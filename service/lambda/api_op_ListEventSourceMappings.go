@@ -41,7 +41,7 @@ type ListEventSourceMappingsInput struct {
 	//   - Amazon DocumentDB – The ARN of the DocumentDB change stream.
 	EventSourceArn *string
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function. Name formats
 	//   - Function name – MyFunction .
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
 	//   - Version or Alias ARN –

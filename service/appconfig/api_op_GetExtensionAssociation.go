@@ -11,8 +11,7 @@ import (
 )
 
 // Returns information about an AppConfig extension association. For more
-// information about extensions and associations, see Working with AppConfig
-// extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// information about extensions and associations, see Extending workflows (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) GetExtensionAssociation(ctx context.Context, params *GetExtensionAssociationInput, optFns ...func(*Options)) (*GetExtensionAssociationOutput, error) {
 	if params == nil {

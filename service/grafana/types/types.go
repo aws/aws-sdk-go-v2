@@ -403,19 +403,29 @@ type WorkspaceDescription struct {
 	Description *string
 
 	// Specifies whether this workspace has already fully used its free trial for
-	// Grafana Enterprise.
+	// Grafana Enterprise. Amazon Managed Grafana workspaces no longer support Grafana
+	// Enterprise free trials.
 	FreeTrialConsumed *bool
 
 	// If this workspace is currently in the free trial period for Grafana Enterprise,
-	// this value specifies when that free trial ends.
+	// this value specifies when that free trial ends. Amazon Managed Grafana
+	// workspaces no longer support Grafana Enterprise free trials.
 	FreeTrialExpiration *time.Time
 
-	// If this workspace has a full Grafana Enterprise license, this specifies when
-	// the license ends and will need to be renewed.
+	// The token that ties this workspace to a Grafana Labs account. For more
+	// information, see Register with Grafana Labs (https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise)
+	// .
+	GrafanaToken *string
+
+	// If this workspace has a full Grafana Enterprise license purchased through
+	// Amazon Web Services Marketplace, this specifies when the license ends and will
+	// need to be renewed. Purchasing the Enterprise plugins option through Amazon
+	// Managed Grafana does not have an expiration. It is valid until the license is
+	// removed.
 	LicenseExpiration *time.Time
 
-	// Specifies whether this workspace has a full Grafana Enterprise license or a
-	// free trial license.
+	// Specifies whether this workspace has a full Grafana Enterprise license. Amazon
+	// Managed Grafana workspaces no longer support Grafana Enterprise free trials.
 	LicenseType LicenseType
 
 	// The name of the workspace.
@@ -512,6 +522,15 @@ type WorkspaceSummary struct {
 
 	// The customer-entered description of the workspace.
 	Description *string
+
+	// The token that ties this workspace to a Grafana Labs account. For more
+	// information, see Register with Grafana Labs (https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise)
+	// .
+	GrafanaToken *string
+
+	// Specifies whether this workspace has a full Grafana Enterprise license. Amazon
+	// Managed Grafana workspaces no longer support Grafana Enterprise free trials.
+	LicenseType LicenseType
 
 	// The name of the workspace.
 	Name *string

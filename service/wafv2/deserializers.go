@@ -2007,6 +2007,9 @@ func awsAwsjson11_deserializeOpErrorDescribeAllManagedProducts(response *smithyh
 	case strings.EqualFold("WAFInvalidOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInvalidOperationException(response, errorBody)
 
+	case strings.EqualFold("WAFInvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFInvalidParameterException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2589,6 +2592,9 @@ func awsAwsjson11_deserializeOpErrorGetDecryptedAPIKey(response *smithyhttp.Resp
 
 	case strings.EqualFold("WAFInvalidResourceException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFInvalidResourceException(response, errorBody)
+
+	case strings.EqualFold("WAFNonexistentItemException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFNonexistentItemException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -7713,9 +7719,9 @@ func awsAwsjson11_deserializeDocumentAWSManagedRulesBotControlRuleSet(v **types.
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+					return fmt.Errorf("expected EnableMachineLearning to be of type *bool, got %T instead", value)
 				}
-				sv.EnableMachineLearning = jtv
+				sv.EnableMachineLearning = ptr.Bool(jtv)
 			}
 
 		case "InspectionLevel":
@@ -15615,6 +15621,15 @@ func awsAwsjson11_deserializeDocumentWAFLimitsExceededException(v **types.WAFLim
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		case "SourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceType to be of type string, got %T instead", value)
+				}
+				sv.SourceType = ptr.String(jtv)
 			}
 
 		default:

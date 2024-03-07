@@ -12,8 +12,7 @@ import (
 )
 
 // Lists all custom and Amazon Web Services authored AppConfig extensions in the
-// account. For more information about extensions, see Working with AppConfig
-// extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// account. For more information about extensions, see Extending workflows (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) ListExtensions(ctx context.Context, params *ListExtensionsInput, optFns ...func(*Options)) (*ListExtensionsOutput, error) {
 	if params == nil {

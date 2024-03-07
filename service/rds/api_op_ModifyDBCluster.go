@@ -95,7 +95,8 @@ type ModifyDBClusterInput struct {
 	BackupRetentionPeriod *int32
 
 	// The CA certificate identifier to use for the DB cluster's server certificate.
-	// Valid for Cluster Type: Multi-AZ DB clusters
+	// For more information, see Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide. Valid for Cluster Type: Multi-AZ DB clusters
 	CACertificateIdentifier *string
 
 	// The configuration setting for the log types to be enabled for export to
@@ -401,7 +402,7 @@ type ModifyDBClusterInput struct {
 	// required. Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
 	// Valid Values:
 	//   - Aurora DB clusters - aurora | aurora-iopt1
-	//   - Multi-AZ DB clusters - io1
+	//   - Multi-AZ DB clusters - io1 | io2 | gp3
 	// Default:
 	//   - Aurora DB clusters - aurora
 	//   - Multi-AZ DB clusters - io1

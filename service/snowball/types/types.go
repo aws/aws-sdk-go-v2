@@ -239,7 +239,7 @@ type Ec2AmiResource struct {
 // on the Snow Family device.
 type EKSOnDeviceServiceConfiguration struct {
 
-	// The version of EKS Anywhere on the Snow Family device.
+	// The optional version of EKS Anywhere on the Snow Family device.
 	EKSAnywhereVersion *string
 
 	// The Kubernetes version for EKS Anywhere on the Snow Family device.

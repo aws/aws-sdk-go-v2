@@ -36,7 +36,7 @@ func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFuncti
 
 type GetFunctionConfigurationInput struct {
 
-	// The name of the Lambda function, version, or alias. Name formats
+	// The name or ARN of the Lambda function, version, or alias. Name formats
 	//   - Function name – my-function (name-only), my-function:v1 (with alias).
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
 	//   - Partial ARN – 123456789012:function:my-function .

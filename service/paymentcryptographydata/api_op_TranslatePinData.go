@@ -20,20 +20,19 @@ import (
 // encryption key transformation can be from PEK (Pin Encryption Key) to BDK (Base
 // Derivation Key) for DUKPT or from BDK for DUKPT to PEK. Amazon Web Services
 // Payment Cryptography supports TDES and AES key derivation type for DUKPT
-// tranlations. You can use this operation for P2PE (Point to Point Encryption) use
-// cases where the encryption keys should change but the processing system either
-// does not need to, or is not permitted to, decrypt the data. The allowed
-// combinations of PIN block format translations are guided by PCI. It is important
-// to note that not all encrypted PIN block formats (example, format 1) require PAN
-// (Primary Account Number) as input. And as such, PIN block format that requires
-// PAN (example, formats 0,3,4) cannot be translated to a format (format 1) that
-// does not require a PAN for generation. For information about valid keys for this
-// operation, see Understanding key attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
+// translations. The allowed combinations of PIN block format translations are
+// guided by PCI. It is important to note that not all encrypted PIN block formats
+// (example, format 1) require PAN (Primary Account Number) as input. And as such,
+// PIN block format that requires PAN (example, formats 0,3,4) cannot be translated
+// to a format (format 1) that does not require a PAN for generation. For
+// information about valid keys for this operation, see Understanding key
+// attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
 // and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. At this time, Amazon
-// Web Services Payment Cryptography does not support translations to PIN format 4.
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts. Related operations:
+// in the Amazon Web Services Payment Cryptography User Guide. Amazon Web Services
+// Payment Cryptography currently supports ISO PIN block 4 translation for PIN
+// block built using legacy PAN length. That is, PAN is the right most 12 digits
+// excluding the check digits. Cross-account use: This operation can't be used
+// across different Amazon Web Services accounts. Related operations:
 //   - GeneratePinData
 //   - VerifyPinData
 func (c *Client) TranslatePinData(ctx context.Context, params *TranslatePinDataInput, optFns ...func(*Options)) (*TranslatePinDataOutput, error) {
@@ -65,7 +64,7 @@ type TranslatePinDataInput struct {
 	// This member is required.
 	IncomingKeyIdentifier *string
 
-	// The format of the incoming PIN block data for tranlation within Amazon Web
+	// The format of the incoming PIN block data for translation within Amazon Web
 	// Services Payment Cryptography.
 	//
 	// This member is required.
@@ -77,14 +76,14 @@ type TranslatePinDataInput struct {
 	// This member is required.
 	OutgoingKeyIdentifier *string
 
-	// The format of the outgoing PIN block data after tranlation by Amazon Web
+	// The format of the outgoing PIN block data after translation by Amazon Web
 	// Services Payment Cryptography.
 	//
 	// This member is required.
 	OutgoingTranslationAttributes types.TranslationIsoFormats
 
 	// The attributes and values to use for incoming DUKPT encryption key for PIN
-	// block tranlation.
+	// block translation.
 	IncomingDukptAttributes *types.DukptDerivationAttributes
 
 	// The attributes and values to use for outgoing DUKPT encryption key after PIN
@@ -104,15 +103,13 @@ type TranslatePinDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography calculates the KCV by using
-	// standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and
-	// then truncating the result to the first 3 bytes, or 6 hex digits, of the
-	// resulting cryptogram.
+	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
+	// the CMAC specification.
 	//
 	// This member is required.
 	KeyCheckValue *string
 
-	// The ougoing encrypted PIN block data after tranlation.
+	// The outgoing encrypted PIN block data after translation.
 	//
 	// This member is required.
 	PinBlock *string

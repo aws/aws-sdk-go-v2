@@ -1,0 +1,8 @@
+{
+    "id": "288799d4-4d7b-421f-8ffc-76b959a00f6d",
+    "type": "documentation",
+    "description": "Doc-only update for change to EKS-Anywhere ordering.",
+    "modules": [
+        "service/snowball"
+    ]
+}

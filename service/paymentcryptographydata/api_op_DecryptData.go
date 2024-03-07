@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Decrypts ciphertext data to plaintext using symmetric, asymmetric, or DUKPT
-// data encryption key. For more information, see Decrypt data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/decrypt-data.html)
+// Decrypts ciphertext data to plaintext using a symmetric (TDES, AES), asymmetric
+// (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information,
+// see Decrypt data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/decrypt-data.html)
 // in the Amazon Web Services Payment Cryptography User Guide. You can use an
 // encryption key generated within Amazon Web Services Payment Cryptography, or you
 // can import your own encryption key by calling ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
@@ -23,12 +24,13 @@ import (
 // export the public component of the asymmetric key pair by calling
 // GetPublicCertificate (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html)
 // . For symmetric and DUKPT decryption, Amazon Web Services Payment Cryptography
-// supports TDES and AES algorithms. For asymmetric decryption, Amazon Web
-// Services Payment Cryptography supports RSA . When you use DUKPT, for TDES
-// algorithm, the ciphertext data length must be a multiple of 16 bytes. For AES
-// algorithm, the ciphertext data length must be a multiple of 32 bytes. For
-// information about valid keys for this operation, see Understanding key
-// attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
+// supports TDES and AES algorithms. For EMV decryption, Amazon Web Services
+// Payment Cryptography supports TDES algorithms. For asymmetric decryption,
+// Amazon Web Services Payment Cryptography supports RSA . When you use TDES or
+// TDES DUKPT, the ciphertext data length must be a multiple of 8 bytes. For AES or
+// AES DUKPT, the ciphertext data length must be a multiple of 16 bytes. For RSA,
+// it sould be equal to the key size unless padding is enabled. For information
+// about valid keys for this operation, see Understanding key attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
 // and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
 // in the Amazon Web Services Payment Cryptography User Guide. Cross-account use:
 // This operation can't be used across different Amazon Web Services accounts.
@@ -82,15 +84,13 @@ type DecryptDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography calculates the KCV by using
-	// standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and
-	// then truncating the result to the first 3 bytes, or 6 hex digits, of the
-	// resulting cryptogram.
+	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
+	// the CMAC specification.
 	//
 	// This member is required.
 	KeyCheckValue *string
 
-	// The decrypted plaintext data.
+	// The decrypted plaintext data in hexBinary format.
 	//
 	// This member is required.
 	PlainText *string

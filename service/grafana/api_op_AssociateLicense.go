@@ -32,7 +32,8 @@ func (c *Client) AssociateLicense(ctx context.Context, params *AssociateLicenseI
 
 type AssociateLicenseInput struct {
 
-	// The type of license to associate with the workspace.
+	// The type of license to associate with the workspace. Amazon Managed Grafana
+	// workspaces no longer support Grafana Enterprise free trials.
 	//
 	// This member is required.
 	LicenseType types.LicenseType
@@ -41,6 +42,11 @@ type AssociateLicenseInput struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	// A token from Grafana Labs that ties your Amazon Web Services account with a
+	// Grafana Labs account. For more information, see Register with Grafana Labs (https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise)
+	// .
+	GrafanaToken *string
 
 	noSmithyDocumentSerde
 }

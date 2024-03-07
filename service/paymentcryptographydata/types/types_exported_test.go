@@ -127,6 +127,9 @@ func ExampleEncryptionDecryptionAttributes_outputUsage() {
 	case *types.EncryptionDecryptionAttributesMemberDukpt:
 		_ = v.Value // Value is types.DukptEncryptionAttributes
 
+	case *types.EncryptionDecryptionAttributesMemberEmv:
+		_ = v.Value // Value is types.EmvEncryptionAttributes
+
 	case *types.EncryptionDecryptionAttributesMemberSymmetric:
 		_ = v.Value // Value is types.SymmetricEncryptionAttributes
 
@@ -139,6 +142,7 @@ func ExampleEncryptionDecryptionAttributes_outputUsage() {
 	}
 }
 
+var _ *types.EmvEncryptionAttributes
 var _ *types.SymmetricEncryptionAttributes
 var _ *types.AsymmetricEncryptionAttributes
 var _ *types.DukptEncryptionAttributes

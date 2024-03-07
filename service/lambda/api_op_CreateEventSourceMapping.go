@@ -64,7 +64,7 @@ func (c *Client) CreateEventSourceMapping(ctx context.Context, params *CreateEve
 
 type CreateEventSourceMappingInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function. Name formats
 	//   - Function name – MyFunction .
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
 	//   - Version or Alias ARN –

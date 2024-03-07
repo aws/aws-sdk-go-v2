@@ -1,0 +1,8 @@
+{
+    "id": "4f0ee41a-2f37-4b33-ab72-6a245017eb06",
+    "type": "feature",
+    "description": "AWS Payment Cryptography EMV Decrypt Feature  Release",
+    "modules": [
+        "service/paymentcryptographydata"
+    ]
+}

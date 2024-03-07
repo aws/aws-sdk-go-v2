@@ -19,6 +19,7 @@ import (
 //     .
 //   - You don't need to specify the PCOIP protocol for Linux bundles because WSP
 //     is the default protocol for those bundles.
+//   - User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.
 func (c *Client) CreateWorkspaces(ctx context.Context, params *CreateWorkspacesInput, optFns ...func(*Options)) (*CreateWorkspacesOutput, error) {
 	if params == nil {
 		params = &CreateWorkspacesInput{}

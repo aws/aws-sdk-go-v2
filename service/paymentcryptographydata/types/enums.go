@@ -64,6 +64,42 @@ func (DukptKeyVariant) Values() []DukptKeyVariant {
 	}
 }
 
+type EmvEncryptionMode string
+
+// Enum values for EmvEncryptionMode
+const (
+	EmvEncryptionModeEcb EmvEncryptionMode = "ECB"
+	EmvEncryptionModeCbc EmvEncryptionMode = "CBC"
+)
+
+// Values returns all known values for EmvEncryptionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EmvEncryptionMode) Values() []EmvEncryptionMode {
+	return []EmvEncryptionMode{
+		"ECB",
+		"CBC",
+	}
+}
+
+type EmvMajorKeyDerivationMode string
+
+// Enum values for EmvMajorKeyDerivationMode
+const (
+	EmvMajorKeyDerivationModeEmvOptionA EmvMajorKeyDerivationMode = "EMV_OPTION_A"
+	EmvMajorKeyDerivationModeEmvOptionB EmvMajorKeyDerivationMode = "EMV_OPTION_B"
+)
+
+// Values returns all known values for EmvMajorKeyDerivationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmvMajorKeyDerivationMode) Values() []EmvMajorKeyDerivationMode {
+	return []EmvMajorKeyDerivationMode{
+		"EMV_OPTION_A",
+		"EMV_OPTION_B",
+	}
+}
+
 type EncryptionMode string
 
 // Enum values for EncryptionMode

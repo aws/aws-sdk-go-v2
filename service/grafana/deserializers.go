@@ -5066,6 +5066,15 @@ func awsRestjson1_deserializeDocumentWorkspaceDescription(v **types.WorkspaceDes
 				}
 			}
 
+		case "grafanaToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GrafanaToken to be of type string, got %T instead", value)
+				}
+				sv.GrafanaToken = ptr.String(jtv)
+			}
+
 		case "grafanaVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5308,6 +5317,15 @@ func awsRestjson1_deserializeDocumentWorkspaceSummary(v **types.WorkspaceSummary
 				sv.Endpoint = ptr.String(jtv)
 			}
 
+		case "grafanaToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GrafanaToken to be of type string, got %T instead", value)
+				}
+				sv.GrafanaToken = ptr.String(jtv)
+			}
+
 		case "grafanaVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5324,6 +5342,15 @@ func awsRestjson1_deserializeDocumentWorkspaceSummary(v **types.WorkspaceSummary
 					return fmt.Errorf("expected WorkspaceId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "licenseType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LicenseType to be of type string, got %T instead", value)
+				}
+				sv.LicenseType = types.LicenseType(jtv)
 			}
 
 		case "modified":

@@ -12,7 +12,7 @@ import (
 )
 
 // Lists all AppConfig extension associations in the account. For more information
-// about extensions and associations, see Working with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// about extensions and associations, see Extending workflows (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) ListExtensionAssociations(ctx context.Context, params *ListExtensionAssociationsInput, optFns ...func(*Options)) (*ListExtensionAssociationsOutput, error) {
 	if params == nil {

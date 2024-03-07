@@ -27,7 +27,7 @@ import (
 //   - For a custom Amazon SQS notification extension, enter the ARN of an Amazon
 //     SQS message queue in the Uri field.
 //
-// For more information about extensions, see Working with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// For more information about extensions, see Extending workflows (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) CreateExtension(ctx context.Context, params *CreateExtensionInput, optFns ...func(*Options)) (*CreateExtensionOutput, error) {
 	if params == nil {

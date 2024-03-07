@@ -292,6 +292,8 @@ type WAFLimitsExceededException struct {
 
 	ErrorCodeOverride *string
 
+	SourceType *string
+
 	noSmithyDocumentSerde
 }
 

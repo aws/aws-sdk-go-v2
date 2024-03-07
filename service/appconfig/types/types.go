@@ -396,12 +396,17 @@ type Monitor struct {
 // A value such as an Amazon Resource Name (ARN) or an Amazon Simple Notification
 // Service topic entered in an extension when invoked. Parameter values are
 // specified in an extension association. For more information about extensions,
-// see Working with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// see Extending workflows (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 type Parameter struct {
 
 	// Information about the parameter.
 	Description *string
+
+	// Indicates whether this parameter's value can be supplied at the extension's
+	// action point instead of during extension association. Dynamic parameters can't
+	// be marked Required .
+	Dynamic bool
 
 	// A parameter value must be specified in the extension association.
 	Required bool

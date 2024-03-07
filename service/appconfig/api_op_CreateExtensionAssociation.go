@@ -19,8 +19,7 @@ import (
 // associate with an AppConfig resource is called an extension association. An
 // extension association is a specified relationship between an extension and an
 // AppConfig resource, such as an application or a configuration profile. For more
-// information about extensions and associations, see Working with AppConfig
-// extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
+// information about extensions and associations, see Extending workflows (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
 // in the AppConfig User Guide.
 func (c *Client) CreateExtensionAssociation(ctx context.Context, params *CreateExtensionAssociationInput, optFns ...func(*Options)) (*CreateExtensionAssociationOutput, error) {
 	if params == nil {

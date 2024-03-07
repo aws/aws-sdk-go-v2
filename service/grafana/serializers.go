@@ -67,6 +67,11 @@ func awsRestjson1_serializeOpHttpBindingsAssociateLicenseInput(v *AssociateLicen
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GrafanaToken != nil && len(*v.GrafanaToken) > 0 {
+		locationName := "Grafana-Token"
+		encoder.SetHeader(locationName).String(*v.GrafanaToken)
+	}
+
 	if len(v.LicenseType) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member licenseType must not be empty")}
 	}

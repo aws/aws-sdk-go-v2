@@ -635,6 +635,30 @@ func validateDynamicCardVerificationValue(v *types.DynamicCardVerificationValue)
 	}
 }
 
+func validateEmvEncryptionAttributes(v *types.EmvEncryptionAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmvEncryptionAttributes"}
+	if len(v.MajorKeyDerivationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MajorKeyDerivationMode"))
+	}
+	if v.PrimaryAccountNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryAccountNumber"))
+	}
+	if v.PanSequenceNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PanSequenceNumber"))
+	}
+	if v.SessionDerivationData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionDerivationData"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEncryptionDecryptionAttributes(v types.EncryptionDecryptionAttributes) error {
 	if v == nil {
 		return nil
@@ -644,6 +668,11 @@ func validateEncryptionDecryptionAttributes(v types.EncryptionDecryptionAttribut
 	case *types.EncryptionDecryptionAttributesMemberDukpt:
 		if err := validateDukptEncryptionAttributes(&uv.Value); err != nil {
 			invalidParams.AddNested("[Dukpt]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.EncryptionDecryptionAttributesMemberEmv:
+		if err := validateEmvEncryptionAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[Emv]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.EncryptionDecryptionAttributesMemberSymmetric:

@@ -41,7 +41,7 @@ func (c *Client) UpdateFunctionConfiguration(ctx context.Context, params *Update
 
 type UpdateFunctionConfigurationInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function. Name formats
 	//   - Function name – my-function .
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
 	//   - Partial ARN – 123456789012:function:my-function .

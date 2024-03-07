@@ -108,10 +108,13 @@ type UpdateWebACLInput struct {
 
 	// Specifies custom configurations for the associations between the web ACL and
 	// protected resources. Use this to customize the maximum size of the request body
-	// that your protected CloudFront distributions forward to WAF for inspection. The
-	// default is 16 KB (16,384 bytes). You are charged additional fees when your
-	// protected resources forward body sizes that are larger than the default. For
-	// more information, see WAF Pricing (http://aws.amazon.com/waf/pricing/) .
+	// that your protected resources forward to WAF for inspection. You can customize
+	// this setting for CloudFront, API Gateway, Amazon Cognito, App Runner, or
+	// Verified Access resources. The default setting is 16 KB (16,384 bytes). You are
+	// charged additional fees when your protected resources forward body sizes that
+	// are larger than the default. For more information, see WAF Pricing (http://aws.amazon.com/waf/pricing/)
+	// . For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
+	// bytes).
 	AssociationConfig *types.AssociationConfig
 
 	// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have

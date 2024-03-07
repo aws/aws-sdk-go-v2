@@ -3160,9 +3160,9 @@ func awsAwsjson11_serializeDocumentAWSManagedRulesBotControlRuleSet(v *types.AWS
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnableMachineLearning {
+	if v.EnableMachineLearning != nil {
 		ok := object.Key("EnableMachineLearning")
-		ok.Boolean(v.EnableMachineLearning)
+		ok.Boolean(*v.EnableMachineLearning)
 	}
 
 	if len(v.InspectionLevel) > 0 {

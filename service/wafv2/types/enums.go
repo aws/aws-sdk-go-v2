@@ -32,7 +32,11 @@ type AssociatedResourceType string
 
 // Enum values for AssociatedResourceType
 const (
-	AssociatedResourceTypeCloudfront AssociatedResourceType = "CLOUDFRONT"
+	AssociatedResourceTypeCloudfront             AssociatedResourceType = "CLOUDFRONT"
+	AssociatedResourceTypeApiGateway             AssociatedResourceType = "API_GATEWAY"
+	AssociatedResourceTypeCognitoUserPool        AssociatedResourceType = "COGNITO_USER_POOL"
+	AssociatedResourceTypeAppRunnerService       AssociatedResourceType = "APP_RUNNER_SERVICE"
+	AssociatedResourceTypeVerifiedAccessInstance AssociatedResourceType = "VERIFIED_ACCESS_INSTANCE"
 )
 
 // Values returns all known values for AssociatedResourceType. Note that this can
@@ -41,6 +45,10 @@ const (
 func (AssociatedResourceType) Values() []AssociatedResourceType {
 	return []AssociatedResourceType{
 		"CLOUDFRONT",
+		"API_GATEWAY",
+		"COGNITO_USER_POOL",
+		"APP_RUNNER_SERVICE",
+		"VERIFIED_ACCESS_INSTANCE",
 	}
 }
 

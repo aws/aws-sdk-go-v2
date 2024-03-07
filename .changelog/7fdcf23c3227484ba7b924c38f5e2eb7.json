@@ -1,0 +1,8 @@
+{
+    "id": "7fdcf23c-3227-484b-a7b9-24c38f5e2eb7",
+    "type": "feature",
+    "description": "This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "72ca9420-3b4d-42de-ac87-832932989040",
+    "type": "feature",
+    "description": "You can increase the max request body inspection size for some regional resources. The size setting is in the web ACL association config. Also, the AWSManagedRulesBotControlRuleSet EnableMachineLearning setting now takes a Boolean instead of a primitive boolean type, for languages like Java.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

@@ -60,6 +60,10 @@ type StartDeploymentInput struct {
 	// A description of the deployment.
 	Description *string
 
+	// A map of dynamic extension parameter names to values to pass to associated
+	// extensions with PRE_START_DEPLOYMENT actions.
+	DynamicExtensionParameters map[string]string
+
 	// The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this ID
 	// to encrypt the configuration data using a customer managed key.
 	KmsKeyIdentifier *string

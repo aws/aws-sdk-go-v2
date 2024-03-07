@@ -28,7 +28,7 @@ func (c *Client) GetFunctionCodeSigningConfig(ctx context.Context, params *GetFu
 
 type GetFunctionCodeSigningConfigInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function. Name formats
 	//   - Function name - MyFunction .
 	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
 	//   - Partial ARN - 123456789012:function:MyFunction .
@@ -48,7 +48,7 @@ type GetFunctionCodeSigningConfigOutput struct {
 	// This member is required.
 	CodeSigningConfigArn *string
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function. Name formats
 	//   - Function name - MyFunction .
 	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
 	//   - Partial ARN - 123456789012:function:MyFunction .

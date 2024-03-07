@@ -1,0 +1,8 @@
+{
+    "id": "1dc9ed4a-06a5-4db2-9c4b-d7043a693fda",
+    "type": "documentation",
+    "description": "Documentation updates for AWS Lambda",
+    "modules": [
+        "service/lambda"
+    ]
+}
