@@ -846,17 +846,19 @@ type UsageFeature string
 
 // Enum values for UsageFeature
 const (
-	UsageFeatureFlowLogs                 UsageFeature = "FLOW_LOGS"
-	UsageFeatureCloudTrail               UsageFeature = "CLOUD_TRAIL"
-	UsageFeatureDnsLogs                  UsageFeature = "DNS_LOGS"
-	UsageFeatureS3DataEvents             UsageFeature = "S3_DATA_EVENTS"
-	UsageFeatureEksAuditLogs             UsageFeature = "EKS_AUDIT_LOGS"
-	UsageFeatureEbsMalwareProtection     UsageFeature = "EBS_MALWARE_PROTECTION"
-	UsageFeatureRdsLoginEvents           UsageFeature = "RDS_LOGIN_EVENTS"
-	UsageFeatureLambdaNetworkLogs        UsageFeature = "LAMBDA_NETWORK_LOGS"
-	UsageFeatureEksRuntimeMonitoring     UsageFeature = "EKS_RUNTIME_MONITORING"
-	UsageFeatureFargateRuntimeMonitoring UsageFeature = "FARGATE_RUNTIME_MONITORING"
-	UsageFeatureEc2RuntimeMonitoring     UsageFeature = "EC2_RUNTIME_MONITORING"
+	UsageFeatureFlowLogs                    UsageFeature = "FLOW_LOGS"
+	UsageFeatureCloudTrail                  UsageFeature = "CLOUD_TRAIL"
+	UsageFeatureDnsLogs                     UsageFeature = "DNS_LOGS"
+	UsageFeatureS3DataEvents                UsageFeature = "S3_DATA_EVENTS"
+	UsageFeatureEksAuditLogs                UsageFeature = "EKS_AUDIT_LOGS"
+	UsageFeatureEbsMalwareProtection        UsageFeature = "EBS_MALWARE_PROTECTION"
+	UsageFeatureRdsLoginEvents              UsageFeature = "RDS_LOGIN_EVENTS"
+	UsageFeatureLambdaNetworkLogs           UsageFeature = "LAMBDA_NETWORK_LOGS"
+	UsageFeatureEksRuntimeMonitoring        UsageFeature = "EKS_RUNTIME_MONITORING"
+	UsageFeatureFargateRuntimeMonitoring    UsageFeature = "FARGATE_RUNTIME_MONITORING"
+	UsageFeatureEc2RuntimeMonitoring        UsageFeature = "EC2_RUNTIME_MONITORING"
+	UsageFeatureRdsDbiProtectionProvisioned UsageFeature = "RDS_DBI_PROTECTION_PROVISIONED"
+	UsageFeatureRdsDbiProtectionServerless  UsageFeature = "RDS_DBI_PROTECTION_SERVERLESS"
 )
 
 // Values returns all known values for UsageFeature. Note that this can be
@@ -875,6 +877,8 @@ func (UsageFeature) Values() []UsageFeature {
 		"EKS_RUNTIME_MONITORING",
 		"FARGATE_RUNTIME_MONITORING",
 		"EC2_RUNTIME_MONITORING",
+		"RDS_DBI_PROTECTION_PROVISIONED",
+		"RDS_DBI_PROTECTION_SERVERLESS",
 	}
 }
 

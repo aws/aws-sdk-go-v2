@@ -2372,6 +2372,14 @@ type JobDetail struct {
 
 	// A short, human-readable string to provide more details for the current status
 	// of the job.
+	//   - CAPACITY:INSUFFICIENT_INSTANCE_CAPACITY - All compute environments have
+	//   insufficient capacity to service the job.
+	//   - MISCONFIGURATION:COMPUTE_ENVIRONMENT_MAX_RESOURCE - All compute environments
+	//   have a maxVcpu setting that is smaller than the job requirements.
+	//   - MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT - All compute environments have no
+	//   connected instances that meet the job requirements.
+	//   - MISCONFIGURATION:SERVICE_ROLE_PERMISSIONS - All compute environments have
+	//   problems with the service role permissions.
 	StatusReason *string
 
 	// The Unix timestamp (in milliseconds) for when the job was stopped. More
@@ -2426,6 +2434,11 @@ type JobQueueDetail struct {
 	// This member is required.
 	State JQState
 
+	// The set of actions that Batch perform on jobs that remain at the head of the
+	// job queue in the specified state longer than specified times. Batch will perform
+	// each action after maxTimeSeconds has passed.
+	JobStateTimeLimitActions []JobStateTimeLimitAction
+
 	// The Amazon Resource Name (ARN) of the scheduling policy. The format is
 	// aws:Partition:batch:Region:Account:scheduling-policy/Name . For example,
 	// aws:aws:batch:us-west-2:123456789012:scheduling-policy/MySchedulingPolicy .
@@ -2442,6 +2455,38 @@ type JobQueueDetail struct {
 	// your Batch resources (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html)
 	// in Batch User Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an action that Batch will take after the job has remained at the head
+// of the queue in the specified state for longer than the specified time.
+type JobStateTimeLimitAction struct {
+
+	// The action to take when a job is at the head of the job queue in the specified
+	// state for the specified period of time. The only supported value is " CANCEL ",
+	// which will cancel the job.
+	//
+	// This member is required.
+	Action JobStateTimeLimitActionsAction
+
+	// The approximate amount of time, in seconds, that must pass with the job in the
+	// specified state before the action is taken. The minimum value is 600 (10
+	// minutes) and the maximum value is 86,400 (24 hours).
+	//
+	// This member is required.
+	MaxTimeSeconds *int32
+
+	// The reason to log for the action being taken.
+	//
+	// This member is required.
+	Reason *string
+
+	// The state of the job needed to trigger the action. The only supported value is "
+	// RUNNABLE ".
+	//
+	// This member is required.
+	State JobStateTimeLimitActionsState
 
 	noSmithyDocumentSerde
 }
@@ -3169,7 +3214,7 @@ type TaskContainerDetails struct {
 	// fails or stops for any reason, all other containers that are part of the task
 	// are stopped. If the essential parameter of a container is marked as false, its
 	// failure doesn't affect the rest of the containers in a task. If this parameter
-	// is omitted, a container is assumed to be essential. All tasks must have at least
+	// is omitted, a container is assumed to be essential. All jobs must have at least
 	// one essential container. If you have an application that's composed of multiple
 	// containers, group containers that are used for a common purpose into components,
 	// and separate the different components into multiple task definitions. For more
@@ -3380,7 +3425,7 @@ type TaskContainerProperties struct {
 	// fails or stops for any reason, all other containers that are part of the task
 	// are stopped. If the essential parameter of a container is marked as false, its
 	// failure doesn't affect the rest of the containers in a task. If this parameter
-	// is omitted, a container is assumed to be essential. All tasks must have at least
+	// is omitted, a container is assumed to be essential. All jobs must have at least
 	// one essential container. If you have an application that's composed of multiple
 	// containers, group containers that are used for a common purpose into components,
 	// and separate the different components into multiple task definitions. For more

@@ -1077,6 +1077,47 @@ func validateFairsharePolicy(v *types.FairsharePolicy) error {
 	}
 }
 
+func validateJobStateTimeLimitAction(v *types.JobStateTimeLimitAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobStateTimeLimitAction"}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if v.MaxTimeSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxTimeSeconds"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobStateTimeLimitActions(v []types.JobStateTimeLimitAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobStateTimeLimitActions"}
+	for i := range v {
+		if err := validateJobStateTimeLimitAction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLinuxParameters(v *types.LinuxParameters) error {
 	if v == nil {
 		return nil
@@ -1697,6 +1738,11 @@ func validateOpCreateJobQueueInput(v *CreateJobQueueInput) error {
 			invalidParams.AddNested("ComputeEnvironmentOrder", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JobStateTimeLimitActions != nil {
+		if err := validateJobStateTimeLimitActions(v.JobStateTimeLimitActions); err != nil {
+			invalidParams.AddNested("JobStateTimeLimitActions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2003,6 +2049,11 @@ func validateOpUpdateJobQueueInput(v *UpdateJobQueueInput) error {
 	if v.ComputeEnvironmentOrder != nil {
 		if err := validateComputeEnvironmentOrders(v.ComputeEnvironmentOrder); err != nil {
 			invalidParams.AddNested("ComputeEnvironmentOrder", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobStateTimeLimitActions != nil {
+		if err := validateJobStateTimeLimitActions(v.JobStateTimeLimitActions); err != nil {
+			invalidParams.AddNested("JobStateTimeLimitActions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

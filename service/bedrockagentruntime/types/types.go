@@ -6,151 +6,173 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// input to lambda used in action group
+// Contains information about the action group being invoked.
 type ActionGroupInvocationInput struct {
 
-	// Agent Trace Action Group Name
+	// The name of the action group.
 	ActionGroupName *string
 
-	// Agent Trace Action Group API path
+	// The path to the API to call, based off the action group.
 	ApiPath *string
 
-	// list of parameters included in action group invocation
+	// The parameters in the Lambda input event.
 	Parameters []Parameter
 
-	// Request Body Content Map
+	// The parameters in the request body for the Lambda input event.
 	RequestBody *RequestBody
 
-	// Agent Trace Action Group Action verb
+	// The API method being used, based off the action group.
 	Verb *string
 
 	noSmithyDocumentSerde
 }
 
-// output from lambda used in action group
+// Contains the JSON-formatted string returned by the API invoked by the action
+// group.
 type ActionGroupInvocationOutput struct {
 
-	// Agent Trace Action Group Lambda Invocation Output String
+	// The JSON-formatted string returned by the API invoked by the action group.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Citations associated with final agent response
+// Contains citations for a part of an agent response.
 type Attribution struct {
 
-	// List of citations
+	// A list of citations and related information for a part of an agent response.
 	Citations []Citation
 
 	noSmithyDocumentSerde
 }
 
-// Citation associated with the agent response
+// An object containing a segment of the generated response that is based on a
+// source in the knowledge base, alongside information about the source.
 type Citation struct {
 
-	// Generate response part
+	// Contains the generated response and metadata
 	GeneratedResponsePart *GeneratedResponsePart
 
-	// list of retrieved references
+	// Contains metadata about the sources cited for the generated response.
 	RetrievedReferences []RetrievedReference
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which is emitted when agent trace could not be generated
+// Contains information about the failure of the interaction.
 type FailureTrace struct {
 
-	// Agent Trace Failed Reason String
+	// The reason the interaction failed.
 	FailureReason *string
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Agent finish output
+// Contains details about the response to the user.
 type FinalResponse struct {
 
-	// Agent Trace Action Group Lambda Invocation Output String
+	// The text in the response to the user.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Generate response part
+// Contains metadata about a part of the generated response that is accompanied by
+// a citation.
 type GeneratedResponsePart struct {
 
-	// Text response part
+	// Contains metadata about a textual part of the generated response that is
+	// accompanied by a citation.
 	TextResponsePart *TextResponsePart
 
 	noSmithyDocumentSerde
 }
 
-// Configurations for controlling the inference response of an InvokeAgent API call
+// Specifications about the inference parameters that were provided alongside the
+// prompt. These are specified in the PromptOverrideConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html)
+// object that was set when the agent was created or updated. For more information,
+// see Inference parameters for foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
+// .
 type InferenceConfiguration struct {
 
-	// Maximum length of output
+	// The maximum number of tokens allowed in the generated response.
 	MaximumLength *int32
 
-	// List of stop sequences
+	// A list of stop sequences. A stop sequence is a sequence of characters that
+	// causes the model to stop generating the response.
 	StopSequences []string
 
-	// Controls randomness, higher values increase diversity
+	// The likelihood of the model selecting higher-probability options while
+	// generating a response. A lower value makes the model more likely to choose
+	// higher-probability options, while a higher value makes the model more likely to
+	// choose lower-probability options.
 	Temperature *float32
 
-	// Sample from the k most likely next tokens
+	// While generating a response, the model determines the probability of the
+	// following token at each point of generation. The value that you set for topK is
+	// the number of most-likely candidates from which the model chooses the next token
+	// in the sequence. For example, if you set topK to 50, the model selects the next
+	// token from among the top 50 most likely choices.
 	TopK *int32
 
-	// Cumulative probability cutoff for token selection
+	// While generating a response, the model determines the probability of the
+	// following token at each point of generation. The value that you set for Top P
+	// determines the number of most-likely candidates from which the model chooses the
+	// next token in the sequence. For example, if you set topP to 80, the model only
+	// selects the next token from the top 80% of the probability distribution of next
+	// tokens.
 	TopP *float32
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains input details for action group or knowledge base
+// Contains information pertaining to the action group or knowledge base that is
+// being invoked.
 type InvocationInput struct {
 
-	// input to lambda used in action group
+	// Contains information about the action group to be invoked.
 	ActionGroupInvocationInput *ActionGroupInvocationInput
 
-	// types of invocations
+	// Specifies whether the agent is invoking an action group or a knowledge base.
 	InvocationType InvocationType
 
-	// Input to lambda used in action group
+	// Contains details about the knowledge base to look up and the query to be made.
 	KnowledgeBaseLookupInput *KnowledgeBaseLookupInput
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Input to lambda used in action group
+// Contains details about the knowledge base to look up and the query to be made.
 type KnowledgeBaseLookupInput struct {
 
-	// Agent Trace Action Group Knowledge Base Id
+	// The unique identifier of the knowledge base to look up.
 	KnowledgeBaseId *string
 
-	// Agent Trace Action Group Lambda Invocation Output String
+	// The query made to the knowledge base.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Input to lambda used in action group
+// Contains details about the results from looking up the knowledge base.
 type KnowledgeBaseLookupOutput struct {
 
-	// list of retrieved references
+	// Contains metadata about the sources cited for the generated response.
 	RetrievedReferences []RetrievedReference
 
 	noSmithyDocumentSerde
 }
 
-// Knowledge base input query.
+// Contains the query made to the knowledge base.
 type KnowledgeBaseQuery struct {
 
-	// Knowledge base input query in text
+	// The text of the query made to the knowledge base.
 	//
 	// This member is required.
 	Text *string
@@ -158,10 +180,14 @@ type KnowledgeBaseQuery struct {
 	noSmithyDocumentSerde
 }
 
-// Search parameters for retrieving from knowledge base.
+// Contains details about how the results should be returned. This data type is
+// used in the following API operations:
+//   - Retrieve request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax)
+//   - RetrieveAndGenerate request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax)
 type KnowledgeBaseRetrievalConfiguration struct {
 
-	// Knowledge base vector search configuration
+	// Contains details about how the results from the vector search should be
+	// returned.
 	//
 	// This member is required.
 	VectorSearchConfiguration *KnowledgeBaseVectorSearchConfiguration
@@ -169,107 +195,138 @@ type KnowledgeBaseRetrievalConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Result item returned from a knowledge base retrieval.
+// Details about a result from querying the knowledge base.
 type KnowledgeBaseRetrievalResult struct {
 
-	// Content of a retrieval result.
+	// Contains a chunk of text from a data source in the knowledge base.
 	//
 	// This member is required.
 	Content *RetrievalResultContent
 
-	// The source location of a retrieval result.
+	// Contains information about the location of the data source.
 	Location *RetrievalResultLocation
 
-	// The relevance score of a result.
+	// The level of relevance of the result to the query.
 	Score *float64
 
 	noSmithyDocumentSerde
 }
 
-// Configurations for retrieval and generation for knowledge base.
+// Contains details about the resource being queried.
 type KnowledgeBaseRetrieveAndGenerateConfiguration struct {
 
-	// Identifier of the KnowledgeBase
+	// The unique identifier of the knowledge base that is queried and the foundation
+	// model used for generation.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Arn of a Bedrock model.
+	// The ARN of the foundation model used to generate a response.
 	//
 	// This member is required.
 	ModelArn *string
 
-	// Search parameters for retrieving from knowledge base.
+	// Contains configurations for how to retrieve and return the knowledge base query.
 	RetrievalConfiguration *KnowledgeBaseRetrievalConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Knowledge base vector search configuration
+// Configurations for how to carry out the search.
 type KnowledgeBaseVectorSearchConfiguration struct {
 
-	// Top-K results to retrieve from knowledge base.
+	// The number of results to return. The numberOfResults field is currently
+	// unsupported for RetrieveAndGenerate . Don't include it in this field if you are
+	// sending a RetrieveAndGenerate request.
 	NumberOfResults *int32
 
-	// Override the type of query to be performed on data store
+	// By default, Amazon Bedrock decides a search strategy for you. If you're using
+	// an Amazon OpenSearch Serverless vector store that contains a filterable text
+	// field, you can specify whether to query the knowledge base with a HYBRID search
+	// using both vector embeddings and raw text, or SEMANTIC search using only vector
+	// embeddings. For other vector store configurations, only SEMANTIC search is
+	// available. For more information, see Test a knowledge base (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-test.html)
+	// .
 	OverrideSearchType SearchType
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information used to call Invoke Model
+// The input for the pre-processing step.
+//   - The type matches the agent step.
+//   - The text contains the prompt.
+//   - The inferenceConfiguration , parserMode , and overrideLambda values are set
+//     in the PromptOverrideConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html)
+//     object that was set when the agent was created or updated.
 type ModelInvocationInput struct {
 
-	// Configurations for controlling the inference response of an InvokeAgent API call
+	// Specifications about the inference parameters that were provided alongside the
+	// prompt. These are specified in the PromptOverrideConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html)
+	// object that was set when the agent was created or updated. For more information,
+	// see Inference parameters for foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
+	// .
 	InferenceConfiguration *InferenceConfiguration
 
-	// ARN of a Lambda.
+	// The ARN of the Lambda function to use when parsing the raw foundation model
+	// output in parts of the agent sequence.
 	OverrideLambda *string
 
-	// indicates if agent uses default prompt or overriden prompt
+	// Specifies whether to override the default parser Lambda function when parsing
+	// the raw foundation model output in the part of the agent sequence defined by the
+	// promptType .
 	ParserMode CreationMode
 
-	// indicates if agent uses default prompt or overriden prompt
+	// Specifies whether the default prompt template was OVERRIDDEN . If it was, the
+	// basePromptTemplate that was set in the PromptOverrideConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html)
+	// object when the agent was created or updated is used instead.
 	PromptCreationMode CreationMode
 
-	// Prompt Message
+	// The text that prompted the agent at this step.
 	Text *string
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
-	// types of prompts
+	// The step in the agent sequence.
 	Type PromptType
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains output details for action group or knowledge base or
-// final response
+// Contains the result or output of an action group or knowledge base, or the
+// response to the user.
 type Observation struct {
 
-	// output from lambda used in action group
+	// Contains the JSON-formatted string returned by the API invoked by the action
+	// group.
 	ActionGroupInvocationOutput *ActionGroupInvocationOutput
 
-	// Agent finish output
+	// Contains details about the response to the user.
 	FinalResponse *FinalResponse
 
-	// Input to lambda used in action group
+	// Contains details about the results from looking up the knowledge base.
 	KnowledgeBaseLookupOutput *KnowledgeBaseLookupOutput
 
-	// Observation information if there were reprompts
+	// Contains details about the response to reprompt the input.
 	RepromptResponse *RepromptResponse
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
-	// types of observations
+	// Specifies what kind of information the agent returns in the observation. The
+	// following values are possible.
+	//   - ACTION_GROUP – The agent returns the result of an action group.
+	//   - KNOWLEDGE_BASE – The agent returns information from a knowledge base.
+	//   - FINISH – The agent returns a final response to the user with no follow-up.
+	//   - ASK_USER – The agent asks the user a question.
+	//   - REPROMPT – The agent prompts the user again for the same information.
 	Type Type
 
 	noSmithyDocumentSerde
 }
 
-// Trace contains intermidate response during orchestration
+// Details about the orchestration step, in which the agent determines the order
+// in which actions are executed and which knowledge bases are retrieved.
 //
 // The following types satisfy this interface:
 //
@@ -281,7 +338,8 @@ type OrchestrationTrace interface {
 	isOrchestrationTrace()
 }
 
-// Trace Part which contains input details for action group or knowledge base
+// Contains information pertaining to the action group or knowledge base that is
+// being invoked.
 type OrchestrationTraceMemberInvocationInput struct {
 	Value InvocationInput
 
@@ -290,7 +348,12 @@ type OrchestrationTraceMemberInvocationInput struct {
 
 func (*OrchestrationTraceMemberInvocationInput) isOrchestrationTrace() {}
 
-// Trace Part which contains information used to call Invoke Model
+// The input for the orchestration step.
+//   - The type is ORCHESTRATION .
+//   - The text contains the prompt.
+//   - The inferenceConfiguration , parserMode , and overrideLambda values are set
+//     in the PromptOverrideConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html)
+//     object that was set when the agent was created or updated.
 type OrchestrationTraceMemberModelInvocationInput struct {
 	Value ModelInvocationInput
 
@@ -299,8 +362,8 @@ type OrchestrationTraceMemberModelInvocationInput struct {
 
 func (*OrchestrationTraceMemberModelInvocationInput) isOrchestrationTrace() {}
 
-// Trace Part which contains output details for action group or knowledge base or
-// final response
+// Details about the observation (the output of the action group Lambda or
+// knowledge base) made by the agent.
 type OrchestrationTraceMemberObservation struct {
 	Value Observation
 
@@ -309,7 +372,8 @@ type OrchestrationTraceMemberObservation struct {
 
 func (*OrchestrationTraceMemberObservation) isOrchestrationTrace() {}
 
-// Trace Part which contains information related to reasoning
+// Details about the reasoning, based on the input, that the agent uses to justify
+// carrying out an action group or getting information from a knowledge base.
 type OrchestrationTraceMemberRationale struct {
 	Value Rationale
 
@@ -318,55 +382,57 @@ type OrchestrationTraceMemberRationale struct {
 
 func (*OrchestrationTraceMemberRationale) isOrchestrationTrace() {}
 
-// parameters included in action group invocation
+// A parameter in the Lambda input event.
 type Parameter struct {
 
-	// Name of parameter
+	// The name of the parameter.
 	Name *string
 
-	// Type of parameter
+	// The type of the parameter.
 	Type *string
 
-	// Value of parameter
+	// The value of the parameter.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
-// Base 64 endoded byte response
+// Contains a part of an agent response and citations for it.
 type PayloadPart struct {
 
-	// Citations associated with final agent response
+	// Contains citations for a part of an agent response.
 	Attribution *Attribution
 
-	// PartBody of the payload in bytes
+	// A part of the agent response in bytes.
 	Bytes []byte
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information related to postprocessing
+// The foundation model output from the post-processing step.
 type PostProcessingModelInvocationOutput struct {
 
-	// Trace Part which contains information if preprocessing was successful
+	// Details about the response from the Lambda parsing of the output of the
+	// post-processing step.
 	ParsedResponse *PostProcessingParsedResponse
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information if preprocessing was successful
+// Details about the response from the Lambda parsing of the output from the
+// post-processing step.
 type PostProcessingParsedResponse struct {
 
-	// Agent Trace Output String
+	// The text returned by the parser.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information related to post processing step
+// Details about the post-processing step, in which the agent shapes the response.
 //
 // The following types satisfy this interface:
 //
@@ -376,7 +442,12 @@ type PostProcessingTrace interface {
 	isPostProcessingTrace()
 }
 
-// Trace Part which contains information used to call Invoke Model
+// The input for the post-processing step.
+//   - The type is POST_PROCESSING .
+//   - The text contains the prompt.
+//   - The inferenceConfiguration , parserMode , and overrideLambda values are set
+//     in the PromptOverrideConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html)
+//     object that was set when the agent was created or updated.
 type PostProcessingTraceMemberModelInvocationInput struct {
 	Value ModelInvocationInput
 
@@ -385,7 +456,7 @@ type PostProcessingTraceMemberModelInvocationInput struct {
 
 func (*PostProcessingTraceMemberModelInvocationInput) isPostProcessingTrace() {}
 
-// Trace Part which contains information related to postprocessing
+// The foundation model output from the post-processing step.
 type PostProcessingTraceMemberModelInvocationOutput struct {
 	Value PostProcessingModelInvocationOutput
 
@@ -394,31 +465,36 @@ type PostProcessingTraceMemberModelInvocationOutput struct {
 
 func (*PostProcessingTraceMemberModelInvocationOutput) isPostProcessingTrace() {}
 
-// Trace Part which contains information related to preprocessing
+// The foundation model output from the pre-processing step.
 type PreProcessingModelInvocationOutput struct {
 
-	// Trace Part which contains information if preprocessing was successful
+	// Details about the response from the Lambda parsing of the output of the
+	// pre-processing step.
 	ParsedResponse *PreProcessingParsedResponse
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information if preprocessing was successful
+// Details about the response from the Lambda parsing of the output from the
+// pre-processing step.
 type PreProcessingParsedResponse struct {
 
-	// Boolean value
+	// Whether the user input is valid or not. If false , the agent doesn't proceed to
+	// orchestration.
 	IsValid *bool
 
-	// Agent Trace Rationale String
+	// The text returned by the parsing of the pre-processing step, explaining the
+	// steps that the agent plans to take in orchestration, if the user input is valid.
 	Rationale *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information related to preprocessing step
+// Details about the pre-processing step, in which the agent contextualizes and
+// categorizes user inputs.
 //
 // The following types satisfy this interface:
 //
@@ -428,7 +504,12 @@ type PreProcessingTrace interface {
 	isPreProcessingTrace()
 }
 
-// Trace Part which contains information used to call Invoke Model
+// The input for the pre-processing step.
+//   - The type is PRE_PROCESSING .
+//   - The text contains the prompt.
+//   - The inferenceConfiguration , parserMode , and overrideLambda values are set
+//     in the PromptOverrideConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html)
+//     object that was set when the agent was created or updated.
 type PreProcessingTraceMemberModelInvocationInput struct {
 	Value ModelInvocationInput
 
@@ -437,7 +518,7 @@ type PreProcessingTraceMemberModelInvocationInput struct {
 
 func (*PreProcessingTraceMemberModelInvocationInput) isPreProcessingTrace() {}
 
-// Trace Part which contains information related to preprocessing
+// The foundation model output from the pre-processing step.
 type PreProcessingTraceMemberModelInvocationOutput struct {
 	Value PreProcessingModelInvocationOutput
 
@@ -446,40 +527,42 @@ type PreProcessingTraceMemberModelInvocationOutput struct {
 
 func (*PreProcessingTraceMemberModelInvocationOutput) isPreProcessingTrace() {}
 
-// Trace Part which contains information related to reasoning
+// Contains the reasoning, based on the input, that the agent uses to justify
+// carrying out an action group or getting information from a knowledge base.
 type Rationale struct {
 
-	// Agent Trace Rationale String
+	// The reasoning or thought process of the agent, based on the input.
 	Text *string
 
-	// Identifier for trace
+	// The unique identifier of the trace step.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Observation information if there were reprompts
+// Contains details about the agent's response to reprompt the input.
 type RepromptResponse struct {
 
-	// Parsing error source
+	// Specifies what output is prompting the agent to reprompt the input.
 	Source Source
 
-	// Reprompt response text
+	// The text reprompting the input.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Request Body Content Map
+// The parameters in the request body for the Lambda input event.
 type RequestBody struct {
 
-	// Content type paramter map
+	// The content in the request body.
 	Content map[string][]Parameter
 
 	noSmithyDocumentSerde
 }
 
-// Response body of is a stream
+// The response from invoking the agent and associated citations and trace
+// information.
 //
 // The following types satisfy this interface:
 //
@@ -489,7 +572,7 @@ type ResponseStream interface {
 	isResponseStream()
 }
 
-// Base 64 endoded byte response
+// Contains a part of an agent response and citations for it.
 type ResponseStreamMemberChunk struct {
 	Value PayloadPart
 
@@ -498,7 +581,12 @@ type ResponseStreamMemberChunk struct {
 
 func (*ResponseStreamMemberChunk) isResponseStream() {}
 
-// Trace Part which contains intermidate response for customer
+// Contains information about the agent and session, alongside the agent's
+// reasoning process and results from calling API actions and querying knowledge
+// bases and metadata about the trace. You can use the trace to understand how the
+// agent arrived at the response it provided the customer. For more information,
+// see Trace events (https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html)
+// .
 type ResponseStreamMemberTrace struct {
 	Value TracePart
 
@@ -507,10 +595,10 @@ type ResponseStreamMemberTrace struct {
 
 func (*ResponseStreamMemberTrace) isResponseStream() {}
 
-// Content of a retrieval result.
+// Contains the cited text from the data source.
 type RetrievalResultContent struct {
 
-	// Content of a retrieval result in text
+	// The cited text from the data source.
 	//
 	// This member is required.
 	Text *string
@@ -518,47 +606,47 @@ type RetrievalResultContent struct {
 	noSmithyDocumentSerde
 }
 
-// The source location of a retrieval result.
+// Contains information about the location of the data source.
 type RetrievalResultLocation struct {
 
-	// The location type of a retrieval result.
+	// The type of the location of the data source.
 	//
 	// This member is required.
 	Type RetrievalResultLocationType
 
-	// The S3 location of a retrieval result.
+	// Contains the S3 location of the data source.
 	S3Location *RetrievalResultS3Location
 
 	noSmithyDocumentSerde
 }
 
-// The S3 location of a retrieval result.
+// Contains the S3 location of the data source.
 type RetrievalResultS3Location struct {
 
-	// URI of S3 location
+	// The S3 URI of the data source.
 	Uri *string
 
 	noSmithyDocumentSerde
 }
 
-// Configures the retrieval and generation for the session.
+// Contains details about the resource being queried.
 type RetrieveAndGenerateConfiguration struct {
 
-	// The type of RetrieveAndGenerate.
+	// The type of resource that is queried by the request.
 	//
 	// This member is required.
 	Type RetrieveAndGenerateType
 
-	// Configurations for retrieval and generation for knowledge base.
+	// Contains details about the resource being queried.
 	KnowledgeBaseConfiguration *KnowledgeBaseRetrieveAndGenerateConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Customer input of the turn
+// Contains the query made to the knowledge base.
 type RetrieveAndGenerateInput struct {
 
-	// Customer input of the turn in text
+	// The query made to the knowledge base.
 	//
 	// This member is required.
 	Text *string
@@ -566,10 +654,10 @@ type RetrieveAndGenerateInput struct {
 	noSmithyDocumentSerde
 }
 
-// Service response of the turn
+// Contains the response generated from querying the knowledge base.
 type RetrieveAndGenerateOutput struct {
 
-	// Service response of the turn in text
+	// The response generated from querying the knowledge base.
 	//
 	// This member is required.
 	Text *string
@@ -577,10 +665,10 @@ type RetrieveAndGenerateOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Configures common parameters of the session.
+// Contains configuration about the session with the knowledge base.
 type RetrieveAndGenerateSessionConfiguration struct {
 
-	// The KMS key arn to encrypt the customer data of the session.
+	// The ARN of the KMS key encrypting the session.
 	//
 	// This member is required.
 	KmsKeyArn *string
@@ -588,55 +676,74 @@ type RetrieveAndGenerateSessionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Retrieved reference
+// Contains metadata about a sources cited for the generated response.
 type RetrievedReference struct {
 
-	// Content of a retrieval result.
+	// Contains the cited text from the data source.
 	Content *RetrievalResultContent
 
-	// The source location of a retrieval result.
+	// Contains information about the location of the data source.
 	Location *RetrievalResultLocation
 
 	noSmithyDocumentSerde
 }
 
-// Session state provided
+// Contains parameters that specify various attributes that persist across a
+// session or prompt. You can define session state attributes as key-value pairs
+// when writing a Lambda function (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html)
+// for an action group or pass them when making an InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
+// request. Use session state attributes to control and provide conversational
+// context for your agent and to help customize your agent's behavior. For more
+// information, see Session context (https://docs.aws.amazon.com/bedrock/latest/userguide/sessionstate.html)
+// .
 type SessionState struct {
 
-	// Prompt Session Attributes
+	// Contains attributes that persist across a prompt and the values of those
+	// attributes. These attributes replace the $prompt_session_attributes$
+	// placeholder variable in the orchestration prompt template. For more information,
+	// see Prompt template placeholder variables (https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html)
+	// .
 	PromptSessionAttributes map[string]string
 
-	// Session Attributes
+	// Contains attributes that persist across a session and the values of those
+	// attributes.
 	SessionAttributes map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Span of text
+// Contains information about where the text with a citation begins and ends in
+// the generated output.
 type Span struct {
 
-	// End of span
+	// Where the text with a citation ends in the generated output.
 	End *int32
 
-	// Start of span
+	// Where the text with a citation starts in the generated output.
 	Start *int32
 
 	noSmithyDocumentSerde
 }
 
-// Text response part
+// Contains the part of the generated text that contains a citation, alongside
+// where it begins and ends.
 type TextResponsePart struct {
 
-	// Span of text
+	// Contains information about where the text with a citation begins and ends in
+	// the generated output.
 	Span *Span
 
-	// Response part in text
+	// The part of the generated text that contains a citation.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace contains intermidate response for customer
+// Contains one part of the agent's reasoning process and results from calling API
+// actions and querying knowledge bases. You can use the trace to understand how
+// the agent arrived at the response it provided the customer. For more
+// information, see Trace enablement (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement)
+// .
 //
 // The following types satisfy this interface:
 //
@@ -648,7 +755,7 @@ type Trace interface {
 	isTrace()
 }
 
-// Trace Part which is emitted when agent trace could not be generated
+// Contains information about the failure of the interaction.
 type TraceMemberFailureTrace struct {
 	Value FailureTrace
 
@@ -657,7 +764,8 @@ type TraceMemberFailureTrace struct {
 
 func (*TraceMemberFailureTrace) isTrace() {}
 
-// Trace contains intermidate response during orchestration
+// Details about the orchestration step, in which the agent determines the order
+// in which actions are executed and which knowledge bases are retrieved.
 type TraceMemberOrchestrationTrace struct {
 	Value OrchestrationTrace
 
@@ -666,7 +774,7 @@ type TraceMemberOrchestrationTrace struct {
 
 func (*TraceMemberOrchestrationTrace) isTrace() {}
 
-// Trace Part which contains information related to post processing step
+// Details about the post-processing step, in which the agent shapes the response..
 type TraceMemberPostProcessingTrace struct {
 	Value PostProcessingTrace
 
@@ -675,7 +783,8 @@ type TraceMemberPostProcessingTrace struct {
 
 func (*TraceMemberPostProcessingTrace) isTrace() {}
 
-// Trace Part which contains information related to preprocessing step
+// Details about the pre-processing step, in which the agent contextualizes and
+// categorizes user inputs.
 type TraceMemberPreProcessingTrace struct {
 	Value PreProcessingTrace
 
@@ -684,19 +793,28 @@ type TraceMemberPreProcessingTrace struct {
 
 func (*TraceMemberPreProcessingTrace) isTrace() {}
 
-// Trace Part which contains intermidate response for customer
+// Contains information about the agent and session, alongside the agent's
+// reasoning process and results from calling API actions and querying knowledge
+// bases and metadata about the trace. You can use the trace to understand how the
+// agent arrived at the response it provided the customer. For more information,
+// see Trace enablement (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement)
+// .
 type TracePart struct {
 
-	// Identifier of the agent alias.
+	// The unique identifier of the alias of the agent.
 	AgentAliasId *string
 
-	// Identifier of the agent.
+	// The unique identifier of the agent.
 	AgentId *string
 
-	// Identifier of the session.
+	// The unique identifier of the session with the agent.
 	SessionId *string
 
-	// Trace contains intermidate response for customer
+	// Contains one part of the agent's reasoning process and results from calling API
+	// actions and querying knowledge bases. You can use the trace to understand how
+	// the agent arrived at the response it provided the customer. For more
+	// information, see Trace enablement (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement)
+	// .
 	Trace Trace
 
 	noSmithyDocumentSerde

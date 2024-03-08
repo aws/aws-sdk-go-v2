@@ -36,9 +36,11 @@ type As2ConnectorConfig struct {
 	// Specifies whether the AS2 file is compressed.
 	Compression CompressionEnum
 
-	// The algorithm that is used to encrypt the file. You can only specify NONE if
-	// the URL for your connector uses HTTPS. This ensures that no traffic is sent in
-	// clear text.
+	// The algorithm that is used to encrypt the file. Note the following:
+	//   - Do not use the DES_EDE3_CBC algorithm unless you must support a legacy
+	//   client that requires it, as it is a weak encryption algorithm.
+	//   - You can only specify NONE if the URL for your connector uses HTTPS. Using
+	//   HTTPS ensures that no traffic is sent in clear text.
 	EncryptionAlgorithm EncryptionAlg
 
 	// A unique identifier for the AS2 local profile.
@@ -885,8 +887,25 @@ type EfsFileLocation struct {
 type EndpointDetails struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP
-	// address to your server's endpoint. This property can only be set when
-	// EndpointType is set to VPC and it is only valid in the UpdateServer API.
+	// address to your server's endpoint. An address allocation ID corresponds to the
+	// allocation ID of an Elastic IP address. This value can be retrieved from the
+	// allocationId field from the Amazon EC2 Address (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Address.html)
+	// data type. One way to retrieve this value is by calling the EC2
+	// DescribeAddresses (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAddresses.html)
+	// API. This parameter is optional. Set this parameter if you want to make your VPC
+	// endpoint public-facing. For details, see Create an internet-facing endpoint for
+	// your server (https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#create-internet-facing-endpoint)
+	// . This property can only be set as follows:
+	//   - EndpointType must be set to VPC
+	//   - The Transfer Family server must be offline.
+	//   - You cannot set this parameter for Transfer Family servers that use the FTP
+	//   protocol.
+	//   - The server must already have SubnetIds populated ( SubnetIds and
+	//   AddressAllocationIds cannot be updated simultaneously).
+	//   - AddressAllocationIds can't contain duplicates, and must be equal in length
+	//   to SubnetIds . For example, if you have three subnet IDs, you must also
+	//   specify three address allocation IDs.
+	//   - Call the UpdateServer API to set or change this parameter.
 	AddressAllocationIds []string
 
 	// A list of security groups IDs that are available to attach to your server's
@@ -1591,7 +1610,12 @@ type ServiceMetadata struct {
 }
 
 // Contains the details for an SFTP connector object. The connector object is used
-// for transferring files to and from a partner's SFTP server.
+// for transferring files to and from a partner's SFTP server. Because the
+// SftpConnectorConfig data type is used for both creating and updating SFTP
+// connectors, its parameters, TrustedHostKeys and UserSecretId are marked as not
+// required. This is a bit misleading, as they are not required when you are
+// updating an existing SFTP connector, but are required when you are creating a
+// new SFTP connector.
 type SftpConnectorConfig struct {
 
 	// The public portion of the host key, or keys, that are used to identify the
@@ -1605,6 +1629,11 @@ type SftpConnectorConfig struct {
 	//   - For ECDSA keys, the <key type> string is either ecdsa-sha2-nistp256 ,
 	//   ecdsa-sha2-nistp384 , or ecdsa-sha2-nistp521 , depending on the size of the
 	//   key you generated.
+	// Run this command to retrieve the SFTP server host key, where your SFTP server
+	// name is ftp.host.com . ssh-keyscan ftp.host.com This prints the public host key
+	// to standard output. ftp.host.com ssh-rsa AAAAB3Nza...<long-string-for-public-key
+	// Copy and paste this string into the TrustedHostKeys field for the
+	// create-connector command or into the Trusted host keys field in the console.
 	TrustedHostKeys []string
 
 	// The identifier for the secret (in Amazon Web Services Secrets Manager) that

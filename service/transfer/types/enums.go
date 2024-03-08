@@ -169,10 +169,11 @@ type EncryptionAlg string
 
 // Enum values for EncryptionAlg
 const (
-	EncryptionAlgAes128Cbc EncryptionAlg = "AES128_CBC"
-	EncryptionAlgAes192Cbc EncryptionAlg = "AES192_CBC"
-	EncryptionAlgAes256Cbc EncryptionAlg = "AES256_CBC"
-	EncryptionAlgNone      EncryptionAlg = "NONE"
+	EncryptionAlgAes128Cbc  EncryptionAlg = "AES128_CBC"
+	EncryptionAlgAes192Cbc  EncryptionAlg = "AES192_CBC"
+	EncryptionAlgAes256Cbc  EncryptionAlg = "AES256_CBC"
+	EncryptionAlgDesEde3Cbc EncryptionAlg = "DES_EDE3_CBC"
+	EncryptionAlgNone       EncryptionAlg = "NONE"
 )
 
 // Values returns all known values for EncryptionAlg. Note that this can be
@@ -183,6 +184,7 @@ func (EncryptionAlg) Values() []EncryptionAlg {
 		"AES128_CBC",
 		"AES192_CBC",
 		"AES256_CBC",
+		"DES_EDE3_CBC",
 		"NONE",
 	}
 }

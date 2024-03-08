@@ -46,6 +46,11 @@ type UpdateJobQueueInput struct {
 	// types in a single job queue.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
 
+	// The set of actions that Batch perform on jobs that remain at the head of the
+	// job queue in the specified state longer than specified times. Batch will perform
+	// each action after maxTimeSeconds has passed.
+	JobStateTimeLimitActions []types.JobStateTimeLimitAction
+
 	// The priority of the job queue. Job queues with a higher priority (or a higher
 	// integer value for the priority parameter) are evaluated first when associated
 	// with the same compute environment. Priority is determined in descending order.

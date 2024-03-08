@@ -7,19 +7,28 @@ import (
 	"time"
 )
 
-// Advanced event selectors let you create fine-grained selectors for the
-// following CloudTrail event record ﬁelds. They help you control costs by logging
-// only those events that are important to you. For more information about advanced
-// event selectors, see Logging data events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
-// in the CloudTrail User Guide.
-//   - readOnly
+// Advanced event selectors let you create fine-grained selectors for CloudTrail
+// management and data events. They help you control costs by logging only those
+// events that are important to you. For more information about advanced event
+// selectors, see Logging management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html)
+// and Logging data events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
+// in the CloudTrail User Guide. You cannot apply both event selectors and advanced
+// event selectors to a trail. Supported CloudTrail event record fields for
+// management events
+//   - eventCategory (required)
 //   - eventSource
+//   - readOnly
+//
+// Supported CloudTrail event record fields for data events
+//   - eventCategory (required)
+//   - resources.type (required)
+//   - readOnly
 //   - eventName
-//   - eventCategory
-//   - resources.type
 //   - resources.ARN
 //
-// You cannot apply both event selectors and advanced event selectors to a trail.
+// For event data stores for CloudTrail Insights events, Config configuration
+// items, Audit Manager evidence, or events outside of Amazon Web Services, the
+// only supported field is eventCategory .
 type AdvancedEventSelector struct {
 
 	// Contains all selector statements in an advanced event selector.
@@ -69,6 +78,7 @@ type AdvancedFieldSelector struct {
 	//   - AWS::DynamoDB::Table
 	//   - AWS::Lambda::Function
 	//   - AWS::S3::Object
+	//   - AWS::AppConfig::Configuration
 	//   - AWS::B2BI::Transformer
 	//   - AWS::Bedrock::AgentAlias
 	//   - AWS::Bedrock::KnowledgeBase
@@ -83,7 +93,13 @@ type AdvancedFieldSelector struct {
 	//   - AWS::EMRWAL::Workspace
 	//   - AWS::FinSpace::Environment
 	//   - AWS::Glue::Table
+	//   - AWS::GreengrassV2::ComponentVersion
+	//   - AWS::GreengrassV2::Deployment
 	//   - AWS::GuardDuty::Detector
+	//   - AWS::IoT::Certificate
+	//   - AWS::IoT::Thing
+	//   - AWS::IoTSiteWise::Asset
+	//   - AWS::IoTSiteWise::TimeSeries
 	//   - AWS::IoTTwinMaker::Entity
 	//   - AWS::IoTTwinMaker::Workspace
 	//   - AWS::KendraRanking::ExecutionPlan
@@ -98,6 +114,9 @@ type AdvancedFieldSelector struct {
 	//   - AWS::QBusiness::Index
 	//   - AWS::QBusiness::WebExperience
 	//   - AWS::RDS::DBCluster
+	//   - AWS::S3::AccessPoint
+	//   - AWS::S3ObjectLambda::AccessPoint
+	//   - AWS::S3Outposts::Object
 	//   - AWS::SageMaker::Endpoint
 	//   - AWS::SageMaker::ExperimentTrialComponent
 	//   - AWS::SageMaker::FeatureGroup
@@ -106,10 +125,8 @@ type AdvancedFieldSelector struct {
 	//   - AWS::SCN::Instance
 	//   - AWS::SNS::PlatformEndpoint
 	//   - AWS::SNS::Topic
+	//   - AWS::SWF::Domain
 	//   - AWS::SQS::Queue
-	//   - AWS::S3::AccessPoint
-	//   - AWS::S3ObjectLambda::AccessPoint
-	//   - AWS::S3Outposts::Object
 	//   - AWS::SSMMessages::ControlChannel
 	//   - AWS::ThinClient::Device
 	//   - AWS::ThinClient::Environment
@@ -134,9 +151,12 @@ type AdvancedFieldSelector struct {
 	//   - arn::dynamodb:::table/ When resources.type equals AWS::Lambda::Function ,
 	//   and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
-	//   - arn::lambda:::function: When resources.type equals AWS::B2BI::Transformer ,
-	//   and the operator is set to Equals or NotEquals , the ARN must be in the
-	//   following format:
+	//   - arn::lambda:::function: When resources.type equals
+	//   AWS::AppConfig::Configuration , and the operator is set to Equals or NotEquals
+	//   , the ARN must be in the following format:
+	//   - arn::appconfig:::application//environment//configuration/ When
+	//   resources.type equals AWS::B2BI::Transformer , and the operator is set to
+	//   Equals or NotEquals , the ARN must be in the following format:
 	//   - arn::b2bi:::transformer/ When resources.type equals AWS::Bedrock::AgentAlias
 	//   , and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
@@ -176,10 +196,28 @@ type AdvancedFieldSelector struct {
 	//   - arn::finspace:::environment/ When resources.type equals AWS::Glue::Table ,
 	//   and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
-	//   - arn::glue:::table// When resources.type equals AWS::GuardDuty::Detector ,
-	//   and the operator is set to Equals or NotEquals , the ARN must be in the
+	//   - arn::glue:::table// When resources.type equals
+	//   AWS::GreengrassV2::ComponentVersion , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::greengrass:::components/ When resources.type equals
+	//   AWS::GreengrassV2::Deployment , and the operator is set to Equals or NotEquals
+	//   , the ARN must be in the following format:
+	//   - arn::greengrass:::deployments/ When resources.type equals
+	//   AWS::GuardDuty::Detector , and the operator is set to Equals or NotEquals ,
+	//   the ARN must be in the following format:
+	//   - arn::guardduty:::detector/ When resources.type equals AWS::IoT::Certificate
+	//   , and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
-	//   - arn::guardduty:::detector/ When resources.type equals
+	//   - arn::iot:::cert/ When resources.type equals AWS::IoT::Thing , and the
+	//   operator is set to Equals or NotEquals , the ARN must be in the following
+	//   format:
+	//   - arn::iot:::thing/ When resources.type equals AWS::IoTSiteWise::Asset , and
+	//   the operator is set to Equals or NotEquals , the ARN must be in the following
+	//   format:
+	//   - arn::iotsitewise:::asset/ When resources.type equals
+	//   AWS::IoTSiteWise::TimeSeries , and the operator is set to Equals or NotEquals
+	//   , the ARN must be in the following format:
+	//   - arn::iotsitewise:::timeseries/ When resources.type equals
 	//   AWS::IoTTwinMaker::Entity , and the operator is set to Equals or NotEquals ,
 	//   the ARN must be in the following format:
 	//   - arn::iottwinmaker:::workspace//entity/ When resources.type equals
@@ -221,7 +259,19 @@ type AdvancedFieldSelector struct {
 	//   - arn::qbusiness:::application//web-experience/ When resources.type equals
 	//   AWS::RDS::DBCluster , and the operator is set to Equals or NotEquals , the ARN
 	//   must be in the following format:
-	//   - arn::rds:::cluster/ When resources.type equals AWS::SageMaker::Endpoint ,
+	//   - arn::rds:::cluster/ When resources.type equals AWS::S3::AccessPoint , and
+	//   the operator is set to Equals or NotEquals , the ARN must be in one of the
+	//   following formats. To log events on all objects in an S3 access point, we
+	//   recommend that you use only the access point ARN, don’t include the object path,
+	//   and use the StartsWith or NotStartsWith operators.
+	//   - arn::s3:::accesspoint/
+	//   - arn::s3:::accesspoint//object/ When resources.type equals
+	//   AWS::S3ObjectLambda::AccessPoint , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::s3-object-lambda:::accesspoint/ When resources.type equals
+	//   AWS::S3Outposts::Object , and the operator is set to Equals or NotEquals , the
+	//   ARN must be in the following format:
+	//   - arn::s3-outposts::: When resources.type equals AWS::SageMaker::Endpoint ,
 	//   and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
 	//   - arn::sagemaker:::endpoint/ When resources.type equals
@@ -245,23 +295,14 @@ type AdvancedFieldSelector struct {
 	//   - arn::sns:::endpoint/// When resources.type equals AWS::SNS::Topic , and the
 	//   operator is set to Equals or NotEquals , the ARN must be in the following
 	//   format:
-	//   - arn::sns::: When resources.type equals AWS::SQS::Queue , and the operator is
-	//   set to Equals or NotEquals , the ARN must be in the following format:
-	//   - arn::sqs::: When resources.type equals AWS::S3::AccessPoint , and the
-	//   operator is set to Equals or NotEquals , the ARN must be in one of the
-	//   following formats. To log events on all objects in an S3 access point, we
-	//   recommend that you use only the access point ARN, don’t include the object path,
-	//   and use the StartsWith or NotStartsWith operators.
-	//   - arn::s3:::accesspoint/
-	//   - arn::s3:::accesspoint//object/ When resources.type equals
-	//   AWS::S3ObjectLambda::AccessPoint , and the operator is set to Equals or
-	//   NotEquals , the ARN must be in the following format:
-	//   - arn::s3-object-lambda:::accesspoint/ When resources.type equals
-	//   AWS::S3Outposts::Object , and the operator is set to Equals or NotEquals , the
-	//   ARN must be in the following format:
-	//   - arn::s3-outposts::: When resources.type equals
-	//   AWS::SSMMessages::ControlChannel , and the operator is set to Equals or
-	//   NotEquals , the ARN must be in the following format:
+	//   - arn::sns::: When resources.type equals AWS::SWF::Domain , and the operator
+	//   is set to Equals or NotEquals , the ARN must be in the following format:
+	//   - arn::swf:::domain/ When resources.type equals AWS::SQS::Queue , and the
+	//   operator is set to Equals or NotEquals , the ARN must be in the following
+	//   format:
+	//   - arn::sqs::: When resources.type equals AWS::SSMMessages::ControlChannel ,
+	//   and the operator is set to Equals or NotEquals , the ARN must be in the
+	//   following format:
 	//   - arn::ssmmessages:::control-channel/ When resources.type equals
 	//   AWS::ThinClient::Device , and the operator is set to Equals or NotEquals , the
 	//   ARN must be in the following format:
@@ -691,7 +732,9 @@ type LookupAttribute struct {
 	// This member is required.
 	AttributeKey LookupAttributeKey
 
-	// Specifies a value for the specified AttributeKey.
+	// Specifies a value for the specified AttributeKey . The maximum length for the
+	// AttributeValue is 2000 characters. The following characters (' _ ', ' ', ' , ', '
+	// \\n ') count as two characters towards the 2000 character limit.
 	//
 	// This member is required.
 	AttributeValue *string

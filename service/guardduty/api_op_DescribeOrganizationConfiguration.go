@@ -67,17 +67,23 @@ type DescribeOrganizationConfigurationOutput struct {
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
 	AutoEnable *bool
 
-	// Indicates the auto-enablement configuration of GuardDuty for the member
-	// accounts in the organization.
+	// Indicates the auto-enablement configuration of GuardDuty or any of the
+	// corresponding protection plans for the member accounts in the organization.
 	//   - NEW : Indicates that when a new account joins the organization, they will
-	//   have GuardDuty enabled automatically.
-	//   - ALL : Indicates that all accounts in the organization have GuardDuty enabled
-	//   automatically. This includes NEW accounts that join the organization and
-	//   accounts that may have been suspended or removed from the organization in
-	//   GuardDuty.
-	//   - NONE : Indicates that GuardDuty will not be automatically enabled for any
-	//   account in the organization. The administrator must manage GuardDuty for each
-	//   account in the organization individually.
+	//   have GuardDuty or any of the corresponding protection plans enabled
+	//   automatically.
+	//   - ALL : Indicates that all accounts in the organization have GuardDuty and any
+	//   of the corresponding protection plans enabled automatically. This includes NEW
+	//   accounts that join the organization and accounts that may have been suspended or
+	//   removed from the organization in GuardDuty.
+	//   - NONE : Indicates that GuardDuty or any of the corresponding protection plans
+	//   will not be automatically enabled for any account in the organization. The
+	//   administrator must manage GuardDuty for each account in the organization
+	//   individually. When you update the auto-enable setting from ALL or NEW to NONE
+	//   , this action doesn't disable the corresponding option for your existing
+	//   accounts. This configuration will apply to the new accounts that join the
+	//   organization. After you update the auto-enable settings, no new account will
+	//   have the corresponding option as enabled.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources are enabled automatically for member accounts.

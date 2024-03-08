@@ -949,7 +949,9 @@ type NotifyEmailType struct {
 // The minimum and maximum values of an attribute that is of the number data type.
 type NumberAttributeConstraintsType struct {
 
-	// The maximum value of an attribute that is of the number data type.
+	// The maximum length of a number attribute value. Must be a number less than or
+	// equal to 2^1023 , represented as a string with a length of 131072 characters or
+	// fewer.
 	MaxValue *string
 
 	// The minimum value of an attribute that is of the number data type.
@@ -1308,7 +1310,9 @@ type SoftwareTokenMfaSettingsType struct {
 // The constraints associated with a string attribute.
 type StringAttributeConstraintsType struct {
 
-	// The maximum length.
+	// The maximum length of a string attribute value. Must be a number less than or
+	// equal to 2^1023 , represented as a string with a length of 131072 characters or
+	// fewer.
 	MaxLength *string
 
 	// The minimum length.

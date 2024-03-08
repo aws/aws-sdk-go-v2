@@ -1,0 +1,8 @@
+{
+    "id": "8927c368-26ce-4333-b371-1cad02330f40",
+    "type": "feature",
+    "description": "Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector.",
+    "modules": [
+        "service/transfer"
+    ]
+}

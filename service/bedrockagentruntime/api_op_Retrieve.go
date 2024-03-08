@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve from knowledge base.
+// Queries a knowledge base and retrieves information from it.
 func (c *Client) Retrieve(ctx context.Context, params *RetrieveInput, optFns ...func(*Options)) (*RetrieveOutput, error) {
 	if params == nil {
 		params = &RetrieveInput{}
@@ -29,20 +29,22 @@ func (c *Client) Retrieve(ctx context.Context, params *RetrieveInput, optFns ...
 
 type RetrieveInput struct {
 
-	// Identifier of the KnowledgeBase
+	// The unique identifier of the knowledge base to query.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Knowledge base input query.
+	// The query to send the knowledge base.
 	//
 	// This member is required.
 	RetrievalQuery *types.KnowledgeBaseQuery
 
-	// Opaque continuation token of previous paginated response.
+	// If there are more results than can fit in the response, the response returns a
+	// nextToken . Use this token in the nextToken field of another request to
+	// retrieve the next batch of results.
 	NextToken *string
 
-	// Search parameters for retrieving from knowledge base.
+	// Contains details about how the results should be returned.
 	RetrievalConfiguration *types.KnowledgeBaseRetrievalConfiguration
 
 	noSmithyDocumentSerde
@@ -50,12 +52,14 @@ type RetrieveInput struct {
 
 type RetrieveOutput struct {
 
-	// List of knowledge base retrieval results
+	// A list of results from querying the knowledge base.
 	//
 	// This member is required.
 	RetrievalResults []types.KnowledgeBaseRetrievalResult
 
-	// Opaque continuation token of previous paginated response.
+	// If there are more results than can fit in the response, the response returns a
+	// nextToken . Use this token in the nextToken field of another request to
+	// retrieve the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

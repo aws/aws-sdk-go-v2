@@ -1,0 +1,8 @@
+{
+    "id": "b677ff24-01f7-4ed2-9844-67419c65ddaa",
+    "type": "feature",
+    "description": "Add ConcurrentModificationException to SetUserPoolMfaConfig",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

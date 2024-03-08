@@ -11,16 +11,18 @@ import (
 )
 
 // Resets the specified user's password in a user pool as an administrator. Works
-// on any user. This action might generate an SMS text message. Starting June 1,
-// 2021, US telecom carriers require you to register an origination phone number
-// before you can send SMS messages to US phone numbers. If you use SMS text
-// messages in Amazon Cognito, you must register a phone number with Amazon
-// Pinpoint (https://console.aws.amazon.com/pinpoint/home/) . Amazon Cognito uses
-// the registered number automatically. Otherwise, Amazon Cognito users who must
-// receive SMS messages might not be able to sign up, activate their accounts, or
-// sign in. If you have never used SMS text messages with Amazon Cognito or any
-// other Amazon Web Service, Amazon Simple Notification Service might place your
-// account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
+// on any user. To use this API operation, your user pool must have self-service
+// account recovery configured. Use AdminSetUserPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html)
+// if you manage passwords as an administrator. This action might generate an SMS
+// text message. Starting June 1, 2021, US telecom carriers require you to register
+// an origination phone number before you can send SMS messages to US phone
+// numbers. If you use SMS text messages in Amazon Cognito, you must register a
+// phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
+// . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
+// Cognito users who must receive SMS messages might not be able to sign up,
+// activate their accounts, or sign in. If you have never used SMS text messages
+// with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification
+// Service might place your account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
 // , you can send messages only to verified phone numbers. After you test your app
 // while in the sandbox environment, you can move out of the sandbox and into
 // production. For more information, see SMS message settings for Amazon Cognito
@@ -64,8 +66,9 @@ type AdminResetUserPasswordInput struct {
 
 	// The username of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
-	// attributes. If username isn't an alias attribute in your user pool, you can
-	// also use their sub in this request.
+	// attributes. If username isn't an alias attribute in your user pool, this value
+	// must be the sub of a local user or the username of a user from a third-party
+	// IdP.
 	//
 	// This member is required.
 	Username *string

@@ -13,9 +13,14 @@ import (
 
 // Configures the delegated administrator account with the provided values. You
 // must provide a value for either autoEnableOrganizationMembers or autoEnable ,
-// but not both. There might be regional differences because some data sources
-// might not be available in all the Amazon Web Services Regions where GuardDuty is
-// presently supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
+// but not both. Specifying both EKS Runtime Monitoring ( EKS_RUNTIME_MONITORING )
+// and Runtime Monitoring ( RUNTIME_MONITORING ) will cause an error. You can add
+// only one of these two features because Runtime Monitoring already includes the
+// threat detection for Amazon EKS resources. For more information, see Runtime
+// Monitoring (https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html)
+// . There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
 // .
 func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *UpdateOrganizationConfigurationInput, optFns ...func(*Options)) (*UpdateOrganizationConfigurationOutput, error) {
 	if params == nil {
@@ -60,7 +65,11 @@ type UpdateOrganizationConfigurationInput struct {
 	//   member accounts.
 	//   - NONE : Indicates that GuardDuty will not be automatically enabled for any
 	//   account in the organization. The administrator must manage GuardDuty for each
-	//   account in the organization individually.
+	//   account in the organization individually. When you update the auto-enable
+	//   setting from ALL or NEW to NONE , this action doesn't disable the
+	//   corresponding option for your existing accounts. This configuration will apply
+	//   to the new accounts that join the organization. After you update the auto-enable
+	//   settings, no new account will have the corresponding option as enabled.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources will be updated.

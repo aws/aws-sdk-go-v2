@@ -10692,6 +10692,9 @@ func awsAwsjson11_deserializeOpErrorSetUserPoolMfaConfig(response *smithyhttp.Re
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InternalErrorException", errorCode):
 		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
 

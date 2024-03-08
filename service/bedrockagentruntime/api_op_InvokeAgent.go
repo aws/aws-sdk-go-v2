@@ -12,8 +12,23 @@ import (
 	"sync"
 )
 
-// Invokes the specified Bedrock model to run inference using the input provided
-// in the request body.
+// Sends a prompt for the agent to process and respond to. The CLI doesn't support
+// InvokeAgent .
+//   - To continue the same conversation with an agent, use the same sessionId
+//     value in the request.
+//   - To activate trace enablement, turn enableTrace to true . Trace enablement
+//     helps you follow the agent's reasoning process that led it to the information it
+//     processed, the actions it took, and the final result it yielded. For more
+//     information, see Trace enablement (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events)
+//     .
+//   - End a conversation by setting endSession to true .
+//   - Include attributes for the session or prompt in the sessionState object.
+//
+// The response is returned in the bytes field of the chunk object.
+//   - The attribution object contains citations for parts of the response.
+//   - If you set enableTrace to true in the request, you can trace the agent's
+//     steps and reasoning process that led it to the response.
+//   - Errors are also surfaced in the response.
 func (c *Client) InvokeAgent(ctx context.Context, params *InvokeAgentInput, optFns ...func(*Options)) (*InvokeAgentOutput, error) {
 	if params == nil {
 		params = &InvokeAgentInput{}
@@ -29,51 +44,52 @@ func (c *Client) InvokeAgent(ctx context.Context, params *InvokeAgentInput, optF
 	return out, nil
 }
 
-// InvokeAgent Request
 type InvokeAgentInput struct {
 
-	// Identifier for Agent Alias
+	// The alias of the agent to use.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Identifier for Agent
+	// The unique identifier of the agent to use.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Input data in the format specified in the Content-Type request header.
+	// The prompt text to send the agent.
 	//
 	// This member is required.
 	InputText *string
 
-	// Identifier used for the current session
+	// The unique identifier of the session. Use the same value across requests to
+	// continue the same conversation.
 	//
 	// This member is required.
 	SessionId *string
 
-	// Enable agent trace events for improved debugging
+	// Specifies whether to turn on the trace or not to track the agent's reasoning
+	// process. For more information, see Trace enablement (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events)
+	// .
 	EnableTrace *bool
 
-	// End current session
+	// Specifies whether to end the session with the agent or not.
 	EndSession *bool
 
-	// Session state passed by customer. Base64 encoded json string representation of
-	// SessionState.
+	// Contains parameters that specify various attributes of the session.
 	SessionState *types.SessionState
 
 	noSmithyDocumentSerde
 }
 
-// InvokeAgent Response
 type InvokeAgentOutput struct {
 
-	// streaming response mimetype of the model
+	// The MIME type of the input data in the request. The default value is
+	// application/json .
 	//
 	// This member is required.
 	ContentType *string
 
-	// streaming response mimetype of the model
+	// The unique identifier of the session with the agent.
 	//
 	// This member is required.
 	SessionId *string

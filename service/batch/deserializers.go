@@ -7623,6 +7623,11 @@ func awsRestjson1_deserializeDocumentJobQueueDetail(v **types.JobQueueDetail, va
 				sv.JobQueueName = ptr.String(jtv)
 			}
 
+		case "jobStateTimeLimitActions":
+			if err := awsRestjson1_deserializeDocumentJobStateTimeLimitActions(&sv.JobStateTimeLimitActions, value); err != nil {
+				return err
+			}
+
 		case "priority":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7710,6 +7715,111 @@ func awsRestjson1_deserializeDocumentJobQueueDetailList(v *[]types.JobQueueDetai
 		var col types.JobQueueDetail
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentJobQueueDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJobStateTimeLimitAction(v **types.JobStateTimeLimitAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JobStateTimeLimitAction
+	if *v == nil {
+		sv = &types.JobStateTimeLimitAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobStateTimeLimitActionsAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.JobStateTimeLimitActionsAction(jtv)
+			}
+
+		case "maxTimeSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxTimeSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "reason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Reason = ptr.String(jtv)
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobStateTimeLimitActionsState to be of type string, got %T instead", value)
+				}
+				sv.State = types.JobStateTimeLimitActionsState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJobStateTimeLimitActions(v *[]types.JobStateTimeLimitAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.JobStateTimeLimitAction
+	if *v == nil {
+		cv = []types.JobStateTimeLimitAction{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.JobStateTimeLimitAction
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentJobStateTimeLimitAction(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

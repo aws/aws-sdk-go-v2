@@ -21,12 +21,14 @@ import (
 // . If neither a verified phone number nor a verified email exists, this API
 // returns InvalidParameterException . If your app client has a client secret and
 // you don't provide a SECRET_HASH parameter, this API returns
-// NotAuthorizedException . Amazon Cognito doesn't evaluate Identity and Access
-// Management (IAM) policies in requests for this API operation. For this
-// operation, you can't use IAM credentials to authorize requests, and you can't
-// grant IAM permissions in policies. For more information about authorization
-// models in Amazon Cognito, see Using the Amazon Cognito user pools API and user
-// pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// NotAuthorizedException . To use this API operation, your user pool must have
+// self-service account recovery configured. Use AdminSetUserPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html)
+// if you manage passwords as an administrator. Amazon Cognito doesn't evaluate
+// Identity and Access Management (IAM) policies in requests for this API
+// operation. For this operation, you can't use IAM credentials to authorize
+// requests, and you can't grant IAM permissions in policies. For more information
+// about authorization models in Amazon Cognito, see Using the Amazon Cognito user
+// pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
 // . This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in
@@ -66,8 +68,9 @@ type ForgotPasswordInput struct {
 
 	// The username of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
-	// attributes. If username isn't an alias attribute in your user pool, you can
-	// also use their sub in this request.
+	// attributes. If username isn't an alias attribute in your user pool, this value
+	// must be the sub of a local user or the username of a user from a third-party
+	// IdP.
 	//
 	// This member is required.
 	Username *string

@@ -1,0 +1,8 @@
+{
+    "id": "20b8c4e7-8c42-4d39-94b3-b949d027a083",
+    "type": "feature",
+    "description": "Added exceptions to CreateTrail, DescribeTrails, and ListImportFailures APIs.",
+    "modules": [
+        "service/cloudtrail"
+    ]
+}

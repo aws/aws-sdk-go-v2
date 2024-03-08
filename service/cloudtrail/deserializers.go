@@ -736,6 +736,9 @@ func awsAwsjson11_deserializeOpErrorCreateTrail(response *smithyhttp.Response, m
 	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
 	case strings.EqualFold("InvalidS3BucketNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidS3BucketNameException(response, errorBody)
 
@@ -1686,6 +1689,9 @@ func awsAwsjson11_deserializeOpErrorDescribeTrails(response *smithyhttp.Response
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
@@ -3438,6 +3444,9 @@ func awsAwsjson11_deserializeOpErrorListImportFailures(response *smithyhttp.Resp
 	switch {
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
 	case strings.EqualFold("OperationNotPermittedException", errorCode):
 		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)

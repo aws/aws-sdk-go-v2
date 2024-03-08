@@ -290,6 +290,13 @@ func awsRestjson1_serializeOpDocumentCreateJobQueueInput(v *CreateJobQueueInput,
 		ok.String(*v.JobQueueName)
 	}
 
+	if v.JobStateTimeLimitActions != nil {
+		ok := object.Key("jobStateTimeLimitActions")
+		if err := awsRestjson1_serializeDocumentJobStateTimeLimitActions(v.JobStateTimeLimitActions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Priority != nil {
 		ok := object.Key("priority")
 		ok.Integer(*v.Priority)
@@ -2128,6 +2135,13 @@ func awsRestjson1_serializeOpDocumentUpdateJobQueueInput(v *UpdateJobQueueInput,
 		ok.String(*v.JobQueue)
 	}
 
+	if v.JobStateTimeLimitActions != nil {
+		ok := object.Key("jobStateTimeLimitActions")
+		if err := awsRestjson1_serializeDocumentJobStateTimeLimitActions(v.JobStateTimeLimitActions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Priority != nil {
 		ok := object.Key("priority")
 		ok.Integer(*v.Priority)
@@ -3557,6 +3571,46 @@ func awsRestjson1_serializeDocumentJobDependencyList(v []types.JobDependency, va
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentJobDependency(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJobStateTimeLimitAction(v *types.JobStateTimeLimitAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("action")
+		ok.String(string(v.Action))
+	}
+
+	if v.MaxTimeSeconds != nil {
+		ok := object.Key("maxTimeSeconds")
+		ok.Integer(*v.MaxTimeSeconds)
+	}
+
+	if v.Reason != nil {
+		ok := object.Key("reason")
+		ok.String(*v.Reason)
+	}
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJobStateTimeLimitActions(v []types.JobStateTimeLimitAction, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentJobStateTimeLimitAction(&v[i], av); err != nil {
 			return err
 		}
 	}

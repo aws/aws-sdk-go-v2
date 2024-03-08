@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// RetrieveAndGenerate API
+// Queries a knowledge base and generates responses based on the retrieved
+// results. The response cites up to five sources but only selects the ones that
+// are relevant to the query. The numberOfResults field is currently unsupported
+// for RetrieveAndGenerate . Don't include it in the vectorSearchConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_KnowledgeBaseVectorSearchConfiguration.html)
+// object.
 func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGenerateInput, optFns ...func(*Options)) (*RetrieveAndGenerateOutput, error) {
 	if params == nil {
 		params = &RetrieveAndGenerateInput{}
@@ -29,18 +33,20 @@ func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGen
 
 type RetrieveAndGenerateInput struct {
 
-	// Customer input of the turn
+	// Contains the query made to the knowledge base.
 	//
 	// This member is required.
 	Input *types.RetrieveAndGenerateInput
 
-	// Configures the retrieval and generation for the session.
+	// Contains details about the resource being queried and the foundation model used
+	// for generation.
 	RetrieveAndGenerateConfiguration *types.RetrieveAndGenerateConfiguration
 
-	// Configures common parameters of the session.
+	// Contains details about the session with the knowledge base.
 	SessionConfiguration *types.RetrieveAndGenerateSessionConfiguration
 
-	// Identifier of the session.
+	// The unique identifier of the session. Reuse the same value to continue the same
+	// session with the knowledge base.
 	SessionId *string
 
 	noSmithyDocumentSerde
@@ -48,17 +54,19 @@ type RetrieveAndGenerateInput struct {
 
 type RetrieveAndGenerateOutput struct {
 
-	// Service response of the turn
+	// Contains the response generated from querying the knowledge base.
 	//
 	// This member is required.
 	Output *types.RetrieveAndGenerateOutput
 
-	// Identifier of the session.
+	// The unique identifier of the session. Reuse the same value to continue the same
+	// session with the knowledge base.
 	//
 	// This member is required.
 	SessionId *string
 
-	// List of citations
+	// A list of segments of the generated response that are based on sources in the
+	// knowledge base, alongside information about the sources.
 	Citations []types.Citation
 
 	// Metadata pertaining to the operation's result.

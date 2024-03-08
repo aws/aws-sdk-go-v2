@@ -1,0 +1,8 @@
+{
+    "id": "fdf1b3b0-1c42-43dd-857e-1ca7e002f6e9",
+    "type": "feature",
+    "description": "Add RDS Provisioned and Serverless Usage types",
+    "modules": [
+        "service/guardduty"
+    ]
+}

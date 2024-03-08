@@ -66,6 +66,11 @@ type CreateJobQueueInput struct {
 	// This member is required.
 	Priority *int32
 
+	// The set of actions that Batch performs on jobs that remain at the head of the
+	// job queue in the specified state longer than specified times. Batch will perform
+	// each action after maxTimeSeconds has passed.
+	JobStateTimeLimitActions []types.JobStateTimeLimitAction
+
 	// The Amazon Resource Name (ARN) of the fair share scheduling policy. If this
 	// parameter is specified, the job queue uses a fair share scheduling policy. If
 	// this parameter isn't specified, the job queue uses a first in, first out (FIFO)

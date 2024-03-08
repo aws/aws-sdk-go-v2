@@ -238,6 +238,40 @@ func (JobDefinitionType) Values() []JobDefinitionType {
 	}
 }
 
+type JobStateTimeLimitActionsAction string
+
+// Enum values for JobStateTimeLimitActionsAction
+const (
+	JobStateTimeLimitActionsActionCancel JobStateTimeLimitActionsAction = "CANCEL"
+)
+
+// Values returns all known values for JobStateTimeLimitActionsAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (JobStateTimeLimitActionsAction) Values() []JobStateTimeLimitActionsAction {
+	return []JobStateTimeLimitActionsAction{
+		"CANCEL",
+	}
+}
+
+type JobStateTimeLimitActionsState string
+
+// Enum values for JobStateTimeLimitActionsState
+const (
+	JobStateTimeLimitActionsStateRunnable JobStateTimeLimitActionsState = "RUNNABLE"
+)
+
+// Values returns all known values for JobStateTimeLimitActionsState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (JobStateTimeLimitActionsState) Values() []JobStateTimeLimitActionsState {
+	return []JobStateTimeLimitActionsState{
+		"RUNNABLE",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus
