@@ -1510,7 +1510,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1586,7 +1586,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1924,7 +1924,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1962,7 +1962,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2081,7 +2081,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2144,7 +2144,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2210,7 +2210,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2279,7 +2279,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2350,7 +2350,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2690,7 +2690,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2777,7 +2777,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2879,7 +2879,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2965,7 +2965,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3031,7 +3031,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Resets the specified user's password in a user pool as an administrator. Works on any\n            user.</p>\n         <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers\n            require you to register an origination phone number before you can send SMS messages\n            to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a\n            phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>.\n            Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must\n            receive SMS messages might not be able to sign up, activate their accounts, or sign\n            in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service,\n            Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you can send messages only to verified phone\n            numbers. After you test your app while in the sandbox environment, you can move out\n            of the sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito\n                Developer Guide</i>.</p>\n         </note>\n         <p>Deactivates a user's password, requiring them to change it. If a user tries to sign in\n            after the API is called, Amazon Cognito responds with a\n                <code>PasswordResetRequiredException</code> error. Your app must then perform the\n            actions that reset your user's password: the forgot-password flow. In addition, if the\n            user pool has phone verification selected and a verified phone number exists for the\n            user, or if email verification is selected and a verified email exists for the user,\n            calling this API will also result in sending a message to the end user with the code to\n            change their password.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Resets the specified user's password in a user pool as an administrator. Works on any\n            user.</p>\n         <p>To use this API operation, your user pool must have self-service account recovery\n            configured. Use <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html\">AdminSetUserPassword</a> if you manage passwords as an administrator.</p>\n         <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers\n            require you to register an origination phone number before you can send SMS messages\n            to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a\n            phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>.\n            Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must\n            receive SMS messages might not be able to sign up, activate their accounts, or sign\n            in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service,\n            Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you can send messages only to verified phone\n            numbers. After you test your app while in the sandbox environment, you can move out\n            of the sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito\n                Developer Guide</i>.</p>\n         </note>\n         <p>Deactivates a user's password, requiring them to change it. If a user tries to sign in\n            after the API is called, Amazon Cognito responds with a\n                <code>PasswordResetRequiredException</code> error. Your app must then perform the\n            actions that reset your user's password: the forgot-password flow. In addition, if the\n            user pool has phone verification selected and a verified phone number exists for the\n            user, or if email verification is selected and a verified email exists for the user,\n            calling this API will also result in sending a message to the end user with the code to\n            change their password.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#AdminResetUserPasswordRequest": {
@@ -3047,7 +3047,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3291,7 +3291,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3362,7 +3362,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3434,7 +3434,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3507,7 +3507,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3585,7 +3585,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3682,7 +3682,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3758,7 +3758,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4942,7 +4942,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5072,7 +5072,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8465,7 +8465,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Calling this API causes a message to be sent to the end user with a confirmation code\n            that is required to change the user's password. For the <code>Username</code> parameter,\n            you can use the username or user alias. The method used to send the confirmation code is\n            sent according to the specified AccountRecoverySetting. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html\">Recovering\n                User Accounts</a> in the <i>Amazon Cognito Developer Guide</i>. To\n            use the confirmation code for resetting the password, call <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html\">ConfirmForgotPassword</a>. </p>\n         <p>If neither a verified phone number nor a verified email exists, this API returns\n                <code>InvalidParameterException</code>. If your app client has a client secret and\n            you don't provide a <code>SECRET_HASH</code> parameter, this API returns\n                <code>NotAuthorizedException</code>.</p>\n         <note>\n            <p>Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you can't use IAM credentials to authorize requests, and you can't\n    grant IAM permissions in policies. For more information about authorization models in\n    Amazon Cognito, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>.</p>\n         </note>\n         <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers\n            require you to register an origination phone number before you can send SMS messages\n            to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a\n            phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>.\n            Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must\n            receive SMS messages might not be able to sign up, activate their accounts, or sign\n            in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service,\n            Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you can send messages only to verified phone\n            numbers. After you test your app while in the sandbox environment, you can move out\n            of the sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito\n                Developer Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Calling this API causes a message to be sent to the end user with a confirmation code\n            that is required to change the user's password. For the <code>Username</code> parameter,\n            you can use the username or user alias. The method used to send the confirmation code is\n            sent according to the specified AccountRecoverySetting. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html\">Recovering\n                User Accounts</a> in the <i>Amazon Cognito Developer Guide</i>. To\n            use the confirmation code for resetting the password, call <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html\">ConfirmForgotPassword</a>. </p>\n         <p>If neither a verified phone number nor a verified email exists, this API returns\n                <code>InvalidParameterException</code>. If your app client has a client secret and\n            you don't provide a <code>SECRET_HASH</code> parameter, this API returns\n                <code>NotAuthorizedException</code>.</p>\n         <p>To use this API operation, your user pool must have self-service account recovery\n            configured. Use <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html\">AdminSetUserPassword</a> if you manage passwords as an administrator.</p>\n         <note>\n            <p>Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you can't use IAM credentials to authorize requests, and you can't\n    grant IAM permissions in policies. For more information about authorization models in\n    Amazon Cognito, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>.</p>\n         </note>\n         <note>\n            <p>This action might generate an SMS text message. Starting June 1, 2021, US telecom carriers\n            require you to register an origination phone number before you can send SMS messages\n            to US phone numbers. If you use SMS text messages in Amazon Cognito, you must register a\n            phone number with <a href=\"https://console.aws.amazon.com/pinpoint/home/\">Amazon Pinpoint</a>.\n            Amazon Cognito uses the registered number automatically. Otherwise, Amazon Cognito users who must\n            receive SMS messages might not be able to sign up, activate their accounts, or sign\n            in.</p>\n            <p>If you have never used SMS text messages with Amazon Cognito or any other Amazon Web Service,\n            Amazon Simple Notification Service might place your account in the SMS sandbox. In <i>\n                  <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">sandbox\n                    mode</a>\n               </i>, you can send messages only to verified phone\n            numbers. After you test your app while in the sandbox environment, you can move out\n            of the sandbox and into production. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html\"> SMS message settings for Amazon Cognito user pools</a> in the <i>Amazon Cognito\n                Developer Guide</i>.</p>\n         </note>",
                 "smithy.api#optionalAuth": {}
             }
         },
@@ -8494,7 +8494,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10909,7 +10909,7 @@
                 "Filter": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserFilterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter string of the form \"<i>AttributeName</i>\n            <i>Filter-Type</i> \"<i>AttributeValue</i>\"\". Quotation marks\n            within the filter string must be escaped using the backslash (\\) character. For example,\n                \"<code>family_name</code> = \\\"Reddy\\\"\".</p>\n         <ul>\n            <li>\n               <p>\n                  <i>AttributeName</i>: The name of the attribute to search for.\n                    You can only search for one attribute at a time.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Filter-Type</i>: For an exact match, use =, for example,\n                        \"<code>given_name</code> = \\\"Jon\\\"\". For a prefix (\"starts with\") match, use\n                    ^=, for example, \"<code>given_name</code> ^= \\\"Jon\\\"\". </p>\n            </li>\n            <li>\n               <p>\n                  <i>AttributeValue</i>: The attribute value that must be matched\n                    for each user.</p>\n            </li>\n         </ul>\n         <p>If the filter string is empty, <code>ListUsers</code> returns all users in the user\n            pool.</p>\n         <p>You can only search for the following standard attributes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>username</code> (case-sensitive)</p>\n            </li>\n            <li>\n               <p>\n                  <code>email</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>phone_number</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>given_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>family_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>preferred_username</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cognito:user_status</code> (called <b>Status</b> in the Console) (case-insensitive)</p>\n            </li>\n            <li>\n               <p>\n                  <code>status (called <b>Enabled</b> in the Console)\n                        (case-sensitive)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sub</code>\n               </p>\n            </li>\n         </ul>\n         <p>Custom attributes aren't searchable.</p>\n         <note>\n            <p>You can also list users with a client-side filter. The server-side filter matches\n                no more than one attribute. For an advanced search, use a client-side filter with\n                the <code>--query</code> parameter of the <code>list-users</code> action in the\n                CLI. When you use a client-side filter, ListUsers returns a paginated list of zero\n                or more users. You can receive multiple pages in a row with zero results. Repeat the\n                query with each pagination token that is returned until you receive a null\n                pagination token value, and then review the combined result. </p>\n            <p>For more information about server-side and client-side filtering, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">FilteringCLI output</a> in the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">Command Line Interface\n                    User Guide</a>. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api\">Searching for Users Using the ListUsers API</a> and <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples\">Examples of Using the ListUsers API</a> in the <i>Amazon Cognito Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A filter string of the form \"<i>AttributeName</i>\n            <i>Filter-Type</i> \"<i>AttributeValue</i>\"\". Quotation marks\n            within the filter string must be escaped using the backslash (<code>\\</code>) character. For example,\n            <code>\"family_name = \\\"Reddy\\\"\"</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>AttributeName</i>: The name of the attribute to search for.\n                    You can only search for one attribute at a time.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Filter-Type</i>: For an exact match, use <code>=</code>, for example,\n                    \"<code>given_name = \\\"Jon\\\"</code>\". For a prefix (\"starts with\") match, use\n                    <code>^=</code>, for example, \"<code>given_name ^= \\\"Jon\\\"</code>\". </p>\n            </li>\n            <li>\n               <p>\n                  <i>AttributeValue</i>: The attribute value that must be matched\n                    for each user.</p>\n            </li>\n         </ul>\n         <p>If the filter string is empty, <code>ListUsers</code> returns all users in the user\n            pool.</p>\n         <p>You can only search for the following standard attributes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>username</code> (case-sensitive)</p>\n            </li>\n            <li>\n               <p>\n                  <code>email</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>phone_number</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>given_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>family_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>preferred_username</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cognito:user_status</code> (called <b>Status</b> in the Console) (case-insensitive)</p>\n            </li>\n            <li>\n               <p>\n                  <code>status (called <b>Enabled</b> in the Console)\n                        (case-sensitive)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sub</code>\n               </p>\n            </li>\n         </ul>\n         <p>Custom attributes aren't searchable.</p>\n         <note>\n            <p>You can also list users with a client-side filter. The server-side filter matches\n                no more than one attribute. For an advanced search, use a client-side filter with\n                the <code>--query</code> parameter of the <code>list-users</code> action in the\n                CLI. When you use a client-side filter, ListUsers returns a paginated list of zero\n                or more users. You can receive multiple pages in a row with zero results. Repeat the\n                query with each pagination token that is returned until you receive a null\n                pagination token value, and then review the combined result. </p>\n            <p>For more information about server-side and client-side filtering, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">FilteringCLI output</a> in the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">Command Line Interface\n                    User Guide</a>. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api\">Searching for Users Using the ListUsers API</a> and <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples\">Examples of Using the ListUsers API</a> in the <i>Amazon Cognito Developer\n                Guide</i>.</p>"
                     }
                 }
             },
@@ -11238,7 +11238,7 @@
                 "MaxValue": {
                     "target": "com.amazonaws.cognitoidentityprovider#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum value of an attribute that is of the number data type.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of a number attribute value. Must be a number less than or equal to\n            <code>2^1023</code>, represented as a string with a length of 131072 characters or\n            fewer.</p>"
                     }
                 }
             },
@@ -11781,7 +11781,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12798,6 +12798,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
                 {
@@ -13409,7 +13412,7 @@
                 "MaxLength": {
                     "target": "com.amazonaws.cognitoidentityprovider#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of a string attribute value. Must be a number less than or equal to\n            <code>2^1023</code>, represented as a string with a length of 131072 characters or\n            fewer.</p>"
                     }
                 }
             },
@@ -13854,7 +13857,7 @@
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter is typically your user's\nusername, but it can be any of their alias attributes. If <code>username</code> isn't an alias attribute in \nyour user pool, you can also use their <code>sub</code> in this request.</p>",
+                        "smithy.api#documentation": "<p>The username of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -1770,7 +1770,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a single Amazon GuardDuty detector. A detector is a resource that represents the\n      GuardDuty service. To start using GuardDuty, you must create a detector in each Region where\n      you enable the service. You can have only one detector per account per Region. All data\n      sources are enabled in a new detector by default.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a single GuardDuty detector. A detector is a resource that represents the\n      GuardDuty service. To start using GuardDuty, you must create a detector in each Region where\n      you enable the service. You can have only one detector per account per Region. All data\n      sources are enabled in a new detector by default.</p>\n         <ul>\n            <li>\n               <p>When you don't specify any <code>features</code>, with an \n          exception to <code>RUNTIME_MONITORING</code>, all the optional features are \n          enabled by default.</p>\n            </li>\n            <li>\n               <p>When you specify some of the <code>features</code>, any feature that is not specified in the \n          API call gets enabled by default, with an exception to <code>RUNTIME_MONITORING</code>. </p>\n            </li>\n         </ul>\n         <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>)\n      and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. \n      You can add only one of these two features because Runtime Monitoring already includes the \n      threat detection for Amazon EKS resources. For more information, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html\">Runtime Monitoring</a>.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector",
@@ -3394,7 +3394,7 @@
                 "AutoEnableOrganizationMembers": {
                     "target": "com.amazonaws.guardduty#AutoEnableMembers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the auto-enablement configuration of GuardDuty for the member accounts in the\n      organization.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code>: Indicates that when a new account joins the organization, they will\n          have GuardDuty enabled automatically. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty\n          enabled automatically. This includes <code>NEW</code> accounts that join the organization\n          and accounts that may have been suspended or removed from the organization in\n          GuardDuty.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Indicates that GuardDuty will not be automatically enabled for any\n          account in the organization. The administrator must manage GuardDuty for each account in \n          the organization individually.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Indicates the auto-enablement configuration of GuardDuty or any of the corresponding protection plans for the member accounts in the\n      organization.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code>: Indicates that when a new account joins the organization, they will\n          have GuardDuty or any of the corresponding protection plans enabled automatically. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty and any of the corresponding \n          protection plans enabled automatically. This includes <code>NEW</code> accounts that join the organization\n          and accounts that may have been suspended or removed from the organization in\n          GuardDuty.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Indicates that GuardDuty or any of the corresponding protection plans \n          will not be automatically enabled for any\n          account in the organization. The administrator must manage GuardDuty for each account in \n          the organization individually.</p>\n               <p>When you update the auto-enable setting from <code>ALL</code> or <code>NEW</code> to \n        <code>NONE</code>, this action doesn't disable the corresponding option for your existing accounts. This\n        configuration will apply to the new accounts that join the organization. After you update the auto-enable settings,\n        no new account will have the corresponding option as enabled.</p>\n            </li>\n         </ul>",
                         "smithy.api#jsonName": "autoEnableOrganizationMembers"
                     }
                 }
@@ -3738,7 +3738,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a GuardDuty feature.</p>"
+                "smithy.api#documentation": "<p>Contains information about a GuardDuty feature.</p>\n         <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>)\n      and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. \n      You can add only one of these two features because Runtime Monitoring already includes the \n      threat detection for Amazon EKS resources. For more information, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html\">Runtime Monitoring</a>.</p>"
             }
         },
         "com.amazonaws.guardduty#DetectorFeatureConfigurationResult": {
@@ -3774,7 +3774,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about a GuardDuty feature.</p>"
+                "smithy.api#documentation": "<p>Contains information about a GuardDuty feature.</p>\n         <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>)\n      and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. \n      You can add only one of these two features because Runtime Monitoring already includes the \n      threat detection for Amazon EKS resources. For more information, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html\">Runtime Monitoring</a>.</p>"
             }
         },
         "com.amazonaws.guardduty#DetectorFeatureConfigurations": {
@@ -6150,7 +6150,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves how many active member accounts \n      in your Amazon Web Services organization have\n      each feature enabled within GuardDuty. Only a delegated GuardDuty administrator of an organization can run this API.</p>\n         <p>When you create a new Amazon Web Services organization, it might take up to 24 \n      hours to generate the statistics for the entire organization.</p>",
+                "smithy.api#documentation": "<p>Retrieves how many active member accounts have\n      each feature enabled within GuardDuty. Only a delegated GuardDuty administrator of an organization can run this API.</p>\n         <p>When you create a new organization, it might take up to 24 \n      hours to generate the statistics for the entire organization.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/organization/statistics",
@@ -12706,7 +12706,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates the malware scan. Invoking this API will automatically create the <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html\">Service-linked role </a> in \n      the corresponding account.</p>",
+                "smithy.api#documentation": "<p>Initiates the malware scan. Invoking this API will automatically create the <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html\">Service-linked role</a> in \n      the corresponding account.</p>\n         <p>When the malware scan starts, you can use the associated scan ID to track the status of the scan. For more information,\n      see <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeMalwareScans.html\">DescribeMalwareScans</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/malware-scan/start",
@@ -13459,7 +13459,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the GuardDuty detector specified by the detectorId.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
+                "smithy.api#documentation": "<p>Updates the GuardDuty detector specified by the detector ID.</p>\n         <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>)\n      and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. \n      You can add only one of these two features because Runtime Monitoring already includes the \n      threat detection for Amazon EKS resources. For more information, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html\">Runtime Monitoring</a>.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}",
@@ -13851,7 +13851,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Contains information on member accounts to be updated.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
+                "smithy.api#documentation": "<p>Contains information on member accounts to be updated.</p>\n         <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>)\n      and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. \n      You can add only one of these two features because Runtime Monitoring already includes the \n      threat detection for Amazon EKS resources. For more information, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html\">Runtime Monitoring</a>.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member/detector/update",
@@ -13936,7 +13936,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures the delegated administrator account with the provided values. You must provide\n      a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>, but not both. </p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
+                "smithy.api#documentation": "<p>Configures the delegated administrator account with the provided values. You must provide\n      a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>, but not both. </p>\n         <p>Specifying both EKS Runtime Monitoring (<code>EKS_RUNTIME_MONITORING</code>)\n      and Runtime Monitoring (<code>RUNTIME_MONITORING</code>) will cause an error. \n      You can add only one of these two features because Runtime Monitoring already includes the \n      threat detection for Amazon EKS resources. For more information, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html\">Runtime Monitoring</a>.</p>\n         <p>There might be regional differences because some data sources might not be \n      available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more \n      information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html\">Regions and endpoints</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/admin",
@@ -13986,7 +13986,7 @@
                 "AutoEnableOrganizationMembers": {
                     "target": "com.amazonaws.guardduty#AutoEnableMembers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the auto-enablement configuration of GuardDuty for the member accounts in the\n      organization. You must provide a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>. </p>\n         <p>Use one of the \n    following configuration values for <code>autoEnableOrganizationMembers</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code>: Indicates that when a new account joins the organization, they will\n          have GuardDuty enabled automatically. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty\n          enabled automatically. This includes <code>NEW</code> accounts that join the organization\n          and accounts that may have been suspended or removed from the organization in\n          GuardDuty.</p>\n               <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Indicates that GuardDuty will not be automatically enabled for any\n          account in the organization. The administrator must manage GuardDuty for each account in the organization individually.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Indicates the auto-enablement configuration of GuardDuty for the member accounts in the\n      organization. You must provide a value for either <code>autoEnableOrganizationMembers</code> or <code>autoEnable</code>. </p>\n         <p>Use one of the \n    following configuration values for <code>autoEnableOrganizationMembers</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code>: Indicates that when a new account joins the organization, they will\n          have GuardDuty enabled automatically. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ALL</code>: Indicates that all accounts in the organization have GuardDuty\n          enabled automatically. This includes <code>NEW</code> accounts that join the organization\n          and accounts that may have been suspended or removed from the organization in\n          GuardDuty.</p>\n               <p>It may take up to 24 hours to update the configuration for all the member accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: Indicates that GuardDuty will not be automatically enabled for any\n          account in the organization. The administrator must manage GuardDuty for each account in the organization individually.</p>\n               <p>When you update the auto-enable setting from <code>ALL</code> or <code>NEW</code> to \n          <code>NONE</code>, this action doesn't disable the corresponding option for your existing accounts. This\n          configuration will apply to the new accounts that join the organization. After you update the auto-enable settings,\n          no new account will have the corresponding option as enabled.</p>\n            </li>\n         </ul>",
                         "smithy.api#jsonName": "autoEnableOrganizationMembers"
                     }
                 }
@@ -14308,6 +14308,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EC2_RUNTIME_MONITORING"
+                    }
+                },
+                "RDS_DBI_PROTECTION_PROVISIONED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS_DBI_PROTECTION_PROVISIONED"
+                    }
+                },
+                "RDS_DBI_PROTECTION_SERVERLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RDS_DBI_PROTECTION_SERVERLESS"
                     }
                 }
             }
