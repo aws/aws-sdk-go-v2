@@ -1,3 +1,7 @@
+# v1.40.0 (2024-03-08)
+
+* **Feature**: Add RDS Provisioned and Serverless Usage types
+
 # v1.39.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

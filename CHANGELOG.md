@@ -1,3 +1,21 @@
+# Release (2024-03-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.35.0](service/batch/CHANGELOG.md#v1350-2024-03-08)
+  * **Feature**: This release adds JobStateTimeLimitActions setting to the Job Queue API. It allows you to configure an action Batch can take for a blocking job in front of the queue after the defined period of time. The new parameter applies for ECS, EKS, and FARGATE Job Queues.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.4.2](service/bedrockagentruntime/CHANGELOG.md#v142-2024-03-08)
+  * **Documentation**: Documentation update for Bedrock Runtime Agent
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.39.0](service/cloudtrail/CHANGELOG.md#v1390-2024-03-08)
+  * **Feature**: Added exceptions to CreateTrail, DescribeTrails, and ListImportFailures APIs.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.30.3](service/codebuild/CHANGELOG.md#v1303-2024-03-08)
+  * **Documentation**: This release adds support for a new webhook event: PULL_REQUEST_CLOSED.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.36.0](service/cognitoidentityprovider/CHANGELOG.md#v1360-2024-03-08)
+  * **Feature**: Add ConcurrentModificationException to SetUserPoolMfaConfig
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.40.0](service/guardduty/CHANGELOG.md#v1400-2024-03-08)
+  * **Feature**: Add RDS Provisioned and Serverless Usage types
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.44.0](service/transfer/CHANGELOG.md#v1440-2024-03-08)
+  * **Feature**: Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector.
+
 # Release (2024-03-07)
 
 ## General Highlights

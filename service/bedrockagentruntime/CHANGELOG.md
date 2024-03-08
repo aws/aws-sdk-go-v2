@@ -1,3 +1,7 @@
+# v1.4.2 (2024-03-08)
+
+* **Documentation**: Documentation update for Bedrock Runtime Agent
+
 # v1.4.1 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

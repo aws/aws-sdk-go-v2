@@ -1,3 +1,7 @@
+# v1.39.0 (2024-03-08)
+
+* **Feature**: Added exceptions to CreateTrail, DescribeTrails, and ListImportFailures APIs.
+
 # v1.38.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

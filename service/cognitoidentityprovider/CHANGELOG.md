@@ -1,3 +1,7 @@
+# v1.36.0 (2024-03-08)
+
+* **Feature**: Add ConcurrentModificationException to SetUserPoolMfaConfig
+
 # v1.35.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

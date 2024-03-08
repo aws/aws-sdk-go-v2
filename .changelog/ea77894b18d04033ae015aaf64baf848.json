@@ -1,8 +1,0 @@
-{
-    "id": "ea77894b-18d0-4033-ae01-5aaf64baf848",
-    "type": "documentation",
-    "description": "Documentation update for Bedrock Runtime Agent",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

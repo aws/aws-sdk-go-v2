@@ -1,8 +1,0 @@
-{
-    "id": "0298121b-7803-4b10-9dae-84ee2c5ac6e0",
-    "type": "documentation",
-    "description": "This release adds support for a new webhook event: PULL_REQUEST_CLOSED.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.44.0 (2024-03-08)
+
+* **Feature**: Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector.
+
 # v1.43.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

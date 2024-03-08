@@ -1,3 +1,7 @@
+# v1.30.3 (2024-03-08)
+
+* **Documentation**: This release adds support for a new webhook event: PULL_REQUEST_CLOSED.
+
 # v1.30.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.
