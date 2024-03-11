@@ -121,6 +121,24 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborSerialize(t *testing.T) {
 				return smithytesting.CompareCBOR(actual, `v2pzdHJpbmdMaXN0n///`)
 			},
 		},
+		// Serializes empty JSON definite length lists
+		"RpcV2CborListsEmptyUsingDefiniteLength": {
+			Params: &RpcV2CborListsInput{
+				StringList: []string{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `oWpzdHJpbmdMaXN0gA==`)
+			},
+		},
 		// Serializes null values in lists
 		"RpcV2CborListsSerializeNull": {
 			Params: &RpcV2CborListsInput{
@@ -140,6 +158,50 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborSerialize(t *testing.T) {
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VTdHJpbmdMaXN0n/ZiaGn//w==`)
+			},
+		},
+		// Serializes indefinite length text strings inside an indefinite length list
+		"RpcV2CborSparseListWithIndefiniteString": {
+			Params: &RpcV2CborListsInput{
+				SparseStringList: []*string{
+					ptr.String("An example indefinite string, which will be chunked, on each comma"),
+					ptr.String("Another example indefinite string with only one chunk"),
+					ptr.String("This is a plain string"),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VTdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8=`)
+			},
+		},
+		// Serializes indefinite length text strings inside a definite length list
+		"RpcV2CborListWithIndefiniteString": {
+			Params: &RpcV2CborListsInput{
+				StringList: []string{
+					"An example indefinite string, which will be chunked, on each comma",
+					"Another example indefinite string with only one chunk",
+					"This is a plain string",
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n`)
 			},
 		},
 	}

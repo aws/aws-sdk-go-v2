@@ -33,7 +33,7 @@ func TestClient_GreetingWithErrors_ComplexError_smithyRpcv2cborDeserialize(t *te
 				"smithy-protocol": []string{"rpc-v2-cbor"},
 			},
 			BodyMediaType: "application/cbor",
-			Body:          []byte(`v2ZfX3R5cGV4JGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyI0NvbXBsZXhFcnJvcmZOZXN0ZWS/Y0Zvb2NiYXL/aFRvcExldmVsaVRvcCBsZXZlbP8=`),
+			Body:          []byte(`v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3JoVG9wTGV2ZWxpVG9wIGxldmVsZk5lc3RlZL9jRm9vY2Jhcv//`),
 			ExpectError: &types.ComplexError{
 				TopLevel: ptr.String("Top level"),
 				Nested: &types.ComplexNestedErrorData{
@@ -44,10 +44,10 @@ func TestClient_GreetingWithErrors_ComplexError_smithyRpcv2cborDeserialize(t *te
 		"RpcV2CborEmptyComplexError": {
 			StatusCode: 400,
 			Header: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
+				"Content-Type": []string{"application/cbor"},
 			},
 			BodyMediaType: "application/cbor",
-			Body:          []byte(`v2ZfX3R5cGV4JGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyI0NvbXBsZXhFcnJvcv8=`),
+			Body:          []byte(`v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3L/`),
 			ExpectError:   &types.ComplexError{},
 		},
 	}
@@ -141,7 +141,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_smithyRpcv2cborDeserialize(t 
 				"smithy-protocol": []string{"rpc-v2-cbor"},
 			},
 			BodyMediaType: "application/cbor",
-			Body:          []byte(`v2ZfX3R5cGV4J2F3cy5wcm90b2NvbHRlc3RzLnJwY3YyI0ludmFsaWRHcmVldGluZ2dNZXNzYWdlYkhp/w==`),
+			Body:          []byte(`v2ZfX3R5cGV4K2F3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNJbnZhbGlkR3JlZXRpbmdnTWVzc2FnZWJIaf8=`),
 			ExpectError: &types.InvalidGreeting{
 				Message: ptr.String("Hi"),
 			},

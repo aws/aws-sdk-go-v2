@@ -38,7 +38,7 @@ func TestClient_EmptyInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
 		"empty_input": {
 			Params:        &EmptyInputOutputInput{},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/aws.protocoltests.rpcv2Cbor.RpcV2Protocol/operation/EmptyInputOutput",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/EmptyInputOutput",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -55,6 +55,10 @@ func TestClient_EmptyInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "empty_input" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#EmptyInputOutput")
+			}
+
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {

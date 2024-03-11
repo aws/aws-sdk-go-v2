@@ -17,6 +17,65 @@ import (
 	"time"
 )
 
+type smithyRpcv2cbor_deserializeOpDefaultFieldInputOutput struct {
+}
+
+func (*smithyRpcv2cbor_deserializeOpDefaultFieldInputOutput) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *smithyRpcv2cbor_deserializeOpDefaultFieldInputOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
+	}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorDefaultFieldInputOutput(resp)
+	}
+
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	if len(payload) == 0 {
+		out.Result = &DefaultFieldInputOutputOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_DefaultFieldInputOutputOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	out.Result = output
+
+	return out, metadata, nil
+}
+
 type smithyRpcv2cbor_deserializeOpEmptyInputOutput struct {
 }
 
@@ -515,92 +574,8 @@ func (m *smithyRpcv2cbor_deserializeOpSimpleScalarProperties) HandleDeserialize(
 
 	return out, metadata, nil
 }
-func deserializeCBOR_RecursiveShapesInputOutputNested1(v smithycbor.Value) (*types.RecursiveShapesInputOutputNested1, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.RecursiveShapesInputOutputNested1{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "foo" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Foo = ptr.String(dv)
-		}
-
-		if key == "nested" {
-			dv, err := deserializeCBOR_RecursiveShapesInputOutputNested2(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Nested = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_DenseBooleanMap(v smithycbor.Value) (map[string]bool, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]bool{}
-	for key, sv := range av {
-
-		dv, err := deserializeCBOR_Bool(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = dv
-	}
-	return dm, nil
-}
-
-func deserializeCBOR_StructureList(v smithycbor.Value) ([]types.StructureListMember, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.StructureListMember
-	for _, si := range av {
-
-		di, err := deserializeCBOR_StructureListMember(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_ComplexError(v smithycbor.Value) (*types.ComplexError, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ComplexError{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "TopLevel" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.TopLevel = ptr.String(dv)
-		}
-
-		if key == "Nested" {
-			dv, err := deserializeCBOR_ComplexNestedErrorData(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Nested = dv
-		}
-	}
-	return ds, nil
+func deserializeCBOR_Time(v smithycbor.Value) (time.Time, error) {
+	return smithycbor.AsTime(v)
 }
 
 func deserializeCBOR_BooleanList(v smithycbor.Value) ([]bool, error) {
@@ -620,66 +595,7 @@ func deserializeCBOR_BooleanList(v smithycbor.Value) ([]bool, error) {
 	return dl, nil
 }
 
-func deserializeCBOR_SparseStructMap(v smithycbor.Value) (map[string]*types.GreetingStruct, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]*types.GreetingStruct{}
-	for key, sv := range av {
-		if _, ok := sv.(*smithycbor.Nil); ok {
-			dm[key] = nil
-			continue
-		}
-		dv, err := deserializeCBOR_GreetingStruct(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = dv
-	}
-	return dm, nil
-}
-
-func deserializeCBOR_GreetingStruct(v smithycbor.Value) (*types.GreetingStruct, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.GreetingStruct{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "hi" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Hi = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_SparseStringMap(v smithycbor.Value) (map[string]*string, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]*string{}
-	for key, sv := range av {
-		if _, ok := sv.(*smithycbor.Nil); ok {
-			dm[key] = nil
-			continue
-		}
-		dv, err := deserializeCBOR_String(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = &dv
-	}
-	return dm, nil
-}
-
-func deserializeCBOR_SparseSetMap(v smithycbor.Value) (map[string][]string, error) {
+func deserializeCBOR_DenseSetMap(v smithycbor.Value) (map[string][]string, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
 		return nil, fmt.Errorf("unexpected value type %T", v)
@@ -691,66 +607,6 @@ func deserializeCBOR_SparseSetMap(v smithycbor.Value) (map[string][]string, erro
 			continue
 		}
 		dv, err := deserializeCBOR_StringSet(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = dv
-	}
-	return dm, nil
-}
-
-func deserializeCBOR_Float64(v smithycbor.Value) (float64, error) {
-	return smithycbor.AsFloat64(v)
-}
-
-func deserializeCBOR_SparseStringList(v smithycbor.Value) ([]*string, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []*string
-	for _, si := range av {
-		if _, ok := si.(*smithycbor.Nil); ok {
-			dl = append(dl, nil)
-			continue
-		}
-		di, err := deserializeCBOR_String(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, &di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_InvalidGreeting(v smithycbor.Value) (*types.InvalidGreeting, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.InvalidGreeting{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_DenseStringMap(v smithycbor.Value) (map[string]string, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]string{}
-	for key, sv := range av {
-
-		dv, err := deserializeCBOR_String(sv)
 		if err != nil {
 			return nil, err
 		}
@@ -776,368 +632,8 @@ func deserializeCBOR_StringSet(v smithycbor.Value) ([]string, error) {
 	return dl, nil
 }
 
-func deserializeCBOR_Int32(v smithycbor.Value) (int32, error) {
-	return smithycbor.AsInt32(v)
-}
-
-func deserializeCBOR_RecursiveShapesOutput(v smithycbor.Value) (*RecursiveShapesOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &RecursiveShapesOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "nested" {
-			dv, err := deserializeCBOR_RecursiveShapesInputOutputNested1(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Nested = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_Int16(v smithycbor.Value) (int16, error) {
-	return smithycbor.AsInt16(v)
-}
-
-func deserializeCBOR_String(v smithycbor.Value) (string, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return "", fmt.Errorf("unexpected value type %T", v)
-	}
-	return string(av), nil
-}
-
-func deserializeCBOR_StringList(v smithycbor.Value) ([]string, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []string
-	for _, si := range av {
-
-		di, err := deserializeCBOR_String(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_FractionalSecondsOutput(v smithycbor.Value) (*FractionalSecondsOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &FractionalSecondsOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "datetime" {
-			dv, err := deserializeCBOR_Time(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Datetime = ptr.Time(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_DenseStructMap(v smithycbor.Value) (map[string]types.GreetingStruct, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]types.GreetingStruct{}
-	for key, sv := range av {
-
-		dv, err := deserializeCBOR_GreetingStruct(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = *dv
-	}
-	return dm, nil
-}
-
-func deserializeCBOR_SimpleScalarPropertiesOutput(v smithycbor.Value) (*SimpleScalarPropertiesOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &SimpleScalarPropertiesOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "trueBooleanValue" {
-			dv, err := deserializeCBOR_Bool(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.TrueBooleanValue = ptr.Bool(dv)
-		}
-
-		if key == "falseBooleanValue" {
-			dv, err := deserializeCBOR_Bool(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.FalseBooleanValue = ptr.Bool(dv)
-		}
-
-		if key == "byteValue" {
-			dv, err := deserializeCBOR_Int8(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ByteValue = ptr.Int8(dv)
-		}
-
-		if key == "doubleValue" {
-			dv, err := deserializeCBOR_Float64(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.DoubleValue = ptr.Float64(dv)
-		}
-
-		if key == "floatValue" {
-			dv, err := deserializeCBOR_Float32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.FloatValue = ptr.Float32(dv)
-		}
-
-		if key == "integerValue" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.IntegerValue = ptr.Int32(dv)
-		}
-
-		if key == "longValue" {
-			dv, err := deserializeCBOR_Int64(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.LongValue = ptr.Int64(dv)
-		}
-
-		if key == "shortValue" {
-			dv, err := deserializeCBOR_Int16(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ShortValue = ptr.Int16(dv)
-		}
-
-		if key == "stringValue" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StringValue = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_SparseBooleanMap(v smithycbor.Value) (map[string]*bool, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]*bool{}
-	for key, sv := range av {
-		if _, ok := sv.(*smithycbor.Nil); ok {
-			dm[key] = nil
-			continue
-		}
-		dv, err := deserializeCBOR_Bool(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = &dv
-	}
-	return dm, nil
-}
-
-func deserializeCBOR_StructureListMember(v smithycbor.Value) (*types.StructureListMember, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.StructureListMember{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "a" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.A = ptr.String(dv)
-		}
-
-		if key == "b" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.B = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
 func deserializeCBOR_Int8(v smithycbor.Value) (int8, error) {
 	return smithycbor.AsInt8(v)
-}
-
-func deserializeCBOR_ComplexNestedErrorData(v smithycbor.Value) (*types.ComplexNestedErrorData, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ComplexNestedErrorData{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Foo" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Foo = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_NestedStringList(v smithycbor.Value) ([][]string, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl [][]string
-	for _, si := range av {
-		if _, ok := si.(*smithycbor.Nil); ok {
-			dl = append(dl, nil)
-			continue
-		}
-		di, err := deserializeCBOR_StringList(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_TimestampList(v smithycbor.Value) ([]time.Time, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []time.Time
-	for _, si := range av {
-
-		di, err := deserializeCBOR_Time(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_Bool(v smithycbor.Value) (bool, error) {
-	av, ok := v.(smithycbor.Bool)
-	if !ok {
-		return false, fmt.Errorf("unexpected value type %T", v)
-	}
-	return bool(av), nil
-}
-
-func deserializeCBOR_DenseNumberMap(v smithycbor.Value) (map[string]int32, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]int32{}
-	for key, sv := range av {
-
-		dv, err := deserializeCBOR_Int32(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = dv
-	}
-	return dm, nil
-}
-
-func deserializeCBOR_Float32(v smithycbor.Value) (float32, error) {
-	return smithycbor.AsFloat32(v)
-}
-
-func deserializeCBOR_FooEnum(v smithycbor.Value) (types.FooEnum, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.FooEnum(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.FooEnum(av), nil
-}
-
-func deserializeCBOR_Time(v smithycbor.Value) (time.Time, error) {
-	return smithycbor.AsTime(v)
-}
-
-func deserializeCBOR_IntegerList(v smithycbor.Value) ([]int32, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []int32
-	for _, si := range av {
-
-		di, err := deserializeCBOR_Int32(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_IntegerEnum(v smithycbor.Value) (types.IntegerEnum, error) {
-	av, err := smithycbor.AsInt32(v)
-	if err != nil {
-		return 0, err
-	}
-	return types.IntegerEnum(av), nil
-}
-
-func deserializeCBOR_SparseNumberMap(v smithycbor.Value) (map[string]*int32, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	dm := map[string]*int32{}
-	for key, sv := range av {
-		if _, ok := sv.(*smithycbor.Nil); ok {
-			dm[key] = nil
-			continue
-		}
-		dv, err := deserializeCBOR_Int32(sv)
-		if err != nil {
-			return nil, err
-		}
-		dm[key] = &dv
-	}
-	return dm, nil
 }
 
 func deserializeCBOR_RpcV2CborListsOutput(v smithycbor.Value) (*RpcV2CborListsOutput, error) {
@@ -1231,6 +727,176 @@ func deserializeCBOR_RpcV2CborListsOutput(v smithycbor.Value) (*RpcV2CborListsOu
 	return ds, nil
 }
 
+func deserializeCBOR_DenseStringMap(v smithycbor.Value) (map[string]string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]string{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_String(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_ComplexError(v smithycbor.Value) (*types.ComplexError, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ComplexError{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "TopLevel" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TopLevel = ptr.String(dv)
+		}
+
+		if key == "Nested" {
+			dv, err := deserializeCBOR_ComplexNestedErrorData(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Nested = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ValidationExceptionField(v smithycbor.Value) (*types.ValidationExceptionField, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ValidationExceptionField{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "path" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Path = ptr.String(dv)
+		}
+
+		if key == "message" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_GreetingWithErrorsOutput(v smithycbor.Value) (*GreetingWithErrorsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &GreetingWithErrorsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "greeting" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Greeting = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_StringList(v smithycbor.Value) ([]string, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []string
+	for _, si := range av {
+
+		di, err := deserializeCBOR_String(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_SparseStringMap(v smithycbor.Value) (map[string]*string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]*string{}
+	for key, sv := range av {
+		if _, ok := sv.(*smithycbor.Nil); ok {
+			dm[key] = nil
+			continue
+		}
+		dv, err := deserializeCBOR_String(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = &dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_GreetingStruct(v smithycbor.Value) (*types.GreetingStruct, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.GreetingStruct{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "hi" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Hi = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_Int16(v smithycbor.Value) (int16, error) {
+	return smithycbor.AsInt16(v)
+}
+
+func deserializeCBOR_NestedStringList(v smithycbor.Value) ([][]string, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl [][]string
+	for _, si := range av {
+		if _, ok := si.(*smithycbor.Nil); ok {
+			dl = append(dl, nil)
+			continue
+		}
+		di, err := deserializeCBOR_StringList(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
+}
+
 func deserializeCBOR_RecursiveShapesInputOutputNested2(v smithycbor.Value) (*types.RecursiveShapesInputOutputNested2, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -1258,18 +924,18 @@ func deserializeCBOR_RecursiveShapesInputOutputNested2(v smithycbor.Value) (*typ
 	return ds, nil
 }
 
-func deserializeCBOR_DenseSetMap(v smithycbor.Value) (map[string][]string, error) {
+func deserializeCBOR_SparseStructMap(v smithycbor.Value) (map[string]*types.GreetingStruct, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
 		return nil, fmt.Errorf("unexpected value type %T", v)
 	}
-	dm := map[string][]string{}
+	dm := map[string]*types.GreetingStruct{}
 	for key, sv := range av {
 		if _, ok := sv.(*smithycbor.Nil); ok {
 			dm[key] = nil
 			continue
 		}
-		dv, err := deserializeCBOR_StringSet(sv)
+		dv, err := deserializeCBOR_GreetingStruct(sv)
 		if err != nil {
 			return nil, err
 		}
@@ -1369,6 +1035,154 @@ func deserializeCBOR_RpcV2CborMapsOutput(v smithycbor.Value) (*RpcV2CborMapsOutp
 	return ds, nil
 }
 
+func deserializeCBOR_DenseNumberMap(v smithycbor.Value) (map[string]int32, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]int32{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_Int32(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_Float32(v smithycbor.Value) (float32, error) {
+	return smithycbor.AsFloat32(v)
+}
+
+func deserializeCBOR_SimpleScalarPropertiesOutput(v smithycbor.Value) (*SimpleScalarPropertiesOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &SimpleScalarPropertiesOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "trueBooleanValue" {
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TrueBooleanValue = ptr.Bool(dv)
+		}
+
+		if key == "falseBooleanValue" {
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.FalseBooleanValue = ptr.Bool(dv)
+		}
+
+		if key == "byteValue" {
+			dv, err := deserializeCBOR_Int8(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ByteValue = ptr.Int8(dv)
+		}
+
+		if key == "doubleValue" {
+			dv, err := deserializeCBOR_Float64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.DoubleValue = ptr.Float64(dv)
+		}
+
+		if key == "floatValue" {
+			dv, err := deserializeCBOR_Float32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.FloatValue = ptr.Float32(dv)
+		}
+
+		if key == "integerValue" {
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.IntegerValue = ptr.Int32(dv)
+		}
+
+		if key == "longValue" {
+			dv, err := deserializeCBOR_Int64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LongValue = ptr.Int64(dv)
+		}
+
+		if key == "shortValue" {
+			dv, err := deserializeCBOR_Int16(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ShortValue = ptr.Int16(dv)
+		}
+
+		if key == "stringValue" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StringValue = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_RecursiveShapesInputOutputNested1(v smithycbor.Value) (*types.RecursiveShapesInputOutputNested1, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.RecursiveShapesInputOutputNested1{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "foo" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Foo = ptr.String(dv)
+		}
+
+		if key == "nested" {
+			dv, err := deserializeCBOR_RecursiveShapesInputOutputNested2(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Nested = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_StructureList(v smithycbor.Value) ([]types.StructureListMember, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.StructureListMember
+	for _, si := range av {
+
+		di, err := deserializeCBOR_StructureListMember(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
 func deserializeCBOR_IntegerEnumList(v smithycbor.Value) ([]types.IntegerEnum, error) {
 	av, ok := v.(smithycbor.List)
 	if !ok {
@@ -1386,23 +1200,205 @@ func deserializeCBOR_IntegerEnumList(v smithycbor.Value) ([]types.IntegerEnum, e
 	return dl, nil
 }
 
-func deserializeCBOR_GreetingWithErrorsOutput(v smithycbor.Value) (*GreetingWithErrorsOutput, error) {
+func deserializeCBOR_String(v smithycbor.Value) (string, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return "", fmt.Errorf("unexpected value type %T", v)
+	}
+	return string(av), nil
+}
+
+func deserializeCBOR_FooEnumList(v smithycbor.Value) ([]types.FooEnum, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.FooEnum
+	for _, si := range av {
+
+		di, err := deserializeCBOR_FooEnum(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_StructureListMember(v smithycbor.Value) (*types.StructureListMember, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
 		return nil, fmt.Errorf("unexpected value type %T", v)
 	}
-	ds := &GreetingWithErrorsOutput{}
+	ds := &types.StructureListMember{}
 	for key, sv := range av {
 		_, _ = key, sv
-		if key == "greeting" {
+		if key == "a" {
 			dv, err := deserializeCBOR_String(sv)
 			if err != nil {
 				return nil, err
 			}
-			ds.Greeting = ptr.String(dv)
+			ds.A = ptr.String(dv)
+		}
+
+		if key == "b" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.B = ptr.String(dv)
 		}
 	}
 	return ds, nil
+}
+
+func deserializeCBOR_ComplexNestedErrorData(v smithycbor.Value) (*types.ComplexNestedErrorData, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ComplexNestedErrorData{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Foo" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Foo = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_Float64(v smithycbor.Value) (float64, error) {
+	return smithycbor.AsFloat64(v)
+}
+
+func deserializeCBOR_IntegerEnum(v smithycbor.Value) (types.IntegerEnum, error) {
+	av, err := smithycbor.AsInt32(v)
+	if err != nil {
+		return 0, err
+	}
+	return types.IntegerEnum(av), nil
+}
+
+func deserializeCBOR_SparseStringList(v smithycbor.Value) ([]*string, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []*string
+	for _, si := range av {
+		if _, ok := si.(*smithycbor.Nil); ok {
+			dl = append(dl, nil)
+			continue
+		}
+		di, err := deserializeCBOR_String(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, &di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_ValidationExceptionFieldList(v smithycbor.Value) ([]types.ValidationExceptionField, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.ValidationExceptionField
+	for _, si := range av {
+
+		di, err := deserializeCBOR_ValidationExceptionField(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_DenseStructMap(v smithycbor.Value) (map[string]types.GreetingStruct, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]types.GreetingStruct{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_GreetingStruct(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = *dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_ValidationException(v smithycbor.Value) (*types.ValidationException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ValidationException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+
+		if key == "fieldList" {
+			dv, err := deserializeCBOR_ValidationExceptionFieldList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.FieldList = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_SparseNumberMap(v smithycbor.Value) (map[string]*int32, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]*int32{}
+	for key, sv := range av {
+		if _, ok := sv.(*smithycbor.Nil); ok {
+			dm[key] = nil
+			continue
+		}
+		dv, err := deserializeCBOR_Int32(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = &dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_TimestampList(v smithycbor.Value) ([]time.Time, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []time.Time
+	for _, si := range av {
+
+		di, err := deserializeCBOR_Time(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
 }
 
 func deserializeCBOR_OptionalInputOutputOutput(v smithycbor.Value) (*OptionalInputOutputOutput, error) {
@@ -1424,19 +1420,62 @@ func deserializeCBOR_OptionalInputOutputOutput(v smithycbor.Value) (*OptionalInp
 	return ds, nil
 }
 
-func deserializeCBOR_Int64(v smithycbor.Value) (int64, error) {
-	return smithycbor.AsInt64(v)
+func deserializeCBOR_InvalidGreeting(v smithycbor.Value) (*types.InvalidGreeting, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.InvalidGreeting{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Message" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
 }
 
-func deserializeCBOR_FooEnumList(v smithycbor.Value) ([]types.FooEnum, error) {
+func deserializeCBOR_FooEnum(v smithycbor.Value) (types.FooEnum, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.FooEnum(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.FooEnum(av), nil
+}
+
+func deserializeCBOR_SparseBooleanMap(v smithycbor.Value) (map[string]*bool, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]*bool{}
+	for key, sv := range av {
+		if _, ok := sv.(*smithycbor.Nil); ok {
+			dm[key] = nil
+			continue
+		}
+		dv, err := deserializeCBOR_Bool(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = &dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_IntegerList(v smithycbor.Value) ([]int32, error) {
 	av, ok := v.(smithycbor.List)
 	if !ok {
 		return nil, fmt.Errorf("unexpected value type %T", v)
 	}
-	var dl []types.FooEnum
+	var dl []int32
 	for _, si := range av {
 
-		di, err := deserializeCBOR_FooEnum(si)
+		di, err := deserializeCBOR_Int32(si)
 		if err != nil {
 			return nil, err
 		}
@@ -1444,6 +1483,207 @@ func deserializeCBOR_FooEnumList(v smithycbor.Value) ([]types.FooEnum, error) {
 	}
 	return dl, nil
 }
+
+func deserializeCBOR_Int64(v smithycbor.Value) (int64, error) {
+	return smithycbor.AsInt64(v)
+}
+
+func deserializeCBOR_FractionalSecondsOutput(v smithycbor.Value) (*FractionalSecondsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &FractionalSecondsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "datetime" {
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Datetime = ptr.Time(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_DenseBooleanMap(v smithycbor.Value) (map[string]bool, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]bool{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_Bool(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_DefaultFieldInputOutputOutput(v smithycbor.Value) (*DefaultFieldInputOutputOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &DefaultFieldInputOutputOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "trueBooleanValue" {
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TrueBooleanValue = ptr.Bool(dv)
+		}
+
+		if key == "falseBooleanValue" {
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.FalseBooleanValue = dv
+		}
+
+		if key == "byteValue" {
+			dv, err := deserializeCBOR_Int8(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ByteValue = ptr.Int8(dv)
+		}
+
+		if key == "doubleValue" {
+			dv, err := deserializeCBOR_Float64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.DoubleValue = ptr.Float64(dv)
+		}
+
+		if key == "floatValue" {
+			dv, err := deserializeCBOR_Float32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.FloatValue = ptr.Float32(dv)
+		}
+
+		if key == "integerValue" {
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.IntegerValue = ptr.Int32(dv)
+		}
+
+		if key == "longValue" {
+			dv, err := deserializeCBOR_Int64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LongValue = ptr.Int64(dv)
+		}
+
+		if key == "shortValue" {
+			dv, err := deserializeCBOR_Int16(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ShortValue = ptr.Int16(dv)
+		}
+
+		if key == "stringValue" {
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StringValue = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_Int32(v smithycbor.Value) (int32, error) {
+	return smithycbor.AsInt32(v)
+}
+
+func deserializeCBOR_Bool(v smithycbor.Value) (bool, error) {
+	av, ok := v.(smithycbor.Bool)
+	if !ok {
+		return false, fmt.Errorf("unexpected value type %T", v)
+	}
+	return bool(av), nil
+}
+
+func deserializeCBOR_RecursiveShapesOutput(v smithycbor.Value) (*RecursiveShapesOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &RecursiveShapesOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "nested" {
+			dv, err := deserializeCBOR_RecursiveShapesInputOutputNested1(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Nested = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_SparseSetMap(v smithycbor.Value) (map[string][]string, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string][]string{}
+	for key, sv := range av {
+		if _, ok := sv.(*smithycbor.Nil); ok {
+			dm[key] = nil
+			continue
+		}
+		dv, err := deserializeCBOR_StringSet(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = dv
+	}
+	return dm, nil
+}
+func rpc2_deserializeOpErrorDefaultFieldInputOutput(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
+	}
+
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
+	}
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
+	}
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
+
+	_ = v
+	switch string(typ) {
+
+	default:
+
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
+	}
+}
+
 func rpc2_deserializeOpErrorEmptyInputOutput(resp *smithyhttp.Response) error {
 	payload, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -1645,7 +1885,16 @@ func rpc2_deserializeOpErrorRpcV2CborLists(resp *smithyhttp.Response) error {
 
 	_ = v
 	switch string(typ) {
+	case "smithy.framework#ValidationException":
+		verr, err := deserializeCBOR_ValidationException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize smithy.framework#ValidationException: %w", err),
+				Snapshot: payload,
+			}
+		}
 
+		return verr
 	default:
 
 		return &smithy.GenericAPIError{Code: typ, Message: msg}
@@ -1672,7 +1921,16 @@ func rpc2_deserializeOpErrorRpcV2CborMaps(resp *smithyhttp.Response) error {
 
 	_ = v
 	switch string(typ) {
+	case "smithy.framework#ValidationException":
+		verr, err := deserializeCBOR_ValidationException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize smithy.framework#ValidationException: %w", err),
+				Snapshot: payload,
+			}
+		}
 
+		return verr
 	default:
 
 		return &smithy.GenericAPIError{Code: typ, Message: msg}

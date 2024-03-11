@@ -8,6 +8,8 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_DefaultFieldInputOutput.go",
+        "api_op_DefaultFieldInputOutput_test.go",
         "api_op_EmptyInputOutput.go",
         "api_op_EmptyInputOutput_test.go",
         "api_op_FractionalSeconds.go",

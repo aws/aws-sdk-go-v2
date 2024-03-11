@@ -38,7 +38,7 @@ func TestClient_NoInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
 		"no_input": {
 			Params:        &NoInputOutputInput{},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/aws.protocoltests.rpcv2Cbor.RpcV2Protocol/operation/NoInputOutput",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/NoInputOutput",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},

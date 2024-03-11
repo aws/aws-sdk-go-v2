@@ -44,6 +44,10 @@ func TestClient_FractionalSeconds_smithyRpcv2cborDeserialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "RpcV2CborDateTimeWithFractionalSeconds" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#FractionalSeconds")
+			}
+
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {

@@ -42,4 +42,21 @@ type GreetingStruct struct {
 	noSmithyDocumentSerde
 }
 
+// Describes one specific validation failure for an input member.
+type ValidationExceptionField struct {
+
+	// A detailed description of the validation failure.
+	//
+	// This member is required.
+	Message *string
+
+	// A JSONPointer expression to the structure member whose value failed to satisfy
+	// the modeled constraints.
+	//
+	// This member is required.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

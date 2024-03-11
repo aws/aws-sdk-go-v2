@@ -66,7 +66,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v25kZW5zZVN0cnVjdE1hcL9jYmF6v2JoaWNieWX/Y2Zvb79iaGlldGhlcmX//29zcGFyc2VTdHJ1Y3RNYXC/Y2Jher9iaGljYnll/2Nmb2+/YmhpZXRoZXJl////`)
+				return smithytesting.CompareCBOR(actual, `v25kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZW9zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb6FiaGlldGhlcmVjYmF6oWJoaWNieWX//w==`)
 			},
 		},
 		// Serializes map values in sparse maps
@@ -95,7 +95,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
+				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
 			},
 		},
 		// Ensure that 0 and false are sent over the wire in all maps and lists
@@ -124,7 +124,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v29kZW5zZUJvb2xlYW5NYXC/YXj0/25kZW5zZU51bWJlck1hcL9heAD/cHNwYXJzZUJvb2xlYW5NYXC/YXj0/29zcGFyc2VOdW1iZXJNYXC/YXgA//8=`)
+				return smithytesting.CompareCBOR(actual, `v25kZW5zZU51bWJlck1hcKFheABvc3BhcnNlTnVtYmVyTWFwv2F4AP9vZGVuc2VCb29sZWFuTWFwoWF49HBzcGFyc2VCb29sZWFuTWFwv2F49P//`)
 			},
 		},
 		// A request that contains a sparse map of sets
@@ -148,7 +148,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXmfYWFhYv9heJ////8=`)
+				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXiAYXmCYWFhYv//`)
 			},
 		},
 		// A request that contains a dense map of sets.
@@ -172,7 +172,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXmfYWFhYv9heJ////8=`)
+				return smithytesting.CompareCBOR(actual, `oWtkZW5zZVNldE1hcKJheIBheYJhYWFi`)
 			},
 		},
 		// A request that contains a sparse map of sets.
@@ -281,7 +281,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v25kZW5zZVN0cnVjdE1hcL9jYmF6v2JoaWNieWX/Y2Zvb79iaGlldGhlcmX//29zcGFyc2VTdHJ1Y3RNYXC/Y2Jher9iaGljYnll/2Nmb2+/YmhpZXRoZXJl////`)
+				p, err := base64.StdEncoding.DecodeString(`v25kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZW9zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb6FiaGlldGhlcmVjYmF6oWJoaWNieWX//w==`)
 				if err != nil {
 					panic(err)
 				}
@@ -316,7 +316,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
+				p, err := base64.StdEncoding.DecodeString(`v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
 				if err != nil {
 					panic(err)
 				}
@@ -347,7 +347,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v29kZW5zZUJvb2xlYW5NYXC/YXj0/25kZW5zZU51bWJlck1hcL9heAD/cHNwYXJzZUJvb2xlYW5NYXC/YXj0/29zcGFyc2VOdW1iZXJNYXC/YXgA//8=`)
+				p, err := base64.StdEncoding.DecodeString(`v25kZW5zZU51bWJlck1hcKFheABvc3BhcnNlTnVtYmVyTWFwv2F4AP9vZGVuc2VCb29sZWFuTWFwoWF49HBzcGFyc2VCb29sZWFuTWFwv2F49P//`)
 				if err != nil {
 					panic(err)
 				}
@@ -404,7 +404,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2xzcGFyc2VTZXRNYXC/YXmfYWFhYv9heJ////8=`)
+				p, err := base64.StdEncoding.DecodeString(`oWtkZW5zZVNldE1hcKJheIBheYJhYWFi`)
 				if err != nil {
 					panic(err)
 				}
@@ -458,7 +458,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL/YXr2//8=`)
+				p, err := base64.StdEncoding.DecodeString(`oWtkZW5zZVNldE1hcKNheIBheYJhYWFiYXr2`)
 				if err != nil {
 					panic(err)
 				}
@@ -472,6 +472,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 						"a",
 						"b",
 					},
+					"z": nil,
 				},
 			},
 		},

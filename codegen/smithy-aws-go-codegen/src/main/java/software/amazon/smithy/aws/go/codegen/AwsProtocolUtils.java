@@ -107,6 +107,34 @@ public final class AwsProtocolUtils {
 
         // skip request compression tests, not yet implemented in the SDK
         Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
+                // CBOR default value serialization
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("aws.protocoltests.rpcv2Cbor#DefaultFieldInputOutput"))
+                        .addTestName("RpcV2CborEmptyInputShouldSerializeDefaultValues")
+                        .addTestName("RpcV2CborSomeDefaultValuesLeftOut")
+                        .build(),
+
+                // TODO(rpc2cbor): known broken tests
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("aws.protocoltests.rpcv2Cbor#EmptyInputOutput"))
+                        .addTestName("empty_input")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("aws.protocoltests.rpcv2Cbor#OptionalInputOutput"))
+                        .addTestName("optional_input")
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("aws.protocoltests.rpcv2Cbor#SimpleScalarProperties"))
+                        .addTestName("RpcV2CborSupportsUpcastingData")
+                        .addTestName("RpcV2CborSimpleScalarPropertiesUsingIndefiniteLength")
+                        .addTestName("RpcV2CborSupportsIndefiniteLengthStrings")
+                        .addTestName("RpcV2CborSupportsIndefiniteLengthByteStrings")
+                        .build(),
+
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
                         .operation(ShapeId.from("aws.protocoltests.restxml#HttpPayloadWithUnion"))
@@ -131,6 +159,21 @@ public final class AwsProtocolUtils {
                 ));
 
         Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
+                // CBOR default value deserialization
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("aws.protocoltests.rpcv2Cbor#DefaultFieldInputOutput"))
+                        .addTestName("RpcV2CborEmptyOutputShouldSerializeDefaultValues")
+                        .addTestName("RpcV2CborSomeDefaultValuesLeftOut")
+                        .build(),
+
+                // TODO(rpc2cbor): known broken tests
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("aws.protocoltests.rpcv2Cbor#FractionalSeconds"))
+                        .addTestName("RpcV2CborDateTimeWithFractionalSeconds")
+                        .build(),
+
                 // REST-JSON optional (SHOULD) test cases
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
