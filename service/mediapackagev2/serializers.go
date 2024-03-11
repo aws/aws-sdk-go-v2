@@ -1849,6 +1849,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelInput(v *UpdateChannelInpu
 		}
 	}
 
+	if v.ETag != nil && len(*v.ETag) > 0 {
+		locationName := "X-Amzn-Update-If-Match"
+		encoder.SetHeader(locationName).String(*v.ETag)
+	}
+
 	return nil
 }
 
@@ -1935,6 +1940,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateChannelGroupInput(v *UpdateChanne
 		if err := encoder.SetURI("ChannelGroupName").String(*v.ChannelGroupName); err != nil {
 			return err
 		}
+	}
+
+	if v.ETag != nil && len(*v.ETag) > 0 {
+		locationName := "X-Amzn-Update-If-Match"
+		encoder.SetHeader(locationName).String(*v.ETag)
 	}
 
 	return nil
@@ -2032,6 +2042,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateOriginEndpointInput(v *UpdateOrig
 		if err := encoder.SetURI("ChannelName").String(*v.ChannelName); err != nil {
 			return err
 		}
+	}
+
+	if v.ETag != nil && len(*v.ETag) > 0 {
+		locationName := "X-Amzn-Update-If-Match"
+		encoder.SetHeader(locationName).String(*v.ETag)
 	}
 
 	if v.OriginEndpointName == nil || len(*v.OriginEndpointName) == 0 {

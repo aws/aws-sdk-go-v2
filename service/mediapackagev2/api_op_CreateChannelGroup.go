@@ -89,6 +89,10 @@ type CreateChannelGroupOutput struct {
 	// The description for your channel group.
 	Description *string
 
+	// The current Entity Tag (ETag) associated with this resource. The entity tag can
+	// be used to safely make concurrent updates to the resource.
+	ETag *string
+
 	// The comma-separated list of tag key:value pairs assigned to the channel group.
 	Tags map[string]string
 

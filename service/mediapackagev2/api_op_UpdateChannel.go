@@ -51,6 +51,11 @@ type UpdateChannelInput struct {
 	// identification purposes.
 	Description *string
 
+	// The expected current Entity Tag (ETag) for the resource. If the specified ETag
+	// does not match the resource's current entity tag, the update request will be
+	// rejected.
+	ETag *string
+
 	noSmithyDocumentSerde
 }
 
@@ -86,6 +91,10 @@ type UpdateChannelOutput struct {
 
 	// The description for your channel.
 	Description *string
+
+	// The current Entity Tag (ETag) associated with this resource. The entity tag can
+	// be used to safely make concurrent updates to the resource.
+	ETag *string
 
 	// The list of ingest endpoints.
 	IngestEndpoints []types.IngestEndpoint

@@ -106,6 +106,10 @@ type GetOriginEndpointOutput struct {
 	// The description for your origin endpoint.
 	Description *string
 
+	// The current Entity Tag (ETag) associated with this resource. The entity tag can
+	// be used to safely make concurrent updates to the resource.
+	ETag *string
+
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []types.GetHlsManifestConfiguration
 

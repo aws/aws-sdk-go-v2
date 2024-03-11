@@ -1,0 +1,8 @@
+{
+    "id": "c878a823-71e3-4150-ad70-6087ea55f064",
+    "type": "feature",
+    "description": "This release enables customers to safely update their MediaPackage v2 channel groups, channels and origin endpoints using entity tags.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

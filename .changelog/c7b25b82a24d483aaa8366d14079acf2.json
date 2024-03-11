@@ -1,0 +1,8 @@
+{
+    "id": "c7b25b82-a24d-483a-aa83-66d14079acf2",
+    "type": "documentation",
+    "description": "Revisions to API text that are now to be carried over to SDK text, changing usages of \"SFO\" in code examples to \"us-west-1\", and some other typos.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

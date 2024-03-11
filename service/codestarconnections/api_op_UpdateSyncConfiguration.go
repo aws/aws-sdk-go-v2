@@ -47,11 +47,18 @@ type UpdateSyncConfigurationInput struct {
 	// The configuration file for the sync configuration to be updated.
 	ConfigFile *string
 
+	// Whether to enable or disable publishing of deployment status to source
+	// providers.
+	PublishDeploymentStatus types.PublishDeploymentStatus
+
 	// The ID of the repository link for the sync configuration to be updated.
 	RepositoryLinkId *string
 
 	// The ARN of the IAM role for the sync configuration to be updated.
 	RoleArn *string
+
+	// When to trigger Git sync to begin the stack update.
+	TriggerResourceUpdateOn types.TriggerResourceUpdateOn
 
 	noSmithyDocumentSerde
 }

@@ -5563,6 +5563,15 @@ func awsAwsjson10_deserializeDocumentSyncConfiguration(v **types.SyncConfigurati
 				sv.ProviderType = types.ProviderType(jtv)
 			}
 
+		case "PublishDeploymentStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PublishDeploymentStatus to be of type string, got %T instead", value)
+				}
+				sv.PublishDeploymentStatus = types.PublishDeploymentStatus(jtv)
+			}
+
 		case "RepositoryLinkId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5606,6 +5615,15 @@ func awsAwsjson10_deserializeDocumentSyncConfiguration(v **types.SyncConfigurati
 					return fmt.Errorf("expected SyncConfigurationType to be of type string, got %T instead", value)
 				}
 				sv.SyncType = types.SyncConfigurationType(jtv)
+			}
+
+		case "TriggerResourceUpdateOn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TriggerResourceUpdateOn to be of type string, got %T instead", value)
+				}
+				sv.TriggerResourceUpdateOn = types.TriggerResourceUpdateOn(jtv)
 			}
 
 		default:

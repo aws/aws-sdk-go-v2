@@ -223,6 +223,15 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "IngestEndpoints":
 			if err := awsRestjson1_deserializeDocumentIngestEndpointList(&sv.IngestEndpoints, value); err != nil {
 				return err
@@ -459,6 +468,15 @@ func awsRestjson1_deserializeOpDocumentCreateChannelGroupOutput(v **CreateChanne
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.EgressDomain = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "ModifiedAt":
@@ -701,6 +719,15 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "HlsManifests":
@@ -1439,6 +1466,15 @@ func awsRestjson1_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "IngestEndpoints":
 			if err := awsRestjson1_deserializeDocumentIngestEndpointList(&sv.IngestEndpoints, value); err != nil {
 				return err
@@ -1669,6 +1705,15 @@ func awsRestjson1_deserializeOpDocumentGetChannelGroupOutput(v **GetChannelGroup
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.EgressDomain = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "ModifiedAt":
@@ -2086,6 +2131,15 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointOutput(v **GetOriginEndp
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "HlsManifests":
@@ -3567,6 +3621,15 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "IngestEndpoints":
 			if err := awsRestjson1_deserializeDocumentIngestEndpointList(&sv.IngestEndpoints, value); err != nil {
 				return err
@@ -3800,6 +3863,15 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelGroupOutput(v **UpdateChanne
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.EgressDomain = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "ModifiedAt":
@@ -4042,6 +4114,15 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "HlsManifests":

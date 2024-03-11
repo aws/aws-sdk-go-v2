@@ -68,6 +68,13 @@ type CreateSyncConfigurationInput struct {
 	// This member is required.
 	SyncType types.SyncConfigurationType
 
+	// Whether to enable or disable publishing of deployment status to source
+	// providers.
+	PublishDeploymentStatus types.PublishDeploymentStatus
+
+	// When to trigger Git sync to begin the stack update.
+	TriggerResourceUpdateOn types.TriggerResourceUpdateOn
+
 	noSmithyDocumentSerde
 }
 

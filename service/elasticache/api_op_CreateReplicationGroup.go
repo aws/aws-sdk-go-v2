@@ -15,7 +15,7 @@ import (
 // replication group. This API can be used to create a standalone regional
 // replication group or a secondary replication group associated with a Global
 // datastore. A Redis (cluster mode disabled) replication group is a collection of
-// clusters, where one of the clusters is a read/write primary and the others are
+// nodes, where one of the nodes is a read/write primary and the others are
 // read-only replicas. Writes to the primary are asynchronously propagated to the
 // replicas. A Redis cluster-mode enabled cluster is comprised of from 1 to 90
 // shards (API/CLI: node groups). Each shard has a primary node and up to 5
@@ -275,10 +275,7 @@ type CreateReplicationGroupInput struct {
 	// Specifies the weekly time range during which maintenance on the cluster is
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
-	// for ddd are: Specifies the weekly time range during which maintenance on the
-	// cluster is performed. It is specified as a range in the format
-	// ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60
-	// minute period. Valid values for ddd are:
+	// for ddd are:
 	//   - sun
 	//   - mon
 	//   - tue

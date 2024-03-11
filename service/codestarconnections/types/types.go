@@ -432,6 +432,13 @@ type SyncConfiguration struct {
 	// configurations linked repository.
 	ConfigFile *string
 
+	// Whether to enable or disable publishing of deployment status to source
+	// providers.
+	PublishDeploymentStatus PublishDeploymentStatus
+
+	// When to trigger Git sync to begin the stack update.
+	TriggerResourceUpdateOn TriggerResourceUpdateOn
+
 	noSmithyDocumentSerde
 }
 

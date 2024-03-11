@@ -80,6 +80,24 @@ func (ProviderType) Values() []ProviderType {
 	}
 }
 
+type PublishDeploymentStatus string
+
+// Enum values for PublishDeploymentStatus
+const (
+	PublishDeploymentStatusEnabled  PublishDeploymentStatus = "ENABLED"
+	PublishDeploymentStatusDisabled PublishDeploymentStatus = "DISABLED"
+)
+
+// Values returns all known values for PublishDeploymentStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PublishDeploymentStatus) Values() []PublishDeploymentStatus {
+	return []PublishDeploymentStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type RepositorySyncStatus string
 
 // Enum values for RepositorySyncStatus
@@ -139,5 +157,23 @@ const (
 func (SyncConfigurationType) Values() []SyncConfigurationType {
 	return []SyncConfigurationType{
 		"CFN_STACK_SYNC",
+	}
+}
+
+type TriggerResourceUpdateOn string
+
+// Enum values for TriggerResourceUpdateOn
+const (
+	TriggerResourceUpdateOnAnyChange  TriggerResourceUpdateOn = "ANY_CHANGE"
+	TriggerResourceUpdateOnFileChange TriggerResourceUpdateOn = "FILE_CHANGE"
+)
+
+// Values returns all known values for TriggerResourceUpdateOn. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerResourceUpdateOn) Values() []TriggerResourceUpdateOn {
+	return []TriggerResourceUpdateOn{
+		"ANY_CHANGE",
+		"FILE_CHANGE",
 	}
 }

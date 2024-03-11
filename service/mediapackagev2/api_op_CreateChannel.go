@@ -98,6 +98,10 @@ type CreateChannelOutput struct {
 	// The description for your channel.
 	Description *string
 
+	// The current Entity Tag (ETag) associated with this resource. The entity tag can
+	// be used to safely make concurrent updates to the resource.
+	ETag *string
+
 	// The list of ingest endpoints.
 	IngestEndpoints []types.IngestEndpoint
 

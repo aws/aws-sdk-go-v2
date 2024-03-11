@@ -671,7 +671,7 @@ type ECPUPerSecond struct {
 }
 
 // Represents the information required for client programs to connect to a cache
-// node.
+// node. This value is read-only.
 type Endpoint struct {
 
 	// The DNS hostname of the cache node.
@@ -925,7 +925,8 @@ type NodeGroup struct {
 	// The endpoint of the primary node in this node group (shard).
 	PrimaryEndpoint *Endpoint
 
-	// The endpoint of the replica nodes in this node group (shard).
+	// The endpoint of the replica nodes in this node group (shard). This value is
+	// read-only.
 	ReaderEndpoint *Endpoint
 
 	// The keyspace for this node group (shard).
@@ -1660,7 +1661,7 @@ type ServerlessCache struct {
 	Description *string
 
 	// Represents the information required for client programs to connect to a cache
-	// node.
+	// node. This value is read-only.
 	Endpoint *Endpoint
 
 	// The engine the serverless cache is compatible with.
@@ -1678,7 +1679,7 @@ type ServerlessCache struct {
 	MajorEngineVersion *string
 
 	// Represents the information required for client programs to connect to a cache
-	// node.
+	// node. This value is read-only.
 	ReaderEndpoint *Endpoint
 
 	// The IDs of the EC2 security groups associated with the serverless cache.
@@ -1695,10 +1696,10 @@ type ServerlessCache struct {
 	// AVAILABLE, DELETING, CREATE-FAILED and MODIFYING.
 	Status *string
 
-	// If no subnet IDs are given and your VPC is in SFO, then ElastiCache will select
-	// 2 default subnets across AZs in your VPC. For all other Regions, if no subnet
-	// IDs are given then ElastiCache will select 3 default subnets across AZs in your
-	// default VPC.
+	// If no subnet IDs are given and your VPC is in us-west-1, then ElastiCache will
+	// select 2 default subnets across AZs in your VPC. For all other Regions, if no
+	// subnet IDs are given then ElastiCache will select 3 default subnets across AZs
+	// in your default VPC.
 	SubnetIds []string
 
 	// The identifier of the user group associated with the serverless cache.
