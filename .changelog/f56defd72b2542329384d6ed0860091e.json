@@ -1,8 +1,0 @@
-{
-    "id": "f56defd7-2b25-4232-9384-d6ed0860091e",
-    "type": "feature",
-    "description": "Added a sync configuration enum to disable publishing of deployment status to source providers (PublishDeploymentStatus). Added a sync configuration enum (TriggerStackUpdateOn) to only trigger changes.",
-    "modules": [
-        "service/codestarconnections"
-    ]
-}

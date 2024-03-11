@@ -1,3 +1,13 @@
+# Release (2024-03-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.25.0](service/codestarconnections/CHANGELOG.md#v1250-2024-03-11)
+  * **Feature**: Added a sync configuration enum to disable publishing of deployment status to source providers (PublishDeploymentStatus). Added a sync configuration enum (TriggerStackUpdateOn) to only trigger changes.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.37.3](service/elasticache/CHANGELOG.md#v1373-2024-03-11)
+  * **Documentation**: Revisions to API text that are now to be carried over to SDK text, changing usages of "SFO" in code examples to "us-west-1", and some other typos.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.10.0](service/mediapackagev2/CHANGELOG.md#v1100-2024-03-11)
+  * **Feature**: This release enables customers to safely update their MediaPackage v2 channel groups, channels and origin endpoints using entity tags.
+
 # Release (2024-03-08)
 
 ## Module Highlights

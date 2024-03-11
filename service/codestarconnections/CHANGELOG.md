@@ -1,3 +1,7 @@
+# v1.25.0 (2024-03-11)
+
+* **Feature**: Added a sync configuration enum to disable publishing of deployment status to source providers (PublishDeploymentStatus). Added a sync configuration enum (TriggerStackUpdateOn) to only trigger changes.
+
 # v1.24.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

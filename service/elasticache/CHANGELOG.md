@@ -1,3 +1,7 @@
+# v1.37.3 (2024-03-11)
+
+* **Documentation**: Revisions to API text that are now to be carried over to SDK text, changing usages of "SFO" in code examples to "us-west-1", and some other typos.
+
 # v1.37.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

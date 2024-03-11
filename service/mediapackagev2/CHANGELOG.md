@@ -1,3 +1,7 @@
+# v1.10.0 (2024-03-11)
+
+* **Feature**: This release enables customers to safely update their MediaPackage v2 channel groups, channels and origin endpoints using entity tags.
+
 # v1.9.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.
