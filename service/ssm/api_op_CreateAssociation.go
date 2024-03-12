@@ -84,8 +84,8 @@ type CreateAssociationInput struct {
 	// The severity level to assign to the association.
 	ComplianceSeverity types.AssociationComplianceSeverity
 
-	// The document version you want to associate with the target(s). Can be a
-	// specific version or the default version. State Manager doesn't support running
+	// The document version you want to associate with the targets. Can be a specific
+	// version or the default version. State Manager doesn't support running
 	// associations that use a new version of a document if that document is shared
 	// from another account. State Manager always runs the default version of a
 	// document if shared from another account, even though the Systems Manager console
@@ -147,7 +147,7 @@ type CreateAssociationInput struct {
 	// The parameters for the runtime configuration of the document.
 	Parameters map[string][]string
 
-	// A cron expression when the association will be applied to the target(s).
+	// A cron expression when the association will be applied to the targets.
 	ScheduleExpression *string
 
 	// Number of days to wait after the scheduled day to run an association. For
@@ -191,8 +191,8 @@ type CreateAssociationInput struct {
 	// Amazon Web Services resource groups, all managed nodes in an Amazon Web Services
 	// account, or individual managed node IDs. You can target all managed nodes in an
 	// Amazon Web Services account by specifying the InstanceIds key with a value of *
-	// . For more information about choosing targets for an association, see Using
-	// targets and rate controls with State Manager associations (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
+	// . For more information about choosing targets for an association, see About
+	// targets and rate controls in State Manager associations (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target
 

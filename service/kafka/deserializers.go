@@ -13477,6 +13477,46 @@ func awsRestjson1_deserializeDocumentReplicationInfoSummary(v **types.Replicatio
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentReplicationStartingPosition(v **types.ReplicationStartingPosition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicationStartingPosition
+	if *v == nil {
+		sv = &types.ReplicationStartingPosition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReplicationStartingPositionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ReplicationStartingPositionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentReplicationStateInfo(v **types.ReplicationStateInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14161,6 +14201,11 @@ func awsRestjson1_deserializeDocumentTopicReplication(v **types.TopicReplication
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
 				sv.DetectAndCopyNewTopics = ptr.Bool(jtv)
+			}
+
+		case "startingPosition":
+			if err := awsRestjson1_deserializeDocumentReplicationStartingPosition(&sv.StartingPosition, value); err != nil {
+				return err
 			}
 
 		case "topicsToExclude":

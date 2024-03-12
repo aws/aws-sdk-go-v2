@@ -69,7 +69,7 @@ type DeleteInventoryOutput struct {
 	DeletionId *string
 
 	// A summary of the delete operation. For more information about this summary, see
-	// Deleting custom inventory (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary)
+	// Understanding the delete inventory summary (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary)
 	// in the Amazon Web Services Systems Manager User Guide.
 	DeletionSummary *types.InventoryDeletionSummary
 

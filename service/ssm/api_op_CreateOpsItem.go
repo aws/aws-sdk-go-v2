@@ -92,7 +92,7 @@ type CreateOpsItemInput struct {
 	// GetOpsItem API operation). Use the /aws/resources key in OperationalData to
 	// specify a related resource in the request. Use the /aws/automations key in
 	// OperationalData to associate an Automation runbook with the OpsItem. To view
-	// Amazon Web Services CLI example commands that use these keys, see Creating
+	// Amazon Web Services CLI example commands that use these keys, see Create
 	// OpsItems manually (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	OperationalData map[string]types.OpsItemDataValue

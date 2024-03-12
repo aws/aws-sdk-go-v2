@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The status of the associations for the managed node(s).
+// The status of the associations for the managed nodes.
 func (c *Client) DescribeInstanceAssociationsStatus(ctx context.Context, params *DescribeInstanceAssociationsStatusInput, optFns ...func(*Options)) (*DescribeInstanceAssociationsStatusOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceAssociationsStatusInput{}

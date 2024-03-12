@@ -59,7 +59,11 @@ type CreateUserInput struct {
 	// The user name for the account. For instances not using SAML for identity
 	// management, the user name can include up to 20 characters. If you are using SAML
 	// for identity management, the user name can include up to 64 characters from
-	// [a-zA-Z0-9_-.\@]+.
+	// [a-zA-Z0-9_-.\@]+. Username can include @ only if used in an email format. For
+	// example:
+	//   - Correct: testuser
+	//   - Correct: testuser@example.com
+	//   - Incorrect: testuser@example
 	//
 	// This member is required.
 	Username *string

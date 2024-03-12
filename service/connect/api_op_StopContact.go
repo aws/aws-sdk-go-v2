@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Ends the specified contact. This call does not work for voice contacts that use
-// the following initiation methods:
+// Ends the specified contact. Use this API to stop queued callbacks. It does not
+// work for voice contacts that use the following initiation methods:
 //   - DISCONNECT
 //   - TRANSFER
 //   - QUEUE_TRANSFER
 //
-// Chat and task contacts, however, can be terminated in any state, regardless of
-// initiation method.
+// Chat and task contacts can be terminated in any state, regardless of initiation
+// method.
 func (c *Client) StopContact(ctx context.Context, params *StopContactInput, optFns ...func(*Options)) (*StopContactOutput, error) {
 	if params == nil {
 		params = &StopContactInput{}

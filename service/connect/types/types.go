@@ -34,7 +34,9 @@ type AgentConfig struct {
 type AgentContactReference struct {
 
 	// The state of the contact (https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html)
-	// .
+	// . When AgentContactState is set to CONNECTED_ONHOLD , StateStartTimestamp is
+	// not changed. Instead, StateStartTimestamp reflects the time the contact was
+	// CONNECTED to the agent.
 	AgentContactState ContactState
 
 	// The channel of the contact.
@@ -5149,7 +5151,10 @@ type UserDataFilters struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the identity of a user.
+// Contains information about the identity of a user. For Amazon Connect instances
+// that are created with the EXISTING_DIRECTORY identity management type, FirstName
+// , LastName , and Email cannot be updated from within Amazon Connect because
+// they are managed by the directory.
 type UserIdentityInfo struct {
 
 	// The email address. If you are using SAML for identity management and include
@@ -5196,8 +5201,12 @@ type UserPhoneConfig struct {
 	// This member is required.
 	PhoneType PhoneType
 
-	// The After Call Work (ACW) timeout setting, in seconds. When returned by a
-	// SearchUsers call, AfterContactWorkTimeLimit is returned in milliseconds.
+	// The After Call Work (ACW) timeout setting, in seconds. This parameter has a
+	// minimum value of 0 and a maximum value of 2,000,000 seconds (24 days). Enter 0
+	// if you don't want to allocate a specific amount of ACW time. It essentially
+	// means an indefinite amount of time. When the conversation ends, ACW starts; the
+	// agent must choose Close contact to end ACW. When returned by a SearchUsers
+	// call, AfterContactWorkTimeLimit is returned in milliseconds.
 	AfterContactWorkTimeLimit int32
 
 	// The Auto accept setting.
@@ -5293,9 +5302,8 @@ type UserSearchCriteria struct {
 	OrConditions []UserSearchCriteria
 
 	// A leaf node condition which can be used to specify a string condition. The
-	// currently supported values for FieldName are username , firstname , lastname ,
-	// resourceId , routingProfileId , securityProfileId , agentGroupId , and
-	// agentGroupPathIds .
+	// currently supported values for FieldName are Username , FirstName , LastName ,
+	// RoutingProfileId , SecurityProfileId , ResourceId .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde

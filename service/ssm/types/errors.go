@@ -1399,12 +1399,12 @@ func (e *InvalidFilterValue) ErrorFault() smithy.ErrorFault { return smithy.Faul
 
 // The following problems can cause this exception:
 //   - You don't have permission to access the managed node.
-//   - Amazon Web Services Systems Manager Agent(SSM Agent) isn't running. Verify
+//   - Amazon Web Services Systems Manager Agent (SSM Agent) isn't running. Verify
 //     that SSM Agent is running.
 //   - SSM Agent isn't registered with the SSM endpoint. Try reinstalling SSM
 //     Agent.
-//   - The managed node isn't in valid state. Valid states are: Running , Pending ,
-//     Stopped , and Stopping . Invalid states are: Shutting-down and Terminated .
+//   - The managed node isn't in a valid state. Valid states are: Running , Pending
+//     , Stopped , and Stopping . Invalid states are: Shutting-down and Terminated .
 type InvalidInstanceId struct {
 	Message *string
 
@@ -1943,7 +1943,7 @@ func (e *InvalidResultAttributeException) ErrorFault() smithy.ErrorFault { retur
 // The role name can't contain invalid characters. Also verify that you specified
 // an IAM role for notifications that includes the required trust policy. For
 // information about configuring the IAM role for Run Command notifications, see
-// Configuring Amazon SNS Notifications for Run Command (https://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html)
+// Monitoring Systems Manager status changes using Amazon SNS notifications (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html)
 // in the Amazon Web Services Systems Manager User Guide.
 type InvalidRole struct {
 	Message *string
@@ -3476,7 +3476,7 @@ func (e *UnsupportedCalendarException) ErrorFault() smithy.ErrorFault { return s
 // Patching for applications released by Microsoft is only available on EC2
 // instances and advanced instances. To patch applications released by Microsoft on
 // on-premises servers and VMs, you must enable advanced instances. For more
-// information, see Enabling the advanced-instances tier (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html)
+// information, see Turning on the advanced-instances tier (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances-advanced.html)
 // in the Amazon Web Services Systems Manager User Guide.
 type UnsupportedFeatureRequiredException struct {
 	Message *string
@@ -3620,7 +3620,7 @@ func (e *UnsupportedParameterType) ErrorCode() string {
 }
 func (e *UnsupportedParameterType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The document doesn't support the platform type of the given managed node ID(s).
+// The document doesn't support the platform type of the given managed node IDs.
 // For example, you sent an document for a Windows managed node to a Linux node.
 type UnsupportedPlatformType struct {
 	Message *string

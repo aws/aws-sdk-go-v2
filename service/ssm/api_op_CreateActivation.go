@@ -19,7 +19,7 @@ import (
 // activation code and ID when installing SSM Agent on machines in your hybrid
 // environment. For more information about requirements for managing on-premises
 // machines using Systems Manager, see Setting up Amazon Web Services Systems
-// Manager for hybrid environments (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html)
+// Manager for hybrid and multicloud environments (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html)
 // in the Amazon Web Services Systems Manager User Guide. Amazon Elastic Compute
 // Cloud (Amazon EC2) instances, edge devices, and on-premises servers and VMs that
 // are configured for Systems Manager are all called managed nodes.
@@ -43,7 +43,8 @@ type CreateActivationInput struct {
 	// The name of the Identity and Access Management (IAM) role that you want to
 	// assign to the managed node. This IAM role must provide AssumeRole permissions
 	// for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com
-	// . For more information, see Create an IAM service role for a hybrid environment (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html)
+	// . For more information, see Create an IAM service role for a hybrid and
+	// multicloud environment (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html)
 	// in the Amazon Web Services Systems Manager User Guide. You can't specify an IAM
 	// service-linked role for this parameter. You must create a unique role.
 	//

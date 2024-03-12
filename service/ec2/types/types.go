@@ -2341,18 +2341,16 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	// Enable or disable IPv6 support. The default is disable .
 	Ipv6Support Ipv6SupportValue
 
-	// Enables you to reference a security group across VPCs attached to a transit
-	// gateway (TGW). Use this option to simplify security group management and control
-	// of instance-to-instance traffic across VPCs that are connected by transit
-	// gateway. You can also use this option to migrate from VPC peering (which was the
-	// only option that supported security group referencing) to transit gateways
-	// (which now also support security group referencing). This option is disabled by
-	// default and there are no additional costs to use this feature. If you don't
-	// enable or disable SecurityGroupReferencingSupport in the request, the attachment
-	// will inherit the security group referencing support setting on the transit
-	// gateway. For important information about this feature, see Create a transit
-	// gateway attachment to a VPC (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment)
-	// in the Amazon Web Services Transit Gateway Guide.
+	// This parameter is in preview and may not be available for your account. Enables
+	// you to reference a security group across VPCs attached to a transit gateway. Use
+	// this option to simplify security group management and control of
+	// instance-to-instance traffic across VPCs that are connected by transit gateway.
+	// You can also use this option to migrate from VPC peering (which was the only
+	// option that supported security group referencing) to transit gateways (which now
+	// also support security group referencing). This option is disabled by default and
+	// there are no additional costs to use this feature. If you don't enable or
+	// disable SecurityGroupReferencingSupport in the request, the attachment will
+	// inherit the security group referencing support setting on the transit gateway.
 	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
 
 	noSmithyDocumentSerde
@@ -3147,11 +3145,11 @@ type EbsBlockDevice struct {
 	// restored from a backing snapshot. The effect of setting the encryption state to
 	// true depends on the volume origin (new or from a snapshot), starting encryption
 	// state, ownership, and whether encryption by default is enabled. For more
-	// information, see Amazon EBS encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters)
-	// in the Amazon EC2 User Guide. In no case can you remove encryption from an
+	// information, see Amazon EBS encryption (https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html#encryption-parameters)
+	// in the Amazon EBS User Guide. In no case can you remove encryption from an
 	// encrypted volume. Encrypted volumes can only be attached to instances that
 	// support Amazon EBS encryption. For more information, see Supported instance
-	// types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances)
+	// types (https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances)
 	// . This parameter is not returned by DescribeImageAttribute . For CreateImage
 	// and RegisterImage , whether you can include this parameter, and the allowed
 	// values differ depending on the type of block device mapping you are creating.
@@ -3219,8 +3217,8 @@ type EbsBlockDevice struct {
 	//   - standard : 1 - 1024 GiB
 	VolumeSize *int32
 
-	// The volume type. For more information, see Amazon EBS volume types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
-	// in the Amazon EC2 User Guide.
+	// The volume type. For more information, see Amazon EBS volume types (https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html)
+	// in the Amazon EBS User Guide.
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
@@ -6275,6 +6273,7 @@ type InstanceMetadataOptionsRequest struct {
 	HttpEndpoint InstanceMetadataEndpointState
 
 	// Enables or disables the IPv6 endpoint for the instance metadata service.
+	// Default: disabled
 	HttpProtocolIpv6 InstanceMetadataProtocolState
 
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
@@ -6313,7 +6312,7 @@ type InstanceMetadataOptionsResponse struct {
 	HttpEndpoint InstanceMetadataEndpointState
 
 	// Indicates whether the IPv6 endpoint for the instance metadata service is
-	// enabled or disabled.
+	// enabled or disabled. Default: disabled
 	HttpProtocolIpv6 InstanceMetadataProtocolState
 
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
@@ -6491,10 +6490,10 @@ type InstanceNetworkInterfaceSpecification struct {
 	// a VPC. The public IP address can only be assigned to a network interface for
 	// eth0, and can only be assigned to a new network interface, not an existing one.
 	// You cannot specify more than one network interface in the request. If launching
-	// into a default subnet, the default value is true . Starting on February 1, 2024,
-	// Amazon Web Services will charge for all public IPv4 addresses, including public
-	// IPv4 addresses associated with running instances and Elastic IP addresses. For
-	// more information, see the Public IPv4 Address tab on the Amazon VPC pricing page (http://aws.amazon.com/vpc/pricing/)
+	// into a default subnet, the default value is true . Amazon Web Services charges
+	// for all public IPv4 addresses, including public IPv4 addresses associated with
+	// running instances and Elastic IP addresses. For more information, see the Public
+	// IPv4 Address tab on the Amazon VPC pricing page (http://aws.amazon.com/vpc/pricing/)
 	// .
 	AssociatePublicIpAddress *bool
 
@@ -8330,13 +8329,11 @@ type IpamScope struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a set of permissions for a security group rule.
+// Describes the permissions for a security group rule.
 type IpPermission struct {
 
 	// If the protocol is TCP or UDP, this is the start of the port range. If the
-	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
-	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
-	// ICMP/ICMPv6 codes.
+	// protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).
 	FromPort *int32
 
 	// The IP protocol name ( tcp , udp , icmp , icmpv6 ) or number (see Protocol
@@ -8349,19 +8346,19 @@ type IpPermission struct {
 	// allowed.
 	IpProtocol *string
 
-	// The IPv4 ranges.
+	// The IPv4 address ranges.
 	IpRanges []IpRange
 
-	// The IPv6 ranges.
+	// The IPv6 address ranges.
 	Ipv6Ranges []Ipv6Range
 
 	// The prefix list IDs.
 	PrefixListIds []PrefixListId
 
 	// If the protocol is TCP or UDP, this is the end of the port range. If the
-	// protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all
-	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
-	// ICMP/ICMPv6 codes.
+	// protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the
+	// start port is -1 (all ICMP types), then the end port must be -1 (all ICMP
+	// codes).
 	ToPort *int32
 
 	// The security group and Amazon Web Services account ID pairs.
@@ -8370,11 +8367,12 @@ type IpPermission struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an IPv4 range.
+// Describes an IPv4 address range.
 type IpRange struct {
 
-	// The IPv4 CIDR range. You can either specify a CIDR range or a source security
-	// group, not both. To specify a single IPv4 address, use the /32 prefix length.
+	// The IPv4 address range. You can either specify a CIDR block or a source
+	// security group, not both. To specify a single IPv4 address, use the /32 prefix
+	// length.
 	CidrIp *string
 
 	// A description for the security group rule that references this IPv4 address
@@ -8482,11 +8480,12 @@ type Ipv6PrefixSpecificationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an IPv6 range.
+// Describes an IPv6 address range.
 type Ipv6Range struct {
 
-	// The IPv6 CIDR range. You can either specify a CIDR range or a source security
-	// group, not both. To specify a single IPv6 address, use the /128 prefix length.
+	// The IPv6 address range. You can either specify a CIDR block or a source
+	// security group, not both. To specify a single IPv6 address, use the /128 prefix
+	// length.
 	CidrIpv6 *string
 
 	// A description for the security group rule that references this IPv6 address
@@ -8887,8 +8886,8 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	//   - standard : 1 - 1024 GiB
 	VolumeSize *int32
 
-	// The volume type. For more information, see Amazon EBS volume types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// The volume type. For more information, see Amazon EBS volume types (https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html)
+	// in the Amazon EBS User Guide.
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
@@ -9173,11 +9172,10 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	AssociateCarrierIpAddress *bool
 
 	// Indicates whether to associate a public IPv4 address with eth0 for a new
-	// network interface. Starting on February 1, 2024, Amazon Web Services will charge
-	// for all public IPv4 addresses, including public IPv4 addresses associated with
-	// running instances and Elastic IP addresses. For more information, see the Public
-	// IPv4 Address tab on the Amazon VPC pricing page (http://aws.amazon.com/vpc/pricing/)
-	// .
+	// network interface. Amazon Web Services charges for all public IPv4 addresses,
+	// including public IPv4 addresses associated with running instances and Elastic IP
+	// addresses. For more information, see the Public IPv4 Address tab on the Amazon
+	// VPC pricing page (http://aws.amazon.com/vpc/pricing/) .
 	AssociatePublicIpAddress *bool
 
 	// A security group connection tracking specification that enables you to set the
@@ -9264,11 +9262,11 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// in the Wavelength Developer Guide.
 	AssociateCarrierIpAddress *bool
 
-	// Associates a public IPv4 address with eth0 for a new network interface.
-	// Starting on February 1, 2024, Amazon Web Services will charge for all public
-	// IPv4 addresses, including public IPv4 addresses associated with running
-	// instances and Elastic IP addresses. For more information, see the Public IPv4
-	// Address tab on the Amazon VPC pricing page (http://aws.amazon.com/vpc/pricing/) .
+	// Associates a public IPv4 address with eth0 for a new network interface. Amazon
+	// Web Services charges for all public IPv4 addresses, including public IPv4
+	// addresses associated with running instances and Elastic IP addresses. For more
+	// information, see the Public IPv4 Address tab on the Amazon VPC pricing page (http://aws.amazon.com/vpc/pricing/)
+	// .
 	AssociatePublicIpAddress *bool
 
 	// A security group connection tracking specification that enables you to set the
@@ -10207,15 +10205,14 @@ type ModifyTransitGatewayOptions struct {
 	// Removes CIDR blocks for the transit gateway.
 	RemoveTransitGatewayCidrBlocks []string
 
-	// Enables you to reference a security group across VPCs attached to a transit
-	// gateway (TGW). Use this option to simplify security group management and control
-	// of instance-to-instance traffic across VPCs that are connected by transit
-	// gateway. You can also use this option to migrate from VPC peering (which was the
-	// only option that supported security group referencing) to transit gateways
-	// (which now also support security group referencing). This option is disabled by
-	// default and there are no additional costs to use this feature. For important
-	// information about this feature, see Create a transit gateway (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw)
-	// in the Amazon Web Services Transit Gateway Guide.
+	// This parameter is in preview and may not be available for your account. Enables
+	// you to reference a security group across VPCs attached to a transit gateway. Use
+	// this option to simplify security group management and control of
+	// instance-to-instance traffic across VPCs that are connected by transit gateway.
+	// You can also use this option to migrate from VPC peering (which was the only
+	// option that supported security group referencing) to transit gateways (which now
+	// also support security group referencing). This option is disabled by default and
+	// there are no additional costs to use this feature.
 	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
 
 	// Enable or disable Equal Cost Multipath Protocol support.
@@ -10238,15 +10235,14 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 	// Enable or disable IPv6 support. The default is enable .
 	Ipv6Support Ipv6SupportValue
 
-	// Enables you to reference a security group across VPCs attached to a transit
-	// gateway (TGW). Use this option to simplify security group management and control
-	// of instance-to-instance traffic across VPCs that are connected by transit
-	// gateway. You can also use this option to migrate from VPC peering (which was the
-	// only option that supported security group referencing) to transit gateways
-	// (which now also support security group referencing). This option is disabled by
-	// default and there are no additional costs to use this feature. For important
-	// information about this feature, see Create a transit gateway attachment to a VPC (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment)
-	// in the Amazon Web Services Transit Gateway Guide.
+	// This parameter is in preview and may not be available for your account. Enables
+	// you to reference a security group across VPCs attached to a transit gateway. Use
+	// this option to simplify security group management and control of
+	// instance-to-instance traffic across VPCs that are connected by transit gateway.
+	// You can also use this option to migrate from VPC peering (which was the only
+	// option that supported security group referencing) to transit gateways (which now
+	// also support security group referencing). This option is disabled by default and
+	// there are no additional costs to use this feature.
 	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
 
 	noSmithyDocumentSerde
@@ -13836,15 +13832,13 @@ type SecurityGroupReference struct {
 	// The ID of the VPC with the referencing security group.
 	ReferencingVpcId *string
 
-	// The ID of the transit gateway (if applicable). For more information about
-	// security group referencing for transit gateways, see Create a transit gateway
-	// attachment to a VPC (https://docs.aws.amazon.com/tgw/tgw-vpc-attachments.html#create-vpc-attachment)
-	// in the Amazon Web Services Transit Gateway Guide.
+	// This parameter is in preview and may not be available for your account. The ID
+	// of the transit gateway (if applicable).
 	TransitGatewayId *string
 
 	// The ID of the VPC peering connection (if applicable). For more information
 	// about security group referencing for peering connections, see Update your
-	// security groups to reference peer security groups (https://docs.aws.amazon.com/peering/vpc-peering-security-groups.html)
+	// security groups to reference peer security groups (https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-security-groups.html)
 	// in the VPC Peering Guide.
 	VpcPeeringConnectionId *string
 
@@ -13864,9 +13858,7 @@ type SecurityGroupRule struct {
 	Description *string
 
 	// If the protocol is TCP or UDP, this is the start of the port range. If the
-	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
-	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
-	// ICMP/ICMPv6 codes.
+	// protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).
 	FromPort *int32
 
 	// The ID of the security group.
@@ -13896,9 +13888,9 @@ type SecurityGroupRule struct {
 	Tags []Tag
 
 	// If the protocol is TCP or UDP, this is the end of the port range. If the
-	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
-	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
-	// ICMP/ICMPv6 codes.
+	// protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the
+	// start port is -1 (all ICMP types), then the end port must be -1 (all ICMP
+	// codes).
 	ToPort *int32
 
 	noSmithyDocumentSerde
@@ -13942,9 +13934,7 @@ type SecurityGroupRuleRequest struct {
 	Description *string
 
 	// If the protocol is TCP or UDP, this is the start of the port range. If the
-	// protocol is ICMP or ICMPv6, this is the type number. A value of -1 indicates all
-	// ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all
-	// ICMP/ICMPv6 codes.
+	// protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).
 	FromPort *int32
 
 	// The IP protocol name ( tcp , udp , icmp , icmpv6 ) or number (see Protocol
@@ -13959,9 +13949,9 @@ type SecurityGroupRuleRequest struct {
 	ReferencedGroupId *string
 
 	// If the protocol is TCP or UDP, this is the end of the port range. If the
-	// protocol is ICMP or ICMPv6, this is the code. A value of -1 indicates all
-	// ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all
-	// ICMP/ICMPv6 codes.
+	// protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes). If the
+	// start port is -1 (all ICMP types), then the end port must be -1 (all ICMP
+	// codes).
 	ToPort *int32
 
 	noSmithyDocumentSerde
@@ -14150,8 +14140,8 @@ type Snapshot struct {
 	KmsKeyId *string
 
 	// The ARN of the Outpost on which the snapshot is stored. For more information,
-	// see Amazon EBS local snapshots on Outposts (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// see Amazon EBS local snapshots on Outposts (https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html)
+	// in the Amazon EBS User Guide.
 	OutpostArn *string
 
 	// The Amazon Web Services owner alias, from an Amazon-maintained list ( amazon ).
@@ -14275,8 +14265,8 @@ type SnapshotInfo struct {
 	Encrypted *bool
 
 	// The ARN of the Outpost on which the snapshot is stored. For more information,
-	// see Amazon EBS local snapshots on Outposts (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// see Amazon EBS local snapshots on Outposts (https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html)
+	// in the Amazon EBS User Guide.
 	OutpostArn *string
 
 	// Account id used when creating this snapshot.
@@ -15234,11 +15224,11 @@ type SpotPrice struct {
 // Describes a stale rule in a security group.
 type StaleIpPermission struct {
 
-	// The start of the port range for the TCP and UDP protocols, or an ICMP type
-	// number. A value of -1 indicates all ICMP types.
+	// If the protocol is TCP or UDP, this is the start of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all ICMP types).
 	FromPort *int32
 
-	// The IP protocol name (for tcp , udp , and icmp ) or number (see Protocol
+	// The IP protocol name ( tcp , udp , icmp , icmpv6 ) or number (see Protocol
 	// Numbers) (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
 	// .
 	IpProtocol *string
@@ -15249,8 +15239,8 @@ type StaleIpPermission struct {
 	// The prefix list IDs. Not applicable for stale security group rules.
 	PrefixListIds []string
 
-	// The end of the port range for the TCP and UDP protocols, or an ICMP type
-	// number. A value of -1 indicates all ICMP types.
+	// If the protocol is TCP or UDP, this is the end of the port range. If the
+	// protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all ICMP codes).
 	ToPort *int32
 
 	// The security group pairs. Returns the ID of the referenced security group and
@@ -15417,10 +15407,10 @@ type Subnet struct {
 	MapCustomerOwnedIpOnLaunch *bool
 
 	// Indicates whether instances launched in this subnet receive a public IPv4
-	// address. Starting on February 1, 2024, Amazon Web Services will charge for all
-	// public IPv4 addresses, including public IPv4 addresses associated with running
-	// instances and Elastic IP addresses. For more information, see the Public IPv4
-	// Address tab on the Amazon VPC pricing page (http://aws.amazon.com/vpc/pricing/) .
+	// address. Amazon Web Services charges for all public IPv4 addresses, including
+	// public IPv4 addresses associated with running instances and Elastic IP
+	// addresses. For more information, see the Public IPv4 Address tab on the Amazon
+	// VPC pricing page (http://aws.amazon.com/vpc/pricing/) .
 	MapPublicIpOnLaunch *bool
 
 	// The Amazon Resource Name (ARN) of the Outpost.
@@ -16467,15 +16457,14 @@ type TransitGatewayOptions struct {
 	// The ID of the default propagation route table.
 	PropagationDefaultRouteTableId *string
 
-	// Enables you to reference a security group across VPCs attached to a transit
-	// gateway (TGW). Use this option to simplify security group management and control
-	// of instance-to-instance traffic across VPCs that are connected by transit
-	// gateway. You can also use this option to migrate from VPC peering (which was the
-	// only option that supported security group referencing) to transit gateways
-	// (which now also support security group referencing). This option is disabled by
-	// default and there are no additional costs to use this feature. For important
-	// information about this feature, see Create a transit gateway (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw)
-	// in the Amazon Web Services Transit Gateway Guide.
+	// This parameter is in preview and may not be available for your account. Enables
+	// you to reference a security group across VPCs attached to a transit gateway. Use
+	// this option to simplify security group management and control of
+	// instance-to-instance traffic across VPCs that are connected by transit gateway.
+	// You can also use this option to migrate from VPC peering (which was the only
+	// option that supported security group referencing) to transit gateways (which now
+	// also support security group referencing). This option is disabled by default and
+	// there are no additional costs to use this feature.
 	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
 
 	// The transit gateway CIDR blocks.
@@ -16715,15 +16704,14 @@ type TransitGatewayRequestOptions struct {
 	// Indicates whether multicast is enabled on the transit gateway
 	MulticastSupport MulticastSupportValue
 
-	// Enables you to reference a security group across VPCs attached to a transit
-	// gateway (TGW). Use this option to simplify security group management and control
-	// of instance-to-instance traffic across VPCs that are connected by transit
-	// gateway. You can also use this option to migrate from VPC peering (which was the
-	// only option that supported security group referencing) to transit gateways
-	// (which now also support security group referencing). This option is disabled by
-	// default and there are no additional costs to use this feature. For important
-	// information about this feature, see Create a transit gateway (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw)
-	// in the Amazon Web Services Transit Gateway Guide.
+	// This parameter is in preview and may not be available for your account. Enables
+	// you to reference a security group across VPCs attached to a transit gateway. Use
+	// this option to simplify security group management and control of
+	// instance-to-instance traffic across VPCs that are connected by transit gateway.
+	// You can also use this option to migrate from VPC peering (which was the only
+	// option that supported security group referencing) to transit gateways (which now
+	// also support security group referencing). This option is disabled by default and
+	// there are no additional costs to use this feature.
 	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
 
 	// One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size
@@ -16958,9 +16946,14 @@ type TransitGatewayVpcAttachmentOptions struct {
 	// Indicates whether IPv6 support is disabled.
 	Ipv6Support Ipv6SupportValue
 
-	// For important information about this feature, see Create a transit gateway
-	// attachment to a VPC (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment)
-	// in the Amazon Web Services Transit Gateway Guide.
+	// This parameter is in preview and may not be available for your account. Enables
+	// you to reference a security group across VPCs attached to a transit gateway. Use
+	// this option to simplify security group management and control of
+	// instance-to-instance traffic across VPCs that are connected by transit gateway.
+	// You can also use this option to migrate from VPC peering (which was the only
+	// option that supported security group referencing) to transit gateways (which now
+	// also support security group referencing). This option is disabled by default and
+	// there are no additional costs to use this feature.
 	SecurityGroupReferencingSupport SecurityGroupReferencingSupportValue
 
 	noSmithyDocumentSerde

@@ -32,8 +32,8 @@ import (
 // to manage your resources. You can search and filter the resources based on the
 // tags you add. Tags don't have any semantic meaning to and are interpreted
 // strictly as a string of characters. For more information about using tags with
-// Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tagging your Amazon
-// EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
+// Amazon Elastic Compute Cloud (Amazon EC2) instances, see Tag your Amazon EC2
+// resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {

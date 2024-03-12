@@ -70,7 +70,7 @@ type LabelParameterVersionInput struct {
 type LabelParameterVersionOutput struct {
 
 	// The label doesn't meet the requirements. For information about parameter label
-	// requirements, see Labeling parameters (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html)
+	// requirements, see Working with parameter labels (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	InvalidLabels []string
 

@@ -55,10 +55,10 @@ type ListInventoryEntriesInput struct {
 
 type ListInventoryEntriesOutput struct {
 
-	// The time that inventory information was collected for the managed node(s).
+	// The time that inventory information was collected for the managed nodes.
 	CaptureTime *string
 
-	// A list of inventory items on the managed node(s).
+	// A list of inventory items on the managed nodes.
 	Entries []map[string]string
 
 	// The managed node ID targeted by the request to query inventory information.
@@ -68,7 +68,7 @@ type ListInventoryEntriesOutput struct {
 	// additional items to return, the string is empty.
 	NextToken *string
 
-	// The inventory schema version used by the managed node(s).
+	// The inventory schema version used by the managed nodes.
 	SchemaVersion *string
 
 	// The type of inventory item returned by the request.

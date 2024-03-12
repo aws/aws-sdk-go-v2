@@ -1107,6 +1107,16 @@ type ReplicationInfoSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for specifying the position in the topics to start replicating
+// from.
+type ReplicationStartingPosition struct {
+
+	// The type of replication starting position.
+	Type ReplicationStartingPositionType
+
+	noSmithyDocumentSerde
+}
+
 // Details about the state of a replicator
 type ReplicationStateInfo struct {
 
@@ -1279,6 +1289,10 @@ type TopicReplication struct {
 
 	// Whether to periodically check for new topics and partitions.
 	DetectAndCopyNewTopics *bool
+
+	// Configuration for specifying the position in the topics to start replicating
+	// from.
+	StartingPosition *ReplicationStartingPosition
 
 	// List of regular expression patterns indicating the topics that should not be
 	// replicated.

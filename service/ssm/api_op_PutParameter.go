@@ -91,7 +91,7 @@ type PutParameterInput struct {
 	// parameters are created successfully, see Setting up notifications or trigger
 	// actions based on Parameter Store events (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html)
 	// . For more information about AMI format validation , see Native parameter
-	// support for Amazon Machine Image (AMI) IDs (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
+	// support for Amazon Machine Image IDs (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
 	// .
 	DataType *string
 
@@ -151,7 +151,7 @@ type PutParameterInput struct {
 	// Advanced parameters have a content size limit of 8 KB and can be configured to
 	// use parameter policies. You can create a maximum of 100,000 advanced parameters
 	// for each Region in an Amazon Web Services account. Advanced parameters incur a
-	// charge. For more information, see Standard and advanced parameter tiers (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html)
+	// charge. For more information, see Managing parameter tiers (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html)
 	// in the Amazon Web Services Systems Manager User Guide. You can change a standard
 	// parameter to an advanced parameter any time. But you can't revert an advanced
 	// parameter to a standard parameter. Reverting an advanced parameter to a standard
@@ -185,7 +185,7 @@ type PutParameterInput struct {
 	//   - More than 10,000 parameters already exist in your Amazon Web Services
 	//   account in the current Amazon Web Services Region.
 	// For more information about configuring the default tier option, see Specifying
-	// a default parameter tier (https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html)
+	// a default parameter tier (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html#ps-default-tier)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Tier types.ParameterTier
 

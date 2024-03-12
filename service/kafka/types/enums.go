@@ -182,6 +182,25 @@ func (NodeType) Values() []NodeType {
 	}
 }
 
+type ReplicationStartingPositionType string
+
+// Enum values for ReplicationStartingPositionType
+const (
+	ReplicationStartingPositionTypeLatest   ReplicationStartingPositionType = "LATEST"
+	ReplicationStartingPositionTypeEarliest ReplicationStartingPositionType = "EARLIEST"
+)
+
+// Values returns all known values for ReplicationStartingPositionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReplicationStartingPositionType) Values() []ReplicationStartingPositionType {
+	return []ReplicationStartingPositionType{
+		"LATEST",
+		"EARLIEST",
+	}
+}
+
 type ReplicatorState string
 
 // Enum values for ReplicatorState

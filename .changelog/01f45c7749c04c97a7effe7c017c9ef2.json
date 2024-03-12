@@ -1,0 +1,8 @@
+{
+    "id": "01f45c77-49c0-4c97-a7ef-fe7c017c9ef2",
+    "type": "documentation",
+    "description": "CloudFormation documentation update for March, 2024",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

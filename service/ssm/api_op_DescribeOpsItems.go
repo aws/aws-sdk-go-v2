@@ -17,8 +17,8 @@ import (
 // in the Amazon Web Services Systems Manager User Guide. Operations engineers and
 // IT professionals use Amazon Web Services Systems Manager OpsCenter to view,
 // investigate, and remediate operational issues impacting the performance and
-// health of their Amazon Web Services resources. For more information, see
-// OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
+// health of their Amazon Web Services resources. For more information, see Amazon
+// Web Services Systems Manager OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
 // in the Amazon Web Services Systems Manager User Guide.
 func (c *Client) DescribeOpsItems(ctx context.Context, params *DescribeOpsItemsInput, optFns ...func(*Options)) (*DescribeOpsItemsOutput, error) {
 	if params == nil {

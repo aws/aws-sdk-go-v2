@@ -13,7 +13,8 @@ import (
 
 // This API is in preview release for Amazon Connect and is subject to change. For
 // the specified referenceTypes , returns a list of references associated with the
-// contact.
+// contact. References are links to documents that are related to a contact, such
+// as emails, attachments, or URLs.
 func (c *Client) ListContactReferences(ctx context.Context, params *ListContactReferencesInput, optFns ...func(*Options)) (*ListContactReferencesOutput, error) {
 	if params == nil {
 		params = &ListContactReferencesInput{}

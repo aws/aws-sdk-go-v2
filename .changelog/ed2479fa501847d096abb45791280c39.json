@@ -1,0 +1,8 @@
+{
+    "id": "ed2479fa-5018-47d0-96ab-b45791280c39",
+    "type": "documentation",
+    "description": "March 2024 doc-only updates for Systems Manager.",
+    "modules": [
+        "service/ssm"
+    ]
+}

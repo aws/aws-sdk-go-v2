@@ -19,8 +19,8 @@ import (
 //     (OpsItems).
 //   - Parameter - The resource policy is used to share a parameter with other
 //     accounts using Resource Access Manager (RAM). For more information about
-//     cross-account sharing of parameters, see Working with shared parameters in the
-//     Amazon Web Services Systems Manager User Guide.
+//     cross-account sharing of parameters, see Working with shared parameters (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html)
+//     in the Amazon Web Services Systems Manager User Guide.
 func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePolicyInput{}

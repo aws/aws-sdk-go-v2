@@ -35,7 +35,7 @@ type GetParametersInput struct {
 	// query. For parameters shared with you from another account, you must use the
 	// full ARNs. To query by parameter label, use "Name": "name:label" . To query by
 	// parameter version, use "Name": "name:version" . For more information about
-	// shared parameters, see Working with shared parameters (https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html)
+	// shared parameters, see Working with shared parameters (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	//
 	// This member is required.

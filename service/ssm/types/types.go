@@ -992,15 +992,15 @@ type Command struct {
 	// The maximum number of managed nodes that are allowed to run the command at the
 	// same time. You can specify a number of managed nodes, such as 10, or a
 	// percentage of nodes, such as 10%. The default value is 50. For more information
-	// about how to use MaxConcurrency , see Running commands using Systems Manager
-	// Run Command (https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
+	// about how to use MaxConcurrency , see Amazon Web Services Systems Manager Run
+	// Command (https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	MaxConcurrency *string
 
 	// The maximum number of errors allowed before the system stops sending the
 	// command to additional targets. You can specify a number of errors, such as 10,
 	// or a percentage or errors, such as 10%. The default value is 0 . For more
-	// information about how to use MaxErrors , see Running commands using Systems
+	// information about how to use MaxErrors , see Amazon Web Services Systems
 	// Manager Run Command (https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	MaxErrors *string
@@ -1348,11 +1348,11 @@ type CommandPlugin struct {
 
 // A summary of the call execution that includes an execution ID, the type of
 // execution (for example, Command ), and the date/time of the execution using a
-// datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+// datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'
 type ComplianceExecutionSummary struct {
 
 	// The time the execution ran as a datetime object that is saved in the following
-	// format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+	// format: yyyy-MM-dd'T'HH:mm:ss'Z'
 	//
 	// This member is required.
 	ExecutionTime *time.Time
@@ -2118,7 +2118,7 @@ type InstanceAggregatedAssociationOverview struct {
 	// Detailed status information about the aggregated associations.
 	DetailedStatus *string
 
-	// The number of associations for the managed node(s).
+	// The number of associations for the managed nodes.
 	InstanceAssociationStatusAggregatedCount map[string]int32
 
 	noSmithyDocumentSerde
@@ -2133,7 +2133,7 @@ type InstanceAssociation struct {
 	// Version information for the association on the managed node.
 	AssociationVersion *string
 
-	// The content of the association document for the managed node(s).
+	// The content of the association document for the managed nodes.
 	Content *string
 
 	// The managed node ID.
@@ -2144,7 +2144,7 @@ type InstanceAssociation struct {
 
 // An S3 bucket where you want to store the results of this request. For the
 // minimal permissions required to enable Amazon S3 output for an association, see
-// Creating associations (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc.html)
+// Create an association (console) (https://docs.aws.amazon.com/systems-manager/latest/userguide/state-manager-associations-creating.html#state-manager-associations-console)
 // in the Systems Manager User Guide.
 type InstanceAssociationOutputLocation struct {
 
@@ -2259,8 +2259,8 @@ type InstanceInformation struct {
 	// specified as the DefaultInstanceName property using the CreateActivation
 	// command. It is applied to the managed node by specifying the Activation Code and
 	// Activation ID when you install SSM Agent on the node, as explained in Install
-	// SSM Agent for a hybrid environment (Linux) (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html)
-	// and Install SSM Agent for a hybrid environment (Windows) (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html)
+	// SSM Agent for a hybrid and multicloud environment (Linux) (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html)
+	// and Install SSM Agent for a hybrid and multicloud environment (Windows) (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html)
 	// . To retrieve the Name tag of an EC2 instance, use the Amazon EC2
 	// DescribeInstances operation. For information, see DescribeInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
 	// in the Amazon EC2 API Reference or describe-instances (https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html)
@@ -2402,8 +2402,8 @@ type InstancePatchState struct {
 	// maintain in an S3 bucket in YAML format and specify in the SSM document
 	// AWS-RunPatchBaseline , overrides the patches specified by the default patch
 	// baseline. For more information about the InstallOverrideList parameter, see
-	// About the AWS-RunPatchBaseline (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html)
-	// SSM document in the Amazon Web Services Systems Manager User Guide.
+	// About the AWS-RunPatchBaseline SSM document (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html)
+	// in the Amazon Web Services Systems Manager User Guide.
 	InstallOverrideList *string
 
 	// The number of patches from the patch baseline that are installed on the managed
@@ -3396,7 +3396,8 @@ type OpsFilter struct {
 // alarm or event details, alarm history, and an alarm timeline graph. For the
 // Amazon Web Services resource, OpsCenter aggregates information from Config,
 // CloudTrail logs, and EventBridge, so you don't have to navigate across multiple
-// console pages during your investigation. For more information, see OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
+// console pages during your investigation. For more information, see Amazon Web
+// Services Systems Manager OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html)
 // in the Amazon Web Services Systems Manager User Guide.
 type OpsItem struct {
 
@@ -4582,7 +4583,8 @@ type ResourceDataSyncSource struct {
 	// options, then Systems Manager automatically enables all OpsData sources in the
 	// selected Amazon Web Services Regions for all Amazon Web Services accounts in
 	// your organization (or in the selected organization units). For more information,
-	// see About multiple account and Region resource data syncs (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html)
+	// see Setting up Systems Manager Explorer to display data from multiple accounts
+	// and Regions (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	EnableAllOpsDataSources bool
 
@@ -4610,7 +4612,8 @@ type ResourceDataSyncSourceWithState struct {
 	// options, then Systems Manager automatically enables all OpsData sources in the
 	// selected Amazon Web Services Regions for all Amazon Web Services accounts in
 	// your organization (or in the selected organization units). For more information,
-	// see About multiple account and Region resource data syncs (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html)
+	// see Setting up Systems Manager Explorer to display data from multiple accounts
+	// and Regions (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	EnableAllOpsDataSources bool
 
@@ -5079,7 +5082,7 @@ type Tag struct {
 //	Services Region where the association was created.
 //
 // For more information about how to send commands that target managed nodes using
-// Key,Value parameters, see Targeting multiple instances (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting)
+// Key,Value parameters, see Targeting multiple managed nodes (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting)
 // in the Amazon Web Services Systems Manager User Guide.
 type Target struct {
 

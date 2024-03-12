@@ -61,7 +61,8 @@ type DescribeParametersInput struct {
 	// Created From Policy must have been promoted to a standard Resource Share using
 	// the RAM PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html)
 	// API operation. For more information about sharing parameters, see Working with
-	// shared parameters in the Amazon Web Services Systems Manager User Guide.
+	// shared parameters (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html)
+	// in the Amazon Web Services Systems Manager User Guide.
 	Shared *bool
 
 	noSmithyDocumentSerde

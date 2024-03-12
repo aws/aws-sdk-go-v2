@@ -32,8 +32,8 @@ type SendCommandInput struct {
 	// The name of the Amazon Web Services Systems Manager document (SSM document) to
 	// run. This can be a public document or a custom document. To run a shared
 	// document belonging to another account, specify the document Amazon Resource Name
-	// (ARN). For more information about how to use shared documents, see Using shared
-	// SSM documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
+	// (ARN). For more information about how to use shared documents, see Sharing SSM
+	// documents (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
 	// in the Amazon Web Services Systems Manager User Guide. If you specify a document
 	// name or ARN that hasn't been shared with your account, you receive an
 	// InvalidDocument error.
@@ -75,7 +75,7 @@ type SendCommandInput struct {
 	// Targets option instead. Using Targets , which accepts tag key-value pairs to
 	// identify the managed nodes to send commands to, you can a send command to tens,
 	// hundreds, or thousands of nodes at once. For more information about how to use
-	// targets, see Using targets and rate controls to send commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
+	// targets, see Run commands at scale (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	InstanceIds []string
 
@@ -126,7 +126,7 @@ type SendCommandInput struct {
 	// accepts tag key-value pairs to identify managed nodes, you can send a command to
 	// tens, hundreds, or thousands of nodes at once. To send a command to a smaller
 	// number of managed nodes, you can use the InstanceIds option instead. For more
-	// information about how to use targets, see Sending commands to a fleet (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
+	// information about how to use targets, see Run commands at scale (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target
 

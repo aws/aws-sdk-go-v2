@@ -61,7 +61,7 @@ type PutComplianceItemsInput struct {
 
 	// A summary of the call execution that includes an execution ID, the type of
 	// execution (for example, Command ), and the date/time of the execution using a
-	// datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+	// datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'
 	//
 	// This member is required.
 	ExecutionSummary *types.ComplianceExecutionSummary
