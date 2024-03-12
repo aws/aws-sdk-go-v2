@@ -1663,415 +1663,6 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateStreamMode) HandleDeserialize(ctx co
 
 	return out, metadata, nil
 }
-func deserializeCBOR_InvalidArgumentException(v smithycbor.Value) (*types.InvalidArgumentException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.InvalidArgumentException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_DescribeStreamOutput(v smithycbor.Value) (*DescribeStreamOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &DescribeStreamOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamDescription" {
-			dv, err := deserializeCBOR_StreamDescription(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamDescription = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ResourceNotFoundException(v smithycbor.Value) (*types.ResourceNotFoundException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ResourceNotFoundException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_KMSAccessDeniedException(v smithycbor.Value) (*types.KMSAccessDeniedException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.KMSAccessDeniedException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ListShardsOutput(v smithycbor.Value) (*ListShardsOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &ListShardsOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Shards" {
-			dv, err := deserializeCBOR_ShardList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Shards = dv
-		}
-
-		if key == "NextToken" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.NextToken = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_DescribeStreamConsumerOutput(v smithycbor.Value) (*DescribeStreamConsumerOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &DescribeStreamConsumerOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "ConsumerDescription" {
-			dv, err := deserializeCBOR_ConsumerDescription(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ConsumerDescription = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ListTagsForStreamOutput(v smithycbor.Value) (*ListTagsForStreamOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &ListTagsForStreamOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Tags" {
-			dv, err := deserializeCBOR_TagList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Tags = dv
-		}
-
-		if key == "HasMoreTags" {
-			dv, err := deserializeCBOR_Bool(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.HasMoreTags = ptr.Bool(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_KMSNotFoundException(v smithycbor.Value) (*types.KMSNotFoundException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.KMSNotFoundException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_StreamSummaryList(v smithycbor.Value) ([]types.StreamSummary, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.StreamSummary
-	for _, si := range av {
-
-		di, err := deserializeCBOR_StreamSummary(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_KMSDisabledException(v smithycbor.Value) (*types.KMSDisabledException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.KMSDisabledException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_LimitExceededException(v smithycbor.Value) (*types.LimitExceededException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.LimitExceededException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_Shard(v smithycbor.Value) (*types.Shard, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.Shard{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "ShardId" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ShardId = ptr.String(dv)
-		}
-
-		if key == "ParentShardId" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ParentShardId = ptr.String(dv)
-		}
-
-		if key == "AdjacentParentShardId" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.AdjacentParentShardId = ptr.String(dv)
-		}
-
-		if key == "HashKeyRange" {
-			dv, err := deserializeCBOR_HashKeyRange(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.HashKeyRange = dv
-		}
-
-		if key == "SequenceNumberRange" {
-			dv, err := deserializeCBOR_SequenceNumberRange(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.SequenceNumberRange = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_PutRecordsResultEntryList(v smithycbor.Value) ([]types.PutRecordsResultEntry, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.PutRecordsResultEntry
-	for _, si := range av {
-
-		di, err := deserializeCBOR_PutRecordsResultEntry(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_RegisterStreamConsumerOutput(v smithycbor.Value) (*RegisterStreamConsumerOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &RegisterStreamConsumerOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Consumer" {
-			dv, err := deserializeCBOR_Consumer(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Consumer = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_StreamDescription(v smithycbor.Value) (*types.StreamDescription, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.StreamDescription{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamName" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamName = ptr.String(dv)
-		}
-
-		if key == "StreamARN" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamARN = ptr.String(dv)
-		}
-
-		if key == "StreamStatus" {
-			dv, err := deserializeCBOR_StreamStatus(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamStatus = dv
-		}
-
-		if key == "StreamModeDetails" {
-			dv, err := deserializeCBOR_StreamModeDetails(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamModeDetails = dv
-		}
-
-		if key == "Shards" {
-			dv, err := deserializeCBOR_ShardList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Shards = dv
-		}
-
-		if key == "HasMoreShards" {
-			dv, err := deserializeCBOR_Bool(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.HasMoreShards = ptr.Bool(dv)
-		}
-
-		if key == "RetentionPeriodHours" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.RetentionPeriodHours = ptr.Int32(dv)
-		}
-
-		if key == "StreamCreationTimestamp" {
-			dv, err := deserializeCBOR_Time(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamCreationTimestamp = ptr.Time(dv)
-		}
-
-		if key == "EnhancedMonitoring" {
-			dv, err := deserializeCBOR_EnhancedMonitoringList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EnhancedMonitoring = dv
-		}
-
-		if key == "EncryptionType" {
-			dv, err := deserializeCBOR_EncryptionType(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EncryptionType = dv
-		}
-
-		if key == "KeyId" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.KeyId = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
 func deserializeCBOR_AccessDeniedException(v smithycbor.Value) (*types.AccessDeniedException, error) {
 	av, ok := v.(smithycbor.Map)
 	if !ok {
@@ -2081,149 +1672,14 @@ func deserializeCBOR_AccessDeniedException(v smithycbor.Value) (*types.AccessDen
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_String(sv)
 			if err != nil {
 				return nil, err
 			}
 			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_DescribeLimitsOutput(v smithycbor.Value) (*DescribeLimitsOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &DescribeLimitsOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "ShardLimit" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ShardLimit = ptr.Int32(dv)
-		}
-
-		if key == "OpenShardCount" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.OpenShardCount = ptr.Int32(dv)
-		}
-
-		if key == "OnDemandStreamCount" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.OnDemandStreamCount = ptr.Int32(dv)
-		}
-
-		if key == "OnDemandStreamCountLimit" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.OnDemandStreamCountLimit = ptr.Int32(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_StreamMode(v smithycbor.Value) (types.StreamMode, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.StreamMode(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.StreamMode(av), nil
-}
-
-func deserializeCBOR_Bool(v smithycbor.Value) (bool, error) {
-	av, ok := v.(smithycbor.Bool)
-	if !ok {
-		return false, fmt.Errorf("unexpected value type %T", v)
-	}
-	return bool(av), nil
-}
-
-func deserializeCBOR_GetResourcePolicyOutput(v smithycbor.Value) (*GetResourcePolicyOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &GetResourcePolicyOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Policy" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Policy = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ShardIdList(v smithycbor.Value) ([]string, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []string
-	for _, si := range av {
-
-		di, err := deserializeCBOR_String(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_DisableEnhancedMonitoringOutput(v smithycbor.Value) (*DisableEnhancedMonitoringOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &DisableEnhancedMonitoringOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamName" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamName = ptr.String(dv)
-		}
-
-		if key == "CurrentShardLevelMetrics" {
-			dv, err := deserializeCBOR_MetricsNameList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.CurrentShardLevelMetrics = dv
-		}
-
-		if key == "DesiredShardLevelMetrics" {
-			dv, err := deserializeCBOR_MetricsNameList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.DesiredShardLevelMetrics = dv
-		}
-
-		if key == "StreamARN" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamARN = ptr.String(dv)
 		}
 	}
 	return ds, nil
@@ -2238,6 +1694,9 @@ func deserializeCBOR_ChildShard(v smithycbor.Value) (*types.ChildShard, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ShardId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_String(sv)
 			if err != nil {
 				return nil, err
@@ -2246,6 +1705,9 @@ func deserializeCBOR_ChildShard(v smithycbor.Value) (*types.ChildShard, error) {
 		}
 
 		if key == "ParentShards" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_ShardIdList(sv)
 			if err != nil {
 				return nil, err
@@ -2254,1125 +1716,14 @@ func deserializeCBOR_ChildShard(v smithycbor.Value) (*types.ChildShard, error) {
 		}
 
 		if key == "HashKeyRange" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_HashKeyRange(sv)
 			if err != nil {
 				return nil, err
 			}
 			ds.HashKeyRange = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ConsumerDescription(v smithycbor.Value) (*types.ConsumerDescription, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ConsumerDescription{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "ConsumerName" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ConsumerName = ptr.String(dv)
-		}
-
-		if key == "ConsumerARN" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ConsumerARN = ptr.String(dv)
-		}
-
-		if key == "ConsumerStatus" {
-			dv, err := deserializeCBOR_ConsumerStatus(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ConsumerStatus = dv
-		}
-
-		if key == "ConsumerCreationTimestamp" {
-			dv, err := deserializeCBOR_Time(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ConsumerCreationTimestamp = ptr.Time(dv)
-		}
-
-		if key == "StreamARN" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamARN = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_StreamDescriptionSummary(v smithycbor.Value) (*types.StreamDescriptionSummary, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.StreamDescriptionSummary{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamName" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamName = ptr.String(dv)
-		}
-
-		if key == "StreamARN" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamARN = ptr.String(dv)
-		}
-
-		if key == "StreamStatus" {
-			dv, err := deserializeCBOR_StreamStatus(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamStatus = dv
-		}
-
-		if key == "StreamModeDetails" {
-			dv, err := deserializeCBOR_StreamModeDetails(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamModeDetails = dv
-		}
-
-		if key == "RetentionPeriodHours" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.RetentionPeriodHours = ptr.Int32(dv)
-		}
-
-		if key == "StreamCreationTimestamp" {
-			dv, err := deserializeCBOR_Time(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamCreationTimestamp = ptr.Time(dv)
-		}
-
-		if key == "EnhancedMonitoring" {
-			dv, err := deserializeCBOR_EnhancedMonitoringList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EnhancedMonitoring = dv
-		}
-
-		if key == "EncryptionType" {
-			dv, err := deserializeCBOR_EncryptionType(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EncryptionType = dv
-		}
-
-		if key == "KeyId" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.KeyId = ptr.String(dv)
-		}
-
-		if key == "OpenShardCount" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.OpenShardCount = ptr.Int32(dv)
-		}
-
-		if key == "ConsumerCount" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ConsumerCount = ptr.Int32(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ValidationException(v smithycbor.Value) (*types.ValidationException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ValidationException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_MetricsName(v smithycbor.Value) (types.MetricsName, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.MetricsName(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.MetricsName(av), nil
-}
-
-func deserializeCBOR_Record(v smithycbor.Value) (*types.Record, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.Record{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "SequenceNumber" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.SequenceNumber = ptr.String(dv)
-		}
-
-		if key == "ApproximateArrivalTimestamp" {
-			dv, err := deserializeCBOR_Time(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ApproximateArrivalTimestamp = ptr.Time(dv)
-		}
-
-		if key == "Data" {
-			dv, err := deserializeCBOR_Blob(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Data = dv
-		}
-
-		if key == "PartitionKey" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.PartitionKey = ptr.String(dv)
-		}
-
-		if key == "EncryptionType" {
-			dv, err := deserializeCBOR_EncryptionType(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EncryptionType = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_StreamSummary(v smithycbor.Value) (*types.StreamSummary, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.StreamSummary{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamName" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamName = ptr.String(dv)
-		}
-
-		if key == "StreamARN" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamARN = ptr.String(dv)
-		}
-
-		if key == "StreamStatus" {
-			dv, err := deserializeCBOR_StreamStatus(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamStatus = dv
-		}
-
-		if key == "StreamModeDetails" {
-			dv, err := deserializeCBOR_StreamModeDetails(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamModeDetails = dv
-		}
-
-		if key == "StreamCreationTimestamp" {
-			dv, err := deserializeCBOR_Time(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamCreationTimestamp = ptr.Time(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_PutRecordOutput(v smithycbor.Value) (*PutRecordOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &PutRecordOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "ShardId" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ShardId = ptr.String(dv)
-		}
-
-		if key == "SequenceNumber" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.SequenceNumber = ptr.String(dv)
-		}
-
-		if key == "EncryptionType" {
-			dv, err := deserializeCBOR_EncryptionType(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EncryptionType = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_Int32(v smithycbor.Value) (int32, error) {
-	return smithycbor.AsInt32(v)
-}
-
-func deserializeCBOR_PutRecordsOutput(v smithycbor.Value) (*PutRecordsOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &PutRecordsOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "FailedRecordCount" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.FailedRecordCount = ptr.Int32(dv)
-		}
-
-		if key == "Records" {
-			dv, err := deserializeCBOR_PutRecordsResultEntryList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Records = dv
-		}
-
-		if key == "EncryptionType" {
-			dv, err := deserializeCBOR_EncryptionType(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EncryptionType = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ResourceInUseException(v smithycbor.Value) (*types.ResourceInUseException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ResourceInUseException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ShardList(v smithycbor.Value) ([]types.Shard, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.Shard
-	for _, si := range av {
-
-		di, err := deserializeCBOR_Shard(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_EnhancedMonitoringList(v smithycbor.Value) ([]types.EnhancedMetrics, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.EnhancedMetrics
-	for _, si := range av {
-
-		di, err := deserializeCBOR_EnhancedMetrics(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_UpdateShardCountOutput(v smithycbor.Value) (*UpdateShardCountOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &UpdateShardCountOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamName" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamName = ptr.String(dv)
-		}
-
-		if key == "CurrentShardCount" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.CurrentShardCount = ptr.Int32(dv)
-		}
-
-		if key == "TargetShardCount" {
-			dv, err := deserializeCBOR_Int32(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.TargetShardCount = ptr.Int32(dv)
-		}
-
-		if key == "StreamARN" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamARN = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_Int64(v smithycbor.Value) (int64, error) {
-	return smithycbor.AsInt64(v)
-}
-
-func deserializeCBOR_SequenceNumberRange(v smithycbor.Value) (*types.SequenceNumberRange, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.SequenceNumberRange{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StartingSequenceNumber" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StartingSequenceNumber = ptr.String(dv)
-		}
-
-		if key == "EndingSequenceNumber" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EndingSequenceNumber = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_String(v smithycbor.Value) (string, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return "", fmt.Errorf("unexpected value type %T", v)
-	}
-	return string(av), nil
-}
-
-func deserializeCBOR_DescribeStreamSummaryOutput(v smithycbor.Value) (*DescribeStreamSummaryOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &DescribeStreamSummaryOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamDescriptionSummary" {
-			dv, err := deserializeCBOR_StreamDescriptionSummary(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamDescriptionSummary = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ListStreamsOutput(v smithycbor.Value) (*ListStreamsOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &ListStreamsOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamNames" {
-			dv, err := deserializeCBOR_StreamNameList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamNames = dv
-		}
-
-		if key == "HasMoreStreams" {
-			dv, err := deserializeCBOR_Bool(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.HasMoreStreams = ptr.Bool(dv)
-		}
-
-		if key == "NextToken" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.NextToken = ptr.String(dv)
-		}
-
-		if key == "StreamSummaries" {
-			dv, err := deserializeCBOR_StreamSummaryList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamSummaries = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ListStreamConsumersOutput(v smithycbor.Value) (*ListStreamConsumersOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &ListStreamConsumersOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Consumers" {
-			dv, err := deserializeCBOR_ConsumerList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Consumers = dv
-		}
-
-		if key == "NextToken" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.NextToken = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_SubscribeToShardOutput(v smithycbor.Value) (*SubscribeToShardOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &SubscribeToShardOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "initialResponseOne" {
-			dv, err := deserializeCBOR_ChildShardList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.InitialResponseOne = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_KMSOptInRequired(v smithycbor.Value) (*types.KMSOptInRequired, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.KMSOptInRequired{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ConsumerList(v smithycbor.Value) ([]types.Consumer, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.Consumer
-	for _, si := range av {
-
-		di, err := deserializeCBOR_Consumer(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_EnhancedMetrics(v smithycbor.Value) (*types.EnhancedMetrics, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.EnhancedMetrics{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "ShardLevelMetrics" {
-			dv, err := deserializeCBOR_MetricsNameList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ShardLevelMetrics = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ProvisionedThroughputExceededException(v smithycbor.Value) (*types.ProvisionedThroughputExceededException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ProvisionedThroughputExceededException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_EnableEnhancedMonitoringOutput(v smithycbor.Value) (*EnableEnhancedMonitoringOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &EnableEnhancedMonitoringOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamName" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamName = ptr.String(dv)
-		}
-
-		if key == "CurrentShardLevelMetrics" {
-			dv, err := deserializeCBOR_MetricsNameList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.CurrentShardLevelMetrics = dv
-		}
-
-		if key == "DesiredShardLevelMetrics" {
-			dv, err := deserializeCBOR_MetricsNameList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.DesiredShardLevelMetrics = dv
-		}
-
-		if key == "StreamARN" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamARN = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_StreamNameList(v smithycbor.Value) ([]string, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []string
-	for _, si := range av {
-
-		di, err := deserializeCBOR_String(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_StreamStatus(v smithycbor.Value) (types.StreamStatus, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.StreamStatus(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.StreamStatus(av), nil
-}
-
-func deserializeCBOR_Blob(v smithycbor.Value) ([]byte, error) {
-	av, ok := v.(smithycbor.Slice)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	return []byte(av), nil
-}
-
-func deserializeCBOR_MetricsNameList(v smithycbor.Value) ([]types.MetricsName, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.MetricsName
-	for _, si := range av {
-
-		di, err := deserializeCBOR_MetricsName(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_RecordList(v smithycbor.Value) ([]types.Record, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.Record
-	for _, si := range av {
-
-		di, err := deserializeCBOR_Record(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_ExpiredNextTokenException(v smithycbor.Value) (*types.ExpiredNextTokenException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ExpiredNextTokenException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ConsumerStatus(v smithycbor.Value) (types.ConsumerStatus, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.ConsumerStatus(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.ConsumerStatus(av), nil
-}
-
-func deserializeCBOR_GetRecordsOutput(v smithycbor.Value) (*GetRecordsOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &GetRecordsOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Records" {
-			dv, err := deserializeCBOR_RecordList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Records = dv
-		}
-
-		if key == "NextShardIterator" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.NextShardIterator = ptr.String(dv)
-		}
-
-		if key == "MillisBehindLatest" {
-			dv, err := deserializeCBOR_Int64(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.MillisBehindLatest = ptr.Int64(dv)
-		}
-
-		if key == "ChildShards" {
-			dv, err := deserializeCBOR_ChildShardList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ChildShards = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_StreamModeDetails(v smithycbor.Value) (*types.StreamModeDetails, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.StreamModeDetails{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StreamMode" {
-			dv, err := deserializeCBOR_StreamMode(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StreamMode = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_EncryptionType(v smithycbor.Value) (types.EncryptionType, error) {
-	av, ok := v.(smithycbor.String)
-	if !ok {
-		return types.EncryptionType(""), fmt.Errorf("unexpected value type %T", v)
-	}
-	return types.EncryptionType(av), nil
-}
-
-func deserializeCBOR_HashKeyRange(v smithycbor.Value) (*types.HashKeyRange, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.HashKeyRange{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "StartingHashKey" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.StartingHashKey = ptr.String(dv)
-		}
-
-		if key == "EndingHashKey" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.EndingHashKey = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_TagList(v smithycbor.Value) ([]types.Tag, error) {
-	av, ok := v.(smithycbor.List)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	var dl []types.Tag
-	for _, si := range av {
-
-		di, err := deserializeCBOR_Tag(si)
-		if err != nil {
-			return nil, err
-		}
-		dl = append(dl, *di)
-	}
-	return dl, nil
-}
-
-func deserializeCBOR_PutRecordsResultEntry(v smithycbor.Value) (*types.PutRecordsResultEntry, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.PutRecordsResultEntry{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "SequenceNumber" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.SequenceNumber = ptr.String(dv)
-		}
-
-		if key == "ShardId" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ShardId = ptr.String(dv)
-		}
-
-		if key == "ErrorCode" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ErrorCode = ptr.String(dv)
-		}
-
-		if key == "ErrorMessage" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ErrorMessage = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_KMSInvalidStateException(v smithycbor.Value) (*types.KMSInvalidStateException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.KMSInvalidStateException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_SubscribeToShardEvent(v smithycbor.Value) (*types.SubscribeToShardEvent, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.SubscribeToShardEvent{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Records" {
-			dv, err := deserializeCBOR_RecordList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Records = dv
-		}
-
-		if key == "ContinuationSequenceNumber" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ContinuationSequenceNumber = ptr.String(dv)
-		}
-
-		if key == "MillisBehindLatest" {
-			dv, err := deserializeCBOR_Int64(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.MillisBehindLatest = ptr.Int64(dv)
-		}
-
-		if key == "ChildShards" {
-			dv, err := deserializeCBOR_ChildShardList(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ChildShards = dv
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_ExpiredIteratorException(v smithycbor.Value) (*types.ExpiredIteratorException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.ExpiredIteratorException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_Time(v smithycbor.Value) (time.Time, error) {
-	return smithycbor.AsTime(v)
-}
-
-func deserializeCBOR_Tag(v smithycbor.Value) (*types.Tag, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.Tag{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "Key" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Key = ptr.String(dv)
-		}
-
-		if key == "Value" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Value = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_GetShardIteratorOutput(v smithycbor.Value) (*GetShardIteratorOutput, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &GetShardIteratorOutput{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "ShardIterator" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.ShardIterator = ptr.String(dv)
-		}
-	}
-	return ds, nil
-}
-
-func deserializeCBOR_InternalFailureException(v smithycbor.Value) (*types.InternalFailureException, error) {
-	av, ok := v.(smithycbor.Map)
-	if !ok {
-		return nil, fmt.Errorf("unexpected value type %T", v)
-	}
-	ds := &types.InternalFailureException{}
-	for key, sv := range av {
-		_, _ = key, sv
-		if key == "message" {
-			dv, err := deserializeCBOR_String(sv)
-			if err != nil {
-				return nil, err
-			}
-			ds.Message = ptr.String(dv)
 		}
 	}
 	return ds, nil
@@ -3404,6 +1755,9 @@ func deserializeCBOR_Consumer(v smithycbor.Value) (*types.Consumer, error) {
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "ConsumerName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_String(sv)
 			if err != nil {
 				return nil, err
@@ -3412,6 +1766,9 @@ func deserializeCBOR_Consumer(v smithycbor.Value) (*types.Consumer, error) {
 		}
 
 		if key == "ConsumerARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_String(sv)
 			if err != nil {
 				return nil, err
@@ -3420,6 +1777,7 @@ func deserializeCBOR_Consumer(v smithycbor.Value) (*types.Consumer, error) {
 		}
 
 		if key == "ConsumerStatus" {
+
 			dv, err := deserializeCBOR_ConsumerStatus(sv)
 			if err != nil {
 				return nil, err
@@ -3428,11 +1786,381 @@ func deserializeCBOR_Consumer(v smithycbor.Value) (*types.Consumer, error) {
 		}
 
 		if key == "ConsumerCreationTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_Time(sv)
 			if err != nil {
 				return nil, err
 			}
 			ds.ConsumerCreationTimestamp = ptr.Time(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ConsumerDescription(v smithycbor.Value) (*types.ConsumerDescription, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ConsumerDescription{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ConsumerName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ConsumerName = ptr.String(dv)
+		}
+
+		if key == "ConsumerARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ConsumerARN = ptr.String(dv)
+		}
+
+		if key == "ConsumerStatus" {
+
+			dv, err := deserializeCBOR_ConsumerStatus(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ConsumerStatus = dv
+		}
+
+		if key == "ConsumerCreationTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ConsumerCreationTimestamp = ptr.Time(dv)
+		}
+
+		if key == "StreamARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamARN = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ConsumerList(v smithycbor.Value) ([]types.Consumer, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.Consumer
+	for _, si := range av {
+
+		di, err := deserializeCBOR_Consumer(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_ConsumerStatus(v smithycbor.Value) (types.ConsumerStatus, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.ConsumerStatus(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.ConsumerStatus(av), nil
+}
+
+func deserializeCBOR_EncryptionType(v smithycbor.Value) (types.EncryptionType, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.EncryptionType(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.EncryptionType(av), nil
+}
+
+func deserializeCBOR_EnhancedMetrics(v smithycbor.Value) (*types.EnhancedMetrics, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.EnhancedMetrics{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ShardLevelMetrics" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_MetricsNameList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ShardLevelMetrics = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_EnhancedMonitoringList(v smithycbor.Value) ([]types.EnhancedMetrics, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.EnhancedMetrics
+	for _, si := range av {
+
+		di, err := deserializeCBOR_EnhancedMetrics(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_ExpiredIteratorException(v smithycbor.Value) (*types.ExpiredIteratorException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ExpiredIteratorException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ExpiredNextTokenException(v smithycbor.Value) (*types.ExpiredNextTokenException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ExpiredNextTokenException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_HashKeyRange(v smithycbor.Value) (*types.HashKeyRange, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.HashKeyRange{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StartingHashKey" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StartingHashKey = ptr.String(dv)
+		}
+
+		if key == "EndingHashKey" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EndingHashKey = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_InternalFailureException(v smithycbor.Value) (*types.InternalFailureException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.InternalFailureException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_InvalidArgumentException(v smithycbor.Value) (*types.InvalidArgumentException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.InvalidArgumentException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_KMSAccessDeniedException(v smithycbor.Value) (*types.KMSAccessDeniedException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.KMSAccessDeniedException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_KMSDisabledException(v smithycbor.Value) (*types.KMSDisabledException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.KMSDisabledException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_KMSInvalidStateException(v smithycbor.Value) (*types.KMSInvalidStateException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.KMSInvalidStateException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_KMSNotFoundException(v smithycbor.Value) (*types.KMSNotFoundException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.KMSNotFoundException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_KMSOptInRequired(v smithycbor.Value) (*types.KMSOptInRequired, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.KMSOptInRequired{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
 		}
 	}
 	return ds, nil
@@ -3447,11 +2175,1631 @@ func deserializeCBOR_KMSThrottlingException(v smithycbor.Value) (*types.KMSThrot
 	for key, sv := range av {
 		_, _ = key, sv
 		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
 			dv, err := deserializeCBOR_String(sv)
 			if err != nil {
 				return nil, err
 			}
 			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_LimitExceededException(v smithycbor.Value) (*types.LimitExceededException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.LimitExceededException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_MetricsName(v smithycbor.Value) (types.MetricsName, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.MetricsName(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.MetricsName(av), nil
+}
+
+func deserializeCBOR_MetricsNameList(v smithycbor.Value) ([]types.MetricsName, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.MetricsName
+	for _, si := range av {
+
+		di, err := deserializeCBOR_MetricsName(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_ProvisionedThroughputExceededException(v smithycbor.Value) (*types.ProvisionedThroughputExceededException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ProvisionedThroughputExceededException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_PutRecordsResultEntry(v smithycbor.Value) (*types.PutRecordsResultEntry, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.PutRecordsResultEntry{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "SequenceNumber" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.SequenceNumber = ptr.String(dv)
+		}
+
+		if key == "ShardId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ShardId = ptr.String(dv)
+		}
+
+		if key == "ErrorCode" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ErrorCode = ptr.String(dv)
+		}
+
+		if key == "ErrorMessage" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ErrorMessage = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_PutRecordsResultEntryList(v smithycbor.Value) ([]types.PutRecordsResultEntry, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.PutRecordsResultEntry
+	for _, si := range av {
+
+		di, err := deserializeCBOR_PutRecordsResultEntry(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_Record(v smithycbor.Value) (*types.Record, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.Record{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "SequenceNumber" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.SequenceNumber = ptr.String(dv)
+		}
+
+		if key == "ApproximateArrivalTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ApproximateArrivalTimestamp = ptr.Time(dv)
+		}
+
+		if key == "Data" {
+
+			dv, err := deserializeCBOR_Blob(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Data = dv
+		}
+
+		if key == "PartitionKey" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.PartitionKey = ptr.String(dv)
+		}
+
+		if key == "EncryptionType" {
+
+			dv, err := deserializeCBOR_EncryptionType(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EncryptionType = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_RecordList(v smithycbor.Value) ([]types.Record, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.Record
+	for _, si := range av {
+
+		di, err := deserializeCBOR_Record(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_ResourceInUseException(v smithycbor.Value) (*types.ResourceInUseException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ResourceInUseException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ResourceNotFoundException(v smithycbor.Value) (*types.ResourceNotFoundException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ResourceNotFoundException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_SequenceNumberRange(v smithycbor.Value) (*types.SequenceNumberRange, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.SequenceNumberRange{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StartingSequenceNumber" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StartingSequenceNumber = ptr.String(dv)
+		}
+
+		if key == "EndingSequenceNumber" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EndingSequenceNumber = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_Shard(v smithycbor.Value) (*types.Shard, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.Shard{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ShardId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ShardId = ptr.String(dv)
+		}
+
+		if key == "ParentShardId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ParentShardId = ptr.String(dv)
+		}
+
+		if key == "AdjacentParentShardId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.AdjacentParentShardId = ptr.String(dv)
+		}
+
+		if key == "HashKeyRange" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_HashKeyRange(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.HashKeyRange = dv
+		}
+
+		if key == "SequenceNumberRange" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_SequenceNumberRange(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.SequenceNumberRange = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ShardIdList(v smithycbor.Value) ([]string, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []string
+	for _, si := range av {
+
+		di, err := deserializeCBOR_String(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_ShardList(v smithycbor.Value) ([]types.Shard, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.Shard
+	for _, si := range av {
+
+		di, err := deserializeCBOR_Shard(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_StreamDescription(v smithycbor.Value) (*types.StreamDescription, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.StreamDescription{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamName = ptr.String(dv)
+		}
+
+		if key == "StreamARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamARN = ptr.String(dv)
+		}
+
+		if key == "StreamStatus" {
+
+			dv, err := deserializeCBOR_StreamStatus(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamStatus = dv
+		}
+
+		if key == "StreamModeDetails" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_StreamModeDetails(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamModeDetails = dv
+		}
+
+		if key == "Shards" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ShardList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Shards = dv
+		}
+
+		if key == "HasMoreShards" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.HasMoreShards = ptr.Bool(dv)
+		}
+
+		if key == "RetentionPeriodHours" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RetentionPeriodHours = ptr.Int32(dv)
+		}
+
+		if key == "StreamCreationTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamCreationTimestamp = ptr.Time(dv)
+		}
+
+		if key == "EnhancedMonitoring" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_EnhancedMonitoringList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EnhancedMonitoring = dv
+		}
+
+		if key == "EncryptionType" {
+
+			dv, err := deserializeCBOR_EncryptionType(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EncryptionType = dv
+		}
+
+		if key == "KeyId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.KeyId = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_StreamDescriptionSummary(v smithycbor.Value) (*types.StreamDescriptionSummary, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.StreamDescriptionSummary{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamName = ptr.String(dv)
+		}
+
+		if key == "StreamARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamARN = ptr.String(dv)
+		}
+
+		if key == "StreamStatus" {
+
+			dv, err := deserializeCBOR_StreamStatus(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamStatus = dv
+		}
+
+		if key == "StreamModeDetails" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_StreamModeDetails(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamModeDetails = dv
+		}
+
+		if key == "RetentionPeriodHours" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RetentionPeriodHours = ptr.Int32(dv)
+		}
+
+		if key == "StreamCreationTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamCreationTimestamp = ptr.Time(dv)
+		}
+
+		if key == "EnhancedMonitoring" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_EnhancedMonitoringList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EnhancedMonitoring = dv
+		}
+
+		if key == "EncryptionType" {
+
+			dv, err := deserializeCBOR_EncryptionType(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EncryptionType = dv
+		}
+
+		if key == "KeyId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.KeyId = ptr.String(dv)
+		}
+
+		if key == "OpenShardCount" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.OpenShardCount = ptr.Int32(dv)
+		}
+
+		if key == "ConsumerCount" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ConsumerCount = ptr.Int32(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_StreamMode(v smithycbor.Value) (types.StreamMode, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.StreamMode(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.StreamMode(av), nil
+}
+
+func deserializeCBOR_StreamModeDetails(v smithycbor.Value) (*types.StreamModeDetails, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.StreamModeDetails{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamMode" {
+
+			dv, err := deserializeCBOR_StreamMode(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamMode = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_StreamNameList(v smithycbor.Value) ([]string, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []string
+	for _, si := range av {
+
+		di, err := deserializeCBOR_String(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_StreamStatus(v smithycbor.Value) (types.StreamStatus, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.StreamStatus(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.StreamStatus(av), nil
+}
+
+func deserializeCBOR_StreamSummary(v smithycbor.Value) (*types.StreamSummary, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.StreamSummary{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamName = ptr.String(dv)
+		}
+
+		if key == "StreamARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamARN = ptr.String(dv)
+		}
+
+		if key == "StreamStatus" {
+
+			dv, err := deserializeCBOR_StreamStatus(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamStatus = dv
+		}
+
+		if key == "StreamModeDetails" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_StreamModeDetails(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamModeDetails = dv
+		}
+
+		if key == "StreamCreationTimestamp" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamCreationTimestamp = ptr.Time(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_StreamSummaryList(v smithycbor.Value) ([]types.StreamSummary, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.StreamSummary
+	for _, si := range av {
+
+		di, err := deserializeCBOR_StreamSummary(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_SubscribeToShardEvent(v smithycbor.Value) (*types.SubscribeToShardEvent, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.SubscribeToShardEvent{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Records" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RecordList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Records = dv
+		}
+
+		if key == "ContinuationSequenceNumber" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ContinuationSequenceNumber = ptr.String(dv)
+		}
+
+		if key == "MillisBehindLatest" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.MillisBehindLatest = ptr.Int64(dv)
+		}
+
+		if key == "ChildShards" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ChildShardList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ChildShards = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_Tag(v smithycbor.Value) (*types.Tag, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.Tag{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Key" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Key = ptr.String(dv)
+		}
+
+		if key == "Value" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Value = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_TagList(v smithycbor.Value) ([]types.Tag, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	var dl []types.Tag
+	for _, si := range av {
+
+		di, err := deserializeCBOR_Tag(si)
+		if err != nil {
+			return nil, err
+		}
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_ValidationException(v smithycbor.Value) (*types.ValidationException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ValidationException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_Blob(v smithycbor.Value) ([]byte, error) {
+	av, ok := v.(smithycbor.Slice)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	return []byte(av), nil
+}
+
+func deserializeCBOR_Bool(v smithycbor.Value) (bool, error) {
+	av, ok := v.(smithycbor.Bool)
+	if !ok {
+		return false, fmt.Errorf("unexpected value type %T", v)
+	}
+	return bool(av), nil
+}
+
+func deserializeCBOR_Int32(v smithycbor.Value) (int32, error) {
+	return smithycbor.AsInt32(v)
+}
+
+func deserializeCBOR_Int64(v smithycbor.Value) (int64, error) {
+	return smithycbor.AsInt64(v)
+}
+
+func deserializeCBOR_String(v smithycbor.Value) (string, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return "", fmt.Errorf("unexpected value type %T", v)
+	}
+	return string(av), nil
+}
+
+func deserializeCBOR_Time(v smithycbor.Value) (time.Time, error) {
+	return smithycbor.AsTime(v)
+}
+
+func deserializeCBOR_DescribeLimitsOutput(v smithycbor.Value) (*DescribeLimitsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &DescribeLimitsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ShardLimit" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ShardLimit = ptr.Int32(dv)
+		}
+
+		if key == "OpenShardCount" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.OpenShardCount = ptr.Int32(dv)
+		}
+
+		if key == "OnDemandStreamCount" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.OnDemandStreamCount = ptr.Int32(dv)
+		}
+
+		if key == "OnDemandStreamCountLimit" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.OnDemandStreamCountLimit = ptr.Int32(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_DescribeStreamConsumerOutput(v smithycbor.Value) (*DescribeStreamConsumerOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &DescribeStreamConsumerOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ConsumerDescription" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ConsumerDescription(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ConsumerDescription = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_DescribeStreamOutput(v smithycbor.Value) (*DescribeStreamOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &DescribeStreamOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamDescription" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_StreamDescription(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamDescription = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_DescribeStreamSummaryOutput(v smithycbor.Value) (*DescribeStreamSummaryOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &DescribeStreamSummaryOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamDescriptionSummary" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_StreamDescriptionSummary(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamDescriptionSummary = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_DisableEnhancedMonitoringOutput(v smithycbor.Value) (*DisableEnhancedMonitoringOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &DisableEnhancedMonitoringOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamName = ptr.String(dv)
+		}
+
+		if key == "CurrentShardLevelMetrics" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_MetricsNameList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CurrentShardLevelMetrics = dv
+		}
+
+		if key == "DesiredShardLevelMetrics" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_MetricsNameList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.DesiredShardLevelMetrics = dv
+		}
+
+		if key == "StreamARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamARN = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_EnableEnhancedMonitoringOutput(v smithycbor.Value) (*EnableEnhancedMonitoringOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &EnableEnhancedMonitoringOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamName = ptr.String(dv)
+		}
+
+		if key == "CurrentShardLevelMetrics" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_MetricsNameList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CurrentShardLevelMetrics = dv
+		}
+
+		if key == "DesiredShardLevelMetrics" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_MetricsNameList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.DesiredShardLevelMetrics = dv
+		}
+
+		if key == "StreamARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamARN = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_GetRecordsOutput(v smithycbor.Value) (*GetRecordsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &GetRecordsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Records" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RecordList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Records = dv
+		}
+
+		if key == "NextShardIterator" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.NextShardIterator = ptr.String(dv)
+		}
+
+		if key == "MillisBehindLatest" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.MillisBehindLatest = ptr.Int64(dv)
+		}
+
+		if key == "ChildShards" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ChildShardList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ChildShards = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_GetResourcePolicyOutput(v smithycbor.Value) (*GetResourcePolicyOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &GetResourcePolicyOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Policy" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Policy = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_GetShardIteratorOutput(v smithycbor.Value) (*GetShardIteratorOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &GetShardIteratorOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ShardIterator" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ShardIterator = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ListShardsOutput(v smithycbor.Value) (*ListShardsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &ListShardsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Shards" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ShardList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Shards = dv
+		}
+
+		if key == "NextToken" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.NextToken = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ListStreamConsumersOutput(v smithycbor.Value) (*ListStreamConsumersOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &ListStreamConsumersOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Consumers" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ConsumerList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Consumers = dv
+		}
+
+		if key == "NextToken" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.NextToken = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ListStreamsOutput(v smithycbor.Value) (*ListStreamsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &ListStreamsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamNames" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_StreamNameList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamNames = dv
+		}
+
+		if key == "HasMoreStreams" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.HasMoreStreams = ptr.Bool(dv)
+		}
+
+		if key == "NextToken" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.NextToken = ptr.String(dv)
+		}
+
+		if key == "StreamSummaries" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_StreamSummaryList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamSummaries = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ListTagsForStreamOutput(v smithycbor.Value) (*ListTagsForStreamOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &ListTagsForStreamOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Tags" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_TagList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Tags = dv
+		}
+
+		if key == "HasMoreTags" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.HasMoreTags = ptr.Bool(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_PutRecordOutput(v smithycbor.Value) (*PutRecordOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &PutRecordOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ShardId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ShardId = ptr.String(dv)
+		}
+
+		if key == "SequenceNumber" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.SequenceNumber = ptr.String(dv)
+		}
+
+		if key == "EncryptionType" {
+
+			dv, err := deserializeCBOR_EncryptionType(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EncryptionType = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_PutRecordsOutput(v smithycbor.Value) (*PutRecordsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &PutRecordsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "FailedRecordCount" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.FailedRecordCount = ptr.Int32(dv)
+		}
+
+		if key == "Records" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_PutRecordsResultEntryList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Records = dv
+		}
+
+		if key == "EncryptionType" {
+
+			dv, err := deserializeCBOR_EncryptionType(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.EncryptionType = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_RegisterStreamConsumerOutput(v smithycbor.Value) (*RegisterStreamConsumerOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &RegisterStreamConsumerOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Consumer" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Consumer(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Consumer = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_SubscribeToShardOutput(v smithycbor.Value) (*SubscribeToShardOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &SubscribeToShardOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "initialResponseOne" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_ChildShardList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.InitialResponseOne = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_UpdateShardCountOutput(v smithycbor.Value) (*UpdateShardCountOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &UpdateShardCountOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "StreamName" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamName = ptr.String(dv)
+		}
+
+		if key == "CurrentShardCount" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CurrentShardCount = ptr.Int32(dv)
+		}
+
+		if key == "TargetShardCount" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TargetShardCount = ptr.Int32(dv)
+		}
+
+		if key == "StreamARN" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StreamARN = ptr.String(dv)
 		}
 	}
 	return ds, nil

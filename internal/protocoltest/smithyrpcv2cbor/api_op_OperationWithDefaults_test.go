@@ -8,10 +8,12 @@ import (
 	"encoding/base64"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"io/ioutil"
@@ -20,9 +22,9 @@ import (
 	"testing"
 )
 
-func TestClient_DefaultFieldInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
+func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *DefaultFieldInputOutputInput
+		Params        *OperationWithDefaultsInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -35,31 +37,13 @@ func TestClient_DefaultFieldInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Serializes an empty input with default values filled in.
-		"RpcV2CborEmptyInputShouldSerializeDefaultValues": {
-			Params:        &DefaultFieldInputOutputInput{},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-		},
-		// Left over default values should be filled in.
-		"RpcV2CborSomeDefaultValuesLeftOut": {
-			Params: &DefaultFieldInputOutputInput{
-				ByteValue:         ptr.Int8(0),
-				DoubleValue:       ptr.Float64(2.889),
-				FalseBooleanValue: true,
-				FloatValue:        ptr.Float32(3.24),
-				IntegerValue:      ptr.Int32(56),
-				TrueBooleanValue:  ptr.Bool(false),
+		// Client populates default values in input.
+		"RpcV2CborClientPopulatesDefaultValuesInInput": {
+			Params: &OperationWithDefaultsInput{
+				Defaults: &types.Defaults{},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
+			ExpectURIPath: "/",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -68,18 +52,75 @@ func TestClient_DefaultFieldInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `qWlieXRlVmFsdWUAa2RvdWJsZVZhbHVl+0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl+kBPXClsaW50ZWdlclZhbHVlGDhpbG9uZ1ZhbHVlGSaRanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlcHRydWVCb29sZWFuVmFsdWX0`)
+				return smithytesting.CompareCBOR(actual, `v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIBwZGVmYXVsdFRpbWVzdGFtcABrZGVmYXVsdEJsb2JjYWJja2RlZmF1bHRCeXRlAWxkZWZhdWx0U2hvcnQBbmRlZmF1bHRJbnRlZ2VyCmtkZWZhdWx0TG9uZxhkbGRlZmF1bHRGbG9hdPs/8AAAAAAAAG1kZWZhdWx0RG91Ymxl+z/wAAAAAAAAamRlZmF1bHRNYXCga2RlZmF1bHRFbnVtY0ZPT25kZWZhdWx0SW50RW51bQH/`)
+			},
+		},
+		// Client skips top level default values in input.
+		"RpcV2CborClientSkipsTopLevelDefaultValuesInInput": {
+			Params:        &OperationWithDefaultsInput{},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v/8=`)
+			},
+		},
+		// Client uses explicitly provided member values over defaults
+		"RpcV2CborClientUsesExplicitlyProvidedMemberValuesOverDefaults": {
+			Params: &OperationWithDefaultsInput{
+				Defaults: &types.Defaults{
+					DefaultString:  ptr.String("bye"),
+					DefaultBoolean: ptr.Bool(true),
+					DefaultList: []string{
+						"a",
+					},
+					DefaultTimestamp: ptr.Time(smithytime.ParseEpochSeconds(1)),
+					DefaultBlob:      []byte("hi"),
+					DefaultByte:      ptr.Int8(2),
+					DefaultShort:     ptr.Int16(2),
+					DefaultInteger:   ptr.Int32(20),
+					DefaultLong:      ptr.Int64(200),
+					DefaultFloat:     ptr.Float32(2.0),
+					DefaultDouble:    ptr.Float64(2.0),
+					DefaultMap: map[string]string{
+						"name": "Jack",
+					},
+					DefaultEnum:    types.TestEnum("BAR"),
+					DefaultIntEnum: 2,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v2hkZWZhdWx0c65tZGVmYXVsdFN0cmluZ2NieWVuZGVmYXVsdEJvb2xlYW71a2RlZmF1bHRMaXN0gWFhcGRlZmF1bHRUaW1lc3RhbXABa2RlZmF1bHRCbG9iYmhpa2RlZmF1bHRCeXRlAmxkZWZhdWx0U2hvcnQCbmRlZmF1bHRJbnRlZ2VyFGtkZWZhdWx0TG9uZxjIbGRlZmF1bHRGbG9hdPtAAAAAAAAAAG1kZWZhdWx0RG91Ymxl+0AAAAAAAAAAamRlZmF1bHRNYXChZG5hbWVkSmFja2tkZWZhdWx0RW51bWNCQVJuZGVmYXVsdEludEVudW0C/w==`)
 			},
 		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "RpcV2CborEmptyInputShouldSerializeDefaultValues" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#DefaultFieldInputOutput")
+			if name == "RpcV2CborClientPopulatesDefaultValuesInInput" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
-			if name == "RpcV2CborSomeDefaultValuesLeftOut" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#DefaultFieldInputOutput")
+			if name == "RpcV2CborClientSkipsTopLevelDefaultValuesInInput" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+			}
+
+			if name == "RpcV2CborClientUsesExplicitlyProvidedMemberValuesOverDefaults" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			actualReq := &http.Request{}
@@ -110,7 +151,7 @@ func TestClient_DefaultFieldInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
 				HTTPClient: protocoltesthttp.NewClient(),
 				Region:     "us-west-2",
 			})
-			result, err := client.DefaultFieldInputOutput(context.Background(), c.Params, func(options *Options) {
+			result, err := client.OperationWithDefaults(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})
@@ -143,16 +184,16 @@ func TestClient_DefaultFieldInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
 	}
 }
 
-func TestClient_DefaultFieldInputOutput_smithyRpcv2cborDeserialize(t *testing.T) {
+func TestClient_OperationWithDefaults_smithyRpcv2cborDeserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *DefaultFieldInputOutputOutput
+		ExpectResult  *OperationWithDefaultsOutput
 	}{
-		// Serializes an empty output with default values filled in.
-		"RpcV2CborEmptyOutputShouldSerializeDefaultValues": {
+		// Client populates default values when missing in response.
+		"RpcV2CborClientPopulatesDefaultsValuesWhenMissingInResponse": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type":    []string{"application/cbor"},
@@ -160,17 +201,32 @@ func TestClient_DefaultFieldInputOutput_smithyRpcv2cborDeserialize(t *testing.T)
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlAWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZf8=`)
+				p, err := base64.StdEncoding.DecodeString(`v/8=`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &DefaultFieldInputOutputOutput{},
+			ExpectResult: &OperationWithDefaultsOutput{
+				DefaultString:    ptr.String("hi"),
+				DefaultBoolean:   ptr.Bool(true),
+				DefaultList:      []string{},
+				DefaultTimestamp: ptr.Time(smithytime.ParseEpochSeconds(0)),
+				DefaultBlob:      []byte("abc"),
+				DefaultByte:      ptr.Int8(1),
+				DefaultShort:     ptr.Int16(1),
+				DefaultInteger:   ptr.Int32(10),
+				DefaultLong:      ptr.Int64(100),
+				DefaultFloat:     ptr.Float32(1.0),
+				DefaultDouble:    ptr.Float64(1.0),
+				DefaultMap:       map[string]string{},
+				DefaultEnum:      types.TestEnum("FOO"),
+				DefaultIntEnum:   1,
+			},
 		},
-		// Left over default values should be filled in.
-		"RpcV2CborSomeDefaultValuesLeftOut": {
+		// Client ignores default values if member values are present in the response.
+		"RpcV2CborClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type":    []string{"application/cbor"},
@@ -178,31 +234,43 @@ func TestClient_DefaultFieldInputOutput_smithyRpcv2cborDeserialize(t *testing.T)
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`qWlieXRlVmFsdWUAa2RvdWJsZVZhbHVl+0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl+kBPXClsaW50ZWdlclZhbHVlGDhpbG9uZ1ZhbHVlGSaRanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlcHRydWVCb29sZWFuVmFsdWX0`)
+				p, err := base64.StdEncoding.DecodeString(`v21kZWZhdWx0U3RyaW5nY2J5ZW5kZWZhdWx0Qm9vbGVhbvRrZGVmYXVsdExpc3SBYWFwZGVmYXVsdFRpbWVzdGFtcAJrZGVmYXVsdEJsb2JiaGlrZGVmYXVsdEJ5dGUCbGRlZmF1bHRTaG9ydAJuZGVmYXVsdEludGVnZXIUa2RlZmF1bHRMb25nGMhsZGVmYXVsdEZsb2F0+0AAAAAAAAAAbWRlZmF1bHREb3VibGX7QAAAAAAAAABqZGVmYXVsdE1hcKFkbmFtZWRKYWNra2RlZmF1bHRFbnVtY0JBUm5kZWZhdWx0SW50RW51bQL/`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &DefaultFieldInputOutputOutput{
-				ByteValue:         ptr.Int8(0),
-				DoubleValue:       ptr.Float64(2.889),
-				FalseBooleanValue: true,
-				FloatValue:        ptr.Float32(3.24),
-				IntegerValue:      ptr.Int32(56),
-				TrueBooleanValue:  ptr.Bool(false),
+			ExpectResult: &OperationWithDefaultsOutput{
+				DefaultString:  ptr.String("bye"),
+				DefaultBoolean: ptr.Bool(false),
+				DefaultList: []string{
+					"a",
+				},
+				DefaultTimestamp: ptr.Time(smithytime.ParseEpochSeconds(2)),
+				DefaultBlob:      []byte("hi"),
+				DefaultByte:      ptr.Int8(2),
+				DefaultShort:     ptr.Int16(2),
+				DefaultInteger:   ptr.Int32(20),
+				DefaultLong:      ptr.Int64(200),
+				DefaultFloat:     ptr.Float32(2.0),
+				DefaultDouble:    ptr.Float64(2.0),
+				DefaultMap: map[string]string{
+					"name": "Jack",
+				},
+				DefaultEnum:    types.TestEnum("BAR"),
+				DefaultIntEnum: 2,
 			},
 		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "RpcV2CborEmptyOutputShouldSerializeDefaultValues" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#DefaultFieldInputOutput")
+			if name == "RpcV2CborClientPopulatesDefaultsValuesWhenMissingInResponse" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
-			if name == "RpcV2CborSomeDefaultValuesLeftOut" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#DefaultFieldInputOutput")
+			if name == "RpcV2CborClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			serverURL := "http://localhost:8888/"
@@ -245,8 +313,8 @@ func TestClient_DefaultFieldInputOutput_smithyRpcv2cborDeserialize(t *testing.T)
 				}),
 				Region: "us-west-2",
 			})
-			var params DefaultFieldInputOutputInput
-			result, err := client.DefaultFieldInputOutput(context.Background(), &params)
+			var params OperationWithDefaultsInput
+			result, err := client.OperationWithDefaults(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}

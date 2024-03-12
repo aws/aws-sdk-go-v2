@@ -48,6 +48,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 				ShortValue:        ptr.Int16(9898),
 				StringValue:       ptr.String("simple"),
 				TrueBooleanValue:  ptr.Bool(true),
+				BlobValue:         []byte("foo"),
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
@@ -59,33 +60,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9f8=`)
-			},
-		},
-		// Serializes simple scalar properties using definite length map
-		"RpcV2CborSimpleScalarPropertiesUsingIndefiniteLength": {
-			Params: &SimpleScalarPropertiesInput{
-				ByteValue:         ptr.Int8(5),
-				DoubleValue:       ptr.Float64(1.889),
-				FalseBooleanValue: ptr.Bool(false),
-				FloatValue:        ptr.Float32(7.624),
-				IntegerValue:      ptr.Int32(256),
-				LongValue:         ptr.Int64(9873),
-				ShortValue:        ptr.Int16(9898),
-				StringValue:       ptr.String("simple"),
-				TrueBooleanValue:  ptr.Bool(true),
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q==`)
+				return smithytesting.CompareCBOR(actual, `v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
 			},
 		},
 		// RpcV2 Cbor should not serialize null structure values
@@ -163,83 +138,9 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 				return smithytesting.CompareCBOR(actual, `v2tkb3VibGVWYWx1Zfv/8AAAAAAAAGpmbG9hdFZhbHVl+v+AAAD/`)
 			},
 		},
-		// Supports indefinite length text strings.
-		"RpcV2CborSupportsIndefiniteLengthStrings": {
-			Params: &SimpleScalarPropertiesInput{
-				StringValue: ptr.String("An example indefinite string, chunked on comma"),
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `oWtzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h/w==`)
-			},
-		},
-		// Supports indefinite length byte strings.
-		"RpcV2CborSupportsIndefiniteLengthByteStrings": {
-			Params: &SimpleScalarPropertiesInput{
-				StringValue: ptr.String("An example indefinite-byte string, chunked on comma"),
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `oWtzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH/`)
-			},
-		},
-		// Supports upcasting from a smaller byte representation of the same date type.
-		"RpcV2CborSupportsUpcastingData": {
-			Params: &SimpleScalarPropertiesInput{
-				DoubleValue:  ptr.Float64(1.889),
-				FloatValue:   ptr.Float32(7.624),
-				IntegerValue: ptr.Int32(56),
-				LongValue:    ptr.Int64(256),
-				ShortValue:   ptr.Int16(10),
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2tkb3VibGVWYWx1Zfk/jmpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8=`)
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "RpcV2CborSimpleScalarPropertiesUsingIndefiniteLength" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#SimpleScalarProperties")
-			}
-
-			if name == "RpcV2CborSupportsIndefiniteLengthStrings" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#SimpleScalarProperties")
-			}
-
-			if name == "RpcV2CborSupportsIndefiniteLengthByteStrings" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#SimpleScalarProperties")
-			}
-
-			if name == "RpcV2CborSupportsUpcastingData" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#SimpleScalarProperties")
-			}
-
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {
@@ -318,7 +219,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxl/w==`)
+				p, err := base64.StdEncoding.DecodeString(`v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb2//`)
 				if err != nil {
 					panic(err)
 				}
@@ -334,6 +235,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 				IntegerValue:      ptr.Int32(256),
 				ShortValue:        ptr.Int16(9898),
 				StringValue:       ptr.String("simple"),
+				BlobValue:         []byte("foo"),
 			},
 		},
 		// RpcV2 Cbor should deserialize null structure values

@@ -62,18 +62,6 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
-func TestCheckSnapshot_DefaultFieldInputOutput(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DefaultFieldInputOutput(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DefaultFieldInputOutput")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_EmptyInputOutput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EmptyInputOutput(context.Background(), nil, func(o *Options) {
@@ -115,6 +103,18 @@ func TestCheckSnapshot_NoInputOutput(t *testing.T) {
 	_, err := svc.NoInputOutput(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "NoInputOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_OperationWithDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OperationWithDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "OperationWithDefaults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -181,18 +181,6 @@ func TestCheckSnapshot_SimpleScalarProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestUpdateSnapshot_DefaultFieldInputOutput(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DefaultFieldInputOutput(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DefaultFieldInputOutput")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_EmptyInputOutput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.EmptyInputOutput(context.Background(), nil, func(o *Options) {
@@ -234,6 +222,18 @@ func TestUpdateSnapshot_NoInputOutput(t *testing.T) {
 	_, err := svc.NoInputOutput(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "NoInputOutput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_OperationWithDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.OperationWithDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "OperationWithDefaults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

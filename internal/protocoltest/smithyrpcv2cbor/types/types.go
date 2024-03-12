@@ -4,10 +4,43 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 type ComplexNestedErrorData struct {
 	Foo *string
+
+	noSmithyDocumentSerde
+}
+
+type Defaults struct {
+	DefaultBlob []byte
+
+	DefaultBoolean *bool
+
+	DefaultByte *int8
+
+	DefaultDouble *float64
+
+	DefaultEnum TestEnum
+
+	DefaultFloat *float32
+
+	DefaultIntEnum TestIntEnum
+
+	DefaultInteger *int32
+
+	DefaultList []string
+
+	DefaultLong *int64
+
+	DefaultMap map[string]string
+
+	DefaultShort *int16
+
+	DefaultString *string
+
+	DefaultTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }

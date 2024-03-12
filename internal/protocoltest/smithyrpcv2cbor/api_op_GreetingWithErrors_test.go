@@ -5,6 +5,7 @@ package smithyrpcv2cbor
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"errors"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
@@ -33,7 +34,14 @@ func TestClient_GreetingWithErrors_ComplexError_smithyRpcv2cborDeserialize(t *te
 				"smithy-protocol": []string{"rpc-v2-cbor"},
 			},
 			BodyMediaType: "application/cbor",
-			Body:          []byte(`v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3JoVG9wTGV2ZWxpVG9wIGxldmVsZk5lc3RlZL9jRm9vY2Jhcv//`),
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3JoVG9wTGV2ZWxpVG9wIGxldmVsZk5lc3RlZL9jRm9vY2Jhcv//`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
 			ExpectError: &types.ComplexError{
 				TopLevel: ptr.String("Top level"),
 				Nested: &types.ComplexNestedErrorData{
@@ -44,11 +52,19 @@ func TestClient_GreetingWithErrors_ComplexError_smithyRpcv2cborDeserialize(t *te
 		"RpcV2CborEmptyComplexError": {
 			StatusCode: 400,
 			Header: http.Header{
-				"Content-Type": []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
 			},
 			BodyMediaType: "application/cbor",
-			Body:          []byte(`v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3L/`),
-			ExpectError:   &types.ComplexError{},
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3L/`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectError: &types.ComplexError{},
 		},
 	}
 	for name, c := range cases {
@@ -141,7 +157,14 @@ func TestClient_GreetingWithErrors_InvalidGreeting_smithyRpcv2cborDeserialize(t 
 				"smithy-protocol": []string{"rpc-v2-cbor"},
 			},
 			BodyMediaType: "application/cbor",
-			Body:          []byte(`v2ZfX3R5cGV4K2F3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNJbnZhbGlkR3JlZXRpbmdnTWVzc2FnZWJIaf8=`),
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4K2F3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNJbnZhbGlkR3JlZXRpbmdnTWVzc2FnZWJIaf8=`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
 			ExpectError: &types.InvalidGreeting{
 				Message: ptr.String("Hi"),
 			},

@@ -48,17 +48,14 @@ func TestClient_OptionalInputOutput_smithyRpcv2cborSerialize(t *testing.T) {
 			ForbidHeader: []string{
 				"X-Amz-Target",
 			},
+			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareReaderBytes(actual, []byte(`v/8=`))
+				return smithytesting.CompareCBOR(actual, `v/8=`)
 			},
 		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "optional_input" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OptionalInputOutput")
-			}
-
 			actualReq := &http.Request{}
 			serverURL := "http://localhost:8888/"
 			if c.Host != nil {

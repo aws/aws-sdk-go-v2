@@ -6,65 +6,63 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
-func (c *Client) DefaultFieldInputOutput(ctx context.Context, params *DefaultFieldInputOutputInput, optFns ...func(*Options)) (*DefaultFieldInputOutputOutput, error) {
+func (c *Client) OperationWithDefaults(ctx context.Context, params *OperationWithDefaultsInput, optFns ...func(*Options)) (*OperationWithDefaultsOutput, error) {
 	if params == nil {
-		params = &DefaultFieldInputOutputInput{}
+		params = &OperationWithDefaultsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DefaultFieldInputOutput", params, optFns, c.addOperationDefaultFieldInputOutputMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "OperationWithDefaults", params, optFns, c.addOperationOperationWithDefaultsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DefaultFieldInputOutputOutput)
+	out := result.(*OperationWithDefaultsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DefaultFieldInputOutputInput struct {
-	ByteValue *int8
+type OperationWithDefaultsInput struct {
+	Defaults *types.Defaults
 
-	DoubleValue *float64
-
-	FalseBooleanValue bool
-
-	FloatValue *float32
-
-	IntegerValue *int32
-
-	LongValue *int64
-
-	ShortValue *int16
-
-	StringValue *string
-
-	TrueBooleanValue *bool
+	TopLevelDefault *string
 
 	noSmithyDocumentSerde
 }
 
-type DefaultFieldInputOutputOutput struct {
-	ByteValue *int8
+type OperationWithDefaultsOutput struct {
+	DefaultBlob []byte
 
-	DoubleValue *float64
+	DefaultBoolean *bool
 
-	FalseBooleanValue bool
+	DefaultByte *int8
 
-	FloatValue *float32
+	DefaultDouble *float64
 
-	IntegerValue *int32
+	DefaultEnum types.TestEnum
 
-	LongValue *int64
+	DefaultFloat *float32
 
-	ShortValue *int16
+	DefaultIntEnum types.TestIntEnum
 
-	StringValue *string
+	DefaultInteger *int32
 
-	TrueBooleanValue *bool
+	DefaultList []string
+
+	DefaultLong *int64
+
+	DefaultMap map[string]string
+
+	DefaultShort *int16
+
+	DefaultString *string
+
+	DefaultTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,19 +70,19 @@ type DefaultFieldInputOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDefaultFieldInputOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDefaultFieldInputOutput{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpOperationWithDefaults{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDefaultFieldInputOutput{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpOperationWithDefaults{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DefaultFieldInputOutput"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "OperationWithDefaults"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -124,7 +122,7 @@ func (c *Client) addOperationDefaultFieldInputOutputMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDefaultFieldInputOutput(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithDefaults(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -145,10 +143,10 @@ func (c *Client) addOperationDefaultFieldInputOutputMiddlewares(stack *middlewar
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDefaultFieldInputOutput(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opOperationWithDefaults(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DefaultFieldInputOutput",
+		OperationName: "OperationWithDefaults",
 	}
 }

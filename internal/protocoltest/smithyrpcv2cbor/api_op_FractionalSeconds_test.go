@@ -27,7 +27,11 @@ func TestClient_FractionalSeconds_smithyRpcv2cborDeserialize(t *testing.T) {
 	}{
 		// Ensures that clients can correctly parse timestamps with fractional seconds
 		"RpcV2CborDateTimeWithFractionalSeconds": {
-			StatusCode:    200,
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
 				p, err := base64.StdEncoding.DecodeString(`v2hkYXRldGltZcH7Qcw32zgPvnf/`)
@@ -44,10 +48,6 @@ func TestClient_FractionalSeconds_smithyRpcv2cborDeserialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "RpcV2CborDateTimeWithFractionalSeconds" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#FractionalSeconds")
-			}
-
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {

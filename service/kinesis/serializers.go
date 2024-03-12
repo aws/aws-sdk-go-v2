@@ -31,6 +31,7 @@ func (m *smithyRpcv2cbor_serializeOpAddTagsToStream) HandleSerialize(ctx context
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -46,12 +47,12 @@ func (m *smithyRpcv2cbor_serializeOpAddTagsToStream) HandleSerialize(ctx context
 
 	cv, err := serializeCBOR_AddTagsToStreamInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -73,6 +74,7 @@ func (m *smithyRpcv2cbor_serializeOpCreateStream) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -88,12 +90,12 @@ func (m *smithyRpcv2cbor_serializeOpCreateStream) HandleSerialize(ctx context.Co
 
 	cv, err := serializeCBOR_CreateStreamInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -115,6 +117,7 @@ func (m *smithyRpcv2cbor_serializeOpDecreaseStreamRetentionPeriod) HandleSeriali
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -130,12 +133,12 @@ func (m *smithyRpcv2cbor_serializeOpDecreaseStreamRetentionPeriod) HandleSeriali
 
 	cv, err := serializeCBOR_DecreaseStreamRetentionPeriodInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -157,6 +160,7 @@ func (m *smithyRpcv2cbor_serializeOpDeleteResourcePolicy) HandleSerialize(ctx co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -172,12 +176,12 @@ func (m *smithyRpcv2cbor_serializeOpDeleteResourcePolicy) HandleSerialize(ctx co
 
 	cv, err := serializeCBOR_DeleteResourcePolicyInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -199,6 +203,7 @@ func (m *smithyRpcv2cbor_serializeOpDeleteStream) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -214,12 +219,12 @@ func (m *smithyRpcv2cbor_serializeOpDeleteStream) HandleSerialize(ctx context.Co
 
 	cv, err := serializeCBOR_DeleteStreamInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -241,6 +246,7 @@ func (m *smithyRpcv2cbor_serializeOpDeregisterStreamConsumer) HandleSerialize(ct
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -256,12 +262,12 @@ func (m *smithyRpcv2cbor_serializeOpDeregisterStreamConsumer) HandleSerialize(ct
 
 	cv, err := serializeCBOR_DeregisterStreamConsumerInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -283,6 +289,7 @@ func (m *smithyRpcv2cbor_serializeOpDescribeLimits) HandleSerialize(ctx context.
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -298,12 +305,12 @@ func (m *smithyRpcv2cbor_serializeOpDescribeLimits) HandleSerialize(ctx context.
 
 	cv, err := serializeCBOR_DescribeLimitsInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -325,6 +332,7 @@ func (m *smithyRpcv2cbor_serializeOpDescribeStream) HandleSerialize(ctx context.
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -340,12 +348,12 @@ func (m *smithyRpcv2cbor_serializeOpDescribeStream) HandleSerialize(ctx context.
 
 	cv, err := serializeCBOR_DescribeStreamInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -367,6 +375,7 @@ func (m *smithyRpcv2cbor_serializeOpDescribeStreamConsumer) HandleSerialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -382,12 +391,12 @@ func (m *smithyRpcv2cbor_serializeOpDescribeStreamConsumer) HandleSerialize(ctx 
 
 	cv, err := serializeCBOR_DescribeStreamConsumerInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -409,6 +418,7 @@ func (m *smithyRpcv2cbor_serializeOpDescribeStreamSummary) HandleSerialize(ctx c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -424,12 +434,12 @@ func (m *smithyRpcv2cbor_serializeOpDescribeStreamSummary) HandleSerialize(ctx c
 
 	cv, err := serializeCBOR_DescribeStreamSummaryInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -451,6 +461,7 @@ func (m *smithyRpcv2cbor_serializeOpDisableEnhancedMonitoring) HandleSerialize(c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -466,12 +477,12 @@ func (m *smithyRpcv2cbor_serializeOpDisableEnhancedMonitoring) HandleSerialize(c
 
 	cv, err := serializeCBOR_DisableEnhancedMonitoringInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -493,6 +504,7 @@ func (m *smithyRpcv2cbor_serializeOpEnableEnhancedMonitoring) HandleSerialize(ct
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -508,12 +520,12 @@ func (m *smithyRpcv2cbor_serializeOpEnableEnhancedMonitoring) HandleSerialize(ct
 
 	cv, err := serializeCBOR_EnableEnhancedMonitoringInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -535,6 +547,7 @@ func (m *smithyRpcv2cbor_serializeOpGetRecords) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -550,12 +563,12 @@ func (m *smithyRpcv2cbor_serializeOpGetRecords) HandleSerialize(ctx context.Cont
 
 	cv, err := serializeCBOR_GetRecordsInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -577,6 +590,7 @@ func (m *smithyRpcv2cbor_serializeOpGetResourcePolicy) HandleSerialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -592,12 +606,12 @@ func (m *smithyRpcv2cbor_serializeOpGetResourcePolicy) HandleSerialize(ctx conte
 
 	cv, err := serializeCBOR_GetResourcePolicyInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -619,6 +633,7 @@ func (m *smithyRpcv2cbor_serializeOpGetShardIterator) HandleSerialize(ctx contex
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -634,12 +649,12 @@ func (m *smithyRpcv2cbor_serializeOpGetShardIterator) HandleSerialize(ctx contex
 
 	cv, err := serializeCBOR_GetShardIteratorInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -661,6 +676,7 @@ func (m *smithyRpcv2cbor_serializeOpIncreaseStreamRetentionPeriod) HandleSeriali
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -676,12 +692,12 @@ func (m *smithyRpcv2cbor_serializeOpIncreaseStreamRetentionPeriod) HandleSeriali
 
 	cv, err := serializeCBOR_IncreaseStreamRetentionPeriodInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -703,6 +719,7 @@ func (m *smithyRpcv2cbor_serializeOpListShards) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -718,12 +735,12 @@ func (m *smithyRpcv2cbor_serializeOpListShards) HandleSerialize(ctx context.Cont
 
 	cv, err := serializeCBOR_ListShardsInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -745,6 +762,7 @@ func (m *smithyRpcv2cbor_serializeOpListStreamConsumers) HandleSerialize(ctx con
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -760,12 +778,12 @@ func (m *smithyRpcv2cbor_serializeOpListStreamConsumers) HandleSerialize(ctx con
 
 	cv, err := serializeCBOR_ListStreamConsumersInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -787,6 +805,7 @@ func (m *smithyRpcv2cbor_serializeOpListStreams) HandleSerialize(ctx context.Con
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -802,12 +821,12 @@ func (m *smithyRpcv2cbor_serializeOpListStreams) HandleSerialize(ctx context.Con
 
 	cv, err := serializeCBOR_ListStreamsInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -829,6 +848,7 @@ func (m *smithyRpcv2cbor_serializeOpListTagsForStream) HandleSerialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -844,12 +864,12 @@ func (m *smithyRpcv2cbor_serializeOpListTagsForStream) HandleSerialize(ctx conte
 
 	cv, err := serializeCBOR_ListTagsForStreamInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -871,6 +891,7 @@ func (m *smithyRpcv2cbor_serializeOpMergeShards) HandleSerialize(ctx context.Con
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -886,12 +907,12 @@ func (m *smithyRpcv2cbor_serializeOpMergeShards) HandleSerialize(ctx context.Con
 
 	cv, err := serializeCBOR_MergeShardsInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -913,6 +934,7 @@ func (m *smithyRpcv2cbor_serializeOpPutRecord) HandleSerialize(ctx context.Conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -928,12 +950,12 @@ func (m *smithyRpcv2cbor_serializeOpPutRecord) HandleSerialize(ctx context.Conte
 
 	cv, err := serializeCBOR_PutRecordInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -955,6 +977,7 @@ func (m *smithyRpcv2cbor_serializeOpPutRecords) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -970,12 +993,12 @@ func (m *smithyRpcv2cbor_serializeOpPutRecords) HandleSerialize(ctx context.Cont
 
 	cv, err := serializeCBOR_PutRecordsInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -997,6 +1020,7 @@ func (m *smithyRpcv2cbor_serializeOpPutResourcePolicy) HandleSerialize(ctx conte
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1012,12 +1036,12 @@ func (m *smithyRpcv2cbor_serializeOpPutResourcePolicy) HandleSerialize(ctx conte
 
 	cv, err := serializeCBOR_PutResourcePolicyInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -1039,6 +1063,7 @@ func (m *smithyRpcv2cbor_serializeOpRegisterStreamConsumer) HandleSerialize(ctx 
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1054,12 +1079,12 @@ func (m *smithyRpcv2cbor_serializeOpRegisterStreamConsumer) HandleSerialize(ctx 
 
 	cv, err := serializeCBOR_RegisterStreamConsumerInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -1081,6 +1106,7 @@ func (m *smithyRpcv2cbor_serializeOpRemoveTagsFromStream) HandleSerialize(ctx co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1096,12 +1122,12 @@ func (m *smithyRpcv2cbor_serializeOpRemoveTagsFromStream) HandleSerialize(ctx co
 
 	cv, err := serializeCBOR_RemoveTagsFromStreamInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -1123,6 +1149,7 @@ func (m *smithyRpcv2cbor_serializeOpSplitShard) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1138,12 +1165,12 @@ func (m *smithyRpcv2cbor_serializeOpSplitShard) HandleSerialize(ctx context.Cont
 
 	cv, err := serializeCBOR_SplitShardInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -1165,6 +1192,7 @@ func (m *smithyRpcv2cbor_serializeOpStartStreamEncryption) HandleSerialize(ctx c
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1180,12 +1208,12 @@ func (m *smithyRpcv2cbor_serializeOpStartStreamEncryption) HandleSerialize(ctx c
 
 	cv, err := serializeCBOR_StartStreamEncryptionInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -1207,6 +1235,7 @@ func (m *smithyRpcv2cbor_serializeOpStopStreamEncryption) HandleSerialize(ctx co
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1222,12 +1251,12 @@ func (m *smithyRpcv2cbor_serializeOpStopStreamEncryption) HandleSerialize(ctx co
 
 	cv, err := serializeCBOR_StopStreamEncryptionInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -1249,6 +1278,7 @@ func (m *smithyRpcv2cbor_serializeOpSubscribeToShard) HandleSerialize(ctx contex
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1264,12 +1294,12 @@ func (m *smithyRpcv2cbor_serializeOpSubscribeToShard) HandleSerialize(ctx contex
 
 	cv, err := serializeCBOR_SubscribeToShardInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -1291,6 +1321,7 @@ func (m *smithyRpcv2cbor_serializeOpUpdateShardCount) HandleSerialize(ctx contex
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1306,12 +1337,12 @@ func (m *smithyRpcv2cbor_serializeOpUpdateShardCount) HandleSerialize(ctx contex
 
 	cv, err := serializeCBOR_UpdateShardCountInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
@@ -1333,6 +1364,7 @@ func (m *smithyRpcv2cbor_serializeOpUpdateStreamMode) HandleSerialize(ctx contex
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
+	_ = input
 
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
@@ -1348,376 +1380,18 @@ func (m *smithyRpcv2cbor_serializeOpUpdateStreamMode) HandleSerialize(ctx contex
 
 	cv, err := serializeCBOR_UpdateStreamModeInput(input)
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	payload := bytes.NewReader(smithycbor.Encode(cv))
 	if req, err = req.SetStream(payload); err != nil {
-		return out, metadata, &smithy.SerializationError{err}
+		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	in.Request = req
 
 	return next.HandleSerialize(ctx, in)
 }
-func serializeCBOR_RegisterStreamConsumerInput(v *RegisterStreamConsumerInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	if v.ConsumerName != nil {
-		ser, err := serializeCBOR_String(*v.ConsumerName)
-		if err != nil {
-			return nil, err
-		}
-		vm["ConsumerName"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_StopStreamEncryptionInput(v *StopStreamEncryptionInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	serEncryptionType, err := serializeCBOR_EncryptionType(v.EncryptionType)
-	if err != nil {
-		return nil, err
-	}
-	vm["EncryptionType"] = serEncryptionType
-	if v.KeyId != nil {
-		ser, err := serializeCBOR_String(*v.KeyId)
-		if err != nil {
-			return nil, err
-		}
-		vm["KeyId"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_DescribeStreamInput(v *DescribeStreamInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.Limit != nil {
-		ser, err := serializeCBOR_Int32(*v.Limit)
-		if err != nil {
-			return nil, err
-		}
-		vm["Limit"] = ser
-	}
-	if v.ExclusiveStartShardId != nil {
-		ser, err := serializeCBOR_String(*v.ExclusiveStartShardId)
-		if err != nil {
-			return nil, err
-		}
-		vm["ExclusiveStartShardId"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_DescribeStreamConsumerInput(v *DescribeStreamConsumerInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	if v.ConsumerName != nil {
-		ser, err := serializeCBOR_String(*v.ConsumerName)
-		if err != nil {
-			return nil, err
-		}
-		vm["ConsumerName"] = ser
-	}
-	if v.ConsumerARN != nil {
-		ser, err := serializeCBOR_String(*v.ConsumerARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["ConsumerARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_GetRecordsInput(v *GetRecordsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ShardIterator != nil {
-		ser, err := serializeCBOR_String(*v.ShardIterator)
-		if err != nil {
-			return nil, err
-		}
-		vm["ShardIterator"] = ser
-	}
-	if v.Limit != nil {
-		ser, err := serializeCBOR_Int32(*v.Limit)
-		if err != nil {
-			return nil, err
-		}
-		vm["Limit"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_DeleteStreamInput(v *DeleteStreamInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.EnforceConsumerDeletion != nil {
-		ser, err := serializeCBOR_Bool(*v.EnforceConsumerDeletion)
-		if err != nil {
-			return nil, err
-		}
-		vm["EnforceConsumerDeletion"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_PutRecordsInput(v *PutRecordsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Records != nil {
-		ser, err := serializeCBOR_PutRecordsRequestEntryList(v.Records)
-		if err != nil {
-			return nil, err
-		}
-		vm["Records"] = ser
-	}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_ShardIteratorType(v types.ShardIteratorType) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
-
-func serializeCBOR_ListStreamsInput(v *ListStreamsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Limit != nil {
-		ser, err := serializeCBOR_Int32(*v.Limit)
-		if err != nil {
-			return nil, err
-		}
-		vm["Limit"] = ser
-	}
-	if v.ExclusiveStartStreamName != nil {
-		ser, err := serializeCBOR_String(*v.ExclusiveStartStreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["ExclusiveStartStreamName"] = ser
-	}
-	if v.NextToken != nil {
-		ser, err := serializeCBOR_String(*v.NextToken)
-		if err != nil {
-			return nil, err
-		}
-		vm["NextToken"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_PutResourcePolicyInput(v *PutResourcePolicyInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ResourceARN != nil {
-		ser, err := serializeCBOR_String(*v.ResourceARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["ResourceARN"] = ser
-	}
-	if v.Policy != nil {
-		ser, err := serializeCBOR_String(*v.Policy)
-		if err != nil {
-			return nil, err
-		}
-		vm["Policy"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_UpdateStreamModeInput(v *UpdateStreamModeInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	if v.StreamModeDetails != nil {
-		ser, err := serializeCBOR_StreamModeDetails(v.StreamModeDetails)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamModeDetails"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_StartingPosition(v *types.StartingPosition) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	serType, err := serializeCBOR_ShardIteratorType(v.Type)
-	if err != nil {
-		return nil, err
-	}
-	vm["Type"] = serType
-	if v.SequenceNumber != nil {
-		ser, err := serializeCBOR_String(*v.SequenceNumber)
-		if err != nil {
-			return nil, err
-		}
-		vm["SequenceNumber"] = ser
-	}
-	if v.Timestamp != nil {
-		ser, err := serializeCBOR_Time(*v.Timestamp)
-		if err != nil {
-			return nil, err
-		}
-		vm["Timestamp"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_SplitShardInput(v *SplitShardInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.ShardToSplit != nil {
-		ser, err := serializeCBOR_String(*v.ShardToSplit)
-		if err != nil {
-			return nil, err
-		}
-		vm["ShardToSplit"] = ser
-	}
-	if v.NewStartingHashKey != nil {
-		ser, err := serializeCBOR_String(*v.NewStartingHashKey)
-		if err != nil {
-			return nil, err
-		}
-		vm["NewStartingHashKey"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_StreamMode(v types.StreamMode) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
-
-func serializeCBOR_Bool(v bool) (smithycbor.Value, error) {
-	return smithycbor.Bool(v), nil
-}
-
-func serializeCBOR_ShardIdList(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_DeleteResourcePolicyInput(v *DeleteResourcePolicyInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ResourceARN != nil {
-		ser, err := serializeCBOR_String(*v.ResourceARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["ResourceARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_TagKeyList(v []string) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_String(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
 func serializeCBOR_ChildShard(v *types.ChildShard) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.ShardId != nil {
@@ -1744,66 +1418,96 @@ func serializeCBOR_ChildShard(v *types.ChildShard) (smithycbor.Value, error) {
 	return vm, nil
 }
 
-func serializeCBOR_RemoveTagsFromStreamInput(v *RemoveTagsFromStreamInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
+func serializeCBOR_ChildShardList(v []types.ChildShard) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_ChildShard(&v[i])
 		if err != nil {
 			return nil, err
 		}
-		vm["StreamName"] = ser
+		vl = append(vl, ser)
 	}
-	if v.TagKeys != nil {
-		ser, err := serializeCBOR_TagKeyList(v.TagKeys)
-		if err != nil {
-			return nil, err
-		}
-		vm["TagKeys"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
+	return vl, nil
 }
 
-func serializeCBOR_DescribeLimitsInput(v *DescribeLimitsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-
-	return vm, nil
+func serializeCBOR_EncryptionType(v types.EncryptionType) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
 }
 
-func serializeCBOR_SubscribeToShardInput(v *SubscribeToShardInput) (smithycbor.Value, error) {
+func serializeCBOR_HashKeyRange(v *types.HashKeyRange) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
-	if v.ConsumerARN != nil {
-		ser, err := serializeCBOR_String(*v.ConsumerARN)
+	if v.StartingHashKey != nil {
+		ser, err := serializeCBOR_String(*v.StartingHashKey)
 		if err != nil {
 			return nil, err
 		}
-		vm["ConsumerARN"] = ser
+		vm["StartingHashKey"] = ser
 	}
-	if v.ShardId != nil {
-		ser, err := serializeCBOR_String(*v.ShardId)
+	if v.EndingHashKey != nil {
+		ser, err := serializeCBOR_String(*v.EndingHashKey)
 		if err != nil {
 			return nil, err
 		}
-		vm["ShardId"] = ser
-	}
-	if v.StartingPosition != nil {
-		ser, err := serializeCBOR_StartingPosition(v.StartingPosition)
-		if err != nil {
-			return nil, err
-		}
-		vm["StartingPosition"] = ser
+		vm["EndingHashKey"] = ser
 	}
 	return vm, nil
 }
 
 func serializeCBOR_MetricsName(v types.MetricsName) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_MetricsNameList(v []types.MetricsName) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_MetricsName(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_PutRecordsRequestEntry(v *types.PutRecordsRequestEntry) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Data != nil {
+		ser, err := serializeCBOR_Blob(v.Data)
+		if err != nil {
+			return nil, err
+		}
+		vm["Data"] = ser
+	}
+	if v.ExplicitHashKey != nil {
+		ser, err := serializeCBOR_String(*v.ExplicitHashKey)
+		if err != nil {
+			return nil, err
+		}
+		vm["ExplicitHashKey"] = ser
+	}
+	if v.PartitionKey != nil {
+		ser, err := serializeCBOR_String(*v.PartitionKey)
+		if err != nil {
+			return nil, err
+		}
+		vm["PartitionKey"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_PutRecordsRequestEntryList(v []types.PutRecordsRequestEntry) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_PutRecordsRequestEntry(&v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
 }
 
 func serializeCBOR_Record(v *types.Record) (smithycbor.Value, error) {
@@ -1844,42 +1548,178 @@ func serializeCBOR_Record(v *types.Record) (smithycbor.Value, error) {
 	return vm, nil
 }
 
+func serializeCBOR_RecordList(v []types.Record) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_Record(&v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_ScalingType(v types.ScalingType) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_ShardFilter(v *types.ShardFilter) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	serType, err := serializeCBOR_ShardFilterType(v.Type)
+	if err != nil {
+		return nil, err
+	}
+	vm["Type"] = serType
+	if v.ShardId != nil {
+		ser, err := serializeCBOR_String(*v.ShardId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShardId"] = ser
+	}
+	if v.Timestamp != nil {
+		ser, err := serializeCBOR_Time(*v.Timestamp)
+		if err != nil {
+			return nil, err
+		}
+		vm["Timestamp"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ShardFilterType(v types.ShardFilterType) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_ShardIdList(v []string) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_String(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_ShardIteratorType(v types.ShardIteratorType) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_StartingPosition(v *types.StartingPosition) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	serType, err := serializeCBOR_ShardIteratorType(v.Type)
+	if err != nil {
+		return nil, err
+	}
+	vm["Type"] = serType
+	if v.SequenceNumber != nil {
+		ser, err := serializeCBOR_String(*v.SequenceNumber)
+		if err != nil {
+			return nil, err
+		}
+		vm["SequenceNumber"] = ser
+	}
+	if v.Timestamp != nil {
+		ser, err := serializeCBOR_Time(*v.Timestamp)
+		if err != nil {
+			return nil, err
+		}
+		vm["Timestamp"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_StreamMode(v types.StreamMode) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_StreamModeDetails(v *types.StreamModeDetails) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	serStreamMode, err := serializeCBOR_StreamMode(v.StreamMode)
+	if err != nil {
+		return nil, err
+	}
+	vm["StreamMode"] = serStreamMode
+	return vm, nil
+}
+
+func serializeCBOR_SubscribeToShardEvent(v *types.SubscribeToShardEvent) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Records != nil {
+		ser, err := serializeCBOR_RecordList(v.Records)
+		if err != nil {
+			return nil, err
+		}
+		vm["Records"] = ser
+	}
+	if v.ContinuationSequenceNumber != nil {
+		ser, err := serializeCBOR_String(*v.ContinuationSequenceNumber)
+		if err != nil {
+			return nil, err
+		}
+		vm["ContinuationSequenceNumber"] = ser
+	}
+	if v.MillisBehindLatest != nil {
+		ser, err := serializeCBOR_Int64(*v.MillisBehindLatest)
+		if err != nil {
+			return nil, err
+		}
+		vm["MillisBehindLatest"] = ser
+	}
+	if v.ChildShards != nil {
+		ser, err := serializeCBOR_ChildShardList(v.ChildShards)
+		if err != nil {
+			return nil, err
+		}
+		vm["ChildShards"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_TagKeyList(v []string) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_String(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_TagMap(v map[string]string) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	for k, vv := range v {
+
+		ser, err := serializeCBOR_String(vv)
+		if err != nil {
+			return nil, err
+		}
+		vm[k] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_Blob(v []byte) (smithycbor.Value, error) {
+	return smithycbor.Slice(v), nil
+}
+
+func serializeCBOR_Bool(v bool) (smithycbor.Value, error) {
+	return smithycbor.Bool(v), nil
+}
+
 func serializeCBOR_Int32(v int32) (smithycbor.Value, error) {
 	if v < 0 {
 		return smithycbor.NegInt(uint64(-v)), nil
 	}
 	return smithycbor.Uint(uint64(v)), nil
-}
-
-func serializeCBOR_StartStreamEncryptionInput(v *StartStreamEncryptionInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	serEncryptionType, err := serializeCBOR_EncryptionType(v.EncryptionType)
-	if err != nil {
-		return nil, err
-	}
-	vm["EncryptionType"] = serEncryptionType
-	if v.KeyId != nil {
-		ser, err := serializeCBOR_String(*v.KeyId)
-		if err != nil {
-			return nil, err
-		}
-		vm["KeyId"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
 }
 
 func serializeCBOR_Int64(v int64) (smithycbor.Value, error) {
@@ -1893,7 +1733,14 @@ func serializeCBOR_String(v string) (smithycbor.Value, error) {
 	return smithycbor.String(v), nil
 }
 
-func serializeCBOR_UpdateShardCountInput(v *UpdateShardCountInput) (smithycbor.Value, error) {
+func serializeCBOR_Time(v time.Time) (smithycbor.Value, error) {
+	return &smithycbor.Tag{
+		ID:    1,
+		Value: smithycbor.Float64(float64(v.UnixMilli()) / 1000),
+	}, nil
+}
+
+func serializeCBOR_AddTagsToStreamInput(v *AddTagsToStreamInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.StreamName != nil {
 		ser, err := serializeCBOR_String(*v.StreamName)
@@ -1902,18 +1749,13 @@ func serializeCBOR_UpdateShardCountInput(v *UpdateShardCountInput) (smithycbor.V
 		}
 		vm["StreamName"] = ser
 	}
-	if v.TargetShardCount != nil {
-		ser, err := serializeCBOR_Int32(*v.TargetShardCount)
+	if v.Tags != nil {
+		ser, err := serializeCBOR_TagMap(v.Tags)
 		if err != nil {
 			return nil, err
 		}
-		vm["TargetShardCount"] = ser
+		vm["Tags"] = ser
 	}
-	serScalingType, err := serializeCBOR_ScalingType(v.ScalingType)
-	if err != nil {
-		return nil, err
-	}
-	vm["ScalingType"] = serScalingType
 	if v.StreamARN != nil {
 		ser, err := serializeCBOR_String(*v.StreamARN)
 		if err != nil {
@@ -1924,12 +1766,230 @@ func serializeCBOR_UpdateShardCountInput(v *UpdateShardCountInput) (smithycbor.V
 	return vm, nil
 }
 
-func serializeCBOR_ShardFilterType(v types.ShardFilterType) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
+func serializeCBOR_CreateStreamInput(v *CreateStreamInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.ShardCount != nil {
+		ser, err := serializeCBOR_Int32(*v.ShardCount)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShardCount"] = ser
+	}
+	if v.StreamModeDetails != nil {
+		ser, err := serializeCBOR_StreamModeDetails(v.StreamModeDetails)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamModeDetails"] = ser
+	}
+	return vm, nil
 }
 
-func serializeCBOR_ScalingType(v types.ScalingType) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
+func serializeCBOR_DecreaseStreamRetentionPeriodInput(v *DecreaseStreamRetentionPeriodInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.RetentionPeriodHours != nil {
+		ser, err := serializeCBOR_Int32(*v.RetentionPeriodHours)
+		if err != nil {
+			return nil, err
+		}
+		vm["RetentionPeriodHours"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DeleteResourcePolicyInput(v *DeleteResourcePolicyInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ResourceARN != nil {
+		ser, err := serializeCBOR_String(*v.ResourceARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["ResourceARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DeleteStreamInput(v *DeleteStreamInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.EnforceConsumerDeletion != nil {
+		ser, err := serializeCBOR_Bool(*v.EnforceConsumerDeletion)
+		if err != nil {
+			return nil, err
+		}
+		vm["EnforceConsumerDeletion"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DeregisterStreamConsumerInput(v *DeregisterStreamConsumerInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	if v.ConsumerName != nil {
+		ser, err := serializeCBOR_String(*v.ConsumerName)
+		if err != nil {
+			return nil, err
+		}
+		vm["ConsumerName"] = ser
+	}
+	if v.ConsumerARN != nil {
+		ser, err := serializeCBOR_String(*v.ConsumerARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["ConsumerARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeLimitsInput(v *DescribeLimitsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
+func serializeCBOR_DescribeStreamConsumerInput(v *DescribeStreamConsumerInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	if v.ConsumerName != nil {
+		ser, err := serializeCBOR_String(*v.ConsumerName)
+		if err != nil {
+			return nil, err
+		}
+		vm["ConsumerName"] = ser
+	}
+	if v.ConsumerARN != nil {
+		ser, err := serializeCBOR_String(*v.ConsumerARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["ConsumerARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeStreamInput(v *DescribeStreamInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.Limit != nil {
+		ser, err := serializeCBOR_Int32(*v.Limit)
+		if err != nil {
+			return nil, err
+		}
+		vm["Limit"] = ser
+	}
+	if v.ExclusiveStartShardId != nil {
+		ser, err := serializeCBOR_String(*v.ExclusiveStartShardId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ExclusiveStartShardId"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeStreamSummaryInput(v *DescribeStreamSummaryInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DisableEnhancedMonitoringInput(v *DisableEnhancedMonitoringInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.ShardLevelMetrics != nil {
+		ser, err := serializeCBOR_MetricsNameList(v.ShardLevelMetrics)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShardLevelMetrics"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
 }
 
 func serializeCBOR_EnableEnhancedMonitoringInput(v *EnableEnhancedMonitoringInput) (smithycbor.Value, error) {
@@ -1954,6 +2014,44 @@ func serializeCBOR_EnableEnhancedMonitoringInput(v *EnableEnhancedMonitoringInpu
 			return nil, err
 		}
 		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_GetRecordsInput(v *GetRecordsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ShardIterator != nil {
+		ser, err := serializeCBOR_String(*v.ShardIterator)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShardIterator"] = ser
+	}
+	if v.Limit != nil {
+		ser, err := serializeCBOR_Int32(*v.Limit)
+		if err != nil {
+			return nil, err
+		}
+		vm["Limit"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_GetResourcePolicyInput(v *GetResourcePolicyInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ResourceARN != nil {
+		ser, err := serializeCBOR_String(*v.ResourceARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["ResourceARN"] = ser
 	}
 	return vm, nil
 }
@@ -2029,204 +2127,6 @@ func serializeCBOR_IncreaseStreamRetentionPeriodInput(v *IncreaseStreamRetention
 	return vm, nil
 }
 
-func serializeCBOR_ListTagsForStreamInput(v *ListTagsForStreamInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.ExclusiveStartTagKey != nil {
-		ser, err := serializeCBOR_String(*v.ExclusiveStartTagKey)
-		if err != nil {
-			return nil, err
-		}
-		vm["ExclusiveStartTagKey"] = ser
-	}
-	if v.Limit != nil {
-		ser, err := serializeCBOR_Int32(*v.Limit)
-		if err != nil {
-			return nil, err
-		}
-		vm["Limit"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_DeregisterStreamConsumerInput(v *DeregisterStreamConsumerInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	if v.ConsumerName != nil {
-		ser, err := serializeCBOR_String(*v.ConsumerName)
-		if err != nil {
-			return nil, err
-		}
-		vm["ConsumerName"] = ser
-	}
-	if v.ConsumerARN != nil {
-		ser, err := serializeCBOR_String(*v.ConsumerARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["ConsumerARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_TagMap(v map[string]string) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	for k, vv := range v {
-
-		ser, err := serializeCBOR_String(vv)
-		if err != nil {
-			return nil, err
-		}
-		vm[k] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_CreateStreamInput(v *CreateStreamInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.ShardCount != nil {
-		ser, err := serializeCBOR_Int32(*v.ShardCount)
-		if err != nil {
-			return nil, err
-		}
-		vm["ShardCount"] = ser
-	}
-	if v.StreamModeDetails != nil {
-		ser, err := serializeCBOR_StreamModeDetails(v.StreamModeDetails)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamModeDetails"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_Blob(v []byte) (smithycbor.Value, error) {
-	return smithycbor.Slice(v), nil
-}
-
-func serializeCBOR_MetricsNameList(v []types.MetricsName) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_MetricsName(v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_RecordList(v []types.Record) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_Record(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_GetResourcePolicyInput(v *GetResourcePolicyInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.ResourceARN != nil {
-		ser, err := serializeCBOR_String(*v.ResourceARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["ResourceARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_AddTagsToStreamInput(v *AddTagsToStreamInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.Tags != nil {
-		ser, err := serializeCBOR_TagMap(v.Tags)
-		if err != nil {
-			return nil, err
-		}
-		vm["Tags"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_PutRecordsRequestEntryList(v []types.PutRecordsRequestEntry) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_PutRecordsRequestEntry(&v[i])
-		if err != nil {
-			return nil, err
-		}
-		vl = append(vl, ser)
-	}
-	return vl, nil
-}
-
-func serializeCBOR_DescribeStreamSummaryInput(v *DescribeStreamSummaryInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
 func serializeCBOR_ListShardsInput(v *ListShardsInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.StreamName != nil {
@@ -2281,188 +2181,6 @@ func serializeCBOR_ListShardsInput(v *ListShardsInput) (smithycbor.Value, error)
 	return vm, nil
 }
 
-func serializeCBOR_ShardFilter(v *types.ShardFilter) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	serType, err := serializeCBOR_ShardFilterType(v.Type)
-	if err != nil {
-		return nil, err
-	}
-	vm["Type"] = serType
-	if v.ShardId != nil {
-		ser, err := serializeCBOR_String(*v.ShardId)
-		if err != nil {
-			return nil, err
-		}
-		vm["ShardId"] = ser
-	}
-	if v.Timestamp != nil {
-		ser, err := serializeCBOR_Time(*v.Timestamp)
-		if err != nil {
-			return nil, err
-		}
-		vm["Timestamp"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_StreamModeDetails(v *types.StreamModeDetails) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	serStreamMode, err := serializeCBOR_StreamMode(v.StreamMode)
-	if err != nil {
-		return nil, err
-	}
-	vm["StreamMode"] = serStreamMode
-	return vm, nil
-}
-
-func serializeCBOR_DisableEnhancedMonitoringInput(v *DisableEnhancedMonitoringInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.ShardLevelMetrics != nil {
-		ser, err := serializeCBOR_MetricsNameList(v.ShardLevelMetrics)
-		if err != nil {
-			return nil, err
-		}
-		vm["ShardLevelMetrics"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_EncryptionType(v types.EncryptionType) (smithycbor.Value, error) {
-	return smithycbor.String(string(v)), nil
-}
-
-func serializeCBOR_DecreaseStreamRetentionPeriodInput(v *DecreaseStreamRetentionPeriodInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.RetentionPeriodHours != nil {
-		ser, err := serializeCBOR_Int32(*v.RetentionPeriodHours)
-		if err != nil {
-			return nil, err
-		}
-		vm["RetentionPeriodHours"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_HashKeyRange(v *types.HashKeyRange) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StartingHashKey != nil {
-		ser, err := serializeCBOR_String(*v.StartingHashKey)
-		if err != nil {
-			return nil, err
-		}
-		vm["StartingHashKey"] = ser
-	}
-	if v.EndingHashKey != nil {
-		ser, err := serializeCBOR_String(*v.EndingHashKey)
-		if err != nil {
-			return nil, err
-		}
-		vm["EndingHashKey"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_SubscribeToShardEvent(v *types.SubscribeToShardEvent) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Records != nil {
-		ser, err := serializeCBOR_RecordList(v.Records)
-		if err != nil {
-			return nil, err
-		}
-		vm["Records"] = ser
-	}
-	if v.ContinuationSequenceNumber != nil {
-		ser, err := serializeCBOR_String(*v.ContinuationSequenceNumber)
-		if err != nil {
-			return nil, err
-		}
-		vm["ContinuationSequenceNumber"] = ser
-	}
-	if v.MillisBehindLatest != nil {
-		ser, err := serializeCBOR_Int64(*v.MillisBehindLatest)
-		if err != nil {
-			return nil, err
-		}
-		vm["MillisBehindLatest"] = ser
-	}
-	if v.ChildShards != nil {
-		ser, err := serializeCBOR_ChildShardList(v.ChildShards)
-		if err != nil {
-			return nil, err
-		}
-		vm["ChildShards"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_Time(v time.Time) (smithycbor.Value, error) {
-	return &smithycbor.Tag{
-		ID:    1,
-		Value: smithycbor.Float64(float64(v.UnixMilli()) / 1000),
-	}, nil
-}
-
-func serializeCBOR_MergeShardsInput(v *MergeShardsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StreamName != nil {
-		ser, err := serializeCBOR_String(*v.StreamName)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamName"] = ser
-	}
-	if v.ShardToMerge != nil {
-		ser, err := serializeCBOR_String(*v.ShardToMerge)
-		if err != nil {
-			return nil, err
-		}
-		vm["ShardToMerge"] = ser
-	}
-	if v.AdjacentShardToMerge != nil {
-		ser, err := serializeCBOR_String(*v.AdjacentShardToMerge)
-		if err != nil {
-			return nil, err
-		}
-		vm["AdjacentShardToMerge"] = ser
-	}
-	if v.StreamARN != nil {
-		ser, err := serializeCBOR_String(*v.StreamARN)
-		if err != nil {
-			return nil, err
-		}
-		vm["StreamARN"] = ser
-	}
-	return vm, nil
-}
-
 func serializeCBOR_ListStreamConsumersInput(v *ListStreamConsumersInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.StreamARN != nil {
@@ -2496,43 +2214,96 @@ func serializeCBOR_ListStreamConsumersInput(v *ListStreamConsumersInput) (smithy
 	return vm, nil
 }
 
-func serializeCBOR_PutRecordsRequestEntry(v *types.PutRecordsRequestEntry) (smithycbor.Value, error) {
+func serializeCBOR_ListStreamsInput(v *ListStreamsInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
-	if v.Data != nil {
-		ser, err := serializeCBOR_Blob(v.Data)
+	if v.Limit != nil {
+		ser, err := serializeCBOR_Int32(*v.Limit)
 		if err != nil {
 			return nil, err
 		}
-		vm["Data"] = ser
+		vm["Limit"] = ser
 	}
-	if v.ExplicitHashKey != nil {
-		ser, err := serializeCBOR_String(*v.ExplicitHashKey)
+	if v.ExclusiveStartStreamName != nil {
+		ser, err := serializeCBOR_String(*v.ExclusiveStartStreamName)
 		if err != nil {
 			return nil, err
 		}
-		vm["ExplicitHashKey"] = ser
+		vm["ExclusiveStartStreamName"] = ser
 	}
-	if v.PartitionKey != nil {
-		ser, err := serializeCBOR_String(*v.PartitionKey)
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
 		if err != nil {
 			return nil, err
 		}
-		vm["PartitionKey"] = ser
+		vm["NextToken"] = ser
 	}
 	return vm, nil
 }
 
-func serializeCBOR_ChildShardList(v []types.ChildShard) (smithycbor.Value, error) {
-	vl := smithycbor.List{}
-	for i := range v {
-
-		ser, err := serializeCBOR_ChildShard(&v[i])
+func serializeCBOR_ListTagsForStreamInput(v *ListTagsForStreamInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
 		if err != nil {
 			return nil, err
 		}
-		vl = append(vl, ser)
+		vm["StreamName"] = ser
 	}
-	return vl, nil
+	if v.ExclusiveStartTagKey != nil {
+		ser, err := serializeCBOR_String(*v.ExclusiveStartTagKey)
+		if err != nil {
+			return nil, err
+		}
+		vm["ExclusiveStartTagKey"] = ser
+	}
+	if v.Limit != nil {
+		ser, err := serializeCBOR_Int32(*v.Limit)
+		if err != nil {
+			return nil, err
+		}
+		vm["Limit"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_MergeShardsInput(v *MergeShardsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.ShardToMerge != nil {
+		ser, err := serializeCBOR_String(*v.ShardToMerge)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShardToMerge"] = ser
+	}
+	if v.AdjacentShardToMerge != nil {
+		ser, err := serializeCBOR_String(*v.AdjacentShardToMerge)
+		if err != nil {
+			return nil, err
+		}
+		vm["AdjacentShardToMerge"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
 }
 
 func serializeCBOR_PutRecordInput(v *PutRecordInput) (smithycbor.Value, error) {
@@ -2578,6 +2349,267 @@ func serializeCBOR_PutRecordInput(v *PutRecordInput) (smithycbor.Value, error) {
 			return nil, err
 		}
 		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_PutRecordsInput(v *PutRecordsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Records != nil {
+		ser, err := serializeCBOR_PutRecordsRequestEntryList(v.Records)
+		if err != nil {
+			return nil, err
+		}
+		vm["Records"] = ser
+	}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_PutResourcePolicyInput(v *PutResourcePolicyInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ResourceARN != nil {
+		ser, err := serializeCBOR_String(*v.ResourceARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["ResourceARN"] = ser
+	}
+	if v.Policy != nil {
+		ser, err := serializeCBOR_String(*v.Policy)
+		if err != nil {
+			return nil, err
+		}
+		vm["Policy"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RegisterStreamConsumerInput(v *RegisterStreamConsumerInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	if v.ConsumerName != nil {
+		ser, err := serializeCBOR_String(*v.ConsumerName)
+		if err != nil {
+			return nil, err
+		}
+		vm["ConsumerName"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RemoveTagsFromStreamInput(v *RemoveTagsFromStreamInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.TagKeys != nil {
+		ser, err := serializeCBOR_TagKeyList(v.TagKeys)
+		if err != nil {
+			return nil, err
+		}
+		vm["TagKeys"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_SplitShardInput(v *SplitShardInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.ShardToSplit != nil {
+		ser, err := serializeCBOR_String(*v.ShardToSplit)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShardToSplit"] = ser
+	}
+	if v.NewStartingHashKey != nil {
+		ser, err := serializeCBOR_String(*v.NewStartingHashKey)
+		if err != nil {
+			return nil, err
+		}
+		vm["NewStartingHashKey"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_StartStreamEncryptionInput(v *StartStreamEncryptionInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	serEncryptionType, err := serializeCBOR_EncryptionType(v.EncryptionType)
+	if err != nil {
+		return nil, err
+	}
+	vm["EncryptionType"] = serEncryptionType
+	if v.KeyId != nil {
+		ser, err := serializeCBOR_String(*v.KeyId)
+		if err != nil {
+			return nil, err
+		}
+		vm["KeyId"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_StopStreamEncryptionInput(v *StopStreamEncryptionInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	serEncryptionType, err := serializeCBOR_EncryptionType(v.EncryptionType)
+	if err != nil {
+		return nil, err
+	}
+	vm["EncryptionType"] = serEncryptionType
+	if v.KeyId != nil {
+		ser, err := serializeCBOR_String(*v.KeyId)
+		if err != nil {
+			return nil, err
+		}
+		vm["KeyId"] = ser
+	}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_SubscribeToShardInput(v *SubscribeToShardInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ConsumerARN != nil {
+		ser, err := serializeCBOR_String(*v.ConsumerARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["ConsumerARN"] = ser
+	}
+	if v.ShardId != nil {
+		ser, err := serializeCBOR_String(*v.ShardId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShardId"] = ser
+	}
+	if v.StartingPosition != nil {
+		ser, err := serializeCBOR_StartingPosition(v.StartingPosition)
+		if err != nil {
+			return nil, err
+		}
+		vm["StartingPosition"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_UpdateShardCountInput(v *UpdateShardCountInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamName != nil {
+		ser, err := serializeCBOR_String(*v.StreamName)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamName"] = ser
+	}
+	if v.TargetShardCount != nil {
+		ser, err := serializeCBOR_Int32(*v.TargetShardCount)
+		if err != nil {
+			return nil, err
+		}
+		vm["TargetShardCount"] = ser
+	}
+	serScalingType, err := serializeCBOR_ScalingType(v.ScalingType)
+	if err != nil {
+		return nil, err
+	}
+	vm["ScalingType"] = serScalingType
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_UpdateStreamModeInput(v *UpdateStreamModeInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StreamARN != nil {
+		ser, err := serializeCBOR_String(*v.StreamARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamARN"] = ser
+	}
+	if v.StreamModeDetails != nil {
+		ser, err := serializeCBOR_StreamModeDetails(v.StreamModeDetails)
+		if err != nil {
+			return nil, err
+		}
+		vm["StreamModeDetails"] = ser
 	}
 	return vm, nil
 }

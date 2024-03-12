@@ -26,6 +26,8 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 }
 
 type SimpleScalarPropertiesInput struct {
+	BlobValue []byte
+
 	ByteValue *int8
 
 	DoubleValue *float64
@@ -48,6 +50,8 @@ type SimpleScalarPropertiesInput struct {
 }
 
 type SimpleScalarPropertiesOutput struct {
+	BlobValue []byte
+
 	ByteValue *int8
 
 	DoubleValue *float64

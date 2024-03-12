@@ -8,8 +8,6 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
-        "api_op_DefaultFieldInputOutput.go",
-        "api_op_DefaultFieldInputOutput_test.go",
         "api_op_EmptyInputOutput.go",
         "api_op_EmptyInputOutput_test.go",
         "api_op_FractionalSeconds.go",
@@ -18,6 +16,8 @@
         "api_op_GreetingWithErrors_test.go",
         "api_op_NoInputOutput.go",
         "api_op_NoInputOutput_test.go",
+        "api_op_OperationWithDefaults.go",
+        "api_op_OperationWithDefaults_test.go",
         "api_op_OptionalInputOutput.go",
         "api_op_OptionalInputOutput_test.go",
         "api_op_RecursiveShapes.go",
