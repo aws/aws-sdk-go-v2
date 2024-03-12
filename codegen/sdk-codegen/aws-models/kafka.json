@@ -7145,6 +7145,41 @@
                 "smithy.api#documentation": "<p>Summarized information of replication between clusters.</p>"
             }
         },
+        "com.amazonaws.kafka#ReplicationStartingPosition": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.kafka#ReplicationStartingPositionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of replication starting position.</p>",
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for specifying the position in the topics to start replicating from.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicationStartingPositionType": {
+            "type": "enum",
+            "members": {
+                "LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST"
+                    }
+                },
+                "EARLIEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EARLIEST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of replication starting position.</p>"
+            }
+        },
         "com.amazonaws.kafka#ReplicationStateInfo": {
             "type": "structure",
             "members": {
@@ -7651,6 +7686,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to periodically check for new topics and partitions.</p>",
                         "smithy.api#jsonName": "detectAndCopyNewTopics"
+                    }
+                },
+                "StartingPosition": {
+                    "target": "com.amazonaws.kafka#ReplicationStartingPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for specifying the position in the topics to start replicating from.</p>",
+                        "smithy.api#jsonName": "startingPosition"
                     }
                 },
                 "TopicsToExclude": {

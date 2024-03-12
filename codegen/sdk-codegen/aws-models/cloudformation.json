@@ -3038,13 +3038,13 @@
                 "TemplateBody": {
                     "target": "com.amazonaws.cloudformation#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200\n   bytes. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the\n   CloudFormation User Guide.</p>\n         <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.</p>"
+                        "smithy.api#documentation": "<p>The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200\n   bytes. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the\n   <i>CloudFormation User Guide</i>.</p>\n         <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.</p>"
                     }
                 },
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the file that contains the template body. The URL must point to a template (maximum size:\n   460,800 bytes) that's located in an Amazon S3 bucket or a Systems Manager document. For more information, see\n   <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n   in the CloudFormation User Guide.</p>\n         <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.</p>"
+                        "smithy.api#documentation": "<p>The location of the file that contains the template body. The URL must point to a template (maximum size:\n   460,800 bytes) that's located in an Amazon S3 bucket or a Systems Manager document. For more information, see\n   <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n   in the <i>CloudFormation User Guide</i>.</p>\n         <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter, but not both.</p>"
                     }
                 },
                 "StackId": {
@@ -4434,7 +4434,7 @@
                 "target": "com.amazonaws.cloudformation#DescribeStackEventsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns all stack related events for a specified stack in reverse chronological order. For more information\n   about a stack's event history, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html\">Stacks</a> in the\n   <i>CloudFormation User Guide</i>.</p>\n         <note>\n            <p>You can list events for stacks that have failed to create or have been deleted by specifying the unique stack\n    identifier (stack ID).</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns all stack related events for a specified stack in reverse chronological order. For more information\n   about a stack's event history, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html\">CloudFormation stack creation\n   events</a> in the <i>CloudFormation User Guide</i>.</p>\n         <note>\n            <p>You can list events for stacks that have failed to create or have been deleted by specifying the unique stack\n    identifier (stack ID).</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4861,7 +4861,7 @@
                 "target": "com.amazonaws.cloudformation#DescribeStacksOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description\n   for all the stacks created.</p>\n         <note>\n            <p>If the stack doesn't exist, a <code>ValidationError</code> is returned.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns the description for the specified stack; if no stack name was specified, then it returns the description\n   for all the stacks created. For more information about a stack's event history, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html\">CloudFormation stack creation\n   events</a> in the <i>CloudFormation User Guide</i>.</p>\n         <note>\n            <p>If the stack doesn't exist, a <code>ValidationError</code> is returned.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -10561,7 +10561,7 @@
                 "RequiresRecreation": {
                     "target": "com.amazonaws.cloudformation#RequiresRecreation",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the <code>Attribute</code> value is <code>Properties</code>, indicates whether a change to this property\n   causes the resource to be recreated. The value can be <code>Never</code>, <code>Always</code>, or\n   <code>Conditionally</code>. To determine the conditions for a <code>Conditionally</code> recreation, see the update\n   behavior for that <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">property</a> in the\n   CloudFormation User Guide.</p>"
+                        "smithy.api#documentation": "<p>If the <code>Attribute</code> value is <code>Properties</code>, indicates whether a change to this property\n   causes the resource to be recreated. The value can be <code>Never</code>, <code>Always</code>, or\n   <code>Conditionally</code>. To determine the conditions for a <code>Conditionally</code> recreation, see the update\n   behavior for that <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">property</a> in the\n   <i>CloudFormation User Guide</i>.</p>"
                     }
                 }
             },
@@ -10576,7 +10576,7 @@
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The type of resource to import into your stack, such as <code>AWS::S3::Bucket</code>. For a list of supported\n   resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html\">Resources that support import\n   operations</a> in the CloudFormation User Guide.</p>",
+                        "smithy.api#documentation": "<p>The type of resource to import into your stack, such as <code>AWS::S3::Bucket</code>. For a list of supported\n   resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html\">Resources that support import\n   operations</a> in the <i>CloudFormation User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11462,7 +11462,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of resource. (For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the CloudFormation User Guide.)</p>"
+                        "smithy.api#documentation": "<p>Type of resource. (For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the <i>CloudFormation User Guide</i>.)</p>"
                     }
                 },
                 "Timestamp": {
@@ -11649,7 +11649,7 @@
                 "DetailedStatus": {
                     "target": "com.amazonaws.cloudformation#StackInstanceDetailedStatus",
                     "traits": {
-                        "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <code>CANCELLED</code>: The operation in the specified account and Region has been canceled. This is either\n     because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has\n     been exceeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation in the specified account and Region failed. If the stack set operation\n     fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be\n     exceeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_IMPORT</code>: The import of the stack instance in the specified account and Region failed and\n     left the stack in an unstable state. Once the issues causing the failure are fixed, the import operation can be\n     retried. If enough stack set operations fail in enough accounts within a Region, the failure tolerance for the\n     stack set operation as a whole might be exceeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an\n     unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might\n     need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to\n     <code>true</code>, to delete the stack instance, and then delete the stack manually.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code>: The operation in the specified account and Region has yet to start.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation in the specified account and Region is currently in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIPPED_SUSPENDED_ACCOUNT</code>: The operation in the specified account and Region has been skipped\n     because the account was suspended at the time of the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation in the specified account and Region completed successfully.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <code>CANCELLED</code>: The operation in the specified account and Region has been canceled. This is either\n     because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has\n     been exceeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation in the specified account and Region failed. If the stack set operation\n     fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be\n     exceeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an\n     unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might\n     need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to\n     <code>true</code>, to delete the stack instance, and then delete the stack manually.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code>: The operation in the specified account and Region has yet to start.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation in the specified account and Region is currently in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIPPED_SUSPENDED_ACCOUNT</code>: The operation in the specified account and Region has been skipped\n     because the account was suspended at the time of the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation in the specified account and Region completed successfully.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -11833,7 +11833,7 @@
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the CloudFormation User Guide.</p>",
+                        "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the <i>CloudFormation User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12065,7 +12065,7 @@
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the CloudFormation User Guide.</p>",
+                        "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the <i>CloudFormation User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12147,7 +12147,7 @@
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the CloudFormation User Guide.</p>",
+                        "smithy.api#documentation": "<p>Type of resource. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the <i>CloudFormation User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12182,7 +12182,7 @@
                 "Metadata": {
                     "target": "com.amazonaws.cloudformation#Metadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the <code>Metadata</code> attribute declared for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html\">Metadata Attribute</a>\n   in the CloudFormation User Guide.</p>"
+                        "smithy.api#documentation": "<p>The content of the <code>Metadata</code> attribute declared for the resource. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html\">Metadata Attribute</a>\n   in the <i>CloudFormation User Guide</i>.</p>"
                     }
                 },
                 "DriftInformation": {
@@ -12404,7 +12404,7 @@
                     "target": "com.amazonaws.cloudformation#ResourceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Type of resource. (For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the CloudFormation User Guide.)</p>",
+                        "smithy.api#documentation": "<p>Type of resource. (For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services Resource Types\n   Reference</a> in the <i>CloudFormation User Guide</i>.)</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12750,7 +12750,7 @@
                 "Status": {
                     "target": "com.amazonaws.cloudformation#StackSetOperationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that\n     you've set for an operation is applied for each Region during stack create and update operations. If the number of\n     failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to\n     <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and CloudFormation cancels the operation in any remaining Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that require a sequence of\n     operations, the operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status\n     codes</a> in the CloudFormation User Guide.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation is currently being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>: The user has canceled the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: The operation is in the process of stopping, at user request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without\n     exceeding the failure tolerance for the operation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that\n     you've set for an operation is applied for each Region during stack create and update operations. If the number of\n     failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to\n     <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and CloudFormation cancels the operation in any remaining Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that require a sequence of\n     operations, the operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status\n     codes</a> in the <i>CloudFormation User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation is currently being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>: The user has canceled the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: The operation is in the process of stopping, at user request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without\n     exceeding the failure tolerance for the operation.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "OperationPreferences": {
@@ -12798,7 +12798,7 @@
                 "StackSetDriftDetectionDetails": {
                     "target": "com.amazonaws.cloudformation#StackSetDriftDetectionDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Detailed information about the drift status of the stack set. This includes information about drift operations\n   currently being performed on the stack set.</p>\n         <p>This information will only be present for stack set operations whose <code>Action</code> type is\n   <code>DETECT_DRIFT</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html\">Detecting Unmanaged Changes in Stack Sets</a> in\n   the CloudFormation User Guide.</p>"
+                        "smithy.api#documentation": "<p>Detailed information about the drift status of the stack set. This includes information about drift operations\n   currently being performed on the stack set.</p>\n         <p>This information will only be present for stack set operations whose <code>Action</code> type is\n   <code>DETECT_DRIFT</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html\">Detecting Unmanaged Changes in Stack Sets</a> in\n   the <i>CloudFormation User Guide</i>.</p>"
                     }
                 },
                 "StatusReason": {
@@ -13064,7 +13064,7 @@
                 "Status": {
                     "target": "com.amazonaws.cloudformation#StackSetOperationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The overall status of the operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that\n     you've set for an operation is applied for each Region during stack create and update operations. If the number of\n     failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to\n     <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and CloudFormation cancels the operation in any remaining Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that require a sequence of\n     operations, the operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status\n     codes</a> in the CloudFormation User Guide.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation is currently being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>: The user has canceled the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: The operation is in the process of stopping, at user request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without\n     exceeding the failure tolerance for the operation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The overall status of the operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation exceeded the specified failure tolerance. The failure tolerance value that\n     you've set for an operation is applied for each Region during stack create and update operations. If the number of\n     failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to\n     <code>FAILED</code>. This in turn sets the status of the operation as a whole to <code>FAILED</code>, and CloudFormation cancels the operation in any remaining Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that require a sequence of\n     operations, the operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status\n     codes</a> in the <i>CloudFormation User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation is currently being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>: The user has canceled the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: The operation is in the process of stopping, at user request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation completed creating or updating all the specified stacks without\n     exceeding the failure tolerance for the operation.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CreationTimestamp": {
@@ -14936,13 +14936,13 @@
                 "TemplateBody": {
                     "target": "com.amazonaws.cloudformation#TemplateBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200\n   bytes. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the\n   CloudFormation User Guide.</p>\n         <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code> or\n   <code>TemplateURL</code>—or set <code>UsePreviousTemplate</code> to true.</p>"
+                        "smithy.api#documentation": "<p>The structure that contains the template body, with a minimum length of 1 byte and a maximum length of 51,200\n   bytes. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a> in the\n   <i>CloudFormation User Guide</i>.</p>\n         <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code> or\n   <code>TemplateURL</code>—or set <code>UsePreviousTemplate</code> to true.</p>"
                     }
                 },
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the file that contains the template body. The URL must point to a template (maximum size:\n   460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information,\n   see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template\n   Anatomy</a> in the CloudFormation User Guide.</p>\n         <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code> or\n   <code>TemplateURL</code>—or set <code>UsePreviousTemplate</code> to true.</p>"
+                        "smithy.api#documentation": "<p>The location of the file that contains the template body. The URL must point to a template (maximum size:\n   460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document. For more information,\n   see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template\n   Anatomy</a> in the <i>CloudFormation User Guide</i>.</p>\n         <p>Conditional: You must specify only one of the following parameters: <code>TemplateBody</code> or\n   <code>TemplateURL</code>—or set <code>UsePreviousTemplate</code> to true.</p>"
                     }
                 },
                 "UsePreviousTemplate": {
