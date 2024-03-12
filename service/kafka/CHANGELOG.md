@@ -1,3 +1,7 @@
+# v1.31.0 (2024-03-12)
+
+* **Feature**: Added support for specifying the starting position of topic replication in MSK-Replicator.
+
 # v1.30.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

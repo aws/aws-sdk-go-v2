@@ -1,3 +1,7 @@
+# v1.93.0 (2024-03-12)
+
+* **Feature**: This release increases MaxResults limit to 500 in request for SearchUsers, SearchQueues and SearchRoutingProfiles APIs of Amazon Connect.
+
 # v1.92.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

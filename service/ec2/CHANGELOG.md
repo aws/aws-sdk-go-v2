@@ -1,3 +1,7 @@
+# v1.150.1 (2024-03-12)
+
+* **Documentation**: Documentation updates for Amazon EC2.
+
 # v1.150.0 (2024-03-07)
 
 * **Feature**: This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation.

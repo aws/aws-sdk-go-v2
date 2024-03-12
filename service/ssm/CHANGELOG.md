@@ -1,3 +1,7 @@
+# v1.49.3 (2024-03-12)
+
+* **Documentation**: March 2024 doc-only updates for Systems Manager.
+
 # v1.49.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

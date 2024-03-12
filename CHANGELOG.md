@@ -1,3 +1,17 @@
+# Release (2024-03-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.47.2](service/cloudformation/CHANGELOG.md#v1472-2024-03-12)
+  * **Documentation**: CloudFormation documentation update for March, 2024
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.93.0](service/connect/CHANGELOG.md#v1930-2024-03-12)
+  * **Feature**: This release increases MaxResults limit to 500 in request for SearchUsers, SearchQueues and SearchRoutingProfiles APIs of Amazon Connect.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.150.1](service/ec2/CHANGELOG.md#v11501-2024-03-12)
+  * **Documentation**: Documentation updates for Amazon EC2.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.31.0](service/kafka/CHANGELOG.md#v1310-2024-03-12)
+  * **Feature**: Added support for specifying the starting position of topic replication in MSK-Replicator.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.49.3](service/ssm/CHANGELOG.md#v1493-2024-03-12)
+  * **Documentation**: March 2024 doc-only updates for Systems Manager.
+
 # Release (2024-03-11)
 
 ## Module Highlights

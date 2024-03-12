@@ -1,3 +1,7 @@
+# v1.47.2 (2024-03-12)
+
+* **Documentation**: CloudFormation documentation update for March, 2024
+
 # v1.47.1 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.
