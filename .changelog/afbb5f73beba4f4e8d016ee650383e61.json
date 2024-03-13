@@ -1,8 +1,0 @@
-{
-    "id": "afbb5f73-beba-4f4e-8d01-6ee650383e61",
-    "type": "feature",
-    "description": "This release makes the default option for S3 on Outposts request signing to use the SigV4A algorithm when using AWS Common Runtime (CRT).",
-    "modules": [
-        "service/s3"
-    ]
-}

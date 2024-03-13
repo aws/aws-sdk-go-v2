@@ -1,3 +1,7 @@
+# v1.12.0 (2024-03-13)
+
+* **Feature**: adds support for multiple new composition layout configuration options (grid, pip)
+
 # v1.11.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

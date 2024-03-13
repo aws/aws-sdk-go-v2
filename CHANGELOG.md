@@ -1,3 +1,16 @@
+# Release (2024-03-13)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.12.0](service/ivsrealtime/CHANGELOG.md#v1120-2024-03-13)
+  * **Feature**: adds support for multiple new composition layout configuration options (grid, pip)
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.24.0](service/kinesisanalyticsv2/CHANGELOG.md#v1240-2024-03-13)
+  * **Feature**: Support new RuntimeEnvironmentUpdate parameter within UpdateApplication API allowing callers to change the Flink version upon which their application runs.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.52.0](service/s3/CHANGELOG.md#v1520-2024-03-13)
+  * **Feature**: This release makes the default option for S3 on Outposts request signing to use the SigV4A algorithm when using AWS Common Runtime (CRT).
+
 # Release (2024-03-12)
 
 ## Module Highlights

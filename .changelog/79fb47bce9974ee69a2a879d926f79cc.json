@@ -1,8 +1,0 @@
-{
-    "id": "79fb47bc-e997-4ee6-9a2a-879d926f79cc",
-    "type": "feature",
-    "description": "adds support for multiple new composition layout configuration options (grid, pip)",
-    "modules": [
-        "service/ivsrealtime"
-    ]
-}
