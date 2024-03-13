@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Kinesis Data Analytics application. For information about creating a
-// Kinesis Data Analytics application, see Creating an Application (https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html)
+// Creates a Managed Service for Apache Flink application. For information about
+// creating a Managed Service for Apache Flink application, see Creating an
+// Application (https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html)
 // .
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
@@ -53,9 +54,9 @@ type CreateApplicationInput struct {
 	// A summary description of the application.
 	ApplicationDescription *string
 
-	// Use the STREAMING mode to create a Kinesis Data Analytics For Flink
-	// application. To create a Kinesis Data Analytics Studio notebook, use the
-	// INTERACTIVE mode.
+	// Use the STREAMING mode to create a Managed Service for Apache Flink
+	// application. To create a Managed Service for Apache Flink Studio notebook, use
+	// the INTERACTIVE mode.
 	ApplicationMode types.ApplicationMode
 
 	// Use this parameter to configure an Amazon CloudWatch log stream to monitor
@@ -74,8 +75,8 @@ type CreateApplicationInput struct {
 
 type CreateApplicationOutput struct {
 
-	// In response to your CreateApplication request, Kinesis Data Analytics returns a
-	// response with details of the application it created.
+	// In response to your CreateApplication request, Managed Service for Apache Flink
+	// returns a response with details of the application it created.
 	//
 	// This member is required.
 	ApplicationDetail *types.ApplicationDetail

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specific Kinesis Data Analytics application. If you
-// want to retrieve a list of all applications in your account, use the
-// ListApplications operation.
+// Returns information about a specific Managed Service for Apache Flink
+// application. If you want to retrieve a list of all applications in your account,
+// use the ListApplications operation.
 func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplicationInput, optFns ...func(*Options)) (*DescribeApplicationOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInput{}
@@ -36,8 +36,8 @@ type DescribeApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Displays verbose information about a Kinesis Data Analytics application,
-	// including the application's job plan.
+	// Displays verbose information about a Managed Service for Apache Flink
+	// application, including the application's job plan.
 	IncludeAdditionalDetails *bool
 
 	noSmithyDocumentSerde

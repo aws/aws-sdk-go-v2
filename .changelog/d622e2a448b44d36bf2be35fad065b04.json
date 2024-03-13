@@ -1,0 +1,8 @@
+{
+    "id": "d622e2a4-48b4-4d36-bf2b-e35fad065b04",
+    "type": "feature",
+    "description": "Support new RuntimeEnvironmentUpdate parameter within UpdateApplication API allowing callers to change the Flink version upon which their application runs.",
+    "modules": [
+        "service/kinesisanalyticsv2"
+    ]
+}

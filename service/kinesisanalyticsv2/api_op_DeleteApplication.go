@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// Deletes the specified application. Kinesis Data Analytics halts application
-// execution and deletes the application.
+// Deletes the specified application. Managed Service for Apache Flink halts
+// application execution and deletes the application.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}

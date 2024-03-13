@@ -11,12 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Kinesis Data Analytics application. Using this operation,
-// you can update application code, input configuration, and output configuration.
-// Kinesis Data Analytics updates the ApplicationVersionId each time you update
-// your application. You cannot update the RuntimeEnvironment of an existing
-// application. If you need to update an application's RuntimeEnvironment , you
-// must delete the application and create it again.
+// Updates an existing Managed Service for Apache Flink application. Using this
+// operation, you can update application code, input configuration, and output
+// configuration. Managed Service for Apache Flink updates the ApplicationVersionId
+// each time you update your application.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}
@@ -63,6 +61,14 @@ type UpdateApplicationInput struct {
 
 	// Describes updates to the application's starting parameters.
 	RunConfigurationUpdate *types.RunConfigurationUpdate
+
+	// Updates the Managed Service for Apache Flink runtime environment used to run
+	// your code. To avoid issues you must:
+	//   - Ensure your new jar and dependencies are compatible with the new runtime
+	//   selected.
+	//   - Ensure your new code's state is compatible with the snapshot from which
+	//   your application will start
+	RuntimeEnvironmentUpdate types.RuntimeEnvironment
 
 	// Describes updates to the service execution role.
 	ServiceExecutionRoleUpdate *string

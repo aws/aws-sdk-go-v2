@@ -7646,6 +7646,15 @@ func awsAwsjson11_deserializeDocumentSnapshotDetails(v **types.SnapshotDetails, 
 				sv.ApplicationVersionId = ptr.Int64(i64)
 			}
 
+		case "RuntimeEnvironment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeEnvironment to be of type string, got %T instead", value)
+				}
+				sv.RuntimeEnvironment = types.RuntimeEnvironment(jtv)
+			}
+
 		case "SnapshotCreationTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {

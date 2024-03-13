@@ -15,7 +15,7 @@ import (
 // were rolled back. The response also includes a summary of the configuration
 // associated with each version. To get the complete description of a specific
 // application version, invoke the DescribeApplicationVersion operation. This
-// operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.
+// operation is supported only for Managed Service for Apache Flink.
 func (c *Client) ListApplicationVersions(ctx context.Context, params *ListApplicationVersionsInput, optFns ...func(*Options)) (*ListApplicationVersionsOutput, error) {
 	if params == nil {
 		params = &ListApplicationVersionsInput{}

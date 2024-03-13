@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the specified Kinesis Data Analytics application. After creating an
-// application, you must exclusively call this operation to start your application.
+// Starts the specified Managed Service for Apache Flink application. After
+// creating an application, you must exclusively call this operation to start your
+// application.
 func (c *Client) StartApplication(ctx context.Context, params *StartApplicationInput, optFns ...func(*Options)) (*StartApplicationOutput, error) {
 	if params == nil {
 		params = &StartApplicationInput{}
@@ -35,8 +36,8 @@ type StartApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Identifies the run configuration (start parameters) of a Kinesis Data Analytics
-	// application.
+	// Identifies the run configuration (start parameters) of a Managed Service for
+	// Apache Flink application.
 	RunConfiguration *types.RunConfiguration
 
 	noSmithyDocumentSerde

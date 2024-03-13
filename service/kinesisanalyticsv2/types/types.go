@@ -36,7 +36,7 @@ type ApplicationCodeConfigurationDescription struct {
 }
 
 // Describes code configuration updates for an application. This is supported for
-// a Flink-based Kinesis Data Analytics application or a SQL-based Kinesis Data
+// a Managed Service for Apache Flink application or a SQL-based Kinesis Data
 // Analytics application.
 type ApplicationCodeConfigurationUpdate struct {
 
@@ -49,22 +49,23 @@ type ApplicationCodeConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the creation parameters for a Kinesis Data Analytics application.
+// Specifies the creation parameters for a Managed Service for Apache Flink
+// application.
 type ApplicationConfiguration struct {
 
-	// The code location and type parameters for a Flink-based Kinesis Data Analytics
+	// The code location and type parameters for a Managed Service for Apache Flink
 	// application.
 	ApplicationCodeConfiguration *ApplicationCodeConfiguration
 
-	// Describes whether snapshots are enabled for a Flink-based Kinesis Data
-	// Analytics application.
+	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
+	// application.
 	ApplicationSnapshotConfiguration *ApplicationSnapshotConfiguration
 
-	// Describes execution properties for a Flink-based Kinesis Data Analytics
+	// Describes execution properties for a Managed Service for Apache Flink
 	// application.
 	EnvironmentProperties *EnvironmentProperties
 
-	// The creation and update parameters for a Flink-based Kinesis Data Analytics
+	// The creation and update parameters for a Managed Service for Apache Flink
 	// application.
 	FlinkApplicationConfiguration *FlinkApplicationConfiguration
 
@@ -75,33 +76,34 @@ type ApplicationConfiguration struct {
 	// The array of descriptions of VPC configurations available to the application.
 	VpcConfigurations []VpcConfiguration
 
-	// The configuration parameters for a Kinesis Data Analytics Studio notebook.
+	// The configuration parameters for a Managed Service for Apache Flink Studio
+	// notebook.
 	ZeppelinApplicationConfiguration *ZeppelinApplicationConfiguration
 
 	noSmithyDocumentSerde
 }
 
 // Describes details about the application code and starting parameters for a
-// Kinesis Data Analytics application.
+// Managed Service for Apache Flink application.
 type ApplicationConfigurationDescription struct {
 
-	// The details about the application code for a Flink-based Kinesis Data Analytics
+	// The details about the application code for a Managed Service for Apache Flink
 	// application.
 	ApplicationCodeConfigurationDescription *ApplicationCodeConfigurationDescription
 
-	// Describes whether snapshots are enabled for a Flink-based Kinesis Data
-	// Analytics application.
+	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
+	// application.
 	ApplicationSnapshotConfigurationDescription *ApplicationSnapshotConfigurationDescription
 
-	// Describes execution properties for a Flink-based Kinesis Data Analytics
+	// Describes execution properties for a Managed Service for Apache Flink
 	// application.
 	EnvironmentPropertyDescriptions *EnvironmentPropertyDescriptions
 
-	// The details about a Flink-based Kinesis Data Analytics application.
+	// The details about a Managed Service for Apache Flink application.
 	FlinkApplicationConfigurationDescription *FlinkApplicationConfigurationDescription
 
-	// The details about the starting properties for a Kinesis Data Analytics
-	// application.
+	// The details about the starting properties for a Managed Service for Apache
+	// Flink application.
 	RunConfigurationDescription *RunConfigurationDescription
 
 	// The details about inputs, outputs, and reference data sources for a SQL-based
@@ -111,7 +113,8 @@ type ApplicationConfigurationDescription struct {
 	// The array of descriptions of VPC configurations available to the application.
 	VpcConfigurationDescriptions []VpcConfigurationDescription
 
-	// The configuration parameters for a Kinesis Data Analytics Studio notebook.
+	// The configuration parameters for a Managed Service for Apache Flink Studio
+	// notebook.
 	ZeppelinApplicationConfigurationDescription *ZeppelinApplicationConfigurationDescription
 
 	noSmithyDocumentSerde
@@ -123,15 +126,15 @@ type ApplicationConfigurationUpdate struct {
 	// Describes updates to an application's code configuration.
 	ApplicationCodeConfigurationUpdate *ApplicationCodeConfigurationUpdate
 
-	// Describes whether snapshots are enabled for a Flink-based Kinesis Data
-	// Analytics application.
+	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
+	// application.
 	ApplicationSnapshotConfigurationUpdate *ApplicationSnapshotConfigurationUpdate
 
-	// Describes updates to the environment properties for a Flink-based Kinesis Data
-	// Analytics application.
+	// Describes updates to the environment properties for a Managed Service for
+	// Apache Flink application.
 	EnvironmentPropertyUpdates *EnvironmentPropertyUpdates
 
-	// Describes updates to a Flink-based Kinesis Data Analytics application's
+	// Describes updates to a Managed Service for Apache Flink application's
 	// configuration.
 	FlinkApplicationConfigurationUpdate *FlinkApplicationConfigurationUpdate
 
@@ -143,7 +146,8 @@ type ApplicationConfigurationUpdate struct {
 	// application.
 	VpcConfigurationUpdates []VpcConfigurationUpdate
 
-	// Updates to the configuration of a Kinesis Data Analytics Studio notebook.
+	// Updates to the configuration of a Managed Service for Apache Flink Studio
+	// notebook.
 	ZeppelinApplicationConfigurationUpdate *ZeppelinApplicationConfigurationUpdate
 
 	noSmithyDocumentSerde
@@ -168,8 +172,8 @@ type ApplicationDetail struct {
 	// This member is required.
 	ApplicationStatus ApplicationStatus
 
-	// Provides the current application version. Kinesis Data Analytics updates the
-	// ApplicationVersionId each time you update the application.
+	// Provides the current application version. Managed Service for Apache Flink
+	// updates the ApplicationVersionId each time you update the application.
 	//
 	// This member is required.
 	ApplicationVersionId *int64
@@ -180,7 +184,7 @@ type ApplicationDetail struct {
 	RuntimeEnvironment RuntimeEnvironment
 
 	// Describes details about the application code and starting parameters for a
-	// Kinesis Data Analytics application.
+	// Managed Service for Apache Flink application.
 	ApplicationConfigurationDescription *ApplicationConfigurationDescription
 
 	// The description of the application.
@@ -189,8 +193,8 @@ type ApplicationDetail struct {
 	// The details of the maintenance configuration for the application.
 	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription
 
-	// To create a Kinesis Data Analytics Studio notebook, you must set the mode to
-	// INTERACTIVE . However, for a Kinesis Data Analytics for Apache Flink
+	// To create a Managed Service for Apache Flink Studio notebook, you must set the
+	// mode to INTERACTIVE . However, for a Managed Service for Apache Flink
 	// application, the mode is optional.
 	ApplicationMode ApplicationMode
 
@@ -267,12 +271,12 @@ type ApplicationRestoreConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes whether snapshots are enabled for a Flink-based Kinesis Data
-// Analytics application.
+// Describes whether snapshots are enabled for a Managed Service for Apache Flink
+// application.
 type ApplicationSnapshotConfiguration struct {
 
-	// Describes whether snapshots are enabled for a Flink-based Kinesis Data
-	// Analytics application.
+	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
+	// application.
 	//
 	// This member is required.
 	SnapshotsEnabled *bool
@@ -280,12 +284,12 @@ type ApplicationSnapshotConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes whether snapshots are enabled for a Flink-based Kinesis Data
-// Analytics application.
+// Describes whether snapshots are enabled for a Managed Service for Apache Flink
+// application.
 type ApplicationSnapshotConfigurationDescription struct {
 
-	// Describes whether snapshots are enabled for a Flink-based Kinesis Data
-	// Analytics application.
+	// Describes whether snapshots are enabled for a Managed Service for Apache Flink
+	// application.
 	//
 	// This member is required.
 	SnapshotsEnabled *bool
@@ -293,8 +297,8 @@ type ApplicationSnapshotConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes updates to whether snapshots are enabled for a Flink-based Kinesis
-// Data Analytics application.
+// Describes updates to whether snapshots are enabled for a Managed Service for
+// Apache Flink application.
 type ApplicationSnapshotConfigurationUpdate struct {
 
 	// Describes updates to whether snapshots are enabled for an application.
@@ -334,8 +338,8 @@ type ApplicationSummary struct {
 	// This member is required.
 	RuntimeEnvironment RuntimeEnvironment
 
-	// For a Kinesis Data Analytics for Apache Flink application, the mode is STREAMING
-	// . For a Kinesis Data Analytics Studio notebook, it is INTERACTIVE .
+	// For a Managed Service for Apache Flink application, the mode is STREAMING . For
+	// a Managed Service for Apache Flink Studio notebook, it is INTERACTIVE .
 	ApplicationMode ApplicationMode
 
 	noSmithyDocumentSerde
@@ -349,7 +353,7 @@ type ApplicationVersionSummary struct {
 	// This member is required.
 	ApplicationStatus ApplicationStatus
 
-	// The ID of the application version. Kinesis Data Analytics updates the
+	// The ID of the application version. Managed Service for Apache Flink updates the
 	// ApplicationVersionId each time you update the application.
 	//
 	// This member is required.
@@ -359,13 +363,13 @@ type ApplicationVersionSummary struct {
 }
 
 // The configuration parameters for the default Amazon Glue database. You use this
-// database for SQL queries that you write in a Kinesis Data Analytics Studio
-// notebook.
+// database for SQL queries that you write in a Managed Service for Apache Flink
+// Studio notebook.
 type CatalogConfiguration struct {
 
 	// The configuration parameters for the default Amazon Glue database. You use this
 	// database for Apache Flink SQL queries and table API transforms that you write in
-	// a Kinesis Data Analytics Studio notebook.
+	// a Managed Service for Apache Flink Studio notebook.
 	//
 	// This member is required.
 	GlueDataCatalogConfiguration *GlueDataCatalogConfiguration
@@ -375,12 +379,12 @@ type CatalogConfiguration struct {
 
 // The configuration parameters for the default Amazon Glue database. You use this
 // database for Apache Flink SQL queries and table API transforms that you write in
-// a Kinesis Data Analytics Studio notebook.
+// a Managed Service for Apache Flink Studio notebook.
 type CatalogConfigurationDescription struct {
 
 	// The configuration parameters for the default Amazon Glue database. You use this
-	// database for SQL queries that you write in a Kinesis Data Analytics Studio
-	// notebook.
+	// database for SQL queries that you write in a Managed Service for Apache Flink
+	// Studio notebook.
 	//
 	// This member is required.
 	GlueDataCatalogConfigurationDescription *GlueDataCatalogConfigurationDescription
@@ -389,13 +393,13 @@ type CatalogConfigurationDescription struct {
 }
 
 // Updates to the configuration parameters for the default Amazon Glue database.
-// You use this database for SQL queries that you write in a Kinesis Data Analytics
-// Studio notebook.
+// You use this database for SQL queries that you write in a Managed Service for
+// Apache Flink Studio notebook.
 type CatalogConfigurationUpdate struct {
 
 	// Updates to the configuration parameters for the default Amazon Glue database.
-	// You use this database for SQL queries that you write in a Kinesis Data Analytics
-	// Studio notebook.
+	// You use this database for SQL queries that you write in a Managed Service for
+	// Apache Flink Studio notebook.
 	//
 	// This member is required.
 	GlueDataCatalogConfigurationUpdate *GlueDataCatalogConfigurationUpdate
@@ -410,12 +414,12 @@ type CatalogConfigurationUpdate struct {
 // .
 type CheckpointConfiguration struct {
 
-	// Describes whether the application uses Kinesis Data Analytics' default
-	// checkpointing behavior. You must set this property to CUSTOM in order to set
-	// the CheckpointingEnabled , CheckpointInterval , or MinPauseBetweenCheckpoints
-	// parameters. If this value is set to DEFAULT , the application will use the
-	// following values, even if they are set to other values using APIs or application
-	// code:
+	// Describes whether the application uses Managed Service for Apache Flink'
+	// default checkpointing behavior. You must set this property to CUSTOM in order
+	// to set the CheckpointingEnabled , CheckpointInterval , or
+	// MinPauseBetweenCheckpoints parameters. If this value is set to DEFAULT , the
+	// application will use the following values, even if they are set to other values
+	// using APIs or application code:
 	//   - CheckpointingEnabled: true
 	//   - CheckpointInterval: 60000
 	//   - MinPauseBetweenCheckpoints: 5000
@@ -429,10 +433,10 @@ type CheckpointConfiguration struct {
 	// using this API or in application code.
 	CheckpointInterval *int64
 
-	// Describes whether checkpointing is enabled for a Flink-based Kinesis Data
-	// Analytics application. If CheckpointConfiguration.ConfigurationType is DEFAULT ,
-	// the application will use a CheckpointingEnabled value of true , even if this
-	// value is set to another value using this API or in application code.
+	// Describes whether checkpointing is enabled for a Managed Service for Apache
+	// Flink application. If CheckpointConfiguration.ConfigurationType is DEFAULT , the
+	// application will use a CheckpointingEnabled value of true , even if this value
+	// is set to another value using this API or in application code.
 	CheckpointingEnabled *bool
 
 	// Describes the minimum time in milliseconds after a checkpoint operation
@@ -448,7 +452,7 @@ type CheckpointConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes checkpointing parameters for a Flink-based Kinesis Data Analytics
+// Describes checkpointing parameters for a Managed Service for Apache Flink
 // application.
 type CheckpointConfigurationDescription struct {
 
@@ -458,16 +462,16 @@ type CheckpointConfigurationDescription struct {
 	// using this API or in application code.
 	CheckpointInterval *int64
 
-	// Describes whether checkpointing is enabled for a Flink-based Kinesis Data
-	// Analytics application. If CheckpointConfiguration.ConfigurationType is DEFAULT ,
-	// the application will use a CheckpointingEnabled value of true , even if this
-	// value is set to another value using this API or in application code.
+	// Describes whether checkpointing is enabled for a Managed Service for Apache
+	// Flink application. If CheckpointConfiguration.ConfigurationType is DEFAULT , the
+	// application will use a CheckpointingEnabled value of true , even if this value
+	// is set to another value using this API or in application code.
 	CheckpointingEnabled *bool
 
 	// Describes whether the application uses the default checkpointing behavior in
-	// Kinesis Data Analytics. If this value is set to DEFAULT , the application will
-	// use the following values, even if they are set to other values using APIs or
-	// application code:
+	// Managed Service for Apache Flink. If this value is set to DEFAULT , the
+	// application will use the following values, even if they are set to other values
+	// using APIs or application code:
 	//   - CheckpointingEnabled: true
 	//   - CheckpointInterval: 60000
 	//   - MinPauseBetweenCheckpoints: 5000
@@ -483,8 +487,8 @@ type CheckpointConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes updates to the checkpointing parameters for a Flink-based Kinesis
-// Data Analytics application.
+// Describes updates to the checkpointing parameters for a Managed Service for
+// Apache Flink application.
 type CheckpointConfigurationUpdate struct {
 
 	// Describes updates to the interval in milliseconds between checkpoint
@@ -500,8 +504,8 @@ type CheckpointConfigurationUpdate struct {
 	CheckpointingEnabledUpdate *bool
 
 	// Describes updates to whether the application uses the default checkpointing
-	// behavior of Kinesis Data Analytics. You must set this property to CUSTOM in
-	// order to set the CheckpointingEnabled , CheckpointInterval , or
+	// behavior of Managed Service for Apache Flink. You must set this property to
+	// CUSTOM in order to set the CheckpointingEnabled , CheckpointInterval , or
 	// MinPauseBetweenCheckpoints parameters. If this value is set to DEFAULT , the
 	// application will use the following values, even if they are set to other values
 	// using APIs or application code:
@@ -568,22 +572,23 @@ type CloudWatchLoggingOptionUpdate struct {
 }
 
 // Specifies either the application code, or the location of the application code,
-// for a Flink-based Kinesis Data Analytics application.
+// for a Managed Service for Apache Flink application.
 type CodeContent struct {
 
 	// Information about the Amazon S3 bucket that contains the application code.
 	S3ContentLocation *S3ContentLocation
 
-	// The text-format code for a Flink-based Kinesis Data Analytics application.
+	// The text-format code for a Managed Service for Apache Flink application.
 	TextContent *string
 
-	// The zip-format code for a Flink-based Kinesis Data Analytics application.
+	// The zip-format code for a Managed Service for Apache Flink application.
 	ZipFileContent []byte
 
 	noSmithyDocumentSerde
 }
 
-// Describes details about the code of a Kinesis Data Analytics application.
+// Describes details about the code of a Managed Service for Apache Flink
+// application.
 type CodeContentDescription struct {
 
 	// The checksum that can be used to validate zip-format code.
@@ -655,10 +660,10 @@ type CustomArtifactConfiguration struct {
 	// The parameters required to fully specify a Maven reference.
 	MavenReference *MavenReference
 
-	// For a Kinesis Data Analytics application provides a description of an Amazon S3
-	// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
-	// the Amazon S3 object that contains the data, and the version number of the
-	// Amazon S3 object that contains the data.
+	// For a Managed Service for Apache Flink application provides a description of an
+	// Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the
+	// name of the Amazon S3 object that contains the data, and the version number of
+	// the Amazon S3 object that contains the data.
 	S3ContentLocation *S3ContentLocation
 
 	noSmithyDocumentSerde
@@ -674,17 +679,17 @@ type CustomArtifactConfigurationDescription struct {
 	// The parameters that are required to specify a Maven dependency.
 	MavenReferenceDescription *MavenReference
 
-	// For a Kinesis Data Analytics application provides a description of an Amazon S3
-	// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
-	// the Amazon S3 object that contains the data, and the version number of the
-	// Amazon S3 object that contains the data.
+	// For a Managed Service for Apache Flink application provides a description of an
+	// Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the
+	// name of the Amazon S3 object that contains the data, and the version number of
+	// the Amazon S3 object that contains the data.
 	S3ContentLocationDescription *S3ContentLocation
 
 	noSmithyDocumentSerde
 }
 
-// The information required to deploy a Kinesis Data Analytics Studio notebook as
-// an application with durable state.
+// The information required to deploy a Managed Service for Apache Flink Studio
+// notebook as an application with durable state.
 type DeployAsApplicationConfiguration struct {
 
 	// The description of an Amazon S3 object that contains the Amazon Data Analytics
@@ -734,7 +739,7 @@ type DestinationSchema struct {
 	noSmithyDocumentSerde
 }
 
-// Describes execution properties for a Flink-based Kinesis Data Analytics
+// Describes execution properties for a Managed Service for Apache Flink
 // application.
 type EnvironmentProperties struct {
 
@@ -755,8 +760,8 @@ type EnvironmentPropertyDescriptions struct {
 	noSmithyDocumentSerde
 }
 
-// Describes updates to the execution property groups for a Flink-based Kinesis
-// Data Analytics application or a Studio notebook.
+// Describes updates to the execution property groups for a Managed Service for
+// Apache Flink application or a Studio notebook.
 type EnvironmentPropertyUpdates struct {
 
 	// Describes updates to the execution property groups.
@@ -767,7 +772,7 @@ type EnvironmentPropertyUpdates struct {
 	noSmithyDocumentSerde
 }
 
-// Describes configuration parameters for a Flink-based Kinesis Data Analytics
+// Describes configuration parameters for a Managed Service for Apache Flink
 // application or a Studio notebook.
 type FlinkApplicationConfiguration struct {
 
@@ -789,7 +794,7 @@ type FlinkApplicationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes configuration parameters for a Flink-based Kinesis Data Analytics
+// Describes configuration parameters for a Managed Service for Apache Flink
 // application.
 type FlinkApplicationConfigurationDescription struct {
 
@@ -816,8 +821,8 @@ type FlinkApplicationConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Describes updates to the configuration parameters for a Flink-based Kinesis
-// Data Analytics application.
+// Describes updates to the configuration parameters for a Managed Service for
+// Apache Flink application.
 type FlinkApplicationConfigurationUpdate struct {
 
 	// Describes updates to an application's checkpointing configuration.
@@ -836,7 +841,7 @@ type FlinkApplicationConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the starting parameters for a Flink-based Kinesis Data Analytics
+// Describes the starting parameters for a Managed Service for Apache Flink
 // application.
 type FlinkRunConfiguration struct {
 
@@ -879,7 +884,7 @@ type GlueDataCatalogConfigurationDescription struct {
 }
 
 // Updates to the configuration of the Glue Data Catalog that you use for SQL
-// queries that you write in a Kinesis Data Analytics Studio notebook.
+// queries that you write in a Managed Service for Apache Flink Studio notebook.
 type GlueDataCatalogConfigurationUpdate struct {
 
 	// The updated Amazon Resource Name (ARN) of the database.
@@ -1585,78 +1590,80 @@ type OutputUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Describes parameters for how a Flink-based Kinesis Data Analytics application
+// Describes parameters for how a Managed Service for Apache Flink application
 // executes multiple tasks simultaneously. For more information about parallelism,
 // see Parallel Execution (https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/parallel.html)
 // in the Apache Flink Documentation (https://ci.apache.org/projects/flink/flink-docs-release-1.8/)
 // .
 type ParallelismConfiguration struct {
 
-	// Describes whether the application uses the default parallelism for the Kinesis
-	// Data Analytics service. You must set this property to CUSTOM in order to change
-	// your application's AutoScalingEnabled , Parallelism , or ParallelismPerKPU
-	// properties.
+	// Describes whether the application uses the default parallelism for the Managed
+	// Service for Apache Flink service. You must set this property to CUSTOM in order
+	// to change your application's AutoScalingEnabled , Parallelism , or
+	// ParallelismPerKPU properties.
 	//
 	// This member is required.
 	ConfigurationType ConfigurationType
 
-	// Describes whether the Kinesis Data Analytics service can increase the
+	// Describes whether the Managed Service for Apache Flink service can increase the
 	// parallelism of the application in response to increased throughput.
 	AutoScalingEnabled *bool
 
-	// Describes the initial number of parallel tasks that a Flink-based Kinesis Data
-	// Analytics application can perform. If AutoScalingEnabled is set to True,
-	// Kinesis Data Analytics increases the CurrentParallelism value in response to
-	// application load. The service can increase the CurrentParallelism value up to
-	// the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for
-	// the application. The maximum KPUs for an application is 32 by default, and can
-	// be increased by requesting a limit increase. If application load is reduced, the
-	// service can reduce the CurrentParallelism value down to the Parallelism setting.
+	// Describes the initial number of parallel tasks that a Managed Service for
+	// Apache Flink application can perform. If AutoScalingEnabled is set to True,
+	// Managed Service for Apache Flink increases the CurrentParallelism value in
+	// response to application load. The service can increase the CurrentParallelism
+	// value up to the maximum parallelism, which is ParalellismPerKPU times the
+	// maximum KPUs for the application. The maximum KPUs for an application is 32 by
+	// default, and can be increased by requesting a limit increase. If application
+	// load is reduced, the service can reduce the CurrentParallelism value down to
+	// the Parallelism setting.
 	Parallelism *int32
 
-	// Describes the number of parallel tasks that a Flink-based Kinesis Data
-	// Analytics application can perform per Kinesis Processing Unit (KPU) used by the
-	// application. For more information about KPUs, see Amazon Kinesis Data Analytics
-	// Pricing (http://aws.amazon.com/kinesis/data-analytics/pricing/) .
+	// Describes the number of parallel tasks that a Managed Service for Apache Flink
+	// application can perform per Kinesis Processing Unit (KPU) used by the
+	// application. For more information about KPUs, see Amazon Managed Service for
+	// Apache Flink Pricing (http://aws.amazon.com/kinesis/data-analytics/pricing/) .
 	ParallelismPerKPU *int32
 
 	noSmithyDocumentSerde
 }
 
-// Describes parameters for how a Flink-based Kinesis Data Analytics application
+// Describes parameters for how a Managed Service for Apache Flink application
 // executes multiple tasks simultaneously.
 type ParallelismConfigurationDescription struct {
 
-	// Describes whether the Kinesis Data Analytics service can increase the
+	// Describes whether the Managed Service for Apache Flink service can increase the
 	// parallelism of the application in response to increased throughput.
 	AutoScalingEnabled *bool
 
-	// Describes whether the application uses the default parallelism for the Kinesis
-	// Data Analytics service.
+	// Describes whether the application uses the default parallelism for the Managed
+	// Service for Apache Flink service.
 	ConfigurationType ConfigurationType
 
-	// Describes the current number of parallel tasks that a Flink-based Kinesis Data
-	// Analytics application can perform. If AutoScalingEnabled is set to True,
-	// Kinesis Data Analytics can increase this value in response to application load.
-	// The service can increase this value up to the maximum parallelism, which is
-	// ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs
-	// for an application is 32 by default, and can be increased by requesting a limit
-	// increase. If application load is reduced, the service can reduce the
-	// CurrentParallelism value down to the Parallelism setting.
-	CurrentParallelism *int32
-
-	// Describes the initial number of parallel tasks that a Flink-based Kinesis Data
-	// Analytics application can perform. If AutoScalingEnabled is set to True, then
-	// Kinesis Data Analytics can increase the CurrentParallelism value in response to
-	// application load. The service can increase CurrentParallelism up to the maximum
+	// Describes the current number of parallel tasks that a Managed Service for
+	// Apache Flink application can perform. If AutoScalingEnabled is set to True,
+	// Managed Service for Apache Flink can increase this value in response to
+	// application load. The service can increase this value up to the maximum
 	// parallelism, which is ParalellismPerKPU times the maximum KPUs for the
 	// application. The maximum KPUs for an application is 32 by default, and can be
 	// increased by requesting a limit increase. If application load is reduced, the
 	// service can reduce the CurrentParallelism value down to the Parallelism setting.
+	CurrentParallelism *int32
+
+	// Describes the initial number of parallel tasks that a Managed Service for
+	// Apache Flink application can perform. If AutoScalingEnabled is set to True,
+	// then Managed Service for Apache Flink can increase the CurrentParallelism value
+	// in response to application load. The service can increase CurrentParallelism up
+	// to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs
+	// for the application. The maximum KPUs for an application is 32 by default, and
+	// can be increased by requesting a limit increase. If application load is reduced,
+	// the service can reduce the CurrentParallelism value down to the Parallelism
+	// setting.
 	Parallelism *int32
 
-	// Describes the number of parallel tasks that a Flink-based Kinesis Data
-	// Analytics application can perform per Kinesis Processing Unit (KPU) used by the
+	// Describes the number of parallel tasks that a Managed Service for Apache Flink
+	// application can perform per Kinesis Processing Unit (KPU) used by the
 	// application.
 	ParallelismPerKPU *int32
 
@@ -1667,15 +1674,16 @@ type ParallelismConfigurationDescription struct {
 // simultaneously.
 type ParallelismConfigurationUpdate struct {
 
-	// Describes updates to whether the Kinesis Data Analytics service can increase
-	// the parallelism of a Flink-based Kinesis Data Analytics application in response
-	// to increased throughput.
+	// Describes updates to whether the Managed Service for Apache Flink service can
+	// increase the parallelism of a Managed Service for Apache Flink application in
+	// response to increased throughput.
 	AutoScalingEnabledUpdate *bool
 
 	// Describes updates to whether the application uses the default parallelism for
-	// the Kinesis Data Analytics service, or if a custom parallelism is used. You must
-	// set this property to CUSTOM in order to change your application's
-	// AutoScalingEnabled , Parallelism , or ParallelismPerKPU properties.
+	// the Managed Service for Apache Flink service, or if a custom parallelism is
+	// used. You must set this property to CUSTOM in order to change your
+	// application's AutoScalingEnabled , Parallelism , or ParallelismPerKPU
+	// properties.
 	ConfigurationTypeUpdate ConfigurationType
 
 	// Describes updates to the number of parallel tasks an application can perform
@@ -1683,13 +1691,13 @@ type ParallelismConfigurationUpdate struct {
 	ParallelismPerKPUUpdate *int32
 
 	// Describes updates to the initial number of parallel tasks an application can
-	// perform. If AutoScalingEnabled is set to True, then Kinesis Data Analytics can
-	// increase the CurrentParallelism value in response to application load. The
-	// service can increase CurrentParallelism up to the maximum parallelism, which is
-	// ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs
-	// for an application is 32 by default, and can be increased by requesting a limit
-	// increase. If application load is reduced, the service will reduce
-	// CurrentParallelism down to the Parallelism setting.
+	// perform. If AutoScalingEnabled is set to True, then Managed Service for Apache
+	// Flink can increase the CurrentParallelism value in response to application
+	// load. The service can increase CurrentParallelism up to the maximum
+	// parallelism, which is ParalellismPerKPU times the maximum KPUs for the
+	// application. The maximum KPUs for an application is 32 by default, and can be
+	// increased by requesting a limit increase. If application load is reduced, the
+	// service will reduce CurrentParallelism down to the Parallelism setting.
 	ParallelismUpdate *int32
 
 	noSmithyDocumentSerde
@@ -1773,10 +1781,10 @@ type ReferenceDataSource struct {
 	// This member is required.
 	TableName *string
 
-	// Identifies the S3 bucket and object that contains the reference data. A Kinesis
-	// Data Analytics application loads reference data only once. If the data changes,
-	// you call the UpdateApplication operation to trigger reloading of data into your
-	// application.
+	// Identifies the S3 bucket and object that contains the reference data. A
+	// SQL-based Kinesis Data Analytics application loads reference data only once. If
+	// the data changes, you call the UpdateApplication operation to trigger reloading
+	// of data into your application.
 	S3ReferenceDataSource *S3ReferenceDataSource
 
 	noSmithyDocumentSerde
@@ -1840,13 +1848,14 @@ type ReferenceDataSourceUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the starting parameters for an Kinesis Data Analytics application.
+// Describes the starting parameters for an Managed Service for Apache Flink
+// application.
 type RunConfiguration struct {
 
 	// Describes the restore behavior of a restarting application.
 	ApplicationRestoreConfiguration *ApplicationRestoreConfiguration
 
-	// Describes the starting parameters for a Flink-based Kinesis Data Analytics
+	// Describes the starting parameters for a Managed Service for Apache Flink
 	// application.
 	FlinkRunConfiguration *FlinkRunConfiguration
 
@@ -1857,27 +1866,28 @@ type RunConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the starting properties for a Kinesis Data Analytics application.
+// Describes the starting properties for a Managed Service for Apache Flink
+// application.
 type RunConfigurationDescription struct {
 
 	// Describes the restore behavior of a restarting application.
 	ApplicationRestoreConfigurationDescription *ApplicationRestoreConfiguration
 
-	// Describes the starting parameters for a Flink-based Kinesis Data Analytics
+	// Describes the starting parameters for a Managed Service for Apache Flink
 	// application.
 	FlinkRunConfigurationDescription *FlinkRunConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Describes the updates to the starting parameters for a Kinesis Data Analytics
-// application.
+// Describes the updates to the starting parameters for a Managed Service for
+// Apache Flink application.
 type RunConfigurationUpdate struct {
 
 	// Describes updates to the restore behavior of a restarting application.
 	ApplicationRestoreConfiguration *ApplicationRestoreConfiguration
 
-	// Describes the starting parameters for a Flink-based Kinesis Data Analytics
+	// Describes the starting parameters for a Managed Service for Apache Flink
 	// application.
 	FlinkRunConfiguration *FlinkRunConfiguration
 
@@ -1963,10 +1973,10 @@ type S3ContentBaseLocationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// For a Kinesis Data Analytics application provides a description of an Amazon S3
-// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
-// the Amazon S3 object that contains the data, and the version number of the
-// Amazon S3 object that contains the data.
+// For a Managed Service for Apache Flink application provides a description of an
+// Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket, the
+// name of the Amazon S3 object that contains the data, and the version number of
+// the Amazon S3 object that contains the data.
 type S3ContentLocation struct {
 
 	// The Amazon Resource Name (ARN) for the S3 bucket containing the application
@@ -2003,9 +2013,10 @@ type S3ContentLocationUpdate struct {
 }
 
 // For a SQL-based Kinesis Data Analytics application, identifies the Amazon S3
-// bucket and object that contains the reference data. A Kinesis Data Analytics
-// application loads reference data only once. If the data changes, you call the
-// UpdateApplication operation to trigger reloading of data into your application.
+// bucket and object that contains the reference data. A SQL-based Kinesis Data
+// Analytics application loads reference data only once. If the data changes, you
+// call the UpdateApplication operation to trigger reloading of data into your
+// application.
 type S3ReferenceDataSource struct {
 
 	// The Amazon Resource Name (ARN) of the S3 bucket.
@@ -2071,6 +2082,9 @@ type SnapshotDetails struct {
 	//
 	// This member is required.
 	SnapshotStatus SnapshotStatus
+
+	// The Flink Runtime for the application snapshot.
+	RuntimeEnvironment RuntimeEnvironment
 
 	// The timestamp of the application snapshot.
 	SnapshotCreationTimestamp *time.Time
@@ -2259,53 +2273,56 @@ type VpcConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration of a Kinesis Data Analytics Studio notebook.
+// The configuration of a Managed Service for Apache Flink Studio notebook.
 type ZeppelinApplicationConfiguration struct {
 
-	// The Amazon Glue Data Catalog that you use in queries in a Kinesis Data
-	// Analytics Studio notebook.
+	// The Amazon Glue Data Catalog that you use in queries in a Managed Service for
+	// Apache Flink Studio notebook.
 	CatalogConfiguration *CatalogConfiguration
 
 	// Custom artifacts are dependency JARs and user-defined functions (UDF).
 	CustomArtifactsConfiguration []CustomArtifactConfiguration
 
-	// The information required to deploy a Kinesis Data Analytics Studio notebook as
-	// an application with durable state.
+	// The information required to deploy a Managed Service for Apache Flink Studio
+	// notebook as an application with durable state.
 	DeployAsApplicationConfiguration *DeployAsApplicationConfiguration
 
-	// The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+	// The monitoring configuration of a Managed Service for Apache Flink Studio
+	// notebook.
 	MonitoringConfiguration *ZeppelinMonitoringConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// The configuration of a Kinesis Data Analytics Studio notebook.
+// The configuration of a Managed Service for Apache Flink Studio notebook.
 type ZeppelinApplicationConfigurationDescription struct {
 
-	// The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+	// The monitoring configuration of a Managed Service for Apache Flink Studio
+	// notebook.
 	//
 	// This member is required.
 	MonitoringConfigurationDescription *ZeppelinMonitoringConfigurationDescription
 
-	// The Amazon Glue Data Catalog that is associated with the Kinesis Data Analytics
-	// Studio notebook.
+	// The Amazon Glue Data Catalog that is associated with the Managed Service for
+	// Apache Flink Studio notebook.
 	CatalogConfigurationDescription *CatalogConfigurationDescription
 
 	// Custom artifacts are dependency JARs and user-defined functions (UDF).
 	CustomArtifactsConfigurationDescription []CustomArtifactConfigurationDescription
 
-	// The parameters required to deploy a Kinesis Data Analytics Studio notebook as
-	// an application with durable state.
+	// The parameters required to deploy a Managed Service for Apache Flink Studio
+	// notebook as an application with durable state.
 	DeployAsApplicationConfigurationDescription *DeployAsApplicationConfigurationDescription
 
 	noSmithyDocumentSerde
 }
 
-// Updates to the configuration of Kinesis Data Analytics Studio notebook.
+// Updates to the configuration of Managed Service for Apache Flink Studio
+// notebook.
 type ZeppelinApplicationConfigurationUpdate struct {
 
 	// Updates to the configuration of the Amazon Glue Data Catalog that is associated
-	// with the Kinesis Data Analytics Studio notebook.
+	// with the Managed Service for Apache Flink Studio notebook.
 	CatalogConfigurationUpdate *CatalogConfigurationUpdate
 
 	// Updates to the customer artifacts. Custom artifacts are dependency JAR files
@@ -2316,16 +2333,16 @@ type ZeppelinApplicationConfigurationUpdate struct {
 	// Analytics Studio notebook as an application with durable state.
 	DeployAsApplicationConfigurationUpdate *DeployAsApplicationConfigurationUpdate
 
-	// Updates to the monitoring configuration of a Kinesis Data Analytics Studio
-	// notebook.
+	// Updates to the monitoring configuration of a Managed Service for Apache Flink
+	// Studio notebook.
 	MonitoringConfigurationUpdate *ZeppelinMonitoringConfigurationUpdate
 
 	noSmithyDocumentSerde
 }
 
-// Describes configuration parameters for Amazon CloudWatch logging for a Kinesis
-// Data Analytics Studio notebook. For more information about CloudWatch logging,
-// see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html)
+// Describes configuration parameters for Amazon CloudWatch logging for a Managed
+// Service for Apache Flink Studio notebook. For more information about CloudWatch
+// logging, see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html)
 // .
 type ZeppelinMonitoringConfiguration struct {
 
@@ -2337,8 +2354,8 @@ type ZeppelinMonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The monitoring configuration for Apache Zeppelin within a Kinesis Data
-// Analytics Studio notebook.
+// The monitoring configuration for Apache Zeppelin within a Managed Service for
+// Apache Flink Studio notebook.
 type ZeppelinMonitoringConfigurationDescription struct {
 
 	// Describes the verbosity of the CloudWatch Logs for an application.
@@ -2347,12 +2364,12 @@ type ZeppelinMonitoringConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Updates to the monitoring configuration for Apache Zeppelin within a Kinesis
-// Data Analytics Studio notebook.
+// Updates to the monitoring configuration for Apache Zeppelin within a Managed
+// Service for Apache Flink Studio notebook.
 type ZeppelinMonitoringConfigurationUpdate struct {
 
-	// Updates to the logging level for Apache Zeppelin within a Kinesis Data
-	// Analytics Studio notebook.
+	// Updates to the logging level for Apache Zeppelin within a Managed Service for
+	// Apache Flink Studio notebook.
 	//
 	// This member is required.
 	LogLevelUpdate LogLevel

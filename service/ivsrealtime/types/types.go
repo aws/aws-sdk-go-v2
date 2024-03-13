@@ -283,6 +283,21 @@ type GridConfiguration struct {
 	// placed in the featured slot.
 	FeaturedParticipantAttribute *string
 
+	// Specifies the spacing between participant tiles in pixels. Default: 2 .
+	GridGap int32
+
+	// Determines whether to omit participants with stopped video in the composition.
+	// Default: false .
+	OmitStoppedVideo bool
+
+	// Sets the non-featured participant display mode. Default: VIDEO .
+	VideoAspectRatio VideoAspectRatio
+
+	// Defines how video fits within the participant tile. When not set, videoFillMode
+	// defaults to COVER fill mode for participants in the grid and to CONTAIN fill
+	// mode for featured participants.
+	VideoFillMode VideoFillMode
+
 	noSmithyDocumentSerde
 }
 
@@ -291,6 +306,9 @@ type LayoutConfiguration struct {
 
 	// Configuration related to grid layout. Default: Grid layout.
 	Grid *GridConfiguration
+
+	// Configuration related to PiP layout.
+	Pip *PipConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -426,6 +444,53 @@ type ParticipantTokenConfiguration struct {
 	// encoded text. This field is exposed to all stage participants and should not be
 	// used for personally identifying, confidential, or sensitive information.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information specific to Picture-in-Picture (PiP) layout, for
+// server-side composition (https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html)
+// .
+type PipConfiguration struct {
+
+	// This attribute name identifies the featured slot. A participant with this
+	// attribute set to "true" (as a string value) in ParticipantTokenConfiguration is
+	// placed in the featured slot.
+	FeaturedParticipantAttribute *string
+
+	// Specifies the spacing between participant tiles in pixels. Default: 0 .
+	GridGap int32
+
+	// Determines whether to omit participants with stopped video in the composition.
+	// Default: false .
+	OmitStoppedVideo bool
+
+	// Defines PiP behavior when all participants have left. Default: STATIC .
+	PipBehavior PipBehavior
+
+	// Specifies the height of the PiP window in pixels. When this is not set
+	// explicitly, pipHeight ’s value will be based on the size of the composition and
+	// the aspect ratio of the participant’s video.
+	PipHeight *int32
+
+	// Sets the PiP window’s offset position in pixels from the closest edges
+	// determined by PipPosition . Default: 0 .
+	PipOffset int32
+
+	// Identifies the PiP slot. A participant with this attribute set to "true" (as a
+	// string value) in ParticipantTokenConfiguration is placed in the PiP slot.
+	PipParticipantAttribute *string
+
+	// Determines the corner position of the PiP window. Default: BOTTOM_RIGHT .
+	PipPosition PipPosition
+
+	// Specifies the width of the PiP window in pixels. When this is not set
+	// explicitly, pipWidth ’s value will be based on the size of the composition and
+	// the aspect ratio of the participant’s video.
+	PipWidth *int32
+
+	// Defines how video fits within the participant tile. Default: COVER .
+	VideoFillMode VideoFillMode
 
 	noSmithyDocumentSerde
 }

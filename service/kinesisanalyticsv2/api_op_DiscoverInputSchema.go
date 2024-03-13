@@ -46,7 +46,7 @@ type DiscoverInputSchemaInput struct {
 	InputProcessingConfiguration *types.InputProcessingConfiguration
 
 	// The point at which you want Kinesis Data Analytics to start reading records
-	// from the specified streaming source discovery purposes.
+	// from the specified streaming source for discovery purposes.
 	InputStartingPositionConfiguration *types.InputStartingPositionConfiguration
 
 	// The Amazon Resource Name (ARN) of the streaming source.

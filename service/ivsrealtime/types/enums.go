@@ -140,6 +140,46 @@ func (ParticipantTokenCapability) Values() []ParticipantTokenCapability {
 	}
 }
 
+type PipBehavior string
+
+// Enum values for PipBehavior
+const (
+	PipBehaviorStatic  PipBehavior = "STATIC"
+	PipBehaviorDynamic PipBehavior = "DYNAMIC"
+)
+
+// Values returns all known values for PipBehavior. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PipBehavior) Values() []PipBehavior {
+	return []PipBehavior{
+		"STATIC",
+		"DYNAMIC",
+	}
+}
+
+type PipPosition string
+
+// Enum values for PipPosition
+const (
+	PipPositionTopLeft     PipPosition = "TOP_LEFT"
+	PipPositionTopRight    PipPosition = "TOP_RIGHT"
+	PipPositionBottomLeft  PipPosition = "BOTTOM_LEFT"
+	PipPositionBottomRight PipPosition = "BOTTOM_RIGHT"
+)
+
+// Values returns all known values for PipPosition. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PipPosition) Values() []PipPosition {
+	return []PipPosition{
+		"TOP_LEFT",
+		"TOP_RIGHT",
+		"BOTTOM_LEFT",
+		"BOTTOM_RIGHT",
+	}
+}
+
 type RecordingConfigurationFormat string
 
 // Enum values for RecordingConfigurationFormat
@@ -154,5 +194,47 @@ const (
 func (RecordingConfigurationFormat) Values() []RecordingConfigurationFormat {
 	return []RecordingConfigurationFormat{
 		"HLS",
+	}
+}
+
+type VideoAspectRatio string
+
+// Enum values for VideoAspectRatio
+const (
+	VideoAspectRatioAuto     VideoAspectRatio = "AUTO"
+	VideoAspectRatioVideo    VideoAspectRatio = "VIDEO"
+	VideoAspectRatioSquare   VideoAspectRatio = "SQUARE"
+	VideoAspectRatioPortrait VideoAspectRatio = "PORTRAIT"
+)
+
+// Values returns all known values for VideoAspectRatio. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VideoAspectRatio) Values() []VideoAspectRatio {
+	return []VideoAspectRatio{
+		"AUTO",
+		"VIDEO",
+		"SQUARE",
+		"PORTRAIT",
+	}
+}
+
+type VideoFillMode string
+
+// Enum values for VideoFillMode
+const (
+	VideoFillModeFill    VideoFillMode = "FILL"
+	VideoFillModeCover   VideoFillMode = "COVER"
+	VideoFillModeContain VideoFillMode = "CONTAIN"
+)
+
+// Values returns all known values for VideoFillMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VideoFillMode) Values() []VideoFillMode {
+	return []VideoFillMode{
+		"FILL",
+		"COVER",
+		"CONTAIN",
 	}
 }

@@ -2329,6 +2329,26 @@ func awsRestjson1_serializeDocumentGridConfiguration(v *types.GridConfiguration,
 		ok.String(*v.FeaturedParticipantAttribute)
 	}
 
+	if v.GridGap != 0 {
+		ok := object.Key("gridGap")
+		ok.Integer(v.GridGap)
+	}
+
+	if v.OmitStoppedVideo {
+		ok := object.Key("omitStoppedVideo")
+		ok.Boolean(v.OmitStoppedVideo)
+	}
+
+	if len(v.VideoAspectRatio) > 0 {
+		ok := object.Key("videoAspectRatio")
+		ok.String(string(v.VideoAspectRatio))
+	}
+
+	if len(v.VideoFillMode) > 0 {
+		ok := object.Key("videoFillMode")
+		ok.String(string(v.VideoFillMode))
+	}
+
 	return nil
 }
 
@@ -2339,6 +2359,13 @@ func awsRestjson1_serializeDocumentLayoutConfiguration(v *types.LayoutConfigurat
 	if v.Grid != nil {
 		ok := object.Key("grid")
 		if err := awsRestjson1_serializeDocumentGridConfiguration(v.Grid, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Pip != nil {
+		ok := object.Key("pip")
+		if err := awsRestjson1_serializeDocumentPipConfiguration(v.Pip, ok); err != nil {
 			return err
 		}
 	}
@@ -2409,6 +2436,63 @@ func awsRestjson1_serializeDocumentParticipantTokenConfigurations(v []types.Part
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPipConfiguration(v *types.PipConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FeaturedParticipantAttribute != nil {
+		ok := object.Key("featuredParticipantAttribute")
+		ok.String(*v.FeaturedParticipantAttribute)
+	}
+
+	if v.GridGap != 0 {
+		ok := object.Key("gridGap")
+		ok.Integer(v.GridGap)
+	}
+
+	if v.OmitStoppedVideo {
+		ok := object.Key("omitStoppedVideo")
+		ok.Boolean(v.OmitStoppedVideo)
+	}
+
+	if len(v.PipBehavior) > 0 {
+		ok := object.Key("pipBehavior")
+		ok.String(string(v.PipBehavior))
+	}
+
+	if v.PipHeight != nil {
+		ok := object.Key("pipHeight")
+		ok.Integer(*v.PipHeight)
+	}
+
+	if v.PipOffset != 0 {
+		ok := object.Key("pipOffset")
+		ok.Integer(v.PipOffset)
+	}
+
+	if v.PipParticipantAttribute != nil {
+		ok := object.Key("pipParticipantAttribute")
+		ok.String(*v.PipParticipantAttribute)
+	}
+
+	if len(v.PipPosition) > 0 {
+		ok := object.Key("pipPosition")
+		ok.String(string(v.PipPosition))
+	}
+
+	if v.PipWidth != nil {
+		ok := object.Key("pipWidth")
+		ok.Integer(*v.PipWidth)
+	}
+
+	if len(v.VideoFillMode) > 0 {
+		ok := object.Key("videoFillMode")
+		ok.String(string(v.VideoFillMode))
+	}
+
 	return nil
 }
 

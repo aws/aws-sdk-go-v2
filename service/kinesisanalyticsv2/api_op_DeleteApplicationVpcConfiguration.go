@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a VPC configuration from a Kinesis Data Analytics application.
+// Removes a VPC configuration from a Managed Service for Apache Flink application.
 func (c *Client) DeleteApplicationVpcConfiguration(ctx context.Context, params *DeleteApplicationVpcConfigurationInput, optFns ...func(*Options)) (*DeleteApplicationVpcConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationVpcConfigurationInput{}
@@ -57,7 +57,7 @@ type DeleteApplicationVpcConfigurationInput struct {
 
 type DeleteApplicationVpcConfigurationOutput struct {
 
-	// The ARN of the Kinesis Data Analytics application.
+	// The ARN of the Managed Service for Apache Flink application.
 	ApplicationARN *string
 
 	// The updated version ID of the application.

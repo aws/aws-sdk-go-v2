@@ -4352,6 +4352,11 @@ func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if len(v.RuntimeEnvironmentUpdate) > 0 {
+		ok := object.Key("RuntimeEnvironmentUpdate")
+		ok.String(string(v.RuntimeEnvironmentUpdate))
+	}
+
 	if v.ServiceExecutionRoleUpdate != nil {
 		ok := object.Key("ServiceExecutionRoleUpdate")
 		ok.String(*v.ServiceExecutionRoleUpdate)

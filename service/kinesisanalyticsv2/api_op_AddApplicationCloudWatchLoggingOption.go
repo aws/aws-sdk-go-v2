@@ -47,10 +47,10 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	// CurrentApplicationVersionId .
 	ConditionalToken *string
 
-	// The version ID of the Kinesis Data Analytics application. You must provide the
-	// CurrentApplicationVersionId or the ConditionalToken .You can retrieve the
-	// application version ID using DescribeApplication . For better concurrency
-	// support, use the ConditionalToken parameter instead of
+	// The version ID of the SQL-based Kinesis Data Analytics application. You must
+	// provide the CurrentApplicationVersionId or the ConditionalToken .You can
+	// retrieve the application version ID using DescribeApplication . For better
+	// concurrency support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	CurrentApplicationVersionId *int64
 
@@ -62,13 +62,13 @@ type AddApplicationCloudWatchLoggingOptionOutput struct {
 	// The application's ARN.
 	ApplicationARN *string
 
-	// The new version ID of the Kinesis Data Analytics application. Kinesis Data
-	// Analytics updates the ApplicationVersionId each time you change the CloudWatch
-	// logging options.
+	// The new version ID of the SQL-based Kinesis Data Analytics application. Kinesis
+	// Data Analytics updates the ApplicationVersionId each time you change the
+	// CloudWatch logging options.
 	ApplicationVersionId *int64
 
-	// The descriptions of the current CloudWatch logging options for the Kinesis Data
-	// Analytics application.
+	// The descriptions of the current CloudWatch logging options for the SQL-based
+	// Kinesis Data Analytics application.
 	CloudWatchLoggingOptionDescriptions []types.CloudWatchLoggingOptionDescription
 
 	// Metadata pertaining to the operation's result.
