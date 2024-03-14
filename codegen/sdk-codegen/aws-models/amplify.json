@@ -2082,7 +2082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Creates a new backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to applications created using the\n            Amplify Gen 2 public preview. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/backendenvironments",
@@ -2787,7 +2787,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Deletes a backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend was created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to applications created using the\n            Amplify Gen 2 public preview. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/apps/{appId}/backendenvironments/{environmentName}",
@@ -3719,7 +3719,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Returns a backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend was created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to applications created using the\n            Amplify Gen 2 public preview. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/backendenvironments/{environmentName}",
@@ -4497,7 +4497,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the backend environments for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Lists the backend environments for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend was created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to applications created using the\n                Amplify Gen 2 public preview. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/backendenvironments",
