@@ -1,0 +1,8 @@
+{
+    "id": "d40ecb47-e15b-4e95-aeaa-651fb0ca1e61",
+    "type": "release",
+    "description": "remove iotroborunner service",
+    "modules": [
+        "."
+    ]
+}
