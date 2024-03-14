@@ -1,8 +1,0 @@
-{
-    "id": "b1548f1e-978f-4222-9e34-01c501af0d2f",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for EBCDIC collation for RDS for Db2.",
-    "modules": [
-        "service/rds"
-    ]
-}

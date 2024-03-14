@@ -1,3 +1,22 @@
+# Release (2024-03-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.21.3](service/amplify/CHANGELOG.md#v1213-2024-03-14)
+  * **Documentation**: Documentation updates for Amplify. Identifies the APIs available only to apps created using Amplify Gen 1.
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.23.0](service/ec2instanceconnect/CHANGELOG.md#v1230-2024-03-14)
+  * **Feature**: This release includes a new exception type "SerialConsoleSessionUnsupportedException" for SendSerialConsoleSSHPublicKey API.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.30.3](service/elasticloadbalancingv2/CHANGELOG.md#v1303-2024-03-14)
+  * **Documentation**: This release allows you to configure HTTP client keep-alive duration for communication between clients and Application Load Balancers.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.24.0](service/fis/CHANGELOG.md#v1240-2024-03-14)
+  * **Feature**: This release adds support for previewing target resources before running a FIS experiment. It also adds resource ARNs for actions, experiments, and experiment templates to API responses.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.75.2](service/rds/CHANGELOG.md#v1752-2024-03-14)
+  * **Documentation**: Updates Amazon RDS documentation for EBCDIC collation for RDS for Db2.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.28.3](service/secretsmanager/CHANGELOG.md#v1283-2024-03-14)
+  * **Documentation**: Doc only update for Secrets Manager
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.0.0](service/timestreaminfluxdb/CHANGELOG.md#v100-2024-03-14)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for Amazon Timestream for InfluxDB. Amazon Timestream for InfluxDB is a new time-series database engine that makes it easy for application developers and DevOps teams to run InfluxDB databases on AWS for near real-time time-series applications using open source APIs.
+
 # Release (2024-03-13)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "60a7e927-bf47-4dbc-8d91-7e1461b55fdb",
-    "type": "feature",
-    "description": "This release includes a new exception type \"SerialConsoleSessionUnsupportedException\" for SendSerialConsoleSSHPublicKey API.",
-    "modules": [
-        "service/ec2instanceconnect"
-    ]
-}

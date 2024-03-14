@@ -1,3 +1,7 @@
+# v1.30.3 (2024-03-14)
+
+* **Documentation**: This release allows you to configure HTTP client keep-alive duration for communication between clients and Application Load Balancers.
+
 # v1.30.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

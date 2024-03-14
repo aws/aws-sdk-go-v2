@@ -1,3 +1,7 @@
+# v1.21.3 (2024-03-14)
+
+* **Documentation**: Documentation updates for Amplify. Identifies the APIs available only to apps created using Amplify Gen 1.
+
 # v1.21.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

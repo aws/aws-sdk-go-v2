@@ -1,3 +1,7 @@
+# v1.75.2 (2024-03-14)
+
+* **Documentation**: Updates Amazon RDS documentation for EBCDIC collation for RDS for Db2.
+
 # v1.75.1 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

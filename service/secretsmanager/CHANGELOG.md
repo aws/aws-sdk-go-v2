@@ -1,3 +1,7 @@
+# v1.28.3 (2024-03-14)
+
+* **Documentation**: Doc only update for Secrets Manager
+
 # v1.28.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

@@ -1,3 +1,7 @@
+# v1.23.0 (2024-03-14)
+
+* **Feature**: This release includes a new exception type "SerialConsoleSessionUnsupportedException" for SendSerialConsoleSSHPublicKey API.
+
 # v1.22.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

@@ -1,3 +1,7 @@
+# v1.24.0 (2024-03-14)
+
+* **Feature**: This release adds support for previewing target resources before running a FIS experiment. It also adds resource ARNs for actions, experiments, and experiment templates to API responses.
+
 # v1.23.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.
