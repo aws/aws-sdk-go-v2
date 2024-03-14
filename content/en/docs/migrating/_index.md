@@ -694,7 +694,7 @@ import "github.com/aws/aws-sdk-go-v2/service/s3"
 
 // ...
 
-client : s3.NewFromConfig(cfg)
+client := s3.NewFromConfig(cfg)
 
 output, err := client.PutObject(context.TODO(), &s3.PutObjectInput{
 	// input parameters
