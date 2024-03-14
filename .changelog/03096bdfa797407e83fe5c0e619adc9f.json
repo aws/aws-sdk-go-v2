@@ -1,0 +1,8 @@
+{
+    "id": "03096bdf-a797-407e-83fe-5c0e619adc9f",
+    "type": "documentation",
+    "description": "Documentation updates for Amplify. Identifies the APIs available only to apps created using Amplify Gen 1.",
+    "modules": [
+        "service/amplify"
+    ]
+}

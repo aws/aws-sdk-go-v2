@@ -989,6 +989,10 @@ func awsRestjson1_serializeOpHttpBindingsListExperimentsInput(v *ListExperiments
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ExperimentTemplateId != nil {
+		encoder.SetQuery("experimentTemplateId").String(*v.ExperimentTemplateId)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
@@ -1405,6 +1409,13 @@ func awsRestjson1_serializeOpDocumentStartExperimentInput(v *StartExperimentInpu
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.ExperimentOptions != nil {
+		ok := object.Key("experimentOptions")
+		if err := awsRestjson1_serializeDocumentStartExperimentExperimentOptionsInput(v.ExperimentOptions, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ExperimentTemplateId != nil {
@@ -2186,6 +2197,18 @@ func awsRestjson1_serializeDocumentResourceArnList(v []string, value smithyjson.
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStartExperimentExperimentOptionsInput(v *types.StartExperimentExperimentOptionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ActionsMode) > 0 {
+		ok := object.Key("actionsMode")
+		ok.String(string(v.ActionsMode))
+	}
+
 	return nil
 }
 

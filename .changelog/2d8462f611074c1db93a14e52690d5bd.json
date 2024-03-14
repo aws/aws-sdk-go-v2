@@ -1,0 +1,8 @@
+{
+    "id": "2d8462f6-1107-4c1d-b93a-14e52690d5bd",
+    "type": "documentation",
+    "description": "This release allows you to configure HTTP client keep-alive duration for communication between clients and Application Load Balancers.",
+    "modules": [
+        "service/elasticloadbalancingv2"
+    ]
+}

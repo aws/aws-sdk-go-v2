@@ -40,6 +40,9 @@ type StartExperimentInput struct {
 	// This member is required.
 	ExperimentTemplateId *string
 
+	// The experiment options for running the experiment.
+	ExperimentOptions *types.StartExperimentExperimentOptionsInput
+
 	// The tags to apply to the experiment.
 	Tags map[string]string
 

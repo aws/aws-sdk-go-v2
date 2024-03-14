@@ -24,7 +24,7 @@ import (
 //     condition as a CloudWatch alarm.
 //
 // For more information, see experiment templates (https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html)
-// in the Fault Injection Simulator User Guide.
+// in the Fault Injection Service User Guide.
 func (c *Client) CreateExperimentTemplate(ctx context.Context, params *CreateExperimentTemplateInput, optFns ...func(*Options)) (*CreateExperimentTemplateOutput, error) {
 	if params == nil {
 		params = &CreateExperimentTemplateInput{}

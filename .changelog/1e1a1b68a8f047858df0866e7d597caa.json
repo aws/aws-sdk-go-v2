@@ -1,0 +1,8 @@
+{
+    "id": "1e1a1b68-a8f0-4785-8df0-866e7d597caa",
+    "type": "feature",
+    "description": "This is the initial SDK release for Amazon Timestream for InfluxDB. Amazon Timestream for InfluxDB is a new time-series database engine that makes it easy for application developers and DevOps teams to run InfluxDB databases on AWS for near real-time time-series applications using open source APIs.",
+    "modules": [
+        "service/timestreaminfluxdb"
+    ]
+}

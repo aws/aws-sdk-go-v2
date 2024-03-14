@@ -52,7 +52,8 @@ type BatchGetSecretValueInput struct {
 
 	// The number of results to include in the response. If there are more results
 	// available, in the response, Secrets Manager includes NextToken . To get the next
-	// results, call BatchGetSecretValue again with the value from NextToken .
+	// results, call BatchGetSecretValue again with the value from NextToken . To use
+	// this parameter, you must also use the Filters parameter.
 	MaxResults *int32
 
 	// A token that indicates where the output should continue from, if a previous
@@ -177,7 +178,8 @@ var _ BatchGetSecretValueAPIClient = (*Client)(nil)
 type BatchGetSecretValuePaginatorOptions struct {
 	// The number of results to include in the response. If there are more results
 	// available, in the response, Secrets Manager includes NextToken . To get the next
-	// results, call BatchGetSecretValue again with the value from NextToken .
+	// results, call BatchGetSecretValue again with the value from NextToken . To use
+	// this parameter, you must also use the Filters parameter.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

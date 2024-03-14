@@ -30,7 +30,7 @@ func (c *Client) GetExperimentTargetAccountConfiguration(ctx context.Context, pa
 
 type GetExperimentTargetAccountConfigurationInput struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	//
 	// This member is required.
 	AccountId *string

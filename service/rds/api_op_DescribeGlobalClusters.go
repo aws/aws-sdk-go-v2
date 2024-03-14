@@ -31,7 +31,10 @@ func (c *Client) DescribeGlobalClusters(ctx context.Context, params *DescribeGlo
 
 type DescribeGlobalClustersInput struct {
 
-	// This parameter isn't currently supported.
+	// A filter that specifies one or more global database clusters to describe. This
+	// parameter is case-sensitive. Currently, the only supported filter is region . If
+	// used, the request returns information about any global cluster with at least one
+	// member (primary or secondary) in the specified Amazon Web Services Regions.
 	Filters []types.Filter
 
 	// The user-supplied DB cluster identifier. If this parameter is specified,

@@ -20,6 +20,24 @@ func (AccountTargeting) Values() []AccountTargeting {
 	}
 }
 
+type ActionsMode string
+
+// Enum values for ActionsMode
+const (
+	ActionsModeSkipAll ActionsMode = "skip-all"
+	ActionsModeRunAll  ActionsMode = "run-all"
+)
+
+// Values returns all known values for ActionsMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionsMode) Values() []ActionsMode {
+	return []ActionsMode{
+		"skip-all",
+		"run-all",
+	}
+}
+
 type EmptyTargetResolutionMode string
 
 // Enum values for EmptyTargetResolutionMode

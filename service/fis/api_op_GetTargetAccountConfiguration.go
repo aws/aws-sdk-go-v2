@@ -30,7 +30,7 @@ func (c *Client) GetTargetAccountConfiguration(ctx context.Context, params *GetT
 
 type GetTargetAccountConfigurationInput struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	//
 	// This member is required.
 	AccountId *string

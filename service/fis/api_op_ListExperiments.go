@@ -29,6 +29,9 @@ func (c *Client) ListExperiments(ctx context.Context, params *ListExperimentsInp
 
 type ListExperimentsInput struct {
 
+	// The ID of the experiment template.
+	ExperimentTemplateId *string
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32

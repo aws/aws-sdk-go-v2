@@ -93,7 +93,10 @@ type DescribeSecretOutput struct {
 	// isn't configured for rotation or rotation has been disabled, Secrets Manager
 	// returns null. If rotation fails, Secrets Manager retries the entire rotation
 	// process multiple times. If rotation is unsuccessful, this date may be in the
-	// past.
+	// past. This date represents the latest date that rotation will occur, but it is
+	// not an approximate rotation date. In some cases, for example if you turn off
+	// automatic rotation and then turn it back on, the next rotation may occur much
+	// sooner than this date.
 	NextRotationDate *time.Time
 
 	// The ID of the service that created this secret. For more information, see

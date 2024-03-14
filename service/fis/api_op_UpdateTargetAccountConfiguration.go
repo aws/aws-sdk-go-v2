@@ -29,7 +29,7 @@ func (c *Client) UpdateTargetAccountConfiguration(ctx context.Context, params *U
 
 type UpdateTargetAccountConfigurationInput struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	//
 	// This member is required.
 	AccountId *string

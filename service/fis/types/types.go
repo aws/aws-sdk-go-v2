@@ -8,8 +8,11 @@ import (
 )
 
 // Describes an action. For more information, see FIS actions (https://docs.aws.amazon.com/fis/latest/userguide/fis-actions-reference.html)
-// in the Fault Injection Simulator User Guide.
+// in the Fault Injection Service User Guide.
 type Action struct {
+
+	// The Amazon Resource Name (ARN) of the action.
+	Arn *string
 
 	// The description for the action.
 	Description *string
@@ -44,6 +47,9 @@ type ActionParameter struct {
 // Provides a summary of an action.
 type ActionSummary struct {
 
+	// The Amazon Resource Name (ARN) of the action.
+	Arn *string
+
 	// The description for the action.
 	Description *string
 
@@ -70,7 +76,7 @@ type ActionTarget struct {
 
 // Specifies an action for an experiment template. For more information, see
 // Actions (https://docs.aws.amazon.com/fis/latest/userguide/actions.html) in the
-// Fault Injection Simulator User Guide.
+// Fault Injection Service User Guide.
 type CreateExperimentTemplateActionInput struct {
 
 	// The ID of the action. The format of the action ID is:
@@ -144,7 +150,7 @@ type CreateExperimentTemplateStopConditionInput struct {
 // Specifies a target for an experiment. You must specify at least one Amazon
 // Resource Name (ARN) or at least one resource tag. You cannot specify both ARNs
 // and tags. For more information, see Targets (https://docs.aws.amazon.com/fis/latest/userguide/targets.html)
-// in the Fault Injection Simulator User Guide.
+// in the Fault Injection Service User Guide.
 type CreateExperimentTemplateTargetInput struct {
 
 	// The resource type. The resource type must be supported for the specified action.
@@ -186,6 +192,9 @@ type Experiment struct {
 
 	// The actions for the experiment.
 	Actions map[string]ExperimentAction
+
+	// The Amazon Resource Name (ARN) of the experiment.
+	Arn *string
 
 	// The time that the experiment was created.
 	CreationTime *time.Time
@@ -303,6 +312,10 @@ type ExperimentOptions struct {
 	// The account targeting setting for an experiment.
 	AccountTargeting AccountTargeting
 
+	// The actions mode of the experiment that is set from the StartExperiment API
+	// command.
+	ActionsMode ActionsMode
+
 	// The empty target resolution mode for an experiment.
 	EmptyTargetResolutionMode EmptyTargetResolutionMode
 
@@ -348,8 +361,14 @@ type ExperimentStopCondition struct {
 // Provides a summary of an experiment.
 type ExperimentSummary struct {
 
+	// The Amazon Resource Name (ARN) of the experiment.
+	Arn *string
+
 	// The time that the experiment was created.
 	CreationTime *time.Time
+
+	// The experiment options for the experiment.
+	ExperimentOptions *ExperimentOptions
 
 	// The ID of the experiment template.
 	ExperimentTemplateId *string
@@ -393,7 +412,7 @@ type ExperimentTarget struct {
 // Describes a target account configuration for an experiment.
 type ExperimentTargetAccountConfiguration struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	AccountId *string
 
 	// The description of the target account.
@@ -408,7 +427,7 @@ type ExperimentTargetAccountConfiguration struct {
 // Provides a summary of a target account configuration.
 type ExperimentTargetAccountConfigurationSummary struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	AccountId *string
 
 	// The description of the target account.
@@ -437,6 +456,9 @@ type ExperimentTemplate struct {
 
 	// The actions for the experiment.
 	Actions map[string]ExperimentTemplateAction
+
+	// The Amazon Resource Name (ARN) of the experiment template.
+	Arn *string
 
 	// The time the experiment template was created.
 	CreationTime *time.Time
@@ -585,6 +607,9 @@ type ExperimentTemplateStopCondition struct {
 // Provides a summary of an experiment template.
 type ExperimentTemplateSummary struct {
 
+	// The Amazon Resource Name (ARN) of the experiment template.
+	Arn *string
+
 	// The time that the experiment template was created.
 	CreationTime *time.Time
 
@@ -641,7 +666,7 @@ type ExperimentTemplateTargetFilter struct {
 
 // Specifies a filter used for the target resource input in an experiment
 // template. For more information, see Resource filters (https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters)
-// in the Fault Injection Simulator User Guide.
+// in the Fault Injection Service User Guide.
 type ExperimentTemplateTargetInputFilter struct {
 
 	// The attribute path for the filter.
@@ -672,10 +697,19 @@ type ResolvedTarget struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies experiment options for running an experiment.
+type StartExperimentExperimentOptionsInput struct {
+
+	// Specifies the actions mode for experiment options.
+	ActionsMode ActionsMode
+
+	noSmithyDocumentSerde
+}
+
 // Describes a target account configuration.
 type TargetAccountConfiguration struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	AccountId *string
 
 	// The description of the target account.
@@ -690,7 +724,7 @@ type TargetAccountConfiguration struct {
 // Provides a summary of a target account configuration.
 type TargetAccountConfigurationSummary struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	AccountId *string
 
 	// The description of the target account.

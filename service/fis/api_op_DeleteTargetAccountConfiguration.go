@@ -29,7 +29,7 @@ func (c *Client) DeleteTargetAccountConfiguration(ctx context.Context, params *D
 
 type DeleteTargetAccountConfigurationInput struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	//
 	// This member is required.
 	AccountId *string

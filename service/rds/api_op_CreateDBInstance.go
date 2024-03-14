@@ -234,8 +234,10 @@ type CreateDBInstanceInput struct {
 	//   - Can't be a word reserved by the database engine.
 	// Amazon RDS Custom for SQL Server Not applicable. Must be null. RDS for Db2 The
 	// name of the database to create when the DB instance is created. If this
-	// parameter isn't specified, no database is created in the DB instance.
-	// Constraints:
+	// parameter isn't specified, no database is created in the DB instance. In some
+	// cases, we recommend that you don't add a database name. For more information,
+	// see Additional considerations (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-db-instance-prereqs.html#db2-prereqs-additional-considerations)
+	// in the Amazon RDS User Guide. Constraints:
 	//   - Must contain 1 to 64 letters or numbers.
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0-9).
