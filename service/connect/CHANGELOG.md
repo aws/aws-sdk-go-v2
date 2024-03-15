@@ -1,3 +1,7 @@
+# v1.94.0 (2024-03-15)
+
+* **Feature**: This release adds Hierarchy based Access Control fields to Security Profile public APIs and adds support for UserAttributeFilter to SearchUsers API.
+
 # v1.93.0 (2024-03-12)
 
 * **Feature**: This release increases MaxResults limit to 500 in request for SearchUsers, SearchQueues and SearchRoutingProfiles APIs of Amazon Connect.

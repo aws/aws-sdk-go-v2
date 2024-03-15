@@ -1,8 +1,0 @@
-{
-    "id": "698e90ef-43a3-41a8-9c0a-a557dcd7fb00",
-    "type": "feature",
-    "description": "AWS CodeBuild now supports overflow behavior on Reserved Capacity.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

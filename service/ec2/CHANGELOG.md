@@ -1,3 +1,7 @@
+# v1.151.0 (2024-03-15)
+
+* **Feature**: Add media accelerator and neuron device information on the describe instance types API.
+
 # v1.150.1 (2024-03-12)
 
 * **Documentation**: Documentation updates for Amazon EC2.

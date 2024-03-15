@@ -1,3 +1,7 @@
+# v1.4.0 (2024-03-15)
+
+* **Feature**: Removed unused parameter kmsKeyArn from UpdateDeviceRequest
+
 # v1.3.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

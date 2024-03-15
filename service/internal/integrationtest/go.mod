@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 require (
 	github.com/aws/aws-sdk-go-v2 v1.25.3
 	github.com/aws/aws-sdk-go-v2/config v1.27.7
-	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.10
+	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.16.11
 	github.com/aws/aws-sdk-go-v2/service/acm v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.27.2
@@ -18,12 +18,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.39.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.36.2
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.30.3
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.22.2
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.25.2
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.26.2
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.21.2
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.36.0
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.36.1
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.46.2
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.38.2
@@ -32,7 +32,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.33.4
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.30.4
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.150.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.151.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.41.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.28.2
@@ -67,7 +67,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.23.2
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.27.2
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.52.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.52.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.2
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.28.2

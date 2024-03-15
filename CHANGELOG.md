@@ -1,3 +1,26 @@
+# Release (2024-03-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.34.0](service/backup/CHANGELOG.md#v1340-2024-03-15)
+  * **Feature**: This release introduces a boolean attribute ManagedByAWSBackupOnly as part of ListRecoveryPointsByResource api to filter the recovery points based on ownership. This attribute can be used to filter out the recovery points protected by AWSBackup.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.31.0](service/codebuild/CHANGELOG.md#v1310-2024-03-15)
+  * **Feature**: AWS CodeBuild now supports overflow behavior on Reserved Capacity.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.94.0](service/connect/CHANGELOG.md#v1940-2024-03-15)
+  * **Feature**: This release adds Hierarchy based Access Control fields to Security Profile public APIs and adds support for UserAttributeFilter to SearchUsers API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.151.0](service/ec2/CHANGELOG.md#v11510-2024-03-15)
+  * **Feature**: Add media accelerator and neuron device information on the describe instance types API.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.25.0](service/kinesisanalyticsv2/CHANGELOG.md#v1250-2024-03-15)
+  * **Feature**: Support for Flink 1.18 in Managed Service for Apache Flink
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.52.1](service/s3/CHANGELOG.md#v1521-2024-03-15)
+  * **Documentation**: Documentation updates for Amazon S3.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.133.0](service/sagemaker/CHANGELOG.md#v11330-2024-03-15)
+  * **Feature**: Adds m6i, m6id, m7i, c6i, c6id, c7i, r6i r6id, r7i, p5 instance type support to Sagemaker Notebook Instances and miscellaneous wording fixes for previous Sagemaker documentation.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.4.0](service/workspacesthinclient/CHANGELOG.md#v140-2024-03-15)
+  * **Feature**: Removed unused parameter kmsKeyArn from UpdateDeviceRequest
+
 # Release (2024-03-14)
 
 ## Module Highlights

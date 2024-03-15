@@ -1,8 +1,0 @@
-{
-    "id": "84459f7a-0648-494d-843b-8097d9bf846d",
-    "type": "feature",
-    "description": "Add media accelerator and neuron device information on the describe instance types API.",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.31.0 (2024-03-15)
+
+* **Feature**: AWS CodeBuild now supports overflow behavior on Reserved Capacity.
+
 # v1.30.3 (2024-03-08)
 
 * **Documentation**: This release adds support for a new webhook event: PULL_REQUEST_CLOSED.

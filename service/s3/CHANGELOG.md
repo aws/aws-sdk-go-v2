@@ -1,3 +1,7 @@
+# v1.52.1 (2024-03-15)
+
+* **Documentation**: Documentation updates for Amazon S3.
+
 # v1.52.0 (2024-03-13)
 
 * **Feature**: This release makes the default option for S3 on Outposts request signing to use the SigV4A algorithm when using AWS Common Runtime (CRT).

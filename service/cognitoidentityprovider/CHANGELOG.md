@@ -1,3 +1,7 @@
+# v1.36.1 (2024-03-15)
+
+* No change notes available for this release.
+
 # v1.36.0 (2024-03-08)
 
 * **Feature**: Add ConcurrentModificationException to SetUserPoolMfaConfig

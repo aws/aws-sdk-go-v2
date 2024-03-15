@@ -1,3 +1,7 @@
+# v1.133.0 (2024-03-15)
+
+* **Feature**: Adds m6i, m6id, m7i, c6i, c6id, c7i, r6i r6id, r7i, p5 instance type support to Sagemaker Notebook Instances and miscellaneous wording fixes for previous Sagemaker documentation.
+
 # v1.132.1 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

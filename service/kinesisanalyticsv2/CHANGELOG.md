@@ -1,3 +1,7 @@
+# v1.25.0 (2024-03-15)
+
+* **Feature**: Support for Flink 1.18 in Managed Service for Apache Flink
+
 # v1.24.0 (2024-03-13)
 
 * **Feature**: Support new RuntimeEnvironmentUpdate parameter within UpdateApplication API allowing callers to change the Flink version upon which their application runs.
