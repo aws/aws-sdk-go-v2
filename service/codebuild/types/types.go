@@ -808,6 +808,13 @@ type Fleet struct {
 	// The name of the compute fleet.
 	Name *string
 
+	// The compute fleet overflow behavior.
+	//   - For overflow behavior QUEUE , your overflow builds need to wait on the
+	//   existing fleet instance to become available.
+	//   - For overflow behavior ON_DEMAND , your overflow builds run on CodeBuild
+	//   on-demand.
+	OverflowBehavior FleetOverflowBehavior
+
 	// The scaling configuration of the compute fleet.
 	ScalingConfiguration *ScalingConfigurationOutput
 

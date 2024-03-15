@@ -96,6 +96,13 @@ type CreateFleetInput struct {
 	// This member is required.
 	Name *string
 
+	// The compute fleet overflow behavior.
+	//   - For overflow behavior QUEUE , your overflow builds need to wait on the
+	//   existing fleet instance to become available.
+	//   - For overflow behavior ON_DEMAND , your overflow builds run on CodeBuild
+	//   on-demand.
+	OverflowBehavior types.FleetOverflowBehavior
+
 	// The scaling configuration of the compute fleet.
 	ScalingConfiguration *types.ScalingConfigurationInput
 

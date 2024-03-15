@@ -282,6 +282,18 @@ type Attribute struct {
 	noSmithyDocumentSerde
 }
 
+// A list of conditions which would be applied together with an AND condition.
+type AttributeAndCondition struct {
+
+	// A leaf node condition which can be used to specify a hierarchy group condition.
+	HierarchyGroupCondition *HierarchyGroupCondition
+
+	// A leaf node condition which can be used to specify a tag condition.
+	TagConditions []TagCondition
+
+	noSmithyDocumentSerde
+}
+
 // Has audio-specific configurations as the operating parameter for Echo Reduction.
 type AudioFeatures struct {
 
@@ -809,6 +821,34 @@ type ControlPlaneTagFilter struct {
 	OrConditions [][]TagCondition
 
 	// A leaf node condition which can be used to specify a tag condition.
+	TagCondition *TagCondition
+
+	noSmithyDocumentSerde
+}
+
+// An object that can be used to specify Tag conditions or Hierarchy Group
+// conditions inside the SearchFilter . This accepts an OR of AND (List of List)
+// input where:
+//   - The top level list specifies conditions that need to be applied with OR
+//     operator
+//   - The inner list specifies conditions that need to be applied with AND
+//     operator.
+//
+// Only one field can be populated. Maximum number of allowed Tag conditions is
+// 25. Maximum number of allowed Hierarchy Group conditions is 20.
+type ControlPlaneUserAttributeFilter struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndCondition *AttributeAndCondition
+
+	// A leaf node condition which can be used to specify a hierarchy group condition.
+	HierarchyGroupCondition *HierarchyGroupCondition
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []AttributeAndCondition
+
+	// A leaf node condition which can be used to specify a tag condition, for
+	// example, HAVE BPO = 123 .
 	TagCondition *TagCondition
 
 	noSmithyDocumentSerde
@@ -4380,6 +4420,10 @@ type SecurityKey struct {
 // Contains information about a security profile.
 type SecurityProfile struct {
 
+	// The identifier of the hierarchy group that a security profile uses to restrict
+	// access to resources in Amazon Connect.
+	AllowedAccessControlHierarchyGroupId *string
+
 	// The list of tags that a security profile uses to restrict access to resources
 	// in Amazon Connect.
 	AllowedAccessControlTags map[string]string
@@ -4389,6 +4433,10 @@ type SecurityProfile struct {
 
 	// The description of the security profile.
 	Description *string
+
+	// The list of resources that a security profile applies hierarchy restrictions to
+	// in Amazon Connect. Following are acceptable ResourceNames: User .
+	HierarchyRestrictedResources []string
 
 	// The identifier for the security profile.
 	Id *string
@@ -5317,6 +5365,19 @@ type UserSearchFilter struct {
 	//   - Top level list specifies conditions that need to be applied with OR operator
 	//   - Inner list specifies conditions that need to be applied with AND operator.
 	TagFilter *ControlPlaneTagFilter
+
+	// An object that can be used to specify Tag conditions or Hierarchy Group
+	// conditions inside the SearchFilter. This accepts an OR of AND (List of List)
+	// input where:
+	//   - The top level list specifies conditions that need to be applied with OR
+	//   operator.
+	//   - The inner list specifies conditions that need to be applied with AND
+	//   operator.
+	// Only one field can be populated. This object can’t be used along with
+	// TagFilter. Request can either contain TagFilter or UserAttributeFilter if
+	// SearchFilter is specified, combination of both is not supported and such request
+	// will throw AccessDeniedException.
+	UserAttributeFilter *ControlPlaneUserAttributeFilter
 
 	noSmithyDocumentSerde
 }

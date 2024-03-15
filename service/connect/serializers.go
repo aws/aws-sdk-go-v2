@@ -3639,6 +3639,11 @@ func awsRestjson1_serializeOpDocumentCreateSecurityProfileInput(v *CreateSecurit
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedAccessControlHierarchyGroupId != nil {
+		ok := object.Key("AllowedAccessControlHierarchyGroupId")
+		ok.String(*v.AllowedAccessControlHierarchyGroupId)
+	}
+
 	if v.AllowedAccessControlTags != nil {
 		ok := object.Key("AllowedAccessControlTags")
 		if err := awsRestjson1_serializeDocumentAllowedAccessControlTags(v.AllowedAccessControlTags, ok); err != nil {
@@ -3656,6 +3661,13 @@ func awsRestjson1_serializeOpDocumentCreateSecurityProfileInput(v *CreateSecurit
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.HierarchyRestrictedResources != nil {
+		ok := object.Key("HierarchyRestrictedResources")
+		if err := awsRestjson1_serializeDocumentHierarchyRestrictedResourceList(v.HierarchyRestrictedResources, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Permissions != nil {
@@ -20757,6 +20769,11 @@ func awsRestjson1_serializeOpDocumentUpdateSecurityProfileInput(v *UpdateSecurit
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedAccessControlHierarchyGroupId != nil {
+		ok := object.Key("AllowedAccessControlHierarchyGroupId")
+		ok.String(*v.AllowedAccessControlHierarchyGroupId)
+	}
+
 	if v.AllowedAccessControlTags != nil {
 		ok := object.Key("AllowedAccessControlTags")
 		if err := awsRestjson1_serializeDocumentAllowedAccessControlTags(v.AllowedAccessControlTags, ok); err != nil {
@@ -20774,6 +20791,13 @@ func awsRestjson1_serializeOpDocumentUpdateSecurityProfileInput(v *UpdateSecurit
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.HierarchyRestrictedResources != nil {
+		ok := object.Key("HierarchyRestrictedResources")
+		if err := awsRestjson1_serializeDocumentHierarchyRestrictedResourceList(v.HierarchyRestrictedResources, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Permissions != nil {
@@ -22201,6 +22225,40 @@ func awsRestjson1_serializeDocumentAssignContactCategoryActionDefinition(v *type
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAttributeAndCondition(v *types.AttributeAndCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HierarchyGroupCondition != nil {
+		ok := object.Key("HierarchyGroupCondition")
+		if err := awsRestjson1_serializeDocumentHierarchyGroupCondition(v.HierarchyGroupCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TagConditions != nil {
+		ok := object.Key("TagConditions")
+		if err := awsRestjson1_serializeDocumentTagAndConditionList(v.TagConditions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAttributeOrConditionList(v []types.AttributeAndCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAttributeAndCondition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAttributes(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22447,6 +22505,41 @@ func awsRestjson1_serializeDocumentControlPlaneTagFilter(v *types.ControlPlaneTa
 	if v.OrConditions != nil {
 		ok := object.Key("OrConditions")
 		if err := awsRestjson1_serializeDocumentTagOrConditionList(v.OrConditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TagCondition != nil {
+		ok := object.Key("TagCondition")
+		if err := awsRestjson1_serializeDocumentTagCondition(v.TagCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentControlPlaneUserAttributeFilter(v *types.ControlPlaneUserAttributeFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AndCondition != nil {
+		ok := object.Key("AndCondition")
+		if err := awsRestjson1_serializeDocumentAttributeAndCondition(v.AndCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HierarchyGroupCondition != nil {
+		ok := object.Key("HierarchyGroupCondition")
+		if err := awsRestjson1_serializeDocumentHierarchyGroupCondition(v.HierarchyGroupCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrConditions != nil {
+		ok := object.Key("OrConditions")
+		if err := awsRestjson1_serializeDocumentAttributeOrConditionList(v.OrConditions, ok); err != nil {
 			return err
 		}
 	}
@@ -23360,6 +23453,17 @@ func awsRestjson1_serializeDocumentHierarchyLevelUpdate(v *types.HierarchyLevelU
 		ok.String(*v.Name)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHierarchyRestrictedResourceList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -25915,6 +26019,13 @@ func awsRestjson1_serializeDocumentUserSearchFilter(v *types.UserSearchFilter, v
 	if v.TagFilter != nil {
 		ok := object.Key("TagFilter")
 		if err := awsRestjson1_serializeDocumentControlPlaneTagFilter(v.TagFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserAttributeFilter != nil {
+		ok := object.Key("UserAttributeFilter")
+		if err := awsRestjson1_serializeDocumentControlPlaneUserAttributeFilter(v.UserAttributeFilter, ok); err != nil {
 			return err
 		}
 	}

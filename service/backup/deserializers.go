@@ -19849,6 +19849,15 @@ func awsRestjson1_deserializeDocumentRecoveryPointByResource(v **types.RecoveryP
 				sv.StatusMessage = ptr.String(jtv)
 			}
 
+		case "VaultType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VaultType to be of type string, got %T instead", value)
+				}
+				sv.VaultType = types.VaultType(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

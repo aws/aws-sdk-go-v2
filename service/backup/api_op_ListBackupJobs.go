@@ -90,7 +90,13 @@ type ListBackupJobsInput struct {
 	//   - VirtualMachine for virtual machines
 	ByResourceType *string
 
-	// Returns only backup jobs that are in the specified state.
+	// Returns only backup jobs that are in the specified state. Completed with issues
+	// is a status found only in the Backup console. For API, this status refers to
+	// jobs with a state of COMPLETED and a MessageCategory with a value other than
+	// SUCCESS ; that is, the status is completed but comes with a status message. To
+	// obtain the job count for Completed with issues , run two GET requests, and
+	// subtract the second, smaller number: GET /backup-jobs/?state=COMPLETED GET
+	// /backup-jobs/?messageCategory=SUCCESS&state=COMPLETED
 	ByState types.BackupJobState
 
 	// The maximum number of items to be returned.

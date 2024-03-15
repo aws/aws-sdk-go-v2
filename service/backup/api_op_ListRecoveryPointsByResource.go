@@ -37,6 +37,13 @@ type ListRecoveryPointsByResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
+	// This attribute filters recovery points based on ownership. If this is set to
+	// TRUE , the response will contain recovery points associated with the selected
+	// resources that are managed by Backup. If this is set to FALSE , the response
+	// will contain all recovery points associated with the selected resource. Type:
+	// Boolean
+	ManagedByAWSBackupOnly bool
+
 	// The maximum number of items to be returned. Amazon RDS requires a value of at
 	// least 20.
 	MaxResults *int32

@@ -8332,6 +8332,15 @@ func awsAwsjson11_deserializeDocumentFleet(v **types.Fleet, value interface{}) e
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "overflowBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FleetOverflowBehavior to be of type string, got %T instead", value)
+				}
+				sv.OverflowBehavior = types.FleetOverflowBehavior(jtv)
+			}
+
 		case "scalingConfiguration":
 			if err := awsAwsjson11_deserializeDocumentScalingConfigurationOutput(&sv.ScalingConfiguration, value); err != nil {
 				return err

@@ -352,6 +352,24 @@ func (FleetContextCode) Values() []FleetContextCode {
 	}
 }
 
+type FleetOverflowBehavior string
+
+// Enum values for FleetOverflowBehavior
+const (
+	FleetOverflowBehaviorQueue    FleetOverflowBehavior = "QUEUE"
+	FleetOverflowBehaviorOnDemand FleetOverflowBehavior = "ON_DEMAND"
+)
+
+// Values returns all known values for FleetOverflowBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FleetOverflowBehavior) Values() []FleetOverflowBehavior {
+	return []FleetOverflowBehavior{
+		"QUEUE",
+		"ON_DEMAND",
+	}
+}
+
 type FleetScalingMetricType string
 
 // Enum values for FleetScalingMetricType

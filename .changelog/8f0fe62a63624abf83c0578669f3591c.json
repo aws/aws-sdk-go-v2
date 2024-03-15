@@ -1,0 +1,8 @@
+{
+    "id": "8f0fe62a-6362-4abf-83c0-578669f3591c",
+    "type": "feature",
+    "description": "Removed unused parameter kmsKeyArn from UpdateDeviceRequest",
+    "modules": [
+        "service/workspacesthinclient"
+    ]
+}

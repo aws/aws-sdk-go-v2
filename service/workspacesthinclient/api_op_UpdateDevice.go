@@ -37,10 +37,6 @@ type UpdateDeviceInput struct {
 	// The ID of the software set to apply.
 	DesiredSoftwareSetId *string
 
-	// The Amazon Resource Name (ARN) of the Key Management Service key to use for the
-	// update.
-	KmsKeyArn *string
-
 	// The name of the device to update.
 	Name *string
 

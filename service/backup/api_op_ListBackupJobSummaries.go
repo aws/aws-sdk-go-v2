@@ -77,7 +77,14 @@ type ListBackupJobSummariesInput struct {
 
 	// This parameter returns the job count for jobs with the specified state. The the
 	// value ANY returns count of all states. AGGREGATE_ALL aggregates job counts for
-	// all states and returns the sum.
+	// all states and returns the sum. Completed with issues is a status found only in
+	// the Backup console. For API, this status refers to jobs with a state of
+	// COMPLETED and a MessageCategory with a value other than SUCCESS ; that is, the
+	// status is completed but comes with a status message. To obtain the job count for
+	// Completed with issues , run two GET requests, and subtract the second, smaller
+	// number: GET
+	// /audit/backup-job-summaries?AggregationPeriod=FOURTEEN_DAYS&State=COMPLETED GET
+	// /audit/backup-job-summaries?AggregationPeriod=FOURTEEN_DAYS&MessageCategory=SUCCESS&State=COMPLETED
 	State types.BackupJobStatus
 
 	noSmithyDocumentSerde

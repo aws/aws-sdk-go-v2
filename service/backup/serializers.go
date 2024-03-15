@@ -4736,6 +4736,10 @@ func awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByResourceInput(v *Li
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ManagedByAWSBackupOnly {
+		encoder.SetQuery("managedByAWSBackupOnly").Boolean(v.ManagedByAWSBackupOnly)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}

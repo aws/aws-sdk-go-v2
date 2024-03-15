@@ -7380,11 +7380,17 @@ type InstanceTypeInfo struct {
 	// in the Amazon EC2 User Guide.
 	InstanceType InstanceType
 
+	// Describes the media accelerator settings for the instance type.
+	MediaAcceleratorInfo *MediaAcceleratorInfo
+
 	// Describes the memory for the instance type.
 	MemoryInfo *MemoryInfo
 
 	// Describes the network settings for the instance type.
 	NetworkInfo *NetworkInfo
+
+	// Describes the Neuron accelerator settings for the instance type.
+	NeuronInfo *NeuronInfo
 
 	// Indicates whether Nitro Enclaves is supported.
 	NitroEnclavesSupport NitroEnclavesSupport
@@ -10080,6 +10086,46 @@ type ManagedPrefixList struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the media accelerators for the instance type.
+type MediaAcceleratorInfo struct {
+
+	// Describes the media accelerators for the instance type.
+	Accelerators []MediaDeviceInfo
+
+	// The total size of the memory for the media accelerators for the instance type,
+	// in MiB.
+	TotalMediaMemoryInMiB *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the media accelerators for the instance type.
+type MediaDeviceInfo struct {
+
+	// The number of media accelerators for the instance type.
+	Count *int32
+
+	// The manufacturer of the media accelerator.
+	Manufacturer *string
+
+	// Describes the memory available to the media accelerator.
+	MemoryInfo *MediaDeviceMemoryInfo
+
+	// The name of the media accelerator.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the memory available to the media accelerator.
+type MediaDeviceMemoryInfo struct {
+
+	// The size of the memory available to each media accelerator, in MiB.
+	SizeInMiB *int32
+
+	noSmithyDocumentSerde
+}
+
 // The minimum and maximum amount of memory per vCPU, in GiB.
 type MemoryGiBPerVCpu struct {
 
@@ -11191,6 +11237,58 @@ type NetworkInterfacePrivateIpAddress struct {
 
 	// The private IPv4 address.
 	PrivateIpAddress *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the cores available to the neuron accelerator.
+type NeuronDeviceCoreInfo struct {
+
+	// The number of cores available to the neuron accelerator.
+	Count *int32
+
+	// The version of the neuron accelerator.
+	Version *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the neuron accelerators for the instance type.
+type NeuronDeviceInfo struct {
+
+	// Describes the cores available to each neuron accelerator.
+	CoreInfo *NeuronDeviceCoreInfo
+
+	// The number of neuron accelerators for the instance type.
+	Count *int32
+
+	// Describes the memory available to each neuron accelerator.
+	MemoryInfo *NeuronDeviceMemoryInfo
+
+	// The name of the neuron accelerator.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the memory available to the neuron accelerator.
+type NeuronDeviceMemoryInfo struct {
+
+	// The size of the memory available to the neuron accelerator, in MiB.
+	SizeInMiB *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the neuron accelerators for the instance type.
+type NeuronInfo struct {
+
+	// Describes the neuron accelerators for the instance type.
+	NeuronDevices []NeuronDeviceInfo
+
+	// The total size of the memory for the neuron accelerators for the instance type,
+	// in MiB.
+	TotalNeuronDeviceMemoryInMiB *int32
 
 	noSmithyDocumentSerde
 }
@@ -14680,7 +14778,10 @@ type SpotFleetRequestConfigData struct {
 
 	// The launch specifications for the Spot Fleet request. If you specify
 	// LaunchSpecifications , you can't specify LaunchTemplateConfigs . If you include
-	// On-Demand capacity in your request, you must use LaunchTemplateConfigs .
+	// On-Demand capacity in your request, you must use LaunchTemplateConfigs . If an
+	// AMI specified in a launch specification is deregistered or disabled, no new
+	// instances can be launched from the AMI. For fleets of type maintain , the target
+	// capacity will not be maintained.
 	LaunchSpecifications []SpotFleetLaunchSpecification
 
 	// The launch template and overrides. If you specify LaunchTemplateConfigs , you

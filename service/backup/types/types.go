@@ -986,7 +986,8 @@ type FrameworkControl struct {
 
 	// The scope of a control. The control scope defines what the control will
 	// evaluate. Three examples of control scopes are: a specific backup plan, all
-	// backup plans with a specific tag, or all backup plans.
+	// backup plans with a specific tag, or all backup plans. For more information, see
+	// ControlScope . (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ControlScope.html)
 	ControlScope *ControlScope
 
 	noSmithyDocumentSerde
@@ -1288,6 +1289,9 @@ type RecoveryPointByResource struct {
 
 	// A message explaining the reason of the recovery point deletion failure.
 	StatusMessage *string
+
+	// This is the type of vault in which the described recovery point is stored.
+	VaultType VaultType
 
 	noSmithyDocumentSerde
 }

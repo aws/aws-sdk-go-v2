@@ -3804,6 +3804,11 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.String(*v.Name)
 	}
 
+	if len(v.OverflowBehavior) > 0 {
+		ok := object.Key("overflowBehavior")
+		ok.String(string(v.OverflowBehavior))
+	}
+
 	if v.ScalingConfiguration != nil {
 		ok := object.Key("scalingConfiguration")
 		if err := awsAwsjson11_serializeDocumentScalingConfigurationInput(v.ScalingConfiguration, ok); err != nil {
@@ -5079,6 +5084,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if len(v.EnvironmentType) > 0 {
 		ok := object.Key("environmentType")
 		ok.String(string(v.EnvironmentType))
+	}
+
+	if len(v.OverflowBehavior) > 0 {
+		ok := object.Key("overflowBehavior")
+		ok.String(string(v.OverflowBehavior))
 	}
 
 	if v.ScalingConfiguration != nil {

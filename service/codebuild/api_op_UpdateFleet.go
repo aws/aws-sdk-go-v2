@@ -90,6 +90,13 @@ type UpdateFleetInput struct {
 	// in the CodeBuild user guide.
 	EnvironmentType types.EnvironmentType
 
+	// The compute fleet overflow behavior.
+	//   - For overflow behavior QUEUE , your overflow builds need to wait on the
+	//   existing fleet instance to become available.
+	//   - For overflow behavior ON_DEMAND , your overflow builds run on CodeBuild
+	//   on-demand.
+	OverflowBehavior types.FleetOverflowBehavior
+
 	// The scaling configuration of the compute fleet.
 	ScalingConfiguration *types.ScalingConfigurationInput
 

@@ -40,6 +40,10 @@ type UpdateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileId *string
 
+	// The identifier of the hierarchy group that a security profile uses to restrict
+	// access to resources in Amazon Connect.
+	AllowedAccessControlHierarchyGroupId *string
+
 	// The list of tags that a security profile uses to restrict access to resources
 	// in Amazon Connect.
 	AllowedAccessControlTags map[string]string
@@ -50,6 +54,10 @@ type UpdateSecurityProfileInput struct {
 
 	// The description of the security profile.
 	Description *string
+
+	// The list of resources that a security profile applies hierarchy restrictions to
+	// in Amazon Connect. Following are acceptable ResourceNames: User .
+	HierarchyRestrictedResources []string
 
 	// The permissions granted to a security profile. For a list of valid permissions,
 	// see List of security profile permissions (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html)

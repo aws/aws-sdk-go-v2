@@ -114,9 +114,9 @@ type CreateDomainInput struct {
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string
 
-	// SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to
-	// the domain with an Amazon Web Services managed key by default. For more control,
-	// specify a customer managed key.
+	// SageMaker uses Amazon Web Services KMS to encrypt EFS and EBS volumes attached
+	// to the domain with an Amazon Web Services managed key by default. For more
+	// control, specify a customer managed key.
 	KmsKeyId *string
 
 	// Tags to associated with the Domain. Each tag consists of a key and an optional

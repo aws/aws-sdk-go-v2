@@ -42454,6 +42454,42 @@ func awsRestjson1_deserializeDocumentHierarchyPathReference(v **types.HierarchyP
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHierarchyRestrictedResourceList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected HierarchyRestrictedResourceName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentHierarchyStructure(v **types.HierarchyStructure, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -50070,6 +50106,15 @@ func awsRestjson1_deserializeDocumentSecurityProfile(v **types.SecurityProfile, 
 
 	for key, value := range shape {
 		switch key {
+		case "AllowedAccessControlHierarchyGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HierarchyGroupId to be of type string, got %T instead", value)
+				}
+				sv.AllowedAccessControlHierarchyGroupId = ptr.String(jtv)
+			}
+
 		case "AllowedAccessControlTags":
 			if err := awsRestjson1_deserializeDocumentAllowedAccessControlTags(&sv.AllowedAccessControlTags, value); err != nil {
 				return err
@@ -50091,6 +50136,11 @@ func awsRestjson1_deserializeDocumentSecurityProfile(v **types.SecurityProfile, 
 					return fmt.Errorf("expected SecurityProfileDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "HierarchyRestrictedResources":
+			if err := awsRestjson1_deserializeDocumentHierarchyRestrictedResourceList(&sv.HierarchyRestrictedResources, value); err != nil {
+				return err
 			}
 
 		case "Id":

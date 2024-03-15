@@ -64,8 +64,8 @@ type CreateFeatureGroupInput struct {
 	// The name of the FeatureGroup . The name must be unique within an Amazon Web
 	// Services Region in an Amazon Web Services account. The name:
 	//   - Must start and end with an alphanumeric character.
-	//   - Can only contain alphanumeric character and hyphens. Spaces are not
-	//   allowed.
+	//   - Can only include alphanumeric characters, underscores, and hyphens. Spaces
+	//   are not allowed.
 	//
 	// This member is required.
 	FeatureGroupName *string

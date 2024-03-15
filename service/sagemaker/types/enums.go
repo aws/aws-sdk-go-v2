@@ -2885,6 +2885,88 @@ const (
 	InstanceTypeMlInf124xlarge InstanceType = "ml.inf1.24xlarge"
 	InstanceTypeMlP4d24xlarge  InstanceType = "ml.p4d.24xlarge"
 	InstanceTypeMlP4de24xlarge InstanceType = "ml.p4de.24xlarge"
+	InstanceTypeMlP548xlarge   InstanceType = "ml.p5.48xlarge"
+	InstanceTypeMlM6iLarge     InstanceType = "ml.m6i.large"
+	InstanceTypeMlM6iXlarge    InstanceType = "ml.m6i.xlarge"
+	InstanceTypeMlM6i2xlarge   InstanceType = "ml.m6i.2xlarge"
+	InstanceTypeMlM6i4xlarge   InstanceType = "ml.m6i.4xlarge"
+	InstanceTypeMlM6i8xlarge   InstanceType = "ml.m6i.8xlarge"
+	InstanceTypeMlM6i12xlarge  InstanceType = "ml.m6i.12xlarge"
+	InstanceTypeMlM6i16xlarge  InstanceType = "ml.m6i.16xlarge"
+	InstanceTypeMlM6i24xlarge  InstanceType = "ml.m6i.24xlarge"
+	InstanceTypeMlM6i32xlarge  InstanceType = "ml.m6i.32xlarge"
+	InstanceTypeMlM7iLarge     InstanceType = "ml.m7i.large"
+	InstanceTypeMlM7iXlarge    InstanceType = "ml.m7i.xlarge"
+	InstanceTypeMlM7i2xlarge   InstanceType = "ml.m7i.2xlarge"
+	InstanceTypeMlM7i4xlarge   InstanceType = "ml.m7i.4xlarge"
+	InstanceTypeMlM7i8xlarge   InstanceType = "ml.m7i.8xlarge"
+	InstanceTypeMlM7i12xlarge  InstanceType = "ml.m7i.12xlarge"
+	InstanceTypeMlM7i16xlarge  InstanceType = "ml.m7i.16xlarge"
+	InstanceTypeMlM7i24xlarge  InstanceType = "ml.m7i.24xlarge"
+	InstanceTypeMlM7i48xlarge  InstanceType = "ml.m7i.48xlarge"
+	InstanceTypeMlC6iLarge     InstanceType = "ml.c6i.large"
+	InstanceTypeMlC6iXlarge    InstanceType = "ml.c6i.xlarge"
+	InstanceTypeMlC6i2xlarge   InstanceType = "ml.c6i.2xlarge"
+	InstanceTypeMlC6i4xlarge   InstanceType = "ml.c6i.4xlarge"
+	InstanceTypeMlC6i8xlarge   InstanceType = "ml.c6i.8xlarge"
+	InstanceTypeMlC6i12xlarge  InstanceType = "ml.c6i.12xlarge"
+	InstanceTypeMlC6i16xlarge  InstanceType = "ml.c6i.16xlarge"
+	InstanceTypeMlC6i24xlarge  InstanceType = "ml.c6i.24xlarge"
+	InstanceTypeMlC6i32xlarge  InstanceType = "ml.c6i.32xlarge"
+	InstanceTypeMlC7iLarge     InstanceType = "ml.c7i.large"
+	InstanceTypeMlC7iXlarge    InstanceType = "ml.c7i.xlarge"
+	InstanceTypeMlC7i2xlarge   InstanceType = "ml.c7i.2xlarge"
+	InstanceTypeMlC7i4xlarge   InstanceType = "ml.c7i.4xlarge"
+	InstanceTypeMlC7i8xlarge   InstanceType = "ml.c7i.8xlarge"
+	InstanceTypeMlC7i12xlarge  InstanceType = "ml.c7i.12xlarge"
+	InstanceTypeMlC7i16xlarge  InstanceType = "ml.c7i.16xlarge"
+	InstanceTypeMlC7i24xlarge  InstanceType = "ml.c7i.24xlarge"
+	InstanceTypeMlC7i48xlarge  InstanceType = "ml.c7i.48xlarge"
+	InstanceTypeMlR6iLarge     InstanceType = "ml.r6i.large"
+	InstanceTypeMlR6iXlarge    InstanceType = "ml.r6i.xlarge"
+	InstanceTypeMlR6i2xlarge   InstanceType = "ml.r6i.2xlarge"
+	InstanceTypeMlR6i4xlarge   InstanceType = "ml.r6i.4xlarge"
+	InstanceTypeMlR6i8xlarge   InstanceType = "ml.r6i.8xlarge"
+	InstanceTypeMlR6i12xlarge  InstanceType = "ml.r6i.12xlarge"
+	InstanceTypeMlR6i16xlarge  InstanceType = "ml.r6i.16xlarge"
+	InstanceTypeMlR6i24xlarge  InstanceType = "ml.r6i.24xlarge"
+	InstanceTypeMlR6i32xlarge  InstanceType = "ml.r6i.32xlarge"
+	InstanceTypeMlR7iLarge     InstanceType = "ml.r7i.large"
+	InstanceTypeMlR7iXlarge    InstanceType = "ml.r7i.xlarge"
+	InstanceTypeMlR7i2xlarge   InstanceType = "ml.r7i.2xlarge"
+	InstanceTypeMlR7i4xlarge   InstanceType = "ml.r7i.4xlarge"
+	InstanceTypeMlR7i8xlarge   InstanceType = "ml.r7i.8xlarge"
+	InstanceTypeMlR7i12xlarge  InstanceType = "ml.r7i.12xlarge"
+	InstanceTypeMlR7i16xlarge  InstanceType = "ml.r7i.16xlarge"
+	InstanceTypeMlR7i24xlarge  InstanceType = "ml.r7i.24xlarge"
+	InstanceTypeMlR7i48xlarge  InstanceType = "ml.r7i.48xlarge"
+	InstanceTypeMlM6idLarge    InstanceType = "ml.m6id.large"
+	InstanceTypeMlM6idXlarge   InstanceType = "ml.m6id.xlarge"
+	InstanceTypeMlM6id2xlarge  InstanceType = "ml.m6id.2xlarge"
+	InstanceTypeMlM6id4xlarge  InstanceType = "ml.m6id.4xlarge"
+	InstanceTypeMlM6id8xlarge  InstanceType = "ml.m6id.8xlarge"
+	InstanceTypeMlM6id12xlarge InstanceType = "ml.m6id.12xlarge"
+	InstanceTypeMlM6id16xlarge InstanceType = "ml.m6id.16xlarge"
+	InstanceTypeMlM6id24xlarge InstanceType = "ml.m6id.24xlarge"
+	InstanceTypeMlM6id32xlarge InstanceType = "ml.m6id.32xlarge"
+	InstanceTypeMlC6idLarge    InstanceType = "ml.c6id.large"
+	InstanceTypeMlC6idXlarge   InstanceType = "ml.c6id.xlarge"
+	InstanceTypeMlC6id2xlarge  InstanceType = "ml.c6id.2xlarge"
+	InstanceTypeMlC6id4xlarge  InstanceType = "ml.c6id.4xlarge"
+	InstanceTypeMlC6id8xlarge  InstanceType = "ml.c6id.8xlarge"
+	InstanceTypeMlC6id12xlarge InstanceType = "ml.c6id.12xlarge"
+	InstanceTypeMlC6id16xlarge InstanceType = "ml.c6id.16xlarge"
+	InstanceTypeMlC6id24xlarge InstanceType = "ml.c6id.24xlarge"
+	InstanceTypeMlC6id32xlarge InstanceType = "ml.c6id.32xlarge"
+	InstanceTypeMlR6idLarge    InstanceType = "ml.r6id.large"
+	InstanceTypeMlR6idXlarge   InstanceType = "ml.r6id.xlarge"
+	InstanceTypeMlR6id2xlarge  InstanceType = "ml.r6id.2xlarge"
+	InstanceTypeMlR6id4xlarge  InstanceType = "ml.r6id.4xlarge"
+	InstanceTypeMlR6id8xlarge  InstanceType = "ml.r6id.8xlarge"
+	InstanceTypeMlR6id12xlarge InstanceType = "ml.r6id.12xlarge"
+	InstanceTypeMlR6id16xlarge InstanceType = "ml.r6id.16xlarge"
+	InstanceTypeMlR6id24xlarge InstanceType = "ml.r6id.24xlarge"
+	InstanceTypeMlR6id32xlarge InstanceType = "ml.r6id.32xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -2967,6 +3049,88 @@ func (InstanceType) Values() []InstanceType {
 		"ml.inf1.24xlarge",
 		"ml.p4d.24xlarge",
 		"ml.p4de.24xlarge",
+		"ml.p5.48xlarge",
+		"ml.m6i.large",
+		"ml.m6i.xlarge",
+		"ml.m6i.2xlarge",
+		"ml.m6i.4xlarge",
+		"ml.m6i.8xlarge",
+		"ml.m6i.12xlarge",
+		"ml.m6i.16xlarge",
+		"ml.m6i.24xlarge",
+		"ml.m6i.32xlarge",
+		"ml.m7i.large",
+		"ml.m7i.xlarge",
+		"ml.m7i.2xlarge",
+		"ml.m7i.4xlarge",
+		"ml.m7i.8xlarge",
+		"ml.m7i.12xlarge",
+		"ml.m7i.16xlarge",
+		"ml.m7i.24xlarge",
+		"ml.m7i.48xlarge",
+		"ml.c6i.large",
+		"ml.c6i.xlarge",
+		"ml.c6i.2xlarge",
+		"ml.c6i.4xlarge",
+		"ml.c6i.8xlarge",
+		"ml.c6i.12xlarge",
+		"ml.c6i.16xlarge",
+		"ml.c6i.24xlarge",
+		"ml.c6i.32xlarge",
+		"ml.c7i.large",
+		"ml.c7i.xlarge",
+		"ml.c7i.2xlarge",
+		"ml.c7i.4xlarge",
+		"ml.c7i.8xlarge",
+		"ml.c7i.12xlarge",
+		"ml.c7i.16xlarge",
+		"ml.c7i.24xlarge",
+		"ml.c7i.48xlarge",
+		"ml.r6i.large",
+		"ml.r6i.xlarge",
+		"ml.r6i.2xlarge",
+		"ml.r6i.4xlarge",
+		"ml.r6i.8xlarge",
+		"ml.r6i.12xlarge",
+		"ml.r6i.16xlarge",
+		"ml.r6i.24xlarge",
+		"ml.r6i.32xlarge",
+		"ml.r7i.large",
+		"ml.r7i.xlarge",
+		"ml.r7i.2xlarge",
+		"ml.r7i.4xlarge",
+		"ml.r7i.8xlarge",
+		"ml.r7i.12xlarge",
+		"ml.r7i.16xlarge",
+		"ml.r7i.24xlarge",
+		"ml.r7i.48xlarge",
+		"ml.m6id.large",
+		"ml.m6id.xlarge",
+		"ml.m6id.2xlarge",
+		"ml.m6id.4xlarge",
+		"ml.m6id.8xlarge",
+		"ml.m6id.12xlarge",
+		"ml.m6id.16xlarge",
+		"ml.m6id.24xlarge",
+		"ml.m6id.32xlarge",
+		"ml.c6id.large",
+		"ml.c6id.xlarge",
+		"ml.c6id.2xlarge",
+		"ml.c6id.4xlarge",
+		"ml.c6id.8xlarge",
+		"ml.c6id.12xlarge",
+		"ml.c6id.16xlarge",
+		"ml.c6id.24xlarge",
+		"ml.c6id.32xlarge",
+		"ml.r6id.large",
+		"ml.r6id.xlarge",
+		"ml.r6id.2xlarge",
+		"ml.r6id.4xlarge",
+		"ml.r6id.8xlarge",
+		"ml.r6id.12xlarge",
+		"ml.r6id.16xlarge",
+		"ml.r6id.24xlarge",
+		"ml.r6id.32xlarge",
 	}
 }
 

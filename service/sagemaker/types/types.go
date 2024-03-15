@@ -2999,9 +2999,11 @@ type ContainerDefinition struct {
 	// ContainerHostName parameter of every ContainerDefinition in that pipeline.
 	ContainerHostname *string
 
-	// The environment variables to set in the Docker container. Each key and value in
-	// the Environment string to string map can have length of up to 1024. We support
-	// up to 16 entries in the map.
+	// The environment variables to set in the Docker container. The maximum length of
+	// each key and value in the Environment map is 1024 bytes. The maximum length of
+	// all keys and values in the map, combined, is 32 KB. If you pass multiple
+	// containers to a CreateModel request, then the maximum length of all of their
+	// maps, combined, is also 32 KB.
 	Environment map[string]string
 
 	// The path where inference code is stored. This can be either in Amazon EC2
@@ -4954,7 +4956,10 @@ type FailStepMetadata struct {
 type FeatureDefinition struct {
 
 	// The name of a feature. The type must be a string. FeatureName cannot be any of
-	// the following: is_deleted , write_time , api_invocation_time .
+	// the following: is_deleted , write_time , api_invocation_time . The name:
+	//   - Must start and end with an alphanumeric character.
+	//   - Can only include alphanumeric characters, underscores, and hyphens. Spaces
+	//   are not allowed.
 	//
 	// This member is required.
 	FeatureName *string
@@ -13461,8 +13466,8 @@ type S3ModelDataSource struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Simple Storage (Amazon S3) location and and security configuration
-// for OfflineStore .
+// The Amazon Simple Storage (Amazon S3) location and security configuration for
+// OfflineStore .
 type S3StorageConfig struct {
 
 	// The S3 URI, or location in Amazon S3, of OfflineStore . S3 URIs have a format
