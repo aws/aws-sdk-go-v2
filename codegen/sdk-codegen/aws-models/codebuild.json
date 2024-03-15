@@ -2872,6 +2872,12 @@
                         "smithy.api#documentation": "<p>The scaling configuration of the compute fleet.</p>"
                     }
                 },
+                "overflowBehavior": {
+                    "target": "com.amazonaws.codebuild#FleetOverflowBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.codebuild#TagList",
                     "traits": {
@@ -4076,6 +4082,12 @@
                         "smithy.api#documentation": "<p>The scaling configuration of the compute fleet.</p>"
                     }
                 },
+                "overflowBehavior": {
+                    "target": "com.amazonaws.codebuild#FleetOverflowBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.codebuild#TagList",
                     "traits": {
@@ -4143,6 +4155,23 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.codebuild#FleetOverflowBehavior": {
+            "type": "enum",
+            "members": {
+                "QUEUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUE"
+                    }
+                },
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND"
+                    }
                 }
             }
         },
@@ -8363,6 +8392,12 @@
                     "target": "com.amazonaws.codebuild#ScalingConfigurationInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The scaling configuration of the compute fleet.</p>"
+                    }
+                },
+                "overflowBehavior": {
+                    "target": "com.amazonaws.codebuild#FleetOverflowBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute fleet overflow behavior.</p>\n         <ul>\n            <li>\n               <p>For overflow behavior <code>QUEUE</code>, your overflow builds need to wait on \n                    the existing fleet instance to become available.</p>\n            </li>\n            <li>\n               <p>For overflow behavior <code>ON_DEMAND</code>, your overflow builds run on CodeBuild on-demand.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "tags": {

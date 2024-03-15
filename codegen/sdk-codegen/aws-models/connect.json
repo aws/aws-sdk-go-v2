@@ -3501,6 +3501,23 @@
                 "smithy.api#documentation": "<p>A toggle for an individual feature at the instance level.</p>"
             }
         },
+        "com.amazonaws.connect#AttributeAndCondition": {
+            "type": "structure",
+            "members": {
+                "TagConditions": {
+                    "target": "com.amazonaws.connect#TagAndConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition.</p>"
+                    }
+                },
+                "HierarchyGroupCondition": {
+                    "target": "com.amazonaws.connect#HierarchyGroupCondition"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code>\n   condition.</p>"
+            }
+        },
         "com.amazonaws.connect#AttributeName": {
             "type": "string",
             "traits": {
@@ -3508,6 +3525,12 @@
                     "min": 1,
                     "max": 32767
                 }
+            }
+        },
+        "com.amazonaws.connect#AttributeOrConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AttributeAndCondition"
             }
         },
         "com.amazonaws.connect#AttributeValue": {
@@ -5434,6 +5457,32 @@
                 "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>.\n   This accepts an <code>OR</code> of <code>AND</code> (List of List) input where: </p>\n         <ul>\n            <li>\n               <p>Top level list specifies conditions that need to be applied with <code>OR</code>\n     operator</p>\n            </li>\n            <li>\n               <p>Inner list specifies conditions that need to be applied with <code>AND</code>\n     operator.</p>\n            </li>\n         </ul>"
             }
         },
+        "com.amazonaws.connect#ControlPlaneUserAttributeFilter": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#AttributeOrConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code>\n   condition.</p>"
+                    }
+                },
+                "AndCondition": {
+                    "target": "com.amazonaws.connect#AttributeAndCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code>\n   condition.</p>"
+                    }
+                },
+                "TagCondition": {
+                    "target": "com.amazonaws.connect#TagCondition"
+                },
+                "HierarchyGroupCondition": {
+                    "target": "com.amazonaws.connect#HierarchyGroupCondition"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions or Hierarchy Group conditions inside\n   the <code>SearchFilter</code>.</p>\n         <p>This accepts an <code>OR</code> of <code>AND</code> (List of List) input where:</p>\n         <ul>\n            <li>\n               <p>The top level list specifies conditions that need to be applied with <code>OR</code>\n     operator</p>\n            </li>\n            <li>\n               <p>The inner list specifies conditions that need to be applied with <code>AND</code>\n     operator.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Only one field can be populated. Maximum number of allowed Tag conditions is 25. Maximum\n    number of allowed Hierarchy Group conditions is 20. </p>\n         </note>"
+            }
+        },
         "com.amazonaws.connect#CreateAgentStatus": {
             "type": "operation",
             "input": {
@@ -7148,6 +7197,18 @@
                     "target": "com.amazonaws.connect#Applications",
                     "traits": {
                         "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of third-party applications that the security profile will give access to.</p>"
+                    }
+                },
+                "HierarchyRestrictedResources": {
+                    "target": "com.amazonaws.connect#HierarchyRestrictedResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code>.</p>"
+                    }
+                },
+                "AllowedAccessControlHierarchyGroupId": {
+                    "target": "com.amazonaws.connect#HierarchyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.</p>"
                     }
                 }
             },
@@ -15959,6 +16020,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the levels in the hierarchy group.</p>"
+            }
+        },
+        "com.amazonaws.connect#HierarchyRestrictedResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#HierarchyRestrictedResourceName"
+            }
+        },
+        "com.amazonaws.connect#HierarchyRestrictedResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.connect#HierarchyStructure": {
@@ -29590,6 +29666,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
                     }
+                },
+                "HierarchyRestrictedResources": {
+                    "target": "com.amazonaws.connect#HierarchyRestrictedResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code>.</p>"
+                    }
+                },
+                "AllowedAccessControlHierarchyGroupId": {
+                    "target": "com.amazonaws.connect#HierarchyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the hierarchy group that a security profile uses to restrict access to\n   resources in Amazon Connect.</p>"
+                    }
                 }
             },
             "traits": {
@@ -35660,6 +35748,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third-party application's metadata.</p>"
                     }
+                },
+                "HierarchyRestrictedResources": {
+                    "target": "com.amazonaws.connect#HierarchyRestrictedResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code>.</p>"
+                    }
+                },
+                "AllowedAccessControlHierarchyGroupId": {
+                    "target": "com.amazonaws.connect#HierarchyGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.</p>"
+                    }
                 }
             },
             "traits": {
@@ -37165,6 +37265,12 @@
             "members": {
                 "TagFilter": {
                     "target": "com.amazonaws.connect#ControlPlaneTagFilter"
+                },
+                "UserAttributeFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneUserAttributeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions or Hierarchy Group conditions inside\n   the SearchFilter.</p>\n         <p>This accepts an <code>OR</code> of <code>AND</code> (List of List) input where:</p>\n         <ul>\n            <li>\n               <p>The top level list specifies conditions that need to be applied with <code>OR</code>\n     operator.</p>\n            </li>\n            <li>\n               <p>The inner list specifies conditions that need to be applied with <code>AND</code>\n     operator.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Only one field can be populated. This object can’t be used along with TagFilter. Request\n    can either contain TagFilter or UserAttributeFilter if SearchFilter is specified, combination of\n    both is not supported and such request will throw AccessDeniedException.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
