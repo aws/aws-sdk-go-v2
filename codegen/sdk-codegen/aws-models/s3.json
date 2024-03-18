@@ -19220,6 +19220,16 @@
                 "smithy.api#documentation": "<note>\n            <p>This action creates an Amazon S3 bucket. To create an Amazon S3 on Outposts bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">\n                  <code>CreateBucket</code>\n               </a>.</p>\n         </note>\n         <p>Creates a new S3 bucket. To create a bucket, you must set up Amazon S3 and have a\n         valid Amazon Web Services Access Key ID to authenticate requests. Anonymous requests are never allowed to\n         create buckets. By creating the bucket, you become the bucket owner.</p>\n         <p>There are two types of buckets: general purpose buckets and directory buckets. For more\n         information about these bucket types, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html\">Creating, configuring, and\n            working with Amazon S3 buckets</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>\n                     <b>General purpose buckets</b> - If you send your <code>CreateBucket</code> request to the <code>s3.amazonaws.com</code> global endpoint,\n                  the request goes to the <code>us-east-1</code> Region. So the signature\n                  calculations in Signature Version 4 must use <code>us-east-1</code> as the Region, even\n                  if the location constraint in the request specifies another Region where the bucket is\n                  to be created. If you create a bucket in a Region other than US East (N. Virginia), your\n                  application must be able to handle 307 redirect. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html\">Virtual hosting of\n                     buckets</a> in the <i>Amazon S3 User Guide</i>.</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Directory buckets </b> - For directory buckets, you must make requests for this API operation to the Regional endpoint. These endpoints support path-style requests in the format <code>https://s3express-control.<i>region_code</i>.amazonaws.com/<i>bucket-name</i>\n                     </code>. Virtual-hosted-style requests aren't supported. \nFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html\">Regional and Zonal endpoints</a> in the\n    <i>Amazon S3 User Guide</i>.</p>\n               </li>\n            </ul>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <b>General purpose bucket permissions</b> - In addition to the <code>s3:CreateBucket</code> permission, the following permissions are\n                     required in a policy when your <code>CreateBucket</code> request includes specific\n                     headers: </p>\n                     <ul>\n                        <li>\n                           <p>\n                              <b>Access control lists (ACLs)</b> - In your <code>CreateBucket</code> request, if you specify an access control list (ACL) \n                              and set it to <code>public-read</code>, <code>public-read-write</code>,\n                              <code>authenticated-read</code>, or if you explicitly specify any other custom ACLs, both <code>s3:CreateBucket</code> and\n                              <code>s3:PutBucketAcl</code> permissions are required. In your <code>CreateBucket</code> request, if you set the ACL to <code>private</code>, \n                              or if you don't specify any ACLs, only the <code>s3:CreateBucket</code> permission is required.\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <b>Object Lock</b> - In your\n                              <code>CreateBucket</code> request, if you set \n                              <code>x-amz-bucket-object-lock-enabled</code> to true, the  \n                              <code>s3:PutBucketObjectLockConfiguration</code> and\n                              <code>s3:PutBucketVersioning</code> permissions are required.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <b>S3 Object Ownership</b> - If your\n                              <code>CreateBucket</code> request includes the\n                              <code>x-amz-object-ownership</code> header, then the\n                              <code>s3:PutBucketOwnershipControls</code> permission is required.</p>\n                           <important>\n                              <p> To set an ACL on a bucket as part of a\n                                    <code>CreateBucket</code> request, you must explicitly set S3\n                                 Object Ownership for the bucket to a different value than the\n                                 default, <code>BucketOwnerEnforced</code>. Additionally, if your\n                                 desired bucket ACL grants public access, you must first create the\n                                 bucket (without the bucket ACL) and then explicitly disable Block\n                                 Public Access on the bucket before using <code>PutBucketAcl</code>\n                                 to set the ACL. If you try to create a bucket with a public ACL,\n                                 the request will fail. </p>\n                              <p> For the majority of modern use cases in S3, we recommend\n                                 that you keep all Block Public Access settings enabled and keep\n                                 ACLs disabled. If you would like to share data with users outside\n                                 of your account, you can use bucket policies as needed. For more\n                                 information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\">Controlling ownership of objects and disabling ACLs for your\n                                    bucket </a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html\">Blocking public access to your Amazon S3 storage </a> in\n                                 the <i>Amazon S3 User Guide</i>. </p>\n                           </important>\n                        </li>\n                        <li>\n                           <p>\n                              <b>S3 Block Public Access</b> - If your\n                              specific use case requires granting public access to your S3 resources, you\n                              can disable Block Public Access. Specifically, you can create a new bucket with Block\n                              Public Access enabled, then separately call the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeletePublicAccessBlock.html\">\n                                 <code>DeletePublicAccessBlock</code>\n                              </a> API. To use this operation, you must have the\n                              <code>s3:PutBucketPublicAccessBlock</code> permission. For more information about S3 Block Public\n                              Access, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html\">Blocking\n                                 public access to your Amazon S3 storage </a> in the\n                              <i>Amazon S3 User Guide</i>. </p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Directory bucket permissions</b> - You must have the <code>s3express:CreateBucket</code> permission in an IAM identity-based policy instead of a bucket policy. Cross-account access to this API operation isn't supported. This operation can only be performed by the Amazon Web Services account that owns the resource. For more information about directory bucket policies and permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-security-iam.html\">Amazon Web Services Identity and Access Management (IAM) for S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>\n                     <important>\n                        <p>The permissions for ACLs, Object Lock, S3 Object Ownership, and S3 Block Public Access are not supported for directory buckets.  \n                        For directory buckets, all Block Public Access settings are enabled at the bucket level and S3  \n                        Object Ownership is set to Bucket owner enforced (ACLs disabled). These settings can't be modified.\n                     </p>\n                        <p>For more information about permissions for creating and working with \n                           directory buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html\">Directory buckets</a> in the <i>Amazon S3 User Guide</i>. \n                           For more information about supported S3 features for directory buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-one-zone.html#s3-express-features\">Features of S3 Express One Zone</a> in the <i>Amazon S3 User Guide</i>.</p>\n                     </important>\n                  </li>\n               </ul>\n            </dd>\n            <dt>HTTP Host header syntax</dt>\n            <dd>\n               <p>\n                  <b>Directory buckets </b> - The HTTP Host header syntax is <code>s3express-control.<i>region</i>.amazonaws.com</code>.</p>\n            </dd>\n         </dl>\n         <p>The following operations are related to <code>CreateBucket</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html\">DeleteBucket</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
+                        "title": "To create a bucket ",
+                        "documentation": "The following example creates a bucket.",
+                        "input": {
+                            "Bucket": "examplebucket"
+                        },
+                        "output": {
+                            "Location": "/examplebucket"
+                        }
+                    },
+                    {
                         "title": "To create a bucket in a specific region",
                         "documentation": "The following example creates a bucket. The request specifies an AWS region where to create the bucket.",
                         "input": {
@@ -19230,16 +19240,6 @@
                         },
                         "output": {
                             "Location": "http://examplebucket.<Region>.s3.amazonaws.com/"
-                        }
-                    },
-                    {
-                        "title": "To create a bucket ",
-                        "documentation": "The following example creates a bucket.",
-                        "input": {
-                            "Bucket": "examplebucket"
-                        },
-                        "output": {
-                            "Location": "/examplebucket"
                         }
                     }
                 ],
@@ -20684,14 +20684,6 @@
                 "smithy.api#documentation": "<p>Removes an object from a bucket. The behavior depends on the bucket's versioning state: </p>\n         <ul>\n            <li>\n               <p>If bucket versioning is not enabled, the operation permanently deletes the object.</p>\n            </li>\n            <li>\n               <p>If bucket versioning is enabled, the operation inserts a delete marker, which becomes the current version of the object. To permanently delete an object in a versioned bucket, you must include the object’s <code>versionId</code> in the request. For more information about versioning-enabled buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectVersions.html\">Deleting object versions from a versioning-enabled bucket</a>.</p>\n            </li>\n            <li>\n               <p>If bucket versioning is suspended, the operation removes the object that has a null <code>versionId</code>, if there is one, and inserts a delete marker that becomes the current version of the object. If there isn't an object with a null <code>versionId</code>, and all versions of the object have a <code>versionId</code>, Amazon S3 does not remove the object and only inserts a delete marker. To permanently delete an object that has a <code>versionId</code>, you must include the object’s <code>versionId</code> in the request. For more information about versioning-suspended buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/DeletingObjectsfromVersioningSuspendedBuckets.html\">Deleting objects from versioning-suspended buckets</a>.</p>\n            </li>\n         </ul>\n         <note>\n            <ul>\n               <li>\n                  <p>\n                     <b>Directory buckets</b> - S3 Versioning isn't enabled and supported for directory buckets. For this API operation, only the <code>null</code> value of the version ID is supported by directory buckets. You can only specify <code>null</code> \n               to the <code>versionId</code> query parameter in the request.</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Directory buckets</b> - For directory buckets, you must make requests for this API operation to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format <code>https://<i>bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com/<i>key-name</i>\n                     </code>. Path-style requests are not supported. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html\">Regional and Zonal endpoints</a> in the\n    <i>Amazon S3 User Guide</i>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>To remove a specific version, you must use the <code>versionId</code> query parameter. Using this\n         query parameter permanently deletes the version. If the object deleted is a delete marker, Amazon S3\n         sets the response header <code>x-amz-delete-marker</code> to true. </p>\n         <p>If the object you want to delete is in a bucket where the bucket versioning\n         configuration is MFA Delete enabled, you must include the <code>x-amz-mfa</code> request\n         header in the DELETE <code>versionId</code> request. Requests that include\n         <code>x-amz-mfa</code> must use HTTPS. For more information about MFA Delete, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html\">Using MFA Delete</a> in the <i>Amazon S3\n               User Guide</i>. To see sample\n         requests that use versioning, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete\">Sample\n            Request</a>. </p>\n         <note>\n            <p>\n               <b>Directory buckets</b> - MFA delete is not supported by directory buckets.</p>\n         </note>\n         <p>You can delete objects by explicitly calling DELETE Object or calling  \n         (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycle.html\">PutBucketLifecycle</a>) to enable Amazon S3 to remove them for you. If you want to block\n         users or accounts from removing or deleting objects from your bucket, you must deny them\n         the <code>s3:DeleteObject</code>, <code>s3:DeleteObjectVersion</code>, and\n         <code>s3:PutLifeCycleConfiguration</code> actions. </p>\n         <note>\n            <p>\n               <b>Directory buckets</b> - S3 Lifecycle is not supported by directory buckets.</p>\n         </note>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <b>General purpose bucket permissions</b> - The following permissions are required in your policies when your \n                        <code>DeleteObjects</code> request includes specific headers.</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <b>\n                                 <code>s3:DeleteObject</code>\n                              </b> - To delete an object from a bucket, you must always have the <code>s3:DeleteObject</code> permission.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <b>\n                                 <code>s3:DeleteObjectVersion</code>\n                              </b> - To delete a specific version of an object from a versioning-enabled bucket, you must have the <code>s3:DeleteObjectVersion</code> permission.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Directory bucket permissions</b> - To grant access to this API operation on a directory bucket, we recommend that you use the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html\">\n                           <code>CreateSession</code>\n                        </a> API operation for session-based authorization. Specifically, you grant the <code>s3express:CreateSession</code> permission to the directory bucket in a bucket policy or an IAM identity-based policy. Then, you make the <code>CreateSession</code> API call on the bucket to obtain a session token. With the session token in your request header, you can make API requests to this operation. After the session token expires, you make another <code>CreateSession</code> API call to generate a new session token for use. \nAmazon Web Services CLI or SDKs create session and refresh the session token automatically to avoid service interruptions when a session expires. For more information about authorization, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html\">\n                           <code>CreateSession</code>\n                        </a>.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>HTTP Host header syntax</dt>\n            <dd>\n               <p>\n                  <b>Directory buckets </b> - The HTTP Host header syntax is <code>\n                     <i>Bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com</code>.</p>\n            </dd>\n         </dl>\n         <p>The following action is related to <code>DeleteObject</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
-                        "title": "To delete an object (from a non-versioned bucket)",
-                        "documentation": "The following example deletes an object from a non-versioned bucket.",
-                        "input": {
-                            "Bucket": "ExampleBucket",
-                            "Key": "HappyFace.jpg"
-                        }
-                    },
-                    {
                         "title": "To delete an object",
                         "documentation": "The following example deletes an object from an S3 bucket.",
                         "input": {
@@ -20699,6 +20691,14 @@
                             "Key": "objectkey.jpg"
                         },
                         "output": {}
+                    },
+                    {
+                        "title": "To delete an object (from a non-versioned bucket)",
+                        "documentation": "The following example deletes an object from a non-versioned bucket.",
+                        "input": {
+                            "Bucket": "ExampleBucket",
+                            "Key": "HappyFace.jpg"
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -23582,7 +23582,8 @@
                     "target": "com.amazonaws.s3#ObjectLockLegalHold",
                     "traits": {
                         "smithy.api#documentation": "<p>The current legal hold status for the specified object.</p>",
-                        "smithy.api#httpPayload": {}
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "LegalHold"
                     }
                 }
             },
@@ -24144,7 +24145,8 @@
                     "target": "com.amazonaws.s3#ObjectLockRetention",
                     "traits": {
                         "smithy.api#documentation": "<p>The container element for an object's retention settings.</p>",
-                        "smithy.api#httpPayload": {}
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "Retention"
                     }
                 }
             },
@@ -24211,6 +24213,24 @@
                 "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Returns the tag-set of an object. You send the GET request against the tagging\n         subresource associated with the object.</p>\n         <p>To use this operation, you must have permission to perform the\n            <code>s3:GetObjectTagging</code> action. By default, the GET action returns information\n         about current version of an object. For a versioned bucket, you can have multiple versions\n         of an object in your bucket. To retrieve tags of any other version, use the versionId query\n         parameter. You also need permission for the <code>s3:GetObjectVersionTagging</code>\n         action.</p>\n         <p> By default, the bucket owner has this permission and can grant this permission to\n         others.</p>\n         <p> For information about the Amazon S3 object tagging feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html\">Object Tagging</a>.</p>\n         <p>The following actions are related to <code>GetObjectTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectTagging.html\">DeleteObjectTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html\">GetObjectAttributes</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectTagging.html\">PutObjectTagging</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
+                        "title": "To retrieve tag set of a specific object version",
+                        "documentation": "The following example retrieves tag set of an object. The request specifies object version.",
+                        "input": {
+                            "Bucket": "examplebucket",
+                            "Key": "exampleobject",
+                            "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
+                        },
+                        "output": {
+                            "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI",
+                            "TagSet": [
+                                {
+                                    "Value": "Value1",
+                                    "Key": "Key1"
+                                }
+                            ]
+                        }
+                    },
+                    {
                         "title": "To retrieve tag set of an object",
                         "documentation": "The following example retrieves tag set of an object.",
                         "input": {
@@ -24227,24 +24247,6 @@
                                 {
                                     "Value": "Value3",
                                     "Key": "Key3"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "title": "To retrieve tag set of a specific object version",
-                        "documentation": "The following example retrieves tag set of an object. The request specifies object version.",
-                        "input": {
-                            "Bucket": "examplebucket",
-                            "Key": "exampleobject",
-                            "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI"
-                        },
-                        "output": {
-                            "VersionId": "ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI",
-                            "TagSet": [
-                                {
-                                    "Value": "Value1",
-                                    "Key": "Key1"
                                 }
                             ]
                         }
@@ -26688,6 +26690,44 @@
             "traits": {
                 "smithy.api#documentation": "<note>\n            <p>This operation is not supported by directory buckets.</p>\n         </note>\n         <p>Returns metadata about all versions of the objects in a bucket. You can also use request\n         parameters as selection criteria to return metadata about a subset of all the object\n         versions.</p>\n         <important>\n            <p> To use this operation, you must have permission to perform the\n               <code>s3:ListBucketVersions</code> action. Be aware of the name difference. </p>\n         </important>\n         <note>\n            <p> A <code>200 OK</code> response can contain valid or invalid XML. Make sure to design\n            your application to parse the contents of the response and handle it\n            appropriately.</p>\n         </note>\n         <p>To use this operation, you must have READ access to the bucket.</p>\n         <p>The following operations are related to <code>ListObjectVersions</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectsV2.html\">ListObjectsV2</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html\">DeleteObject</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
+                    {
+                        "title": "To list object versions",
+                        "documentation": "The following example return versions of an object with specific key name prefix. The request limits the number of items returned to two. If there are are more than two object version, S3 returns NextToken in the response. You can specify this token value in your next request to fetch next set of object versions.",
+                        "input": {
+                            "Bucket": "examplebucket",
+                            "Prefix": "HappyFace.jpg"
+                        },
+                        "output": {
+                            "Versions": [
+                                {
+                                    "LastModified": "2016-12-15T01:19:41.000Z",
+                                    "VersionId": "null",
+                                    "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\"",
+                                    "StorageClass": "STANDARD",
+                                    "Key": "HappyFace.jpg",
+                                    "Owner": {
+                                        "DisplayName": "owner-display-name",
+                                        "ID": "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc"
+                                    },
+                                    "IsLatest": true,
+                                    "Size": 3191
+                                },
+                                {
+                                    "LastModified": "2016-12-13T00:58:26.000Z",
+                                    "VersionId": "PHtexPGjH2y.zBgT8LmB7wwLI2mpbz.k",
+                                    "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\"",
+                                    "StorageClass": "STANDARD",
+                                    "Key": "HappyFace.jpg",
+                                    "Owner": {
+                                        "DisplayName": "owner-display-name",
+                                        "ID": "examplee7a2f25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc"
+                                    },
+                                    "IsLatest": false,
+                                    "Size": 3191
+                                }
+                            ]
+                        }
+                    },
                     {
                         "title": "To list object versions",
                         "documentation": "The following example returns versions of an object with specific key name prefix.",
@@ -30610,17 +30650,30 @@
                 "smithy.api#documentation": "<p>Adds an object to a bucket.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>Amazon S3 never adds partial objects; if you receive a success response, Amazon S3 added the\n               entire object to the bucket. You cannot use <code>PutObject</code> to only update a\n               single piece of metadata for an existing object. You must put the entire object with\n               updated metadata if you want to update some values.</p>\n               </li>\n               <li>\n                  <p>If your bucket uses the bucket owner enforced setting for Object Ownership, ACLs are disabled and no longer affect permissions. All\n                  objects written to the bucket by any account will be owned by the bucket owner.</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Directory buckets</b> - For directory buckets, you must make requests for this API operation to the Zonal endpoint. These endpoints support virtual-hosted-style requests in the format <code>https://<i>bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com/<i>key-name</i>\n                     </code>. Path-style requests are not supported. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Regions-and-Zones.html\">Regional and Zonal endpoints</a> in the\n    <i>Amazon S3 User Guide</i>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>Amazon S3 is a distributed system. If it receives multiple write requests for the same object\n         simultaneously, it overwrites all but the last object written. However, Amazon S3 provides features that can modify this behavior:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>S3 Object Lock</b> - To prevent objects from\n            being deleted or overwritten, you can use <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html\">Amazon S3 Object\n               Lock</a> in the <i>Amazon S3 User Guide</i>.</p>\n               <note>\n                  <p>This functionality is not supported for directory buckets.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <b>S3 Versioning</b> - When you enable\n            versioning for a bucket, if Amazon S3 receives multiple write requests for the same object\n            simultaneously, it stores all versions of the objects. For each write request that is made to the same object, Amazon S3 automatically generates a unique version ID\n            of that object being stored in Amazon S3. \n           You can retrieve, replace, or delete any version of the object. For more information about versioning, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html\">Adding Objects to\n               Versioning-Enabled Buckets</a> in the <i>Amazon S3\n                  User Guide</i>. For information about returning the versioning state\n            of a bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html\">GetBucketVersioning</a>. </p>\n               <note>\n                  <p>This functionality is not supported for directory buckets.</p>\n               </note>\n            </li>\n         </ul>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <b>General purpose bucket permissions</b> - The following permissions are required in your policies when your \n                        <code>PutObject</code> request includes specific headers.</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <b>\n                                 <code>s3:PutObject</code>\n                              </b> - To successfully complete the <code>PutObject</code> request, you must always have the <code>s3:PutObject</code> permission on a bucket to add an object\n                                 to it.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <b>\n                                 <code>s3:PutObjectAcl</code>\n                              </b> - To successfully change the objects ACL of your <code>PutObject</code> request, you must have the <code>s3:PutObjectAcl</code>.</p>\n                        </li>\n                        <li>\n                           <p>\n                              <b>\n                                 <code>s3:PutObjectTagging</code>\n                              </b> - To successfully set the tag-set with your <code>PutObject</code> request, you\n                                 must have the <code>s3:PutObjectTagging</code>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Directory bucket permissions</b> - To grant access to this API operation on a directory bucket, we recommend that you use the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html\">\n                           <code>CreateSession</code>\n                        </a> API operation for session-based authorization. Specifically, you grant the <code>s3express:CreateSession</code> permission to the directory bucket in a bucket policy or an IAM identity-based policy. Then, you make the <code>CreateSession</code> API call on the bucket to obtain a session token. With the session token in your request header, you can make API requests to this operation. After the session token expires, you make another <code>CreateSession</code> API call to generate a new session token for use. \nAmazon Web Services CLI or SDKs create session and refresh the session token automatically to avoid service interruptions when a session expires. For more information about authorization, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateSession.html\">\n                           <code>CreateSession</code>\n                        </a>.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Data integrity with Content-MD5</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <b>General purpose bucket</b> - To ensure that data is not corrupted traversing the network, use the\n                    <code>Content-MD5</code> header. When you use this header, Amazon S3 checks the object\n                    against the provided MD5 value and, if they do not match, Amazon S3 returns an error. Alternatively, when the object's ETag is its MD5 digest, \n                    you can calculate the MD5 while putting the object to Amazon S3 and compare the returned ETag to\n                    the calculated MD5 value.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <b>Directory bucket</b> - This functionality is not supported for directory buckets.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>HTTP Host header syntax</dt>\n            <dd>\n               <p>\n                  <b>Directory buckets </b> - The HTTP Host header syntax is <code>\n                     <i>Bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com</code>.</p>\n            </dd>\n         </dl>\n         <p>For more information about related Amazon S3 APIs, see the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_CopyObject.html\">CopyObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObject.html\">DeleteObject</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#examples": [
                     {
-                        "title": "To upload an object and specify server-side encryption and object tags",
-                        "documentation": "The following example uploads an object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
+                        "title": "To upload an object",
+                        "documentation": "The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file syntax. S3 returns VersionId of the newly created object.",
                         "input": {
-                            "Body": "filetoupload",
+                            "Body": "HappyFace.jpg",
                             "Bucket": "examplebucket",
-                            "Key": "exampleobject",
-                            "ServerSideEncryption": "AES256",
-                            "Tagging": "key1=value1&key2=value2"
+                            "Key": "HappyFace.jpg"
                         },
                         "output": {
-                            "VersionId": "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt",
+                            "VersionId": "tpf3zF08nBplQK1XLOefGskR7mGDwcDk",
+                            "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\""
+                        }
+                    },
+                    {
+                        "title": "To upload an object (specify optional headers)",
+                        "documentation": "The following example uploads an object. The request specifies optional request headers to directs S3 to use specific storage class and use server-side encryption.",
+                        "input": {
+                            "Body": "HappyFace.jpg",
+                            "Bucket": "examplebucket",
+                            "Key": "HappyFace.jpg",
+                            "ServerSideEncryption": "AES256",
+                            "StorageClass": "STANDARD_IA"
+                        },
+                        "output": {
+                            "VersionId": "CG612hodqujkf8FaaNfp8U..FIhLROcp",
                             "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\"",
                             "ServerSideEncryption": "AES256"
                         }
@@ -30657,19 +30710,6 @@
                         }
                     },
                     {
-                        "title": "To upload an object",
-                        "documentation": "The following example uploads an object to a versioning-enabled bucket. The source file is specified using Windows file syntax. S3 returns VersionId of the newly created object.",
-                        "input": {
-                            "Body": "HappyFace.jpg",
-                            "Bucket": "examplebucket",
-                            "Key": "HappyFace.jpg"
-                        },
-                        "output": {
-                            "VersionId": "tpf3zF08nBplQK1XLOefGskR7mGDwcDk",
-                            "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\""
-                        }
-                    },
-                    {
                         "title": "To create an object.",
                         "documentation": "The following example creates an object. If the bucket is versioning enabled, S3 returns version ID in response.",
                         "input": {
@@ -30683,17 +30723,17 @@
                         }
                     },
                     {
-                        "title": "To upload an object (specify optional headers)",
-                        "documentation": "The following example uploads an object. The request specifies optional request headers to directs S3 to use specific storage class and use server-side encryption.",
+                        "title": "To upload an object and specify server-side encryption and object tags",
+                        "documentation": "The following example uploads an object. The request specifies the optional server-side encryption option. The request also specifies optional object tags. If the bucket is versioning enabled, S3 returns version ID in response.",
                         "input": {
-                            "Body": "HappyFace.jpg",
+                            "Body": "filetoupload",
                             "Bucket": "examplebucket",
-                            "Key": "HappyFace.jpg",
+                            "Key": "exampleobject",
                             "ServerSideEncryption": "AES256",
-                            "StorageClass": "STANDARD_IA"
+                            "Tagging": "key1=value1&key2=value2"
                         },
                         "output": {
-                            "VersionId": "CG612hodqujkf8FaaNfp8U..FIhLROcp",
+                            "VersionId": "Ri.vC6qVlA4dEnjgRV4ZHsHoFIjqEMNt",
                             "ETag": "\"6805f2cfc46c0f04559748bb039d69ae\"",
                             "ServerSideEncryption": "AES256"
                         }

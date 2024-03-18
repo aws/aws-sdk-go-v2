@@ -229,7 +229,7 @@
                 "QueryString": {
                     "target": "com.amazonaws.timestreamquery#QueryString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query string to run. Parameter\n            names can be specified in the query string <code>@</code> character followed by an\n            identifier. The named Parameter <code>@scheduled_runtime</code> is reserved and can be used in the query to get the time at which the query is scheduled to run.</p>\n         <p>The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of <code>@scheduled_runtime</code> paramater for each query run. \n            For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the <code>@scheduled_runtime</code> parameter is \n            initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.</p>",
+                        "smithy.api#documentation": "<p>The query string to run. Parameter names can be specified in the query string\n                <code>@</code> character followed by an identifier. The named Parameter\n                <code>@scheduled_runtime</code> is reserved and can be used in the query to get the\n            time at which the query is scheduled to run.</p>\n         <p>The timestamp calculated according to the ScheduleConfiguration parameter, will be the\n            value of <code>@scheduled_runtime</code> paramater for each query run. For example,\n            consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this\n            instance, the <code>@scheduled_runtime</code> parameter is initialized to the timestamp\n            2021-12-01 00:00:00 when invoking the query.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -243,7 +243,7 @@
                 "NotificationConfiguration": {
                     "target": "com.amazonaws.timestreamquery#NotificationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Notification configuration for the scheduled query. A notification is sent by\n            Timestream when a query run finishes, when the state is updated or when you delete it. </p>",
+                        "smithy.api#documentation": "<p>Notification configuration for the scheduled query. A notification is sent by\n            Timestream when a query run finishes, when the state is updated or when you delete it.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -256,14 +256,14 @@
                 "ClientToken": {
                     "target": "com.amazonaws.timestreamquery#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making \n            multiple identical CreateScheduledQuery requests has the same effect as making a single request.\n\n </p>\n         <ul>\n            <li>\n               <p> If CreateScheduledQuery is called without a <code>ClientToken</code>, the\n                    Query SDK generates a <code>ClientToken</code> on your behalf.</p>\n            </li>\n            <li>\n               <p> After 8 hours, any request with the same <code>ClientToken</code> is treated\n                    as a new request. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words,\n            making the same request repeatedly will produce the same result. Making multiple\n            identical CreateScheduledQuery requests has the same effect as making a single request. </p>\n         <ul>\n            <li>\n               <p> If CreateScheduledQuery is called without a <code>ClientToken</code>, the\n                    Query SDK generates a <code>ClientToken</code> on your behalf.</p>\n            </li>\n            <li>\n               <p> After 8 hours, any request with the same <code>ClientToken</code> is treated\n                    as a new request. </p>\n            </li>\n         </ul>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "ScheduledQueryExecutionRoleArn": {
                     "target": "com.amazonaws.timestreamquery#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the IAM role that Timestream will assume when running the scheduled query. </p>",
+                        "smithy.api#documentation": "<p>The ARN for the IAM role that Timestream will assume when running the scheduled query.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -276,13 +276,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.timestreamquery#StringValue2048",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS\n            key is not specified, the scheduled query resource will be encrypted with a Timestream\n            owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias\n            ARN. When using an alias name, prefix the name with <i>alias/</i>\n         </p>\n         <p>If ErrorReportConfiguration uses <code>SSE_KMS</code> as encryption type, the same KmsKeyId is used to encrypt the error report at rest.</p>"
+                        "smithy.api#documentation": "<p>The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the\n            Amazon KMS key is not specified, the scheduled query resource will be encrypted with a\n            Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias\n            name, or alias ARN. When using an alias name, prefix the name with\n                <i>alias/</i>\n         </p>\n         <p>If ErrorReportConfiguration uses <code>SSE_KMS</code> as encryption type, the same\n            KmsKeyId is used to encrypt the error report at rest.</p>"
                     }
                 },
                 "ErrorReportConfiguration": {
                     "target": "com.amazonaws.timestreamquery#ErrorReportConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results. </p>",
+                        "smithy.api#documentation": "<p>Configuration for error reporting. Error reports will be generated when a problem is\n            encountered when writing the query results. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -666,7 +666,7 @@
                 "InvocationTime": {
                     "target": "com.amazonaws.timestreamquery#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp in UTC. Query will be run as if it was invoked at this timestamp. </p>",
+                        "smithy.api#documentation": "<p>The timestamp in UTC. Query will be run as if it was invoked at this timestamp.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -689,7 +689,7 @@
                     "target": "com.amazonaws.timestreamquery#Long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Total time, measured in milliseconds, that was needed for the scheduled query run to complete.</p>"
+                        "smithy.api#documentation": "<p>Total time, measured in milliseconds, that was needed for the scheduled query run to\n            complete.</p>"
                     }
                 },
                 "DataWrites": {
@@ -780,7 +780,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Gets a list of all scheduled queries in the caller's Amazon account and Region. <code>ListScheduledQueries</code> is eventually consistent. </p>",
+                "smithy.api#documentation": "<p>Gets a list of all scheduled queries in the caller's Amazon account and Region.\n                <code>ListScheduledQueries</code> is eventually consistent. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1109,7 +1109,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Notification configuration for a scheduled query. A notification is sent by\n            Timestream when a scheduled query is created, its state is updated or when it is deleted. </p>"
+                "smithy.api#documentation": "<p>Notification configuration for a scheduled query. A notification is sent by Timestream\n            when a scheduled query is created, its state is updated or when it is deleted. </p>"
             }
         },
         "com.amazonaws.timestreamquery#NullableBoolean": {
@@ -1180,7 +1180,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>A synchronous operation that allows you to submit a query with parameters to be stored\n            by Timestream for later running. Timestream only supports using this operation with the\n                <code>PrepareQueryRequest$ValidateOnly</code> set to <code>true</code>. </p>",
+                "smithy.api#documentation": "<p>A synchronous operation that allows you to submit a query with parameters to be stored\n            by Timestream for later running. Timestream only supports using this operation with\n                <code>ValidateOnly</code> set to <code>true</code>. </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1899,7 +1899,7 @@
                 "InvocationTime": {
                     "target": "com.amazonaws.timestreamquery#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>InvocationTime for this run. This is the time at which the query is scheduled to run.\n            Parameter <code>@scheduled_runtime</code> can be used in the query to get the value. </p>"
+                        "smithy.api#documentation": "<p>InvocationTime for this run. This is the time at which the query is scheduled to run.\n            Parameter <code>@scheduled_runtime</code> can be used in the query to get the value.\n        </p>"
                     }
                 },
                 "TriggerTime": {
@@ -2261,7 +2261,7 @@
                 "TableName": {
                     "target": "com.amazonaws.timestreamquery#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of Timestream table that the query result will be written to. The table should\n            be within the same database that is provided in Timestream configuration.</p>",
+                        "smithy.api#documentation": "<p>Name of Timestream table that the query result will be written to. The table should be\n            within the same database that is provided in Timestream configuration.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2426,7 +2426,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2469,7 +2468,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2482,7 +2482,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2496,7 +2495,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2519,7 +2517,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2554,7 +2551,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2565,14 +2561,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2586,14 +2584,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2602,11 +2598,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2617,14 +2613,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2638,7 +2636,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2658,7 +2655,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2669,14 +2665,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2687,9 +2685,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -3020,7 +3020,7 @@
                 "ScalarType": {
                     "target": "com.amazonaws.timestreamquery#ScalarType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the column is of type string, integer, Boolean, double, timestamp, date,\n            time. </p>"
+                        "smithy.api#documentation": "<p>Indicates if the column is of type string, integer, Boolean, double, timestamp, date,\n            time. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html\">Supported data\n                types</a>.</p>"
                     }
                 },
                 "ArrayColumnInfo": {

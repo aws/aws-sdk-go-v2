@@ -845,6 +845,9 @@
                     "target": "com.amazonaws.rds#ModifyGlobalCluster"
                 },
                 {
+                    "target": "com.amazonaws.rds#ModifyIntegration"
+                },
+                {
                     "target": "com.amazonaws.rds#ModifyOptionGroup"
                 },
                 {
@@ -6628,8 +6631,9 @@
                             "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8"
                         },
                         "output": {
-                            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
                             "IntegrationName": "my-integration",
+                            "IntegrationArn": "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231",
+                            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
                             "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8",
                             "Tags": [],
                             "CreateTime": "2023-12-28T17:20:20.629Z",
@@ -6681,6 +6685,18 @@
                 },
                 "Tags": {
                     "target": "com.amazonaws.rds#TagList"
+                },
+                "DataFilter": {
+                    "target": "com.amazonaws.rds#DataFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data filtering options for the integration. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html\">Data filtering for Aurora zero-ETL integrations with Amazon Redshift</a>.\n        </p>\n         <p>Valid for: Integrations with Aurora MySQL source DB clusters only</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rds#IntegrationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11776,6 +11792,16 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.rds#DataFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25600
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_ \"\\\\\\-$,*.:?+\\/]*$"
+            }
+        },
         "com.amazonaws.rds#DatabaseArn": {
             "type": "string",
             "traits": {
@@ -12950,6 +12976,7 @@
                         "output": {
                             "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
                             "IntegrationName": "my-integration",
+                            "IntegrationArn": "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231",
                             "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8",
                             "Tags": [],
                             "CreateTime": "2023-12-28T17:20:20.629Z",
@@ -17004,6 +17031,7 @@
                             "Integrations": [
                                 {
                                     "IntegrationName": "my-integration",
+                                    "IntegrationArn": "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231",
                                     "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
                                     "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8",
                                     "Tags": [],
@@ -19762,6 +19790,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Any errors associated with the integration.</p>"
                     }
+                },
+                "DataFilter": {
+                    "target": "com.amazonaws.rds#DataFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data filters for the integration. These filters determine which tables\n            from the source database are sent to the target Amazon Redshift data warehouse. \n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rds#IntegrationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19792,7 +19832,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:rds(-[a-z]*)?:[a-z0-9\\-]*:[0-9]*:integration:[a-z][a-z0-9]*(-[a-zA-Z0-9]+)*\\/[a-zA-Z0-9_:\\-\\/]+$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:rds(-[a-z]*)?:[a-z0-9\\-]*:[0-9]*:integration:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.rds#IntegrationConflictOperationFault": {
@@ -19810,6 +19850,16 @@
                 "smithy.api#documentation": "<p>A conflicting conditional operation is currently in progress against this resource.\n            Typically occurs when there are multiple requests being made to the same resource at the same time,\n            and these requests conflict with each other.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#IntegrationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.rds#IntegrationError": {
@@ -23306,6 +23356,84 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#ModifyIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#ModifyIntegrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#Integration"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#IntegrationConflictOperationFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#IntegrationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidIntegrationStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies a zero-ETL integration with Amazon Redshift.</p>\n         <note>\n            <p>Currently, you can only modify integrations that have Aurora MySQL source DB clusters. Integrations with Aurora PostgreSQL and RDS sources currently don't support modifying the integration.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To modify a zero-ETL integration",
+                        "documentation": "The following example modifies the name of an existing zero-ETL integration.",
+                        "input": {
+                            "IntegrationIdentifier": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "IntegrationName": "my-renamed-integration"
+                        },
+                        "output": {
+                            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
+                            "IntegrationName": "my-renamed-integration",
+                            "IntegrationArn": "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231",
+                            "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8",
+                            "Tags": [],
+                            "DataFilter": "include: *.*",
+                            "CreateTime": "2023-12-28T17:20:20.629Z",
+                            "KMSKeyId": "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa",
+                            "Status": "active"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rds#ModifyIntegrationMessage": {
+            "type": "structure",
+            "members": {
+                "IntegrationIdentifier": {
+                    "target": "com.amazonaws.rds#IntegrationIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the integration to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntegrationName": {
+                    "target": "com.amazonaws.rds#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the integration.</p>"
+                    }
+                },
+                "DataFilter": {
+                    "target": "com.amazonaws.rds#DataFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new data filter for the integration. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html\">Data filtering for Aurora zero-ETL integrations with Amazon Redshift</a>.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rds#IntegrationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#ModifyOptionGroup": {
