@@ -55,6 +55,9 @@ type CreateProgramInput struct {
 	// The ad break configuration settings.
 	AdBreaks []types.AdBreak
 
+	// The list of AudienceMedia defined in program.
+	AudienceMedia []types.AudienceMedia
+
 	// The name of the LiveSource for this Program.
 	LiveSourceName *string
 
@@ -71,6 +74,9 @@ type CreateProgramOutput struct {
 
 	// The ARN to assign to the program.
 	Arn *string
+
+	// The list of AudienceMedia defined in program.
+	AudienceMedia []types.AudienceMedia
 
 	// The name to assign to the channel for this program.
 	ChannelName *string

@@ -53,6 +53,9 @@ type DescribeProgramOutput struct {
 	// The ARN of the program.
 	Arn *string
 
+	// The list of AudienceMedia defined in program.
+	AudienceMedia []types.AudienceMedia
+
 	// The name of the channel that the program belongs to.
 	ChannelName *string
 

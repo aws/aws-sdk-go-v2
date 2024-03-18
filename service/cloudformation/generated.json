@@ -65,6 +65,7 @@
         "api_op_ListStackInstanceResourceDrifts.go",
         "api_op_ListStackInstances.go",
         "api_op_ListStackResources.go",
+        "api_op_ListStackSetAutoDeploymentTargets.go",
         "api_op_ListStackSetOperationResults.go",
         "api_op_ListStackSetOperations.go",
         "api_op_ListStackSets.go",

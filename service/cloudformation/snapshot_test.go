@@ -746,6 +746,18 @@ func TestCheckSnapshot_ListStacks(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListStackSetAutoDeploymentTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStackSetAutoDeploymentTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListStackSetAutoDeploymentTargets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListStackSetOperationResults(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListStackSetOperationResults(context.Background(), nil, func(o *Options) {
@@ -1710,6 +1722,18 @@ func TestUpdateSnapshot_ListStacks(t *testing.T) {
 	_, err := svc.ListStacks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListStacks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListStackSetAutoDeploymentTargets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListStackSetAutoDeploymentTargets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListStackSetAutoDeploymentTargets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

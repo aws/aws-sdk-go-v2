@@ -150,6 +150,47 @@ type Alert struct {
 	noSmithyDocumentSerde
 }
 
+// A playlist of media (VOD and/or live) to be played instead of the default media
+// on a particular program.
+type AlternateMedia struct {
+
+	// Ad break configuration parameters defined in AlternateMedia.
+	AdBreaks []AdBreak
+
+	// Clip range configuration for the VOD source associated with the program.
+	ClipRange *ClipRange
+
+	// The duration of the alternateMedia in milliseconds.
+	DurationMillis *int64
+
+	// The name of the live source for alternateMedia.
+	LiveSourceName *string
+
+	// The date and time that the alternateMedia is scheduled to start, in epoch
+	// milliseconds.
+	ScheduledStartTimeMillis *int64
+
+	// The name of the source location for alternateMedia.
+	SourceLocationName *string
+
+	// The name of the VOD source for alternateMedia.
+	VodSourceName *string
+
+	noSmithyDocumentSerde
+}
+
+// An AudienceMedia object contains an Audience and a list of AlternateMedia.
+type AudienceMedia struct {
+
+	// The list of AlternateMedia defined in AudienceMedia.
+	AlternateMedia []AlternateMedia
+
+	// The Audience defined in AudienceMedia.
+	Audience *string
+
+	noSmithyDocumentSerde
+}
+
 // MediaTailor only places (consumes) prefetched ads if the ad break meets the
 // criteria defined by the dynamic variables. This gives you granular control over
 // which ad break to place the prefetched ads into. As an example, let's say that
@@ -294,6 +335,9 @@ type Channel struct {
 	// This member is required.
 	Tier *string
 
+	// The list of audiences defined in channel.
+	Audiences []string
+
 	// The timestamp of when the channel was created.
 	CreationTime *time.Time
 
@@ -320,9 +364,11 @@ type ClipRange struct {
 
 	// The end offset of the clip range, in milliseconds, starting from the beginning
 	// of the VOD source associated with the program.
-	//
-	// This member is required.
 	EndOffsetMillis *int64
+
+	// The start offset of the clip range, in milliseconds. This offset truncates the
+	// start at the number of milliseconds into the duration of the VOD source.
+	StartOffsetMillis *int64
 
 	noSmithyDocumentSerde
 }
@@ -898,6 +944,9 @@ type ScheduleEntry struct {
 
 	// The approximate time that the program will start playing.
 	ApproximateStartTime *time.Time
+
+	// The list of audiences defined in ScheduleEntry.
+	Audiences []string
 
 	// The name of the live source used for the program.
 	LiveSourceName *string

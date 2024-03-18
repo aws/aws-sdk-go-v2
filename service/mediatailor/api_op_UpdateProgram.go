@@ -48,6 +48,9 @@ type UpdateProgramInput struct {
 	// The ad break configuration settings.
 	AdBreaks []types.AdBreak
 
+	// The list of AudienceMedia defined in program.
+	AudienceMedia []types.AudienceMedia
+
 	noSmithyDocumentSerde
 }
 
@@ -58,6 +61,9 @@ type UpdateProgramOutput struct {
 
 	// The ARN to assign to the program.
 	Arn *string
+
+	// The list of AudienceMedia defined in program.
+	AudienceMedia []types.AudienceMedia
 
 	// The name to assign to the channel for this program.
 	ChannelName *string

@@ -257,6 +257,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.Audiences != nil {
+		ok := object.Key("Audiences")
+		if err := awsRestjson1_serializeDocumentAudiences(v.Audiences, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FillerSlate != nil {
 		ok := object.Key("FillerSlate")
 		if err := awsRestjson1_serializeDocumentSlateSource(v.FillerSlate, ok); err != nil {
@@ -607,6 +614,13 @@ func awsRestjson1_serializeOpDocumentCreateProgramInput(v *CreateProgramInput, v
 	if v.AdBreaks != nil {
 		ok := object.Key("AdBreaks")
 		if err := awsRestjson1_serializeDocument__listOfAdBreak(v.AdBreaks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AudienceMedia != nil {
+		ok := object.Key("AudienceMedia")
+		if err := awsRestjson1_serializeDocument__listOfAudienceMedia(v.AudienceMedia, ok); err != nil {
 			return err
 		}
 	}
@@ -1884,6 +1898,10 @@ func (m *awsRestjson1_serializeOpGetChannelSchedule) HandleSerialize(ctx context
 func awsRestjson1_serializeOpHttpBindingsGetChannelScheduleInput(v *GetChannelScheduleInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Audience != nil {
+		encoder.SetQuery("audience").String(*v.Audience)
 	}
 
 	if v.ChannelName == nil || len(*v.ChannelName) == 0 {
@@ -3233,6 +3251,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.Audiences != nil {
+		ok := object.Key("Audiences")
+		if err := awsRestjson1_serializeDocumentAudiences(v.Audiences, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FillerSlate != nil {
 		ok := object.Key("FillerSlate")
 		if err := awsRestjson1_serializeDocumentSlateSource(v.FillerSlate, ok); err != nil {
@@ -3448,6 +3473,13 @@ func awsRestjson1_serializeOpDocumentUpdateProgramInput(v *UpdateProgramInput, v
 	if v.AdBreaks != nil {
 		ok := object.Key("AdBreaks")
 		if err := awsRestjson1_serializeDocument__listOfAdBreak(v.AdBreaks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AudienceMedia != nil {
+		ok := object.Key("AudienceMedia")
+		if err := awsRestjson1_serializeDocument__listOfAudienceMedia(v.AudienceMedia, ok); err != nil {
 			return err
 		}
 	}
@@ -3685,6 +3717,32 @@ func awsRestjson1_serializeDocument__listOfAdBreak(v []types.AdBreak, value smit
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAlternateMedia(v []types.AlternateMedia, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAlternateMedia(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfAudienceMedia(v []types.AudienceMedia, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAudienceMedia(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfAvailMatchingCriteria(v []types.AvailMatchingCriteria, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3822,6 +3880,82 @@ func awsRestjson1_serializeDocumentAdMarkupTypes(v []types.AdMarkupType, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAlternateMedia(v *types.AlternateMedia, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdBreaks != nil {
+		ok := object.Key("AdBreaks")
+		if err := awsRestjson1_serializeDocument__listOfAdBreak(v.AdBreaks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClipRange != nil {
+		ok := object.Key("ClipRange")
+		if err := awsRestjson1_serializeDocumentClipRange(v.ClipRange, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DurationMillis != nil {
+		ok := object.Key("DurationMillis")
+		ok.Long(*v.DurationMillis)
+	}
+
+	if v.LiveSourceName != nil {
+		ok := object.Key("LiveSourceName")
+		ok.String(*v.LiveSourceName)
+	}
+
+	if v.ScheduledStartTimeMillis != nil {
+		ok := object.Key("ScheduledStartTimeMillis")
+		ok.Long(*v.ScheduledStartTimeMillis)
+	}
+
+	if v.SourceLocationName != nil {
+		ok := object.Key("SourceLocationName")
+		ok.String(*v.SourceLocationName)
+	}
+
+	if v.VodSourceName != nil {
+		ok := object.Key("VodSourceName")
+		ok.String(*v.VodSourceName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudienceMedia(v *types.AudienceMedia, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AlternateMedia != nil {
+		ok := object.Key("AlternateMedia")
+		if err := awsRestjson1_serializeDocument__listOfAlternateMedia(v.AlternateMedia, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Audience != nil {
+		ok := object.Key("Audience")
+		ok.String(*v.Audience)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAudiences(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAvailMatchingCriteria(v *types.AvailMatchingCriteria, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3902,6 +4036,11 @@ func awsRestjson1_serializeDocumentClipRange(v *types.ClipRange, value smithyjso
 	if v.EndOffsetMillis != nil {
 		ok := object.Key("EndOffsetMillis")
 		ok.Long(*v.EndOffsetMillis)
+	}
+
+	if v.StartOffsetMillis != nil {
+		ok := object.Key("StartOffsetMillis")
+		ok.Long(*v.StartOffsetMillis)
 	}
 
 	return nil

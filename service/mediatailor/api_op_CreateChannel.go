@@ -51,6 +51,9 @@ type CreateChannelInput struct {
 	// This member is required.
 	PlaybackMode types.PlaybackMode
 
+	// The list of audiences defined in channel.
+	Audiences []string
+
 	// The slate used to fill gaps between programs in the schedule. You must
 	// configure filler slate if your channel uses the LINEAR PlaybackMode .
 	// MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode
@@ -76,6 +79,9 @@ type CreateChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) to assign to the channel.
 	Arn *string
+
+	// The list of audiences defined in channel.
+	Audiences []string
 
 	// The name to assign to the channel.
 	ChannelName *string

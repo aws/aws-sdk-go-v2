@@ -1265,6 +1265,11 @@ type StackInstanceComprehensiveStatus struct {
 	//   - FAILED : The operation in the specified account and Region failed. If the
 	//   stack set operation fails in enough accounts within a Region, the failure
 	//   tolerance for the stack set operation as a whole might be exceeded.
+	//   - FAILED_IMPORT : The import of the stack instance in the specified account
+	//   and Region failed and left the stack in an unstable state. Once the issues
+	//   causing the failure are fixed, the import operation can be retried. If enough
+	//   stack set operations fail in enough accounts within a Region, the failure
+	//   tolerance for the stack set operation as a whole might be exceeded.
 	//   - INOPERABLE : A DeleteStackInstances operation has failed and left the stack
 	//   in an unstable state. Stacks in this state are excluded from further
 	//   UpdateStackSet operations. You might need to perform a DeleteStackInstances
@@ -1813,6 +1818,21 @@ type StackSet struct {
 	// The structure that contains the body of the template that was used to create or
 	// update the stack set.
 	TemplateBody *string
+
+	noSmithyDocumentSerde
+}
+
+// One of the targets for the stack set. Returned by the
+// ListStackSetAutoDeploymentTargets (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html)
+// API operation.
+type StackSetAutoDeploymentTargetSummary struct {
+
+	// The organization root ID or organizational unit (OU) IDs where the stack set is
+	// targeted.
+	OrganizationalUnitId *string
+
+	// The list of Regions targeted for this organization or OU.
+	Regions []string
 
 	noSmithyDocumentSerde
 }

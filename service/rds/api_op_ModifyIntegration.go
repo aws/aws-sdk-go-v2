@@ -12,69 +12,48 @@ import (
 	"time"
 )
 
-// Creates a zero-ETL integration with Amazon Redshift.
-func (c *Client) CreateIntegration(ctx context.Context, params *CreateIntegrationInput, optFns ...func(*Options)) (*CreateIntegrationOutput, error) {
+// Modifies a zero-ETL integration with Amazon Redshift. Currently, you can only
+// modify integrations that have Aurora MySQL source DB clusters. Integrations with
+// Aurora PostgreSQL and RDS sources currently don't support modifying the
+// integration.
+func (c *Client) ModifyIntegration(ctx context.Context, params *ModifyIntegrationInput, optFns ...func(*Options)) (*ModifyIntegrationOutput, error) {
 	if params == nil {
-		params = &CreateIntegrationInput{}
+		params = &ModifyIntegrationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateIntegration", params, optFns, c.addOperationCreateIntegrationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ModifyIntegration", params, optFns, c.addOperationModifyIntegrationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateIntegrationOutput)
+	out := result.(*ModifyIntegrationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateIntegrationInput struct {
+type ModifyIntegrationInput struct {
 
-	// The name of the integration.
+	// The unique identifier of the integration to modify.
 	//
 	// This member is required.
-	IntegrationName *string
+	IntegrationIdentifier *string
 
-	// The Amazon Resource Name (ARN) of the database to use as the source for
-	// replication.
-	//
-	// This member is required.
-	SourceArn *string
-
-	// The ARN of the Redshift data warehouse to use as the target for replication.
-	//
-	// This member is required.
-	TargetArn *string
-
-	// An optional set of non-secret key–value pairs that contains additional
-	// contextual information about the data. For more information, see Encryption
-	// context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
-	// in the Amazon Web Services Key Management Service Developer Guide. You can only
-	// include this parameter if you specify the KMSKeyId parameter.
-	AdditionalEncryptionContext map[string]string
-
-	// Data filtering options for the integration. For more information, see Data
-	// filtering for Aurora zero-ETL integrations with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html)
-	// . Valid for: Integrations with Aurora MySQL source DB clusters only
+	// A new data filter for the integration. For more information, see Data filtering
+	// for Aurora zero-ETL integrations with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html)
+	// .
 	DataFilter *string
 
-	// A description of the integration.
+	// A new description for the integration.
 	Description *string
 
-	// The Amazon Web Services Key Management System (Amazon Web Services KMS) key
-	// identifier for the key to use to encrypt the integration. If you don't specify
-	// an encryption key, RDS uses a default Amazon Web Services owned key.
-	KMSKeyId *string
-
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
-	Tags []types.Tag
+	// A new name for the integration.
+	IntegrationName *string
 
 	noSmithyDocumentSerde
 }
 
 // A zero-ETL integration with Amazon Redshift.
-type CreateIntegrationOutput struct {
+type ModifyIntegrationOutput struct {
 
 	// The encryption context for the integration. For more information, see
 	// Encryption context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
@@ -124,19 +103,19 @@ type CreateIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationModifyIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateIntegration{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyIntegration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpCreateIntegration{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyIntegration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIntegration"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyIntegration"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -179,10 +158,10 @@ func (c *Client) addOperationCreateIntegrationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateIntegrationValidationMiddleware(stack); err != nil {
+	if err = addOpModifyIntegrationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIntegration(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyIntegration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -203,10 +182,10 @@ func (c *Client) addOperationCreateIntegrationMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opModifyIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateIntegration",
+		OperationName: "ModifyIntegration",
 	}
 }

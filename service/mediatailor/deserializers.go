@@ -473,6 +473,11 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "Audiences":
+			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
+			}
+
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1105,6 +1110,11 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AudienceMedia":
+			if err := awsRestjson1_deserializeDocument__listOfAudienceMedia(&sv.AudienceMedia, value); err != nil {
+				return err
 			}
 
 		case "ChannelName":
@@ -2412,6 +2422,11 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "Audiences":
+			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
+			}
+
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2864,6 +2879,11 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AudienceMedia":
+			if err := awsRestjson1_deserializeDocument__listOfAudienceMedia(&sv.AudienceMedia, value); err != nil {
+				return err
 			}
 
 		case "ChannelName":
@@ -6206,6 +6226,11 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "Audiences":
+			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
+			}
+
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6653,6 +6678,11 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AudienceMedia":
+			if err := awsRestjson1_deserializeDocument__listOfAudienceMedia(&sv.AudienceMedia, value); err != nil {
+				return err
 			}
 
 		case "ChannelName":
@@ -7311,6 +7341,74 @@ func awsRestjson1_deserializeDocument__listOfAlert(v *[]types.Alert, value inter
 		var col types.Alert
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentAlert(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfAlternateMedia(v *[]types.AlternateMedia, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AlternateMedia
+	if *v == nil {
+		cv = []types.AlternateMedia{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AlternateMedia
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAlternateMedia(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfAudienceMedia(v *[]types.AudienceMedia, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AudienceMedia
+	if *v == nil {
+		cv = []types.AudienceMedia{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AudienceMedia
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAudienceMedia(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -8091,6 +8189,181 @@ func awsRestjson1_deserializeDocumentAlert(v **types.Alert, value interface{}) e
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAlternateMedia(v **types.AlternateMedia, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AlternateMedia
+	if *v == nil {
+		sv = &types.AlternateMedia{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdBreaks":
+			if err := awsRestjson1_deserializeDocument__listOfAdBreak(&sv.AdBreaks, value); err != nil {
+				return err
+			}
+
+		case "ClipRange":
+			if err := awsRestjson1_deserializeDocumentClipRange(&sv.ClipRange, value); err != nil {
+				return err
+			}
+
+		case "DurationMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationMillis = ptr.Int64(i64)
+			}
+
+		case "LiveSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.LiveSourceName = ptr.String(jtv)
+			}
+
+		case "ScheduledStartTimeMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ScheduledStartTimeMillis = ptr.Int64(i64)
+			}
+
+		case "SourceLocationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SourceLocationName = ptr.String(jtv)
+			}
+
+		case "VodSourceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.VodSourceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudienceMedia(v **types.AudienceMedia, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudienceMedia
+	if *v == nil {
+		sv = &types.AudienceMedia{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AlternateMedia":
+			if err := awsRestjson1_deserializeDocument__listOfAlternateMedia(&sv.AlternateMedia, value); err != nil {
+				return err
+			}
+
+		case "Audience":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Audience = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAudiences(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAvailMatchingCriteria(v **types.AvailMatchingCriteria, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8367,6 +8640,11 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "Audiences":
+			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
+			}
+
 		case "ChannelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8497,6 +8775,19 @@ func awsRestjson1_deserializeDocumentClipRange(v **types.ClipRange, value interf
 					return err
 				}
 				sv.EndOffsetMillis = ptr.Int64(i64)
+			}
+
+		case "StartOffsetMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartOffsetMillis = ptr.Int64(i64)
 			}
 
 		default:
@@ -9915,6 +10206,11 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "Audiences":
+			if err := awsRestjson1_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
 			}
 
 		case "ChannelName":

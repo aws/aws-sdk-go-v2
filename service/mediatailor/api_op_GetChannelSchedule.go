@@ -34,6 +34,9 @@ type GetChannelScheduleInput struct {
 	// This member is required.
 	ChannelName *string
 
+	// The single audience for GetChannelScheduleRequest.
+	Audience *string
+
 	// The duration in minutes of the channel schedule.
 	DurationMinutes *string
 

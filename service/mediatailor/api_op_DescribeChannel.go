@@ -50,6 +50,9 @@ type DescribeChannelOutput struct {
 	// The ARN of the channel.
 	Arn *string
 
+	// The list of audiences defined in channel.
+	Audiences []string
+
 	// The name of the channel.
 	ChannelName *string
 

@@ -224,8 +224,9 @@ type ScheduleEntryType string
 
 // Enum values for ScheduleEntryType
 const (
-	ScheduleEntryTypeProgram     ScheduleEntryType = "PROGRAM"
-	ScheduleEntryTypeFillerSlate ScheduleEntryType = "FILLER_SLATE"
+	ScheduleEntryTypeProgram        ScheduleEntryType = "PROGRAM"
+	ScheduleEntryTypeFillerSlate    ScheduleEntryType = "FILLER_SLATE"
+	ScheduleEntryTypeAlternateMedia ScheduleEntryType = "ALTERNATE_MEDIA"
 )
 
 // Values returns all known values for ScheduleEntryType. Note that this can be
@@ -235,6 +236,7 @@ func (ScheduleEntryType) Values() []ScheduleEntryType {
 	return []ScheduleEntryType{
 		"PROGRAM",
 		"FILLER_SLATE",
+		"ALTERNATE_MEDIA",
 	}
 }
 

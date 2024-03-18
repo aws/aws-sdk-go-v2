@@ -1,0 +1,8 @@
+{
+    "id": "5eb7f150-0c07-4b0d-8ffa-c1b0eb51f602",
+    "type": "documentation",
+    "description": "Documentation updates, March 2024",
+    "modules": [
+        "service/timestreamquery"
+    ]
+}

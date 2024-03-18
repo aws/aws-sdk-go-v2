@@ -1574,6 +1574,18 @@ func TestCheckSnapshot_ModifyGlobalCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyOptionGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyOptionGroup(context.Background(), nil, func(o *Options) {
@@ -3498,6 +3510,18 @@ func TestUpdateSnapshot_ModifyGlobalCluster(t *testing.T) {
 	_, err := svc.ModifyGlobalCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyGlobalCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

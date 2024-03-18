@@ -141,6 +141,7 @@
         "api_op_ModifyDBSubnetGroup.go",
         "api_op_ModifyEventSubscription.go",
         "api_op_ModifyGlobalCluster.go",
+        "api_op_ModifyIntegration.go",
         "api_op_ModifyOptionGroup.go",
         "api_op_ModifyTenantDatabase.go",
         "api_op_PromoteReadReplica.go",

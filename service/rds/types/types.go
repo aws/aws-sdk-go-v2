@@ -3069,6 +3069,13 @@ type Integration struct {
 	// The time when the integration was created, in Universal Coordinated Time (UTC).
 	CreateTime *time.Time
 
+	// Data filters for the integration. These filters determine which tables from the
+	// source database are sent to the target Amazon Redshift data warehouse.
+	DataFilter *string
+
+	// A description of the integration.
+	Description *string
+
 	// Any errors associated with the integration.
 	Errors []IntegrationError
 

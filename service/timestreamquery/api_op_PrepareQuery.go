@@ -14,7 +14,7 @@ import (
 
 // A synchronous operation that allows you to submit a query with parameters to be
 // stored by Timestream for later running. Timestream only supports using this
-// operation with the PrepareQueryRequest$ValidateOnly set to true .
+// operation with ValidateOnly set to true .
 func (c *Client) PrepareQuery(ctx context.Context, params *PrepareQueryInput, optFns ...func(*Options)) (*PrepareQueryOutput, error) {
 	if params == nil {
 		params = &PrepareQueryInput{}

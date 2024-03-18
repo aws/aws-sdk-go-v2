@@ -1,0 +1,8 @@
+{
+    "id": "3e1a793e-1990-4bfc-a55d-ce6218864703",
+    "type": "feature",
+    "description": "This release adds support to allow customers to show different content within a channel depending on metadata associated with the viewer.",
+    "modules": [
+        "service/mediatailor"
+    ]
+}
