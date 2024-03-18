@@ -1,3 +1,7 @@
+# v1.31.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2024-03-15)
 
 * **Feature**: AWS CodeBuild now supports overflow behavior on Reserved Capacity.

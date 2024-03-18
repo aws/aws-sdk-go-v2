@@ -1,3 +1,7 @@
+# v1.34.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2024-03-15)
 
 * **Feature**: This release introduces a boolean attribute ManagedByAWSBackupOnly as part of ListRecoveryPointsByResource api to filter the recovery points based on ownership. This attribute can be used to filter out the recovery points protected by AWSBackup.

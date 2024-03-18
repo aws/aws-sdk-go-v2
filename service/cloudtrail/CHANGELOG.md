@@ -1,3 +1,7 @@
+# v1.39.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2024-03-08)
 
 * **Feature**: Added exceptions to CreateTrail, DescribeTrails, and ListImportFailures APIs.

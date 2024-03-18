@@ -1,3 +1,7 @@
+# v1.35.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2024-03-08)
 
 * **Feature**: This release adds JobStateTimeLimitActions setting to the Job Queue API. It allows you to configure an action Batch can take for a blocking job in front of the queue after the defined period of time. The new parameter applies for ECS, EKS, and FARGATE Job Queues.

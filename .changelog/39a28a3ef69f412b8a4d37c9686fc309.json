@@ -1,8 +1,0 @@
-{
-    "id": "39a28a3e-f69f-412b-8a4d-37c9686fc309",
-    "type": "feature",
-    "description": "This release supports for a new API ListStackSetAutoDeploymentTargets, which provider auto-deployment configuration as a describable resource. Customers can now view the specific combinations of regions and OUs that are being auto-deployed.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

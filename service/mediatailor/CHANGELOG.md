@@ -1,3 +1,8 @@
+# v1.37.0 (2024-03-18)
+
+* **Feature**: This release adds support to allow customers to show different content within a channel depending on metadata associated with the viewer.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.2 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

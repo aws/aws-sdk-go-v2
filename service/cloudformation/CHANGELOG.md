@@ -1,3 +1,8 @@
+# v1.48.0 (2024-03-18)
+
+* **Feature**: This release supports for a new API ListStackSetAutoDeploymentTargets, which provider auto-deployment configuration as a describable resource. Customers can now view the specific combinations of regions and OUs that are being auto-deployed.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.2 (2024-03-12)
 
 * **Documentation**: CloudFormation documentation update for March, 2024

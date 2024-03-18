@@ -1,3 +1,7 @@
+# v1.8.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2024-03-07)
 
 * **Feature**: AWS Payment Cryptography EMV Decrypt Feature  Release

@@ -1,8 +1,0 @@
-{
-    "id": "0d9371d2-f177-4d72-a0c0-e1e96046cd35",
-    "type": "feature",
-    "description": "Adds the ability to use the default policy name by omitting the policyName parameter in calls to PutKeyPolicy and GetKeyPolicy",
-    "modules": [
-        "service/kms"
-    ]
-}

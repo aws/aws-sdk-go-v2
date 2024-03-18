@@ -1,3 +1,7 @@
+# v1.21.4 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.3 (2024-03-14)
 
 * **Documentation**: Documentation updates for Amplify. Identifies the APIs available only to apps created using Amplify Gen 1.

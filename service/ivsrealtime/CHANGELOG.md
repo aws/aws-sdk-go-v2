@@ -1,3 +1,7 @@
+# v1.12.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2024-03-13)
 
 * **Feature**: adds support for multiple new composition layout configuration options (grid, pip)

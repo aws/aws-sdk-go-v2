@@ -1,3 +1,7 @@
+# v1.49.4 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.3 (2024-03-12)
 
 * **Documentation**: March 2024 doc-only updates for Systems Manager.

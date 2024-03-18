@@ -1,3 +1,24 @@
+# Release (2024-03-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.26.0
+  * **Feature**: Add no-op rate limiting implementation `ratelimit.None`, which allows disabling of client-side retry quota behavior.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.48.0](service/cloudformation/CHANGELOG.md#v1480-2024-03-18)
+  * **Feature**: This release supports for a new API ListStackSetAutoDeploymentTargets, which provider auto-deployment configuration as a describable resource. Customers can now view the specific combinations of regions and OUs that are being auto-deployed.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.30.0](service/kms/CHANGELOG.md#v1300-2024-03-18)
+  * **Feature**: Adds the ability to use the default policy name by omitting the policyName parameter in calls to PutKeyPolicy and GetKeyPolicy
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.37.0](service/mediatailor/CHANGELOG.md#v1370-2024-03-18)
+  * **Feature**: This release adds support to allow customers to show different content within a channel depending on metadata associated with the viewer.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.76.0](service/rds/CHANGELOG.md#v1760-2024-03-18)
+  * **Feature**: This release launches the ModifyIntegration API and support for data filtering for zero-ETL Integrations.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.53.0](service/s3/CHANGELOG.md#v1530-2024-03-18)
+  * **Feature**: Fix two issues with response root node names.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.22.4](service/timestreamquery/CHANGELOG.md#v1224-2024-03-18)
+  * **Documentation**: Documentation updates, March 2024
+
 # Release (2024-03-15)
 
 ## General Highlights

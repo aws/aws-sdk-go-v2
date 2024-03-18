@@ -1,8 +1,0 @@
-{
-    "id": "8cd440fb-2ae6-4450-a937-c4e80439ba39",
-    "type": "feature",
-    "description": "Fix two issues with response root node names.",
-    "modules": [
-        "service/s3"
-    ]
-}

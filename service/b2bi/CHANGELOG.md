@@ -1,3 +1,7 @@
+# v1.0.0-preview.19 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.18 (2024-03-07)
 
 * **Bug Fix**: Remove dependency on go-cmp.

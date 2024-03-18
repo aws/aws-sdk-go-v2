@@ -1,3 +1,7 @@
+# v1.44.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.44.0 (2024-03-08)
 
 * **Feature**: Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector.

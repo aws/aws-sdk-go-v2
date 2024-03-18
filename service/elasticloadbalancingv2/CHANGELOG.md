@@ -1,3 +1,7 @@
+# v1.30.4 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.3 (2024-03-14)
 
 * **Documentation**: This release allows you to configure HTTP client keep-alive duration for communication between clients and Application Load Balancers.

@@ -1,3 +1,7 @@
+# v1.10.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2024-03-11)
 
 * **Feature**: This release enables customers to safely update their MediaPackage v2 channel groups, channels and origin endpoints using entity tags.

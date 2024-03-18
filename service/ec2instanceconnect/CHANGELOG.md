@@ -1,3 +1,7 @@
+# v1.23.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2024-03-14)
 
 * **Feature**: This release includes a new exception type "SerialConsoleSessionUnsupportedException" for SendSerialConsoleSSHPublicKey API.

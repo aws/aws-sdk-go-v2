@@ -1,3 +1,7 @@
+# v1.151.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.151.0 (2024-03-15)
 
 * **Feature**: Add media accelerator and neuron device information on the describe instance types API.

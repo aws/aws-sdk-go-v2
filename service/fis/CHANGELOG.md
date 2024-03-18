@@ -1,3 +1,7 @@
+# v1.24.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2024-03-14)
 
 * **Feature**: This release adds support for previewing target resources before running a FIS experiment. It also adds resource ARNs for actions, experiments, and experiment templates to API responses.

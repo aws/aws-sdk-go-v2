@@ -1,3 +1,8 @@
+# v1.76.0 (2024-03-18)
+
+* **Feature**: This release launches the ModifyIntegration API and support for data filtering for zero-ETL Integrations.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.75.2 (2024-03-14)
 
 * **Documentation**: Updates Amazon RDS documentation for EBCDIC collation for RDS for Db2.
