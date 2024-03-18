@@ -1,0 +1,8 @@
+{
+    "id": "df6f67ad-cf63-4eb4-8c3c-35f3cc763f09",
+    "type": "feature",
+    "description": "Add no-op rate limiting implementation `ratelimit.None`, which allows disabling of client-side retry quota behavior.",
+    "modules": [
+        "."
+    ]
+}
