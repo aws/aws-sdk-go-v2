@@ -7,6 +7,17 @@ import (
 	"time"
 )
 
+// This is the container for the unique public address on the blockchain.
+type AddressIdentifierFilter struct {
+
+	// The container for the recipient address of the transaction.
+	//
+	// This member is required.
+	TransactionEventToAddress []string
+
+	noSmithyDocumentSerde
+}
+
 // This container contains information about an contract.
 type AssetContract struct {
 
@@ -50,7 +61,7 @@ type BatchGetTokenBalanceErrorItem struct {
 	// The container for time.
 	AtBlockchainInstant *BlockchainInstant
 
-	// The container for the identifier of the owner.
+	// The container for the owner identifier.
 	OwnerIdentifier *OwnerIdentifier
 
 	// The container for the identifier for the token including the unique token ID
@@ -64,7 +75,7 @@ type BatchGetTokenBalanceErrorItem struct {
 // The container for the input for getting a token balance.
 type BatchGetTokenBalanceInputItem struct {
 
-	// The container for the identifier of the owner.
+	// The container for the owner identifier.
 	//
 	// This member is required.
 	OwnerIdentifier *OwnerIdentifier
@@ -98,7 +109,7 @@ type BatchGetTokenBalanceOutputItem struct {
 	// The container for time.
 	LastUpdatedTime *BlockchainInstant
 
-	// The container for the identifier of the owner.
+	// The container for the owner identifier.
 	OwnerIdentifier *OwnerIdentifier
 
 	// The container for the identifier for the token including the unique token ID
@@ -185,6 +196,21 @@ type ContractMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// Lists all the transaction events for an address on the blockchain. This
+// operation is only supported on the Bitcoin blockchain networks.
+type ListFilteredTransactionEventsSort struct {
+
+	// Container on how the results will be sorted by?
+	SortBy ListFilteredTransactionEventsSortBy
+
+	// The container for the sort order for ListFilteredTransactionEvents . The
+	// SortOrder field only accepts the values ASCENDING and DESCENDING . Not providing
+	// SortOrder will default to ASCENDING .
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
 // The container for determining how the list transaction result will be sorted.
 type ListTransactionsSort struct {
 
@@ -210,13 +236,25 @@ type OwnerFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The container for the identifier of the owner.
+// The container for the owner identifier.
 type OwnerIdentifier struct {
 
 	// The contract or wallet address for the owner.
 	//
 	// This member is required.
 	Address *string
+
+	noSmithyDocumentSerde
+}
+
+// This container is used to specify a time frame.
+type TimeFilter struct {
+
+	// The container for time.
+	From *BlockchainInstant
+
+	// The container for time.
+	To *BlockchainInstant
 
 	noSmithyDocumentSerde
 }
@@ -316,8 +354,7 @@ type Transaction struct {
 	// This member is required.
 	To *string
 
-	// The hash of the transaction. It is generated whenever a transaction is verified
-	// and added to the blockchain.
+	// The hash of a transaction. It is generated when a transaction is created.
 	//
 	// This member is required.
 	TransactionHash *string
@@ -374,8 +411,8 @@ type Transaction struct {
 	// The transaction fee.
 	TransactionFee *string
 
-	// The unique identifier of the transaction. It is generated whenever a
-	// transaction is verified and added to the blockchain.
+	// The identifier of a Bitcoin transaction. It is generated when a transaction is
+	// created.
 	TransactionId *string
 
 	noSmithyDocumentSerde
@@ -394,18 +431,35 @@ type TransactionEvent struct {
 	// This member is required.
 	Network QueryNetwork
 
-	// The hash of the transaction. It is generated whenever a transaction is verified
-	// and added to the blockchain.
+	// The hash of a transaction. It is generated when a transaction is created.
 	//
 	// This member is required.
 	TransactionHash *string
 
-	// The blockchain address. for the contract
+	// The container for time.
+	BlockchainInstant *BlockchainInstant
+
+	// This container specifies whether the transaction has reached Finality.
+	ConfirmationStatus ConfirmationStatus
+
+	// The blockchain address for the contract
 	ContractAddress *string
 
 	// The wallet address initiating the transaction. It can either be a public key or
 	// a contract.
 	From *string
+
+	// The position of the spent transaction output in the output list of the creating
+	// transaction. This is only returned for BITCOIN_VIN event types.
+	SpentVoutIndex *int32
+
+	// The transactionHash that created the spent transaction output. This is only
+	// returned for BITCOIN_VIN event types.
+	SpentVoutTransactionHash *string
+
+	// The transactionId that created the spent transaction output. This is only
+	// returned for BITCOIN_VIN event types.
+	SpentVoutTransactionId *string
 
 	// The wallet address receiving the transaction. It can either be a public key or
 	// a contract.
@@ -414,15 +468,20 @@ type TransactionEvent struct {
 	// The unique identifier for the token involved in the transaction.
 	TokenId *string
 
-	// The unique identifier of the transaction. It is generated whenever a
-	// transaction is verified and added to the blockchain.
+	// The identifier of a Bitcoin transaction. It is generated when a transaction is
+	// created.
 	TransactionId *string
 
 	// The value that was transacted.
 	Value *string
 
-	// The position of the vout in the transaction output list.
+	// The position of the transaction output in the transaction output list.
 	VoutIndex *int32
+
+	// Specifies if the transaction output is spent or unspent. This is only returned
+	// for BITCOIN_VOUT event types. This is only returned for BITCOIN_VOUT event
+	// types.
+	VoutSpent *bool
 
 	noSmithyDocumentSerde
 }
@@ -435,8 +494,7 @@ type TransactionOutputItem struct {
 	// This member is required.
 	Network QueryNetwork
 
-	// The hash of the transaction. It is generated whenever a transaction is verified
-	// and added to the blockchain.
+	// The hash of a transaction. It is generated when a transaction is created.
 	//
 	// This member is required.
 	TransactionHash *string
@@ -464,6 +522,18 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// This container specifies filtering attributes related to BITCOIN_VOUT event
+// types
+type VoutFilter struct {
+
+	// Specifies if the transaction output is spent or unspent.
+	//
+	// This member is required.
+	VoutSpent *bool
 
 	noSmithyDocumentSerde
 }

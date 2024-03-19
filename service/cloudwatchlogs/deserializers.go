@@ -11117,6 +11117,59 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentLogEvent(v **types.LogEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LogEvent
+	if *v == nil {
+		sv = &types.LogEvent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EventMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "timestamp":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Timestamp = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLogGroup(v **types.LogGroup, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11488,7 +11541,7 @@ func awsAwsjson11_deserializeDocumentLogRecord(v *map[string]string, value inter
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentLogSamples(v *[]string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentLogSamples(v *[]types.LogEvent, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11501,22 +11554,20 @@ func awsAwsjson11_deserializeDocumentLogSamples(v *[]string, value interface{}) 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []string
+	var cv []types.LogEvent
 	if *v == nil {
-		cv = []string{}
+		cv = []types.LogEvent{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col string
-		if value != nil {
-			jtv, ok := value.(string)
-			if !ok {
-				return fmt.Errorf("expected LogEvent to be of type string, got %T instead", value)
-			}
-			col = jtv
+		var col types.LogEvent
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentLogEvent(&destAddr, value); err != nil {
+			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

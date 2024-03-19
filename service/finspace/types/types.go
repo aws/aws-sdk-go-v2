@@ -553,10 +553,8 @@ type KxDataviewListEntry struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneId *string
 
-	// The number of availability zones you want to assign per cluster. This can be
-	// one of the following
-	//   - SINGLE – Assigns one availability zone per cluster.
-	//   - MULTI – Assigns all the availability zones per cluster.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode KxAzMode
 
 	// A unique identifier for the changeset.
@@ -583,6 +581,9 @@ type KxDataviewListEntry struct {
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
+
+	// Returns True if the dataview is created as writeable and False otherwise.
+	ReadWrite bool
 
 	// The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
@@ -617,6 +618,12 @@ type KxDataviewSegmentConfiguration struct {
 	//
 	// This member is required.
 	VolumeName *string
+
+	// Enables on-demand caching on the selected database path when a particular file
+	// or a column of the database is accessed. When on demand caching is True,
+	// dataviews perform minimal loading of files on the filesystem as needed. When it
+	// is set to False, everything is cached. The default value is False.
+	OnDemand bool
 
 	noSmithyDocumentSerde
 }
@@ -782,7 +789,19 @@ type KxScalingGroup struct {
 	CreatedTimestamp *time.Time
 
 	// The memory and CPU capabilities of the scaling group host on which FinSpace
-	// Managed kdb clusters will be placed.
+	// Managed kdb clusters will be placed. You can add one of the following values:
+	//   - kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16
+	//   vCPUs.
+	//   - kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32
+	//   vCPUs.
+	//   - kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64
+	//   vCPUs.
+	//   - kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and
+	//   128 vCPUs.
+	//   - kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and
+	//   64 vCPUs.
+	//   - kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and
+	//   96 vCPUs.
 	HostType *string
 
 	// The last time that the scaling group was updated in FinSpace. The value is
@@ -860,8 +879,8 @@ type KxVolume struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneIds []string
 
-	// The number of availability zones assigned to the volume. Currently, only SINGLE
-	// is supported.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode KxAzMode
 
 	// The timestamp at which the volume was created in FinSpace. The value is

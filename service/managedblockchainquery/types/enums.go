@@ -58,6 +58,24 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 	}
 }
 
+type ListFilteredTransactionEventsSortBy string
+
+// Enum values for ListFilteredTransactionEventsSortBy
+const (
+	// Timestamp of a transaction
+	ListFilteredTransactionEventsSortByBlockchainInstant ListFilteredTransactionEventsSortBy = "blockchainInstant"
+)
+
+// Values returns all known values for ListFilteredTransactionEventsSortBy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ListFilteredTransactionEventsSortBy) Values() []ListFilteredTransactionEventsSortBy {
+	return []ListFilteredTransactionEventsSortBy{
+		"blockchainInstant",
+	}
+}
+
 type ListTransactionsSortBy string
 
 // Enum values for ListTransactionsSortBy

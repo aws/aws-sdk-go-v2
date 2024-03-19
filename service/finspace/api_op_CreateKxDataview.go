@@ -33,10 +33,8 @@ func (c *Client) CreateKxDataview(ctx context.Context, params *CreateKxDataviewI
 
 type CreateKxDataviewInput struct {
 
-	// The number of availability zones you want to assign per cluster. This can be
-	// one of the following
-	//   - SINGLE – Assigns one availability zone per cluster.
-	//   - MULTI – Assigns all the availability zones per cluster.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	//
 	// This member is required.
 	AzMode types.KxAzMode
@@ -76,6 +74,20 @@ type CreateKxDataviewInput struct {
 	// A description of the dataview.
 	Description *string
 
+	// The option to specify whether you want to make the dataview writable to perform
+	// database maintenance. The following are some considerations related to writable
+	// dataviews.
+	//   - You cannot create partial writable dataviews. When you create writeable
+	//   dataviews you must provide the entire database path.
+	//   - You cannot perform updates on a writeable dataview. Hence, autoUpdate must
+	//   be set as False if readWrite is True for a dataview.
+	//   - You must also use a unique volume for creating a writeable dataview. So, if
+	//   you choose a volume that is already in use by another dataview, the dataview
+	//   creation fails.
+	//   - Once you create a dataview as writeable, you cannot change it to read-only.
+	//   So, you cannot update the readWrite parameter later.
+	ReadWrite bool
+
 	// The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
 	// each volume. If you do not explicitly specify any database path for a volume,
@@ -100,10 +112,8 @@ type CreateKxDataviewOutput struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneId *string
 
-	// The number of availability zones you want to assign per cluster. This can be
-	// one of the following
-	//   - SINGLE – Assigns one availability zone per cluster.
-	//   - MULTI – Assigns all the availability zones per cluster.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode types.KxAzMode
 
 	// A unique identifier for the changeset.
@@ -131,6 +141,9 @@ type CreateKxDataviewOutput struct {
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
+
+	// Returns True if the dataview is created as writeable and False otherwise.
+	ReadWrite bool
 
 	// The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for

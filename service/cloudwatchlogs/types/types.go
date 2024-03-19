@@ -93,7 +93,7 @@ type Anomaly struct {
 	// anomaly.
 	//
 	// This member is required.
-	LogSamples []string
+	LogSamples []LogEvent
 
 	// The ID of the pattern used to help identify this anomaly.
 	//
@@ -206,7 +206,7 @@ type Delivery struct {
 	DeliveryDestinationArn *string
 
 	// Displays whether the delivery destination associated with this delivery is
-	// CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+	// CloudWatch Logs, Amazon S3, or Firehose.
 	DeliveryDestinationType DeliveryDestinationType
 
 	// The name of the delivery source that is associated with this delivery.
@@ -224,9 +224,9 @@ type Delivery struct {
 // This structure contains information about one delivery destination in your
 // account. A delivery destination is an Amazon Web Services resource that
 // represents an Amazon Web Services service that logs can be sent to. CloudWatch
-// Logs, Amazon S3, are supported as Kinesis Data Firehose delivery destinations.
-// To configure logs delivery between a supported Amazon Web Services service and a
-// destination, you must do the following:
+// Logs, Amazon S3, are supported as Firehose delivery destinations. To configure
+// logs delivery between a supported Amazon Web Services service and a destination,
+// you must do the following:
 //   - Create a delivery source, which is a logical object that represents the
 //     resource that is actually sending the logs. For more information, see
 //     PutDeliverySource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html)
@@ -256,7 +256,7 @@ type DeliveryDestination struct {
 	DeliveryDestinationConfiguration *DeliveryDestinationConfiguration
 
 	// Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or
-	// Kinesis Data Firehose.
+	// Firehose.
 	DeliveryDestinationType DeliveryDestinationType
 
 	// The name of this delivery destination.
@@ -276,8 +276,7 @@ type DeliveryDestinationConfiguration struct {
 
 	// The ARN of the Amazon Web Services destination that this delivery destination
 	// represents. That Amazon Web Services destination can be a log group in
-	// CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data
-	// Firehose.
+	// CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.
 	//
 	// This member is required.
 	DestinationResourceArn *string
@@ -288,10 +287,9 @@ type DeliveryDestinationConfiguration struct {
 // This structure contains information about one delivery source in your account.
 // A delivery source is an Amazon Web Services resource that sends logs to an
 // Amazon Web Services destination. The destination can be CloudWatch Logs, Amazon
-// S3, or Kinesis Data Firehose. Only some Amazon Web Services services support
-// being configured as a delivery source. These services are listed as Supported
-// [V2 Permissions] in the table at Enabling logging from Amazon Web Services
-// services. (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
+// S3, or Firehose. Only some Amazon Web Services services support being configured
+// as a delivery source. These services are listed as Supported [V2 Permissions] in
+// the table at Enabling logging from Amazon Web Services services. (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
 // To configure logs delivery between a supported Amazon Web Services service and a
 // destination, you must do the following:
 //   - Create a delivery source, which is a logical object that represents the
@@ -555,6 +553,19 @@ type LiveTailSessionUpdate struct {
 	// second, the log events are sampled down to 500 log events to be included in each
 	// sessionUpdate structure.
 	SessionResults []LiveTailSessionLogEvent
+
+	noSmithyDocumentSerde
+}
+
+// This structure contains the information for one sample log event that is
+// associated with an anomaly found by a log anomaly detector.
+type LogEvent struct {
+
+	// The message content of the log event.
+	Message *string
+
+	// The time stamp of the log event.
+	Timestamp *int64
 
 	noSmithyDocumentSerde
 }
@@ -922,10 +933,10 @@ type RejectedLogEventsInfo struct {
 	// The expired log events.
 	ExpiredLogEventEndIndex *int32
 
-	// The log events that are too new.
+	// The index of the first log event that is too new. This field is inclusive.
 	TooNewLogEventStartIndex *int32
 
-	// The log events that are dated too far in the past.
+	// The index of the last log event that is too old. This field is exclusive.
 	TooOldLogEventEndIndex *int32
 
 	noSmithyDocumentSerde

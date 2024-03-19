@@ -13,6 +13,7 @@
         "api_op_GetTokenBalance.go",
         "api_op_GetTransaction.go",
         "api_op_ListAssetContracts.go",
+        "api_op_ListFilteredTransactionEvents.go",
         "api_op_ListTokenBalances.go",
         "api_op_ListTransactionEvents.go",
         "api_op_ListTransactions.go",

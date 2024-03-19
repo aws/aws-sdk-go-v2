@@ -44,18 +44,18 @@ import (
 // CloudWatch Logs to other Amazon Web Services services. Account-level
 // subscription filter policies apply to both existing log groups and log groups
 // that are created later in this account. Supported destinations are Kinesis Data
-// Streams, Kinesis Data Firehose, and Lambda. When log events are sent to the
-// receiving service, they are Base64 encoded and compressed with the GZIP format.
-// The following destinations are supported for subscription filters:
+// Streams, Firehose, and Lambda. When log events are sent to the receiving
+// service, they are Base64 encoded and compressed with the GZIP format. The
+// following destinations are supported for subscription filters:
 //   - An Kinesis Data Streams data stream in the same account as the subscription
 //     policy, for same-account delivery.
-//   - An Kinesis Data Firehose data stream in the same account as the
-//     subscription policy, for same-account delivery.
+//   - An Firehose data stream in the same account as the subscription policy, for
+//     same-account delivery.
 //   - A Lambda function in the same account as the subscription policy, for
 //     same-account delivery.
 //   - A logical destination in a different account created with PutDestination (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html)
-//     , for cross-account delivery. Kinesis Data Streams and Kinesis Data Firehose are
-//     supported as logical destinations.
+//     , for cross-account delivery. Kinesis Data Streams and Firehose are supported as
+//     logical destinations.
 //
 // Each account can have one account-level subscription filter policy. If you are
 // updating an existing filter, you must specify the correct name in PolicyName .
@@ -88,8 +88,7 @@ type PutAccountPolicyInput struct {
 	//   sensitive data terms. This Audit action must contain a FindingsDestination
 	//   object. You can optionally use that FindingsDestination object to list one or
 	//   more destinations to send audit findings to. If you specify destinations such as
-	//   log groups, Kinesis Data Firehose streams, and S3 buckets, they must already
-	//   exist.
+	//   log groups, Firehose streams, and S3 buckets, they must already exist.
 	//   - The second block must include both a DataIdentifer array and an Operation
 	//   property with an Deidentify action. The DataIdentifer array must exactly match
 	//   the DataIdentifer array in the first block of the policy. The Operation
@@ -108,13 +107,13 @@ type PutAccountPolicyInput struct {
 	//   Supported destinations are:
 	//   - An Kinesis Data Streams data stream in the same account as the subscription
 	//   policy, for same-account delivery.
-	//   - An Kinesis Data Firehose data stream in the same account as the
-	//   subscription policy, for same-account delivery.
+	//   - An Firehose data stream in the same account as the subscription policy, for
+	//   same-account delivery.
 	//   - A Lambda function in the same account as the subscription policy, for
 	//   same-account delivery.
 	//   - A logical destination in a different account created with PutDestination (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html)
-	//   , for cross-account delivery. Kinesis Data Streams and Kinesis Data Firehose are
-	//   supported as logical destinations.
+	//   , for cross-account delivery. Kinesis Data Streams and Firehose are supported as
+	//   logical destinations.
 	//   - RoleArn The ARN of an IAM role that grants CloudWatch Logs permissions to
 	//   deliver ingested log events to the destination stream. You don't need to provide
 	//   the ARN when you are working with a logical destination for cross-account

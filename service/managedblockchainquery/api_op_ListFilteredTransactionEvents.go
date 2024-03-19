@@ -11,31 +11,40 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the transaction events for a transaction This action will return
-// transaction details for all transactions that are confirmed on the blockchain,
-// even if they have not reached finality (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
-// .
-func (c *Client) ListTransactionEvents(ctx context.Context, params *ListTransactionEventsInput, optFns ...func(*Options)) (*ListTransactionEventsOutput, error) {
+// Lists all the transaction events for an address on the blockchain. This
+// operation is only supported on the Bitcoin networks.
+func (c *Client) ListFilteredTransactionEvents(ctx context.Context, params *ListFilteredTransactionEventsInput, optFns ...func(*Options)) (*ListFilteredTransactionEventsOutput, error) {
 	if params == nil {
-		params = &ListTransactionEventsInput{}
+		params = &ListFilteredTransactionEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListTransactionEvents", params, optFns, c.addOperationListTransactionEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListFilteredTransactionEvents", params, optFns, c.addOperationListFilteredTransactionEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListTransactionEventsOutput)
+	out := result.(*ListFilteredTransactionEventsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListTransactionEventsInput struct {
+type ListFilteredTransactionEventsInput struct {
 
-	// The blockchain network where the transaction events occurred.
+	// This is the unique public address on the blockchain for which the transaction
+	// events are being requested.
 	//
 	// This member is required.
-	Network types.QueryNetwork
+	AddressIdentifierFilter *types.AddressIdentifierFilter
+
+	// The blockchain network where the transaction occurred. Valid Values:
+	// BITCOIN_MAINNET | BITCOIN_TESTNET
+	//
+	// This member is required.
+	Network *string
+
+	// The container for the ConfirmationStatusFilter that filters for the  finality  (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
+	// of the results.
+	ConfirmationStatusFilter *types.ConfirmationStatusFilter
 
 	// The maximum number of transaction events to list. Default: 100 Even if
 	// additional results can be retrieved, the request can return less results than
@@ -47,20 +56,23 @@ type ListTransactionEventsInput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The hash of a transaction. It is generated when a transaction is created.
-	TransactionHash *string
+	// The order by which the results will be sorted.
+	Sort *types.ListFilteredTransactionEventsSort
 
-	// The identifier of a Bitcoin transaction. It is generated when a transaction is
-	// created. transactionId is only supported on the Bitcoin networks.
-	TransactionId *string
+	// This container specifies the time frame for the transaction events returned in
+	// the response.
+	TimeFilter *types.TimeFilter
+
+	// This container specifies filtering attributes related to BITCOIN_VOUT event
+	// types
+	VoutFilter *types.VoutFilter
 
 	noSmithyDocumentSerde
 }
 
-type ListTransactionEventsOutput struct {
+type ListFilteredTransactionEventsOutput struct {
 
-	// An array of TransactionEvent objects. Each object contains details about the
-	// transaction events.
+	// The transaction events returned by the request.
 	//
 	// This member is required.
 	Events []types.TransactionEvent
@@ -74,19 +86,19 @@ type ListTransactionEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListTransactionEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListFilteredTransactionEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTransactionEvents{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFilteredTransactionEvents{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTransactionEvents{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFilteredTransactionEvents{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTransactionEvents"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFilteredTransactionEvents"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -129,10 +141,10 @@ func (c *Client) addOperationListTransactionEventsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpListTransactionEventsValidationMiddleware(stack); err != nil {
+	if err = addOpListFilteredTransactionEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTransactionEvents(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFilteredTransactionEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -153,17 +165,17 @@ func (c *Client) addOperationListTransactionEventsMiddlewares(stack *middleware.
 	return nil
 }
 
-// ListTransactionEventsAPIClient is a client that implements the
-// ListTransactionEvents operation.
-type ListTransactionEventsAPIClient interface {
-	ListTransactionEvents(context.Context, *ListTransactionEventsInput, ...func(*Options)) (*ListTransactionEventsOutput, error)
+// ListFilteredTransactionEventsAPIClient is a client that implements the
+// ListFilteredTransactionEvents operation.
+type ListFilteredTransactionEventsAPIClient interface {
+	ListFilteredTransactionEvents(context.Context, *ListFilteredTransactionEventsInput, ...func(*Options)) (*ListFilteredTransactionEventsOutput, error)
 }
 
-var _ ListTransactionEventsAPIClient = (*Client)(nil)
+var _ ListFilteredTransactionEventsAPIClient = (*Client)(nil)
 
-// ListTransactionEventsPaginatorOptions is the paginator options for
-// ListTransactionEvents
-type ListTransactionEventsPaginatorOptions struct {
+// ListFilteredTransactionEventsPaginatorOptions is the paginator options for
+// ListFilteredTransactionEvents
+type ListFilteredTransactionEventsPaginatorOptions struct {
 	// The maximum number of transaction events to list. Default: 100 Even if
 	// additional results can be retrieved, the request can return less results than
 	// maxResults or an empty array of results. To retrieve the next set of results,
@@ -176,22 +188,24 @@ type ListTransactionEventsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListTransactionEventsPaginator is a paginator for ListTransactionEvents
-type ListTransactionEventsPaginator struct {
-	options   ListTransactionEventsPaginatorOptions
-	client    ListTransactionEventsAPIClient
-	params    *ListTransactionEventsInput
+// ListFilteredTransactionEventsPaginator is a paginator for
+// ListFilteredTransactionEvents
+type ListFilteredTransactionEventsPaginator struct {
+	options   ListFilteredTransactionEventsPaginatorOptions
+	client    ListFilteredTransactionEventsAPIClient
+	params    *ListFilteredTransactionEventsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListTransactionEventsPaginator returns a new ListTransactionEventsPaginator
-func NewListTransactionEventsPaginator(client ListTransactionEventsAPIClient, params *ListTransactionEventsInput, optFns ...func(*ListTransactionEventsPaginatorOptions)) *ListTransactionEventsPaginator {
+// NewListFilteredTransactionEventsPaginator returns a new
+// ListFilteredTransactionEventsPaginator
+func NewListFilteredTransactionEventsPaginator(client ListFilteredTransactionEventsAPIClient, params *ListFilteredTransactionEventsInput, optFns ...func(*ListFilteredTransactionEventsPaginatorOptions)) *ListFilteredTransactionEventsPaginator {
 	if params == nil {
-		params = &ListTransactionEventsInput{}
+		params = &ListFilteredTransactionEventsInput{}
 	}
 
-	options := ListTransactionEventsPaginatorOptions{}
+	options := ListFilteredTransactionEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -200,7 +214,7 @@ func NewListTransactionEventsPaginator(client ListTransactionEventsAPIClient, pa
 		fn(&options)
 	}
 
-	return &ListTransactionEventsPaginator{
+	return &ListFilteredTransactionEventsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -210,12 +224,12 @@ func NewListTransactionEventsPaginator(client ListTransactionEventsAPIClient, pa
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListTransactionEventsPaginator) HasMorePages() bool {
+func (p *ListFilteredTransactionEventsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListTransactionEvents page.
-func (p *ListTransactionEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTransactionEventsOutput, error) {
+// NextPage retrieves the next ListFilteredTransactionEvents page.
+func (p *ListFilteredTransactionEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFilteredTransactionEventsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -229,7 +243,7 @@ func (p *ListTransactionEventsPaginator) NextPage(ctx context.Context, optFns ..
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListTransactionEvents(ctx, &params, optFns...)
+	result, err := p.client.ListFilteredTransactionEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -248,10 +262,10 @@ func (p *ListTransactionEventsPaginator) NextPage(ctx context.Context, optFns ..
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListTransactionEvents(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListFilteredTransactionEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListTransactionEvents",
+		OperationName: "ListFilteredTransactionEvents",
 	}
 }

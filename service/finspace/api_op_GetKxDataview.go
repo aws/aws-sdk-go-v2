@@ -62,10 +62,8 @@ type GetKxDataviewOutput struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneId *string
 
-	// The number of availability zones you want to assign per cluster. This can be
-	// one of the following
-	//   - SINGLE – Assigns one availability zone per cluster.
-	//   - MULTI – Assigns all the availability zones per cluster.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode types.KxAzMode
 
 	// A unique identifier of the changeset that you want to use to ingest data.
@@ -93,6 +91,9 @@ type GetKxDataviewOutput struct {
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
+
+	// Returns True if the dataview is created as writeable and False otherwise.
+	ReadWrite bool
 
 	// The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for

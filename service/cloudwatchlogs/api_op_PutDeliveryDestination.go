@@ -13,10 +13,9 @@ import (
 
 // Creates or updates a logical delivery destination. A delivery destination is an
 // Amazon Web Services resource that represents an Amazon Web Services service that
-// logs can be sent to. CloudWatch Logs, Amazon S3, and Kinesis Data Firehose are
-// supported as logs delivery destinations. To configure logs delivery between a
-// supported Amazon Web Services service and a destination, you must do the
-// following:
+// logs can be sent to. CloudWatch Logs, Amazon S3, and Firehose are supported as
+// logs delivery destinations. To configure logs delivery between a supported
+// Amazon Web Services service and a destination, you must do the following:
 //   - Create a delivery source, which is a logical object that represents the
 //     resource that is actually sending the logs. For more information, see
 //     PutDeliverySource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html)

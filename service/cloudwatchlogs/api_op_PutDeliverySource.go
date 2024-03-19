@@ -13,10 +13,9 @@ import (
 
 // Creates or updates a logical delivery source. A delivery source represents an
 // Amazon Web Services resource that sends logs to an logs delivery destination.
-// The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose. To
-// configure logs delivery between a delivery destination and an Amazon Web
-// Services service that is supported as a delivery source, you must do the
-// following:
+// The destination can be CloudWatch Logs, Amazon S3, or Firehose. To configure
+// logs delivery between a delivery destination and an Amazon Web Services service
+// that is supported as a delivery source, you must do the following:
 //   - Use PutDeliverySource to create a delivery source, which is a logical object
 //     that represents the resource that is actually sending the logs.
 //   - Use PutDeliveryDestination to create a delivery destination, which is a
@@ -57,8 +56,12 @@ func (c *Client) PutDeliverySource(ctx context.Context, params *PutDeliverySourc
 
 type PutDeliverySourceInput struct {
 
-	// Defines the type of log that the source is sending. For Amazon CodeWhisperer,
-	// the valid value is EVENT_LOGS .
+	// Defines the type of log that the source is sending.
+	//   - For Amazon CodeWhisperer, the valid value is EVENT_LOGS .
+	//   - For IAM Identity Centerr, the valid value is ERROR_LOGS .
+	//   - For Amazon WorkMail, the valid values are ACCESS_CONTROL_LOGS ,
+	//   AUTHENTICATION_LOGS , WORKMAIL_AVAILABILITY_PROVIDER_LOGS , and
+	//   WORKMAIL_MAILBOX_ACCESS_LOGS .
 	//
 	// This member is required.
 	LogType *string

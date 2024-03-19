@@ -671,6 +671,11 @@ func awsRestjson1_serializeOpDocumentCreateKxDataviewInput(v *CreateKxDataviewIn
 		ok.String(*v.Description)
 	}
 
+	if v.ReadWrite {
+		ok := object.Key("readWrite")
+		ok.Boolean(v.ReadWrite)
+	}
+
 	if v.SegmentConfigurations != nil {
 		ok := object.Key("segmentConfigurations")
 		if err := awsRestjson1_serializeDocumentKxDataviewSegmentConfigurationList(v.SegmentConfigurations, ok); err != nil {
@@ -4903,6 +4908,11 @@ func awsRestjson1_serializeDocumentKxDataviewSegmentConfiguration(v *types.KxDat
 		if err := awsRestjson1_serializeDocumentSegmentConfigurationDbPathList(v.DbPaths, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.OnDemand {
+		ok := object.Key("onDemand")
+		ok.Boolean(v.OnDemand)
 	}
 
 	if v.VolumeName != nil {

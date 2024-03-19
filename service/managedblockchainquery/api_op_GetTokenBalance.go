@@ -65,7 +65,7 @@ type GetTokenBalanceOutput struct {
 	// The container for time.
 	LastUpdatedTime *types.BlockchainInstant
 
-	// The container for the identifier of the owner.
+	// The container for the owner identifier.
 	OwnerIdentifier *types.OwnerIdentifier
 
 	// The container for the identifier for the token including the unique token ID

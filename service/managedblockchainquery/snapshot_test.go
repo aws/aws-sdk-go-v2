@@ -122,6 +122,18 @@ func TestCheckSnapshot_ListAssetContracts(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFilteredTransactionEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFilteredTransactionEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFilteredTransactionEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTokenBalances(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTokenBalances(context.Background(), nil, func(o *Options) {
@@ -210,6 +222,18 @@ func TestUpdateSnapshot_ListAssetContracts(t *testing.T) {
 	_, err := svc.ListAssetContracts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssetContracts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFilteredTransactionEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFilteredTransactionEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFilteredTransactionEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

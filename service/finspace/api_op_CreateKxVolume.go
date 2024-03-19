@@ -35,8 +35,8 @@ type CreateKxVolumeInput struct {
 	// This member is required.
 	AvailabilityZoneIds []string
 
-	// The number of availability zones you want to assign per cluster. Currently,
-	// FinSpace only support SINGLE for volumes.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	//
 	// This member is required.
 	AzMode types.KxAzMode
@@ -81,8 +81,8 @@ type CreateKxVolumeOutput struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneIds []string
 
-	// The number of availability zones you want to assign per cluster. Currently,
-	// FinSpace only support SINGLE for volumes.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode types.KxAzMode
 
 	// The timestamp at which the volume was created in FinSpace. The value is

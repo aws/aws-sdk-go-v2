@@ -110,6 +110,26 @@ func (m *validateOpListAssetContracts) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListFilteredTransactionEvents struct {
+}
+
+func (*validateOpListFilteredTransactionEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFilteredTransactionEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFilteredTransactionEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFilteredTransactionEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTokenBalances struct {
 }
 
@@ -190,6 +210,10 @@ func addOpListAssetContractsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListAssetContracts{}, middleware.After)
 }
 
+func addOpListFilteredTransactionEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFilteredTransactionEvents{}, middleware.After)
+}
+
 func addOpListTokenBalancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTokenBalances{}, middleware.After)
 }
@@ -200,6 +224,21 @@ func addOpListTransactionEventsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpListTransactionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTransactions{}, middleware.After)
+}
+
+func validateAddressIdentifierFilter(v *types.AddressIdentifierFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddressIdentifierFilter"}
+	if v.TransactionEventToAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransactionEventToAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateBatchGetTokenBalanceInputItem(v *types.BatchGetTokenBalanceInputItem) error {
@@ -359,6 +398,21 @@ func validateTokenIdentifier(v *types.TokenIdentifier) error {
 	}
 }
 
+func validateVoutFilter(v *types.VoutFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VoutFilter"}
+	if v.VoutSpent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoutSpent"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetTokenBalanceInput(v *BatchGetTokenBalanceInput) error {
 	if v == nil {
 		return nil
@@ -458,6 +512,38 @@ func validateOpListAssetContractsInput(v *ListAssetContractsInput) error {
 	}
 }
 
+func validateOpListFilteredTransactionEventsInput(v *ListFilteredTransactionEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFilteredTransactionEventsInput"}
+	if v.Network == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Network"))
+	}
+	if v.AddressIdentifierFilter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddressIdentifierFilter"))
+	} else if v.AddressIdentifierFilter != nil {
+		if err := validateAddressIdentifierFilter(v.AddressIdentifierFilter); err != nil {
+			invalidParams.AddNested("AddressIdentifierFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VoutFilter != nil {
+		if err := validateVoutFilter(v.VoutFilter); err != nil {
+			invalidParams.AddNested("VoutFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConfirmationStatusFilter != nil {
+		if err := validateConfirmationStatusFilter(v.ConfirmationStatusFilter); err != nil {
+			invalidParams.AddNested("ConfirmationStatusFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTokenBalancesInput(v *ListTokenBalancesInput) error {
 	if v == nil {
 		return nil
@@ -487,9 +573,6 @@ func validateOpListTransactionEventsInput(v *ListTransactionEventsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListTransactionEventsInput"}
-	if v.TransactionHash == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransactionHash"))
-	}
 	if len(v.Network) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Network"))
 	}

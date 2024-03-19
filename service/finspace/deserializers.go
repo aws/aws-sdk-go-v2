@@ -1277,6 +1277,15 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 			}
 
+		case "readWrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.ReadWrite = jtv
+			}
+
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
@@ -4443,6 +4452,15 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "readWrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.ReadWrite = jtv
 			}
 
 		case "segmentConfigurations":
@@ -8347,6 +8365,15 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 			}
 
+		case "readWrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.ReadWrite = jtv
+			}
+
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
@@ -12154,6 +12181,15 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 			}
 
+		case "readWrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.ReadWrite = jtv
+			}
+
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
@@ -12245,6 +12281,15 @@ func awsRestjson1_deserializeDocumentKxDataviewSegmentConfiguration(v **types.Kx
 		case "dbPaths":
 			if err := awsRestjson1_deserializeDocumentSegmentConfigurationDbPathList(&sv.DbPaths, value); err != nil {
 				return err
+			}
+
+		case "onDemand":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.OnDemand = jtv
 			}
 
 		case "volumeName":

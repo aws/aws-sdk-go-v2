@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the transactions on a given wallet address or to a specific
-// contract.
+// Lists all the transaction events for a transaction.
 func (c *Client) ListTransactions(ctx context.Context, params *ListTransactionsInput, optFns ...func(*Options)) (*ListTransactionsOutput, error) {
 	if params == nil {
 		params = &ListTransactionsInput{}
@@ -43,7 +42,7 @@ type ListTransactionsInput struct {
 
 	// This filter is used to include transactions in the response that haven't
 	// reached finality  (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
-	// . Transactions that have reached finiality are always part of the response.
+	// . Transactions that have reached finality are always part of the response.
 	ConfirmationStatusFilter *types.ConfirmationStatusFilter
 
 	// The container for time.
@@ -59,8 +58,7 @@ type ListTransactionsInput struct {
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The order by which the results will be sorted. If ASCENNDING is selected, the
-	// results will be ordered by fromTime .
+	// The order by which the results will be sorted.
 	Sort *types.ListTransactionsSort
 
 	// The container for time.

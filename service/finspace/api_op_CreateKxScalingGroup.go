@@ -47,7 +47,19 @@ type CreateKxScalingGroupInput struct {
 	EnvironmentId *string
 
 	// The memory and CPU capabilities of the scaling group host on which FinSpace
-	// Managed kdb clusters will be placed.
+	// Managed kdb clusters will be placed. You can add one of the following values:
+	//   - kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16
+	//   vCPUs.
+	//   - kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32
+	//   vCPUs.
+	//   - kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64
+	//   vCPUs.
+	//   - kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and
+	//   128 vCPUs.
+	//   - kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and
+	//   64 vCPUs.
+	//   - kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and
+	//   96 vCPUs.
 	//
 	// This member is required.
 	HostType *string

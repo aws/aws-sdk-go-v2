@@ -63,8 +63,7 @@ type PutDataProtectionPolicyInput struct {
 	//   sensitive data terms. This Audit action must contain a FindingsDestination
 	//   object. You can optionally use that FindingsDestination object to list one or
 	//   more destinations to send audit findings to. If you specify destinations such as
-	//   log groups, Kinesis Data Firehose streams, and S3 buckets, they must already
-	//   exist.
+	//   log groups, Firehose streams, and S3 buckets, they must already exist.
 	//   - The second block must include both a DataIdentifer array and an Operation
 	//   property with an Deidentify action. The DataIdentifer array must exactly match
 	//   the DataIdentifer array in the first block of the policy. The Operation

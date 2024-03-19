@@ -1,0 +1,8 @@
+{
+    "id": "e3cb6df6-e8ef-4762-8e46-86ae7f1a7ae5",
+    "type": "feature",
+    "description": "Introduces a new API for Amazon Managed Blockchain Query: ListFilteredTransactionEvents.",
+    "modules": [
+        "service/managedblockchainquery"
+    ]
+}

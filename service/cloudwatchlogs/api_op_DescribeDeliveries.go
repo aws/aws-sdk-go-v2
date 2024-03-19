@@ -16,9 +16,9 @@ import (
 // and a delivery destination  (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html)
 // . A delivery source represents an Amazon Web Services resource that sends logs
 // to an logs delivery destination. The destination can be CloudWatch Logs, Amazon
-// S3, or Kinesis Data Firehose. Only some Amazon Web Services services support
-// being configured as a delivery source. These services are listed in Enable
-// logging from Amazon Web Services services. (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
+// S3, or Firehose. Only some Amazon Web Services services support being configured
+// as a delivery source. These services are listed in Enable logging from Amazon
+// Web Services services. (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
 func (c *Client) DescribeDeliveries(ctx context.Context, params *DescribeDeliveriesInput, optFns ...func(*Options)) (*DescribeDeliveriesOutput, error) {
 	if params == nil {
 		params = &DescribeDeliveriesInput{}

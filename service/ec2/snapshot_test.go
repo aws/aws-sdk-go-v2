@@ -3566,6 +3566,18 @@ func TestCheckSnapshot_DescribeLockedSnapshots(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeMacHosts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMacHosts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeMacHosts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeManagedPrefixLists(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeManagedPrefixLists(context.Background(), nil, func(o *Options) {
@@ -10938,6 +10950,18 @@ func TestUpdateSnapshot_DescribeLockedSnapshots(t *testing.T) {
 	_, err := svc.DescribeLockedSnapshots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeLockedSnapshots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeMacHosts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeMacHosts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeMacHosts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

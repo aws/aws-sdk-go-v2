@@ -427,6 +427,126 @@ func awsRestjson1_serializeOpDocumentListAssetContractsInput(v *ListAssetContrac
 	return nil
 }
 
+type awsRestjson1_serializeOpListFilteredTransactionEvents struct {
+}
+
+func (*awsRestjson1_serializeOpListFilteredTransactionEvents) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListFilteredTransactionEvents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListFilteredTransactionEventsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/list-filtered-transaction-events")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListFilteredTransactionEventsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListFilteredTransactionEventsInput(v *ListFilteredTransactionEventsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListFilteredTransactionEventsInput(v *ListFilteredTransactionEventsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AddressIdentifierFilter != nil {
+		ok := object.Key("addressIdentifierFilter")
+		if err := awsRestjson1_serializeDocumentAddressIdentifierFilter(v.AddressIdentifierFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ConfirmationStatusFilter != nil {
+		ok := object.Key("confirmationStatusFilter")
+		if err := awsRestjson1_serializeDocumentConfirmationStatusFilter(v.ConfirmationStatusFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.Network != nil {
+		ok := object.Key("network")
+		ok.String(*v.Network)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.Sort != nil {
+		ok := object.Key("sort")
+		if err := awsRestjson1_serializeDocumentListFilteredTransactionEventsSort(v.Sort, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeFilter != nil {
+		ok := object.Key("timeFilter")
+		if err := awsRestjson1_serializeDocumentTimeFilter(v.TimeFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VoutFilter != nil {
+		ok := object.Key("voutFilter")
+		if err := awsRestjson1_serializeDocumentVoutFilter(v.VoutFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListTokenBalances struct {
 }
 
@@ -608,6 +728,11 @@ func awsRestjson1_serializeOpDocumentListTransactionEventsInput(v *ListTransacti
 		ok.String(*v.TransactionHash)
 	}
 
+	if v.TransactionId != nil {
+		ok := object.Key("transactionId")
+		ok.String(*v.TransactionId)
+	}
+
 	return nil
 }
 
@@ -729,6 +854,20 @@ func awsRestjson1_serializeOpDocumentListTransactionsInput(v *ListTransactionsIn
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAddressIdentifierFilter(v *types.AddressIdentifierFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TransactionEventToAddress != nil {
+		ok := object.Key("transactionEventToAddress")
+		if err := awsRestjson1_serializeDocumentChainAddresses(v.TransactionEventToAddress, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBatchGetTokenBalanceInputItem(v *types.BatchGetTokenBalanceInputItem, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -766,6 +905,17 @@ func awsRestjson1_serializeDocumentBlockchainInstant(v *types.BlockchainInstant,
 		ok.Double(smithytime.FormatEpochSeconds(*v.Time))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChainAddresses(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -846,6 +996,23 @@ func awsRestjson1_serializeDocumentGetTokenBalanceInputList(v []types.BatchGetTo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListFilteredTransactionEventsSort(v *types.ListFilteredTransactionEventsSort, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("sortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("sortOrder")
+		ok.String(string(v.SortOrder))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListTransactionsSort(v *types.ListTransactionsSort, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -882,6 +1049,27 @@ func awsRestjson1_serializeDocumentOwnerIdentifier(v *types.OwnerIdentifier, val
 	if v.Address != nil {
 		ok := object.Key("address")
 		ok.String(*v.Address)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimeFilter(v *types.TimeFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.From != nil {
+		ok := object.Key("from")
+		if err := awsRestjson1_serializeDocumentBlockchainInstant(v.From, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.To != nil {
+		ok := object.Key("to")
+		if err := awsRestjson1_serializeDocumentBlockchainInstant(v.To, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -926,6 +1114,18 @@ func awsRestjson1_serializeDocumentTokenIdentifier(v *types.TokenIdentifier, val
 	if v.TokenId != nil {
 		ok := object.Key("tokenId")
 		ok.String(*v.TokenId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVoutFilter(v *types.VoutFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.VoutSpent != nil {
+		ok := object.Key("voutSpent")
+		ok.Boolean(*v.VoutSpent)
 	}
 
 	return nil
