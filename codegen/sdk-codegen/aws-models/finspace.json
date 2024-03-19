@@ -970,7 +970,14 @@
             }
         },
         "com.amazonaws.finspace#AvailabilityZoneId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
         },
         "com.amazonaws.finspace#AvailabilityZoneIds": {
             "type": "list",
@@ -1064,7 +1071,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 26
-                }
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
             }
         },
         "com.amazonaws.finspace#ChangesetStatus": {
@@ -1977,7 +1985,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2004,6 +2012,13 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The option to specify whether you want to apply all the future additions and corrections automatically to the dataview, when you ingest new changesets. The default value is false.</p>"
+                    }
+                },
+                "readWrite": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>\n         The option to specify whether you want to make the dataview writable to perform database maintenance. The following are some considerations related to writable dataviews.\u2028\u2028</p>\n         <ul>\n            <li>\n               <p>You cannot create partial writable dataviews. When you create writeable dataviews you must\n               provide the entire database path.</p>\n            </li>\n            <li>\n               <p>You cannot perform updates on a writeable dataview. Hence, <code>autoUpdate</code> must be set\n            as <b>False</b> if <code>readWrite</code> is <b>True</b> for a dataview.</p>\n            </li>\n            <li>\n               <p>You must also use a unique volume for creating a writeable dataview. So, if you choose a\n               volume that is already in use by another dataview, the dataview creation\n               fails.</p>\n            </li>\n            <li>\n               <p>Once you create a dataview as writeable, you cannot change it to read-only. So, you cannot\n               update the <code>readWrite</code> parameter later.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "description": {
@@ -2055,7 +2070,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>"
                     }
                 },
                 "availabilityZoneId": {
@@ -2087,6 +2102,13 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The option to select whether you want to apply all the future additions and corrections automatically to the dataview when you ingest new changesets. The default value is false.</p>"
+                    }
+                },
+                "readWrite": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Returns True if the dataview is created as writeable and False otherwise. </p>"
                     }
                 },
                 "createdTimestamp": {
@@ -2312,7 +2334,7 @@
                 "hostType": {
                     "target": "com.amazonaws.finspace#KxHostType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.\n   \n</p>",
+                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.</p>\n         <p>You can add one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>kx.sg.4xlarge</code> – The host type with a configuration of 108 GiB memory and 16 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.8xlarge</code> – The host type with a configuration of 216 GiB memory and 32 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.16xlarge</code> – The host type with a configuration of 432 GiB memory and 64 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.32xlarge</code> – The host type with a configuration of 864 GiB memory and 128 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg1.16xlarge</code> – The host type with a configuration of 1949 GiB memory and 64 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg1.24xlarge</code> – The host type with a configuration of 2948 GiB memory and 96 vCPUs.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2592,7 +2614,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. Currently, FinSpace only support <code>SINGLE</code> for volumes.</p>",
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2662,7 +2684,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. Currently, FinSpace only support <code>SINGLE</code> for volumes.</p>"
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>"
                     }
                 },
                 "description": {
@@ -4480,7 +4502,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>"
                     }
                 },
                 "availabilityZoneId": {
@@ -4518,6 +4540,13 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when new changesets are ingested. The default value is false.</p>"
+                    }
+                },
+                "readWrite": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Returns True if the dataview is created as writeable and False otherwise. </p>"
                     }
                 },
                 "environmentId": {
@@ -4794,7 +4823,7 @@
                 "hostType": {
                     "target": "com.amazonaws.finspace#KxHostType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.\n   \n</p>"
+                        "smithy.api#documentation": "<p>\n      The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.</p>\n         <p>It can have one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>kx.sg.4xlarge</code> – The host type with a configuration of 108 GiB memory and 16 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.8xlarge</code> – The host type with a configuration of 216 GiB memory and 32 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.16xlarge</code> – The host type with a configuration of 432 GiB memory and 64 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.32xlarge</code> – The host type with a configuration of 864 GiB memory and 128 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg1.16xlarge</code> – The host type with a configuration of 1949 GiB memory and 64 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg1.24xlarge</code> – The host type with a configuration of 2948 GiB memory and 96 vCPUs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "clusters": {
@@ -5052,7 +5081,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. Currently, FinSpace only support <code>SINGLE</code> for volumes.</p>"
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>"
                     }
                 },
                 "availabilityZoneIds": {
@@ -5606,7 +5635,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 1024
                 },
                 "smithy.api#pattern": "^(?![Aa][Ww][Ss])(s|([a-zA-Z][a-zA-Z0-9_]+))|(AWS_ZIP_DEFAULT)$"
             }
@@ -5616,7 +5645,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 1024
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_:./,]+$"
             }
@@ -5838,7 +5867,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>"
                     }
                 },
                 "availabilityZoneId": {
@@ -5882,6 +5911,13 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>\n   The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when you ingest new changesets. The default value is false.\n</p>"
+                    }
+                },
+                "readWrite": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p> Returns True if the dataview is created as writeable and False otherwise.  </p>"
                     }
                 },
                 "createdTimestamp": {
@@ -5932,6 +5968,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\nThe name of the volume where you want to add data. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "onDemand": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Enables on-demand caching on the selected database path when a particular file or a\n         column of the database is accessed. When on demand caching is <b>True</b>, dataviews perform minimal loading of files on the filesystem as\n         needed. When it is set to <b>False</b>, everything is cached. The\n         default value is <b>False</b>. </p>"
                     }
                 }
             },
@@ -6204,8 +6247,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1200,
-                    "max": 33600
+                    "min": 1200
                 }
             }
         },
@@ -6322,7 +6364,7 @@
                 "hostType": {
                     "target": "com.amazonaws.finspace#KxHostType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.\n   \n</p>"
+                        "smithy.api#documentation": "<p>\n   The memory and CPU capabilities of the scaling group host on which FinSpace Managed kdb clusters will be placed.</p>\n         <p>You can add one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>kx.sg.4xlarge</code> – The host type with a configuration of 108 GiB memory and 16 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.8xlarge</code> – The host type with a configuration of 216 GiB memory and 32 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.16xlarge</code> – The host type with a configuration of 432 GiB memory and 64 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg.32xlarge</code> – The host type with a configuration of 864 GiB memory and 128 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg1.16xlarge</code> – The host type with a configuration of 1949 GiB memory and 64 vCPUs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kx.sg1.24xlarge</code> – The host type with a configuration of 2948 GiB memory and 96 vCPUs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "clusters": {
@@ -6564,7 +6606,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe number of availability zones assigned to the volume. Currently, only <code>SINGLE</code> is supported.\n</p>"
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>"
                     }
                 },
                 "availabilityZoneIds": {
@@ -7959,7 +8001,7 @@
                     "min": 9,
                     "max": 1093
                 },
-                "smithy.api#pattern": "^s3:\\/\\/[a-z0-9][a-z0-9-]{1,61}[a-z0-9]\\/([^\\/]+\\/)*[^\\/]*$"
+                "smithy.api#pattern": "^s3:\\/\\/[a-z0-9][a-z0-9-.]{1,61}[a-z0-9]\\/([^\\/]+\\/)*[^\\/]*$"
             }
         },
         "com.amazonaws.finspace#SamlMetadataDocument": {
@@ -8826,7 +8868,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. This can be one of the following </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE</code> – Assigns one availability zone per cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MULTI</code> – Assigns all the availability zones per cluster.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>"
                     }
                 },
                 "availabilityZoneId": {
@@ -8864,6 +8906,13 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The option to specify whether you want to apply all the future additions and corrections automatically to the dataview when new changesets are ingested. The default value is false.</p>"
+                    }
+                },
+                "readWrite": {
+                    "target": "com.amazonaws.finspace#booleanValue",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Returns True if the dataview is created as writeable and False otherwise. </p>"
                     }
                 },
                 "description": {
@@ -9488,7 +9537,7 @@
                 "azMode": {
                     "target": "com.amazonaws.finspace#KxAzMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per cluster. Currently, FinSpace only support <code>SINGLE</code> for volumes.</p>"
+                        "smithy.api#documentation": "<p>The number of availability zones you want to assign per volume. Currently, FinSpace only supports <code>SINGLE</code> for volumes. This places dataview in a single AZ.</p>"
                     }
                 },
                 "availabilityZoneIds": {
