@@ -1,8 +1,0 @@
-{
-    "id": "df9b1f28-a527-4bdd-aaeb-7b984b3932da",
-    "type": "feature",
-    "description": "Update LogSamples field in Anomaly model to be a list of LogEvent",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

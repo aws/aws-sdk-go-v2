@@ -1,3 +1,7 @@
+# v1.23.0 (2024-03-19)
+
+* **Feature**: Adding new attributes readWrite and onDemand to dataview models for Database Maintenance operations.
+
 # v1.22.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "74b11f82-9fcc-4523-8597-306b65f52168",
-    "type": "documentation",
-    "description": "Documentation update, March 2024. Corrects some formatting.",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

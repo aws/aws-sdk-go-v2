@@ -1,3 +1,15 @@
+# Release (2024-03-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.35.0](service/cloudwatchlogs/CHANGELOG.md#v1350-2024-03-19)
+  * **Feature**: Update LogSamples field in Anomaly model to be a list of LogEvent
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.152.0](service/ec2/CHANGELOG.md#v11520-2024-03-19)
+  * **Feature**: This release adds the new DescribeMacHosts API operation for getting information about EC2 Mac Dedicated Hosts. Users can now see the latest macOS versions that their underlying Apple Mac can support without needing to be updated.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.23.0](service/finspace/CHANGELOG.md#v1230-2024-03-19)
+  * **Feature**: Adding new attributes readWrite and onDemand to dataview models for Database Maintenance operations.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.11.0](service/managedblockchainquery/CHANGELOG.md#v1110-2024-03-19)
+  * **Feature**: Introduces a new API for Amazon Managed Blockchain Query: ListFilteredTransactionEvents.
+
 # Release (2024-03-18)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.11.0 (2024-03-19)
+
+* **Feature**: Introduces a new API for Amazon Managed Blockchain Query: ListFilteredTransactionEvents.
+
 # v1.10.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions
