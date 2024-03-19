@@ -130,6 +130,76 @@ if err != nil {
 client := s3.NewFromConfig(cfg)
 ```
 
+### Client-side rate limiting
+
+The {{% alias sdk-go %}} introduces a new client-side rate-limiting mechanism
+in the standard retry policy to align with the behavior of modern SDKs. This is
+behavior is controlled by the [RateLimiter]({{< apiref "aws/retry#RateLimiter" >}})
+field on a retryer's [options]({{< apiref "aws/retry#StandardOptions" >}}).
+
+A RateLimiter operates as a token bucket with a set capacity, where operation
+attempt failures consume tokens. A retry that attempts to consume more tokens
+than what's available results in operation failure with a
+[QuotaExceededError]({{< apiref "aws/ratelimit#QuotaExceededError" >}}).
+
+The default implementation is parameterized as follows (how to modify each setting):
+- a capacity of 500 (set the value of RateLimiter on StandardOptions using [NewTokenRateLimit]({{< apiref "aws/ratelimit#NewTokenRateLimit" >}}))
+- a retry caused by a timeout costs 10 tokens (set RetryCost on StandardOptions)
+- a retry caused by other errors costs 5 tokens (set RetryTimeoutCost on StandardOptions)
+- an operation that succeeds on the 1st attempt adds 1 token (set NoRetryIncrement on StandardOptions)
+  - operations that succeed on the 2nd or later attempt do not add back any tokens
+
+If you find that the default behavior does not fit your application's needs,
+you can disable it with [ratelimit.None]({{< apiref "aws/ratelimit#pkg-variables" >}}).
+
+#### Example: modified rate limiter
+
+```go
+import (
+    "context"
+
+    "github.com/aws/aws-sdk-go-v2/aws"
+    "github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+    "github.com/aws/aws-sdk-go-v2/aws/retry"
+    "github.com/aws/aws-sdk-go-v2/config"
+)
+
+// ...
+
+cfg, err := config.LoadDefaultConfig(context.Background(), config.WithRetryer(func() aws.Retryer {
+    return retry.NewStandard(func(o *retry.StandardOptions) {
+        // Makes the rate limiter more permissive in general. These values are
+        // arbitrary for demonstration and may not suit your specific
+        // application's needs.
+        o.RateLimiter = ratelimit.NewTokenRateLimit(1000)
+        o.RetryCost = 1
+        o.RetryTimeoutCost = 3
+        o.NoRetryIncrement = 10
+    })
+}))
+```
+
+#### Example: no rate limit using ratelimit.None
+
+```go
+import (
+    "context"
+
+    "github.com/aws/aws-sdk-go-v2/aws"
+    "github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+    "github.com/aws/aws-sdk-go-v2/aws/retry"
+    "github.com/aws/aws-sdk-go-v2/config"
+)
+
+// ...
+
+cfg, err := config.LoadDefaultConfig(context.Background(), config.WithRetryer(func() aws.Retryer {
+    return retry.NewStandard(func(o *retry.StandardOptions) {
+        o.RateLimiter = ratelimit.None
+    })
+}))
+```
+
 ##  Timeouts
 
 You use the [context](https://golang.org/pkg/context/) package to set timeouts or deadlines when invoking a service
