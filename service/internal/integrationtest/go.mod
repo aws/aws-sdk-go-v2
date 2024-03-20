@@ -18,7 +18,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.22.3
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.39.1
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.36.3
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.31.2
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.22.3
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.25.3
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.26.3
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.33.5
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.30.5
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.152.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.41.3

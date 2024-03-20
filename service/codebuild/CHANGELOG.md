@@ -1,3 +1,7 @@
+# v1.31.2 (2024-03-20)
+
+* **Documentation**: This release adds support for new webhook events (RELEASED and PRERELEASED) and filter types (TAG_NAME and RELEASE_NAME).
+
 # v1.31.1 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

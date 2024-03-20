@@ -1,3 +1,7 @@
+# v1.19.0 (2024-03-20)
+
+* **Feature**: Introducing the Savings Plans Return feature enabling customers to return their Savings Plans within 7 days of purchase.
+
 # v1.18.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

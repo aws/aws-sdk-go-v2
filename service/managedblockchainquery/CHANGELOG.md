@@ -1,3 +1,7 @@
+# v1.12.0 (2024-03-20)
+
+* **Feature**: AMB Query: update GetTransaction to include transactionId as input
+
 # v1.11.0 (2024-03-19)
 
 * **Feature**: Introduces a new API for Amazon Managed Blockchain Query: ListFilteredTransactionEvents.

@@ -1,8 +1,0 @@
-{
-    "id": "9974e4c6-5e1c-4661-bd21-53b07fd49a6a",
-    "type": "feature",
-    "description": "This release adds support for policy validation and external access findings for DynamoDB tables and streams. IAM Access Analyzer helps you author functional and secure resource-based policies and identify cross-account access. Updated service API, documentation, and paginators.",
-    "modules": [
-        "service/accessanalyzer"
-    ]
-}

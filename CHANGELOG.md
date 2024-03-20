@@ -1,3 +1,22 @@
+# Release (2024-03-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.29.0](service/accessanalyzer/CHANGELOG.md#v1290-2024-03-20)
+  * **Feature**: This release adds support for policy validation and external access findings for DynamoDB tables and streams. IAM Access Analyzer helps you author functional and secure resource-based policies and identify cross-account access. Updated service API, documentation, and paginators.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.31.2](service/codebuild/CHANGELOG.md#v1312-2024-03-20)
+  * **Documentation**: This release adds support for new webhook events (RELEASED and PRERELEASED) and filter types (TAG_NAME and RELEASE_NAME).
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.95.0](service/connect/CHANGELOG.md#v1950-2024-03-20)
+  * **Feature**: This release updates the *InstanceStorageConfig APIs to support a new ResourceType: REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS. Use this resource type to enable streaming for real-time analysis of chat contacts and to associate a Kinesis stream where real-time analysis chat segments will be published.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.31.0](service/dynamodb/CHANGELOG.md#v1310-2024-03-20)
+  * **Feature**: This release introduces 3 new APIs ('GetResourcePolicy', 'PutResourcePolicy' and 'DeleteResourcePolicy') and modifies the existing 'CreateTable' API for the resource-based policy support. It also modifies several APIs to accept a 'TableArn' for the 'TableName' parameter.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.12.0](service/managedblockchainquery/CHANGELOG.md#v1120-2024-03-20)
+  * **Feature**: AMB Query: update GetTransaction to include transactionId as input
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.19.0](service/savingsplans/CHANGELOG.md#v1190-2024-03-20)
+  * **Feature**: Introducing the Savings Plans Return feature enabling customers to return their Savings Plans within 7 days of purchase.
+
 # Release (2024-03-19)
 
 ## Module Highlights
