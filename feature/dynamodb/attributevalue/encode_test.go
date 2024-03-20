@@ -83,6 +83,97 @@ func TestMarshalMashaler(t *testing.T) {
 	}
 }
 
+type customBoolStringMarshaler string
+
+func (m customBoolStringMarshaler) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
+
+	if b, err := strconv.ParseBool(string(m)); err == nil {
+		return &types.AttributeValueMemberBOOL{Value: b}, nil
+	}
+
+	return &types.AttributeValueMemberS{Value: string(m)}, nil
+}
+
+func TestCustomStringMarshaler(t *testing.T) {
+	cases := []struct {
+		expected types.AttributeValue
+		input    string
+	}{
+		{
+			expected: &types.AttributeValueMemberBOOL{Value: false},
+			input:    "false",
+		},
+		{
+			expected: &types.AttributeValueMemberBOOL{Value: true},
+			input:    "true",
+		},
+		{
+			expected: &types.AttributeValueMemberS{Value: "ABC"},
+			input:    "ABC",
+		},
+	}
+
+	for _, testCase := range cases {
+		input := customBoolStringMarshaler(testCase.input)
+		actual, err := Marshal(input)
+		if err != nil {
+			t.Errorf("got unexpected error %v for input %v", err, testCase.input)
+		}
+		if diff := cmpDiff(testCase.expected, actual); len(diff) != 0 {
+			t.Errorf("expected match but got:%s", diff)
+		}
+	}
+}
+
+type customGradeMarshaler uint
+
+func (m customGradeMarshaler) MarshalDynamoDBAttributeValue() (types.AttributeValue, error) {
+	if int(m) > 100 {
+		return nil, fmt.Errorf("grade cant be larger then 100")
+	}
+	return &types.AttributeValueMemberN{Value: strconv.FormatUint(uint64(m), 10)}, nil
+}
+
+func TestCustomNumberMarshaler(t *testing.T) {
+	cases := []struct {
+		expectedErr bool
+		input       uint
+		expected    types.AttributeValue
+	}{
+		{
+			expectedErr: false,
+			input:       50,
+			expected:    &types.AttributeValueMemberN{Value: "50"},
+		},
+		{
+			expectedErr: false,
+			input:       90,
+			expected:    &types.AttributeValueMemberN{Value: "90"},
+		},
+		{
+			expectedErr: true,
+			input:       150,
+			expected:    nil,
+		},
+	}
+
+	for _, testCase := range cases {
+		input := customGradeMarshaler(testCase.input)
+		actual, err := Marshal(customGradeMarshaler(input))
+		if testCase.expectedErr && err == nil {
+			t.Errorf("expected error but got nil for input %v", testCase.input)
+			continue
+		}
+		if !testCase.expectedErr && err != nil {
+			t.Errorf("got unexpected error %v for input %v", err, testCase.input)
+			continue
+		}
+		if diff := cmpDiff(testCase.expected, actual); len(diff) != 0 {
+			t.Errorf("expected match but got:%s", diff)
+		}
+	}
+}
+
 type testOmitEmptyElemListStruct struct {
 	Values []string `dynamodbav:",omitemptyelem"`
 }
