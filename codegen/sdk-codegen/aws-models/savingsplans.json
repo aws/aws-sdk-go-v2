@@ -55,6 +55,9 @@
                     "target": "com.amazonaws.savingsplans#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.savingsplans#ReturnSavingsPlan"
+                },
+                {
                     "target": "com.amazonaws.savingsplans#TagResource"
                 },
                 {
@@ -73,7 +76,7 @@
                     "name": "savingsplans"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Savings Plans are a pricing model that offer significant savings on AWS usage (for\n        example, on Amazon EC2 instances). You commit to a consistent amount of usage, in USD\n        per hour, for a term of 1 or 3 years, and receive a lower price for that usage. For\n        more information, see the <a href=\"https://docs.aws.amazon.com/savingsplans/latest/userguide/\">AWS Savings Plans User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Savings Plans are a pricing model that offer significant savings on Amazon Web Services usage (for example, on Amazon EC2 instances). You commit to a consistent\n         amount of usage per hour, in the specified currency, for a term of one or three years, and\n         receive a lower price for that usage. For more information, see the <a href=\"https://docs.aws.amazon.com/savingsplans/latest/userguide/\">Amazon Web Services\n            Savings Plans User Guide</a>.</p>",
                 "smithy.api#title": "AWS Savings Plans",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -117,7 +120,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -160,7 +162,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -173,7 +176,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -187,7 +189,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -261,7 +262,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -296,7 +296,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -307,14 +306,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -328,14 +329,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -344,11 +343,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -359,14 +358,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -380,7 +381,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -400,7 +400,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -411,14 +410,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -429,9 +430,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -837,26 +840,26 @@
                 "commitment": {
                     "target": "com.amazonaws.savingsplans#Amount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more\n        than five digits after the decimal point.</p>",
+                        "smithy.api#documentation": "<p>The hourly commitment, in the same currency of the <code>savingsPlanOfferingId</code>.\n         This is a value between 0.001 and 1 million. You cannot specify more than five digits after\n         the decimal point.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "upfrontPaymentAmount": {
                     "target": "com.amazonaws.savingsplans#Amount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan.\n       This parameter is supported only if the payment option is <code>Partial Upfront</code>.</p>"
+                        "smithy.api#documentation": "<p>The up-front payment amount. This is a whole number between 50 and 99 percent of the\n         total value of the Savings Plan. This parameter is only supported if the\n         payment option is <code>Partial Upfront</code>.</p>"
                     }
                 },
                 "purchaseTime": {
                     "target": "com.amazonaws.savingsplans#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which to purchase the Savings Plan, in UTC format (YYYY-MM-DDTHH:MM:SSZ).</p>"
+                        "smithy.api#documentation": "<p>The purchase time of the Savings Plan in UTC format\n         (YYYY-MM-DDTHH:MM:SSZ).</p>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.savingsplans#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -981,7 +984,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified Savings Plans rates.</p>",
+                "smithy.api#documentation": "<p>Describes the rates for the specified Savings Plan.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeSavingsPlanRates",
@@ -1014,7 +1017,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.savingsplans#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve additional results, make another\n         call with the returned token value.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve additional\n         results, make another call with the returned token value.</p>"
                     }
                 }
             },
@@ -1034,13 +1037,13 @@
                 "searchResults": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanRateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the Savings Plans rates.</p>"
+                        "smithy.api#documentation": "<p>Information about the Savings Plan rates.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.savingsplans#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more \n         results to return. </p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
                     }
                 }
             },
@@ -1090,7 +1093,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified Savings Plans offering rates.</p>",
+                "smithy.api#documentation": "<p>Describes the offering rates for the specified Savings Plans.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeSavingsPlansOfferingRates",
@@ -1122,7 +1125,7 @@
                 "products": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanProductTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS products.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services products.</p>"
                     }
                 },
                 "serviceCodes": {
@@ -1140,7 +1143,7 @@
                 "operations": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanRateOperationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific AWS operation for the line item in the billing report.</p>"
+                        "smithy.api#documentation": "<p>The specific Amazon Web Services operation for the line item in the billing\n         report.</p>"
                     }
                 },
                 "filters": {
@@ -1159,7 +1162,7 @@
                     "target": "com.amazonaws.savingsplans#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve additional results, make another\n       call with the returned token value.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve additional\n         results, make another call with the returned token value.</p>"
                     }
                 }
             },
@@ -1179,7 +1182,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.savingsplans#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more \n       results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
                     }
                 }
             },
@@ -1204,7 +1207,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified Savings Plans offerings.</p>",
+                "smithy.api#documentation": "<p>Describes the offerings for the specified Savings Plans.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeSavingsPlansOfferings",
@@ -1236,13 +1239,13 @@
                 "planTypes": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The plan type.</p>"
+                        "smithy.api#documentation": "<p>The plan types.</p>"
                     }
                 },
                 "durations": {
                     "target": "com.amazonaws.savingsplans#DurationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The durations, in seconds.</p>"
+                        "smithy.api#documentation": "<p>The duration, in seconds.</p>"
                     }
                 },
                 "currencies": {
@@ -1272,7 +1275,7 @@
                 "operations": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanOperationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific AWS operation for the line item in the billing report.</p>"
+                        "smithy.api#documentation": "<p>The specific Amazon Web Services operation for the line item in the billing\n         report.</p>"
                     }
                 },
                 "filters": {
@@ -1291,7 +1294,7 @@
                     "target": "com.amazonaws.savingsplans#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve additional results, make another\n       call with the returned token value.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve additional\n         results, make another call with the returned token value.</p>"
                     }
                 }
             },
@@ -1311,7 +1314,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.savingsplans#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more \n       results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
                     }
                 }
             },
@@ -1343,13 +1346,13 @@
                 "maxResults": {
                     "target": "com.amazonaws.savingsplans#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve additional results, make another\n       call with the returned token value.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve additional\n         results, make another call with the returned token value.</p>"
                     }
                 },
                 "states": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanStateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The states.</p>"
+                        "smithy.api#documentation": "<p>The current states of the Savings Plans.</p>"
                     }
                 },
                 "filters": {
@@ -1375,7 +1378,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.savingsplans#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more \n       results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
                     }
                 }
             },
@@ -1584,6 +1587,73 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.savingsplans#ReturnSavingsPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.savingsplans#ReturnSavingsPlanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.savingsplans#ReturnSavingsPlanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.savingsplans#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.savingsplans#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.savingsplans#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.savingsplans#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the specified Savings Plan.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ReturnSavingsPlan",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.savingsplans#ReturnSavingsPlanRequest": {
+            "type": "structure",
+            "members": {
+                "savingsPlanId": {
+                    "target": "com.amazonaws.savingsplans#SavingsPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Savings Plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.savingsplans#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.savingsplans#ReturnSavingsPlanResponse": {
+            "type": "structure",
+            "members": {
+                "savingsPlanId": {
+                    "target": "com.amazonaws.savingsplans#SavingsPlanId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Savings Plan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.savingsplans#SavingsPlan": {
             "type": "structure",
             "members": {
@@ -1626,13 +1696,13 @@
                 "state": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state.</p>"
+                        "smithy.api#documentation": "<p>The current state.</p>"
                     }
                 },
                 "region": {
                     "target": "com.amazonaws.savingsplans#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>"
                     }
                 },
                 "ec2InstanceFamily": {
@@ -1668,7 +1738,7 @@
                 "commitment": {
                     "target": "com.amazonaws.savingsplans#Amount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hourly commitment, in USD.</p>"
+                        "smithy.api#documentation": "<p>The hourly commitment amount in the specified currency.</p>"
                     }
                 },
                 "upfrontPaymentAmount": {
@@ -1694,6 +1764,12 @@
                     "target": "com.amazonaws.savingsplans#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>One or more tags.</p>"
+                    }
+                },
+                "returnableUntil": {
+                    "target": "com.amazonaws.savingsplans#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time until when a return for the Savings Plan can be requested. If the\n            Savings Plan is not returnable, the field reflects the Savings Plan start time.</p>"
                     }
                 }
             },
@@ -1748,7 +1824,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a filter.</p>"
+                "smithy.api#documentation": "<p>Information about a Savings Plan filter.</p>"
             }
         },
         "com.amazonaws.savingsplans#SavingsPlanFilterList": {
@@ -1833,7 +1909,7 @@
                 "operation": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanOperation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific AWS operation for the line item in the billing report.</p>"
+                        "smithy.api#documentation": "<p>The specific Amazon Web Services operation for the line item in the billing\n         report.</p>"
                     }
                 },
                 "properties": {
@@ -1881,7 +1957,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a filter.</p>"
+                "smithy.api#documentation": "<p>Information about a Savings Plan offering filter.</p>"
             }
         },
         "com.amazonaws.savingsplans#SavingsPlanOfferingFiltersList": {
@@ -1910,7 +1986,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a property.</p>"
+                "smithy.api#documentation": "<p>Information about a Savings Plan offering property.</p>"
             }
         },
         "com.amazonaws.savingsplans#SavingsPlanOfferingPropertyKey": {
@@ -1978,7 +2054,7 @@
                 "operation": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanRateOperation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific AWS operation for the line item in the billing report.</p>"
+                        "smithy.api#documentation": "<p>The specific Amazon Web Services operation for the line item in the billing\n         report.</p>"
                     }
                 },
                 "properties": {
@@ -2009,7 +2085,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a filter.</p>"
+                "smithy.api#documentation": "<p>Information about a Savings Plan offering rate filter.</p>"
             }
         },
         "com.amazonaws.savingsplans#SavingsPlanOfferingRateFiltersList": {
@@ -2035,7 +2111,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a property.</p>"
+                "smithy.api#documentation": "<p>Information about a Savings Plan offering rate property.</p>"
             }
         },
         "com.amazonaws.savingsplans#SavingsPlanOfferingRatePropertyList": {
@@ -2178,7 +2254,7 @@
                 "operation": {
                     "target": "com.amazonaws.savingsplans#SavingsPlanRateOperation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specific AWS operation for the line item in the billing report.</p>"
+                        "smithy.api#documentation": "<p>The specific Amazon Web Services operation for the line item in the billing\n         report.</p>"
                     }
                 },
                 "properties": {
@@ -2209,7 +2285,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a filter.</p>"
+                "smithy.api#documentation": "<p>Information about a Savings Plan rate filter.</p>"
             }
         },
         "com.amazonaws.savingsplans#SavingsPlanRateFilterAttribute": {
@@ -2354,7 +2430,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about a property.</p>"
+                "smithy.api#documentation": "<p>Information about a Savings Plan rate property.</p>"
             }
         },
         "com.amazonaws.savingsplans#SavingsPlanRatePropertyKey": {
@@ -2531,6 +2607,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "queued-deleted"
+                    }
+                },
+                "PENDING_RETURN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending-return"
+                    }
+                },
+                "RETURNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "returned"
                     }
                 }
             }

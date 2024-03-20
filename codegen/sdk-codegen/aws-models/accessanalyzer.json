@@ -2351,6 +2351,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The access control configuration is for an Amazon S3 directory bucket.</p>"
                     }
+                },
+                "dynamodbStream": {
+                    "target": "com.amazonaws.accessanalyzer#DynamodbStreamConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access control configuration is for a DynamoDB stream.</p>"
+                    }
+                },
+                "dynamodbTable": {
+                    "target": "com.amazonaws.accessanalyzer#DynamodbTableConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access control configuration is for a DynamoDB table or index.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2529,7 +2541,7 @@
                 "type": {
                     "target": "com.amazonaws.accessanalyzer#Type",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of analyzer to create. Only <code>ACCOUNT</code>, <code>ORGANIZATION</code>,\n         <code>ACCOUNT_UNUSED_ACCESS</code>, and <code>ORGANIZATION_UNUSED_ACCESS</code>\n         analyzers are supported. You can create only one analyzer per account per Region. You can\n         create up to 5 analyzers per organization per Region.</p>",
+                        "smithy.api#documentation": "<p>The type of analyzer to create. Only <code>ACCOUNT</code>, <code>ORGANIZATION</code>,\n            <code>ACCOUNT_UNUSED_ACCESS</code>, and <code>ORGANIZATION_UNUSED_ACCESS</code>\n         analyzers are supported. You can create only one analyzer per account per Region. You can\n         create up to 5 analyzers per organization per Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2812,6 +2824,40 @@
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an archive rule.</p>"
             }
+        },
+        "com.amazonaws.accessanalyzer#DynamodbStreamConfiguration": {
+            "type": "structure",
+            "members": {
+                "streamPolicy": {
+                    "target": "com.amazonaws.accessanalyzer#DynamodbStreamPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed resource policy defining who can access or manage the DynamoDB stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The proposed access control configuration for a DynamoDB stream. You can propose a\n         configuration for a new DynamoDB stream or an existing DynamoDB stream that you own by specifying\n         the policy for the DynamoDB stream. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutResourcePolicy.html\">PutResourcePolicy</a>.</p>\n         <ul>\n            <li>\n               <p>If the configuration is for an existing DynamoDB stream and you do not specify the\n               DynamoDB policy, then the access preview uses the existing DynamoDB policy for the\n               stream.</p>\n            </li>\n            <li>\n               <p>If the access preview is for a new resource and you do not specify the policy,\n               then the access preview assumes a DynamoDB stream without a policy.</p>\n            </li>\n            <li>\n               <p>To propose deletion of an existing DynamoDB stream policy, you can specify an empty\n               string for the DynamoDB policy.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#DynamodbStreamPolicy": {
+            "type": "string"
+        },
+        "com.amazonaws.accessanalyzer#DynamodbTableConfiguration": {
+            "type": "structure",
+            "members": {
+                "tablePolicy": {
+                    "target": "com.amazonaws.accessanalyzer#DynamodbTablePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed resource policy defining who can access or manage the DynamoDB table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The proposed access control configuration for a DynamoDB table or index. You can propose a\n         configuration for a new DynamoDB table or index or an existing DynamoDB table or index that you\n         own by specifying the policy for the DynamoDB table or index. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutResourcePolicy.html\">PutResourcePolicy</a>.</p>\n         <ul>\n            <li>\n               <p>If the configuration is for an existing DynamoDB table or index and you do not\n               specify the DynamoDB policy, then the access preview uses the existing DynamoDB policy for\n               the table or index.</p>\n            </li>\n            <li>\n               <p>If the access preview is for a new resource and you do not specify the policy,\n               then the access preview assumes a DynamoDB table without a policy.</p>\n            </li>\n            <li>\n               <p>To propose deletion of an existing DynamoDB table or index policy, you can specify an\n               empty string for the DynamoDB policy.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.accessanalyzer#DynamodbTablePolicy": {
+            "type": "string"
         },
         "com.amazonaws.accessanalyzer#EbsGroup": {
             "type": "string"
@@ -5848,6 +5894,14 @@
                     {
                         "value": "AWS::S3Express::DirectoryBucket",
                         "name": "AWS_S3EXPRESS_DIRECTORYBUCKET"
+                    },
+                    {
+                        "value": "AWS::DynamoDB::Table",
+                        "name": "AWS_DYNAMODB_TABLE"
+                    },
+                    {
+                        "value": "AWS::DynamoDB::Stream",
+                        "name": "AWS_DYNAMODB_STREAM"
                     }
                 ]
             }
@@ -7044,6 +7098,10 @@
                     {
                         "value": "AWS::IAM::AssumeRolePolicyDocument",
                         "name": "ROLE_TRUST"
+                    },
+                    {
+                        "value": "AWS::DynamoDB::Table",
+                        "name": "DYNAMODB_TABLE"
                     }
                 ]
             }
