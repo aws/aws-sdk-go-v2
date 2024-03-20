@@ -45,7 +45,7 @@ type DescribeSavingsPlansInput struct {
 	// The IDs of the Savings Plans.
 	SavingsPlanIds []string
 
-	// The states.
+	// The current states of the Savings Plans.
 	States []types.SavingsPlanState
 
 	noSmithyDocumentSerde

@@ -52,7 +52,8 @@ type CreateBackupInput struct {
 	// This member is required.
 	BackupName *string
 
-	// The name of the table.
+	// The name of the table. You can also provide the Amazon Resource Name (ARN) of
+	// the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified Savings Plans offerings.
+// Describes the offerings for the specified Savings Plans.
 func (c *Client) DescribeSavingsPlansOfferings(ctx context.Context, params *DescribeSavingsPlansOfferingsInput, optFns ...func(*Options)) (*DescribeSavingsPlansOfferingsOutput, error) {
 	if params == nil {
 		params = &DescribeSavingsPlansOfferingsInput{}
@@ -35,7 +35,7 @@ type DescribeSavingsPlansOfferingsInput struct {
 	// The descriptions.
 	Descriptions []string
 
-	// The durations, in seconds.
+	// The duration, in seconds.
 	Durations []int64
 
 	// The filters.
@@ -51,13 +51,14 @@ type DescribeSavingsPlansOfferingsInput struct {
 	// The IDs of the offerings.
 	OfferingIds []string
 
-	// The specific AWS operation for the line item in the billing report.
+	// The specific Amazon Web Services operation for the line item in the billing
+	// report.
 	Operations []string
 
 	// The payment options.
 	PaymentOptions []types.SavingsPlanPaymentOption
 
-	// The plan type.
+	// The plan types.
 	PlanTypes []types.SavingsPlanType
 
 	// The product type.

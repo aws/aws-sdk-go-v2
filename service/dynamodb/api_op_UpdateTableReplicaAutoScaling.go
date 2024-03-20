@@ -31,7 +31,8 @@ func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *Upda
 
 type UpdateTableReplicaAutoScalingInput struct {
 
-	// The name of the global table to be updated.
+	// The name of the global table to be updated. You can also provide the Amazon
+	// Resource Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

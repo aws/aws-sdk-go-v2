@@ -39,7 +39,8 @@ func (c *Client) DescribeContinuousBackups(ctx context.Context, params *Describe
 type DescribeContinuousBackupsInput struct {
 
 	// Name of the table for which the customer wants to check the continuous backups
-	// and point in time recovery settings.
+	// and point in time recovery settings. You can also provide the Amazon Resource
+	// Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

@@ -72,7 +72,8 @@ type CreateTableInput struct {
 	// This member is required.
 	KeySchema []types.KeySchemaElement
 
-	// The name of the table to create.
+	// The name of the table to create. You can also provide the Amazon Resource Name
+	// (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string
@@ -147,6 +148,17 @@ type CreateTableInput struct {
 	// Table Quotas (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *types.ProvisionedThroughput
+
+	// An Amazon Web Services resource-based policy document in JSON format that will
+	// be attached to the table. When you attach a resource-based policy while creating
+	// a table, the policy creation is strongly consistent. The maximum size supported
+	// for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when
+	// calculating the size of a policy against this limit. You can’t request an
+	// increase for this limit. For a full list of all considerations that you should
+	// keep in mind while attaching a resource-based policy, see Resource-based policy
+	// considerations (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html)
+	// .
+	ResourcePolicy *string
 
 	// Represents the settings used to enable server-side encryption.
 	SSESpecification *types.SSESpecification

@@ -23,8 +23,8 @@ import (
 //
 // UpdateTable is an asynchronous operation; while it's executing, the table
 // status changes from ACTIVE to UPDATING . While it's UPDATING , you can't issue
-// another UpdateTable request on the base table nor any replicas. When the table
-// returns to the ACTIVE state, the UpdateTable operation is complete.
+// another UpdateTable request. When the table returns to the ACTIVE state, the
+// UpdateTable operation is complete.
 func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optFns ...func(*Options)) (*UpdateTableOutput, error) {
 	if params == nil {
 		params = &UpdateTableInput{}
@@ -43,7 +43,8 @@ func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optF
 // Represents the input of an UpdateTable operation.
 type UpdateTableInput struct {
 
-	// The name of the table to be updated.
+	// The name of the table to be updated. You can also provide the Amazon Resource
+	// Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

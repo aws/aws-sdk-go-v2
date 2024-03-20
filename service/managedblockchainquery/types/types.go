@@ -507,6 +507,10 @@ type TransactionOutputItem struct {
 	// Specifies whether to list transactions that have not reached Finality.
 	ConfirmationStatus ConfirmationStatus
 
+	// The identifier of a Bitcoin transaction. It is generated when a transaction is
+	// created.
+	TransactionId *string
+
 	noSmithyDocumentSerde
 }
 

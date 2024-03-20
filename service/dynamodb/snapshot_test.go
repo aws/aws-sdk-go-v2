@@ -158,6 +158,18 @@ func TestCheckSnapshot_DeleteItem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTable(context.Background(), nil, func(o *Options) {
@@ -398,6 +410,18 @@ func TestCheckSnapshot_GetItem(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ImportTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportTable(context.Background(), nil, func(o *Options) {
@@ -499,6 +523,18 @@ func TestCheckSnapshot_PutItem(t *testing.T) {
 	_, err := svc.PutItem(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -805,6 +841,18 @@ func TestUpdateSnapshot_DeleteItem(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTable(context.Background(), nil, func(o *Options) {
@@ -1045,6 +1093,18 @@ func TestUpdateSnapshot_GetItem(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ImportTable(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportTable(context.Background(), nil, func(o *Options) {
@@ -1146,6 +1206,18 @@ func TestUpdateSnapshot_PutItem(t *testing.T) {
 	_, err := svc.PutItem(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

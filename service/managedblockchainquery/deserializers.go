@@ -3245,6 +3245,15 @@ func awsRestjson1_deserializeDocumentTransactionOutputItem(v **types.Transaction
 				sv.TransactionHash = ptr.String(jtv)
 			}
 
+		case "transactionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryTransactionId to be of type string, got %T instead", value)
+				}
+				sv.TransactionId = ptr.String(jtv)
+			}
+
 		case "transactionTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {

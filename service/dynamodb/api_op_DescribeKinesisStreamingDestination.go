@@ -30,7 +30,8 @@ func (c *Client) DescribeKinesisStreamingDestination(ctx context.Context, params
 
 type DescribeKinesisStreamingDestinationInput struct {
 
-	// The name of the table being described.
+	// The name of the table being described. You can also provide the Amazon Resource
+	// Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

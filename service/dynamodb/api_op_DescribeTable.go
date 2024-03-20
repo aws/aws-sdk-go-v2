@@ -43,7 +43,8 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 // Represents the input of a DescribeTable operation.
 type DescribeTableInput struct {
 
-	// The name of the table to describe.
+	// The name of the table to describe. You can also provide the Amazon Resource
+	// Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

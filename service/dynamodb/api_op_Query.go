@@ -67,7 +67,8 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 // Represents the input of a Query operation.
 type QueryInput struct {
 
-	// The name of the table containing the requested items.
+	// The name of the table containing the requested items. You can also provide the
+	// Amazon Resource Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

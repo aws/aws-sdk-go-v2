@@ -68,10 +68,10 @@ func (c *Client) BatchGetItem(ctx context.Context, params *BatchGetItemInput, op
 // Represents the input of a BatchGetItem operation.
 type BatchGetItemInput struct {
 
-	// A map of one or more table names and, for each table, a map that describes one
-	// or more items to retrieve from that table. Each table name can be used only once
-	// per BatchGetItem request. Each element in the map of items to retrieve consists
-	// of the following:
+	// A map of one or more table names or table ARNs and, for each table, a map that
+	// describes one or more items to retrieve from that table. Each table name or ARN
+	// can be used only once per BatchGetItem request. Each element in the map of
+	// items to retrieve consists of the following:
 	//   - ConsistentRead - If true , a strongly consistent read is used; if false (the
 	//   default), an eventually consistent read is used.
 	//   - ExpressionAttributeNames - One or more substitution tokens for attribute
@@ -138,9 +138,9 @@ type BatchGetItemOutput struct {
 	//   - CapacityUnits - The total number of capacity units consumed.
 	ConsumedCapacity []types.ConsumedCapacity
 
-	// A map of table name to a list of items. Each object in Responses consists of a
-	// table name, along with a map of attribute data consisting of the data type and
-	// attribute value.
+	// A map of table name or table ARN to a list of items. Each object in Responses
+	// consists of a table name or ARN, along with a map of attribute data consisting
+	// of the data type and attribute value.
 	Responses map[string][]map[string]types.AttributeValue
 
 	// A map of tables and their respective keys that were not processed with the

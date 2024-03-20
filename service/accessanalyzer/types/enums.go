@@ -443,6 +443,8 @@ const (
 	ResourceTypeAwsRdsDbclustersnapshot     ResourceType = "AWS::RDS::DBClusterSnapshot"
 	ResourceTypeAwsSnsTopic                 ResourceType = "AWS::SNS::Topic"
 	ResourceTypeAwsS3expressDirectorybucket ResourceType = "AWS::S3Express::DirectoryBucket"
+	ResourceTypeAwsDynamodbTable            ResourceType = "AWS::DynamoDB::Table"
+	ResourceTypeAwsDynamodbStream           ResourceType = "AWS::DynamoDB::Stream"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -464,6 +466,8 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::RDS::DBClusterSnapshot",
 		"AWS::SNS::Topic",
 		"AWS::S3Express::DirectoryBucket",
+		"AWS::DynamoDB::Table",
+		"AWS::DynamoDB::Stream",
 	}
 }
 
@@ -520,6 +524,7 @@ const (
 	ValidatePolicyResourceTypeS3MultiRegionAccessPoint  ValidatePolicyResourceType = "AWS::S3::MultiRegionAccessPoint"
 	ValidatePolicyResourceTypeS3ObjectLambdaAccessPoint ValidatePolicyResourceType = "AWS::S3ObjectLambda::AccessPoint"
 	ValidatePolicyResourceTypeRoleTrust                 ValidatePolicyResourceType = "AWS::IAM::AssumeRolePolicyDocument"
+	ValidatePolicyResourceTypeDynamodbTable             ValidatePolicyResourceType = "AWS::DynamoDB::Table"
 )
 
 // Values returns all known values for ValidatePolicyResourceType. Note that this
@@ -532,6 +537,7 @@ func (ValidatePolicyResourceType) Values() []ValidatePolicyResourceType {
 		"AWS::S3::MultiRegionAccessPoint",
 		"AWS::S3ObjectLambda::AccessPoint",
 		"AWS::IAM::AssumeRolePolicyDocument",
+		"AWS::DynamoDB::Table",
 	}
 }
 

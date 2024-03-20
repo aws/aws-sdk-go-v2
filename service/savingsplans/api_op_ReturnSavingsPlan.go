@@ -8,58 +8,39 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Creates a Savings Plan.
-func (c *Client) CreateSavingsPlan(ctx context.Context, params *CreateSavingsPlanInput, optFns ...func(*Options)) (*CreateSavingsPlanOutput, error) {
+// Returns the specified Savings Plan.
+func (c *Client) ReturnSavingsPlan(ctx context.Context, params *ReturnSavingsPlanInput, optFns ...func(*Options)) (*ReturnSavingsPlanOutput, error) {
 	if params == nil {
-		params = &CreateSavingsPlanInput{}
+		params = &ReturnSavingsPlanInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateSavingsPlan", params, optFns, c.addOperationCreateSavingsPlanMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ReturnSavingsPlan", params, optFns, c.addOperationReturnSavingsPlanMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateSavingsPlanOutput)
+	out := result.(*ReturnSavingsPlanOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateSavingsPlanInput struct {
+type ReturnSavingsPlanInput struct {
 
-	// The hourly commitment, in the same currency of the savingsPlanOfferingId . This
-	// is a value between 0.001 and 1 million. You cannot specify more than five digits
-	// after the decimal point.
+	// The ID of the Savings Plan.
 	//
 	// This member is required.
-	Commitment *string
-
-	// The ID of the offering.
-	//
-	// This member is required.
-	SavingsPlanOfferingId *string
+	SavingsPlanId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
 
-	// The purchase time of the Savings Plan in UTC format (YYYY-MM-DDTHH:MM:SSZ).
-	PurchaseTime *time.Time
-
-	// One or more tags.
-	Tags map[string]string
-
-	// The up-front payment amount. This is a whole number between 50 and 99 percent
-	// of the total value of the Savings Plan. This parameter is only supported if the
-	// payment option is Partial Upfront .
-	UpfrontPaymentAmount *string
-
 	noSmithyDocumentSerde
 }
 
-type CreateSavingsPlanOutput struct {
+type ReturnSavingsPlanOutput struct {
 
 	// The ID of the Savings Plan.
 	SavingsPlanId *string
@@ -70,19 +51,19 @@ type CreateSavingsPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationReturnSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSavingsPlan{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpReturnSavingsPlan{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSavingsPlan{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReturnSavingsPlan{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSavingsPlan"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ReturnSavingsPlan"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -125,13 +106,13 @@ func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateSavingsPlanMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opReturnSavingsPlanMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateSavingsPlanValidationMiddleware(stack); err != nil {
+	if err = addOpReturnSavingsPlanValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSavingsPlan(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReturnSavingsPlan(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -152,24 +133,24 @@ func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stac
 	return nil
 }
 
-type idempotencyToken_initializeOpCreateSavingsPlan struct {
+type idempotencyToken_initializeOpReturnSavingsPlan struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpCreateSavingsPlan) ID() string {
+func (*idempotencyToken_initializeOpReturnSavingsPlan) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpCreateSavingsPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpReturnSavingsPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*CreateSavingsPlanInput)
+	input, ok := in.Parameters.(*ReturnSavingsPlanInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateSavingsPlanInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *ReturnSavingsPlanInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -181,14 +162,14 @@ func (m *idempotencyToken_initializeOpCreateSavingsPlan) HandleInitialize(ctx co
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opCreateSavingsPlanMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSavingsPlan{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opReturnSavingsPlanMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpReturnSavingsPlan{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opCreateSavingsPlan(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opReturnSavingsPlan(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "CreateSavingsPlan",
+		OperationName: "ReturnSavingsPlan",
 	}
 }

@@ -480,9 +480,6 @@ func validateOpGetTransactionInput(v *GetTransactionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetTransactionInput"}
-	if v.TransactionHash == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TransactionHash"))
-	}
 	if len(v.Network) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Network"))
 	}

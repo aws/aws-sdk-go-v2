@@ -2751,6 +2751,18 @@ func awsRestjson1_serializeDocumentConfiguration(v types.Configuration, value sm
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ConfigurationMemberDynamodbStream:
+		av := object.Key("dynamodbStream")
+		if err := awsRestjson1_serializeDocumentDynamodbStreamConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfigurationMemberDynamodbTable:
+		av := object.Key("dynamodbTable")
+		if err := awsRestjson1_serializeDocumentDynamodbTableConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConfigurationMemberEbsSnapshot:
 		av := object.Key("ebsSnapshot")
 		if err := awsRestjson1_serializeDocumentEbsSnapshotConfiguration(&uv.Value, av); err != nil {
@@ -2874,6 +2886,30 @@ func awsRestjson1_serializeDocumentCriterion(v *types.Criterion, value smithyjso
 		if err := awsRestjson1_serializeDocumentValueList(v.Neq, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDynamodbStreamConfiguration(v *types.DynamodbStreamConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StreamPolicy != nil {
+		ok := object.Key("streamPolicy")
+		ok.String(*v.StreamPolicy)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDynamodbTableConfiguration(v *types.DynamodbTableConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TablePolicy != nil {
+		ok := object.Key("tablePolicy")
+		ok.String(*v.TablePolicy)
 	}
 
 	return nil

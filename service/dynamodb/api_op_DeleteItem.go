@@ -48,7 +48,8 @@ type DeleteItemInput struct {
 	// This member is required.
 	Key map[string]types.AttributeValue
 
-	// The name of the table from which to delete the item.
+	// The name of the table from which to delete the item. You can also provide the
+	// Amazon Resource Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

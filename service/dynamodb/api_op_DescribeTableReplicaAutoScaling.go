@@ -31,7 +31,8 @@ func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *De
 
 type DescribeTableReplicaAutoScalingInput struct {
 
-	// The name of the table.
+	// The name of the table. You can also provide the Amazon Resource Name (ARN) of
+	// the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

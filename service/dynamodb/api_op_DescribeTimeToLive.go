@@ -30,7 +30,8 @@ func (c *Client) DescribeTimeToLive(ctx context.Context, params *DescribeTimeToL
 
 type DescribeTimeToLiveInput struct {
 
-	// The name of the table to be described.
+	// The name of the table to be described. You can also provide the Amazon Resource
+	// Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

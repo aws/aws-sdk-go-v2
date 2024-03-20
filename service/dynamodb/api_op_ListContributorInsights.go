@@ -36,7 +36,8 @@ type ListContributorInsightsInput struct {
 	// A token to for the desired page, if there is one.
 	NextToken *string
 
-	// The name of the table.
+	// The name of the table. You can also provide the Amazon Resource Name (ARN) of
+	// the table in this parameter.
 	TableName *string
 
 	noSmithyDocumentSerde

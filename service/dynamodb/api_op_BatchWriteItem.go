@@ -86,9 +86,9 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 // Represents the input of a BatchWriteItem operation.
 type BatchWriteItemInput struct {
 
-	// A map of one or more table names and, for each table, a list of operations to
-	// be performed ( DeleteRequest or PutRequest ). Each element in the map consists
-	// of the following:
+	// A map of one or more table names or table ARNs and, for each table, a list of
+	// operations to be performed ( DeleteRequest or PutRequest ). Each element in the
+	// map consists of the following:
 	//   - DeleteRequest - Perform a DeleteItem operation on the specified item. The
 	//   item to be deleted is identified by a Key subelement:
 	//   - Key - A map of primary key attribute values that uniquely identify the item.
@@ -159,8 +159,8 @@ type BatchWriteItemOutput struct {
 	// UnprocessedItems value is in the same form as RequestItems , so you can provide
 	// this value directly to a subsequent BatchWriteItem operation. For more
 	// information, see RequestItems in the Request Parameters section. Each
-	// UnprocessedItems entry consists of a table name and, for that table, a list of
-	// operations to perform ( DeleteRequest or PutRequest ).
+	// UnprocessedItems entry consists of a table name or table ARN and, for that
+	// table, a list of operations to perform ( DeleteRequest or PutRequest ).
 	//   - DeleteRequest - Perform a DeleteItem operation on the specified item. The
 	//   item to be deleted is identified by a Key subelement:
 	//   - Key - A map of primary key attribute values that uniquely identify the item.

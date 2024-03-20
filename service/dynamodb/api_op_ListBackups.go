@@ -58,7 +58,8 @@ type ListBackupsInput struct {
 	// Maximum number of backups to return at once.
 	Limit *int32
 
-	// The backups from the table specified by TableName are listed.
+	// Lists the backups from the table specified in TableName . You can also provide
+	// the Amazon Resource Name (ARN) of the table in this parameter.
 	TableName *string
 
 	// Only backups created after this time are listed. TimeRangeLowerBound is

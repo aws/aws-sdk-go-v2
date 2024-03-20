@@ -146,6 +146,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ReturnSavingsPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReturnSavingsPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ReturnSavingsPlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -246,6 +258,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ReturnSavingsPlan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReturnSavingsPlan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ReturnSavingsPlan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

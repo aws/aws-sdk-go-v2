@@ -1,0 +1,8 @@
+{
+    "id": "e9dcbafa-502c-4b35-ae41-4add526347d5",
+    "type": "feature",
+    "description": "This release updates the *InstanceStorageConfig APIs to support a new ResourceType: REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS. Use this resource type to enable streaming for real-time analysis of chat contacts and to associate a Kinesis stream where real-time analysis chat segments will be published.",
+    "modules": [
+        "service/connect"
+    ]
+}

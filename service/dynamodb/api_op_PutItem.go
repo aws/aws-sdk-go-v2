@@ -66,7 +66,8 @@ type PutItemInput struct {
 	// This member is required.
 	Item map[string]types.AttributeValue
 
-	// The name of the table to contain the item.
+	// The name of the table to contain the item. You can also provide the Amazon
+	// Resource Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

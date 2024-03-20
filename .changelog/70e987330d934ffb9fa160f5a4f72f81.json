@@ -1,0 +1,8 @@
+{
+    "id": "70e98733-0d93-4ffb-9fa1-60f5a4f72f81",
+    "type": "feature",
+    "description": "Introducing the Savings Plans Return feature enabling customers to return their Savings Plans within 7 days of purchase.",
+    "modules": [
+        "service/savingsplans"
+    ]
+}

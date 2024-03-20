@@ -38,9 +38,11 @@ type GetTransactionInput struct {
 	Network types.QueryNetwork
 
 	// The hash of a transaction. It is generated when a transaction is created.
-	//
-	// This member is required.
 	TransactionHash *string
+
+	// The identifier of a Bitcoin transaction. It is generated when a transaction is
+	// created. transactionId is only supported on the Bitcoin networks.
+	TransactionId *string
 
 	noSmithyDocumentSerde
 }

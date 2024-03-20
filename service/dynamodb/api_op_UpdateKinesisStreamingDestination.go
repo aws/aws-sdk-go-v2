@@ -30,12 +30,13 @@ func (c *Client) UpdateKinesisStreamingDestination(ctx context.Context, params *
 
 type UpdateKinesisStreamingDestinationInput struct {
 
-	// The ARN for the Kinesis stream input.
+	// The Amazon Resource Name (ARN) for the Kinesis stream input.
 	//
 	// This member is required.
 	StreamArn *string
 
-	// The table name for the Kinesis streaming destination input.
+	// The table name for the Kinesis streaming destination input. You can also
+	// provide the ARN of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

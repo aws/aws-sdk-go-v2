@@ -46,7 +46,8 @@ type UpdateItemInput struct {
 	// This member is required.
 	Key map[string]types.AttributeValue
 
-	// The name of the table containing the item to update.
+	// The name of the table containing the item to update. You can also provide the
+	// Amazon Resource Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

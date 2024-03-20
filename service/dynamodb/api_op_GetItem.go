@@ -46,7 +46,8 @@ type GetItemInput struct {
 	// This member is required.
 	Key map[string]types.AttributeValue
 
-	// The name of the table containing the requested item.
+	// The name of the table containing the requested item. You can also provide the
+	// Amazon Resource Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

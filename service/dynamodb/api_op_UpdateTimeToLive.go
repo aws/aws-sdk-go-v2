@@ -48,7 +48,8 @@ func (c *Client) UpdateTimeToLive(ctx context.Context, params *UpdateTimeToLiveI
 // Represents the input of an UpdateTimeToLive operation.
 type UpdateTimeToLiveInput struct {
 
-	// The name of the table to be configured.
+	// The name of the table to be configured. You can also provide the Amazon
+	// Resource Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

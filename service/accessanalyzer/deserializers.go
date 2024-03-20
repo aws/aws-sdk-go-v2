@@ -6318,6 +6318,26 @@ loop:
 			continue
 		}
 		switch key {
+		case "dynamodbStream":
+			var mv types.DynamodbStreamConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDynamodbStreamConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationMemberDynamodbStream{Value: mv}
+			break loop
+
+		case "dynamodbTable":
+			var mv types.DynamodbTableConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDynamodbTableConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationMemberDynamodbTable{Value: mv}
+			break loop
+
 		case "ebsSnapshot":
 			var mv types.EbsSnapshotConfiguration
 			destAddr := &mv
@@ -6584,6 +6604,86 @@ func awsRestjson1_deserializeDocumentCriterion(v **types.Criterion, value interf
 		case "neq":
 			if err := awsRestjson1_deserializeDocumentValueList(&sv.Neq, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDynamodbStreamConfiguration(v **types.DynamodbStreamConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamodbStreamConfiguration
+	if *v == nil {
+		sv = &types.DynamodbStreamConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "streamPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DynamodbStreamPolicy to be of type string, got %T instead", value)
+				}
+				sv.StreamPolicy = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDynamodbTableConfiguration(v **types.DynamodbTableConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamodbTableConfiguration
+	if *v == nil {
+		sv = &types.DynamodbTableConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "tablePolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DynamodbTablePolicy to be of type string, got %T instead", value)
+				}
+				sv.TablePolicy = ptr.String(jtv)
 			}
 
 		default:

@@ -267,6 +267,8 @@ const (
 	SavingsPlanStateRetired        SavingsPlanState = "retired"
 	SavingsPlanStateQueued         SavingsPlanState = "queued"
 	SavingsPlanStateQueuedDeleted  SavingsPlanState = "queued-deleted"
+	SavingsPlanStatePendingReturn  SavingsPlanState = "pending-return"
+	SavingsPlanStateReturned       SavingsPlanState = "returned"
 )
 
 // Values returns all known values for SavingsPlanState. Note that this can be
@@ -280,6 +282,8 @@ func (SavingsPlanState) Values() []SavingsPlanState {
 		"retired",
 		"queued",
 		"queued-deleted",
+		"pending-return",
+		"returned",
 	}
 }
 

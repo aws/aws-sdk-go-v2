@@ -33,7 +33,7 @@ type ParentSavingsPlanOffering struct {
 // Information about a Savings Plan.
 type SavingsPlan struct {
 
-	// The hourly commitment, in USD.
+	// The hourly commitment amount in the specified currency.
 	Commitment *string
 
 	// The currency.
@@ -60,8 +60,12 @@ type SavingsPlan struct {
 	// The recurring payment amount.
 	RecurringPaymentAmount *string
 
-	// The AWS Region.
+	// The Amazon Web Services Region.
 	Region *string
+
+	// The time until when a return for the Savings Plan can be requested. If the
+	// Savings Plan is not returnable, the field reflects the Savings Plan start time.
+	ReturnableUntil *string
 
 	// The Amazon Resource Name (ARN) of the Savings Plan.
 	SavingsPlanArn *string
@@ -75,7 +79,7 @@ type SavingsPlan struct {
 	// The start time.
 	Start *string
 
-	// The state.
+	// The current state.
 	State SavingsPlanState
 
 	// One or more tags.
@@ -90,7 +94,7 @@ type SavingsPlan struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a filter.
+// Information about a Savings Plan filter.
 type SavingsPlanFilter struct {
 
 	// The filter name.
@@ -117,7 +121,8 @@ type SavingsPlanOffering struct {
 	// The ID of the offering.
 	OfferingId *string
 
-	// The specific AWS operation for the line item in the billing report.
+	// The specific Amazon Web Services operation for the line item in the billing
+	// report.
 	Operation *string
 
 	// The payment option.
@@ -141,7 +146,7 @@ type SavingsPlanOffering struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a filter.
+// Information about a Savings Plan offering filter.
 type SavingsPlanOfferingFilterElement struct {
 
 	// The filter name.
@@ -153,7 +158,7 @@ type SavingsPlanOfferingFilterElement struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a property.
+// Information about a Savings Plan offering property.
 type SavingsPlanOfferingProperty struct {
 
 	// The property name.
@@ -168,7 +173,8 @@ type SavingsPlanOfferingProperty struct {
 // Information about a Savings Plan offering rate.
 type SavingsPlanOfferingRate struct {
 
-	// The specific AWS operation for the line item in the billing report.
+	// The specific Amazon Web Services operation for the line item in the billing
+	// report.
 	Operation *string
 
 	// The product type.
@@ -195,7 +201,7 @@ type SavingsPlanOfferingRate struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a filter.
+// Information about a Savings Plan offering rate filter.
 type SavingsPlanOfferingRateFilterElement struct {
 
 	// The filter name.
@@ -207,7 +213,7 @@ type SavingsPlanOfferingRateFilterElement struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a property.
+// Information about a Savings Plan offering rate property.
 type SavingsPlanOfferingRateProperty struct {
 
 	// The property name.
@@ -225,7 +231,8 @@ type SavingsPlanRate struct {
 	// The currency.
 	Currency CurrencyCode
 
-	// The specific AWS operation for the line item in the billing report.
+	// The specific Amazon Web Services operation for the line item in the billing
+	// report.
 	Operation *string
 
 	// The product type.
@@ -249,7 +256,7 @@ type SavingsPlanRate struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a filter.
+// Information about a Savings Plan rate filter.
 type SavingsPlanRateFilter struct {
 
 	// The filter name.
@@ -261,7 +268,7 @@ type SavingsPlanRateFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a property.
+// Information about a Savings Plan rate property.
 type SavingsPlanRateProperty struct {
 
 	// The property name.

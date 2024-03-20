@@ -467,6 +467,8 @@ type CloudTrailProperties struct {
 //
 // The following types satisfy this interface:
 //
+//	ConfigurationMemberDynamodbStream
+//	ConfigurationMemberDynamodbTable
 //	ConfigurationMemberEbsSnapshot
 //	ConfigurationMemberEcrRepository
 //	ConfigurationMemberEfsFileSystem
@@ -482,6 +484,24 @@ type CloudTrailProperties struct {
 type Configuration interface {
 	isConfiguration()
 }
+
+// The access control configuration is for a DynamoDB stream.
+type ConfigurationMemberDynamodbStream struct {
+	Value DynamodbStreamConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberDynamodbStream) isConfiguration() {}
+
+// The access control configuration is for a DynamoDB table or index.
+type ConfigurationMemberDynamodbTable struct {
+	Value DynamodbTableConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberDynamodbTable) isConfiguration() {}
 
 // The access control configuration is for an Amazon EBS volume snapshot.
 type ConfigurationMemberEbsSnapshot struct {
@@ -607,6 +627,48 @@ type Criterion struct {
 
 	// A "not equals" operator to match for the filter used to create the rule.
 	Neq []string
+
+	noSmithyDocumentSerde
+}
+
+// The proposed access control configuration for a DynamoDB stream. You can
+// propose a configuration for a new DynamoDB stream or an existing DynamoDB stream
+// that you own by specifying the policy for the DynamoDB stream. For more
+// information, see PutResourcePolicy (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutResourcePolicy.html)
+// .
+//   - If the configuration is for an existing DynamoDB stream and you do not
+//     specify the DynamoDB policy, then the access preview uses the existing DynamoDB
+//     policy for the stream.
+//   - If the access preview is for a new resource and you do not specify the
+//     policy, then the access preview assumes a DynamoDB stream without a policy.
+//   - To propose deletion of an existing DynamoDB stream policy, you can specify
+//     an empty string for the DynamoDB policy.
+type DynamodbStreamConfiguration struct {
+
+	// The proposed resource policy defining who can access or manage the DynamoDB
+	// stream.
+	StreamPolicy *string
+
+	noSmithyDocumentSerde
+}
+
+// The proposed access control configuration for a DynamoDB table or index. You
+// can propose a configuration for a new DynamoDB table or index or an existing
+// DynamoDB table or index that you own by specifying the policy for the DynamoDB
+// table or index. For more information, see PutResourcePolicy (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutResourcePolicy.html)
+// .
+//   - If the configuration is for an existing DynamoDB table or index and you do
+//     not specify the DynamoDB policy, then the access preview uses the existing
+//     DynamoDB policy for the table or index.
+//   - If the access preview is for a new resource and you do not specify the
+//     policy, then the access preview assumes a DynamoDB table without a policy.
+//   - To propose deletion of an existing DynamoDB table or index policy, you can
+//     specify an empty string for the DynamoDB policy.
+type DynamodbTableConfiguration struct {
+
+	// The proposed resource policy defining who can access or manage the DynamoDB
+	// table.
+	TablePolicy *string
 
 	noSmithyDocumentSerde
 }

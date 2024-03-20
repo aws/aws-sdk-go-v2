@@ -337,6 +337,11 @@ func awsRestjson1_serializeOpDocumentGetTransactionInput(v *GetTransactionInput,
 		ok.String(*v.TransactionHash)
 	}
 
+	if v.TransactionId != nil {
+		ok := object.Key("transactionId")
+		ok.String(*v.TransactionId)
+	}
+
 	return nil
 }
 

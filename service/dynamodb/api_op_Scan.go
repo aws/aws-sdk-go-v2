@@ -63,8 +63,9 @@ func (c *Client) Scan(ctx context.Context, params *ScanInput, optFns ...func(*Op
 // Represents the input of a Scan operation.
 type ScanInput struct {
 
-	// The name of the table containing the requested items; or, if you provide
-	// IndexName , the name of the table to which that index belongs.
+	// The name of the table containing the requested items or if you provide IndexName
+	// , the name of the table to which that index belongs. You can also provide the
+	// Amazon Resource Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

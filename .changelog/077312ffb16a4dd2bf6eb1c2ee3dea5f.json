@@ -1,0 +1,8 @@
+{
+    "id": "077312ff-b16a-4dd2-bf6e-b1c2ee3dea5f",
+    "type": "documentation",
+    "description": "This release adds support for new webhook events (RELEASED and PRERELEASED) and filter types (TAG_NAME and RELEASE_NAME).",
+    "modules": [
+        "service/codebuild"
+    ]
+}

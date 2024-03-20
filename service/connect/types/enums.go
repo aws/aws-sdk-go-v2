@@ -815,16 +815,18 @@ type InstanceStorageResourceType string
 
 // Enum values for InstanceStorageResourceType
 const (
-	InstanceStorageResourceTypeChatTranscripts                 InstanceStorageResourceType = "CHAT_TRANSCRIPTS"
-	InstanceStorageResourceTypeCallRecordings                  InstanceStorageResourceType = "CALL_RECORDINGS"
-	InstanceStorageResourceTypeScheduledReports                InstanceStorageResourceType = "SCHEDULED_REPORTS"
-	InstanceStorageResourceTypeMediaStreams                    InstanceStorageResourceType = "MEDIA_STREAMS"
-	InstanceStorageResourceTypeContactTraceRecords             InstanceStorageResourceType = "CONTACT_TRACE_RECORDS"
-	InstanceStorageResourceTypeAgentEvents                     InstanceStorageResourceType = "AGENT_EVENTS"
-	InstanceStorageResourceTypeRealTimeContactAnalysisSegments InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"
-	InstanceStorageResourceTypeAttachments                     InstanceStorageResourceType = "ATTACHMENTS"
-	InstanceStorageResourceTypeContactEvaluations              InstanceStorageResourceType = "CONTACT_EVALUATIONS"
-	InstanceStorageResourceTypeScreenRecordings                InstanceStorageResourceType = "SCREEN_RECORDINGS"
+	InstanceStorageResourceTypeChatTranscripts                      InstanceStorageResourceType = "CHAT_TRANSCRIPTS"
+	InstanceStorageResourceTypeCallRecordings                       InstanceStorageResourceType = "CALL_RECORDINGS"
+	InstanceStorageResourceTypeScheduledReports                     InstanceStorageResourceType = "SCHEDULED_REPORTS"
+	InstanceStorageResourceTypeMediaStreams                         InstanceStorageResourceType = "MEDIA_STREAMS"
+	InstanceStorageResourceTypeContactTraceRecords                  InstanceStorageResourceType = "CONTACT_TRACE_RECORDS"
+	InstanceStorageResourceTypeAgentEvents                          InstanceStorageResourceType = "AGENT_EVENTS"
+	InstanceStorageResourceTypeRealTimeContactAnalysisSegments      InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"
+	InstanceStorageResourceTypeAttachments                          InstanceStorageResourceType = "ATTACHMENTS"
+	InstanceStorageResourceTypeContactEvaluations                   InstanceStorageResourceType = "CONTACT_EVALUATIONS"
+	InstanceStorageResourceTypeScreenRecordings                     InstanceStorageResourceType = "SCREEN_RECORDINGS"
+	InstanceStorageResourceTypeRealTimeContactAnalysisChatSegments  InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS"
+	InstanceStorageResourceTypeRealTimeContactAnalysisVoiceSegments InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS"
 )
 
 // Values returns all known values for InstanceStorageResourceType. Note that this
@@ -842,6 +844,8 @@ func (InstanceStorageResourceType) Values() []InstanceStorageResourceType {
 		"ATTACHMENTS",
 		"CONTACT_EVALUATIONS",
 		"SCREEN_RECORDINGS",
+		"REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS",
+		"REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS",
 	}
 }
 

@@ -6,59 +6,65 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DeleteTable operation deletes a table and all of its items. After a
-// DeleteTable request, the specified table is in the DELETING state until
-// DynamoDB completes the deletion. If the table is in the ACTIVE state, you can
-// delete it. If a table is in CREATING or UPDATING states, then DynamoDB returns
-// a ResourceInUseException . If the specified table does not exist, DynamoDB
-// returns a ResourceNotFoundException . If table is already in the DELETING
-// state, no error is returned. This operation only applies to Version 2019.11.21
-// (Current) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
-// of global tables. DynamoDB might continue to accept data read and write
-// operations, such as GetItem and PutItem , on a table in the DELETING state
-// until the table deletion is complete. When you delete a table, any indexes on
-// that table are also deleted. If you have DynamoDB Streams enabled on the table,
-// then the corresponding stream on that table goes into the DISABLED state, and
-// the stream is automatically deleted after 24 hours. Use the DescribeTable
-// action to check the status of the table.
-func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optFns ...func(*Options)) (*DeleteTableOutput, error) {
+// Deletes the resource-based policy attached to the resource, which can be a
+// table or stream. DeleteResourcePolicy is an idempotent operation; running it
+// multiple times on the same resource doesn't result in an error response, unless
+// you specify an ExpectedRevisionId , which will then return a
+// PolicyNotFoundException . To make sure that you don't inadvertently lock
+// yourself out of your own resources, the root principal in your Amazon Web
+// Services account can perform DeleteResourcePolicy requests, even if your
+// resource-based policy explicitly denies the root principal's access.
+// DeleteResourcePolicy is an asynchronous operation. If you issue a
+// GetResourcePolicy request immediately after running the DeleteResourcePolicy
+// request, DynamoDB might still return the deleted policy. This is because the
+// policy for your resource might not have been deleted yet. Wait for a few
+// seconds, and then try the GetResourcePolicy request again.
+func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourcePolicyInput, optFns ...func(*Options)) (*DeleteResourcePolicyOutput, error) {
 	if params == nil {
-		params = &DeleteTableInput{}
+		params = &DeleteResourcePolicyInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteTable", params, optFns, c.addOperationDeleteTableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteResourcePolicy", params, optFns, c.addOperationDeleteResourcePolicyMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteTableOutput)
+	out := result.(*DeleteResourcePolicyOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// Represents the input of a DeleteTable operation.
-type DeleteTableInput struct {
+type DeleteResourcePolicyInput struct {
 
-	// The name of the table to delete. You can also provide the Amazon Resource Name
-	// (ARN) of the table in this parameter.
+	// The Amazon Resource Name (ARN) of the DynamoDB resource from which the policy
+	// will be removed. The resources you can specify include tables and streams. If
+	// you remove the policy of a table, it will also remove the permissions for the
+	// table's indexes defined in that policy document. This is because index
+	// permissions are defined in the table's policy.
 	//
 	// This member is required.
-	TableName *string
+	ResourceArn *string
+
+	// A string value that you can use to conditionally delete your policy. When you
+	// provide an expected revision ID, if the revision ID of the existing policy on
+	// the resource doesn't match or if there's no policy attached to the resource, the
+	// request will fail and return a PolicyNotFoundException .
+	ExpectedRevisionId *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DeleteTable operation.
-type DeleteTableOutput struct {
+type DeleteResourcePolicyOutput struct {
 
-	// Represents the properties of a table.
-	TableDescription *types.TableDescription
+	// A unique string that represents the revision ID of the policy. If you are
+	// comparing revision IDs, make sure to always use string comparison logic. This
+	// value will be empty if you make a request against a resource without a policy.
+	RevisionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,19 +72,19 @@ type DeleteTableOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteTable{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteTable{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteResourcePolicy{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteTable"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteResourcePolicy"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -118,16 +124,16 @@ func (c *Client) addOperationDeleteTableMiddlewares(stack *middleware.Stack, opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteTableDiscoverEndpointMiddleware(stack, options, c); err != nil {
+	if err = addOpDeleteResourcePolicyDiscoverEndpointMiddleware(stack, options, c); err != nil {
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteTableValidationMiddleware(stack); err != nil {
+	if err = addOpDeleteResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTable(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -154,7 +160,7 @@ func (c *Client) addOperationDeleteTableMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func addOpDeleteTableDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
+func addOpDeleteResourcePolicyDiscoverEndpointMiddleware(stack *middleware.Stack, o Options, c *Client) error {
 	return stack.Finalize.Insert(&internalEndpointDiscovery.DiscoverEndpoint{
 		Options: []func(*internalEndpointDiscovery.DiscoverEndpointOptions){
 			func(opt *internalEndpointDiscovery.DiscoverEndpointOptions) {
@@ -162,16 +168,16 @@ func addOpDeleteTableDiscoverEndpointMiddleware(stack *middleware.Stack, o Optio
 				opt.Logger = o.Logger
 			},
 		},
-		DiscoverOperation:            c.fetchOpDeleteTableDiscoverEndpoint,
+		DiscoverOperation:            c.fetchOpDeleteResourcePolicyDiscoverEndpoint,
 		EndpointDiscoveryEnableState: o.EndpointDiscovery.EnableEndpointDiscovery,
 		EndpointDiscoveryRequired:    false,
 		Region:                       o.Region,
 	}, "ResolveEndpointV2", middleware.After)
 }
 
-func (c *Client) fetchOpDeleteTableDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
+func (c *Client) fetchOpDeleteResourcePolicyDiscoverEndpoint(ctx context.Context, region string, optFns ...func(*internalEndpointDiscovery.DiscoverEndpointOptions)) (internalEndpointDiscovery.WeightedAddress, error) {
 	input := getOperationInput(ctx)
-	in, ok := input.(*DeleteTableInput)
+	in, ok := input.(*DeleteResourcePolicyInput)
 	if !ok {
 		return internalEndpointDiscovery.WeightedAddress{}, fmt.Errorf("unknown input type %T", input)
 	}
@@ -197,10 +203,10 @@ func (c *Client) fetchOpDeleteTableDiscoverEndpoint(ctx context.Context, region 
 	return internalEndpointDiscovery.WeightedAddress{}, nil
 }
 
-func newServiceMetadataMiddleware_opDeleteTable(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteResourcePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteTable",
+		OperationName: "DeleteResourcePolicy",
 	}
 }

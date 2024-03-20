@@ -1,0 +1,8 @@
+{
+    "id": "8fa23c7a-5064-48ad-8d7f-8c8d94f071fb",
+    "type": "feature",
+    "description": "AMB Query: update GetTransaction to include transactionId as input",
+    "modules": [
+        "service/managedblockchainquery"
+    ]
+}

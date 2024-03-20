@@ -31,7 +31,8 @@ func (c *Client) DescribeContributorInsights(ctx context.Context, params *Descri
 
 type DescribeContributorInsightsInput struct {
 
-	// The name of the table to describe.
+	// The name of the table to describe. You can also provide the Amazon Resource
+	// Name (ARN) of the table in this parameter.
 	//
 	// This member is required.
 	TableName *string

@@ -15,6 +15,7 @@
         "api_op_DescribeSavingsPlansOfferingRates.go",
         "api_op_DescribeSavingsPlansOfferings.go",
         "api_op_ListTagsForResource.go",
+        "api_op_ReturnSavingsPlan.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "auth.go",

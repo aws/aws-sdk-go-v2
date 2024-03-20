@@ -42,7 +42,16 @@ type AssociateInstanceStorageConfigInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// A valid resource type.
+	// A valid resource type. To enable streaming for real-time analysis of contacts (https://docs.aws.amazon.com/connect/latest/adminguide/enable-contact-analysis-segment-streams.html)
+	// , use the following types:
+	//   - For chat contacts, use REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS .
+	//   - For voice contacts, use REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS .
+	// REAL_TIME_CONTACT_ANALYSIS_SEGMENTS is deprecated, but it is still supported
+	// and will apply only to VOICE channel contacts. Use
+	// REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS for voice contacts moving forward. If
+	// you have previously associated a stream with REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
+	// , no action is needed to update the stream to
+	// REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS .
 	//
 	// This member is required.
 	ResourceType types.InstanceStorageResourceType
