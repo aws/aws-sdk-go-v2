@@ -220,6 +220,29 @@ func TestOperationTimeoutMiddleware_withCustomDeadline(t *testing.T) {
 	}
 }
 
+func TestOperationTimeoutMiddleware_Disabled(t *testing.T) {
+	m := &operationTimeout{
+		Disabled:       true,
+		DefaultTimeout: time.Nanosecond,
+	}
+
+	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{},
+		middleware.InitializeHandlerFunc(func(
+			ctx context.Context, input middleware.InitializeInput,
+		) (
+			out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+		) {
+			if err := sdk.SleepWithContext(ctx, time.Second); err != nil {
+				return out, metadata, err
+			}
+
+			return out, metadata, nil
+		}))
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+}
+
 // Ensure that the response body is read in the deserialize middleware,
 // ensuring that the timeoutOperation middleware won't race canceling the
 // context with the upstream reading the response body.
