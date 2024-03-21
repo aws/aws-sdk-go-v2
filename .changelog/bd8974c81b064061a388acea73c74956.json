@@ -1,8 +1,0 @@
-{
-    "id": "bd8974c8-1b06-4061-a388-acea73c74956",
-    "type": "feature",
-    "description": "Add config switch `DisableDefaultTimeout` that allows you to disable the default operation timeout (5 seconds) for IMDS calls.",
-    "modules": [
-        "feature/ec2/imds"
-    ]
-}

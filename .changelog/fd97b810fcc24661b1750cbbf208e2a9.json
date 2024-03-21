@@ -1,8 +1,0 @@
-{
-    "id": "fd97b810-fcc2-4661-b175-0cbbf208e2a9",
-    "type": "feature",
-    "description": "This release adds Package groups to CodeArtifact so you can more conveniently configure package origin controls for multiple packages.",
-    "modules": [
-        "service/codeartifact"
-    ]
-}

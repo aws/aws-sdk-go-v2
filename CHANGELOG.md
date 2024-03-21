@@ -1,3 +1,14 @@
+# Release (2024-03-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/ec2/imds`: [v1.16.0](feature/ec2/imds/CHANGELOG.md#v1160-2024-03-21)
+  * **Feature**: Add config switch `DisableDefaultTimeout` that allows you to disable the default operation timeout (5 seconds) for IMDS calls.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.26.0](service/codeartifact/CHANGELOG.md#v1260-2024-03-21)
+  * **Feature**: This release adds Package groups to CodeArtifact so you can more conveniently configure package origin controls for multiple packages.
+
 # Release (2024-03-20)
 
 ## General Highlights

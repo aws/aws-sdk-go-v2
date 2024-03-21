@@ -4,8 +4,8 @@ go 1.20
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.26.0
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.8
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.15.4
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.9
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.0
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.0
 	github.com/aws/aws-sdk-go-v2/service/sso v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.23.3
