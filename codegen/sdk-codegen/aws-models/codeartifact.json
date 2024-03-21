@@ -250,6 +250,44 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codeartifact#AssociatedPackage": {
+            "type": "structure",
+            "members": {
+                "format": {
+                    "target": "com.amazonaws.codeartifact#PackageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A format that specifies the type of the associated package.</p>"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.codeartifact#PackageNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the associated package. The package component that specifies its \n    namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "package": {
+                    "target": "com.amazonaws.codeartifact#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the associated package.\n    </p>"
+                    }
+                },
+                "associationType": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupAssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the strength of the association between the package and package group. A strong match can be thought of as an \n      exact match, and a weak match can be thought of as a variation match, for example, the package name matches a variation of the package group pattern. \n      For more information about package group pattern matching, including strong and weak matches, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html\">Package group definition syntax and matching behavior</a> \n      in the <i>CodeArtifact User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      A package associated with a package group.\n    </p>"
+            }
+        },
+        "com.amazonaws.codeartifact#AssociatedPackageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codeartifact#AssociatedPackage"
+            }
+        },
         "com.amazonaws.codeartifact#AuthorizationTokenDurationSeconds": {
             "type": "long",
             "traits": {
@@ -276,6 +314,9 @@
                     "target": "com.amazonaws.codeartifact#CreateDomain"
                 },
                 {
+                    "target": "com.amazonaws.codeartifact#CreatePackageGroup"
+                },
+                {
                     "target": "com.amazonaws.codeartifact#CreateRepository"
                 },
                 {
@@ -286,6 +327,9 @@
                 },
                 {
                     "target": "com.amazonaws.codeartifact#DeletePackage"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#DeletePackageGroup"
                 },
                 {
                     "target": "com.amazonaws.codeartifact#DeletePackageVersions"
@@ -303,6 +347,9 @@
                     "target": "com.amazonaws.codeartifact#DescribePackage"
                 },
                 {
+                    "target": "com.amazonaws.codeartifact#DescribePackageGroup"
+                },
+                {
                     "target": "com.amazonaws.codeartifact#DescribePackageVersion"
                 },
                 {
@@ -313,6 +360,9 @@
                 },
                 {
                     "target": "com.amazonaws.codeartifact#DisposePackageVersions"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#GetAssociatedPackageGroup"
                 },
                 {
                     "target": "com.amazonaws.codeartifact#GetAuthorizationToken"
@@ -333,7 +383,16 @@
                     "target": "com.amazonaws.codeartifact#GetRepositoryPermissionsPolicy"
                 },
                 {
+                    "target": "com.amazonaws.codeartifact#ListAllowedRepositoriesForGroup"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ListAssociatedPackages"
+                },
+                {
                     "target": "com.amazonaws.codeartifact#ListDomains"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ListPackageGroups"
                 },
                 {
                     "target": "com.amazonaws.codeartifact#ListPackages"
@@ -352,6 +411,9 @@
                 },
                 {
                     "target": "com.amazonaws.codeartifact#ListRepositoriesInDomain"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ListSubPackageGroups"
                 },
                 {
                     "target": "com.amazonaws.codeartifact#ListTagsForResource"
@@ -375,6 +437,12 @@
                     "target": "com.amazonaws.codeartifact#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.codeartifact#UpdatePackageGroup"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#UpdatePackageGroupOriginConfiguration"
+                },
+                {
                     "target": "com.amazonaws.codeartifact#UpdatePackageVersionsStatus"
                 },
                 {
@@ -393,7 +461,7 @@
                     "name": "codeartifact"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p> CodeArtifact is a fully managed artifact repository compatible with language-native\n      package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to\n      share packages with development teams and pull packages. Packages can be pulled from both\n      public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact\n      repository and another repository, which effectively merges their contents from the point of\n      view of a package manager client. </p>\n         <p>\n            <b>CodeArtifact Components</b>\n         </p>\n         <p>Use the information in this guide to help you work with the following CodeArtifact components:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Repository</b>: A CodeArtifact repository contains a set of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version\">package\n            versions</a>, each of which maps to a set of assets, or files. Repositories are\n          polyglot, so a single repository can contain packages of any supported type. Each\n          repository exposes endpoints for fetching and publishing packages using tools like the\n            <b>\n                     <code>npm</code>\n                  </b> CLI, the Maven CLI (<b>\n                     <code>mvn</code>\n                  </b>), Python CLIs (<b>\n                     <code>pip</code>\n                  </b> and <code>twine</code>), and NuGet CLIs (<code>nuget</code> and <code>dotnet</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Domain</b>: Repositories are aggregated into a higher-level entity known as a\n            <i>domain</i>. All package assets and metadata are stored in the domain,\n            but are consumed through repositories. A given package asset, such as a Maven JAR file, is\n            stored once per domain, no matter how many repositories it's present in. All of the assets\n            and metadata in a domain are encrypted with the same customer master key (CMK) stored in\n            Key Management Service (KMS).</p>\n               <p>Each repository is a member of a single domain and can't be moved to a\n            different domain.</p>\n               <p>The domain allows organizational policy to be applied across multiple\n            repositories, such as which accounts can access repositories in the domain, and\n            which public repositories can be used as sources of packages.</p>\n               <p>Although an organization can have multiple domains, we recommend a single production\n            domain that contains all published artifacts so that teams can find and share packages\n            across their organization.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to\n          resolve dependencies and install the software. CodeArtifact supports <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html\">npm</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html\">PyPI</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven\">Maven</a>, and <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-nuget\">NuGet</a> package formats.</p>\n               <p>In CodeArtifact, a package consists of:</p>\n               <ul>\n                  <li>\n                     <p>A <i>name</i> (for example, <code>webpack</code> is the name of a\n              popular npm package)</p>\n                  </li>\n                  <li>\n                     <p>An optional namespace (for example, <code>@types</code> in <code>@types/node</code>)</p>\n                  </li>\n                  <li>\n                     <p>A set of versions (for example, <code>1.0.0</code>, <code>1.0.1</code>,\n                <code>1.0.2</code>, etc.)</p>\n                  </li>\n                  <li>\n                     <p> Package-level metadata (for example, npm tags)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Package version</b>: A version of a package, such as <code>@types/node 12.6.9</code>. The version number\n          format and semantics vary for different package formats. For example, npm package versions\n          must conform to the <a href=\"https://semver.org/\">Semantic Versioning\n            specification</a>. In CodeArtifact, a package version consists of the version identifier,\n          metadata at the package version level, and a set of assets.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Upstream repository</b>: One repository is <i>upstream</i> of another when the package versions in\n          it can be accessed from the repository endpoint of the downstream repository, effectively\n          merging the contents of the two repositories from the point of view of a client. CodeArtifact\n          allows creating an upstream relationship between two repositories.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Asset</b>: An individual file stored in CodeArtifact associated with a package version, such as an npm\n            <code>.tgz</code> file or Maven POM and JAR files.</p>\n            </li>\n         </ul>\n         <p>CodeArtifact supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AssociateExternalConnection</code>: Adds an existing external \n          connection to a repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyPackageVersions</code>: Copies package versions from one \n          repository to another repository in the same domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateDomain</code>: Creates a domain</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateRepository</code>: Creates a CodeArtifact repository in a domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomain</code>: Deletes a domain. You cannot delete a domain that contains\n          repositories. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackage</code>: Deletes a package and all associated package versions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackageVersions</code>: Deletes versions of a package. After a package has\n          been deleted, it can be republished, but its assets and metadata cannot be restored\n          because they have been permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepository</code>: Deletes a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepositoryPermissionsPolicy</code>: Deletes the resource policy that is set on a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDomain</code>: Returns a <code>DomainDescription</code> object that\n          contains information about the requested domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackage</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html\">PackageDescription</a>\n          object that contains details about a package. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackageVersion</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">PackageVersionDescription</a>\n          object that contains details about a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeRepository</code>: Returns a <code>RepositoryDescription</code> object\n          that contains detailed information about the requested repository. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DisposePackageVersions</code>: Disposes versions of a package. A package version\n          with the status <code>Disposed</code> cannot be restored because they have been\n          permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetAuthorizationToken</code>: Generates a temporary authorization token for accessing repositories in the domain. The token expires the authorization period has passed. \n          The default authorization period is 12 hours and can be customized to any length with a maximum of 12 hours.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetDomainPermissionsPolicy</code>: Returns the policy of a resource\n          that is attached to the specified domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionAsset</code>: Returns the contents of an asset that is in a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionReadme</code>: Gets the readme file or descriptive text for a package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryEndpoint</code>: Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n          package format:\n        </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>maven</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>npm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>nuget</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>pypi</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryPermissionsPolicy</code>: Returns the resource policy that is set on a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each\n          returned <code>DomainSummary</code> object contains information about a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackages</code>: Lists the packages in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionAssets</code>: Lists the assets for a given package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionDependencies</code>: Returns a list of the direct dependencies for a\n          package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersions</code>: Returns a list of package versions for a specified\n          package in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositoriesInDomain</code>: Returns a list of the repositories in a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PublishPackageVersion</code>: Creates a new package version containing one or more assets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutPackageOriginConfiguration</code>: Sets the package origin configuration for a package, which determine \n        how new versions of the package can be added to a specific repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository\n          that specifies permissions to access it. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePackageVersionsStatus</code>: Updates the status of one or more versions of a package.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateRepository</code>: Updates the properties of a repository.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p> CodeArtifact is a fully managed artifact repository compatible with language-native\n      package managers and build tools such as npm, Apache Maven, pip, and dotnet. You can use CodeArtifact to\n      share packages with development teams and pull packages. Packages can be pulled from both\n      public and CodeArtifact repositories. You can also create an upstream relationship between a CodeArtifact\n      repository and another repository, which effectively merges their contents from the point of\n      view of a package manager client. </p>\n         <p>\n            <b>CodeArtifact concepts</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Repository</b>: A CodeArtifact repository contains a set of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version\">package\n            versions</a>, each of which maps to a set of assets, or files. Repositories are\n          polyglot, so a single repository can contain packages of any supported type. Each\n          repository exposes endpoints for fetching and publishing packages using tools like the\n            <b>\n                     <code>npm</code>\n                  </b> CLI, the Maven CLI (<b>\n                     <code>mvn</code>\n                  </b>), Python CLIs (<b>\n                     <code>pip</code>\n                  </b> and <code>twine</code>), NuGet CLIs (<code>nuget</code> and <code>dotnet</code>), and \n          the Swift package manager (<b>\n                     <code>swift</code>\n                  </b>).</p>\n            </li>\n            <li>\n               <p>\n                  <b>Domain</b>: Repositories are aggregated into a higher-level entity known as a\n            <i>domain</i>. All package assets and metadata are stored in the domain,\n            but are consumed through repositories. A given package asset, such as a Maven JAR file, is\n            stored once per domain, no matter how many repositories it's present in. All of the assets\n            and metadata in a domain are encrypted with the same customer master key (CMK) stored in\n            Key Management Service (KMS).</p>\n               <p>Each repository is a member of a single domain and can't be moved to a\n            different domain.</p>\n               <p>The domain allows organizational policy to be applied across multiple\n            repositories, such as which accounts can access repositories in the domain, and\n            which public repositories can be used as sources of packages.</p>\n               <p>Although an organization can have multiple domains, we recommend a single production\n            domain that contains all published artifacts so that teams can find and share packages\n            across their organization.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Package</b>: A <i>package</i> is a bundle of software and the metadata required to\n          resolve dependencies and install the software. CodeArtifact supports <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html\">npm</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html\">PyPI</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven\">Maven</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-nuget\">NuGet</a>, <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-swift\">Swift</a>, and <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic\">generic</a> package formats.</p>\n               <p>In CodeArtifact, a package consists of:</p>\n               <ul>\n                  <li>\n                     <p>A <i>name</i> (for example, <code>webpack</code> is the name of a\n              popular npm package)</p>\n                  </li>\n                  <li>\n                     <p>An optional namespace (for example, <code>@types</code> in <code>@types/node</code>)</p>\n                  </li>\n                  <li>\n                     <p>A set of versions (for example, <code>1.0.0</code>, <code>1.0.1</code>,\n                <code>1.0.2</code>, etc.)</p>\n                  </li>\n                  <li>\n                     <p> Package-level metadata (for example, npm tags)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>Package group</b>: A group of packages that match a specified definition. Package \n          groups can be used to apply configuration to multiple packages that match a defined pattern using \n          package format, package namespace, and package name. You can use package groups to more conveniently \n          configure package origin controls for multiple packages. Package origin controls are used to block or allow ingestion or publishing \n          of new package versions, which protects users from malicious actions known as dependency substitution attacks.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Package version</b>: A version of a package, such as <code>@types/node 12.6.9</code>. The version number\n          format and semantics vary for different package formats. For example, npm package versions\n          must conform to the <a href=\"https://semver.org/\">Semantic Versioning\n            specification</a>. In CodeArtifact, a package version consists of the version identifier,\n          metadata at the package version level, and a set of assets.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Upstream repository</b>: One repository is <i>upstream</i> of another when the package versions in\n          it can be accessed from the repository endpoint of the downstream repository, effectively\n          merging the contents of the two repositories from the point of view of a client. CodeArtifact\n          allows creating an upstream relationship between two repositories.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Asset</b>: An individual file stored in CodeArtifact associated with a package version, such as an npm\n            <code>.tgz</code> file or Maven POM and JAR files.</p>\n            </li>\n         </ul>\n         <p>\n            <b>CodeArtifact supported API operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>AssociateExternalConnection</code>: Adds an existing external \n          connection to a repository.\n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyPackageVersions</code>: Copies package versions from one \n          repository to another repository in the same domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateDomain</code>: Creates a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreatePackageGroup</code>: Creates a package group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateRepository</code>: Creates a CodeArtifact repository in a domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomain</code>: Deletes a domain. You cannot delete a domain that contains\n          repositories. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteDomainPermissionsPolicy</code>: Deletes the resource policy that is set on a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackage</code>: Deletes a package and all associated package versions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackageGroup</code>: Deletes a package group. Does not delete packages or package versions that are associated with a package group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeletePackageVersions</code>: Deletes versions of a package. After a package has\n          been deleted, it can be republished, but its assets and metadata cannot be restored\n          because they have been permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepository</code>: Deletes a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteRepositoryPermissionsPolicy</code>: Deletes the resource policy that is set on a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDomain</code>: Returns a <code>DomainDescription</code> object that\n          contains information about the requested domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackage</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html\">PackageDescription</a>\n          object that contains details about a package. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackageGroup</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroup.html\">PackageGroup</a>\n          object that contains details about a package group. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePackageVersion</code>: Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">PackageVersionDescription</a>\n          object that contains details about a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeRepository</code>: Returns a <code>RepositoryDescription</code> object\n          that contains detailed information about the requested repository. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DisposePackageVersions</code>: Disposes versions of a package. A package version\n          with the status <code>Disposed</code> cannot be restored because they have been\n          permanently removed from storage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DisassociateExternalConnection</code>: Removes an existing external connection from a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetAssociatedPackageGroup</code>: Returns the most closely associated package group to the specified package.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetAuthorizationToken</code>: Generates a temporary authorization token for accessing repositories in the domain. The token expires the authorization period has passed. \n          The default authorization period is 12 hours and can be customized to any length with a maximum of 12 hours.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetDomainPermissionsPolicy</code>: Returns the policy of a resource\n          that is attached to the specified domain. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionAsset</code>: Returns the contents of an asset that is in a package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>GetPackageVersionReadme</code>: Gets the readme file or descriptive text for a package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryEndpoint</code>: Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n          package format:\n        </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>generic</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>maven</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>npm</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>nuget</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>pypi</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>swift</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>GetRepositoryPermissionsPolicy</code>: Returns the resource policy that is set on a repository.          \n        </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListAllowedRepositoriesForGroup</code>: Lists the allowed repositories for a package group that has origin configuration set to <code>ALLOW_SPECIFIC_REPOSITORIES</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListAssociatedPackages</code>: Returns a list of packages associated with the requested package group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListDomains</code>: Returns a list of <code>DomainSummary</code> objects. Each\n          returned <code>DomainSummary</code> object contains information about a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackages</code>: Lists the packages in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageGroups</code>: Returns a list of package groups in the requested domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionAssets</code>: Lists the assets for a given package version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersionDependencies</code>: Returns a list of the direct dependencies for a\n          package version. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ListPackageVersions</code>: Returns a list of package versions for a specified\n          package in a repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositories</code>: Returns a list of repositories owned by the Amazon Web Services account that called this method.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListRepositoriesInDomain</code>: Returns a list of the repositories in a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListSubPackageGroups</code>: Returns a list of direct children of the specified package group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PublishPackageVersion</code>: Creates a new package version containing one or more assets.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutDomainPermissionsPolicy</code>: Attaches a resource policy to a domain.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutPackageOriginConfiguration</code>: Sets the package origin configuration for a package, which determine \n        how new versions of the package can be added to a specific repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PutRepositoryPermissionsPolicy</code>: Sets the resource policy on a repository\n          that specifies permissions to access it. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePackageGroup</code>: Updates a package group. This API cannot be used to update a package group's origin configuration or pattern.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePackageGroupOriginConfiguration</code>: Updates the package origin configuration for a package group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdatePackageVersionsStatus</code>: Updates the status of one or more versions of a package.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateRepository</code>: Updates the properties of a repository.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "CodeArtifact",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -437,7 +505,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -480,7 +547,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -493,7 +561,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -507,7 +574,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -530,7 +596,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -565,7 +630,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -576,14 +640,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -597,14 +663,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -613,11 +677,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -628,14 +692,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -649,7 +715,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -669,7 +734,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -680,14 +744,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -698,9 +764,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1294,7 +1362,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be copied. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when copying Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be copied. The package component that specifies its namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when copying package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -1437,6 +1505,108 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codeartifact#CreatePackageGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#CreatePackageGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#CreatePackageGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Creates a package group. For more information about creating package groups, including example CLI commands, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/create-package-group.html\">Create a package group</a> in the <i>CodeArtifact User Guide</i>.\n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/package-group",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#CreatePackageGroupRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain in which you want to create a package group.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern of the package group to create. The pattern is also the identifier of the package group. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contactInfo": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupContactInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The contact information for the created package group.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.codeartifact#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A description of the package group.\n    </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.codeartifact#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tag key-value pairs for the package group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#CreatePackageGroupResult": {
+            "type": "structure",
+            "members": {
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Information about the created package group after processing the request.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codeartifact#CreateRepository": {
             "type": "operation",
             "input": {
@@ -1498,7 +1668,7 @@
                 "repository": {
                     "target": "com.amazonaws.codeartifact#RepositoryName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of the repository to create. </p>",
+                        "smithy.api#documentation": "<p>The name of the repository to create. </p>",
                         "smithy.api#httpQuery": "repository",
                         "smithy.api#required": {}
                     }
@@ -1721,12 +1891,98 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a package and all associated package versions. A deleted package cannot be restored. To delete one or more package versions, use the\n     <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html\">DeletePackageVersions</a> API.</p>",
+                "smithy.api#documentation": "<p>Deletes a package and all associated package versions. A deleted package cannot be restored. To delete one or more package versions, use the\n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html\">DeletePackageVersions</a> API.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/v1/package",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.codeartifact#DeletePackageGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#DeletePackageGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#DeletePackageGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a package group. \n      Deleting a package group does not delete packages or package versions associated with the package group. \n      When a package group is deleted, the direct child package groups will become children of the package \n      group's direct parent package group. Therefore, if any of the child groups are inheriting any settings \n      from the parent, those settings could change.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/package-group",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.codeartifact#DeletePackageGroupRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The domain that contains the package group to be deleted.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern of the package group to be deleted.</p>",
+                        "smithy.api#httpQuery": "package-group",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#DeletePackageGroupResult": {
+            "type": "structure",
+            "members": {
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Information about the deleted package group after processing the request.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DeletePackageRequest": {
@@ -1766,7 +2022,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of an npm package is its <code>scope</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when deleting packages of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -1868,7 +2124,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be deleted. The package version component that specifies its \n        namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n            The namespace of a Maven package version is its <code>groupId</code>. The namespace is required when deleting Maven package versions.\n          </p>\n            </li>\n            <li>\n               <p>\n            The namespace of an npm package version is its <code>scope</code>.\n          </p>\n            </li>\n            <li>\n               <p>\n            Python and NuGet package versions do not contain a corresponding component, package versions \n            of those formats do not have a namespace.\n          </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be deleted. The package component that specifies its namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when deleting package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2191,6 +2447,85 @@
                 }
             }
         },
+        "com.amazonaws.codeartifact#DescribePackageGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#DescribePackageGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#DescribePackageGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroupDescription.html\">PackageGroupDescription</a> object that \n    contains information about the requested package group.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/package-group",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#DescribePackageGroupRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain that contains the package group. \n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern of the requested package group.</p>",
+                        "smithy.api#httpQuery": "package-group",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#DescribePackageGroupResult": {
+            "type": "structure",
+            "members": {
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageGroupDescription.html\">PackageGroupDescription</a> object \n    that contains information about the requested package group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codeartifact#DescribePackageRequest": {
             "type": "structure",
             "members": {
@@ -2228,7 +2563,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the requested package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>. The namespace is required when requesting Maven packages.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the requested package. The package component that specifies its namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when requesting packages of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2334,7 +2669,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the requested package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the requested package version. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when requesting package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2630,7 +2965,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package versions to be disposed. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package versions to be disposed. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when disposing package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -2767,7 +3102,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about how a package originally entered the CodeArtifact domain. For packages published directly to CodeArtifact, the entry point is the repository it was published to. \n      For packages ingested from an external repository, the entry point is the external connection that it was ingested from. An external \n    connection is a CodeArtifact repository that is connected to an external repository such as the npm registry or NuGet gallery.</p>"
+                "smithy.api#documentation": "<p>Information about how a package originally entered the CodeArtifact domain. For packages published directly to CodeArtifact, the entry point is the repository it was published to. \n      For packages ingested from an external repository, the entry point is the external connection that it was ingested from. An external \n    connection is a CodeArtifact repository that is connected to an external repository such as the npm registry or NuGet gallery.</p>\n         <note>\n            <p>If a package version exists in a repository and is updated, for example if a package of the same version is added \n      with additional assets, the package version's <code>DomainEntryPoint</code> will not change from the original package version's value.</p>\n         </note>"
             }
         },
         "com.amazonaws.codeartifact#DomainName": {
@@ -2871,6 +3206,103 @@
                 }
             }
         },
+        "com.amazonaws.codeartifact#GetAssociatedPackageGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#GetAssociatedPackageGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#GetAssociatedPackageGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the most closely associated package group to the specified package. This API does not require that the package exist \n    in any repository in the domain. As such, <code>GetAssociatedPackageGroup</code> can be used to see which package group's origin configuration \n    applies to a package before that package is in a repository. This can be helpful to check if public packages are blocked without ingesting them.</p>\n         <p>For information package group association and matching, see \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html\">Package group \n        definition syntax and matching behavior</a> in the <i>CodeArtifact User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/get-associated-package-group",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#GetAssociatedPackageGroupRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain that contains the package from which to get the associated package group.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.codeartifact#PackageFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The format of the package from which to get the associated package group.\n    </p>",
+                        "smithy.api#httpQuery": "format",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.codeartifact#PackageNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the package from which to get the associated package group. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when getting associated package groups from packages of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "namespace"
+                    }
+                },
+                "package": {
+                    "target": "com.amazonaws.codeartifact#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The package from which to get the associated package group.\n    </p>",
+                        "smithy.api#httpQuery": "package",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#GetAssociatedPackageGroupResult": {
+            "type": "structure",
+            "members": {
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package group that is associated with the requested package.</p>"
+                    }
+                },
+                "associationType": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupAssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the strength of the association between the package and package group. A strong match is also known as an \n    exact match, and a weak match is known as a relative match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codeartifact#GetAuthorizationToken": {
             "type": "operation",
             "input": {
@@ -2952,7 +3384,8 @@
                 }
             },
             "traits": {
-                "smithy.api#output": {}
+                "smithy.api#output": {},
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.codeartifact#GetDomainPermissionsPolicy": {
@@ -3100,7 +3533,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested asset file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested asset file. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when requesting assets from package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3248,7 +3681,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested readme file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p> The namespace of an npm package version is its <code>scope</code>. </p>\n            </li>\n            <li>\n               <p> Python and NuGet package versions do not contain a corresponding component, package\n          versions of those formats do not have a namespace. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested readme file. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when requesting the readme from package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3285,7 +3718,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested readme file. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested readme file. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "package": {
@@ -3343,7 +3776,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n      package format:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>nuget</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>\n      Returns the endpoint of a repository for a specific package format. A repository has one endpoint for each \n      package format:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>generic</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>maven</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>npm</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>nuget</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>pypi</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>swift</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/repository/endpoint",
@@ -3570,6 +4003,240 @@
                 "target": "com.amazonaws.codeartifact#LicenseInfo"
             }
         },
+        "com.amazonaws.codeartifact#ListAllowedRepositoriesForGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#ListAllowedRepositoriesForGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#ListAllowedRepositoriesForGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the repositories in the added repositories list of the specified restriction type for a package group. For more information about restriction types \n      and added repository lists, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-origin-controls.html\">Package group origin controls</a> in the <i>CodeArtifact User Guide</i>.\n    </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/package-group-allowed-repositories",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "allowedRepositories",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#ListAllowedRepositoriesForGroupMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#ListAllowedRepositoriesForGroupRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain that contains the package group from which to list allowed repositories.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pattern of the package group from which to list allowed repositories.</p>",
+                        "smithy.api#httpQuery": "package-group",
+                        "smithy.api#required": {}
+                    }
+                },
+                "originRestrictionType": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin configuration restriction type of which to list allowed repositories.</p>",
+                        "smithy.api#httpQuery": "originRestrictionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.codeartifact#ListAllowedRepositoriesForGroupMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The maximum number of results to return per page.\n       </p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codeartifact#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#ListAllowedRepositoriesForGroupResult": {
+            "type": "structure",
+            "members": {
+                "allowedRepositories": {
+                    "target": "com.amazonaws.codeartifact#RepositoryNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of allowed repositories for the package group and origin configuration restriction type.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codeartifact#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codeartifact#ListAssociatedPackages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#ListAssociatedPackagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#ListAssociatedPackagesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of packages associated with the requested package group. For information package group association and matching, see \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html\">Package group \n        definition syntax and matching behavior</a> in the <i>CodeArtifact User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/list-associated-packages",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "packages",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#ListAssociatedPackagesRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain that contains the package group from which to list associated packages.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pattern of the package group from which to list associated packages.\n    </p>",
+                        "smithy.api#httpQuery": "package-group",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.codeartifact#ListPackagesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The maximum number of results to return per page.\n       </p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codeartifact#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "preview": {
+                    "target": "com.amazonaws.codeartifact#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      When this flag is included, <code>ListAssociatedPackages</code> will return a list of packages that would be associated with a package \n      group, even if it does not exist.\n    </p>",
+                        "smithy.api#httpQuery": "preview"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#ListAssociatedPackagesResult": {
+            "type": "structure",
+            "members": {
+                "packages": {
+                    "target": "com.amazonaws.codeartifact#AssociatedPackageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of packages associated with the requested package group.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codeartifact#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codeartifact#ListDomains": {
             "type": "operation",
             "input": {
@@ -3643,6 +4310,119 @@
                     "target": "com.amazonaws.codeartifact#DomainSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html\">DomainSummary</a> objects.\n     </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codeartifact#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codeartifact#ListPackageGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#ListPackageGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#ListPackageGroupsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of package groups in the requested domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/package-groups",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "packageGroups",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#ListPackageGroupsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#ListPackageGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The domain for which you want to list package groups.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.codeartifact#ListPackageGroupsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The maximum number of results to return per page.\n       </p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codeartifact#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPatternPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A prefix for which to search package groups. When included, <code>ListPackageGroups</code> will return only\n      package groups with patterns that match the prefix.\n    </p>",
+                        "smithy.api#httpQuery": "prefix"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#ListPackageGroupsResult": {
+            "type": "structure",
+            "members": {
+                "packageGroups": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of package groups in the requested domain.\n    </p>"
                     }
                 },
                 "nextToken": {
@@ -3742,7 +4522,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version that contains the requested package version assets. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version that contains the requested package version assets. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required requesting assets from package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3793,7 +4573,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version that contains the requested package version assets. The package version component that specifies its \n       namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n           The namespace of a Maven package version is its <code>groupId</code>.\n         </p>\n            </li>\n            <li>\n               <p>\n           The namespace of an npm package version is its <code>scope</code>.\n         </p>\n            </li>\n            <li>\n               <p>\n           Python and NuGet package versions do not contain a corresponding component, package versions \n           of those formats do not have a namespace.\n         </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package version that contains the requested package version assets. The package component that specifies its \n       namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "package": {
@@ -3902,7 +4682,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version with the requested dependencies. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version with the requested dependencies. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when listing dependencies from package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -3946,7 +4726,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version that contains the returned dependencies. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package version that contains the returned dependencies. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "package": {
@@ -4070,7 +4850,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package that contains the requested package versions. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package that contains the requested package versions. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <note>\n            <p>The namespace is required when deleting package versions of the following formats:</p>\n            <ul>\n               <li>\n                  <p>Maven</p>\n               </li>\n               <li>\n                  <p>Swift</p>\n               </li>\n               <li>\n                  <p>generic</p>\n               </li>\n            </ul>\n         </note>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -4140,7 +4920,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package that contains the requested package versions. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package that contains the requested package versions. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "package": {
@@ -4251,7 +5031,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called <code>--namespace</code> and not <code>--namespace-prefix</code>, it has prefix-matching behavior.</p>\n         <p>Each package format uses namespace as follows:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace prefix used to filter requested packages. \n      Only packages with a namespace that starts with the provided string value are returned. \n      Note that although this option is called <code>--namespace</code> and not <code>--namespace-prefix</code>, it has prefix-matching behavior.</p>\n         <p>Each package format uses namespace as follows:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -4530,6 +5310,111 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codeartifact#ListSubPackageGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#ListSubPackageGroupsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#ListSubPackageGroupsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of direct children of the specified package group.</p>\n         <p>For information package group hierarchy, see \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html\">Package group \n        definition syntax and matching behavior</a> in the <i>CodeArtifact User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/package-groups/sub-groups",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "packageGroups",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#ListSubPackageGroupsRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain which contains the package group from which to list sub package groups.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pattern of the package group from which to list sub package groups.\n    </p>",
+                        "smithy.api#httpQuery": "package-group",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.codeartifact#ListPackageGroupsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The maximum number of results to return per page.\n       </p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codeartifact#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#ListSubPackageGroupsResult": {
+            "type": "structure",
+            "members": {
+                "packageGroups": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of sub package groups for the requested package group.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codeartifact#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        If there are additional results, this is the token for the next set of results.\n       </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codeartifact#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -4600,13 +5485,22 @@
         "com.amazonaws.codeartifact#LongOptional": {
             "type": "long"
         },
+        "com.amazonaws.codeartifact#OriginRestrictions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictionType"
+            },
+            "value": {
+                "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictionMode"
+            }
+        },
         "com.amazonaws.codeartifact#PackageDependency": {
             "type": "structure",
             "members": {
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package that this package depends on. The package component that specifies its \n       namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n           The namespace of a Maven package is its <code>groupId</code>.\n         </p>\n            </li>\n            <li>\n               <p>\n           The namespace of an npm package is its <code>scope</code>.\n         </p>\n            </li>\n            <li>\n               <p>\n           Python and NuGet packages do not contain a corresponding component, packages \n           of those formats do not have a namespace.\n         </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package that this package depends on. The package component that specifies its \n       namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "package": {
@@ -4650,7 +5544,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "name": {
@@ -4709,6 +5603,371 @@
                         "smithy.api#enumValue": "swift"
                     }
                 }
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupAllowedRepository": {
+            "type": "structure",
+            "members": {
+                "repositoryName": {
+                    "target": "com.amazonaws.codeartifact#RepositoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the allowed repository.\n    </p>"
+                    }
+                },
+                "originRestrictionType": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin configuration restriction type of the allowed repository.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Details about an allowed repository for a package group, including its name and origin configuration.\n    </p>"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codeartifact#PackageGroupAllowedRepository"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryUpdate": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryUpdateType"
+            },
+            "value": {
+                "target": "com.amazonaws.codeartifact#RepositoryNameList"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryUpdateType": {
+            "type": "enum",
+            "members": {
+                "ADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDED"
+                    }
+                },
+                "REMOVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryUpdates": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictionType"
+            },
+            "value": {
+                "target": "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryUpdate"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupAssociationType": {
+            "type": "enum",
+            "members": {
+                "STRONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRONG"
+                    }
+                },
+                "WEAK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEAK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupContactInfo": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupDescription": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.codeartifact#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN of the package group.\n    </p>"
+                    }
+                },
+                "pattern": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pattern of the package group. The pattern determines which packages are associated with the package group.\n    </p>"
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain that contains the package group.\n    </p>"
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.codeartifact#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that represents the date and time the package group was created.</p>"
+                    }
+                },
+                "contactInfo": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupContactInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The contact information of the package group.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.codeartifact#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the package group.\n    </p>"
+                    }
+                },
+                "originConfiguration": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupOriginConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package group origin configuration that determines how package versions can enter repositories.</p>"
+                    }
+                },
+                "parent": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The direct parent package group of the package group.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The description of the package group.\n    </p>"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupOriginConfiguration": {
+            "type": "structure",
+            "members": {
+                "restrictions": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin configuration settings that determine how package versions can enter repositories.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The package group origin configuration that determines how package versions can enter repositories.</p>"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupOriginRestriction": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package group origin restriction setting. If the value of <code>mode</code> is <code>ALLOW</code>, \n      <code>ALLOW_SPECIFIC_REPOSITORIES</code>, or <code>BLOCK</code>, then the value of <code>effectiveMode</code> \n    is the same. Otherwise, when the value is <code>INHERIT</code>, then the value of <code>effectiveMode</code> is the value of \n    <code>mode</code> of the first parent group which does not have a value of <code>INHERIT</code>.</p>"
+                    }
+                },
+                "effectiveMode": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective package group origin restriction setting. If the value of <code>mode</code> is <code>ALLOW</code>, \n      <code>ALLOW_SPECIFIC_REPOSITORIES</code>, or <code>BLOCK</code>, then the value of <code>effectiveMode</code> \n      is the same. Otherwise, when the value of <code>mode</code> is <code>INHERIT</code>, then the value of <code>effectiveMode</code> is the value of \n      <code>mode</code> of the first parent group which does not have a value of <code>INHERIT</code>.</p>"
+                    }
+                },
+                "inheritedFrom": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parent package group that the package group origin restrictions are inherited from.</p>"
+                    }
+                },
+                "repositoriesCount": {
+                    "target": "com.amazonaws.codeartifact#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of repositories in the allowed repository list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the configured restrictions of the origin controls of a package group.</p>"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupOriginRestrictionMode": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "ALLOW_SPECIFIC_REPOSITORIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW_SPECIFIC_REPOSITORIES"
+                    }
+                },
+                "BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLOCK"
+                    }
+                },
+                "INHERIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERIT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupOriginRestrictionType": {
+            "type": "enum",
+            "members": {
+                "EXTERNAL_UPSTREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL_UPSTREAM"
+                    }
+                },
+                "INTERNAL_UPSTREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_UPSTREAM"
+                    }
+                },
+                "PUBLISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISH"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupOriginRestrictions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.codeartifact#PackageGroupOriginRestrictionType"
+            },
+            "value": {
+                "target": "com.amazonaws.codeartifact#PackageGroupOriginRestriction"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 520
+                },
+                "smithy.api#pattern": "^[^\\p{C}\\p{IsWhitespace}]+$"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupPatternPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 520
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupReference": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.codeartifact#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN of the package group.\n    </p>"
+                    }
+                },
+                "pattern": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pattern of the package group. The pattern determines which packages are associated with the package group, and is \n      also the identifier of the package group.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the identifiers of a package group.</p>"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.codeartifact#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN of the package group.\n    </p>"
+                    }
+                },
+                "pattern": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pattern of the package group. The pattern determines which packages are associated with the package group.\n    </p>"
+                    }
+                },
+                "domainName": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The domain that contains the package group.\n    </p>"
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.codeartifact#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that represents the date and time the repository was created.</p>"
+                    }
+                },
+                "contactInfo": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupContactInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The contact information of the package group.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.codeartifact#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the package group.\n    </p>"
+                    }
+                },
+                "originConfiguration": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupOriginConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the package origin configuration of a package group.</p>"
+                    }
+                },
+                "parent": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The direct parent package group of the package group.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a package group.</p>"
+            }
+        },
+        "com.amazonaws.codeartifact#PackageGroupSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codeartifact#PackageGroupSummary"
             }
         },
         "com.amazonaws.codeartifact#PackageName": {
@@ -4779,7 +6038,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "package": {
@@ -4827,7 +6086,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The namespace of the package version. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>"
                     }
                 },
                 "packageName": {
@@ -5199,7 +6458,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new package version containing one or more assets (or files).</p>\n         <p>The <code>unfinished</code> flag can be used to keep the package version in the\n        <code>Unfinished</code> state until all of its assets have been uploaded (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status\">Package version status</a> in the <i>CodeArtifact user guide</i>). To set\n      the package version’s status to <code>Published</code>, omit the <code>unfinished</code> flag\n      when uploading the final asset, or set the status using <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html\">UpdatePackageVersionStatus</a>. Once a package version’s status is set to\n        <code>Published</code>, it cannot change back to <code>Unfinished</code>.</p>\n         <note>\n            <p>Only generic packages can be published using this API. For more information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html\">Using generic\n          packages</a> in the <i>CodeArtifact User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a new package version containing one or more assets (or files).</p>\n         <p>The <code>unfinished</code> flag can be used to keep the package version in the\n      <code>Unfinished</code> state until all of its assets have been uploaded (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status\">Package version status</a> in the <i>CodeArtifact user guide</i>). To set\n      the package version’s status to <code>Published</code>, omit the <code>unfinished</code> flag\n      when uploading the final asset, or set the status using <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html\">UpdatePackageVersionStatus</a>. Once a package version’s status is set to\n      <code>Published</code>, it cannot change back to <code>Unfinished</code>.</p>\n         <note>\n            <p>Only generic packages can be published using this API. For more information, see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html\">Using generic\n      packages</a> in the <i>CodeArtifact User Guide</i>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/package/version/publish",
@@ -5275,7 +6534,7 @@
                 "assetName": {
                     "target": "com.amazonaws.codeartifact#AssetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the asset to publish. Asset names can include Unicode letters and numbers, and\n      the following special characters: <code>~ ! @ ^ & ( ) - ` _ + [ ] { } ; , .\n      `</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the asset to publish. Asset names can include Unicode letters and numbers, and\n      the following special characters: <code>~ ! @ ^ & ( ) - ` _ + [ ] { } ; , .\n        `</code>\n         </p>",
                         "smithy.api#httpQuery": "asset",
                         "smithy.api#required": {}
                     }
@@ -5283,7 +6542,7 @@
                 "assetSHA256": {
                     "target": "com.amazonaws.codeartifact#SHA256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SHA256 hash of the <code>assetContent</code> to publish. This value must be calculated\n      by the caller and provided with the request (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages\">Publishing a generic package</a> in the <i>CodeArtifact User\n        Guide</i>).</p>\n         <p>This value is used as an integrity check to verify that the <code>assetContent</code> has\n      not changed after it was originally sent.</p>",
+                        "smithy.api#documentation": "<p>The SHA256 hash of the <code>assetContent</code> to publish. This value must be calculated\n      by the caller and provided with the request (see <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages\">Publishing a generic package</a> in the <i>CodeArtifact User\n          Guide</i>).</p>\n         <p>This value is used as an integrity check to verify that the <code>assetContent</code> has\n      not changed after it was originally sent.</p>",
                         "smithy.api#httpHeader": "x-amz-content-sha256",
                         "smithy.api#required": {}
                     }
@@ -5291,7 +6550,7 @@
                 "unfinished": {
                     "target": "com.amazonaws.codeartifact#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the package version should remain in the <code>unfinished</code>\n      state. If omitted, the package version status will be set to <code>Published</code> (see\n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status\">Package version status</a> in the <i>CodeArtifact User Guide</i>).</p>\n         <p>Valid values: <code>unfinished</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies whether the package version should remain in the <code>unfinished</code>\n      state. If omitted, the package version status will be set to <code>Published</code> (see\n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status\">Package version status</a> in the <i>CodeArtifact User Guide</i>).</p>\n         <p>Valid values: <code>unfinished</code>\n         </p>",
                         "smithy.api#httpQuery": "unfinished"
                     }
                 }
@@ -5509,7 +6768,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package to be updated. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet packages do not contain a corresponding component, packages \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package to be updated. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
@@ -5747,6 +7006,12 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9._\\-]{1,99}$"
+            }
+        },
+        "com.amazonaws.codeartifact#RepositoryNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codeartifact#RepositoryName"
             }
         },
         "com.amazonaws.codeartifact#RepositorySummary": {
@@ -6193,6 +7458,207 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.codeartifact#UpdatePackageGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#UpdatePackageGroupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#UpdatePackageGroupResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a package group. This API cannot be used to update a package group's origin configuration or pattern. To update a \n      package group's origin configuration, use <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageGroupOriginConfiguration.html\">UpdatePackageGroupOriginConfiguration</a>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/package-group",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.codeartifact#UpdatePackageGroupOriginConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codeartifact#UpdatePackageGroupOriginConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codeartifact#UpdatePackageGroupOriginConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codeartifact#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codeartifact#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the package origin configuration for a package group.</p>\n         <p>The package origin configuration determines how new versions of a package can be added to a repository. You can allow or block direct \n      publishing of new package versions, or ingestion and retaining of new package versions from an external connection or upstream source. \n      For more information about package group origin controls and configuration, see \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-origin-controls.html\">Package group origin controls</a> \n      in the <i>CodeArtifact User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/package-group-origin-configuration",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.codeartifact#UpdatePackageGroupOriginConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain which contains the package group for which to update the origin configuration.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pattern of the package group for which to update the origin configuration.\n    </p>",
+                        "smithy.api#httpQuery": "package-group",
+                        "smithy.api#required": {}
+                    }
+                },
+                "restrictions": {
+                    "target": "com.amazonaws.codeartifact#OriginRestrictions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The origin configuration settings that determine how package versions can enter repositories.\n      </p>"
+                    }
+                },
+                "addAllowedRepositories": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository name and restrictions to add to the allowed repository list of the specified package group.</p>"
+                    }
+                },
+                "removeAllowedRepositories": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The repository name and restrictions to remove from the allowed repository list of the specified package group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#UpdatePackageGroupOriginConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The package group and information about it after processing the request.\n    </p>"
+                    }
+                },
+                "allowedRepositoryUpdates": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupAllowedRepositoryUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the updated allowed repositories after processing the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codeartifact#UpdatePackageGroupRequest": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.codeartifact#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the domain which contains the package group to be updated.\n    </p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {}
+                    }
+                },
+                "domainOwner": {
+                    "target": "com.amazonaws.codeartifact#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The 12-digit account number of the Amazon Web Services account that owns the domain. It does not include \n        dashes or spaces.\n      </p>",
+                        "smithy.api#httpQuery": "domain-owner"
+                    }
+                },
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupPattern",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The pattern of the package group to be updated.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contactInfo": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupContactInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Contact information which you want to update the requested package group with.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.codeartifact#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description you want to update the requested package group with.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codeartifact#UpdatePackageGroupResult": {
+            "type": "structure",
+            "members": {
+                "packageGroup": {
+                    "target": "com.amazonaws.codeartifact#PackageGroupDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The package group and information about it after the request has been processed.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.codeartifact#UpdatePackageVersionsStatus": {
             "type": "operation",
             "input": {
@@ -6267,7 +7733,7 @@
                 "namespace": {
                     "target": "com.amazonaws.codeartifact#PackageNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the package version to be updated. The package version component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n            <li>\n               <p> The namespace of a generic package is its <code>namespace</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The namespace of the package version to be updated. The package component that specifies its \n      namespace depends on its type. For example:</p>\n         <ul>\n            <li>\n               <p>\n          The namespace of a Maven package version is its <code>groupId</code>.\n        </p>\n            </li>\n            <li>\n               <p>\n          The namespace of an npm or Swift package version is its <code>scope</code>.\n        </p>\n            </li>\n            <li>\n               <p>The namespace of a generic package is its <code>namespace</code>.</p>\n            </li>\n            <li>\n               <p>\n          Python and NuGet package versions do not contain a corresponding component, package versions \n          of those formats do not have a namespace.\n        </p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "namespace"
                     }
                 },
