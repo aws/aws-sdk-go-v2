@@ -69,13 +69,18 @@ type GetPackageVersionAssetInput struct {
 	DomainOwner *string
 
 	// The namespace of the package version with the requested asset file. The package
-	// version component that specifies its namespace depends on its type. For example:
+	// component that specifies its namespace depends on its type. For example: The
+	// namespace is required when requesting assets from package versions of the
+	// following formats:
+	//   - Maven
+	//   - Swift
+	//   - generic
 	//
 	//   - The namespace of a Maven package version is its groupId .
-	//   - The namespace of an npm package version is its scope .
+	//   - The namespace of an npm or Swift package version is its scope .
+	//   - The namespace of a generic package is its namespace .
 	//   - Python and NuGet package versions do not contain a corresponding component,
 	//   package versions of those formats do not have a namespace.
-	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The name of the package version revision that contains the requested asset.

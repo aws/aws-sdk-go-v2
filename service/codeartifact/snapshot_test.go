@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePackageGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRepository(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRepository(context.Background(), nil, func(o *Options) {
@@ -139,6 +151,18 @@ func TestCheckSnapshot_DeletePackage(t *testing.T) {
 	_, err := svc.DeletePackage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePackage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePackageGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,6 +230,18 @@ func TestCheckSnapshot_DescribePackage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribePackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribePackageGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribePackageVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribePackageVersion(context.Background(), nil, func(o *Options) {
@@ -247,6 +283,18 @@ func TestCheckSnapshot_DisposePackageVersions(t *testing.T) {
 	_, err := svc.DisposePackageVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisposePackageVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAssociatedPackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssociatedPackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAssociatedPackageGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -326,11 +374,47 @@ func TestCheckSnapshot_GetRepositoryPermissionsPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAllowedRepositoriesForGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAllowedRepositoriesForGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAllowedRepositoriesForGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAssociatedPackages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssociatedPackages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssociatedPackages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPackageGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPackageGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPackageGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -403,6 +487,18 @@ func TestCheckSnapshot_ListRepositoriesInDomain(t *testing.T) {
 	_, err := svc.ListRepositoriesInDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListRepositoriesInDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSubPackageGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSubPackageGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSubPackageGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -494,6 +590,30 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdatePackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePackageGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdatePackageGroupOriginConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePackageGroupOriginConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePackageGroupOriginConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdatePackageVersionsStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePackageVersionsStatus(context.Background(), nil, func(o *Options) {
@@ -553,6 +673,18 @@ func TestUpdateSnapshot_CreateDomain(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePackageGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRepository(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRepository(context.Background(), nil, func(o *Options) {
@@ -594,6 +726,18 @@ func TestUpdateSnapshot_DeletePackage(t *testing.T) {
 	_, err := svc.DeletePackage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePackage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePackageGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -661,6 +805,18 @@ func TestUpdateSnapshot_DescribePackage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribePackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribePackageGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribePackageVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribePackageVersion(context.Background(), nil, func(o *Options) {
@@ -702,6 +858,18 @@ func TestUpdateSnapshot_DisposePackageVersions(t *testing.T) {
 	_, err := svc.DisposePackageVersions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisposePackageVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAssociatedPackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssociatedPackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAssociatedPackageGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,11 +949,47 @@ func TestUpdateSnapshot_GetRepositoryPermissionsPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAllowedRepositoriesForGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAllowedRepositoriesForGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAllowedRepositoriesForGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAssociatedPackages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssociatedPackages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssociatedPackages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPackageGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPackageGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPackageGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -858,6 +1062,18 @@ func TestUpdateSnapshot_ListRepositoriesInDomain(t *testing.T) {
 	_, err := svc.ListRepositoriesInDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListRepositoriesInDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSubPackageGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSubPackageGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSubPackageGroups")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -942,6 +1158,30 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePackageGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePackageGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePackageGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdatePackageGroupOriginConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePackageGroupOriginConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePackageGroupOriginConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

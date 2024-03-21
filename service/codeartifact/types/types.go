@@ -24,6 +24,36 @@ type AssetSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A package associated with a package group.
+type AssociatedPackage struct {
+
+	// Describes the strength of the association between the package and package
+	// group. A strong match can be thought of as an exact match, and a weak match can
+	// be thought of as a variation match, for example, the package name matches a
+	// variation of the package group pattern. For more information about package group
+	// pattern matching, including strong and weak matches, see Package group
+	// definition syntax and matching behavior (https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html)
+	// in the CodeArtifact User Guide.
+	AssociationType PackageGroupAssociationType
+
+	// A format that specifies the type of the associated package.
+	Format PackageFormat
+
+	// The namespace of the associated package. The package component that specifies
+	// its namespace depends on its type. For example:
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm or Swift package version is its scope .
+	//   - The namespace of a generic package is its namespace .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
+	Namespace *string
+
+	// The name of the associated package.
+	Package *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a domain. A domain is a container for repositories. When you
 // create a domain, it is empty until you add one or more repositories.
 type DomainDescription struct {
@@ -64,7 +94,10 @@ type DomainDescription struct {
 // it was published to. For packages ingested from an external repository, the
 // entry point is the external connection that it was ingested from. An external
 // connection is a CodeArtifact repository that is connected to an external
-// repository such as the npm registry or NuGet gallery.
+// repository such as the npm registry or NuGet gallery. If a package version
+// exists in a repository and is updated, for example if a package of the same
+// version is added with additional assets, the package version's DomainEntryPoint
+// will not change from the original package version's value.
 type DomainEntryPoint struct {
 
 	// The name of the external connection that a package was ingested from.
@@ -131,10 +164,11 @@ type PackageDependency struct {
 
 	// The namespace of the package that this package depends on. The package
 	// component that specifies its namespace depends on its type. For example:
-	//   - The namespace of a Maven package is its groupId .
-	//   - The namespace of an npm package is its scope .
-	//   - Python and NuGet packages do not contain a corresponding component,
-	//   packages of those formats do not have a namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm or Swift package version is its scope .
+	//   - The namespace of a generic package is its namespace .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
 	Namespace *string
 
 	// The name of the package that this package depends on.
@@ -159,15 +193,152 @@ type PackageDescription struct {
 
 	// The namespace of the package. The package component that specifies its
 	// namespace depends on its type. For example:
-	//   - The namespace of a Maven package is its groupId .
-	//   - The namespace of an npm package is its scope .
-	//   - Python and NuGet packages do not contain a corresponding component,
-	//   packages of those formats do not have a namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm or Swift package version is its scope .
 	//   - The namespace of a generic package is its namespace .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
 	Namespace *string
 
 	// The package origin configuration for the package.
 	OriginConfiguration *PackageOriginConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Details about an allowed repository for a package group, including its name and
+// origin configuration.
+type PackageGroupAllowedRepository struct {
+
+	// The origin configuration restriction type of the allowed repository.
+	OriginRestrictionType PackageGroupOriginRestrictionType
+
+	// The name of the allowed repository.
+	RepositoryName *string
+
+	noSmithyDocumentSerde
+}
+
+// The description of the package group.
+type PackageGroupDescription struct {
+
+	// The ARN of the package group.
+	Arn *string
+
+	// The contact information of the package group.
+	ContactInfo *string
+
+	// A timestamp that represents the date and time the package group was created.
+	CreatedTime *time.Time
+
+	// The description of the package group.
+	Description *string
+
+	// The name of the domain that contains the package group.
+	DomainName *string
+
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
+	DomainOwner *string
+
+	// The package group origin configuration that determines how package versions can
+	// enter repositories.
+	OriginConfiguration *PackageGroupOriginConfiguration
+
+	// The direct parent package group of the package group.
+	Parent *PackageGroupReference
+
+	// The pattern of the package group. The pattern determines which packages are
+	// associated with the package group.
+	Pattern *string
+
+	noSmithyDocumentSerde
+}
+
+// The package group origin configuration that determines how package versions can
+// enter repositories.
+type PackageGroupOriginConfiguration struct {
+
+	// The origin configuration settings that determine how package versions can enter
+	// repositories.
+	Restrictions map[string]PackageGroupOriginRestriction
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the configured restrictions of the origin controls
+// of a package group.
+type PackageGroupOriginRestriction struct {
+
+	// The effective package group origin restriction setting. If the value of mode is
+	// ALLOW , ALLOW_SPECIFIC_REPOSITORIES , or BLOCK , then the value of effectiveMode
+	// is the same. Otherwise, when the value of mode is INHERIT , then the value of
+	// effectiveMode is the value of mode of the first parent group which does not
+	// have a value of INHERIT .
+	EffectiveMode PackageGroupOriginRestrictionMode
+
+	// The parent package group that the package group origin restrictions are
+	// inherited from.
+	InheritedFrom *PackageGroupReference
+
+	// The package group origin restriction setting. If the value of mode is ALLOW ,
+	// ALLOW_SPECIFIC_REPOSITORIES , or BLOCK , then the value of effectiveMode is the
+	// same. Otherwise, when the value is INHERIT , then the value of effectiveMode is
+	// the value of mode of the first parent group which does not have a value of
+	// INHERIT .
+	Mode PackageGroupOriginRestrictionMode
+
+	// The number of repositories in the allowed repository list.
+	RepositoriesCount *int64
+
+	noSmithyDocumentSerde
+}
+
+// Information about the identifiers of a package group.
+type PackageGroupReference struct {
+
+	// The ARN of the package group.
+	Arn *string
+
+	// The pattern of the package group. The pattern determines which packages are
+	// associated with the package group, and is also the identifier of the package
+	// group.
+	Pattern *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a package group.
+type PackageGroupSummary struct {
+
+	// The ARN of the package group.
+	Arn *string
+
+	// The contact information of the package group.
+	ContactInfo *string
+
+	// A timestamp that represents the date and time the repository was created.
+	CreatedTime *time.Time
+
+	// The description of the package group.
+	Description *string
+
+	// The domain that contains the package group.
+	DomainName *string
+
+	// The 12-digit account number of the Amazon Web Services account that owns the
+	// domain. It does not include dashes or spaces.
+	DomainOwner *string
+
+	// Details about the package origin configuration of a package group.
+	OriginConfiguration *PackageGroupOriginConfiguration
+
+	// The direct parent package group of the package group.
+	Parent *PackageGroupReference
+
+	// The pattern of the package group. The pattern determines which packages are
+	// associated with the package group.
+	Pattern *string
 
 	noSmithyDocumentSerde
 }
@@ -210,11 +381,11 @@ type PackageSummary struct {
 
 	// The namespace of the package. The package component that specifies its
 	// namespace depends on its type. For example:
-	//   - The namespace of a Maven package is its groupId .
-	//   - The namespace of an npm package is its scope .
-	//   - Python and NuGet packages do not contain a corresponding component,
-	//   packages of those formats do not have a namespace.
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm or Swift package version is its scope .
 	//   - The namespace of a generic package is its namespace .
+	//   - Python and NuGet package versions do not contain a corresponding component,
+	//   package versions of those formats do not have a namespace.
 	Namespace *string
 
 	// A PackageOriginConfiguration (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html)
@@ -246,13 +417,13 @@ type PackageVersionDescription struct {
 	// Information about licenses associated with the package version.
 	Licenses []LicenseInfo
 
-	// The namespace of the package version. The package version component that
-	// specifies its namespace depends on its type. For example:
+	// The namespace of the package version. The package component that specifies its
+	// namespace depends on its type. For example:
 	//   - The namespace of a Maven package version is its groupId .
-	//   - The namespace of an npm package version is its scope .
+	//   - The namespace of an npm or Swift package version is its scope .
+	//   - The namespace of a generic package is its namespace .
 	//   - Python and NuGet package versions do not contain a corresponding component,
 	//   package versions of those formats do not have a namespace.
-	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// A PackageVersionOrigin (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionOrigin.html)

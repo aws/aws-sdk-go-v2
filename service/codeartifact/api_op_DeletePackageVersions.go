@@ -67,14 +67,18 @@ type DeletePackageVersionsInput struct {
 	// The expected status of the package version to delete.
 	ExpectedStatus types.PackageVersionStatus
 
-	// The namespace of the package versions to be deleted. The package version
-	// component that specifies its namespace depends on its type. For example:
-	//   - The namespace of a Maven package version is its groupId . The namespace is
-	//   required when deleting Maven package versions.
-	//   - The namespace of an npm package version is its scope .
+	// The namespace of the package versions to be deleted. The package component that
+	// specifies its namespace depends on its type. For example: The namespace is
+	// required when deleting package versions of the following formats:
+	//   - Maven
+	//   - Swift
+	//   - generic
+	//
+	//   - The namespace of a Maven package version is its groupId .
+	//   - The namespace of an npm or Swift package version is its scope .
+	//   - The namespace of a generic package is its namespace .
 	//   - Python and NuGet package versions do not contain a corresponding component,
 	//   package versions of those formats do not have a namespace.
-	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	noSmithyDocumentSerde

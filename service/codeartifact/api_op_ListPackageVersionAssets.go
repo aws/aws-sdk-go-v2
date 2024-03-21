@@ -65,13 +65,18 @@ type ListPackageVersionAssetsInput struct {
 	MaxResults *int32
 
 	// The namespace of the package version that contains the requested package
-	// version assets. The package version component that specifies its namespace
-	// depends on its type. For example:
+	// version assets. The package component that specifies its namespace depends on
+	// its type. For example: The namespace is required requesting assets from package
+	// versions of the following formats:
+	//   - Maven
+	//   - Swift
+	//   - generic
+	//
 	//   - The namespace of a Maven package version is its groupId .
-	//   - The namespace of an npm package version is its scope .
+	//   - The namespace of an npm or Swift package version is its scope .
+	//   - The namespace of a generic package is its namespace .
 	//   - Python and NuGet package versions do not contain a corresponding component,
 	//   package versions of those formats do not have a namespace.
-	//   - The namespace of a generic package is its namespace .
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -91,10 +96,11 @@ type ListPackageVersionAssetsOutput struct {
 	Format types.PackageFormat
 
 	// The namespace of the package version that contains the requested package
-	// version assets. The package version component that specifies its namespace
-	// depends on its type. For example:
+	// version assets. The package component that specifies its namespace depends on
+	// its type. For example:
 	//   - The namespace of a Maven package version is its groupId .
-	//   - The namespace of an npm package version is its scope .
+	//   - The namespace of an npm or Swift package version is its scope .
+	//   - The namespace of a generic package is its namespace .
 	//   - Python and NuGet package versions do not contain a corresponding component,
 	//   package versions of those formats do not have a namespace.
 	Namespace *string

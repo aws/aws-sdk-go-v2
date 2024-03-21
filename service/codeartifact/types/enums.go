@@ -120,6 +120,87 @@ func (PackageFormat) Values() []PackageFormat {
 	}
 }
 
+type PackageGroupAllowedRepositoryUpdateType string
+
+// Enum values for PackageGroupAllowedRepositoryUpdateType
+const (
+	PackageGroupAllowedRepositoryUpdateTypeAdded   PackageGroupAllowedRepositoryUpdateType = "ADDED"
+	PackageGroupAllowedRepositoryUpdateTypeRemoved PackageGroupAllowedRepositoryUpdateType = "REMOVED"
+)
+
+// Values returns all known values for PackageGroupAllowedRepositoryUpdateType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PackageGroupAllowedRepositoryUpdateType) Values() []PackageGroupAllowedRepositoryUpdateType {
+	return []PackageGroupAllowedRepositoryUpdateType{
+		"ADDED",
+		"REMOVED",
+	}
+}
+
+type PackageGroupAssociationType string
+
+// Enum values for PackageGroupAssociationType
+const (
+	PackageGroupAssociationTypeStrong PackageGroupAssociationType = "STRONG"
+	PackageGroupAssociationTypeWeak   PackageGroupAssociationType = "WEAK"
+)
+
+// Values returns all known values for PackageGroupAssociationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PackageGroupAssociationType) Values() []PackageGroupAssociationType {
+	return []PackageGroupAssociationType{
+		"STRONG",
+		"WEAK",
+	}
+}
+
+type PackageGroupOriginRestrictionMode string
+
+// Enum values for PackageGroupOriginRestrictionMode
+const (
+	PackageGroupOriginRestrictionModeAllow                     PackageGroupOriginRestrictionMode = "ALLOW"
+	PackageGroupOriginRestrictionModeAllowSpecificRepositories PackageGroupOriginRestrictionMode = "ALLOW_SPECIFIC_REPOSITORIES"
+	PackageGroupOriginRestrictionModeBlock                     PackageGroupOriginRestrictionMode = "BLOCK"
+	PackageGroupOriginRestrictionModeInherit                   PackageGroupOriginRestrictionMode = "INHERIT"
+)
+
+// Values returns all known values for PackageGroupOriginRestrictionMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PackageGroupOriginRestrictionMode) Values() []PackageGroupOriginRestrictionMode {
+	return []PackageGroupOriginRestrictionMode{
+		"ALLOW",
+		"ALLOW_SPECIFIC_REPOSITORIES",
+		"BLOCK",
+		"INHERIT",
+	}
+}
+
+type PackageGroupOriginRestrictionType string
+
+// Enum values for PackageGroupOriginRestrictionType
+const (
+	PackageGroupOriginRestrictionTypeExternalUpstream PackageGroupOriginRestrictionType = "EXTERNAL_UPSTREAM"
+	PackageGroupOriginRestrictionTypeInternalUpstream PackageGroupOriginRestrictionType = "INTERNAL_UPSTREAM"
+	PackageGroupOriginRestrictionTypePublish          PackageGroupOriginRestrictionType = "PUBLISH"
+)
+
+// Values returns all known values for PackageGroupOriginRestrictionType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PackageGroupOriginRestrictionType) Values() []PackageGroupOriginRestrictionType {
+	return []PackageGroupOriginRestrictionType{
+		"EXTERNAL_UPSTREAM",
+		"INTERNAL_UPSTREAM",
+		"PUBLISH",
+	}
+}
+
 type PackageVersionErrorCode string
 
 // Enum values for PackageVersionErrorCode

@@ -11,72 +11,57 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a package and all associated package versions. A deleted package cannot
-// be restored. To delete one or more package versions, use the
-// DeletePackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html)
-// API.
-func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
+// Creates a package group. For more information about creating package groups,
+// including example CLI commands, see Create a package group (https://docs.aws.amazon.com/codeartifact/latest/ug/create-package-group.html)
+// in the CodeArtifact User Guide.
+func (c *Client) CreatePackageGroup(ctx context.Context, params *CreatePackageGroupInput, optFns ...func(*Options)) (*CreatePackageGroupOutput, error) {
 	if params == nil {
-		params = &DeletePackageInput{}
+		params = &CreatePackageGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePackage", params, optFns, c.addOperationDeletePackageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreatePackageGroup", params, optFns, c.addOperationCreatePackageGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeletePackageOutput)
+	out := result.(*CreatePackageGroupOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeletePackageInput struct {
+type CreatePackageGroupInput struct {
 
-	// The name of the domain that contains the package to delete.
+	// The name of the domain in which you want to create a package group.
 	//
 	// This member is required.
 	Domain *string
 
-	// The format of the requested package to delete.
+	// The pattern of the package group to create. The pattern is also the identifier
+	// of the package group.
 	//
 	// This member is required.
-	Format types.PackageFormat
+	PackageGroup *string
 
-	// The name of the package to delete.
-	//
-	// This member is required.
-	Package *string
+	// The contact information for the created package group.
+	ContactInfo *string
 
-	// The name of the repository that contains the package to delete.
-	//
-	// This member is required.
-	Repository *string
+	// A description of the package group.
+	Description *string
 
 	// The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The namespace of the package to delete. The package component that specifies
-	// its namespace depends on its type. For example: The namespace is required when
-	// deleting packages of the following formats:
-	//   - Maven
-	//   - Swift
-	//   - generic
-	//
-	//   - The namespace of a Maven package version is its groupId .
-	//   - The namespace of an npm or Swift package version is its scope .
-	//   - The namespace of a generic package is its namespace .
-	//   - Python and NuGet package versions do not contain a corresponding component,
-	//   package versions of those formats do not have a namespace.
-	Namespace *string
+	// One or more tag key-value pairs for the package group.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-type DeletePackageOutput struct {
+type CreatePackageGroupOutput struct {
 
-	// Details about a package, including its format, namespace, and name.
-	DeletedPackage *types.PackageSummary
+	// Information about the created package group after processing the request.
+	PackageGroup *types.PackageGroupDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,19 +69,19 @@ type DeletePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationCreatePackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackage{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackageGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePackage{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePackageGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePackage"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePackageGroup"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -139,10 +124,10 @@ func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeletePackageValidationMiddleware(stack); err != nil {
+	if err = addOpCreatePackageGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePackage(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePackageGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -163,10 +148,10 @@ func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeletePackage(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreatePackageGroup(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeletePackage",
+		OperationName: "CreatePackageGroup",
 	}
 }

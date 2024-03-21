@@ -11,54 +11,55 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a package and all associated package versions. A deleted package cannot
-// be restored. To delete one or more package versions, use the
-// DeletePackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html)
-// API.
-func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
+// Returns the most closely associated package group to the specified package.
+// This API does not require that the package exist in any repository in the
+// domain. As such, GetAssociatedPackageGroup can be used to see which package
+// group's origin configuration applies to a package before that package is in a
+// repository. This can be helpful to check if public packages are blocked without
+// ingesting them. For information package group association and matching, see
+// Package group definition syntax and matching behavior (https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html)
+// in the CodeArtifact User Guide.
+func (c *Client) GetAssociatedPackageGroup(ctx context.Context, params *GetAssociatedPackageGroupInput, optFns ...func(*Options)) (*GetAssociatedPackageGroupOutput, error) {
 	if params == nil {
-		params = &DeletePackageInput{}
+		params = &GetAssociatedPackageGroupInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeletePackage", params, optFns, c.addOperationDeletePackageMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAssociatedPackageGroup", params, optFns, c.addOperationGetAssociatedPackageGroupMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeletePackageOutput)
+	out := result.(*GetAssociatedPackageGroupOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeletePackageInput struct {
+type GetAssociatedPackageGroupInput struct {
 
-	// The name of the domain that contains the package to delete.
+	// The name of the domain that contains the package from which to get the
+	// associated package group.
 	//
 	// This member is required.
 	Domain *string
 
-	// The format of the requested package to delete.
+	// The format of the package from which to get the associated package group.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package to delete.
+	// The package from which to get the associated package group.
 	//
 	// This member is required.
 	Package *string
-
-	// The name of the repository that contains the package to delete.
-	//
-	// This member is required.
-	Repository *string
 
 	// The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The namespace of the package to delete. The package component that specifies
-	// its namespace depends on its type. For example: The namespace is required when
-	// deleting packages of the following formats:
+	// The namespace of the package from which to get the associated package group.
+	// The package component that specifies its namespace depends on its type. For
+	// example: The namespace is required when getting associated package groups from
+	// packages of the following formats:
 	//   - Maven
 	//   - Swift
 	//   - generic
@@ -73,10 +74,15 @@ type DeletePackageInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeletePackageOutput struct {
+type GetAssociatedPackageGroupOutput struct {
 
-	// Details about a package, including its format, namespace, and name.
-	DeletedPackage *types.PackageSummary
+	// Describes the strength of the association between the package and package
+	// group. A strong match is also known as an exact match, and a weak match is known
+	// as a relative match.
+	AssociationType types.PackageGroupAssociationType
+
+	// The package group that is associated with the requested package.
+	PackageGroup *types.PackageGroupDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,19 +90,19 @@ type DeletePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAssociatedPackageGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackage{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssociatedPackageGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePackage{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssociatedPackageGroup{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePackage"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssociatedPackageGroup"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -139,10 +145,10 @@ func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeletePackageValidationMiddleware(stack); err != nil {
+	if err = addOpGetAssociatedPackageGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePackage(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssociatedPackageGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -163,10 +169,10 @@ func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeletePackage(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetAssociatedPackageGroup(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeletePackage",
+		OperationName: "GetAssociatedPackageGroup",
 	}
 }

@@ -70,6 +70,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePackageGroup struct {
+}
+
+func (*validateOpCreatePackageGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePackageGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePackageGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePackageGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRepository struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpDeleteDomainPermissionsPolicy) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDomainPermissionsPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePackageGroup struct {
+}
+
+func (*validateOpDeletePackageGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePackageGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePackageGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePackageGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +270,26 @@ func (m *validateOpDescribeDomain) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribePackageGroup struct {
+}
+
+func (*validateOpDescribePackageGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePackageGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePackageGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePackageGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribePackage struct {
 }
 
@@ -325,6 +385,26 @@ func (m *validateOpDisposePackageVersions) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisposePackageVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAssociatedPackageGroup struct {
+}
+
+func (*validateOpGetAssociatedPackageGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAssociatedPackageGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssociatedPackageGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssociatedPackageGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +530,66 @@ func (m *validateOpGetRepositoryPermissionsPolicy) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAllowedRepositoriesForGroup struct {
+}
+
+func (*validateOpListAllowedRepositoriesForGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAllowedRepositoriesForGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAllowedRepositoriesForGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAllowedRepositoriesForGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssociatedPackages struct {
+}
+
+func (*validateOpListAssociatedPackages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssociatedPackages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssociatedPackagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssociatedPackagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPackageGroups struct {
+}
+
+func (*validateOpListPackageGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPackageGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPackageGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPackageGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPackages struct {
 }
 
@@ -545,6 +685,26 @@ func (m *validateOpListRepositoriesInDomain) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRepositoriesInDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSubPackageGroups struct {
+}
+
+func (*validateOpListSubPackageGroups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSubPackageGroups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSubPackageGroupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSubPackageGroupsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +850,46 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePackageGroup struct {
+}
+
+func (*validateOpUpdatePackageGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePackageGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePackageGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePackageGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePackageGroupOriginConfiguration struct {
+}
+
+func (*validateOpUpdatePackageGroupOriginConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePackageGroupOriginConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePackageGroupOriginConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePackageGroupOriginConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePackageVersionsStatus struct {
 }
 
@@ -742,6 +942,10 @@ func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
 
+func addOpCreatePackageGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePackageGroup{}, middleware.After)
+}
+
 func addOpCreateRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRepository{}, middleware.After)
 }
@@ -752,6 +956,10 @@ func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDomainPermissionsPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomainPermissionsPolicy{}, middleware.After)
+}
+
+func addOpDeletePackageGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePackageGroup{}, middleware.After)
 }
 
 func addOpDeletePackageValidationMiddleware(stack *middleware.Stack) error {
@@ -774,6 +982,10 @@ func addOpDescribeDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomain{}, middleware.After)
 }
 
+func addOpDescribePackageGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePackageGroup{}, middleware.After)
+}
+
 func addOpDescribePackageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePackage{}, middleware.After)
 }
@@ -792,6 +1004,10 @@ func addOpDisassociateExternalConnectionValidationMiddleware(stack *middleware.S
 
 func addOpDisposePackageVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisposePackageVersions{}, middleware.After)
+}
+
+func addOpGetAssociatedPackageGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAssociatedPackageGroup{}, middleware.After)
 }
 
 func addOpGetAuthorizationTokenValidationMiddleware(stack *middleware.Stack) error {
@@ -818,6 +1034,18 @@ func addOpGetRepositoryPermissionsPolicyValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpGetRepositoryPermissionsPolicy{}, middleware.After)
 }
 
+func addOpListAllowedRepositoriesForGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAllowedRepositoriesForGroup{}, middleware.After)
+}
+
+func addOpListAssociatedPackagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssociatedPackages{}, middleware.After)
+}
+
+func addOpListPackageGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPackageGroups{}, middleware.After)
+}
+
 func addOpListPackagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPackages{}, middleware.After)
 }
@@ -836,6 +1064,10 @@ func addOpListPackageVersionsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListRepositoriesInDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRepositoriesInDomain{}, middleware.After)
+}
+
+func addOpListSubPackageGroupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSubPackageGroups{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -864,6 +1096,14 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdatePackageGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePackageGroup{}, middleware.After)
+}
+
+func addOpUpdatePackageGroupOriginConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePackageGroupOriginConfiguration{}, middleware.After)
 }
 
 func addOpUpdatePackageVersionsStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -1027,6 +1267,29 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	}
 }
 
+func validateOpCreatePackageGroupInput(v *CreatePackageGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePackageGroupInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PackageGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageGroup"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRepositoryInput(v *CreateRepositoryInput) error {
 	if v == nil {
 		return nil
@@ -1077,6 +1340,24 @@ func validateOpDeleteDomainPermissionsPolicyInput(v *DeleteDomainPermissionsPoli
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainPermissionsPolicyInput"}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePackageGroupInput(v *DeletePackageGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePackageGroupInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PackageGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1179,6 +1460,24 @@ func validateOpDescribeDomainInput(v *DescribeDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainInput"}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePackageGroupInput(v *DescribePackageGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePackageGroupInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PackageGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1296,6 +1595,27 @@ func validateOpDisposePackageVersionsInput(v *DisposePackageVersionsInput) error
 	}
 	if v.Versions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Versions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAssociatedPackageGroupInput(v *GetAssociatedPackageGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssociatedPackageGroupInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Package == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Package"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1430,6 +1750,60 @@ func validateOpGetRepositoryPermissionsPolicyInput(v *GetRepositoryPermissionsPo
 	}
 }
 
+func validateOpListAllowedRepositoriesForGroupInput(v *ListAllowedRepositoriesForGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAllowedRepositoriesForGroupInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PackageGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageGroup"))
+	}
+	if len(v.OriginRestrictionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginRestrictionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssociatedPackagesInput(v *ListAssociatedPackagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssociatedPackagesInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PackageGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPackageGroupsInput(v *ListPackageGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPackageGroupsInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPackagesInput(v *ListPackagesInput) error {
 	if v == nil {
 		return nil
@@ -1533,6 +1907,24 @@ func validateOpListRepositoriesInDomainInput(v *ListRepositoriesInDomainInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "ListRepositoriesInDomainInput"}
 	if v.Domain == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSubPackageGroupsInput(v *ListSubPackageGroupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSubPackageGroupsInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PackageGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1694,6 +2086,42 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePackageGroupInput(v *UpdatePackageGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePackageGroupInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PackageGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePackageGroupOriginConfigurationInput(v *UpdatePackageGroupOriginConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePackageGroupOriginConfigurationInput"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PackageGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
