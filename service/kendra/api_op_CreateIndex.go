@@ -88,7 +88,8 @@ type CreateIndexInput struct {
 
 	// Gets users and groups from IAM Identity Center identity source. To configure
 	// this, see UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
-	// .
+	// . This is useful for user context filtering, where search results are filtered
+	// based on the user or their group access to documents.
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration.

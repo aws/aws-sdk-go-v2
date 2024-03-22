@@ -67886,6 +67886,15 @@ func awsRestjson1_deserializeDocumentVulnerability(v **types.Vulnerability, valu
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "LastKnownExploitAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastKnownExploitAt = ptr.String(jtv)
+			}
+
 		case "ReferenceUrls":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.ReferenceUrls, value); err != nil {
 				return err

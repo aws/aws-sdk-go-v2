@@ -42,7 +42,9 @@ type CreateProfileInput struct {
 	// This member is required.
 	RoleArns []string
 
-	// The number of seconds the vended session credentials are valid for.
+	// Used to determine how long sessions vended using this profile are valid for.
+	// See the Expiration section of the CreateSession API documentation (https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object)
+	// page for more details.
 	DurationSeconds *int32
 
 	// Specifies whether the profile is enabled.

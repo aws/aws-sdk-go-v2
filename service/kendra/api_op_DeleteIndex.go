@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Amazon Kendra index. An exception is not thrown if the
-// index is already being deleted. While the index is being deleted, the Status
-// field returned by a call to the DescribeIndex API is set to DELETING .
+// Deletes an Amazon Kendra index. An exception is not thrown if the index is
+// already being deleted. While the index is being deleted, the Status field
+// returned by a call to the DescribeIndex API is set to DELETING .
 func (c *Client) DeleteIndex(ctx context.Context, params *DeleteIndexInput, optFns ...func(*Options)) (*DeleteIndexOutput, error) {
 	if params == nil {
 		params = &DeleteIndexInput{}

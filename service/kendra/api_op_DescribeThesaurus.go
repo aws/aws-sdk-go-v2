@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about an existing Amazon Kendra thesaurus.
+// Gets information about an Amazon Kendra thesaurus.
 func (c *Client) DescribeThesaurus(ctx context.Context, params *DescribeThesaurusInput, optFns ...func(*Options)) (*DescribeThesaurusOutput, error) {
 	if params == nil {
 		params = &DescribeThesaurusInput{}

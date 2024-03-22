@@ -1,0 +1,8 @@
+{
+    "id": "bd7c57ee-7697-423b-ad21-405330bce773",
+    "type": "feature",
+    "description": "Add ResourceNotFoundException to ListPriceLists and GetPriceListFileUrl APIs",
+    "modules": [
+        "service/pricing"
+    ]
+}

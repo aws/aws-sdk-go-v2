@@ -168,7 +168,9 @@ type ProfileDetail struct {
 	// The Amazon Web Services account that created the profile.
 	CreatedBy *string
 
-	// The number of seconds the vended session credentials are valid for.
+	// Used to determine how long sessions vended using this profile are valid for.
+	// See the Expiration section of the CreateSession API documentation (https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object)
+	// page for more details.
 	DurationSeconds *int32
 
 	// Indicates whether the profile is enabled.

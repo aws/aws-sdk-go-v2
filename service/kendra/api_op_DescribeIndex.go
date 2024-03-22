@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about an existing Amazon Kendra index.
+// Gets information about an Amazon Kendra index.
 func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, optFns ...func(*Options)) (*DescribeIndexOutput, error) {
 	if params == nil {
 		params = &DescribeIndexInput{}
@@ -78,11 +78,11 @@ type DescribeIndexOutput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra
-	// permission to write to your Amazon Cloudwatch logs.
+	// permission to write to your Amazon CloudWatch logs.
 	RoleArn *string
 
-	// The identifier of the KMScustomer master key (CMK) that is used to encrypt your
-	// data. Amazon Kendra doesn't support asymmetric CMKs.
+	// The identifier of the KMS customer master key (CMK) that is used to encrypt
+	// your data. Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The current status of the index. When the value is ACTIVE , the index is ready
@@ -90,14 +90,15 @@ type DescribeIndexOutput struct {
 	// a message that explains why.
 	Status types.IndexStatus
 
-	// The Unix when the index was last updated.
+	// The Unix timestamp when the index was last updated.
 	UpdatedAt *time.Time
 
 	// The user context policy for the Amazon Kendra index.
 	UserContextPolicy types.UserContextPolicy
 
-	// Whether you have enabled the configuration for fetching access levels of groups
-	// and users from an IAM Identity Center identity source.
+	// Whether you have enabled IAM Identity Center identity source for your users and
+	// groups. This is useful for user context filtering, where search results are
+	// filtered based on the user or their group access to documents.
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration for the Amazon Kendra index.

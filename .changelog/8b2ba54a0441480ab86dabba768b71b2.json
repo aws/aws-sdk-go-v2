@@ -1,0 +1,8 @@
+{
+    "id": "8b2ba54a-0441-480a-b86d-abba768b71b2",
+    "type": "feature",
+    "description": "Documentation update, March 2024. Corrects some docs for Amazon Kendra.",
+    "modules": [
+        "service/kendra"
+    ]
+}

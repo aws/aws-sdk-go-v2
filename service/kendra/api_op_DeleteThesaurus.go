@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing Amazon Kendra thesaurus.
+// Deletes an Amazon Kendra thesaurus.
 func (c *Client) DeleteThesaurus(ctx context.Context, params *DeleteThesaurusInput, optFns ...func(*Options)) (*DeleteThesaurusOutput, error) {
 	if params == nil {
 		params = &DeleteThesaurusInput{}

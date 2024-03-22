@@ -1,0 +1,8 @@
+{
+    "id": "bea999c0-1c7b-4f36-ae5c-1e5dffe2ba64",
+    "type": "feature",
+    "description": "This release relaxes constraints on the durationSeconds request parameter for the *Profile APIs that support it. This parameter can now take on values that go up to 43200.",
+    "modules": [
+        "service/rolesanywhere"
+    ]
+}

@@ -60,7 +60,10 @@ type RetrieveInput struct {
 	// The input query text to retrieve relevant passages for the search. Amazon
 	// Kendra truncates queries at 30 token words, which excludes punctuation and stop
 	// words. Truncation still applies if you use Boolean or more advanced, complex
-	// queries.
+	// queries. For example, Timeoff AND October AND Category:HR is counted as 3
+	// tokens: timeoff , october , hr . For more information, see Searching with
+	// advanced query syntax (https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax)
+	// in the Amazon Kendra Developer Guide.
 	//
 	// This member is required.
 	QueryText *string

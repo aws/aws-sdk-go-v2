@@ -1082,10 +1082,27 @@ type DataSourceConfiguration struct {
 	DatabaseConfiguration *DatabaseConfiguration
 
 	// Provides the configuration information to connect to Amazon FSx as your data
-	// source.
+	// source. Amazon Kendra now supports an upgraded Amazon FSx Windows connector. You
+	// must now use the TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+	// object instead of the FsxConfiguration object to configure your connector.
+	// Connectors configured using the older console and API architecture will continue
+	// to function as configured. However, you won't be able to edit or update them. If
+	// you want to edit or update your connector configuration, you must create a new
+	// connector. We recommended migrating your connector workflow to the upgraded
+	// version. Support for connectors configured using the older architecture is
+	// scheduled to end by June 2024.
 	FsxConfiguration *FsxConfiguration
 
-	// Provides the configuration information to connect to GitHub as your data source.
+	// Provides the configuration information to connect to GitHub as your data
+	// source. Amazon Kendra now supports an upgraded GitHub connector. You must now
+	// use the TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+	// object instead of the GitHubConfiguration object to configure your connector.
+	// Connectors configured using the older console and API architecture will continue
+	// to function as configured. However, you won’t be able to edit or update them. If
+	// you want to edit or update your connector configuration, you must create a new
+	// connector. We recommended migrating your connector workflow to the upgraded
+	// version. Support for connectors configured using the older architecture is
+	// scheduled to end by June 2024.
 	GitHubConfiguration *GitHubConfiguration
 
 	// Provides the configuration information to connect to Google Drive as your data
@@ -1103,7 +1120,15 @@ type DataSourceConfiguration struct {
 	QuipConfiguration *QuipConfiguration
 
 	// Provides the configuration information to connect to an Amazon S3 bucket as
-	// your data source.
+	// your data source. Amazon Kendra now supports an upgraded Amazon S3 connector.
+	// You must now use the TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+	// object instead of the S3DataSourceConfiguration object to configure your
+	// connector. Connectors configured using the older console and API architecture
+	// will continue to function as configured. However, you won't be able to edit or
+	// update them. If you want to edit or update your connector configuration, you
+	// must create a new connector. We recommended migrating your connector workflow to
+	// the upgraded version. Support for connectors configured using the older
+	// architecture is scheduled to end by June 2024.
 	S3Configuration *S3DataSourceConfiguration
 
 	// Provides the configuration information to connect to Salesforce as your data
@@ -1119,6 +1144,15 @@ type DataSourceConfiguration struct {
 	SharePointConfiguration *SharePointConfiguration
 
 	// Provides the configuration information to connect to Slack as your data source.
+	// Amazon Kendra now supports an upgraded Slack connector. You must now use the
+	// TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+	// object instead of the SlackConfiguration object to configure your connector.
+	// Connectors configured using the older console and API architecture will continue
+	// to function as configured. However, you won't be able to edit or update them. If
+	// you want to edit or update your connector configuration, you must create a new
+	// connector. We recommended migrating your connector workflow to the upgraded
+	// version. Support for connectors configured using the older architecture is
+	// scheduled to end by June 2024.
 	SlackConfiguration *SlackConfiguration
 
 	// Provides a template for the configuration information to connect to your data
@@ -2055,7 +2089,15 @@ type FeaturedResultsSetSummary struct {
 }
 
 // Provides the configuration information to connect to Amazon FSx as your data
-// source.
+// source. Amazon Kendra now supports an upgraded Amazon FSx Windows connector. You
+// must now use the TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+// object instead of the FsxConfiguration object to configure your connector.
+// Connectors configured using the older console and API architecture will continue
+// to function as configured. However, you won't be able to edit or update them. If
+// you want to edit or update your connector configuration, you must create a new
+// connector. We recommended migrating your connector workflow to the upgraded
+// version. Support for connectors configured using the older architecture is
+// scheduled to end by June 2024.
 type FsxConfiguration struct {
 
 	// The identifier of the Amazon FSx file system. You can find your file system ID
@@ -2115,7 +2157,16 @@ type FsxConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the configuration information to connect to GitHub as your data source.
+// Provides the configuration information to connect to GitHub as your data
+// source. Amazon Kendra now supports an upgraded GitHub connector. You must now
+// use the TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+// object instead of the GitHubConfiguration object to configure your connector.
+// Connectors configured using the older console and API architecture will continue
+// to function as configured. However, you won’t be able to edit or update them. If
+// you want to edit or update your connector configuration, you must create a new
+// connector. We recommended migrating your connector workflow to the upgraded
+// version. Support for connectors configured using the older architecture is
+// scheduled to end by June 2024.
 type GitHubConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
@@ -2800,7 +2851,7 @@ type OnPremiseConfiguration struct {
 	// This member is required.
 	HostUrl *string
 
-	// The name of the organization of the GitHub Enterprise Server (in-premise)
+	// The name of the organization of the GitHub Enterprise Server (on-premises)
 	// account you want to connect to. You can find your organization name by logging
 	// into GitHub desktop and selecting Your organizations under your profile picture
 	// dropdown.
@@ -2944,7 +2995,9 @@ type QueryResultItem struct {
 	// DocumentExcerpt .
 	Format QueryResultFormat
 
-	// The identifier for the query result.
+	// The unique identifier for the query result item id ( Id ) and the query result
+	// item document id ( DocumentId ) combined. The value of this field changes with
+	// every request, even when you have the same documents.
 	Id *string
 
 	// Indicates the confidence level of Amazon Kendra providing a relevant result for
@@ -3087,8 +3140,7 @@ type Relevance struct {
 
 	// Indicates that this field determines how "fresh" a document is. For example, if
 	// document 1 was created on November 5, and document 2 was created on October 31,
-	// document 1 is "fresher" than document 2. You can only set the Freshness field
-	// on one DATE type field. Only applies to DATE fields.
+	// document 1 is "fresher" than document 2. Only applies to DATE fields.
 	Freshness *bool
 
 	// The relative importance of the field in the search. Larger numbers provide more
@@ -3100,11 +3152,11 @@ type Relevance struct {
 	// score of 10 is higher ranking than a document with a rating score of 1. When the
 	// RankOrder field is DESCENDING , lower numbers are better. For example, in a task
 	// tracking application, a priority 1 task is more important than a priority 5
-	// task. Only applies to LONG and DOUBLE fields.
+	// task. Only applies to LONG fields.
 	RankOrder Order
 
 	// A list of values that should be given a different boost when they appear in the
-	// result list. For example, if you are boosting a field called "department," query
+	// result list. For example, if you are boosting a field called "department", query
 	// terms that match the department field are boosted in the result. However, you
 	// can add entries from the department field to boost documents with those values
 	// higher. For example, you can add entries to the map with names of departments.
@@ -3166,6 +3218,15 @@ type RetrieveResultItem struct {
 }
 
 // Provides the configuration information to connect to an Amazon S3 bucket.
+// Amazon Kendra now supports an upgraded Amazon S3 connector. You must now use the
+// TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+// object instead of the S3DataSourceConfiguration object to configure your
+// connector. Connectors configured using the older console and API architecture
+// will continue to function as configured. However, you won't be able to edit or
+// update them. If you want to edit or update your connector configuration, you
+// must create a new connector. We recommended migrating your connector workflow to
+// the upgraded version. Support for connectors configured using the older
+// architecture is scheduled to end by June 2024.
 type S3DataSourceConfiguration struct {
 
 	// The name of the bucket that contains the documents.
@@ -3183,27 +3244,46 @@ type S3DataSourceConfiguration struct {
 	// metadata file contains metadata about a single document.
 	DocumentsMetadataConfiguration *DocumentsMetadataConfiguration
 
-	// A list of glob patterns for documents that should not be indexed. If a document
-	// that matches an inclusion prefix or inclusion pattern also matches an exclusion
-	// pattern, the document is not indexed. Some examples (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
-	// are:
-	//   - *.png , *.jpg will exclude all PNG and JPEG image files in a directory
-	//   (files with the extensions .png and .jpg).
-	//   - *internal* will exclude all files in a directory that contain 'internal' in
-	//   the file name, such as 'internal', 'internal_only', 'company_internal'.
-	//   - **/*internal* will exclude all internal-related files in a directory and
-	//   its subdirectories.
+	// A list of glob patterns (patterns that can expand a wildcard pattern into a
+	// list of path names that match the given pattern) for certain file names and file
+	// types to exclude from your index. If a document matches both an inclusion and
+	// exclusion prefix or pattern, the exclusion prefix takes precendence and the
+	// document is not indexed. Examples of glob patterns include:
+	//   - /myapp/config/*—All files inside config directory.
+	//   - **/*.png—All .png files in all directories.
+	//   - **/*.{png, ico, md}—All .png, .ico or .md files in all directories.
+	//   - /myapp/src/**/*.ts—All .ts files inside src directory (and all its
+	//   subdirectories).
+	//   - **/!(*.module).ts—All .ts files but not .module.ts
+	//   - *.png , *.jpg—All PNG and JPEG image files in a directory (files with the
+	//   extensions .png and .jpg).
+	//   - *internal*—All files in a directory that contain 'internal' in the file
+	//   name, such as 'internal', 'internal_only', 'company_internal'.
+	//   - **/*internal*—All internal-related files in a directory and its
+	//   subdirectories.
+	// For more examples, see Use of Exclude and Include Filters (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
+	// in the Amazon Web Services CLI Command Reference.
 	ExclusionPatterns []string
 
-	// A list of glob patterns for documents that should be indexed. If a document
-	// that matches an inclusion pattern also matches an exclusion pattern, the
-	// document is not indexed. Some examples (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
-	// are:
-	//   - *.txt will include all text files in a directory (files with the extension
-	//   .txt).
-	//   - **/*.txt will include all text files in a directory and its subdirectories.
-	//   - *tax* will include all files in a directory that contain 'tax' in the file
-	//   name, such as 'tax', 'taxes', 'income_tax'.
+	// A list of glob patterns (patterns that can expand a wildcard pattern into a
+	// list of path names that match the given pattern) for certain file names and file
+	// types to include in your index. If a document matches both an inclusion and
+	// exclusion prefix or pattern, the exclusion prefix takes precendence and the
+	// document is not indexed. Examples of glob patterns include:
+	//   - /myapp/config/*—All files inside config directory.
+	//   - **/*.png—All .png files in all directories.
+	//   - **/*.{png, ico, md}—All .png, .ico or .md files in all directories.
+	//   - /myapp/src/**/*.ts—All .ts files inside src directory (and all its
+	//   subdirectories).
+	//   - **/!(*.module).ts—All .ts files but not .module.ts
+	//   - *.png , *.jpg—All PNG and JPEG image files in a directory (files with the
+	//   extensions .png and .jpg).
+	//   - *internal*—All files in a directory that contain 'internal' in the file
+	//   name, such as 'internal', 'internal_only', 'company_internal'.
+	//   - **/*internal*—All internal-related files in a directory and its
+	//   subdirectories.
+	// For more examples, see Use of Exclude and Include Filters (https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters)
+	// in the Amazon Web Services CLI Command Reference.
 	InclusionPatterns []string
 
 	// A list of S3 prefixes for the documents that should be included in the index.
@@ -3775,6 +3855,15 @@ type SiteMapsConfiguration struct {
 }
 
 // Provides the configuration information to connect to Slack as your data source.
+// Amazon Kendra now supports an upgraded Slack connector. You must now use the
+// TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+// object instead of the SlackConfiguration object to configure your connector.
+// Connectors configured using the older console and API architecture will continue
+// to function as configured. However, you won’t be able to edit or update them. If
+// you want to edit or update your connector configuration, you must create a new
+// connector. We recommended migrating your connector workflow to the upgraded
+// version. Support for connectors configured using the older architecture is
+// scheduled to end by June 2024.
 type SlackConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the

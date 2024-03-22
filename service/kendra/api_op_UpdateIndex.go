@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Kendra index.
+// Updates an Amazon Kendra index.
 func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optFns ...func(*Options)) (*UpdateIndexOutput, error) {
 	if params == nil {
 		params = &UpdateIndexInput{}
@@ -49,7 +49,7 @@ type UpdateIndexInput struct {
 	// the company department name associated with each document.
 	DocumentMetadataConfigurationUpdates []types.DocumentMetadataConfiguration
 
-	// The name of the index you want to update.
+	// A new name for the index.
 	Name *string
 
 	// An Identity and Access Management (IAM) role that gives Amazon Kendra
@@ -59,9 +59,10 @@ type UpdateIndexInput struct {
 	// The user context policy.
 	UserContextPolicy types.UserContextPolicy
 
-	// Enables fetching access levels of groups and users from an IAM Identity Center
-	// identity source. To configure this, see UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
-	// .
+	// Gets users and groups from IAM Identity Center identity source. To configure
+	// this, see UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
+	// . This is useful for user context filtering, where search results are filtered
+	// based on the user or their group access to documents.
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration.
