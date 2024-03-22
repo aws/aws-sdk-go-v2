@@ -168,6 +168,37 @@ func TestClient_RecursiveShapes_smithyRpcv2cborDeserialize(t *testing.T) {
 				},
 			},
 		},
+		// Deserializes recursive structures encoded using a map with definite length
+		"RpcV2CborRecursiveShapesUsingDefiniteLength": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWZuZXN0ZWSiY2Zvb2RGb28xZm5lc3RlZKJjYmFyZEJhcjFvcmVjdXJzaXZlTWVtYmVyomNmb29kRm9vMmZuZXN0ZWShY2JhcmRCYXIy`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RecursiveShapesOutput{
+				Nested: &types.RecursiveShapesInputOutputNested1{
+					Foo: ptr.String("Foo1"),
+					Nested: &types.RecursiveShapesInputOutputNested2{
+						Bar: ptr.String("Bar1"),
+						RecursiveMember: &types.RecursiveShapesInputOutputNested1{
+							Foo: ptr.String("Foo2"),
+							Nested: &types.RecursiveShapesInputOutputNested2{
+								Bar: ptr.String("Bar2"),
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

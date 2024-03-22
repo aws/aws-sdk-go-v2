@@ -21,9 +21,9 @@ import (
 	"testing"
 )
 
-func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
+func TestClient_RpcV2CborDenseMaps_smithyRpcv2cborSerialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *RpcV2CborMapsInput
+		Params        *RpcV2CborDenseMapsInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -38,7 +38,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 	}{
 		// Serializes maps
 		"RpcV2CborMaps": {
-			Params: &RpcV2CborMapsInput{
+			Params: &RpcV2CborDenseMapsInput{
 				DenseStructMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
@@ -47,17 +47,9 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 						Hi: ptr.String("bye"),
 					},
 				},
-				SparseStructMap: map[string]*types.GreetingStruct{
-					"foo": {
-						Hi: ptr.String("there"),
-					},
-					"baz": {
-						Hi: ptr.String("bye"),
-					},
-				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborMaps",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -66,56 +58,21 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v25kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZW9zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb6FiaGlldGhlcmVjYmF6oWJoaWNieWX//w==`)
-			},
-		},
-		// Serializes map values in sparse maps
-		"RpcV2CborSerializesNullMapValues": {
-			Params: &RpcV2CborMapsInput{
-				SparseBooleanMap: map[string]*bool{
-					"x": nil,
-				},
-				SparseNumberMap: map[string]*int32{
-					"x": nil,
-				},
-				SparseStringMap: map[string]*string{
-					"x": nil,
-				},
-				SparseStructMap: map[string]*types.GreetingStruct{
-					"x": nil,
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborMaps",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
+				return smithytesting.CompareCBOR(actual, `oW5kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZQ==`)
 			},
 		},
 		// Ensure that 0 and false are sent over the wire in all maps and lists
 		"RpcV2CborSerializesZeroValuesInMaps": {
-			Params: &RpcV2CborMapsInput{
+			Params: &RpcV2CborDenseMapsInput{
 				DenseNumberMap: map[string]int32{
 					"x": 0,
-				},
-				SparseNumberMap: map[string]*int32{
-					"x": ptr.Int32(0),
 				},
 				DenseBooleanMap: map[string]bool{
 					"x": false,
 				},
-				SparseBooleanMap: map[string]*bool{
-					"x": ptr.Bool(false),
-				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborMaps",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -124,36 +81,12 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v25kZW5zZU51bWJlck1hcKFheABvc3BhcnNlTnVtYmVyTWFwv2F4AP9vZGVuc2VCb29sZWFuTWFwoWF49HBzcGFyc2VCb29sZWFuTWFwv2F49P//`)
-			},
-		},
-		// A request that contains a sparse map of sets
-		"RpcV2CborSerializesSparseSetMap": {
-			Params: &RpcV2CborMapsInput{
-				SparseSetMap: map[string][]string{
-					"x": {},
-					"y": {
-						"a",
-						"b",
-					},
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborMaps",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXiAYXmCYWFhYv//`)
+				return smithytesting.CompareCBOR(actual, `om5kZW5zZU51bWJlck1hcKFheABvZGVuc2VCb29sZWFuTWFwoWF49A==`)
 			},
 		},
 		// A request that contains a dense map of sets.
 		"RpcV2CborSerializesDenseSetMap": {
-			Params: &RpcV2CborMapsInput{
+			Params: &RpcV2CborDenseMapsInput{
 				DenseSetMap: map[string][]string{
 					"x": {},
 					"y": {
@@ -163,7 +96,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborMaps",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -173,31 +106,6 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareCBOR(actual, `oWtkZW5zZVNldE1hcKJheIBheYJhYWFi`)
-			},
-		},
-		// A request that contains a sparse map of sets.
-		"RpcV2CborSerializesSparseSetMapAndRetainsNull": {
-			Params: &RpcV2CborMapsInput{
-				SparseSetMap: map[string][]string{
-					"x": {},
-					"y": {
-						"a",
-						"b",
-					},
-					"z": nil,
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborMaps",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL/YXr2//8=`)
 			},
 		},
 	}
@@ -231,7 +139,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 				HTTPClient: protocoltesthttp.NewClient(),
 				Region:     "us-west-2",
 			})
-			result, err := client.RpcV2CborMaps(context.Background(), c.Params, func(options *Options) {
+			result, err := client.RpcV2CborDenseMaps(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})
@@ -264,13 +172,13 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborSerialize(t *testing.T) {
 	}
 }
 
-func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
+func TestClient_RpcV2CborDenseMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *RpcV2CborMapsOutput
+		ExpectResult  *RpcV2CborDenseMapsOutput
 	}{
 		// Deserializes maps
 		"RpcV2CborMaps": {
@@ -281,14 +189,14 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v25kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZW9zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb6FiaGlldGhlcmVjYmF6oWJoaWNieWX//w==`)
+				p, err := base64.StdEncoding.DecodeString(`oW5kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZQ==`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &RpcV2CborMapsOutput{
+			ExpectResult: &RpcV2CborDenseMapsOutput{
 				DenseStructMap: map[string]types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
@@ -296,45 +204,6 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 					"baz": {
 						Hi: ptr.String("bye"),
 					},
-				},
-				SparseStructMap: map[string]*types.GreetingStruct{
-					"foo": {
-						Hi: ptr.String("there"),
-					},
-					"baz": {
-						Hi: ptr.String("bye"),
-					},
-				},
-			},
-		},
-		// Deserializes null map values
-		"RpcV2CborDeserializesNullMapValues": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectResult: &RpcV2CborMapsOutput{
-				SparseBooleanMap: map[string]*bool{
-					"x": nil,
-				},
-				SparseNumberMap: map[string]*int32{
-					"x": nil,
-				},
-				SparseStringMap: map[string]*string{
-					"x": nil,
-				},
-				SparseStructMap: map[string]*types.GreetingStruct{
-					"x": nil,
 				},
 			},
 		},
@@ -347,55 +216,23 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v25kZW5zZU51bWJlck1hcKFheABvc3BhcnNlTnVtYmVyTWFwv2F4AP9vZGVuc2VCb29sZWFuTWFwoWF49HBzcGFyc2VCb29sZWFuTWFwv2F49P//`)
+				p, err := base64.StdEncoding.DecodeString(`om5kZW5zZU51bWJlck1hcKFheABvZGVuc2VCb29sZWFuTWFwoWF49A==`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &RpcV2CborMapsOutput{
+			ExpectResult: &RpcV2CborDenseMapsOutput{
 				DenseNumberMap: map[string]int32{
 					"x": 0,
-				},
-				SparseNumberMap: map[string]*int32{
-					"x": ptr.Int32(0),
 				},
 				DenseBooleanMap: map[string]bool{
 					"x": false,
 				},
-				SparseBooleanMap: map[string]*bool{
-					"x": ptr.Bool(false),
-				},
 			},
 		},
-		// A response that contains a sparse map of sets
-		"RpcV2CborDeserializesSparseSetMap": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2xzcGFyc2VTZXRNYXC/YXmfYWFhYv9heJ////8=`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectResult: &RpcV2CborMapsOutput{
-				SparseSetMap: map[string][]string{
-					"x": {},
-					"y": {
-						"a",
-						"b",
-					},
-				},
-			},
-		},
-		// A response that contains a dense map of sets.
+		// A response that contains a dense map of sets
 		"RpcV2CborDeserializesDenseSetMap": {
 			StatusCode: 200,
 			Header: http.Header{
@@ -411,40 +248,13 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 
 				return p
 			}(),
-			ExpectResult: &RpcV2CborMapsOutput{
+			ExpectResult: &RpcV2CborDenseMapsOutput{
 				DenseSetMap: map[string][]string{
 					"x": {},
 					"y": {
 						"a",
 						"b",
 					},
-				},
-			},
-		},
-		// A response that contains a sparse map of sets.
-		"RpcV2CborDeserializesSparseSetMapAndRetainsNull": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL/YXr2//8=`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectResult: &RpcV2CborMapsOutput{
-				SparseSetMap: map[string][]string{
-					"x": {},
-					"y": {
-						"a",
-						"b",
-					},
-					"z": nil,
 				},
 			},
 		},
@@ -465,7 +275,7 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 
 				return p
 			}(),
-			ExpectResult: &RpcV2CborMapsOutput{
+			ExpectResult: &RpcV2CborDenseMapsOutput{
 				DenseSetMap: map[string][]string{
 					"x": {},
 					"y": {
@@ -519,8 +329,8 @@ func TestClient_RpcV2CborMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 				}),
 				Region: "us-west-2",
 			})
-			var params RpcV2CborMapsInput
-			result, err := client.RpcV2CborMaps(context.Background(), &params)
+			var params RpcV2CborDenseMapsInput
+			result, err := client.RpcV2CborDenseMaps(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}

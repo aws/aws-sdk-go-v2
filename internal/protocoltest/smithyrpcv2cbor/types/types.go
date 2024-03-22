@@ -7,6 +7,12 @@ import (
 	"time"
 )
 
+type ClientOptionalDefaults struct {
+	Member *int32
+
+	noSmithyDocumentSerde
+}
+
 type ComplexNestedErrorData struct {
 	Foo *string
 
@@ -41,6 +47,24 @@ type Defaults struct {
 	DefaultString *string
 
 	DefaultTimestamp *time.Time
+
+	EmptyBlob []byte
+
+	EmptyString *string
+
+	FalseBoolean bool
+
+	ZeroByte int8
+
+	ZeroDouble float64
+
+	ZeroFloat float32
+
+	ZeroInteger int32
+
+	ZeroLong int64
+
+	ZeroShort int16
 
 	noSmithyDocumentSerde
 }

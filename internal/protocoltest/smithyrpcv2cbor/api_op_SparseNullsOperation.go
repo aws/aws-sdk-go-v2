@@ -6,71 +6,37 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The example tests basic map serialization.
-func (c *Client) RpcV2CborMaps(ctx context.Context, params *RpcV2CborMapsInput, optFns ...func(*Options)) (*RpcV2CborMapsOutput, error) {
+func (c *Client) SparseNullsOperation(ctx context.Context, params *SparseNullsOperationInput, optFns ...func(*Options)) (*SparseNullsOperationOutput, error) {
 	if params == nil {
-		params = &RpcV2CborMapsInput{}
+		params = &SparseNullsOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "RpcV2CborMaps", params, optFns, c.addOperationRpcV2CborMapsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SparseNullsOperation", params, optFns, c.addOperationSparseNullsOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*RpcV2CborMapsOutput)
+	out := result.(*SparseNullsOperationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type RpcV2CborMapsInput struct {
-	DenseBooleanMap map[string]bool
-
-	DenseNumberMap map[string]int32
-
-	DenseSetMap map[string][]string
-
-	DenseStringMap map[string]string
-
-	DenseStructMap map[string]types.GreetingStruct
-
-	SparseBooleanMap map[string]*bool
-
-	SparseNumberMap map[string]*int32
-
-	SparseSetMap map[string][]string
+type SparseNullsOperationInput struct {
+	SparseStringList []*string
 
 	SparseStringMap map[string]*string
-
-	SparseStructMap map[string]*types.GreetingStruct
 
 	noSmithyDocumentSerde
 }
 
-type RpcV2CborMapsOutput struct {
-	DenseBooleanMap map[string]bool
-
-	DenseNumberMap map[string]int32
-
-	DenseSetMap map[string][]string
-
-	DenseStringMap map[string]string
-
-	DenseStructMap map[string]types.GreetingStruct
-
-	SparseBooleanMap map[string]*bool
-
-	SparseNumberMap map[string]*int32
-
-	SparseSetMap map[string][]string
+type SparseNullsOperationOutput struct {
+	SparseStringList []*string
 
 	SparseStringMap map[string]*string
-
-	SparseStructMap map[string]*types.GreetingStruct
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,19 +44,19 @@ type RpcV2CborMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationRpcV2CborMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSparseNullsOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRpcV2CborMaps{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpSparseNullsOperation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRpcV2CborMaps{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpSparseNullsOperation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RpcV2CborMaps"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "SparseNullsOperation"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -130,7 +96,7 @@ func (c *Client) addOperationRpcV2CborMapsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRpcV2CborMaps(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSparseNullsOperation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -151,10 +117,10 @@ func (c *Client) addOperationRpcV2CborMapsMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opRpcV2CborMaps(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opSparseNullsOperation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "RpcV2CborMaps",
+		OperationName: "SparseNullsOperation",
 	}
 }

@@ -146,6 +146,18 @@ func TestCheckSnapshot_RecursiveShapes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RpcV2CborDenseMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RpcV2CborDenseMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RpcV2CborDenseMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RpcV2CborLists(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RpcV2CborLists(context.Background(), nil, func(o *Options) {
@@ -158,11 +170,11 @@ func TestCheckSnapshot_RpcV2CborLists(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_RpcV2CborMaps(t *testing.T) {
+func TestCheckSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 	svc := New(Options{})
-	_, err := svc.RpcV2CborMaps(context.Background(), nil, func(o *Options) {
+	_, err := svc.RpcV2CborSparseMaps(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "RpcV2CborMaps")
+			return testSnapshot(stack, "RpcV2CborSparseMaps")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -175,6 +187,18 @@ func TestCheckSnapshot_SimpleScalarProperties(t *testing.T) {
 	_, err := svc.SimpleScalarProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SimpleScalarProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SparseNullsOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SparseNullsOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SparseNullsOperation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -265,6 +289,18 @@ func TestUpdateSnapshot_RecursiveShapes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RpcV2CborDenseMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RpcV2CborDenseMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RpcV2CborDenseMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RpcV2CborLists(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RpcV2CborLists(context.Background(), nil, func(o *Options) {
@@ -277,11 +313,11 @@ func TestUpdateSnapshot_RpcV2CborLists(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_RpcV2CborMaps(t *testing.T) {
+func TestUpdateSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 	svc := New(Options{})
-	_, err := svc.RpcV2CborMaps(context.Background(), nil, func(o *Options) {
+	_, err := svc.RpcV2CborSparseMaps(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "RpcV2CborMaps")
+			return updateSnapshot(stack, "RpcV2CborSparseMaps")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -294,6 +330,18 @@ func TestUpdateSnapshot_SimpleScalarProperties(t *testing.T) {
 	_, err := svc.SimpleScalarProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SimpleScalarProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SparseNullsOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SparseNullsOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SparseNullsOperation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

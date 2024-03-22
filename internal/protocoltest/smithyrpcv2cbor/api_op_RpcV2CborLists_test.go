@@ -89,6 +89,10 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborSerialize(t *testing.T) {
 						B: ptr.String("4"),
 					},
 				},
+				BlobList: [][]byte{
+					[]byte("foo"),
+					[]byte("bar"),
+				},
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
@@ -100,7 +104,7 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2tib29sZWFuTGlzdJ/19P9oZW51bUxpc3SfY0Zvb2Ew/2tpbnRFbnVtTGlzdJ8BAv9raW50ZWdlckxpc3SfAQL/cG5lc3RlZFN0cmluZ0xpc3Sfn2Nmb29jYmFy/59jYmF6Y3F1eP//anN0cmluZ0xpc3SfY2Zvb2NiYXL/aXN0cmluZ1NldJ9jZm9vY2Jhcv9tc3RydWN0dXJlTGlzdJ+/YWFhMWFiYTL/v2FhYTNhYmE0//9tdGltZXN0YW1wTGlzdJ/B+0HU1/vzgAAAwftB1Nf784AAAP//`)
+				return smithytesting.CompareCBOR(actual, `v2pzdHJpbmdMaXN0gmNmb29jYmFyaXN0cmluZ1NldIJjZm9vY2JhcmtpbnRlZ2VyTGlzdIIBAmtib29sZWFuTGlzdIL19G10aW1lc3RhbXBMaXN0gsH7QdTX+/OAAADB+0HU1/vzgAAAaGVudW1MaXN0gmNGb29hMGtpbnRFbnVtTGlzdIIBAnBuZXN0ZWRTdHJpbmdMaXN0goJjZm9vY2JhcoJjYmF6Y3F1eG1zdHJ1Y3R1cmVMaXN0gqJhYWExYWJhMqJhYWEzYWJhNGhibG9iTGlzdIJDZm9vQ2Jhcv8=`)
 			},
 		},
 		// Serializes empty JSON lists
@@ -137,71 +141,6 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborSerialize(t *testing.T) {
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareCBOR(actual, `oWpzdHJpbmdMaXN0gA==`)
-			},
-		},
-		// Serializes null values in lists
-		"RpcV2CborListsSerializeNull": {
-			Params: &RpcV2CborListsInput{
-				SparseStringList: []*string{
-					nil,
-					ptr.String("hi"),
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VTdHJpbmdMaXN0n/ZiaGn//w==`)
-			},
-		},
-		// Serializes indefinite length text strings inside an indefinite length list
-		"RpcV2CborSparseListWithIndefiniteString": {
-			Params: &RpcV2CborListsInput{
-				SparseStringList: []*string{
-					ptr.String("An example indefinite string, which will be chunked, on each comma"),
-					ptr.String("Another example indefinite string with only one chunk"),
-					ptr.String("This is a plain string"),
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VTdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8=`)
-			},
-		},
-		// Serializes indefinite length text strings inside a definite length list
-		"RpcV2CborListWithIndefiniteString": {
-			Params: &RpcV2CborListsInput{
-				StringList: []string{
-					"An example indefinite string, which will be chunked, on each comma",
-					"Another example indefinite string with only one chunk",
-					"This is a plain string",
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborLists",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Accept":          []string{"application/cbor"},
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n`)
 			},
 		},
 	}
@@ -285,7 +224,7 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2tib29sZWFuTGlzdJ/19P9oZW51bUxpc3SfY0Zvb2Ew/2tpbnRFbnVtTGlzdJ8BAv9raW50ZWdlckxpc3SfAQL/cG5lc3RlZFN0cmluZ0xpc3Sfn2Nmb29jYmFy/59jYmF6Y3F1eP//anN0cmluZ0xpc3SfY2Zvb2NiYXL/aXN0cmluZ1NldJ9jZm9vY2Jhcv9tc3RydWN0dXJlTGlzdJ+/YWFhMWFiYTL/v2FhYTNhYmE0//9tdGltZXN0YW1wTGlzdJ/B+0HU1/vzgAAAwftB1Nf784AAAP//`)
+				p, err := base64.StdEncoding.DecodeString(`v2pzdHJpbmdMaXN0n2Nmb29jYmFy/2lzdHJpbmdTZXSfY2Zvb2NiYXL/a2ludGVnZXJMaXN0nwEC/2tib29sZWFuTGlzdJ/19P9tdGltZXN0YW1wTGlzdJ/B+0HU1/vzgAAAwftB1Nf784AAAP9oZW51bUxpc3SfY0Zvb2Ew/2tpbnRFbnVtTGlzdJ8BAv9wbmVzdGVkU3RyaW5nTGlzdJ+fY2Zvb2NiYXL/n2NiYXpjcXV4//9tc3RydWN0dXJlTGlzdJ+/YWFhMWFiYTL/v2FhYTNhYmE0//9oYmxvYkxpc3SfQ2Zvb0NiYXL//w==`)
 				if err != nil {
 					panic(err)
 				}
@@ -341,6 +280,10 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborDeserialize(t *testing.T) {
 						B: ptr.String("4"),
 					},
 				},
+				BlobList: [][]byte{
+					[]byte("foo"),
+					[]byte("bar"),
+				},
 			},
 		},
 		// Serializes empty RpcV2 Cbor lists
@@ -363,8 +306,8 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborDeserialize(t *testing.T) {
 				StringList: []string{},
 			},
 		},
-		// Serializes null values in sparse lists
-		"RpcV2CborListsSerializeNull": {
+		// Can deserialize indefinite length text strings inside an indefinite length list
+		"RpcV2CborIndefiniteStringInsideIndefiniteListCanDeserialize": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type":    []string{"application/cbor"},
@@ -372,7 +315,7 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v3BzcGFyc2VTdHJpbmdMaXN0n/ZiaGn//w==`)
+				p, err := base64.StdEncoding.DecodeString(`v2pzdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8=`)
 				if err != nil {
 					panic(err)
 				}
@@ -380,9 +323,34 @@ func TestClient_RpcV2CborLists_smithyRpcv2cborDeserialize(t *testing.T) {
 				return p
 			}(),
 			ExpectResult: &RpcV2CborListsOutput{
-				SparseStringList: []*string{
-					nil,
-					ptr.String("hi"),
+				StringList: []string{
+					"An example indefinite string, which will be chunked, on each comma",
+					"Another example indefinite string with only one chunk",
+					"This is a plain string",
+				},
+			},
+		},
+		// Can deserialize indefinite length text strings inside a definite length list
+		"RpcV2CborIndefiniteStringInsideDefiniteListCanDeserialize": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &RpcV2CborListsOutput{
+				StringList: []string{
+					"An example indefinite string, which will be chunked, on each comma",
+					"Another example indefinite string with only one chunk",
+					"This is a plain string",
 				},
 			},
 		},

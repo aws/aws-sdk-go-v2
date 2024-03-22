@@ -52,7 +52,7 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIBwZGVmYXVsdFRpbWVzdGFtcABrZGVmYXVsdEJsb2JjYWJja2RlZmF1bHRCeXRlAWxkZWZhdWx0U2hvcnQBbmRlZmF1bHRJbnRlZ2VyCmtkZWZhdWx0TG9uZxhkbGRlZmF1bHRGbG9hdPs/8AAAAAAAAG1kZWZhdWx0RG91Ymxl+z/wAAAAAAAAamRlZmF1bHRNYXCga2RlZmF1bHRFbnVtY0ZPT25kZWZhdWx0SW50RW51bQH/`)
+				return smithytesting.CompareCBOR(actual, `v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIBwZGVmYXVsdFRpbWVzdGFtcMH7AAAAAAAAAABrZGVmYXVsdEJsb2JDYWJja2RlZmF1bHRCeXRlAWxkZWZhdWx0U2hvcnQBbmRlZmF1bHRJbnRlZ2VyCmtkZWZhdWx0TG9uZxhkbGRlZmF1bHRGbG9hdPo/gAAAbWRlZmF1bHREb3VibGX7P/AAAAAAAABqZGVmYXVsdE1hcKBrZGVmYXVsdEVudW1jRk9PbmRlZmF1bHRJbnRFbnVtAWtlbXB0eVN0cmluZ2BsZmFsc2VCb29sZWFu9GllbXB0eUJsb2JAaHplcm9CeXRlAGl6ZXJvU2hvcnQAa3plcm9JbnRlZ2VyAGh6ZXJvTG9uZwBpemVyb0Zsb2F0+gAAAABqemVyb0RvdWJsZfsAAAAAAAAAAP8=`)
 			},
 		},
 		// Client skips top level default values in input.
@@ -93,6 +93,15 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 					},
 					DefaultEnum:    types.TestEnum("BAR"),
 					DefaultIntEnum: 2,
+					EmptyString:    ptr.String("foo"),
+					FalseBoolean:   true,
+					EmptyBlob:      []byte("hi"),
+					ZeroByte:       1,
+					ZeroShort:      1,
+					ZeroInteger:    1,
+					ZeroLong:       1,
+					ZeroFloat:      1.0,
+					ZeroDouble:     1.0,
 				},
 			},
 			ExpectMethod:  "POST",
@@ -105,7 +114,46 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2hkZWZhdWx0c65tZGVmYXVsdFN0cmluZ2NieWVuZGVmYXVsdEJvb2xlYW71a2RlZmF1bHRMaXN0gWFhcGRlZmF1bHRUaW1lc3RhbXABa2RlZmF1bHRCbG9iYmhpa2RlZmF1bHRCeXRlAmxkZWZhdWx0U2hvcnQCbmRlZmF1bHRJbnRlZ2VyFGtkZWZhdWx0TG9uZxjIbGRlZmF1bHRGbG9hdPtAAAAAAAAAAG1kZWZhdWx0RG91Ymxl+0AAAAAAAAAAamRlZmF1bHRNYXChZG5hbWVkSmFja2tkZWZhdWx0RW51bWNCQVJuZGVmYXVsdEludEVudW0C/w==`)
+				return smithytesting.CompareCBOR(actual, `v2hkZWZhdWx0c7dtZGVmYXVsdFN0cmluZ2NieWVuZGVmYXVsdEJvb2xlYW71a2RlZmF1bHRMaXN0gWFhcGRlZmF1bHRUaW1lc3RhbXDB+z/wAAAAAAAAa2RlZmF1bHRCbG9iQmhpa2RlZmF1bHRCeXRlAmxkZWZhdWx0U2hvcnQCbmRlZmF1bHRJbnRlZ2VyFGtkZWZhdWx0TG9uZxjIbGRlZmF1bHRGbG9hdPpAAAAAbWRlZmF1bHREb3VibGX7QAAAAAAAAABqZGVmYXVsdE1hcKFkbmFtZWRKYWNra2RlZmF1bHRFbnVtY0JBUm5kZWZhdWx0SW50RW51bQJrZW1wdHlTdHJpbmdjZm9vbGZhbHNlQm9vbGVhbvVpZW1wdHlCbG9iQmhpaHplcm9CeXRlAWl6ZXJvU2hvcnQBa3plcm9JbnRlZ2VyAWh6ZXJvTG9uZwFpemVyb0Zsb2F0+j+AAABqemVyb0RvdWJsZfs/8AAAAAAAAP8=`)
+			},
+		},
+		// Any time a value is provided for a member in the top level of input, it is
+		// used, regardless of if its the default.
+		"RpcV2CborClientUsesExplicitlyProvidedValuesInTopLevel": {
+			Params: &OperationWithDefaultsInput{
+				TopLevelDefault:      ptr.String("hi"),
+				OtherTopLevelDefault: 0,
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v290b3BMZXZlbERlZmF1bHRiaGl0b3RoZXJUb3BMZXZlbERlZmF1bHQA/w==`)
+			},
+		},
+		// Typically, non top-level members would have defaults filled in, but if they
+		// have the clientOptional trait, the defaults should be ignored.
+		"RpcV2CborClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional": {
+			Params: &OperationWithDefaultsInput{
+				ClientOptionalDefaults: &types.ClientOptionalDefaults{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Accept":          []string{"application/cbor"},
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareCBOR(actual, `v3ZjbGllbnRPcHRpb25hbERlZmF1bHRzoP8=`)
 			},
 		},
 	}
@@ -120,6 +168,14 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 			}
 
 			if name == "RpcV2CborClientUsesExplicitlyProvidedMemberValuesOverDefaults" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+			}
+
+			if name == "RpcV2CborClientUsesExplicitlyProvidedValuesInTopLevel" {
+				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+			}
+
+			if name == "RpcV2CborClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional" {
 				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
@@ -223,6 +279,15 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborDeserialize(t *testing.T) {
 				DefaultMap:       map[string]string{},
 				DefaultEnum:      types.TestEnum("FOO"),
 				DefaultIntEnum:   1,
+				EmptyString:      ptr.String(""),
+				FalseBoolean:     false,
+				EmptyBlob:        []byte(""),
+				ZeroByte:         0,
+				ZeroShort:        0,
+				ZeroInteger:      0,
+				ZeroLong:         0,
+				ZeroFloat:        0.0,
+				ZeroDouble:       0.0,
 			},
 		},
 		// Client ignores default values if member values are present in the response.
@@ -234,7 +299,7 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborDeserialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v21kZWZhdWx0U3RyaW5nY2J5ZW5kZWZhdWx0Qm9vbGVhbvRrZGVmYXVsdExpc3SBYWFwZGVmYXVsdFRpbWVzdGFtcAJrZGVmYXVsdEJsb2JiaGlrZGVmYXVsdEJ5dGUCbGRlZmF1bHRTaG9ydAJuZGVmYXVsdEludGVnZXIUa2RlZmF1bHRMb25nGMhsZGVmYXVsdEZsb2F0+0AAAAAAAAAAbWRlZmF1bHREb3VibGX7QAAAAAAAAABqZGVmYXVsdE1hcKFkbmFtZWRKYWNra2RlZmF1bHRFbnVtY0JBUm5kZWZhdWx0SW50RW51bQL/`)
+				p, err := base64.StdEncoding.DecodeString(`v21kZWZhdWx0U3RyaW5nY2J5ZW5kZWZhdWx0Qm9vbGVhbvRrZGVmYXVsdExpc3SBYWFwZGVmYXVsdFRpbWVzdGFtcMH7QAAAAAAAAABrZGVmYXVsdEJsb2JCaGlrZGVmYXVsdEJ5dGUCbGRlZmF1bHRTaG9ydAJuZGVmYXVsdEludGVnZXIUa2RlZmF1bHRMb25nGMhsZGVmYXVsdEZsb2F0+kAAAABtZGVmYXVsdERvdWJsZftAAAAAAAAAAGpkZWZhdWx0TWFwoWRuYW1lZEphY2trZGVmYXVsdEVudW1jQkFSbmRlZmF1bHRJbnRFbnVtAmtlbXB0eVN0cmluZ2Nmb29sZmFsc2VCb29sZWFu9WllbXB0eUJsb2JCaGloemVyb0J5dGUBaXplcm9TaG9ydAFremVyb0ludGVnZXIBaHplcm9Mb25nAWl6ZXJvRmxvYXT6P4AAAGp6ZXJvRG91Ymxl+z/wAAAAAAAA/w==`)
 				if err != nil {
 					panic(err)
 				}
@@ -260,6 +325,15 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborDeserialize(t *testing.T) {
 				},
 				DefaultEnum:    types.TestEnum("BAR"),
 				DefaultIntEnum: 2,
+				EmptyString:    ptr.String("foo"),
+				FalseBoolean:   true,
+				EmptyBlob:      []byte("hi"),
+				ZeroByte:       1,
+				ZeroShort:      1,
+				ZeroInteger:    1,
+				ZeroLong:       1,
+				ZeroFloat:      1.0,
+				ZeroDouble:     1.0,
 			},
 		},
 	}

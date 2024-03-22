@@ -8,6 +8,7 @@ import (
 	"encoding/base64"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
@@ -15,15 +16,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"io/ioutil"
-	"math"
 	"net/http"
 	"net/url"
 	"testing"
 )
 
-func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
+func TestClient_RpcV2CborSparseMaps_smithyRpcv2cborSerialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *SimpleScalarPropertiesInput
+		Params        *RpcV2CborSparseMapsInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -36,22 +36,20 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Serializes simple scalar properties
-		"RpcV2CborSimpleScalarProperties": {
-			Params: &SimpleScalarPropertiesInput{
-				ByteValue:         ptr.Int8(5),
-				DoubleValue:       ptr.Float64(1.889),
-				FalseBooleanValue: ptr.Bool(false),
-				FloatValue:        ptr.Float32(7.624),
-				IntegerValue:      ptr.Int32(256),
-				LongValue:         ptr.Int64(9873),
-				ShortValue:        ptr.Int16(9898),
-				StringValue:       ptr.String("simple"),
-				TrueBooleanValue:  ptr.Bool(true),
-				BlobValue:         []byte("foo"),
+		// Serializes sparse maps
+		"RpcV2CborSparseMaps": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -60,16 +58,27 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
+				return smithytesting.CompareCBOR(actual, `v29zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb79iaGlldGhlcmX/Y2Jher9iaGljYnll////`)
 			},
 		},
-		// RpcV2 Cbor should not serialize null structure values
-		"RpcV2CborClientDoesntSerializeNullStructureValues": {
-			Params: &SimpleScalarPropertiesInput{
-				StringValue: nil,
+		// Serializes null map values in sparse maps
+		"RpcV2CborSerializesNullMapValues": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseBooleanMap: map[string]*bool{
+					"x": nil,
+				},
+				SparseNumberMap: map[string]*int32{
+					"x": nil,
+				},
+				SparseStringMap: map[string]*string{
+					"x": nil,
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"x": nil,
+				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -78,17 +87,22 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v/8=`)
+				return smithytesting.CompareCBOR(actual, `v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
 			},
 		},
-		// Supports handling NaN float values.
-		"RpcV2CborSupportsNaNFloatInputs": {
-			Params: &SimpleScalarPropertiesInput{
-				DoubleValue: ptr.Float64(math.NaN()),
-				FloatValue:  ptr.Float32(float32(math.NaN())),
+		// A request that contains a sparse map of sets
+		"RpcV2CborSerializesSparseSetMap": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -97,17 +111,23 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2tkb3VibGVWYWx1Zft/+AAAAAAAAGpmbG9hdFZhbHVl+n/AAAD/`)
+				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL///8=`)
 			},
 		},
-		// Supports handling Infinity float values.
-		"RpcV2CborSupportsInfinityFloatInputs": {
-			Params: &SimpleScalarPropertiesInput{
-				DoubleValue: ptr.Float64(math.Inf(1)),
-				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+		// A request that contains a sparse map of sets.
+		"RpcV2CborSerializesSparseSetMapAndRetainsNull": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+					"z": nil,
+				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -116,17 +136,21 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2tkb3VibGVWYWx1Zft/8AAAAAAAAGpmbG9hdFZhbHVl+n+AAAD/`)
+				return smithytesting.CompareCBOR(actual, `v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL/YXr2//8=`)
 			},
 		},
-		// Supports handling Infinity float values.
-		"RpcV2CborSupportsNegativeInfinityFloatInputs": {
-			Params: &SimpleScalarPropertiesInput{
-				DoubleValue: ptr.Float64(math.Inf(-1)),
-				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
+		// Ensure that 0 and false are sent over the wire in all maps and lists
+		"RpcV2CborSerializesZeroValuesInSparseMaps": {
+			Params: &RpcV2CborSparseMapsInput{
+				SparseNumberMap: map[string]*int32{
+					"x": ptr.Int32(0),
+				},
+				SparseBooleanMap: map[string]*bool{
+					"x": ptr.Bool(false),
+				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -135,7 +159,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/cbor",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareCBOR(actual, `v2tkb3VibGVWYWx1Zfv/8AAAAAAAAGpmbG9hdFZhbHVl+v+AAAD/`)
+				return smithytesting.CompareCBOR(actual, `v29zcGFyc2VOdW1iZXJNYXC/YXgA/3BzcGFyc2VCb29sZWFuTWFwv2F49P//`)
 			},
 		},
 	}
@@ -169,7 +193,7 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 				HTTPClient: protocoltesthttp.NewClient(),
 				Region:     "us-west-2",
 			})
-			result, err := client.SimpleScalarProperties(context.Background(), c.Params, func(options *Options) {
+			result, err := client.RpcV2CborSparseMaps(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})
@@ -202,16 +226,16 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborSerialize(t *testing.T) {
 	}
 }
 
-func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) {
+func TestClient_RpcV2CborSparseMaps_smithyRpcv2cborDeserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *SimpleScalarPropertiesOutput
+		ExpectResult  *RpcV2CborSparseMapsOutput
 	}{
-		// Serializes simple scalar properties
-		"RpcV2CborSimpleScalarProperties": {
+		// Deserializes sparse maps
+		"RpcV2CborSparseJsonMaps": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type":    []string{"application/cbor"},
@@ -219,27 +243,26 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb2//`)
+				p, err := base64.StdEncoding.DecodeString(`v29zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb79iaGlldGhlcmX/Y2Jher9iaGljYnll////`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &SimpleScalarPropertiesOutput{
-				TrueBooleanValue:  ptr.Bool(true),
-				FalseBooleanValue: ptr.Bool(false),
-				ByteValue:         ptr.Int8(5),
-				DoubleValue:       ptr.Float64(1.889),
-				FloatValue:        ptr.Float32(7.624),
-				IntegerValue:      ptr.Int32(256),
-				ShortValue:        ptr.Int16(9898),
-				StringValue:       ptr.String("simple"),
-				BlobValue:         []byte("foo"),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"foo": {
+						Hi: ptr.String("there"),
+					},
+					"baz": {
+						Hi: ptr.String("bye"),
+					},
+				},
 			},
 		},
-		// Deserializes simple scalar properties encoded using a map with definite length
-		"RpcV2CborSimpleScalarPropertiesUsingDefiniteLength": {
+		// Deserializes null map values
+		"RpcV2CborDeserializesNullMapValues": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type":    []string{"application/cbor"},
@@ -247,27 +270,30 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`qXB0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb28=`)
+				p, err := base64.StdEncoding.DecodeString(`v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &SimpleScalarPropertiesOutput{
-				TrueBooleanValue:  ptr.Bool(true),
-				FalseBooleanValue: ptr.Bool(false),
-				ByteValue:         ptr.Int8(5),
-				DoubleValue:       ptr.Float64(1.889),
-				FloatValue:        ptr.Float32(7.624),
-				IntegerValue:      ptr.Int32(256),
-				ShortValue:        ptr.Int16(9898),
-				StringValue:       ptr.String("simple"),
-				BlobValue:         []byte("foo"),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseBooleanMap: map[string]*bool{
+					"x": nil,
+				},
+				SparseNumberMap: map[string]*int32{
+					"x": nil,
+				},
+				SparseStringMap: map[string]*string{
+					"x": nil,
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"x": nil,
+				},
 			},
 		},
-		// RpcV2 Cbor should not deserialize null structure values
-		"RpcV2CborClientDoesntDeserializeNullStructureValues": {
+		// A response that contains a sparse map of sets
+		"RpcV2CborDeserializesSparseSetMap": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type":    []string{"application/cbor"},
@@ -275,38 +301,25 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2tzdHJpbmdWYWx1Zfb/`)
+				p, err := base64.StdEncoding.DecodeString(`v2xzcGFyc2VTZXRNYXC/YXmfYWFhYv9heJ////8=`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &SimpleScalarPropertiesOutput{},
-		},
-		// Supports handling NaN float values.
-		"RpcV2CborSupportsNaNFloatOutputs": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2tkb3VibGVWYWx1Zft/+AAAAAAAAGpmbG9hdFZhbHVl+n/AAAD/`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectResult: &SimpleScalarPropertiesOutput{
-				DoubleValue: ptr.Float64(math.NaN()),
-				FloatValue:  ptr.Float32(float32(math.NaN())),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+				},
 			},
 		},
-		// Supports handling Infinity float values.
-		"RpcV2CborSupportsInfinityFloatOutputs": {
+		// A response that contains a sparse map of sets with a null
+		"RpcV2CborDeserializesSparseSetMapAndRetainsNull": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type":    []string{"application/cbor"},
@@ -314,20 +327,26 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2tkb3VibGVWYWx1Zft/8AAAAAAAAGpmbG9hdFZhbHVl+n+AAAD/`)
+				p, err := base64.StdEncoding.DecodeString(`v2xzcGFyc2VTZXRNYXC/YXif/2F5n2FhYWL/YXr2//8=`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &SimpleScalarPropertiesOutput{
-				DoubleValue: ptr.Float64(math.Inf(1)),
-				FloatValue:  ptr.Float32(float32(math.Inf(1))),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+					"z": nil,
+				},
 			},
 		},
-		// Supports handling Negative Infinity float values.
-		"RpcV2CborSupportsNegativeInfinityFloatOutputs": {
+		// Ensure that 0 and false are sent over the wire in all maps and lists
+		"RpcV2CborDeserializesZeroValuesInSparseMaps": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type":    []string{"application/cbor"},
@@ -335,40 +354,20 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2tkb3VibGVWYWx1Zfv/8AAAAAAAAGpmbG9hdFZhbHVl+v+AAAD/`)
+				p, err := base64.StdEncoding.DecodeString(`v29zcGFyc2VOdW1iZXJNYXC/YXgA/3BzcGFyc2VCb29sZWFuTWFwv2F49P//`)
 				if err != nil {
 					panic(err)
 				}
 
 				return p
 			}(),
-			ExpectResult: &SimpleScalarPropertiesOutput{
-				DoubleValue: ptr.Float64(math.Inf(-1)),
-				FloatValue:  ptr.Float32(float32(math.Inf(-1))),
-			},
-		},
-		// Supports upcasting from a smaller byte representation of the same data type.
-		"RpcV2CborSupportsUpcastingDataOnDeserialize": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2tkb3VibGVWYWx1Zfk+AGpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8=`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectResult: &SimpleScalarPropertiesOutput{
-				DoubleValue:  ptr.Float64(1.5),
-				FloatValue:   ptr.Float32(7.625),
-				IntegerValue: ptr.Int32(56),
-				LongValue:    ptr.Int64(256),
-				ShortValue:   ptr.Int16(10),
+			ExpectResult: &RpcV2CborSparseMapsOutput{
+				SparseNumberMap: map[string]*int32{
+					"x": ptr.Int32(0),
+				},
+				SparseBooleanMap: map[string]*bool{
+					"x": ptr.Bool(false),
+				},
 			},
 		},
 	}
@@ -414,8 +413,8 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 				}),
 				Region: "us-west-2",
 			})
-			var params SimpleScalarPropertiesInput
-			result, err := client.SimpleScalarProperties(context.Background(), &params)
+			var params RpcV2CborSparseMapsInput
+			result, err := client.RpcV2CborSparseMaps(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}

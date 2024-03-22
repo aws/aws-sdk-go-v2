@@ -114,6 +114,8 @@ public final class AwsProtocolUtils {
                         .addTestName("RpcV2CborClientPopulatesDefaultValuesInInput")
                         .addTestName("RpcV2CborClientSkipsTopLevelDefaultValuesInInput")
                         .addTestName("RpcV2CborClientUsesExplicitlyProvidedMemberValuesOverDefaults")
+                        .addTestName("RpcV2CborClientUsesExplicitlyProvidedValuesInTopLevel")
+                        .addTestName("RpcV2CborClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional")
                         .build(),
 
                 HttpProtocolUnitTestGenerator.SkipTest.builder()

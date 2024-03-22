@@ -34,6 +34,8 @@ func (c *Client) RpcV2CborLists(ctx context.Context, params *RpcV2CborListsInput
 }
 
 type RpcV2CborListsInput struct {
+	BlobList [][]byte
+
 	BooleanList []bool
 
 	EnumList []types.FooEnum
@@ -44,8 +46,6 @@ type RpcV2CborListsInput struct {
 
 	// A list of lists of strings.
 	NestedStringList [][]string
-
-	SparseStringList []*string
 
 	StringList []string
 
@@ -59,6 +59,8 @@ type RpcV2CborListsInput struct {
 }
 
 type RpcV2CborListsOutput struct {
+	BlobList [][]byte
+
 	BooleanList []bool
 
 	EnumList []types.FooEnum
@@ -69,8 +71,6 @@ type RpcV2CborListsOutput struct {
 
 	// A list of lists of strings.
 	NestedStringList [][]string
-
-	SparseStringList []*string
 
 	StringList []string
 

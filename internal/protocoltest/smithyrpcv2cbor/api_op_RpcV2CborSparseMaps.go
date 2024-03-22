@@ -9,82 +9,47 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-func (c *Client) OperationWithDefaults(ctx context.Context, params *OperationWithDefaultsInput, optFns ...func(*Options)) (*OperationWithDefaultsOutput, error) {
+func (c *Client) RpcV2CborSparseMaps(ctx context.Context, params *RpcV2CborSparseMapsInput, optFns ...func(*Options)) (*RpcV2CborSparseMapsOutput, error) {
 	if params == nil {
-		params = &OperationWithDefaultsInput{}
+		params = &RpcV2CborSparseMapsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "OperationWithDefaults", params, optFns, c.addOperationOperationWithDefaultsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RpcV2CborSparseMaps", params, optFns, c.addOperationRpcV2CborSparseMapsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*OperationWithDefaultsOutput)
+	out := result.(*RpcV2CborSparseMapsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type OperationWithDefaultsInput struct {
-	ClientOptionalDefaults *types.ClientOptionalDefaults
+type RpcV2CborSparseMapsInput struct {
+	SparseBooleanMap map[string]*bool
 
-	Defaults *types.Defaults
+	SparseNumberMap map[string]*int32
 
-	OtherTopLevelDefault int32
+	SparseSetMap map[string][]string
 
-	TopLevelDefault *string
+	SparseStringMap map[string]*string
+
+	SparseStructMap map[string]*types.GreetingStruct
 
 	noSmithyDocumentSerde
 }
 
-type OperationWithDefaultsOutput struct {
-	DefaultBlob []byte
+type RpcV2CborSparseMapsOutput struct {
+	SparseBooleanMap map[string]*bool
 
-	DefaultBoolean *bool
+	SparseNumberMap map[string]*int32
 
-	DefaultByte *int8
+	SparseSetMap map[string][]string
 
-	DefaultDouble *float64
+	SparseStringMap map[string]*string
 
-	DefaultEnum types.TestEnum
-
-	DefaultFloat *float32
-
-	DefaultIntEnum types.TestIntEnum
-
-	DefaultInteger *int32
-
-	DefaultList []string
-
-	DefaultLong *int64
-
-	DefaultMap map[string]string
-
-	DefaultShort *int16
-
-	DefaultString *string
-
-	DefaultTimestamp *time.Time
-
-	EmptyBlob []byte
-
-	EmptyString *string
-
-	FalseBoolean bool
-
-	ZeroByte int8
-
-	ZeroDouble float64
-
-	ZeroFloat float32
-
-	ZeroInteger int32
-
-	ZeroLong int64
-
-	ZeroShort int16
+	SparseStructMap map[string]*types.GreetingStruct
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -92,19 +57,19 @@ type OperationWithDefaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRpcV2CborSparseMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpOperationWithDefaults{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRpcV2CborSparseMaps{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpOperationWithDefaults{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRpcV2CborSparseMaps{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "OperationWithDefaults"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "RpcV2CborSparseMaps"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -144,7 +109,7 @@ func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithDefaults(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRpcV2CborSparseMaps(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -165,10 +130,10 @@ func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.
 	return nil
 }
 
-func newServiceMetadataMiddleware_opOperationWithDefaults(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opRpcV2CborSparseMaps(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "OperationWithDefaults",
+		OperationName: "RpcV2CborSparseMaps",
 	}
 }

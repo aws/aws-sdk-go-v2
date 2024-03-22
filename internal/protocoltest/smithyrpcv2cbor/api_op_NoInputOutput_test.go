@@ -124,7 +124,7 @@ func TestClient_NoInputOutput_smithyRpcv2cborDeserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *NoInputOutputOutput
 	}{
-		// Body is empty and no Content-Type header if no response
+		// A Content-Type header should not be set if the response body is empty.
 		"no_output": {
 			StatusCode: 200,
 			Header: http.Header{
@@ -141,26 +141,41 @@ func TestClient_NoInputOutput_smithyRpcv2cborDeserialize(t *testing.T) {
 			}(),
 			ExpectResult: &NoInputOutputOutput{},
 		},
-		// Servers should allow the accept header to be set to the default content-type.
-		"no_output_client_allows_accept": {
+		// Clients should accept a CBOR empty struct if there is no output.
+		"NoOutputClientAllowsEmptyCbor": {
 			StatusCode: 200,
 			Header: http.Header{
-				"Accept":          []string{"application/cbor"},
 				"Content-Type":    []string{"application/cbor"},
 				"smithy-protocol": []string{"rpc-v2-cbor"},
 			},
-			Body:         []byte(``),
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v/8=`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
 			ExpectResult: &NoInputOutputOutput{},
 		},
-		// Client should accept CBOR empty struct if no output
-		"no_input_client_allows_empty_cbor": {
+		// Clients should accept an empty body if there is no output and should not raise
+		// an error if the Content-Type header is set.
+		"NoOutputClientAllowsEmptyBody": {
 			StatusCode: 200,
 			Header: http.Header{
-				"Accept":          []string{"application/cbor"},
 				"Content-Type":    []string{"application/cbor"},
 				"smithy-protocol": []string{"rpc-v2-cbor"},
 			},
-			Body:         []byte(`v/8=`),
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(``)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
 			ExpectResult: &NoInputOutputOutput{},
 		},
 	}

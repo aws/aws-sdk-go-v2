@@ -277,6 +277,49 @@ func (m *smithyRpcv2cbor_serializeOpRecursiveShapes) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type smithyRpcv2cbor_serializeOpRpcV2CborDenseMaps struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpRpcV2CborDenseMaps) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpRpcV2CborDenseMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RpcV2CborDenseMapsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/RpcV2Protocol/operation/RpcV2CborDenseMaps"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_RpcV2CborDenseMapsInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type smithyRpcv2cbor_serializeOpRpcV2CborLists struct {
 }
 
@@ -320,17 +363,17 @@ func (m *smithyRpcv2cbor_serializeOpRpcV2CborLists) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
-type smithyRpcv2cbor_serializeOpRpcV2CborMaps struct {
+type smithyRpcv2cbor_serializeOpRpcV2CborSparseMaps struct {
 }
 
-func (*smithyRpcv2cbor_serializeOpRpcV2CborMaps) ID() string {
+func (*smithyRpcv2cbor_serializeOpRpcV2CborSparseMaps) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *smithyRpcv2cbor_serializeOpRpcV2CborMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpRpcV2CborSparseMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*RpcV2CborMapsInput)
+	input, ok := in.Parameters.(*RpcV2CborSparseMapsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
 	}
@@ -342,13 +385,13 @@ func (m *smithyRpcv2cbor_serializeOpRpcV2CborMaps) HandleSerialize(ctx context.C
 	}
 
 	req.Method = http.MethodPost
-	req.URL.Path = "/service/RpcV2Protocol/operation/RpcV2CborMaps"
+	req.URL.Path = "/service/RpcV2Protocol/operation/RpcV2CborSparseMaps"
 	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
 
 	req.Header.Set("Content-Type", "application/cbor")
 	req.Header.Set("Accept", "application/cbor")
 
-	cv, err := serializeCBOR_RpcV2CborMapsInput(input)
+	cv, err := serializeCBOR_RpcV2CborSparseMapsInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -405,6 +448,61 @@ func (m *smithyRpcv2cbor_serializeOpSimpleScalarProperties) HandleSerialize(ctx 
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type smithyRpcv2cbor_serializeOpSparseNullsOperation struct {
+}
+
+func (*smithyRpcv2cbor_serializeOpSparseNullsOperation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *smithyRpcv2cbor_serializeOpSparseNullsOperation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SparseNullsOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
+	}
+
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/RpcV2Protocol/operation/SparseNullsOperation"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_SparseNullsOperationInput(input)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	in.Request = req
+
+	return next.HandleSerialize(ctx, in)
+}
+func serializeCBOR_ClientOptionalDefaults(v *types.ClientOptionalDefaults) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Member != nil {
+		ser, err := serializeCBOR_Int32(*v.Member)
+		if err != nil {
+			return nil, err
+		}
+		vm["member"] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_Defaults(v *types.Defaults) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.DefaultString != nil {
@@ -501,6 +599,55 @@ func serializeCBOR_Defaults(v *types.Defaults) (smithycbor.Value, error) {
 		return nil, err
 	}
 	vm["defaultIntEnum"] = serdefaultIntEnum
+	if v.EmptyString != nil {
+		ser, err := serializeCBOR_String(*v.EmptyString)
+		if err != nil {
+			return nil, err
+		}
+		vm["emptyString"] = ser
+	}
+	serfalseBoolean, err := serializeCBOR_Bool(v.FalseBoolean)
+	if err != nil {
+		return nil, err
+	}
+	vm["falseBoolean"] = serfalseBoolean
+	if v.EmptyBlob != nil {
+		ser, err := serializeCBOR_Blob(v.EmptyBlob)
+		if err != nil {
+			return nil, err
+		}
+		vm["emptyBlob"] = ser
+	}
+	serzeroByte, err := serializeCBOR_Int8(v.ZeroByte)
+	if err != nil {
+		return nil, err
+	}
+	vm["zeroByte"] = serzeroByte
+	serzeroShort, err := serializeCBOR_Int16(v.ZeroShort)
+	if err != nil {
+		return nil, err
+	}
+	vm["zeroShort"] = serzeroShort
+	serzeroInteger, err := serializeCBOR_Int32(v.ZeroInteger)
+	if err != nil {
+		return nil, err
+	}
+	vm["zeroInteger"] = serzeroInteger
+	serzeroLong, err := serializeCBOR_Int64(v.ZeroLong)
+	if err != nil {
+		return nil, err
+	}
+	vm["zeroLong"] = serzeroLong
+	serzeroFloat, err := serializeCBOR_Float32(v.ZeroFloat)
+	if err != nil {
+		return nil, err
+	}
+	vm["zeroFloat"] = serzeroFloat
+	serzeroDouble, err := serializeCBOR_Float64(v.ZeroDouble)
+	if err != nil {
+		return nil, err
+	}
+	vm["zeroDouble"] = serzeroDouble
 	return vm, nil
 }
 
@@ -741,6 +888,19 @@ func serializeCBOR_TestStringMap(v map[string]string) (smithycbor.Value, error) 
 		vm[k] = ser
 	}
 	return vm, nil
+}
+
+func serializeCBOR_BlobList(v [][]byte) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_Blob(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
 }
 
 func serializeCBOR_BooleanList(v []bool) (smithycbor.Value, error) {
@@ -993,6 +1153,13 @@ func serializeCBOR_OperationWithDefaultsInput(v *OperationWithDefaultsInput) (sm
 		}
 		vm["defaults"] = ser
 	}
+	if v.ClientOptionalDefaults != nil {
+		ser, err := serializeCBOR_ClientOptionalDefaults(v.ClientOptionalDefaults)
+		if err != nil {
+			return nil, err
+		}
+		vm["clientOptionalDefaults"] = ser
+	}
 	if v.TopLevelDefault != nil {
 		ser, err := serializeCBOR_String(*v.TopLevelDefault)
 		if err != nil {
@@ -1000,6 +1167,11 @@ func serializeCBOR_OperationWithDefaultsInput(v *OperationWithDefaultsInput) (sm
 		}
 		vm["topLevelDefault"] = ser
 	}
+	serotherTopLevelDefault, err := serializeCBOR_Int32(v.OtherTopLevelDefault)
+	if err != nil {
+		return nil, err
+	}
+	vm["otherTopLevelDefault"] = serotherTopLevelDefault
 	return vm, nil
 }
 
@@ -1027,6 +1199,46 @@ func serializeCBOR_RecursiveShapesInput(v *RecursiveShapesInput) (smithycbor.Val
 	return vm, nil
 }
 
+func serializeCBOR_RpcV2CborDenseMapsInput(v *RpcV2CborDenseMapsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.DenseStructMap != nil {
+		ser, err := serializeCBOR_DenseStructMap(v.DenseStructMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseStructMap"] = ser
+	}
+	if v.DenseNumberMap != nil {
+		ser, err := serializeCBOR_DenseNumberMap(v.DenseNumberMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseNumberMap"] = ser
+	}
+	if v.DenseBooleanMap != nil {
+		ser, err := serializeCBOR_DenseBooleanMap(v.DenseBooleanMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseBooleanMap"] = ser
+	}
+	if v.DenseStringMap != nil {
+		ser, err := serializeCBOR_DenseStringMap(v.DenseStringMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseStringMap"] = ser
+	}
+	if v.DenseSetMap != nil {
+		ser, err := serializeCBOR_DenseSetMap(v.DenseSetMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseSetMap"] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_RpcV2CborListsInput(v *RpcV2CborListsInput) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.StringList != nil {
@@ -1035,13 +1247,6 @@ func serializeCBOR_RpcV2CborListsInput(v *RpcV2CborListsInput) (smithycbor.Value
 			return nil, err
 		}
 		vm["stringList"] = ser
-	}
-	if v.SparseStringList != nil {
-		ser, err := serializeCBOR_SparseStringList(v.SparseStringList)
-		if err != nil {
-			return nil, err
-		}
-		vm["sparseStringList"] = ser
 	}
 	if v.StringSet != nil {
 		ser, err := serializeCBOR_StringSet(v.StringSet)
@@ -1099,45 +1304,24 @@ func serializeCBOR_RpcV2CborListsInput(v *RpcV2CborListsInput) (smithycbor.Value
 		}
 		vm["structureList"] = ser
 	}
-	return vm, nil
-}
-
-func serializeCBOR_RpcV2CborMapsInput(v *RpcV2CborMapsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.DenseStructMap != nil {
-		ser, err := serializeCBOR_DenseStructMap(v.DenseStructMap)
+	if v.BlobList != nil {
+		ser, err := serializeCBOR_BlobList(v.BlobList)
 		if err != nil {
 			return nil, err
 		}
-		vm["denseStructMap"] = ser
+		vm["blobList"] = ser
 	}
+	return vm, nil
+}
+
+func serializeCBOR_RpcV2CborSparseMapsInput(v *RpcV2CborSparseMapsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.SparseStructMap != nil {
 		ser, err := serializeCBOR_SparseStructMap(v.SparseStructMap)
 		if err != nil {
 			return nil, err
 		}
 		vm["sparseStructMap"] = ser
-	}
-	if v.DenseNumberMap != nil {
-		ser, err := serializeCBOR_DenseNumberMap(v.DenseNumberMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseNumberMap"] = ser
-	}
-	if v.DenseBooleanMap != nil {
-		ser, err := serializeCBOR_DenseBooleanMap(v.DenseBooleanMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseBooleanMap"] = ser
-	}
-	if v.DenseStringMap != nil {
-		ser, err := serializeCBOR_DenseStringMap(v.DenseStringMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseStringMap"] = ser
 	}
 	if v.SparseNumberMap != nil {
 		ser, err := serializeCBOR_SparseNumberMap(v.SparseNumberMap)
@@ -1159,13 +1343,6 @@ func serializeCBOR_RpcV2CborMapsInput(v *RpcV2CborMapsInput) (smithycbor.Value, 
 			return nil, err
 		}
 		vm["sparseStringMap"] = ser
-	}
-	if v.DenseSetMap != nil {
-		ser, err := serializeCBOR_DenseSetMap(v.DenseSetMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseSetMap"] = ser
 	}
 	if v.SparseSetMap != nil {
 		ser, err := serializeCBOR_SparseSetMap(v.SparseSetMap)
@@ -1248,6 +1425,25 @@ func serializeCBOR_SimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput) (
 			return nil, err
 		}
 		vm["blobValue"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_SparseNullsOperationInput(v *SparseNullsOperationInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.SparseStringList != nil {
+		ser, err := serializeCBOR_SparseStringList(v.SparseStringList)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseStringList"] = ser
+	}
+	if v.SparseStringMap != nil {
+		ser, err := serializeCBOR_SparseStringMap(v.SparseStringMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseStringMap"] = ser
 	}
 	return vm, nil
 }
