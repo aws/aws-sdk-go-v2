@@ -35,7 +35,7 @@ plugins {
 
 dependencies {
 	implementation("software.amazon.smithy:smithy-cli:$smithyVersion")
-    implementation("software.amazon.smithy:smithy-aws-protocol-tests:1.42.0") // TODO(rpc2cbor) match smithy version when merged
+    implementation("software.amazon.smithy:smithy-aws-protocol-tests:$smithyVersion")
     implementation(project(":smithy-aws-go-codegen"))
 }
 
