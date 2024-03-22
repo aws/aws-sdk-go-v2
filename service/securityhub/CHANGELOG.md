@@ -1,3 +1,7 @@
+# v1.47.0 (2024-03-22)
+
+* **Feature**: Added new resource detail object to ASFF, including resource for LastKnownExploitAt
+
 # v1.46.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

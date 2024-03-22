@@ -1,8 +1,0 @@
-{
-    "id": "88459eff-60ec-4ff3-8b4d-cc7241465432",
-    "type": "documentation",
-    "description": "Updates Amazon Firehose documentation for message regarding Enforcing Tags IAM Policy.",
-    "modules": [
-        "service/firehose"
-    ]
-}

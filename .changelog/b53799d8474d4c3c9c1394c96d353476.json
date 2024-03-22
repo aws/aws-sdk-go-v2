@@ -1,8 +1,0 @@
-{
-    "id": "b53799d8-474d-4c3c-9c13-94c96d353476",
-    "type": "feature",
-    "description": "Added new resource detail object to ASFF, including resource for LastKnownExploitAt",
-    "modules": [
-        "service/securityhub"
-    ]
-}

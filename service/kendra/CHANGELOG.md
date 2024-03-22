@@ -1,3 +1,7 @@
+# v1.50.0 (2024-03-22)
+
+* **Feature**: Documentation update, March 2024. Corrects some docs for Amazon Kendra.
+
 # v1.49.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

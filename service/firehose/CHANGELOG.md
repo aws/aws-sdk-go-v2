@@ -1,3 +1,7 @@
+# v1.28.4 (2024-03-22)
+
+* **Documentation**: Updates Amazon Firehose documentation for message regarding Enforcing Tags IAM Policy.
+
 # v1.28.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

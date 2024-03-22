@@ -1,3 +1,17 @@
+# Release (2024-03-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.28.4](service/firehose/CHANGELOG.md#v1284-2024-03-22)
+  * **Documentation**: Updates Amazon Firehose documentation for message regarding Enforcing Tags IAM Policy.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.50.0](service/kendra/CHANGELOG.md#v1500-2024-03-22)
+  * **Feature**: Documentation update, March 2024. Corrects some docs for Amazon Kendra.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.28.0](service/pricing/CHANGELOG.md#v1280-2024-03-22)
+  * **Feature**: Add ResourceNotFoundException to ListPriceLists and GetPriceListFileUrl APIs
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.9.0](service/rolesanywhere/CHANGELOG.md#v190-2024-03-22)
+  * **Feature**: This release relaxes constraints on the durationSeconds request parameter for the *Profile APIs that support it. This parameter can now take on values that go up to 43200.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.47.0](service/securityhub/CHANGELOG.md#v1470-2024-03-22)
+  * **Feature**: Added new resource detail object to ASFF, including resource for LastKnownExploitAt
+
 # Release (2024-03-21)
 
 ## General Highlights
