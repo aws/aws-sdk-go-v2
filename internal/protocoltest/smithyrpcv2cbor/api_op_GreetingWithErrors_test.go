@@ -18,129 +18,6 @@ import (
 	"testing"
 )
 
-func TestClient_GreetingWithErrors_ComplexError_smithyRpcv2cborDeserialize(t *testing.T) {
-	cases := map[string]struct {
-		StatusCode    int
-		Header        http.Header
-		BodyMediaType string
-		Body          []byte
-		ExpectError   *types.ComplexError
-	}{
-		// Parses a complex error with no message member
-		"RpcV2CborComplexError": {
-			StatusCode: 400,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3JoVG9wTGV2ZWxpVG9wIGxldmVsZk5lc3RlZL9jRm9vY2Jhcv//`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectError: &types.ComplexError{
-				TopLevel: ptr.String("Top level"),
-				Nested: &types.ComplexNestedErrorData{
-					Foo: ptr.String("bar"),
-				},
-			},
-		},
-		"RpcV2CborEmptyComplexError": {
-			StatusCode: 400,
-			Header: http.Header{
-				"Content-Type":    []string{"application/cbor"},
-				"smithy-protocol": []string{"rpc-v2-cbor"},
-			},
-			BodyMediaType: "application/cbor",
-			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3L/`)
-				if err != nil {
-					panic(err)
-				}
-
-				return p
-			}(),
-			ExpectError: &types.ComplexError{},
-		},
-	}
-	for name, c := range cases {
-		t.Run(name, func(t *testing.T) {
-			serverURL := "http://localhost:8888/"
-			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					headers := http.Header{}
-					for k, vs := range c.Header {
-						for _, v := range vs {
-							headers.Add(k, v)
-						}
-					}
-					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
-						headers.Set("Content-Type", c.BodyMediaType)
-					}
-					response := &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     headers,
-						Request:    r,
-					}
-					if len(c.Body) != 0 {
-						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
-					} else {
-
-						response.Body = http.NoBody
-					}
-					return response, nil
-				}),
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
-					},
-				},
-				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = serverURL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
-				Region: "us-west-2",
-			})
-			var params GreetingWithErrorsInput
-			result, err := client.GreetingWithErrors(context.Background(), &params)
-			if err == nil {
-				t.Fatalf("expect not nil err")
-			}
-			if result != nil {
-				t.Fatalf("expect nil result, got %v", result)
-			}
-			var opErr interface {
-				Service() string
-				Operation() string
-			}
-			if !errors.As(err, &opErr) {
-				t.Fatalf("expect *types.ComplexError operation error, got %T", err)
-			}
-			if e, a := ServiceID, opErr.Service(); e != a {
-				t.Errorf("expect %v operation service name, got %v", e, a)
-			}
-			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {
-				t.Errorf("expect %v operation service name, got %v", e, a)
-			}
-			var actualErr *types.ComplexError
-			if !errors.As(err, &actualErr) {
-				t.Fatalf("expect *types.ComplexError result error, got %T", err)
-			}
-			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
-				t.Errorf("expect c.ExpectError value match:\n%v", err)
-			}
-		})
-	}
-}
-
 func TestClient_GreetingWithErrors_InvalidGreeting_smithyRpcv2cborDeserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
@@ -158,7 +35,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_smithyRpcv2cborDeserialize(t 
 			},
 			BodyMediaType: "application/cbor",
 			Body: func() []byte {
-				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4K2F3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNJbnZhbGlkR3JlZXRpbmdnTWVzc2FnZWJIaf8=`)
+				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4LnNtaXRoeS5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNJbnZhbGlkR3JlZXRpbmdnTWVzc2FnZWJIaf8=`)
 				if err != nil {
 					panic(err)
 				}
@@ -236,6 +113,129 @@ func TestClient_GreetingWithErrors_InvalidGreeting_smithyRpcv2cborDeserialize(t 
 			var actualErr *types.InvalidGreeting
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.InvalidGreeting result error, got %T", err)
+			}
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
+				t.Errorf("expect c.ExpectError value match:\n%v", err)
+			}
+		})
+	}
+}
+
+func TestClient_GreetingWithErrors_ComplexError_smithyRpcv2cborDeserialize(t *testing.T) {
+	cases := map[string]struct {
+		StatusCode    int
+		Header        http.Header
+		BodyMediaType string
+		Body          []byte
+		ExpectError   *types.ComplexError
+	}{
+		// Parses a complex error with no message member
+		"RpcV2CborComplexError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4K3NtaXRoeS5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3JoVG9wTGV2ZWxpVG9wIGxldmVsZk5lc3RlZL9jRm9vY2Jhcv//`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectError: &types.ComplexError{
+				TopLevel: ptr.String("Top level"),
+				Nested: &types.ComplexNestedErrorData{
+					Foo: ptr.String("bar"),
+				},
+			},
+		},
+		"RpcV2CborEmptyComplexError": {
+			StatusCode: 400,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2ZfX3R5cGV4K3NtaXRoeS5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3L/`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectError: &types.ComplexError{},
+		},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			serverURL := "http://localhost:8888/"
+			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
+				APIOptions: []func(*middleware.Stack) error{
+					func(s *middleware.Stack) error {
+						s.Finalize.Clear()
+						s.Initialize.Remove(`OperationInputValidation`)
+						return nil
+					},
+				},
+				EndpointResolver: EndpointResolverFunc(func(region string, options EndpointResolverOptions) (e aws.Endpoint, err error) {
+					e.URL = serverURL
+					e.SigningRegion = "us-west-2"
+					return e, err
+				}),
+				Region: "us-west-2",
+			})
+			var params GreetingWithErrorsInput
+			result, err := client.GreetingWithErrors(context.Background(), &params)
+			if err == nil {
+				t.Fatalf("expect not nil err")
+			}
+			if result != nil {
+				t.Fatalf("expect nil result, got %v", result)
+			}
+			var opErr interface {
+				Service() string
+				Operation() string
+			}
+			if !errors.As(err, &opErr) {
+				t.Fatalf("expect *types.ComplexError operation error, got %T", err)
+			}
+			if e, a := ServiceID, opErr.Service(); e != a {
+				t.Errorf("expect %v operation service name, got %v", e, a)
+			}
+			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {
+				t.Errorf("expect %v operation service name, got %v", e, a)
+			}
+			var actualErr *types.ComplexError
+			if !errors.As(err, &actualErr) {
+				t.Fatalf("expect *types.ComplexError result error, got %T", err)
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)

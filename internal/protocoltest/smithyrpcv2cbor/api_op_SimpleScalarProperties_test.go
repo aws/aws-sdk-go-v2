@@ -371,6 +371,38 @@ func TestClient_SimpleScalarProperties_smithyRpcv2cborDeserialize(t *testing.T) 
 				ShortValue:   ptr.Int16(10),
 			},
 		},
+		// The client should skip over additional fields that are not part of the
+		// structure. This allows a client generated against an older Smithy model to be
+		// able to communicate with a server that is generated against a newer Smithy
+		// model.
+		"RpcV2CborExtraFieldsInTheBodyShouldBeSkippedByClients": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type":    []string{"application/cbor"},
+				"smithy-protocol": []string{"rpc-v2-cbor"},
+			},
+			BodyMediaType: "application/cbor",
+			Body: func() []byte {
+				p, err := base64.StdEncoding.DecodeString(`v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989rZXh0cmFPYmplY3S/c2luZGVmaW5pdGVMZW5ndGhNYXC/a3dpdGhBbkFycmF5nwECA///cWRlZmluaXRlTGVuZ3RoTWFwo3J3aXRoQURlZmluaXRlQXJyYXmDAQIDeB1hbmRTb21lSW5kZWZpbml0ZUxlbmd0aFN0cmluZ3gfdGhhdCBoYXMsIGJlZW4gY2h1bmtlZCBvbiBjb21tYWxub3JtYWxTdHJpbmdjZm9vanNob3J0VmFsdWUZJw9uc29tZU90aGVyRmllbGR2dGhpcyBzaG91bGQgYmUgc2tpcHBlZP9saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w==`)
+				if err != nil {
+					panic(err)
+				}
+
+				return p
+			}(),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				ByteValue:         ptr.Int8(5),
+				DoubleValue:       ptr.Float64(1.889),
+				FalseBooleanValue: ptr.Bool(false),
+				FloatValue:        ptr.Float32(7.624),
+				IntegerValue:      ptr.Int32(256),
+				LongValue:         ptr.Int64(9873),
+				ShortValue:        ptr.Int16(9898),
+				StringValue:       ptr.String("simple"),
+				TrueBooleanValue:  ptr.Bool(true),
+				BlobValue:         []byte("foo"),
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

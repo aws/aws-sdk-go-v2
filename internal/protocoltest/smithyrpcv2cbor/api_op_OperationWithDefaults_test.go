@@ -43,7 +43,7 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 				Defaults: &types.Defaults{},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/OperationWithDefaults",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -59,7 +59,7 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 		"RpcV2CborClientSkipsTopLevelDefaultValuesInInput": {
 			Params:        &OperationWithDefaultsInput{},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/OperationWithDefaults",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -105,7 +105,7 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/OperationWithDefaults",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -125,7 +125,7 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 				OtherTopLevelDefault: 0,
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/OperationWithDefaults",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -144,7 +144,7 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 				ClientOptionalDefaults: &types.ClientOptionalDefaults{},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
+			ExpectURIPath: "/service/RpcV2Protocol/operation/OperationWithDefaults",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Accept":          []string{"application/cbor"},
@@ -160,23 +160,23 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborSerialize(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			if name == "RpcV2CborClientPopulatesDefaultValuesInInput" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			if name == "RpcV2CborClientSkipsTopLevelDefaultValuesInInput" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			if name == "RpcV2CborClientUsesExplicitlyProvidedMemberValuesOverDefaults" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			if name == "RpcV2CborClientUsesExplicitlyProvidedValuesInTopLevel" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			if name == "RpcV2CborClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			actualReq := &http.Request{}
@@ -340,11 +340,11 @@ func TestClient_OperationWithDefaults_smithyRpcv2cborDeserialize(t *testing.T) {
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			if name == "RpcV2CborClientPopulatesDefaultsValuesWhenMissingInResponse" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			if name == "RpcV2CborClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse" {
-				t.Skip("disabled test aws.protocoltests.rpcv2Cbor#RpcV2Protocol aws.protocoltests.rpcv2Cbor#OperationWithDefaults")
+				t.Skip("disabled test smithy.protocoltests.rpcv2Cbor#RpcV2Protocol smithy.protocoltests.rpcv2Cbor#OperationWithDefaults")
 			}
 
 			serverURL := "http://localhost:8888/"

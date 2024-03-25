@@ -111,7 +111,7 @@ func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.Ser
 	if len(awsmiddleware.GetSigningName(ctx)) == 0 {
 		signingName := endpoint.SigningName
 		if len(signingName) == 0 {
-			signingName = "rpcv2protocol"
+			signingName = ""
 		}
 		ctx = awsmiddleware.SetSigningName(ctx, signingName)
 	}
@@ -200,13 +200,13 @@ func resolveBaseEndpoint(cfg aws.Config, o *Options) {
 	}
 
 	_, g := os.LookupEnv("AWS_ENDPOINT_URL")
-	_, s := os.LookupEnv("AWS_ENDPOINT_URL_SAMPLE_RPCV2_PROTOCOL")
+	_, s := os.LookupEnv("AWS_ENDPOINT_URL_")
 
 	if g && !s {
 		return
 	}
 
-	value, found, err := internalConfig.ResolveServiceBaseEndpoint(context.Background(), "Sample RpcV2 Protocol", cfg.ConfigSources)
+	value, found, err := internalConfig.ResolveServiceBaseEndpoint(context.Background(), "", cfg.ConfigSources)
 	if found && err == nil {
 		o.BaseEndpoint = &value
 	}

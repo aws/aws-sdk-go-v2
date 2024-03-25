@@ -109,8 +109,8 @@ public final class AwsProtocolUtils {
         Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
                 // CBOR default value serialization (SHOULD)
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.rpcv2Cbor#RpcV2Protocol"))
-                        .operation(ShapeId.from("aws.protocoltests.rpcv2Cbor#OperationWithDefaults"))
+                        .service(ShapeId.from("smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("smithy.protocoltests.rpcv2Cbor#OperationWithDefaults"))
                         .addTestName("RpcV2CborClientPopulatesDefaultValuesInInput")
                         .addTestName("RpcV2CborClientSkipsTopLevelDefaultValuesInInput")
                         .addTestName("RpcV2CborClientUsesExplicitlyProvidedMemberValuesOverDefaults")
@@ -144,8 +144,8 @@ public final class AwsProtocolUtils {
         Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
                 // CBOR default value deserialization (SHOULD)
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.rpcv2Cbor#RpcV2Protocol"))
-                        .operation(ShapeId.from("aws.protocoltests.rpcv2Cbor#OperationWithDefaults"))
+                        .service(ShapeId.from("smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("smithy.protocoltests.rpcv2Cbor#OperationWithDefaults"))
                         .addTestName("RpcV2CborClientPopulatesDefaultsValuesWhenMissingInResponse")
                         .addTestName("RpcV2CborClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse")
                         .build(),

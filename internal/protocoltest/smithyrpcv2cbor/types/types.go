@@ -7,6 +7,23 @@ import (
 	"time"
 )
 
+// Describes one specific validation failure for an input member.
+type ValidationExceptionField struct {
+
+	// A detailed description of the validation failure.
+	//
+	// This member is required.
+	Message *string
+
+	// A JSONPointer expression to the structure member whose value failed to satisfy
+	// the modeled constraints.
+	//
+	// This member is required.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
 type ClientOptionalDefaults struct {
 	Member *int32
 
@@ -95,23 +112,6 @@ type StructureListMember struct {
 
 type GreetingStruct struct {
 	Hi *string
-
-	noSmithyDocumentSerde
-}
-
-// Describes one specific validation failure for an input member.
-type ValidationExceptionField struct {
-
-	// A detailed description of the validation failure.
-	//
-	// This member is required.
-	Message *string
-
-	// A JSONPointer expression to the structure member whose value failed to satisfy
-	// the modeled constraints.
-	//
-	// This member is required.
-	Path *string
 
 	noSmithyDocumentSerde
 }

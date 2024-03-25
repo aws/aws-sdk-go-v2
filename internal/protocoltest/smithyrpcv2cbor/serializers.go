@@ -491,6 +491,389 @@ func (m *smithyRpcv2cbor_serializeOpSparseNullsOperation) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
+func serializeCBOR_Blob(v []byte) (smithycbor.Value, error) {
+	return smithycbor.Slice(v), nil
+}
+
+func serializeCBOR_Bool(v bool) (smithycbor.Value, error) {
+	return smithycbor.Bool(v), nil
+}
+
+func serializeCBOR_Float32(v float32) (smithycbor.Value, error) {
+	return smithycbor.Float32(v), nil
+}
+
+func serializeCBOR_Float64(v float64) (smithycbor.Value, error) {
+	return smithycbor.Float64(v), nil
+}
+
+func serializeCBOR_Int16(v int16) (smithycbor.Value, error) {
+	if v < 0 {
+		return smithycbor.NegInt(uint64(-v)), nil
+	}
+	return smithycbor.Uint(uint64(v)), nil
+}
+
+func serializeCBOR_Int32(v int32) (smithycbor.Value, error) {
+	if v < 0 {
+		return smithycbor.NegInt(uint64(-v)), nil
+	}
+	return smithycbor.Uint(uint64(v)), nil
+}
+
+func serializeCBOR_Int64(v int64) (smithycbor.Value, error) {
+	if v < 0 {
+		return smithycbor.NegInt(uint64(-v)), nil
+	}
+	return smithycbor.Uint(uint64(v)), nil
+}
+
+func serializeCBOR_Int8(v int8) (smithycbor.Value, error) {
+	if v < 0 {
+		return smithycbor.NegInt(uint64(-v)), nil
+	}
+	return smithycbor.Uint(uint64(v)), nil
+}
+
+func serializeCBOR_String(v string) (smithycbor.Value, error) {
+	return smithycbor.String(v), nil
+}
+
+func serializeCBOR_Time(v time.Time) (smithycbor.Value, error) {
+	return &smithycbor.Tag{
+		ID:    1,
+		Value: smithycbor.Float64(float64(v.UnixMilli()) / 1000),
+	}, nil
+}
+
+func serializeCBOR_EmptyInputOutputInput(v *EmptyInputOutputInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
+func serializeCBOR_FractionalSecondsInput(v *FractionalSecondsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
+func serializeCBOR_GreetingWithErrorsInput(v *GreetingWithErrorsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
+func serializeCBOR_NoInputOutputInput(v *NoInputOutputInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
+func serializeCBOR_OperationWithDefaultsInput(v *OperationWithDefaultsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Defaults != nil {
+		ser, err := serializeCBOR_Defaults(v.Defaults)
+		if err != nil {
+			return nil, err
+		}
+		vm["defaults"] = ser
+	}
+	if v.ClientOptionalDefaults != nil {
+		ser, err := serializeCBOR_ClientOptionalDefaults(v.ClientOptionalDefaults)
+		if err != nil {
+			return nil, err
+		}
+		vm["clientOptionalDefaults"] = ser
+	}
+	if v.TopLevelDefault != nil {
+		ser, err := serializeCBOR_String(*v.TopLevelDefault)
+		if err != nil {
+			return nil, err
+		}
+		vm["topLevelDefault"] = ser
+	}
+	serotherTopLevelDefault, err := serializeCBOR_Int32(v.OtherTopLevelDefault)
+	if err != nil {
+		return nil, err
+	}
+	vm["otherTopLevelDefault"] = serotherTopLevelDefault
+	return vm, nil
+}
+
+func serializeCBOR_OptionalInputOutputInput(v *OptionalInputOutputInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Value != nil {
+		ser, err := serializeCBOR_String(*v.Value)
+		if err != nil {
+			return nil, err
+		}
+		vm["value"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RecursiveShapesInput(v *RecursiveShapesInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Nested != nil {
+		ser, err := serializeCBOR_RecursiveShapesInputOutputNested1(v.Nested)
+		if err != nil {
+			return nil, err
+		}
+		vm["nested"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RpcV2CborDenseMapsInput(v *RpcV2CborDenseMapsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.DenseStructMap != nil {
+		ser, err := serializeCBOR_DenseStructMap(v.DenseStructMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseStructMap"] = ser
+	}
+	if v.DenseNumberMap != nil {
+		ser, err := serializeCBOR_DenseNumberMap(v.DenseNumberMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseNumberMap"] = ser
+	}
+	if v.DenseBooleanMap != nil {
+		ser, err := serializeCBOR_DenseBooleanMap(v.DenseBooleanMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseBooleanMap"] = ser
+	}
+	if v.DenseStringMap != nil {
+		ser, err := serializeCBOR_DenseStringMap(v.DenseStringMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseStringMap"] = ser
+	}
+	if v.DenseSetMap != nil {
+		ser, err := serializeCBOR_DenseSetMap(v.DenseSetMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["denseSetMap"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RpcV2CborListsInput(v *RpcV2CborListsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.StringList != nil {
+		ser, err := serializeCBOR_StringList(v.StringList)
+		if err != nil {
+			return nil, err
+		}
+		vm["stringList"] = ser
+	}
+	if v.StringSet != nil {
+		ser, err := serializeCBOR_StringSet(v.StringSet)
+		if err != nil {
+			return nil, err
+		}
+		vm["stringSet"] = ser
+	}
+	if v.IntegerList != nil {
+		ser, err := serializeCBOR_IntegerList(v.IntegerList)
+		if err != nil {
+			return nil, err
+		}
+		vm["integerList"] = ser
+	}
+	if v.BooleanList != nil {
+		ser, err := serializeCBOR_BooleanList(v.BooleanList)
+		if err != nil {
+			return nil, err
+		}
+		vm["booleanList"] = ser
+	}
+	if v.TimestampList != nil {
+		ser, err := serializeCBOR_TimestampList(v.TimestampList)
+		if err != nil {
+			return nil, err
+		}
+		vm["timestampList"] = ser
+	}
+	if v.EnumList != nil {
+		ser, err := serializeCBOR_FooEnumList(v.EnumList)
+		if err != nil {
+			return nil, err
+		}
+		vm["enumList"] = ser
+	}
+	if v.IntEnumList != nil {
+		ser, err := serializeCBOR_IntegerEnumList(v.IntEnumList)
+		if err != nil {
+			return nil, err
+		}
+		vm["intEnumList"] = ser
+	}
+	if v.NestedStringList != nil {
+		ser, err := serializeCBOR_NestedStringList(v.NestedStringList)
+		if err != nil {
+			return nil, err
+		}
+		vm["nestedStringList"] = ser
+	}
+	if v.StructureList != nil {
+		ser, err := serializeCBOR_StructureList(v.StructureList)
+		if err != nil {
+			return nil, err
+		}
+		vm["structureList"] = ser
+	}
+	if v.BlobList != nil {
+		ser, err := serializeCBOR_BlobList(v.BlobList)
+		if err != nil {
+			return nil, err
+		}
+		vm["blobList"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RpcV2CborSparseMapsInput(v *RpcV2CborSparseMapsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.SparseStructMap != nil {
+		ser, err := serializeCBOR_SparseStructMap(v.SparseStructMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseStructMap"] = ser
+	}
+	if v.SparseNumberMap != nil {
+		ser, err := serializeCBOR_SparseNumberMap(v.SparseNumberMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseNumberMap"] = ser
+	}
+	if v.SparseBooleanMap != nil {
+		ser, err := serializeCBOR_SparseBooleanMap(v.SparseBooleanMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseBooleanMap"] = ser
+	}
+	if v.SparseStringMap != nil {
+		ser, err := serializeCBOR_SparseStringMap(v.SparseStringMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseStringMap"] = ser
+	}
+	if v.SparseSetMap != nil {
+		ser, err := serializeCBOR_SparseSetMap(v.SparseSetMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseSetMap"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_SimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.TrueBooleanValue != nil {
+		ser, err := serializeCBOR_Bool(*v.TrueBooleanValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["trueBooleanValue"] = ser
+	}
+	if v.FalseBooleanValue != nil {
+		ser, err := serializeCBOR_Bool(*v.FalseBooleanValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["falseBooleanValue"] = ser
+	}
+	if v.ByteValue != nil {
+		ser, err := serializeCBOR_Int8(*v.ByteValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["byteValue"] = ser
+	}
+	if v.DoubleValue != nil {
+		ser, err := serializeCBOR_Float64(*v.DoubleValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["doubleValue"] = ser
+	}
+	if v.FloatValue != nil {
+		ser, err := serializeCBOR_Float32(*v.FloatValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["floatValue"] = ser
+	}
+	if v.IntegerValue != nil {
+		ser, err := serializeCBOR_Int32(*v.IntegerValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["integerValue"] = ser
+	}
+	if v.LongValue != nil {
+		ser, err := serializeCBOR_Int64(*v.LongValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["longValue"] = ser
+	}
+	if v.ShortValue != nil {
+		ser, err := serializeCBOR_Int16(*v.ShortValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["shortValue"] = ser
+	}
+	if v.StringValue != nil {
+		ser, err := serializeCBOR_String(*v.StringValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["stringValue"] = ser
+	}
+	if v.BlobValue != nil {
+		ser, err := serializeCBOR_Blob(v.BlobValue)
+		if err != nil {
+			return nil, err
+		}
+		vm["blobValue"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_SparseNullsOperationInput(v *SparseNullsOperationInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.SparseStringList != nil {
+		ser, err := serializeCBOR_SparseStringList(v.SparseStringList)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseStringList"] = ser
+	}
+	if v.SparseStringMap != nil {
+		ser, err := serializeCBOR_SparseStringMap(v.SparseStringMap)
+		if err != nil {
+			return nil, err
+		}
+		vm["sparseStringMap"] = ser
+	}
+	return vm, nil
+}
+
 func serializeCBOR_ClientOptionalDefaults(v *types.ClientOptionalDefaults) (smithycbor.Value, error) {
 	vm := smithycbor.Map{}
 	if v.Member != nil {
@@ -1063,387 +1446,4 @@ func serializeCBOR_TimestampList(v []time.Time) (smithycbor.Value, error) {
 		vl = append(vl, ser)
 	}
 	return vl, nil
-}
-
-func serializeCBOR_Blob(v []byte) (smithycbor.Value, error) {
-	return smithycbor.Slice(v), nil
-}
-
-func serializeCBOR_Bool(v bool) (smithycbor.Value, error) {
-	return smithycbor.Bool(v), nil
-}
-
-func serializeCBOR_Float32(v float32) (smithycbor.Value, error) {
-	return smithycbor.Float32(v), nil
-}
-
-func serializeCBOR_Float64(v float64) (smithycbor.Value, error) {
-	return smithycbor.Float64(v), nil
-}
-
-func serializeCBOR_Int16(v int16) (smithycbor.Value, error) {
-	if v < 0 {
-		return smithycbor.NegInt(uint64(-v)), nil
-	}
-	return smithycbor.Uint(uint64(v)), nil
-}
-
-func serializeCBOR_Int32(v int32) (smithycbor.Value, error) {
-	if v < 0 {
-		return smithycbor.NegInt(uint64(-v)), nil
-	}
-	return smithycbor.Uint(uint64(v)), nil
-}
-
-func serializeCBOR_Int64(v int64) (smithycbor.Value, error) {
-	if v < 0 {
-		return smithycbor.NegInt(uint64(-v)), nil
-	}
-	return smithycbor.Uint(uint64(v)), nil
-}
-
-func serializeCBOR_Int8(v int8) (smithycbor.Value, error) {
-	if v < 0 {
-		return smithycbor.NegInt(uint64(-v)), nil
-	}
-	return smithycbor.Uint(uint64(v)), nil
-}
-
-func serializeCBOR_String(v string) (smithycbor.Value, error) {
-	return smithycbor.String(v), nil
-}
-
-func serializeCBOR_Time(v time.Time) (smithycbor.Value, error) {
-	return &smithycbor.Tag{
-		ID:    1,
-		Value: smithycbor.Float64(float64(v.UnixMilli()) / 1000),
-	}, nil
-}
-
-func serializeCBOR_EmptyInputOutputInput(v *EmptyInputOutputInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-
-	return vm, nil
-}
-
-func serializeCBOR_FractionalSecondsInput(v *FractionalSecondsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-
-	return vm, nil
-}
-
-func serializeCBOR_GreetingWithErrorsInput(v *GreetingWithErrorsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-
-	return vm, nil
-}
-
-func serializeCBOR_NoInputOutputInput(v *NoInputOutputInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-
-	return vm, nil
-}
-
-func serializeCBOR_OperationWithDefaultsInput(v *OperationWithDefaultsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Defaults != nil {
-		ser, err := serializeCBOR_Defaults(v.Defaults)
-		if err != nil {
-			return nil, err
-		}
-		vm["defaults"] = ser
-	}
-	if v.ClientOptionalDefaults != nil {
-		ser, err := serializeCBOR_ClientOptionalDefaults(v.ClientOptionalDefaults)
-		if err != nil {
-			return nil, err
-		}
-		vm["clientOptionalDefaults"] = ser
-	}
-	if v.TopLevelDefault != nil {
-		ser, err := serializeCBOR_String(*v.TopLevelDefault)
-		if err != nil {
-			return nil, err
-		}
-		vm["topLevelDefault"] = ser
-	}
-	serotherTopLevelDefault, err := serializeCBOR_Int32(v.OtherTopLevelDefault)
-	if err != nil {
-		return nil, err
-	}
-	vm["otherTopLevelDefault"] = serotherTopLevelDefault
-	return vm, nil
-}
-
-func serializeCBOR_OptionalInputOutputInput(v *OptionalInputOutputInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Value != nil {
-		ser, err := serializeCBOR_String(*v.Value)
-		if err != nil {
-			return nil, err
-		}
-		vm["value"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_RecursiveShapesInput(v *RecursiveShapesInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.Nested != nil {
-		ser, err := serializeCBOR_RecursiveShapesInputOutputNested1(v.Nested)
-		if err != nil {
-			return nil, err
-		}
-		vm["nested"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_RpcV2CborDenseMapsInput(v *RpcV2CborDenseMapsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.DenseStructMap != nil {
-		ser, err := serializeCBOR_DenseStructMap(v.DenseStructMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseStructMap"] = ser
-	}
-	if v.DenseNumberMap != nil {
-		ser, err := serializeCBOR_DenseNumberMap(v.DenseNumberMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseNumberMap"] = ser
-	}
-	if v.DenseBooleanMap != nil {
-		ser, err := serializeCBOR_DenseBooleanMap(v.DenseBooleanMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseBooleanMap"] = ser
-	}
-	if v.DenseStringMap != nil {
-		ser, err := serializeCBOR_DenseStringMap(v.DenseStringMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseStringMap"] = ser
-	}
-	if v.DenseSetMap != nil {
-		ser, err := serializeCBOR_DenseSetMap(v.DenseSetMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["denseSetMap"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_RpcV2CborListsInput(v *RpcV2CborListsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.StringList != nil {
-		ser, err := serializeCBOR_StringList(v.StringList)
-		if err != nil {
-			return nil, err
-		}
-		vm["stringList"] = ser
-	}
-	if v.StringSet != nil {
-		ser, err := serializeCBOR_StringSet(v.StringSet)
-		if err != nil {
-			return nil, err
-		}
-		vm["stringSet"] = ser
-	}
-	if v.IntegerList != nil {
-		ser, err := serializeCBOR_IntegerList(v.IntegerList)
-		if err != nil {
-			return nil, err
-		}
-		vm["integerList"] = ser
-	}
-	if v.BooleanList != nil {
-		ser, err := serializeCBOR_BooleanList(v.BooleanList)
-		if err != nil {
-			return nil, err
-		}
-		vm["booleanList"] = ser
-	}
-	if v.TimestampList != nil {
-		ser, err := serializeCBOR_TimestampList(v.TimestampList)
-		if err != nil {
-			return nil, err
-		}
-		vm["timestampList"] = ser
-	}
-	if v.EnumList != nil {
-		ser, err := serializeCBOR_FooEnumList(v.EnumList)
-		if err != nil {
-			return nil, err
-		}
-		vm["enumList"] = ser
-	}
-	if v.IntEnumList != nil {
-		ser, err := serializeCBOR_IntegerEnumList(v.IntEnumList)
-		if err != nil {
-			return nil, err
-		}
-		vm["intEnumList"] = ser
-	}
-	if v.NestedStringList != nil {
-		ser, err := serializeCBOR_NestedStringList(v.NestedStringList)
-		if err != nil {
-			return nil, err
-		}
-		vm["nestedStringList"] = ser
-	}
-	if v.StructureList != nil {
-		ser, err := serializeCBOR_StructureList(v.StructureList)
-		if err != nil {
-			return nil, err
-		}
-		vm["structureList"] = ser
-	}
-	if v.BlobList != nil {
-		ser, err := serializeCBOR_BlobList(v.BlobList)
-		if err != nil {
-			return nil, err
-		}
-		vm["blobList"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_RpcV2CborSparseMapsInput(v *RpcV2CborSparseMapsInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.SparseStructMap != nil {
-		ser, err := serializeCBOR_SparseStructMap(v.SparseStructMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["sparseStructMap"] = ser
-	}
-	if v.SparseNumberMap != nil {
-		ser, err := serializeCBOR_SparseNumberMap(v.SparseNumberMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["sparseNumberMap"] = ser
-	}
-	if v.SparseBooleanMap != nil {
-		ser, err := serializeCBOR_SparseBooleanMap(v.SparseBooleanMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["sparseBooleanMap"] = ser
-	}
-	if v.SparseStringMap != nil {
-		ser, err := serializeCBOR_SparseStringMap(v.SparseStringMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["sparseStringMap"] = ser
-	}
-	if v.SparseSetMap != nil {
-		ser, err := serializeCBOR_SparseSetMap(v.SparseSetMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["sparseSetMap"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_SimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.TrueBooleanValue != nil {
-		ser, err := serializeCBOR_Bool(*v.TrueBooleanValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["trueBooleanValue"] = ser
-	}
-	if v.FalseBooleanValue != nil {
-		ser, err := serializeCBOR_Bool(*v.FalseBooleanValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["falseBooleanValue"] = ser
-	}
-	if v.ByteValue != nil {
-		ser, err := serializeCBOR_Int8(*v.ByteValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["byteValue"] = ser
-	}
-	if v.DoubleValue != nil {
-		ser, err := serializeCBOR_Float64(*v.DoubleValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["doubleValue"] = ser
-	}
-	if v.FloatValue != nil {
-		ser, err := serializeCBOR_Float32(*v.FloatValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["floatValue"] = ser
-	}
-	if v.IntegerValue != nil {
-		ser, err := serializeCBOR_Int32(*v.IntegerValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["integerValue"] = ser
-	}
-	if v.LongValue != nil {
-		ser, err := serializeCBOR_Int64(*v.LongValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["longValue"] = ser
-	}
-	if v.ShortValue != nil {
-		ser, err := serializeCBOR_Int16(*v.ShortValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["shortValue"] = ser
-	}
-	if v.StringValue != nil {
-		ser, err := serializeCBOR_String(*v.StringValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["stringValue"] = ser
-	}
-	if v.BlobValue != nil {
-		ser, err := serializeCBOR_Blob(v.BlobValue)
-		if err != nil {
-			return nil, err
-		}
-		vm["blobValue"] = ser
-	}
-	return vm, nil
-}
-
-func serializeCBOR_SparseNullsOperationInput(v *SparseNullsOperationInput) (smithycbor.Value, error) {
-	vm := smithycbor.Map{}
-	if v.SparseStringList != nil {
-		ser, err := serializeCBOR_SparseStringList(v.SparseStringList)
-		if err != nil {
-			return nil, err
-		}
-		vm["sparseStringList"] = ser
-	}
-	if v.SparseStringMap != nil {
-		ser, err := serializeCBOR_SparseStringMap(v.SparseStringMap)
-		if err != nil {
-			return nil, err
-		}
-		vm["sparseStringMap"] = ser
-	}
-	return vm, nil
 }

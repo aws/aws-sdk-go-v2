@@ -44,30 +44,30 @@ func TestResolveBaseEndpoint(t *testing.T) {
 	}{
 		"env ignore": {
 			envGlobal:     "https://env-global.dev",
-			envService:    "https://env-sample-rpcv2-protocol.dev",
+			envService:    "https://env-.dev",
 			envIgnore:     true,
 			configGlobal:  "http://config-global.dev",
-			configService: "http://config-sample-rpcv2-protocol.dev",
+			configService: "http://config-.dev",
 			expectURL:     nil,
 		},
 		"env global": {
 			envGlobal:     "https://env-global.dev",
 			configGlobal:  "http://config-global.dev",
-			configService: "http://config-sample-rpcv2-protocol.dev",
+			configService: "http://config-.dev",
 			expectURL:     aws.String("https://env-global.dev"),
 		},
 		"env service": {
 			envGlobal:     "https://env-global.dev",
-			envService:    "https://env-sample-rpcv2-protocol.dev",
+			envService:    "https://env-.dev",
 			configGlobal:  "http://config-global.dev",
-			configService: "http://config-sample-rpcv2-protocol.dev",
-			expectURL:     aws.String("https://env-sample-rpcv2-protocol.dev"),
+			configService: "http://config-.dev",
+			expectURL:     aws.String("https://env-.dev"),
 		},
 		"config ignore": {
 			envGlobal:     "https://env-global.dev",
-			envService:    "https://env-sample-rpcv2-protocol.dev",
+			envService:    "https://env-.dev",
 			configGlobal:  "http://config-global.dev",
-			configService: "http://config-sample-rpcv2-protocol.dev",
+			configService: "http://config-.dev",
 			configIgnore:  true,
 			expectURL:     nil,
 		},
@@ -77,16 +77,16 @@ func TestResolveBaseEndpoint(t *testing.T) {
 		},
 		"config service": {
 			configGlobal:  "http://config-global.dev",
-			configService: "http://config-sample-rpcv2-protocol.dev",
-			expectURL:     aws.String("http://config-sample-rpcv2-protocol.dev"),
+			configService: "http://config-.dev",
+			expectURL:     aws.String("http://config-.dev"),
 		},
 		"client": {
 			envGlobal:      "https://env-global.dev",
-			envService:     "https://env-sample-rpcv2-protocol.dev",
+			envService:     "https://env-.dev",
 			configGlobal:   "http://config-global.dev",
-			configService:  "http://config-sample-rpcv2-protocol.dev",
-			clientEndpoint: aws.String("https://client-sample-rpcv2-protocol.dev"),
-			expectURL:      aws.String("https://client-sample-rpcv2-protocol.dev"),
+			configService:  "http://config-.dev",
+			clientEndpoint: aws.String("https://client-.dev"),
+			expectURL:      aws.String("https://client-.dev"),
 		},
 	}
 
@@ -109,7 +109,7 @@ func TestResolveBaseEndpoint(t *testing.T) {
 			}
 
 			if c.envService != "" {
-				t.Setenv("AWS_ENDPOINT_URL_SAMPLE_RPCV2_PROTOCOL", c.envService)
+				t.Setenv("AWS_ENDPOINT_URL_", c.envService)
 			}
 
 			awsConfig.ConfigSources = []interface{}{

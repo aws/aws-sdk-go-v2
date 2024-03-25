@@ -62,7 +62,7 @@ func transformToSharedOptions(options Options) endpoints.Options {
 	}
 }
 
-// Resolver Sample RpcV2 Protocol endpoint resolver
+// Resolver endpoint resolver
 type Resolver struct {
 	partitions endpoints.Partitions
 }
@@ -110,28 +110,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.api.aws",
+				Hostname:          ".{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.amazonaws.com",
+				Hostname:          "-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.api.aws",
+				Hostname:          "-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.amazonaws.com",
+				Hostname:          ".{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -145,28 +145,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.api.amazonwebservices.com.cn",
+				Hostname:          ".{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.amazonaws.com.cn",
+				Hostname:          "-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.amazonaws.com.cn",
+				Hostname:          ".{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -180,14 +180,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.c2s.ic.gov",
+				Hostname:          "-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.c2s.ic.gov",
+				Hostname:          ".{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -201,14 +201,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.sc2s.sgov.gov",
+				Hostname:          "-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.sc2s.sgov.gov",
+				Hostname:          ".{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -222,14 +222,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.cloud.adc-e.uk",
+				Hostname:          "-fips.{region}.cloud.adc-e.uk",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.cloud.adc-e.uk",
+				Hostname:          ".{region}.cloud.adc-e.uk",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -243,14 +243,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.csp.hci.ic.gov",
+				Hostname:          "-fips.{region}.csp.hci.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.csp.hci.ic.gov",
+				Hostname:          ".{region}.csp.hci.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -264,28 +264,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.api.aws",
+				Hostname:          ".{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.amazonaws.com",
+				Hostname:          "-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "rpcv2protocol-fips.{region}.api.aws",
+				Hostname:          "-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "rpcv2protocol.{region}.amazonaws.com",
+				Hostname:          ".{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},

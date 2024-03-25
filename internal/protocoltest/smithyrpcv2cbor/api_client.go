@@ -20,7 +20,7 @@ import (
 	"net/http"
 )
 
-const ServiceID = "Sample RpcV2 Protocol"
+const ServiceID = ""
 const ServiceAPIVersion = "2020-07-14"
 
 // Client provides the API client to make operations call for RpcV2 Protocol
@@ -352,7 +352,7 @@ func addClientUserAgent(stack *middleware.Stack, options Options) error {
 		return err
 	}
 
-	ua.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "samplerpcv2protocol", goModuleVersion)
+	ua.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "", goModuleVersion)
 	if len(options.AppID) > 0 {
 		ua.AddSDKAgentKey(awsmiddleware.ApplicationIdentifier, options.AppID)
 	}
