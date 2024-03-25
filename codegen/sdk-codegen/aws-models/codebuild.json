@@ -118,6 +118,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PERSONAL_ACCESS_TOKEN"
                     }
+                },
+                "CODECONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODECONNECTIONS"
+                    }
                 }
             }
         },
@@ -4226,7 +4232,7 @@
                 "statusCode": {
                     "target": "com.amazonaws.codebuild#FleetStatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status code of the compute fleet. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code>: The compute fleet is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>: The compute fleet is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROTATING</code>: The compute fleet is being rotated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>: The compute fleet is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code>: The compute fleet has failed to create.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_ROLLBACK_FAILED</code>: The compute fleet has failed to update and could not rollback to previous state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code>: The compute fleet has succeeded and is active.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status code of the compute fleet. Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code>: The compute fleet is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>: The compute fleet is being updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROTATING</code>: The compute fleet is being rotated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_DELETION</code>: The compute fleet is pending deletion.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code>: The compute fleet is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code>: The compute fleet has failed to create.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_ROLLBACK_FAILED</code>: The compute fleet has failed to update and could not rollback to previous state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code>: The compute fleet has succeeded and is active.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "context": {
@@ -6336,14 +6342,14 @@
                 "type": {
                     "target": "com.amazonaws.codebuild#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of repository that contains the source code to be built. Valid values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CODECOMMIT</code>: The source code is in an CodeCommit repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CODEPIPELINE</code>: The source code settings are specified in the\n                    source action of a pipeline in CodePipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud\n                    repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise\n                    Server repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_SOURCE</code>: The project does not have input source code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code>: The source code is in an Amazon S3 bucket.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of repository that contains the source code to be built. Valid values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CODECOMMIT</code>: The source code is in an CodeCommit repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CODEPIPELINE</code>: The source code settings are specified in the\n                    source action of a pipeline in CodePipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GITHUB</code>: The source code is in a GitHub repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise\n                    Server repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GITLAB</code>: The source code is in a GitLab repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GITLAB_SELF_MANAGED</code>: The source code is in a self-managed GitLab repository.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_SOURCE</code>: The project does not have input source code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code>: The source code is in an Amazon S3 bucket.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "location": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the location of the source code to be built. Valid values\n            include:</p>\n         <ul>\n            <li>\n               <p>For source code settings that are specified in the source action of a pipeline\n                    in CodePipeline, <code>location</code> should not be specified. If it is specified,\n                    CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source\n                    action instead of this value.</p>\n            </li>\n            <li>\n               <p>For source code in an CodeCommit repository, the HTTPS clone URL to the repository\n                    that contains the source code and the buildspec file (for example,\n                        <code>https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name></code>).</p>\n            </li>\n            <li>\n               <p>For source code in an Amazon S3 input bucket, one of the following. </p>\n               <ul>\n                  <li>\n                     <p>The path to the ZIP file that contains the source code (for example,\n                                <code><bucket-name>/<path>/<object-name>.zip</code>). </p>\n                  </li>\n                  <li>\n                     <p>The path to the folder that contains the source code (for example,\n                                <code><bucket-name>/<path-to-source-code>/<folder>/</code>). </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For source code in a GitHub repository, the HTTPS clone URL to the repository\n                    that contains the source and the buildspec file. You must connect your Amazon Web Services account \n                    to your GitHub account. Use the CodeBuild console to start creating a build\n                    project. When you use the console to connect (or reconnect) with GitHub, on the\n                    GitHub <b>Authorize application</b> page, for\n                        <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to\n                    allow CodeBuild to have access to, and then choose <b>Authorize\n                        application</b>. (After you have connected to your GitHub account,\n                    you do not need to finish creating the build project. You can leave the CodeBuild\n                    console.) To instruct CodeBuild to use this connection, in the <code>source</code>\n                    object, set the <code>auth</code> object's <code>type</code> value to\n                        <code>OAUTH</code>.</p>\n            </li>\n            <li>\n               <p>For source code in a Bitbucket repository, the HTTPS clone URL to the\n                    repository that contains the source and the buildspec file. You must connect\n                    your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start\n                    creating a build project. When you use the console to connect (or reconnect)\n                    with Bitbucket, on the Bitbucket <b>Confirm access to your\n                        account</b> page, choose <b>Grant\n                        access</b>. (After you have connected to your Bitbucket account, you\n                    do not need to finish creating the build project. You can leave the CodeBuild\n                    console.) To instruct CodeBuild to use this connection, in the <code>source</code>\n                    object, set the <code>auth</code> object's <code>type</code> value to\n                        <code>OAUTH</code>.</p>\n            </li>\n         </ul>\n         <p>\n          If you specify <code>CODEPIPELINE</code> for the <code>Type</code> property, don't specify this \n          property. For all of the other types, you must specify <code>Location</code>.\n       </p>"
+                        "smithy.api#documentation": "<p>Information about the location of the source code to be built. Valid values\n            include:</p>\n         <ul>\n            <li>\n               <p>For source code settings that are specified in the source action of a pipeline\n                    in CodePipeline, <code>location</code> should not be specified. If it is specified,\n                    CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source\n                    action instead of this value.</p>\n            </li>\n            <li>\n               <p>For source code in an CodeCommit repository, the HTTPS clone URL to the repository\n                    that contains the source code and the buildspec file (for example,\n                        <code>https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name></code>).</p>\n            </li>\n            <li>\n               <p>For source code in an Amazon S3 input bucket, one of the following. </p>\n               <ul>\n                  <li>\n                     <p>The path to the ZIP file that contains the source code (for example,\n                                <code><bucket-name>/<path>/<object-name>.zip</code>). </p>\n                  </li>\n                  <li>\n                     <p>The path to the folder that contains the source code (for example,\n                                <code><bucket-name>/<path-to-source-code>/<folder>/</code>). </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For source code in a GitHub repository, the HTTPS clone URL to the repository\n                    that contains the source and the buildspec file. You must connect your Amazon Web Services account \n                    to your GitHub account. Use the CodeBuild console to start creating a build\n                    project. When you use the console to connect (or reconnect) with GitHub, on the\n                    GitHub <b>Authorize application</b> page, for\n                        <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to\n                    allow CodeBuild to have access to, and then choose <b>Authorize\n                        application</b>. (After you have connected to your GitHub account,\n                    you do not need to finish creating the build project. You can leave the CodeBuild\n                    console.) To instruct CodeBuild to use this connection, in the <code>source</code>\n                    object, set the <code>auth</code> object's <code>type</code> value to\n                        <code>OAUTH</code>.</p>\n            </li>\n            <li>\n               <p>For source code in an GitLab or self-managed GitLab repository, the HTTPS clone URL to the repository\n                    that contains the source and the buildspec file. You must connect your Amazon Web Services account \n                    to your GitLab account. Use the CodeBuild console to start creating a build\n                    project. When you use the console to connect (or reconnect) with GitLab, on the\n                    Connections <b>Authorize application</b> page, choose <b>Authorize</b>. Then on the CodeStar Connections <b>Create GitLab connection</b> page, \n                    choose <b>Connect to GitLab</b>. (After you have connected to your GitLab account,\n                    you do not need to finish creating the build project. You can leave the CodeBuild\n                    console.) To instruct CodeBuild to override the default connection and use this connection instead,\n                    set the <code>auth</code> object's <code>type</code> value to\n                    <code>CODECONNECTIONS</code> in the <code>source</code> object.</p>\n            </li>\n            <li>\n               <p>For source code in a Bitbucket repository, the HTTPS clone URL to the\n                    repository that contains the source and the buildspec file. You must connect\n                    your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start\n                    creating a build project. When you use the console to connect (or reconnect)\n                    with Bitbucket, on the Bitbucket <b>Confirm access to your\n                        account</b> page, choose <b>Grant\n                        access</b>. (After you have connected to your Bitbucket account, you\n                    do not need to finish creating the build project. You can leave the CodeBuild\n                    console.) To instruct CodeBuild to use this connection, in the <code>source</code>\n                    object, set the <code>auth</code> object's <code>type</code> value to\n                        <code>OAUTH</code>.</p>\n            </li>\n         </ul>\n         <p>\n          If you specify <code>CODEPIPELINE</code> for the <code>Type</code> property, don't specify this \n          property. For all of the other types, you must specify <code>Location</code>.\n       </p>"
                     }
                 },
                 "gitCloneDepth": {
@@ -6373,7 +6379,7 @@
                 "reportBuildStatus": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Set to true to report the status of a build's start and finish to your source\n            provider. This option is valid only when your source provider is GitHub, GitHub\n            Enterprise, or Bitbucket. If this is set and you use a different source provider, an\n            <code>invalidInputException</code> is thrown. </p>\n         <p>To be able to report the build status to the source provider, the user associated with the source provider must\nhave write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p>\n         <p>The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n         <p>If your project's builds are triggered by a webhook, you must push a\n              new commit to the repo for a change to this property to take\n              effect.</p>"
+                        "smithy.api#documentation": "<p> Set to true to report the status of a build's start and finish to your source\n            provider. This option is valid only when your source provider is GitHub, GitHub\n            Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you use a different source provider, an\n            <code>invalidInputException</code> is thrown. </p>\n         <p>To be able to report the build status to the source provider, the user associated with the source provider must\nhave write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p>\n         <p>The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n         <p>If your project's builds are triggered by a webhook, you must push a\n              new commit to the repo for a change to this property to take\n              effect.</p>"
                     }
                 },
                 "buildStatusConfig": {
@@ -6412,7 +6418,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source version for the corresponding source identifier. If specified, must be one\n          of:</p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n                  corresponds to the version of the source code you want to build. If a pull\n                  request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                  (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n                  HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                  used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                  version of the source code you want to build. If a branch name is specified, the\n                  branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                  commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n                  file to use.</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n              with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>",
+                        "smithy.api#documentation": "<p>The source version for the corresponding source identifier. If specified, must be one\n          of:</p>\n         <ul>\n            <li>\n               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub or GitLab: the commit ID, pull request ID, branch name, or tag name that\n                  corresponds to the version of the source code you want to build. If a pull\n                  request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                  (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n                  HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                  used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                  version of the source code you want to build. If a branch name is specified, the\n                  branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                  commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n                  file to use.</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n              with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7390,6 +7396,18 @@
                     "traits": {
                         "smithy.api#enumValue": "GITHUB_ENTERPRISE"
                     }
+                },
+                "GITLAB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB"
+                    }
+                },
+                "GITLAB_SELF_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_SELF_MANAGED"
+                    }
                 }
             }
         },
@@ -7433,7 +7451,7 @@
                 "type": {
                     "target": "com.amazonaws.codebuild#SourceAuthType",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p> This data type is deprecated and is no longer accurate or used. </p>\n         </note>\n         <p>The authorization type to use. The only valid value is <code>OAUTH</code>, which\n            represents the OAuth authorization type.</p>",
+                        "smithy.api#documentation": "<p>The authorization type to use. Valid options are OAUTH or CODECONNECTIONS.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7456,6 +7474,12 @@
                     "traits": {
                         "smithy.api#enumValue": "OAUTH"
                     }
+                },
+                "CODECONNECTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CODECONNECTIONS"
+                    }
                 }
             }
         },
@@ -7471,18 +7495,24 @@
                 "serverType": {
                     "target": "com.amazonaws.codebuild#ServerType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, or\n            BITBUCKET. </p>"
+                        "smithy.api#documentation": "<p> The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE, GITLAB, GITLAB_SELF_MANAGED, or\n            BITBUCKET. </p>"
                     }
                 },
                 "authType": {
                     "target": "com.amazonaws.codebuild#AuthType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of authentication used by the credentials. Valid options are OAUTH,\n            BASIC_AUTH, or PERSONAL_ACCESS_TOKEN. </p>"
+                        "smithy.api#documentation": "<p> The type of authentication used by the credentials. Valid options are OAUTH,\n            BASIC_AUTH, PERSONAL_ACCESS_TOKEN, or CODECONNECTIONS. </p>"
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection ARN if your serverType type is GITLAB or GITLAB_SELF_MANAGED and your authType is CODECONNECTIONS.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Information about the credentials for a GitHub, GitHub Enterprise, or Bitbucket\n            repository. </p>"
+                "smithy.api#documentation": "<p> Information about the credentials for a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket\n            repository. </p>"
             }
         },
         "com.amazonaws.codebuild#SourceCredentialsInfos": {
@@ -7510,6 +7540,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GITHUB"
+                    }
+                },
+                "GITLAB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB"
+                    }
+                },
+                "GITLAB_SELF_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITLAB_SELF_MANAGED"
                     }
                 },
                 "S3": {

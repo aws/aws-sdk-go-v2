@@ -403,7 +403,7 @@
                 "Cidr": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The address range, in CIDR notation. This must be the exact range that you provisioned. \n\t\t\tYou can't advertise only a portion of the provisioned range.</p>",
+                        "smithy.api#documentation": "<p>The address range, in CIDR notation. This must be the exact range that you provisioned. \n\t\t\tYou can't advertise only a portion of the provisioned range.</p>\n         <p> For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own IP addresses (BYOIP)</a> in \n\t\t\tthe Global Accelerator Developer Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -556,7 +556,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A cross-account attachment in Global Accelerator. A cross-account attachment\n\t\t\tspecifies the <i>principals</i> who have permission to add to accelerators in their own\n\t\t\taccount the resources in your account that you also list in the attachment.</p>"
+                "smithy.api#documentation": "<p>A cross-account attachment in Global Accelerator. A cross-account attachment\n\t\t\tspecifies the <i>principals</i> who have permission to work with <i>resources</i> \n\t\t\tin your account, which you also list in the attachment.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#AttachmentName": {
@@ -610,7 +610,7 @@
                 "Cidr": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The address range, in CIDR notation.</p>"
+                        "smithy.api#documentation": "<p>The address range, in CIDR notation.</p>\n         <p> For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own IP addresses (BYOIP)</a> in \n\t\t\tthe Global Accelerator Developer Guide.</p>"
                     }
                 },
                 "State": {
@@ -908,7 +908,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a cross-account attachment in Global Accelerator. You create a cross-account attachment to\n\t\t\tspecify the <i>principals</i> who have permission to add to accelerators in their own\n\t\t\taccount the resources in your account that you also list in the attachment.</p>\n         <p>A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an \n\t\t\taccelerator. For account numbers that are listed as principals, to add a resource listed in the attachment to an accelerator,\n\t\t\tyou must sign in to an account specified as a principal. Then you can add the resources that are listed \n\t\t\tto any of your accelerators. If an accelerator ARN is listed in the cross-account attachment as a principal, \n\t\t\tanyone with permission to make updates to the accelerator can add as endpoints resources that are listed in the \n\t\t\tattachment. </p>"
+                "smithy.api#documentation": "<p>Create a cross-account attachment in Global Accelerator. You create a cross-account attachment to\n\t\t\tspecify the <i>principals</i> who have permission to work with <i>resources</i>\n\t\t\tin accelerators in their own account. You specify, in the same attachment, the resources that are shared.</p>\n         <p>A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an \n\t\t\taccelerator. For account numbers that are listed as principals, to work with a resource listed in the attachment,\n\t\t\tyou must sign in to an account specified as a principal. Then, you can work with resources that are listed, \n\t\t\twith any of your accelerators. If an accelerator ARN is listed in the cross-account attachment as a principal, \n\t\t\tanyone with permission to make updates to the accelerator can work with resources that are listed in the \n\t\t\tattachment. </p>\n         <p>Specify each principal and resource separately. To specify two CIDR address pools, list\n\t\t\tthem individually under <code>Resources</code>, and so on. For a command line operation, for example,\n\t\t\tyou might use a statement like the following:</p>\n         <p>\n            <code> \"Resources\": [{\"Cidr\": \"169.254.60.0/24\"},{\"Cidr\": \"169.254.59.0/24\"}]</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html\">\n\t\t\tWorking with cross-account attachments and resources in Global Accelerator</a> in the <i>\n\t\t\t\tGlobal Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#CreateCrossAccountAttachmentRequest": {
@@ -924,13 +924,13 @@
                 "Principals": {
                     "target": "com.amazonaws.globalaccelerator#Principals",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principals to list in the cross-account attachment. A principal can be an Amazon Web Services account\n\t\t\tnumber or the Amazon Resource Name (ARN) for an accelerator. </p>"
+                        "smithy.api#documentation": "<p>The principals to include in the cross-account attachment. A principal can be an Amazon Web Services account\n\t\t\tnumber or the Amazon Resource Name (ARN) for an accelerator. </p>"
                     }
                 },
                 "Resources": {
                     "target": "com.amazonaws.globalaccelerator#Resources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the resources to list in the cross-account attachment. A resource can\n\t\t\tbe any supported Amazon Web Services resource type for Global Accelerator. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the resources to include in the cross-account attachment. A resource can\n\t\t\tbe any supported Amazon Web Services resource type for Global Accelerator or a CIDR range for a\n\t\t\tbring your own IP address (BYOIP) address pool. </p>"
                     }
                 },
                 "IdempotencyToken": {
@@ -944,7 +944,7 @@
                 "Tags": {
                     "target": "com.amazonaws.globalaccelerator#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Create tags for cross-account attachment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t\tin Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Add tags for a cross-account attachment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html\">Tagging\n\t\t\tin Global Accelerator</a> in the <i>Global Accelerator Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -1437,15 +1437,21 @@
                         "smithy.api#documentation": "<p>The endpoint ID for the endpoint that is listed in a cross-account attachment and\n\t\t\tcan be added to an accelerator by specified principals.</p>"
                     }
                 },
+                "Cidr": {
+                    "target": "com.amazonaws.globalaccelerator#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IP address range, in CIDR format, that is specified as an Amazon Web Services resource. The address must\n\t\t\tbe provisioned and advertised in Global Accelerator by following the bring your own IP address (BYOIP) process \n\t\t\tfor Global Accelerator.</p>\n         <p> For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own IP addresses (BYOIP)</a> in \n\t\t\tthe Global Accelerator Developer Guide.</p>"
+                    }
+                },
                 "AttachmentArn": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources)\n\t\t\tthat can be added to accelerators and principals that have permission to add the endpoints to accelerators.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cross-account attachment that specifies the resources (endpoints or\n\t\t\tCIDR range) that can be added to accelerators and principals that have permission to add them.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An endpoint (Amazon Web Services resource) that is listed in a cross-account attachment and\n\t\t\tcan be added to an accelerator by specified principals, that are also listed in the attachment.</p>"
+                "smithy.api#documentation": "<p>An endpoint (Amazon Web Services resource) or an IP address range, in CIDR format, that is \n\t\t\tlisted in a cross-account attachment. A cross-account resource can be added to an accelerator by \n\t\t\tspecified principals, which are also listed in the attachment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html\">\n\t\t\tWorking with cross-account attachments and resources in Global Accelerator</a> in the <i>\n\t\t\t\tGlobal Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#CrossAccountResources": {
@@ -1667,7 +1673,7 @@
                 "AttachmentArn": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources)\n\t\t\tthat can be added to accelerators and principals that have permission to add the endpoints to accelerators.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources)\n\t\t\tthat can be added to accelerators and principals that have permission to add the endpoints.</p>"
                     }
                 }
             },
@@ -1870,7 +1876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a cross-account attachment. When you delete an attachment, Global Accelerator revokes the permission\n\t\t\tto use the resources in the attachment from all principals in the list of principals. Global Accelerator \n\t\t\trevokes the permission for specific resources by doing the following:</p>\n         <ul>\n            <li>\n               <p>If the principal is an account ID, Global Accelerator reviews every accelerator in the account\n\t\t\tand removes cross-account endpoints from all accelerators.</p>\n            </li>\n            <li>\n               <p>If the principal is an accelerator, Global Accelerator reviews just that accelerator\n\t\t\tand removes cross-account endpoints from it.</p>\n            </li>\n         </ul>\n         <p>If there are overlapping permissions provided by multiple cross-account attachments,\n\t\tGlobal Accelerator only removes endpoints if there are no current cross-account attachments that provide\n\t\taccess permission. For example, if you delete a cross-account attachment that lists an\n\t\taccelerator as a principal, but another cross-account attachment includes the account ID\n\t\tthat owns that accelerator, endpoints will not be removed from the accelerator.</p>"
+                "smithy.api#documentation": "<p>Delete a cross-account attachment. When you delete an attachment, Global Accelerator revokes the permission\n\t\t\tto use the resources in the attachment from all principals in the list of principals. Global Accelerator \n\t\t\trevokes the permission for specific resources.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html\">\n\t\t\tWorking with cross-account attachments and resources in Global Accelerator</a> in the <i>\n\t\t\t\tGlobal Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#DeleteCrossAccountAttachmentRequest": {
@@ -2188,7 +2194,7 @@
                 "Cidr": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The address range, in CIDR notation. The prefix must be the same prefix that you specified \n\t\t\twhen you provisioned the address range.</p>",
+                        "smithy.api#documentation": "<p>The address range, in CIDR notation. The prefix must be the same prefix that you specified \n\t\t\twhen you provisioned the address range.</p>\n         <p> For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own IP addresses (BYOIP)</a> in \n\t\t\tthe Global Accelerator Developer Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2787,7 +2793,7 @@
                 "EndpointId": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon\n\t\t\tResource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address\n\t\t\tallocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A resource must be valid and active \n\t\t\twhen you add it as an endpoint.</p>\n         <p>An Application Load Balancer can be either internal or internet-facing.</p>"
+                        "smithy.api#documentation": "<p>An ID for the endpoint. If the endpoint is a Network Load Balancer or Application Load Balancer, this is the Amazon\n\t\t\tResource Name (ARN) of the resource. If the endpoint is an Elastic IP address, this is the Elastic IP address\n\t\t\tallocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A resource must be valid and active \n\t\t\twhen you add it as an endpoint.</p>\n         <p>For cross-account endpoints, this must be the ARN of the resource.</p>"
                     }
                 },
                 "Weight": {
@@ -2805,7 +2811,7 @@
                 "AttachmentArn": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources)\n\t\t\tthat can be added to accelerators and principals that have permission to add the endpoints to accelerators.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources)\n\t\t\tthat can be added to accelerators and principals that have permission to add the endpoints.</p>"
                     }
                 }
             },
@@ -4344,7 +4350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the accounts that have cross-account endpoints.</p>"
+                "smithy.api#documentation": "<p>List the accounts that have cross-account resources.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html\">\n\t\t\tWorking with cross-account attachments and resources in Global Accelerator</a> in the <i>\n\t\t\t\tGlobal Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#ListCrossAccountResourceAccountsRequest": {
@@ -4360,7 +4366,7 @@
                 "ResourceOwnerAwsAccountIds": {
                     "target": "com.amazonaws.globalaccelerator#AwsAccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account IDs of principals (resource owners) in a cross-account attachment who can add endpoints (resources) listed\n\t\t\tin the same attachment.</p>"
+                        "smithy.api#documentation": "<p>The account IDs of principals (resource owners) in a cross-account attachment who can work\n\t\t\twith resources listed in the same attachment.</p>"
                     }
                 }
             },
@@ -4394,7 +4400,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the cross-account endpoints available to add to an accelerator.</p>",
+                "smithy.api#documentation": "<p>List the cross-account resources available to work with.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4422,7 +4428,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.globalaccelerator#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of cross-account endpoints objects that you want to return with this call. The default value is 10.</p>"
+                        "smithy.api#documentation": "<p>The number of cross-account resource objects that you want to return with this call. The default value is 10.</p>"
                     }
                 },
                 "NextToken": {
@@ -4442,7 +4448,7 @@
                 "CrossAccountResources": {
                     "target": "com.amazonaws.globalaccelerator#CrossAccountResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoints attached to an accelerator in a cross-account attachment.</p>"
+                        "smithy.api#documentation": "<p>The cross-account resources used with an accelerator.</p>"
                     }
                 },
                 "NextToken": {
@@ -5333,7 +5339,7 @@
                 "Cidr": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can\n\t\t\tspecify is /24. The address range cannot overlap with another address range that you've brought \n\t\t\tto this or another Region.</p>",
+                        "smithy.api#documentation": "<p>The public IPv4 address range, in CIDR notation. The most specific IP prefix that you can\n\t\t\tspecify is /24. The address range cannot overlap with another address range that you've brought \n\t\t\tto this Amazon Web Services Region or another Region.</p>\n         <p> For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own IP addresses (BYOIP)</a> in \n\t\t\tthe Global Accelerator Developer Guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5474,19 +5480,26 @@
                 "EndpointId": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint ID for the endpoint (Amazon Web Services resource).</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The endpoint ID for the endpoint that is specified as a Amazon Web Services resource. </p>\n         <p>An endpoint ID for the cross-account feature is the ARN of an Amazon Web Services resource, such as a \n\t\t\tNetwork Load Balancer, that Global Accelerator supports as an endpoint for an accelerator.</p>"
+                    }
+                },
+                "Cidr": {
+                    "target": "com.amazonaws.globalaccelerator#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IP address range, in CIDR format, that is specified as resource. The address must\n\t\t\tbe provisioned and advertised in Global Accelerator by following the bring your own IP address (BYOIP) process \n\t\t\tfor Global Accelerator</p>\n         <p> For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own IP addresses (BYOIP)</a> in \n\t\t\tthe Global Accelerator Developer Guide.</p>"
                     }
                 },
                 "Region": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Region where a resource is located.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where a shared endpoint resource is located.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Amazon Web Services resource that is supported by Global Accelerator and can be added as an endpoint for an accelerator.</p>"
+                "smithy.api#documentation": "<p>A resource is one of the following: the ARN for an Amazon Web Services resource that is supported by \n\t\t\tGlobal Accelerator to be added as an endpoint, or a CIDR range that specifies a bring your own IP (BYOIP) address pool.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#ResourceArn": {
@@ -5901,7 +5914,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a cross-account attachment to add or remove principals or resources. When you update \n\t\t\tan attachment to remove a principal (account ID or accelerator) or a resource, Global Accelerator \n\t\t\trevokes the permission for specific resources by doing the following:</p>\n         <ul>\n            <li>\n               <p>If the principal is an account ID, Global Accelerator reviews every accelerator in the account\n\t\t\t\tand removes cross-account endpoints from all accelerators.</p>\n            </li>\n            <li>\n               <p>If the principal is an accelerator, Global Accelerator reviews just that accelerator\n\t\t\t\tand removes cross-account endpoints from it.</p>\n            </li>\n         </ul>\n         <p>If there are overlapping permissions provided by multiple cross-account attachments,\n\t\t\tGlobal Accelerator only removes endpoints if there are no current cross-account attachments that provide\n\t\t\taccess permission. For example, if you delete a cross-account attachment that lists an\n\t\t\taccelerator as a principal, but another cross-account attachment includes the account ID\n\t\t\tthat owns that accelerator, endpoints will not be removed from the accelerator.</p>"
+                "smithy.api#documentation": "<p>Update a cross-account attachment to add or remove principals or resources. When you update \n\t\t\tan attachment to remove a principal (account ID or accelerator) or a resource, Global Accelerator \n\t\t\trevokes the permission for specific resources. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html\">\n\t\t\tWorking with cross-account attachments and resources in Global Accelerator</a> in the <i>\n\t\t\t\tGlobal Accelerator Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.globalaccelerator#UpdateCrossAccountAttachmentRequest": {
@@ -5923,25 +5936,25 @@
                 "AddPrincipals": {
                     "target": "com.amazonaws.globalaccelerator#Principals",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principals to add to the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN)\n\t\t\tof an accelerator that the attachment gives permission to add the resources from another account, listed in the attachment.</p>\n         <p>To add more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.</p>"
+                        "smithy.api#documentation": "<p>The principals to add to the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN)\n\t\t\tof an accelerator that the attachment gives permission to work with resources from another account. The resources\n\t\t\tare also listed in the attachment.</p>\n         <p>To add more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.</p>"
                     }
                 },
                 "RemovePrincipals": {
                     "target": "com.amazonaws.globalaccelerator#Principals",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principals to remove from the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN)\n\t\t\tof an accelerator that is given permission to add the resources from another account, listed in the cross-account attachment.</p>\n         <p>To remove more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.</p>"
+                        "smithy.api#documentation": "<p>The principals to remove from the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN)\n\t\t\tof an accelerator that the attachment gives permission to work with resources from another account. The resources\n\t\t\tare also listed in the attachment.</p>\n         <p>To remove more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.</p>"
                     }
                 },
                 "AddResources": {
                     "target": "com.amazonaws.globalaccelerator#Resources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resources to add to the cross-account attachment. A resource listed in a cross-account attachment can be added\n\t\t\tto an accelerator by the principals that are listed in the attachment.</p>\n         <p>To add more than one resource, separate the resource ARNs with commas.</p>"
+                        "smithy.api#documentation": "<p>The resources to add to the cross-account attachment. A resource listed in a cross-account attachment can be used\n\t\t\twith an accelerator by the principals that are listed in the attachment.</p>\n         <p>To add more than one resource, separate the resource ARNs with commas.</p>"
                     }
                 },
                 "RemoveResources": {
                     "target": "com.amazonaws.globalaccelerator#Resources",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resources to remove from the cross-account attachment. A resource listed in a cross-account attachment can be added\n\t\t\tto an accelerator fy principals that are listed in the cross-account attachment.</p>\n         <p>To remove more than one resource, separate the resource ARNs with commas.</p>"
+                        "smithy.api#documentation": "<p>The resources to remove from the cross-account attachment. A resource listed in a cross-account attachment can be used\n\t\t\twith an accelerator by the principals that are listed in the attachment.</p>\n         <p>To remove more than one resource, separate the resource ARNs with commas.</p>"
                     }
                 }
             },
@@ -6388,7 +6401,7 @@
                 "Cidr": {
                     "target": "com.amazonaws.globalaccelerator#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The address range, in CIDR notation.</p>",
+                        "smithy.api#documentation": "<p>The address range, in CIDR notation.</p>\n         <p> For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html\">Bring your own IP addresses (BYOIP)</a> in \n\t\t\tthe Global Accelerator Developer Guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6403,7 +6416,7 @@
                 "ByoipCidr": {
                     "target": "com.amazonaws.globalaccelerator#ByoipCidr",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the address pool.</p>"
+                        "smithy.api#documentation": "<p>Information about the BYOIP address pool.</p>"
                     }
                 }
             },

@@ -10644,6 +10644,46 @@
                 "smithy.api#documentation": "H265 Look Ahead Rate Control"
             }
         },
+        "com.amazonaws.medialive#H265MvOverPictureBoundaries": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "H265 Mv Over Picture Boundaries"
+            }
+        },
+        "com.amazonaws.medialive#H265MvTemporalPredictor": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "H265 Mv Temporal Predictor"
+            }
+        },
         "com.amazonaws.medialive#H265Profile": {
             "type": "enum",
             "members": {
@@ -10946,6 +10986,48 @@
                         "smithy.api#documentation": "Timecode burn-in settings",
                         "smithy.api#jsonName": "timecodeBurninSettings"
                     }
+                },
+                "MvOverPictureBoundaries": {
+                    "target": "com.amazonaws.medialive#H265MvOverPictureBoundaries",
+                    "traits": {
+                        "smithy.api#documentation": "If you are setting up the picture as a tile, you must set this to \"disabled\". In all other configurations, you typically enter \"enabled\".",
+                        "smithy.api#jsonName": "mvOverPictureBoundaries"
+                    }
+                },
+                "MvTemporalPredictor": {
+                    "target": "com.amazonaws.medialive#H265MvTemporalPredictor",
+                    "traits": {
+                        "smithy.api#documentation": "If you are setting up the picture as a tile, you must set this to \"disabled\". In other configurations, you typically enter \"enabled\".",
+                        "smithy.api#jsonName": "mvTemporalPredictor"
+                    }
+                },
+                "TileHeight": {
+                    "target": "com.amazonaws.medialive#__integerMin64Max2160",
+                    "traits": {
+                        "smithy.api#documentation": "Set this field to set up the picture as a tile. You must also set tileWidth.\nThe tile height must result in 22 or fewer rows in the frame. The tile width\nmust result in 20 or fewer columns in the frame. And finally, the product of the\ncolumn count and row count must be 64 of less.\nIf the tile width and height are specified, MediaLive will override the video\ncodec slices field with a value that MediaLive calculates",
+                        "smithy.api#jsonName": "tileHeight"
+                    }
+                },
+                "TilePadding": {
+                    "target": "com.amazonaws.medialive#H265TilePadding",
+                    "traits": {
+                        "smithy.api#documentation": "Set to \"padded\" to force MediaLive to add padding to the frame, to obtain a frame that is a whole multiple of the tile size.\nIf you are setting up the picture as a tile, you must enter \"padded\".\nIn all other configurations, you typically enter \"none\".",
+                        "smithy.api#jsonName": "tilePadding"
+                    }
+                },
+                "TileWidth": {
+                    "target": "com.amazonaws.medialive#__integerMin256Max3840",
+                    "traits": {
+                        "smithy.api#documentation": "Set this field to set up the picture as a tile. See tileHeight for more information.",
+                        "smithy.api#jsonName": "tileWidth"
+                    }
+                },
+                "TreeblockSize": {
+                    "target": "com.amazonaws.medialive#H265TreeblockSize",
+                    "traits": {
+                        "smithy.api#documentation": "Select the tree block size used for encoding. If you enter \"auto\", the encoder will pick the best size. If you are setting up the picture as a tile, you must set this to 32x32. In all other configurations, you typically enter \"auto\".",
+                        "smithy.api#jsonName": "treeblockSize"
+                    }
                 }
             },
             "traits": {
@@ -10972,6 +11054,26 @@
                 "smithy.api#documentation": "H265 Tier"
             }
         },
+        "com.amazonaws.medialive#H265TilePadding": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "PADDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PADDED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "H265 Tile Padding"
+            }
+        },
         "com.amazonaws.medialive#H265TimecodeInsertionBehavior": {
             "type": "enum",
             "members": {
@@ -10990,6 +11092,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "H265 Timecode Insertion Behavior"
+            }
+        },
+        "com.amazonaws.medialive#H265TreeblockSize": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "TREE_SIZE_32X32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TREE_SIZE_32X32"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "H265 Treeblock Size"
             }
         },
         "com.amazonaws.medialive#Hdr10Settings": {
@@ -26010,6 +26132,16 @@
                 }
             }
         },
+        "com.amazonaws.medialive#__integerMin256Max3840": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin256Max3840",
+                "smithy.api#range": {
+                    "min": 256,
+                    "max": 3840
+                }
+            }
+        },
         "com.amazonaws.medialive#__integerMin25Max10000": {
             "type": "integer",
             "traits": {
@@ -26065,6 +26197,16 @@
                 "smithy.api#range": {
                     "min": 4,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.medialive#__integerMin64Max2160": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin64Max2160",
+                "smithy.api#range": {
+                    "min": 64,
+                    "max": 2160
                 }
             }
         },
