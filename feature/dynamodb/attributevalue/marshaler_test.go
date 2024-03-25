@@ -546,6 +546,60 @@ func BenchmarkMarshalOneMember(b *testing.B) {
 	})
 }
 
+func BenchmarkList20Ints(b *testing.B) {
+	input := []int{}
+	for i := 0; i < 20; i++ {
+		input = append(input, i)
+	}
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, err := Marshal(input)
+			if err != nil {
+				b.Fatal(err)
+			}
+		}
+	})
+}
+
+func BenchmarkStruct10Fields(b *testing.B) {
+
+	type struct10Fields struct {
+		Field1  int
+		Field2  string
+		Field3  int
+		Field4  string
+		Field5  string
+		Field6  string
+		Field7  int
+		Field8  string
+		Field9  int
+		Field10 int
+	}
+
+	input := struct10Fields{
+		Field1:  10,
+		Field2:  "ASD",
+		Field3:  70,
+		Field4:  "qqqqq",
+		Field5:  "AAA",
+		Field6:  "bbb",
+		Field7:  63,
+		Field8:  "aa",
+		Field9:  10,
+		Field10: 63,
+	}
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, err := Marshal(input)
+			if err != nil {
+				b.Fatal(err)
+			}
+		}
+	})
+}
+
 func BenchmarkMarshalTwoMembers(b *testing.B) {
 	fieldCache = &fieldCacher{}
 

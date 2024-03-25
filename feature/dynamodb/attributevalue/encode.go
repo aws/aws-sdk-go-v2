@@ -714,11 +714,6 @@ func (e *Encoder) encodeScalar(v reflect.Value, fieldTag tag) (types.AttributeVa
 }
 
 func (e *Encoder) encodeNumber(v reflect.Value) (types.AttributeValue, error) {
-	if av, err := tryMarshaler(v); err != nil {
-		return nil, err
-	} else if av != nil {
-		return av, nil
-	}
 
 	var out string
 	switch v.Kind() {
@@ -742,11 +737,6 @@ func (e *Encoder) encodeNumber(v reflect.Value) (types.AttributeValue, error) {
 }
 
 func (e *Encoder) encodeString(v reflect.Value) (types.AttributeValue, error) {
-	if av, err := tryMarshaler(v); err != nil {
-		return nil, err
-	} else if av != nil {
-		return av, nil
-	}
 
 	switch v.Kind() {
 	case reflect.String:

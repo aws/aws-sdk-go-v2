@@ -1,0 +1,8 @@
+{
+    "id": "b35ddd7e-9ee6-4481-8481-e7729b0f749d",
+    "type": "bugfix",
+    "description": "Removes some duplicated reflection-based calls in the marshaler.",
+    "modules": [
+        "feature/dynamodb/attributevalue"
+    ]
+}
