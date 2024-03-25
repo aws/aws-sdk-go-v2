@@ -1,8 +1,0 @@
-{
-    "id": "7b3afd39-6d47-41a1-b441-cae094740eaf",
-    "type": "feature",
-    "description": "Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild.",
-    "modules": [
-        "service/codebuild"
-    ]
-}

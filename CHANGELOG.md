@@ -1,3 +1,26 @@
+# Release (2024-03-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue`: [v1.13.12](feature/dynamodb/attributevalue/CHANGELOG.md#v11312-2024-03-25)
+  * **Bug Fix**: Removes some duplicated reflection-based calls in the marshaler.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.32.0](service/codebuild/CHANGELOG.md#v1320-2024-03-25)
+  * **Feature**: Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.153.0](service/ec2/CHANGELOG.md#v11530-2024-03-25)
+  * **Feature**: Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.41.4](service/ecs/CHANGELOG.md#v1414-2024-03-25)
+  * **Documentation**: Documentation only update for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.26.0](service/emrcontainers/CHANGELOG.md#v1260-2024-03-25)
+  * **Feature**: This release increases the number of supported job template parameters from 20 to 100.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.23.0](service/globalaccelerator/CHANGELOG.md#v1230-2024-03-25)
+  * **Feature**: AWS Global Accelerator now supports cross-account sharing for bring your own IP addresses.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.49.0](service/medialive/CHANGELOG.md#v1490-2024-03-25)
+  * **Feature**: Exposing TileMedia H265 options
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.134.0](service/sagemaker/CHANGELOG.md#v11340-2024-03-25)
+  * **Feature**: Introduced support for the following new instance types on SageMaker Studio for JupyterLab and CodeEditor applications: m6i, m6id, m7i, c6i, c6id, c7i, r6i, r6id, r7i, and p5
+
 # Release (2024-03-22)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "d84d7a78-50c9-44cd-99ca-98b7c999354e",
-    "type": "feature",
-    "description": "This release increases the number of supported job template parameters from 20 to 100.",
-    "modules": [
-        "service/emrcontainers"
-    ]
-}

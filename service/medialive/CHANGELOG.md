@@ -1,3 +1,7 @@
+# v1.49.0 (2024-03-25)
+
+* **Feature**: Exposing TileMedia H265 options
+
 # v1.48.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

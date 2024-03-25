@@ -1,8 +1,0 @@
-{
-    "id": "ac17563c-e64d-4cc0-9a65-ffe717f17825",
-    "type": "feature",
-    "description": "AWS Global Accelerator now supports cross-account sharing for bring your own IP addresses.",
-    "modules": [
-        "service/globalaccelerator"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "cd3c2ae3-7d9f-4d53-b45b-08351b506295",
-    "type": "feature",
-    "description": "Introduced support for the following new instance types on SageMaker Studio for JupyterLab and CodeEditor applications: m6i, m6id, m7i, c6i, c6id, c7i, r6i, r6id, r7i, and p5",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

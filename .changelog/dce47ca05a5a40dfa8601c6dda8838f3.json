@@ -1,8 +1,0 @@
-{
-    "id": "dce47ca0-5a5a-40df-a860-1c6dda8838f3",
-    "type": "feature",
-    "description": "Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults",
-    "modules": [
-        "service/ec2"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.134.0 (2024-03-25)
+
+* **Feature**: Introduced support for the following new instance types on SageMaker Studio for JupyterLab and CodeEditor applications: m6i, m6id, m7i, c6i, c6id, c7i, r6i, r6id, r7i, and p5
+
 # v1.133.1 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

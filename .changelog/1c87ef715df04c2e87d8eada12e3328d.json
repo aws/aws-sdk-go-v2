@@ -1,8 +1,0 @@
-{
-    "id": "1c87ef71-5df0-4c2e-87d8-eada12e3328d",
-    "type": "feature",
-    "description": "Exposing TileMedia H265 options",
-    "modules": [
-        "service/medialive"
-    ]
-}

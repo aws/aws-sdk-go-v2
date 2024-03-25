@@ -1,3 +1,7 @@
+# v1.13.12 (2024-03-25)
+
+* **Bug Fix**: Removes some duplicated reflection-based calls in the marshaler.
+
 # v1.13.11 (2024-03-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "c7d9272f-e2fc-49a4-8ff5-8c015c7c05e2",
-    "type": "documentation",
-    "description": "Documentation only update for Amazon ECS.",
-    "modules": [
-        "service/ecs"
-    ]
-}

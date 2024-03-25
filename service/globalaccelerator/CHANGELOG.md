@@ -1,3 +1,7 @@
+# v1.23.0 (2024-03-25)
+
+* **Feature**: AWS Global Accelerator now supports cross-account sharing for bring your own IP addresses.
+
 # v1.22.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions
