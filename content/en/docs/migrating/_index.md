@@ -206,7 +206,7 @@ type GetObjectAPIClient interface {
 }
 
 func GetObjectBytes(ctx context.Context, client GetObjectAPIClient, bucket, key string) ([]byte, error) {
-    object, err := api.GetObject(ctx, &s3.GetObjectInput{
+    object, err := client.GetObject(ctx, &s3.GetObjectInput{
         Bucket: &bucket,
         Key:    &key,
     })
