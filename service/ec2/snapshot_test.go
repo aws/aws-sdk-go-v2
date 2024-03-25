@@ -5342,6 +5342,18 @@ func TestCheckSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInstanceMetadataDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstanceMetadataDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInstanceMetadataDefaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInstanceTypesFromInstanceRequirements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInstanceTypesFromInstanceRequirements(context.Background(), nil, func(o *Options) {
@@ -6067,6 +6079,18 @@ func TestCheckSnapshot_ModifyInstanceMaintenanceOptions(t *testing.T) {
 	_, err := svc.ModifyInstanceMaintenanceOptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyInstanceMaintenanceOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyInstanceMetadataDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyInstanceMetadataDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyInstanceMetadataDefaults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12733,6 +12757,18 @@ func TestUpdateSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetInstanceMetadataDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstanceMetadataDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInstanceMetadataDefaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetInstanceTypesFromInstanceRequirements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInstanceTypesFromInstanceRequirements(context.Background(), nil, func(o *Options) {
@@ -13458,6 +13494,18 @@ func TestUpdateSnapshot_ModifyInstanceMaintenanceOptions(t *testing.T) {
 	_, err := svc.ModifyInstanceMaintenanceOptions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyInstanceMaintenanceOptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyInstanceMetadataDefaults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyInstanceMetadataDefaults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyInstanceMetadataDefaults")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

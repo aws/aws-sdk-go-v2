@@ -3379,6 +3379,11 @@ func awsAwsjson11_serializeDocumentResource(v *types.Resource, value smithyjson.
 	object := value.Object()
 	defer object.Close()
 
+	if v.Cidr != nil {
+		ok := object.Key("Cidr")
+		ok.String(*v.Cidr)
+	}
+
 	if v.EndpointId != nil {
 		ok := object.Key("EndpointId")
 		ok.String(*v.EndpointId)

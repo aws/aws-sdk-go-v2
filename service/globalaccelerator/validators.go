@@ -1322,38 +1322,6 @@ func validateEndpointIdentifiers(v []types.EndpointIdentifier) error {
 	}
 }
 
-func validateResource(v *types.Resource) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "Resource"}
-	if v.EndpointId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndpointId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateResources(v []types.Resource) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "Resources"}
-	for i := range v {
-		if err := validateResource(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1488,11 +1456,6 @@ func validateOpCreateCrossAccountAttachmentInput(v *CreateCrossAccountAttachment
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCrossAccountAttachmentInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Resources != nil {
-		if err := validateResources(v.Resources); err != nil {
-			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.IdempotencyToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
@@ -2161,16 +2124,6 @@ func validateOpUpdateCrossAccountAttachmentInput(v *UpdateCrossAccountAttachment
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCrossAccountAttachmentInput"}
 	if v.AttachmentArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttachmentArn"))
-	}
-	if v.AddResources != nil {
-		if err := validateResources(v.AddResources); err != nil {
-			invalidParams.AddNested("AddResources", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RemoveResources != nil {
-		if err := validateResources(v.RemoveResources); err != nil {
-			invalidParams.AddNested("RemoveResources", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

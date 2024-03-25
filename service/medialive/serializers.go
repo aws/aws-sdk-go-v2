@@ -8303,6 +8303,16 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		ok.Integer(*v.MinIInterval)
 	}
 
+	if len(v.MvOverPictureBoundaries) > 0 {
+		ok := object.Key("mvOverPictureBoundaries")
+		ok.String(string(v.MvOverPictureBoundaries))
+	}
+
+	if len(v.MvTemporalPredictor) > 0 {
+		ok := object.Key("mvTemporalPredictor")
+		ok.String(string(v.MvTemporalPredictor))
+	}
+
 	if v.ParDenominator != nil {
 		ok := object.Key("parDenominator")
 		ok.Integer(*v.ParDenominator)
@@ -8348,6 +8358,21 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		ok.String(string(v.Tier))
 	}
 
+	if v.TileHeight != nil {
+		ok := object.Key("tileHeight")
+		ok.Integer(*v.TileHeight)
+	}
+
+	if len(v.TilePadding) > 0 {
+		ok := object.Key("tilePadding")
+		ok.String(string(v.TilePadding))
+	}
+
+	if v.TileWidth != nil {
+		ok := object.Key("tileWidth")
+		ok.Integer(*v.TileWidth)
+	}
+
 	if v.TimecodeBurninSettings != nil {
 		ok := object.Key("timecodeBurninSettings")
 		if err := awsRestjson1_serializeDocumentTimecodeBurninSettings(v.TimecodeBurninSettings, ok); err != nil {
@@ -8358,6 +8383,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if len(v.TimecodeInsertion) > 0 {
 		ok := object.Key("timecodeInsertion")
 		ok.String(string(v.TimecodeInsertion))
+	}
+
+	if len(v.TreeblockSize) > 0 {
+		ok := object.Key("treeblockSize")
+		ok.String(string(v.TreeblockSize))
 	}
 
 	return nil

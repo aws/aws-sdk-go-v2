@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the cross-account endpoints available to add to an accelerator.
+// List the cross-account resources available to work with.
 func (c *Client) ListCrossAccountResources(ctx context.Context, params *ListCrossAccountResourcesInput, optFns ...func(*Options)) (*ListCrossAccountResourcesOutput, error) {
 	if params == nil {
 		params = &ListCrossAccountResourcesInput{}
@@ -37,7 +37,7 @@ type ListCrossAccountResourcesInput struct {
 	// The Amazon Resource Name (ARN) of an accelerator in a cross-account attachment.
 	AcceleratorArn *string
 
-	// The number of cross-account endpoints objects that you want to return with this
+	// The number of cross-account resource objects that you want to return with this
 	// call. The default value is 10.
 	MaxResults *int32
 
@@ -50,7 +50,7 @@ type ListCrossAccountResourcesInput struct {
 
 type ListCrossAccountResourcesOutput struct {
 
-	// The endpoints attached to an accelerator in a cross-account attachment.
+	// The cross-account resources used with an accelerator.
 	CrossAccountResources []types.CrossAccountResource
 
 	// The token for the next set of results. You receive this token from a previous
@@ -153,7 +153,7 @@ var _ ListCrossAccountResourcesAPIClient = (*Client)(nil)
 // ListCrossAccountResourcesPaginatorOptions is the paginator options for
 // ListCrossAccountResources
 type ListCrossAccountResourcesPaginatorOptions struct {
-	// The number of cross-account endpoints objects that you want to return with this
+	// The number of cross-account resource objects that you want to return with this
 	// call. The default value is 10.
 	Limit int32
 

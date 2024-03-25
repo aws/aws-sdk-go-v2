@@ -201,6 +201,88 @@ const (
 	AppInstanceTypeMlTrn12xlarge           AppInstanceType = "ml.trn1.2xlarge"
 	AppInstanceTypeMlTrn132xlarge          AppInstanceType = "ml.trn1.32xlarge"
 	AppInstanceTypeMlTrn1n32xlarge         AppInstanceType = "ml.trn1n.32xlarge"
+	AppInstanceTypeMlP548xlarge            AppInstanceType = "ml.p5.48xlarge"
+	AppInstanceTypeMlM6iLarge              AppInstanceType = "ml.m6i.large"
+	AppInstanceTypeMlM6iXlarge             AppInstanceType = "ml.m6i.xlarge"
+	AppInstanceTypeMlM6i2xlarge            AppInstanceType = "ml.m6i.2xlarge"
+	AppInstanceTypeMlM6i4xlarge            AppInstanceType = "ml.m6i.4xlarge"
+	AppInstanceTypeMlM6i8xlarge            AppInstanceType = "ml.m6i.8xlarge"
+	AppInstanceTypeMlM6i12xlarge           AppInstanceType = "ml.m6i.12xlarge"
+	AppInstanceTypeMlM6i16xlarge           AppInstanceType = "ml.m6i.16xlarge"
+	AppInstanceTypeMlM6i24xlarge           AppInstanceType = "ml.m6i.24xlarge"
+	AppInstanceTypeMlM6i32xlarge           AppInstanceType = "ml.m6i.32xlarge"
+	AppInstanceTypeMlM7iLarge              AppInstanceType = "ml.m7i.large"
+	AppInstanceTypeMlM7iXlarge             AppInstanceType = "ml.m7i.xlarge"
+	AppInstanceTypeMlM7i2xlarge            AppInstanceType = "ml.m7i.2xlarge"
+	AppInstanceTypeMlM7i4xlarge            AppInstanceType = "ml.m7i.4xlarge"
+	AppInstanceTypeMlM7i8xlarge            AppInstanceType = "ml.m7i.8xlarge"
+	AppInstanceTypeMlM7i12xlarge           AppInstanceType = "ml.m7i.12xlarge"
+	AppInstanceTypeMlM7i16xlarge           AppInstanceType = "ml.m7i.16xlarge"
+	AppInstanceTypeMlM7i24xlarge           AppInstanceType = "ml.m7i.24xlarge"
+	AppInstanceTypeMlM7i48xlarge           AppInstanceType = "ml.m7i.48xlarge"
+	AppInstanceTypeMlC6iLarge              AppInstanceType = "ml.c6i.large"
+	AppInstanceTypeMlC6iXlarge             AppInstanceType = "ml.c6i.xlarge"
+	AppInstanceTypeMlC6i2xlarge            AppInstanceType = "ml.c6i.2xlarge"
+	AppInstanceTypeMlC6i4xlarge            AppInstanceType = "ml.c6i.4xlarge"
+	AppInstanceTypeMlC6i8xlarge            AppInstanceType = "ml.c6i.8xlarge"
+	AppInstanceTypeMlC6i12xlarge           AppInstanceType = "ml.c6i.12xlarge"
+	AppInstanceTypeMlC6i16xlarge           AppInstanceType = "ml.c6i.16xlarge"
+	AppInstanceTypeMlC6i24xlarge           AppInstanceType = "ml.c6i.24xlarge"
+	AppInstanceTypeMlC6i32xlarge           AppInstanceType = "ml.c6i.32xlarge"
+	AppInstanceTypeMlC7iLarge              AppInstanceType = "ml.c7i.large"
+	AppInstanceTypeMlC7iXlarge             AppInstanceType = "ml.c7i.xlarge"
+	AppInstanceTypeMlC7i2xlarge            AppInstanceType = "ml.c7i.2xlarge"
+	AppInstanceTypeMlC7i4xlarge            AppInstanceType = "ml.c7i.4xlarge"
+	AppInstanceTypeMlC7i8xlarge            AppInstanceType = "ml.c7i.8xlarge"
+	AppInstanceTypeMlC7i12xlarge           AppInstanceType = "ml.c7i.12xlarge"
+	AppInstanceTypeMlC7i16xlarge           AppInstanceType = "ml.c7i.16xlarge"
+	AppInstanceTypeMlC7i24xlarge           AppInstanceType = "ml.c7i.24xlarge"
+	AppInstanceTypeMlC7i48xlarge           AppInstanceType = "ml.c7i.48xlarge"
+	AppInstanceTypeMlR6iLarge              AppInstanceType = "ml.r6i.large"
+	AppInstanceTypeMlR6iXlarge             AppInstanceType = "ml.r6i.xlarge"
+	AppInstanceTypeMlR6i2xlarge            AppInstanceType = "ml.r6i.2xlarge"
+	AppInstanceTypeMlR6i4xlarge            AppInstanceType = "ml.r6i.4xlarge"
+	AppInstanceTypeMlR6i8xlarge            AppInstanceType = "ml.r6i.8xlarge"
+	AppInstanceTypeMlR6i12xlarge           AppInstanceType = "ml.r6i.12xlarge"
+	AppInstanceTypeMlR6i16xlarge           AppInstanceType = "ml.r6i.16xlarge"
+	AppInstanceTypeMlR6i24xlarge           AppInstanceType = "ml.r6i.24xlarge"
+	AppInstanceTypeMlR6i32xlarge           AppInstanceType = "ml.r6i.32xlarge"
+	AppInstanceTypeMlR7iLarge              AppInstanceType = "ml.r7i.large"
+	AppInstanceTypeMlR7iXlarge             AppInstanceType = "ml.r7i.xlarge"
+	AppInstanceTypeMlR7i2xlarge            AppInstanceType = "ml.r7i.2xlarge"
+	AppInstanceTypeMlR7i4xlarge            AppInstanceType = "ml.r7i.4xlarge"
+	AppInstanceTypeMlR7i8xlarge            AppInstanceType = "ml.r7i.8xlarge"
+	AppInstanceTypeMlR7i12xlarge           AppInstanceType = "ml.r7i.12xlarge"
+	AppInstanceTypeMlR7i16xlarge           AppInstanceType = "ml.r7i.16xlarge"
+	AppInstanceTypeMlR7i24xlarge           AppInstanceType = "ml.r7i.24xlarge"
+	AppInstanceTypeMlR7i48xlarge           AppInstanceType = "ml.r7i.48xlarge"
+	AppInstanceTypeMlM6idLarge             AppInstanceType = "ml.m6id.large"
+	AppInstanceTypeMlM6idXlarge            AppInstanceType = "ml.m6id.xlarge"
+	AppInstanceTypeMlM6id2xlarge           AppInstanceType = "ml.m6id.2xlarge"
+	AppInstanceTypeMlM6id4xlarge           AppInstanceType = "ml.m6id.4xlarge"
+	AppInstanceTypeMlM6id8xlarge           AppInstanceType = "ml.m6id.8xlarge"
+	AppInstanceTypeMlM6id12xlarge          AppInstanceType = "ml.m6id.12xlarge"
+	AppInstanceTypeMlM6id16xlarge          AppInstanceType = "ml.m6id.16xlarge"
+	AppInstanceTypeMlM6id24xlarge          AppInstanceType = "ml.m6id.24xlarge"
+	AppInstanceTypeMlM6id32xlarge          AppInstanceType = "ml.m6id.32xlarge"
+	AppInstanceTypeMlC6idLarge             AppInstanceType = "ml.c6id.large"
+	AppInstanceTypeMlC6idXlarge            AppInstanceType = "ml.c6id.xlarge"
+	AppInstanceTypeMlC6id2xlarge           AppInstanceType = "ml.c6id.2xlarge"
+	AppInstanceTypeMlC6id4xlarge           AppInstanceType = "ml.c6id.4xlarge"
+	AppInstanceTypeMlC6id8xlarge           AppInstanceType = "ml.c6id.8xlarge"
+	AppInstanceTypeMlC6id12xlarge          AppInstanceType = "ml.c6id.12xlarge"
+	AppInstanceTypeMlC6id16xlarge          AppInstanceType = "ml.c6id.16xlarge"
+	AppInstanceTypeMlC6id24xlarge          AppInstanceType = "ml.c6id.24xlarge"
+	AppInstanceTypeMlC6id32xlarge          AppInstanceType = "ml.c6id.32xlarge"
+	AppInstanceTypeMlR6idLarge             AppInstanceType = "ml.r6id.large"
+	AppInstanceTypeMlR6idXlarge            AppInstanceType = "ml.r6id.xlarge"
+	AppInstanceTypeMlR6id2xlarge           AppInstanceType = "ml.r6id.2xlarge"
+	AppInstanceTypeMlR6id4xlarge           AppInstanceType = "ml.r6id.4xlarge"
+	AppInstanceTypeMlR6id8xlarge           AppInstanceType = "ml.r6id.8xlarge"
+	AppInstanceTypeMlR6id12xlarge          AppInstanceType = "ml.r6id.12xlarge"
+	AppInstanceTypeMlR6id16xlarge          AppInstanceType = "ml.r6id.16xlarge"
+	AppInstanceTypeMlR6id24xlarge          AppInstanceType = "ml.r6id.24xlarge"
+	AppInstanceTypeMlR6id32xlarge          AppInstanceType = "ml.r6id.32xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -271,6 +353,88 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.trn1.2xlarge",
 		"ml.trn1.32xlarge",
 		"ml.trn1n.32xlarge",
+		"ml.p5.48xlarge",
+		"ml.m6i.large",
+		"ml.m6i.xlarge",
+		"ml.m6i.2xlarge",
+		"ml.m6i.4xlarge",
+		"ml.m6i.8xlarge",
+		"ml.m6i.12xlarge",
+		"ml.m6i.16xlarge",
+		"ml.m6i.24xlarge",
+		"ml.m6i.32xlarge",
+		"ml.m7i.large",
+		"ml.m7i.xlarge",
+		"ml.m7i.2xlarge",
+		"ml.m7i.4xlarge",
+		"ml.m7i.8xlarge",
+		"ml.m7i.12xlarge",
+		"ml.m7i.16xlarge",
+		"ml.m7i.24xlarge",
+		"ml.m7i.48xlarge",
+		"ml.c6i.large",
+		"ml.c6i.xlarge",
+		"ml.c6i.2xlarge",
+		"ml.c6i.4xlarge",
+		"ml.c6i.8xlarge",
+		"ml.c6i.12xlarge",
+		"ml.c6i.16xlarge",
+		"ml.c6i.24xlarge",
+		"ml.c6i.32xlarge",
+		"ml.c7i.large",
+		"ml.c7i.xlarge",
+		"ml.c7i.2xlarge",
+		"ml.c7i.4xlarge",
+		"ml.c7i.8xlarge",
+		"ml.c7i.12xlarge",
+		"ml.c7i.16xlarge",
+		"ml.c7i.24xlarge",
+		"ml.c7i.48xlarge",
+		"ml.r6i.large",
+		"ml.r6i.xlarge",
+		"ml.r6i.2xlarge",
+		"ml.r6i.4xlarge",
+		"ml.r6i.8xlarge",
+		"ml.r6i.12xlarge",
+		"ml.r6i.16xlarge",
+		"ml.r6i.24xlarge",
+		"ml.r6i.32xlarge",
+		"ml.r7i.large",
+		"ml.r7i.xlarge",
+		"ml.r7i.2xlarge",
+		"ml.r7i.4xlarge",
+		"ml.r7i.8xlarge",
+		"ml.r7i.12xlarge",
+		"ml.r7i.16xlarge",
+		"ml.r7i.24xlarge",
+		"ml.r7i.48xlarge",
+		"ml.m6id.large",
+		"ml.m6id.xlarge",
+		"ml.m6id.2xlarge",
+		"ml.m6id.4xlarge",
+		"ml.m6id.8xlarge",
+		"ml.m6id.12xlarge",
+		"ml.m6id.16xlarge",
+		"ml.m6id.24xlarge",
+		"ml.m6id.32xlarge",
+		"ml.c6id.large",
+		"ml.c6id.xlarge",
+		"ml.c6id.2xlarge",
+		"ml.c6id.4xlarge",
+		"ml.c6id.8xlarge",
+		"ml.c6id.12xlarge",
+		"ml.c6id.16xlarge",
+		"ml.c6id.24xlarge",
+		"ml.c6id.32xlarge",
+		"ml.r6id.large",
+		"ml.r6id.xlarge",
+		"ml.r6id.2xlarge",
+		"ml.r6id.4xlarge",
+		"ml.r6id.8xlarge",
+		"ml.r6id.12xlarge",
+		"ml.r6id.16xlarge",
+		"ml.r6id.24xlarge",
+		"ml.r6id.32xlarge",
 	}
 }
 

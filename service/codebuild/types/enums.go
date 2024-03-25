@@ -65,6 +65,7 @@ const (
 	AuthTypeOauth               AuthType = "OAUTH"
 	AuthTypeBasicAuth           AuthType = "BASIC_AUTH"
 	AuthTypePersonalAccessToken AuthType = "PERSONAL_ACCESS_TOKEN"
+	AuthTypeCodeconnections     AuthType = "CODECONNECTIONS"
 )
 
 // Values returns all known values for AuthType. Note that this can be expanded in
@@ -75,6 +76,7 @@ func (AuthType) Values() []AuthType {
 		"OAUTH",
 		"BASIC_AUTH",
 		"PERSONAL_ACCESS_TOKEN",
+		"CODECONNECTIONS",
 	}
 }
 
@@ -769,9 +771,11 @@ type ServerType string
 
 // Enum values for ServerType
 const (
-	ServerTypeGithub           ServerType = "GITHUB"
-	ServerTypeBitbucket        ServerType = "BITBUCKET"
-	ServerTypeGithubEnterprise ServerType = "GITHUB_ENTERPRISE"
+	ServerTypeGithub            ServerType = "GITHUB"
+	ServerTypeBitbucket         ServerType = "BITBUCKET"
+	ServerTypeGithubEnterprise  ServerType = "GITHUB_ENTERPRISE"
+	ServerTypeGitlab            ServerType = "GITLAB"
+	ServerTypeGitlabSelfManaged ServerType = "GITLAB_SELF_MANAGED"
 )
 
 // Values returns all known values for ServerType. Note that this can be expanded
@@ -782,6 +786,8 @@ func (ServerType) Values() []ServerType {
 		"GITHUB",
 		"BITBUCKET",
 		"GITHUB_ENTERPRISE",
+		"GITLAB",
+		"GITLAB_SELF_MANAGED",
 	}
 }
 
@@ -825,7 +831,8 @@ type SourceAuthType string
 
 // Enum values for SourceAuthType
 const (
-	SourceAuthTypeOauth SourceAuthType = "OAUTH"
+	SourceAuthTypeOauth           SourceAuthType = "OAUTH"
+	SourceAuthTypeCodeconnections SourceAuthType = "CODECONNECTIONS"
 )
 
 // Values returns all known values for SourceAuthType. Note that this can be
@@ -834,6 +841,7 @@ const (
 func (SourceAuthType) Values() []SourceAuthType {
 	return []SourceAuthType{
 		"OAUTH",
+		"CODECONNECTIONS",
 	}
 }
 
@@ -841,13 +849,15 @@ type SourceType string
 
 // Enum values for SourceType
 const (
-	SourceTypeCodecommit       SourceType = "CODECOMMIT"
-	SourceTypeCodepipeline     SourceType = "CODEPIPELINE"
-	SourceTypeGithub           SourceType = "GITHUB"
-	SourceTypeS3               SourceType = "S3"
-	SourceTypeBitbucket        SourceType = "BITBUCKET"
-	SourceTypeGithubEnterprise SourceType = "GITHUB_ENTERPRISE"
-	SourceTypeNoSource         SourceType = "NO_SOURCE"
+	SourceTypeCodecommit        SourceType = "CODECOMMIT"
+	SourceTypeCodepipeline      SourceType = "CODEPIPELINE"
+	SourceTypeGithub            SourceType = "GITHUB"
+	SourceTypeGitlab            SourceType = "GITLAB"
+	SourceTypeGitlabSelfManaged SourceType = "GITLAB_SELF_MANAGED"
+	SourceTypeS3                SourceType = "S3"
+	SourceTypeBitbucket         SourceType = "BITBUCKET"
+	SourceTypeGithubEnterprise  SourceType = "GITHUB_ENTERPRISE"
+	SourceTypeNoSource          SourceType = "NO_SOURCE"
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
@@ -858,6 +868,8 @@ func (SourceType) Values() []SourceType {
 		"CODECOMMIT",
 		"CODEPIPELINE",
 		"GITHUB",
+		"GITLAB",
+		"GITLAB_SELF_MANAGED",
 		"S3",
 		"BITBUCKET",
 		"GITHUB_ENTERPRISE",

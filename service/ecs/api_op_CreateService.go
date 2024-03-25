@@ -14,18 +14,13 @@ import (
 // Runs and maintains your desired number of tasks from a specified task
 // definition. If the number of tasks running in a service drops below the
 // desiredCount , Amazon ECS runs another copy of the task in the specified
-// cluster. To update an existing service, see the UpdateService action. Starting
-// April 15, 2023, Amazon Web Services will not onboard new customers to Amazon
-// Elastic Inference (EI), and will help current customers migrate their workloads
-// to options that offer better price and performance. After April 15, 2023, new
-// customers will not be able to launch instances with Amazon EI accelerators in
-// Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used
-// Amazon EI at least once during the past 30-day period are considered current
-// customers and will be able to continue using the service. In addition to
-// maintaining the desired count of tasks in your service, you can optionally run
-// your service behind one or more load balancers. The load balancers distribute
-// traffic across the tasks that are associated with the service. For more
-// information, see Service load balancing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
+// cluster. To update an existing service, see the UpdateService action. The
+// following change began on March 21, 2024. When the task definition revision is
+// not specified, Amazon ECS resolves the task definition revision before it
+// authorizes the task definition. In addition to maintaining the desired count of
+// tasks in your service, you can optionally run your service behind one or more
+// load balancers. The load balancers distribute traffic across the tasks that are
+// associated with the service. For more information, see Service load balancing (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
 // in the Amazon Elastic Container Service Developer Guide. You can attach Amazon
 // EBS volumes to Amazon ECS tasks by configuring the volume when creating or
 // updating a service. volumeConfigurations is only supported for REPLICA service
@@ -95,7 +90,14 @@ import (
 // scheduler launches new tasks, it determines task placement. For information
 // about task placement and task placement strategies, see Amazon ECS task
 // placement (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html)
-// in the Amazon Elastic Container Service Developer Guide.
+// in the Amazon Elastic Container Service Developer Guide Starting April 15, 2023,
+// Amazon Web Services will not onboard new customers to Amazon Elastic Inference
+// (EI), and will help current customers migrate their workloads to options that
+// offer better price and performance. After April 15, 2023, new customers will not
+// be able to launch instances with Amazon EI accelerators in Amazon SageMaker,
+// Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least
+// once during the past 30-day period are considered current customers and will be
+// able to continue using the service.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -183,9 +185,9 @@ type CreateServiceInput struct {
 	// type runs your tasks on Fargate On-Demand infrastructure. Fargate Spot
 	// infrastructure is available for use but a capacity provider strategy must be
 	// used. For more information, see Fargate capacity providers (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html)
-	// in the Amazon ECS User Guide for Fargate. The EC2 launch type runs your tasks
-	// on Amazon EC2 instances registered to your cluster. The EXTERNAL launch type
-	// runs your tasks on your on-premises server or virtual machine (VM) capacity
+	// in the Amazon ECS Developer Guide. The EC2 launch type runs your tasks on
+	// Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs
+	// your tasks on your on-premises server or virtual machine (VM) capacity
 	// registered to your cluster. A service can use either a launch type or a capacity
 	// provider strategy. If a launchType is specified, the capacityProviderStrategy
 	// parameter must be omitted.
@@ -258,7 +260,9 @@ type CreateServiceInput struct {
 	// If no value is specified, the tags aren't propagated. Tags can only be
 	// propagated to the task during task creation. To add tags to a task after task
 	// creation, use the TagResource (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html)
-	// API action. The default is NONE .
+	// API action. You must set this to a value other than NONE when you use Cost
+	// Explorer. For more information, see Amazon ECS usage reports (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html)
+	// in the Amazon Elastic Container Service Developer Guide. The default is NONE .
 	PropagateTags types.PropagateTags
 
 	// The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon

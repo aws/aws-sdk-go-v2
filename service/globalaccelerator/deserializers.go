@@ -8016,6 +8016,15 @@ func awsAwsjson11_deserializeDocumentCrossAccountResource(v **types.CrossAccount
 				sv.AttachmentArn = ptr.String(jtv)
 			}
 
+		case "Cidr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Cidr = ptr.String(jtv)
+			}
+
 		case "EndpointId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10139,6 +10148,15 @@ func awsAwsjson11_deserializeDocumentResource(v **types.Resource, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "Cidr":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Cidr = ptr.String(jtv)
+			}
+
 		case "EndpointId":
 			if value != nil {
 				jtv, ok := value.(string)

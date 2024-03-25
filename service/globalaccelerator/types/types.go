@@ -113,8 +113,8 @@ type AcceleratorEvent struct {
 }
 
 // A cross-account attachment in Global Accelerator. A cross-account attachment
-// specifies the principals who have permission to add to accelerators in their own
-// account the resources in your account that you also list in the attachment.
+// specifies the principals who have permission to work with resources in your
+// account, which you also list in the attachment.
 type Attachment struct {
 
 	// The Amazon Resource Name (ARN) of the cross-account attachment.
@@ -172,7 +172,9 @@ type Attachment struct {
 //     contact Amazon Web Services support.
 type ByoipCidr struct {
 
-	// The address range, in CIDR notation.
+	// The address range, in CIDR notation. For more information, see Bring your own
+	// IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+	// in the Global Accelerator Developer Guide.
 	Cidr *string
 
 	// A history of status changes for an IP address range that you bring to Global
@@ -221,15 +223,26 @@ type CidrAuthorizationContext struct {
 	noSmithyDocumentSerde
 }
 
-// An endpoint (Amazon Web Services resource) that is listed in a cross-account
-// attachment and can be added to an accelerator by specified principals, that are
-// also listed in the attachment.
+// An endpoint (Amazon Web Services resource) or an IP address range, in CIDR
+// format, that is listed in a cross-account attachment. A cross-account resource
+// can be added to an accelerator by specified principals, which are also listed in
+// the attachment. For more information, see Working with cross-account
+// attachments and resources in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html)
+// in the Global Accelerator Developer Guide.
 type CrossAccountResource struct {
 
 	// The Amazon Resource Name (ARN) of the cross-account attachment that specifies
-	// the endpoints (resources) that can be added to accelerators and principals that
-	// have permission to add the endpoints to accelerators.
+	// the resources (endpoints or CIDR range) that can be added to accelerators and
+	// principals that have permission to add them.
 	AttachmentArn *string
+
+	// An IP address range, in CIDR format, that is specified as an Amazon Web
+	// Services resource. The address must be provisioned and advertised in Global
+	// Accelerator by following the bring your own IP address (BYOIP) process for
+	// Global Accelerator. For more information, see Bring your own IP addresses
+	// (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+	// in the Global Accelerator Developer Guide.
+	Cidr *string
 
 	// The endpoint ID for the endpoint that is listed in a cross-account attachment
 	// and can be added to an accelerator by specified principals.
@@ -361,7 +374,7 @@ type CustomRoutingEndpointConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the cross-account attachment that specifies
 	// the endpoints (resources) that can be added to accelerators and principals that
-	// have permission to add the endpoints to accelerators.
+	// have permission to add the endpoints.
 	AttachmentArn *string
 
 	// An ID for the endpoint. For custom routing accelerators, this is the virtual
@@ -463,7 +476,7 @@ type EndpointConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the cross-account attachment that specifies
 	// the endpoints (resources) that can be added to accelerators and principals that
-	// have permission to add the endpoints to accelerators.
+	// have permission to add the endpoints.
 	AttachmentArn *string
 
 	// Indicates whether client IP address preservation is enabled for an endpoint.
@@ -483,8 +496,8 @@ type EndpointConfiguration struct {
 	// Application Load Balancer, this is the Amazon Resource Name (ARN) of the
 	// resource. If the endpoint is an Elastic IP address, this is the Elastic IP
 	// address allocation ID. For Amazon EC2 instances, this is the EC2 instance ID. A
-	// resource must be valid and active when you add it as an endpoint. An Application
-	// Load Balancer can be either internal or internet-facing.
+	// resource must be valid and active when you add it as an endpoint. For
+	// cross-account endpoints, this must be the ARN of the resource.
 	EndpointId *string
 
 	// The weight associated with the endpoint. When you add weights to endpoints, you
@@ -729,16 +742,25 @@ type PortRange struct {
 	noSmithyDocumentSerde
 }
 
-// An Amazon Web Services resource that is supported by Global Accelerator and can
-// be added as an endpoint for an accelerator.
+// A resource is one of the following: the ARN for an Amazon Web Services resource
+// that is supported by Global Accelerator to be added as an endpoint, or a CIDR
+// range that specifies a bring your own IP (BYOIP) address pool.
 type Resource struct {
 
-	// The endpoint ID for the endpoint (Amazon Web Services resource).
-	//
-	// This member is required.
+	// An IP address range, in CIDR format, that is specified as resource. The address
+	// must be provisioned and advertised in Global Accelerator by following the bring
+	// your own IP address (BYOIP) process for Global Accelerator For more information,
+	// see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+	// in the Global Accelerator Developer Guide.
+	Cidr *string
+
+	// The endpoint ID for the endpoint that is specified as a Amazon Web Services
+	// resource. An endpoint ID for the cross-account feature is the ARN of an Amazon
+	// Web Services resource, such as a Network Load Balancer, that Global Accelerator
+	// supports as an endpoint for an accelerator.
 	EndpointId *string
 
-	// The Amazon Web Services Region where a resource is located.
+	// The Amazon Web Services Region where a shared endpoint resource is located.
 	Region *string
 
 	noSmithyDocumentSerde

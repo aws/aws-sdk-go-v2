@@ -2239,6 +2239,14 @@ type H265Settings struct {
 	// GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
 	MinIInterval *int32
 
+	// If you are setting up the picture as a tile, you must set this to "disabled".
+	// In all other configurations, you typically enter "enabled".
+	MvOverPictureBoundaries H265MvOverPictureBoundaries
+
+	// If you are setting up the picture as a tile, you must set this to "disabled".
+	// In other configurations, you typically enter "enabled".
+	MvTemporalPredictor H265MvTemporalPredictor
+
 	// Pixel Aspect Ratio denominator.
 	ParDenominator *int32
 
@@ -2283,6 +2291,24 @@ type H265Settings struct {
 	// H.265 Tier.
 	Tier H265Tier
 
+	// Set this field to set up the picture as a tile. You must also set tileWidth.
+	// The tile height must result in 22 or fewer rows in the frame. The tile width
+	// must result in 20 or fewer columns in the frame. And finally, the product of the
+	// column count and row count must be 64 of less. If the tile width and height are
+	// specified, MediaLive will override the video codec slices field with a value
+	// that MediaLive calculates
+	TileHeight *int32
+
+	// Set to "padded" to force MediaLive to add padding to the frame, to obtain a
+	// frame that is a whole multiple of the tile size. If you are setting up the
+	// picture as a tile, you must enter "padded". In all other configurations, you
+	// typically enter "none".
+	TilePadding H265TilePadding
+
+	// Set this field to set up the picture as a tile. See tileHeight for more
+	// information.
+	TileWidth *int32
+
 	// Timecode burn-in settings
 	TimecodeBurninSettings *TimecodeBurninSettings
 
@@ -2291,6 +2317,11 @@ type H265Settings struct {
 	//   - 'picTimingSei': Pass through picture timing SEI messages from the source
 	//   specified in Timecode Config
 	TimecodeInsertion H265TimecodeInsertionBehavior
+
+	// Select the tree block size used for encoding. If you enter "auto", the encoder
+	// will pick the best size. If you are setting up the picture as a tile, you must
+	// set this to 32x32. In all other configurations, you typically enter "auto".
+	TreeblockSize H265TreeblockSize
 
 	noSmithyDocumentSerde
 }

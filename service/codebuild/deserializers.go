@@ -11383,6 +11383,15 @@ func awsAwsjson11_deserializeDocumentSourceCredentialsInfo(v **types.SourceCrede
 				sv.AuthType = types.AuthType(jtv)
 			}
 
+		case "resource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Resource = ptr.String(jtv)
+			}
+
 		case "serverType":
 			if value != nil {
 				jtv, ok := value.(string)

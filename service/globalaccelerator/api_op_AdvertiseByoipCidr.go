@@ -36,7 +36,9 @@ func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipC
 type AdvertiseByoipCidrInput struct {
 
 	// The address range, in CIDR notation. This must be the exact range that you
-	// provisioned. You can't advertise only a portion of the provisioned range.
+	// provisioned. You can't advertise only a portion of the provisioned range. For
+	// more information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+	// in the Global Accelerator Developer Guide.
 	//
 	// This member is required.
 	Cidr *string

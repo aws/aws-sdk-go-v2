@@ -844,6 +844,7 @@ type FleetStatus struct {
 	//   - CREATING : The compute fleet is being created.
 	//   - UPDATING : The compute fleet is being updated.
 	//   - ROTATING : The compute fleet is being rotated.
+	//   - PENDING_DELETION : The compute fleet is pending deletion.
 	//   - DELETING : The compute fleet is being deleted.
 	//   - CREATE_FAILED : The compute fleet has failed to create.
 	//   - UPDATE_ROLLBACK_FAILED : The compute fleet has failed to update and could
@@ -1485,9 +1486,11 @@ type ProjectSource struct {
 	//   - CODECOMMIT : The source code is in an CodeCommit repository.
 	//   - CODEPIPELINE : The source code settings are specified in the source action
 	//   of a pipeline in CodePipeline.
-	//   - GITHUB : The source code is in a GitHub or GitHub Enterprise Cloud
-	//   repository.
+	//   - GITHUB : The source code is in a GitHub repository.
 	//   - GITHUB_ENTERPRISE : The source code is in a GitHub Enterprise Server
+	//   repository.
+	//   - GITLAB : The source code is in a GitLab repository.
+	//   - GITLAB_SELF_MANAGED : The source code is in a self-managed GitLab
 	//   repository.
 	//   - NO_SOURCE : The project does not have input source code.
 	//   - S3 : The source code is in an Amazon S3 bucket.
@@ -1552,6 +1555,17 @@ type ProjectSource struct {
 	//   the build project. You can leave the CodeBuild console.) To instruct CodeBuild
 	//   to use this connection, in the source object, set the auth object's type value
 	//   to OAUTH .
+	//   - For source code in an GitLab or self-managed GitLab repository, the HTTPS
+	//   clone URL to the repository that contains the source and the buildspec file. You
+	//   must connect your Amazon Web Services account to your GitLab account. Use the
+	//   CodeBuild console to start creating a build project. When you use the console to
+	//   connect (or reconnect) with GitLab, on the Connections Authorize application
+	//   page, choose Authorize. Then on the CodeStar Connections Create GitLab
+	//   connection page, choose Connect to GitLab. (After you have connected to your
+	//   GitLab account, you do not need to finish creating the build project. You can
+	//   leave the CodeBuild console.) To instruct CodeBuild to override the default
+	//   connection and use this connection instead, set the auth object's type value
+	//   to CODECONNECTIONS in the source object.
 	//   - For source code in a Bitbucket repository, the HTTPS clone URL to the
 	//   repository that contains the source and the buildspec file. You must connect
 	//   your Amazon Web Services account to your Bitbucket account. Use the CodeBuild
@@ -1567,11 +1581,12 @@ type ProjectSource struct {
 
 	// Set to true to report the status of a build's start and finish to your source
 	// provider. This option is valid only when your source provider is GitHub, GitHub
-	// Enterprise, or Bitbucket. If this is set and you use a different source
-	// provider, an invalidInputException is thrown. To be able to report the build
-	// status to the source provider, the user associated with the source provider must
-	// have write access to the repo. If the user does not have write access, the build
-	// status cannot be updated. For more information, see Source provider access (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html)
+	// Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you
+	// use a different source provider, an invalidInputException is thrown. To be able
+	// to report the build status to the source provider, the user associated with the
+	// source provider must have write access to the repo. If the user does not have
+	// write access, the build status cannot be updated. For more information, see
+	// Source provider access (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html)
 	// in the CodeBuild User Guide. The status of a build triggered by a webhook is
 	// always reported to your source provider. If your project's builds are triggered
 	// by a webhook, you must push a new commit to the repo for a change to this
@@ -1599,9 +1614,9 @@ type ProjectSourceVersion struct {
 	// The source version for the corresponding source identifier. If specified, must
 	// be one of:
 	//   - For CodeCommit: the commit ID, branch, or Git tag to use.
-	//   - For GitHub: the commit ID, pull request ID, branch name, or tag name that
-	//   corresponds to the version of the source code you want to build. If a pull
-	//   request ID is specified, it must use the format pr/pull-request-ID (for
+	//   - For GitHub or GitLab: the commit ID, pull request ID, branch name, or tag
+	//   name that corresponds to the version of the source code you want to build. If a
+	//   pull request ID is specified, it must use the format pr/pull-request-ID (for
 	//   example, pr/25 ). If a branch name is specified, the branch's HEAD commit ID
 	//   is used. If not specified, the default branch's HEAD commit ID is used.
 	//   - For Bitbucket: the commit ID, branch name, or tag name that corresponds to
@@ -1913,9 +1928,7 @@ type ScalingConfigurationOutput struct {
 // code should not get or set this information directly.
 type SourceAuth struct {
 
-	// This data type is deprecated and is no longer accurate or used. The
-	// authorization type to use. The only valid value is OAUTH , which represents the
-	// OAuth authorization type.
+	// The authorization type to use. Valid options are OAUTH or CODECONNECTIONS.
 	//
 	// This member is required.
 	Type SourceAuthType
@@ -1926,19 +1939,23 @@ type SourceAuth struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the credentials for a GitHub, GitHub Enterprise, or Bitbucket
-// repository.
+// Information about the credentials for a GitHub, GitHub Enterprise, GitLab,
+// GitLab Self Managed, or Bitbucket repository.
 type SourceCredentialsInfo struct {
 
 	// The Amazon Resource Name (ARN) of the token.
 	Arn *string
 
 	// The type of authentication used by the credentials. Valid options are OAUTH,
-	// BASIC_AUTH, or PERSONAL_ACCESS_TOKEN.
+	// BASIC_AUTH, PERSONAL_ACCESS_TOKEN, or CODECONNECTIONS.
 	AuthType AuthType
 
+	// The connection ARN if your serverType type is GITLAB or GITLAB_SELF_MANAGED and
+	// your authType is CODECONNECTIONS.
+	Resource *string
+
 	// The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE,
-	// or BITBUCKET.
+	// GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.
 	ServerType ServerType
 
 	noSmithyDocumentSerde

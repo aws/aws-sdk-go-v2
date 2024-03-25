@@ -20326,6 +20326,24 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				sv.MinIInterval = ptr.Int32(int32(i64))
 			}
 
+		case "mvOverPictureBoundaries":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265MvOverPictureBoundaries to be of type string, got %T instead", value)
+				}
+				sv.MvOverPictureBoundaries = types.H265MvOverPictureBoundaries(jtv)
+			}
+
+		case "mvTemporalPredictor":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265MvTemporalPredictor to be of type string, got %T instead", value)
+				}
+				sv.MvTemporalPredictor = types.H265MvTemporalPredictor(jtv)
+			}
+
 		case "parDenominator":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -20423,6 +20441,41 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				sv.Tier = types.H265Tier(jtv)
 			}
 
+		case "tileHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin64Max2160 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileHeight = ptr.Int32(int32(i64))
+			}
+
+		case "tilePadding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265TilePadding to be of type string, got %T instead", value)
+				}
+				sv.TilePadding = types.H265TilePadding(jtv)
+			}
+
+		case "tileWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin256Max3840 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TileWidth = ptr.Int32(int32(i64))
+			}
+
 		case "timecodeBurninSettings":
 			if err := awsRestjson1_deserializeDocumentTimecodeBurninSettings(&sv.TimecodeBurninSettings, value); err != nil {
 				return err
@@ -20435,6 +20488,15 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return fmt.Errorf("expected H265TimecodeInsertionBehavior to be of type string, got %T instead", value)
 				}
 				sv.TimecodeInsertion = types.H265TimecodeInsertionBehavior(jtv)
+			}
+
+		case "treeblockSize":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected H265TreeblockSize to be of type string, got %T instead", value)
+				}
+				sv.TreeblockSize = types.H265TreeblockSize(jtv)
 			}
 
 		default:

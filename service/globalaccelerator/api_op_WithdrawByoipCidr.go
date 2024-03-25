@@ -35,7 +35,9 @@ func (c *Client) WithdrawByoipCidr(ctx context.Context, params *WithdrawByoipCid
 
 type WithdrawByoipCidrInput struct {
 
-	// The address range, in CIDR notation.
+	// The address range, in CIDR notation. For more information, see Bring your own
+	// IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+	// in the Global Accelerator Developer Guide.
 	//
 	// This member is required.
 	Cidr *string
@@ -45,7 +47,7 @@ type WithdrawByoipCidrInput struct {
 
 type WithdrawByoipCidrOutput struct {
 
-	// Information about the address pool.
+	// Information about the BYOIP address pool.
 	ByoipCidr *types.ByoipCidr
 
 	// Metadata pertaining to the operation's result.

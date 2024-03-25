@@ -13,9 +13,9 @@ type Attachment struct {
 	// Details of the attachment. For elastic network interfaces, this includes the
 	// network interface ID, the MAC address, the subnet ID, and the private IPv4
 	// address. For Service Connect services, this includes portName , clientAliases ,
-	// discoveryName , and ingressPortOverride . For elastic block storage, this
-	// includes roleArn , encrypted , filesystemType , iops , kmsKeyId , sizeInGiB ,
-	// snapshotId , tagSpecifications , throughput , and volumeType .
+	// discoveryName , and ingressPortOverride . For Elastic Block Storage, this
+	// includes roleArn , deleteOnTermination , volumeName , volumeId , and
+	// statusReason (only when the attachment fails to create or attach).
 	Details []KeyValuePair
 
 	// The unique identifier for the attachment.
@@ -1750,9 +1750,10 @@ type EFSVolumeConfiguration struct {
 // variables contained within an environment file. If multiple environment files
 // are specified that contain the same variable, they're processed from the top
 // down. We recommend that you use unique variable names. For more information, see
-// Specifying environment variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
-// in the Amazon Elastic Container Service Developer Guide. You must use the
-// following platforms for the Fargate launch type:
+// Use a file to pass environment variables to a container (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/use-environment-file.html)
+// in the Amazon Elastic Container Service Developer Guide. Environment variable
+// files are objects in Amazon S3 and all Amazon S3 security considerations apply.
+// You must use the following platforms for the Fargate launch type:
 //   - Linux platform version 1.4.0 or later.
 //   - Windows platform version 1.0.0 or later.
 //
@@ -1762,7 +1763,8 @@ type EFSVolumeConfiguration struct {
 //   - The container entry point interperts the VARIABLE values.
 type EnvironmentFile struct {
 
-	// The file type to use. The only supported value is s3 .
+	// The file type to use. Environment files are objects in Amazon S3. The only
+	// supported value is s3 .
 	//
 	// This member is required.
 	Type EnvironmentFileType
@@ -1787,7 +1789,7 @@ type EnvironmentFile struct {
 type EphemeralStorage struct {
 
 	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
-	// supported value is 21 GiB and the maximum supported value is 200 GiB.
+	// supported value is 20 GiB and the maximum supported value is 200 GiB.
 	//
 	// This member is required.
 	SizeInGiB int32
@@ -1950,8 +1952,9 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // health status of both individual containers and a task with the DescribeTasks
 // API operation or when viewing the task details in the console. The health check
 // is designed to make sure that your containers survive agent restarts, upgrades,
-// or temporary unavailability. The following describes the possible healthStatus
-// values for a container:
+// or temporary unavailability. Amazon ECS performs health checks on containers
+// with the default that launched the container instance or the task. The following
+// describes the possible healthStatus values for a container:
 //   - HEALTHY -The container health check has passed successfully.
 //   - UNHEALTHY -The container health check has failed.
 //   - UNKNOWN -The container health check is being evaluated, there's no container
@@ -2142,10 +2145,10 @@ type InstanceHealthCheckResult struct {
 	noSmithyDocumentSerde
 }
 
-// The Linux capabilities for the container that are added to or dropped from the
-// default configuration provided by Docker. For more information about the default
-// capabilities and the non-default available capabilities, see Runtime privilege
-// and Linux capabilities (https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
+// The Linux capabilities to add or remove from the default Docker configuration
+// for a container defined in the task definition. For more information about the
+// default capabilities and the non-default available capabilities, see Runtime
+// privilege and Linux capabilities (https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities)
 // in the Docker run reference. For more detailed information about these Linux
 // capabilities, see the capabilities(7) (http://man7.org/linux/man-pages/man7/capabilities.7.html)
 // Linux manual page.

@@ -2324,6 +2324,42 @@ func (H265LookAheadRateControl) Values() []H265LookAheadRateControl {
 	}
 }
 
+type H265MvOverPictureBoundaries string
+
+// Enum values for H265MvOverPictureBoundaries
+const (
+	H265MvOverPictureBoundariesDisabled H265MvOverPictureBoundaries = "DISABLED"
+	H265MvOverPictureBoundariesEnabled  H265MvOverPictureBoundaries = "ENABLED"
+)
+
+// Values returns all known values for H265MvOverPictureBoundaries. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H265MvOverPictureBoundaries) Values() []H265MvOverPictureBoundaries {
+	return []H265MvOverPictureBoundaries{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type H265MvTemporalPredictor string
+
+// Enum values for H265MvTemporalPredictor
+const (
+	H265MvTemporalPredictorDisabled H265MvTemporalPredictor = "DISABLED"
+	H265MvTemporalPredictorEnabled  H265MvTemporalPredictor = "ENABLED"
+)
+
+// Values returns all known values for H265MvTemporalPredictor. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265MvTemporalPredictor) Values() []H265MvTemporalPredictor {
+	return []H265MvTemporalPredictor{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H265Profile string
 
 // Enum values for H265Profile
@@ -2416,6 +2452,24 @@ func (H265Tier) Values() []H265Tier {
 	}
 }
 
+type H265TilePadding string
+
+// Enum values for H265TilePadding
+const (
+	H265TilePaddingNone   H265TilePadding = "NONE"
+	H265TilePaddingPadded H265TilePadding = "PADDED"
+)
+
+// Values returns all known values for H265TilePadding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265TilePadding) Values() []H265TilePadding {
+	return []H265TilePadding{
+		"NONE",
+		"PADDED",
+	}
+}
+
 type H265TimecodeInsertionBehavior string
 
 // Enum values for H265TimecodeInsertionBehavior
@@ -2432,6 +2486,24 @@ func (H265TimecodeInsertionBehavior) Values() []H265TimecodeInsertionBehavior {
 	return []H265TimecodeInsertionBehavior{
 		"DISABLED",
 		"PIC_TIMING_SEI",
+	}
+}
+
+type H265TreeblockSize string
+
+// Enum values for H265TreeblockSize
+const (
+	H265TreeblockSizeAuto          H265TreeblockSize = "AUTO"
+	H265TreeblockSizeTreeSize32x32 H265TreeblockSize = "TREE_SIZE_32X32"
+)
+
+// Values returns all known values for H265TreeblockSize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (H265TreeblockSize) Values() []H265TreeblockSize {
+	return []H265TreeblockSize{
+		"AUTO",
+		"TREE_SIZE_32X32",
 	}
 }
 

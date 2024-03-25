@@ -37,7 +37,9 @@ func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionBy
 type DeprovisionByoipCidrInput struct {
 
 	// The address range, in CIDR notation. The prefix must be the same prefix that
-	// you specified when you provisioned the address range.
+	// you specified when you provisioned the address range. For more information, see
+	// Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
+	// in the Global Accelerator Developer Guide.
 	//
 	// This member is required.
 	Cidr *string
