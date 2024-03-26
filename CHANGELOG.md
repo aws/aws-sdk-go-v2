@@ -1,3 +1,17 @@
+# Release (2024-03-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.5.0](service/bedrockagentruntime/CHANGELOG.md#v150-2024-03-26)
+  * **Feature**: This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.37.0](service/costexplorer/CHANGELOG.md#v1370-2024-03-26)
+  * **Feature**: Adds support for backfill of cost allocation tags, with new StartCostAllocationTagBackfill and ListCostAllocationTagBackfillHistory API.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.154.0](service/ec2/CHANGELOG.md#v11540-2024-03-26)
+  * **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.41.5](service/ecs/CHANGELOG.md#v1415-2024-03-26)
+  * **Documentation**: This is a documentation update for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.24.0](service/finspace/CHANGELOG.md#v1240-2024-03-26)
+  * **Feature**: Add new operation delete-kx-cluster-node and add status parameter to list-kx-cluster-node operation.
+
 # Release (2024-03-25)
 
 ## General Highlights

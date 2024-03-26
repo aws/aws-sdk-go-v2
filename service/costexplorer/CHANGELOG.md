@@ -1,3 +1,7 @@
+# v1.37.0 (2024-03-26)
+
+* **Feature**: Adds support for backfill of cost allocation tags, with new StartCostAllocationTagBackfill and ListCostAllocationTagBackfillHistory API.
+
 # v1.36.2 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

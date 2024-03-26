@@ -1,3 +1,7 @@
+# v1.41.5 (2024-03-26)
+
+* **Documentation**: This is a documentation update for Amazon ECS.
+
 # v1.41.4 (2024-03-25)
 
 * **Documentation**: Documentation only update for Amazon ECS.

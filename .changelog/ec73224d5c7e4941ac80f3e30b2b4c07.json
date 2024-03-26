@@ -1,8 +1,0 @@
-{
-    "id": "ec73224d-5c7e-4941-ac80-f3e30b2b4c07",
-    "type": "feature",
-    "description": "This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

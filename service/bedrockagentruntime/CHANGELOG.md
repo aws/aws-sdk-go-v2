@@ -1,3 +1,7 @@
+# v1.5.0 (2024-03-26)
+
+* **Feature**: This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock.
+
 # v1.4.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

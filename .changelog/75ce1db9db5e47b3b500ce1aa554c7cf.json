@@ -1,8 +1,0 @@
-{
-    "id": "75ce1db9-db5e-47b3-b500-ce1aa554c7cf",
-    "type": "feature",
-    "description": "Adds support for backfill of cost allocation tags, with new StartCostAllocationTagBackfill and ListCostAllocationTagBackfillHistory API.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}
