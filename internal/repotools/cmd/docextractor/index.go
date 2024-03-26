@@ -6,12 +6,11 @@ import (
 )
 
 type astIndex struct {
-	Types map[string]*ast.TypeSpec
+	Types     map[string]*ast.TypeSpec
 	Functions map[string]*ast.FuncDecl
-	Fields map[string]*ast.Field
-	Other []*ast.GenDecl
+	Fields    map[string]*ast.Field
+	Other     []*ast.GenDecl
 }
-
 
 func indexFromAst(p *ast.Package, index *astIndex) {
 	ast.Inspect(p, func(n ast.Node) bool {

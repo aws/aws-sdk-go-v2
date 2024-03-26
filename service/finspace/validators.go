@@ -230,6 +230,26 @@ func (m *validateOpDeleteKxCluster) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteKxClusterNode struct {
+}
+
+func (*validateOpDeleteKxClusterNode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteKxClusterNode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteKxClusterNodeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteKxClusterNodeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteKxDatabase struct {
 }
 
@@ -992,6 +1012,10 @@ func addOpDeleteEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteKxClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKxCluster{}, middleware.After)
+}
+
+func addOpDeleteKxClusterNodeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteKxClusterNode{}, middleware.After)
 }
 
 func addOpDeleteKxDatabaseValidationMiddleware(stack *middleware.Stack) error {
@@ -1806,6 +1830,27 @@ func validateOpDeleteKxClusterInput(v *DeleteKxClusterInput) error {
 	}
 	if v.ClusterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteKxClusterNodeInput(v *DeleteKxClusterNodeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteKxClusterNodeInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.NodeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NodeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

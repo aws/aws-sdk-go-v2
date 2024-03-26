@@ -1,0 +1,8 @@
+{
+    "id": "3c3f66e1-0230-46af-912d-e83651d9a8dc",
+    "type": "documentation",
+    "description": "This is a documentation update for Amazon ECS.",
+    "modules": [
+        "service/ecs"
+    ]
+}

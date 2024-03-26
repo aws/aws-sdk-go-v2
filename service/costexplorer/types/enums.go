@@ -99,6 +99,27 @@ func (Context) Values() []Context {
 	}
 }
 
+type CostAllocationTagBackfillStatus string
+
+// Enum values for CostAllocationTagBackfillStatus
+const (
+	CostAllocationTagBackfillStatusSucceeded  CostAllocationTagBackfillStatus = "SUCCEEDED"
+	CostAllocationTagBackfillStatusProcessing CostAllocationTagBackfillStatus = "PROCESSING"
+	CostAllocationTagBackfillStatusFailed     CostAllocationTagBackfillStatus = "FAILED"
+)
+
+// Values returns all known values for CostAllocationTagBackfillStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CostAllocationTagBackfillStatus) Values() []CostAllocationTagBackfillStatus {
+	return []CostAllocationTagBackfillStatus{
+		"SUCCEEDED",
+		"PROCESSING",
+		"FAILED",
+	}
+}
+
 type CostAllocationTagStatus string
 
 // Enum values for CostAllocationTagStatus

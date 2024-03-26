@@ -34,7 +34,7 @@ type RetrieveInput struct {
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// The query to send the knowledge base.
+	// Contains the query to send the knowledge base.
 	//
 	// This member is required.
 	RetrievalQuery *types.KnowledgeBaseQuery
@@ -44,7 +44,9 @@ type RetrieveInput struct {
 	// retrieve the next batch of results.
 	NextToken *string
 
-	// Contains details about how the results should be returned.
+	// Contains configurations for the knowledge base query and retrieval process. For
+	// more information, see Query configurations (https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html)
+	// .
 	RetrievalConfiguration *types.KnowledgeBaseRetrievalConfiguration
 
 	noSmithyDocumentSerde

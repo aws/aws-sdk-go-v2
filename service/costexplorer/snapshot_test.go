@@ -386,6 +386,18 @@ func TestCheckSnapshot_GetUsageForecast(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListCostAllocationTagBackfillHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCostAllocationTagBackfillHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCostAllocationTagBackfillHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCostAllocationTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCostAllocationTags(context.Background(), nil, func(o *Options) {
@@ -439,6 +451,18 @@ func TestCheckSnapshot_ProvideAnomalyFeedback(t *testing.T) {
 	_, err := svc.ProvideAnomalyFeedback(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ProvideAnomalyFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartCostAllocationTagBackfill(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCostAllocationTagBackfill(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCostAllocationTagBackfill")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -853,6 +877,18 @@ func TestUpdateSnapshot_GetUsageForecast(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListCostAllocationTagBackfillHistory(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCostAllocationTagBackfillHistory(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCostAllocationTagBackfillHistory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCostAllocationTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCostAllocationTags(context.Background(), nil, func(o *Options) {
@@ -906,6 +942,18 @@ func TestUpdateSnapshot_ProvideAnomalyFeedback(t *testing.T) {
 	_, err := svc.ProvideAnomalyFeedback(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ProvideAnomalyFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartCostAllocationTagBackfill(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCostAllocationTagBackfill(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCostAllocationTagBackfill")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

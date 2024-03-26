@@ -11,17 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the parameters of a service. The following change began on March 21,
-// 2024. When the task definition revision is not specified, Amazon ECS resolves
-// the task definition revision before it authorizes the task definition. For
-// services using the rolling update ( ECS ) you can update the desired count,
-// deployment configuration, network configuration, load balancers, service
-// registries, enable ECS managed tags option, propagate tags option, task
-// placement constraints and strategies, and task definition. When you update any
-// of these parameters, Amazon ECS starts new tasks with the new configuration. You
-// can attach Amazon EBS volumes to Amazon ECS tasks by configuring the volume when
-// starting or running a task, or when creating or updating a service. For more
-// infomation, see Amazon EBS volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types)
+// Modifies the parameters of a service. On March 21, 2024, a change was made to
+// resolve the task definition revision before authorization. When a task
+// definition revision is not specified, authorization will occur using the latest
+// revision of a task definition. For services using the rolling update ( ECS ) you
+// can update the desired count, deployment configuration, network configuration,
+// load balancers, service registries, enable ECS managed tags option, propagate
+// tags option, task placement constraints and strategies, and task definition.
+// When you update any of these parameters, Amazon ECS starts new tasks with the
+// new configuration. You can attach Amazon EBS volumes to Amazon ECS tasks by
+// configuring the volume when starting or running a task, or when creating or
+// updating a service. For more infomation, see Amazon EBS volumes (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types)
 // in the Amazon Elastic Container Service Developer Guide. You can update your
 // volume configurations and trigger a new deployment. volumeConfigurations is
 // only supported for REPLICA service and not DAEMON service. If you leave

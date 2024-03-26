@@ -1,0 +1,8 @@
+{
+    "id": "14112558-7f68-4a62-8fe7-6093e7f302bd",
+    "type": "feature",
+    "description": "Add new operation delete-kx-cluster-node and add status parameter to list-kx-cluster-node operation.",
+    "modules": [
+        "service/finspace"
+    ]
+}

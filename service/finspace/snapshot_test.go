@@ -194,6 +194,18 @@ func TestCheckSnapshot_DeleteKxCluster(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteKxClusterNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteKxClusterNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteKxClusterNode")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteKxDatabase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteKxDatabase(context.Background(), nil, func(o *Options) {
@@ -774,6 +786,18 @@ func TestUpdateSnapshot_DeleteKxCluster(t *testing.T) {
 	_, err := svc.DeleteKxCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteKxCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteKxClusterNode(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteKxClusterNode(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteKxClusterNode")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

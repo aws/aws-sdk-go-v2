@@ -14,11 +14,11 @@ import (
 // Create a task set in the specified cluster and service. This is used when a
 // service uses the EXTERNAL deployment controller type. For more information, see
 // Amazon ECS deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
-// in the Amazon Elastic Container Service Developer Guide. The following change
-// began on March 21, 2024. When the task definition revision is not specified,
-// Amazon ECS resolves the task definition revision before it authorizes the task
-// definition. For information about the maximum number of task sets and otther
-// quotas, see Amazon ECS service quotas (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html)
+// in the Amazon Elastic Container Service Developer Guide. On March 21, 2024, a
+// change was made to resolve the task definition revision before authorization.
+// When a task definition revision is not specified, authorization will occur using
+// the latest revision of a task definition. For information about the maximum
+// number of task sets and otther quotas, see Amazon ECS service quotas (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) CreateTaskSet(ctx context.Context, params *CreateTaskSetInput, optFns ...func(*Options)) (*CreateTaskSetOutput, error) {
 	if params == nil {

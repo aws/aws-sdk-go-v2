@@ -335,6 +335,20 @@ func awsRestjson1_serializeOpDocumentRetrieveAndGenerateInput(v *RetrieveAndGene
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGenerationConfiguration(v *types.GenerationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PromptTemplate != nil {
+		ok := object.Key("promptTemplate")
+		if err := awsRestjson1_serializeDocumentPromptTemplate(v.PromptTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKnowledgeBaseQuery(v *types.KnowledgeBaseQuery, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -364,6 +378,13 @@ func awsRestjson1_serializeDocumentKnowledgeBaseRetrievalConfiguration(v *types.
 func awsRestjson1_serializeDocumentKnowledgeBaseRetrieveAndGenerateConfiguration(v *types.KnowledgeBaseRetrieveAndGenerateConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.GenerationConfiguration != nil {
+		ok := object.Key("generationConfiguration")
+		if err := awsRestjson1_serializeDocumentGenerationConfiguration(v.GenerationConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.KnowledgeBaseId != nil {
 		ok := object.Key("knowledgeBaseId")
@@ -410,6 +431,18 @@ func awsRestjson1_serializeDocumentPromptSessionAttributesMap(v map[string]strin
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPromptTemplate(v *types.PromptTemplate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TextPromptTemplate != nil {
+		ok := object.Key("textPromptTemplate")
+		ok.String(*v.TextPromptTemplate)
+	}
+
 	return nil
 }
 

@@ -7,6 +7,33 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// A request to backfill is already in progress. Once the previous request is
+// complete, you can create another request.
+type BackfillLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *BackfillLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BackfillLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BackfillLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "BackfillLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *BackfillLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The requested report expired. Update the date interval and try again.
 type BillExpirationException struct {
 	Message *string

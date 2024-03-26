@@ -285,6 +285,28 @@ type CostAllocationTag struct {
 	noSmithyDocumentSerde
 }
 
+// The cost allocation tag backfill request structure that contains metadata and
+// details of a certain backfill.
+type CostAllocationTagBackfillRequest struct {
+
+	// The date the backfill starts from.
+	BackfillFrom *string
+
+	// The status of the cost allocation tag backfill request.
+	BackfillStatus CostAllocationTagBackfillStatus
+
+	// The backfill completion time.
+	CompletedAt *string
+
+	// The time when the backfill status was last updated.
+	LastUpdatedAt *string
+
+	// The time when the backfill was requested.
+	RequestedAt *string
+
+	noSmithyDocumentSerde
+}
+
 // The cost allocation tag status. The status of a key can either be active or
 // inactive.
 type CostAllocationTagStatusEntry struct {

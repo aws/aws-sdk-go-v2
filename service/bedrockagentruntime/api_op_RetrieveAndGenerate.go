@@ -13,9 +13,7 @@ import (
 
 // Queries a knowledge base and generates responses based on the retrieved
 // results. The response cites up to five sources but only selects the ones that
-// are relevant to the query. The numberOfResults field is currently unsupported
-// for RetrieveAndGenerate . Don't include it in the vectorSearchConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_KnowledgeBaseVectorSearchConfiguration.html)
-// object.
+// are relevant to the query.
 func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGenerateInput, optFns ...func(*Options)) (*RetrieveAndGenerateOutput, error) {
 	if params == nil {
 		params = &RetrieveAndGenerateInput{}
@@ -33,13 +31,14 @@ func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGen
 
 type RetrieveAndGenerateInput struct {
 
-	// Contains the query made to the knowledge base.
+	// Contains the query to be made to the knowledge base.
 	//
 	// This member is required.
 	Input *types.RetrieveAndGenerateInput
 
-	// Contains details about the resource being queried and the foundation model used
-	// for generation.
+	// Contains configurations for the knowledge base query and retrieval process. For
+	// more information, see Query configurations (https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html)
+	// .
 	RetrieveAndGenerateConfiguration *types.RetrieveAndGenerateConfiguration
 
 	// Contains details about the session with the knowledge base.

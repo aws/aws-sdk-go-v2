@@ -32,7 +32,7 @@ func (c *Client) CreateKxChangeset(ctx context.Context, params *CreateKxChangese
 type CreateKxChangesetInput struct {
 
 	// A list of change request objects that are run in order. A change request object
-	// consists of changeType , s3Path , and dbPath . A changeType can has the
+	// consists of changeType , s3Path , and dbPath . A changeType can have the
 	// following values:
 	//   - PUT – Adds or updates files in a database.
 	//   - DELETE – Deletes files in a database.

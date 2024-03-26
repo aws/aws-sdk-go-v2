@@ -75,7 +75,9 @@ type InvokeAgentInput struct {
 	// Specifies whether to end the session with the agent or not.
 	EndSession *bool
 
-	// Contains parameters that specify various attributes of the session.
+	// Contains parameters that specify various attributes of the session. For more
+	// information, see Control session context (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html)
+	// .
 	SessionState *types.SessionState
 
 	noSmithyDocumentSerde

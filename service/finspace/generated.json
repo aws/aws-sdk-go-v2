@@ -19,6 +19,7 @@
         "api_op_CreateKxVolume.go",
         "api_op_DeleteEnvironment.go",
         "api_op_DeleteKxCluster.go",
+        "api_op_DeleteKxClusterNode.go",
         "api_op_DeleteKxDatabase.go",
         "api_op_DeleteKxDataview.go",
         "api_op_DeleteKxEnvironment.go",

@@ -727,7 +727,9 @@ type KxEnvironment struct {
 // (NAS_1) file system volume.
 type KxNAS1Configuration struct {
 
-	// The size of the network attached storage.
+	// The size of the network attached storage. For storage type SSD_1000 and SSD_250
+	// you can select the minimum size as 1200 GB or increments of 2400 GB. For storage
+	// type HDD_12 you can select the minimum size as 6000 GB or increments of 6000 GB.
 	Size *int32
 
 	// The type of the network attached storage.
@@ -750,6 +752,11 @@ type KxNode struct {
 
 	// A unique identifier for the node.
 	NodeId *string
+
+	// Specifies the status of the cluster nodes.
+	//   - RUNNING – The node is actively serving.
+	//   - PROVISIONING – The node is being prepared.
+	Status KxNodeStatus
 
 	noSmithyDocumentSerde
 }

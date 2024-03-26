@@ -550,6 +550,26 @@ func (m *validateOpProvideAnomalyFeedback) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCostAllocationTagBackfill struct {
+}
+
+func (*validateOpStartCostAllocationTagBackfill) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCostAllocationTagBackfill) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCostAllocationTagBackfillInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCostAllocationTagBackfillInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -776,6 +796,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpProvideAnomalyFeedbackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpProvideAnomalyFeedback{}, middleware.After)
+}
+
+func addOpStartCostAllocationTagBackfillValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCostAllocationTagBackfill{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1662,6 +1686,21 @@ func validateOpProvideAnomalyFeedbackInput(v *ProvideAnomalyFeedbackInput) error
 	}
 	if len(v.Feedback) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Feedback"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCostAllocationTagBackfillInput(v *StartCostAllocationTagBackfillInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCostAllocationTagBackfillInput"}
+	if v.BackfillFrom == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackfillFrom"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
