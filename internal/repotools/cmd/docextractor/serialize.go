@@ -30,7 +30,7 @@ func serialize(packageName string, items map[string]jewelryItem) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	err = os.WriteFile(fmt.Sprintf("../clients/%v.json", packageName), content, 0644)
+	err = os.WriteFile(fmt.Sprintf("clients/%v.json", packageName), content, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -43,7 +43,7 @@ func serialize(packageName string, items map[string]jewelryItem) {
 		if err != nil {
 			fmt.Println(err)
 		}
-		err = os.WriteFile(fmt.Sprintf("../public/members/-aws-sdk-client-%v.%v.%v.json", packageName, item.Name, string(item.Type)), content, 0644)
+		err = os.WriteFile(fmt.Sprintf("public/members/-aws-sdk-client-%v.%v.%v.json", packageName, item.Name, string(item.Type)), content, 0644)
 		if err != nil {
 			panic(err)
 		}
@@ -65,7 +65,7 @@ func serialize(packageName string, items map[string]jewelryItem) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	err = os.WriteFile(fmt.Sprintf("../public/members/-aws-sdk-client-%v.json", packageName), content, 0644)
+	err = os.WriteFile(fmt.Sprintf("public/members/-aws-sdk-client-%v.json", packageName), content, 0644)
 	if err != nil {
 		panic(err)
 	}
