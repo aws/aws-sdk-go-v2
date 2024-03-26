@@ -115,6 +115,9 @@
                     "target": "com.amazonaws.costexplorer#GetUsageForecast"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistory"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#ListCostAllocationTags"
                 },
                 {
@@ -128,6 +131,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#ProvideAnomalyFeedback"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#StartCostAllocationTagBackfill"
                 },
                 {
                     "target": "com.amazonaws.costexplorer#StartSavingsPlansPurchaseRecommendationGeneration"
@@ -1334,6 +1340,19 @@
                 "target": "com.amazonaws.costexplorer#AttributeValue"
             }
         },
+        "com.amazonaws.costexplorer#BackfillLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.costexplorer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            A request to backfill is already in progress. Once the previous request is complete, you can create another request.\n        </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.costexplorer#BillExpirationException": {
             "type": "structure",
             "members": {
@@ -1408,6 +1427,79 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The cost allocation tag structure. This includes detailed metadata for the\n                <code>CostAllocationTag</code> object. </p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostAllocationTagBackfillRequest": {
+            "type": "structure",
+            "members": {
+                "BackfillFrom": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date the backfill starts from.\n        </p>"
+                    }
+                },
+                "RequestedAt": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time when the backfill was requested.\n        </p>"
+                    }
+                },
+                "CompletedAt": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The backfill completion time.\n        </p>"
+                    }
+                },
+                "BackfillStatus": {
+                    "target": "com.amazonaws.costexplorer#CostAllocationTagBackfillStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status of the cost allocation tag backfill request.\n        </p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time when the backfill status was last updated.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The cost allocation tag backfill request structure that contains metadata and details of a certain backfill.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostAllocationTagBackfillRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#CostAllocationTagBackfillRequest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#CostAllocationTagBackfillStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostAllocationTagKeyList": {
@@ -5660,6 +5752,71 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Retrieves a list of your historical cost allocation tag backfill requests.\n    </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.\n    </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#CostAllocationTagsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of objects that are returned for this request.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "BackfillRequests": {
+                    "target": "com.amazonaws.costexplorer#CostAllocationTagBackfillRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of historical cost allocation tag backfill requests.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.costexplorer#ListCostAllocationTags": {
             "type": "operation",
             "input": {
@@ -8320,6 +8477,55 @@
                         "smithy.api#enumValue": "DESCENDING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.costexplorer#StartCostAllocationTagBackfill": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#StartCostAllocationTagBackfillRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#StartCostAllocationTagBackfillResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#BackfillLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Request a cost allocation tag backfill. This will backfill the activation status (either <code>active</code> or <code>inactive</code>) for all tag keys from <code>para:BackfillFrom</code> up to the when this request is made.</p>\n         <p>You can request a backfill once every 24 hours.\n    </p>"
+            }
+        },
+        "com.amazonaws.costexplorer#StartCostAllocationTagBackfillRequest": {
+            "type": "structure",
+            "members": {
+                "BackfillFrom": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The date you want the backfill to start from. The date can only be a first day of the month (a billing start date). Dates can't precede the previous twelve months, or in the future.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#StartCostAllocationTagBackfillResponse": {
+            "type": "structure",
+            "members": {
+                "BackfillRequest": {
+                    "target": "com.amazonaws.costexplorer#CostAllocationTagBackfillRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An object containing detailed metadata of your new backfill request.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#StartSavingsPlansPurchaseRecommendationGeneration": {

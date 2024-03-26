@@ -67,6 +67,9 @@
                     "target": "com.amazonaws.finspace#DeleteKxCluster"
                 },
                 {
+                    "target": "com.amazonaws.finspace#DeleteKxClusterNode"
+                },
+                {
                     "target": "com.amazonaws.finspace#DeleteKxDatabase"
                 },
                 {
@@ -1379,7 +1382,7 @@
                 "changeRequests": {
                     "target": "com.amazonaws.finspace#ChangeRequests",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of change request objects that are run in order. A change request object consists of <code>changeType</code> , <code>s3Path</code>, and <code>dbPath</code>. \n      A changeType can has the following values: </p>\n         <ul>\n            <li>\n               <p>PUT – Adds or updates files in a database.</p>\n            </li>\n            <li>\n               <p>DELETE – Deletes files in a database.</p>\n            </li>\n         </ul>\n         <p>All the change requests require a mandatory <code>dbPath</code> attribute that defines the\n         path within the database directory. All database paths must start with a leading / and end\n         with a trailing /. The <code>s3Path</code> attribute defines the s3 source file path and is\n         required for a PUT change type. The <code>s3path</code> must end with a trailing / if it is\n         a directory and must end without a trailing / if it is a file. </p>\n         <p>Here are few examples of how you can use the change request object:</p>\n         <ol>\n            <li>\n               <p>This request adds a single sym file at database root location.   </p>\n               <p>\n                  <code>{ \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/sym\",\n               \"dbPath\":\"/\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>This request adds files in the given <code>s3Path</code> under the 2020.01.02\n               partition of the database.</p>\n               <p>\n                  <code>{ \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/2020.01.02/\",\n               \"dbPath\":\"/2020.01.02/\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>This request adds files in the given <code>s3Path</code> under the\n                  <i>taq</i> table partition of the database.</p>\n               <p>\n                  <code>[ { \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/2020.01.02/taq/\",\n                  \"dbPath\":\"/2020.01.02/taq/\"}]</code>\n               </p>\n            </li>\n            <li>\n               <p>This request deletes the 2020.01.02 partition of the database.</p>\n               <p>\n                  <code>[{ \"changeType\": \"DELETE\", \"dbPath\": \"/2020.01.02/\"} ]</code>\n               </p>\n            </li>\n            <li>\n               <p>The <i>DELETE</i> request allows you to delete the existing files under the\n               2020.01.02 partition of the database, and the <i>PUT</i> request adds a\n               new taq table under it.</p>\n               <p>\n                  <code>[ {\"changeType\": \"DELETE\", \"dbPath\":\"/2020.01.02/\"}, {\"changeType\": \"PUT\",\n                  \"s3Path\":\"s3://bucket/db/2020.01.02/taq/\",\n               \"dbPath\":\"/2020.01.02/taq/\"}]</code>\n               </p>\n            </li>\n         </ol>",
+                        "smithy.api#documentation": "<p>A list of change request objects that are run in order. A change request object consists of <code>changeType</code> , <code>s3Path</code>, and <code>dbPath</code>. \n      A changeType can have the following values: </p>\n         <ul>\n            <li>\n               <p>PUT – Adds or updates files in a database.</p>\n            </li>\n            <li>\n               <p>DELETE – Deletes files in a database.</p>\n            </li>\n         </ul>\n         <p>All the change requests require a mandatory <code>dbPath</code> attribute that defines the\n         path within the database directory. All database paths must start with a leading / and end\n         with a trailing /. The <code>s3Path</code> attribute defines the s3 source file path and is\n         required for a PUT change type. The <code>s3path</code> must end with a trailing / if it is\n         a directory and must end without a trailing / if it is a file. </p>\n         <p>Here are few examples of how you can use the change request object:</p>\n         <ol>\n            <li>\n               <p>This request adds a single sym file at database root location.   </p>\n               <p>\n                  <code>{ \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/sym\",\n               \"dbPath\":\"/\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>This request adds files in the given <code>s3Path</code> under the 2020.01.02\n               partition of the database.</p>\n               <p>\n                  <code>{ \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/2020.01.02/\",\n               \"dbPath\":\"/2020.01.02/\"}</code>\n               </p>\n            </li>\n            <li>\n               <p>This request adds files in the given <code>s3Path</code> under the\n                  <i>taq</i> table partition of the database.</p>\n               <p>\n                  <code>[ { \"changeType\": \"PUT\", \"s3Path\":\"s3://bucket/db/2020.01.02/taq/\",\n                  \"dbPath\":\"/2020.01.02/taq/\"}]</code>\n               </p>\n            </li>\n            <li>\n               <p>This request deletes the 2020.01.02 partition of the database.</p>\n               <p>\n                  <code>[{ \"changeType\": \"DELETE\", \"dbPath\": \"/2020.01.02/\"} ]</code>\n               </p>\n            </li>\n            <li>\n               <p>The <i>DELETE</i> request allows you to delete the existing files under the\n               2020.01.02 partition of the database, and the <i>PUT</i> request adds a\n               new taq table under it.</p>\n               <p>\n                  <code>[ {\"changeType\": \"DELETE\", \"dbPath\":\"/2020.01.02/\"}, {\"changeType\": \"PUT\",\n                  \"s3Path\":\"s3://bucket/db/2020.01.02/taq/\",\n               \"dbPath\":\"/2020.01.02/taq/\"}]</code>\n               </p>\n            </li>\n         </ol>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2882,6 +2885,79 @@
                     "uri": "/kx/environments/{environmentId}/clusters/{clusterName}",
                     "code": 200
                 }
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxClusterNode": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#DeleteKxClusterNodeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#DeleteKxClusterNodeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified nodes from a cluster.\n      </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/kx/environments/{environmentId}/clusters/{clusterName}/nodes/{nodeId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxClusterNodeRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#KxEnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the kdb environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterName": {
+                    "target": "com.amazonaws.finspace#KxClusterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster, for which you want to delete the nodes.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nodeId": {
+                    "target": "com.amazonaws.finspace#KxClusterNodeIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the node that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.finspace#DeleteKxClusterNodeResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.finspace#DeleteKxClusterRequest": {
@@ -6235,7 +6311,7 @@
                 "size": {
                     "target": "com.amazonaws.finspace#KxNAS1Size",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe size of the network attached storage.</p>"
+                        "smithy.api#documentation": "<p>\n   The size of the network attached storage. For storage type\n   <code>SSD_1000</code> and <code>SSD_250</code> you can select the\n   minimum size as 1200 GB or increments of 2400 GB. For storage type\n   <code>HDD_12</code> you can select the minimum size as 6000 GB or increments\n   of 6000 GB.</p>"
                     }
                 }
             },
@@ -6294,10 +6370,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when a particular node is started.  The value is determined as epoch time in milliseconds. For example, the value for Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.</p>"
                     }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#KxNodeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Specifies the status of the cluster nodes.   </p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> – The node is actively serving.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PROVISIONING</code> – The node is being prepared.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that stores metadata for a kdb node.</p>"
+            }
+        },
+        "com.amazonaws.finspace#KxNodeStatus": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONING"
+                    }
+                }
             }
         },
         "com.amazonaws.finspace#KxNodeSummaries": {

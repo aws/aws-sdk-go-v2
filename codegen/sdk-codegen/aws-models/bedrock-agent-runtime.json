@@ -855,7 +855,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object containing a segment of the generated response that is based on a source in the knowledge base, alongside information about the source.</p>"
+                "smithy.api#documentation": "<p>An object containing a segment of the generated response that is based on a source in the knowledge base, alongside information about the source.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>citations</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>citations</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#Citations": {
@@ -980,7 +980,21 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains metadata about a part of the generated response that is accompanied by a citation.</p>"
+                "smithy.api#documentation": "<p>Contains metadata about a part of the generated response that is accompanied by a citation.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>generatedResponsePart</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>generatedResponsePart</code> field</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#GenerationConfiguration": {
+            "type": "structure",
+            "members": {
+                "promptTemplate": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the template for the prompt that's sent to the model for response generation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configurations for response generation based on the knowledge base query results.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#InferenceConfiguration": {
@@ -1159,7 +1173,7 @@
                 "sessionState": {
                     "target": "com.amazonaws.bedrockagentruntime#SessionState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains parameters that specify various attributes of the session.</p>"
+                        "smithy.api#documentation": "<p>Contains parameters that specify various attributes of the session. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html\">Control session context</a>.</p>"
                     }
                 },
                 "agentId": {
@@ -1316,7 +1330,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the query made to the knowledge base.</p>",
+                "smithy.api#documentation": "<p>Contains the query made to the knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>retrievalQuery</code> field</p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1326,13 +1340,13 @@
                 "vectorSearchConfiguration": {
                     "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseVectorSearchConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about how the results from the vector search should be returned.</p>",
+                        "smithy.api#documentation": "<p>Contains details about how the results from the vector search should be returned. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about how the results should be returned.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request body</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request body</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains configurations for the knowledge base query and retrieval process. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>retrievalConfiguration</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>retrievalConfiguration</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalResult": {
@@ -1359,7 +1373,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about a result from querying the knowledge base.</p>"
+                "smithy.api#documentation": "<p>Details about a result from querying the knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>retrievalResults</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalResults": {
@@ -1393,10 +1407,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains configurations for how to retrieve and return the knowledge base query.</p>"
                     }
+                },
+                "generationConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#GenerationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configurations for response generation based on the knowwledge base query results.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the resource being queried.</p>"
+                "smithy.api#documentation": "<p>Contains details about the resource being queried.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>knowledgeBaseConfiguration</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>knowledgeBaseConfiguration</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#KnowledgeBaseVectorSearchConfiguration": {
@@ -1407,10 +1427,10 @@
                     "traits": {
                         "smithy.api#addedDefault": {},
                         "smithy.api#default": 5,
-                        "smithy.api#documentation": "<p>The number of results to return.</p>\n         <note>\n            <p>The <code>numberOfResults</code> field is currently unsupported for <code>RetrieveAndGenerate</code>. Don't include it in this field if you are sending a <code>RetrieveAndGenerate</code> request.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The number of source chunks to retrieve.</p>",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 25
+                            "max": 100
                         }
                     }
                 },
@@ -1422,7 +1442,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configurations for how to carry out the search.</p>"
+                "smithy.api#documentation": "<p>Configurations for how to perform the search query and return results. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a> – in the <code>vectorSearchConfiguration</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>vectorSearchConfiguration</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#LambdaArn": {
@@ -1782,6 +1802,20 @@
                 "target": "smithy.api#String"
             }
         },
+        "com.amazonaws.bedrockagentruntime#PromptTemplate": {
+            "type": "structure",
+            "members": {
+                "textPromptTemplate": {
+                    "target": "com.amazonaws.bedrockagentruntime#TextPromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template for the prompt that's sent to the model for response generation. You can include prompt placeholders, which become replaced before the prompt is sent to the model to provide instructions and context to the model. In addition, you can include XML tags to delineate meaningful sections of the prompt template.</p>\n         <p>For more information, see the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt\">Knowledge base prompt templates</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.anthropic.com/claude/docs/use-xml-tags\">Use XML tags with Anthropic Claude models</a>\n               </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the template for the prompt that's sent to the model for response generation. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt\">Knowledge base prompt templates</a>.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#PromptText": {
             "type": "string",
             "traits": {
@@ -1979,7 +2013,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the cited text from the data source.</p>",
+                "smithy.api#documentation": "<p>Contains the cited text from the data source.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>content</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>content</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>content</code> field</p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2001,7 +2035,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the location of the data source.</p>",
+                "smithy.api#documentation": "<p>Contains information about the location of the data source.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>location</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>location</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>locatino</code> field</p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2027,7 +2061,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the S3 location of the data source.</p>"
+                "smithy.api#documentation": "<p>Contains the S3 location of the data source.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>s3Location</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>s3Location</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>s3Location</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#Retrieve": {
@@ -2120,7 +2154,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Queries a knowledge base and generates responses based on the retrieved results. The response cites up to five sources but only selects the ones that are relevant to the query.</p>\n         <note>\n            <p>The <code>numberOfResults</code> field is currently unsupported for <code>RetrieveAndGenerate</code>. Don't include it in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_KnowledgeBaseVectorSearchConfiguration.html\">vectorSearchConfiguration</a> object.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Queries a knowledge base and generates responses based on the retrieved results. The response cites up to five sources but only selects the ones that are relevant to the query.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2146,7 +2180,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the resource being queried.</p>"
+                "smithy.api#documentation": "<p>Contains details about the resource being queried.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>retrieveAndGenerateConfiguration</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateInput": {
@@ -2164,7 +2198,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the query made to the knowledge base.</p>",
+                "smithy.api#documentation": "<p>Contains the query made to the knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>input</code> field</p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2180,7 +2214,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the response generated from querying the knowledge base.</p>",
+                "smithy.api#documentation": "<p>Contains the response generated from querying the knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>output</code> field</p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2196,14 +2230,14 @@
                 "input": {
                     "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the query made to the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>Contains the query to be made to the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "retrieveAndGenerateConfiguration": {
                     "target": "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the resource being queried and the foundation model used for generation.</p>"
+                        "smithy.api#documentation": "<p>Contains configurations for the knowledge base query and retrieval process. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>"
                     }
                 },
                 "sessionConfiguration": {
@@ -2265,7 +2299,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains configuration about the session with the knowledge base.</p>"
+                "smithy.api#documentation": "<p>Contains configuration about the session with the knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a> – in the <code>sessionConfiguration</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#RetrieveAndGenerateType": {
@@ -2293,14 +2327,14 @@
                 "retrievalQuery": {
                     "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseQuery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query to send the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>Contains the query to send the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "retrievalConfiguration": {
                     "target": "com.amazonaws.bedrockagentruntime#KnowledgeBaseRetrievalConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about how the results should be returned.</p>"
+                        "smithy.api#documentation": "<p>Contains configurations for the knowledge base query and retrieval process. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html\">Query configurations</a>.</p>"
                     }
                 },
                 "nextToken": {
@@ -2360,7 +2394,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains metadata about a sources cited for the generated response.</p>"
+                "smithy.api#documentation": "<p>Contains metadata about a source cited for the generated response.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>retrievedReferences</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>retrievedReferences</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#RetrievedReferences": {
@@ -2435,7 +2469,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains parameters that specify various attributes that persist across a session or prompt. You can define session state attributes as key-value pairs when writing a <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html\">Lambda function</a> for an action group or pass them when making an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> request. Use session state attributes to control and provide conversational context for your agent and to help customize your agent's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/sessionstate.html\">Session context</a>.</p>"
+                "smithy.api#documentation": "<p>Contains parameters that specify various attributes that persist across a session or prompt. You can define session state attributes as key-value pairs when writing a <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html\">Lambda function</a> for an action group or pass them when making an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> request. Use session state attributes to control and provide conversational context for your agent and to help customize your agent's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html\">Control session context</a>.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#Source": {
@@ -2487,7 +2521,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about where the text with a citation begins and ends in the generated output.</p>"
+                "smithy.api#documentation": "<p>Contains information about where the text with a citation begins and ends in the generated output.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>span</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>span</code> field</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#StopSequences": {
@@ -2511,6 +2545,16 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#TextPromptTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#TextResponsePart": {
             "type": "structure",
             "members": {
@@ -2528,7 +2572,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the part of the generated text that contains a citation, alongside where it begins and ends.</p>",
+                "smithy.api#documentation": "<p>Contains the part of the generated text that contains a citation, alongside where it begins and ends.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax\">RetrieveAndGenerate response</a> – in the <code>textResponsePart</code> field</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a> – in the <code>textResponsePart</code> field</p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
             }
         },
