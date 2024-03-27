@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get an existing data source
+// Gets information about a data source.
 func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, optFns ...func(*Options)) (*GetDataSourceOutput, error) {
 	if params == nil {
 		params = &GetDataSourceInput{}
@@ -29,12 +29,12 @@ func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, 
 
 type GetDataSourceInput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base that the data source was added to.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -44,7 +44,7 @@ type GetDataSourceInput struct {
 
 type GetDataSourceOutput struct {
 
-	// Contains the information of a data source.
+	// Contains details about the data source.
 	//
 	// This member is required.
 	DataSource *types.DataSource

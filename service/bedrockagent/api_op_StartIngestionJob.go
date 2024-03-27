@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Start a new ingestion job
+// Begins an ingestion job, in which a data source is added to a knowledge base.
 func (c *Client) StartIngestionJob(ctx context.Context, params *StartIngestionJobInput, optFns ...func(*Options)) (*StartIngestionJobOutput, error) {
 	if params == nil {
 		params = &StartIngestionJobInput{}
@@ -29,20 +29,24 @@ func (c *Client) StartIngestionJob(ctx context.Context, params *StartIngestionJo
 
 type StartIngestionJobInput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source to ingest.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which to add the data source.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see
+	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
-	// Description of the Resource.
+	// A description of the ingestion job.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -50,7 +54,7 @@ type StartIngestionJobInput struct {
 
 type StartIngestionJobOutput struct {
 
-	// Contains the information of an ingestion job.
+	// An object containing information about the ingestion job.
 	//
 	// This member is required.
 	IngestionJob *types.IngestionJob

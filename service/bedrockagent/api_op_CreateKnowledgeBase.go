@@ -11,7 +11,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new knowledge base
+// Creates a knowledge base that contains data sources from which information can
+// be queried and used by LLMs. To create a knowledge base, you must first set up
+// your data sources and configure a supported vector store. For more information,
+// see Set up your data for ingestion (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html)
+// . If you prefer to let Amazon Bedrock create and manage a vector store for you
+// in Amazon OpenSearch Service, use the console. For more information, see Create
+// a knowledge base (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create)
+// .
+//   - Provide the name and an optional description .
+//   - Provide the ARN with permissions to create a knowledge base in the roleArn
+//     field.
+//   - Provide the embedding model to use in the embeddingModelArn field in the
+//     knowledgeBaseConfiguration object.
+//   - Provide the configuration for your vector store in the storageConfiguration
+//     object.
+//   - For an Amazon OpenSearch Service database, use the
+//     opensearchServerlessConfiguration object. For more information, see Create a
+//     vector store in Amazon OpenSearch Service (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html)
+//     .
+//   - For an Amazon Aurora database, use the RdsConfiguration object. For more
+//     information, see Create a vector store in Amazon Aurora (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html)
+//     .
+//   - For a Pinecone database, use the pineconeConfiguration object. For more
+//     information, see Create a vector store in Pinecone (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html)
+//     .
+//   - For a Redis Enterprise Cloud database, use the
+//     redisEnterpriseCloudConfiguration object. For more information, see Create a
+//     vector store in Redis Enterprise Cloud (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html)
+//     .
 func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledgeBaseInput, optFns ...func(*Options)) (*CreateKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &CreateKnowledgeBaseInput{}
@@ -29,33 +57,39 @@ func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledg
 
 type CreateKnowledgeBaseInput struct {
 
-	// Configures a bedrock knowledge base.
+	// Contains details about the embeddings model used for the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseConfiguration *types.KnowledgeBaseConfiguration
 
-	// Name for a resource.
+	// A name for the knowledge base.
 	//
 	// This member is required.
 	Name *string
 
-	// ARN of a IAM role.
+	// The ARN of the IAM role with permissions to create the knowledge base.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Configures the physical storage of ingested data in a knowledge base.
+	// Contains details about the configuration of the vector database used for the
+	// knowledge base.
 	//
 	// This member is required.
 	StorageConfiguration *types.StorageConfiguration
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see
+	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
-	// Description of the Resource.
+	// A description of the knowledge base.
 	Description *string
 
-	// A map of tag keys and values
+	// Specify the key-value pairs for the tags that you want to attach to your
+	// knowledge base in this object.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -63,7 +97,7 @@ type CreateKnowledgeBaseInput struct {
 
 type CreateKnowledgeBaseOutput struct {
 
-	// Contains the information of a knowledge base.
+	// Contains details about the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBase *types.KnowledgeBase

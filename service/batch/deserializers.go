@@ -5909,6 +5909,15 @@ func awsRestjson1_deserializeDocumentEksContainerSecurityContext(v **types.EksCo
 
 	for key, value := range shape {
 		switch key {
+		case "allowPrivilegeEscalation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowPrivilegeEscalation = ptr.Bool(jtv)
+			}
+
 		case "privileged":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -6305,6 +6314,11 @@ func awsRestjson1_deserializeDocumentEksPodProperties(v **types.EksPodProperties
 				sv.HostNetwork = ptr.Bool(jtv)
 			}
 
+		case "imagePullSecrets":
+			if err := awsRestjson1_deserializeDocumentImagePullSecrets(&sv.ImagePullSecrets, value); err != nil {
+				return err
+			}
+
 		case "initContainers":
 			if err := awsRestjson1_deserializeDocumentEksContainers(&sv.InitContainers, value); err != nil {
 				return err
@@ -6390,6 +6404,11 @@ func awsRestjson1_deserializeDocumentEksPodPropertiesDetail(v **types.EksPodProp
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.HostNetwork = ptr.Bool(jtv)
+			}
+
+		case "imagePullSecrets":
+			if err := awsRestjson1_deserializeDocumentImagePullSecrets(&sv.ImagePullSecrets, value); err != nil {
+				return err
 			}
 
 		case "initContainers":
@@ -7016,6 +7035,80 @@ func awsRestjson1_deserializeDocumentHost(v **types.Host, value interface{}) err
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImagePullSecret(v **types.ImagePullSecret, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImagePullSecret
+	if *v == nil {
+		sv = &types.ImagePullSecret{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImagePullSecrets(v *[]types.ImagePullSecret, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ImagePullSecret
+	if *v == nil {
+		cv = []types.ImagePullSecret{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ImagePullSecret
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentImagePullSecret(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

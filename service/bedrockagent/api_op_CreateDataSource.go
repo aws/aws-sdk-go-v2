@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new data source
+// Sets up a data source to be added to a knowledge base. You can't change the
+// chunkingConfiguration after you create the data source.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -29,31 +30,35 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// Specifies a raw data source location to ingest.
+	// Contains metadata about where the data source is stored.
 	//
 	// This member is required.
 	DataSourceConfiguration *types.DataSourceConfiguration
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which to add the data source.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Name for a resource.
+	// The name of the data source.
 	//
 	// This member is required.
 	Name *string
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see
+	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
-	// Description of the Resource.
+	// A description of the data source.
 	Description *string
 
-	// Server-side encryption configuration.
+	// Contains details about the server-side encryption for the data source.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
-	// Configures ingestion for a vector knowledge base
+	// Contains details about how to ingest the documents in the data source.
 	VectorIngestionConfiguration *types.VectorIngestionConfiguration
 
 	noSmithyDocumentSerde
@@ -61,7 +66,7 @@ type CreateDataSourceInput struct {
 
 type CreateDataSourceOutput struct {
 
-	// Contains the information of a data source.
+	// Contains details about the data source.
 	//
 	// This member is required.
 	DataSource *types.DataSource

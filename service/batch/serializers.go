@@ -3121,6 +3121,11 @@ func awsRestjson1_serializeDocumentEksContainerSecurityContext(v *types.EksConta
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowPrivilegeEscalation != nil {
+		ok := object.Key("allowPrivilegeEscalation")
+		ok.Boolean(*v.AllowPrivilegeEscalation)
+	}
+
 	if v.Privileged != nil {
 		ok := object.Key("privileged")
 		ok.Boolean(*v.Privileged)
@@ -3268,6 +3273,13 @@ func awsRestjson1_serializeDocumentEksPodProperties(v *types.EksPodProperties, v
 	if v.HostNetwork != nil {
 		ok := object.Key("hostNetwork")
 		ok.Boolean(*v.HostNetwork)
+	}
+
+	if v.ImagePullSecrets != nil {
+		ok := object.Key("imagePullSecrets")
+		if err := awsRestjson1_serializeDocumentImagePullSecrets(v.ImagePullSecrets, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.InitContainers != nil {
@@ -3544,6 +3556,31 @@ func awsRestjson1_serializeDocumentHost(v *types.Host, value smithyjson.Value) e
 		ok.String(*v.SourcePath)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImagePullSecret(v *types.ImagePullSecret, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImagePullSecrets(v []types.ImagePullSecret, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentImagePullSecret(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

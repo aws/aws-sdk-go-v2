@@ -12,8 +12,7 @@ import (
 )
 
 // Queries a knowledge base and generates responses based on the retrieved
-// results. The response cites up to five sources but only selects the ones that
-// are relevant to the query.
+// results. The response only cites sources that are relevant to the query.
 func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGenerateInput, optFns ...func(*Options)) (*RetrieveAndGenerateOutput, error) {
 	if params == nil {
 		params = &RetrieveAndGenerateInput{}

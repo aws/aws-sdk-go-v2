@@ -82,6 +82,24 @@ func addOpRetrieveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRetrieve{}, middleware.After)
 }
 
+func validateFilterAttribute(v *types.FilterAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterAttribute"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateKnowledgeBaseQuery(v *types.KnowledgeBaseQuery) error {
 	if v == nil {
 		return nil
@@ -104,6 +122,10 @@ func validateKnowledgeBaseRetrievalConfiguration(v *types.KnowledgeBaseRetrieval
 	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseRetrievalConfiguration"}
 	if v.VectorSearchConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VectorSearchConfiguration"))
+	} else if v.VectorSearchConfiguration != nil {
+		if err := validateKnowledgeBaseVectorSearchConfiguration(v.VectorSearchConfiguration); err != nil {
+			invalidParams.AddNested("VectorSearchConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -126,6 +148,109 @@ func validateKnowledgeBaseRetrieveAndGenerateConfiguration(v *types.KnowledgeBas
 	if v.RetrievalConfiguration != nil {
 		if err := validateKnowledgeBaseRetrievalConfiguration(v.RetrievalConfiguration); err != nil {
 			invalidParams.AddNested("RetrievalConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKnowledgeBaseVectorSearchConfiguration(v *types.KnowledgeBaseVectorSearchConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KnowledgeBaseVectorSearchConfiguration"}
+	if v.Filter != nil {
+		if err := validateRetrievalFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRetrievalFilter(v types.RetrievalFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetrievalFilter"}
+	switch uv := v.(type) {
+	case *types.RetrievalFilterMemberAndAll:
+		if err := validateRetrievalFilterList(uv.Value); err != nil {
+			invalidParams.AddNested("[andAll]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberEquals:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[equals]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberGreaterThan:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[greaterThan]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberGreaterThanOrEquals:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[greaterThanOrEquals]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberIn:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[in]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberLessThan:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[lessThan]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberLessThanOrEquals:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[lessThanOrEquals]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberNotEquals:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[notEquals]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberNotIn:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[notIn]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberOrAll:
+		if err := validateRetrievalFilterList(uv.Value); err != nil {
+			invalidParams.AddNested("[orAll]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RetrievalFilterMemberStartsWith:
+		if err := validateFilterAttribute(&uv.Value); err != nil {
+			invalidParams.AddNested("[startsWith]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRetrievalFilterList(v []types.RetrievalFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetrievalFilterList"}
+	for i := range v {
+		if err := validateRetrievalFilter(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

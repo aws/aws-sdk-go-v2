@@ -1412,11 +1412,6 @@ func validateCacheUsageLimits(v *types.CacheUsageLimits) error {
 			invalidParams.AddNested("DataStorage", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ECPUPerSecond != nil {
-		if err := validateECPUPerSecond(v.ECPUPerSecond); err != nil {
-			invalidParams.AddNested("ECPUPerSecond", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1447,26 +1442,8 @@ func validateDataStorage(v *types.DataStorage) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DataStorage"}
-	if v.Maximum == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Maximum"))
-	}
 	if len(v.Unit) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateECPUPerSecond(v *types.ECPUPerSecond) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ECPUPerSecond"}
-	if v.Maximum == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Maximum"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an Agent version for existing Amazon Bedrock Agent
+// Gets details about a version of an agent.
 func (c *Client) GetAgentVersion(ctx context.Context, params *GetAgentVersionInput, optFns ...func(*Options)) (*GetAgentVersionOutput, error) {
 	if params == nil {
 		params = &GetAgentVersionInput{}
@@ -27,15 +27,14 @@ func (c *Client) GetAgentVersion(ctx context.Context, params *GetAgentVersionInp
 	return out, nil
 }
 
-// Get Agent Version Request
 type GetAgentVersionInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Numerical Agent Version.
+	// The version of the agent.
 	//
 	// This member is required.
 	AgentVersion *string
@@ -43,10 +42,9 @@ type GetAgentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Agent Version Response
 type GetAgentVersionOutput struct {
 
-	// Contains the information of an agent version.
+	// Contains details about the version of the agent.
 	//
 	// This member is required.
 	AgentVersion *types.AgentVersion

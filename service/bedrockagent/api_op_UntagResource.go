@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Untag a resource
+// Remove tags from a resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,12 +28,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// ARN of Taggable resources: [Agent, AgentAlias, Knowledge-Base]
+	// The ARN of the resource from which to remove tags.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// List of Tag Keys
+	// A list of keys of the tags to remove from the resource.
 	//
 	// This member is required.
 	TagKeys []string

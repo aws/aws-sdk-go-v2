@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List of Knowledge Bases associated to an existing Amazon Bedrock Agent Version
+// Lists knowledge bases associated with an agent and information about each one.
 func (c *Client) ListAgentKnowledgeBases(ctx context.Context, params *ListAgentKnowledgeBasesInput, optFns ...func(*Options)) (*ListAgentKnowledgeBasesOutput, error) {
 	if params == nil {
 		params = &ListAgentKnowledgeBasesInput{}
@@ -27,37 +27,45 @@ func (c *Client) ListAgentKnowledgeBases(ctx context.Context, params *ListAgentK
 	return out, nil
 }
 
-// List Agent Knowledge Bases Request
 type ListAgentKnowledgeBasesInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent for which to return information about
+	// knowledge bases associated with it.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Version number generated when a version is created
+	// The version of the agent for which to return information about knowledge bases
+	// associated with it.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// List Agent Knowledge Bases Response
 type ListAgentKnowledgeBasesOutput struct {
 
-	// List of Agent Knowledge Base Summaries
+	// A list of objects, each of which contains information about a knowledge base
+	// associated with the agent.
 	//
 	// This member is required.
 	AgentKnowledgeBaseSummaries []types.AgentKnowledgeBaseSummary
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -156,7 +164,10 @@ var _ ListAgentKnowledgeBasesAPIClient = (*Client)(nil)
 // ListAgentKnowledgeBasesPaginatorOptions is the paginator options for
 // ListAgentKnowledgeBases
 type ListAgentKnowledgeBasesPaginatorOptions struct {
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

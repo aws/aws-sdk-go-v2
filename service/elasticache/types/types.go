@@ -616,15 +616,16 @@ type CustomerNodeEndpoint struct {
 // The data storage limit.
 type DataStorage struct {
 
-	// The upper limit for data storage the cache is set to use.
-	//
-	// This member is required.
-	Maximum *int32
-
 	// The unit that the storage is measured in, in GB.
 	//
 	// This member is required.
 	Unit DataStorageUnit
+
+	// The upper limit for data storage the cache is set to use.
+	Maximum *int32
+
+	// The lower limit for data storage the cache is set to use.
+	Minimum *int32
 
 	noSmithyDocumentSerde
 }
@@ -663,9 +664,11 @@ type ECPUPerSecond struct {
 
 	// The configuration for the maximum number of ECPUs the cache can consume per
 	// second.
-	//
-	// This member is required.
 	Maximum *int32
+
+	// The configuration for the minimum number of ECPUs the cache should be able
+	// consume per second.
+	Minimum *int32
 
 	noSmithyDocumentSerde
 }

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List tags for a resource
+// List all the tags for the resource you specify.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -28,7 +28,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// ARN of Taggable resources: [Agent, AgentAlias, Knowledge-Base]
+	// The ARN of the resource for which to list tags.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// A map of tag keys and values
+	// The key-value pairs for the tags associated with the resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an Action Group for existing Amazon Bedrock Agent Version
+// Gets information about an action group for an agent.
 func (c *Client) GetAgentActionGroup(ctx context.Context, params *GetAgentActionGroupInput, optFns ...func(*Options)) (*GetAgentActionGroupOutput, error) {
 	if params == nil {
 		params = &GetAgentActionGroupInput{}
@@ -27,20 +27,19 @@ func (c *Client) GetAgentActionGroup(ctx context.Context, params *GetAgentAction
 	return out, nil
 }
 
-// Get Action Group Request
 type GetAgentActionGroupInput struct {
 
-	// Id generated at the server side when an Agent Action Group is created
+	// The unique identifier of the action group for which to get information.
 	//
 	// This member is required.
 	ActionGroupId *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent that the action group belongs to.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Version number generated when a version is created
+	// The version of the agent that the action group belongs to.
 	//
 	// This member is required.
 	AgentVersion *string
@@ -48,10 +47,9 @@ type GetAgentActionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Action Group Response
 type GetAgentActionGroupOutput struct {
 
-	// Contains the information of an Agent Action Group
+	// Contains details about the action group.
 	//
 	// This member is required.
 	AgentActionGroup *types.AgentActionGroup

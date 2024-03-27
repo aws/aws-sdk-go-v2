@@ -883,6 +883,11 @@ func validateEksPodProperties(v *types.EksPodProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EksPodProperties"}
+	if v.ImagePullSecrets != nil {
+		if err := validateImagePullSecrets(v.ImagePullSecrets); err != nil {
+			invalidParams.AddNested("ImagePullSecrets", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Containers != nil {
 		if err := validateEksContainers(v.Containers); err != nil {
 			invalidParams.AddNested("Containers", err.(smithy.InvalidParamsError))
@@ -1068,6 +1073,38 @@ func validateFairsharePolicy(v *types.FairsharePolicy) error {
 	if v.ShareDistribution != nil {
 		if err := validateShareAttributesList(v.ShareDistribution); err != nil {
 			invalidParams.AddNested("ShareDistribution", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImagePullSecret(v *types.ImagePullSecret) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImagePullSecret"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImagePullSecrets(v []types.ImagePullSecret) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImagePullSecrets"}
+	for i := range v {
+		if err := validateImagePullSecret(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

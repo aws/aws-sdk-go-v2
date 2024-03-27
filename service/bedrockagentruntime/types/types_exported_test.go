@@ -103,6 +103,55 @@ func ExampleResponseStream_outputUsage() {
 var _ *types.PayloadPart
 var _ *types.TracePart
 
+func ExampleRetrievalFilter_outputUsage() {
+	var union types.RetrievalFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RetrievalFilterMemberAndAll:
+		_ = v.Value // Value is []types.RetrievalFilter
+
+	case *types.RetrievalFilterMemberEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberGreaterThan:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberGreaterThanOrEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberIn:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberLessThan:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberLessThanOrEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberNotEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberNotIn:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberOrAll:
+		_ = v.Value // Value is []types.RetrievalFilter
+
+	case *types.RetrievalFilterMemberStartsWith:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.RetrievalFilter
+var _ *types.FilterAttribute
+
 func ExampleTrace_outputUsage() {
 	var union types.Trace
 	// type switches can be used to check the union value

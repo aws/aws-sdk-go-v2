@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an Alias for a Amazon Bedrock Agent
+// Gets information about an alias of an agent.
 func (c *Client) GetAgentAlias(ctx context.Context, params *GetAgentAliasInput, optFns ...func(*Options)) (*GetAgentAliasOutput, error) {
 	if params == nil {
 		params = &GetAgentAliasInput{}
@@ -27,15 +27,15 @@ func (c *Client) GetAgentAlias(ctx context.Context, params *GetAgentAliasInput, 
 	return out, nil
 }
 
-// Get Agent Alias Request
 type GetAgentAliasInput struct {
 
-	// Id generated at the server side when an Agent Alias is created
+	// The unique identifier of the alias for which to get information.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent to which the alias to get information
+	// belongs.
 	//
 	// This member is required.
 	AgentId *string
@@ -43,10 +43,9 @@ type GetAgentAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Agent Alias Response
 type GetAgentAliasOutput struct {
 
-	// Contains the information of an agent alias
+	// Contains information about the alias.
 	//
 	// This member is required.
 	AgentAlias *types.AgentAlias

@@ -11,6 +11,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -2789,6 +2791,48 @@ func awsRestjson1_deserializeDocumentRetrievalResultLocation(v **types.Retrieval
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRetrievalResultMetadata(v *map[string]document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]document.Interface
+	if *v == nil {
+		mv = map[string]document.Interface{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal document.Interface
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentRetrievalResultMetadataValue(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRetrievalResultMetadataValue(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRetrievalResultS3Location(v **types.RetrievalResultS3Location, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2858,6 +2902,11 @@ func awsRestjson1_deserializeDocumentRetrievedReference(v **types.RetrievedRefer
 
 		case "location":
 			if err := awsRestjson1_deserializeDocumentRetrievalResultLocation(&sv.Location, value); err != nil {
+				return err
+			}
+
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentRetrievalResultMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
 
@@ -3642,6 +3691,11 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseRetrievalResult(v **types.Know
 
 		case "location":
 			if err := awsRestjson1_deserializeDocumentRetrievalResultLocation(&sv.Location, value); err != nil {
+				return err
+			}
+
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentRetrievalResultMetadata(&sv.Metadata, value); err != nil {
 				return err
 			}
 

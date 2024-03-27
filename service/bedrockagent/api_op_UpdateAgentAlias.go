@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Alias for an Amazon Bedrock Agent
+// Updates configurations for an alias of an agent.
 func (c *Client) UpdateAgentAlias(ctx context.Context, params *UpdateAgentAliasInput, optFns ...func(*Options)) (*UpdateAgentAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAgentAliasInput{}
@@ -27,37 +27,35 @@ func (c *Client) UpdateAgentAlias(ctx context.Context, params *UpdateAgentAliasI
 	return out, nil
 }
 
-// Update Agent Alias Request
 type UpdateAgentAliasInput struct {
 
-	// Id generated at the server side when an Agent Alias is created
+	// The unique identifier of the alias.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Name for a resource.
+	// Specifies a new name for the alias.
 	//
 	// This member is required.
 	AgentAliasName *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Description of the Resource.
+	// Specifies a new description for the alias.
 	Description *string
 
-	// Routing configuration for an Agent alias.
+	// Contains details about the routing configuration of the alias.
 	RoutingConfiguration []types.AgentAliasRoutingConfigurationListItem
 
 	noSmithyDocumentSerde
 }
 
-// Update Agent Alias Response
 type UpdateAgentAliasOutput struct {
 
-	// Contains the information of an agent alias
+	// Contains details about the alias that was updated.
 	//
 	// This member is required.
 	AgentAlias *types.AgentAlias

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an Agent for existing Amazon Bedrock Agent
+// Gets information about an agent.
 func (c *Client) GetAgent(ctx context.Context, params *GetAgentInput, optFns ...func(*Options)) (*GetAgentOutput, error) {
 	if params == nil {
 		params = &GetAgentInput{}
@@ -27,10 +27,9 @@ func (c *Client) GetAgent(ctx context.Context, params *GetAgentInput, optFns ...
 	return out, nil
 }
 
-// Get Agent Request
 type GetAgentInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
@@ -38,10 +37,9 @@ type GetAgentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Agent Response
 type GetAgentOutput struct {
 
-	// Contains the information of an agent
+	// Contains details about the agent.
 	//
 	// This member is required.
 	Agent *types.Agent

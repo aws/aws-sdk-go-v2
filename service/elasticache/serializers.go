@@ -4976,6 +4976,11 @@ func awsAwsquery_serializeDocumentDataStorage(v *types.DataStorage, value query.
 		objectKey.Integer(*v.Maximum)
 	}
 
+	if v.Minimum != nil {
+		objectKey := object.Key("Minimum")
+		objectKey.Integer(*v.Minimum)
+	}
+
 	if len(v.Unit) > 0 {
 		objectKey := object.Key("Unit")
 		objectKey.String(string(v.Unit))
@@ -5012,6 +5017,11 @@ func awsAwsquery_serializeDocumentECPUPerSecond(v *types.ECPUPerSecond, value qu
 	if v.Maximum != nil {
 		objectKey := object.Key("Maximum")
 		objectKey.Integer(*v.Maximum)
+	}
+
+	if v.Minimum != nil {
+		objectKey := object.Key("Minimum")
+		objectKey.Integer(*v.Minimum)
 	}
 
 	return nil

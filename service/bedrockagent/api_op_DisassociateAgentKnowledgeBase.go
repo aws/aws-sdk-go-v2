@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociate an existing Knowledge Base from an Amazon Bedrock Agent
+// Disassociates a knowledge base from an agent.
 func (c *Client) DisassociateAgentKnowledgeBase(ctx context.Context, params *DisassociateAgentKnowledgeBaseInput, optFns ...func(*Options)) (*DisassociateAgentKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &DisassociateAgentKnowledgeBaseInput{}
@@ -26,20 +26,20 @@ func (c *Client) DisassociateAgentKnowledgeBase(ctx context.Context, params *Dis
 	return out, nil
 }
 
-// Disassociate Agent Knowledge Base Request
 type DisassociateAgentKnowledgeBaseInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent from which to disassociate the knowledge
+	// base.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Draft Version of the Agent.
+	// The version of the agent from which to disassociate the knowledge base.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Id generated at the server side when a Knowledge Base is associated to an Agent
+	// The unique identifier of the knowledge base to disassociate.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -47,7 +47,6 @@ type DisassociateAgentKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
-// Disassociate Agent Knowledge Base Response
 type DisassociateAgentKnowledgeBaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an existing knowledge base
+// Deletes a knowledge base. Before deleting a knowledge base, you should
+// disassociate the knowledge base from any agents that it is associated with by
+// making a DisassociateAgentKnowledgeBase (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_DisassociateAgentKnowledgeBase.html)
+// request.
 func (c *Client) DeleteKnowledgeBase(ctx context.Context, params *DeleteKnowledgeBaseInput, optFns ...func(*Options)) (*DeleteKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &DeleteKnowledgeBaseInput{}
@@ -29,7 +32,7 @@ func (c *Client) DeleteKnowledgeBase(ctx context.Context, params *DeleteKnowledg
 
 type DeleteKnowledgeBaseInput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to delete.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -39,12 +42,12 @@ type DeleteKnowledgeBaseInput struct {
 
 type DeleteKnowledgeBaseOutput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base that was deleted.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// The status of a knowledge base.
+	// The status of the knowledge base and whether it has been successfully deleted.
 	//
 	// This member is required.
 	Status types.KnowledgeBaseStatus

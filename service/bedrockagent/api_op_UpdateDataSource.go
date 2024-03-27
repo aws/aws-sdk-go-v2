@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update an existing data source
+// Updates configurations for a data source. You can't change the
+// chunkingConfiguration after you create the data source. Specify the existing
+// chunkingConfiguration .
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
 		params = &UpdateDataSourceInput{}
@@ -29,33 +31,33 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 
 type UpdateDataSourceInput struct {
 
-	// Specifies a raw data source location to ingest.
+	// Contains details about the storage configuration of the data source.
 	//
 	// This member is required.
 	DataSourceConfiguration *types.DataSourceConfiguration
 
-	// Identifier for a resource.
+	// The unique identifier of the data source.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which the data source belongs.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Name for a resource.
+	// Specifies a new name for the data source.
 	//
 	// This member is required.
 	Name *string
 
-	// Description of the Resource.
+	// Specifies a new description for the data source.
 	Description *string
 
-	// Server-side encryption configuration.
+	// Contains details about server-side encryption of the data source.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
-	// Configures ingestion for a vector knowledge base
+	// Contains details about how to ingest the documents in the data source.
 	VectorIngestionConfiguration *types.VectorIngestionConfiguration
 
 	noSmithyDocumentSerde
@@ -63,7 +65,7 @@ type UpdateDataSourceInput struct {
 
 type UpdateDataSourceOutput struct {
 
-	// Contains the information of a data source.
+	// Contains details about the data source.
 	//
 	// This member is required.
 	DataSource *types.DataSource

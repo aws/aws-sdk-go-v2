@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Action Group for existing Amazon Bedrock Agent.
+// Deletes an action group in an agent.
 func (c *Client) DeleteAgentActionGroup(ctx context.Context, params *DeleteAgentActionGroupInput, optFns ...func(*Options)) (*DeleteAgentActionGroupOutput, error) {
 	if params == nil {
 		params = &DeleteAgentActionGroupInput{}
@@ -26,31 +26,31 @@ func (c *Client) DeleteAgentActionGroup(ctx context.Context, params *DeleteAgent
 	return out, nil
 }
 
-// Delete Action Group Request
 type DeleteAgentActionGroupInput struct {
 
-	// Id generated at the server side when an Agent ActionGroup is created
+	// The unique identifier of the action group to delete.
 	//
 	// This member is required.
 	ActionGroupId *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent that the action group belongs to.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Draft Version of the Agent.
+	// The version of the agent that the action group belongs to.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Skips checking if resource is in use when set to true. Defaults to false
+	// By default, this value is false and deletion is stopped if the resource is in
+	// use. If you set it to true , the resource will be deleted even if the resource
+	// is in use.
 	SkipResourceInUseCheck bool
 
 	noSmithyDocumentSerde
 }
 
-// Delete Action Group Response
 type DeleteAgentActionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

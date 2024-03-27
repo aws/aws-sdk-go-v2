@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List Knowledge Bases
+// Lists the knowledge bases in an account and information about each of them.
 func (c *Client) ListKnowledgeBases(ctx context.Context, params *ListKnowledgeBasesInput, optFns ...func(*Options)) (*ListKnowledgeBasesOutput, error) {
 	if params == nil {
 		params = &ListKnowledgeBasesInput{}
@@ -29,10 +29,15 @@ func (c *Client) ListKnowledgeBases(ctx context.Context, params *ListKnowledgeBa
 
 type ListKnowledgeBasesInput struct {
 
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,12 +45,14 @@ type ListKnowledgeBasesInput struct {
 
 type ListKnowledgeBasesOutput struct {
 
-	// List of KnowledgeBaseSummaries
+	// A list of objects, each of which contains information about a knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseSummaries []types.KnowledgeBaseSummary
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,7 +148,10 @@ var _ ListKnowledgeBasesAPIClient = (*Client)(nil)
 // ListKnowledgeBasesPaginatorOptions is the paginator options for
 // ListKnowledgeBases
 type ListKnowledgeBasesPaginatorOptions struct {
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

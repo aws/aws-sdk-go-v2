@@ -11,7 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Bedrock Agent
+// Creates an agent that orchestrates interactions between foundation models, data
+// sources, software applications, user conversations, and APIs to carry out tasks
+// to help customers.
+//   - Specify the following fields for security purposes.
+//   - agentResourceRoleArn – The ARN of the role with permissions to create an
+//     agent.
+//   - (Optional) customerEncryptionKeyArn – The ARN of a KMS key to encrypt the
+//     creation of the agent.
+//   - (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which
+//     the agent should maintain session information. After this time expires, the
+//     subsequent InvokeAgent request begins a new session.
+//   - To override the default prompt behavior for agent orchestration and to use
+//     advanced prompts, include a promptOverrideConfiguration object. For more
+//     information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
+//     .
+//   - If you agent fails to be created, the response returns a list of
+//     failureReasons alongside a list of recommendedActions for you to troubleshoot.
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}
@@ -27,50 +43,59 @@ func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optF
 	return out, nil
 }
 
-// Create Agent Request
 type CreateAgentInput struct {
 
-	// Name for a resource.
+	// A name for the agent that you create.
 	//
 	// This member is required.
 	AgentName *string
 
-	// ARN of a IAM role.
+	// The ARN of the IAM role with permissions to create the agent. The ARN must
+	// begin with AmazonBedrockExecutionRoleForAgents_ .
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see
+	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
+	// .
 	ClientToken *string
 
-	// A KMS key ARN
+	// The ARN of the KMS key with which to encrypt the agent.
 	CustomerEncryptionKeyArn *string
 
-	// Description of the Resource.
+	// A description of the agent.
 	Description *string
 
-	// ARN or name of a Bedrock model.
+	// The foundation model to be used for orchestration by the agent you create.
 	FoundationModel *string
 
-	// Max Session Time.
+	// The number of seconds for which Amazon Bedrock keeps information about a user's
+	// conversation with the agent. A user interaction remains active for the amount of
+	// time specified. If no conversation occurs during this time, the session expires
+	// and Amazon Bedrock deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *int32
 
-	// Instruction for the agent.
+	// Instructions that tell the agent what it should do and how it should interact
+	// with users.
 	Instruction *string
 
-	// Configuration for prompt override.
+	// Contains configurations to override prompts in different parts of an agent
+	// sequence. For more information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
+	// .
 	PromptOverrideConfiguration *types.PromptOverrideConfiguration
 
-	// A map of tag keys and values
+	// Any tags that you want to attach to the agent.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Create Agent Response
 type CreateAgentOutput struct {
 
-	// Contains the information of an agent
+	// Contains details about the agent created.
 	//
 	// This member is required.
 	Agent *types.Agent

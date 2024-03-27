@@ -9073,6 +9073,32 @@ func awsRestjson1_deserializeDocumentIngestionJobStatistics(v **types.IngestionJ
 				sv.NumberOfDocumentsScanned = i64
 			}
 
+		case "numberOfMetadataDocumentsModified":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfMetadataDocumentsModified = i64
+			}
+
+		case "numberOfMetadataDocumentsScanned":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfMetadataDocumentsScanned = i64
+			}
+
 		case "numberOfModifiedDocumentsIndexed":
 			if value != nil {
 				jtv, ok := value.(json.Number)

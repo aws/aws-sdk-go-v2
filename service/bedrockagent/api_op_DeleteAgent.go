@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Agent for existing Amazon Bedrock Agent
+// Deletes an agent.
 func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optFns ...func(*Options)) (*DeleteAgentOutput, error) {
 	if params == nil {
 		params = &DeleteAgentInput{}
@@ -27,29 +27,29 @@ func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optF
 	return out, nil
 }
 
-// Delete Agent Request
 type DeleteAgentInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent to delete.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Skips checking if resource is in use when set to true. Defaults to false
+	// By default, this value is false and deletion is stopped if the resource is in
+	// use. If you set it to true , the resource will be deleted even if the resource
+	// is in use.
 	SkipResourceInUseCheck bool
 
 	noSmithyDocumentSerde
 }
 
-// Delete Agent Response
 type DeleteAgentOutput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the agent that was deleted.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Schema Type for Action APIs.
+	// The status of the agent.
 	//
 	// This member is required.
 	AgentStatus types.AgentStatus

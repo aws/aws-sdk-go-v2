@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Alias for a Amazon Bedrock Agent
+// Deletes an alias of an agent.
 func (c *Client) DeleteAgentAlias(ctx context.Context, params *DeleteAgentAliasInput, optFns ...func(*Options)) (*DeleteAgentAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAgentAliasInput{}
@@ -27,15 +27,14 @@ func (c *Client) DeleteAgentAlias(ctx context.Context, params *DeleteAgentAliasI
 	return out, nil
 }
 
-// Delete Agent Alias Request
 type DeleteAgentAliasInput struct {
 
-	// Id generated at the server side when an Agent Alias is created
+	// The unique identifier of the alias to delete.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent that the alias belongs to.
 	//
 	// This member is required.
 	AgentId *string
@@ -43,20 +42,19 @@ type DeleteAgentAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Delete Agent Alias Response
 type DeleteAgentAliasOutput struct {
 
-	// Id for an Agent Alias generated at the server side.
+	// The unique identifier of the alias that was deleted.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// The statuses an Agent Alias can be in.
+	// The status of the alias.
 	//
 	// This member is required.
 	AgentAliasStatus types.AgentAliasStatus
 
-	// Identifier for a resource.
+	// The unique identifier of the agent that the alias belongs to.
 	//
 	// This member is required.
 	AgentId *string

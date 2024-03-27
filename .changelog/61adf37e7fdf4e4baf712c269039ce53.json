@@ -1,0 +1,8 @@
+{
+    "id": "61adf37e-7fdf-4e4b-af71-2c269039ce53",
+    "type": "feature",
+    "description": "Added minimum capacity to  Amazon ElastiCache Serverless. This feature allows customer to ensure minimum capacity even without current load",
+    "modules": [
+        "service/elasticache"
+    ]
+}

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists an Action Group for existing Amazon Bedrock Agent Version
+// Lists the action groups for an agent and information about each one.
 func (c *Client) ListAgentActionGroups(ctx context.Context, params *ListAgentActionGroupsInput, optFns ...func(*Options)) (*ListAgentActionGroupsOutput, error) {
 	if params == nil {
 		params = &ListAgentActionGroupsInput{}
@@ -27,37 +27,42 @@ func (c *Client) ListAgentActionGroups(ctx context.Context, params *ListAgentAct
 	return out, nil
 }
 
-// List Action Groups Request
 type ListAgentActionGroupsInput struct {
 
-	// Id generated at the server side when an Agent is Listed
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Id generated at the server side when an Agent is Listed
+	// The version of the agent.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// List Action Groups Response
 type ListAgentActionGroupsOutput struct {
 
-	// List of ActionGroup Summaries
+	// A list of objects, each of which contains information about an action group.
 	//
 	// This member is required.
 	ActionGroupSummaries []types.ActionGroupSummary
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -156,7 +161,10 @@ var _ ListAgentActionGroupsAPIClient = (*Client)(nil)
 // ListAgentActionGroupsPaginatorOptions is the paginator options for
 // ListAgentActionGroups
 type ListAgentActionGroupsPaginatorOptions struct {
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

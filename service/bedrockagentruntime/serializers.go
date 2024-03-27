@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/internal/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -335,6 +337,40 @@ func awsRestjson1_serializeOpDocumentRetrieveAndGenerateInput(v *RetrieveAndGene
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFilterAttribute(v *types.FilterAttribute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		if err := awsRestjson1_serializeDocumentFilterValue(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterValue(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGenerationConfiguration(v *types.GenerationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -410,6 +446,13 @@ func awsRestjson1_serializeDocumentKnowledgeBaseVectorSearchConfiguration(v *typ
 	object := value.Object()
 	defer object.Close()
 
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentRetrievalFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NumberOfResults != nil {
 		ok := object.Key("numberOfResults")
 		ok.Integer(*v.NumberOfResults)
@@ -443,6 +486,100 @@ func awsRestjson1_serializeDocumentPromptTemplate(v *types.PromptTemplate, value
 		ok.String(*v.TextPromptTemplate)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRetrievalFilter(v types.RetrievalFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RetrievalFilterMemberAndAll:
+		av := object.Key("andAll")
+		if err := awsRestjson1_serializeDocumentRetrievalFilterList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberEquals:
+		av := object.Key("equals")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberGreaterThan:
+		av := object.Key("greaterThan")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberGreaterThanOrEquals:
+		av := object.Key("greaterThanOrEquals")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberIn:
+		av := object.Key("in")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberLessThan:
+		av := object.Key("lessThan")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberLessThanOrEquals:
+		av := object.Key("lessThanOrEquals")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberNotEquals:
+		av := object.Key("notEquals")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberNotIn:
+		av := object.Key("notIn")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberOrAll:
+		av := object.Key("orAll")
+		if err := awsRestjson1_serializeDocumentRetrievalFilterList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RetrievalFilterMemberStartsWith:
+		av := object.Key("startsWith")
+		if err := awsRestjson1_serializeDocumentFilterAttribute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRetrievalFilterList(v []types.RetrievalFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentRetrievalFilter(v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate a Knowledge Base to an existing Amazon Bedrock Agent
+// Associates a knowledge base with an agent. If a knowledge base is associated
+// and its indexState is set to Enabled , the agent queries the knowledge base for
+// information to augment its response to the user.
 func (c *Client) AssociateAgentKnowledgeBase(ctx context.Context, params *AssociateAgentKnowledgeBaseInput, optFns ...func(*Options)) (*AssociateAgentKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &AssociateAgentKnowledgeBaseInput{}
@@ -27,39 +29,40 @@ func (c *Client) AssociateAgentKnowledgeBase(ctx context.Context, params *Associ
 	return out, nil
 }
 
-// Associate Agent Knowledge Base Request
 type AssociateAgentKnowledgeBaseInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent with which you want to associate the
+	// knowledge base.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Draft Version of the Agent.
+	// The version of the agent with which you want to associate the knowledge base.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Description of the Resource.
+	// A description of what the agent should use the knowledge base for.
 	//
 	// This member is required.
 	Description *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to associate with the agent.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// State of the knowledge base; whether it is enabled or disabled
+	// Specifies whether to use the knowledge base or not when sending an InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
+	// request.
 	KnowledgeBaseState types.KnowledgeBaseState
 
 	noSmithyDocumentSerde
 }
 
-// Associate Agent Knowledge Base Response
 type AssociateAgentKnowledgeBaseOutput struct {
 
-	// Contains the information of an Agent Knowledge Base.
+	// Contains details about the knowledge base that has been associated with the
+	// agent.
 	//
 	// This member is required.
 	AgentKnowledgeBase *types.AgentKnowledgeBase

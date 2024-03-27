@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the Aliases for an Amazon Bedrock Agent
+// Lists the aliases of an agent and information about each one.
 func (c *Client) ListAgentAliases(ctx context.Context, params *ListAgentAliasesInput, optFns ...func(*Options)) (*ListAgentAliasesOutput, error) {
 	if params == nil {
 		params = &ListAgentAliasesInput{}
@@ -27,32 +27,38 @@ func (c *Client) ListAgentAliases(ctx context.Context, params *ListAgentAliasesI
 	return out, nil
 }
 
-// List Agent Aliases Request
 type ListAgentAliasesInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// List Agent Aliases Response
 type ListAgentAliasesOutput struct {
 
-	// The list of summaries of all the aliases for an Agent.
+	// A list of objects, each of which contains information about an alias of the
+	// agent.
 	//
 	// This member is required.
 	AgentAliasSummaries []types.AgentAliasSummary
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,7 +156,10 @@ var _ ListAgentAliasesAPIClient = (*Client)(nil)
 
 // ListAgentAliasesPaginatorOptions is the paginator options for ListAgentAliases
 type ListAgentAliasesPaginatorOptions struct {
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tag a resource
+// Associate tags with a resource. For more information, see Tagging resources (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
+// in the Amazon Bedrock User Guide.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -28,12 +29,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// ARN of Taggable resources: [Agent, AgentAlias, Knowledge-Base]
+	// The ARN of the resource to tag.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A map of tag keys and values
+	// An object containing key-value pairs that define the tags to attach to the
+	// resource.
 	//
 	// This member is required.
 	Tags map[string]string

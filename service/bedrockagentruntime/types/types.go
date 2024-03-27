@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/document"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -72,6 +73,26 @@ type FailureTrace struct {
 
 	// The unique identifier of the trace.
 	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the name that the metadata attribute must match and the value to
+// which to compare the value of the metadata attribute. For more information, see
+// Query configurations (https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html)
+// . This data type is used in the following API operations:
+//   - RetrieveAndGenerate request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax)
+type FilterAttribute struct {
+
+	// The name that the metadata attribute must match.
+	//
+	// This member is required.
+	Key *string
+
+	// The value to whcih to compare the value of the metadata attribute.
+	//
+	// This member is required.
+	Value document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -237,6 +258,11 @@ type KnowledgeBaseRetrievalResult struct {
 	// Contains information about the location of the data source.
 	Location *RetrievalResultLocation
 
+	// Contains metadata attributes and their values for the file in the data source.
+	// For more information, see Metadata and filtering (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata)
+	// .
+	Metadata map[string]document.Interface
+
 	// The level of relevance of the result to the query.
 	Score *float64
 
@@ -280,6 +306,11 @@ type KnowledgeBaseRetrieveAndGenerateConfiguration struct {
 //   - RetrieveAndGenerate request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax)
 //     – in the vectorSearchConfiguration field
 type KnowledgeBaseVectorSearchConfiguration struct {
+
+	// Specifies the filters to use on the metadata in the knowledge base data sources
+	// before returning results. For more information, see Query configurations (https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html)
+	// .
+	Filter RetrievalFilter
 
 	// The number of source chunks to retrieve.
 	NumberOfResults *int32
@@ -575,6 +606,7 @@ func (*PreProcessingTraceMemberModelInvocationOutput) isPreProcessingTrace() {}
 // generation. For more information, see Knowledge base prompt templates (https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt)
 // . This data type is used in the following API operations:
 //   - RetrieveAndGenerate request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax)
+//     – in the filter field
 type PromptTemplate struct {
 
 	// The template for the prompt that's sent to the model for response generation.
@@ -656,6 +688,151 @@ type ResponseStreamMemberTrace struct {
 }
 
 func (*ResponseStreamMemberTrace) isResponseStream() {}
+
+// Specifies the filters to use on the metadata attributes in the knowledge base
+// data sources before returning results. For more information, see Query
+// configurations (https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html)
+// . This data type is used in the following API operations:
+//   - Retrieve request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax)
+//     – in the filter field
+//   - RetrieveAndGenerate request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax)
+//     – in the filter field
+//
+// The following types satisfy this interface:
+//
+//	RetrievalFilterMemberAndAll
+//	RetrievalFilterMemberEquals
+//	RetrievalFilterMemberGreaterThan
+//	RetrievalFilterMemberGreaterThanOrEquals
+//	RetrievalFilterMemberIn
+//	RetrievalFilterMemberLessThan
+//	RetrievalFilterMemberLessThanOrEquals
+//	RetrievalFilterMemberNotEquals
+//	RetrievalFilterMemberNotIn
+//	RetrievalFilterMemberOrAll
+//	RetrievalFilterMemberStartsWith
+type RetrievalFilter interface {
+	isRetrievalFilter()
+}
+
+// Knowledge base data sources whose metadata attributes fulfill all the filter
+// conditions inside this list are returned.
+type RetrievalFilterMemberAndAll struct {
+	Value []RetrievalFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberAndAll) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value matches the value in this object are returned.
+type RetrievalFilterMemberEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value is greater than the value in this object are
+// returned.
+type RetrievalFilterMemberGreaterThan struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberGreaterThan) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value is greater than or equal to the value in this
+// object are returned.
+type RetrievalFilterMemberGreaterThanOrEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberGreaterThanOrEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value is in the list specified in the value in this
+// object are returned.
+type RetrievalFilterMemberIn struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberIn) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value is less than the value in this object are
+// returned.
+type RetrievalFilterMemberLessThan struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberLessThan) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value is less than or equal to the value in this
+// object are returned.
+type RetrievalFilterMemberLessThanOrEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberLessThanOrEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value doesn't match the value in this object are
+// returned.
+type RetrievalFilterMemberNotEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberNotEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value isn't in the list specified in the value in
+// this object are returned.
+type RetrievalFilterMemberNotIn struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberNotIn) isRetrievalFilter() {}
+
+// Knowledge base data sources whose metadata attributes fulfill at least one of
+// the filter conditions inside this list are returned.
+type RetrievalFilterMemberOrAll struct {
+	Value []RetrievalFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberOrAll) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value starts with the value in this object are
+// returned. This filter is currently only supported for Amazon OpenSearch
+// Serverless vector stores.
+type RetrievalFilterMemberStartsWith struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberStartsWith) isRetrievalFilter() {}
 
 // Contains the cited text from the data source. This data type is used in the
 // following API operations:
@@ -784,6 +961,11 @@ type RetrievedReference struct {
 
 	// Contains information about the location of the data source.
 	Location *RetrievalResultLocation
+
+	// Contains metadata attributes and their values for the file in the data source.
+	// For more information, see Metadata and filtering (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata)
+	// .
+	Metadata map[string]document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -944,4 +1126,5 @@ func (*UnknownUnionMember) isOrchestrationTrace()  {}
 func (*UnknownUnionMember) isPostProcessingTrace() {}
 func (*UnknownUnionMember) isPreProcessingTrace()  {}
 func (*UnknownUnionMember) isResponseStream()      {}
+func (*UnknownUnionMember) isRetrievalFilter()     {}
 func (*UnknownUnionMember) isTrace()               {}

@@ -1714,6 +1714,10 @@ type EksContainerResourceRequirements struct {
 // in the Kubernetes documentation.
 type EksContainerSecurityContext struct {
 
+	// Whether or not a container or a Kubernetes pod is allowed to gain more
+	// privileges than its parent process. The default value is false .
+	AllowPrivilegeEscalation *bool
+
 	// When this parameter is true , the container is given elevated permissions on the
 	// host container instance. The level of permissions are similar to the root user
 	// permissions. The default value is false . This parameter maps to privileged
@@ -1845,6 +1849,12 @@ type EksPodProperties struct {
 	// in the Kubernetes documentation.
 	HostNetwork *bool
 
+	// References a Kubernetes secret resource. This object must start and end with an
+	// alphanumeric character, is required to be lowercase, can include periods (.) and
+	// hyphens (-), and can't contain more than 253 characters. ImagePullSecret$name
+	// is required when this object is used.
+	ImagePullSecrets []ImagePullSecret
+
 	// These containers run before application containers, always runs to completion,
 	// and must complete successfully before the next container starts. These
 	// containers are registered with the Amazon EKS Connector agent and persists the
@@ -1905,6 +1915,9 @@ type EksPodPropertiesDetail struct {
 	// and Pod networking (https://kubernetes.io/docs/concepts/workloads/pods/#pod-networking)
 	// in the Kubernetes documentation.
 	HostNetwork *bool
+
+	// Displays the reference pointer to the Kubernetes secret resource.
+	ImagePullSecrets []ImagePullSecret
 
 	// The container registered with the Amazon EKS Connector agent and persists the
 	// registration information in the Kubernetes backend data store.
@@ -2146,6 +2159,19 @@ type Host struct {
 	// of the source path folder are exported. This parameter isn't applicable to jobs
 	// that run on Fargate resources. Don't provide this for these jobs.
 	SourcePath *string
+
+	noSmithyDocumentSerde
+}
+
+// References a Kubernetes configuration resource that holds a list of secrets.
+// These secrets help to gain access to pull an image from a private registry.
+type ImagePullSecret struct {
+
+	// Provides a unique identifier for the ImagePullSecret . This object is required
+	// when EksPodProperties$imagePullSecrets is used.
+	//
+	// This member is required.
+	Name *string
 
 	noSmithyDocumentSerde
 }

@@ -2058,6 +2058,9 @@ func validateOpUpdateAgentInput(v *UpdateAgentInput) error {
 	if v.AgentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentName"))
 	}
+	if v.FoundationModel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FoundationModel"))
+	}
 	if v.AgentResourceRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentResourceRoleArn"))
 	}

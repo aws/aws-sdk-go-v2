@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Action Group for Amazon Bedrock Agent
+// Updates the configuration for an action group for an agent.
 func (c *Client) UpdateAgentActionGroup(ctx context.Context, params *UpdateAgentActionGroupInput, optFns ...func(*Options)) (*UpdateAgentActionGroupOutput, error) {
 	if params == nil {
 		params = &UpdateAgentActionGroupInput{}
@@ -27,51 +27,61 @@ func (c *Client) UpdateAgentActionGroup(ctx context.Context, params *UpdateAgent
 	return out, nil
 }
 
-// Update Action Group Request
 type UpdateAgentActionGroupInput struct {
 
-	// Id generated at the server side when an Action Group is created under Agent
+	// The unique identifier of the action group.
 	//
 	// This member is required.
 	ActionGroupId *string
 
-	// Name for a resource.
+	// Specifies a new name for the action group.
 	//
 	// This member is required.
 	ActionGroupName *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent for which to update the action group.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Draft Version of the Agent.
+	// The unique identifier of the agent version for which to update the action group.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Type of Executors for an Action Group
+	// The ARN of the Lambda function containing the business logic that is carried
+	// out upon invoking the action.
 	ActionGroupExecutor types.ActionGroupExecutor
 
-	// State of the action group
+	// Specifies whether the action group is available for the agent to invoke or not
+	// when sending an InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
+	// request.
 	ActionGroupState types.ActionGroupState
 
-	// Contains information about the API Schema for the Action Group
+	// Contains either details about the S3 object containing the OpenAPI schema for
+	// the action group or the JSON or YAML-formatted payload defining the schema. For
+	// more information, see Action group OpenAPI schemas (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html)
+	// .
 	ApiSchema types.APISchema
 
-	// Description of the Resource.
+	// Specifies a new name for the action group.
 	Description *string
 
-	// Action Group Signature for a BuiltIn Action
+	// To allow your agent to request the user for additional information when trying
+	// to complete a task, set this field to AMAZON.UserInput . You must leave the
+	// description , apiSchema , and actionGroupExecutor fields blank for this action
+	// group. During orchestration, if your agent determines that it needs to invoke an
+	// API in an action group, but doesn't have enough information to complete the API
+	// request, it will invoke this action group instead and return an Observation (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html)
+	// reprompting the user for more information.
 	ParentActionGroupSignature types.ActionGroupSignature
 
 	noSmithyDocumentSerde
 }
 
-// Update Action Group Response
 type UpdateAgentActionGroupOutput struct {
 
-	// Contains the information of an Agent Action Group
+	// Contains details about the action group that was updated.
 	//
 	// This member is required.
 	AgentActionGroup *types.AgentActionGroup

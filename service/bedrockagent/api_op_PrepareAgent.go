@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Prepares an existing Amazon Bedrock Agent to receive runtime requests
+// Creates a DRAFT version of the agent that can be used for internal testing.
 func (c *Client) PrepareAgent(ctx context.Context, params *PrepareAgentInput, optFns ...func(*Options)) (*PrepareAgentOutput, error) {
 	if params == nil {
 		params = &PrepareAgentInput{}
@@ -28,10 +28,9 @@ func (c *Client) PrepareAgent(ctx context.Context, params *PrepareAgentInput, op
 	return out, nil
 }
 
-// PrepareAgent Request
 type PrepareAgentInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent for which to create a DRAFT version.
 	//
 	// This member is required.
 	AgentId *string
@@ -39,25 +38,24 @@ type PrepareAgentInput struct {
 	noSmithyDocumentSerde
 }
 
-// PrepareAgent Response
 type PrepareAgentOutput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the agent for which the DRAFT version was created.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Schema Type for Action APIs.
+	// The status of the DRAFT version and whether it is ready for use.
 	//
 	// This member is required.
 	AgentStatus types.AgentStatus
 
-	// Agent Version.
+	// The version of the agent.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Time Stamp.
+	// The time at which the DRAFT version of the agent was last prepared.
 	//
 	// This member is required.
 	PreparedAt *time.Time

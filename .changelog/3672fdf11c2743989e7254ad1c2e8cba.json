@@ -1,0 +1,8 @@
+{
+    "id": "3672fdf1-1c27-4398-9e72-54ad1c2e8cba",
+    "type": "feature",
+    "description": "This release introduces filtering support on Retrieve and RetrieveAndGenerate APIs.",
+    "modules": [
+        "service/bedrockagentruntime"
+    ]
+}
