@@ -5135,9 +5135,13 @@
                 "Maximum": {
                     "target": "com.amazonaws.elasticache#IntegerOptional",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The upper limit for data storage the cache is set to use.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The upper limit for data storage the cache is set to use.</p>"
+                    }
+                },
+                "Minimum": {
+                    "target": "com.amazonaws.elasticache#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lower limit for data storage the cache is set to use.</p>"
                     }
                 },
                 "Unit": {
@@ -9719,9 +9723,13 @@
                 "Maximum": {
                     "target": "com.amazonaws.elasticache#IntegerOptional",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The configuration for the maximum number of ECPUs the cache can consume per second.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The configuration for the maximum number of ECPUs the cache can consume per second.</p>"
+                    }
+                },
+                "Minimum": {
+                    "target": "com.amazonaws.elasticache#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the minimum number of ECPUs the cache should be able consume per second.</p>"
                     }
                 }
             },
