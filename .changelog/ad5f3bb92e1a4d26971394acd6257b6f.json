@@ -1,8 +1,0 @@
-{
-    "id": "ad5f3bb9-2e1a-4d26-9713-94acd6257b6f",
-    "type": "feature",
-    "description": "This changes introduces metadata documents statistics and also updates the documentation for bedrock agent.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

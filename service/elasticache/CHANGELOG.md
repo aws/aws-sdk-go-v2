@@ -1,3 +1,7 @@
+# v1.38.0 (2024-03-27)
+
+* **Feature**: Added minimum capacity to  Amazon ElastiCache Serverless. This feature allows customer to ensure minimum capacity even without current load
+
 # v1.37.4 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.49.1 (2024-03-27)
+
+* No change notes available for this release.
+
 # v1.49.0 (2024-03-25)
 
 * **Feature**: Exposing TileMedia H265 options

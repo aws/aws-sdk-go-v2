@@ -1,3 +1,17 @@
+# Release (2024-03-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.36.0](service/batch/CHANGELOG.md#v1360-2024-03-27)
+  * **Feature**: This feature allows AWS Batch to support configuration of imagePullSecrets and allowPrivilegeEscalation for jobs running on EKS
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.5.0](service/bedrockagent/CHANGELOG.md#v150-2024-03-27)
+  * **Feature**: This changes introduces metadata documents statistics and also updates the documentation for bedrock agent.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.6.0](service/bedrockagentruntime/CHANGELOG.md#v160-2024-03-27)
+  * **Feature**: This release introduces filtering support on Retrieve and RetrieveAndGenerate APIs.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.38.0](service/elasticache/CHANGELOG.md#v1380-2024-03-27)
+  * **Feature**: Added minimum capacity to  Amazon ElastiCache Serverless. This feature allows customer to ensure minimum capacity even without current load
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.28.5](service/secretsmanager/CHANGELOG.md#v1285-2024-03-27)
+  * **Documentation**: Documentation updates for Secrets Manager
+
 # Release (2024-03-26)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.6.0 (2024-03-27)
+
+* **Feature**: This release introduces filtering support on Retrieve and RetrieveAndGenerate APIs.
+
 # v1.5.0 (2024-03-26)
 
 * **Feature**: This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock.

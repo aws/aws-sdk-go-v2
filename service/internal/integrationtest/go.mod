@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.34.3
 	github.com/aws/aws-sdk-go-v2/service/athena v1.40.3
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.40.4
-	github.com/aws/aws-sdk-go-v2/service/batch v1.35.1
+	github.com/aws/aws-sdk-go-v2/service/batch v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.35.3
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.21.3
@@ -36,7 +36,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.41.5
 	github.com/aws/aws-sdk-go-v2/service/efs v1.28.3
-	github.com/aws/aws-sdk-go-v2/service/elasticache v1.37.4
+	github.com/aws/aws-sdk-go-v2/service/elasticache v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.24.3
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.30.4
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.27.3
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.3
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.4
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/ses v1.22.3
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.26.3

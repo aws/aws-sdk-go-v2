@@ -1,8 +1,0 @@
-{
-    "id": "6735ddeb-2317-4bc8-9b4b-c0468320bde6",
-    "type": "feature",
-    "description": "This feature allows AWS Batch to support configuration of imagePullSecrets and allowPrivilegeEscalation for jobs running on EKS",
-    "modules": [
-        "service/batch"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.5.0 (2024-03-27)
+
+* **Feature**: This changes introduces metadata documents statistics and also updates the documentation for bedrock agent.
+
 # v1.4.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions
