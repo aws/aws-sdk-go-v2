@@ -8406,6 +8406,18 @@
                     "traits": {
                         "smithy.api#enumValue": "AutoScalingGroupInstanceRefreshActive"
                     }
+                },
+                "KUBERNETES_LABEL_INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KubernetesLabelInvalid"
+                    }
+                },
+                "EC2_LAUNCH_TEMPLATE_VERSION_MAX_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ec2LaunchTemplateVersionMaxLimitExceeded"
+                    }
                 }
             }
         },

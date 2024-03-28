@@ -1294,7 +1294,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This API is also used when you use GuardDuty Runtime Monitoring \n      for your Amazon EC2 instances (currently in preview\n      release) and is subject to change. The use of this API is subject to Section 2 of the \n      <a href=\"http://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (\"Betas and Previews\").</p>\n         </note>\n         <p>Contains information about the Amazon EC2 instance runtime \n    coverage details.</p>"
+                "smithy.api#documentation": "<p>Contains information about the Amazon EC2 instance runtime \n    coverage details.</p>"
             }
         },
         "com.amazonaws.guardduty#CoverageEcsClusterDetails": {
@@ -1595,7 +1595,7 @@
                 "Ec2InstanceDetails": {
                     "target": "com.amazonaws.guardduty#CoverageEc2InstanceDetails",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>This API is also used when you use GuardDuty Runtime Monitoring \n      for your Amazon EC2 instances (currently in preview\n      release) and is subject to change. The use of this API is subject to Section 2 of the \n      <a href=\"http://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (\"Betas and Previews\").</p>\n         </note>\n         <p>Information about the Amazon EC2 instance assessed \n      for runtime coverage.</p>",
+                        "smithy.api#documentation": "<p>Information about the Amazon EC2 instance assessed \n      for runtime coverage.</p>",
                         "smithy.api#jsonName": "ec2InstanceDetails"
                     }
                 }
@@ -2096,7 +2096,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account\n      IDs. This step is a prerequisite for managing the associated member accounts either by\n      invitation or through an organization.</p>\n         <p>As a delegated administrator, using <code>CreateMembers</code> will enable GuardDuty in \n      the added member accounts, with the exception of the\n      organization delegated administrator account. A delegated administrator must enable GuardDuty \n      prior to being added as a member.</p>\n         <p>When you use CreateMembers as an Organizations delegated \n      administrator, GuardDuty applies your organization's auto-enable settings to the member\n      accounts in this request, irrespective of the accounts being new or existing members. For \n      more information about the existing auto-enable settings for your organization, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html\">DescribeOrganizationConfiguration</a>.</p>\n         <p>If you are adding accounts by invitation, before using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a>, use \n      <code>CreateMembers</code> after GuardDuty has been enabled in potential member accounts.</p>\n         <p>If you disassociate a member from a GuardDuty \n      delegated administrator, the member account details \n      obtained from this API, including the associated email addresses, will be retained. \n      This is done so that the delegated administrator can invoke the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a> API without the need to invoke the CreateMembers API again. To \n      remove the details associated with a member account, the delegated administrator must invoke the \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a> API. </p>",
+                "smithy.api#documentation": "<p>Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account\n      IDs. This step is a prerequisite for managing the associated member accounts either by\n      invitation or through an organization.</p>\n         <p>As a delegated administrator, using <code>CreateMembers</code> will enable GuardDuty in \n      the added member accounts, with the exception of the\n      organization delegated administrator account. A delegated administrator must enable GuardDuty \n      prior to being added as a member.</p>\n         <p>When you use CreateMembers as an Organizations delegated \n      administrator, GuardDuty applies your organization's auto-enable settings to the member\n      accounts in this request, irrespective of the accounts being new or existing members. For \n      more information about the existing auto-enable settings for your organization, see\n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DescribeOrganizationConfiguration.html\">DescribeOrganizationConfiguration</a>.</p>\n         <p>If you disassociate a member account that was added by invitation, the member account details \n      obtained from this API, including the associated email addresses, will be retained. \n      This is done so that the delegated administrator can invoke the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a> API without the need to invoke the CreateMembers API again. To \n      remove the details associated with a member account, the delegated administrator must invoke the \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a> API. </p>\n         <p>When the member accounts added through Organizations are later disassociated, you (administrator)\n      can't invite them by calling the InviteMembers API. You can create an association with these\n      member accounts again only by calling the CreateMembers API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member",
@@ -4071,7 +4071,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates GuardDuty member accounts (from the current administrator account) specified\n      by the account IDs.</p>\n         <p>When you \n      disassociate an invited member from a GuardDuty delegated administrator, the member account details \n      obtained from the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a> API, including the associated email addresses, are retained. This is \n      done so that the delegated administrator can invoke the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a> API without the need to invoke the CreateMembers API again. To \n      remove the details associated with a member account, the delegated administrator must invoke the \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a> API. </p>\n         <p>With <code>autoEnableOrganizationMembers</code> configuration for your organization set to\n        <code>ALL</code>, you'll receive an error if you attempt to disassociate a member account\n      before removing them from your organization.</p>",
+                "smithy.api#documentation": "<p>Disassociates GuardDuty member accounts (from the current administrator account) specified\n      by the account IDs.</p>\n         <p>When you \n      disassociate an invited member from a GuardDuty delegated administrator, the member account details \n      obtained from the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a> API, including the associated email addresses, are retained. This is \n      done so that the delegated administrator can invoke the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a> API without the need to invoke the CreateMembers API again. To \n      remove the details associated with a member account, the delegated administrator must invoke the \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a> API. </p>\n         <p>With <code>autoEnableOrganizationMembers</code> configuration for your organization set to\n        <code>ALL</code>, you'll receive an error if you attempt to disassociate a member account\n      before removing them from your organization.</p>\n         <p>If you disassociate a member account that was added by invitation, the member account details \n      obtained from this API, including the associated email addresses, will be retained. \n      This is done so that the delegated administrator can invoke the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a> API without the need to invoke the CreateMembers API again. To \n      remove the details associated with a member account, the delegated administrator must invoke the \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a> API. </p>\n         <p>When the member accounts added through Organizations are later disassociated, you (administrator)\n      can't invite them by calling the InviteMembers API. You can create an association with these\n      member accounts again only by calling the CreateMembers API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member/disassociate",
@@ -4149,7 +4149,7 @@
                 "DomainWithSuffix": {
                     "target": "com.amazonaws.guardduty#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The second and top level domain involved in the \n      activity that prompted GuardDuty to generate this finding.</p>",
+                        "smithy.api#documentation": "<p>The second and top level domain involved in the \n      activity that potentially prompted GuardDuty to generate this finding.\n      For a list of top-level and second-level domains, see <a href=\"https://publicsuffix.org/\">public suffix list</a>.</p>",
                         "smithy.api#jsonName": "domainWithSuffix"
                     }
                 }
@@ -4607,6 +4607,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ECS_FARGATE_AGENT_MANAGEMENT"
+                    }
+                },
+                "EC2_AGENT_MANAGEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_AGENT_MANAGEMENT"
                     }
                 }
             }
@@ -7992,7 +7998,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account \n      that invokes this API. If you are using Amazon Web Services Organizations to manage your GuardDuty environment, this step is not\n      needed. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html\">Managing accounts with organizations</a>.</p>\n         <p>To invite Amazon Web Services accounts, the first step is \n      to ensure that GuardDuty has been enabled in the potential member accounts. You can now invoke this API\n      to add accounts by invitation. The \n      invited accounts can either accept or decline the invitation from their GuardDuty accounts. Each invited Amazon Web Services account can \n      choose to accept the invitation from only one Amazon Web Services account. For more information, see \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html\">Managing GuardDuty accounts \n      by invitation</a>.</p>\n         <p>After the invite has been accepted and you choose to disassociate a member account \n      (by using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html\">DisassociateMembers</a>) from your account, \n      the details of the member account obtained by invoking <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a>, including the \n      associated email addresses, will be retained. \n      This is done so that you can invoke InviteMembers without the need to invoke \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a> again. To \n      remove the details associated with a member account, you must also invoke \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a>. </p>",
+                "smithy.api#documentation": "<p>Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account \n      that invokes this API. If you are using Amazon Web Services Organizations to manage your GuardDuty environment, this step is not\n      needed. For more information, see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_organizations.html\">Managing accounts with organizations</a>.</p>\n         <p>To invite Amazon Web Services accounts, the first step is \n      to ensure that GuardDuty has been enabled in the potential member accounts. You can now invoke this API\n      to add accounts by invitation. The \n      invited accounts can either accept or decline the invitation from their GuardDuty accounts. Each invited Amazon Web Services account can \n      choose to accept the invitation from only one Amazon Web Services account. For more information, see \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html\">Managing GuardDuty accounts \n      by invitation</a>.</p>\n         <p>After the invite has been accepted and you choose to disassociate a member account \n      (by using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DisassociateMembers.html\">DisassociateMembers</a>) from your account, \n      the details of the member account obtained by invoking <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a>, including the \n      associated email addresses, will be retained. \n      This is done so that you can invoke InviteMembers without the need to invoke \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html\">CreateMembers</a> again. To \n      remove the details associated with a member account, you must also invoke \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a>. </p>\n         <p>If you disassociate a member account that was added by invitation, the member account details \n      obtained from this API, including the associated email addresses, will be retained. \n      This is done so that the delegated administrator can invoke the <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\">InviteMembers</a> API without the need to invoke the CreateMembers API again. To \n      remove the details associated with a member account, the delegated administrator must invoke the \n      <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html\">DeleteMembers</a> API. </p>\n         <p>When the member accounts added through Organizations are later disassociated, you (administrator)\n      can't invite them by calling the InviteMembers API. You can create an association with these\n      member accounts again only by calling the CreateMembers API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/member/invite",
@@ -10459,6 +10465,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ECS_FARGATE_AGENT_MANAGEMENT"
                     }
+                },
+                "EC2_AGENT_MANAGEMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_AGENT_MANAGEMENT"
+                    }
                 }
             }
         },
@@ -11864,6 +11876,41 @@
                         "smithy.api#documentation": "<p>Specifies the Region of a process's address space such as stack and heap.</p>",
                         "smithy.api#jsonName": "memoryRegions"
                     }
+                },
+                "ToolName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the potentially suspicious tool.</p>",
+                        "smithy.api#jsonName": "toolName"
+                    }
+                },
+                "ToolCategory": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Category that the tool belongs to. Some of the examples\n    are Backdoor Tool, Pentest Tool, Network Scanner, and Network Sniffer.</p>",
+                        "smithy.api#jsonName": "toolCategory"
+                    }
+                },
+                "ServiceName": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the security service that has been potentially disabled.</p>",
+                        "smithy.api#jsonName": "serviceName"
+                    }
+                },
+                "CommandLineExample": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Example of the command line involved in the suspicious activity.</p>",
+                        "smithy.api#jsonName": "commandLineExample"
+                    }
+                },
+                "ThreatFilePath": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suspicious file path for which the threat intelligence details were found.</p>",
+                        "smithy.api#jsonName": "threatFilePath"
+                    }
                 }
             },
             "traits": {
@@ -13189,6 +13236,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of names of the threats in the threat intelligence list that triggered the\n      finding.</p>",
                         "smithy.api#jsonName": "threatNames"
+                    }
+                },
+                "ThreatFileSha256": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>SHA256 of the file that generated the finding.</p>",
+                        "smithy.api#jsonName": "threatFileSha256"
                     }
                 }
             },

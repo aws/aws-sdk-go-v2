@@ -12461,7 +12461,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A dataset parameter.</p>"
+                "smithy.api#documentation": "<p>A parameter that is created in a dataset. The parameter can be a string, integer, decimal, or datetime data type.</p>"
             }
         },
         "com.amazonaws.quicksight#DatasetParameterId": {
@@ -12511,6 +12511,9 @@
                         "smithy.api#enumValue": "SINGLE_VALUED"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value type of the parameter. The value type is used to validate the parameter before it is evaluated.</p>"
             }
         },
         "com.amazonaws.quicksight#Datasets": {
@@ -18820,6 +18823,18 @@
                         "smithy.api#documentation": "<p>A map that describes the IP rules with CIDR range and description.</p>"
                     }
                 },
+                "VpcIdRestrictionRuleMap": {
+                    "target": "com.amazonaws.quicksight#VpcIdRestrictionRuleMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of allowed VPC IDs and their rule descriptions.</p>"
+                    }
+                },
+                "VpcEndpointIdRestrictionRuleMap": {
+                    "target": "com.amazonaws.quicksight#VpcEndpointIdRestrictionRuleMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of allowed VPC endpoint IDs and their rule descriptions.</p>"
+                    }
+                },
                 "Enabled": {
                     "target": "com.amazonaws.quicksight#NullableBoolean",
                     "traits": {
@@ -23800,7 +23815,7 @@
                 "AuthorizedResourceArns": {
                     "target": "com.amazonaws.quicksight#ArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the user\n            is authorized to access during the lifetime of the session.</p>\n         <p>If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the\n            account that you want the user to be able to view.</p>\n         <p>Currently, you can pass up to 25\n            dashboard ARNs in each API call.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the user\n            is authorized to access during the lifetime of the session.</p>\n         <p>If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the\n            account that you want the user to be able to view.</p>\n         <p>If you want to make changes to the theme of your embedded content, pass a list of theme ARNs that the anonymous users need access to.</p>\n         <p>Currently, you can pass up to 25 theme ARNs in each API call.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -42719,7 +42734,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 65536
+                    "max": 168000
                 }
             }
         },
@@ -50107,7 +50122,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the content and status of IP rules. To use this operation, you\n\t\t\tmust\n\t\t\tprovide the entire map of rules. You can use the <code>DescribeIpRestriction</code>\n\t\t\toperation to get the current rule map.</p>",
+                "smithy.api#documentation": "<p>Updates the content and status of IP rules. Traffic from a source is allowed when the source satisfies either the <code>IpRestrictionRule</code>, <code>VpcIdRestrictionRule</code>, or <code>VpcEndpointIdRestrictionRule</code>. To use this operation, you must provide the entire map of rules. You can use the <code>DescribeIpRestriction</code> operation to get the current rule map.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/ip-restriction",
@@ -50130,6 +50145,18 @@
                     "target": "com.amazonaws.quicksight#IpRestrictionRuleMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A map that describes the updated IP rules with CIDR ranges and descriptions.</p>"
+                    }
+                },
+                "VpcIdRestrictionRuleMap": {
+                    "target": "com.amazonaws.quicksight#VpcIdRestrictionRuleMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of VPC IDs and their corresponding rules. When you configure this parameter, traffic from all VPC endpoints that are present in the specified VPC is allowed.</p>"
+                    }
+                },
+                "VpcEndpointIdRestrictionRuleMap": {
+                    "target": "com.amazonaws.quicksight#VpcEndpointIdRestrictionRuleMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of allowed VPC endpoint IDs and their corresponding rule descriptions.</p>"
                     }
                 },
                 "Enabled": {
@@ -52828,6 +52855,62 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>VPC connection properties.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#VpcEndpointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^vpce-[0-9a-z]*$"
+            }
+        },
+        "com.amazonaws.quicksight#VpcEndpointIdRestrictionRuleDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.quicksight#VpcEndpointIdRestrictionRuleMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#VpcEndpointId"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#VpcEndpointIdRestrictionRuleDescription"
+            }
+        },
+        "com.amazonaws.quicksight#VpcId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^vpc-[0-9a-z]*$"
+            }
+        },
+        "com.amazonaws.quicksight#VpcIdRestrictionRuleDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.quicksight#VpcIdRestrictionRuleMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#VpcId"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#VpcIdRestrictionRuleDescription"
             }
         },
         "com.amazonaws.quicksight#Warehouse": {

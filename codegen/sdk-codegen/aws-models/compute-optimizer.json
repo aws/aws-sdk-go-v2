@@ -1480,6 +1480,12 @@
                         "smithy.api#enumValue": "PERCENT_20"
                     }
                 },
+                "PERCENT_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERCENT_10"
+                    }
+                },
                 "PERCENT_0": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -1496,6 +1502,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CpuUtilization"
                     }
+                },
+                "MEMORY_UTILIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemoryUtilization"
+                    }
                 }
             }
         },
@@ -1505,13 +1517,13 @@
                 "threshold": {
                     "target": "com.amazonaws.computeoptimizer#CustomizableMetricThreshold",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The threshold value used for the specified metric parameter.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The threshold value used for the specified metric parameter.\n        </p>\n         <note>\n            <p>You can only specify the threshold value for CPU utilization.</p>\n         </note>"
                     }
                 },
                 "headroom": {
                     "target": "com.amazonaws.computeoptimizer#CustomizableMetricHeadroom",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The headroom threshold value in percentage used for the specified metric parameter.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The headroom value in percentage used for the specified metric parameter.\n        </p>\n         <p>The following lists the valid values for CPU and memory utilization.</p>\n         <ul>\n            <li>\n               <p>CPU utilization: <code>PERCENT_30 | PERCENT_20 | PERCENT_0</code>\n               </p>\n            </li>\n            <li>\n               <p>Memory utilization: <code>PERCENT_30 | PERCENT_20 | PERCENT_10</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2539,7 +2551,7 @@
                 "utilizationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#UtilizationPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The resource’s CPU utilization threshold preferences, such as threshold and headroom, that \n            are used to generate rightsizing recommendations. \n        </p>\n         <note>\n            <p>This preference is only available for the Amazon EC2 instance resource type.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The resource’s CPU and memory utilization preferences, such as threshold and headroom, that \n            are used to generate rightsizing recommendations. \n        </p>\n         <note>\n            <p>This preference is only available for the Amazon EC2 instance resource type.</p>\n         </note>"
                     }
                 },
                 "preferredResources": {
@@ -5811,7 +5823,7 @@
                 "utilizationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#UtilizationPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The resource’s CPU utilization threshold preferences, such as threshold and headroom, \n            that were used to generate rightsizing recommendations. It considers all applicable preferences \n            that you set at the resource, account, and organization level.\n        </p>\n         <p>To validate that the preference is applied to your last generated set of recommendations, review the \n            <code>effectiveRecommendationPreferences</code> value in the response of the \n            GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.</p>"
+                        "smithy.api#documentation": "<p>\n            The resource’s CPU and memory utilization preferences, such as threshold and headroom, \n            that were used to generate rightsizing recommendations. It considers all applicable preferences \n            that you set at the resource, account, and organization level.\n        </p>\n         <p>To validate that the preference is applied to your last generated set of recommendations, review the \n            <code>effectiveRecommendationPreferences</code> value in the response of the \n            GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.</p>"
                     }
                 },
                 "preferredResources": {
@@ -8591,7 +8603,7 @@
                 "utilizationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#UtilizationPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control the resource’s CPU utilization thresholds - threshold and headroom. When this \n            preference isn't specified, we use the following default values:\n        </p>\n         <ul>\n            <li>\n               <p>\n                  <code>P99_5</code> for threshold</p>\n            </li>\n            <li>\n               <p>\n                  <code>PERCENT_17</code> for headroom</p>\n            </li>\n         </ul>\n         <note>\n            <p>You can only set this preference for the Amazon EC2 instance resource type.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. When this \n            preference isn't specified, we use the following default values.\n        </p>\n         <p>CPU utilization:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>P99_5</code> for threshold</p>\n            </li>\n            <li>\n               <p>\n                  <code>PERCENT_20</code> for headroom</p>\n            </li>\n         </ul>\n         <p>Memory utilization:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PERCENT_20</code> for headroom</p>\n            </li>\n         </ul>\n         <note>\n            <ul>\n               <li>\n                  <p>You can only set CPU and memory utilization preferences for the Amazon EC2 instance resource type.</p>\n               </li>\n               <li>\n                  <p>The threshold setting isn’t available for memory utilization.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "preferredResources": {
@@ -8816,7 +8828,7 @@
                 "utilizationPreferences": {
                     "target": "com.amazonaws.computeoptimizer#UtilizationPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control the resource’s CPU utilization thresholds - threshold and headroom. \n            If the preference isn’t set, this object is null. \n        </p>\n         <note>\n            <p>This preference is only available for the Amazon EC2 instance resource type.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. \n            If the preference isn’t set, this object is null. \n        </p>\n         <note>\n            <p>This preference is only available for the Amazon EC2 instance resource type.</p>\n         </note>"
                     }
                 },
                 "preferredResources": {
@@ -9516,7 +9528,7 @@
                 "metricName": {
                     "target": "com.amazonaws.computeoptimizer#CustomizableMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of the resource utilization metric name to customize. \n        </p>\n         <note>\n            <p>Compute Optimizer only supports <code>CpuUtilization</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The name of the resource utilization metric name to customize. \n        </p>"
                     }
                 },
                 "metricParameters": {

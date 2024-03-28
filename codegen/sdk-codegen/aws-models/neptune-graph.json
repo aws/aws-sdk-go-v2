@@ -1884,7 +1884,7 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 128</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 128</p>"
                     }
                 },
                 "endpoint": {
@@ -1896,7 +1896,7 @@
                 "publicConnectivity": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not the graph can be reachable over the internet. All access to graphs is IAM authenticated.</p>\n         <note>\n            <p>If enabling public connectivity for the first time, there will be a delay while it is enabled.</p>\n         </note>"
                     }
                 },
                 "vectorSearchConfiguration": {
@@ -1908,7 +1908,7 @@
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs.</p>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs.</p>\n         <p>Default: If not specified, the default value is 1.</p>"
                     }
                 },
                 "kmsKeyIdentifier": {
@@ -2283,7 +2283,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Create a private graph endpoint to allow private access from to the graph from within\n    a VPC. You can attach security groups to the private graph endpoint. VPC endpoint charges apply.</p>",
+                "smithy.api#documentation": "<p>Create a private graph endpoint to allow private access from to the graph from within\n    a VPC. You can attach security groups to the private graph endpoint.</p>\n         <note>\n            <p>VPC endpoint charges apply.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -2812,7 +2812,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "<p>Execute an openCypher query. Currently, the SDK does not support parameterized queries. If you want to make a \n      parameterized query call, you can use an HTTP request. </p>\n         <p>\n      When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have a policy attached \n      that allows one of the following IAM actions in that cluster, depending on the query:\n    </p>\n         <ul>\n            <li>\n               <p>neptune-graph:ReadDataViaQuery</p>\n            </li>\n            <li>\n               <p>neptune-graph:WriteDataViaQuery</p>\n            </li>\n            <li>\n               <p>neptune-graph:DeleteDataViaQuery</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n        Non-parametrized queries are not considered for plan caching. You can force plan caching with \n        <code>planCache=enabled</code>. The plan cache will be reused only for the same exact query. Slight variations \n        in the query will not be able to reuse the query plan cache.\n      </p>\n         </note>",
+                "smithy.api#documentation": "<p>Execute an openCypher query.</p>\n         <p>\n      When invoking this operation in a Neptune Analytics cluster, the IAM user or role making the request must have a policy attached \n      that allows one of the following IAM actions in that cluster, depending on the query:\n    </p>\n         <ul>\n            <li>\n               <p>neptune-graph:ReadDataViaQuery</p>\n            </li>\n            <li>\n               <p>neptune-graph:WriteDataViaQuery</p>\n            </li>\n            <li>\n               <p>neptune-graph:DeleteDataViaQuery</p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{graphIdentifier}."
                 },
@@ -3516,7 +3516,7 @@
                                 "state": "failure",
                                 "matcher": {
                                     "output": {
-                                        "path": "status != 'CANCELLING'",
+                                        "path": "status != 'CANCELLING' && status != 'CANCELLED'",
                                         "expected": "true",
                                         "comparator": "booleanEquals"
                                     }
@@ -4133,6 +4133,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IMPORTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORTING"
                     }
                 }
             }
@@ -5578,7 +5584,7 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 128</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 128</p>"
                     }
                 },
                 "deletionProtection": {
@@ -6202,7 +6208,7 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 128</p>"
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>\n         <p>Min = 128</p>"
                     }
                 },
                 "deletionProtection": {
