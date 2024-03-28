@@ -3917,7 +3917,8 @@ type DatasetMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A dataset parameter.
+// A parameter that is created in a dataset. The parameter can be a string,
+// integer, decimal, or datetime data type.
 type DatasetParameter struct {
 
 	// A date time parameter that is created in the dataset.

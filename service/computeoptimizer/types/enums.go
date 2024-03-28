@@ -84,6 +84,7 @@ type CustomizableMetricHeadroom string
 const (
 	CustomizableMetricHeadroomPercent30 CustomizableMetricHeadroom = "PERCENT_30"
 	CustomizableMetricHeadroomPercent20 CustomizableMetricHeadroom = "PERCENT_20"
+	CustomizableMetricHeadroomPercent10 CustomizableMetricHeadroom = "PERCENT_10"
 	CustomizableMetricHeadroomPercent0  CustomizableMetricHeadroom = "PERCENT_0"
 )
 
@@ -94,6 +95,7 @@ func (CustomizableMetricHeadroom) Values() []CustomizableMetricHeadroom {
 	return []CustomizableMetricHeadroom{
 		"PERCENT_30",
 		"PERCENT_20",
+		"PERCENT_10",
 		"PERCENT_0",
 	}
 }
@@ -102,7 +104,8 @@ type CustomizableMetricName string
 
 // Enum values for CustomizableMetricName
 const (
-	CustomizableMetricNameCpuUtilization CustomizableMetricName = "CpuUtilization"
+	CustomizableMetricNameCpuUtilization    CustomizableMetricName = "CpuUtilization"
+	CustomizableMetricNameMemoryUtilization CustomizableMetricName = "MemoryUtilization"
 )
 
 // Values returns all known values for CustomizableMetricName. Note that this can
@@ -111,6 +114,7 @@ const (
 func (CustomizableMetricName) Values() []CustomizableMetricName {
 	return []CustomizableMetricName{
 		"CpuUtilization",
+		"MemoryUtilization",
 	}
 }
 

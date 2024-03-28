@@ -10,6 +10,7 @@ const (
 	ResourceTypeAwsLogsLoggroup                   ResourceType = "AWS::Logs::LogGroup"
 	ResourceTypeAwsXrayTrace                      ResourceType = "AWS::XRay::Trace"
 	ResourceTypeAwsApplicationinsightsApplication ResourceType = "AWS::ApplicationInsights::Application"
+	ResourceTypeAwsInternetmonitorMonitor         ResourceType = "AWS::InternetMonitor::Monitor"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -21,5 +22,6 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Logs::LogGroup",
 		"AWS::XRay::Trace",
 		"AWS::ApplicationInsights::Application",
+		"AWS::InternetMonitor::Monitor",
 	}
 }

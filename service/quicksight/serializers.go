@@ -14306,6 +14306,20 @@ func awsRestjson1_serializeOpDocumentUpdateIpRestrictionInput(v *UpdateIpRestric
 		}
 	}
 
+	if v.VpcEndpointIdRestrictionRuleMap != nil {
+		ok := object.Key("VpcEndpointIdRestrictionRuleMap")
+		if err := awsRestjson1_serializeDocumentVpcEndpointIdRestrictionRuleMap(v.VpcEndpointIdRestrictionRuleMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcIdRestrictionRuleMap != nil {
+		ok := object.Key("VpcIdRestrictionRuleMap")
+		if err := awsRestjson1_serializeDocumentVpcIdRestrictionRuleMap(v.VpcIdRestrictionRuleMap, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -36905,6 +36919,28 @@ func awsRestjson1_serializeDocumentVpcConnectionProperties(v *types.VpcConnectio
 		ok.String(*v.VpcConnectionArn)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcEndpointIdRestrictionRuleMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcIdRestrictionRuleMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

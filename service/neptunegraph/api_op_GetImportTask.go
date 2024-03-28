@@ -602,7 +602,7 @@ func (w *ImportTaskCancelledWaiter) WaitForOutput(ctx context.Context, params *G
 func importTaskCancelledStateRetryable(ctx context.Context, input *GetImportTaskInput, output *GetImportTaskOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status != 'CANCELLING'", output)
+		pathValue, err := jmespath.Search("status != 'CANCELLING' && status != 'CANCELLED'", output)
 		if err != nil {
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}

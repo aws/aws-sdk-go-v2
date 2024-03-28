@@ -87,7 +87,7 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	// GetEC2InstanceRecommendations actions.
 	PreferredResources []types.EffectivePreferredResource
 
-	// The resource’s CPU utilization threshold preferences, such as threshold and
+	// The resource’s CPU and memory utilization preferences, such as threshold and
 	// headroom, that were used to generate rightsizing recommendations. It considers
 	// all applicable preferences that you set at the resource, account, and
 	// organization level. To validate that the preference is applied to your last

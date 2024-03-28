@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Returns information about the Amazon Web Services account used for billing
@@ -42,6 +43,18 @@ type GetSubscriptionOutput struct {
 	// The display name of the Amazon Web Services account used for billing for the
 	// space.
 	AwsAccountName *string
+
+	// The day and time the pending change will be applied to the space, in
+	// coordinated universal time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// .
+	PendingSubscriptionStartTime *time.Time
+
+	// The type of the billing plan that the space will be changed to at the start of
+	// the next billing cycle. This applies only to changes that reduce the
+	// functionality available for the space. Billing plan changes that increase
+	// functionality are applied immediately. For more information, see Pricing (https://codecatalyst.aws/explore/pricing)
+	// .
+	PendingSubscriptionType *string
 
 	// The type of the billing plan for the space.
 	SubscriptionType *string

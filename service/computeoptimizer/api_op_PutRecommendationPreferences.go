@@ -101,12 +101,17 @@ type PutRecommendationPreferencesInput struct {
 	// preferences at the resource level only for standalone instances.
 	Scope *types.Scope
 
-	// The preference to control the resource’s CPU utilization thresholds - threshold
-	// and headroom. When this preference isn't specified, we use the following default
-	// values:
+	// The preference to control the resource’s CPU utilization threshold, CPU
+	// utilization headroom, and memory utilization headroom. When this preference
+	// isn't specified, we use the following default values. CPU utilization:
 	//   - P99_5 for threshold
-	//   - PERCENT_17 for headroom
-	// You can only set this preference for the Amazon EC2 instance resource type.
+	//   - PERCENT_20 for headroom
+	// Memory utilization:
+	//   - PERCENT_20 for headroom
+	//
+	//   - You can only set CPU and memory utilization preferences for the Amazon EC2
+	//   instance resource type.
+	//   - The threshold setting isn’t available for memory utilization.
 	UtilizationPreferences []types.UtilizationPreference
 
 	noSmithyDocumentSerde

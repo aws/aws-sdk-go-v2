@@ -18658,6 +18658,15 @@ func awsRestjson1_deserializeDocumentRuntimeContext(v **types.RuntimeContext, va
 				sv.AddressFamily = ptr.String(jtv)
 			}
 
+		case "commandLineExample":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CommandLineExample = ptr.String(jtv)
+			}
+
 		case "fileSystemType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18801,6 +18810,15 @@ func awsRestjson1_deserializeDocumentRuntimeContext(v **types.RuntimeContext, va
 				sv.ScriptPath = ptr.String(jtv)
 			}
 
+		case "serviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = ptr.String(jtv)
+			}
+
 		case "shellHistoryFilePath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18822,6 +18840,33 @@ func awsRestjson1_deserializeDocumentRuntimeContext(v **types.RuntimeContext, va
 		case "targetProcess":
 			if err := awsRestjson1_deserializeDocumentProcessDetails(&sv.TargetProcess, value); err != nil {
 				return err
+			}
+
+		case "threatFilePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ThreatFilePath = ptr.String(jtv)
+			}
+
+		case "toolCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ToolCategory = ptr.String(jtv)
+			}
+
+		case "toolName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ToolName = ptr.String(jtv)
 			}
 
 		default:
@@ -20457,6 +20502,15 @@ func awsRestjson1_deserializeDocumentThreatIntelligenceDetail(v **types.ThreatIn
 
 	for key, value := range shape {
 		switch key {
+		case "threatFileSha256":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ThreatFileSha256 = ptr.String(jtv)
+			}
+
 		case "threatListName":
 			if value != nil {
 				jtv, ok := value.(string)

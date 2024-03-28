@@ -336,6 +336,7 @@ type FeatureAdditionalConfiguration string
 const (
 	FeatureAdditionalConfigurationEksAddonManagement        FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
 	FeatureAdditionalConfigurationEcsFargateAgentManagement FeatureAdditionalConfiguration = "ECS_FARGATE_AGENT_MANAGEMENT"
+	FeatureAdditionalConfigurationEc2AgentManagement        FeatureAdditionalConfiguration = "EC2_AGENT_MANAGEMENT"
 )
 
 // Values returns all known values for FeatureAdditionalConfiguration. Note that
@@ -346,6 +347,7 @@ func (FeatureAdditionalConfiguration) Values() []FeatureAdditionalConfiguration 
 	return []FeatureAdditionalConfiguration{
 		"EKS_ADDON_MANAGEMENT",
 		"ECS_FARGATE_AGENT_MANAGEMENT",
+		"EC2_AGENT_MANAGEMENT",
 	}
 }
 
@@ -601,6 +603,7 @@ type OrgFeatureAdditionalConfiguration string
 const (
 	OrgFeatureAdditionalConfigurationEksAddonManagement        OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"
 	OrgFeatureAdditionalConfigurationEcsFargateAgentManagement OrgFeatureAdditionalConfiguration = "ECS_FARGATE_AGENT_MANAGEMENT"
+	OrgFeatureAdditionalConfigurationEc2AgentManagement        OrgFeatureAdditionalConfiguration = "EC2_AGENT_MANAGEMENT"
 )
 
 // Values returns all known values for OrgFeatureAdditionalConfiguration. Note
@@ -611,6 +614,7 @@ func (OrgFeatureAdditionalConfiguration) Values() []OrgFeatureAdditionalConfigur
 	return []OrgFeatureAdditionalConfiguration{
 		"EKS_ADDON_MANAGEMENT",
 		"ECS_FARGATE_AGENT_MANAGEMENT",
+		"EC2_AGENT_MANAGEMENT",
 	}
 }
 

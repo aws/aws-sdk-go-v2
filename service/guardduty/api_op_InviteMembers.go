@@ -31,7 +31,17 @@ import (
 // that you can invoke InviteMembers without the need to invoke CreateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
 // again. To remove the details associated with a member account, you must also
 // invoke DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
-// .
+// . If you disassociate a member account that was added by invitation, the member
+// account details obtained from this API, including the associated email
+// addresses, will be retained. This is done so that the delegated administrator
+// can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// API without the need to invoke the CreateMembers API again. To remove the
+// details associated with a member account, the delegated administrator must
+// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
+// API. When the member accounts added through Organizations are later
+// disassociated, you (administrator) can't invite them by calling the
+// InviteMembers API. You can create an association with these member accounts
+// again only by calling the CreateMembers API.
 func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
 	if params == nil {
 		params = &InviteMembersInput{}

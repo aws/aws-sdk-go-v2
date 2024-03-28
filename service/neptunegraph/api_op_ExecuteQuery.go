@@ -16,19 +16,13 @@ import (
 	"strings"
 )
 
-// Execute an openCypher query. Currently, the SDK does not support parameterized
-// queries. If you want to make a parameterized query call, you can use an HTTP
-// request. When invoking this operation in a Neptune Analytics cluster, the IAM
-// user or role making the request must have a policy attached that allows one of
-// the following IAM actions in that cluster, depending on the query:
+// Execute an openCypher query. When invoking this operation in a Neptune
+// Analytics cluster, the IAM user or role making the request must have a policy
+// attached that allows one of the following IAM actions in that cluster, depending
+// on the query:
 //   - neptune-graph:ReadDataViaQuery
 //   - neptune-graph:WriteDataViaQuery
 //   - neptune-graph:DeleteDataViaQuery
-//
-// Non-parametrized queries are not considered for plan caching. You can force
-// plan caching with planCache=enabled . The plan cache will be reused only for the
-// same exact query. Slight variations in the query will not be able to reuse the
-// query plan cache.
 func (c *Client) ExecuteQuery(ctx context.Context, params *ExecuteQueryInput, optFns ...func(*Options)) (*ExecuteQueryOutput, error) {
 	if params == nil {
 		params = &ExecuteQueryInput{}

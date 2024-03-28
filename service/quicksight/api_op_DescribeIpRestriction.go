@@ -53,6 +53,12 @@ type DescribeIpRestrictionOutput struct {
 	// The HTTP status of the request.
 	Status int32
 
+	// A map of allowed VPC endpoint IDs and their rule descriptions.
+	VpcEndpointIdRestrictionRuleMap map[string]string
+
+	// A map of allowed VPC IDs and their rule descriptions.
+	VpcIdRestrictionRuleMap map[string]string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

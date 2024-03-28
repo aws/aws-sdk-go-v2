@@ -114,10 +114,12 @@ type CreateGraphOutput struct {
 	ProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All
-	// access to graphs is IAM authenticated.
+	// access to graphs is IAM authenticated. If enabling public connectivity for the
+	// first time, there will be a delay while it is enabled.
 	PublicConnectivity *bool
 
-	// The number of replicas in other AZs.
+	// The number of replicas in other AZs. Default: If not specified, the default
+	// value is 1.
 	ReplicaCount *int32
 
 	// The ID of the source graph.

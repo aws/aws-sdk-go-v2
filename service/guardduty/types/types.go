@@ -438,11 +438,7 @@ type Country struct {
 	noSmithyDocumentSerde
 }
 
-// This API is also used when you use GuardDuty Runtime Monitoring for your Amazon
-// EC2 instances (currently in preview release) and is subject to change. The use
-// of this API is subject to Section 2 of the Amazon Web Services Service Terms (http://aws.amazon.com/service-terms/)
-// ("Betas and Previews"). Contains information about the Amazon EC2 instance
-// runtime coverage details.
+// Contains information about the Amazon EC2 instance runtime coverage details.
 type CoverageEc2InstanceDetails struct {
 
 	// Information about the installed security agent.
@@ -578,11 +574,7 @@ type CoverageResource struct {
 // Information about the resource for each individual EKS cluster.
 type CoverageResourceDetails struct {
 
-	// This API is also used when you use GuardDuty Runtime Monitoring for your Amazon
-	// EC2 instances (currently in preview release) and is subject to change. The use
-	// of this API is subject to Section 2 of the Amazon Web Services Service Terms (http://aws.amazon.com/service-terms/)
-	// ("Betas and Previews"). Information about the Amazon EC2 instance assessed for
-	// runtime coverage.
+	// Information about the Amazon EC2 instance assessed for runtime coverage.
 	Ec2InstanceDetails *CoverageEc2InstanceDetails
 
 	// Information about the Amazon ECS cluster that is assessed for runtime coverage.
@@ -863,8 +855,9 @@ type DnsRequestAction struct {
 	// The domain information for the DNS query.
 	Domain *string
 
-	// The second and top level domain involved in the activity that prompted
-	// GuardDuty to generate this finding.
+	// The second and top level domain involved in the activity that potentially
+	// prompted GuardDuty to generate this finding. For a list of top-level and
+	// second-level domains, see public suffix list (https://publicsuffix.org/) .
 	DomainWithSuffix *string
 
 	// The network connection protocol observed in the activity that prompted
@@ -2602,6 +2595,9 @@ type RuntimeContext struct {
 	// the address family AF_INET is used for IP version of 4 protocol.
 	AddressFamily *string
 
+	// Example of the command line involved in the suspicious activity.
+	CommandLineExample *string
+
 	// Represents the type of mounted fileSystem.
 	FileSystemType *string
 
@@ -2655,6 +2651,9 @@ type RuntimeContext struct {
 	// The path to the script that was executed.
 	ScriptPath *string
 
+	// Name of the security service that has been potentially disabled.
+	ServiceName *string
+
 	// The path to the modified shell history file.
 	ShellHistoryFilePath *string
 
@@ -2664,6 +2663,16 @@ type RuntimeContext struct {
 	// Information about the process that had its memory overwritten by the current
 	// process.
 	TargetProcess *ProcessDetails
+
+	// The suspicious file path for which the threat intelligence details were found.
+	ThreatFilePath *string
+
+	// Category that the tool belongs to. Some of the examples are Backdoor Tool,
+	// Pentest Tool, Network Scanner, and Network Sniffer.
+	ToolCategory *string
+
+	// Name of the potentially suspicious tool.
+	ToolName *string
 
 	noSmithyDocumentSerde
 }
@@ -3067,6 +3076,9 @@ type ThreatDetectedByName struct {
 // An instance of a threat intelligence detail that constitutes evidence for the
 // finding.
 type ThreatIntelligenceDetail struct {
+
+	// SHA256 of the file that generated the finding.
+	ThreatFileSha256 *string
 
 	// The name of the threat intelligence list that triggered the finding.
 	ThreatListName *string

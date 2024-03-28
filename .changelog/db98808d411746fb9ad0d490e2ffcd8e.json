@@ -1,0 +1,8 @@
+{
+    "id": "db98808d-4117-46fb-9ad0-d490e2ffcd8e",
+    "type": "feature",
+    "description": "Amazon QuickSight: Adds support for setting up VPC Endpoint restrictions for accessing QuickSight Website.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

@@ -82,7 +82,7 @@ type CreateDevEnvironmentInput struct {
 	// Environment.
 	Repositories []types.RepositoryInput
 
-	// The name of the connection to use connect to a Amazon VPC.
+	// The name of the connection that will be used to connect to Amazon VPC, if any.
 	VpcConnectionName *string
 
 	noSmithyDocumentSerde

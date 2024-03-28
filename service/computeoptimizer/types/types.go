@@ -272,11 +272,14 @@ type CurrentPerformanceRiskRatings struct {
 // and headroom.
 type CustomizableMetricParameters struct {
 
-	// The headroom threshold value in percentage used for the specified metric
-	// parameter.
+	// The headroom value in percentage used for the specified metric parameter. The
+	// following lists the valid values for CPU and memory utilization.
+	//   - CPU utilization: PERCENT_30 | PERCENT_20 | PERCENT_0
+	//   - Memory utilization: PERCENT_30 | PERCENT_20 | PERCENT_10
 	Headroom CustomizableMetricHeadroom
 
-	// The threshold value used for the specified metric parameter.
+	// The threshold value used for the specified metric parameter. You can only
+	// specify the threshold value for CPU utilization.
 	Threshold CustomizableMetricThreshold
 
 	noSmithyDocumentSerde
@@ -779,7 +782,7 @@ type EffectiveRecommendationPreferences struct {
 	// opportunity for a resource.
 	SavingsEstimationMode *InstanceSavingsEstimationMode
 
-	// The resource’s CPU utilization threshold preferences, such as threshold and
+	// The resource’s CPU and memory utilization preferences, such as threshold and
 	// headroom, that are used to generate rightsizing recommendations. This preference
 	// is only available for the Amazon EC2 instance resource type.
 	UtilizationPreferences []UtilizationPreference
@@ -1996,9 +1999,10 @@ type RecommendationPreferencesDetail struct {
 	// in the Compute Optimizer User Guide.
 	Scope *Scope
 
-	// The preference to control the resource’s CPU utilization thresholds - threshold
-	// and headroom. If the preference isn’t set, this object is null. This preference
-	// is only available for the Amazon EC2 instance resource type.
+	// The preference to control the resource’s CPU utilization threshold, CPU
+	// utilization headroom, and memory utilization headroom. If the preference isn’t
+	// set, this object is null. This preference is only available for the Amazon EC2
+	// instance resource type.
 	UtilizationPreferences []UtilizationPreference
 
 	noSmithyDocumentSerde
@@ -2323,8 +2327,7 @@ type UtilizationMetric struct {
 // resource type.
 type UtilizationPreference struct {
 
-	// The name of the resource utilization metric name to customize. Compute
-	// Optimizer only supports CpuUtilization .
+	// The name of the resource utilization metric name to customize.
 	MetricName CustomizableMetricName
 
 	// The parameters to set when customizing the resource utilization thresholds.

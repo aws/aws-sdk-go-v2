@@ -3024,6 +3024,28 @@ func awsRestjson1_deserializeOpDocumentGetSubscriptionOutput(v **GetSubscription
 				sv.AwsAccountName = ptr.String(jtv)
 			}
 
+		case "pendingSubscriptionStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.PendingSubscriptionStartTime = ptr.Time(t)
+			}
+
+		case "pendingSubscriptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PendingSubscriptionType = ptr.String(jtv)
+			}
+
 		case "subscriptionType":
 			if value != nil {
 				jtv, ok := value.(string)
