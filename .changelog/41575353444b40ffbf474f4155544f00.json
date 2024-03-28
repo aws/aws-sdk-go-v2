@@ -1,0 +1,8 @@
+{
+    "id": "41575353-444b-40ff-bf47-4f4155544f00",
+    "type": "release",
+    "description": "New AWS service client module",
+    "modules": [
+        "internal/protocoltest/smithyrpcv2cbor"
+    ]
+}

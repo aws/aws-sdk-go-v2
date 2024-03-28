@@ -38,7 +38,7 @@ import software.amazon.smithy.utils.SetUtils;
 /**
  * Utility methods for generating AWS protocols.
  */
-final class AwsProtocolUtils {
+public final class AwsProtocolUtils {
     private AwsProtocolUtils() {
     }
 
@@ -47,7 +47,7 @@ final class AwsProtocolUtils {
      *
      * @param context The generation context.
      */
-    static void generateHttpProtocolTests(GenerationContext context) {
+    public static void generateHttpProtocolTests(GenerationContext context) {
         Set<HttpProtocolUnitTestGenerator.ConfigValue> configValues = new TreeSet<>(SetUtils.of(
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
                         .name(AddAwsConfigFields.REGION_CONFIG_NAME)
@@ -107,6 +107,17 @@ final class AwsProtocolUtils {
 
         // skip request compression tests, not yet implemented in the SDK
         Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
+                // CBOR default value serialization (SHOULD)
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("smithy.protocoltests.rpcv2Cbor#OperationWithDefaults"))
+                        .addTestName("RpcV2CborClientPopulatesDefaultValuesInInput")
+                        .addTestName("RpcV2CborClientSkipsTopLevelDefaultValuesInInput")
+                        .addTestName("RpcV2CborClientUsesExplicitlyProvidedMemberValuesOverDefaults")
+                        .addTestName("RpcV2CborClientUsesExplicitlyProvidedValuesInTopLevel")
+                        .addTestName("RpcV2CborClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional")
+                        .build(),
+
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
                         .operation(ShapeId.from("aws.protocoltests.restxml#HttpPayloadWithUnion"))
@@ -131,6 +142,14 @@ final class AwsProtocolUtils {
                 ));
 
         Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
+                // CBOR default value deserialization (SHOULD)
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("smithy.protocoltests.rpcv2Cbor#OperationWithDefaults"))
+                        .addTestName("RpcV2CborClientPopulatesDefaultsValuesWhenMissingInResponse")
+                        .addTestName("RpcV2CborClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse")
+                        .build(),
+
                 // REST-JSON optional (SHOULD) test cases
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))

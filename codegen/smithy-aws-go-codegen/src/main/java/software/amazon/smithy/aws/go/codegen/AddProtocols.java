@@ -1,6 +1,7 @@
 package software.amazon.smithy.aws.go.codegen;
 
 import java.util.List;
+import software.amazon.smithy.aws.go.codegen.protocol.AwsRpc2CborProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
@@ -38,7 +39,8 @@ public class AddProtocols implements GoIntegration {
                 new AwsJsonRpc1_1(),
                 new AwsRestXml(),
                 new AwsQuery(),
-                new Ec2Query()
+                new Ec2Query(),
+                new AwsRpc2CborProtocolGenerator()
         );
     }
 }

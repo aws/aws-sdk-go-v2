@@ -1485,7 +1485,7 @@ public final class AwsEventStreamUtils {
         return getSerDeName(toShapeId, serviceShape, protocolName, "_deserializeEventMessageException");
     }
 
-    private static String getEventStreamExceptionDeserializerName(
+    public static String getEventStreamExceptionDeserializerName(
             ToShapeId toShapeId,
             ServiceShape serviceShape,
             String protocolName
@@ -1501,7 +1501,7 @@ public final class AwsEventStreamUtils {
         return getSerDeName(toShapeId, serviceShape, protocolName, "_deserializeEventMessage");
     }
 
-    private static String getEventStreamDeserializerName(
+    public static String getEventStreamDeserializerName(
             ToShapeId toShapeId,
             ServiceShape serviceShape,
             String protocolName
@@ -1611,7 +1611,7 @@ public final class AwsEventStreamUtils {
         }).write("");
     }
 
-    private static String getEventStreamSerializerName(
+    public static String getEventStreamSerializerName(
             ToShapeId toShapeId,
             ServiceShape serviceShape,
             String protocolName
@@ -1775,7 +1775,7 @@ public final class AwsEventStreamUtils {
                 }).write("");
     }
 
-    private static String getEventStreamMessageRequestSerializerName(
+    public static String getEventStreamMessageRequestSerializerName(
             ToShapeId toShapeId,
             ServiceShape serviceShape,
             String protocolName
@@ -1783,7 +1783,7 @@ public final class AwsEventStreamUtils {
         return getSerDeName(toShapeId, serviceShape, protocolName, "_serializeEventMessageRequest");
     }
 
-    private static String getEventStreamMessageResponseDeserializerName(
+    public static String getEventStreamMessageResponseDeserializerName(
             ToShapeId toShapeId, ServiceShape serviceShape, String protocolName
     ) {
         return getSerDeName(toShapeId, serviceShape, protocolName, "_deserializeEventMessageResponse");
