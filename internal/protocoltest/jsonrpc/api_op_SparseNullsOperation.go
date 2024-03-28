@@ -10,29 +10,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, optFns ...func(*Options)) (*NullOperationOutput, error) {
+func (c *Client) SparseNullsOperation(ctx context.Context, params *SparseNullsOperationInput, optFns ...func(*Options)) (*SparseNullsOperationOutput, error) {
 	if params == nil {
-		params = &NullOperationInput{}
+		params = &SparseNullsOperationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "NullOperation", params, optFns, c.addOperationNullOperationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "SparseNullsOperation", params, optFns, c.addOperationSparseNullsOperationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*NullOperationOutput)
+	out := result.(*SparseNullsOperationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type NullOperationInput struct {
-	String_ *string
+type SparseNullsOperationInput struct {
+	SparseStringList []*string
+
+	SparseStringMap map[string]*string
 
 	noSmithyDocumentSerde
 }
 
-type NullOperationOutput struct {
-	String_ *string
+type SparseNullsOperationOutput struct {
+	SparseStringList []*string
+
+	SparseStringMap map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,19 +44,19 @@ type NullOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationNullOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationSparseNullsOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNullOperation{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSparseNullsOperation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNullOperation{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSparseNullsOperation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "NullOperation"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "SparseNullsOperation"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -95,7 +99,7 @@ func (c *Client) addOperationNullOperationMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNullOperation(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSparseNullsOperation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -116,10 +120,10 @@ func (c *Client) addOperationNullOperationMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opNullOperation(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opSparseNullsOperation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "NullOperation",
+		OperationName: "SparseNullsOperation",
 	}
 }

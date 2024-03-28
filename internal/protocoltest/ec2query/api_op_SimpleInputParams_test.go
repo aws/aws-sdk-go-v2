@@ -185,7 +185,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&A=Hi`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&HasQueryName=Hi`))
 			},
 		},
 		// ec2QueryName trait is preferred over xmlName.
@@ -204,7 +204,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&B=Hi`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&HasQueryAndXmlName=Hi`))
 			},
 		},
 		// xmlName is used with the ec2 protocol, but the first character is uppercased
@@ -223,7 +223,7 @@ func TestClient_SimpleInputParams_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&C=Hi`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&UsesXmlName=Hi`))
 			},
 		},
 		// Supports handling NaN float values.

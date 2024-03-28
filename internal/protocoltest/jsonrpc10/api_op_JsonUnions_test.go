@@ -525,6 +525,35 @@ func TestClient_JsonUnions_awsAwsjson10Deserialize(t *testing.T) {
 				}},
 			},
 		},
+		// Allows for : null to be set for all unset fields
+		"AwsJson10DeserializeAllowNulls": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "contents": {
+			      "stringValue": null,
+			      "booleanValue": null,
+			      "numberValue": null,
+			      "blobValue": null,
+			      "timestampValue": null,
+			      "enumValue": null,
+			      "intEnumValue": null,
+			      "listValue": null,
+			      "mapValue": null,
+			      "structureValue": {
+			          "hi": "hello"
+			      }
+			    }
+			}`),
+			ExpectResult: &JsonUnionsOutput{
+				Contents: &types.MyUnionMemberStructureValue{Value: types.GreetingStruct{
+					Hi: ptr.String("hello"),
+				}},
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

@@ -21,9 +21,9 @@ import (
 	"testing"
 )
 
-func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
+func TestClient_SparseJsonMaps_awsRestjson1Serialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *JsonMapsInput
+		Params        *SparseJsonMapsInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -37,9 +37,9 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 		BodyAssert    func(io.Reader) error
 	}{
 		// Serializes JSON maps
-		"RestJsonJsonMaps": {
-			Params: &JsonMapsInput{
-				DenseStructMap: map[string]types.GreetingStruct{
+		"RestJsonSparseJsonMaps": {
+			Params: &SparseJsonMapsInput{
+				SparseStructMap: map[string]*types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},
@@ -49,7 +49,7 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/JsonMaps",
+			ExpectURIPath: "/SparseJsonMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/json"},
@@ -57,7 +57,7 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "denseStructMap": {
+			    "sparseStructMap": {
 			        "foo": {
 			            "hi": "there"
 			        },
@@ -68,18 +68,24 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			}`))
 			},
 		},
-		// Ensure that 0 and false are sent over the wire in all maps and lists
-		"RestJsonSerializesZeroValuesInMaps": {
-			Params: &JsonMapsInput{
-				DenseNumberMap: map[string]int32{
-					"x": 0,
+		// Serializes JSON map values in sparse maps
+		"RestJsonSerializesSparseNullMapValues": {
+			Params: &SparseJsonMapsInput{
+				SparseBooleanMap: map[string]*bool{
+					"x": nil,
 				},
-				DenseBooleanMap: map[string]bool{
-					"x": false,
+				SparseNumberMap: map[string]*int32{
+					"x": nil,
+				},
+				SparseStringMap: map[string]*string{
+					"x": nil,
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"x": nil,
 				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/JsonMaps",
+			ExpectURIPath: "/SparseJsonMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/json"},
@@ -87,19 +93,53 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "denseNumberMap": {
+			    "sparseBooleanMap": {
+			        "x": null
+			    },
+			    "sparseNumberMap": {
+			        "x": null
+			    },
+			    "sparseStringMap": {
+			        "x": null
+			    },
+			    "sparseStructMap": {
+			        "x": null
+			    }
+			}`))
+			},
+		},
+		// Ensure that 0 and false are sent over the wire in all maps and lists
+		"RestJsonSerializesZeroValuesInSparseMaps": {
+			Params: &SparseJsonMapsInput{
+				SparseNumberMap: map[string]*int32{
+					"x": ptr.Int32(0),
+				},
+				SparseBooleanMap: map[string]*bool{
+					"x": ptr.Bool(false),
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/SparseJsonMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "sparseNumberMap": {
 			        "x": 0
 			    },
-			    "denseBooleanMap": {
+			    "sparseBooleanMap": {
 			        "x": false
 			    }
 			}`))
 			},
 		},
-		// A request that contains a dense map of sets.
-		"RestJsonSerializesDenseSetMap": {
-			Params: &JsonMapsInput{
-				DenseSetMap: map[string][]string{
+		// A request that contains a sparse map of sets
+		"RestJsonSerializesSparseSetMap": {
+			Params: &SparseJsonMapsInput{
+				SparseSetMap: map[string][]string{
 					"x": {},
 					"y": {
 						"a",
@@ -108,7 +148,7 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 				},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/JsonMaps",
+			ExpectURIPath: "/SparseJsonMaps",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/json"},
@@ -116,9 +156,38 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "denseSetMap": {
+			    "sparseSetMap": {
 			        "x": [],
 			        "y": ["a", "b"]
+			    }
+			}`))
+			},
+		},
+		// A request that contains a sparse map of sets.
+		"RestJsonSerializesSparseSetMapAndRetainsNull": {
+			Params: &SparseJsonMapsInput{
+				SparseSetMap: map[string][]string{
+					"x": {},
+					"y": {
+						"a",
+						"b",
+					},
+					"z": nil,
+				},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/SparseJsonMaps",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "sparseSetMap": {
+			        "x": [],
+			        "y": ["a", "b"],
+			        "z": null
 			    }
 			}`))
 			},
@@ -155,7 +224,7 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			result, err := client.JsonMaps(context.Background(), c.Params, func(options *Options) {
+			result, err := client.SparseJsonMaps(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})
@@ -188,33 +257,33 @@ func TestClient_JsonMaps_awsRestjson1Serialize(t *testing.T) {
 	}
 }
 
-func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
+func TestClient_SparseJsonMaps_awsRestjson1Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *JsonMapsOutput
+		ExpectResult  *SparseJsonMapsOutput
 	}{
 		// Deserializes JSON maps
-		"RestJsonJsonMaps": {
+		"RestJsonSparseJsonMaps": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/json"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "denseStructMap": {
+			    "sparseStructMap": {
 			        "foo": {
 			            "hi": "there"
 			        },
 			        "baz": {
 			            "hi": "bye"
 			        }
-			    }
+			   }
 			}`),
-			ExpectResult: &JsonMapsOutput{
-				DenseStructMap: map[string]types.GreetingStruct{
+			ExpectResult: &SparseJsonMapsOutput{
+				SparseStructMap: map[string]*types.GreetingStruct{
 					"foo": {
 						Hi: ptr.String("there"),
 					},
@@ -224,45 +293,81 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 				},
 			},
 		},
-		// Ensure that 0 and false are sent over the wire in all maps and lists
-		"RestJsonDeserializesZeroValuesInMaps": {
+		// Deserializes null JSON map values
+		"RestJsonDeserializesSparseNullMapValues": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/json"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "denseNumberMap": {
-			        "x": 0
+			    "sparseBooleanMap": {
+			        "x": null
 			    },
-			    "denseBooleanMap": {
-			        "x": false
+			    "sparseNumberMap": {
+			        "x": null
+			    },
+			    "sparseStringMap": {
+			        "x": null
+			    },
+			    "sparseStructMap": {
+			        "x": null
 			    }
 			}`),
-			ExpectResult: &JsonMapsOutput{
-				DenseNumberMap: map[string]int32{
-					"x": 0,
+			ExpectResult: &SparseJsonMapsOutput{
+				SparseBooleanMap: map[string]*bool{
+					"x": nil,
 				},
-				DenseBooleanMap: map[string]bool{
-					"x": false,
+				SparseNumberMap: map[string]*int32{
+					"x": nil,
+				},
+				SparseStringMap: map[string]*string{
+					"x": nil,
+				},
+				SparseStructMap: map[string]*types.GreetingStruct{
+					"x": nil,
 				},
 			},
 		},
-		// A response that contains a dense map of sets.
-		"RestJsonDeserializesDenseSetMap": {
+		// Ensure that 0 and false are sent over the wire in all maps and lists
+		"RestJsonDeserializesZeroValuesInSparseMaps": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/json"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "denseSetMap": {
+			    "sparseNumberMap": {
+			        "x": 0
+			    },
+			    "sparseBooleanMap": {
+			        "x": false
+			    }
+			}`),
+			ExpectResult: &SparseJsonMapsOutput{
+				SparseNumberMap: map[string]*int32{
+					"x": ptr.Int32(0),
+				},
+				SparseBooleanMap: map[string]*bool{
+					"x": ptr.Bool(false),
+				},
+			},
+		},
+		// A response that contains a sparse map of sets
+		"RestJsonDeserializesSparseSetMap": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			Body: []byte(`{
+			    "sparseSetMap": {
 			        "x": [],
 			        "y": ["a", "b"]
 			    }
 			}`),
-			ExpectResult: &JsonMapsOutput{
-				DenseSetMap: map[string][]string{
+			ExpectResult: &SparseJsonMapsOutput{
+				SparseSetMap: map[string][]string{
 					"x": {},
 					"y": {
 						"a",
@@ -271,38 +376,34 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 				},
 			},
 		},
-		// Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD
-		// drop the null key-value pair.
-		"RestJsonDeserializesDenseSetMapAndSkipsNull": {
+		// A response that contains a sparse map of sets.
+		"RestJsonDeserializesSparseSetMapAndRetainsNull": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/json"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "denseSetMap": {
+			    "sparseSetMap": {
 			        "x": [],
 			        "y": ["a", "b"],
 			        "z": null
 			    }
 			}`),
-			ExpectResult: &JsonMapsOutput{
-				DenseSetMap: map[string][]string{
+			ExpectResult: &SparseJsonMapsOutput{
+				SparseSetMap: map[string][]string{
 					"x": {},
 					"y": {
 						"a",
 						"b",
 					},
+					"z": nil,
 				},
 			},
 		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "RestJsonDeserializesDenseSetMapAndSkipsNull" {
-				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#JsonMaps")
-			}
-
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
@@ -344,8 +445,8 @@ func TestClient_JsonMaps_awsRestjson1Deserialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			var params JsonMapsInput
-			result, err := client.JsonMaps(context.Background(), &params)
+			var params SparseJsonMapsInput
+			result, err := client.SparseJsonMaps(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}

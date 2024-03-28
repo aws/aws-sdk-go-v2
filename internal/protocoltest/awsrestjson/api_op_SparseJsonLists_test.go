@@ -7,25 +7,22 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
-	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
-	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"testing"
-	"time"
 )
 
-func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
+func TestClient_SparseJsonLists_awsRestjson1Serialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *JsonListsInput
+		Params        *SparseJsonListsInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -38,60 +35,16 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Serializes JSON lists
-		"RestJsonLists": {
-			Params: &JsonListsInput{
-				StringList: []string{
-					"foo",
-					"bar",
-				},
-				StringSet: []string{
-					"foo",
-					"bar",
-				},
-				IntegerList: []int32{
-					1,
-					2,
-				},
-				BooleanList: []bool{
-					true,
-					false,
-				},
-				TimestampList: []time.Time{
-					smithytime.ParseEpochSeconds(1398796238),
-					smithytime.ParseEpochSeconds(1398796238),
-				},
-				EnumList: []types.FooEnum{
-					types.FooEnum("Foo"),
-					types.FooEnum("0"),
-				},
-				IntEnumList: []types.IntegerEnum{
-					1,
-					2,
-				},
-				NestedStringList: [][]string{
-					{
-						"foo",
-						"bar",
-					},
-					{
-						"baz",
-						"qux",
-					},
-				},
-				StructureList: []types.StructureListMember{
-					{
-						A: ptr.String("1"),
-						B: ptr.String("2"),
-					},
-					{
-						A: ptr.String("3"),
-						B: ptr.String("4"),
-					},
+		// Serializes null values in sparse lists
+		"RestJsonSparseListsSerializeNull": {
+			Params: &SparseJsonListsInput{
+				SparseStringList: []*string{
+					nil,
+					ptr.String("hi"),
 				},
 			},
 			ExpectMethod:  "PUT",
-			ExpectURIPath: "/JsonLists",
+			ExpectURIPath: "/SparseJsonLists",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/json"},
@@ -99,72 +52,10 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "stringList": [
-			        "foo",
-			        "bar"
-			    ],
-			    "stringSet": [
-			        "foo",
-			        "bar"
-			    ],
-			    "integerList": [
-			        1,
-			        2
-			    ],
-			    "booleanList": [
-			        true,
-			        false
-			    ],
-			    "timestampList": [
-			        1398796238,
-			        1398796238
-			    ],
-			    "enumList": [
-			        "Foo",
-			        "0"
-			    ],
-			    "intEnumList": [
-			        1,
-			        2
-			    ],
-			    "nestedStringList": [
-			        [
-			            "foo",
-			            "bar"
-			        ],
-			        [
-			            "baz",
-			            "qux"
-			        ]
-			    ],
-			    "myStructureList": [
-			        {
-			            "value": "1",
-			            "other": "2"
-			        },
-			        {
-			            "value": "3",
-			            "other": "4"
-			        }
+			    "sparseStringList": [
+			        null,
+			        "hi"
 			    ]
-			}`))
-			},
-		},
-		// Serializes empty JSON lists
-		"RestJsonListsEmpty": {
-			Params: &JsonListsInput{
-				StringList: []string{},
-			},
-			ExpectMethod:  "PUT",
-			ExpectURIPath: "/JsonLists",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/json"},
-			},
-			BodyMediaType: "application/json",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "stringList": []
 			}`))
 			},
 		},
@@ -200,7 +91,7 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			result, err := client.JsonLists(context.Background(), c.Params, func(options *Options) {
+			result, err := client.SparseJsonLists(context.Background(), c.Params, func(options *Options) {
 				options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
 					return smithyprivateprotocol.AddCaptureRequestMiddleware(stack, actualReq)
 				})
@@ -233,134 +124,32 @@ func TestClient_JsonLists_awsRestjson1Serialize(t *testing.T) {
 	}
 }
 
-func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
+func TestClient_SparseJsonLists_awsRestjson1Deserialize(t *testing.T) {
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header
 		BodyMediaType string
 		Body          []byte
-		ExpectResult  *JsonListsOutput
+		ExpectResult  *SparseJsonListsOutput
 	}{
-		// Serializes JSON lists
-		"RestJsonLists": {
+		// Serializes null values in sparse lists
+		"RestJsonSparseListsSerializeNull": {
 			StatusCode: 200,
 			Header: http.Header{
 				"Content-Type": []string{"application/json"},
 			},
 			BodyMediaType: "application/json",
 			Body: []byte(`{
-			    "stringList": [
-			        "foo",
-			        "bar"
-			    ],
-			    "stringSet": [
-			        "foo",
-			        "bar"
-			    ],
-			    "integerList": [
-			        1,
-			        2
-			    ],
-			    "booleanList": [
-			        true,
-			        false
-			    ],
-			    "timestampList": [
-			        1398796238,
-			        1398796238
-			    ],
-			    "enumList": [
-			        "Foo",
-			        "0"
-			    ],
-			    "intEnumList": [
-			        1,
-			        2
-			    ],
-			    "nestedStringList": [
-			        [
-			            "foo",
-			            "bar"
-			        ],
-			        [
-			            "baz",
-			            "qux"
-			        ]
-			    ],
-			    "myStructureList": [
-			        {
-			            "value": "1",
-			            "other": "2"
-			        },
-			        {
-			            "value": "3",
-			            "other": "4"
-			        }
+			    "sparseStringList": [
+			        null,
+			        "hi"
 			    ]
 			}`),
-			ExpectResult: &JsonListsOutput{
-				StringList: []string{
-					"foo",
-					"bar",
+			ExpectResult: &SparseJsonListsOutput{
+				SparseStringList: []*string{
+					nil,
+					ptr.String("hi"),
 				},
-				StringSet: []string{
-					"foo",
-					"bar",
-				},
-				IntegerList: []int32{
-					1,
-					2,
-				},
-				BooleanList: []bool{
-					true,
-					false,
-				},
-				TimestampList: []time.Time{
-					smithytime.ParseEpochSeconds(1398796238),
-					smithytime.ParseEpochSeconds(1398796238),
-				},
-				EnumList: []types.FooEnum{
-					types.FooEnum("Foo"),
-					types.FooEnum("0"),
-				},
-				IntEnumList: []types.IntegerEnum{
-					1,
-					2,
-				},
-				NestedStringList: [][]string{
-					{
-						"foo",
-						"bar",
-					},
-					{
-						"baz",
-						"qux",
-					},
-				},
-				StructureList: []types.StructureListMember{
-					{
-						A: ptr.String("1"),
-						B: ptr.String("2"),
-					},
-					{
-						A: ptr.String("3"),
-						B: ptr.String("4"),
-					},
-				},
-			},
-		},
-		// Serializes empty JSON lists
-		"RestJsonListsEmpty": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"application/json"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "stringList": []
-			}`),
-			ExpectResult: &JsonListsOutput{
-				StringList: []string{},
 			},
 		},
 	}
@@ -407,8 +196,8 @@ func TestClient_JsonLists_awsRestjson1Deserialize(t *testing.T) {
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			var params JsonListsInput
-			result, err := client.JsonLists(context.Background(), &params)
+			var params SparseJsonListsInput
+			result, err := client.SparseJsonLists(context.Background(), &params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}

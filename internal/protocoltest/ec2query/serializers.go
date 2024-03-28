@@ -1818,12 +1818,12 @@ func awsEc2query_serializeOpDocumentSimpleInputParamsInput(v *SimpleInputParamsI
 	}
 
 	if v.HasQueryAndXmlName != nil {
-		objectKey := object.Key("B")
+		objectKey := object.Key("HasQueryAndXmlName")
 		objectKey.String(*v.HasQueryAndXmlName)
 	}
 
 	if v.HasQueryName != nil {
-		objectKey := object.Key("A")
+		objectKey := object.Key("HasQueryName")
 		objectKey.String(*v.HasQueryName)
 	}
 
@@ -1833,7 +1833,7 @@ func awsEc2query_serializeOpDocumentSimpleInputParamsInput(v *SimpleInputParamsI
 	}
 
 	if v.UsesXmlName != nil {
-		objectKey := object.Key("C")
+		objectKey := object.Key("UsesXmlName")
 		objectKey.String(*v.UsesXmlName)
 	}
 

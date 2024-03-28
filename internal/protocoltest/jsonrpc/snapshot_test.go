@@ -241,6 +241,18 @@ func TestCheckSnapshot_SimpleScalarProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_SparseNullsOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SparseNullsOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SparseNullsOperation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_DatetimeOffsets(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DatetimeOffsets(context.Background(), nil, func(o *Options) {
@@ -414,6 +426,18 @@ func TestUpdateSnapshot_SimpleScalarProperties(t *testing.T) {
 	_, err := svc.SimpleScalarProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SimpleScalarProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SparseNullsOperation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SparseNullsOperation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SparseNullsOperation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -50,52 +50,6 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
 			},
 		},
-		// Serializes null values in maps
-		"AwsJson11MapsSerializeNullValues": {
-			Params: &NullOperationInput{
-				SparseStringMap: map[string]*string{
-					"foo": nil,
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-				"X-Amz-Target": []string{"JsonProtocol.NullOperation"},
-			},
-			BodyMediaType: "application/json",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "sparseStringMap": {
-			        "foo": null
-			    }
-			}`))
-			},
-		},
-		// Serializes null values in lists
-		"AwsJson11ListsSerializeNull": {
-			Params: &NullOperationInput{
-				SparseStringList: []*string{
-					nil,
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-				"X-Amz-Target": []string{"JsonProtocol.NullOperation"},
-			},
-			BodyMediaType: "application/json",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "sparseStringList": [
-			        null
-			    ]
-			}`))
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -179,42 +133,6 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 			    "string": null
 			}`),
 			ExpectResult: &NullOperationOutput{},
-		},
-		// Deserializes null values in maps
-		"AwsJson11MapsDeserializeNullValues": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "sparseStringMap": {
-			        "foo": null
-			    }
-			}`),
-			ExpectResult: &NullOperationOutput{
-				SparseStringMap: map[string]*string{
-					"foo": nil,
-				},
-			},
-		},
-		// Deserializes null values in lists
-		"AwsJson11ListsDeserializeNull": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "sparseStringList": [
-			        null
-			    ]
-			}`),
-			ExpectResult: &NullOperationOutput{
-				SparseStringList: []*string{
-					nil,
-				},
-			},
 		},
 	}
 	for name, c := range cases {
