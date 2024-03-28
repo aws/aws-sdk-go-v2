@@ -1,3 +1,7 @@
+# v1.13.0 (2024-03-28)
+
+* **Feature**: This release adds support for understanding pending changes to subscriptions by including two new response parameters for the GetSubscription API for Amazon CodeCatalyst.
+
 # v1.12.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

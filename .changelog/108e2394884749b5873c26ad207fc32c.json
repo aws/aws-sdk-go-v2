@@ -1,8 +1,0 @@
-{
-    "id": "108e2394-8847-49b5-873c-26ad207fc32c",
-    "type": "feature",
-    "description": "This release adds support for sharing AWS::InternetMonitor::Monitor resources.",
-    "modules": [
-        "service/oam"
-    ]
-}

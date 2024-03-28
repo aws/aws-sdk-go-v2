@@ -1,8 +1,0 @@
-{
-    "id": "ae790fad-de11-4bff-a63a-5746e6dcc924",
-    "type": "feature",
-    "description": "This release enables AWS Compute Optimizer to analyze and generate recommendations with a new customization preference, Memory Utilization.",
-    "modules": [
-        "service/computeoptimizer"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "144ffa3f-d99c-459d-b645-178e7cac02c7",
-    "type": "feature",
-    "description": "Add EC2 support for GuardDuty Runtime Monitoring auto management.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

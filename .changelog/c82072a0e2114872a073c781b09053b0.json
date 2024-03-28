@@ -1,8 +1,0 @@
-{
-    "id": "c82072a0-e211-4872-a073-c781b09053b0",
-    "type": "feature",
-    "description": "This release adds support for understanding pending changes to subscriptions by including two new response parameters for the GetSubscription API for Amazon CodeCatalyst.",
-    "modules": [
-        "service/codecatalyst"
-    ]
-}

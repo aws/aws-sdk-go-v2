@@ -1,3 +1,7 @@
+# v1.7.0 (2024-03-28)
+
+* **Feature**: Update ImportTaskCancelled waiter to evaluate task state correctly and minor documentation changes.
+
 # v1.6.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

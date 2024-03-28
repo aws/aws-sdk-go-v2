@@ -1,3 +1,23 @@
+# Release (2024-03-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.13.0](service/codecatalyst/CHANGELOG.md#v1130-2024-03-28)
+  * **Feature**: This release adds support for understanding pending changes to subscriptions by including two new response parameters for the GetSubscription API for Amazon CodeCatalyst.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.34.0](service/computeoptimizer/CHANGELOG.md#v1340-2024-03-28)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze and generate recommendations with a new customization preference, Memory Utilization.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.155.0](service/ec2/CHANGELOG.md#v11550-2024-03-28)
+  * **Feature**: Amazon EC2 C7gd, M7gd and R7gd metal instances with up to 3.8 TB of local NVMe-based SSD block-level storage have up to 45% improved real-time NVMe storage performance than comparable Graviton2-based instances.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.42.0](service/eks/CHANGELOG.md#v1420-2024-03-28)
+  * **Feature**: Add multiple customer error code to handle customer caused failure when managing EKS node groups
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.41.0](service/guardduty/CHANGELOG.md#v1410-2024-03-28)
+  * **Feature**: Add EC2 support for GuardDuty Runtime Monitoring auto management.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.7.0](service/neptunegraph/CHANGELOG.md#v170-2024-03-28)
+  * **Feature**: Update ImportTaskCancelled waiter to evaluate task state correctly and minor documentation changes.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.10.0](service/oam/CHANGELOG.md#v1100-2024-03-28)
+  * **Feature**: This release adds support for sharing AWS::InternetMonitor::Monitor resources.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.60.0](service/quicksight/CHANGELOG.md#v1600-2024-03-28)
+  * **Feature**: Amazon QuickSight: Adds support for setting up VPC Endpoint restrictions for accessing QuickSight Website.
+
 # Release (2024-03-27)
 
 ## Module Highlights
