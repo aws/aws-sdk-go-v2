@@ -341,10 +341,10 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 				QueryInteger: ptr.Int32(0),
 				QueryBoolean: ptr.Bool(false),
 				QueryParamsMapOfStringList: map[string][]string{
-					"queryInteger": {
+					"Integer": {
 						"0",
 					},
-					"queryBoolean": {
+					"Boolean": {
 						"false",
 					},
 				},

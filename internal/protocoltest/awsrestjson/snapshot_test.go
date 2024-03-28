@@ -1070,6 +1070,30 @@ func TestCheckSnapshot_SimpleScalarProperties(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SparseJsonLists(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SparseJsonLists(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SparseJsonLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SparseJsonMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SparseJsonMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SparseJsonMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StreamingTraits(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StreamingTraits(context.Background(), nil, func(o *Options) {
@@ -2178,6 +2202,30 @@ func TestUpdateSnapshot_SimpleScalarProperties(t *testing.T) {
 	_, err := svc.SimpleScalarProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SimpleScalarProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SparseJsonLists(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SparseJsonLists(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SparseJsonLists")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SparseJsonMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SparseJsonMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SparseJsonMaps")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -38,16 +38,6 @@ type JsonMapsInput struct {
 
 	DenseStructMap map[string]types.GreetingStruct
 
-	SparseBooleanMap map[string]*bool
-
-	SparseNumberMap map[string]*int32
-
-	SparseSetMap map[string][]string
-
-	SparseStringMap map[string]*string
-
-	SparseStructMap map[string]*types.GreetingStruct
-
 	noSmithyDocumentSerde
 }
 
@@ -61,16 +51,6 @@ type JsonMapsOutput struct {
 	DenseStringMap map[string]string
 
 	DenseStructMap map[string]types.GreetingStruct
-
-	SparseBooleanMap map[string]*bool
-
-	SparseNumberMap map[string]*int32
-
-	SparseSetMap map[string][]string
-
-	SparseStringMap map[string]*string
-
-	SparseStructMap map[string]*types.GreetingStruct
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

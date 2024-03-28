@@ -62,9 +62,6 @@ func TestClient_HttpPayloadWithUnion_awsRestxmlSerialize(t *testing.T) {
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/HttpPayloadWithUnion",
 			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/xml"},
-			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
