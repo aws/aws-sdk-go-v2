@@ -350,6 +350,18 @@ func TestCheckSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartImportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartImportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartImportTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -666,6 +678,18 @@ func TestUpdateSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 	_, err := svc.RestoreGraphFromSnapshot(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RestoreGraphFromSnapshot")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartImportTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartImportTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartImportTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

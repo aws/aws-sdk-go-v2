@@ -431,6 +431,7 @@ const (
 	FleetStatusCodeCreating             FleetStatusCode = "CREATING"
 	FleetStatusCodeUpdating             FleetStatusCode = "UPDATING"
 	FleetStatusCodeRotating             FleetStatusCode = "ROTATING"
+	FleetStatusCodePendingDeletion      FleetStatusCode = "PENDING_DELETION"
 	FleetStatusCodeDeleting             FleetStatusCode = "DELETING"
 	FleetStatusCodeCreateFailed         FleetStatusCode = "CREATE_FAILED"
 	FleetStatusCodeUpdateRollbackFailed FleetStatusCode = "UPDATE_ROLLBACK_FAILED"
@@ -445,6 +446,7 @@ func (FleetStatusCode) Values() []FleetStatusCode {
 		"CREATING",
 		"UPDATING",
 		"ROTATING",
+		"PENDING_DELETION",
 		"DELETING",
 		"CREATE_FAILED",
 		"UPDATE_ROLLBACK_FAILED",

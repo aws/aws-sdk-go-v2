@@ -34432,6 +34432,11 @@ func awsAwsjson11_deserializeDocumentAppImageConfigDetails(v **types.AppImageCon
 				sv.AppImageConfigName = ptr.String(jtv)
 			}
 
+		case "CodeEditorAppImageConfig":
+			if err := awsAwsjson11_deserializeDocumentCodeEditorAppImageConfig(&sv.CodeEditorAppImageConfig, value); err != nil {
+				return err
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -39884,6 +39889,47 @@ func awsAwsjson11_deserializeDocumentClusterSummary(v **types.ClusterSummary, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCodeEditorAppImageConfig(v **types.CodeEditorAppImageConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CodeEditorAppImageConfig
+	if *v == nil {
+		sv = &types.CodeEditorAppImageConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ContainerConfig":
+			if err := awsAwsjson11_deserializeDocumentContainerConfig(&sv.ContainerConfig, value); err != nil {
+				return err
+			}
+
+		case "FileSystemConfig":
+			if err := awsAwsjson11_deserializeDocumentFileSystemConfig(&sv.FileSystemConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCodeEditorAppSettings(v **types.CodeEditorAppSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -39906,6 +39952,11 @@ func awsAwsjson11_deserializeDocumentCodeEditorAppSettings(v **types.CodeEditorA
 
 	for key, value := range shape {
 		switch key {
+		case "CustomImages":
+			if err := awsAwsjson11_deserializeDocumentCustomImages(&sv.CustomImages, value); err != nil {
+				return err
+			}
+
 		case "DefaultResourceSpec":
 			if err := awsAwsjson11_deserializeDocumentResourceSpec(&sv.DefaultResourceSpec, value); err != nil {
 				return err
@@ -81194,6 +81245,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAppImageConfigOutput(v **Describe
 					return fmt.Errorf("expected AppImageConfigName to be of type string, got %T instead", value)
 				}
 				sv.AppImageConfigName = ptr.String(jtv)
+			}
+
+		case "CodeEditorAppImageConfig":
+			if err := awsAwsjson11_deserializeDocumentCodeEditorAppImageConfig(&sv.CodeEditorAppImageConfig, value); err != nil {
+				return err
 			}
 
 		case "CreationTime":

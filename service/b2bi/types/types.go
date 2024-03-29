@@ -287,8 +287,7 @@ type X12Details struct {
 	// Transaction sets are maintained by the X12 Accredited Standards Committee.
 	TransactionSet X12TransactionSet
 
-	// Returns the version to use for the specified X12 transaction set. Supported
-	// versions are 4010 , 4030 , and 5010 .
+	// Returns the version to use for the specified X12 transaction set.
 	Version X12Version
 
 	noSmithyDocumentSerde

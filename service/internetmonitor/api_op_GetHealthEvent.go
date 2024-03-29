@@ -48,6 +48,9 @@ type GetHealthEventInput struct {
 	// This member is required.
 	MonitorName *string
 
+	// TBD
+	LinkedAccountId *string
+
 	noSmithyDocumentSerde
 }
 

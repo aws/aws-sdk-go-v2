@@ -1,0 +1,8 @@
+{
+    "id": "370ff22e-36fa-4e56-a69d-75e6d19f2b99",
+    "type": "feature",
+    "description": "This release enhances the ListEntities API to support ResaleAuthorizationId filter and sort for OfferEntity in the request and the addition of a ResaleAuthorizationId field in the response of OfferSummary.",
+    "modules": [
+        "service/marketplacecatalog"
+    ]
+}

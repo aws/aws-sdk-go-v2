@@ -876,6 +876,10 @@ type AppImageConfigDetails struct {
 	// The name of the AppImageConfig. Must be unique to your account.
 	AppImageConfigName *string
 
+	// The configuration for the file system and the runtime, such as the environment
+	// variables and entry point.
+	CodeEditorAppImageConfig *CodeEditorAppImageConfig
+
 	// When the AppImageConfig was created.
 	CreationTime *time.Time
 
@@ -2768,10 +2772,27 @@ type ClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the file system and kernels in a SageMaker image running
+// as a Code Editor app. The FileSystemConfig object is not supported.
+type CodeEditorAppImageConfig struct {
+
+	// The configuration used to run the application image container.
+	ContainerConfig *ContainerConfig
+
+	// The Amazon Elastic File System storage configuration for a SageMaker image.
+	FileSystemConfig *FileSystemConfig
+
+	noSmithyDocumentSerde
+}
+
 // The Code Editor application settings. For more information about Code Editor,
 // see Get started with Code Editor in Amazon SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/code-editor.html)
 // .
 type CodeEditorAppSettings struct {
+
+	// A list of custom SageMaker images that are configured to run as a Code Editor
+	// app.
+	CustomImages []CustomImage
 
 	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
 	// instance type that the version runs on.

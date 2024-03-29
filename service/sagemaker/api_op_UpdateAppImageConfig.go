@@ -34,6 +34,9 @@ type UpdateAppImageConfigInput struct {
 	// This member is required.
 	AppImageConfigName *string
 
+	// The Code Editor app running on the image.
+	CodeEditorAppImageConfig *types.CodeEditorAppImageConfig
+
 	// The JupyterLab app running on the image.
 	JupyterLabAppImageConfig *types.JupyterLabAppImageConfig
 

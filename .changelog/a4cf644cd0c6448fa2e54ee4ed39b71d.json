@@ -1,0 +1,8 @@
+{
+    "id": "a4cf644c-d0c6-448f-a2e5-4ee4ed39b71d",
+    "type": "feature",
+    "description": "Add new fleet status code for Reserved Capacity.",
+    "modules": [
+        "service/codebuild"
+    ]
+}

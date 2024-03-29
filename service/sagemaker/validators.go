@@ -7239,6 +7239,23 @@ func validateClusterLifeCycleConfig(v *types.ClusterLifeCycleConfig) error {
 	}
 }
 
+func validateCodeEditorAppSettings(v *types.CodeEditorAppSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeEditorAppSettings"}
+	if v.CustomImages != nil {
+		if err := validateCustomImages(v.CustomImages); err != nil {
+			invalidParams.AddNested("CustomImages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeRepositories(v []types.CodeRepository) error {
 	if v == nil {
 		return nil
@@ -12133,6 +12150,11 @@ func validateUserSettings(v *types.UserSettings) error {
 	if v.RSessionAppSettings != nil {
 		if err := validateRSessionAppSettings(v.RSessionAppSettings); err != nil {
 			invalidParams.AddNested("RSessionAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeEditorAppSettings != nil {
+		if err := validateCodeEditorAppSettings(v.CodeEditorAppSettings); err != nil {
+			invalidParams.AddNested("CodeEditorAppSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.JupyterLabAppSettings != nil {

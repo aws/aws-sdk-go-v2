@@ -1893,6 +1893,13 @@ func awsRestjson1_serializeDocumentOfferFilters(v *types.OfferFilters, value smi
 		}
 	}
 
+	if v.ResaleAuthorizationId != nil {
+		ok := object.Key("ResaleAuthorizationId")
+		if err := awsRestjson1_serializeDocumentOfferResaleAuthorizationIdFilter(v.ResaleAuthorizationId, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.State != nil {
 		ok := object.Key("State")
 		if err := awsRestjson1_serializeDocumentOfferStateFilter(v.State, ok); err != nil {
@@ -2024,6 +2031,31 @@ func awsRestjson1_serializeDocumentOfferReleaseDateFilterDateRange(v *types.Offe
 		ok.String(*v.BeforeValue)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOfferResaleAuthorizationIdFilter(v *types.OfferResaleAuthorizationIdFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ValueList != nil {
+		ok := object.Key("ValueList")
+		if err := awsRestjson1_serializeDocumentOfferResaleAuthorizationIdFilterValueList(v.ValueList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOfferResaleAuthorizationIdFilterValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

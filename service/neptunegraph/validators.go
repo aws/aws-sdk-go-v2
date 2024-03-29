@@ -430,6 +430,26 @@ func (m *validateOpRestoreGraphFromSnapshot) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartImportTask struct {
+}
+
+func (*validateOpStartImportTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartImportTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartImportTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartImportTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -572,6 +592,10 @@ func addOpResetGraphValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRestoreGraphFromSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreGraphFromSnapshot{}, middleware.After)
+}
+
+func addOpStartImportTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartImportTask{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1002,6 +1026,32 @@ func validateOpRestoreGraphFromSnapshotInput(v *RestoreGraphFromSnapshotInput) e
 	}
 	if v.GraphName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartImportTaskInput(v *StartImportTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartImportTaskInput"}
+	if v.ImportOptions != nil {
+		if err := validateImportOptions(v.ImportOptions); err != nil {
+			invalidParams.AddNested("ImportOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.GraphIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

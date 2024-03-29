@@ -2,6 +2,26 @@
 
 package types
 
+type AggregationPeriod string
+
+// Enum values for AggregationPeriod
+const (
+	AggregationPeriodOneHour AggregationPeriod = "OneHour"
+	AggregationPeriodOneDay  AggregationPeriod = "OneDay"
+	AggregationPeriodOneWeek AggregationPeriod = "OneWeek"
+)
+
+// Values returns all known values for AggregationPeriod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AggregationPeriod) Values() []AggregationPeriod {
+	return []AggregationPeriod{
+		"OneHour",
+		"OneDay",
+		"OneWeek",
+	}
+}
+
 type ApplicationConfigType string
 
 // Enum values for ApplicationConfigType
@@ -93,6 +113,24 @@ func (DeviceState) Values() []DeviceState {
 		"RegisteredNotSeen",
 		"RegisteredReachable",
 		"RegisteredUnreachable",
+	}
+}
+
+type DimensionName string
+
+// Enum values for DimensionName
+const (
+	DimensionNameDeviceId  DimensionName = "DeviceId"
+	DimensionNameGatewayId DimensionName = "GatewayId"
+)
+
+// Values returns all known values for DimensionName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DimensionName) Values() []DimensionName {
+	return []DimensionName{
+		"DeviceId",
+		"GatewayId",
 	}
 }
 
@@ -385,6 +423,98 @@ func (MessageType) Values() []MessageType {
 	}
 }
 
+type MetricName string
+
+// Enum values for MetricName
+const (
+	MetricNameDeviceRSSI                     MetricName = "DeviceRSSI"
+	MetricNameDeviceSNR                      MetricName = "DeviceSNR"
+	MetricNameDeviceUplinkCount              MetricName = "DeviceUplinkCount"
+	MetricNameDeviceDownlinkCount            MetricName = "DeviceDownlinkCount"
+	MetricNameDeviceUplinkLostCount          MetricName = "DeviceUplinkLostCount"
+	MetricNameDeviceUplinkLostRate           MetricName = "DeviceUplinkLostRate"
+	MetricNameDeviceJoinRequestCount         MetricName = "DeviceJoinRequestCount"
+	MetricNameDeviceJoinAcceptCount          MetricName = "DeviceJoinAcceptCount"
+	MetricNameDeviceRoamingUplinkCount       MetricName = "DeviceRoamingUplinkCount"
+	MetricNameDeviceRoamingDownlinkCount     MetricName = "DeviceRoamingDownlinkCount"
+	MetricNameGatewayUpTime                  MetricName = "GatewayUpTime"
+	MetricNameGatewayDownTime                MetricName = "GatewayDownTime"
+	MetricNameGatewayRSSI                    MetricName = "GatewayRSSI"
+	MetricNameGatewaySNR                     MetricName = "GatewaySNR"
+	MetricNameGatewayUplinkCount             MetricName = "GatewayUplinkCount"
+	MetricNameGatewayDownlinkCount           MetricName = "GatewayDownlinkCount"
+	MetricNameGatewayJoinRequestCount        MetricName = "GatewayJoinRequestCount"
+	MetricNameGatewayJoinAcceptCount         MetricName = "GatewayJoinAcceptCount"
+	MetricNameAwsAccountUplinkCount          MetricName = "AwsAccountUplinkCount"
+	MetricNameAwsAccountDownlinkCount        MetricName = "AwsAccountDownlinkCount"
+	MetricNameAwsAccountUplinkLostCount      MetricName = "AwsAccountUplinkLostCount"
+	MetricNameAwsAccountUplinkLostRate       MetricName = "AwsAccountUplinkLostRate"
+	MetricNameAwsAccountJoinRequestCount     MetricName = "AwsAccountJoinRequestCount"
+	MetricNameAwsAccountJoinAcceptCount      MetricName = "AwsAccountJoinAcceptCount"
+	MetricNameAwsAccountRoamingUplinkCount   MetricName = "AwsAccountRoamingUplinkCount"
+	MetricNameAwsAccountRoamingDownlinkCount MetricName = "AwsAccountRoamingDownlinkCount"
+	MetricNameAwsAccountDeviceCount          MetricName = "AwsAccountDeviceCount"
+	MetricNameAwsAccountGatewayCount         MetricName = "AwsAccountGatewayCount"
+	MetricNameAwsAccountActiveDeviceCount    MetricName = "AwsAccountActiveDeviceCount"
+	MetricNameAwsAccountActiveGatewayCount   MetricName = "AwsAccountActiveGatewayCount"
+)
+
+// Values returns all known values for MetricName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricName) Values() []MetricName {
+	return []MetricName{
+		"DeviceRSSI",
+		"DeviceSNR",
+		"DeviceUplinkCount",
+		"DeviceDownlinkCount",
+		"DeviceUplinkLostCount",
+		"DeviceUplinkLostRate",
+		"DeviceJoinRequestCount",
+		"DeviceJoinAcceptCount",
+		"DeviceRoamingUplinkCount",
+		"DeviceRoamingDownlinkCount",
+		"GatewayUpTime",
+		"GatewayDownTime",
+		"GatewayRSSI",
+		"GatewaySNR",
+		"GatewayUplinkCount",
+		"GatewayDownlinkCount",
+		"GatewayJoinRequestCount",
+		"GatewayJoinAcceptCount",
+		"AwsAccountUplinkCount",
+		"AwsAccountDownlinkCount",
+		"AwsAccountUplinkLostCount",
+		"AwsAccountUplinkLostRate",
+		"AwsAccountJoinRequestCount",
+		"AwsAccountJoinAcceptCount",
+		"AwsAccountRoamingUplinkCount",
+		"AwsAccountRoamingDownlinkCount",
+		"AwsAccountDeviceCount",
+		"AwsAccountGatewayCount",
+		"AwsAccountActiveDeviceCount",
+		"AwsAccountActiveGatewayCount",
+	}
+}
+
+type MetricQueryStatus string
+
+// Enum values for MetricQueryStatus
+const (
+	MetricQueryStatusSucceeded MetricQueryStatus = "Succeeded"
+	MetricQueryStatusFailed    MetricQueryStatus = "Failed"
+)
+
+// Values returns all known values for MetricQueryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricQueryStatus) Values() []MetricQueryStatus {
+	return []MetricQueryStatus{
+		"Succeeded",
+		"Failed",
+	}
+}
+
 type MulticastFrameInfo string
 
 // Enum values for MulticastFrameInfo
@@ -560,6 +690,25 @@ func (SigningAlg) Values() []SigningAlg {
 	return []SigningAlg{
 		"Ed25519",
 		"P256r1",
+	}
+}
+
+type SummaryMetricConfigurationStatus string
+
+// Enum values for SummaryMetricConfigurationStatus
+const (
+	SummaryMetricConfigurationStatusEnabled  SummaryMetricConfigurationStatus = "Enabled"
+	SummaryMetricConfigurationStatusDisabled SummaryMetricConfigurationStatus = "Disabled"
+)
+
+// Values returns all known values for SummaryMetricConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SummaryMetricConfigurationStatus) Values() []SummaryMetricConfigurationStatus {
+	return []SummaryMetricConfigurationStatus{
+		"Enabled",
+		"Disabled",
 	}
 }
 

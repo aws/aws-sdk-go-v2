@@ -201,15 +201,16 @@ type OfferSortBy string
 
 // Enum values for OfferSortBy
 const (
-	OfferSortByEntityId            OfferSortBy = "EntityId"
-	OfferSortByName                OfferSortBy = "Name"
-	OfferSortByProductId           OfferSortBy = "ProductId"
-	OfferSortByReleaseDate         OfferSortBy = "ReleaseDate"
-	OfferSortByAvailabilityEndDate OfferSortBy = "AvailabilityEndDate"
-	OfferSortByBuyerAccounts       OfferSortBy = "BuyerAccounts"
-	OfferSortByState               OfferSortBy = "State"
-	OfferSortByTargeting           OfferSortBy = "Targeting"
-	OfferSortByLastModifiedDate    OfferSortBy = "LastModifiedDate"
+	OfferSortByEntityId              OfferSortBy = "EntityId"
+	OfferSortByName                  OfferSortBy = "Name"
+	OfferSortByProductId             OfferSortBy = "ProductId"
+	OfferSortByResaleAuthorizationId OfferSortBy = "ResaleAuthorizationId"
+	OfferSortByReleaseDate           OfferSortBy = "ReleaseDate"
+	OfferSortByAvailabilityEndDate   OfferSortBy = "AvailabilityEndDate"
+	OfferSortByBuyerAccounts         OfferSortBy = "BuyerAccounts"
+	OfferSortByState                 OfferSortBy = "State"
+	OfferSortByTargeting             OfferSortBy = "Targeting"
+	OfferSortByLastModifiedDate      OfferSortBy = "LastModifiedDate"
 )
 
 // Values returns all known values for OfferSortBy. Note that this can be expanded
@@ -220,6 +221,7 @@ func (OfferSortBy) Values() []OfferSortBy {
 		"EntityId",
 		"Name",
 		"ProductId",
+		"ResaleAuthorizationId",
 		"ReleaseDate",
 		"AvailabilityEndDate",
 		"BuyerAccounts",

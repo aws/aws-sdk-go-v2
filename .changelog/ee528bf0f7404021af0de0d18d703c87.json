@@ -1,0 +1,8 @@
+{
+    "id": "ee528bf0-f740-4021-af0d-e0d18d703c87",
+    "type": "feature",
+    "description": "Add support for retrieving key historical and live metrics for LoRaWAN devices and gateways",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

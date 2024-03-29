@@ -768,6 +768,11 @@ type OfferFilters struct {
 	// Allows filtering on the ReleaseDate of an offer.
 	ReleaseDate *OfferReleaseDateFilter
 
+	// Allows filtering on the ResaleAuthorizationId of an offer. Not all offers have
+	// a ResaleAuthorizationId . The response will only include offers for which you
+	// have permissions.
+	ResaleAuthorizationId *OfferResaleAuthorizationIdFilter
+
 	// Allows filtering on the State of an offer.
 	State *OfferStateFilter
 
@@ -840,6 +845,17 @@ type OfferReleaseDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+// Allows filtering on the ResaleAuthorizationId of an offer. Not all offers have
+// a ResaleAuthorizationId . The response will only include offers for which you
+// have permissions.
+type OfferResaleAuthorizationIdFilter struct {
+
+	// Allows filtering on the ResaleAuthorizationId of an offer with list input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
 // Allows to sort offers.
 type OfferSort struct {
 
@@ -878,6 +894,9 @@ type OfferSummary struct {
 
 	// The release date of the offer.
 	ReleaseDate *string
+
+	// The ResaleAuthorizationId of the offer.
+	ResaleAuthorizationId *string
 
 	// The status of the offer.
 	State OfferStateString

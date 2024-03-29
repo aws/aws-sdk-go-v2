@@ -30,6 +30,9 @@ func (c *Client) ListMonitors(ctx context.Context, params *ListMonitorsInput, op
 
 type ListMonitorsInput struct {
 
+	// TBD
+	IncludeLinkedAccounts *bool
+
 	// The number of monitor objects that you want to return with this call.
 	MaxResults *int32
 

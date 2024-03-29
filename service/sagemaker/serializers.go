@@ -19349,9 +19349,37 @@ func awsAwsjson11_serializeDocumentClusterLifeCycleConfig(v *types.ClusterLifeCy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCodeEditorAppImageConfig(v *types.CodeEditorAppImageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContainerConfig != nil {
+		ok := object.Key("ContainerConfig")
+		if err := awsAwsjson11_serializeDocumentContainerConfig(v.ContainerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FileSystemConfig != nil {
+		ok := object.Key("FileSystemConfig")
+		if err := awsAwsjson11_serializeDocumentFileSystemConfig(v.FileSystemConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCodeEditorAppSettings(v *types.CodeEditorAppSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomImages != nil {
+		ok := object.Key("CustomImages")
+		if err := awsAwsjson11_serializeDocumentCustomImages(v.CustomImages, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DefaultResourceSpec != nil {
 		ok := object.Key("DefaultResourceSpec")
@@ -28414,6 +28442,13 @@ func awsAwsjson11_serializeOpDocumentCreateAppImageConfigInput(v *CreateAppImage
 		ok.String(*v.AppImageConfigName)
 	}
 
+	if v.CodeEditorAppImageConfig != nil {
+		ok := object.Key("CodeEditorAppImageConfig")
+		if err := awsAwsjson11_serializeDocumentCodeEditorAppImageConfig(v.CodeEditorAppImageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JupyterLabAppImageConfig != nil {
 		ok := object.Key("JupyterLabAppImageConfig")
 		if err := awsAwsjson11_serializeDocumentJupyterLabAppImageConfig(v.JupyterLabAppImageConfig, ok); err != nil {
@@ -37083,6 +37118,13 @@ func awsAwsjson11_serializeOpDocumentUpdateAppImageConfigInput(v *UpdateAppImage
 	if v.AppImageConfigName != nil {
 		ok := object.Key("AppImageConfigName")
 		ok.String(*v.AppImageConfigName)
+	}
+
+	if v.CodeEditorAppImageConfig != nil {
+		ok := object.Key("CodeEditorAppImageConfig")
+		if err := awsAwsjson11_serializeDocumentCodeEditorAppImageConfig(v.CodeEditorAppImageConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.JupyterLabAppImageConfig != nil {

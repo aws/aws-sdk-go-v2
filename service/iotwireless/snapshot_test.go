@@ -578,6 +578,30 @@ func TestCheckSnapshot_GetLogLevelsByResourceTypes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMetricConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMetricConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMetricConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMulticastGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMulticastGroup(context.Background(), nil, func(o *Options) {
@@ -1262,6 +1286,18 @@ func TestCheckSnapshot_UpdateLogLevelsByResourceTypes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateMetricConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMetricConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMetricConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMulticastGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMulticastGroup(context.Background(), nil, func(o *Options) {
@@ -1878,6 +1914,30 @@ func TestUpdateSnapshot_GetLogLevelsByResourceTypes(t *testing.T) {
 	_, err := svc.GetLogLevelsByResourceTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetLogLevelsByResourceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetMetricConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMetricConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMetricConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetMetrics(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMetrics(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMetrics")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2562,6 +2622,18 @@ func TestUpdateSnapshot_UpdateLogLevelsByResourceTypes(t *testing.T) {
 	_, err := svc.UpdateLogLevelsByResourceTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLogLevelsByResourceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMetricConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMetricConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMetricConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

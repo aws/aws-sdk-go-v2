@@ -45,6 +45,9 @@ type ListHealthEventsInput struct {
 	// The status of a health event.
 	EventStatus types.HealthEventStatus
 
+	// TBD
+	LinkedAccountId *string
+
 	// The number of health event objects that you want to return with this call.
 	MaxResults *int32
 

@@ -261,6 +261,10 @@ func awsRestjson1_serializeOpHttpBindingsGetHealthEventInput(v *GetHealthEventIn
 		}
 	}
 
+	if v.LinkedAccountId != nil {
+		encoder.SetQuery("LinkedAccountId").String(*v.LinkedAccountId)
+	}
+
 	if v.MonitorName == nil || len(*v.MonitorName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member MonitorName must not be empty")}
 	}
@@ -324,6 +328,10 @@ func (m *awsRestjson1_serializeOpGetMonitor) HandleSerialize(ctx context.Context
 func awsRestjson1_serializeOpHttpBindingsGetMonitorInput(v *GetMonitorInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LinkedAccountId != nil {
+		encoder.SetQuery("LinkedAccountId").String(*v.LinkedAccountId)
 	}
 
 	if v.MonitorName == nil || len(*v.MonitorName) == 0 {
@@ -555,6 +563,10 @@ func awsRestjson1_serializeOpHttpBindingsListHealthEventsInput(v *ListHealthEven
 		encoder.SetQuery("EventStatus").String(string(v.EventStatus))
 	}
 
+	if v.LinkedAccountId != nil {
+		encoder.SetQuery("LinkedAccountId").String(*v.LinkedAccountId)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("MaxResults").Integer(*v.MaxResults)
 	}
@@ -630,6 +642,10 @@ func (m *awsRestjson1_serializeOpListMonitors) HandleSerialize(ctx context.Conte
 func awsRestjson1_serializeOpHttpBindingsListMonitorsInput(v *ListMonitorsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.IncludeLinkedAccounts != nil {
+		encoder.SetQuery("IncludeLinkedAccounts").Boolean(*v.IncludeLinkedAccounts)
 	}
 
 	if v.MaxResults != nil {
@@ -802,6 +818,11 @@ func awsRestjson1_serializeOpDocumentStartQueryInput(v *StartQueryInput, value s
 		if err := awsRestjson1_serializeDocumentFilterParameters(v.FilterParameters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.LinkedAccountId != nil {
+		ok := object.Key("LinkedAccountId")
+		ok.String(*v.LinkedAccountId)
 	}
 
 	if len(v.QueryType) > 0 {

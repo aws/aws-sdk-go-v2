@@ -315,6 +315,18 @@ type DeviceRegistrationStateResourceTypeEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The required list of dimensions for the metric.
+type Dimension struct {
+
+	// The name of the dimension.
+	Name DimensionName
+
+	// The dimension's value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // The message in the downlink queue.
 type DownlinkQueueMessage struct {
 
@@ -1213,6 +1225,32 @@ type MessageDeliveryStatusResourceTypeEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The aggregated values of the metric.
+type MetricQueryValue struct {
+
+	// The average of the values of the all data points collected during the period.
+	Avg *float64
+
+	// The maximum of the values of the all data points collected during the period.
+	Max *float64
+
+	// The minimum of the values of the all data points collected during the period.
+	Min *float64
+
+	// The 90th percentile of the values of the all data points collected during the
+	// period.
+	P90 *float64
+
+	// The standard deviation of the values of the all data points collected during
+	// the period.
+	Std *float64
+
+	// The sum of the values of the all data points collected during the period.
+	Sum *float64
+
+	noSmithyDocumentSerde
+}
+
 // A multicast group.
 type MulticastGroup struct {
 
@@ -1261,7 +1299,8 @@ type NetworkAnalyzerConfigurations struct {
 // OTAA device object for v1.0.x
 type OtaaV1_0_x struct {
 
-	// The AppEUI value.
+	// The AppEUI value. You specify this value when using LoRaWAN versions v1.0.2 or
+	// v1.0.3.
 	AppEui *string
 
 	// The AppKey value.
@@ -1270,7 +1309,8 @@ type OtaaV1_0_x struct {
 	// The GenAppKey value.
 	GenAppKey *string
 
-	// The JoinEUI value.
+	// The JoinEUI value. You specify this value instead of the AppEUI when using
+	// LoRaWAN version v1.0.4.
 	JoinEui *string
 
 	noSmithyDocumentSerde
@@ -1688,6 +1728,78 @@ type SidewalkUpdateImportInfo struct {
 	// The CSV file contained in an S3 bucket that's used for appending devices to an
 	// existing import task.
 	DeviceCreationFile *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of summary metric.
+type SummaryMetricConfiguration struct {
+
+	// The configuration of summary metric.
+	Status SummaryMetricConfigurationStatus
+
+	noSmithyDocumentSerde
+}
+
+// The metric query object.
+type SummaryMetricQuery struct {
+
+	// The aggregation period of the metric.
+	AggregationPeriod AggregationPeriod
+
+	// The dimensions of the metric.
+	Dimensions []Dimension
+
+	// The end timestamp for summary metric query.
+	EndTimestamp *time.Time
+
+	// The name of the metric.
+	MetricName MetricName
+
+	// The id of the query.
+	QueryId *string
+
+	// The start timestamp for summary metric query.
+	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The result of metrics aggregation operation.
+type SummaryMetricQueryResult struct {
+
+	// The aggregation period of the metric.
+	AggregationPeriod AggregationPeriod
+
+	// The dimensions of the metric.
+	Dimensions []Dimension
+
+	// The end timestamp for summary metric query.
+	EndTimestamp *time.Time
+
+	// The error message for the summary metric query.
+	Error *string
+
+	// The name of the metric.
+	MetricName MetricName
+
+	// The id of the query.
+	QueryId *string
+
+	// The status of the metric query.
+	QueryStatus MetricQueryStatus
+
+	// The start timestamp for summary metric query.
+	StartTimestamp *time.Time
+
+	// The timestamp of each aggregation result.
+	Timestamps []time.Time
+
+	// The units of measurement to be used for interpreting the aggregation result.
+	Unit *string
+
+	// The list of aggregated metrics.
+	Values []MetricQueryValue
 
 	noSmithyDocumentSerde
 }

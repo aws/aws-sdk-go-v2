@@ -3359,6 +3359,15 @@ func awsRestjson1_deserializeDocumentOfferSummary(v **types.OfferSummary, value 
 				sv.ReleaseDate = ptr.String(jtv)
 			}
 
+		case "ResaleAuthorizationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferResaleAuthorizationIdString to be of type string, got %T instead", value)
+				}
+				sv.ResaleAuthorizationId = ptr.String(jtv)
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)

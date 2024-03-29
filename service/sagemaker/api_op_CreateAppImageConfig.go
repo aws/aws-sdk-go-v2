@@ -36,6 +36,11 @@ type CreateAppImageConfigInput struct {
 	// This member is required.
 	AppImageConfigName *string
 
+	// The CodeEditorAppImageConfig . You can only specify one image kernel in the
+	// AppImageConfig API. This kernel is shown to users before the image starts. After
+	// the image runs, all kernels are visible in Code Editor.
+	CodeEditorAppImageConfig *types.CodeEditorAppImageConfig
+
 	// The JupyterLabAppImageConfig . You can only specify one image kernel in the
 	// AppImageConfig API. This kernel is shown to users before the image starts. After
 	// the image runs, all kernels are visible in JupyterLab.

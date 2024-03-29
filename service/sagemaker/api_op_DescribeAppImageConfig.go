@@ -46,6 +46,9 @@ type DescribeAppImageConfigOutput struct {
 	// The name of the AppImageConfig.
 	AppImageConfigName *string
 
+	// The configuration of the Code Editor app.
+	CodeEditorAppImageConfig *types.CodeEditorAppImageConfig
+
 	// When the AppImageConfig was created.
 	CreationTime *time.Time
 

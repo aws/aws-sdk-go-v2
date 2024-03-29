@@ -79,6 +79,9 @@ type StartQueryInput struct {
 	// in the Amazon CloudWatch Internet Monitor User Guide.
 	FilterParameters []types.FilterParameter
 
+	// TBD
+	LinkedAccountId *string
+
 	noSmithyDocumentSerde
 }
 

@@ -100,17 +100,39 @@ const (
 	X12TransactionSetX12180 X12TransactionSet = "X12_180"
 	X12TransactionSetX12204 X12TransactionSet = "X12_204"
 	X12TransactionSetX12210 X12TransactionSet = "X12_210"
+	X12TransactionSetX12211 X12TransactionSet = "X12_211"
 	X12TransactionSetX12214 X12TransactionSet = "X12_214"
 	X12TransactionSetX12215 X12TransactionSet = "X12_215"
+	X12TransactionSetX12259 X12TransactionSet = "X12_259"
+	X12TransactionSetX12260 X12TransactionSet = "X12_260"
+	X12TransactionSetX12266 X12TransactionSet = "X12_266"
+	X12TransactionSetX12269 X12TransactionSet = "X12_269"
+	X12TransactionSetX12270 X12TransactionSet = "X12_270"
+	X12TransactionSetX12271 X12TransactionSet = "X12_271"
+	X12TransactionSetX12274 X12TransactionSet = "X12_274"
+	X12TransactionSetX12275 X12TransactionSet = "X12_275"
+	X12TransactionSetX12276 X12TransactionSet = "X12_276"
+	X12TransactionSetX12277 X12TransactionSet = "X12_277"
+	X12TransactionSetX12278 X12TransactionSet = "X12_278"
 	X12TransactionSetX12310 X12TransactionSet = "X12_310"
 	X12TransactionSetX12315 X12TransactionSet = "X12_315"
 	X12TransactionSetX12322 X12TransactionSet = "X12_322"
 	X12TransactionSetX12404 X12TransactionSet = "X12_404"
 	X12TransactionSetX12410 X12TransactionSet = "X12_410"
+	X12TransactionSetX12417 X12TransactionSet = "X12_417"
+	X12TransactionSetX12421 X12TransactionSet = "X12_421"
+	X12TransactionSetX12426 X12TransactionSet = "X12_426"
+	X12TransactionSetX12810 X12TransactionSet = "X12_810"
 	X12TransactionSetX12820 X12TransactionSet = "X12_820"
 	X12TransactionSetX12824 X12TransactionSet = "X12_824"
 	X12TransactionSetX12830 X12TransactionSet = "X12_830"
+	X12TransactionSetX12832 X12TransactionSet = "X12_832"
+	X12TransactionSetX12834 X12TransactionSet = "X12_834"
+	X12TransactionSetX12835 X12TransactionSet = "X12_835"
+	X12TransactionSetX12837 X12TransactionSet = "X12_837"
+	X12TransactionSetX12844 X12TransactionSet = "X12_844"
 	X12TransactionSetX12846 X12TransactionSet = "X12_846"
+	X12TransactionSetX12849 X12TransactionSet = "X12_849"
 	X12TransactionSetX12850 X12TransactionSet = "X12_850"
 	X12TransactionSetX12852 X12TransactionSet = "X12_852"
 	X12TransactionSetX12855 X12TransactionSet = "X12_855"
@@ -118,9 +140,14 @@ const (
 	X12TransactionSetX12860 X12TransactionSet = "X12_860"
 	X12TransactionSetX12861 X12TransactionSet = "X12_861"
 	X12TransactionSetX12864 X12TransactionSet = "X12_864"
+	X12TransactionSetX12865 X12TransactionSet = "X12_865"
+	X12TransactionSetX12869 X12TransactionSet = "X12_869"
+	X12TransactionSetX12870 X12TransactionSet = "X12_870"
 	X12TransactionSetX12940 X12TransactionSet = "X12_940"
+	X12TransactionSetX12945 X12TransactionSet = "X12_945"
 	X12TransactionSetX12990 X12TransactionSet = "X12_990"
 	X12TransactionSetX12997 X12TransactionSet = "X12_997"
+	X12TransactionSetX12999 X12TransactionSet = "X12_999"
 )
 
 // Values returns all known values for X12TransactionSet. Note that this can be
@@ -132,17 +159,39 @@ func (X12TransactionSet) Values() []X12TransactionSet {
 		"X12_180",
 		"X12_204",
 		"X12_210",
+		"X12_211",
 		"X12_214",
 		"X12_215",
+		"X12_259",
+		"X12_260",
+		"X12_266",
+		"X12_269",
+		"X12_270",
+		"X12_271",
+		"X12_274",
+		"X12_275",
+		"X12_276",
+		"X12_277",
+		"X12_278",
 		"X12_310",
 		"X12_315",
 		"X12_322",
 		"X12_404",
 		"X12_410",
+		"X12_417",
+		"X12_421",
+		"X12_426",
+		"X12_810",
 		"X12_820",
 		"X12_824",
 		"X12_830",
+		"X12_832",
+		"X12_834",
+		"X12_835",
+		"X12_837",
+		"X12_844",
 		"X12_846",
+		"X12_849",
 		"X12_850",
 		"X12_852",
 		"X12_855",
@@ -150,9 +199,14 @@ func (X12TransactionSet) Values() []X12TransactionSet {
 		"X12_860",
 		"X12_861",
 		"X12_864",
+		"X12_865",
+		"X12_869",
+		"X12_870",
 		"X12_940",
+		"X12_945",
 		"X12_990",
 		"X12_997",
+		"X12_999",
 	}
 }
 
