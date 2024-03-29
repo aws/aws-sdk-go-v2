@@ -14,6 +14,15 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.internetmonitor#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                }
+            }
+        },
         "com.amazonaws.internetmonitor#Arn": {
             "type": "string",
             "traits": {
@@ -338,6 +347,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "LinkedAccountId": {
+                    "target": "com.amazonaws.internetmonitor#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TBD </p>",
+                        "smithy.api#httpQuery": "LinkedAccountId"
+                    }
                 }
             }
         },
@@ -464,6 +480,13 @@
                         "smithy.api#documentation": "<p>The name of the monitor.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "LinkedAccountId": {
+                    "target": "com.amazonaws.internetmonitor#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TBD </p>",
+                        "smithy.api#httpQuery": "LinkedAccountId"
                     }
                 }
             },
@@ -1904,6 +1927,13 @@
                         "smithy.api#documentation": "<p>The status of a health event.</p>",
                         "smithy.api#httpQuery": "EventStatus"
                     }
+                },
+                "LinkedAccountId": {
+                    "target": "com.amazonaws.internetmonitor#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TBD </p>",
+                        "smithy.api#httpQuery": "LinkedAccountId"
+                    }
                 }
             }
         },
@@ -1984,6 +2014,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of a monitor. This includes the status of the data processing for the monitor and the status of the monitor itself.</p>\n         <p>For information about the statuses for a monitor, see <a href=\"https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html\">\n\t\t\t\tMonitor</a>.</p>",
                         "smithy.api#httpQuery": "MonitorStatus"
+                    }
+                },
+                "IncludeLinkedAccounts": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TBD </p>",
+                        "smithy.api#httpQuery": "IncludeLinkedAccounts"
                     }
                 }
             },
@@ -2691,6 +2728,12 @@
                     "target": "com.amazonaws.internetmonitor#FilterParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>FilterParameters</code> field that you use with Amazon CloudWatch Internet Monitor queries is a string the defines \n\t\t\thow you want a query to be filtered. The filter parameters that you can specify depend on the query type, since \n\t\t\teach query type returns a different set of Internet Monitor data.</p>\n         <p>For more information about specifying filter parameters, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html\">Using the Amazon CloudWatch Internet Monitor query interface</a>\n\t\t\tin the Amazon CloudWatch Internet Monitor User Guide.</p>"
+                    }
+                },
+                "LinkedAccountId": {
+                    "target": "com.amazonaws.internetmonitor#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TBD </p>"
                     }
                 }
             },

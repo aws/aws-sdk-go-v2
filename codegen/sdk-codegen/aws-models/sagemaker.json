@@ -978,6 +978,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for the file system and the runtime, such as the environment variables and entry point.</p>"
                     }
+                },
+                "CodeEditorAppImageConfig": {
+                    "target": "com.amazonaws.sagemaker#CodeEditorAppImageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the file system and the runtime, \n      such as the environment variables and entry point.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7096,11 +7102,31 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#CodeEditorAppImageConfig": {
+            "type": "structure",
+            "members": {
+                "FileSystemConfig": {
+                    "target": "com.amazonaws.sagemaker#FileSystemConfig"
+                },
+                "ContainerConfig": {
+                    "target": "com.amazonaws.sagemaker#ContainerConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for the file system and kernels in a SageMaker image running as a Code Editor app. \n      The <code>FileSystemConfig</code> object is not supported.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#CodeEditorAppSettings": {
             "type": "structure",
             "members": {
                 "DefaultResourceSpec": {
                     "target": "com.amazonaws.sagemaker#ResourceSpec"
+                },
+                "CustomImages": {
+                    "target": "com.amazonaws.sagemaker#CustomImages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom SageMaker images that are configured to run as a Code Editor app.</p>"
+                    }
                 },
                 "LifecycleConfigArns": {
                     "target": "com.amazonaws.sagemaker#LifecycleConfigArns",
@@ -8388,6 +8414,12 @@
                     "target": "com.amazonaws.sagemaker#JupyterLabAppImageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>JupyterLabAppImageConfig</code>. You can only specify one image kernel in the <code>AppImageConfig</code> API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab.</p>"
+                    }
+                },
+                "CodeEditorAppImageConfig": {
+                    "target": "com.amazonaws.sagemaker#CodeEditorAppImageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>CodeEditorAppImageConfig</code>. You can only specify one image kernel \n      in the AppImageConfig API. This kernel is shown to users before the image starts. \n      After the image runs, all kernels are visible in Code Editor.</p>"
                     }
                 }
             },
@@ -16628,6 +16660,12 @@
                     "target": "com.amazonaws.sagemaker#JupyterLabAppImageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the JupyterLab app.</p>"
+                    }
+                },
+                "CodeEditorAppImageConfig": {
+                    "target": "com.amazonaws.sagemaker#CodeEditorAppImageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration of the Code Editor app.</p>"
                     }
                 }
             },
@@ -33893,7 +33931,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": ".*"
+                "smithy.api#pattern": "^[a-zA-Z0-9:/_-]*$"
             }
         },
         "com.amazonaws.sagemaker#LabelAttributeName": {
@@ -63597,6 +63635,12 @@
                     "target": "com.amazonaws.sagemaker#JupyterLabAppImageConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The JupyterLab app running on the image.</p>"
+                    }
+                },
+                "CodeEditorAppImageConfig": {
+                    "target": "com.amazonaws.sagemaker#CodeEditorAppImageConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Code Editor app running on the image.</p>"
                     }
                 }
             },

@@ -3279,6 +3279,12 @@
                         "smithy.api#documentation": "<p>Allows filtering on the <code>ProductId</code> of an offer.</p>"
                     }
                 },
+                "ResaleAuthorizationId": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ResaleAuthorizationId</code> of an offer.</p>\n         <note>\n            <p>Not all offers have a <code>ResaleAuthorizationId</code>. The response will only\n                include offers for which you have permissions.</p>\n         </note>"
+                    }
+                },
                 "ReleaseDate": {
                     "target": "com.amazonaws.marketplacecatalog#OfferReleaseDateFilter",
                     "traits": {
@@ -3466,6 +3472,42 @@
                 "smithy.api#documentation": "<p>Allows filtering on the <code>ReleaseDate</code> of an offer with date range as input.</p>"
             }
         },
+        "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdFilter": {
+            "type": "structure",
+            "members": {
+                "ValueList": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdFilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Allows filtering on the <code>ResaleAuthorizationId</code> of an offer with list input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Allows filtering on the <code>ResaleAuthorizationId</code> of an offer.</p>\n         <note>\n            <p>Not all offers have a <code>ResaleAuthorizationId</code>. The response will only\n                include offers for which you have permissions.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdFilterValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][.a-zA-Z0-9/-]+[a-zA-Z0-9]$"
+            }
+        },
         "com.amazonaws.marketplacecatalog#OfferSort": {
             "type": "structure",
             "members": {
@@ -3505,6 +3547,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ProductId"
+                    }
+                },
+                "ResaleAuthorizationId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResaleAuthorizationId"
                     }
                 },
                 "ReleaseDate": {
@@ -3601,6 +3649,12 @@
                     "target": "com.amazonaws.marketplacecatalog#OfferProductIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The product ID of the offer.</p>"
+                    }
+                },
+                "ResaleAuthorizationId": {
+                    "target": "com.amazonaws.marketplacecatalog#OfferResaleAuthorizationIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ResaleAuthorizationId of the offer.</p>"
                     }
                 },
                 "ReleaseDate": {

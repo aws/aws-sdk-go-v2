@@ -4273,6 +4273,12 @@
                         "smithy.api#enumValue": "ROTATING"
                     }
                 },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETION"
+                    }
+                },
                 "DELETING": {
                     "target": "smithy.api#Unit",
                     "traits": {
