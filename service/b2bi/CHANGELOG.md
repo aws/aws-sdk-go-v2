@@ -1,3 +1,8 @@
+# v1.0.0-preview.20 (2024-03-29)
+
+* **Feature**: Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.19 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

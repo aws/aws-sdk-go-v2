@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc
 go 1.20
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.26.0
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.4
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.4
+	github.com/aws/aws-sdk-go-v2 v1.26.1
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.5
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.5
 	github.com/aws/smithy-go v1.20.2
 )
 

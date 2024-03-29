@@ -1,3 +1,7 @@
+# v1.12.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2024-03-20)
 
 * **Feature**: AMB Query: update GetTransaction to include transactionId as input

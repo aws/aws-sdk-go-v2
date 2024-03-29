@@ -1,3 +1,7 @@
+# v1.9.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2024-03-22)
 
 * **Feature**: This release relaxes constraints on the durationSeconds request parameter for the *Profile APIs that support it. This parameter can now take on values that go up to 43200.

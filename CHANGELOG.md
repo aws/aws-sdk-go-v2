@@ -1,3 +1,27 @@
+# Release (2024-03-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.20](service/b2bi/CHANGELOG.md#v100-preview20-2024-03-29)
+  * **Feature**: Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.33.0](service/codebuild/CHANGELOG.md#v1330-2024-03-29)
+  * **Feature**: Add new fleet status code for Reserved Capacity.
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.0.0](service/codeconnections/CHANGELOG.md#v100-2024-03-29)
+  * **Release**: New AWS service client module
+  * **Feature**: Duplicating the CodeStar Connections service into the new, rebranded AWS CodeConnections service.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.13.0](service/internetmonitor/CHANGELOG.md#v1130-2024-03-29)
+  * **Feature**: This release adds support to allow customers to track cross account monitors through ListMonitor, GetMonitor, ListHealthEvents, GetHealthEvent, StartQuery APIs.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.37.0](service/iotwireless/CHANGELOG.md#v1370-2024-03-29)
+  * **Feature**: Add support for retrieving key historical and live metrics for LoRaWAN devices and gateways
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.26.0](service/marketplacecatalog/CHANGELOG.md#v1260-2024-03-29)
+  * **Feature**: This release enhances the ListEntities API to support ResaleAuthorizationId filter and sort for OfferEntity in the request and the addition of a ResaleAuthorizationId field in the response of OfferSummary.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.8.0](service/neptunegraph/CHANGELOG.md#v180-2024-03-29)
+  * **Feature**: Add the new API Start-Import-Task for Amazon Neptune Analytics.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.135.0](service/sagemaker/CHANGELOG.md#v11350-2024-03-29)
+  * **Feature**: This release adds support for custom images for the CodeEditor App on SageMaker Studio
+
 # Release (2024-03-28)
 
 ## Module Highlights

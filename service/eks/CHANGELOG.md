@@ -1,3 +1,7 @@
+# v1.42.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2024-03-28)
 
 * **Feature**: Add multiple customer error code to handle customer caused failure when managing EKS node groups

@@ -1,3 +1,8 @@
+# v1.26.0 (2024-03-29)
+
+* **Feature**: This release enhances the ListEntities API to support ResaleAuthorizationId filter and sort for OfferEntity in the request and the addition of a ResaleAuthorizationId field in the response of OfferSummary.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

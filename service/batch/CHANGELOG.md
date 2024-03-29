@@ -1,3 +1,7 @@
+# v1.36.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.0 (2024-03-27)
 
 * **Feature**: This feature allows AWS Batch to support configuration of imagePullSecrets and allowPrivilegeEscalation for jobs running on EKS

@@ -1,3 +1,7 @@
+# v1.41.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.41.0 (2024-03-28)
 
 * **Feature**: Add EC2 support for GuardDuty Runtime Monitoring auto management.

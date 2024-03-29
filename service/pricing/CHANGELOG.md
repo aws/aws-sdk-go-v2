@@ -1,3 +1,7 @@
+# v1.28.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2024-03-22)
 
 * **Feature**: Add ResourceNotFoundException to ListPriceLists and GetPriceListFileUrl APIs

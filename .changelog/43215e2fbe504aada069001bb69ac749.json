@@ -1,8 +1,0 @@
-{
-    "id": "43215e2f-be50-4aad-a069-001bb69ac749",
-    "type": "feature",
-    "description": "Add the new API Start-Import-Task for Amazon Neptune Analytics.",
-    "modules": [
-        "service/neptunegraph"
-    ]
-}

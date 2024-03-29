@@ -1,3 +1,7 @@
+# v1.60.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2024-03-28)
 
 * **Feature**: Amazon QuickSight: Adds support for setting up VPC Endpoint restrictions for accessing QuickSight Website.

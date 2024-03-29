@@ -1,8 +1,0 @@
-{
-    "id": "36b60199-9543-4ee2-82de-e9a890170bb9",
-    "type": "feature",
-    "description": "This release adds support to allow customers to track cross account monitors through ListMonitor, GetMonitor, ListHealthEvents, GetHealthEvent, StartQuery APIs.",
-    "modules": [
-        "service/internetmonitor"
-    ]
-}

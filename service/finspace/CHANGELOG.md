@@ -1,3 +1,7 @@
+# v1.24.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2024-03-26)
 
 * **Feature**: Add new operation delete-kx-cluster-node and add status parameter to list-kx-cluster-node operation.

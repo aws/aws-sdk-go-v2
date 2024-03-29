@@ -1,3 +1,7 @@
+# v1.10.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2024-03-28)
 
 * **Feature**: This release adds support for sharing AWS::InternetMonitor::Monitor resources.

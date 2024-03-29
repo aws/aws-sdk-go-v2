@@ -1,3 +1,7 @@
+# v1.26.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2024-03-21)
 
 * **Feature**: This release adds Package groups to CodeArtifact so you can more conveniently configure package origin controls for multiple packages.

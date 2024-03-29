@@ -1,3 +1,7 @@
+# v1.35.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2024-03-19)
 
 * **Feature**: Update LogSamples field in Anomaly model to be a list of LogEvent

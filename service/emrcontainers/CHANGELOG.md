@@ -1,3 +1,7 @@
+# v1.26.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2024-03-25)
 
 * **Feature**: This release increases the number of supported job template parameters from 20 to 100.

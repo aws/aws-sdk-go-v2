@@ -1,3 +1,8 @@
+# v1.33.0 (2024-03-29)
+
+* **Feature**: Add new fleet status code for Reserved Capacity.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2024-03-25)
 
 * **Feature**: Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild.

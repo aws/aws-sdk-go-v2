@@ -1,3 +1,7 @@
+# v1.34.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2024-03-28)
 
 * **Feature**: This release enables AWS Compute Optimizer to analyze and generate recommendations with a new customization preference, Memory Utilization.

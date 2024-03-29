@@ -1,3 +1,7 @@
+# v1.37.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2024-03-18)
 
 * **Feature**: This release adds support to allow customers to show different content within a channel depending on metadata associated with the viewer.

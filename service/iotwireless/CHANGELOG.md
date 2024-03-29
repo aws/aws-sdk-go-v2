@@ -1,3 +1,8 @@
+# v1.37.0 (2024-03-29)
+
+* **Feature**: Add support for retrieving key historical and live metrics for LoRaWAN devices and gateways
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

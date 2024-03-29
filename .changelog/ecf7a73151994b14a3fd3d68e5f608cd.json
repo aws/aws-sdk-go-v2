@@ -1,8 +1,0 @@
-{
-    "id": "ecf7a731-5199-4b14-a3fd-3d68e5f608cd",
-    "type": "feature",
-    "description": "Duplicating the CodeStar Connections service into the new, rebranded AWS CodeConnections service.",
-    "modules": [
-        "service/codeconnections"
-    ]
-}

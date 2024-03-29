@@ -1,3 +1,8 @@
+# v1.13.0 (2024-03-29)
+
+* **Feature**: This release adds support to allow customers to track cross account monitors through ListMonitor, GetMonitor, ListHealthEvents, GetHealthEvent, StartQuery APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.3 (2024-03-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

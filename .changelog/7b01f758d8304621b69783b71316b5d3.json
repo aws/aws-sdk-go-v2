@@ -1,8 +1,0 @@
-{
-    "id": "7b01f758-d830-4621-b697-83b71316b5d3",
-    "type": "feature",
-    "description": "Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010.",
-    "modules": [
-        "service/b2bi"
-    ]
-}

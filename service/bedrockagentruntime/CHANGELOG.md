@@ -1,3 +1,7 @@
+# v1.6.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2024-03-27)
 
 * **Feature**: This release introduces filtering support on Retrieve and RetrieveAndGenerate APIs.

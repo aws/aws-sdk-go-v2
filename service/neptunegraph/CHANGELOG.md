@@ -1,3 +1,8 @@
+# v1.8.0 (2024-03-29)
+
+* **Feature**: Add the new API Start-Import-Task for Amazon Neptune Analytics.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2024-03-28)
 
 * **Feature**: Update ImportTaskCancelled waiter to evaluate task state correctly and minor documentation changes.
