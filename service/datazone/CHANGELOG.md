@@ -1,3 +1,7 @@
+# v1.7.0 (2024-04-01)
+
+* **Feature**: This release supports the feature of AI recommendations for descriptions to enrich the business data catalog in Amazon DataZone.
+
 # v1.6.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

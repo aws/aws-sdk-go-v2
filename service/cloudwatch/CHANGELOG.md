@@ -1,3 +1,7 @@
+# v1.37.0 (2024-04-01)
+
+* **Feature**: This release adds support for CloudWatch Anomaly Detection on cross-account metrics. SingleMetricAnomalyDetector and MetricDataQuery inputs to Anomaly Detection APIs now take an optional AccountId field.
+
 # v1.36.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

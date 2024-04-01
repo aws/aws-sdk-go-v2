@@ -17,7 +17,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.21.4
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.39.2
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.36.4
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.33.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.25.4
@@ -42,7 +42,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.30.5
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.22.4
-	github.com/aws/aws-sdk-go-v2/service/emr v1.39.4
+	github.com/aws/aws-sdk-go-v2/service/emr v1.39.5
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.28.5
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.30.4
@@ -55,7 +55,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/kms v1.30.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.53.4
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.36.4
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.20.4
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.31.6
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.22.4

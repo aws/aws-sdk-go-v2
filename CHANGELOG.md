@@ -1,3 +1,18 @@
+# Release (2024-04-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.37.0](service/cloudwatch/CHANGELOG.md#v1370-2024-04-01)
+  * **Feature**: This release adds support for CloudWatch Anomaly Detection on cross-account metrics. SingleMetricAnomalyDetector and MetricDataQuery inputs to Anomaly Detection APIs now take an optional AccountId field.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.7.0](service/datazone/CHANGELOG.md#v170-2024-04-01)
+  * **Feature**: This release supports the feature of AI recommendations for descriptions to enrich the business data catalog in Amazon DataZone.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.0.0](service/deadline/CHANGELOG.md#v100-2024-04-01)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Deadline Cloud is a new fully managed service that helps customers set up, deploy, and scale rendering projects in minutes, so they can improve the efficiency of their rendering pipelines and take on more projects.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.39.5](service/emr/CHANGELOG.md#v1395-2024-04-01)
+  * **Documentation**: This release fixes a broken link in the documentation.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.37.0](service/lightsail/CHANGELOG.md#v1370-2024-04-01)
+  * **Feature**: This release adds support to upgrade the TLS version of the distribution.
+
 # Release (2024-03-29)
 
 ## General Highlights
