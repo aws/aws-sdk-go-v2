@@ -1,0 +1,8 @@
+{
+    "id": "0e41e8e7-911c-4f0f-99fe-c07d07bb4057",
+    "type": "feature",
+    "description": "This release adds support to upgrade the TLS version of the distribution.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

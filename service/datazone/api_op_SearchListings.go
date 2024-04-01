@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches listings in Amazon DataZone.
+// Searches listings (records of an asset at a given time) in Amazon DataZone.
 func (c *Client) SearchListings(ctx context.Context, params *SearchListingsInput, optFns ...func(*Options)) (*SearchListingsOutput, error) {
 	if params == nil {
 		params = &SearchListingsInput{}
@@ -53,7 +53,7 @@ type SearchListingsInput struct {
 	// SearchListings to list the next set of results.
 	NextToken *string
 
-	//
+	// The details of the search.
 	SearchIn []types.SearchInItem
 
 	// Specifies the text for which to search.

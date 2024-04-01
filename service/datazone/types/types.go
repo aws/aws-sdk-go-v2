@@ -11,13 +11,18 @@ import (
 // and the target (for example, a column name) that can be accepted.
 type AcceptChoice struct {
 
+	// Specifies the target (for example, a column name) where a prediction can be
+	// accepted.
+	//
+	// This member is required.
+	PredictionTarget *string
+
+	// The edit of the prediction.
+	EditedValue *string
+
 	// Specifies the prediction (aka, the automatically generated piece of metadata)
 	// that can be accepted.
 	PredictionChoice *int32
-
-	// Specifies the target (for example, a column name) where a prediction can be
-	// accepted.
-	PredictionTarget *string
 
 	noSmithyDocumentSerde
 }
@@ -230,6 +235,7 @@ type AssetRevision struct {
 	noSmithyDocumentSerde
 }
 
+// The name map for assets.
 type AssetTargetNameMap struct {
 
 	// The identifier of the inventory asset.
@@ -1522,6 +1528,65 @@ type MemberDetailsMemberUser struct {
 
 func (*MemberDetailsMemberUser) isMemberDetails() {}
 
+// The metadata generation run.
+type MetadataGenerationRunItem struct {
+
+	// The ID of the Amazon DataZone domain in which the metadata generation run was
+	// created.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The ID of the metadata generation run.
+	//
+	// This member is required.
+	Id *string
+
+	// The ID of the project that owns the asset for which the metadata generation was
+	// ran.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The timestamp at which the metadata generation run was created.
+	CreatedAt *time.Time
+
+	// The user who created the metadata generation run.
+	CreatedBy *string
+
+	// The status of the metadata generation run.
+	Status MetadataGenerationRunStatus
+
+	// The asset for which metadata was generated.
+	Target *MetadataGenerationRunTarget
+
+	// The type of the metadata generation run.
+	Type MetadataGenerationRunType
+
+	noSmithyDocumentSerde
+}
+
+// The asset for which metadata was generated.
+type MetadataGenerationRunTarget struct {
+
+	// The ID of the metadata generation run's target.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The type of the asset for which metadata was generated.
+	//
+	// This member is required.
+	Type MetadataGenerationTargetType
+
+	// The revision of the asset for which metadata was generated.
+	Revision *string
+
+	noSmithyDocumentSerde
+}
+
+// The model of the API.
+//
 // The following types satisfy this interface:
 //
 //	ModelMemberSmithy
@@ -1529,6 +1594,7 @@ type Model interface {
 	isModel()
 }
 
+// Indicates the smithy model of the API.
 type ModelMemberSmithy struct {
 	Value string
 
@@ -1622,13 +1688,14 @@ type PredictionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Error that occurred during project deletion
+// Specifies the error message that is returned if the operation cannot be
+// successfully completed.
 type ProjectDeletionError struct {
 
-	// Project Deletion Error Code
+	// The code of the project deletion error.
 	Code *string
 
-	// Project Deletion Error Message
+	// The message of the project deletion error.
 	Message *string
 
 	noSmithyDocumentSerde
@@ -1679,10 +1746,11 @@ type ProjectSummary struct {
 	// The description of a project.
 	Description *string
 
-	// Reasons for failed project deletion
+	// Specifies the error message that is returned if the operation cannot be
+	// successfully completed.
 	FailureReasons []ProjectDeletionError
 
-	// Status of the project
+	// The status of the project.
 	ProjectStatus ProjectStatus
 
 	// The timestamp of when the project was updated.
@@ -1847,13 +1915,15 @@ func (*RedshiftStorageMemberRedshiftServerlessSource) isRedshiftStorage() {}
 // The details of the automatically generated business metadata that is rejected.
 type RejectChoice struct {
 
+	// Specifies the target (for example, a column name) where a prediction can be
+	// rejected.
+	//
+	// This member is required.
+	PredictionTarget *string
+
 	// Specifies the the automatically generated business metadata that can be
 	// rejected.
 	PredictionChoices []int32
-
-	// Specifies the target (for example, a column name) where a prediction can be
-	// rejected.
-	PredictionTarget *string
 
 	noSmithyDocumentSerde
 }

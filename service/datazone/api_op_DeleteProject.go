@@ -38,7 +38,7 @@ type DeleteProjectInput struct {
 	// This member is required.
 	Identifier *string
 
-	// Optional flag to asynchronously delete child entities within the project
+	// Specifies the optional flag to delete all child entities within the project.
 	SkipDeletionCheck *bool
 
 	noSmithyDocumentSerde

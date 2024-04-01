@@ -50,6 +50,26 @@ func (m *validateOpAcceptSubscriptionRequest) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelMetadataGenerationRun struct {
+}
+
+func (*validateOpCancelMetadataGenerationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelMetadataGenerationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelMetadataGenerationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelMetadataGenerationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelSubscription struct {
 }
 
@@ -1050,6 +1070,26 @@ func (m *validateOpGetListing) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMetadataGenerationRun struct {
+}
+
+func (*validateOpGetMetadataGenerationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMetadataGenerationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMetadataGenerationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMetadataGenerationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetProject struct {
 }
 
@@ -1325,6 +1365,26 @@ func (m *validateOpListEnvironments) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEnvironmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMetadataGenerationRuns struct {
+}
+
+func (*validateOpListMetadataGenerationRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMetadataGenerationRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMetadataGenerationRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMetadataGenerationRunsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1690,6 +1750,26 @@ func (m *validateOpStartDataSourceRun) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMetadataGenerationRun struct {
+}
+
+func (*validateOpStartMetadataGenerationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMetadataGenerationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMetadataGenerationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMetadataGenerationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1978,6 +2058,10 @@ func addOpAcceptSubscriptionRequestValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpAcceptSubscriptionRequest{}, middleware.After)
 }
 
+func addOpCancelMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelMetadataGenerationRun{}, middleware.After)
+}
+
 func addOpCancelSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelSubscription{}, middleware.After)
 }
@@ -2178,6 +2262,10 @@ func addOpGetListingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetListing{}, middleware.After)
 }
 
+func addOpGetMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMetadataGenerationRun{}, middleware.After)
+}
+
 func addOpGetProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProject{}, middleware.After)
 }
@@ -2232,6 +2320,10 @@ func addOpListEnvironmentProfilesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListEnvironmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnvironments{}, middleware.After)
+}
+
+func addOpListMetadataGenerationRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMetadataGenerationRuns{}, middleware.After)
 }
 
 func addOpListNotificationsValidationMiddleware(stack *middleware.Stack) error {
@@ -2306,6 +2398,10 @@ func addOpStartDataSourceRunValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpStartDataSourceRun{}, middleware.After)
 }
 
+func addOpStartMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMetadataGenerationRun{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -2360,6 +2456,38 @@ func addOpUpdateSubscriptionTargetValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateUserProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserProfile{}, middleware.After)
+}
+
+func validateAcceptChoice(v *types.AcceptChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptChoice"}
+	if v.PredictionTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictionTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcceptChoices(v []types.AcceptChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptChoices"}
+	for i := range v {
+		if err := validateAcceptChoice(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAssetTargetNameMap(v *types.AssetTargetNameMap) error {
@@ -2644,6 +2772,24 @@ func validateListingRevisionInput(v *types.ListingRevisionInput) error {
 	}
 }
 
+func validateMetadataGenerationRunTarget(v *types.MetadataGenerationRunTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataGenerationRunTarget"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftClusterStorage(v *types.RedshiftClusterStorage) error {
 	if v == nil {
 		return nil
@@ -2738,6 +2884,38 @@ func validateRedshiftStorage(v types.RedshiftStorage) error {
 			invalidParams.AddNested("[redshiftServerlessSource]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRejectChoice(v *types.RejectChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectChoice"}
+	if v.PredictionTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictionTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRejectChoices(v []types.RejectChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectChoices"}
+	for i := range v {
+		if err := validateRejectChoice(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2908,6 +3086,11 @@ func validateOpAcceptPredictionsInput(v *AcceptPredictionsInput) error {
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
+	if v.AcceptChoices != nil {
+		if err := validateAcceptChoices(v.AcceptChoices); err != nil {
+			invalidParams.AddNested("AcceptChoices", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2920,6 +3103,24 @@ func validateOpAcceptSubscriptionRequestInput(v *AcceptSubscriptionRequestInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptSubscriptionRequestInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelMetadataGenerationRunInput(v *CancelMetadataGenerationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelMetadataGenerationRunInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
@@ -3961,6 +4162,24 @@ func validateOpGetListingInput(v *GetListingInput) error {
 	}
 }
 
+func validateOpGetMetadataGenerationRunInput(v *GetMetadataGenerationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMetadataGenerationRunInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetProjectInput(v *GetProjectInput) error {
 	if v == nil {
 		return nil
@@ -4207,6 +4426,21 @@ func validateOpListEnvironmentsInput(v *ListEnvironmentsInput) error {
 	}
 }
 
+func validateOpListMetadataGenerationRunsInput(v *ListMetadataGenerationRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMetadataGenerationRunsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListNotificationsInput(v *ListNotificationsInput) error {
 	if v == nil {
 		return nil
@@ -4367,6 +4601,11 @@ func validateOpRejectPredictionsInput(v *RejectPredictionsInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.RejectChoices != nil {
+		if err := validateRejectChoices(v.RejectChoices); err != nil {
+			invalidParams.AddNested("RejectChoices", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4556,6 +4795,34 @@ func validateOpStartDataSourceRunInput(v *StartDataSourceRunInput) error {
 	}
 	if v.DataSourceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMetadataGenerationRunInput(v *StartMetadataGenerationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMetadataGenerationRunInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	} else if v.Target != nil {
+		if err := validateMetadataGenerationRunTarget(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

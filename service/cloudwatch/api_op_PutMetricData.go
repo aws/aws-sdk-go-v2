@@ -18,7 +18,7 @@ import (
 // to fifteen minutes for the metric to appear in calls to ListMetrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html)
 // . You can publish either individual data points in the Value field, or arrays
 // of values and the number of times each value occurred during the period by using
-// the Values and Counts fields in the MetricDatum structure. Using the Values and
+// the Values and Counts fields in the MetricData structure. Using the Values and
 // Counts method enables you to publish up to 150 values per metric with one
 // PutMetricData request, and supports retrieving percentile statistics on this
 // data. Each PutMetricData request is limited to 1 MB in size for HTTP POST

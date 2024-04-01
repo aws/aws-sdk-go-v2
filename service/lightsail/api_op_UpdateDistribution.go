@@ -46,6 +46,12 @@ type UpdateDistributionInput struct {
 	// distribution.
 	CacheBehaviors []types.CacheBehaviorPerPath
 
+	// The name of the SSL/TLS certificate that you want to attach to the
+	// distribution. Only certificates with a status of ISSUED can be attached to a
+	// distribution. Use the GetCertificates (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html)
+	// action to get a list of certificate names that you can specify.
+	CertificateName *string
+
 	// An object that describes the default cache behavior for the distribution.
 	DefaultCacheBehavior *types.CacheBehavior
 
@@ -56,6 +62,16 @@ type UpdateDistributionInput struct {
 	// Lightsail instance, bucket, or load balancer. The distribution pulls, caches,
 	// and serves content from the origin.
 	Origin *types.InputOrigin
+
+	// Indicates whether the default SSL/TLS certificate is attached to the
+	// distribution. The default value is true . When true , the distribution uses the
+	// default domain name such as d111111abcdef8.cloudfront.net . Set this value to
+	// false to attach a new certificate to the distribution.
+	UseDefaultCertificate *bool
+
+	// Use this parameter to update the minimum TLS protocol version for the SSL/TLS
+	// certificate that's attached to the distribution.
+	ViewerMinimumTlsProtocolVersion types.ViewerMinimumTlsProtocolVersionEnum
 
 	noSmithyDocumentSerde
 }

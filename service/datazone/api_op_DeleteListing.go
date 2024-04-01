@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deletes a listing (a record of an asset at a given time).
 func (c *Client) DeleteListing(ctx context.Context, params *DeleteListingInput, optFns ...func(*Options)) (*DeleteListingOutput, error) {
 	if params == nil {
 		params = &DeleteListingInput{}
@@ -27,12 +28,12 @@ func (c *Client) DeleteListing(ctx context.Context, params *DeleteListingInput, 
 
 type DeleteListingInput struct {
 
-	//
+	// The ID of the Amazon DataZone domain.
 	//
 	// This member is required.
 	DomainIdentifier *string
 
-	//
+	// The ID of the listing to be deleted.
 	//
 	// This member is required.
 	Identifier *string

@@ -495,6 +495,63 @@ func (ListingStatus) Values() []ListingStatus {
 	}
 }
 
+type MetadataGenerationRunStatus string
+
+// Enum values for MetadataGenerationRunStatus
+const (
+	MetadataGenerationRunStatusSubmitted  MetadataGenerationRunStatus = "SUBMITTED"
+	MetadataGenerationRunStatusInProgress MetadataGenerationRunStatus = "IN_PROGRESS"
+	MetadataGenerationRunStatusCanceled   MetadataGenerationRunStatus = "CANCELED"
+	MetadataGenerationRunStatusSucceeded  MetadataGenerationRunStatus = "SUCCEEDED"
+	MetadataGenerationRunStatusFailed     MetadataGenerationRunStatus = "FAILED"
+)
+
+// Values returns all known values for MetadataGenerationRunStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataGenerationRunStatus) Values() []MetadataGenerationRunStatus {
+	return []MetadataGenerationRunStatus{
+		"SUBMITTED",
+		"IN_PROGRESS",
+		"CANCELED",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type MetadataGenerationRunType string
+
+// Enum values for MetadataGenerationRunType
+const (
+	MetadataGenerationRunTypeBusinessDescriptions MetadataGenerationRunType = "BUSINESS_DESCRIPTIONS"
+)
+
+// Values returns all known values for MetadataGenerationRunType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataGenerationRunType) Values() []MetadataGenerationRunType {
+	return []MetadataGenerationRunType{
+		"BUSINESS_DESCRIPTIONS",
+	}
+}
+
+type MetadataGenerationTargetType string
+
+// Enum values for MetadataGenerationTargetType
+const (
+	MetadataGenerationTargetTypeAsset MetadataGenerationTargetType = "ASSET"
+)
+
+// Values returns all known values for MetadataGenerationTargetType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MetadataGenerationTargetType) Values() []MetadataGenerationTargetType {
+	return []MetadataGenerationTargetType{
+		"ASSET",
+	}
+}
+
 type NotificationResourceType string
 
 // Enum values for NotificationResourceType

@@ -1952,6 +1952,12 @@ type InputOrigin struct {
 	// The AWS Region name of the origin resource.
 	RegionName RegionName
 
+	// The amount of time, in seconds, that the distribution waits for a response
+	// after forwarding a request to the origin. The minimum timeout is 1 second, the
+	// maximum is 60 seconds, and the default (if you don't specify otherwise) is 30
+	// seconds.
+	ResponseTimeout *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -2642,6 +2648,10 @@ type LightsailDistribution struct {
 	// .
 	Tags []Tag
 
+	// The minimum TLS protocol version that the distribution can use to communicate
+	// with viewers.
+	ViewerMinimumTlsProtocolVersion *string
+
 	noSmithyDocumentSerde
 }
 
@@ -3144,6 +3154,12 @@ type Origin struct {
 
 	// The resource type of the origin resource (Instance).
 	ResourceType ResourceType
+
+	// The amount of time, in seconds, that the distribution waits for a response
+	// after forwarding a request to the origin. The minimum timeout is 1 second, the
+	// maximum is 60 seconds, and the default (if you don't specify otherwise) is 30
+	// seconds.
+	ResponseTimeout *int32
 
 	noSmithyDocumentSerde
 }

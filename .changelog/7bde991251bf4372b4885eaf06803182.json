@@ -1,0 +1,8 @@
+{
+    "id": "7bde9912-51bf-4372-b488-5eaf06803182",
+    "type": "feature",
+    "description": "This release supports the feature of AI recommendations for descriptions to enrich the business data catalog in Amazon DataZone.",
+    "modules": [
+        "service/datazone"
+    ]
+}

@@ -20,7 +20,7 @@ import (
 // interruptions and failures. If unhealthy node replacement is on, Amazon EMR
 // notifies YARN and other applications on the cluster to stop scheduling tasks
 // with these nodes, moves the data, and then terminates the nodes. For more
-// information, see graceful node replacement (https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_UnhealthyNodeReplacement.html)
+// information, see graceful node replacement (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html)
 // in the Amazon EMR Management Guide.
 func (c *Client) SetUnhealthyNodeReplacement(ctx context.Context, params *SetUnhealthyNodeReplacementInput, optFns ...func(*Options)) (*SetUnhealthyNodeReplacementOutput, error) {
 	if params == nil {

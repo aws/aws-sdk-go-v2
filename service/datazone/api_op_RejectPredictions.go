@@ -44,13 +44,14 @@ type RejectPredictionsInput struct {
 	// of the request.
 	ClientToken *string
 
-	//
+	// Specifies the prediction (aka, the automatically generated piece of metadata)
+	// and the target (for example, a column name) that can be rejected.
 	RejectChoices []types.RejectChoice
 
-	//
+	// Specifies the rule (or the conditions) under which a prediction can be rejected.
 	RejectRule *types.RejectRule
 
-	//
+	// The revision that is to be made to the asset.
 	Revision *string
 
 	noSmithyDocumentSerde
@@ -58,17 +59,17 @@ type RejectPredictionsInput struct {
 
 type RejectPredictionsOutput struct {
 
-	//
+	// The ID of the asset.
 	//
 	// This member is required.
 	AssetId *string
 
-	//
+	// The revision that is to be made to the asset.
 	//
 	// This member is required.
 	AssetRevision *string
 
-	//
+	// The ID of the Amazon DataZone domain.
 	//
 	// This member is required.
 	DomainId *string

@@ -3,6 +3,7 @@
     "type": "release",
     "description": "New AWS service client module",
     "modules": [
-        "internal/protocoltest/smithyrpcv2cbor"
+        "internal/protocoltest/smithyrpcv2cbor",
+        "service/deadline"
     ]
 }

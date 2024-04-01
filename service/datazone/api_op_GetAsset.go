@@ -97,7 +97,7 @@ type GetAssetOutput struct {
 	// The description of the Amazon DataZone asset.
 	Description *string
 
-	//
+	// The external ID of the asset.
 	ExternalIdentifier *string
 
 	// The timestamp of when the first revision of the asset was created.
@@ -109,7 +109,7 @@ type GetAssetOutput struct {
 	// The business glossary terms attached to the asset.
 	GlossaryTerms []string
 
-	//
+	// The listing of the asset.
 	Listing *types.AssetListingDetails
 
 	// The read-only metadata forms attached to the asset.

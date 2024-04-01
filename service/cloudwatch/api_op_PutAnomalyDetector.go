@@ -12,8 +12,12 @@ import (
 )
 
 // Creates an anomaly detection model for a CloudWatch metric. You can use the
-// model to display a band of expected normal values when the metric is graphed.
-// For more information, see CloudWatch Anomaly Detection (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html)
+// model to display a band of expected normal values when the metric is graphed. If
+// you have enabled unified cross-account observability, and this account is a
+// monitoring account, the metric can be in the same account or a source account.
+// You can specify the account ID in the object you specify in the
+// SingleMetricAnomalyDetector parameter. For more information, see CloudWatch
+// Anomaly Detection (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html)
 // .
 func (c *Client) PutAnomalyDetector(ctx context.Context, params *PutAnomalyDetectorInput, optFns ...func(*Options)) (*PutAnomalyDetectorOutput, error) {
 	if params == nil {
@@ -72,7 +76,7 @@ type PutAnomalyDetectorInput struct {
 	//   - MetricName
 	//   - Namespace
 	//   - Stat
-	//   - the MetricMatchAnomalyDetector parameters of PutAnomalyDetectorInput
+	//   - the MetricMathAnomalyDetector parameters of PutAnomalyDetectorInput
 	// Instead, specify the single metric anomaly detector attributes as part of the
 	// property SingleMetricAnomalyDetector .
 	SingleMetricAnomalyDetector *types.SingleMetricAnomalyDetector

@@ -1,0 +1,8 @@
+{
+    "id": "de83a941-eda3-41ff-866a-53fc307ca16d",
+    "type": "feature",
+    "description": "This release adds support for CloudWatch Anomaly Detection on cross-account metrics. SingleMetricAnomalyDetector and MetricDataQuery inputs to Anomaly Detection APIs now take an optional AccountId field.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

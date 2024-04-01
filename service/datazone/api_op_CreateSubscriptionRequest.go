@@ -41,7 +41,7 @@ type CreateSubscriptionRequestInput struct {
 	// This member is required.
 	RequestReason *string
 
-	//
+	// The published asset for which the subscription grant is to be created.
 	//
 	// This member is required.
 	SubscribedListings []types.SubscribedListingInput
@@ -91,7 +91,7 @@ type CreateSubscriptionRequestOutput struct {
 	// This member is required.
 	Status types.SubscriptionRequestStatus
 
-	//
+	// The published asset for which the subscription grant is to be created.
 	//
 	// This member is required.
 	SubscribedListings []types.SubscribedListing

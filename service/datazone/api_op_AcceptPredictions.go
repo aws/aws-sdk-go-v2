@@ -35,12 +35,13 @@ type AcceptPredictionsInput struct {
 	// This member is required.
 	DomainIdentifier *string
 
-	//
+	// The identifier of the asset.
 	//
 	// This member is required.
 	Identifier *string
 
-	//
+	// Specifies the prediction (aka, the automatically generated piece of metadata)
+	// and the target (for example, a column name) that can be accepted.
 	AcceptChoices []types.AcceptChoice
 
 	// Specifies the rule (or the conditions) under which a prediction can be accepted.
@@ -50,7 +51,7 @@ type AcceptPredictionsInput struct {
 	// field is automatically populated if not provided.
 	ClientToken *string
 
-	//
+	// The revision that is to be made to the asset.
 	Revision *string
 
 	noSmithyDocumentSerde
@@ -58,17 +59,17 @@ type AcceptPredictionsInput struct {
 
 type AcceptPredictionsOutput struct {
 
-	//
+	// The ID of the asset.
 	//
 	// This member is required.
 	AssetId *string
 
-	//
+	// The identifier of the Amazon DataZone domain.
 	//
 	// This member is required.
 	DomainId *string
 
-	//
+	// The revision that is to be made to the asset.
 	//
 	// This member is required.
 	Revision *string

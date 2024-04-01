@@ -86,6 +86,18 @@ func TestCheckSnapshot_AcceptSubscriptionRequest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelMetadataGenerationRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelMetadataGenerationRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelMetadataGenerationRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelSubscription(context.Background(), nil, func(o *Options) {
@@ -686,6 +698,18 @@ func TestCheckSnapshot_GetListing(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMetadataGenerationRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMetadataGenerationRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMetadataGenerationRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
@@ -859,6 +883,18 @@ func TestCheckSnapshot_ListEnvironments(t *testing.T) {
 	_, err := svc.ListEnvironments(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEnvironments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMetadataGenerationRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMetadataGenerationRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMetadataGenerationRuns")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1082,6 +1118,18 @@ func TestCheckSnapshot_StartDataSourceRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartMetadataGenerationRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMetadataGenerationRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMetadataGenerationRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -1266,6 +1314,18 @@ func TestUpdateSnapshot_AcceptSubscriptionRequest(t *testing.T) {
 	_, err := svc.AcceptSubscriptionRequest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AcceptSubscriptionRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelMetadataGenerationRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelMetadataGenerationRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelMetadataGenerationRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1873,6 +1933,18 @@ func TestUpdateSnapshot_GetListing(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMetadataGenerationRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMetadataGenerationRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMetadataGenerationRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
@@ -2046,6 +2118,18 @@ func TestUpdateSnapshot_ListEnvironments(t *testing.T) {
 	_, err := svc.ListEnvironments(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEnvironments")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMetadataGenerationRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMetadataGenerationRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMetadataGenerationRuns")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2262,6 +2346,18 @@ func TestUpdateSnapshot_StartDataSourceRun(t *testing.T) {
 	_, err := svc.StartDataSourceRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartDataSourceRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartMetadataGenerationRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMetadataGenerationRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMetadataGenerationRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

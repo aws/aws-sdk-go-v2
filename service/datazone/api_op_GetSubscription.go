@@ -70,7 +70,7 @@ type GetSubscriptionOutput struct {
 	// This member is required.
 	Status types.SubscriptionStatus
 
-	//
+	// The details of the published asset for which the subscription grant is created.
 	//
 	// This member is required.
 	SubscribedListing *types.SubscribedListing

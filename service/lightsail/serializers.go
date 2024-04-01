@@ -9432,6 +9432,11 @@ func awsAwsjson11_serializeDocumentInputOrigin(v *types.InputOrigin, value smith
 		ok.String(string(v.RegionName))
 	}
 
+	if v.ResponseTimeout != nil {
+		ok := object.Key("responseTimeout")
+		ok.Integer(*v.ResponseTimeout)
+	}
+
 	return nil
 }
 
@@ -10270,6 +10275,11 @@ func awsAwsjson11_serializeOpDocumentCreateDistributionInput(v *CreateDistributi
 		}
 	}
 
+	if v.CertificateName != nil {
+		ok := object.Key("certificateName")
+		ok.String(*v.CertificateName)
+	}
+
 	if v.DefaultCacheBehavior != nil {
 		ok := object.Key("defaultCacheBehavior")
 		if err := awsAwsjson11_serializeDocumentCacheBehavior(v.DefaultCacheBehavior, ok); err != nil {
@@ -10299,6 +10309,11 @@ func awsAwsjson11_serializeOpDocumentCreateDistributionInput(v *CreateDistributi
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ViewerMinimumTlsProtocolVersion) > 0 {
+		ok := object.Key("viewerMinimumTlsProtocolVersion")
+		ok.String(string(v.ViewerMinimumTlsProtocolVersion))
 	}
 
 	return nil
@@ -12912,6 +12927,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDistributionInput(v *UpdateDistributi
 		}
 	}
 
+	if v.CertificateName != nil {
+		ok := object.Key("certificateName")
+		ok.String(*v.CertificateName)
+	}
+
 	if v.DefaultCacheBehavior != nil {
 		ok := object.Key("defaultCacheBehavior")
 		if err := awsAwsjson11_serializeDocumentCacheBehavior(v.DefaultCacheBehavior, ok); err != nil {
@@ -12934,6 +12954,16 @@ func awsAwsjson11_serializeOpDocumentUpdateDistributionInput(v *UpdateDistributi
 		if err := awsAwsjson11_serializeDocumentInputOrigin(v.Origin, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.UseDefaultCertificate != nil {
+		ok := object.Key("useDefaultCertificate")
+		ok.Boolean(*v.UseDefaultCertificate)
+	}
+
+	if len(v.ViewerMinimumTlsProtocolVersion) > 0 {
+		ok := object.Key("viewerMinimumTlsProtocolVersion")
+		ok.String(string(v.ViewerMinimumTlsProtocolVersion))
 	}
 
 	return nil

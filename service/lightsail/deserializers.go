@@ -28124,6 +28124,15 @@ func awsAwsjson11_deserializeDocumentLightsailDistribution(v **types.LightsailDi
 				return err
 			}
 
+		case "viewerMinimumTlsProtocolVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.ViewerMinimumTlsProtocolVersion = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -30084,6 +30093,19 @@ func awsAwsjson11_deserializeDocumentOrigin(v **types.Origin, value interface{})
 					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = types.ResourceType(jtv)
+			}
+
+		case "responseTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResponseTimeout = ptr.Int32(int32(i64))
 			}
 
 		default:

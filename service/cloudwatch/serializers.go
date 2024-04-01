@@ -3040,6 +3040,11 @@ func awsAwsquery_serializeDocumentSingleMetricAnomalyDetector(v *types.SingleMet
 	object := value.Object()
 	_ = object
 
+	if v.AccountId != nil {
+		objectKey := object.Key("AccountId")
+		objectKey.String(*v.AccountId)
+	}
+
 	if v.Dimensions != nil {
 		objectKey := object.Key("Dimensions")
 		if err := awsAwsquery_serializeDocumentDimensions(v.Dimensions, objectKey); err != nil {

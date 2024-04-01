@@ -106,7 +106,7 @@ type GetDataSourceOutput struct {
 	// to be also automatically published to the catalog.
 	PublishOnImport *bool
 
-	//
+	// The recommendation configuration of the data source.
 	Recommendation *types.RecommendationConfiguration
 
 	// The schedule of the data source runs.

@@ -61,7 +61,7 @@ type SearchInput struct {
 	// The identifier of the owning project specified for the search.
 	OwningProjectIdentifier *string
 
-	//
+	// The details of the search.
 	SearchIn []types.SearchInItem
 
 	// Specifies the text for which to search.

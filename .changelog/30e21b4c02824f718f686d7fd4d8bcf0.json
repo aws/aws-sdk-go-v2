@@ -1,0 +1,8 @@
+{
+    "id": "30e21b4c-0282-4f71-8f68-6d7fd4d8bcf0",
+    "type": "documentation",
+    "description": "This release fixes a broken link in the documentation.",
+    "modules": [
+        "service/emr"
+    ]
+}

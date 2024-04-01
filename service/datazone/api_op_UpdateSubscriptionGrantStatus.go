@@ -109,7 +109,7 @@ type UpdateSubscriptionGrantStatusOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	//
+	// The details of the asset for which the subscription grant is created.
 	Assets []types.SubscribedAsset
 
 	// The identifier of the subscription.

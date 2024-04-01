@@ -35,7 +35,7 @@ type SearchTypesInput struct {
 	// This member is required.
 	DomainIdentifier *string
 
-	//
+	// Specifies whether the search is managed.
 	//
 	// This member is required.
 	Managed *bool
@@ -61,7 +61,7 @@ type SearchTypesInput struct {
 	// SearchTypes to list the next set of results.
 	NextToken *string
 
-	//
+	// The details of the search.
 	SearchIn []types.SearchInItem
 
 	// Specifies the text for which to search.

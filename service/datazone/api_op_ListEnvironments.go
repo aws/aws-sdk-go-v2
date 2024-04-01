@@ -59,7 +59,7 @@ type ListEnvironmentsInput struct {
 	// environments.
 	MaxResults *int32
 
-	//
+	// The name of the environment.
 	Name *string
 
 	// When the number of environments is greater than the default value for the

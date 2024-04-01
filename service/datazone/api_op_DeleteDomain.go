@@ -38,7 +38,7 @@ type DeleteDomainInput struct {
 	// of the request.
 	ClientToken *string
 
-	// Optional flag to delete all child entities within the domain
+	// Specifies the optional flag to delete all child entities within the domain.
 	SkipDeletionCheck *bool
 
 	noSmithyDocumentSerde

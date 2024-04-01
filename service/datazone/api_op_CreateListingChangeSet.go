@@ -11,6 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Publishes a listing (a record of an asset at a given time) or removes a listing
+// from the catalog.
 func (c *Client) CreateListingChangeSet(ctx context.Context, params *CreateListingChangeSetInput, optFns ...func(*Options)) (*CreateListingChangeSetOutput, error) {
 	if params == nil {
 		params = &CreateListingChangeSetInput{}
@@ -28,30 +30,31 @@ func (c *Client) CreateListingChangeSet(ctx context.Context, params *CreateListi
 
 type CreateListingChangeSetInput struct {
 
-	//
+	// Specifies whether to publish or unpublish a listing.
 	//
 	// This member is required.
 	Action types.ChangeAction
 
-	//
+	// The ID of the Amazon DataZone domain.
 	//
 	// This member is required.
 	DomainIdentifier *string
 
-	//
+	// The ID of the asset.
 	//
 	// This member is required.
 	EntityIdentifier *string
 
-	//
+	// The type of an entity.
 	//
 	// This member is required.
 	EntityType types.EntityType
 
-	//
+	// A unique, case-sensitive identifier that is provided to ensure the idempotency
+	// of the request.
 	ClientToken *string
 
-	//
+	// The revision of an asset.
 	EntityRevision *string
 
 	noSmithyDocumentSerde
@@ -59,17 +62,17 @@ type CreateListingChangeSetInput struct {
 
 type CreateListingChangeSetOutput struct {
 
-	//
+	// The ID of the listing (a record of an asset at a given time).
 	//
 	// This member is required.
 	ListingId *string
 
-	//
+	// The revision of a listing.
 	//
 	// This member is required.
 	ListingRevision *string
 
-	//
+	// Specifies the status of the listing.
 	//
 	// This member is required.
 	Status types.ListingStatus

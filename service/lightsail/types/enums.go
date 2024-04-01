@@ -2076,3 +2076,26 @@ func (TreatMissingData) Values() []TreatMissingData {
 		"missing",
 	}
 }
+
+type ViewerMinimumTlsProtocolVersionEnum string
+
+// Enum values for ViewerMinimumTlsProtocolVersionEnum
+const (
+	ViewerMinimumTlsProtocolVersionEnumTLSv112016 ViewerMinimumTlsProtocolVersionEnum = "TLSv1.1_2016"
+	ViewerMinimumTlsProtocolVersionEnumTLSv122018 ViewerMinimumTlsProtocolVersionEnum = "TLSv1.2_2018"
+	ViewerMinimumTlsProtocolVersionEnumTLSv122019 ViewerMinimumTlsProtocolVersionEnum = "TLSv1.2_2019"
+	ViewerMinimumTlsProtocolVersionEnumTLSv122021 ViewerMinimumTlsProtocolVersionEnum = "TLSv1.2_2021"
+)
+
+// Values returns all known values for ViewerMinimumTlsProtocolVersionEnum. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ViewerMinimumTlsProtocolVersionEnum) Values() []ViewerMinimumTlsProtocolVersionEnum {
+	return []ViewerMinimumTlsProtocolVersionEnum{
+		"TLSv1.1_2016",
+		"TLSv1.2_2018",
+		"TLSv1.2_2019",
+		"TLSv1.2_2021",
+	}
+}

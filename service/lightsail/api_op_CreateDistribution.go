@@ -66,6 +66,11 @@ type CreateDistributionInput struct {
 	// distribution.
 	CacheBehaviors []types.CacheBehaviorPerPath
 
+	// The name of the SSL/TLS certificate that you want to attach to the
+	// distribution. Use the GetCertificates (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html)
+	// action to get a list of certificate names that you can specify.
+	CertificateName *string
+
 	// The IP address type for the distribution. The possible values are ipv4 for IPv4
 	// only, and dualstack for IPv4 and IPv6. The default value is dualstack .
 	IpAddressType types.IpAddressType
@@ -73,6 +78,9 @@ type CreateDistributionInput struct {
 	// The tag keys and optional values to add to the distribution during create. Use
 	// the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
+
+	// The minimum TLS protocol version for the SSL/TLS certificate.
+	ViewerMinimumTlsProtocolVersion types.ViewerMinimumTlsProtocolVersionEnum
 
 	noSmithyDocumentSerde
 }

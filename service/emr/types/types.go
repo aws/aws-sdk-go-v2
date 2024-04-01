@@ -339,7 +339,8 @@ type Cluster struct {
 	// the private DNS name. On a public subnet, this is the public DNS name.
 	MasterPublicDnsName *string
 
-	// The name of the cluster.
+	// The name of the cluster. This parameter can't contain the characters <, >, $,
+	// |, or ` (backtick).
 	Name *string
 
 	// An approximation of the cost of the cluster, represented in m1.small/hours.
@@ -1737,7 +1738,7 @@ type JobFlowInstancesConfig struct {
 	InstanceGroups []InstanceGroupConfig
 
 	// Specifies whether the cluster should remain available after completing all
-	// steps. Defaults to true . For more information about configuring cluster
+	// steps. Defaults to false . For more information about configuring cluster
 	// termination, see Control Cluster Termination (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html)
 	// in the EMR Management Guide.
 	KeepJobFlowAliveWhenNoSteps *bool

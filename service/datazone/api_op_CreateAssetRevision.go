@@ -120,7 +120,7 @@ type CreateAssetRevisionOutput struct {
 	// The revised asset description.
 	Description *string
 
-	//
+	// The external identifier of the asset.
 	ExternalIdentifier *string
 
 	// The timestamp of when the first asset revision occured.
@@ -132,7 +132,7 @@ type CreateAssetRevisionOutput struct {
 	// The glossary terms that were attached to the asset as part of asset revision.
 	GlossaryTerms []string
 
-	//
+	// The details of an asset published in an Amazon DataZone catalog.
 	Listing *types.AssetListingDetails
 
 	// The configuration of the automatically generated business-friendly metadata for

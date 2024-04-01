@@ -57,7 +57,7 @@ type CreateAssetInput struct {
 	// Asset description.
 	Description *string
 
-	//
+	// The external identifier of the asset.
 	ExternalIdentifier *string
 
 	// Metadata forms attached to the asset.
@@ -127,7 +127,7 @@ type CreateAssetOutput struct {
 	// The description of the created asset.
 	Description *string
 
-	//
+	// The external identifier of the asset.
 	ExternalIdentifier *string
 
 	// The timestamp of when the first revision of the asset took place.
@@ -139,7 +139,7 @@ type CreateAssetOutput struct {
 	// The glossary terms that are attached to the created asset.
 	GlossaryTerms []string
 
-	//
+	// The details of an asset published in an Amazon DataZone catalog.
 	Listing *types.AssetListingDetails
 
 	// The configuration of the automatically generated business-friendly metadata for

@@ -77,7 +77,8 @@ type CreateProjectOutput struct {
 	// The description of the project.
 	Description *string
 
-	// Reasons for failed project deletion
+	// Specifies the error message that is returned if the operation cannot be
+	// successfully completed.
 	FailureReasons []types.ProjectDeletionError
 
 	// The glossary terms that can be used in the project.
@@ -86,7 +87,7 @@ type CreateProjectOutput struct {
 	// The timestamp of when the project was last updated.
 	LastUpdatedAt *time.Time
 
-	// Status of the project
+	// The status of the Amazon DataZone project that was created.
 	ProjectStatus types.ProjectStatus
 
 	// Metadata pertaining to the operation's result.

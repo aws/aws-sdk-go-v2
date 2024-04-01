@@ -43,7 +43,7 @@ type ListProjectsInput struct {
 	// to ListProjects to list the next set of projects.
 	MaxResults *int32
 
-	//
+	// The name of the project.
 	Name *string
 
 	// When the number of projects is greater than the default value for the MaxResults
