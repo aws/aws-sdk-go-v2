@@ -4324,6 +4324,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tag keys and optional values to add to the distribution during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
+                },
+                "certificateName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the SSL/TLS certificate that you want to attach to the distribution.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html\">GetCertificates</a> action to get a list of certificate names that you can specify.</p>"
+                    }
+                },
+                "viewerMinimumTlsProtocolVersion": {
+                    "target": "com.amazonaws.lightsail#ViewerMinimumTlsProtocolVersionEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum TLS protocol version for the SSL/TLS certificate.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13956,6 +13968,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol that your Amazon Lightsail distribution uses when establishing a connection\n      with your origin to pull content.</p>"
                     }
+                },
+                "responseTimeout": {
+                    "target": "com.amazonaws.lightsail#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after forwarding a request to the origin.\n    The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15197,6 +15215,12 @@
                     "target": "com.amazonaws.lightsail#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tag keys and optional values for the resource. For more information about tags in\n      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
+                    }
+                },
+                "viewerMinimumTlsProtocolVersion": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum TLS protocol version that the distribution can use to communicate with viewers.</p>"
                     }
                 }
             },
@@ -18737,6 +18761,12 @@
                     "target": "com.amazonaws.lightsail#OriginProtocolPolicyEnum",
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol that your Amazon Lightsail distribution uses when establishing a connection\n      with your origin to pull content.</p>"
+                    }
+                },
+                "responseTimeout": {
+                    "target": "com.amazonaws.lightsail#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after forwarding a request to the origin.\n    The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
                     }
                 }
             },
@@ -22906,6 +22936,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether to enable the distribution.</p>"
                     }
+                },
+                "viewerMinimumTlsProtocolVersion": {
+                    "target": "com.amazonaws.lightsail#ViewerMinimumTlsProtocolVersionEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to update the minimum TLS protocol version for the SSL/TLS certificate that's attached to the distribution.</p>"
+                    }
+                },
+                "certificateName": {
+                    "target": "com.amazonaws.lightsail#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the SSL/TLS certificate that you want to attach to the distribution.</p>\n         <p>Only certificates with a status of <code>ISSUED</code> can be attached to a distribution.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html\">GetCertificates</a> action to get a list of certificate names that you can specify.</p>"
+                    }
+                },
+                "useDefaultCertificate": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the default SSL/TLS certificate is attached to the distribution. The default value is <code>true</code>. When <code>true</code>, the distribution uses the default domain name such as <code>d111111abcdef8.cloudfront.net</code>.</p>\n         <p> Set this value to <code>false</code> to attach a new certificate to the distribution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -23381,6 +23429,35 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lightsail#ViewerMinimumTlsProtocolVersionEnum": {
+            "type": "enum",
+            "members": {
+                "TLSv11_2016": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLSv1.1_2016"
+                    }
+                },
+                "TLSv12_2018": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLSv1.2_2018"
+                    }
+                },
+                "TLSv12_2019": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLSv1.2_2019"
+                    }
+                },
+                "TLSv12_2021": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLSv1.2_2021"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#boolean": {

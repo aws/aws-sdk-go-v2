@@ -885,7 +885,7 @@
                 "Name": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cluster.</p>"
+                        "smithy.api#documentation": "<p>The name of the cluster. This parameter can't contain the characters <, >, $, |, or ` (backtick).</p>"
                     }
                 },
                 "Status": {
@@ -6111,7 +6111,7 @@
                 "KeepJobFlowAliveWhenNoSteps": {
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the cluster should remain available after completing all steps.\n         Defaults to <code>true</code>. For more information about configuring cluster termination,\n         see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control Cluster Termination</a> in the <i>EMR Management\n         Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the cluster should remain available after completing all steps.\n         Defaults to <code>false</code>. For more information about configuring cluster termination,\n         see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control Cluster Termination</a> in the <i>EMR Management\n         Guide</i>.</p>"
                     }
                 },
                 "TerminationProtected": {
@@ -9056,7 +9056,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specify whether to enable unhealthy node replacement, which lets Amazon EMR gracefully \n         replace core nodes on a cluster if any nodes become unhealthy. For example, a node becomes \n         unhealthy if disk usage is above 90%. If unhealthy node replacement is on and <code>TerminationProtected</code> are off, \n         Amazon EMR immediately terminates the unhealthy core nodes. To use unhealthy node replacement \n         and retain unhealthy core nodes, use  to turn on\n         termination protection. In such cases, Amazon EMR adds \n         the unhealthy nodes to a denylist, reducing job interruptions and failures.</p>\n         <p>If unhealthy node replacement is on, Amazon EMR \n         notifies YARN and other applications on the cluster to stop scheduling tasks \n         with these nodes, moves the data, and then terminates the nodes.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_UnhealthyNodeReplacement.html\">graceful \n         node replacement</a> in the <i>Amazon EMR Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Specify whether to enable unhealthy node replacement, which lets Amazon EMR gracefully \n         replace core nodes on a cluster if any nodes become unhealthy. For example, a node becomes \n         unhealthy if disk usage is above 90%. If unhealthy node replacement is on and <code>TerminationProtected</code> are off, \n         Amazon EMR immediately terminates the unhealthy core nodes. To use unhealthy node replacement \n         and retain unhealthy core nodes, use  to turn on\n         termination protection. In such cases, Amazon EMR adds \n         the unhealthy nodes to a denylist, reducing job interruptions and failures.</p>\n         <p>If unhealthy node replacement is on, Amazon EMR \n         notifies YARN and other applications on the cluster to stop scheduling tasks \n         with these nodes, moves the data, and then terminates the nodes.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-node-replacement.html\">graceful \n         node replacement</a> in the <i>Amazon EMR Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.emr#SetUnhealthyNodeReplacementInput": {
