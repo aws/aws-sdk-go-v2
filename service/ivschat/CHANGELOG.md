@@ -1,3 +1,7 @@
+# v1.12.5 (2024-04-02)
+
+* **Documentation**: Doc-only update. Changed "Resources" to "Key Concepts" in docs and updated text.
+
 # v1.12.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.41.7 (2024-04-02)
+
+* **Documentation**: Documentation only update for Amazon ECS.
+
 # v1.41.6 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

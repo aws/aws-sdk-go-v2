@@ -1,8 +1,0 @@
-{
-    "id": "716b7599-8f81-46fa-805e-8ed502a81954",
-    "type": "documentation",
-    "description": "Doc-only update. Changed \"Resources\" to \"Key Concepts\" in docs and updated text.",
-    "modules": [
-        "service/ivschat"
-    ]
-}

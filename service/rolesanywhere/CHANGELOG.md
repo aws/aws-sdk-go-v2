@@ -1,3 +1,7 @@
+# v1.10.0 (2024-04-02)
+
+* **Feature**: This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs.
+
 # v1.9.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

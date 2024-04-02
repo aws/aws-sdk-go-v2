@@ -1,8 +1,0 @@
-{
-    "id": "b9f37010-5a92-4ed5-9a5b-9ea7c9576c52",
-    "type": "feature",
-    "description": "This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs.",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

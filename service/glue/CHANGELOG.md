@@ -1,3 +1,7 @@
+# v1.78.0 (2024-04-02)
+
+* **Feature**: Adding View related fields to responses of read-only Table APIs.
+
 # v1.77.5 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

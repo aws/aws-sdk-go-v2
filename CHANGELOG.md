@@ -1,3 +1,17 @@
+# Release (2024-04-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.41.7](service/ecs/CHANGELOG.md#v1417-2024-04-02)
+  * **Documentation**: Documentation only update for Amazon ECS.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.78.0](service/glue/CHANGELOG.md#v1780-2024-04-02)
+  * **Feature**: Adding View related fields to responses of read-only Table APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.12.5](service/ivschat/CHANGELOG.md#v1125-2024-04-02)
+  * **Documentation**: Doc-only update. Changed "Resources" to "Key Concepts" in docs and updated text.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.10.0](service/rolesanywhere/CHANGELOG.md#v1100-2024-04-02)
+  * **Feature**: This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.47.2](service/securityhub/CHANGELOG.md#v1472-2024-04-02)
+  * **Documentation**: Documentation updates for AWS Security Hub
+
 # Release (2024-04-01)
 
 ## Module Highlights

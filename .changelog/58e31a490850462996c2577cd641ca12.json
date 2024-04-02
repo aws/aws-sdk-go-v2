@@ -1,8 +1,0 @@
-{
-    "id": "58e31a49-0850-4629-96c2-577cd641ca12",
-    "type": "feature",
-    "description": "Adding View related fields to responses of read-only Table APIs.",
-    "modules": [
-        "service/glue"
-    ]
-}
