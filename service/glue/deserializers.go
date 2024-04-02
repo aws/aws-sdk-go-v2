@@ -51401,6 +51401,15 @@ func awsAwsjson11_deserializeDocumentTable(v **types.Table, value interface{}) e
 				return err
 			}
 
+		case "IsMultiDialectView":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMultiDialectView = ptr.Bool(jtv)
+			}
+
 		case "IsRegisteredWithLakeFormation":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -51525,6 +51534,11 @@ func awsAwsjson11_deserializeDocumentTable(v **types.Table, value interface{}) e
 					return fmt.Errorf("expected VersionString to be of type string, got %T instead", value)
 				}
 				sv.VersionId = ptr.String(jtv)
+			}
+
+		case "ViewDefinition":
+			if err := awsAwsjson11_deserializeDocumentViewDefinition(&sv.ViewDefinition, value); err != nil {
+				return err
 			}
 
 		case "ViewExpandedText":
@@ -53372,6 +53386,211 @@ func awsAwsjson11_deserializeDocumentVersionMismatchException(v **types.VersionM
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentViewDefinition(v **types.ViewDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ViewDefinition
+	if *v == nil {
+		sv = &types.ViewDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Definer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnString to be of type string, got %T instead", value)
+				}
+				sv.Definer = ptr.String(jtv)
+			}
+
+		case "IsProtected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsProtected = ptr.Bool(jtv)
+			}
+
+		case "Representations":
+			if err := awsAwsjson11_deserializeDocumentViewRepresentationList(&sv.Representations, value); err != nil {
+				return err
+			}
+
+		case "SubObjects":
+			if err := awsAwsjson11_deserializeDocumentViewSubObjectsList(&sv.SubObjects, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentViewRepresentation(v **types.ViewRepresentation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ViewRepresentation
+	if *v == nil {
+		sv = &types.ViewRepresentation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Dialect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewDialect to be of type string, got %T instead", value)
+				}
+				sv.Dialect = types.ViewDialect(jtv)
+			}
+
+		case "DialectVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewDialectVersionString to be of type string, got %T instead", value)
+				}
+				sv.DialectVersion = ptr.String(jtv)
+			}
+
+		case "IsStale":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsStale = ptr.Bool(jtv)
+			}
+
+		case "ViewExpandedText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewTextString to be of type string, got %T instead", value)
+				}
+				sv.ViewExpandedText = ptr.String(jtv)
+			}
+
+		case "ViewOriginalText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViewTextString to be of type string, got %T instead", value)
+				}
+				sv.ViewOriginalText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentViewRepresentationList(v *[]types.ViewRepresentation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ViewRepresentation
+	if *v == nil {
+		cv = []types.ViewRepresentation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ViewRepresentation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentViewRepresentation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentViewSubObjectsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ArnString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -60588,6 +60807,24 @@ func awsAwsjson11_deserializeOpDocumentGetUnfilteredTableMetadataOutput(v **GetU
 		case "CellFilters":
 			if err := awsAwsjson11_deserializeDocumentColumnRowFilterList(&sv.CellFilters, value); err != nil {
 				return err
+			}
+
+		case "IsMultiDialectView":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsMultiDialectView = jtv
+			}
+
+		case "IsProtected":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsProtected = jtv
 			}
 
 		case "IsRegisteredWithLakeFormation":

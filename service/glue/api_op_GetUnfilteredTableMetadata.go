@@ -81,6 +81,16 @@ type GetUnfilteredTableMetadataOutput struct {
 	// A list of column row filters.
 	CellFilters []types.ColumnRowFilter
 
+	// Specifies whether the view supports the SQL dialects of one or more different
+	// query engines and can therefore be read by those engines.
+	IsMultiDialectView bool
+
+	// A flag that instructs the engine not to push user-provided operations into the
+	// logical plan of the view during query planning. However, if set this flag does
+	// not guarantee that the engine will comply. Refer to the engine's documentation
+	// to understand the guarantees provided, if any.
+	IsProtected bool
+
 	// A Boolean value that indicates whether the partition location is registered
 	// with Lake Formation.
 	IsRegisteredWithLakeFormation bool

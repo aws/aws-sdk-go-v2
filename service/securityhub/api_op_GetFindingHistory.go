@@ -38,20 +38,27 @@ type GetFindingHistoryInput struct {
 	FindingIdentifier *types.AwsSecurityFindingIdentifier
 
 	// An ISO 8601-formatted timestamp that indicates the end time of the requested
-	// finding history. A correctly formatted example is 2020-05-21T20:16:34.724Z . The
-	// value cannot contain spaces, and date and time should be separated by T . For
-	// more information, see RFC 3339 section 5.6, Internet Date/Time Format (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// . If you provide values for both StartTime and EndTime , Security Hub returns
-	// finding history for the specified time period. If you provide a value for
-	// StartTime but not for EndTime , Security Hub returns finding history from the
-	// StartTime to the time at which the API is called. If you provide a value for
-	// EndTime but not for StartTime , Security Hub returns finding history from the
-	// CreatedAt (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt)
+	// finding history. If you provide values for both StartTime and EndTime , Security
+	// Hub returns finding history for the specified time period. If you provide a
+	// value for StartTime but not for EndTime , Security Hub returns finding history
+	// from the StartTime to the time at which the API is called. If you provide a
+	// value for EndTime but not for StartTime , Security Hub returns finding history
+	// from the CreatedAt (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt)
 	// timestamp of the finding to the EndTime . If you provide neither StartTime nor
 	// EndTime , Security Hub returns finding history from the CreatedAt timestamp of
 	// the finding to the time at which the API is called. In all of these scenarios,
 	// the response is limited to 100 results, and the maximum time period is limited
-	// to 90 days.
+	// to 90 days. This field accepts only the specified formats. Timestamps can end
+	// with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
+	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
+	// Here are valid timestamp formats with examples:
+	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
+	//   )
+	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
+	//   2024-01-04T15:25:10.123456789+17:59 )
 	EndTime *time.Time
 
 	// The maximum number of results to be returned. If you don’t provide it, Security
@@ -64,21 +71,27 @@ type GetFindingHistoryInput struct {
 	// Security Hub returns up to 100 results of finding history for each request.
 	NextToken *string
 
-	// An ISO 8601-formatted timestamp that indicates the start time of the requested
-	// finding history. A correctly formatted example is 2020-05-21T20:16:34.724Z . The
-	// value cannot contain spaces, and date and time should be separated by T . For
-	// more information, see RFC 3339 section 5.6, Internet Date/Time Format (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// . If you provide values for both StartTime and EndTime , Security Hub returns
-	// finding history for the specified time period. If you provide a value for
-	// StartTime but not for EndTime , Security Hub returns finding history from the
-	// StartTime to the time at which the API is called. If you provide a value for
-	// EndTime but not for StartTime , Security Hub returns finding history from the
-	// CreatedAt (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt)
+	// A timestamp that indicates the start time of the requested finding history. If
+	// you provide values for both StartTime and EndTime , Security Hub returns finding
+	// history for the specified time period. If you provide a value for StartTime but
+	// not for EndTime , Security Hub returns finding history from the StartTime to
+	// the time at which the API is called. If you provide a value for EndTime but not
+	// for StartTime , Security Hub returns finding history from the CreatedAt (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt)
 	// timestamp of the finding to the EndTime . If you provide neither StartTime nor
 	// EndTime , Security Hub returns finding history from the CreatedAt timestamp of
 	// the finding to the time at which the API is called. In all of these scenarios,
 	// the response is limited to 100 results, and the maximum time period is limited
-	// to 90 days.
+	// to 90 days. This field accepts only the specified formats. Timestamps can end
+	// with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
+	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
+	// Here are valid timestamp formats with examples:
+	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
+	//   )
+	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
+	//   2024-01-04T15:25:10.123456789+17:59 )
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

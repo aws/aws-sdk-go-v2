@@ -64,22 +64,18 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 type RunTaskInput struct {
 
 	// The family and revision ( family:revision ) or full ARN of the task definition
-	// to run. If a revision isn't specified, the latest ACTIVE revision is used. When
-	// you create a policy for run-task, you can set the resource to be the latest task
-	// definition revision, or a specific revision. The full ARN value must match the
-	// value that you specified as the Resource of the principal's permissions policy.
-	// When you specify the policy resource as the latest task definition version (by
-	// setting the Resource in the policy to
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName ), then set
-	// this value to arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName
-	// . When you specify the policy resource as a specific task definition version (by
-	// setting the Resource in the policy to
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1 or
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:* ), then set
-	// this value to
-	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1 . For more
+	// to run. If a revision isn't specified, the latest ACTIVE revision is used. The
+	// full ARN value must match the value that you specified as the Resource of the
+	// principal's permissions policy. When you specify a task definition, you must
+	// either specify a specific revision, or all revisions in the ARN. To specify a
+	// specific revision, include the revision number in the ARN. For example, to
+	// specify revision 2, use
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:2 . To specify
+	// all revisions, use the wildcard (*) in the ARN. For example, to specify all
+	// revisions, use
+	// arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:* . For more
 	// information, see Policy Resources for Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources)
-	// in the Amazon Elastic Container Service developer Guide.
+	// in the Amazon Elastic Container Service Developer Guide.
 	//
 	// This member is required.
 	TaskDefinition *string

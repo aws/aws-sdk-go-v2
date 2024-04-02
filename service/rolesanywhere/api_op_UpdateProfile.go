@@ -38,7 +38,8 @@ type UpdateProfileInput struct {
 
 	// Used to determine how long sessions vended using this profile are valid for.
 	// See the Expiration section of the CreateSession API documentation (https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object)
-	// page for more details.
+	// page for more details. In requests, if this value is not provided, the default
+	// value will be 3600.
 	DurationSeconds *int32
 
 	// A list of managed policy ARNs that apply to the vended session credentials.

@@ -7653,6 +7653,10 @@ type Table struct {
 	// Catalog.
 	FederatedTable *FederatedTable
 
+	// Specifies whether the view supports the SQL dialects of one or more different
+	// query engines and can therefore be read by those engines.
+	IsMultiDialectView *bool
+
 	// Indicates whether the table has been registered with Lake Formation.
 	IsRegisteredWithLakeFormation bool
 
@@ -7697,6 +7701,10 @@ type Table struct {
 
 	// The ID of the table version.
 	VersionId *string
+
+	// A structure that contains all the information that defines the view, including
+	// the dialect or dialects for the view, and the query.
+	ViewDefinition *ViewDefinition
 
 	// Included for Apache Hive compatibility. Not used in the normal course of Glue
 	// operations.
@@ -8385,6 +8393,56 @@ type UserDefinedFunctionInput struct {
 
 	// The resource URIs for the function.
 	ResourceUris []ResourceUri
+
+	noSmithyDocumentSerde
+}
+
+// A structure containing details for representations.
+type ViewDefinition struct {
+
+	// The definer of a view in SQL.
+	Definer *string
+
+	// You can set this flag as true to instruct the engine not to push user-provided
+	// operations into the logical plan of the view during query planning. However,
+	// setting this flag does not guarantee that the engine will comply. Refer to the
+	// engine's documentation to understand the guarantees provided, if any.
+	IsProtected *bool
+
+	// A list of representations.
+	Representations []ViewRepresentation
+
+	// A list of table Amazon Resource Names (ARNs).
+	SubObjects []string
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains the dialect of the view, and the query that defines
+// the view.
+type ViewRepresentation struct {
+
+	// The dialect of the query engine.
+	Dialect ViewDialect
+
+	// The version of the dialect of the query engine. For example, 3.0.0.
+	DialectVersion *string
+
+	// Dialects marked as stale are no longer valid and must be updated before they
+	// can be queried in their respective query engines.
+	IsStale *bool
+
+	// The expanded SQL for the view. This SQL is used by engines while processing a
+	// query on a view. Engines may perform operations during view creation to
+	// transform ViewOriginalText to ViewExpandedText . For example:
+	//   - Fully qualify identifiers: SELECT * from table1 → SELECT * from db1.table1
+	ViewExpandedText *string
+
+	// The SELECT query provided by the customer during CREATE VIEW DDL . This SQL is
+	// not used during a query on a view ( ViewExpandedText is used instead).
+	// ViewOriginalText is used for cases like SHOW CREATE VIEW where users want to
+	// see the original DDL command that created the view.
+	ViewOriginalText *string
 
 	noSmithyDocumentSerde
 }

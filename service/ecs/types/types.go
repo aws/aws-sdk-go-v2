@@ -1557,12 +1557,18 @@ type DeploymentConfiguration struct {
 	//   service scheduler will wait for both the task to reach a healthy status and the
 	//   load balancer target group health check to return a healthy status before
 	//   counting the task towards the minimum healthy percent total.
-	// If a service is using either the blue/green ( CODE_DEPLOY ) or EXTERNAL
-	// deployment types and is running tasks that use the EC2 launch type, the minimum
-	// healthy percent value is set to the default value and is used to define the
-	// lower limit on the number of the tasks in the service that remain in the RUNNING
-	// state while the container instances are in the DRAINING state. If a service is
-	// using either the blue/green ( CODE_DEPLOY ) or EXTERNAL deployment types and is
+	// The default value for a replica service for minimumHealthyPercent is 100%. The
+	// default minimumHealthyPercent value for a service using the DAEMON service
+	// schedule is 0% for the CLI, the Amazon Web Services SDKs, and the APIs and 50%
+	// for the Amazon Web Services Management Console. The minimum number of healthy
+	// tasks during a deployment is the desiredCount multiplied by the
+	// minimumHealthyPercent /100, rounded up to the nearest integer value. If a
+	// service is using either the blue/green ( CODE_DEPLOY ) or EXTERNAL deployment
+	// types and is running tasks that use the EC2 launch type, the minimum healthy
+	// percent value is set to the default value and is used to define the lower limit
+	// on the number of the tasks in the service that remain in the RUNNING state
+	// while the container instances are in the DRAINING state. If a service is using
+	// either the blue/green ( CODE_DEPLOY ) or EXTERNAL deployment types and is
 	// running tasks that use the Fargate launch type, the minimum healthy percent
 	// value is not used, although it is returned when describing your service.
 	MinimumHealthyPercent *int32
