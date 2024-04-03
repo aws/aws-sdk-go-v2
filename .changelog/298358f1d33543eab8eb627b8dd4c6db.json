@@ -1,8 +1,0 @@
-{
-    "id": "298358f1-d335-43ea-b8eb-627b8dd4c6db",
-    "type": "feature",
-    "description": "This release adds visibilityStartTime and visibilityEndTime to DescribeContact and ListContacts responses.",
-    "modules": [
-        "service/groundstation"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "2fa6c842-8f33-4e30-9fe7-4ed93ef5647a",
-    "type": "feature",
-    "description": "Add Ruby 3.3 (ruby3.3) support to AWS Lambda",
-    "modules": [
-        "service/lambda"
-    ]
-}

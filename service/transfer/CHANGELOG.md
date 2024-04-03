@@ -1,3 +1,7 @@
+# v1.45.0 (2024-04-03)
+
+* **Feature**: Add ability to specify Security Policies for SFTP Connectors
+
 # v1.44.2 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

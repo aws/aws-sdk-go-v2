@@ -1,3 +1,25 @@
+# Release (2024-04-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.4.0](service/cleanroomsml/CHANGELOG.md#v140-2024-04-03)
+  * **Feature**: The release includes a public SDK for AWS Clean Rooms ML APIs, making them globally available to developers worldwide.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.49.0](service/cloudformation/CHANGELOG.md#v1490-2024-04-03)
+  * **Feature**: This release would return a new field - PolicyAction in cloudformation's existed DescribeChangeSetResponse, showing actions we are going to apply on the physical resource (e.g., Delete, Retain) according to the user's template
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.8.0](service/datazone/CHANGELOG.md#v180-2024-04-03)
+  * **Feature**: This release supports the feature of dataQuality to enrich asset with dataQualityResult in Amazon DataZone.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.34.0](service/docdb/CHANGELOG.md#v1340-2024-04-03)
+  * **Feature**: This release adds Global Cluster Switchover capability which enables you to change your global cluster's primary AWS Region, the region that serves writes, while preserving the replication between all regions in the global cluster.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.27.0](service/groundstation/CHANGELOG.md#v1270-2024-04-03)
+  * **Feature**: This release adds visibilityStartTime and visibilityEndTime to DescribeContact and ListContacts responses.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.54.0](service/lambda/CHANGELOG.md#v1540-2024-04-03)
+  * **Feature**: Add Ruby 3.3 (ruby3.3) support to AWS Lambda
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.50.0](service/medialive/CHANGELOG.md#v1500-2024-04-03)
+  * **Feature**: Cmaf Ingest outputs are now supported in Media Live
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.8.0](service/medicalimaging/CHANGELOG.md#v180-2024-04-03)
+  * **Feature**: SearchImageSets API now supports following enhancements - Additional support for searching on UpdatedAt and SeriesInstanceUID - Support for searching existing filters between dates/times - Support for sorting the search result by Ascending/Descending - Additional parameters returned in the response
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.45.0](service/transfer/CHANGELOG.md#v1450-2024-04-03)
+  * **Feature**: Add ability to specify Security Policies for SFTP Connectors
+
 # Release (2024-04-02)
 
 ## Module Highlights

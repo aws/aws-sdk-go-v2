@@ -1,8 +1,0 @@
-{
-    "id": "4d9d9172-5034-4ea6-b53a-91d966d7be38",
-    "type": "feature",
-    "description": "This release supports the feature of dataQuality to enrich asset with dataQualityResult in Amazon DataZone.",
-    "modules": [
-        "service/datazone"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.50.0 (2024-04-03)
+
+* **Feature**: Cmaf Ingest outputs are now supported in Media Live
+
 # v1.49.3 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

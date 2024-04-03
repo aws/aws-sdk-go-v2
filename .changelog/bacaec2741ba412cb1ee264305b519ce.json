@@ -1,8 +1,0 @@
-{
-    "id": "bacaec27-41ba-412c-b1ee-264305b519ce",
-    "type": "feature",
-    "description": "This release adds Global Cluster Switchover capability which enables you to change your global cluster's primary AWS Region, the region that serves writes, while preserving the replication between all regions in the global cluster.",
-    "modules": [
-        "service/docdb"
-    ]
-}

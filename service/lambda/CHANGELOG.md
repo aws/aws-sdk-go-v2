@@ -1,3 +1,7 @@
+# v1.54.0 (2024-04-03)
+
+* **Feature**: Add Ruby 3.3 (ruby3.3) support to AWS Lambda
+
 # v1.53.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

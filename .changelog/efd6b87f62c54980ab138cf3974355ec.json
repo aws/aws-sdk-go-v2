@@ -1,8 +1,0 @@
-{
-    "id": "efd6b87f-62c5-4980-ab13-8cf3974355ec",
-    "type": "feature",
-    "description": "Cmaf Ingest outputs are now supported in Media Live",
-    "modules": [
-        "service/medialive"
-    ]
-}

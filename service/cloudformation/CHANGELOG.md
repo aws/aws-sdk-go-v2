@@ -1,3 +1,7 @@
+# v1.49.0 (2024-04-03)
+
+* **Feature**: This release would return a new field - PolicyAction in cloudformation's existed DescribeChangeSetResponse, showing actions we are going to apply on the physical resource (e.g., Delete, Retain) according to the user's template
+
 # v1.48.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

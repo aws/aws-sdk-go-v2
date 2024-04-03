@@ -1,3 +1,7 @@
+# v1.8.0 (2024-04-03)
+
+* **Feature**: This release supports the feature of dataQuality to enrich asset with dataQualityResult in Amazon DataZone.
+
 # v1.7.0 (2024-04-01)
 
 * **Feature**: This release supports the feature of AI recommendations for descriptions to enrich the business data catalog in Amazon DataZone.
