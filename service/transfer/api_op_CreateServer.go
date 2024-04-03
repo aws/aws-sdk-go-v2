@@ -188,7 +188,7 @@ type CreateServerInput struct {
 	// have a file target.
 	S3StorageOptions *types.S3StorageOptions
 
-	// Specifies the name of the security policy that is attached to the server.
+	// Specifies the name of the security policy for the server.
 	SecurityPolicyName *string
 
 	// Specifies the log groups to which your server logs are sent. To specify a log

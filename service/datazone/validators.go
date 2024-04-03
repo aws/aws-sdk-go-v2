@@ -770,6 +770,26 @@ func (m *validateOpDeleteSubscriptionTarget) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTimeSeriesDataPoints struct {
+}
+
+func (*validateOpDeleteTimeSeriesDataPoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTimeSeriesDataPoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTimeSeriesDataPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTimeSeriesDataPointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAsset struct {
 }
 
@@ -1190,6 +1210,26 @@ func (m *validateOpGetSubscriptionTarget) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTimeSeriesDataPoint struct {
+}
+
+func (*validateOpGetTimeSeriesDataPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTimeSeriesDataPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTimeSeriesDataPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTimeSeriesDataPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetUserProfile struct {
 }
 
@@ -1545,6 +1585,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTimeSeriesDataPoints struct {
+}
+
+func (*validateOpListTimeSeriesDataPoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTimeSeriesDataPoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTimeSeriesDataPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTimeSeriesDataPointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPostTimeSeriesDataPoints struct {
+}
+
+func (*validateOpPostTimeSeriesDataPoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPostTimeSeriesDataPoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PostTimeSeriesDataPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPostTimeSeriesDataPointsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2202,6 +2282,10 @@ func addOpDeleteSubscriptionTargetValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDeleteSubscriptionTarget{}, middleware.After)
 }
 
+func addOpDeleteTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTimeSeriesDataPoints{}, middleware.After)
+}
+
 func addOpGetAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAsset{}, middleware.After)
 }
@@ -2286,6 +2370,10 @@ func addOpGetSubscriptionTargetValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetSubscriptionTarget{}, middleware.After)
 }
 
+func addOpGetTimeSeriesDataPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTimeSeriesDataPoint{}, middleware.After)
+}
+
 func addOpGetUserProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUserProfile{}, middleware.After)
 }
@@ -2356,6 +2444,14 @@ func addOpListSubscriptionTargetsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTimeSeriesDataPoints{}, middleware.After)
+}
+
+func addOpPostTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPostTimeSeriesDataPoints{}, middleware.After)
 }
 
 func addOpPutEnvironmentBlueprintConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -3065,6 +3161,44 @@ func validateSubscriptionTargetForms(v []types.SubscriptionTargetForm) error {
 	invalidParams := smithy.InvalidParamsError{Context: "SubscriptionTargetForms"}
 	for i := range v {
 		if err := validateSubscriptionTargetForm(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesDataPointFormInput(v *types.TimeSeriesDataPointFormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesDataPointFormInput"}
+	if v.FormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
+	}
+	if v.TypeIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeIdentifier"))
+	}
+	if v.Timestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesDataPointFormInputList(v []types.TimeSeriesDataPointFormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesDataPointFormInputList"}
+	for i := range v {
+		if err := validateTimeSeriesDataPointFormInput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3898,6 +4032,30 @@ func validateOpDeleteSubscriptionTargetInput(v *DeleteSubscriptionTargetInput) e
 	}
 }
 
+func validateOpDeleteTimeSeriesDataPointsInput(v *DeleteTimeSeriesDataPointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTimeSeriesDataPointsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.FormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAssetInput(v *GetAssetInput) error {
 	if v == nil {
 		return nil
@@ -4273,6 +4431,33 @@ func validateOpGetSubscriptionTargetInput(v *GetSubscriptionTargetInput) error {
 	}
 }
 
+func validateOpGetTimeSeriesDataPointInput(v *GetTimeSeriesDataPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTimeSeriesDataPointInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.FormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetUserProfileInput(v *GetUserProfileInput) error {
 	if v == nil {
 		return nil
@@ -4562,6 +4747,58 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTimeSeriesDataPointsInput(v *ListTimeSeriesDataPointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTimeSeriesDataPointsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.FormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPostTimeSeriesDataPointsInput(v *PostTimeSeriesDataPointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostTimeSeriesDataPointsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.Forms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Forms"))
+	} else if v.Forms != nil {
+		if err := validateTimeSeriesDataPointFormInputList(v.Forms); err != nil {
+			invalidParams.AddNested("Forms", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

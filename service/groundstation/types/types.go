@@ -394,6 +394,20 @@ type ContactData struct {
 	// Tags assigned to a contact.
 	Tags map[string]string
 
+	// Projected time in UTC your satellite will set below the receive mask (https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html)
+	// . This time is based on the satellite's current active ephemeris for future
+	// contacts and the ephemeris that was active during contact execution for
+	// completed contacts. This field is not present for contacts with a SCHEDULING or
+	// SCHEDULED status.
+	VisibilityEndTime *time.Time
+
+	// Projected time in UTC your satellite will rise above the receive mask (https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html)
+	// . This time is based on the satellite's current active ephemeris for future
+	// contacts and the ephemeris that was active during contact execution for
+	// completed contacts. This field is not present for contacts with a SCHEDULING or
+	// SCHEDULED status.
+	VisibilityStartTime *time.Time
+
 	noSmithyDocumentSerde
 }
 

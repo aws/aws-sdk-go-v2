@@ -132,6 +132,9 @@ type CreateAssetRevisionOutput struct {
 	// The glossary terms that were attached to the asset as part of asset revision.
 	GlossaryTerms []string
 
+	// The latest data point that was imported into the time series form for the asset.
+	LatestTimeSeriesDataPointFormsOutput []types.TimeSeriesDataPointSummaryFormOutput
+
 	// The details of an asset published in an Amazon DataZone catalog.
 	Listing *types.AssetListingDetails
 

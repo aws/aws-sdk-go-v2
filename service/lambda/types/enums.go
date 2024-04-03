@@ -412,6 +412,7 @@ const (
 	RuntimePython310      Runtime = "python3.10"
 	RuntimeJava17         Runtime = "java17"
 	RuntimeRuby32         Runtime = "ruby3.2"
+	RuntimeRuby33         Runtime = "ruby3.3"
 	RuntimePython311      Runtime = "python3.11"
 	RuntimeNodejs20x      Runtime = "nodejs20.x"
 	RuntimeProvidedal2023 Runtime = "provided.al2023"
@@ -456,6 +457,7 @@ func (Runtime) Values() []Runtime {
 		"python3.10",
 		"java17",
 		"ruby3.2",
+		"ruby3.3",
 		"python3.11",
 		"nodejs20.x",
 		"provided.al2023",

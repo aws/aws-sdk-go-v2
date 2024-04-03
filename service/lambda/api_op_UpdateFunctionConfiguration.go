@@ -79,7 +79,7 @@ type UpdateFunctionConfigurationInput struct {
 	// .
 	Handler *string
 
-	// Container image configuration values (https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html)
+	// Container image configuration values (https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms)
 	// that override the values in the container image Docker file.
 	ImageConfig *types.ImageConfig
 

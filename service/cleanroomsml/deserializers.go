@@ -1436,11 +1436,6 @@ func awsRestjson1_deserializeOpDocumentGetAudienceModelOutput(v **GetAudienceMod
 				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
-		case "metrics":
-			if err := awsRestjson1_deserializeDocumentAudienceModelMetrics(&sv.Metrics, value); err != nil {
-				return err
-			}
-
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4542,127 +4537,6 @@ func awsRestjson1_deserializeDocumentAudienceModelList(v *[]types.AudienceModelS
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAudienceModelMetric(v **types.AudienceModelMetric, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.AudienceModelMetric
-	if *v == nil {
-		sv = &types.AudienceModelMetric{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "forTopKItemPredictions":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.ForTopKItemPredictions = ptr.Int32(int32(i64))
-			}
-
-		case "type":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected AudienceModelMetricType to be of type string, got %T instead", value)
-				}
-				sv.Type = types.AudienceModelMetricType(jtv)
-			}
-
-		case "value":
-			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.Value = ptr.Float64(f64)
-
-				case string:
-					var f64 float64
-					switch {
-					case strings.EqualFold(jtv, "NaN"):
-						f64 = math.NaN()
-
-					case strings.EqualFold(jtv, "Infinity"):
-						f64 = math.Inf(1)
-
-					case strings.EqualFold(jtv, "-Infinity"):
-						f64 = math.Inf(-1)
-
-					default:
-						return fmt.Errorf("unknown JSON number value: %s", jtv)
-
-					}
-					sv.Value = ptr.Float64(f64)
-
-				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
-
-				}
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentAudienceModelMetrics(v *[]types.AudienceModelMetric, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.([]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var cv []types.AudienceModelMetric
-	if *v == nil {
-		cv = []types.AudienceModelMetric{}
-	} else {
-		cv = *v
-	}
-
-	for _, value := range shape {
-		var col types.AudienceModelMetric
-		destAddr := &col
-		if err := awsRestjson1_deserializeDocumentAudienceModelMetric(&destAddr, value); err != nil {
-			return err
-		}
-		col = *destAddr
-		cv = append(cv, col)
-
-	}
-	*v = cv
-	return nil
-}
-
 func awsRestjson1_deserializeDocumentAudienceModelSummary(v **types.AudienceModelSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4787,6 +4661,40 @@ func awsRestjson1_deserializeDocumentAudienceQualityMetrics(v **types.AudienceQu
 
 	for key, value := range shape {
 		switch key {
+		case "recallMetric":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.RecallMetric = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.RecallMetric = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "relevanceMetrics":
 			if err := awsRestjson1_deserializeDocumentRelevanceMetrics(&sv.RelevanceMetrics, value); err != nil {
 				return err

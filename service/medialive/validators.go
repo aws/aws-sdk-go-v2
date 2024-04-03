@@ -2098,6 +2098,21 @@ func validateCaptionSelectorSettings(v *types.CaptionSelectorSettings) error {
 	}
 }
 
+func validateCmafIngestGroupSettings(v *types.CmafIngestGroupSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CmafIngestGroupSettings"}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateColorCorrection(v *types.ColorCorrection) error {
 	if v == nil {
 		return nil
@@ -2976,6 +2991,11 @@ func validateOutputGroupSettings(v *types.OutputGroupSettings) error {
 	if v.MsSmoothGroupSettings != nil {
 		if err := validateMsSmoothGroupSettings(v.MsSmoothGroupSettings); err != nil {
 			invalidParams.AddNested("MsSmoothGroupSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CmafIngestGroupSettings != nil {
+		if err := validateCmafIngestGroupSettings(v.CmafIngestGroupSettings); err != nil {
+			invalidParams.AddNested("CmafIngestGroupSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

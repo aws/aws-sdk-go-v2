@@ -77,7 +77,7 @@ type DescribeTypeOutput struct {
 	// A JSON string that represent the current configuration data for the extension
 	// in this account and Region. To set the configuration data for an extension, use
 	// SetTypeConfiguration (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
-	// . For more information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+	// . For more information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration)
 	// in the CloudFormation User Guide.
 	ConfigurationSchema *string
 

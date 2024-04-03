@@ -3407,6 +3407,70 @@ func (m *awsAwsquery_serializeOpStopDBCluster) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsquery_serializeOpSwitchoverGlobalCluster struct {
+}
+
+func (*awsAwsquery_serializeOpSwitchoverGlobalCluster) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpSwitchoverGlobalCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SwitchoverGlobalClusterInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("SwitchoverGlobalCluster")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentSwitchoverGlobalClusterInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsquery_serializeDocumentAttributeValueList(v []string, value query.Value) error {
 	array := value.Array("AttributeValue")
 
@@ -5374,6 +5438,23 @@ func awsAwsquery_serializeOpDocumentStopDBClusterInput(v *StopDBClusterInput, va
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentSwitchoverGlobalClusterInput(v *SwitchoverGlobalClusterInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.GlobalClusterIdentifier != nil {
+		objectKey := object.Key("GlobalClusterIdentifier")
+		objectKey.String(*v.GlobalClusterIdentifier)
+	}
+
+	if v.TargetDbClusterIdentifier != nil {
+		objectKey := object.Key("TargetDbClusterIdentifier")
+		objectKey.String(*v.TargetDbClusterIdentifier)
 	}
 
 	return nil

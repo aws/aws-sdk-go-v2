@@ -1,0 +1,8 @@
+{
+    "id": "006be38f-829c-4e5f-8bbb-59662f289d07",
+    "type": "feature",
+    "description": "This release would return a new field - PolicyAction in cloudformation's existed DescribeChangeSetResponse, showing actions we are going to apply on the physical resource (e.g., Delete, Retain) according to the user's template",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

@@ -248,6 +248,10 @@ type AudioDescription struct {
 	// This member is required.
 	Name *string
 
+	// Identifies the DASH roles to assign to this audio output. Applies only when the
+	// audio output is configured for DVB DASH accessibility signaling.
+	AudioDashRoles []DashRoleAudio
+
 	// Advanced audio normalization settings.
 	AudioNormalizationSettings *AudioNormalizationSettings
 
@@ -269,6 +273,11 @@ type AudioDescription struct {
 
 	// Audio codec settings.
 	CodecSettings *AudioCodecSettings
+
+	// Identifies DVB DASH accessibility signaling in this audio output. Used in
+	// Microsoft Smooth Streaming outputs to signal accessibility information to
+	// packagers.
+	DvbDashAccessibility DvbDashAccessibility
 
 	// RFC 5646 language code representing the language of the audio output track.
 	// Only used if languageControlMode is useConfigured, or there is no ISO 639
@@ -791,9 +800,18 @@ type CaptionDescription struct {
 	// added to HLS output group and MediaPackage output group.
 	Accessibility AccessibilityType
 
+	// Identifies the DASH roles to assign to this captions output. Applies only when
+	// the captions output is configured for DVB DASH accessibility signaling.
+	CaptionDashRoles []DashRoleCaption
+
 	// Additional settings for captions destination that depend on the destination
 	// type.
 	DestinationSettings *CaptionDestinationSettings
+
+	// Identifies DVB DASH accessibility signaling in this captions output. Used in
+	// Microsoft Smooth Streaming outputs to signal accessibility information to
+	// packagers.
+	DvbDashAccessibility DvbDashAccessibility
 
 	// ISO 639-2 three-digit code: http://www.loc.gov/standards/iso639-2/
 	LanguageCode *string
@@ -1106,6 +1124,47 @@ type ChannelSummary struct {
 
 	// Settings for any VPC outputs.
 	Vpc *VpcOutputSettingsDescription
+
+	noSmithyDocumentSerde
+}
+
+// Cmaf Ingest Group Settings
+type CmafIngestGroupSettings struct {
+
+	// A HTTP destination for the tracks
+	//
+	// This member is required.
+	Destination *OutputLocationRef
+
+	// If set to passthrough, Nielsen inaudible tones for media tracking will be
+	// detected in the input audio and an equivalent ID3 tag will be inserted in the
+	// output.
+	NielsenId3Behavior CmafNielsenId3Behavior
+
+	// Type of scte35 track to add. none or scte35WithoutSegmentation
+	Scte35Type Scte35Type
+
+	// The nominal duration of segments. The units are specified in
+	// SegmentLengthUnits. The segments will end on the next keyframe after the
+	// specified duration, so the actual segment length might be longer, and it might
+	// be a fraction of the units.
+	SegmentLength *int32
+
+	// Time unit for segment length parameter.
+	SegmentLengthUnits CmafIngestSegmentLengthUnits
+
+	// Number of milliseconds to delay the output from the second pipeline.
+	SendDelayMs *int32
+
+	noSmithyDocumentSerde
+}
+
+// Cmaf Ingest Output Settings
+type CmafIngestOutputSettings struct {
+
+	// String concatenated to the end of the destination filename. Required for
+	// multiple outputs of the same type.
+	NameModifier *string
 
 	noSmithyDocumentSerde
 }
@@ -4784,6 +4843,9 @@ type OutputGroupSettings struct {
 	// Archive Group Settings
 	ArchiveGroupSettings *ArchiveGroupSettings
 
+	// Cmaf Ingest Group Settings
+	CmafIngestGroupSettings *CmafIngestGroupSettings
+
 	// Frame Capture Group Settings
 	FrameCaptureGroupSettings *FrameCaptureGroupSettings
 
@@ -4834,6 +4896,9 @@ type OutputSettings struct {
 
 	// Archive Output Settings
 	ArchiveOutputSettings *ArchiveOutputSettings
+
+	// Cmaf Ingest Output Settings
+	CmafIngestOutputSettings *CmafIngestOutputSettings
 
 	// Frame Capture Output Settings
 	FrameCaptureOutputSettings *FrameCaptureOutputSettings

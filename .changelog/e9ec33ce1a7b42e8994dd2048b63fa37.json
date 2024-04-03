@@ -1,0 +1,8 @@
+{
+    "id": "e9ec33ce-1a7b-42e8-994d-d2048b63fa37",
+    "type": "feature",
+    "description": "Add ability to specify Security Policies for SFTP Connectors",
+    "modules": [
+        "service/transfer"
+    ]
+}

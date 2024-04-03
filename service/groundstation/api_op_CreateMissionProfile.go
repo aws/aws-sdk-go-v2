@@ -53,12 +53,12 @@ type CreateMissionProfileInput struct {
 	// This member is required.
 	TrackingConfigArn *string
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
-	// event indicating the pass has finished.
+	// Amount of time after a contact ends that you’d like to receive a Ground Station
+	// Contact State Change event indicating the pass has finished.
 	ContactPostPassDurationSeconds *int32
 
-	// Amount of time prior to contact start you’d like to receive a CloudWatch event
-	// indicating an upcoming pass.
+	// Amount of time prior to contact start you’d like to receive a Ground Station
+	// Contact State Change event indicating an upcoming pass.
 	ContactPrePassDurationSeconds *int32
 
 	// KMS key to use for encrypting streams.

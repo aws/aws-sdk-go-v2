@@ -87,7 +87,8 @@ type GetAudienceGenerationJobOutput struct {
 	// the seed.
 	IncludeSeedInOutput *bool
 
-	// The relevance scores for different audience sizes.
+	// The relevance scores for different audience sizes and the recall score of the
+	// generated audience.
 	Metrics *types.AudienceQualityMetrics
 
 	// The seed audience that was used for this audience generation job. This field

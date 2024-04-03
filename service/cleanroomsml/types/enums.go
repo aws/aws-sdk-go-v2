@@ -52,28 +52,6 @@ func (AudienceGenerationJobStatus) Values() []AudienceGenerationJobStatus {
 	}
 }
 
-type AudienceModelMetricType string
-
-// Enum values for AudienceModelMetricType
-const (
-	AudienceModelMetricTypeNormalizedDiscountedCumulativeGain AudienceModelMetricType = "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN"
-	AudienceModelMetricTypeMeanReciprocalRank                 AudienceModelMetricType = "MEAN_RECIPROCAL_RANK"
-	AudienceModelMetricTypePrecision                          AudienceModelMetricType = "PRECISION"
-	AudienceModelMetricTypeRecall                             AudienceModelMetricType = "RECALL"
-)
-
-// Values returns all known values for AudienceModelMetricType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (AudienceModelMetricType) Values() []AudienceModelMetricType {
-	return []AudienceModelMetricType{
-		"NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN",
-		"MEAN_RECIPROCAL_RANK",
-		"PRECISION",
-		"RECALL",
-	}
-}
-
 type AudienceModelStatus string
 
 // Enum values for AudienceModelStatus

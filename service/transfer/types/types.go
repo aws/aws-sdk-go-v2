@@ -424,6 +424,9 @@ type DescribedConnector struct {
 	// set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
 
+	// The text name of the security policy for the specified connector.
+	SecurityPolicyName *string
+
 	// The list of egress IP addresses of this connector. These IP addresses are
 	// assigned automatically when you create the connector.
 	ServiceManagedEgressIpAddresses []string
@@ -548,35 +551,52 @@ type DescribedProfile struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the properties of a security policy that was specified. For more
-// information about security policies, see Working with security policies (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
+// Describes the properties of a security policy that you specify. For more
+// information about security policies, see Working with security policies for
+// servers (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
+// or Working with security policies for SFTP connectors (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html)
 // .
 type DescribedSecurityPolicy struct {
 
-	// Specifies the name of the security policy that is attached to the server.
+	// The text name of the specified security policy.
 	//
 	// This member is required.
 	SecurityPolicyName *string
 
 	// Specifies whether this policy enables Federal Information Processing Standards
-	// (FIPS).
+	// (FIPS). This parameter applies to both server and connector security policies.
 	Fips *bool
 
-	// Specifies the enabled Secure Shell (SSH) cipher encryption algorithms in the
-	// security policy that is attached to the server.
+	// Lists the file transfer protocols that the security policy applies to.
+	Protocols []SecurityPolicyProtocol
+
+	// Lists the enabled Secure Shell (SSH) cipher encryption algorithms in the
+	// security policy that is attached to the server or connector. This parameter
+	// applies to both server and connector security policies.
 	SshCiphers []string
 
-	// Specifies the enabled SSH key exchange (KEX) encryption algorithms in the
-	// security policy that is attached to the server.
+	// Lists the host key algorithms for the security policy. This parameter only
+	// applies to security policies for connectors.
+	SshHostKeyAlgorithms []string
+
+	// Lists the enabled SSH key exchange (KEX) encryption algorithms in the security
+	// policy that is attached to the server or connector. This parameter applies to
+	// both server and connector security policies.
 	SshKexs []string
 
-	// Specifies the enabled SSH message authentication code (MAC) encryption
-	// algorithms in the security policy that is attached to the server.
+	// Lists the enabled SSH message authentication code (MAC) encryption algorithms
+	// in the security policy that is attached to the server or connector. This
+	// parameter applies to both server and connector security policies.
 	SshMacs []string
 
-	// Specifies the enabled Transport Layer Security (TLS) cipher encryption
-	// algorithms in the security policy that is attached to the server.
+	// Lists the enabled Transport Layer Security (TLS) cipher encryption algorithms
+	// in the security policy that is attached to the server. This parameter only
+	// applies to security policies for servers.
 	TlsCiphers []string
+
+	// The resource type to which the security policy applies, either server or
+	// connector.
+	Type SecurityPolicyResourceType
 
 	noSmithyDocumentSerde
 }
@@ -708,7 +728,7 @@ type DescribedServer struct {
 	// have a file target.
 	S3StorageOptions *S3StorageOptions
 
-	// Specifies the name of the security policy that is attached to the server.
+	// Specifies the name of the security policy for the server.
 	SecurityPolicyName *string
 
 	// Specifies the unique system-assigned identifier for a server that you

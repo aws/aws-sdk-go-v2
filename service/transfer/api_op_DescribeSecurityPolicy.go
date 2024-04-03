@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the security policy that is attached to your file transfer
-// protocol-enabled server. The response contains a description of the security
-// policy's properties. For more information about security policies, see Working
-// with security policies (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
+// Describes the security policy that is attached to your server or SFTP
+// connector. The response contains a description of the security policy's
+// properties. For more information about security policies, see Working with
+// security policies for servers (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
+// or Working with security policies for SFTP connectors (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html)
 // .
 func (c *Client) DescribeSecurityPolicy(ctx context.Context, params *DescribeSecurityPolicyInput, optFns ...func(*Options)) (*DescribeSecurityPolicyOutput, error) {
 	if params == nil {
@@ -33,7 +34,7 @@ func (c *Client) DescribeSecurityPolicy(ctx context.Context, params *DescribeSec
 
 type DescribeSecurityPolicyInput struct {
 
-	// Specifies the name of the security policy that is attached to the server.
+	// Specify the text name of the security policy for which you want the details.
 	//
 	// This member is required.
 	SecurityPolicyName *string

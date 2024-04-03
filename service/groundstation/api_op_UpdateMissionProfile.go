@@ -35,12 +35,12 @@ type UpdateMissionProfileInput struct {
 	// This member is required.
 	MissionProfileId *string
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
-	// event indicating the pass has finished.
+	// Amount of time after a contact ends that you’d like to receive a Ground Station
+	// Contact State Change event indicating the pass has finished.
 	ContactPostPassDurationSeconds *int32
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
-	// event indicating the pass has finished.
+	// Amount of time after a contact ends that you’d like to receive a Ground Station
+	// Contact State Change event indicating the pass has finished.
 	ContactPrePassDurationSeconds *int32
 
 	// A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a

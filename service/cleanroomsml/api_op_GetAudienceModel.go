@@ -77,9 +77,6 @@ type GetAudienceModelOutput struct {
 	// The KMS key ARN used for the audience model.
 	KmsKeyArn *string
 
-	// Accuracy metrics for the model.
-	Metrics []types.AudienceModelMetric
-
 	// Details about the status of the audience model.
 	StatusDetails *types.StatusDetails
 

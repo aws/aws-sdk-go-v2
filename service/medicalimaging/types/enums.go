@@ -119,3 +119,41 @@ func (Operator) Values() []Operator {
 		"BETWEEN",
 	}
 }
+
+type SortField string
+
+// Enum values for SortField
+const (
+	SortFieldUpdatedAt             SortField = "updatedAt"
+	SortFieldCreatedAt             SortField = "createdAt"
+	SortFieldDICOMStudyDateAndTime SortField = "DICOMStudyDateAndTime"
+)
+
+// Values returns all known values for SortField. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SortField) Values() []SortField {
+	return []SortField{
+		"updatedAt",
+		"createdAt",
+		"DICOMStudyDateAndTime",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASC",
+		"DESC",
+	}
+}

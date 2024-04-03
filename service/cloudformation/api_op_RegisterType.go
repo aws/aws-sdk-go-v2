@@ -28,7 +28,7 @@ import (
 // to monitor the progress of the registration request. Once you have registered a
 // private extension in your account and Region, use SetTypeConfiguration (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
 // to specify configuration properties for the extension. For more information, see
-// Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration)
 // in the CloudFormation User Guide.
 func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, optFns ...func(*Options)) (*RegisterTypeOutput, error) {
 	if params == nil {

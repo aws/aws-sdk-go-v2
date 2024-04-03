@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the security policies that are attached to your file transfer
-// protocol-enabled servers.
+// Lists the security policies that are attached to your servers and SFTP
+// connectors. For more information about security policies, see Working with
+// security policies for servers (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
+// or Working with security policies for SFTP connectors (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html)
+// .
 func (c *Client) ListSecurityPolicies(ctx context.Context, params *ListSecurityPoliciesInput, optFns ...func(*Options)) (*ListSecurityPoliciesOutput, error) {
 	if params == nil {
 		params = &ListSecurityPoliciesInput{}

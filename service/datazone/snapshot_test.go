@@ -518,6 +518,18 @@ func TestCheckSnapshot_DeleteSubscriptionTarget(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteTimeSeriesDataPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTimeSeriesDataPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAsset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAsset(context.Background(), nil, func(o *Options) {
@@ -770,6 +782,18 @@ func TestCheckSnapshot_GetSubscriptionTarget(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetTimeSeriesDataPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTimeSeriesDataPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTimeSeriesDataPoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetUserProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUserProfile(context.Background(), nil, func(o *Options) {
@@ -991,6 +1015,30 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListTimeSeriesDataPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTimeSeriesDataPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PostTimeSeriesDataPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PostTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PostTimeSeriesDataPoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1753,6 +1801,18 @@ func TestUpdateSnapshot_DeleteSubscriptionTarget(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteTimeSeriesDataPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTimeSeriesDataPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAsset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAsset(context.Background(), nil, func(o *Options) {
@@ -2005,6 +2065,18 @@ func TestUpdateSnapshot_GetSubscriptionTarget(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetTimeSeriesDataPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTimeSeriesDataPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTimeSeriesDataPoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetUserProfile(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetUserProfile(context.Background(), nil, func(o *Options) {
@@ -2226,6 +2298,30 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListTimeSeriesDataPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTimeSeriesDataPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PostTimeSeriesDataPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PostTimeSeriesDataPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PostTimeSeriesDataPoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

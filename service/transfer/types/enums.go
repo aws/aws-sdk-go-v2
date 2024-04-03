@@ -437,6 +437,42 @@ func (Protocol) Values() []Protocol {
 	}
 }
 
+type SecurityPolicyProtocol string
+
+// Enum values for SecurityPolicyProtocol
+const (
+	SecurityPolicyProtocolSftp SecurityPolicyProtocol = "SFTP"
+	SecurityPolicyProtocolFtps SecurityPolicyProtocol = "FTPS"
+)
+
+// Values returns all known values for SecurityPolicyProtocol. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityPolicyProtocol) Values() []SecurityPolicyProtocol {
+	return []SecurityPolicyProtocol{
+		"SFTP",
+		"FTPS",
+	}
+}
+
+type SecurityPolicyResourceType string
+
+// Enum values for SecurityPolicyResourceType
+const (
+	SecurityPolicyResourceTypeServer    SecurityPolicyResourceType = "SERVER"
+	SecurityPolicyResourceTypeConnector SecurityPolicyResourceType = "CONNECTOR"
+)
+
+// Values returns all known values for SecurityPolicyResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityPolicyResourceType) Values() []SecurityPolicyResourceType {
+	return []SecurityPolicyResourceType{
+		"SERVER",
+		"CONNECTOR",
+	}
+}
+
 type SetStatOption string
 
 // Enum values for SetStatOption

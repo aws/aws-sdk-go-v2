@@ -306,16 +306,28 @@ type DICOMTags struct {
 	// The patient sex.
 	DICOMPatientSex *string
 
+	// The DICOM provided identifier for the series Body Part Examined.
+	DICOMSeriesBodyPart *string
+
+	// The DICOM provided identifier for the Series Instance UID.
+	DICOMSeriesInstanceUID *string
+
+	// The DICOM provided identifier for the series Modality.
+	DICOMSeriesModality *string
+
+	// The DICOM provided identifier for the Series Number.
+	DICOMSeriesNumber *int32
+
 	// The study date.
 	DICOMStudyDate *string
 
-	// The description of the study.
+	// The DICOM provided Study Description.
 	DICOMStudyDescription *string
 
-	// The DICOM provided studyId.
+	// The DICOM provided identifier for the Study ID.
 	DICOMStudyId *string
 
-	// The DICOM provided identifier for studyInstanceUid.>
+	// The DICOM provided identifier for the Study Instance UID.
 	DICOMStudyInstanceUID *string
 
 	// The study time.
@@ -432,9 +444,11 @@ func (*MetadataUpdatesMemberDICOMUpdates) isMetadataUpdates() {}
 //	SearchByAttributeValueMemberCreatedAt
 //	SearchByAttributeValueMemberDICOMAccessionNumber
 //	SearchByAttributeValueMemberDICOMPatientId
+//	SearchByAttributeValueMemberDICOMSeriesInstanceUID
 //	SearchByAttributeValueMemberDICOMStudyDateAndTime
 //	SearchByAttributeValueMemberDICOMStudyId
 //	SearchByAttributeValueMemberDICOMStudyInstanceUID
+//	SearchByAttributeValueMemberUpdatedAt
 type SearchByAttributeValue interface {
 	isSearchByAttributeValue()
 }
@@ -466,6 +480,15 @@ type SearchByAttributeValueMemberDICOMPatientId struct {
 
 func (*SearchByAttributeValueMemberDICOMPatientId) isSearchByAttributeValue() {}
 
+// The Series Instance UID input for search.
+type SearchByAttributeValueMemberDICOMSeriesInstanceUID struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchByAttributeValueMemberDICOMSeriesInstanceUID) isSearchByAttributeValue() {}
+
 // The aggregated structure containing DICOM study date and study time for search.
 type SearchByAttributeValueMemberDICOMStudyDateAndTime struct {
 	Value DICOMStudyDateAndTime
@@ -493,11 +516,23 @@ type SearchByAttributeValueMemberDICOMStudyInstanceUID struct {
 
 func (*SearchByAttributeValueMemberDICOMStudyInstanceUID) isSearchByAttributeValue() {}
 
+// The timestamp input for search.
+type SearchByAttributeValueMemberUpdatedAt struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*SearchByAttributeValueMemberUpdatedAt) isSearchByAttributeValue() {}
+
 // The search criteria.
 type SearchCriteria struct {
 
 	// The filters for the search criteria.
 	Filters []SearchFilter
+
+	// The sort input for search criteria.
+	Sort *Sort
 
 	noSmithyDocumentSerde
 }
@@ -514,6 +549,22 @@ type SearchFilter struct {
 	//
 	// This member is required.
 	Values []SearchByAttributeValue
+
+	noSmithyDocumentSerde
+}
+
+// Sort search results.
+type Sort struct {
+
+	// The sort field for search criteria.
+	//
+	// This member is required.
+	SortField SortField
+
+	// The sort order for search criteria.
+	//
+	// This member is required.
+	SortOrder SortOrder
 
 	noSmithyDocumentSerde
 }

@@ -8014,6 +8014,15 @@ func awsAwsjson11_deserializeDocumentDescribedConnector(v **types.DescribedConne
 				sv.LoggingRole = ptr.String(jtv)
 			}
 
+		case "SecurityPolicyName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorSecurityPolicyName to be of type string, got %T instead", value)
+				}
+				sv.SecurityPolicyName = ptr.String(jtv)
+			}
+
 		case "ServiceManagedEgressIpAddresses":
 			if err := awsAwsjson11_deserializeDocumentServiceManagedEgressIpAddresses(&sv.ServiceManagedEgressIpAddresses, value); err != nil {
 				return err
@@ -8335,6 +8344,11 @@ func awsAwsjson11_deserializeDocumentDescribedSecurityPolicy(v **types.Described
 				sv.Fips = ptr.Bool(jtv)
 			}
 
+		case "Protocols":
+			if err := awsAwsjson11_deserializeDocumentSecurityPolicyProtocols(&sv.Protocols, value); err != nil {
+				return err
+			}
+
 		case "SecurityPolicyName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8346,6 +8360,11 @@ func awsAwsjson11_deserializeDocumentDescribedSecurityPolicy(v **types.Described
 
 		case "SshCiphers":
 			if err := awsAwsjson11_deserializeDocumentSecurityPolicyOptions(&sv.SshCiphers, value); err != nil {
+				return err
+			}
+
+		case "SshHostKeyAlgorithms":
+			if err := awsAwsjson11_deserializeDocumentSecurityPolicyOptions(&sv.SshHostKeyAlgorithms, value); err != nil {
 				return err
 			}
 
@@ -8362,6 +8381,15 @@ func awsAwsjson11_deserializeDocumentDescribedSecurityPolicy(v **types.Described
 		case "TlsCiphers":
 			if err := awsAwsjson11_deserializeDocumentSecurityPolicyOptions(&sv.TlsCiphers, value); err != nil {
 				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecurityPolicyResourceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SecurityPolicyResourceType(jtv)
 			}
 
 		default:
@@ -11330,6 +11358,42 @@ func awsAwsjson11_deserializeDocumentSecurityPolicyOptions(v *[]string, value in
 				return fmt.Errorf("expected SecurityPolicyOption to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSecurityPolicyProtocols(v *[]types.SecurityPolicyProtocol, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SecurityPolicyProtocol
+	if *v == nil {
+		cv = []types.SecurityPolicyProtocol{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SecurityPolicyProtocol
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SecurityPolicyProtocol to be of type string, got %T instead", value)
+			}
+			col = types.SecurityPolicyProtocol(jtv)
 		}
 		cv = append(cv, col)
 

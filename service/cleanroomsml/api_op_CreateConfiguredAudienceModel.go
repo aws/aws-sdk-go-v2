@@ -76,7 +76,7 @@ type CreateConfiguredAudienceModelInput struct {
 	Description *string
 
 	// The minimum number of users from the seed audience that must match with users
-	// in the training data of the audience model.
+	// in the training data of the audience model. The default value is 500.
 	MinMatchingSeedSize *int32
 
 	// The optional metadata that you apply to the resource to help you categorize and
@@ -95,9 +95,9 @@ type CreateConfiguredAudienceModelInput struct {
 	//   - Do not use aws:, AWS:, or any upper or lowercase combination of such as a
 	//   prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
 	//   keys with this prefix. Values can have this prefix. If a tag value has aws as
-	//   its prefix but the key does not, then Forecast considers it to be a user tag and
-	//   will count against the limit of 50 tags. Tags with only the key prefix of aws do
-	//   not count against your tags per resource limit.
+	//   its prefix but the key does not, then Clean Rooms ML considers it to be a user
+	//   tag and will count against the limit of 50 tags. Tags with only the key prefix
+	//   of aws do not count against your tags per resource limit.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

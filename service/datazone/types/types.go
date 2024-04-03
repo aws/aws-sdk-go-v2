@@ -108,6 +108,10 @@ type AssetItemAdditionalAttributes struct {
 	// The forms included in the additional attributes of an inventory asset.
 	FormsOutput []FormOutput
 
+	// The latest time series data points forms included in the additional attributes
+	// of an asset.
+	LatestTimeSeriesDataPointFormsOutput []TimeSeriesDataPointSummaryFormOutput
+
 	// The read-only forms included in the additional attributes of an inventory asset.
 	ReadOnlyFormsOutput []FormOutput
 
@@ -135,6 +139,10 @@ type AssetListing struct {
 
 	// The glossary terms attached to an asset published in an Amazon DataZone catalog.
 	GlossaryTerms []DetailedGlossaryTerm
+
+	// The latest time series data points forms included in the additional attributes
+	// of an asset.
+	LatestTimeSeriesDataPointForms []TimeSeriesDataPointSummaryFormOutput
 
 	// The identifier of the project where an asset published in an Amazon DataZone
 	// catalog exists.
@@ -210,6 +218,10 @@ type AssetListingItemAdditionalAttributes struct {
 
 	// The metadata forms that form additional attributes of the metadata asset.
 	Forms *string
+
+	// The latest time series data points forms included in the additional attributes
+	// of an asset.
+	LatestTimeSeriesDataPointForms []TimeSeriesDataPointSummaryFormOutput
 
 	noSmithyDocumentSerde
 }
@@ -1299,6 +1311,10 @@ type GlueRunConfigurationInput struct {
 	// This member is required.
 	RelationalFilterConfigurations []RelationalFilterConfiguration
 
+	// Specifies whether to automatically import data quality metrics as part of the
+	// data source run.
+	AutoImportDataQualityResult *bool
+
 	// The data access role included in the configuration details of the Amazon Web
 	// Services Glue data source.
 	DataAccessRole *string
@@ -1318,6 +1334,10 @@ type GlueRunConfigurationOutput struct {
 	// The Amazon Web Services account ID included in the configuration details of the
 	// Amazon Web Services Glue data source.
 	AccountId *string
+
+	// Specifies whether to automatically import data quality metrics as part of the
+	// data source run.
+	AutoImportDataQualityResult *bool
 
 	// The data access role included in the configuration details of the Amazon Web
 	// Services Glue data source.
@@ -2623,6 +2643,93 @@ type TermRelations struct {
 
 	// The isA property of the term relations.
 	IsA []string
+
+	noSmithyDocumentSerde
+}
+
+// The time series data points form.
+type TimeSeriesDataPointFormInput struct {
+
+	// The name of the time series data points form.
+	//
+	// This member is required.
+	FormName *string
+
+	// The timestamp of the time series data points form.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The ID of the type of the time series data points form.
+	//
+	// This member is required.
+	TypeIdentifier *string
+
+	// The content of the time series data points form.
+	Content *string
+
+	// The revision type of the time series data points form.
+	TypeRevision *string
+
+	noSmithyDocumentSerde
+}
+
+// The time series data points form.
+type TimeSeriesDataPointFormOutput struct {
+
+	// The name of the time series data points form.
+	//
+	// This member is required.
+	FormName *string
+
+	// The timestamp of the time series data points form.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The ID of the type of the time series data points form.
+	//
+	// This member is required.
+	TypeIdentifier *string
+
+	// The content of the time series data points form.
+	Content *string
+
+	// The ID of the time series data points form.
+	Id *string
+
+	// The revision type of the time series data points form.
+	TypeRevision *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the time series data points form.
+type TimeSeriesDataPointSummaryFormOutput struct {
+
+	// The name of the time series data points summary form.
+	//
+	// This member is required.
+	FormName *string
+
+	// The timestamp of the time series data points summary form.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The type ID of the time series data points summary form.
+	//
+	// This member is required.
+	TypeIdentifier *string
+
+	// The content of the summary of the time series data points form.
+	ContentSummary *string
+
+	// The ID of the time series data points summary form.
+	Id *string
+
+	// The type revision of the time series data points summary form.
+	TypeRevision *string
 
 	noSmithyDocumentSerde
 }

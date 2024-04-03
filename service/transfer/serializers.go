@@ -4113,6 +4113,11 @@ func awsAwsjson11_serializeOpDocumentCreateConnectorInput(v *CreateConnectorInpu
 		ok.String(*v.LoggingRole)
 	}
 
+	if v.SecurityPolicyName != nil {
+		ok := object.Key("SecurityPolicyName")
+		ok.String(*v.SecurityPolicyName)
+	}
+
 	if v.SftpConfig != nil {
 		ok := object.Key("SftpConfig")
 		if err := awsAwsjson11_serializeDocumentSftpConnectorConfig(v.SftpConfig, ok); err != nil {
@@ -5334,6 +5339,11 @@ func awsAwsjson11_serializeOpDocumentUpdateConnectorInput(v *UpdateConnectorInpu
 	if v.LoggingRole != nil {
 		ok := object.Key("LoggingRole")
 		ok.String(*v.LoggingRole)
+	}
+
+	if v.SecurityPolicyName != nil {
+		ok := object.Key("SecurityPolicyName")
+		ok.String(*v.SecurityPolicyName)
 	}
 
 	if v.SftpConfig != nil {

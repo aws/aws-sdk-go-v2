@@ -14,7 +14,7 @@ import (
 // Specifies the configuration data for a registered CloudFormation extension, in
 // the given account and Region. To view the current configuration data for an
 // extension, refer to the ConfigurationSchema element of DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
-// . For more information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// . For more information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration)
 // in the CloudFormation User Guide. It's strongly recommended that you use dynamic
 // references to restrict sensitive configuration definitions, such as third-party
 // credentials. For more details on dynamic references, see Using dynamic

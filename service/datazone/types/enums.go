@@ -652,7 +652,8 @@ type SearchOutputAdditionalAttribute string
 
 // Enum values for SearchOutputAdditionalAttribute
 const (
-	SearchOutputAdditionalAttributeForms SearchOutputAdditionalAttribute = "FORMS"
+	SearchOutputAdditionalAttributeForms                    SearchOutputAdditionalAttribute = "FORMS"
+	SearchOutputAdditionalAttributeTimeSeriesDataPointForms SearchOutputAdditionalAttribute = "TIME_SERIES_DATA_POINT_FORMS"
 )
 
 // Values returns all known values for SearchOutputAdditionalAttribute. Note that
@@ -662,6 +663,7 @@ const (
 func (SearchOutputAdditionalAttribute) Values() []SearchOutputAdditionalAttribute {
 	return []SearchOutputAdditionalAttribute{
 		"FORMS",
+		"TIME_SERIES_DATA_POINT_FORMS",
 	}
 }
 
@@ -831,6 +833,24 @@ func (TaskStatus) Values() []TaskStatus {
 	return []TaskStatus{
 		"ACTIVE",
 		"INACTIVE",
+	}
+}
+
+type TimeSeriesEntityType string
+
+// Enum values for TimeSeriesEntityType
+const (
+	TimeSeriesEntityTypeAsset   TimeSeriesEntityType = "ASSET"
+	TimeSeriesEntityTypeListing TimeSeriesEntityType = "LISTING"
+)
+
+// Values returns all known values for TimeSeriesEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimeSeriesEntityType) Values() []TimeSeriesEntityType {
+	return []TimeSeriesEntityType{
+		"ASSET",
+		"LISTING",
 	}
 }
 

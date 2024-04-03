@@ -12753,6 +12753,78 @@ func awsRestjson1_deserializeDocument__listOfColorCorrection(v *[]types.ColorCor
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfDashRoleAudio(v *[]types.DashRoleAudio, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DashRoleAudio
+	if *v == nil {
+		cv = []types.DashRoleAudio{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DashRoleAudio
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DashRoleAudio to be of type string, got %T instead", value)
+			}
+			col = types.DashRoleAudio(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfDashRoleCaption(v *[]types.DashRoleCaption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DashRoleCaption
+	if *v == nil {
+		cv = []types.DashRoleCaption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DashRoleCaption
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DashRoleCaption to be of type string, got %T instead", value)
+			}
+			col = types.DashRoleCaption(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfFailoverCondition(v *[]types.FailoverCondition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14715,6 +14787,11 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 
 	for key, value := range shape {
 		switch key {
+		case "audioDashRoles":
+			if err := awsRestjson1_deserializeDocument__listOfDashRoleAudio(&sv.AudioDashRoles, value); err != nil {
+				return err
+			}
+
 		case "audioNormalizationSettings":
 			if err := awsRestjson1_deserializeDocumentAudioNormalizationSettings(&sv.AudioNormalizationSettings, value); err != nil {
 				return err
@@ -14755,6 +14832,15 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 		case "codecSettings":
 			if err := awsRestjson1_deserializeDocumentAudioCodecSettings(&sv.CodecSettings, value); err != nil {
 				return err
+			}
+
+		case "dvbDashAccessibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DvbDashAccessibility to be of type string, got %T instead", value)
+				}
+				sv.DvbDashAccessibility = types.DvbDashAccessibility(jtv)
 			}
 
 		case "languageCode":
@@ -16191,6 +16277,11 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 				sv.Accessibility = types.AccessibilityType(jtv)
 			}
 
+		case "captionDashRoles":
+			if err := awsRestjson1_deserializeDocument__listOfDashRoleCaption(&sv.CaptionDashRoles, value); err != nil {
+				return err
+			}
+
 		case "captionSelectorName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16203,6 +16294,15 @@ func awsRestjson1_deserializeDocumentCaptionDescription(v **types.CaptionDescrip
 		case "destinationSettings":
 			if err := awsRestjson1_deserializeDocumentCaptionDestinationSettings(&sv.DestinationSettings, value); err != nil {
 				return err
+			}
+
+		case "dvbDashAccessibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DvbDashAccessibility to be of type string, got %T instead", value)
+				}
+				sv.DvbDashAccessibility = types.DvbDashAccessibility(jtv)
 			}
 
 		case "languageCode":
@@ -17059,6 +17159,135 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 		case "vpc":
 			if err := awsRestjson1_deserializeDocumentVpcOutputSettingsDescription(&sv.Vpc, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCmafIngestGroupSettings(v **types.CmafIngestGroupSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CmafIngestGroupSettings
+	if *v == nil {
+		sv = &types.CmafIngestGroupSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "destination":
+			if err := awsRestjson1_deserializeDocumentOutputLocationRef(&sv.Destination, value); err != nil {
+				return err
+			}
+
+		case "nielsenId3Behavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafNielsenId3Behavior to be of type string, got %T instead", value)
+				}
+				sv.NielsenId3Behavior = types.CmafNielsenId3Behavior(jtv)
+			}
+
+		case "scte35Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Scte35Type to be of type string, got %T instead", value)
+				}
+				sv.Scte35Type = types.Scte35Type(jtv)
+			}
+
+		case "segmentLength":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SegmentLength = ptr.Int32(int32(i64))
+			}
+
+		case "segmentLengthUnits":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafIngestSegmentLengthUnits to be of type string, got %T instead", value)
+				}
+				sv.SegmentLengthUnits = types.CmafIngestSegmentLengthUnits(jtv)
+			}
+
+		case "sendDelayMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SendDelayMs = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCmafIngestOutputSettings(v **types.CmafIngestOutputSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CmafIngestOutputSettings
+	if *v == nil {
+		sv = &types.CmafIngestOutputSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "nameModifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.NameModifier = ptr.String(jtv)
 			}
 
 		default:
@@ -27374,6 +27603,11 @@ func awsRestjson1_deserializeDocumentOutputGroupSettings(v **types.OutputGroupSe
 				return err
 			}
 
+		case "cmafIngestGroupSettings":
+			if err := awsRestjson1_deserializeDocumentCmafIngestGroupSettings(&sv.CmafIngestGroupSettings, value); err != nil {
+				return err
+			}
+
 		case "frameCaptureGroupSettings":
 			if err := awsRestjson1_deserializeDocumentFrameCaptureGroupSettings(&sv.FrameCaptureGroupSettings, value); err != nil {
 				return err
@@ -27523,6 +27757,11 @@ func awsRestjson1_deserializeDocumentOutputSettings(v **types.OutputSettings, va
 		switch key {
 		case "archiveOutputSettings":
 			if err := awsRestjson1_deserializeDocumentArchiveOutputSettings(&sv.ArchiveOutputSettings, value); err != nil {
+				return err
+			}
+
+		case "cmafIngestOutputSettings":
+			if err := awsRestjson1_deserializeDocumentCmafIngestOutputSettings(&sv.CmafIngestOutputSettings, value); err != nil {
 				return err
 			}
 

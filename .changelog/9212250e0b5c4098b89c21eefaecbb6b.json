@@ -1,0 +1,8 @@
+{
+    "id": "9212250e-0b5c-4098-b89c-21eefaecbb6b",
+    "type": "feature",
+    "description": "The release includes a public SDK for AWS Clean Rooms ML APIs, making them globally available to developers worldwide.",
+    "modules": [
+        "service/cleanroomsml"
+    ]
+}

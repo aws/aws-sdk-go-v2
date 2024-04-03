@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Defines the information necessary to create a training dataset, or seed
-// audience. In Clean Rooms ML, the TrainingDataset is metadata that points to a
-// Glue table, which is read only during AudienceModel creation.
+// Defines the information necessary to create a training dataset. In Clean Rooms
+// ML, the TrainingDataset is metadata that points to a Glue table, which is read
+// only during AudienceModel creation.
 func (c *Client) CreateTrainingDataset(ctx context.Context, params *CreateTrainingDatasetInput, optFns ...func(*Options)) (*CreateTrainingDatasetOutput, error) {
 	if params == nil {
 		params = &CreateTrainingDatasetInput{}

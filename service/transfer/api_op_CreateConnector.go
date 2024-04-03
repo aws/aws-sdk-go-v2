@@ -73,6 +73,9 @@ type CreateConnectorInput struct {
 	// set, you can view connector activity in your CloudWatch logs.
 	LoggingRole *string
 
+	// Specifies the name of the security policy for the connector.
+	SecurityPolicyName *string
+
 	// A structure that contains the parameters for an SFTP connector object.
 	SftpConfig *types.SftpConnectorConfig
 

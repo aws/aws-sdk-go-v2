@@ -2421,6 +2421,11 @@ func awsRestjson1_deserializeOpDocumentSearchImageSetsOutput(v **SearchImageSets
 				sv.NextToken = ptr.String(jtv)
 			}
 
+		case "sort":
+			if err := awsRestjson1_deserializeDocumentSort(&sv.Sort, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4237,6 +4242,46 @@ func awsRestjson1_deserializeDocumentDICOMTags(v **types.DICOMTags, value interf
 				sv.DICOMPatientSex = ptr.String(jtv)
 			}
 
+		case "DICOMSeriesBodyPart":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DICOMSeriesBodyPart to be of type string, got %T instead", value)
+				}
+				sv.DICOMSeriesBodyPart = ptr.String(jtv)
+			}
+
+		case "DICOMSeriesInstanceUID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DICOMSeriesInstanceUID to be of type string, got %T instead", value)
+				}
+				sv.DICOMSeriesInstanceUID = ptr.String(jtv)
+			}
+
+		case "DICOMSeriesModality":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DICOMSeriesModality to be of type string, got %T instead", value)
+				}
+				sv.DICOMSeriesModality = ptr.String(jtv)
+			}
+
+		case "DICOMSeriesNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DICOMSeriesNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DICOMSeriesNumber = ptr.Int32(int32(i64))
+			}
+
 		case "DICOMStudyDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4682,6 +4727,55 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSort(v **types.Sort, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Sort
+	if *v == nil {
+		sv = &types.Sort{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sortField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SortField to be of type string, got %T instead", value)
+				}
+				sv.SortField = types.SortField(jtv)
+			}
+
+		case "sortOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SortOrder to be of type string, got %T instead", value)
+				}
+				sv.SortOrder = types.SortOrder(jtv)
 			}
 
 		default:

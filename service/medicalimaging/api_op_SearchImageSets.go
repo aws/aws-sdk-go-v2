@@ -63,6 +63,9 @@ type SearchImageSetsOutput struct {
 	// The token for pagination results.
 	NextToken *string
 
+	// The sort order for image set search results.
+	Sort *types.Sort
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

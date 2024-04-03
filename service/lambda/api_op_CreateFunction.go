@@ -132,7 +132,7 @@ type CreateFunctionInput struct {
 	// .
 	Handler *string
 
-	// Container image configuration values (https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings)
+	// Container image configuration values (https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms)
 	// that override the values in the container image Dockerfile.
 	ImageConfig *types.ImageConfig
 

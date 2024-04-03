@@ -5378,6 +5378,28 @@ func awsRestjson1_serializeDocument__listOfColorCorrection(v []types.ColorCorrec
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfDashRoleAudio(v []types.DashRoleAudio, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfDashRoleCaption(v []types.DashRoleCaption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfFailoverCondition(v []types.FailoverCondition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5999,6 +6021,13 @@ func awsRestjson1_serializeDocumentAudioDescription(v *types.AudioDescription, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AudioDashRoles != nil {
+		ok := object.Key("audioDashRoles")
+		if err := awsRestjson1_serializeDocument__listOfDashRoleAudio(v.AudioDashRoles, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AudioNormalizationSettings != nil {
 		ok := object.Key("audioNormalizationSettings")
 		if err := awsRestjson1_serializeDocumentAudioNormalizationSettings(v.AudioNormalizationSettings, ok); err != nil {
@@ -6033,6 +6062,11 @@ func awsRestjson1_serializeDocumentAudioDescription(v *types.AudioDescription, v
 		if err := awsRestjson1_serializeDocumentAudioCodecSettings(v.CodecSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.DvbDashAccessibility) > 0 {
+		ok := object.Key("dvbDashAccessibility")
+		ok.String(string(v.DvbDashAccessibility))
 	}
 
 	if v.LanguageCode != nil {
@@ -6562,6 +6596,13 @@ func awsRestjson1_serializeDocumentCaptionDescription(v *types.CaptionDescriptio
 		ok.String(string(v.Accessibility))
 	}
 
+	if v.CaptionDashRoles != nil {
+		ok := object.Key("captionDashRoles")
+		if err := awsRestjson1_serializeDocument__listOfDashRoleCaption(v.CaptionDashRoles, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CaptionSelectorName != nil {
 		ok := object.Key("captionSelectorName")
 		ok.String(*v.CaptionSelectorName)
@@ -6572,6 +6613,11 @@ func awsRestjson1_serializeDocumentCaptionDescription(v *types.CaptionDescriptio
 		if err := awsRestjson1_serializeDocumentCaptionDestinationSettings(v.DestinationSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.DvbDashAccessibility) > 0 {
+		ok := object.Key("dvbDashAccessibility")
+		ok.String(string(v.DvbDashAccessibility))
 	}
 
 	if v.LanguageCode != nil {
@@ -6878,6 +6924,57 @@ func awsRestjson1_serializeDocumentCdiInputSpecification(v *types.CdiInputSpecif
 	if len(v.Resolution) > 0 {
 		ok := object.Key("resolution")
 		ok.String(string(v.Resolution))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCmafIngestGroupSettings(v *types.CmafIngestGroupSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("destination")
+		if err := awsRestjson1_serializeDocumentOutputLocationRef(v.Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.NielsenId3Behavior) > 0 {
+		ok := object.Key("nielsenId3Behavior")
+		ok.String(string(v.NielsenId3Behavior))
+	}
+
+	if len(v.Scte35Type) > 0 {
+		ok := object.Key("scte35Type")
+		ok.String(string(v.Scte35Type))
+	}
+
+	if v.SegmentLength != nil {
+		ok := object.Key("segmentLength")
+		ok.Integer(*v.SegmentLength)
+	}
+
+	if len(v.SegmentLengthUnits) > 0 {
+		ok := object.Key("segmentLengthUnits")
+		ok.String(string(v.SegmentLengthUnits))
+	}
+
+	if v.SendDelayMs != nil {
+		ok := object.Key("sendDelayMs")
+		ok.Integer(*v.SendDelayMs)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCmafIngestOutputSettings(v *types.CmafIngestOutputSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NameModifier != nil {
+		ok := object.Key("nameModifier")
+		ok.String(*v.NameModifier)
 	}
 
 	return nil
@@ -10702,6 +10799,13 @@ func awsRestjson1_serializeDocumentOutputGroupSettings(v *types.OutputGroupSetti
 		}
 	}
 
+	if v.CmafIngestGroupSettings != nil {
+		ok := object.Key("cmafIngestGroupSettings")
+		if err := awsRestjson1_serializeDocumentCmafIngestGroupSettings(v.CmafIngestGroupSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FrameCaptureGroupSettings != nil {
 		ok := object.Key("frameCaptureGroupSettings")
 		if err := awsRestjson1_serializeDocumentFrameCaptureGroupSettings(v.FrameCaptureGroupSettings, ok); err != nil {
@@ -10794,6 +10898,13 @@ func awsRestjson1_serializeDocumentOutputSettings(v *types.OutputSettings, value
 	if v.ArchiveOutputSettings != nil {
 		ok := object.Key("archiveOutputSettings")
 		if err := awsRestjson1_serializeDocumentArchiveOutputSettings(v.ArchiveOutputSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CmafIngestOutputSettings != nil {
+		ok := object.Key("cmafIngestOutputSettings")
+		if err := awsRestjson1_serializeDocumentCmafIngestOutputSettings(v.CmafIngestOutputSettings, ok); err != nil {
 			return err
 		}
 	}

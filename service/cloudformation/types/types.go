@@ -558,6 +558,17 @@ type ResourceChange struct {
 	// have physical IDs because they haven't been created.
 	PhysicalResourceId *string
 
+	// The action that will be taken on the physical resource when the change set is
+	// executed.
+	//   - Delete The resource will be deleted.
+	//   - Retain The resource will be retained.
+	//   - Snapshot The resource will have a snapshot taken.
+	//   - ReplaceAndDelete The resource will be replaced and then deleted.
+	//   - ReplaceAndRetain The resource will be replaced and then retained.
+	//   - ReplaceAndSnapshot The resource will be replaced and then have a snapshot
+	//   taken.
+	PolicyAction PolicyAction
+
 	// For the Modify action, indicates whether CloudFormation will replace the
 	// resource by creating a new one and deleting the old one. This value depends on
 	// the value of the RequiresRecreation property in the ResourceTargetDefinition
@@ -2417,7 +2428,7 @@ type TemplateSummaryConfig struct {
 
 // Detailed information concerning the specification of a CloudFormation extension
 // in a given account and Region. For more information, see Configuring extensions
-// at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration)
 // in the CloudFormation User Guide.
 type TypeConfigurationDetails struct {
 

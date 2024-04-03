@@ -769,6 +769,43 @@ func (ChannelState) Values() []ChannelState {
 	}
 }
 
+type CmafIngestSegmentLengthUnits string
+
+// Enum values for CmafIngestSegmentLengthUnits
+const (
+	CmafIngestSegmentLengthUnitsMilliseconds CmafIngestSegmentLengthUnits = "MILLISECONDS"
+	CmafIngestSegmentLengthUnitsSeconds      CmafIngestSegmentLengthUnits = "SECONDS"
+)
+
+// Values returns all known values for CmafIngestSegmentLengthUnits. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CmafIngestSegmentLengthUnits) Values() []CmafIngestSegmentLengthUnits {
+	return []CmafIngestSegmentLengthUnits{
+		"MILLISECONDS",
+		"SECONDS",
+	}
+}
+
+type CmafNielsenId3Behavior string
+
+// Enum values for CmafNielsenId3Behavior
+const (
+	CmafNielsenId3BehaviorNoPassthrough CmafNielsenId3Behavior = "NO_PASSTHROUGH"
+	CmafNielsenId3BehaviorPassthrough   CmafNielsenId3Behavior = "PASSTHROUGH"
+)
+
+// Values returns all known values for CmafNielsenId3Behavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafNielsenId3Behavior) Values() []CmafNielsenId3Behavior {
+	return []CmafNielsenId3Behavior{
+		"NO_PASSTHROUGH",
+		"PASSTHROUGH",
+	}
+}
+
 type ColorSpace string
 
 // Enum values for ColorSpace
@@ -804,6 +841,78 @@ const (
 func (ContentType) Values() []ContentType {
 	return []ContentType{
 		"image/jpeg",
+	}
+}
+
+type DashRoleAudio string
+
+// Enum values for DashRoleAudio
+const (
+	DashRoleAudioAlternate                    DashRoleAudio = "ALTERNATE"
+	DashRoleAudioCommentary                   DashRoleAudio = "COMMENTARY"
+	DashRoleAudioDescription                  DashRoleAudio = "DESCRIPTION"
+	DashRoleAudioDub                          DashRoleAudio = "DUB"
+	DashRoleAudioEmergency                    DashRoleAudio = "EMERGENCY"
+	DashRoleAudioEnhancedAudioIntelligibility DashRoleAudio = "ENHANCED-AUDIO-INTELLIGIBILITY"
+	DashRoleAudioKaraoke                      DashRoleAudio = "KARAOKE"
+	DashRoleAudioMain                         DashRoleAudio = "MAIN"
+	DashRoleAudioSupplementary                DashRoleAudio = "SUPPLEMENTARY"
+)
+
+// Values returns all known values for DashRoleAudio. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashRoleAudio) Values() []DashRoleAudio {
+	return []DashRoleAudio{
+		"ALTERNATE",
+		"COMMENTARY",
+		"DESCRIPTION",
+		"DUB",
+		"EMERGENCY",
+		"ENHANCED-AUDIO-INTELLIGIBILITY",
+		"KARAOKE",
+		"MAIN",
+		"SUPPLEMENTARY",
+	}
+}
+
+type DashRoleCaption string
+
+// Enum values for DashRoleCaption
+const (
+	DashRoleCaptionAlternate      DashRoleCaption = "ALTERNATE"
+	DashRoleCaptionCaption        DashRoleCaption = "CAPTION"
+	DashRoleCaptionCommentary     DashRoleCaption = "COMMENTARY"
+	DashRoleCaptionDescription    DashRoleCaption = "DESCRIPTION"
+	DashRoleCaptionDub            DashRoleCaption = "DUB"
+	DashRoleCaptionEasyreader     DashRoleCaption = "EASYREADER"
+	DashRoleCaptionEmergency      DashRoleCaption = "EMERGENCY"
+	DashRoleCaptionForcedSubtitle DashRoleCaption = "FORCED-SUBTITLE"
+	DashRoleCaptionKaraoke        DashRoleCaption = "KARAOKE"
+	DashRoleCaptionMain           DashRoleCaption = "MAIN"
+	DashRoleCaptionMetadata       DashRoleCaption = "METADATA"
+	DashRoleCaptionSubtitle       DashRoleCaption = "SUBTITLE"
+	DashRoleCaptionSupplementary  DashRoleCaption = "SUPPLEMENTARY"
+)
+
+// Values returns all known values for DashRoleCaption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashRoleCaption) Values() []DashRoleCaption {
+	return []DashRoleCaption{
+		"ALTERNATE",
+		"CAPTION",
+		"COMMENTARY",
+		"DESCRIPTION",
+		"DUB",
+		"EASYREADER",
+		"EMERGENCY",
+		"FORCED-SUBTITLE",
+		"KARAOKE",
+		"MAIN",
+		"METADATA",
+		"SUBTITLE",
+		"SUPPLEMENTARY",
 	}
 }
 
@@ -874,6 +983,34 @@ func (DolbyEProgramSelection) Values() []DolbyEProgramSelection {
 		"PROGRAM_6",
 		"PROGRAM_7",
 		"PROGRAM_8",
+	}
+}
+
+type DvbDashAccessibility string
+
+// Enum values for DvbDashAccessibility
+const (
+	DvbDashAccessibilityDvbdash1VisuallyImpaired       DvbDashAccessibility = "DVBDASH_1_VISUALLY_IMPAIRED"
+	DvbDashAccessibilityDvbdash2HardOfHearing          DvbDashAccessibility = "DVBDASH_2_HARD_OF_HEARING"
+	DvbDashAccessibilityDvbdash3SupplementalCommentary DvbDashAccessibility = "DVBDASH_3_SUPPLEMENTAL_COMMENTARY"
+	DvbDashAccessibilityDvbdash4DirectorsCommentary    DvbDashAccessibility = "DVBDASH_4_DIRECTORS_COMMENTARY"
+	DvbDashAccessibilityDvbdash5EducationalNotes       DvbDashAccessibility = "DVBDASH_5_EDUCATIONAL_NOTES"
+	DvbDashAccessibilityDvbdash6MainProgram            DvbDashAccessibility = "DVBDASH_6_MAIN_PROGRAM"
+	DvbDashAccessibilityDvbdash7CleanFeed              DvbDashAccessibility = "DVBDASH_7_CLEAN_FEED"
+)
+
+// Values returns all known values for DvbDashAccessibility. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DvbDashAccessibility) Values() []DvbDashAccessibility {
+	return []DvbDashAccessibility{
+		"DVBDASH_1_VISUALLY_IMPAIRED",
+		"DVBDASH_2_HARD_OF_HEARING",
+		"DVBDASH_3_SUPPLEMENTAL_COMMENTARY",
+		"DVBDASH_4_DIRECTORS_COMMENTARY",
+		"DVBDASH_5_EDUCATIONAL_NOTES",
+		"DVBDASH_6_MAIN_PROGRAM",
+		"DVBDASH_7_CLEAN_FEED",
 	}
 }
 
@@ -5105,6 +5242,24 @@ func (Scte35SpliceInsertWebDeliveryAllowedBehavior) Values() []Scte35SpliceInser
 	return []Scte35SpliceInsertWebDeliveryAllowedBehavior{
 		"FOLLOW",
 		"IGNORE",
+	}
+}
+
+type Scte35Type string
+
+// Enum values for Scte35Type
+const (
+	Scte35TypeNone                      Scte35Type = "NONE"
+	Scte35TypeScte35WithoutSegmentation Scte35Type = "SCTE_35_WITHOUT_SEGMENTATION"
+)
+
+// Values returns all known values for Scte35Type. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Scte35Type) Values() []Scte35Type {
+	return []Scte35Type{
+		"NONE",
+		"SCTE_35_WITHOUT_SEGMENTATION",
 	}
 }
 

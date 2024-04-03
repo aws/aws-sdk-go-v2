@@ -697,6 +697,18 @@ func TestCheckSnapshot_StopDBCluster(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_SwitchoverGlobalCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SwitchoverGlobalCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SwitchoverGlobalCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AddSourceIdentifierToSubscription(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddSourceIdentifierToSubscription(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1338,18 @@ func TestUpdateSnapshot_StopDBCluster(t *testing.T) {
 	_, err := svc.StopDBCluster(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopDBCluster")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SwitchoverGlobalCluster(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SwitchoverGlobalCluster(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SwitchoverGlobalCluster")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

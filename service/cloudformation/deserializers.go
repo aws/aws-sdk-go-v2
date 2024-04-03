@@ -14271,6 +14271,19 @@ func awsAwsquery_deserializeDocumentResourceChange(v **types.ResourceChange, dec
 				sv.PhysicalResourceId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("PolicyAction", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PolicyAction = types.PolicyAction(xtv)
+			}
+
 		case strings.EqualFold("Replacement", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
