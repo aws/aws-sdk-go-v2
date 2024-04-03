@@ -206,7 +206,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates a public third-party extension, making it available for use in stack templates. For more information,\n   see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html\">Using public\n   extensions</a> in the <i>CloudFormation User Guide</i>.</p>\n         <p>Once you have activated a public third-party extension in your account and Region, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at\n    the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Activates a public third-party extension, making it available for use in stack templates. For more information,\n   see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html\">Using public\n   extensions</a> in the <i>CloudFormation User Guide</i>.</p>\n         <p>Once you have activated a public third-party extension in your account and Region, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see\n    <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration\">Configuring extensions at\n    the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -364,7 +364,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry\n   for the account and Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at\n   the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry\n   for the account and Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration\">Configuring extensions at\n   the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
             }
         },
         "com.amazonaws.cloudformation#BatchDescribeTypeConfigurationsError": {
@@ -5541,7 +5541,7 @@
                 "ConfigurationSchema": {
                     "target": "com.amazonaws.cloudformation#ConfigurationSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string that represent the current configuration data for the extension in this account and Region.</p>\n         <p>To set the configuration data for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>. For more\n   information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at\n    the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A JSON string that represent the current configuration data for the extension in this account and Region.</p>\n         <p>To set the configuration data for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>. For more\n   information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration\">Configuring extensions at\n    the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
                     }
                 },
                 "PublisherId": {
@@ -9350,6 +9350,47 @@
                 "smithy.api#documentation": "<p>Context information that enables CloudFormation to uniquely identify a resource. CloudFormation uses context key-value pairs in\n   cases where a resource's logical and physical IDs aren't enough to uniquely identify that resource. Each context\n   key-value pair specifies a resource that contains the targeted resource.</p>"
             }
         },
+        "com.amazonaws.cloudformation#PolicyAction": {
+            "type": "enum",
+            "members": {
+                "Delete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Delete"
+                    }
+                },
+                "Retain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Retain"
+                    }
+                },
+                "Snapshot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Snapshot"
+                    }
+                },
+                "ReplaceAndDelete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplaceAndDelete"
+                    }
+                },
+                "ReplaceAndRetain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplaceAndRetain"
+                    }
+                },
+                "ReplaceAndSnapshot": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReplaceAndSnapshot"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudformation#PrivateTypeArn": {
             "type": "string",
             "traits": {
@@ -9750,7 +9791,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in\n   CloudFormation templates in your Amazon Web Services account, and includes:</p>\n         <ul>\n            <li>\n               <p>Validating the extension schema.</p>\n            </li>\n            <li>\n               <p>Determining which handlers, if any, have been specified for the extension.</p>\n            </li>\n            <li>\n               <p>Making the extension available for use in your account.</p>\n            </li>\n         </ul>\n         <p>For more information about how to develop extensions and ready them for registration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource\n   Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and\n   per Region. Use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p>\n         <p>Once you have initiated a registration request using <a>RegisterType</a>, you can use <a>DescribeTypeRegistration</a> to monitor the progress of the registration request.</p>\n         <p>Once you have registered a private extension in your account and Region, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify\n   configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at\n    the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in\n   CloudFormation templates in your Amazon Web Services account, and includes:</p>\n         <ul>\n            <li>\n               <p>Validating the extension schema.</p>\n            </li>\n            <li>\n               <p>Determining which handlers, if any, have been specified for the extension.</p>\n            </li>\n            <li>\n               <p>Making the extension available for use in your account.</p>\n            </li>\n         </ul>\n         <p>For more information about how to develop extensions and ready them for registration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource\n   Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and\n   per Region. Use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p>\n         <p>Once you have initiated a registration request using <a>RegisterType</a>, you can use <a>DescribeTypeRegistration</a> to monitor the progress of the registration request.</p>\n         <p>Once you have registered a private extension in your account and Region, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify\n   configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration\">Configuring extensions at\n    the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -10031,6 +10072,12 @@
         "com.amazonaws.cloudformation#ResourceChange": {
             "type": "structure",
             "members": {
+                "PolicyAction": {
+                    "target": "com.amazonaws.cloudformation#PolicyAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that will be taken on the physical resource when the change set is executed.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Delete</code> The resource will be deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Retain</code> The resource will be retained.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Snapshot</code> The resource will have a snapshot taken.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ReplaceAndDelete</code> The resource will be replaced and then deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ReplaceAndRetain</code> The resource will be replaced and then retained.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ReplaceAndSnapshot</code> The resource will be replaced and then have a snapshot taken.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "Action": {
                     "target": "com.amazonaws.cloudformation#ChangeAction",
                     "traits": {
@@ -11058,7 +11105,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the configuration data for a registered CloudFormation extension, in the given account and Region.</p>\n         <p>To view the current configuration data for an extension, refer to the <code>ConfigurationSchema</code> element\n   of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at\n    the account level</a> in the <i>CloudFormation User Guide</i>.</p>\n         <important>\n            <p>It's strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such\n    as third-party credentials. For more details on dynamic references, see <a href=\"https://docs.aws.amazon.com/\">Using\n    dynamic references to specify template values</a> in the <i>CloudFormation User Guide</i>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Specifies the configuration data for a registered CloudFormation extension, in the given account and Region.</p>\n         <p>To view the current configuration data for an extension, refer to the <code>ConfigurationSchema</code> element\n   of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration\">Configuring extensions at\n    the account level</a> in the <i>CloudFormation User Guide</i>.</p>\n         <important>\n            <p>It's strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such\n    as third-party credentials. For more details on dynamic references, see <a href=\"https://docs.aws.amazon.com/\">Using\n    dynamic references to specify template values</a> in the <i>CloudFormation User Guide</i>.</p>\n         </important>"
             }
         },
         "com.amazonaws.cloudformation#SetTypeConfigurationInput": {
@@ -14224,7 +14271,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Detailed information concerning the specification of a CloudFormation extension in a given account and\n   Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at\n   the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Detailed information concerning the specification of a CloudFormation extension in a given account and\n   Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration\">Configuring extensions at\n   the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
             }
         },
         "com.amazonaws.cloudformation#TypeConfigurationDetailsList": {

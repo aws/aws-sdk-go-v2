@@ -295,6 +295,9 @@
                 },
                 {
                     "target": "com.amazonaws.docdb#StopDBCluster"
+                },
+                {
+                    "target": "com.amazonaws.docdb#SwitchoverGlobalCluster"
                 }
             ],
             "traits": {
@@ -8387,6 +8390,67 @@
                 "smithy.api#documentation": "<p>The subscription name does not exist. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.docdb#SwitchoverGlobalCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdb#SwitchoverGlobalClusterMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.docdb#SwitchoverGlobalClusterResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdb#DBClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.docdb#GlobalClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.docdb#InvalidDBClusterStateFault"
+                },
+                {
+                    "target": "com.amazonaws.docdb#InvalidGlobalClusterStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Switches over the specified secondary Amazon DocumentDB cluster to be the new primary Amazon DocumentDB cluster in the global database cluster.</p>"
+            }
+        },
+        "com.amazonaws.docdb#SwitchoverGlobalClusterMessage": {
+            "type": "structure",
+            "members": {
+                "GlobalClusterIdentifier": {
+                    "target": "com.amazonaws.docdb#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the Amazon DocumentDB global database cluster to switch over. \n        The identifier is the unique key assigned by the user when the cluster is created. \n        In other words, it's the name of the global cluster.\n        This parameter isn’t case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing global cluster (Amazon DocumentDB global database).</p>\n            </li>\n            <li>\n               <p>Minimum length of 1. Maximum length of 255.</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetDbClusterIdentifier": {
+                    "target": "com.amazonaws.docdb#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the secondary Amazon DocumentDB cluster to promote to the new primary for the global database cluster. \n            Use the Amazon Resource Name (ARN) for the identifier so that Amazon DocumentDB can locate the cluster in its Amazon Web Services region.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing secondary cluster.</p>\n            </li>\n            <li>\n               <p>Minimum length of 1. Maximum length of 255.</p>\n            </li>\n         </ul>\n         <p>Pattern: <code>[A-Za-z][0-9A-Za-z-:._]*</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.docdb#SwitchoverGlobalClusterResult": {
+            "type": "structure",
+            "members": {
+                "GlobalCluster": {
+                    "target": "com.amazonaws.docdb#GlobalCluster"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#TStamp": {

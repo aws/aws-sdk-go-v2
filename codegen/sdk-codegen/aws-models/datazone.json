@@ -432,6 +432,9 @@
                 "readOnlyFormsOutput": {
                     "target": "com.amazonaws.datazone#FormOutputList"
                 },
+                "latestTimeSeriesDataPointFormsOutput": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList"
+                },
                 "owningProjectIdentifier": {
                     "target": "com.amazonaws.datazone#ProjectId"
                 },
@@ -595,6 +598,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The read-only forms included in the additional attributes of an inventory asset.</p>"
                     }
+                },
+                "latestTimeSeriesDataPointFormsOutput": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest time series data points forms included in the additional attributes of an\n         asset.</p>"
+                    }
                 }
             },
             "traits": {
@@ -632,6 +641,12 @@
                     "target": "com.amazonaws.datazone#Forms",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata forms attached to an asset published in an Amazon DataZone catalog. </p>"
+                    }
+                },
+                "latestTimeSeriesDataPointForms": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest time series data points forms included in the additional attributes of an\n         asset.</p>"
                     }
                 },
                 "glossaryTerms": {
@@ -766,6 +781,12 @@
                     "target": "com.amazonaws.datazone#Forms",
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata forms that form additional attributes of the metadata asset.</p>"
+                    }
+                },
+                "latestTimeSeriesDataPointForms": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest time series data points forms included in the additional attributes of an\n         asset.</p>"
                     }
                 }
             },
@@ -1659,6 +1680,12 @@
                         "smithy.api#documentation": "<p>The read-only metadata forms that are attached to the created asset.</p>"
                     }
                 },
+                "latestTimeSeriesDataPointFormsOutput": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest data point that was imported into the time series form for the asset. </p>"
+                    }
+                },
                 "predictionConfiguration": {
                     "target": "com.amazonaws.datazone#PredictionConfiguration",
                     "traits": {
@@ -1889,6 +1916,12 @@
                     "target": "com.amazonaws.datazone#FormOutputList",
                     "traits": {
                         "smithy.api#documentation": "<p>The read-only metadata forms that were attached to the asset as part of the asset\n         revision.</p>"
+                    }
+                },
+                "latestTimeSeriesDataPointFormsOutput": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest data point that was imported into the time series form for the asset. </p>"
                     }
                 },
                 "predictionConfiguration": {
@@ -3513,7 +3546,7 @@
                     }
                 },
                 "entityIdentifier": {
-                    "target": "com.amazonaws.datazone#EntityId",
+                    "target": "com.amazonaws.datazone#EntityIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the asset.</p>",
                         "smithy.api#required": {}
@@ -4607,6 +4640,12 @@
                 }
             }
         },
+        "com.amazonaws.datazone#DataPointIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{0,36}$"
+            }
+        },
         "com.amazonaws.datazone#DataProductDescription": {
             "type": "string",
             "traits": {
@@ -5460,6 +5499,9 @@
                     "target": "com.amazonaws.datazone#DeleteSubscriptionTarget"
                 },
                 {
+                    "target": "com.amazonaws.datazone#DeleteTimeSeriesDataPoints"
+                },
+                {
                     "target": "com.amazonaws.datazone#GetEnvironment"
                 },
                 {
@@ -5488,6 +5530,9 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#GetSubscriptionTarget"
+                },
+                {
+                    "target": "com.amazonaws.datazone#GetTimeSeriesDataPoint"
                 },
                 {
                     "target": "com.amazonaws.datazone#GetUserProfile"
@@ -5530,6 +5575,12 @@
                 },
                 {
                     "target": "com.amazonaws.datazone#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ListTimeSeriesDataPoints"
+                },
+                {
+                    "target": "com.amazonaws.datazone#PostTimeSeriesDataPoints"
                 },
                 {
                     "target": "com.amazonaws.datazone#RejectPredictions"
@@ -7363,6 +7414,96 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.datazone#DeleteTimeSeriesDataPoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#DeleteTimeSeriesDataPointsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#DeleteTimeSeriesDataPointsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified time series form for the specified asset. </p>",
+                "smithy.api#http": {
+                    "code": 204,
+                    "method": "DELETE",
+                    "uri": "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/time-series-data-points"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteTimeSeriesDataPointsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain that houses the asset for which you want to delete\n         a time series form.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "com.amazonaws.datazone#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset for which you want to delete a time series form.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TimeSeriesEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the asset for which you want to delete a time series form.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "formName": {
+                    "target": "com.amazonaws.datazone#TimeSeriesFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the time series form that you want to delete.</p>",
+                        "smithy.api#httpQuery": "formName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is\n         automatically populated if not provided.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#DeleteTimeSeriesDataPointsOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#Deployment": {
             "type": "structure",
             "members": {
@@ -7764,7 +7905,16 @@
             }
         },
         "com.amazonaws.datazone#EntityId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.datazone#EntityIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
         },
         "com.amazonaws.datazone#EntityType": {
             "type": "enum",
@@ -9025,6 +9175,12 @@
                     "target": "com.amazonaws.datazone#FormOutputList",
                     "traits": {
                         "smithy.api#documentation": "<p>The read-only metadata forms attached to the asset.</p>"
+                    }
+                },
+                "latestTimeSeriesDataPointFormsOutput": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest data point that was imported into the time series form for the asset. </p>"
                     }
                 }
             },
@@ -11888,6 +12044,127 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#GetTimeSeriesDataPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#GetTimeSeriesDataPointInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#GetTimeSeriesDataPointOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the existing data point for the asset.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/time-series-data-points/{identifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#GetTimeSeriesDataPointInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain that houses the asset for which you want to get the\n         data point.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "com.amazonaws.datazone#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset for which you want to get the data point.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TimeSeriesEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the asset for which you want to get the data point.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data point that you want to get.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "formName": {
+                    "target": "com.amazonaws.datazone#TimeSeriesFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the time series form that houses the data point that you want to get.</p>",
+                        "smithy.api#httpQuery": "formName",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#GetTimeSeriesDataPointOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain that houses the asset data point that you want to\n         get.</p>"
+                    }
+                },
+                "entityId": {
+                    "target": "com.amazonaws.datazone#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset for which you want to get the data point.</p>"
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TimeSeriesEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the asset for which you want to get the data point.</p>"
+                    }
+                },
+                "formName": {
+                    "target": "com.amazonaws.datazone#TimeSeriesFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the time series form that houses the data point that you want to get.</p>"
+                    }
+                },
+                "form": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointFormOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time series form that houses the data point that you want to get.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#GetUserProfile": {
             "type": "operation",
             "input": {
@@ -12372,6 +12649,12 @@
                         "smithy.api#documentation": "<p>The relational filter configurations included in the configuration details of the Amazon Web Services\n         Glue data source.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "autoImportDataQualityResult": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically import data quality metrics as part of the data\n         source run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12415,6 +12698,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The relational filter configurations included in the configuration details of the Amazon Web Services\n         Glue data source.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "autoImportDataQualityResult": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to automatically import data quality metrics as part of the data\n         source run.</p>"
                     }
                 }
             },
@@ -14725,6 +15014,135 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#ListTimeSeriesDataPoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#ListTimeSeriesDataPointsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#ListTimeSeriesDataPointsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists time series data points.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/time-series-data-points"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.datazone#ListTimeSeriesDataPointsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain that houses the assets for which you want to list\n         time series data points.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "com.amazonaws.datazone#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset for which you want to list data points.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TimeSeriesEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the asset for which you want to list data points.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "formName": {
+                    "target": "com.amazonaws.datazone#TimeSeriesFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the time series data points form.</p>",
+                        "smithy.api#httpQuery": "formName",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data points that you want to list started.</p>",
+                        "smithy.api#httpQuery": "startedAt"
+                    }
+                },
+                "endedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the data points that you wanted to list ended.</p>",
+                        "smithy.api#httpQuery": "endedAt"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of data points is greater than the default value for the MaxResults\n         parameter, or if you explicitly specify a value for MaxResults that is less than the number\n         of data points, the response includes a pagination token named NextToken. You can specify\n         this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set\n         of data points.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.datazone#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of data points to return in a single call to\n         ListTimeSeriesDataPoints. When the number of data points to be listed is greater than the\n         value of MaxResults, the response contains a NextToken value that you can use in a\n         subsequent call to ListTimeSeriesDataPoints to list the next set of data points.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#ListTimeSeriesDataPointsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results of the ListTimeSeriesDataPoints action. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.datazone#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the number of data points is greater than the default value for the MaxResults\n         parameter, or if you explicitly specify a value for MaxResults that is less than the number\n         of data points, the response includes a pagination token named NextToken. You can specify\n         this NextToken value in a subsequent call to ListTimeSeriesDataPoints to list the next set\n         of data points.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.datazone#Listing": {
             "type": "resource",
             "identifiers": {
@@ -15384,6 +15802,125 @@
                     "min": 1,
                     "max": 8192
                 }
+            }
+        },
+        "com.amazonaws.datazone#PostTimeSeriesDataPoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.datazone#PostTimeSeriesDataPointsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.datazone#PostTimeSeriesDataPointsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.datazone#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.datazone#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Posts time series data points to Amazon DataZone for the specified asset.</p>",
+                "smithy.api#http": {
+                    "code": 201,
+                    "method": "POST",
+                    "uri": "/v2/domains/{domainIdentifier}/entities/{entityType}/{entityIdentifier}/time-series-data-points"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.datazone#PostTimeSeriesDataPointsInput": {
+            "type": "structure",
+            "members": {
+                "domainIdentifier": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which you want to post time series data\n         points.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityIdentifier": {
+                    "target": "com.amazonaws.datazone#EntityIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset for which you want to post time series data points.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TimeSeriesEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the asset for which you want to post data points.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "forms": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointFormInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms that contain the data points that you want to post.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.datazone#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the\n         request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.datazone#PostTimeSeriesDataPointsOutput": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.datazone#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon DataZone domain in which you want to post time series data\n         points.</p>"
+                    }
+                },
+                "entityId": {
+                    "target": "com.amazonaws.datazone#EntityId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset for which you want to post time series data points.</p>"
+                    }
+                },
+                "entityType": {
+                    "target": "com.amazonaws.datazone#TimeSeriesEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the asset for which you want to post data points.</p>"
+                    }
+                },
+                "forms": {
+                    "target": "com.amazonaws.datazone#TimeSeriesDataPointFormOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forms that contain the data points that you have posted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.datazone#PredictionChoices": {
@@ -17046,6 +17583,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FORMS"
+                    }
+                },
+                "TIME_SERIES_DATA_POINT_FORMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIME_SERIES_DATA_POINT_FORMS"
                     }
                 }
             }
@@ -18833,6 +19376,200 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesDataPointFormInput": {
+            "type": "structure",
+            "members": {
+                "formName": {
+                    "target": "com.amazonaws.datazone#TimeSeriesFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the time series data points form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeIdentifier": {
+                    "target": "com.amazonaws.datazone#FormTypeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the type of the time series data points form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision type of the time series data points form.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the time series data points form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the time series data points form.</p>",
+                        "smithy.api#length": {
+                            "max": 500000
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time series data points form.</p>"
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesDataPointFormInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#TimeSeriesDataPointFormInput"
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesDataPointFormOutput": {
+            "type": "structure",
+            "members": {
+                "formName": {
+                    "target": "com.amazonaws.datazone#TimeSeriesFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the time series data points form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeIdentifier": {
+                    "target": "com.amazonaws.datazone#FormTypeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the type of the time series data points form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision type of the time series data points form.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the time series data points form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the time series data points form.</p>",
+                        "smithy.api#length": {
+                            "max": 500000
+                        }
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DataPointIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the time series data points form.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time series data points form.</p>"
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesDataPointFormOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#TimeSeriesDataPointFormOutput"
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesDataPointIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,36}$"
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutput": {
+            "type": "structure",
+            "members": {
+                "formName": {
+                    "target": "com.amazonaws.datazone#TimeSeriesFormName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the time series data points summary form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeIdentifier": {
+                    "target": "com.amazonaws.datazone#FormTypeIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type ID of the time series data points summary form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "typeRevision": {
+                    "target": "com.amazonaws.datazone#Revision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type revision of the time series data points summary form.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the time series data points summary form.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentSummary": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the summary of the time series data points form.</p>",
+                        "smithy.api#length": {
+                            "max": 20000
+                        }
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.datazone#DataPointIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the time series data points summary form.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the time series data points form.</p>"
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#TimeSeriesDataPointSummaryFormOutput"
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesEntityType": {
+            "type": "enum",
+            "members": {
+                "ASSET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSET"
+                    }
+                },
+                "LISTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LISTING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.datazone#TimeSeriesFormName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.datazone#Timezone": {

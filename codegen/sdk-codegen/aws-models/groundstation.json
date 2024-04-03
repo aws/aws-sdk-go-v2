@@ -907,6 +907,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Tags assigned to a contact.</p>"
                     }
+                },
+                "visibilityStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Projected time in UTC your satellite will rise above the\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>.\n         This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was\n         active during contact execution for completed contacts.\n         <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i>\n         </p>"
+                    }
+                },
+                "visibilityEndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Projected time in UTC your satellite will set below the\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>.\n         This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was\n         active during contact execution for completed contacts.\n         <i>This field is not present for contacts with a <code>SCHEDULING</code> or <code>SCHEDULED</code> status.</i>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -1238,13 +1250,13 @@
                 "contactPrePassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time prior to contact start you’d like to receive a CloudWatch event indicating an upcoming pass.</p>"
+                        "smithy.api#documentation": "<p>Amount of time prior to contact start you’d like to receive a Ground Station Contact State Change event indicating an upcoming pass.</p>"
                     }
                 },
                 "contactPostPassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>"
+                        "smithy.api#documentation": "<p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>"
                     }
                 },
                 "minimumViableContactDurationSeconds": {
@@ -1898,6 +1910,18 @@
                     "target": "com.amazonaws.groundstation#DataflowList",
                     "traits": {
                         "smithy.api#documentation": "<p>List describing source and destination details for each dataflow edge.</p>"
+                    }
+                },
+                "visibilityStartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Projected time in UTC your satellite will rise above the\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>.\n         This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was\n         active during contact execution for completed contacts.\n      </p>"
+                    }
+                },
+                "visibilityEndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Projected time in UTC your satellite will set below the\n         <a href=\"https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html\">receive mask</a>.\n         This time is based on the satellite's current active ephemeris for future contacts and the ephemeris that was\n         active during contact execution for completed contacts.\n      </p>"
                     }
                 }
             },
@@ -6064,13 +6088,13 @@
                 "contactPrePassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>"
+                        "smithy.api#documentation": "<p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>"
                     }
                 },
                 "contactPostPassDurationSeconds": {
                     "target": "com.amazonaws.groundstation#DurationInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amount of time after a contact ends that you’d like to receive a CloudWatch event indicating the pass has finished.</p>"
+                        "smithy.api#documentation": "<p>Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.</p>"
                     }
                 },
                 "minimumViableContactDurationSeconds": {

@@ -953,6 +953,20 @@
                         "smithy.api#documentation": "Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary).",
                         "smithy.api#jsonName": "streamName"
                     }
+                },
+                "AudioDashRoles": {
+                    "target": "com.amazonaws.medialive#__listOfDashRoleAudio",
+                    "traits": {
+                        "smithy.api#documentation": "Identifies the DASH roles to assign to this audio output. Applies only when the audio output is configured for DVB DASH accessibility signaling.",
+                        "smithy.api#jsonName": "audioDashRoles"
+                    }
+                },
+                "DvbDashAccessibility": {
+                    "target": "com.amazonaws.medialive#DvbDashAccessibility",
+                    "traits": {
+                        "smithy.api#documentation": "Identifies DVB DASH accessibility signaling in this audio output. Used in Microsoft Smooth Streaming outputs to signal accessibility information to packagers.",
+                        "smithy.api#jsonName": "dvbDashAccessibility"
+                    }
                 }
             },
             "traits": {
@@ -2621,6 +2635,20 @@
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
+                },
+                "CaptionDashRoles": {
+                    "target": "com.amazonaws.medialive#__listOfDashRoleCaption",
+                    "traits": {
+                        "smithy.api#documentation": "Identifies the DASH roles to assign to this captions output. Applies only when the captions output is configured for DVB DASH accessibility signaling.",
+                        "smithy.api#jsonName": "captionDashRoles"
+                    }
+                },
+                "DvbDashAccessibility": {
+                    "target": "com.amazonaws.medialive#DvbDashAccessibility",
+                    "traits": {
+                        "smithy.api#documentation": "Identifies DVB DASH accessibility signaling in this captions output. Used in Microsoft Smooth Streaming outputs to signal accessibility information to packagers.",
+                        "smithy.api#jsonName": "dvbDashAccessibility"
+                    }
                 }
             },
             "traits": {
@@ -3365,6 +3393,113 @@
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for ClaimDeviceResponse",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medialive#CmafIngestGroupSettings": {
+            "type": "structure",
+            "members": {
+                "Destination": {
+                    "target": "com.amazonaws.medialive#OutputLocationRef",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "A HTTP destination for the tracks",
+                        "smithy.api#jsonName": "destination",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NielsenId3Behavior": {
+                    "target": "com.amazonaws.medialive#CmafNielsenId3Behavior",
+                    "traits": {
+                        "smithy.api#documentation": "If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.",
+                        "smithy.api#jsonName": "nielsenId3Behavior"
+                    }
+                },
+                "Scte35Type": {
+                    "target": "com.amazonaws.medialive#Scte35Type",
+                    "traits": {
+                        "smithy.api#documentation": "Type of scte35 track to add. none or scte35WithoutSegmentation",
+                        "smithy.api#jsonName": "scte35Type"
+                    }
+                },
+                "SegmentLength": {
+                    "target": "com.amazonaws.medialive#__integerMin1",
+                    "traits": {
+                        "smithy.api#documentation": "The nominal duration of segments. The units are specified in SegmentLengthUnits. The segments will end on the next keyframe after the specified duration, so the actual segment length might be longer, and it might be a fraction of the units.",
+                        "smithy.api#jsonName": "segmentLength"
+                    }
+                },
+                "SegmentLengthUnits": {
+                    "target": "com.amazonaws.medialive#CmafIngestSegmentLengthUnits",
+                    "traits": {
+                        "smithy.api#documentation": "Time unit for segment length parameter.",
+                        "smithy.api#jsonName": "segmentLengthUnits"
+                    }
+                },
+                "SendDelayMs": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max2000",
+                    "traits": {
+                        "smithy.api#documentation": "Number of milliseconds to delay the output from the second pipeline.",
+                        "smithy.api#jsonName": "sendDelayMs"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Cmaf Ingest Group Settings"
+            }
+        },
+        "com.amazonaws.medialive#CmafIngestOutputSettings": {
+            "type": "structure",
+            "members": {
+                "NameModifier": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.",
+                        "smithy.api#jsonName": "nameModifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Cmaf Ingest Output Settings"
+            }
+        },
+        "com.amazonaws.medialive#CmafIngestSegmentLengthUnits": {
+            "type": "enum",
+            "members": {
+                "MILLISECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MILLISECONDS"
+                    }
+                },
+                "SECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECONDS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Cmaf Ingest Segment Length Units"
+            }
+        },
+        "com.amazonaws.medialive#CmafNielsenId3Behavior": {
+            "type": "enum",
+            "members": {
+                "NO_PASSTHROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_PASSTHROUGH"
+                    }
+                },
+                "PASSTHROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSTHROUGH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Cmaf Nielsen Id3 Behavior"
             }
         },
         "com.amazonaws.medialive#ColorCorrection": {
@@ -4216,6 +4351,154 @@
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for CreateTagsRequest",
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medialive#DashRoleAudio": {
+            "type": "enum",
+            "members": {
+                "ALTERNATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALTERNATE"
+                    }
+                },
+                "COMMENTARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMENTARY"
+                    }
+                },
+                "DESCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCRIPTION"
+                    }
+                },
+                "DUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUB"
+                    }
+                },
+                "EMERGENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMERGENCY"
+                    }
+                },
+                "ENHANCED_AUDIO_INTELLIGIBILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENHANCED-AUDIO-INTELLIGIBILITY"
+                    }
+                },
+                "KARAOKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KARAOKE"
+                    }
+                },
+                "MAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAIN"
+                    }
+                },
+                "SUPPLEMENTARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPPLEMENTARY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dash Role Audio"
+            }
+        },
+        "com.amazonaws.medialive#DashRoleCaption": {
+            "type": "enum",
+            "members": {
+                "ALTERNATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALTERNATE"
+                    }
+                },
+                "CAPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAPTION"
+                    }
+                },
+                "COMMENTARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMENTARY"
+                    }
+                },
+                "DESCRIPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCRIPTION"
+                    }
+                },
+                "DUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUB"
+                    }
+                },
+                "EASYREADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EASYREADER"
+                    }
+                },
+                "EMERGENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMERGENCY"
+                    }
+                },
+                "FORCED_SUBTITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORCED-SUBTITLE"
+                    }
+                },
+                "KARAOKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KARAOKE"
+                    }
+                },
+                "MAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAIN"
+                    }
+                },
+                "METADATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METADATA"
+                    }
+                },
+                "SUBTITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBTITLE"
+                    }
+                },
+                "SUPPLEMENTARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUPPLEMENTARY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dash Role Caption"
             }
         },
         "com.amazonaws.medialive#DeleteChannel": {
@@ -7221,6 +7504,56 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "Dolby Vision81 Settings"
+            }
+        },
+        "com.amazonaws.medialive#DvbDashAccessibility": {
+            "type": "enum",
+            "members": {
+                "DVBDASH_1_VISUALLY_IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DVBDASH_1_VISUALLY_IMPAIRED"
+                    }
+                },
+                "DVBDASH_2_HARD_OF_HEARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DVBDASH_2_HARD_OF_HEARING"
+                    }
+                },
+                "DVBDASH_3_SUPPLEMENTAL_COMMENTARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DVBDASH_3_SUPPLEMENTAL_COMMENTARY"
+                    }
+                },
+                "DVBDASH_4_DIRECTORS_COMMENTARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DVBDASH_4_DIRECTORS_COMMENTARY"
+                    }
+                },
+                "DVBDASH_5_EDUCATIONAL_NOTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DVBDASH_5_EDUCATIONAL_NOTES"
+                    }
+                },
+                "DVBDASH_6_MAIN_PROGRAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DVBDASH_6_MAIN_PROGRAM"
+                    }
+                },
+                "DVBDASH_7_CLEAN_FEED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DVBDASH_7_CLEAN_FEED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dvb Dash Accessibility"
             }
         },
         "com.amazonaws.medialive#DvbNitSettings": {
@@ -19726,6 +20059,12 @@
                     "traits": {
                         "smithy.api#jsonName": "udpGroupSettings"
                     }
+                },
+                "CmafIngestGroupSettings": {
+                    "target": "com.amazonaws.medialive#CmafIngestGroupSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "cmafIngestGroupSettings"
+                    }
                 }
             },
             "traits": {
@@ -19815,6 +20154,12 @@
                     "target": "com.amazonaws.medialive#UdpOutputSettings",
                     "traits": {
                         "smithy.api#jsonName": "udpOutputSettings"
+                    }
+                },
+                "CmafIngestOutputSettings": {
+                    "target": "com.amazonaws.medialive#CmafIngestOutputSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "cmafIngestOutputSettings"
                     }
                 }
             },
@@ -22009,6 +22354,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Settings for a SCTE-35 time_signal."
+            }
+        },
+        "com.amazonaws.medialive#Scte35Type": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "SCTE_35_WITHOUT_SEGMENTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE_35_WITHOUT_SEGMENTATION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Scte35 Type"
             }
         },
         "com.amazonaws.medialive#Scte35WebDeliveryAllowedFlag": {
@@ -25835,6 +26200,16 @@
                 }
             }
         },
+        "com.amazonaws.medialive#__integerMin0Max2000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max2000",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2000
+                }
+            }
+        },
         "com.amazonaws.medialive#__integerMin0Max255": {
             "type": "integer",
             "traits": {
@@ -26385,6 +26760,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfColorCorrection"
+            }
+        },
+        "com.amazonaws.medialive#__listOfDashRoleAudio": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#DashRoleAudio"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfDashRoleAudio"
+            }
+        },
+        "com.amazonaws.medialive#__listOfDashRoleCaption": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#DashRoleCaption"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfDashRoleCaption"
             }
         },
         "com.amazonaws.medialive#__listOfFailoverCondition": {

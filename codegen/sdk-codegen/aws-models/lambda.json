@@ -2834,7 +2834,7 @@
                 "ImageConfig": {
                     "target": "com.amazonaws.lambda#ImageConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container image <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings\">configuration\n      values</a> that override the values in the container image Dockerfile.</p>"
+                        "smithy.api#documentation": "<p>Container image <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms\">configuration\n      values</a> that override the values in the container image Dockerfile.</p>"
                     }
                 },
                 "CodeSigningConfigArn": {
@@ -10065,6 +10065,12 @@
                         "smithy.api#enumValue": "ruby3.2"
                     }
                 },
+                "ruby33": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ruby3.3"
+                    }
+                },
                 "python311": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -11631,7 +11637,7 @@
                 "ImageConfig": {
                     "target": "com.amazonaws.lambda#ImageConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container image configuration\n        values</a> that override the values in the container image Docker file.</p>"
+                        "smithy.api#documentation": "<p>\n            <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms\">Container image configuration\n        values</a> that override the values in the container image Docker file.</p>"
                     }
                 },
                 "EphemeralStorage": {

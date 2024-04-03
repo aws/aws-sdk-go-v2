@@ -80,7 +80,7 @@
                     }
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the <i>AWS HealthImaging API Reference</i>. AWS HealthImaging is a HIPAA-eligible service that helps health\n            care providers and their medical imaging ISV partners store, transform, and apply machine learning to medical images. For\n            an introduction to the service, see the <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/what-is.html\">\n               <i>AWS HealthImaging Developer Guide</i>\n            </a>.</p>\n         <note>\n            <p>We recommend using one of the AWS Software Development Kits (SDKs) for your programming language, as\n                    they take care of request authentication, serialization, and connection management. For more information,\n                    see <a href=\"http://aws.amazon.com/developer/tools\">Tools to build on AWS</a>.</p>\n            <p>For information about using HealthImaging API actions in one of the language-specific AWS SDKs, refer to the\n                    <i>See Also</i> link at the end of each section that describes an API action or data type.</p>\n         </note>\n         <p>The following sections list AWS HealthImaging API actions categorized according to functionality. Links are \n             provided to actions within this Reference, along with links back to corresponding sections in the \n             <i>AWS HealthImaging Developer Guide</i> where you can view console procedures and CLI/SDK code examples.</p>\n         <p class=\"title\">\n            <b>Data store actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_CreateDatastore.html\">CreateDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/create-data-store.html\">Creating a data store</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetDatastore.html\">GetDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-data-store.html\">Getting data store properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListDatastores.html\">ListDatastores</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-data-stores.html\">Listing data stores</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_DeleteDatastore.html\">DeleteDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/delete-data-store.html\">Deleting a data store</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Import job actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_StartDICOMImportJob.html\">StartDICOMImportJob</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/start-dicom-import-job.html\">Starting an import job</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetDICOMImportJob.html\">GetDICOMImportJob</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-dicom-import-job.html\">Getting import job properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListDICOMImportJobs.html\">ListDICOMImportJobs</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-dicom-import-jobs.html\">Listing import jobs</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Image set access actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_SearchImageSets.html\">SearchImageSets</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/search-image-sets.html\">Searching image sets</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageSet.html\">GetImageSet</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-set-properties.html\">Getting image set properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageSetMetadata.html\">GetImageSetMetadata</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-set-metadata.html\">Getting image set metadata</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageFrame.html\">GetImageFrame</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-frame.html\">Getting image set pixel data</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Image set modification actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListImageSetVersions.html\">ListImageSetVersions</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-image-set-versions.html\">Listing image set versions</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_UpdateImageSetMetadata.html\">UpdateImageSetMetadata</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/update-image-set-metadata.html\">Updating image set metadata</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_CopyImageSet.html\">CopyImageSet</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/copy-image-set.html\">Copying an image set</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_DeleteImageSet.html\">DeleteImageSet</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/delete-image-set.html\">Deleting an image set</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Tagging actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_TagResource.html\">TagResource</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/tag-list-untag-data-store.html\">Tagging a data store</a> and\n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/tag-list-untag-image-set.html\">Tagging an image set</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/tag-list-untag-data-store.html\">Tagging a data store</a> and\n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/tag-list-untag-image-set.html\">Tagging an image set</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_UntagResource.html\">UntagResource</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/tag-list-untag-data-store.html\">Tagging a data store</a> and\n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/tag-list-untag-image-set.html\">Tagging an image set</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This is the <i>AWS HealthImaging API Reference</i>. AWS HealthImaging is a HIPAA eligible service\n            that empowers healthcare providers, life science organizations, and their software partners to store,\n            analyze, and share medical images in the cloud at petabyte scale. For an introduction to the service, see the\n            <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/what-is.html\">\n               <i>AWS HealthImaging Developer Guide</i>\n            </a>.</p>\n         <note>\n            <p>We recommend using one of the AWS Software Development Kits (SDKs) for your programming language, as\n                    they take care of request authentication, serialization, and connection management. For more information,\n                    see <a href=\"http://aws.amazon.com/developer/tools\">Tools to build on AWS</a>.</p>\n         </note>\n         <p>The following sections list AWS HealthImaging API actions categorized according to functionality. Links are \n             provided to actions within this Reference, along with links back to corresponding sections in the \n             <i>AWS HealthImaging Developer Guide</i> where you can view tested code examples.</p>\n         <p class=\"title\">\n            <b>Data store actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_CreateDatastore.html\">CreateDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/create-data-store.html\">Creating a data store</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetDatastore.html\">GetDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-data-store.html\">Getting data store properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListDatastores.html\">ListDatastores</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-data-stores.html\">Listing data stores</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_DeleteDatastore.html\">DeleteDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/delete-data-store.html\">Deleting a data store</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Import job actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_StartDICOMImportJob.html\">StartDICOMImportJob</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/start-dicom-import-job.html\">Starting an import job</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetDICOMImportJob.html\">GetDICOMImportJob</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-dicom-import-job.html\">Getting import job properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListDICOMImportJobs.html\">ListDICOMImportJobs</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-dicom-import-jobs.html\">Listing import jobs</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Image set access actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_SearchImageSets.html\">SearchImageSets</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/search-image-sets.html\">Searching image sets</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageSet.html\">GetImageSet</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-set-properties.html\">Getting image set properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageSetMetadata.html\">GetImageSetMetadata</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-set-metadata.html\">Getting image set metadata</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_GetImageFrame.html\">GetImageFrame</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/get-image-frame.html\">Getting image set pixel data</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Image set modification actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListImageSetVersions.html\">ListImageSetVersions</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-image-set-versions.html\">Listing image set versions</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_UpdateImageSetMetadata.html\">UpdateImageSetMetadata</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/update-image-set-metadata.html\">Updating image set metadata</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_CopyImageSet.html\">CopyImageSet</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/copy-image-set.html\">Copying an image set</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_DeleteImageSet.html\">DeleteImageSet</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/delete-image-set.html\">Deleting an image set</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Tagging actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_TagResource.html\">TagResource</a>\n                        – See <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/tag-resource.html\">Tagging a resource</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>\n                        – See <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/list-tag-resource.html\">Listing tags for a resource</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/healthimaging/latest/APIReference/API_UntagResource.html\">UntagResource</a>\n                        – See <a href=\"https://docs.aws.amazon.com/healthimaging/latest/devguide/untag-resource.html\">Untagging a resource</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Health Imaging",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1379,6 +1379,47 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.medicalimaging#DICOMSeriesBodyPart": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMSeriesInstanceUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(?:[1-9][0-9]*|0)(\\.(?:[1-9][0-9]*|0))*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMSeriesModality": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMSeriesNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -2147483648,
+                    "max": 2147483647
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.medicalimaging#DICOMStudyDate": {
             "type": "string",
             "traits": {
@@ -1481,19 +1522,19 @@
                 "DICOMStudyInstanceUID": {
                     "target": "com.amazonaws.medicalimaging#DICOMStudyInstanceUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DICOM provided identifier for studyInstanceUid.&gt;</p>"
+                        "smithy.api#documentation": "<p>The DICOM provided identifier for the Study Instance UID.</p>"
                     }
                 },
                 "DICOMStudyId": {
                     "target": "com.amazonaws.medicalimaging#DICOMStudyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DICOM provided studyId.</p>"
+                        "smithy.api#documentation": "<p>The DICOM provided identifier for the Study ID.</p>"
                     }
                 },
                 "DICOMStudyDescription": {
                     "target": "com.amazonaws.medicalimaging#DICOMStudyDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the study.</p>"
+                        "smithy.api#documentation": "<p>The DICOM provided Study Description.</p>"
                     }
                 },
                 "DICOMNumberOfStudyRelatedSeries": {
@@ -1514,6 +1555,30 @@
                     "target": "com.amazonaws.medicalimaging#DICOMAccessionNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The accession number for the DICOM study.</p>"
+                    }
+                },
+                "DICOMSeriesInstanceUID": {
+                    "target": "com.amazonaws.medicalimaging#DICOMSeriesInstanceUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM provided identifier for the Series Instance UID.</p>"
+                    }
+                },
+                "DICOMSeriesModality": {
+                    "target": "com.amazonaws.medicalimaging#DICOMSeriesModality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM provided identifier for the series Modality.</p>"
+                    }
+                },
+                "DICOMSeriesBodyPart": {
+                    "target": "com.amazonaws.medicalimaging#DICOMSeriesBodyPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM provided identifier for the series Body Part Examined.</p>"
+                    }
+                },
+                "DICOMSeriesNumber": {
+                    "target": "com.amazonaws.medicalimaging#DICOMSeriesNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM provided identifier for the Series Number.</p>"
                     }
                 },
                 "DICOMStudyDate": {
@@ -1946,7 +2011,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the import job properties to learn more about the job or job progress.</p>",
+                "smithy.api#documentation": "<p>Get the import job properties to learn more about the job or job progress.</p>\n         <note>\n            <p>The <code>jobStatus</code> refers to the execution of the import job. Therefore, an import job can return a <code>jobStatus</code> as\n               <code>COMPLETED</code> even if validation issues are discovered during the import process. If a <code>jobStatus</code> returns\n               as <code>COMPLETED</code>, we still recommend you review the output manifests written to S3, as they provide details on the success\n               or failure of individual P10 object imports.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/getDICOMImportJob/datastore/{datastoreId}/job/{jobId}"
@@ -3223,10 +3288,22 @@
                         "smithy.api#documentation": "<p>The DICOM study instance UID for search.</p>"
                     }
                 },
+                "DICOMSeriesInstanceUID": {
+                    "target": "com.amazonaws.medicalimaging#DICOMSeriesInstanceUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Series Instance UID input for search.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.medicalimaging#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>The created at time of the image set provided for search.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp input for search.</p>"
                     }
                 },
                 "DICOMStudyDateAndTime": {
@@ -3257,6 +3334,12 @@
                             "min": 1,
                             "max": 2
                         }
+                    }
+                },
+                "sort": {
+                    "target": "com.amazonaws.medicalimaging#Sort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort input for search criteria.</p>"
                     }
                 }
             },
@@ -3393,6 +3476,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "sort": {
+                    "target": "com.amazonaws.medicalimaging#Sort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for image set search results.</p>"
+                    }
+                },
                 "nextToken": {
                     "target": "com.amazonaws.medicalimaging#NextToken",
                     "traits": {
@@ -3418,6 +3507,68 @@
                 "smithy.api#documentation": "<p>The request caused a service quota to be exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.medicalimaging#Sort": {
+            "type": "structure",
+            "members": {
+                "sortOrder": {
+                    "target": "com.amazonaws.medicalimaging#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for search criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortField": {
+                    "target": "com.amazonaws.medicalimaging#SortField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort field for search criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sort search results.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#SortField": {
+            "type": "enum",
+            "members": {
+                "updatedAt": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "updatedAt"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "createdAt"
+                    }
+                },
+                "DICOMStudyDateAndTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DICOMStudyDateAndTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#SortOrder": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
             }
         },
         "com.amazonaws.medicalimaging#StartDICOMImportJob": {

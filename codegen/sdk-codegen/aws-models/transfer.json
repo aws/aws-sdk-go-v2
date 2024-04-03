@@ -338,6 +338,16 @@
                 "smithy.api#pattern": "^c-([0-9a-f]{17})$"
             }
         },
+        "com.amazonaws.transfer#ConnectorSecurityPolicyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^TransferSFTPConnectorSecurityPolicy-[A-Za-z0-9-]+$"
+            }
+        },
         "com.amazonaws.transfer#CopyStepDetails": {
             "type": "structure",
             "members": {
@@ -657,6 +667,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that contains the parameters for an SFTP connector object.</p>"
                     }
+                },
+                "SecurityPolicyName": {
+                    "target": "com.amazonaws.transfer#ConnectorSecurityPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the security policy for the connector.</p>"
+                    }
                 }
             },
             "traits": {
@@ -869,7 +885,7 @@
                 "SecurityPolicyName": {
                     "target": "com.amazonaws.transfer#SecurityPolicyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the security policy that is attached to the server.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the security policy for the server.</p>"
                     }
                 },
                 "Tags": {
@@ -2177,7 +2193,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the security policy that is attached to your file transfer protocol-enabled\n      server. The response contains a description of the security policy's properties. For more\n      information about security policies, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html\">Working with security\n        policies</a>.</p>",
+                "smithy.api#documentation": "<p>Describes the security policy that is attached to your server or SFTP connector. The response contains a description of the security policy's properties. For more\n      information about security policies, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html\">Working with security\n        policies for servers</a> or <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html\">Working with security\n          policies for SFTP connectors</a>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -2187,7 +2203,7 @@
                 "SecurityPolicyName": {
                     "target": "com.amazonaws.transfer#SecurityPolicyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the security policy that is attached to the server.</p>",
+                        "smithy.api#documentation": "<p>Specify the text name of the security policy for which you want the details.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2716,6 +2732,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.</p>"
                     }
+                },
+                "SecurityPolicyName": {
+                    "target": "com.amazonaws.transfer#ConnectorSecurityPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text name of the security policy for the specified connector.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2877,43 +2899,61 @@
                 "Fips": {
                     "target": "com.amazonaws.transfer#Fips",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this policy enables Federal Information Processing Standards\n      (FIPS).</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this policy enables Federal Information Processing Standards (FIPS).\n      This parameter applies to both server and connector security policies.</p>"
                     }
                 },
                 "SecurityPolicyName": {
                     "target": "com.amazonaws.transfer#SecurityPolicyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the security policy that is attached to the server.</p>",
+                        "smithy.api#documentation": "<p>The text name of the specified security policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SshCiphers": {
                     "target": "com.amazonaws.transfer#SecurityPolicyOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the enabled Secure Shell (SSH) cipher encryption algorithms in the security\n      policy that is attached to the server.</p>"
+                        "smithy.api#documentation": "<p>Lists the enabled Secure Shell (SSH) cipher encryption algorithms in the security policy\n      that is attached to the server or connector. This parameter applies to both server and\n      connector security policies.</p>"
                     }
                 },
                 "SshKexs": {
                     "target": "com.amazonaws.transfer#SecurityPolicyOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the enabled SSH key exchange (KEX) encryption algorithms in the security policy\n      that is attached to the server.</p>"
+                        "smithy.api#documentation": "<p>Lists the enabled SSH key exchange (KEX) encryption algorithms in the security policy that\n      is attached to the server or connector. This parameter applies to both server and connector\n      security policies.</p>"
                     }
                 },
                 "SshMacs": {
                     "target": "com.amazonaws.transfer#SecurityPolicyOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the enabled SSH message authentication code (MAC) encryption algorithms in the\n      security policy that is attached to the server.</p>"
+                        "smithy.api#documentation": "<p>Lists the enabled SSH message authentication code (MAC) encryption algorithms in the\n      security policy that is attached to the server or connector. This parameter applies to both\n      server and connector security policies.</p>"
                     }
                 },
                 "TlsCiphers": {
                     "target": "com.amazonaws.transfer#SecurityPolicyOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the enabled Transport Layer Security (TLS) cipher encryption algorithms in the\n      security policy that is attached to the server.</p>"
+                        "smithy.api#documentation": "<p>Lists the enabled Transport Layer Security (TLS) cipher encryption algorithms in the\n      security policy that is attached to the server.</p>\n         <note>\n            <p>This parameter only applies to security policies for servers.</p>\n         </note>"
+                    }
+                },
+                "SshHostKeyAlgorithms": {
+                    "target": "com.amazonaws.transfer#SecurityPolicyOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the host key algorithms for the security policy.</p>\n         <note>\n            <p>This parameter only applies to security policies for connectors.</p>\n         </note>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.transfer#SecurityPolicyResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type to which the security policy applies, either server or connector.</p>"
+                    }
+                },
+                "Protocols": {
+                    "target": "com.amazonaws.transfer#SecurityPolicyProtocols",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the file transfer protocols that the security policy applies to.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the properties of a security policy that was specified. For more information\n      about security policies, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html\">Working with security\n        policies</a>.</p>"
+                "smithy.api#documentation": "<p>Describes the properties of a security policy that you specify. For more information\n      about security policies, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html\">Working with security\n        policies for servers</a> or <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html\">Working with security\n          policies for SFTP connectors</a>.</p>"
             }
         },
         "com.amazonaws.transfer#DescribedServer": {
@@ -3001,7 +3041,7 @@
                 "SecurityPolicyName": {
                     "target": "com.amazonaws.transfer#SecurityPolicyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the security policy that is attached to the server.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the security policy for the server.</p>"
                     }
                 },
                 "ServerId": {
@@ -4745,7 +4785,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the security policies that are attached to your file transfer protocol-enabled\n      servers.</p>",
+                "smithy.api#documentation": "<p>Lists the security policies that are attached to your servers and SFTP connectors. For more information\n      about security policies, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html\">Working with security\n        policies for servers</a> or <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html\">Working with security\n          policies for SFTP connectors</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -6257,7 +6297,7 @@
                     "min": 0,
                     "max": 100
                 },
-                "smithy.api#pattern": "^TransferSecurityPolicy-.+$"
+                "smithy.api#pattern": "^Transfer[A-Za-z0-9]*SecurityPolicy-[A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.transfer#SecurityPolicyNames": {
@@ -6279,6 +6319,52 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.transfer#SecurityPolicyOption"
+            }
+        },
+        "com.amazonaws.transfer#SecurityPolicyProtocol": {
+            "type": "enum",
+            "members": {
+                "SFTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SFTP"
+                    }
+                },
+                "FTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FTPS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#SecurityPolicyProtocols": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#SecurityPolicyProtocol"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.transfer#SecurityPolicyResourceType": {
+            "type": "enum",
+            "members": {
+                "SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVER"
+                    }
+                },
+                "CONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTOR"
+                    }
+                }
             }
         },
         "com.amazonaws.transfer#SendWorkflowStepState": {
@@ -8824,6 +8910,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that contains the parameters for an SFTP connector object.</p>"
                     }
+                },
+                "SecurityPolicyName": {
+                    "target": "com.amazonaws.transfer#ConnectorSecurityPolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the name of the security policy for the connector.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9094,7 +9186,7 @@
                 "SecurityPolicyName": {
                     "target": "com.amazonaws.transfer#SecurityPolicyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the security policy that is attached to the server.</p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the security policy for the server.</p>"
                     }
                 },
                 "ServerId": {
