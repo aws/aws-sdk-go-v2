@@ -76,15 +76,11 @@ func Extract(servicePath string, serviceDir fs.DirEntry, items map[string]jewelr
 // extractType iterates through
 func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[string]jewelryItem) error {
 	for kt, vt := range types {
-		summary := ""
-		if vt.Doc != nil {
-			summary = vt.Doc.Text()
-		}
 		typeName := vt.Name.Name
 
 		item := jewelryItem{
 			Name:        typeName,
-			Summary:     summary,
+			Summary:     formatComment(vt.Doc),
 			Members:     []jewelryItem{},
 			Tags:        []string{},
 			OtherBlocks: map[string]string{},
@@ -134,26 +130,13 @@ func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[
 						break
 					}
 					fieldName := vf.Names[i].Name
-					var fieldItem jewelryItem
-					if vf.Doc == nil || vf.Doc.List == nil || vf.Doc.List[i] == nil {
-						fieldItem = jewelryItem{
-							Name:        fieldName,
-							Tags:        []string{},
-							OtherBlocks: map[string]string{},
-							Params:      []jewelryParam{},
-							Members:     []jewelryItem{},
-							Summary:     "",
-						}
-
-					} else {
-						fieldItem = jewelryItem{
-							Name:        fieldName,
-							Tags:        []string{},
-							OtherBlocks: map[string]string{},
-							Params:      []jewelryParam{},
-							Members:     []jewelryItem{},
-							Summary:     vf.Doc.List[i].Text,
-						}
+					fieldItem := jewelryItem{
+						Name:        fieldName,
+						Tags:        []string{},
+						OtherBlocks: map[string]string{},
+						Params:      []jewelryParam{},
+						Members:     []jewelryItem{},
+						Summary:     formatComment(vf.Doc),
 					}
 					fieldItem.Type = jewelryItemKindField
 					fieldItem.BreadCrumbs = []breadCrumb{
@@ -170,15 +153,11 @@ func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[
 							Kind: jewelryItemKindField,
 						},
 					}
-					se, ok := vf.Type.(*ast.StarExpr)
-					if ok {
-						ident, ok := se.X.(*ast.Ident)
-						if ok {
-							fieldItem.Signature = typeSignature{
-								Signature: ident.Name,
-							}
-						}
+					fieldItem.Signature = typeSignature{
+						Signature: toSignature(vf.Type, packageName),
+						// Location is unused - links have to be embedded in signature
 					}
+
 					members = append(members, fieldItem)
 				}
 			}
@@ -187,6 +166,125 @@ func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[
 		items[kt] = item
 	}
 	return nil
+}
+
+// We've already converted the model's HTML to Go docs, now for ref docs we
+// must convert back. We can't use the model's original docs directly because
+// that doesn't include extra content we may inject at codegen.
+//
+// Practically this is just a matter of converting lists and paragraphs, since
+// that's really all Go docs do in terms of formatting. Links are left as-is.
+// Note we don't bother with <ul> on lists since our API ref docs generator
+// doesn't require them to render.
+func formatComment(cg *ast.CommentGroup) string {
+	if cg == nil {
+		return ""
+	}
+
+	var inlist bool
+	var html, currp, currli string
+	for _, c := range cg.List {
+		line := c.Text
+		if line == "//" {
+			flushp(&html, &currp)
+			continue
+		}
+
+		line = strings.TrimPrefix(line, "// ")
+		if strings.HasPrefix(line, "  ") && !inlist {
+			inlist = true
+			flushp(&html, &currp)
+		}
+		if !strings.HasPrefix(line, "  ") && inlist {
+			inlist = false
+			flushli(&html, &currli)
+		}
+
+		if inlist {
+			if strings.HasPrefix(line, "  -") {
+				if len(currli) > 0 {
+					flushli(&html, &currli)
+				}
+				currli = strings.TrimPrefix(line, "  -") + " "
+			} else if strings.HasPrefix(line, "  ") {
+				currli += strings.TrimPrefix(line, "  ") + " "
+			}
+		} else {
+			currp += line + " "
+		}
+	}
+
+	if len(currp) > 0 {
+		flushp(&html, &currp)
+	}
+	if len(currli) > 0 {
+		flushli(&html, &currli)
+	}
+
+	return html
+}
+
+func flushp(dst, src *string) {
+	if len(*src) == 0 {
+		return
+	}
+	*dst = *dst + "<p>" + *src + "</p>"
+	*src = ""
+}
+
+func flushli(dst, src *string) {
+	if len(*src) == 0 {
+		return
+	}
+	*dst = *dst + "<li>" + *src + "</li>"
+	*src = ""
+}
+
+func toSignature(v ast.Expr, pkg string) string {
+	switch vv := v.(type) {
+	case *ast.Ident:
+		return fmt.Sprintf("%s", vv.Name)
+	case *ast.StarExpr:
+		return fmt.Sprintf("*%s", toSignature(vv.X, pkg))
+	case *ast.ArrayType:
+		return fmt.Sprintf("[]%s", toSignature(vv.Elt, pkg))
+	case *ast.MapType:
+		return fmt.Sprintf("map[string]%s", toSignature(vv.Value, pkg))
+	case *ast.SelectorExpr:
+		spkg := vv.X.(*ast.Ident).Name
+		if spkg == "types" {
+			return fmt.Sprintf("[%s.%s](-aws-sdk-client-%s!%s:Struct)", spkg, vv.Sel.Name, pkg, vv.Sel.Name)
+		}
+		// FUTURE: handle links to runtime
+		return fmt.Sprintf("%s.%s", spkg, vv.Sel.Name)
+	case *ast.FuncType:
+		return toFuncSignature(vv, pkg)
+	default:
+		return ""
+	}
+}
+
+func toFuncSignature(v *ast.FuncType, pkg string) string {
+	xpr := "func ("
+	if v.Params != nil {
+		for i, param := range v.Params.List {
+			xpr += toSignature(param.Type, pkg)
+			if i < len(v.Params.List)-1 {
+				xpr += ", "
+			}
+		}
+	}
+	xpr += ")"
+	if v.Results != nil {
+		xpr += " "
+		for i, param := range v.Results.List {
+			xpr += toSignature(param.Type, pkg)
+			if i < len(v.Params.List)-1 {
+				xpr += ", "
+			}
+		}
+	}
+	return xpr
 }
 
 func extractFunctions(packageName string, types map[string]*ast.TypeSpec, functions map[string]*ast.FuncDecl, items map[string]jewelryItem) error {
@@ -202,7 +300,7 @@ func extractFunctions(packageName string, types map[string]*ast.TypeSpec, functi
 				OtherBlocks: map[string]string{},
 				Params:      []jewelryParam{},
 				Members:     []jewelryItem{},
-				Summary:     vf.Doc.Text(),
+				Summary:     formatComment(vf.Doc),
 				BreadCrumbs: []breadCrumb{
 					{
 						Name: packageName,
@@ -270,7 +368,7 @@ func extractFunctions(packageName string, types map[string]*ast.TypeSpec, functi
 				OtherBlocks: map[string]string{},
 				Params:      params,
 				Returns:     returns,
-				Summary:     vf.Doc.Text(),
+				Summary:     formatComment(vf.Doc),
 				BreadCrumbs: []breadCrumb{
 					{
 						Name: packageName,

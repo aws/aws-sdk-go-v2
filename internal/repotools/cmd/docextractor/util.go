@@ -7,7 +7,6 @@ import (
 )
 
 func getPackageItem(packageName string, files map[string]*ast.File) (jewelryItem, error) {
-	packageDoc := ""
 	docRe := regexp.MustCompile(`.*/doc.go`)
 
 	for k, f := range files {
@@ -15,18 +14,13 @@ func getPackageItem(packageName string, files map[string]*ast.File) (jewelryItem
 		if !matched {
 			continue
 		}
-		if f.Doc != nil && f.Doc.List != nil {
-			for _, line := range f.Doc.List {
-				packageDoc += line.Text
-			}
-		}
 		return jewelryItem{
 			Tags:        []string{},
 			OtherBlocks: map[string]string{},
 			Members:     []jewelryItem{},
 			Params:      []jewelryParam{},
 			BreadCrumbs: []breadCrumb{},
-			Summary:     packageDoc,
+			Summary:     formatComment(f.Doc),
 		}, nil
 	}
 	return jewelryItem{}, fmt.Errorf("no doc.go")
