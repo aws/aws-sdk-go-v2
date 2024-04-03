@@ -1,5 +1,5 @@
 ---
-name: 🔀 Migration Issue: AWS SDK Go v1 to v2
+name: "🔀 Migration Issue: AWS SDK Go v1 to v2"
 description: Report an issue or discrepancy encountered during migration from AWS SDK Go v1 to v2
 title: "MIGRATION ISSUE: (short issue description)"
 labels: [needs-triage, v1-v2-inconsistency]
