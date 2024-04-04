@@ -116,7 +116,7 @@
                     "name": "emr-containers"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows\n         you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).\n         With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.\n         For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is\n            shared id=\"EMR-EKS\"/></a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following\n         scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,\n                  <code>aws emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For\n               example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more\n               information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKSService Endpoints</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows\n         you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).\n         With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.\n         For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is\n            Amazon EMR on EKS</a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following\n         scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,\n                  <code>aws emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For\n               example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more\n               information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKSService Endpoints</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon EMR Containers",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1018,6 +1018,9 @@
                 "smithy.api#pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$"
             }
         },
+        "com.amazonaws.emrcontainers#Boolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.emrcontainers#CancelJobRun": {
             "type": "operation",
             "input": {
@@ -1526,6 +1529,9 @@
                 "target": "com.amazonaws.emrcontainers#CreateVirtualClusterResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#EKSRequestThrottledException"
+                },
                 {
                     "target": "com.amazonaws.emrcontainers#InternalServerException"
                 },
@@ -2062,6 +2068,19 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#EKSRequestThrottledException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.emrcontainers#String1024"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeded the Amazon EKS API operation limits.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
             }
         },
         "com.amazonaws.emrcontainers#EksInfo": {
@@ -3279,6 +3298,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of virtual clusters to return. </p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "eksAccessEntryIntegrated": {
+                    "target": "com.amazonaws.emrcontainers#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional Boolean that specifies whether the operation should return the \n         virtual clusters that have the access entry integration enabled or disabled. If not specified,\n      the operation returns all applicable virtual clusters.</p>",
+                        "smithy.api#httpQuery": "eksAccessEntryIntegrated"
                     }
                 }
             },
