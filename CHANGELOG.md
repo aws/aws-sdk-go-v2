@@ -1,3 +1,19 @@
+# Release (2024-04-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.21](service/b2bi/CHANGELOG.md#v100-preview21-2024-04-04)
+  * **Feature**: Adding support for X12 5010 HIPAA EDI version and associated transaction sets.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.11.0](service/cleanrooms/CHANGELOG.md#v1110-2024-04-04)
+  * **Feature**: Feature: New schemaStatusDetails field to the existing Schema object that displays a status on Schema API responses to show whether a schema is queryable or not. New BatchGetSchemaAnalysisRule API to retrieve multiple schemaAnalysisRules using a single API call.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.156.0](service/ec2/CHANGELOG.md#v11560-2024-04-04)
+  * **Feature**: Amazon EC2 G6 instances powered by NVIDIA L4 Tensor Core GPUs can be used for a wide range of graphics-intensive and machine learning use cases. Gr6 instances also feature NVIDIA L4 GPUs and can be used for graphics workloads with higher memory requirements.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.27.0](service/emrcontainers/CHANGELOG.md#v1270-2024-04-04)
+  * **Feature**: This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.34.0](service/ivs/CHANGELOG.md#v1340-2024-04-04)
+  * **Feature**: API update to include an SRT ingest endpoint and passphrase for all channels.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.12.0](service/verifiedpermissions/CHANGELOG.md#v1120-2024-04-04)
+  * **Feature**: Adds GroupConfiguration field to Identity Source API's
+
 # Release (2024-04-03)
 
 ## Module Highlights

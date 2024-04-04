@@ -1,3 +1,7 @@
+# v1.27.0 (2024-04-04)
+
+* **Feature**: This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS.
+
 # v1.26.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

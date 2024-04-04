@@ -1,3 +1,7 @@
+# v1.0.0-preview.21 (2024-04-04)
+
+* **Feature**: Adding support for X12 5010 HIPAA EDI version and associated transaction sets.
+
 # v1.0.0-preview.20 (2024-03-29)
 
 * **Feature**: Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010.

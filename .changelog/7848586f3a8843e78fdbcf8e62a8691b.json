@@ -1,8 +1,0 @@
-{
-    "id": "7848586f-3a88-43e7-8fdb-cf8e62a8691b",
-    "type": "feature",
-    "description": "Adding support for X12 5010 HIPAA EDI version and associated transaction sets.",
-    "modules": [
-        "service/b2bi"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "7c8ec2de-3b10-4b20-87ed-758b800e3eb3",
-    "type": "feature",
-    "description": "This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS.",
-    "modules": [
-        "service/emrcontainers"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.34.0 (2024-04-04)
+
+* **Feature**: API update to include an SRT ingest endpoint and passphrase for all channels.
+
 # v1.33.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

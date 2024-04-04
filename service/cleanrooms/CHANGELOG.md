@@ -1,3 +1,7 @@
+# v1.11.0 (2024-04-04)
+
+* **Feature**: Feature: New schemaStatusDetails field to the existing Schema object that displays a status on Schema API responses to show whether a schema is queryable or not. New BatchGetSchemaAnalysisRule API to retrieve multiple schemaAnalysisRules using a single API call.
+
 # v1.10.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.12.0 (2024-04-04)
+
+* **Feature**: Adds GroupConfiguration field to Identity Source API's
+
 # v1.11.4 (2024-04-03)
 
 * No change notes available for this release.
