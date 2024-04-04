@@ -1507,6 +1507,18 @@ func awsAwsjson10_serializeDocumentClientIds(v []string, value smithyjson.Value)
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentCognitoGroupConfiguration(v *types.CognitoGroupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupEntityType != nil {
+		ok := object.Key("groupEntityType")
+		ok.String(*v.GroupEntityType)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentCognitoUserPoolConfiguration(v *types.CognitoUserPoolConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1514,6 +1526,13 @@ func awsAwsjson10_serializeDocumentCognitoUserPoolConfiguration(v *types.Cognito
 	if v.ClientIds != nil {
 		ok := object.Key("clientIds")
 		if err := awsAwsjson10_serializeDocumentClientIds(v.ClientIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GroupConfiguration != nil {
+		ok := object.Key("groupConfiguration")
+		if err := awsAwsjson10_serializeDocumentCognitoGroupConfiguration(v.GroupConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -1876,6 +1895,18 @@ func awsAwsjson10_serializeDocumentTemplateLinkedPolicyDefinition(v *types.Templ
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentUpdateCognitoGroupConfiguration(v *types.UpdateCognitoGroupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupEntityType != nil {
+		ok := object.Key("groupEntityType")
+		ok.String(*v.GroupEntityType)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentUpdateCognitoUserPoolConfiguration(v *types.UpdateCognitoUserPoolConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1883,6 +1914,13 @@ func awsAwsjson10_serializeDocumentUpdateCognitoUserPoolConfiguration(v *types.U
 	if v.ClientIds != nil {
 		ok := object.Key("clientIds")
 		if err := awsAwsjson10_serializeDocumentClientIds(v.ClientIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GroupConfiguration != nil {
+		ok := object.Key("groupConfiguration")
+		if err := awsAwsjson10_serializeDocumentUpdateCognitoGroupConfiguration(v.GroupConfiguration, ok); err != nil {
 			return err
 		}
 	}

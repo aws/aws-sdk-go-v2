@@ -7,6 +7,32 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The request exceeded the Amazon EKS API operation limits.
+type EKSRequestThrottledException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *EKSRequestThrottledException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EKSRequestThrottledException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EKSRequestThrottledException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "EKSRequestThrottledException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *EKSRequestThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This is an internal server exception.
 type InternalServerException struct {
 	Message *string

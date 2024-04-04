@@ -1,0 +1,8 @@
+{
+    "id": "543b7e23-f61f-4882-8256-fd3e16133d1e",
+    "type": "feature",
+    "description": "Adds GroupConfiguration field to Identity Source API's",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

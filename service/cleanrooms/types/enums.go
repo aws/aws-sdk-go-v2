@@ -491,19 +491,30 @@ type ScalarFunctions string
 
 // Enum values for ScalarFunctions
 const (
-	ScalarFunctionsTrunc    ScalarFunctions = "TRUNC"
-	ScalarFunctionsAbs      ScalarFunctions = "ABS"
-	ScalarFunctionsCeiling  ScalarFunctions = "CEILING"
-	ScalarFunctionsFloor    ScalarFunctions = "FLOOR"
-	ScalarFunctionsLn       ScalarFunctions = "LN"
-	ScalarFunctionsLog      ScalarFunctions = "LOG"
-	ScalarFunctionsRound    ScalarFunctions = "ROUND"
-	ScalarFunctionsSqrt     ScalarFunctions = "SQRT"
-	ScalarFunctionsCast     ScalarFunctions = "CAST"
-	ScalarFunctionsLower    ScalarFunctions = "LOWER"
-	ScalarFunctionsRtrim    ScalarFunctions = "RTRIM"
-	ScalarFunctionsUpper    ScalarFunctions = "UPPER"
-	ScalarFunctionsCoalesce ScalarFunctions = "COALESCE"
+	ScalarFunctionsAbs         ScalarFunctions = "ABS"
+	ScalarFunctionsCast        ScalarFunctions = "CAST"
+	ScalarFunctionsCeiling     ScalarFunctions = "CEILING"
+	ScalarFunctionsCoalesce    ScalarFunctions = "COALESCE"
+	ScalarFunctionsConvert     ScalarFunctions = "CONVERT"
+	ScalarFunctionsCurrentDate ScalarFunctions = "CURRENT_DATE"
+	ScalarFunctionsDateadd     ScalarFunctions = "DATEADD"
+	ScalarFunctionsExtract     ScalarFunctions = "EXTRACT"
+	ScalarFunctionsFloor       ScalarFunctions = "FLOOR"
+	ScalarFunctionsGetdate     ScalarFunctions = "GETDATE"
+	ScalarFunctionsLn          ScalarFunctions = "LN"
+	ScalarFunctionsLog         ScalarFunctions = "LOG"
+	ScalarFunctionsLower       ScalarFunctions = "LOWER"
+	ScalarFunctionsRound       ScalarFunctions = "ROUND"
+	ScalarFunctionsRtrim       ScalarFunctions = "RTRIM"
+	ScalarFunctionsSqrt        ScalarFunctions = "SQRT"
+	ScalarFunctionsSubstring   ScalarFunctions = "SUBSTRING"
+	ScalarFunctionsToChar      ScalarFunctions = "TO_CHAR"
+	ScalarFunctionsToDate      ScalarFunctions = "TO_DATE"
+	ScalarFunctionsToNumber    ScalarFunctions = "TO_NUMBER"
+	ScalarFunctionsToTimestamp ScalarFunctions = "TO_TIMESTAMP"
+	ScalarFunctionsTrim        ScalarFunctions = "TRIM"
+	ScalarFunctionsTrunc       ScalarFunctions = "TRUNC"
+	ScalarFunctionsUpper       ScalarFunctions = "UPPER"
 )
 
 // Values returns all known values for ScalarFunctions. Note that this can be
@@ -511,19 +522,86 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ScalarFunctions) Values() []ScalarFunctions {
 	return []ScalarFunctions{
-		"TRUNC",
 		"ABS",
+		"CAST",
 		"CEILING",
+		"COALESCE",
+		"CONVERT",
+		"CURRENT_DATE",
+		"DATEADD",
+		"EXTRACT",
 		"FLOOR",
+		"GETDATE",
 		"LN",
 		"LOG",
-		"ROUND",
-		"SQRT",
-		"CAST",
 		"LOWER",
+		"ROUND",
 		"RTRIM",
+		"SQRT",
+		"SUBSTRING",
+		"TO_CHAR",
+		"TO_DATE",
+		"TO_NUMBER",
+		"TO_TIMESTAMP",
+		"TRIM",
+		"TRUNC",
 		"UPPER",
-		"COALESCE",
+	}
+}
+
+type SchemaConfiguration string
+
+// Enum values for SchemaConfiguration
+const (
+	SchemaConfigurationDifferentialPrivacy SchemaConfiguration = "DIFFERENTIAL_PRIVACY"
+)
+
+// Values returns all known values for SchemaConfiguration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaConfiguration) Values() []SchemaConfiguration {
+	return []SchemaConfiguration{
+		"DIFFERENTIAL_PRIVACY",
+	}
+}
+
+type SchemaStatus string
+
+// Enum values for SchemaStatus
+const (
+	SchemaStatusReady    SchemaStatus = "READY"
+	SchemaStatusNotReady SchemaStatus = "NOT_READY"
+)
+
+// Values returns all known values for SchemaStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaStatus) Values() []SchemaStatus {
+	return []SchemaStatus{
+		"READY",
+		"NOT_READY",
+	}
+}
+
+type SchemaStatusReasonCode string
+
+// Enum values for SchemaStatusReasonCode
+const (
+	SchemaStatusReasonCodeAnalysisRuleMissing                    SchemaStatusReasonCode = "ANALYSIS_RULE_MISSING"
+	SchemaStatusReasonCodeAnalysisTemplatesNotConfigured         SchemaStatusReasonCode = "ANALYSIS_TEMPLATES_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAnalysisProvidersNotConfigured         SchemaStatusReasonCode = "ANALYSIS_PROVIDERS_NOT_CONFIGURED"
+	SchemaStatusReasonCodeDifferentialPrivacyPolicyNotConfigured SchemaStatusReasonCode = "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+)
+
+// Values returns all known values for SchemaStatusReasonCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaStatusReasonCode) Values() []SchemaStatusReasonCode {
+	return []SchemaStatusReasonCode{
+		"ANALYSIS_RULE_MISSING",
+		"ANALYSIS_TEMPLATES_NOT_CONFIGURED",
+		"ANALYSIS_PROVIDERS_NOT_CONFIGURED",
+		"DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED",
 	}
 }
 

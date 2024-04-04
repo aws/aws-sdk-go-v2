@@ -16,29 +16,26 @@
 //   - Accept-Encoding: gzip, deflate
 //   - Content-Type: application/json
 //
-// Resources The following resources contain information about your IVS live
-// stream (see Getting Started with Amazon IVS (https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html)
-// ):
+// Key Concepts
 //   - Channel — Stores configuration data related to your live stream. You first
 //     create a channel and then use the channel’s stream key to start your live
-//     stream. See the Channel endpoints for more information.
+//     stream.
 //   - Stream key — An identifier assigned by Amazon IVS when you create a
-//     channel, which is then used to authorize streaming. See the StreamKey endpoints
-//     for more information. Treat the stream key like a secret, since it allows anyone
-//     to stream to the channel.
+//     channel, which is then used to authorize streaming. Treat the stream key like a
+//     secret, since it allows anyone to stream to the channel.
 //   - Playback key pair — Video playback may be restricted using
 //     playback-authorization tokens, which use public-key encryption. A playback key
 //     pair is the public-private pair of keys used to sign and validate the
-//     playback-authorization token. See the PlaybackKeyPair endpoints for more
-//     information.
+//     playback-authorization token.
 //   - Recording configuration — Stores configuration related to recording a live
 //     stream and where to store the recorded content. Multiple channels can reference
-//     the same recording configuration. See the Recording Configuration endpoints for
-//     more information.
+//     the same recording configuration.
 //   - Playback restriction policy — Restricts playback by countries and/or origin
-//     sites. See the Playback Restriction Policy endpoints for more information.
+//     sites.
 //
-// Tagging A tag is a metadata label that you assign to an Amazon Web Services
+// For more information about your IVS live stream, also see Getting Started with
+// IVS Low-Latency Streaming (https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/getting-started.html)
+// . Tagging A tag is a metadata label that you assign to an Amazon Web Services
 // resource. A tag comprises a key and a value, both set by you. For example, you
 // might set a tag as topic:nature to label a particular video category. See
 // Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
@@ -125,7 +122,7 @@
 //   - BatchStartViewerSessionRevocation — Performs StartViewerSessionRevocation on
 //     multiple channel ARN and viewer ID pairs simultaneously.
 //
-// RecordingConfiguration Endpoints
+// Recording Configuration Endpoints
 //   - CreateRecordingConfiguration — Creates a new recording configuration, used
 //     to enable recording to Amazon S3.
 //   - GetRecordingConfiguration — Gets the recording-configuration metadata for
@@ -154,7 +151,7 @@
 //     batching your data into a single PutMetadata call.) At most 155 requests per
 //     second per account are allowed.
 //
-// StreamKey Endpoints
+// Stream Key Endpoints
 //   - CreateStreamKey — Creates a stream key, used to initiate a stream, for the
 //     specified channel ARN.
 //   - GetStreamKey — Gets stream key information for the specified ARN.

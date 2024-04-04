@@ -1,0 +1,8 @@
+{
+    "id": "ed110c88-1d22-4dae-8be9-72cd31599d9e",
+    "type": "feature",
+    "description": "API update to include an SRT ingest endpoint and passphrase for all channels.",
+    "modules": [
+        "service/ivs"
+    ]
+}

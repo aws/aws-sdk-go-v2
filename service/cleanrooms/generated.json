@@ -10,6 +10,7 @@
         "api_client_test.go",
         "api_op_BatchGetCollaborationAnalysisTemplate.go",
         "api_op_BatchGetSchema.go",
+        "api_op_BatchGetSchemaAnalysisRule.go",
         "api_op_CreateAnalysisTemplate.go",
         "api_op_CreateCollaboration.go",
         "api_op_CreateConfiguredAudienceModelAssociation.go",

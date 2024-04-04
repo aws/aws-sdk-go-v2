@@ -86,6 +86,18 @@ func TestCheckSnapshot_BatchGetSchema(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetSchemaAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSchemaAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetSchemaAnalysisRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAnalysisTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAnalysisTemplate(context.Background(), nil, func(o *Options) {
@@ -822,6 +834,18 @@ func TestUpdateSnapshot_BatchGetSchema(t *testing.T) {
 	_, err := svc.BatchGetSchema(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetSchema")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetSchemaAnalysisRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSchemaAnalysisRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetSchemaAnalysisRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

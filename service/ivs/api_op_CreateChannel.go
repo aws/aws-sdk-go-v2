@@ -33,7 +33,7 @@ type CreateChannelInput struct {
 	// false .
 	Authorized bool
 
-	// Whether the channel allows insecure RTMP ingest. Default: false .
+	// Whether the channel allows insecure RTMP and SRT ingest. Default: false .
 	InsecureIngest bool
 
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full

@@ -154,13 +154,13 @@ type AnalysisRuleAggregation struct {
 // queries on their configured tables. It supports differential privacy.
 type AnalysisRuleCustom struct {
 
-	// The analysis templates that are allowed by the custom analysis rule.
+	// The ARN of the analysis templates that are allowed by the custom analysis rule.
 	//
 	// This member is required.
 	AllowedAnalyses []string
 
-	// The Amazon Web Services accounts that are allowed to query by the custom
-	// analysis rule. Required when allowedAnalyses is ANY_QUERY .
+	// The IDs of the Amazon Web Services accounts that are allowed to query by the
+	// custom analysis rule. Required when allowedAnalyses is ANY_QUERY .
 	AllowedAnalysisProviders []string
 
 	// The differential privacy configuration.
@@ -418,6 +418,32 @@ type BatchGetCollaborationAnalysisTemplateError struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// An error that describes why a schema could not be fetched.
+type BatchGetSchemaAnalysisRuleError struct {
+
+	// An error code for the error.
+	//
+	// This member is required.
+	Code *string
+
+	// A description of why the call failed.
+	//
+	// This member is required.
+	Message *string
+
+	// An error name for the error.
+	//
+	// This member is required.
+	Name *string
+
+	// The analysis rule type.
+	//
+	// This member is required.
+	Type AnalysisRuleType
 
 	noSmithyDocumentSerde
 }
@@ -2599,6 +2625,11 @@ type Schema struct {
 	// This member is required.
 	PartitionKeys []Column
 
+	// Details about the status of the schema. Currently, only one entry is present.
+	//
+	// This member is required.
+	SchemaStatusDetails []SchemaStatusDetail
+
 	// The type of schema. The only valid value is currently `TABLE`.
 	//
 	// This member is required.
@@ -2612,6 +2643,62 @@ type Schema struct {
 	// The analysis method for the schema. The only valid value is currently
 	// DIRECT_QUERY.
 	AnalysisMethod AnalysisMethod
+
+	noSmithyDocumentSerde
+}
+
+// Defines the information that's necessary to retrieve an analysis rule schema.
+// Schema analysis rules are uniquely identiﬁed by a combination of the schema name
+// and the analysis rule type for a given collaboration.
+type SchemaAnalysisRuleRequest struct {
+
+	// The name of the analysis rule schema that you are requesting.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of analysis rule schema that you are requesting.
+	//
+	// This member is required.
+	Type AnalysisRuleType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the schema status. A status of READY means that based on the
+// schema analysis rule, queries of the given analysis rule type are properly
+// configured to run queries on this schema.
+type SchemaStatusDetail struct {
+
+	// The status of the schema.
+	//
+	// This member is required.
+	Status SchemaStatus
+
+	// The analysis rule type for which the schema status has been evaluated.
+	AnalysisRuleType AnalysisRuleType
+
+	// The configuration details of the schema analysis rule for the given type.
+	Configurations []SchemaConfiguration
+
+	// The reasons why the schema status is set to its current state.
+	Reasons []SchemaStatusReason
+
+	noSmithyDocumentSerde
+}
+
+// A reason why the schema status is set to its current value.
+type SchemaStatusReason struct {
+
+	// The schema status reason code.
+	//
+	// This member is required.
+	Code SchemaStatusReasonCode
+
+	// An explanation of the schema status reason code.
+	//
+	// This member is required.
+	Message *string
 
 	noSmithyDocumentSerde
 }

@@ -1398,6 +1398,10 @@ func awsRestjson1_serializeOpHttpBindingsListVirtualClustersInput(v *ListVirtual
 		encoder.SetQuery("createdBefore").String(smithytime.FormatDateTime(*v.CreatedBefore))
 	}
 
+	if v.EksAccessEntryIntegrated != nil {
+		encoder.SetQuery("eksAccessEntryIntegrated").Boolean(*v.EksAccessEntryIntegrated)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}

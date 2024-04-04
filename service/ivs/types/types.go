@@ -130,6 +130,10 @@ type Channel struct {
 	// enables recording. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
+	// Specifies the endpoint and optional passphrase for streaming with the SRT
+	// protocol.
+	Srt *Srt
+
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
 	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 	// for more information, including restrictions that apply to tags and "Tag naming
@@ -447,6 +451,19 @@ type S3DestinationConfiguration struct {
 	//
 	// This member is required.
 	BucketName *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies information needed to stream using the SRT protocol.
+type Srt struct {
+
+	// The endpoint to be used when streaming with IVS using the SRT protocol.
+	Endpoint *string
+
+	// Auto-generated passphrase to enable encryption. This field is applicable only
+	// if the end user has not enabled the insecureIngest option for the channel.
+	Passphrase *string
 
 	noSmithyDocumentSerde
 }

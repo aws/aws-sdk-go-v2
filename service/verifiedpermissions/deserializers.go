@@ -3645,6 +3645,86 @@ func awsAwsjson10_deserializeDocumentClientIds(v *[]string, value interface{}) e
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentCognitoGroupConfigurationDetail(v **types.CognitoGroupConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CognitoGroupConfigurationDetail
+	if *v == nil {
+		sv = &types.CognitoGroupConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupEntityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupEntityType to be of type string, got %T instead", value)
+				}
+				sv.GroupEntityType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCognitoGroupConfigurationItem(v **types.CognitoGroupConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CognitoGroupConfigurationItem
+	if *v == nil {
+		sv = &types.CognitoGroupConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupEntityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupEntityType to be of type string, got %T instead", value)
+				}
+				sv.GroupEntityType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationDetail(v **types.CognitoUserPoolConfigurationDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3669,6 +3749,11 @@ func awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationDetail(v **type
 		switch key {
 		case "clientIds":
 			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "groupConfiguration":
+			if err := awsAwsjson10_deserializeDocumentCognitoGroupConfigurationDetail(&sv.GroupConfiguration, value); err != nil {
 				return err
 			}
 
@@ -3723,6 +3808,11 @@ func awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationItem(v **types.
 		switch key {
 		case "clientIds":
 			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "groupConfiguration":
+			if err := awsAwsjson10_deserializeDocumentCognitoGroupConfigurationItem(&sv.GroupConfiguration, value); err != nil {
 				return err
 			}
 
@@ -6666,6 +6756,11 @@ func awsAwsjson10_deserializeOpDocumentIsAuthorizedWithTokenOutput(v **IsAuthori
 
 		case "errors":
 			if err := awsAwsjson10_deserializeDocumentEvaluationErrorList(&sv.Errors, value); err != nil {
+				return err
+			}
+
+		case "principal":
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&sv.Principal, value); err != nil {
 				return err
 			}
 

@@ -39,7 +39,7 @@ type UpdateChannelInput struct {
 	// Whether the channel is private (enabled for playback authorization).
 	Authorized bool
 
-	// Whether the channel allows insecure RTMP ingest. Default: false .
+	// Whether the channel allows insecure RTMP and SRT ingest. Default: false .
 	InsecureIngest bool
 
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full

@@ -1,0 +1,8 @@
+{
+    "id": "04a55bb4-4825-45bc-b564-505ce89f0b0a",
+    "type": "feature",
+    "description": "Feature: New schemaStatusDetails field to the existing Schema object that displays a status on Schema API responses to show whether a schema is queryable or not. New BatchGetSchemaAnalysisRule API to retrieve multiple schemaAnalysisRules using a single API call.",
+    "modules": [
+        "service/cleanrooms"
+    ]
+}

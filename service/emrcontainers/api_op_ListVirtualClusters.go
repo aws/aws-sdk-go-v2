@@ -48,6 +48,11 @@ type ListVirtualClustersInput struct {
 	// The date and time before which the virtual clusters are created.
 	CreatedBefore *time.Time
 
+	// Optional Boolean that specifies whether the operation should return the virtual
+	// clusters that have the access entry integration enabled or disabled. If not
+	// specified, the operation returns all applicable virtual clusters.
+	EksAccessEntryIntegrated *bool
+
 	// The maximum number of virtual clusters that can be listed.
 	MaxResults *int32
 

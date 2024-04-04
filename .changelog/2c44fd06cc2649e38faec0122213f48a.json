@@ -1,0 +1,8 @@
+{
+    "id": "2c44fd06-cc26-49e3-8fae-c0122213f48a",
+    "type": "feature",
+    "description": "Amazon EC2 G6 instances powered by NVIDIA L4 Tensor Core GPUs can be used for a wide range of graphics-intensive and machine learning use cases. Gr6 instances also feature NVIDIA L4 GPUs and can be used for graphics workloads with higher memory requirements.",
+    "modules": [
+        "service/ec2"
+    ]
+}

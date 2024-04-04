@@ -113,6 +113,9 @@ type IsAuthorizedWithTokenOutput struct {
 	// This member is required.
 	Errors []types.EvaluationErrorItem
 
+	// The identifier of the principal in the ID or access token.
+	Principal *types.EntityIdentifier
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

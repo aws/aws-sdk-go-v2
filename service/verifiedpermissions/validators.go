@@ -682,6 +682,21 @@ func validateBatchIsAuthorizedInputList(v []types.BatchIsAuthorizedInputItem) er
 	}
 }
 
+func validateCognitoGroupConfiguration(v *types.CognitoGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CognitoGroupConfiguration"}
+	if v.GroupEntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupEntityType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCognitoUserPoolConfiguration(v *types.CognitoUserPoolConfiguration) error {
 	if v == nil {
 		return nil
@@ -689,6 +704,11 @@ func validateCognitoUserPoolConfiguration(v *types.CognitoUserPoolConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "CognitoUserPoolConfiguration"}
 	if v.UserPoolArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolArn"))
+	}
+	if v.GroupConfiguration != nil {
+		if err := validateCognitoGroupConfiguration(v.GroupConfiguration); err != nil {
+			invalidParams.AddNested("GroupConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1008,6 +1028,21 @@ func validateTemplateLinkedPolicyDefinition(v *types.TemplateLinkedPolicyDefinit
 	}
 }
 
+func validateUpdateCognitoGroupConfiguration(v *types.UpdateCognitoGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCognitoGroupConfiguration"}
+	if v.GroupEntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupEntityType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateCognitoUserPoolConfiguration(v *types.UpdateCognitoUserPoolConfiguration) error {
 	if v == nil {
 		return nil
@@ -1015,6 +1050,11 @@ func validateUpdateCognitoUserPoolConfiguration(v *types.UpdateCognitoUserPoolCo
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCognitoUserPoolConfiguration"}
 	if v.UserPoolArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolArn"))
+	}
+	if v.GroupConfiguration != nil {
+		if err := validateUpdateCognitoGroupConfiguration(v.GroupConfiguration); err != nil {
+			invalidParams.AddNested("GroupConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

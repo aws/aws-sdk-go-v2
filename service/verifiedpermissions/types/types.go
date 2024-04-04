@@ -112,8 +112,8 @@ func (*AttributeValueMemberString) isAttributeValue() {}
 // An authorization request that you include in a BatchIsAuthorized API request.
 type BatchIsAuthorizedInputItem struct {
 
-	// Specifies the requested action to be authorized. For example, is the principal
-	// authorized to perform this action on the resource?
+	// Specifies the requested action to be authorized. For example,
+	// PhotoFlash::ReadPhoto .
 	Action *ActionIdentifier
 
 	// Specifies additional context that can be used to make more granular
@@ -123,7 +123,8 @@ type BatchIsAuthorizedInputItem struct {
 	// Specifies the principal for which the authorization decision is to be made.
 	Principal *EntityIdentifier
 
-	// Specifies the resource for which the authorization decision is to be made.
+	// Specifies the resource that you want an authorization decision for. For
+	// example, PhotoFlash::Photo .
 	Resource *EntityIdentifier
 
 	noSmithyDocumentSerde
@@ -149,9 +150,8 @@ type BatchIsAuthorizedOutputItem struct {
 	// This member is required.
 	DeterminingPolicies []DeterminingPolicyItem
 
-	// Errors that occurred while making an authorization decision, for example, a
-	// policy references an Entity or entity Attribute that does not exist in the
-	// slice.
+	// Errors that occurred while making an authorization decision. For example, a
+	// policy might reference an entity or attribute that doesn't exist in the request.
 	//
 	// This member is required.
 	Errors []EvaluationErrorItem
@@ -164,13 +164,58 @@ type BatchIsAuthorizedOutputItem struct {
 	noSmithyDocumentSerde
 }
 
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source. This data type is part of a
+// CognitoUserPoolConfiguration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfiguration.html)
+// structure and is a request parameter in CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
+// .
+type CognitoGroupConfiguration struct {
+
+	// The name of the schema entity type that's mapped to the user pool group.
+	// Defaults to AWS::CognitoGroup .
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source. This data type is part of an
+// CognitoUserPoolConfigurationDetail (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationItem.html)
+// structure and is a response parameter to GetIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html)
+// .
+type CognitoGroupConfigurationDetail struct {
+
+	// The name of the schema entity type that's mapped to the user pool group.
+	// Defaults to AWS::CognitoGroup .
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source. This data type is part of an
+// CognitoUserPoolConfigurationItem (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationDetail.html)
+// structure and is a response parameter to ListIdentitySources (http://forums.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html)
+// .
+type CognitoGroupConfigurationItem struct {
+
+	// The name of the schema entity type that's mapped to the user pool group.
+	// Defaults to AWS::CognitoGroup .
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for an identity source that represents a connection to an
 // Amazon Cognito user pool used as an identity provider for Verified Permissions.
 // This data type is used as a field that is part of an Configuration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html)
 // structure that is used as a parameter to CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
 // . Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
 type CognitoUserPoolConfiguration struct {
 
 	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -185,6 +230,10 @@ type CognitoUserPoolConfiguration struct {
 	// Cognito user pool. Example: "ClientIds": ["&ExampleCogClientId;"]
 	ClientIds []string
 
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
+	GroupConfiguration *CognitoGroupConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -194,7 +243,8 @@ type CognitoUserPoolConfiguration struct {
 // structure that is part of the response to GetIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html)
 // . Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
 type CognitoUserPoolConfigurationDetail struct {
 
 	// The unique application client IDs that are associated with the specified Amazon
@@ -218,6 +268,10 @@ type CognitoUserPoolConfigurationDetail struct {
 	// This member is required.
 	UserPoolArn *string
 
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
+	GroupConfiguration *CognitoGroupConfigurationDetail
+
 	noSmithyDocumentSerde
 }
 
@@ -227,7 +281,8 @@ type CognitoUserPoolConfigurationDetail struct {
 // structure that is part of the response to ListIdentitySources (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html)
 // . Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
 type CognitoUserPoolConfigurationItem struct {
 
 	// The unique application client IDs that are associated with the specified Amazon
@@ -251,12 +306,16 @@ type CognitoUserPoolConfigurationItem struct {
 	// This member is required.
 	UserPoolArn *string
 
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
+	GroupConfiguration *CognitoGroupConfigurationItem
+
 	noSmithyDocumentSerde
 }
 
 // Contains configuration information used when creating a new identity source. At
 // this time, the only valid member of this structure is a Amazon Cognito user pool
-// configuration. You must specify a userPoolArn , and optionally, a ClientId .
+// configuration. Specifies a userPoolArn , a groupConfiguration , and a ClientId .
 // This data type is used as a request parameter for the CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
 // operation.
 //
@@ -272,7 +331,8 @@ type Configuration interface {
 // specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 // of a Amazon Cognito user pool and one or more application client IDs. Example:
 // "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}}
 type ConfigurationMemberCognitoUserPoolConfiguration struct {
 	Value CognitoUserPoolConfiguration
 
@@ -295,9 +355,11 @@ type ConfigurationDetail interface {
 // Contains configuration details of a Amazon Cognito user pool that Verified
 // Permissions can use as a source of authenticated identities as entities. It
 // specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// of a Amazon Cognito user pool and one or more application client IDs. Example:
+// of a Amazon Cognito user pool, the policy store entity that you want to assign
+// to user groups, and one or more application client IDs. Example:
 // "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}}
 type ConfigurationDetailMemberCognitoUserPoolConfiguration struct {
 	Value CognitoUserPoolConfigurationDetail
 
@@ -320,9 +382,11 @@ type ConfigurationItem interface {
 // Contains configuration details of a Amazon Cognito user pool that Verified
 // Permissions can use as a source of authenticated identities as entities. It
 // specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// of a Amazon Cognito user pool and one or more application client IDs. Example:
+// of a Amazon Cognito user pool, the policy store entity that you want to assign
+// to user groups, and one or more application client IDs. Example:
 // "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}}
 type ConfigurationItemMemberCognitoUserPoolConfiguration struct {
 	Value CognitoUserPoolConfigurationItem
 
@@ -1010,6 +1074,18 @@ type TemplateLinkedPolicyDefinitionItem struct {
 	noSmithyDocumentSerde
 }
 
+// The user group entities from an Amazon Cognito user pool identity source.
+type UpdateCognitoGroupConfiguration struct {
+
+	// The name of the schema entity type that's mapped to the user pool group.
+	// Defaults to AWS::CognitoGroup .
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configuration details of a Amazon Cognito user pool for use with an
 // identity source.
 type UpdateCognitoUserPoolConfiguration struct {
@@ -1023,6 +1099,10 @@ type UpdateCognitoUserPoolConfiguration struct {
 	// The client ID of an app client that is configured for the specified Amazon
 	// Cognito user pool.
 	ClientIds []string
+
+	// The configuration of the user groups from an Amazon Cognito user pool identity
+	// source.
+	GroupConfiguration *UpdateCognitoGroupConfiguration
 
 	noSmithyDocumentSerde
 }

@@ -11,50 +11,50 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves multiple schemas by their identifiers.
-func (c *Client) BatchGetSchema(ctx context.Context, params *BatchGetSchemaInput, optFns ...func(*Options)) (*BatchGetSchemaOutput, error) {
+// Retrieves multiple analysis rule schemas.
+func (c *Client) BatchGetSchemaAnalysisRule(ctx context.Context, params *BatchGetSchemaAnalysisRuleInput, optFns ...func(*Options)) (*BatchGetSchemaAnalysisRuleOutput, error) {
 	if params == nil {
-		params = &BatchGetSchemaInput{}
+		params = &BatchGetSchemaAnalysisRuleInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "BatchGetSchema", params, optFns, c.addOperationBatchGetSchemaMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "BatchGetSchemaAnalysisRule", params, optFns, c.addOperationBatchGetSchemaAnalysisRuleMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*BatchGetSchemaOutput)
+	out := result.(*BatchGetSchemaAnalysisRuleOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type BatchGetSchemaInput struct {
+type BatchGetSchemaAnalysisRuleInput struct {
 
-	// A unique identifier for the collaboration that the schemas belong to. Currently
-	// accepts collaboration ID.
+	// The unique identifier of the collaboration that contains the schema analysis
+	// rule.
 	//
 	// This member is required.
 	CollaborationIdentifier *string
 
-	// The names for the schema objects to retrieve.
+	// The information that's necessary to retrieve a schema analysis rule.
 	//
 	// This member is required.
-	Names []string
+	SchemaAnalysisRuleRequests []types.SchemaAnalysisRuleRequest
 
 	noSmithyDocumentSerde
 }
 
-type BatchGetSchemaOutput struct {
+type BatchGetSchemaAnalysisRuleOutput struct {
+
+	// The retrieved list of analysis rules.
+	//
+	// This member is required.
+	AnalysisRules []types.AnalysisRule
 
 	// Error reasons for schemas that could not be retrieved. One error is returned
 	// for every schema that could not be retrieved.
 	//
 	// This member is required.
-	Errors []types.BatchGetSchemaError
-
-	// The retrieved list of schemas.
-	//
-	// This member is required.
-	Schemas []types.Schema
+	Errors []types.BatchGetSchemaAnalysisRuleError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,19 +62,19 @@ type BatchGetSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationBatchGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationBatchGetSchemaAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSchema{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSchemaAnalysisRule{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSchema{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSchemaAnalysisRule{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetSchema"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetSchemaAnalysisRule"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -117,10 +117,10 @@ func (c *Client) addOperationBatchGetSchemaMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpBatchGetSchemaValidationMiddleware(stack); err != nil {
+	if err = addOpBatchGetSchemaAnalysisRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetSchema(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetSchemaAnalysisRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -141,10 +141,10 @@ func (c *Client) addOperationBatchGetSchemaMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opBatchGetSchema(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opBatchGetSchemaAnalysisRule(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "BatchGetSchema",
+		OperationName: "BatchGetSchemaAnalysisRule",
 	}
 }
