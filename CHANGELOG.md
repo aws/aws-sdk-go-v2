@@ -1,3 +1,16 @@
+# Release (2024-04-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.61.0](service/quicksight/CHANGELOG.md#v1610-2024-04-05)
+  * **Feature**: Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.22.0](service/resourcegroups/CHANGELOG.md#v1220-2024-04-05)
+  * **Feature**: Added a new QueryErrorCode RESOURCE_TYPE_NOT_SUPPORTED that is returned by the ListGroupResources operation if the group query contains unsupported resource types.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.13.0](service/verifiedpermissions/CHANGELOG.md#v1130-2024-04-05)
+  * **Feature**: Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token.
+
 # Release (2024-04-04)
 
 ## Module Highlights

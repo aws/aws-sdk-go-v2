@@ -1,3 +1,7 @@
+# v1.61.0 (2024-04-05)
+
+* **Feature**: Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription
+
 # v1.60.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

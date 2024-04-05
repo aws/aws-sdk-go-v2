@@ -1,3 +1,7 @@
+# v1.22.0 (2024-04-05)
+
+* **Feature**: Added a new QueryErrorCode RESOURCE_TYPE_NOT_SUPPORTED that is returned by the ListGroupResources operation if the group query contains unsupported resource types.
+
 # v1.21.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.13.0 (2024-04-05)
+
+* **Feature**: Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token.
+
 # v1.12.0 (2024-04-04)
 
 * **Feature**: Adds GroupConfiguration field to Identity Source API's
