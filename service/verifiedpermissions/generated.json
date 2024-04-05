@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_BatchIsAuthorized.go",
+        "api_op_BatchIsAuthorizedWithToken.go",
         "api_op_CreateIdentitySource.go",
         "api_op_CreatePolicy.go",
         "api_op_CreatePolicyStore.go",

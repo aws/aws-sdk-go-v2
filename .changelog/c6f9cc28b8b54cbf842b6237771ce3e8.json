@@ -1,0 +1,8 @@
+{
+    "id": "c6f9cc28-b8b5-4cbf-842b-6237771ce3e8",
+    "type": "feature",
+    "description": "Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

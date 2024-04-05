@@ -70,10 +70,11 @@ type SearchResourcesOutput struct {
 	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
-	// A list of QueryError objects. Each error is an object that contains ErrorCode
-	// and Message structures. Possible values for ErrorCode :
+	// A list of QueryError objects. Each error contains an ErrorCode and Message .
+	// Possible values for ErrorCode :
 	//   - CLOUDFORMATION_STACK_INACTIVE
 	//   - CLOUDFORMATION_STACK_NOT_EXISTING
+	//   - CLOUDFORMATION_STACK_UNASSUMABLE_ROLE
 	QueryErrors []types.QueryError
 
 	// The ARNs and resource types of resources that are members of the group that you

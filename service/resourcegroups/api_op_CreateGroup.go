@@ -41,9 +41,9 @@ type CreateGroupInput struct {
 	// The name of the group, which is the identifier of the group in other
 	// operations. You can't change the name of a resource group after you create it. A
 	// resource group name can consist of letters, numbers, hyphens, periods, and
-	// underscores. The name cannot start with AWS or aws ; these are reserved. A
-	// resource group name must be unique within each Amazon Web Services Region in
-	// your Amazon Web Services account.
+	// underscores. The name cannot start with AWS , aws , or any other possible
+	// capitalization; these are reserved. A resource group name must be unique within
+	// each Amazon Web Services Region in your Amazon Web Services account.
 	//
 	// This member is required.
 	Name *string

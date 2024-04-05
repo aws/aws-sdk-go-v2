@@ -92,9 +92,10 @@ type ListGroupResourcesOutput struct {
 	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
-	// A list of QueryError objects. Each error is an object that contains ErrorCode
-	// and Message structures. Possible values for ErrorCode are
-	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING .
+	// A list of QueryError objects. Each error contains an ErrorCode and Message .
+	// Possible values for ErrorCode are CLOUDFORMATION_STACK_INACTIVE ,
+	// CLOUDFORMATION_STACK_NOT_EXISTING , CLOUDFORMATION_STACK_UNASSUMABLE_ROLE and
+	// RESOURCE_TYPE_NOT_SUPPORTED .
 	QueryErrors []types.QueryError
 
 	// Deprecated - don't use this parameter. Use the Resources response field instead.

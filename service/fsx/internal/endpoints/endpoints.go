@@ -498,6 +498,53 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "fips-prod-us-iso-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "fsx-fips.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-iso-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "fsx-fips.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "prod-us-iso-east-1",
+			}: endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region:  "prod-us-iso-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "fsx-fips.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-iso-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-iso-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "fsx-fips.us-iso-east-1.c2s.ic.gov",
+			},
+		},
 	},
 	{
 		ID: "aws-iso-b",

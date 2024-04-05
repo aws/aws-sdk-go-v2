@@ -212,20 +212,13 @@ type PendingResource struct {
 }
 
 // A two-part error structure that can occur in ListGroupResources or
-// SearchResources operations on CloudFront stack-based queries. The error occurs
-// if the CloudFront stack on which the query is based either does not exist, or
-// has a status that renders the stack inactive. A QueryError occurrence does not
-// necessarily mean that Resource Groups could not complete the operation, but the
-// resulting group might have no member resources.
+// SearchResources .
 type QueryError struct {
 
 	// Specifies the error code that was raised.
 	ErrorCode QueryErrorCode
 
-	// A message that explains the ErrorCode value. Messages might state that the
-	// specified CloudFront stack does not exist (or no longer exists). For
-	// CLOUDFORMATION_STACK_INACTIVE , the message typically states that the CloudFront
-	// stack has a status that is not (or no longer) active, such as CREATE_FAILED .
+	// A message that explains the ErrorCode .
 	Message *string
 
 	noSmithyDocumentSerde

@@ -335,6 +335,11 @@ func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAcc
 		ok.String(*v.FirstName)
 	}
 
+	if v.IAMIdentityCenterInstanceArn != nil {
+		ok := object.Key("IAMIdentityCenterInstanceArn")
+		ok.String(*v.IAMIdentityCenterInstanceArn)
+	}
+
 	if v.LastName != nil {
 		ok := object.Key("LastName")
 		ok.String(*v.LastName)

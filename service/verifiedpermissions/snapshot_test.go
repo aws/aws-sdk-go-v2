@@ -74,6 +74,18 @@ func TestCheckSnapshot_BatchIsAuthorized(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchIsAuthorizedWithToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchIsAuthorizedWithToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIdentitySource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIdentitySource(context.Background(), nil, func(o *Options) {
@@ -366,6 +378,18 @@ func TestUpdateSnapshot_BatchIsAuthorized(t *testing.T) {
 	_, err := svc.BatchIsAuthorized(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchIsAuthorized")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchIsAuthorizedWithToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchIsAuthorizedWithToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchIsAuthorizedWithToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

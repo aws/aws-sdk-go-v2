@@ -131,6 +131,9 @@ type CreateAccountSubscriptionInput struct {
 	// edition of the new Amazon QuickSight account.
 	FirstName *string
 
+	// The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+	IAMIdentityCenterInstanceArn *string
+
 	// The last name of the author of the Amazon QuickSight account to use for future
 	// communications. This field is required if ENTERPPRISE_AND_Q is the selected
 	// edition of the new Amazon QuickSight account.

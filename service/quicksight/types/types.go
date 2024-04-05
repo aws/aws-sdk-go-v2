@@ -156,9 +156,11 @@ type AggregationSortConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for applying a filter to all sheets. You can apply this
-// filter to all visuals on every sheet. This is a union type structure. For this
-// structure to be valid, only one of the attributes can be defined.
+// An empty object that represents that the AllSheets option is the chosen value
+// for the FilterScopeConfiguration parameter. This structure applies the filter
+// to all visuals on all sheets of an Analysis, Dashboard, or Template. This is a
+// union type structure. For this structure to be valid, only one of the attributes
+// can be defined.
 type AllSheetsFilterScopeConfiguration struct {
 	noSmithyDocumentSerde
 }
@@ -5769,7 +5771,10 @@ type FilterRelativeDateTimeControl struct {
 // this structure to be valid, only one of the attributes can be defined.
 type FilterScopeConfiguration struct {
 
-	// The configuration for applying a filter to all sheets.
+	// The configuration that applies a filter to all sheets. When you choose AllSheets
+	// as the value for a FilterScopeConfiguration , this filter is applied to all
+	// visuals of all sheets in an Analysis, Dashboard, or Template. The
+	// AllSheetsFilterScopeConfiguration is chosen.
 	AllSheets *AllSheetsFilterScopeConfiguration
 
 	// The configuration for applying a filter to specific sheets.

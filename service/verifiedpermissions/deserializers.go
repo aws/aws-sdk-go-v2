@@ -138,6 +138,125 @@ func awsAwsjson10_deserializeOpErrorBatchIsAuthorized(response *smithyhttp.Respo
 	}
 }
 
+type awsAwsjson10_deserializeOpBatchIsAuthorizedWithToken struct {
+}
+
+func (*awsAwsjson10_deserializeOpBatchIsAuthorizedWithToken) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpBatchIsAuthorizedWithToken) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorBatchIsAuthorizedWithToken(response, &metadata)
+	}
+	output := &BatchIsAuthorizedWithTokenOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentBatchIsAuthorizedWithTokenOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorBatchIsAuthorizedWithToken(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpCreateIdentitySource struct {
 }
 
@@ -3609,6 +3728,141 @@ func awsAwsjson10_deserializeDocumentBatchIsAuthorizedOutputList(v *[]types.Batc
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenInputItem(v **types.BatchIsAuthorizedWithTokenInputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchIsAuthorizedWithTokenInputItem
+	if *v == nil {
+		sv = &types.BatchIsAuthorizedWithTokenInputItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifier(&sv.Action, value); err != nil {
+				return err
+			}
+
+		case "context":
+			if err := awsAwsjson10_deserializeDocumentContextDefinition(&sv.Context, value); err != nil {
+				return err
+			}
+
+		case "resource":
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&sv.Resource, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenOutputItem(v **types.BatchIsAuthorizedWithTokenOutputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchIsAuthorizedWithTokenOutputItem
+	if *v == nil {
+		sv = &types.BatchIsAuthorizedWithTokenOutputItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "decision":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Decision to be of type string, got %T instead", value)
+				}
+				sv.Decision = types.Decision(jtv)
+			}
+
+		case "determiningPolicies":
+			if err := awsAwsjson10_deserializeDocumentDeterminingPolicyList(&sv.DeterminingPolicies, value); err != nil {
+				return err
+			}
+
+		case "errors":
+			if err := awsAwsjson10_deserializeDocumentEvaluationErrorList(&sv.Errors, value); err != nil {
+				return err
+			}
+
+		case "request":
+			if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenInputItem(&sv.Request, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenOutputList(v *[]types.BatchIsAuthorizedWithTokenOutputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchIsAuthorizedWithTokenOutputItem
+	if *v == nil {
+		cv = []types.BatchIsAuthorizedWithTokenOutputItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchIsAuthorizedWithTokenOutputItem
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenOutputItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentClientIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5758,6 +6012,47 @@ func awsAwsjson10_deserializeOpDocumentBatchIsAuthorizedOutput(v **BatchIsAuthor
 		switch key {
 		case "results":
 			if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedOutputList(&sv.Results, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentBatchIsAuthorizedWithTokenOutput(v **BatchIsAuthorizedWithTokenOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchIsAuthorizedWithTokenOutput
+	if *v == nil {
+		sv = &BatchIsAuthorizedWithTokenOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "principal":
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&sv.Principal, value); err != nil {
+				return err
+			}
+
+		case "results":
+			if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenOutputList(&sv.Results, value); err != nil {
 				return err
 			}
 

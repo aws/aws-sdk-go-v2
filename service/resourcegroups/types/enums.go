@@ -88,6 +88,7 @@ const (
 	QueryErrorCodeCloudformationStackInactive        QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"
 	QueryErrorCodeCloudformationStackNotExisting     QueryErrorCode = "CLOUDFORMATION_STACK_NOT_EXISTING"
 	QueryErrorCodeCloudformationStackUnassumableRole QueryErrorCode = "CLOUDFORMATION_STACK_UNASSUMABLE_ROLE"
+	QueryErrorCodeResourceTypeNotSupported           QueryErrorCode = "RESOURCE_TYPE_NOT_SUPPORTED"
 )
 
 // Values returns all known values for QueryErrorCode. Note that this can be
@@ -98,6 +99,7 @@ func (QueryErrorCode) Values() []QueryErrorCode {
 		"CLOUDFORMATION_STACK_INACTIVE",
 		"CLOUDFORMATION_STACK_NOT_EXISTING",
 		"CLOUDFORMATION_STACK_UNASSUMABLE_ROLE",
+		"RESOURCE_TYPE_NOT_SUPPORTED",
 	}
 }
 

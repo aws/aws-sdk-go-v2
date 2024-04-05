@@ -1,0 +1,8 @@
+{
+    "id": "0ace282a-2e9e-45b9-aeb9-7b78d7446888",
+    "type": "feature",
+    "description": "Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription",
+    "modules": [
+        "service/quicksight"
+    ]
+}
