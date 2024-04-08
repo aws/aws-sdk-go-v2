@@ -33,7 +33,7 @@ func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, 
 type CreateMonitorInput struct {
 
 	// The name identifying the monitor. It can contain only letters, underscores (_),
-	// or dashes (-), and can be up to 255 characters.
+	// or dashes (-), and can be up to 200 characters.
 	//
 	// This member is required.
 	MonitorName *string
@@ -73,7 +73,7 @@ type CreateMonitorOutput struct {
 	State types.MonitorState
 
 	// The number of seconds that metrics are aggregated by and sent to Amazon
-	// CloudWatch. This will be either 30 or 60 .
+	// CloudWatch. This must be either 30 or 60 .
 	AggregationPeriod *int64
 
 	// The list of key-value pairs assigned to the monitor.

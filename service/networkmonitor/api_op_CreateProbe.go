@@ -54,14 +54,14 @@ type CreateProbeInput struct {
 
 type CreateProbeOutput struct {
 
-	// The destination IP address for the monitor. This will be either an IPv4 or IPv6
+	// The destination IP address for the monitor. This must be either an IPv4 or IPv6
 	// address.
 	//
 	// This member is required.
 	Destination *string
 
 	// The protocol used for the network traffic between the source and destination .
-	// This will be either TCP or ICMP .
+	// This must be either TCP or ICMP .
 	//
 	// This member is required.
 	Protocol types.Protocol
@@ -84,7 +84,7 @@ type CreateProbeOutput struct {
 	// The time and date when the probe was last modified.
 	ModifiedAt *time.Time
 
-	// The size of the packets sent between the source and destination. This will be a
+	// The size of the packets sent between the source and destination. This must be a
 	// number between 56 and 8500 .
 	PacketSize *int32
 

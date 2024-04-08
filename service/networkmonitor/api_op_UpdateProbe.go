@@ -81,13 +81,13 @@ type UpdateProbeOutput struct {
 	// This member is required.
 	SourceArn *string
 
-	// The updated IP address family. This will be either IPV4 or IPV6 .
+	// The updated IP address family. This must be either IPV4 or IPV6 .
 	AddressFamily types.AddressFamily
 
 	// The time and date that the probe was created.
 	CreatedAt *time.Time
 
-	// The updated destination port. This will be a number between 1 and 65536 .
+	// The updated destination port. This must be a number between 1 and 65536 .
 	DestinationPort *int32
 
 	// The time and date that the probe was last updated.

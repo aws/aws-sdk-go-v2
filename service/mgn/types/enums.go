@@ -11,6 +11,7 @@ const (
 	ActionCategoryLicenseAndSubscription ActionCategory = "LICENSE_AND_SUBSCRIPTION"
 	ActionCategoryValidation             ActionCategory = "VALIDATION"
 	ActionCategoryObservability          ActionCategory = "OBSERVABILITY"
+	ActionCategoryRefactoring            ActionCategory = "REFACTORING"
 	ActionCategorySecurity               ActionCategory = "SECURITY"
 	ActionCategoryNetworking             ActionCategory = "NETWORKING"
 	ActionCategoryConfiguration          ActionCategory = "CONFIGURATION"
@@ -28,6 +29,7 @@ func (ActionCategory) Values() []ActionCategory {
 		"LICENSE_AND_SUBSCRIPTION",
 		"VALIDATION",
 		"OBSERVABILITY",
+		"REFACTORING",
 		"SECURITY",
 		"NETWORKING",
 		"CONFIGURATION",
@@ -82,6 +84,7 @@ type BootMode string
 const (
 	BootModeLegacyBios BootMode = "LEGACY_BIOS"
 	BootModeUefi       BootMode = "UEFI"
+	BootModeUseSource  BootMode = "USE_SOURCE"
 )
 
 // Values returns all known values for BootMode. Note that this can be expanded in
@@ -91,6 +94,7 @@ func (BootMode) Values() []BootMode {
 	return []BootMode{
 		"LEGACY_BIOS",
 		"UEFI",
+		"USE_SOURCE",
 	}
 }
 
