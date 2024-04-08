@@ -108,7 +108,7 @@
                 "monitorName": {
                     "target": "com.amazonaws.networkmonitor#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name identifying the monitor. It can contain only letters, underscores (_), or dashes (-), and can be up to 255 characters.</p>",
+                        "smithy.api#documentation": "<p>The name identifying the monitor. It can contain only letters, underscores (_), or dashes (-), and can be up to 200 characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -169,7 +169,7 @@
                 "aggregationPeriod": {
                     "target": "com.amazonaws.networkmonitor#AggregationPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch. This will be either <code>30</code> or <code>60</code>. </p>"
+                        "smithy.api#documentation": "<p>The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch. This must be either <code>30</code> or <code>60</code>. </p>"
                     }
                 },
                 "tags": {
@@ -196,7 +196,7 @@
                 "destination": {
                     "target": "com.amazonaws.networkmonitor#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address. This must be either <code>IPV4</code> or <code>IPV6</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -209,14 +209,14 @@
                 "protocol": {
                     "target": "com.amazonaws.networkmonitor#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This must be either <code>TCP</code> or <code>ICMP</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "packetSize": {
                     "target": "com.amazonaws.networkmonitor#PacketSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
                     }
                 },
                 "probeTags": {
@@ -337,7 +337,7 @@
                 "destination": {
                     "target": "com.amazonaws.networkmonitor#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This will be either an IPv4 or IPv6 address.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This must be either an IPv4 or IPv6 address.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -350,14 +350,14 @@
                 "protocol": {
                     "target": "com.amazonaws.networkmonitor#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This must be either <code>TCP</code> or <code>ICMP</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "packetSize": {
                     "target": "com.amazonaws.networkmonitor#PacketSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
                     }
                 },
                 "addressFamily": {
@@ -742,7 +742,7 @@
                 "destination": {
                     "target": "com.amazonaws.networkmonitor#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This will be either an IPv4 or IPv6 address.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This must be either an IPv4 or IPv6 address.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -755,14 +755,14 @@
                 "protocol": {
                     "target": "com.amazonaws.networkmonitor#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This must be either <code>TCP</code> or <code>ICMP</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "packetSize": {
                     "target": "com.amazonaws.networkmonitor#PacketSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
                     }
                 },
                 "addressFamily": {
@@ -2000,7 +2000,7 @@
                 "destination": {
                     "target": "com.amazonaws.networkmonitor#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address. This must be either <code>IPV4</code> or <code>IPV6</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2013,14 +2013,14 @@
                 "protocol": {
                     "target": "com.amazonaws.networkmonitor#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This must be either <code>TCP</code> or <code>ICMP</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "packetSize": {
                     "target": "com.amazonaws.networkmonitor#PacketSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
                     }
                 },
                 "tags": {
@@ -2135,7 +2135,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 255
+                    "max": 200
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
             }
@@ -2633,7 +2633,7 @@
                 "destinationPort": {
                     "target": "com.amazonaws.networkmonitor#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated destination port. This will be a number between <code>1</code> and <code>65536</code>.</p>"
+                        "smithy.api#documentation": "<p>The updated destination port. This must be a number between <code>1</code> and <code>65536</code>.</p>"
                     }
                 },
                 "protocol": {
@@ -2652,7 +2652,7 @@
                 "addressFamily": {
                     "target": "com.amazonaws.networkmonitor#AddressFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated IP address family. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>"
+                        "smithy.api#documentation": "<p>The updated IP address family. This must be either <code>IPV4</code> or <code>IPV6</code>.</p>"
                     }
                 },
                 "vpcId": {

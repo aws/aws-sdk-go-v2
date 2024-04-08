@@ -70,6 +70,10 @@
                         "name": "OBSERVABILITY"
                     },
                     {
+                        "value": "REFACTORING",
+                        "name": "REFACTORING"
+                    },
+                    {
                         "value": "SECURITY",
                         "name": "SECURITY"
                     },
@@ -1627,6 +1631,10 @@
                     {
                         "name": "UEFI",
                         "value": "UEFI"
+                    },
+                    {
+                        "name": "USE_SOURCE",
+                        "value": "USE_SOURCE"
                     }
                 ]
             }
@@ -9732,7 +9740,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates multiple LaunchConfigurations by Source Server ID.</p>",
+                "smithy.api#documentation": "<p>Updates multiple LaunchConfigurations by Source Server ID.</p>\n        <note>\n            <p>bootMode valid values are <code>LEGACY_BIOS | UEFI</code>\n            </p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/UpdateLaunchConfiguration",
                     "method": "POST",
