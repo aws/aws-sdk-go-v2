@@ -1,3 +1,7 @@
+# v1.28.0 (2024-04-08)
+
+* **Feature**: Added USE_SOURCE as default option to LaunchConfigurationTemplate bootMode parameter.
+
 # v1.27.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

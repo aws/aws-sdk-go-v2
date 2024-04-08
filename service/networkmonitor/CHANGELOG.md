@@ -1,3 +1,7 @@
+# v1.3.0 (2024-04-08)
+
+* **Feature**: Updated the allowed monitorName length for CloudWatch Network Monitor.
+
 # v1.2.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

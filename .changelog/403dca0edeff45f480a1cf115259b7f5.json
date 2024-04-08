@@ -1,8 +1,0 @@
-{
-    "id": "403dca0e-deff-45f4-80a1-cf115259b7f5",
-    "type": "feature",
-    "description": "Added USE_SOURCE as default option to LaunchConfigurationTemplate bootMode parameter.",
-    "modules": [
-        "service/mgn"
-    ]
-}

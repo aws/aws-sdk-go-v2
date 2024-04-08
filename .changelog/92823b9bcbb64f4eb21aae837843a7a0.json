@@ -1,8 +1,0 @@
-{
-    "id": "92823b9b-cbb6-4f4e-b21a-ae837843a7a0",
-    "type": "feature",
-    "description": "Updated the allowed monitorName length for CloudWatch Network Monitor.",
-    "modules": [
-        "service/networkmonitor"
-    ]
-}

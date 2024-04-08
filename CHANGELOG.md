@@ -1,3 +1,14 @@
+# Release (2024-04-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.0.0](service/controlcatalog/CHANGELOG.md#v100-2024-04-08)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the initial SDK release for AWS Control Catalog, a central catalog for AWS managed controls. This release includes 3 new APIs - ListDomains, ListObjectives, and ListCommonControls - that vend high-level data to categorize controls across the AWS platform.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.28.0](service/mgn/CHANGELOG.md#v1280-2024-04-08)
+  * **Feature**: Added USE_SOURCE as default option to LaunchConfigurationTemplate bootMode parameter.
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.3.0](service/networkmonitor/CHANGELOG.md#v130-2024-04-08)
+  * **Feature**: Updated the allowed monitorName length for CloudWatch Network Monitor.
+
 # Release (2024-04-05)
 
 ## General Highlights
