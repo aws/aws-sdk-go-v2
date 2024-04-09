@@ -2689,7 +2689,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings."
+                "smithy.api#documentation": "To use the available style, color, and position information from your input captions: Set Style passthrough to Enabled. Note that MediaConvert uses default settings for any missing style or position information in your input captions To ignore the style and position information from your input captions and use default settings: Leave blank or keep the default value, Disabled. Default settings include white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings. You can also override any fonts by manually specifying custom font files."
             }
         },
         "com.amazonaws.mediaconvert#BurninDestinationSettings": {
@@ -2735,6 +2735,34 @@
                     "traits": {
                         "smithy.api#documentation": "Specify the color of the burned-in captions text. Leave Font color blank and set Style passthrough to enabled to use the font color data from your input captions, if present.",
                         "smithy.api#jsonName": "fontColor"
+                    }
+                },
+                "FontFileBold": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3TtfHttpsTtf",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a bold TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a regular, an italic, and a bold italic font file.",
+                        "smithy.api#jsonName": "fontFileBold"
+                    }
+                },
+                "FontFileBoldItalic": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a bold italic TrueType font file to use when rendering your output captions.\nEnter an S3, HTTP, or HTTPS URL.\nWhen you do, you must also separately specify a regular, a bold, and an italic font file.",
+                        "smithy.api#jsonName": "fontFileBoldItalic"
+                    }
+                },
+                "FontFileItalic": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3TtfHttpsTtf",
+                    "traits": {
+                        "smithy.api#documentation": "Specify an italic TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a regular, a bold, and a bold italic font file.",
+                        "smithy.api#jsonName": "fontFileItalic"
+                    }
+                },
+                "FontFileRegular": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3TtfHttpsTtf",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a regular TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a bold, an italic, and a bold italic font file.",
+                        "smithy.api#jsonName": "fontFileRegular"
                     }
                 },
                 "FontOpacity": {
@@ -2817,7 +2845,7 @@
                 "StylePassthrough": {
                     "target": "com.amazonaws.mediaconvert#BurnInSubtitleStylePassthrough",
                     "traits": {
-                        "smithy.api#documentation": "Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings.",
+                        "smithy.api#documentation": "To use the available style, color, and position information from your input captions: Set Style passthrough to Enabled. Note that MediaConvert uses default settings for any missing style or position information in your input captions To ignore the style and position information from your input captions and use default settings: Leave blank or keep the default value, Disabled. Default settings include white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings. You can also override any fonts by manually specifying custom font files.",
                         "smithy.api#jsonName": "stylePassthrough"
                     }
                 },
@@ -6720,7 +6748,6 @@
                 "smithy.api#deprecated": {
                     "message": "DescribeEndpoints and account specific endpoints are no longer required. We recommend that you send your requests directly to the regional endpoint instead."
                 },
-                "smithy.api#documentation": "DescribeEndpointsRequest",
                 "smithy.api#input": {}
             }
         },
@@ -7099,6 +7126,34 @@
                         "smithy.api#jsonName": "fontColor"
                     }
                 },
+                "FontFileBold": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3TtfHttpsTtf",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a bold TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a regular, an italic, and a bold italic font file.",
+                        "smithy.api#jsonName": "fontFileBold"
+                    }
+                },
+                "FontFileBoldItalic": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3TtfHttpsTtf",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a bold italic TrueType font file to use when rendering your output captions.\nEnter an S3, HTTP, or HTTPS URL.\nWhen you do, you must also separately specify a regular, a bold, and an italic font file.",
+                        "smithy.api#jsonName": "fontFileBoldItalic"
+                    }
+                },
+                "FontFileItalic": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3TtfHttpsTtf",
+                    "traits": {
+                        "smithy.api#documentation": "Specify an italic TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a regular, a bold, and a bold italic font file.",
+                        "smithy.api#jsonName": "fontFileItalic"
+                    }
+                },
+                "FontFileRegular": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3TtfHttpsTtf",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a regular TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a bold, an italic, and a bold italic font file.",
+                        "smithy.api#jsonName": "fontFileRegular"
+                    }
+                },
                 "FontOpacity": {
                     "target": "com.amazonaws.mediaconvert#__integerMin0Max255",
                     "traits": {
@@ -7186,7 +7241,7 @@
                 "StylePassthrough": {
                     "target": "com.amazonaws.mediaconvert#DvbSubtitleStylePassthrough",
                     "traits": {
-                        "smithy.api#documentation": "Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings.",
+                        "smithy.api#documentation": "To use the available style, color, and position information from your input captions: Set Style passthrough to Enabled. Note that MediaConvert uses default settings for any missing style or position information in your input captions To ignore the style and position information from your input captions and use default settings: Leave blank or keep the default value, Disabled. Default settings include white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings. You can also override any fonts by manually specifying custom font files.",
                         "smithy.api#jsonName": "stylePassthrough"
                     }
                 },
@@ -7516,7 +7571,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings."
+                "smithy.api#documentation": "To use the available style, color, and position information from your input captions: Set Style passthrough to Enabled. Note that MediaConvert uses default settings for any missing style or position information in your input captions To ignore the style and position information from your input captions and use default settings: Leave blank or keep the default value, Disabled. Default settings include white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings. You can also override any fonts by manually specifying custom font files."
             }
         },
         "com.amazonaws.mediaconvert#DvbSubtitleTeletextSpacing": {
@@ -13798,7 +13853,7 @@
                 "ColorConversion3DLUTSettings": {
                     "target": "com.amazonaws.mediaconvert#__listOfColorConversion3DLUTSetting",
                     "traits": {
-                        "smithy.api#documentation": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs.",
+                        "smithy.api#documentation": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html",
                         "smithy.api#jsonName": "colorConversion3DLUTSettings"
                     }
                 },
@@ -14071,7 +14126,7 @@
                 "ColorConversion3DLUTSettings": {
                     "target": "com.amazonaws.mediaconvert#__listOfColorConversion3DLUTSetting",
                     "traits": {
-                        "smithy.api#documentation": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs.",
+                        "smithy.api#documentation": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html",
                         "smithy.api#jsonName": "colorConversion3DLUTSettings"
                     }
                 },
@@ -16129,6 +16184,26 @@
                 "smithy.api#documentation": "When set to PCR_EVERY_PES_PACKET, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This is effective only when the PCR PID is the same as the video or audio elementary stream."
             }
         },
+        "com.amazonaws.mediaconvert#M2tsPreventBufferUnderflow": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify whether MediaConvert automatically attempts to prevent decoder buffer underflows in your transport stream output. Use if you are seeing decoder buffer underflows in your output and are unable to increase your transport stream's bitrate. For most workflows: We recommend that you keep the default value, Disabled. To prevent decoder buffer underflows in your output, when possible: Choose Enabled. Note that if MediaConvert prevents a decoder buffer underflow in your output, output video quality is reduced and your job will take longer to complete."
+            }
+        },
         "com.amazonaws.mediaconvert#M2tsRateMode": {
             "type": "enum",
             "members": {
@@ -16438,6 +16513,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify the packet identifier (PID) for the program map table (PMT) itself. Default is 480.",
                         "smithy.api#jsonName": "pmtPid"
+                    }
+                },
+                "PreventBufferUnderflow": {
+                    "target": "com.amazonaws.mediaconvert#M2tsPreventBufferUnderflow",
+                    "traits": {
+                        "smithy.api#documentation": "Specify whether MediaConvert automatically attempts to prevent decoder buffer underflows in your transport stream output. Use if you are seeing decoder buffer underflows in your output and are unable to increase your transport stream's bitrate. For most workflows: We recommend that you keep the default value, Disabled. To prevent decoder buffer underflows in your output, when possible: Choose Enabled. Note that if MediaConvert prevents a decoder buffer underflow in your output, output video quality is reduced and your job will take longer to complete.",
+                        "smithy.api#jsonName": "preventBufferUnderflow"
                     }
                 },
                 "PrivateMetadataPid": {
@@ -26988,6 +27070,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^s3://([^\\/]+\\/+)+((([^\\/]*)))|^https?://[^\\/].*[^&]$"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringPatternS3TtfHttpsTtf": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^((s3://(.*?)\\.(ttf))|(https?://(.*?)\\.(ttf)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
             }
         },
         "com.amazonaws.mediaconvert#__stringPatternSNManifestConfirmConditionNotificationNS": {
