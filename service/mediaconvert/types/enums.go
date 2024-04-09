@@ -5912,6 +5912,24 @@ func (M2tsPcrControl) Values() []M2tsPcrControl {
 	}
 }
 
+type M2tsPreventBufferUnderflow string
+
+// Enum values for M2tsPreventBufferUnderflow
+const (
+	M2tsPreventBufferUnderflowDisabled M2tsPreventBufferUnderflow = "DISABLED"
+	M2tsPreventBufferUnderflowEnabled  M2tsPreventBufferUnderflow = "ENABLED"
+)
+
+// Values returns all known values for M2tsPreventBufferUnderflow. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsPreventBufferUnderflow) Values() []M2tsPreventBufferUnderflow {
+	return []M2tsPreventBufferUnderflow{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type M2tsRateMode string
 
 // Enum values for M2tsRateMode

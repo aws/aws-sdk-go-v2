@@ -2149,6 +2149,10 @@ type EmailChannelRequest struct {
 	// Specifies whether to enable the email channel for the application.
 	Enabled *bool
 
+	// The ARN of an IAM role for Amazon Pinpoint to use to send email from your
+	// campaigns or journeys through Amazon SES.
+	OrchestrationSendingRoleArn *string
+
 	// The ARN of the AWS Identity and Access Management (IAM) role that you want
 	// Amazon Pinpoint to use when it submits email-related event data for the channel.
 	RoleArn *string
@@ -2205,6 +2209,10 @@ type EmailChannelResponse struct {
 
 	// The maximum number of emails that can be sent through the channel each second.
 	MessagesPerSecond *int32
+
+	// The ARN of an IAM role for Amazon Pinpoint to use to send email from your
+	// campaigns or journeys through Amazon SES.
+	OrchestrationSendingRoleArn *string
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
 	// Pinpoint uses to submit email-related event data for the channel.
@@ -2568,7 +2576,6 @@ type EndpointMessageResult struct {
 	//   attempt to send the message again.
 	//   - THROTTLED - Amazon Pinpoint throttled the operation to send the message to
 	//   the endpoint.
-	//   - TIMEOUT - The message couldn't be sent within the timeout period.
 	//   - UNKNOWN_FAILURE - An unknown error occurred.
 	//
 	// This member is required.
@@ -4654,7 +4661,6 @@ type MessageResult struct {
 	//   attempt to send the message again.
 	//   - THROTTLED - Amazon Pinpoint throttled the operation to send the message to
 	//   the endpoint address.
-	//   - TIMEOUT - The message couldn't be sent within the timeout period.
 	//   - UNKNOWN_FAILURE - An unknown error occurred.
 	//
 	// This member is required.

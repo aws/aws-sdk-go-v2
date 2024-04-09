@@ -65,6 +65,14 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Region. Example: us-east-1d
 	AvailabilityZone *string
 
+	// The CA certificate identifier to use for the read replica's server certificate.
+	// This setting doesn't apply to RDS Custom DB instances. For more information, see
+	// Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
+	// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
+	CACertificateIdentifier *string
+
 	// Specifies whether to copy all tags from the read replica to snapshots of the
 	// read replica. By default, tags aren't copied.
 	CopyTagsToSnapshot *bool

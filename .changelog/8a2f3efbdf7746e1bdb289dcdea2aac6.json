@@ -1,0 +1,8 @@
+{
+    "id": "8a2f3efb-df77-46e1-bdb2-89dcdea2aac6",
+    "type": "feature",
+    "description": "This release adds support for specifying the CA certificate to use for the new db instance when restoring from db snapshot, restoring from s3, restoring to point in time, and creating a db instance read replica.",
+    "modules": [
+        "service/rds"
+    ]
+}

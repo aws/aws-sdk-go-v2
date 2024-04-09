@@ -7873,6 +7873,42 @@ func awsRestjson1_deserializeDocumentBurninDestinationSettings(v **types.BurninD
 				sv.FontColor = types.BurninSubtitleFontColor(jtv)
 			}
 
+		case "fontFileBold":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3TtfHttpsTtf to be of type string, got %T instead", value)
+				}
+				sv.FontFileBold = ptr.String(jtv)
+			}
+
+		case "fontFileBoldItalic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.FontFileBoldItalic = ptr.String(jtv)
+			}
+
+		case "fontFileItalic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3TtfHttpsTtf to be of type string, got %T instead", value)
+				}
+				sv.FontFileItalic = ptr.String(jtv)
+			}
+
+		case "fontFileRegular":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3TtfHttpsTtf to be of type string, got %T instead", value)
+				}
+				sv.FontFileRegular = ptr.String(jtv)
+			}
+
 		case "fontOpacity":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -10549,6 +10585,42 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 					return fmt.Errorf("expected DvbSubtitleFontColor to be of type string, got %T instead", value)
 				}
 				sv.FontColor = types.DvbSubtitleFontColor(jtv)
+			}
+
+		case "fontFileBold":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3TtfHttpsTtf to be of type string, got %T instead", value)
+				}
+				sv.FontFileBold = ptr.String(jtv)
+			}
+
+		case "fontFileBoldItalic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3TtfHttpsTtf to be of type string, got %T instead", value)
+				}
+				sv.FontFileBoldItalic = ptr.String(jtv)
+			}
+
+		case "fontFileItalic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3TtfHttpsTtf to be of type string, got %T instead", value)
+				}
+				sv.FontFileItalic = ptr.String(jtv)
+			}
+
+		case "fontFileRegular":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3TtfHttpsTtf to be of type string, got %T instead", value)
+				}
+				sv.FontFileRegular = ptr.String(jtv)
 			}
 
 		case "fontOpacity":
@@ -16712,6 +16784,15 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 					return err
 				}
 				sv.PmtPid = ptr.Int32(int32(i64))
+			}
+
+		case "preventBufferUnderflow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsPreventBufferUnderflow to be of type string, got %T instead", value)
+				}
+				sv.PreventBufferUnderflow = types.M2tsPreventBufferUnderflow(jtv)
 			}
 
 		case "privateMetadataPid":

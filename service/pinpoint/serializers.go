@@ -11082,6 +11082,11 @@ func awsRestjson1_serializeDocumentEmailChannelRequest(v *types.EmailChannelRequ
 		ok.String(*v.Identity)
 	}
 
+	if v.OrchestrationSendingRoleArn != nil {
+		ok := object.Key("OrchestrationSendingRoleArn")
+		ok.String(*v.OrchestrationSendingRoleArn)
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)

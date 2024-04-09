@@ -212,9 +212,10 @@ type CreateDBClusterInput struct {
 	EnablePerformanceInsights *bool
 
 	// The DB engine mode of the DB cluster, either provisioned or serverless . The
-	// serverless engine mode only applies for Aurora Serverless v1 DB clusters. For
-	// information about limitations and requirements for Serverless DB clusters, see
-	// the following sections in the Amazon Aurora User Guide:
+	// serverless engine mode only applies for Aurora Serverless v1 DB clusters. Aurora
+	// Serverless v2 DB clusters use the provisioned engine mode. For information
+	// about limitations and requirements for Serverless DB clusters, see the following
+	// sections in the Amazon Aurora User Guide:
 	//   - Limitations of Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations)
 	//   - Requirements for Aurora Serverless v2 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html)
 	// Valid for Cluster Type: Aurora DB clusters only

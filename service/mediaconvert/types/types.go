@@ -1001,6 +1001,26 @@ type BurninDestinationSettings struct {
 	// captions, if present.
 	FontColor BurninSubtitleFontColor
 
+	// Specify a bold TrueType font file to use when rendering your output captions.
+	// Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a
+	// regular, an italic, and a bold italic font file.
+	FontFileBold *string
+
+	// Specify a bold italic TrueType font file to use when rendering your output
+	// captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately
+	// specify a regular, a bold, and an italic font file.
+	FontFileBoldItalic *string
+
+	// Specify an italic TrueType font file to use when rendering your output
+	// captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately
+	// specify a regular, a bold, and a bold italic font file.
+	FontFileItalic *string
+
+	// Specify a regular TrueType font file to use when rendering your output
+	// captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately
+	// specify a bold, an italic, and a bold italic font file.
+	FontFileRegular *string
+
 	// Specify the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
 	FontOpacity *int32
 
@@ -1055,14 +1075,16 @@ type BurninDestinationSettings struct {
 	// y-offset data from your input captions, if present.
 	ShadowYOffset *int32
 
-	// Set Style passthrough to ENABLED to use the available style, color, and
-	// position information from your input captions. MediaConvert uses default
-	// settings for any missing style and position information in your input captions.
-	// Set Style passthrough to DISABLED, or leave blank, to ignore the style and
-	// position information from your input captions and use default settings: white
-	// text with black outlining, bottom-center positioning, and automatic sizing.
-	// Whether you set Style passthrough to enabled or not, you can also choose to
-	// manually override any of the individual style and position settings.
+	// To use the available style, color, and position information from your input
+	// captions: Set Style passthrough to Enabled. Note that MediaConvert uses default
+	// settings for any missing style or position information in your input captions To
+	// ignore the style and position information from your input captions and use
+	// default settings: Leave blank or keep the default value, Disabled. Default
+	// settings include white text with black outlining, bottom-center positioning, and
+	// automatic sizing. Whether you set Style passthrough to enabled or not, you can
+	// also choose to manually override any of the individual style and position
+	// settings. You can also override any fonts by manually specifying custom font
+	// files.
 	StylePassthrough BurnInSubtitleStylePassthrough
 
 	// Specify whether the text spacing in your captions is set by the captions grid,
@@ -2425,6 +2447,26 @@ type DvbSubDestinationSettings struct {
 	// identical.
 	FontColor DvbSubtitleFontColor
 
+	// Specify a bold TrueType font file to use when rendering your output captions.
+	// Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a
+	// regular, an italic, and a bold italic font file.
+	FontFileBold *string
+
+	// Specify a bold italic TrueType font file to use when rendering your output
+	// captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately
+	// specify a regular, a bold, and an italic font file.
+	FontFileBoldItalic *string
+
+	// Specify an italic TrueType font file to use when rendering your output
+	// captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately
+	// specify a regular, a bold, and a bold italic font file.
+	FontFileItalic *string
+
+	// Specify a regular TrueType font file to use when rendering your output
+	// captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately
+	// specify a bold, an italic, and a bold italic font file.
+	FontFileRegular *string
+
 	// Specify the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
 	// Within your job settings, all of your DVB-Sub settings must be identical.
 	FontOpacity *int32
@@ -2495,14 +2537,16 @@ type DvbSubDestinationSettings struct {
 	// all of your DVB-Sub settings must be identical.
 	ShadowYOffset *int32
 
-	// Set Style passthrough to ENABLED to use the available style, color, and
-	// position information from your input captions. MediaConvert uses default
-	// settings for any missing style and position information in your input captions.
-	// Set Style passthrough to DISABLED, or leave blank, to ignore the style and
-	// position information from your input captions and use default settings: white
-	// text with black outlining, bottom-center positioning, and automatic sizing.
-	// Whether you set Style passthrough to enabled or not, you can also choose to
-	// manually override any of the individual style and position settings.
+	// To use the available style, color, and position information from your input
+	// captions: Set Style passthrough to Enabled. Note that MediaConvert uses default
+	// settings for any missing style or position information in your input captions To
+	// ignore the style and position information from your input captions and use
+	// default settings: Leave blank or keep the default value, Disabled. Default
+	// settings include white text with black outlining, bottom-center positioning, and
+	// automatic sizing. Whether you set Style passthrough to enabled or not, you can
+	// also choose to manually override any of the individual style and position
+	// settings. You can also override any fonts by manually specifying custom font
+	// files.
 	StylePassthrough DvbSubtitleStylePassthrough
 
 	// Specify whether your DVB subtitles are standard or for hearing impaired. Choose
@@ -5029,7 +5073,9 @@ type JobSettings struct {
 	AvailBlanking *AvailBlanking
 
 	// Use 3D LUTs to specify custom color mapping behavior when you convert from one
-	// color space into another. You can include up to 8 different 3D LUTs.
+	// color space into another. You can include up to 8 different 3D LUTs. For more
+	// information, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html
 	ColorConversion3DLUTSettings []ColorConversion3DLUTSetting
 
 	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad
@@ -5179,7 +5225,9 @@ type JobTemplateSettings struct {
 	AvailBlanking *AvailBlanking
 
 	// Use 3D LUTs to specify custom color mapping behavior when you convert from one
-	// color space into another. You can include up to 8 different 3D LUTs.
+	// color space into another. You can include up to 8 different 3D LUTs. For more
+	// information, see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html
 	ColorConversion3DLUTSettings []ColorConversion3DLUTSetting
 
 	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad
@@ -5490,6 +5538,16 @@ type M2tsSettings struct {
 	// Specify the packet identifier (PID) for the program map table (PMT) itself.
 	// Default is 480.
 	PmtPid *int32
+
+	// Specify whether MediaConvert automatically attempts to prevent decoder buffer
+	// underflows in your transport stream output. Use if you are seeing decoder buffer
+	// underflows in your output and are unable to increase your transport stream's
+	// bitrate. For most workflows: We recommend that you keep the default value,
+	// Disabled. To prevent decoder buffer underflows in your output, when possible:
+	// Choose Enabled. Note that if MediaConvert prevents a decoder buffer underflow in
+	// your output, output video quality is reduced and your job will take longer to
+	// complete.
+	PreventBufferUnderflow M2tsPreventBufferUnderflow
 
 	// Specify the packet identifier (PID) of the private metadata stream. Default is
 	// 503.

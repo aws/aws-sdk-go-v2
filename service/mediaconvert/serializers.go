@@ -3658,6 +3658,26 @@ func awsRestjson1_serializeDocumentBurninDestinationSettings(v *types.BurninDest
 		ok.String(string(v.FontColor))
 	}
 
+	if v.FontFileBold != nil {
+		ok := object.Key("fontFileBold")
+		ok.String(*v.FontFileBold)
+	}
+
+	if v.FontFileBoldItalic != nil {
+		ok := object.Key("fontFileBoldItalic")
+		ok.String(*v.FontFileBoldItalic)
+	}
+
+	if v.FontFileItalic != nil {
+		ok := object.Key("fontFileItalic")
+		ok.String(*v.FontFileItalic)
+	}
+
+	if v.FontFileRegular != nil {
+		ok := object.Key("fontFileRegular")
+		ok.String(*v.FontFileRegular)
+	}
+
 	if v.FontOpacity != nil {
 		ok := object.Key("fontOpacity")
 		ok.Integer(*v.FontOpacity)
@@ -4932,6 +4952,26 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 	if len(v.FontColor) > 0 {
 		ok := object.Key("fontColor")
 		ok.String(string(v.FontColor))
+	}
+
+	if v.FontFileBold != nil {
+		ok := object.Key("fontFileBold")
+		ok.String(*v.FontFileBold)
+	}
+
+	if v.FontFileBoldItalic != nil {
+		ok := object.Key("fontFileBoldItalic")
+		ok.String(*v.FontFileBoldItalic)
+	}
+
+	if v.FontFileItalic != nil {
+		ok := object.Key("fontFileItalic")
+		ok.String(*v.FontFileItalic)
+	}
+
+	if v.FontFileRegular != nil {
+		ok := object.Key("fontFileRegular")
+		ok.String(*v.FontFileRegular)
 	}
 
 	if v.FontOpacity != nil {
@@ -7591,6 +7631,11 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 	if v.PmtPid != nil {
 		ok := object.Key("pmtPid")
 		ok.Integer(*v.PmtPid)
+	}
+
+	if len(v.PreventBufferUnderflow) > 0 {
+		ok := object.Key("preventBufferUnderflow")
+		ok.String(string(v.PreventBufferUnderflow))
 	}
 
 	if v.PrivateMetadataPid != nil {

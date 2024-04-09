@@ -32,7 +32,6 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	return out, nil
 }
 
-// DescribeEndpointsRequest
 type DescribeEndpointsInput struct {
 
 	// Optional. Max number of endpoints, up to twenty, that will be returned at one

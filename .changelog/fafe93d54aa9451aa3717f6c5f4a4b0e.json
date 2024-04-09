@@ -1,0 +1,8 @@
+{
+    "id": "fafe93d5-4aa9-451a-a371-7f6c5f4a4b0e",
+    "type": "feature",
+    "description": "The OrchestrationSendingRoleArn has been added to the email channel and is used to send emails from campaigns or journeys.",
+    "modules": [
+        "service/pinpoint"
+    ]
+}

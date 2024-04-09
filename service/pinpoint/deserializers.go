@@ -23892,6 +23892,15 @@ func awsRestjson1_deserializeDocumentEmailChannelResponse(v **types.EmailChannel
 				sv.MessagesPerSecond = ptr.Int32(int32(i64))
 			}
 
+		case "OrchestrationSendingRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.OrchestrationSendingRoleArn = ptr.String(jtv)
+			}
+
 		case "Platform":
 			if value != nil {
 				jtv, ok := value.(string)

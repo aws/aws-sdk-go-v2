@@ -933,6 +933,9 @@ const (
 	WebhookFilterTypeActorAccountId WebhookFilterType = "ACTOR_ACCOUNT_ID"
 	WebhookFilterTypeFilePath       WebhookFilterType = "FILE_PATH"
 	WebhookFilterTypeCommitMessage  WebhookFilterType = "COMMIT_MESSAGE"
+	WebhookFilterTypeWorkflowName   WebhookFilterType = "WORKFLOW_NAME"
+	WebhookFilterTypeTagName        WebhookFilterType = "TAG_NAME"
+	WebhookFilterTypeReleaseName    WebhookFilterType = "RELEASE_NAME"
 )
 
 // Values returns all known values for WebhookFilterType. Note that this can be
@@ -946,5 +949,8 @@ func (WebhookFilterType) Values() []WebhookFilterType {
 		"ACTOR_ACCOUNT_ID",
 		"FILE_PATH",
 		"COMMIT_MESSAGE",
+		"WORKFLOW_NAME",
+		"TAG_NAME",
+		"RELEASE_NAME",
 	}
 }
