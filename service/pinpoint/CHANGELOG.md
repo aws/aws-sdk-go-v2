@@ -1,3 +1,7 @@
+# v1.29.0 (2024-04-09)
+
+* **Feature**: The OrchestrationSendingRoleArn has been added to the email channel and is used to send emails from campaigns or journeys.
+
 # v1.28.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

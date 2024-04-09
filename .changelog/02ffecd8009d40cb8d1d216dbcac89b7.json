@@ -1,8 +1,0 @@
-{
-    "id": "02ffecd8-009d-40cb-8d1d-216dbcac89b7",
-    "type": "feature",
-    "description": "This release includes support for bringing your own fonts to use for burn-in or DVB-Sub captioning workflows.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

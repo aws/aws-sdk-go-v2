@@ -1,3 +1,7 @@
+# v1.34.0 (2024-04-09)
+
+* **Feature**: Add new webhook filter types for GitHub webhooks
+
 # v1.33.0 (2024-03-29)
 
 * **Feature**: Add new fleet status code for Reserved Capacity.

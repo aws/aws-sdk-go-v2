@@ -1,8 +1,0 @@
-{
-    "id": "e10e63d1-b776-4332-92cd-96508771a508",
-    "type": "feature",
-    "description": "Add new webhook filter types for GitHub webhooks",
-    "modules": [
-        "service/codebuild"
-    ]
-}

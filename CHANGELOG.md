@@ -1,3 +1,15 @@
+# Release (2024-04-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.34.0](service/codebuild/CHANGELOG.md#v1340-2024-04-09)
+  * **Feature**: Add new webhook filter types for GitHub webhooks
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.53.0](service/mediaconvert/CHANGELOG.md#v1530-2024-04-09)
+  * **Feature**: This release includes support for bringing your own fonts to use for burn-in or DVB-Sub captioning workflows.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.29.0](service/pinpoint/CHANGELOG.md#v1290-2024-04-09)
+  * **Feature**: The OrchestrationSendingRoleArn has been added to the email channel and is used to send emails from campaigns or journeys.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.77.0](service/rds/CHANGELOG.md#v1770-2024-04-09)
+  * **Feature**: This release adds support for specifying the CA certificate to use for the new db instance when restoring from db snapshot, restoring from s3, restoring to point in time, and creating a db instance read replica.
+
 # Release (2024-04-08)
 
 ## Module Highlights

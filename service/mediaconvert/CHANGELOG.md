@@ -1,3 +1,7 @@
+# v1.53.0 (2024-04-09)
+
+* **Feature**: This release includes support for bringing your own fonts to use for burn-in or DVB-Sub captioning workflows.
+
 # v1.52.5 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.77.0 (2024-04-09)
+
+* **Feature**: This release adds support for specifying the CA certificate to use for the new db instance when restoring from db snapshot, restoring from s3, restoring to point in time, and creating a db instance read replica.
+
 # v1.76.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
