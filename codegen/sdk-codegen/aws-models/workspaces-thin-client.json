@@ -655,7 +655,7 @@
                     }
                 },
                 "tags": {
-                    "target": "com.amazonaws.workspacesthinclient#EmbeddedTag",
+                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
                     }
@@ -828,37 +828,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device.</p>"
                     }
-                },
-                "tags": {
-                    "target": "com.amazonaws.workspacesthinclient#EmbeddedTag",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
-                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a thin client device.</p>"
-            }
-        },
-        "com.amazonaws.workspacesthinclient#EmbeddedTag": {
-            "type": "structure",
-            "members": {
-                "resourceArn": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a resource to tag.</p>"
-                    }
-                },
-                "internalId": {
-                    "target": "smithy.api#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The internal ID of a resource to tag.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The resource and internal ID of a resource to tag.</p>",
-                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesthinclient#Environment": {
@@ -973,7 +946,7 @@
                     }
                 },
                 "tags": {
-                    "target": "com.amazonaws.workspacesthinclient#EmbeddedTag",
+                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
                     }
@@ -1110,12 +1083,6 @@
                     "target": "com.amazonaws.workspacesthinclient#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment.</p>"
-                    }
-                },
-                "tags": {
-                    "target": "com.amazonaws.workspacesthinclient#EmbeddedTag",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
                     }
                 }
             },
@@ -1359,26 +1326,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The server encountered an internal error and is unable to complete the request.</p>",
-                "smithy.api#error": "server",
-                "smithy.api#httpError": 500
-            }
-        },
-        "com.amazonaws.workspacesthinclient#InternalServiceException": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.workspacesthinclient#ExceptionMessage"
-                },
-                "retryAfterSeconds": {
-                    "target": "com.amazonaws.workspacesthinclient#RetryAfterSeconds",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the next request.</p>",
-                        "smithy.api#httpHeader": "Retry-After"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Request processing failed due to some unknown error, exception, or failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -1652,10 +1599,16 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.workspacesthinclient#InternalServiceException"
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
                 },
                 {
                     "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.workspacesthinclient#ValidationException"
@@ -1945,6 +1898,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the software set.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.workspacesthinclient#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2106,10 +2065,19 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.workspacesthinclient#InternalServiceException"
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
                 },
                 {
                     "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.workspacesthinclient#ValidationException"
@@ -2962,10 +2930,19 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.workspacesthinclient#InternalServiceException"
+                    "target": "com.amazonaws.workspacesthinclient#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#InternalServerException"
                 },
                 {
                     "target": "com.amazonaws.workspacesthinclient#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspacesthinclient#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.workspacesthinclient#ValidationException"

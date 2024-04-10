@@ -1374,6 +1374,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters of the analysis template.</p>"
                     }
+                },
+                "validations": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the validations performed on the analysis template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1545,6 +1551,95 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 90000
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatus": {
+            "type": "enum",
+            "members": {
+                "VALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALID"
+                    }
+                },
+                "INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID"
+                    }
+                },
+                "UNABLE_TO_VALIDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNABLE_TO_VALIDATE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetail": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of validation that was performed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reasons": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reasons for the validation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status details of the analysis template validation. Clean Rooms Differential Privacy uses a general-purpose query structure to support complex SQL queries and validates whether an analysis template fits that general-purpose query structure. Validation is performed when analysis templates are created and fetched. Because analysis templates are immutable by design, we recommend that you create analysis templates after you associate the configured tables with their analysis rule to your collaboration.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy\">https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy</a>.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetail"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusReason": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reasons for the validation results.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusReasonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusReason"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationType": {
+            "type": "enum",
+            "members": {
+                "DIFFERENTIAL_PRIVACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIFFERENTIAL_PRIVACY"
+                    }
                 }
             }
         },
@@ -2105,6 +2200,12 @@
                     "target": "com.amazonaws.cleanrooms#AnalysisParameterList",
                     "traits": {
                         "smithy.api#documentation": "<p>The analysis parameters that have been specified in the analysis template.</p>"
+                    }
+                },
+                "validations": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validations that were performed.</p>"
                     }
                 }
             },

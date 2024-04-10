@@ -117,6 +117,12 @@
                     "traits": {
                         "smithy.api#enumValue": "END_ASSOCIATED_TASKS"
                     }
+                },
+                "SUBMIT_AUTO_EVALUATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMIT_AUTO_EVALUATION"
+                    }
                 }
             }
         },
@@ -7196,7 +7202,7 @@
                 "Applications": {
                     "target": "com.amazonaws.connect#Applications",
                     "traits": {
-                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of third-party applications that the security profile will give access to.</p>"
+                        "smithy.api#documentation": "<p>A list of third-party applications that the security profile will give access to.</p>"
                     }
                 },
                 "HierarchyRestrictedResources": {
@@ -13261,6 +13267,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.connect#EvaluationFormId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
                 }
             }
         },
@@ -20854,7 +20869,7 @@
                 "Applications": {
                     "target": "com.amazonaws.connect#Applications",
                     "traits": {
-                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third-party application's metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of the third-party application's metadata.</p>"
                     }
                 },
                 "NextToken": {
@@ -27901,6 +27916,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the end associated tasks action.</p>\n         <p>Supported only for <code>TriggerEventSource</code> values: <code>OnCaseUpdate</code>.</p>"
                     }
+                },
+                "SubmitAutoEvaluationAction": {
+                    "target": "com.amazonaws.connect#SubmitAutoEvaluationActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the submit automated evaluation action.</p>"
+                    }
                 }
             },
             "traits": {
@@ -31467,6 +31488,21 @@
                     "min": 1,
                     "max": 200
                 }
+            }
+        },
+        "com.amazonaws.connect#SubmitAutoEvaluationActionDefinition": {
+            "type": "structure",
+            "members": {
+                "EvaluationFormId": {
+                    "target": "com.amazonaws.connect#EvaluationFormId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the auto-evaluation enabled form.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the submit automated evaluation action.</p>"
             }
         },
         "com.amazonaws.connect#SubmitContactEvaluation": {
@@ -35758,7 +35794,7 @@
                 "Applications": {
                     "target": "com.amazonaws.connect#Applications",
                     "traits": {
-                        "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>A list of the third-party application's metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of the third-party application's metadata.</p>"
                     }
                 },
                 "HierarchyRestrictedResources": {
