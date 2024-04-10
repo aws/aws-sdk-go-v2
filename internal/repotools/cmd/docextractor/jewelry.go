@@ -9,6 +9,8 @@ const (
 	jewelryItemKindFunc                      = "Function"
 	jewelryItemKindMethod                    = "Method"
 	jewelryItemKindField                     = "Field"
+	jewelryItemKindEnum                      = "Enum"
+	jewelryItemKindUnion                     = "Union"
 	jewelryItemKindOther                     = "Other"
 )
 
@@ -30,6 +32,7 @@ type jewelryParam struct {
 }
 
 type jewelryItem struct {
+	Package     string          `json:"package"`
 	Name        string          `json:"name"`
 	Summary     string          `json:"summary"`
 	Type        jewelryItemKind `json:"type"`

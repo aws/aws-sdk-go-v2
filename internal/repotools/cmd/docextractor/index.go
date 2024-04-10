@@ -6,10 +6,11 @@ import (
 )
 
 type astIndex struct {
-	Types     map[string]*ast.TypeSpec
-	Functions map[string]*ast.FuncDecl
-	Fields    map[string]*ast.Field
-	Other     []*ast.GenDecl
+	Types            map[string]*ast.TypeSpec
+	Functions        map[string]*ast.FuncDecl
+	Fields           map[string]*ast.Field
+	StringEnumConsts map[string]string
+	Other            []*ast.GenDecl
 }
 
 func indexFromAst(p *ast.Package, index *astIndex) {
@@ -81,6 +82,13 @@ func indexFromAst(p *ast.Package, index *astIndex) {
 				}
 
 				index.Types[name] = xt
+			} else if x.Tok == token.CONST {
+				for _, spec := range x.Specs {
+					vs := spec.(*ast.ValueSpec)
+					if vl, ok := vs.Values[0].(*ast.BasicLit); ok {
+						index.StringEnumConsts[vs.Names[0].Name] = vl.Value
+					}
+				}
 			} else {
 				index.Other = append(index.Other, x)
 			}
