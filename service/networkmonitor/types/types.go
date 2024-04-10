@@ -68,7 +68,7 @@ type MonitorSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes information about a monitor probe.
+// Describes information about a network monitor probe.
 type Probe struct {
 
 	// The destination for the probe. This should be either an IPV4 or IPV6 .

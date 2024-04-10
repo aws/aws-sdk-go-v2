@@ -52,11 +52,11 @@ type CreateAssistantInput struct {
 	// The configuration information for the customer managed key used for encryption.
 	// The customer managed key must have a policy that allows kms:CreateGrant ,
 	// kms:DescribeKey , kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM
-	// identity using the key to invoke Amazon Q. To use Amazon Q with chat, the key
-	// policy must also allow kms:Decrypt , kms:GenerateDataKey* , and kms:DescribeKey
-	// permissions to the connect.amazonaws.com service principal. For more
-	// information about setting up a customer managed key for Amazon Q, see Enable
-	// Amazon Q in Connect for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
+	// identity using the key to invoke Amazon Q in Connect. To use Amazon Q in Connect
+	// with chat, the key policy must also allow kms:Decrypt , kms:GenerateDataKey* ,
+	// and kms:DescribeKey permissions to the connect.amazonaws.com service principal.
+	// For more information about setting up a customer managed key for Amazon Q in
+	// Connect, see Enable Amazon Q in Connect for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
 	// .
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 

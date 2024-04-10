@@ -35,8 +35,8 @@ type GetAssistantAssociationInput struct {
 	// This member is required.
 	AssistantAssociationId *string
 
-	// The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	AssistantId *string

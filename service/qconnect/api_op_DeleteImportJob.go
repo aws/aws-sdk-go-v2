@@ -33,8 +33,7 @@ type DeleteImportJobInput struct {
 	// This member is required.
 	ImportJobId *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string

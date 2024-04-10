@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q quick response.
+// Creates an Amazon Q in Connect quick response.
 func (c *Client) CreateQuickResponse(ctx context.Context, params *CreateQuickResponseInput, optFns ...func(*Options)) (*CreateQuickResponseOutput, error) {
 	if params == nil {
 		params = &CreateQuickResponseInput{}
@@ -34,9 +34,8 @@ type CreateQuickResponseInput struct {
 	// This member is required.
 	Content types.QuickResponseDataProvider
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN. URLs cannot contain the ARN.
+	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
+	// cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string

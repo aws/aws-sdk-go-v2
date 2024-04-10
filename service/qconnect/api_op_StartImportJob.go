@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Start an asynchronous job to import Amazon Q resources from an uploaded source
-// file. Before calling this API, use StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
+// Start an asynchronous job to import Amazon Q in Connect resources from an
+// uploaded source file. Before calling this API, use StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
 // to upload an asset that contains the resource data.
-//   - For importing Amazon Q quick responses, you need to upload a csv file
-//     including the quick responses. For information about how to format the csv file
-//     for importing quick responses, see Import quick responses (https://docs.aws.amazon.com/console/connect/quick-responses/add-data)
+//   - For importing Amazon Q in Connect quick responses, you need to upload a csv
+//     file including the quick responses. For information about how to format the csv
+//     file for importing quick responses, see Import quick responses (https://docs.aws.amazon.com/console/connect/quick-responses/add-data)
 //     .
 func (c *Client) StartImportJob(ctx context.Context, params *StartImportJobInput, optFns ...func(*Options)) (*StartImportJobOutput, error) {
 	if params == nil {
@@ -41,11 +41,10 @@ type StartImportJobInput struct {
 	// This member is required.
 	ImportJobType types.ImportJobType
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN. URLs cannot contain the ARN.
-	//   - For importing Amazon Q quick responses, this should be a QUICK_RESPONSES
-	//   type knowledge base.
+	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
+	// cannot contain the ARN.
+	//   - For importing Amazon Q in Connect quick responses, this should be a
+	//   QUICK_RESPONSES type knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -63,7 +62,7 @@ type StartImportJobInput struct {
 	// imported from.
 	ExternalSourceConfiguration *types.ExternalSourceConfiguration
 
-	// The metadata fields of the imported Amazon Q resources.
+	// The metadata fields of the imported Amazon Q in Connect resources.
 	Metadata map[string]string
 
 	noSmithyDocumentSerde

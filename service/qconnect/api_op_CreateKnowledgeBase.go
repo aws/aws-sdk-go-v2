@@ -70,8 +70,9 @@ type CreateKnowledgeBaseInput struct {
 	// The configuration information for the customer managed key used for encryption.
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
 	// kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM identity using
-	// the key to invoke Amazon Q. For more information about setting up a customer
-	// managed key for Amazon Q, see Enable Amazon Q in Connect for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
+	// the key to invoke Amazon Q in Connect. For more information about setting up a
+	// customer managed key for Amazon Q in Connect, see Enable Amazon Q in Connect
+	// for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
 	// .
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 

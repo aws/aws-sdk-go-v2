@@ -6888,6 +6888,11 @@ func validateRuleAction(v *types.RuleAction) error {
 			invalidParams.AddNested("UpdateCaseAction", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SubmitAutoEvaluationAction != nil {
+		if err := validateSubmitAutoEvaluationActionDefinition(v.SubmitAutoEvaluationAction); err != nil {
+			invalidParams.AddNested("SubmitAutoEvaluationAction", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7153,6 +7158,21 @@ func validateSort(v *types.Sort) error {
 	}
 	if len(v.Order) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubmitAutoEvaluationActionDefinition(v *types.SubmitAutoEvaluationActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubmitAutoEvaluationActionDefinition"}
+	if v.EvaluationFormId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

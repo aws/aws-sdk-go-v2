@@ -85,6 +85,18 @@ func TestCheckSnapshot_GetBillOfMaterialsImportJob(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_SendDataIntegrationEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDataIntegrationEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendDataIntegrationEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateBillOfMaterialsImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBillOfMaterialsImportJob(context.Background(), nil, func(o *Options) {
@@ -102,6 +114,18 @@ func TestUpdateSnapshot_GetBillOfMaterialsImportJob(t *testing.T) {
 	_, err := svc.GetBillOfMaterialsImportJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetBillOfMaterialsImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendDataIntegrationEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDataIntegrationEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendDataIntegrationEvent")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified monitor.
+// Deletes a specified monitor. This action requires the monitorName parameter.
+// Run ListMonitors to get a list of monitor names.
 func (c *Client) DeleteMonitor(ctx context.Context, params *DeleteMonitorInput, optFns ...func(*Options)) (*DeleteMonitorOutput, error) {
 	if params == nil {
 		params = &DeleteMonitorInput{}
@@ -28,8 +29,7 @@ func (c *Client) DeleteMonitor(ctx context.Context, params *DeleteMonitorInput, 
 
 type DeleteMonitorInput struct {
 
-	// The name of the monitor to delete. Use the ListMonitors action to get a list of
-	// your current monitors.
+	// The name of the monitor to delete.
 	//
 	// This member is required.
 	MonitorName *string

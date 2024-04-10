@@ -11960,6 +11960,11 @@ func awsAwsjson11_deserializeDocumentContentModerationDetection(v **types.Conten
 
 	for key, value := range shape {
 		switch key {
+		case "ContentTypes":
+			if err := awsAwsjson11_deserializeDocumentContentTypes(&sv.ContentTypes, value); err != nil {
+				return err
+			}
+
 		case "DurationMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)

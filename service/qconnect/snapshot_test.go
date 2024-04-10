@@ -565,6 +565,18 @@ func TestCheckSnapshot_UpdateQuickResponse(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateAssistant(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAssistant(context.Background(), nil, func(o *Options) {
@@ -1062,6 +1074,18 @@ func TestUpdateSnapshot_UpdateQuickResponse(t *testing.T) {
 	_, err := svc.UpdateQuickResponse(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateQuickResponse")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

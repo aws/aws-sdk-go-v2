@@ -6,63 +6,76 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the content.
-func (c *Client) DeleteContent(ctx context.Context, params *DeleteContentInput, optFns ...func(*Options)) (*DeleteContentOutput, error) {
+// Updates a session. A session is a contextual container used for generating
+// recommendations. Amazon Connect updates the existing Amazon Q in Connect session
+// for each contact on which Amazon Q in Connect is enabled.
+func (c *Client) UpdateSession(ctx context.Context, params *UpdateSessionInput, optFns ...func(*Options)) (*UpdateSessionOutput, error) {
 	if params == nil {
-		params = &DeleteContentInput{}
+		params = &UpdateSessionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteContent", params, optFns, c.addOperationDeleteContentMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSession", params, optFns, c.addOperationUpdateSessionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteContentOutput)
+	out := result.(*UpdateSessionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteContentInput struct {
+type UpdateSessionInput struct {
 
-	// The identifier of the content. Can be either the ID or the ARN. URLs cannot
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
+	//
+	// This member is required.
+	AssistantId *string
+
+	// The identifier of the session. Can be either the ID or the ARN. URLs cannot
 	// contain the ARN.
 	//
 	// This member is required.
-	ContentId *string
+	SessionId *string
 
-	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
-	//
-	// This member is required.
-	KnowledgeBaseId *string
+	// The description.
+	Description *string
+
+	// An object that can be used to specify Tag conditions.
+	TagFilter types.TagFilter
 
 	noSmithyDocumentSerde
 }
 
-type DeleteContentOutput struct {
+type UpdateSessionOutput struct {
+
+	// Information about the session.
+	Session *types.SessionData
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationUpdateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContent{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteContent{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteContent"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSession"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -105,10 +118,10 @@ func (c *Client) addOperationDeleteContentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteContentValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteContent(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSession(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -129,10 +142,10 @@ func (c *Client) addOperationDeleteContentMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteContent(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateSession(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DeleteContent",
+		OperationName: "UpdateSession",
 	}
 }

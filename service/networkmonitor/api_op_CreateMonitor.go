@@ -14,7 +14,17 @@ import (
 // Creates a monitor between a source subnet and destination IP address. Within a
 // monitor you'll create one or more probes that monitor network traffic between
 // your source Amazon Web Services VPC subnets and your destination IP addresses.
-// Each probe then aggregates and sends metrics to Amazon CloudWatch.
+// Each probe then aggregates and sends metrics to Amazon CloudWatch. You can also
+// create a monitor with probes using this command. For each probe, you define the
+// following:
+//   - source —The subnet IDs where the probes will be created.
+//   - destination — The target destination IP address for the probe.
+//   - destinationPort —Required only if the protocol is TCP .
+//   - protocol —The communication protocol between the source and destination.
+//     This will be either TCP or ICMP .
+//   - packetSize —The size of the packets. This must be a number between 56 and
+//     8500 .
+//   - (Optional) tags —Key-value pairs created and assigned to the probe.
 func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, optFns ...func(*Options)) (*CreateMonitorOutput, error) {
 	if params == nil {
 		params = &CreateMonitorInput{}
@@ -39,7 +49,8 @@ type CreateMonitorInput struct {
 	MonitorName *string
 
 	// The time, in seconds, that metrics are aggregated and sent to Amazon
-	// CloudWatch. Valid values are either 30 or 60 .
+	// CloudWatch. Valid values are either 30 or 60 . 60 is the default if no period
+	// is chosen.
 	AggregationPeriod *int64
 
 	// Unique, case-sensitive identifier to ensure the idempotency of the request.
@@ -73,7 +84,7 @@ type CreateMonitorOutput struct {
 	State types.MonitorState
 
 	// The number of seconds that metrics are aggregated by and sent to Amazon
-	// CloudWatch. This must be either 30 or 60 .
+	// CloudWatch. This will be either 30 or 60 .
 	AggregationPeriod *int64
 
 	// The list of key-value pairs assigned to the monitor.

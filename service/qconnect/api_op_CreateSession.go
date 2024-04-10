@@ -12,8 +12,8 @@ import (
 )
 
 // Creates a session. A session is a contextual container used for generating
-// recommendations. Amazon Connect creates a new Amazon Q session for each contact
-// on which Amazon Q is enabled.
+// recommendations. Amazon Connect creates a new Amazon Q in Connect session for
+// each contact on which Amazon Q in Connect is enabled.
 func (c *Client) CreateSession(ctx context.Context, params *CreateSessionInput, optFns ...func(*Options)) (*CreateSessionOutput, error) {
 	if params == nil {
 		params = &CreateSessionInput{}
@@ -31,8 +31,8 @@ func (c *Client) CreateSession(ctx context.Context, params *CreateSessionInput, 
 
 type CreateSessionInput struct {
 
-	// The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	AssistantId *string
@@ -51,6 +51,9 @@ type CreateSessionInput struct {
 
 	// The description.
 	Description *string
+
+	// An object that can be used to specify Tag conditions.
+	TagFilter types.TagFilter
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

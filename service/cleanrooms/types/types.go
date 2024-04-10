@@ -342,6 +342,9 @@ type AnalysisTemplate struct {
 	// The description of the analysis template.
 	Description *string
 
+	// Information about the validations performed on the analysis template.
+	Validations []AnalysisTemplateValidationStatusDetail
+
 	noSmithyDocumentSerde
 }
 
@@ -396,6 +399,44 @@ type AnalysisTemplateSummary struct {
 
 	// The description of the analysis template.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// The status details of the analysis template validation. Clean Rooms
+// Differential Privacy uses a general-purpose query structure to support complex
+// SQL queries and validates whether an analysis template fits that general-purpose
+// query structure. Validation is performed when analysis templates are created and
+// fetched. Because analysis templates are immutable by design, we recommend that
+// you create analysis templates after you associate the configured tables with
+// their analysis rule to your collaboration. For more information, see
+// https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy (https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy)
+// .
+type AnalysisTemplateValidationStatusDetail struct {
+
+	// The status of the validation.
+	//
+	// This member is required.
+	Status AnalysisTemplateValidationStatus
+
+	// The type of validation that was performed.
+	//
+	// This member is required.
+	Type AnalysisTemplateValidationType
+
+	// The reasons for the validation results.
+	Reasons []AnalysisTemplateValidationStatusReason
+
+	noSmithyDocumentSerde
+}
+
+// The reasons for the validation results.
+type AnalysisTemplateValidationStatusReason struct {
+
+	// The validation message.
+	//
+	// This member is required.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -601,6 +642,9 @@ type CollaborationAnalysisTemplate struct {
 
 	// The description of the analysis template.
 	Description *string
+
+	// The validations that were performed.
+	Validations []AnalysisTemplateValidationStatusDetail
 
 	noSmithyDocumentSerde
 }

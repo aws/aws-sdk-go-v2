@@ -10877,6 +10877,11 @@ func awsRestjson1_deserializeDocumentAnalysisTemplate(v **types.AnalysisTemplate
 				}
 			}
 
+		case "validations":
+			if err := awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusDetailList(&sv.Validations, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11045,6 +11050,168 @@ func awsRestjson1_deserializeDocumentAnalysisTemplateSummaryList(v *[]types.Anal
 		var col types.AnalysisTemplateSummary
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentAnalysisTemplateSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusDetail(v **types.AnalysisTemplateValidationStatusDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AnalysisTemplateValidationStatusDetail
+	if *v == nil {
+		sv = &types.AnalysisTemplateValidationStatusDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "reasons":
+			if err := awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusReasonList(&sv.Reasons, value); err != nil {
+				return err
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalysisTemplateValidationStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.AnalysisTemplateValidationStatus(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AnalysisTemplateValidationType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AnalysisTemplateValidationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusDetailList(v *[]types.AnalysisTemplateValidationStatusDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AnalysisTemplateValidationStatusDetail
+	if *v == nil {
+		cv = []types.AnalysisTemplateValidationStatusDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AnalysisTemplateValidationStatusDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusReason(v **types.AnalysisTemplateValidationStatusReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AnalysisTemplateValidationStatusReason
+	if *v == nil {
+		sv = &types.AnalysisTemplateValidationStatusReason{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusReasonList(v *[]types.AnalysisTemplateValidationStatusReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AnalysisTemplateValidationStatusReason
+	if *v == nil {
+		cv = []types.AnalysisTemplateValidationStatusReason{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AnalysisTemplateValidationStatusReason
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusReason(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -11637,6 +11804,11 @@ func awsRestjson1_deserializeDocumentCollaborationAnalysisTemplate(v **types.Col
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "validations":
+			if err := awsRestjson1_deserializeDocumentAnalysisTemplateValidationStatusDetailList(&sv.Validations, value); err != nil {
+				return err
 			}
 
 		default:

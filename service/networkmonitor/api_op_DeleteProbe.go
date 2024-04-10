@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified monitor. Once a probe is deleted you'll no longer incur
-// any billing fees for that probe.
+// Deletes the specified probe. Once a probe is deleted you'll no longer incur any
+// billing fees for that probe. This action requires both the monitorName and
+// probeId parameters. Run ListMonitors to get a list of monitor names. Run
+// GetMonitor to get a list of probes and probe IDs. You can only delete a single
+// probe at a time using this action.
 func (c *Client) DeleteProbe(ctx context.Context, params *DeleteProbeInput, optFns ...func(*Options)) (*DeleteProbeOutput, error) {
 	if params == nil {
 		params = &DeleteProbeInput{}
@@ -29,14 +32,12 @@ func (c *Client) DeleteProbe(ctx context.Context, params *DeleteProbeInput, optF
 
 type DeleteProbeInput struct {
 
-	// The name of the monitor to delete. For a list of the available monitors, use
-	// the ListMonitors action.
+	// The name of the monitor to delete.
 	//
 	// This member is required.
 	MonitorName *string
 
-	// The ID of the probe to delete. Run GetMonitor to get a lst of all probes and
-	// probe IDs associated with the monitor.
+	// The ID of the probe to delete.
 	//
 	// This member is required.
 	ProbeId *string

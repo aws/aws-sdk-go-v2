@@ -13,6 +13,7 @@ const (
 	ActionTypeCreateCase               ActionType = "CREATE_CASE"
 	ActionTypeUpdateCase               ActionType = "UPDATE_CASE"
 	ActionTypeEndAssociatedTasks       ActionType = "END_ASSOCIATED_TASKS"
+	ActionTypeSubmitAutoEvaluation     ActionType = "SUBMIT_AUTO_EVALUATION"
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
@@ -27,6 +28,7 @@ func (ActionType) Values() []ActionType {
 		"CREATE_CASE",
 		"UPDATE_CASE",
 		"END_ASSOCIATED_TASKS",
+		"SUBMIT_AUTO_EVALUATION",
 	}
 }
 

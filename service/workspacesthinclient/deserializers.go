@@ -1549,11 +1549,17 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 
 	switch {
-	case strings.EqualFold("InternalServiceException", errorCode):
-		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
@@ -1674,11 +1680,20 @@ func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	}
 
 	switch {
-	case strings.EqualFold("InternalServiceException", errorCode):
-		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
@@ -1763,11 +1778,20 @@ func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	}
 
 	switch {
-	case strings.EqualFold("InternalServiceException", errorCode):
-		return awsRestjson1_deserializeErrorInternalServiceException(response, errorBody)
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
@@ -2211,22 +2235,6 @@ func awsRestjson1_deserializeOpHttpBindingsInternalServerException(v *types.Inte
 
 	return nil
 }
-func awsRestjson1_deserializeOpHttpBindingsInternalServiceException(v *types.InternalServiceException, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("Retry-After"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		vv, err := strconv.ParseInt(headerValues[0], 0, 32)
-		if err != nil {
-			return err
-		}
-		v.RetryAfterSeconds = ptr.Int32(int32(vv))
-	}
-
-	return nil
-}
 func awsRestjson1_deserializeOpHttpBindingsThrottlingException(v *types.ThrottlingException, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
@@ -2349,46 +2357,6 @@ func awsRestjson1_deserializeErrorInternalServerException(response *smithyhttp.R
 	errorBody.Seek(0, io.SeekStart)
 
 	if err := awsRestjson1_deserializeOpHttpBindingsInternalServerException(output, response); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
-	}
-
-	return output
-}
-
-func awsRestjson1_deserializeErrorInternalServiceException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	output := &types.InternalServiceException{}
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	var shape interface{}
-	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	err := awsRestjson1_deserializeDocumentInternalServiceException(&output, shape)
-
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	errorBody.Seek(0, io.SeekStart)
-
-	if err := awsRestjson1_deserializeOpHttpBindingsInternalServiceException(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
 
@@ -2892,7 +2860,7 @@ func awsRestjson1_deserializeDocumentDevice(v **types.Device, value interface{})
 			}
 
 		case "tags":
-			if err := awsRestjson1_deserializeDocumentEmbeddedTag(&sv.Tags, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
 			}
 
@@ -3124,11 +3092,6 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 				sv.Status = types.DeviceStatus(jtv)
 			}
 
-		case "tags":
-			if err := awsRestjson1_deserializeDocumentEmbeddedTag(&sv.Tags, value); err != nil {
-				return err
-			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3143,55 +3106,6 @@ func awsRestjson1_deserializeDocumentDeviceSummary(v **types.DeviceSummary, valu
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentEmbeddedTag(v **types.EmbeddedTag, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.EmbeddedTag
-	if *v == nil {
-		sv = &types.EmbeddedTag{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "internalId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
-				}
-				sv.InternalId = ptr.String(jtv)
-			}
-
-		case "resourceArn":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
-				}
-				sv.ResourceArn = ptr.String(jtv)
 			}
 
 		default:
@@ -3386,7 +3300,7 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 			}
 
 		case "tags":
-			if err := awsRestjson1_deserializeDocumentEmbeddedTag(&sv.Tags, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
 			}
 
@@ -3591,11 +3505,6 @@ func awsRestjson1_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				sv.SoftwareSetUpdateSchedule = types.SoftwareSetUpdateSchedule(jtv)
 			}
 
-		case "tags":
-			if err := awsRestjson1_deserializeDocumentEmbeddedTag(&sv.Tags, value); err != nil {
-				return err
-			}
-
 		case "updatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3637,59 +3546,6 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	var sv *types.InternalServerException
 	if *v == nil {
 		sv = &types.InternalServerException{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "message":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
-				}
-				sv.Message = ptr.String(jtv)
-			}
-
-		case "retryAfterSeconds":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected RetryAfterSeconds to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.RetryAfterSeconds = ptr.Int32(int32(i64))
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentInternalServiceException(v **types.InternalServiceException, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.InternalServiceException
-	if *v == nil {
-		sv = &types.InternalServiceException{}
 	} else {
 		sv = *v
 	}
@@ -4125,6 +3981,11 @@ func awsRestjson1_deserializeDocumentSoftwareSet(v **types.SoftwareSet, value in
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "validationStatus":

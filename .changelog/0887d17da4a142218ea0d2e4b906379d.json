@@ -1,0 +1,8 @@
+{
+    "id": "0887d17d-a4a1-4221-8ea0-d2e4b906379d",
+    "type": "feature",
+    "description": "This release includes API SendDataIntegrationEvent for AWS Supply Chain",
+    "modules": [
+        "service/supplychain"
+    ]
+}

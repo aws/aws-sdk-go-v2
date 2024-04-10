@@ -13,9 +13,9 @@ import (
 
 // Updates the template URI of a knowledge base. This is only supported for
 // knowledge bases of type EXTERNAL. Include a single variable in ${variable}
-// format; this interpolated by Amazon Q using ingested content. For example, if
-// you ingest a Salesforce article, it has an Id value, and you can set the
-// template URI to
+// format; this interpolated by Amazon Q in Connect using ingested content. For
+// example, if you ingest a Salesforce article, it has an Id value, and you can
+// set the template URI to
 // https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view
 // .
 func (c *Client) UpdateKnowledgeBaseTemplateUri(ctx context.Context, params *UpdateKnowledgeBaseTemplateUriInput, optFns ...func(*Options)) (*UpdateKnowledgeBaseTemplateUriOutput, error) {
@@ -36,8 +36,7 @@ func (c *Client) UpdateKnowledgeBaseTemplateUri(ctx context.Context, params *Upd
 type UpdateKnowledgeBaseTemplateUriInput struct {
 
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN. URLs cannot contain the ARN.
+	// knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string

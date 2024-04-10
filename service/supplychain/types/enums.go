@@ -25,3 +25,47 @@ func (ConfigurationJobStatus) Values() []ConfigurationJobStatus {
 		"SUCCESS",
 	}
 }
+
+type DataIntegrationEventType string
+
+// Enum values for DataIntegrationEventType
+const (
+	DataIntegrationEventTypeForecast                 DataIntegrationEventType = "scn.data.forecast"
+	DataIntegrationEventTypeInventoryLevel           DataIntegrationEventType = "scn.data.inventorylevel"
+	DataIntegrationEventTypeInboundOrder             DataIntegrationEventType = "scn.data.inboundorder"
+	DataIntegrationEventTypeInboundOrderLine         DataIntegrationEventType = "scn.data.inboundorderline"
+	DataIntegrationEventTypeInboundOrderLineSchedule DataIntegrationEventType = "scn.data.inboundorderlineschedule"
+	DataIntegrationEventTypeOutboundOrderLine        DataIntegrationEventType = "scn.data.outboundorderline"
+	DataIntegrationEventTypeOutboundShipment         DataIntegrationEventType = "scn.data.outboundshipment"
+	DataIntegrationEventTypeProcessHeader            DataIntegrationEventType = "scn.data.processheader"
+	DataIntegrationEventTypeProcessOperation         DataIntegrationEventType = "scn.data.processoperation"
+	DataIntegrationEventTypeProcessProduct           DataIntegrationEventType = "scn.data.processproduct"
+	DataIntegrationEventTypeReservation              DataIntegrationEventType = "scn.data.reservation"
+	DataIntegrationEventTypeShipment                 DataIntegrationEventType = "scn.data.shipment"
+	DataIntegrationEventTypeShipmentStop             DataIntegrationEventType = "scn.data.shipmentstop"
+	DataIntegrationEventTypeShipmentStopOrder        DataIntegrationEventType = "scn.data.shipmentstoporder"
+	DataIntegrationEventTypeSupplyPlan               DataIntegrationEventType = "scn.data.supplyplan"
+)
+
+// Values returns all known values for DataIntegrationEventType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataIntegrationEventType) Values() []DataIntegrationEventType {
+	return []DataIntegrationEventType{
+		"scn.data.forecast",
+		"scn.data.inventorylevel",
+		"scn.data.inboundorder",
+		"scn.data.inboundorderline",
+		"scn.data.inboundorderlineschedule",
+		"scn.data.outboundorderline",
+		"scn.data.outboundshipment",
+		"scn.data.processheader",
+		"scn.data.processoperation",
+		"scn.data.processproduct",
+		"scn.data.reservation",
+		"scn.data.shipment",
+		"scn.data.shipmentstop",
+		"scn.data.shipmentstoporder",
+		"scn.data.supplyplan",
+	}
+}

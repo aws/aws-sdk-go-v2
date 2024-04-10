@@ -1,0 +1,8 @@
+{
+    "id": "ae87c427-8e76-4b09-a55c-6628fb1020f8",
+    "type": "feature",
+    "description": "This release adds new Submit Auto Evaluation Action for Amazon Connect Rules.",
+    "modules": [
+        "service/connect"
+    ]
+}

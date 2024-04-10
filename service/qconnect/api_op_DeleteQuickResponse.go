@@ -29,8 +29,7 @@ func (c *Client) DeleteQuickResponse(ctx context.Context, params *DeleteQuickRes
 type DeleteQuickResponseInput struct {
 
 	// The knowledge base from which the quick response is deleted. The identifier of
-	// the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if
-	// you're storing Amazon Q Content resource to it.
+	// the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string

@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Performs a manual search against the specified assistant. To retrieve
-// recommendations for an assistant, use GetRecommendations (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html)
+// This API will be discontinued starting June 1, 2024. To receive generative
+// responses after March 1, 2024, you will need to create a new Assistant in the
+// Amazon Connect console and integrate the Amazon Q in Connect JavaScript library
+// (amazon-q-connectjs) into your applications. Performs a manual search against
+// the specified assistant. To retrieve recommendations for an assistant, use
+// GetRecommendations (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html)
 // .
 //
 // Deprecated: QueryAssistant API will be discontinued starting June 1, 2024. To
@@ -36,8 +40,8 @@ func (c *Client) QueryAssistant(ctx context.Context, params *QueryAssistantInput
 
 type QueryAssistantInput struct {
 
-	// The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	AssistantId *string
@@ -57,8 +61,8 @@ type QueryAssistantInput struct {
 	// Information about how to query content.
 	QueryCondition []types.QueryCondition
 
-	// The identifier of the Amazon Q session. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
+	// The identifier of the Amazon Q in Connect session. Can be either the ID or the
+	// ARN. URLs cannot contain the ARN.
 	SessionId *string
 
 	noSmithyDocumentSerde

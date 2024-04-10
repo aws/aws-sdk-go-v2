@@ -48,8 +48,8 @@ type CreateSecurityProfileInput struct {
 	// in Amazon Connect.
 	AllowedAccessControlTags map[string]string
 
-	// This API is in preview release for Amazon Connect and is subject to change. A
-	// list of third-party applications that the security profile will give access to.
+	// A list of third-party applications that the security profile will give access
+	// to.
 	Applications []types.Application
 
 	// The description of the security profile.

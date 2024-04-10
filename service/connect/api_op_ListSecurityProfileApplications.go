@@ -53,8 +53,7 @@ type ListSecurityProfileApplicationsInput struct {
 
 type ListSecurityProfileApplicationsOutput struct {
 
-	// This API is in preview release for Amazon Connect and is subject to change. A
-	// list of the third-party application's metadata.
+	// A list of the third-party application's metadata.
 	Applications []types.Application
 
 	// The Amazon Web Services Region where this resource was last modified.

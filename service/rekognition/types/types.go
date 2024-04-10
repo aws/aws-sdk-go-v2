@@ -354,6 +354,10 @@ type ConnectedHomeSettingsForUpdate struct {
 // detection in a stored video.
 type ContentModerationDetection struct {
 
+	// A list of predicted results for the type of content an image contains. For
+	// example, the image content might be from animation, sports, or a video game.
+	ContentTypes []ContentType
+
 	// The time duration of a segment in milliseconds, I.e. time elapsed from
 	// StartTimestampMillis to EndTimestampMillis.
 	DurationMillis *int64

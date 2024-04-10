@@ -14,6 +14,9 @@ import (
 
 // Create a probe within a monitor. Once you create a probe, and it begins
 // monitoring your network traffic, you'll incur billing charges for that probe.
+// This action requires the monitorName parameter. Run ListMonitors to get a list
+// of monitor names. Note the name of the monitorName you want to create the probe
+// for.
 func (c *Client) CreateProbe(ctx context.Context, params *CreateProbeInput, optFns ...func(*Options)) (*CreateProbeOutput, error) {
 	if params == nil {
 		params = &CreateProbeInput{}
@@ -31,8 +34,7 @@ func (c *Client) CreateProbe(ctx context.Context, params *CreateProbeInput, optF
 
 type CreateProbeInput struct {
 
-	// The name of the monitor to associated with the probe. To get a list of
-	// available monitors, use ListMonitors .
+	// The name of the monitor to associated with the probe.
 	//
 	// This member is required.
 	MonitorName *string

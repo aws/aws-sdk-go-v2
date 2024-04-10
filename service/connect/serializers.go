@@ -24842,6 +24842,13 @@ func awsRestjson1_serializeDocumentRuleAction(v *types.RuleAction, value smithyj
 		}
 	}
 
+	if v.SubmitAutoEvaluationAction != nil {
+		ok := object.Key("SubmitAutoEvaluationAction")
+		if err := awsRestjson1_serializeDocumentSubmitAutoEvaluationActionDefinition(v.SubmitAutoEvaluationAction, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TaskAction != nil {
 		ok := object.Key("TaskAction")
 		if err := awsRestjson1_serializeDocumentTaskActionDefinition(v.TaskAction, ok); err != nil {
@@ -25301,6 +25308,18 @@ func awsRestjson1_serializeDocumentStringCondition(v *types.StringCondition, val
 	if v.Value != nil {
 		ok := object.Key("Value")
 		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubmitAutoEvaluationActionDefinition(v *types.SubmitAutoEvaluationActionDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EvaluationFormId != nil {
+		ok := object.Key("EvaluationFormId")
+		ok.String(*v.EvaluationFormId)
 	}
 
 	return nil

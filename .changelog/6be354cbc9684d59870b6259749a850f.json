@@ -1,0 +1,8 @@
+{
+    "id": "6be354cb-c968-4d59-870b-6259749a850f",
+    "type": "feature",
+    "description": "Added support for ContentType to content moderation detections.",
+    "modules": [
+        "service/rekognition"
+    ]
+}

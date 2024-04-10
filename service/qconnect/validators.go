@@ -810,6 +810,26 @@ func (m *validateOpUpdateQuickResponse) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSession struct {
+}
+
+func (*validateOpUpdateSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateAssistantAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAssistantAssociation{}, middleware.After)
 }
@@ -970,6 +990,27 @@ func addOpUpdateQuickResponseValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateQuickResponse{}, middleware.After)
 }
 
+func addOpUpdateSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSession{}, middleware.After)
+}
+
+func validateAndConditions(v []types.TagCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AndConditions"}
+	for i := range v {
+		if err := validateTagCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration) error {
 	if v == nil {
 		return nil
@@ -1067,6 +1108,47 @@ func validateGenerativeContentFeedbackData(v *types.GenerativeContentFeedbackDat
 	invalidParams := smithy.InvalidParamsError{Context: "GenerativeContentFeedbackData"}
 	if len(v.Relevance) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Relevance"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrCondition(v types.OrCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrCondition"}
+	switch uv := v.(type) {
+	case *types.OrConditionMemberAndConditions:
+		if err := validateAndConditions(uv.Value); err != nil {
+			invalidParams.AddNested("[andConditions]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.OrConditionMemberTagCondition:
+		if err := validateTagCondition(&uv.Value); err != nil {
+			invalidParams.AddNested("[tagCondition]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOrConditions(v []types.OrCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OrConditions"}
+	for i := range v {
+		if err := validateOrCondition(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1285,6 +1367,50 @@ func validateSourceConfiguration(v types.SourceConfiguration) error {
 	}
 }
 
+func validateTagCondition(v *types.TagCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagCondition"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagFilter(v types.TagFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagFilter"}
+	switch uv := v.(type) {
+	case *types.TagFilterMemberAndConditions:
+		if err := validateAndConditions(uv.Value); err != nil {
+			invalidParams.AddNested("[andConditions]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.TagFilterMemberOrConditions:
+		if err := validateOrConditions(uv.Value); err != nil {
+			invalidParams.AddNested("[orConditions]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.TagFilterMemberTagCondition:
+		if err := validateTagCondition(&uv.Value); err != nil {
+			invalidParams.AddNested("[tagCondition]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAssistantAssociationInput(v *CreateAssistantAssociationInput) error {
 	if v == nil {
 		return nil
@@ -1399,6 +1525,11 @@ func validateOpCreateSessionInput(v *CreateSessionInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TagFilter != nil {
+		if err := validateTagFilter(v.TagFilter); err != nil {
+			invalidParams.AddNested("TagFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2019,6 +2150,29 @@ func validateOpUpdateQuickResponseInput(v *UpdateQuickResponseInput) error {
 	}
 	if v.QuickResponseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuickResponseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSessionInput(v *UpdateSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSessionInput"}
+	if v.AssistantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssistantId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.TagFilter != nil {
+		if err := validateTagFilter(v.TagFilter); err != nil {
+			invalidParams.AddNested("TagFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

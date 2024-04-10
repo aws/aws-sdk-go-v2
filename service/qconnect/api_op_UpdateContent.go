@@ -36,16 +36,15 @@ type UpdateContentInput struct {
 	ContentId *string
 
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN
+	// knowledge base. Can be either the ID or the ARN
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
 	// A key/value map to store attributes without affecting tagging or
 	// recommendations. For example, when synchronizing data between an external system
-	// and Amazon Q, you can store an external version identifier as metadata to
-	// utilize for determining drift.
+	// and Amazon Q in Connect, you can store an external version identifier as
+	// metadata to utilize for determining drift.
 	Metadata map[string]string
 
 	// The URI for the article. If the knowledge base has a templateUri, setting this

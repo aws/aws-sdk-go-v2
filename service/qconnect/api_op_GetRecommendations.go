@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves recommendations for the specified session. To avoid retrieving the
-// same recommendations in subsequent calls, use NotifyRecommendationsReceived (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_NotifyRecommendationsReceived.html)
+// This API will be discontinued starting June 1, 2024. To receive generative
+// responses after March 1, 2024, you will need to create a new Assistant in the
+// Amazon Connect console and integrate the Amazon Q in Connect JavaScript library
+// (amazon-q-connectjs) into your applications. Retrieves recommendations for the
+// specified session. To avoid retrieving the same recommendations in subsequent
+// calls, use NotifyRecommendationsReceived (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_NotifyRecommendationsReceived.html)
 // . This API supports long-polling behavior with the waitTimeSeconds parameter.
 // Short poll is the default behavior and only returns recommendations already
 // available. To perform a manual query against an assistant, use QueryAssistant (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_QueryAssistant.html)
@@ -39,8 +43,8 @@ func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendati
 
 type GetRecommendationsInput struct {
 
-	// The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	AssistantId *string

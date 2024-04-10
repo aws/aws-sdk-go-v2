@@ -110,6 +110,44 @@ func (AnalysisRuleType) Values() []AnalysisRuleType {
 	}
 }
 
+type AnalysisTemplateValidationStatus string
+
+// Enum values for AnalysisTemplateValidationStatus
+const (
+	AnalysisTemplateValidationStatusValid            AnalysisTemplateValidationStatus = "VALID"
+	AnalysisTemplateValidationStatusInvalid          AnalysisTemplateValidationStatus = "INVALID"
+	AnalysisTemplateValidationStatusUnableToValidate AnalysisTemplateValidationStatus = "UNABLE_TO_VALIDATE"
+)
+
+// Values returns all known values for AnalysisTemplateValidationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AnalysisTemplateValidationStatus) Values() []AnalysisTemplateValidationStatus {
+	return []AnalysisTemplateValidationStatus{
+		"VALID",
+		"INVALID",
+		"UNABLE_TO_VALIDATE",
+	}
+}
+
+type AnalysisTemplateValidationType string
+
+// Enum values for AnalysisTemplateValidationType
+const (
+	AnalysisTemplateValidationTypeDifferentialPrivacy AnalysisTemplateValidationType = "DIFFERENTIAL_PRIVACY"
+)
+
+// Values returns all known values for AnalysisTemplateValidationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AnalysisTemplateValidationType) Values() []AnalysisTemplateValidationType {
+	return []AnalysisTemplateValidationType{
+		"DIFFERENTIAL_PRIVACY",
+	}
+}
+
 type CollaborationQueryLogStatus string
 
 // Enum values for CollaborationQueryLogStatus

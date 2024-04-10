@@ -4219,6 +4219,9 @@ type RuleAction struct {
 	// OnPostChatAnalysisAvailable | OnContactEvaluationSubmit | OnMetricDataUpdate
 	SendNotificationAction *SendNotificationActionDefinition
 
+	// Information about the submit automated evaluation action.
+	SubmitAutoEvaluationAction *SubmitAutoEvaluationActionDefinition
+
 	// Information about the task action. This field is required if TriggerEventSource
 	// is one of the following values: OnZendeskTicketCreate |
 	// OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
@@ -4677,6 +4680,17 @@ type StringReference struct {
 
 	// A valid string.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the submit automated evaluation action.
+type SubmitAutoEvaluationActionDefinition struct {
+
+	// The identifier of the auto-evaluation enabled form.
+	//
+	// This member is required.
+	EvaluationFormId *string
 
 	noSmithyDocumentSerde
 }

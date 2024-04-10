@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Returns details about a specific monitor.
+// Returns details about a specific monitor. This action requires the monitorName
+// parameter. Run ListMonitors to get a list of monitor names.
 func (c *Client) GetMonitor(ctx context.Context, params *GetMonitorInput, optFns ...func(*Options)) (*GetMonitorOutput, error) {
 	if params == nil {
 		params = &GetMonitorInput{}
@@ -60,13 +61,12 @@ type GetMonitorOutput struct {
 	// This member is required.
 	MonitorArn *string
 
-	// The name of the monitor. To get a list of the current monitors and their names,
-	// use the ListMonitors action.
+	// The name of the monitor.
 	//
 	// This member is required.
 	MonitorName *string
 
-	// Returns a list of the state of each monitor.
+	// Lists the status of the state of each monitor.
 	//
 	// This member is required.
 	State types.MonitorState

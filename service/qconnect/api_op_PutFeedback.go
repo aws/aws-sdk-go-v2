@@ -30,7 +30,7 @@ func (c *Client) PutFeedback(ctx context.Context, params *PutFeedbackInput, optF
 
 type PutFeedbackInput struct {
 
-	// The identifier of the Amazon Q assistant.
+	// The identifier of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantId *string
@@ -55,12 +55,12 @@ type PutFeedbackInput struct {
 
 type PutFeedbackOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q assistant.
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantArn *string
 
-	// The identifier of the Amazon Q assistant.
+	// The identifier of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantId *string

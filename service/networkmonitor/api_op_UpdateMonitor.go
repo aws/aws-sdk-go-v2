@@ -12,7 +12,9 @@ import (
 )
 
 // Updates the aggregationPeriod for a monitor. Monitors support an
-// aggregationPeriod of either 30 or 60 seconds.
+// aggregationPeriod of either 30 or 60 seconds. This action requires the
+// monitorName and probeId parameter. Run ListMonitors to get a list of monitor
+// names.
 func (c *Client) UpdateMonitor(ctx context.Context, params *UpdateMonitorInput, optFns ...func(*Options)) (*UpdateMonitorOutput, error) {
 	if params == nil {
 		params = &UpdateMonitorInput{}
@@ -35,8 +37,7 @@ type UpdateMonitorInput struct {
 	// This member is required.
 	AggregationPeriod *int64
 
-	// The name of the monitor to update. Run ListMonitors to get a list of monitor
-	// names.
+	// The name of the monitor to update.
 	//
 	// This member is required.
 	MonitorName *string

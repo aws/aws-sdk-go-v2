@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Amazon Q content. Before to calling this API, use StartContentUpload (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html)
+// Creates Amazon Q in Connect content. Before to calling this API, use
+// StartContentUpload (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html)
 // to upload an asset.
 func (c *Client) CreateContent(ctx context.Context, params *CreateContentInput, optFns ...func(*Options)) (*CreateContentOutput, error) {
 	if params == nil {
@@ -31,8 +32,7 @@ func (c *Client) CreateContent(ctx context.Context, params *CreateContentInput, 
 type CreateContentInput struct {
 
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN. URLs cannot contain the ARN.
+	// knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -60,8 +60,8 @@ type CreateContentInput struct {
 
 	// A key/value map to store attributes without affecting tagging or
 	// recommendations. For example, when synchronizing data between an external system
-	// and Amazon Q, you can store an external version identifier as metadata to
-	// utilize for determining drift.
+	// and Amazon Q in Connect, you can store an external version identifier as
+	// metadata to utilize for determining drift.
 	Metadata map[string]string
 
 	// The URI you want to use for the article. If the knowledge base has a
