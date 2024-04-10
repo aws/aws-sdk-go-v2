@@ -1,3 +1,7 @@
+# v1.3.1 (2024-04-10)
+
+* **Documentation**: Examples were added to CloudWatch Network Monitor commands.
+
 # v1.3.0 (2024-04-08)
 
 * **Feature**: Updated the allowed monitorName length for CloudWatch Network Monitor.

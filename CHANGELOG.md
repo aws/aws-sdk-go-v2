@@ -1,3 +1,21 @@
+# Release (2024-04-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.12.0](service/cleanrooms/CHANGELOG.md#v1120-2024-04-10)
+  * **Feature**: AWS Clean Rooms Differential Privacy is now fully available. Differential privacy protects against user-identification attempts.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.96.0](service/connect/CHANGELOG.md#v1960-2024-04-10)
+  * **Feature**: This release adds new Submit Auto Evaluation Action for Amazon Connect Rules.
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.3.1](service/networkmonitor/CHANGELOG.md#v131-2024-04-10)
+  * **Documentation**: Examples were added to CloudWatch Network Monitor commands.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.6.0](service/qconnect/CHANGELOG.md#v160-2024-04-10)
+  * **Feature**: This release adds a new QiC public API updateSession and updates an existing QiC public API createSession
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.40.0](service/rekognition/CHANGELOG.md#v1400-2024-04-10)
+  * **Feature**: Added support for ContentType to content moderation detections.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.3.0](service/supplychain/CHANGELOG.md#v130-2024-04-10)
+  * **Feature**: This release includes API SendDataIntegrationEvent for AWS Supply Chain
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.5.0](service/workspacesthinclient/CHANGELOG.md#v150-2024-04-10)
+  * **Feature**: Adding tags field to SoftwareSet. Removing tags fields from Summary objects. Changing the list of exceptions in tagging APIs. Fixing an issue where the SDK returns empty tags in Get APIs.
+
 # Release (2024-04-09)
 
 ## Module Highlights

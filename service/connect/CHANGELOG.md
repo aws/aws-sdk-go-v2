@@ -1,3 +1,7 @@
+# v1.96.0 (2024-04-10)
+
+* **Feature**: This release adds new Submit Auto Evaluation Action for Amazon Connect Rules.
+
 # v1.95.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

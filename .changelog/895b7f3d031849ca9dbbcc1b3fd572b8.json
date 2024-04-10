@@ -1,8 +1,0 @@
-{
-    "id": "895b7f3d-0318-49ca-9dbb-cc1b3fd572b8",
-    "type": "documentation",
-    "description": "Examples were added to CloudWatch Network Monitor commands.",
-    "modules": [
-        "service/networkmonitor"
-    ]
-}

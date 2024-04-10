@@ -1,8 +1,0 @@
-{
-    "id": "f926b159-9fa8-4257-9bcf-7a1300e890d8",
-    "type": "feature",
-    "description": "AWS Clean Rooms Differential Privacy is now fully available. Differential privacy protects against user-identification attempts.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.3.0 (2024-04-10)
+
+* **Feature**: This release includes API SendDataIntegrationEvent for AWS Supply Chain
+
 # v1.2.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

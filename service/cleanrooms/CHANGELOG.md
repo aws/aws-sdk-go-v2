@@ -1,3 +1,7 @@
+# v1.12.0 (2024-04-10)
+
+* **Feature**: AWS Clean Rooms Differential Privacy is now fully available. Differential privacy protects against user-identification attempts.
+
 # v1.11.0 (2024-04-04)
 
 * **Feature**: Feature: New schemaStatusDetails field to the existing Schema object that displays a status on Schema API responses to show whether a schema is queryable or not. New BatchGetSchemaAnalysisRule API to retrieve multiple schemaAnalysisRules using a single API call.
