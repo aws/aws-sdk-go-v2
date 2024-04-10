@@ -200,6 +200,9 @@ func extractTypes(pkg, module string, index astIndex, items map[string]jewelryIt
 
 func isProbablyUnion(name string, i *ast.InterfaceType) bool {
 	for _, field := range i.Methods.List {
+		if len(field.Names) == 0 {
+			continue
+		}
 		if field.Names[0].Name == "is"+name {
 			return true
 		}
