@@ -404,7 +404,7 @@ func extractFunctions(packageName string, types map[string]*ast.TypeSpec, functi
 
 		// without proper runtime documentation, we have to bridge the gap to
 		// event payloads for now
-		if vf.Name.Name == "GetStream" {
+		if vf.Name.Name == "GetStream" && isInputOutput(receiverName) {
 			stream := strings.TrimSuffix(receiverName, whichSuffix(receiverName)) + "EventStream"
 			members = append(members, jewelryItem{
 				Name:    "(event stream payload)",
@@ -447,6 +447,11 @@ func extractFunctions(packageName string, types map[string]*ast.TypeSpec, functi
 	}
 
 	return nil
+}
+
+// whether there's "Input" or "Output" on a structure
+func isInputOutput(name string) bool {
+	return strings.HasSuffix(name, "Input") || strings.HasSuffix(name, "Output")
 }
 
 // "Input" or "Output" on a structure
