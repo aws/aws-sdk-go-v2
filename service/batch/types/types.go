@@ -95,6 +95,51 @@ type AttemptDetail struct {
 	// SUCCEEDED or FAILED ).
 	StoppedAt *int64
 
+	// The properties for a task definition that describes the container and volume
+	// definitions of an Amazon ECS task.
+	TaskProperties []AttemptEcsTaskDetails
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the details of a task.
+type AttemptEcsTaskDetails struct {
+
+	// The Amazon Resource Name (ARN) of the container instance that hosts the task.
+	ContainerInstanceArn *string
+
+	// A list of containers that are included in the taskProperties list.
+	Containers []AttemptTaskContainerDetails
+
+	// The ARN of the Amazon ECS task.
+	TaskArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the details of a container that's part of a job
+// attempt.
+type AttemptTaskContainerDetails struct {
+
+	// The exit code for the container’s attempt. A non-zero exit code is considered
+	// failed.
+	ExitCode *int32
+
+	// The name of the Amazon CloudWatch Logs log stream that's associated with the
+	// container. The log group for Batch jobs is /aws/batch/job . Each container
+	// attempt receives a log stream name when they reach the RUNNING status.
+	LogStreamName *string
+
+	// The name of a container.
+	Name *string
+
+	// The network interfaces that are associated with the job attempt.
+	NetworkInterfaces []NetworkInterface
+
+	// A short (255 max characters) string that's easy to understand and provides
+	// additional details for a running or stopped container.
+	Reason *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1391,6 +1436,9 @@ type EksAttemptContainerDetail struct {
 	// failed.
 	ExitCode *int32
 
+	// The name of a container.
+	Name *string
+
 	// A short (255 max characters) human-readable string to provide additional
 	// details for a running or stopped container.
 	Reason *string
@@ -1849,10 +1897,9 @@ type EksPodProperties struct {
 	// in the Kubernetes documentation.
 	HostNetwork *bool
 
-	// References a Kubernetes secret resource. This object must start and end with an
-	// alphanumeric character, is required to be lowercase, can include periods (.) and
-	// hyphens (-), and can't contain more than 253 characters. ImagePullSecret$name
-	// is required when this object is used.
+	// References a Kubernetes secret resource. It holds a list of secrets. These
+	// secrets help to gain access to pull an images from a private registry.
+	// ImagePullSecret$name is required when this object is used.
 	ImagePullSecrets []ImagePullSecret
 
 	// These containers run before application containers, always runs to completion,
@@ -1916,7 +1963,8 @@ type EksPodPropertiesDetail struct {
 	// in the Kubernetes documentation.
 	HostNetwork *bool
 
-	// Displays the reference pointer to the Kubernetes secret resource.
+	// Displays the reference pointer to the Kubernetes secret resource. These secrets
+	// help to gain access to pull an images from a private registry.
 	ImagePullSecrets []ImagePullSecret
 
 	// The container registered with the Amazon EKS Connector agent and persists the
@@ -2163,8 +2211,9 @@ type Host struct {
 	noSmithyDocumentSerde
 }
 
-// References a Kubernetes configuration resource that holds a list of secrets.
-// These secrets help to gain access to pull an image from a private registry.
+// References a Kubernetes secret resource. This name of the secret must start and
+// end with an alphanumeric character, is required to be lowercase, can include
+// periods (.) and hyphens (-), and can't contain more than 253 characters.
 type ImagePullSecret struct {
 
 	// Provides a unique identifier for the ImagePullSecret . This object is required
@@ -2490,7 +2539,7 @@ type JobQueueDetail struct {
 type JobStateTimeLimitAction struct {
 
 	// The action to take when a job is at the head of the job queue in the specified
-	// state for the specified period of time. The only supported value is " CANCEL ",
+	// state for the specified period of time. The only supported value is CANCEL ,
 	// which will cancel the job.
 	//
 	// This member is required.
@@ -2508,8 +2557,8 @@ type JobStateTimeLimitAction struct {
 	// This member is required.
 	Reason *string
 
-	// The state of the job needed to trigger the action. The only supported value is "
-	// RUNNABLE ".
+	// The state of the job needed to trigger the action. The only supported value is
+	// RUNNABLE .
 	//
 	// This member is required.
 	State JobStateTimeLimitActionsState

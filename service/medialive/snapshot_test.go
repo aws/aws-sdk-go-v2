@@ -158,6 +158,54 @@ func TestCheckSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCloudWatchAlarmTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCloudWatchAlarmTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCloudWatchAlarmTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateEventBridgeRuleTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEventBridgeRuleTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEventBridgeRuleTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateEventBridgeRuleTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEventBridgeRuleTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEventBridgeRuleTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInput(context.Background(), nil, func(o *Options) {
@@ -218,6 +266,18 @@ func TestCheckSnapshot_CreatePartnerInput(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSignalMap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSignalMap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSignalMap")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTags(context.Background(), nil, func(o *Options) {
@@ -235,6 +295,54 @@ func TestCheckSnapshot_DeleteChannel(t *testing.T) {
 	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCloudWatchAlarmTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCloudWatchAlarmTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCloudWatchAlarmTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteEventBridgeRuleTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEventBridgeRuleTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEventBridgeRuleTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteEventBridgeRuleTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEventBridgeRuleTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEventBridgeRuleTemplateGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -307,6 +415,18 @@ func TestCheckSnapshot_DeleteSchedule(t *testing.T) {
 	_, err := svc.DeleteSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSignalMap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSignalMap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSignalMap")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -470,11 +590,119 @@ func TestCheckSnapshot_DescribeThumbnails(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCloudWatchAlarmTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCloudWatchAlarmTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCloudWatchAlarmTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetEventBridgeRuleTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEventBridgeRuleTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEventBridgeRuleTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetEventBridgeRuleTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEventBridgeRuleTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEventBridgeRuleTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSignalMap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSignalMap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSignalMap")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListChannels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCloudWatchAlarmTemplateGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCloudWatchAlarmTemplateGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCloudWatchAlarmTemplateGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCloudWatchAlarmTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCloudWatchAlarmTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCloudWatchAlarmTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEventBridgeRuleTemplateGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventBridgeRuleTemplateGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEventBridgeRuleTemplateGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListEventBridgeRuleTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventBridgeRuleTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEventBridgeRuleTemplates")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +806,18 @@ func TestCheckSnapshot_ListReservations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSignalMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSignalMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSignalMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -650,6 +890,18 @@ func TestCheckSnapshot_StartChannel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartDeleteMonitorDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDeleteMonitorDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDeleteMonitorDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartInputDevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartInputDevice(context.Background(), nil, func(o *Options) {
@@ -674,11 +926,35 @@ func TestCheckSnapshot_StartInputDeviceMaintenanceWindow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartMonitorDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMonitorDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMonitorDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartMultiplex(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMultiplex(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartMultiplex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartUpdateSignalMap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartUpdateSignalMap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartUpdateSignalMap")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -763,6 +1039,54 @@ func TestCheckSnapshot_UpdateChannelClass(t *testing.T) {
 	_, err := svc.UpdateChannelClass(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateChannelClass")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCloudWatchAlarmTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCloudWatchAlarmTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCloudWatchAlarmTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateEventBridgeRuleTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEventBridgeRuleTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEventBridgeRuleTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateEventBridgeRuleTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEventBridgeRuleTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEventBridgeRuleTemplateGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -937,6 +1261,54 @@ func TestUpdateSnapshot_CreateChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCloudWatchAlarmTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCloudWatchAlarmTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCloudWatchAlarmTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateEventBridgeRuleTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEventBridgeRuleTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEventBridgeRuleTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateEventBridgeRuleTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEventBridgeRuleTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEventBridgeRuleTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateInput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInput(context.Background(), nil, func(o *Options) {
@@ -997,6 +1369,18 @@ func TestUpdateSnapshot_CreatePartnerInput(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSignalMap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSignalMap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSignalMap")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTags(context.Background(), nil, func(o *Options) {
@@ -1014,6 +1398,54 @@ func TestUpdateSnapshot_DeleteChannel(t *testing.T) {
 	_, err := svc.DeleteChannel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteChannel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCloudWatchAlarmTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCloudWatchAlarmTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCloudWatchAlarmTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteEventBridgeRuleTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEventBridgeRuleTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEventBridgeRuleTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteEventBridgeRuleTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEventBridgeRuleTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEventBridgeRuleTemplateGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1086,6 +1518,18 @@ func TestUpdateSnapshot_DeleteSchedule(t *testing.T) {
 	_, err := svc.DeleteSchedule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteSchedule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSignalMap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSignalMap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSignalMap")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,11 +1693,119 @@ func TestUpdateSnapshot_DescribeThumbnails(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCloudWatchAlarmTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCloudWatchAlarmTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCloudWatchAlarmTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEventBridgeRuleTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEventBridgeRuleTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEventBridgeRuleTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetEventBridgeRuleTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEventBridgeRuleTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEventBridgeRuleTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSignalMap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSignalMap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSignalMap")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListChannels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCloudWatchAlarmTemplateGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCloudWatchAlarmTemplateGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCloudWatchAlarmTemplateGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCloudWatchAlarmTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCloudWatchAlarmTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCloudWatchAlarmTemplates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEventBridgeRuleTemplateGroups(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventBridgeRuleTemplateGroups(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEventBridgeRuleTemplateGroups")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListEventBridgeRuleTemplates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEventBridgeRuleTemplates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEventBridgeRuleTemplates")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1357,6 +1909,18 @@ func TestUpdateSnapshot_ListReservations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListSignalMaps(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSignalMaps(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSignalMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1429,6 +1993,18 @@ func TestUpdateSnapshot_StartChannel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartDeleteMonitorDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDeleteMonitorDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDeleteMonitorDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartInputDevice(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartInputDevice(context.Background(), nil, func(o *Options) {
@@ -1453,11 +2029,35 @@ func TestUpdateSnapshot_StartInputDeviceMaintenanceWindow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartMonitorDeployment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMonitorDeployment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMonitorDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartMultiplex(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartMultiplex(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartMultiplex")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartUpdateSignalMap(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartUpdateSignalMap(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartUpdateSignalMap")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1542,6 +2142,54 @@ func TestUpdateSnapshot_UpdateChannelClass(t *testing.T) {
 	_, err := svc.UpdateChannelClass(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateChannelClass")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCloudWatchAlarmTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCloudWatchAlarmTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCloudWatchAlarmTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCloudWatchAlarmTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCloudWatchAlarmTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCloudWatchAlarmTemplateGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateEventBridgeRuleTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEventBridgeRuleTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEventBridgeRuleTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateEventBridgeRuleTemplateGroup(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEventBridgeRuleTemplateGroup(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEventBridgeRuleTemplateGroup")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

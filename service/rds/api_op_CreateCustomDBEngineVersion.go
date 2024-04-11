@@ -30,8 +30,11 @@ func (c *Client) CreateCustomDBEngineVersion(ctx context.Context, params *Create
 
 type CreateCustomDBEngineVersionInput struct {
 
-	// The database engine to use for your custom engine version (CEV). The only
-	// supported value is custom-oracle-ee .
+	// The database engine. RDS Custom for Oracle supports the following values:
+	//   - custom-oracle-ee
+	//   - custom-oracle-ee-cdb
+	//   - custom-oracle-se2
+	//   - custom-oracle-se2-cdb
 	//
 	// This member is required.
 	Engine *string

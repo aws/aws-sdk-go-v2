@@ -23,7 +23,7 @@ import (
 // operation. Additional Permissions The IAM role that S3 Access Grants assumes
 // must have the following permissions specified in the trust policy when
 // registering the location: sts:AssumeRole , for directory users or groups
-// sts:SetContext , and for IAM users or roles sts:SourceIdentity .
+// sts:SetContext , and for IAM users or roles sts:SetSourceIdentity .
 func (c *Client) GetDataAccess(ctx context.Context, params *GetDataAccessInput, optFns ...func(*Options)) (*GetDataAccessOutput, error) {
 	if params == nil {
 		params = &GetDataAccessInput{}

@@ -38,8 +38,11 @@ func (c *Client) ModifyCustomDBEngineVersion(ctx context.Context, params *Modify
 
 type ModifyCustomDBEngineVersionInput struct {
 
-	// The DB engine. The only supported values are custom-oracle-ee and
-	// custom-oracle-ee-cdb .
+	// The database engine. RDS Custom for Oracle supports the following values:
+	//   - custom-oracle-ee
+	//   - custom-oracle-ee-cdb
+	//   - custom-oracle-se2
+	//   - custom-oracle-se2-cdb
 	//
 	// This member is required.
 	Engine *string

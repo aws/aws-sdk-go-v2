@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Store to update.
+// Specifies the key value store to update.
 func (c *Client) UpdateKeyValueStore(ctx context.Context, params *UpdateKeyValueStoreInput, optFns ...func(*Options)) (*UpdateKeyValueStoreOutput, error) {
 	if params == nil {
 		params = &UpdateKeyValueStoreInput{}
@@ -29,17 +29,17 @@ func (c *Client) UpdateKeyValueStore(ctx context.Context, params *UpdateKeyValue
 
 type UpdateKeyValueStoreInput struct {
 
-	// The comment of the Key Value Store to update.
+	// The comment of the key value store to update.
 	//
 	// This member is required.
 	Comment *string
 
-	// The Key Value Store to update, if a match occurs.
+	// The key value store to update, if a match occurs.
 	//
 	// This member is required.
 	IfMatch *string
 
-	// The name of the Key Value Store to update.
+	// The name of the key value store to update.
 	//
 	// This member is required.
 	Name *string
@@ -49,10 +49,10 @@ type UpdateKeyValueStoreInput struct {
 
 type UpdateKeyValueStoreOutput struct {
 
-	// The ETag of the resulting Key Value Store.
+	// The ETag of the resulting key value store.
 	ETag *string
 
-	// The resulting Key Value Store to update.
+	// The resulting key value store to update.
 	KeyValueStore *types.KeyValueStore
 
 	// Metadata pertaining to the operation's result.

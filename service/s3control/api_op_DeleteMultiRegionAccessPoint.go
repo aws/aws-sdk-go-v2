@@ -20,8 +20,8 @@ import (
 // Access Point. This action does not delete the buckets associated with the
 // Multi-Region Access Point, only the Multi-Region Access Point itself. This
 // action will always be routed to the US West (Oregon) Region. For more
-// information about the restrictions around managing Multi-Region Access Points,
-// see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// information about the restrictions around working with Multi-Region Access
+// Points, see Multi-Region Access Point restrictions and limitations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html)
 // in the Amazon S3 User Guide. This request is asynchronous, meaning that you
 // might receive a response before the command has completed. When this request
 // provides a response, it provides a token that you can use to monitor the status

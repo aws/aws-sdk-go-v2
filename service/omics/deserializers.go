@@ -2218,6 +2218,15 @@ func awsRestjson1_deserializeOpDocumentCreateSequenceStoreOutput(v **CreateSeque
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "eTagAlgorithmFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ETagAlgorithmFamily to be of type string, got %T instead", value)
+				}
+				sv.ETagAlgorithmFamily = types.ETagAlgorithmFamily(jtv)
+			}
+
 		case "fallbackLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8059,6 +8068,15 @@ func awsRestjson1_deserializeOpDocumentGetSequenceStoreOutput(v **GetSequenceSto
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "eTagAlgorithmFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ETagAlgorithmFamily to be of type string, got %T instead", value)
+				}
+				sv.ETagAlgorithmFamily = types.ETagAlgorithmFamily(jtv)
+			}
+
 		case "fallbackLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8084,6 +8102,11 @@ func awsRestjson1_deserializeOpDocumentGetSequenceStoreOutput(v **GetSequenceSto
 					return fmt.Errorf("expected SequenceStoreName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "s3Access":
+			if err := awsRestjson1_deserializeDocumentSequenceStoreS3Access(&sv.S3Access, value); err != nil {
+				return err
 			}
 
 		case "sseConfig":
@@ -16974,6 +16997,11 @@ func awsRestjson1_deserializeDocumentFileInformation(v **types.FileInformation, 
 				sv.PartSize = ptr.Int64(i64)
 			}
 
+		case "s3Access":
+			if err := awsRestjson1_deserializeDocumentReadSetS3Access(&sv.S3Access, value); err != nil {
+				return err
+			}
+
 		case "totalParts":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -18337,6 +18365,46 @@ func awsRestjson1_deserializeDocumentReadSetListItem(v **types.ReadSetListItem, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentReadSetS3Access(v **types.ReadSetS3Access, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReadSetS3Access
+	if *v == nil {
+		sv = &types.ReadSetS3Access{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentReadSetUploadPartList(v *[]types.ReadSetUploadPartListItem, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19529,6 +19597,15 @@ func awsRestjson1_deserializeDocumentSequenceStoreDetail(v **types.SequenceStore
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "eTagAlgorithmFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ETagAlgorithmFamily to be of type string, got %T instead", value)
+				}
+				sv.ETagAlgorithmFamily = types.ETagAlgorithmFamily(jtv)
+			}
+
 		case "fallbackLocation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19601,6 +19678,55 @@ func awsRestjson1_deserializeDocumentSequenceStoreDetailList(v *[]types.Sequence
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSequenceStoreS3Access(v **types.SequenceStoreS3Access, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SequenceStoreS3Access
+	if *v == nil {
+		sv = &types.SequenceStoreS3Access{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3AccessPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3AccessPointArn to be of type string, got %T instead", value)
+				}
+				sv.S3AccessPointArn = ptr.String(jtv)
+			}
+
+		case "s3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

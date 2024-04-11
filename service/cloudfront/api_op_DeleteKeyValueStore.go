@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Store to delete.
+// Specifies the key value store to delete.
 func (c *Client) DeleteKeyValueStore(ctx context.Context, params *DeleteKeyValueStoreInput, optFns ...func(*Options)) (*DeleteKeyValueStoreOutput, error) {
 	if params == nil {
 		params = &DeleteKeyValueStoreInput{}
@@ -28,12 +28,12 @@ func (c *Client) DeleteKeyValueStore(ctx context.Context, params *DeleteKeyValue
 
 type DeleteKeyValueStoreInput struct {
 
-	// The Key Value Store to delete, if a match occurs.
+	// The key value store to delete, if a match occurs.
 	//
 	// This member is required.
 	IfMatch *string
 
-	// The name of the Key Value Store.
+	// The name of the key value store.
 	//
 	// This member is required.
 	Name *string

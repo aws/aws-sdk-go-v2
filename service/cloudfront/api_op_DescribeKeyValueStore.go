@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Store and its configuration.
+// Specifies the key value store and its configuration.
 func (c *Client) DescribeKeyValueStore(ctx context.Context, params *DescribeKeyValueStoreInput, optFns ...func(*Options)) (*DescribeKeyValueStoreOutput, error) {
 	if params == nil {
 		params = &DescribeKeyValueStoreInput{}
@@ -29,7 +29,7 @@ func (c *Client) DescribeKeyValueStore(ctx context.Context, params *DescribeKeyV
 
 type DescribeKeyValueStoreInput struct {
 
-	// The name of the Key Value Store.
+	// The name of the key value store.
 	//
 	// This member is required.
 	Name *string
@@ -39,10 +39,10 @@ type DescribeKeyValueStoreInput struct {
 
 type DescribeKeyValueStoreOutput struct {
 
-	// The ETag of the resulting Key Value Store.
+	// The ETag of the resulting key value store.
 	ETag *string
 
-	// The resulting Key Value Store.
+	// The resulting key value store.
 	KeyValueStore *types.KeyValueStore
 
 	// Metadata pertaining to the operation's result.

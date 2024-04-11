@@ -48,6 +48,11 @@ type AnomalyDetector struct {
 	// Deprecated: Use SingleMetricAnomalyDetector.Dimensions property.
 	Dimensions []Dimension
 
+	// This object includes parameters that you can use to provide information about
+	// your metric to CloudWatch to help it build more accurate anomaly detection
+	// models. Currently, it includes the PeriodicSpikes parameter.
+	MetricCharacteristics *MetricCharacteristics
+
 	// The CloudWatch metric math expression for this anomaly detector.
 	MetricMathAnomalyDetector *MetricMathAnomalyDetector
 
@@ -69,8 +74,7 @@ type AnomalyDetector struct {
 	// Deprecated: Use SingleMetricAnomalyDetector.Stat property.
 	Stat *string
 
-	// The current status of the anomaly detector's training. The possible values are
-	// TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA
+	// The current status of the anomaly detector's training.
 	StateValue AnomalyDetectorStateValue
 
 	noSmithyDocumentSerde
@@ -646,6 +650,19 @@ type MetricAlarm struct {
 
 	// The unit of the metric associated with the alarm.
 	Unit StandardUnit
+
+	noSmithyDocumentSerde
+}
+
+// This object includes parameters that you can use to provide information to
+// CloudWatch to help it build more accurate anomaly detection models.
+type MetricCharacteristics struct {
+
+	// Set this parameter to true if values for this metric consistently include
+	// spikes that should not be considered to be anomalies. With this set to true ,
+	// CloudWatch will expect to see spikes that occurred consistently during the model
+	// training period, and won't flag future similar spikes as anomalies.
+	PeriodicSpikes *bool
 
 	noSmithyDocumentSerde
 }

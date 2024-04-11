@@ -107,7 +107,7 @@ type CreateMultipartReadSetUploadOutput struct {
 	// This member is required.
 	SubjectId *string
 
-	// he ID for the initiated multipart upload.
+	// The ID for the initiated multipart upload.
 	//
 	// This member is required.
 	UploadId *string

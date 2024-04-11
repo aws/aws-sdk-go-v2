@@ -2659,6 +2659,9 @@ func awsRestxml_deserializeOpErrorCreateKeyValueStore(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsRestxml_deserializeErrorUnsupportedOperation(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4861,6 +4864,9 @@ func awsRestxml_deserializeOpErrorDeleteKeyValueStore(response *smithyhttp.Respo
 	case strings.EqualFold("PreconditionFailed", errorCode):
 		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsRestxml_deserializeErrorUnsupportedOperation(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -5712,6 +5718,9 @@ func awsRestxml_deserializeOpErrorDescribeKeyValueStore(response *smithyhttp.Res
 
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsRestxml_deserializeErrorUnsupportedOperation(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -12417,6 +12426,9 @@ func awsRestxml_deserializeOpErrorListKeyValueStores(response *smithyhttp.Respon
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
 
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsRestxml_deserializeErrorUnsupportedOperation(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -15941,6 +15953,9 @@ func awsRestxml_deserializeOpErrorUpdateKeyValueStore(response *smithyhttp.Respo
 
 	case strings.EqualFold("PreconditionFailed", errorCode):
 		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsRestxml_deserializeErrorUnsupportedOperation(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

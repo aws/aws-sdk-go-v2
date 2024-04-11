@@ -90,6 +90,86 @@ func (m *validateOpCreateChannel) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCloudWatchAlarmTemplateGroup struct {
+}
+
+func (*validateOpCreateCloudWatchAlarmTemplateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCloudWatchAlarmTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCloudWatchAlarmTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCloudWatchAlarmTemplateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCloudWatchAlarmTemplate struct {
+}
+
+func (*validateOpCreateCloudWatchAlarmTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCloudWatchAlarmTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCloudWatchAlarmTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCloudWatchAlarmTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEventBridgeRuleTemplateGroup struct {
+}
+
+func (*validateOpCreateEventBridgeRuleTemplateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEventBridgeRuleTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEventBridgeRuleTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEventBridgeRuleTemplateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEventBridgeRuleTemplate struct {
+}
+
+func (*validateOpCreateEventBridgeRuleTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEventBridgeRuleTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEventBridgeRuleTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEventBridgeRuleTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInput struct {
 }
 
@@ -170,6 +250,26 @@ func (m *validateOpCreatePartnerInput) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSignalMap struct {
+}
+
+func (*validateOpCreateSignalMap) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSignalMap) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSignalMapInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSignalMapInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTags struct {
 }
 
@@ -205,6 +305,86 @@ func (m *validateOpDeleteChannel) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCloudWatchAlarmTemplateGroup struct {
+}
+
+func (*validateOpDeleteCloudWatchAlarmTemplateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCloudWatchAlarmTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCloudWatchAlarmTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCloudWatchAlarmTemplateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCloudWatchAlarmTemplate struct {
+}
+
+func (*validateOpDeleteCloudWatchAlarmTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCloudWatchAlarmTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCloudWatchAlarmTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCloudWatchAlarmTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEventBridgeRuleTemplateGroup struct {
+}
+
+func (*validateOpDeleteEventBridgeRuleTemplateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEventBridgeRuleTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEventBridgeRuleTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEventBridgeRuleTemplateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEventBridgeRuleTemplate struct {
+}
+
+func (*validateOpDeleteEventBridgeRuleTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEventBridgeRuleTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEventBridgeRuleTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEventBridgeRuleTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +505,26 @@ func (m *validateOpDeleteSchedule) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSignalMap struct {
+}
+
+func (*validateOpDeleteSignalMap) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSignalMap) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSignalMapInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSignalMapInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +770,106 @@ func (m *validateOpDescribeThumbnails) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCloudWatchAlarmTemplateGroup struct {
+}
+
+func (*validateOpGetCloudWatchAlarmTemplateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCloudWatchAlarmTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCloudWatchAlarmTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCloudWatchAlarmTemplateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCloudWatchAlarmTemplate struct {
+}
+
+func (*validateOpGetCloudWatchAlarmTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCloudWatchAlarmTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCloudWatchAlarmTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCloudWatchAlarmTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEventBridgeRuleTemplateGroup struct {
+}
+
+func (*validateOpGetEventBridgeRuleTemplateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEventBridgeRuleTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventBridgeRuleTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventBridgeRuleTemplateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEventBridgeRuleTemplate struct {
+}
+
+func (*validateOpGetEventBridgeRuleTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEventBridgeRuleTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventBridgeRuleTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventBridgeRuleTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSignalMap struct {
+}
+
+func (*validateOpGetSignalMap) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSignalMap) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSignalMapInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSignalMapInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListInputDeviceTransfers struct {
 }
 
@@ -730,6 +1030,26 @@ func (m *validateOpStartChannel) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDeleteMonitorDeployment struct {
+}
+
+func (*validateOpStartDeleteMonitorDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDeleteMonitorDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDeleteMonitorDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDeleteMonitorDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartInputDevice struct {
 }
 
@@ -770,6 +1090,26 @@ func (m *validateOpStartInputDeviceMaintenanceWindow) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMonitorDeployment struct {
+}
+
+func (*validateOpStartMonitorDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMonitorDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMonitorDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMonitorDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMultiplex struct {
 }
 
@@ -785,6 +1125,26 @@ func (m *validateOpStartMultiplex) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartMultiplexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartUpdateSignalMap struct {
+}
+
+func (*validateOpStartUpdateSignalMap) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartUpdateSignalMap) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartUpdateSignalMapInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartUpdateSignalMapInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -905,6 +1265,86 @@ func (m *validateOpUpdateChannel) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCloudWatchAlarmTemplateGroup struct {
+}
+
+func (*validateOpUpdateCloudWatchAlarmTemplateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCloudWatchAlarmTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCloudWatchAlarmTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCloudWatchAlarmTemplateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCloudWatchAlarmTemplate struct {
+}
+
+func (*validateOpUpdateCloudWatchAlarmTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCloudWatchAlarmTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCloudWatchAlarmTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCloudWatchAlarmTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateEventBridgeRuleTemplateGroup struct {
+}
+
+func (*validateOpUpdateEventBridgeRuleTemplateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEventBridgeRuleTemplateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEventBridgeRuleTemplateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEventBridgeRuleTemplateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateEventBridgeRuleTemplate struct {
+}
+
+func (*validateOpUpdateEventBridgeRuleTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEventBridgeRuleTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEventBridgeRuleTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEventBridgeRuleTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1046,6 +1486,22 @@ func addOpCreateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateChannel{}, middleware.After)
 }
 
+func addOpCreateCloudWatchAlarmTemplateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCloudWatchAlarmTemplateGroup{}, middleware.After)
+}
+
+func addOpCreateCloudWatchAlarmTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCloudWatchAlarmTemplate{}, middleware.After)
+}
+
+func addOpCreateEventBridgeRuleTemplateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEventBridgeRuleTemplateGroup{}, middleware.After)
+}
+
+func addOpCreateEventBridgeRuleTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEventBridgeRuleTemplate{}, middleware.After)
+}
+
 func addOpCreateInputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInput{}, middleware.After)
 }
@@ -1062,12 +1518,32 @@ func addOpCreatePartnerInputValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreatePartnerInput{}, middleware.After)
 }
 
+func addOpCreateSignalMapValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSignalMap{}, middleware.After)
+}
+
 func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTags{}, middleware.After)
 }
 
 func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteChannel{}, middleware.After)
+}
+
+func addOpDeleteCloudWatchAlarmTemplateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCloudWatchAlarmTemplateGroup{}, middleware.After)
+}
+
+func addOpDeleteCloudWatchAlarmTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCloudWatchAlarmTemplate{}, middleware.After)
+}
+
+func addOpDeleteEventBridgeRuleTemplateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEventBridgeRuleTemplateGroup{}, middleware.After)
+}
+
+func addOpDeleteEventBridgeRuleTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEventBridgeRuleTemplate{}, middleware.After)
 }
 
 func addOpDeleteInputValidationMiddleware(stack *middleware.Stack) error {
@@ -1092,6 +1568,10 @@ func addOpDeleteReservationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSchedule{}, middleware.After)
+}
+
+func addOpDeleteSignalMapValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSignalMap{}, middleware.After)
 }
 
 func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
@@ -1142,6 +1622,26 @@ func addOpDescribeThumbnailsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDescribeThumbnails{}, middleware.After)
 }
 
+func addOpGetCloudWatchAlarmTemplateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCloudWatchAlarmTemplateGroup{}, middleware.After)
+}
+
+func addOpGetCloudWatchAlarmTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCloudWatchAlarmTemplate{}, middleware.After)
+}
+
+func addOpGetEventBridgeRuleTemplateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEventBridgeRuleTemplateGroup{}, middleware.After)
+}
+
+func addOpGetEventBridgeRuleTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEventBridgeRuleTemplate{}, middleware.After)
+}
+
+func addOpGetSignalMapValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSignalMap{}, middleware.After)
+}
+
 func addOpListInputDeviceTransfersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInputDeviceTransfers{}, middleware.After)
 }
@@ -1174,6 +1674,10 @@ func addOpStartChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartChannel{}, middleware.After)
 }
 
+func addOpStartDeleteMonitorDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDeleteMonitorDeployment{}, middleware.After)
+}
+
 func addOpStartInputDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartInputDevice{}, middleware.After)
 }
@@ -1182,8 +1686,16 @@ func addOpStartInputDeviceMaintenanceWindowValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpStartInputDeviceMaintenanceWindow{}, middleware.After)
 }
 
+func addOpStartMonitorDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMonitorDeployment{}, middleware.After)
+}
+
 func addOpStartMultiplexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMultiplex{}, middleware.After)
+}
+
+func addOpStartUpdateSignalMapValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartUpdateSignalMap{}, middleware.After)
 }
 
 func addOpStopChannelValidationMiddleware(stack *middleware.Stack) error {
@@ -1208,6 +1720,22 @@ func addOpUpdateChannelClassValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
+func addOpUpdateCloudWatchAlarmTemplateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCloudWatchAlarmTemplateGroup{}, middleware.After)
+}
+
+func addOpUpdateCloudWatchAlarmTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCloudWatchAlarmTemplate{}, middleware.After)
+}
+
+func addOpUpdateEventBridgeRuleTemplateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEventBridgeRuleTemplateGroup{}, middleware.After)
+}
+
+func addOpUpdateEventBridgeRuleTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEventBridgeRuleTemplate{}, middleware.After)
 }
 
 func addOpUpdateInputDeviceValidationMiddleware(stack *middleware.Stack) error {
@@ -1360,6 +1888,23 @@ func validate__listOfColorCorrection(v []types.ColorCorrection) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfColorCorrection"}
 	for i := range v {
 		if err := validateColorCorrection(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfEventBridgeRuleTemplateTarget(v []types.EventBridgeRuleTemplateTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfEventBridgeRuleTemplateTarget"}
+	for i := range v {
+		if err := validateEventBridgeRuleTemplateTarget(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2278,6 +2823,21 @@ func validateEsam(v *types.Esam) error {
 	}
 	if v.PoisEndpoint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PoisEndpoint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventBridgeRuleTemplateTarget(v *types.EventBridgeRuleTemplateTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeRuleTemplateTarget"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3719,6 +4279,104 @@ func validateOpCreateChannelInput(v *CreateChannelInput) error {
 	}
 }
 
+func validateOpCreateCloudWatchAlarmTemplateGroupInput(v *CreateCloudWatchAlarmTemplateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCloudWatchAlarmTemplateGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCloudWatchAlarmTemplateInput(v *CreateCloudWatchAlarmTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCloudWatchAlarmTemplateInput"}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if v.EvaluationPeriods == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationPeriods"))
+	}
+	if v.GroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupIdentifier"))
+	}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
+	}
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	}
+	if len(v.TargetResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetResourceType"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
+	}
+	if len(v.TreatMissingData) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TreatMissingData"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEventBridgeRuleTemplateGroupInput(v *CreateEventBridgeRuleTemplateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEventBridgeRuleTemplateGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEventBridgeRuleTemplateInput(v *CreateEventBridgeRuleTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEventBridgeRuleTemplateInput"}
+	if v.EventTargets != nil {
+		if err := validate__listOfEventBridgeRuleTemplateTarget(v.EventTargets); err != nil {
+			invalidParams.AddNested("EventTargets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.EventType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EventType"))
+	}
+	if v.GroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateInputInput(v *CreateInputInput) error {
 	if v == nil {
 		return nil
@@ -3807,6 +4465,24 @@ func validateOpCreatePartnerInputInput(v *CreatePartnerInputInput) error {
 	}
 }
 
+func validateOpCreateSignalMapInput(v *CreateSignalMapInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSignalMapInput"}
+	if v.DiscoveryEntryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DiscoveryEntryPointArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTagsInput(v *CreateTagsInput) error {
 	if v == nil {
 		return nil
@@ -3829,6 +4505,66 @@ func validateOpDeleteChannelInput(v *DeleteChannelInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteChannelInput"}
 	if v.ChannelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCloudWatchAlarmTemplateGroupInput(v *DeleteCloudWatchAlarmTemplateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCloudWatchAlarmTemplateGroupInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCloudWatchAlarmTemplateInput(v *DeleteCloudWatchAlarmTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCloudWatchAlarmTemplateInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEventBridgeRuleTemplateGroupInput(v *DeleteEventBridgeRuleTemplateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventBridgeRuleTemplateGroupInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEventBridgeRuleTemplateInput(v *DeleteEventBridgeRuleTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventBridgeRuleTemplateInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3922,6 +4658,21 @@ func validateOpDeleteScheduleInput(v *DeleteScheduleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteScheduleInput"}
 	if v.ChannelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSignalMapInput(v *DeleteSignalMapInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSignalMapInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4125,6 +4876,81 @@ func validateOpDescribeThumbnailsInput(v *DescribeThumbnailsInput) error {
 	}
 }
 
+func validateOpGetCloudWatchAlarmTemplateGroupInput(v *GetCloudWatchAlarmTemplateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCloudWatchAlarmTemplateGroupInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCloudWatchAlarmTemplateInput(v *GetCloudWatchAlarmTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCloudWatchAlarmTemplateInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEventBridgeRuleTemplateGroupInput(v *GetEventBridgeRuleTemplateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventBridgeRuleTemplateGroupInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEventBridgeRuleTemplateInput(v *GetEventBridgeRuleTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventBridgeRuleTemplateInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSignalMapInput(v *GetSignalMapInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSignalMapInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListInputDeviceTransfersInput(v *ListInputDeviceTransfersInput) error {
 	if v == nil {
 		return nil
@@ -4248,6 +5074,21 @@ func validateOpStartChannelInput(v *StartChannelInput) error {
 	}
 }
 
+func validateOpStartDeleteMonitorDeploymentInput(v *StartDeleteMonitorDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDeleteMonitorDeploymentInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartInputDeviceInput(v *StartInputDeviceInput) error {
 	if v == nil {
 		return nil
@@ -4278,6 +5119,21 @@ func validateOpStartInputDeviceMaintenanceWindowInput(v *StartInputDeviceMainten
 	}
 }
 
+func validateOpStartMonitorDeploymentInput(v *StartMonitorDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMonitorDeploymentInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartMultiplexInput(v *StartMultiplexInput) error {
 	if v == nil {
 		return nil
@@ -4285,6 +5141,21 @@ func validateOpStartMultiplexInput(v *StartMultiplexInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartMultiplexInput"}
 	if v.MultiplexId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MultiplexId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartUpdateSignalMapInput(v *StartUpdateSignalMapInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartUpdateSignalMapInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4388,6 +5259,71 @@ func validateOpUpdateChannelInput(v *UpdateChannelInput) error {
 		if err := validate__listOfInputAttachment(v.InputAttachments); err != nil {
 			invalidParams.AddNested("InputAttachments", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCloudWatchAlarmTemplateGroupInput(v *UpdateCloudWatchAlarmTemplateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudWatchAlarmTemplateGroupInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCloudWatchAlarmTemplateInput(v *UpdateCloudWatchAlarmTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudWatchAlarmTemplateInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEventBridgeRuleTemplateGroupInput(v *UpdateEventBridgeRuleTemplateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEventBridgeRuleTemplateGroupInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEventBridgeRuleTemplateInput(v *UpdateEventBridgeRuleTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEventBridgeRuleTemplateInput"}
+	if v.EventTargets != nil {
+		if err := validate__listOfEventBridgeRuleTemplateTarget(v.EventTargets); err != nil {
+			invalidParams.AddNested("EventTargets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

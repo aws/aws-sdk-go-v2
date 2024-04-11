@@ -141,7 +141,7 @@ func (e *CannotChangeImmutablePublicKeyFields) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The Key Value Store entity cannot be deleted while it is in use.
+// The key value store entity cannot be deleted while it is in use.
 type CannotDeleteEntityWhileInUse struct {
 	Message *string
 
@@ -361,8 +361,8 @@ func (e *DistributionNotDisabled) ErrorCode() string {
 }
 func (e *DistributionNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Key Value Store entity already exists. You must provide a unique Key Value
-// Store entity.
+// The key value store entity already exists. You must provide a unique key value
+// store entity.
 type EntityAlreadyExists struct {
 	Message *string
 
@@ -388,7 +388,7 @@ func (e *EntityAlreadyExists) ErrorCode() string {
 }
 func (e *EntityAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Key Value Store entity limit has been exceeded.
+// The key value store entity limit has been exceeded.
 type EntityLimitExceeded struct {
 	Message *string
 
@@ -414,7 +414,7 @@ func (e *EntityLimitExceeded) ErrorCode() string {
 }
 func (e *EntityLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Key Value Store entity was not found.
+// The key value store entity was not found.
 type EntityNotFound struct {
 	Message *string
 
@@ -440,7 +440,7 @@ func (e *EntityNotFound) ErrorCode() string {
 }
 func (e *EntityNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Key Value Store entity size limit was exceeded.
+// The key value store entity size limit was exceeded.
 type EntitySizeLimitExceeded struct {
 	Message *string
 

@@ -13,7 +13,7 @@ import (
 
 // Lists multipart read set uploads and for in progress uploads. Once the upload
 // is completed, a read set is created and the upload will no longer be returned in
-// the respone.
+// the response.
 func (c *Client) ListMultipartReadSetUploads(ctx context.Context, params *ListMultipartReadSetUploadsInput, optFns ...func(*Options)) (*ListMultipartReadSetUploadsOutput, error) {
 	if params == nil {
 		params = &ListMultipartReadSetUploadsInput{}

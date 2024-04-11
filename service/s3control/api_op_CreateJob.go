@@ -22,7 +22,7 @@ import (
 // specify. For more information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
 // in the Amazon S3 User Guide. Permissions For information about permissions
 // required to use the Batch Operations, see Granting permissions for S3 Batch
-// Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
+// Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-iam-role-policies.html)
 // in the Amazon S3 User Guide. Related actions include:
 //   - DescribeJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
 //   - ListJobs (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)

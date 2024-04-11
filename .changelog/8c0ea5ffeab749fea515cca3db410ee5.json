@@ -1,0 +1,8 @@
+{
+    "id": "8c0ea5ff-eab7-49fe-a515-cca3db410ee5",
+    "type": "feature",
+    "description": "Adds an updated version of smoke tests, including smithy trait, for SDK testing.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

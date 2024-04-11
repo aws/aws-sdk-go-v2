@@ -42,6 +42,9 @@ type DescribeDBEngineVersionsInput struct {
 	//   - aurora-mysql
 	//   - aurora-postgresql
 	//   - custom-oracle-ee
+	//   - custom-oracle-ee-cdb
+	//   - custom-oracle-se2
+	//   - custom-oracle-se2-cdb
 	//   - db2-ae
 	//   - db2-se
 	//   - mariadb

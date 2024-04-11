@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Stores to list.
+// Specifies the key value stores to list.
 func (c *Client) ListKeyValueStores(ctx context.Context, params *ListKeyValueStoresInput, optFns ...func(*Options)) (*ListKeyValueStoresOutput, error) {
 	if params == nil {
 		params = &ListKeyValueStoresInput{}
@@ -29,13 +29,13 @@ func (c *Client) ListKeyValueStores(ctx context.Context, params *ListKeyValueSto
 
 type ListKeyValueStoresInput struct {
 
-	// The marker associated with the Key Value Stores list.
+	// The marker associated with the key value stores list.
 	Marker *string
 
-	// The maximum number of items in the Key Value Stores list.
+	// The maximum number of items in the key value stores list.
 	MaxItems *int32
 
-	// The status of the request for the Key Value Stores list.
+	// The status of the request for the key value stores list.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -43,7 +43,7 @@ type ListKeyValueStoresInput struct {
 
 type ListKeyValueStoresOutput struct {
 
-	// The resulting Key Value Stores list.
+	// The resulting key value stores list.
 	KeyValueStoreList *types.KeyValueStoreList
 
 	// Metadata pertaining to the operation's result.
@@ -139,7 +139,7 @@ var _ ListKeyValueStoresAPIClient = (*Client)(nil)
 // ListKeyValueStoresPaginatorOptions is the paginator options for
 // ListKeyValueStores
 type ListKeyValueStoresPaginatorOptions struct {
-	// The maximum number of items in the Key Value Stores list.
+	// The maximum number of items in the key value stores list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -154,13 +154,15 @@ type AllowedMethods struct {
 // (formerly known as limit) on the number of cache behaviors that you can add to a
 // distribution, see Quotas (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
 // in the Amazon CloudFront Developer Guide. If you don't want to specify any cache
-// behaviors, include only an empty CacheBehaviors element. Don't include an empty
-// CacheBehavior element because this is invalid. To delete all cache behaviors in
-// an existing distribution, update the distribution configuration and include only
-// an empty CacheBehaviors element. To add, change, or remove one or more cache
-// behaviors, update the distribution configuration and specify all of the cache
-// behaviors that you want to include in the updated distribution. For more
-// information about cache behaviors, see Cache Behavior Settings (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
+// behaviors, include only an empty CacheBehaviors element. For more information,
+// see CacheBehaviors (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CacheBehaviors.html)
+// . Don't include an empty CacheBehavior element because this is invalid. To
+// delete all cache behaviors in an existing distribution, update the distribution
+// configuration and include only an empty CacheBehaviors element. To add, change,
+// or remove one or more cache behaviors, update the distribution configuration and
+// specify all of the cache behaviors that you want to include in the updated
+// distribution. For more information about cache behaviors, see Cache Behavior
+// Settings (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
 // in the Amazon CloudFront Developer Guide.
 type CacheBehavior struct {
 
@@ -941,7 +943,8 @@ type ContinuousDeploymentSingleHeaderConfig struct {
 type ContinuousDeploymentSingleWeightConfig struct {
 
 	// The percentage of traffic to send to a staging distribution, expressed as a
-	// decimal number between 0 and .15.
+	// decimal number between 0 and 0.15. For example, a value of 0.10 means 10% of
+	// traffic is sent to the staging distribution.
 	//
 	// This member is required.
 	Weight *float32
@@ -1270,8 +1273,8 @@ type DefaultCacheBehavior struct {
 	ForwardedValues *ForwardedValues
 
 	// A list of CloudFront functions that are associated with this cache behavior.
-	// CloudFront functions must be published to the LIVE stage to associate them with
-	// a cache behavior.
+	// Your functions must be published to the LIVE stage to associate them with a
+	// cache behavior.
 	FunctionAssociations *FunctionAssociations
 
 	// A complex type that contains zero or more Lambda@Edge function associations for
@@ -1489,7 +1492,7 @@ type DistributionConfig struct {
 	// in the Amazon CloudFront Developer Guide.
 	DefaultRootObject *string
 
-	// (Optional) Specify the maximum HTTP version(s) that you want viewers to use to
+	// (Optional) Specify the HTTP version(s) that you want viewers to use to
 	// communicate with CloudFront. The default value for new web distributions is
 	// http2 . Viewers that don't support HTTP/2 automatically use an earlier HTTP
 	// version. For viewers and CloudFront to use HTTP/2, viewers must support TLSv1.2
@@ -1570,9 +1573,9 @@ type DistributionConfig struct {
 	// A unique identifier that specifies the WAF web ACL, if any, to associate with
 	// this distribution. To specify a web ACL created using the latest version of WAF,
 	// use the ACL ARN, for example
-	// arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a
+	// arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111
 	// . To specify a web ACL created using WAF Classic, use the ACL ID, for example
-	// 473e64fd-f30b-4765-81a0-62ad96dd167a . WAF is a web application firewall that
+	// a1b2c3d4-5678-90ab-cdef-EXAMPLE11111 . WAF is a web application firewall that
 	// lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront,
 	// and lets you control access to your content. Based on conditions that you
 	// specify, such as the IP addresses that requests originate from or the values of
@@ -1765,7 +1768,9 @@ type DistributionSummary struct {
 	// This member is required.
 	Restrictions *Restrictions
 
-	// Whether the primary distribution has a staging distribution enabled.
+	// A Boolean that indicates whether this is a staging distribution. When this
+	// value is true , this is a staging distribution. When this value is false , this
+	// is not a staging distribution.
 	//
 	// This member is required.
 	Staging *bool
@@ -2192,8 +2197,8 @@ type FunctionAssociation struct {
 }
 
 // A list of CloudFront functions that are associated with a cache behavior in a
-// CloudFront distribution. CloudFront functions must be published to the LIVE
-// stage to associate them with a cache behavior.
+// CloudFront distribution. Your functions must be published to the LIVE stage to
+// associate them with a cache behavior.
 type FunctionAssociations struct {
 
 	// The number of CloudFront functions in the list.
@@ -2202,8 +2207,8 @@ type FunctionAssociations struct {
 	Quantity *int32
 
 	// The CloudFront functions that are associated with a cache behavior in a
-	// CloudFront distribution. CloudFront functions must be published to the LIVE
-	// stage to associate them with a cache behavior.
+	// CloudFront distribution. Your functions must be published to the LIVE stage to
+	// associate them with a cache behavior.
 	Items []FunctionAssociation
 
 	noSmithyDocumentSerde
@@ -2222,7 +2227,7 @@ type FunctionConfig struct {
 	// This member is required.
 	Runtime FunctionRuntime
 
-	// The configuration for the Key Value Store associations.
+	// The configuration for the key value store associations.
 	KeyValueStoreAssociations *KeyValueStoreAssociations
 
 	noSmithyDocumentSerde
@@ -2355,15 +2360,15 @@ type Headers struct {
 	noSmithyDocumentSerde
 }
 
-// The import source for the Key Value Store.
+// The import source for the key value store.
 type ImportSource struct {
 
-	// The Amazon Resource Name (ARN) of the import source for the Key Value Store.
+	// The Amazon Resource Name (ARN) of the import source for the key value store.
 	//
 	// This member is required.
 	SourceARN *string
 
-	// The source type of the import source for the Key Value Store.
+	// The source type of the import source for the key value store.
 	//
 	// This member is required.
 	SourceType ImportSourceType
@@ -2585,46 +2590,46 @@ type KeyPairIds struct {
 	noSmithyDocumentSerde
 }
 
-// The Key Value Store. Use this to separate data from function code, allowing you
-// to update data without having to publish a new version of a function. The Key
-// Value Store holds keys and their corresponding values.
+// The key value store. Use this to separate data from function code, allowing you
+// to update data without having to publish a new version of a function. The key
+// value store holds keys and their corresponding values.
 type KeyValueStore struct {
 
-	// The Amazon Resource Name (ARN) of the Key Value Store.
+	// The Amazon Resource Name (ARN) of the key value store.
 	//
 	// This member is required.
 	ARN *string
 
-	// A comment for the Key Value Store.
+	// A comment for the key value store.
 	//
 	// This member is required.
 	Comment *string
 
-	// The unique Id for the Key Value Store.
+	// The unique Id for the key value store.
 	//
 	// This member is required.
 	Id *string
 
-	// The last-modified time of the Key Value Store.
+	// The last-modified time of the key value store.
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The name of the Key Value Store.
+	// The name of the key value store.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of the Key Value Store.
+	// The status of the key value store.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// The Key Value Store association.
+// The key value store association.
 type KeyValueStoreAssociation struct {
 
-	// The Amazon Resource Name (ARN) of the Key Value Store association.
+	// The Amazon Resource Name (ARN) of the key value store association.
 	//
 	// This member is required.
 	KeyValueStoreARN *string
@@ -2632,37 +2637,37 @@ type KeyValueStoreAssociation struct {
 	noSmithyDocumentSerde
 }
 
-// The Key Value Store associations.
+// The key value store associations.
 type KeyValueStoreAssociations struct {
 
-	// The quantity of Key Value Store associations.
+	// The quantity of key value store associations.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// The items of the Key Value Store association.
+	// The items of the key value store association.
 	Items []KeyValueStoreAssociation
 
 	noSmithyDocumentSerde
 }
 
-// The Key Value Store list.
+// The key value store list.
 type KeyValueStoreList struct {
 
-	// The maximum number of items in the Key Value Store list.
+	// The maximum number of items in the key value store list.
 	//
 	// This member is required.
 	MaxItems *int32
 
-	// The quantity of the Key Value Store list.
+	// The quantity of the key value store list.
 	//
 	// This member is required.
 	Quantity *int32
 
-	// The items of the Key Value Store list.
+	// The items of the key value store list.
 	Items []KeyValueStore
 
-	// The next marker associated with the Key Value Store list.
+	// The next marker associated with the key value store list.
 	NextMarker *string
 
 	noSmithyDocumentSerde
@@ -2914,7 +2919,8 @@ type OriginAccessControl struct {
 // A CloudFront origin access control configuration.
 type OriginAccessControlConfig struct {
 
-	// A name to identify the origin access control.
+	// A name to identify the origin access control. You can specify up to 64
+	// characters.
 	//
 	// This member is required.
 	Name *string
@@ -4226,7 +4232,8 @@ type ResponseHeadersPolicySecurityHeadersConfig struct {
 
 	// Determines whether CloudFront includes the Strict-Transport-Security HTTP
 	// response header and the header's value. For more information about the
-	// Strict-Transport-Security HTTP response header, see Strict-Transport-Security (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)
+	// Strict-Transport-Security HTTP response header, see Security headers (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#understanding-response-headers-policies-security)
+	// in the Amazon CloudFront Developer Guide and Strict-Transport-Security (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)
 	// in the MDN Web Docs.
 	StrictTransportSecurity *ResponseHeadersPolicyStrictTransportSecurity
 
@@ -4401,10 +4408,14 @@ type S3Origin struct {
 // endpoint, use the CustomOriginConfig element instead.
 type S3OriginConfig struct {
 
-	// The CloudFront origin access identity to associate with the origin. Use an
-	// origin access identity to configure the origin so that viewers can only access
-	// objects in an Amazon S3 bucket through CloudFront. The format of the value is:
-	// origin-access-identity/cloudfront/ID-of-origin-access-identity where
+	// If you're using origin access control (OAC) instead of origin access identity,
+	// specify an empty OriginAccessIdentity element. For more information, see
+	// Restricting access to an Amazon Web Services (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html)
+	// in the Amazon CloudFront Developer Guide. The CloudFront origin access identity
+	// to associate with the origin. Use an origin access identity to configure the
+	// origin so that viewers can only access objects in an Amazon S3 bucket through
+	// CloudFront. The format of the value is:
+	// origin-access-identity/cloudfront/ID-of-origin-access-identity The
 	// ID-of-origin-access-identity is the value that CloudFront returned in the ID
 	// element when you created the origin access identity. If you want viewers to be
 	// able to access objects using either the CloudFront URL or the Amazon S3 URL,
@@ -4438,7 +4449,7 @@ type SessionStickinessConfig struct {
 
 	// The maximum amount of time to consider requests from the viewer as being part
 	// of the same session. Allowed values are 300–3600 seconds (5–60 minutes). The
-	// value must be less than or equal to IdleTTL .
+	// value must be greater than or equal to IdleTTL .
 	//
 	// This member is required.
 	MaximumTTL *int32

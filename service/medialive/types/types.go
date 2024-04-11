@@ -1128,6 +1128,139 @@ type ChannelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Placeholder documentation for CloudWatchAlarmTemplateGroupSummary
+type CloudWatchAlarmTemplateGroupSummary struct {
+
+	// A cloudwatch alarm template group's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A cloudwatch alarm template group's id. AWS provided template groups have ids
+	// that start with aws-
+	//
+	// This member is required.
+	Id *string
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// The number of templates in a group.
+	//
+	// This member is required.
+	TemplateCount *int32
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for CloudWatchAlarmTemplateSummary
+type CloudWatchAlarmTemplateSummary struct {
+
+	// A cloudwatch alarm template's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// The comparison operator used to compare the specified statistic and the
+	// threshold.
+	//
+	// This member is required.
+	ComparisonOperator CloudWatchAlarmTemplateComparisonOperator
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The number of periods over which data is compared to the specified threshold.
+	//
+	// This member is required.
+	EvaluationPeriods *int32
+
+	// A cloudwatch alarm template group's id. AWS provided template groups have ids
+	// that start with aws-
+	//
+	// This member is required.
+	GroupId *string
+
+	// A cloudwatch alarm template's id. AWS provided templates have ids that start
+	// with aws-
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the metric associated with the alarm. Must be compatible with
+	// targetResourceType.
+	//
+	// This member is required.
+	MetricName *string
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// The period, in seconds, over which the specified statistic is applied.
+	//
+	// This member is required.
+	Period *int32
+
+	// The statistic to apply to the alarm's metric data.
+	//
+	// This member is required.
+	Statistic CloudWatchAlarmTemplateStatistic
+
+	// The resource type this template should dynamically generate cloudwatch metric
+	// alarms for.
+	//
+	// This member is required.
+	TargetResourceType CloudWatchAlarmTemplateTargetResourceType
+
+	// The threshold value to compare with the specified statistic.
+	//
+	// This member is required.
+	Threshold *float64
+
+	// Specifies how missing data points are treated when evaluating the alarm's
+	// condition.
+	//
+	// This member is required.
+	TreatMissingData CloudWatchAlarmTemplateTreatMissingData
+
+	// The number of datapoints within the evaluation period that must be breaching to
+	// trigger the alarm.
+	DatapointsToAlarm *int32
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Cmaf Ingest Group Settings
 type CmafIngestGroupSettings struct {
 
@@ -1689,6 +1822,112 @@ type Esam struct {
 	// Optional data sent as zoneIdentity to identify the MediaLive channel to the
 	// POIS.
 	ZoneIdentity *string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for EventBridgeRuleTemplateGroupSummary
+type EventBridgeRuleTemplateGroupSummary struct {
+
+	// An eventbridge rule template group's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// An eventbridge rule template group's id. AWS provided template groups have ids
+	// that start with aws-
+	//
+	// This member is required.
+	Id *string
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// The number of templates in a group.
+	//
+	// This member is required.
+	TemplateCount *int32
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for EventBridgeRuleTemplateSummary
+type EventBridgeRuleTemplateSummary struct {
+
+	// An eventbridge rule template's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The number of targets configured to send matching events.
+	//
+	// This member is required.
+	EventTargetCount *int32
+
+	// The type of event to match with the rule.
+	//
+	// This member is required.
+	EventType EventBridgeRuleTemplateEventType
+
+	// An eventbridge rule template group's id. AWS provided template groups have ids
+	// that start with aws-
+	//
+	// This member is required.
+	GroupId *string
+
+	// An eventbridge rule template's id. AWS provided templates have ids that start
+	// with aws-
+	//
+	// This member is required.
+	Id *string
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The target to which to send matching events.
+type EventBridgeRuleTemplateTarget struct {
+
+	// Target ARNs must be either an SNS topic or CloudWatch log group.
+	//
+	// This member is required.
+	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -4029,6 +4268,52 @@ type MediaPackageOutputSettings struct {
 	noSmithyDocumentSerde
 }
 
+// An AWS resource used in media workflows.
+type MediaResource struct {
+
+	// Placeholder documentation for __listOfMediaResourceNeighbor
+	Destinations []MediaResourceNeighbor
+
+	// The logical name of an AWS media resource.
+	Name *string
+
+	// Placeholder documentation for __listOfMediaResourceNeighbor
+	Sources []MediaResourceNeighbor
+
+	noSmithyDocumentSerde
+}
+
+// A direct source or destination neighbor to an AWS media resource.
+type MediaResourceNeighbor struct {
+
+	// The ARN of a resource used in AWS media workflows.
+	//
+	// This member is required.
+	Arn *string
+
+	// The logical name of an AWS media resource.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the latest monitor deployment of a signal map.
+type MonitorDeployment struct {
+
+	// A signal map's monitor deployment status.
+	//
+	// This member is required.
+	Status SignalMapMonitorDeploymentStatus
+
+	// URI associated with a signal map's monitor deployment.
+	DetailsUri *string
+
+	// Error message associated with a failed monitor deployment of a signal map.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Settings to specify the rendering of motion graphics into the video stream.
 type MotionGraphicsActivateScheduleActionSettings struct {
 
@@ -5544,6 +5829,53 @@ type Scte35TimeSignalScheduleActionSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Placeholder documentation for SignalMapSummary
+type SignalMapSummary struct {
+
+	// A signal map's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A signal map's id.
+	//
+	// This member is required.
+	Id *string
+
+	// A signal map's monitor deployment status.
+	//
+	// This member is required.
+	MonitorDeploymentStatus SignalMapMonitorDeploymentStatus
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// A signal map's current status which is dependent on its lifecycle actions or
+	// associated jobs.
+	//
+	// This member is required.
+	Status SignalMapStatus
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Smpte Tt Destination Settings
 type SmpteTtDestinationSettings struct {
 	noSmithyDocumentSerde
@@ -5751,6 +6083,22 @@ type StopTimecode struct {
 	// specified, the clip continues to the end of the file. Enter the timecode as
 	// HH:MM:SS:FF or HH:MM:SS;FF.
 	Timecode *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the latest successful monitor deployment of a signal map.
+type SuccessfulMonitorDeployment struct {
+
+	// URI associated with a signal map's monitor deployment.
+	//
+	// This member is required.
+	DetailsUri *string
+
+	// A signal map's monitor deployment status.
+	//
+	// This member is required.
+	Status SignalMapMonitorDeploymentStatus
 
 	noSmithyDocumentSerde
 }

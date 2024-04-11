@@ -19,8 +19,8 @@ import (
 // This operation is not supported by directory buckets. Indicates whether the
 // specified Multi-Region Access Point has an access control policy that allows
 // public access. This action will always be routed to the US West (Oregon) Region.
-// For more information about the restrictions around managing Multi-Region Access
-// Points, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
+// For more information about the restrictions around working with Multi-Region
+// Access Points, see Multi-Region Access Point restrictions and limitations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html)
 // in the Amazon S3 User Guide. The following actions are related to
 // GetMultiRegionAccessPointPolicyStatus :
 //   - GetMultiRegionAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html)
@@ -50,8 +50,8 @@ type GetMultiRegionAccessPointPolicyStatusInput struct {
 
 	// Specifies the Multi-Region Access Point. The name of the Multi-Region Access
 	// Point is different from the alias. For more information about the distinction
-	// between the name and the alias of an Multi-Region Access Point, see Managing
-	// Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
+	// between the name and the alias of an Multi-Region Access Point, see Rules for
+	// naming Amazon S3 Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
 	// in the Amazon S3 User Guide.
 	//
 	// This member is required.

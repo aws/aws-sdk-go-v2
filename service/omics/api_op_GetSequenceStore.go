@@ -58,11 +58,18 @@ type GetSequenceStoreOutput struct {
 	// The store's description.
 	Description *string
 
+	// The algorithm family of the ETag.
+	ETagAlgorithmFamily types.ETagAlgorithmFamily
+
 	// An S3 location that is used to store files that have failed a direct upload.
 	FallbackLocation *string
 
 	// The store's name.
 	Name *string
+
+	// The S3 metadata of a sequence store, including the ARN and S3 URI of the S3
+	// bucket.
+	S3Access *types.SequenceStoreS3Access
 
 	// The store's server-side encryption (SSE) settings.
 	SseConfig *types.SseConfig

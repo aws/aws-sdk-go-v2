@@ -44,7 +44,10 @@ type ModifyDBInstanceInput struct {
 	// the value supplied must be at least 10% greater than the current value. Values
 	// that are not at least 10% greater than the existing value are rounded up so that
 	// they are 10% greater than the current value. For the valid values for allocated
-	// storage for each engine, see CreateDBInstance .
+	// storage for each engine, see CreateDBInstance . Constraints:
+	//   - When you increase the allocated storage for a DB instance that uses
+	//   Provisioned IOPS ( gp3 , io1 , or io2 storage type), you must also specify the
+	//   Iops parameter. You can use the current value for Iops .
 	AllocatedStorage *int32
 
 	// Specifies whether major version upgrades are allowed. Changing this parameter
@@ -347,6 +350,9 @@ type ModifyDBInstanceInput struct {
 	//   - The value supplied must be at least 10% greater than the current value. Values
 	//   that are not at least 10% greater than the existing value are rounded up so that
 	//   they are 10% greater than the current value.
+	//   - When you increase the Provisioned IOPS, you must also specify the
+	//   AllocatedStorage parameter. You can use the current value for AllocatedStorage
+	//   .
 	// Default: Uses existing setting
 	Iops *int32
 

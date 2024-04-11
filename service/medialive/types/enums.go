@@ -769,6 +769,108 @@ func (ChannelState) Values() []ChannelState {
 	}
 }
 
+type CloudWatchAlarmTemplateComparisonOperator string
+
+// Enum values for CloudWatchAlarmTemplateComparisonOperator
+const (
+	CloudWatchAlarmTemplateComparisonOperatorGreaterThanOrEqualToThreshold CloudWatchAlarmTemplateComparisonOperator = "GreaterThanOrEqualToThreshold"
+	CloudWatchAlarmTemplateComparisonOperatorGreaterThanThreshold          CloudWatchAlarmTemplateComparisonOperator = "GreaterThanThreshold"
+	CloudWatchAlarmTemplateComparisonOperatorLessThanThreshold             CloudWatchAlarmTemplateComparisonOperator = "LessThanThreshold"
+	CloudWatchAlarmTemplateComparisonOperatorLessThanOrEqualToThreshold    CloudWatchAlarmTemplateComparisonOperator = "LessThanOrEqualToThreshold"
+)
+
+// Values returns all known values for CloudWatchAlarmTemplateComparisonOperator.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CloudWatchAlarmTemplateComparisonOperator) Values() []CloudWatchAlarmTemplateComparisonOperator {
+	return []CloudWatchAlarmTemplateComparisonOperator{
+		"GreaterThanOrEqualToThreshold",
+		"GreaterThanThreshold",
+		"LessThanThreshold",
+		"LessThanOrEqualToThreshold",
+	}
+}
+
+type CloudWatchAlarmTemplateStatistic string
+
+// Enum values for CloudWatchAlarmTemplateStatistic
+const (
+	CloudWatchAlarmTemplateStatisticSampleCount CloudWatchAlarmTemplateStatistic = "SampleCount"
+	CloudWatchAlarmTemplateStatisticAverage     CloudWatchAlarmTemplateStatistic = "Average"
+	CloudWatchAlarmTemplateStatisticSum         CloudWatchAlarmTemplateStatistic = "Sum"
+	CloudWatchAlarmTemplateStatisticMinimum     CloudWatchAlarmTemplateStatistic = "Minimum"
+	CloudWatchAlarmTemplateStatisticMaximum     CloudWatchAlarmTemplateStatistic = "Maximum"
+)
+
+// Values returns all known values for CloudWatchAlarmTemplateStatistic. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CloudWatchAlarmTemplateStatistic) Values() []CloudWatchAlarmTemplateStatistic {
+	return []CloudWatchAlarmTemplateStatistic{
+		"SampleCount",
+		"Average",
+		"Sum",
+		"Minimum",
+		"Maximum",
+	}
+}
+
+type CloudWatchAlarmTemplateTargetResourceType string
+
+// Enum values for CloudWatchAlarmTemplateTargetResourceType
+const (
+	CloudWatchAlarmTemplateTargetResourceTypeCloudfrontDistribution     CloudWatchAlarmTemplateTargetResourceType = "CLOUDFRONT_DISTRIBUTION"
+	CloudWatchAlarmTemplateTargetResourceTypeMedialiveMultiplex         CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_MULTIPLEX"
+	CloudWatchAlarmTemplateTargetResourceTypeMedialiveChannel           CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_CHANNEL"
+	CloudWatchAlarmTemplateTargetResourceTypeMedialiveInputDevice       CloudWatchAlarmTemplateTargetResourceType = "MEDIALIVE_INPUT_DEVICE"
+	CloudWatchAlarmTemplateTargetResourceTypeMediapackageChannel        CloudWatchAlarmTemplateTargetResourceType = "MEDIAPACKAGE_CHANNEL"
+	CloudWatchAlarmTemplateTargetResourceTypeMediapackageOriginEndpoint CloudWatchAlarmTemplateTargetResourceType = "MEDIAPACKAGE_ORIGIN_ENDPOINT"
+	CloudWatchAlarmTemplateTargetResourceTypeMediaconnectFlow           CloudWatchAlarmTemplateTargetResourceType = "MEDIACONNECT_FLOW"
+	CloudWatchAlarmTemplateTargetResourceTypeS3Bucket                   CloudWatchAlarmTemplateTargetResourceType = "S3_BUCKET"
+)
+
+// Values returns all known values for CloudWatchAlarmTemplateTargetResourceType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CloudWatchAlarmTemplateTargetResourceType) Values() []CloudWatchAlarmTemplateTargetResourceType {
+	return []CloudWatchAlarmTemplateTargetResourceType{
+		"CLOUDFRONT_DISTRIBUTION",
+		"MEDIALIVE_MULTIPLEX",
+		"MEDIALIVE_CHANNEL",
+		"MEDIALIVE_INPUT_DEVICE",
+		"MEDIAPACKAGE_CHANNEL",
+		"MEDIAPACKAGE_ORIGIN_ENDPOINT",
+		"MEDIACONNECT_FLOW",
+		"S3_BUCKET",
+	}
+}
+
+type CloudWatchAlarmTemplateTreatMissingData string
+
+// Enum values for CloudWatchAlarmTemplateTreatMissingData
+const (
+	CloudWatchAlarmTemplateTreatMissingDataNotBreaching CloudWatchAlarmTemplateTreatMissingData = "notBreaching"
+	CloudWatchAlarmTemplateTreatMissingDataBreaching    CloudWatchAlarmTemplateTreatMissingData = "breaching"
+	CloudWatchAlarmTemplateTreatMissingDataIgnore       CloudWatchAlarmTemplateTreatMissingData = "ignore"
+	CloudWatchAlarmTemplateTreatMissingDataMissing      CloudWatchAlarmTemplateTreatMissingData = "missing"
+)
+
+// Values returns all known values for CloudWatchAlarmTemplateTreatMissingData.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CloudWatchAlarmTemplateTreatMissingData) Values() []CloudWatchAlarmTemplateTreatMissingData {
+	return []CloudWatchAlarmTemplateTreatMissingData{
+		"notBreaching",
+		"breaching",
+		"ignore",
+		"missing",
+	}
+}
+
 type CmafIngestSegmentLengthUnits string
 
 // Enum values for CmafIngestSegmentLengthUnits
@@ -1622,6 +1724,47 @@ func (EmbeddedScte20Detection) Values() []EmbeddedScte20Detection {
 	return []EmbeddedScte20Detection{
 		"AUTO",
 		"OFF",
+	}
+}
+
+type EventBridgeRuleTemplateEventType string
+
+// Enum values for EventBridgeRuleTemplateEventType
+const (
+	EventBridgeRuleTemplateEventTypeMedialiveMultiplexAlert             EventBridgeRuleTemplateEventType = "MEDIALIVE_MULTIPLEX_ALERT"
+	EventBridgeRuleTemplateEventTypeMedialiveMultiplexStateChange       EventBridgeRuleTemplateEventType = "MEDIALIVE_MULTIPLEX_STATE_CHANGE"
+	EventBridgeRuleTemplateEventTypeMedialiveChannelAlert               EventBridgeRuleTemplateEventType = "MEDIALIVE_CHANNEL_ALERT"
+	EventBridgeRuleTemplateEventTypeMedialiveChannelInputChange         EventBridgeRuleTemplateEventType = "MEDIALIVE_CHANNEL_INPUT_CHANGE"
+	EventBridgeRuleTemplateEventTypeMedialiveChannelStateChange         EventBridgeRuleTemplateEventType = "MEDIALIVE_CHANNEL_STATE_CHANGE"
+	EventBridgeRuleTemplateEventTypeMediapackageInputNotification       EventBridgeRuleTemplateEventType = "MEDIAPACKAGE_INPUT_NOTIFICATION"
+	EventBridgeRuleTemplateEventTypeMediapackageKeyProviderNotification EventBridgeRuleTemplateEventType = "MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION"
+	EventBridgeRuleTemplateEventTypeMediapackageHarvestJobNotification  EventBridgeRuleTemplateEventType = "MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION"
+	EventBridgeRuleTemplateEventTypeSignalMapActiveAlarm                EventBridgeRuleTemplateEventType = "SIGNAL_MAP_ACTIVE_ALARM"
+	EventBridgeRuleTemplateEventTypeMediaconnectAlert                   EventBridgeRuleTemplateEventType = "MEDIACONNECT_ALERT"
+	EventBridgeRuleTemplateEventTypeMediaconnectSourceHealth            EventBridgeRuleTemplateEventType = "MEDIACONNECT_SOURCE_HEALTH"
+	EventBridgeRuleTemplateEventTypeMediaconnectOutputHealth            EventBridgeRuleTemplateEventType = "MEDIACONNECT_OUTPUT_HEALTH"
+	EventBridgeRuleTemplateEventTypeMediaconnectFlowStatusChange        EventBridgeRuleTemplateEventType = "MEDIACONNECT_FLOW_STATUS_CHANGE"
+)
+
+// Values returns all known values for EventBridgeRuleTemplateEventType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (EventBridgeRuleTemplateEventType) Values() []EventBridgeRuleTemplateEventType {
+	return []EventBridgeRuleTemplateEventType{
+		"MEDIALIVE_MULTIPLEX_ALERT",
+		"MEDIALIVE_MULTIPLEX_STATE_CHANGE",
+		"MEDIALIVE_CHANNEL_ALERT",
+		"MEDIALIVE_CHANNEL_INPUT_CHANGE",
+		"MEDIALIVE_CHANNEL_STATE_CHANGE",
+		"MEDIAPACKAGE_INPUT_NOTIFICATION",
+		"MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION",
+		"MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION",
+		"SIGNAL_MAP_ACTIVE_ALARM",
+		"MEDIACONNECT_ALERT",
+		"MEDIACONNECT_SOURCE_HEALTH",
+		"MEDIACONNECT_OUTPUT_HEALTH",
+		"MEDIACONNECT_FLOW_STATUS_CHANGE",
 	}
 }
 
@@ -5279,6 +5422,73 @@ func (Scte35WebDeliveryAllowedFlag) Values() []Scte35WebDeliveryAllowedFlag {
 	return []Scte35WebDeliveryAllowedFlag{
 		"WEB_DELIVERY_NOT_ALLOWED",
 		"WEB_DELIVERY_ALLOWED",
+	}
+}
+
+type SignalMapMonitorDeploymentStatus string
+
+// Enum values for SignalMapMonitorDeploymentStatus
+const (
+	SignalMapMonitorDeploymentStatusNotDeployed                SignalMapMonitorDeploymentStatus = "NOT_DEPLOYED"
+	SignalMapMonitorDeploymentStatusDryRunDeploymentComplete   SignalMapMonitorDeploymentStatus = "DRY_RUN_DEPLOYMENT_COMPLETE"
+	SignalMapMonitorDeploymentStatusDryRunDeploymentFailed     SignalMapMonitorDeploymentStatus = "DRY_RUN_DEPLOYMENT_FAILED"
+	SignalMapMonitorDeploymentStatusDryRunDeploymentInProgress SignalMapMonitorDeploymentStatus = "DRY_RUN_DEPLOYMENT_IN_PROGRESS"
+	SignalMapMonitorDeploymentStatusDeploymentComplete         SignalMapMonitorDeploymentStatus = "DEPLOYMENT_COMPLETE"
+	SignalMapMonitorDeploymentStatusDeploymentFailed           SignalMapMonitorDeploymentStatus = "DEPLOYMENT_FAILED"
+	SignalMapMonitorDeploymentStatusDeploymentInProgress       SignalMapMonitorDeploymentStatus = "DEPLOYMENT_IN_PROGRESS"
+	SignalMapMonitorDeploymentStatusDeleteComplete             SignalMapMonitorDeploymentStatus = "DELETE_COMPLETE"
+	SignalMapMonitorDeploymentStatusDeleteFailed               SignalMapMonitorDeploymentStatus = "DELETE_FAILED"
+	SignalMapMonitorDeploymentStatusDeleteInProgress           SignalMapMonitorDeploymentStatus = "DELETE_IN_PROGRESS"
+)
+
+// Values returns all known values for SignalMapMonitorDeploymentStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SignalMapMonitorDeploymentStatus) Values() []SignalMapMonitorDeploymentStatus {
+	return []SignalMapMonitorDeploymentStatus{
+		"NOT_DEPLOYED",
+		"DRY_RUN_DEPLOYMENT_COMPLETE",
+		"DRY_RUN_DEPLOYMENT_FAILED",
+		"DRY_RUN_DEPLOYMENT_IN_PROGRESS",
+		"DEPLOYMENT_COMPLETE",
+		"DEPLOYMENT_FAILED",
+		"DEPLOYMENT_IN_PROGRESS",
+		"DELETE_COMPLETE",
+		"DELETE_FAILED",
+		"DELETE_IN_PROGRESS",
+	}
+}
+
+type SignalMapStatus string
+
+// Enum values for SignalMapStatus
+const (
+	SignalMapStatusCreateInProgress SignalMapStatus = "CREATE_IN_PROGRESS"
+	SignalMapStatusCreateComplete   SignalMapStatus = "CREATE_COMPLETE"
+	SignalMapStatusCreateFailed     SignalMapStatus = "CREATE_FAILED"
+	SignalMapStatusUpdateInProgress SignalMapStatus = "UPDATE_IN_PROGRESS"
+	SignalMapStatusUpdateComplete   SignalMapStatus = "UPDATE_COMPLETE"
+	SignalMapStatusUpdateReverted   SignalMapStatus = "UPDATE_REVERTED"
+	SignalMapStatusUpdateFailed     SignalMapStatus = "UPDATE_FAILED"
+	SignalMapStatusReady            SignalMapStatus = "READY"
+	SignalMapStatusNotReady         SignalMapStatus = "NOT_READY"
+)
+
+// Values returns all known values for SignalMapStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SignalMapStatus) Values() []SignalMapStatus {
+	return []SignalMapStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_COMPLETE",
+		"UPDATE_REVERTED",
+		"UPDATE_FAILED",
+		"READY",
+		"NOT_READY",
 	}
 }
 

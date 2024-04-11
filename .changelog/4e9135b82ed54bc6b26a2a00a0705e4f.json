@@ -1,0 +1,8 @@
+{
+    "id": "4e9135b8-2ed5-4bc6-b26a-2a00a0705e4f",
+    "type": "feature",
+    "description": "CloudFront origin access control extends support to AWS Lambda function URLs and AWS Elemental MediaPackage v2 origins.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

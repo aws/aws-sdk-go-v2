@@ -69,7 +69,7 @@ type StartRunInput struct {
 	// The ID of a run to duplicate.
 	RunId *string
 
-	// A storage capacity for the run in gigabytes.
+	// A storage capacity for the run in gibibytes.
 	StorageCapacity *int32
 
 	// Tags for the run.

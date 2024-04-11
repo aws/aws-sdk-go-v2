@@ -29,10 +29,14 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 
 type DescribeOrderableDBInstanceOptionsInput struct {
 
-	// The name of the engine to describe DB instance options for. Valid Values:
+	// The name of the database engine to describe DB instance options for. Valid
+	// Values:
 	//   - aurora-mysql
 	//   - aurora-postgresql
 	//   - custom-oracle-ee
+	//   - custom-oracle-ee-cdb
+	//   - custom-oracle-se2
+	//   - custom-oracle-se2-cdb
 	//   - db2-ae
 	//   - db2-se
 	//   - mariadb
@@ -79,7 +83,7 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 10000.
+	// Default: 100 Constraints: Minimum 20, maximum 1000.
 	MaxRecords *int32
 
 	// Specifies whether to show only VPC or non-VPC offerings. RDS Custom supports
@@ -202,7 +206,7 @@ type DescribeOrderableDBInstanceOptionsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 10000.
+	// Default: 100 Constraints: Minimum 20, maximum 1000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

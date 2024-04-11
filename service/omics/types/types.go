@@ -399,6 +399,9 @@ type FileInformation struct {
 	// The file's part size.
 	PartSize *int64
 
+	// The S3 URI metadata of a sequence store.
+	S3Access *ReadSetS3Access
+
 	// The file's total parts.
 	TotalParts *int32
 
@@ -893,6 +896,15 @@ type ReadSetListItem struct {
 	noSmithyDocumentSerde
 }
 
+// The S3 URI for each read set file.
+type ReadSetS3Access struct {
+
+	// The S3 URI for each read set file.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Filter settings that select for read set upload parts of interest.
 type ReadSetUploadPartListFilter struct {
 
@@ -1195,6 +1207,9 @@ type SequenceStoreDetail struct {
 	// The store's description.
 	Description *string
 
+	// The algorithm family of the ETag.
+	ETagAlgorithmFamily ETagAlgorithmFamily
+
 	// An S3 location that is used to store files that have failed a direct upload.
 	FallbackLocation *string
 
@@ -1218,6 +1233,18 @@ type SequenceStoreFilter struct {
 
 	// A name to filter on.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The S3 access metadata of the sequence store.
+type SequenceStoreS3Access struct {
+
+	// This is ARN of the access point associated with the S3 bucket storing read sets.
+	S3AccessPointArn *string
+
+	// The S3 URI of the sequence store.
+	S3Uri *string
 
 	noSmithyDocumentSerde
 }

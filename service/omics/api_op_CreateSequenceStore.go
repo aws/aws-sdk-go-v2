@@ -42,6 +42,9 @@ type CreateSequenceStoreInput struct {
 	// A description for the store.
 	Description *string
 
+	// The ETag algorithm family to use for ingested read sets.
+	ETagAlgorithmFamily types.ETagAlgorithmFamily
+
 	// An S3 location that is used to store files that have failed a direct upload.
 	FallbackLocation *string
 
@@ -73,6 +76,9 @@ type CreateSequenceStoreOutput struct {
 
 	// The store's description.
 	Description *string
+
+	// The algorithm family of the ETag.
+	ETagAlgorithmFamily types.ETagAlgorithmFamily
 
 	// An S3 location that is used to store files that have failed a direct upload.
 	FallbackLocation *string

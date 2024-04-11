@@ -39,6 +39,7 @@ type DescribeEngineDefaultParametersInput struct {
 	//   - aurora-postgresql13
 	//   - aurora-postgresql14
 	//   - custom-oracle-ee-19
+	//   - custom-oracle-ee-cdb-19
 	//   - db2-ae
 	//   - db2-se
 	//   - mariadb10.2

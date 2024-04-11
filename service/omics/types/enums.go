@@ -94,9 +94,15 @@ type ETagAlgorithm string
 
 // Enum values for ETagAlgorithm
 const (
-	ETagAlgorithmFastqMd5up ETagAlgorithm = "FASTQ_MD5up"
-	ETagAlgorithmBamMd5up   ETagAlgorithm = "BAM_MD5up"
-	ETagAlgorithmCramMd5up  ETagAlgorithm = "CRAM_MD5up"
+	ETagAlgorithmFastqMd5up    ETagAlgorithm = "FASTQ_MD5up"
+	ETagAlgorithmBamMd5up      ETagAlgorithm = "BAM_MD5up"
+	ETagAlgorithmCramMd5up     ETagAlgorithm = "CRAM_MD5up"
+	ETagAlgorithmFastqSha256up ETagAlgorithm = "FASTQ_SHA256up"
+	ETagAlgorithmBamSha256up   ETagAlgorithm = "BAM_SHA256up"
+	ETagAlgorithmCramSha256up  ETagAlgorithm = "CRAM_SHA256up"
+	ETagAlgorithmFastqSha512up ETagAlgorithm = "FASTQ_SHA512up"
+	ETagAlgorithmBamSha512up   ETagAlgorithm = "BAM_SHA512up"
+	ETagAlgorithmCramSha512up  ETagAlgorithm = "CRAM_SHA512up"
 )
 
 // Values returns all known values for ETagAlgorithm. Note that this can be
@@ -107,6 +113,32 @@ func (ETagAlgorithm) Values() []ETagAlgorithm {
 		"FASTQ_MD5up",
 		"BAM_MD5up",
 		"CRAM_MD5up",
+		"FASTQ_SHA256up",
+		"BAM_SHA256up",
+		"CRAM_SHA256up",
+		"FASTQ_SHA512up",
+		"BAM_SHA512up",
+		"CRAM_SHA512up",
+	}
+}
+
+type ETagAlgorithmFamily string
+
+// Enum values for ETagAlgorithmFamily
+const (
+	ETagAlgorithmFamilyMd5up    ETagAlgorithmFamily = "MD5up"
+	ETagAlgorithmFamilySha256up ETagAlgorithmFamily = "SHA256up"
+	ETagAlgorithmFamilySha512up ETagAlgorithmFamily = "SHA512up"
+)
+
+// Values returns all known values for ETagAlgorithmFamily. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ETagAlgorithmFamily) Values() []ETagAlgorithmFamily {
+	return []ETagAlgorithmFamily{
+		"MD5up",
+		"SHA256up",
+		"SHA512up",
 	}
 }
 

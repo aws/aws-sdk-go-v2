@@ -1178,6 +1178,11 @@ func awsRestjson1_serializeOpDocumentCreateSequenceStoreInput(v *CreateSequenceS
 		ok.String(*v.Description)
 	}
 
+	if len(v.ETagAlgorithmFamily) > 0 {
+		ok := object.Key("eTagAlgorithmFamily")
+		ok.String(string(v.ETagAlgorithmFamily))
+	}
+
 	if v.FallbackLocation != nil {
 		ok := object.Key("fallbackLocation")
 		ok.String(*v.FallbackLocation)

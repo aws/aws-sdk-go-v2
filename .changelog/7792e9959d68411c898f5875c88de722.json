@@ -1,0 +1,8 @@
+{
+    "id": "7792e995-9d68-411c-898f-5875c88de722",
+    "type": "feature",
+    "description": "For CreateOpenIDConnectProvider API, the ThumbprintList parameter is no longer required.",
+    "modules": [
+        "service/iam"
+    ]
+}

@@ -36,8 +36,6 @@ import (
 //   - ap-southeast-2
 //   - ap-northeast-1
 //   - eu-west-1
-//
-// Your Amazon S3 bucket does not need to be in these five Regions.
 func (c *Client) SubmitMultiRegionAccessPointRoutes(ctx context.Context, params *SubmitMultiRegionAccessPointRoutesInput, optFns ...func(*Options)) (*SubmitMultiRegionAccessPointRoutesOutput, error) {
 	if params == nil {
 		params = &SubmitMultiRegionAccessPointRoutesInput{}

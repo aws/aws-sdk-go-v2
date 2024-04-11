@@ -372,8 +372,10 @@ type OriginAccessControlOriginTypes string
 
 // Enum values for OriginAccessControlOriginTypes
 const (
-	OriginAccessControlOriginTypesS3         OriginAccessControlOriginTypes = "s3"
-	OriginAccessControlOriginTypesMediastore OriginAccessControlOriginTypes = "mediastore"
+	OriginAccessControlOriginTypesS3             OriginAccessControlOriginTypes = "s3"
+	OriginAccessControlOriginTypesMediastore     OriginAccessControlOriginTypes = "mediastore"
+	OriginAccessControlOriginTypesMediapackagev2 OriginAccessControlOriginTypes = "mediapackagev2"
+	OriginAccessControlOriginTypesLambda         OriginAccessControlOriginTypes = "lambda"
 )
 
 // Values returns all known values for OriginAccessControlOriginTypes. Note that
@@ -384,6 +386,8 @@ func (OriginAccessControlOriginTypes) Values() []OriginAccessControlOriginTypes 
 	return []OriginAccessControlOriginTypes{
 		"s3",
 		"mediastore",
+		"mediapackagev2",
+		"lambda",
 	}
 }
 

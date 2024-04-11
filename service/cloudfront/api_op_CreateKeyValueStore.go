@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Store resource to add to your account. In your account,
-// the Key Value Store names must be unique. You can also import Key Value Store
+// Specifies the key value store resource to add to your account. In your account,
+// the key value store names must be unique. You can also import key value store
 // data in JSON format from an S3 bucket by providing a valid ImportSource that
 // you own.
 func (c *Client) CreateKeyValueStore(ctx context.Context, params *CreateKeyValueStoreInput, optFns ...func(*Options)) (*CreateKeyValueStoreOutput, error) {
@@ -32,13 +32,13 @@ func (c *Client) CreateKeyValueStore(ctx context.Context, params *CreateKeyValue
 
 type CreateKeyValueStoreInput struct {
 
-	// The name of the Key Value Store. The maximum length of the name is 32
-	// characters.
+	// The name of the key value store. The minimum length is 1 character and the
+	// maximum length is 64 characters.
 	//
 	// This member is required.
 	Name *string
 
-	// The comment of the Key Value Store.
+	// The comment of the key value store.
 	Comment *string
 
 	// The S3 bucket that provides the source for the import. The source must be in a
@@ -50,13 +50,13 @@ type CreateKeyValueStoreInput struct {
 
 type CreateKeyValueStoreOutput struct {
 
-	// The ETag in the resulting Key Value Store.
+	// The ETag in the resulting key value store.
 	ETag *string
 
-	// The resulting Key Value Store.
+	// The resulting key value store.
 	KeyValueStore *types.KeyValueStore
 
-	// The location of the resulting Key Value Store.
+	// The location of the resulting key value store.
 	Location *string
 
 	// Metadata pertaining to the operation's result.

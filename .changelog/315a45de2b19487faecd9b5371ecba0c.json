@@ -1,0 +1,8 @@
+{
+    "id": "315a45de-2b19-487f-aecd-9b5371ecba0c",
+    "type": "feature",
+    "description": "This release adds the task properties field to attempt details and the name field on EKS container detail.",
+    "modules": [
+        "service/batch"
+    ]
+}

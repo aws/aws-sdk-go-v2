@@ -62,6 +62,8 @@ type CreateDBInstanceInput struct {
 	//   - aurora-postgresql (for Aurora PostgreSQL DB instances)
 	//   - custom-oracle-ee (for RDS Custom for Oracle DB instances)
 	//   - custom-oracle-ee-cdb (for RDS Custom for Oracle DB instances)
+	//   - custom-oracle-se2 (for RDS Custom for Oracle DB instances)
+	//   - custom-oracle-se2-cdb (for RDS Custom for Oracle DB instances)
 	//   - custom-sqlserver-ee (for RDS Custom for SQL Server DB instances)
 	//   - custom-sqlserver-se (for RDS Custom for SQL Server DB instances)
 	//   - custom-sqlserver-web (for RDS Custom for SQL Server DB instances)

@@ -47,6 +47,11 @@ type PutAnomalyDetectorInput struct {
 	// Deprecated: Use SingleMetricAnomalyDetector.
 	Dimensions []types.Dimension
 
+	// Use this object to include parameters to provide information about your metric
+	// to CloudWatch to help it build more accurate anomaly detection models.
+	// Currently, it includes the PeriodicSpikes parameter.
+	MetricCharacteristics *types.MetricCharacteristics
+
 	// The metric math anomaly detector to be created. When using
 	// MetricMathAnomalyDetector , you cannot include the following parameters in the
 	// same operation:

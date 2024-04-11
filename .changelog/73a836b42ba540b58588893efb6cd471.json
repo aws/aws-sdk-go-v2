@@ -1,0 +1,8 @@
+{
+    "id": "73a836b4-2ba5-40b5-8588-893efb6cd471",
+    "type": "feature",
+    "description": "LogConfiguration ARN validation fixes",
+    "modules": [
+        "service/pipes"
+    ]
+}

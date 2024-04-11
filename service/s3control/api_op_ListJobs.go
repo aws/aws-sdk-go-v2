@@ -17,7 +17,7 @@ import (
 )
 
 // Lists current S3 Batch Operations jobs as well as the jobs that have ended
-// within the last 30 days for the Amazon Web Services account making the request.
+// within the last 90 days for the Amazon Web Services account making the request.
 // For more information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
 // in the Amazon S3 User Guide. Permissions To use the ListJobs operation, you
 // must have permission to perform the s3:ListJobs action. Related actions

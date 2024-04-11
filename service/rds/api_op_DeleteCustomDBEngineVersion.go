@@ -44,8 +44,11 @@ func (c *Client) DeleteCustomDBEngineVersion(ctx context.Context, params *Delete
 
 type DeleteCustomDBEngineVersionInput struct {
 
-	// The database engine. The only supported engines are custom-oracle-ee and
-	// custom-oracle-ee-cdb .
+	// The database engine. RDS Custom for Oracle supports the following values:
+	//   - custom-oracle-ee
+	//   - custom-oracle-ee-cdb
+	//   - custom-oracle-se2
+	//   - custom-oracle-se2-cdb
 	//
 	// This member is required.
 	Engine *string
