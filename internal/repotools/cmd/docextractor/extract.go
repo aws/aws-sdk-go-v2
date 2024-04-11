@@ -401,35 +401,60 @@ func extractFunctions(packageName string, types map[string]*ast.TypeSpec, functi
 		}
 
 		members := i.Members
-		members = append(members,
-			jewelryItem{
-				Type:        jewelryItemKindMethod,
-				Name:        methodName,
-				Members:     []jewelryItem{},
-				Tags:        []string{},
-				OtherBlocks: map[string]string{},
-				Params:      params,
-				Returns:     returns,
-				Summary:     formatComment(vf.Doc),
-				BreadCrumbs: []breadCrumb{
-					{
-						Name: packageName,
-						Kind: jewelryItemKindPackage,
-					},
-					{
-						Name: receiverName,
-						Kind: jewelryItemKindStruct,
-					},
-					{
-						Name: methodName,
-						Kind: jewelryItemKindMethod,
+
+		// without proper runtime documentation, we have to bridge the gap to
+		// event payloads for now
+		if vf.Name.Name == "GetStream" {
+			stream := strings.TrimSuffix(receiverName, whichSuffix(receiverName)) + "EventStream"
+			members = append(members, jewelryItem{
+				Name:    "(event stream payload)",
+				Summary: "The event streaming payload union for this structure.",
+				Signature: typeSignature{
+					Signature: fmt.Sprintf("[%s](-aws-sdk-client-%s!%s:Union)", stream, packageName, stream),
+				},
+			})
+		} else {
+			members = append(members,
+				jewelryItem{
+					Type:        jewelryItemKindMethod,
+					Name:        methodName,
+					Members:     []jewelryItem{},
+					Tags:        []string{},
+					OtherBlocks: map[string]string{},
+					Params:      params,
+					Returns:     returns,
+					Summary:     formatComment(vf.Doc),
+					BreadCrumbs: []breadCrumb{
+						{
+							Name: packageName,
+							Kind: jewelryItemKindPackage,
+						},
+						{
+							Name: receiverName,
+							Kind: jewelryItemKindStruct,
+						},
+						{
+							Name: methodName,
+							Kind: jewelryItemKindMethod,
+						},
 					},
 				},
-			},
-		)
+			)
+		}
+
 		i.Members = members
 		items[receiverName] = i
 	}
 
 	return nil
+}
+
+// "Input" or "Output" on a structure
+func whichSuffix(name string) string {
+	if strings.HasSuffix(name, "Input") {
+		return "Input"
+	} else if strings.HasSuffix(name, "Output") {
+		return "Output"
+	}
+	panic("expected -Input or -Output suffix")
 }
