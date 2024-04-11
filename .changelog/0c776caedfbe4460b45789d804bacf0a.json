@@ -1,8 +1,0 @@
-{
-    "id": "0c776cae-dfbe-4460-b457-89d804bacf0a",
-    "type": "documentation",
-    "description": "Documentation updates for Amazon S3-control.",
-    "modules": [
-        "service/s3control"
-    ]
-}

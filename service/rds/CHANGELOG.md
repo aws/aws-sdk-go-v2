@@ -1,3 +1,7 @@
+# v1.77.1 (2024-04-11)
+
+* **Documentation**: Updates Amazon RDS documentation for Standard Edition 2 support in RDS Custom for Oracle.
+
 # v1.77.0 (2024-04-09)
 
 * **Feature**: This release adds support for specifying the CA certificate to use for the new db instance when restoring from db snapshot, restoring from s3, restoring to point in time, and creating a db instance read replica.

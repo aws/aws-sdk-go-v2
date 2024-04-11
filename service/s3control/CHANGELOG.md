@@ -1,3 +1,7 @@
+# v1.44.5 (2024-04-11)
+
+* **Documentation**: Documentation updates for Amazon S3-control.
+
 # v1.44.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

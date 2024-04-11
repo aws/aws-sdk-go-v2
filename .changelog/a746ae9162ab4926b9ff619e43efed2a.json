@@ -1,8 +1,0 @@
-{
-    "id": "a746ae91-62ab-4926-b9ff-619e43efed2a",
-    "type": "documentation",
-    "description": "Support access tokens for Bitbucket sources",
-    "modules": [
-        "service/codebuild"
-    ]
-}

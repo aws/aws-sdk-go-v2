@@ -1,3 +1,7 @@
+# v1.34.1 (2024-04-11)
+
+* **Documentation**: Support access tokens for Bitbucket sources
+
 # v1.34.0 (2024-04-09)
 
 * **Feature**: Add new webhook filter types for GitHub webhooks

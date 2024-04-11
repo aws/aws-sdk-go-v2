@@ -1,8 +1,0 @@
-{
-    "id": "29ba9d42-eb91-426e-b131-ade780b7381c",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for Standard Edition 2 support in RDS Custom for Oracle.",
-    "modules": [
-        "service/rds"
-    ]
-}

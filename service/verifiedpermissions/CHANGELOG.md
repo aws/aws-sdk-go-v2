@@ -1,3 +1,7 @@
+# v1.13.1 (2024-04-11)
+
+* No change notes available for this release.
+
 # v1.13.0 (2024-04-05)
 
 * **Feature**: Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token.

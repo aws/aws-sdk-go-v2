@@ -11,19 +11,19 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.34.4
 	github.com/aws/aws-sdk-go-v2/service/athena v1.40.4
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.40.5
-	github.com/aws/aws-sdk-go-v2/service/batch v1.36.1
+	github.com/aws/aws-sdk-go-v2/service/batch v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.49.0
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.35.4
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.21.4
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.39.2
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.37.0
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.34.0
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.38.0
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.21.4
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.36.3
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.36.4
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.46.4
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.38.4
@@ -49,7 +49,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/glue v1.78.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.24.4
-	github.com/aws/aws-sdk-go-v2/service/iam v1.31.4
+	github.com/aws/aws-sdk-go-v2/service/iam v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.21.4
 	github.com/aws/aws-sdk-go-v2/service/iot v1.53.3
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.27.4
@@ -61,14 +61,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/polly v1.39.6
-	github.com/aws/aws-sdk-go-v2/service/rds v1.77.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.77.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.43.5
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.4
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.53.1
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.4
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.5
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.6
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/ses v1.22.4

@@ -1,3 +1,25 @@
+# Release (2024-04-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.37.0](service/batch/CHANGELOG.md#v1370-2024-04-11)
+  * **Feature**: This release adds the task properties field to attempt details and the name field on EKS container detail.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.36.0](service/cloudfront/CHANGELOG.md#v1360-2024-04-11)
+  * **Feature**: CloudFront origin access control extends support to AWS Lambda function URLs and AWS Elemental MediaPackage v2 origins.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.38.0](service/cloudwatch/CHANGELOG.md#v1380-2024-04-11)
+  * **Feature**: This release adds support for Metric Characteristics for CloudWatch Anomaly Detection. Anomaly Detector now takes Metric Characteristics object with Periodic Spikes boolean field that tells Anomaly Detection that spikes that repeat at the same time every week are part of the expected pattern.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.34.1](service/codebuild/CHANGELOG.md#v1341-2024-04-11)
+  * **Documentation**: Support access tokens for Bitbucket sources
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.32.0](service/iam/CHANGELOG.md#v1320-2024-04-11)
+  * **Feature**: For CreateOpenIDConnectProvider API, the ThumbprintList parameter is no longer required.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.51.0](service/medialive/CHANGELOG.md#v1510-2024-04-11)
+  * **Feature**: AWS Elemental MediaLive introduces workflow monitor, a new feature that enables the visualization and monitoring of your media workflows. Create signal maps of your existing workflows and monitor them by creating notification and monitoring template groups.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.20.0](service/omics/CHANGELOG.md#v1200-2024-04-11)
+  * **Feature**: This release adds support for retrieval of S3 direct access metadata on sequence stores and read sets, and adds support for SHA256up and SHA512up HealthOmics ETags.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.77.1](service/rds/CHANGELOG.md#v1771-2024-04-11)
+  * **Documentation**: Updates Amazon RDS documentation for Standard Edition 2 support in RDS Custom for Oracle.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.44.5](service/s3control/CHANGELOG.md#v1445-2024-04-11)
+  * **Documentation**: Documentation updates for Amazon S3-control.
+
 # Release (2024-04-10)
 
 ## Module Highlights

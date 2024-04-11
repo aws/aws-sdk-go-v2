@@ -1,3 +1,7 @@
+# v1.20.0 (2024-04-11)
+
+* **Feature**: This release adds support for retrieval of S3 direct access metadata on sequence stores and read sets, and adds support for SHA256up and SHA512up HealthOmics ETags.
+
 # v1.19.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

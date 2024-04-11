@@ -1,3 +1,7 @@
+# v1.51.0 (2024-04-11)
+
+* **Feature**: AWS Elemental MediaLive introduces workflow monitor, a new feature that enables the visualization and monitoring of your media workflows. Create signal maps of your existing workflows and monitor them by creating notification and monitoring template groups.
+
 # v1.50.0 (2024-04-03)
 
 * **Feature**: Cmaf Ingest outputs are now supported in Media Live

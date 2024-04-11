@@ -1,3 +1,7 @@
+# v1.37.0 (2024-04-11)
+
+* **Feature**: This release adds the task properties field to attempt details and the name field on EKS container detail.
+
 # v1.36.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

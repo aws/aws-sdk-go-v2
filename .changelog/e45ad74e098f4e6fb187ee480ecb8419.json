@@ -1,8 +1,0 @@
-{
-    "id": "e45ad74e-098f-4e6f-b187-ee480ecb8419",
-    "type": "feature",
-    "description": "This release adds support for retrieval of S3 direct access metadata on sequence stores and read sets, and adds support for SHA256up and SHA512up HealthOmics ETags.",
-    "modules": [
-        "service/omics"
-    ]
-}

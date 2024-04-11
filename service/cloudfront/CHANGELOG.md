@@ -1,3 +1,7 @@
+# v1.36.0 (2024-04-11)
+
+* **Feature**: CloudFront origin access control extends support to AWS Lambda function URLs and AWS Elemental MediaPackage v2 origins.
+
 # v1.35.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

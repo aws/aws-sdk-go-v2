@@ -1,8 +1,0 @@
-{
-    "id": "689cb10c-5628-4c65-b7bb-6498c0982bf2",
-    "type": "feature",
-    "description": "This release adds support for Metric Characteristics for CloudWatch Anomaly Detection. Anomaly Detector now takes Metric Characteristics object with Periodic Spikes boolean field that tells Anomaly Detection that spikes that repeat at the same time every week are part of the expected pattern.",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}
