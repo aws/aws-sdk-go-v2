@@ -118,7 +118,7 @@
                     "name": "batch"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Batch</fullname>\n         <p>Using Batch, you can run batch computing workloads on the Amazon Web Services Cloud. Batch computing is a common means for\n   developers, scientists, and engineers to access large amounts of compute resources. Batch uses the advantages of\n   the batch computing to remove the undifferentiated heavy lifting of configuring and managing required infrastructure.\n   At the same time, it also adopts a familiar batch computing software approach. You can use Batch to efficiently\n   provision resources d, and work toward eliminating capacity constraints, reducing your overall compute costs, and\n   delivering results more quickly.</p>\n         <p>As a fully managed service, Batch can run batch computing workloads of any scale. Batch automatically\n   provisions compute resources and optimizes workload distribution based on the quantity and scale of your specific\n   workloads. With Batch, there's no need to install or manage batch computing software. This means that you can focus\n   on analyzing results and solving your specific problems instead.</p>",
+                "smithy.api#documentation": "<fullname>Batch</fullname>\n         <p>Using Batch, you can run batch computing workloads on the Amazon Web Services Cloud. Batch computing is a common means for\n   developers, scientists, and engineers to access large amounts of compute resources. Batch uses the advantages of\n   the batch computing to remove the undifferentiated heavy lifting of configuring and managing required infrastructure.\n   At the same time, it also adopts a familiar batch computing software approach. You can use Batch to efficiently\n   provision resources, and work toward eliminating capacity constraints, reducing your overall compute costs, and\n   delivering results more quickly.</p>\n         <p>As a fully managed service, Batch can run batch computing workloads of any scale. Batch automatically\n   provisions compute resources and optimizes workload distribution based on the quantity and scale of your specific\n   workloads. With Batch, there's no need to install or manage batch computing software. This means that you can focus\n   on analyzing results and solving your specific problems instead.</p>",
                 "smithy.api#title": "AWS Batch",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://batch.amazonaws.com/doc/2016-08-10/"
@@ -1327,6 +1327,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A short, human-readable string to provide additional details for the current status of the\n   job attempt.</p>"
                     }
+                },
+                "taskProperties": {
+                    "target": "com.amazonaws.batch#ListAttemptEcsTaskDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties for a task definition that describes the container and volume definitions of\n   an Amazon ECS task.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1337,6 +1343,70 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.batch#AttemptDetail"
+            }
+        },
+        "com.amazonaws.batch#AttemptEcsTaskDetails": {
+            "type": "structure",
+            "members": {
+                "containerInstanceArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container instance that hosts the task.</p>"
+                    }
+                },
+                "taskArn": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Amazon ECS task.</p>"
+                    }
+                },
+                "containers": {
+                    "target": "com.amazonaws.batch#ListAttemptTaskContainerDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of containers that are included in the <code>taskProperties</code> list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the details of a task.</p>"
+            }
+        },
+        "com.amazonaws.batch#AttemptTaskContainerDetails": {
+            "type": "structure",
+            "members": {
+                "exitCode": {
+                    "target": "com.amazonaws.batch#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exit code for the container’s attempt. A non-zero exit code is considered failed.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a container.</p>"
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short (255 max characters) string that's easy to understand and provides additional details for a\n   running or stopped container.</p>"
+                    }
+                },
+                "logStreamName": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon CloudWatch Logs log stream that's associated with the container. The log\n   group for Batch jobs is <code>/aws/batch/job</code>. Each container attempt receives a log stream name\n   when they reach the <code>RUNNING</code> status.</p>"
+                    }
+                },
+                "networkInterfaces": {
+                    "target": "com.amazonaws.batch#NetworkInterfaceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network interfaces that are associated with the job attempt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents the details of a container that's part of a job attempt.</p>"
             }
         },
         "com.amazonaws.batch#Boolean": {
@@ -3747,7 +3817,7 @@
                 "containers": {
                     "target": "com.amazonaws.batch#ListTaskContainerDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of containers that are included in the <code>taskProperties</code>\n   list.</p>"
+                        "smithy.api#documentation": "<p>A list of containers that are included in the <code>taskProperties</code> list.</p>"
                     }
                 },
                 "containerInstanceArn": {
@@ -3789,7 +3859,7 @@
                 "taskRoleArn": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the container can assume for Amazon Web Services permissions. For more\n   information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html\">IAM roles for tasks</a> in the\n   <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <note>\n            <p>This is object is comparable to <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_ContainerProperties.html\">ContainerProperties:jobRoleArn</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the container can assume for Amazon Web Services permissions. For more\n   information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html\">IAM roles for tasks</a> in the\n    <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n         <note>\n            <p>This is object is comparable to <a href=\"https://docs.aws.amazon.com/batch/latest/APIReference/API_ContainerProperties.html\">ContainerProperties:jobRoleArn</a>.</p>\n         </note>"
                     }
                 },
                 "pidMode": {
@@ -3853,7 +3923,7 @@
                 "ipcMode": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are\n   <code>host</code>, <code>task</code>, or <code>none</code>.</p>\n         <p>If <code>host</code> is specified, all containers within the tasks that specified the\n   <code>host</code> IPC mode on the same container instance share the same IPC resources with the\n   host Amazon EC2 instance.</p>\n         <p>If <code>task</code> is specified, all containers within the specified <code>task</code>\n   share the same IPC resources.</p>\n         <p>If <code>none</code> is specified, the IPC resources within the containers of a task are\n   private, and are not shared with other containers in a task or on the container instance. </p>\n         <p>If no value is specified, then the IPC resource namespace sharing depends on the Docker\n   daemon setting on the container instance. For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#ipc-settings---ipc\">IPC settings</a> in\n   the Docker run reference.</p>"
+                        "smithy.api#documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are\n    <code>host</code>, <code>task</code>, or <code>none</code>.</p>\n         <p>If <code>host</code> is specified, all containers within the tasks that specified the\n    <code>host</code> IPC mode on the same container instance share the same IPC resources with the\n   host Amazon EC2 instance.</p>\n         <p>If <code>task</code> is specified, all containers within the specified <code>task</code>\n   share the same IPC resources.</p>\n         <p>If <code>none</code> is specified, the IPC resources within the containers of a task are\n   private, and are not shared with other containers in a task or on the container instance. </p>\n         <p>If no value is specified, then the IPC resource namespace sharing depends on the Docker\n   daemon setting on the container instance. For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#ipc-settings---ipc\">IPC settings</a> in\n   the Docker run reference.</p>"
                     }
                 },
                 "taskRoleArn": {
@@ -3865,7 +3935,7 @@
                 "pidMode": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process namespace to use for the containers in the task. The valid values are\n   <code>host</code> or <code>task</code>. For example, monitoring sidecars might need\n   <code>pidMode</code> to access information about other containers running in the same\n   task.</p>\n         <p>If <code>host</code> is specified, all containers within the tasks that specified the\n   <code>host</code> PID mode on the same container instance share the process namespace with the\n   host Amazon EC2 instance.</p>\n         <p>If <code>task</code> is specified, all containers within the specified task share the same\n   process namespace.</p>\n         <p>If no value is specified, the default is a private namespace for each container. For more\n   information, see <a href=\"https://docs.docker.com/engine/reference/run/#pid-settings---pid\">PID settings</a> in the Docker run reference.</p>"
+                        "smithy.api#documentation": "<p>The process namespace to use for the containers in the task. The valid values are\n    <code>host</code> or <code>task</code>. For example, monitoring sidecars might need\n    <code>pidMode</code> to access information about other containers running in the same\n   task.</p>\n         <p>If <code>host</code> is specified, all containers within the tasks that specified the\n    <code>host</code> PID mode on the same container instance share the process namespace with the\n   host Amazon EC2 instance.</p>\n         <p>If <code>task</code> is specified, all containers within the specified task share the same\n   process namespace.</p>\n         <p>If no value is specified, the default is a private namespace for each container. For more\n   information, see <a href=\"https://docs.docker.com/engine/reference/run/#pid-settings---pid\">PID settings</a> in the Docker run reference.</p>"
                     }
                 },
                 "networkConfiguration": {
@@ -3894,10 +3964,16 @@
         "com.amazonaws.batch#EksAttemptContainerDetail": {
             "type": "structure",
             "members": {
+                "name": {
+                    "target": "com.amazonaws.batch#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a container.</p>"
+                    }
+                },
                 "exitCode": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exit code returned for the job attempt. A non-zero exit code is considered failed.</p>"
+                        "smithy.api#documentation": "<p>The exit code returned for the job attempt. A non-zero exit code is considered\n   failed.</p>"
                     }
                 },
                 "reason": {
@@ -4109,7 +4185,7 @@
                 "exitCode": {
                     "target": "com.amazonaws.batch#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exit code returned for the job attempt. A non-zero exit code is considered failed.</p>"
+                        "smithy.api#documentation": "<p>The exit code returned for the job attempt. A non-zero exit code is considered\n   failed.</p>"
                     }
                 },
                 "reason": {
@@ -4175,7 +4251,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pointer to the container that you want to override. The name must match a unique container name that you wish to override.</p>"
+                        "smithy.api#documentation": "<p>A pointer to the container that you want to override. The name must match a unique container\n   name that you wish to override.</p>"
                     }
                 },
                 "image": {
@@ -4263,7 +4339,7 @@
                 "allowPrivilegeEscalation": {
                     "target": "com.amazonaws.batch#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process. The default value is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent\n   process. The default value is <code>false</code>.</p>"
                     }
                 },
                 "readOnlyRootFilesystem": {
@@ -4411,7 +4487,7 @@
                 "imagePullSecrets": {
                     "target": "com.amazonaws.batch#ImagePullSecrets",
                     "traits": {
-                        "smithy.api#documentation": "<p>References a Kubernetes secret resource. This object must start and end with an alphanumeric character, is required to be lowercase, can include periods (.) and hyphens (-), and can't contain more than 253 characters.</p>\n         <p>\n            <code>ImagePullSecret$name</code> is required when this object is used.</p>"
+                        "smithy.api#documentation": "<p>References a Kubernetes secret resource. It holds a list of secrets. These secrets help to gain\n   access to pull an images from a private registry.</p>\n         <p>\n            <code>ImagePullSecret$name</code> is required when this object is used.</p>"
                     }
                 },
                 "containers": {
@@ -4423,7 +4499,7 @@
                 "initContainers": {
                     "target": "com.amazonaws.batch#EksContainers",
                     "traits": {
-                        "smithy.api#documentation": "<p>These containers run before application containers, always runs to completion, and must complete successfully before the next container starts. These containers are registered with the Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store.  For more information, see <a href=\"https://kubernetes.io/docs/concepts/workloads/pods/init-containers/\">Init\n   Containers</a> in the <i>Kubernetes documentation</i>.</p>\n         <note>\n            <p>This object is limited to 10 elements</p>\n         </note>"
+                        "smithy.api#documentation": "<p>These containers run before application containers, always runs to completion, and must\n   complete successfully before the next container starts. These containers are registered with the\n   Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store.\n   For more information, see <a href=\"https://kubernetes.io/docs/concepts/workloads/pods/init-containers/\">Init\n    Containers</a> in the <i>Kubernetes documentation</i>.</p>\n         <note>\n            <p>This object is limited to 10 elements</p>\n         </note>"
                     }
                 },
                 "volumes": {
@@ -4473,7 +4549,7 @@
                 "imagePullSecrets": {
                     "target": "com.amazonaws.batch#ImagePullSecrets",
                     "traits": {
-                        "smithy.api#documentation": "<p>Displays the reference pointer to the Kubernetes secret resource.</p>"
+                        "smithy.api#documentation": "<p>Displays the reference pointer to the Kubernetes secret resource. These secrets help to gain\n   access to pull an images from a private registry.</p>"
                     }
                 },
                 "containers": {
@@ -4535,7 +4611,7 @@
                 "initContainers": {
                     "target": "com.amazonaws.batch#EksContainerOverrideList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The overrides for the conatainers defined in the Amazon EKS  pod. These containers run before application containers, always runs to completion, and must complete successfully before the next container starts. These containers are registered with the Amazon EKS Connector agent and persists the registration information in the Kubernetes backend data store.  For more information, see <a href=\"https://kubernetes.io/docs/concepts/workloads/pods/init-containers/\">Init\n    Containers</a> in the <i>Kubernetes documentation</i>.</p>\n         <note>\n            <p>This object is limited to 10 elements</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The overrides for the conatainers defined in the Amazon EKS pod. These containers run before\n   application containers, always runs to completion, and must complete successfully before the next\n   container starts. These containers are registered with the Amazon EKS Connector agent and persists the\n   registration information in the Kubernetes backend data store. For more information, see <a href=\"https://kubernetes.io/docs/concepts/workloads/pods/init-containers/\">Init\n    Containers</a> in the <i>Kubernetes documentation</i>.</p>\n         <note>\n            <p>This object is limited to 10 elements</p>\n         </note>"
                     }
                 },
                 "metadata": {
@@ -4797,13 +4873,13 @@
                     "target": "com.amazonaws.batch#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Provides a unique identifier for the <code>ImagePullSecret</code>. This object is required when <code>EksPodProperties$imagePullSecrets</code> is used.</p>",
+                        "smithy.api#documentation": "<p>Provides a unique identifier for the <code>ImagePullSecret</code>. This object is required\n   when <code>EksPodProperties$imagePullSecrets</code> is used.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>References a Kubernetes configuration resource that holds a list of secrets. These secrets help to gain access to pull an image from a private registry.</p>"
+                "smithy.api#documentation": "<p>References a Kubernetes secret resource. This name of the secret must start and end with an\n   alphanumeric character, is required to be lowercase, can include periods (.) and hyphens (-), and\n   can't contain more than 253 characters.</p>"
             }
         },
         "com.amazonaws.batch#ImagePullSecrets": {
@@ -4944,7 +5020,7 @@
                 "containerProperties": {
                     "target": "com.amazonaws.batch#ContainerProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object with properties specific to Amazon ECS-based jobs. When <code>containerProperties</code> is used in the job definition, it can't be used in addition to <code>eksProperties</code>, <code>ecsProperties</code>, or\n    <code>nodeProperties</code>.</p>"
+                        "smithy.api#documentation": "<p>An object with properties specific to Amazon ECS-based jobs. When\n    <code>containerProperties</code> is used in the job definition, it can't be used in addition to\n    <code>eksProperties</code>, <code>ecsProperties</code>, or <code>nodeProperties</code>.</p>"
                     }
                 },
                 "timeout": {
@@ -4956,7 +5032,7 @@
                 "nodeProperties": {
                     "target": "com.amazonaws.batch#NodeProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object with properties that are specific to multi-node parallel jobs. When <code>nodeProperties</code> is used in the job definition, it can't be used in addition to <code>containerProperties</code>, <code>ecsProperties</code>, or <code>eksProperties</code>.</p>\n         <note>\n            <p>If the job runs on Fargate resources, don't specify <code>nodeProperties</code>. Use\n     <code>containerProperties</code> instead.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>An object with properties that are specific to multi-node parallel jobs. When\n    <code>nodeProperties</code> is used in the job definition, it can't be used in addition to\n    <code>containerProperties</code>, <code>ecsProperties</code>, or\n   <code>eksProperties</code>.</p>\n         <note>\n            <p>If the job runs on Fargate resources, don't specify <code>nodeProperties</code>. Use\n     <code>containerProperties</code> instead.</p>\n         </note>"
                     }
                 },
                 "tags": {
@@ -4980,13 +5056,13 @@
                 "ecsProperties": {
                     "target": "com.amazonaws.batch#EcsProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains the properties for the Amazon ECS resources of a job.When <code>ecsProperties</code>\n   is used in the job definition, it can't be used in addition to <code>containerProperties</code>, <code>eksProperties</code>, or <code>nodeProperties</code>.</p>"
+                        "smithy.api#documentation": "<p>An object that contains the properties for the Amazon ECS resources of a job.When\n    <code>ecsProperties</code> is used in the job definition, it can't be used in addition to\n    <code>containerProperties</code>, <code>eksProperties</code>, or\n   <code>nodeProperties</code>.</p>"
                     }
                 },
                 "eksProperties": {
                     "target": "com.amazonaws.batch#EksProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object with properties that are specific to Amazon EKS-based jobs. When <code>eksProperties</code>\n   is used in the job definition, it can't be used in addition to <code>containerProperties</code>, <code>ecsProperties</code>, or <code>nodeProperties</code>.</p>"
+                        "smithy.api#documentation": "<p>An object with properties that are specific to Amazon EKS-based jobs. When\n    <code>eksProperties</code> is used in the job definition, it can't be used in addition to\n    <code>containerProperties</code>, <code>ecsProperties</code>, or\n   <code>nodeProperties</code>.</p>"
                     }
                 },
                 "containerOrchestrationType": {
@@ -5111,7 +5187,7 @@
                 "statusReason": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A short, human-readable string to provide more details for the current status of the job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPACITY:INSUFFICIENT_INSTANCE_CAPACITY</code> - All compute environments have insufficient capacity to\n     service the job.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURATION:COMPUTE_ENVIRONMENT_MAX_RESOURCE</code> - All compute environments have a\n     <code>maxVcpu</code> setting that is smaller than the job requirements.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT</code> - All compute environments  have no connected instances\n     that meet the job requirements.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURATION:SERVICE_ROLE_PERMISSIONS</code> - All compute environments have problems with the\n     service role permissions.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A short, human-readable string to provide more details for the current status of the\n   job.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPACITY:INSUFFICIENT_INSTANCE_CAPACITY</code> - All compute environments have\n     insufficient capacity to service the job.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURATION:COMPUTE_ENVIRONMENT_MAX_RESOURCE</code> - All compute environments\n     have a <code>maxVcpu</code> setting that is smaller than the job requirements.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURATION:JOB_RESOURCE_REQUIREMENT</code> - All compute environments have no\n     connected instances that meet the job requirements.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISCONFIGURATION:SERVICE_ROLE_PERMISSIONS</code> - All compute environments have\n     problems with the service role permissions.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "createdAt": {
@@ -5163,7 +5239,7 @@
                 "container": {
                     "target": "com.amazonaws.batch#ContainerDetail",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that represents the details for the container that's associated with the\n   job. If the details are for a multiple-container job, this object will be empty. </p>"
+                        "smithy.api#documentation": "<p>An object that represents the details for the container that's associated with the job. If\n   the details are for a multiple-container job, this object will be empty. </p>"
                     }
                 },
                 "nodeDetails": {
@@ -5357,7 +5433,7 @@
                     "target": "com.amazonaws.batch#JobStateTimeLimitActionsState",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The state of the job needed to trigger the action. The only supported value is \"<code>RUNNABLE</code>\".</p>",
+                        "smithy.api#documentation": "<p>The state of the job needed to trigger the action. The only supported value is <code>RUNNABLE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5373,7 +5449,7 @@
                     "target": "com.amazonaws.batch#JobStateTimeLimitActionsAction",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The action to take when a job is at the head of the job queue in the specified state for the specified period of\n   time. The only supported value is \"<code>CANCEL</code>\", which will cancel the job.</p>",
+                        "smithy.api#documentation": "<p>The action to take when a job is at the head of the job queue in the specified state for the specified period of\n   time. The only supported value is <code>CANCEL</code>, which will cancel the job.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5678,6 +5754,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Linux-specific modifications that are applied to the container, such as details for device\n   mappings.</p>"
+            }
+        },
+        "com.amazonaws.batch#ListAttemptEcsTaskDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#AttemptEcsTaskDetails"
+            }
+        },
+        "com.amazonaws.batch#ListAttemptTaskContainerDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.batch#AttemptTaskContainerDetails"
             }
         },
         "com.amazonaws.batch#ListEcsTaskDetails": {
@@ -6332,7 +6420,7 @@
                 "instanceTypes": {
                     "target": "com.amazonaws.batch#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance types of the underlying host infrastructure of a multi-node parallel job.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources.</p>\n            <p>In addition, this list object is currently limited to one element.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The instance types of the underlying host infrastructure of a multi-node parallel\n   job.</p>\n         <note>\n            <p>This parameter isn't applicable to jobs that are running on Fargate resources.</p>\n            <p>In addition, this list object is currently limited to one element.</p>\n         </note>"
                     }
                 },
                 "ecsProperties": {
@@ -7205,7 +7293,7 @@
                 "condition": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dependency condition of the container. The following are the available conditions and\n   their behavior:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>START</code> - This condition emulates the behavior of links and volumes today. It validates that a dependent container is started before permitting other containers to start. </p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETE</code> - This condition validates that a dependent container runs to\n     completion (exits) before permitting other containers to start. This can be useful for\n     nonessential containers that run a script and then exit. This condition can't be set on an\n     essential container. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - This condition is the same as <code>COMPLETE</code>, but it also\n     requires that the container exits with a zero status. This condition can't be set on an\n     essential container. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The dependency condition of the container. The following are the available conditions and\n   their behavior:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>START</code> - This condition emulates the behavior of links and volumes today. It\n     validates that a dependent container is started before permitting other containers to start.\n    </p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETE</code> - This condition validates that a dependent container runs to\n     completion (exits) before permitting other containers to start. This can be useful for\n     nonessential containers that run a script and then exit. This condition can't be set on an\n     essential container. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCESS</code> - This condition is the same as <code>COMPLETE</code>, but it also\n     requires that the container exits with a zero status. This condition can't be set on an\n     essential container. </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7435,7 +7523,7 @@
                 "name": {
                     "target": "com.amazonaws.batch#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a container. The name can be used as a unique identifier to target your <code>dependsOn</code> and <code>Overrides</code> objects. </p>"
+                        "smithy.api#documentation": "<p>The name of a container. The name can be used as a unique identifier to target your\n    <code>dependsOn</code> and <code>Overrides</code> objects. </p>"
                     }
                 },
                 "privileged": {

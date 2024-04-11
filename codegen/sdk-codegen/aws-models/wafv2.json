@@ -8163,7 +8163,23 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an array of <a>WebACLSummary</a> objects for the web ACLs that you\n         manage.</p>"
+                "smithy.api#documentation": "<p>Retrieves an array of <a>WebACLSummary</a> objects for the web ACLs that you\n         manage.</p>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListWebACLsSuccess",
+                        "params": {
+                            "Scope": "REGIONAL",
+                            "Limit": 20
+                        },
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.wafv2#ListWebACLsRequest": {

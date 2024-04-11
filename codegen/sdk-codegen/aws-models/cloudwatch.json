@@ -269,7 +269,13 @@
                 "StateValue": {
                     "target": "com.amazonaws.cloudwatch#AnomalyDetectorStateValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the anomaly detector's training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The current status of the anomaly detector's training.</p>"
+                    }
+                },
+                "MetricCharacteristics": {
+                    "target": "com.amazonaws.cloudwatch#MetricCharacteristics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This object includes parameters that you can use to provide information about your metric to \n\t\t\tCloudWatch to help it build more accurate anomaly detection models. Currently, it includes\n\t\t\tthe <code>PeriodicSpikes</code> parameter.</p>"
                     }
                 },
                 "SingleMetricAnomalyDetector": {
@@ -4838,6 +4844,20 @@
                 "target": "com.amazonaws.cloudwatch#MetricAlarm"
             }
         },
+        "com.amazonaws.cloudwatch#MetricCharacteristics": {
+            "type": "structure",
+            "members": {
+                "PeriodicSpikes": {
+                    "target": "com.amazonaws.cloudwatch#PeriodicSpikes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this parameter to <code>true</code> if values for this metric consistently include spikes\n\t\t\tthat should not be considered to be anomalies. With this set to <code>true</code>, CloudWatch will expect \n\t\t\tto see spikes that occurred consistently during the model training period, and won't flag future similar spikes\n\t\t\tas anomalies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object includes parameters that you can use to provide information to \n\t\t\tCloudWatch to help it build more accurate anomaly detection models.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#MetricData": {
             "type": "list",
             "member": {
@@ -5402,6 +5422,9 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatch#PeriodicSpikes": {
+            "type": "boolean"
+        },
         "com.amazonaws.cloudwatch#PutAnomalyDetector": {
             "type": "operation",
             "input": {
@@ -5474,6 +5497,12 @@
                     "target": "com.amazonaws.cloudwatch#AnomalyDetectorConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration specifies details about how the \n\t\t\tanomaly detection model is to be trained, including \n\t\t\ttime ranges to exclude when training and updating the model.\n\t\t\tYou can specify as many as 10 time ranges.</p>\n         <p>The configuration can also include the time zone to use for \n\t\t\tthe metric.</p>"
+                    }
+                },
+                "MetricCharacteristics": {
+                    "target": "com.amazonaws.cloudwatch#MetricCharacteristics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this object to include parameters to provide information about your metric to \n\t\t\tCloudWatch to help it build more accurate anomaly detection models. Currently, it includes\n\t\t\tthe <code>PeriodicSpikes</code> parameter.</p>"
                     }
                 },
                 "SingleMetricAnomalyDetector": {
