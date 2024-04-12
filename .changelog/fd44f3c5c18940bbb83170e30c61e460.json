@@ -1,8 +1,0 @@
-{
-    "id": "fd44f3c5-c189-40bb-b831-70e30c61e460",
-    "type": "feature",
-    "description": "Added new CREATE_FAILED status for data stores. Added new errorCause to DescribeFHIRDatastore API and ListFHIRDatastores API response for additional insights into data store creation and deletion workflows.",
-    "modules": [
-        "service/healthlake"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "e06a7d76-eec4-4783-a4c8-07f5b9194889",
-    "type": "documentation",
-    "description": "Update to API documentation to resolve customer reported issues.",
-    "modules": [
-        "service/neptunegraph"
-    ]
-}

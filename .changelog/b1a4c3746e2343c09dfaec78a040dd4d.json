@@ -1,8 +1,0 @@
-{
-    "id": "b1a4c374-6e23-43c0-9dfa-ec78a040dd4d",
-    "type": "feature",
-    "description": "This release adds EXPEDITORS as a valid shipment carrier.",
-    "modules": [
-        "service/outposts"
-    ]
-}

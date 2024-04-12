@@ -1,3 +1,7 @@
+# v1.8.1 (2024-04-12)
+
+* **Documentation**: Update to API documentation to resolve customer reported issues.
+
 # v1.8.0 (2024-03-29)
 
 * **Feature**: Add the new API Start-Import-Task for Amazon Neptune Analytics.

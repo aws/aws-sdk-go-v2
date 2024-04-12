@@ -1,8 +1,0 @@
-{
-    "id": "507a9623-1302-47d1-8b28-fb988b2d49fa",
-    "type": "feature",
-    "description": "Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.",
-    "modules": [
-        "service/redshift"
-    ]
-}

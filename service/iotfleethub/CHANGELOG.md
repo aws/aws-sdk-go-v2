@@ -1,3 +1,7 @@
+# v1.20.5 (2024-04-12)
+
+* **Documentation**: Documentation updates for AWS IoT Fleet Hub to clarify that Fleet Hub supports organization instance of IAM Identity Center.
+
 # v1.20.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

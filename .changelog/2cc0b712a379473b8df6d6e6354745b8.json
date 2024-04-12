@@ -1,8 +1,0 @@
-{
-    "id": "2cc0b712-a379-473b-8df6-d6e6354745b8",
-    "type": "documentation",
-    "description": "Documentation updates for AWS IoT Fleet Hub to clarify that Fleet Hub supports organization instance of IAM Identity Center.",
-    "modules": [
-        "service/iotfleethub"
-    ]
-}

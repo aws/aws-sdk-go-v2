@@ -1,3 +1,29 @@
+# Release (2024-04-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.50.0](service/cloudformation/CHANGELOG.md#v1500-2024-04-12)
+  * **Feature**: Adding support for the new parameter "IncludePropertyValues" in the CloudFormation DescribeChangeSet API. When this parameter is included, the DescribeChangeSet response will include more detailed information such as before and after values for the resource properties that will change.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.46.5](service/configservice/CHANGELOG.md#v1465-2024-04-12)
+  * **Documentation**: Updates documentation for AWS Config
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.79.0](service/glue/CHANGELOG.md#v1790-2024-04-12)
+  * **Feature**: Modifying request for GetUnfilteredTableMetadata for view-related fields.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.24.0](service/healthlake/CHANGELOG.md#v1240-2024-04-12)
+  * **Feature**: Added new CREATE_FAILED status for data stores. Added new errorCause to DescribeFHIRDatastore API and ListFHIRDatastores API response for additional insights into data store creation and deletion workflows.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleethub`: [v1.20.5](service/iotfleethub/CHANGELOG.md#v1205-2024-04-12)
+  * **Documentation**: Documentation updates for AWS IoT Fleet Hub to clarify that Fleet Hub supports organization instance of IAM Identity Center.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.31.0](service/kms/CHANGELOG.md#v1310-2024-04-12)
+  * **Feature**: This feature supports the ability to specify a custom rotation period for automatic key rotations, the ability to perform on-demand key rotations, and visibility into your key material rotations.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.38.0](service/mediatailor/CHANGELOG.md#v1380-2024-04-12)
+  * **Feature**: Added InsertionMode to PlaybackConfigurations. This setting controls whether players can use stitched or guided ad insertion. The default for players that do not specify an insertion mode is stitched.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.8.1](service/neptunegraph/CHANGELOG.md#v181-2024-04-12)
+  * **Documentation**: Update to API documentation to resolve customer reported issues.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.38.0](service/outposts/CHANGELOG.md#v1380-2024-04-12)
+  * **Feature**: This release adds EXPEDITORS as a valid shipment carrier.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.44.0](service/redshift/CHANGELOG.md#v1440-2024-04-12)
+  * **Feature**: Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.46.0](service/transfer/CHANGELOG.md#v1460-2024-04-12)
+  * **Feature**: This change releases support for importing self signed certificates to the Transfer Family for sending outbound file transfers over TLS/HTTPS.
+
 # Release (2024-04-11)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.46.5 (2024-04-12)
+
+* **Documentation**: Updates documentation for AWS Config
+
 # v1.46.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
