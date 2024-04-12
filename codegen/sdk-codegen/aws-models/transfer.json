@@ -292,6 +292,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ENCRYPTION"
                     }
+                },
+                "TLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS"
+                    }
                 }
             }
         },
@@ -2601,7 +2607,7 @@
                 "Usage": {
                     "target": "com.amazonaws.transfer#CertificateUsageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>"
+                        "smithy.api#documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SIGNING</code>: For signing AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENCRYPTION</code>: For encrypting AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS</code>: For securing AS2 communications sent over HTTPS</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Status": {
@@ -3860,7 +3866,7 @@
                 "Usage": {
                     "target": "com.amazonaws.transfer#CertificateUsageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>",
+                        "smithy.api#documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SIGNING</code>: For signing AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENCRYPTION</code>: For encrypting AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS</code>: For securing AS2 communications sent over HTTPS</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5273,7 +5279,7 @@
                 "Usage": {
                     "target": "com.amazonaws.transfer#CertificateUsageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>"
+                        "smithy.api#documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SIGNING</code>: For signing AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENCRYPTION</code>: For encrypting AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS</code>: For securing AS2 communications sent over HTTPS</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Status": {

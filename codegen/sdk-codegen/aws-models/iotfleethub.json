@@ -70,7 +70,7 @@
                     "name": "iotfleethub"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>With Fleet Hub for AWS IoT Device Management you can build stand-alone web applications for monitoring the health of your device fleets.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>With Fleet Hub for IoT Device Management you can build stand-alone web applications for monitoring the health of your device fleets.</p>",
                 "smithy.api#title": "AWS IoT Fleet Hub",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -114,7 +114,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -157,7 +156,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -170,7 +170,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -184,7 +183,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -207,7 +205,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -242,7 +239,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -253,14 +249,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -274,14 +272,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -290,11 +286,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -305,14 +301,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -326,7 +324,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -346,7 +343,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -357,14 +353,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -375,9 +373,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -990,7 +990,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary of information about a AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A summary of information about a Fleet Hub for IoT Device Management web application.</p>"
             }
         },
         "com.amazonaws.iotfleethub#Arn": {
@@ -1049,7 +1049,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Fleet Hub for AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a Fleet Hub for IoT Device Management web application.</p>\n         <p>When creating a Fleet Hub application, you must create an organization instance of\n      IAM Identity Center if you don't already have one. The Fleet Hub application you create must also be in\n      the same Amazon Web Services Region of the organization instance of IAM Identity Center. For more information see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/get-set-up-for-idc.html\">Enabling\n        IAM Identity Center</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/organization-instances-identity-center.html\">Organization instances of IAM Identity Center</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/applications",
@@ -1083,7 +1083,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iotfleethub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that the web application assumes when it interacts with AWS IoT Core.</p>\n         <note>\n            <p>The name of the role must be in the form <code>AWSIotFleetHub_<i>random_string</i>\n               </code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The ARN of the role that the web application assumes when it interacts with Amazon Web Services IoT Core.</p>\n         <note>\n            <p>The name of the role must be in the form <code>AWSIotFleetHub_<i>random_string</i>\n               </code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1143,7 +1143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Fleet Hub for AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a Fleet Hub for IoT Device Management web application.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/applications/{applicationId}",
@@ -1205,7 +1205,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a Fleet Hub for AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets information about a Fleet Hub for IoT Device Management web application.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/applications/{applicationId}",
@@ -1292,7 +1292,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.iotfleethub#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that the web application assumes when it interacts with AWS IoT Core.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the role that the web application assumes when it interacts with Amazon Web Services IoT Core.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1305,7 +1305,7 @@
                 "errorMessage": {
                     "target": "com.amazonaws.iotfleethub#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message indicating why the <code>DescribeApplication</code> API failed.</p>"
+                        "smithy.api#documentation": "<p>A message that explains any failures included in the <code>applicationState</code> response field. This message \n    explains failures in the <code>CreateApplication</code> and <code>DeleteApplication</code> actions.</p>"
                     }
                 },
                 "tags": {
@@ -1401,7 +1401,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of Fleet Hub for AWS IoT Device Management web applications for the current account.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets a list of Fleet Hub for IoT Device Management web applications for the current account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/applications",
@@ -1469,7 +1469,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags for the specified resource.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists the tags for the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}",
@@ -1597,7 +1597,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds to or modifies the tags of the specified resource. Tags are metadata which can be used to manage a resource.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Adds to or modifies the tags of the specified resource. Tags are metadata which can be used to manage a resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -1683,7 +1683,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the specified tags (metadata) from the resource.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Removes the specified tags (metadata) from the resource.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
@@ -1748,7 +1748,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates information about a Fleet Hub for a AWS IoT Device Management web application.</p>\n         <note>\n            <p>Fleet Hub for AWS IoT Device Management is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates information about a Fleet Hub for IoT Device Management web application.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/applications/{applicationId}",
