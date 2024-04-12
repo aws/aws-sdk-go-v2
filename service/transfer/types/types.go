@@ -377,7 +377,10 @@ type DescribedCertificate struct {
 	// CERTIFICATE .
 	Type CertificateType
 
-	// Specifies whether this certificate is used for signing or encryption.
+	// Specifies how this certificate is used. It can be used in the following ways:
+	//   - SIGNING : For signing AS2 messages
+	//   - ENCRYPTION : For encrypting AS2 messages
+	//   - TLS : For securing AS2 communications sent over HTTPS
 	Usage CertificateUsageType
 
 	noSmithyDocumentSerde
@@ -1211,7 +1214,10 @@ type ListedCertificate struct {
 	// key, the type is CERTIFICATE .
 	Type CertificateType
 
-	// Specifies whether this certificate is used for signing or encryption.
+	// Specifies how this certificate is used. It can be used in the following ways:
+	//   - SIGNING : For signing AS2 messages
+	//   - ENCRYPTION : For encrypting AS2 messages
+	//   - TLS : For securing AS2 communications sent over HTTPS
 	Usage CertificateUsageType
 
 	noSmithyDocumentSerde

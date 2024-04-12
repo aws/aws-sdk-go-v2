@@ -10,9 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates information about a Fleet Hub for a AWS IoT Device Management web
-// application. Fleet Hub for AWS IoT Device Management is in public preview and is
-// subject to change.
+// Updates information about a Fleet Hub for IoT Device Management web application.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}

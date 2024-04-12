@@ -23787,6 +23787,11 @@ func awsAwsjson11_serializeOpDocumentGetUnfilteredTableMetadataInput(v *GetUnfil
 		ok.String(*v.Name)
 	}
 
+	if v.ParentResourceArn != nil {
+		ok := object.Key("ParentResourceArn")
+		ok.String(*v.ParentResourceArn)
+	}
+
 	if v.Permissions != nil {
 		ok := object.Key("Permissions")
 		if err := awsAwsjson11_serializeDocumentPermissionList(v.Permissions, ok); err != nil {
@@ -23804,6 +23809,11 @@ func awsAwsjson11_serializeOpDocumentGetUnfilteredTableMetadataInput(v *GetUnfil
 	if v.Region != nil {
 		ok := object.Key("Region")
 		ok.String(*v.Region)
+	}
+
+	if v.RootResourceArn != nil {
+		ok := object.Key("RootResourceArn")
+		ok.String(*v.RootResourceArn)
 	}
 
 	if v.SupportedDialect != nil {

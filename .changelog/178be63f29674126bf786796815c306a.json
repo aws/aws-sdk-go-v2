@@ -1,0 +1,8 @@
+{
+    "id": "178be63f-2967-4126-bf78-6796815c306a",
+    "type": "feature",
+    "description": "This change releases support for importing self signed certificates to the Transfer Family for sending outbound file transfers over TLS/HTTPS.",
+    "modules": [
+        "service/transfer"
+    ]
+}

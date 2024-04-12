@@ -4795,13 +4795,16 @@ type KinesisStreamingSourceOptions struct {
 	// version 2.0 and above.
 	IdleTimeBetweenReadsInMs *int64
 
-	// The maximum number of records to fetch per shard in the Kinesis data stream.
-	// The default value is 100000 .
+	// The maximum number of records to fetch per shard in the Kinesis data stream per
+	// microbatch. Note: The client can exceed this limit if the streaming job has
+	// already read extra records from Kinesis (in the same get-records call). If
+	// MaxFetchRecordsPerShard needs to be strict then it needs to be a multiple of
+	// MaxRecordPerRead . The default value is 100000 .
 	MaxFetchRecordsPerShard *int64
 
-	// The maximum time spent in the job executor to fetch a record from the Kinesis
-	// data stream per shard, specified in milliseconds (ms). The default value is 1000
-	// .
+	// The maximum time spent for the job executor to read records for the current
+	// batch from the Kinesis data stream, specified in milliseconds (ms). Multiple
+	// GetRecords API calls may be made within this time. The default value is 1000 .
 	MaxFetchTimeInMs *int64
 
 	// The maximum number of records to fetch from the Kinesis data stream in each

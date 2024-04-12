@@ -6,9 +6,8 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// A summary of information about a AWS IoT Device Management web application.
-// Fleet Hub for AWS IoT Device Management is in public preview and is subject to
-// change.
+// A summary of information about a Fleet Hub for IoT Device Management web
+// application.
 type ApplicationSummary struct {
 
 	// The unique Id of the web application.

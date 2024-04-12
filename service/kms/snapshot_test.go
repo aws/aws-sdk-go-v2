@@ -446,6 +446,18 @@ func TestCheckSnapshot_ListKeyPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListKeyRotations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListKeyRotations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListKeyRotations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListKeys(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListKeys(context.Background(), nil, func(o *Options) {
@@ -535,6 +547,18 @@ func TestCheckSnapshot_RevokeGrant(t *testing.T) {
 	_, err := svc.RevokeGrant(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RevokeGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RotateKeyOnDemand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RotateKeyOnDemand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RotateKeyOnDemand")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1045,6 +1069,18 @@ func TestUpdateSnapshot_ListKeyPolicies(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListKeyRotations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListKeyRotations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListKeyRotations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListKeys(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListKeys(context.Background(), nil, func(o *Options) {
@@ -1134,6 +1170,18 @@ func TestUpdateSnapshot_RevokeGrant(t *testing.T) {
 	_, err := svc.RevokeGrant(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RevokeGrant")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RotateKeyOnDemand(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RotateKeyOnDemand(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RotateKeyOnDemand")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -14220,6 +14220,32 @@ func awsAwsquery_deserializeDocumentResourceChange(v **types.ResourceChange, dec
 				sv.Action = types.ChangeAction(xtv)
 			}
 
+		case strings.EqualFold("AfterContext", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AfterContext = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("BeforeContext", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.BeforeContext = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("ChangeSetId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -15317,6 +15343,19 @@ func awsAwsquery_deserializeDocumentResourceTargetDefinition(v **types.ResourceT
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AfterValue", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AfterValue = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Attribute", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -15330,6 +15369,32 @@ func awsAwsquery_deserializeDocumentResourceTargetDefinition(v **types.ResourceT
 				sv.Attribute = types.ResourceAttribute(xtv)
 			}
 
+		case strings.EqualFold("AttributeChangeType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AttributeChangeType = types.AttributeChangeType(xtv)
+			}
+
+		case strings.EqualFold("BeforeValue", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.BeforeValue = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Name", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -15341,6 +15406,19 @@ func awsAwsquery_deserializeDocumentResourceTargetDefinition(v **types.ResourceT
 			{
 				xtv := string(val)
 				sv.Name = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Path", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Path = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("RequiresRecreation", t.Name.Local):

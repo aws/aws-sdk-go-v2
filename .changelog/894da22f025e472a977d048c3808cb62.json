@@ -1,0 +1,8 @@
+{
+    "id": "894da22f-025e-472a-977d-048c3808cb62",
+    "type": "feature",
+    "description": "This feature supports the ability to specify a custom rotation period for automatic key rotations, the ability to perform on-demand key rotations, and visibility into your key material rotations.",
+    "modules": [
+        "service/kms"
+    ]
+}

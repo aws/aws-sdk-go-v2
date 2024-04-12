@@ -6681,6 +6681,11 @@ func awsAwsquery_serializeOpDocumentDescribeChangeSetInput(v *DescribeChangeSetI
 		objectKey.String(*v.ChangeSetName)
 	}
 
+	if v.IncludePropertyValues != nil {
+		objectKey := object.Key("IncludePropertyValues")
+		objectKey.Boolean(*v.IncludePropertyValues)
+	}
+
 	if v.NextToken != nil {
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)

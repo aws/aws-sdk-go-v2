@@ -44,6 +44,26 @@ func (AccountGateStatus) Values() []AccountGateStatus {
 	}
 }
 
+type AttributeChangeType string
+
+// Enum values for AttributeChangeType
+const (
+	AttributeChangeTypeAdd    AttributeChangeType = "Add"
+	AttributeChangeTypeRemove AttributeChangeType = "Remove"
+	AttributeChangeTypeModify AttributeChangeType = "Modify"
+)
+
+// Values returns all known values for AttributeChangeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AttributeChangeType) Values() []AttributeChangeType {
+	return []AttributeChangeType{
+		"Add",
+		"Remove",
+		"Modify",
+	}
+}
+
 type CallAs string
 
 // Enum values for CallAs

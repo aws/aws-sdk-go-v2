@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of Fleet Hub for AWS IoT Device Management web applications for the
-// current account. Fleet Hub for AWS IoT Device Management is in public preview
-// and is subject to change.
+// Gets a list of Fleet Hub for IoT Device Management web applications for the
+// current account.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}

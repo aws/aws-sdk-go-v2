@@ -96,6 +96,24 @@ func (FillPolicy) Values() []FillPolicy {
 	}
 }
 
+type InsertionMode string
+
+// Enum values for InsertionMode
+const (
+	InsertionModeStitchedOnly InsertionMode = "STITCHED_ONLY"
+	InsertionModePlayerSelect InsertionMode = "PLAYER_SELECT"
+)
+
+// Values returns all known values for InsertionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InsertionMode) Values() []InsertionMode {
+	return []InsertionMode{
+		"STITCHED_ONLY",
+		"PLAYER_SELECT",
+	}
+}
+
 type LogType string
 
 // Enum values for LogType

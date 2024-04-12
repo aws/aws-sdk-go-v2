@@ -1951,6 +1951,9 @@ type Snapshot struct {
 	// The list of node types that this cluster snapshot is able to restore into.
 	RestorableNodeTypes []string
 
+	// The Amazon Resource Name (ARN) of the snapshot.
+	SnapshotArn *string
+
 	// The time (in UTC format) when Amazon Redshift began the snapshot. A snapshot
 	// contains a copy of the cluster data as of this exact time.
 	SnapshotCreateTime *time.Time

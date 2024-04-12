@@ -1,0 +1,8 @@
+{
+    "id": "9992ba96-2f5e-4aca-bd6e-6a0c0ddb77cb",
+    "type": "feature",
+    "description": "Modifying request for GetUnfilteredTableMetadata for view-related fields.",
+    "modules": [
+        "service/glue"
+    ]
+}

@@ -418,10 +418,11 @@ type ShipmentCarrier string
 
 // Enum values for ShipmentCarrier
 const (
-	ShipmentCarrierDhl   ShipmentCarrier = "DHL"
-	ShipmentCarrierDbs   ShipmentCarrier = "DBS"
-	ShipmentCarrierFedex ShipmentCarrier = "FEDEX"
-	ShipmentCarrierUps   ShipmentCarrier = "UPS"
+	ShipmentCarrierDhl        ShipmentCarrier = "DHL"
+	ShipmentCarrierDbs        ShipmentCarrier = "DBS"
+	ShipmentCarrierFedex      ShipmentCarrier = "FEDEX"
+	ShipmentCarrierUps        ShipmentCarrier = "UPS"
+	ShipmentCarrierExpeditors ShipmentCarrier = "EXPEDITORS"
 )
 
 // Values returns all known values for ShipmentCarrier. Note that this can be
@@ -433,6 +434,7 @@ func (ShipmentCarrier) Values() []ShipmentCarrier {
 		"DBS",
 		"FEDEX",
 		"UPS",
+		"EXPEDITORS",
 	}
 }
 

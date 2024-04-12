@@ -80,6 +80,7 @@ type CertificateUsageType string
 const (
 	CertificateUsageTypeSigning    CertificateUsageType = "SIGNING"
 	CertificateUsageTypeEncryption CertificateUsageType = "ENCRYPTION"
+	CertificateUsageTypeTls        CertificateUsageType = "TLS"
 )
 
 // Values returns all known values for CertificateUsageType. Note that this can be
@@ -89,6 +90,7 @@ func (CertificateUsageType) Values() []CertificateUsageType {
 	return []CertificateUsageType{
 		"SIGNING",
 		"ENCRYPTION",
+		"TLS",
 	}
 }
 

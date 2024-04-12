@@ -11,8 +11,7 @@ import (
 )
 
 // Adds to or modifies the tags of the specified resource. Tags are metadata which
-// can be used to manage a resource. Fleet Hub for AWS IoT Device Management is in
-// public preview and is subject to change.
+// can be used to manage a resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

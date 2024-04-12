@@ -11,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a Fleet Hub for AWS IoT Device Management web
-// application. Fleet Hub for AWS IoT Device Management is in public preview and is
-// subject to change.
+// Gets information about a Fleet Hub for IoT Device Management web application.
 func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplicationInput, optFns ...func(*Options)) (*DescribeApplicationOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInput{}
@@ -76,8 +74,8 @@ type DescribeApplicationOutput struct {
 	// This member is required.
 	ApplicationUrl *string
 
-	// The ARN of the role that the web application assumes when it interacts with AWS
-	// IoT Core.
+	// The ARN of the role that the web application assumes when it interacts with
+	// Amazon Web Services IoT Core.
 	//
 	// This member is required.
 	RoleArn *string
@@ -85,7 +83,9 @@ type DescribeApplicationOutput struct {
 	// An optional description of the web application.
 	ApplicationDescription *string
 
-	// A message indicating why the DescribeApplication API failed.
+	// A message that explains any failures included in the applicationState response
+	// field. This message explains failures in the CreateApplication and
+	// DeleteApplication actions.
 	ErrorMessage *string
 
 	// The Id of the single sign-on client that you use to authenticate and authorize
