@@ -51,6 +51,10 @@ func TestIgnoredHeaders(t *testing.T) {
 			Header:        "X-Amz-Content-Sha256",
 			ExpectIgnored: false,
 		},
+		"connection": {
+			Header:        "Connection",
+			ExpectIgnored: true,
+		},
 	}
 
 	for name, c := range cases {
