@@ -1,0 +1,8 @@
+{
+    "id": "638f57b7-c1df-463f-b0d6-ca0f80535972",
+    "type": "feature",
+    "description": "This release adds new APIs to allow customers to configure their Outpost capacity at order-time.",
+    "modules": [
+        "service/outposts"
+    ]
+}

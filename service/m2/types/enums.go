@@ -89,6 +89,7 @@ const (
 	BatchJobExecutionStatusCancelled            BatchJobExecutionStatus = "Cancelled"
 	BatchJobExecutionStatusSucceeded            BatchJobExecutionStatus = "Succeeded"
 	BatchJobExecutionStatusFailed               BatchJobExecutionStatus = "Failed"
+	BatchJobExecutionStatusPurged               BatchJobExecutionStatus = "Purged"
 	BatchJobExecutionStatusSucceededWithWarning BatchJobExecutionStatus = "Succeeded With Warning"
 )
 
@@ -105,6 +106,7 @@ func (BatchJobExecutionStatus) Values() []BatchJobExecutionStatus {
 		"Cancelled",
 		"Succeeded",
 		"Failed",
+		"Purged",
 		"Succeeded With Warning",
 	}
 }
@@ -219,10 +221,12 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonUnknownOperation      ValidationExceptionReason = "unknownOperation"
-	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "cannotParse"
-	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "fieldValidationFailed"
-	ValidationExceptionReasonOther                 ValidationExceptionReason = "other"
+	ValidationExceptionReasonUnknownOperation         ValidationExceptionReason = "unknownOperation"
+	ValidationExceptionReasonCannotParse              ValidationExceptionReason = "cannotParse"
+	ValidationExceptionReasonFeatureNotAvailable      ValidationExceptionReason = "featureNotAvailable"
+	ValidationExceptionReasonUnsupportedEngineVersion ValidationExceptionReason = "unsupportedEngineVersion"
+	ValidationExceptionReasonFieldValidationFailed    ValidationExceptionReason = "fieldValidationFailed"
+	ValidationExceptionReasonOther                    ValidationExceptionReason = "other"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -232,6 +236,8 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
 		"unknownOperation",
 		"cannotParse",
+		"featureNotAvailable",
+		"unsupportedEngineVersion",
 		"fieldValidationFailed",
 		"other",
 	}

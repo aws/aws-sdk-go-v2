@@ -1010,6 +1010,26 @@ func (m *validateOpUpdateAnswer) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIntegration struct {
+}
+
+func (*validateOpUpdateIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLensReview struct {
 }
 
@@ -1428,6 +1448,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAnswerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAnswer{}, middleware.After)
+}
+
+func addOpUpdateIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIntegration{}, middleware.After)
 }
 
 func addOpUpdateLensReviewValidationMiddleware(stack *middleware.Stack) error {
@@ -2446,6 +2470,27 @@ func validateOpUpdateAnswerInput(v *UpdateAnswerInput) error {
 		if err := validateChoiceUpdates(v.ChoiceUpdates); err != nil {
 			invalidParams.AddNested("ChoiceUpdates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIntegrationInput(v *UpdateIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIntegrationInput"}
+	if v.WorkloadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadId"))
+	}
+	if v.ClientRequestToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
+	}
+	if len(v.IntegratingService) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegratingService"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

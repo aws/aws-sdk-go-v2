@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the metric configuration.
+// Update the summary metric configuration.
 func (c *Client) UpdateMetricConfiguration(ctx context.Context, params *UpdateMetricConfigurationInput, optFns ...func(*Options)) (*UpdateMetricConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateMetricConfigurationInput{}

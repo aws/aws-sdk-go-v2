@@ -17,8 +17,8 @@ type ActionGroupExecutor interface {
 	isActionGroupExecutor()
 }
 
-// The ARN of the Lambda function containing the business logic that is carried
-// out upon invoking the action.
+// The Amazon Resource Name (ARN) of the Lambda function containing the business
+// logic that is carried out upon invoking the action.
 type ActionGroupExecutorMemberLambda struct {
 	Value string
 
@@ -61,7 +61,7 @@ type ActionGroupSummary struct {
 // Contains details about an agent.
 type Agent struct {
 
-	// The ARN of the agent.
+	// The Amazon Resource Name (ARN) of the agent.
 	//
 	// This member is required.
 	AgentArn *string
@@ -76,8 +76,8 @@ type Agent struct {
 	// This member is required.
 	AgentName *string
 
-	// The ARN of the IAM role with permissions to call API operations on the agent.
-	// The ARN must begin with AmazonBedrockExecutionRoleForAgents_ .
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
@@ -125,7 +125,7 @@ type Agent struct {
 	// .
 	ClientToken *string
 
-	// The ARN of the KMS key that encrypts the agent.
+	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
 	CustomerEncryptionKeyArn *string
 
 	// The description of the agent.
@@ -196,8 +196,8 @@ type AgentActionGroup struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The ARN of the Lambda function containing the business logic that is carried
-	// out upon invoking the action.
+	// The Amazon Resource Name (ARN) of the Lambda function containing the business
+	// logic that is carried out upon invoking the action.
 	ActionGroupExecutor ActionGroupExecutor
 
 	// Contains either details about the S3 object containing the OpenAPI schema for
@@ -231,7 +231,7 @@ type AgentActionGroup struct {
 // Contains details about an alias of an agent.
 type AgentAlias struct {
 
-	// The ARN of the alias of the agent.
+	// The Amazon Resource Name (ARN) of the alias of the agent.
 	//
 	// This member is required.
 	AgentAliasArn *string
@@ -467,7 +467,7 @@ type AgentSummary struct {
 // Contains details about a version of an agent.
 type AgentVersion struct {
 
-	// The ARN of the agent that the version belongs to.
+	// The Amazon Resource Name (ARN) of the agent that the version belongs to.
 	//
 	// This member is required.
 	AgentArn *string
@@ -482,8 +482,8 @@ type AgentVersion struct {
 	// This member is required.
 	AgentName *string
 
-	// The ARN of the IAM role with permissions to invoke API operations on the agent.
-	// The ARN must begin with AmazonBedrockExecutionRoleForAgents_ .
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
@@ -516,7 +516,7 @@ type AgentVersion struct {
 	// This member is required.
 	Version *string
 
-	// The ARN of the KMS key that encrypts the agent.
+	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
 	CustomerEncryptionKeyArn *string
 
 	// The description of the version.
@@ -963,7 +963,7 @@ type KnowledgeBase struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ARN of the knowledge base.
+	// The Amazon Resource Name (ARN) of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseArn *string
@@ -983,9 +983,8 @@ type KnowledgeBase struct {
 	// This member is required.
 	Name *string
 
-	// The ARN of the IAM role with permissions to invoke API operations on the
-	// knowledge base. The ARN must begin with
-	// AmazonBedrockExecutionRoleForKnowledgeBase_ .
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the knowledge base.
 	//
 	// This member is required.
 	RoleArn *string
@@ -1069,7 +1068,7 @@ type KnowledgeBaseSummary struct {
 // .
 type OpenSearchServerlessConfiguration struct {
 
-	// The ARN of the OpenSearch Service vector store.
+	// The Amazon Resource Name (ARN) of the OpenSearch Service vector store.
 	//
 	// This member is required.
 	CollectionArn *string
@@ -1123,8 +1122,8 @@ type PineconeConfiguration struct {
 	// This member is required.
 	ConnectionString *string
 
-	// The ARN of the secret that you created in Secrets Manager that is linked to
-	// your Pinecone API key.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Pinecone API key.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
@@ -1231,8 +1230,8 @@ type PromptOverrideConfiguration struct {
 // .
 type RdsConfiguration struct {
 
-	// The ARN of the secret that you created in Secrets Manager that is linked to
-	// your Amazon RDS database.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Amazon RDS database.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
@@ -1248,7 +1247,7 @@ type RdsConfiguration struct {
 	// This member is required.
 	FieldMapping *RdsFieldMapping
 
-	// The ARN of the vector store.
+	// The Amazon Resource Name (ARN) of the vector store.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -1297,8 +1296,8 @@ type RdsFieldMapping struct {
 // .
 type RedisEnterpriseCloudConfiguration struct {
 
-	// The ARN of the secret that you created in Secrets Manager that is linked to
-	// your Redis Enterprise Cloud database.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Redis Enterprise Cloud database.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
@@ -1350,7 +1349,7 @@ type RedisEnterpriseCloudFieldMapping struct {
 // Contains information about the S3 configuration of the data source.
 type S3DataSourceConfiguration struct {
 
-	// The ARN of the bucket that contains the data source.
+	// The Amazon Resource Name (ARN) of the bucket that contains the data source.
 	//
 	// This member is required.
 	BucketArn *string
@@ -1378,7 +1377,7 @@ type S3Identifier struct {
 // Contains the configuration for server-side encryption.
 type ServerSideEncryptionConfiguration struct {
 
-	// The ARN of the KMS key used to encrypt the resource.
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -1443,7 +1442,8 @@ type VectorIngestionConfiguration struct {
 // knowledge base.
 type VectorKnowledgeBaseConfiguration struct {
 
-	// The ARN of the model used to create vector embeddings for the knowledge base.
+	// The Amazon Resource Name (ARN) of the model used to create vector embeddings
+	// for the knowledge base.
 	//
 	// This member is required.
 	EmbeddingModelArn *string

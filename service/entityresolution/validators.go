@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddPolicyStatement struct {
+}
+
+func (*validateOpAddPolicyStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddPolicyStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddPolicyStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddPolicyStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIdMappingWorkflow struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpCreateIdMappingWorkflow) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateIdMappingWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateIdNamespace struct {
+}
+
+func (*validateOpCreateIdNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIdNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIdNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIdNamespaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -90,6 +130,26 @@ func (m *validateOpDeleteIdMappingWorkflow) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIdNamespace struct {
+}
+
+func (*validateOpDeleteIdNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIdNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIdNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIdNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMatchingWorkflow struct {
 }
 
@@ -105,6 +165,26 @@ func (m *validateOpDeleteMatchingWorkflow) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMatchingWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePolicyStatement struct {
+}
+
+func (*validateOpDeletePolicyStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePolicyStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePolicyStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePolicyStatementInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +250,26 @@ func (m *validateOpGetIdMappingWorkflow) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetIdNamespace struct {
+}
+
+func (*validateOpGetIdNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIdNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIdNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIdNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMatchId struct {
 }
 
@@ -225,6 +325,26 @@ func (m *validateOpGetMatchingWorkflow) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMatchingWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPolicy struct {
+}
+
+func (*validateOpGetPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +450,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutPolicy struct {
+}
+
+func (*validateOpPutPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartIdMappingJob struct {
 }
 
@@ -430,6 +570,26 @@ func (m *validateOpUpdateIdMappingWorkflow) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIdNamespace struct {
+}
+
+func (*validateOpUpdateIdNamespace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIdNamespace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIdNamespaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIdNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMatchingWorkflow struct {
 }
 
@@ -470,8 +630,16 @@ func (m *validateOpUpdateSchemaMapping) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddPolicyStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddPolicyStatement{}, middleware.After)
+}
+
 func addOpCreateIdMappingWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIdMappingWorkflow{}, middleware.After)
+}
+
+func addOpCreateIdNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIdNamespace{}, middleware.After)
 }
 
 func addOpCreateMatchingWorkflowValidationMiddleware(stack *middleware.Stack) error {
@@ -486,8 +654,16 @@ func addOpDeleteIdMappingWorkflowValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeleteIdMappingWorkflow{}, middleware.After)
 }
 
+func addOpDeleteIdNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIdNamespace{}, middleware.After)
+}
+
 func addOpDeleteMatchingWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMatchingWorkflow{}, middleware.After)
+}
+
+func addOpDeletePolicyStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePolicyStatement{}, middleware.After)
 }
 
 func addOpDeleteSchemaMappingValidationMiddleware(stack *middleware.Stack) error {
@@ -502,6 +678,10 @@ func addOpGetIdMappingWorkflowValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpGetIdMappingWorkflow{}, middleware.After)
 }
 
+func addOpGetIdNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIdNamespace{}, middleware.After)
+}
+
 func addOpGetMatchIdValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMatchId{}, middleware.After)
 }
@@ -512,6 +692,10 @@ func addOpGetMatchingJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetMatchingWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMatchingWorkflow{}, middleware.After)
+}
+
+func addOpGetPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPolicy{}, middleware.After)
 }
 
 func addOpGetProviderServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -534,6 +718,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutPolicy{}, middleware.After)
+}
+
 func addOpStartIdMappingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartIdMappingJob{}, middleware.After)
 }
@@ -554,12 +742,51 @@ func addOpUpdateIdMappingWorkflowValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateIdMappingWorkflow{}, middleware.After)
 }
 
+func addOpUpdateIdNamespaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIdNamespace{}, middleware.After)
+}
+
 func addOpUpdateMatchingWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMatchingWorkflow{}, middleware.After)
 }
 
 func addOpUpdateSchemaMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSchemaMapping{}, middleware.After)
+}
+
+func validateIdMappingJobOutputSource(v *types.IdMappingJobOutputSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdMappingJobOutputSource"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.OutputS3Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputS3Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdMappingJobOutputSourceConfig(v []types.IdMappingJobOutputSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdMappingJobOutputSourceConfig"}
+	for i := range v {
+		if err := validateIdMappingJobOutputSource(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateIdMappingTechniques(v *types.IdMappingTechniques) error {
@@ -570,9 +797,7 @@ func validateIdMappingTechniques(v *types.IdMappingTechniques) error {
 	if len(v.IdMappingType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("IdMappingType"))
 	}
-	if v.ProviderProperties == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProviderProperties"))
-	} else if v.ProviderProperties != nil {
+	if v.ProviderProperties != nil {
 		if err := validateProviderProperties(v.ProviderProperties); err != nil {
 			invalidParams.AddNested("ProviderProperties", err.(smithy.InvalidParamsError))
 		}
@@ -591,9 +816,6 @@ func validateIdMappingWorkflowInputSource(v *types.IdMappingWorkflowInputSource)
 	invalidParams := smithy.InvalidParamsError{Context: "IdMappingWorkflowInputSource"}
 	if v.InputSourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputSourceARN"))
-	}
-	if v.SchemaName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SchemaName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -651,6 +873,75 @@ func validateIdMappingWorkflowOutputSourceConfig(v []types.IdMappingWorkflowOutp
 	}
 }
 
+func validateIdNamespaceIdMappingWorkflowProperties(v *types.IdNamespaceIdMappingWorkflowProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdNamespaceIdMappingWorkflowProperties"}
+	if len(v.IdMappingType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IdMappingType"))
+	}
+	if v.ProviderProperties != nil {
+		if err := validateNamespaceProviderProperties(v.ProviderProperties); err != nil {
+			invalidParams.AddNested("ProviderProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdNamespaceIdMappingWorkflowPropertiesList(v []types.IdNamespaceIdMappingWorkflowProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdNamespaceIdMappingWorkflowPropertiesList"}
+	for i := range v {
+		if err := validateIdNamespaceIdMappingWorkflowProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdNamespaceInputSource(v *types.IdNamespaceInputSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdNamespaceInputSource"}
+	if v.InputSourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputSourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIdNamespaceInputSourceConfig(v []types.IdNamespaceInputSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdNamespaceInputSourceConfig"}
+	for i := range v {
+		if err := validateIdNamespaceInputSource(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInputSource(v *types.InputSource) error {
 	if v == nil {
 		return nil
@@ -693,6 +984,21 @@ func validateIntermediateSourceConfiguration(v *types.IntermediateSourceConfigur
 	invalidParams := smithy.InvalidParamsError{Context: "IntermediateSourceConfiguration"}
 	if v.IntermediateS3Path == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IntermediateS3Path"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNamespaceProviderProperties(v *types.NamespaceProviderProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NamespaceProviderProperties"}
+	if v.ProviderServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderServiceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -909,6 +1215,33 @@ func validateSchemaInputAttributes(v []types.SchemaInputAttribute) error {
 	}
 }
 
+func validateOpAddPolicyStatementInput(v *AddPolicyStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddPolicyStatementInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.StatementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
+	}
+	if len(v.Effect) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Effect"))
+	}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateIdMappingWorkflowInput(v *CreateIdMappingWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -924,9 +1257,7 @@ func validateOpCreateIdMappingWorkflowInput(v *CreateIdMappingWorkflowInput) err
 			invalidParams.AddNested("InputSourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.OutputSourceConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputSourceConfig"))
-	} else if v.OutputSourceConfig != nil {
+	if v.OutputSourceConfig != nil {
 		if err := validateIdMappingWorkflowOutputSourceConfig(v.OutputSourceConfig); err != nil {
 			invalidParams.AddNested("OutputSourceConfig", err.(smithy.InvalidParamsError))
 		}
@@ -940,6 +1271,34 @@ func validateOpCreateIdMappingWorkflowInput(v *CreateIdMappingWorkflowInput) err
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateIdNamespaceInput(v *CreateIdNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIdNamespaceInput"}
+	if v.IdNamespaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceName"))
+	}
+	if v.InputSourceConfig != nil {
+		if err := validateIdNamespaceInputSourceConfig(v.InputSourceConfig); err != nil {
+			invalidParams.AddNested("InputSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IdMappingWorkflowProperties != nil {
+		if err := validateIdNamespaceIdMappingWorkflowPropertiesList(v.IdMappingWorkflowProperties); err != nil {
+			invalidParams.AddNested("IdMappingWorkflowProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1024,6 +1383,21 @@ func validateOpDeleteIdMappingWorkflowInput(v *DeleteIdMappingWorkflowInput) err
 	}
 }
 
+func validateOpDeleteIdNamespaceInput(v *DeleteIdNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIdNamespaceInput"}
+	if v.IdNamespaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMatchingWorkflowInput(v *DeleteMatchingWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -1031,6 +1405,24 @@ func validateOpDeleteMatchingWorkflowInput(v *DeleteMatchingWorkflowInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteMatchingWorkflowInput"}
 	if v.WorkflowName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePolicyStatementInput(v *DeletePolicyStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePolicyStatementInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.StatementId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatementId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1087,6 +1479,21 @@ func validateOpGetIdMappingWorkflowInput(v *GetIdMappingWorkflowInput) error {
 	}
 }
 
+func validateOpGetIdNamespaceInput(v *GetIdNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIdNamespaceInput"}
+	if v.IdNamespaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMatchIdInput(v *GetMatchIdInput) error {
 	if v == nil {
 		return nil
@@ -1130,6 +1537,21 @@ func validateOpGetMatchingWorkflowInput(v *GetMatchingWorkflowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetMatchingWorkflowInput"}
 	if v.WorkflowName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPolicyInput(v *GetPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1216,6 +1638,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutPolicyInput(v *PutPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartIdMappingJobInput(v *StartIdMappingJobInput) error {
 	if v == nil {
 		return nil
@@ -1223,6 +1663,11 @@ func validateOpStartIdMappingJobInput(v *StartIdMappingJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartIdMappingJobInput"}
 	if v.WorkflowName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkflowName"))
+	}
+	if v.OutputSourceConfig != nil {
+		if err := validateIdMappingJobOutputSourceConfig(v.OutputSourceConfig); err != nil {
+			invalidParams.AddNested("OutputSourceConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1297,9 +1742,7 @@ func validateOpUpdateIdMappingWorkflowInput(v *UpdateIdMappingWorkflowInput) err
 			invalidParams.AddNested("InputSourceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.OutputSourceConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OutputSourceConfig"))
-	} else if v.OutputSourceConfig != nil {
+	if v.OutputSourceConfig != nil {
 		if err := validateIdMappingWorkflowOutputSourceConfig(v.OutputSourceConfig); err != nil {
 			invalidParams.AddNested("OutputSourceConfig", err.(smithy.InvalidParamsError))
 		}
@@ -1313,6 +1756,31 @@ func validateOpUpdateIdMappingWorkflowInput(v *UpdateIdMappingWorkflowInput) err
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIdNamespaceInput(v *UpdateIdNamespaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdNamespaceInput"}
+	if v.IdNamespaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdNamespaceName"))
+	}
+	if v.InputSourceConfig != nil {
+		if err := validateIdNamespaceInputSourceConfig(v.InputSourceConfig); err != nil {
+			invalidParams.AddNested("InputSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IdMappingWorkflowProperties != nil {
+		if err := validateIdNamespaceIdMappingWorkflowPropertiesList(v.IdMappingWorkflowProperties); err != nil {
+			invalidParams.AddNested("IdMappingWorkflowProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

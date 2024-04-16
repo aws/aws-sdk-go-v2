@@ -1,0 +1,8 @@
+{
+    "id": "3d2826bb-3431-4724-9125-fc46d44d1714",
+    "type": "feature",
+    "description": "For Create Agent API, the agentResourceRoleArn parameter is no longer required.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

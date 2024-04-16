@@ -7,6 +7,48 @@ import (
 	"time"
 )
 
+// Account-level: Input for the Jira configuration.
+type AccountJiraConfigurationInput struct {
+
+	// Account-level: Configuration status of the Jira integration.
+	IntegrationStatus IntegrationStatusInput
+
+	// Account-level: Jira issue management status.
+	IssueManagementStatus AccountJiraIssueManagementStatus
+
+	// Account-level: Jira issue management type.
+	IssueManagementType IssueManagementType
+
+	// Account-level: Jira project key to sync workloads to.
+	JiraProjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Account-level: Output configuration of the Jira integration.
+type AccountJiraConfigurationOutput struct {
+
+	// Account-level: Configuration status of the Jira integration.
+	IntegrationStatus IntegrationStatus
+
+	// Account-level: Jira issue management status.
+	IssueManagementStatus AccountJiraIssueManagementStatus
+
+	// Account-level: Jira issue management type.
+	IssueManagementType IssueManagementType
+
+	// Account-level: Jira project key to sync workloads to.
+	JiraProjectKey *string
+
+	// Account-level: Status message on configuration of the Jira integration.
+	StatusMessage *string
+
+	// Account-level: Jira subdomain URL.
+	Subdomain *string
+
+	noSmithyDocumentSerde
+}
+
 // The choice level additional resources for a custom lens. This field does not
 // apply to Amazon Web Services official lenses.
 type AdditionalResources struct {
@@ -47,6 +89,9 @@ type Answer struct {
 
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable *bool
+
+	// Configuration of the Jira integration.
+	JiraConfiguration *JiraConfiguration
 
 	// The notes associated with the workload. For a review template, these are the
 	// notes that will be associated with the workload when the template is applied.
@@ -89,6 +134,9 @@ type AnswerSummary struct {
 
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable *bool
+
+	// Configuration of the Jira integration.
+	JiraConfiguration *JiraConfiguration
 
 	// The ID used to identify a pillar, for example, security . A pillar is identified
 	// by its PillarReviewSummary$PillarId .
@@ -368,6 +416,9 @@ type ImprovementSummary struct {
 	// The improvement plan details.
 	ImprovementPlans []ChoiceImprovementPlan
 
+	// Configuration of the Jira integration.
+	JiraConfiguration *JiraConfiguration
+
 	// The ID used to identify a pillar, for example, security . A pillar is identified
 	// by its PillarReviewSummary$PillarId .
 	PillarId *string
@@ -380,6 +431,27 @@ type ImprovementSummary struct {
 
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
+
+	noSmithyDocumentSerde
+}
+
+// Configuration of the Jira integration.
+type JiraConfiguration struct {
+
+	// The URL of the associated Jira issue.
+	JiraIssueUrl *string
+
+	// The date and time recorded.
+	LastSyncedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Selected questions in the workload.
+type JiraSelectedQuestionConfiguration struct {
+
+	// Selected pillars in the workload.
+	SelectedPillars []SelectedPillar
 
 	noSmithyDocumentSerde
 }
@@ -428,6 +500,9 @@ type LensMetric struct {
 
 // A lens review of a question.
 type LensReview struct {
+
+	// Jira configuration status of the Lens review.
+	JiraConfiguration *JiraSelectedQuestionConfiguration
 
 	// The alias of the lens. For Amazon Web Services official lenses, this is either
 	// the lens alias, such as serverless , or the lens ARN, such as
@@ -1228,6 +1303,19 @@ type ReviewTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The selected pillar.
+type SelectedPillar struct {
+
+	// The ID used to identify a pillar, for example, security . A pillar is identified
+	// by its PillarReviewSummary$PillarId .
+	PillarId *string
+
+	// Selected question IDs in the selected pillar.
+	SelectedQuestionIds []string
+
+	noSmithyDocumentSerde
+}
+
 // The share invitation.
 type ShareInvitation struct {
 
@@ -1423,6 +1511,9 @@ type Workload struct {
 	// is added.
 	IsReviewOwnerUpdateAcknowledged *bool
 
+	// Jira configuration for a specific workload.
+	JiraConfiguration *WorkloadJiraConfigurationOutput
+
 	// The list of lenses associated with the workload. Each lens is identified by its
 	// LensSummary$LensAlias . If a review template that specifies lenses is applied to
 	// the workload, those lenses are applied to the workload in addition to these
@@ -1492,6 +1583,39 @@ type WorkloadDiscoveryConfig struct {
 	// The mode to use for identifying resources associated with the workload. You can
 	// specify WORKLOAD_METADATA , APP_REGISTRY , or both.
 	WorkloadResourceDefinition []DefinitionType
+
+	noSmithyDocumentSerde
+}
+
+// Workload-level: Input for the Jira configuration.
+type WorkloadJiraConfigurationInput struct {
+
+	// Workload-level: Jira issue management status.
+	IssueManagementStatus WorkloadIssueManagementStatus
+
+	// Workload-level: Jira issue management type.
+	IssueManagementType IssueManagementType
+
+	// Workload-level: Jira project key to sync workloads to.
+	JiraProjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Workload-level: Output configuration of the Jira integration.
+type WorkloadJiraConfigurationOutput struct {
+
+	// Workload-level: Jira issue management status.
+	IssueManagementStatus WorkloadIssueManagementStatus
+
+	// Workload-level: Jira issue management type.
+	IssueManagementType IssueManagementType
+
+	// Workload-level: Jira project key to sync workloads to.
+	JiraProjectKey *string
+
+	// Workload-level: Status message on configuration of the Jira integration.
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }

@@ -1454,9 +1454,6 @@ func validateOpCreateAgentInput(v *CreateAgentInput) error {
 	if v.AgentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentName"))
 	}
-	if v.AgentResourceRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentResourceRoleArn"))
-	}
 	if v.PromptOverrideConfiguration != nil {
 		if err := validatePromptOverrideConfiguration(v.PromptOverrideConfiguration); err != nil {
 			invalidParams.AddNested("PromptOverrideConfiguration", err.(smithy.InvalidParamsError))

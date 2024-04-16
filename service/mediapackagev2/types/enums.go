@@ -2,6 +2,24 @@
 
 package types
 
+type AdMarkerDash string
+
+// Enum values for AdMarkerDash
+const (
+	AdMarkerDashBinary AdMarkerDash = "BINARY"
+	AdMarkerDashXml    AdMarkerDash = "XML"
+)
+
+// Values returns all known values for AdMarkerDash. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdMarkerDash) Values() []AdMarkerDash {
+	return []AdMarkerDash{
+		"BINARY",
+		"XML",
+	}
+}
+
 type AdMarkerHls string
 
 // Enum values for AdMarkerHls
@@ -73,6 +91,86 @@ func (ContainerType) Values() []ContainerType {
 	return []ContainerType{
 		"TS",
 		"CMAF",
+	}
+}
+
+type DashDrmSignaling string
+
+// Enum values for DashDrmSignaling
+const (
+	DashDrmSignalingIndividual DashDrmSignaling = "INDIVIDUAL"
+	DashDrmSignalingReferenced DashDrmSignaling = "REFERENCED"
+)
+
+// Values returns all known values for DashDrmSignaling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashDrmSignaling) Values() []DashDrmSignaling {
+	return []DashDrmSignaling{
+		"INDIVIDUAL",
+		"REFERENCED",
+	}
+}
+
+type DashPeriodTrigger string
+
+// Enum values for DashPeriodTrigger
+const (
+	DashPeriodTriggerAvails            DashPeriodTrigger = "AVAILS"
+	DashPeriodTriggerDrmKeyRotation    DashPeriodTrigger = "DRM_KEY_ROTATION"
+	DashPeriodTriggerSourceChanges     DashPeriodTrigger = "SOURCE_CHANGES"
+	DashPeriodTriggerSourceDisruptions DashPeriodTrigger = "SOURCE_DISRUPTIONS"
+	DashPeriodTriggerNone              DashPeriodTrigger = "NONE"
+)
+
+// Values returns all known values for DashPeriodTrigger. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashPeriodTrigger) Values() []DashPeriodTrigger {
+	return []DashPeriodTrigger{
+		"AVAILS",
+		"DRM_KEY_ROTATION",
+		"SOURCE_CHANGES",
+		"SOURCE_DISRUPTIONS",
+		"NONE",
+	}
+}
+
+type DashSegmentTemplateFormat string
+
+// Enum values for DashSegmentTemplateFormat
+const (
+	DashSegmentTemplateFormatNumberWithTimeline DashSegmentTemplateFormat = "NUMBER_WITH_TIMELINE"
+)
+
+// Values returns all known values for DashSegmentTemplateFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashSegmentTemplateFormat) Values() []DashSegmentTemplateFormat {
+	return []DashSegmentTemplateFormat{
+		"NUMBER_WITH_TIMELINE",
+	}
+}
+
+type DashUtcTimingMode string
+
+// Enum values for DashUtcTimingMode
+const (
+	DashUtcTimingModeHttpHead   DashUtcTimingMode = "HTTP_HEAD"
+	DashUtcTimingModeHttpIso    DashUtcTimingMode = "HTTP_ISO"
+	DashUtcTimingModeHttpXsdate DashUtcTimingMode = "HTTP_XSDATE"
+	DashUtcTimingModeUtcDirect  DashUtcTimingMode = "UTC_DIRECT"
+)
+
+// Values returns all known values for DashUtcTimingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DashUtcTimingMode) Values() []DashUtcTimingMode {
+	return []DashUtcTimingMode{
+		"HTTP_HEAD",
+		"HTTP_ISO",
+		"HTTP_XSDATE",
+		"UTC_DIRECT",
 	}
 }
 
@@ -243,6 +341,7 @@ const (
 	ValidationExceptionTypeEncryptionContractShared                            ValidationExceptionType = "ENCRYPTION_CONTRACT_SHARED"
 	ValidationExceptionTypeNumManifestsLow                                     ValidationExceptionType = "NUM_MANIFESTS_LOW"
 	ValidationExceptionTypeNumManifestsHigh                                    ValidationExceptionType = "NUM_MANIFESTS_HIGH"
+	ValidationExceptionTypeManifestDrmSystemsIncompatible                      ValidationExceptionType = "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE"
 	ValidationExceptionTypeDrmSystemsEncryptionMethodIncompatible              ValidationExceptionType = "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE"
 	ValidationExceptionTypeRoleArnNotAssumable                                 ValidationExceptionType = "ROLE_ARN_NOT_ASSUMABLE"
 	ValidationExceptionTypeRoleArnLengthOutOfRange                             ValidationExceptionType = "ROLE_ARN_LENGTH_OUT_OF_RANGE"
@@ -267,6 +366,13 @@ const (
 	ValidationExceptionTypeInvalidManifestFilter                               ValidationExceptionType = "INVALID_MANIFEST_FILTER"
 	ValidationExceptionTypeInvalidTimeDelaySeconds                             ValidationExceptionType = "INVALID_TIME_DELAY_SECONDS"
 	ValidationExceptionTypeEndTimeEarlierThanStartTime                         ValidationExceptionType = "END_TIME_EARLIER_THAN_START_TIME"
+	ValidationExceptionTypeTsContainerTypeWithDashManifest                     ValidationExceptionType = "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST"
+	ValidationExceptionTypeDirectModeWithTimingSource                          ValidationExceptionType = "DIRECT_MODE_WITH_TIMING_SOURCE"
+	ValidationExceptionTypeNoneModeWithTimingSource                            ValidationExceptionType = "NONE_MODE_WITH_TIMING_SOURCE"
+	ValidationExceptionTypeTimingSourceMissing                                 ValidationExceptionType = "TIMING_SOURCE_MISSING"
+	ValidationExceptionTypeUpdatePeriodSmallerThanSegmentDuration              ValidationExceptionType = "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION"
+	ValidationExceptionTypePeriodTriggersNoneSpecifiedWithAdditionalValues     ValidationExceptionType = "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES"
+	ValidationExceptionTypeDrmSignalingMismatchSegmentEncryptionStatus         ValidationExceptionType = "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS"
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
@@ -287,6 +393,7 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"ENCRYPTION_CONTRACT_SHARED",
 		"NUM_MANIFESTS_LOW",
 		"NUM_MANIFESTS_HIGH",
+		"MANIFEST_DRM_SYSTEMS_INCOMPATIBLE",
 		"DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE",
 		"ROLE_ARN_NOT_ASSUMABLE",
 		"ROLE_ARN_LENGTH_OUT_OF_RANGE",
@@ -311,5 +418,12 @@ func (ValidationExceptionType) Values() []ValidationExceptionType {
 		"INVALID_MANIFEST_FILTER",
 		"INVALID_TIME_DELAY_SECONDS",
 		"END_TIME_EARLIER_THAN_START_TIME",
+		"TS_CONTAINER_TYPE_WITH_DASH_MANIFEST",
+		"DIRECT_MODE_WITH_TIMING_SOURCE",
+		"NONE_MODE_WITH_TIMING_SOURCE",
+		"TIMING_SOURCE_MISSING",
+		"UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION",
+		"PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES",
+		"DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS",
 	}
 }

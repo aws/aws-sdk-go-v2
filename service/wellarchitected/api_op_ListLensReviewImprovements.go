@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List lens review improvements.
+// List the improvements of a particular lens review.
 func (c *Client) ListLensReviewImprovements(ctx context.Context, params *ListLensReviewImprovementsInput, optFns ...func(*Options)) (*ListLensReviewImprovementsOutput, error) {
 	if params == nil {
 		params = &ListLensReviewImprovementsInput{}

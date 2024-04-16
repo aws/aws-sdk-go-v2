@@ -197,6 +197,7 @@ type BatchJobExecutionSummary struct {
 // The following types satisfy this interface:
 //
 //	BatchJobIdentifierMemberFileBatchJobIdentifier
+//	BatchJobIdentifierMemberRestartBatchJobIdentifier
 //	BatchJobIdentifierMemberS3BatchJobIdentifier
 //	BatchJobIdentifierMemberScriptBatchJobIdentifier
 type BatchJobIdentifier interface {
@@ -211,6 +212,16 @@ type BatchJobIdentifierMemberFileBatchJobIdentifier struct {
 }
 
 func (*BatchJobIdentifierMemberFileBatchJobIdentifier) isBatchJobIdentifier() {}
+
+// Specifies the required information for restart, including execution ID and
+// jobsteprestartmarker.
+type BatchJobIdentifierMemberRestartBatchJobIdentifier struct {
+	Value RestartBatchJobIdentifier
+
+	noSmithyDocumentSerde
+}
+
+func (*BatchJobIdentifierMemberRestartBatchJobIdentifier) isBatchJobIdentifier() {}
 
 // Specifies an Amazon S3 location that identifies the batch jobs that you want to
 // run. Use this identifier to run ad hoc batch jobs.
@@ -790,6 +801,50 @@ type JobIdentifierMemberScriptName struct {
 
 func (*JobIdentifierMemberScriptName) isJobIdentifier() {}
 
+// Provides information related to a job step.
+type JobStep struct {
+
+	// The name of a procedure step.
+	ProcStepName *string
+
+	// The number of a procedure step.
+	ProcStepNumber int32
+
+	// The condition code of a step.
+	StepCondCode *string
+
+	// The name of a step.
+	StepName *string
+
+	// The number of a step.
+	StepNumber int32
+
+	// Specifies if a step can be restarted or not.
+	StepRestartable bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides restart step information for the most recent restart operation.
+type JobStepRestartMarker struct {
+
+	// The step name that a batch job restart was from.
+	//
+	// This member is required.
+	FromStep *string
+
+	// The procedure step name that a job was restarted from.
+	FromProcStep *string
+
+	// The procedure step name that a batch job was restarted to.
+	ToProcStep *string
+
+	// The step name that a job was restarted to.
+	ToStep *string
+
+	noSmithyDocumentSerde
+}
+
 // A subset of the attributes that describe a log group. In CloudWatch a log group
 // is a group of log streams that share the same retention, monitoring, and access
 // control settings.
@@ -931,6 +986,23 @@ type RecordLength struct {
 	//
 	// This member is required.
 	Min int32
+
+	noSmithyDocumentSerde
+}
+
+// An identifier for the StartBatchJob API to show that it is a restart operation.
+type RestartBatchJobIdentifier struct {
+
+	// The executionId from the StartBatchJob response when the job ran for the first
+	// time.
+	//
+	// This member is required.
+	ExecutionId *string
+
+	// The restart step information for the most recent restart operation.
+	//
+	// This member is required.
+	JobStepRestartMarker *JobStepRestartMarker
 
 	noSmithyDocumentSerde
 }

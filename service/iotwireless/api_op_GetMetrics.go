@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get metrics.
+// Get the summary metrics for this AWS account.
 func (c *Client) GetMetrics(ctx context.Context, params *GetMetricsInput, optFns ...func(*Options)) (*GetMetricsOutput, error) {
 	if params == nil {
 		params = &GetMetricsInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetMetrics(ctx context.Context, params *GetMetricsInput, optFns
 
 type GetMetricsInput struct {
 
-	// The list of queries to retrieve summary metrics.
+	// The list of queries to retrieve the summary metrics.
 	SummaryMetricQueries []types.SummaryMetricQuery
 
 	noSmithyDocumentSerde
@@ -37,7 +37,7 @@ type GetMetricsInput struct {
 
 type GetMetricsOutput struct {
 
-	// The list of retrieved metrics.
+	// The list of summary metrics that were retrieved.
 	SummaryMetricQueryResults []types.SummaryMetricQueryResult
 
 	// Metadata pertaining to the operation's result.

@@ -1,0 +1,8 @@
+{
+    "id": "3c7c9264-c195-4747-926b-ec2ae28cab20",
+    "type": "feature",
+    "description": "Add PublicGateways in the GetWirelessStatistics call response, indicating the LoRaWAN public network accessed by the device.",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

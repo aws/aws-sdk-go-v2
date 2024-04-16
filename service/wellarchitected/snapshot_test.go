@@ -350,6 +350,18 @@ func TestCheckSnapshot_GetConsolidatedReport(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetGlobalSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlobalSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGlobalSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetLens(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLens(context.Background(), nil, func(o *Options) {
@@ -763,6 +775,18 @@ func TestCheckSnapshot_UpdateGlobalSettings(t *testing.T) {
 	_, err := svc.UpdateGlobalSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateGlobalSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1189,6 +1213,18 @@ func TestUpdateSnapshot_GetConsolidatedReport(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetGlobalSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlobalSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGlobalSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetLens(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetLens(context.Background(), nil, func(o *Options) {
@@ -1602,6 +1638,18 @@ func TestUpdateSnapshot_UpdateGlobalSettings(t *testing.T) {
 	_, err := svc.UpdateGlobalSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateGlobalSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIntegration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIntegration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIntegration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

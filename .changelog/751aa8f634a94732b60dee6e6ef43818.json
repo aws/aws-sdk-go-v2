@@ -1,0 +1,8 @@
+{
+    "id": "751aa8f6-34a9-4732-b60d-ee6e6ef43818",
+    "type": "feature",
+    "description": "AWS Well-Architected now has a Connector for Jira to allow customers to efficiently track workload risks and improvement efforts and create closed-loop mechanisms.",
+    "modules": [
+        "service/wellarchitected"
+    ]
+}

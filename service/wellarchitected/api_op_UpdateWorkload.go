@@ -100,6 +100,9 @@ type UpdateWorkloadInput struct {
 	// is added.
 	IsReviewOwnerUpdateAcknowledged *bool
 
+	// Configuration of the Jira integration.
+	JiraConfiguration *types.WorkloadJiraConfigurationInput
+
 	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 

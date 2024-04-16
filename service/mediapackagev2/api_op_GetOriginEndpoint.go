@@ -103,6 +103,9 @@ type GetOriginEndpointOutput struct {
 	// This member is required.
 	Segment *types.Segment
 
+	// A DASH manifest configuration.
+	DashManifests []types.GetDashManifestConfiguration
+
 	// The description for your origin endpoint.
 	Description *string
 

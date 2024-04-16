@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates whether the Amazon Web Services account is opted into organization
+// Update whether the Amazon Web Services account is opted into organization
 // sharing and discovery integration features.
 func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalSettingsInput, optFns ...func(*Options)) (*UpdateGlobalSettingsOutput, error) {
 	if params == nil {
@@ -32,6 +32,9 @@ type UpdateGlobalSettingsInput struct {
 
 	// The status of discovery support settings.
 	DiscoveryIntegrationStatus types.DiscoveryIntegrationStatus
+
+	// The status of Jira integration settings.
+	JiraConfiguration *types.AccountJiraConfigurationInput
 
 	// The status of organization sharing settings.
 	OrganizationSharingStatus types.OrganizationSharingStatus

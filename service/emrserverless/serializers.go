@@ -1769,6 +1769,11 @@ func awsRestjson1_serializeDocumentWorkerResourceConfig(v *types.WorkerResourceC
 		ok.String(*v.Disk)
 	}
 
+	if v.DiskType != nil {
+		ok := object.Key("diskType")
+		ok.String(*v.DiskType)
+	}
+
 	if v.Memory != nil {
 		ok := object.Key("memory")
 		ok.String(*v.Memory)

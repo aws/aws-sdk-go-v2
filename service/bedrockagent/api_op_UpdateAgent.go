@@ -39,8 +39,8 @@ type UpdateAgentInput struct {
 	// This member is required.
 	AgentName *string
 
-	// The ARN of the IAM role with permissions to update the agent. The ARN must
-	// begin with AmazonBedrockExecutionRoleForAgents_ .
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
@@ -50,7 +50,7 @@ type UpdateAgentInput struct {
 	// This member is required.
 	FoundationModel *string
 
-	// The ARN of the KMS key with which to encrypt the agent.
+	// The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
 	CustomerEncryptionKeyArn *string
 
 	// Specifies a new description of the agent.

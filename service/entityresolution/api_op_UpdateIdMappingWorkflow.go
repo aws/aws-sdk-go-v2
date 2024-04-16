@@ -42,14 +42,8 @@ type UpdateIdMappingWorkflowInput struct {
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path and
-	// KMSArn .
-	//
-	// This member is required.
-	OutputSourceConfig []types.IdMappingWorkflowOutputSource
-
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to access resources on your behalf.
+	// role to access Amazon Web Services resources on your behalf.
 	//
 	// This member is required.
 	RoleArn *string
@@ -61,6 +55,10 @@ type UpdateIdMappingWorkflowInput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	// A list of OutputSource objects, each of which contains fields OutputS3Path and
+	// KMSArn .
+	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	noSmithyDocumentSerde
 }
@@ -78,20 +76,14 @@ type UpdateIdMappingWorkflowOutput struct {
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path and
-	// KMSArn .
-	//
-	// This member is required.
-	OutputSourceConfig []types.IdMappingWorkflowOutputSource
-
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to access resources on your behalf.
+	// role to access Amazon Web Services resources on your behalf.
 	//
 	// This member is required.
 	RoleArn *string
 
 	// The Amazon Resource Name (ARN) of the workflow role. Entity Resolution assumes
-	// this role to access resources on your behalf.
+	// this role to access Amazon Web Services resources on your behalf.
 	//
 	// This member is required.
 	WorkflowArn *string
@@ -103,6 +95,10 @@ type UpdateIdMappingWorkflowOutput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	// A list of OutputSource objects, each of which contains fields OutputS3Path and
+	// KMSArn .
+	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -370,6 +370,26 @@ func (m *validateOpListBatchJobExecutions) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListBatchJobRestartPoints struct {
+}
+
+func (*validateOpListBatchJobRestartPoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBatchJobRestartPoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBatchJobRestartPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBatchJobRestartPointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDataSetImportHistory struct {
 }
 
@@ -662,6 +682,10 @@ func addOpListBatchJobExecutionsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpListBatchJobExecutions{}, middleware.After)
 }
 
+func addOpListBatchJobRestartPointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBatchJobRestartPoints{}, middleware.After)
+}
+
 func addOpListDataSetImportHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSetImportHistory{}, middleware.After)
 }
@@ -744,6 +768,11 @@ func validateBatchJobIdentifier(v types.BatchJobIdentifier) error {
 	case *types.BatchJobIdentifierMemberFileBatchJobIdentifier:
 		if err := validateFileBatchJobIdentifier(&uv.Value); err != nil {
 			invalidParams.AddNested("[fileBatchJobIdentifier]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BatchJobIdentifierMemberRestartBatchJobIdentifier:
+		if err := validateRestartBatchJobIdentifier(&uv.Value); err != nil {
+			invalidParams.AddNested("[restartBatchJobIdentifier]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.BatchJobIdentifierMemberS3BatchJobIdentifier:
@@ -946,6 +975,21 @@ func validateHighAvailabilityConfig(v *types.HighAvailabilityConfig) error {
 	}
 }
 
+func validateJobStepRestartMarker(v *types.JobStepRestartMarker) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobStepRestartMarker"}
+	if v.FromStep == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromStep"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePoAttributes(v *types.PoAttributes) error {
 	if v == nil {
 		return nil
@@ -996,6 +1040,28 @@ func validateRecordLength(v *types.RecordLength) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RecordLength"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRestartBatchJobIdentifier(v *types.RestartBatchJobIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestartBatchJobIdentifier"}
+	if v.ExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
+	}
+	if v.JobStepRestartMarker == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobStepRestartMarker"))
+	} else if v.JobStepRestartMarker != nil {
+		if err := validateJobStepRestartMarker(v.JobStepRestartMarker); err != nil {
+			invalidParams.AddNested("JobStepRestartMarker", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1420,6 +1486,24 @@ func validateOpListBatchJobExecutionsInput(v *ListBatchJobExecutionsInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "ListBatchJobExecutionsInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBatchJobRestartPointsInput(v *ListBatchJobRestartPointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBatchJobRestartPointsInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.ExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

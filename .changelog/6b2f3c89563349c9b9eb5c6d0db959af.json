@@ -1,0 +1,8 @@
+{
+    "id": "6b2f3c89-5633-49c9-b9eb-5c6d0db959af",
+    "type": "feature",
+    "description": "This release adds Lake Formation managed RAM support for the 4 APIs - \"DescribeLakeFormationIdentityCenterConfiguration\", \"CreateLakeFormationIdentityCenterConfiguration\", \"DescribeLakeFormationIdentityCenterConfiguration\", and \"DeleteLakeFormationIdentityCenterConfiguration\"",
+    "modules": [
+        "service/lakeformation"
+    ]
+}

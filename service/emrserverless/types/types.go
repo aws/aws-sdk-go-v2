@@ -624,6 +624,11 @@ type WorkerResourceConfig struct {
 	// The disk requirements for every worker instance of the worker type.
 	Disk *string
 
+	// The disk type for every worker instance of the work type. Shuffle optimized
+	// disks have higher performance characteristics and are better for shuffle heavy
+	// workloads. Default is STANDARD .
+	DiskType *string
+
 	noSmithyDocumentSerde
 }
 

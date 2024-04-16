@@ -1,0 +1,8 @@
+{
+    "id": "790a9a25-d6d0-40a0-b794-c6f59d18105f",
+    "type": "feature",
+    "description": "Dash v2 is a MediaPackage V2 feature to support egressing on DASH manifest format.",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

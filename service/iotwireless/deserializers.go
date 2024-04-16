@@ -18349,6 +18349,11 @@ func awsRestjson1_deserializeDocumentLoRaWANDeviceMetadata(v **types.LoRaWANDevi
 				return err
 			}
 
+		case "PublicGateways":
+			if err := awsRestjson1_deserializeDocumentLoRaWANPublicGatewayMetadataList(&sv.PublicGateways, value); err != nil {
+				return err
+			}
+
 		case "Timestamp":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19527,6 +19532,175 @@ func awsRestjson1_deserializeDocumentLoRaWANMulticastSession(v **types.LoRaWANMu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLoRaWANPublicGatewayMetadata(v **types.LoRaWANPublicGatewayMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LoRaWANPublicGatewayMetadata
+	if *v == nil {
+		sv = &types.LoRaWANPublicGatewayMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DlAllowed":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected DlAllowed to be of type *bool, got %T instead", value)
+				}
+				sv.DlAllowed = ptr.Bool(jtv)
+			}
+
+		case "Id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "ProviderNetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProviderNetId to be of type string, got %T instead", value)
+				}
+				sv.ProviderNetId = ptr.String(jtv)
+			}
+
+		case "RfRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RfRegion to be of type string, got %T instead", value)
+				}
+				sv.RfRegion = ptr.String(jtv)
+			}
+
+		case "Rssi":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Rssi = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Rssi = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Snr":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Snr = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Snr = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLoRaWANPublicGatewayMetadataList(v *[]types.LoRaWANPublicGatewayMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LoRaWANPublicGatewayMetadata
+	if *v == nil {
+		cv = []types.LoRaWANPublicGatewayMetadata{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LoRaWANPublicGatewayMetadata
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLoRaWANPublicGatewayMetadata(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

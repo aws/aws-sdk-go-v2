@@ -57,7 +57,7 @@ type UpdateKnowledgeBaseInput struct {
 	Name *string
 
 	// Specifies a different Amazon Resource Name (ARN) of the IAM role with
-	// permissions to modify the knowledge base.
+	// permissions to invoke API operations on the knowledge base.
 	//
 	// This member is required.
 	RoleArn *string

@@ -42,6 +42,16 @@ type UpdateLakeFormationIdentityCenterConfigurationInput struct {
 	// applications that are allowed to access data managed by Lake Formation.
 	ExternalFiltering *types.ExternalFilteringConfiguration
 
+	// A list of Amazon Web Services account IDs or Amazon Web Services
+	// organization/organizational unit ARNs that are allowed to access to access data
+	// managed by Lake Formation. If the ShareRecipients list includes valid values,
+	// then the resource share is updated with the principals you want to have access
+	// to the resources. If the ShareRecipients value is null, both the list of share
+	// recipients and the resource share remain unchanged. If the ShareRecipients
+	// value is an empty list, then the existing share recipients list will be cleared,
+	// and the resource share will be deleted.
+	ShareRecipients []types.DataLakePrincipal
+
 	noSmithyDocumentSerde
 }
 

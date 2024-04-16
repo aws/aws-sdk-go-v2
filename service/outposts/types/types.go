@@ -86,6 +86,48 @@ type AssetLocation struct {
 	noSmithyDocumentSerde
 }
 
+// The capacity tasks that failed.
+type CapacityTaskFailure struct {
+
+	// The reason that the specified capacity task failed.
+	//
+	// This member is required.
+	Reason *string
+
+	// The type of failure.
+	Type CapacityTaskFailureType
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the capacity task.
+type CapacityTaskSummary struct {
+
+	// The ID of the specified capacity task.
+	CapacityTaskId *string
+
+	// The status of the capacity task.
+	CapacityTaskStatus CapacityTaskStatus
+
+	// The date that the specified capacity task successfully ran.
+	CompletionDate *time.Time
+
+	// The date that the specified capacity task was created.
+	CreationDate *time.Time
+
+	// The date that the specified capacity was last modified.
+	LastModifiedDate *time.Time
+
+	// The ID of the Amazon Web Services Outposts order of the host associated with
+	// the capacity task.
+	OrderId *string
+
+	// The ID of the Outpost associated with the specified capacity task.
+	OutpostId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a catalog item.
 type CatalogItem struct {
 
@@ -172,6 +214,23 @@ type EC2Capacity struct {
 
 	// The quantity of the EC2 capacity.
 	Quantity *string
+
+	noSmithyDocumentSerde
+}
+
+// The instance type that you specify determines the combination of CPU, memory,
+// storage, and networking capacity.
+type InstanceTypeCapacity struct {
+
+	// The number of instances for the specified instance type.
+	//
+	// This member is required.
+	Count int32
+
+	// The instance type of the hosts.
+	//
+	// This member is required.
+	InstanceType *string
 
 	noSmithyDocumentSerde
 }

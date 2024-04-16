@@ -63,7 +63,7 @@ type GetMatchingWorkflowOutput struct {
 	ResolutionTechniques *types.ResolutionTechniques
 
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to access resources on your behalf.
+	// role to access Amazon Web Services resources on your behalf.
 	//
 	// This member is required.
 	RoleArn *string

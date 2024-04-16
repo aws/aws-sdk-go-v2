@@ -62,11 +62,35 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AddPolicyStatement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddPolicyStatement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddPolicyStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIdMappingWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIdMappingWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateIdMappingWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateIdNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIdNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateIdNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -110,11 +134,35 @@ func TestCheckSnapshot_DeleteIdMappingWorkflow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteIdNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteIdNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteMatchingWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMatchingWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteMatchingWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePolicyStatement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicyStatement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePolicyStatement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -158,6 +206,18 @@ func TestCheckSnapshot_GetIdMappingWorkflow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetIdNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetIdNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMatchId(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMatchId(context.Background(), nil, func(o *Options) {
@@ -187,6 +247,18 @@ func TestCheckSnapshot_GetMatchingWorkflow(t *testing.T) {
 	_, err := svc.GetMatchingWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetMatchingWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -235,6 +307,18 @@ func TestCheckSnapshot_ListIdMappingWorkflows(t *testing.T) {
 	_, err := svc.ListIdMappingWorkflows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIdMappingWorkflows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIdNamespaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIdNamespaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIdNamespaces")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -302,6 +386,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartIdMappingJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartIdMappingJob(context.Background(), nil, func(o *Options) {
@@ -362,6 +458,18 @@ func TestCheckSnapshot_UpdateIdMappingWorkflow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateIdNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIdNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateIdNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMatchingWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMatchingWorkflow(context.Background(), nil, func(o *Options) {
@@ -385,11 +493,35 @@ func TestCheckSnapshot_UpdateSchemaMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AddPolicyStatement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddPolicyStatement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddPolicyStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIdMappingWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIdMappingWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateIdMappingWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateIdNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateIdNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateIdNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,11 +565,35 @@ func TestUpdateSnapshot_DeleteIdMappingWorkflow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteIdNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteIdNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteIdNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteMatchingWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMatchingWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteMatchingWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePolicyStatement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicyStatement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePolicyStatement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -481,6 +637,18 @@ func TestUpdateSnapshot_GetIdMappingWorkflow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetIdNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetIdNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetIdNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMatchId(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMatchId(context.Background(), nil, func(o *Options) {
@@ -510,6 +678,18 @@ func TestUpdateSnapshot_GetMatchingWorkflow(t *testing.T) {
 	_, err := svc.GetMatchingWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetMatchingWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -558,6 +738,18 @@ func TestUpdateSnapshot_ListIdMappingWorkflows(t *testing.T) {
 	_, err := svc.ListIdMappingWorkflows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIdMappingWorkflows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIdNamespaces(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIdNamespaces(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIdNamespaces")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -625,6 +817,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartIdMappingJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartIdMappingJob(context.Background(), nil, func(o *Options) {
@@ -678,6 +882,18 @@ func TestUpdateSnapshot_UpdateIdMappingWorkflow(t *testing.T) {
 	_, err := svc.UpdateIdMappingWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateIdMappingWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateIdNamespace(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateIdNamespace(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateIdNamespace")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "1d11b5e0-3858-465b-8cb5-9215ad18863b",
+    "type": "feature",
+    "description": "Adding new ListBatchJobRestartPoints API and support for restart batch job.",
+    "modules": [
+        "service/m2"
+    ]
+}

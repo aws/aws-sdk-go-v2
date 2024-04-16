@@ -71,6 +71,9 @@ type GetIdMappingJobOutput struct {
 	// unique IDs generated, and records the execution skipped.
 	Metrics *types.IdMappingJobMetrics
 
+	// A list of OutputSource objects.
+	OutputSourceConfig []types.IdMappingJobOutputSource
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

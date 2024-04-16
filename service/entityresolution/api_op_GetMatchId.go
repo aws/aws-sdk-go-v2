@@ -39,6 +39,12 @@ type GetMatchIdInput struct {
 	// This member is required.
 	WorkflowName *string
 
+	// Normalizes the attributes defined in the schema in the input data. For example,
+	// if an attribute has an AttributeType of PHONE_NUMBER , and the data in the input
+	// table is in a format of 1234567890, Entity Resolution will normalize this field
+	// in the output to (123)-456-7890.
+	ApplyNormalization *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -46,6 +52,9 @@ type GetMatchIdOutput struct {
 
 	// The unique identifiers for this group of match records.
 	MatchId *string
+
+	// The rule the record matched on.
+	MatchRule *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

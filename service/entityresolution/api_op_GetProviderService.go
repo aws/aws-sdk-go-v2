@@ -91,12 +91,21 @@ type GetProviderServiceOutput struct {
 	// This member is required.
 	ProviderServiceType types.ServiceType
 
+	// Input schema for the provider service.
+	ProviderComponentSchema *types.ProviderComponentSchema
+
 	// The definition of the provider configuration.
 	ProviderConfigurationDefinition document.Interface
+
+	// The provider configuration required for different ID namespace types.
+	ProviderIdNameSpaceConfiguration *types.ProviderIdNameSpaceConfiguration
 
 	// The Amazon Web Services accounts and the S3 permissions that are required by
 	// some providers to create an S3 bucket for intermediate data storage.
 	ProviderIntermediateDataAccessConfiguration *types.ProviderIntermediateDataAccessConfiguration
+
+	// Provider service job configurations.
+	ProviderJobConfiguration document.Interface
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

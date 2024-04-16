@@ -56,6 +56,46 @@ func (AssetType) Values() []AssetType {
 	}
 }
 
+type CapacityTaskFailureType string
+
+// Enum values for CapacityTaskFailureType
+const (
+	CapacityTaskFailureTypeUnsupportedCapacityConfiguration CapacityTaskFailureType = "UNSUPPORTED_CAPACITY_CONFIGURATION"
+)
+
+// Values returns all known values for CapacityTaskFailureType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityTaskFailureType) Values() []CapacityTaskFailureType {
+	return []CapacityTaskFailureType{
+		"UNSUPPORTED_CAPACITY_CONFIGURATION",
+	}
+}
+
+type CapacityTaskStatus string
+
+// Enum values for CapacityTaskStatus
+const (
+	CapacityTaskStatusRequested  CapacityTaskStatus = "REQUESTED"
+	CapacityTaskStatusInProgress CapacityTaskStatus = "IN_PROGRESS"
+	CapacityTaskStatusFailed     CapacityTaskStatus = "FAILED"
+	CapacityTaskStatusCompleted  CapacityTaskStatus = "COMPLETED"
+	CapacityTaskStatusCancelled  CapacityTaskStatus = "CANCELLED"
+)
+
+// Values returns all known values for CapacityTaskStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CapacityTaskStatus) Values() []CapacityTaskStatus {
+	return []CapacityTaskStatus{
+		"REQUESTED",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+		"CANCELLED",
+	}
+}
+
 type CatalogItemClass string
 
 // Enum values for CatalogItemClass

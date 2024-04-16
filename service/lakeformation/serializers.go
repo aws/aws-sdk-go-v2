@@ -669,6 +669,13 @@ func awsRestjson1_serializeOpDocumentCreateLakeFormationIdentityCenterConfigurat
 		ok.String(*v.InstanceArn)
 	}
 
+	if v.ShareRecipients != nil {
+		ok := object.Key("ShareRecipients")
+		if err := awsRestjson1_serializeDocumentDataLakePrincipalList(v.ShareRecipients, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4344,6 +4351,13 @@ func awsRestjson1_serializeOpDocumentUpdateLakeFormationIdentityCenterConfigurat
 	if v.ExternalFiltering != nil {
 		ok := object.Key("ExternalFiltering")
 		if err := awsRestjson1_serializeDocumentExternalFilteringConfiguration(v.ExternalFiltering, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ShareRecipients != nil {
+		ok := object.Key("ShareRecipients")
+		if err := awsRestjson1_serializeDocumentDataLakePrincipalList(v.ShareRecipients, ok); err != nil {
 			return err
 		}
 	}

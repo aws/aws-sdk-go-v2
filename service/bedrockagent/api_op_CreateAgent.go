@@ -15,10 +15,10 @@ import (
 // sources, software applications, user conversations, and APIs to carry out tasks
 // to help customers.
 //   - Specify the following fields for security purposes.
-//   - agentResourceRoleArn – The ARN of the role with permissions to create an
-//     agent.
-//   - (Optional) customerEncryptionKeyArn – The ARN of a KMS key to encrypt the
-//     creation of the agent.
+//   - agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with
+//     permissions to invoke API operations on an agent.
+//   - (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a
+//     KMS key to encrypt the creation of the agent.
 //   - (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which
 //     the agent should maintain session information. After this time expires, the
 //     subsequent InvokeAgent request begins a new session.
@@ -50,10 +50,8 @@ type CreateAgentInput struct {
 	// This member is required.
 	AgentName *string
 
-	// The ARN of the IAM role with permissions to create the agent. The ARN must
-	// begin with AmazonBedrockExecutionRoleForAgents_ .
-	//
-	// This member is required.
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	AgentResourceRoleArn *string
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
@@ -63,7 +61,7 @@ type CreateAgentInput struct {
 	// .
 	ClientToken *string
 
-	// The ARN of the KMS key with which to encrypt the agent.
+	// The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
 	CustomerEncryptionKeyArn *string
 
 	// A description of the agent.

@@ -302,6 +302,18 @@ func TestCheckSnapshot_ListBatchJobExecutions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListBatchJobRestartPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBatchJobRestartPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBatchJobRestartPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDataSetImportHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDataSetImportHistory(context.Background(), nil, func(o *Options) {
@@ -690,6 +702,18 @@ func TestUpdateSnapshot_ListBatchJobExecutions(t *testing.T) {
 	_, err := svc.ListBatchJobExecutions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBatchJobExecutions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBatchJobRestartPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBatchJobRestartPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBatchJobRestartPoints")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
