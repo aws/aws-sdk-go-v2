@@ -40,7 +40,7 @@
                 "lambda": {
                     "target": "com.amazonaws.bedrockagent#LambdaArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
                     }
                 }
             },
@@ -169,7 +169,7 @@
                 "agentArn": {
                     "target": "com.amazonaws.bedrockagent#AgentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the agent.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -221,14 +221,14 @@
                 "agentResourceRoleArn": {
                     "target": "com.amazonaws.bedrockagent#AgentRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to call API operations on the agent. The ARN must begin with <code>AmazonBedrockExecutionRoleForAgents_</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key that encrypts the agent.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.</p>"
                     }
                 },
                 "createdAt": {
@@ -340,7 +340,7 @@
                 "actionGroupExecutor": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
                     }
                 },
                 "apiSchema": {
@@ -388,7 +388,7 @@
                 "agentAliasArn": {
                     "target": "com.amazonaws.bedrockagent#AgentAliasArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the alias of the agent.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the alias of the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -902,7 +902,7 @@
                 "agentArn": {
                     "target": "com.amazonaws.bedrockagent#AgentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the agent that the version belongs to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent that the version belongs to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -948,14 +948,14 @@
                 "agentResourceRoleArn": {
                     "target": "com.amazonaws.bedrockagent#AgentRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to invoke API operations on the agent. The ARN must begin with <code>AmazonBedrockExecutionRoleForAgents_</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key that encrypts the agent.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.</p>"
                     }
                 },
                 "createdAt": {
@@ -2020,7 +2020,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p>\n         <ul>\n            <li>\n               <p>Specify the following fields for security purposes.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>agentResourceRoleArn</code> – The ARN of the role with permissions to create an agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>customerEncryptionKeyArn</code> – The ARN of a KMS key to encrypt the creation of the agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.</p>\n            </li>\n            <li>\n               <p>If you agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p>\n         <ul>\n            <li>\n               <p>Specify the following fields for security purposes.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>agentResourceRoleArn</code> – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>customerEncryptionKeyArn</code> – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.</p>\n            </li>\n            <li>\n               <p>If you agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -2124,7 +2124,7 @@
                 "actionGroupExecutor": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
                     }
                 },
                 "apiSchema": {
@@ -2310,14 +2310,13 @@
                 "agentResourceRoleArn": {
                     "target": "com.amazonaws.bedrockagent#AgentRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to create the agent. The ARN must begin with <code>AmazonBedrockExecutionRoleForAgents_</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.</p>"
                     }
                 },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key with which to encrypt the agent.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.</p>"
                     }
                 },
                 "tags": {
@@ -2495,7 +2494,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html\">Set up your data for ingestion</a>.</p>\n         <note>\n            <p>If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create\">Create a knowledge base</a>.</p>\n         </note>\n         <ul>\n            <li>\n               <p>Provide the <code>name</code> and an optional <code>description</code>.</p>\n            </li>\n            <li>\n               <p>Provide the ARN with permissions to create a knowledge base in the <code>roleArn</code> field.</p>\n            </li>\n            <li>\n               <p>Provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p>\n            </li>\n            <li>\n               <p>Provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p>\n               <ul>\n                  <li>\n                     <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html\">Create a vector store in Amazon OpenSearch Service</a>.</p>\n                  </li>\n                  <li>\n                     <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector store in Amazon Aurora</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html\">Create a vector store in Pinecone</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html\">Create a vector store in Redis Enterprise Cloud</a>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html\">Set up your data for ingestion</a>.</p>\n         <note>\n            <p>If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create\">Create a knowledge base</a>.</p>\n         </note>\n         <ul>\n            <li>\n               <p>Provide the <code>name</code> and an optional <code>description</code>.</p>\n            </li>\n            <li>\n               <p>Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the <code>roleArn</code> field.</p>\n            </li>\n            <li>\n               <p>Provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p>\n            </li>\n            <li>\n               <p>Provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p>\n               <ul>\n                  <li>\n                     <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html\">Create a vector store in Amazon OpenSearch Service</a>.</p>\n                  </li>\n                  <li>\n                     <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector store in Amazon Aurora</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html\">Create a vector store in Pinecone</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html\">Create a vector store in Redis Enterprise Cloud</a>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -2533,7 +2532,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to create the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4577,7 +4576,7 @@
                 "knowledgeBaseArn": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4590,7 +4589,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with <code>AmazonBedrockExecutionRoleForKnowledgeBase_</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5662,7 +5661,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.bedrockagent#TaggableResourcesArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource for which to list tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5757,7 +5756,7 @@
                 "collectionArn": {
                     "target": "com.amazonaws.bedrockagent#OpenSearchServerlessCollectionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the OpenSearch Service vector store.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OpenSearch Service vector store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5837,7 +5836,7 @@
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that you created in Secrets Manager that is linked to your Pinecone API key.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Pinecone API key.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6129,14 +6128,14 @@
                 "resourceArn": {
                     "target": "com.amazonaws.bedrockagent#RdsArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the vector store.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector store.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that you created in Secrets Manager that is linked to your Amazon RDS database.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Amazon RDS database.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6259,7 +6258,7 @@
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that you created in Secrets Manager that is linked to your Redis Enterprise Cloud database.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Redis Enterprise Cloud database.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6330,7 +6329,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified resource ARN was not found. Check the ARN and try your request again.</p>",
+                "smithy.api#documentation": "<p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -6361,7 +6360,7 @@
                 "bucketArn": {
                     "target": "com.amazonaws.bedrockagent#S3BucketArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the bucket that contains the data source.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bucket that contains the data source.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6439,7 +6438,7 @@
                 "kmsKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt the resource.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.</p>"
                     }
                 }
             },
@@ -6698,7 +6697,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.bedrockagent#TaggableResourcesArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource to tag.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to tag.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6846,7 +6845,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.bedrockagent#TaggableResourcesArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource from which to remove tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to remove tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7008,7 +7007,7 @@
                 "actionGroupExecutor": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
                     }
                 },
                 "actionGroupState": {
@@ -7292,14 +7291,14 @@
                 "agentResourceRoleArn": {
                     "target": "com.amazonaws.bedrockagent#AgentRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to update the agent. The ARN must begin with <code>AmazonBedrockExecutionRoleForAgents_</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key with which to encrypt the agent.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.</p>"
                     }
                 },
                 "promptOverrideConfiguration": {
@@ -7508,7 +7507,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a different Amazon Resource Name (ARN) of the IAM role with permissions to modify the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>Specifies a different Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7613,7 +7612,7 @@
                 "embeddingModelArn": {
                     "target": "com.amazonaws.bedrockagent#BedrockEmbeddingModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the model used to create vector embeddings for the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model used to create vector embeddings for the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 }
