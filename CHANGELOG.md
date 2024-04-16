@@ -1,3 +1,25 @@
+# Release (2024-04-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.6.0](service/bedrockagent/CHANGELOG.md#v160-2024-04-16)
+  * **Feature**: For Create Agent API, the agentResourceRoleArn parameter is no longer required.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.18.0](service/emrserverless/CHANGELOG.md#v1180-2024-04-16)
+  * **Feature**: This release adds support for shuffle optimized disks that allow larger disk sizes and higher IOPS to efficiently run shuffle heavy workloads.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.9.0](service/entityresolution/CHANGELOG.md#v190-2024-04-16)
+  * **Feature**: Cross Account Resource Support .
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.38.0](service/iotwireless/CHANGELOG.md#v1380-2024-04-16)
+  * **Feature**: Add PublicGateways in the GetWirelessStatistics call response, indicating the LoRaWAN public network accessed by the device.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.32.0](service/lakeformation/CHANGELOG.md#v1320-2024-04-16)
+  * **Feature**: This release adds Lake Formation managed RAM support for the 4 APIs - "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration"
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.13.0](service/m2/CHANGELOG.md#v1130-2024-04-16)
+  * **Feature**: Adding new ListBatchJobRestartPoints API and support for restart batch job.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.11.0](service/mediapackagev2/CHANGELOG.md#v1110-2024-04-16)
+  * **Feature**: Dash v2 is a MediaPackage V2 feature to support egressing on DASH manifest format.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.39.0](service/outposts/CHANGELOG.md#v1390-2024-04-16)
+  * **Feature**: This release adds new APIs to allow customers to configure their Outpost capacity at order-time.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.30.0](service/wellarchitected/CHANGELOG.md#v1300-2024-04-16)
+  * **Feature**: AWS Well-Architected now has a Connector for Jira to allow customers to efficiently track workload risks and improvement efforts and create closed-loop mechanisms.
+
 # Release (2024-04-12)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.38.0 (2024-04-16)
+
+* **Feature**: Add PublicGateways in the GetWirelessStatistics call response, indicating the LoRaWAN public network accessed by the device.
+
 # v1.37.0 (2024-03-29)
 
 * **Feature**: Add support for retrieving key historical and live metrics for LoRaWAN devices and gateways

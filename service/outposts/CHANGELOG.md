@@ -1,3 +1,7 @@
+# v1.39.0 (2024-04-16)
+
+* **Feature**: This release adds new APIs to allow customers to configure their Outpost capacity at order-time.
+
 # v1.38.0 (2024-04-12)
 
 * **Feature**: This release adds EXPEDITORS as a valid shipment carrier.

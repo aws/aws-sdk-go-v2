@@ -1,3 +1,7 @@
+# v1.6.0 (2024-04-16)
+
+* **Feature**: For Create Agent API, the agentResourceRoleArn parameter is no longer required.
+
 # v1.5.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

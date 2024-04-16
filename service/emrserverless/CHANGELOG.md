@@ -1,3 +1,7 @@
+# v1.18.0 (2024-04-16)
+
+* **Feature**: This release adds support for shuffle optimized disks that allow larger disk sizes and higher IOPS to efficiently run shuffle heavy workloads.
+
 # v1.17.5 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "4db7a79b-aea5-4e07-b067-c599830f77ef",
-    "type": "feature",
-    "description": "Cross Account Resource Support .",
-    "modules": [
-        "service/entityresolution"
-    ]
-}

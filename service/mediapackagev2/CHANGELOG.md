@@ -1,3 +1,7 @@
+# v1.11.0 (2024-04-16)
+
+* **Feature**: Dash v2 is a MediaPackage V2 feature to support egressing on DASH manifest format.
+
 # v1.10.2 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

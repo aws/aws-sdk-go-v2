@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.25.4
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.21.4
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.36.4
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.36.5
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.46.5
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.38.4
@@ -44,7 +44,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/emr v1.39.5
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.30.4
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.28.5
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.28.6
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/glue v1.79.0
@@ -74,7 +74,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ses v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.26.4
 	github.com/aws/aws-sdk-go-v2/service/shield v1.25.4
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.26.4
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.26.5
 	github.com/aws/aws-sdk-go-v2/service/sns v1.29.4
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.31.4
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.49.5

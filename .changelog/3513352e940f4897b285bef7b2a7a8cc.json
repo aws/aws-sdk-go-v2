@@ -1,8 +1,0 @@
-{
-    "id": "3513352e-940f-4897-b285-bef7b2a7a8cc",
-    "type": "feature",
-    "description": "This release adds support for shuffle optimized disks that allow larger disk sizes and higher IOPS to efficiently run shuffle heavy workloads.",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.13.0 (2024-04-16)
+
+* **Feature**: Adding new ListBatchJobRestartPoints API and support for restart batch job.
+
 # v1.12.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
