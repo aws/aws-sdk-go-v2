@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about an existing Amazon Q application.
+// Gets information about an existing Amazon Q Business application.
 func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput, optFns ...func(*Options)) (*GetApplicationOutput, error) {
 	if params == nil {
 		params = &GetApplicationInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 
 type GetApplicationInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -40,40 +40,44 @@ type GetApplicationInput struct {
 
 type GetApplicationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q application.
+	// The Amazon Resource Name (ARN) of the Amazon Q Business application.
 	ApplicationArn *string
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	ApplicationId *string
 
 	// Settings for whether end users can upload files directly during chat.
 	AttachmentsConfiguration *types.AppliedAttachmentsConfiguration
 
-	// The Unix timestamp when the Amazon Q application was last updated.
+	// The Unix timestamp when the Amazon Q Business application was last updated.
 	CreatedAt *time.Time
 
-	// A description for the Amazon Q application.
+	// A description for the Amazon Q Business application.
 	Description *string
 
-	// The name of the Amazon Q application.
+	// The name of the Amazon Q Business application.
 	DisplayName *string
 
 	// The identifier of the Amazon Web Services KMS key that is used to encrypt your
-	// data. Amazon Q doesn't support asymmetric keys.
+	// data. Amazon Q Business doesn't support asymmetric keys.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// If the Status field is set to ERROR , the ErrorMessage field contains a
 	// description of the error that caused the synchronization to fail.
 	Error *types.ErrorDetail
 
+	// The Amazon Resource Name (ARN) of the AWS IAM Identity Center instance attached
+	// to your Amazon Q Business application.
+	IdentityCenterApplicationArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM with permissions to access your
 	// CloudWatch logs and metrics.
 	RoleArn *string
 
-	// The status of the Amazon Q application.
+	// The status of the Amazon Q Business application.
 	Status types.ApplicationStatus
 
-	// The Unix timestamp when the Amazon Q application was last updated.
+	// The Unix timestamp when the Amazon Q Business application was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

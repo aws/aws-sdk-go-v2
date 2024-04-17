@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Q web experience conversation.
+// Deletes an Amazon Q Business web experience conversation.
 func (c *Client) DeleteConversation(ctx context.Context, params *DeleteConversationInput, optFns ...func(*Options)) (*DeleteConversationOutput, error) {
 	if params == nil {
 		params = &DeleteConversationInput{}
@@ -28,19 +28,19 @@ func (c *Client) DeleteConversation(ctx context.Context, params *DeleteConversat
 
 type DeleteConversationInput struct {
 
-	// The identifier of the Amazon Q application associated with the conversation.
+	// The identifier of the Amazon Q Business application associated with the
+	// conversation.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q web experience conversation being deleted.
+	// The identifier of the Amazon Q Business web experience conversation being
+	// deleted.
 	//
 	// This member is required.
 	ConversationId *string
 
 	// The identifier of the user who is deleting the conversation.
-	//
-	// This member is required.
 	UserId *string
 
 	noSmithyDocumentSerde

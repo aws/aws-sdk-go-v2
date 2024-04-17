@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists one or more Amazon Q conversations.
+// Lists one or more Amazon Q Business conversations.
 func (c *Client) ListConversations(ctx context.Context, params *ListConversationsInput, optFns ...func(*Options)) (*ListConversationsOutput, error) {
 	if params == nil {
 		params = &ListConversationsInput{}
@@ -29,23 +29,23 @@ func (c *Client) ListConversations(ctx context.Context, params *ListConversation
 
 type ListConversationsInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the user involved in the Amazon Q web experience conversation.
-	//
-	// This member is required.
-	UserId *string
-
-	// The maximum number of Amazon Q conversations to return.
+	// The maximum number of Amazon Q Business conversations to return.
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q conversations.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business
+	// conversations.
 	NextToken *string
+
+	// The identifier of the user involved in the Amazon Q Business web experience
+	// conversation.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -53,11 +53,11 @@ type ListConversationsInput struct {
 type ListConversationsOutput struct {
 
 	// An array of summary information on the configuration of one or more Amazon Q
-	// web experiences.
+	// Business web experiences.
 	Conversations []types.Conversation
 
-	// If the response is truncated, Amazon Q returns this token, which you can use in
-	// a later request to list the next set of messages.
+	// If the response is truncated, Amazon Q Business returns this token, which you
+	// can use in a later request to list the next set of messages.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -155,7 +155,7 @@ var _ ListConversationsAPIClient = (*Client)(nil)
 
 // ListConversationsPaginatorOptions is the paginator options for ListConversations
 type ListConversationsPaginatorOptions struct {
-	// The maximum number of Amazon Q conversations to return.
+	// The maximum number of Amazon Q Business conversations to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

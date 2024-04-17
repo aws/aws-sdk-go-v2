@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Q web experience.
+// Deletes an Amazon Q Business web experience.
 func (c *Client) DeleteWebExperience(ctx context.Context, params *DeleteWebExperienceInput, optFns ...func(*Options)) (*DeleteWebExperienceOutput, error) {
 	if params == nil {
 		params = &DeleteWebExperienceInput{}
@@ -28,13 +28,13 @@ func (c *Client) DeleteWebExperience(ctx context.Context, params *DeleteWebExper
 
 type DeleteWebExperienceInput struct {
 
-	// The identifier of the Amazon Q application linked to the Amazon Q web
-	// experience.
+	// The identifier of the Amazon Q Business application linked to the Amazon Q
+	// Business web experience.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q web experience being deleted.
+	// The identifier of the Amazon Q Business web experience being deleted.
 	//
 	// This member is required.
 	WebExperienceId *string

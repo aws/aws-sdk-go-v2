@@ -1566,6 +1566,40 @@ func validateBasicAuthConfiguration(v *types.BasicAuthConfiguration) error {
 	}
 }
 
+func validateChatModeConfiguration(v types.ChatModeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChatModeConfiguration"}
+	switch uv := v.(type) {
+	case *types.ChatModeConfigurationMemberPluginConfiguration:
+		if err := validatePluginConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[pluginConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreatorModeConfiguration(v *types.CreatorModeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatorModeConfiguration"}
+	if len(v.CreatorModeControl) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorModeControl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSourceVpcConfiguration(v *types.DataSourceVpcConfiguration) error {
 	if v == nil {
 		return nil
@@ -2100,6 +2134,21 @@ func validatePluginAuthConfiguration(v types.PluginAuthConfiguration) error {
 	}
 }
 
+func validatePluginConfiguration(v *types.PluginConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PluginConfiguration"}
+	if v.PluginId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PluginId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePrincipal(v types.Principal) error {
 	if v == nil {
 		return nil
@@ -2479,9 +2528,6 @@ func validateOpChatSyncInput(v *ChatSyncInput) error {
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if v.Attachments != nil {
 		if err := validateAttachmentsInput(v.Attachments); err != nil {
 			invalidParams.AddNested("Attachments", err.(smithy.InvalidParamsError))
@@ -2495,6 +2541,11 @@ func validateOpChatSyncInput(v *ChatSyncInput) error {
 	if v.AttributeFilter != nil {
 		if err := validateAttributeFilter(v.AttributeFilter); err != nil {
 			invalidParams.AddNested("AttributeFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ChatModeConfiguration != nil {
+		if err := validateChatModeConfiguration(v.ChatModeConfiguration); err != nil {
+			invalidParams.AddNested("ChatModeConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2746,9 +2797,6 @@ func validateOpDeleteConversationInput(v *DeleteConversationInput) error {
 	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
-	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3059,9 +3107,6 @@ func validateOpListConversationsInput(v *ListConversationsInput) error {
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3173,9 +3218,6 @@ func validateOpListMessagesInput(v *ListMessagesInput) error {
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3250,9 +3292,6 @@ func validateOpPutFeedbackInput(v *PutFeedbackInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutFeedbackInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
-	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.ConversationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConversationId"))
@@ -3421,6 +3460,11 @@ func validateOpUpdateChatControlsConfigurationInput(v *UpdateChatControlsConfigu
 	if v.TopicConfigurationsToDelete != nil {
 		if err := validateTopicConfigurations(v.TopicConfigurationsToDelete); err != nil {
 			invalidParams.AddNested("TopicConfigurationsToDelete", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CreatorModeConfiguration != nil {
+		if err := validateCreatorModeConfiguration(v.CreatorModeConfiguration); err != nil {
+			invalidParams.AddNested("CreatorModeConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a data source connector for an Amazon Q application. CreateDataSource
-// is a synchronous operation. The operation returns 200 if the data source was
-// successfully created. Otherwise, an exception is raised.
+// Creates a data source connector for an Amazon Q Business application.
+// CreateDataSource is a synchronous operation. The operation returns 200 if the
+// data source was successfully created. Otherwise, an exception is raised.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -32,13 +32,14 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// The identifier of the Amazon Q application the data source will be attached to.
+	// The identifier of the Amazon Q Business application the data source will be
+	// attached to.
 	//
 	// This member is required.
 	ApplicationId *string
 
 	// Configuration information to connect to your data source repository. For
-	// configuration templates for your specific data source, see Supported connectors (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html.html)
+	// configuration templates for your specific data source, see Supported connectors (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html)
 	// .
 	//
 	// This member is required.
@@ -72,12 +73,12 @@ type CreateDataSourceInput struct {
 	// data source and required resources.
 	RoleArn *string
 
-	// Sets the frequency for Amazon Q to check the documents in your data source
-	// repository and update your index. If you don't set a schedule, Amazon Q won't
-	// periodically update the index. Specify a cron- format schedule string or an
-	// empty string to indicate that the index is updated on demand. You can't specify
-	// the Schedule parameter when the Type parameter is set to CUSTOM . If you do, you
-	// receive a ValidationException exception.
+	// Sets the frequency for Amazon Q Business to check the documents in your data
+	// source repository and update your index. If you don't set a schedule, Amazon Q
+	// Business won't periodically update the index. Specify a cron- format schedule
+	// string or an empty string to indicate that the index is updated on demand. You
+	// can't specify the Schedule parameter when the Type parameter is set to CUSTOM .
+	// If you do, you receive a ValidationException exception.
 	SyncSchedule *string
 
 	// A list of key-value pairs that identify or categorize the data source
@@ -88,7 +89,7 @@ type CreateDataSourceInput struct {
 
 	// Configuration information for an Amazon VPC (Virtual Private Cloud) to connect
 	// to your data source. For more information, see Using Amazon VPC with Amazon Q
-	// connectors (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connector-vpc.html)
+	// Business connectors (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connector-vpc.html)
 	// .
 	VpcConfiguration *types.DataSourceVpcConfiguration
 
@@ -97,7 +98,8 @@ type CreateDataSourceInput struct {
 
 type CreateDataSourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of a data source in an Amazon Q application.
+	// The Amazon Resource Name (ARN) of a data source in an Amazon Q Business
+	// application.
 	DataSourceArn *string
 
 	// The identifier of the data source connector.

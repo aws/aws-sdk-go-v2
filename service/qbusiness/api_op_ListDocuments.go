@@ -46,8 +46,8 @@ type ListDocumentsInput struct {
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of documents.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of documents.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,8 +59,8 @@ type ListDocumentsOutput struct {
 	DocumentDetailList []types.DocumentDetails
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of documents.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of documents.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of messages associated with an Amazon Q web experience.
+// Gets a list of messages associated with an Amazon Q Business web experience.
 func (c *Client) ListMessages(ctx context.Context, params *ListMessagesInput, optFns ...func(*Options)) (*ListMessagesOutput, error) {
 	if params == nil {
 		params = &ListMessagesInput{}
@@ -29,27 +29,26 @@ func (c *Client) ListMessages(ctx context.Context, params *ListMessagesInput, op
 
 type ListMessagesInput struct {
 
-	// The identifier for the Amazon Q application.
+	// The identifier for the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q web experience conversation.
+	// The identifier of the Amazon Q Business web experience conversation.
 	//
 	// This member is required.
 	ConversationId *string
 
-	// The identifier of the user involved in the Amazon Q web experience conversation.
-	//
-	// This member is required.
-	UserId *string
-
 	// The maximum number of messages to return.
 	MaxResults *int32
 
-	// If the number of retrievers returned exceeds maxResults , Amazon Q returns a
-	// next token as a pagination token to retrieve the next set of messages.
+	// If the number of retrievers returned exceeds maxResults , Amazon Q Business
+	// returns a next token as a pagination token to retrieve the next set of messages.
 	NextToken *string
+
+	// The identifier of the user involved in the Amazon Q Business web experience
+	// conversation.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -59,8 +58,8 @@ type ListMessagesOutput struct {
 	// An array of information on one or more messages.
 	Messages []types.Message
 
-	// If the response is truncated, Amazon Q returns this token, which you can use in
-	// a later request to list the next set of messages.
+	// If the response is truncated, Amazon Q Business returns this token, which you
+	// can use in a later request to list the next set of messages.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

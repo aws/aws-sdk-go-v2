@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon Q plugin.
+// Updates an Amazon Q Business plugin.
 func (c *Client) UpdatePlugin(ctx context.Context, params *UpdatePluginInput, optFns ...func(*Options)) (*UpdatePluginOutput, error) {
 	if params == nil {
 		params = &UpdatePluginInput{}

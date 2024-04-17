@@ -122,6 +122,26 @@ func (AttributeValueOperator) Values() []AttributeValueOperator {
 	}
 }
 
+type ChatMode string
+
+// Enum values for ChatMode
+const (
+	ChatModeRetrievalMode ChatMode = "RETRIEVAL_MODE"
+	ChatModeCreatorMode   ChatMode = "CREATOR_MODE"
+	ChatModePluginMode    ChatMode = "PLUGIN_MODE"
+)
+
+// Values returns all known values for ChatMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ChatMode) Values() []ChatMode {
+	return []ChatMode{
+		"RETRIEVAL_MODE",
+		"CREATOR_MODE",
+		"PLUGIN_MODE",
+	}
+}
+
 type ContentType string
 
 // Enum values for ContentType
@@ -157,6 +177,24 @@ func (ContentType) Values() []ContentType {
 		"CSV",
 		"JSON",
 		"MD",
+	}
+}
+
+type CreatorModeControl string
+
+// Enum values for CreatorModeControl
+const (
+	CreatorModeControlEnabled  CreatorModeControl = "ENABLED"
+	CreatorModeControlDisabled CreatorModeControl = "DISABLED"
+)
+
+// Values returns all known values for CreatorModeControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CreatorModeControl) Values() []CreatorModeControl {
+	return []CreatorModeControl{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

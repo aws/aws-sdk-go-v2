@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an set of chat controls configured for an existing Amazon Q application.
+// Updates an set of chat controls configured for an existing Amazon Q Business
+// application.
 func (c *Client) UpdateChatControlsConfiguration(ctx context.Context, params *UpdateChatControlsConfigurationInput, optFns ...func(*Options)) (*UpdateChatControlsConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateChatControlsConfigurationInput{}
@@ -37,9 +38,12 @@ type UpdateChatControlsConfigurationInput struct {
 	// The phrases blocked from chat by your chat control configuration.
 	BlockedPhrasesConfigurationUpdate *types.BlockedPhrasesConfigurationUpdate
 
-	// A token that you provide to identify the request to update a Amazon Q
+	// A token that you provide to identify the request to update a Amazon Q Business
 	// application chat configuration.
 	ClientToken *string
+
+	// The configuration details for CREATOR_MODE .
+	CreatorModeConfiguration *types.CreatorModeConfiguration
 
 	// The response scope configured for your application. This determines whether
 	// your application uses its retrieval augmented generation (RAG) system to

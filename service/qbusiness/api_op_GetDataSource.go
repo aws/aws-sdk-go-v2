@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Gets information about an existing Amazon Q data source connector.
+// Gets information about an existing Amazon Q Business data source connector.
 func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, optFns ...func(*Options)) (*GetDataSourceOutput, error) {
 	if params == nil {
 		params = &GetDataSourceInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, 
 
 type GetDataSourceInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -51,7 +51,7 @@ type GetDataSourceInput struct {
 
 type GetDataSourceOutput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	ApplicationId *string
 
 	// The details of how the data source connector is configured.
@@ -94,7 +94,7 @@ type GetDataSourceOutput struct {
 	// the data source connector to fail.
 	Status types.DataSourceStatus
 
-	// The schedule for Amazon Q to update the index.
+	// The schedule for Amazon Q Business to update the index.
 	SyncSchedule *string
 
 	// The type of the data source connector. For example, S3 .

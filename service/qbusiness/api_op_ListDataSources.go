@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Q data source connectors that you have created.
+// Lists the Amazon Q Business data source connectors that you have created.
 func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInput, optFns ...func(*Options)) (*ListDataSourcesOutput, error) {
 	if params == nil {
 		params = &ListDataSourcesInput{}
@@ -29,7 +29,8 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 
 type ListDataSourcesInput struct {
 
-	// The identifier of the Amazon Q application linked to the data source connectors.
+	// The identifier of the Amazon Q Business application linked to the data source
+	// connectors.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -43,8 +44,9 @@ type ListDataSourcesInput struct {
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q data source connectors.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business data
+	// source connectors.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,8 +57,8 @@ type ListDataSourcesOutput struct {
 	// An array of summary information for one or more data source connector.
 	DataSources []types.DataSource
 
-	// If the response is truncated, Amazon Q returns this token. You can use this
-	// token in a subsequent request to retrieve the next set of data source
+	// If the response is truncated, Amazon Q Business returns this token. You can use
+	// this token in a subsequent request to retrieve the next set of data source
 	// connectors.
 	NextToken *string
 

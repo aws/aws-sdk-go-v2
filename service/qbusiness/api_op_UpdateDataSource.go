@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Q data source connector.
+// Updates an existing Amazon Q Business data source connector.
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
 		params = &UpdateDataSourceInput{}
@@ -30,7 +30,8 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 
 type UpdateDataSourceInput struct {
 
-	// The identifier of the Amazon Q application the data source is attached to.
+	// The identifier of the Amazon Q Business application the data source is attached
+	// to.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -45,7 +46,7 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	IndexId *string
 
-	// Provides the configuration information for an Amazon Q data source.
+	// Provides the configuration information for an Amazon Q Business data source.
 	Configuration document.Interface
 
 	// The description of the data source connector.

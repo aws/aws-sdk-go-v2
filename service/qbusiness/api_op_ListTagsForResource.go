@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of tags associated with a specified resource. Amazon Q applications
-// and data sources can have tags associated with them.
+// Gets a list of tags associated with a specified resource. Amazon Q Business
+// applications and data sources can have tags associated with them.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -30,8 +30,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q application or data source to
-	// get a list of tags for.
+	// The Amazon Resource Name (ARN) of the Amazon Q Business application or data
+	// source to get a list of tags for.
 	//
 	// This member is required.
 	ResourceARN *string
@@ -41,7 +41,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// A list of tags associated with the Amazon Q application or data source.
+	// A list of tags associated with the Amazon Q Business application or data source.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

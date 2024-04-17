@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an Amazon Q data source connector synchronization job already in progress.
+// Stops an Amazon Q Business data source connector synchronization job already in
+// progress.
 func (c *Client) StopDataSourceSyncJob(ctx context.Context, params *StopDataSourceSyncJobInput, optFns ...func(*Options)) (*StopDataSourceSyncJobOutput, error) {
 	if params == nil {
 		params = &StopDataSourceSyncJobInput{}
@@ -28,7 +29,8 @@ func (c *Client) StopDataSourceSyncJob(ctx context.Context, params *StopDataSour
 
 type StopDataSourceSyncJobInput struct {
 
-	// The identifier of the Amazon Q application that the data source is connected to.
+	// The identifier of the Amazon Q Business application that the data source is
+	// connected to.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -38,7 +40,8 @@ type StopDataSourceSyncJobInput struct {
 	// This member is required.
 	DataSourceId *string
 
-	// The identifier of the index used with the Amazon Q data source connector.
+	// The identifier of the index used with the Amazon Q Business data source
+	// connector.
 	//
 	// This member is required.
 	IndexId *string

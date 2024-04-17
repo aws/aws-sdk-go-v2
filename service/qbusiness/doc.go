@@ -4,19 +4,20 @@
 // QBusiness.
 //
 // Amazon Q is in preview release and is subject to change. This is the Amazon Q
-// (for business use) API Reference. Amazon Q is a fully managed, generative-AI
+// Business API Reference. Amazon Q Business is a fully managed, generative-AI
 // powered enterprise chat assistant that you can deploy within your organization.
-// Amazon Q enhances employee productivity by supporting key tasks such as
+// Amazon Q Business enhances employee productivity by supporting key tasks such as
 // question-answering, knowledge discovery, writing email messages, summarizing
 // text, drafting document outlines, and brainstorming ideas. Users ask questions
-// of Amazon Q and get answers that are presented in a conversational manner. For
-// an introduction to the service, see the Amazon Q (for business use) Developer
+// of Amazon Q Business and get answers that are presented in a conversational
+// manner. For an introduction to the service, see the Amazon Q Business User
 // Guide  (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html)
-// . For an overview of the Amazon Q APIs, see Overview of Amazon Q API operations (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview)
+// . For an overview of the Amazon Q Business APIs, see Overview of Amazon Q
+// Business API operations (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview)
 // . For information about the IAM access control permissions you need to use this
-// API, see IAM roles for Amazon Q (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html)
-// in the Amazon Q (for business use) Developer Guide. You can use the following
-// AWS SDKs to access Amazon Q APIs:
+// API, see IAM roles for Amazon Q Business (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html)
+// in the Amazon Q Business User Guide. You can use the following AWS SDKs to
+// access Amazon Q Business APIs:
 //   - AWS SDK for C++ (https://docs.aws.amazon.com/sdk-for-cpp)
 //   - AWS SDK for Go (https://docs.aws.amazon.com/sdk-for-go)
 //   - AWS SDK for Java (https://docs.aws.amazon.com/sdk-for-java)
@@ -26,8 +27,8 @@
 //   - AWS SDK for Ruby (https://docs.aws.amazon.com/sdk-for-ruby)
 //
 // The following resources provide additional information about using the Amazon Q
-// API:
-//   - Setting up for Amazon Q (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/setting-up.html)
-//   - Amazon Q CLI Reference (https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html)
+// Business API:
+//   - Setting up for Amazon Q Business (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/setting-up.html)
+//   - Amazon Q Business CLI Reference (https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html)
 //   - Amazon Web Services General Reference (https://docs.aws.amazon.com/general/latest/gr/amazonq.html)
 package qbusiness

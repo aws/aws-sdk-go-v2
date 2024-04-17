@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Q application.
+// Updates an existing Amazon Q Business application.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}
@@ -29,7 +29,7 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -37,14 +37,14 @@ type UpdateApplicationInput struct {
 	// An option to allow end users to upload files directly during chat.
 	AttachmentsConfiguration *types.AttachmentsConfiguration
 
-	// A description for the Amazon Q application.
+	// A description for the Amazon Q Business application.
 	Description *string
 
-	// A name for the Amazon Q application.
+	// A name for the Amazon Q Business application.
 	DisplayName *string
 
 	// An Amazon Web Services Identity and Access Management (IAM) role that gives
-	// Amazon Q permission to access Amazon CloudWatch logs and metrics.
+	// Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
 	RoleArn *string
 
 	noSmithyDocumentSerde

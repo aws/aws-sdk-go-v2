@@ -12,7 +12,7 @@ import (
 )
 
 // Gets information about an chat controls configured for an existing Amazon Q
-// application.
+// Business application.
 func (c *Client) GetChatControlsConfiguration(ctx context.Context, params *GetChatControlsConfigurationInput, optFns ...func(*Options)) (*GetChatControlsConfigurationOutput, error) {
 	if params == nil {
 		params = &GetChatControlsConfigurationInput{}
@@ -39,8 +39,9 @@ type GetChatControlsConfigurationInput struct {
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q chat controls configured.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business chat
+	// controls configured.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,18 +52,23 @@ type GetChatControlsConfigurationOutput struct {
 	// The phrases blocked from chat by your chat control configuration.
 	BlockedPhrases *types.BlockedPhrasesConfiguration
 
+	// The configuration details for CREATOR_MODE .
+	CreatorModeConfiguration *types.AppliedCreatorModeConfiguration
+
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q chat controls configured.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business chat
+	// controls configured.
 	NextToken *string
 
-	// The response scope configured for a Amazon Q application. This determines
-	// whether your application uses its retrieval augmented generation (RAG) system to
-	// generate answers only from your enterprise data, or also uses the large language
-	// models (LLM) knowledge to respons to end user questions in chat.
+	// The response scope configured for a Amazon Q Business application. This
+	// determines whether your application uses its retrieval augmented generation
+	// (RAG) system to generate answers only from your enterprise data, or also uses
+	// the large language models (LLM) knowledge to respons to end user questions in
+	// chat.
 	ResponseScope types.ResponseScope
 
-	// The topic specific controls configured for a Amazon Q application.
+	// The topic specific controls configured for a Amazon Q Business application.
 	TopicConfigurations []types.TopicConfiguration
 
 	// Metadata pertaining to the operation's result.

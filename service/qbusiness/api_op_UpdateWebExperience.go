@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon Q web experience.
+// Updates an Amazon Q Business web experience.
 func (c *Client) UpdateWebExperience(ctx context.Context, params *UpdateWebExperienceInput, optFns ...func(*Options)) (*UpdateWebExperienceOutput, error) {
 	if params == nil {
 		params = &UpdateWebExperienceInput{}
@@ -29,30 +29,32 @@ func (c *Client) UpdateWebExperience(ctx context.Context, params *UpdateWebExper
 
 type UpdateWebExperienceInput struct {
 
-	// The identifier of the Amazon Q application attached to the web experience.
+	// The identifier of the Amazon Q Business application attached to the web
+	// experience.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q web experience.
+	// The identifier of the Amazon Q Business web experience.
 	//
 	// This member is required.
 	WebExperienceId *string
 
-	// The authentication configuration of the Amazon Q web experience.
+	// The authentication configuration of the Amazon Q Business web experience.
 	AuthenticationConfiguration types.WebExperienceAuthConfiguration
 
 	// Determines whether sample prompts are enabled in the web experience for an end
 	// user.
 	SamplePromptsControlMode types.WebExperienceSamplePromptsControlMode
 
-	// The subtitle of the Amazon Q web experience.
+	// The subtitle of the Amazon Q Business web experience.
 	Subtitle *string
 
-	// The title of the Amazon Q web experience.
+	// The title of the Amazon Q Business web experience.
 	Title *string
 
-	// A customized welcome message for an end user in an Amazon Q web experience.
+	// A customized welcome message for an end user in an Amazon Q Business web
+	// experience.
 	WelcomeMessage *string
 
 	noSmithyDocumentSerde

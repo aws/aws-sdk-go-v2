@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about an existing Amazon Q plugin.
+// Gets information about an existing Amazon Q Business plugin.
 func (c *Client) GetPlugin(ctx context.Context, params *GetPluginInput, optFns ...func(*Options)) (*GetPluginOutput, error) {
 	if params == nil {
 		params = &GetPluginInput{}
@@ -48,7 +48,7 @@ type GetPluginOutput struct {
 	// The identifier of the application which contains the plugin.
 	ApplicationId *string
 
-	// Authentication configuration information for an Amazon Q plugin.
+	// Authentication configuration information for an Amazon Q Business plugin.
 	AuthConfiguration types.PluginAuthConfiguration
 
 	// The timestamp for when the plugin was created.

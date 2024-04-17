@@ -8,6 +8,24 @@ import (
 	"time"
 )
 
+func ExampleChatModeConfiguration_outputUsage() {
+	var union types.ChatModeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ChatModeConfigurationMemberPluginConfiguration:
+		_ = v.Value // Value is types.PluginConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PluginConfiguration
+
 func ExampleDocumentAttributeBoostingConfiguration_outputUsage() {
 	var union types.DocumentAttributeBoostingConfiguration
 	// type switches can be used to check the union value

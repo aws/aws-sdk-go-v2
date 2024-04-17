@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Gets information about an existing Amazon Q index.
+// Gets information about an existing Amazon Q Business index.
 func (c *Client) GetIndex(ctx context.Context, params *GetIndexInput, optFns ...func(*Options)) (*GetIndexOutput, error) {
 	if params == nil {
 		params = &GetIndexInput{}
@@ -30,12 +30,12 @@ func (c *Client) GetIndex(ctx context.Context, params *GetIndexInput, optFns ...
 
 type GetIndexInput struct {
 
-	// The identifier of the Amazon Q application connected to the index.
+	// The identifier of the Amazon Q Business application connected to the index.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q index you want information on.
+	// The identifier of the Amazon Q Business index you want information on.
 	//
 	// This member is required.
 	IndexId *string
@@ -45,19 +45,19 @@ type GetIndexInput struct {
 
 type GetIndexOutput struct {
 
-	// The identifier of the Amazon Q application associated with the index.
+	// The identifier of the Amazon Q Business application associated with the index.
 	ApplicationId *string
 
-	// The storage capacity units chosen for your Amazon Q index.
+	// The storage capacity units chosen for your Amazon Q Business index.
 	CapacityConfiguration *types.IndexCapacityConfiguration
 
-	// The Unix timestamp when the Amazon Q index was created.
+	// The Unix timestamp when the Amazon Q Business index was created.
 	CreatedAt *time.Time
 
-	// The description for the Amazon Q index.
+	// The description for the Amazon Q Business index.
 	Description *string
 
-	// The name of the Amazon Q index.
+	// The name of the Amazon Q Business index.
 	DisplayName *string
 
 	// Configuration information for document attributes or metadata. Document
@@ -71,10 +71,10 @@ type GetIndexOutput struct {
 	// message that explains why.
 	Error *types.ErrorDetail
 
-	// The Amazon Resource Name (ARN) of the Amazon Q index.
+	// The Amazon Resource Name (ARN) of the Amazon Q Business index.
 	IndexArn *string
 
-	// The identifier of the Amazon Q index.
+	// The identifier of the Amazon Q Business index.
 	IndexId *string
 
 	// Provides information about the number of documents indexed.
@@ -85,7 +85,7 @@ type GetIndexOutput struct {
 	// a message that explains why.
 	Status types.IndexStatus
 
-	// The Unix timestamp when the Amazon Q index was last updated.
+	// The Unix timestamp when the Amazon Q Business index was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

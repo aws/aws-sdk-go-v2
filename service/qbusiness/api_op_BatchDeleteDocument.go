@@ -12,8 +12,8 @@ import (
 )
 
 // Asynchronously deletes one or more documents added using the BatchPutDocument
-// API from an Amazon Q index. You can see the progress of the deletion, and any
-// error messages related to the process, by using CloudWatch.
+// API from an Amazon Q Business index. You can see the progress of the deletion,
+// and any error messages related to the process, by using CloudWatch.
 func (c *Client) BatchDeleteDocument(ctx context.Context, params *BatchDeleteDocumentInput, optFns ...func(*Options)) (*BatchDeleteDocumentOutput, error) {
 	if params == nil {
 		params = &BatchDeleteDocumentInput{}
@@ -31,17 +31,18 @@ func (c *Client) BatchDeleteDocument(ctx context.Context, params *BatchDeleteDoc
 
 type BatchDeleteDocumentInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Documents deleted from the Amazon Q index.
+	// Documents deleted from the Amazon Q Business index.
 	//
 	// This member is required.
 	Documents []types.DeleteDocument
 
-	// The identifier of the Amazon Q index that contains the documents to delete.
+	// The identifier of the Amazon Q Business index that contains the documents to
+	// delete.
 	//
 	// This member is required.
 	IndexId *string
@@ -54,8 +55,8 @@ type BatchDeleteDocumentInput struct {
 
 type BatchDeleteDocumentOutput struct {
 
-	// A list of documents that couldn't be removed from the Amazon Q index. Each
-	// entry contains an error message that indicates why the document couldn't be
+	// A list of documents that couldn't be removed from the Amazon Q Business index.
+	// Each entry contains an error message that indicates why the document couldn't be
 	// removed from the index.
 	FailedDocuments []types.FailedDocument
 
