@@ -1,3 +1,11 @@
+# Release (2024-04-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.157.0](service/ec2/CHANGELOG.md#v11570-2024-04-17)
+  * **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.5.0](service/qbusiness/CHANGELOG.md#v150-2024-04-17)
+  * **Feature**: This release adds support for IAM Identity Center (IDC) as the identity gateway for Q Business. It also allows users to provide an explicit intent for Q Business to identify how the Chat request should be handled.
+
 # Release (2024-04-16)
 
 ## Module Highlights
