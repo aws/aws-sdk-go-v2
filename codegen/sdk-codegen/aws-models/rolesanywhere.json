@@ -23,6 +23,51 @@
                 }
             }
         },
+        "com.amazonaws.rolesanywhere#AttributeMapping": {
+            "type": "structure",
+            "members": {
+                "certificateField": {
+                    "target": "com.amazonaws.rolesanywhere#CertificateField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.</p>"
+                    }
+                },
+                "mappingRules": {
+                    "target": "com.amazonaws.rolesanywhere#MappingRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of mapping entries for every supported specifier or sub-field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A mapping applied to the authenticating end-entity certificate.</p>"
+            }
+        },
+        "com.amazonaws.rolesanywhere#AttributeMappings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rolesanywhere#AttributeMapping"
+            }
+        },
+        "com.amazonaws.rolesanywhere#CertificateField": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "x509Subject",
+                        "value": "x509Subject"
+                    },
+                    {
+                        "name": "x509Issuer",
+                        "value": "x509Issuer"
+                    },
+                    {
+                        "name": "x509SAN",
+                        "value": "x509SAN"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.rolesanywhere#CreateProfile": {
             "type": "operation",
             "input": {
@@ -325,6 +370,120 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rolesanywhere#CrlDetail"
+            }
+        },
+        "com.amazonaws.rolesanywhere#DeleteAttributeMapping": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rolesanywhere#DeleteAttributeMappingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rolesanywhere#DeleteAttributeMappingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an entry from the attribute mapping rules enforced by a given profile.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteAttributeMapping - Deletes a custom attribute mapping rule",
+                        "input": {
+                            "profileId": "00000000-0000-0000-0000-000000000000",
+                            "specifiers": [
+                                "OU"
+                            ],
+                            "certificateField": "x509Subject"
+                        },
+                        "output": {
+                            "profile": {
+                                "attributeMappings": [
+                                    {
+                                        "mappingRules": [
+                                            {
+                                                "specifier": "CN"
+                                            }
+                                        ],
+                                        "certificateField": "x509Subject"
+                                    }
+                                ],
+                                "createdAt": "2021-07-19T15:55:25.986591Z",
+                                "createdBy": "arn:aws:sts::123456789012:assumed-role/Admin/DummyRole",
+                                "durationSeconds": 3600,
+                                "enabled": true,
+                                "managedPolicyArns": [],
+                                "name": "Dummy Profile",
+                                "profileArn": "arn:aws:rolesanywhere:us-east-1:123456789012:profile/00000000-0000-0000-0000-000000000000",
+                                "profileId": "00000000-0000-0000-0000-000000000000",
+                                "requireInstanceProperties": false,
+                                "roleArns": [
+                                    "arn:aws:iam::123456789012:role/DummyRole"
+                                ],
+                                "sessionPolicy": "",
+                                "updatedAt": "2021-07-19T15:55:25.986591Z"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/profiles/{profileId}/mappings",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rolesanywhere#DeleteAttributeMappingRequest": {
+            "type": "structure",
+            "members": {
+                "profileId": {
+                    "target": "com.amazonaws.rolesanywhere#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateField": {
+                    "target": "com.amazonaws.rolesanywhere#CertificateField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.</p>",
+                        "smithy.api#httpQuery": "certificateField",
+                        "smithy.api#required": {}
+                    }
+                },
+                "specifiers": {
+                    "target": "com.amazonaws.rolesanywhere#SpecifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of specifiers of a certificate field; for example, CN, OU, UID from a Subject.</p>",
+                        "smithy.api#httpQuery": "specifiers"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rolesanywhere#DeleteAttributeMappingResponse": {
+            "type": "structure",
+            "members": {
+                "profile": {
+                    "target": "com.amazonaws.rolesanywhere#ProfileDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the profile after a read or write operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rolesanywhere#DeleteCrl": {
@@ -1054,6 +1213,30 @@
                 }
             }
         },
+        "com.amazonaws.rolesanywhere#MappingRule": {
+            "type": "structure",
+            "members": {
+                "specifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifier within a certificate field, such as CN, OU, or UID from the Subject field.</p>",
+                        "smithy.api#length": {
+                            "max": 60
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single mapping entry for each supported specifier or sub-field.</p>"
+            }
+        },
+        "com.amazonaws.rolesanywhere#MappingRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rolesanywhere#MappingRule"
+            }
+        },
         "com.amazonaws.rolesanywhere#NotificationChannel": {
             "type": "string",
             "traits": {
@@ -1247,10 +1430,16 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.rolesanywhere#DeleteAttributeMapping"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#DisableProfile"
                 },
                 {
                     "target": "com.amazonaws.rolesanywhere#EnableProfile"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#PutAttributeMapping"
                 }
             ],
             "traits": {
@@ -1343,6 +1532,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Used to determine how long sessions vended using this profile are valid for. See the <code>Expiration</code> section of the \n<a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object\">CreateSession API documentation</a>\npage for more details. In requests, if this value is not provided, the default value will be 3600. </p>"
                     }
+                },
+                "attributeMappings": {
+                    "target": "com.amazonaws.rolesanywhere#AttributeMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping applied to the authenticating end-entity certificate.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1364,6 +1559,121 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rolesanywhere#ProfileDetail"
+            }
+        },
+        "com.amazonaws.rolesanywhere#PutAttributeMapping": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rolesanywhere#PutAttributeMappingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rolesanywhere#PutAttributeMappingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Put an entry in the attribute mapping rules that will be enforced by a given profile. \n      A mapping specifies a certificate field and one or more specifiers that have contextual meanings.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "PutAttributeMapping - Adds a custom attribute mapping rule",
+                        "input": {
+                            "profileId": "00000000-0000-0000-0000-000000000000",
+                            "mappingRules": [
+                                {
+                                    "specifier": "CN"
+                                }
+                            ],
+                            "certificateField": "x509Subject"
+                        },
+                        "output": {
+                            "profile": {
+                                "attributeMappings": [
+                                    {
+                                        "mappingRules": [
+                                            {
+                                                "specifier": "CN"
+                                            }
+                                        ],
+                                        "certificateField": "x509Subject"
+                                    }
+                                ],
+                                "createdAt": "2021-07-19T15:55:25.986591Z",
+                                "createdBy": "arn:aws:sts::123456789012:assumed-role/Admin/DummyRole",
+                                "durationSeconds": 3600,
+                                "enabled": true,
+                                "managedPolicyArns": [],
+                                "name": "Dummy Profile",
+                                "profileArn": "arn:aws:rolesanywhere:us-east-1:123456789012:profile/00000000-0000-0000-0000-000000000000",
+                                "profileId": "00000000-0000-0000-0000-000000000000",
+                                "requireInstanceProperties": false,
+                                "roleArns": [
+                                    "arn:aws:iam::123456789012:role/DummyRole"
+                                ],
+                                "sessionPolicy": "",
+                                "updatedAt": "2021-07-19T15:55:25.986591Z"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/profiles/{profileId}/mappings",
+                    "method": "PUT"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.rolesanywhere#PutAttributeMappingRequest": {
+            "type": "structure",
+            "members": {
+                "profileId": {
+                    "target": "com.amazonaws.rolesanywhere#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateField": {
+                    "target": "com.amazonaws.rolesanywhere#CertificateField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mappingRules": {
+                    "target": "com.amazonaws.rolesanywhere#MappingRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of mapping entries for every supported specifier or sub-field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rolesanywhere#PutAttributeMappingResponse": {
+            "type": "structure",
+            "members": {
+                "profile": {
+                    "target": "com.amazonaws.rolesanywhere#ProfileDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the profile after a read or write operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rolesanywhere#PutNotificationSettings": {
@@ -2633,6 +2943,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The data field of the trust anchor depending on its type. </p>"
+            }
+        },
+        "com.amazonaws.rolesanywhere#SpecifierList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.rolesanywhere#Subject": {

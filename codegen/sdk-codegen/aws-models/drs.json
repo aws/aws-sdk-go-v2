@@ -875,6 +875,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>AWS Availability zone into which data is being replicated.</p>"
                     }
+                },
+                "stagingOutpostArn": {
+                    "target": "com.amazonaws.drs#OutpostARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the staging Outpost</p>"
+                    }
                 }
             },
             "traits": {
@@ -5572,6 +5578,16 @@
                 ]
             }
         },
+        "com.amazonaws.drs#OutpostARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/op-[a-f0-9]{17}$"
+            }
+        },
         "com.amazonaws.drs#PITPolicy": {
             "type": "list",
             "member": {
@@ -6051,6 +6067,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the DRS agent installed on the recovery instance</p>"
                     }
+                },
+                "sourceOutpostArn": {
+                    "target": "com.amazonaws.drs#OutpostARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source Outpost</p>"
+                    }
                 }
             },
             "traits": {
@@ -6120,6 +6142,12 @@
                     "target": "com.amazonaws.drs#AwsAvailabilityZone",
                     "traits": {
                         "smithy.api#documentation": "<p>AWS Availability zone into which data is being replicated.</p>"
+                    }
+                },
+                "stagingOutpostArn": {
+                    "target": "com.amazonaws.drs#OutpostARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the staging Outpost</p>"
                     }
                 }
             },
@@ -7476,6 +7504,12 @@
                     "target": "com.amazonaws.drs#AwsAvailabilityZone",
                     "traits": {
                         "smithy.api#documentation": "<p>AWS Availability Zone for an EC2-originated Source Server.</p>"
+                    }
+                },
+                "sourceOutpostArn": {
+                    "target": "com.amazonaws.drs#OutpostARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source Outpost</p>"
                     }
                 }
             },
@@ -9569,6 +9603,10 @@
                     {
                         "value": "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE",
                         "name": "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
                     }
                 ]
             }
