@@ -1,3 +1,7 @@
+# v1.62.0 (2024-04-18)
+
+* **Feature**: This release adds support for the Cross Sheet Filter and Control features, and support for warnings in asset imports for any permitted errors encountered during execution
+
 # v1.61.0 (2024-04-05)
 
 * **Feature**: Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription

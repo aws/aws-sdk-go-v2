@@ -1,3 +1,7 @@
+# v1.136.0 (2024-04-18)
+
+* **Feature**: Removed deprecated enum values and updated API documentation.
+
 # v1.135.0 (2024-03-29)
 
 * **Feature**: This release adds support for custom images for the CodeEditor App on SageMaker Studio

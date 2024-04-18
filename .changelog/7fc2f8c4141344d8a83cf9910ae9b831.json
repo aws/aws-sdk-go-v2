@@ -1,8 +1,0 @@
-{
-    "id": "7fc2f8c4-1413-44d8-a83c-f9910ae9b831",
-    "type": "feature",
-    "description": "This release introduces the PutAttributeMapping and DeleteAttributeMapping APIs. IAM Roles Anywhere now provides the capability to define a set of mapping rules, allowing customers to specify which data is extracted from their X.509 end-entity certificates.",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

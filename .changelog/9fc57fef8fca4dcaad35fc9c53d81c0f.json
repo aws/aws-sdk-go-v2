@@ -1,8 +1,0 @@
-{
-    "id": "9fc57fef-8fca-4dca-ad35-fc9c53d81c0f",
-    "type": "feature",
-    "description": "This release adds the capability to publish detailed Spark engine metrics to Amazon Managed Service for Prometheus (AMP) for  enhanced monitoring for Spark jobs.",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

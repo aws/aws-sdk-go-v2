@@ -1,3 +1,21 @@
+# Release (2024-04-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.26.0](service/drs/CHANGELOG.md#v1260-2024-04-18)
+  * **Feature**: Outpost ARN added to Source Server and Recovery Instance
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.19.0](service/emrserverless/CHANGELOG.md#v1190-2024-04-18)
+  * **Feature**: This release adds the capability to publish detailed Spark engine metrics to Amazon Managed Service for Prometheus (AMP) for  enhanced monitoring for Spark jobs.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.42.0](service/guardduty/CHANGELOG.md#v1420-2024-04-18)
+  * **Feature**: Added IPv6Address fields for local and remote IP addresses
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.62.0](service/quicksight/CHANGELOG.md#v1620-2024-04-18)
+  * **Feature**: This release adds support for the Cross Sheet Filter and Control features, and support for warnings in asset imports for any permitted errors encountered during execution
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.11.0](service/rolesanywhere/CHANGELOG.md#v1110-2024-04-18)
+  * **Feature**: This release introduces the PutAttributeMapping and DeleteAttributeMapping APIs. IAM Roles Anywhere now provides the capability to define a set of mapping rules, allowing customers to specify which data is extracted from their X.509 end-entity certificates.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.136.0](service/sagemaker/CHANGELOG.md#v11360-2024-04-18)
+  * **Feature**: Removed deprecated enum values and updated API documentation.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.39.0](service/workspaces/CHANGELOG.md#v1390-2024-04-18)
+  * **Feature**: Adds new APIs for managing and sharing WorkSpaces BYOL configuration across accounts.
+
 # Release (2024-04-17)
 
 ## Module Highlights

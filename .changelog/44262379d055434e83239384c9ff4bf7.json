@@ -1,8 +1,0 @@
-{
-    "id": "44262379-d055-434e-8323-9384c9ff4bf7",
-    "type": "feature",
-    "description": "Added IPv6Address fields for local and remote IP addresses",
-    "modules": [
-        "service/guardduty"
-    ]
-}

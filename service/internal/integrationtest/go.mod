@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.53.1
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.5
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.44.6
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.28.6
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.28.4
 	github.com/aws/aws-sdk-go-v2/service/ses v1.22.4
@@ -85,7 +85,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.20.4
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.21.4
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.48.2
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.38.4
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.39.0
 	github.com/aws/smithy-go v1.20.2
 )
 
