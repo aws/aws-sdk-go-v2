@@ -11,41 +11,39 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes the configuration of Bring Your Own License
-// (BYOL) for the specified account.
-func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInput, optFns ...func(*Options)) (*DescribeAccountOutput, error) {
+// Rejects the account link invitation.
+func (c *Client) RejectAccountLinkInvitation(ctx context.Context, params *RejectAccountLinkInvitationInput, optFns ...func(*Options)) (*RejectAccountLinkInvitationOutput, error) {
 	if params == nil {
-		params = &DescribeAccountInput{}
+		params = &RejectAccountLinkInvitationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccount", params, optFns, c.addOperationDescribeAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RejectAccountLinkInvitation", params, optFns, c.addOperationRejectAccountLinkInvitationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeAccountOutput)
+	out := result.(*RejectAccountLinkInvitationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeAccountInput struct {
+type RejectAccountLinkInvitationInput struct {
+
+	// The identifier of the account link
+	//
+	// This member is required.
+	LinkId *string
+
+	// The client token of the account link invitation to reject.
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
-type DescribeAccountOutput struct {
+type RejectAccountLinkInvitationOutput struct {
 
-	// The type of linked account.
-	DedicatedTenancyAccountType types.DedicatedTenancyAccountType
-
-	// The IP address range, specified as an IPv4 CIDR block, used for the management
-	// network interface. The management network interface is connected to a secure
-	// Amazon WorkSpaces management network. It is used for interactive streaming of
-	// the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon
-	// WorkSpaces to manage the WorkSpace.
-	DedicatedTenancyManagementCidrRange *string
-
-	// The status of BYOL (whether BYOL is enabled or disabled).
-	DedicatedTenancySupport types.DedicatedTenancySupportResultEnum
+	// Information about the account link.
+	AccountLink *types.AccountLink
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,19 +51,19 @@ type DescribeAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationRejectAccountLinkInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccount{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectAccountLinkInvitation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccount{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRejectAccountLinkInvitation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccount"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "RejectAccountLinkInvitation"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -108,7 +106,10 @@ func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccount(options.Region), middleware.Before); err != nil {
+	if err = addOpRejectAccountLinkInvitationValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectAccountLinkInvitation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -129,10 +130,10 @@ func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeAccount(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opRejectAccountLinkInvitation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeAccount",
+		OperationName: "RejectAccountLinkInvitation",
 	}
 }

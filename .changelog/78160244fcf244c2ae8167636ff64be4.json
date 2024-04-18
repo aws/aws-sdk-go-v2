@@ -1,0 +1,8 @@
+{
+    "id": "78160244-fcf2-44c2-ae81-67636ff64be4",
+    "type": "feature",
+    "description": "Removed deprecated enum values and updated API documentation.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

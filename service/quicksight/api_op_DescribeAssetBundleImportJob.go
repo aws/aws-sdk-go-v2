@@ -110,6 +110,10 @@ type DescribeAssetBundleImportJobOutput struct {
 	// The HTTP status of the response.
 	Status int32
 
+	// An array of warning records that describe all permitted errors that are
+	// encountered during the import job.
+	Warnings []types.AssetBundleImportJobWarning
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

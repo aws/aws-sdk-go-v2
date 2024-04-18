@@ -89,6 +89,9 @@ type DataReplicationInfo struct {
 	// AWS Availability zone into which data is being replicated.
 	StagingAvailabilityZone *string
 
+	// The ARN of the staging Outpost
+	StagingOutpostArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -701,6 +704,9 @@ type RecoveryInstance struct {
 	// Properties of the Recovery Instance machine.
 	RecoveryInstanceProperties *RecoveryInstanceProperties
 
+	// The ARN of the source Outpost
+	SourceOutpostArn *string
+
 	// The Source Server ID that this Recovery Instance is associated with.
 	SourceServerID *string
 
@@ -745,6 +751,9 @@ type RecoveryInstanceDataReplicationInfo struct {
 
 	// AWS Availability zone into which data is being replicated.
 	StagingAvailabilityZone *string
+
+	// The ARN of the staging Outpost
+	StagingOutpostArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1019,6 +1028,9 @@ type SourceCloudProperties struct {
 
 	// AWS Region for an EC2-originated Source Server.
 	OriginRegion *string
+
+	// The ARN of the source Outpost
+	SourceOutpostArn *string
 
 	noSmithyDocumentSerde
 }

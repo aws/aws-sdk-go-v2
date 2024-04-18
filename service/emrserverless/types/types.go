@@ -521,6 +521,10 @@ type MonitoringConfiguration struct {
 	// The managed log persistence configuration for a job run.
 	ManagedPersistenceMonitoringConfiguration *ManagedPersistenceMonitoringConfiguration
 
+	// The monitoring configuration object you can configure to send metrics to Amazon
+	// Managed Service for Prometheus for a job run.
+	PrometheusMonitoringConfiguration *PrometheusMonitoringConfiguration
+
 	// The Amazon S3 configuration for monitoring log publishing.
 	S3MonitoringConfiguration *S3MonitoringConfiguration
 
@@ -535,6 +539,17 @@ type NetworkConfiguration struct {
 
 	// The array of subnet Ids for customer VPC connectivity.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The monitoring configuration object you can configure to send metrics to Amazon
+// Managed Service for Prometheus for a job run.
+type PrometheusMonitoringConfiguration struct {
+
+	// The remote write URL in the Amazon Managed Service for Prometheus workspace to
+	// send metrics to.
+	RemoteWriteUrl *string
 
 	noSmithyDocumentSerde
 }

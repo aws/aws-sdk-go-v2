@@ -11595,6 +11595,11 @@ func awsRestjson1_deserializeOpDocumentDescribeAssetBundleImportJobOutput(v **De
 				return err
 			}
 
+		case "Warnings":
+			if err := awsRestjson1_deserializeDocumentAssetBundleImportJobWarningList(&sv.Warnings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -39788,6 +39793,89 @@ func awsRestjson1_deserializeDocumentAssetBundleImportJobVPCConnectionOverrideTa
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetBundleImportJobWarning(v **types.AssetBundleImportJobWarning, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetBundleImportJobWarning
+	if *v == nil {
+		sv = &types.AssetBundleImportJobWarning{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAssetBundleImportJobWarningList(v *[]types.AssetBundleImportJobWarning, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AssetBundleImportJobWarning
+	if *v == nil {
+		cv = []types.AssetBundleImportJobWarning{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AssetBundleImportJobWarning
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAssetBundleImportJobWarning(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetBundleImportSourceDescription(v **types.AssetBundleImportSourceDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -42864,6 +42952,11 @@ func awsRestjson1_deserializeDocumentCategoryFilter(v **types.CategoryFilter, va
 
 		case "Configuration":
 			if err := awsRestjson1_deserializeDocumentCategoryFilterConfiguration(&sv.Configuration, value); err != nil {
+				return err
+			}
+
+		case "DefaultFilterControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(&sv.DefaultFilterControlConfiguration, value); err != nil {
 				return err
 			}
 
@@ -51037,6 +51130,262 @@ func awsRestjson1_deserializeDocumentDecimalValueWhenUnsetConfiguration(v **type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDefaultDateTimePickerControlOptions(v **types.DefaultDateTimePickerControlOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultDateTimePickerControlOptions
+	if *v == nil {
+		sv = &types.DefaultDateTimePickerControlOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisplayOptions":
+			if err := awsRestjson1_deserializeDocumentDateTimePickerControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SheetControlDateTimePickerType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SheetControlDateTimePickerType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(v **types.DefaultFilterControlConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultFilterControlConfiguration
+	if *v == nil {
+		sv = &types.DefaultFilterControlConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ControlOptions":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlOptions(&sv.ControlOptions, value); err != nil {
+				return err
+			}
+
+		case "Title":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SheetControlTitle to be of type string, got %T instead", value)
+				}
+				sv.Title = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDefaultFilterControlOptions(v **types.DefaultFilterControlOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultFilterControlOptions
+	if *v == nil {
+		sv = &types.DefaultFilterControlOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultDateTimePickerOptions":
+			if err := awsRestjson1_deserializeDocumentDefaultDateTimePickerControlOptions(&sv.DefaultDateTimePickerOptions, value); err != nil {
+				return err
+			}
+
+		case "DefaultDropdownOptions":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterDropDownControlOptions(&sv.DefaultDropdownOptions, value); err != nil {
+				return err
+			}
+
+		case "DefaultListOptions":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterListControlOptions(&sv.DefaultListOptions, value); err != nil {
+				return err
+			}
+
+		case "DefaultRelativeDateTimeOptions":
+			if err := awsRestjson1_deserializeDocumentDefaultRelativeDateTimeControlOptions(&sv.DefaultRelativeDateTimeOptions, value); err != nil {
+				return err
+			}
+
+		case "DefaultSliderOptions":
+			if err := awsRestjson1_deserializeDocumentDefaultSliderControlOptions(&sv.DefaultSliderOptions, value); err != nil {
+				return err
+			}
+
+		case "DefaultTextAreaOptions":
+			if err := awsRestjson1_deserializeDocumentDefaultTextAreaControlOptions(&sv.DefaultTextAreaOptions, value); err != nil {
+				return err
+			}
+
+		case "DefaultTextFieldOptions":
+			if err := awsRestjson1_deserializeDocumentDefaultTextFieldControlOptions(&sv.DefaultTextFieldOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDefaultFilterDropDownControlOptions(v **types.DefaultFilterDropDownControlOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultFilterDropDownControlOptions
+	if *v == nil {
+		sv = &types.DefaultFilterDropDownControlOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisplayOptions":
+			if err := awsRestjson1_deserializeDocumentDropDownControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
+				return err
+			}
+
+		case "SelectableValues":
+			if err := awsRestjson1_deserializeDocumentFilterSelectableValues(&sv.SelectableValues, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SheetControlListType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SheetControlListType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDefaultFilterListControlOptions(v **types.DefaultFilterListControlOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultFilterListControlOptions
+	if *v == nil {
+		sv = &types.DefaultFilterListControlOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisplayOptions":
+			if err := awsRestjson1_deserializeDocumentListControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
+				return err
+			}
+
+		case "SelectableValues":
+			if err := awsRestjson1_deserializeDocumentFilterSelectableValues(&sv.SelectableValues, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SheetControlListType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SheetControlListType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDefaultFormatting(v **types.DefaultFormatting, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51281,6 +51630,42 @@ func awsRestjson1_deserializeDocumentDefaultPaginatedLayoutConfiguration(v **typ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDefaultRelativeDateTimeControlOptions(v **types.DefaultRelativeDateTimeControlOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultRelativeDateTimeControlOptions
+	if *v == nil {
+		sv = &types.DefaultRelativeDateTimeControlOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisplayOptions":
+			if err := awsRestjson1_deserializeDocumentRelativeDateTimeControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDefaultSectionBasedLayoutConfiguration(v **types.DefaultSectionBasedLayoutConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51305,6 +51690,234 @@ func awsRestjson1_deserializeDocumentDefaultSectionBasedLayoutConfiguration(v **
 		switch key {
 		case "CanvasSizeOptions":
 			if err := awsRestjson1_deserializeDocumentSectionBasedLayoutCanvasSizeOptions(&sv.CanvasSizeOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDefaultSliderControlOptions(v **types.DefaultSliderControlOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultSliderControlOptions
+	if *v == nil {
+		sv = &types.DefaultSliderControlOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisplayOptions":
+			if err := awsRestjson1_deserializeDocumentSliderControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
+				return err
+			}
+
+		case "MaximumValue":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MaximumValue = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MaximumValue = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "MinimumValue":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MinimumValue = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MinimumValue = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "StepSize":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StepSize = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.StepSize = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SheetControlSliderType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SheetControlSliderType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDefaultTextAreaControlOptions(v **types.DefaultTextAreaControlOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultTextAreaControlOptions
+	if *v == nil {
+		sv = &types.DefaultTextAreaControlOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Delimiter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TextAreaControlDelimiter to be of type string, got %T instead", value)
+				}
+				sv.Delimiter = ptr.String(jtv)
+			}
+
+		case "DisplayOptions":
+			if err := awsRestjson1_deserializeDocumentTextAreaControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDefaultTextFieldControlOptions(v **types.DefaultTextFieldControlOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DefaultTextFieldControlOptions
+	if *v == nil {
+		sv = &types.DefaultTextFieldControlOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisplayOptions":
+			if err := awsRestjson1_deserializeDocumentTextFieldControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
 			}
 
@@ -53458,6 +54071,11 @@ func awsRestjson1_deserializeDocumentFilterControl(v **types.FilterControl, valu
 
 	for key, value := range shape {
 		switch key {
+		case "CrossSheet":
+			if err := awsRestjson1_deserializeDocumentFilterCrossSheetControl(&sv.CrossSheet, value); err != nil {
+				return err
+			}
+
 		case "DateTimePicker":
 			if err := awsRestjson1_deserializeDocumentFilterDateTimePickerControl(&sv.DateTimePicker, value); err != nil {
 				return err
@@ -53533,6 +54151,60 @@ func awsRestjson1_deserializeDocumentFilterControlList(v *[]types.FilterControl,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFilterCrossSheetControl(v **types.FilterCrossSheetControl, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FilterCrossSheetControl
+	if *v == nil {
+		sv = &types.FilterCrossSheetControl{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CascadingControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentCascadingControlConfiguration(&sv.CascadingControlConfiguration, value); err != nil {
+				return err
+			}
+
+		case "FilterControlId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.FilterControlId = ptr.String(jtv)
+			}
+
+		case "SourceFilterId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortRestrictiveResourceId to be of type string, got %T instead", value)
+				}
+				sv.SourceFilterId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -64524,6 +65196,11 @@ func awsRestjson1_deserializeDocumentNumericEqualityFilter(v **types.NumericEqua
 				return err
 			}
 
+		case "DefaultFilterControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(&sv.DefaultFilterControlConfiguration, value); err != nil {
+				return err
+			}
+
 		case "FilterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -64687,6 +65364,11 @@ func awsRestjson1_deserializeDocumentNumericRangeFilter(v **types.NumericRangeFi
 
 		case "Column":
 			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
+				return err
+			}
+
+		case "DefaultFilterControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(&sv.DefaultFilterControlConfiguration, value); err != nil {
 				return err
 			}
 
@@ -70475,6 +71157,11 @@ func awsRestjson1_deserializeDocumentRelativeDatesFilter(v **types.RelativeDates
 
 		case "Column":
 			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
+				return err
+			}
+
+		case "DefaultFilterControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(&sv.DefaultFilterControlConfiguration, value); err != nil {
 				return err
 			}
 
@@ -80067,6 +80754,11 @@ func awsRestjson1_deserializeDocumentTimeEqualityFilter(v **types.TimeEqualityFi
 				return err
 			}
 
+		case "DefaultFilterControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(&sv.DefaultFilterControlConfiguration, value); err != nil {
+				return err
+			}
+
 		case "FilterId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -80225,6 +80917,11 @@ func awsRestjson1_deserializeDocumentTimeRangeFilter(v **types.TimeRangeFilter, 
 		switch key {
 		case "Column":
 			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
+				return err
+			}
+
+		case "DefaultFilterControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(&sv.DefaultFilterControlConfiguration, value); err != nil {
 				return err
 			}
 
@@ -80516,6 +81213,11 @@ func awsRestjson1_deserializeDocumentTopBottomFilter(v **types.TopBottomFilter, 
 
 		case "Column":
 			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
+				return err
+			}
+
+		case "DefaultFilterControlConfiguration":
+			if err := awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(&sv.DefaultFilterControlConfiguration, value); err != nil {
 				return err
 			}
 

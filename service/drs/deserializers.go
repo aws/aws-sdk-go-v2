@@ -9184,6 +9184,15 @@ func awsRestjson1_deserializeDocumentDataReplicationInfo(v **types.DataReplicati
 				sv.StagingAvailabilityZone = ptr.String(jtv)
 			}
 
+		case "stagingOutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutpostARN to be of type string, got %T instead", value)
+				}
+				sv.StagingOutpostArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11605,6 +11614,15 @@ func awsRestjson1_deserializeDocumentRecoveryInstance(v **types.RecoveryInstance
 				return err
 			}
 
+		case "sourceOutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutpostARN to be of type string, got %T instead", value)
+				}
+				sv.SourceOutpostArn = ptr.String(jtv)
+			}
+
 		case "sourceServerID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11748,6 +11766,15 @@ func awsRestjson1_deserializeDocumentRecoveryInstanceDataReplicationInfo(v **typ
 					return fmt.Errorf("expected AwsAvailabilityZone to be of type string, got %T instead", value)
 				}
 				sv.StagingAvailabilityZone = ptr.String(jtv)
+			}
+
+		case "stagingOutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutpostARN to be of type string, got %T instead", value)
+				}
+				sv.StagingOutpostArn = ptr.String(jtv)
 			}
 
 		default:
@@ -13044,6 +13071,15 @@ func awsRestjson1_deserializeDocumentSourceCloudProperties(v **types.SourceCloud
 					return fmt.Errorf("expected AwsRegion to be of type string, got %T instead", value)
 				}
 				sv.OriginRegion = ptr.String(jtv)
+			}
+
+		case "sourceOutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutpostARN to be of type string, got %T instead", value)
+				}
+				sv.SourceOutpostArn = ptr.String(jtv)
 			}
 
 		default:

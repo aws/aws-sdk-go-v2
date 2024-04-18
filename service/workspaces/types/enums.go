@@ -20,6 +20,30 @@ func (AccessPropertyValue) Values() []AccessPropertyValue {
 	}
 }
 
+type AccountLinkStatusEnum string
+
+// Enum values for AccountLinkStatusEnum
+const (
+	AccountLinkStatusEnumLinked                           AccountLinkStatusEnum = "LINKED"
+	AccountLinkStatusEnumLinkingFailed                    AccountLinkStatusEnum = "LINKING_FAILED"
+	AccountLinkStatusEnumLinkNotFound                     AccountLinkStatusEnum = "LINK_NOT_FOUND"
+	AccountLinkStatusEnumPendingAcceptanceByTargetAccount AccountLinkStatusEnum = "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT"
+	AccountLinkStatusEnumRejected                         AccountLinkStatusEnum = "REJECTED"
+)
+
+// Values returns all known values for AccountLinkStatusEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccountLinkStatusEnum) Values() []AccountLinkStatusEnum {
+	return []AccountLinkStatusEnum{
+		"LINKED",
+		"LINKING_FAILED",
+		"LINK_NOT_FOUND",
+		"PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT",
+		"REJECTED",
+	}
+}
+
 type Application string
 
 // Enum values for Application
@@ -306,6 +330,24 @@ func (DataReplication) Values() []DataReplication {
 	return []DataReplication{
 		"NO_REPLICATION",
 		"PRIMARY_AS_SOURCE",
+	}
+}
+
+type DedicatedTenancyAccountType string
+
+// Enum values for DedicatedTenancyAccountType
+const (
+	DedicatedTenancyAccountTypeSourceAccount DedicatedTenancyAccountType = "SOURCE_ACCOUNT"
+	DedicatedTenancyAccountTypeTargetAccount DedicatedTenancyAccountType = "TARGET_ACCOUNT"
+)
+
+// Values returns all known values for DedicatedTenancyAccountType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DedicatedTenancyAccountType) Values() []DedicatedTenancyAccountType {
+	return []DedicatedTenancyAccountType{
+		"SOURCE_ACCOUNT",
+		"TARGET_ACCOUNT",
 	}
 }
 

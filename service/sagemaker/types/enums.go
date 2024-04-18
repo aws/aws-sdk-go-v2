@@ -1090,9 +1090,6 @@ type AwsManagedHumanLoopRequestSource string
 const (
 	AwsManagedHumanLoopRequestSourceRekognitionDetectModerationLabelsImageV3 AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"
 	AwsManagedHumanLoopRequestSourceTextractAnalyzeDocumentFormsV1           AwsManagedHumanLoopRequestSource = "AWS/Textract/AnalyzeDocument/Forms/V1"
-	AwsManagedHumanLoopRequestSourceTextractAnalyzeExpense                   AwsManagedHumanLoopRequestSource = "AWS/Textract/AnalyzeExpense"
-	AwsManagedHumanLoopRequestSourceHandshakeVerifyIdentity                  AwsManagedHumanLoopRequestSource = "AWS/Handshake/VerifyIdentity"
-	AwsManagedHumanLoopRequestSourceBedrockModelEvaluation                   AwsManagedHumanLoopRequestSource = "AWS/Bedrock/ModelEvaluation"
 )
 
 // Values returns all known values for AwsManagedHumanLoopRequestSource. Note that
@@ -1103,9 +1100,6 @@ func (AwsManagedHumanLoopRequestSource) Values() []AwsManagedHumanLoopRequestSou
 	return []AwsManagedHumanLoopRequestSource{
 		"AWS/Rekognition/DetectModerationLabels/Image/V3",
 		"AWS/Textract/AnalyzeDocument/Forms/V1",
-		"AWS/Textract/AnalyzeExpense",
-		"AWS/Handshake/VerifyIdentity",
-		"AWS/Bedrock/ModelEvaluation",
 	}
 }
 

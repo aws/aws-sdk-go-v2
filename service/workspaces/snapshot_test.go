@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AcceptAccountLinkInvitation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptAccountLinkInvitation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptAccountLinkInvitation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateConnectionAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateConnectionAlias(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_CopyWorkspaceImage(t *testing.T) {
 	_, err := svc.CopyWorkspaceImage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CopyWorkspaceImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAccountLinkInvitation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAccountLinkInvitation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAccountLinkInvitation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -223,6 +247,18 @@ func TestCheckSnapshot_CreateWorkspaces(t *testing.T) {
 	_, err := svc.CreateWorkspaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateWorkspaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAccountLinkInvitation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccountLinkInvitation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAccountLinkInvitation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -626,6 +662,18 @@ func TestCheckSnapshot_DisassociateWorkspaceApplication(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccountLink(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountLink(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ImportClientBranding(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportClientBranding(context.Background(), nil, func(o *Options) {
@@ -643,6 +691,18 @@ func TestCheckSnapshot_ImportWorkspaceImage(t *testing.T) {
 	_, err := svc.ImportWorkspaceImage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ImportWorkspaceImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAccountLinks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccountLinks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAccountLinks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -818,6 +878,18 @@ func TestCheckSnapshot_RegisterWorkspaceDirectory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RejectAccountLinkInvitation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectAccountLinkInvitation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectAccountLinkInvitation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RestoreWorkspace(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RestoreWorkspace(context.Background(), nil, func(o *Options) {
@@ -937,6 +1009,18 @@ func TestCheckSnapshot_UpdateWorkspaceImagePermission(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AcceptAccountLinkInvitation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptAccountLinkInvitation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptAccountLinkInvitation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateConnectionAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateConnectionAlias(context.Background(), nil, func(o *Options) {
@@ -990,6 +1074,18 @@ func TestUpdateSnapshot_CopyWorkspaceImage(t *testing.T) {
 	_, err := svc.CopyWorkspaceImage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CopyWorkspaceImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAccountLinkInvitation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAccountLinkInvitation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAccountLinkInvitation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1098,6 +1194,18 @@ func TestUpdateSnapshot_CreateWorkspaces(t *testing.T) {
 	_, err := svc.CreateWorkspaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateWorkspaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAccountLinkInvitation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccountLinkInvitation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAccountLinkInvitation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1501,6 +1609,18 @@ func TestUpdateSnapshot_DisassociateWorkspaceApplication(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAccountLink(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountLink(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ImportClientBranding(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ImportClientBranding(context.Background(), nil, func(o *Options) {
@@ -1518,6 +1638,18 @@ func TestUpdateSnapshot_ImportWorkspaceImage(t *testing.T) {
 	_, err := svc.ImportWorkspaceImage(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ImportWorkspaceImage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAccountLinks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccountLinks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAccountLinks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1686,6 +1818,18 @@ func TestUpdateSnapshot_RegisterWorkspaceDirectory(t *testing.T) {
 	_, err := svc.RegisterWorkspaceDirectory(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RegisterWorkspaceDirectory")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RejectAccountLinkInvitation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectAccountLinkInvitation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectAccountLinkInvitation")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -3854,6 +3854,11 @@ func awsRestjson1_deserializeDocumentMonitoringConfiguration(v **types.Monitorin
 				return err
 			}
 
+		case "prometheusMonitoringConfiguration":
+			if err := awsRestjson1_deserializeDocumentPrometheusMonitoringConfiguration(&sv.PrometheusMonitoringConfiguration, value); err != nil {
+				return err
+			}
+
 		case "s3MonitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentS3MonitoringConfiguration(&sv.S3MonitoringConfiguration, value); err != nil {
 				return err
@@ -3898,6 +3903,46 @@ func awsRestjson1_deserializeDocumentNetworkConfiguration(v **types.NetworkConfi
 		case "subnetIds":
 			if err := awsRestjson1_deserializeDocumentSubnetIds(&sv.SubnetIds, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrometheusMonitoringConfiguration(v **types.PrometheusMonitoringConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrometheusMonitoringConfiguration
+	if *v == nil {
+		sv = &types.PrometheusMonitoringConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "remoteWriteUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrometheusUrlString to be of type string, got %T instead", value)
+				}
+				sv.RemoteWriteUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -4192,7 +4237,7 @@ func awsRestjson1_deserializeDocumentSensitivePropertiesMap(v *map[string]string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected String1024 to be of type string, got %T instead", value)
+				return fmt.Errorf("expected ConfigurationPropertyValue to be of type string, got %T instead", value)
 			}
 			parsedVal = jtv
 		}

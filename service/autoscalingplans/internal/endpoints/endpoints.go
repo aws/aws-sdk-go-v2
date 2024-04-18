@@ -372,12 +372,42 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-gov-east-1",
 			}: endpoints.Endpoint{
+				Hostname:  "autoscaling-plans.us-gov-east-1.amazonaws.com",
 				Protocols: []string{"http", "https"},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:  "autoscaling-plans.us-gov-east-1.amazonaws.com",
+				Protocols: []string{"http", "https"},
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname:   "autoscaling-plans.us-gov-east-1.amazonaws.com",
+				Protocols:  []string{"http", "https"},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{
+				Hostname:  "autoscaling-plans.us-gov-west-1.amazonaws.com",
 				Protocols: []string{"http", "https"},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:  "autoscaling-plans.us-gov-west-1.amazonaws.com",
+				Protocols: []string{"http", "https"},
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname:   "autoscaling-plans.us-gov-west-1.amazonaws.com",
+				Protocols:  []string{"http", "https"},
+				Deprecated: aws.TrueTernary,
 			},
 		},
 	},

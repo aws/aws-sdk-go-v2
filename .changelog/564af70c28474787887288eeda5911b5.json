@@ -1,0 +1,8 @@
+{
+    "id": "564af70c-2847-4787-8872-88eeda5911b5",
+    "type": "feature",
+    "description": "Outpost ARN added to Source Server and Recovery Instance",
+    "modules": [
+        "service/drs"
+    ]
+}

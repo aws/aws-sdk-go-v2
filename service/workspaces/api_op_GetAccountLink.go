@@ -11,41 +11,37 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes the configuration of Bring Your Own License
-// (BYOL) for the specified account.
-func (c *Client) DescribeAccount(ctx context.Context, params *DescribeAccountInput, optFns ...func(*Options)) (*DescribeAccountOutput, error) {
+// Retrieves account link information.
+func (c *Client) GetAccountLink(ctx context.Context, params *GetAccountLinkInput, optFns ...func(*Options)) (*GetAccountLinkOutput, error) {
 	if params == nil {
-		params = &DescribeAccountInput{}
+		params = &GetAccountLinkInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeAccount", params, optFns, c.addOperationDescribeAccountMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAccountLink", params, optFns, c.addOperationGetAccountLinkMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeAccountOutput)
+	out := result.(*GetAccountLinkOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeAccountInput struct {
+type GetAccountLinkInput struct {
+
+	// The identifier of the account to link.
+	LinkId *string
+
+	// The identifier of the account link
+	LinkedAccountId *string
+
 	noSmithyDocumentSerde
 }
 
-type DescribeAccountOutput struct {
+type GetAccountLinkOutput struct {
 
-	// The type of linked account.
-	DedicatedTenancyAccountType types.DedicatedTenancyAccountType
-
-	// The IP address range, specified as an IPv4 CIDR block, used for the management
-	// network interface. The management network interface is connected to a secure
-	// Amazon WorkSpaces management network. It is used for interactive streaming of
-	// the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon
-	// WorkSpaces to manage the WorkSpace.
-	DedicatedTenancyManagementCidrRange *string
-
-	// The status of BYOL (whether BYOL is enabled or disabled).
-	DedicatedTenancySupport types.DedicatedTenancySupportResultEnum
+	// The account link of the account link to retrieve.
+	AccountLink *types.AccountLink
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,19 +49,19 @@ type DescribeAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGetAccountLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccount{}, middleware.After)
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccountLink{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccount{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAccountLink{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccount"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountLink"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -108,7 +104,7 @@ func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccount(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccountLink(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -129,10 +125,10 @@ func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeAccount(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetAccountLink(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "DescribeAccount",
+		OperationName: "GetAccountLink",
 	}
 }

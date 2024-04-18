@@ -2669,16 +2669,20 @@ type ClusterInstanceStatusDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The LifeCycle configuration for a SageMaker HyperPod cluster.
+// The lifecycle configuration for a SageMaker HyperPod cluster.
 type ClusterLifeCycleConfig struct {
 
-	// The directory of the LifeCycle script under SourceS3Uri . This LifeCycle script
-	// runs during cluster creation.
+	// The file name of the entrypoint script of lifecycle scripts under SourceS3Uri .
+	// This entrypoint script runs during cluster creation.
 	//
 	// This member is required.
 	OnCreate *string
 
-	// An Amazon S3 bucket path where your LifeCycle scripts are stored.
+	// An Amazon S3 bucket path where your lifecycle scripts are stored. Make sure
+	// that the S3 bucket path starts with s3://sagemaker- . The IAM role for
+	// SageMaker HyperPod (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-iam-role-for-hyperpod)
+	// has the managed AmazonSageMakerClusterInstanceRolePolicy (https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-cluster.html)
+	// attached, which allows access to S3 buckets with the specific prefix sagemaker- .
 	//
 	// This member is required.
 	SourceS3Uri *string
@@ -4978,7 +4982,7 @@ type FeatureDefinition struct {
 
 	// The name of a feature. The type must be a string. FeatureName cannot be any of
 	// the following: is_deleted , write_time , api_invocation_time . The name:
-	//   - Must start and end with an alphanumeric character.
+	//   - Must start with an alphanumeric character.
 	//   - Can only include alphanumeric characters, underscores, and hyphens. Spaces
 	//   are not allowed.
 	//

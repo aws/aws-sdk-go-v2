@@ -2,6 +2,26 @@
 
 package types
 
+type CertificateField string
+
+// Enum values for CertificateField
+const (
+	CertificateFieldX509Subject CertificateField = "x509Subject"
+	CertificateFieldX509Issuer  CertificateField = "x509Issuer"
+	CertificateFieldX509SAN     CertificateField = "x509SAN"
+)
+
+// Values returns all known values for CertificateField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateField) Values() []CertificateField {
+	return []CertificateField{
+		"x509Subject",
+		"x509Issuer",
+		"x509SAN",
+	}
+}
+
 type NotificationChannel string
 
 // Enum values for NotificationChannel

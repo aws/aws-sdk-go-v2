@@ -212,6 +212,7 @@ const (
 	AssetBundleExportJobDataSourcePropertyToOverrideManifestFileLocation AssetBundleExportJobDataSourcePropertyToOverride = "ManifestFileLocation"
 	AssetBundleExportJobDataSourcePropertyToOverrideWarehouse            AssetBundleExportJobDataSourcePropertyToOverride = "Warehouse"
 	AssetBundleExportJobDataSourcePropertyToOverrideRoleArn              AssetBundleExportJobDataSourcePropertyToOverride = "RoleArn"
+	AssetBundleExportJobDataSourcePropertyToOverrideProductType          AssetBundleExportJobDataSourcePropertyToOverride = "ProductType"
 )
 
 // Values returns all known values for
@@ -237,6 +238,7 @@ func (AssetBundleExportJobDataSourcePropertyToOverride) Values() []AssetBundleEx
 		"ManifestFileLocation",
 		"Warehouse",
 		"RoleArn",
+		"ProductType",
 	}
 }
 

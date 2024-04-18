@@ -734,7 +734,7 @@ type AssetBundleExportJobThemeOverrideProperties struct {
 }
 
 // The option to relax the validation that is required to export each asset. When
-// StrictModeForAllResource is set to true, validation is skipped for specific UI
+// StrictModeForAllResource is set to false , validation is skipped for specific UI
 // errors.
 type AssetBundleExportJobValidationStrategy struct {
 
@@ -1297,6 +1297,18 @@ type AssetBundleImportJobVPCConnectionOverrideTags struct {
 	//
 	// This member is required.
 	VPCConnectionIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a warning that occurred during an Asset Bundle import job.
+type AssetBundleImportJobWarning struct {
+
+	// The ARN of the resource that the warning occurred for.
+	Arn *string
+
+	// A description of the warning that occurred during an Asset Bundle import job.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -2161,7 +2173,7 @@ type CategoricalMeasureField struct {
 	noSmithyDocumentSerde
 }
 
-// The numeric equality type drill down filter.
+// The category drill down filter.
 type CategoryDrillDownFilter struct {
 
 	// A list of the string inputs that are the values of the category drill down
@@ -2198,6 +2210,10 @@ type CategoryFilter struct {
 	//
 	// This member is required.
 	FilterId *string
+
+	// The default configurations for the associated controls. This applies only for
+	// filters that are scoped to multiple sheets.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -4847,6 +4863,102 @@ type DecimalValueWhenUnsetConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The default options that correspond to the filter control type of a
+// DateTimePicker .
+type DefaultDateTimePickerControlOptions struct {
+
+	// The display options of a control.
+	DisplayOptions *DateTimePickerControlDisplayOptions
+
+	// The date time picker type of the DefaultDateTimePickerControlOptions . Choose
+	// one of the following options:
+	//   - SINGLE_VALUED : The filter condition is a fixed date.
+	//   - DATE_RANGE : The filter condition is a date time range.
+	Type SheetControlDateTimePickerType
+
+	noSmithyDocumentSerde
+}
+
+// The default configuration for all dependent controls of the filter.
+type DefaultFilterControlConfiguration struct {
+
+	// The control option for the DefaultFilterControlConfiguration .
+	//
+	// This member is required.
+	ControlOptions *DefaultFilterControlOptions
+
+	// The title of the DefaultFilterControlConfiguration . This title is shared by all
+	// controls that are tied to this filter.
+	//
+	// This member is required.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The option that corresponds to the control type of the filter.
+type DefaultFilterControlOptions struct {
+
+	// The default options that correspond to the filter control type of a
+	// DateTimePicker .
+	DefaultDateTimePickerOptions *DefaultDateTimePickerControlOptions
+
+	// The default options that correspond to the Dropdown filter control type.
+	DefaultDropdownOptions *DefaultFilterDropDownControlOptions
+
+	// The default options that correspond to the List filter control type.
+	DefaultListOptions *DefaultFilterListControlOptions
+
+	// The default options that correspond to the RelativeDateTime filter control type.
+	DefaultRelativeDateTimeOptions *DefaultRelativeDateTimeControlOptions
+
+	// The default options that correspond to the Slider filter control type.
+	DefaultSliderOptions *DefaultSliderControlOptions
+
+	// The default options that correspond to the TextArea filter control type.
+	DefaultTextAreaOptions *DefaultTextAreaControlOptions
+
+	// The default options that correspond to the TextField filter control type.
+	DefaultTextFieldOptions *DefaultTextFieldControlOptions
+
+	noSmithyDocumentSerde
+}
+
+// The default options that correspond to the Dropdown filter control type.
+type DefaultFilterDropDownControlOptions struct {
+
+	// The display options of a control.
+	DisplayOptions *DropDownControlDisplayOptions
+
+	// A list of selectable values that are used in a control.
+	SelectableValues *FilterSelectableValues
+
+	// The type of the FilterDropDownControl . Choose one of the following options:
+	//   - MULTI_SELECT : The user can select multiple entries from a dropdown menu.
+	//   - SINGLE_SELECT : The user can select a single entry from a dropdown menu.
+	Type SheetControlListType
+
+	noSmithyDocumentSerde
+}
+
+// The default options that correspond to the List filter control type.
+type DefaultFilterListControlOptions struct {
+
+	// The display options of a control.
+	DisplayOptions *ListControlDisplayOptions
+
+	// A list of selectable values that are used in a control.
+	SelectableValues *FilterSelectableValues
+
+	// The type of the DefaultFilterListControlOptions . Choose one of the following
+	// options:
+	//   - MULTI_SELECT : The user can select multiple entries from the list.
+	//   - SINGLE_SELECT : The user can select a single entry from the list.
+	Type SheetControlListType
+
+	noSmithyDocumentSerde
+}
+
 // A structure that represents a default formatting definition.
 type DefaultFormatting struct {
 
@@ -4925,6 +5037,15 @@ type DefaultPaginatedLayoutConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The default options that correspond to the RelativeDateTime filter control type.
+type DefaultRelativeDateTimeControlOptions struct {
+
+	// The display options of a control.
+	DisplayOptions *RelativeDateTimeControlDisplayOptions
+
+	noSmithyDocumentSerde
+}
+
 // The options that determine the default settings for a section-based layout
 // configuration.
 type DefaultSectionBasedLayoutConfiguration struct {
@@ -4933,6 +5054,57 @@ type DefaultSectionBasedLayoutConfiguration struct {
 	//
 	// This member is required.
 	CanvasSizeOptions *SectionBasedLayoutCanvasSizeOptions
+
+	noSmithyDocumentSerde
+}
+
+// The default options that correspond to the Slider filter control type.
+type DefaultSliderControlOptions struct {
+
+	// The larger value that is displayed at the right of the slider.
+	//
+	// This member is required.
+	MaximumValue float64
+
+	// The smaller value that is displayed at the left of the slider.
+	//
+	// This member is required.
+	MinimumValue float64
+
+	// The number of increments that the slider bar is divided into.
+	//
+	// This member is required.
+	StepSize float64
+
+	// The display options of a control.
+	DisplayOptions *SliderControlDisplayOptions
+
+	// The type of the DefaultSliderControlOptions . Choose one of the following
+	// options:
+	//   - SINGLE_POINT : Filter against(equals) a single data point.
+	//   - RANGE : Filter data that is in a specified range.
+	Type SheetControlSliderType
+
+	noSmithyDocumentSerde
+}
+
+// The default options that correspond to the TextArea filter control type.
+type DefaultTextAreaControlOptions struct {
+
+	// The delimiter that is used to separate the lines in text.
+	Delimiter *string
+
+	// The display options of a control.
+	DisplayOptions *TextAreaControlDisplayOptions
+
+	noSmithyDocumentSerde
+}
+
+// The default options that correspond to the TextField filter control type.
+type DefaultTextFieldControlOptions struct {
+
+	// The display options of a control.
+	DisplayOptions *TextFieldControlDisplayOptions
 
 	noSmithyDocumentSerde
 }
@@ -5508,6 +5680,10 @@ type Filter struct {
 // one of the attributes can be defined.
 type FilterControl struct {
 
+	// A control from a filter that is scoped across more than one sheet. This
+	// represents your filter control on a sheet
+	CrossSheet *FilterCrossSheetControl
+
 	// A control from a date filter that is used to specify date and time.
 	DateTimePicker *FilterDateTimePickerControl
 
@@ -5535,6 +5711,27 @@ type FilterControl struct {
 	noSmithyDocumentSerde
 }
 
+// A control from a filter that is scoped across more than one sheet. This
+// represents your filter control on a sheet
+type FilterCrossSheetControl struct {
+
+	// The ID of the FilterCrossSheetControl .
+	//
+	// This member is required.
+	FilterControlId *string
+
+	// The source filter ID of the FilterCrossSheetControl .
+	//
+	// This member is required.
+	SourceFilterId *string
+
+	// The values that are displayed in a control can be configured to only show
+	// values that are valid based on what's selected in other controls.
+	CascadingControlConfiguration *CascadingControlConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // A control from a date filter that is used to specify date and time.
 type FilterDateTimePickerControl struct {
 
@@ -5556,10 +5753,9 @@ type FilterDateTimePickerControl struct {
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
 
-	// The date time picker type of a FilterDateTimePickerControl . Choose one of the
-	// following options:
-	//   - SINGLE_VALUED : The filter condition is a fixed date.
-	//   - DATE_RANGE : The filter condition is a date time range.
+	// The type of the FilterDropDownControl . Choose one of the following options:
+	//   - MULTI_SELECT : The user can select multiple entries from a dropdown menu.
+	//   - SINGLE_SELECT : The user can select a single entry from a dropdown menu.
 	Type SheetControlDateTimePickerType
 
 	noSmithyDocumentSerde
@@ -5693,7 +5889,7 @@ type FilterListControl struct {
 	// A list of selectable values that are used in a control.
 	SelectableValues *FilterSelectableValues
 
-	// The type of FilterListControl . Choose one of the following options:
+	// The type of the FilterListControl . Choose one of the following options:
 	//   - MULTI_SELECT : The user can select multiple entries from the list.
 	//   - SINGLE_SELECT : The user can select a single entry from the list.
 	Type SheetControlListType
@@ -5801,12 +5997,12 @@ type FilterSliderControl struct {
 	// This member is required.
 	FilterControlId *string
 
-	// The smaller value that is displayed at the left of the slider.
+	// The larger value that is displayed at the right of the slider.
 	//
 	// This member is required.
 	MaximumValue float64
 
-	// The larger value that is displayed at the right of the slider.
+	// The smaller value that is displayed at the left of the slider.
 	//
 	// This member is required.
 	MinimumValue float64
@@ -5829,7 +6025,7 @@ type FilterSliderControl struct {
 	// The display options of a control.
 	DisplayOptions *SliderControlDisplayOptions
 
-	// The type of FilterSliderControl . Choose one of the following options:
+	// The type of the FilterSliderControl . Choose one of the following options:
 	//   - SINGLE_POINT : Filter against(equals) a single data point.
 	//   - RANGE : Filter data that is in a specified range.
 	Type SheetControlSliderType
@@ -8613,7 +8809,7 @@ type NumericAxisOptions struct {
 	noSmithyDocumentSerde
 }
 
-// The category drill down filter.
+// The numeric equality type drill down filter.
 type NumericEqualityDrillDownFilter struct {
 
 	// The column that the filter is applied to.
@@ -8658,6 +8854,10 @@ type NumericEqualityFilter struct {
 
 	// The aggregation function of the filter.
 	AggregationFunction *AggregationFunction
+
+	// The default configurations for the associated controls. This applies only for
+	// filters that are scoped to multiple sheets.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
 
 	// The parameter whose value should be used for the filter value.
 	ParameterName *string
@@ -8713,6 +8913,10 @@ type NumericRangeFilter struct {
 
 	// The aggregation function of the filter.
 	AggregationFunction *AggregationFunction
+
+	// The default configurations for the associated controls. This applies only for
+	// filters that are scoped to multiple sheets.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
 
 	// Determines whether the maximum value in the filter value range should be
 	// included in the filtered results.
@@ -9060,12 +9264,12 @@ type ParameterSelectableValues struct {
 // sliding the toggle.
 type ParameterSliderControl struct {
 
-	// The smaller value that is displayed at the left of the slider.
+	// The larger value that is displayed at the right of the slider.
 	//
 	// This member is required.
 	MaximumValue float64
 
-	// The larger value that is displayed at the right of the slider.
+	// The smaller value that is displayed at the left of the slider.
 	//
 	// This member is required.
 	MinimumValue float64
@@ -10563,6 +10767,10 @@ type RelativeDatesFilter struct {
 	//
 	// This member is required.
 	TimeGranularity TimeGranularity
+
+	// The default configurations for the associated controls. This applies only for
+	// filters that are scoped to multiple sheets.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
 
 	// The configuration for the exclude period of the filter.
 	ExcludePeriodConfiguration *ExcludePeriodConfiguration
@@ -13098,6 +13306,10 @@ type TimeEqualityFilter struct {
 	// This member is required.
 	FilterId *string
 
+	// The default configurations for the associated controls. This applies only for
+	// filters that are scoped to multiple sheets.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
+
 	// The parameter whose value should be used for the filter value. This field is
 	// mutually exclusive to Value and RollingDate .
 	ParameterName *string
@@ -13163,6 +13375,10 @@ type TimeRangeFilter struct {
 	//
 	// This member is required.
 	NullOption FilterNullOption
+
+	// The default configurations for the associated controls. This applies only for
+	// filters that are scoped to multiple sheets.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
 
 	// The exclude period of the time range filter.
 	ExcludePeriodConfiguration *ExcludePeriodConfiguration
@@ -13252,6 +13468,10 @@ type TopBottomFilter struct {
 	//
 	// This member is required.
 	FilterId *string
+
+	// The default configurations for the associated controls. This applies only for
+	// filters that are scoped to multiple sheets.
+	DefaultFilterControlConfiguration *DefaultFilterControlConfiguration
 
 	// The number of items to include in the top bottom filter results.
 	Limit *int32

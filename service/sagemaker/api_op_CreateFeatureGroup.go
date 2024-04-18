@@ -63,7 +63,7 @@ type CreateFeatureGroupInput struct {
 
 	// The name of the FeatureGroup . The name must be unique within an Amazon Web
 	// Services Region in an Amazon Web Services account. The name:
-	//   - Must start and end with an alphanumeric character.
+	//   - Must start with an alphanumeric character.
 	//   - Can only include alphanumeric characters, underscores, and hyphens. Spaces
 	//   are not allowed.
 	//
@@ -75,7 +75,7 @@ type CreateFeatureGroupInput struct {
 	// OnlineStore . RecordIdentifierFeatureName must be one of feature definitions'
 	// names. You use the RecordIdentifierFeatureName to access data in a FeatureStore
 	// . This name:
-	//   - Must start and end with an alphanumeric character.
+	//   - Must start with an alphanumeric character.
 	//   - Can only contains alphanumeric characters, hyphens, underscores. Spaces are
 	//   not allowed.
 	//
