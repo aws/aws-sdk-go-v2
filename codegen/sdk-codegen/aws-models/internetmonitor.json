@@ -72,6 +72,68 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.internetmonitor#ClientLocation": {
+            "type": "structure",
+            "members": {
+                "ASName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the internet service provider (ISP) or network (ASN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ASNumber": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Autonomous System Number (ASN) of the network at an impacted location.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Country": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the country where the internet event is located.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subdivision": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subdivision location where the health event is located. The subdivision usually maps to states in most countries \n\t\t\t(including the United States). For United Kingdom, it maps to a country (England, Scotland, Wales) or province (Northern Ireland).</p>"
+                    }
+                },
+                "Metro": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metro area where the health event is located.</p>\n         <p>Metro indicates a metropolitan region in the United States, such as the region around New York City. In non-US countries, \n\t\t\tthis is a second-level subdivision. For example, in the United Kingdom, it could be a county, a London borough, a unitary \n\t\t\tauthority, council area, and so on.</p>"
+                    }
+                },
+                "City": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the city where the internet event is located.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Latitude": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latitude where the internet event is located.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Longitude": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The longitude where the internet event is located.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The impacted location, such as a city, that Amazon Web Services clients access application resources from.</p>"
+            }
+        },
         "com.amazonaws.internetmonitor#ConflictException": {
             "type": "structure",
             "members": {
@@ -321,7 +383,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information the Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations,\n\t\t\tand all the information related to the event, by location.</p>\n         <p>The information returned includes the impact on performance, availability, and round-trip time, information about the network providers (ASNs),\n\t\t\tthe event type, and so on.</p>\n         <p>Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.</p>",
+                "smithy.api#documentation": "<p>Gets information that Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations,\n\t\t\tand all the information related to the event, by location.</p>\n         <p>The information returned includes the impact on performance, availability, and round-trip time, information about the network providers (ASNs),\n\t\t\tthe event type, and so on.</p>\n         <p>Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.</p>",
                 "smithy.api#http": {
                     "uri": "/v20210603/Monitors/{MonitorName}/HealthEvents/{EventId}",
                     "method": "GET"
@@ -351,7 +413,7 @@
                 "LinkedAccountId": {
                     "target": "com.amazonaws.internetmonitor#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TBD </p>",
+                        "smithy.api#documentation": "<p>The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor. You configure cross-account\n\t\t\tsharing by using Amazon CloudWatch Observability Access Manager. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html\">Internet Monitor cross-account\n\t\t\tobservability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
                         "smithy.api#httpQuery": "LinkedAccountId"
                     }
                 }
@@ -440,6 +502,111 @@
                 }
             }
         },
+        "com.amazonaws.internetmonitor#GetInternetEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#GetInternetEventInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#GetInternetEventOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information that Amazon CloudWatch Internet Monitor has generated about an internet event. Internet Monitor displays information about \n\t\t\trecent global health events, called internet events, on a global outages map that is available to all Amazon Web Services\n\t\t\tcustomers. </p>\n         <p>The information returned here includes the impacted location,\n\t\t\twhen the event started and (if the event is over) ended, the type of event (<code>PERFORMANCE</code> or <code>AVAILABILITY</code>),\n\t\t\tand the status (<code>ACTIVE</code> or <code>RESOLVED</code>).</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/InternetEvents/{EventId}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetInternetEventInput": {
+            "type": "structure",
+            "members": {
+                "EventId": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>EventId</code> of the internet event to return information for. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#GetInternetEventOutput": {
+            "type": "structure",
+            "members": {
+                "EventId": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internally-generated identifier of an internet event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventArn": {
+                    "target": "com.amazonaws.internetmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the internet event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the internet event started.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "EndedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the internet event ended. If the event hasn't ended yet, this value is empty.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "ClientLocation": {
+                    "target": "com.amazonaws.internetmonitor#ClientLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impacted location, such as a city, where clients access Amazon Web Services application resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventType": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of network impairment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventStatus": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the internet event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.internetmonitor#GetMonitor": {
             "type": "operation",
             "input": {
@@ -485,7 +652,7 @@
                 "LinkedAccountId": {
                     "target": "com.amazonaws.internetmonitor#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TBD </p>",
+                        "smithy.api#documentation": "<p>The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor. You configure cross-account\n\t\t\tsharing by using Amazon CloudWatch Observability Access Manager. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html\">Internet Monitor cross-account\n\t\t\t\tobservability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
                         "smithy.api#httpQuery": "LinkedAccountId"
                     }
                 }
@@ -823,7 +990,7 @@
                 "Status": {
                     "target": "com.amazonaws.internetmonitor#HealthEventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Health event list member.</p>",
+                        "smithy.api#documentation": "<p>The status of a health event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -969,7 +1136,7 @@
                 "ASName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the network at an impacted location.</p>",
+                        "smithy.api#documentation": "<p>The name of the internet service provider (ISP) or network (ASN).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1099,6 +1266,142 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.internetmonitor#InternetEventId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetEventMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetEventResource": {
+            "type": "resource",
+            "identifiers": {
+                "EventId": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.internetmonitor#GetInternetEvent"
+            },
+            "list": {
+                "target": "com.amazonaws.internetmonitor#ListInternetEvents"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "internet-event/{EventId}",
+                    "noRegion": true,
+                    "noAccount": false
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "smithy.api#documentation": "Represents an internet event for a specific city+AS location"
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetEventStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE"
+                    },
+                    {
+                        "name": "RESOLVED",
+                        "value": "RESOLVED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetEventSummary": {
+            "type": "structure",
+            "members": {
+                "EventId": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internally-generated identifier of an internet event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventArn": {
+                    "target": "com.amazonaws.internetmonitor#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the internet event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when an internet event started.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "EndedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when an internet event ended. If the event hasn't ended yet, this value\n\t\tis empty.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "ClientLocation": {
+                    "target": "com.amazonaws.internetmonitor#ClientLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impacted location, such as a city, that Amazon Web Services clients access application resources from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventType": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of network impairment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventStatus": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of an internet event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of information about an internet event in Amazon CloudWatch Internet Monitor. Internet events are issues that cause performance degradation\n\t\t\tor availability problems for impacted Amazon Web Services client locations. Internet Monitor displays information about \n\t\t\trecent global health events, called internet events, on a global outages map that is available to all Amazon Web Services\n\t\t\tcustomers. </p>"
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetEventType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AVAILABILITY",
+                        "name": "AVAILABILITY"
+                    },
+                    {
+                        "value": "PERFORMANCE",
+                        "name": "PERFORMANCE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.internetmonitor#InternetEventsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.internetmonitor#InternetEventSummary"
+            }
+        },
         "com.amazonaws.internetmonitor#InternetHealth": {
             "type": "structure",
             "members": {
@@ -1148,6 +1451,9 @@
                 }
             ],
             "resources": [
+                {
+                    "target": "com.amazonaws.internetmonitor#InternetEventResource"
+                },
                 {
                     "target": "com.amazonaws.internetmonitor#MonitorResource"
                 }
@@ -1866,7 +2172,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and \n\t\t\tthe status.</p>\n         <note>\n            <p>Health events that have start times during the time frame that is requested are not included in the list of health events.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end times, and \n\t\t\tthe status.</p>\n         <note>\n            <p>Health events that have start times during the time frame that is requested are not included in the list of health events.</p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/v20210603/Monitors/{MonitorName}/HealthEvents",
                     "method": "GET"
@@ -1931,7 +2237,7 @@
                 "LinkedAccountId": {
                     "target": "com.amazonaws.internetmonitor#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TBD </p>",
+                        "smithy.api#documentation": "<p>The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor. You configure cross-account\n\t\t\tsharing by using Amazon CloudWatch Observability Access Manager. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html\">Internet Monitor cross-account\n\t\t\t\tobservability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
                         "smithy.api#httpQuery": "LinkedAccountId"
                     }
                 }
@@ -1953,6 +2259,116 @@
                         "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.internetmonitor#ListInternetEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.internetmonitor#ListInternetEventsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.internetmonitor#ListInternetEventsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.internetmonitor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.internetmonitor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists internet events that cause performance or availability issues for client locations. Amazon CloudWatch Internet Monitor displays information about \n\t\t\trecent global health events, called internet events, on a global outages map that is available to all Amazon Web Services\n\t\t\tcustomers. </p>\n         <p>You can constrain the list of internet events returned by providing a start time and end time to define a total \n\t\t\ttime frame for events you want to list. Both start time and end time specify the time when an event started. End time\n\t\t\tis optional. If you don't include it, the default end time is the current time.</p>\n         <p>You can also limit the events returned to a specific status\n\t\t\t(<code>ACTIVE</code> or <code>RESOLVED</code>) or type (<code>PERFORMANCE</code> or <code>AVAILABILITY</code>).</p>",
+                "smithy.api#http": {
+                    "uri": "/v20210603/InternetEvents",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "InternetEvents"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#ListInternetEventsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of query results that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "InternetEventMaxResults"
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the time window that you want to get a list of internet events for.</p>",
+                        "smithy.api#httpQuery": "StartTime",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the time window that you want to get a list of internet events for.</p>",
+                        "smithy.api#httpQuery": "EndTime",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "EventStatus": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of an internet event.</p>",
+                        "smithy.api#httpQuery": "EventStatus"
+                    }
+                },
+                "EventType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of network impairment.</p>",
+                        "smithy.api#httpQuery": "EventType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.internetmonitor#ListInternetEventsOutput": {
+            "type": "structure",
+            "members": {
+                "InternetEvents": {
+                    "target": "com.amazonaws.internetmonitor#InternetEventsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of internet events returned for the list operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. You receive this token from a previous call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.internetmonitor#ListMonitors": {
@@ -2019,7 +2435,7 @@
                 "IncludeLinkedAccounts": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>TBD </p>",
+                        "smithy.api#documentation": "<p>A boolean option that you can set to <code>TRUE</code> to include monitors for linked accounts in a list of\n\t\t\tmonitors, when you've set up cross-account sharing in Amazon CloudWatch Internet Monitor. You configure cross-account\n\t\t\tsharing by using Amazon CloudWatch Observability Access Manager. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html\">Internet Monitor cross-account\n\t\t\t\tobservability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>",
                         "smithy.api#httpQuery": "IncludeLinkedAccounts"
                     }
                 }
@@ -2358,7 +2774,7 @@
                 "ASName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The internet provider name or network name.</p>",
+                        "smithy.api#documentation": "<p>The name of the internet service provider (ISP) or network (ASN).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2371,7 +2787,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An internet service provider (ISP) or network in Amazon CloudWatch Internet Monitor.</p>"
+                "smithy.api#documentation": "<p>An internet service provider (ISP) or network (ASN) in Amazon CloudWatch Internet Monitor.</p>"
             }
         },
         "com.amazonaws.internetmonitor#NetworkImpairment": {
@@ -2394,7 +2810,7 @@
                 "NetworkEventType": {
                     "target": "com.amazonaws.internetmonitor#TriangulationEventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of network impairment.</p>",
+                        "smithy.api#documentation": "<p>The type of network impairment.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2733,7 +3149,7 @@
                 "LinkedAccountId": {
                     "target": "com.amazonaws.internetmonitor#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>TBD </p>"
+                        "smithy.api#documentation": "<p>The account ID for an account that you've set up cross-account sharing for in Amazon CloudWatch Internet Monitor. You configure cross-account\n\t\t\tsharing by using Amazon CloudWatch Observability Access Manager. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html\">Internet Monitor cross-account\n\t\t\t\tobservability</a> in the Amazon CloudWatch Internet Monitor User Guide.</p>"
                     }
                 }
             },
