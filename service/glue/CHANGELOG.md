@@ -1,3 +1,7 @@
+# v1.80.0 (2024-04-19)
+
+* **Feature**: Adding RowFilter in the response for GetUnfilteredTableMetadata API
+
 # v1.79.0 (2024-04-12)
 
 * **Feature**: Modifying request for GetUnfilteredTableMetadata for view-related fields.

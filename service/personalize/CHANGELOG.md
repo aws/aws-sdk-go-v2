@@ -1,3 +1,7 @@
+# v1.33.0 (2024-04-19)
+
+* **Feature**: This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign
+
 # v1.32.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

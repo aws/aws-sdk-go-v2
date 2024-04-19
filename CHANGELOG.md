@@ -1,3 +1,13 @@
+# Release (2024-04-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.80.0](service/glue/CHANGELOG.md#v1800-2024-04-19)
+  * **Feature**: Adding RowFilter in the response for GetUnfilteredTableMetadata API
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.14.0](service/internetmonitor/CHANGELOG.md#v1140-2024-04-19)
+  * **Feature**: This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.33.0](service/personalize/CHANGELOG.md#v1330-2024-04-19)
+  * **Feature**: This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign
+
 # Release (2024-04-18)
 
 ## Module Highlights
