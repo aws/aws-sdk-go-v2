@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-// that are attached to a resource.
+// Removes the specified tags that are attached to a resource. For more
+// information, see Removing tags from Amazon Personalize resources (https://docs.aws.amazon.com/personalize/latest/dg/tags-remove.html)
+// .
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -34,7 +35,7 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Keys to remove from the resource's tags.
+	// The keys of the tags to be removed.
 	//
 	// This member is required.
 	TagKeys []string

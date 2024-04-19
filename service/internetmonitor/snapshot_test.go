@@ -98,6 +98,18 @@ func TestCheckSnapshot_GetHealthEvent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInternetEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInternetEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInternetEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMonitor(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMonitor(context.Background(), nil, func(o *Options) {
@@ -139,6 +151,18 @@ func TestCheckSnapshot_ListHealthEvents(t *testing.T) {
 	_, err := svc.ListHealthEvents(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListHealthEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInternetEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInternetEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInternetEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -265,6 +289,18 @@ func TestUpdateSnapshot_GetHealthEvent(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetInternetEvent(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInternetEvent(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInternetEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMonitor(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMonitor(context.Background(), nil, func(o *Options) {
@@ -306,6 +342,18 @@ func TestUpdateSnapshot_ListHealthEvents(t *testing.T) {
 	_, err := svc.ListHealthEvents(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListHealthEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInternetEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInternetEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInternetEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

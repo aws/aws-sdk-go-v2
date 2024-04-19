@@ -3730,6 +3730,18 @@ func awsAwsjson11_serializeDocumentAutoMLConfig(v *types.AutoMLConfig, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAutoTrainingConfig(v *types.AutoTrainingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchedulingExpression != nil {
+		ok := object.Key("schedulingExpression")
+		ok.String(*v.SchedulingExpression)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBatchInferenceJobConfig(v *types.BatchInferenceJobConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3814,6 +3826,11 @@ func awsAwsjson11_serializeDocumentCampaignConfig(v *types.CampaignConfig, value
 		if err := awsAwsjson11_serializeDocumentHyperParameters(v.ItemExplorationConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SyncWithLatestSolutionVersion != nil {
+		ok := object.Key("syncWithLatestSolutionVersion")
+		ok.Boolean(*v.SyncWithLatestSolutionVersion)
 	}
 
 	return nil
@@ -4284,6 +4301,13 @@ func awsAwsjson11_serializeDocumentSolutionConfig(v *types.SolutionConfig, value
 	if v.AutoMLConfig != nil {
 		ok := object.Key("autoMLConfig")
 		if err := awsAwsjson11_serializeDocumentAutoMLConfig(v.AutoMLConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AutoTrainingConfig != nil {
+		ok := object.Key("autoTrainingConfig")
+		if err := awsAwsjson11_serializeDocumentAutoTrainingConfig(v.AutoTrainingConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -4873,6 +4897,11 @@ func awsAwsjson11_serializeOpDocumentCreateSolutionInput(v *CreateSolutionInput,
 	if v.PerformAutoML {
 		ok := object.Key("performAutoML")
 		ok.Boolean(v.PerformAutoML)
+	}
+
+	if v.PerformAutoTraining != nil {
+		ok := object.Key("performAutoTraining")
+		ok.Boolean(*v.PerformAutoTraining)
 	}
 
 	if v.PerformHPO != nil {

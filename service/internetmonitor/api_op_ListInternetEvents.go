@@ -12,65 +12,63 @@ import (
 	"time"
 )
 
-// Lists all health events for a monitor in Amazon CloudWatch Internet Monitor.
-// Returns information for health events including the event start and end times,
-// and the status. Health events that have start times during the time frame that
-// is requested are not included in the list of health events.
-func (c *Client) ListHealthEvents(ctx context.Context, params *ListHealthEventsInput, optFns ...func(*Options)) (*ListHealthEventsOutput, error) {
+// Lists internet events that cause performance or availability issues for client
+// locations. Amazon CloudWatch Internet Monitor displays information about recent
+// global health events, called internet events, on a global outages map that is
+// available to all Amazon Web Services customers. You can constrain the list of
+// internet events returned by providing a start time and end time to define a
+// total time frame for events you want to list. Both start time and end time
+// specify the time when an event started. End time is optional. If you don't
+// include it, the default end time is the current time. You can also limit the
+// events returned to a specific status ( ACTIVE or RESOLVED ) or type ( PERFORMANCE
+// or AVAILABILITY ).
+func (c *Client) ListInternetEvents(ctx context.Context, params *ListInternetEventsInput, optFns ...func(*Options)) (*ListInternetEventsOutput, error) {
 	if params == nil {
-		params = &ListHealthEventsInput{}
+		params = &ListInternetEventsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListHealthEvents", params, optFns, c.addOperationListHealthEventsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListInternetEvents", params, optFns, c.addOperationListInternetEventsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListHealthEventsOutput)
+	out := result.(*ListInternetEventsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListHealthEventsInput struct {
+type ListInternetEventsInput struct {
 
-	// The name of the monitor.
-	//
-	// This member is required.
-	MonitorName *string
-
-	// The time when a health event ended. If the health event is still ongoing, then
-	// the end time is not set.
+	// The end time of the time window that you want to get a list of internet events
+	// for.
 	EndTime *time.Time
 
-	// The status of a health event.
-	EventStatus types.HealthEventStatus
+	// The status of an internet event.
+	EventStatus *string
 
-	// The account ID for an account that you've set up cross-account sharing for in
-	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
-	// Amazon CloudWatch Observability Access Manager. For more information, see
-	// Internet Monitor cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html)
-	// in the Amazon CloudWatch Internet Monitor User Guide.
-	LinkedAccountId *string
+	// The type of network impairment.
+	EventType *string
 
-	// The number of health event objects that you want to return with this call.
+	// The number of query results that you want to return with this call.
 	MaxResults *int32
 
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
 
-	// The time when a health event started.
+	// The start time of the time window that you want to get a list of internet
+	// events for.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-type ListHealthEventsOutput struct {
+type ListInternetEventsOutput struct {
 
-	// A list of health events.
+	// A set of internet events returned for the list operation.
 	//
 	// This member is required.
-	HealthEvents []types.HealthEvent
+	InternetEvents []types.InternetEventSummary
 
 	// The token for the next set of results. You receive this token from a previous
 	// call.
@@ -82,19 +80,19 @@ type ListHealthEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListHealthEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationListInternetEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHealthEvents{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInternetEvents{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHealthEvents{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInternetEvents{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHealthEvents"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInternetEvents"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -137,10 +135,7 @@ func (c *Client) addOperationListHealthEventsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpListHealthEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHealthEvents(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInternetEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -161,17 +156,18 @@ func (c *Client) addOperationListHealthEventsMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-// ListHealthEventsAPIClient is a client that implements the ListHealthEvents
+// ListInternetEventsAPIClient is a client that implements the ListInternetEvents
 // operation.
-type ListHealthEventsAPIClient interface {
-	ListHealthEvents(context.Context, *ListHealthEventsInput, ...func(*Options)) (*ListHealthEventsOutput, error)
+type ListInternetEventsAPIClient interface {
+	ListInternetEvents(context.Context, *ListInternetEventsInput, ...func(*Options)) (*ListInternetEventsOutput, error)
 }
 
-var _ ListHealthEventsAPIClient = (*Client)(nil)
+var _ ListInternetEventsAPIClient = (*Client)(nil)
 
-// ListHealthEventsPaginatorOptions is the paginator options for ListHealthEvents
-type ListHealthEventsPaginatorOptions struct {
-	// The number of health event objects that you want to return with this call.
+// ListInternetEventsPaginatorOptions is the paginator options for
+// ListInternetEvents
+type ListInternetEventsPaginatorOptions struct {
+	// The number of query results that you want to return with this call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -179,22 +175,22 @@ type ListHealthEventsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListHealthEventsPaginator is a paginator for ListHealthEvents
-type ListHealthEventsPaginator struct {
-	options   ListHealthEventsPaginatorOptions
-	client    ListHealthEventsAPIClient
-	params    *ListHealthEventsInput
+// ListInternetEventsPaginator is a paginator for ListInternetEvents
+type ListInternetEventsPaginator struct {
+	options   ListInternetEventsPaginatorOptions
+	client    ListInternetEventsAPIClient
+	params    *ListInternetEventsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListHealthEventsPaginator returns a new ListHealthEventsPaginator
-func NewListHealthEventsPaginator(client ListHealthEventsAPIClient, params *ListHealthEventsInput, optFns ...func(*ListHealthEventsPaginatorOptions)) *ListHealthEventsPaginator {
+// NewListInternetEventsPaginator returns a new ListInternetEventsPaginator
+func NewListInternetEventsPaginator(client ListInternetEventsAPIClient, params *ListInternetEventsInput, optFns ...func(*ListInternetEventsPaginatorOptions)) *ListInternetEventsPaginator {
 	if params == nil {
-		params = &ListHealthEventsInput{}
+		params = &ListInternetEventsInput{}
 	}
 
-	options := ListHealthEventsPaginatorOptions{}
+	options := ListInternetEventsPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -203,7 +199,7 @@ func NewListHealthEventsPaginator(client ListHealthEventsAPIClient, params *List
 		fn(&options)
 	}
 
-	return &ListHealthEventsPaginator{
+	return &ListInternetEventsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -213,12 +209,12 @@ func NewListHealthEventsPaginator(client ListHealthEventsAPIClient, params *List
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListHealthEventsPaginator) HasMorePages() bool {
+func (p *ListInternetEventsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListHealthEvents page.
-func (p *ListHealthEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListHealthEventsOutput, error) {
+// NextPage retrieves the next ListInternetEvents page.
+func (p *ListInternetEventsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListInternetEventsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -232,7 +228,7 @@ func (p *ListHealthEventsPaginator) NextPage(ctx context.Context, optFns ...func
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListHealthEvents(ctx, &params, optFns...)
+	result, err := p.client.ListInternetEvents(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -251,10 +247,10 @@ func (p *ListHealthEventsPaginator) NextPage(ctx context.Context, optFns ...func
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListHealthEvents(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListInternetEvents(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "ListHealthEvents",
+		OperationName: "ListInternetEvents",
 	}
 }

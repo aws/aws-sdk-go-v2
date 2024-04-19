@@ -1,0 +1,8 @@
+{
+    "id": "62c57568-8375-4bab-8879-f918aba5ef39",
+    "type": "feature",
+    "description": "Adding RowFilter in the response for GetUnfilteredTableMetadata API",
+    "modules": [
+        "service/glue"
+    ]
+}

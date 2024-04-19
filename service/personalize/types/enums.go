@@ -118,8 +118,9 @@ type TrainingMode string
 
 // Enum values for TrainingMode
 const (
-	TrainingModeFull   TrainingMode = "FULL"
-	TrainingModeUpdate TrainingMode = "UPDATE"
+	TrainingModeFull      TrainingMode = "FULL"
+	TrainingModeUpdate    TrainingMode = "UPDATE"
+	TrainingModeAutotrain TrainingMode = "AUTOTRAIN"
 )
 
 // Values returns all known values for TrainingMode. Note that this can be
@@ -129,5 +130,24 @@ func (TrainingMode) Values() []TrainingMode {
 	return []TrainingMode{
 		"FULL",
 		"UPDATE",
+		"AUTOTRAIN",
+	}
+}
+
+type TrainingType string
+
+// Enum values for TrainingType
+const (
+	TrainingTypeAutomatic TrainingType = "AUTOMATIC"
+	TrainingTypeManual    TrainingType = "MANUAL"
+)
+
+// Values returns all known values for TrainingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TrainingType) Values() []TrainingType {
+	return []TrainingType{
+		"AUTOMATIC",
+		"MANUAL",
 	}
 }

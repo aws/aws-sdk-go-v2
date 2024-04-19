@@ -11,28 +11,43 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the configuration for training a model. A trained model is known as a
-// solution version. After the configuration is created, you train the model
-// (create a solution version) by calling the CreateSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
-// operation. Every time you call CreateSolutionVersion , a new version of the
-// solution is created. After creating a solution version, you check its accuracy
-// by calling GetSolutionMetrics (https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html)
-// . When you are satisfied with the version, you deploy it using CreateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html)
+// After you create a solution, you can’t change its configuration. By default,
+// all new solutions use automatic training. With automatic training, you incur
+// training costs while your solution is active. You can't stop automatic training
+// for a solution. To avoid unnecessary costs, make sure to delete the solution
+// when you are finished. For information about training costs, see Amazon
+// Personalize pricing (https://aws.amazon.com/personalize/pricing/) . Creates the
+// configuration for training a model (creating a solution version). This
+// configuration includes the recipe to use for model training and optional
+// training configuration, such as columns to use in training and feature
+// transformation parameters. For more information about configuring a solution,
+// see Creating and configuring a solution (https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html)
+// . By default, new solutions use automatic training to create solution versions
+// every 7 days. You can change the training frequency. Automatic solution version
+// creation starts one hour after the solution is ACTIVE. If you manually create a
+// solution version within the hour, the solution skips the first automatic
+// training. For more information, see Configuring automatic training (https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html)
+// . To turn off automatic training, set performAutoTraining to false. If you turn
+// off automatic training, you must manually create a solution version by calling
+// the CreateSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
+// operation. After training starts, you can get the solution version's Amazon
+// Resource Name (ARN) with the ListSolutionVersions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
+// API operation. To get its status, use the DescribeSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
+// . After training completes you can evaluate model accuracy by calling
+// GetSolutionMetrics (https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html)
+// . When you are satisfied with the solution version, you deploy it using
+// CreateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html)
 // . The campaign provides recommendations to a client through the
 // GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
-// API. To train a model, Amazon Personalize requires training data and a recipe.
-// The training data comes from the dataset group that you provide in the request.
-// A recipe specifies the training algorithm and a feature transformation. You can
-// specify one of the predefined recipes provided by Amazon Personalize. Amazon
-// Personalize doesn't support configuring the hpoObjective for solution
-// hyperparameter optimization at this time. Status A solution can be in one of the
-// following states:
+// API. Amazon Personalize doesn't support configuring the hpoObjective for
+// solution hyperparameter optimization at this time. Status A solution can be in
+// one of the following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //
 // To get the status of the solution, call DescribeSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html)
-// . Wait until the status shows as ACTIVE before calling CreateSolutionVersion .
-// Related APIs
+// . If you use manual training, the status must be ACTIVE before you call
+// CreateSolutionVersion . Related APIs
 //
 //   - ListSolutions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html)
 //
@@ -90,6 +105,20 @@ type CreateSolutionInput struct {
 	// with different values for the hyperparameters. AutoML lengthens the training
 	// process as compared to selecting a specific recipe.
 	PerformAutoML bool
+
+	// Whether the solution uses automatic training to create new solution versions
+	// (trained models). The default is True and the solution automatically creates
+	// new solution versions every 7 days. You can change the training frequency by
+	// specifying a schedulingExpression in the AutoTrainingConfig as part of solution
+	// configuration. For more information about automatic training, see Configuring
+	// automatic training (https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html)
+	// . Automatic solution version creation starts one hour after the solution is
+	// ACTIVE. If you manually create a solution version within the hour, the solution
+	// skips the first automatic training. After training starts, you can get the
+	// solution version's Amazon Resource Name (ARN) with the ListSolutionVersions (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html)
+	// API operation. To get its status, use the DescribeSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html)
+	// .
+	PerformAutoTraining *bool
 
 	// Whether to perform hyperparameter optimization (HPO) on the specified or
 	// selected recipe. The default is false . When performing AutoML, this parameter

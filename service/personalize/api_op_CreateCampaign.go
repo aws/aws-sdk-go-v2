@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a campaign that deploys a solution version. When a client calls the
+// You incur campaign costs while it is active. To avoid unnecessary costs, make
+// sure to delete the campaign when you are finished. For information about
+// campaign costs, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
+// . Creates a campaign that deploys a solution version. When a client calls the
 // GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
 // and GetPersonalizedRanking (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html)
 // APIs, a campaign is specified in the request. Minimum Provisioned TPS and
@@ -68,7 +71,14 @@ type CreateCampaignInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the solution version to deploy.
+	// The Amazon Resource Name (ARN) of the trained model to deploy with the
+	// campaign. To specify the latest solution version of your solution, specify the
+	// ARN of your solution in SolutionArn/$LATEST format. You must use this format if
+	// you set syncWithLatestSolutionVersion to True in the CampaignConfig (https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html)
+	// . To deploy a model that isn't the latest solution version of your solution,
+	// specify the ARN of the solution version. For more information about automatic
+	// campaign updates, see Enabling automatic campaign updates (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update)
+	// .
 	//
 	// This member is required.
 	SolutionVersionArn *string

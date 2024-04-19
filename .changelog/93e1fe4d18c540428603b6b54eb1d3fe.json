@@ -1,0 +1,8 @@
+{
+    "id": "93e1fe4d-18c5-4042-8603-b6b54eb1d3fe",
+    "type": "feature",
+    "description": "This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign",
+    "modules": [
+        "service/personalize"
+    ]
+}

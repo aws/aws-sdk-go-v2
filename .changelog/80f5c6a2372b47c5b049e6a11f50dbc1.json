@@ -1,0 +1,8 @@
+{
+    "id": "80f5c6a2-372b-47c5-b049-e6a11f50dbc1",
+    "type": "feature",
+    "description": "This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map.",
+    "modules": [
+        "service/internetmonitor"
+    ]
+}

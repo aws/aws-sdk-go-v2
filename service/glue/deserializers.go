@@ -60859,6 +60859,15 @@ func awsAwsjson11_deserializeOpDocumentGetUnfilteredTableMetadataOutput(v **GetU
 				sv.ResourceArn = ptr.String(jtv)
 			}
 
+		case "RowFilter":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PredicateString to be of type string, got %T instead", value)
+				}
+				sv.RowFilter = ptr.String(jtv)
+			}
+
 		case "Table":
 			if err := awsAwsjson11_deserializeDocumentTable(&sv.Table, value); err != nil {
 				return err
