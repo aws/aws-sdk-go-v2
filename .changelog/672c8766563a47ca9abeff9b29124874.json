@@ -1,8 +1,0 @@
-{
-    "id": "672c8766-563a-47ca-9abe-ff9b29124874",
-    "type": "feature",
-    "description": "Releasing the support for simplified configuration and return of control",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.137.0 (2024-04-22)
+
+* **Feature**: This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.
+
 # v1.136.0 (2024-04-18)
 
 * **Feature**: Removed deprecated enum values and updated API documentation.

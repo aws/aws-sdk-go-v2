@@ -1,3 +1,7 @@
+# v1.29.6 (2024-04-22)
+
+* **Documentation**: This release adds examples to several Cloud Map actions.
+
 # v1.29.5 (2024-04-02)
 
 * No change notes available for this release.

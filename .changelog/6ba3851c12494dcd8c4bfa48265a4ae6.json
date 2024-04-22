@@ -1,8 +1,0 @@
-{
-    "id": "6ba3851c-1249-4dcd-8c4b-fa48265a4ae6",
-    "type": "documentation",
-    "description": "Updates description of schedule field for scheduled actions.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

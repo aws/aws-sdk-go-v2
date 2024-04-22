@@ -1,8 +1,0 @@
-{
-    "id": "7824315b-7c06-47ec-84c9-5f386a1e6d0d",
-    "type": "feature",
-    "description": "Adding new API to support remote directory listing using SFTP connector",
-    "modules": [
-        "service/transfer"
-    ]
-}

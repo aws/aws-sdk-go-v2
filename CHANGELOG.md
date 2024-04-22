@@ -1,3 +1,24 @@
+# Release (2024-04-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.7.0](service/bedrockagent/CHANGELOG.md#v170-2024-04-22)
+  * **Feature**: Releasing the support for simplified configuration and return of control
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.7.0](service/bedrockagentruntime/CHANGELOG.md#v170-2024-04-22)
+  * **Feature**: Releasing the support for simplified configuration and return of control
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.10.0](service/paymentcryptography/CHANGELOG.md#v1100-2024-04-22)
+  * **Feature**: Adding support to TR-31/TR-34 exports for optional headers, allowing customers to add additional metadata (such as key version and KSN) when exporting keys from the service.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.17.5](service/redshiftserverless/CHANGELOG.md#v1175-2024-04-22)
+  * **Documentation**: Updates description of schedule field for scheduled actions.
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.0.0](service/route53profiles/CHANGELOG.md#v100-2024-04-22)
+  * **Release**: New AWS service client module
+  * **Feature**: Route 53 Profiles allows you to apply a central DNS configuration across many VPCs regardless of account.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.137.0](service/sagemaker/CHANGELOG.md#v11370-2024-04-22)
+  * **Feature**: This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.29.6](service/servicediscovery/CHANGELOG.md#v1296-2024-04-22)
+  * **Documentation**: This release adds examples to several Cloud Map actions.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.47.0](service/transfer/CHANGELOG.md#v1470-2024-04-22)
+  * **Feature**: Adding new API to support remote directory listing using SFTP connector
+
 # Release (2024-04-19)
 
 ## Module Highlights

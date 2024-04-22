@@ -1,8 +1,0 @@
-{
-    "id": "a127e26c-ef01-41a8-8a7d-f942541471d2",
-    "type": "documentation",
-    "description": "This release adds examples to several Cloud Map actions.",
-    "modules": [
-        "service/servicediscovery"
-    ]
-}

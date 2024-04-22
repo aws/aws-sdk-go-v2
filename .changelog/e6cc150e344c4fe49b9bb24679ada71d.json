@@ -1,8 +1,0 @@
-{
-    "id": "e6cc150e-344c-4fe4-9b9b-b24679ada71d",
-    "type": "feature",
-    "description": "Route 53 Profiles allows you to apply a central DNS configuration across many VPCs regardless of account.",
-    "modules": [
-        "service/route53profiles"
-    ]
-}

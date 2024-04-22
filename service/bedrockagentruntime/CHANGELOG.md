@@ -1,3 +1,7 @@
+# v1.7.0 (2024-04-22)
+
+* **Feature**: Releasing the support for simplified configuration and return of control
+
 # v1.6.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

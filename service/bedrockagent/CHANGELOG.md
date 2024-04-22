@@ -1,3 +1,7 @@
+# v1.7.0 (2024-04-22)
+
+* **Feature**: Releasing the support for simplified configuration and return of control
+
 # v1.6.0 (2024-04-16)
 
 * **Feature**: For Create Agent API, the agentResourceRoleArn parameter is no longer required.
