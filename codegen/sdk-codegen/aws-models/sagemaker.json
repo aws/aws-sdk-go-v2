@@ -14081,7 +14081,7 @@
                     "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The default size of the EBS storage volume for a private space.</p>",
+                        "smithy.api#documentation": "<p>The default size of the EBS storage volume for a space.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14089,13 +14089,13 @@
                     "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The maximum size of the EBS storage volume for a private space.</p>",
+                        "smithy.api#documentation": "<p>The maximum size of the EBS storage volume for a space.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of default EBS storage settings that applies to private spaces created within a domain or user profile.</p>"
+                "smithy.api#documentation": "<p>A collection of default EBS storage settings that apply to spaces created within a domain or user profile.</p>"
             }
         },
         "com.amazonaws.sagemaker#DefaultGid": {
@@ -14127,6 +14127,21 @@
                 },
                 "KernelGatewayAppSettings": {
                     "target": "com.amazonaws.sagemaker#KernelGatewayAppSettings"
+                },
+                "JupyterLabAppSettings": {
+                    "target": "com.amazonaws.sagemaker#JupyterLabAppSettings"
+                },
+                "SpaceStorageSettings": {
+                    "target": "com.amazonaws.sagemaker#DefaultSpaceStorageSettings"
+                },
+                "CustomPosixUserConfig": {
+                    "target": "com.amazonaws.sagemaker#CustomPosixUserConfig"
+                },
+                "CustomFileSystemConfigs": {
+                    "target": "com.amazonaws.sagemaker#CustomFileSystemConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for assigning a custom file system to a domain. Permitted users can access this file system in Amazon SageMaker Studio.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14139,12 +14154,12 @@
                 "DefaultEbsStorageSettings": {
                     "target": "com.amazonaws.sagemaker#DefaultEbsStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default EBS storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>The default EBS storage settings for a space.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The default storage settings for a private space.</p>"
+                "smithy.api#documentation": "<p>The default storage settings for a space.</p>"
             }
         },
         "com.amazonaws.sagemaker#DefaultUid": {
@@ -25366,13 +25381,13 @@
                     "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The size of an EBS storage volume for a private space.</p>",
+                        "smithy.api#documentation": "<p>The size of an EBS storage volume for a space.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of EBS storage settings that applies to private spaces.</p>"
+                "smithy.api#documentation": "<p>A collection of EBS storage settings that apply to both private and shared spaces.</p>"
             }
         },
         "com.amazonaws.sagemaker#Edge": {
@@ -47622,7 +47637,7 @@
                     "target": "com.amazonaws.sagemaker#UserProfileName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The user profile who is the owner of the private space.</p>",
+                        "smithy.api#documentation": "<p>The user profile who is the owner of the space.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -47637,7 +47652,7 @@
                 "OwnerUserProfileName": {
                     "target": "com.amazonaws.sagemaker#UserProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user profile who is the owner of the private space.</p>"
+                        "smithy.api#documentation": "<p>The user profile who is the owner of the space.</p>"
                     }
                 }
             },
@@ -58004,7 +58019,7 @@
                 "SpaceStorageSettings": {
                     "target": "com.amazonaws.sagemaker#SpaceStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>The storage settings for a space.</p>"
                     }
                 },
                 "CustomFileSystems": {
@@ -58030,7 +58045,7 @@
                 "SpaceStorageSettings": {
                     "target": "com.amazonaws.sagemaker#SpaceStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>The storage settings for a space.</p>"
                     }
                 }
             },
@@ -58138,12 +58153,12 @@
                 "EbsStorageSettings": {
                     "target": "com.amazonaws.sagemaker#EbsStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of EBS storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>A collection of EBS storage settings for a space.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                "smithy.api#documentation": "<p>The storage settings for a space.</p>"
             }
         },
         "com.amazonaws.sagemaker#SpawnRate": {
@@ -66366,7 +66381,7 @@
                 "SpaceStorageSettings": {
                     "target": "com.amazonaws.sagemaker#DefaultSpaceStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>The storage settings for a space.</p>"
                     }
                 },
                 "DefaultLandingUri": {

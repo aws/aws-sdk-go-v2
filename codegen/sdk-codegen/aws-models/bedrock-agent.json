@@ -42,6 +42,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
                     }
+                },
+                "customControl": {
+                    "target": "com.amazonaws.bedrockagent#CustomControlMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To return the action group invocation results directly in the <code>InvokeAgent</code> response, specify <code>RETURN_CONTROL</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -347,6 +353,12 @@
                     "target": "com.amazonaws.bedrockagent#APISchema",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html\">Action group OpenAPI schemas</a>.</p>"
+                    }
+                },
+                "functionSchema": {
+                    "target": "com.amazonaws.bedrockagent#FunctionSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p>"
                     }
                 },
                 "actionGroupState": {
@@ -2138,6 +2150,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the action group is available for the agent to invoke or not when sending an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> request.</p>"
                     }
+                },
+                "functionSchema": {
+                    "target": "com.amazonaws.bedrockagent#FunctionSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2589,6 +2607,17 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OVERRIDDEN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#CustomControlMethod": {
+            "type": "enum",
+            "members": {
+                "RETURN_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETURN_CONTROL"
                     }
                 }
             }
@@ -3495,6 +3524,62 @@
                 "smithy.api#documentation": "<p>Configurations for when you choose fixed-size chunking. If you set the <code>chunkingStrategy</code> as <code>NONE</code>, exclude this field.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#Function": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagent#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagent#FunctionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the function and its purpose.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.bedrockagent#ParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that the agent elicits from the user to fulfill the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines parameters that the agent needs to invoke from the user to complete the function. Corresponds to an action in an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagent#FunctionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#FunctionSchema": {
+            "type": "union",
+            "members": {
+                "functions": {
+                    "target": "com.amazonaws.bedrockagent#Functions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of functions that each define an action in the action group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagent#Functions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#Function"
+            }
+        },
         "com.amazonaws.bedrockagent#GetAgent": {
             "type": "operation",
             "input": {
@@ -4228,7 +4313,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about an ingestion job, which converts a data source to embeddings for a vector store in knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax\">StartIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax\">GetIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJob.html#API_agent_ListIngestionJob_ResponseSyntax\">ListIngestionJob response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains details about an ingestion job, which converts a data source to embeddings for a vector store in knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax\">StartIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax\">GetIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax\">ListIngestionJob response</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagent#IngestionJobFilter": {
@@ -5817,6 +5902,51 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.bedrockagent#ParameterDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#ParameterDetail": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "com.amazonaws.bedrockagent#ParameterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the parameter. Helps the foundation model determine how to elicit the parameters from the user.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the parameter is required for the agent to complete the function for action group invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a parameter in a function for an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagent#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagent#ParameterDetail"
+            }
+        },
         "com.amazonaws.bedrockagent#Payload": {
             "type": "string",
             "traits": {
@@ -6804,6 +6934,41 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#Type": {
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "string"
+                    }
+                },
+                "NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "number"
+                    }
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "integer"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "boolean"
+                    }
+                },
+                "ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "array"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#UntagResource": {
             "type": "operation",
             "input": {
@@ -7020,6 +7185,12 @@
                     "target": "com.amazonaws.bedrockagent#APISchema",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html\">Action group OpenAPI schemas</a>.</p>"
+                    }
+                },
+                "functionSchema": {
+                    "target": "com.amazonaws.bedrockagent#FunctionSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>"
                     }
                 }
             },

@@ -2607,7 +2607,7 @@
                 "Usage": {
                     "target": "com.amazonaws.transfer#CertificateUsageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SIGNING</code>: For signing AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENCRYPTION</code>: For encrypting AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS</code>: For securing AS2 communications sent over HTTPS</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>"
                     }
                 },
                 "Status": {
@@ -3866,7 +3866,7 @@
                 "Usage": {
                     "target": "com.amazonaws.transfer#CertificateUsageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SIGNING</code>: For signing AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENCRYPTION</code>: For encrypting AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS</code>: For securing AS2 communications sent over HTTPS</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5279,7 +5279,7 @@
                 "Usage": {
                     "target": "com.amazonaws.transfer#CertificateUsageType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how this certificate is used. It can be used in the following ways:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SIGNING</code>: For signing AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>ENCRYPTION</code>: For encrypting AS2 messages</p>\n            </li>\n            <li>\n               <p>\n                  <code>TLS</code>: For securing AS2 communications sent over HTTPS</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies whether this certificate is used for signing or encryption.</p>"
                     }
                 },
                 "Status": {
@@ -5628,6 +5628,16 @@
                 "target": "com.amazonaws.transfer#ListedWorkflow"
             }
         },
+        "com.amazonaws.transfer#ListingId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z./-]+$"
+            }
+        },
         "com.amazonaws.transfer#LogGroupName": {
             "type": "string",
             "traits": {
@@ -5692,6 +5702,15 @@
                     "traits": {
                         "smithy.api#enumValue": "DIRECTORY"
                     }
+                }
+            }
+        },
+        "com.amazonaws.transfer#MaxItems": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10000
                 }
             }
         },
@@ -5816,6 +5835,16 @@
                     "min": 0,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.transfer#OutputFileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 26,
+                    "max": 537
+                },
+                "smithy.api#pattern": "^c-([0-9a-f]{17})-[0-9a-zA-Z./-]+.json$"
             }
         },
         "com.amazonaws.transfer#OverwriteExisting": {
@@ -6720,6 +6749,92 @@
                 }
             }
         },
+        "com.amazonaws.transfer#StartDirectoryListing": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#StartDirectoryListingRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#StartDirectoryListingResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of the contents of a directory from a remote SFTP server. You specify the\n      connector ID, the output path, and the remote directory path. You can also specify the\n      optional <code>MaxItems</code> value to control the maximum number of items that are listed\n      from the remote directory. This API returns a list of all files and directories in the remote\n      directory (up to the maximum value), but does not return files or folders in sub-directories.\n      That is, it only returns a list of files and directories one-level deep.</p>\n         <p>After you receive the listing file, you can provide the files that you want to transfer to\n      the <code>RetrieveFilePaths</code> parameter of the <code>StartFileTransfer</code> API\n      call.</p>\n         <p>The naming convention for the output file is\n          <code>\n               <i>connector-ID</i>-<i>listing-ID</i>.json</code>. The\n      output file contains the following information:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>filePath</code>: the complete path of a remote file, relative to the directory\n          of the listing request for your SFTP connector on the remote server.</p>\n            </li>\n            <li>\n               <p>\n                  <code>modifiedTimestamp</code>: the last time the file was modified, in UTC time\n          format. This field is optional. If the remote file attributes don't contain a timestamp,\n          it is omitted from the file listing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>size</code>: the size of the file, in bytes. This field is optional. If the\n          remote file attributes don't contain a file size, it is omitted from the file\n          listing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>path</code>: the complete path of a remote directory, relative to the directory\n          of the listing request for your SFTP connector on the remote server.</p>\n            </li>\n            <li>\n               <p>\n                  <code>truncated</code>: a flag indicating whether the list output contains all of the\n          items contained in the remote directory or not. If your <code>Truncated</code> output\n          value is true, you can increase the value provided in the optional <code>max-items</code>\n          input attribute to be able to list more items (up to the maximum allowed list size of\n          10,000 items).</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.transfer#StartDirectoryListingRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectorId": {
+                    "target": "com.amazonaws.transfer#ConnectorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RemoteDirectoryPath": {
+                    "target": "com.amazonaws.transfer#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the directory on the remote SFTP server for which you want to list its contents.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.transfer#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter where you can specify the maximum number of file/directory names to\n      retrieve. The default value is 1,000.</p>"
+                    }
+                },
+                "OutputDirectoryPath": {
+                    "target": "com.amazonaws.transfer#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the path (bucket and prefix) in Amazon S3 storage to store the results of the directory listing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.transfer#StartDirectoryListingResponse": {
+            "type": "structure",
+            "members": {
+                "ListingId": {
+                    "target": "com.amazonaws.transfer#ListingId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a unique identifier for the directory listing call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputFileName": {
+                    "target": "com.amazonaws.transfer#OutputFileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the file name where the results are stored. This is a combination of the connector ID and the listing ID: <code>&lt;connector-id&gt;-&lt;listing-id&gt;.json</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.transfer#StartFileTransfer": {
             "type": "operation",
             "input": {
@@ -6746,7 +6861,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.</p>\n         <ul>\n            <li>\n               <p>For an AS2 connector, you specify the <code>ConnectorId</code> and one or more <code>SendFilePaths</code> to identify the files\n          you want to transfer.</p>\n            </li>\n            <li>\n               <p>For an SFTP connector, the file transfer can be either outbound or inbound. In both\n          cases, you specify the <code>ConnectorId</code>. Depending on the direction of the transfer,\n          you also specify the following items:</p>\n               <ul>\n                  <li>\n                     <p>If you are transferring file from a partner's SFTP server to Amazon Web Services\n              storage, you specify one or more <code>RetreiveFilePaths</code> to identify the files\n              you want to transfer, and a <code>LocalDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n                  <li>\n                     <p>If you are transferring file to a partner's SFTP server from Amazon Web Services\n              storage, you specify one or more <code>SendFilePaths</code> to identify the files you\n              want to transfer, and a <code>RemoteDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.</p>\n         <ul>\n            <li>\n               <p>For an AS2 connector, you specify the <code>ConnectorId</code> and one or more <code>SendFilePaths</code> to identify the files\n          you want to transfer.</p>\n            </li>\n            <li>\n               <p>For an SFTP connector, the file transfer can be either outbound or inbound. In both\n          cases, you specify the <code>ConnectorId</code>. Depending on the direction of the transfer,\n          you also specify the following items:</p>\n               <ul>\n                  <li>\n                     <p>If you are transferring file from a partner's SFTP server to Amazon Web Services\n              storage, you specify one or more <code>RetrieveFilePaths</code> to identify the files\n              you want to transfer, and a <code>LocalDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n                  <li>\n                     <p>If you are transferring file to a partner's SFTP server from Amazon Web Services\n              storage, you specify one or more <code>SendFilePaths</code> to identify the files you\n              want to transfer, and a <code>RemoteDirectoryPath</code> to specify the destination\n              folder.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.transfer#StartFileTransferRequest": {
@@ -7464,6 +7579,9 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#SendWorkflowStepState"
+                },
+                {
+                    "target": "com.amazonaws.transfer#StartDirectoryListing"
                 },
                 {
                     "target": "com.amazonaws.transfer#StartFileTransfer"

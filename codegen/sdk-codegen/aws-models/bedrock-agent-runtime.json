@@ -46,10 +46,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters in the request body for the Lambda input event.</p>"
                     }
+                },
+                "function": {
+                    "target": "com.amazonaws.bedrockagentruntime#Function",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function in the action group to call.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the action group being invoked.</p>"
+                "smithy.api#documentation": "<p>Contains information about the action group being invoked. For more information about the possible structures, see the InvocationInput tab in <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/trace-orchestration.html\">OrchestrationTrace</a> in the Amazon Bedrock User Guide.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#ActionGroupInvocationOutput": {
@@ -94,6 +100,16 @@
                     "max": 10
                 },
                 "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#AgentVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$"
             }
         },
         "com.amazonaws.bedrockagentruntime#AmazonBedrockAgentRunTimeService": {
@@ -789,10 +805,149 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#ApiContentMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentruntime#PropertyParameters"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ApiInvocationInput": {
+            "type": "structure",
+            "members": {
+                "actionGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action group that the API operation belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "httpMethod": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method of the API operation.</p>"
+                    }
+                },
+                "apiPath": {
+                    "target": "com.amazonaws.bedrockagentruntime#ApiPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the API operation.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.bedrockagentruntime#ApiParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters to provide for the API request, as the agent elicited from the user.</p>"
+                    }
+                },
+                "requestBody": {
+                    "target": "com.amazonaws.bedrockagentruntime#ApiRequestBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request body to provide for the API request, as the agent elicited from the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the API operation that the agent predicts should be called.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>In the <code>returnControl</code> field of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ApiParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter.</p>"
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type for the parameter.</p>"
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a parameter to provide to the API request.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ApiParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#ApiParameter"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#ApiPath": {
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ApiRequestBody": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.bedrockagentruntime#ApiContentMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the request body. The key of the object in this field is a media type defining the format of the request body.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body to provide for the API request, as the agent elicited from the user.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ApiResult": {
+            "type": "structure",
+            "members": {
+                "actionGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action group that the API operation belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "httpMethod": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP method for the API operation.</p>"
+                    }
+                },
+                "apiPath": {
+                    "target": "com.amazonaws.bedrockagentruntime#ApiPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the API operation.</p>"
+                    }
+                },
+                "responseBody": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResponseBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response body from the API operation. The key of the object is the content type. The response may be returned directly or from the Lambda function.</p>"
+                    }
+                },
+                "httpStatusCode": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>http status code from API execution response (for example: 200, 400, 500).</p>"
+                    }
+                },
+                "responseState": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResponseState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the final response state returned to end user when API/Function execution failed. When this state is FAILURE, the request would fail with dependency failure exception. When this state is REPROMPT, the API/function response will be sent to model for re-prompt</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the API operation that was called from the action group and the response body that was returned.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>In the <code>returnControlInvocationResults</code> of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#Attribution": {
@@ -875,6 +1030,20 @@
                 "smithy.api#documentation": "<p>There was a conflict performing an operation. Resolve the conflict and retry your request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ContentBody": {
+            "type": "structure",
+            "members": {
+                "body": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the API response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the body of the API response.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>In the <code>returnControlInvocationResults</code> field of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#ContentMap": {
@@ -1001,6 +1170,104 @@
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Function": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FunctionInvocationInput": {
+            "type": "structure",
+            "members": {
+                "actionGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action group that the function belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.bedrockagentruntime#FunctionParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameters of the function.</p>"
+                    }
+                },
+                "function": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the function that the agent predicts should be called.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>In the <code>returnControl</code> field of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FunctionParameter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter.</p>"
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the parameter.</p>"
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a parameter of the function.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>In the <code>returnControl</code> field of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FunctionParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#FunctionParameter"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#FunctionResult": {
+            "type": "structure",
+            "members": {
+                "actionGroup": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action group that the function belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "function": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function that was called.</p>"
+                    }
+                },
+                "responseBody": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResponseBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response from the function call using the parameters. The response may be returned directly or from the Lambda function.</p>"
+                    }
+                },
+                "responseState": {
+                    "target": "com.amazonaws.bedrockagentruntime#ResponseState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the final response state returned to end user when API/Function execution failed. When this state is FAILURE, the request would fail with dependency failure exception. When this state is REPROMPT, the API/function response will be sent to model for re-prompt</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the function that was called from the action group and the response that was returned.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>In the <code>returnControlInvocationResults</code> of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagentruntime#GeneratedResponsePart": {
@@ -1132,6 +1399,58 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentruntime#InvocationInputMember": {
+            "type": "union",
+            "members": {
+                "apiInvocationInput": {
+                    "target": "com.amazonaws.bedrockagentruntime#ApiInvocationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the API operation that the agent predicts should be called.</p>"
+                    }
+                },
+                "functionInvocationInput": {
+                    "target": "com.amazonaws.bedrockagentruntime#FunctionInvocationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the function that the agent predicts should be called.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the API operation or function that the agent predicts should be called.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>In the <code>returnControl</code> field of the <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationInputs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#InvocationInputMember"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#InvocationResultMember": {
+            "type": "union",
+            "members": {
+                "apiResult": {
+                    "target": "com.amazonaws.bedrockagentruntime#ApiResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from the API response from the action group invocation.</p>"
+                    }
+                },
+                "functionResult": {
+                    "target": "com.amazonaws.bedrockagentruntime#FunctionResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result from the function from the action group invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A result from the action group invocation.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax\">Retrieve request</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#InvocationType": {
             "type": "enum",
             "members": {
@@ -1193,7 +1512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a prompt for the agent to process and respond to.</p>\n         <note>\n            <p>The CLI doesn't support <code>InvokeAgent</code>.</p>\n         </note>\n         <ul>\n            <li>\n               <p>To continue the same conversation with an agent, use the same <code>sessionId</code> value in the request.</p>\n            </li>\n            <li>\n               <p>To activate trace enablement, turn <code>enableTrace</code> to <code>true</code>. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events\">Trace enablement</a>.</p>\n            </li>\n            <li>\n               <p>End a conversation by setting <code>endSession</code> to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>Include attributes for the session or prompt in the <code>sessionState</code> object.</p>\n            </li>\n         </ul>\n         <p>The response is returned in the <code>bytes</code> field of the <code>chunk</code> object.</p>\n         <ul>\n            <li>\n               <p>The <code>attribution</code> object contains citations for parts of the response.</p>\n            </li>\n            <li>\n               <p>If you set <code>enableTrace</code> to <code>true</code> in the request, you can trace the agent's steps and reasoning process that led it to the response.</p>\n            </li>\n            <li>\n               <p>Errors are also surfaced in the response.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Sends a prompt for the agent to process and respond to. Use return control event type for function calling.</p>\n         <note>\n            <p>The CLI doesn't support <code>InvokeAgent</code>.</p>\n         </note>\n         <ul>\n            <li>\n               <p>To continue the same conversation with an agent, use the same <code>sessionId</code> value in the request.</p>\n            </li>\n            <li>\n               <p>To activate trace enablement, turn <code>enableTrace</code> to <code>true</code>. Trace enablement helps you follow the agent's reasoning process that led it to the information it processed, the actions it took, and the final result it yielded. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events\">Trace enablement</a>.</p>\n            </li>\n            <li>\n               <p>End a conversation by setting <code>endSession</code> to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>In the <code>sessionState</code> object, you can include attributes for the session or prompt or parameters returned from the action group.</p>\n            </li>\n            <li>\n               <p>Use return control event type for function calling.</p>\n            </li>\n         </ul>\n         <p>The response is returned in the <code>bytes</code> field of the <code>chunk</code> object.</p>\n         <ul>\n            <li>\n               <p>The <code>attribution</code> object contains citations for parts of the response.</p>\n            </li>\n            <li>\n               <p>If you set <code>enableTrace</code> to <code>true</code> in the request, you can trace the agent's steps and reasoning process that led it to the response.</p>\n            </li>\n            <li>\n               <p>Errors are also surfaced in the response.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1249,8 +1568,7 @@
                 "inputText": {
                     "target": "com.amazonaws.bedrockagentruntime#InputText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prompt text to send the agent.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The prompt text to send the agent.</p>"
                     }
                 }
             },
@@ -1680,7 +1998,13 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A parameter in the Lambda input event.</p>"
+                "smithy.api#documentation": "<p>A parameter for the API request or function.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#Parameter"
             }
         },
         "com.amazonaws.bedrockagentruntime#Parameters": {
@@ -1897,6 +2221,20 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentruntime#PropertyParameters": {
+            "type": "structure",
+            "members": {
+                "properties": {
+                    "target": "com.amazonaws.bedrockagentruntime#ParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of parameters in the request body.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the parameters in the request body.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#Rationale": {
             "type": "structure",
             "members": {
@@ -1956,7 +2294,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters in the request body for the Lambda input event.</p>"
+                "smithy.api#documentation": "<p>The parameters in the API request body.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#ResourceNotFoundException": {
@@ -1967,9 +2305,35 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified resource ARN was not found. Check the ARN and try your request again.</p>",
+                "smithy.api#documentation": "<p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ResponseBody": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagentruntime#ContentBody"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ResponseState": {
+            "type": "enum",
+            "members": {
+                "FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILURE"
+                    }
+                },
+                "REPROMPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPROMPT"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentruntime#ResponseStream": {
@@ -1984,7 +2348,13 @@
                 "trace": {
                     "target": "com.amazonaws.bedrockagentruntime#TracePart",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about the agent and session, alongside the agent's reasoning process and results from calling API actions and querying knowledge bases and metadata about the trace. You can use the trace to understand how the agent arrived at the response it provided the customer. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html\">Trace events</a>.</p>"
+                        "smithy.api#documentation": "<p>Contains information about the agent and session, alongside the agent's reasoning process and results from calling actions and querying knowledge bases and metadata about the trace. You can use the trace to understand how the agent arrived at the response it provided the customer. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html\">Trace events</a>.</p>"
+                    }
+                },
+                "returnControl": {
+                    "target": "com.amazonaws.bedrockagentruntime#ReturnControlPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the parameters and information that the agent elicited from the customer to carry out an action. This information is returned to the system and can be used in your own setup for fulfilling the action.</p>"
                     }
                 },
                 "internalServerException": {
@@ -2002,7 +2372,7 @@
                 "resourceNotFoundException": {
                     "target": "com.amazonaws.bedrockagentruntime#ResourceNotFoundException",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specified resource ARN was not found. Check the ARN and try your request again.</p>"
+                        "smithy.api#documentation": "<p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>"
                     }
                 },
                 "serviceQuotaExceededException": {
@@ -2569,6 +2939,39 @@
                 "target": "com.amazonaws.bedrockagentruntime#RetrievedReference"
             }
         },
+        "com.amazonaws.bedrockagentruntime#ReturnControlInvocationResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#InvocationResultMember"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ReturnControlPayload": {
+            "type": "structure",
+            "members": {
+                "invocationInputs": {
+                    "target": "com.amazonaws.bedrockagentruntime#InvocationInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects that contain information about the parameters and inputs that need to be sent into the API operation or function, based on what the agent determines from its session with the user.</p>"
+                    }
+                },
+                "invocationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the action group invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information to return from the action group that the agent has predicted to invoke.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrockagentruntime#SearchType": {
             "type": "enum",
             "members": {
@@ -2631,6 +3034,18 @@
                     "target": "com.amazonaws.bedrockagentruntime#PromptSessionAttributesMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains attributes that persist across a prompt and the values of those attributes. These attributes replace the $prompt_session_attributes$ placeholder variable in the orchestration prompt template. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html\">Prompt template placeholder variables</a>.</p>"
+                    }
+                },
+                "returnControlInvocationResults": {
+                    "target": "com.amazonaws.bedrockagentruntime#ReturnControlInvocationResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the results from the action group invocation.</p>"
+                    }
+                },
+                "invocationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the invocation.</p>"
                     }
                 }
             },
@@ -2840,6 +3255,12 @@
                     "target": "com.amazonaws.bedrockagentruntime#SessionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the session with the agent.</p>"
+                    }
+                },
+                "agentVersion": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgentVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the agent.</p>"
                     }
                 },
                 "trace": {
