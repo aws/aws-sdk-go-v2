@@ -3619,16 +3619,16 @@ type DebugRuleEvaluationStatus struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of default EBS storage settings that applies to private spaces
-// created within a domain or user profile.
+// A collection of default EBS storage settings that apply to spaces created
+// within a domain or user profile.
 type DefaultEbsStorageSettings struct {
 
-	// The default size of the EBS storage volume for a private space.
+	// The default size of the EBS storage volume for a space.
 	//
 	// This member is required.
 	DefaultEbsVolumeSizeInGb *int32
 
-	// The maximum size of the EBS storage volume for a private space.
+	// The maximum size of the EBS storage volume for a space.
 	//
 	// This member is required.
 	MaximumEbsVolumeSizeInGb *int32
@@ -3639,8 +3639,18 @@ type DefaultEbsStorageSettings struct {
 // A collection of settings that apply to spaces created in the domain.
 type DefaultSpaceSettings struct {
 
+	// The settings for assigning a custom file system to a domain. Permitted users
+	// can access this file system in Amazon SageMaker Studio.
+	CustomFileSystemConfigs []CustomFileSystemConfig
+
+	// Details about the POSIX identity that is used for file system operations.
+	CustomPosixUserConfig *CustomPosixUserConfig
+
 	// The ARN of the execution role for the space.
 	ExecutionRole *string
+
+	// The settings for the JupyterLab application.
+	JupyterLabAppSettings *JupyterLabAppSettings
 
 	// The JupyterServer app settings.
 	JupyterServerAppSettings *JupyterServerAppSettings
@@ -3651,13 +3661,16 @@ type DefaultSpaceSettings struct {
 	// The security group IDs for the Amazon VPC that the space uses for communication.
 	SecurityGroups []string
 
+	// The default storage settings for a space.
+	SpaceStorageSettings *DefaultSpaceStorageSettings
+
 	noSmithyDocumentSerde
 }
 
-// The default storage settings for a private space.
+// The default storage settings for a space.
 type DefaultSpaceStorageSettings struct {
 
-	// The default EBS storage settings for a private space.
+	// The default EBS storage settings for a space.
 	DefaultEbsStorageSettings *DefaultEbsStorageSettings
 
 	noSmithyDocumentSerde
@@ -4168,10 +4181,11 @@ type DynamicScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of EBS storage settings that applies to private spaces.
+// A collection of EBS storage settings that apply to both private and shared
+// spaces.
 type EbsStorageSettings struct {
 
-	// The size of an EBS storage volume for a private space.
+	// The size of an EBS storage volume for a space.
 	//
 	// This member is required.
 	EbsVolumeSizeInGb *int32
@@ -10996,7 +11010,7 @@ type OutputParameter struct {
 // The collection of ownership settings for a space.
 type OwnershipSettings struct {
 
-	// The user profile who is the owner of the private space.
+	// The user profile who is the owner of the space.
 	//
 	// This member is required.
 	OwnerUserProfileName *string
@@ -11007,7 +11021,7 @@ type OwnershipSettings struct {
 // Specifies summary information about the ownership settings.
 type OwnershipSettingsSummary struct {
 
-	// The user profile who is the owner of the private space.
+	// The user profile who is the owner of the space.
 	OwnerUserProfileName *string
 
 	noSmithyDocumentSerde
@@ -14099,7 +14113,7 @@ type SpaceSettings struct {
 	// The KernelGateway app settings.
 	KernelGatewayAppSettings *KernelGatewayAppSettings
 
-	// The storage settings for a private space.
+	// The storage settings for a space.
 	SpaceStorageSettings *SpaceStorageSettings
 
 	noSmithyDocumentSerde
@@ -14111,7 +14125,7 @@ type SpaceSettingsSummary struct {
 	// The type of app created within the space.
 	AppType AppType
 
-	// The storage settings for a private space.
+	// The storage settings for a space.
 	SpaceStorageSettings *SpaceStorageSettings
 
 	noSmithyDocumentSerde
@@ -14137,10 +14151,10 @@ type SpaceSharingSettingsSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The storage settings for a private space.
+// The storage settings for a space.
 type SpaceStorageSettings struct {
 
-	// A collection of EBS storage settings for a private space.
+	// A collection of EBS storage settings for a space.
 	EbsStorageSettings *EbsStorageSettings
 
 	noSmithyDocumentSerde
@@ -16221,7 +16235,7 @@ type UserSettings struct {
 	// Specifies options for sharing Amazon SageMaker Studio notebooks.
 	SharingSettings *SharingSettings
 
-	// The storage settings for a private space.
+	// The storage settings for a space.
 	SpaceStorageSettings *DefaultSpaceStorageSettings
 
 	// Whether the user can access Studio. If this value is set to DISABLED , the user

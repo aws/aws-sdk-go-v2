@@ -12,10 +12,21 @@ import (
 //
 // The following types satisfy this interface:
 //
+//	ActionGroupExecutorMemberCustomControl
 //	ActionGroupExecutorMemberLambda
 type ActionGroupExecutor interface {
 	isActionGroupExecutor()
 }
+
+// To return the action group invocation results directly in the InvokeAgent
+// response, specify RETURN_CONTROL .
+type ActionGroupExecutorMemberCustomControl struct {
+	Value CustomControlMethod
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionGroupExecutorMemberCustomControl) isActionGroupExecutor() {}
 
 // The Amazon Resource Name (ARN) of the Lambda function containing the business
 // logic that is carried out upon invoking the action.
@@ -215,6 +226,10 @@ type AgentActionGroup struct {
 
 	// The description of the action group.
 	Description *string
+
+	// Defines functions that each define parameters that the agent needs to invoke
+	// from the user. Each function represents an action in an action group.
+	FunctionSchema FunctionSchema
 
 	// If this field is set as AMAZON.UserInput , the agent can request the user for
 	// additional information when trying to complete a task. The description ,
@@ -757,6 +772,55 @@ type FixedSizeChunkingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Defines parameters that the agent needs to invoke from the user to complete the
+// function. Corresponds to an action in an action group. This data type is used in
+// the following API operations:
+//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
+//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
+//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
+//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
+//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+type Function struct {
+
+	// A name for the function.
+	//
+	// This member is required.
+	Name *string
+
+	// A description of the function and its purpose.
+	Description *string
+
+	// The parameters that the agent elicits from the user to fulfill the function.
+	Parameters map[string]ParameterDetail
+
+	noSmithyDocumentSerde
+}
+
+// Defines functions that each define parameters that the agent needs to invoke
+// from the user. Each function represents an action in an action group. This data
+// type is used in the following API operations:
+//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
+//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
+//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
+//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
+//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+//
+// The following types satisfy this interface:
+//
+//	FunctionSchemaMemberFunctions
+type FunctionSchema interface {
+	isFunctionSchema()
+}
+
+// A list of functions that each define an action in the action group.
+type FunctionSchemaMemberFunctions struct {
+	Value []Function
+
+	noSmithyDocumentSerde
+}
+
+func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
+
 // Contains inference parameters to use when the agent invokes a foundation model
 // in the part of the agent sequence defined by the promptType . For more
 // information, see Inference parameters for foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
@@ -799,7 +863,7 @@ type InferenceConfiguration struct {
 // following API operations:
 //   - StartIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax)
 //   - GetIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax)
-//   - ListIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJob.html#API_agent_ListIngestionJob_ResponseSyntax)
+//   - ListIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax)
 type IngestionJob struct {
 
 	// The unique identifier of the ingested data source.
@@ -1108,6 +1172,31 @@ type OpenSearchServerlessFieldMapping struct {
 	//
 	// This member is required.
 	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a parameter in a function for an action group. This data
+// type is used in the following API operations:
+//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
+//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
+//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
+//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
+//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+type ParameterDetail struct {
+
+	// The data type of the parameter.
+	//
+	// This member is required.
+	Type Type
+
+	// A description of the parameter. Helps the foundation model determine how to
+	// elicit the parameters from the user.
+	Description *string
+
+	// Whether the parameter is required for the agent to complete the function for
+	// action group invocation.
+	Required *bool
 
 	noSmithyDocumentSerde
 }
@@ -1464,3 +1553,4 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isActionGroupExecutor() {}
 func (*UnknownUnionMember) isAPISchema()           {}
+func (*UnknownUnionMember) isFunctionSchema()      {}

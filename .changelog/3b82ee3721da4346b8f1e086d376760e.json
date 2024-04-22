@@ -1,0 +1,8 @@
+{
+    "id": "3b82ee37-21da-4346-b8f1-e086d376760e",
+    "type": "feature",
+    "description": "This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

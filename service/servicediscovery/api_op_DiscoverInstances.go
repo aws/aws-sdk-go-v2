@@ -34,7 +34,9 @@ func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstance
 type DiscoverInstancesInput struct {
 
 	// The HttpName name of the namespace. It's found in the HttpProperties member of
-	// the Properties member of the namespace.
+	// the Properties member of the namespace. In most cases, Name and HttpName match.
+	// However, if you reuse Name for namespace creation, a generated hash is added to
+	// HttpName to distinguish the two.
 	//
 	// This member is required.
 	NamespaceName *string

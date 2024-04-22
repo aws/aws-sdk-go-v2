@@ -20302,9 +20302,30 @@ func awsAwsjson11_serializeDocumentDefaultSpaceSettings(v *types.DefaultSpaceSet
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomFileSystemConfigs != nil {
+		ok := object.Key("CustomFileSystemConfigs")
+		if err := awsAwsjson11_serializeDocumentCustomFileSystemConfigs(v.CustomFileSystemConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomPosixUserConfig != nil {
+		ok := object.Key("CustomPosixUserConfig")
+		if err := awsAwsjson11_serializeDocumentCustomPosixUserConfig(v.CustomPosixUserConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExecutionRole != nil {
 		ok := object.Key("ExecutionRole")
 		ok.String(*v.ExecutionRole)
+	}
+
+	if v.JupyterLabAppSettings != nil {
+		ok := object.Key("JupyterLabAppSettings")
+		if err := awsAwsjson11_serializeDocumentJupyterLabAppSettings(v.JupyterLabAppSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.JupyterServerAppSettings != nil {
@@ -20324,6 +20345,13 @@ func awsAwsjson11_serializeDocumentDefaultSpaceSettings(v *types.DefaultSpaceSet
 	if v.SecurityGroups != nil {
 		ok := object.Key("SecurityGroups")
 		if err := awsAwsjson11_serializeDocumentSecurityGroupIds(v.SecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceStorageSettings != nil {
+		ok := object.Key("SpaceStorageSettings")
+		if err := awsAwsjson11_serializeDocumentDefaultSpaceStorageSettings(v.SpaceStorageSettings, ok); err != nil {
 			return err
 		}
 	}

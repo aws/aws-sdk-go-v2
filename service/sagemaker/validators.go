@@ -7791,6 +7791,26 @@ func validateDefaultSpaceSettings(v *types.DefaultSpaceSettings) error {
 			invalidParams.AddNested("KernelGatewayAppSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JupyterLabAppSettings != nil {
+		if err := validateJupyterLabAppSettings(v.JupyterLabAppSettings); err != nil {
+			invalidParams.AddNested("JupyterLabAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpaceStorageSettings != nil {
+		if err := validateDefaultSpaceStorageSettings(v.SpaceStorageSettings); err != nil {
+			invalidParams.AddNested("SpaceStorageSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomPosixUserConfig != nil {
+		if err := validateCustomPosixUserConfig(v.CustomPosixUserConfig); err != nil {
+			invalidParams.AddNested("CustomPosixUserConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomFileSystemConfigs != nil {
+		if err := validateCustomFileSystemConfigs(v.CustomFileSystemConfigs); err != nil {
+			invalidParams.AddNested("CustomFileSystemConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

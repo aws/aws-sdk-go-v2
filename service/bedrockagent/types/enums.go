@@ -126,6 +126,22 @@ func (CreationMode) Values() []CreationMode {
 	}
 }
 
+type CustomControlMethod string
+
+// Enum values for CustomControlMethod
+const (
+	CustomControlMethodReturnControl CustomControlMethod = "RETURN_CONTROL"
+)
+
+// Values returns all known values for CustomControlMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomControlMethod) Values() []CustomControlMethod {
+	return []CustomControlMethod{
+		"RETURN_CONTROL",
+	}
+}
+
 type DataSourceStatus string
 
 // Enum values for DataSourceStatus
@@ -367,5 +383,29 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type Type string
+
+// Enum values for Type
+const (
+	TypeString  Type = "string"
+	TypeNumber  Type = "number"
+	TypeInteger Type = "integer"
+	TypeBoolean Type = "boolean"
+	TypeArray   Type = "array"
+)
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"string",
+		"number",
+		"integer",
+		"boolean",
+		"array",
 	}
 }

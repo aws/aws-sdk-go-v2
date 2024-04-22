@@ -67,6 +67,10 @@ type UpdateAgentActionGroupInput struct {
 	// Specifies a new name for the action group.
 	Description *string
 
+	// Contains details about the function schema for the action group or the JSON or
+	// YAML-formatted payload defining the schema.
+	FunctionSchema types.FunctionSchema
+
 	// To allow your agent to request the user for additional information when trying
 	// to complete a task, set this field to AMAZON.UserInput . You must leave the
 	// description , apiSchema , and actionGroupExecutor fields blank for this action

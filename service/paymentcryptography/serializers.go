@@ -1201,6 +1201,13 @@ func awsAwsjson10_serializeDocumentExportTr31KeyBlock(v *types.ExportTr31KeyBloc
 	object := value.Object()
 	defer object.Close()
 
+	if v.KeyBlockHeaders != nil {
+		ok := object.Key("KeyBlockHeaders")
+		if err := awsAwsjson10_serializeDocumentKeyBlockHeaders(v.KeyBlockHeaders, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.WrappingKeyIdentifier != nil {
 		ok := object.Key("WrappingKeyIdentifier")
 		ok.String(*v.WrappingKeyIdentifier)
@@ -1226,6 +1233,13 @@ func awsAwsjson10_serializeDocumentExportTr34KeyBlock(v *types.ExportTr34KeyBloc
 	if len(v.KeyBlockFormat) > 0 {
 		ok := object.Key("KeyBlockFormat")
 		ok.String(string(v.KeyBlockFormat))
+	}
+
+	if v.KeyBlockHeaders != nil {
+		ok := object.Key("KeyBlockHeaders")
+		if err := awsAwsjson10_serializeDocumentKeyBlockHeaders(v.KeyBlockHeaders, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RandomNonce != nil {
@@ -1400,6 +1414,37 @@ func awsAwsjson10_serializeDocumentKeyAttributes(v *types.KeyAttributes, value s
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentKeyBlockHeaders(v *types.KeyBlockHeaders, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.KeyExportability) > 0 {
+		ok := object.Key("KeyExportability")
+		ok.String(string(v.KeyExportability))
+	}
+
+	if v.KeyModesOfUse != nil {
+		ok := object.Key("KeyModesOfUse")
+		if err := awsAwsjson10_serializeDocumentKeyModesOfUse(v.KeyModesOfUse, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.KeyVersion != nil {
+		ok := object.Key("KeyVersion")
+		ok.String(*v.KeyVersion)
+	}
+
+	if v.OptionalBlocks != nil {
+		ok := object.Key("OptionalBlocks")
+		if err := awsAwsjson10_serializeDocumentOptionalBlocks(v.OptionalBlocks, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentKeyModesOfUse(v *types.KeyModesOfUse, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1449,6 +1494,17 @@ func awsAwsjson10_serializeDocumentKeyModesOfUse(v *types.KeyModesOfUse, value s
 		ok.Boolean(v.Wrap)
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentOptionalBlocks(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

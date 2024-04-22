@@ -1,0 +1,8 @@
+{
+    "id": "c7a5aa37-5d25-49be-acd4-2a75083a3b1a",
+    "type": "feature",
+    "description": "Releasing the support for simplified configuration and return of control",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

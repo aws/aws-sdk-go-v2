@@ -62,6 +62,24 @@ func (PromptType) Values() []PromptType {
 	}
 }
 
+type ResponseState string
+
+// Enum values for ResponseState
+const (
+	ResponseStateFailure  ResponseState = "FAILURE"
+	ResponseStateReprompt ResponseState = "REPROMPT"
+)
+
+// Values returns all known values for ResponseState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseState) Values() []ResponseState {
+	return []ResponseState{
+		"FAILURE",
+		"REPROMPT",
+	}
+}
+
 type RetrievalResultLocationType string
 
 // Enum values for RetrievalResultLocationType

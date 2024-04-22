@@ -11,6 +11,9 @@ func ExampleActionGroupExecutor_outputUsage() {
 	var union types.ActionGroupExecutor
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ActionGroupExecutorMemberCustomControl:
+		_ = v.Value // Value is types.CustomControlMethod
+
 	case *types.ActionGroupExecutorMemberLambda:
 		_ = v.Value // Value is string
 
@@ -24,6 +27,7 @@ func ExampleActionGroupExecutor_outputUsage() {
 }
 
 var _ *string
+var _ types.CustomControlMethod
 
 func ExampleAPISchema_outputUsage() {
 	var union types.APISchema
@@ -46,3 +50,21 @@ func ExampleAPISchema_outputUsage() {
 
 var _ *string
 var _ *types.S3Identifier
+
+func ExampleFunctionSchema_outputUsage() {
+	var union types.FunctionSchema
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FunctionSchemaMemberFunctions:
+		_ = v.Value // Value is []types.Function
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.Function

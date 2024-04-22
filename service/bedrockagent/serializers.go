@@ -369,6 +369,13 @@ func awsRestjson1_serializeOpDocumentCreateAgentActionGroupInput(v *CreateAgentA
 		ok.String(*v.Description)
 	}
 
+	if v.FunctionSchema != nil {
+		ok := object.Key("functionSchema")
+		if err := awsRestjson1_serializeDocumentFunctionSchema(v.FunctionSchema, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ParentActionGroupSignature) > 0 {
 		ok := object.Key("parentActionGroupSignature")
 		ok.String(string(v.ParentActionGroupSignature))
@@ -3254,6 +3261,13 @@ func awsRestjson1_serializeOpDocumentUpdateAgentActionGroupInput(v *UpdateAgentA
 		ok.String(*v.Description)
 	}
 
+	if v.FunctionSchema != nil {
+		ok := object.Key("functionSchema")
+		if err := awsRestjson1_serializeDocumentFunctionSchema(v.FunctionSchema, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ParentActionGroupSignature) > 0 {
 		ok := object.Key("parentActionGroupSignature")
 		ok.String(string(v.ParentActionGroupSignature))
@@ -3722,6 +3736,10 @@ func awsRestjson1_serializeDocumentActionGroupExecutor(v types.ActionGroupExecut
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ActionGroupExecutorMemberCustomControl:
+		av := object.Key("customControl")
+		av.String(string(uv.Value))
+
 	case *types.ActionGroupExecutorMemberLambda:
 		av := object.Key("lambda")
 		av.String(uv.Value)
@@ -3832,6 +3850,61 @@ func awsRestjson1_serializeDocumentFixedSizeChunkingConfiguration(v *types.Fixed
 		ok.Integer(*v.OverlapPercentage)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFunction(v *types.Function, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentParameterMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFunctions(v []types.Function, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFunction(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFunctionSchema(v types.FunctionSchema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.FunctionSchemaMemberFunctions:
+		av := object.Key("functions")
+		if err := awsRestjson1_serializeDocumentFunctions(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -4022,6 +4095,42 @@ func awsRestjson1_serializeDocumentOpenSearchServerlessFieldMapping(v *types.Ope
 		ok.String(*v.VectorField)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParameterDetail(v *types.ParameterDetail, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Required != nil {
+		ok := object.Key("required")
+		ok.Boolean(*v.Required)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParameterMap(v map[string]types.ParameterDetail, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentParameterDetail(&mapVar, om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

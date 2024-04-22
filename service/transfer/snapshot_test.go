@@ -590,6 +590,18 @@ func TestCheckSnapshot_SendWorkflowStepState(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartDirectoryListing(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDirectoryListing(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartDirectoryListing")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartFileTransfer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartFileTransfer(context.Background(), nil, func(o *Options) {
@@ -1290,6 +1302,18 @@ func TestUpdateSnapshot_SendWorkflowStepState(t *testing.T) {
 	_, err := svc.SendWorkflowStepState(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SendWorkflowStepState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartDirectoryListing(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartDirectoryListing(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartDirectoryListing")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

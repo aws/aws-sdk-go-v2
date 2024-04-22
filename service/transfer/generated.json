@@ -53,6 +53,7 @@
         "api_op_ListUsers.go",
         "api_op_ListWorkflows.go",
         "api_op_SendWorkflowStepState.go",
+        "api_op_StartDirectoryListing.go",
         "api_op_StartFileTransfer.go",
         "api_op_StartServer.go",
         "api_op_StopServer.go",

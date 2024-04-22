@@ -24,11 +24,12 @@ import (
 // After the key is deleted, the KeyState is DELETE_COMPLETE . You should delete a
 // key only when you are sure that you don't need to use it anymore and no other
 // parties are utilizing this key. If you aren't sure, consider deactivating it
-// instead by calling StopKeyUsage . Cross-account use: This operation can't be
-// used across different Amazon Web Services accounts. Related operations:
-//   - RestoreKey
-//   - StartKeyUsage
-//   - StopKeyUsage
+// instead by calling StopKeyUsage (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html)
+// . Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts. Related operations:
+//   - RestoreKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_RestoreKey.html)
+//   - StartKeyUsage (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html)
+//   - StopKeyUsage (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html)
 func (c *Client) DeleteKey(ctx context.Context, params *DeleteKeyInput, optFns ...func(*Options)) (*DeleteKeyOutput, error) {
 	if params == nil {
 		params = &DeleteKeyInput{}

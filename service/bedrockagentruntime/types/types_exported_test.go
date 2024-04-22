@@ -7,6 +7,50 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
 )
 
+func ExampleInvocationInputMember_outputUsage() {
+	var union types.InvocationInputMember
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvocationInputMemberMemberApiInvocationInput:
+		_ = v.Value // Value is types.ApiInvocationInput
+
+	case *types.InvocationInputMemberMemberFunctionInvocationInput:
+		_ = v.Value // Value is types.FunctionInvocationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ApiInvocationInput
+var _ *types.FunctionInvocationInput
+
+func ExampleInvocationResultMember_outputUsage() {
+	var union types.InvocationResultMember
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvocationResultMemberMemberApiResult:
+		_ = v.Value // Value is types.ApiResult
+
+	case *types.InvocationResultMemberMemberFunctionResult:
+		_ = v.Value // Value is types.FunctionResult
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ApiResult
+var _ *types.FunctionResult
+
 func ExampleOrchestrationTrace_outputUsage() {
 	var union types.OrchestrationTrace
 	// type switches can be used to check the union value
@@ -88,6 +132,9 @@ func ExampleResponseStream_outputUsage() {
 	case *types.ResponseStreamMemberChunk:
 		_ = v.Value // Value is types.PayloadPart
 
+	case *types.ResponseStreamMemberReturnControl:
+		_ = v.Value // Value is types.ReturnControlPayload
+
 	case *types.ResponseStreamMemberTrace:
 		_ = v.Value // Value is types.TracePart
 
@@ -100,6 +147,7 @@ func ExampleResponseStream_outputUsage() {
 	}
 }
 
+var _ *types.ReturnControlPayload
 var _ *types.PayloadPart
 var _ *types.TracePart
 

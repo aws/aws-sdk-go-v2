@@ -72,6 +72,26 @@ func (KeyClass) Values() []KeyClass {
 	}
 }
 
+type KeyExportability string
+
+// Enum values for KeyExportability
+const (
+	KeyExportabilityExportable    KeyExportability = "EXPORTABLE"
+	KeyExportabilityNonExportable KeyExportability = "NON_EXPORTABLE"
+	KeyExportabilitySensitive     KeyExportability = "SENSITIVE"
+)
+
+// Values returns all known values for KeyExportability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KeyExportability) Values() []KeyExportability {
+	return []KeyExportability{
+		"EXPORTABLE",
+		"NON_EXPORTABLE",
+		"SENSITIVE",
+	}
+}
+
 type KeyMaterialType string
 
 // Enum values for KeyMaterialType

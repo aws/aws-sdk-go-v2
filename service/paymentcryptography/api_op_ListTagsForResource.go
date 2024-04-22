@@ -19,8 +19,8 @@ import (
 // that means there are no more tags to get. Cross-account use: This operation
 // can't be used across different Amazon Web Services accounts. Related operations:
 //
-//   - TagResource
-//   - UntagResource
+//   - TagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html)
+//   - UntagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html)
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

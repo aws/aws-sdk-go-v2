@@ -12,8 +12,8 @@ import (
 	"sync"
 )
 
-// Sends a prompt for the agent to process and respond to. The CLI doesn't support
-// InvokeAgent .
+// Sends a prompt for the agent to process and respond to. Use return control
+// event type for function calling. The CLI doesn't support InvokeAgent .
 //   - To continue the same conversation with an agent, use the same sessionId
 //     value in the request.
 //   - To activate trace enablement, turn enableTrace to true . Trace enablement
@@ -22,7 +22,9 @@ import (
 //     information, see Trace enablement (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events)
 //     .
 //   - End a conversation by setting endSession to true .
-//   - Include attributes for the session or prompt in the sessionState object.
+//   - In the sessionState object, you can include attributes for the session or
+//     prompt or parameters returned from the action group.
+//   - Use return control event type for function calling.
 //
 // The response is returned in the bytes field of the chunk object.
 //   - The attribution object contains citations for parts of the response.
@@ -56,11 +58,6 @@ type InvokeAgentInput struct {
 	// This member is required.
 	AgentId *string
 
-	// The prompt text to send the agent.
-	//
-	// This member is required.
-	InputText *string
-
 	// The unique identifier of the session. Use the same value across requests to
 	// continue the same conversation.
 	//
@@ -74,6 +71,9 @@ type InvokeAgentInput struct {
 
 	// Specifies whether to end the session with the agent or not.
 	EndSession *bool
+
+	// The prompt text to send the agent.
+	InputText *string
 
 	// Contains parameters that specify various attributes of the session. For more
 	// information, see Control session context (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html)

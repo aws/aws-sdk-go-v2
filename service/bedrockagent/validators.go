@@ -1012,6 +1012,62 @@ func validateFixedSizeChunkingConfiguration(v *types.FixedSizeChunkingConfigurat
 	}
 }
 
+func validateFunction(v *types.Function) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Function"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Parameters != nil {
+		if err := validateParameterMap(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctions(v []types.Function) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Functions"}
+	for i := range v {
+		if err := validateFunction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionSchema(v types.FunctionSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionSchema"}
+	switch uv := v.(type) {
+	case *types.FunctionSchemaMemberFunctions:
+		if err := validateFunctions(uv.Value); err != nil {
+			invalidParams.AddNested("[functions]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIngestionJobFilter(v *types.IngestionJobFilter) error {
 	if v == nil {
 		return nil
@@ -1126,6 +1182,39 @@ func validateOpenSearchServerlessFieldMapping(v *types.OpenSearchServerlessField
 	}
 	if v.MetadataField == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameterDetail(v *types.ParameterDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterDetail"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameterMap(v map[string]types.ParameterDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateParameterDetail(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1415,6 +1504,11 @@ func validateOpCreateAgentActionGroupInput(v *CreateAgentActionGroupInput) error
 	}
 	if v.ActionGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroupName"))
+	}
+	if v.FunctionSchema != nil {
+		if err := validateFunctionSchema(v.FunctionSchema); err != nil {
+			invalidParams.AddNested("FunctionSchema", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2010,6 +2104,11 @@ func validateOpUpdateAgentActionGroupInput(v *UpdateAgentActionGroupInput) error
 	}
 	if v.ActionGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroupName"))
+	}
+	if v.FunctionSchema != nil {
+		if err := validateFunctionSchema(v.FunctionSchema); err != nil {
+			invalidParams.AddNested("FunctionSchema", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

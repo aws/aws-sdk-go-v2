@@ -40,10 +40,7 @@ type ImportCertificateInput struct {
 	// This member is required.
 	Certificate *string
 
-	// Specifies how this certificate is used. It can be used in the following ways:
-	//   - SIGNING : For signing AS2 messages
-	//   - ENCRYPTION : For encrypting AS2 messages
-	//   - TLS : For securing AS2 communications sent over HTTPS
+	// Specifies whether this certificate is used for signing or encryption.
 	//
 	// This member is required.
 	Usage types.CertificateUsageType

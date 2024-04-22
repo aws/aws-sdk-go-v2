@@ -82,6 +82,21 @@ func addOpRetrieveValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRetrieve{}, middleware.After)
 }
 
+func validateApiResult(v *types.ApiResult) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApiResult"}
+	if v.ActionGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFilterAttribute(v *types.FilterAttribute) error {
 	if v == nil {
 		return nil
@@ -92,6 +107,45 @@ func validateFilterAttribute(v *types.FilterAttribute) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionResult(v *types.FunctionResult) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionResult"}
+	if v.ActionGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInvocationResultMember(v types.InvocationResultMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvocationResultMember"}
+	switch uv := v.(type) {
+	case *types.InvocationResultMemberMemberApiResult:
+		if err := validateApiResult(&uv.Value); err != nil {
+			invalidParams.AddNested("[apiResult]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.InvocationResultMemberMemberFunctionResult:
+		if err := validateFunctionResult(&uv.Value); err != nil {
+			invalidParams.AddNested("[functionResult]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -310,11 +364,50 @@ func validateRetrieveAndGenerateSessionConfiguration(v *types.RetrieveAndGenerat
 	}
 }
 
+func validateReturnControlInvocationResults(v []types.InvocationResultMember) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReturnControlInvocationResults"}
+	for i := range v {
+		if err := validateInvocationResultMember(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSessionState(v *types.SessionState) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionState"}
+	if v.ReturnControlInvocationResults != nil {
+		if err := validateReturnControlInvocationResults(v.ReturnControlInvocationResults); err != nil {
+			invalidParams.AddNested("ReturnControlInvocationResults", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpInvokeAgentInput(v *InvokeAgentInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InvokeAgentInput"}
+	if v.SessionState != nil {
+		if err := validateSessionState(v.SessionState); err != nil {
+			invalidParams.AddNested("SessionState", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AgentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
 	}
@@ -323,9 +416,6 @@ func validateOpInvokeAgentInput(v *InvokeAgentInput) error {
 	}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
-	}
-	if v.InputText == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputText"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
