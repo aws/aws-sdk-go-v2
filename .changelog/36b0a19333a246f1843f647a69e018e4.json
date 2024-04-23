@@ -1,8 +1,0 @@
-{
-    "id": "36b0a193-33a2-46f1-843f-647a69e018e4",
-    "type": "feature",
-    "description": "Added additional metadata that might be applicable to your reservation recommendations.",
-    "modules": [
-        "service/costexplorer"
-    ]
-}

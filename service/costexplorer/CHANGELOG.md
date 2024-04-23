@@ -1,3 +1,7 @@
+# v1.38.0 (2024-04-23)
+
+* **Feature**: Added additional metadata that might be applicable to your reservation recommendations.
+
 # v1.37.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

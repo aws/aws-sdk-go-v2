@@ -1,8 +1,0 @@
-{
-    "id": "5bde245e-1ed9-42be-8725-a08244217154",
-    "type": "feature",
-    "description": "This release introduces Model Evaluation and Guardrails for Amazon Bedrock.",
-    "modules": [
-        "service/bedrock"
-    ]
-}

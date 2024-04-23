@@ -1,3 +1,7 @@
+# v1.77.2 (2024-04-23)
+
+* **Documentation**: Fix the example ARN for ModifyActivityStreamRequest
+
 # v1.77.1 (2024-04-11)
 
 * **Documentation**: Updates Amazon RDS documentation for Standard Edition 2 support in RDS Custom for Oracle.

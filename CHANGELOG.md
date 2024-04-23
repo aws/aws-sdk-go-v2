@@ -1,3 +1,25 @@
+# Release (2024-04-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.8.0](service/bedrock/CHANGELOG.md#v180-2024-04-23)
+  * **Feature**: This release introduces Model Evaluation and Guardrails for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.8.0](service/bedrockagent/CHANGELOG.md#v180-2024-04-23)
+  * **Feature**: Introducing the ability to create multiple data sources per knowledge base, specify S3 buckets as data sources from external accounts, and exposing levers to define the deletion behavior of the underlying vector store data.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.8.0](service/bedrockagentruntime/CHANGELOG.md#v180-2024-04-23)
+  * **Feature**: This release introduces zero-setup file upload support for the RetrieveAndGenerate API. This allows you to chat with your data without setting up a Knowledge Base.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.8.0](service/bedrockruntime/CHANGELOG.md#v180-2024-04-23)
+  * **Feature**: This release introduces Guardrails for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.38.0](service/costexplorer/CHANGELOG.md#v1380-2024-04-23)
+  * **Feature**: Added additional metadata that might be applicable to your reservation recommendations.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.158.0](service/ec2/CHANGELOG.md#v11580-2024-04-23)
+  * **Feature**: This release introduces EC2 AMI Deregistration Protection, a new AMI property that can be enabled by customers to protect an AMI against an unintended deregistration. This release also enables the AMI owners to view the AMI 'LastLaunchedTime' in DescribeImages API.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.24.5](service/pi/CHANGELOG.md#v1245-2024-04-23)
+  * **Documentation**: Clarifies how aggregation works for GetResourceMetrics in the Performance Insights API.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.77.2](service/rds/CHANGELOG.md#v1772-2024-04-23)
+  * **Documentation**: Fix the example ARN for ModifyActivityStreamRequest
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.18.0](service/workspacesweb/CHANGELOG.md#v1180-2024-04-23)
+  * **Feature**: Added InstanceType and MaxConcurrentSessions parameters on CreatePortal and UpdatePortal Operations as well as the ability to read Customer Managed Key & Additional Encryption Context parameters on supported resources (Portal, BrowserSettings, UserSettings, IPAccessSettings)
+
 # Release (2024-04-22)
 
 ## Module Highlights

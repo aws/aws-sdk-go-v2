@@ -1,8 +1,0 @@
-{
-    "id": "2f630cbc-4087-4c34-b368-f1bc777a91b6",
-    "type": "documentation",
-    "description": "Fix the example ARN for ModifyActivityStreamRequest",
-    "modules": [
-        "service/rds"
-    ]
-}

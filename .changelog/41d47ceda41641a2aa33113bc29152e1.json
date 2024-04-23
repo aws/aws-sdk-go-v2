@@ -1,8 +1,0 @@
-{
-    "id": "41d47ced-a416-41a2-aa33-113bc29152e1",
-    "type": "feature",
-    "description": "This release introduces zero-setup file upload support for the RetrieveAndGenerate API. This allows you to chat with your data without setting up a Knowledge Base.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

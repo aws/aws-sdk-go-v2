@@ -1,8 +1,0 @@
-{
-    "id": "b8d4e47d-83aa-4171-9910-6a8f5e1d1e44",
-    "type": "feature",
-    "description": "Added InstanceType and MaxConcurrentSessions parameters on CreatePortal and UpdatePortal Operations as well as the ability to read Customer Managed Key \u0026 Additional Encryption Context parameters on supported resources (Portal, BrowserSettings, UserSettings, IPAccessSettings)",
-    "modules": [
-        "service/workspacesweb"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "1ed73e94-48c7-4b7e-af09-ccc3bcb1f71b",
-    "type": "feature",
-    "description": "This release introduces Guardrails for Amazon Bedrock.",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}
