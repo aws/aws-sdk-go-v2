@@ -1096,7 +1096,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieve Performance Insights metrics for a set of data sources over a time period. You can provide\n      specific dimension groups and dimensions, and provide aggregation and filtering criteria for\n      each group.</p>\n         <note>\n            <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, \n               only the first 500 bytes are returned.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieve Performance Insights metrics for a set of data sources over a time period. You can provide\n          specific dimension groups and dimensions, and provide filtering criteria for each group. You must specify an aggregate function for\n          each metric.</p>\n         <note>\n            <p>Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, \n               only the first 500 bytes are returned.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -1124,7 +1124,7 @@
                 "MetricQueries": {
                     "target": "com.amazonaws.pi#MetricQueryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of one or more queries to perform. Each query must specify a Performance Insights metric, and can optionally specify aggregation and filtering\n            criteria.</p>",
+                        "smithy.api#documentation": "<p>An array of one or more queries to perform. Each query must specify a Performance Insights metric and specify an aggregate function, and you can provide filtering\n            criteria. You must append the aggregate function to the metric. For example, to find the average for the metric <code>db.load</code> \n            you must use <code>db.load.avg</code>. Valid values for aggregate functions include <code>.avg</code>, <code>.min</code>, \n            <code>.max</code>, and <code>.sum</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1742,7 +1742,7 @@
                 "Metric": {
                     "target": "com.amazonaws.pi#RequestString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - A scaled representation of the number of active sessions for the \n                    database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                        operating system counters</a> in the <i>Amazon Aurora User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> are the same\n            value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the\n            scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than\n                <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.</p>",
+                        "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - A scaled representation of the number of active sessions for the \n                    database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                        operating system counters</a> in the <i>Amazon Aurora User Guide</i>.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                    operating system counters</a> in the <i>Amazon RDS User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and <code>db.sampledload.avg</code> are the same\n            value. If the number of active sessions is greater than the internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the\n            scaled values, <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less than\n                <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1760,7 +1760,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A single query to be processed. You must provide the metric to query. If no other\n      parameters are specified, Performance Insights returns all data points for the specified metric. Optionally, you can\n      request that the data points be aggregated by dimension group (<code>GroupBy</code>), and return only \n          those data points that match your criteria (<code>Filter</code>).</p>"
+                "smithy.api#documentation": "<p>A single query to be processed. You must provide the metric to query and append an aggregate function to the metric.\n            For example, to find the average for the metric <code>db.load</code> \n            you must use <code>db.load.avg</code>. Valid values for aggregate functions include <code>.avg</code>, <code>.min</code>, \n            <code>.max</code>, and <code>.sum</code>.\n            If no other parameters are specified, Performance Insights returns all data points for the specified metric. Optionally, you can\n      request that the data points be aggregated by dimension group (<code>GroupBy</code>), and return only \n          those data points that match your criteria (<code>Filter</code>).</p>"
             }
         },
         "com.amazonaws.pi#MetricQueryFilterMap": {
@@ -1953,7 +1953,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -1996,7 +1995,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2009,7 +2009,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2023,7 +2022,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2046,7 +2044,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2081,7 +2078,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2092,14 +2088,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2113,14 +2111,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2129,11 +2125,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2144,14 +2140,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2165,7 +2163,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2185,7 +2182,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2196,14 +2192,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2214,9 +2212,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2944,7 +2944,7 @@
                 "Metric": {
                     "target": "com.amazonaws.pi#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - A scaled representation of the number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                        operating system counters</a> in the <i>Amazon Aurora User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and \n          <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the \n          internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the scaled values, \n          <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less \n          than <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.\n      </p>",
+                        "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - A scaled representation of the number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                        operating system counters</a> in the <i>Amazon Aurora User Guide</i>.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                    operating system counters</a> in the <i>Amazon RDS User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and \n          <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the \n          internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the scaled values, \n          <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less \n          than <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },

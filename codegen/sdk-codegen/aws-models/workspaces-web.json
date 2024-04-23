@@ -108,7 +108,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -151,7 +150,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -164,7 +164,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -178,7 +177,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -201,7 +199,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -236,7 +233,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -247,14 +243,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -268,14 +266,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -284,11 +280,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -299,14 +295,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -320,7 +318,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -340,7 +337,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -351,14 +347,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -369,9 +367,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1296,6 +1296,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A JSON string containing Chrome Enterprise policies that will be applied to all\n         streaming sessions.</p>"
                     }
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer managed key used to encrypt sensitive information in the browser settings.</p>"
+                    }
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional encryption context of the browser settings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1551,7 +1563,8 @@
                     "min": 0,
                     "max": 253
                 },
-                "smithy.api#pattern": "^(\\.?)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)*[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$"
+                "smithy.api#pattern": "^(\\.?)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)*[a-z0-9][a-z0-9-]{0,61}[a-z0-9]$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#CookieName": {
@@ -1560,7 +1573,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 4096
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#CookiePath": {
@@ -1570,7 +1584,8 @@
                     "min": 0,
                     "max": 2000
                 },
-                "smithy.api#pattern": "^/(\\S)*$"
+                "smithy.api#pattern": "^/(\\S)*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.workspacesweb#CookieSpecification": {
@@ -1706,7 +1721,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request.</p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS SDK. </p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request.</p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK. </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -1797,14 +1812,14 @@
                 "identityProviderDetails": {
                     "target": "com.amazonaws.workspacesweb#IdentityProviderDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code> (boolean) \n               <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by\n                           <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code> (boolean) \n               <i>optional</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPInit</code> (boolean) <i>optional</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RequestSigningAlgorithm</code> (string) <i>optional</i>\n                     - Only accepts <code>rsa-sha256</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>EncryptedResponses</code> (boolean) <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request.</p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request.</p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -1909,7 +1924,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2004,7 +2019,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2099,14 +2114,26 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "authenticationType": {
                     "target": "com.amazonaws.workspacesweb#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM_Identity_Center</code> web portals are authenticated through AWS IAM Identity\n         Center (successor to AWS Single Sign-On). They provide additional features, such as\n         IdP-initiated authentication. Identity sources (including external identity provider\n         integration), plus user and group access to your web portal, can be configured in the IAM\n         Identity Center.</p>"
+                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center (successor to Single Sign-On). Identity sources (including\n         external identity provider integration), plus user and group access to your web portal,\n          can be configured in the IAM Identity Center.</p>"
+                    }
+                },
+                "instanceType": {
+                    "target": "com.amazonaws.workspacesweb#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type and resources of the underlying instance.</p>"
+                    }
+                },
+                "maxConcurrentSessions": {
+                    "target": "com.amazonaws.workspacesweb#MaxConcurrentSessions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent sessions for the portal.</p>"
                     }
                 }
             },
@@ -2193,7 +2220,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2274,7 +2301,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2397,7 +2424,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -4023,7 +4050,7 @@
                 "identityProviderDetails": {
                     "target": "com.amazonaws.workspacesweb#IdentityProviderDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by oidc_issuer\n                        key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by oidc_issuer\n                        key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by oidc_issuer\n                        key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by oidc_issuer\n                        key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code>\n                        <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by oidc_issuer\n                        key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by oidc_issuer\n                        key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by oidc_issuer\n                        key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by oidc_issuer\n                        key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code> (boolean) <i>optional</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPInit</code> (boolean) <i>optional</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RequestSigningAlgorithm</code> (string) <i>optional</i>\n                     - Only accepts <code>rsa-sha256</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>EncryptedResponses</code> (boolean) <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4174,6 +4201,25 @@
                 }
             }
         },
+        "com.amazonaws.workspacesweb#InstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "standard.regular",
+                        "name": "STANDARD_REGULAR"
+                    },
+                    {
+                        "value": "standard.large",
+                        "name": "STANDARD_LARGE"
+                    },
+                    {
+                        "value": "standard.xlarge",
+                        "name": "STANDARD_XLARGE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.workspacesweb#InternalServerException": {
             "type": "structure",
             "members": {
@@ -4234,6 +4280,18 @@
                     "target": "com.amazonaws.workspacesweb#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The creation date timestamp of the IP access settings.</p>"
+                    }
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer managed key used to encrypt sensitive information in the IP access settings.</p>"
+                    }
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional encryption context of the IP access settings.</p>"
                     }
                 }
             },
@@ -5205,6 +5263,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.workspacesweb#MaxConcurrentSessions": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5000
+                }
+            }
+        },
         "com.amazonaws.workspacesweb#MaxResults": {
             "type": "integer",
             "traits": {
@@ -5429,13 +5496,37 @@
                 "authenticationType": {
                     "target": "com.amazonaws.workspacesweb#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM_Identity_Center</code> web portals are authenticated through AWS IAM Identity\n         Center (successor to AWS Single Sign-On). They provide additional features, such as\n         IdP-initiated authentication. Identity sources (including external identity provider\n         integration), plus user and group access to your web portal, can be configured in the IAM\n         Identity Center.</p>"
+                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center (successor to Single Sign-On). Identity sources (including\n         external identity provider integration), plus user and group access to your web portal,\n         can be configured in the IAM Identity Center.</p>"
                     }
                 },
                 "ipAccessSettingsArn": {
                     "target": "com.amazonaws.workspacesweb#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the IP access settings.</p>"
+                    }
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer managed key used to encrypt sensitive information in the portal.</p>"
+                    }
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional encryption context of the portal.</p>"
+                    }
+                },
+                "instanceType": {
+                    "target": "com.amazonaws.workspacesweb#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type and resources of the underlying instance.</p>"
+                    }
+                },
+                "maxConcurrentSessions": {
+                    "target": "com.amazonaws.workspacesweb#MaxConcurrentSessions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent sessions for the portal.</p>"
                     }
                 }
             },
@@ -5520,6 +5611,12 @@
                 },
                 "additionalEncryptionContext": {
                     "target": "com.amazonaws.workspacesweb#EncryptionContextMap"
+                },
+                "instanceType": {
+                    "target": "com.amazonaws.workspacesweb#InstanceType"
+                },
+                "maxConcurrentSessions": {
+                    "target": "com.amazonaws.workspacesweb#MaxConcurrentSessions"
                 }
             },
             "create": {
@@ -5700,13 +5797,25 @@
                 "authenticationType": {
                     "target": "com.amazonaws.workspacesweb#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM_Identity_Center</code> web portals are authenticated through AWS IAM Identity\n         Center (successor to AWS Single Sign-On). They provide additional features, such as\n         IdP-initiated authentication. Identity sources (including external identity provider\n         integration), plus user and group access to your web portal, can be configured in the IAM\n         Identity Center.</p>"
+                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center (successor to Single Sign-On). Identity sources (including\n         external identity provider integration), plus user and group access to your web portal,\n         can be configured in the IAM Identity Center.</p>"
                     }
                 },
                 "ipAccessSettingsArn": {
                     "target": "com.amazonaws.workspacesweb#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the IP access settings.</p>"
+                    }
+                },
+                "instanceType": {
+                    "target": "com.amazonaws.workspacesweb#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type and resources of the underlying instance.</p>"
+                    }
+                },
+                "maxConcurrentSessions": {
+                    "target": "com.amazonaws.workspacesweb#MaxConcurrentSessions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent sessions for the portal.</p>"
                     }
                 }
             },
@@ -6008,7 +6117,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -6309,7 +6418,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -6394,13 +6503,13 @@
                 "identityProviderDetails": {
                     "target": "com.amazonaws.workspacesweb#IdentityProviderDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the identity provider. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code> (boolean) \n               <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The details of the identity provider. The following list describes the provider detail keys for\n         each identity provider type. </p>\n         <ul>\n            <li>\n               <p>For Google and Login with Amazon:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Facebook:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>api_version</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For Sign in with Apple:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>team_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>key_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>private_key</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For OIDC providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>client_id</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>client_secret</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_request_method</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>oidc_issuer</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_scopes</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>authorize_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>token_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>attributes_url</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>jwks_uri</code>\n                        <i>if not available from discovery URL specified by\n                  <code>oidc_issuer</code> key</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For SAML providers:</p>      \n               <ul>\n                  <li>\n                     <p>\n                        <code>MetadataFile</code> OR <code>MetadataURL</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPSignout</code> (boolean) <i>optional</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IDPInit</code> (boolean) <i>optional</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RequestSigningAlgorithm</code> (string) <i>optional</i>\n                     - Only accepts <code>rsa-sha256</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>EncryptedResponses</code> (boolean) <i>optional</i>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -6491,7 +6600,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -6582,7 +6691,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -6629,6 +6738,9 @@
                     "target": "com.amazonaws.workspacesweb#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.workspacesweb#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.workspacesweb#ThrottlingException"
                 },
                 {
@@ -6665,7 +6777,19 @@
                 "authenticationType": {
                     "target": "com.amazonaws.workspacesweb#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM_Identity_Center</code> web portals are authenticated through AWS IAM Identity\n         Center (successor to AWS Single Sign-On). They provide additional features, such as\n         IdP-initiated authentication. Identity sources (including external identity provider\n         integration), plus user and group access to your web portal, can be configured in the IAM\n         Identity Center.</p>"
+                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center (successor to Single Sign-On). Identity sources (including\n         external identity provider integration), plus user and group access to your web portal,\n         can be configured in the IAM Identity Center.</p>"
+                    }
+                },
+                "instanceType": {
+                    "target": "com.amazonaws.workspacesweb#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type and resources of the underlying instance.</p>"
+                    }
+                },
+                "maxConcurrentSessions": {
+                    "target": "com.amazonaws.workspacesweb#MaxConcurrentSessions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent sessions for the portal.</p>"
                     }
                 }
             },
@@ -6753,7 +6877,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -6831,7 +6955,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -6948,7 +7072,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.workspacesweb#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token return the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -7146,6 +7270,18 @@
                     "target": "com.amazonaws.workspacesweb#CookieSynchronizationConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that specifies which cookies should be synchronized from the end user's local browser to the remote browser.</p>"
+                    }
+                },
+                "customerManagedKey": {
+                    "target": "com.amazonaws.workspacesweb#keyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer managed key used to encrypt sensitive information in the user settings.</p>"
+                    }
+                },
+                "additionalEncryptionContext": {
+                    "target": "com.amazonaws.workspacesweb#EncryptionContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional encryption context of the user settings.</p>"
                     }
                 }
             },

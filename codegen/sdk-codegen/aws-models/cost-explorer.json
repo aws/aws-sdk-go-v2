@@ -4067,7 +4067,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves cost and usage metrics with resources for your account. You can specify which\n      cost and usage-related metric, such as <code>BlendedCosts</code> or\n      <code>UsageQuantity</code>, that you want the request to return. You can also filter and group\n      your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a\n      specific time range. For a complete list of valid dimensions, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html\">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the\n      Amazon Elastic Compute Cloud – Compute service only.</p>\n         <note>\n            <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer\n        Settings page. For information about how to access the Settings page, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html\">Controlling\n          Access for Cost Explorer</a> in the <i>Billing and Cost Management User\n          Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves cost and usage metrics with resources for your account. You can specify which\n      cost and usage-related metric, such as <code>BlendedCosts</code> or\n      <code>UsageQuantity</code>, that you want the request to return. You can also filter and group\n      your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a\n      specific time range. For a complete list of valid dimensions, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html\">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts.</p>\n         <p>Hourly granularity is only available for EC2-Instances (Elastic Compute Cloud)\n      resource-level data. All other resource-level data is available at daily\n      granularity.</p>\n         <note>\n            <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer\n        Settings page. For information about how to access the Settings page, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html\">Controlling\n          Access for Cost Explorer</a> in the <i>Billing and Cost Management User\n          Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#GetCostAndUsageWithResourcesRequest": {
@@ -7372,18 +7372,24 @@
                 "RecommendationId": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for this specific recommendation.</p>"
+                        "smithy.api#documentation": "<p>The ID for the recommendation.</p>"
                     }
                 },
                 "GenerationTimestamp": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp for when Amazon Web Services made this recommendation.</p>"
+                        "smithy.api#documentation": "<p>The timestamp for when Amazon Web Services made the recommendation.</p>"
+                    }
+                },
+                "AdditionalMetadata": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional metadata that might be applicable to the recommendation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about this specific recommendation, such as the timestamp for when Amazon Web Services made a specific recommendation.</p>"
+                "smithy.api#documentation": "<p>Information about a recommendation, such as the timestamp for when Amazon Web Services\n            made a specific recommendation.</p>"
             }
         },
         "com.amazonaws.costexplorer#ReservationPurchaseRecommendationSummary": {
@@ -7690,19 +7696,19 @@
                 "RecommendationId": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for this specific recommendation.</p>"
+                        "smithy.api#documentation": "<p>The ID for the recommendation.</p>"
                     }
                 },
                 "GenerationTimestamp": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp for when Amazon Web Services made this recommendation.</p>"
+                        "smithy.api#documentation": "<p>The timestamp for when Amazon Web Services made the recommendation.</p>"
                     }
                 },
                 "LookbackPeriodInDays": {
                     "target": "com.amazonaws.costexplorer#LookbackPeriodInDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days of previous usage that Amazon Web Services considers when making\n            this recommendation.</p>"
+                        "smithy.api#documentation": "<p>The number of days of previous usage that Amazon Web Services considers when making the\n            recommendation.</p>"
                     }
                 },
                 "AdditionalMetadata": {
@@ -7713,7 +7719,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata for this recommendation set.</p>"
+                "smithy.api#documentation": "<p>Metadata for a recommendation set.</p>"
             }
         },
         "com.amazonaws.costexplorer#RightsizingRecommendationSummary": {

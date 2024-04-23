@@ -993,6 +993,45 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))$"
             }
         },
+        "com.amazonaws.bedrockagentruntime#ByteContentBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10485760
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ByteContentDoc": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.bedrockagentruntime#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file name of the document contained in the wrapper object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.bedrockagentruntime#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the document contained in the wrapper object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.bedrockagentruntime#ByteContentBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The byte value of the file to upload, encoded as a Base-64 string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This property contains the document to chat with, along with its attributes.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#Citation": {
             "type": "structure",
             "members": {
@@ -1055,6 +1094,12 @@
                 "target": "com.amazonaws.bedrockagentruntime#Parameters"
             }
         },
+        "com.amazonaws.bedrockagentruntime#ContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[a-z]{1,20}/.{1,20}"
+            }
+        },
         "com.amazonaws.bedrockagentruntime#CreationMode": {
             "type": "enum",
             "members": {
@@ -1089,6 +1134,104 @@
                 "smithy.api#documentation": "<p>There was an issue with a dependency. Check the resource configurations and retry the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 424
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ExternalSource": {
+            "type": "structure",
+            "members": {
+                "sourceType": {
+                    "target": "com.amazonaws.bedrockagentruntime#ExternalSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source type of the external source wrapper object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Location": {
+                    "target": "com.amazonaws.bedrockagentruntime#S3ObjectDoc",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 location of the external source wrapper object.</p>"
+                    }
+                },
+                "byteContent": {
+                    "target": "com.amazonaws.bedrockagentruntime#ByteContentDoc",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier, contentType, and data of the external source wrapper object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The unique external source of the content contained in the wrapper object.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ExternalSourceType": {
+            "type": "enum",
+            "members": {
+                "S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3"
+                    }
+                },
+                "BYTE_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYTE_CONTENT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ExternalSources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#ExternalSource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ExternalSourcesGenerationConfiguration": {
+            "type": "structure",
+            "members": {
+                "promptTemplate": {
+                    "target": "com.amazonaws.bedrockagentruntime#PromptTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contain the textPromptTemplate string for the external source wrapper object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the generation configuration of the external source wrapper object.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#ExternalSourcesRetrieveAndGenerateConfiguration": {
+            "type": "structure",
+            "members": {
+                "modelArn": {
+                    "target": "com.amazonaws.bedrockagentruntime#BedrockModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The modelArn used with the external source wrapper object in the retrieveAndGenerate function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.bedrockagentruntime#ExternalSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document used with the external source wrapper object in the retrieveAndGenerate function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "generationConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#ExternalSourcesGenerationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prompt used with the external source wrapper object with the retrieveAndGenerate function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configurations of the external source wrapper object in the retrieveAndGenerate function.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#FailureReasonString": {
@@ -1296,6 +1439,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains configurations for response generation based on the knowledge base query results.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax\">RetrieveAndGenerate request</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#Identifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.bedrockagentruntime#InferenceConfiguration": {
@@ -2707,6 +2860,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains details about the resource being queried.</p>"
                     }
+                },
+                "externalSourcesConfiguration": {
+                    "target": "com.amazonaws.bedrockagentruntime#ExternalSourcesRetrieveAndGenerateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration used with the external source wrapper object in the retrieveAndGenerate function.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2840,6 +2999,12 @@
                     "traits": {
                         "smithy.api#enumValue": "KNOWLEDGE_BASE"
                     }
+                },
+                "EXTERNAL_SOURCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL_SOURCES"
+                    }
                 }
             }
         },
@@ -2970,6 +3135,31 @@
             "traits": {
                 "smithy.api#documentation": "<p>Contains information to return from the action group that the agent has predicted to invoke.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax\">Retrieve response</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#S3ObjectDoc": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.bedrockagentruntime#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file location of the S3 wrapper object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The unique wrapper object of the document from the S3 location.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.{1,1024}$"
             }
         },
         "com.amazonaws.bedrockagentruntime#SearchType": {

@@ -1933,6 +1933,16 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))$"
             }
         },
+        "com.amazonaws.bedrockagent#BucketOwnerAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
         "com.amazonaws.bedrockagent#ChunkingConfiguration": {
             "type": "structure",
             "members": {
@@ -2451,6 +2461,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "dataDeletionPolicy": {
+                    "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deletion policy for the requested data source</p>"
+                    }
+                },
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.bedrockagent#ServerSideEncryptionConfiguration",
                     "traits": {
@@ -2622,6 +2638,23 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#DataDeletionPolicy": {
+            "type": "enum",
+            "members": {
+                "RETAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETAIN"
+                    }
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#DataSource": {
             "type": "structure",
             "members": {
@@ -2678,6 +2711,12 @@
                         "smithy.api#documentation": "<p>Contains details about how to ingest the documents in the data source.</p>"
                     }
                 },
+                "dataDeletionPolicy": {
+                    "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deletion policy for the data source.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagent#DateTimestamp",
                     "traits": {
@@ -2690,6 +2729,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the data source was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.bedrockagent#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the failure reasons related to the data source.</p>"
                     }
                 }
             },
@@ -2751,6 +2796,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_UNSUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_UNSUCCESSFUL"
                     }
                 }
             }
@@ -4847,6 +4898,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "DELETE_UNSUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_UNSUCCESSFUL"
+                    }
                 }
             }
         },
@@ -6499,6 +6556,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of S3 prefixes that define the object containing the data sources. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a>.</p>"
                     }
+                },
+                "bucketOwnerAccountId": {
+                    "target": "com.amazonaws.bedrockagent#BucketOwnerAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID for the owner of the S3 bucket.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7576,6 +7639,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains details about the storage configuration of the data source.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "dataDeletionPolicy": {
+                    "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data deletion policy of the updated data source.</p>"
                     }
                 },
                 "serverSideEncryptionConfiguration": {
