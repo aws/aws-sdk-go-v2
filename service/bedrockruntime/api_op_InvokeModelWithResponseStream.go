@@ -12,10 +12,13 @@ import (
 	"sync"
 )
 
-// Invoke the specified Bedrock model to run inference using the input provided.
-// Return the response in a stream. For more information, see Run inference (https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html)
-// in the Bedrock User Guide. For an example request and response, see Examples
-// (after the Errors section).
+// Invoke the specified Amazon Bedrock model to run inference using the prompt and
+// inference parameters provided in the request body. The response is returned in a
+// stream. To see if a model supports streaming, call GetFoundationModel (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html)
+// and check the responseStreamingSupported field in the response. The CLI doesn't
+// support InvokeModelWithResponseStream . For example code, see Invoke model with
+// streaming code example in the Amazon Bedrock User Guide. This operation requires
+// permissions to perform the bedrock:InvokeModelWithResponseStream action.
 func (c *Client) InvokeModelWithResponseStream(ctx context.Context, params *InvokeModelWithResponseStreamInput, optFns ...func(*Options)) (*InvokeModelWithResponseStreamOutput, error) {
 	if params == nil {
 		params = &InvokeModelWithResponseStreamInput{}
@@ -33,14 +36,29 @@ func (c *Client) InvokeModelWithResponseStream(ctx context.Context, params *Invo
 
 type InvokeModelWithResponseStreamInput struct {
 
-	// Inference input in the format specified by the content-type. To see the format
-	// and content of this field for different models, refer to Inference parameters (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
-	// .
+	// The prompt and inference parameters in the format specified in the contentType
+	// in the header. To see the format and content of the request and response bodies
+	// for different models, refer to Inference parameters (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
+	// . For more information, see Run inference (https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html)
+	// in the Bedrock User Guide.
 	//
 	// This member is required.
 	Body []byte
 
-	// Id of the model to invoke using the streaming request.
+	// The unique identifier of the model to invoke to run inference. The modelId to
+	// provide depends on the type of model that you use:
+	//   - If you use a base model, specify the model ID or its ARN. For a list of
+	//   model IDs for base models, see Amazon Bedrock base model IDs (on-demand
+	//   throughput) (https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns)
+	//   in the Amazon Bedrock User Guide.
+	//   - If you use a provisioned model, specify the ARN of the Provisioned
+	//   Throughput. For more information, see Run inference using a Provisioned
+	//   Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html)
+	//   in the Amazon Bedrock User Guide.
+	//   - If you use a custom model, first purchase Provisioned Throughput for it.
+	//   Then specify the ARN of the resulting provisioned model. For more information,
+	//   see Use a custom model in Amazon Bedrock (https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html)
+	//   in the Amazon Bedrock User Guide.
 	//
 	// This member is required.
 	ModelId *string
@@ -52,6 +70,22 @@ type InvokeModelWithResponseStreamInput struct {
 	// The MIME type of the input data in the request. The default value is
 	// application/json .
 	ContentType *string
+
+	// The unique identifier of the guardrail that you want to use. If you don't
+	// provide a value, no guardrail is applied to the invocation. An error is thrown
+	// in the following situations.
+	//   - You don't provide a guardrail identifier but you specify the
+	//   amazon-bedrock-guardrailConfig field in the request body.
+	//   - You enable the guardrail but the contentType isn't application/json .
+	//   - You provide a guardrail identifier, but guardrailVersion isn't specified.
+	GuardrailIdentifier *string
+
+	// The version number for the guardrail. The value can also be DRAFT .
+	GuardrailVersion *string
+
+	// Specifies whether to enable or disable the Bedrock trace. If enabled, you can
+	// see the full Bedrock trace.
+	Trace types.Trace
 
 	noSmithyDocumentSerde
 }

@@ -694,8 +694,14 @@ type DataSource struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The deletion policy for the data source.
+	DataDeletionPolicy DataDeletionPolicy
+
 	// The description of the data source.
 	Description *string
+
+	// The details of the failure reasons related to the data source.
+	FailureReasons []string
 
 	// Contains details about the configuration of the server-side encryption.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
@@ -1442,6 +1448,9 @@ type S3DataSourceConfiguration struct {
 	//
 	// This member is required.
 	BucketArn *string
+
+	// The account ID for the owner of the S3 bucket.
+	BucketOwnerAccountId *string
 
 	// A list of S3 prefixes that define the object containing the data sources. For
 	// more information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)

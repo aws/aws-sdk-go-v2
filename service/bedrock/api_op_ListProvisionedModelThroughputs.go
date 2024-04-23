@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// List the provisioned capacities. For more information, see Provisioned
-// throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// Lists the Provisioned Throughputs in the account. For more information, see
+// Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
+// in the Amazon Bedrock User Guide.
 func (c *Client) ListProvisionedModelThroughputs(ctx context.Context, params *ListProvisionedModelThroughputsInput, optFns ...func(*Options)) (*ListProvisionedModelThroughputsOutput, error) {
 	if params == nil {
 		params = &ListProvisionedModelThroughputsInput{}
@@ -32,34 +32,39 @@ func (c *Client) ListProvisionedModelThroughputs(ctx context.Context, params *Li
 
 type ListProvisionedModelThroughputsInput struct {
 
-	// Return provisioned capacities created after the specified time.
+	// A filter that returns Provisioned Throughputs created after the specified time.
 	CreationTimeAfter *time.Time
 
-	// Return provisioned capacities created before the specified time.
+	// A filter that returns Provisioned Throughputs created before the specified time.
 	CreationTimeBefore *time.Time
 
-	// THe maximum number of results to return in the response.
+	// THe maximum number of results to return in the response. If there are more
+	// results than the number you specified, the response returns a nextToken value.
+	// To see the next batch of results, send the nextToken value in another list
+	// request.
 	MaxResults *int32
 
-	// Return the list of provisioned capacities where their model ARN is equal to
-	// this parameter.
+	// A filter that returns Provisioned Throughputs whose model Amazon Resource Name
+	// (ARN) is equal to the value that you specify.
 	ModelArnEquals *string
 
-	// Return the list of provisioned capacities if their name contains these
-	// characters.
+	// A filter that returns Provisioned Throughputs if their name contains the
+	// expression that you specify.
 	NameContains *string
 
-	// Continuation token from the previous response, for Amazon Bedrock to list the
-	// next set of results.
+	// If there are more results than the number you specified in the maxResults
+	// field, the response returns a nextToken value. To see the next batch of
+	// results, specify the nextToken value in this field.
 	NextToken *string
 
-	// The field to sort by in the returned list of provisioned capacities.
+	// The field by which to sort the returned list of Provisioned Throughputs.
 	SortBy types.SortByProvisionedModels
 
 	// The sort order of the results.
 	SortOrder types.SortOrder
 
-	// Return the list of provisioned capacities that match the specified status.
+	// A filter that returns Provisioned Throughputs if their statuses matches the
+	// value that you specify.
 	StatusEquals types.ProvisionedModelStatus
 
 	noSmithyDocumentSerde
@@ -67,10 +72,12 @@ type ListProvisionedModelThroughputsInput struct {
 
 type ListProvisionedModelThroughputsOutput struct {
 
-	// Continuation token for the next request to list the next set of results.
+	// If there are more results than the number you specified in the maxResults
+	// field, this value is returned. To see the next batch of results, include this
+	// value in the nextToken field in another list request.
 	NextToken *string
 
-	// List of summaries, one for each provisioned throughput in the response.
+	// A list of summaries, one for each Provisioned Throughput in the response.
 	ProvisionedModelSummaries []types.ProvisionedModelSummary
 
 	// Metadata pertaining to the operation's result.
@@ -166,7 +173,10 @@ var _ ListProvisionedModelThroughputsAPIClient = (*Client)(nil)
 // ListProvisionedModelThroughputsPaginatorOptions is the paginator options for
 // ListProvisionedModelThroughputs
 type ListProvisionedModelThroughputsPaginatorOptions struct {
-	// THe maximum number of results to return in the response.
+	// THe maximum number of results to return in the response. If there are more
+	// results than the number you specified, the response returns a nextToken value.
+	// To see the next batch of results, send the nextToken value in another list
+	// request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

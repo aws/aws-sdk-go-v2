@@ -87,6 +87,16 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelInput(v *InvokeModelInput, e
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
+	if v.GuardrailIdentifier != nil && len(*v.GuardrailIdentifier) > 0 {
+		locationName := "X-Amzn-Bedrock-Guardrailidentifier"
+		encoder.SetHeader(locationName).String(*v.GuardrailIdentifier)
+	}
+
+	if v.GuardrailVersion != nil && len(*v.GuardrailVersion) > 0 {
+		locationName := "X-Amzn-Bedrock-Guardrailversion"
+		encoder.SetHeader(locationName).String(*v.GuardrailVersion)
+	}
+
 	if v.ModelId == nil || len(*v.ModelId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member modelId must not be empty")}
 	}
@@ -94,6 +104,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelInput(v *InvokeModelInput, e
 		if err := encoder.SetURI("modelId").String(*v.ModelId); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Trace) > 0 {
+		locationName := "X-Amzn-Bedrock-Trace"
+		encoder.SetHeader(locationName).String(string(v.Trace))
 	}
 
 	return nil
@@ -174,6 +189,16 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelWithResponseStreamInput(v *I
 		encoder.SetHeader(locationName).String(*v.ContentType)
 	}
 
+	if v.GuardrailIdentifier != nil && len(*v.GuardrailIdentifier) > 0 {
+		locationName := "X-Amzn-Bedrock-Guardrailidentifier"
+		encoder.SetHeader(locationName).String(*v.GuardrailIdentifier)
+	}
+
+	if v.GuardrailVersion != nil && len(*v.GuardrailVersion) > 0 {
+		locationName := "X-Amzn-Bedrock-Guardrailversion"
+		encoder.SetHeader(locationName).String(*v.GuardrailVersion)
+	}
+
 	if v.ModelId == nil || len(*v.ModelId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member modelId must not be empty")}
 	}
@@ -181,6 +206,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeModelWithResponseStreamInput(v *I
 		if err := encoder.SetURI("modelId").String(*v.ModelId); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Trace) > 0 {
+		locationName := "X-Amzn-Bedrock-Trace"
+		encoder.SetHeader(locationName).String(string(v.Trace))
 	}
 
 	return nil

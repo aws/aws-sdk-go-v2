@@ -1,0 +1,8 @@
+{
+    "id": "afff4f45-8881-4c0e-852d-801be4ce02ea",
+    "type": "documentation",
+    "description": "Clarifies how aggregation works for GetResourceMetrics in the Performance Insights API.",
+    "modules": [
+        "service/pi"
+    ]
+}

@@ -141,6 +141,27 @@ type Attribution struct {
 	noSmithyDocumentSerde
 }
 
+// This property contains the document to chat with, along with its attributes.
+type ByteContentDoc struct {
+
+	// The MIME type of the document contained in the wrapper object.
+	//
+	// This member is required.
+	ContentType *string
+
+	// The byte value of the file to upload, encoded as a Base-64 string.
+	//
+	// This member is required.
+	Data []byte
+
+	// The file name of the document contained in the wrapper object.
+	//
+	// This member is required.
+	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
 // An object containing a segment of the generated response that is based on a
 // source in the knowledge base, alongside information about the source. This data
 // type is used in the following API operations:
@@ -166,6 +187,55 @@ type ContentBody struct {
 
 	// The body of the API response.
 	Body *string
+
+	noSmithyDocumentSerde
+}
+
+// The unique external source of the content contained in the wrapper object.
+type ExternalSource struct {
+
+	// The source type of the external source wrapper object.
+	//
+	// This member is required.
+	SourceType ExternalSourceType
+
+	// The identifier, contentType, and data of the external source wrapper object.
+	ByteContent *ByteContentDoc
+
+	// The S3 location of the external source wrapper object.
+	S3Location *S3ObjectDoc
+
+	noSmithyDocumentSerde
+}
+
+// Contains the generation configuration of the external source wrapper object.
+type ExternalSourcesGenerationConfiguration struct {
+
+	// Contain the textPromptTemplate string for the external source wrapper object.
+	PromptTemplate *PromptTemplate
+
+	noSmithyDocumentSerde
+}
+
+// The configurations of the external source wrapper object in the
+// retrieveAndGenerate function.
+type ExternalSourcesRetrieveAndGenerateConfiguration struct {
+
+	// The modelArn used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// The document used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	//
+	// This member is required.
+	Sources []ExternalSource
+
+	// The prompt used with the external source wrapper object with the
+	// retrieveAndGenerate function.
+	GenerationConfiguration *ExternalSourcesGenerationConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1151,6 +1221,10 @@ type RetrieveAndGenerateConfiguration struct {
 	// This member is required.
 	Type RetrieveAndGenerateType
 
+	// The configuration used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	ExternalSourcesConfiguration *ExternalSourcesRetrieveAndGenerateConfiguration
+
 	// Contains details about the resource being queried.
 	KnowledgeBaseConfiguration *KnowledgeBaseRetrieveAndGenerateConfiguration
 
@@ -1233,6 +1307,17 @@ type ReturnControlPayload struct {
 	// need to be sent into the API operation or function, based on what the agent
 	// determines from its session with the user.
 	InvocationInputs []InvocationInputMember
+
+	noSmithyDocumentSerde
+}
+
+// The unique wrapper object of the document from the S3 location.
+type S3ObjectDoc struct {
+
+	// The file location of the S3 wrapper object.
+	//
+	// This member is required.
+	Uri *string
 
 	noSmithyDocumentSerde
 }

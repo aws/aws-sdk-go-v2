@@ -12,7 +12,7 @@ import (
 
 // Deletes a custom model that you created earlier. For more information, see
 // Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Bedrock User Guide.
+// in the Amazon Bedrock User Guide.
 func (c *Client) DeleteCustomModel(ctx context.Context, params *DeleteCustomModelInput, optFns ...func(*Options)) (*DeleteCustomModelOutput, error) {
 	if params == nil {
 		params = &DeleteCustomModelInput{}

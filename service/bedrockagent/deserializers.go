@@ -8444,6 +8444,15 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case "dataDeletionPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataDeletionPolicy to be of type string, got %T instead", value)
+				}
+				sv.DataDeletionPolicy = types.DataDeletionPolicy(jtv)
+			}
+
 		case "dataSourceConfiguration":
 			if err := awsRestjson1_deserializeDocumentDataSourceConfiguration(&sv.DataSourceConfiguration, value); err != nil {
 				return err
@@ -8465,6 +8474,11 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
 			}
 
 		case "knowledgeBaseId":
@@ -10585,6 +10599,15 @@ func awsRestjson1_deserializeDocumentS3DataSourceConfiguration(v **types.S3DataS
 					return fmt.Errorf("expected S3BucketArn to be of type string, got %T instead", value)
 				}
 				sv.BucketArn = ptr.String(jtv)
+			}
+
+		case "bucketOwnerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketOwnerAccountId to be of type string, got %T instead", value)
+				}
+				sv.BucketOwnerAccountId = ptr.String(jtv)
 			}
 
 		case "inclusionPrefixes":

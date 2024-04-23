@@ -376,6 +376,28 @@ func awsRestjson1_serializeDocumentApiResult(v *types.ApiResult, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentByteContentDoc(v *types.ByteContentDoc, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContentType != nil {
+		ok := object.Key("contentType")
+		ok.String(*v.ContentType)
+	}
+
+	if v.Data != nil {
+		ok := object.Key("data")
+		ok.Base64EncodeBytes(v.Data)
+	}
+
+	if v.Identifier != nil {
+		ok := object.Key("identifier")
+		ok.String(*v.Identifier)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContentBody(v *types.ContentBody, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -383,6 +405,85 @@ func awsRestjson1_serializeDocumentContentBody(v *types.ContentBody, value smith
 	if v.Body != nil {
 		ok := object.Key("body")
 		ok.String(*v.Body)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExternalSource(v *types.ExternalSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ByteContent != nil {
+		ok := object.Key("byteContent")
+		if err := awsRestjson1_serializeDocumentByteContentDoc(v.ByteContent, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3Location != nil {
+		ok := object.Key("s3Location")
+		if err := awsRestjson1_serializeDocumentS3ObjectDoc(v.S3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SourceType) > 0 {
+		ok := object.Key("sourceType")
+		ok.String(string(v.SourceType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExternalSources(v []types.ExternalSource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentExternalSource(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExternalSourcesGenerationConfiguration(v *types.ExternalSourcesGenerationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PromptTemplate != nil {
+		ok := object.Key("promptTemplate")
+		if err := awsRestjson1_serializeDocumentPromptTemplate(v.PromptTemplate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExternalSourcesRetrieveAndGenerateConfiguration(v *types.ExternalSourcesRetrieveAndGenerateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GenerationConfiguration != nil {
+		ok := object.Key("generationConfiguration")
+		if err := awsRestjson1_serializeDocumentExternalSourcesGenerationConfiguration(v.GenerationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelArn != nil {
+		ok := object.Key("modelArn")
+		ok.String(*v.ModelArn)
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentExternalSources(v.Sources, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -705,6 +806,13 @@ func awsRestjson1_serializeDocumentRetrieveAndGenerateConfiguration(v *types.Ret
 	object := value.Object()
 	defer object.Close()
 
+	if v.ExternalSourcesConfiguration != nil {
+		ok := object.Key("externalSourcesConfiguration")
+		if err := awsRestjson1_serializeDocumentExternalSourcesRetrieveAndGenerateConfiguration(v.ExternalSourcesConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KnowledgeBaseConfiguration != nil {
 		ok := object.Key("knowledgeBaseConfiguration")
 		if err := awsRestjson1_serializeDocumentKnowledgeBaseRetrieveAndGenerateConfiguration(v.KnowledgeBaseConfiguration, ok); err != nil {
@@ -757,6 +865,18 @@ func awsRestjson1_serializeDocumentReturnControlInvocationResults(v []types.Invo
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3ObjectDoc(v *types.S3ObjectDoc, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Uri != nil {
+		ok := object.Key("uri")
+		ok.String(*v.Uri)
+	}
+
 	return nil
 }
 

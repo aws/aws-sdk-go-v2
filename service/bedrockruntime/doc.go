@@ -3,5 +3,5 @@
 // Package bedrockruntime provides the API client, operations, and parameter types
 // for Amazon Bedrock Runtime.
 //
-// Describes the API operations for running inference using Bedrock models.
+// Describes the API operations for running inference using Amazon Bedrock models.
 package bedrockruntime

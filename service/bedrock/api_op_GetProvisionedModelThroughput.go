@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Get details for a provisioned throughput. For more information, see Provisioned
-// throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// Returns details for a Provisioned Throughput. For more information, see
+// Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
+// in the Amazon Bedrock User Guide.
 func (c *Client) GetProvisionedModelThroughput(ctx context.Context, params *GetProvisionedModelThroughputInput, optFns ...func(*Options)) (*GetProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &GetProvisionedModelThroughputInput{}
@@ -32,7 +32,7 @@ func (c *Client) GetProvisionedModelThroughput(ctx context.Context, params *GetP
 
 type GetProvisionedModelThroughputInput struct {
 
-	// The ARN or name of the provisioned throughput.
+	// The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
 	//
 	// This member is required.
 	ProvisionedModelId *string
@@ -42,65 +42,70 @@ type GetProvisionedModelThroughputInput struct {
 
 type GetProvisionedModelThroughputOutput struct {
 
-	// The timestamp of the creation time for this provisioned throughput.
+	// The timestamp of the creation time for this Provisioned Throughput.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The ARN of the new model to asssociate with this provisioned throughput.
+	// The Amazon Resource Name (ARN) of the model requested to be associated to this
+	// Provisioned Throughput. This value differs from the modelArn if updating hasn't
+	// completed.
 	//
 	// This member is required.
 	DesiredModelArn *string
 
-	// The desired number of model units that was requested to be available for this
-	// provisioned throughput.
+	// The number of model units that was requested for this Provisioned Throughput.
 	//
 	// This member is required.
 	DesiredModelUnits *int32
 
-	// ARN of the foundation model.
+	// The Amazon Resource Name (ARN) of the base model for which the Provisioned
+	// Throughput was created, or of the base model that the custom model for which the
+	// Provisioned Throughput was created was customized.
 	//
 	// This member is required.
 	FoundationModelArn *string
 
-	// The timestamp of the last modified time of this provisioned throughput.
+	// The timestamp of the last time that this Provisioned Throughput was modified.
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The ARN or name of the model associated with this provisioned throughput.
+	// The Amazon Resource Name (ARN) of the model associated with this Provisioned
+	// Throughput.
 	//
 	// This member is required.
 	ModelArn *string
 
-	// The current number of model units requested to be available for this
-	// provisioned throughput.
+	// The number of model units allocated to this Provisioned Throughput.
 	//
 	// This member is required.
 	ModelUnits *int32
 
-	// The ARN of the provisioned throughput.
+	// The Amazon Resource Name (ARN) of the Provisioned Throughput.
 	//
 	// This member is required.
 	ProvisionedModelArn *string
 
-	// The name of the provisioned throughput.
+	// The name of the Provisioned Throughput.
 	//
 	// This member is required.
 	ProvisionedModelName *string
 
-	// Status of the provisioned throughput.
+	// The status of the Provisioned Throughput.
 	//
 	// This member is required.
 	Status types.ProvisionedModelStatus
 
-	// Commitment duration of the provisioned throughput.
+	// Commitment duration of the Provisioned Throughput.
 	CommitmentDuration types.CommitmentDuration
 
-	// Commitment expiration time for the provisioned throughput.
+	// The timestamp for when the commitment term for the Provisioned Throughput
+	// expires.
 	CommitmentExpirationTime *time.Time
 
-	// Failure message for any issues that the create operation encounters.
+	// A failure message for any issues that occurred during creation, updating, or
+	// deletion of the Provisioned Throughput.
 	FailureMessage *string
 
 	// Metadata pertaining to the operation's result.

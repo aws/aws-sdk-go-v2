@@ -14,7 +14,7 @@ import (
 
 // Returns a list of the custom models that you have created with the
 // CreateModelCustomizationJob operation. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Bedrock User Guide.
+// in the Amazon Bedrock User Guide.
 func (c *Client) ListCustomModels(ctx context.Context, params *ListCustomModelsInput, optFns ...func(*Options)) (*ListCustomModelsOutput, error) {
 	if params == nil {
 		params = &ListCustomModelsInput{}
@@ -32,7 +32,8 @@ func (c *Client) ListCustomModels(ctx context.Context, params *ListCustomModelsI
 
 type ListCustomModelsInput struct {
 
-	// Return custom models only if the base model ARN matches this parameter.
+	// Return custom models only if the base model Amazon Resource Name (ARN) matches
+	// this parameter.
 	BaseModelArnEquals *string
 
 	// Return custom models created after the specified time.
@@ -41,7 +42,8 @@ type ListCustomModelsInput struct {
 	// Return custom models created before the specified time.
 	CreationTimeBefore *time.Time
 
-	// Return custom models only if the foundation model ARN matches this parameter.
+	// Return custom models only if the foundation model Amazon Resource Name (ARN)
+	// matches this parameter.
 	FoundationModelArnEquals *string
 
 	// Maximum number of results to return in the response.

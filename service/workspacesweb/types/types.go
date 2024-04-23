@@ -17,12 +17,19 @@ type BrowserSettings struct {
 	// This member is required.
 	BrowserSettingsArn *string
 
+	// The additional encryption context of the browser settings.
+	AdditionalEncryptionContext map[string]string
+
 	// A list of web portal ARNs that this browser settings is associated with.
 	AssociatedPortalArns []string
 
 	// A JSON string containing Chrome Enterprise policies that will be applied to all
 	// streaming sessions.
 	BrowserPolicy *string
+
+	// The customer managed key used to encrypt sensitive information in the browser
+	// settings.
+	CustomerManagedKey *string
 
 	noSmithyDocumentSerde
 }
@@ -156,7 +163,10 @@ type IdentityProvider struct {
 	//   - jwks_uri if not available from discovery URL specified by oidc_issuer key
 	//   - For SAML providers:
 	//   - MetadataFile OR MetadataURL
-	//   - IDPSignout optional
+	//   - IDPSignout (boolean) optional
+	//   - IDPInit (boolean) optional
+	//   - RequestSigningAlgorithm (string) optional - Only accepts rsa-sha256
+	//   - EncryptedResponses (boolean) optional
 	IdentityProviderDetails map[string]string
 
 	// The identity provider name.
@@ -193,12 +203,19 @@ type IpAccessSettings struct {
 	// This member is required.
 	IpAccessSettingsArn *string
 
+	// The additional encryption context of the IP access settings.
+	AdditionalEncryptionContext map[string]string
+
 	// A list of web portal ARNs that this IP access settings resource is associated
 	// with.
 	AssociatedPortalArns []string
 
 	// The creation date timestamp of the IP access settings.
 	CreationDate *time.Time
+
+	// The customer managed key used to encrypt sensitive information in the IP access
+	// settings.
+	CustomerManagedKey *string
 
 	// The description of the IP access settings.
 	Description *string
@@ -296,16 +313,18 @@ type Portal struct {
 	// This member is required.
 	PortalArn *string
 
+	// The additional encryption context of the portal.
+	AdditionalEncryptionContext map[string]string
+
 	// The type of authentication integration points used when signing into the web
 	// portal. Defaults to Standard . Standard web portals are authenticated directly
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
-	// your web portal is controlled through your identity provider.
-	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
-	// Center (successor to AWS Single Sign-On). They provide additional features, such
-	// as IdP-initiated authentication. Identity sources (including external identity
-	// provider integration), plus user and group access to your web portal, can be
-	// configured in the IAM Identity Center.
+	// your web portal is controlled through your identity provider. IAM Identity
+	// Center web portals are authenticated through IAM Identity Center (successor to
+	// Single Sign-On). Identity sources (including external identity provider
+	// integration), plus user and group access to your web portal, can be configured
+	// in the IAM Identity Center.
 	AuthenticationType AuthenticationType
 
 	// The ARN of the browser settings that is associated with this web portal.
@@ -317,11 +336,20 @@ type Portal struct {
 	// The creation date of the web portal.
 	CreationDate *time.Time
 
+	// The customer managed key used to encrypt sensitive information in the portal.
+	CustomerManagedKey *string
+
 	// The name of the web portal.
 	DisplayName *string
 
+	// The type and resources of the underlying instance.
+	InstanceType InstanceType
+
 	// The ARN of the IP access settings.
 	IpAccessSettingsArn *string
+
+	// The maximum number of concurrent sessions for the portal.
+	MaxConcurrentSessions *int32
 
 	// The ARN of the network settings that is associated with the web portal.
 	NetworkSettingsArn *string
@@ -364,12 +392,11 @@ type PortalSummary struct {
 	// portal. Defaults to Standard . Standard web portals are authenticated directly
 	// through your identity provider. You need to call CreateIdentityProvider to
 	// integrate your identity provider with your web portal. User and group access to
-	// your web portal is controlled through your identity provider.
-	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
-	// Center (successor to AWS Single Sign-On). They provide additional features, such
-	// as IdP-initiated authentication. Identity sources (including external identity
-	// provider integration), plus user and group access to your web portal, can be
-	// configured in the IAM Identity Center.
+	// your web portal is controlled through your identity provider. IAM Identity
+	// Center web portals are authenticated through IAM Identity Center (successor to
+	// Single Sign-On). Identity sources (including external identity provider
+	// integration), plus user and group access to your web portal, can be configured
+	// in the IAM Identity Center.
 	AuthenticationType AuthenticationType
 
 	// The ARN of the browser settings that is associated with the web portal.
@@ -384,8 +411,14 @@ type PortalSummary struct {
 	// The name of the web portal.
 	DisplayName *string
 
+	// The type and resources of the underlying instance.
+	InstanceType InstanceType
+
 	// The ARN of the IP access settings.
 	IpAccessSettingsArn *string
+
+	// The maximum number of concurrent sessions for the portal.
+	MaxConcurrentSessions *int32
 
 	// The ARN of the network settings that is associated with the web portal.
 	NetworkSettingsArn *string
@@ -500,6 +533,9 @@ type UserSettings struct {
 	// This member is required.
 	UserSettingsArn *string
 
+	// The additional encryption context of the user settings.
+	AdditionalEncryptionContext map[string]string
+
 	// A list of web portal ARNs that this user settings is associated with.
 	AssociatedPortalArns []string
 
@@ -510,6 +546,10 @@ type UserSettings struct {
 	// Specifies whether the user can copy text from the streaming session to the
 	// local device.
 	CopyAllowed EnabledType
+
+	// The customer managed key used to encrypt sensitive information in the user
+	// settings.
+	CustomerManagedKey *string
 
 	// The amount of time that a streaming session remains active after users
 	// disconnect.

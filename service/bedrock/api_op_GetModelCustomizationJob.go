@@ -14,7 +14,7 @@ import (
 
 // Retrieves the properties associated with a model-customization job, including
 // the status of the job. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Bedrock User Guide.
+// in the Amazon Bedrock User Guide.
 func (c *Client) GetModelCustomizationJob(ctx context.Context, params *GetModelCustomizationJobInput, optFns ...func(*Options)) (*GetModelCustomizationJobOutput, error) {
 	if params == nil {
 		params = &GetModelCustomizationJobInput{}
@@ -42,7 +42,7 @@ type GetModelCustomizationJobInput struct {
 
 type GetModelCustomizationJobOutput struct {
 
-	// ARN of the base model.
+	// Amazon Resource Name (ARN) of the base model.
 	//
 	// This member is required.
 	BaseModelArn *string
@@ -52,14 +52,14 @@ type GetModelCustomizationJobOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The hyperparameter values for the job. For information about hyperparameters
-	// for specific models, see Guidelines for model customization (https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-guidelines.html)
+	// The hyperparameter values for the job. For details on the format for different
+	// models, see Custom model hyperparameters (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html)
 	// .
 	//
 	// This member is required.
 	HyperParameters map[string]string
 
-	// The ARN of the customization job.
+	// The Amazon Resource Name (ARN) of the customization job.
 	//
 	// This member is required.
 	JobArn *string
@@ -79,17 +79,17 @@ type GetModelCustomizationJobOutput struct {
 	// This member is required.
 	OutputModelName *string
 
-	// The ARN of the IAM role.
+	// The Amazon Resource Name (ARN) of the IAM role.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// S3 Location of the training data.
+	// Contains information about the training dataset.
 	//
 	// This member is required.
 	TrainingDataConfig *types.TrainingDataConfig
 
-	// Array of up to 10 validators.
+	// Contains information about the validation dataset.
 	//
 	// This member is required.
 	ValidationDataConfig *types.ValidationDataConfig
@@ -109,7 +109,7 @@ type GetModelCustomizationJobOutput struct {
 	// Time that the resource was last modified.
 	LastModifiedTime *time.Time
 
-	// The ARN of the output model.
+	// The Amazon Resource Name (ARN) of the output model.
 	OutputModelArn *string
 
 	// The custom model is encrypted at rest using this key.
@@ -120,7 +120,7 @@ type GetModelCustomizationJobOutput struct {
 	// message contains information about why the job failed.
 	Status types.ModelCustomizationJobStatus
 
-	// Metrics associated with the custom job.
+	// Contains training metrics from the job creation.
 	TrainingMetrics *types.TrainingMetrics
 
 	// The loss metric for each validator that you provided in the createjob request.

@@ -376,11 +376,14 @@ type MetricKeyDataPoints struct {
 	noSmithyDocumentSerde
 }
 
-// A single query to be processed. You must provide the metric to query. If no
-// other parameters are specified, Performance Insights returns all data points for
-// the specified metric. Optionally, you can request that the data points be
-// aggregated by dimension group ( GroupBy ), and return only those data points
-// that match your criteria ( Filter ).
+// A single query to be processed. You must provide the metric to query and append
+// an aggregate function to the metric. For example, to find the average for the
+// metric db.load you must use db.load.avg . Valid values for aggregate functions
+// include .avg , .min , .max , and .sum . If no other parameters are specified,
+// Performance Insights returns all data points for the specified metric.
+// Optionally, you can request that the data points be aggregated by dimension
+// group ( GroupBy ), and return only those data points that match your criteria (
+// Filter ).
 type MetricQuery struct {
 
 	// The name of a Performance Insights metric to be measured. Valid values for
@@ -391,6 +394,8 @@ type MetricQuery struct {
 	//   engine.
 	//   - The counter metrics listed in Performance Insights operating system counters (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS)
 	//   in the Amazon Aurora User Guide.
+	//   - The counter metrics listed in Performance Insights operating system counters (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS)
+	//   in the Amazon RDS User Guide.
 	// If the number of active sessions is less than an internal Performance Insights
 	// threshold, db.load.avg and db.sampledload.avg are the same value. If the number
 	// of active sessions is greater than the internal threshold, Performance Insights
@@ -489,6 +494,8 @@ type ResponseResourceMetricKey struct {
 	//   engine.
 	//   - The counter metrics listed in Performance Insights operating system counters (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS)
 	//   in the Amazon Aurora User Guide.
+	//   - The counter metrics listed in Performance Insights operating system counters (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS)
+	//   in the Amazon RDS User Guide.
 	// If the number of active sessions is less than an internal Performance Insights
 	// threshold, db.load.avg and db.sampledload.avg are the same value. If the number
 	// of active sessions is greater than the internal threshold, Performance Insights

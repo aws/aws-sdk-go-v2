@@ -25,6 +25,7 @@
         "protocol_test.go",
         "serializers.go",
         "snapshot_test.go",
+        "types/enums.go",
         "types/errors.go",
         "types/types.go",
         "types/types_exported_test.go",

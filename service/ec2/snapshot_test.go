@@ -4658,6 +4658,18 @@ func TestCheckSnapshot_DisableImageDeprecation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisableImageDeregistrationProtection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableImageDeregistrationProtection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisableImageDeregistrationProtection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableIpamOrganizationAdminAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableIpamOrganizationAdminAccount(context.Background(), nil, func(o *Options) {
@@ -5011,6 +5023,18 @@ func TestCheckSnapshot_EnableImageDeprecation(t *testing.T) {
 	_, err := svc.EnableImageDeprecation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableImageDeprecation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_EnableImageDeregistrationProtection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableImageDeregistrationProtection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "EnableImageDeregistrationProtection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -12073,6 +12097,18 @@ func TestUpdateSnapshot_DisableImageDeprecation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisableImageDeregistrationProtection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisableImageDeregistrationProtection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisableImageDeregistrationProtection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableIpamOrganizationAdminAccount(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableIpamOrganizationAdminAccount(context.Background(), nil, func(o *Options) {
@@ -12426,6 +12462,18 @@ func TestUpdateSnapshot_EnableImageDeprecation(t *testing.T) {
 	_, err := svc.EnableImageDeprecation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableImageDeprecation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_EnableImageDeregistrationProtection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.EnableImageDeregistrationProtection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "EnableImageDeregistrationProtection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

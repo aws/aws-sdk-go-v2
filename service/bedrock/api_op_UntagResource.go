@@ -11,8 +11,8 @@ import (
 )
 
 // Remove one or more tags from a resource. For more information, see Tagging
-// resources (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// resources (https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html) in
+// the Amazon Bedrock User Guide.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -30,7 +30,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The ARN of the resource to untag.
+	// The Amazon Resource Name (ARN) of the resource to untag.
 	//
 	// This member is required.
 	ResourceARN *string

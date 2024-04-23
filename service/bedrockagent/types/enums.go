@@ -142,12 +142,31 @@ func (CustomControlMethod) Values() []CustomControlMethod {
 	}
 }
 
+type DataDeletionPolicy string
+
+// Enum values for DataDeletionPolicy
+const (
+	DataDeletionPolicyRetain DataDeletionPolicy = "RETAIN"
+	DataDeletionPolicyDelete DataDeletionPolicy = "DELETE"
+)
+
+// Values returns all known values for DataDeletionPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataDeletionPolicy) Values() []DataDeletionPolicy {
+	return []DataDeletionPolicy{
+		"RETAIN",
+		"DELETE",
+	}
+}
+
 type DataSourceStatus string
 
 // Enum values for DataSourceStatus
 const (
-	DataSourceStatusAvailable DataSourceStatus = "AVAILABLE"
-	DataSourceStatusDeleting  DataSourceStatus = "DELETING"
+	DataSourceStatusAvailable          DataSourceStatus = "AVAILABLE"
+	DataSourceStatusDeleting           DataSourceStatus = "DELETING"
+	DataSourceStatusDeleteUnsuccessful DataSourceStatus = "DELETE_UNSUCCESSFUL"
 )
 
 // Values returns all known values for DataSourceStatus. Note that this can be
@@ -157,6 +176,7 @@ func (DataSourceStatus) Values() []DataSourceStatus {
 	return []DataSourceStatus{
 		"AVAILABLE",
 		"DELETING",
+		"DELETE_UNSUCCESSFUL",
 	}
 }
 
@@ -270,11 +290,12 @@ type KnowledgeBaseStatus string
 
 // Enum values for KnowledgeBaseStatus
 const (
-	KnowledgeBaseStatusCreating KnowledgeBaseStatus = "CREATING"
-	KnowledgeBaseStatusActive   KnowledgeBaseStatus = "ACTIVE"
-	KnowledgeBaseStatusDeleting KnowledgeBaseStatus = "DELETING"
-	KnowledgeBaseStatusUpdating KnowledgeBaseStatus = "UPDATING"
-	KnowledgeBaseStatusFailed   KnowledgeBaseStatus = "FAILED"
+	KnowledgeBaseStatusCreating           KnowledgeBaseStatus = "CREATING"
+	KnowledgeBaseStatusActive             KnowledgeBaseStatus = "ACTIVE"
+	KnowledgeBaseStatusDeleting           KnowledgeBaseStatus = "DELETING"
+	KnowledgeBaseStatusUpdating           KnowledgeBaseStatus = "UPDATING"
+	KnowledgeBaseStatusFailed             KnowledgeBaseStatus = "FAILED"
+	KnowledgeBaseStatusDeleteUnsuccessful KnowledgeBaseStatus = "DELETE_UNSUCCESSFUL"
 )
 
 // Values returns all known values for KnowledgeBaseStatus. Note that this can be
@@ -287,6 +308,7 @@ func (KnowledgeBaseStatus) Values() []KnowledgeBaseStatus {
 		"DELETING",
 		"UPDATING",
 		"FAILED",
+		"DELETE_UNSUCCESSFUL",
 	}
 }
 

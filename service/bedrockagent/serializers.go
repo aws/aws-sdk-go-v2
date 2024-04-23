@@ -581,6 +581,11 @@ func awsRestjson1_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 		ok.String(*v.ClientToken)
 	}
 
+	if len(v.DataDeletionPolicy) > 0 {
+		ok := object.Key("dataDeletionPolicy")
+		ok.String(string(v.DataDeletionPolicy))
+	}
+
 	if v.DataSourceConfiguration != nil {
 		ok := object.Key("dataSourceConfiguration")
 		if err := awsRestjson1_serializeDocumentDataSourceConfiguration(v.DataSourceConfiguration, ok); err != nil {
@@ -3585,6 +3590,11 @@ func awsRestjson1_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceIn
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DataDeletionPolicy) > 0 {
+		ok := object.Key("dataDeletionPolicy")
+		ok.String(string(v.DataDeletionPolicy))
+	}
+
 	if v.DataSourceConfiguration != nil {
 		ok := object.Key("dataSourceConfiguration")
 		if err := awsRestjson1_serializeDocumentDataSourceConfiguration(v.DataSourceConfiguration, ok); err != nil {
@@ -4370,6 +4380,11 @@ func awsRestjson1_serializeDocumentS3DataSourceConfiguration(v *types.S3DataSour
 	if v.BucketArn != nil {
 		ok := object.Key("bucketArn")
 		ok.String(*v.BucketArn)
+	}
+
+	if v.BucketOwnerAccountId != nil {
+		ok := object.Key("bucketOwnerAccountId")
+		ok.String(*v.BucketOwnerAccountId)
 	}
 
 	if v.InclusionPrefixes != nil {

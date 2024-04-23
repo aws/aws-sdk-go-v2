@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a provisioned throughput. For more information, see Provisioned
-// throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// Deletes a Provisioned Throughput. You can't delete a Provisioned Throughput
+// before the commitment term is over. For more information, see Provisioned
+// Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
+// in the Amazon Bedrock User Guide.
 func (c *Client) DeleteProvisionedModelThroughput(ctx context.Context, params *DeleteProvisionedModelThroughputInput, optFns ...func(*Options)) (*DeleteProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &DeleteProvisionedModelThroughputInput{}
@@ -30,7 +31,7 @@ func (c *Client) DeleteProvisionedModelThroughput(ctx context.Context, params *D
 
 type DeleteProvisionedModelThroughputInput struct {
 
-	// The ARN or name of the provisioned throughput.
+	// The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
 	//
 	// This member is required.
 	ProvisionedModelId *string
