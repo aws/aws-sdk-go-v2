@@ -1,0 +1,8 @@
+{
+    "id": "0e8c68cb-2c71-48d0-b26d-9108381339f8",
+    "type": "feature",
+    "description": "Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface",
+    "modules": [
+        "service/ec2"
+    ]
+}

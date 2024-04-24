@@ -1,0 +1,8 @@
+{
+    "id": "2db8e2f9-9521-4d52-9533-f2d6f34125b4",
+    "type": "feature",
+    "description": "Amazon GameLift releases container fleets support for public preview. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

@@ -11,13 +11,23 @@ import (
 	"time"
 )
 
-// Requests an authentication token from Amazon GameLift for a registered compute
-// in an Anywhere fleet. The game servers that are running on the compute use this
-// token to authenticate with the Amazon GameLift service. Each server process must
-// provide a valid authentication token in its call to the Amazon GameLift server
-// SDK action InitSDK() . Authentication tokens are valid for a limited time span.
-// Use a mechanism to regularly request a fresh authentication token before the
-// current token expires. Learn more
+// Requests an authentication token from Amazon GameLift for a compute resource in
+// an Amazon GameLift Anywhere fleet or container fleet. Game servers that are
+// running on the compute use this token to communicate with the Amazon GameLift
+// service, such as when calling the Amazon GameLift server SDK action InitSDK() .
+// Authentication tokens are valid for a limited time span, so you need to request
+// a fresh token before the current token expires. Use this operation based on the
+// fleet compute type:
+//   - For EC2 fleets, auth token retrieval and refresh is handled automatically.
+//     All game servers that are running on all fleet instances have access to a valid
+//     auth token.
+//   - For ANYWHERE and CONTAINER fleets, if you're using the Amazon GameLift
+//     Agent, auth token retrieval and refresh is handled automatically for any
+//     container or Anywhere compute where the Agent is running. If you're not using
+//     the Agent, create a mechanism to retrieve and refresh auth tokens for computes
+//     that are running game server processes.
+//
+// Learn more
 //   - Create an Anywhere fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-anywhere.html)
 //   - Test your integration (https://docs.aws.amazon.com/gamelift/latest/developerguide/integration-testing.html)
 //   - Server SDK reference guides (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html)
@@ -40,7 +50,11 @@ func (c *Client) GetComputeAuthToken(ctx context.Context, params *GetComputeAuth
 type GetComputeAuthTokenInput struct {
 
 	// The name of the compute resource you are requesting the authentication token
-	// for.
+	// for. For an Anywhere fleet compute, use the registered compute name. For an EC2
+	// fleet instance, use the instance ID. For a container fleet, use the compute name
+	// (for example,
+	// a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9 ) or the
+	// compute ARN.
 	//
 	// This member is required.
 	ComputeName *string

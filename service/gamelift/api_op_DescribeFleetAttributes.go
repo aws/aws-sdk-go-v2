@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves core fleet-wide properties, including the computing hardware and
-// deployment configuration for all instances in the fleet. This operation can be
-// used in the following ways:
-//   - To get attributes for one or more specific fleets, provide a list of fleet
-//     IDs or fleet ARNs.
+// This operation has been expanded to use with the Amazon GameLift containers
+// feature, which is currently in public preview. Retrieves core fleet-wide
+// properties for fleets in an Amazon Web Services Region. Properties include the
+// computing hardware and deployment configuration for instances in the fleet. You
+// can use this operation in the following ways:
+//   - To get attributes for specific fleets, provide a list of fleet IDs or fleet
+//     ARNs.
 //   - To get attributes for all fleets, do not provide a fleet identifier.
 //
 // When requesting attributes for multiple fleets, use the pagination parameters

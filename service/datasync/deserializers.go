@@ -10928,6 +10928,80 @@ func awsAwsjson11_deserializeDocumentTaskSchedule(v **types.TaskSchedule, value 
 				sv.ScheduleExpression = ptr.String(jtv)
 			}
 
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduleStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ScheduleStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTaskScheduleDetails(v **types.TaskScheduleDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaskScheduleDetails
+	if *v == nil {
+		sv = &types.TaskScheduleDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisabledBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduleDisabledBy to be of type string, got %T instead", value)
+				}
+				sv.DisabledBy = types.ScheduleDisabledBy(jtv)
+			}
+
+		case "DisabledReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduleDisabledReason to be of type string, got %T instead", value)
+				}
+				sv.DisabledReason = ptr.String(jtv)
+			}
+
+		case "StatusUpdateTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StatusUpdateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Time to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13587,6 +13661,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 
 		case "Schedule":
 			if err := awsAwsjson11_deserializeDocumentTaskSchedule(&sv.Schedule, value); err != nil {
+				return err
+			}
+
+		case "ScheduleDetails":
+			if err := awsAwsjson11_deserializeDocumentTaskScheduleDetails(&sv.ScheduleDetails, value); err != nil {
 				return err
 			}
 

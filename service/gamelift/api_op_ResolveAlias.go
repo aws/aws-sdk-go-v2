@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the fleet ID that an alias is currently pointing to. Related actions
-// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// Attempts to retrieve a fleet ID that is associated with an alias. Specify a
+// unique alias identifier. If the alias has a SIMPLE routing strategy, Amazon
+// GameLift returns a fleet ID. If the alias has a TERMINAL routing strategy, the
+// result is a TerminalRoutingStrategyException . Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, optFns ...func(*Options)) (*ResolveAliasOutput, error) {
 	if params == nil {
 		params = &ResolveAliasInput{}

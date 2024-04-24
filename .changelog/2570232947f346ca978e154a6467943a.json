@@ -1,0 +1,8 @@
+{
+    "id": "25702329-47f3-46ca-978e-154a6467943a",
+    "type": "feature",
+    "description": "Support Batch Unique IDs Deletion.",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

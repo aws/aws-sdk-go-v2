@@ -70,6 +70,26 @@ func (m *validateOpCreateManagedEndpoint) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSecurityConfiguration struct {
+}
+
+func (*validateOpCreateSecurityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSecurityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSecurityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSecurityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateVirtualCluster struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpDescribeManagedEndpoint) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeManagedEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSecurityConfiguration struct {
+}
+
+func (*validateOpDescribeSecurityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSecurityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSecurityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSecurityConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -382,6 +422,10 @@ func addOpCreateManagedEndpointValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateManagedEndpoint{}, middleware.After)
 }
 
+func addOpCreateSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSecurityConfiguration{}, middleware.After)
+}
+
 func addOpCreateVirtualClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVirtualCluster{}, middleware.After)
 }
@@ -408,6 +452,10 @@ func addOpDescribeJobTemplateValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeManagedEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeManagedEndpoint{}, middleware.After)
+}
+
+func addOpDescribeSecurityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSecurityConfiguration{}, middleware.After)
 }
 
 func addOpDescribeVirtualClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -766,6 +814,27 @@ func validateOpCreateManagedEndpointInput(v *CreateManagedEndpointInput) error {
 	}
 }
 
+func validateOpCreateSecurityConfigurationInput(v *CreateSecurityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSecurityConfigurationInput"}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SecurityConfigurationData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityConfigurationData"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateVirtualClusterInput(v *CreateVirtualClusterInput) error {
 	if v == nil {
 		return nil
@@ -882,6 +951,21 @@ func validateOpDescribeManagedEndpointInput(v *DescribeManagedEndpointInput) err
 	}
 	if v.VirtualClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VirtualClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSecurityConfigurationInput(v *DescribeSecurityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSecurityConfigurationInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

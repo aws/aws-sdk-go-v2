@@ -602,6 +602,18 @@ func TestCheckSnapshot_DescribeInstancePatchStatesForPatchGroup(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeInstanceProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInstanceProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeInventoryDeletions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInventoryDeletions(context.Background(), nil, func(o *Options) {
@@ -2262,6 +2274,18 @@ func TestUpdateSnapshot_DescribeInstancePatchStatesForPatchGroup(t *testing.T) {
 	_, err := svc.DescribeInstancePatchStatesForPatchGroup(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeInstancePatchStatesForPatchGroup")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeInstanceProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInstanceProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInstanceProperties")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

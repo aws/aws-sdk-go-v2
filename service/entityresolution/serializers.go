@@ -14,6 +14,8 @@ import (
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"strconv"
+	"strings"
 )
 
 type awsRestjson1_serializeOpAddPolicyStatement struct {
@@ -125,6 +127,90 @@ func awsRestjson1_serializeOpDocumentAddPolicyStatementInput(v *AddPolicyStateme
 	if v.Principal != nil {
 		ok := object.Key("principal")
 		if err := awsRestjson1_serializeDocumentStatementPrincipalList(v.Principal, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpBatchDeleteUniqueId struct {
+}
+
+func (*awsRestjson1_serializeOpBatchDeleteUniqueId) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchDeleteUniqueId) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchDeleteUniqueIdInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/matchingworkflows/{workflowName}/uniqueids")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchDeleteUniqueIdInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchDeleteUniqueIdInput(v *BatchDeleteUniqueIdInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InputSource != nil && len(*v.InputSource) > 0 {
+		locationName := "Inputsource"
+		encoder.SetHeader(locationName).String(*v.InputSource)
+	}
+
+	if v.UniqueIds != nil {
+		locationName := "Uniqueids"
+		for i := range v.UniqueIds {
+			if len(v.UniqueIds[i]) > 0 {
+				escaped := v.UniqueIds[i]
+				if strings.Index(v.UniqueIds[i], `,`) != -1 || strings.Index(v.UniqueIds[i], `"`) != -1 {
+					escaped = strconv.Quote(v.UniqueIds[i])
+				}
+
+				encoder.AddHeader(locationName).String(escaped)
+			}
+		}
+	}
+
+	if v.WorkflowName == nil || len(*v.WorkflowName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member workflowName must not be empty")}
+	}
+	if v.WorkflowName != nil {
+		if err := encoder.SetURI("workflowName").String(*v.WorkflowName); err != nil {
 			return err
 		}
 	}

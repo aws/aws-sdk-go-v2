@@ -35,8 +35,10 @@ type UpdateTaskExecutionInput struct {
 	// DataSync handles files, objects, and their associated metadata during your
 	// transfer. You also can specify how to verify data integrity, set bandwidth
 	// limits for your task, among other options. Each option has a default value.
-	// Unless you need to, you don't have to configure any of these options before
-	// starting your task.
+	// Unless you need to, you don't have to configure any option before calling
+	// StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
+	// . You also can override your task options for each task execution. For example,
+	// you might want to adjust the LogLevel for an individual execution.
 	//
 	// This member is required.
 	Options *types.Options

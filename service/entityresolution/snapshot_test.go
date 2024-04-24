@@ -74,6 +74,18 @@ func TestCheckSnapshot_AddPolicyStatement(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchDeleteUniqueId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteUniqueId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteUniqueId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIdMappingWorkflow(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIdMappingWorkflow(context.Background(), nil, func(o *Options) {
@@ -498,6 +510,18 @@ func TestUpdateSnapshot_AddPolicyStatement(t *testing.T) {
 	_, err := svc.AddPolicyStatement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AddPolicyStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteUniqueId(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteUniqueId(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteUniqueId")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

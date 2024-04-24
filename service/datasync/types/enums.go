@@ -688,6 +688,42 @@ func (S3StorageClass) Values() []S3StorageClass {
 	}
 }
 
+type ScheduleDisabledBy string
+
+// Enum values for ScheduleDisabledBy
+const (
+	ScheduleDisabledByUser    ScheduleDisabledBy = "USER"
+	ScheduleDisabledByService ScheduleDisabledBy = "SERVICE"
+)
+
+// Values returns all known values for ScheduleDisabledBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleDisabledBy) Values() []ScheduleDisabledBy {
+	return []ScheduleDisabledBy{
+		"USER",
+		"SERVICE",
+	}
+}
+
+type ScheduleStatus string
+
+// Enum values for ScheduleStatus
+const (
+	ScheduleStatusEnabled  ScheduleStatus = "ENABLED"
+	ScheduleStatusDisabled ScheduleStatus = "DISABLED"
+)
+
+// Values returns all known values for ScheduleStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleStatus) Values() []ScheduleStatus {
+	return []ScheduleStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type SmbSecurityDescriptorCopyFlags string
 
 // Enum values for SmbSecurityDescriptorCopyFlags

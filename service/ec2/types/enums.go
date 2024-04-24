@@ -5831,10 +5831,11 @@ type NetworkInterfaceAttribute string
 
 // Enum values for NetworkInterfaceAttribute
 const (
-	NetworkInterfaceAttributeDescription     NetworkInterfaceAttribute = "description"
-	NetworkInterfaceAttributeGroupSet        NetworkInterfaceAttribute = "groupSet"
-	NetworkInterfaceAttributeSourceDestCheck NetworkInterfaceAttribute = "sourceDestCheck"
-	NetworkInterfaceAttributeAttachment      NetworkInterfaceAttribute = "attachment"
+	NetworkInterfaceAttributeDescription              NetworkInterfaceAttribute = "description"
+	NetworkInterfaceAttributeGroupSet                 NetworkInterfaceAttribute = "groupSet"
+	NetworkInterfaceAttributeSourceDestCheck          NetworkInterfaceAttribute = "sourceDestCheck"
+	NetworkInterfaceAttributeAttachment               NetworkInterfaceAttribute = "attachment"
+	NetworkInterfaceAttributeAssociatePublicIpAddress NetworkInterfaceAttribute = "associatePublicIpAddress"
 )
 
 // Values returns all known values for NetworkInterfaceAttribute. Note that this
@@ -5846,6 +5847,7 @@ func (NetworkInterfaceAttribute) Values() []NetworkInterfaceAttribute {
 		"groupSet",
 		"sourceDestCheck",
 		"attachment",
+		"associatePublicIpAddress",
 	}
 }
 

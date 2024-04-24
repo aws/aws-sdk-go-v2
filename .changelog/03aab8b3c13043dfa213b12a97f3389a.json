@@ -1,0 +1,8 @@
+{
+    "id": "03aab8b3-c130-43df-a213-b12a97f3389a",
+    "type": "feature",
+    "description": "EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.",
+    "modules": [
+        "service/emrcontainers"
+    ]
+}

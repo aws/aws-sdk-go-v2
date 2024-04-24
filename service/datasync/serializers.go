@@ -4065,6 +4065,11 @@ func awsAwsjson11_serializeDocumentTaskSchedule(v *types.TaskSchedule, value smi
 		ok.String(*v.ScheduleExpression)
 	}
 
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
 	return nil
 }
 

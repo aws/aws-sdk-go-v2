@@ -30,6 +30,26 @@ func (m *validateOpAddPolicyStatement) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDeleteUniqueId struct {
+}
+
+func (*validateOpBatchDeleteUniqueId) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteUniqueId) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteUniqueIdInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteUniqueIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIdMappingWorkflow struct {
 }
 
@@ -634,6 +654,10 @@ func addOpAddPolicyStatementValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpAddPolicyStatement{}, middleware.After)
 }
 
+func addOpBatchDeleteUniqueIdValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteUniqueId{}, middleware.After)
+}
+
 func addOpCreateIdMappingWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIdMappingWorkflow{}, middleware.After)
 }
@@ -1234,6 +1258,24 @@ func validateOpAddPolicyStatementInput(v *AddPolicyStatementInput) error {
 	}
 	if v.Principal == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteUniqueIdInput(v *BatchDeleteUniqueIdInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteUniqueIdInput"}
+	if v.WorkflowName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowName"))
+	}
+	if v.UniqueIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UniqueIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

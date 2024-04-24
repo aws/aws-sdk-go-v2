@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateManagedEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateSecurityConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSecurityConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSecurityConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateVirtualCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVirtualCluster(context.Background(), nil, func(o *Options) {
@@ -182,6 +194,18 @@ func TestCheckSnapshot_DescribeManagedEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeSecurityConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecurityConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeSecurityConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeVirtualCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeVirtualCluster(context.Background(), nil, func(o *Options) {
@@ -235,6 +259,18 @@ func TestCheckSnapshot_ListManagedEndpoints(t *testing.T) {
 	_, err := svc.ListManagedEndpoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListManagedEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSecurityConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSecurityConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSecurityConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -337,6 +373,18 @@ func TestUpdateSnapshot_CreateManagedEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateSecurityConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSecurityConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSecurityConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateVirtualCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateVirtualCluster(context.Background(), nil, func(o *Options) {
@@ -421,6 +469,18 @@ func TestUpdateSnapshot_DescribeManagedEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeSecurityConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeSecurityConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeSecurityConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeVirtualCluster(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeVirtualCluster(context.Background(), nil, func(o *Options) {
@@ -474,6 +534,18 @@ func TestUpdateSnapshot_ListManagedEndpoints(t *testing.T) {
 	_, err := svc.ListManagedEndpoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListManagedEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSecurityConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSecurityConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSecurityConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

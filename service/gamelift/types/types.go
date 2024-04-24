@@ -42,7 +42,7 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon GameLift Anywhere configuration options for your Anywhere fleets.
+// Amazon GameLift configuration options for your Anywhere fleets.
 type AnywhereConfiguration struct {
 
 	// The cost to run your fleet per hour. Amazon GameLift uses the provided cost of
@@ -158,10 +158,11 @@ type Build struct {
 	noSmithyDocumentSerde
 }
 
-// Determines whether a TLS/SSL certificate is generated for a fleet. This feature
-// must be enabled when creating the fleet. All instances in a fleet share the same
-// certificate. The certificate can be retrieved by calling the Amazon GameLift
-// Server SDK (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html)
+// This data type has been expanded to use with the Amazon GameLift containers
+// feature, which is currently in public preview. Determines whether a TLS/SSL
+// certificate is generated for a fleet. This feature must be enabled when creating
+// the fleet. All instances in a fleet share the same certificate. The certificate
+// can be retrieved by calling the Amazon GameLift Server SDK (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html)
 // operation GetInstanceCertificate .
 type CertificateConfiguration struct {
 
@@ -187,23 +188,32 @@ type ClaimFilterOption struct {
 	noSmithyDocumentSerde
 }
 
-// An Amazon GameLift compute resource for hosting your game servers. A compute
-// can be an EC2instance in a managed EC2 fleet or a registered compute in an
-// Anywhere fleet.
+// This data type has been expanded to use with the Amazon GameLift containers
+// feature, which is currently in public preview. An Amazon GameLift compute
+// resource for hosting your game servers. Computes in an Amazon GameLift fleet
+// differs depending on the fleet's compute type property as follows:
+//   - For EC2 fleets, a compute is an EC2 instance.
+//   - For ANYWHERE fleets, a compute is a computing resource that you provide and
+//     is registered to the fleet.
+//   - For CONTAINER fleets, a compute is a container that's registered to the
+//     fleet.
 type Compute struct {
 
 	// The ARN that is assigned to a compute resource and uniquely identifies it. ARNs
 	// are unique across locations. Instances in managed EC2 fleets are not assigned a
-	// ComputeARN.
+	// Compute ARN.
 	ComputeArn *string
 
 	// A descriptive label for the compute resource. For instances in a managed EC2
-	// fleet, the compute name is an instance ID.
+	// fleet, the compute name is the same value as the InstanceId ID.
 	ComputeName *string
 
 	// Current status of the compute. A compute must have an ACTIVE status to host
 	// game sessions.
 	ComputeStatus ComputeStatus
+
+	// Some attributes of a container.
+	ContainerAttributes *ContainerAttributes
 
 	// A time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057" ).
@@ -219,10 +229,17 @@ type Compute struct {
 	// A unique identifier for the fleet that the compute belongs to.
 	FleetId *string
 
+	// The endpoint of the Amazon GameLift Agent.
+	GameLiftAgentEndpoint *string
+
 	// The Amazon GameLift SDK endpoint connection for a registered compute resource
 	// in an Anywhere fleet. The game servers on the compute use this endpoint to
 	// connect to the Amazon GameLift service.
 	GameLiftServiceSdkEndpoint *string
+
+	// The InstanceID of the Instance hosting the compute for Container and Managed
+	// EC2 fleets.
+	InstanceId *string
 
 	// The IP address of a compute resource. Amazon GameLift requires a DNS name or IP
 	// address for a compute.
@@ -238,6 +255,610 @@ type Compute struct {
 	// The Amazon EC2 instance type that the fleet uses. For registered computes in an
 	// Amazon GameLift Anywhere fleet, this property is empty.
 	Type EC2InstanceType
+
+	noSmithyDocumentSerde
+}
+
+// This operation has been expanded to use with the Amazon GameLift containers
+// feature, which is currently in public preview. The set of port numbers to open
+// on each instance in a container fleet. Connection ports are used by inbound
+// traffic to connect with processes that are running in containers on the fleet.
+// Part of: ContainerGroupsConfiguration , ContainerGroupsAttributes
+type ConnectionPortRange struct {
+
+	// Starting value for the port range.
+	//
+	// This member is required.
+	FromPort *int32
+
+	// Ending value for the port. Port numbers are end-inclusive. This value must be
+	// equal to or greater than FromPort .
+	//
+	// This member is required.
+	ToPort *int32
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. Describes attributes of containers that are
+// deployed to a fleet with compute type CONTAINER .
+type ContainerAttributes struct {
+
+	// Describes how container ports map to connection ports on the fleet instance.
+	// Incoming traffic connects to a game via a connection port. A
+	// ContainerPortMapping directs the traffic from a connection port to a port on the
+	// container that hosts the game session.
+	ContainerPortMappings []ContainerPortMapping
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. Describes a container in a container fleet, the
+// resources available to the container, and the commands that are run when the
+// container starts. Container properties can't be updated. To change a property,
+// create a new container group definition. See also ContainerDefinitionInput .
+// Part of: ContainerGroupDefinition Returned by: DescribeContainerGroupDefinition
+// , ListContainerGroupDefinitions
+type ContainerDefinition struct {
+
+	// The container definition identifier. Container names are unique within a
+	// container group definition.
+	//
+	// This member is required.
+	ContainerName *string
+
+	// The URI to the image that $short; copied and deployed to a container fleet.
+	// For a more specific identifier, see ResolvedImageDigest .
+	//
+	// This member is required.
+	ImageUri *string
+
+	// A command that's passed to the container on startup. Each argument for the
+	// command is an additional string in the array. See the
+	// ContainerDefinition::command (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-command)
+	// parameter in the Amazon Elastic Container Service API reference.
+	Command []string
+
+	// The number of CPU units that are reserved for the container. Note: 1 vCPU unit
+	// equals 1024 CPU units. If no resources are reserved, the container shares the
+	// total CPU limit for the container group. Related data type:
+	// ContainerGroupDefinition$TotalCpuLimit
+	Cpu *int32
+
+	// Indicates that the container relies on the status of other containers in the
+	// same container group during its startup and shutdown sequences. A container
+	// might have dependencies on multiple containers.
+	DependsOn []ContainerDependency
+
+	// The entry point that's passed to the container on startup. If there are
+	// multiple arguments, each argument is an additional string in the array. See the
+	// ContainerDefinition::entryPoint (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-entryPoint)
+	// parameter in the Amazon Elastic Container Service API Reference.
+	EntryPoint []string
+
+	// A set of environment variables that's passed to the container on startup. See
+	// the ContainerDefinition::environment (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-environment)
+	// parameter in the Amazon Elastic Container Service API Reference.
+	Environment []ContainerEnvironment
+
+	// Indicates whether the container is vital to the container group. If an
+	// essential container fails, the entire container group is restarted.
+	Essential *bool
+
+	// A configuration for a non-terminal health check. A container, which
+	// automatically restarts if it stops functioning, also restarts if it fails this
+	// health check. If an essential container in the daemon group fails a health
+	// check, the entire container group is restarted. The essential container in the
+	// replica group doesn't use this health check mechanism, because the Amazon
+	// GameLift Agent automatically handles the task.
+	HealthCheck *ContainerHealthCheck
+
+	// The amount of memory that Amazon GameLift makes available to the container. If
+	// memory limits aren't set for an individual container, the container shares the
+	// container group's total memory allocation. Related data type:
+	// ContainerGroupDefinition$TotalMemoryLimit
+	MemoryLimits *ContainerMemoryLimits
+
+	// Defines the ports that are available to assign to processes in the container.
+	// For example, a game server process requires a container port to allow game
+	// clients to connect to it. Container ports aren't directly accessed by inbound
+	// traffic. Amazon GameLift maps these container ports to externally accessible
+	// connection ports, which are assigned as needed from the container fleet's
+	// ConnectionPortRange .
+	PortConfiguration *ContainerPortConfiguration
+
+	// A unique and immutable identifier for the container image that is deployed to a
+	// container fleet. The digest is a SHA 256 hash of the container image manifest.
+	ResolvedImageDigest *string
+
+	// The directory in the container where commands are run. See the
+	// ContainerDefinition::workingDirectory (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-workingDirectory)
+	// parameter in the Amazon Elastic Container Service API Reference.
+	WorkingDirectory *string
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. Describes a container's configuration, resources,
+// and start instructions. Use this data type to create a container group
+// definition. For the properties of a container that's been deployed to a fleet,
+// see ContainerDefinition . You can't change these properties after you've created
+// the container group definition. If you need a container group with different
+// properties, then you must create a new one. Used with:
+// CreateContainerGroupDefinition
+type ContainerDefinitionInput struct {
+
+	// A string that uniquely identifies the container definition within a container
+	// group.
+	//
+	// This member is required.
+	ContainerName *string
+
+	// The location of a container image that $short; will copy and deploy to a
+	// container fleet. Images in Amazon Elastic Container Registry private
+	// repositories are supported. The repository must be in the same Amazon Web
+	// Services account and Amazon Web Services Region where you're creating the
+	// container group definition. For limits on image size, see Amazon GameLift
+	// endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/gamelift.html)
+	// . You can use any of the following image URI formats:
+	//   - Image ID only: [AWS account].dkr.ecr.[AWS region].amazonaws.com/[repository
+	//   ID]
+	//   - Image ID and digest: [AWS account].dkr.ecr.[AWS
+	//   region].amazonaws.com/[repository ID]@[digest]
+	//   - Image ID and tag: [AWS account].dkr.ecr.[AWS
+	//   region].amazonaws.com/[repository ID]:[tag]
+	//
+	// This member is required.
+	ImageUri *string
+
+	// A command to pass to the container on startup. Add multiple arguments as
+	// additional strings in the array. See the ContainerDefinition command (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-command)
+	// parameter in the Amazon Elastic Container Service API reference.
+	Command []string
+
+	// The number of CPU units to reserve for this container. The container can use
+	// more resources when needed, if available. Note: 1 vCPU unit equals 1024 CPU
+	// units. If you don't reserve CPU units for this container, then it shares the
+	// total CPU limit for the container group. This property is similar to the Amazon
+	// ECS container definition parameter environment (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_environment)
+	// (Amazon Elastic Container Service Developer Guide). Related data type:
+	// ContainerGroupDefinition$TotalCpuLimit
+	Cpu *int32
+
+	// Sets up dependencies between this container and the status of other containers
+	// in the same container group. A container can have dependencies on multiple
+	// different containers. You can use dependencies to establish a startup/shutdown
+	// sequence across the container group. A container startup dependency is reversed
+	// on shutdown. For example, you might specify that SideCarContainerB has a START
+	// dependency on SideCarContainerA. This dependency means that SideCarContainerB
+	// can't start until after SideCarContainerA has started. This dependency is
+	// reversed on shutdown, which means that SideCarContainerB must shut down before
+	// SideCarContainerA can shut down.
+	DependsOn []ContainerDependency
+
+	// An entry point to pass to the container on startup. Add multiple arguments as
+	// additional strings in the array. See the ContainerDefinition::entryPoint (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-entryPoint)
+	// parameter in the Amazon Elastic Container Service API Reference.
+	EntryPoint []string
+
+	// A set of environment variables to pass to the container on startup. See the
+	// ContainerDefinition::environment (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-environment)
+	// parameter in the Amazon Elastic Container Service API Reference.
+	Environment []ContainerEnvironment
+
+	// Specifies whether the container is vital for the container group to function
+	// properly. If an essential container fails, it causes the entire container group
+	// to restart. Each container group must have an essential container. Replica
+	// container groups - A replica group must have exactly one essential container.
+	// Use the following to configure an essential replica container:
+	//   - Choose a container is running your game server and the Amazon GameLift
+	//   Agent.
+	//   - Include a port configuration. This container runs your game server
+	//   processes, and each process requires a container port to allow access to game
+	//   clients.
+	//   - Don't configure a health check. The Agent handles this task for the
+	//   essential replica container.
+	// Daemon container groups - A daemon group must have at least one essential
+	// container.
+	Essential *bool
+
+	// Configuration for a non-terminal health check. A container automatically
+	// restarts if it stops functioning. This parameter lets you define additional
+	// reasons to consider a container unhealthy and restart it. You can set a health
+	// check for any container except for the essential container in the replica
+	// container group. If an essential container in the daemon group fails a health
+	// check, the entire container group is restarted.
+	HealthCheck *ContainerHealthCheck
+
+	// The amount of memory to make available to the container. If you don't specify
+	// memory limits for this container, then it shares the container group's total
+	// memory allocation. Related data type: ContainerGroupDefinition$TotalMemoryLimit
+	MemoryLimits *ContainerMemoryLimits
+
+	// A set of ports that Amazon GameLift can assign to processes in the container.
+	// All processes that accept inbound traffic connections, including game server
+	// processes, must be assigned a port from this set. The set of ports must be large
+	// enough to assign one to each process in the container that needs one. If the
+	// container includes your game server, include enough ports to assign one port to
+	// each concurrent server process (as defined in a container fleet's
+	// RuntimeConfiguration ). For more details, see Networking for container fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-network)
+	// . Container ports aren't directly accessed by inbound traffic. Amazon GameLift
+	// maps these container ports to externally accessible connection ports, which are
+	// assigned as needed from the container fleet's ConnectionPortRange .
+	PortConfiguration *ContainerPortConfiguration
+
+	// The directory in the container where commands are run. See the
+	// ContainerDefinition::workingDirectory parameter (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-workingDirectory)
+	// in the Amazon Elastic Container Service API Reference.
+	WorkingDirectory *string
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. A container's dependency on another container in
+// the same container group. The dependency impacts how the dependent container is
+// able to start or shut down based the status of the other container. For example,
+// ContainerA is configured with the following dependency: a START dependency on
+// ContainerB. This means that ContainerA can't start until ContainerB has started.
+// It also means that ContainerA must shut down before ContainerB. Part of:
+// ContainerDefinition
+type ContainerDependency struct {
+
+	// The condition that the dependency container must reach before the dependent
+	// container can start. Valid conditions include:
+	//   - START - The dependency container must have started.
+	//   - COMPLETE - The dependency container has run to completion (exits). Use this
+	//   condition with nonessential containers, such as those that run a script and then
+	//   exit. The dependency container can't be an essential container.
+	//   - SUCCESS - The dependency container has run to completion and exited with a
+	//   zero status. The dependency container can't be an essential container.
+	//   - HEALTHY - The dependency container has passed its Docker health check. Use
+	//   this condition with dependency containers that have health checks configured.
+	//   This condition is confirmed at container group startup only.
+	//
+	// This member is required.
+	Condition ContainerDependencyCondition
+
+	// A descriptive label for the container definition that this container depends on.
+	//
+	// This member is required.
+	ContainerName *string
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. An environment variable to set inside a container,
+// in the form of a key-value pair. Related data type:
+// ContainerDefinition$Environment
+type ContainerEnvironment struct {
+
+	// The environment variable name.
+	//
+	// This member is required.
+	Name *string
+
+	// The environment variable value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. The properties that describe a container group
+// resource. Container group definition properties can't be updated. To change a
+// property, create a new container group definition. Used with:
+// CreateContainerGroupDefinition Returned by: DescribeContainerGroupDefinition ,
+// ListContainerGroupDefinitions
+type ContainerGroupDefinition struct {
+
+	// The set of container definitions that are included in the container group.
+	ContainerDefinitions []ContainerDefinition
+
+	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
+	// ) that is assigned to an Amazon GameLift ContainerGroupDefinition resource. It
+	// uniquely identifies the resource across all Amazon Web Services Regions. Format
+	// is arn:aws:gamelift:::containergroupdefinition/[container group definition name]
+	// .
+	ContainerGroupDefinitionArn *string
+
+	// A time stamp indicating when this data object was created. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057" ).
+	CreationTime *time.Time
+
+	// A descriptive identifier for the container group definition. The name value is
+	// unique in an Amazon Web Services Region.
+	Name *string
+
+	// The platform required for all containers in the container group definition.
+	OperatingSystem ContainerOperatingSystem
+
+	// The method for deploying the container group across fleet instances. A replica
+	// container group might have multiple copies on each fleet instance. A daemon
+	// container group maintains only one copy per fleet instance.
+	SchedulingStrategy ContainerSchedulingStrategy
+
+	// Current status of the container group definition resource. Values include:
+	//   - COPYING -- Amazon GameLift is in the process of making copies of all
+	//   container images that are defined in the group. While in this state, the
+	//   resource can't be used to create a container fleet.
+	//   - READY -- Amazon GameLift has copied the registry images for all containers
+	//   that are defined in the group. You can use a container group definition in this
+	//   status to create a container fleet.
+	//   - FAILED -- Amazon GameLift failed to create a valid container group
+	//   definition resource. For more details on the cause of the failure, see
+	//   StatusReason . A container group definition resource in failed status will be
+	//   deleted within a few minutes.
+	Status ContainerGroupDefinitionStatus
+
+	// Additional information about a container group definition that's in FAILED
+	// status. Possible reasons include:
+	//   - An internal issue prevented Amazon GameLift from creating the container
+	//   group definition resource. Delete the failed resource and call
+	//   CreateContainerGroupDefinition again.
+	//   - An access-denied message means that you don't have permissions to access
+	//   the container image on ECR. See IAM permission examples (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html)
+	//   for help setting up required IAM permissions for Amazon GameLift.
+	//   - The ImageUri value for at least one of the containers in the container group
+	//   definition was invalid or not found in the current Amazon Web Services account.
+	//   - At least one of the container images referenced in the container group
+	//   definition exceeds the allowed size. For size limits, see Amazon GameLift
+	//   endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/gamelift.html)
+	//   .
+	//   - At least one of the container images referenced in the container group
+	//   definition uses a different operating system than the one defined for the
+	//   container group.
+	StatusReason *string
+
+	// The amount of CPU units on a fleet instance to allocate for the container
+	// group. All containers in the group share these resources. This property is an
+	// integer value in CPU units (1 vCPU is equal to 1024 CPU units). You can set
+	// additional limits for each ContainerDefinition in the group. If individual
+	// containers have limits, this value must be equal to or greater than the sum of
+	// all container-specific CPU limits in the group. For more details on memory
+	// allocation, see the Container fleet design guide (https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-design-fleet)
+	// .
+	TotalCpuLimit *int32
+
+	// The amount of memory (in MiB) on a fleet instance to allocate for the container
+	// group. All containers in the group share these resources. You can set additional
+	// limits for each ContainerDefinition in the group. If individual containers have
+	// limits, this value must meet the following requirements:
+	//   - Equal to or greater than the sum of all container-specific soft memory
+	//   limits in the group.
+	//   - Equal to or greater than any container-specific hard limits in the group.
+	// For more details on memory allocation, see the Container fleet design guide (https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-design-fleet)
+	// .
+	TotalMemoryLimit *int32
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. The properties of a container group that is
+// deployed to a container fleet. Part of: ContainerGroupsAttributes Returned by:
+// DescribeFleetAttributes
+type ContainerGroupDefinitionProperty struct {
+
+	// The unique identifier for the container group definition.
+	ContainerGroupDefinitionName *string
+
+	// The method for scheduling and maintaining copies of the container group across
+	// a container fleet.
+	SchedulingStrategy ContainerSchedulingStrategy
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. The properties of container groups that are running
+// on a container fleet. Container group properties for a fleet can't be changed.
+// Returned by: DescribeFleetAttributes , CreateFleet
+type ContainerGroupsAttributes struct {
+
+	// A set of ports that allow inbound traffic to connect to processes running in
+	// the fleet's container groups. Amazon GameLift maps each connection port to a
+	// container port, which is assigned to a specific container process. A fleet's
+	// connection port range can't be changed, but you can control access to connection
+	// ports by updating a fleet's EC2InboundPermissions with UpdateFleetPortSettings .
+	ConnectionPortRange *ConnectionPortRange
+
+	// A collection of properties that describe each container group in the fleet. A
+	// container fleet is deployed with one or more ContainerGroupDefinition
+	// resources, which is where these properties are set.
+	ContainerGroupDefinitionProperties []ContainerGroupDefinitionProperty
+
+	// Details about the number of replica container groups that Amazon GameLift
+	// deploys to each instance in the container fleet.
+	ContainerGroupsPerInstance *ContainerGroupsPerInstance
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. Configuration details for a set of container
+// groups, for use when creating a fleet with compute type CONTAINER . Used with:
+// CreateFleet
+type ContainerGroupsConfiguration struct {
+
+	// A set of ports to allow inbound traffic, including game clients, to connect to
+	// processes running in the container fleet. Connection ports are dynamically
+	// mapped to container ports, which are assigned to individual processes running in
+	// a container. The connection port range must have enough ports to map to all
+	// container ports across a fleet instance. To calculate the minimum connection
+	// ports needed, use the following formula: [Total number of container ports as
+	// defined for containers in the replica container group] * [Desired or calculated
+	// number of replica container groups per instance] + [Total number of container
+	// ports as defined for containers in the daemon container group] As a best
+	// practice, double the minimum number of connection ports. Use the fleet's
+	// EC2InboundPermissions property to control external access to connection ports.
+	// Set this property to the connection port numbers that you want to open access
+	// to. See IpPermission for more details.
+	//
+	// This member is required.
+	ConnectionPortRange *ConnectionPortRange
+
+	// The list of container group definition names to deploy to a new container fleet.
+	//
+	// This member is required.
+	ContainerGroupDefinitionNames []string
+
+	// The number of times to replicate the replica container group on each instance
+	// in a container fleet. By default, Amazon GameLift calculates the maximum number
+	// of replica container groups that can fit on a fleet instance (based on CPU and
+	// memory resources). Leave this parameter empty if you want to use the maximum
+	// number, or specify a desired number to override the maximum. The desired number
+	// is used if it's less than the maximum number.
+	DesiredReplicaContainerGroupsPerInstance *int32
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. Determines how many replica container groups that
+// Amazon GameLift deploys to each instance in a container fleet. Amazon GameLift
+// calculates the maximum possible replica groups per instance based on the
+// instance 's CPU and memory resources. When deploying a fleet, Amazon GameLift
+// places replica container groups on each fleet instance based on the following:
+//   - If no desired value is set, Amazon GameLift places the calculated maximum.
+//   - If a desired number is set to a value higher than the calculated maximum,
+//     Amazon GameLift places the calculated maximum.
+//   - If a desired number is set to a value lower than the calculated maximum,
+//     Amazon GameLift places the desired number.
+//
+// Part of: ContainerGroupsConfiguration , ContainerGroupsAttributes Returned by:
+// DescribeFleetAttributes , CreateFleet
+type ContainerGroupsPerInstance struct {
+
+	// The desired number of replica container groups to place on each fleet instance.
+	DesiredReplicaContainerGroupsPerInstance *int32
+
+	// The maximum possible number of replica container groups that each fleet
+	// instance can have.
+	MaxReplicaContainerGroupsPerInstance *int32
+
+	noSmithyDocumentSerde
+}
+
+// Instructions on when and how to check the health of a container in a container
+// fleet. When health check properties are set in a container definition, they
+// override any Docker health checks in the container image. For more information
+// on container health checks, see HealthCheck command (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html#ECS-Type-HealthCheck-command)
+// in the Amazon Elastic Container Service API. The following example instructions
+// tell the container to wait 100 seconds after launch before counting failed
+// health checks, then initiate the health check command every 60 seconds. After
+// issuing the health check command, wait 10 seconds for it to succeed. If it
+// fails, retry the command 3 times before considering the container to be
+// unhealthy. {"Command": [ "CMD-SHELL", "ps cax | grep "processmanager" || exit
+// 1" ], "Interval": 300, "Timeout": 30, "Retries": 5, "StartPeriod": 100 } Part
+// of: ContainerDefinition$HealthCheck
+type ContainerHealthCheck struct {
+
+	// A string array that specifies the command that the container runs to determine
+	// if it's healthy.
+	//
+	// This member is required.
+	Command []string
+
+	// The time period (in seconds) between each health check.
+	Interval *int32
+
+	// The number of times to retry a failed health check before the container is
+	// considered unhealthy. The first run of the command does not count as a retry.
+	Retries *int32
+
+	// The optional grace period (in seconds) to give a container time to bootstrap
+	// before the first failed health check counts toward the number of retries.
+	StartPeriod *int32
+
+	// The time period (in seconds) to wait for a health check to succeed before a
+	// failed health check is counted.
+	Timeout *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how much memory is available to a container. You can't change this
+// value after you create this object. Part of: ContainerDefinition$MemoryLimits
+type ContainerMemoryLimits struct {
+
+	// The maximum amount of memory that the container can use. If a container
+	// attempts to exceed this limit, the container is stopped. This property is
+	// similar to the Amazon ECS container definition parameter memory (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_memory)
+	// in the Amazon Elastic Container Service Developer Guide.
+	HardLimit *int32
+
+	// The amount of memory that is reserved for a container. When the container
+	// group's shared memory is under contention, the system attempts to maintain the
+	// container memory usage at this soft limit. However, the container can use more
+	// memory when needed, if available. This property is similar to the Amazon ECS
+	// container definition parameter memoryreservation (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#ContainerDefinition-memoryReservation)
+	// (Amazon Elastic Container Service Developer Guide).
+	SoftLimit *int32
+
+	noSmithyDocumentSerde
+}
+
+// Defines ranges of ports that server processes can connect to. Part of:
+// ContainerDefinition$PortConfiguration
+type ContainerPortConfiguration struct {
+
+	// Specifies one or more ranges of ports on a container. These ranges must not
+	// overlap.
+	//
+	// This member is required.
+	ContainerPortRanges []ContainerPortRange
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. Defines how an internal-facing container port is
+// mapped to an external-facing connection port on a fleet instance of compute type
+// CONTAINER . Incoming traffic, such as a game client, uses a connection port to
+// connect to a process in the container fleet. Amazon GameLift directs the inbound
+// traffic to the container port that is assigned to the process, such as a game
+// session, running on a container. Part of: ContainerAttributes
+type ContainerPortMapping struct {
+
+	// The port opened on the fleet instance. This is also called the "host port".
+	ConnectionPort *int32
+
+	// The port opened on the container.
+	ContainerPort *int32
+
+	// The network protocol that this mapping supports.
+	Protocol IpProtocol
+
+	noSmithyDocumentSerde
+}
+
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. A set of one or more port numbers that can be
+// opened on the container. Part of: ContainerPortConfiguration
+type ContainerPortRange struct {
+
+	// A starting value for the range of allowed port numbers.
+	//
+	// This member is required.
+	FromPort *int32
+
+	// The network protocol that these ports support.
+	//
+	// This member is required.
+	Protocol IpProtocol
+
+	// An ending value for the range of allowed port numbers. Port numbers are
+	// end-inclusive. This value must be equal to or greater than FromPort .
+	//
+	// This member is required.
+	ToPort *int32
 
 	noSmithyDocumentSerde
 }
@@ -318,6 +939,9 @@ type EC2InstanceLimit struct {
 // a fleet). In addition to tracking activity, event codes and messages can provide
 // additional information for troubleshooting and debugging problems.
 type Event struct {
+
+	// The number of times that this event occurred.
+	Count *int64
 
 	// The type of event being logged. Fleet state transition events:
 	//   - FLEET_CREATED -- A fleet resource was successfully created with a status of
@@ -471,33 +1095,52 @@ type FilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a Amazon GameLift fleet of game hosting resources. Related actions
+// This operation has been expanded to use with the Amazon GameLift containers
+// feature, which is currently in public preview. Describes an Amazon GameLift
+// fleet of game hosting resources. Attributes differ based on the fleet's compute
+// type, as follows:
+//   - EC2 fleet attributes identify a Build resource (for fleets with customer
+//     game server builds) or a Script resource (for Realtime Servers fleets).
+//   - Container fleets have ContainerGroupsAttributes , which identify the fleet's
+//     ContainerGroupDefinition resources.
+//   - Amazon GameLift Anywhere fleets have an abbreviated set of attributes,
+//     because most fleet configurations are set directly on the fleet's computes.
+//     Attributes include fleet identifiers and descriptive properties,
+//     creation/termination time, and fleet status.
+//
+// Returned by: DescribeFleetAttributes
 type FleetAttributes struct {
 
-	// Amazon GameLift Anywhere configuration options for your Anywhere fleets.
+	// This property is used with the Amazon GameLift containers feature, which is
+	// currently in public preview. A set of attributes that describe the container
+	// groups that are deployed on the fleet. These attributes are included for fleets
+	// with compute type CONTAINER only. This attribute is used with fleets where
+	// ComputeType is "Container".
 	AnywhereConfiguration *AnywhereConfiguration
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
 	// ) associated with the Amazon GameLift build resource that is deployed on
 	// instances in this fleet. In a GameLift build ARN, the resource ID matches the
-	// BuildId value.
+	// BuildId value. This attribute is used with fleets where ComputeType is "EC2".
 	BuildArn *string
 
 	// A unique identifier for the build resource that is deployed on instances in
-	// this fleet.
+	// this fleet. This attribute is used with fleets where ComputeType is "EC2".
 	BuildId *string
 
 	// Determines whether a TLS/SSL certificate is generated for a fleet. This feature
 	// must be enabled when creating the fleet. All instances in a fleet share the same
-	// certificate. The certificate can be retrieved by calling the Amazon GameLift
-	// Server SDK (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html)
-	// operation GetInstanceCertificate .
+	// certificate.
 	CertificateConfiguration *CertificateConfiguration
 
 	// The type of compute resource used to host your game servers. You can use your
 	// own compute resources with Amazon GameLift Anywhere or use Amazon EC2 instances
 	// with managed Amazon GameLift.
 	ComputeType ComputeType
+
+	// A set of properties that describe the container groups that are deployed to the
+	// fleet. These attributes are included for fleets with compute type CONTAINER .
+	ContainerGroupsAttributes *ContainerGroupsAttributes
 
 	// A time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057" ).
@@ -516,9 +1159,8 @@ type FleetAttributes struct {
 	// A unique identifier for the fleet.
 	FleetId *string
 
-	// Indicates whether to use On-Demand or Spot instances for this fleet. By
-	// default, this property is set to ON_DEMAND . Learn more about when to use
-	// On-Demand versus Spot Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot)
+	// Indicates whether the fleet uses On-Demand or Spot instances. For more
+	// information, see On-Demand versus Spot Instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html#gamelift-ec2-instances-spot)
 	// . This fleet property can't be changed after the fleet is created.
 	FleetType FleetType
 
@@ -529,7 +1171,7 @@ type FleetAttributes struct {
 	// have access to. For more information about using the role with your game server
 	// builds, see Communicate with other Amazon Web Services resources from your
 	// fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html)
-	// .
+	// . This attribute is used with fleets where ComputeType is "EC2" or "Container".
 	InstanceRoleArn *string
 
 	// Indicates that fleet instances maintain a shared credentials file for the IAM
@@ -539,13 +1181,14 @@ type FleetAttributes struct {
 	// integrated with the server SDK version 5.x. For more information about using
 	// shared credentials, see Communicate with other Amazon Web Services resources
 	// from your fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html)
-	// .
+	// . This attribute is used with fleets where ComputeType is "EC2" or "Container".
 	InstanceRoleCredentialsProvider InstanceRoleCredentialsProvider
 
-	// The Amazon EC2 instance type that determines the computing resources of each
-	// instance in the fleet. Instance type defines the CPU, memory, storage, and
-	// networking capacity. See Amazon Elastic Compute Cloud Instance Types (http://aws.amazon.com/ec2/instance-types/)
-	// for detailed descriptions.
+	// The Amazon EC2 instance type that the fleet uses. Instance type determines the
+	// computing resources of each instance in the fleet, including CPU, memory,
+	// storage, and networking capacity. See Amazon Elastic Compute Cloud Instance
+	// Types (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
+	// This attribute is used with fleets where ComputeType is "EC2" or "Container".
 	InstanceType EC2InstanceType
 
 	// This parameter is no longer used. Game session log paths are now defined using
@@ -556,7 +1199,8 @@ type FleetAttributes struct {
 
 	// Name of a metric group that metrics for this fleet are added to. In Amazon
 	// CloudWatch, you can view aggregated metrics for fleets that are in a metric
-	// group. A fleet can be included in only one metric group at a time.
+	// group. A fleet can be included in only one metric group at a time. This
+	// attribute is used with fleets where ComputeType is "EC2" or "Container".
 	MetricGroups []string
 
 	// A descriptive label that is associated with a fleet. Fleet names do not need to
@@ -564,7 +1208,8 @@ type FleetAttributes struct {
 	Name *string
 
 	// The type of game session protection to set on all new instances that are
-	// started in the fleet.
+	// started in the fleet. This attribute is used with fleets where ComputeType is
+	// "EC2" or "Container".
 	//   - NoProtection -- The game session can be terminated during a scale-down
 	//   event.
 	//   - FullProtection -- If the game session is in an ACTIVE status, it cannot be
@@ -573,7 +1218,8 @@ type FleetAttributes struct {
 
 	// The operating system of the fleet's computing resources. A fleet's operating
 	// system is determined by the OS of the build or script that is deployed on this
-	// fleet.
+	// fleet. This attribute is used with fleets where ComputeType is "EC2" or
+	// "Container".
 	OperatingSystem OperatingSystem
 
 	// A policy that puts limits on the number of game sessions that a player can
@@ -591,17 +1237,18 @@ type FleetAttributes struct {
 	ScriptArn *string
 
 	// A unique identifier for the Realtime script resource that is deployed on
-	// instances in this fleet.
+	// instances in this fleet. This attribute is used with fleets where ComputeType
+	// is "EC2".
 	ScriptId *string
 
 	// This parameter is no longer used. Server launch parameters are now defined
 	// using the fleet's runtime configuration . Requests that use this parameter
-	// instead continue to be valid.
+	// continue to be valid.
 	ServerLaunchParameters *string
 
 	// This parameter is no longer used. Server launch paths are now defined using the
 	// fleet's RuntimeConfiguration (https://docs.aws.amazon.com/gamelift/latest/apireference/RuntimeConfiguration.html)
-	// . Requests that use this parameter instead continue to be valid.
+	// . Requests that use this parameter continue to be valid.
 	ServerLaunchPath *string
 
 	// Current status of the fleet. Possible fleet statuses include the following:
@@ -617,7 +1264,8 @@ type FleetAttributes struct {
 	Status FleetStatus
 
 	// A list of fleet activity that has been suspended using StopFleetActions (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html)
-	// . This includes fleet auto-scaling.
+	// . This includes fleet auto-scaling. This attribute is used with fleets where
+	// ComputeType is "EC2" or "Container".
 	StoppedActions []FleetAction
 
 	// A time stamp indicating when this data object was terminated. Format is a
@@ -627,11 +1275,11 @@ type FleetAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Current resource capacity settings in a specified fleet or location. The
-// location value might refer to a fleet's remote location or its home Region.
-// Related actions DescribeFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html)
-// | DescribeFleetLocationCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html)
-// | UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
+// Current resource capacity settings for managed EC2 fleets and container fleets.
+// For multi-location fleets, location values might refer to a fleet's remote
+// location or its home Region. Returned by: DescribeFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html)
+// , DescribeFleetLocationCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html)
+// , UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
 type FleetCapacity struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
@@ -643,27 +1291,31 @@ type FleetCapacity struct {
 	// A unique identifier for the fleet associated with the location.
 	FleetId *string
 
-	// Resource capacity settings. Fleet capacity is measured in Amazon EC2 instances.
-	// Pending and terminating counts are non-zero when the fleet capacity is adjusting
-	// to a scaling event or if access to resources is temporarily affected.
+	// The current number of instances in the fleet, listed by instance status. Counts
+	// for pending and terminating instances might be non-zero if the fleet is
+	// adjusting to a scaling event or if access to resources is temporarily affected.
 	InstanceCounts *EC2InstanceCounts
 
-	// The Amazon EC2 instance type that is used for all instances in a fleet. The
-	// instance type determines the computing resources in use, including CPU, memory,
-	// storage, and networking capacity. See Amazon Elastic Compute Cloud Instance
-	// Types (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
+	// The Amazon EC2 instance type that is used for instances in a fleet. Instance
+	// type determines the computing resources in use, including CPU, memory, storage,
+	// and networking capacity. See Amazon Elastic Compute Cloud Instance Types (http://aws.amazon.com/ec2/instance-types/)
+	// for detailed descriptions.
 	InstanceType EC2InstanceType
 
 	// The fleet location for the instance count information, expressed as an Amazon
 	// Web Services Region code, such as us-west-2 .
 	Location *string
 
+	// This property is used with the Amazon GameLift containers feature, which is
+	// currently in public preview. The number and status of replica container groups
+	// in a container fleet.
+	ReplicaContainerGroupCounts *ReplicaContainerGroupCounts
+
 	noSmithyDocumentSerde
 }
 
 // Current resource utilization statistics in a specified fleet or location. The
-// location value might refer to a fleet's remote location or its home Region.
-// Related actions
+// location value might refer to a fleet's remote location or its home region.
 type FleetUtilization struct {
 
 	// The number of active game sessions that are currently being hosted across all
@@ -1390,11 +2042,11 @@ type InstanceDefinition struct {
 }
 
 // A range of IP addresses and port settings that allow inbound traffic to connect
-// to server processes on an instance in a fleet. New game sessions are assigned an
-// IP address/port number combination, which must fall into the fleet's allowed
-// ranges. Fleets with custom game builds must have permissions explicitly set. For
-// Realtime Servers fleets, Amazon GameLift automatically opens two port ranges,
-// one for TCP messaging and one for UDP.
+// to processes on an instance in a fleet. Processes are assigned an IP
+// address/port number combination, which must fall into the fleet's allowed
+// ranges. For container fleets, the port settings must use the same port numbers
+// as the fleet's connection ports. For Realtime Servers fleets, Amazon GameLift
+// automatically opens two port ranges, one for TCP messaging and one for UDP.
 type IpPermission struct {
 
 	// A starting value for a range of allowed port numbers. For fleets using Linux
@@ -1465,8 +2117,9 @@ type LocationAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// A remote location where a multi-location fleet can deploy game servers for game
-// hosting.
+// This data type has been expanded to use with the Amazon GameLift containers
+// feature, which is currently in public preview. A remote location where a
+// multi-location fleet can deploy game servers for game hosting.
 type LocationConfiguration struct {
 
 	// An Amazon Web Services Region code, such as us-west-2 .
@@ -1477,7 +2130,10 @@ type LocationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Properties of a location
+// Properties of a custom location for use in an Amazon GameLift Anywhere fleet.
+// This data type is returned in response to a call to
+// https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateLocation.html (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateLocation.html)
+// .
 type LocationModel struct {
 
 	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
@@ -1966,6 +2622,30 @@ type PriorityConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// This data type is used with the Amazon GameLift containers feature, which is
+// currently in public preview. The number and status of replica container groups
+// that are deployed across a fleet with compute type CONTAINER . This information,
+// combined with the number of server processes being hosted per container group
+// (see RuntimeConfiguration ), tells you how many game sessions the fleet is
+// currently capable of hosting concurrently. Returned by: DescribeFleetCapacity ,
+// DescribeFleetLocationCapacity
+type ReplicaContainerGroupCounts struct {
+
+	// The number of container groups that have active game sessions.
+	ACTIVE *int32
+
+	// The number of container groups that have no active game sessions.
+	IDLE *int32
+
+	// The number of container groups that are starting up but have not yet registered.
+	PENDING *int32
+
+	// The number of container groups that are in the process of shutting down.
+	TERMINATING *int32
+
+	noSmithyDocumentSerde
+}
+
 // A policy that puts limits on the number of game sessions that a player can
 // create within a specified span of time. With this policy, you can control
 // players' ability to consume available resources. The policy is evaluated when a
@@ -2010,15 +2690,18 @@ type RoutingStrategy struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of server process configurations that describe the set of
-// processes to run on each instance in a fleet. Server processes run either an
-// executable in a custom game build or a Realtime Servers script. Amazon GameLift
-// launches the configured processes, manages their life cycle, and replaces them
-// as needed. Each instance checks regularly for an updated runtime configuration.
-// A Amazon GameLift instance is limited to 50 processes running concurrently. To
-// calculate the total number of processes in a runtime configuration, add the
-// values of the ConcurrentExecutions parameter for each server process. Learn
-// more about Running Multiple Processes on a Fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
+// This data type has been expanded to use with the Amazon GameLift containers
+// feature, which is currently in public preview. A set of instructions that define
+// the set of server processes to run on computes in a fleet. Server processes run
+// either an executable in a custom game build or a Realtime Servers script. Amazon
+// GameLift launches the processes, manages their life cycle, and replaces them as
+// needed. Computes check regularly for an updated runtime configuration. On a
+// container fleet, the Amazon GameLift Agent uses the runtime configuration to
+// manage the lifecycle of server processes in a replica container group. An Amazon
+// GameLift instance is limited to 50 processes running concurrently. To calculate
+// the total number of processes defined in a runtime configuration, add the values
+// of the ConcurrentExecutions parameter for each server process. Learn more about
+// Running Multiple Processes on a Fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
 // .
 type RuntimeConfiguration struct {
 
@@ -2028,13 +2711,13 @@ type RuntimeConfiguration struct {
 	// timeout, it is ended and the game session status is changed to TERMINATED .
 	GameSessionActivationTimeoutSeconds *int32
 
-	// The number of game sessions in status ACTIVATING to allow on an instance. This
-	// setting limits the instance resources that can be used for new game activations
-	// at any one time.
+	// The number of game sessions in status ACTIVATING to allow on an instance or
+	// container. This setting limits the instance resources that can be used for new
+	// game activations at any one time.
 	MaxConcurrentGameSessionActivations *int32
 
 	// A collection of server process configurations that identify what server
-	// processes to run on each instance in a fleet.
+	// processes to run on fleet computes.
 	ServerProcesses []ServerProcess
 
 	noSmithyDocumentSerde
@@ -2211,14 +2894,14 @@ type Script struct {
 	noSmithyDocumentSerde
 }
 
-// A set of instructions for launching server processes on each instance in a
-// fleet. Server processes run either an executable in a custom game build or a
-// Realtime Servers script. Server process configurations are part of a fleet's
-// runtime configuration.
+// A set of instructions for launching server processes on fleet computes. Server
+// processes run either an executable in a custom game build or a Realtime Servers
+// script. Server process configurations are part of a fleet's runtime
+// configuration.
 type ServerProcess struct {
 
 	// The number of server processes using this configuration that run concurrently
-	// on each instance.
+	// on each instance or container..
 	//
 	// This member is required.
 	ConcurrentExecutions *int32

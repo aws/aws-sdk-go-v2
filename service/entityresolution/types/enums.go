@@ -20,6 +20,42 @@ func (AttributeMatchingModel) Values() []AttributeMatchingModel {
 	}
 }
 
+type DeleteUniqueIdErrorType string
+
+// Enum values for DeleteUniqueIdErrorType
+const (
+	DeleteUniqueIdErrorTypeServiceError    DeleteUniqueIdErrorType = "SERVICE_ERROR"
+	DeleteUniqueIdErrorTypeValidationError DeleteUniqueIdErrorType = "VALIDATION_ERROR"
+)
+
+// Values returns all known values for DeleteUniqueIdErrorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteUniqueIdErrorType) Values() []DeleteUniqueIdErrorType {
+	return []DeleteUniqueIdErrorType{
+		"SERVICE_ERROR",
+		"VALIDATION_ERROR",
+	}
+}
+
+type DeleteUniqueIdStatus string
+
+// Enum values for DeleteUniqueIdStatus
+const (
+	DeleteUniqueIdStatusCompleted DeleteUniqueIdStatus = "COMPLETED"
+	DeleteUniqueIdStatusAccepted  DeleteUniqueIdStatus = "ACCEPTED"
+)
+
+// Values returns all known values for DeleteUniqueIdStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteUniqueIdStatus) Values() []DeleteUniqueIdStatus {
+	return []DeleteUniqueIdStatus{
+		"COMPLETED",
+		"ACCEPTED",
+	}
+}
+
 type IdMappingType string
 
 // Enum values for IdMappingType

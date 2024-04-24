@@ -8,6 +8,33 @@ import (
 	"time"
 )
 
+// The deleted unique ID.
+type DeletedUniqueId struct {
+
+	// The unique ID of the deleted item.
+	//
+	// This member is required.
+	UniqueId *string
+
+	noSmithyDocumentSerde
+}
+
+// The Delete Unique Id error.
+type DeleteUniqueIdError struct {
+
+	// The error type for the batch delete unique ID operation.
+	//
+	// This member is required.
+	ErrorType DeleteUniqueIdErrorType
+
+	// The unique ID that could not be deleted.
+	//
+	// This member is required.
+	UniqueId *string
+
+	noSmithyDocumentSerde
+}
+
 // An object containing an error message, if there was an error.
 type ErrorDetails struct {
 

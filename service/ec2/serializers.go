@@ -65033,6 +65033,11 @@ func awsEc2query_serializeOpDocumentModifyNetworkInterfaceAttributeInput(v *Modi
 	object := value.Object()
 	_ = object
 
+	if v.AssociatePublicIpAddress != nil {
+		objectKey := object.Key("AssociatePublicIpAddress")
+		objectKey.Boolean(*v.AssociatePublicIpAddress)
+	}
+
 	if v.Attachment != nil {
 		objectKey := object.Key("Attachment")
 		if err := awsEc2query_serializeDocumentNetworkInterfaceAttachmentChanges(v.Attachment, objectKey); err != nil {

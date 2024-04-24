@@ -48,6 +48,9 @@ type CreateVirtualClusterInput struct {
 	// This member is required.
 	Name *string
 
+	// The ID of the security configuration.
+	SecurityConfigurationId *string
+
 	// The tags assigned to the virtual cluster.
 	Tags map[string]string
 

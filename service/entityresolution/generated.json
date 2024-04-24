@@ -9,6 +9,7 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_AddPolicyStatement.go",
+        "api_op_BatchDeleteUniqueId.go",
         "api_op_CreateIdMappingWorkflow.go",
         "api_op_CreateIdNamespace.go",
         "api_op_CreateMatchingWorkflow.go",

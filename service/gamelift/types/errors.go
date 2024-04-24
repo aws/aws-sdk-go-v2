@@ -282,6 +282,35 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The operation failed because Amazon GameLift has not yet finished validating
+// this compute. We recommend attempting 8 to 10 retries over 3 to 5 minutes with
+// exponential backoffs and jitter (http://aws.amazon.com/blogs/https:/aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
+// .
+type NotReadyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NotReadyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NotReadyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NotReadyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified game server group has no available game servers to fulfill a
 // ClaimGameServer request. Clients can retry such requests immediately or after a
 // waiting period.

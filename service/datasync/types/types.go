@@ -592,8 +592,10 @@ type OnPremConfig struct {
 // DataSync handles files, objects, and their associated metadata during your
 // transfer. You also can specify how to verify data integrity, set bandwidth
 // limits for your task, among other options. Each option has a default value.
-// Unless you need to, you don't have to configure any of these options before
-// starting your task.
+// Unless you need to, you don't have to configure any option before calling
+// StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
+// . You also can override your task options for each task execution. For example,
+// you might want to adjust the LogLevel for an individual execution.
 type Options struct {
 
 	// Specifies whether to preserve metadata indicating the last time a file was read
@@ -751,9 +753,11 @@ type Options struct {
 	//   .
 	//   - POINT_IN_TIME_CONSISTENT (default) - At the end of the transfer, DataSync
 	//   scans the entire source and destination to verify that both locations are fully
-	//   synchronized. You can't use this option when transferring to S3 Glacier Flexible
-	//   Retrieval or S3 Glacier Deep Archive storage classes. For more information, see
-	//   Storage class considerations with Amazon S3 locations (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
+	//   synchronized. If you use a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
+	//   , DataSync only scans and verifies what's listed in the manifest. You can't use
+	//   this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier
+	//   Deep Archive storage classes. For more information, see Storage class
+	//   considerations with Amazon S3 locations (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
 	//   .
 	//   - NONE - DataSync doesn't run additional verification at the end of the
 	//   transfer. All data transmissions are still integrity-checked with checksum
@@ -786,12 +790,7 @@ type P95Metrics struct {
 // number.
 type Platform struct {
 
-	// The version of the DataSync agent. On December 7, 2023, we discontinued version
-	// 1 DataSync agents. Check the DataSync console to see if you have affected
-	// agents. If you do, replace (https://docs.aws.amazon.com/datasync/latest/userguide/replacing-agent.html)
-	// those agents or delete (https://docs.aws.amazon.com/datasync/latest/userguide/deleting-agent.html)
-	// them if they aren't in use. If you need more help, contact Amazon Web Services
-	// Support (https://aws.amazon.com/contact-us/) .
+	// The version of the DataSync agent.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1253,16 +1252,52 @@ type TaskReportConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the schedule you want your task to use for repeated executions. For
-// more information, see Schedule Expressions for Rules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
-// .
+// Configures your DataSync task to run on a schedule (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
+// (at a minimum interval of 1 hour).
 type TaskSchedule struct {
 
-	// A cron expression that specifies when DataSync initiates a scheduled transfer
-	// from a source to a destination location.
+	// Specifies your task schedule by using a cron expression in UTC time. For
+	// information about cron expression syntax, see the Amazon EventBridge User Guide  (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cron-expressions.html)
+	// .
 	//
 	// This member is required.
 	ScheduleExpression *string
+
+	// Specifies whether to enable or disable your task schedule. Your schedule is
+	// enabled by default, but there can be situations where you need to disable it.
+	// For example, you might need to pause a recurring transfer or fix an issue with
+	// your task or perform maintenance on your storage system. DataSync might disable
+	// your schedule automatically if your task fails repeatedly with the same error.
+	// For more information, see TaskScheduleDetails (https://docs.aws.amazon.com/datasync/latest/userguide/API_TaskScheduleDetails.html)
+	// .
+	Status ScheduleStatus
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about your DataSync task schedule (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
+// .
+type TaskScheduleDetails struct {
+
+	// Indicates how your task schedule was disabled.
+	//   - USER - Your schedule was manually disabled by using the UpdateTask (https://docs.aws.amazon.com/datasync/latest/userguide/API_UpdateTask.html)
+	//   operation or DataSync console.
+	//   - SERVICE - Your schedule was automatically disabled by DataSync because the
+	//   task failed repeatedly with the same error.
+	DisabledBy ScheduleDisabledBy
+
+	// Provides a reason if the task schedule is disabled. If your schedule is
+	// disabled by USER , you see a Manually disabled by user. message. If your
+	// schedule is disabled by SERVICE , you see an error message to help you
+	// understand why the task keeps failing. For information on resolving DataSync
+	// errors, see Troubleshooting issues with DataSync transfers (https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html)
+	// .
+	DisabledReason *string
+
+	// Indicates the last time the status of your task schedule changed. For example,
+	// if DataSync automatically disables your schedule because of a repeated error,
+	// you can see when the schedule was disabled.
+	StatusUpdateTime *time.Time
 
 	noSmithyDocumentSerde
 }

@@ -12,8 +12,12 @@ import (
 )
 
 // Retrieves a fleet's runtime configuration settings. The runtime configuration
-// tells Amazon GameLift which server processes to run (and how) on each instance
-// in the fleet. To get the runtime configuration that is currently in forces for a
+// determines which server processes run, and how, on computes in the fleet. For
+// managed EC2 fleets, the runtime configuration describes server processes that
+// run on each fleet instance. For container fleets, the runtime configuration
+// describes server processes that run in each replica container group. You can
+// update a fleet's runtime configuration at any time using
+// UpdateRuntimeConfiguration . To get the current runtime configuration for a
 // fleet, provide the fleet ID. If successful, a RuntimeConfiguration object is
 // returned for the requested fleet. If the requested fleet has been deleted, the
 // result set is empty. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
@@ -46,8 +50,8 @@ type DescribeRuntimeConfigurationInput struct {
 
 type DescribeRuntimeConfigurationOutput struct {
 
-	// Instructions that describe how server processes should be launched and
-	// maintained on each instance in the fleet.
+	// Instructions that describe how server processes are launched and maintained on
+	// computes in the fleet.
 	RuntimeConfiguration *types.RuntimeConfiguration
 
 	// Metadata pertaining to the operation's result.
