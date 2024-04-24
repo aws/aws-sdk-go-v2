@@ -534,6 +534,9 @@
                     "target": "com.amazonaws.ssm#DescribeInstancePatchStatesForPatchGroup"
                 },
                 {
+                    "target": "com.amazonaws.ssm#DescribeInstanceProperties"
+                },
+                {
                     "target": "com.amazonaws.ssm#DescribeInventoryDeletions"
                 },
                 {
@@ -1865,6 +1868,15 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 360
+                }
+            }
+        },
+        "com.amazonaws.ssm#Architecture": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 120
                 }
             }
         },
@@ -6186,7 +6198,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the SSM document.</p>\n         <important>\n            <p>You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services\n    for use as document name prefixes:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>aws</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>amzn</code>\n                  </p>\n               </li>\n            </ul>\n         </important>",
+                        "smithy.api#documentation": "<p>A name for the SSM document.</p>\n         <important>\n            <p>You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services\n    for use as document name prefixes:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>aws</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>amzn</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWSEC2</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWSConfigRemediation</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWSSupport</code>\n                  </p>\n               </li>\n            </ul>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6287,7 +6299,7 @@
                 "StartDate": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowStringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to\n   become active. <code>StartDate</code> allows you to delay activation of the maintenance window\n   until the specified future date.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to\n   become active. <code>StartDate</code> allows you to delay activation of the maintenance window\n   until the specified future date.</p>\n         <note>\n            <p>When using a rate schedule, if you provide a start date that occurs in the past, the\n    current date and time are used as the start date. </p>\n         </note>"
                     }
                 },
                 "EndDate": {
@@ -9051,6 +9063,108 @@
                     "target": "com.amazonaws.ssm#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ssm#DescribeInstanceProperties": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#DescribeInstancePropertiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#DescribeInstancePropertiesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidActivationId"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidDocument"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidFilterKey"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidInstanceId"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidInstancePropertyFilterValue"
+                },
+                {
+                    "target": "com.amazonaws.ssm#InvalidNextToken"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>An API operation used by the Systems Manager console to display information about Systems Manager managed nodes.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "InstanceProperties",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssm#DescribeInstancePropertiesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ssm#DescribeInstancePropertiesRequest": {
+            "type": "structure",
+            "members": {
+                "InstancePropertyFilterList": {
+                    "target": "com.amazonaws.ssm#InstancePropertyFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of instance property filters.</p>"
+                    }
+                },
+                "FiltersWithOperator": {
+                    "target": "com.amazonaws.ssm#InstancePropertyStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request filters to use with the operator.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssm#DescribeInstancePropertiesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for the call. The call also returns a token that you\n        can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token provided by a previous request to use to return the next set of properties.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssm#DescribeInstancePropertiesResult": {
+            "type": "structure",
+            "members": {
+                "InstanceProperties": {
+                    "target": "com.amazonaws.ssm#InstanceProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties for the managed instances.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of properties to return. Use this token to get the next set of\n        results.</p>"
                     }
                 }
             },
@@ -13900,7 +14014,7 @@
                 "Names": {
                     "target": "com.amazonaws.ssm#ParameterNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the parameters that you want to query. For\n   parameters shared with you from another account, you must use the full ARNs.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>\n         <p>For more information about shared parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html\">Working with\n    shared parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the parameters that you want to query. For\n   parameters shared with you from another account, you must use the full ARNs.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>\n         <note>\n            <p>The results for <code>GetParameters</code> requests are listed in alphabetical order in\n    query responses.</p>\n         </note>\n         <p>For information about shared parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html\">Working with\n    shared parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14921,6 +15035,15 @@
                 }
             }
         },
+        "com.amazonaws.ssm#InstanceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.ssm#InstancePatchState": {
             "type": "structure",
             "members": {
@@ -15190,12 +15313,418 @@
                 }
             }
         },
+        "com.amazonaws.ssm#InstanceProperties": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#InstanceProperty",
+                "traits": {
+                    "smithy.api#xmlName": "InstanceProperty"
+                }
+            }
+        },
+        "com.amazonaws.ssm#InstanceProperty": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.ssm#InstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the EC2 <code>Name</code> tag associated with the node. If a <code>Name</code> tag hasn't been applied to the node, this value is blank.</p>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.ssm#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the managed node.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.ssm#InstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type of the managed node. For example, t3.large.</p>"
+                    }
+                },
+                "InstanceRole": {
+                    "target": "com.amazonaws.ssm#InstanceRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance profile attached to the node. If an instance profile isn't attached to the node, this value is blank.</p>"
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.ssm#KeyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the key pair associated with the node. If a key pair isnt't associated with the node, this value is blank.</p>"
+                    }
+                },
+                "InstanceState": {
+                    "target": "com.amazonaws.ssm#InstanceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the node.</p>"
+                    }
+                },
+                "Architecture": {
+                    "target": "com.amazonaws.ssm#Architecture",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPU architecture of the node. For example, x86_64.</p>"
+                    }
+                },
+                "IPAddress": {
+                    "target": "com.amazonaws.ssm#IPAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public IPv4 address assigned to the node. If a public IPv4 address isn't assigned to the node, this value is blank.</p>"
+                    }
+                },
+                "LaunchTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the node was launched.</p>"
+                    }
+                },
+                "PingStatus": {
+                    "target": "com.amazonaws.ssm#PingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Connection status of the SSM Agent on the managed node.</p>"
+                    }
+                },
+                "LastPingDateTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the SSM Agent last pinged the Systems Manager service.</p>"
+                    }
+                },
+                "AgentVersion": {
+                    "target": "com.amazonaws.ssm#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of SSM Agent running on your managed node.</p>"
+                    }
+                },
+                "PlatformType": {
+                    "target": "com.amazonaws.ssm#PlatformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operating system platform type of the managed node. For example, Windows.</p>"
+                    }
+                },
+                "PlatformName": {
+                    "target": "com.amazonaws.ssm#PlatformName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the operating system platform running on your managed node.</p>"
+                    }
+                },
+                "PlatformVersion": {
+                    "target": "com.amazonaws.ssm#PlatformVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the OS platform running on your managed node.</p>"
+                    }
+                },
+                "ActivationId": {
+                    "target": "com.amazonaws.ssm#ActivationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The activation ID created by Systems Manager when the server or virtual machine (VM) was registered</p>"
+                    }
+                },
+                "IamRole": {
+                    "target": "com.amazonaws.ssm#IamRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role used in the hybrid activation to register the node with Systems Manager.</p>"
+                    }
+                },
+                "RegistrationDate": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the node was registered with Systems Manager.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of managed node.</p>"
+                    }
+                },
+                "ComputerName": {
+                    "target": "com.amazonaws.ssm#ComputerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fully qualified host name of the managed node.</p>"
+                    }
+                },
+                "AssociationStatus": {
+                    "target": "com.amazonaws.ssm#StatusName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the State Manager association applied to the managed node.</p>"
+                    }
+                },
+                "LastAssociationExecutionDate": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the association was last run.</p>"
+                    }
+                },
+                "LastSuccessfulAssociationExecutionDate": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date the association was successfully run.</p>"
+                    }
+                },
+                "AssociationOverview": {
+                    "target": "com.amazonaws.ssm#InstanceAggregatedAssociationOverview"
+                },
+                "SourceId": {
+                    "target": "com.amazonaws.ssm#SourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source resource.</p>"
+                    }
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.ssm#SourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the source resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing various properties of a managed node.</p>"
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyFilter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.ssm#InstancePropertyFilterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "valueSet": {
+                    "target": "com.amazonaws.ssm#InstancePropertyFilterValueSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter for a specific list of managed nodes. You can filter node information by using tags. You specify tags by using a key-value mapping.</p>"
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyFilterKey": {
+            "type": "enum",
+            "members": {
+                "INSTANCE_IDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceIds"
+                    }
+                },
+                "AGENT_VERSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AgentVersion"
+                    }
+                },
+                "PING_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PingStatus"
+                    }
+                },
+                "PLATFORM_TYPES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlatformTypes"
+                    }
+                },
+                "DOCUMENT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocumentName"
+                    }
+                },
+                "ACTIVATION_IDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ActivationIds"
+                    }
+                },
+                "IAM_ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IamRole"
+                    }
+                },
+                "RESOURCE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ResourceType"
+                    }
+                },
+                "ASSOCIATION_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AssociationStatus"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#InstancePropertyFilter",
+                "traits": {
+                    "smithy.api#xmlName": "InstancePropertyFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40
+                }
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyFilterOperator": {
+            "type": "enum",
+            "members": {
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Equal"
+                    }
+                },
+                "NOT_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NotEqual"
+                    }
+                },
+                "BEGIN_WITH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BeginWith"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThan"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThan"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                },
+                "smithy.api#pattern": "^.{1,100000}$"
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyFilterValueSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#InstancePropertyFilterValue",
+                "traits": {
+                    "smithy.api#xmlName": "InstancePropertyFilterValue"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40
+                }
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyStringFilter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ssm#InstancePropertyStringFilterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.ssm#InstancePropertyFilterValueSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter key name to describe your managed nodes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.ssm#InstancePropertyFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator used by the filter call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filters to describe or get information about your managed nodes.</p>"
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyStringFilterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100000
+                },
+                "smithy.api#pattern": "^.{1,100000}$"
+            }
+        },
+        "com.amazonaws.ssm#InstancePropertyStringFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#InstancePropertyStringFilter",
+                "traits": {
+                    "smithy.api#xmlName": "InstancePropertyStringFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40
+                }
+            }
+        },
+        "com.amazonaws.ssm#InstanceRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 120
+                }
+            }
+        },
+        "com.amazonaws.ssm#InstanceState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 120
+                }
+            }
+        },
         "com.amazonaws.ssm#InstanceTagName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
                     "max": 255
+                }
+            }
+        },
+        "com.amazonaws.ssm#InstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 120
                 }
             }
         },
@@ -15609,6 +16138,22 @@
             "traits": {
                 "aws.protocols#awsQueryError": {
                     "code": "InvalidInstanceInformationFilterValue",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The specified filter value isn't valid.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#InvalidInstancePropertyFilterValue": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidInstancePropertyFilterValue",
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>The specified filter value isn't valid.</p>",
@@ -16764,6 +17309,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ssm#TagKey"
+            }
+        },
+        "com.amazonaws.ssm#KeyName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.ssm#LabelParameterVersion": {
@@ -23654,6 +24208,15 @@
                 }
             }
         },
+        "com.amazonaws.ssm#PlatformName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 120
+                }
+            }
+        },
         "com.amazonaws.ssm#PlatformType": {
             "type": "enum",
             "members": {
@@ -23683,6 +24246,15 @@
                 "target": "com.amazonaws.ssm#PlatformType",
                 "traits": {
                     "smithy.api#xmlName": "PlatformType"
+                }
+            }
+        },
+        "com.amazonaws.ssm#PlatformVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 120
                 }
             }
         },
@@ -24496,7 +25068,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a \n  maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's \n  service-linked role.  If no service-linked role for Systems Manager exists in your account, it is created when you run \n  <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions\">Using \n    service-linked roles for Systems Manager</a> in the in the <i>Amazon Web Services Systems Manager User Guide</i>:</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TaskType": {
@@ -27708,7 +28280,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of search criteria that targets managed nodes using a key-value pair that you\n   specify.</p>\n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n     Lambda, and Step Functions). For more information about running tasks\n    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>,<instance-id-3></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:<my-tag-key>,Values=<my-tag-value-1>,<my-tag-value-2></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=<my-tag-key-1>,<my-tag-key-2></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n      <code>Key=resource-groups:Name,Values=<resource-group-name></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n      <code>Key=resource-groups:ResourceTypeFilters,Values=<resource-type-1>,<resource-type-2></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n      <code>Key=ResourceGroup;Values=<resource-group-name></code>\n               </p>\n            </li>\n         </ul>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n      <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code>\n               </p>\n               <p>This example demonstrates how to target all resources in the resource group <b>ProductionResourceGroup</b> in your maintenance window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n      <code>Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC</code>\n               </p>\n               <p>This example demonstrates how to target only Amazon Elastic Compute Cloud (Amazon EC2)\n     instances and VPCs in your maintenance window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n      <code>Key=ResourceGroup,Values=MyResourceGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>State Manager association targets only</b>:\n      <code>Key=InstanceIds,Values=*</code>\n               </p>\n               <p>This example demonstrates how to target all managed instances in the Amazon Web Services Region where\n     the association was created.</p>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target managed nodes using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple managed nodes</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>An array of search criteria that targets managed nodes using a key-value pair that you\n   specify.</p>\n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n     Lambda, and Step Functions). For more information about running tasks\n    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <p>\n            <b>For all Systems Manager capabilities:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>For Automation and Change Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ResourceGroup,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ParameterValues,Values=value-1,value-2,value-3</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=AWS::EC2::Instance,Values=*</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For Run Command and Maintenance Windows:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=resource-groups:Name,Values=resource-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>Additionally, Maintenance Windows support targeting resource types:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=resource-groups:ResourceTypeFilters,Values=resource-type-1,resource-type-2</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>For State Manager:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=instance-id-1,instance-id-2,instance-id-3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:tag-key,Values=tag-value-1,tag-value-2</code>\n               </p>\n            </li>\n            <li>\n               <p>To target all instances in the Amazon Web Services Region:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>Key=InstanceIds,Values=*</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target managed nodes using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple managed nodes</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#TargetCount": {
@@ -28782,7 +29354,7 @@
                 "StartDate": {
                     "target": "com.amazonaws.ssm#MaintenanceWindowStringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to\n   become active. <code>StartDate</code> allows you to delay activation of the maintenance window\n   until the specified future date.</p>"
+                        "smithy.api#documentation": "<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to\n   become active. <code>StartDate</code> allows you to delay activation of the maintenance window\n   until the specified future date.</p>\n         <note>\n            <p>When using a rate schedule, if you provide a start date that occurs in the past, the\n    current date and time are used as the start date. </p>\n         </note>"
                     }
                 },
                 "EndDate": {
@@ -29100,7 +29672,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a \n  maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's \n  service-linked role.  If no service-linked role for Systems Manager exists in your account, it is created when you run \n  <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions\">Using \n    service-linked roles for Systems Manager</a> in the in the <i>Amazon Web Services Systems Manager User Guide</i>:</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for\n                Amazon Web Services Systems Manager to assume when running a maintenance window task. If you do not specify a\n                service role ARN, Systems Manager uses a service-linked role in your account. If no\n                appropriate service-linked role for Systems Manager exists in your account, it is created when\n                you run <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>However, for an improved security posture, we strongly recommend creating a custom\n                policy and custom service role for running your maintenance window tasks. The policy\n                can be crafted to provide only the permissions needed for your particular\n                maintenance window tasks. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html\">Setting up maintenance windows</a> in the in the\n                    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "TaskParameters": {

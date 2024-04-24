@@ -9,6 +9,9 @@
                     "target": "com.amazonaws.entityresolution#AddPolicyStatement"
                 },
                 {
+                    "target": "com.amazonaws.entityresolution#BatchDeleteUniqueId"
+                },
+                {
                     "target": "com.amazonaws.entityresolution#CreateIdMappingWorkflow"
                 },
                 {
@@ -976,6 +979,102 @@
                 "target": "com.amazonaws.entityresolution#AwsAccountId"
             }
         },
+        "com.amazonaws.entityresolution#BatchDeleteUniqueId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.entityresolution#BatchDeleteUniqueIdInput"
+            },
+            "output": {
+                "target": "com.amazonaws.entityresolution#BatchDeleteUniqueIdOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.entityresolution#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.entityresolution#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.entityresolution#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes multiple unique IDs in a matching workflow.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/matchingworkflows/{workflowName}/uniqueids"
+                }
+            }
+        },
+        "com.amazonaws.entityresolution#BatchDeleteUniqueIdInput": {
+            "type": "structure",
+            "members": {
+                "workflowName": {
+                    "target": "com.amazonaws.entityresolution#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workflow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputSource": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input source for the batch delete unique ID operation.</p>",
+                        "smithy.api#httpHeader": "inputSource",
+                        "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$"
+                    }
+                },
+                "uniqueIds": {
+                    "target": "com.amazonaws.entityresolution#UniqueIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique IDs to delete.</p>",
+                        "smithy.api#httpHeader": "uniqueIds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.entityresolution#BatchDeleteUniqueIdOutput": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.entityresolution#DeleteUniqueIdStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the batch delete unique ID operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.entityresolution#DeleteUniqueIdErrorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The errors from deleting multiple unique IDs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deleted": {
+                    "target": "com.amazonaws.entityresolution#DeletedUniqueIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique IDs that were deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "disconnectedUniqueIds": {
+                    "target": "com.amazonaws.entityresolution#DisconnectedUniqueIdsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique IDs that were disconnected.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.entityresolution#ConflictException": {
             "type": "structure",
             "members": {
@@ -1915,12 +2014,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.entityresolution#DeleteUniqueIdError": {
+            "type": "structure",
+            "members": {
+                "uniqueId": {
+                    "target": "com.amazonaws.entityresolution#UniqueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID that could not be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorType": {
+                    "target": "com.amazonaws.entityresolution#DeleteUniqueIdErrorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The error type for the batch delete unique ID operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Delete Unique Id error.</p>"
+            }
+        },
+        "com.amazonaws.entityresolution#DeleteUniqueIdErrorType": {
+            "type": "enum",
+            "members": {
+                "SERVICE_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_ERROR"
+                    }
+                },
+                "VALIDATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALIDATION_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.entityresolution#DeleteUniqueIdErrorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.entityresolution#DeleteUniqueIdError"
+            }
+        },
+        "com.amazonaws.entityresolution#DeleteUniqueIdStatus": {
+            "type": "enum",
+            "members": {
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "ACCEPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPTED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.entityresolution#DeletedUniqueId": {
+            "type": "structure",
+            "members": {
+                "uniqueId": {
+                    "target": "com.amazonaws.entityresolution#UniqueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique ID of the deleted item.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deleted unique ID.</p>"
+            }
+        },
+        "com.amazonaws.entityresolution#DeletedUniqueIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.entityresolution#DeletedUniqueId"
+            }
+        },
         "com.amazonaws.entityresolution#Description": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "max": 255
                 }
+            }
+        },
+        "com.amazonaws.entityresolution#DisconnectedUniqueIdsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.entityresolution#UniqueId"
             }
         },
         "com.amazonaws.entityresolution#EntityName": {
@@ -4861,7 +5049,7 @@
                     "smithy.api#length": {
                         "max": 255
                     },
-                    "smithy.api#pattern": "^[a-zA-Z_0-9-.@ ()+\\t]*$"
+                    "smithy.api#pattern": "^[a-zA-Z_0-9-./@ ()+\\t]*$"
                 }
             },
             "traits": {
@@ -4986,7 +5174,7 @@
                         "smithy.api#documentation": "<p>A list of <code>Rule</code> objects, each of which have fields <code>RuleName</code> and\n            <code>MatchingKeys</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 15
+                            "max": 25
                         },
                         "smithy.api#required": {}
                     }
@@ -5628,6 +5816,22 @@
                 "smithy.api#retryable": {
                     "throttling": true
                 }
+            }
+        },
+        "com.amazonaws.entityresolution#UniqueId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 760
+                },
+                "smithy.api#pattern": "^[a-zA-Z_0-9-,]*$"
+            }
+        },
+        "com.amazonaws.entityresolution#UniqueIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.entityresolution#UniqueId"
             }
         },
         "com.amazonaws.entityresolution#UntagResource": {
