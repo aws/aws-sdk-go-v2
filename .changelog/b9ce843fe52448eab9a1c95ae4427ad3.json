@@ -1,8 +1,0 @@
-{
-    "id": "b9ce843f-e524-48ea-b9a1-c95ae4427ad3",
-    "type": "feature",
-    "description": "Add SSM DescribeInstanceProperties API to public AWS SDK.",
-    "modules": [
-        "service/ssm"
-    ]
-}

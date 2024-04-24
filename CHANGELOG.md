@@ -1,3 +1,19 @@
+# Release (2024-04-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.37.0](service/datasync/CHANGELOG.md#v1370-2024-04-24)
+  * **Feature**: This change allows users to disable and enable the schedules associated with their tasks.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.159.0](service/ec2/CHANGELOG.md#v11590-2024-04-24)
+  * **Feature**: Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.28.0](service/emrcontainers/CHANGELOG.md#v1280-2024-04-24)
+  * **Feature**: EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.10.0](service/entityresolution/CHANGELOG.md#v1100-2024-04-24)
+  * **Feature**: Support Batch Unique IDs Deletion.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.31.0](service/gamelift/CHANGELOG.md#v1310-2024-04-24)
+  * **Feature**: Amazon GameLift releases container fleets support for public preview. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.50.0](service/ssm/CHANGELOG.md#v1500-2024-04-24)
+  * **Feature**: Add SSM DescribeInstanceProperties API to public AWS SDK.
+
 # Release (2024-04-23)
 
 ## Module Highlights

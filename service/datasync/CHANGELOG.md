@@ -1,3 +1,7 @@
+# v1.37.0 (2024-04-24)
+
+* **Feature**: This change allows users to disable and enable the schedules associated with their tasks.
+
 # v1.36.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

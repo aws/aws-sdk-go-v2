@@ -1,3 +1,7 @@
+# v1.31.0 (2024-04-24)
+
+* **Feature**: Amazon GameLift releases container fleets support for public preview. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.
+
 # v1.30.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

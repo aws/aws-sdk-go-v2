@@ -1,8 +1,0 @@
-{
-    "id": "72ed97c7-32b1-4ff0-9696-4c674ba59f10",
-    "type": "feature",
-    "description": "This change allows users to disable and enable the schedules associated with their tasks.",
-    "modules": [
-        "service/datasync"
-    ]
-}
