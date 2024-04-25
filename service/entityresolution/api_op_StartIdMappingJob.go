@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +35,9 @@ type StartIdMappingJobInput struct {
 	// This member is required.
 	WorkflowName *string
 
+	// A list of OutputSource objects.
+	OutputSourceConfig []types.IdMappingJobOutputSource
+
 	noSmithyDocumentSerde
 }
 
@@ -43,6 +47,9 @@ type StartIdMappingJobOutput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	// A list of OutputSource objects.
+	OutputSourceConfig []types.IdMappingJobOutputSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

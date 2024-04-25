@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CancelCapacityTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelCapacityTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelCapacityTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelOrder(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelOrder(context.Background(), nil, func(o *Options) {
@@ -134,6 +146,18 @@ func TestCheckSnapshot_DeleteSite(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCapacityTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCatalogItem(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCatalogItem(context.Background(), nil, func(o *Options) {
@@ -194,6 +218,18 @@ func TestCheckSnapshot_GetOutpostInstanceTypes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOutpostSupportedInstanceTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOutpostSupportedInstanceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSite(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSite(context.Background(), nil, func(o *Options) {
@@ -223,6 +259,18 @@ func TestCheckSnapshot_ListAssets(t *testing.T) {
 	_, err := svc.ListAssets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListAssets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCapacityTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCapacityTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCapacityTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -283,6 +331,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartCapacityTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCapacityTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartCapacityTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -373,6 +433,18 @@ func TestCheckSnapshot_UpdateSiteRackPhysicalProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CancelCapacityTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelCapacityTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelCapacityTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelOrder(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelOrder(context.Background(), nil, func(o *Options) {
@@ -445,6 +517,18 @@ func TestUpdateSnapshot_DeleteSite(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCapacityTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCatalogItem(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCatalogItem(context.Background(), nil, func(o *Options) {
@@ -505,6 +589,18 @@ func TestUpdateSnapshot_GetOutpostInstanceTypes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOutpostSupportedInstanceTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOutpostSupportedInstanceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSite(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSite(context.Background(), nil, func(o *Options) {
@@ -534,6 +630,18 @@ func TestUpdateSnapshot_ListAssets(t *testing.T) {
 	_, err := svc.ListAssets(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAssets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCapacityTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCapacityTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCapacityTasks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -594,6 +702,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartCapacityTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartCapacityTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartCapacityTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

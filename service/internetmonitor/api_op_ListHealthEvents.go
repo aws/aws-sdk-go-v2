@@ -13,9 +13,9 @@ import (
 )
 
 // Lists all health events for a monitor in Amazon CloudWatch Internet Monitor.
-// Returns information for health events including the event start and end time and
-// the status. Health events that have start times during the time frame that is
-// requested are not included in the list of health events.
+// Returns information for health events including the event start and end times,
+// and the status. Health events that have start times during the time frame that
+// is requested are not included in the list of health events.
 func (c *Client) ListHealthEvents(ctx context.Context, params *ListHealthEventsInput, optFns ...func(*Options)) (*ListHealthEventsOutput, error) {
 	if params == nil {
 		params = &ListHealthEventsInput{}
@@ -45,7 +45,11 @@ type ListHealthEventsInput struct {
 	// The status of a health event.
 	EventStatus types.HealthEventStatus
 
-	// TBD
+	// The account ID for an account that you've set up cross-account sharing for in
+	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
+	// Amazon CloudWatch Observability Access Manager. For more information, see
+	// Internet Monitor cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html)
+	// in the Amazon CloudWatch Internet Monitor User Guide.
 	LinkedAccountId *string
 
 	// The number of health event objects that you want to return with this call.

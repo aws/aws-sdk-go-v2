@@ -992,6 +992,7 @@ const (
 	VolumeStatusContainsMarketplaceProductCodes               VolumeStatus = "CONTAINS_MARKETPLACE_PRODUCT_CODES"
 	VolumeStatusMissingVolumeAttributes                       VolumeStatus = "MISSING_VOLUME_ATTRIBUTES"
 	VolumeStatusMissingVolumeAttributesAndPrecheckUnavailable VolumeStatus = "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+	VolumeStatusPending                                       VolumeStatus = "PENDING"
 )
 
 // Values returns all known values for VolumeStatus. Note that this can be
@@ -1003,5 +1004,6 @@ func (VolumeStatus) Values() []VolumeStatus {
 		"CONTAINS_MARKETPLACE_PRODUCT_CODES",
 		"MISSING_VOLUME_ATTRIBUTES",
 		"MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE",
+		"PENDING",
 	}
 }

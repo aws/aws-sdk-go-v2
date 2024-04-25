@@ -62,6 +62,42 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CreateEvaluationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEvaluationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEvaluationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGuardrail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateGuardrailVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGuardrailVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGuardrailVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateModelCustomizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModelCustomizationJob(context.Background(), nil, func(o *Options) {
@@ -91,6 +127,18 @@ func TestCheckSnapshot_DeleteCustomModel(t *testing.T) {
 	_, err := svc.DeleteCustomModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCustomModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGuardrail")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -134,11 +182,35 @@ func TestCheckSnapshot_GetCustomModel(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetEvaluationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEvaluationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetEvaluationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFoundationModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFoundationModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetFoundationModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGuardrail")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -194,11 +266,35 @@ func TestCheckSnapshot_ListCustomModels(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEvaluationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEvaluationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEvaluationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListFoundationModels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFoundationModels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListFoundationModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGuardrails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGuardrails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGuardrails")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -254,6 +350,18 @@ func TestCheckSnapshot_PutModelInvocationLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopEvaluationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopEvaluationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopEvaluationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopModelCustomizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopModelCustomizationJob(context.Background(), nil, func(o *Options) {
@@ -290,6 +398,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGuardrail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateProvisionedModelThroughput(context.Background(), nil, func(o *Options) {
@@ -301,6 +421,42 @@ func TestCheckSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CreateEvaluationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEvaluationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEvaluationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGuardrail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateGuardrailVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGuardrailVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGuardrailVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateModelCustomizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateModelCustomizationJob(context.Background(), nil, func(o *Options) {
@@ -330,6 +486,18 @@ func TestUpdateSnapshot_DeleteCustomModel(t *testing.T) {
 	_, err := svc.DeleteCustomModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCustomModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGuardrail")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -373,11 +541,35 @@ func TestUpdateSnapshot_GetCustomModel(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetEvaluationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetEvaluationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetEvaluationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFoundationModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFoundationModel(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFoundationModel")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGuardrail")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -433,11 +625,35 @@ func TestUpdateSnapshot_ListCustomModels(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListEvaluationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEvaluationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEvaluationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListFoundationModels(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFoundationModels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFoundationModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGuardrails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGuardrails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGuardrails")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -493,6 +709,18 @@ func TestUpdateSnapshot_PutModelInvocationLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StopEvaluationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopEvaluationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopEvaluationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopModelCustomizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopModelCustomizationJob(context.Background(), nil, func(o *Options) {
@@ -522,6 +750,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGuardrail(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGuardrail(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGuardrail")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

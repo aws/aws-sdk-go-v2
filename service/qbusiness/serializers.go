@@ -341,6 +341,18 @@ func awsRestjson1_serializeOpDocumentChatSyncInput(v *ChatSyncInput, value smith
 		}
 	}
 
+	if len(v.ChatMode) > 0 {
+		ok := object.Key("chatMode")
+		ok.String(string(v.ChatMode))
+	}
+
+	if v.ChatModeConfiguration != nil {
+		ok := object.Key("chatModeConfiguration")
+		if err := awsRestjson1_serializeDocumentChatModeConfiguration(v.ChatModeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -458,6 +470,11 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		if err := awsRestjson1_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.IdentityCenterInstanceArn != nil {
+		ok := object.Key("identityCenterInstanceArn")
+		ok.String(*v.IdentityCenterInstanceArn)
 	}
 
 	if v.RoleArn != nil {
@@ -1149,6 +1166,11 @@ func awsRestjson1_serializeOpDocumentCreateWebExperienceInput(v *CreateWebExperi
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
 	}
 
 	if len(v.SamplePromptsControlMode) > 0 {
@@ -4309,6 +4331,13 @@ func awsRestjson1_serializeOpDocumentUpdateChatControlsConfigurationInput(v *Upd
 		ok.String(*v.ClientToken)
 	}
 
+	if v.CreatorModeConfiguration != nil {
+		ok := object.Key("creatorModeConfiguration")
+		if err := awsRestjson1_serializeDocumentCreatorModeConfiguration(v.CreatorModeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ResponseScope) > 0 {
 		ok := object.Key("responseScope")
 		ok.String(string(v.ResponseScope))
@@ -5341,6 +5370,24 @@ func awsRestjson1_serializeDocumentBlockedPhrasesConfigurationUpdate(v *types.Bl
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChatModeConfiguration(v types.ChatModeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ChatModeConfigurationMemberPluginConfiguration:
+		av := object.Key("pluginConfiguration")
+		if err := awsRestjson1_serializeDocumentPluginConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContentBlockerRule(v *types.ContentBlockerRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5362,6 +5409,18 @@ func awsRestjson1_serializeDocumentContentRetrievalRule(v *types.ContentRetrieva
 		if err := awsRestjson1_serializeDocumentEligibleDataSources(v.EligibleDataSources, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCreatorModeConfiguration(v *types.CreatorModeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CreatorModeControl) > 0 {
+		ok := object.Key("creatorModeControl")
+		ok.String(string(v.CreatorModeControl))
 	}
 
 	return nil
@@ -6093,6 +6152,18 @@ func awsRestjson1_serializeDocumentPluginAuthConfiguration(v types.PluginAuthCon
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPluginConfiguration(v *types.PluginConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PluginId != nil {
+		ok := object.Key("pluginId")
+		ok.String(*v.PluginId)
+	}
+
 	return nil
 }
 

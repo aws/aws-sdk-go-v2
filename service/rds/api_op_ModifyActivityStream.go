@@ -42,7 +42,7 @@ type ModifyActivityStreamInput struct {
 	AuditPolicyState types.AuditPolicyState
 
 	// The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB
-	// instance. For example, arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db .
+	// instance. For example, arn:aws:rds:us-east-1:12345667890:db:my-orcl-db .
 	ResourceArn *string
 
 	noSmithyDocumentSerde

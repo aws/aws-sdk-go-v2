@@ -29,7 +29,7 @@ func (c *Client) UpdateOutpost(ctx context.Context, params *UpdateOutpostInput, 
 
 type UpdateOutpostInput struct {
 
-	// The ID or the Amazon Resource Name (ARN) of the Outpost.
+	// The ID or ARN of the Outpost.
 	//
 	// This member is required.
 	OutpostId *string

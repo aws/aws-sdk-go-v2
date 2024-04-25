@@ -1,3 +1,7 @@
+# v1.24.0 (2024-04-12)
+
+* **Feature**: Added new CREATE_FAILED status for data stores. Added new errorCause to DescribeFHIRDatastore API and ListFHIRDatastores API response for additional insights into data store creation and deletion workflows.
+
 # v1.23.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

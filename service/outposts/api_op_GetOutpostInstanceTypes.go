@@ -29,7 +29,7 @@ func (c *Client) GetOutpostInstanceTypes(ctx context.Context, params *GetOutpost
 
 type GetOutpostInstanceTypesInput struct {
 
-	// The ID or the Amazon Resource Name (ARN) of the Outpost.
+	// The ID or ARN of the Outpost.
 	//
 	// This member is required.
 	OutpostId *string

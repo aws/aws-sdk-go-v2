@@ -7,6 +7,24 @@ import (
 	"time"
 )
 
+// Information about about the account link.
+type AccountLink struct {
+
+	// The identifier of the account link.
+	AccountLinkId *string
+
+	// The status of the account link.
+	AccountLinkStatus AccountLinkStatusEnum
+
+	// The identifier of the source account.
+	SourceAccountId *string
+
+	// The identifier of the target account.
+	TargetAccountId *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a modification to the configuration of Bring Your Own License (BYOL)
 // for the specified account.
 type AccountModification struct {

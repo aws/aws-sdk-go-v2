@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts or continues a non-streaming Amazon Q conversation.
+// Starts or continues a non-streaming Amazon Q Business conversation.
 func (c *Client) ChatSync(ctx context.Context, params *ChatSyncInput, optFns ...func(*Options)) (*ChatSyncOutput, error) {
 	if params == nil {
 		params = &ChatSyncInput{}
@@ -29,31 +29,45 @@ func (c *Client) ChatSync(ctx context.Context, params *ChatSyncInput, optFns ...
 
 type ChatSyncInput struct {
 
-	// The identifier of the Amazon Q application linked to the Amazon Q conversation.
+	// The identifier of the Amazon Q Business application linked to the Amazon Q
+	// Business conversation.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the user attached to the chat input.
-	//
-	// This member is required.
-	UserId *string
-
-	// A request from an end user to perform an Amazon Q plugin action.
+	// A request from an end user to perform an Amazon Q Business plugin action.
 	ActionExecution *types.ActionExecution
 
 	// A list of files uploaded directly during chat. You can upload a maximum of 5
 	// files of upto 10 MB each.
 	Attachments []types.AttachmentInput
 
-	// Enables filtering of Amazon Q web experience responses based on document
-	// attributes or metadata fields.
+	// Enables filtering of Amazon Q Business web experience responses based on
+	// document attributes or metadata fields.
 	AttributeFilter *types.AttributeFilter
+
+	// The chat modes available in an Amazon Q Business web experience.
+	//   - RETRIEVAL_MODE - The default chat mode for an Amazon Q Business application.
+	//   When this mode is enabled, Amazon Q Business generates responses only from data
+	//   sources connected to an Amazon Q Business application.
+	//   - CREATOR_MODE - By selecting this mode, users can choose to generate
+	//   responses only from the LLM knowledge, without consulting connected data
+	//   sources, for a chat request.
+	//   - PLUGIN_MODE - By selecting this mode, users can choose to use plugins in
+	//   chat.
+	// For more information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
+	// , Plugins (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html)
+	// , and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
+	// .
+	ChatMode types.ChatMode
+
+	// The chat mode configuration for an Amazon Q Business application.
+	ChatModeConfiguration types.ChatModeConfiguration
 
 	// A token that you provide to identify a chat request.
 	ClientToken *string
 
-	// The identifier of the Amazon Q conversation.
+	// The identifier of the Amazon Q Business conversation.
 	ConversationId *string
 
 	// The identifier of the previous end user text input message in a conversation.
@@ -61,6 +75,9 @@ type ChatSyncInput struct {
 
 	// The groups that a user associated with the chat input belongs to.
 	UserGroups []string
+
+	// The identifier of the user attached to the chat input.
+	UserId *string
 
 	// A end user message in a conversation.
 	UserMessage *string
@@ -70,11 +87,11 @@ type ChatSyncInput struct {
 
 type ChatSyncOutput struct {
 
-	// A request from Amazon Q to the end user for information Amazon Q needs to
-	// successfully complete a requested plugin action.
+	// A request from Amazon Q Business to the end user for information Amazon Q
+	// Business needs to successfully complete a requested plugin action.
 	ActionReview *types.ActionReview
 
-	// The identifier of the Amazon Q conversation.
+	// The identifier of the Amazon Q Business conversation.
 	ConversationId *string
 
 	// A list of files which failed to upload during chat.
@@ -86,10 +103,11 @@ type ChatSyncOutput struct {
 	// An AI-generated message in a conversation.
 	SystemMessage *string
 
-	// The identifier of an Amazon Q AI generated message within the conversation.
+	// The identifier of an Amazon Q Business AI generated message within the
+	// conversation.
 	SystemMessageId *string
 
-	// The identifier of an Amazon Q end user text input message within the
+	// The identifier of an Amazon Q Business end user text input message within the
 	// conversation.
 	UserMessageId *string
 

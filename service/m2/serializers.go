@@ -1621,6 +1621,80 @@ func awsRestjson1_serializeOpHttpBindingsListBatchJobExecutionsInput(v *ListBatc
 	return nil
 }
 
+type awsRestjson1_serializeOpListBatchJobRestartPoints struct {
+}
+
+func (*awsRestjson1_serializeOpListBatchJobRestartPoints) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListBatchJobRestartPoints) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListBatchJobRestartPointsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/applications/{applicationId}/batch-job-executions/{executionId}/steps")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListBatchJobRestartPointsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListBatchJobRestartPointsInput(v *ListBatchJobRestartPointsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member applicationId must not be empty")}
+	}
+	if v.ApplicationId != nil {
+		if err := encoder.SetURI("applicationId").String(*v.ApplicationId); err != nil {
+			return err
+		}
+	}
+
+	if v.ExecutionId == nil || len(*v.ExecutionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member executionId must not be empty")}
+	}
+	if v.ExecutionId != nil {
+		if err := encoder.SetURI("executionId").String(*v.ExecutionId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListDataSetImportHistory struct {
 }
 
@@ -2730,6 +2804,12 @@ func awsRestjson1_serializeDocumentBatchJobIdentifier(v types.BatchJobIdentifier
 			return err
 		}
 
+	case *types.BatchJobIdentifierMemberRestartBatchJobIdentifier:
+		av := object.Key("restartBatchJobIdentifier")
+		if err := awsRestjson1_serializeDocumentRestartBatchJobIdentifier(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.BatchJobIdentifierMemberS3BatchJobIdentifier:
 		av := object.Key("s3BatchJobIdentifier")
 		if err := awsRestjson1_serializeDocumentS3BatchJobIdentifier(&uv.Value, av); err != nil {
@@ -3024,6 +3104,33 @@ func awsRestjson1_serializeDocumentJobIdentifier(v types.JobIdentifier, value sm
 	return nil
 }
 
+func awsRestjson1_serializeDocumentJobStepRestartMarker(v *types.JobStepRestartMarker, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FromProcStep != nil {
+		ok := object.Key("fromProcStep")
+		ok.String(*v.FromProcStep)
+	}
+
+	if v.FromStep != nil {
+		ok := object.Key("fromStep")
+		ok.String(*v.FromStep)
+	}
+
+	if v.ToProcStep != nil {
+		ok := object.Key("toProcStep")
+		ok.String(*v.ToProcStep)
+	}
+
+	if v.ToStep != nil {
+		ok := object.Key("toStep")
+		ok.String(*v.ToStep)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPoAttributes(v *types.PoAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3099,6 +3206,25 @@ func awsRestjson1_serializeDocumentRecordLength(v *types.RecordLength, value smi
 	{
 		ok := object.Key("min")
 		ok.Integer(v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRestartBatchJobIdentifier(v *types.RestartBatchJobIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecutionId != nil {
+		ok := object.Key("executionId")
+		ok.String(*v.ExecutionId)
+	}
+
+	if v.JobStepRestartMarker != nil {
+		ok := object.Key("jobStepRestartMarker")
+		if err := awsRestjson1_serializeDocumentJobStepRestartMarker(v.JobStepRestartMarker, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

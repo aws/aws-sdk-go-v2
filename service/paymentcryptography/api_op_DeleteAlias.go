@@ -11,16 +11,17 @@ import (
 )
 
 // Deletes the alias, but doesn't affect the underlying key. Each key can have
-// multiple aliases. To get the aliases of all keys, use the ListAliases
-// operation. To change the alias of a key, first use DeleteAlias to delete the
-// current alias and then use CreateAlias to create a new alias. To associate an
-// existing alias with a different key, call UpdateAlias . Cross-account use: This
-// operation can't be used across different Amazon Web Services accounts. Related
-// operations:
-//   - CreateAlias
-//   - GetAlias
-//   - ListAliases
-//   - UpdateAlias
+// multiple aliases. To get the aliases of all keys, use the UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
+// operation. To change the alias of a key, first use DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
+// to delete the current alias and then use CreateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html)
+// to create a new alias. To associate an existing alias with a different key, call
+// UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
+// . Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts. Related operations:
+//   - CreateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html)
+//   - GetAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html)
+//   - ListAliases (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
+//   - UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
 func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optFns ...func(*Options)) (*DeleteAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAliasInput{}

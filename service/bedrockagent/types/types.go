@@ -12,13 +12,24 @@ import (
 //
 // The following types satisfy this interface:
 //
+//	ActionGroupExecutorMemberCustomControl
 //	ActionGroupExecutorMemberLambda
 type ActionGroupExecutor interface {
 	isActionGroupExecutor()
 }
 
-// The ARN of the Lambda function containing the business logic that is carried
-// out upon invoking the action.
+// To return the action group invocation results directly in the InvokeAgent
+// response, specify RETURN_CONTROL .
+type ActionGroupExecutorMemberCustomControl struct {
+	Value CustomControlMethod
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionGroupExecutorMemberCustomControl) isActionGroupExecutor() {}
+
+// The Amazon Resource Name (ARN) of the Lambda function containing the business
+// logic that is carried out upon invoking the action.
 type ActionGroupExecutorMemberLambda struct {
 	Value string
 
@@ -61,7 +72,7 @@ type ActionGroupSummary struct {
 // Contains details about an agent.
 type Agent struct {
 
-	// The ARN of the agent.
+	// The Amazon Resource Name (ARN) of the agent.
 	//
 	// This member is required.
 	AgentArn *string
@@ -76,8 +87,8 @@ type Agent struct {
 	// This member is required.
 	AgentName *string
 
-	// The ARN of the IAM role with permissions to call API operations on the agent.
-	// The ARN must begin with AmazonBedrockExecutionRoleForAgents_ .
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
@@ -125,7 +136,7 @@ type Agent struct {
 	// .
 	ClientToken *string
 
-	// The ARN of the KMS key that encrypts the agent.
+	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
 	CustomerEncryptionKeyArn *string
 
 	// The description of the agent.
@@ -196,8 +207,8 @@ type AgentActionGroup struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The ARN of the Lambda function containing the business logic that is carried
-	// out upon invoking the action.
+	// The Amazon Resource Name (ARN) of the Lambda function containing the business
+	// logic that is carried out upon invoking the action.
 	ActionGroupExecutor ActionGroupExecutor
 
 	// Contains either details about the S3 object containing the OpenAPI schema for
@@ -216,6 +227,10 @@ type AgentActionGroup struct {
 	// The description of the action group.
 	Description *string
 
+	// Defines functions that each define parameters that the agent needs to invoke
+	// from the user. Each function represents an action in an action group.
+	FunctionSchema FunctionSchema
+
 	// If this field is set as AMAZON.UserInput , the agent can request the user for
 	// additional information when trying to complete a task. The description ,
 	// apiSchema , and actionGroupExecutor fields must be blank for this action group.
@@ -231,7 +246,7 @@ type AgentActionGroup struct {
 // Contains details about an alias of an agent.
 type AgentAlias struct {
 
-	// The ARN of the alias of the agent.
+	// The Amazon Resource Name (ARN) of the alias of the agent.
 	//
 	// This member is required.
 	AgentAliasArn *string
@@ -467,7 +482,7 @@ type AgentSummary struct {
 // Contains details about a version of an agent.
 type AgentVersion struct {
 
-	// The ARN of the agent that the version belongs to.
+	// The Amazon Resource Name (ARN) of the agent that the version belongs to.
 	//
 	// This member is required.
 	AgentArn *string
@@ -482,8 +497,8 @@ type AgentVersion struct {
 	// This member is required.
 	AgentName *string
 
-	// The ARN of the IAM role with permissions to invoke API operations on the agent.
-	// The ARN must begin with AmazonBedrockExecutionRoleForAgents_ .
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
@@ -516,7 +531,7 @@ type AgentVersion struct {
 	// This member is required.
 	Version *string
 
-	// The ARN of the KMS key that encrypts the agent.
+	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
 	CustomerEncryptionKeyArn *string
 
 	// The description of the version.
@@ -679,8 +694,14 @@ type DataSource struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The deletion policy for the data source.
+	DataDeletionPolicy DataDeletionPolicy
+
 	// The description of the data source.
 	Description *string
+
+	// The details of the failure reasons related to the data source.
+	FailureReasons []string
 
 	// Contains details about the configuration of the server-side encryption.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
@@ -757,6 +778,55 @@ type FixedSizeChunkingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Defines parameters that the agent needs to invoke from the user to complete the
+// function. Corresponds to an action in an action group. This data type is used in
+// the following API operations:
+//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
+//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
+//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
+//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
+//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+type Function struct {
+
+	// A name for the function.
+	//
+	// This member is required.
+	Name *string
+
+	// A description of the function and its purpose.
+	Description *string
+
+	// The parameters that the agent elicits from the user to fulfill the function.
+	Parameters map[string]ParameterDetail
+
+	noSmithyDocumentSerde
+}
+
+// Defines functions that each define parameters that the agent needs to invoke
+// from the user. Each function represents an action in an action group. This data
+// type is used in the following API operations:
+//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
+//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
+//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
+//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
+//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+//
+// The following types satisfy this interface:
+//
+//	FunctionSchemaMemberFunctions
+type FunctionSchema interface {
+	isFunctionSchema()
+}
+
+// A list of functions that each define an action in the action group.
+type FunctionSchemaMemberFunctions struct {
+	Value []Function
+
+	noSmithyDocumentSerde
+}
+
+func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
+
 // Contains inference parameters to use when the agent invokes a foundation model
 // in the part of the agent sequence defined by the promptType . For more
 // information, see Inference parameters for foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
@@ -799,7 +869,7 @@ type InferenceConfiguration struct {
 // following API operations:
 //   - StartIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax)
 //   - GetIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax)
-//   - ListIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJob.html#API_agent_ListIngestionJob_ResponseSyntax)
+//   - ListIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax)
 type IngestionJob struct {
 
 	// The unique identifier of the ingested data source.
@@ -963,7 +1033,7 @@ type KnowledgeBase struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ARN of the knowledge base.
+	// The Amazon Resource Name (ARN) of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseArn *string
@@ -983,9 +1053,8 @@ type KnowledgeBase struct {
 	// This member is required.
 	Name *string
 
-	// The ARN of the IAM role with permissions to invoke API operations on the
-	// knowledge base. The ARN must begin with
-	// AmazonBedrockExecutionRoleForKnowledgeBase_ .
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the knowledge base.
 	//
 	// This member is required.
 	RoleArn *string
@@ -1069,7 +1138,7 @@ type KnowledgeBaseSummary struct {
 // .
 type OpenSearchServerlessConfiguration struct {
 
-	// The ARN of the OpenSearch Service vector store.
+	// The Amazon Resource Name (ARN) of the OpenSearch Service vector store.
 	//
 	// This member is required.
 	CollectionArn *string
@@ -1113,6 +1182,31 @@ type OpenSearchServerlessFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a parameter in a function for an action group. This data
+// type is used in the following API operations:
+//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
+//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
+//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
+//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
+//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+type ParameterDetail struct {
+
+	// The data type of the parameter.
+	//
+	// This member is required.
+	Type Type
+
+	// A description of the parameter. Helps the foundation model determine how to
+	// elicit the parameters from the user.
+	Description *string
+
+	// Whether the parameter is required for the agent to complete the function for
+	// action group invocation.
+	Required *bool
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the storage configuration of the knowledge base in
 // Pinecone. For more information, see Create a vector index in Pinecone (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html)
 // .
@@ -1123,8 +1217,8 @@ type PineconeConfiguration struct {
 	// This member is required.
 	ConnectionString *string
 
-	// The ARN of the secret that you created in Secrets Manager that is linked to
-	// your Pinecone API key.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Pinecone API key.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
@@ -1231,8 +1325,8 @@ type PromptOverrideConfiguration struct {
 // .
 type RdsConfiguration struct {
 
-	// The ARN of the secret that you created in Secrets Manager that is linked to
-	// your Amazon RDS database.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Amazon RDS database.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
@@ -1248,7 +1342,7 @@ type RdsConfiguration struct {
 	// This member is required.
 	FieldMapping *RdsFieldMapping
 
-	// The ARN of the vector store.
+	// The Amazon Resource Name (ARN) of the vector store.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -1297,8 +1391,8 @@ type RdsFieldMapping struct {
 // .
 type RedisEnterpriseCloudConfiguration struct {
 
-	// The ARN of the secret that you created in Secrets Manager that is linked to
-	// your Redis Enterprise Cloud database.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Redis Enterprise Cloud database.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
@@ -1350,10 +1444,13 @@ type RedisEnterpriseCloudFieldMapping struct {
 // Contains information about the S3 configuration of the data source.
 type S3DataSourceConfiguration struct {
 
-	// The ARN of the bucket that contains the data source.
+	// The Amazon Resource Name (ARN) of the bucket that contains the data source.
 	//
 	// This member is required.
 	BucketArn *string
+
+	// The account ID for the owner of the S3 bucket.
+	BucketOwnerAccountId *string
 
 	// A list of S3 prefixes that define the object containing the data sources. For
 	// more information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
@@ -1378,7 +1475,7 @@ type S3Identifier struct {
 // Contains the configuration for server-side encryption.
 type ServerSideEncryptionConfiguration struct {
 
-	// The ARN of the KMS key used to encrypt the resource.
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -1443,7 +1540,8 @@ type VectorIngestionConfiguration struct {
 // knowledge base.
 type VectorKnowledgeBaseConfiguration struct {
 
-	// The ARN of the model used to create vector embeddings for the knowledge base.
+	// The Amazon Resource Name (ARN) of the model used to create vector embeddings
+	// for the knowledge base.
 	//
 	// This member is required.
 	EmbeddingModelArn *string
@@ -1464,3 +1562,4 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isActionGroupExecutor() {}
 func (*UnknownUnionMember) isAPISchema()           {}
+func (*UnknownUnionMember) isFunctionSchema()      {}

@@ -54,8 +54,8 @@ type CreateAgentActionGroupInput struct {
 	// This member is required.
 	AgentVersion *string
 
-	// The ARN of the Lambda function containing the business logic that is carried
-	// out upon invoking the action.
+	// The Amazon Resource Name (ARN) of the Lambda function containing the business
+	// logic that is carried out upon invoking the action.
 	ActionGroupExecutor types.ActionGroupExecutor
 
 	// Specifies whether the action group is available for the agent to invoke or not
@@ -78,6 +78,10 @@ type CreateAgentActionGroupInput struct {
 
 	// A description of the action group.
 	Description *string
+
+	// Contains details about the function schema for the action group or the JSON or
+	// YAML-formatted payload defining the schema.
+	FunctionSchema types.FunctionSchema
 
 	// To allow your agent to request the user for additional information when trying
 	// to complete a task, set this field to AMAZON.UserInput . You must leave the

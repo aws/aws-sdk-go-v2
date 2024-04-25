@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q web experience.
+// Creates an Amazon Q Business web experience.
 func (c *Client) CreateWebExperience(ctx context.Context, params *CreateWebExperienceInput, optFns ...func(*Options)) (*CreateWebExperienceOutput, error) {
 	if params == nil {
 		params = &CreateWebExperienceInput{}
@@ -29,31 +29,37 @@ func (c *Client) CreateWebExperience(ctx context.Context, params *CreateWebExper
 
 type CreateWebExperienceInput struct {
 
-	// The identifier of the Amazon Q web experience.
+	// The identifier of the Amazon Q Business web experience.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// A token you provide to identify a request to create an Amazon Q web experience.
+	// A token you provide to identify a request to create an Amazon Q Business web
+	// experience.
 	ClientToken *string
+
+	// The Amazon Resource Name (ARN) of the service role attached to your web
+	// experience.
+	RoleArn *string
 
 	// Determines whether sample prompts are enabled in the web experience for an end
 	// user.
 	SamplePromptsControlMode types.WebExperienceSamplePromptsControlMode
 
-	// A subtitle to personalize your Amazon Q web experience.
+	// A subtitle to personalize your Amazon Q Business web experience.
 	Subtitle *string
 
-	// A list of key-value pairs that identify or categorize your Amazon Q web
-	// experience. You can also use tags to help control access to the web experience.
-	// Tag keys and values can consist of Unicode letters, digits, white space, and any
-	// of the following symbols: _ . : / = + - @.
+	// A list of key-value pairs that identify or categorize your Amazon Q Business
+	// web experience. You can also use tags to help control access to the web
+	// experience. Tag keys and values can consist of Unicode letters, digits, white
+	// space, and any of the following symbols: _ . : / = + - @.
 	Tags []types.Tag
 
-	// The title for your Amazon Q web experience.
+	// The title for your Amazon Q Business web experience.
 	Title *string
 
-	// The customized welcome message for end users of an Amazon Q web experience.
+	// The customized welcome message for end users of an Amazon Q Business web
+	// experience.
 	WelcomeMessage *string
 
 	noSmithyDocumentSerde
@@ -61,10 +67,10 @@ type CreateWebExperienceInput struct {
 
 type CreateWebExperienceOutput struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Q web experience.
+	// The Amazon Resource Name (ARN) of an Amazon Q Business web experience.
 	WebExperienceArn *string
 
-	// The identifier of the Amazon Q web experience.
+	// The identifier of the Amazon Q Business web experience.
 	WebExperienceId *string
 
 	// Metadata pertaining to the operation's result.

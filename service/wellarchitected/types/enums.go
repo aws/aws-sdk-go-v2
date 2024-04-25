@@ -2,6 +2,25 @@
 
 package types
 
+type AccountJiraIssueManagementStatus string
+
+// Enum values for AccountJiraIssueManagementStatus
+const (
+	AccountJiraIssueManagementStatusEnabled  AccountJiraIssueManagementStatus = "ENABLED"
+	AccountJiraIssueManagementStatusDisabled AccountJiraIssueManagementStatus = "DISABLED"
+)
+
+// Values returns all known values for AccountJiraIssueManagementStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AccountJiraIssueManagementStatus) Values() []AccountJiraIssueManagementStatus {
+	return []AccountJiraIssueManagementStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type AdditionalResourceType string
 
 // Enum values for AdditionalResourceType
@@ -223,6 +242,74 @@ func (ImportLensStatus) Values() []ImportLensStatus {
 		"IN_PROGRESS",
 		"COMPLETE",
 		"ERROR",
+	}
+}
+
+type IntegratingService string
+
+// Enum values for IntegratingService
+const (
+	IntegratingServiceJira IntegratingService = "JIRA"
+)
+
+// Values returns all known values for IntegratingService. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntegratingService) Values() []IntegratingService {
+	return []IntegratingService{
+		"JIRA",
+	}
+}
+
+type IntegrationStatus string
+
+// Enum values for IntegrationStatus
+const (
+	IntegrationStatusConfigured    IntegrationStatus = "CONFIGURED"
+	IntegrationStatusNotConfigured IntegrationStatus = "NOT_CONFIGURED"
+)
+
+// Values returns all known values for IntegrationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationStatus) Values() []IntegrationStatus {
+	return []IntegrationStatus{
+		"CONFIGURED",
+		"NOT_CONFIGURED",
+	}
+}
+
+type IntegrationStatusInput string
+
+// Enum values for IntegrationStatusInput
+const (
+	IntegrationStatusInputNotConfigured IntegrationStatusInput = "NOT_CONFIGURED"
+)
+
+// Values returns all known values for IntegrationStatusInput. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IntegrationStatusInput) Values() []IntegrationStatusInput {
+	return []IntegrationStatusInput{
+		"NOT_CONFIGURED",
+	}
+}
+
+type IssueManagementType string
+
+// Enum values for IssueManagementType
+const (
+	IssueManagementTypeAuto   IssueManagementType = "AUTO"
+	IssueManagementTypeManual IssueManagementType = "MANUAL"
+)
+
+// Values returns all known values for IssueManagementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IssueManagementType) Values() []IssueManagementType {
+	return []IssueManagementType{
+		"AUTO",
+		"MANUAL",
 	}
 }
 
@@ -678,5 +765,26 @@ func (WorkloadImprovementStatus) Values() []WorkloadImprovementStatus {
 		"IN_PROGRESS",
 		"COMPLETE",
 		"RISK_ACKNOWLEDGED",
+	}
+}
+
+type WorkloadIssueManagementStatus string
+
+// Enum values for WorkloadIssueManagementStatus
+const (
+	WorkloadIssueManagementStatusEnabled  WorkloadIssueManagementStatus = "ENABLED"
+	WorkloadIssueManagementStatusDisabled WorkloadIssueManagementStatus = "DISABLED"
+	WorkloadIssueManagementStatusInherit  WorkloadIssueManagementStatus = "INHERIT"
+)
+
+// Values returns all known values for WorkloadIssueManagementStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (WorkloadIssueManagementStatus) Values() []WorkloadIssueManagementStatus {
+	return []WorkloadIssueManagementStatus{
+		"ENABLED",
+		"DISABLED",
+		"INHERIT",
 	}
 }

@@ -20,15 +20,16 @@ import (
 // multiple aliases. You can't create an alias without a key. The alias must be
 // unique in the account and Amazon Web Services Region, but you can create another
 // alias with the same name in a different Amazon Web Services Region. To change
-// the key that's associated with the alias, call UpdateAlias . To delete the
-// alias, call DeleteAlias . These operations don't affect the underlying key. To
-// get the alias that you created, call ListAliases . Cross-account use: This
-// operation can't be used across different Amazon Web Services accounts. Related
-// operations:
-//   - DeleteAlias
-//   - GetAlias
-//   - ListAliases
-//   - UpdateAlias
+// the key that's associated with the alias, call UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
+// . To delete the alias, call DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
+// . These operations don't affect the underlying key. To get the alias that you
+// created, call ListAliases (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
+// . Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts. Related operations:
+//   - DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
+//   - GetAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html)
+//   - ListAliases (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
+//   - UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}

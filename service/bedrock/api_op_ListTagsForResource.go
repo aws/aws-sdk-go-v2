@@ -12,8 +12,8 @@ import (
 )
 
 // List the tags associated with the specified resource. For more information, see
-// Tagging resources (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// Tagging resources (https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html)
+// in the Amazon Bedrock User Guide.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -31,7 +31,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) of the resource.
 	//
 	// This member is required.
 	ResourceARN *string

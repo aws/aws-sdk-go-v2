@@ -40,10 +40,11 @@ func Extract(servicePath string, serviceDir fs.DirEntry, items map[string]jewelr
 			}
 
 			index := astIndex{
-				Types:     map[string]*ast.TypeSpec{},
-				Functions: map[string]*ast.FuncDecl{},
-				Fields:    map[string]*ast.Field{},
-				Other:     []*ast.GenDecl{},
+				Types:            map[string]*ast.TypeSpec{},
+				Functions:        map[string]*ast.FuncDecl{},
+				Fields:           map[string]*ast.Field{},
+				StringEnumConsts: map[string]string{},
+				Other:            []*ast.GenDecl{},
 			}
 
 			for _, p := range directory {
@@ -56,7 +57,7 @@ func Extract(servicePath string, serviceDir fs.DirEntry, items map[string]jewelr
 
 				indexFromAst(p, &index)
 
-				err = extractTypes(packageName, index.Types, items)
+				err = extractTypes(d.Name(), packageName, index, items)
 				if err != nil {
 					log.Fatal(err)
 				}
@@ -74,11 +75,13 @@ func Extract(servicePath string, serviceDir fs.DirEntry, items map[string]jewelr
 }
 
 // extractType iterates through
-func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[string]jewelryItem) error {
+func extractTypes(pkg, module string, index astIndex, items map[string]jewelryItem) error {
+	types := index.Types
 	for kt, vt := range types {
 		typeName := vt.Name.Name
 
 		item := jewelryItem{
+			Package:     pkg,
 			Name:        typeName,
 			Summary:     formatComment(vt.Doc),
 			Members:     []jewelryItem{},
@@ -87,29 +90,15 @@ func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[
 			Params:      []jewelryParam{},
 			BreadCrumbs: []breadCrumb{
 				{
-					Name: packageName,
+					Name: module,
 					Kind: jewelryItemKindPackage,
 				},
 			},
 		}
 		members := []jewelryItem{}
 
-		st, ok := vt.Type.(*ast.StructType)
-
-		if !ok {
-			item.Type = jewelryItemKindInterface
-
-			bc := item.BreadCrumbs
-			bc = append(bc, breadCrumb{
-				Name: typeName,
-				Kind: jewelryItemKindInterface,
-			})
-			item.BreadCrumbs = bc
-			item.Signature = typeSignature{
-				Signature: fmt.Sprintf("type %v interface", typeName),
-			}
-
-		} else {
+		switch st := vt.Type.(type) {
+		case *ast.StructType:
 			item.Type = jewelryItemKindStruct
 			bc := item.BreadCrumbs
 			bc = append(bc, breadCrumb{
@@ -120,9 +109,6 @@ func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[
 			item.Signature = typeSignature{
 				Signature: fmt.Sprintf("type %v struct", typeName),
 			}
-		}
-
-		if ok && st.Fields != nil && st.Fields.List != nil {
 			for _, vf := range st.Fields.List {
 				namesNum := len(vf.Names)
 				for i := 0; i < namesNum; i++ {
@@ -141,7 +127,7 @@ func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[
 					fieldItem.Type = jewelryItemKindField
 					fieldItem.BreadCrumbs = []breadCrumb{
 						{
-							Name: packageName,
+							Name: module,
 							Kind: jewelryItemKindPackage,
 						},
 						{
@@ -154,18 +140,74 @@ func extractTypes(packageName string, types map[string]*ast.TypeSpec, items map[
 						},
 					}
 					fieldItem.Signature = typeSignature{
-						Signature: toSignature(vf.Type, packageName),
+						Signature: toSignature(vf.Type, module),
 						// Location is unused - links have to be embedded in signature
 					}
 
 					members = append(members, fieldItem)
 				}
 			}
+		case *ast.Ident:
+			if st.Name != "string" {
+				continue
+			}
+
+			// probably an enum, map its variants to members
+			item.Type = jewelryItemKindEnum
+			item.BreadCrumbs = append(item.BreadCrumbs, breadCrumb{
+				Name: typeName,
+				Kind: jewelryItemKindEnum,
+			})
+			for name, value := range index.StringEnumConsts {
+				if strings.HasPrefix(name, typeName) { // good enough
+					members = append(members, jewelryItem{
+						Name:      name,
+						Signature: typeSignature{Signature: typeName},
+						Summary:   value,
+					})
+				}
+			}
+		case *ast.InterfaceType:
+			if !isProbablyUnion(typeName, st) {
+				continue
+			}
+
+			item.Type = jewelryItemKindUnion
+			item.BreadCrumbs = append(item.BreadCrumbs, breadCrumb{
+				Name: typeName,
+				Kind: jewelryItemKindUnion,
+			})
+			for name, typ := range index.Types {
+				if strings.HasPrefix(name, typeName+"Member") {
+					members = append(members, jewelryItem{
+						Name: name,
+						Signature: typeSignature{
+							Signature: fmt.Sprintf("[%s](-aws-sdk-client-%s!%s:Struct)", name, module, name),
+						},
+						Summary: formatComment(typ.Doc),
+					})
+				}
+			}
+		default:
+			continue
 		}
+
 		item.Members = members
 		items[kt] = item
 	}
 	return nil
+}
+
+func isProbablyUnion(name string, i *ast.InterfaceType) bool {
+	for _, field := range i.Methods.List {
+		if len(field.Names) == 0 {
+			continue
+		}
+		if field.Names[0].Name == "is"+name {
+			return true
+		}
+	}
+	return false
 }
 
 // We've already converted the model's HTML to Go docs, now for ref docs we
@@ -260,7 +302,7 @@ func toSignature(v ast.Expr, pkg string) string {
 	case *ast.FuncType:
 		return toFuncSignature(vv, pkg)
 	default:
-		return ""
+		return fmt.Sprintf("[unhandled %T]", v)
 	}
 }
 
@@ -359,35 +401,65 @@ func extractFunctions(packageName string, types map[string]*ast.TypeSpec, functi
 		}
 
 		members := i.Members
-		members = append(members,
-			jewelryItem{
-				Type:        jewelryItemKindMethod,
-				Name:        methodName,
-				Members:     []jewelryItem{},
-				Tags:        []string{},
-				OtherBlocks: map[string]string{},
-				Params:      params,
-				Returns:     returns,
-				Summary:     formatComment(vf.Doc),
-				BreadCrumbs: []breadCrumb{
-					{
-						Name: packageName,
-						Kind: jewelryItemKindPackage,
-					},
-					{
-						Name: receiverName,
-						Kind: jewelryItemKindStruct,
-					},
-					{
-						Name: methodName,
-						Kind: jewelryItemKindMethod,
+
+		// without proper runtime documentation, we have to bridge the gap to
+		// event payloads for now
+		if vf.Name.Name == "GetStream" && isInputOutput(receiverName) {
+			stream := strings.TrimSuffix(receiverName, whichSuffix(receiverName)) + "EventStream"
+			members = append(members, jewelryItem{
+				Name:    "(event stream payload)",
+				Summary: "The event streaming payload union for this structure.",
+				Signature: typeSignature{
+					Signature: fmt.Sprintf("[%s](-aws-sdk-client-%s!%s:Union)", stream, packageName, stream),
+				},
+			})
+		} else {
+			members = append(members,
+				jewelryItem{
+					Type:        jewelryItemKindMethod,
+					Name:        methodName,
+					Members:     []jewelryItem{},
+					Tags:        []string{},
+					OtherBlocks: map[string]string{},
+					Params:      params,
+					Returns:     returns,
+					Summary:     formatComment(vf.Doc),
+					BreadCrumbs: []breadCrumb{
+						{
+							Name: packageName,
+							Kind: jewelryItemKindPackage,
+						},
+						{
+							Name: receiverName,
+							Kind: jewelryItemKindStruct,
+						},
+						{
+							Name: methodName,
+							Kind: jewelryItemKindMethod,
+						},
 					},
 				},
-			},
-		)
+			)
+		}
+
 		i.Members = members
 		items[receiverName] = i
 	}
 
 	return nil
+}
+
+// whether there's "Input" or "Output" on a structure
+func isInputOutput(name string) bool {
+	return strings.HasSuffix(name, "Input") || strings.HasSuffix(name, "Output")
+}
+
+// "Input" or "Output" on a structure
+func whichSuffix(name string) string {
+	if strings.HasSuffix(name, "Input") {
+		return "Input"
+	} else if strings.HasSuffix(name, "Output") {
+		return "Output"
+	}
+	panic("expected -Input or -Output suffix")
 }

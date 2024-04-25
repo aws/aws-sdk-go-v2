@@ -1,3 +1,7 @@
+# v1.44.0 (2024-04-12)
+
+* **Feature**: Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.
+
 # v1.43.5 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

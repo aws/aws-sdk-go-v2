@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a tag from an Amazon Q application or a data source.
+// Removes a tag from an Amazon Q Business application or a data source.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,14 +28,14 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q application, or data source to
-	// remove the tag from.
+	// The Amazon Resource Name (ARN) of the Amazon Q Business application, or data
+	// source to remove the tag from.
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// A list of tag keys to remove from the Amazon Q application or data source. If a
-	// tag key does not exist on the resource, it is ignored.
+	// A list of tag keys to remove from the Amazon Q Business application or data
+	// source. If a tag key does not exist on the resource, it is ignored.
 	//
 	// This member is required.
 	TagKeys []string

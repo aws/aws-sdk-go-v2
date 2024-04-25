@@ -42914,6 +42914,16 @@ func awsAwsjson11_deserializeDocumentDefaultSpaceSettings(v **types.DefaultSpace
 
 	for key, value := range shape {
 		switch key {
+		case "CustomFileSystemConfigs":
+			if err := awsAwsjson11_deserializeDocumentCustomFileSystemConfigs(&sv.CustomFileSystemConfigs, value); err != nil {
+				return err
+			}
+
+		case "CustomPosixUserConfig":
+			if err := awsAwsjson11_deserializeDocumentCustomPosixUserConfig(&sv.CustomPosixUserConfig, value); err != nil {
+				return err
+			}
+
 		case "ExecutionRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -42921,6 +42931,11 @@ func awsAwsjson11_deserializeDocumentDefaultSpaceSettings(v **types.DefaultSpace
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.ExecutionRole = ptr.String(jtv)
+			}
+
+		case "JupyterLabAppSettings":
+			if err := awsAwsjson11_deserializeDocumentJupyterLabAppSettings(&sv.JupyterLabAppSettings, value); err != nil {
+				return err
 			}
 
 		case "JupyterServerAppSettings":
@@ -42935,6 +42950,11 @@ func awsAwsjson11_deserializeDocumentDefaultSpaceSettings(v **types.DefaultSpace
 
 		case "SecurityGroups":
 			if err := awsAwsjson11_deserializeDocumentSecurityGroupIds(&sv.SecurityGroups, value); err != nil {
+				return err
+			}
+
+		case "SpaceStorageSettings":
+			if err := awsAwsjson11_deserializeDocumentDefaultSpaceStorageSettings(&sv.SpaceStorageSettings, value); err != nil {
 				return err
 			}
 

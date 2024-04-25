@@ -1,3 +1,11 @@
+# v1.47.0 (2024-04-22)
+
+* **Feature**: Adding new API to support remote directory listing using SFTP connector
+
+# v1.46.0 (2024-04-12)
+
+* **Feature**: This change releases support for importing self signed certificates to the Transfer Family for sending outbound file transfers over TLS/HTTPS.
+
 # v1.45.0 (2024-04-03)
 
 * **Feature**: Add ability to specify Security Policies for SFTP Connectors

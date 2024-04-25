@@ -1639,6 +1639,13 @@ func awsRestjson1_serializeDocumentMonitoringConfiguration(v *types.MonitoringCo
 		}
 	}
 
+	if v.PrometheusMonitoringConfiguration != nil {
+		ok := object.Key("prometheusMonitoringConfiguration")
+		if err := awsRestjson1_serializeDocumentPrometheusMonitoringConfiguration(v.PrometheusMonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.S3MonitoringConfiguration != nil {
 		ok := object.Key("s3MonitoringConfiguration")
 		if err := awsRestjson1_serializeDocumentS3MonitoringConfiguration(v.S3MonitoringConfiguration, ok); err != nil {
@@ -1665,6 +1672,18 @@ func awsRestjson1_serializeDocumentNetworkConfiguration(v *types.NetworkConfigur
 		if err := awsRestjson1_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrometheusMonitoringConfiguration(v *types.PrometheusMonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RemoteWriteUrl != nil {
+		ok := object.Key("remoteWriteUrl")
+		ok.String(*v.RemoteWriteUrl)
 	}
 
 	return nil
@@ -1767,6 +1786,11 @@ func awsRestjson1_serializeDocumentWorkerResourceConfig(v *types.WorkerResourceC
 	if v.Disk != nil {
 		ok := object.Key("disk")
 		ok.String(*v.Disk)
+	}
+
+	if v.DiskType != nil {
+		ok := object.Key("diskType")
+		ok.String(*v.DiskType)
 	}
 
 	if v.Memory != nil {

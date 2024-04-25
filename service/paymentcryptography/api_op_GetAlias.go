@@ -14,10 +14,10 @@ import (
 // Gets the Amazon Web Services Payment Cryptography key associated with the
 // alias. Cross-account use: This operation can't be used across different Amazon
 // Web Services accounts. Related operations:
-//   - CreateAlias
-//   - DeleteAlias
-//   - ListAliases
-//   - UpdateAlias
+//   - CreateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html)
+//   - DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
+//   - ListAliases (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
+//   - UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
 func (c *Client) GetAlias(ctx context.Context, params *GetAliasInput, optFns ...func(*Options)) (*GetAliasOutput, error) {
 	if params == nil {
 		params = &GetAliasInput{}

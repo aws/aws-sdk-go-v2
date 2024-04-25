@@ -1,3 +1,15 @@
+# v1.8.0 (2024-04-23)
+
+* **Feature**: Introducing the ability to create multiple data sources per knowledge base, specify S3 buckets as data sources from external accounts, and exposing levers to define the deletion behavior of the underlying vector store data.
+
+# v1.7.0 (2024-04-22)
+
+* **Feature**: Releasing the support for simplified configuration and return of control
+
+# v1.6.0 (2024-04-16)
+
+* **Feature**: For Create Agent API, the agentResourceRoleArn parameter is no longer required.
+
 # v1.5.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified tag to the specified Amazon Q application or data source
-// resource. If the tag already exists, the existing value is replaced with the new
-// value.
+// Adds the specified tag to the specified Amazon Q Business application or data
+// source resource. If the tag already exists, the existing value is replaced with
+// the new value.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -31,14 +31,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q application or data source to
-	// tag.
+	// The Amazon Resource Name (ARN) of the Amazon Q Business application or data
+	// source to tag.
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// A list of tag keys to add to the Amazon Q application or data source. If a tag
-	// already exists, the existing value is replaced with the new value.
+	// A list of tag keys to add to the Amazon Q Business application or data source.
+	// If a tag already exists, the existing value is replaced with the new value.
 	//
 	// This member is required.
 	Tags []types.Tag

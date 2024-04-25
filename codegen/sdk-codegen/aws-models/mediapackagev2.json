@@ -14,6 +14,23 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.mediapackagev2#AdMarkerDash": {
+            "type": "enum",
+            "members": {
+                "BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BINARY"
+                    }
+                },
+                "XML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XML"
+                    }
+                }
+            }
+        },
         "com.amazonaws.mediapackagev2#AdMarkerHls": {
             "type": "enum",
             "members": {
@@ -691,6 +708,99 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediapackagev2#CreateDashManifestConfiguration": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ManifestName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ManifestWindowSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total duration (in seconds) of the manifest's content.</p>",
+                        "smithy.api#range": {
+                            "min": 30
+                        }
+                    }
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
+                },
+                "MinUpdatePeriodSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 3600
+                        }
+                    }
+                },
+                "MinBufferTimeSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Minimum amount of content (in seconds) that a player must keep available in the buffer.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 3600
+                        }
+                    }
+                },
+                "SuggestedPresentationDelaySeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 3600
+                        }
+                    }
+                },
+                "SegmentTemplateFormat": {
+                    "target": "com.amazonaws.mediapackagev2#DashSegmentTemplateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the type of variable used in the <code>media</code> URL of the <code>SegmentTemplate</code> tag in the manifest. Also specifies if segment timeline information is included in <code>SegmentTimeline</code> or <code>SegmentTemplate</code>.</p>\n         <p>Value description:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NUMBER_WITH_TIMELINE</code> - The <code>$Number$</code> variable is used in the <code>media</code> URL. The value of this variable is the sequential number of the segment. A full <code>SegmentTimeline</code> object is presented in each <code>SegmentTemplate</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PeriodTriggers": {
+                    "target": "com.amazonaws.mediapackagev2#DashPeriodTriggers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Type <code>ADS</code> to indicate that AWS Elemental MediaPackage must create periods in the output manifest that correspond to SCTE-35 ad markers in the input source. Leave this value empty to indicate that the manifest is contained all in one period.\n         For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>"
+                    }
+                },
+                "ScteDash": {
+                    "target": "com.amazonaws.mediapackagev2#ScteDash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SCTE configuration.</p>"
+                    }
+                },
+                "DrmSignaling": {
+                    "target": "com.amazonaws.mediapackagev2#DashDrmSignaling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines how the DASH manifest signals the DRM content.</p>"
+                    }
+                },
+                "UtcTiming": {
+                    "target": "com.amazonaws.mediapackagev2#DashUtcTiming",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Create a DASH manifest configuration.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#CreateDashManifests": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#CreateDashManifestConfiguration"
+            }
+        },
         "com.amazonaws.mediapackagev2#CreateHlsManifestConfiguration": {
             "type": "structure",
             "members": {
@@ -1019,7 +1129,7 @@
                             "ChannelGroupName": "exampleChannelGroup",
                             "ChannelName": "exampleChannel",
                             "OriginEndpointName": "exampleOriginEndpointCMAF",
-                            "ContainerType": "TS",
+                            "ContainerType": "CMAF",
                             "StartoverWindowSeconds": 300,
                             "Segment": {
                                 "SegmentDurationSeconds": 6,
@@ -1092,6 +1202,41 @@
                                     "ProgramDateTimeIntervalSeconds": 60
                                 }
                             ],
+                            "DashManifests": [
+                                {
+                                    "ManifestName": "exampleDashManifest1",
+                                    "ManifestWindowSeconds": 300,
+                                    "MinUpdatePeriodSeconds": 5,
+                                    "MinBufferTimeSeconds": 30,
+                                    "SuggestedPresentationDelaySeconds": 2,
+                                    "SegmentTemplateFormat": "NUMBER_WITH_TIMELINE",
+                                    "PeriodTriggers": [
+                                        "AVAILS"
+                                    ],
+                                    "ScteDash": {
+                                        "AdMarkerDash": "XML"
+                                    },
+                                    "DrmSignaling": "INDIVIDUAL"
+                                },
+                                {
+                                    "ManifestName": "exampleDashManifest2",
+                                    "ManifestWindowSeconds": 60,
+                                    "MinUpdatePeriodSeconds": 3,
+                                    "MinBufferTimeSeconds": 9,
+                                    "SuggestedPresentationDelaySeconds": 12,
+                                    "SegmentTemplateFormat": "NUMBER_WITH_TIMELINE",
+                                    "PeriodTriggers": [
+                                        "AVAILS",
+                                        "DRM_KEY_ROTATION",
+                                        "SOURCE_CHANGES",
+                                        "SOURCE_DISRUPTIONS"
+                                    ],
+                                    "ScteDash": {
+                                        "AdMarkerDash": "XML"
+                                    },
+                                    "DrmSignaling": "INDIVIDUAL"
+                                }
+                            ],
                             "Tags": {
                                 "key1": "value1",
                                 "key2": "value2"
@@ -1104,7 +1249,7 @@
                             "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointCMAF",
                             "CreatedAt": "2022-10-18T09:36:00.00Z",
                             "ModifiedAt": "2022-10-18T09:36:00.00Z",
-                            "ContainerType": "TS",
+                            "ContainerType": "CMAF",
                             "StartoverWindowSeconds": 300,
                             "Segment": {
                                 "SegmentDurationSeconds": 6,
@@ -1179,6 +1324,43 @@
                                     "ManifestWindowSeconds": 30,
                                     "ProgramDateTimeIntervalSeconds": 60,
                                     "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest2.m3u8"
+                                }
+                            ],
+                            "DashManifests": [
+                                {
+                                    "ManifestName": "exampleDashManifest1",
+                                    "ManifestWindowSeconds": 300,
+                                    "MinUpdatePeriodSeconds": 5,
+                                    "MinBufferTimeSeconds": 30,
+                                    "SuggestedPresentationDelaySeconds": 2,
+                                    "SegmentTemplateFormat": "NUMBER_WITH_TIMELINE",
+                                    "PeriodTriggers": [
+                                        "AVAILS"
+                                    ],
+                                    "ScteDash": {
+                                        "AdMarkerDash": "XML"
+                                    },
+                                    "DrmSignaling": "INDIVIDUAL",
+                                    "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest1.mpd"
+                                },
+                                {
+                                    "ManifestName": "exampleDashManifest2",
+                                    "ManifestWindowSeconds": 60,
+                                    "MinUpdatePeriodSeconds": 3,
+                                    "MinBufferTimeSeconds": 9,
+                                    "SuggestedPresentationDelaySeconds": 12,
+                                    "SegmentTemplateFormat": "NUMBER_WITH_TIMELINE",
+                                    "PeriodTriggers": [
+                                        "AVAILS",
+                                        "DRM_KEY_ROTATION",
+                                        "SOURCE_CHANGES",
+                                        "SOURCE_DISRUPTIONS"
+                                    ],
+                                    "ScteDash": {
+                                        "AdMarkerDash": "XML"
+                                    },
+                                    "DrmSignaling": "INDIVIDUAL",
+                                    "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest2.mpd"
                                 }
                             ],
                             "ETag": "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=",
@@ -1271,6 +1453,13 @@
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>A low-latency HLS manifest configuration.</p>"
+                    }
+                },
+                "DashManifests": {
+                    "target": "com.amazonaws.mediapackagev2#CreateDashManifests",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
                     }
                 },
                 "Tags": {
@@ -1368,6 +1557,12 @@
                         "smithy.api#documentation": "<p>A low-latency HLS manifest configuration.</p>"
                     }
                 },
+                "DashManifests": {
+                    "target": "com.amazonaws.mediapackagev2#GetDashManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
                 "ETag": {
                     "target": "com.amazonaws.mediapackagev2#EntityTag",
                     "traits": {
@@ -1385,6 +1580,134 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mediapackagev2#DashDrmSignaling": {
+            "type": "enum",
+            "members": {
+                "INDIVIDUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDIVIDUAL"
+                    }
+                },
+                "REFERENCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFERENCED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#DashPeriodTrigger": {
+            "type": "enum",
+            "members": {
+                "AVAILS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILS"
+                    }
+                },
+                "DRM_KEY_ROTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRM_KEY_ROTATION"
+                    }
+                },
+                "SOURCE_CHANGES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_CHANGES"
+                    }
+                },
+                "SOURCE_DISRUPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_DISRUPTIONS"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#DashPeriodTriggers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#DashPeriodTrigger"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#DashSegmentTemplateFormat": {
+            "type": "enum",
+            "members": {
+                "NUMBER_WITH_TIMELINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_WITH_TIMELINE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.mediapackagev2#DashUtcTiming": {
+            "type": "structure",
+            "members": {
+                "TimingMode": {
+                    "target": "com.amazonaws.mediapackagev2#DashUtcTimingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The UTC timing mode.</p>"
+                    }
+                },
+                "TimingSource": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#DashUtcTimingMode": {
+            "type": "enum",
+            "members": {
+                "HTTP_HEAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_HEAD"
+                    }
+                },
+                "HTTP_ISO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_ISO"
+                    }
+                },
+                "HTTP_XSDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_XSDATE"
+                    }
+                },
+                "UTC_DIRECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UTC_DIRECT"
+                    }
+                }
             }
         },
         "com.amazonaws.mediapackagev2#DeleteChannel": {
@@ -2343,6 +2666,91 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediapackagev2#GetDashManifestConfiguration": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The egress domain URL for stream delivery from MediaPackage.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ManifestWindowSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total duration (in seconds) of the manifest's content.</p>"
+                    }
+                },
+                "FilterConfiguration": {
+                    "target": "com.amazonaws.mediapackagev2#FilterConfiguration"
+                },
+                "MinUpdatePeriodSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.</p>"
+                    }
+                },
+                "MinBufferTimeSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Minimum amount of content (in seconds) that a player must keep available in the buffer.</p>"
+                    }
+                },
+                "SuggestedPresentationDelaySeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>"
+                    }
+                },
+                "SegmentTemplateFormat": {
+                    "target": "com.amazonaws.mediapackagev2#DashSegmentTemplateFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the type of variable used in the <code>media</code> URL of the <code>SegmentTemplate</code> tag in the manifest. Also specifies if segment timeline information is included in <code>SegmentTimeline</code> or <code>SegmentTemplate</code>.</p>\n         <p>Value description:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NUMBER_WITH_TIMELINE</code> - The <code>$Number$</code> variable is used in the <code>media</code> URL. The value of this variable is the sequential number of the segment. A full <code>SegmentTimeline</code> object is presented in each <code>SegmentTemplate</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PeriodTriggers": {
+                    "target": "com.amazonaws.mediapackagev2#DashPeriodTriggers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period.\n         For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>"
+                    }
+                },
+                "ScteDash": {
+                    "target": "com.amazonaws.mediapackagev2#ScteDash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SCTE configuration.</p>"
+                    }
+                },
+                "DrmSignaling": {
+                    "target": "com.amazonaws.mediapackagev2#DashDrmSignaling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines how the DASH manifest signals the DRM content.</p>"
+                    }
+                },
+                "UtcTiming": {
+                    "target": "com.amazonaws.mediapackagev2#DashUtcTiming",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve the DASH manifest configuration.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#GetDashManifests": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#GetDashManifestConfiguration"
+            }
+        },
         "com.amazonaws.mediapackagev2#GetHlsManifestConfiguration": {
             "type": "structure",
             "members": {
@@ -2830,6 +3238,12 @@
                         "aws.cloudformation#cfnExcludeProperty": {},
                         "smithy.api#documentation": "<p>The comma-separated list of tag key:value pairs assigned to the origin endpoint.</p>"
                     }
+                },
+                "DashManifests": {
+                    "target": "com.amazonaws.mediapackagev2#GetDashManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3113,6 +3527,33 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.mediapackagev2#ListDashManifestConfiguration": {
+            "type": "structure",
+            "members": {
+                "ManifestName": {
+                    "target": "com.amazonaws.mediapackagev2#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The egress domain URL for stream delivery from MediaPackage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List the DASH manifest configuration.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#ListDashManifests": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediapackagev2#ListDashManifestConfiguration"
+            }
+        },
         "com.amazonaws.mediapackagev2#ListHlsManifestConfiguration": {
             "type": "structure",
             "members": {
@@ -3257,7 +3698,7 @@
                                     "Arn": "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointCMAF",
                                     "CreatedAt": "2022-10-18T09:36:00.00Z",
                                     "ModifiedAt": "2022-10-18T09:36:00.00Z",
-                                    "ContainerType": "TS",
+                                    "ContainerType": "CMAF",
                                     "HlsManifests": [
                                         {
                                             "ManifestName": "exampleManifest1",
@@ -3280,6 +3721,16 @@
                                             "ManifestName": "exampleLLManifest2",
                                             "ChildManifestName": "exampleLLManifest2",
                                             "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest2.m3u8"
+                                        }
+                                    ],
+                                    "DashManifests": [
+                                        {
+                                            "ManifestName": "exampleDashManifest1",
+                                            "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest1.mpd"
+                                        },
+                                        {
+                                            "ManifestName": "exampleDashManifest2",
+                                            "Url": "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest2.mpd"
                                         }
                                     ]
                                 }
@@ -3514,6 +3965,12 @@
                     "target": "com.amazonaws.mediapackagev2#ListLowLatencyHlsManifests",
                     "traits": {
                         "smithy.api#documentation": "<p>A low-latency HLS manifest configuration.</p>"
+                    }
+                },
+                "DashManifests": {
+                    "target": "com.amazonaws.mediapackagev2#ListDashManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
                     }
                 }
             },
@@ -3965,6 +4422,20 @@
                     "target": "com.amazonaws.mediapackagev2#ScteFilterList",
                     "traits": {
                         "smithy.api#documentation": "<p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SCTE configuration.</p>"
+            }
+        },
+        "com.amazonaws.mediapackagev2#ScteDash": {
+            "type": "structure",
+            "members": {
+                "AdMarkerDash": {
+                    "target": "com.amazonaws.mediapackagev2#AdMarkerDash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Choose how ad markers are included in the packaged content. If you include ad markers in the content stream in your upstream encoders, then you need to inform MediaPackage what to do with the ad markers in the output.</p>\n         <p>Value description:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Binary</code> - The SCTE-35 marker is expressed as a hex-string (Base64 string) rather than full XML.</p>\n            </li>\n            <li>\n               <p>\n                  <code>XML</code> - The SCTE marker is expressed fully in XML.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4987,6 +5458,13 @@
                         "smithy.api#documentation": "<p>A low-latency HLS manifest configuration.</p>"
                     }
                 },
+                "DashManifests": {
+                    "target": "com.amazonaws.mediapackagev2#CreateDashManifests",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
+                },
                 "ETag": {
                     "target": "com.amazonaws.mediapackagev2#EntityTag",
                     "traits": {
@@ -5097,6 +5575,12 @@
                         "smithy.api#documentation": "<p>The comma-separated list of tag key:value pairs assigned to the origin endpoint.</p>",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "DashManifests": {
+                    "target": "com.amazonaws.mediapackagev2#GetDashManifests",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A DASH manifest configuration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5200,6 +5684,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NUM_MANIFESTS_HIGH"
+                    }
+                },
+                "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE"
                     }
                 },
                 "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE": {
@@ -5344,6 +5834,48 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "END_TIME_EARLIER_THAN_START_TIME"
+                    }
+                },
+                "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST"
+                    }
+                },
+                "DIRECT_MODE_WITH_TIMING_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_MODE_WITH_TIMING_SOURCE"
+                    }
+                },
+                "NONE_MODE_WITH_TIMING_SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE_MODE_WITH_TIMING_SOURCE"
+                    }
+                },
+                "TIMING_SOURCE_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMING_SOURCE_MISSING"
+                    }
+                },
+                "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION"
+                    }
+                },
+                "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES"
+                    }
+                },
+                "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS"
                     }
                 }
             }

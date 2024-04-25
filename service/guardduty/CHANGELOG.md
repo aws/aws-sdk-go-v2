@@ -1,3 +1,7 @@
+# v1.42.0 (2024-04-18)
+
+* **Feature**: Added IPv6Address fields for local and remote IP addresses
+
 # v1.41.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

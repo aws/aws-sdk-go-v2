@@ -18,9 +18,9 @@ import (
 // is CREATE_COMPLETE , and the value for deletePendingTimestamp is removed.
 // Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts. Related operations:
-//   - DeleteKey
-//   - StartKeyUsage
-//   - StopKeyUsage
+//   - DeleteKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html)
+//   - StartKeyUsage (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html)
+//   - StopKeyUsage (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html)
 func (c *Client) RestoreKey(ctx context.Context, params *RestoreKeyInput, optFns ...func(*Options)) (*RestoreKeyOutput, error) {
 	if params == nil {
 		params = &RestoreKeyInput{}

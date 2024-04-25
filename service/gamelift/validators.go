@@ -90,6 +90,26 @@ func (m *validateOpCreateBuild) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContainerGroupDefinition struct {
+}
+
+func (*validateOpCreateContainerGroupDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContainerGroupDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContainerGroupDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContainerGroupDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFleet struct {
 }
 
@@ -385,6 +405,26 @@ func (m *validateOpDeleteBuild) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteBuildInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteContainerGroupDefinition struct {
+}
+
+func (*validateOpDeleteContainerGroupDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContainerGroupDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContainerGroupDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContainerGroupDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -705,6 +745,26 @@ func (m *validateOpDescribeCompute) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeComputeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeContainerGroupDefinition struct {
+}
+
+func (*validateOpDescribeContainerGroupDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeContainerGroupDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeContainerGroupDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeContainerGroupDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1726,6 +1786,10 @@ func addOpCreateBuildValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBuild{}, middleware.After)
 }
 
+func addOpCreateContainerGroupDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContainerGroupDefinition{}, middleware.After)
+}
+
 func addOpCreateFleetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFleet{}, middleware.After)
 }
@@ -1784,6 +1848,10 @@ func addOpDeleteAliasValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteBuildValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBuild{}, middleware.After)
+}
+
+func addOpDeleteContainerGroupDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContainerGroupDefinition{}, middleware.After)
 }
 
 func addOpDeleteFleetValidationMiddleware(stack *middleware.Stack) error {
@@ -1848,6 +1916,10 @@ func addOpDescribeBuildValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeComputeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCompute{}, middleware.After)
+}
+
+func addOpDescribeContainerGroupDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeContainerGroupDefinition{}, middleware.After)
 }
 
 func addOpDescribeFleetEventsValidationMiddleware(stack *middleware.Stack) error {
@@ -2072,6 +2144,243 @@ func validateCertificateConfiguration(v *types.CertificateConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CertificateConfiguration"}
 	if len(v.CertificateType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectionPortRange(v *types.ConnectionPortRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectionPortRange"}
+	if v.FromPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromPort"))
+	}
+	if v.ToPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToPort"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerDefinitionInput(v *types.ContainerDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerDefinitionInput"}
+	if v.ContainerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
+	}
+	if v.ImageUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageUri"))
+	}
+	if v.PortConfiguration != nil {
+		if err := validateContainerPortConfiguration(v.PortConfiguration); err != nil {
+			invalidParams.AddNested("PortConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.HealthCheck != nil {
+		if err := validateContainerHealthCheck(v.HealthCheck); err != nil {
+			invalidParams.AddNested("HealthCheck", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Environment != nil {
+		if err := validateContainerEnvironmentList(v.Environment); err != nil {
+			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DependsOn != nil {
+		if err := validateContainerDependencyList(v.DependsOn); err != nil {
+			invalidParams.AddNested("DependsOn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerDefinitionInputList(v []types.ContainerDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerDefinitionInputList"}
+	for i := range v {
+		if err := validateContainerDefinitionInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerDependency(v *types.ContainerDependency) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerDependency"}
+	if v.ContainerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerName"))
+	}
+	if len(v.Condition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerDependencyList(v []types.ContainerDependency) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerDependencyList"}
+	for i := range v {
+		if err := validateContainerDependency(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerEnvironment(v *types.ContainerEnvironment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerEnvironment"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerEnvironmentList(v []types.ContainerEnvironment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerEnvironmentList"}
+	for i := range v {
+		if err := validateContainerEnvironment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerGroupsConfiguration(v *types.ContainerGroupsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerGroupsConfiguration"}
+	if v.ContainerGroupDefinitionNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerGroupDefinitionNames"))
+	}
+	if v.ConnectionPortRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionPortRange"))
+	} else if v.ConnectionPortRange != nil {
+		if err := validateConnectionPortRange(v.ConnectionPortRange); err != nil {
+			invalidParams.AddNested("ConnectionPortRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerHealthCheck(v *types.ContainerHealthCheck) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerHealthCheck"}
+	if v.Command == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Command"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerPortConfiguration(v *types.ContainerPortConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerPortConfiguration"}
+	if v.ContainerPortRanges == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerPortRanges"))
+	} else if v.ContainerPortRanges != nil {
+		if err := validateContainerPortRangeList(v.ContainerPortRanges); err != nil {
+			invalidParams.AddNested("ContainerPortRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerPortRange(v *types.ContainerPortRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerPortRange"}
+	if v.FromPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromPort"))
+	}
+	if v.ToPort == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToPort"))
+	}
+	if len(v.Protocol) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerPortRangeList(v []types.ContainerPortRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerPortRangeList"}
+	for i := range v {
+		if err := validateContainerPortRange(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2432,6 +2741,42 @@ func validateOpCreateBuildInput(v *CreateBuildInput) error {
 	}
 }
 
+func validateOpCreateContainerGroupDefinitionInput(v *CreateContainerGroupDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContainerGroupDefinitionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TotalMemoryLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TotalMemoryLimit"))
+	}
+	if v.TotalCpuLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TotalCpuLimit"))
+	}
+	if v.ContainerDefinitions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerDefinitions"))
+	} else if v.ContainerDefinitions != nil {
+		if err := validateContainerDefinitionInputList(v.ContainerDefinitions); err != nil {
+			invalidParams.AddNested("ContainerDefinitions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.OperatingSystem) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OperatingSystem"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFleetInput(v *CreateFleetInput) error {
 	if v == nil {
 		return nil
@@ -2468,6 +2813,11 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 	if v.AnywhereConfiguration != nil {
 		if err := validateAnywhereConfiguration(v.AnywhereConfiguration); err != nil {
 			invalidParams.AddNested("AnywhereConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainerGroupsConfiguration != nil {
+		if err := validateContainerGroupsConfiguration(v.ContainerGroupsConfiguration); err != nil {
+			invalidParams.AddNested("ContainerGroupsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2782,6 +3132,21 @@ func validateOpDeleteBuildInput(v *DeleteBuildInput) error {
 	}
 }
 
+func validateOpDeleteContainerGroupDefinitionInput(v *DeleteContainerGroupDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContainerGroupDefinitionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFleetInput(v *DeleteFleetInput) error {
 	if v == nil {
 		return nil
@@ -3035,6 +3400,21 @@ func validateOpDescribeComputeInput(v *DescribeComputeInput) error {
 	}
 	if v.ComputeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ComputeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeContainerGroupDefinitionInput(v *DescribeContainerGroupDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeContainerGroupDefinitionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

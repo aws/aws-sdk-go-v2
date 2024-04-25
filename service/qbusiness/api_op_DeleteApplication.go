@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Q application.
+// Deletes an Amazon Q Business application.
 func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicationInput, optFns ...func(*Options)) (*DeleteApplicationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 
 type DeleteApplicationInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string

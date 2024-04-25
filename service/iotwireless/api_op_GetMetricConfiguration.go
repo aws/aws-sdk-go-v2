@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the metric configuration status for this account.
+// Get the metric configuration status for this AWS account.
 func (c *Client) GetMetricConfiguration(ctx context.Context, params *GetMetricConfigurationInput, optFns ...func(*Options)) (*GetMetricConfigurationOutput, error) {
 	if params == nil {
 		params = &GetMetricConfigurationInput{}
@@ -33,7 +33,7 @@ type GetMetricConfigurationInput struct {
 
 type GetMetricConfigurationOutput struct {
 
-	// The account's configuration status for summary metric aggregation.
+	// The configuration status of the AWS account for summary metric aggregation.
 	SummaryMetric *types.SummaryMetricConfiguration
 
 	// Metadata pertaining to the operation's result.

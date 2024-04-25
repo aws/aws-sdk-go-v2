@@ -16,12 +16,13 @@ import (
 // export from Amazon Web Services Payment Cryptography. The signing key
 // certificate signs the wrapped key under export within the TR-34 key payload. The
 // export token and signing key certificate must be in place and operational before
-// calling ExportKey . The export token expires in 7 days. You can use the same
-// export token to export multiple keys from your service account. Cross-account
-// use: This operation can't be used across different Amazon Web Services accounts.
-// Related operations:
-//   - ExportKey
-//   - GetParametersForImport
+// calling ExportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html)
+// . The export token expires in 7 days. You can use the same export token to
+// export multiple keys from your service account. Cross-account use: This
+// operation can't be used across different Amazon Web Services accounts. Related
+// operations:
+//   - ExportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html)
+//   - GetParametersForImport (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html)
 func (c *Client) GetParametersForExport(ctx context.Context, params *GetParametersForExportInput, optFns ...func(*Options)) (*GetParametersForExportOutput, error) {
 	if params == nil {
 		params = &GetParametersForExportInput{}

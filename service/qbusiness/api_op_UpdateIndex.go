@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon Q index.
+// Updates an Amazon Q Business index.
 func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optFns ...func(*Options)) (*UpdateIndexOutput, error) {
 	if params == nil {
 		params = &UpdateIndexInput{}
@@ -29,24 +29,24 @@ func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optF
 
 type UpdateIndexInput struct {
 
-	// The identifier of the Amazon Q application connected to the index.
+	// The identifier of the Amazon Q Business application connected to the index.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q index.
+	// The identifier of the Amazon Q Business index.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The storage capacity units you want to provision for your Amazon Q index. You
-	// can add and remove capacity to fit your usage needs.
+	// The storage capacity units you want to provision for your Amazon Q Business
+	// index. You can add and remove capacity to fit your usage needs.
 	CapacityConfiguration *types.IndexCapacityConfiguration
 
-	// The description of the Amazon Q index.
+	// The description of the Amazon Q Business index.
 	Description *string
 
-	// The name of the Amazon Q index.
+	// The name of the Amazon Q Business index.
 	DisplayName *string
 
 	// Configuration information for document metadata or fields. Document metadata

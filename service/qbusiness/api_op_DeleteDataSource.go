@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Q data source connector. While the data source is being
-// deleted, the Status field returned by a call to the DescribeDataSource API is
-// set to DELETING .
+// Deletes an Amazon Q Business data source connector. While the data source is
+// being deleted, the Status field returned by a call to the DescribeDataSource
+// API is set to DELETING .
 func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceInput, optFns ...func(*Options)) (*DeleteDataSourceOutput, error) {
 	if params == nil {
 		params = &DeleteDataSourceInput{}
@@ -30,7 +30,8 @@ func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceI
 
 type DeleteDataSourceInput struct {
 
-	// The identifier of the Amazon Q application used with the data source connector.
+	// The identifier of the Amazon Q Business application used with the data source
+	// connector.
 	//
 	// This member is required.
 	ApplicationId *string

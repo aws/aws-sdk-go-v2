@@ -60,6 +60,9 @@ type UpdateOriginEndpointInput struct {
 	// This member is required.
 	OriginEndpointName *string
 
+	// A DASH manifest configuration.
+	DashManifests []types.CreateDashManifestConfiguration
+
 	// Any descriptive information that you want to add to the origin endpoint for
 	// future identification purposes.
 	Description *string
@@ -135,6 +138,9 @@ type UpdateOriginEndpointOutput struct {
 	//
 	// This member is required.
 	Segment *types.Segment
+
+	// A DASH manifest configuration.
+	DashManifests []types.GetDashManifestConfiguration
 
 	// The description of the origin endpoint.
 	Description *string

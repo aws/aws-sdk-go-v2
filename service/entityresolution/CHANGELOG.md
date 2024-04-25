@@ -1,3 +1,11 @@
+# v1.10.0 (2024-04-24)
+
+* **Feature**: Support Batch Unique IDs Deletion.
+
+# v1.9.0 (2024-04-16)
+
+* **Feature**: Cross Account Resource Support .
+
 # v1.8.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

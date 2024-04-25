@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateTrustAnchor(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAttributeMapping(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAttributeMapping(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAttributeMapping")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCrl(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCrl(context.Background(), nil, func(o *Options) {
@@ -314,6 +326,18 @@ func TestCheckSnapshot_ListTrustAnchors(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutAttributeMapping(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAttributeMapping(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAttributeMapping")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutNotificationSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutNotificationSettings(context.Background(), nil, func(o *Options) {
@@ -414,6 +438,18 @@ func TestUpdateSnapshot_CreateTrustAnchor(t *testing.T) {
 	_, err := svc.CreateTrustAnchor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateTrustAnchor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAttributeMapping(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAttributeMapping(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAttributeMapping")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -642,6 +678,18 @@ func TestUpdateSnapshot_ListTrustAnchors(t *testing.T) {
 	_, err := svc.ListTrustAnchors(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTrustAnchors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAttributeMapping(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAttributeMapping(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAttributeMapping")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

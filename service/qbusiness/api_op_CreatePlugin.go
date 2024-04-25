@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q plugin.
+// Creates an Amazon Q Business plugin.
 func (c *Client) CreatePlugin(ctx context.Context, params *CreatePluginInput, optFns ...func(*Options)) (*CreatePluginOutput, error) {
 	if params == nil {
 		params = &CreatePluginInput{}
@@ -34,7 +34,7 @@ type CreatePluginInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Authentication configuration information for an Amazon Q plugin.
+	// Authentication configuration information for an Amazon Q Business plugin.
 	//
 	// This member is required.
 	AuthConfiguration types.PluginAuthConfiguration
@@ -54,7 +54,8 @@ type CreatePluginInput struct {
 	// This member is required.
 	Type types.PluginType
 
-	// A token that you provide to identify the request to create your Amazon Q plugin.
+	// A token that you provide to identify the request to create your Amazon Q
+	// Business plugin.
 	ClientToken *string
 
 	// A list of key-value pairs that identify or categorize the data source

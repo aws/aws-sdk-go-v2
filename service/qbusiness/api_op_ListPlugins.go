@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists configured Amazon Q plugins.
+// Lists configured Amazon Q Business plugins.
 func (c *Client) ListPlugins(ctx context.Context, params *ListPluginsInput, optFns ...func(*Options)) (*ListPluginsOutput, error) {
 	if params == nil {
 		params = &ListPluginsInput{}
@@ -38,8 +38,8 @@ type ListPluginsInput struct {
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of plugins.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of plugins.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,8 +48,8 @@ type ListPluginsInput struct {
 type ListPluginsOutput struct {
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of plugins.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of plugins.
 	NextToken *string
 
 	// Information about a configured plugin.

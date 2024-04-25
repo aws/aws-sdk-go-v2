@@ -703,6 +703,9 @@ type LoRaWANDeviceMetadata struct {
 	// Information about the gateways accessed by the device.
 	Gateways []LoRaWANGatewayMetadata
 
+	// Information about the LoRaWAN public network accessed by the device.
+	PublicGateways []LoRaWANPublicGatewayMetadata
+
 	// The date and time of the metadata.
 	Timestamp *string
 
@@ -1013,6 +1016,30 @@ type LoRaWANMulticastSession struct {
 	noSmithyDocumentSerde
 }
 
+// LoRaWAN public gateway metadata.
+type LoRaWANPublicGatewayMetadata struct {
+
+	// Boolean that indicates whether downlink is allowed using the network.
+	DlAllowed *bool
+
+	// The ID of the gateways that are operated by the network provider.
+	Id *string
+
+	// The ID of the LoRaWAN public network provider.
+	ProviderNetId *string
+
+	// The frequency band (RFRegion) value.
+	RfRegion *string
+
+	// The RSSI (received signal strength indicator) value.
+	Rssi *float64
+
+	// The SNR (signal to noise ratio) value.
+	Snr *float64
+
+	noSmithyDocumentSerde
+}
+
 // LoRaWAN router info.
 type LoRaWANSendDataToDevice struct {
 
@@ -1228,24 +1255,28 @@ type MessageDeliveryStatusResourceTypeEventConfiguration struct {
 // The aggregated values of the metric.
 type MetricQueryValue struct {
 
-	// The average of the values of the all data points collected during the period.
+	// The average of the values of all data points collected during the aggregation
+	// period.
 	Avg *float64
 
-	// The maximum of the values of the all data points collected during the period.
+	// The maximum of the values of all the data points collected during the
+	// aggregation period.
 	Max *float64
 
-	// The minimum of the values of the all data points collected during the period.
+	// The minimum of the values of all data points collected during the aggregation
+	// period.
 	Min *float64
 
-	// The 90th percentile of the values of the all data points collected during the
-	// period.
+	// The 90th percentile of the values of all data points collected during the
+	// aggregation period.
 	P90 *float64
 
-	// The standard deviation of the values of the all data points collected during
-	// the period.
+	// The standard deviation of the values of all data points collected during the
+	// aggregation period.
 	Std *float64
 
-	// The sum of the values of the all data points collected during the period.
+	// The sum of the values of all data points collected during the aggregation
+	// period.
 	Sum *float64
 
 	noSmithyDocumentSerde
@@ -1732,40 +1763,40 @@ type SidewalkUpdateImportInfo struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration of summary metric.
+// The configuration of summary metrics.
 type SummaryMetricConfiguration struct {
 
-	// The configuration of summary metric.
+	// The status of the configuration of summary metrics.
 	Status SummaryMetricConfigurationStatus
 
 	noSmithyDocumentSerde
 }
 
-// The metric query object.
+// The summary metric query object.
 type SummaryMetricQuery struct {
 
-	// The aggregation period of the metric.
+	// The aggregation period of the summary metric.
 	AggregationPeriod AggregationPeriod
 
-	// The dimensions of the metric.
+	// The dimensions of the summary metric.
 	Dimensions []Dimension
 
-	// The end timestamp for summary metric query.
+	// The end timestamp for the summary metric query.
 	EndTimestamp *time.Time
 
 	// The name of the metric.
 	MetricName MetricName
 
-	// The id of the query.
+	// The id of the summary metric query.
 	QueryId *string
 
-	// The start timestamp for summary metric query.
+	// The start timestamp for the summary metric query.
 	StartTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// The result of metrics aggregation operation.
+// The result of the summary metrics aggregation operation.
 type SummaryMetricQueryResult struct {
 
 	// The aggregation period of the metric.
@@ -1774,22 +1805,22 @@ type SummaryMetricQueryResult struct {
 	// The dimensions of the metric.
 	Dimensions []Dimension
 
-	// The end timestamp for summary metric query.
+	// The end timestamp for the summary metric query.
 	EndTimestamp *time.Time
 
-	// The error message for the summary metric query.
+	// The error message for the summary metric query result.
 	Error *string
 
-	// The name of the metric.
+	// The name of the summary metric query result.
 	MetricName MetricName
 
-	// The id of the query.
+	// The ID of the summary metric results query operation.
 	QueryId *string
 
-	// The status of the metric query.
+	// The status of the summary metric query result.
 	QueryStatus MetricQueryStatus
 
-	// The start timestamp for summary metric query.
+	// The start timestamp for the summary metric query.
 	StartTimestamp *time.Time
 
 	// The timestamp of each aggregation result.
@@ -1798,7 +1829,7 @@ type SummaryMetricQueryResult struct {
 	// The units of measurement to be used for interpreting the aggregation result.
 	Unit *string
 
-	// The list of aggregated metrics.
+	// The list of aggregated summary metric query results.
 	Values []MetricQueryValue
 
 	noSmithyDocumentSerde

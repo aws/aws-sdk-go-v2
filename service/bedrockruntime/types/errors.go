@@ -114,7 +114,7 @@ func (e *ModelNotReadyException) ErrorCode() string {
 }
 func (e *ModelNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occurred while streaming the response.
+// An error occurred while streaming the response. Retry your request.
 type ModelStreamErrorException struct {
 	Message *string
 

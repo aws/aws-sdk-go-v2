@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Q index.
+// Deletes an Amazon Q Business index.
 func (c *Client) DeleteIndex(ctx context.Context, params *DeleteIndexInput, optFns ...func(*Options)) (*DeleteIndexOutput, error) {
 	if params == nil {
 		params = &DeleteIndexInput{}
@@ -28,12 +28,13 @@ func (c *Client) DeleteIndex(ctx context.Context, params *DeleteIndexInput, optF
 
 type DeleteIndexInput struct {
 
-	// The identifier of the Amazon Q application the Amazon Q index is linked to.
+	// The identifier of the Amazon Q Business application the Amazon Q Business index
+	// is linked to.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q index.
+	// The identifier of the Amazon Q Business index.
 	//
 	// This member is required.
 	IndexId *string

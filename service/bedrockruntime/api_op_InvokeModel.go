@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Invokes the specified Bedrock model to run inference using the input provided
-// in the request body. You use InvokeModel to run inference for text models, image
-// models, and embedding models. For more information, see Run inference (https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html)
-// in the Bedrock User Guide. For example requests, see Examples (after the Errors
-// section).
+// Invokes the specified Amazon Bedrock model to run inference using the prompt
+// and inference parameters provided in the request body. You use model inference
+// to generate text, images, and embeddings. For example code, see Invoke model
+// code examples in the Amazon Bedrock User Guide. This operation requires
+// permission for the bedrock:InvokeModel action.
 func (c *Client) InvokeModel(ctx context.Context, params *InvokeModelInput, optFns ...func(*Options)) (*InvokeModelOutput, error) {
 	if params == nil {
 		params = &InvokeModelInput{}
@@ -32,15 +33,29 @@ func (c *Client) InvokeModel(ctx context.Context, params *InvokeModelInput, optF
 
 type InvokeModelInput struct {
 
-	// Input data in the format specified in the content-type request header. To see
-	// the format and content of this field for different models, refer to Inference
-	// parameters (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
-	// .
+	// The prompt and inference parameters in the format specified in the contentType
+	// in the header. To see the format and content of the request and response bodies
+	// for different models, refer to Inference parameters (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
+	// . For more information, see Run inference (https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html)
+	// in the Bedrock User Guide.
 	//
 	// This member is required.
 	Body []byte
 
-	// Identifier of the model.
+	// The unique identifier of the model to invoke to run inference. The modelId to
+	// provide depends on the type of model that you use:
+	//   - If you use a base model, specify the model ID or its ARN. For a list of
+	//   model IDs for base models, see Amazon Bedrock base model IDs (on-demand
+	//   throughput) (https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns)
+	//   in the Amazon Bedrock User Guide.
+	//   - If you use a provisioned model, specify the ARN of the Provisioned
+	//   Throughput. For more information, see Run inference using a Provisioned
+	//   Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html)
+	//   in the Amazon Bedrock User Guide.
+	//   - If you use a custom model, first purchase Provisioned Throughput for it.
+	//   Then specify the ARN of the resulting provisioned model. For more information,
+	//   see Use a custom model in Amazon Bedrock (https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html)
+	//   in the Amazon Bedrock User Guide.
 	//
 	// This member is required.
 	ModelId *string
@@ -53,14 +68,30 @@ type InvokeModelInput struct {
 	// application/json .
 	ContentType *string
 
+	// The unique identifier of the guardrail that you want to use. If you don't
+	// provide a value, no guardrail is applied to the invocation. An error will be
+	// thrown in the following situations.
+	//   - You don't provide a guardrail identifier but you specify the
+	//   amazon-bedrock-guardrailConfig field in the request body.
+	//   - You enable the guardrail but the contentType isn't application/json .
+	//   - You provide a guardrail identifier, but guardrailVersion isn't specified.
+	GuardrailIdentifier *string
+
+	// The version number for the guardrail. The value can also be DRAFT .
+	GuardrailVersion *string
+
+	// Specifies whether to enable or disable the Bedrock trace. If enabled, you can
+	// see the full Bedrock trace.
+	Trace types.Trace
+
 	noSmithyDocumentSerde
 }
 
 type InvokeModelOutput struct {
 
-	// Inference response from the model in the format specified in the content-type
-	// header field. To see the format and content of this field for different models,
-	// refer to Inference parameters (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
+	// Inference response from the model in the format specified in the contentType
+	// header. To see the format and content of the request and response bodies for
+	// different models, refer to Inference parameters (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
 	// .
 	//
 	// This member is required.

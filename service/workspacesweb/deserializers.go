@@ -7951,6 +7951,9 @@ func awsRestjson1_deserializeOpErrorUpdatePortal(response *smithyhttp.Response, 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -8913,6 +8916,11 @@ func awsRestjson1_deserializeDocumentBrowserSettings(v **types.BrowserSettings, 
 
 	for key, value := range shape {
 		switch key {
+		case "additionalEncryptionContext":
+			if err := awsRestjson1_deserializeDocumentEncryptionContextMap(&sv.AdditionalEncryptionContext, value); err != nil {
+				return err
+			}
+
 		case "associatedPortalArns":
 			if err := awsRestjson1_deserializeDocumentArnList(&sv.AssociatedPortalArns, value); err != nil {
 				return err
@@ -8934,6 +8942,15 @@ func awsRestjson1_deserializeDocumentBrowserSettings(v **types.BrowserSettings, 
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.BrowserSettingsArn = ptr.String(jtv)
+			}
+
+		case "customerManagedKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected keyArn to be of type string, got %T instead", value)
+				}
+				sv.CustomerManagedKey = ptr.String(jtv)
 			}
 
 		default:
@@ -9437,6 +9454,42 @@ func awsRestjson1_deserializeDocumentCookieSynchronizationConfiguration(v **type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEncryptionContextMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIdentityProvider(v **types.IdentityProvider, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9703,6 +9756,11 @@ func awsRestjson1_deserializeDocumentIpAccessSettings(v **types.IpAccessSettings
 
 	for key, value := range shape {
 		switch key {
+		case "additionalEncryptionContext":
+			if err := awsRestjson1_deserializeDocumentEncryptionContextMap(&sv.AdditionalEncryptionContext, value); err != nil {
+				return err
+			}
+
 		case "associatedPortalArns":
 			if err := awsRestjson1_deserializeDocumentArnList(&sv.AssociatedPortalArns, value); err != nil {
 				return err
@@ -9722,6 +9780,15 @@ func awsRestjson1_deserializeDocumentIpAccessSettings(v **types.IpAccessSettings
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "customerManagedKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected keyArn to be of type string, got %T instead", value)
+				}
+				sv.CustomerManagedKey = ptr.String(jtv)
 			}
 
 		case "description":
@@ -10125,6 +10192,11 @@ func awsRestjson1_deserializeDocumentPortal(v **types.Portal, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "additionalEncryptionContext":
+			if err := awsRestjson1_deserializeDocumentEncryptionContextMap(&sv.AdditionalEncryptionContext, value); err != nil {
+				return err
+			}
+
 		case "authenticationType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10168,6 +10240,15 @@ func awsRestjson1_deserializeDocumentPortal(v **types.Portal, value interface{})
 				}
 			}
 
+		case "customerManagedKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected keyArn to be of type string, got %T instead", value)
+				}
+				sv.CustomerManagedKey = ptr.String(jtv)
+			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10177,6 +10258,15 @@ func awsRestjson1_deserializeDocumentPortal(v **types.Portal, value interface{})
 				sv.DisplayName = ptr.String(jtv)
 			}
 
+		case "instanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.InstanceType(jtv)
+			}
+
 		case "ipAccessSettingsArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10184,6 +10274,19 @@ func awsRestjson1_deserializeDocumentPortal(v **types.Portal, value interface{})
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.IpAccessSettingsArn = ptr.String(jtv)
+			}
+
+		case "maxConcurrentSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxConcurrentSessions to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConcurrentSessions = ptr.Int32(int32(i64))
 			}
 
 		case "networkSettingsArn":
@@ -10384,6 +10487,15 @@ func awsRestjson1_deserializeDocumentPortalSummary(v **types.PortalSummary, valu
 				sv.DisplayName = ptr.String(jtv)
 			}
 
+		case "instanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.InstanceType(jtv)
+			}
+
 		case "ipAccessSettingsArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10391,6 +10503,19 @@ func awsRestjson1_deserializeDocumentPortalSummary(v **types.PortalSummary, valu
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.IpAccessSettingsArn = ptr.String(jtv)
+			}
+
+		case "maxConcurrentSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxConcurrentSessions to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConcurrentSessions = ptr.Int32(int32(i64))
 			}
 
 		case "networkSettingsArn":
@@ -11161,6 +11286,11 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 
 	for key, value := range shape {
 		switch key {
+		case "additionalEncryptionContext":
+			if err := awsRestjson1_deserializeDocumentEncryptionContextMap(&sv.AdditionalEncryptionContext, value); err != nil {
+				return err
+			}
+
 		case "associatedPortalArns":
 			if err := awsRestjson1_deserializeDocumentArnList(&sv.AssociatedPortalArns, value); err != nil {
 				return err
@@ -11178,6 +11308,15 @@ func awsRestjson1_deserializeDocumentUserSettings(v **types.UserSettings, value 
 					return fmt.Errorf("expected EnabledType to be of type string, got %T instead", value)
 				}
 				sv.CopyAllowed = types.EnabledType(jtv)
+			}
+
+		case "customerManagedKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected keyArn to be of type string, got %T instead", value)
+				}
+				sv.CustomerManagedKey = ptr.String(jtv)
 			}
 
 		case "disconnectTimeoutInMinutes":

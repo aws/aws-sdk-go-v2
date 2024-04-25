@@ -71,6 +71,9 @@ type GetMatchingJobOutput struct {
 	// unique IDs generated, and records the execution skipped.
 	Metrics *types.JobMetrics
 
+	// A list of OutputSource objects.
+	OutputSourceConfig []types.JobOutputSource
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

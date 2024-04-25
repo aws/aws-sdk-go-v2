@@ -76,6 +76,66 @@ type ChannelListConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Create a DASH manifest configuration.
+type CreateDashManifestConfiguration struct {
+
+	// A short string that's appended to the endpoint URL. The child manifest name
+	// creates a unique path to this endpoint.
+	//
+	// This member is required.
+	ManifestName *string
+
+	// Determines how the DASH manifest signals the DRM content.
+	DrmSignaling DashDrmSignaling
+
+	// Filter configuration includes settings for manifest filtering, start and end
+	// times, and time delay that apply to all of your egress requests for this
+	// manifest.
+	FilterConfiguration *FilterConfiguration
+
+	// The total duration (in seconds) of the manifest's content.
+	ManifestWindowSeconds *int32
+
+	// Minimum amount of content (in seconds) that a player must keep available in the
+	// buffer.
+	MinBufferTimeSeconds *int32
+
+	// Minimum amount of time (in seconds) that the player should wait before
+	// requesting updates to the manifest.
+	MinUpdatePeriodSeconds *int32
+
+	// A list of triggers that controls when AWS Elemental MediaPackage separates the
+	// MPEG-DASH manifest into multiple periods. Type ADS to indicate that AWS
+	// Elemental MediaPackage must create periods in the output manifest that
+	// correspond to SCTE-35 ad markers in the input source. Leave this value empty to
+	// indicate that the manifest is contained all in one period. For more information
+	// about periods in the DASH manifest, see Multi-period DASH in AWS Elemental
+	// MediaPackage (https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html)
+	// .
+	PeriodTriggers []DashPeriodTrigger
+
+	// The SCTE configuration.
+	ScteDash *ScteDash
+
+	// Determines the type of variable used in the media URL of the SegmentTemplate
+	// tag in the manifest. Also specifies if segment timeline information is included
+	// in SegmentTimeline or SegmentTemplate . Value description:
+	//   - NUMBER_WITH_TIMELINE - The $Number$ variable is used in the media URL. The
+	//   value of this variable is the sequential number of the segment. A full
+	//   SegmentTimeline object is presented in each SegmentTemplate .
+	SegmentTemplateFormat DashSegmentTemplateFormat
+
+	// The amount of time (in seconds) that the player should be from the end of the
+	// manifest.
+	SuggestedPresentationDelaySeconds *int32
+
+	// Determines the type of UTC timing included in the DASH Media Presentation
+	// Description (MPD).
+	UtcTiming *DashUtcTiming
+
+	noSmithyDocumentSerde
+}
+
 // Create an HTTP live streaming (HLS) manifest configuration.
 type CreateHlsManifestConfiguration struct {
 
@@ -158,6 +218,20 @@ type CreateLowLatencyHlsManifestConfiguration struct {
 
 	// The SCTE configuration.
 	ScteHls *ScteHls
+
+	noSmithyDocumentSerde
+}
+
+// Determines the type of UTC timing included in the DASH Media Presentation
+// Description (MPD).
+type DashUtcTiming struct {
+
+	// The UTC timing mode.
+	TimingMode DashUtcTimingMode
+
+	// The the method that the player uses to synchronize to coordinated universal
+	// time (UTC) wall clock time.
+	TimingSource *string
 
 	noSmithyDocumentSerde
 }
@@ -289,6 +363,70 @@ type FilterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Retrieve the DASH manifest configuration.
+type GetDashManifestConfiguration struct {
+
+	// A short string that's appended to the endpoint URL. The manifest name creates a
+	// unique path to this endpoint. If you don't enter a value, MediaPackage uses the
+	// default manifest name, index.
+	//
+	// This member is required.
+	ManifestName *string
+
+	// The egress domain URL for stream delivery from MediaPackage.
+	//
+	// This member is required.
+	Url *string
+
+	// Determines how the DASH manifest signals the DRM content.
+	DrmSignaling DashDrmSignaling
+
+	// Filter configuration includes settings for manifest filtering, start and end
+	// times, and time delay that apply to all of your egress requests for this
+	// manifest.
+	FilterConfiguration *FilterConfiguration
+
+	// The total duration (in seconds) of the manifest's content.
+	ManifestWindowSeconds *int32
+
+	// Minimum amount of content (in seconds) that a player must keep available in the
+	// buffer.
+	MinBufferTimeSeconds *int32
+
+	// Minimum amount of time (in seconds) that the player should wait before
+	// requesting updates to the manifest.
+	MinUpdatePeriodSeconds *int32
+
+	// A list of triggers that controls when AWS Elemental MediaPackage separates the
+	// MPEG-DASH manifest into multiple periods. Leave this value empty to indicate
+	// that the manifest is contained all in one period. For more information about
+	// periods in the DASH manifest, see Multi-period DASH in AWS Elemental
+	// MediaPackage (https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html)
+	// .
+	PeriodTriggers []DashPeriodTrigger
+
+	// The SCTE configuration.
+	ScteDash *ScteDash
+
+	// Determines the type of variable used in the media URL of the SegmentTemplate
+	// tag in the manifest. Also specifies if segment timeline information is included
+	// in SegmentTimeline or SegmentTemplate . Value description:
+	//   - NUMBER_WITH_TIMELINE - The $Number$ variable is used in the media URL. The
+	//   value of this variable is the sequential number of the segment. A full
+	//   SegmentTimeline object is presented in each SegmentTemplate .
+	SegmentTemplateFormat DashSegmentTemplateFormat
+
+	// The amount of time (in seconds) that the player should be from the end of the
+	// manifest.
+	SuggestedPresentationDelaySeconds *int32
+
+	// Determines the type of UTC timing included in the DASH Media Presentation
+	// Description (MPD).
+	UtcTiming *DashUtcTiming
+
+	noSmithyDocumentSerde
+}
+
 // Retrieve the HTTP live streaming (HLS) manifest configuration.
 type GetHlsManifestConfiguration struct {
 
@@ -397,6 +535,22 @@ type IngestEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+// List the DASH manifest configuration.
+type ListDashManifestConfiguration struct {
+
+	// A short string that's appended to the endpoint URL. The manifest name creates a
+	// unique path to this endpoint. If you don't enter a value, MediaPackage uses the
+	// default manifest name, index.
+	//
+	// This member is required.
+	ManifestName *string
+
+	// The egress domain URL for stream delivery from MediaPackage.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
 // List the HTTP live streaming (HLS) manifest configuration.
 type ListHlsManifestConfiguration struct {
 
@@ -487,6 +641,9 @@ type OriginEndpointListConfiguration struct {
 	// The date and time the origin endpoint was created.
 	CreatedAt *time.Time
 
+	// A DASH manifest configuration.
+	DashManifests []ListDashManifestConfiguration
+
 	// Any descriptive information that you want to add to the origin endpoint for
 	// future identification purposes.
 	Description *string
@@ -509,6 +666,20 @@ type Scte struct {
 	// The SCTE-35 message types that you want to be treated as ad markers in the
 	// output.
 	ScteFilter []ScteFilter
+
+	noSmithyDocumentSerde
+}
+
+// The SCTE configuration.
+type ScteDash struct {
+
+	// Choose how ad markers are included in the packaged content. If you include ad
+	// markers in the content stream in your upstream encoders, then you need to inform
+	// MediaPackage what to do with the ad markers in the output. Value description:
+	//   - Binary - The SCTE-35 marker is expressed as a hex-string (Base64 string)
+	//   rather than full XML.
+	//   - XML - The SCTE marker is expressed fully in XML.
+	AdMarkerDash AdMarkerDash
 
 	noSmithyDocumentSerde
 }

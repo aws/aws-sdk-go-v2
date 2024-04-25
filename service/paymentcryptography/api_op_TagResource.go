@@ -17,11 +17,11 @@ import (
 // which are case-sensitive strings. The tag value can be an empty (null) string.
 // To add a tag, specify a new tag key and a tag value. To edit a tag, specify an
 // existing tag key and a new tag value. You can also add tags to an Amazon Web
-// Services Payment Cryptography key when you create it with CreateKey .
-// Cross-account use: This operation can't be used across different Amazon Web
+// Services Payment Cryptography key when you create it with CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
+// . Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts. Related operations:
-//   - ListTagsForResource
-//   - UntagResource
+//   - ListTagsForResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html)
+//   - UntagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html)
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -51,9 +51,10 @@ type TagResourceInput struct {
 	// Cryptography replaces the current tag value with the new one. Don't include
 	// personal, confidential or sensitive information in this field. This field may be
 	// displayed in plaintext in CloudTrail logs and other output. To use this
-	// parameter, you must have TagResource permission in an IAM policy. Don't include
-	// personal, confidential or sensitive information in this field. This field may be
-	// displayed in plaintext in CloudTrail logs and other output.
+	// parameter, you must have TagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html)
+	// permission in an IAM policy. Don't include personal, confidential or sensitive
+	// information in this field. This field may be displayed in plaintext in
+	// CloudTrail logs and other output.
 	//
 	// This member is required.
 	Tags []types.Tag

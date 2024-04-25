@@ -20,8 +20,8 @@ import (
 // a knowledge base (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create)
 // .
 //   - Provide the name and an optional description .
-//   - Provide the ARN with permissions to create a knowledge base in the roleArn
-//     field.
+//   - Provide the Amazon Resource Name (ARN) with permissions to create a
+//     knowledge base in the roleArn field.
 //   - Provide the embedding model to use in the embeddingModelArn field in the
 //     knowledgeBaseConfiguration object.
 //   - Provide the configuration for your vector store in the storageConfiguration
@@ -67,7 +67,8 @@ type CreateKnowledgeBaseInput struct {
 	// This member is required.
 	Name *string
 
-	// The ARN of the IAM role with permissions to create the knowledge base.
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the knowledge base.
 	//
 	// This member is required.
 	RoleArn *string

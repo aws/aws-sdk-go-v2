@@ -1,3 +1,7 @@
+# v1.30.0 (2024-04-16)
+
+* **Feature**: AWS Well-Architected now has a Connector for Jira to allow customers to efficiently track workload risks and improvement efforts and create closed-loop mechanisms.
+
 # v1.29.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

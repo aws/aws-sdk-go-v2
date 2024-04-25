@@ -38,7 +38,11 @@ type GetMonitorInput struct {
 	// This member is required.
 	MonitorName *string
 
-	// TBD
+	// The account ID for an account that you've set up cross-account sharing for in
+	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
+	// Amazon CloudWatch Observability Access Manager. For more information, see
+	// Internet Monitor cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html)
+	// in the Amazon CloudWatch Internet Monitor User Guide.
 	LinkedAccountId *string
 
 	noSmithyDocumentSerde

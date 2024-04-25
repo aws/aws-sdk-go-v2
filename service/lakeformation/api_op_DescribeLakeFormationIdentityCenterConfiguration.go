@@ -40,7 +40,8 @@ type DescribeLakeFormationIdentityCenterConfigurationInput struct {
 
 type DescribeLakeFormationIdentityCenterConfigurationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the integrated application.
+	// The Amazon Resource Name (ARN) of the Lake Formation application integrated
+	// with IAM Identity Center.
 	ApplicationArn *string
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
@@ -54,6 +55,17 @@ type DescribeLakeFormationIdentityCenterConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the connection.
 	InstanceArn *string
+
+	// The Amazon Resource Name (ARN) of the RAM share.
+	ResourceShare *string
+
+	// A list of Amazon Web Services account IDs or Amazon Web Services
+	// organization/organizational unit ARNs that are allowed to access data managed by
+	// Lake Formation. If the ShareRecipients list includes valid values, a resource
+	// share is created with the principals you want to have access to the resources as
+	// the ShareRecipients . If the ShareRecipients value is null or the list is
+	// empty, no resource share is created.
+	ShareRecipients []types.DataLakePrincipal
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

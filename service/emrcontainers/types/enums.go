@@ -2,6 +2,22 @@
 
 package types
 
+type CertificateProviderType string
+
+// Enum values for CertificateProviderType
+const (
+	CertificateProviderTypePem CertificateProviderType = "PEM"
+)
+
+// Values returns all known values for CertificateProviderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateProviderType) Values() []CertificateProviderType {
+	return []CertificateProviderType{
+		"PEM",
+	}
+}
+
 type ContainerProviderType string
 
 // Enum values for ContainerProviderType

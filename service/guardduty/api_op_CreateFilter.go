@@ -86,6 +86,7 @@ type CreateFilterInput struct {
 	//   - service.action.awsApiCallAction.remoteIpDetails.city.cityName
 	//   - service.action.awsApiCallAction.remoteIpDetails.country.countryName
 	//   - service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+	//   - service.action.awsApiCallAction.remoteIpDetails.ipAddressV6
 	//   - service.action.awsApiCallAction.remoteIpDetails.organization.asn
 	//   - service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
 	//   - service.action.awsApiCallAction.serviceName
@@ -98,16 +99,19 @@ type CreateFilterInput struct {
 	//   - service.action.networkConnectionAction.remoteIpDetails.city.cityName
 	//   - service.action.networkConnectionAction.remoteIpDetails.country.countryName
 	//   - service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+	//   - service.action.networkConnectionAction.remoteIpDetails.ipAddressV6
 	//   - service.action.networkConnectionAction.remoteIpDetails.organization.asn
 	//   - service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
 	//   - service.action.networkConnectionAction.remotePortDetails.port
 	//   - service.action.awsApiCallAction.remoteAccountDetails.affiliated
 	//   - service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4
+	//   - service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV6
 	//   - service.action.kubernetesApiCallAction.namespace
 	//   - service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn
 	//   - service.action.kubernetesApiCallAction.requestUri
 	//   - service.action.kubernetesApiCallAction.statusCode
 	//   - service.action.networkConnectionAction.localIpDetails.ipAddressV4
+	//   - service.action.networkConnectionAction.localIpDetails.ipAddressV6
 	//   - service.action.networkConnectionAction.protocol
 	//   - service.action.awsApiCallAction.serviceName
 	//   - service.action.awsApiCallAction.remoteAccountDetails.accountId

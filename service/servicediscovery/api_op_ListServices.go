@@ -12,7 +12,7 @@ import (
 )
 
 // Lists summary information for all the services that are associated with one or
-// more specified namespaces.
+// more namespaces.
 func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, optFns ...func(*Options)) (*ListServicesOutput, error) {
 	if params == nil {
 		params = &ListServicesInput{}

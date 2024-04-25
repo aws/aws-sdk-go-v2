@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of solutions that use the given dataset group. When a dataset
-// group is not specified, all the solutions associated with the account are
-// listed. The response provides the properties for each solution, including the
-// Amazon Resource Name (ARN). For more information on solutions, see
-// CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+// Returns a list of solutions in a given dataset group. When a dataset group is
+// not specified, all the solutions associated with the account are listed. The
+// response provides the properties for each solution, including the Amazon
+// Resource Name (ARN). For more information on solutions, see CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
 // .
 func (c *Client) ListSolutions(ctx context.Context, params *ListSolutionsInput, optFns ...func(*Options)) (*ListSolutionsOutput, error) {
 	if params == nil {

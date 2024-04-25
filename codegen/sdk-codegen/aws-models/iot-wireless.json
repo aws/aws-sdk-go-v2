@@ -328,7 +328,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.iotwireless#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client request.\n        </p>",
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1231,7 +1231,7 @@
         "com.amazonaws.iotwireless#ClientRequestToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client\n            request.</p>",
+                "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
@@ -1410,7 +1410,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.iotwireless#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client request.\n        </p>",
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -1497,7 +1497,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.iotwireless#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client request.\n        </p>",
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1682,7 +1682,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.iotwireless#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client request.\n        </p>",
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1873,7 +1873,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.iotwireless#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client request.\n        </p>",
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -1971,7 +1971,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.iotwireless#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client request.\n        </p>",
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2050,7 +2050,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provisions a wireless gateway.</p>",
+                "smithy.api#documentation": "<p>Provisions a wireless gateway.</p>\n         <note>\n            <p>When provisioning a wireless gateway, you might run into duplication errors\n            for the following reasons.</p>\n            <ul>\n               <li>\n                  <p>If you specify a <code>GatewayEui</code> value that already exists.</p>\n               </li>\n               <li>\n                  <p>If you used a <code>ClientRequestToken</code> with the same parameters \n                    within the last 10 minutes.</p>\n               </li>\n            </ul>\n            <p>To avoid this error, make sure that you use unique identifiers and parameters\n                for each request within the specified time period.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/wireless-gateways",
@@ -2089,7 +2089,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.iotwireless#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client request.\n        </p>",
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2218,7 +2218,7 @@
                 "ClientRequestToken": {
                     "target": "com.amazonaws.iotwireless#ClientRequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. If you try to create a new\n            resource with the same token as a resource that already exists, an exception occurs. If\n            you omit this value, AWS SDKs will automatically generate a unique client request.\n        </p>",
+                        "smithy.api#documentation": "<p>Each resource must have a unique client request token. The client token is used to implement\n            idempotency. It ensures that the request completes no more than one time. If you retry a request\n            with the same token and the same parameters, the request will complete successfully. However, if\n            you try to create a new resource using the same token but different parameters, an HTTP 409\n            conflict occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.\n            For more information about idempotency, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2934,7 +2934,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a wireless gateway.</p>",
+                "smithy.api#documentation": "<p>Deletes a wireless gateway.</p>\n         <note>\n            <p>When deleting a wireless gateway, you might run into duplication errors\n            for the following reasons.</p>\n            <ul>\n               <li>\n                  <p>If you specify a <code>GatewayEui</code> value that already exists.</p>\n               </li>\n               <li>\n                  <p>If you used a <code>ClientRequestToken</code> with the same parameters \n                    within the last 10 minutes.</p>\n               </li>\n            </ul>\n            <p>To avoid this error, make sure that you use unique identifiers and parameters\n                for each request within the specified time period.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/wireless-gateways/{Id}",
@@ -3894,6 +3894,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.iotwireless#DlAllowed": {
+            "type": "boolean"
         },
         "com.amazonaws.iotwireless#DlBucketSize": {
             "type": "integer",
@@ -5075,7 +5078,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get the metric configuration status for this account.</p>",
+                "smithy.api#documentation": "<p>Get the metric configuration status for this AWS account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/metric-configuration",
@@ -5096,7 +5099,7 @@
                 "SummaryMetric": {
                     "target": "com.amazonaws.iotwireless#SummaryMetricConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account's configuration status for summary metric aggregation.</p>"
+                        "smithy.api#documentation": "<p>The configuration status of the AWS account for summary metric aggregation.</p>"
                     }
                 }
             },
@@ -5133,7 +5136,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get metrics.</p>",
+                "smithy.api#documentation": "<p>Get the summary metrics for this AWS account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics",
@@ -5147,7 +5150,7 @@
                 "SummaryMetricQueries": {
                     "target": "com.amazonaws.iotwireless#SummaryMetricQueries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of queries to retrieve summary metrics.</p>"
+                        "smithy.api#documentation": "<p>The list of queries to retrieve the summary metrics.</p>"
                     }
                 }
             },
@@ -5161,7 +5164,7 @@
                 "SummaryMetricQueryResults": {
                     "target": "com.amazonaws.iotwireless#SummaryMetricQueryResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of retrieved metrics.</p>"
+                        "smithy.api#documentation": "<p>The list of summary metrics that were retrieved.</p>"
                     }
                 }
             },
@@ -7235,6 +7238,15 @@
                 "smithy.api#pattern": "^([\\+-]?\\d{4}(?!\\d{2}\\b))((-?)((0[1-9]|1[0-2])(\\3([12]\\d|0[1-9]|3[01]))?|W([0-4]\\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\\d|[12]\\d{2}|3([0-5]\\d|6[1-6])))([T\\s]((([01]\\d|2[0-3])((:?)[0-5]\\d)?|24\\:?00)([\\.,]\\d+(?!:))?)?(\\17[0-5]\\d([\\.,]\\d+)?)?([zZ]|([\\+-])([01]\\d|2[0-3]):?([0-5]\\d)?)?)?)?$"
             }
         },
+        "com.amazonaws.iotwireless#Id": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.iotwireless#Identifier": {
             "type": "string",
             "traits": {
@@ -9058,6 +9070,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the gateways accessed by the device.</p>"
                     }
+                },
+                "PublicGateways": {
+                    "target": "com.amazonaws.iotwireless#LoRaWANPublicGatewayMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the LoRaWAN public network accessed by the device.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9570,6 +9588,53 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The LoRaWAN information used with the multicast session.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANPublicGatewayMetadata": {
+            "type": "structure",
+            "members": {
+                "ProviderNetId": {
+                    "target": "com.amazonaws.iotwireless#ProviderNetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the LoRaWAN public network provider.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.iotwireless#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the gateways that are operated by the network provider.</p>"
+                    }
+                },
+                "Rssi": {
+                    "target": "com.amazonaws.iotwireless#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RSSI (received signal strength indicator) value.</p>"
+                    }
+                },
+                "Snr": {
+                    "target": "com.amazonaws.iotwireless#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SNR (signal to noise ratio) value.</p>"
+                    }
+                },
+                "RfRegion": {
+                    "target": "com.amazonaws.iotwireless#RfRegion"
+                },
+                "DlAllowed": {
+                    "target": "com.amazonaws.iotwireless#DlAllowed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean that indicates whether downlink is allowed using the network.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>LoRaWAN public gateway metadata.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#LoRaWANPublicGatewayMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#LoRaWANPublicGatewayMetadata"
             }
         },
         "com.amazonaws.iotwireless#LoRaWANSendDataToDevice": {
@@ -10326,37 +10391,37 @@
                 "Min": {
                     "target": "com.amazonaws.iotwireless#Min",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minimum of the values of the all data points collected during the period.</p>"
+                        "smithy.api#documentation": "<p>The minimum of the values of all data points collected during the aggregation\n            period.</p>"
                     }
                 },
                 "Max": {
                     "target": "com.amazonaws.iotwireless#Max",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum of the values of the all data points collected during the period.</p>"
+                        "smithy.api#documentation": "<p>The maximum of the values of all the data points collected during the aggregation\n            period.</p>"
                     }
                 },
                 "Sum": {
                     "target": "com.amazonaws.iotwireless#Sum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sum of the values of the all data points collected during the period.</p>"
+                        "smithy.api#documentation": "<p>The sum of the values of all data points collected during the aggregation\n            period.</p>"
                     }
                 },
                 "Avg": {
                     "target": "com.amazonaws.iotwireless#Avg",
                     "traits": {
-                        "smithy.api#documentation": "<p>The average of the values of the all data points collected during the period.</p>"
+                        "smithy.api#documentation": "<p>The average of the values of all data points collected during the aggregation\n            period.</p>"
                     }
                 },
                 "Std": {
                     "target": "com.amazonaws.iotwireless#Std",
                     "traits": {
-                        "smithy.api#documentation": "<p>The standard deviation of the values of the all data points collected during the period.</p>"
+                        "smithy.api#documentation": "<p>The standard deviation of the values of all data points collected during the\n            aggregation period.</p>"
                     }
                 },
                 "P90": {
                     "target": "com.amazonaws.iotwireless#P90",
                     "traits": {
-                        "smithy.api#documentation": "<p>The 90th percentile of the values of the all data points collected during the period.</p>"
+                        "smithy.api#documentation": "<p>The 90th percentile of the values of all data points collected during the aggregation\n            period.</p>"
                     }
                 }
             },
@@ -10426,7 +10491,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>FrameInfo</code> of your multicast group resources for the trace content. Use\n        FrameInfo to debug the multicast communication between your multicast groups and the network server.</p>"
+                "smithy.api#documentation": "<p>\n            <code>FrameInfo</code> of your multicast group resources for the trace content. Use\n            FrameInfo to debug the multicast communication between your multicast groups and the\n            network server.</p>"
             }
         },
         "com.amazonaws.iotwireless#MulticastGroup": {
@@ -10715,13 +10780,13 @@
                 "AppEui": {
                     "target": "com.amazonaws.iotwireless#AppEui",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AppEUI value. You specify this value when using LoRaWAN versions v1.0.2 or v1.0.3.</p>"
+                        "smithy.api#documentation": "<p>The AppEUI value. You specify this value when using LoRaWAN versions v1.0.2 or\n            v1.0.3.</p>"
                     }
                 },
                 "JoinEui": {
                     "target": "com.amazonaws.iotwireless#JoinEui",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JoinEUI value. You specify this value instead of the AppEUI when using LoRaWAN \n            version v1.0.4.</p>"
+                        "smithy.api#documentation": "<p>The JoinEUI value. You specify this value instead of the AppEUI when using LoRaWAN\n            version v1.0.4.</p>"
                     }
                 },
                 "GenAppKey": {
@@ -11124,6 +11189,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iotwireless#CertificateList"
+            }
+        },
+        "com.amazonaws.iotwireless#ProviderNetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.iotwireless#ProximityEventConfiguration": {
@@ -12879,12 +12953,12 @@
                 "Status": {
                     "target": "com.amazonaws.iotwireless#SummaryMetricConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of summary metric.</p>"
+                        "smithy.api#documentation": "<p>The status of the configuration of summary metrics.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of summary metric.</p>"
+                "smithy.api#documentation": "<p>The configuration of summary metrics.</p>"
             }
         },
         "com.amazonaws.iotwireless#SummaryMetricConfigurationStatus": {
@@ -12916,7 +12990,7 @@
                 "QueryId": {
                     "target": "com.amazonaws.iotwireless#MetricQueryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The id of the query.</p>"
+                        "smithy.api#documentation": "<p>The id of the summary metric query.</p>"
                     }
                 },
                 "MetricName": {
@@ -12928,30 +13002,30 @@
                 "Dimensions": {
                     "target": "com.amazonaws.iotwireless#Dimensions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dimensions of the metric.</p>"
+                        "smithy.api#documentation": "<p>The dimensions of the summary metric.</p>"
                     }
                 },
                 "AggregationPeriod": {
                     "target": "com.amazonaws.iotwireless#AggregationPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The aggregation period of the metric.</p>"
+                        "smithy.api#documentation": "<p>The aggregation period of the summary metric.</p>"
                     }
                 },
                 "StartTimestamp": {
                     "target": "com.amazonaws.iotwireless#MetricQueryStartTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start timestamp for summary metric query.</p>"
+                        "smithy.api#documentation": "<p>The start timestamp for the summary metric query.</p>"
                     }
                 },
                 "EndTimestamp": {
                     "target": "com.amazonaws.iotwireless#MetricQueryEndTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end timestamp for summary metric query.</p>"
+                        "smithy.api#documentation": "<p>The end timestamp for the summary metric query.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The metric query object.</p>"
+                "smithy.api#documentation": "<p>The summary metric query object.</p>"
             }
         },
         "com.amazonaws.iotwireless#SummaryMetricQueryResult": {
@@ -12960,25 +13034,25 @@
                 "QueryId": {
                     "target": "com.amazonaws.iotwireless#MetricQueryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The id of the query.</p>"
+                        "smithy.api#documentation": "<p>The ID of the summary metric results query operation.</p>"
                     }
                 },
                 "QueryStatus": {
                     "target": "com.amazonaws.iotwireless#MetricQueryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the metric query.</p>"
+                        "smithy.api#documentation": "<p>The status of the summary metric query result.</p>"
                     }
                 },
                 "Error": {
                     "target": "com.amazonaws.iotwireless#MetricQueryError",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error message for the summary metric query.</p>"
+                        "smithy.api#documentation": "<p>The error message for the summary metric query result.</p>"
                     }
                 },
                 "MetricName": {
                     "target": "com.amazonaws.iotwireless#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the metric.</p>"
+                        "smithy.api#documentation": "<p>The name of the summary metric query result.</p>"
                     }
                 },
                 "Dimensions": {
@@ -12996,13 +13070,13 @@
                 "StartTimestamp": {
                     "target": "com.amazonaws.iotwireless#MetricQueryStartTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start timestamp for summary metric query.</p>"
+                        "smithy.api#documentation": "<p>The start timestamp for the summary metric query.</p>"
                     }
                 },
                 "EndTimestamp": {
                     "target": "com.amazonaws.iotwireless#MetricQueryEndTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end timestamp for summary metric query.</p>"
+                        "smithy.api#documentation": "<p>The end timestamp for the summary metric query.</p>"
                     }
                 },
                 "Timestamps": {
@@ -13014,7 +13088,7 @@
                 "Values": {
                     "target": "com.amazonaws.iotwireless#MetricQueryValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of aggregated metrics.</p>"
+                        "smithy.api#documentation": "<p>The list of aggregated summary metric query results.</p>"
                     }
                 },
                 "Unit": {
@@ -13025,7 +13099,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result of metrics aggregation operation.</p>"
+                "smithy.api#documentation": "<p>The result of the summary metrics aggregation operation.</p>"
             }
         },
         "com.amazonaws.iotwireless#SummaryMetricQueryResults": {
@@ -14092,7 +14166,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the metric configuration.</p>",
+                "smithy.api#documentation": "<p>Update the summary metric configuration.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/metric-configuration",
@@ -14267,13 +14341,13 @@
                 "MulticastGroupsToAdd": {
                     "target": "com.amazonaws.iotwireless#NetworkAnalyzerMulticastGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Multicast group resources to add to the network analyzer configuration. Provide the\n            <code>MulticastGroupId</code> of the resource to add in the input array.</p>"
+                        "smithy.api#documentation": "<p>Multicast group resources to add to the network analyzer configuration. Provide the\n                <code>MulticastGroupId</code> of the resource to add in the input array.</p>"
                     }
                 },
                 "MulticastGroupsToRemove": {
                     "target": "com.amazonaws.iotwireless#NetworkAnalyzerMulticastGroupList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Multicast group resources to remove from the network analyzer configuration. Provide the\n            <code>MulticastGroupId</code> of the resources to remove in the input array.</p>"
+                        "smithy.api#documentation": "<p>Multicast group resources to remove from the network analyzer configuration. Provide\n            the <code>MulticastGroupId</code> of the resources to remove in the input array.</p>"
                     }
                 }
             },

@@ -11,7 +11,7 @@ import (
 )
 
 // Stops an active model customization job. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Bedrock User Guide.
+// in the Amazon Bedrock User Guide.
 func (c *Client) StopModelCustomizationJob(ctx context.Context, params *StopModelCustomizationJobInput, optFns ...func(*Options)) (*StopModelCustomizationJobOutput, error) {
 	if params == nil {
 		params = &StopModelCustomizationJobInput{}

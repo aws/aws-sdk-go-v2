@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Gets information about an existing retriever used by an Amazon Q application.
+// Gets information about an existing retriever used by an Amazon Q Business
+// application.
 func (c *Client) GetRetriever(ctx context.Context, params *GetRetrieverInput, optFns ...func(*Options)) (*GetRetrieverOutput, error) {
 	if params == nil {
 		params = &GetRetrieverInput{}
@@ -30,7 +31,7 @@ func (c *Client) GetRetriever(ctx context.Context, params *GetRetrieverInput, op
 
 type GetRetrieverInput struct {
 
-	// The identifier of the Amazon Q application using the retriever.
+	// The identifier of the Amazon Q Business application using the retriever.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -45,11 +46,11 @@ type GetRetrieverInput struct {
 
 type GetRetrieverOutput struct {
 
-	// The identifier of the Amazon Q application using the retriever.
+	// The identifier of the Amazon Q Business application using the retriever.
 	ApplicationId *string
 
-	// Provides information on how the retriever used for your Amazon Q application is
-	// configured.
+	// Provides information on how the retriever used for your Amazon Q Business
+	// application is configured.
 	Configuration types.RetrieverConfiguration
 
 	// The Unix timestamp when the retriever was created.

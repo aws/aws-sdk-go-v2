@@ -7,7 +7,9 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// Contains information about the action group being invoked.
+// Contains information about the action group being invoked. For more information
+// about the possible structures, see the InvocationInput tab in OrchestrationTrace (https://docs.aws.amazon.com/bedrock/latest/userguide/trace-orchestration.html)
+// in the Amazon Bedrock User Guide.
 type ActionGroupInvocationInput struct {
 
 	// The name of the action group.
@@ -15,6 +17,9 @@ type ActionGroupInvocationInput struct {
 
 	// The path to the API to call, based off the action group.
 	ApiPath *string
+
+	// The function in the action group to call.
+	Function *string
 
 	// The parameters in the Lambda input event.
 	Parameters []Parameter
@@ -38,11 +43,121 @@ type ActionGroupInvocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the API operation that the agent predicts should be
+// called. This data type is used in the following API operations:
+//   - In the returnControl field of the Retrieve response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax)
+type ApiInvocationInput struct {
+
+	// The action group that the API operation belongs to.
+	//
+	// This member is required.
+	ActionGroup *string
+
+	// The path to the API operation.
+	ApiPath *string
+
+	// The HTTP method of the API operation.
+	HttpMethod *string
+
+	// The parameters to provide for the API request, as the agent elicited from the
+	// user.
+	Parameters []ApiParameter
+
+	// The request body to provide for the API request, as the agent elicited from the
+	// user.
+	RequestBody *ApiRequestBody
+
+	noSmithyDocumentSerde
+}
+
+// Information about a parameter to provide to the API request. This data type is
+// used in the following API operations:
+//   - Retrieve response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax)
+type ApiParameter struct {
+
+	// The name of the parameter.
+	Name *string
+
+	// The data type for the parameter.
+	Type *string
+
+	// The value of the parameter.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The request body to provide for the API request, as the agent elicited from the
+// user. This data type is used in the following API operations:
+//   - Retrieve response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax)
+type ApiRequestBody struct {
+
+	// The content of the request body. The key of the object in this field is a media
+	// type defining the format of the request body.
+	Content map[string]PropertyParameters
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the API operation that was called from the action
+// group and the response body that was returned. This data type is used in the
+// following API operations:
+//   - In the returnControlInvocationResults of the Retrieve request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax)
+type ApiResult struct {
+
+	// The action group that the API operation belongs to.
+	//
+	// This member is required.
+	ActionGroup *string
+
+	// The path to the API operation.
+	ApiPath *string
+
+	// The HTTP method for the API operation.
+	HttpMethod *string
+
+	// http status code from API execution response (for example: 200, 400, 500).
+	HttpStatusCode *int32
+
+	// The response body from the API operation. The key of the object is the content
+	// type. The response may be returned directly or from the Lambda function.
+	ResponseBody map[string]ContentBody
+
+	// Controls the final response state returned to end user when API/Function
+	// execution failed. When this state is FAILURE, the request would fail with
+	// dependency failure exception. When this state is REPROMPT, the API/function
+	// response will be sent to model for re-prompt
+	ResponseState ResponseState
+
+	noSmithyDocumentSerde
+}
+
 // Contains citations for a part of an agent response.
 type Attribution struct {
 
 	// A list of citations and related information for a part of an agent response.
 	Citations []Citation
+
+	noSmithyDocumentSerde
+}
+
+// This property contains the document to chat with, along with its attributes.
+type ByteContentDoc struct {
+
+	// The MIME type of the document contained in the wrapper object.
+	//
+	// This member is required.
+	ContentType *string
+
+	// The byte value of the file to upload, encoded as a Base-64 string.
+	//
+	// This member is required.
+	Data []byte
+
+	// The file name of the document contained in the wrapper object.
+	//
+	// This member is required.
+	Identifier *string
 
 	noSmithyDocumentSerde
 }
@@ -61,6 +176,66 @@ type Citation struct {
 
 	// Contains metadata about the sources cited for the generated response.
 	RetrievedReferences []RetrievedReference
+
+	noSmithyDocumentSerde
+}
+
+// Contains the body of the API response. This data type is used in the following
+// API operations:
+//   - In the returnControlInvocationResults field of the Retrieve request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax)
+type ContentBody struct {
+
+	// The body of the API response.
+	Body *string
+
+	noSmithyDocumentSerde
+}
+
+// The unique external source of the content contained in the wrapper object.
+type ExternalSource struct {
+
+	// The source type of the external source wrapper object.
+	//
+	// This member is required.
+	SourceType ExternalSourceType
+
+	// The identifier, contentType, and data of the external source wrapper object.
+	ByteContent *ByteContentDoc
+
+	// The S3 location of the external source wrapper object.
+	S3Location *S3ObjectDoc
+
+	noSmithyDocumentSerde
+}
+
+// Contains the generation configuration of the external source wrapper object.
+type ExternalSourcesGenerationConfiguration struct {
+
+	// Contain the textPromptTemplate string for the external source wrapper object.
+	PromptTemplate *PromptTemplate
+
+	noSmithyDocumentSerde
+}
+
+// The configurations of the external source wrapper object in the
+// retrieveAndGenerate function.
+type ExternalSourcesRetrieveAndGenerateConfiguration struct {
+
+	// The modelArn used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// The document used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	//
+	// This member is required.
+	Sources []ExternalSource
+
+	// The prompt used with the external source wrapper object with the
+	// retrieveAndGenerate function.
+	GenerationConfiguration *ExternalSourcesGenerationConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -102,6 +277,69 @@ type FinalResponse struct {
 
 	// The text in the response to the user.
 	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the function that the agent predicts should be
+// called. This data type is used in the following API operations:
+//   - In the returnControl field of the Retrieve response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax)
+type FunctionInvocationInput struct {
+
+	// The action group that the function belongs to.
+	//
+	// This member is required.
+	ActionGroup *string
+
+	// The name of the function.
+	Function *string
+
+	// A list of parameters of the function.
+	Parameters []FunctionParameter
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a parameter of the function. This data type is used
+// in the following API operations:
+//   - In the returnControl field of the Retrieve response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax)
+type FunctionParameter struct {
+
+	// The name of the parameter.
+	Name *string
+
+	// The data type of the parameter.
+	Type *string
+
+	// The value of the parameter.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the function that was called from the action group
+// and the response that was returned. This data type is used in the following API
+// operations:
+//   - In the returnControlInvocationResults of the Retrieve request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax)
+type FunctionResult struct {
+
+	// The action group that the function belongs to.
+	//
+	// This member is required.
+	ActionGroup *string
+
+	// The name of the function that was called.
+	Function *string
+
+	// The response from the function call using the parameters. The response may be
+	// returned directly or from the Lambda function.
+	ResponseBody map[string]ContentBody
+
+	// Controls the final response state returned to end user when API/Function
+	// execution failed. When this state is FAILURE, the request would fail with
+	// dependency failure exception. When this state is REPROMPT, the API/function
+	// response will be sent to model for re-prompt
+	ResponseState ResponseState
 
 	noSmithyDocumentSerde
 }
@@ -189,6 +427,68 @@ type InvocationInput struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains details about the API operation or function that the agent predicts
+// should be called. This data type is used in the following API operations:
+//   - In the returnControl field of the Retrieve response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax)
+//
+// The following types satisfy this interface:
+//
+//	InvocationInputMemberMemberApiInvocationInput
+//	InvocationInputMemberMemberFunctionInvocationInput
+type InvocationInputMember interface {
+	isInvocationInputMember()
+}
+
+// Contains information about the API operation that the agent predicts should be
+// called.
+type InvocationInputMemberMemberApiInvocationInput struct {
+	Value ApiInvocationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationInputMemberMemberApiInvocationInput) isInvocationInputMember() {}
+
+// Contains information about the function that the agent predicts should be
+// called.
+type InvocationInputMemberMemberFunctionInvocationInput struct {
+	Value FunctionInvocationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationInputMemberMemberFunctionInvocationInput) isInvocationInputMember() {}
+
+// A result from the action group invocation. This data type is used in the
+// following API operations:
+//   - Retrieve request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax)
+//
+// The following types satisfy this interface:
+//
+//	InvocationResultMemberMemberApiResult
+//	InvocationResultMemberMemberFunctionResult
+type InvocationResultMember interface {
+	isInvocationResultMember()
+}
+
+// The result from the API response from the action group invocation.
+type InvocationResultMemberMemberApiResult struct {
+	Value ApiResult
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationResultMemberMemberApiResult) isInvocationResultMember() {}
+
+// The result from the function from the action group invocation.
+type InvocationResultMemberMemberFunctionResult struct {
+	Value FunctionResult
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationResultMemberMemberFunctionResult) isInvocationResultMember() {}
 
 // Contains details about the knowledge base to look up and the query to be made.
 type KnowledgeBaseLookupInput struct {
@@ -457,7 +757,7 @@ type OrchestrationTraceMemberRationale struct {
 
 func (*OrchestrationTraceMemberRationale) isOrchestrationTrace() {}
 
-// A parameter in the Lambda input event.
+// A parameter for the API request or function.
 type Parameter struct {
 
 	// The name of the parameter.
@@ -621,6 +921,15 @@ type PromptTemplate struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the parameters in the request body.
+type PropertyParameters struct {
+
+	// A list of parameters in the request body.
+	Properties []Parameter
+
+	noSmithyDocumentSerde
+}
+
 // Contains the reasoning, based on the input, that the agent uses to justify
 // carrying out an action group or getting information from a knowledge base.
 type Rationale struct {
@@ -646,7 +955,7 @@ type RepromptResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The parameters in the request body for the Lambda input event.
+// The parameters in the API request body.
 type RequestBody struct {
 
 	// The content in the request body.
@@ -661,6 +970,7 @@ type RequestBody struct {
 // The following types satisfy this interface:
 //
 //	ResponseStreamMemberChunk
+//	ResponseStreamMemberReturnControl
 //	ResponseStreamMemberTrace
 type ResponseStream interface {
 	isResponseStream()
@@ -675,11 +985,22 @@ type ResponseStreamMemberChunk struct {
 
 func (*ResponseStreamMemberChunk) isResponseStream() {}
 
+// Contains the parameters and information that the agent elicited from the
+// customer to carry out an action. This information is returned to the system and
+// can be used in your own setup for fulfilling the action.
+type ResponseStreamMemberReturnControl struct {
+	Value ReturnControlPayload
+
+	noSmithyDocumentSerde
+}
+
+func (*ResponseStreamMemberReturnControl) isResponseStream() {}
+
 // Contains information about the agent and session, alongside the agent's
-// reasoning process and results from calling API actions and querying knowledge
-// bases and metadata about the trace. You can use the trace to understand how the
-// agent arrived at the response it provided the customer. For more information,
-// see Trace events (https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html)
+// reasoning process and results from calling actions and querying knowledge bases
+// and metadata about the trace. You can use the trace to understand how the agent
+// arrived at the response it provided the customer. For more information, see
+// Trace events (https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html)
 // .
 type ResponseStreamMemberTrace struct {
 	Value TracePart
@@ -900,6 +1221,10 @@ type RetrieveAndGenerateConfiguration struct {
 	// This member is required.
 	Type RetrieveAndGenerateType
 
+	// The configuration used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	ExternalSourcesConfiguration *ExternalSourcesRetrieveAndGenerateConfiguration
+
 	// Contains details about the resource being queried.
 	KnowledgeBaseConfiguration *KnowledgeBaseRetrieveAndGenerateConfiguration
 
@@ -970,6 +1295,33 @@ type RetrievedReference struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information to return from the action group that the agent has
+// predicted to invoke. This data type is used in the following API operations:
+//   - Retrieve response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax)
+type ReturnControlPayload struct {
+
+	// The identifier of the action group invocation.
+	InvocationId *string
+
+	// A list of objects that contain information about the parameters and inputs that
+	// need to be sent into the API operation or function, based on what the agent
+	// determines from its session with the user.
+	InvocationInputs []InvocationInputMember
+
+	noSmithyDocumentSerde
+}
+
+// The unique wrapper object of the document from the S3 location.
+type S3ObjectDoc struct {
+
+	// The file location of the S3 wrapper object.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains parameters that specify various attributes that persist across a
 // session or prompt. You can define session state attributes as key-value pairs
 // when writing a Lambda function (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html)
@@ -980,12 +1332,18 @@ type RetrievedReference struct {
 // .
 type SessionState struct {
 
+	// The identifier of the invocation.
+	InvocationId *string
+
 	// Contains attributes that persist across a prompt and the values of those
 	// attributes. These attributes replace the $prompt_session_attributes$
 	// placeholder variable in the orchestration prompt template. For more information,
 	// see Prompt template placeholder variables (https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html)
 	// .
 	PromptSessionAttributes map[string]string
+
+	// Contains information about the results from the action group invocation.
+	ReturnControlInvocationResults []InvocationResultMember
 
 	// Contains attributes that persist across a session and the values of those
 	// attributes.
@@ -1098,6 +1456,9 @@ type TracePart struct {
 	// The unique identifier of the agent.
 	AgentId *string
 
+	// The version of the agent.
+	AgentVersion *string
+
 	// The unique identifier of the session with the agent.
 	SessionId *string
 
@@ -1122,9 +1483,11 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isOrchestrationTrace()  {}
-func (*UnknownUnionMember) isPostProcessingTrace() {}
-func (*UnknownUnionMember) isPreProcessingTrace()  {}
-func (*UnknownUnionMember) isResponseStream()      {}
-func (*UnknownUnionMember) isRetrievalFilter()     {}
-func (*UnknownUnionMember) isTrace()               {}
+func (*UnknownUnionMember) isInvocationInputMember()  {}
+func (*UnknownUnionMember) isInvocationResultMember() {}
+func (*UnknownUnionMember) isOrchestrationTrace()     {}
+func (*UnknownUnionMember) isPostProcessingTrace()    {}
+func (*UnknownUnionMember) isPreProcessingTrace()     {}
+func (*UnknownUnionMember) isResponseStream()         {}
+func (*UnknownUnionMember) isRetrievalFilter()        {}
+func (*UnknownUnionMember) isTrace()                  {}

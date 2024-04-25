@@ -17,7 +17,7 @@ import (
 // These sub groups include their own list of users or people who work in these
 // teams. Only users who work in research and engineering, and therefore belong in
 // the intellectual property group, can see top-secret company documents in their
-// Amazon Q chat results.
+// Amazon Q Business chat results.
 func (c *Client) PutGroup(ctx context.Context, params *PutGroupInput, optFns ...func(*Options)) (*PutGroupOutput, error) {
 	if params == nil {
 		params = &PutGroupInput{}
@@ -41,7 +41,7 @@ type PutGroupInput struct {
 	ApplicationId *string
 
 	// A list of users or sub groups that belong to a group. This is for generating
-	// Amazon Q chat results only from document a user has access to.
+	// Amazon Q Business chat results only from document a user has access to.
 	//
 	// This member is required.
 	GroupMembers *types.GroupMembers

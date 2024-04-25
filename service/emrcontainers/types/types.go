@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// Authorization-related configuration inputs for the security configuration.
+type AuthorizationConfiguration struct {
+
+	// Encryption-related configuration input for the security configuration.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// Lake Formation related configuration inputs for the security configuration.
+	LakeFormationConfiguration *LakeFormationConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The entity representing certificate data generated for managed endpoint.
 type Certificate struct {
 
@@ -149,6 +161,15 @@ type EksInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Configurations related to encryption for the security configuration.
+type EncryptionConfiguration struct {
+
+	// In-transit encryption-related input for the security configuration.
+	InTransitEncryptionConfiguration *InTransitEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // This entity represents the endpoint that is managed by Amazon EMR on EKS.
 type Endpoint struct {
 
@@ -211,6 +232,15 @@ type Endpoint struct {
 
 	// The ID of the endpoint's virtual cluster.
 	VirtualClusterId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configurations related to in-transit encryption for the security configuration.
+type InTransitEncryptionConfiguration struct {
+
+	// TLS certificate-related configuration input for the security configuration.
+	TlsCertificateConfiguration *TLSCertificateConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -359,6 +389,23 @@ type JobTemplateData struct {
 	noSmithyDocumentSerde
 }
 
+// Lake Formation related configuration inputs for the security configuration.
+type LakeFormationConfiguration struct {
+
+	// The session tag to authorize Amazon EMR on EKS for API calls to Lake Formation.
+	AuthorizedSessionTagValue *string
+
+	// The query engine IAM role ARN that is tied to the secure Spark job. The
+	// QueryEngine role assumes the JobExecutionRole to execute all the Lake Formation
+	// calls.
+	QueryEngineRoleArn *string
+
+	// The namespace input of the system job.
+	SecureNamespaceInfo *SecureNamespaceInfo
+
+	noSmithyDocumentSerde
+}
+
 // Configuration setting for monitoring.
 type MonitoringConfiguration struct {
 
@@ -465,6 +512,58 @@ type S3MonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Namespace inputs for the system job.
+type SecureNamespaceInfo struct {
+
+	// The ID of the Amazon EKS cluster where Amazon EMR on EKS jobs run.
+	ClusterId *string
+
+	// The namespace of the Amazon EKS cluster where the system jobs run.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// Inputs related to the security configuration. Security configurations in Amazon
+// EMR on EKS are templates for different security setups. You can use security
+// configurations to configure the Lake Formation integration setup. You can also
+// create a security configuration to re-use a security setup each time you create
+// a virtual cluster.
+type SecurityConfiguration struct {
+
+	// The ARN (Amazon Resource Name) of the security configuration.
+	Arn *string
+
+	// The date and time that the job run was created.
+	CreatedAt *time.Time
+
+	// The user who created the job run.
+	CreatedBy *string
+
+	// The ID of the security configuration.
+	Id *string
+
+	// The name of the security configuration.
+	Name *string
+
+	// Security configuration inputs for the request.
+	SecurityConfigurationData *SecurityConfigurationData
+
+	// The tags to assign to the security configuration.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Configurations related to the security configuration for the request.
+type SecurityConfigurationData struct {
+
+	// Authorization-related configuration input for the security configuration.
+	AuthorizationConfiguration *AuthorizationConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // The job driver for job type.
 type SparkSqlJobDriver struct {
 
@@ -506,6 +605,23 @@ type TemplateParameterConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configurations related to the TLS certificate for the security configuration.
+type TLSCertificateConfiguration struct {
+
+	// The TLS certificate type. Acceptable values: PEM or Custom .
+	CertificateProviderType CertificateProviderType
+
+	// Secrets Manager ARN that contains the private TLS certificate contents, used
+	// for communication between the user job and the system job.
+	PrivateCertificateSecretArn *string
+
+	// Secrets Manager ARN that contains the public TLS certificate contents, used for
+	// communication between the user job and the system job.
+	PublicCertificateSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
 // This entity describes a virtual cluster. A virtual cluster is a Kubernetes
 // namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters
 // to run jobs and host endpoints. Multiple virtual clusters can be backed by the
@@ -529,6 +645,9 @@ type VirtualCluster struct {
 
 	// The name of the virtual cluster.
 	Name *string
+
+	// The ID of the security configuration.
+	SecurityConfigurationId *string
 
 	// The state of the virtual cluster.
 	State VirtualClusterState

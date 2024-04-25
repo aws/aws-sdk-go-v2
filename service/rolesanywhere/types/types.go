@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// A mapping applied to the authenticating end-entity certificate.
+type AttributeMapping struct {
+
+	// Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.
+	CertificateField CertificateField
+
+	// A list of mapping entries for every supported specifier or sub-field.
+	MappingRules []MappingRule
+
+	noSmithyDocumentSerde
+}
+
 // A record of a presented X509 credential from a temporary credential request.
 type CredentialSummary struct {
 
@@ -80,6 +92,18 @@ type InstanceProperty struct {
 	// The ISO-8601 time stamp of when the certificate was last used in a temporary
 	// credential request.
 	SeenAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A single mapping entry for each supported specifier or sub-field.
+type MappingRule struct {
+
+	// Specifier within a certificate field, such as CN, OU, or UID from the Subject
+	// field.
+	//
+	// This member is required.
+	Specifier *string
 
 	noSmithyDocumentSerde
 }
@@ -161,6 +185,9 @@ type NotificationSettingKey struct {
 
 // The state of the profile after a read or write operation.
 type ProfileDetail struct {
+
+	// A mapping applied to the authenticating end-entity certificate.
+	AttributeMappings []AttributeMapping
 
 	// The ISO-8601 timestamp when the profile was created.
 	CreatedAt *time.Time

@@ -34,6 +34,9 @@ type DescribeAccountInput struct {
 
 type DescribeAccountOutput struct {
 
+	// The type of linked account.
+	DedicatedTenancyAccountType types.DedicatedTenancyAccountType
+
 	// The IP address range, specified as an IPv4 CIDR block, used for the management
 	// network interface. The management network interface is connected to a secure
 	// Amazon WorkSpaces management network. It is used for interactive streaming of

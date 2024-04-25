@@ -42,6 +42,42 @@ func (HealthEventStatus) Values() []HealthEventStatus {
 	}
 }
 
+type InternetEventStatus string
+
+// Enum values for InternetEventStatus
+const (
+	InternetEventStatusActive   InternetEventStatus = "ACTIVE"
+	InternetEventStatusResolved InternetEventStatus = "RESOLVED"
+)
+
+// Values returns all known values for InternetEventStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InternetEventStatus) Values() []InternetEventStatus {
+	return []InternetEventStatus{
+		"ACTIVE",
+		"RESOLVED",
+	}
+}
+
+type InternetEventType string
+
+// Enum values for InternetEventType
+const (
+	InternetEventTypeAvailability InternetEventType = "AVAILABILITY"
+	InternetEventTypePerformance  InternetEventType = "PERFORMANCE"
+)
+
+// Values returns all known values for InternetEventType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InternetEventType) Values() []InternetEventType {
+	return []InternetEventType{
+		"AVAILABILITY",
+		"PERFORMANCE",
+	}
+}
+
 type LocalHealthEventsConfigStatus string
 
 // Enum values for LocalHealthEventsConfigStatus

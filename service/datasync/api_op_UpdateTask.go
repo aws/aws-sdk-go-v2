@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of an DataSync transfer task.
+// Updates the configuration of a task, which defines where and how DataSync
+// transfers your data.
 func (c *Client) UpdateTask(ctx context.Context, params *UpdateTaskInput, optFns ...func(*Options)) (*UpdateTaskOutput, error) {
 	if params == nil {
 		params = &UpdateTaskInput{}
@@ -30,23 +31,25 @@ func (c *Client) UpdateTask(ctx context.Context, params *UpdateTaskInput, optFns
 // UpdateTaskResponse
 type UpdateTaskInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource name of the task to update.
+	// Specifies the ARN of the task that you want to update.
 	//
 	// This member is required.
 	TaskArn *string
 
-	// The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch
-	// log group.
+	// Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for
+	// monitoring your task.
 	CloudWatchLogGroupArn *string
 
-	// Specifies a list of filter rules that exclude specific data during your
-	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
+	// Specifies exclude filters that define the files, objects, and folders in your
+	// source location that you don't want DataSync to transfer. For more information
+	// and examples, see Specifying what DataSync transfers by using filters (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// .
 	Excludes []types.FilterRule
 
-	// Specifies a list of filter rules that include specific data during your
-	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
+	// Specifies include filters define the files, objects, and folders in your source
+	// location that you want DataSync to transfer. For more information and examples,
+	// see Specifying what DataSync transfers by using filters (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
+	// .
 	Includes []types.FilterRule
 
 	// Configures a manifest, which is a list of files or objects that you want
@@ -59,22 +62,21 @@ type UpdateTaskInput struct {
 	// this parameter as empty.
 	ManifestConfig *types.ManifestConfig
 
-	// The name of the task to update.
+	// Specifies the name of your task.
 	Name *string
 
 	// Indicates how your transfer task is configured. These options include how
 	// DataSync handles files, objects, and their associated metadata during your
 	// transfer. You also can specify how to verify data integrity, set bandwidth
 	// limits for your task, among other options. Each option has a default value.
-	// Unless you need to, you don't have to configure any of these options before
-	// starting your task.
+	// Unless you need to, you don't have to configure any option before calling
+	// StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
+	// . You also can override your task options for each task execution. For example,
+	// you might want to adjust the LogLevel for an individual execution.
 	Options *types.Options
 
-	// Specifies a schedule used to periodically transfer files from a source to a
-	// destination location. You can configure your task to execute hourly, daily,
-	// weekly or on specific days of the week. You control when in the day or hour you
-	// want the task to execute. The time you specify is UTC time. For more
-	// information, see Scheduling your task (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
+	// Specifies a schedule for when you want your task to run. For more information,
+	// see Scheduling your task (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
 	// .
 	Schedule *types.TaskSchedule
 

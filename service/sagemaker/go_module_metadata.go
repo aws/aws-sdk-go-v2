@@ -3,4 +3,4 @@
 package sagemaker
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.135.0"
+const goModuleVersion = "1.137.0"

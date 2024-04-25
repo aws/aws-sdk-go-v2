@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q index. To determine if index creation has completed, check
-// the Status field returned from a call to DescribeIndex . The Status field is
-// set to ACTIVE when the index is ready to use. Once the index is active, you can
-// index your documents using the BatchPutDocument (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_BatchPutDocument.html)
+// Creates an Amazon Q Business index. To determine if index creation has
+// completed, check the Status field returned from a call to DescribeIndex . The
+// Status field is set to ACTIVE when the index is ready to use. Once the index is
+// active, you can index your documents using the BatchPutDocument (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_BatchPutDocument.html)
 // API or the CreateDataSource (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_CreateDataSource.html)
 // API.
 func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optFns ...func(*Options)) (*CreateIndexOutput, error) {
@@ -34,12 +34,12 @@ func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optF
 
 type CreateIndexInput struct {
 
-	// The identifier of the Amazon Q application using the index.
+	// The identifier of the Amazon Q Business application using the index.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// A name for the Amazon Q index.
+	// A name for the Amazon Q Business index.
 	//
 	// This member is required.
 	DisplayName *string
@@ -53,7 +53,7 @@ type CreateIndexInput struct {
 	// index.
 	ClientToken *string
 
-	// A description for the Amazon Q index.
+	// A description for the Amazon Q Business index.
 	Description *string
 
 	// A list of key-value pairs that identify or categorize the index. You can also
@@ -67,10 +67,10 @@ type CreateIndexInput struct {
 
 type CreateIndexOutput struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Q index.
+	// The Amazon Resource Name (ARN) of an Amazon Q Business index.
 	IndexArn *string
 
-	// The identifier for the Amazon Q index.
+	// The identifier for the Amazon Q Business index.
 	IndexId *string
 
 	// Metadata pertaining to the operation's result.

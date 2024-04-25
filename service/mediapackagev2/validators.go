@@ -562,6 +562,38 @@ func addOpUpdateOriginEndpointValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateOriginEndpoint{}, middleware.After)
 }
 
+func validateCreateDashManifestConfiguration(v *types.CreateDashManifestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDashManifestConfiguration"}
+	if v.ManifestName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManifestName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateDashManifests(v []types.CreateDashManifestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDashManifests"}
+	for i := range v {
+		if err := validateCreateDashManifestConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateHlsManifestConfiguration(v *types.CreateHlsManifestConfiguration) error {
 	if v == nil {
 		return nil
@@ -777,6 +809,11 @@ func validateOpCreateOriginEndpointInput(v *CreateOriginEndpointInput) error {
 	if v.LowLatencyHlsManifests != nil {
 		if err := validateCreateLowLatencyHlsManifests(v.LowLatencyHlsManifests); err != nil {
 			invalidParams.AddNested("LowLatencyHlsManifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DashManifests != nil {
+		if err := validateCreateDashManifests(v.DashManifests); err != nil {
+			invalidParams.AddNested("DashManifests", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1164,6 +1201,11 @@ func validateOpUpdateOriginEndpointInput(v *UpdateOriginEndpointInput) error {
 	if v.LowLatencyHlsManifests != nil {
 		if err := validateCreateLowLatencyHlsManifests(v.LowLatencyHlsManifests); err != nil {
 			invalidParams.AddNested("LowLatencyHlsManifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DashManifests != nil {
+		if err := validateCreateDashManifests(v.DashManifests); err != nil {
+			invalidParams.AddNested("DashManifests", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

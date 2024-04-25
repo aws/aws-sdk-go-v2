@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the retriever used for your Amazon Q application.
+// Updates the retriever used for your Amazon Q Business application.
 func (c *Client) UpdateRetriever(ctx context.Context, params *UpdateRetrieverInput, optFns ...func(*Options)) (*UpdateRetrieverOutput, error) {
 	if params == nil {
 		params = &UpdateRetrieverInput{}
@@ -29,7 +29,7 @@ func (c *Client) UpdateRetriever(ctx context.Context, params *UpdateRetrieverInp
 
 type UpdateRetrieverInput struct {
 
-	// The identifier of your Amazon Q application.
+	// The identifier of your Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -39,8 +39,8 @@ type UpdateRetrieverInput struct {
 	// This member is required.
 	RetrieverId *string
 
-	// Provides information on how the retriever used for your Amazon Q application is
-	// configured.
+	// Provides information on how the retriever used for your Amazon Q Business
+	// application is configured.
 	Configuration types.RetrieverConfiguration
 
 	// The name of your retriever.

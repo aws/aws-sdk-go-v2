@@ -1,3 +1,15 @@
+# v1.159.0 (2024-04-24)
+
+* **Feature**: Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface
+
+# v1.158.0 (2024-04-23)
+
+* **Feature**: This release introduces EC2 AMI Deregistration Protection, a new AMI property that can be enabled by customers to protect an AMI against an unintended deregistration. This release also enables the AMI owners to view the AMI 'LastLaunchedTime' in DescribeImages API.
+
+# v1.157.0 (2024-04-17)
+
+* **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+
 # v1.156.0 (2024-04-04)
 
 * **Feature**: Amazon EC2 G6 instances powered by NVIDIA L4 Tensor Core GPUs can be used for a wide range of graphics-intensive and machine learning use cases. Gr6 instances also feature NVIDIA L4 GPUs and can be used for graphics workloads with higher memory requirements.

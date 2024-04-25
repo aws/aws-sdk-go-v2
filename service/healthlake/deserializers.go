@@ -1907,6 +1907,11 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				sv.DatastoreTypeVersion = types.FHIRVersion(jtv)
 			}
 
+		case "ErrorCause":
+			if err := awsAwsjson10_deserializeDocumentErrorCause(&sv.ErrorCause, value); err != nil {
+				return err
+			}
+
 		case "IdentityProviderConfiguration":
 			if err := awsAwsjson10_deserializeDocumentIdentityProviderConfiguration(&sv.IdentityProviderConfiguration, value); err != nil {
 				return err
@@ -1962,6 +1967,55 @@ func awsAwsjson10_deserializeDocumentDatastorePropertiesList(v *[]types.Datastor
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentErrorCause(v **types.ErrorCause, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ErrorCause
+	if *v == nil {
+		sv = &types.ErrorCause{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorCategory to be of type string, got %T instead", value)
+				}
+				sv.ErrorCategory = types.ErrorCategory(jtv)
+			}
+
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -305,7 +305,13 @@ type BaseConfigurationItem struct {
 	// resource.
 	ConfigurationItemCaptureTime *time.Time
 
-	// The time when configuration changes for the resource were delivered.
+	// The time when configuration changes for the resource were delivered. This field
+	// is optional and is not guaranteed to be present in a configuration item (CI). If
+	// you are using daily recording, this field will be populated. However, if you are
+	// using continuous recording, this field will be omitted since the delivery time
+	// is instantaneous as the CI is available right away. For more information on
+	// daily recording and continuous recording, see Recording Frequency (https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency)
+	// in the Config Developer Guide.
 	ConfigurationItemDeliveryTime *time.Time
 
 	// The configuration item status. Valid values include:
@@ -770,7 +776,13 @@ type ConfigurationItem struct {
 	// resource.
 	ConfigurationItemCaptureTime *time.Time
 
-	// The time when configuration changes for the resource were delivered.
+	// The time when configuration changes for the resource were delivered. This field
+	// is optional and is not guaranteed to be present in a configuration item (CI). If
+	// you are using daily recording, this field will be populated. However, if you are
+	// using continuous recording, this field will be omitted since the delivery time
+	// is instantaneous as the CI is available right away. For more information on
+	// daily recording and continuous recording, see Recording Frequency (https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency)
+	// in the Config Developer Guide.
 	ConfigurationItemDeliveryTime *time.Time
 
 	// Unique MD5 hash that represents the configuration item's state. You can use MD5
@@ -2702,8 +2714,9 @@ type ResourceEvaluationFilters struct {
 	// Stack.
 	EvaluationContextIdentifier *string
 
-	// Filters all resource evaluations results based on an evaluation mode. the valid
-	// value for this API is Proactive .
+	// Filters all resource evaluations results based on an evaluation mode.
+	// Currently, DECTECTIVE is not supported as a valid value. Ignore other
+	// documentation stating otherwise.
 	EvaluationMode EvaluationMode
 
 	// Returns a TimeWindow object.

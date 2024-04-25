@@ -1428,6 +1428,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RoleArn"
                     }
+                },
+                "PRODUCT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProductType"
+                    }
                 }
             }
         },
@@ -1779,7 +1785,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The option to relax the validation that is required to export each asset. When <code>StrictModeForAllResource</code> is set to true, validation is skipped for specific UI errors.</p>"
+                "smithy.api#documentation": "<p>The option to relax the validation that is required to export each asset. When <code>StrictModeForAllResource</code> is set to <code>false</code>, validation is skipped for specific UI errors.</p>"
             }
         },
         "com.amazonaws.quicksight#AssetBundleExportJobWarning": {
@@ -2822,6 +2828,32 @@
                     "min": 1,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobWarning": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource that the warning occurred for.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the warning that occurred during an Asset Bundle import job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a warning that occurred during an Asset Bundle import job.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobWarningList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobWarning"
             }
         },
         "com.amazonaws.quicksight#AssetBundleImportSource": {
@@ -4693,7 +4725,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The numeric equality type drill down filter.</p>"
+                "smithy.api#documentation": "<p>The category drill down filter.</p>"
             }
         },
         "com.amazonaws.quicksight#CategoryFilter": {
@@ -4718,6 +4750,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for a <code>CategoryFilter</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>"
                     }
                 }
             },
@@ -13328,6 +13366,150 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DefaultDateTimePickerControlOptions": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetControlDateTimePickerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date time picker type of the <code>DefaultDateTimePickerControlOptions</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE_VALUED</code>: The filter condition is a fixed date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DATE_RANGE</code>: The filter condition is a date time range.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#DateTimePickerControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the filter control type of a <code>DateTimePicker</code>.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultFilterControlConfiguration": {
+            "type": "structure",
+            "members": {
+                "Title": {
+                    "target": "com.amazonaws.quicksight#SheetControlTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the <code>DefaultFilterControlConfiguration</code>. This title is shared by all controls that are tied to this filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ControlOptions": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control option for the <code>DefaultFilterControlConfiguration</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default configuration for all dependent controls of the filter.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultFilterControlOptions": {
+            "type": "structure",
+            "members": {
+                "DefaultDateTimePickerOptions": {
+                    "target": "com.amazonaws.quicksight#DefaultDateTimePickerControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the filter control type of a <code>DateTimePicker</code>.</p>"
+                    }
+                },
+                "DefaultListOptions": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterListControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the <code>List</code> filter control type.</p>"
+                    }
+                },
+                "DefaultDropdownOptions": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterDropDownControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the <code>Dropdown</code> filter control type.</p>"
+                    }
+                },
+                "DefaultTextFieldOptions": {
+                    "target": "com.amazonaws.quicksight#DefaultTextFieldControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the <code>TextField</code> filter control type.</p>"
+                    }
+                },
+                "DefaultTextAreaOptions": {
+                    "target": "com.amazonaws.quicksight#DefaultTextAreaControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the <code>TextArea</code> filter control type.</p>"
+                    }
+                },
+                "DefaultSliderOptions": {
+                    "target": "com.amazonaws.quicksight#DefaultSliderControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the <code>Slider</code> filter control type.</p>"
+                    }
+                },
+                "DefaultRelativeDateTimeOptions": {
+                    "target": "com.amazonaws.quicksight#DefaultRelativeDateTimeControlOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default options that correspond to the <code>RelativeDateTime</code> filter control type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The option that corresponds to the control type of the filter.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultFilterDropDownControlOptions": {
+            "type": "structure",
+            "members": {
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#DropDownControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetControlListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>FilterDropDownControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SelectableValues": {
+                    "target": "com.amazonaws.quicksight#FilterSelectableValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of selectable values that are used in a control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the <code>Dropdown</code> filter control type.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultFilterListControlOptions": {
+            "type": "structure",
+            "members": {
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#ListControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetControlListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>DefaultFilterListControlOptions</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SelectableValues": {
+                    "target": "com.amazonaws.quicksight#FilterSelectableValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of selectable values that are used in a control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the <code>List</code> filter control type.</p>"
+            }
+        },
         "com.amazonaws.quicksight#DefaultFormatting": {
             "type": "structure",
             "members": {
@@ -13438,6 +13620,20 @@
                 "smithy.api#documentation": "<p>The options that determine the default settings for a paginated layout configuration.</p>"
             }
         },
+        "com.amazonaws.quicksight#DefaultRelativeDateTimeControlOptions": {
+            "type": "structure",
+            "members": {
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#RelativeDateTimeControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the <code>RelativeDateTime</code> filter control type.</p>"
+            }
+        },
         "com.amazonaws.quicksight#DefaultSectionBasedLayoutConfiguration": {
             "type": "structure",
             "members": {
@@ -13451,6 +13647,84 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The options that determine the default settings for a section-based layout configuration.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultSliderControlOptions": {
+            "type": "structure",
+            "members": {
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#SliderControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#SheetControlSliderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the <code>DefaultSliderControlOptions</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE_POINT</code>: Filter against(equals) a single data point.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RANGE</code>: Filter data that is in a specified range.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaximumValue": {
+                    "target": "com.amazonaws.quicksight#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The larger value that is displayed at the right of the slider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinimumValue": {
+                    "target": "com.amazonaws.quicksight#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The smaller value that is displayed at the left of the slider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StepSize": {
+                    "target": "com.amazonaws.quicksight#Double",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of increments that the slider bar is divided into.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the <code>Slider</code> filter control type.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultTextAreaControlOptions": {
+            "type": "structure",
+            "members": {
+                "Delimiter": {
+                    "target": "com.amazonaws.quicksight#TextAreaControlDelimiter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The delimiter that is used to separate the lines in text.</p>"
+                    }
+                },
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#TextAreaControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the <code>TextArea</code> filter control type.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DefaultTextFieldControlOptions": {
+            "type": "structure",
+            "members": {
+                "DisplayOptions": {
+                    "target": "com.amazonaws.quicksight#TextFieldControlDisplayOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display options of a control.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The default options that correspond to the <code>TextField</code> filter control type.</p>"
             }
         },
         "com.amazonaws.quicksight#DeleteAccountCustomization": {
@@ -16912,6 +17186,12 @@
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideValidationStrategy",
                     "traits": {
                         "smithy.api#documentation": "<p>An optional validation strategy override for all analyses and dashboards to be applied to the resource configuration before import.</p>"
+                    }
+                },
+                "Warnings": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobWarningList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of warning records that describe all permitted errors that are encountered during the import job.</p>"
                     }
                 }
             },
@@ -21847,6 +22127,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A control from a date filter that is used to specify the relative date.</p>"
                     }
+                },
+                "CrossSheet": {
+                    "target": "com.amazonaws.quicksight#FilterCrossSheetControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet</p>"
+                    }
                 }
             },
             "traits": {
@@ -21863,6 +22149,34 @@
                     "min": 0,
                     "max": 200
                 }
+            }
+        },
+        "com.amazonaws.quicksight#FilterCrossSheetControl": {
+            "type": "structure",
+            "members": {
+                "FilterControlId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the <code>FilterCrossSheetControl</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceFilterId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source filter ID of the <code>FilterCrossSheetControl</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CascadingControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#CascadingControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values that are displayed in a control can be configured to only show values that are valid based on what's selected in other controls.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A control from a filter that is scoped across more than one sheet. This represents your filter control on a sheet</p>"
             }
         },
         "com.amazonaws.quicksight#FilterDateTimePickerControl": {
@@ -21898,7 +22212,7 @@
                 "Type": {
                     "target": "com.amazonaws.quicksight#SheetControlDateTimePickerType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date time picker type of a <code>FilterDateTimePickerControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE_VALUED</code>: The filter condition is a fixed date.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DATE_RANGE</code>: The filter condition is a date time range.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of the <code>FilterDropDownControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -22091,7 +22405,7 @@
                 "Type": {
                     "target": "com.amazonaws.quicksight#SheetControlListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of <code>FilterListControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of the <code>FilterListControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SelectableValues": {
@@ -22308,14 +22622,14 @@
                 "Type": {
                     "target": "com.amazonaws.quicksight#SheetControlSliderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of <code>FilterSliderControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE_POINT</code>: Filter against(equals) a single data point.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RANGE</code>: Filter data that is in a specified range.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of the <code>FilterSliderControl</code>. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE_POINT</code>: Filter against(equals) a single data point.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RANGE</code>: Filter data that is in a specified range.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaximumValue": {
                     "target": "com.amazonaws.quicksight#Double",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The smaller value that is displayed at the left of the slider.</p>",
+                        "smithy.api#documentation": "<p>The larger value that is displayed at the right of the slider.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22323,7 +22637,7 @@
                     "target": "com.amazonaws.quicksight#Double",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The larger value that is displayed at the right of the slider.</p>",
+                        "smithy.api#documentation": "<p>The smaller value that is displayed at the left of the slider.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -33047,7 +33361,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The category drill down filter.</p>"
+                "smithy.api#documentation": "<p>The numeric equality type drill down filter.</p>"
             }
         },
         "com.amazonaws.quicksight#NumericEqualityFilter": {
@@ -33104,6 +33418,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This option determines how null values should be treated when filtering data.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_VALUES</code>: Include null values in filtered results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>"
                     }
                 }
             },
@@ -33225,6 +33545,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This option determines how null values should be treated when filtering data.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL_VALUES</code>: Include null values in filtered results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NULLS_ONLY</code>: Only include null values in filtered results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>"
                     }
                 }
             },
@@ -34058,7 +34384,7 @@
                     "target": "com.amazonaws.quicksight#Double",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The smaller value that is displayed at the left of the slider.</p>",
+                        "smithy.api#documentation": "<p>The larger value that is displayed at the right of the slider.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -34066,7 +34392,7 @@
                     "target": "com.amazonaws.quicksight#Double",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The larger value that is displayed at the right of the slider.</p>",
+                        "smithy.api#documentation": "<p>The smaller value that is displayed at the left of the slider.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -38765,6 +39091,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for the exclude period of the filter.</p>"
                     }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -43156,7 +43488,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.</p>\n         <ul>\n            <li>\n               <p>1 paginated PDF</p>\n            </li>\n            <li>\n               <p>1 Excel workbook</p>\n            </li>\n            <li>\n               <p>5 CSVs</p>\n            </li>\n         </ul>\n         <p>Poll job descriptions with a <code>DescribeDashboardSnapshotJob</code> API call. Once the job succeeds, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the download URIs that the job generates.</p>",
+                "smithy.api#documentation": "<p>Starts an asynchronous job that generates a snapshot of a dashboard's output. You can request one or several of the following format configurations in each API call.</p>\n         <ul>\n            <li>\n               <p>1 Paginated PDF</p>\n            </li>\n            <li>\n               <p>1 Excel workbook that includes up to 5 table or pivot table visuals</p>\n            </li>\n            <li>\n               <p>5 CSVs from table or pivot table visuals</p>\n            </li>\n         </ul>\n         <p>The status of a submitted job can be polled with the <code>DescribeDashboardSnapshotJob</code> API. When you call the  <code>DescribeDashboardSnapshotJob</code> API, check the <code>JobStatus</code> field in the response. Once the job reaches a <code>COMPLETED</code> or <code>FAILED</code> status, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the URLs for the generated files. If the job fails, the <code>DescribeDashboardSnapshotJobResult</code> API returns detailed information about the error that occurred.</p>\n         <p>\n            <b>StartDashboardSnapshotJob API throttling</b>\n         </p>\n         <p>Amazon QuickSight utilizes API throttling to create a more consistent user experience within a time span for customers when they call the <code>StartDashboardSnapshotJob</code>. By default, 12 jobs can run simlutaneously in one Amazon Web Services account and users can submit up 10 API requests per second before an account is throttled. If an overwhelming number of API requests are made by the same user in a short period of time, Amazon QuickSight throttles the API calls to maintin an optimal experience and reliability for all Amazon QuickSight users.</p>\n         <p>\n            <b>Common throttling scenarios</b>\n         </p>\n         <p>The following list provides information about the most commin throttling scenarios that can occur.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>A large number of <code>SnapshotExport</code> API jobs are running simultaneously on an Amazon Web Services account.</b> When a new <code>StartDashboardSnapshotJob</code> is created and there are already 12 jobs with the <code>RUNNING</code> status, the new job request fails and returns a <code>LimitExceededException</code> error. Wait for a current job to comlpete before you resubmit the new job.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A large number of API requests are submitted on an Amazon Web Services account.</b> When a user makes more than 10 API calls to the Amazon QuickSight API in one second, a <code>ThrottlingException</code> is returned.</p>\n            </li>\n         </ul>\n         <p>If your use case requires a higher throttling limit, contact your account admin or <a href=\"http://aws.amazon.com/contact-us/\">Amazon Web ServicesSupport</a> to explore options to tailor a more optimal expereince for your account.</p>\n         <p>\n            <b>Best practices to handle throttling</b>\n         </p>\n         <p>If your use case projects high levels of API traffic, try to reduce the degree of frequency and parallelism of API calls as much as you can to avoid throttling. You can also perform a timing test to calculate an estimate for the total processing time of your projected load that stays within the throttling limits of the Amazon QuickSight APIs. For example, if your projected traffic is 100 snapshot jobs before 12:00 PM per day, start 12 jobs in parallel and measure the amount of time it takes to proccess all 12 jobs. Once you obtain the result, multiply the duration by 9, for example <code>(12 minutes * 9 = 108 minutes)</code>. Use the new result to determine the latest time at which the jobs need to be started to meet your target deadline.</p>\n         <p>The time that it takes to process a job can be impacted by the following factors:</p>\n         <ul>\n            <li>\n               <p>The dataset type (Direct Query or SPICE).</p>\n            </li>\n            <li>\n               <p>The size of the dataset.</p>\n            </li>\n            <li>\n               <p>The complexity of the calculated fields that are used in the dashboard.</p>\n            </li>\n            <li>\n               <p>The number of visuals that are on a sheet.</p>\n            </li>\n            <li>\n               <p>The types of visuals that are on the sheet.</p>\n            </li>\n            <li>\n               <p>The number of formats and snapshots that are requested in the job configuration.</p>\n            </li>\n            <li>\n               <p>The size of the generated snapshots.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs",
@@ -45770,6 +46102,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The rolling date input for the <code>TimeEquality</code> filter.</p>\n         <p>This field is mutually exclusive to <code>Value</code> and <code>ParameterName</code>.</p>"
                     }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -45931,6 +46269,12 @@
                     "target": "com.amazonaws.quicksight#TimeGranularity",
                     "traits": {
                         "smithy.api#documentation": "<p>The level of time precision that is used to aggregate <code>DateTime</code> values.</p>"
+                    }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>"
                     }
                 }
             },
@@ -46123,6 +46467,12 @@
                     "target": "com.amazonaws.quicksight#ParameterName",
                     "traits": {
                         "smithy.api#documentation": "<p>The parameter whose value should be used for the filter value.</p>"
+                    }
+                },
+                "DefaultFilterControlConfiguration": {
+                    "target": "com.amazonaws.quicksight#DefaultFilterControlConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>"
                     }
                 }
             },

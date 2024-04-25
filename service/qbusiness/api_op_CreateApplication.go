@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q application.
+// Creates an Amazon Q Business application.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -29,7 +29,7 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
-	// A name for the Amazon Q application.
+	// A name for the Amazon Q Business application.
 	//
 	// This member is required.
 	DisplayName *string
@@ -44,17 +44,21 @@ type CreateApplicationInput struct {
 	AttachmentsConfiguration *types.AttachmentsConfiguration
 
 	// A token that you provide to identify the request to create your Amazon Q
-	// application.
+	// Business application.
 	ClientToken *string
 
-	// A description for the Amazon Q application.
+	// A description for the Amazon Q Business application.
 	Description *string
 
 	// The identifier of the KMS key that is used to encrypt your data. Amazon Q
-	// doesn't support asymmetric keys.
+	// Business doesn't support asymmetric keys.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// A list of key-value pairs that identify or categorize your Amazon Q
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
+	// either creating for—or connecting to—your Amazon Q Business application.
+	IdentityCenterInstanceArn *string
+
+	// A list of key-value pairs that identify or categorize your Amazon Q Business
 	// application. You can also use tags to help control access to the application.
 	// Tag keys and values can consist of Unicode letters, digits, white space, and any
 	// of the following symbols: _ . : / = + - @.
@@ -65,10 +69,10 @@ type CreateApplicationInput struct {
 
 type CreateApplicationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q application.
+	// The Amazon Resource Name (ARN) of the Amazon Q Business application.
 	ApplicationArn *string
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	ApplicationId *string
 
 	// Metadata pertaining to the operation's result.

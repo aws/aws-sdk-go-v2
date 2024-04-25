@@ -52,6 +52,9 @@ type CreateDataSourceInput struct {
 	// .
 	ClientToken *string
 
+	// The deletion policy for the requested data source
+	DataDeletionPolicy types.DataDeletionPolicy
+
 	// A description of the data source.
 	Description *string
 

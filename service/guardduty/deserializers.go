@@ -15539,6 +15539,15 @@ func awsRestjson1_deserializeDocumentLocalIpDetails(v **types.LocalIpDetails, va
 				sv.IpAddressV4 = ptr.String(jtv)
 			}
 
+		case "ipAddressV6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.IpAddressV6 = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18423,6 +18432,15 @@ func awsRestjson1_deserializeDocumentRemoteIpDetails(v **types.RemoteIpDetails, 
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.IpAddressV4 = ptr.String(jtv)
+			}
+
+		case "ipAddressV6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.IpAddressV6 = ptr.String(jtv)
 			}
 
 		case "organization":

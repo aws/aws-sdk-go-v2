@@ -1,3 +1,7 @@
+# v1.28.0 (2024-04-24)
+
+* **Feature**: EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.
+
 # v1.27.0 (2024-04-04)
 
 * **Feature**: This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS.

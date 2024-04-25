@@ -1,3 +1,7 @@
+# v1.26.0 (2024-04-18)
+
+* **Feature**: Outpost ARN added to Source Server and Recovery Instance
+
 # v1.25.3 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

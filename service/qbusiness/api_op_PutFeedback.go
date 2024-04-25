@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Enables your end user to to provide feedback on their Amazon Q generated chat
-// responses.
+// Enables your end user to provide feedback on their Amazon Q Business generated
+// chat responses.
 func (c *Client) PutFeedback(ctx context.Context, params *PutFeedbackInput, optFns ...func(*Options)) (*PutFeedbackOutput, error) {
 	if params == nil {
 		params = &PutFeedbackInput{}
@@ -46,16 +46,14 @@ type PutFeedbackInput struct {
 	// This member is required.
 	MessageId *string
 
-	// The identifier of the user giving the feedback.
-	//
-	// This member is required.
-	UserId *string
-
 	// The timestamp for when the feedback was recorded.
 	MessageCopiedAt *time.Time
 
 	// The feedback usefulness value given by the user to the chat message.
 	MessageUsefulness *types.MessageUsefulnessFeedback
+
+	// The identifier of the user giving the feedback.
+	UserId *string
 
 	noSmithyDocumentSerde
 }

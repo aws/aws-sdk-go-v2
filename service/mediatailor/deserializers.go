@@ -3887,6 +3887,15 @@ func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPla
 				return err
 			}
 
+		case "InsertionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InsertionMode to be of type string, got %T instead", value)
+				}
+				sv.InsertionMode = types.InsertionMode(jtv)
+			}
+
 		case "LivePreRollConfiguration":
 			if err := awsRestjson1_deserializeDocumentLivePreRollConfiguration(&sv.LivePreRollConfiguration, value); err != nil {
 				return err
@@ -5642,6 +5651,15 @@ func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPla
 		case "HlsConfiguration":
 			if err := awsRestjson1_deserializeDocumentHlsConfiguration(&sv.HlsConfiguration, value); err != nil {
 				return err
+			}
+
+		case "InsertionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InsertionMode to be of type string, got %T instead", value)
+				}
+				sv.InsertionMode = types.InsertionMode(jtv)
 			}
 
 		case "LivePreRollConfiguration":
@@ -9648,6 +9666,15 @@ func awsRestjson1_deserializeDocumentPlaybackConfiguration(v **types.PlaybackCon
 		case "HlsConfiguration":
 			if err := awsRestjson1_deserializeDocumentHlsConfiguration(&sv.HlsConfiguration, value); err != nil {
 				return err
+			}
+
+		case "InsertionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InsertionMode to be of type string, got %T instead", value)
+				}
+				sv.InsertionMode = types.InsertionMode(jtv)
 			}
 
 		case "LivePreRollConfiguration":

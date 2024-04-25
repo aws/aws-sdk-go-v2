@@ -747,7 +747,7 @@
                 "configurationItemDeliveryTime": {
                     "target": "com.amazonaws.configservice#ConfigurationItemDeliveryTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when configuration changes for the resource were delivered.</p>"
+                        "smithy.api#documentation": "<p>The time when configuration changes for the resource were delivered.</p>\n         <note>\n            <p>This field is optional and is not guaranteed to be present in a configuration item  (CI). If you are using daily recording,\n\t\t\tthis field will be populated. However, if you are using continuous recording,\n\t\t\tthis field will be omitted since the delivery time is instantaneous as the CI is available right away. For more information on daily recording and continuous recording, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency\">Recording Frequency</a> in the <i>Config\n\t\t\t\t\tDeveloper Guide</i>.</p>\n         </note>"
                     }
                 }
             },
@@ -1739,7 +1739,7 @@
                 "configurationItemDeliveryTime": {
                     "target": "com.amazonaws.configservice#ConfigurationItemDeliveryTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when configuration changes for the resource were delivered.</p>"
+                        "smithy.api#documentation": "<p>The time when configuration changes for the resource were delivered.</p>\n         <note>\n            <p>This field is optional and is not guaranteed to be present in a configuration item  (CI). If you are using daily recording,\n\t\t\tthis field will be populated. However, if you are using continuous recording,\n\t\t\tthis field will be omitted since the delivery time is instantaneous as the CI is available right away. For more information on daily recording and continuous recording, see <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html#select-resources-recording-frequency\">Recording Frequency</a> in the <i>Config\n\t\t\t\t\tDeveloper Guide</i>.</p>\n         </note>"
                     }
                 }
             },
@@ -3789,7 +3789,7 @@
                     "target": "com.amazonaws.configservice#RuleLimit",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of rule evaluation results that you want\n\t\t\treturned.</p>\n         <p>This parameter is required if the rule limit for your account\n\t\t\tis more than the default of 150 rules.</p>\n         <p>For information about requesting a rule limit increase, see\n\t\t\t\t<a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config\">Config Limits</a> in the <i>Amazon Web Services General\n\t\t\t\tReference Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The number of rule evaluation results that you want\n\t\t\treturned.</p>\n         <p>This parameter is required if the rule limit for your account\n\t\t\tis more than the default of 1000 rules.</p>\n         <p>For information about requesting a rule limit increase, see\n\t\t\t\t<a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config\">Config Limits</a> in the <i>Amazon Web Services General\n\t\t\t\tReference Guide</i>.</p>"
                     }
                 }
             },
@@ -8040,7 +8040,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Failed to add the Config rule because the account already\n\t\t\tcontains the maximum number of 150 rules. Consider deleting any\n\t\t\tdeactivated rules before you add new rules.</p>",
+                "smithy.api#documentation": "<p>Failed to add the Config rule because the account already\n\t\t\tcontains the maximum number of 1000 rules. Consider deleting any\n\t\t\tdeactivated rules before you add new rules.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -11440,7 +11440,7 @@
                 "EvaluationMode": {
                     "target": "com.amazonaws.configservice#EvaluationMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters all resource evaluations results based on an evaluation mode. the valid value for this API is <code>Proactive</code>.</p>"
+                        "smithy.api#documentation": "<p>Filters all resource evaluations results based on an evaluation mode.</p>\n         <important>\n            <p>Currently, <code>DECTECTIVE</code> is not supported as a valid value. Ignore other documentation stating otherwise.</p>\n         </important>"
                     }
                 },
                 "TimeWindow": {

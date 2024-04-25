@@ -1,3 +1,7 @@
+# v1.24.5 (2024-04-23)
+
+* **Documentation**: Clarifies how aggregation works for GetResourceMetrics in the Performance Insights API.
+
 # v1.24.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

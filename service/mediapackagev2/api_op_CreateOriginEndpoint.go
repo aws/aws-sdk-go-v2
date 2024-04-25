@@ -67,6 +67,9 @@ type CreateOriginEndpointInput struct {
 	// the request.
 	ClientToken *string
 
+	// A DASH manifest configuration.
+	DashManifests []types.CreateDashManifestConfiguration
+
 	// Enter any descriptive text that helps you to identify the origin endpoint.
 	Description *string
 
@@ -141,6 +144,9 @@ type CreateOriginEndpointOutput struct {
 	//
 	// This member is required.
 	Segment *types.Segment
+
+	// A DASH manifest configuration.
+	DashManifests []types.GetDashManifestConfiguration
 
 	// The description for your origin endpoint.
 	Description *string

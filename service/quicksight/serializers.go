@@ -19043,6 +19043,13 @@ func awsRestjson1_serializeDocumentCategoryFilter(v *types.CategoryFilter, value
 		}
 	}
 
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FilterId != nil {
 		ok := object.Key("FilterId")
 		ok.String(*v.FilterId)
@@ -22499,6 +22506,152 @@ func awsRestjson1_serializeDocumentDecimalValueWhenUnsetConfiguration(v *types.D
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultDateTimePickerControlOptions(v *types.DefaultDateTimePickerControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentDateTimePickerControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v *types.DefaultFilterControlConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ControlOptions != nil {
+		ok := object.Key("ControlOptions")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlOptions(v.ControlOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Title != nil {
+		ok := object.Key("Title")
+		ok.String(*v.Title)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultFilterControlOptions(v *types.DefaultFilterControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultDateTimePickerOptions != nil {
+		ok := object.Key("DefaultDateTimePickerOptions")
+		if err := awsRestjson1_serializeDocumentDefaultDateTimePickerControlOptions(v.DefaultDateTimePickerOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultDropdownOptions != nil {
+		ok := object.Key("DefaultDropdownOptions")
+		if err := awsRestjson1_serializeDocumentDefaultFilterDropDownControlOptions(v.DefaultDropdownOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultListOptions != nil {
+		ok := object.Key("DefaultListOptions")
+		if err := awsRestjson1_serializeDocumentDefaultFilterListControlOptions(v.DefaultListOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultRelativeDateTimeOptions != nil {
+		ok := object.Key("DefaultRelativeDateTimeOptions")
+		if err := awsRestjson1_serializeDocumentDefaultRelativeDateTimeControlOptions(v.DefaultRelativeDateTimeOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultSliderOptions != nil {
+		ok := object.Key("DefaultSliderOptions")
+		if err := awsRestjson1_serializeDocumentDefaultSliderControlOptions(v.DefaultSliderOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultTextAreaOptions != nil {
+		ok := object.Key("DefaultTextAreaOptions")
+		if err := awsRestjson1_serializeDocumentDefaultTextAreaControlOptions(v.DefaultTextAreaOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultTextFieldOptions != nil {
+		ok := object.Key("DefaultTextFieldOptions")
+		if err := awsRestjson1_serializeDocumentDefaultTextFieldControlOptions(v.DefaultTextFieldOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultFilterDropDownControlOptions(v *types.DefaultFilterDropDownControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentDropDownControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelectableValues != nil {
+		ok := object.Key("SelectableValues")
+		if err := awsRestjson1_serializeDocumentFilterSelectableValues(v.SelectableValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultFilterListControlOptions(v *types.DefaultFilterListControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentListControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelectableValues != nil {
+		ok := object.Key("SelectableValues")
+		if err := awsRestjson1_serializeDocumentFilterSelectableValues(v.SelectableValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDefaultFormatting(v *types.DefaultFormatting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22607,6 +22760,20 @@ func awsRestjson1_serializeDocumentDefaultPaginatedLayoutConfiguration(v *types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultRelativeDateTimeControlOptions(v *types.DefaultRelativeDateTimeControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentRelativeDateTimeControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDefaultSectionBasedLayoutConfiguration(v *types.DefaultSectionBasedLayoutConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22614,6 +22781,112 @@ func awsRestjson1_serializeDocumentDefaultSectionBasedLayoutConfiguration(v *typ
 	if v.CanvasSizeOptions != nil {
 		ok := object.Key("CanvasSizeOptions")
 		if err := awsRestjson1_serializeDocumentSectionBasedLayoutCanvasSizeOptions(v.CanvasSizeOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultSliderControlOptions(v *types.DefaultSliderControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentSliderControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	{
+		ok := object.Key("MaximumValue")
+		switch {
+		case math.IsNaN(v.MaximumValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.MaximumValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MaximumValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MaximumValue)
+
+		}
+	}
+
+	{
+		ok := object.Key("MinimumValue")
+		switch {
+		case math.IsNaN(v.MinimumValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinimumValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinimumValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinimumValue)
+
+		}
+	}
+
+	{
+		ok := object.Key("StepSize")
+		switch {
+		case math.IsNaN(v.StepSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.StepSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.StepSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.StepSize)
+
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultTextAreaControlOptions(v *types.DefaultTextAreaControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Delimiter != nil {
+		ok := object.Key("Delimiter")
+		ok.String(*v.Delimiter)
+	}
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentTextAreaControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultTextFieldControlOptions(v *types.DefaultTextFieldControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentTextFieldControlDisplayOptions(v.DisplayOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -23538,6 +23811,13 @@ func awsRestjson1_serializeDocumentFilterControl(v *types.FilterControl, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.CrossSheet != nil {
+		ok := object.Key("CrossSheet")
+		if err := awsRestjson1_serializeDocumentFilterCrossSheetControl(v.CrossSheet, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DateTimePicker != nil {
 		ok := object.Key("DateTimePicker")
 		if err := awsRestjson1_serializeDocumentFilterDateTimePickerControl(v.DateTimePicker, ok); err != nil {
@@ -23600,6 +23880,30 @@ func awsRestjson1_serializeDocumentFilterControlList(v []types.FilterControl, va
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterCrossSheetControl(v *types.FilterCrossSheetControl, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CascadingControlConfiguration != nil {
+		ok := object.Key("CascadingControlConfiguration")
+		if err := awsRestjson1_serializeDocumentCascadingControlConfiguration(v.CascadingControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilterControlId != nil {
+		ok := object.Key("FilterControlId")
+		ok.String(*v.FilterControlId)
+	}
+
+	if v.SourceFilterId != nil {
+		ok := object.Key("SourceFilterId")
+		ok.String(*v.SourceFilterId)
+	}
+
 	return nil
 }
 
@@ -28379,6 +28683,13 @@ func awsRestjson1_serializeDocumentNumericEqualityFilter(v *types.NumericEqualit
 		}
 	}
 
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FilterId != nil {
 		ok := object.Key("FilterId")
 		ok.String(*v.FilterId)
@@ -28467,6 +28778,13 @@ func awsRestjson1_serializeDocumentNumericRangeFilter(v *types.NumericRangeFilte
 	if v.Column != nil {
 		ok := object.Key("Column")
 		if err := awsRestjson1_serializeDocumentColumnIdentifier(v.Column, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -31351,6 +31669,13 @@ func awsRestjson1_serializeDocumentRelativeDatesFilter(v *types.RelativeDatesFil
 	if v.Column != nil {
 		ok := object.Key("Column")
 		if err := awsRestjson1_serializeDocumentColumnIdentifier(v.Column, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -34857,6 +35182,13 @@ func awsRestjson1_serializeDocumentTimeEqualityFilter(v *types.TimeEqualityFilte
 		}
 	}
 
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FilterId != nil {
 		ok := object.Key("FilterId")
 		ok.String(*v.FilterId)
@@ -34923,6 +35255,13 @@ func awsRestjson1_serializeDocumentTimeRangeFilter(v *types.TimeRangeFilter, val
 	if v.Column != nil {
 		ok := object.Key("Column")
 		if err := awsRestjson1_serializeDocumentColumnIdentifier(v.Column, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -35072,6 +35411,13 @@ func awsRestjson1_serializeDocumentTopBottomFilter(v *types.TopBottomFilter, val
 	if v.Column != nil {
 		ok := object.Key("Column")
 		if err := awsRestjson1_serializeDocumentColumnIdentifier(v.Column, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
 			return err
 		}
 	}

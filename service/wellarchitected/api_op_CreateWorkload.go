@@ -128,6 +128,9 @@ type CreateWorkloadInput struct {
 	//   - Other
 	IndustryType *string
 
+	// Jira configuration settings when creating a workload.
+	JiraConfiguration *types.WorkloadJiraConfigurationInput
+
 	// The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 

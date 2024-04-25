@@ -46,6 +46,99 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.wellarchitected#AccountJiraConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "IssueManagementStatus": {
+                    "target": "com.amazonaws.wellarchitected#AccountJiraIssueManagementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Jira issue management status.</p>"
+                    }
+                },
+                "IssueManagementType": {
+                    "target": "com.amazonaws.wellarchitected#IssueManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Jira issue management type.</p>"
+                    }
+                },
+                "JiraProjectKey": {
+                    "target": "com.amazonaws.wellarchitected#JiraProjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Jira project key to sync workloads to.</p>"
+                    }
+                },
+                "IntegrationStatus": {
+                    "target": "com.amazonaws.wellarchitected#IntegrationStatusInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Configuration status of the Jira integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Account-level: Input for the Jira configuration.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#AccountJiraConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "IntegrationStatus": {
+                    "target": "com.amazonaws.wellarchitected#IntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Configuration status of the Jira integration.</p>"
+                    }
+                },
+                "IssueManagementStatus": {
+                    "target": "com.amazonaws.wellarchitected#AccountJiraIssueManagementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Jira issue management status.</p>"
+                    }
+                },
+                "IssueManagementType": {
+                    "target": "com.amazonaws.wellarchitected#IssueManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Jira issue management type.</p>"
+                    }
+                },
+                "Subdomain": {
+                    "target": "com.amazonaws.wellarchitected#Subdomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Jira subdomain URL.</p>"
+                    }
+                },
+                "JiraProjectKey": {
+                    "target": "com.amazonaws.wellarchitected#JiraProjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Jira project key to sync workloads to.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.wellarchitected#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account-level: Status message on configuration of the Jira integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Account-level: Output configuration of the Jira integration.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#AccountJiraIssueManagementStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#AccountSummary": {
             "type": "map",
             "key": {
@@ -154,6 +247,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The reason why the question is not applicable to your workload.</p>"
                     }
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#JiraConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of the Jira integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -244,6 +343,12 @@
                     "target": "com.amazonaws.wellarchitected#QuestionType",
                     "traits": {
                         "smithy.api#documentation": "<p>The type of the question.</p>"
+                    }
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#JiraConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of the Jira integration.</p>"
                     }
                 }
             },
@@ -1850,6 +1955,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The list of review template ARNs to associate with the workload.</p>"
                     }
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadJiraConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Jira configuration settings when creating a workload.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2981,6 +3092,63 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.wellarchitected#GetGlobalSettings": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetGlobalSettingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Global settings for all workloads.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/global-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetGlobalSettingsOutput": {
+            "type": "structure",
+            "members": {
+                "OrganizationSharingStatus": {
+                    "target": "com.amazonaws.wellarchitected#OrganizationSharingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Web Services Organizations sharing status.</p>"
+                    }
+                },
+                "DiscoveryIntegrationStatus": {
+                    "target": "com.amazonaws.wellarchitected#DiscoveryIntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Discovery integration status.</p>"
+                    }
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#AccountJiraConfigurationOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Jira configuration status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wellarchitected#GetLens": {
             "type": "operation",
             "input": {
@@ -3970,6 +4138,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The improvement plan details.</p>"
                     }
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#JiraConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of the Jira integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3978,6 +4152,45 @@
         },
         "com.amazonaws.wellarchitected#IncludeSharedResources": {
             "type": "boolean"
+        },
+        "com.amazonaws.wellarchitected#IntegratingService": {
+            "type": "enum",
+            "members": {
+                "JIRA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JIRA"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#IntegrationStatus": {
+            "type": "enum",
+            "members": {
+                "CONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFIGURED"
+                    }
+                },
+                "NOT_CONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_CONFIGURED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#IntegrationStatusInput": {
+            "type": "enum",
+            "members": {
+                "NOT_CONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_CONFIGURED"
+                    }
+                }
+            }
         },
         "com.amazonaws.wellarchitected#InternalServerException": {
             "type": "structure",
@@ -4007,6 +4220,73 @@
         },
         "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged": {
             "type": "boolean"
+        },
+        "com.amazonaws.wellarchitected#IssueManagementType": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#JiraConfiguration": {
+            "type": "structure",
+            "members": {
+                "JiraIssueUrl": {
+                    "target": "com.amazonaws.wellarchitected#JiraIssueUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the associated Jira issue.</p>"
+                    }
+                },
+                "LastSyncedTime": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of the Jira integration.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#JiraIssueUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#JiraProjectKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Z][A-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.wellarchitected#JiraSelectedQuestionConfiguration": {
+            "type": "structure",
+            "members": {
+                "SelectedPillars": {
+                    "target": "com.amazonaws.wellarchitected#SelectedPillars",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Selected pillars in the workload.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Selected questions in the workload.</p>"
+            }
         },
         "com.amazonaws.wellarchitected#Lens": {
             "type": "structure",
@@ -4176,6 +4456,12 @@
                 },
                 "PillarReviewSummaries": {
                     "target": "com.amazonaws.wellarchitected#PillarReviewSummaries"
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#JiraSelectedQuestionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Jira configuration status of the Lens review.</p>"
+                    }
                 },
                 "UpdatedAt": {
                     "target": "com.amazonaws.wellarchitected#Timestamp"
@@ -4880,7 +5166,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List lens review improvements.</p>",
+                "smithy.api#documentation": "<p>List the improvements of a particular lens review.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/workloads/{WorkloadId}/lensReviews/{LensAlias}/improvements",
@@ -6801,8 +7087,7 @@
                 "smithy.api#length": {
                     "min": 3,
                     "max": 100
-                },
-                "smithy.api#pattern": "^[A-Za-z0-9-_.,:/()@!&?#+'’\\s]+$"
+                }
             }
         },
         "com.amazonaws.wellarchitected#ProfileName": {
@@ -6811,8 +7096,7 @@
                 "smithy.api#length": {
                     "min": 3,
                     "max": 100
-                },
-                "smithy.api#pattern": "^[A-Za-z0-9-_.,:/()@!&?#+'’\\s]+$"
+                }
             }
         },
         "com.amazonaws.wellarchitected#ProfileNamePrefix": {
@@ -6821,8 +7105,7 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
-                },
-                "smithy.api#pattern": "^[A-Za-z0-9-_.,:/()@!&?#+'’\\s]+$"
+                }
             }
         },
         "com.amazonaws.wellarchitected#ProfileNotificationSummaries": {
@@ -7805,10 +8088,42 @@
                 "smithy.api#documentation": "<p>List of selected choice IDs in a question answer.</p>\n         <p>The values entered replace the previously selected choices.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#SelectedPillar": {
+            "type": "structure",
+            "members": {
+                "PillarId": {
+                    "target": "com.amazonaws.wellarchitected#PillarId"
+                },
+                "SelectedQuestionIds": {
+                    "target": "com.amazonaws.wellarchitected#SelectedQuestionIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Selected question IDs in the selected pillar.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The selected pillar.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#SelectedPillars": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#SelectedPillar"
+            }
+        },
         "com.amazonaws.wellarchitected#SelectedProfileChoiceIds": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.wellarchitected#ChoiceId"
+            }
+        },
+        "com.amazonaws.wellarchitected#SelectedQuestionId": {
+            "type": "string"
+        },
+        "com.amazonaws.wellarchitected#SelectedQuestionIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#SelectedQuestionId"
             }
         },
         "com.amazonaws.wellarchitected#ServiceCode": {
@@ -8115,6 +8430,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#Subdomain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
                 }
             }
         },
@@ -8533,7 +8857,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates whether the Amazon Web Services account is opted into organization sharing and discovery integration features.</p>",
+                "smithy.api#documentation": "<p>Update whether the Amazon Web Services account is opted into organization sharing and discovery integration features.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/global-settings",
@@ -8554,6 +8878,80 @@
                     "target": "com.amazonaws.wellarchitected#DiscoveryIntegrationStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of discovery support settings.</p>"
+                    }
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#AccountJiraConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Jira integration settings.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpdateIntegrationInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update integration features.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workloads/{WorkloadId}/updateIntegration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateIntegrationInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntegratingService": {
+                    "target": "com.amazonaws.wellarchitected#IntegratingService",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Which integrated service to update.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -8620,6 +9018,12 @@
                 },
                 "PillarNotes": {
                     "target": "com.amazonaws.wellarchitected#PillarNotes"
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#JiraSelectedQuestionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of the Jira integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9190,6 +9594,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of AppRegistry application ARNs to associate to the workload.</p>"
                     }
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadJiraConfigurationInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration of the Jira integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9313,6 +9723,9 @@
                     "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#ThrottlingException"
                 },
                 {
@@ -9380,6 +9793,9 @@
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#ThrottlingException"
@@ -9681,6 +10097,9 @@
                     "target": "com.amazonaws.wellarchitected#GetConsolidatedReport"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#GetGlobalSettings"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#GetLens"
                 },
                 {
@@ -9784,6 +10203,9 @@
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#UpdateGlobalSettings"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UpdateIntegration"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#UpdateLensReview"
@@ -10785,6 +11207,12 @@
                 },
                 "PrioritizedRiskCounts": {
                     "target": "com.amazonaws.wellarchitected#RiskCounts"
+                },
+                "JiraConfiguration": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadJiraConfigurationOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Jira configuration for a specific workload.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10963,6 +11391,87 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "INHERIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INHERIT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadJiraConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "IssueManagementStatus": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workload-level: Jira issue management status.</p>"
+                    }
+                },
+                "IssueManagementType": {
+                    "target": "com.amazonaws.wellarchitected#IssueManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workload-level: Jira issue management type.</p>"
+                    }
+                },
+                "JiraProjectKey": {
+                    "target": "com.amazonaws.wellarchitected#JiraProjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workload-level: Jira project key to sync workloads to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Workload-level: Input for the Jira configuration.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadJiraConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "IssueManagementStatus": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workload-level: Jira issue management status.</p>"
+                    }
+                },
+                "IssueManagementType": {
+                    "target": "com.amazonaws.wellarchitected#IssueManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workload-level: Jira issue management type.</p>"
+                    }
+                },
+                "JiraProjectKey": {
+                    "target": "com.amazonaws.wellarchitected#JiraProjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workload-level: Jira project key to sync workloads to.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.wellarchitected#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Workload-level: Status message on configuration of the Jira integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Workload-level: Output configuration of the Jira integration.</p>"
             }
         },
         "com.amazonaws.wellarchitected#WorkloadLenses": {

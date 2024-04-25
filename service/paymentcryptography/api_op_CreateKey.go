@@ -31,9 +31,9 @@ import (
 // Web Services Payment Cryptography stores the key contents wrapped and never
 // stores or transmits them in the clear. Cross-account use: This operation can't
 // be used across different Amazon Web Services accounts. Related operations:
-//   - DeleteKey
-//   - GetKey
-//   - ListKeys
+//   - DeleteKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html)
+//   - GetKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html)
+//   - ListKeys (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html)
 func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns ...func(*Options)) (*CreateKeyOutput, error) {
 	if params == nil {
 		params = &CreateKeyInput{}
@@ -79,14 +79,14 @@ type CreateKeyInput struct {
 
 	// Assigns one or more tags to the Amazon Web Services Payment Cryptography key.
 	// Use this parameter to tag a key when it is created. To tag an existing Amazon
-	// Web Services Payment Cryptography key, use the TagResource operation. Each tag
-	// consists of a tag key and a tag value. Both the tag key and the tag value are
-	// required, but the tag value can be an empty (null) string. You can't have more
-	// than one tag on an Amazon Web Services Payment Cryptography key with the same
-	// tag key. Don't include personal, confidential or sensitive information in this
-	// field. This field may be displayed in plaintext in CloudTrail logs and other
-	// output. Tagging or untagging an Amazon Web Services Payment Cryptography key can
-	// allow or deny permission to the key.
+	// Web Services Payment Cryptography key, use the TagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html)
+	// operation. Each tag consists of a tag key and a tag value. Both the tag key and
+	// the tag value are required, but the tag value can be an empty (null) string. You
+	// can't have more than one tag on an Amazon Web Services Payment Cryptography key
+	// with the same tag key. Don't include personal, confidential or sensitive
+	// information in this field. This field may be displayed in plaintext in
+	// CloudTrail logs and other output. Tagging or untagging an Amazon Web Services
+	// Payment Cryptography key can allow or deny permission to the key.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

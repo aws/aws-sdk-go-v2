@@ -40,8 +40,8 @@ type CreateUserInput struct {
 	// This member is required.
 	UserId *string
 
-	// A token that you provide to identify the request to create your Amazon Q user
-	// mapping.
+	// A token that you provide to identify the request to create your Amazon Q
+	// Business user mapping.
 	ClientToken *string
 
 	// The list of user aliases in the mapping.

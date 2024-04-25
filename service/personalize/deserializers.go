@@ -7956,6 +7956,46 @@ func awsAwsjson11_deserializeDocumentAutoMLResult(v **types.AutoMLResult, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAutoTrainingConfig(v **types.AutoTrainingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoTrainingConfig
+	if *v == nil {
+		sv = &types.AutoTrainingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "schedulingExpression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SchedulingExpression to be of type string, got %T instead", value)
+				}
+				sv.SchedulingExpression = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentBatchInferenceJob(v **types.BatchInferenceJob, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8911,6 +8951,15 @@ func awsAwsjson11_deserializeDocumentCampaignConfig(v **types.CampaignConfig, va
 		case "itemExplorationConfig":
 			if err := awsAwsjson11_deserializeDocumentHyperParameters(&sv.ItemExplorationConfig, value); err != nil {
 				return err
+			}
+
+		case "syncWithLatestSolutionVersion":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SyncWithLatestSolutionVersion = ptr.Bool(jtv)
 			}
 
 		default:
@@ -13998,6 +14047,15 @@ func awsAwsjson11_deserializeDocumentSolution(v **types.Solution, value interfac
 				sv.PerformAutoML = jtv
 			}
 
+		case "performAutoTraining":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected PerformAutoTraining to be of type *bool, got %T instead", value)
+				}
+				sv.PerformAutoTraining = ptr.Bool(jtv)
+			}
+
 		case "performHPO":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -14077,6 +14135,11 @@ func awsAwsjson11_deserializeDocumentSolutionConfig(v **types.SolutionConfig, va
 
 		case "autoMLConfig":
 			if err := awsAwsjson11_deserializeDocumentAutoMLConfig(&sv.AutoMLConfig, value); err != nil {
+				return err
+			}
+
+		case "autoTrainingConfig":
+			if err := awsAwsjson11_deserializeDocumentAutoTrainingConfig(&sv.AutoTrainingConfig, value); err != nil {
 				return err
 			}
 
@@ -14443,6 +14506,15 @@ func awsAwsjson11_deserializeDocumentSolutionVersion(v **types.SolutionVersion, 
 				sv.TrainingMode = types.TrainingMode(jtv)
 			}
 
+		case "trainingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingType to be of type string, got %T instead", value)
+				}
+				sv.TrainingType = types.TrainingType(jtv)
+			}
+
 		case "tunedHPOParams":
 			if err := awsAwsjson11_deserializeDocumentTunedHPOParams(&sv.TunedHPOParams, value); err != nil {
 				return err
@@ -14570,6 +14642,24 @@ func awsAwsjson11_deserializeDocumentSolutionVersionSummary(v **types.SolutionVe
 					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
 				}
 				sv.Status = ptr.String(jtv)
+			}
+
+		case "trainingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingMode to be of type string, got %T instead", value)
+				}
+				sv.TrainingMode = types.TrainingMode(jtv)
+			}
+
+		case "trainingType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TrainingType to be of type string, got %T instead", value)
+				}
+				sv.TrainingType = types.TrainingType(jtv)
 			}
 
 		default:

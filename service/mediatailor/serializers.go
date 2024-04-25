@@ -2831,6 +2831,11 @@ func awsRestjson1_serializeOpDocumentPutPlaybackConfigurationInput(v *PutPlaybac
 		}
 	}
 
+	if len(v.InsertionMode) > 0 {
+		ok := object.Key("InsertionMode")
+		ok.String(string(v.InsertionMode))
+	}
+
 	if v.LivePreRollConfiguration != nil {
 		ok := object.Key("LivePreRollConfiguration")
 		if err := awsRestjson1_serializeDocumentLivePreRollConfiguration(v.LivePreRollConfiguration, ok); err != nil {

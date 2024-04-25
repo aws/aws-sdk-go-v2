@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the retriever used by an Amazon Q application.
+// Lists the retriever used by an Amazon Q Business application.
 func (c *Client) ListRetrievers(ctx context.Context, params *ListRetrieversInput, optFns ...func(*Options)) (*ListRetrieversOutput, error) {
 	if params == nil {
 		params = &ListRetrieversInput{}
@@ -29,7 +29,7 @@ func (c *Client) ListRetrievers(ctx context.Context, params *ListRetrieversInput
 
 type ListRetrieversInput struct {
 
-	// The identifier of the Amazon Q application using the retriever.
+	// The identifier of the Amazon Q Business application using the retriever.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -37,8 +37,9 @@ type ListRetrieversInput struct {
 	// The maximum number of retrievers returned.
 	MaxResults *int32
 
-	// If the number of retrievers returned exceeds maxResults , Amazon Q returns a
-	// next token as a pagination token to retrieve the next set of retrievers.
+	// If the number of retrievers returned exceeds maxResults , Amazon Q Business
+	// returns a next token as a pagination token to retrieve the next set of
+	// retrievers.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,8 +47,8 @@ type ListRetrieversInput struct {
 
 type ListRetrieversOutput struct {
 
-	// If the response is truncated, Amazon Q returns this token, which you can use in
-	// a later request to list the next set of retrievers.
+	// If the response is truncated, Amazon Q Business returns this token, which you
+	// can use in a later request to list the next set of retrievers.
 	NextToken *string
 
 	// An array of summary information for one or more retrievers.

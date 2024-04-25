@@ -1,3 +1,7 @@
+# v1.8.0 (2024-04-23)
+
+* **Feature**: This release introduces Guardrails for Amazon Bedrock.
+
 # v1.7.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

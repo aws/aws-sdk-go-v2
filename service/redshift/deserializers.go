@@ -38386,6 +38386,19 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				return err
 			}
 
+		case strings.EqualFold("SnapshotArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SnapshotArn = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("SnapshotCreateTime", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

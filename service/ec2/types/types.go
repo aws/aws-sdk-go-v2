@@ -592,12 +592,12 @@ type AssociatedRole struct {
 	// The name of the Amazon S3 bucket in which the Amazon S3 object is stored.
 	CertificateS3BucketName *string
 
-	// The key of the Amazon S3 object ey where the certificate, certificate chain,
-	// and encrypted private key bundle is stored. The object key is formated as
-	// follows: role_arn / certificate_arn .
+	// The key of the Amazon S3 object where the certificate, certificate chain, and
+	// encrypted private key bundle are stored. The object key is formatted as follows:
+	// role_arn / certificate_arn .
 	CertificateS3ObjectKey *string
 
-	// The ID of the KMS customer master key (CMK) used to encrypt the private key.
+	// The ID of the KMS key used to encrypt the private key.
 	EncryptionKmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -2243,12 +2243,12 @@ type CpuOptionsRequest struct {
 type CreateFleetError struct {
 
 	// The error code that indicates why the instance could not be launched. For more
-	// information about error codes, see Error codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html)
+	// information about error codes, see Error codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html)
 	// .
 	ErrorCode *string
 
 	// The error message that describes why the instance could not be launched. For
-	// more information about error messages, see Error codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html)
+	// more information about error messages, see Error codes (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html)
 	// .
 	ErrorMessage *string
 
@@ -5296,6 +5296,9 @@ type Image struct {
 	// the seconds to the nearest minute.
 	DeprecationTime *string
 
+	// Indicates whether deregistration protection is enabled for the AMI.
+	DeregistrationProtection *string
+
 	// The description of the AMI that was provided during image creation.
 	Description *string
 
@@ -5328,6 +5331,12 @@ type Image struct {
 	// The kernel associated with the image, if any. Only applicable for machine
 	// images.
 	KernelId *string
+
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601)
+	// , when the AMI was last used to launch an EC2 instance. When the AMI is used to
+	// launch an instance, there is a 24-hour delay before that usage is reported.
+	// lastLaunchedTime data is available starting April 2017.
+	LastLaunchedTime *string
 
 	// The name of the AMI that was provided during image creation.
 	Name *string
@@ -9579,22 +9588,21 @@ type LaunchTemplatesMonitoringRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The launch template to use. You must specify either the launch template ID or
-// launch template name in the request, but not both.
+// Describes the launch template to use.
 type LaunchTemplateSpecification struct {
 
-	// The ID of the launch template. You must specify the LaunchTemplateId or the
-	// LaunchTemplateName , but not both.
+	// The ID of the launch template. You must specify either the launch template ID
+	// or the launch template name, but not both.
 	LaunchTemplateId *string
 
-	// The name of the launch template. You must specify the LaunchTemplateName or the
-	// LaunchTemplateId , but not both.
+	// The name of the launch template. You must specify either the launch template ID
+	// or the launch template name, but not both.
 	LaunchTemplateName *string
 
-	// The launch template version number, $Latest , or $Default . If the value is
-	// $Latest , Amazon EC2 uses the latest version of the launch template. If the
-	// value is $Default , Amazon EC2 uses the default version of the launch template.
-	// Default: The default version of the launch template.
+	// The launch template version number, $Latest , or $Default . A value of $Latest
+	// uses the latest version of the launch template. A value of $Default uses the
+	// default version of the launch template. Default: The default version of the
+	// launch template.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -12677,8 +12685,7 @@ type RequestLaunchTemplateData struct {
 	// The monitoring for the instance.
 	Monitoring *LaunchTemplatesMonitoringRequest
 
-	// One or more network interfaces. If you specify a network interface, you must
-	// specify any security groups and subnets as part of the network interface.
+	// The network interfaces for the instance.
 	NetworkInterfaces []LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
 
 	// The placement for the instance.
@@ -12693,13 +12700,15 @@ type RequestLaunchTemplateData struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	RamDiskId *string
 
-	// One or more security group IDs. You can create a security group using
-	// CreateSecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html)
-	// .
+	// The IDs of the security groups. If you specify a network interface, you must
+	// specify any security groups as part of the network interface instead of using
+	// this parameter.
 	SecurityGroupIds []string
 
-	// One or more security group names. For a nondefault VPC, you must use security
-	// group IDs instead.
+	// The names of the security groups. For a nondefault VPC, you must use security
+	// group IDs instead. If you specify a network interface, you must specify any
+	// security groups as part of the network interface instead of using this
+	// parameter.
 	SecurityGroups []string
 
 	// The tags to apply to the resources that are created during instance launch.
@@ -14636,11 +14645,9 @@ type SpotFleetLaunchSpecification struct {
 	// Enable or disable monitoring for the instances.
 	Monitoring *SpotFleetMonitoring
 
-	// One or more network interfaces. If you specify a network interface, you must
-	// specify subnet IDs and security group IDs using the network interface.
-	// SpotFleetLaunchSpecification currently does not support Elastic Fabric Adapter
-	// (EFA). To specify an EFA, you must use LaunchTemplateConfig (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html)
-	// .
+	// The network interfaces. SpotFleetLaunchSpecification does not support Elastic
+	// Fabric Adapter (EFA). You must use LaunchTemplateConfig (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_LaunchTemplateConfig.html)
+	// instead.
 	NetworkInterfaces []InstanceNetworkInterfaceSpecification
 
 	// The placement information.
@@ -14652,7 +14659,9 @@ type SpotFleetLaunchSpecification struct {
 	// Resource Center and search for the kernel ID.
 	RamdiskId *string
 
-	// The security groups.
+	// The security groups. If you specify a network interface, you must specify any
+	// security groups as part of the network interface instead of using this
+	// parameter.
 	SecurityGroups []GroupIdentifier
 
 	// The maximum price per unit hour that you are willing to pay for a Spot
@@ -14664,7 +14673,8 @@ type SpotFleetLaunchSpecification struct {
 
 	// The IDs of the subnets in which to launch the instances. To specify multiple
 	// subnets, separate them using commas; for example, "subnet-1234abcdeexample1,
-	// subnet-0987cdef6example2".
+	// subnet-0987cdef6example2". If you specify a network interface, you must specify
+	// any subnets as part of the network interface instead of using this parameter.
 	SubnetId *string
 
 	// The tags to apply during creation.

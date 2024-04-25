@@ -11,7 +11,7 @@ import (
 )
 
 // Starts a data source connector synchronization job. If a synchronization job is
-// already in progress, Amazon Q returns a ConflictException .
+// already in progress, Amazon Q Business returns a ConflictException .
 func (c *Client) StartDataSourceSyncJob(ctx context.Context, params *StartDataSourceSyncJobInput, optFns ...func(*Options)) (*StartDataSourceSyncJobOutput, error) {
 	if params == nil {
 		params = &StartDataSourceSyncJobInput{}
@@ -29,7 +29,7 @@ func (c *Client) StartDataSourceSyncJob(ctx context.Context, params *StartDataSo
 
 type StartDataSourceSyncJobInput struct {
 
-	// The identifier of Amazon Q application the data source is connected to.
+	// The identifier of Amazon Q Business application the data source is connected to.
 	//
 	// This member is required.
 	ApplicationId *string

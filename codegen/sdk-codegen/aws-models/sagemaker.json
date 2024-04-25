@@ -4356,24 +4356,6 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS/Textract/AnalyzeDocument/Forms/V1"
                     }
-                },
-                "TEXTRACT_ANALYZE_EXPENSE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "AWS/Textract/AnalyzeExpense"
-                    }
-                },
-                "HANDSHAKE_VERIFY_IDENTITY": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "AWS/Handshake/VerifyIdentity"
-                    }
-                },
-                "BEDROCK_MODEL_EVALUATION": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "AWS/Bedrock/ModelEvaluation"
-                    }
                 }
             }
         },
@@ -6814,7 +6796,7 @@
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An Amazon S3 bucket path where your LifeCycle scripts are stored.</p>",
+                        "smithy.api#documentation": "<p>An Amazon S3 bucket path where your lifecycle scripts are stored.</p>\n         <important>\n            <p>Make sure that the S3 bucket path starts with <code>s3://sagemaker-</code>. The\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-iam-role-for-hyperpod\">IAM role for SageMaker HyperPod</a> has the managed <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-cluster.html\">\n                  <code>AmazonSageMakerClusterInstanceRolePolicy</code>\n               </a> attached, which\n            allows access to S3 buckets with the specific prefix <code>sagemaker-</code>.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6822,13 +6804,13 @@
                     "target": "com.amazonaws.sagemaker#ClusterLifeCycleConfigFileName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The directory of the LifeCycle script under <code>SourceS3Uri</code>. This LifeCycle\n         script runs during cluster creation.</p>",
+                        "smithy.api#documentation": "<p>The file name of the entrypoint script of lifecycle scripts under\n            <code>SourceS3Uri</code>. This entrypoint script runs during cluster creation.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The LifeCycle configuration for a SageMaker HyperPod cluster.</p>"
+                "smithy.api#documentation": "<p>The lifecycle configuration for a SageMaker HyperPod cluster.</p>"
             }
         },
         "com.amazonaws.sagemaker#ClusterLifeCycleConfigFileName": {
@@ -9899,7 +9881,7 @@
                     "target": "com.amazonaws.sagemaker#FeatureGroupName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the <code>FeatureGroup</code>. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account.</p>\n         <p>The name:</p>\n         <ul>\n            <li>\n               <p>Must start and end with an alphanumeric character.</p>\n            </li>\n            <li>\n               <p>Can only include alphanumeric characters, underscores, and hyphens. Spaces are not\n               allowed.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the <code>FeatureGroup</code>. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account.</p>\n         <p>The name:</p>\n         <ul>\n            <li>\n               <p>Must start with an alphanumeric character.</p>\n            </li>\n            <li>\n               <p>Can only include alphanumeric characters, underscores, and hyphens. Spaces are not\n               allowed.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9907,7 +9889,7 @@
                     "target": "com.amazonaws.sagemaker#FeatureName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the <code>Feature</code> whose value uniquely identifies a\n            <code>Record</code> defined in the <code>FeatureStore</code>. Only the latest record per\n         identifier value will be stored in the <code>OnlineStore</code>.\n            <code>RecordIdentifierFeatureName</code> must be one of feature definitions'\n         names.</p>\n         <p>You use the <code>RecordIdentifierFeatureName</code> to access data in a\n            <code>FeatureStore</code>.</p>\n         <p>This name:</p>\n         <ul>\n            <li>\n               <p>Must start and end with an alphanumeric character.</p>\n            </li>\n            <li>\n               <p>Can only contains alphanumeric characters, hyphens, underscores. Spaces are not\n               allowed. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the <code>Feature</code> whose value uniquely identifies a\n            <code>Record</code> defined in the <code>FeatureStore</code>. Only the latest record per\n         identifier value will be stored in the <code>OnlineStore</code>.\n            <code>RecordIdentifierFeatureName</code> must be one of feature definitions'\n         names.</p>\n         <p>You use the <code>RecordIdentifierFeatureName</code> to access data in a\n            <code>FeatureStore</code>.</p>\n         <p>This name:</p>\n         <ul>\n            <li>\n               <p>Must start with an alphanumeric character.</p>\n            </li>\n            <li>\n               <p>Can only contains alphanumeric characters, hyphens, underscores. Spaces are not\n               allowed. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14099,7 +14081,7 @@
                     "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The default size of the EBS storage volume for a private space.</p>",
+                        "smithy.api#documentation": "<p>The default size of the EBS storage volume for a space.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14107,13 +14089,13 @@
                     "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The maximum size of the EBS storage volume for a private space.</p>",
+                        "smithy.api#documentation": "<p>The maximum size of the EBS storage volume for a space.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of default EBS storage settings that applies to private spaces created within a domain or user profile.</p>"
+                "smithy.api#documentation": "<p>A collection of default EBS storage settings that apply to spaces created within a domain or user profile.</p>"
             }
         },
         "com.amazonaws.sagemaker#DefaultGid": {
@@ -14145,6 +14127,21 @@
                 },
                 "KernelGatewayAppSettings": {
                     "target": "com.amazonaws.sagemaker#KernelGatewayAppSettings"
+                },
+                "JupyterLabAppSettings": {
+                    "target": "com.amazonaws.sagemaker#JupyterLabAppSettings"
+                },
+                "SpaceStorageSettings": {
+                    "target": "com.amazonaws.sagemaker#DefaultSpaceStorageSettings"
+                },
+                "CustomPosixUserConfig": {
+                    "target": "com.amazonaws.sagemaker#CustomPosixUserConfig"
+                },
+                "CustomFileSystemConfigs": {
+                    "target": "com.amazonaws.sagemaker#CustomFileSystemConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for assigning a custom file system to a domain. Permitted users can access this file system in Amazon SageMaker Studio.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14157,12 +14154,12 @@
                 "DefaultEbsStorageSettings": {
                     "target": "com.amazonaws.sagemaker#DefaultEbsStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default EBS storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>The default EBS storage settings for a space.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The default storage settings for a private space.</p>"
+                "smithy.api#documentation": "<p>The default storage settings for a space.</p>"
             }
         },
         "com.amazonaws.sagemaker#DefaultUid": {
@@ -25384,13 +25381,13 @@
                     "target": "com.amazonaws.sagemaker#SpaceEbsVolumeSizeInGb",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The size of an EBS storage volume for a private space.</p>",
+                        "smithy.api#documentation": "<p>The size of an EBS storage volume for a space.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of EBS storage settings that applies to private spaces.</p>"
+                "smithy.api#documentation": "<p>A collection of EBS storage settings that apply to both private and shared spaces.</p>"
             }
         },
         "com.amazonaws.sagemaker#Edge": {
@@ -27129,7 +27126,7 @@
                     "target": "com.amazonaws.sagemaker#FeatureName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of a feature. The type must be a string. <code>FeatureName</code> cannot be any\n         of the following: <code>is_deleted</code>, <code>write_time</code>,\n            <code>api_invocation_time</code>.</p>\n         <p>The name:</p>\n         <ul>\n            <li>\n               <p>Must start and end with an alphanumeric character.</p>\n            </li>\n            <li>\n               <p>Can only include alphanumeric characters, underscores, and hyphens. Spaces are not\n               allowed.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of a feature. The type must be a string. <code>FeatureName</code> cannot be any\n         of the following: <code>is_deleted</code>, <code>write_time</code>,\n            <code>api_invocation_time</code>.</p>\n         <p>The name:</p>\n         <ul>\n            <li>\n               <p>Must start with an alphanumeric character.</p>\n            </li>\n            <li>\n               <p>Can only include alphanumeric characters, underscores, and hyphens. Spaces are not\n               allowed.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -47640,7 +47637,7 @@
                     "target": "com.amazonaws.sagemaker#UserProfileName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The user profile who is the owner of the private space.</p>",
+                        "smithy.api#documentation": "<p>The user profile who is the owner of the space.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -47655,7 +47652,7 @@
                 "OwnerUserProfileName": {
                     "target": "com.amazonaws.sagemaker#UserProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user profile who is the owner of the private space.</p>"
+                        "smithy.api#documentation": "<p>The user profile who is the owner of the space.</p>"
                     }
                 }
             },
@@ -58022,7 +58019,7 @@
                 "SpaceStorageSettings": {
                     "target": "com.amazonaws.sagemaker#SpaceStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>The storage settings for a space.</p>"
                     }
                 },
                 "CustomFileSystems": {
@@ -58048,7 +58045,7 @@
                 "SpaceStorageSettings": {
                     "target": "com.amazonaws.sagemaker#SpaceStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>The storage settings for a space.</p>"
                     }
                 }
             },
@@ -58156,12 +58153,12 @@
                 "EbsStorageSettings": {
                     "target": "com.amazonaws.sagemaker#EbsStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of EBS storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>A collection of EBS storage settings for a space.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                "smithy.api#documentation": "<p>The storage settings for a space.</p>"
             }
         },
         "com.amazonaws.sagemaker#SpawnRate": {
@@ -66384,7 +66381,7 @@
                 "SpaceStorageSettings": {
                     "target": "com.amazonaws.sagemaker#DefaultSpaceStorageSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage settings for a private space.</p>"
+                        "smithy.api#documentation": "<p>The storage settings for a space.</p>"
                     }
                 },
                 "DefaultLandingUri": {

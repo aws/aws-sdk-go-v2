@@ -1,3 +1,7 @@
+# v1.32.0 (2024-04-16)
+
+* **Feature**: This release adds Lake Formation managed RAM support for the 4 APIs - "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration"
+
 # v1.31.5 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

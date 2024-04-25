@@ -292,6 +292,12 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cloudformation#AfterContext": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudformation#AfterValue": {
+            "type": "string"
+        },
         "com.amazonaws.cloudformation#AllowedValue": {
             "type": "string"
         },
@@ -320,6 +326,29 @@
         },
         "com.amazonaws.cloudformation#Arn": {
             "type": "string"
+        },
+        "com.amazonaws.cloudformation#AttributeChangeType": {
+            "type": "enum",
+            "members": {
+                "Add": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Add"
+                    }
+                },
+                "Remove": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Remove"
+                    }
+                },
+                "Modify": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Modify"
+                    }
+                }
+            }
         },
         "com.amazonaws.cloudformation#AutoDeployment": {
             "type": "structure",
@@ -440,6 +469,12 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.cloudformation#BeforeContext": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudformation#BeforeValue": {
+            "type": "string"
         },
         "com.amazonaws.cloudformation#BoxedInteger": {
             "type": "integer"
@@ -600,7 +635,7 @@
                 "Type": {
                     "target": "com.amazonaws.cloudformation#ChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of entity that CloudFormation changes. Currently, the only entity type is <code>Resource</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of entity that CloudFormation changes.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Resource</code> This change is for a resource.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "HookInvocationCount": {
@@ -3886,6 +3921,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A string (provided by the <a>DescribeChangeSet</a> response output) that identifies the next page of\n   information that you want to retrieve.</p>"
                     }
+                },
+                "IncludePropertyValues": {
+                    "target": "com.amazonaws.cloudformation#IncludePropertyValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, the returned changes include detailed changes in the property values.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7084,6 +7125,9 @@
         "com.amazonaws.cloudformation#IncludeNestedStacks": {
             "type": "boolean"
         },
+        "com.amazonaws.cloudformation#IncludePropertyValues": {
+            "type": "boolean"
+        },
         "com.amazonaws.cloudformation#InsufficientCapabilitiesException": {
             "type": "structure",
             "members": {
@@ -10131,6 +10175,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the module from which the resource was created, if the resource was created from a\n   module included in the stack template.</p>"
                     }
+                },
+                "BeforeContext": {
+                    "target": "com.amazonaws.cloudformation#BeforeContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An encoded JSON string containing the context of the resource before the change is executed.</p>"
+                    }
+                },
+                "AfterContext": {
+                    "target": "com.amazonaws.cloudformation#AfterContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An encoded JSON string containing the context of the resource after the change is executed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10357,6 +10413,9 @@
             }
         },
         "com.amazonaws.cloudformation#ResourceProperties": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudformation#ResourcePropertyPath": {
             "type": "string"
         },
         "com.amazonaws.cloudformation#ResourceScanId": {
@@ -10683,6 +10742,30 @@
                     "target": "com.amazonaws.cloudformation#RequiresRecreation",
                     "traits": {
                         "smithy.api#documentation": "<p>If the <code>Attribute</code> value is <code>Properties</code>, indicates whether a change to this property\n   causes the resource to be recreated. The value can be <code>Never</code>, <code>Always</code>, or\n   <code>Conditionally</code>. To determine the conditions for a <code>Conditionally</code> recreation, see the update\n   behavior for that <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">property</a> in the\n   <i>CloudFormation User Guide</i>.</p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.cloudformation#ResourcePropertyPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property path of the property.</p>"
+                    }
+                },
+                "BeforeValue": {
+                    "target": "com.amazonaws.cloudformation#BeforeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the property before the change is executed. Large values can be truncated.</p>"
+                    }
+                },
+                "AfterValue": {
+                    "target": "com.amazonaws.cloudformation#AfterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the property after the change is executed. Large values can be truncated.</p>"
+                    }
+                },
+                "AttributeChangeType": {
+                    "target": "com.amazonaws.cloudformation#AttributeChangeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of change to be made to the property if the change is executed.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Add</code> The item will be added.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Remove</code> The item will be removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modify</code> The item will be modified.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

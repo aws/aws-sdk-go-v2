@@ -2919,6 +2919,15 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				return err
 			}
 
+		case "identityCenterApplicationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdcApplicationArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityCenterApplicationArn = ptr.String(jtv)
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3109,6 +3118,11 @@ func awsRestjson1_deserializeOpDocumentGetChatControlsConfigurationOutput(v **Ge
 		switch key {
 		case "blockedPhrases":
 			if err := awsRestjson1_deserializeDocumentBlockedPhrasesConfiguration(&sv.BlockedPhrases, value); err != nil {
+				return err
+			}
+
+		case "creatorModeConfiguration":
+			if err := awsRestjson1_deserializeDocumentAppliedCreatorModeConfiguration(&sv.CreatorModeConfiguration, value); err != nil {
 				return err
 			}
 
@@ -4724,6 +4738,15 @@ func awsRestjson1_deserializeOpDocumentGetWebExperienceOutput(v **GetWebExperien
 		case "error":
 			if err := awsRestjson1_deserializeDocumentErrorDetail(&sv.Error, value); err != nil {
 				return err
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
 			}
 
 		case "samplePromptsControlMode":
@@ -9224,6 +9247,46 @@ func awsRestjson1_deserializeDocumentAppliedAttachmentsConfiguration(v **types.A
 					return fmt.Errorf("expected AttachmentsControlMode to be of type string, got %T instead", value)
 				}
 				sv.AttachmentsControlMode = types.AttachmentsControlMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAppliedCreatorModeConfiguration(v **types.AppliedCreatorModeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AppliedCreatorModeConfiguration
+	if *v == nil {
+		sv = &types.AppliedCreatorModeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "creatorModeControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CreatorModeControl to be of type string, got %T instead", value)
+				}
+				sv.CreatorModeControl = types.CreatorModeControl(jtv)
 			}
 
 		default:

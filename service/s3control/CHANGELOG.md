@@ -1,3 +1,7 @@
+# v1.44.6 (2024-04-18)
+
+* No change notes available for this release.
+
 # v1.44.5 (2024-04-11)
 
 * **Documentation**: Documentation updates for Amazon S3-control.

@@ -45,6 +45,9 @@ type DescribeChangeSetInput struct {
 	// This member is required.
 	ChangeSetName *string
 
+	// If true , the returned changes include detailed changes in the property values.
+	IncludePropertyValues *bool
+
 	// A string (provided by the DescribeChangeSet response output) that identifies
 	// the next page of information that you want to retrieve.
 	NextToken *string

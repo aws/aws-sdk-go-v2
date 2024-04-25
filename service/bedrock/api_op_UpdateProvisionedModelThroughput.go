@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a provisioned throughput. For more information, see Provisioned
-// throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// Updates the name or associated model for a Provisioned Throughput. For more
+// information, see Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
+// in the Amazon Bedrock User Guide.
 func (c *Client) UpdateProvisionedModelThroughput(ctx context.Context, params *UpdateProvisionedModelThroughputInput, optFns ...func(*Options)) (*UpdateProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &UpdateProvisionedModelThroughputInput{}
@@ -30,15 +30,21 @@ func (c *Client) UpdateProvisionedModelThroughput(ctx context.Context, params *U
 
 type UpdateProvisionedModelThroughputInput struct {
 
-	// The ARN or name of the provisioned throughput to update.
+	// The Amazon Resource Name (ARN) or name of the Provisioned Throughput to update.
 	//
 	// This member is required.
 	ProvisionedModelId *string
 
-	// The ARN of the new model to associate with this provisioned throughput.
+	// The Amazon Resource Name (ARN) of the new model to associate with this
+	// Provisioned Throughput. You can't specify this field if this Provisioned
+	// Throughput is associated with a base model. If this Provisioned Throughput is
+	// associated with a custom model, you can specify one of the following options:
+	//   - The base model from which the custom model was customized.
+	//   - Another custom model that was customized from the same base model as the
+	//   custom model.
 	DesiredModelId *string
 
-	// The new name for this provisioned throughput.
+	// The new name for this Provisioned Throughput.
 	DesiredProvisionedModelName *string
 
 	noSmithyDocumentSerde

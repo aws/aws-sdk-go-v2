@@ -53,8 +53,9 @@ type ListGroupsInput struct {
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more data to
-	// retrieve), Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of groups that are mapped to users.
+	// retrieve), Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of groups that are mapped to
+	// users.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -65,9 +66,9 @@ type ListGroupsOutput struct {
 	// Summary information for list of groups that are mapped to users.
 	Items []types.GroupSummary
 
-	// If the response is truncated, Amazon Q returns this token that you can use in
-	// the subsequent request to retrieve the next set of groups that are mapped to
-	// users.
+	// If the response is truncated, Amazon Q Business returns this token that you can
+	// use in the subsequent request to retrieve the next set of groups that are mapped
+	// to users.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

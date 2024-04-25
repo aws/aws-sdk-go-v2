@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List of Amazon Bedrock foundation models that you can use. For more
-// information, see Foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html)
-// in the Bedrock User Guide.
+// Lists Amazon Bedrock foundation models that you can use. You can filter the
+// results with the request parameters. For more information, see Foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html)
+// in the Amazon Bedrock User Guide.
 func (c *Client) ListFoundationModels(ctx context.Context, params *ListFoundationModelsInput, optFns ...func(*Options)) (*ListFoundationModelsOutput, error) {
 	if params == nil {
 		params = &ListFoundationModelsInput{}
@@ -31,16 +31,20 @@ func (c *Client) ListFoundationModels(ctx context.Context, params *ListFoundatio
 
 type ListFoundationModelsInput struct {
 
-	// List by customization type.
+	// Return models that support the customization type that you specify. For more
+	// information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
+	// in the Amazon Bedrock User Guide.
 	ByCustomizationType types.ModelCustomization
 
-	// List by inference type.
+	// Return models that support the inference type that you specify. For more
+	// information, see Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
+	// in the Amazon Bedrock User Guide.
 	ByInferenceType types.InferenceType
 
-	// List by output modality type.
+	// Return models that support the output modality that you specify.
 	ByOutputModality types.ModelModality
 
-	// A Amazon Bedrock model provider.
+	// Return models belonging to the model provider that you specify.
 	ByProvider *string
 
 	noSmithyDocumentSerde

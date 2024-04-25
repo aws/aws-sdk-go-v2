@@ -1,3 +1,7 @@
+# v1.14.0 (2024-04-19)
+
+* **Feature**: This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map.
+
 # v1.13.0 (2024-03-29)
 
 * **Feature**: This release adds support to allow customers to track cross account monitors through ListMonitor, GetMonitor, ListHealthEvents, GetHealthEvent, StartQuery APIs.

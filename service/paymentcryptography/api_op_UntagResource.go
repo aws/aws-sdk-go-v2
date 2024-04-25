@@ -14,8 +14,8 @@ import (
 // untagging an Amazon Web Services Payment Cryptography key can allow or deny
 // permission to the key. Cross-account use: This operation can't be used across
 // different Amazon Web Services accounts. Related operations:
-//   - ListTagsForResource
-//   - TagResource
+//   - ListTagsForResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html)
+//   - TagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html)
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -41,7 +41,8 @@ type UntagResourceInput struct {
 	// One or more tag keys. Don't include the tag values. If the Amazon Web Services
 	// Payment Cryptography key doesn't have the specified tag key, Amazon Web Services
 	// Payment Cryptography doesn't throw an exception or return a response. To confirm
-	// that the operation succeeded, use the ListTagsForResource operation.
+	// that the operation succeeded, use the ListTagsForResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html)
+	// operation.
 	//
 	// This member is required.
 	TagKeys []string

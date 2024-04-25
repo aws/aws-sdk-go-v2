@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a fleet's mutable attributes, including game session protection and
+// Updates a fleet's mutable attributes, such as game session protection and
 // resource creation limits. To update fleet attributes, specify the fleet ID and
-// the property values that you want to change. If successful, an updated
-// FleetAttributes object is returned. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// the property values that you want to change. If successful, Amazon GameLift
+// returns the identifiers for the updated fleet. Learn more Setting up Amazon
+// GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetAttributesInput, optFns ...func(*Options)) (*UpdateFleetAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateFleetAttributesInput{}

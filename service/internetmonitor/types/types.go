@@ -59,6 +59,56 @@ type AvailabilityMeasurement struct {
 	noSmithyDocumentSerde
 }
 
+// The impacted location, such as a city, that Amazon Web Services clients access
+// application resources from.
+type ClientLocation struct {
+
+	// The name of the internet service provider (ISP) or network (ASN).
+	//
+	// This member is required.
+	ASName *string
+
+	// The Autonomous System Number (ASN) of the network at an impacted location.
+	//
+	// This member is required.
+	ASNumber *int64
+
+	// The name of the city where the internet event is located.
+	//
+	// This member is required.
+	City *string
+
+	// The name of the country where the internet event is located.
+	//
+	// This member is required.
+	Country *string
+
+	// The latitude where the internet event is located.
+	//
+	// This member is required.
+	Latitude *float64
+
+	// The longitude where the internet event is located.
+	//
+	// This member is required.
+	Longitude *float64
+
+	// The metro area where the health event is located. Metro indicates a
+	// metropolitan region in the United States, such as the region around New York
+	// City. In non-US countries, this is a second-level subdivision. For example, in
+	// the United Kingdom, it could be a county, a London borough, a unitary authority,
+	// council area, and so on.
+	Metro *string
+
+	// The subdivision location where the health event is located. The subdivision
+	// usually maps to states in most countries (including the United States). For
+	// United Kingdom, it maps to a country (England, Scotland, Wales) or province
+	// (Northern Ireland).
+	Subdivision *string
+
+	noSmithyDocumentSerde
+}
+
 // A filter that you use with the results of a Amazon CloudWatch Internet Monitor
 // query that you created and ran. The query sets up a repository of data that is a
 // subset of your application's Internet Monitor data. FilterParameter is a string
@@ -125,7 +175,7 @@ type HealthEvent struct {
 	// This member is required.
 	StartedAt *time.Time
 
-	// Health event list member.
+	// The status of a health event.
 	//
 	// This member is required.
 	Status HealthEventStatus
@@ -192,7 +242,7 @@ type HealthEventsConfig struct {
 // region is identified based on the IP address used at the client locations.
 type ImpactedLocation struct {
 
-	// The name of the network at an impacted location.
+	// The name of the internet service provider (ISP) or network (ASN).
 	//
 	// This member is required.
 	ASName *string
@@ -255,6 +305,52 @@ type ImpactedLocation struct {
 	// The subdivision code where the health event is located. The ISO 3166-2 codes
 	// for country subdivisions is provided, when available.
 	SubdivisionCode *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of information about an internet event in Amazon CloudWatch Internet
+// Monitor. Internet events are issues that cause performance degradation or
+// availability problems for impacted Amazon Web Services client locations.
+// Internet Monitor displays information about recent global health events, called
+// internet events, on a global outages map that is available to all Amazon Web
+// Services customers.
+type InternetEventSummary struct {
+
+	// The impacted location, such as a city, that Amazon Web Services clients access
+	// application resources from.
+	//
+	// This member is required.
+	ClientLocation *ClientLocation
+
+	// The Amazon Resource Name (ARN) of the internet event.
+	//
+	// This member is required.
+	EventArn *string
+
+	// The internally-generated identifier of an internet event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The status of an internet event.
+	//
+	// This member is required.
+	EventStatus InternetEventStatus
+
+	// The type of network impairment.
+	//
+	// This member is required.
+	EventType InternetEventType
+
+	// The time when an internet event started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The time when an internet event ended. If the event hasn't ended yet, this
+	// value is empty.
+	EndedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -360,11 +456,11 @@ type Monitor struct {
 	noSmithyDocumentSerde
 }
 
-// An internet service provider (ISP) or network in Amazon CloudWatch Internet
-// Monitor.
+// An internet service provider (ISP) or network (ASN) in Amazon CloudWatch
+// Internet Monitor.
 type Network struct {
 
-	// The internet provider name or network name.
+	// The name of the internet service provider (ISP) or network (ASN).
 	//
 	// This member is required.
 	ASName *string
@@ -387,7 +483,7 @@ type NetworkImpairment struct {
 	// This member is required.
 	AsPath []Network
 
-	// Type of network impairment.
+	// The type of network impairment.
 	//
 	// This member is required.
 	NetworkEventType TriangulationEventType

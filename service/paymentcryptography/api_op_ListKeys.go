@@ -19,9 +19,9 @@ import (
 // a response with no NextToken (or an empty or null value), that means there are
 // no more keys to get. Cross-account use: This operation can't be used across
 // different Amazon Web Services accounts. Related operations:
-//   - CreateKey
-//   - DeleteKey
-//   - GetKey
+//   - CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
+//   - DeleteKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html)
+//   - GetKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html)
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {
 		params = &ListKeysInput{}

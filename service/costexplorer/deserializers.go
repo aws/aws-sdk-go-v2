@@ -10553,6 +10553,15 @@ func awsAwsjson11_deserializeDocumentReservationPurchaseRecommendationMetadata(v
 
 	for key, value := range shape {
 		switch key {
+		case "AdditionalMetadata":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.AdditionalMetadata = ptr.String(jtv)
+			}
+
 		case "GenerationTimestamp":
 			if value != nil {
 				jtv, ok := value.(string)

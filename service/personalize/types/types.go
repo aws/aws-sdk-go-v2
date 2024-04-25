@@ -85,6 +85,21 @@ type AutoMLResult struct {
 	noSmithyDocumentSerde
 }
 
+// The automatic training configuration to use when performAutoTraining is true.
+type AutoTrainingConfig struct {
+
+	// Specifies how often to automatically train new solution versions. Specify a
+	// rate expression in rate(value unit) format. For value, specify a number between
+	// 1 and 30. For unit, specify day or days . For example, to automatically create a
+	// new solution version every 5 days, specify rate(5 days) . The default is every 7
+	// days. For more information about auto training, see Creating and configuring a
+	// solution (https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html)
+	// .
+	SchedulingExpression *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information on a batch inference job.
 type BatchInferenceJob struct {
 
@@ -361,7 +376,7 @@ type Campaign struct {
 	// The name of the campaign.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of a specific version of the solution.
+	// The Amazon Resource Name (ARN) of the solution version the campaign uses.
 	SolutionVersionArn *string
 
 	// The status of the campaign. A campaign can be in one of the following states:
@@ -392,6 +407,15 @@ type CampaignConfig struct {
 	// User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
 	// recipe.
 	ItemExplorationConfig map[string]string
+
+	// Whether the campaign automatically updates to use the latest solution version
+	// (trained model) of a solution. If you specify True , you must specify the ARN of
+	// your solution for the SolutionVersionArn parameter. It must be in
+	// SolutionArn/$LATEST format. The default is False and you must manually update
+	// the campaign to deploy the latest solution version. For more information about
+	// automatic campaign updates, see Enabling automatic campaign updates (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update)
+	// .
+	SyncWithLatestSolutionVersion *bool
 
 	noSmithyDocumentSerde
 }
@@ -1553,8 +1577,18 @@ type S3DataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// An object that provides information about a solution. A solution is a trained
-// model that can be deployed as a campaign.
+// After you create a solution, you can’t change its configuration. By default,
+// all new solutions use automatic training. With automatic training, you incur
+// training costs while your solution is active. You can't stop automatic training
+// for a solution. To avoid unnecessary costs, make sure to delete the solution
+// when you are finished. For information about training costs, see Amazon
+// Personalize pricing (https://aws.amazon.com/personalize/pricing/) . An object
+// that provides information about a solution. A solution includes the custom
+// recipe, customized parameters, and trained models (Solution Versions) that
+// Amazon Personalize uses to generate recommendations. After you create a
+// solution, you can’t change its configuration. If you need to make changes, you
+// can clone the solution (https://docs.aws.amazon.com/personalize/latest/dg/cloning-solution.html)
+// with the Amazon Personalize console or create a new one.
 type Solution struct {
 
 	// When performAutoML is true, specifies the best recipe found.
@@ -1590,6 +1624,13 @@ type Solution struct {
 	// Amazon Personalize uses recipeArn for training.
 	PerformAutoML bool
 
+	// Specifies whether the solution automatically creates solution versions. The
+	// default is True and the solution automatically creates new solution versions
+	// every 7 days. For more information about auto training, see Creating and
+	// configuring a solution (https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html)
+	// .
+	PerformAutoTraining *bool
+
 	// Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The
 	// default is false .
 	PerformHPO bool
@@ -1621,6 +1662,9 @@ type SolutionConfig struct {
 	// The AutoMLConfig (https://docs.aws.amazon.com/personalize/latest/dg/API_AutoMLConfig.html)
 	// object containing a list of recipes to search when AutoML is performed.
 	AutoMLConfig *AutoMLConfig
+
+	// Specifies the automatic training configuration to use.
+	AutoTrainingConfig *AutoTrainingConfig
 
 	// Only events with a value greater than or equal to this threshold are used for
 	// training a model.
@@ -1732,17 +1776,14 @@ type SolutionVersion struct {
 	// a model.
 	TrainingHours *float64
 
-	// The scope of training to be performed when creating the solution version. The
-	// FULL option trains the solution version based on the entirety of the input
-	// solution's training data, while the UPDATE option processes only the data that
-	// has changed in comparison to the input solution. Choose UPDATE when you want to
-	// incrementally update your solution version instead of creating an entirely new
-	// one. The UPDATE option can only be used when you already have an active
-	// solution version created from the input solution using the FULL option and the
-	// input solution was trained with the User-Personalization (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
-	// recipe or the HRNN-Coldstart (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
-	// recipe.
+	// The scope of training to be performed when creating the solution version. A FULL
+	// training considers all of the data in your dataset group. An UPDATE processes
+	// only the data that has changed since the latest training. Only solution versions
+	// created with the User-Personalization recipe can use UPDATE .
 	TrainingMode TrainingMode
+
+	// Whether the solution version was created automatically or manually.
+	TrainingType TrainingType
 
 	// If hyperparameter optimization was performed, contains the hyperparameter
 	// values of the best performing model.
@@ -1773,12 +1814,21 @@ type SolutionVersionSummary struct {
 	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	Status *string
 
+	// The scope of training to be performed when creating the solution version. A FULL
+	// training considers all of the data in your dataset group. An UPDATE processes
+	// only the data that has changed since the latest training. Only solution versions
+	// created with the User-Personalization recipe can use UPDATE .
+	TrainingMode TrainingMode
+
+	// Whether the solution version was created automatically or manually.
+	TrainingType TrainingType
+
 	noSmithyDocumentSerde
 }
 
 // The optional metadata that you apply to resources to help you categorize and
 // organize them. Each tag consists of a key and an optional value, both of which
-// you define. For more information see Tagging Amazon Personalize recources (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
+// you define. For more information see Tagging Amazon Personalize resources (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 // .
 type Tag struct {
 

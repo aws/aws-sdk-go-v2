@@ -930,6 +930,16 @@ func awsRestjson1_serializeOpDocumentCreatePortalInput(v *CreatePortalInput, val
 		ok.String(*v.DisplayName)
 	}
 
+	if len(v.InstanceType) > 0 {
+		ok := object.Key("instanceType")
+		ok.String(string(v.InstanceType))
+	}
+
+	if v.MaxConcurrentSessions != nil {
+		ok := object.Key("maxConcurrentSessions")
+		ok.Integer(*v.MaxConcurrentSessions)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -4139,6 +4149,16 @@ func awsRestjson1_serializeOpDocumentUpdatePortalInput(v *UpdatePortalInput, val
 	if v.DisplayName != nil {
 		ok := object.Key("displayName")
 		ok.String(*v.DisplayName)
+	}
+
+	if len(v.InstanceType) > 0 {
+		ok := object.Key("instanceType")
+		ok.String(string(v.InstanceType))
+	}
+
+	if v.MaxConcurrentSessions != nil {
+		ok := object.Key("maxConcurrentSessions")
+		ok.Integer(*v.MaxConcurrentSessions)
 	}
 
 	return nil

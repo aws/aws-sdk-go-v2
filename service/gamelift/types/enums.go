@@ -142,8 +142,9 @@ type ComputeType string
 
 // Enum values for ComputeType
 const (
-	ComputeTypeEc2      ComputeType = "EC2"
-	ComputeTypeAnywhere ComputeType = "ANYWHERE"
+	ComputeTypeEc2       ComputeType = "EC2"
+	ComputeTypeAnywhere  ComputeType = "ANYWHERE"
+	ComputeTypeContainer ComputeType = "CONTAINER"
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
@@ -153,6 +154,85 @@ func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"EC2",
 		"ANYWHERE",
+		"CONTAINER",
+	}
+}
+
+type ContainerDependencyCondition string
+
+// Enum values for ContainerDependencyCondition
+const (
+	ContainerDependencyConditionStart    ContainerDependencyCondition = "START"
+	ContainerDependencyConditionComplete ContainerDependencyCondition = "COMPLETE"
+	ContainerDependencyConditionSuccess  ContainerDependencyCondition = "SUCCESS"
+	ContainerDependencyConditionHealthy  ContainerDependencyCondition = "HEALTHY"
+)
+
+// Values returns all known values for ContainerDependencyCondition. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContainerDependencyCondition) Values() []ContainerDependencyCondition {
+	return []ContainerDependencyCondition{
+		"START",
+		"COMPLETE",
+		"SUCCESS",
+		"HEALTHY",
+	}
+}
+
+type ContainerGroupDefinitionStatus string
+
+// Enum values for ContainerGroupDefinitionStatus
+const (
+	ContainerGroupDefinitionStatusReady   ContainerGroupDefinitionStatus = "READY"
+	ContainerGroupDefinitionStatusCopying ContainerGroupDefinitionStatus = "COPYING"
+	ContainerGroupDefinitionStatusFailed  ContainerGroupDefinitionStatus = "FAILED"
+)
+
+// Values returns all known values for ContainerGroupDefinitionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContainerGroupDefinitionStatus) Values() []ContainerGroupDefinitionStatus {
+	return []ContainerGroupDefinitionStatus{
+		"READY",
+		"COPYING",
+		"FAILED",
+	}
+}
+
+type ContainerOperatingSystem string
+
+// Enum values for ContainerOperatingSystem
+const (
+	ContainerOperatingSystemAmazonLinux2023 ContainerOperatingSystem = "AMAZON_LINUX_2023"
+)
+
+// Values returns all known values for ContainerOperatingSystem. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerOperatingSystem) Values() []ContainerOperatingSystem {
+	return []ContainerOperatingSystem{
+		"AMAZON_LINUX_2023",
+	}
+}
+
+type ContainerSchedulingStrategy string
+
+// Enum values for ContainerSchedulingStrategy
+const (
+	ContainerSchedulingStrategyReplica ContainerSchedulingStrategy = "REPLICA"
+	ContainerSchedulingStrategyDaemon  ContainerSchedulingStrategy = "DAEMON"
+)
+
+// Values returns all known values for ContainerSchedulingStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerSchedulingStrategy) Values() []ContainerSchedulingStrategy {
+	return []ContainerSchedulingStrategy{
+		"REPLICA",
+		"DAEMON",
 	}
 }
 

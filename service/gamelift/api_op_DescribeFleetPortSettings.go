@@ -12,20 +12,21 @@ import (
 )
 
 // Retrieves a fleet's inbound connection permissions. Connection permissions
-// specify the range of IP addresses and port settings that incoming traffic can
-// use to access server processes in the fleet. Game sessions that are running on
-// instances in the fleet must use connections that fall in this range. This
-// operation can be used in the following ways:
-//   - To retrieve the inbound connection permissions for a fleet, identify the
-//     fleet's unique identifier.
+// specify IP addresses and port settings that incoming traffic can use to access
+// server processes in the fleet. Game server processes that are running in the
+// fleet must use a port that falls within this range. To connect to game server
+// processes on a container fleet, the port settings should include one or more of
+// the fleet's connection ports. Use this operation in the following ways:
+//   - To retrieve the port settings for a fleet, identify the fleet's unique
+//     identifier.
 //   - To check the status of recent updates to a fleet remote location, specify
 //     the fleet ID and a location. Port setting updates can take time to propagate
 //     across all locations.
 //
 // If successful, a set of IpPermission objects is returned for the requested
-// fleet ID. When a location is specified, a pending status is included. If the
-// requested fleet has been deleted, the result set is empty. Learn more Setting
-// up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// fleet ID. When specifying a location, this operation returns a pending status.
+// If the requested fleet has been deleted, the result set is empty. Learn more
+// Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *DescribeFleetPortSettingsInput, optFns ...func(*Options)) (*DescribeFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetPortSettingsInput{}

@@ -56,14 +56,8 @@ type GetIdMappingWorkflowOutput struct {
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
 
-	// A list of OutputSource objects, each of which contains fields OutputS3Path and
-	// KMSArn .
-	//
-	// This member is required.
-	OutputSourceConfig []types.IdMappingWorkflowOutputSource
-
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
-	// role to access resources on your behalf.
+	// role to access Amazon Web Services resources on your behalf.
 	//
 	// This member is required.
 	RoleArn *string
@@ -86,6 +80,10 @@ type GetIdMappingWorkflowOutput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	// A list of OutputSource objects, each of which contains fields OutputS3Path and
+	// KMSArn .
+	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

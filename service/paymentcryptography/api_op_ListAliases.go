@@ -22,10 +22,10 @@ import (
 // value), that means there are no more aliases to get. Cross-account use: This
 // operation can't be used across different Amazon Web Services accounts. Related
 // operations:
-//   - CreateAlias
-//   - DeleteAlias
-//   - GetAlias
-//   - UpdateAlias
+//   - CreateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html)
+//   - DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
+//   - GetAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html)
+//   - UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}

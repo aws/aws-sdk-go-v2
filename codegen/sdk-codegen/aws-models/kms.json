@@ -336,6 +336,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.kms#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.kms#ErrorMessageType"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConflictException",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>The request was rejected because an automatic rotation of this key is currently in \n      progress or scheduled to begin within the next 20 minutes. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.kms#ConnectCustomKeyStore": {
             "type": "operation",
             "input": {
@@ -1819,7 +1836,7 @@
                     "target": "com.amazonaws.kms#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
                     }
                 }
             },
@@ -2149,7 +2166,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic\n        rotation of the key material</a> of the specified symmetric encryption KMS key.</p>\n         <p>Automatic key rotation is supported only on symmetric encryption KMS keys.\n      You cannot enable automatic rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To enable or disable automatic rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>, set the property on the primary key.</p>\n         <p>You can enable (<a>EnableKeyRotation</a>) and disable automatic rotation of the\n      key material in <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed KMS keys</a>. Key material rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a> is not\n      configurable. KMS always rotates the key material for every year. Rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned KMS\n        keys</a> varies.</p>\n         <note>\n            <p>In May 2022, KMS changed the rotation schedule for Amazon Web Services managed keys from every three\n        years to every year. For details, see <a>EnableKeyRotation</a>.</p>\n         </note>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:DisableKeyRotation</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>EnableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKeyRotationStatus</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Disables <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic\n        rotation of the key material</a> of the specified symmetric encryption KMS key.</p>\n         <p>Automatic key rotation is supported only on symmetric encryption KMS keys.\n      You cannot enable automatic rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To enable or disable automatic rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>, set the property on the primary key.</p>\n         <p>You can enable (<a>EnableKeyRotation</a>) and disable automatic rotation of the\n      key material in <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed KMS keys</a>. Key material rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a> is not\n      configurable. KMS always rotates the key material for every year. Rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned KMS\n        keys</a> varies.</p>\n         <note>\n            <p>In May 2022, KMS changed the rotation schedule for Amazon Web Services managed keys from every three\n        years to every year. For details, see <a>EnableKeyRotation</a>.</p>\n         </note>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:DisableKeyRotation</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>EnableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKeyRotationStatus</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeyRotations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RotateKeyOnDemand</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To disable automatic rotation of key material",
@@ -2353,13 +2370,14 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic rotation\n        of the key material</a> of the specified symmetric encryption KMS key. </p>\n         <p>When you enable automatic rotation of a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed KMS key</a>, KMS\n      rotates the key material of the KMS key one year (approximately 365 days) from the enable date\n      and every year thereafter. You can monitor rotation of the key material for your KMS keys in\n      CloudTrail and Amazon CloudWatch. To disable rotation of the key material in a customer\n      managed KMS key, use the <a>DisableKeyRotation</a> operation.</p>\n         <p>Automatic key rotation is supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks\">symmetric encryption KMS keys</a>.\n      You cannot enable automatic rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To enable or disable automatic rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>, set the property on the primary key. </p>\n         <p>You cannot enable or disable automatic rotation <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a>. KMS\n      always rotates the key material of Amazon Web Services managed keys every year. Rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned KMS\n        keys</a> varies.</p>\n         <note>\n            <p>In May 2022, KMS changed the rotation schedule for Amazon Web Services managed keys from every three\n        years (approximately 1,095 days) to every year (approximately 365 days).</p>\n            <p>New Amazon Web Services managed keys are automatically rotated one year after they are created, and\n        approximately every year thereafter. </p>\n            <p>Existing Amazon Web Services managed keys are automatically rotated one year after their most recent\n        rotation, and every year thereafter.</p>\n         </note>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:EnableKeyRotation</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DisableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKeyRotationStatus</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Enables <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-enable-disable\">automatic rotation\n        of the key material</a> of the specified symmetric encryption KMS key. </p>\n         <p>By default, when you enable automatic rotation of a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed KMS key</a>, KMS\n      rotates the key material of the KMS key one year (approximately 365 days) from the enable date\n      and every year thereafter. You can use the optional <code>RotationPeriodInDays</code>\n      parameter to specify a custom rotation period when you enable key rotation, or you can use \n      <code>RotationPeriodInDays</code> to modify the rotation period of a key that you previously \n      enabled automatic key rotation on.</p>\n         <p>You can monitor rotation of the key material\n      for your KMS keys in CloudTrail and Amazon CloudWatch. To disable rotation of the key\n      material in a customer managed KMS key, use the <a>DisableKeyRotation</a>\n      operation. You can use the <a>GetKeyRotationStatus</a> operation to identify any in progress \n      rotations. You can use the <a>ListKeyRotations</a> operation to view the details of\n      completed rotations.</p>\n         <p>Automatic key rotation is supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks\">symmetric encryption KMS keys</a>.\n      You cannot enable automatic rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To enable or disable automatic rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>, set the property on the primary key. </p>\n         <p>You cannot enable or disable automatic rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a>. KMS\n      always rotates the key material of Amazon Web Services managed keys every year. Rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned KMS\n        keys</a> is managed by the Amazon Web Services service that owns the key.</p>\n         <note>\n            <p>In May 2022, KMS changed the rotation schedule for Amazon Web Services managed keys from every three\n        years (approximately 1,095 days) to every year (approximately 365 days).</p>\n            <p>New Amazon Web Services managed keys are automatically rotated one year after they are created, and\n        approximately every year thereafter. </p>\n            <p>Existing Amazon Web Services managed keys are automatically rotated one year after their most recent\n        rotation, and every year thereafter.</p>\n         </note>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:EnableKeyRotation</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DisableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKeyRotationStatus</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeyRotations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RotateKeyOnDemand</a>\n               </p>\n               <note>\n                  <p>You can perform on-demand (<a>RotateKeyOnDemand</a>) rotation of the \n            key material in customer managed KMS keys, regardless of whether or not automatic key rotation is enabled.</p>\n               </note>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To enable automatic rotation of key material",
-                        "documentation": "The following example enables automatic annual rotation of the key material for the specified KMS key.",
+                        "documentation": "The following example enables automatic rotation with a rotation period of 365 days for the specified KMS key.",
                         "input": {
-                            "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
+                            "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+                            "RotationPeriodInDays": 365
                         }
                     }
                 ]
@@ -2373,6 +2391,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies a symmetric encryption KMS key. You cannot enable automatic rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To enable or disable automatic rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>, set the property on the primary key.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RotationPeriodInDays": {
+                    "target": "com.amazonaws.kms#RotationPeriodInDaysType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to specify a custom period of time between each rotation date. If no\n      value is specified, the default value is 365 days.</p>\n         <p>The rotation period defines the number of days after you enable automatic key rotation\n      that KMS will rotate your key material, and the number of days between each automatic\n      rotation thereafter.</p>\n         <p>You can use the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-rotation-period-in-days\">\n               <code>kms:RotationPeriodInDays</code>\n            </a> condition key to further constrain the \n      values that principals can specify in the <code>RotationPeriodInDays</code> parameter.</p>\n         <p> </p>"
                     }
                 }
             },
@@ -3471,19 +3495,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a Boolean value that indicates whether <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic rotation of the key material</a> is\n      enabled for the specified KMS key.</p>\n         <p>When you enable automatic rotation for <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed KMS keys</a>, KMS\n      rotates the key material of the KMS key one year (approximately 365 days) from the enable date\n      and every year thereafter. You can monitor rotation of the key material for your KMS keys in\n      CloudTrail and Amazon CloudWatch.</p>\n         <p>Automatic key rotation is supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks\">symmetric encryption KMS keys</a>.\n      You cannot enable automatic rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To enable or disable automatic rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>, set the property on the primary key..</p>\n         <p>You can enable (<a>EnableKeyRotation</a>) and disable automatic rotation (<a>DisableKeyRotation</a>) of the key material in customer managed KMS keys. Key\n      material rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a> is not\n      configurable. KMS always rotates the key material in Amazon Web Services managed KMS keys every year. The\n      key rotation status for Amazon Web Services managed KMS keys is always <code>true</code>.</p>\n         <note>\n            <p>In May 2022, KMS changed the rotation schedule for Amazon Web Services managed keys from every three\n        years to every year. For details, see <a>EnableKeyRotation</a>.</p>\n         </note>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n               <p>Disabled: The key rotation status does not change when you disable a KMS key. However,\n          while the KMS key is disabled, KMS does not rotate the key material. When you re-enable\n          the KMS key, rotation resumes. If the key material in the re-enabled KMS key hasn't been\n          rotated in one year, KMS rotates it immediately, and every year thereafter. If it's been\n          less than a year since the key material in the re-enabled KMS key was rotated, the KMS key\n          resumes its prior rotation schedule.</p>\n            </li>\n            <li>\n               <p>Pending deletion: While a KMS key is pending deletion, its key rotation status is\n            <code>false</code> and KMS does not rotate the key material. If you cancel the\n          deletion, the original key rotation status returns to <code>true</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key\n  ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GetKeyRotationStatus</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DisableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>EnableKeyRotation</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
-                "smithy.api#examples": [
-                    {
-                        "title": "To retrieve the rotation status for a KMS key",
-                        "documentation": "The following example retrieves the status of automatic annual rotation of the key material for the specified KMS key.",
-                        "input": {
-                            "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
-                        },
-                        "output": {
-                            "KeyRotationEnabled": true
-                        }
-                    }
-                ]
+                "smithy.api#documentation": "<p>Provides detailed information about the rotation status for a KMS key, including \n      whether <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic rotation of the key material</a> is enabled for the specified KMS key, the\n      <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotation-period\">rotation period</a>, and the next scheduled\n      rotation date.</p>\n         <p>Automatic key rotation is supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks\">symmetric encryption KMS keys</a>.\n      You cannot enable automatic rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To enable or disable automatic rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>, set the property on the primary key..</p>\n         <p>You can enable (<a>EnableKeyRotation</a>) and disable automatic rotation (<a>DisableKeyRotation</a>) of the key material in customer managed KMS keys. Key\n      material rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a> is not\n      configurable. KMS always rotates the key material in Amazon Web Services managed KMS keys every year. The\n      key rotation status for Amazon Web Services managed KMS keys is always <code>true</code>.</p>\n         <p>You can perform on-demand (<a>RotateKeyOnDemand</a>) rotation of the \n      key material in customer managed KMS keys, regardless of whether or not automatic key rotation is enabled. \n      You can use GetKeyRotationStatus to identify the date and time that an in progress on-demand rotation\n      was initiated. You can use <a>ListKeyRotations</a> to view the details of completed rotations.</p>\n         <note>\n            <p>In May 2022, KMS changed the rotation schedule for Amazon Web Services managed keys from every three\n        years to every year. For details, see <a>EnableKeyRotation</a>.</p>\n         </note>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <ul>\n            <li>\n               <p>Disabled: The key rotation status does not change when you disable a KMS key. However,\n          while the KMS key is disabled, KMS does not rotate the key material. When you re-enable\n          the KMS key, rotation resumes. If the key material in the re-enabled KMS key hasn't been\n          rotated in one year, KMS rotates it immediately, and every year thereafter. If it's been\n          less than a year since the key material in the re-enabled KMS key was rotated, the KMS key\n          resumes its prior rotation schedule.</p>\n            </li>\n            <li>\n               <p>Pending deletion: While a KMS key is pending deletion, its key rotation status is\n            <code>false</code> and KMS does not rotate the key material. If you cancel the\n          deletion, the original key rotation status returns to <code>true</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key\n  ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:GetKeyRotationStatus</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DisableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>EnableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeyRotations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RotateKeyOnDemand</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>"
             }
         },
         "com.amazonaws.kms#GetKeyRotationStatusRequest": {
@@ -3509,6 +3521,30 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that specifies whether key rotation is enabled.</p>"
+                    }
+                },
+                "KeyId": {
+                    "target": "com.amazonaws.kms#KeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the specified symmetric encryption KMS key.</p>"
+                    }
+                },
+                "RotationPeriodInDays": {
+                    "target": "com.amazonaws.kms#RotationPeriodInDaysType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days between each automatic rotation. The default value is 365 days.</p>"
+                    }
+                },
+                "NextRotationDate": {
+                    "target": "com.amazonaws.kms#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next date that KMS will automatically rotate the key material.</p>"
+                    }
+                },
+                "OnDemandRotationStartDate": {
+                    "target": "com.amazonaws.kms#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the date and time that an in progress on-demand rotation was initiated.</p>\n         <p>The KMS API follows an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">eventual consistency</a> model\n      due to the distributed nature of the system. As a result, there might be a slight delay\n      between initiating on-demand key rotation and the rotation's completion. Once the on-demand\n      rotation is complete, use <a>ListKeyRotations</a> to view the details of the\n      on-demand rotation.</p>"
                     }
                 }
             },
@@ -4903,7 +4939,7 @@
                     "target": "com.amazonaws.kms#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
                     }
                 }
             },
@@ -5010,7 +5046,7 @@
                     "target": "com.amazonaws.kms#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
                     }
                 }
             }
@@ -5111,7 +5147,99 @@
                     "target": "com.amazonaws.kms#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kms#ListKeyRotations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kms#ListKeyRotationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kms#ListKeyRotationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kms#InvalidArnException"
+                },
+                {
+                    "target": "com.amazonaws.kms#InvalidMarkerException"
+                },
+                {
+                    "target": "com.amazonaws.kms#KMSInternalException"
+                },
+                {
+                    "target": "com.amazonaws.kms#KMSInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.kms#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kms#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about all completed key material rotations for the specified KMS\n      key.</p>\n         <p>You must specify the KMS key in all requests. You can refine the key rotations list by\n      limiting the number of rotations returned.</p>\n         <p>For detailed information about automatic and on-demand key rotations, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">Rotating KMS keys</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListKeyRotations</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>EnableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DisableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKeyRotationStatus</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RotateKeyOnDemand</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "Rotations",
+                    "pageSize": "Limit"
+                }
+            }
+        },
+        "com.amazonaws.kms#ListKeyRotationsRequest": {
+            "type": "structure",
+            "members": {
+                "KeyId": {
+                    "target": "com.amazonaws.kms#KeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Gets the key rotations for the specified KMS key.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.kms#LimitType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this\n    value is present, KMS does not return more than the specified number of items, but it might\n    return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between\n    1 and 1000, inclusive. If you do not include a value, it defaults to 100.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.kms#MarkerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with\n    truncated results. Set it to the value of <code>NextMarker</code> from the truncated response\n    you just received.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kms#ListKeyRotationsResponse": {
+            "type": "structure",
+            "members": {
+                "Rotations": {
+                    "target": "com.amazonaws.kms#RotationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of completed key material rotations.</p>"
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.kms#MarkerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>Truncated</code> is true, this element is present and contains the\n    value to use for the <code>Marker</code> parameter in a subsequent request.</p>"
+                    }
+                },
+                "Truncated": {
+                    "target": "com.amazonaws.kms#BooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
                     }
                 }
             },
@@ -5226,7 +5354,7 @@
                     "target": "com.amazonaws.kms#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
                     }
                 }
             },
@@ -5338,7 +5466,7 @@
                     "target": "com.amazonaws.kms#BooleanType",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in thisresponse to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether there are more items in the list. When this\n    value is true, the list in this response is truncated. To get more items, pass the value of\n    the <code>NextMarker</code> element in this response to the <code>Marker</code> parameter in a\n    subsequent request.</p>"
                     }
                 }
             },
@@ -6270,6 +6398,146 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.kms#RotateKeyOnDemand": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kms#RotateKeyOnDemandRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kms#RotateKeyOnDemandResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kms#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.kms#DependencyTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.kms#DisabledException"
+                },
+                {
+                    "target": "com.amazonaws.kms#InvalidArnException"
+                },
+                {
+                    "target": "com.amazonaws.kms#KMSInternalException"
+                },
+                {
+                    "target": "com.amazonaws.kms#KMSInvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.kms#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kms#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kms#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Immediately initiates rotation of the key material of the specified symmetric encryption\n      KMS key.</p>\n         <p>You can perform <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-on-demand\">on-demand rotation</a>\n      of the key material in customer managed KMS keys, \n      regardless of whether or not <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-enable-disable\">automatic key rotation</a> is enabled.\n      On-demand rotations do not change existing automatic rotation schedules. For example, consider a KMS key that\n      has automatic key rotation enabled with a rotation period of 730 days. If the key is scheduled to \n      automatically rotate on April 14, 2024, and you perform an on-demand rotation on April 10, 2024, the key will automatically rotate,\n      as scheduled, on April 14, 2024 and every 730 days thereafter.</p>\n         <note>\n            <p>You can perform on-demand key rotation a <b>maximum of 10 times</b>\n        per KMS key. You can use the KMS console \n        to view the number of remaining on-demand rotations available for a KMS key.</p>\n         </note>\n         <p>You can use <a>GetKeyRotationStatus</a> to identify any in progress \n      on-demand rotations. You can use <a>ListKeyRotations</a> to identify the date that\n      completed on-demand rotations were performed. You can monitor rotation of the key material \n      for your KMS keys in CloudTrail and Amazon CloudWatch.</p>\n         <p>On-demand key rotation is supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks\">symmetric encryption KMS keys</a>.\n      You cannot perform on-demand rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>,\n      <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, \n      KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To perform\n      on-demand rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>,\n      invoke the on-demand rotation on the primary key.</p>\n         <p>You cannot initiate on-demand rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a>. KMS\n      always rotates the key material of Amazon Web Services managed keys every year. Rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk\">Amazon Web Services owned KMS\n        keys</a> is managed by the Amazon Web Services service that owns the key.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:RotateKeyOnDemand</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>EnableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DisableKeyRotation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKeyRotationStatus</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeyRotations</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To perform on-demand rotation of key material",
+                        "documentation": "The following example immediately initiates rotation of the key material for the specified KMS key.",
+                        "input": {
+                            "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
+                        },
+                        "output": {
+                            "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.kms#RotateKeyOnDemandRequest": {
+            "type": "structure",
+            "members": {
+                "KeyId": {
+                    "target": "com.amazonaws.kms#KeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies a symmetric encryption KMS key. You cannot perform on-demand rotation of <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS keys</a>,\n      <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC KMS keys</a>, \n      KMS keys with <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html\">imported key material</a>, or KMS keys in a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key store</a>. To perform\n      on-demand rotation of a set of related <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate\">multi-Region keys</a>,\n      invoke the on-demand rotation on the primary key.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kms#RotateKeyOnDemandResponse": {
+            "type": "structure",
+            "members": {
+                "KeyId": {
+                    "target": "com.amazonaws.kms#KeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the symmetric encryption KMS key that you initiated on-demand rotation\n      on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.kms#RotationPeriodInDaysType": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 90,
+                    "max": 2560
+                }
+            }
+        },
+        "com.amazonaws.kms#RotationType": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                },
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kms#RotationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kms#RotationsListEntry"
+            }
+        },
+        "com.amazonaws.kms#RotationsListEntry": {
+            "type": "structure",
+            "members": {
+                "KeyId": {
+                    "target": "com.amazonaws.kms#KeyIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the key.</p>"
+                    }
+                },
+                "RotationDate": {
+                    "target": "com.amazonaws.kms#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Date and time that the key material rotation completed. Formatted as Unix time.</p>"
+                    }
+                },
+                "RotationType": {
+                    "target": "com.amazonaws.kms#RotationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies whether the key material rotation was a scheduled <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-enable-disable\">automatic rotation</a> or an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-on-demand\">on-demand rotation</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about completed key material rotations.</p>"
+            }
+        },
         "com.amazonaws.kms#ScheduleKeyDeletion": {
             "type": "operation",
             "input": {
@@ -6808,6 +7076,9 @@
                     "target": "com.amazonaws.kms#ListKeyPolicies"
                 },
                 {
+                    "target": "com.amazonaws.kms#ListKeyRotations"
+                },
+                {
                     "target": "com.amazonaws.kms#ListKeys"
                 },
                 {
@@ -6830,6 +7101,9 @@
                 },
                 {
                     "target": "com.amazonaws.kms#RevokeGrant"
+                },
+                {
+                    "target": "com.amazonaws.kms#RotateKeyOnDemand"
                 },
                 {
                     "target": "com.amazonaws.kms#ScheduleKeyDeletion"
@@ -9132,7 +9406,7 @@
                     "code": "XksProxyUriEndpointInUseException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request was rejected because the <code>XksProxyUriEndpoint</code> is already\n      associated with another external key store in this Amazon Web Services Region. To identify the cause,\n      see the error message that accompanies the exception. </p>",
+                "smithy.api#documentation": "<p>The request was rejected because the <code>XksProxyUriEndpoint</code> is already\n      associated with another external key store in this Amazon Web Services Region. To identify the cause, see\n      the error message that accompanies the exception. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

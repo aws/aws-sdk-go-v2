@@ -47,6 +47,9 @@ type UpdateLensReviewInput struct {
 	// This member is required.
 	WorkloadId *string
 
+	// Configuration of the Jira integration.
+	JiraConfiguration *types.JiraSelectedQuestionConfiguration
+
 	// The notes associated with the workload. For a review template, these are the
 	// notes that will be associated with the workload when the template is applied.
 	LensNotes *string

@@ -69,6 +69,26 @@ func (m *validateOpGetHealthEvent) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInternetEvent struct {
+}
+
+func (*validateOpGetInternetEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInternetEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInternetEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInternetEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMonitor struct {
 }
 
@@ -281,6 +301,10 @@ func addOpGetHealthEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetHealthEvent{}, middleware.After)
 }
 
+func addOpGetInternetEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInternetEvent{}, middleware.After)
+}
+
 func addOpGetMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMonitor{}, middleware.After)
 }
@@ -359,6 +383,21 @@ func validateOpGetHealthEventInput(v *GetHealthEventInput) error {
 	if v.MonitorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MonitorName"))
 	}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInternetEventInput(v *GetInternetEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInternetEventInput"}
 	if v.EventId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
 	}

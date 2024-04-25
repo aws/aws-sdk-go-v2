@@ -56,8 +56,8 @@ type RegisterInstanceInput struct {
 	//   - The attributes that apply to the records that are defined in the service.
 	//   - For each attribute, the applicable value.
 	// Do not include sensitive information in the attributes if the namespace is
-	// discoverable by public DNS queries. Supported attribute keys include the
-	// following: AWS_ALIAS_DNS_NAME If you want Cloud Map to create an Amazon Route 53
+	// discoverable by public DNS queries. The following are the supported attribute
+	// keys. AWS_ALIAS_DNS_NAME If you want Cloud Map to create an Amazon Route 53
 	// alias record that routes traffic to an Elastic Load Balancing load balancer,
 	// specify the DNS name that's associated with the load balancer. For information
 	// about how to get the DNS name, see "DNSName" in the topic AliasTarget (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html)
@@ -74,6 +74,7 @@ type RegisterInstanceInput struct {
 	//   balancers.
 	//   - If you specify a value for AWS_ALIAS_DNS_NAME , don't specify values for any
 	//   of the AWS_INSTANCE attributes.
+	//   - The AWS_ALIAS_DNS_NAME is not supported in the GovCloud (US) Regions.
 	// AWS_EC2_INSTANCE_ID HTTP namespaces only. The Amazon EC2 instance ID for the
 	// instance. If the AWS_EC2_INSTANCE_ID attribute is specified, then the only
 	// other attribute that can be specified is AWS_INIT_HEALTH_STATUS . When the

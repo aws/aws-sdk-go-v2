@@ -25,6 +25,7 @@ import (
 //
 // If successful, Amazon GameLift no longer initiates scaling events except in
 // response to manual changes using UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
+// . To restart fleet actions again, call StartFleetActions (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartFleetActions.html)
 // . Learn more Setting up Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {

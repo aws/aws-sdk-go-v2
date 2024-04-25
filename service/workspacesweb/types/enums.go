@@ -80,6 +80,26 @@ func (IdentityProviderType) Values() []IdentityProviderType {
 	}
 }
 
+type InstanceType string
+
+// Enum values for InstanceType
+const (
+	InstanceTypeStandardRegular InstanceType = "standard.regular"
+	InstanceTypeStandardLarge   InstanceType = "standard.large"
+	InstanceTypeStandardXlarge  InstanceType = "standard.xlarge"
+)
+
+// Values returns all known values for InstanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceType) Values() []InstanceType {
+	return []InstanceType{
+		"standard.regular",
+		"standard.large",
+		"standard.xlarge",
+	}
+}
+
 type PortalStatus string
 
 // Enum values for PortalStatus

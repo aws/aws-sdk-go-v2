@@ -1,3 +1,7 @@
+# v1.11.0 (2024-04-18)
+
+* **Feature**: This release introduces the PutAttributeMapping and DeleteAttributeMapping APIs. IAM Roles Anywhere now provides the capability to define a set of mapping rules, allowing customers to specify which data is extracted from their X.509 end-entity certificates.
+
 # v1.10.0 (2024-04-02)
 
 * **Feature**: This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs.

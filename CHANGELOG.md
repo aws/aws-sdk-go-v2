@@ -1,3 +1,146 @@
+# Release (2024-04-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.37.0](service/datasync/CHANGELOG.md#v1370-2024-04-24)
+  * **Feature**: This change allows users to disable and enable the schedules associated with their tasks.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.159.0](service/ec2/CHANGELOG.md#v11590-2024-04-24)
+  * **Feature**: Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.28.0](service/emrcontainers/CHANGELOG.md#v1280-2024-04-24)
+  * **Feature**: EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.10.0](service/entityresolution/CHANGELOG.md#v1100-2024-04-24)
+  * **Feature**: Support Batch Unique IDs Deletion.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.31.0](service/gamelift/CHANGELOG.md#v1310-2024-04-24)
+  * **Feature**: Amazon GameLift releases container fleets support for public preview. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.50.0](service/ssm/CHANGELOG.md#v1500-2024-04-24)
+  * **Feature**: Add SSM DescribeInstanceProperties API to public AWS SDK.
+
+# Release (2024-04-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.8.0](service/bedrock/CHANGELOG.md#v180-2024-04-23)
+  * **Feature**: This release introduces Model Evaluation and Guardrails for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.8.0](service/bedrockagent/CHANGELOG.md#v180-2024-04-23)
+  * **Feature**: Introducing the ability to create multiple data sources per knowledge base, specify S3 buckets as data sources from external accounts, and exposing levers to define the deletion behavior of the underlying vector store data.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.8.0](service/bedrockagentruntime/CHANGELOG.md#v180-2024-04-23)
+  * **Feature**: This release introduces zero-setup file upload support for the RetrieveAndGenerate API. This allows you to chat with your data without setting up a Knowledge Base.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.8.0](service/bedrockruntime/CHANGELOG.md#v180-2024-04-23)
+  * **Feature**: This release introduces Guardrails for Amazon Bedrock.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.38.0](service/costexplorer/CHANGELOG.md#v1380-2024-04-23)
+  * **Feature**: Added additional metadata that might be applicable to your reservation recommendations.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.158.0](service/ec2/CHANGELOG.md#v11580-2024-04-23)
+  * **Feature**: This release introduces EC2 AMI Deregistration Protection, a new AMI property that can be enabled by customers to protect an AMI against an unintended deregistration. This release also enables the AMI owners to view the AMI 'LastLaunchedTime' in DescribeImages API.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.24.5](service/pi/CHANGELOG.md#v1245-2024-04-23)
+  * **Documentation**: Clarifies how aggregation works for GetResourceMetrics in the Performance Insights API.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.77.2](service/rds/CHANGELOG.md#v1772-2024-04-23)
+  * **Documentation**: Fix the example ARN for ModifyActivityStreamRequest
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.18.0](service/workspacesweb/CHANGELOG.md#v1180-2024-04-23)
+  * **Feature**: Added InstanceType and MaxConcurrentSessions parameters on CreatePortal and UpdatePortal Operations as well as the ability to read Customer Managed Key & Additional Encryption Context parameters on supported resources (Portal, BrowserSettings, UserSettings, IPAccessSettings)
+
+# Release (2024-04-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.7.0](service/bedrockagent/CHANGELOG.md#v170-2024-04-22)
+  * **Feature**: Releasing the support for simplified configuration and return of control
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.7.0](service/bedrockagentruntime/CHANGELOG.md#v170-2024-04-22)
+  * **Feature**: Releasing the support for simplified configuration and return of control
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.10.0](service/paymentcryptography/CHANGELOG.md#v1100-2024-04-22)
+  * **Feature**: Adding support to TR-31/TR-34 exports for optional headers, allowing customers to add additional metadata (such as key version and KSN) when exporting keys from the service.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.17.5](service/redshiftserverless/CHANGELOG.md#v1175-2024-04-22)
+  * **Documentation**: Updates description of schedule field for scheduled actions.
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.0.0](service/route53profiles/CHANGELOG.md#v100-2024-04-22)
+  * **Release**: New AWS service client module
+  * **Feature**: Route 53 Profiles allows you to apply a central DNS configuration across many VPCs regardless of account.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.137.0](service/sagemaker/CHANGELOG.md#v11370-2024-04-22)
+  * **Feature**: This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.29.6](service/servicediscovery/CHANGELOG.md#v1296-2024-04-22)
+  * **Documentation**: This release adds examples to several Cloud Map actions.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.47.0](service/transfer/CHANGELOG.md#v1470-2024-04-22)
+  * **Feature**: Adding new API to support remote directory listing using SFTP connector
+
+# Release (2024-04-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.80.0](service/glue/CHANGELOG.md#v1800-2024-04-19)
+  * **Feature**: Adding RowFilter in the response for GetUnfilteredTableMetadata API
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.14.0](service/internetmonitor/CHANGELOG.md#v1140-2024-04-19)
+  * **Feature**: This update introduces the GetInternetEvent and ListInternetEvents APIs, which provide access to internet events displayed on the Amazon CloudWatch Internet Weather Map.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.33.0](service/personalize/CHANGELOG.md#v1330-2024-04-19)
+  * **Feature**: This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign
+
+# Release (2024-04-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.26.0](service/drs/CHANGELOG.md#v1260-2024-04-18)
+  * **Feature**: Outpost ARN added to Source Server and Recovery Instance
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.19.0](service/emrserverless/CHANGELOG.md#v1190-2024-04-18)
+  * **Feature**: This release adds the capability to publish detailed Spark engine metrics to Amazon Managed Service for Prometheus (AMP) for  enhanced monitoring for Spark jobs.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.42.0](service/guardduty/CHANGELOG.md#v1420-2024-04-18)
+  * **Feature**: Added IPv6Address fields for local and remote IP addresses
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.62.0](service/quicksight/CHANGELOG.md#v1620-2024-04-18)
+  * **Feature**: This release adds support for the Cross Sheet Filter and Control features, and support for warnings in asset imports for any permitted errors encountered during execution
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.11.0](service/rolesanywhere/CHANGELOG.md#v1110-2024-04-18)
+  * **Feature**: This release introduces the PutAttributeMapping and DeleteAttributeMapping APIs. IAM Roles Anywhere now provides the capability to define a set of mapping rules, allowing customers to specify which data is extracted from their X.509 end-entity certificates.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.136.0](service/sagemaker/CHANGELOG.md#v11360-2024-04-18)
+  * **Feature**: Removed deprecated enum values and updated API documentation.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.39.0](service/workspaces/CHANGELOG.md#v1390-2024-04-18)
+  * **Feature**: Adds new APIs for managing and sharing WorkSpaces BYOL configuration across accounts.
+
+# Release (2024-04-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.157.0](service/ec2/CHANGELOG.md#v11570-2024-04-17)
+  * **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.5.0](service/qbusiness/CHANGELOG.md#v150-2024-04-17)
+  * **Feature**: This release adds support for IAM Identity Center (IDC) as the identity gateway for Q Business. It also allows users to provide an explicit intent for Q Business to identify how the Chat request should be handled.
+
+# Release (2024-04-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.6.0](service/bedrockagent/CHANGELOG.md#v160-2024-04-16)
+  * **Feature**: For Create Agent API, the agentResourceRoleArn parameter is no longer required.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.18.0](service/emrserverless/CHANGELOG.md#v1180-2024-04-16)
+  * **Feature**: This release adds support for shuffle optimized disks that allow larger disk sizes and higher IOPS to efficiently run shuffle heavy workloads.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.9.0](service/entityresolution/CHANGELOG.md#v190-2024-04-16)
+  * **Feature**: Cross Account Resource Support .
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.38.0](service/iotwireless/CHANGELOG.md#v1380-2024-04-16)
+  * **Feature**: Add PublicGateways in the GetWirelessStatistics call response, indicating the LoRaWAN public network accessed by the device.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.32.0](service/lakeformation/CHANGELOG.md#v1320-2024-04-16)
+  * **Feature**: This release adds Lake Formation managed RAM support for the 4 APIs - "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration"
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.13.0](service/m2/CHANGELOG.md#v1130-2024-04-16)
+  * **Feature**: Adding new ListBatchJobRestartPoints API and support for restart batch job.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.11.0](service/mediapackagev2/CHANGELOG.md#v1110-2024-04-16)
+  * **Feature**: Dash v2 is a MediaPackage V2 feature to support egressing on DASH manifest format.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.39.0](service/outposts/CHANGELOG.md#v1390-2024-04-16)
+  * **Feature**: This release adds new APIs to allow customers to configure their Outpost capacity at order-time.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.30.0](service/wellarchitected/CHANGELOG.md#v1300-2024-04-16)
+  * **Feature**: AWS Well-Architected now has a Connector for Jira to allow customers to efficiently track workload risks and improvement efforts and create closed-loop mechanisms.
+
+# Release (2024-04-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.50.0](service/cloudformation/CHANGELOG.md#v1500-2024-04-12)
+  * **Feature**: Adding support for the new parameter "IncludePropertyValues" in the CloudFormation DescribeChangeSet API. When this parameter is included, the DescribeChangeSet response will include more detailed information such as before and after values for the resource properties that will change.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.46.5](service/configservice/CHANGELOG.md#v1465-2024-04-12)
+  * **Documentation**: Updates documentation for AWS Config
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.79.0](service/glue/CHANGELOG.md#v1790-2024-04-12)
+  * **Feature**: Modifying request for GetUnfilteredTableMetadata for view-related fields.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.24.0](service/healthlake/CHANGELOG.md#v1240-2024-04-12)
+  * **Feature**: Added new CREATE_FAILED status for data stores. Added new errorCause to DescribeFHIRDatastore API and ListFHIRDatastores API response for additional insights into data store creation and deletion workflows.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleethub`: [v1.20.5](service/iotfleethub/CHANGELOG.md#v1205-2024-04-12)
+  * **Documentation**: Documentation updates for AWS IoT Fleet Hub to clarify that Fleet Hub supports organization instance of IAM Identity Center.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.31.0](service/kms/CHANGELOG.md#v1310-2024-04-12)
+  * **Feature**: This feature supports the ability to specify a custom rotation period for automatic key rotations, the ability to perform on-demand key rotations, and visibility into your key material rotations.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.38.0](service/mediatailor/CHANGELOG.md#v1380-2024-04-12)
+  * **Feature**: Added InsertionMode to PlaybackConfigurations. This setting controls whether players can use stitched or guided ad insertion. The default for players that do not specify an insertion mode is stitched.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.8.1](service/neptunegraph/CHANGELOG.md#v181-2024-04-12)
+  * **Documentation**: Update to API documentation to resolve customer reported issues.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.38.0](service/outposts/CHANGELOG.md#v1380-2024-04-12)
+  * **Feature**: This release adds EXPEDITORS as a valid shipment carrier.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.44.0](service/redshift/CHANGELOG.md#v1440-2024-04-12)
+  * **Feature**: Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.46.0](service/transfer/CHANGELOG.md#v1460-2024-04-12)
+  * **Feature**: This change releases support for importing self signed certificates to the Transfer Family for sending outbound file transfers over TLS/HTTPS.
+
 # Release (2024-04-11)
 
 ## Module Highlights

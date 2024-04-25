@@ -1635,6 +1635,9 @@ type LocalIpDetails struct {
 	// The IPv4 local address of the connection.
 	IpAddressV4 *string
 
+	// The IPv6 local address of the connection.
+	IpAddressV6 *string
+
 	noSmithyDocumentSerde
 }
 
@@ -2513,6 +2516,9 @@ type RemoteIpDetails struct {
 
 	// The IPv4 remote address of the connection.
 	IpAddressV4 *string
+
+	// The IPv6 remote address of the connection.
+	IpAddressV6 *string
 
 	// The ISP organization information of the remote IP address.
 	Organization *Organization

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes chat controls configured for an existing Amazon Q application.
+// Deletes chat controls configured for an existing Amazon Q Business application.
 func (c *Client) DeleteChatControlsConfiguration(ctx context.Context, params *DeleteChatControlsConfigurationInput, optFns ...func(*Options)) (*DeleteChatControlsConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteChatControlsConfigurationInput{}

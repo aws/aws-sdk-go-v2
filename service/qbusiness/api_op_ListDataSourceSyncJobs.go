@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Get information about an Amazon Q data source connector synchronization.
+// Get information about an Amazon Q Business data source connector
+// synchronization.
 func (c *Client) ListDataSourceSyncJobs(ctx context.Context, params *ListDataSourceSyncJobsInput, optFns ...func(*Options)) (*ListDataSourceSyncJobsOutput, error) {
 	if params == nil {
 		params = &ListDataSourceSyncJobsInput{}
@@ -30,7 +31,8 @@ func (c *Client) ListDataSourceSyncJobs(ctx context.Context, params *ListDataSou
 
 type ListDataSourceSyncJobsInput struct {
 
-	// The identifier of the Amazon Q application connected to the data source.
+	// The identifier of the Amazon Q Business application connected to the data
+	// source.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -40,7 +42,8 @@ type ListDataSourceSyncJobsInput struct {
 	// This member is required.
 	DataSourceId *string
 
-	// The identifier of the index used with the Amazon Q data source connector.
+	// The identifier of the index used with the Amazon Q Business data source
+	// connector.
 	//
 	// This member is required.
 	IndexId *string
@@ -52,8 +55,8 @@ type ListDataSourceSyncJobsInput struct {
 	MaxResults *int32
 
 	// If the maxResults response was incpmplete because there is more data to
-	// retriever, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of responses.
+	// retriever, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of responses.
 	NextToken *string
 
 	// The start time of the data source connector sync.
@@ -71,8 +74,8 @@ type ListDataSourceSyncJobsOutput struct {
 	// A history of synchronization jobs for the data source connector.
 	History []types.DataSourceSyncJob
 
-	// If the response is truncated, Amazon Q returns this token. You can use this
-	// token in any subsequent request to retrieve the next set of jobs.
+	// If the response is truncated, Amazon Q Business returns this token. You can use
+	// this token in any subsequent request to retrieve the next set of jobs.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

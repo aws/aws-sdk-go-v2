@@ -2167,6 +2167,20 @@ func awsRestjson1_deserializeOpDocumentDescribeLakeFormationIdentityCenterConfig
 				sv.InstanceArn = ptr.String(jtv)
 			}
 
+		case "ResourceShare":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RAMResourceShareArn to be of type string, got %T instead", value)
+				}
+				sv.ResourceShare = ptr.String(jtv)
+			}
+
+		case "ShareRecipients":
+			if err := awsRestjson1_deserializeDocumentDataLakePrincipalList(&sv.ShareRecipients, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

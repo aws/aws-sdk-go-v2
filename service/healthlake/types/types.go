@@ -63,6 +63,9 @@ type DatastoreProperties struct {
 	// The user-generated name for the data store.
 	DatastoreName *string
 
+	// The error cause for the current data store operation.
+	ErrorCause *ErrorCause
+
 	// The identity provider that you selected when you created the data store.
 	IdentityProviderConfiguration *IdentityProviderConfiguration
 
@@ -73,6 +76,19 @@ type DatastoreProperties struct {
 	// The server-side encryption key configuration for a customer provided encryption
 	// key (CMK).
 	SseConfiguration *SseConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The error info of the create/delete data store operation.
+type ErrorCause struct {
+
+	// The error category of the create/delete data store operation. Possible statuses
+	// are RETRYABLE_ERROR or NON_RETRYABLE_ERROR.
+	ErrorCategory ErrorCategory
+
+	// The text of the error message.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }

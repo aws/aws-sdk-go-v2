@@ -17,10 +17,11 @@ import (
 // group your data by various dimensions, such as SERVICE or AZ , in a specific
 // time range. For a complete list of valid dimensions, see the GetDimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
 // operation. Management account in an organization in Organizations have access to
-// all member accounts. This API is currently available for the Amazon Elastic
-// Compute Cloud – Compute service only. This is an opt-in only feature. You can
-// enable this feature from the Cost Explorer Settings page. For information about
-// how to access the Settings page, see Controlling Access for Cost Explorer (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html)
+// all member accounts. Hourly granularity is only available for EC2-Instances
+// (Elastic Compute Cloud) resource-level data. All other resource-level data is
+// available at daily granularity. This is an opt-in only feature. You can enable
+// this feature from the Cost Explorer Settings page. For information about how to
+// access the Settings page, see Controlling Access for Cost Explorer (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html)
 // in the Billing and Cost Management User Guide.
 func (c *Client) GetCostAndUsageWithResources(ctx context.Context, params *GetCostAndUsageWithResourcesInput, optFns ...func(*Options)) (*GetCostAndUsageWithResourcesOutput, error) {
 	if params == nil {

@@ -35,6 +35,70 @@
                 "smithy.api#pattern": "^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$"
             }
         },
+        "com.amazonaws.workspaces#AcceptAccountLinkInvitation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#AcceptAccountLinkInvitationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#AcceptAccountLinkInvitationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Accepts the account link invitation.</p>\n         <important>\n            <p>There's currently no unlinking capability after you accept the account linking invitation.</p>\n         </important>"
+            }
+        },
+        "com.amazonaws.workspaces#AcceptAccountLinkInvitationRequest": {
+            "type": "structure",
+            "members": {
+                "LinkId": {
+                    "target": "com.amazonaws.workspaces#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the account link.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.workspaces#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#AcceptAccountLinkInvitationResult": {
+            "type": "structure",
+            "members": {
+                "AccountLink": {
+                    "target": "com.amazonaws.workspaces#AccountLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the account link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspaces#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -60,6 +124,79 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DENY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#AccountLink": {
+            "type": "structure",
+            "members": {
+                "AccountLinkId": {
+                    "target": "com.amazonaws.workspaces#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the account link.</p>"
+                    }
+                },
+                "AccountLinkStatus": {
+                    "target": "com.amazonaws.workspaces#AccountLinkStatusEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the account link.</p>"
+                    }
+                },
+                "SourceAccountId": {
+                    "target": "com.amazonaws.workspaces#AwsAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the source account.</p>"
+                    }
+                },
+                "TargetAccountId": {
+                    "target": "com.amazonaws.workspaces#AwsAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the target account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about about the account link.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#AccountLinkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#AccountLink"
+            }
+        },
+        "com.amazonaws.workspaces#AccountLinkStatusEnum": {
+            "type": "enum",
+            "members": {
+                "LINKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKED"
+                    }
+                },
+                "LINKING_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINKING_FAILED"
+                    }
+                },
+                "LINK_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINK_NOT_FOUND"
+                    }
+                },
+                "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
                     }
                 }
             }
@@ -987,6 +1124,12 @@
                 "smithy.api#documentation": "<p>Information about the Amazon WorkSpaces client.</p>"
             }
         },
+        "com.amazonaws.workspaces#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^.{1,64}$"
+            }
+        },
         "com.amazonaws.workspaces#ClientUrl": {
             "type": "string",
             "traits": {
@@ -1086,6 +1229,18 @@
         },
         "com.amazonaws.workspaces#ComputerName": {
             "type": "string"
+        },
+        "com.amazonaws.workspaces#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspaces#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The <code>TargetAccountId</code> is already linked or invited.</p>",
+                "smithy.api#error": "client"
+            }
         },
         "com.amazonaws.workspaces#ConnectClientAddIn": {
             "type": "structure",
@@ -1424,6 +1579,67 @@
                     "target": "com.amazonaws.workspaces#WorkspaceImageId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the image.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.workspaces#CreateAccountLinkInvitation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#CreateAccountLinkInvitationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#CreateAccountLinkInvitationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the account link invitation.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#CreateAccountLinkInvitationRequest": {
+            "type": "structure",
+            "members": {
+                "TargetAccountId": {
+                    "target": "com.amazonaws.workspaces#AwsAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the target account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.workspaces#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#CreateAccountLinkInvitationResult": {
+            "type": "structure",
+            "members": {
+                "AccountLink": {
+                    "target": "com.amazonaws.workspaces#AccountLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the account link.</p>"
                     }
                 }
             },
@@ -2164,6 +2380,23 @@
                 "smithy.api#documentation": "<p>Describes the data replication settings.</p>"
             }
         },
+        "com.amazonaws.workspaces#DedicatedTenancyAccountType": {
+            "type": "enum",
+            "members": {
+                "SOURCE_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOURCE_ACCOUNT"
+                    }
+                },
+                "TARGET_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_ACCOUNT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#DedicatedTenancyCidrRangeList": {
             "type": "list",
             "member": {
@@ -2397,6 +2630,70 @@
                         "smithy.api#enumValue": "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
                     }
                 }
+            }
+        },
+        "com.amazonaws.workspaces#DeleteAccountLinkInvitation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#DeleteAccountLinkInvitationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#DeleteAccountLinkInvitationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the account link invitation.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#DeleteAccountLinkInvitationRequest": {
+            "type": "structure",
+            "members": {
+                "LinkId": {
+                    "target": "com.amazonaws.workspaces#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the account link.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.workspaces#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#DeleteAccountLinkInvitationResult": {
+            "type": "structure",
+            "members": {
+                "AccountLink": {
+                    "target": "com.amazonaws.workspaces#AccountLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the account link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DeleteClientBranding": {
@@ -2952,6 +3249,12 @@
                     "target": "com.amazonaws.workspaces#DedicatedTenancyManagementCidrRange",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address range, specified as an IPv4 CIDR block, used for the management network\n         interface.</p>\n         <p>The management network interface is connected to a secure Amazon WorkSpaces management\n         network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces\n         clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
+                    }
+                },
+                "DedicatedTenancyAccountType": {
+                    "target": "com.amazonaws.workspaces#DedicatedTenancyAccountType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of linked account.</p>"
                     }
                 }
             },
@@ -4665,6 +4968,66 @@
                 "smithy.api#documentation": "<p>Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>),\n         rebuilt (<a>RebuildWorkspaces</a>), restored (<a>RestoreWorkspace</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>"
             }
         },
+        "com.amazonaws.workspaces#GetAccountLink": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#GetAccountLinkRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#GetAccountLinkResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves account link information.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#GetAccountLinkRequest": {
+            "type": "structure",
+            "members": {
+                "LinkId": {
+                    "target": "com.amazonaws.workspaces#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the account to link.</p>"
+                    }
+                },
+                "LinkedAccountId": {
+                    "target": "com.amazonaws.workspaces#AwsAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the account link</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#GetAccountLinkResult": {
+            "type": "structure",
+            "members": {
+                "AccountLink": {
+                    "target": "com.amazonaws.workspaces#AccountLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account link of the account link to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspaces#ImageAssociatedResourceType": {
             "type": "enum",
             "members": {
@@ -4998,6 +5361,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.workspaces#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspaces#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unexpected server error occured.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.workspaces#InvalidParameterValuesException": {
             "type": "structure",
             "members": {
@@ -5218,6 +5593,93 @@
                     "min": 1,
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.workspaces#LinkId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^link-.{8,24}$"
+            }
+        },
+        "com.amazonaws.workspaces#LinkStatusFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#AccountLinkStatusEnum"
+            }
+        },
+        "com.amazonaws.workspaces#ListAccountLinks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#ListAccountLinksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#ListAccountLinksResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all account links.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AccountLinks",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.workspaces#ListAccountLinksRequest": {
+            "type": "structure",
+            "members": {
+                "LinkStatusFilter": {
+                    "target": "com.amazonaws.workspaces#LinkStatusFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the account based on their link status.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workspaces#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.workspaces#Limit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of accounts to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#ListAccountLinksResult": {
+            "type": "structure",
+            "members": {
+                "AccountLinks": {
+                    "target": "com.amazonaws.workspaces#AccountLinkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the account links.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.workspaces#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#ListAvailableManagementCidrRanges": {
@@ -6476,6 +6938,70 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#RejectAccountLinkInvitation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#RejectAccountLinkInvitationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#RejectAccountLinkInvitationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Rejects the account link invitation.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#RejectAccountLinkInvitationRequest": {
+            "type": "structure",
+            "members": {
+                "LinkId": {
+                    "target": "com.amazonaws.workspaces#LinkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the account link</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.workspaces#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token of the account link invitation to reject.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.workspaces#RejectAccountLinkInvitationResult": {
+            "type": "structure",
+            "members": {
+                "AccountLink": {
+                    "target": "com.amazonaws.workspaces#AccountLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the account link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.workspaces#RelatedWorkspaceProperties": {
             "type": "structure",
             "members": {
@@ -7712,6 +8238,18 @@
         },
         "com.amazonaws.workspaces#UserVolumeSizeGib": {
             "type": "integer"
+        },
+        "com.amazonaws.workspaces#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workspaces#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You either haven't provided a <code>TargetAccountId</code> or \n         are using the same value for <code>TargetAccountId</code> and <code>SourceAccountId</code>.</p>",
+                "smithy.api#error": "client"
+            }
         },
         "com.amazonaws.workspaces#VolumeEncryptionKey": {
             "type": "string"
@@ -9189,6 +9727,9 @@
             "version": "2015-04-08",
             "operations": [
                 {
+                    "target": "com.amazonaws.workspaces#AcceptAccountLinkInvitation"
+                },
+                {
                     "target": "com.amazonaws.workspaces#AssociateConnectionAlias"
                 },
                 {
@@ -9202,6 +9743,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#CopyWorkspaceImage"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#CreateAccountLinkInvitation"
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateConnectClientAddIn"
@@ -9229,6 +9773,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateWorkspaces"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#DeleteAccountLinkInvitation"
                 },
                 {
                     "target": "com.amazonaws.workspaces#DeleteClientBranding"
@@ -9330,10 +9877,16 @@
                     "target": "com.amazonaws.workspaces#DisassociateWorkspaceApplication"
                 },
                 {
+                    "target": "com.amazonaws.workspaces#GetAccountLink"
+                },
+                {
                     "target": "com.amazonaws.workspaces#ImportClientBranding"
                 },
                 {
                     "target": "com.amazonaws.workspaces#ImportWorkspaceImage"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ListAccountLinks"
                 },
                 {
                     "target": "com.amazonaws.workspaces#ListAvailableManagementCidrRanges"
@@ -9376,6 +9929,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#RegisterWorkspaceDirectory"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#RejectAccountLinkInvitation"
                 },
                 {
                     "target": "com.amazonaws.workspaces#RestoreWorkspace"

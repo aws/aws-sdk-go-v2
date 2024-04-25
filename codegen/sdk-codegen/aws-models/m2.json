@@ -120,6 +120,9 @@
                     "target": "com.amazonaws.m2#ListBatchJobExecutions"
                 },
                 {
+                    "target": "com.amazonaws.m2#ListBatchJobRestartPoints"
+                },
+                {
                     "target": "com.amazonaws.m2#ListDataSetImportHistory"
                 },
                 {
@@ -1224,6 +1227,10 @@
                         "name": "FAILED"
                     },
                     {
+                        "value": "Purged",
+                        "name": "PURGED"
+                    },
+                    {
                         "value": "Succeeded With Warning",
                         "name": "SUCCEEDED_WITH_WARNING"
                     }
@@ -1328,6 +1335,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies an Amazon S3 location that identifies the batch jobs that you want to run. Use this identifier to run ad hoc batch jobs.</p>"
                     }
+                },
+                "restartBatchJobIdentifier": {
+                    "target": "com.amazonaws.m2#RestartBatchJobIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the required information for restart, including execution ID and jobsteprestartmarker.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1348,6 +1361,12 @@
                     "min": 0,
                     "max": 500
                 }
+            }
+        },
+        "com.amazonaws.m2#BatchJobStepList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.m2#JobStep"
             }
         },
         "com.amazonaws.m2#BatchJobType": {
@@ -3381,6 +3400,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of this batch job.</p>"
                     }
+                },
+                "jobStepRestartMarker": {
+                    "target": "com.amazonaws.m2#JobStepRestartMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The restart steps information for the most recent restart operation.</p>"
+                    }
                 }
             }
         },
@@ -4039,6 +4064,86 @@
                 "smithy.api#documentation": "<p>Identifies a specific batch job.</p>"
             }
         },
+        "com.amazonaws.m2#JobStep": {
+            "type": "structure",
+            "members": {
+                "stepNumber": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of a step.</p>"
+                    }
+                },
+                "stepName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a step.</p>"
+                    }
+                },
+                "procStepNumber": {
+                    "target": "com.amazonaws.m2#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of a procedure step.</p>"
+                    }
+                },
+                "procStepName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a procedure step.</p>"
+                    }
+                },
+                "stepCondCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition code of a step.</p>"
+                    }
+                },
+                "stepRestartable": {
+                    "target": "com.amazonaws.m2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies if a step can be restarted or not.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information related to a job step.</p>"
+            }
+        },
+        "com.amazonaws.m2#JobStepRestartMarker": {
+            "type": "structure",
+            "members": {
+                "fromStep": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The step name that a batch job restart was from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fromProcStep": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The procedure step name that a job was restarted from.</p>"
+                    }
+                },
+                "toStep": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The step name that a job was restarted to.</p>"
+                    }
+                },
+                "toProcStep": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The procedure step name that a batch job was restarted to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides restart step information for the most recent restart operation.</p>"
+            }
+        },
         "com.amazonaws.m2#ListApplicationVersions": {
             "type": "operation",
             "input": {
@@ -4457,6 +4562,83 @@
                         "smithy.api#documentation": "<p>A pagination token that's returned when the response doesn't contain all batch job\n         executions.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.m2#ListBatchJobRestartPoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.m2#ListBatchJobRestartPointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.m2#ListBatchJobRestartPointsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.m2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.m2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Lists all the job steps for JCL files to restart a batch job. This is only applicable for Micro Focus engine with versions 8.0.6 and above.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{applicationId}/batch-job-executions/{executionId}/steps",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.m2#ListBatchJobRestartPointsRequest": {
+            "type": "structure",
+            "members": {
+                "applicationId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of each batch job execution.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.m2#ListBatchJobRestartPointsResponse": {
+            "type": "structure",
+            "members": {
+                "batchJobSteps": {
+                    "target": "com.amazonaws.m2#BatchJobStepList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns all the batch job steps and related information for a batch job that previously ran.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.m2#ListDataSetImportHistory": {
@@ -5281,6 +5463,28 @@
                 "smithy.api#documentation": "<p>The specified resource was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.m2#RestartBatchJobIdentifier": {
+            "type": "structure",
+            "members": {
+                "executionId": {
+                    "target": "com.amazonaws.m2#Identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The executionId from the StartBatchJob response when the job ran for the first time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStepRestartMarker": {
+                    "target": "com.amazonaws.m2#JobStepRestartMarker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The restart step information for the most recent restart operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An identifier for the StartBatchJob API to show that it is a restart operation.</p>"
             }
         },
         "com.amazonaws.m2#S3BatchJobIdentifier": {
@@ -6143,6 +6347,14 @@
                     {
                         "value": "cannotParse",
                         "name": "CANNOT_PARSE"
+                    },
+                    {
+                        "value": "featureNotAvailable",
+                        "name": "FEATURE_NOT_AVAILABLE"
+                    },
+                    {
+                        "value": "unsupportedEngineVersion",
+                        "name": "UNSUPPORTED_ENGINE_VERSION"
                     },
                     {
                         "value": "fieldValidationFailed",

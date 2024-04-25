@@ -1,3 +1,7 @@
+# v1.39.0 (2024-04-18)
+
+* **Feature**: Adds new APIs for managing and sharing WorkSpaces BYOL configuration across accounts.
+
 # v1.38.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

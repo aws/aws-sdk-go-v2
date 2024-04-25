@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the retriever used by an Amazon Q application.
+// Deletes the retriever used by an Amazon Q Business application.
 func (c *Client) DeleteRetriever(ctx context.Context, params *DeleteRetrieverInput, optFns ...func(*Options)) (*DeleteRetrieverOutput, error) {
 	if params == nil {
 		params = &DeleteRetrieverInput{}
@@ -28,7 +28,7 @@ func (c *Client) DeleteRetriever(ctx context.Context, params *DeleteRetrieverInp
 
 type DeleteRetrieverInput struct {
 
-	// The identifier of the Amazon Q application using the retriever.
+	// The identifier of the Amazon Q Business application using the retriever.
 	//
 	// This member is required.
 	ApplicationId *string

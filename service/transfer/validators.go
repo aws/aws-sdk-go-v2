@@ -770,6 +770,26 @@ func (m *validateOpSendWorkflowStepState) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartDirectoryListing struct {
+}
+
+func (*validateOpStartDirectoryListing) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDirectoryListing) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDirectoryListingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDirectoryListingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartFileTransfer struct {
 }
 
@@ -1220,6 +1240,10 @@ func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSendWorkflowStepStateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendWorkflowStepState{}, middleware.After)
+}
+
+func addOpStartDirectoryListingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDirectoryListing{}, middleware.After)
 }
 
 func addOpStartFileTransferValidationMiddleware(stack *middleware.Stack) error {
@@ -2270,6 +2294,27 @@ func validateOpSendWorkflowStepStateInput(v *SendWorkflowStepStateInput) error {
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDirectoryListingInput(v *StartDirectoryListingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDirectoryListingInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if v.RemoteDirectoryPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RemoteDirectoryPath"))
+	}
+	if v.OutputDirectoryPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDirectoryPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

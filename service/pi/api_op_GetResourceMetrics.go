@@ -14,9 +14,9 @@ import (
 
 // Retrieve Performance Insights metrics for a set of data sources over a time
 // period. You can provide specific dimension groups and dimensions, and provide
-// aggregation and filtering criteria for each group. Each response element returns
-// a maximum of 500 bytes. For larger elements, such as SQL statements, only the
-// first 500 bytes are returned.
+// filtering criteria for each group. You must specify an aggregate function for
+// each metric. Each response element returns a maximum of 500 bytes. For larger
+// elements, such as SQL statements, only the first 500 bytes are returned.
 func (c *Client) GetResourceMetrics(ctx context.Context, params *GetResourceMetricsInput, optFns ...func(*Options)) (*GetResourceMetricsOutput, error) {
 	if params == nil {
 		params = &GetResourceMetricsInput{}
@@ -53,8 +53,11 @@ type GetResourceMetricsInput struct {
 	Identifier *string
 
 	// An array of one or more queries to perform. Each query must specify a
-	// Performance Insights metric, and can optionally specify aggregation and
-	// filtering criteria.
+	// Performance Insights metric and specify an aggregate function, and you can
+	// provide filtering criteria. You must append the aggregate function to the
+	// metric. For example, to find the average for the metric db.load you must use
+	// db.load.avg . Valid values for aggregate functions include .avg , .min , .max ,
+	// and .sum .
 	//
 	// This member is required.
 	MetricQueries []types.MetricQuery

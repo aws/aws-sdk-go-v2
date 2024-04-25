@@ -50,6 +50,26 @@ func (m *validateOpCreateTrustAnchor) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAttributeMapping struct {
+}
+
+func (*validateOpDeleteAttributeMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAttributeMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAttributeMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAttributeMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCrl struct {
 }
 
@@ -350,6 +370,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAttributeMapping struct {
+}
+
+func (*validateOpPutAttributeMapping) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAttributeMapping) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAttributeMappingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAttributeMappingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutNotificationSettings struct {
 }
 
@@ -498,6 +538,10 @@ func addOpCreateTrustAnchorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTrustAnchor{}, middleware.After)
 }
 
+func addOpDeleteAttributeMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAttributeMapping{}, middleware.After)
+}
+
 func addOpDeleteCrlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCrl{}, middleware.After)
 }
@@ -558,6 +602,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutAttributeMappingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAttributeMapping{}, middleware.After)
+}
+
 func addOpPutNotificationSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutNotificationSettings{}, middleware.After)
 }
@@ -584,6 +632,38 @@ func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateTrustAnchorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTrustAnchor{}, middleware.After)
+}
+
+func validateMappingRule(v *types.MappingRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MappingRule"}
+	if v.Specifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Specifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMappingRules(v []types.MappingRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MappingRules"}
+	for i := range v {
+		if err := validateMappingRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateNotificationSetting(v *types.NotificationSetting) error {
@@ -731,6 +811,24 @@ func validateOpCreateTrustAnchorInput(v *CreateTrustAnchorInput) error {
 		if err := validateNotificationSettings(v.NotificationSettings); err != nil {
 			invalidParams.AddNested("NotificationSettings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAttributeMappingInput(v *DeleteAttributeMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAttributeMappingInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if len(v.CertificateField) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateField"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -967,6 +1065,31 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAttributeMappingInput(v *PutAttributeMappingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAttributeMappingInput"}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if len(v.CertificateField) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateField"))
+	}
+	if v.MappingRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MappingRules"))
+	} else if v.MappingRules != nil {
+		if err := validateMappingRules(v.MappingRules); err != nil {
+			invalidParams.AddNested("MappingRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

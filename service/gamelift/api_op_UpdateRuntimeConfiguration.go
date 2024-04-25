@@ -11,18 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the current runtime configuration for the specified fleet, which tells
-// Amazon GameLift how to launch server processes on all instances in the fleet.
-// You can update a fleet's runtime configuration at any time after the fleet is
-// created; it does not need to be in ACTIVE status. To update runtime
-// configuration, specify the fleet ID and provide a RuntimeConfiguration with an
-// updated set of server process configurations. If successful, the fleet's runtime
-// configuration settings are updated. Each instance in the fleet regularly checks
-// for and retrieves updated runtime configurations. Instances immediately begin
-// complying with the new configuration by launching new server processes or not
-// replacing existing processes when they shut down. Updating a fleet's runtime
-// configuration never affects existing server processes. Learn more Setting up
-// Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Updates the runtime configuration for the specified fleet. The runtime
+// configuration tells Amazon GameLift how to launch server processes on computes
+// in the fleet. For managed EC2 fleets, it determines what server processes to run
+// on each fleet instance. For container fleets, it describes what server processes
+// to run in each replica container group. You can update a fleet's runtime
+// configuration at any time after the fleet is created; it does not need to be in
+// ACTIVE status. To update runtime configuration, specify the fleet ID and provide
+// a RuntimeConfiguration with an updated set of server process configurations. If
+// successful, the fleet's runtime configuration settings are updated. Fleet
+// computes that run game server processes regularly check for and receive updated
+// runtime configurations. The computes immediately take action to comply with the
+// new configuration by launching new server processes or by not replacing existing
+// processes when they shut down. Updating a fleet's runtime configuration never
+// affects existing server processes. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
 func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateRuntimeConfigurationInput, optFns ...func(*Options)) (*UpdateRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateRuntimeConfigurationInput{}
@@ -46,11 +48,10 @@ type UpdateRuntimeConfigurationInput struct {
 	// This member is required.
 	FleetId *string
 
-	// Instructions for launching server processes on each instance in the fleet.
-	// Server processes run either a custom game build executable or a Realtime Servers
-	// script. The runtime configuration lists the types of server processes to run on
-	// an instance, how to launch them, and the number of processes to run
-	// concurrently.
+	// Instructions for launching server processes on fleet computes. Server processes
+	// run either a custom game build executable or a Realtime Servers script. The
+	// runtime configuration lists the types of server processes to run, how to launch
+	// them, and the number of processes to run concurrently.
 	//
 	// This member is required.
 	RuntimeConfiguration *types.RuntimeConfiguration
@@ -60,8 +61,8 @@ type UpdateRuntimeConfigurationInput struct {
 
 type UpdateRuntimeConfigurationOutput struct {
 
-	// The runtime configuration currently in use by all instances in the fleet. If
-	// the update was successful, all property changes are shown.
+	// The runtime configuration currently in use by computes in the fleet. If the
+	// update is successful, all property changes are shown.
 	RuntimeConfiguration *types.RuntimeConfiguration
 
 	// Metadata pertaining to the operation's result.

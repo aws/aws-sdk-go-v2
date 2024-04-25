@@ -42,12 +42,6 @@ type CreateIdMappingWorkflowInput struct {
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
 
-	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
-	// OutputS3Path and Output .
-	//
-	// This member is required.
-	OutputSourceConfig []types.IdMappingWorkflowOutputSource
-
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
 	// role to create resources on your behalf as part of workflow execution.
 	//
@@ -62,6 +56,10 @@ type CreateIdMappingWorkflowInput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
+	// OutputS3Path and Output .
+	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
@@ -82,12 +80,6 @@ type CreateIdMappingWorkflowOutput struct {
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
 
-	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
-	// OutputS3Path and Output .
-	//
-	// This member is required.
-	OutputSourceConfig []types.IdMappingWorkflowOutputSource
-
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
 	// role to create resources on your behalf as part of workflow execution.
 	//
@@ -107,6 +99,10 @@ type CreateIdMappingWorkflowOutput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
+	// OutputS3Path and Output .
+	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

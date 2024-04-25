@@ -40,7 +40,13 @@
                 "lambda": {
                     "target": "com.amazonaws.bedrockagent#LambdaArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                    }
+                },
+                "customControl": {
+                    "target": "com.amazonaws.bedrockagent#CustomControlMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To return the action group invocation results directly in the <code>InvokeAgent</code> response, specify <code>RETURN_CONTROL</code>.</p>"
                     }
                 }
             },
@@ -169,7 +175,7 @@
                 "agentArn": {
                     "target": "com.amazonaws.bedrockagent#AgentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the agent.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -221,14 +227,14 @@
                 "agentResourceRoleArn": {
                     "target": "com.amazonaws.bedrockagent#AgentRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to call API operations on the agent. The ARN must begin with <code>AmazonBedrockExecutionRoleForAgents_</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key that encrypts the agent.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.</p>"
                     }
                 },
                 "createdAt": {
@@ -340,13 +346,19 @@
                 "actionGroupExecutor": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
                     }
                 },
                 "apiSchema": {
                     "target": "com.amazonaws.bedrockagent#APISchema",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html\">Action group OpenAPI schemas</a>.</p>"
+                    }
+                },
+                "functionSchema": {
+                    "target": "com.amazonaws.bedrockagent#FunctionSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p>"
                     }
                 },
                 "actionGroupState": {
@@ -388,7 +400,7 @@
                 "agentAliasArn": {
                     "target": "com.amazonaws.bedrockagent#AgentAliasArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the alias of the agent.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the alias of the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -902,7 +914,7 @@
                 "agentArn": {
                     "target": "com.amazonaws.bedrockagent#AgentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the agent that the version belongs to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent that the version belongs to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -948,14 +960,14 @@
                 "agentResourceRoleArn": {
                     "target": "com.amazonaws.bedrockagent#AgentRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to invoke API operations on the agent. The ARN must begin with <code>AmazonBedrockExecutionRoleForAgents_</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key that encrypts the agent.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.</p>"
                     }
                 },
                 "createdAt": {
@@ -1921,6 +1933,16 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))$"
             }
         },
+        "com.amazonaws.bedrockagent#BucketOwnerAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]{12}$"
+            }
+        },
         "com.amazonaws.bedrockagent#ChunkingConfiguration": {
             "type": "structure",
             "members": {
@@ -2020,7 +2042,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p>\n         <ul>\n            <li>\n               <p>Specify the following fields for security purposes.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>agentResourceRoleArn</code> – The ARN of the role with permissions to create an agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>customerEncryptionKeyArn</code> – The ARN of a KMS key to encrypt the creation of the agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.</p>\n            </li>\n            <li>\n               <p>If you agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an agent that orchestrates interactions between foundation models, data sources, software applications, user conversations, and APIs to carry out tasks to help customers.</p>\n         <ul>\n            <li>\n               <p>Specify the following fields for security purposes.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>agentResourceRoleArn</code> – The Amazon Resource Name (ARN) of the role with permissions to invoke API operations on an agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>customerEncryptionKeyArn</code> – The Amazon Resource Name (ARN) of a KMS key to encrypt the creation of the agent.</p>\n                  </li>\n                  <li>\n                     <p>(Optional) <code>idleSessionTTLinSeconds</code> – Specify the number of seconds for which the agent should maintain session information. After this time expires, the subsequent <code>InvokeAgent</code> request begins a new session.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>To override the default prompt behavior for agent orchestration and to use advanced prompts, include a <code>promptOverrideConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html\">Advanced prompts</a>.</p>\n            </li>\n            <li>\n               <p>If you agent fails to be created, the response returns a list of <code>failureReasons</code> alongside a list of <code>recommendedActions</code> for you to troubleshoot.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -2124,7 +2146,7 @@
                 "actionGroupExecutor": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
                     }
                 },
                 "apiSchema": {
@@ -2137,6 +2159,12 @@
                     "target": "com.amazonaws.bedrockagent#ActionGroupState",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the action group is available for the agent to invoke or not when sending an <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html\">InvokeAgent</a> request.</p>"
+                    }
+                },
+                "functionSchema": {
+                    "target": "com.amazonaws.bedrockagent#FunctionSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>"
                     }
                 }
             },
@@ -2310,14 +2338,13 @@
                 "agentResourceRoleArn": {
                     "target": "com.amazonaws.bedrockagent#AgentRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to create the agent. The ARN must begin with <code>AmazonBedrockExecutionRoleForAgents_</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.</p>"
                     }
                 },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key with which to encrypt the agent.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.</p>"
                     }
                 },
                 "tags": {
@@ -2434,6 +2461,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "dataDeletionPolicy": {
+                    "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deletion policy for the requested data source</p>"
+                    }
+                },
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.bedrockagent#ServerSideEncryptionConfiguration",
                     "traits": {
@@ -2495,7 +2528,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html\">Set up your data for ingestion</a>.</p>\n         <note>\n            <p>If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create\">Create a knowledge base</a>.</p>\n         </note>\n         <ul>\n            <li>\n               <p>Provide the <code>name</code> and an optional <code>description</code>.</p>\n            </li>\n            <li>\n               <p>Provide the ARN with permissions to create a knowledge base in the <code>roleArn</code> field.</p>\n            </li>\n            <li>\n               <p>Provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p>\n            </li>\n            <li>\n               <p>Provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p>\n               <ul>\n                  <li>\n                     <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html\">Create a vector store in Amazon OpenSearch Service</a>.</p>\n                  </li>\n                  <li>\n                     <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector store in Amazon Aurora</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html\">Create a vector store in Pinecone</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html\">Create a vector store in Redis Enterprise Cloud</a>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a knowledge base that contains data sources from which information can be queried and used by LLMs. To create a knowledge base, you must first set up your data sources and configure a supported vector store. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html\">Set up your data for ingestion</a>.</p>\n         <note>\n            <p>If you prefer to let Amazon Bedrock create and manage a vector store for you in Amazon OpenSearch Service, use the console. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create\">Create a knowledge base</a>.</p>\n         </note>\n         <ul>\n            <li>\n               <p>Provide the <code>name</code> and an optional <code>description</code>.</p>\n            </li>\n            <li>\n               <p>Provide the Amazon Resource Name (ARN) with permissions to create a knowledge base in the <code>roleArn</code> field.</p>\n            </li>\n            <li>\n               <p>Provide the embedding model to use in the <code>embeddingModelArn</code> field in the <code>knowledgeBaseConfiguration</code> object.</p>\n            </li>\n            <li>\n               <p>Provide the configuration for your vector store in the <code>storageConfiguration</code> object.</p>\n               <ul>\n                  <li>\n                     <p>For an Amazon OpenSearch Service database, use the <code>opensearchServerlessConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html\">Create a vector store in Amazon OpenSearch Service</a>.</p>\n                  </li>\n                  <li>\n                     <p>For an Amazon Aurora database, use the <code>RdsConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector store in Amazon Aurora</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Pinecone database, use the <code>pineconeConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html\">Create a vector store in Pinecone</a>.</p>\n                  </li>\n                  <li>\n                     <p>For a Redis Enterprise Cloud database, use the <code>redisEnterpriseCloudConfiguration</code> object. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html\">Create a vector store in Redis Enterprise Cloud</a>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "PUT",
@@ -2533,7 +2566,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to create the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2594,6 +2627,34 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#CustomControlMethod": {
+            "type": "enum",
+            "members": {
+                "RETURN_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETURN_CONTROL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#DataDeletionPolicy": {
+            "type": "enum",
+            "members": {
+                "RETAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETAIN"
+                    }
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#DataSource": {
             "type": "structure",
             "members": {
@@ -2650,6 +2711,12 @@
                         "smithy.api#documentation": "<p>Contains details about how to ingest the documents in the data source.</p>"
                     }
                 },
+                "dataDeletionPolicy": {
+                    "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deletion policy for the data source.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagent#DateTimestamp",
                     "traits": {
@@ -2662,6 +2729,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the data source was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.bedrockagent#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the failure reasons related to the data source.</p>"
                     }
                 }
             },
@@ -2723,6 +2796,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETE_UNSUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_UNSUCCESSFUL"
                     }
                 }
             }
@@ -3496,6 +3575,62 @@
                 "smithy.api#documentation": "<p>Configurations for when you choose fixed-size chunking. If you set the <code>chunkingStrategy</code> as <code>NONE</code>, exclude this field.</p>"
             }
         },
+        "com.amazonaws.bedrockagent#Function": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrockagent#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.bedrockagent#FunctionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the function and its purpose.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.bedrockagent#ParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that the agent elicits from the user to fulfill the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines parameters that the agent needs to invoke from the user to complete the function. Corresponds to an action in an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagent#FunctionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1200
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#FunctionSchema": {
+            "type": "union",
+            "members": {
+                "functions": {
+                    "target": "com.amazonaws.bedrockagent#Functions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of functions that each define an action in the action group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines functions that each define parameters that the agent needs to invoke from the user. Each function represents an action in an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagent#Functions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagent#Function"
+            }
+        },
         "com.amazonaws.bedrockagent#GetAgent": {
             "type": "operation",
             "input": {
@@ -4229,7 +4364,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about an ingestion job, which converts a data source to embeddings for a vector store in knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax\">StartIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax\">GetIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJob.html#API_agent_ListIngestionJob_ResponseSyntax\">ListIngestionJob response</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Contains details about an ingestion job, which converts a data source to embeddings for a vector store in knowledge base.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax\">StartIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax\">GetIngestionJob response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax\">ListIngestionJob response</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.bedrockagent#IngestionJobFilter": {
@@ -4577,7 +4712,7 @@
                 "knowledgeBaseArn": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4590,7 +4725,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with <code>AmazonBedrockExecutionRoleForKnowledgeBase_</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4762,6 +4897,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "DELETE_UNSUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_UNSUCCESSFUL"
                     }
                 }
             }
@@ -5662,7 +5803,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.bedrockagent#TaggableResourcesArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource for which to list tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which to list tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5757,7 +5898,7 @@
                 "collectionArn": {
                     "target": "com.amazonaws.bedrockagent#OpenSearchServerlessCollectionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the OpenSearch Service vector store.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OpenSearch Service vector store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5818,6 +5959,51 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.bedrockagent#ParameterDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.bedrockagent#ParameterDetail": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "com.amazonaws.bedrockagent#ParameterDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the parameter. Helps the foundation model determine how to elicit the parameters from the user.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.bedrockagent#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the parameter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the parameter is required for the agent to complete the function for action group invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a parameter in a function for an action group.</p>\n         <p>This data type is used in the following API operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax\">CreateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax\">CreateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax\">UpdateAgentActionGroup request</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax\">UpdateAgentActionGroup response</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax\">GetAgentActionGroup response</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.bedrockagent#ParameterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.bedrockagent#Name"
+            },
+            "value": {
+                "target": "com.amazonaws.bedrockagent#ParameterDetail"
+            }
+        },
         "com.amazonaws.bedrockagent#Payload": {
             "type": "string",
             "traits": {
@@ -5837,7 +6023,7 @@
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that you created in Secrets Manager that is linked to your Pinecone API key.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Pinecone API key.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6129,14 +6315,14 @@
                 "resourceArn": {
                     "target": "com.amazonaws.bedrockagent#RdsArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the vector store.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the vector store.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that you created in Secrets Manager that is linked to your Amazon RDS database.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Amazon RDS database.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6259,7 +6445,7 @@
                 "credentialsSecretArn": {
                     "target": "com.amazonaws.bedrockagent#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the secret that you created in Secrets Manager that is linked to your Redis Enterprise Cloud database.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that is linked to your Redis Enterprise Cloud database.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6330,7 +6516,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified resource ARN was not found. Check the ARN and try your request again.</p>",
+                "smithy.api#documentation": "<p>The specified resource Amazon Resource Name (ARN) was not found. Check the Amazon Resource Name (ARN) and try your request again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -6361,7 +6547,7 @@
                 "bucketArn": {
                     "target": "com.amazonaws.bedrockagent#S3BucketArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the bucket that contains the data source.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bucket that contains the data source.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6369,6 +6555,12 @@
                     "target": "com.amazonaws.bedrockagent#S3Prefixes",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of S3 prefixes that define the object containing the data sources. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a>.</p>"
+                    }
+                },
+                "bucketOwnerAccountId": {
+                    "target": "com.amazonaws.bedrockagent#BucketOwnerAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID for the owner of the S3 bucket.</p>"
                     }
                 }
             },
@@ -6439,7 +6631,7 @@
                 "kmsKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt the resource.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.</p>"
                     }
                 }
             },
@@ -6698,7 +6890,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.bedrockagent#TaggableResourcesArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource to tag.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to tag.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6805,6 +6997,41 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#Type": {
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "string"
+                    }
+                },
+                "NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "number"
+                    }
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "integer"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "boolean"
+                    }
+                },
+                "ARRAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "array"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagent#UntagResource": {
             "type": "operation",
             "input": {
@@ -6846,7 +7073,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.bedrockagent#TaggableResourcesArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource from which to remove tags.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to remove tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7008,7 +7235,7 @@
                 "actionGroupExecutor": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
                     }
                 },
                 "actionGroupState": {
@@ -7021,6 +7248,12 @@
                     "target": "com.amazonaws.bedrockagent#APISchema",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains either details about the S3 object containing the OpenAPI schema for the action group or the JSON or YAML-formatted payload defining the schema. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html\">Action group OpenAPI schemas</a>.</p>"
+                    }
+                },
+                "functionSchema": {
+                    "target": "com.amazonaws.bedrockagent#FunctionSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the function schema for the action group or the JSON or YAML-formatted payload defining the schema.</p>"
                     }
                 }
             },
@@ -7292,14 +7525,14 @@
                 "agentResourceRoleArn": {
                     "target": "com.amazonaws.bedrockagent#AgentRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role with permissions to update the agent. The ARN must begin with <code>AmazonBedrockExecutionRoleForAgents_</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the agent.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "customerEncryptionKeyArn": {
                     "target": "com.amazonaws.bedrockagent#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key with which to encrypt the agent.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.</p>"
                     }
                 },
                 "promptOverrideConfiguration": {
@@ -7408,6 +7641,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "dataDeletionPolicy": {
+                    "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data deletion policy of the updated data source.</p>"
+                    }
+                },
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.bedrockagent#ServerSideEncryptionConfiguration",
                     "traits": {
@@ -7508,7 +7747,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrockagent#KnowledgeBaseRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a different Amazon Resource Name (ARN) of the IAM role with permissions to modify the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>Specifies a different Amazon Resource Name (ARN) of the IAM role with permissions to invoke API operations on the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7613,7 +7852,7 @@
                 "embeddingModelArn": {
                     "target": "com.amazonaws.bedrockagent#BedrockEmbeddingModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the model used to create vector embeddings for the knowledge base.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model used to create vector embeddings for the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 }

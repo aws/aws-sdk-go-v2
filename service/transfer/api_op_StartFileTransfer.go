@@ -18,7 +18,7 @@ import (
 //     In both cases, you specify the ConnectorId . Depending on the direction of the
 //     transfer, you also specify the following items:
 //   - If you are transferring file from a partner's SFTP server to Amazon Web
-//     Services storage, you specify one or more RetreiveFilePaths to identify the
+//     Services storage, you specify one or more RetrieveFilePaths to identify the
 //     files you want to transfer, and a LocalDirectoryPath to specify the
 //     destination folder.
 //   - If you are transferring file to a partner's SFTP server from Amazon Web

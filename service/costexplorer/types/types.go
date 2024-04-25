@@ -1572,14 +1572,17 @@ type ReservationPurchaseRecommendationDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Information about this specific recommendation, such as the timestamp for when
-// Amazon Web Services made a specific recommendation.
+// Information about a recommendation, such as the timestamp for when Amazon Web
+// Services made a specific recommendation.
 type ReservationPurchaseRecommendationMetadata struct {
 
-	// The timestamp for when Amazon Web Services made this recommendation.
+	// Additional metadata that might be applicable to the recommendation.
+	AdditionalMetadata *string
+
+	// The timestamp for when Amazon Web Services made the recommendation.
 	GenerationTimestamp *string
 
-	// The ID for this specific recommendation.
+	// The ID for the recommendation.
 	RecommendationId *string
 
 	noSmithyDocumentSerde
@@ -1728,20 +1731,20 @@ type RightsizingRecommendationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata for this recommendation set.
+// Metadata for a recommendation set.
 type RightsizingRecommendationMetadata struct {
 
 	// Additional metadata that might be applicable to the recommendation.
 	AdditionalMetadata *string
 
-	// The timestamp for when Amazon Web Services made this recommendation.
+	// The timestamp for when Amazon Web Services made the recommendation.
 	GenerationTimestamp *string
 
 	// The number of days of previous usage that Amazon Web Services considers when
-	// making this recommendation.
+	// making the recommendation.
 	LookbackPeriodInDays LookbackPeriodInDays
 
-	// The ID for this specific recommendation.
+	// The ID for the recommendation.
 	RecommendationId *string
 
 	noSmithyDocumentSerde

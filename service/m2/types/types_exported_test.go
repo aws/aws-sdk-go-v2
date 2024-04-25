@@ -36,6 +36,9 @@ func ExampleBatchJobIdentifier_outputUsage() {
 	case *types.BatchJobIdentifierMemberFileBatchJobIdentifier:
 		_ = v.Value // Value is types.FileBatchJobIdentifier
 
+	case *types.BatchJobIdentifierMemberRestartBatchJobIdentifier:
+		_ = v.Value // Value is types.RestartBatchJobIdentifier
+
 	case *types.BatchJobIdentifierMemberS3BatchJobIdentifier:
 		_ = v.Value // Value is types.S3BatchJobIdentifier
 
@@ -52,6 +55,7 @@ func ExampleBatchJobIdentifier_outputUsage() {
 }
 
 var _ *types.S3BatchJobIdentifier
+var _ *types.RestartBatchJobIdentifier
 var _ *types.FileBatchJobIdentifier
 var _ *types.ScriptBatchJobIdentifier
 

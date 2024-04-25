@@ -1818,7 +1818,7 @@
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default = 1.</p>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default = 1.</p>\n         <important>\n            <p>\n        Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.\n      </p>\n         </important>"
                     }
                 },
                 "deletionProtection": {
@@ -2141,7 +2141,7 @@
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs to provision on the new graph after import. Default = 0, Min = 0, Max = 2.</p>\n         <important>\n            <p>\n        Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.\n      </p>\n         </important>"
                     }
                 },
                 "deletionProtection": {
@@ -5602,7 +5602,7 @@
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default =1</p>"
+                        "smithy.api#documentation": "<p>The number of replicas in other AZs. Min =0, Max = 2, Default =1</p>\n         <important>\n            <p>\n        Additional charges equivalent to the m-NCUs selected for the graph apply for each replica.\n      </p>\n         </important>"
                     }
                 },
                 "publicConnectivity": {

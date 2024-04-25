@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateBuild(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateContainerGroupDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContainerGroupDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateContainerGroupDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFleet(context.Background(), nil, func(o *Options) {
@@ -283,6 +295,18 @@ func TestCheckSnapshot_DeleteBuild(t *testing.T) {
 	_, err := svc.DeleteBuild(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteBuild")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteContainerGroupDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContainerGroupDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteContainerGroupDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -475,6 +499,18 @@ func TestCheckSnapshot_DescribeCompute(t *testing.T) {
 	_, err := svc.DescribeCompute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCompute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeContainerGroupDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContainerGroupDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeContainerGroupDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -871,6 +907,18 @@ func TestCheckSnapshot_ListCompute(t *testing.T) {
 	_, err := svc.ListCompute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCompute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListContainerGroupDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContainerGroupDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContainerGroupDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1357,6 +1405,18 @@ func TestUpdateSnapshot_CreateBuild(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateContainerGroupDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateContainerGroupDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateContainerGroupDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFleet(context.Background(), nil, func(o *Options) {
@@ -1530,6 +1590,18 @@ func TestUpdateSnapshot_DeleteBuild(t *testing.T) {
 	_, err := svc.DeleteBuild(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteBuild")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteContainerGroupDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteContainerGroupDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteContainerGroupDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1722,6 +1794,18 @@ func TestUpdateSnapshot_DescribeCompute(t *testing.T) {
 	_, err := svc.DescribeCompute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCompute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeContainerGroupDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContainerGroupDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeContainerGroupDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2118,6 +2202,18 @@ func TestUpdateSnapshot_ListCompute(t *testing.T) {
 	_, err := svc.ListCompute(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCompute")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListContainerGroupDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContainerGroupDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContainerGroupDefinitions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

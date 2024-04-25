@@ -77,6 +77,9 @@ type GetBatchJobExecutionOutput struct {
 	// The name of this batch job.
 	JobName *string
 
+	// The restart steps information for the most recent restart operation.
+	JobStepRestartMarker *types.JobStepRestartMarker
+
 	// The type of job.
 	JobType types.BatchJobType
 

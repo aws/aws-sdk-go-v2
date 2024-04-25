@@ -32,7 +32,7 @@
                     "name": "bedrock"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Describes the API operations for running inference using Bedrock models.</p>",
+                "smithy.api#documentation": "<p>Describes the API operations for running inference using Amazon Bedrock models.</p>",
                 "smithy.api#title": "Amazon Bedrock Runtime",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -709,6 +709,21 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockruntime#GuardrailIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$"
+            }
+        },
+        "com.amazonaws.bedrockruntime#GuardrailVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(([1-9][0-9]{0,7})|(DRAFT))$"
+            }
+        },
         "com.amazonaws.bedrockruntime#InferenceResource": {
             "type": "resource",
             "operations": [
@@ -771,7 +786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invokes the specified Bedrock model to run inference using the input provided in the request body. \n         You use InvokeModel to run inference for text models, image models, and embedding models.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html\">Run inference</a> in the Bedrock User Guide.</p>\n         <p>For example requests, see Examples (after the Errors section).</p>",
+                "smithy.api#documentation": "<p>Invokes the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. \n         You use model inference to generate text, images, and embeddings.</p>\n         <p>For example code, see <i>Invoke model code examples</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permission for the <code>bedrock:InvokeModel</code> action.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -795,7 +810,7 @@
                 "body": {
                     "target": "com.amazonaws.bedrockruntime#Body",
                     "traits": {
-                        "smithy.api#documentation": "<p>Input data in the format specified in the content-type request header. To see the format and content of this field for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>.</p>",
+                        "smithy.api#documentation": "<p>The prompt and inference parameters in the format specified in the <code>contentType</code> in the header. To see the format and content of the request and response bodies for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html\">Run inference</a> in the Bedrock User Guide.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -810,16 +825,37 @@
                 "accept": {
                     "target": "com.amazonaws.bedrockruntime#MimeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired MIME type of the inference body in the response. The default value is\n            <code>application/json</code>.</p>",
+                        "smithy.api#documentation": "<p>The desired MIME type of the inference body in the response. The default value is <code>application/json</code>.</p>",
                         "smithy.api#httpHeader": "Accept"
                     }
                 },
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#InvokeModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifier of the model. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "trace": {
+                    "target": "com.amazonaws.bedrockruntime#Trace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable or disable the Bedrock trace. If enabled, you can see the full Bedrock trace.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-Trace"
+                    }
+                },
+                "guardrailIdentifier": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail that you want to use. If you don't provide a value, no guardrail is applied\n            to the invocation.</p>\n         <p>An error will be thrown in the following situations.</p>\n         <ul>\n            <li>\n               <p>You don't provide a guardrail identifier but you specify the <code>amazon-bedrock-guardrailConfig</code> field in the request body.</p>\n            </li>\n            <li>\n               <p>You enable the guardrail but the <code>contentType</code> isn't <code>application/json</code>.</p>\n            </li>\n            <li>\n               <p>You provide a guardrail identifier, but <code>guardrailVersion</code> isn't specified.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-GuardrailIdentifier"
+                    }
+                },
+                "guardrailVersion": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number for the guardrail. The value can also be <code>DRAFT</code>.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-GuardrailVersion"
                     }
                 }
             },
@@ -833,7 +869,7 @@
                 "body": {
                     "target": "com.amazonaws.bedrockruntime#Body",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inference response from the model in the format specified in the content-type header field. To see the format and content of this field for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>.</p>",
+                        "smithy.api#documentation": "<p>Inference response from the model in the format specified in the <code>contentType</code> header. To see the format and content of the request and response bodies for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -892,7 +928,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Invoke the specified Bedrock model to run inference using the input provided.\n      Return the response in a stream.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html\">Run inference</a> in the Bedrock User Guide.</p>\n         <p>For an example request and response, see Examples (after the Errors section).</p>",
+                "smithy.api#documentation": "<p>Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body. The response is returned in a stream.</p>\n         <p>To see if a model supports streaming, call <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html\">GetFoundationModel</a>\n         and check the <code>responseStreamingSupported</code> field in the response.</p>\n         <note>\n            <p>The CLI doesn't support <code>InvokeModelWithResponseStream</code>.</p>\n         </note>\n         <p>For example code, see <i>Invoke model with streaming code\n         example</i> in the <i>Amazon Bedrock User Guide</i>.\n      </p>\n         <p>This operation requires permissions to perform the <code>bedrock:InvokeModelWithResponseStream</code> action. </p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -906,7 +942,7 @@
                 "body": {
                     "target": "com.amazonaws.bedrockruntime#Body",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inference input in the format specified by the \n         content-type. To see the format and content of this field for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>.</p>",
+                        "smithy.api#documentation": "<p>The prompt and inference parameters in the format specified in the <code>contentType</code> in the header. To see the format and content of the request and response bodies for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html\">Run inference</a> in the Bedrock User Guide.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -928,9 +964,30 @@
                 "modelId": {
                     "target": "com.amazonaws.bedrockruntime#InvokeModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>Id of the model to invoke using the streaming request.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the model to invoke to run inference.</p>\n         <p>The <code>modelId</code> to provide depends on the type of model that you use:</p>\n         <ul>\n            <li>\n               <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs for base models, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns\">Amazon Bedrock base model IDs (on-demand throughput)</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a provisioned model, specify the ARN of the Provisioned Throughput. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html\">Run inference using a Provisioned Throughput</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n            <li>\n               <p>If you use a custom model, first purchase Provisioned Throughput for it. Then specify the ARN of the resulting provisioned model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html\">Use a custom model in Amazon Bedrock</a> in the Amazon Bedrock User Guide.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "trace": {
+                    "target": "com.amazonaws.bedrockruntime#Trace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable or disable the Bedrock trace. If enabled, you can see the full Bedrock trace.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-Trace"
+                    }
+                },
+                "guardrailIdentifier": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the guardrail that you want to use. If you don't provide a value, no guardrail is applied\n            to the invocation.</p>\n         <p>An error is thrown in the following situations.</p>\n         <ul>\n            <li>\n               <p>You don't provide a guardrail identifier but you specify the <code>amazon-bedrock-guardrailConfig</code> field in the request body.</p>\n            </li>\n            <li>\n               <p>You enable the guardrail but the <code>contentType</code> isn't <code>application/json</code>.</p>\n            </li>\n            <li>\n               <p>You provide a guardrail identifier, but <code>guardrailVersion</code> isn't specified.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-GuardrailIdentifier"
+                    }
+                },
+                "guardrailVersion": {
+                    "target": "com.amazonaws.bedrockruntime#GuardrailVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number for the guardrail. The value can also be <code>DRAFT</code>.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-GuardrailVersion"
                     }
                 }
             },
@@ -944,7 +1001,7 @@
                 "body": {
                     "target": "com.amazonaws.bedrockruntime#ResponseStream",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inference response from the model in the format specified by Content-Type. To see the format and content of this field for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>.</p>",
+                        "smithy.api#documentation": "<p>Inference response from the model in the format specified by the <code>contentType</code> header. To see the format and content of this field for different models, refer to <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters</a>.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -1023,7 +1080,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An error occurred while streaming the response.</p>",
+                "smithy.api#documentation": "<p>An error occurred while streaming the response. Retry your request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 424
             }
@@ -1094,19 +1151,34 @@
                     }
                 },
                 "internalServerException": {
-                    "target": "com.amazonaws.bedrockruntime#InternalServerException"
+                    "target": "com.amazonaws.bedrockruntime#InternalServerException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An internal server error occurred. Retry your request.</p>"
+                    }
                 },
                 "modelStreamErrorException": {
-                    "target": "com.amazonaws.bedrockruntime#ModelStreamErrorException"
+                    "target": "com.amazonaws.bedrockruntime#ModelStreamErrorException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error occurred while streaming the response. Retry your request.</p>"
+                    }
                 },
                 "validationException": {
-                    "target": "com.amazonaws.bedrockruntime#ValidationException"
+                    "target": "com.amazonaws.bedrockruntime#ValidationException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input validation failed. Check your request parameters and retry the request.</p>"
+                    }
                 },
                 "throttlingException": {
-                    "target": "com.amazonaws.bedrockruntime#ThrottlingException"
+                    "target": "com.amazonaws.bedrockruntime#ThrottlingException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number or frequency of requests exceeds the limit. Resubmit your request later.</p>"
+                    }
                 },
                 "modelTimeoutException": {
-                    "target": "com.amazonaws.bedrockruntime#ModelTimeoutException"
+                    "target": "com.amazonaws.bedrockruntime#ModelTimeoutException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request took too long to process. Processing time exceeded the model timeout length.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1147,6 +1219,23 @@
                 "smithy.api#documentation": "<p>The number of requests exceeds the limit. Resubmit your request later.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.bedrockruntime#Trace": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockruntime#ValidationException": {
