@@ -7332,7 +7332,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:[a-z-]*:secretsmanager:[a-z0-9-]*:\\d{12}:secret:[0-9A-Za-z_/-]*$"
+                "smithy.api#pattern": "^arn:[a-z-]*:secretsmanager:[a-z0-9-]*:\\d{12}:secret:[0-9A-Za-z_/+=.@!-]*$"
             }
         },
         "com.amazonaws.appsync#RdsHttpEndpointConfig": {
@@ -8936,7 +8936,8 @@
                 "authenticationType": {
                     "target": "com.amazonaws.appsync#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new authentication type for the <code>GraphqlApi</code> object.</p>"
+                        "smithy.api#documentation": "<p>The new authentication type for the <code>GraphqlApi</code> object.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "userPoolConfig": {

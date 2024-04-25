@@ -828,7 +828,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$"
+                "smithy.api#pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.ivsrealtime#ChannelDestinationConfiguration": {
@@ -3731,7 +3731,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$"
+                "smithy.api#pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$"
             }
         },
         "com.amazonaws.ivsrealtime#ResourceNotFoundException": {
@@ -4406,6 +4406,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.ivsrealtime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivsrealtime#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.ivsrealtime#PendingVerification"

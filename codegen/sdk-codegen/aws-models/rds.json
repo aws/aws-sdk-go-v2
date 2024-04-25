@@ -5155,7 +5155,7 @@
                 "Timezone": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone of the DB instance. \n            The time zone parameter is currently supported only by\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone\">Microsoft SQL Server</a>.</p>"
+                        "smithy.api#documentation": "<p>The time zone of the DB instance. \n            The time zone parameter is currently supported only by <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone\">RDS for Db2</a> and\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone\">RDS for SQL Server</a>.</p>"
                     }
                 },
                 "EnableIAMDatabaseAuthentication": {
@@ -9222,7 +9222,7 @@
                 "Timezone": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone of the DB instance.\n            In most cases, the <code>Timezone</code> element is empty.\n            <code>Timezone</code> content appears only for\n            Microsoft SQL Server DB instances \n            that were created with a time zone specified.</p>"
+                        "smithy.api#documentation": "<p>The time zone of the DB instance.\n            In most cases, the <code>Timezone</code> element is empty.\n            <code>Timezone</code> content appears only for\n            RDS for Db2 and RDS for SQL Server DB instances \n            that were created with a time zone specified.</p>"
                     }
                 },
                 "IAMDatabaseAuthenticationEnabled": {
@@ -22068,7 +22068,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new DB subnet group for the DB instance.\n          You can use this parameter to move your DB instance to a different VPC.\n      \n    \n          If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC.\n          For more information, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC\">Working with a DB instance in a VPC</a> \n          in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Changing the subnet group causes an outage during the change. \n        The change is applied during the next maintenance window,\n        unless you enable <code>ApplyImmediately</code>.</p>\n         <p>This parameter doesn't apply to RDS Custom DB instances.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match existing DB subnet group.</p>\n            </li>\n         </ul>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The new DB subnet group for the DB instance.\n          You can use this parameter to move your DB instance to a different VPC.\n      \n    \n          If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC.\n          For more information, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC\">Working with a DB instance in a VPC</a> \n          in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Changing the subnet group causes an outage during the change. \n        The change is applied during the next maintenance window,\n        unless you enable <code>ApplyImmediately</code>.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match existing DB subnet group.</p>\n            </li>\n         </ul>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "DBSecurityGroups": {
@@ -22314,7 +22314,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the DB instance has deletion protection enabled. \n            The database can't be deleted when deletion protection is enabled. By default, \n            deletion protection isn't enabled. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\">\n                Deleting a DB Instance</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance has deletion protection enabled. \n            The database can't be deleted when deletion protection is enabled. By default, \n            deletion protection isn't enabled. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\">\n                Deleting a DB Instance</a>.</p>\n         <p>This setting doesn't apply to Amazon Aurora DB instances. You can enable or disable deletion protection for the DB cluster. \n        For more information, see <code>ModifyDBCluster</code>. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster.</p>"
                     }
                 },
                 "MaxAllocatedStorage": {
