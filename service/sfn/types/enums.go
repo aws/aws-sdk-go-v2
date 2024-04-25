@@ -344,6 +344,42 @@ func (TestExecutionStatus) Values() []TestExecutionStatus {
 	}
 }
 
+type ValidateStateMachineDefinitionResultCode string
+
+// Enum values for ValidateStateMachineDefinitionResultCode
+const (
+	ValidateStateMachineDefinitionResultCodeOk   ValidateStateMachineDefinitionResultCode = "OK"
+	ValidateStateMachineDefinitionResultCodeFail ValidateStateMachineDefinitionResultCode = "FAIL"
+)
+
+// Values returns all known values for ValidateStateMachineDefinitionResultCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ValidateStateMachineDefinitionResultCode) Values() []ValidateStateMachineDefinitionResultCode {
+	return []ValidateStateMachineDefinitionResultCode{
+		"OK",
+		"FAIL",
+	}
+}
+
+type ValidateStateMachineDefinitionSeverity string
+
+// Enum values for ValidateStateMachineDefinitionSeverity
+const (
+	ValidateStateMachineDefinitionSeverityError ValidateStateMachineDefinitionSeverity = "ERROR"
+)
+
+// Values returns all known values for ValidateStateMachineDefinitionSeverity.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ValidateStateMachineDefinitionSeverity) Values() []ValidateStateMachineDefinitionSeverity {
+	return []ValidateStateMachineDefinitionSeverity{
+		"ERROR",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

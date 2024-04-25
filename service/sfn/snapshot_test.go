@@ -493,6 +493,18 @@ func TestCheckSnapshot_UpdateStateMachineAlias(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_ValidateStateMachineDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateStateMachineDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ValidateStateMachineDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateActivity(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateActivity(context.Background(), nil, func(o *Options) {
@@ -918,6 +930,18 @@ func TestUpdateSnapshot_UpdateStateMachineAlias(t *testing.T) {
 	_, err := svc.UpdateStateMachineAlias(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateStateMachineAlias")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ValidateStateMachineDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidateStateMachineDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ValidateStateMachineDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

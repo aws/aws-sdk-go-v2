@@ -697,7 +697,8 @@ type CreateDBInstanceInput struct {
 	TdeCredentialPassword *string
 
 	// The time zone of the DB instance. The time zone parameter is currently
-	// supported only by Microsoft SQL Server (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone)
+	// supported only by RDS for Db2 (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone)
+	// and RDS for SQL Server (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone)
 	// .
 	Timezone *string
 

@@ -1234,4 +1234,33 @@ type TracingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an error found during validation. Validation errors found in the
+// definition return in the response as diagnostic elements, rather than raise an
+// exception.
+type ValidateStateMachineDefinitionDiagnostic struct {
+
+	// Identifying code for the diagnostic.
+	//
+	// This member is required.
+	Code *string
+
+	// Message describing the diagnostic condition.
+	//
+	// This member is required.
+	Message *string
+
+	// A value of ERROR means that you cannot create or update a state machine with
+	// this definition.
+	//
+	// This member is required.
+	Severity ValidateStateMachineDefinitionSeverity
+
+	// Location of the issue in the state machine, if available. For errors specific
+	// to a field, the location could be in the format: /States// , for example:
+	// /States/FailState/ErrorPath .
+	Location *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

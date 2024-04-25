@@ -1,0 +1,8 @@
+{
+    "id": "6849a2c4-9183-4566-ba75-8cedbaa17773",
+    "type": "feature",
+    "description": "AWS Firewall Manager adds support for network ACL policies to manage Amazon Virtual Private Cloud (VPC) network access control lists (ACLs) for accounts in your organization.",
+    "modules": [
+        "service/fms"
+    ]
+}

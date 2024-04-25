@@ -1755,8 +1755,8 @@ type DBInstance struct {
 	TdeCredentialArn *string
 
 	// The time zone of the DB instance. In most cases, the Timezone element is empty.
-	// Timezone content appears only for Microsoft SQL Server DB instances that were
-	// created with a time zone specified.
+	// Timezone content appears only for RDS for Db2 and RDS for SQL Server DB
+	// instances that were created with a time zone specified.
 	Timezone *string
 
 	// The list of Amazon EC2 VPC security groups that the DB instance belongs to.

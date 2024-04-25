@@ -204,8 +204,8 @@ type ModifyDBInstanceInput struct {
 	// information, see Working with a DB instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC)
 	// in the Amazon RDS User Guide. Changing the subnet group causes an outage during
 	// the change. The change is applied during the next maintenance window, unless you
-	// enable ApplyImmediately . This parameter doesn't apply to RDS Custom DB
-	// instances. Constraints:
+	// enable ApplyImmediately . This setting doesn't apply to RDS Custom DB instances.
+	// Constraints:
 	//   - If supplied, must match existing DB subnet group.
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
@@ -216,7 +216,10 @@ type ModifyDBInstanceInput struct {
 	// Specifies whether the DB instance has deletion protection enabled. The database
 	// can't be deleted when deletion protection is enabled. By default, deletion
 	// protection isn't enabled. For more information, see Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
-	// .
+	// . This setting doesn't apply to Amazon Aurora DB instances. You can enable or
+	// disable deletion protection for the DB cluster. For more information, see
+	// ModifyDBCluster . DB instances in a DB cluster can be deleted even when deletion
+	// protection is enabled for the DB cluster.
 	DeletionProtection *bool
 
 	// Specifies whether to remove the DB instance from the Active Directory domain.

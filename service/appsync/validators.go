@@ -2975,6 +2975,9 @@ func validateOpUpdateGraphqlApiInput(v *UpdateGraphqlApiInput) error {
 			invalidParams.AddNested("LogConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if len(v.AuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationType"))
+	}
 	if v.UserPoolConfig != nil {
 		if err := validateUserPoolConfig(v.UserPoolConfig); err != nil {
 			invalidParams.AddNested("UserPoolConfig", err.(smithy.InvalidParamsError))

@@ -5801,6 +5801,119 @@ func awsAwsjson11_deserializeDocumentComplianceViolators(v *[]types.ComplianceVi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCreateNetworkAclAction(v **types.CreateNetworkAclAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CreateNetworkAclAction
+	if *v == nil {
+		sv = &types.CreateNetworkAclAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "FMSCanRemediate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.FMSCanRemediate = jtv
+			}
+
+		case "Vpc":
+			if err := awsAwsjson11_deserializeDocumentActionTarget(&sv.Vpc, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCreateNetworkAclEntriesAction(v **types.CreateNetworkAclEntriesAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CreateNetworkAclEntriesAction
+	if *v == nil {
+		sv = &types.CreateNetworkAclEntriesAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "FMSCanRemediate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.FMSCanRemediate = jtv
+			}
+
+		case "NetworkAclEntriesToBeCreated":
+			if err := awsAwsjson11_deserializeDocumentEntriesDescription(&sv.NetworkAclEntriesToBeCreated, value); err != nil {
+				return err
+			}
+
+		case "NetworkAclId":
+			if err := awsAwsjson11_deserializeDocumentActionTarget(&sv.NetworkAclId, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCustomerPolicyScopeIdList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5868,6 +5981,65 @@ func awsAwsjson11_deserializeDocumentCustomerPolicyScopeMap(v *map[string][]stri
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDeleteNetworkAclEntriesAction(v **types.DeleteNetworkAclEntriesAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeleteNetworkAclEntriesAction
+	if *v == nil {
+		sv = &types.DeleteNetworkAclEntriesAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "FMSCanRemediate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.FMSCanRemediate = jtv
+			}
+
+		case "NetworkAclEntriesToBeDeleted":
+			if err := awsAwsjson11_deserializeDocumentEntriesDescription(&sv.NetworkAclEntriesToBeDeleted, value); err != nil {
+				return err
+			}
+
+		case "NetworkAclId":
+			if err := awsAwsjson11_deserializeDocumentActionTarget(&sv.NetworkAclId, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -6630,6 +6802,271 @@ func awsAwsjson11_deserializeDocumentEC2ReplaceRouteTableAssociationAction(v **t
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEntriesDescription(v *[]types.EntryDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EntryDescription
+	if *v == nil {
+		cv = []types.EntryDescription{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EntryDescription
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEntryDescription(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEntriesWithConflicts(v *[]types.EntryDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EntryDescription
+	if *v == nil {
+		cv = []types.EntryDescription{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EntryDescription
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEntryDescription(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEntryDescription(v **types.EntryDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EntryDescription
+	if *v == nil {
+		sv = &types.EntryDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EntryDetail":
+			if err := awsAwsjson11_deserializeDocumentNetworkAclEntry(&sv.EntryDetail, value); err != nil {
+				return err
+			}
+
+		case "EntryRuleNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerObjectMinimum0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EntryRuleNumber = int32(i64)
+			}
+
+		case "EntryType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntryType to be of type string, got %T instead", value)
+				}
+				sv.EntryType = types.EntryType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEntryViolation(v **types.EntryViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EntryViolation
+	if *v == nil {
+		sv = &types.EntryViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActualEvaluationOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.ActualEvaluationOrder = ptr.String(jtv)
+			}
+
+		case "EntriesWithConflicts":
+			if err := awsAwsjson11_deserializeDocumentEntriesWithConflicts(&sv.EntriesWithConflicts, value); err != nil {
+				return err
+			}
+
+		case "EntryAtExpectedEvaluationOrder":
+			if err := awsAwsjson11_deserializeDocumentEntryDescription(&sv.EntryAtExpectedEvaluationOrder, value); err != nil {
+				return err
+			}
+
+		case "EntryViolationReasons":
+			if err := awsAwsjson11_deserializeDocumentEntryViolationReasons(&sv.EntryViolationReasons, value); err != nil {
+				return err
+			}
+
+		case "ExpectedEntry":
+			if err := awsAwsjson11_deserializeDocumentEntryDescription(&sv.ExpectedEntry, value); err != nil {
+				return err
+			}
+
+		case "ExpectedEvaluationOrder":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.ExpectedEvaluationOrder = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEntryViolationReasons(v *[]types.EntryViolationReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EntryViolationReason
+	if *v == nil {
+		cv = []types.EntryViolationReason{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EntryViolationReason
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EntryViolationReason to be of type string, got %T instead", value)
+			}
+			col = types.EntryViolationReason(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEntryViolations(v *[]types.EntryViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EntryViolation
+	if *v == nil {
+		cv = []types.EntryViolation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EntryViolation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentEntryViolation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEvaluationResult(v **types.EvaluationResult, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7192,6 +7629,78 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInvalidNetworkAclEntriesViolation(v **types.InvalidNetworkAclEntriesViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvalidNetworkAclEntriesViolation
+	if *v == nil {
+		sv = &types.InvalidNetworkAclEntriesViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentAssociatedNetworkAcl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.CurrentAssociatedNetworkAcl = ptr.String(jtv)
+			}
+
+		case "EntryViolations":
+			if err := awsAwsjson11_deserializeDocumentEntryViolations(&sv.EntryViolations, value); err != nil {
+				return err
+			}
+
+		case "Subnet":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.Subnet = ptr.String(jtv)
+			}
+
+		case "SubnetAvailabilityZone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.SubnetAvailabilityZone = ptr.String(jtv)
+			}
+
+		case "Vpc":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceId to be of type string, got %T instead", value)
+				}
+				sv.Vpc = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInvalidOperationException(v **types.InvalidOperationException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7417,6 +7926,335 @@ func awsAwsjson11_deserializeDocumentMemberAccounts(v *[]string, value interface
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkAclCommonPolicy(v **types.NetworkAclCommonPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkAclCommonPolicy
+	if *v == nil {
+		sv = &types.NetworkAclCommonPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NetworkAclEntrySet":
+			if err := awsAwsjson11_deserializeDocumentNetworkAclEntrySet(&sv.NetworkAclEntrySet, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkAclEntries(v *[]types.NetworkAclEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NetworkAclEntry
+	if *v == nil {
+		cv = []types.NetworkAclEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NetworkAclEntry
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentNetworkAclEntry(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkAclEntry(v **types.NetworkAclEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkAclEntry
+	if *v == nil {
+		sv = &types.NetworkAclEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CidrBlock":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.CidrBlock = ptr.String(jtv)
+			}
+
+		case "Egress":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.Egress = ptr.Bool(jtv)
+			}
+
+		case "IcmpTypeCode":
+			if err := awsAwsjson11_deserializeDocumentNetworkAclIcmpTypeCode(&sv.IcmpTypeCode, value); err != nil {
+				return err
+			}
+
+		case "Ipv6CidrBlock":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedNonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Ipv6CidrBlock = ptr.String(jtv)
+			}
+
+		case "PortRange":
+			if err := awsAwsjson11_deserializeDocumentNetworkAclPortRange(&sv.PortRange, value); err != nil {
+				return err
+			}
+
+		case "Protocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.Protocol = ptr.String(jtv)
+			}
+
+		case "RuleAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkAclRuleAction to be of type string, got %T instead", value)
+				}
+				sv.RuleAction = types.NetworkAclRuleAction(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkAclEntrySet(v **types.NetworkAclEntrySet, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkAclEntrySet
+	if *v == nil {
+		sv = &types.NetworkAclEntrySet{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FirstEntries":
+			if err := awsAwsjson11_deserializeDocumentNetworkAclEntries(&sv.FirstEntries, value); err != nil {
+				return err
+			}
+
+		case "ForceRemediateForFirstEntries":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.ForceRemediateForFirstEntries = ptr.Bool(jtv)
+			}
+
+		case "ForceRemediateForLastEntries":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.ForceRemediateForLastEntries = ptr.Bool(jtv)
+			}
+
+		case "LastEntries":
+			if err := awsAwsjson11_deserializeDocumentNetworkAclEntries(&sv.LastEntries, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkAclIcmpTypeCode(v **types.NetworkAclIcmpTypeCode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkAclIcmpTypeCode
+	if *v == nil {
+		sv = &types.NetworkAclIcmpTypeCode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerObject to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Code = ptr.Int32(int32(i64))
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IntegerObject to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Type = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkAclPortRange(v **types.NetworkAclPortRange, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkAclPortRange
+	if *v == nil {
+		sv = &types.NetworkAclPortRange{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "From":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IPPortNumberInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.From = ptr.Int32(int32(i64))
+			}
+
+		case "To":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected IPPortNumberInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.To = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -8998,6 +9836,11 @@ func awsAwsjson11_deserializeDocumentPolicyOption(v **types.PolicyOption, value 
 
 	for key, value := range shape {
 		switch key {
+		case "NetworkAclCommonPolicy":
+			if err := awsAwsjson11_deserializeDocumentNetworkAclCommonPolicy(&sv.NetworkAclCommonPolicy, value); err != nil {
+				return err
+			}
+
 		case "NetworkFirewallPolicy":
 			if err := awsAwsjson11_deserializeDocumentNetworkFirewallPolicy(&sv.NetworkFirewallPolicy, value); err != nil {
 				return err
@@ -9700,6 +10543,21 @@ func awsAwsjson11_deserializeDocumentRemediationAction(v **types.RemediationActi
 
 	for key, value := range shape {
 		switch key {
+		case "CreateNetworkAclAction":
+			if err := awsAwsjson11_deserializeDocumentCreateNetworkAclAction(&sv.CreateNetworkAclAction, value); err != nil {
+				return err
+			}
+
+		case "CreateNetworkAclEntriesAction":
+			if err := awsAwsjson11_deserializeDocumentCreateNetworkAclEntriesAction(&sv.CreateNetworkAclEntriesAction, value); err != nil {
+				return err
+			}
+
+		case "DeleteNetworkAclEntriesAction":
+			if err := awsAwsjson11_deserializeDocumentDeleteNetworkAclEntriesAction(&sv.DeleteNetworkAclEntriesAction, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9749,6 +10607,11 @@ func awsAwsjson11_deserializeDocumentRemediationAction(v **types.RemediationActi
 				return err
 			}
 
+		case "ReplaceNetworkAclAssociationAction":
+			if err := awsAwsjson11_deserializeDocumentReplaceNetworkAclAssociationAction(&sv.ReplaceNetworkAclAssociationAction, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9795,6 +10658,65 @@ func awsAwsjson11_deserializeDocumentRemediationActionWithOrder(v **types.Remedi
 
 		case "RemediationAction":
 			if err := awsAwsjson11_deserializeDocumentRemediationAction(&sv.RemediationAction, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentReplaceNetworkAclAssociationAction(v **types.ReplaceNetworkAclAssociationAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplaceNetworkAclAssociationAction
+	if *v == nil {
+		sv = &types.ReplaceNetworkAclAssociationAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssociationId":
+			if err := awsAwsjson11_deserializeDocumentActionTarget(&sv.AssociationId, value); err != nil {
+				return err
+			}
+
+		case "Description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "FMSCanRemediate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.FMSCanRemediate = jtv
+			}
+
+		case "NetworkAclId":
+			if err := awsAwsjson11_deserializeDocumentActionTarget(&sv.NetworkAclId, value); err != nil {
 				return err
 			}
 
@@ -10394,6 +11316,11 @@ func awsAwsjson11_deserializeDocumentResourceViolation(v **types.ResourceViolati
 
 		case "FirewallSubnetMissingVPCEndpointViolation":
 			if err := awsAwsjson11_deserializeDocumentFirewallSubnetMissingVPCEndpointViolation(&sv.FirewallSubnetMissingVPCEndpointViolation, value); err != nil {
+				return err
+			}
+
+		case "InvalidNetworkAclEntriesViolation":
+			if err := awsAwsjson11_deserializeDocumentInvalidNetworkAclEntriesViolation(&sv.InvalidNetworkAclEntriesViolation, value); err != nil {
 				return err
 			}
 

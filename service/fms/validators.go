@@ -867,6 +867,91 @@ func validateAppsListData(v *types.AppsListData) error {
 	}
 }
 
+func validateNetworkAclCommonPolicy(v *types.NetworkAclCommonPolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkAclCommonPolicy"}
+	if v.NetworkAclEntrySet == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkAclEntrySet"))
+	} else if v.NetworkAclEntrySet != nil {
+		if err := validateNetworkAclEntrySet(v.NetworkAclEntrySet); err != nil {
+			invalidParams.AddNested("NetworkAclEntrySet", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkAclEntries(v []types.NetworkAclEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkAclEntries"}
+	for i := range v {
+		if err := validateNetworkAclEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkAclEntry(v *types.NetworkAclEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkAclEntry"}
+	if v.Protocol == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if len(v.RuleAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleAction"))
+	}
+	if v.Egress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Egress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkAclEntrySet(v *types.NetworkAclEntrySet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkAclEntrySet"}
+	if v.FirstEntries != nil {
+		if err := validateNetworkAclEntries(v.FirstEntries); err != nil {
+			invalidParams.AddNested("FirstEntries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ForceRemediateForFirstEntries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForceRemediateForFirstEntries"))
+	}
+	if v.LastEntries != nil {
+		if err := validateNetworkAclEntries(v.LastEntries); err != nil {
+			invalidParams.AddNested("LastEntries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ForceRemediateForLastEntries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForceRemediateForLastEntries"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePolicy(v *types.Policy) error {
 	if v == nil {
 		return nil
@@ -888,6 +973,23 @@ func validatePolicy(v *types.Policy) error {
 	if v.ResourceTags != nil {
 		if err := validateResourceTags(v.ResourceTags); err != nil {
 			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyOption(v *types.PolicyOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyOption"}
+	if v.NetworkAclCommonPolicy != nil {
+		if err := validateNetworkAclCommonPolicy(v.NetworkAclCommonPolicy); err != nil {
+			invalidParams.AddNested("NetworkAclCommonPolicy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -989,6 +1091,11 @@ func validateSecurityServicePolicyData(v *types.SecurityServicePolicyData) error
 	invalidParams := smithy.InvalidParamsError{Context: "SecurityServicePolicyData"}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.PolicyOption != nil {
+		if err := validatePolicyOption(v.PolicyOption); err != nil {
+			invalidParams.AddNested("PolicyOption", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

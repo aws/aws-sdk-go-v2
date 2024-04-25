@@ -437,6 +437,15 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "fips-us-gov-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "email-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-us-gov-west-1",
 			}: endpoints.Endpoint{
 				Hostname: "email-fips.us-gov-west-1.amazonaws.com",
@@ -444,6 +453,15 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-gov-west-1",
 				},
 				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "email-fips.us-gov-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-gov-west-1",

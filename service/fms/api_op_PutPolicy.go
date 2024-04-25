@@ -18,11 +18,17 @@ import (
 // Organizations, Firewall Manager automatically applies the policy to the
 // resources in that account that are within scope of the policy. Firewall Manager
 // provides the following types of policies:
+//   - WAF policy - This policy applies WAF web ACL protections to specified
+//     accounts and resources.
 //   - Shield Advanced policy - This policy applies Shield Advanced protection to
 //     specified accounts and resources.
 //   - Security Groups policy - This type of policy gives you control over
 //     security groups that are in use throughout your organization in Organizations
 //     and lets you enforce a baseline set of rules across your organization.
+//   - Network ACL policy - This type of policy gives you control over the network
+//     ACLs that are in use throughout your organization in Organizations and lets you
+//     enforce a baseline set of first and last network ACL rules across your
+//     organization.
 //   - Network Firewall policy - This policy applies Network Firewall protection
 //     to your organization's VPCs.
 //   - DNS Firewall policy - This policy applies Amazon Route 53 Resolver DNS

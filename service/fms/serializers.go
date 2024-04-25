@@ -2536,6 +2536,144 @@ func awsAwsjson11_serializeDocumentIdentifierList(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentNetworkAclCommonPolicy(v *types.NetworkAclCommonPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NetworkAclEntrySet != nil {
+		ok := object.Key("NetworkAclEntrySet")
+		if err := awsAwsjson11_serializeDocumentNetworkAclEntrySet(v.NetworkAclEntrySet, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNetworkAclEntries(v []types.NetworkAclEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentNetworkAclEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNetworkAclEntry(v *types.NetworkAclEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CidrBlock != nil {
+		ok := object.Key("CidrBlock")
+		ok.String(*v.CidrBlock)
+	}
+
+	if v.Egress != nil {
+		ok := object.Key("Egress")
+		ok.Boolean(*v.Egress)
+	}
+
+	if v.IcmpTypeCode != nil {
+		ok := object.Key("IcmpTypeCode")
+		if err := awsAwsjson11_serializeDocumentNetworkAclIcmpTypeCode(v.IcmpTypeCode, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ipv6CidrBlock != nil {
+		ok := object.Key("Ipv6CidrBlock")
+		ok.String(*v.Ipv6CidrBlock)
+	}
+
+	if v.PortRange != nil {
+		ok := object.Key("PortRange")
+		if err := awsAwsjson11_serializeDocumentNetworkAclPortRange(v.PortRange, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Protocol != nil {
+		ok := object.Key("Protocol")
+		ok.String(*v.Protocol)
+	}
+
+	if len(v.RuleAction) > 0 {
+		ok := object.Key("RuleAction")
+		ok.String(string(v.RuleAction))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNetworkAclEntrySet(v *types.NetworkAclEntrySet, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FirstEntries != nil {
+		ok := object.Key("FirstEntries")
+		if err := awsAwsjson11_serializeDocumentNetworkAclEntries(v.FirstEntries, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ForceRemediateForFirstEntries != nil {
+		ok := object.Key("ForceRemediateForFirstEntries")
+		ok.Boolean(*v.ForceRemediateForFirstEntries)
+	}
+
+	if v.ForceRemediateForLastEntries != nil {
+		ok := object.Key("ForceRemediateForLastEntries")
+		ok.Boolean(*v.ForceRemediateForLastEntries)
+	}
+
+	if v.LastEntries != nil {
+		ok := object.Key("LastEntries")
+		if err := awsAwsjson11_serializeDocumentNetworkAclEntries(v.LastEntries, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNetworkAclIcmpTypeCode(v *types.NetworkAclIcmpTypeCode, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Code != nil {
+		ok := object.Key("Code")
+		ok.Integer(*v.Code)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		ok.Integer(*v.Type)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentNetworkAclPortRange(v *types.NetworkAclPortRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.From != nil {
+		ok := object.Key("From")
+		ok.Integer(*v.From)
+	}
+
+	if v.To != nil {
+		ok := object.Key("To")
+		ok.Integer(*v.To)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNetworkFirewallPolicy(v *types.NetworkFirewallPolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2680,6 +2818,13 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 func awsAwsjson11_serializeDocumentPolicyOption(v *types.PolicyOption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.NetworkAclCommonPolicy != nil {
+		ok := object.Key("NetworkAclCommonPolicy")
+		if err := awsAwsjson11_serializeDocumentNetworkAclCommonPolicy(v.NetworkAclCommonPolicy, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.NetworkFirewallPolicy != nil {
 		ok := object.Key("NetworkFirewallPolicy")

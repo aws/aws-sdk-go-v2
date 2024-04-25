@@ -104,6 +104,46 @@ func (DestinationType) Values() []DestinationType {
 	}
 }
 
+type EntryType string
+
+// Enum values for EntryType
+const (
+	EntryTypeFMSManagedFirstEntry EntryType = "FMS_MANAGED_FIRST_ENTRY"
+	EntryTypeFMSManagedLastEntry  EntryType = "FMS_MANAGED_LAST_ENTRY"
+	EntryTypeCustomEntry          EntryType = "CUSTOM_ENTRY"
+)
+
+// Values returns all known values for EntryType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EntryType) Values() []EntryType {
+	return []EntryType{
+		"FMS_MANAGED_FIRST_ENTRY",
+		"FMS_MANAGED_LAST_ENTRY",
+		"CUSTOM_ENTRY",
+	}
+}
+
+type EntryViolationReason string
+
+// Enum values for EntryViolationReason
+const (
+	EntryViolationReasonMissingExpectedEntry EntryViolationReason = "MISSING_EXPECTED_ENTRY"
+	EntryViolationReasonIncorrectEntryOrder  EntryViolationReason = "INCORRECT_ENTRY_ORDER"
+	EntryViolationReasonEntryConflict        EntryViolationReason = "ENTRY_CONFLICT"
+)
+
+// Values returns all known values for EntryViolationReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EntryViolationReason) Values() []EntryViolationReason {
+	return []EntryViolationReason{
+		"MISSING_EXPECTED_ENTRY",
+		"INCORRECT_ENTRY_ORDER",
+		"ENTRY_CONFLICT",
+	}
+}
+
 type FailedItemReason string
 
 // Enum values for FailedItemReason
@@ -166,6 +206,24 @@ func (MarketplaceSubscriptionOnboardingStatus) Values() []MarketplaceSubscriptio
 		"NO_SUBSCRIPTION",
 		"NOT_COMPLETE",
 		"COMPLETE",
+	}
+}
+
+type NetworkAclRuleAction string
+
+// Enum values for NetworkAclRuleAction
+const (
+	NetworkAclRuleActionAllow NetworkAclRuleAction = "allow"
+	NetworkAclRuleActionDeny  NetworkAclRuleAction = "deny"
+)
+
+// Values returns all known values for NetworkAclRuleAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkAclRuleAction) Values() []NetworkAclRuleAction {
+	return []NetworkAclRuleAction{
+		"allow",
+		"deny",
 	}
 }
 
@@ -294,6 +352,7 @@ const (
 	SecurityServiceTypeDnsFirewall                SecurityServiceType = "DNS_FIREWALL"
 	SecurityServiceTypeThirdPartyFirewall         SecurityServiceType = "THIRD_PARTY_FIREWALL"
 	SecurityServiceTypeImportNetworkFirewall      SecurityServiceType = "IMPORT_NETWORK_FIREWALL"
+	SecurityServiceTypeNetworkAclCommon           SecurityServiceType = "NETWORK_ACL_COMMON"
 )
 
 // Values returns all known values for SecurityServiceType. Note that this can be
@@ -311,6 +370,7 @@ func (SecurityServiceType) Values() []SecurityServiceType {
 		"DNS_FIREWALL",
 		"THIRD_PARTY_FIREWALL",
 		"IMPORT_NETWORK_FIREWALL",
+		"NETWORK_ACL_COMMON",
 	}
 }
 
@@ -423,6 +483,7 @@ const (
 	ViolationReasonResourceMissingDnsFirewall              ViolationReason = "RESOURCE_MISSING_DNS_FIREWALL"
 	ViolationReasonRouteHasOutOfScopeEndpoint              ViolationReason = "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT"
 	ViolationReasonFirewallSubnetMissingVPCEndpoint        ViolationReason = "FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT"
+	ViolationReasonInvalidNetworkAclEntry                  ViolationReason = "INVALID_NETWORK_ACL_ENTRY"
 )
 
 // Values returns all known values for ViolationReason. Note that this can be
@@ -458,5 +519,6 @@ func (ViolationReason) Values() []ViolationReason {
 		"RESOURCE_MISSING_DNS_FIREWALL",
 		"ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT",
 		"FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT",
+		"INVALID_NETWORK_ACL_ENTRY",
 	}
 }

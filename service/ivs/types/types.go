@@ -31,7 +31,7 @@ type AudioConfiguration struct {
 // Error related to a specific channel, specified by its ARN.
 type BatchError struct {
 
-	// Channel ARN.
+	// ARN of an IVS resource; e.g., channel.
 	Arn *string
 
 	// Error code.

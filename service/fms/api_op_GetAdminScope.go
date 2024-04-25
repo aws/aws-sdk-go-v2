@@ -12,8 +12,8 @@ import (
 )
 
 // Returns information about the specified account's administrative scope. The
-// admistrative scope defines the resources that an Firewall Manager administrator
-// can manage.
+// administrative scope defines the resources that an Firewall Manager
+// administrator can manage.
 func (c *Client) GetAdminScope(ctx context.Context, params *GetAdminScopeInput, optFns ...func(*Options)) (*GetAdminScopeOutput, error) {
 	if params == nil {
 		params = &GetAdminScopeInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetAdminScope(ctx context.Context, params *GetAdminScopeInput, 
 
 type GetAdminScopeInput struct {
 
-	// The administator account that you want to get the details for.
+	// The administrator account that you want to get the details for.
 	//
 	// This member is required.
 	AdminAccount *string
@@ -45,7 +45,7 @@ type GetAdminScopeOutput struct {
 	AdminScope *types.AdminScope
 
 	// The current status of the request to onboard a member account as an Firewall
-	// Manager administator.
+	// Manager administrator.
 	//   - ONBOARDING - The account is onboarding to Firewall Manager as an
 	//   administrator.
 	//   - ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall

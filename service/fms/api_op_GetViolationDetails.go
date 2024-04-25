@@ -41,6 +41,7 @@ type GetViolationDetailsInput struct {
 	//   - Imported Network Firewall
 	//   - Network Firewall
 	//   - Security group content audit
+	//   - Network ACL
 	//   - Third-party firewall
 	//
 	// This member is required.

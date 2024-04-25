@@ -1,0 +1,8 @@
+{
+    "id": "4b186daa-cc85-4d01-b88d-e2fc82a5348e",
+    "type": "feature",
+    "description": "Bug Fix: IVS Real Time does not support ARNs using the `svs` prefix.",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

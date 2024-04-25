@@ -68,7 +68,7 @@ type AdminAccountSummary struct {
 	DefaultAdmin bool
 
 	// The current status of the request to onboard a member account as an Firewall
-	// Manager administator.
+	// Manager administrator.
 	//   - ONBOARDING - The account is onboarding to Firewall Manager as an
 	//   administrator.
 	//   - ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall
@@ -246,6 +246,66 @@ type ComplianceViolator struct {
 
 	// The reason that the resource is not protected by the policy.
 	ViolationReason ViolationReason
+
+	noSmithyDocumentSerde
+}
+
+// Information about the CreateNetworkAcl action in Amazon EC2. This is a
+// remediation option in RemediationAction .
+type CreateNetworkAclAction struct {
+
+	// Brief description of this remediation action.
+	Description *string
+
+	// Indicates whether it is possible for Firewall Manager to perform this
+	// remediation action. A false value indicates that auto remediation is disabled or
+	// Firewall Manager is unable to perform the action due to a conflict of some kind.
+	FMSCanRemediate bool
+
+	// The VPC that's associated with the remediation action.
+	Vpc *ActionTarget
+
+	noSmithyDocumentSerde
+}
+
+// Information about the CreateNetworkAclEntries action in Amazon EC2. This is a
+// remediation option in RemediationAction .
+type CreateNetworkAclEntriesAction struct {
+
+	// Brief description of this remediation action.
+	Description *string
+
+	// Indicates whether it is possible for Firewall Manager to perform this
+	// remediation action. A false value indicates that auto remediation is disabled or
+	// Firewall Manager is unable to perform the action due to a conflict of some kind.
+	FMSCanRemediate bool
+
+	// Lists the entries that the remediation action would create.
+	NetworkAclEntriesToBeCreated []EntryDescription
+
+	// The network ACL that's associated with the remediation action.
+	NetworkAclId *ActionTarget
+
+	noSmithyDocumentSerde
+}
+
+// Information about the DeleteNetworkAclEntries action in Amazon EC2. This is a
+// remediation option in RemediationAction .
+type DeleteNetworkAclEntriesAction struct {
+
+	// Brief description of this remediation action.
+	Description *string
+
+	// Indicates whether it is possible for Firewall Manager to perform this
+	// remediation action. A false value indicates that auto remediation is disabled or
+	// Firewall Manager is unable to perform the action due to a conflict of some kind.
+	FMSCanRemediate bool
+
+	// Lists the entries that the remediation action would delete.
+	NetworkAclEntriesToBeDeleted []EntryDescription
+
+	// The network ACL that's associated with the remediation action.
+	NetworkAclId *ActionTarget
 
 	noSmithyDocumentSerde
 }
@@ -491,6 +551,64 @@ type EC2ReplaceRouteTableAssociationAction struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a single rule in a network ACL.
+type EntryDescription struct {
+
+	// Describes a rule in a network ACL. Each network ACL has a set of numbered
+	// ingress rules and a separate set of numbered egress rules. When determining
+	// whether a packet should be allowed in or out of a subnet associated with the
+	// network ACL, Amazon Web Services processes the entries in the network ACL
+	// according to the rule numbers, in ascending order. When you manage an individual
+	// network ACL, you explicitly specify the rule numbers. When you specify the
+	// network ACL rules in a Firewall Manager policy, you provide the rules to run
+	// first, in the order that you want them to run, and the rules to run last, in the
+	// order that you want them to run. Firewall Manager assigns the rule numbers for
+	// you when you save the network ACL policy specification.
+	EntryDetail *NetworkAclEntry
+
+	// The rule number for the entry. ACL entries are processed in ascending order by
+	// rule number. In a Firewall Manager network ACL policy, Firewall Manager assigns
+	// rule numbers.
+	EntryRuleNumber int32
+
+	// Specifies whether the entry is managed by Firewall Manager or by a user, and,
+	// for Firewall Manager-managed entries, specifies whether the entry is among those
+	// that run first in the network ACL or those that run last.
+	EntryType EntryType
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about an entry violation in a network ACL. The violation
+// is against the network ACL specification inside the Firewall Manager network ACL
+// policy. This data object is part of InvalidNetworkAclEntriesViolation .
+type EntryViolation struct {
+
+	// The evaluation location within the ordered list of entries where the
+	// ExpectedEntry is currently located.
+	ActualEvaluationOrder *string
+
+	// The list of entries that are in conflict with ExpectedEntry .
+	EntriesWithConflicts []EntryDescription
+
+	// The entry that's currently in the ExpectedEvaluationOrder location, in place of
+	// the expected entry.
+	EntryAtExpectedEvaluationOrder *EntryDescription
+
+	// Descriptions of the violations that Firewall Manager found for these entries.
+	EntryViolationReasons []EntryViolationReason
+
+	// The Firewall Manager-managed network ACL entry that is involved in the entry
+	// violation.
+	ExpectedEntry *EntryDescription
+
+	// The evaluation location within the ordered list of entries where the
+	// ExpectedEntry should be, according to the network ACL policy specifications.
+	ExpectedEvaluationOrder *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the compliance status for the account. An account is considered
 // noncompliant if it includes resources that are not protected by the specified
 // policy or that don't comply with the policy.
@@ -604,6 +722,151 @@ type FMSPolicyUpdateFirewallCreationConfigAction struct {
 	// SecurityServiceData (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_SecurityServicePolicyData.html)
 	// in order to remedy scope violations.
 	FirewallCreationConfig *string
+
+	noSmithyDocumentSerde
+}
+
+// Violation detail for the entries in a network ACL resource.
+type InvalidNetworkAclEntriesViolation struct {
+
+	// The network ACL containing the entry violations.
+	CurrentAssociatedNetworkAcl *string
+
+	// Detailed information about the entry violations in the network ACL.
+	EntryViolations []EntryViolation
+
+	// The subnet that's associated with the network ACL.
+	Subnet *string
+
+	// The Availability Zone where the network ACL is in use.
+	SubnetAvailabilityZone *string
+
+	// The VPC where the violation was found.
+	Vpc *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a Firewall Manager network ACL policy. This is used in the PolicyOption
+// of a SecurityServicePolicyData for a Policy , when the SecurityServicePolicyData
+// type is set to NETWORK_ACL_COMMON . For information about network ACLs, see
+// Control traffic to subnets using network ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html)
+// in the Amazon Virtual Private Cloud User Guide.
+type NetworkAclCommonPolicy struct {
+
+	// The definition of the first and last rules for the network ACL policy.
+	//
+	// This member is required.
+	NetworkAclEntrySet *NetworkAclEntrySet
+
+	noSmithyDocumentSerde
+}
+
+// Describes a rule in a network ACL. Each network ACL has a set of numbered
+// ingress rules and a separate set of numbered egress rules. When determining
+// whether a packet should be allowed in or out of a subnet associated with the
+// network ACL, Amazon Web Services processes the entries in the network ACL
+// according to the rule numbers, in ascending order. When you manage an individual
+// network ACL, you explicitly specify the rule numbers. When you specify the
+// network ACL rules in a Firewall Manager policy, you provide the rules to run
+// first, in the order that you want them to run, and the rules to run last, in the
+// order that you want them to run. Firewall Manager assigns the rule numbers for
+// you when you save the network ACL policy specification.
+type NetworkAclEntry struct {
+
+	// Indicates whether the rule is an egress, or outbound, rule (applied to traffic
+	// leaving the subnet). If it's not an egress rule, then it's an ingress, or
+	// inbound, rule.
+	//
+	// This member is required.
+	Egress *bool
+
+	// The protocol number. A value of "-1" means all protocols.
+	//
+	// This member is required.
+	Protocol *string
+
+	// Indicates whether to allow or deny the traffic that matches the rule.
+	//
+	// This member is required.
+	RuleAction NetworkAclRuleAction
+
+	// The IPv4 network range to allow or deny, in CIDR notation.
+	CidrBlock *string
+
+	// ICMP protocol: The ICMP type and code.
+	IcmpTypeCode *NetworkAclIcmpTypeCode
+
+	// The IPv6 network range to allow or deny, in CIDR notation.
+	Ipv6CidrBlock *string
+
+	// TCP or UDP protocols: The range of ports the rule applies to.
+	PortRange *NetworkAclPortRange
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the first and last rules for the network ACL policy, and
+// the remediation settings for each.
+type NetworkAclEntrySet struct {
+
+	// Applies only when remediation is enabled for the policy as a whole. Firewall
+	// Manager uses this setting when it finds policy violations that involve conflicts
+	// between the custom entries and the policy entries. If forced remediation is
+	// disabled, Firewall Manager marks the network ACL as noncompliant and does not
+	// try to remediate. For more information about the remediation behavior, see
+	// Network access control list (ACL) policies (https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html)
+	// in the Firewall Manager Developer Guide.
+	//
+	// This member is required.
+	ForceRemediateForFirstEntries *bool
+
+	// Applies only when remediation is enabled for the policy as a whole. Firewall
+	// Manager uses this setting when it finds policy violations that involve conflicts
+	// between the custom entries and the policy entries. If forced remediation is
+	// disabled, Firewall Manager marks the network ACL as noncompliant and does not
+	// try to remediate. For more information about the remediation behavior, see
+	// Network access control list (ACL) policies (https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html)
+	// in the Firewall Manager Developer Guide.
+	//
+	// This member is required.
+	ForceRemediateForLastEntries *bool
+
+	// The rules that you want to run first in the Firewall Manager managed network
+	// ACLs. Provide these in the order in which you want them to run. Firewall Manager
+	// will assign the specific rule numbers for you, in the network ACLs that it
+	// creates.
+	FirstEntries []NetworkAclEntry
+
+	// The rules that you want to run last in the Firewall Manager managed network
+	// ACLs. Provide these in the order in which you want them to run. Firewall Manager
+	// will assign the specific rule numbers for you, in the network ACLs that it
+	// creates.
+	LastEntries []NetworkAclEntry
+
+	noSmithyDocumentSerde
+}
+
+// ICMP protocol: The ICMP type and code.
+type NetworkAclIcmpTypeCode struct {
+
+	// ICMP code.
+	Code *int32
+
+	// ICMP type.
+	Type *int32
+
+	noSmithyDocumentSerde
+}
+
+// TCP or UDP protocols: The range of ports the rule applies to.
+type NetworkAclPortRange struct {
+
+	// The beginning port number of the range.
+	From *int32
+
+	// The ending port number of the range.
+	To *int32
 
 	noSmithyDocumentSerde
 }
@@ -1014,13 +1277,14 @@ type Policy struct {
 	//   .
 	//   - WAF - AWS::ApiGateway::Stage , AWS::ElasticLoadBalancingV2::LoadBalancer ,
 	//   and AWS::CloudFront::Distribution .
-	//   - DNS Firewall, Network Firewall, and third-party firewall - AWS::EC2::VPC .
 	//   - Shield Advanced - AWS::ElasticLoadBalancingV2::LoadBalancer ,
 	//   AWS::ElasticLoadBalancing::LoadBalancer , AWS::EC2::EIP , and
 	//   AWS::CloudFront::Distribution .
+	//   - Network ACL - AWS::EC2::Subnet .
+	//   - Security group usage audit - AWS::EC2::SecurityGroup .
 	//   - Security group content audit - AWS::EC2::SecurityGroup ,
 	//   AWS::EC2::NetworkInterface , and AWS::EC2::Instance .
-	//   - Security group usage audit - AWS::EC2::SecurityGroup .
+	//   - DNS Firewall, Network Firewall, and third-party firewall - AWS::EC2::VPC .
 	//
 	// This member is required.
 	ResourceType *string
@@ -1174,9 +1438,12 @@ type PolicyComplianceStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Network Firewall firewall policy options to configure the policy's
-// deployment model and third-party firewall policy settings.
+// Contains the settings to configure a network ACL policy, a Network Firewall
+// firewall policy deployment model, or a third-party firewall policy.
 type PolicyOption struct {
+
+	// Defines a Firewall Manager network ACL policy.
+	NetworkAclCommonPolicy *NetworkAclCommonPolicy
 
 	// Defines the deployment model to use for the firewall policy.
 	NetworkFirewallPolicy *NetworkFirewallPolicy
@@ -1221,14 +1488,7 @@ type PolicySummary struct {
 
 	// The type of resource protected by or in scope of the policy. This is in the
 	// format shown in the Amazon Web Services Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-	// . For WAF and Shield Advanced, examples include
-	// AWS::ElasticLoadBalancingV2::LoadBalancer and AWS::CloudFront::Distribution .
-	// For a security group common policy, valid values are AWS::EC2::NetworkInterface
-	// and AWS::EC2::Instance . For a security group content audit policy, valid values
-	// are AWS::EC2::SecurityGroup , AWS::EC2::NetworkInterface , and
-	// AWS::EC2::Instance . For a security group usage audit policy, the value is
-	// AWS::EC2::SecurityGroup . For an Network Firewall policy or DNS Firewall policy,
-	// the value is AWS::EC2::VPC .
+	// .
 	ResourceType *string
 
 	// The service that the policy is using to protect the resources. This specifies
@@ -1354,6 +1614,15 @@ type RegionScope struct {
 // Information about an individual action you can take to remediate a violation.
 type RemediationAction struct {
 
+	// Information about the CreateNetworkAcl action in Amazon EC2.
+	CreateNetworkAclAction *CreateNetworkAclAction
+
+	// Information about the CreateNetworkAclEntries action in Amazon EC2.
+	CreateNetworkAclEntriesAction *CreateNetworkAclEntriesAction
+
+	// Information about the DeleteNetworkAclEntries action in Amazon EC2.
+	DeleteNetworkAclEntriesAction *DeleteNetworkAclEntriesAction
+
 	// A description of a remediation action.
 	Description *string
 
@@ -1381,6 +1650,9 @@ type RemediationAction struct {
 	// The remedial action to take when updating a firewall configuration.
 	FMSPolicyUpdateFirewallCreationConfigAction *FMSPolicyUpdateFirewallCreationConfigAction
 
+	// Information about the ReplaceNetworkAclAssociation action in Amazon EC2.
+	ReplaceNetworkAclAssociationAction *ReplaceNetworkAclAssociationAction
+
 	noSmithyDocumentSerde
 }
 
@@ -1392,6 +1664,27 @@ type RemediationActionWithOrder struct {
 
 	// Information about an action you can take to remediate a violation.
 	RemediationAction *RemediationAction
+
+	noSmithyDocumentSerde
+}
+
+// Information about the ReplaceNetworkAclAssociation action in Amazon EC2. This
+// is a remediation option in RemediationAction .
+type ReplaceNetworkAclAssociationAction struct {
+
+	// Describes a remediation action target.
+	AssociationId *ActionTarget
+
+	// Brief description of this remediation action.
+	Description *string
+
+	// Indicates whether it is possible for Firewall Manager to perform this
+	// remediation action. A false value indicates that auto remediation is disabled or
+	// Firewall Manager is unable to perform the action due to a conflict of some kind.
+	FMSCanRemediate bool
+
+	// The network ACL that's associated with the remediation action.
+	NetworkAclId *ActionTarget
 
 	noSmithyDocumentSerde
 }
@@ -1546,6 +1839,9 @@ type ResourceViolation struct {
 	// The violation details for a third-party firewall's VPC endpoint subnet that was
 	// deleted.
 	FirewallSubnetMissingVPCEndpointViolation *FirewallSubnetMissingVPCEndpointViolation
+
+	// Violation detail for the entries in a network ACL resource.
+	InvalidNetworkAclEntriesViolation *InvalidNetworkAclEntriesViolation
 
 	// Violation detail for an internet gateway route with an inactive state in the
 	// customer subnet route table or Network Firewall subnet route table.
@@ -1784,7 +2080,7 @@ type SecurityServicePolicyData struct {
 	//   Firewall Manager won't be able to create the policy. When you enable
 	//   revertManualSecurityGroupChanges , Firewall Manager identifies and reports
 	//   when the security groups created by this policy become non-compliant. Firewall
-	//   Manager won't distrubute system tags added by Amazon Web Services services into
+	//   Manager won't distribute system tags added by Amazon Web Services services into
 	//   the replica security groups. System tags begin with the aws: prefix.
 	//   - Example: Shared VPCs. Apply the preceding policy to resources in shared
 	//   VPCs as well as to those in VPCs that the account owns
@@ -1922,8 +2218,8 @@ type SecurityServicePolicyData struct {
 	//   {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}"
 	ManagedServiceData *string
 
-	// Contains the Network Firewall firewall policy options to configure a
-	// centralized deployment model.
+	// Contains the settings to configure a network ACL policy, a Network Firewall
+	// firewall policy deployment model, or a third-party firewall policy.
 	PolicyOption *PolicyOption
 
 	noSmithyDocumentSerde
