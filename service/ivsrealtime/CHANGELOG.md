@@ -1,3 +1,7 @@
+# v1.13.0 (2024-04-25)
+
+* **Feature**: Bug Fix: IVS Real Time does not support ARNs using the `svs` prefix.
+
 # v1.12.2 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

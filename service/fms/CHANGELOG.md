@@ -1,3 +1,7 @@
+# v1.32.0 (2024-04-25)
+
+* **Feature**: AWS Firewall Manager adds support for network ACL policies to manage Amazon Virtual Private Cloud (VPC) network access control lists (ACLs) for accounts in your organization.
+
 # v1.31.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

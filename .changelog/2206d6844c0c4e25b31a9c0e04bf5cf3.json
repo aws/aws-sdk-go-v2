@@ -1,8 +1,0 @@
-{
-    "id": "2206d684-4c0c-4e25-b31a-9c0e04bf5cf3",
-    "type": "feature",
-    "description": "Bug Fix: IVS does not support arns with the `svs` prefix",
-    "modules": [
-        "service/ivs"
-    ]
-}

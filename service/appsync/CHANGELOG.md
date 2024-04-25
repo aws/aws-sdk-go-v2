@@ -1,3 +1,7 @@
+# v1.32.0 (2024-04-25)
+
+* **Feature**: UpdateGraphQLAPI documentation update and datasource introspection secret arn update
+
 # v1.31.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

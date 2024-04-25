@@ -1,3 +1,7 @@
+# v1.77.3 (2024-04-25)
+
+* **Documentation**: Updates Amazon RDS documentation for setting local time zones for RDS for Db2 DB instances.
+
 # v1.77.2 (2024-04-23)
 
 * **Documentation**: Fix the example ARN for ModifyActivityStreamRequest

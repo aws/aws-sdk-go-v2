@@ -1,3 +1,7 @@
+# v1.35.0 (2024-04-25)
+
+* **Feature**: Bug Fix: IVS does not support arns with the `svs` prefix
+
 # v1.34.0 (2024-04-04)
 
 * **Feature**: API update to include an SRT ingest endpoint and passphrase for all channels.

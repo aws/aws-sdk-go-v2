@@ -1,3 +1,19 @@
+# Release (2024-04-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.32.0](service/appsync/CHANGELOG.md#v1320-2024-04-25)
+  * **Feature**: UpdateGraphQLAPI documentation update and datasource introspection secret arn update
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.32.0](service/fms/CHANGELOG.md#v1320-2024-04-25)
+  * **Feature**: AWS Firewall Manager adds support for network ACL policies to manage Amazon Virtual Private Cloud (VPC) network access control lists (ACLs) for accounts in your organization.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.35.0](service/ivs/CHANGELOG.md#v1350-2024-04-25)
+  * **Feature**: Bug Fix: IVS does not support arns with the `svs` prefix
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.13.0](service/ivsrealtime/CHANGELOG.md#v1130-2024-04-25)
+  * **Feature**: Bug Fix: IVS Real Time does not support ARNs using the `svs` prefix.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.77.3](service/rds/CHANGELOG.md#v1773-2024-04-25)
+  * **Documentation**: Updates Amazon RDS documentation for setting local time zones for RDS for Db2 DB instances.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.27.0](service/sfn/CHANGELOG.md#v1270-2024-04-25)
+  * **Feature**: Add new ValidateStateMachineDefinition operation, which performs syntax checking on the definition of a Amazon States Language (ASL) state machine.
+
 # Release (2024-04-24)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "30557e8a-3cd3-41c2-a4fe-dedb9b2db7b2",
-    "type": "feature",
-    "description": "UpdateGraphQLAPI documentation update and datasource introspection secret arn update",
-    "modules": [
-        "service/appsync"
-    ]
-}

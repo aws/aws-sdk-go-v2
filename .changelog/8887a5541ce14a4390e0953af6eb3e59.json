@@ -1,8 +1,0 @@
-{
-    "id": "8887a554-1ce1-4a43-90e0-953af6eb3e59",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for setting local time zones for RDS for Db2 DB instances.",
-    "modules": [
-        "service/rds"
-    ]
-}
