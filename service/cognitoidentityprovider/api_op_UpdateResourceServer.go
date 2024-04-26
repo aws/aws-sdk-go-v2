@@ -36,7 +36,12 @@ func (c *Client) UpdateResourceServer(ctx context.Context, params *UpdateResourc
 
 type UpdateResourceServerInput struct {
 
-	// The identifier for the resource server.
+	// A unique resource server identifier for the resource server. The identifier can
+	// be an API friendly name like solar-system-data . You can also set an API URL
+	// like https://solar-system-data-api.example.com as your identifier. Amazon
+	// Cognito represents scopes in the access token in the format
+	// $resource-server-identifier/$scope . Longer scope-identifier strings increase
+	// the size of your access tokens.
 	//
 	// This member is required.
 	Identifier *string

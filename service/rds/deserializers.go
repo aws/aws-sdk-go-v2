@@ -31904,6 +31904,22 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 				sv.SupportsIntegrations = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("SupportsLimitlessDatabase", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLimitlessDatabase = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -54129,6 +54145,22 @@ func awsAwsquery_deserializeDocumentUpgradeTarget(v **types.UpgradeTarget, decod
 				sv.SupportsIntegrations = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("SupportsLimitlessDatabase", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLimitlessDatabase = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -55869,6 +55901,22 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 				sv.SupportsIntegrations = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("SupportsLimitlessDatabase", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLimitlessDatabase = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -57433,6 +57481,22 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.SupportsIntegrations = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("SupportsLimitlessDatabase", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLimitlessDatabase = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):
@@ -61828,6 +61892,22 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.SupportsIntegrations = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("SupportsLimitlessDatabase", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.SupportsLimitlessDatabase = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("SupportsLocalWriteForwarding", t.Name.Local):

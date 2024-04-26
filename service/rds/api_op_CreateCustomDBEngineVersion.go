@@ -222,6 +222,9 @@ type CreateCustomDBEngineVersionOutput struct {
 	// Amazon Redshift.
 	SupportsIntegrations *bool
 
+	// Indicates whether the DB engine version supports Aurora Limitless Database.
+	SupportsLimitlessDatabase *bool
+
 	// Indicates whether the DB engine version supports forwarding write operations
 	// from reader DB instances to the writer DB instance in the DB cluster. By
 	// default, write operations aren't allowed on reader DB instances. Valid for:

@@ -10975,6 +10975,9 @@ func awsAwsjson11_deserializeOpErrorSignUp(response *smithyhttp.Response, metada
 	case strings.EqualFold("InvalidSmsRoleTrustRelationshipException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidSmsRoleTrustRelationshipException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 

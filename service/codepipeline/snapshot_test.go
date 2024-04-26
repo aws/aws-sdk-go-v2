@@ -458,6 +458,18 @@ func TestCheckSnapshot_RetryStageExecution(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RollbackStage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RollbackStage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RollbackStage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartPipelineExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartPipelineExecution(context.Background(), nil, func(o *Options) {
@@ -918,6 +930,18 @@ func TestUpdateSnapshot_RetryStageExecution(t *testing.T) {
 	_, err := svc.RetryStageExecution(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RetryStageExecution")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RollbackStage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RollbackStage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RollbackStage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

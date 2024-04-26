@@ -193,6 +193,24 @@ func (ExecutionMode) Values() []ExecutionMode {
 	}
 }
 
+type ExecutionType string
+
+// Enum values for ExecutionType
+const (
+	ExecutionTypeStandard ExecutionType = "STANDARD"
+	ExecutionTypeRollback ExecutionType = "ROLLBACK"
+)
+
+// Values returns all known values for ExecutionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionType) Values() []ExecutionType {
+	return []ExecutionType{
+		"STANDARD",
+		"ROLLBACK",
+	}
+}
+
 type ExecutorType string
 
 // Enum values for ExecutorType
@@ -347,6 +365,22 @@ func (PipelineType) Values() []PipelineType {
 	}
 }
 
+type Result string
+
+// Enum values for Result
+const (
+	ResultRollback Result = "ROLLBACK"
+)
+
+// Values returns all known values for Result. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Result) Values() []Result {
+	return []Result{
+		"ROLLBACK",
+	}
+}
+
 type SourceRevisionType string
 
 // Enum values for SourceRevisionType
@@ -458,6 +492,8 @@ const (
 	TriggerTypeCloudWatchEvent        TriggerType = "CloudWatchEvent"
 	TriggerTypePutActionRevision      TriggerType = "PutActionRevision"
 	TriggerTypeWebhookV2              TriggerType = "WebhookV2"
+	TriggerTypeManualRollback         TriggerType = "ManualRollback"
+	TriggerTypeAutomatedRollback      TriggerType = "AutomatedRollback"
 )
 
 // Values returns all known values for TriggerType. Note that this can be expanded
@@ -472,6 +508,8 @@ func (TriggerType) Values() []TriggerType {
 		"CloudWatchEvent",
 		"PutActionRevision",
 		"WebhookV2",
+		"ManualRollback",
+		"AutomatedRollback",
 	}
 }
 

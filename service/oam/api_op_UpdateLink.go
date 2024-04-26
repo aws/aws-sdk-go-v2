@@ -13,8 +13,10 @@ import (
 
 // Use this operation to change what types of data are shared from a source
 // account to its linked monitoring account sink. You can't change the sink or
-// change the monitoring account with this operation. To update the list of tags
-// associated with the sink, use TagResource (https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html)
+// change the monitoring account with this operation. When you update a link, you
+// can optionally specify filters that specify which metric namespaces and which
+// log groups are shared from the source account to the monitoring account. To
+// update the list of tags associated with the sink, use TagResource (https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html)
 // .
 func (c *Client) UpdateLink(ctx context.Context, params *UpdateLinkInput, optFns ...func(*Options)) (*UpdateLinkOutput, error) {
 	if params == nil {
@@ -45,6 +47,10 @@ type UpdateLinkInput struct {
 	// This member is required.
 	ResourceTypes []types.ResourceType
 
+	// Use this structure to filter which metric namespaces and which log groups are
+	// to be shared from the source account to the monitoring account.
+	LinkConfiguration *types.LinkConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -63,6 +69,10 @@ type UpdateLinkOutput struct {
 	// The exact label template that was specified when the link was created, with the
 	// template variables not resolved.
 	LabelTemplate *string
+
+	// This structure includes filters that specify which metric namespaces and which
+	// log groups are shared from the source account to the monitoring account.
+	LinkConfiguration *types.LinkConfiguration
 
 	// The resource types now supported by this link.
 	ResourceTypes []string

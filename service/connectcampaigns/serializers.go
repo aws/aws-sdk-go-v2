@@ -1709,6 +1709,11 @@ func awsRestjson1_serializeDocumentAnswerMachineDetectionConfig(v *types.AnswerM
 	object := value.Object()
 	defer object.Close()
 
+	if v.AwaitAnswerMachinePrompt != nil {
+		ok := object.Key("awaitAnswerMachinePrompt")
+		ok.Boolean(*v.AwaitAnswerMachinePrompt)
+	}
+
 	if v.EnableAnswerMachineDetection != nil {
 		ok := object.Key("enableAnswerMachineDetection")
 		ok.Boolean(*v.EnableAnswerMachineDetection)

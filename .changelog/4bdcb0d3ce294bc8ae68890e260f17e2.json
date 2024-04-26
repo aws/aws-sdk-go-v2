@@ -1,0 +1,8 @@
+{
+    "id": "4bdcb0d3-ce29-4bc8-ae68-890e260f17e2",
+    "type": "feature",
+    "description": "Add ability to manually and automatically roll back a pipeline stage to a previously successful execution.",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

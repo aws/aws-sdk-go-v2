@@ -418,6 +418,19 @@ func (r *resolver) ResolveEndpoint(
 				}
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
 			}
+			if _Region == "cn-northwest-1" {
+				uriString := "https://entitlement-marketplace.cn-northwest-1.amazonaws.com.cn"
+
+				uri, err := url.Parse(uriString)
+				if err != nil {
+					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+				}
+
+				return smithyendpoints.Endpoint{
+					URI:     *uri,
+					Headers: http.Header{},
+				}, nil
+			}
 			if "aws" == _PartitionResult.Name {
 				uriString := func() string {
 					var out strings.Builder

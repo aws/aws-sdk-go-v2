@@ -3491,6 +3491,15 @@ func awsRestjson1_deserializeDocumentAnswerMachineDetectionConfig(v **types.Answ
 
 	for key, value := range shape {
 		switch key {
+		case "awaitAnswerMachinePrompt":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AwaitAnswerMachinePrompt = ptr.Bool(jtv)
+			}
+
 		case "enableAnswerMachineDetection":
 			if value != nil {
 				jtv, ok := value.(bool)

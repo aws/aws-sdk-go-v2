@@ -1,0 +1,8 @@
+{
+    "id": "9a28e16b-3f7d-40b7-af5c-668fd36e83f6",
+    "type": "feature",
+    "description": "This release introduces support for Source Accounts to define which Metrics and Logs to share with the Monitoring Account",
+    "modules": [
+        "service/oam"
+    ]
+}

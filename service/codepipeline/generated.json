@@ -41,6 +41,7 @@
         "api_op_PutWebhook.go",
         "api_op_RegisterWebhookWithThirdParty.go",
         "api_op_RetryStageExecution.go",
+        "api_op_RollbackStage.go",
         "api_op_StartPipelineExecution.go",
         "api_op_StopPipelineExecution.go",
         "api_op_TagResource.go",

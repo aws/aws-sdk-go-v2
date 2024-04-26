@@ -1,0 +1,8 @@
+{
+    "id": "04e930bb-6f1f-4256-a454-08f269af7532",
+    "type": "feature",
+    "description": "SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.",
+    "modules": [
+        "service/rds"
+    ]
+}

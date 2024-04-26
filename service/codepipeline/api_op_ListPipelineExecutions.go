@@ -36,6 +36,9 @@ type ListPipelineExecutionsInput struct {
 	// This member is required.
 	PipelineName *string
 
+	// The pipeline execution to filter on.
+	Filter *types.PipelineExecutionFilter
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. Pipeline
 	// history is limited to the most recent 12 months, based on pipeline execution

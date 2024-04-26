@@ -570,6 +570,26 @@ func (m *validateOpRetryStageExecution) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRollbackStage struct {
+}
+
+func (*validateOpRollbackStage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRollbackStage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RollbackStageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRollbackStageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartPipelineExecution struct {
 }
 
@@ -800,6 +820,10 @@ func addOpPutWebhookValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRetryStageExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRetryStageExecution{}, middleware.After)
+}
+
+func addOpRollbackStageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRollbackStage{}, middleware.After)
 }
 
 func addOpStartPipelineExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -2333,6 +2357,27 @@ func validateOpRetryStageExecutionInput(v *RetryStageExecutionInput) error {
 	}
 	if len(v.RetryMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RetryMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRollbackStageInput(v *RollbackStageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollbackStageInput"}
+	if v.PipelineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineName"))
+	}
+	if v.StageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageName"))
+	}
+	if v.TargetPipelineExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetPipelineExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

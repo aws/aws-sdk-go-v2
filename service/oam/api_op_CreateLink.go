@@ -12,11 +12,14 @@ import (
 )
 
 // Creates a link between a source account and a sink that you have created in a
-// monitoring account. Before you create a link, you must create a sink in the
-// monitoring account and create a sink policy in that account. The sink policy
-// must permit the source account to link to it. You can grant permission to source
-// accounts by granting permission to an entire organization or to individual
-// accounts. For more information, see CreateSink (https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html)
+// monitoring account. After the link is created, data is sent from the source
+// account to the monitoring account. When you create a link, you can optionally
+// specify filters that specify which metric namespaces and which log groups are
+// shared from the source account to the monitoring account. Before you create a
+// link, you must create a sink in the monitoring account and create a sink policy
+// in that account. The sink policy must permit the source account to link to it.
+// You can grant permission to source accounts by granting permission to an entire
+// organization or to individual accounts. For more information, see CreateSink (https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html)
 // and PutSinkPolicy (https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html)
 // . Each monitoring account can be linked to as many as 100,000 source accounts.
 // Each source account can be linked to as many as five monitoring accounts.
@@ -61,6 +64,11 @@ type CreateLinkInput struct {
 	// This member is required.
 	SinkIdentifier *string
 
+	// Use this structure to optionally create filters that specify that only some
+	// metric namespaces or log groups are to be shared from the source account to the
+	// monitoring account.
+	LinkConfiguration *types.LinkConfiguration
+
 	// Assigns one or more tags (key-value pairs) to the link. Tags can help you
 	// organize and categorize your resources. You can also use them to scope user
 	// permissions by granting a user permission to access or change only resources
@@ -86,6 +94,10 @@ type CreateLinkOutput struct {
 
 	// The exact label template that you specified, with the variables not resolved.
 	LabelTemplate *string
+
+	// This structure includes filters that specify which metric namespaces and which
+	// log groups are shared from the source account to the monitoring account.
+	LinkConfiguration *types.LinkConfiguration
 
 	// The resource types supported by this link.
 	ResourceTypes []string

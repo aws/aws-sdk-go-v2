@@ -925,6 +925,17 @@ type ExecutorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration that specifies the result, such as rollback, to occur upon
+// stage failure.
+type FailureConditions struct {
+
+	// The specified result for when the failure conditions are met, such as rolling
+	// back the stage.
+	Result Result
+
+	noSmithyDocumentSerde
+}
+
 // Represents information about failure details.
 type FailureDetails struct {
 
@@ -1349,6 +1360,9 @@ type PipelineExecution struct {
 	// default mode is SUPERSEDED.
 	ExecutionMode ExecutionMode
 
+	// The type of the pipeline execution.
+	ExecutionType ExecutionType
+
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string
 
@@ -1357,6 +1371,9 @@ type PipelineExecution struct {
 
 	// The version number of the pipeline with the specified pipeline execution.
 	PipelineVersion *int32
+
+	// The metadata about the execution pertaining to stage rollback.
+	RollbackMetadata *PipelineRollbackMetadata
 
 	// The status of the pipeline execution.
 	//   - Cancelled: The pipeline’s definition was updated before the pipeline
@@ -1389,6 +1406,16 @@ type PipelineExecution struct {
 	noSmithyDocumentSerde
 }
 
+// The pipeline execution to filter on.
+type PipelineExecutionFilter struct {
+
+	// Filter for pipeline executions where the stage was successful in the current
+	// pipeline version.
+	SucceededInStage *SucceededInStageFilter
+
+	noSmithyDocumentSerde
+}
+
 // Summary information about a pipeline execution.
 type PipelineExecutionSummary struct {
 
@@ -1396,12 +1423,18 @@ type PipelineExecutionSummary struct {
 	// default mode is SUPERSEDED.
 	ExecutionMode ExecutionMode
 
+	// Type of the pipeline execution.
+	ExecutionType ExecutionType
+
 	// The date and time of the last change to the pipeline execution, in timestamp
 	// format.
 	LastUpdateTime *time.Time
 
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string
+
+	// The metadata for the stage execution to be rolled back.
+	RollbackMetadata *PipelineRollbackMetadata
 
 	// A list of the source artifact revisions that initiated a pipeline execution.
 	SourceRevisions []SourceRevision
@@ -1425,6 +1458,9 @@ type PipelineExecutionSummary struct {
 	//   .
 	//   - Failed: The pipeline execution was not completed successfully.
 	Status PipelineExecutionStatus
+
+	// Status summary for the pipeline.
+	StatusSummary *string
 
 	// The interaction that stopped a pipeline execution.
 	StopTrigger *StopExecutionTrigger
@@ -1456,6 +1492,15 @@ type PipelineMetadata struct {
 
 	// The date and time the pipeline was last updated, in timestamp format.
 	Updated *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The metadata for the stage execution to be rolled back.
+type PipelineRollbackMetadata struct {
+
+	// The pipeline execution ID to which the stage will be rolled back.
+	RollbackTargetPipelineExecutionId *string
 
 	noSmithyDocumentSerde
 }
@@ -1672,6 +1717,11 @@ type StageDeclaration struct {
 	// Reserved for future use.
 	Blockers []BlockerDeclaration
 
+	// The method to use when a stage has not completed successfully. For example,
+	// configuring this field for rollback will roll back a failed stage automatically
+	// to the last successful pipeline execution in the stage.
+	OnFailure *FailureConditions
+
 	noSmithyDocumentSerde
 }
 
@@ -1689,6 +1739,10 @@ type StageExecution struct {
 	//
 	// This member is required.
 	Status StageExecutionStatus
+
+	// The type of pipeline execution for the stage, such as a rollback pipeline
+	// execution.
+	Type ExecutionType
 
 	noSmithyDocumentSerde
 }
@@ -1723,6 +1777,17 @@ type StopExecutionTrigger struct {
 
 	// The user-specified reason the pipeline was stopped.
 	Reason *string
+
+	noSmithyDocumentSerde
+}
+
+// Filter for pipeline executions that have successfully completed the stage in
+// the current pipeline version.
+type SucceededInStageFilter struct {
+
+	// The name of the stage for filtering for pipeline executions where the stage was
+	// successful in the current pipeline version.
+	StageName *string
 
 	noSmithyDocumentSerde
 }

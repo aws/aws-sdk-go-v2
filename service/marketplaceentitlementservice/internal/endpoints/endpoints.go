@@ -195,7 +195,7 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "cn-northwest-1",
 			}: endpoints.Endpoint{
 				Hostname:  "entitlement-marketplace.cn-northwest-1.amazonaws.com.cn",
-				Protocols: []string{"HTTPS"},
+				Protocols: []string{"https"},
 				CredentialScope: endpoints.CredentialScope{
 					Region: "cn-northwest-1",
 				},

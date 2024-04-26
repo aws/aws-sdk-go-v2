@@ -3618,6 +3618,131 @@ func awsAwsjson11_deserializeOpErrorRetryStageExecution(response *smithyhttp.Res
 	}
 }
 
+type awsAwsjson11_deserializeOpRollbackStage struct {
+}
+
+func (*awsAwsjson11_deserializeOpRollbackStage) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpRollbackStage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorRollbackStage(response, &metadata)
+	}
+	output := &RollbackStageOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentRollbackStageOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorRollbackStage(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("PipelineExecutionNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineExecutionNotFoundException(response, errorBody)
+
+	case strings.EqualFold("PipelineExecutionOutdatedException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineExecutionOutdatedException(response, errorBody)
+
+	case strings.EqualFold("PipelineNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
+
+	case strings.EqualFold("StageNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorStageNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnableToRollbackStageException", errorCode):
+		return awsAwsjson11_deserializeErrorUnableToRollbackStageException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpStartPipelineExecution struct {
 }
 
@@ -5252,6 +5377,41 @@ func awsAwsjson11_deserializeErrorPipelineExecutionNotStoppableException(respons
 	return output
 }
 
+func awsAwsjson11_deserializeErrorPipelineExecutionOutdatedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.PipelineExecutionOutdatedException{}
+	err := awsAwsjson11_deserializeDocumentPipelineExecutionOutdatedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorPipelineNameInUseException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -5517,6 +5677,41 @@ func awsAwsjson11_deserializeErrorTooManyTagsException(response *smithyhttp.Resp
 
 	output := &types.TooManyTagsException{}
 	err := awsAwsjson11_deserializeDocumentTooManyTagsException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorUnableToRollbackStageException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.UnableToRollbackStageException{}
+	err := awsAwsjson11_deserializeDocumentUnableToRollbackStageException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -8427,6 +8622,46 @@ func awsAwsjson11_deserializeDocumentExecutorConfiguration(v **types.ExecutorCon
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFailureConditions(v **types.FailureConditions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FailureConditions
+	if *v == nil {
+		sv = &types.FailureConditions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "result":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Result to be of type string, got %T instead", value)
+				}
+				sv.Result = types.Result(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentGitBranchFilterCriteria(v **types.GitBranchFilterCriteria, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10417,6 +10652,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecution(v **types.PipelineExecuti
 				sv.ExecutionMode = types.ExecutionMode(jtv)
 			}
 
+		case "executionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionType to be of type string, got %T instead", value)
+				}
+				sv.ExecutionType = types.ExecutionType(jtv)
+			}
+
 		case "pipelineExecutionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10446,6 +10690,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecution(v **types.PipelineExecuti
 					return err
 				}
 				sv.PipelineVersion = ptr.Int32(int32(i64))
+			}
+
+		case "rollbackMetadata":
+			if err := awsAwsjson11_deserializeDocumentPipelineRollbackMetadata(&sv.RollbackMetadata, value); err != nil {
+				return err
 			}
 
 		case "status":
@@ -10565,6 +10814,46 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionNotStoppableException(v **
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPipelineExecutionOutdatedException(v **types.PipelineExecutionOutdatedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipelineExecutionOutdatedException
+	if *v == nil {
+		sv = &types.PipelineExecutionOutdatedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.PipelineExecutionSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10596,6 +10885,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.Pipeline
 				sv.ExecutionMode = types.ExecutionMode(jtv)
 			}
 
+		case "executionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionType to be of type string, got %T instead", value)
+				}
+				sv.ExecutionType = types.ExecutionType(jtv)
+			}
+
 		case "lastUpdateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10619,6 +10917,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.Pipeline
 					return fmt.Errorf("expected PipelineExecutionId to be of type string, got %T instead", value)
 				}
 				sv.PipelineExecutionId = ptr.String(jtv)
+			}
+
+		case "rollbackMetadata":
+			if err := awsAwsjson11_deserializeDocumentPipelineRollbackMetadata(&sv.RollbackMetadata, value); err != nil {
+				return err
 			}
 
 		case "sourceRevisions":
@@ -10649,6 +10952,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.Pipeline
 					return fmt.Errorf("expected PipelineExecutionStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.PipelineExecutionStatus(jtv)
+			}
+
+		case "statusSummary":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionStatusSummary to be of type string, got %T instead", value)
+				}
+				sv.StatusSummary = ptr.String(jtv)
 			}
 
 		case "stopTrigger":
@@ -10895,6 +11207,46 @@ func awsAwsjson11_deserializeDocumentPipelineNotFoundException(v **types.Pipelin
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPipelineRollbackMetadata(v **types.PipelineRollbackMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipelineRollbackMetadata
+	if *v == nil {
+		sv = &types.PipelineRollbackMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "rollbackTargetPipelineExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionId to be of type string, got %T instead", value)
+				}
+				sv.RollbackTargetPipelineExecutionId = ptr.String(jtv)
 			}
 
 		default:
@@ -11873,6 +12225,11 @@ func awsAwsjson11_deserializeDocumentStageDeclaration(v **types.StageDeclaration
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "onFailure":
+			if err := awsAwsjson11_deserializeDocumentFailureConditions(&sv.OnFailure, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11920,6 +12277,15 @@ func awsAwsjson11_deserializeDocumentStageExecution(v **types.StageExecution, va
 					return fmt.Errorf("expected StageExecutionStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.StageExecutionStatus(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ExecutionType(jtv)
 			}
 
 		default:
@@ -12582,6 +12948,46 @@ func awsAwsjson11_deserializeDocumentTransitionState(v **types.TransitionState, 
 					return fmt.Errorf("expected LastChangedBy to be of type string, got %T instead", value)
 				}
 				sv.LastChangedBy = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUnableToRollbackStageException(v **types.UnableToRollbackStageException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnableToRollbackStageException
+	if *v == nil {
+		sv = &types.UnableToRollbackStageException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -13927,6 +14333,46 @@ func awsAwsjson11_deserializeOpDocumentRetryStageExecutionOutput(v **RetryStageE
 	var sv *RetryStageExecutionOutput
 	if *v == nil {
 		sv = &RetryStageExecutionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "pipelineExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionId to be of type string, got %T instead", value)
+				}
+				sv.PipelineExecutionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentRollbackStageOutput(v **RollbackStageOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *RollbackStageOutput
+	if *v == nil {
+		sv = &RollbackStageOutput{}
 	} else {
 		sv = *v
 	}

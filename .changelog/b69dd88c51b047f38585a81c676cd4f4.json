@@ -1,0 +1,8 @@
+{
+    "id": "b69dd88c-51b0-47f3-8585-a81c676cd4f4",
+    "type": "feature",
+    "description": "Add LimitExceededException to SignUp errors",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

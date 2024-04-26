@@ -16,8 +16,8 @@ import (
 // accounts can link to the sink to send observability data. After you create a
 // sink, you must create a sink policy that allows source accounts to attach to it.
 // For more information, see PutSinkPolicy (https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html)
-// . Each account can contain one sink. If you delete a sink, you can then create a
-// new one in that account.
+// . Each account can contain one sink per Region. If you delete a sink, you can
+// then create a new one in that Region.
 func (c *Client) CreateSink(ctx context.Context, params *CreateSinkInput, optFns ...func(*Options)) (*CreateSinkOutput, error) {
 	if params == nil {
 		params = &CreateSinkInput{}
