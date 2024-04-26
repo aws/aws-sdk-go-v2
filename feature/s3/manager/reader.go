@@ -23,6 +23,7 @@ type ObjectReader struct {
 	chunkSize     int64
 	concurrency   int
 	clientOptions []func(*s3.Options)
+	partRetries   int
 	input         *s3.GetObjectInput
 }
 
@@ -34,6 +35,7 @@ func (d *Downloader) NewReader(ctx context.Context, input *s3.GetObjectInput) io
 		input:         input,
 		chunkSize:     d.PartSize,
 		concurrency:   d.Concurrency,
+		partRetries:   d.PartBodyMaxRetries,
 		clientOptions: d.ClientOptions,
 	}
 
@@ -176,5 +178,14 @@ func (r *ObjectReader) getObject(ctx context.Context, start, end int64) (*s3.Get
 	copyInput := *r.input
 	copyInput.Range = &byteRange
 
-	return r.s3.GetObject(ctx, &copyInput, r.clientOptions...)
+	var output *s3.GetObjectOutput
+	var err error
+	for i := 0; i < r.partRetries; i++ {
+		output, err = r.s3.GetObject(ctx, &copyInput, r.clientOptions...)
+		if err == nil {
+			return output, nil
+		}
+	}
+
+	return output, err
 }
