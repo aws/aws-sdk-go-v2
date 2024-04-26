@@ -1,3 +1,7 @@
+# v1.11.0 (2024-04-26)
+
+* **Feature**: This release introduces support for Source Accounts to define which Metrics and Logs to share with the Monitoring Account
+
 # v1.10.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

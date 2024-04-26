@@ -1,3 +1,7 @@
+# v1.27.0 (2024-04-26)
+
+* **Feature**: Add ability to manually and automatically roll back a pipeline stage to a previously successful execution.
+
 # v1.26.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

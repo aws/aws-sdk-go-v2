@@ -1,3 +1,7 @@
+# v1.21.0 (2024-04-26)
+
+* **Feature**: Releasing minor endpoint updates.
+
 # v1.20.5 (2024-04-23)
 
 * No change notes available for this release.

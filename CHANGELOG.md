@@ -1,3 +1,21 @@
+# Release (2024-04-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.27.0](service/codepipeline/CHANGELOG.md#v1270-2024-04-26)
+  * **Feature**: Add ability to manually and automatically roll back a pipeline stage to a previously successful execution.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.37.0](service/cognitoidentityprovider/CHANGELOG.md#v1370-2024-04-26)
+  * **Feature**: Add LimitExceededException to SignUp errors
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.11.0](service/connectcampaigns/CHANGELOG.md#v1110-2024-04-26)
+  * **Feature**: This release adds support for specifying if Answering Machine should wait for prompt sound.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.21.0](service/marketplaceentitlementservice/CHANGELOG.md#v1210-2024-04-26)
+  * **Feature**: Releasing minor endpoint updates.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.11.0](service/oam/CHANGELOG.md#v1110-2024-04-26)
+  * **Feature**: This release introduces support for Source Accounts to define which Metrics and Logs to share with the Monitoring Account
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.78.0](service/rds/CHANGELOG.md#v1780-2024-04-26)
+  * **Feature**: SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.22.0](service/support/CHANGELOG.md#v1220-2024-04-26)
+  * **Feature**: Releasing minor endpoint updates.
+
 # Release (2024-04-25)
 
 ## Module Highlights

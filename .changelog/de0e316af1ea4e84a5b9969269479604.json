@@ -1,8 +1,0 @@
-{
-    "id": "de0e316a-f1ea-4e84-a5b9-969269479604",
-    "type": "feature",
-    "description": "Releasing minor endpoint updates.",
-    "modules": [
-        "service/support"
-    ]
-}

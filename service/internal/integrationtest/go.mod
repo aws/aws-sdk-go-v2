@@ -21,9 +21,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.34.1
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.25.4
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.26.4
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.21.4
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.36.5
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.37.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.46.5
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.23.4
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.38.4
@@ -61,7 +61,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.22.4
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.19.5
 	github.com/aws/aws-sdk-go-v2/service/polly v1.39.6
-	github.com/aws/aws-sdk-go-v2/service/rds v1.77.3
+	github.com/aws/aws-sdk-go-v2/service/rds v1.78.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.40.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.40.4
@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.31.4
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.50.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.28.6
-	github.com/aws/aws-sdk-go-v2/service/support v1.21.4
+	github.com/aws/aws-sdk-go-v2/service/support v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/waf v1.20.4

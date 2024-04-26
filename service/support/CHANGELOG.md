@@ -1,3 +1,7 @@
+# v1.22.0 (2024-04-26)
+
+* **Feature**: Releasing minor endpoint updates.
+
 # v1.21.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

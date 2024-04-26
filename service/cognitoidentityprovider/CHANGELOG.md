@@ -1,3 +1,7 @@
+# v1.37.0 (2024-04-26)
+
+* **Feature**: Add LimitExceededException to SignUp errors
+
 # v1.36.5 (2024-04-16)
 
 * No change notes available for this release.

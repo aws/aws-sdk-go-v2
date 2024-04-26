@@ -1,3 +1,7 @@
+# v1.11.0 (2024-04-26)
+
+* **Feature**: This release adds support for specifying if Answering Machine should wait for prompt sound.
+
 # v1.10.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

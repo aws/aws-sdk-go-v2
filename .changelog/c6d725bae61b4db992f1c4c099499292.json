@@ -1,8 +1,0 @@
-{
-    "id": "c6d725ba-e61b-4db9-92f1-c4c099499292",
-    "type": "feature",
-    "description": "This release adds support for specifying if Answering Machine should wait for prompt sound.",
-    "modules": [
-        "service/connectcampaigns"
-    ]
-}

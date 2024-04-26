@@ -1,3 +1,7 @@
+# v1.78.0 (2024-04-26)
+
+* **Feature**: SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.
+
 # v1.77.3 (2024-04-25)
 
 * **Documentation**: Updates Amazon RDS documentation for setting local time zones for RDS for Db2 DB instances.
