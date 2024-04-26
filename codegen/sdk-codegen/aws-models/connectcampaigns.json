@@ -820,6 +820,13 @@
                         "smithy.api#documentation": "Enable or disable answering machine detection",
                         "smithy.api#required": {}
                     }
+                },
+                "awaitAnswerMachinePrompt": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "Enable or disable await answer machine prompt"
+                    }
                 }
             },
             "traits": {

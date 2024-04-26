@@ -2385,7 +2385,7 @@
                 "UserLastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "Enabled": {
@@ -4108,7 +4108,7 @@
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "EventResponse": {
@@ -5295,7 +5295,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a configuration and trust relationship between a third-party identity provider (IdP) and a user pool.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Adds a configuration and trust relationship between a third-party identity provider\n            (IdP) and a user pool.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#CreateIdentityProviderRequest": {
@@ -5406,7 +5406,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceServerIdentifierType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique resource server identifier for the resource server. This could be an HTTPS\n            endpoint where the resource server is located, such as\n                <code>https://my-weather-api.example.com</code>.</p>",
+                        "smithy.api#documentation": "<p>A unique resource server identifier for the resource server. The identifier can be an\n            API friendly name like <code>solar-system-data</code>. You can also set an API URL like\n                <code>https://solar-system-data-api.example.com</code> as your identifier.</p>\n         <p>Amazon Cognito represents scopes in the access token in the format\n                <code>$resource-server-identifier/$scope</code>. Longer scope-identifier strings\n            increase the size of your access tokens.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6266,7 +6266,7 @@
                 "DefaultRedirectURI": {
                     "target": "com.amazonaws.cognitoidentityprovider#RedirectUrlType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default redirect URI. Must be in the <code>CallbackURLs</code> list.</p>\n         <p>A redirect URI must:</p>\n         <ul>\n            <li>\n               <p>Be an absolute URI.</p>\n            </li>\n            <li>\n               <p>Be registered with the authorization server.</p>\n            </li>\n            <li>\n               <p>Not include a fragment component.</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://tools.ietf.org/html/rfc6749#section-3.1.2\">OAuth 2.0 -\n                Redirection Endpoint</a>.</p>\n         <p>Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes\n            only.</p>\n         <p>App callback URLs such as myapp://example are also supported.</p>"
+                        "smithy.api#documentation": "<p>The default redirect URI. In app clients with one assigned IdP, replaces\n                <code>redirect_uri</code> in authentication requests. Must be in the\n                <code>CallbackURLs</code> list.</p>\n         <p>A redirect URI must:</p>\n         <ul>\n            <li>\n               <p>Be an absolute URI.</p>\n            </li>\n            <li>\n               <p>Be registered with the authorization server.</p>\n            </li>\n            <li>\n               <p>Not include a fragment component.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#cognito-user-pools-app-idp-settings-about\">Default redirect URI</a>.</p>\n         <p>Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes\n            only.</p>\n         <p>App callback URLs such as myapp://example are also supported.</p>"
                     }
                 },
                 "AllowedOAuthFlows": {
@@ -7294,7 +7294,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceServerIdentifierType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource server</p>",
+                        "smithy.api#documentation": "<p>A unique resource server identifier for the resource server. The identifier can be an\n            API friendly name like <code>solar-system-data</code>. You can also set an API URL like\n                <code>https://solar-system-data-api.example.com</code> as your identifier.</p>\n         <p>Amazon Cognito represents scopes in the access token in the format\n                <code>$resource-server-identifier/$scope</code>. Longer scope-identifier strings\n            increase the size of your access tokens.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7755,7 +7755,7 @@
                 "DeviceLastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "DeviceLastAuthenticatedDate": {
@@ -9405,13 +9405,13 @@
                 "LastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 }
             },
@@ -9502,13 +9502,13 @@
                 "LastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 }
             },
@@ -10909,7 +10909,7 @@
                 "Filter": {
                     "target": "com.amazonaws.cognitoidentityprovider#UserFilterType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter string of the form \"<i>AttributeName</i>\n            <i>Filter-Type</i> \"<i>AttributeValue</i>\"\". Quotation marks\n            within the filter string must be escaped using the backslash (<code>\\</code>) character. For example,\n            <code>\"family_name = \\\"Reddy\\\"\"</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>AttributeName</i>: The name of the attribute to search for.\n                    You can only search for one attribute at a time.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Filter-Type</i>: For an exact match, use <code>=</code>, for example,\n                    \"<code>given_name = \\\"Jon\\\"</code>\". For a prefix (\"starts with\") match, use\n                    <code>^=</code>, for example, \"<code>given_name ^= \\\"Jon\\\"</code>\". </p>\n            </li>\n            <li>\n               <p>\n                  <i>AttributeValue</i>: The attribute value that must be matched\n                    for each user.</p>\n            </li>\n         </ul>\n         <p>If the filter string is empty, <code>ListUsers</code> returns all users in the user\n            pool.</p>\n         <p>You can only search for the following standard attributes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>username</code> (case-sensitive)</p>\n            </li>\n            <li>\n               <p>\n                  <code>email</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>phone_number</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>given_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>family_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>preferred_username</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cognito:user_status</code> (called <b>Status</b> in the Console) (case-insensitive)</p>\n            </li>\n            <li>\n               <p>\n                  <code>status (called <b>Enabled</b> in the Console)\n                        (case-sensitive)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sub</code>\n               </p>\n            </li>\n         </ul>\n         <p>Custom attributes aren't searchable.</p>\n         <note>\n            <p>You can also list users with a client-side filter. The server-side filter matches\n                no more than one attribute. For an advanced search, use a client-side filter with\n                the <code>--query</code> parameter of the <code>list-users</code> action in the\n                CLI. When you use a client-side filter, ListUsers returns a paginated list of zero\n                or more users. You can receive multiple pages in a row with zero results. Repeat the\n                query with each pagination token that is returned until you receive a null\n                pagination token value, and then review the combined result. </p>\n            <p>For more information about server-side and client-side filtering, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">FilteringCLI output</a> in the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">Command Line Interface\n                    User Guide</a>. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api\">Searching for Users Using the ListUsers API</a> and <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples\">Examples of Using the ListUsers API</a> in the <i>Amazon Cognito Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A filter string of the form \"<i>AttributeName</i>\n            <i>Filter-Type</i> \"<i>AttributeValue</i>\"\". Quotation marks\n            within the filter string must be escaped using the backslash (<code>\\</code>) character.\n            For example, <code>\"family_name = \\\"Reddy\\\"\"</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>AttributeName</i>: The name of the attribute to search for.\n                    You can only search for one attribute at a time.</p>\n            </li>\n            <li>\n               <p>\n                  <i>Filter-Type</i>: For an exact match, use <code>=</code>, for\n                    example, \"<code>given_name = \\\"Jon\\\"</code>\". For a prefix (\"starts with\")\n                    match, use <code>^=</code>, for example, \"<code>given_name ^= \\\"Jon\\\"</code>\".\n                </p>\n            </li>\n            <li>\n               <p>\n                  <i>AttributeValue</i>: The attribute value that must be matched\n                    for each user.</p>\n            </li>\n         </ul>\n         <p>If the filter string is empty, <code>ListUsers</code> returns all users in the user\n            pool.</p>\n         <p>You can only search for the following standard attributes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>username</code> (case-sensitive)</p>\n            </li>\n            <li>\n               <p>\n                  <code>email</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>phone_number</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>given_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>family_name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>preferred_username</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>cognito:user_status</code> (called <b>Status</b> in the Console) (case-insensitive)</p>\n            </li>\n            <li>\n               <p>\n                  <code>status (called <b>Enabled</b> in the Console)\n                        (case-sensitive)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sub</code>\n               </p>\n            </li>\n         </ul>\n         <p>Custom attributes aren't searchable.</p>\n         <note>\n            <p>You can also list users with a client-side filter. The server-side filter matches\n                no more than one attribute. For an advanced search, use a client-side filter with\n                the <code>--query</code> parameter of the <code>list-users</code> action in the\n                CLI. When you use a client-side filter, ListUsers returns a paginated list of zero\n                or more users. You can receive multiple pages in a row with zero results. Repeat the\n                query with each pagination token that is returned until you receive a null\n                pagination token value, and then review the combined result. </p>\n            <p>For more information about server-side and client-side filtering, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">FilteringCLI output</a> in the <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">Command Line Interface\n                    User Guide</a>. </p>\n         </note>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-using-listusers-api\">Searching for Users Using the ListUsers API</a> and <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-manage-user-accounts.html#cognito-user-pools-searching-for-users-listusers-api-examples\">Examples of Using the ListUsers API</a> in the <i>Amazon Cognito Developer\n                Guide</i>.</p>"
                     }
                 }
             },
@@ -11238,7 +11238,7 @@
                 "MaxValue": {
                     "target": "com.amazonaws.cognitoidentityprovider#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of a number attribute value. Must be a number less than or equal to\n            <code>2^1023</code>, represented as a string with a length of 131072 characters or\n            fewer.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of a number attribute value. Must be a number less than or equal to\n                <code>2^1023</code>, represented as a string with a length of 131072 characters or\n            fewer.</p>"
                     }
                 }
             },
@@ -11516,7 +11516,7 @@
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 }
             },
@@ -11919,7 +11919,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceServerIdentifierType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource server.</p>"
+                        "smithy.api#documentation": "<p>A unique resource server identifier for the resource server. The identifier can be an\n            API friendly name like <code>solar-system-data</code>. You can also set an API URL like\n                <code>https://solar-system-data-api.example.com</code> as your identifier.</p>\n         <p>Amazon Cognito represents scopes in the access token in the format\n                <code>$resource-server-identifier/$scope</code>. Longer scope-identifier strings\n            increase the size of your access tokens.</p>"
                     }
                 },
                 "Name": {
@@ -12218,7 +12218,7 @@
                 "LastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 }
             },
@@ -12993,6 +12993,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#InvalidSmsRoleTrustRelationshipException"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
                 },
                 {
@@ -13412,7 +13415,7 @@
                 "MaxLength": {
                     "target": "com.amazonaws.cognitoidentityprovider#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of a string attribute value. Must be a number less than or equal to\n            <code>2^1023</code>, represented as a string with a length of 131072 characters or\n            fewer.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of a string attribute value. Must be a number less than or equal to\n                <code>2^1023</code>, represented as a string with a length of 131072 characters or\n            fewer.</p>"
                     }
                 }
             },
@@ -13651,13 +13654,13 @@
                 "LastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 }
             },
@@ -14192,7 +14195,7 @@
                 "Identifier": {
                     "target": "com.amazonaws.cognitoidentityprovider#ResourceServerIdentifierType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the resource server.</p>",
+                        "smithy.api#documentation": "<p>A unique resource server identifier for the resource server. The identifier can be an\n            API friendly name like <code>solar-system-data</code>. You can also set an API URL like\n                <code>https://solar-system-data-api.example.com</code> as your identifier.</p>\n         <p>Amazon Cognito represents scopes in the access token in the format\n                <code>$resource-server-identifier/$scope</code>. Longer scope-identifier strings\n            increase the size of your access tokens.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14960,7 +14963,7 @@
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "StartDate": {
@@ -15175,13 +15178,13 @@
                 "LastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "RefreshTokenValidity": {
@@ -15338,13 +15341,13 @@
                 "LastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 }
             },
@@ -15488,13 +15491,13 @@
                 "LastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "CreationDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was created.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was created. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "SchemaAttributes": {
@@ -15724,7 +15727,7 @@
                 "UserLastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a> format, when the item was modified.</p>"
+                        "smithy.api#documentation": "<p>The date and time when the item was modified. Amazon Cognito returns this timestamp in UNIX epoch time format. Your SDK might render the output in a \nhuman-readable format like ISO 8601 or a Java <code>Date</code> object.</p>"
                     }
                 },
                 "Enabled": {

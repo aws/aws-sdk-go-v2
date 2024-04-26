@@ -58,7 +58,7 @@
                     "aws:RequestTag/${TagKey}",
                     "oam:ResourceTypes"
                 ],
-                "smithy.api#documentation": "<p>Creates a link between a source account and a sink that you have created in a monitoring account.</p>\n         <p>Before you create a link, you must create a sink in the monitoring account and create a\n            sink policy in that account. The sink policy must permit the source account to link to it. You\n            can grant permission to source accounts by granting permission to an entire organization or to\n            individual accounts.</p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html\">CreateSink</a> and\n            <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html\">PutSinkPolicy</a>.</p>\n         <p>Each monitoring account can be linked to as many as 100,000 source accounts.</p>\n         <p>Each source account can be linked to as many as five monitoring accounts.</p>",
+                "smithy.api#documentation": "<p>Creates a link between a source account and a sink that you have created in a monitoring account. After the link is created, \n      data is sent from the source account to the monitoring account. When you create a link, you can optionally specify filters\n      that specify which metric namespaces and which log groups are shared from the source account to the monitoring account.</p>\n         <p>Before you create a link, you must create a sink in the monitoring account and create a\n      sink policy in that account. The sink policy must permit the source account to link to it. You\n      can grant permission to source accounts by granting permission to an entire organization or to\n      individual accounts.</p>\n         <p>For more information, see \n       <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html\">CreateSink</a> and\n       <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html\">PutSinkPolicy</a>.</p>\n         <p>Each monitoring account can be linked to as many as 100,000 source accounts.</p>\n         <p>Each source account can be linked to as many as five monitoring accounts.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateLink"
@@ -71,28 +71,34 @@
                 "LabelTemplate": {
                     "target": "com.amazonaws.oam#LabelTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify a friendly human-readable name to use to identify this source account when you are viewing data from it in the monitoring\n            account.</p>\n         <p>You can use a custom label or use the following variables:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>$AccountName</code> is the name of the account</p>\n            </li>\n            <li>\n               <p>\n                  <code>$AccountEmail</code> is the globally unique email address of the account</p>\n            </li>\n            <li>\n               <p>\n                  <code>$AccountEmailNoDomain</code> is the email address of the account without the domain name</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specify a friendly human-readable name to use to identify this source account when you are viewing data from it in the monitoring\n      account.</p>\n         <p>You can use a custom label or use the following variables:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>$AccountName</code> is the name of the account</p>\n            </li>\n            <li>\n               <p>\n                  <code>$AccountEmail</code> is the globally unique email address of the account</p>\n            </li>\n            <li>\n               <p>\n                  <code>$AccountEmailNoDomain</code> is the email address of the account without the domain name</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceTypes": {
                     "target": "com.amazonaws.oam#ResourceTypesInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that define which types of data that the source account shares with the monitoring\n            account.</p>",
+                        "smithy.api#documentation": "<p>An array of strings that define which types of data that the source account shares with the monitoring \n      account.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SinkIdentifier": {
                     "target": "com.amazonaws.oam#ResourceIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the sink to use to create this link. You can use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html\">ListSinks</a> to find the ARNs of sinks.</p>\n         <p>For more information about sinks, see\n            <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html\">CreateSink</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the sink to use to create this link. You can use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html\">ListSinks</a> to find the ARNs of sinks.</p>\n         <p>For more information about sinks, see \n        <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html\">CreateSink</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.oam#TagMapInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the link. </p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n            permissions by granting a user\n            permission to access or change only resources with certain tag values.</p>\n         <p>For more information about using tags to control access, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the link. </p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>For more information about using tags to control access, see \n       <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
+                    }
+                },
+                "LinkConfiguration": {
+                    "target": "com.amazonaws.oam#LinkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this structure to optionally create filters that specify that only some metric namespaces or log groups are to be shared from \n    the source account to the monitoring account.</p>"
                     }
                 }
             },
@@ -118,7 +124,7 @@
                 "Label": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The label that you assigned to this link. If the <code>labelTemplate</code> includes variables,\n            this field displays the variables resolved to their actual values.</p>"
+                        "smithy.api#documentation": "<p>The label that you assigned to this link. If the <code>labelTemplate</code> includes variables, \n        this field displays the variables resolved to their actual values.</p>"
                     }
                 },
                 "LabelTemplate": {
@@ -143,6 +149,12 @@
                     "target": "com.amazonaws.oam#TagMapOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to the link.</p>"
+                    }
+                },
+                "LinkConfiguration": {
+                    "target": "com.amazonaws.oam#LinkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure includes filters that specify which metric namespaces and which log groups are shared from \n      the source account to the monitoring account.</p>"
                     }
                 }
             },
@@ -180,7 +192,7 @@
                     "aws:TagKeys",
                     "aws:RequestTag/${TagKey}"
                 ],
-                "smithy.api#documentation": "<p>Use this to create a <i>sink</i> in the current account, so that it can be\n            used as a monitoring account in CloudWatch cross-account observability. A sink is a resource that\n            represents an attachment point in a monitoring account. Source accounts can link to the sink\n            to send observability data.</p>\n         <p>After you create a sink, you must create a sink policy that allows source accounts to attach to it.\n            For more information, see <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html\">PutSinkPolicy</a>.</p>\n         <p>Each account can contain one sink. If you delete a sink, you can then create a new one in that account.</p>",
+                "smithy.api#documentation": "<p>Use this to create a <i>sink</i> in the current account, so that it can be\n        used as a monitoring account in CloudWatch cross-account observability. A sink is a resource that\n      represents an attachment point in a monitoring account. Source accounts can link to the sink\n      to send observability data.</p>\n         <p>After you create a sink, you must create a sink policy that allows source accounts to attach to it. \n       For more information, see <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html\">PutSinkPolicy</a>.</p>\n         <p>Each account can contain one sink per Region. If you delete a sink, you can then create a new one in that Region.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateSink"
@@ -200,7 +212,7 @@
                 "Tags": {
                     "target": "com.amazonaws.oam#TagMapInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the link. </p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n            permissions by granting a user\n            permission to access or change only resources with certain tag values.</p>\n         <p>For more information about using tags to control access, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the link. </p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>For more information about using tags to control access, see \n       <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
                     }
                 }
             },
@@ -266,7 +278,7 @@
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag/${TagKey}"
                 ],
-                "smithy.api#documentation": "<p>Deletes a link between a monitoring account sink and a source account. You must run this operation\n            in the source account.</p>",
+                "smithy.api#documentation": "<p>Deletes a link between a monitoring account sink and a source account. You must run this operation\n      in the source account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteLink"
@@ -446,6 +458,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to the link.</p>"
                     }
+                },
+                "LinkConfiguration": {
+                    "target": "com.amazonaws.oam#LinkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure includes filters that specify which metric namespaces and which log groups are shared from \n      the source account to the monitoring account.</p>"
+                    }
                 }
             },
             "traits": {
@@ -559,7 +577,7 @@
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag/${TagKey}"
                 ],
-                "smithy.api#documentation": "<p>Returns the current sink policy attached to this sink. The sink policy specifies what\n            accounts can attach to this sink as source accounts, and what types of data they can share.</p>",
+                "smithy.api#documentation": "<p>Returns the current sink policy attached to this sink. The sink policy specifies what \n      accounts can attach to this sink as source accounts, and what types of data they can share.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/GetSinkPolicy"
@@ -657,6 +675,26 @@
                 }
             }
         },
+        "com.amazonaws.oam#LinkConfiguration": {
+            "type": "structure",
+            "members": {
+                "LogGroupConfiguration": {
+                    "target": "com.amazonaws.oam#LogGroupConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this structure to filter which log groups are to send log events from \n      the source account to the monitoring account.</p>"
+                    }
+                },
+                "MetricConfiguration": {
+                    "target": "com.amazonaws.oam#MetricConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this structure to filter which metric namespaces are to be shared from \n      the source account to the monitoring account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this structure to optionally create filters that specify that only some metric namespaces or log groups are to be shared from \n      the source account to the monitoring account.</p>"
+            }
+        },
         "com.amazonaws.oam#ListAttachedLinks": {
             "type": "operation",
             "input": {
@@ -748,7 +786,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains information about one link attached to this monitoring\n            account sink.</p>"
+                "smithy.api#documentation": "<p>A structure that contains information about one link attached to this monitoring \n      account sink.</p>"
             }
         },
         "com.amazonaws.oam#ListAttachedLinksItems": {
@@ -807,7 +845,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation in a source account to return a list of links to monitoring account sinks that\n            this source account has.</p>\n         <p>To find a list of links for one monitoring account sink, use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListAttachedLinks.html\">ListAttachedLinks</a> from within the monitoring account.</p>",
+                "smithy.api#documentation": "<p>Use this operation in a source account to return a list of links to monitoring account sinks that\n      this source account has.</p>\n         <p>To find a list of links for one monitoring account sink, use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListAttachedLinks.html\">ListAttachedLinks</a> from within the monitoring account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListLinks"
@@ -1066,7 +1104,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.oam#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the  resource that you want to view tags for.</p>\n         <p>The ARN format of a sink is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n         <p>The ARN format of a link is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs\n            resources and operations</a>.</p>\n         <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to retrieve the list of tags\n            for links or sinks you must have the <code>oam:RequestTag</code> permission. The\n            <code>aws:ReguestTag</code> permission does not allow you to tag and untag links and\n            sinks.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The ARN of the  resource that you want to view tags for.</p>\n         <p>The ARN format of a sink is \n      <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n         <p>The ARN format of a link is \n      <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs \n      resources and operations</a>.</p>\n         <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to retrieve the list of tags\n        for links or sinks you must have the <code>oam:RequestTag</code> permission. The\n          <code>aws:ReguestTag</code> permission does not allow you to tag and untag links and\n        sinks.</p>\n         </important>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1088,6 +1126,54 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#LogGroupConfiguration": {
+            "type": "structure",
+            "members": {
+                "Filter": {
+                    "target": "com.amazonaws.oam#LogsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field to specify which log groups are to share their log events with the monitoring account. Use the term <code>LogGroupName</code> and one or\n      more of the following operands.  Use single quotation marks (')  around log group names. The matching of log group names is case sensitive.\n      Each filter has a limit of five conditional operands. Conditional operands are <code>AND</code> and <code>OR</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>=</code> and <code>!=</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AND</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LIKE</code> and <code>NOT LIKE</code>. These can be used only as prefix searches. Include a <code>%</code> at the end\n      of the string that you want to search for and include.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN</code> and <code>NOT IN</code>, using parentheses <code>( )</code>\n               </p>\n            </li>\n         </ul>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LogGroupName IN ('This-Log-Group', 'Other-Log-Group')</code> includes only the log groups with names <code>This-Log-Group</code> and \n          <code>Other-Log-Group</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LogGroupName NOT IN ('Private-Log-Group', 'Private-Log-Group-2')</code> includes all log groups except the log groups with names <code>Private-Log-Group</code> and \n          <code>Private-Log-Group-2</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LogGroupName LIKE 'aws/lambda/%' OR LogGroupName LIKE 'AWSLogs%'</code> includes all log groups that have names that start with <code>aws/lambda/</code> or \n          <code>AWSLogs</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you are updating a link that uses filters, you can specify <code>*</code> as the only value for the \n    <code>filter</code> parameter to delete the filter and share all log groups with the monitoring account.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains the <code>Filter</code> parameter which you can use to specify which log groups are to  \n    share log events from this source account to the monitoring account.</p>"
+            }
+        },
+        "com.amazonaws.oam#LogsFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.oam#MetricConfiguration": {
+            "type": "structure",
+            "members": {
+                "Filter": {
+                    "target": "com.amazonaws.oam#MetricsFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field to specify which metrics are to be shared with the monitoring account. Use the term <code>Namespace</code> and one or\n      more of the following operands. Use single quotation marks (') around namespace names. The matching of namespace names is case sensitive.\n      Each filter has a limit of five conditional operands. Conditional operands are <code>AND</code> and <code>OR</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>=</code> and <code>!=</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AND</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LIKE</code> and <code>NOT LIKE</code>. These can be used only as prefix searches. Include a <code>%</code> at the end\n        of the string that you want to search for and include.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN</code> and <code>NOT IN</code>, using parentheses <code>( )</code>\n               </p>\n            </li>\n         </ul>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Namespace NOT LIKE 'AWS/%'</code> includes only namespaces that don't start with <code>AWS/</code>, such as custom namespaces.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Namespace IN ('AWS/EC2', 'AWS/ELB', 'AWS/S3')</code> includes only the metrics in the EC2, Elastic Load Balancing, and Amazon S3 namespaces. </p>\n            </li>\n            <li>\n               <p>\n                  <code>Namespace = 'AWS/EC2' OR Namespace NOT LIKE 'AWS/%'</code> includes only the EC2 namespace and your custom namespaces.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you are updating a link that uses filters, you can specify <code>*</code> as the only value for the \n      <code>filter</code> parameter to delete the filter and share all metric namespaces with the monitoring account.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure contains the <code>Filter</code> parameter which you can use to specify which metric namespaces are to  \n      be shared from this source account to the monitoring account.</p>"
+            }
+        },
+        "com.amazonaws.oam#MetricsFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
             }
         },
         "com.amazonaws.oam#MissingRequiredParameterException": {
@@ -1139,7 +1225,7 @@
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag/${TagKey}"
                 ],
-                "smithy.api#documentation": "<p>Creates or updates the resource policy that grants permissions to source\n            accounts to link to the monitoring account sink. When you create a sink policy, you can grant\n            permissions to all accounts in an organization or to individual accounts.</p>\n         <p>You can also use a sink policy to limit the types of data that is shared. The three types that\n            you can allow or deny are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Metrics</b> - Specify with\n                <code>AWS::CloudWatch::Metric</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Log groups</b> - Specify with <code>AWS::Logs::LogGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Traces</b> - Specify with <code>AWS::XRay::Trace</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Application Insights - Applications</b> - Specify with <code>AWS::ApplicationInsights::Application</code>\n               </p>\n            </li>\n         </ul>\n         <p>See the examples in this section to see how to specify permitted source accounts and data types.</p>",
+                "smithy.api#documentation": "<p>Creates or updates the resource policy that grants permissions to source\n      accounts to link to the monitoring account sink. When you create a sink policy, you can grant\n      permissions to all accounts in an organization or to individual accounts.</p>\n         <p>You can also use a sink policy to limit the types of data that is shared. The three types that \n     you can allow or deny are:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Metrics</b> - Specify with\n          <code>AWS::CloudWatch::Metric</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Log groups</b> - Specify with <code>AWS::Logs::LogGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Traces</b> - Specify with <code>AWS::XRay::Trace</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Application Insights - Applications</b> - Specify with <code>AWS::ApplicationInsights::Application</code>\n               </p>\n            </li>\n         </ul>\n         <p>See the examples in this section to see how to specify permitted source accounts and data types.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/PutSinkPolicy"
@@ -1159,7 +1245,7 @@
                 "Policy": {
                     "target": "com.amazonaws.oam#SinkPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON policy to use. If you are updating an existing policy, the entire existing policy is\n            replaced by what you specify here.</p>\n         <p>The policy must be in JSON string format with quotation marks escaped and no newlines.</p>\n         <p>For examples of different types of policies, see the <b>Examples</b> section on this page.</p>",
+                        "smithy.api#documentation": "<p>The JSON policy to use. If you are updating an existing policy, the entire existing policy is\n      replaced by what you specify here.</p>\n         <p>The policy must be in JSON string format with quotation marks escaped and no newlines.</p>\n         <p>For examples of different types of policies, see the <b>Examples</b> section on this page.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1368,7 +1454,7 @@
                     "aws:TagKeys",
                     "aws:RequestTag/${TagKey}"
                 ],
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified resource.\n            Both sinks and links can be tagged. </p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n            permissions by granting a user\n            permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the alarm,\n            this tag is appended to the list of tags associated\n            with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces\n            the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>\n         <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to tag or untag links and\n            sinks you must have the <code>oam:ResourceTag</code> permission. The\n            <code>iam:ResourceTag</code> permission does not allow you to tag and untag links and\n            sinks.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified resource. \n     Both sinks and links can be tagged. </p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n      permissions by granting a user\n      permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the alarm, \n      this tag is appended to the list of tags associated\n      with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces\n      the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>\n         <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to tag or untag links and\n        sinks you must have the <code>oam:ResourceTag</code> permission. The\n          <code>iam:ResourceTag</code> permission does not allow you to tag and untag links and\n        sinks.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/tags/{ResourceArn}",
@@ -1382,7 +1468,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.oam#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the  resource that you're adding tags to.</p>\n         <p>The ARN format of a sink is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n         <p>The ARN format of a link is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs\n            resources and operations</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the  resource that you're adding tags to.</p>\n         <p>The ARN format of a sink is \n      <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n         <p>The ARN format of a link is \n      <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs \n      resources and operations</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1450,7 +1536,7 @@
                 "aws.iam#conditionKeys": [
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>\n         <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to tag or untag links and\n            sinks you must have the <code>oam:ResourceTag</code> permission. The\n            <code>iam:TagResource</code> permission does not allow you to tag and untag links and\n            sinks.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>\n         <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to tag or untag links and\n        sinks you must have the <code>oam:ResourceTag</code> permission. The\n          <code>iam:TagResource</code> permission does not allow you to tag and untag links and\n        sinks.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{ResourceArn}",
@@ -1464,7 +1550,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.oam#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource that you're removing tags from.</p>\n         <p>The ARN format of a sink is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n         <p>The ARN format of a link is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs\n            resources and operations</a>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource that you're removing tags from.</p>\n         <p>The ARN format of a sink is \n      <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n         <p>The ARN format of a link is \n      <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n         <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs \n      resources and operations</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1516,7 +1602,7 @@
                     "aws:ResourceTag/${TagKey}",
                     "oam:ResourceTypes"
                 ],
-                "smithy.api#documentation": "<p>Use this operation to change what types of data are shared from a source account to its linked\n            monitoring account sink. You can't change the sink or change the monitoring account with this operation.</p>\n         <p>To update the list of tags associated with the sink, use\n            <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>",
+                "smithy.api#documentation": "<p>Use this operation to change what types of data are shared from a source account to its linked\n      monitoring account sink. You can't change the sink or change the monitoring account with this operation.</p>\n         <p>When you update a link, you can optionally specify filters\n     that specify which metric namespaces and which log groups are shared from the source account to the monitoring account.</p>\n         <p>To update the list of tags associated with the sink, use \n       <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/UpdateLink"
@@ -1536,8 +1622,14 @@
                 "ResourceTypes": {
                     "target": "com.amazonaws.oam#ResourceTypesInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of strings that define which types of data that the source account will send to the monitoring\n            account.</p>\n         <p>Your input here replaces the current set of data types that are shared.</p>",
+                        "smithy.api#documentation": "<p>An array of strings that define which types of data that the source account will send to the monitoring \n       account.</p>\n         <p>Your input here replaces the current set of data types that are shared.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "LinkConfiguration": {
+                    "target": "com.amazonaws.oam#LinkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this structure to filter which metric namespaces and which log groups are to be shared from \n      the source account to the monitoring account.</p>"
                     }
                 }
             },
@@ -1588,6 +1680,12 @@
                     "target": "com.amazonaws.oam#TagMapOutput",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to the link.</p>"
+                    }
+                },
+                "LinkConfiguration": {
+                    "target": "com.amazonaws.oam#LinkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure includes filters that specify which metric namespaces and which log groups are shared from \n      the source account to the monitoring account.</p>"
                     }
                 }
             },
@@ -1702,7 +1800,7 @@
                         "X-Amz-Requested-Operation"
                     ]
                 },
-                "smithy.api#documentation": "<p>Use Amazon CloudWatch Observability Access Manager to create and manage links between source accounts and\n            monitoring accounts by using <i>CloudWatch cross-account observability</i>. With\n            CloudWatch cross-account observability, you can monitor and troubleshoot applications that span\n            multiple accounts within a Region. Seamlessly search, visualize, and analyze your metrics,\n            logs, traces, and Application Insights applications in any of the linked accounts without account boundaries.</p>\n         <p>Set up one or more Amazon Web Services accounts as <i>monitoring\n            accounts</i> and link them with multiple <i>source accounts</i>. A\n            monitoring account is a central Amazon Web Services account that can view and interact with\n            observability data generated from source accounts. A source account is an individual Amazon Web Services account that generates observability data for the resources that reside in it.\n            Source accounts share their observability data with the monitoring account. The shared\n            observability data can include metrics in Amazon CloudWatch, logs in Amazon CloudWatch Logs, traces in X-Ray, and applications in Amazon CloudWatch Application Insights.</p>",
+                "smithy.api#documentation": "<p>Use Amazon CloudWatch Observability Access Manager to create and manage links between source accounts and\n      monitoring accounts by using <i>CloudWatch cross-account observability</i>. With\n        CloudWatch cross-account observability, you can monitor and troubleshoot applications that span\n      multiple accounts within a Region. Seamlessly search, visualize, and analyze your metrics,\n      logs, traces, and Application Insights applications in any of the linked accounts without account boundaries.</p>\n         <p>Set up one or more Amazon Web Services accounts as <i>monitoring\n        accounts</i> and link them with multiple <i>source accounts</i>. A\n      monitoring account is a central Amazon Web Services account that can view and interact with\n      observability data generated from source accounts. A source account is an individual Amazon Web Services account that generates observability data for the resources that reside in it.\n      Source accounts share their observability data with the monitoring account. The shared\n      observability data can include metrics in Amazon CloudWatch, logs in Amazon CloudWatch Logs, traces in X-Ray, and applications in Amazon CloudWatch Application Insights.</p>",
                 "smithy.api#title": "CloudWatch Observability Access Manager",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

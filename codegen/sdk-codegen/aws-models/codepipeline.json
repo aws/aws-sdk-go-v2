@@ -1859,6 +1859,9 @@
                     "target": "com.amazonaws.codepipeline#RetryStageExecution"
                 },
                 {
+                    "target": "com.amazonaws.codepipeline#RollbackStage"
+                },
+                {
                     "target": "com.amazonaws.codepipeline#StartPipelineExecution"
                 },
                 {
@@ -3584,6 +3587,23 @@
                 "smithy.api#documentation": "<p>The interaction or event that started a pipeline execution.</p>"
             }
         },
+        "com.amazonaws.codepipeline#ExecutionType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK"
+                    }
+                }
+            }
+        },
         "com.amazonaws.codepipeline#ExecutorConfiguration": {
             "type": "structure",
             "members": {
@@ -3626,6 +3646,20 @@
         },
         "com.amazonaws.codepipeline#ExternalExecutionSummary": {
             "type": "string"
+        },
+        "com.amazonaws.codepipeline#FailureConditions": {
+            "type": "structure",
+            "members": {
+                "result": {
+                    "target": "com.amazonaws.codepipeline#Result",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified result for when the failure conditions are met, such as rolling back the stage.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration that specifies the result, such as rollback, to occur upon stage failure. </p>"
+            }
         },
         "com.amazonaws.codepipeline#FailureDetails": {
             "type": "structure",
@@ -5072,6 +5106,12 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n            results, make another call with the returned nextToken value. Pipeline history is\n            limited to the most recent 12 months, based on pipeline execution start times. Default\n            value is 100.</p>"
                     }
                 },
+                "filter": {
+                    "target": "com.amazonaws.codepipeline#PipelineExecutionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline execution to filter on.</p>"
+                    }
+                },
                 "nextToken": {
                     "target": "com.amazonaws.codepipeline#NextToken",
                     "traits": {
@@ -5715,10 +5755,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default\n            mode is SUPERSEDED.</p>"
                     }
+                },
+                "executionType": {
+                    "target": "com.amazonaws.codepipeline#ExecutionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the pipeline execution.</p>"
+                    }
+                },
+                "rollbackMetadata": {
+                    "target": "com.amazonaws.codepipeline#PipelineRollbackMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata about the execution pertaining to stage rollback.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents information about an execution of a pipeline.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineExecutionFilter": {
+            "type": "structure",
+            "members": {
+                "succeededInStage": {
+                    "target": "com.amazonaws.codepipeline#SucceededInStageFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter for pipeline executions where the stage was successful in the current pipeline\n            version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pipeline execution to filter on.</p>"
             }
         },
         "com.amazonaws.codepipeline#PipelineExecutionId": {
@@ -5751,6 +5817,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Unable to stop the pipeline execution. The execution might already be in a\n                <code>Stopped</code> state, or it might no longer be in progress.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineExecutionOutdatedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.codepipeline#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified pipeline execution is outdated and cannot be used as a target pipeline execution for rollback.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5819,6 +5897,12 @@
                         "smithy.api#documentation": "<p>The status of the pipeline execution.</p>\n         <ul>\n            <li>\n               <p>InProgress: The pipeline execution is currently running.</p>\n            </li>\n            <li>\n               <p>Stopped: The pipeline execution was manually stopped. For more information,\n                    see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped\">Stopped Executions</a>.</p>\n            </li>\n            <li>\n               <p>Stopping: The pipeline execution received a request to be manually stopped.\n                    Depending on the selected stop mode, the execution is either completing or\n                    abandoning in-progress actions. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped\">Stopped Executions</a>.</p>\n            </li>\n            <li>\n               <p>Succeeded: The pipeline execution was completed successfully. </p>\n            </li>\n            <li>\n               <p>Superseded: While this pipeline execution was waiting for the next stage to\n                    be completed, a newer pipeline execution advanced and continued through the\n                    pipeline instead. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded\">Superseded Executions</a>.</p>\n            </li>\n            <li>\n               <p>Failed: The pipeline execution was not completed successfully.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "statusSummary": {
+                    "target": "com.amazonaws.codepipeline#PipelineExecutionStatusSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status summary for the pipeline.</p>"
+                    }
+                },
                 "startTime": {
                     "target": "com.amazonaws.codepipeline#Timestamp",
                     "traits": {
@@ -5853,6 +5937,18 @@
                     "target": "com.amazonaws.codepipeline#ExecutionMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The method that the pipeline will use to handle multiple executions. The default\n            mode is SUPERSEDED.</p>"
+                    }
+                },
+                "executionType": {
+                    "target": "com.amazonaws.codepipeline#ExecutionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the pipeline execution.</p>"
+                    }
+                },
+                "rollbackMetadata": {
+                    "target": "com.amazonaws.codepipeline#PipelineRollbackMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata for the stage execution to be rolled back.</p>"
                     }
                 }
             },
@@ -5942,6 +6038,20 @@
             "traits": {
                 "smithy.api#documentation": "<p>The pipeline was specified in an invalid format or cannot be found.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.codepipeline#PipelineRollbackMetadata": {
+            "type": "structure",
+            "members": {
+                "rollbackTargetPipelineExecutionId": {
+                    "target": "com.amazonaws.codepipeline#PipelineExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline execution ID to which the stage will be rolled back.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata for the stage execution to be rolled back.</p>"
             }
         },
         "com.amazonaws.codepipeline#PipelineStageDeclarationList": {
@@ -6952,6 +7062,17 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.codepipeline#Result": {
+            "type": "enum",
+            "members": {
+                "ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK"
+                    }
+                }
+            }
+        },
         "com.amazonaws.codepipeline#RetryStageExecution": {
             "type": "operation",
             "input": {
@@ -7071,6 +7192,85 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/"
+            }
+        },
+        "com.amazonaws.codepipeline#RollbackStage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codepipeline#RollbackStageInput"
+            },
+            "output": {
+                "target": "com.amazonaws.codepipeline#RollbackStageOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codepipeline#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#PipelineExecutionNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#PipelineExecutionOutdatedException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#PipelineNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#StageNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#UnableToRollbackStageException"
+                },
+                {
+                    "target": "com.amazonaws.codepipeline#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Rolls back a stage execution.</p>"
+            }
+        },
+        "com.amazonaws.codepipeline#RollbackStageInput": {
+            "type": "structure",
+            "members": {
+                "pipelineName": {
+                    "target": "com.amazonaws.codepipeline#PipelineName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline for which the stage will be rolled back. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stageName": {
+                    "target": "com.amazonaws.codepipeline#StageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stage in the pipeline to be rolled back. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetPipelineExecutionId": {
+                    "target": "com.amazonaws.codepipeline#PipelineExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pipeline execution ID for the stage to be rolled back to. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codepipeline#RollbackStageOutput": {
+            "type": "structure",
+            "members": {
+                "pipelineExecutionId": {
+                    "target": "com.amazonaws.codepipeline#PipelineExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution ID of the pipeline execution for the stage that has been rolled\n            back.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codepipeline#S3ArtifactLocation": {
@@ -7311,6 +7511,12 @@
                         "smithy.api#documentation": "<p>The actions included in a stage.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "onFailure": {
+                    "target": "com.amazonaws.codepipeline#FailureConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The method to use when a stage has not completed successfully. For example, configuring this field for rollback will roll back a failed stage automatically to the last successful pipeline execution in the stage.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7332,6 +7538,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the stage, or for a completed stage, the last status of the\n            stage.</p>\n         <note>\n            <p>A status of cancelled means that the pipeline’s definition was updated before the\n                stage execution could be completed.</p>\n         </note>",
                         "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.codepipeline#ExecutionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of pipeline execution for the stage, such as a rollback pipeline execution.</p>"
                     }
                 }
             },
@@ -7704,6 +7916,20 @@
         "com.amazonaws.codepipeline#String": {
             "type": "string"
         },
+        "com.amazonaws.codepipeline#SucceededInStageFilter": {
+            "type": "structure",
+            "members": {
+                "stageName": {
+                    "target": "com.amazonaws.codepipeline#StageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stage for filtering for pipeline executions where the stage was successful in the current pipeline\n            version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter for pipeline executions that have successfully completed the stage in the current pipeline version.</p>"
+            }
+        },
         "com.amazonaws.codepipeline#Tag": {
             "type": "structure",
             "members": {
@@ -8038,7 +8264,31 @@
                     "traits": {
                         "smithy.api#enumValue": "WebhookV2"
                     }
+                },
+                "ManualRollback": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManualRollback"
+                    }
+                },
+                "AutomatedRollback": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AutomatedRollback"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.codepipeline#UnableToRollbackStageException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.codepipeline#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unable to roll back the stage. The cause might be if the pipeline version has changed\n            since the target pipeline execution was deployed, the stage is currently running, or an\n            incorrect target pipeline execution ID was provided.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.codepipeline#UntagResource": {
