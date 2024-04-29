@@ -98,6 +98,18 @@ func TestCheckSnapshot_DeleteScheduledQuery(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeEndpoints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeEndpoints(context.Background(), nil, func(o *Options) {
@@ -206,6 +218,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAccountSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateScheduledQuery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateScheduledQuery(context.Background(), nil, func(o *Options) {
@@ -246,6 +270,18 @@ func TestUpdateSnapshot_DeleteScheduledQuery(t *testing.T) {
 	_, err := svc.DeleteScheduledQuery(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteScheduledQuery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAccountSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -354,6 +390,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAccountSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccountSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAccountSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

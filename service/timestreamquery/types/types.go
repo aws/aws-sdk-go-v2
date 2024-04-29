@@ -108,6 +108,9 @@ type ExecutionStats struct {
 	// Bytes metered for a single scheduled query run.
 	BytesMetered int64
 
+	// Bytes scanned for a single scheduled query run.
+	CumulativeBytesScanned int64
+
 	// Data writes metered for records ingested in a single scheduled query run.
 	DataWrites int64
 

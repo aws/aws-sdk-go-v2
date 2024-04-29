@@ -1259,6 +1259,10 @@ type CoverageFilterCriteria struct {
 	// AWS_ECR_CONTAINER_IMAGE , AWS_ECR_REPOSITORY or AWS_ACCOUNT .
 	ResourceType []CoverageStringFilter
 
+	// The filter to search for Amazon EC2 instance coverage by scan mode. Valid
+	// values are EC2_SSM_AGENT_BASED and EC2_HYBRID .
+	ScanMode []CoverageStringFilter
+
 	// The scan status code to filter on. Valid values are: ValidationException ,
 	// InternalServerException , ResourceNotFoundException , BadRequestException , and
 	// ThrottlingException .
@@ -1336,6 +1340,9 @@ type CoveredResource struct {
 
 	// An object that contains details about the metadata.
 	ResourceMetadata *ResourceScanMetadata
+
+	// The scan method that is applied to the instance.
+	ScanMode ScanMode
 
 	// The status of the scan covering the resource.
 	ScanStatus *ScanStatus
@@ -1528,6 +1535,26 @@ type Destination struct {
 	noSmithyDocumentSerde
 }
 
+// Enables agent-based scanning, which scans instances that are not managed by SSM.
+type Ec2Configuration struct {
+
+	// The scan method that is applied to the instance.
+	//
+	// This member is required.
+	ScanMode Ec2ScanMode
+
+	noSmithyDocumentSerde
+}
+
+// Details about the state of the EC2 scan configuration for your environment.
+type Ec2ConfigurationState struct {
+
+	// An object that contains details about the state of the Amazon EC2 scan mode.
+	ScanModeState *Ec2ScanModeState
+
+	noSmithyDocumentSerde
+}
+
 // The details that define an aggregation based on Amazon EC2 instances.
 type Ec2InstanceAggregation struct {
 
@@ -1595,6 +1622,18 @@ type Ec2Metadata struct {
 
 	// The tags attached to the instance.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The state of your Amazon EC2 scan mode configuration.
+type Ec2ScanModeState struct {
+
+	// The scan method that is applied to the instance.
+	ScanMode Ec2ScanMode
+
+	// The status of the Amazon EC2 scan mode setting.
+	ScanModeStatus Ec2ScanModeStatus
 
 	noSmithyDocumentSerde
 }
@@ -1996,7 +2035,8 @@ type Finding struct {
 	// This member is required.
 	FirstObservedAt *time.Time
 
-	// The date and time that the finding was last observed.
+	// The date and time the finding was last observed. This timestamp for this field
+	// remains unchanged until a finding is updated.
 	//
 	// This member is required.
 	LastObservedAt *time.Time

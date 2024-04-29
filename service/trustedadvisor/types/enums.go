@@ -2,6 +2,24 @@
 
 package types
 
+type ExclusionStatus string
+
+// Enum values for ExclusionStatus
+const (
+	ExclusionStatusExcluded ExclusionStatus = "excluded"
+	ExclusionStatusIncluded ExclusionStatus = "included"
+)
+
+// Values returns all known values for ExclusionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExclusionStatus) Values() []ExclusionStatus {
+	return []ExclusionStatus{
+		"excluded",
+		"included",
+	}
+}
+
 type RecommendationLanguage string
 
 // Enum values for RecommendationLanguage

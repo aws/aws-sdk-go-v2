@@ -3912,6 +3912,11 @@ func awsRestjson1_deserializeOpDocumentGetConfigurationOutput(v **GetConfigurati
 
 	for key, value := range shape {
 		switch key {
+		case "ec2Configuration":
+			if err := awsRestjson1_deserializeDocumentEc2ConfigurationState(&sv.Ec2Configuration, value); err != nil {
+				return err
+			}
+
 		case "ecrConfiguration":
 			if err := awsRestjson1_deserializeDocumentEcrConfigurationState(&sv.EcrConfiguration, value); err != nil {
 				return err
@@ -12109,6 +12114,15 @@ func awsRestjson1_deserializeDocumentCoveredResource(v **types.CoveredResource, 
 				sv.ResourceType = types.CoverageResourceType(jtv)
 			}
 
+		case "scanMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScanMode to be of type string, got %T instead", value)
+				}
+				sv.ScanMode = types.ScanMode(jtv)
+			}
+
 		case "scanStatus":
 			if err := awsRestjson1_deserializeDocumentScanStatus(&sv.ScanStatus, value); err != nil {
 				return err
@@ -13132,6 +13146,42 @@ func awsRestjson1_deserializeDocumentDetectorTagList(v *[]string, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEc2ConfigurationState(v **types.Ec2ConfigurationState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ec2ConfigurationState
+	if *v == nil {
+		sv = &types.Ec2ConfigurationState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "scanModeState":
+			if err := awsRestjson1_deserializeDocumentEc2ScanModeState(&sv.ScanModeState, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEc2InstanceAggregationResponse(v **types.Ec2InstanceAggregationResponse, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13265,6 +13315,55 @@ func awsRestjson1_deserializeDocumentEc2Metadata(v **types.Ec2Metadata, value in
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEc2ScanModeState(v **types.Ec2ScanModeState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Ec2ScanModeState
+	if *v == nil {
+		sv = &types.Ec2ScanModeState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "scanMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ec2ScanMode to be of type string, got %T instead", value)
+				}
+				sv.ScanMode = types.Ec2ScanMode(jtv)
+			}
+
+		case "scanModeStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ec2ScanModeStatus to be of type string, got %T instead", value)
+				}
+				sv.ScanModeStatus = types.Ec2ScanModeStatus(jtv)
 			}
 
 		default:

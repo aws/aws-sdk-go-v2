@@ -42,6 +42,24 @@ func (MeasureValueType) Values() []MeasureValueType {
 	}
 }
 
+type QueryPricingModel string
+
+// Enum values for QueryPricingModel
+const (
+	QueryPricingModelBytesScanned QueryPricingModel = "BYTES_SCANNED"
+	QueryPricingModelComputeUnits QueryPricingModel = "COMPUTE_UNITS"
+)
+
+// Values returns all known values for QueryPricingModel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryPricingModel) Values() []QueryPricingModel {
+	return []QueryPricingModel{
+		"BYTES_SCANNED",
+		"COMPUTE_UNITS",
+	}
+}
+
 type S3EncryptionOption string
 
 // Enum values for S3EncryptionOption

@@ -32,9 +32,11 @@ func (c *Client) UpdateConfiguration(ctx context.Context, params *UpdateConfigur
 
 type UpdateConfigurationInput struct {
 
+	// Specifies how the Amazon EC2 automated scan will be updated for your
+	// environment.
+	Ec2Configuration *types.Ec2Configuration
+
 	// Specifies how the ECR automated re-scan will be updated for your environment.
-	//
-	// This member is required.
 	EcrConfiguration *types.EcrConfiguration
 
 	noSmithyDocumentSerde

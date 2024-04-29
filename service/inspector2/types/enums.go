@@ -738,6 +738,42 @@ func (Ec2Platform) Values() []Ec2Platform {
 	}
 }
 
+type Ec2ScanMode string
+
+// Enum values for Ec2ScanMode
+const (
+	Ec2ScanModeEc2SsmAgentBased Ec2ScanMode = "EC2_SSM_AGENT_BASED"
+	Ec2ScanModeEc2Hybrid        Ec2ScanMode = "EC2_HYBRID"
+)
+
+// Values returns all known values for Ec2ScanMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Ec2ScanMode) Values() []Ec2ScanMode {
+	return []Ec2ScanMode{
+		"EC2_SSM_AGENT_BASED",
+		"EC2_HYBRID",
+	}
+}
+
+type Ec2ScanModeStatus string
+
+// Enum values for Ec2ScanModeStatus
+const (
+	Ec2ScanModeStatusSuccess Ec2ScanModeStatus = "SUCCESS"
+	Ec2ScanModeStatusPending Ec2ScanModeStatus = "PENDING"
+)
+
+// Values returns all known values for Ec2ScanModeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Ec2ScanModeStatus) Values() []Ec2ScanModeStatus {
+	return []Ec2ScanModeStatus{
+		"SUCCESS",
+		"PENDING",
+	}
+}
+
 type EcrPullDateRescanDuration string
 
 // Enum values for EcrPullDateRescanDuration
@@ -1595,6 +1631,24 @@ func (SbomReportFormat) Values() []SbomReportFormat {
 	return []SbomReportFormat{
 		"CYCLONEDX_1_4",
 		"SPDX_2_3",
+	}
+}
+
+type ScanMode string
+
+// Enum values for ScanMode
+const (
+	ScanModeEc2SsmAgentBased ScanMode = "EC2_SSM_AGENT_BASED"
+	ScanModeEc2Agentless     ScanMode = "EC2_AGENTLESS"
+)
+
+// Values returns all known values for ScanMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ScanMode) Values() []ScanMode {
+	return []ScanMode{
+		"EC2_SSM_AGENT_BASED",
+		"EC2_AGENTLESS",
 	}
 }
 

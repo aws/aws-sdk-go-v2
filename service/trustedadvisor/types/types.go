@@ -229,6 +229,9 @@ type OrganizationRecommendationResourceSummary struct {
 	// The AWS account ID
 	AccountId *string
 
+	// The exclusion status of the Recommendation Resource
+	ExclusionStatus ExclusionStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -416,6 +419,23 @@ type RecommendationPillarSpecificAggregates struct {
 	noSmithyDocumentSerde
 }
 
+// The request entry for Recommendation Resource exclusion. Each entry is a
+// combination of Recommendation Resource ARN and corresponding exclusion status
+type RecommendationResourceExclusion struct {
+
+	// The ARN of the Recommendation Resource
+	//
+	// This member is required.
+	Arn *string
+
+	// The exclusion status
+	//
+	// This member is required.
+	IsExcluded *bool
+
+	noSmithyDocumentSerde
+}
+
 // Aggregation of Recommendation Resources
 type RecommendationResourcesAggregates struct {
 
@@ -483,6 +503,9 @@ type RecommendationResourceSummary struct {
 	// This member is required.
 	Status ResourceStatus
 
+	// The exclusion status of the Recommendation Resource
+	ExclusionStatus ExclusionStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -547,6 +570,22 @@ type RecommendationSummary struct {
 
 	// The pillar aggregations for cost savings
 	PillarSpecificAggregates *RecommendationPillarSpecificAggregates
+
+	noSmithyDocumentSerde
+}
+
+// The error entry for Recommendation Resource exclusion. Each entry is a
+// combination of Recommendation Resource ARN, error code and error message
+type UpdateRecommendationResourceExclusionError struct {
+
+	// The ARN of the Recommendation Resource
+	Arn *string
+
+	// The error code
+	ErrorCode *string
+
+	// The error message
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }

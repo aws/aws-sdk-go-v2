@@ -1763,6 +1763,11 @@ func validateCoverageFilterCriteria(v *types.CoverageFilterCriteria) error {
 			invalidParams.AddNested("LambdaFunctionRuntime", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ScanMode != nil {
+		if err := validateCoverageStringFilterList(v.ScanMode); err != nil {
+			invalidParams.AddNested("ScanMode", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1887,6 +1892,21 @@ func validateDestination(v *types.Destination) error {
 	}
 	if v.KmsKeyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEc2Configuration(v *types.Ec2Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Ec2Configuration"}
+	if len(v.ScanMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3685,11 +3705,14 @@ func validateOpUpdateConfigurationInput(v *UpdateConfigurationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationInput"}
-	if v.EcrConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EcrConfiguration"))
-	} else if v.EcrConfiguration != nil {
+	if v.EcrConfiguration != nil {
 		if err := validateEcrConfiguration(v.EcrConfiguration); err != nil {
 			invalidParams.AddNested("EcrConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Ec2Configuration != nil {
+		if err := validateEc2Configuration(v.Ec2Configuration); err != nil {
+			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

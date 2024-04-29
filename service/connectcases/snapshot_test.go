@@ -170,6 +170,42 @@ func TestCheckSnapshot_DeleteDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteField(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteField(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteField")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLayout")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCase(context.Background(), nil, func(o *Options) {
@@ -534,6 +570,42 @@ func TestUpdateSnapshot_DeleteDomain(t *testing.T) {
 	_, err := svc.DeleteDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteField(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteField(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteField")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLayout(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLayout(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLayout")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTemplate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTemplate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTemplate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

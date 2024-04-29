@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Returns the details for the requested layout.
@@ -64,6 +65,15 @@ type GetLayoutOutput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The timestamp for when the resource was created.
+	CreatedTime *time.Time
+
+	// Indicates whether the resource has been deleted.
+	Deleted bool
+
+	// The timestamp for when the resource was created or last modified.
+	LastModifiedTime *time.Time
 
 	// A map of of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.

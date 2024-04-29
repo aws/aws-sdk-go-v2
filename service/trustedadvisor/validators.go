@@ -5,9 +5,30 @@ package trustedadvisor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
+
+type validateOpBatchUpdateRecommendationResourceExclusion struct {
+}
+
+func (*validateOpBatchUpdateRecommendationResourceExclusion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateRecommendationResourceExclusion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateRecommendationResourceExclusionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateRecommendationResourceExclusionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
 
 type validateOpGetOrganizationRecommendation struct {
 }
@@ -149,6 +170,10 @@ func (m *validateOpUpdateRecommendationLifecycle) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchUpdateRecommendationResourceExclusionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateRecommendationResourceExclusion{}, middleware.After)
+}
+
 func addOpGetOrganizationRecommendationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOrganizationRecommendation{}, middleware.After)
 }
@@ -175,6 +200,60 @@ func addOpUpdateOrganizationRecommendationLifecycleValidationMiddleware(stack *m
 
 func addOpUpdateRecommendationLifecycleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRecommendationLifecycle{}, middleware.After)
+}
+
+func validateRecommendationResourceExclusion(v *types.RecommendationResourceExclusion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationResourceExclusion"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.IsExcluded == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsExcluded"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommendationResourceExclusionList(v []types.RecommendationResourceExclusion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationResourceExclusionList"}
+	for i := range v {
+		if err := validateRecommendationResourceExclusion(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateRecommendationResourceExclusionInput(v *BatchUpdateRecommendationResourceExclusionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateRecommendationResourceExclusionInput"}
+	if v.RecommendationResourceExclusions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationResourceExclusions"))
+	} else if v.RecommendationResourceExclusions != nil {
+		if err := validateRecommendationResourceExclusionList(v.RecommendationResourceExclusions); err != nil {
+			invalidParams.AddNested("RecommendationResourceExclusions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpGetOrganizationRecommendationInput(v *GetOrganizationRecommendationInput) error {

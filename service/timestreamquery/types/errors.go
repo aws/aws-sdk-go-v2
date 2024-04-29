@@ -59,7 +59,7 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Timestream was unable to fully process this request because of an internal
+// The service was unable to fully process this request because of an internal
 // server error.
 type InternalServerException struct {
 	Message *string

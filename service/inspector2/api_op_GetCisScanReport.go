@@ -45,7 +45,7 @@ type GetCisScanReportOutput struct {
 	// The status.
 	Status types.CisReportStatus
 
-	// The URL where the CIS scan report PDF can be downloaded.
+	// The URL where a PDF of the CIS scan report can be downloaded.
 	Url *string
 
 	// Metadata pertaining to the operation's result.

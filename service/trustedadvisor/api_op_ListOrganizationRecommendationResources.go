@@ -38,6 +38,9 @@ type ListOrganizationRecommendationResourcesInput struct {
 	// An account affected by this organization recommendation
 	AffectedAccountId *string
 
+	// The exclusion status of the resource
+	ExclusionStatus types.ExclusionStatus
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
 

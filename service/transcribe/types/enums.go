@@ -20,6 +20,22 @@ func (BaseModelName) Values() []BaseModelName {
 	}
 }
 
+type CallAnalyticsFeature string
+
+// Enum values for CallAnalyticsFeature
+const (
+	CallAnalyticsFeatureGenerativeSummarization CallAnalyticsFeature = "GENERATIVE_SUMMARIZATION"
+)
+
+// Values returns all known values for CallAnalyticsFeature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CallAnalyticsFeature) Values() []CallAnalyticsFeature {
+	return []CallAnalyticsFeature{
+		"GENERATIVE_SUMMARIZATION",
+	}
+}
+
 type CallAnalyticsJobStatus string
 
 // Enum values for CallAnalyticsJobStatus
@@ -39,6 +55,25 @@ func (CallAnalyticsJobStatus) Values() []CallAnalyticsJobStatus {
 		"IN_PROGRESS",
 		"FAILED",
 		"COMPLETED",
+	}
+}
+
+type CallAnalyticsSkippedReasonCode string
+
+// Enum values for CallAnalyticsSkippedReasonCode
+const (
+	CallAnalyticsSkippedReasonCodeInsufficientConversationContent CallAnalyticsSkippedReasonCode = "INSUFFICIENT_CONVERSATION_CONTENT"
+	CallAnalyticsSkippedReasonCodeFailedSafetyGuidelines          CallAnalyticsSkippedReasonCode = "FAILED_SAFETY_GUIDELINES"
+)
+
+// Values returns all known values for CallAnalyticsSkippedReasonCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CallAnalyticsSkippedReasonCode) Values() []CallAnalyticsSkippedReasonCode {
+	return []CallAnalyticsSkippedReasonCode{
+		"INSUFFICIENT_CONVERSATION_CONTENT",
+		"FAILED_SAFETY_GUIDELINES",
 	}
 }
 

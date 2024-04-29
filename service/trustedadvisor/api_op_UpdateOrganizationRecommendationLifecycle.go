@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the lifecyle of a Recommendation within an Organization. This API only
+// Update the lifecycle of a Recommendation within an Organization. This API only
 // supports prioritized recommendations.
 func (c *Client) UpdateOrganizationRecommendationLifecycle(ctx context.Context, params *UpdateOrganizationRecommendationLifecycleInput, optFns ...func(*Options)) (*UpdateOrganizationRecommendationLifecycleOutput, error) {
 	if params == nil {

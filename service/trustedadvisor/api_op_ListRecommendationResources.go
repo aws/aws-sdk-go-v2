@@ -34,6 +34,9 @@ type ListRecommendationResourcesInput struct {
 	// This member is required.
 	RecommendationIdentifier *string
 
+	// The exclusion status of the resource
+	ExclusionStatus types.ExclusionStatus
+
 	// The maximum number of results to return per page.
 	MaxResults *int32
 

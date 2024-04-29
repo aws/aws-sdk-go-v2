@@ -1,0 +1,8 @@
+{
+    "id": "26f5b3c7-7b80-43f5-bb3b-aa9e5a2f639c",
+    "type": "feature",
+    "description": "Update Inspector2 to include new Agentless API parameters.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

@@ -8,6 +8,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_BatchUpdateRecommendationResourceExclusion.go",
         "api_op_GetOrganizationRecommendation.go",
         "api_op_GetRecommendation.go",
         "api_op_ListChecks.go",

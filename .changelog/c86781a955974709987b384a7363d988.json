@@ -1,0 +1,8 @@
+{
+    "id": "c86781a9-5597-4709-987b-384a7363d988",
+    "type": "feature",
+    "description": "This change allows users to update and describe account settings associated with their accounts.",
+    "modules": [
+        "service/timestreamquery"
+    ]
+}

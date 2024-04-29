@@ -55,6 +55,10 @@ type AbsoluteTimeRange struct {
 // in the RedactedMediaFileUri field of your response.
 type CallAnalyticsJob struct {
 
+	// Provides detailed information about a call analytics job, including information
+	// about skipped analytics features.
+	CallAnalyticsJobDetails *CallAnalyticsJobDetails
+
 	// The name of the Call Analytics job. Job names are case sensitive and must be
 	// unique within an Amazon Web Services account.
 	CallAnalyticsJobName *string
@@ -154,6 +158,18 @@ type CallAnalyticsJob struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a call analytics job, including information about
+// skipped analytics features.
+type CallAnalyticsJobDetails struct {
+
+	// Contains information about any skipped analytics features during the analysis
+	// of a call analytics job. This array lists all the analytics features that were
+	// skipped, along with their corresponding reason code and message.
+	Skipped []CallAnalyticsSkippedFeature
+
+	noSmithyDocumentSerde
+}
+
 // Provides additional optional settings for your request, including content
 // redaction, automatic language identification; allows you to apply custom
 // language models, custom vocabulary filters, and custom vocabularies.
@@ -232,6 +248,10 @@ type CallAnalyticsJobSettings struct {
 // Provides detailed information about a specific Call Analytics job.
 type CallAnalyticsJobSummary struct {
 
+	// Provides detailed information about a call analytics job, including information
+	// about skipped analytics features.
+	CallAnalyticsJobDetails *CallAnalyticsJobDetails
+
 	// The name of the Call Analytics job. Job names are case sensitive and must be
 	// unique within an Amazon Web Services account.
 	CallAnalyticsJobName *string
@@ -268,6 +288,28 @@ type CallAnalyticsJobSummary struct {
 	// 2022-05-04T12:32:58.789000-07:00 represents a transcription job that started
 	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents a skipped analytics feature during the analysis of a call analytics
+// job. The Feature field indicates the type of analytics feature that was
+// skipped. The Message field contains additional information or a message
+// explaining why the analytics feature was skipped. The ReasonCode field provides
+// a code indicating the reason why the analytics feature was skipped.
+type CallAnalyticsSkippedFeature struct {
+
+	// Indicates the type of analytics feature that was skipped during the analysis of
+	// a call analytics job.
+	Feature CallAnalyticsFeature
+
+	// Contains additional information or a message explaining why a specific
+	// analytics feature was skipped during the analysis of a call analytics job.
+	Message *string
+
+	// Provides a code indicating the reason why a specific analytics feature was
+	// skipped during the analysis of a call analytics job.
+	ReasonCode CallAnalyticsSkippedReasonCode
 
 	noSmithyDocumentSerde
 }

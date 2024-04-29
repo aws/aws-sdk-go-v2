@@ -58,8 +58,7 @@ type AuditEventField struct {
 	noSmithyDocumentSerde
 }
 
-// Object to store union of Field values. This data type is a UNION, so only one
-// of the following members can be specified when used or returned.
+// Object to store union of Field values.
 //
 // The following types satisfy this interface:
 //
@@ -648,8 +647,17 @@ type GetFieldResponse struct {
 	// This member is required.
 	Type FieldType
 
+	// The timestamp for when the resource was created.
+	CreatedTime *time.Time
+
+	// Indicates whether the resource has been deleted.
+	Deleted bool
+
 	// Description of the field.
 	Description *string
+
+	// The timestamp for when the resource was created or last modified.
+	LastModifiedTime *time.Time
 
 	// A map of of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.

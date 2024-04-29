@@ -5148,6 +5148,11 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 
 	for key, value := range shape {
 		switch key {
+		case "CallAnalyticsJobDetails":
+			if err := awsAwsjson11_deserializeDocumentCallAnalyticsJobDetails(&sv.CallAnalyticsJobDetails, value); err != nil {
+				return err
+			}
+
 		case "CallAnalyticsJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5326,6 +5331,42 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJob(v **types.CallAnalyticsJob
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCallAnalyticsJobDetails(v **types.CallAnalyticsJobDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CallAnalyticsJobDetails
+	if *v == nil {
+		sv = &types.CallAnalyticsJobDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Skipped":
+			if err := awsAwsjson11_deserializeDocumentCallAnalyticsSkippedFeatureList(&sv.Skipped, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCallAnalyticsJobSettings(v **types.CallAnalyticsJobSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5469,6 +5510,11 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 
 	for key, value := range shape {
 		switch key {
+		case "CallAnalyticsJobDetails":
+			if err := awsAwsjson11_deserializeDocumentCallAnalyticsJobDetails(&sv.CallAnalyticsJobDetails, value); err != nil {
+				return err
+			}
+
 		case "CallAnalyticsJobName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5559,6 +5605,98 @@ func awsAwsjson11_deserializeDocumentCallAnalyticsJobSummary(v **types.CallAnaly
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCallAnalyticsSkippedFeature(v **types.CallAnalyticsSkippedFeature, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CallAnalyticsSkippedFeature
+	if *v == nil {
+		sv = &types.CallAnalyticsSkippedFeature{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Feature":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CallAnalyticsFeature to be of type string, got %T instead", value)
+				}
+				sv.Feature = types.CallAnalyticsFeature(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "ReasonCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CallAnalyticsSkippedReasonCode to be of type string, got %T instead", value)
+				}
+				sv.ReasonCode = types.CallAnalyticsSkippedReasonCode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCallAnalyticsSkippedFeatureList(v *[]types.CallAnalyticsSkippedFeature, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CallAnalyticsSkippedFeature
+	if *v == nil {
+		cv = []types.CallAnalyticsSkippedFeature{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CallAnalyticsSkippedFeature
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCallAnalyticsSkippedFeature(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
