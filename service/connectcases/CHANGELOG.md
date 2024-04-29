@@ -1,3 +1,7 @@
+# v1.16.0 (2024-04-29)
+
+* **Feature**: This feature releases DeleteField, DeletedLayout, and DeleteTemplate API's
+
 # v1.15.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

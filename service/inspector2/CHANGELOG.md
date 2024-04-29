@@ -1,3 +1,7 @@
+# v1.25.0 (2024-04-29)
+
+* **Feature**: Update Inspector2 to include new Agentless API parameters.
+
 # v1.24.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "fc6eb0bd-5c9e-4c30-b516-1984d0efdf44",
-    "type": "feature",
-    "description": "Updating max results limit for listing any resources (Job, Artifacts, Branch, BackendResources, DomainAssociation) to 50 with the exception of list apps that where max results can be up to 100.",
-    "modules": [
-        "service/amplify"
-    ]
-}

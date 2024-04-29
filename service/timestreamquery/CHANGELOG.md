@@ -1,3 +1,7 @@
+# v1.23.0 (2024-04-29)
+
+* **Feature**: This change allows users to update and describe account settings associated with their accounts.
+
 # v1.22.5 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

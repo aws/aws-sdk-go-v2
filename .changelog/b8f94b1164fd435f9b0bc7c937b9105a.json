@@ -1,8 +1,0 @@
-{
-    "id": "b8f94b11-64fd-435f-9b0b-c7c937b9105a",
-    "type": "feature",
-    "description": "This update provides error messaging for generative call summarization in Transcribe Call Analytics",
-    "modules": [
-        "service/transcribe"
-    ]
-}

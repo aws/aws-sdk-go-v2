@@ -1,3 +1,17 @@
+# Release (2024-04-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.16.0](service/connectcases/CHANGELOG.md#v1160-2024-04-29)
+  * **Feature**: This feature releases DeleteField, DeletedLayout, and DeleteTemplate API's
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.25.0](service/inspector2/CHANGELOG.md#v1250-2024-04-29)
+  * **Feature**: Update Inspector2 to include new Agentless API parameters.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.23.0](service/timestreamquery/CHANGELOG.md#v1230-2024-04-29)
+  * **Feature**: This change allows users to update and describe account settings associated with their accounts.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.37.0](service/transcribe/CHANGELOG.md#v1370-2024-04-29)
+  * **Feature**: This update provides error messaging for generative call summarization in Transcribe Call Analytics
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.4.0](service/trustedadvisor/CHANGELOG.md#v140-2024-04-29)
+  * **Feature**: This release adds the BatchUpdateRecommendationResourceExclusion API to support batch updates of Recommendation Resource exclusion statuses and introduces a new exclusion status filter to the ListRecommendationResources and ListOrganizationRecommendationResources APIs.
+
 # Release (2024-04-26)
 
 ## Module Highlights

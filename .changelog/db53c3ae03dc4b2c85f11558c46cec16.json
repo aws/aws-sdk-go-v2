@@ -1,8 +1,0 @@
-{
-    "id": "db53c3ae-03dc-4b2c-85f1-1558c46cec16",
-    "type": "feature",
-    "description": "This release adds the BatchUpdateRecommendationResourceExclusion API to support batch updates of Recommendation Resource exclusion statuses and introduces a new exclusion status filter to the ListRecommendationResources and ListOrganizationRecommendationResources APIs.",
-    "modules": [
-        "service/trustedadvisor"
-    ]
-}

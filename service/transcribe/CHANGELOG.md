@@ -1,3 +1,7 @@
+# v1.37.0 (2024-04-29)
+
+* **Feature**: This update provides error messaging for generative call summarization in Transcribe Call Analytics
+
 # v1.36.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
