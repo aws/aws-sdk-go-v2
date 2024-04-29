@@ -401,6 +401,62 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.timestreamquery#DescribeAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#DescribeAccountSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#DescribeAccountSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>Describes the settings for your account that include the query pricing model and the configured maximum TCUs the service can use for your query workload.</p>\n         <p>You're charged only for the duration of compute units used for your workloads.</p>"
+            }
+        },
+        "com.amazonaws.timestreamquery#DescribeAccountSettingsRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#DescribeAccountSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "MaxQueryTCU": {
+                    "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/tcu.html\">Timestream compute units</a> (TCUs) the service will use at any point in time to serve your queries.</p>"
+                    }
+                },
+                "QueryPricingModel": {
+                    "target": "com.amazonaws.timestreamquery#QueryPricingModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing model for queries in your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.timestreamquery#DescribeEndpoints": {
             "type": "operation",
             "input": {
@@ -706,6 +762,13 @@
                         "smithy.api#documentation": "<p>Bytes metered for a single scheduled query run.</p>"
                     }
                 },
+                "CumulativeBytesScanned": {
+                    "target": "com.amazonaws.timestreamquery#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Bytes scanned for a single scheduled query run.</p>"
+                    }
+                },
                 "RecordsIngested": {
                     "target": "com.amazonaws.timestreamquery#Long",
                     "traits": {
@@ -733,7 +796,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Timestream was unable to fully process this request because of an internal\n            server error. </p>",
+                "smithy.api#documentation": "<p>\n            The service was unable to fully process this request because of an internal\n            server error. </p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -918,6 +981,9 @@
             "traits": {
                 "smithy.api#default": 0
             }
+        },
+        "com.amazonaws.timestreamquery#MaxQueryCapacity": {
+            "type": "integer"
         },
         "com.amazonaws.timestreamquery#MaxQueryResults": {
             "type": "integer",
@@ -1300,6 +1366,23 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreamquery#QueryPricingModel": {
+            "type": "enum",
+            "members": {
+                "BYTES_SCANNED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYTES_SCANNED"
+                    }
+                },
+                "COMPUTE_UNITS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPUTE_UNITS"
+                    }
+                }
             }
         },
         "com.amazonaws.timestreamquery#QueryRequest": {
@@ -1861,7 +1944,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+                "smithy.api#pattern": "^[a-zA-Z0-9|!\\-_*'\\(\\)]([a-zA-Z0-9]|[!\\-_*'\\(\\)\\/.])+$"
             }
         },
         "com.amazonaws.timestreamquery#ScheduledQueryRunStatus": {
@@ -2336,6 +2419,9 @@
                     "target": "com.amazonaws.timestreamquery#DeleteScheduledQuery"
                 },
                 {
+                    "target": "com.amazonaws.timestreamquery#DescribeAccountSettings"
+                },
+                {
                     "target": "com.amazonaws.timestreamquery#DescribeEndpoints"
                 },
                 {
@@ -2361,6 +2447,9 @@
                 },
                 {
                     "target": "com.amazonaws.timestreamquery#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#UpdateAccountSettings"
                 },
                 {
                     "target": "com.amazonaws.timestreamquery#UpdateScheduledQuery"
@@ -3100,6 +3189,79 @@
         "com.amazonaws.timestreamquery#UntagResourceResponse": {
             "type": "structure",
             "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#UpdateAccountSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreamquery#UpdateAccountSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreamquery#UpdateAccountSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreamquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": true
+                },
+                "smithy.api#documentation": "<p>Transitions your account to use TCUs for query pricing and modifies the maximum query compute units that you've configured. If you reduce the value of <code>MaxQueryTCU</code> to a desired configuration, the new value can take up to 24 hours to be effective.</p>\n         <note>\n            <p>After you've transitioned your account to use TCUs for query pricing, you can't transition to using bytes scanned for query pricing.</p>\n         </note>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#UpdateAccountSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxQueryTCU": {
+                    "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of compute units the service will use at any point in time to serve your queries. To run queries, you must set a minimum capacity of 4 TCU. You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16, 32, and so on.</p>\n         <p>The maximum value supported for <code>MaxQueryTCU</code> is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for maxQueryTCU, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default\">Default quotas</a>.</p>"
+                    }
+                },
+                "QueryPricingModel": {
+                    "target": "com.amazonaws.timestreamquery#QueryPricingModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing model for queries in an account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreamquery#UpdateAccountSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "MaxQueryTCU": {
+                    "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configured maximum number of compute units the service will use at any point in time to serve your queries.</p>"
+                    }
+                },
+                "QueryPricingModel": {
+                    "target": "com.amazonaws.timestreamquery#QueryPricingModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing model for an account.</p>"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#output": {}
             }

@@ -4341,7 +4341,7 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.amplify#MaxResults",
+                    "target": "com.amazonaws.amplify#MaxResultsForListApps",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of records to list in a single response. </p>",
@@ -5006,6 +5006,16 @@
             }
         },
         "com.amazonaws.amplify#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.amplify#MaxResultsForListApps": {
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0,
