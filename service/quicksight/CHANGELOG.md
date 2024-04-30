@@ -1,3 +1,7 @@
+# v1.63.0 (2024-04-30)
+
+* **Feature**: New Q embedding supporting Generative Q&A
+
 # v1.62.0 (2024-04-18)
 
 * **Feature**: This release adds support for the Cross Sheet Filter and Control features, and support for warnings in asset imports for any permitted errors encountered during execution

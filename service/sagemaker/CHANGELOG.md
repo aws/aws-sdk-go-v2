@@ -1,3 +1,7 @@
+# v1.138.0 (2024-04-30)
+
+* **Feature**: Amazon SageMaker Training now supports the use of attribute-based access control (ABAC) roles for training job execution roles. Amazon SageMaker Inference now supports G6 instance types.
+
 # v1.137.0 (2024-04-22)
 
 * **Feature**: This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.

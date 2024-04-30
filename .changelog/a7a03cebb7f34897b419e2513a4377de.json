@@ -1,8 +1,0 @@
-{
-    "id": "a7a03ceb-b7f3-4897-b419-e2513a4377de",
-    "type": "feature",
-    "description": "Add support for workflow sharing and dynamic run storage",
-    "modules": [
-        "service/omics"
-    ]
-}

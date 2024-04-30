@@ -1,8 +1,0 @@
-{
-    "id": "fd30799e-0cc1-4528-8962-c7d503e7939e",
-    "type": "feature",
-    "description": "New Q embedding supporting Generative Q\u0026A",
-    "modules": [
-        "service/quicksight"
-    ]
-}

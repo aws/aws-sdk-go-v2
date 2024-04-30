@@ -1,3 +1,7 @@
+# v1.10.0 (2024-04-30)
+
+* **Feature**: Amazon Pinpoint has added two new features Multimedia services (MMS) and protect configurations. Use the three new MMS APIs to send media messages to a mobile phone which includes image, audio, text, or video files. Use the ten new protect configurations APIs to block messages to specific countries.
+
 # v1.9.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

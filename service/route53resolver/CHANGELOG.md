@@ -1,3 +1,7 @@
+# v1.28.0 (2024-04-30)
+
+* **Feature**: Release of FirewallDomainRedirectionAction parameter on the Route 53 DNS Firewall Rule.  This allows customers to configure a DNS Firewall rule to inspect all the domains in the DNS redirection chain (default) , such as CNAME, ALIAS, DNAME, etc., or just the first domain and trust the rest.
+
 # v1.27.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

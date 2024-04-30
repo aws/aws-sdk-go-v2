@@ -1,8 +1,0 @@
-{
-    "id": "1ff697ea-d8dd-47c3-ac21-09306cf308a1",
-    "type": "documentation",
-    "description": "Documentation updates for AWS Signer. Adds cross-account signing constraint and definitions for cross-account actions.",
-    "modules": [
-        "service/signer"
-    ]
-}

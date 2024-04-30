@@ -1,8 +1,0 @@
-{
-    "id": "861428b0-179c-4921-8f96-25f3cebad3ce",
-    "type": "feature",
-    "description": "Add support for the Ruby package format.",
-    "modules": [
-        "service/codeartifact"
-    ]
-}

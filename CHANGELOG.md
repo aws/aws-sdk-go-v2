@@ -1,3 +1,29 @@
+# Release (2024-04-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.15.0](service/chimesdkvoice/CHANGELOG.md#v1150-2024-04-30)
+  * **Feature**: Due to changes made by the Amazon Alexa service, GetSipMediaApplicationAlexaSkillConfiguration and PutSipMediaApplicationAlexaSkillConfiguration APIs are no longer available for use. For more information, refer to the Alexa Smart Properties page.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.27.0](service/codeartifact/CHANGELOG.md#v1270-2024-04-30)
+  * **Feature**: Add support for the Ruby package format.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.33.0](service/fms/CHANGELOG.md#v1330-2024-04-30)
+  * **Feature**: AWS Firewall Manager now supports the network firewall service stream exception policy feature for accounts within your organization.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.21.0](service/omics/CHANGELOG.md#v1210-2024-04-30)
+  * **Feature**: Add support for workflow sharing and dynamic run storage
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.33.0](service/opensearch/CHANGELOG.md#v1330-2024-04-30)
+  * **Feature**: This release enables customers to create Route53 A and AAAA alias record types to point custom endpoint domain to OpenSearch domain's dualstack search endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.10.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1100-2024-04-30)
+  * **Feature**: Amazon Pinpoint has added two new features Multimedia services (MMS) and protect configurations. Use the three new MMS APIs to send media messages to a mobile phone which includes image, audio, text, or video files. Use the ten new protect configurations APIs to block messages to specific countries.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.6.0](service/qbusiness/CHANGELOG.md#v160-2024-04-30)
+  * **Feature**: This is a general availability (GA) release of Amazon Q Business. Q Business enables employees in an enterprise to get comprehensive answers to complex questions and take actions through a unified, intuitive web-based chat experience - using an enterprise's existing content, data, and systems.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.63.0](service/quicksight/CHANGELOG.md#v1630-2024-04-30)
+  * **Feature**: New Q embedding supporting Generative Q&A
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.28.0](service/route53resolver/CHANGELOG.md#v1280-2024-04-30)
+  * **Feature**: Release of FirewallDomainRedirectionAction parameter on the Route 53 DNS Firewall Rule.  This allows customers to configure a DNS Firewall rule to inspect all the domains in the DNS redirection chain (default) , such as CNAME, ALIAS, DNAME, etc., or just the first domain and trust the rest.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.138.0](service/sagemaker/CHANGELOG.md#v11380-2024-04-30)
+  * **Feature**: Amazon SageMaker Training now supports the use of attribute-based access control (ABAC) roles for training job execution roles. Amazon SageMaker Inference now supports G6 instance types.
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.22.7](service/signer/CHANGELOG.md#v1227-2024-04-30)
+  * **Documentation**: Documentation updates for AWS Signer. Adds cross-account signing constraint and definitions for cross-account actions.
+
 # Release (2024-04-29)
 
 ## Module Highlights

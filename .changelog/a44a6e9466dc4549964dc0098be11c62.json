@@ -1,8 +1,0 @@
-{
-    "id": "a44a6e94-66dc-4549-964d-c0098be11c62",
-    "type": "feature",
-    "description": "Amazon SageMaker Training now supports the use of attribute-based access control (ABAC) roles for training job execution roles. Amazon SageMaker Inference now supports G6 instance types.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

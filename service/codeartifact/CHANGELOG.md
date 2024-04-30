@@ -1,3 +1,7 @@
+# v1.27.0 (2024-04-30)
+
+* **Feature**: Add support for the Ruby package format.
+
 # v1.26.1 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions
