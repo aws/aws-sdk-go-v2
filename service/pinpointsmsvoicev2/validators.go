@@ -30,6 +30,26 @@ func (m *validateOpAssociateOriginationIdentity) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateProtectConfiguration struct {
+}
+
+func (*validateOpAssociateProtectConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateProtectConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateProtectConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateProtectConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConfigurationSet struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCreatePool) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreatePoolInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProtectConfiguration struct {
+}
+
+func (*validateOpCreateProtectConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProtectConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProtectConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProtectConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +410,26 @@ func (m *validateOpDeletePool) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteProtectConfiguration struct {
+}
+
+func (*validateOpDeleteProtectConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProtectConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProtectConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProtectConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRegistrationAttachment struct {
 }
 
@@ -545,6 +605,26 @@ func (m *validateOpDescribePools) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribePoolsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeProtectConfigurations struct {
+}
+
+func (*validateOpDescribeProtectConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeProtectConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeProtectConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeProtectConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +830,26 @@ func (m *validateOpDisassociateOriginationIdentity) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateProtectConfiguration struct {
+}
+
+func (*validateOpDisassociateProtectConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateProtectConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateProtectConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateProtectConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDiscardRegistrationVersion struct {
 }
 
@@ -765,6 +865,26 @@ func (m *validateOpDiscardRegistrationVersion) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDiscardRegistrationVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetProtectConfigurationCountryRuleSet struct {
+}
+
+func (*validateOpGetProtectConfigurationCountryRuleSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProtectConfigurationCountryRuleSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProtectConfigurationCountryRuleSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProtectConfigurationCountryRuleSetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -990,6 +1110,26 @@ func (m *validateOpSendDestinationNumberVerificationCode) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendMediaMessage struct {
+}
+
+func (*validateOpSendMediaMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendMediaMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendMediaMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendMediaMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendTextMessage struct {
 }
 
@@ -1030,6 +1170,26 @@ func (m *validateOpSendVoiceMessage) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetAccountDefaultProtectConfiguration struct {
+}
+
+func (*validateOpSetAccountDefaultProtectConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetAccountDefaultProtectConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetAccountDefaultProtectConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetAccountDefaultProtectConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetDefaultMessageType struct {
 }
 
@@ -1065,6 +1225,26 @@ func (m *validateOpSetDefaultSenderId) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSetDefaultSenderIdInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSetMediaMessageSpendLimitOverride struct {
+}
+
+func (*validateOpSetMediaMessageSpendLimitOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetMediaMessageSpendLimitOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetMediaMessageSpendLimitOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetMediaMessageSpendLimitOverrideInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1230,6 +1410,46 @@ func (m *validateOpUpdatePool) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProtectConfigurationCountryRuleSet struct {
+}
+
+func (*validateOpUpdateProtectConfigurationCountryRuleSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProtectConfigurationCountryRuleSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProtectConfigurationCountryRuleSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProtectConfigurationCountryRuleSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProtectConfiguration struct {
+}
+
+func (*validateOpUpdateProtectConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProtectConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProtectConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProtectConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSenderId struct {
 }
 
@@ -1274,6 +1494,10 @@ func addOpAssociateOriginationIdentityValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpAssociateOriginationIdentity{}, middleware.After)
 }
 
+func addOpAssociateProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateProtectConfiguration{}, middleware.After)
+}
+
 func addOpCreateConfigurationSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConfigurationSet{}, middleware.After)
 }
@@ -1288,6 +1512,10 @@ func addOpCreateOptOutListValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreatePoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePool{}, middleware.After)
+}
+
+func addOpCreateProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProtectConfiguration{}, middleware.After)
 }
 
 func addOpCreateRegistrationAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -1342,6 +1570,10 @@ func addOpDeletePoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePool{}, middleware.After)
 }
 
+func addOpDeleteProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProtectConfiguration{}, middleware.After)
+}
+
 func addOpDeleteRegistrationAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRegistrationAttachment{}, middleware.After)
 }
@@ -1376,6 +1608,10 @@ func addOpDescribePhoneNumbersValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribePoolsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePools{}, middleware.After)
+}
+
+func addOpDescribeProtectConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeProtectConfigurations{}, middleware.After)
 }
 
 func addOpDescribeRegistrationAttachmentsValidationMiddleware(stack *middleware.Stack) error {
@@ -1418,8 +1654,16 @@ func addOpDisassociateOriginationIdentityValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDisassociateOriginationIdentity{}, middleware.After)
 }
 
+func addOpDisassociateProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateProtectConfiguration{}, middleware.After)
+}
+
 func addOpDiscardRegistrationVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDiscardRegistrationVersion{}, middleware.After)
+}
+
+func addOpGetProtectConfigurationCountryRuleSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProtectConfigurationCountryRuleSet{}, middleware.After)
 }
 
 func addOpListPoolOriginationIdentitiesValidationMiddleware(stack *middleware.Stack) error {
@@ -1466,6 +1710,10 @@ func addOpSendDestinationNumberVerificationCodeValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpSendDestinationNumberVerificationCode{}, middleware.After)
 }
 
+func addOpSendMediaMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendMediaMessage{}, middleware.After)
+}
+
 func addOpSendTextMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendTextMessage{}, middleware.After)
 }
@@ -1474,12 +1722,20 @@ func addOpSendVoiceMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendVoiceMessage{}, middleware.After)
 }
 
+func addOpSetAccountDefaultProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetAccountDefaultProtectConfiguration{}, middleware.After)
+}
+
 func addOpSetDefaultMessageTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetDefaultMessageType{}, middleware.After)
 }
 
 func addOpSetDefaultSenderIdValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetDefaultSenderId{}, middleware.After)
+}
+
+func addOpSetMediaMessageSpendLimitOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetMediaMessageSpendLimitOverride{}, middleware.After)
 }
 
 func addOpSetTextMessageSpendLimitOverrideValidationMiddleware(stack *middleware.Stack) error {
@@ -1512,6 +1768,14 @@ func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdatePoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePool{}, middleware.After)
+}
+
+func addOpUpdateProtectConfigurationCountryRuleSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProtectConfigurationCountryRuleSet{}, middleware.After)
+}
+
+func addOpUpdateProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProtectConfiguration{}, middleware.After)
 }
 
 func addOpUpdateSenderIdValidationMiddleware(stack *middleware.Stack) error {
@@ -1775,6 +2039,74 @@ func validatePoolOriginationIdentitiesFilterList(v []types.PoolOriginationIdenti
 	invalidParams := smithy.InvalidParamsError{Context: "PoolOriginationIdentitiesFilterList"}
 	for i := range v {
 		if err := validatePoolOriginationIdentitiesFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectConfigurationCountryRuleSet(v map[string]types.ProtectConfigurationCountryRuleSetInformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectConfigurationCountryRuleSet"}
+	for key := range v {
+		value := v[key]
+		if err := validateProtectConfigurationCountryRuleSetInformation(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectConfigurationCountryRuleSetInformation(v *types.ProtectConfigurationCountryRuleSetInformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectConfigurationCountryRuleSetInformation"}
+	if len(v.ProtectStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectConfigurationFilter(v *types.ProtectConfigurationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectConfigurationFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProtectConfigurationFilterList(v []types.ProtectConfigurationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProtectConfigurationFilterList"}
+	for i := range v {
+		if err := validateProtectConfigurationFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2136,6 +2468,24 @@ func validateOpAssociateOriginationIdentityInput(v *AssociateOriginationIdentity
 	}
 }
 
+func validateOpAssociateProtectConfigurationInput(v *AssociateProtectConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateProtectConfigurationInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if v.ConfigurationSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateConfigurationSetInput(v *CreateConfigurationSetInput) error {
 	if v == nil {
 		return nil
@@ -2226,6 +2576,23 @@ func validateOpCreatePoolInput(v *CreatePoolInput) error {
 	if len(v.MessageType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageType"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProtectConfigurationInput(v *CreateProtectConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProtectConfigurationInput"}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -2457,6 +2824,21 @@ func validateOpDeletePoolInput(v *DeletePoolInput) error {
 	}
 }
 
+func validateOpDeleteProtectConfigurationInput(v *DeleteProtectConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProtectConfigurationInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRegistrationAttachmentInput(v *DeleteRegistrationAttachmentInput) error {
 	if v == nil {
 		return nil
@@ -2601,6 +2983,23 @@ func validateOpDescribePoolsInput(v *DescribePoolsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePoolsInput"}
 	if v.Filters != nil {
 		if err := validatePoolFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeProtectConfigurationsInput(v *DescribeProtectConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeProtectConfigurationsInput"}
+	if v.Filters != nil {
+		if err := validateProtectConfigurationFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2787,6 +3186,24 @@ func validateOpDisassociateOriginationIdentityInput(v *DisassociateOriginationId
 	}
 }
 
+func validateOpDisassociateProtectConfigurationInput(v *DisassociateProtectConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateProtectConfigurationInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if v.ConfigurationSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDiscardRegistrationVersionInput(v *DiscardRegistrationVersionInput) error {
 	if v == nil {
 		return nil
@@ -2794,6 +3211,24 @@ func validateOpDiscardRegistrationVersionInput(v *DiscardRegistrationVersionInpu
 	invalidParams := smithy.InvalidParamsError{Context: "DiscardRegistrationVersionInput"}
 	if v.RegistrationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RegistrationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetProtectConfigurationCountryRuleSetInput(v *GetProtectConfigurationCountryRuleSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProtectConfigurationCountryRuleSetInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if len(v.NumberCapability) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberCapability"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3017,6 +3452,24 @@ func validateOpSendDestinationNumberVerificationCodeInput(v *SendDestinationNumb
 	}
 }
 
+func validateOpSendMediaMessageInput(v *SendMediaMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendMediaMessageInput"}
+	if v.DestinationPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
+	}
+	if v.OriginationIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationIdentity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendTextMessageInput(v *SendTextMessageInput) error {
 	if v == nil {
 		return nil
@@ -3042,6 +3495,21 @@ func validateOpSendVoiceMessageInput(v *SendVoiceMessageInput) error {
 	}
 	if v.OriginationIdentity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OriginationIdentity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetAccountDefaultProtectConfigurationInput(v *SetAccountDefaultProtectConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetAccountDefaultProtectConfigurationInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3078,6 +3546,21 @@ func validateOpSetDefaultSenderIdInput(v *SetDefaultSenderIdInput) error {
 	}
 	if v.SenderId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SenderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetMediaMessageSpendLimitOverrideInput(v *SetMediaMessageSpendLimitOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetMediaMessageSpendLimitOverrideInput"}
+	if v.MonthlyLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonthlyLimit"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3226,6 +3709,46 @@ func validateOpUpdatePoolInput(v *UpdatePoolInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePoolInput"}
 	if v.PoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProtectConfigurationCountryRuleSetInput(v *UpdateProtectConfigurationCountryRuleSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProtectConfigurationCountryRuleSetInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if len(v.NumberCapability) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberCapability"))
+	}
+	if v.CountryRuleSetUpdates == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CountryRuleSetUpdates"))
+	} else if v.CountryRuleSetUpdates != nil {
+		if err := validateProtectConfigurationCountryRuleSet(v.CountryRuleSetUpdates); err != nil {
+			invalidParams.AddNested("CountryRuleSetUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProtectConfigurationInput(v *UpdateProtectConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProtectConfigurationInput"}
+	if v.ProtectConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

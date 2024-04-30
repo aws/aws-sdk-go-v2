@@ -1,3 +1,7 @@
+# v1.33.0 (2024-04-30)
+
+* **Feature**: AWS Firewall Manager now supports the network firewall service stream exception policy feature for accounts within your organization.
+
 # v1.32.0 (2024-04-25)
 
 * **Feature**: AWS Firewall Manager adds support for network ACL policies to manage Amazon Virtual Private Cloud (VPC) network access control lists (ACLs) for accounts in your organization.

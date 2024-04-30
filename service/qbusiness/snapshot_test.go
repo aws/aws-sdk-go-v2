@@ -86,6 +86,18 @@ func TestCheckSnapshot_BatchPutDocument(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_Chat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Chat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Chat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ChatSync(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ChatSync(context.Background(), nil, func(o *Options) {
@@ -738,6 +750,18 @@ func TestUpdateSnapshot_BatchPutDocument(t *testing.T) {
 	_, err := svc.BatchPutDocument(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchPutDocument")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_Chat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Chat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Chat")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -13,10 +13,16 @@ import (
 )
 
 // Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN.
-// The remaining parameters are copied from the previous run. The total number of
-// runs in your account is subject to a quota per Region. To avoid needing to
-// delete runs manually, you can set the retention mode to REMOVE . Runs with this
-// setting are deleted automatically when the run quoata is exceeded.
+// The remaining parameters are copied from the previous run. StartRun will not
+// support re-run for a workflow that is shared with you. The total number of runs
+// in your account is subject to a quota per Region. To avoid needing to delete
+// runs manually, you can set the retention mode to REMOVE . Runs with this setting
+// are deleted automatically when the run quoata is exceeded. By default, the run
+// uses STATIC storage. For STATIC storage, set the storageCapacity field. You can
+// set the storage type to DYNAMIC. You do not set storageCapacity , because
+// HealthOmics dynamically scales the storage up or down as required. For more
+// information about static and dynamic storage, see Running workflows (https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html)
+// in the AWS HealthOmics User Guide.
 func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...func(*Options)) (*StartRunOutput, error) {
 	if params == nil {
 		params = &StartRunInput{}
@@ -69,14 +75,24 @@ type StartRunInput struct {
 	// The ID of a run to duplicate.
 	RunId *string
 
-	// A storage capacity for the run in gibibytes.
+	// A storage capacity for the run in gibibytes. This field is not required if the
+	// storage type is dynamic (the system ignores any value that you enter).
 	StorageCapacity *int32
+
+	// The run's storage type. By default, the run uses STATIC storage type, which
+	// allocates a fixed amount of storage. If you set the storage type to DYNAMIC,
+	// HealthOmics dynamically scales the storage up or down, based on file system
+	// utilization.
+	StorageType types.StorageType
 
 	// Tags for the run.
 	Tags map[string]string
 
 	// The run's workflow ID.
 	WorkflowId *string
+
+	// The ID of the workflow owner.
+	WorkflowOwnerId *string
 
 	// The run's workflow type.
 	WorkflowType types.WorkflowType

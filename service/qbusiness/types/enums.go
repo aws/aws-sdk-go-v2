@@ -24,6 +24,22 @@ func (ActionPayloadFieldType) Values() []ActionPayloadFieldType {
 	}
 }
 
+type APISchemaType string
+
+// Enum values for APISchemaType
+const (
+	APISchemaTypeOpenApiV3 APISchemaType = "OPEN_API_V3"
+)
+
+// Values returns all known values for APISchemaType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (APISchemaType) Values() []APISchemaType {
+	return []APISchemaType{
+		"OPEN_API_V3",
+	}
+}
+
 type ApplicationStatus string
 
 // Enum values for ApplicationStatus
@@ -430,6 +446,24 @@ func (IndexStatus) Values() []IndexStatus {
 	}
 }
 
+type IndexType string
+
+// Enum values for IndexType
+const (
+	IndexTypeEnterprise IndexType = "ENTERPRISE"
+	IndexTypeStarter    IndexType = "STARTER"
+)
+
+// Values returns all known values for IndexType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IndexType) Values() []IndexType {
+	return []IndexType{
+		"ENTERPRISE",
+		"STARTER",
+	}
+}
+
 type MemberRelation string
 
 // Enum values for MemberRelation
@@ -558,6 +592,34 @@ func (NumberAttributeBoostingType) Values() []NumberAttributeBoostingType {
 	}
 }
 
+type PluginBuildStatus string
+
+// Enum values for PluginBuildStatus
+const (
+	PluginBuildStatusReady            PluginBuildStatus = "READY"
+	PluginBuildStatusCreateInProgress PluginBuildStatus = "CREATE_IN_PROGRESS"
+	PluginBuildStatusCreateFailed     PluginBuildStatus = "CREATE_FAILED"
+	PluginBuildStatusUpdateInProgress PluginBuildStatus = "UPDATE_IN_PROGRESS"
+	PluginBuildStatusUpdateFailed     PluginBuildStatus = "UPDATE_FAILED"
+	PluginBuildStatusDeleteInProgress PluginBuildStatus = "DELETE_IN_PROGRESS"
+	PluginBuildStatusDeleteFailed     PluginBuildStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for PluginBuildStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PluginBuildStatus) Values() []PluginBuildStatus {
+	return []PluginBuildStatus{
+		"READY",
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"UPDATE_IN_PROGRESS",
+		"UPDATE_FAILED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+	}
+}
+
 type PluginState string
 
 // Enum values for PluginState
@@ -584,6 +646,7 @@ const (
 	PluginTypeSalesforce PluginType = "SALESFORCE"
 	PluginTypeJira       PluginType = "JIRA"
 	PluginTypeZendesk    PluginType = "ZENDESK"
+	PluginTypeCustom     PluginType = "CUSTOM"
 )
 
 // Values returns all known values for PluginType. Note that this can be expanded
@@ -595,6 +658,7 @@ func (PluginType) Values() []PluginType {
 		"SALESFORCE",
 		"JIRA",
 		"ZENDESK",
+		"CUSTOM",
 	}
 }
 

@@ -1,3 +1,7 @@
+# v1.22.7 (2024-04-30)
+
+* **Documentation**: Documentation updates for AWS Signer. Adds cross-account signing constraint and definitions for cross-account actions.
+
 # v1.22.6 (2024-04-04)
 
 * No change notes available for this release.

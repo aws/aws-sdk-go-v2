@@ -48,8 +48,8 @@ type AccountLimit struct {
 // events.
 type CloudWatchLogsDestination struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Identity and Access Management
-	// (IAM) role that is able to write event data to an Amazon CloudWatch destination.
+	// The Amazon Resource Name (ARN) of an Identity and Access Management role that
+	// is able to write event data to an Amazon CloudWatch destination.
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -112,12 +112,15 @@ type ConfigurationSetInformation struct {
 	// The default sender ID used by the ConfigurationSet.
 	DefaultSenderId *string
 
+	// The unique identifier for the protect configuration.
+	ProtectConfigurationId *string
+
 	noSmithyDocumentSerde
 }
 
 // Contains information about an event destination. Event destinations are
 // associated with configuration sets, which enable you to publish message sending
-// events to CloudWatch, Kinesis Data Firehose,or Amazon SNS.
+// events to CloudWatch, Kinesis Data Firehose, or Amazon SNS.
 type EventDestination struct {
 
 	// When set to true events will be logged.
@@ -189,7 +192,7 @@ type KeywordInformation struct {
 }
 
 // Contains the delivery stream Amazon Resource Name (ARN), and the ARN of the
-// Identity and Access Management (IAM) role associated with an Kinesis Data
+// Identity and Access Management (IAM) role associated with a Kinesis Data
 // Firehose event destination. Event destinations, such as Kinesis Data Firehose,
 // are associated with configuration sets, which enable you to publish message
 // sending events.
@@ -200,8 +203,8 @@ type KinesisFirehoseDestination struct {
 	// This member is required.
 	DeliveryStreamArn *string
 
-	// The ARN of an Amazon Identity and Access Management (IAM) role that is able to
-	// write event data to an Amazon Firehose destination.
+	// The ARN of an Identity and Access Management role that is able to write event
+	// data to an Amazon Kinesis Data Firehose destination.
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -519,6 +522,68 @@ type PoolOriginationIdentitiesFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The types of statuses that can be used.
+type ProtectConfigurationCountryRuleSetInformation struct {
+
+	// The types of protection that can be used.
+	//
+	// This member is required.
+	ProtectStatus ProtectStatus
+
+	noSmithyDocumentSerde
+}
+
+// The filter definition for filtering protect configurations that meet a
+// specified criteria.
+type ProtectConfigurationFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name ProtectConfigurationFilterName
+
+	// An array of values to filter for.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on the specified protect configuration.
+type ProtectConfigurationInformation struct {
+
+	// This is true if the protect configuration is set as your account default
+	// protect configuration.
+	//
+	// This member is required.
+	AccountDefault bool
+
+	// The time when the protect configuration was created, in UNIX epoch time (https://www.epochconverter.com/)
+	// format.
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The status of deletion protection for the protect configuration. When set to
+	// true deletion protection is enabled. By default this is set to false.
+	//
+	// This member is required.
+	DeletionProtectionEnabled bool
+
+	// The Amazon Resource Name (ARN) of the protect configuration.
+	//
+	// This member is required.
+	ProtectConfigurationArn *string
+
+	// The unique identifier for the protect configuration.
+	//
+	// This member is required.
+	ProtectConfigurationId *string
 
 	noSmithyDocumentSerde
 }

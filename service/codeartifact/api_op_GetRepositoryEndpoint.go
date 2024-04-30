@@ -18,6 +18,7 @@ import (
 //   - npm
 //   - nuget
 //   - pypi
+//   - ruby
 //   - swift
 func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositoryEndpointInput, optFns ...func(*Options)) (*GetRepositoryEndpointOutput, error) {
 	if params == nil {

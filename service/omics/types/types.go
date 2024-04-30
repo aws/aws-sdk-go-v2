@@ -408,15 +408,20 @@ type FileInformation struct {
 	noSmithyDocumentSerde
 }
 
-// Use filters to focus the returned annotation store versions on a specific
-// parameter, such as the status of the annotation store.
+// Use filters to return a subset of resources. You can define filters for
+// specific parameters, such as the resource status.
 type Filter struct {
 
-	// The Amazon Resource Number (Arn) for an analytics store.
+	// Filter based on the Amazon Resource Number (ARN) of the resource. You can
+	// specify up to 10 values.
 	ResourceArns []string
 
-	// The status of an annotation store version.
+	// Filter based on the resource status. You can specify up to 10 values.
 	Status []ShareStatus
+
+	// The type of resources to be filtered. You can specify one or more of the
+	// resource types.
+	Type []ShareResourceType
 
 	noSmithyDocumentSerde
 }
@@ -1147,8 +1152,12 @@ type RunListItem struct {
 	// When the run stopped.
 	StopTime *time.Time
 
-	// The run's storage capacity.
+	// The run's storage capacity in gibibytes. For dynamic storage, after the run has
+	// completed, this value is the maximum amount of storage used during the run.
 	StorageCapacity *int32
+
+	// The run's storage type.
+	StorageType StorageType
 
 	// The run's workflow ID.
 	WorkflowId *string
@@ -1249,36 +1258,38 @@ type SequenceStoreS3Access struct {
 	noSmithyDocumentSerde
 }
 
-// The details of a share.
+// The details of a resource share.
 type ShareDetails struct {
 
-	// The timestamp for when the share was created.
+	// The timestamp of when the resource share was created.
 	CreationTime *time.Time
 
-	// The account ID for the data owner. The owner creates the share offer.
+	// The account ID for the data owner. The owner creates the resource share.
 	OwnerId *string
 
-	// The principal subscriber is the account the analytics store data is being
-	// shared with.
+	// The principal subscriber is the account that is sharing the resource.
 	PrincipalSubscriber *string
 
-	// The resource Arn of the analytics store being shared.
+	// The Arn of the shared resource.
 	ResourceArn *string
 
-	// The ID for a share offer for an analytics store .
+	// The ID of the shared resource.
+	ResourceId *string
+
+	// The ID of the resource share.
 	ShareId *string
 
-	// The name of the share.
+	// The name of the resource share.
 	ShareName *string
 
-	// The status of a share.
+	// The status of the share.
 	Status ShareStatus
 
-	// The status message for a share. It provides more details on the status of the
-	// share.
+	// The status message for a resource share. It provides additional details about
+	// the share status.
 	StatusMessage *string
 
-	// The timestamp of the share update.
+	// The timestamp of the resource share update.
 	UpdateTime *time.Time
 
 	noSmithyDocumentSerde

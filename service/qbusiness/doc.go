@@ -3,15 +3,14 @@
 // Package qbusiness provides the API client, operations, and parameter types for
 // QBusiness.
 //
-// Amazon Q is in preview release and is subject to change. This is the Amazon Q
-// Business API Reference. Amazon Q Business is a fully managed, generative-AI
-// powered enterprise chat assistant that you can deploy within your organization.
-// Amazon Q Business enhances employee productivity by supporting key tasks such as
-// question-answering, knowledge discovery, writing email messages, summarizing
-// text, drafting document outlines, and brainstorming ideas. Users ask questions
-// of Amazon Q Business and get answers that are presented in a conversational
-// manner. For an introduction to the service, see the Amazon Q Business User
-// Guide  (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html)
+// This is the Amazon Q Business API Reference. Amazon Q Business is a fully
+// managed, generative-AI powered enterprise chat assistant that you can deploy
+// within your organization. Amazon Q Business enhances employee productivity by
+// supporting key tasks such as question-answering, knowledge discovery, writing
+// email messages, summarizing text, drafting document outlines, and brainstorming
+// ideas. Users ask questions of Amazon Q Business and get answers that are
+// presented in a conversational manner. For an introduction to the service, see
+// the Amazon Q Business User Guide  (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html)
 // . For an overview of the Amazon Q Business APIs, see Overview of Amazon Q
 // Business API operations (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview)
 // . For information about the IAM access control permissions you need to use this

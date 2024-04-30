@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
         "github.com/aws/smithy-go": "v1.4.0"
@@ -10,6 +11,7 @@
         "api_client_test.go",
         "api_op_BatchDeleteDocument.go",
         "api_op_BatchPutDocument.go",
+        "api_op_Chat.go",
         "api_op_ChatSync.go",
         "api_op_CreateApplication.go",
         "api_op_CreateDataSource.go",
@@ -71,6 +73,7 @@
         "endpoints.go",
         "endpoints_config_test.go",
         "endpoints_test.go",
+        "eventstream.go",
         "generated.json",
         "internal/document/document.go",
         "internal/document/document_test.go",

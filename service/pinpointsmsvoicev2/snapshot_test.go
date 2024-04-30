@@ -74,6 +74,18 @@ func TestCheckSnapshot_AssociateOriginationIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateConfigurationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateConfigurationSet(context.Background(), nil, func(o *Options) {
@@ -115,6 +127,18 @@ func TestCheckSnapshot_CreatePool(t *testing.T) {
 	_, err := svc.CreatePool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreatePool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateProtectConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -182,6 +206,18 @@ func TestCheckSnapshot_CreateVerifiedDestinationNumber(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAccountDefaultProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccountDefaultProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAccountDefaultProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteConfigurationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConfigurationSet(context.Background(), nil, func(o *Options) {
@@ -242,6 +278,18 @@ func TestCheckSnapshot_DeleteKeyword(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteMediaMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMediaMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteMediaMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteOptedOutNumber(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteOptedOutNumber(context.Background(), nil, func(o *Options) {
@@ -271,6 +319,18 @@ func TestCheckSnapshot_DeletePool(t *testing.T) {
 	_, err := svc.DeletePool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteProtectConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -446,6 +506,18 @@ func TestCheckSnapshot_DescribePools(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeProtectConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeProtectConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeProtectConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeRegistrationAttachments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRegistrationAttachments(context.Background(), nil, func(o *Options) {
@@ -578,11 +650,35 @@ func TestCheckSnapshot_DisassociateOriginationIdentity(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DiscardRegistrationVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DiscardRegistrationVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DiscardRegistrationVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetProtectConfigurationCountryRuleSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProtectConfigurationCountryRuleSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProtectConfigurationCountryRuleSet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -722,6 +818,18 @@ func TestCheckSnapshot_SendDestinationNumberVerificationCode(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SendMediaMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendMediaMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendMediaMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SendTextMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendTextMessage(context.Background(), nil, func(o *Options) {
@@ -746,6 +854,18 @@ func TestCheckSnapshot_SendVoiceMessage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_SetAccountDefaultProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetAccountDefaultProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SetAccountDefaultProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SetDefaultMessageType(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetDefaultMessageType(context.Background(), nil, func(o *Options) {
@@ -763,6 +883,18 @@ func TestCheckSnapshot_SetDefaultSenderId(t *testing.T) {
 	_, err := svc.SetDefaultSenderId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SetDefaultSenderId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SetMediaMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetMediaMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SetMediaMessageSpendLimitOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -866,6 +998,30 @@ func TestCheckSnapshot_UpdatePool(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateProtectConfigurationCountryRuleSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProtectConfigurationCountryRuleSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProtectConfigurationCountryRuleSet")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateSenderId(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateSenderId(context.Background(), nil, func(o *Options) {
@@ -894,6 +1050,18 @@ func TestUpdateSnapshot_AssociateOriginationIdentity(t *testing.T) {
 	_, err := svc.AssociateOriginationIdentity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateOriginationIdentity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AssociateProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateProtectConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -942,6 +1110,18 @@ func TestUpdateSnapshot_CreatePool(t *testing.T) {
 	_, err := svc.CreatePool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreatePool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateProtectConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1009,6 +1189,18 @@ func TestUpdateSnapshot_CreateVerifiedDestinationNumber(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAccountDefaultProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccountDefaultProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAccountDefaultProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteConfigurationSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConfigurationSet(context.Background(), nil, func(o *Options) {
@@ -1069,6 +1261,18 @@ func TestUpdateSnapshot_DeleteKeyword(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteMediaMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteMediaMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteMediaMessageSpendLimitOverride")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteOptedOutNumber(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteOptedOutNumber(context.Background(), nil, func(o *Options) {
@@ -1098,6 +1302,18 @@ func TestUpdateSnapshot_DeletePool(t *testing.T) {
 	_, err := svc.DeletePool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteProtectConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1273,6 +1489,18 @@ func TestUpdateSnapshot_DescribePools(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeProtectConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeProtectConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeProtectConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeRegistrationAttachments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeRegistrationAttachments(context.Background(), nil, func(o *Options) {
@@ -1405,11 +1633,35 @@ func TestUpdateSnapshot_DisassociateOriginationIdentity(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DiscardRegistrationVersion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DiscardRegistrationVersion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DiscardRegistrationVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetProtectConfigurationCountryRuleSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProtectConfigurationCountryRuleSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProtectConfigurationCountryRuleSet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1549,6 +1801,18 @@ func TestUpdateSnapshot_SendDestinationNumberVerificationCode(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SendMediaMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendMediaMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendMediaMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SendTextMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendTextMessage(context.Background(), nil, func(o *Options) {
@@ -1573,6 +1837,18 @@ func TestUpdateSnapshot_SendVoiceMessage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_SetAccountDefaultProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetAccountDefaultProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SetAccountDefaultProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SetDefaultMessageType(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SetDefaultMessageType(context.Background(), nil, func(o *Options) {
@@ -1590,6 +1866,18 @@ func TestUpdateSnapshot_SetDefaultSenderId(t *testing.T) {
 	_, err := svc.SetDefaultSenderId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SetDefaultSenderId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SetMediaMessageSpendLimitOverride(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SetMediaMessageSpendLimitOverride(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SetMediaMessageSpendLimitOverride")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1686,6 +1974,30 @@ func TestUpdateSnapshot_UpdatePool(t *testing.T) {
 	_, err := svc.UpdatePool(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePool")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProtectConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProtectConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProtectConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProtectConfigurationCountryRuleSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProtectConfigurationCountryRuleSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProtectConfigurationCountryRuleSet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

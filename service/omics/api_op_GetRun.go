@@ -16,7 +16,8 @@ import (
 	"time"
 )
 
-// Gets information about a workflow run.
+// Gets information about a workflow run. If a workflow is shared with you, you
+// cannot export information about the run.
 func (c *Client) GetRun(ctx context.Context, params *GetRunInput, optFns ...func(*Options)) (*GetRunOutput, error) {
 	if params == nil {
 		params = &GetRunInput{}
@@ -119,8 +120,12 @@ type GetRunOutput struct {
 	// The run's stop time.
 	StopTime *time.Time
 
-	// The run's storage capacity in gigabytes.
+	// The run's storage capacity in gibibytes. For dynamic storage, after the run has
+	// completed, this value is the maximum amount of storage used during the run.
 	StorageCapacity *int32
+
+	// The run's storage type.
+	StorageType types.StorageType
 
 	// The run's tags.
 	Tags map[string]string
@@ -130,6 +135,9 @@ type GetRunOutput struct {
 
 	// The run's workflow ID.
 	WorkflowId *string
+
+	// The ID of the workflow owner.
+	WorkflowOwnerId *string
 
 	// The run's workflow type.
 	WorkflowType types.WorkflowType

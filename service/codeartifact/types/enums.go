@@ -103,6 +103,7 @@ const (
 	PackageFormatMaven   PackageFormat = "maven"
 	PackageFormatNuget   PackageFormat = "nuget"
 	PackageFormatGeneric PackageFormat = "generic"
+	PackageFormatRuby    PackageFormat = "ruby"
 	PackageFormatSwift   PackageFormat = "swift"
 )
 
@@ -116,6 +117,7 @@ func (PackageFormat) Values() []PackageFormat {
 		"maven",
 		"nuget",
 		"generic",
+		"ruby",
 		"swift",
 	}
 }

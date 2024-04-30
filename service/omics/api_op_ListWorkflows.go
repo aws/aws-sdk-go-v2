@@ -32,14 +32,14 @@ type ListWorkflowsInput struct {
 	// The maximum number of workflows to return in one page of results.
 	MaxResults *int32
 
-	// The workflows' name.
+	// Filter the list by workflow name.
 	Name *string
 
 	// Specify the pagination token from a previous request to retrieve the next page
 	// of results.
 	StartingToken *string
 
-	// The workflows' type.
+	// Filter the list by workflow type.
 	Type types.WorkflowType
 
 	noSmithyDocumentSerde
@@ -47,7 +47,7 @@ type ListWorkflowsInput struct {
 
 type ListWorkflowsOutput struct {
 
-	// The workflows' items.
+	// A list of workflow items.
 	Items []types.WorkflowListItem
 
 	// A pagination token that's included if more results are available.

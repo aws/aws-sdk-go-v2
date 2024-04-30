@@ -168,6 +168,7 @@
         "api_op_UpdatePublicSharingSettings.go",
         "api_op_UpdateRefreshSchedule.go",
         "api_op_UpdateRoleCustomPermission.go",
+        "api_op_UpdateSPICECapacityConfiguration.go",
         "api_op_UpdateTemplate.go",
         "api_op_UpdateTemplateAlias.go",
         "api_op_UpdateTemplatePermissions.go",

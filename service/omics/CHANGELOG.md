@@ -1,3 +1,7 @@
+# v1.21.0 (2024-04-30)
+
+* **Feature**: Add support for workflow sharing and dynamic run storage
+
 # v1.20.0 (2024-04-11)
 
 * **Feature**: This release adds support for retrieval of S3 direct access metadata on sequence stores and read sets, and adds support for SHA256up and SHA512up HealthOmics ETags.

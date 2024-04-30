@@ -24,7 +24,8 @@ type AccountAttributeName string
 
 // Enum values for AccountAttributeName
 const (
-	AccountAttributeNameAccountTier AccountAttributeName = "ACCOUNT_TIER"
+	AccountAttributeNameAccountTier                   AccountAttributeName = "ACCOUNT_TIER"
+	AccountAttributeNameDefaultProtectConfigurationId AccountAttributeName = "DEFAULT_PROTECT_CONFIGURATION_ID"
 )
 
 // Values returns all known values for AccountAttributeName. Note that this can be
@@ -33,6 +34,7 @@ const (
 func (AccountAttributeName) Values() []AccountAttributeName {
 	return []AccountAttributeName{
 		"ACCOUNT_TIER",
+		"DEFAULT_PROTECT_CONFIGURATION_ID",
 	}
 }
 
@@ -108,10 +110,11 @@ type ConfigurationSetFilterName string
 
 // Enum values for ConfigurationSetFilterName
 const (
-	ConfigurationSetFilterNameEventDestinationName ConfigurationSetFilterName = "event-destination-name"
-	ConfigurationSetFilterNameMatchingEventTypes   ConfigurationSetFilterName = "matching-event-types"
-	ConfigurationSetFilterNameDefaultMessageType   ConfigurationSetFilterName = "default-message-type"
-	ConfigurationSetFilterNameDefaultSenderId      ConfigurationSetFilterName = "default-sender-id"
+	ConfigurationSetFilterNameEventDestinationName   ConfigurationSetFilterName = "event-destination-name"
+	ConfigurationSetFilterNameMatchingEventTypes     ConfigurationSetFilterName = "matching-event-types"
+	ConfigurationSetFilterNameDefaultMessageType     ConfigurationSetFilterName = "default-message-type"
+	ConfigurationSetFilterNameDefaultSenderId        ConfigurationSetFilterName = "default-sender-id"
+	ConfigurationSetFilterNameProtectConfigurationId ConfigurationSetFilterName = "protect-configuration-id"
 )
 
 // Values returns all known values for ConfigurationSetFilterName. Note that this
@@ -123,6 +126,7 @@ func (ConfigurationSetFilterName) Values() []ConfigurationSetFilterName {
 		"matching-event-types",
 		"default-message-type",
 		"default-sender-id",
+		"protect-configuration-id",
 	}
 }
 
@@ -130,37 +134,41 @@ type ConflictExceptionReason string
 
 // Enum values for ConflictExceptionReason
 const (
-	ConflictExceptionReasonCreateRegistrationVersionNotAllowed   ConflictExceptionReason = "CREATE_REGISTRATION_VERSION_NOT_ALLOWED"
-	ConflictExceptionReasonDeletionProtectionEnabled             ConflictExceptionReason = "DELETION_PROTECTION_ENABLED"
-	ConflictExceptionReasonDestinationPhoneNumberNotVerified     ConflictExceptionReason = "DESTINATION_PHONE_NUMBER_NOT_VERIFIED"
-	ConflictExceptionReasonDestinationPhoneNumberOptedOut        ConflictExceptionReason = "DESTINATION_PHONE_NUMBER_OPTED_OUT"
-	ConflictExceptionReasonDisassociateRegistrationNotAllowed    ConflictExceptionReason = "DISASSOCIATE_REGISTRATION_NOT_ALLOWED"
-	ConflictExceptionReasonDiscardRegistrationVersionNotAllowed  ConflictExceptionReason = "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED"
-	ConflictExceptionReasonEditRegistrationFieldValuesNotAllowed ConflictExceptionReason = "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED"
-	ConflictExceptionReasonEventDestinationMismatch              ConflictExceptionReason = "EVENT_DESTINATION_MISMATCH"
-	ConflictExceptionReasonKeywordMismatch                       ConflictExceptionReason = "KEYWORD_MISMATCH"
-	ConflictExceptionReasonLastPhoneNumber                       ConflictExceptionReason = "LAST_PHONE_NUMBER"
-	ConflictExceptionReasonNumberCapabilitiesMismatch            ConflictExceptionReason = "NUMBER_CAPABILITIES_MISMATCH"
-	ConflictExceptionReasonMessageTypeMismatch                   ConflictExceptionReason = "MESSAGE_TYPE_MISMATCH"
-	ConflictExceptionReasonNoOriginationIdentitiesFound          ConflictExceptionReason = "NO_ORIGINATION_IDENTITIES_FOUND"
-	ConflictExceptionReasonOptOutListMismatch                    ConflictExceptionReason = "OPT_OUT_LIST_MISMATCH"
-	ConflictExceptionReasonPhoneNumberAssociatedToPool           ConflictExceptionReason = "PHONE_NUMBER_ASSOCIATED_TO_POOL"
-	ConflictExceptionReasonPhoneNumberAssociatedToRegistration   ConflictExceptionReason = "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION"
-	ConflictExceptionReasonPhoneNumberNotAssociatedToPool        ConflictExceptionReason = "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL"
-	ConflictExceptionReasonPhoneNumberNotInRegistrationRegion    ConflictExceptionReason = "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION"
-	ConflictExceptionReasonRegistrationAlreadySubmitted          ConflictExceptionReason = "REGISTRATION_ALREADY_SUBMITTED"
-	ConflictExceptionReasonRegistrationNotComplete               ConflictExceptionReason = "REGISTRATION_NOT_COMPLETE"
-	ConflictExceptionReasonSenderIdAssociatedToPool              ConflictExceptionReason = "SENDER_ID_ASSOCIATED_TO_POOL"
-	ConflictExceptionReasonResourceAlreadyExists                 ConflictExceptionReason = "RESOURCE_ALREADY_EXISTS"
-	ConflictExceptionReasonResourceDeletionNotAllowed            ConflictExceptionReason = "RESOURCE_DELETION_NOT_ALLOWED"
-	ConflictExceptionReasonResourceModificationNotAllowed        ConflictExceptionReason = "RESOURCE_MODIFICATION_NOT_ALLOWED"
-	ConflictExceptionReasonResourceNotActive                     ConflictExceptionReason = "RESOURCE_NOT_ACTIVE"
-	ConflictExceptionReasonResourceNotEmpty                      ConflictExceptionReason = "RESOURCE_NOT_EMPTY"
-	ConflictExceptionReasonSelfManagedOptOutsMismatch            ConflictExceptionReason = "SELF_MANAGED_OPT_OUTS_MISMATCH"
-	ConflictExceptionReasonSubmitRegistrationVersionNotAllowed   ConflictExceptionReason = "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED"
-	ConflictExceptionReasonTwoWayConfigMismatch                  ConflictExceptionReason = "TWO_WAY_CONFIG_MISMATCH"
-	ConflictExceptionReasonVerificationCodeExpired               ConflictExceptionReason = "VERIFICATION_CODE_EXPIRED"
-	ConflictExceptionReasonVerificationAlreadyComplete           ConflictExceptionReason = "VERIFICATION_ALREADY_COMPLETE"
+	ConflictExceptionReasonCreateRegistrationVersionNotAllowed                   ConflictExceptionReason = "CREATE_REGISTRATION_VERSION_NOT_ALLOWED"
+	ConflictExceptionReasonDeletionProtectionEnabled                             ConflictExceptionReason = "DELETION_PROTECTION_ENABLED"
+	ConflictExceptionReasonDestinationPhoneNumberNotVerified                     ConflictExceptionReason = "DESTINATION_PHONE_NUMBER_NOT_VERIFIED"
+	ConflictExceptionReasonDestinationPhoneNumberOptedOut                        ConflictExceptionReason = "DESTINATION_PHONE_NUMBER_OPTED_OUT"
+	ConflictExceptionReasonDisassociateRegistrationNotAllowed                    ConflictExceptionReason = "DISASSOCIATE_REGISTRATION_NOT_ALLOWED"
+	ConflictExceptionReasonDiscardRegistrationVersionNotAllowed                  ConflictExceptionReason = "DISCARD_REGISTRATION_VERSION_NOT_ALLOWED"
+	ConflictExceptionReasonEditRegistrationFieldValuesNotAllowed                 ConflictExceptionReason = "EDIT_REGISTRATION_FIELD_VALUES_NOT_ALLOWED"
+	ConflictExceptionReasonEventDestinationMismatch                              ConflictExceptionReason = "EVENT_DESTINATION_MISMATCH"
+	ConflictExceptionReasonKeywordMismatch                                       ConflictExceptionReason = "KEYWORD_MISMATCH"
+	ConflictExceptionReasonLastPhoneNumber                                       ConflictExceptionReason = "LAST_PHONE_NUMBER"
+	ConflictExceptionReasonNumberCapabilitiesMismatch                            ConflictExceptionReason = "NUMBER_CAPABILITIES_MISMATCH"
+	ConflictExceptionReasonMessageTypeMismatch                                   ConflictExceptionReason = "MESSAGE_TYPE_MISMATCH"
+	ConflictExceptionReasonNoOriginationIdentitiesFound                          ConflictExceptionReason = "NO_ORIGINATION_IDENTITIES_FOUND"
+	ConflictExceptionReasonOptOutListMismatch                                    ConflictExceptionReason = "OPT_OUT_LIST_MISMATCH"
+	ConflictExceptionReasonPhoneNumberAssociatedToPool                           ConflictExceptionReason = "PHONE_NUMBER_ASSOCIATED_TO_POOL"
+	ConflictExceptionReasonPhoneNumberAssociatedToRegistration                   ConflictExceptionReason = "PHONE_NUMBER_ASSOCIATED_TO_REGISTRATION"
+	ConflictExceptionReasonPhoneNumberNotAssociatedToPool                        ConflictExceptionReason = "PHONE_NUMBER_NOT_ASSOCIATED_TO_POOL"
+	ConflictExceptionReasonPhoneNumberNotInRegistrationRegion                    ConflictExceptionReason = "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION"
+	ConflictExceptionReasonRegistrationAlreadySubmitted                          ConflictExceptionReason = "REGISTRATION_ALREADY_SUBMITTED"
+	ConflictExceptionReasonRegistrationNotComplete                               ConflictExceptionReason = "REGISTRATION_NOT_COMPLETE"
+	ConflictExceptionReasonSenderIdAssociatedToPool                              ConflictExceptionReason = "SENDER_ID_ASSOCIATED_TO_POOL"
+	ConflictExceptionReasonResourceAlreadyExists                                 ConflictExceptionReason = "RESOURCE_ALREADY_EXISTS"
+	ConflictExceptionReasonResourceDeletionNotAllowed                            ConflictExceptionReason = "RESOURCE_DELETION_NOT_ALLOWED"
+	ConflictExceptionReasonResourceModificationNotAllowed                        ConflictExceptionReason = "RESOURCE_MODIFICATION_NOT_ALLOWED"
+	ConflictExceptionReasonResourceNotActive                                     ConflictExceptionReason = "RESOURCE_NOT_ACTIVE"
+	ConflictExceptionReasonResourceNotEmpty                                      ConflictExceptionReason = "RESOURCE_NOT_EMPTY"
+	ConflictExceptionReasonSelfManagedOptOutsMismatch                            ConflictExceptionReason = "SELF_MANAGED_OPT_OUTS_MISMATCH"
+	ConflictExceptionReasonSubmitRegistrationVersionNotAllowed                   ConflictExceptionReason = "SUBMIT_REGISTRATION_VERSION_NOT_ALLOWED"
+	ConflictExceptionReasonTwoWayConfigMismatch                                  ConflictExceptionReason = "TWO_WAY_CONFIG_MISMATCH"
+	ConflictExceptionReasonVerificationCodeExpired                               ConflictExceptionReason = "VERIFICATION_CODE_EXPIRED"
+	ConflictExceptionReasonVerificationAlreadyComplete                           ConflictExceptionReason = "VERIFICATION_ALREADY_COMPLETE"
+	ConflictExceptionReasonProtectConfigurationIsAccountDefault                  ConflictExceptionReason = "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT"
+	ConflictExceptionReasonProtectConfigurationAssociatedWithConfigurationSet    ConflictExceptionReason = "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET"
+	ConflictExceptionReasonProtectConfigurationNotAssociatedWithConfigurationSet ConflictExceptionReason = "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET"
+	ConflictExceptionReasonDestinationCountryBlockedByProtectConfiguration       ConflictExceptionReason = "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION"
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
@@ -199,6 +207,10 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"TWO_WAY_CONFIG_MISMATCH",
 		"VERIFICATION_CODE_EXPIRED",
 		"VERIFICATION_ALREADY_COMPLETE",
+		"PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT",
+		"PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET",
+		"PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET",
+		"DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION",
 	}
 }
 
@@ -225,31 +237,48 @@ type EventType string
 
 // Enum values for EventType
 const (
-	EventTypeAll                    EventType = "ALL"
-	EventTypeTextAll                EventType = "TEXT_ALL"
-	EventTypeTextSent               EventType = "TEXT_SENT"
-	EventTypeTextPending            EventType = "TEXT_PENDING"
-	EventTypeTextQueued             EventType = "TEXT_QUEUED"
-	EventTypeTextSuccessful         EventType = "TEXT_SUCCESSFUL"
-	EventTypeTextDelivered          EventType = "TEXT_DELIVERED"
-	EventTypeTextInvalid            EventType = "TEXT_INVALID"
-	EventTypeTextInvalidMessage     EventType = "TEXT_INVALID_MESSAGE"
-	EventTypeTextUnreachable        EventType = "TEXT_UNREACHABLE"
-	EventTypeTextCarrierUnreachable EventType = "TEXT_CARRIER_UNREACHABLE"
-	EventTypeTextBlocked            EventType = "TEXT_BLOCKED"
-	EventTypeTextCarrierBlocked     EventType = "TEXT_CARRIER_BLOCKED"
-	EventTypeTextSpam               EventType = "TEXT_SPAM"
-	EventTypeTextUnknown            EventType = "TEXT_UNKNOWN"
-	EventTypeTextTtlExpired         EventType = "TEXT_TTL_EXPIRED"
-	EventTypeVoiceAll               EventType = "VOICE_ALL"
-	EventTypeVoiceInitiated         EventType = "VOICE_INITIATED"
-	EventTypeVoiceRinging           EventType = "VOICE_RINGING"
-	EventTypeVoiceAnswered          EventType = "VOICE_ANSWERED"
-	EventTypeVoiceCompleted         EventType = "VOICE_COMPLETED"
-	EventTypeVoiceBusy              EventType = "VOICE_BUSY"
-	EventTypeVoiceNoAnswer          EventType = "VOICE_NO_ANSWER"
-	EventTypeVoiceFailed            EventType = "VOICE_FAILED"
-	EventTypeVoiceTtlExpired        EventType = "VOICE_TTL_EXPIRED"
+	EventTypeAll                      EventType = "ALL"
+	EventTypeTextAll                  EventType = "TEXT_ALL"
+	EventTypeTextSent                 EventType = "TEXT_SENT"
+	EventTypeTextPending              EventType = "TEXT_PENDING"
+	EventTypeTextQueued               EventType = "TEXT_QUEUED"
+	EventTypeTextSuccessful           EventType = "TEXT_SUCCESSFUL"
+	EventTypeTextDelivered            EventType = "TEXT_DELIVERED"
+	EventTypeTextInvalid              EventType = "TEXT_INVALID"
+	EventTypeTextInvalidMessage       EventType = "TEXT_INVALID_MESSAGE"
+	EventTypeTextUnreachable          EventType = "TEXT_UNREACHABLE"
+	EventTypeTextCarrierUnreachable   EventType = "TEXT_CARRIER_UNREACHABLE"
+	EventTypeTextBlocked              EventType = "TEXT_BLOCKED"
+	EventTypeTextCarrierBlocked       EventType = "TEXT_CARRIER_BLOCKED"
+	EventTypeTextSpam                 EventType = "TEXT_SPAM"
+	EventTypeTextUnknown              EventType = "TEXT_UNKNOWN"
+	EventTypeTextTtlExpired           EventType = "TEXT_TTL_EXPIRED"
+	EventTypeVoiceAll                 EventType = "VOICE_ALL"
+	EventTypeVoiceInitiated           EventType = "VOICE_INITIATED"
+	EventTypeVoiceRinging             EventType = "VOICE_RINGING"
+	EventTypeVoiceAnswered            EventType = "VOICE_ANSWERED"
+	EventTypeVoiceCompleted           EventType = "VOICE_COMPLETED"
+	EventTypeVoiceBusy                EventType = "VOICE_BUSY"
+	EventTypeVoiceNoAnswer            EventType = "VOICE_NO_ANSWER"
+	EventTypeVoiceFailed              EventType = "VOICE_FAILED"
+	EventTypeVoiceTtlExpired          EventType = "VOICE_TTL_EXPIRED"
+	EventTypeMediaAll                 EventType = "MEDIA_ALL"
+	EventTypeMediaPending             EventType = "MEDIA_PENDING"
+	EventTypeMediaQueued              EventType = "MEDIA_QUEUED"
+	EventTypeMediaSuccessful          EventType = "MEDIA_SUCCESSFUL"
+	EventTypeMediaDelivered           EventType = "MEDIA_DELIVERED"
+	EventTypeMediaInvalid             EventType = "MEDIA_INVALID"
+	EventTypeMediaInvalidMessage      EventType = "MEDIA_INVALID_MESSAGE"
+	EventTypeMediaUnreachable         EventType = "MEDIA_UNREACHABLE"
+	EventTypeMediaCarrierUnreachable  EventType = "MEDIA_CARRIER_UNREACHABLE"
+	EventTypeMediaBlocked             EventType = "MEDIA_BLOCKED"
+	EventTypeMediaCarrierBlocked      EventType = "MEDIA_CARRIER_BLOCKED"
+	EventTypeMediaSpam                EventType = "MEDIA_SPAM"
+	EventTypeMediaUnknown             EventType = "MEDIA_UNKNOWN"
+	EventTypeMediaTtlExpired          EventType = "MEDIA_TTL_EXPIRED"
+	EventTypeMediaFileInaccessible    EventType = "MEDIA_FILE_INACCESSIBLE"
+	EventTypeMediaFileTypeUnsupported EventType = "MEDIA_FILE_TYPE_UNSUPPORTED"
+	EventTypeMediaFileSizeExceeded    EventType = "MEDIA_FILE_SIZE_EXCEEDED"
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
@@ -282,6 +311,23 @@ func (EventType) Values() []EventType {
 		"VOICE_NO_ANSWER",
 		"VOICE_FAILED",
 		"VOICE_TTL_EXPIRED",
+		"MEDIA_ALL",
+		"MEDIA_PENDING",
+		"MEDIA_QUEUED",
+		"MEDIA_SUCCESSFUL",
+		"MEDIA_DELIVERED",
+		"MEDIA_INVALID",
+		"MEDIA_INVALID_MESSAGE",
+		"MEDIA_UNREACHABLE",
+		"MEDIA_CARRIER_UNREACHABLE",
+		"MEDIA_BLOCKED",
+		"MEDIA_CARRIER_BLOCKED",
+		"MEDIA_SPAM",
+		"MEDIA_UNKNOWN",
+		"MEDIA_TTL_EXPIRED",
+		"MEDIA_FILE_INACCESSIBLE",
+		"MEDIA_FILE_TYPE_UNSUPPORTED",
+		"MEDIA_FILE_SIZE_EXCEEDED",
 	}
 }
 
@@ -425,6 +471,7 @@ type NumberCapability string
 const (
 	NumberCapabilitySms   NumberCapability = "SMS"
 	NumberCapabilityVoice NumberCapability = "VOICE"
+	NumberCapabilityMms   NumberCapability = "MMS"
 )
 
 // Values returns all known values for NumberCapability. Note that this can be
@@ -434,6 +481,7 @@ func (NumberCapability) Values() []NumberCapability {
 	return []NumberCapability{
 		"SMS",
 		"VOICE",
+		"MMS",
 	}
 }
 
@@ -601,6 +649,43 @@ func (PoolStatus) Values() []PoolStatus {
 		"CREATING",
 		"ACTIVE",
 		"DELETING",
+	}
+}
+
+type ProtectConfigurationFilterName string
+
+// Enum values for ProtectConfigurationFilterName
+const (
+	ProtectConfigurationFilterNameAccountDefault            ProtectConfigurationFilterName = "account-default"
+	ProtectConfigurationFilterNameDeletionProtectionEnabled ProtectConfigurationFilterName = "deletion-protection-enabled"
+)
+
+// Values returns all known values for ProtectConfigurationFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ProtectConfigurationFilterName) Values() []ProtectConfigurationFilterName {
+	return []ProtectConfigurationFilterName{
+		"account-default",
+		"deletion-protection-enabled",
+	}
+}
+
+type ProtectStatus string
+
+// Enum values for ProtectStatus
+const (
+	ProtectStatusAllow ProtectStatus = "ALLOW"
+	ProtectStatusBlock ProtectStatus = "BLOCK"
+)
+
+// Values returns all known values for ProtectStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProtectStatus) Values() []ProtectStatus {
+	return []ProtectStatus{
+		"ALLOW",
+		"BLOCK",
 	}
 }
 
@@ -833,6 +918,7 @@ const (
 	ResourceTypeRegistration              ResourceType = "registration"
 	ResourceTypeRegistrationAttachment    ResourceType = "registration-attachment"
 	ResourceTypeVerifiedDestinationNumber ResourceType = "verified-destination-number"
+	ResourceTypeProtectConfiguration      ResourceType = "protect-configuration"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -852,6 +938,7 @@ func (ResourceType) Values() []ResourceType {
 		"registration",
 		"registration-attachment",
 		"verified-destination-number",
+		"protect-configuration",
 	}
 }
 
@@ -889,6 +976,7 @@ const (
 	ServiceQuotaExceededExceptionReasonEventDestinationsPerConfigurationSet ServiceQuotaExceededExceptionReason = "EVENT_DESTINATIONS_PER_CONFIGURATION_SET"
 	ServiceQuotaExceededExceptionReasonKeywordsPerPhoneNumber               ServiceQuotaExceededExceptionReason = "KEYWORDS_PER_PHONE_NUMBER"
 	ServiceQuotaExceededExceptionReasonKeywordsPerPool                      ServiceQuotaExceededExceptionReason = "KEYWORDS_PER_POOL"
+	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForMedia     ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForText      ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForVoice     ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE"
 	ServiceQuotaExceededExceptionReasonOptOutListsPerAccount                ServiceQuotaExceededExceptionReason = "OPT_OUT_LISTS_PER_ACCOUNT"
@@ -904,6 +992,7 @@ const (
 	ServiceQuotaExceededExceptionReasonTagsPerResource                      ServiceQuotaExceededExceptionReason = "TAGS_PER_RESOURCE"
 	ServiceQuotaExceededExceptionReasonVerifiedDestinationNumbersPerAccount ServiceQuotaExceededExceptionReason = "VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT"
 	ServiceQuotaExceededExceptionReasonVerificationAttemptsPerDay           ServiceQuotaExceededExceptionReason = "VERIFICATION_ATTEMPTS_PER_DAY"
+	ServiceQuotaExceededExceptionReasonProtectConfigurationsPerAccount      ServiceQuotaExceededExceptionReason = "PROTECT_CONFIGURATIONS_PER_ACCOUNT"
 )
 
 // Values returns all known values for ServiceQuotaExceededExceptionReason. Note
@@ -918,6 +1007,7 @@ func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExcept
 		"EVENT_DESTINATIONS_PER_CONFIGURATION_SET",
 		"KEYWORDS_PER_PHONE_NUMBER",
 		"KEYWORDS_PER_POOL",
+		"MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE",
 		"OPT_OUT_LISTS_PER_ACCOUNT",
@@ -933,6 +1023,7 @@ func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExcept
 		"TAGS_PER_RESOURCE",
 		"VERIFIED_DESTINATION_NUMBERS_PER_ACCOUNT",
 		"VERIFICATION_ATTEMPTS_PER_DAY",
+		"PROTECT_CONFIGURATIONS_PER_ACCOUNT",
 	}
 }
 
@@ -942,6 +1033,7 @@ type SpendLimitName string
 const (
 	SpendLimitNameTextMessageMonthlySpendLimit  SpendLimitName = "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"
 	SpendLimitNameVoiceMessageMonthlySpendLimit SpendLimitName = "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"
+	SpendLimitNameMediaMessageMonthlySpendLimit SpendLimitName = "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"
 )
 
 // Values returns all known values for SpendLimitName. Note that this can be
@@ -951,6 +1043,7 @@ func (SpendLimitName) Values() []SpendLimitName {
 	return []SpendLimitName{
 		"TEXT_MESSAGE_MONTHLY_SPEND_LIMIT",
 		"VOICE_MESSAGE_MONTHLY_SPEND_LIMIT",
+		"MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT",
 	}
 }
 
@@ -972,6 +1065,7 @@ const (
 	ValidationExceptionReasonInvalidRequest                            ValidationExceptionReason = "INVALID_REQUEST"
 	ValidationExceptionReasonInvalidRegistrationAssociation            ValidationExceptionReason = "INVALID_REGISTRATION_ASSOCIATION"
 	ValidationExceptionReasonMaximumSizeExceeded                       ValidationExceptionReason = "MAXIMUM_SIZE_EXCEEDED"
+	ValidationExceptionReasonMediaTypeNotSupported                     ValidationExceptionReason = "MEDIA_TYPE_NOT_SUPPORTED"
 	ValidationExceptionReasonMissingParameter                          ValidationExceptionReason = "MISSING_PARAMETER"
 	ValidationExceptionReasonParametersCannotBeUsedTogether            ValidationExceptionReason = "PARAMETERS_CANNOT_BE_USED_TOGETHER"
 	ValidationExceptionReasonPhoneNumberCannotBeOptedIn                ValidationExceptionReason = "PHONE_NUMBER_CANNOT_BE_OPTED_IN"
@@ -1017,6 +1111,7 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"INVALID_REQUEST",
 		"INVALID_REGISTRATION_ASSOCIATION",
 		"MAXIMUM_SIZE_EXCEEDED",
+		"MEDIA_TYPE_NOT_SUPPORTED",
 		"MISSING_PARAMETER",
 		"PARAMETERS_CANNOT_BE_USED_TOGETHER",
 		"PHONE_NUMBER_CANNOT_BE_OPTED_IN",

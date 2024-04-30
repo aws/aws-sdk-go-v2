@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the metadata for a share.
+// Retrieves the metadata for the specified resource share.
 func (c *Client) GetShare(ctx context.Context, params *GetShareInput, optFns ...func(*Options)) (*GetShareOutput, error) {
 	if params == nil {
 		params = &GetShareInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetShare(ctx context.Context, params *GetShareInput, optFns ...
 
 type GetShareInput struct {
 
-	// The generated ID for a share.
+	// The ID of the share.
 	//
 	// This member is required.
 	ShareId *string
@@ -39,8 +39,8 @@ type GetShareInput struct {
 
 type GetShareOutput struct {
 
-	// An analytic store share details object. contains status, resourceArn, ownerId,
-	// etc.
+	// A resource share details object. The object includes the status, the
+	// resourceArn, and ownerId.
 	Share *types.ShareDetails
 
 	// Metadata pertaining to the operation's result.

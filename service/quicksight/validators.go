@@ -3210,6 +3210,26 @@ func (m *validateOpUpdateRoleCustomPermission) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSPICECapacityConfiguration struct {
+}
+
+func (*validateOpUpdateSPICECapacityConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSPICECapacityConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSPICECapacityConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSPICECapacityConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTemplateAlias struct {
 }
 
@@ -4070,6 +4090,10 @@ func addOpUpdateRoleCustomPermissionValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpUpdateRoleCustomPermission{}, middleware.After)
 }
 
+func addOpUpdateSPICECapacityConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSPICECapacityConfiguration{}, middleware.After)
+}
+
 func addOpUpdateTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTemplateAlias{}, middleware.After)
 }
@@ -4343,6 +4367,26 @@ func validateAnonymousUserEmbeddingExperienceConfiguration(v *types.AnonymousUse
 		if err := validateAnonymousUserQSearchBarEmbeddingConfiguration(v.QSearchBar); err != nil {
 			invalidParams.AddNested("QSearchBar", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.GenerativeQnA != nil {
+		if err := validateAnonymousUserGenerativeQnAEmbeddingConfiguration(v.GenerativeQnA); err != nil {
+			invalidParams.AddNested("GenerativeQnA", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnonymousUserGenerativeQnAEmbeddingConfiguration(v *types.AnonymousUserGenerativeQnAEmbeddingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnonymousUserGenerativeQnAEmbeddingConfiguration"}
+	if v.InitialTopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialTopicId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17737,9 +17781,6 @@ func validateOpCreateAccountSubscriptionInput(v *CreateAccountSubscriptionInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAccountSubscriptionInput"}
-	if len(v.Edition) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Edition"))
-	}
 	if len(v.AuthenticationMethod) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationMethod"))
 	}
@@ -21212,6 +21253,24 @@ func validateOpUpdateRoleCustomPermissionInput(v *UpdateRoleCustomPermissionInpu
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSPICECapacityConfigurationInput(v *UpdateSPICECapacityConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSPICECapacityConfigurationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if len(v.PurchaseMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PurchaseMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

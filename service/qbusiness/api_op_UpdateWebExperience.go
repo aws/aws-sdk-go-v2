@@ -41,7 +41,14 @@ type UpdateWebExperienceInput struct {
 	WebExperienceId *string
 
 	// The authentication configuration of the Amazon Q Business web experience.
+	//
+	// Deprecated: Property associated with legacy SAML IdP flow. Deprecated in favor
+	// of using AWS IAM Identity Center for user management.
 	AuthenticationConfiguration types.WebExperienceAuthConfiguration
+
+	// The Amazon Resource Name (ARN) of the role with permission to access the Amazon
+	// Q Business web experience and required resources.
+	RoleArn *string
 
 	// Determines whether sample prompts are enabled in the web experience for an end
 	// user.

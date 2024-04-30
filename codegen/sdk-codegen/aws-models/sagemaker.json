@@ -12737,6 +12737,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains information about the infrastructure health check configuration for the training job.</p>"
                     }
+                },
+                "SessionChainingConfig": {
+                    "target": "com.amazonaws.sagemaker#SessionChainingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about attribute-based access control (ABAC) for the training\n            job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -26019,6 +26025,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.sagemaker#EnableSessionTagChaining": {
+            "type": "boolean"
         },
         "com.amazonaws.sagemaker#Endpoint": {
             "type": "structure",
@@ -50484,6 +50493,54 @@
                         "smithy.api#enumValue": "ml.g5.48xlarge"
                     }
                 },
+                "ML_G6_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.xlarge"
+                    }
+                },
+                "ML_G6_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.2xlarge"
+                    }
+                },
+                "ML_G6_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.4xlarge"
+                    }
+                },
+                "ML_G6_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.8xlarge"
+                    }
+                },
+                "ML_G6_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.12xlarge"
+                    }
+                },
+                "ML_G6_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.16xlarge"
+                    }
+                },
+                "ML_G6_24XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.24xlarge"
+                    }
+                },
+                "ML_G6_48XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.g6.48xlarge"
+                    }
+                },
                 "ML_P4D_24XLARGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -57359,6 +57416,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details that you specify to provision a service catalog product. \n            For information about service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>.\n        </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SessionChainingConfig": {
+            "type": "structure",
+            "members": {
+                "EnableSessionTagChaining": {
+                    "target": "com.amazonaws.sagemaker#EnableSessionTagChaining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>True</code> to allow SageMaker to extract session tags from a \n            training job creation role and reuse these tags when assuming the training \n            job execution role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about attribute-based access control (ABAC) for a training job. </p>"
             }
         },
         "com.amazonaws.sagemaker#SessionExpirationDurationInSeconds": {

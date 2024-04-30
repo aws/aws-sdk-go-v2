@@ -7284,6 +7284,15 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 				sv.StorageCapacity = ptr.Int32(int32(i64))
 			}
 
+		case "storageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageType to be of type string, got %T instead", value)
+				}
+				sv.StorageType = types.StorageType(jtv)
+			}
+
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
@@ -7305,6 +7314,15 @@ func awsRestjson1_deserializeOpDocumentGetRunOutput(v **GetRunOutput, value inte
 					return fmt.Errorf("expected WorkflowId to be of type string, got %T instead", value)
 				}
 				sv.WorkflowId = ptr.String(jtv)
+			}
+
+		case "workflowOwnerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkflowOwnerId to be of type string, got %T instead", value)
+				}
+				sv.WorkflowOwnerId = ptr.String(jtv)
 			}
 
 		case "workflowType":
@@ -19290,6 +19308,15 @@ func awsRestjson1_deserializeDocumentRunListItem(v **types.RunListItem, value in
 				sv.StorageCapacity = ptr.Int32(int32(i64))
 			}
 
+		case "storageType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageType to be of type string, got %T instead", value)
+				}
+				sv.StorageType = types.StorageType(jtv)
+			}
+
 		case "workflowId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19830,6 +19857,15 @@ func awsRestjson1_deserializeDocumentShareDetails(v **types.ShareDetails, value 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "resourceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ResourceId = ptr.String(jtv)
 			}
 
 		case "shareId":

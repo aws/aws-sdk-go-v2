@@ -374,6 +374,28 @@ func (SecurityServiceType) Values() []SecurityServiceType {
 	}
 }
 
+type StreamExceptionPolicy string
+
+// Enum values for StreamExceptionPolicy
+const (
+	StreamExceptionPolicyDrop      StreamExceptionPolicy = "DROP"
+	StreamExceptionPolicyContinue  StreamExceptionPolicy = "CONTINUE"
+	StreamExceptionPolicyReject    StreamExceptionPolicy = "REJECT"
+	StreamExceptionPolicyFmsIgnore StreamExceptionPolicy = "FMS_IGNORE"
+)
+
+// Values returns all known values for StreamExceptionPolicy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StreamExceptionPolicy) Values() []StreamExceptionPolicy {
+	return []StreamExceptionPolicy{
+		"DROP",
+		"CONTINUE",
+		"REJECT",
+		"FMS_IGNORE",
+	}
+}
+
 type TargetType string
 
 // Enum values for TargetType

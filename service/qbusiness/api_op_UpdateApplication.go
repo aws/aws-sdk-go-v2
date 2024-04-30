@@ -43,6 +43,10 @@ type UpdateApplicationInput struct {
 	// A name for the Amazon Q Business application.
 	DisplayName *string
 
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
+	// either creating for—or connecting to—your Amazon Q Business application.
+	IdentityCenterInstanceArn *string
+
 	// An Amazon Web Services Identity and Access Management (IAM) role that gives
 	// Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
 	RoleArn *string

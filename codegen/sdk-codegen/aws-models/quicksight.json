@@ -866,10 +866,31 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Q search bar that you want to use for anonymous user embedding.</p>"
                     }
+                },
+                "GenerativeQnA": {
+                    "target": "com.amazonaws.quicksight#AnonymousUserGenerativeQnAEmbeddingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Generative Q&A experience that you want to use for anonymous user embedding.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of experience you want to embed. For anonymous users, you can embed Amazon QuickSight dashboards.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserGenerativeQnAEmbeddingConfiguration": {
+            "type": "structure",
+            "members": {
+                "InitialTopicId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon QuickSight Q topic ID of the new reader experience topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders the Generative Q&A experience with this new reader experience topic pre selected.</p>\n         <p>The Amazon Resource Name (ARN) of this Q new reader experience topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request fails with an <code>InvalidParameterValueException</code> error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings that you want to use for the Generative Q&A experience.</p>"
             }
         },
         "com.amazonaws.quicksight#AnonymousUserQSearchBarEmbeddingConfiguration": {
@@ -878,7 +899,7 @@
                 "InitialTopicId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The QuickSight Q topic ID of the topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders the Q search bar with this topic pre-selected.</p>\n         <p>The Amazon Resource Name (ARN) of this Q topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon QuickSight Q topic ID of the legacy topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders the Q search bar with this legacy topic pre-selected.</p>\n         <p>The Amazon Resource Name (ARN) of this Q legacy topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request fails with an <code>InvalidParameterValueException</code> error.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6603,8 +6624,7 @@
                 "Edition": {
                     "target": "com.amazonaws.quicksight#Edition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The edition of Amazon QuickSight that you want your account to have. Currently, you can\n            choose from <code>ENTERPRISE</code> or\n                <code>ENTERPRISE_AND_Q</code>.</p>\n         <p>If you choose <code>ENTERPRISE_AND_Q</code>, the following parameters are\n            required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FirstName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LastName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EmailAddress</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ContactNumber</code>\n               </p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The edition of Amazon QuickSight that you want your account to have. Currently, you can\n            choose from <code>ENTERPRISE</code> or\n                <code>ENTERPRISE_AND_Q</code>.</p>\n         <p>If you choose <code>ENTERPRISE_AND_Q</code>, the following parameters are\n            required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FirstName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LastName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EmailAddress</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ContactNumber</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "AuthenticationMethod": {
@@ -6657,7 +6677,7 @@
                 "AdminGroup": {
                     "target": "com.amazonaws.quicksight#GroupsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The admin group associated with your Active Directory or IAM Identity Center account. This field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new Amazon QuickSight account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
+                        "smithy.api#documentation": "<p>The admin group associated with your Active Directory or IAM Identity Center account. Either this field or the <code>AdminProGroup</code> field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new Amazon QuickSight account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
                     }
                 },
                 "AuthorGroup": {
@@ -6670,6 +6690,24 @@
                     "target": "com.amazonaws.quicksight#GroupsList",
                     "traits": {
                         "smithy.api#documentation": "<p>The reader group associated with your Active Directory or IAM Identity Center account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
+                    }
+                },
+                "AdminProGroup": {
+                    "target": "com.amazonaws.quicksight#GroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The admin pro group associated with your Active Directory or IAM Identity Center account. Either this field or the <code>AdminGroup</code> field is required if <code>ACTIVE_DIRECTORY</code> or <code>IAM_IDENTITY_CENTER</code> is the selected authentication method of the new Amazon QuickSight account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
+                    }
+                },
+                "AuthorProGroup": {
+                    "target": "com.amazonaws.quicksight#GroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The author pro group associated with your Active Directory or IAM Identity Center account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
+                    }
+                },
+                "ReaderProGroup": {
+                    "target": "com.amazonaws.quicksight#GroupsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reader pro group associated with your Active Directory or IAM Identity Center account.</p>\n         <p>For more information about using IAM Identity Center in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html\">Using IAM Identity Center with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html\">Using Active Directory with Amazon QuickSight Enterprise Edition</a> in the Amazon QuickSight User Guide.</p>"
                     }
                 },
                 "FirstName": {
@@ -23846,6 +23884,26 @@
                 "smithy.api#documentation": "<p>The options that determine the presentation of the arc of a <code>GaugeChartVisual</code>.</p>"
             }
         },
+        "com.amazonaws.quicksight#GaugeChartColorConfiguration": {
+            "type": "structure",
+            "members": {
+                "ForegroundColor": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The foreground color configuration of a <code>GaugeChartVisual</code>.</p>"
+                    }
+                },
+                "BackgroundColor": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The background color configuration of a <code>GaugeChartVisual</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color configuration of a <code>GaugeChartVisual</code>.</p>"
+            }
+        },
         "com.amazonaws.quicksight#GaugeChartConditionalFormatting": {
             "type": "structure",
             "members": {
@@ -23923,6 +23981,12 @@
                     "target": "com.amazonaws.quicksight#VisualPalette",
                     "traits": {
                         "smithy.api#documentation": "<p>The visual palette configuration of a <code>GaugeChartVisual</code>.</p>"
+                    }
+                },
+                "ColorConfiguration": {
+                    "target": "com.amazonaws.quicksight#GaugeChartColorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color configuration of a <code>GaugeChartVisual</code>.</p>"
                     }
                 },
                 "Interactions": {
@@ -24268,7 +24332,7 @@
                 "ExperienceConfiguration": {
                     "target": "com.amazonaws.quicksight#RegisteredUserEmbeddingExperienceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q search bar, or the entire Amazon QuickSight console.</p>",
+                        "smithy.api#documentation": "<p>The experience that you want to embed. For registered users, you can embed Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q search bar, the Amazon QuickSight Generative Q&A experience, or the entire Amazon QuickSight console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -24289,7 +24353,7 @@
                 "EmbedUrl": {
                     "target": "com.amazonaws.quicksight#EmbeddingUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The embed URL for the Amazon QuickSight dashboard, visual, Q search bar, or console.</p>",
+                        "smithy.api#documentation": "<p>The embed URL for the Amazon QuickSight dashboard, visual, Q search bar, Generative Q&A experience, or console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -35133,7 +35197,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 100
+                    "max": 500
                 }
             }
         },
@@ -36145,6 +36209,23 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PurchaseMode": {
+            "type": "enum",
+            "members": {
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                },
+                "AUTO_PURCHASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO_PURCHASE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#PutDataSetRefreshProperties": {
             "type": "operation",
             "input": {
@@ -36774,6 +36855,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateRoleCustomPermission"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateSPICECapacityConfiguration"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateTemplate"
@@ -38636,7 +38720,7 @@
                 "IdentityType": {
                     "target": "com.amazonaws.quicksight#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon QuickSight supports several ways of managing the identity of users. This\n\t\t\tparameter accepts two values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IAM</code>: A user whose identity maps to an existing IAM user or role.\n\t\t\t\t</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUICKSIGHT</code>: A user whose identity is owned and managed internally by\n\t\t\t\t\tAmazon QuickSight. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identity type that your Amazon QuickSight account uses to manage the identity of users.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -38691,7 +38775,7 @@
                 "CustomPermissionsName": {
                     "target": "com.amazonaws.quicksight#RoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to\n            assign to this user. Customized permissions allows you to control a user's access by\n            restricting access the following operations:</p>\n         <ul>\n            <li>\n               <p>Create and update data sources</p>\n            </li>\n            <li>\n               <p>Create and update datasets</p>\n            </li>\n            <li>\n               <p>Create and update email reports</p>\n            </li>\n            <li>\n               <p>Subscribe to email reports</p>\n            </li>\n         </ul>\n         <p>To add custom permissions to an existing user, use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> instead.</p>\n         <p>A set of custom permissions includes any combination of these restrictions. Currently,\n            you need to create the profile names for custom permission sets by using the Amazon QuickSight\n            console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of\n            permissions to a Amazon QuickSight user. </p>\n         <p>Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they\n            override the permissions typically granted by assigning Amazon QuickSight users to one of the\n            default security cohorts in Amazon QuickSight (admin, author, reader).</p>\n         <p>This feature is available only to Amazon QuickSight Enterprise edition subscriptions.</p>"
+                        "smithy.api#documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to\n            assign to this user. Customized permissions allows you to control a user's access by\n            restricting access the following operations:</p>\n         <ul>\n            <li>\n               <p>Create and update data sources</p>\n            </li>\n            <li>\n               <p>Create and update datasets</p>\n            </li>\n            <li>\n               <p>Create and update email reports</p>\n            </li>\n            <li>\n               <p>Subscribe to email reports</p>\n            </li>\n         </ul>\n         <p>To add custom permissions to an existing user, use <code>\n               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>\n            </code> instead.</p>\n         <p>A set of custom permissions includes any combination of these restrictions. Currently,\n            you need to create the profile names for custom permission sets by using the Amazon QuickSight\n            console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of\n            permissions to a Amazon QuickSight user. </p>\n         <p>Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they\n            override the permissions typically granted by assigning Amazon QuickSight users to one of the\n            default security cohorts in Amazon QuickSight (admin, author, reader, admin pro, author pro, reader pro).</p>\n         <p>This feature is available only to Amazon QuickSight Enterprise edition subscriptions.</p>"
                     }
                 },
                 "ExternalLoginFederationProviderType": {
@@ -38853,10 +38937,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of embedding experience. In this case, Amazon QuickSight visuals.</p>"
                     }
+                },
+                "GenerativeQnA": {
+                    "target": "com.amazonaws.quicksight#RegisteredUserGenerativeQnAEmbeddingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for embedding the Generative Q&A experience.</p>\n         <p>For more information about embedding the Generative Q&A experience, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html\">Embedding Overview</a> in\n                the <i>Amazon QuickSight User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of experience you want to embed. For registered users, you can embed Amazon QuickSight dashboards or the Amazon QuickSight console.</p>\n         <note>\n            <p>Exactly one of the experience configurations is required. You can choose\n                    <code>Dashboard</code> or <code>QuickSightConsole</code>. You cannot choose more\n                than one experience configuration.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.quicksight#RegisteredUserGenerativeQnAEmbeddingConfiguration": {
+            "type": "structure",
+            "members": {
+                "InitialTopicId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the new Q reader experience topic that you want to make the starting topic in the Generative Q&A experience.\n        You can find a topic ID by navigating to the Topics pane in the Amazon QuickSight application and opening\n        a topic. The ID is in the URL for the topic that you open.</p>\n         <p>If you don't specify an initial topic or you specify a legacy topic, a list of all shared new reader experience topics is shown in the Generative Q&A experience for your readers. When you select an initial new reader experience topic, you can specify whether or not readers are allowed to select other new reader experience topics from the available ones in the list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that provides information about the configuration of a Generative Q&A experience.</p>"
             }
         },
         "com.amazonaws.quicksight#RegisteredUserQSearchBarEmbeddingConfiguration": {
@@ -38865,7 +38969,7 @@
                 "InitialTopicId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Q topic that you want to make the starting topic in the Q search bar.\n      You can find a topic ID by navigating to the Topics pane in the Amazon QuickSight application and opening\n      a topic. The ID is in the URL for the topic that you open.</p>\n         <p>If you don't specify an initial topic, a list of all shared topics is shown in the Q bar\n      for your readers. When you select an initial topic, you can specify whether or not readers\n      are allowed to select other topics from the available ones in the list.</p>"
+                        "smithy.api#documentation": "<p>The ID of the legacy Q topic that you want to use as the starting topic in the Q search bar. To locate the topic ID of the topic that you want to use, open the <a href=\"https://quicksight.aws.amazon.com/\">Amazon QuickSight console</a>, navigate to the <b>Topics</b> pane, and choose thre topic that you want to use. The <code>TopicID</code> is located in the URL of the topic that opens. When you select an initial topic, you can specify whether or not readers\n      are allowed to select other topics from the list of available topics.</p>\n         <p>If you don't specify an initial topic or if you specify a new reader experience topic, a list of all shared legacy topics is shown in the Q bar. </p>"
                     }
                 }
             },
@@ -39469,6 +39573,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "READER"
+                    }
+                },
+                "ADMIN_PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN_PRO"
+                    }
+                },
+                "AUTHOR_PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHOR_PRO"
+                    }
+                },
+                "READER_PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READER_PRO"
                     }
                 }
             }
@@ -41456,7 +41578,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 10
+                    "max": 2000
                 }
             }
         },
@@ -44182,7 +44304,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 100
+                    "max": 500
                 }
             }
         },
@@ -47475,6 +47597,12 @@
                     "target": "com.amazonaws.quicksight#ResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the topic.</p>"
+                    }
+                },
+                "UserExperienceVersion": {
+                    "target": "com.amazonaws.quicksight#TopicUserExperienceVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user experience version of the topic.</p>"
                     }
                 }
             },
@@ -50865,6 +50993,85 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateSPICECapacityConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateSPICECapacityConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateSPICECapacityConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the SPICE capacity configuration for a Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/spice-capacity-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSPICECapacityConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the SPICE configuration that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PurchaseMode": {
+                    "target": "com.amazonaws.quicksight#PurchaseMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines how SPICE capacity can be purchased. The following options are available. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>MANUAL</code>: SPICE capacity can only be purchased manually.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO_PURCHASE</code>: Extra SPICE capacity is automatically purchased on your behalf as needed. SPICE capacity can also be purchased manually with this option.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSPICECapacityConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateTemplate": {
             "type": "operation",
             "input": {
@@ -52018,7 +52225,7 @@
                 "Role": {
                     "target": "com.amazonaws.quicksight#UserRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight role of the user. The role can be one of the\n\t\t\tfollowing default security cohorts:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and\n\t\t\t\t\tdashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight\n\t\t\t\t\tsettings.</p>\n            </li>\n         </ul>\n         <p>The name of the Amazon QuickSight role is invisible to the user except for the console\n\t        screens dealing with permissions.</p>",
+                        "smithy.api#documentation": "<p>The Amazon QuickSight role of the user. The role can be one of the\n\t\t\tfollowing default security cohorts:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and\n\t\t\t\t\tdashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight\n\t\t\t\t\tsettings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q Business, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR_PRO</code>: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&A, and generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>\n            </li>\n         </ul>\n         <p>The name of the Amazon QuickSight role is invisible to the user except for the console\n\t        screens dealing with permissions.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -52296,7 +52503,7 @@
                 "Role": {
                     "target": "com.amazonaws.quicksight#UserRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight role for the user. The user role can be one of the\n            following:.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses,\n                    and dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon\n                    Amazon QuickSight settings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_READER</code>: This role isn't currently available for\n                    use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_AUTHOR</code>: This role isn't currently available for\n                    use.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon QuickSight role for the user. The user role can be one of the\n            following:.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>READER</code>: A user who has read-only access to dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR</code>: A user who can create data sources, datasets, analyses,\n                    and dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN</code>: A user who is an author, who can also manage Amazon\n                    Amazon QuickSight settings.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READER_PRO</code>: Reader Pro adds Generative BI capabilities to the Reader role. Reader Pros have access to Amazon Q Business, can build stories with Amazon Q, and can generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTHOR_PRO</code>: Author Pro adds Generative BI capabilities to the Author role. Author Pros can author dashboards with natural language with Amazon Q, build stories with Amazon Q, create Topics for Q&A, and generate executive summaries from dashboards.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ADMIN_PRO</code>: Admin Pros are Author Pros who can also manage Amazon QuickSight administrative settings. Admin Pro users are billed at Author Pro pricing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_READER</code>: This role isn't currently available for\n                    use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESTRICTED_AUTHOR</code>: This role isn't currently available for\n                    use.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IdentityType": {
@@ -52393,6 +52600,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RESTRICTED_READER"
+                    }
+                },
+                "ADMIN_PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN_PRO"
+                    }
+                },
+                "AUTHOR_PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHOR_PRO"
+                    }
+                },
+                "READER_PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READER_PRO"
                     }
                 }
             }

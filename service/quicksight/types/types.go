@@ -439,8 +439,28 @@ type AnonymousUserEmbeddingExperienceConfiguration struct {
 	// The type of embedding experience. In this case, Amazon QuickSight visuals.
 	DashboardVisual *AnonymousUserDashboardVisualEmbeddingConfiguration
 
+	// The Generative Q&A experience that you want to use for anonymous user embedding.
+	GenerativeQnA *AnonymousUserGenerativeQnAEmbeddingConfiguration
+
 	// The Q search bar that you want to use for anonymous user embedding.
 	QSearchBar *AnonymousUserQSearchBarEmbeddingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The settings that you want to use for the Generative Q&A experience.
+type AnonymousUserGenerativeQnAEmbeddingConfiguration struct {
+
+	// The Amazon QuickSight Q topic ID of the new reader experience topic that you
+	// want the anonymous user to see first. This ID is included in the output URL.
+	// When the URL in response is accessed, Amazon QuickSight renders the Generative
+	// Q&A experience with this new reader experience topic pre selected. The Amazon
+	// Resource Name (ARN) of this Q new reader experience topic must be included in
+	// the AuthorizedResourceArns parameter. Otherwise, the request fails with an
+	// InvalidParameterValueException error.
+	//
+	// This member is required.
+	InitialTopicId *string
 
 	noSmithyDocumentSerde
 }
@@ -448,12 +468,12 @@ type AnonymousUserEmbeddingExperienceConfiguration struct {
 // The settings that you want to use with the Q search bar.
 type AnonymousUserQSearchBarEmbeddingConfiguration struct {
 
-	// The QuickSight Q topic ID of the topic that you want the anonymous user to see
-	// first. This ID is included in the output URL. When the URL in response is
-	// accessed, Amazon QuickSight renders the Q search bar with this topic
-	// pre-selected. The Amazon Resource Name (ARN) of this Q topic must be included in
-	// the AuthorizedResourceArns parameter. Otherwise, the request will fail with
-	// InvalidParameterValueException .
+	// The Amazon QuickSight Q topic ID of the legacy topic that you want the
+	// anonymous user to see first. This ID is included in the output URL. When the URL
+	// in response is accessed, Amazon QuickSight renders the Q search bar with this
+	// legacy topic pre-selected. The Amazon Resource Name (ARN) of this Q legacy topic
+	// must be included in the AuthorizedResourceArns parameter. Otherwise, the
+	// request fails with an InvalidParameterValueException error.
 	//
 	// This member is required.
 	InitialTopicId *string
@@ -6591,6 +6611,18 @@ type GaugeChartArcConditionalFormatting struct {
 	noSmithyDocumentSerde
 }
 
+// The color configuration of a GaugeChartVisual .
+type GaugeChartColorConfiguration struct {
+
+	// The background color configuration of a GaugeChartVisual .
+	BackgroundColor *string
+
+	// The foreground color configuration of a GaugeChartVisual .
+	ForegroundColor *string
+
+	noSmithyDocumentSerde
+}
+
 // The conditional formatting of a GaugeChartVisual .
 type GaugeChartConditionalFormatting struct {
 
@@ -6614,6 +6646,9 @@ type GaugeChartConditionalFormattingOption struct {
 
 // The configuration of a GaugeChartVisual .
 type GaugeChartConfiguration struct {
+
+	// The color configuration of a GaugeChartVisual .
+	ColorConfiguration *GaugeChartColorConfiguration
 
 	// The data label configuration of a GaugeChartVisual .
 	DataLabels *DataLabelOptions
@@ -10632,6 +10667,12 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	// The type of embedding experience. In this case, Amazon QuickSight visuals.
 	DashboardVisual *RegisteredUserDashboardVisualEmbeddingConfiguration
 
+	// The configuration details for embedding the Generative Q&A experience. For more
+	// information about embedding the Generative Q&A experience, see Embedding
+	// Overview (https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html)
+	// in the Amazon QuickSight User Guide.
+	GenerativeQnA *RegisteredUserGenerativeQnAEmbeddingConfiguration
+
 	// The configuration details for embedding the Q search bar. For more information
 	// about embedding the Q search bar, see Embedding Overview (https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html)
 	// in the Amazon QuickSight User Guide.
@@ -10663,16 +10704,36 @@ type RegisteredUserEmbeddingExperienceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An object that provides information about the configuration of a Generative Q&A
+// experience.
+type RegisteredUserGenerativeQnAEmbeddingConfiguration struct {
+
+	// The ID of the new Q reader experience topic that you want to make the starting
+	// topic in the Generative Q&A experience. You can find a topic ID by navigating to
+	// the Topics pane in the Amazon QuickSight application and opening a topic. The ID
+	// is in the URL for the topic that you open. If you don't specify an initial topic
+	// or you specify a legacy topic, a list of all shared new reader experience topics
+	// is shown in the Generative Q&A experience for your readers. When you select an
+	// initial new reader experience topic, you can specify whether or not readers are
+	// allowed to select other new reader experience topics from the available ones in
+	// the list.
+	InitialTopicId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the Q search bar embedding experience.
 type RegisteredUserQSearchBarEmbeddingConfiguration struct {
 
-	// The ID of the Q topic that you want to make the starting topic in the Q search
-	// bar. You can find a topic ID by navigating to the Topics pane in the Amazon
-	// QuickSight application and opening a topic. The ID is in the URL for the topic
-	// that you open. If you don't specify an initial topic, a list of all shared
-	// topics is shown in the Q bar for your readers. When you select an initial topic,
-	// you can specify whether or not readers are allowed to select other topics from
-	// the available ones in the list.
+	// The ID of the legacy Q topic that you want to use as the starting topic in the
+	// Q search bar. To locate the topic ID of the topic that you want to use, open the
+	// Amazon QuickSight console (https://quicksight.aws.amazon.com/) , navigate to the
+	// Topics pane, and choose thre topic that you want to use. The TopicID is located
+	// in the URL of the topic that opens. When you select an initial topic, you can
+	// specify whether or not readers are allowed to select other topics from the list
+	// of available topics. If you don't specify an initial topic or if you specify a
+	// new reader experience topic, a list of all shared legacy topics is shown in the
+	// Q bar.
 	InitialTopicId *string
 
 	noSmithyDocumentSerde
@@ -13991,6 +14052,9 @@ type TopicSummary struct {
 	// Amazon Web Services account.
 	TopicId *string
 
+	// The user experience version of the topic.
+	UserExperienceVersion TopicUserExperienceVersion
+
 	noSmithyDocumentSerde
 }
 
@@ -14500,6 +14564,15 @@ type User struct {
 	//   dashboards.
 	//   - ADMIN : A user who is an author, who can also manage Amazon Amazon
 	//   QuickSight settings.
+	//   - READER_PRO : Reader Pro adds Generative BI capabilities to the Reader role.
+	//   Reader Pros have access to Amazon Q Business, can build stories with Amazon Q,
+	//   and can generate executive summaries from dashboards.
+	//   - AUTHOR_PRO : Author Pro adds Generative BI capabilities to the Author role.
+	//   Author Pros can author dashboards with natural language with Amazon Q, build
+	//   stories with Amazon Q, create Topics for Q&A, and generate executive summaries
+	//   from dashboards.
+	//   - ADMIN_PRO : Admin Pros are Author Pros who can also manage Amazon QuickSight
+	//   administrative settings. Admin Pro users are billed at Author Pro pricing.
 	//   - RESTRICTED_READER : This role isn't currently available for use.
 	//   - RESTRICTED_AUTHOR : This role isn't currently available for use.
 	Role UserRole

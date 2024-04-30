@@ -14024,6 +14024,15 @@ func awsRestjson1_deserializeDocumentDomainStatus(v **types.DomainStatus, value 
 				return err
 			}
 
+		case "DomainEndpointV2HostedZoneId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostedZoneId to be of type string, got %T instead", value)
+				}
+				sv.DomainEndpointV2HostedZoneId = ptr.String(jtv)
+			}
+
 		case "DomainId":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -125,7 +125,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nAccepts a share for an analytics store. \n</p>",
+                "smithy.api#documentation": "<p>Accept a resource share request.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -142,7 +142,7 @@
                 "shareId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe ID for a share offer for analytics store data. \n</p>",
+                        "smithy.api#documentation": "<p>The ID of the resource share.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -158,7 +158,7 @@
                 "status": {
                     "target": "com.amazonaws.omics#ShareStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe status of an analytics store share. \n</p>"
+                        "smithy.api#documentation": "<p>The status of the resource share.</p>"
                     }
                 }
             },
@@ -508,6 +508,9 @@
             },
             "list": {
                 "target": "com.amazonaws.omics#ListAnnotationStores"
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents a resource that stores annotation data"
             }
         },
         "com.amazonaws.omics#AnnotationStoreItem": {
@@ -1263,6 +1266,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an Annotation Store"
+                },
                 "smithy.api#documentation": "<p>Creates an annotation store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -2192,7 +2198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Creates a share offer that can be accepted outside the account by a subscriber. The share is created by the owner and accepted by the principal subscriber. \n    </p>",
+                "smithy.api#documentation": "<p>Creates a cross-account shared resource. The resource owner makes an offer to share the resource \n      with the principal subscriber (an AWS user with a different account than the resource owner).</p>\n         <p>The following resources support cross-account sharing:</p>\n         <ul>\n            <li>\n               <p>Healthomics variant stores</p>\n            </li>\n            <li>\n               <p>Healthomics annotation stores</p>\n            </li>\n            <li>\n               <p>Private workflows</p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -2209,21 +2215,21 @@
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The resource ARN for the analytics store to be shared.\n    </p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource to be shared.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "principalSubscriber": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The principal subscriber is the account being given access to the analytics store data through the share offer. \n    </p>",
+                        "smithy.api#documentation": "<p>The principal subscriber is the account being offered shared access to the resource. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "shareName": {
                     "target": "com.amazonaws.omics#ShareName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A name given to the share. \n    </p>"
+                        "smithy.api#documentation": "<p>A name that the owner defines for the share.</p>"
                     }
                 }
             },
@@ -2237,19 +2243,19 @@
                 "shareId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      An ID generated for the share. \n    </p>"
+                        "smithy.api#documentation": "<p>The ID that HealthOmics generates for the share.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.omics#ShareStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status of a share. \n    </p>"
+                        "smithy.api#documentation": "<p>The status of the share.</p>"
                     }
                 },
                 "shareName": {
                     "target": "com.amazonaws.omics#ShareName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A name given to the share. \n    </p>"
+                        "smithy.api#documentation": "<p>The name of the share.</p>"
                     }
                 }
             },
@@ -2289,6 +2295,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a Variant Store"
+                },
                 "smithy.api#documentation": "<p>Creates a variant store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -2476,7 +2485,7 @@
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A storage capacity for the workflow in gibibytes.</p>",
+                        "smithy.api#documentation": "<p>The storage capacity for the workflow in gibibytes.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -2590,6 +2599,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an Annotation Store"
+                },
                 "smithy.api#documentation": "<p>Deletes an annotation store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -3097,7 +3109,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Deletes a share of an analytics store. \n    </p>",
+                "smithy.api#documentation": "<p>Deletes a resource share. If you are the resource owner, the subscriber will no longer have \n      access to the shared resource. If you are the subscriber, this operation deletes your access to the share.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -3115,7 +3127,7 @@
                 "shareId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID for the share request to be deleted. \n    </p>",
+                        "smithy.api#documentation": "<p>The ID for the resource share to be deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3131,7 +3143,7 @@
                 "status": {
                     "target": "com.amazonaws.omics#ShareStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status of the share being deleted. \n    </p>"
+                        "smithy.api#documentation": "<p>The status of the share being deleted.</p>"
                     }
                 }
             },
@@ -3168,6 +3180,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a Variant Store"
+                },
                 "smithy.api#documentation": "<p>Deletes a variant store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -3644,18 +3659,24 @@
                 "resourceArns": {
                     "target": "com.amazonaws.omics#ArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe Amazon Resource Number (Arn) for an analytics store. \n</p>"
+                        "smithy.api#documentation": "<p>Filter based on the Amazon Resource Number (ARN) of the resource. You can specify up to 10 values.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.omics#StatusList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe status of an annotation store version. \n</p>"
+                        "smithy.api#documentation": "<p>Filter based on the resource status. You can specify up to 10 values.</p>"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.omics#TypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resources to be filtered. You can specify one or more of the resource types.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nUse filters to focus the returned annotation store versions on a specific parameter, such as the status of the annotation store.\n</p>"
+                "smithy.api#documentation": "<p>Use filters to return a subset of resources.  You can define filters for specific parameters,\n          such as the resource status.</p>"
             }
         },
         "com.amazonaws.omics#FormatOptions": {
@@ -3971,6 +3992,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get detailed information about an Annotation Store"
+                },
                 "smithy.api#documentation": "<p>Gets information about an annotation store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -5935,7 +5959,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a workflow run.</p>",
+                "smithy.api#documentation": "<p>Gets information about a workflow run.</p>\n         <p>If a workflow is shared with you, you cannot export information about the run.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -6325,7 +6349,7 @@
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The run's storage capacity in gigabytes.</p>",
+                        "smithy.api#documentation": "<p>The run's storage capacity in gibibytes. For dynamic storage, \n      after the run has completed, this value is the maximum amount of storage\n      used during the run.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -6420,6 +6444,18 @@
                     "target": "com.amazonaws.omics#RunOutputUri",
                     "traits": {
                         "smithy.api#documentation": "<p>The destination for workflow outputs.</p>"
+                    }
+                },
+                "storageType": {
+                    "target": "com.amazonaws.omics#StorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run's storage type.</p>"
+                    }
+                },
+                "workflowOwnerId": {
+                    "target": "com.amazonaws.omics#WorkflowOwnerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow owner.</p>"
                     }
                 }
             },
@@ -6875,7 +6911,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Retrieves the metadata for a share. \n    </p>",
+                "smithy.api#documentation": "<p>Retrieves the metadata for the specified resource share.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -6893,7 +6929,7 @@
                 "shareId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The generated ID for a share. \n    </p>",
+                        "smithy.api#documentation": "<p>The ID of the share.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6909,7 +6945,7 @@
                 "share": {
                     "target": "com.amazonaws.omics#ShareDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      An analytic store share details object. contains status, resourceArn, ownerId, etc. \n    </p>"
+                        "smithy.api#documentation": "<p>A resource share details object. The object includes the status, the resourceArn, and ownerId.</p>"
                     }
                 }
             },
@@ -7140,6 +7176,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get detailed information about a Variant Store"
+                },
                 "smithy.api#documentation": "<p>Gets information about a variant store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -7377,7 +7416,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a workflow.</p>",
+                "smithy.api#documentation": "<p>Gets information about a workflow.</p>\n         <p>If a workflow is shared with you, you cannot export the workflow.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -7462,6 +7501,13 @@
                         "smithy.api#documentation": "<p>The export format for the workflow.</p>",
                         "smithy.api#httpQuery": "export"
                     }
+                },
+                "workflowOwnerId": {
+                    "target": "com.amazonaws.omics#WorkflowOwnerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow owner.</p>",
+                        "smithy.api#httpQuery": "workflowOwnerId"
+                    }
                 }
             },
             "traits": {
@@ -7542,7 +7588,7 @@
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflow's storage capacity in gigabytes.</p>",
+                        "smithy.api#documentation": "<p>The workflow's storage capacity in gibibytes.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -8169,12 +8215,12 @@
                 "status": {
                     "target": "com.amazonaws.omics#VersionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe status of an annotation store version. \n</p>"
+                        "smithy.api#documentation": "<p>The status of an annotation store version.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nUse filters to focus the returned annotation store versions on a specific parameter, such as the status of the annotation store.\n</p>"
+                "smithy.api#documentation": "<p>Use filters to focus the returned annotation store versions on a specific parameter,\n          such as the status of the annotation store.</p>"
             }
         },
         "com.amazonaws.omics#ListAnnotationStoreVersionsRequest": {
@@ -8267,6 +8313,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a list of information about Annotation Stores"
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of annotation stores.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -9810,7 +9859,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Lists all shares associated with an account. \n    </p>",
+                "smithy.api#documentation": "<p>Retrieves the resource shares associated with an account. Use the filter parameter to \n             retrieve a specific subset of the shares.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
                 },
@@ -9834,27 +9883,27 @@
                 "resourceOwner": {
                     "target": "com.amazonaws.omics#ResourceOwner",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The account that owns the analytics store shared. \n    </p>",
+                        "smithy.api#documentation": "<p>The account that owns the resource shares.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "filter": {
                     "target": "com.amazonaws.omics#Filter",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Attributes used to filter for a specific subset of shares. \n    </p>"
+                        "smithy.api#documentation": "<p>Attributes that you use to filter for a specific subset of resource shares.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results.\n    </p>",
+                        "smithy.api#documentation": "<p>Next token returned in the response of a previous ListReadSetUploadPartsRequest call.\n      Used to get the next page of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The maximum number of shares to return in one page of results.\n    </p>",
+                        "smithy.api#documentation": "<p>The maximum number of shares to return in one page of results.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -9869,7 +9918,7 @@
                 "shares": {
                     "target": "com.amazonaws.omics#ShareDetailsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The shares available and their meta details. \n    </p>",
+                        "smithy.api#documentation": "<p>The shares available and their metadata details.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10118,6 +10167,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a list of metadata for Variant Stores"
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of variant stores.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -10275,14 +10327,14 @@
                 "type": {
                     "target": "com.amazonaws.omics#WorkflowType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflows' type.</p>",
+                        "smithy.api#documentation": "<p>Filter the list by workflow type.</p>",
                         "smithy.api#httpQuery": "type"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.omics#WorkflowName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflows' name.</p>",
+                        "smithy.api#documentation": "<p>Filter the list by workflow name.</p>",
                         "smithy.api#httpQuery": "name"
                     }
                 },
@@ -10315,7 +10367,7 @@
                 "items": {
                     "target": "com.amazonaws.omics#WorkflowList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflows' items.</p>"
+                        "smithy.api#documentation": "<p>A list of workflow items.</p>"
                     }
                 },
                 "nextToken": {
@@ -12865,7 +12917,7 @@
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The run's storage capacity.</p>",
+                        "smithy.api#documentation": "<p>The run's storage capacity in gibibytes. For dynamic storage, \n      after the run has completed, this value is the maximum amount of storage\n      used during the run.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -12888,6 +12940,12 @@
                     "target": "com.amazonaws.omics#RunTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>When the run stopped.</p>"
+                    }
+                },
+                "storageType": {
+                    "target": "com.amazonaws.omics#StorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run's storage type.</p>"
                     }
                 }
             },
@@ -13586,60 +13644,66 @@
                 "shareId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID for a share offer for an analytics store .\n    </p>"
+                        "smithy.api#documentation": "<p>The ID of the resource share.</p>"
                     }
                 },
                 "resourceArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The resource Arn of the analytics store being shared. \n    </p>"
+                        "smithy.api#documentation": "<p>The Arn of the shared resource. </p>"
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the shared resource. </p>"
                     }
                 },
                 "principalSubscriber": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The principal subscriber is the account the analytics store data is being shared with. \n    </p>"
+                        "smithy.api#documentation": "<p>The principal subscriber is the account that is sharing the resource.</p>"
                     }
                 },
                 "ownerId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The account ID for the data owner. The owner creates the share offer. \n    </p>"
+                        "smithy.api#documentation": "<p>The account ID for the data owner. The owner creates the resource share.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.omics#ShareStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status of a share. \n    </p>"
+                        "smithy.api#documentation": "<p>The status of the share.</p>"
                     }
                 },
                 "statusMessage": {
                     "target": "com.amazonaws.omics#StatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status message for a share. It provides more details on the status of the share.\n    </p>"
+                        "smithy.api#documentation": "<p>The status message for a resource share. It provides additional details about the share status.</p>"
                     }
                 },
                 "shareName": {
                     "target": "com.amazonaws.omics#ShareName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of the share. \n    </p>"
+                        "smithy.api#documentation": "<p>The name of the resource share.</p>"
                     }
                 },
                 "creationTime": {
                     "target": "com.amazonaws.omics#CreationTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The timestamp for when the share was created. \n    </p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the resource share was created.</p>"
                     }
                 },
                 "updateTime": {
                     "target": "com.amazonaws.omics#UpdateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The timestamp of the share update. \n    </p>"
+                        "smithy.api#documentation": "<p>The timestamp of the resource share update.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      The details of a share. \n    </p>"
+                "smithy.api#documentation": "<p>The details of a resource share.</p>"
             }
         },
         "com.amazonaws.omics#ShareDetailsList": {
@@ -13656,6 +13720,28 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.omics#ShareResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VARIANT_STORE",
+                        "name": "VARIANT_STORE",
+                        "documentation": "The share is on a variant store"
+                    },
+                    {
+                        "value": "ANNOTATION_STORE",
+                        "name": "ANNOTATION_STORE",
+                        "documentation": "The share is on an annotation store"
+                    },
+                    {
+                        "value": "WORKFLOW",
+                        "name": "WORKFLOW",
+                        "documentation": "The share is on a workflow"
+                    }
+                ]
             }
         },
         "com.amazonaws.omics#ShareStatus": {
@@ -14520,7 +14606,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The\n      remaining parameters are copied from the previous run.</p>\n         <p>The total number of runs in your account is subject to a quota per Region. To avoid\n      needing to delete runs manually, you can set the retention mode to <code>REMOVE</code>.\n      Runs with this setting are deleted automatically when the run quoata is exceeded.</p>",
+                "smithy.api#documentation": "<p>Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The\n      remaining parameters are copied from the previous run.</p>\n         <p>StartRun will not support re-run for a workflow that is shared with you.</p>\n         <p>The total number of runs in your account is subject to a quota per Region. To avoid\n      needing to delete runs manually, you can set the retention mode to <code>REMOVE</code>.\n      Runs with this setting are deleted automatically when the run quoata is exceeded.</p>\n         <p>By default, the run uses STATIC storage. For STATIC storage, set the <code>storageCapacity</code> field. \n      You can set the storage type to DYNAMIC. You do not set <code>storageCapacity</code>,\n      because HealthOmics dynamically scales the storage up or down as required.\n      For more information about static and dynamic storage, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html\">Running workflows</a> \n      in the <i>AWS HealthOmics User Guide</i>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "workflows-"
                 },
@@ -14590,7 +14676,7 @@
                 "storageCapacity": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>A storage capacity for the run in gibibytes.</p>",
+                        "smithy.api#documentation": "<p>A storage capacity for the run in gibibytes. This field is not required if the storage type is dynamic\n      (the system ignores any value that you enter).</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 100000
@@ -14627,6 +14713,18 @@
                     "target": "com.amazonaws.omics#RunRetentionMode",
                     "traits": {
                         "smithy.api#documentation": "<p>The retention mode for the run.</p>"
+                    }
+                },
+                "storageType": {
+                    "target": "com.amazonaws.omics#StorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run's storage type. By default, the run uses STATIC storage type, which allocates a fixed amount of storage.\n    If you set the storage type to DYNAMIC, HealthOmics dynamically scales the storage up \n    or down, based on file system utilization.</p>"
+                    }
+                },
+                "workflowOwnerId": {
+                    "target": "com.amazonaws.omics#WorkflowOwnerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow owner. </p>"
                     }
                 }
             },
@@ -14781,6 +14879,10 @@
                 "target": "com.amazonaws.omics#ShareStatus"
             },
             "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
                 "smithy.api#uniqueItems": {}
             }
         },
@@ -14790,6 +14892,25 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.omics#StorageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "STATIC",
+                        "value": "STATIC"
+                    },
+                    {
+                        "name": "DYNAMIC",
+                        "value": "DYNAMIC"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
                 }
             }
         },
@@ -15333,6 +15454,19 @@
                 "smithy.api#documentation": "<p>\nThe options for a TSV file.\n</p>"
             }
         },
+        "com.amazonaws.omics#TypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#ShareResourceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.omics#UntagResource": {
             "type": "operation",
             "input": {
@@ -15437,6 +15571,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update information about the Annotation Store"
+                },
                 "smithy.api#documentation": "<p>Updates an annotation store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -15810,6 +15947,9 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update metadata about the Variant Store"
+                },
                 "smithy.api#documentation": "<p>Updates a variant store.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "analytics-"
@@ -16295,6 +16435,9 @@
             },
             "list": {
                 "target": "com.amazonaws.omics#ListVariantStores"
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents a resource that stores variant data"
             }
         },
         "com.amazonaws.omics#VariantStoreItem": {
@@ -16720,6 +16863,12 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#WorkflowOwnerId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
         "com.amazonaws.omics#WorkflowParameter": {

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a share of an analytics store.
+// Deletes a resource share. If you are the resource owner, the subscriber will no
+// longer have access to the shared resource. If you are the subscriber, this
+// operation deletes your access to the share.
 func (c *Client) DeleteShare(ctx context.Context, params *DeleteShareInput, optFns ...func(*Options)) (*DeleteShareOutput, error) {
 	if params == nil {
 		params = &DeleteShareInput{}
@@ -29,7 +31,7 @@ func (c *Client) DeleteShare(ctx context.Context, params *DeleteShareInput, optF
 
 type DeleteShareInput struct {
 
-	// The ID for the share request to be deleted.
+	// The ID for the resource share to be deleted.
 	//
 	// This member is required.
 	ShareId *string

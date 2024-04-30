@@ -11,7 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Alexa Skill configuration for the SIP media application.
+// Updates the Alexa Skill configuration for the SIP media application. Due to
+// changes made by the Amazon Alexa service, this API is no longer available for
+// use. For more information, refer to the Alexa Smart Properties (https://developer.amazon.com/en-US/alexa/alexasmartproperties)
+// page.
+//
+// Deprecated: Due to changes made by the Amazon Alexa service, this API is no
+// longer available for use. For more information, refer to the Alexa Smart
+// Properties page(https://developer.amazon.com/en-US/alexa/alexasmartproperties).
 func (c *Client) PutSipMediaApplicationAlexaSkillConfiguration(ctx context.Context, params *PutSipMediaApplicationAlexaSkillConfigurationInput, optFns ...func(*Options)) (*PutSipMediaApplicationAlexaSkillConfigurationOutput, error) {
 	if params == nil {
 		params = &PutSipMediaApplicationAlexaSkillConfigurationInput{}

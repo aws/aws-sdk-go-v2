@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts a share for an analytics store.
+// Accept a resource share request.
 func (c *Client) AcceptShare(ctx context.Context, params *AcceptShareInput, optFns ...func(*Options)) (*AcceptShareOutput, error) {
 	if params == nil {
 		params = &AcceptShareInput{}
@@ -29,7 +29,7 @@ func (c *Client) AcceptShare(ctx context.Context, params *AcceptShareInput, optF
 
 type AcceptShareInput struct {
 
-	// The ID for a share offer for analytics store data.
+	// The ID of the resource share.
 	//
 	// This member is required.
 	ShareId *string
@@ -39,7 +39,7 @@ type AcceptShareInput struct {
 
 type AcceptShareOutput struct {
 
-	// The status of an analytics store share.
+	// The status of the resource share.
 	Status types.ShareStatus
 
 	// Metadata pertaining to the operation's result.

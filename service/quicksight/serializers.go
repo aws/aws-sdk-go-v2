@@ -298,6 +298,13 @@ func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAcc
 		}
 	}
 
+	if v.AdminProGroup != nil {
+		ok := object.Key("AdminProGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.AdminProGroup, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.AuthenticationMethod) > 0 {
 		ok := object.Key("AuthenticationMethod")
 		ok.String(string(v.AuthenticationMethod))
@@ -306,6 +313,13 @@ func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAcc
 	if v.AuthorGroup != nil {
 		ok := object.Key("AuthorGroup")
 		if err := awsRestjson1_serializeDocumentGroupsList(v.AuthorGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AuthorProGroup != nil {
+		ok := object.Key("AuthorProGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.AuthorProGroup, ok); err != nil {
 			return err
 		}
 	}
@@ -353,6 +367,13 @@ func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAcc
 	if v.ReaderGroup != nil {
 		ok := object.Key("ReaderGroup")
 		if err := awsRestjson1_serializeDocumentGroupsList(v.ReaderGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReaderProGroup != nil {
+		ok := object.Key("ReaderProGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.ReaderProGroup, ok); err != nil {
 			return err
 		}
 	}
@@ -14621,6 +14642,94 @@ func awsRestjson1_serializeOpDocumentUpdateRoleCustomPermissionInput(v *UpdateRo
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateSPICECapacityConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateSPICECapacityConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateSPICECapacityConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSPICECapacityConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/spice-capacity-configuration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateSPICECapacityConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateSPICECapacityConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateSPICECapacityConfigurationInput(v *UpdateSPICECapacityConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateSPICECapacityConfigurationInput(v *UpdateSPICECapacityConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PurchaseMode) > 0 {
+		ok := object.Key("PurchaseMode")
+		ok.String(string(v.PurchaseMode))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateTemplate struct {
 }
 
@@ -16212,11 +16321,30 @@ func awsRestjson1_serializeDocumentAnonymousUserEmbeddingExperienceConfiguration
 		}
 	}
 
+	if v.GenerativeQnA != nil {
+		ok := object.Key("GenerativeQnA")
+		if err := awsRestjson1_serializeDocumentAnonymousUserGenerativeQnAEmbeddingConfiguration(v.GenerativeQnA, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QSearchBar != nil {
 		ok := object.Key("QSearchBar")
 		if err := awsRestjson1_serializeDocumentAnonymousUserQSearchBarEmbeddingConfiguration(v.QSearchBar, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAnonymousUserGenerativeQnAEmbeddingConfiguration(v *types.AnonymousUserGenerativeQnAEmbeddingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InitialTopicId != nil {
+		ok := object.Key("InitialTopicId")
+		ok.String(*v.InitialTopicId)
 	}
 
 	return nil
@@ -25158,6 +25286,23 @@ func awsRestjson1_serializeDocumentGaugeChartArcConditionalFormatting(v *types.G
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGaugeChartColorConfiguration(v *types.GaugeChartColorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackgroundColor != nil {
+		ok := object.Key("BackgroundColor")
+		ok.String(*v.BackgroundColor)
+	}
+
+	if v.ForegroundColor != nil {
+		ok := object.Key("ForegroundColor")
+		ok.String(*v.ForegroundColor)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGaugeChartConditionalFormatting(v *types.GaugeChartConditionalFormatting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25209,6 +25354,13 @@ func awsRestjson1_serializeDocumentGaugeChartConditionalFormattingOptionList(v [
 func awsRestjson1_serializeDocumentGaugeChartConfiguration(v *types.GaugeChartConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ColorConfiguration != nil {
+		ok := object.Key("ColorConfiguration")
+		if err := awsRestjson1_serializeDocumentGaugeChartColorConfiguration(v.ColorConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DataLabels != nil {
 		ok := object.Key("DataLabels")
@@ -31573,6 +31725,13 @@ func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguratio
 		}
 	}
 
+	if v.GenerativeQnA != nil {
+		ok := object.Key("GenerativeQnA")
+		if err := awsRestjson1_serializeDocumentRegisteredUserGenerativeQnAEmbeddingConfiguration(v.GenerativeQnA, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QSearchBar != nil {
 		ok := object.Key("QSearchBar")
 		if err := awsRestjson1_serializeDocumentRegisteredUserQSearchBarEmbeddingConfiguration(v.QSearchBar, ok); err != nil {
@@ -31585,6 +31744,18 @@ func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguratio
 		if err := awsRestjson1_serializeDocumentRegisteredUserQuickSightConsoleEmbeddingConfiguration(v.QuickSightConsole, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRegisteredUserGenerativeQnAEmbeddingConfiguration(v *types.RegisteredUserGenerativeQnAEmbeddingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InitialTopicId != nil {
+		ok := object.Key("InitialTopicId")
+		ok.String(*v.InitialTopicId)
 	}
 
 	return nil

@@ -63,6 +63,30 @@ type ActionExecution struct {
 	noSmithyDocumentSerde
 }
 
+// A request from an end user signalling an intent to perform an Amazon Q Business
+// plugin action during a streaming chat.
+type ActionExecutionEvent struct {
+
+	// A mapping of field names to the field values in input that an end user provides
+	// to Amazon Q Business requests to perform their plugin action.
+	//
+	// This member is required.
+	Payload map[string]ActionExecutionPayloadField
+
+	// A string used to retain information about the hierarchical contexts within a
+	// action execution event payload.
+	//
+	// This member is required.
+	PayloadFieldNameSeparator *string
+
+	// The identifier of the plugin for which the action is being requested.
+	//
+	// This member is required.
+	PluginId *string
+
+	noSmithyDocumentSerde
+}
+
 // A user input field in an plugin action execution payload.
 type ActionExecutionPayloadField struct {
 
@@ -97,12 +121,56 @@ type ActionReview struct {
 	noSmithyDocumentSerde
 }
 
+// An output event that Amazon Q Business returns to an user who wants to perform
+// a plugin action during a streaming chat conversation. It contains information
+// about the selected action with a list of possible user input fields, some
+// pre-populated by Amazon Q Business.
+type ActionReviewEvent struct {
+
+	// The identifier of the conversation with which the action review event is
+	// associated.
+	ConversationId *string
+
+	// Field values that an end user needs to provide to Amazon Q Business for Amazon
+	// Q Business to perform the requested plugin action.
+	Payload map[string]ActionReviewPayloadField
+
+	// A string used to retain information about the hierarchical contexts within an
+	// action review event payload.
+	PayloadFieldNameSeparator *string
+
+	// The identifier of the plugin associated with the action review event.
+	PluginId *string
+
+	// The type of plugin.
+	PluginType PluginType
+
+	// The identifier of an Amazon Q Business AI generated associated with the action
+	// review event.
+	SystemMessageId *string
+
+	// The identifier of the conversation with which the plugin action is associated.
+	UserMessageId *string
+
+	noSmithyDocumentSerde
+}
+
 // A user input field in an plugin action review payload.
 type ActionReviewPayloadField struct {
+
+	// The expected data format for the action review input field value. For example,
+	// in PTO request, from and to would be of datetime allowed format.
+	AllowedFormat *string
 
 	// Information about the field values that an end user can use to provide to
 	// Amazon Q Business for Amazon Q Business to perform the requested plugin action.
 	AllowedValues []ActionReviewPayloadFieldAllowedValue
+
+	// The field level description of each action review input field. This could be an
+	// explanation of the field. In the Amazon Q Business web experience, these
+	// descriptions could be used to display as tool tips to help users understand the
+	// field.
+	DisplayDescription *string
 
 	// The name of the field.
 	DisplayName *string
@@ -134,6 +202,39 @@ type ActionReviewPayloadFieldAllowedValue struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains details about the OpenAPI schema for a custom plugin. For more
+// information, see custom plugin OpenAPI schemas (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/custom-plugin.html#plugins-api-schema)
+// . You can either include the schema directly in the payload field or you can
+// upload it to an S3 bucket and specify the S3 bucket location in the s3 field.
+//
+// The following types satisfy this interface:
+//
+//	APISchemaMemberPayload
+//	APISchemaMemberS3
+type APISchema interface {
+	isAPISchema()
+}
+
+// The JSON or YAML-formatted payload defining the OpenAPI schema for a custom
+// plugin.
+type APISchemaMemberPayload struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*APISchemaMemberPayload) isAPISchema() {}
+
+// Contains details about the S3 object containing the OpenAPI schema for a custom
+// plugin. The schema could be in either JSON or YAML format.
+type APISchemaMemberS3 struct {
+	Value S3
+
+	noSmithyDocumentSerde
+}
+
+func (*APISchemaMemberS3) isAPISchema() {}
 
 // Summary information for an Amazon Q Business application.
 type Application struct {
@@ -197,6 +298,16 @@ type AttachmentInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A file input event activated by a end user request to upload files into their
+// web experience chat.
+type AttachmentInputEvent struct {
+
+	// A file directly uploaded into a web experience chat.
+	Attachment *AttachmentInput
 
 	noSmithyDocumentSerde
 }
@@ -278,6 +389,57 @@ type AttributeFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A request made by Amazon Q Business to a third paty authentication server to
+// authenticate a custom plugin user.
+type AuthChallengeRequest struct {
+
+	// The URL sent by Amazon Q Business to the third party authentication server to
+	// authenticate a custom plugin user through an OAuth protocol.
+	//
+	// This member is required.
+	AuthorizationUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// An authentication verification event activated by an end user request to use a
+// custom plugin.
+type AuthChallengeRequestEvent struct {
+
+	// The URL sent by Amazon Q Business to a third party authentication server in
+	// response to an authentication verification event activated by an end user
+	// request to use a custom plugin.
+	//
+	// This member is required.
+	AuthorizationUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details of the authentication information received from a third party
+// authentication server in response to an authentication challenge.
+type AuthChallengeResponse struct {
+
+	// The mapping of key-value pairs in an authentication challenge response.
+	//
+	// This member is required.
+	ResponseMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An authentication verification event response by a third party authentication
+// server to Amazon Q Business.
+type AuthChallengeResponseEvent struct {
+
+	// The mapping of key-value pairs in an authentication challenge response.
+	//
+	// This member is required.
+	ResponseMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the basic authentication credentials used to configure a
 // plugin.
 type BasicAuthConfiguration struct {
@@ -328,6 +490,77 @@ type BlockedPhrasesConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// The streaming input for the Chat API.
+//
+// The following types satisfy this interface:
+//
+//	ChatInputStreamMemberActionExecutionEvent
+//	ChatInputStreamMemberAttachmentEvent
+//	ChatInputStreamMemberAuthChallengeResponseEvent
+//	ChatInputStreamMemberConfigurationEvent
+//	ChatInputStreamMemberEndOfInputEvent
+//	ChatInputStreamMemberTextEvent
+type ChatInputStream interface {
+	isChatInputStream()
+}
+
+// A request from an end user to perform an Amazon Q Business plugin action.
+type ChatInputStreamMemberActionExecutionEvent struct {
+	Value ActionExecutionEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberActionExecutionEvent) isChatInputStream() {}
+
+// A request by an end user to upload a file during chat.
+type ChatInputStreamMemberAttachmentEvent struct {
+	Value AttachmentInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberAttachmentEvent) isChatInputStream() {}
+
+// An authentication verification event response by a third party authentication
+// server to Amazon Q Business.
+type ChatInputStreamMemberAuthChallengeResponseEvent struct {
+	Value AuthChallengeResponseEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberAuthChallengeResponseEvent) isChatInputStream() {}
+
+// A configuration event activated by an end user request to select a specific
+// chat mode.
+type ChatInputStreamMemberConfigurationEvent struct {
+	Value ConfigurationEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberConfigurationEvent) isChatInputStream() {}
+
+// The end of the streaming input for the Chat API.
+type ChatInputStreamMemberEndOfInputEvent struct {
+	Value EndOfInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberEndOfInputEvent) isChatInputStream() {}
+
+// Information about the payload of the ChatInputStream event containing the end
+// user message input.
+type ChatInputStreamMemberTextEvent struct {
+	Value TextInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberTextEvent) isChatInputStream() {}
+
 // Configuration information for Amazon Q Business conversation modes. For more
 // information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
 // and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
@@ -348,6 +581,99 @@ type ChatModeConfigurationMemberPluginConfiguration struct {
 }
 
 func (*ChatModeConfigurationMemberPluginConfiguration) isChatModeConfiguration() {}
+
+// The streaming output for the Chat API.
+//
+// The following types satisfy this interface:
+//
+//	ChatOutputStreamMemberActionReviewEvent
+//	ChatOutputStreamMemberAuthChallengeRequestEvent
+//	ChatOutputStreamMemberFailedAttachmentEvent
+//	ChatOutputStreamMemberMetadataEvent
+//	ChatOutputStreamMemberTextEvent
+type ChatOutputStream interface {
+	isChatOutputStream()
+}
+
+// A request from Amazon Q Business to the end user for information Amazon Q
+// Business needs to successfully complete a requested plugin action.
+type ChatOutputStreamMemberActionReviewEvent struct {
+	Value ActionReviewEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberActionReviewEvent) isChatOutputStream() {}
+
+// An authentication verification event activated by an end user request to use a
+// custom plugin.
+type ChatOutputStreamMemberAuthChallengeRequestEvent struct {
+	Value AuthChallengeRequestEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberAuthChallengeRequestEvent) isChatOutputStream() {}
+
+// A failed file upload event during a web experience chat.
+type ChatOutputStreamMemberFailedAttachmentEvent struct {
+	Value FailedAttachmentEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberFailedAttachmentEvent) isChatOutputStream() {}
+
+// A metadata event for a AI-generated text output message in a Amazon Q Business
+// conversation.
+type ChatOutputStreamMemberMetadataEvent struct {
+	Value MetadataEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberMetadataEvent) isChatOutputStream() {}
+
+// Information about the payload of the ChatOutputStream event containing the
+// AI-generated message output.
+type ChatOutputStreamMemberTextEvent struct {
+	Value TextOutputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberTextEvent) isChatOutputStream() {}
+
+// A configuration event activated by an end user request to select a specific
+// chat mode.
+type ConfigurationEvent struct {
+
+	// Enables filtering of responses based on document attributes or metadata fields.
+	AttributeFilter *AttributeFilter
+
+	// The chat modes available to an Amazon Q Business end user.
+	//   - RETRIEVAL_MODE - The default chat mode for an Amazon Q Business application.
+	//   When this mode is enabled, Amazon Q Business generates responses only from data
+	//   sources connected to an Amazon Q Business application.
+	//   - CREATOR_MODE - By selecting this mode, users can choose to generate
+	//   responses only from the LLM knowledge, without consulting connected data
+	//   sources, for a chat request.
+	//   - PLUGIN_MODE - By selecting this mode, users can choose to use plugins in
+	//   chat.
+	// For more information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
+	// , Plugins (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html)
+	// , and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
+	// .
+	ChatMode ChatMode
+
+	// Configuration information for Amazon Q Business conversation modes. For more
+	// information, see Admin controls and guardrails (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html)
+	// and Conversation settings (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope)
+	// .
+	ChatModeConfiguration ChatModeConfiguration
+
+	noSmithyDocumentSerde
+}
 
 // A rule for configuring how Amazon Q Business responds when it encounters a a
 // blocked topic. You can configure a custom message to inform your end users that
@@ -399,6 +725,28 @@ type CreatorModeConfiguration struct {
 	//
 	// This member is required.
 	CreatorModeControl CreatorModeControl
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information required to create a custom plugin.
+type CustomPluginConfiguration struct {
+
+	// Contains either details about the S3 object containing the OpenAPI schema for
+	// the action group or the JSON or YAML-formatted payload defining the schema.
+	//
+	// This member is required.
+	ApiSchema APISchema
+
+	// The type of OpenAPI schema to use.
+	//
+	// This member is required.
+	ApiSchemaType APISchemaType
+
+	// A description for your custom plugin configuration.
+	//
+	// This member is required.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -673,8 +1021,8 @@ type DocumentAttributeCondition struct {
 
 	// The identifier of the document attribute used for the condition. For example,
 	// 'Source_URI' could be an identifier for the attribute or metadata field that
-	// contains source URIs associated with the documents. Amazon Kendra currently does
-	// not support _document_body as an attribute key used for the condition.
+	// contains source URIs associated with the documents. Amazon Q Business currently
+	// does not support _document_body as an attribute key used for the condition.
 	//
 	// This member is required.
 	Operator DocumentEnrichmentConditionOperator
@@ -856,29 +1204,25 @@ type DocumentEnrichmentConfiguration struct {
 
 	// Provides the configuration information for invoking a Lambda function in Lambda
 	// to alter document metadata and content when ingesting documents into Amazon Q
-	// Business. You can configure your Lambda function using
-	// PreExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
-	// if you want to apply advanced alterations on the original or raw documents. If
-	// you want to apply advanced alterations on the Amazon Q Business structured
-	// documents, you must configure your Lambda function using
-	// PostExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
-	// . You can only invoke one Lambda function. However, this function can invoke
-	// other functions it requires. For more information, see Custom document
-	// enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
+	// Business. You can configure your Lambda function using the
+	// PreExtractionHookConfiguration parameter if you want to apply advanced
+	// alterations on the original or raw documents. If you want to apply advanced
+	// alterations on the Amazon Q Business structured documents, you must configure
+	// your Lambda function using PostExtractionHookConfiguration . You can only invoke
+	// one Lambda function. However, this function can invoke other functions it
+	// requires. For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
 	// .
 	PostExtractionHookConfiguration *HookConfiguration
 
 	// Provides the configuration information for invoking a Lambda function in Lambda
 	// to alter document metadata and content when ingesting documents into Amazon Q
-	// Business. You can configure your Lambda function using
-	// PreExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
-	// if you want to apply advanced alterations on the original or raw documents. If
-	// you want to apply advanced alterations on the Amazon Q Business structured
-	// documents, you must configure your Lambda function using
-	// PostExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
-	// . You can only invoke one Lambda function. However, this function can invoke
-	// other functions it requires. For more information, see Custom document
-	// enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
+	// Business. You can configure your Lambda function using the
+	// PreExtractionHookConfiguration parameter if you want to apply advanced
+	// alterations on the original or raw documents. If you want to apply advanced
+	// alterations on the Amazon Q Business structured documents, you must configure
+	// your Lambda function using PostExtractionHookConfiguration . You can only invoke
+	// one Lambda function. However, this function can invoke other functions it
+	// requires. For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
 	// .
 	PreExtractionHookConfiguration *HookConfiguration
 
@@ -909,6 +1253,11 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The end of the streaming input for the Chat API.
+type EndOfInputEvent struct {
+	noSmithyDocumentSerde
+}
+
 // Provides information about a data source sync error.
 type ErrorDetail struct {
 
@@ -917,6 +1266,24 @@ type ErrorDetail struct {
 
 	// The message explaining the data source sync error.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A failed file upload during web experience chat.
+type FailedAttachmentEvent struct {
+
+	// The details of a file uploaded during chat.
+	Attachment *AttachmentOutput
+
+	// The identifier of the conversation associated with the failed file upload.
+	ConversationId *string
+
+	// The identifier of the AI-generated message associated with the file upload.
+	SystemMessageId *string
+
+	// The identifier of the end user chat message associated with the file upload.
+	UserMessageId *string
 
 	noSmithyDocumentSerde
 }
@@ -982,15 +1349,13 @@ type GroupSummary struct {
 
 // Provides the configuration information for invoking a Lambda function in Lambda
 // to alter document metadata and content when ingesting documents into Amazon Q
-// Business. You can configure your Lambda function using
-// PreExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
-// if you want to apply advanced alterations on the original or raw documents. If
-// you want to apply advanced alterations on the Amazon Q Business structured
-// documents, you must configure your Lambda function using
-// PostExtractionHookConfiguration (https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentEnrichmentConfiguration.html)
-// . You can only invoke one Lambda function. However, this function can invoke
-// other functions it requires. For more information, see Custom document
-// enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
+// Business. You can configure your Lambda function using the
+// PreExtractionHookConfiguration parameter if you want to apply advanced
+// alterations on the original or raw documents. If you want to apply advanced
+// alterations on the Amazon Q Business structured documents, you must configure
+// your Lambda function using PostExtractionHookConfiguration . You can only invoke
+// one Lambda function. However, this function can invoke other functions it
+// requires. For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
 // .
 type HookConfiguration struct {
 
@@ -1197,6 +1562,31 @@ type MessageUsefulnessFeedback struct {
 	noSmithyDocumentSerde
 }
 
+// A metadata event for a AI-generated text output message in a Amazon Q Business
+// conversation, containing associated metadata generated.
+type MetadataEvent struct {
+
+	// The identifier of the conversation with which the generated metadata is
+	// associated.
+	ConversationId *string
+
+	// The final text output message generated by the system.
+	FinalTextMessage *string
+
+	// The source documents used to generate the conversation response.
+	SourceAttributions []*SourceAttribution
+
+	// The identifier of an Amazon Q Business AI generated message within the
+	// conversation.
+	SystemMessageId *string
+
+	// The identifier of an Amazon Q Business end user text input message within the
+	// conversation.
+	UserMessageId *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information for an Amazon Q Business index.
 type NativeIndexConfiguration struct {
 
@@ -1209,6 +1599,12 @@ type NativeIndexConfiguration struct {
 	// attribute data types.
 	BoostingOverride map[string]DocumentAttributeBoostingConfiguration
 
+	noSmithyDocumentSerde
+}
+
+// Information about invoking a custom plugin without any authentication or
+// authorization requirement.
+type NoAuthConfiguration struct {
 	noSmithyDocumentSerde
 }
 
@@ -1252,6 +1648,9 @@ type OAuth2ClientCredentialConfiguration struct {
 // Information about an Amazon Q Business plugin and its configuration.
 type Plugin struct {
 
+	// The status of the plugin.
+	BuildStatus PluginBuildStatus
+
 	// The timestamp for when the plugin was created.
 	CreatedAt *time.Time
 
@@ -1281,6 +1680,7 @@ type Plugin struct {
 // The following types satisfy this interface:
 //
 //	PluginAuthConfigurationMemberBasicAuthConfiguration
+//	PluginAuthConfigurationMemberNoAuthConfiguration
 //	PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration
 type PluginAuthConfiguration interface {
 	isPluginAuthConfiguration()
@@ -1295,6 +1695,15 @@ type PluginAuthConfigurationMemberBasicAuthConfiguration struct {
 }
 
 func (*PluginAuthConfigurationMemberBasicAuthConfiguration) isPluginAuthConfiguration() {}
+
+// Information about invoking a custom plugin without any authentication.
+type PluginAuthConfigurationMemberNoAuthConfiguration struct {
+	Value NoAuthConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*PluginAuthConfigurationMemberNoAuthConfiguration) isPluginAuthConfiguration() {}
 
 // Information about the OAuth 2.0 authentication credential/token used to
 // configure a plugin.
@@ -1534,6 +1943,17 @@ type SamlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the relevant text excerpt from a source that was used to generate a
+// citation text segment in an Amazon Q Business chat response.
+type SnippetExcerpt struct {
+
+	// The relevant text excerpt from a source that was used to generate a citation
+	// text segment in an Amazon Q chat response.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // The documents used to generate an Amazon Q Business web experience response.
 type SourceAttribution struct {
 
@@ -1635,6 +2055,37 @@ type TextDocumentStatistics struct {
 	noSmithyDocumentSerde
 }
 
+// An input event for a end user message in an Amazon Q Business web experience.
+type TextInputEvent struct {
+
+	// A user message in a text message input event.
+	//
+	// This member is required.
+	UserMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// An output event for an AI-generated response in an Amazon Q Business web
+// experience.
+type TextOutputEvent struct {
+
+	// The identifier of the conversation with which the text output event is
+	// associated.
+	ConversationId *string
+
+	// An AI-generated message in a TextOutputEvent .
+	SystemMessage *string
+
+	// The identifier of an AI-generated message in a TextOutputEvent .
+	SystemMessageId *string
+
+	// The identifier of an end user message in a TextOutputEvent .
+	UserMessageId *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about a text extract in a chat response that can be
 // attributed to a source document.
 type TextSegment struct {
@@ -1646,6 +2097,10 @@ type TextSegment struct {
 	// The zero-based location in the response string where the source attribution
 	// ends.
 	EndOffset *int32
+
+	// The relevant text excerpt from a source that was used to generate a citation
+	// text segment in an Amazon Q Business chat response.
+	SnippetExcerpt *SnippetExcerpt
 
 	noSmithyDocumentSerde
 }
@@ -1775,7 +2230,10 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAPISchema()                              {}
+func (*UnknownUnionMember) isChatInputStream()                        {}
 func (*UnknownUnionMember) isChatModeConfiguration()                  {}
+func (*UnknownUnionMember) isChatOutputStream()                       {}
 func (*UnknownUnionMember) isDocumentAttributeBoostingConfiguration() {}
 func (*UnknownUnionMember) isDocumentAttributeValue()                 {}
 func (*UnknownUnionMember) isDocumentContent()                        {}

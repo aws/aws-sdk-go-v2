@@ -46,7 +46,11 @@ type ChatSyncInput struct {
 	// document attributes or metadata fields.
 	AttributeFilter *types.AttributeFilter
 
-	// The chat modes available in an Amazon Q Business web experience.
+	// An authentication verification event response by a third party authentication
+	// server to Amazon Q Business.
+	AuthChallengeResponse *types.AuthChallengeResponse
+
+	// The chat modes available to an Amazon Q Business end user.
 	//   - RETRIEVAL_MODE - The default chat mode for an Amazon Q Business application.
 	//   When this mode is enabled, Amazon Q Business generates responses only from data
 	//   sources connected to an Amazon Q Business application.
@@ -90,6 +94,10 @@ type ChatSyncOutput struct {
 	// A request from Amazon Q Business to the end user for information Amazon Q
 	// Business needs to successfully complete a requested plugin action.
 	ActionReview *types.ActionReview
+
+	// An authentication verification event activated by an end user request to use a
+	// custom plugin.
+	AuthChallengeRequest *types.AuthChallengeRequest
 
 	// The identifier of the Amazon Q Business conversation.
 	ConversationId *string

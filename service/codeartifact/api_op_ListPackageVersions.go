@@ -71,8 +71,8 @@ type ListPackageVersionsInput struct {
 	//   - The namespace of a Maven package version is its groupId .
 	//   - The namespace of an npm or Swift package version is its scope .
 	//   - The namespace of a generic package is its namespace .
-	//   - Python and NuGet package versions do not contain a corresponding component,
-	//   package versions of those formats do not have a namespace.
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -110,8 +110,8 @@ type ListPackageVersionsOutput struct {
 	//   - The namespace of a Maven package version is its groupId .
 	//   - The namespace of an npm or Swift package version is its scope .
 	//   - The namespace of a generic package is its namespace .
-	//   - Python and NuGet package versions do not contain a corresponding component,
-	//   package versions of those formats do not have a namespace.
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
 	// If there are additional results, this is the token for the next set of results.

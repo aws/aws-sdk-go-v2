@@ -966,6 +966,9 @@ type DomainStatus struct {
 	// for all traffic.
 	DomainEndpointOptions *DomainEndpointOptions
 
+	// The DualStack Hosted Zone Id for the domain.
+	DomainEndpointV2HostedZoneId *string
+
 	// The status of any changes that are currently in progress for the domain.
 	DomainProcessingStatus DomainProcessingStatusType
 
@@ -986,8 +989,11 @@ type DomainStatus struct {
 	EndpointV2 *string
 
 	// The key-value pair that exists if the OpenSearch Service domain uses VPC
-	// endpoints. Example key, value :
-	// 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com' .
+	// endpoints. For example:
+	//   - IPv4 IP addresses -
+	//   'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'
+	//   - Dual stack IP addresses -
+	//   'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'
 	Endpoints map[string]string
 
 	// Version of OpenSearch or Elasticsearch that the domain is running, in the

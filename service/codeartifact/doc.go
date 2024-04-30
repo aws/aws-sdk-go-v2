@@ -14,9 +14,10 @@
 //   - Repository: A CodeArtifact repository contains a set of package versions (https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html#welcome-concepts-package-version)
 //     , each of which maps to a set of assets, or files. Repositories are polyglot, so
 //     a single repository can contain packages of any supported type. Each repository
-//     exposes endpoints for fetching and publishing packages using tools like the
-//     npm CLI, the Maven CLI ( mvn ), Python CLIs ( pip and twine ), NuGet CLIs (
-//     nuget and dotnet ), and the Swift package manager ( swift ).
+//     exposes endpoints for fetching and publishing packages using tools such as the
+//     npm CLI or the Maven CLI ( mvn ). For a list of supported package managers,
+//     see the CodeArtifact User Guide (https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html)
+//     .
 //   - Domain: Repositories are aggregated into a higher-level entity known as a
 //     domain. All package assets and metadata are stored in the domain, but are
 //     consumed through repositories. A given package asset, such as a Maven JAR file,
@@ -31,12 +32,11 @@
 //     published artifacts so that teams can find and share packages across their
 //     organization.
 //   - Package: A package is a bundle of software and the metadata required to
-//     resolve dependencies and install the software. CodeArtifact supports npm (https://docs.aws.amazon.com/codeartifact/latest/ug/using-npm.html)
-//     , PyPI (https://docs.aws.amazon.com/codeartifact/latest/ug/using-python.html)
-//     , Maven (https://docs.aws.amazon.com/codeartifact/latest/ug/using-maven) ,
-//     NuGet (https://docs.aws.amazon.com/codeartifact/latest/ug/using-nuget) , Swift (https://docs.aws.amazon.com/codeartifact/latest/ug/using-swift)
-//     , and generic (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic)
-//     package formats. In CodeArtifact, a package consists of:
+//     resolve dependencies and install the software. CodeArtifact supports npm, PyPI,
+//     Maven, NuGet, Swift, Ruby, and generic package formats. For more information
+//     about the supported package formats and how to use CodeArtifact with them, see
+//     the CodeArtifact User Guide (https://docs.aws.amazon.com/codeartifact/latest/ug/welcome.html)
+//     . In CodeArtifact, a package consists of:
 //   - A name (for example, webpack is the name of a popular npm package)
 //   - An optional namespace (for example, @types in @types/node )
 //   - A set of versions (for example, 1.0.0 , 1.0.1 , 1.0.2 , etc.)
@@ -117,6 +117,7 @@
 //   - npm
 //   - nuget
 //   - pypi
+//   - ruby
 //   - swift
 //   - GetRepositoryPermissionsPolicy : Returns the resource policy that is set on
 //     a repository.
