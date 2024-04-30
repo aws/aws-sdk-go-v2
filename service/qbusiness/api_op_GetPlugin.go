@@ -51,8 +51,14 @@ type GetPluginOutput struct {
 	// Authentication configuration information for an Amazon Q Business plugin.
 	AuthConfiguration types.PluginAuthConfiguration
 
+	// The current status of a plugin. A plugin is modified asynchronously.
+	BuildStatus types.PluginBuildStatus
+
 	// The timestamp for when the plugin was created.
 	CreatedAt *time.Time
+
+	// Configuration information required to create a custom plugin.
+	CustomPluginConfiguration *types.CustomPluginConfiguration
 
 	// The name of the plugin.
 	DisplayName *string

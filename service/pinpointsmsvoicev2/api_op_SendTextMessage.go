@@ -78,6 +78,9 @@ type SendTextMessageInput struct {
 	// PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.
 	OriginationIdentity *string
 
+	// The unique identifier for the protect configuration.
+	ProtectConfigurationId *string
+
 	// How long the text message is valid for. By default this is 72 hours.
 	TimeToLive *int32
 

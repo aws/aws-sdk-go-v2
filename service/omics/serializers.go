@@ -3645,6 +3645,10 @@ func awsRestjson1_serializeOpHttpBindingsGetWorkflowInput(v *GetWorkflowInput, e
 		encoder.SetQuery("type").String(string(v.Type))
 	}
 
+	if v.WorkflowOwnerId != nil {
+		encoder.SetQuery("workflowOwnerId").String(*v.WorkflowOwnerId)
+	}
+
 	return nil
 }
 
@@ -6168,6 +6172,11 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 		ok.Integer(*v.StorageCapacity)
 	}
 
+	if len(v.StorageType) > 0 {
+		ok := object.Key("storageType")
+		ok.String(string(v.StorageType))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -6178,6 +6187,11 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 	if v.WorkflowId != nil {
 		ok := object.Key("workflowId")
 		ok.String(*v.WorkflowId)
+	}
+
+	if v.WorkflowOwnerId != nil {
+		ok := object.Key("workflowOwnerId")
+		ok.String(*v.WorkflowOwnerId)
 	}
 
 	if len(v.WorkflowType) > 0 {
@@ -7185,6 +7199,13 @@ func awsRestjson1_serializeDocumentFilter(v *types.Filter, value smithyjson.Valu
 		}
 	}
 
+	if v.Type != nil {
+		ok := object.Key("type")
+		if err := awsRestjson1_serializeDocumentTypeList(v.Type, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7882,6 +7903,17 @@ func awsRestjson1_serializeDocumentTsvVersionOptions(v *types.TsvVersionOptions,
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTypeList(v []types.ShareResourceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

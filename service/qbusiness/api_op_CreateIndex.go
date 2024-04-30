@@ -62,6 +62,11 @@ type CreateIndexInput struct {
 	// = + - @.
 	Tags []types.Tag
 
+	// The index type that's suitable for your needs. For more information on what's
+	// included in each type of index or index tier, see Amazon Q Business tiers (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers)
+	// .
+	Type types.IndexType
+
 	noSmithyDocumentSerde
 }
 

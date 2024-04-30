@@ -26644,6 +26644,18 @@ func awsAwsjson11_serializeDocumentServiceCatalogProvisioningUpdateDetails(v *ty
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSessionChainingConfig(v *types.SessionChainingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableSessionTagChaining != nil {
+		ok := object.Key("EnableSessionTagChaining")
+		ok.Boolean(*v.EnableSessionTagChaining)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentShadowModeConfig(v *types.ShadowModeConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -30975,6 +30987,13 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingJobInput(v *CreateTrainingJob
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	if v.SessionChainingConfig != nil {
+		ok := object.Key("SessionChainingConfig")
+		if err := awsAwsjson11_serializeDocumentSessionChainingConfig(v.SessionChainingConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.StoppingCondition != nil {

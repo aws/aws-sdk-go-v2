@@ -8,6 +8,66 @@ import (
 	"time"
 )
 
+func ExampleAPISchema_outputUsage() {
+	var union types.APISchema
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.APISchemaMemberPayload:
+		_ = v.Value // Value is string
+
+	case *types.APISchemaMemberS3:
+		_ = v.Value // Value is types.S3
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *types.S3
+
+func ExampleChatInputStream_outputUsage() {
+	var union types.ChatInputStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ChatInputStreamMemberActionExecutionEvent:
+		_ = v.Value // Value is types.ActionExecutionEvent
+
+	case *types.ChatInputStreamMemberAttachmentEvent:
+		_ = v.Value // Value is types.AttachmentInputEvent
+
+	case *types.ChatInputStreamMemberAuthChallengeResponseEvent:
+		_ = v.Value // Value is types.AuthChallengeResponseEvent
+
+	case *types.ChatInputStreamMemberConfigurationEvent:
+		_ = v.Value // Value is types.ConfigurationEvent
+
+	case *types.ChatInputStreamMemberEndOfInputEvent:
+		_ = v.Value // Value is types.EndOfInputEvent
+
+	case *types.ChatInputStreamMemberTextEvent:
+		_ = v.Value // Value is types.TextInputEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EndOfInputEvent
+var _ *types.ActionExecutionEvent
+var _ *types.TextInputEvent
+var _ *types.AttachmentInputEvent
+var _ *types.ConfigurationEvent
+var _ *types.AuthChallengeResponseEvent
+
 func ExampleChatModeConfiguration_outputUsage() {
 	var union types.ChatModeConfiguration
 	// type switches can be used to check the union value
@@ -25,6 +85,40 @@ func ExampleChatModeConfiguration_outputUsage() {
 }
 
 var _ *types.PluginConfiguration
+
+func ExampleChatOutputStream_outputUsage() {
+	var union types.ChatOutputStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ChatOutputStreamMemberActionReviewEvent:
+		_ = v.Value // Value is types.ActionReviewEvent
+
+	case *types.ChatOutputStreamMemberAuthChallengeRequestEvent:
+		_ = v.Value // Value is types.AuthChallengeRequestEvent
+
+	case *types.ChatOutputStreamMemberFailedAttachmentEvent:
+		_ = v.Value // Value is types.FailedAttachmentEvent
+
+	case *types.ChatOutputStreamMemberMetadataEvent:
+		_ = v.Value // Value is types.MetadataEvent
+
+	case *types.ChatOutputStreamMemberTextEvent:
+		_ = v.Value // Value is types.TextOutputEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AuthChallengeRequestEvent
+var _ *types.FailedAttachmentEvent
+var _ *types.ActionReviewEvent
+var _ *types.MetadataEvent
+var _ *types.TextOutputEvent
 
 func ExampleDocumentAttributeBoostingConfiguration_outputUsage() {
 	var union types.DocumentAttributeBoostingConfiguration
@@ -115,6 +209,9 @@ func ExamplePluginAuthConfiguration_outputUsage() {
 	case *types.PluginAuthConfigurationMemberBasicAuthConfiguration:
 		_ = v.Value // Value is types.BasicAuthConfiguration
 
+	case *types.PluginAuthConfigurationMemberNoAuthConfiguration:
+		_ = v.Value // Value is types.NoAuthConfiguration
+
 	case *types.PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration:
 		_ = v.Value // Value is types.OAuth2ClientCredentialConfiguration
 
@@ -129,6 +226,7 @@ func ExamplePluginAuthConfiguration_outputUsage() {
 
 var _ *types.BasicAuthConfiguration
 var _ *types.OAuth2ClientCredentialConfiguration
+var _ *types.NoAuthConfiguration
 
 func ExamplePrincipal_outputUsage() {
 	var union types.Principal

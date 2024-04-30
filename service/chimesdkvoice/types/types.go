@@ -503,7 +503,10 @@ type SipMediaApplication struct {
 	noSmithyDocumentSerde
 }
 
-// The Alexa Skill configuration of a SIP media application.
+// The Alexa Skill configuration of a SIP media application. Due to changes made
+// by the Amazon Alexa service, this data type is no longer available for use. For
+// more information, refer to the Alexa Smart Properties (https://developer.amazon.com/en-US/alexa/alexasmartproperties)
+// page.
 type SipMediaApplicationAlexaSkillConfiguration struct {
 
 	// The ID of the Alexa Skill configuration.

@@ -52,9 +52,12 @@ type GetWebExperienceOutput struct {
 
 	// The authentication configuration information for your Amazon Q Business web
 	// experience.
+	//
+	// Deprecated: Property associated with legacy SAML IdP flow. Deprecated in favor
+	// of using AWS IAM Identity Center for user management.
 	AuthenticationConfiguration types.WebExperienceAuthConfiguration
 
-	// The Unix timestamp when the retriever was created.
+	// The Unix timestamp when the Amazon Q Business web experience was last created.
 	CreatedAt *time.Time
 
 	// The endpoint of your Amazon Q Business web experience.
@@ -83,7 +86,7 @@ type GetWebExperienceOutput struct {
 	// The title for your Amazon Q Business web experience.
 	Title *string
 
-	// The Unix timestamp when the data source connector was last updated.
+	// The Unix timestamp when the Amazon Q Business web experience was last updated.
 	UpdatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the role with the permission to access the

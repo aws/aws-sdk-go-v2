@@ -44,11 +44,6 @@ type CreatePluginInput struct {
 	// This member is required.
 	DisplayName *string
 
-	// The source URL used for plugin configuration.
-	//
-	// This member is required.
-	ServerUrl *string
-
 	// The type of plugin you want to create.
 	//
 	// This member is required.
@@ -57,6 +52,12 @@ type CreatePluginInput struct {
 	// A token that you provide to identify the request to create your Amazon Q
 	// Business plugin.
 	ClientToken *string
+
+	// Contains configuration for a custom plugin.
+	CustomPluginConfiguration *types.CustomPluginConfiguration
+
+	// The source URL used for plugin configuration.
+	ServerUrl *string
 
 	// A list of key-value pairs that identify or categorize the data source
 	// connector. You can also use tags to help control access to the data source
@@ -68,6 +69,9 @@ type CreatePluginInput struct {
 }
 
 type CreatePluginOutput struct {
+
+	// The current status of a plugin. A plugin is modified asynchronously.
+	BuildStatus types.PluginBuildStatus
 
 	// The Amazon Resource Name (ARN) of a plugin.
 	PluginArn *string

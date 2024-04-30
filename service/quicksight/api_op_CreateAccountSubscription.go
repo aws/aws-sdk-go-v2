@@ -70,17 +70,6 @@ type CreateAccountSubscriptionInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The edition of Amazon QuickSight that you want your account to have. Currently,
-	// you can choose from ENTERPRISE or ENTERPRISE_AND_Q . If you choose
-	// ENTERPRISE_AND_Q , the following parameters are required:
-	//   - FirstName
-	//   - LastName
-	//   - EmailAddress
-	//   - ContactNumber
-	//
-	// This member is required.
-	Edition types.Edition
-
 	// The email address that you want Amazon QuickSight to send notifications to
 	// regarding your Amazon QuickSight account or Amazon QuickSight subscription.
 	//
@@ -92,15 +81,28 @@ type CreateAccountSubscriptionInput struct {
 	ActiveDirectoryName *string
 
 	// The admin group associated with your Active Directory or IAM Identity Center
-	// account. This field is required if ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is
-	// the selected authentication method of the new Amazon QuickSight account. For
-	// more information about using IAM Identity Center in Amazon QuickSight, see
-	// Using IAM Identity Center with Amazon QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html)
+	// account. Either this field or the AdminProGroup field is required if
+	// ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method
+	// of the new Amazon QuickSight account. For more information about using IAM
+	// Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon
+	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html)
 	// in the Amazon QuickSight User Guide. For more information about using Active
 	// Directory in Amazon QuickSight, see Using Active Directory with Amazon
 	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
 	// in the Amazon QuickSight User Guide.
 	AdminGroup []string
+
+	// The admin pro group associated with your Active Directory or IAM Identity
+	// Center account. Either this field or the AdminGroup field is required if
+	// ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method
+	// of the new Amazon QuickSight account. For more information about using IAM
+	// Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon
+	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html)
+	// in the Amazon QuickSight User Guide. For more information about using Active
+	// Directory in Amazon QuickSight, see Using Active Directory with Amazon
+	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// in the Amazon QuickSight User Guide.
+	AdminProGroup []string
 
 	// The author group associated with your Active Directory or IAM Identity Center
 	// account. For more information about using IAM Identity Center in Amazon
@@ -112,6 +114,16 @@ type CreateAccountSubscriptionInput struct {
 	// in the Amazon QuickSight User Guide.
 	AuthorGroup []string
 
+	// The author pro group associated with your Active Directory or IAM Identity
+	// Center account. For more information about using IAM Identity Center in Amazon
+	// QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise
+	// Edition (https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html)
+	// in the Amazon QuickSight User Guide. For more information about using Active
+	// Directory in Amazon QuickSight, see Using Active Directory with Amazon
+	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// in the Amazon QuickSight User Guide.
+	AuthorProGroup []string
+
 	// A 10-digit phone number for the author of the Amazon QuickSight account to use
 	// for future communications. This field is required if ENTERPPRISE_AND_Q is the
 	// selected edition of the new Amazon QuickSight account.
@@ -120,6 +132,15 @@ type CreateAccountSubscriptionInput struct {
 	// The ID of the Active Directory that is associated with your Amazon QuickSight
 	// account.
 	DirectoryId *string
+
+	// The edition of Amazon QuickSight that you want your account to have. Currently,
+	// you can choose from ENTERPRISE or ENTERPRISE_AND_Q . If you choose
+	// ENTERPRISE_AND_Q , the following parameters are required:
+	//   - FirstName
+	//   - LastName
+	//   - EmailAddress
+	//   - ContactNumber
+	Edition types.Edition
 
 	// The email address of the author of the Amazon QuickSight account to use for
 	// future communications. This field is required if ENTERPPRISE_AND_Q is the
@@ -148,6 +169,16 @@ type CreateAccountSubscriptionInput struct {
 	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
 	// in the Amazon QuickSight User Guide.
 	ReaderGroup []string
+
+	// The reader pro group associated with your Active Directory or IAM Identity
+	// Center account. For more information about using IAM Identity Center in Amazon
+	// QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise
+	// Edition (https://docs.aws.amazon.com/quicksight/latest/user/sec-identity-management-identity-center.html)
+	// in the Amazon QuickSight User Guide. For more information about using Active
+	// Directory in Amazon QuickSight, see Using Active Directory with Amazon
+	// QuickSight Enterprise Edition (https://docs.aws.amazon.com/quicksight/latest/user/aws-directory-service.html)
+	// in the Amazon QuickSight User Guide.
+	ReaderProGroup []string
 
 	// The realm of the Active Directory that is associated with your Amazon
 	// QuickSight account. This field is required if ACTIVE_DIRECTORY is the selected

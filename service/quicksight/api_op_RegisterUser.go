@@ -50,11 +50,8 @@ type RegisterUserInput struct {
 	// This member is required.
 	Email *string
 
-	// Amazon QuickSight supports several ways of managing the identity of users. This
-	// parameter accepts two values:
-	//   - IAM : A user whose identity maps to an existing IAM user or role.
-	//   - QUICKSIGHT : A user whose identity is owned and managed internally by Amazon
-	//   QuickSight.
+	// The identity type that your Amazon QuickSight account uses to manage the
+	// identity of users.
 	//
 	// This member is required.
 	IdentityType types.IdentityType
@@ -98,8 +95,9 @@ type RegisterUserInput struct {
 	// QuickSight user. Amazon QuickSight custom permissions are applied through IAM
 	// policies. Therefore, they override the permissions typically granted by
 	// assigning Amazon QuickSight users to one of the default security cohorts in
-	// Amazon QuickSight (admin, author, reader). This feature is available only to
-	// Amazon QuickSight Enterprise edition subscriptions.
+	// Amazon QuickSight (admin, author, reader, admin pro, author pro, reader pro).
+	// This feature is available only to Amazon QuickSight Enterprise edition
+	// subscriptions.
 	CustomPermissionsName *string
 
 	// The type of supported external login provider that provides identity to let a

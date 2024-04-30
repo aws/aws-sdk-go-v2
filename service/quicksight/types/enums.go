@@ -3039,6 +3039,24 @@ func (PropertyUsage) Values() []PropertyUsage {
 	}
 }
 
+type PurchaseMode string
+
+// Enum values for PurchaseMode
+const (
+	PurchaseModeManual       PurchaseMode = "MANUAL"
+	PurchaseModeAutoPurchase PurchaseMode = "AUTO_PURCHASE"
+)
+
+// Values returns all known values for PurchaseMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PurchaseMode) Values() []PurchaseMode {
+	return []PurchaseMode{
+		"MANUAL",
+		"AUTO_PURCHASE",
+	}
+}
+
 type RadarChartAxesRangeScale string
 
 // Enum values for RadarChartAxesRangeScale
@@ -3298,9 +3316,12 @@ type Role string
 
 // Enum values for Role
 const (
-	RoleAdmin  Role = "ADMIN"
-	RoleAuthor Role = "AUTHOR"
-	RoleReader Role = "READER"
+	RoleAdmin     Role = "ADMIN"
+	RoleAuthor    Role = "AUTHOR"
+	RoleReader    Role = "READER"
+	RoleAdminPro  Role = "ADMIN_PRO"
+	RoleAuthorPro Role = "AUTHOR_PRO"
+	RoleReaderPro Role = "READER_PRO"
 )
 
 // Values returns all known values for Role. Note that this can be expanded in the
@@ -3311,6 +3332,9 @@ func (Role) Values() []Role {
 		"ADMIN",
 		"AUTHOR",
 		"READER",
+		"ADMIN_PRO",
+		"AUTHOR_PRO",
+		"READER_PRO",
 	}
 }
 
@@ -4325,6 +4349,9 @@ const (
 	UserRoleReader           UserRole = "READER"
 	UserRoleRestrictedAuthor UserRole = "RESTRICTED_AUTHOR"
 	UserRoleRestrictedReader UserRole = "RESTRICTED_READER"
+	UserRoleAdminPro         UserRole = "ADMIN_PRO"
+	UserRoleAuthorPro        UserRole = "AUTHOR_PRO"
+	UserRoleReaderPro        UserRole = "READER_PRO"
 )
 
 // Values returns all known values for UserRole. Note that this can be expanded in
@@ -4337,6 +4364,9 @@ func (UserRole) Values() []UserRole {
 		"READER",
 		"RESTRICTED_AUTHOR",
 		"RESTRICTED_READER",
+		"ADMIN_PRO",
+		"AUTHOR_PRO",
+		"READER_PRO",
 	}
 }
 

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all shares associated with an account.
+// Retrieves the resource shares associated with an account. Use the filter
+// parameter to retrieve a specific subset of the shares.
 func (c *Client) ListShares(ctx context.Context, params *ListSharesInput, optFns ...func(*Options)) (*ListSharesOutput, error) {
 	if params == nil {
 		params = &ListSharesInput{}
@@ -29,12 +30,12 @@ func (c *Client) ListShares(ctx context.Context, params *ListSharesInput, optFns
 
 type ListSharesInput struct {
 
-	// The account that owns the analytics store shared.
+	// The account that owns the resource shares.
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
 
-	// Attributes used to filter for a specific subset of shares.
+	// Attributes that you use to filter for a specific subset of resource shares.
 	Filter *types.Filter
 
 	// The maximum number of shares to return in one page of results.
@@ -49,7 +50,7 @@ type ListSharesInput struct {
 
 type ListSharesOutput struct {
 
-	// The shares available and their meta details.
+	// The shares available and their metadata details.
 	//
 	// This member is required.
 	Shares []types.ShareDetails

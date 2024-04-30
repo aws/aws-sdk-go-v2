@@ -1,0 +1,8 @@
+{
+    "id": "c9016f3e-1ca1-48e3-818b-affd152e3507",
+    "type": "feature",
+    "description": "Amazon Pinpoint has added two new features Multimedia services (MMS) and protect configurations. Use the three new MMS APIs to send media messages to a mobile phone which includes image, audio, text, or video files. Use the ten new protect configurations APIs to block messages to specific countries.",
+    "modules": [
+        "service/pinpointsmsvoicev2"
+    ]
+}

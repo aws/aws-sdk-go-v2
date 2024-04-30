@@ -22,6 +22,8 @@ import (
 //     destination bucket to write your signed code.
 //   - You specify the name of the source and destination buckets when calling the
 //     StartSigningJob operation.
+//   - You must ensure the S3 buckets are from the same Region as the signing
+//     profile. Cross-Region signing isn't supported.
 //   - You must also specify a request token that identifies your request to
 //     Signer.
 //

@@ -85,6 +85,9 @@ type GetIndexOutput struct {
 	// a message that explains why.
 	Status types.IndexStatus
 
+	// The type of index attached to your Amazon Q Business application.
+	Type types.IndexType
+
 	// The Unix timestamp when the Amazon Q Business index was last updated.
 	UpdatedAt *time.Time
 

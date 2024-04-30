@@ -119,6 +119,25 @@ func (FirewallDomainListStatus) Values() []FirewallDomainListStatus {
 	}
 }
 
+type FirewallDomainRedirectionAction string
+
+// Enum values for FirewallDomainRedirectionAction
+const (
+	FirewallDomainRedirectionActionInspectRedirectionDomain FirewallDomainRedirectionAction = "INSPECT_REDIRECTION_DOMAIN"
+	FirewallDomainRedirectionActionTrustRedirectionDomain   FirewallDomainRedirectionAction = "TRUST_REDIRECTION_DOMAIN"
+)
+
+// Values returns all known values for FirewallDomainRedirectionAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FirewallDomainRedirectionAction) Values() []FirewallDomainRedirectionAction {
+	return []FirewallDomainRedirectionAction{
+		"INSPECT_REDIRECTION_DOMAIN",
+		"TRUST_REDIRECTION_DOMAIN",
+	}
+}
+
 type FirewallDomainUpdateOperation string
 
 // Enum values for FirewallDomainUpdateOperation

@@ -1,0 +1,8 @@
+{
+    "id": "6e2e2676-5867-4ea5-b5c4-b4246d6d9993",
+    "type": "feature",
+    "description": "Due to changes made by the Amazon Alexa service, GetSipMediaApplicationAlexaSkillConfiguration and PutSipMediaApplicationAlexaSkillConfiguration APIs are no longer available for use. For more information, refer to the Alexa Smart Properties page.",
+    "modules": [
+        "service/chimesdkvoice"
+    ]
+}

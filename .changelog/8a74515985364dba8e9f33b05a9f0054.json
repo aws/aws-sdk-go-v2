@@ -1,0 +1,8 @@
+{
+    "id": "8a745159-8536-4dba-8e9f-33b05a9f0054",
+    "type": "feature",
+    "description": "AWS Firewall Manager now supports the network firewall service stream exception policy feature for accounts within your organization.",
+    "modules": [
+        "service/fms"
+    ]
+}

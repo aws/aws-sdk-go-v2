@@ -67,6 +67,9 @@ type SendVoiceMessageInput struct {
 	//   - SSML: When used the maximum character limit is 6000 including SSML tagging.
 	MessageBodyTextType types.VoiceMessageBodyTextType
 
+	// The unique identifier for the protect configuration.
+	ProtectConfigurationId *string
+
 	// How long the voice message is valid for. By default this is 72 hours.
 	TimeToLive *int32
 

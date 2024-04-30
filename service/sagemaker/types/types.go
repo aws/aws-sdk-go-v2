@@ -13901,6 +13901,18 @@ type ServiceCatalogProvisioningUpdateDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about attribute-based access control (ABAC) for a training
+// job.
+type SessionChainingConfig struct {
+
+	// Set to True to allow SageMaker to extract session tags from a training job
+	// creation role and reuse these tags when assuming the training job execution
+	// role.
+	EnableSessionTagChaining *bool
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of ShadowMode inference experiment type, which specifies a
 // production variant to take all the inference requests, and a shadow variant to
 // which Amazon SageMaker replicates a percentage of the inference requests. For

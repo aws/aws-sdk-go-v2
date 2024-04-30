@@ -666,6 +666,29 @@ func (SchemaValueType) Values() []SchemaValueType {
 	}
 }
 
+type ShareResourceType string
+
+// Enum values for ShareResourceType
+const (
+	// The share is on a variant store
+	ShareResourceTypeVariantStore ShareResourceType = "VARIANT_STORE"
+	// The share is on an annotation store
+	ShareResourceTypeAnnotationStore ShareResourceType = "ANNOTATION_STORE"
+	// The share is on a workflow
+	ShareResourceTypeWorkflow ShareResourceType = "WORKFLOW"
+)
+
+// Values returns all known values for ShareResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ShareResourceType) Values() []ShareResourceType {
+	return []ShareResourceType{
+		"VARIANT_STORE",
+		"ANNOTATION_STORE",
+		"WORKFLOW",
+	}
+}
+
 type ShareStatus string
 
 // Enum values for ShareStatus
@@ -695,6 +718,24 @@ func (ShareStatus) Values() []ShareStatus {
 		"DELETING",
 		"DELETED",
 		"FAILED",
+	}
+}
+
+type StorageType string
+
+// Enum values for StorageType
+const (
+	StorageTypeStatic  StorageType = "STATIC"
+	StorageTypeDynamic StorageType = "DYNAMIC"
+)
+
+// Values returns all known values for StorageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StorageType) Values() []StorageType {
+	return []StorageType{
+		"STATIC",
+		"DYNAMIC",
 	}
 }
 

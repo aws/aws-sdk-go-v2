@@ -42,6 +42,9 @@ type UpdatePluginInput struct {
 	// The authentication configuration the plugin is using.
 	AuthConfiguration types.PluginAuthConfiguration
 
+	// The configuration for a custom plugin.
+	CustomPluginConfiguration *types.CustomPluginConfiguration
+
 	// The name of the plugin.
 	DisplayName *string
 

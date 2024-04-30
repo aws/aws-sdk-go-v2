@@ -50,6 +50,26 @@ func (m *validateOpBatchPutDocument) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpChat struct {
+}
+
+func (*validateOpChat) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpChat) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ChatInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpChatInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpChatSync struct {
 }
 
@@ -1098,6 +1118,10 @@ func addOpBatchPutDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchPutDocument{}, middleware.After)
 }
 
+func addOpChatValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpChat{}, middleware.After)
+}
+
 func addOpChatSyncValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChatSync{}, middleware.After)
 }
@@ -1386,6 +1410,31 @@ func validateActionExecution(v *types.ActionExecution) error {
 	}
 }
 
+func validateActionExecutionEvent(v *types.ActionExecutionEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionExecutionEvent"}
+	if v.PluginId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PluginId"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	} else if v.Payload != nil {
+		if err := validateActionExecutionPayload(v.Payload); err != nil {
+			invalidParams.AddNested("Payload", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PayloadFieldNameSeparator == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PayloadFieldNameSeparator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateActionExecutionPayload(v map[string]types.ActionExecutionPayloadField) error {
 	if v == nil {
 		return nil
@@ -1419,6 +1468,25 @@ func validateActionExecutionPayloadField(v *types.ActionExecutionPayloadField) e
 	}
 }
 
+func validateAPISchema(v types.APISchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "APISchema"}
+	switch uv := v.(type) {
+	case *types.APISchemaMemberS3:
+		if err := validateS3(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAttachmentInput(v *types.AttachmentInput) error {
 	if v == nil {
 		return nil
@@ -1429,6 +1497,23 @@ func validateAttachmentInput(v *types.AttachmentInput) error {
 	}
 	if v.Data == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttachmentInputEvent(v *types.AttachmentInputEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachmentInputEvent"}
+	if v.Attachment != nil {
+		if err := validateAttachmentInput(v.Attachment); err != nil {
+			invalidParams.AddNested("Attachment", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1548,6 +1633,36 @@ func validateAttributeFilters(v []types.AttributeFilter) error {
 	}
 }
 
+func validateAuthChallengeResponse(v *types.AuthChallengeResponse) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthChallengeResponse"}
+	if v.ResponseMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseMap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuthChallengeResponseEvent(v *types.AuthChallengeResponseEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthChallengeResponseEvent"}
+	if v.ResponseMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseMap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBasicAuthConfiguration(v *types.BasicAuthConfiguration) error {
 	if v == nil {
 		return nil
@@ -1558,6 +1673,45 @@ func validateBasicAuthConfiguration(v *types.BasicAuthConfiguration) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChatInputStream(v types.ChatInputStream) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChatInputStream"}
+	switch uv := v.(type) {
+	case *types.ChatInputStreamMemberActionExecutionEvent:
+		if err := validateActionExecutionEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[actionExecutionEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ChatInputStreamMemberAttachmentEvent:
+		if err := validateAttachmentInputEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[attachmentEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ChatInputStreamMemberAuthChallengeResponseEvent:
+		if err := validateAuthChallengeResponseEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[authChallengeResponseEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ChatInputStreamMemberConfigurationEvent:
+		if err := validateConfigurationEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[configurationEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ChatInputStreamMemberTextEvent:
+		if err := validateTextInputEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[textEvent]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1585,6 +1739,28 @@ func validateChatModeConfiguration(v types.ChatModeConfiguration) error {
 	}
 }
 
+func validateConfigurationEvent(v *types.ConfigurationEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationEvent"}
+	if v.ChatModeConfiguration != nil {
+		if err := validateChatModeConfiguration(v.ChatModeConfiguration); err != nil {
+			invalidParams.AddNested("ChatModeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AttributeFilter != nil {
+		if err := validateAttributeFilter(v.AttributeFilter); err != nil {
+			invalidParams.AddNested("AttributeFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreatorModeConfiguration(v *types.CreatorModeConfiguration) error {
 	if v == nil {
 		return nil
@@ -1592,6 +1768,31 @@ func validateCreatorModeConfiguration(v *types.CreatorModeConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreatorModeConfiguration"}
 	if len(v.CreatorModeControl) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("CreatorModeControl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomPluginConfiguration(v *types.CustomPluginConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomPluginConfiguration"}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if len(v.ApiSchemaType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiSchemaType"))
+	}
+	if v.ApiSchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiSchema"))
+	} else if v.ApiSchema != nil {
+		if err := validateAPISchema(v.ApiSchema); err != nil {
+			invalidParams.AddNested("ApiSchema", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2380,6 +2581,21 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateTextInputEvent(v *types.TextInputEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TextInputEvent"}
+	if v.UserMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserMessage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTopicConfiguration(v *types.TopicConfiguration) error {
 	if v == nil {
 		return nil
@@ -2520,6 +2736,21 @@ func validateOpBatchPutDocumentInput(v *BatchPutDocumentInput) error {
 	}
 }
 
+func validateOpChatInput(v *ChatInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChatInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpChatSyncInput(v *ChatSyncInput) error {
 	if v == nil {
 		return nil
@@ -2536,6 +2767,11 @@ func validateOpChatSyncInput(v *ChatSyncInput) error {
 	if v.ActionExecution != nil {
 		if err := validateActionExecution(v.ActionExecution); err != nil {
 			invalidParams.AddNested("ActionExecution", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthChallengeResponse != nil {
+		if err := validateAuthChallengeResponse(v.AuthChallengeResponse); err != nil {
+			invalidParams.AddNested("AuthChallengeResponse", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AttributeFilter != nil {
@@ -2562,9 +2798,6 @@ func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
-	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
@@ -2659,14 +2892,16 @@ func validateOpCreatePluginInput(v *CreatePluginInput) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
-	if v.ServerUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServerUrl"))
-	}
 	if v.AuthConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthConfiguration"))
 	} else if v.AuthConfiguration != nil {
 		if err := validatePluginAuthConfiguration(v.AuthConfiguration); err != nil {
 			invalidParams.AddNested("AuthConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomPluginConfiguration != nil {
+		if err := validateCustomPluginConfiguration(v.CustomPluginConfiguration); err != nil {
+			invalidParams.AddNested("CustomPluginConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {
@@ -3533,6 +3768,11 @@ func validateOpUpdatePluginInput(v *UpdatePluginInput) error {
 	}
 	if v.PluginId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PluginId"))
+	}
+	if v.CustomPluginConfiguration != nil {
+		if err := validateCustomPluginConfiguration(v.CustomPluginConfiguration); err != nil {
+			invalidParams.AddNested("CustomPluginConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AuthConfiguration != nil {
 		if err := validatePluginAuthConfiguration(v.AuthConfiguration); err != nil {

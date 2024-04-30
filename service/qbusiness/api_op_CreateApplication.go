@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q Business application.
+// Creates an Amazon Q Business application. There are new tiers for Amazon Q
+// Business. Not all features in Amazon Q Business Pro are also available in Amazon
+// Q Business Lite. For information on what's included in Amazon Q Business Lite
+// and what's included in Amazon Q Business Pro, see Amazon Q Business tiers (https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers)
+// . You must use the Amazon Q Business console to assign subscription tiers to
+// users.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -34,12 +39,6 @@ type CreateApplicationInput struct {
 	// This member is required.
 	DisplayName *string
 
-	// The Amazon Resource Name (ARN) of an IAM role with permissions to access your
-	// Amazon CloudWatch logs and metrics.
-	//
-	// This member is required.
-	RoleArn *string
-
 	// An option to allow end users to upload files directly during chat.
 	AttachmentsConfiguration *types.AttachmentsConfiguration
 
@@ -57,6 +56,10 @@ type CreateApplicationInput struct {
 	// The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
 	// either creating for—or connecting to—your Amazon Q Business application.
 	IdentityCenterInstanceArn *string
+
+	// The Amazon Resource Name (ARN) of an IAM role with permissions to access your
+	// Amazon CloudWatch logs and metrics.
+	RoleArn *string
 
 	// A list of key-value pairs that identify or categorize your Amazon Q Business
 	// application. You can also use tags to help control access to the application.

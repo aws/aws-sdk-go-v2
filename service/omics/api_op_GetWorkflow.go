@@ -15,7 +15,8 @@ import (
 	"time"
 )
 
-// Gets information about a workflow.
+// Gets information about a workflow. If a workflow is shared with you, you cannot
+// export the workflow.
 func (c *Client) GetWorkflow(ctx context.Context, params *GetWorkflowInput, optFns ...func(*Options)) (*GetWorkflowOutput, error) {
 	if params == nil {
 		params = &GetWorkflowInput{}
@@ -43,6 +44,9 @@ type GetWorkflowInput struct {
 
 	// The workflow's type.
 	Type types.WorkflowType
+
+	// The ID of the workflow owner.
+	WorkflowOwnerId *string
 
 	noSmithyDocumentSerde
 }
@@ -91,7 +95,7 @@ type GetWorkflowOutput struct {
 	// The workflow's status message.
 	StatusMessage *string
 
-	// The workflow's storage capacity in gigabytes.
+	// The workflow's storage capacity in gibibytes.
 	StorageCapacity *int32
 
 	// The workflow's tags.

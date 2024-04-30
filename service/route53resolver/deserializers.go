@@ -9390,6 +9390,15 @@ func awsAwsjson11_deserializeDocumentFirewallRule(v **types.FirewallRule, value 
 				sv.FirewallDomainListId = ptr.String(jtv)
 			}
 
+		case "FirewallDomainRedirectionAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FirewallDomainRedirectionAction to be of type string, got %T instead", value)
+				}
+				sv.FirewallDomainRedirectionAction = types.FirewallDomainRedirectionAction(jtv)
+			}
+
 		case "FirewallRuleGroupId":
 			if value != nil {
 				jtv, ok := value.(string)

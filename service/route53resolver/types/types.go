@@ -279,6 +279,15 @@ type FirewallRule struct {
 	// The ID of the domain list that's used in the rule.
 	FirewallDomainListId *string
 
+	// How you want the the rule to evaluate DNS redirection in the DNS redirection
+	// chain, such as CNAME, DNAME, ot ALIAS. Inspect_Redirection_Domain (Default)
+	// inspects all domains in the redirection chain. The individual domains in the
+	// redirection chain must be added to the allow domain list.
+	// Trust_Redirection_Domain inspects only the first domain in the redirection
+	// chain. You don't need to add the subsequent domains in the domain in the
+	// redirection list to the domain alloww list.
+	FirewallDomainRedirectionAction FirewallDomainRedirectionAction
+
 	// The unique identifier of the firewall rule group of the rule.
 	FirewallRuleGroupId *string
 
@@ -308,6 +317,10 @@ type FirewallRule struct {
 	//   - SPF: Lists the servers authorized to send emails from a domain.
 	//   - SRV: Application specific values that identify servers.
 	//   - TXT: Verifies email senders and application-specific values.
+	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
+	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for
+	//   example, TYPE28. For more information, see List of DNS record types (https://en.wikipedia.org/wiki/List_of_DNS_record_types)
+	//   .
 	Qtype *string
 
 	noSmithyDocumentSerde

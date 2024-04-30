@@ -1,0 +1,8 @@
+{
+    "id": "f54fdba2-1c51-42e3-bba0-5754fb1b71a9",
+    "type": "feature",
+    "description": "This release enables customers to create Route53 A and AAAA alias record types to point custom endpoint domain to OpenSearch domain's dualstack search endpoint.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

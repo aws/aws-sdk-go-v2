@@ -1982,6 +1982,18 @@ func TestCheckSnapshot_UpdateRoleCustomPermission(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateSPICECapacityConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSPICECapacityConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSPICECapacityConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTemplate(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTemplate(context.Background(), nil, func(o *Options) {
@@ -4026,6 +4038,18 @@ func TestUpdateSnapshot_UpdateRoleCustomPermission(t *testing.T) {
 	_, err := svc.UpdateRoleCustomPermission(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRoleCustomPermission")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSPICECapacityConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSPICECapacityConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSPICECapacityConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

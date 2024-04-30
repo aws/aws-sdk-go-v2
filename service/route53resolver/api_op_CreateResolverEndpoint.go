@@ -63,7 +63,13 @@ type CreateResolverEndpointInput struct {
 	// rules (for inbound Resolver endpoints) or outbound rules (for outbound Resolver
 	// endpoints). Inbound and outbound rules must allow TCP and UDP access. For
 	// inbound access, open port 53. For outbound access, open the port that you're
-	// using for DNS queries on your network.
+	// using for DNS queries on your network. Some security group rules will cause your
+	// connection to be tracked. For outbound resolver endpoint, it can potentially
+	// impact the maximum queries per second from outbound endpoint to your target name
+	// server. For inbound resolver endpoint, it can bring down the overall maximum
+	// queries per second per IP address to as low as 1500. To avoid connection
+	// tracking caused by security group, see Untracked connections (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#untracked-connectionsl)
+	// .
 	//
 	// This member is required.
 	SecurityGroupIds []string

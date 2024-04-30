@@ -61,7 +61,7 @@ type CreateEventDestinationInput struct {
 	ClientToken *string
 
 	// An object that contains information about an event destination for logging to
-	// Amazon CloudWatch logs.
+	// Amazon CloudWatch Logs.
 	CloudWatchLogsDestination *types.CloudWatchLogsDestination
 
 	// An object that contains information about an event destination for logging to

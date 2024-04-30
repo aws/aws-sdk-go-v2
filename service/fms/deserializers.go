@@ -11981,6 +11981,15 @@ func awsAwsjson11_deserializeDocumentStatefulEngineOptions(v **types.StatefulEng
 				sv.RuleOrder = types.RuleOrder(jtv)
 			}
 
+		case "StreamExceptionPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamExceptionPolicy to be of type string, got %T instead", value)
+				}
+				sv.StreamExceptionPolicy = types.StreamExceptionPolicy(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
