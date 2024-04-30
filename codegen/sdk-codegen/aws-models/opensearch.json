@@ -373,7 +373,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of\n   case-sensitive key-value pairs. A domain can have up to 10 tags. For more information, see\n    <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html\">Tagging Amazon OpenSearch Service domains</a>.</p>",
+                "smithy.api#documentation": "<p>Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of\n   case-sensitive key-value pairs. A domain can have up to 10 tags. For more information, see\n    <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-awsresourcetagging.html\">Tagging Amazon OpenSearch Service domains</a>.\n  </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2021-01-01/tags",
@@ -6204,7 +6204,13 @@
                 "Endpoints": {
                     "target": "com.amazonaws.opensearch#EndpointsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints. Example\n    <code>key, value</code>:\n    <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>.</p>"
+                        "smithy.api#documentation": "<p>The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints. For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>IPv4 IP addresses</b> -\n      <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Dual stack IP addresses</b> -\n      <code>'vpcv2':'vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.aos.us-east-1.on.aws'</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DomainEndpointV2HostedZoneId": {
+                    "target": "com.amazonaws.opensearch#HostedZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DualStack Hosted Zone Id for the domain. </p>"
                     }
                 },
                 "Processing": {
@@ -7228,6 +7234,9 @@
                 "smithy.api#documentation": "<p>Container for the response returned by the <code>GetUpgradeStatus</code> operation.</p>",
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.opensearch#HostedZoneId": {
+            "type": "string"
         },
         "com.amazonaws.opensearch#IPAddressType": {
             "type": "enum",
