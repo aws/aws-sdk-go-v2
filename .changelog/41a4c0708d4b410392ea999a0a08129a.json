@@ -1,0 +1,8 @@
+{
+    "id": "41a4c070-8d4b-4103-92ea-999a0a08129a",
+    "type": "release",
+    "description": "remove deprecated alexaforbusiness from v2",
+    "modules": [
+        "."
+    ]
+}
