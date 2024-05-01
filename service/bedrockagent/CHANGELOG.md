@@ -1,3 +1,7 @@
+# v1.9.0 (2024-05-01)
+
+* **Feature**: This release adds support for using MongoDB Atlas as a vector store when creating a knowledge base.
+
 # v1.8.0 (2024-04-23)
 
 * **Feature**: Introducing the ability to create multiple data sources per knowledge base, specify S3 buckets as data sources from external accounts, and exposing levers to define the deletion behavior of the underlying vector store data.

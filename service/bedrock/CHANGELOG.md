@@ -1,3 +1,7 @@
+# v1.8.1 (2024-05-01)
+
+* No change notes available for this release.
+
 # v1.8.0 (2024-04-23)
 
 * **Feature**: This release introduces Model Evaluation and Guardrails for Amazon Bedrock.

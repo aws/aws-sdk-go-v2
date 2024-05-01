@@ -1,8 +1,0 @@
-{
-    "id": "41a4c070-8d4b-4103-92ea-999a0a08129a",
-    "type": "feature",
-    "description": "Remove deprecated `alexaforbusiness` service.",
-    "modules": [
-        "."
-    ]
-}

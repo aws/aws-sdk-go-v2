@@ -1,3 +1,7 @@
+# v1.159.1 (2024-05-01)
+
+* **Documentation**: Documentation updates for Amazon EC2.
+
 # v1.159.0 (2024-04-24)
 
 * **Feature**: Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface

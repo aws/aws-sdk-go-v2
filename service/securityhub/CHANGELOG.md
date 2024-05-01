@@ -1,3 +1,7 @@
+# v1.48.0 (2024-05-01)
+
+* **Feature**: Updated CreateMembers API request with limits.
+
 # v1.47.2 (2024-04-02)
 
 * **Documentation**: Documentation updates for AWS Security Hub

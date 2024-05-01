@@ -1,3 +1,7 @@
+# v1.28.0 (2024-05-01)
+
+* **Feature**: Fixes ListContacts and ListImportJobs APIs to use POST instead of GET.
+
 # v1.27.4 (2024-04-25)
 
 * No change notes available for this release.
