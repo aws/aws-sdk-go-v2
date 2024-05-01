@@ -214,6 +214,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#AccountDetails"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.securityhub#AccountId": {
@@ -33952,7 +33958,7 @@
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a \n            configuration policy, or a value of <code>SELF_MANAGED_SECURITY_HUB</code> for a self-managed configuration.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -34081,7 +34087,7 @@
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the configuration policy.\n        </p>",
+                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a \n            configuration policy, or a value of <code>SELF_MANAGED_SECURITY_HUB</code> for a self-managed configuration.\n        </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -35468,7 +35474,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>UpdateFindings</code> is deprecated. Instead of <code>UpdateFindings</code>, use\n            <code>BatchUpdateFindings</code>.</p>\n         <p>Updates the <code>Note</code> and <code>RecordState</code> of the Security Hub-aggregated\n         findings that the filter attributes specify. Any member account that can view the finding\n         also sees the update to the finding.</p>",
+                "smithy.api#documentation": "<p>\n            <code>UpdateFindings</code> is a deprecated operation. Instead of <code>UpdateFindings</code>, use\n            the <code>BatchUpdateFindings</code> operation.</p>\n         <p>Updates the <code>Note</code> and <code>RecordState</code> of the Security Hub-aggregated\n         findings that the filter attributes specify. Any member account that can view the finding\n         also sees the update to the finding.</p>\n         <p>Finding updates made with <code>UpdateFindings</code> might not be persisted if the same finding is later updated by the \n            finding provider through the <code>BatchImportFindings</code> operation.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/findings",

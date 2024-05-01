@@ -6276,8 +6276,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists the contacts present in a specific contact list.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/v2/email/contact-lists/{ContactListName}/contacts",
+                    "method": "POST",
+                    "uri": "/v2/email/contact-lists/{ContactListName}/contacts/list",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -6327,15 +6327,13 @@
                 "PageSize": {
                     "target": "com.amazonaws.sesv2#MaxItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of contacts that may be returned at once, which is dependent on if there\n            are more or less contacts than the value of the PageSize. Use this parameter to paginate\n            results. If additional contacts exist beyond the specified limit, the\n                <code>NextToken</code> element is sent in the response. Use the\n                <code>NextToken</code> value in subsequent requests to retrieve additional\n            contacts.</p>",
-                        "smithy.api#httpQuery": "PageSize"
+                        "smithy.api#documentation": "<p>The number of contacts that may be returned at once, which is dependent on if there\n            are more or less contacts than the value of the PageSize. Use this parameter to paginate\n            results. If additional contacts exist beyond the specified limit, the\n                <code>NextToken</code> element is sent in the response. Use the\n                <code>NextToken</code> value in subsequent requests to retrieve additional\n            contacts.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.sesv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string token indicating that there might be additional contacts available to be\n            listed. Use the token provided in the Response to use in the subsequent call to\n            ListContacts with the same parameters to retrieve the next page of contacts.</p>",
-                        "smithy.api#httpQuery": "NextToken"
+                        "smithy.api#documentation": "<p>A string token indicating that there might be additional contacts available to be\n            listed. Use the token provided in the Response to use in the subsequent call to\n            ListContacts with the same parameters to retrieve the next page of contacts.</p>"
                     }
                 }
             },
@@ -6942,8 +6940,8 @@
             "traits": {
                 "smithy.api#documentation": "<p>Lists all of the import jobs.</p>",
                 "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/v2/email/import-jobs",
+                    "method": "POST",
+                    "uri": "/v2/email/import-jobs/list",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -6965,15 +6963,13 @@
                 "NextToken": {
                     "target": "com.amazonaws.sesv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string token indicating that there might be additional import jobs available to be\n            listed. Copy this token to a subsequent call to <code>ListImportJobs</code> with the\n            same parameters to retrieve the next page of import jobs.</p>",
-                        "smithy.api#httpQuery": "NextToken"
+                        "smithy.api#documentation": "<p>A string token indicating that there might be additional import jobs available to be\n            listed. Copy this token to a subsequent call to <code>ListImportJobs</code> with the\n            same parameters to retrieve the next page of import jobs.</p>"
                     }
                 },
                 "PageSize": {
                     "target": "com.amazonaws.sesv2#MaxItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of import jobs to return at once. Use this parameter to paginate\n            results. If additional import jobs exist beyond the specified limit, the\n                <code>NextToken</code> element is sent in the response. Use the\n                <code>NextToken</code> value in subsequent requests to retrieve additional\n            addresses.</p>",
-                        "smithy.api#httpQuery": "PageSize"
+                        "smithy.api#documentation": "<p>Maximum number of import jobs to return at once. Use this parameter to paginate\n            results. If additional import jobs exist beyond the specified limit, the\n                <code>NextToken</code> element is sent in the response. Use the\n                <code>NextToken</code> value in subsequent requests to retrieve additional\n            addresses.</p>"
                     }
                 }
             },

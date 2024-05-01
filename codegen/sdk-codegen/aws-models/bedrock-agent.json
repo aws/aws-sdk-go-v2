@@ -2464,7 +2464,7 @@
                 "dataDeletionPolicy": {
                     "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deletion policy for the requested data source</p>"
+                        "smithy.api#documentation": "<p>The data deletion policy assigned to the data source.</p>"
                     }
                 },
                 "serverSideEncryptionConfiguration": {
@@ -2714,7 +2714,7 @@
                 "dataDeletionPolicy": {
                     "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deletion policy for the data source.</p>"
+                        "smithy.api#documentation": "<p>The data deletion policy for a data source.</p>"
                     }
                 },
                 "createdAt": {
@@ -2734,7 +2734,7 @@
                 "failureReasons": {
                     "target": "com.amazonaws.bedrockagent#FailureReasons",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the failure reasons related to the data source.</p>"
+                        "smithy.api#documentation": "<p>The detailed reasons on the failure to delete a data source.</p>"
                     }
                 }
             },
@@ -4933,6 +4933,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RDS"
                     }
+                },
+                "MONGO_DB_ATLAS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONGO_DB_ATLAS"
+                    }
                 }
             }
         },
@@ -5855,6 +5861,137 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}(([:][a-z0-9-]{1,63}){0,2})?/[a-z0-9]{12})|(:foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})))|(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2}))|(([0-9a-zA-Z][_-]?)+)$"
             }
         },
+        "com.amazonaws.bedrockagent#MongoDbAtlasCollectionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 63
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#MongoDbAtlasConfiguration": {
+            "type": "structure",
+            "members": {
+                "endpoint": {
+                    "target": "com.amazonaws.bedrockagent#MongoDbAtlasEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint URL of your MongoDB Atlas cluster for your knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "databaseName": {
+                    "target": "com.amazonaws.bedrockagent#MongoDbAtlasDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database name in your MongoDB Atlas cluster for your knowledge base.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "collectionName": {
+                    "target": "com.amazonaws.bedrockagent#MongoDbAtlasCollectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection name of the knowledge base in MongoDB Atlas.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vectorIndexName": {
+                    "target": "com.amazonaws.bedrockagent#MongoDbAtlasIndexName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the MongoDB Atlas vector search index.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "credentialsSecretArn": {
+                    "target": "com.amazonaws.bedrockagent#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret that you created in Secrets Manager that contains user credentials for your MongoDB Atlas cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldMapping": {
+                    "target": "com.amazonaws.bedrockagent#MongoDbAtlasFieldMapping",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the names of the fields to which to map information about the vector store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endpointServiceName": {
+                    "target": "com.amazonaws.bedrockagent#MongoDbAtlasEndpointServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VPC endpoint service in your account that is connected to your MongoDB Atlas cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base in MongoDB Atlas. </p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MongoDbAtlasDatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 63
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#MongoDbAtlasEndpoint": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.bedrockagent#MongoDbAtlasEndpointServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(?:arn:aws(?:-us-gov|-cn|-iso|-iso-[a-z])*:.+:.*:\\d+:.+/.+$|[a-zA-Z0-9*]+[a-zA-Z0-9._-]*)$"
+            }
+        },
+        "com.amazonaws.bedrockagent#MongoDbAtlasFieldMapping": {
+            "type": "structure",
+            "members": {
+                "vectorField": {
+                    "target": "com.amazonaws.bedrockagent#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "textField": {
+                    "target": "com.amazonaws.bedrockagent#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metadataField": {
+                    "target": "com.amazonaws.bedrockagent#FieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in which Amazon Bedrock stores metadata about the vector store.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the names of the fields to which to map information about the vector store.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagent#MongoDbAtlasIndexName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
         "com.amazonaws.bedrockagent#Name": {
             "type": "string",
             "traits": {
@@ -6560,7 +6697,7 @@
                 "bucketOwnerAccountId": {
                     "target": "com.amazonaws.bedrockagent#BucketOwnerAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID for the owner of the S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>The bucket account owner ID for the S3 bucket.</p>"
                     }
                 }
             },
@@ -6818,6 +6955,12 @@
                     "target": "com.amazonaws.bedrockagent#RdsConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html\">Create a vector index in Amazon RDS</a>.</p>"
+                    }
+                },
+                "mongoDbAtlasConfiguration": {
+                    "target": "com.amazonaws.bedrockagent#MongoDbAtlasConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the storage configuration of the knowledge base in MongoDB Atlas.</p>"
                     }
                 }
             },
@@ -7644,7 +7787,7 @@
                 "dataDeletionPolicy": {
                     "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data deletion policy of the updated data source.</p>"
+                        "smithy.api#documentation": "<p>The data deletion policy assigned to the data source.</p>"
                     }
                 },
                 "serverSideEncryptionConfiguration": {
