@@ -831,6 +831,11 @@ func awsRestjson1_deserializeDocumentPredictedItem(v **types.PredictedItem, valu
 				sv.PromotionName = ptr.String(jtv)
 			}
 
+		case "reason":
+			if err := awsRestjson1_deserializeDocumentReasonList(&sv.Reason, value); err != nil {
+				return err
+			}
+
 		case "score":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -871,6 +876,42 @@ func awsRestjson1_deserializeDocumentPredictedItem(v **types.PredictedItem, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReasonList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Reason to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

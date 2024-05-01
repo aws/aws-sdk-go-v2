@@ -4062,6 +4062,72 @@ func awsRestjson1_serializeDocumentKnowledgeBaseConfiguration(v *types.Knowledge
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMongoDbAtlasConfiguration(v *types.MongoDbAtlasConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CollectionName != nil {
+		ok := object.Key("collectionName")
+		ok.String(*v.CollectionName)
+	}
+
+	if v.CredentialsSecretArn != nil {
+		ok := object.Key("credentialsSecretArn")
+		ok.String(*v.CredentialsSecretArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Endpoint != nil {
+		ok := object.Key("endpoint")
+		ok.String(*v.Endpoint)
+	}
+
+	if v.EndpointServiceName != nil {
+		ok := object.Key("endpointServiceName")
+		ok.String(*v.EndpointServiceName)
+	}
+
+	if v.FieldMapping != nil {
+		ok := object.Key("fieldMapping")
+		if err := awsRestjson1_serializeDocumentMongoDbAtlasFieldMapping(v.FieldMapping, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VectorIndexName != nil {
+		ok := object.Key("vectorIndexName")
+		ok.String(*v.VectorIndexName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMongoDbAtlasFieldMapping(v *types.MongoDbAtlasFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataField != nil {
+		ok := object.Key("metadataField")
+		ok.String(*v.MetadataField)
+	}
+
+	if v.TextField != nil {
+		ok := object.Key("textField")
+		ok.String(*v.TextField)
+	}
+
+	if v.VectorField != nil {
+		ok := object.Key("vectorField")
+		ok.String(*v.VectorField)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOpenSearchServerlessConfiguration(v *types.OpenSearchServerlessConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4451,6 +4517,13 @@ func awsRestjson1_serializeDocumentStopSequences(v []string, value smithyjson.Va
 func awsRestjson1_serializeDocumentStorageConfiguration(v *types.StorageConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MongoDbAtlasConfiguration != nil {
+		ok := object.Key("mongoDbAtlasConfiguration")
+		if err := awsRestjson1_serializeDocumentMongoDbAtlasConfiguration(v.MongoDbAtlasConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.OpensearchServerlessConfiguration != nil {
 		ok := object.Key("opensearchServerlessConfiguration")

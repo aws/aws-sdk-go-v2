@@ -9757,6 +9757,154 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseSummary(v **types.KnowledgeBas
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMongoDbAtlasConfiguration(v **types.MongoDbAtlasConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MongoDbAtlasConfiguration
+	if *v == nil {
+		sv = &types.MongoDbAtlasConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "collectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasCollectionName to be of type string, got %T instead", value)
+				}
+				sv.CollectionName = ptr.String(jtv)
+			}
+
+		case "credentialsSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.CredentialsSecretArn = ptr.String(jtv)
+			}
+
+		case "databaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasDatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasEndpoint to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
+		case "endpointServiceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasEndpointServiceName to be of type string, got %T instead", value)
+				}
+				sv.EndpointServiceName = ptr.String(jtv)
+			}
+
+		case "fieldMapping":
+			if err := awsRestjson1_deserializeDocumentMongoDbAtlasFieldMapping(&sv.FieldMapping, value); err != nil {
+				return err
+			}
+
+		case "vectorIndexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasIndexName to be of type string, got %T instead", value)
+				}
+				sv.VectorIndexName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMongoDbAtlasFieldMapping(v **types.MongoDbAtlasFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MongoDbAtlasFieldMapping
+	if *v == nil {
+		sv = &types.MongoDbAtlasFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadataField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.MetadataField = ptr.String(jtv)
+			}
+
+		case "textField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.TextField = ptr.String(jtv)
+			}
+
+		case "vectorField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.VectorField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOpenSearchServerlessConfiguration(v **types.OpenSearchServerlessConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10847,6 +10995,11 @@ func awsRestjson1_deserializeDocumentStorageConfiguration(v **types.StorageConfi
 
 	for key, value := range shape {
 		switch key {
+		case "mongoDbAtlasConfiguration":
+			if err := awsRestjson1_deserializeDocumentMongoDbAtlasConfiguration(&sv.MongoDbAtlasConfiguration, value); err != nil {
+				return err
+			}
+
 		case "opensearchServerlessConfiguration":
 			if err := awsRestjson1_deserializeDocumentOpenSearchServerlessConfiguration(&sv.OpensearchServerlessConfiguration, value); err != nil {
 				return err

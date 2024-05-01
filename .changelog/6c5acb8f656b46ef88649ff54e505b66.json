@@ -1,0 +1,8 @@
+{
+    "id": "6c5acb8f-656b-46ef-8864-9ff54e505b66",
+    "type": "feature",
+    "description": "Updated CreateMembers API request with limits.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

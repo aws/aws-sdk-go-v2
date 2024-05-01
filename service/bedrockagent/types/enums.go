@@ -320,6 +320,7 @@ const (
 	KnowledgeBaseStorageTypePinecone             KnowledgeBaseStorageType = "PINECONE"
 	KnowledgeBaseStorageTypeRedisEnterpriseCloud KnowledgeBaseStorageType = "REDIS_ENTERPRISE_CLOUD"
 	KnowledgeBaseStorageTypeRds                  KnowledgeBaseStorageType = "RDS"
+	KnowledgeBaseStorageTypeMongoDbAtlas         KnowledgeBaseStorageType = "MONGO_DB_ATLAS"
 )
 
 // Values returns all known values for KnowledgeBaseStorageType. Note that this
@@ -331,6 +332,7 @@ func (KnowledgeBaseStorageType) Values() []KnowledgeBaseStorageType {
 		"PINECONE",
 		"REDIS_ENTERPRISE_CLOUD",
 		"RDS",
+		"MONGO_DB_ATLAS",
 	}
 }
 

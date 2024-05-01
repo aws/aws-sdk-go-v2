@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// UpdateFindings is deprecated. Instead of UpdateFindings , use
-// BatchUpdateFindings . Updates the Note and RecordState of the Security
+// UpdateFindings is a deprecated operation. Instead of UpdateFindings , use the
+// BatchUpdateFindings operation. Updates the Note and RecordState of the Security
 // Hub-aggregated findings that the filter attributes specify. Any member account
-// that can view the finding also sees the update to the finding.
+// that can view the finding also sees the update to the finding. Finding updates
+// made with UpdateFindings might not be persisted if the same finding is later
+// updated by the finding provider through the BatchImportFindings operation.
 func (c *Client) UpdateFindings(ctx context.Context, params *UpdateFindingsInput, optFns ...func(*Options)) (*UpdateFindingsOutput, error) {
 	if params == nil {
 		params = &UpdateFindingsInput{}

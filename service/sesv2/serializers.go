@@ -3479,10 +3479,10 @@ func (m *awsRestjson1_serializeOpListContacts) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts")
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts/list")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "GET"
+	request.Method = "POST"
 	var restEncoder *httpbinding.Encoder
 	if request.URL.RawPath == "" {
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
@@ -3531,14 +3531,6 @@ func awsRestjson1_serializeOpHttpBindingsListContactsInput(v *ListContactsInput,
 		}
 	}
 
-	if v.NextToken != nil {
-		encoder.SetQuery("NextToken").String(*v.NextToken)
-	}
-
-	if v.PageSize != nil {
-		encoder.SetQuery("PageSize").Integer(*v.PageSize)
-	}
-
 	return nil
 }
 
@@ -3551,6 +3543,16 @@ func awsRestjson1_serializeOpDocumentListContactsInput(v *ListContactsInput, val
 		if err := awsRestjson1_serializeDocumentListContactsFilter(v.Filter, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		ok := object.Key("PageSize")
+		ok.Integer(*v.PageSize)
 	}
 
 	return nil
@@ -4068,10 +4070,10 @@ func (m *awsRestjson1_serializeOpListImportJobs) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v2/email/import-jobs")
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/import-jobs/list")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "GET"
+	request.Method = "POST"
 	var restEncoder *httpbinding.Encoder
 	if request.URL.RawPath == "" {
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
@@ -4081,10 +4083,6 @@ func (m *awsRestjson1_serializeOpListImportJobs) HandleSerialize(ctx context.Con
 	}
 
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeOpHttpBindingsListImportJobsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4111,14 +4109,6 @@ func awsRestjson1_serializeOpHttpBindingsListImportJobsInput(v *ListImportJobsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.NextToken != nil {
-		encoder.SetQuery("NextToken").String(*v.NextToken)
-	}
-
-	if v.PageSize != nil {
-		encoder.SetQuery("PageSize").Integer(*v.PageSize)
-	}
-
 	return nil
 }
 
@@ -4129,6 +4119,16 @@ func awsRestjson1_serializeOpDocumentListImportJobsInput(v *ListImportJobsInput,
 	if len(v.ImportDestinationType) > 0 {
 		ok := object.Key("ImportDestinationType")
 		ok.String(string(v.ImportDestinationType))
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		ok := object.Key("PageSize")
+		ok.Integer(*v.PageSize)
 	}
 
 	return nil

@@ -1,0 +1,8 @@
+{
+    "id": "b42aded2-84d6-469f-9d31-0f103888bc44",
+    "type": "feature",
+    "description": "This release adds support for using MongoDB Atlas as a vector store when creating a knowledge base.",
+    "modules": [
+        "service/bedrockagent"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "66afb4b2-e647-4011-9669-3202e3a4623e",
+    "type": "feature",
+    "description": "Fixes ListContacts and ListImportJobs APIs to use POST instead of GET.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

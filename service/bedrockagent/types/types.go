@@ -694,13 +694,13 @@ type DataSource struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The deletion policy for the data source.
+	// The data deletion policy for a data source.
 	DataDeletionPolicy DataDeletionPolicy
 
 	// The description of the data source.
 	Description *string
 
-	// The details of the failure reasons related to the data source.
+	// The detailed reasons on the failure to delete a data source.
 	FailureReasons []string
 
 	// Contains details about the configuration of the server-side encryption.
@@ -1133,6 +1133,74 @@ type KnowledgeBaseSummary struct {
 }
 
 // Contains details about the storage configuration of the knowledge base in
+// MongoDB Atlas.
+type MongoDbAtlasConfiguration struct {
+
+	// The collection name of the knowledge base in MongoDB Atlas.
+	//
+	// This member is required.
+	CollectionName *string
+
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that contains user credentials for your MongoDB Atlas cluster.
+	//
+	// This member is required.
+	CredentialsSecretArn *string
+
+	// The database name in your MongoDB Atlas cluster for your knowledge base.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The endpoint URL of your MongoDB Atlas cluster for your knowledge base.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// Contains the names of the fields to which to map information about the vector
+	// store.
+	//
+	// This member is required.
+	FieldMapping *MongoDbAtlasFieldMapping
+
+	// The name of the MongoDB Atlas vector search index.
+	//
+	// This member is required.
+	VectorIndexName *string
+
+	// The name of the VPC endpoint service in your account that is connected to your
+	// MongoDB Atlas cluster.
+	EndpointServiceName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the names of the fields to which to map information about the vector
+// store.
+type MongoDbAtlasFieldMapping struct {
+
+	// The name of the field in which Amazon Bedrock stores metadata about the vector
+	// store.
+	//
+	// This member is required.
+	MetadataField *string
+
+	// The name of the field in which Amazon Bedrock stores the raw text from your
+	// data. The text is split according to the chunking strategy you choose.
+	//
+	// This member is required.
+	TextField *string
+
+	// The name of the field in which Amazon Bedrock stores the vector embeddings for
+	// your data sources.
+	//
+	// This member is required.
+	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the storage configuration of the knowledge base in
 // Amazon OpenSearch Service. For more information, see Create a vector index in
 // Amazon OpenSearch Service (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html)
 // .
@@ -1449,7 +1517,7 @@ type S3DataSourceConfiguration struct {
 	// This member is required.
 	BucketArn *string
 
-	// The account ID for the owner of the S3 bucket.
+	// The bucket account owner ID for the S3 bucket.
 	BucketOwnerAccountId *string
 
 	// A list of S3 prefixes that define the object containing the data sources. For
@@ -1488,6 +1556,9 @@ type StorageConfiguration struct {
 	//
 	// This member is required.
 	Type KnowledgeBaseStorageType
+
+	// Contains the storage configuration of the knowledge base in MongoDB Atlas.
+	MongoDbAtlasConfiguration *MongoDbAtlasConfiguration
 
 	// Contains the storage configuration of the knowledge base in Amazon OpenSearch
 	// Service.
