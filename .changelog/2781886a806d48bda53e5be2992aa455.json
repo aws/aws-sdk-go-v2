@@ -1,0 +1,8 @@
+{
+    "id": "2781886a-806d-48bd-a53e-5be2992aa455",
+    "type": "bugfix",
+    "description": "Fix serialization behavior of empty lists.",
+    "modules": [
+        "service/ec2"
+    ]
+}
