@@ -141,6 +141,9 @@
                     "target": "com.amazonaws.personalize#CreateCampaign"
                 },
                 {
+                    "target": "com.amazonaws.personalize#CreateDataDeletionJob"
+                },
+                {
                     "target": "com.amazonaws.personalize#CreateDataset"
                 },
                 {
@@ -213,6 +216,9 @@
                     "target": "com.amazonaws.personalize#DescribeCampaign"
                 },
                 {
+                    "target": "com.amazonaws.personalize#DescribeDataDeletionJob"
+                },
+                {
                     "target": "com.amazonaws.personalize#DescribeDataset"
                 },
                 {
@@ -262,6 +268,9 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#ListCampaigns"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ListDataDeletionJobs"
                 },
                 {
                     "target": "com.amazonaws.personalize#ListDatasetExportJobs"
@@ -2231,6 +2240,94 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.personalize#CreateDataDeletionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#CreateDataDeletionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#CreateDataDeletionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a batch job that deletes all\n      references to specific users from an Amazon Personalize dataset group in batches. You specify the users to delete in a CSV file of userIds in \n      an Amazon S3 bucket. After a job completes, Amazon Personalize no longer trains\n      on the users’ data and no longer considers the users when generating user segments. \n      For more information about creating a data deletion job, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html\">Deleting users</a>.</p>\n         <ul>\n            <li>\n               <p>Your input file must be a CSV file with a single USER_ID column that lists the users IDs. For more information\n          about preparing the CSV file, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/prepare-deletion-input-file.html\">Preparing your data deletion file and uploading it to Amazon S3</a>.</p>\n            </li>\n            <li>\n               <p>To give Amazon Personalize permission to access your input CSV file of userIds, you must specify an IAM service role that has permission to\n          read from the data source. This role \n          needs <code>GetObject</code> and <code>ListBucket</code> permissions for the bucket and its content.\n          These permissions are the same as importing data. For information on granting access to your Amazon S3\n          bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving\n            Amazon Personalize Access to Amazon S3 Resources</a>. </p>\n            </li>\n         </ul>\n         <p>\n      After you create a job, it can take up to a day to delete all references to the users from datasets and models. Until the job completes, \n      Amazon Personalize continues to use the data when training. And if you use a User Segmentation recipe, the users might appear in user segments. \n    </p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A data deletion job can have one of the following statuses:</p>\n         <ul>\n            <li>\n               <p>PENDING > IN_PROGRESS > COMPLETED -or- FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the data deletion job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html\">DescribeDataDeletionJob</a> API operation and specify the Amazon Resource Name\n      (ARN) of the job. If the status is FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job\n      failed.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDataDeletionJobs.html\">ListDataDeletionJobs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html\">DescribeDataDeletionJob</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.personalize#CreateDataDeletionJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the data deletion job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group that has the datasets you want to\n    delete records from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataSource": {
+                    "target": "com.amazonaws.personalize#DataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the list of userIds of the users to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.personalize#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3\n      data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.personalize#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the data deletion job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalize#CreateDataDeletionJobResponse": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data deletion job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.personalize#CreateDataset": {
             "type": "operation",
             "input": {
@@ -3182,18 +3279,145 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.personalize#DataDeletionJob": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data deletion job.</p>"
+                    }
+                },
+                "dataDeletionJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data deletion job.</p>"
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group the job deletes records from.</p>"
+                    }
+                },
+                "dataSource": {
+                    "target": "com.amazonaws.personalize#DataSource"
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.personalize#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3\n      data source.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data deletion job.</p>\n         <p>A data deletion job can have one of the following statuses:</p>\n         <ul>\n            <li>\n               <p>PENDING > IN_PROGRESS > COMPLETED -or- FAILED</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "numDeleted": {
+                    "target": "com.amazonaws.personalize#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records deleted by a COMPLETED job.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the data deletion\n      job.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix time) the data deletion job was last updated.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a data deletion job fails, provides the reason why.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a job that deletes all\n      references to specific users from an Amazon Personalize dataset group in batches. For information about creating a data deletion job, \n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html\">Deleting users</a>.</p>"
+            }
+        },
+        "com.amazonaws.personalize#DataDeletionJobSummary": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data deletion job.</p>"
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group the job deleted records from.</p>"
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data deletion job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data deletion job.</p>\n         <p>A data deletion job can have one of the following statuses:</p>\n         <ul>\n            <li>\n               <p>PENDING > IN_PROGRESS > COMPLETED -or- FAILED</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the data deletion\n      job.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix time) the data deletion job was last updated.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a data deletion job fails, provides the reason why.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the properties of a data deletion job. For a complete listing, call the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html\">DescribeDataDeletionJob</a>\n      API operation.</p>"
+            }
+        },
+        "com.amazonaws.personalize#DataDeletionJobs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#DataDeletionJobSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.personalize#DataSource": {
             "type": "structure",
             "members": {
                 "dataLocation": {
                     "target": "com.amazonaws.personalize#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the data that you want to upload to\n      your dataset is stored. For example: </p>\n         <p>\n            <code>s3://bucket-name/folder-name/</code>\n         </p>"
+                        "smithy.api#documentation": "<p>For dataset import jobs, the path to the Amazon S3 bucket where the data that you want to upload to\n      your dataset is stored. For data deletion jobs, the path to the Amazon S3 bucket that stores the list of records to delete.\n    </p>\n         <p>\n      For example: </p>\n         <p>\n            <code>s3://bucket-name/folder-name/fileName.csv</code>\n         </p>\n         <p>If your CSV files are in a folder in your Amazon S3 bucket and you want your import job or data deletion job\n      to consider multiple files, you can specify the path to the folder.  With a data deletion job, Amazon Personalize uses all files in the folder and any sub folder. Use the following syntax with a <code>/</code> after the folder\n      name:</p>\n         <p>\n            <code>s3://bucket-name/folder-name/</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the data source that contains the data to upload to a\n      dataset.</p>"
+                "smithy.api#documentation": "<p>Describes the data source that contains the data to upload to a dataset, or the list of \n      records to delete from Amazon Personalize.</p>"
             }
         },
         "com.amazonaws.personalize#Dataset": {
@@ -4559,6 +4783,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.personalize#DescribeDataDeletionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#DescribeDataDeletionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#DescribeDataDeletionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the data deletion job created by <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html\">CreateDataDeletionJob</a>, including the job status.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#DescribeDataDeletionJobRequest": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data deletion job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalize#DescribeDataDeletionJobResponse": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJob": {
+                    "target": "com.amazonaws.personalize#DataDeletionJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the data deletion job, including the status.</p>\n         <p>The status is one of the following values:</p>\n         <ul>\n            <li>\n               <p>PENDING</p>\n            </li>\n            <li>\n               <p>IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>COMPLETED</p>\n            </li>\n            <li>\n               <p>FAILED</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.personalize#DescribeDataset": {
             "type": "operation",
             "input": {
@@ -5828,6 +6102,9 @@
                 }
             }
         },
+        "com.amazonaws.personalize#Integer": {
+            "type": "integer"
+        },
         "com.amazonaws.personalize#IntegerHyperParameterRange": {
             "type": "structure",
             "members": {
@@ -6156,6 +6433,73 @@
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token for getting the next set of campaigns (if they exist).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.personalize#ListDataDeletionJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#ListDataDeletionJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#ListDataDeletionJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of data deletion jobs for a dataset group ordered by creation time,\n      with the most recent first.\n      When\n      a dataset group is not specified, all the data deletion jobs associated with\n      the account are listed. The response provides the properties for each\n      job, including the Amazon Resource Name (ARN). For more\n      information on data deletion jobs, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html\">Deleting users</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#ListDataDeletionJobsRequest": {
+            "type": "structure",
+            "members": {
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group to list data deletion jobs for.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from the previous call to\n      <code>ListDataDeletionJobs</code> for getting the next set of jobs (if they exist).</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.personalize#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of data deletion jobs to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalize#ListDataDeletionJobsResponse": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJobs": {
+                    "target": "com.amazonaws.personalize#DataDeletionJobs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of data deletion jobs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token for getting the next set of data deletion jobs (if they\n      exist).</p>"
                     }
                 }
             },

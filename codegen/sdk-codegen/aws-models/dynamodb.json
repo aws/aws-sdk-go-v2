@@ -1959,6 +1959,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index.</p>\n         <p>For current minimum and maximum provisioned throughput values, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service,\n                Account, and Table Quotas</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
                     }
+                },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the global secondary index being created. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2068,6 +2074,12 @@
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughputOverride",
                     "traits": {
                         "smithy.api#documentation": "<p>Replica-specific provisioned throughput. If not specified, uses the source table's\n            provisioned throughput settings.</p>"
+                    }
+                },
+                "OnDemandThroughputOverride": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum on-demand throughput settings for the specified replica table being created. You can only modify <code>MaxReadRequestUnits</code>, because you can't modify <code>MaxWriteRequestUnits</code> for individual replica tables.\n        </p>"
                     }
                 },
                 "GlobalSecondaryIndexes": {
@@ -2197,7 +2209,13 @@
                 "ResourcePolicy": {
                     "target": "com.amazonaws.dynamodb#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Web Services resource-based policy document in JSON format that will be attached to the table.</p>\n         <p>When you attach a resource-based policy while creating a table, the policy creation is <i>strongly consistent</i>.</p>\n         <p>The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. You can’t request an increase for this limit. For a full list of all considerations that you should keep in mind while attaching a resource-based policy, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html\">Resource-based policy considerations</a>.</p>"
+                        "smithy.api#documentation": "<p>An Amazon Web Services resource-based policy document in JSON format that will be attached to the table.</p>\n         <p>When you attach a resource-based policy while creating a table, the policy application is <i>strongly consistent</i>.</p>\n         <p>The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that apply for resource-based policies, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html\">Resource-based policy considerations</a>.</p>"
+                    }
+                },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the maximum number of read and write units for the specified table in on-demand capacity mode. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 }
             },
@@ -2670,7 +2688,7 @@
                 "RevisionId": {
                     "target": "com.amazonaws.dynamodb#PolicyRevisionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic.</p>\n         <p>This value will be empty if you make a request against a resource without a policy.</p>"
+                        "smithy.api#documentation": "<p>A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.</p>\n         <p>This value will be empty if you make a request against a resource without a policy.</p>"
                     }
                 }
             },
@@ -5912,7 +5930,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.</p>\n         <p>\n            <code>GetResourcePolicy</code> follows an <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n               <i>eventually consistent</i>\n            </a> model. The following list describes the outcomes when you issue the <code>GetResourcePolicy</code> request immediately after issuing another request:</p>\n         <ul>\n            <li>\n               <p>If you issue a <code>GetResourcePolicy</code> request immediately after a <code>PutResourcePolicy</code> request, DynamoDB might return a <code>PolicyNotFoundException</code>.</p>\n            </li>\n            <li>\n               <p>If you issue a <code>GetResourcePolicy</code>request immediately after a <code>DeleteResourcePolicy</code> request, DynamoDB might return the policy that was present before the deletion request.</p>\n            </li>\n            <li>\n               <p>If you issue a <code>GetResourcePolicy</code> request immediately after a <code>CreateTable</code> request, which includes a resource-based policy, DynamoDB might return a <code>ResourceNotFoundException</code> or a <code>PolicyNotFoundException</code>.</p>\n            </li>\n         </ul>\n         <p>Because <code>GetResourcePolicy</code> uses an <i>eventually consistent</i> query, the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then retry the <code>GetResourcePolicy</code> request.</p>\n         <p>After a <code>GetResourcePolicy</code> request returns a policy created using the <code>PutResourcePolicy</code> request, you can assume the policy will start getting applied in the authorization of requests to the resource. Because this process is eventually consistent, it will take some time to apply the policy to all requests to a resource. Policies that you attach while creating a table using the <code>CreateTable</code> request will always be applied to all requests for that table.</p>"
+                "smithy.api#documentation": "<p>Returns the resource-based policy document attached to the resource, which can be a table or stream, in JSON format.</p>\n         <p>\n            <code>GetResourcePolicy</code> follows an <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n               <i>eventually consistent</i>\n            </a> model. The following list describes the outcomes when you issue the <code>GetResourcePolicy</code> request immediately after issuing another request:</p>\n         <ul>\n            <li>\n               <p>If you issue a <code>GetResourcePolicy</code> request immediately after a <code>PutResourcePolicy</code> request, DynamoDB might return a <code>PolicyNotFoundException</code>.</p>\n            </li>\n            <li>\n               <p>If you issue a <code>GetResourcePolicy</code>request immediately after a <code>DeleteResourcePolicy</code> request, DynamoDB might return the policy that was present before the deletion request.</p>\n            </li>\n            <li>\n               <p>If you issue a <code>GetResourcePolicy</code> request immediately after a <code>CreateTable</code> request, which includes a resource-based policy, DynamoDB might return a <code>ResourceNotFoundException</code> or a <code>PolicyNotFoundException</code>.</p>\n            </li>\n         </ul>\n         <p>Because <code>GetResourcePolicy</code> uses an <i>eventually consistent</i> query, the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then retry the <code>GetResourcePolicy</code> request.</p>\n         <p>After a <code>GetResourcePolicy</code> request returns a policy created using the <code>PutResourcePolicy</code> request, the policy will be applied in the authorization of requests to the resource. Because this process is eventually consistent, it will take some time to apply the policy to all requests to a resource. Policies that you attach while creating a table using the <code>CreateTable</code> request will always be applied to all requests for that table.</p>"
             }
         },
         "com.amazonaws.dynamodb#GetResourcePolicyInput": {
@@ -5942,7 +5960,7 @@
                 "RevisionId": {
                     "target": "com.amazonaws.dynamodb#PolicyRevisionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic.</p>"
+                        "smithy.api#documentation": "<p>A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.</p>"
                     }
                 }
             },
@@ -5978,6 +5996,12 @@
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughput",
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index.</p>\n         <p>For current minimum and maximum provisioned throughput values, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service,\n                Account, and Table Quotas</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
+                    }
+                },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 }
             },
@@ -6069,6 +6093,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the index.</p>"
                     }
+                },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6107,6 +6137,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index. </p>"
                     }
+                },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput"
                 }
             },
             "traits": {
@@ -7987,6 +8020,40 @@
                 "target": "com.amazonaws.dynamodb#NumberAttributeValue"
             }
         },
+        "com.amazonaws.dynamodb#OnDemandThroughput": {
+            "type": "structure",
+            "members": {
+                "MaxReadRequestUnits": {
+                    "target": "com.amazonaws.dynamodb#LongObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of read request units for the specified table.</p>\n         <p>To specify a maximum <code>OnDemandThroughput</code> on your table, set the value of <code>MaxReadRequestUnits</code> as greater than or equal to 1. To remove the maximum <code>OnDemandThroughput</code> that is currently set on your table, set the value of <code>MaxReadRequestUnits</code> to -1.</p>"
+                    }
+                },
+                "MaxWriteRequestUnits": {
+                    "target": "com.amazonaws.dynamodb#LongObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of write request units for the specified table.</p>\n         <p>To specify a maximum <code>OnDemandThroughput</code> on your table, set the value of <code>MaxWriteRequestUnits</code> as greater than or equal to 1. To remove the maximum <code>OnDemandThroughput</code> that is currently set on your table, set the value of <code>MaxWriteRequestUnits</code> to -1.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the maximum number of read and write units for the specified on-demand table. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
+            }
+        },
+        "com.amazonaws.dynamodb#OnDemandThroughputOverride": {
+            "type": "structure",
+            "members": {
+                "MaxReadRequestUnits": {
+                    "target": "com.amazonaws.dynamodb#LongObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of read request units for the specified replica table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Overrides the on-demand throughput settings for this replica table. If you don't specify a value for this parameter, it uses the source table's on-demand throughput settings.</p>"
+            }
+        },
         "com.amazonaws.dynamodb#ParameterizedStatement": {
             "type": "structure",
             "members": {
@@ -8595,7 +8662,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": false
                 },
-                "smithy.api#documentation": "<p>Attaches a resource-based policy document to the resource, which can be a table or stream. When you attach a resource-based policy using this API, the policy application is <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n               <i>eventually consistent</i>\n            </a>.</p>\n         <p>\n            <code>PutResourcePolicy</code> is an idempotent operation; running it multiple times on the same resource using the same policy document will return the same revision ID. If you specify an <code>ExpectedRevisionId</code> which doesn't match the current policy's <code>RevisionId</code>, the <code>PolicyNotFoundException</code> will be returned.</p>\n         <note>\n            <p>\n               <code>PutResourcePolicy</code> is an asynchronous operation. If you issue a <code>GetResourcePolicy</code> request immediately after a <code>PutResourcePolicy</code> request, DynamoDB might return your previous policy, if there was one, or return the <code>PolicyNotFoundException</code>. This is because <code>GetResourcePolicy</code> uses an eventually consistent query, and the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then try the <code>GetResourcePolicy</code> request again.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Attaches a resource-based policy document to the resource, which can be a table or stream. When you attach a resource-based policy using this API, the policy application is <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n               <i>eventually consistent</i>\n            </a>.</p>\n         <p>\n            <code>PutResourcePolicy</code> is an idempotent operation; running it multiple times on the same resource using the same policy document will return the same revision ID. If you specify an <code>ExpectedRevisionId</code> that doesn't match the current policy's <code>RevisionId</code>, the <code>PolicyNotFoundException</code> will be returned.</p>\n         <note>\n            <p>\n               <code>PutResourcePolicy</code> is an asynchronous operation. If you issue a <code>GetResourcePolicy</code> request immediately after a <code>PutResourcePolicy</code> request, DynamoDB might return your previous policy, if there was one, or return the <code>PolicyNotFoundException</code>. This is because <code>GetResourcePolicy</code> uses an eventually consistent query, and the metadata for your policy or table might not be available at that moment. Wait for a few seconds, and then try the <code>GetResourcePolicy</code> request again.</p>\n         </note>"
             }
         },
         "com.amazonaws.dynamodb#PutResourcePolicyInput": {
@@ -8611,14 +8678,14 @@
                 "Policy": {
                     "target": "com.amazonaws.dynamodb#ResourcePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Web Services resource-based policy document in JSON format.</p>\n         <p>The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit. For a full list of all considerations that you should keep in mind while attaching a resource-based policy, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html\">Resource-based policy considerations</a>.</p>",
+                        "smithy.api#documentation": "<p>An Amazon Web Services resource-based policy document in JSON format.</p>\n         <ul>\n            <li>\n               <p>The maximum size supported for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when calculating the size of a policy against this limit.</p>\n            </li>\n            <li>\n               <p>Within a resource-based policy, if the action for a DynamoDB service-linked role (SLR) to replicate data for a global table is denied, adding or deleting a replica will fail with an error.</p>\n            </li>\n         </ul>\n         <p>For a full list of all considerations that apply while attaching a resource-based policy, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html\">Resource-based policy considerations</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExpectedRevisionId": {
                     "target": "com.amazonaws.dynamodb#PolicyRevisionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy. When you provide an expected revision ID, if the revision ID of the existing policy on the resource doesn't match or if there's no policy attached to the resource, your request will be rejected with a <code>PolicyNotFoundException</code>.</p>\n         <p>To conditionally put a policy when no policy exists for the resource, specify <code>NO_POLICY</code> for the revision ID.</p>"
+                        "smithy.api#documentation": "<p>A string value that you can use to conditionally update your policy. You can provide the revision ID of your existing policy to make mutating requests against that policy.</p>\n         <note>\n            <p>When you provide an expected revision ID, if the revision ID of the existing policy on the resource doesn't match or if there's no policy attached to the resource, your request will be rejected with a <code>PolicyNotFoundException</code>.</p>\n         </note>\n         <p>To conditionally attach a policy when no policy exists for the resource, specify <code>NO_POLICY</code> for the revision ID.</p>"
                     }
                 },
                 "ConfirmRemoveSelfResourceAccess": {
@@ -8640,7 +8707,7 @@
                 "RevisionId": {
                     "target": "com.amazonaws.dynamodb#PolicyRevisionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that represents the revision ID of the policy. If you are comparing revision IDs, make sure to always use string comparison logic.</p>"
+                        "smithy.api#documentation": "<p>A unique string that represents the revision ID of the policy. If you're comparing revision IDs, make sure to always use string comparison logic.</p>"
                     }
                 }
             },
@@ -9008,6 +9075,12 @@
                         "smithy.api#documentation": "<p>Replica-specific provisioned throughput. If not described, uses the source table's\n            provisioned throughput settings.</p>"
                     }
                 },
+                "OnDemandThroughputOverride": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput settings for the specified replica table.</p>"
+                    }
+                },
                 "GlobalSecondaryIndexes": {
                     "target": "com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexDescriptionList",
                     "traits": {
@@ -9048,6 +9121,12 @@
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughputOverride",
                     "traits": {
                         "smithy.api#documentation": "<p>Replica table GSI-specific provisioned throughput. If not specified, uses the source\n            table GSI's read capacity settings.</p>"
+                    }
+                },
+                "OnDemandThroughputOverride": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput settings for the specified global secondary index in the specified replica table.</p>"
                     }
                 }
             },
@@ -9123,6 +9202,12 @@
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughputOverride",
                     "traits": {
                         "smithy.api#documentation": "<p>If not described, uses the source table GSI's read capacity settings.</p>"
+                    }
+                },
+                "OnDemandThroughputOverride": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput for the specified global secondary index in the specified replica table.</p>"
                     }
                 }
             },
@@ -9658,6 +9743,9 @@
                         "smithy.api#documentation": "<p>Provisioned throughput settings for the restored table.</p>"
                     }
                 },
+                "OnDemandThroughputOverride": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput"
+                },
                 "SSESpecificationOverride": {
                     "target": "com.amazonaws.dynamodb#SSESpecification",
                     "traits": {
@@ -9781,6 +9869,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provisioned throughput settings for the restored table.</p>"
                     }
+                },
+                "OnDemandThroughputOverride": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput"
                 },
                 "SSESpecificationOverride": {
                     "target": "com.amazonaws.dynamodb#SSESpecification",
@@ -10450,6 +10541,9 @@
                         "smithy.api#required": {}
                     }
                 },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput"
+                },
                 "ItemCount": {
                     "target": "com.amazonaws.dynamodb#ItemCount",
                     "traits": {
@@ -10699,6 +10793,9 @@
                 "ProvisionedThroughput": {
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughput"
                 },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput"
+                },
                 "SSESpecification": {
                     "target": "com.amazonaws.dynamodb#SSESpecification"
                 },
@@ -10852,6 +10949,12 @@
                     "target": "com.amazonaws.dynamodb#DeletionProtectionEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether deletion protection is enabled (true) or disabled (false) on the table.</p>"
+                    }
+                },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of read and write units for the specified on-demand table. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 }
             },
@@ -11690,8 +11793,13 @@
                 "ProvisionedThroughput": {
                     "target": "com.amazonaws.dynamodb#ProvisionedThroughput",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index.</p>\n         <p>For current minimum and maximum provisioned throughput values, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service,\n                Account, and Table Quotas</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Represents the provisioned throughput settings for the specified global secondary\n            index.</p>\n         <p>For current minimum and maximum provisioned throughput values, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service,\n                Account, and Table Quotas</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
+                    }
+                },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 }
             },
@@ -12202,6 +12310,12 @@
                         "smithy.api#documentation": "<p>Replica-specific provisioned throughput. If not specified, uses the source table's\n            provisioned throughput settings.</p>"
                     }
                 },
+                "OnDemandThroughputOverride": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughputOverride",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides the maximum on-demand throughput for the replica table.</p>"
+                    }
+                },
                 "GlobalSecondaryIndexes": {
                     "target": "com.amazonaws.dynamodb#ReplicaGlobalSecondaryIndexList",
                     "traits": {
@@ -12313,6 +12427,12 @@
                     "target": "com.amazonaws.dynamodb#DeletionProtectionEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether deletion protection is to be enabled (true) or disabled (false) on the table.</p>"
+                    }
+                },
+                "OnDemandThroughput": {
+                    "target": "com.amazonaws.dynamodb#OnDemandThroughput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the maximum number of read and write units for the specified table in on-demand capacity mode. If you use this parameter, you must specify <code>MaxReadRequestUnits</code>, <code>MaxWriteRequestUnits</code>, or both.</p>"
                     }
                 }
             },
