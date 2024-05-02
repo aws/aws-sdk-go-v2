@@ -1,8 +1,0 @@
-{
-    "id": "adf9c7dc-d48a-43f4-adbc-0567d294b5dc",
-    "type": "feature",
-    "description": "This release adds support to specify an optional, maximum OnDemandThroughput for DynamoDB tables and global secondary indexes in the CreateTable or UpdateTable APIs. You can also override the OnDemandThroughput settings by calling the ImportTable, RestoreFromPointInTime, or RestoreFromBackup APIs.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

@@ -1,3 +1,18 @@
+# Release (2024-05-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.32.0](service/dynamodb/CHANGELOG.md#v1320-2024-05-02)
+  * **Feature**: This release adds support to specify an optional, maximum OnDemandThroughput for DynamoDB tables and global secondary indexes in the CreateTable or UpdateTable APIs. You can also override the OnDemandThroughput settings by calling the ImportTable, RestoreFromPointInTime, or RestoreFromBackup APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.160.0](service/ec2/CHANGELOG.md#v11600-2024-05-02)
+  * **Feature**: This release includes a new API for retrieving the public endorsement key of the EC2 instance's Nitro Trusted Platform Module (NitroTPM).
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.34.0](service/personalize/CHANGELOG.md#v1340-2024-05-02)
+  * **Feature**: This releases ability to delete users and their data, including their metadata and interactions data, from a dataset group.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.18.0](service/redshiftserverless/CHANGELOG.md#v1180-2024-05-02)
+  * **Feature**: Update Redshift Serverless List Scheduled Actions Output Response to include Namespace Name.
+
 # Release (2024-05-01)
 
 ## Module Highlights

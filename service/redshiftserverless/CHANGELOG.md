@@ -1,3 +1,7 @@
+# v1.18.0 (2024-05-02)
+
+* **Feature**: Update Redshift Serverless List Scheduled Actions Output Response to include Namespace Name.
+
 # v1.17.5 (2024-04-22)
 
 * **Documentation**: Updates description of schedule field for scheduled actions.

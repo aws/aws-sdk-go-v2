@@ -1,8 +1,0 @@
-{
-    "id": "84518169-9940-4ed6-8995-5b51de3ba88c",
-    "type": "feature",
-    "description": "Update Redshift Serverless List Scheduled Actions Output Response to include Namespace Name.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

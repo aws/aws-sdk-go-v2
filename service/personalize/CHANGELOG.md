@@ -1,3 +1,7 @@
+# v1.34.0 (2024-05-02)
+
+* **Feature**: This releases ability to delete users and their data, including their metadata and interactions data, from a dataset group.
+
 # v1.33.0 (2024-04-19)
 
 * **Feature**: This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign
