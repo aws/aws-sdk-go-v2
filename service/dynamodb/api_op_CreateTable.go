@@ -140,6 +140,11 @@ type CreateTableInput struct {
 	//   as two distinct attributes when determining the total.
 	LocalSecondaryIndexes []types.LocalSecondaryIndex
 
+	// Sets the maximum number of read and write units for the specified table in
+	// on-demand capacity mode. If you use this parameter, you must specify
+	// MaxReadRequestUnits , MaxWriteRequestUnits , or both.
+	OnDemandThroughput *types.OnDemandThroughput
+
 	// Represents the provisioned throughput settings for a specified table or index.
 	// The settings can be modified using the UpdateTable operation. If you set
 	// BillingMode as PROVISIONED , you must specify this property. If you set
@@ -151,12 +156,11 @@ type CreateTableInput struct {
 
 	// An Amazon Web Services resource-based policy document in JSON format that will
 	// be attached to the table. When you attach a resource-based policy while creating
-	// a table, the policy creation is strongly consistent. The maximum size supported
-	// for a resource-based policy document is 20 KB. DynamoDB counts whitespaces when
-	// calculating the size of a policy against this limit. You can’t request an
-	// increase for this limit. For a full list of all considerations that you should
-	// keep in mind while attaching a resource-based policy, see Resource-based policy
-	// considerations (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html)
+	// a table, the policy application is strongly consistent. The maximum size
+	// supported for a resource-based policy document is 20 KB. DynamoDB counts
+	// whitespaces when calculating the size of a policy against this limit. For a full
+	// list of all considerations that apply for resource-based policies, see
+	// Resource-based policy considerations (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html)
 	// .
 	ResourcePolicy *string
 

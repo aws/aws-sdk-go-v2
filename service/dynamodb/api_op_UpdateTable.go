@@ -82,6 +82,11 @@ type UpdateTableInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	GlobalSecondaryIndexUpdates []types.GlobalSecondaryIndexUpdate
 
+	// Updates the maximum number of read and write units for the specified table in
+	// on-demand capacity mode. If you use this parameter, you must specify
+	// MaxReadRequestUnits , MaxWriteRequestUnits , or both.
+	OnDemandThroughput *types.OnDemandThroughput
+
 	// The new provisioned throughput settings for the specified table or index.
 	ProvisionedThroughput *types.ProvisionedThroughput
 

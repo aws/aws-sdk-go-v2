@@ -1,0 +1,8 @@
+{
+    "id": "68407b7c-e0d8-493f-83c6-84f2455da645",
+    "type": "feature",
+    "description": "This release includes a new API for retrieving the public endorsement key of the EC2 instance's Nitro Trusted Platform Module (NitroTPM).",
+    "modules": [
+        "service/ec2"
+    ]
+}

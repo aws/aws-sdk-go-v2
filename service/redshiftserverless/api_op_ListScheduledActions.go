@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,8 +52,8 @@ type ListScheduledActionsOutput struct {
 	// the returned token to retrieve the next page.
 	NextToken *string
 
-	// All of the returned scheduled action objects.
-	ScheduledActions []string
+	// All of the returned scheduled action association objects.
+	ScheduledActions []types.ScheduledActionAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

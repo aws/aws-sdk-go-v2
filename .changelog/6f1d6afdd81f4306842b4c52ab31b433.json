@@ -1,0 +1,8 @@
+{
+    "id": "6f1d6afd-d81f-4306-842b-4c52ab31b433",
+    "type": "feature",
+    "description": "This releases ability to delete users and their data, including their metadata and interactions data, from a dataset group.",
+    "modules": [
+        "service/personalize"
+    ]
+}

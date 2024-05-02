@@ -16,7 +16,7 @@ import (
 // application is eventually consistent  (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html)
 // . PutResourcePolicy is an idempotent operation; running it multiple times on
 // the same resource using the same policy document will return the same revision
-// ID. If you specify an ExpectedRevisionId which doesn't match the current
+// ID. If you specify an ExpectedRevisionId that doesn't match the current
 // policy's RevisionId , the PolicyNotFoundException will be returned.
 // PutResourcePolicy is an asynchronous operation. If you issue a GetResourcePolicy
 // request immediately after a PutResourcePolicy request, DynamoDB might return
@@ -41,10 +41,14 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// An Amazon Web Services resource-based policy document in JSON format. The
-	// maximum size supported for a resource-based policy document is 20 KB. DynamoDB
-	// counts whitespaces when calculating the size of a policy against this limit. For
-	// a full list of all considerations that you should keep in mind while attaching a
+	// An Amazon Web Services resource-based policy document in JSON format.
+	//   - The maximum size supported for a resource-based policy document is 20 KB.
+	//   DynamoDB counts whitespaces when calculating the size of a policy against this
+	//   limit.
+	//   - Within a resource-based policy, if the action for a DynamoDB service-linked
+	//   role (SLR) to replicate data for a global table is denied, adding or deleting a
+	//   replica will fail with an error.
+	// For a full list of all considerations that apply while attaching a
 	// resource-based policy, see Resource-based policy considerations (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html)
 	// .
 	//
@@ -72,7 +76,7 @@ type PutResourcePolicyInput struct {
 	// against that policy. When you provide an expected revision ID, if the revision
 	// ID of the existing policy on the resource doesn't match or if there's no policy
 	// attached to the resource, your request will be rejected with a
-	// PolicyNotFoundException . To conditionally put a policy when no policy exists
+	// PolicyNotFoundException . To conditionally attach a policy when no policy exists
 	// for the resource, specify NO_POLICY for the revision ID.
 	ExpectedRevisionId *string
 
@@ -81,7 +85,7 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// A unique string that represents the revision ID of the policy. If you are
+	// A unique string that represents the revision ID of the policy. If you're
 	// comparing revision IDs, make sure to always use string comparison logic.
 	RevisionId *string
 

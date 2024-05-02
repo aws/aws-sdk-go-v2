@@ -28,12 +28,12 @@ import (
 // Because GetResourcePolicy uses an eventually consistent query, the metadata for
 // your policy or table might not be available at that moment. Wait for a few
 // seconds, and then retry the GetResourcePolicy request. After a GetResourcePolicy
-// request returns a policy created using the PutResourcePolicy request, you can
-// assume the policy will start getting applied in the authorization of requests to
-// the resource. Because this process is eventually consistent, it will take some
-// time to apply the policy to all requests to a resource. Policies that you attach
-// while creating a table using the CreateTable request will always be applied to
-// all requests for that table.
+// request returns a policy created using the PutResourcePolicy request, the
+// policy will be applied in the authorization of requests to the resource. Because
+// this process is eventually consistent, it will take some time to apply the
+// policy to all requests to a resource. Policies that you attach while creating a
+// table using the CreateTable request will always be applied to all requests for
+// that table.
 func (c *Client) GetResourcePolicy(ctx context.Context, params *GetResourcePolicyInput, optFns ...func(*Options)) (*GetResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetResourcePolicyInput{}
@@ -66,7 +66,7 @@ type GetResourcePolicyOutput struct {
 	// table or stream, in JSON format.
 	Policy *string
 
-	// A unique string that represents the revision ID of the policy. If you are
+	// A unique string that represents the revision ID of the policy. If you're
 	// comparing revision IDs, make sure to always use string comparison logic.
 	RevisionId *string
 

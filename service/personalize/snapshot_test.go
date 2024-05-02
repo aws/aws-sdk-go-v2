@@ -98,6 +98,18 @@ func TestCheckSnapshot_CreateCampaign(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDataDeletionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataDeletionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataDeletionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
@@ -386,6 +398,18 @@ func TestCheckSnapshot_DescribeCampaign(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDataDeletionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataDeletionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDataDeletionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDataset(context.Background(), nil, func(o *Options) {
@@ -583,6 +607,18 @@ func TestCheckSnapshot_ListCampaigns(t *testing.T) {
 	_, err := svc.ListCampaigns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCampaigns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataDeletionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataDeletionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataDeletionJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -901,6 +937,18 @@ func TestUpdateSnapshot_CreateCampaign(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDataDeletionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataDeletionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataDeletionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
@@ -1189,6 +1237,18 @@ func TestUpdateSnapshot_DescribeCampaign(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeDataDeletionJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataDeletionJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDataDeletionJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDataset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDataset(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1446,18 @@ func TestUpdateSnapshot_ListCampaigns(t *testing.T) {
 	_, err := svc.ListCampaigns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCampaigns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataDeletionJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataDeletionJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataDeletionJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

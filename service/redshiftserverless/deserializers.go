@@ -8194,6 +8194,55 @@ loop:
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentScheduledActionAssociation(v **types.ScheduledActionAssociation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScheduledActionAssociation
+	if *v == nil {
+		sv = &types.ScheduledActionAssociation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "namespaceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", value)
+				}
+				sv.NamespaceName = ptr.String(jtv)
+			}
+
+		case "scheduledActionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduledActionName to be of type string, got %T instead", value)
+				}
+				sv.ScheduledActionName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentScheduledActionResponse(v **types.ScheduledActionResponse, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8326,7 +8375,7 @@ func awsAwsjson11_deserializeDocumentScheduledActionResponse(v **types.Scheduled
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentScheduledActionsList(v *[]string, value interface{}) error {
+func awsAwsjson11_deserializeDocumentScheduledActionsList(v *[]types.ScheduledActionAssociation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8339,22 +8388,20 @@ func awsAwsjson11_deserializeDocumentScheduledActionsList(v *[]string, value int
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []string
+	var cv []types.ScheduledActionAssociation
 	if *v == nil {
-		cv = []string{}
+		cv = []types.ScheduledActionAssociation{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col string
-		if value != nil {
-			jtv, ok := value.(string)
-			if !ok {
-				return fmt.Errorf("expected ScheduledActionName to be of type string, got %T instead", value)
-			}
-			col = jtv
+		var col types.ScheduledActionAssociation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentScheduledActionAssociation(&destAddr, value); err != nil {
+			return err
 		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

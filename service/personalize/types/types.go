@@ -508,6 +508,82 @@ type ContinuousHyperParameterRange struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a job that deletes all references to specific users from an Amazon
+// Personalize dataset group in batches. For information about creating a data
+// deletion job, see Deleting users (https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html)
+// .
+type DataDeletionJob struct {
+
+	// The creation date and time (in Unix time) of the data deletion job.
+	CreationDateTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the data deletion job.
+	DataDeletionJobArn *string
+
+	// Describes the data source that contains the data to upload to a dataset, or the
+	// list of records to delete from Amazon Personalize.
+	DataSource *DataSource
+
+	// The Amazon Resource Name (ARN) of the dataset group the job deletes records
+	// from.
+	DatasetGroupArn *string
+
+	// If a data deletion job fails, provides the reason why.
+	FailureReason *string
+
+	// The name of the data deletion job.
+	JobName *string
+
+	// The date and time (in Unix time) the data deletion job was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// The number of records deleted by a COMPLETED job.
+	NumDeleted *int32
+
+	// The Amazon Resource Name (ARN) of the IAM role that has permissions to read
+	// from the Amazon S3 data source.
+	RoleArn *string
+
+	// The status of the data deletion job. A data deletion job can have one of the
+	// following statuses:
+	//   - PENDING > IN_PROGRESS > COMPLETED -or- FAILED
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of the properties of a data deletion job. For a complete
+// listing, call the DescribeDataDeletionJob (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html)
+// API operation.
+type DataDeletionJobSummary struct {
+
+	// The creation date and time (in Unix time) of the data deletion job.
+	CreationDateTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the data deletion job.
+	DataDeletionJobArn *string
+
+	// The Amazon Resource Name (ARN) of the dataset group the job deleted records
+	// from.
+	DatasetGroupArn *string
+
+	// If a data deletion job fails, provides the reason why.
+	FailureReason *string
+
+	// The name of the data deletion job.
+	JobName *string
+
+	// The date and time (in Unix time) the data deletion job was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// The status of the data deletion job. A data deletion job can have one of the
+	// following statuses:
+	//   - PENDING > IN_PROGRESS > COMPLETED -or- FAILED
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides metadata for a dataset.
 type Dataset struct {
 
@@ -903,11 +979,19 @@ type DatasetUpdateSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the data source that contains the data to upload to a dataset.
+// Describes the data source that contains the data to upload to a dataset, or the
+// list of records to delete from Amazon Personalize.
 type DataSource struct {
 
-	// The path to the Amazon S3 bucket where the data that you want to upload to your
-	// dataset is stored. For example: s3://bucket-name/folder-name/
+	// For dataset import jobs, the path to the Amazon S3 bucket where the data that
+	// you want to upload to your dataset is stored. For data deletion jobs, the path
+	// to the Amazon S3 bucket that stores the list of records to delete. For example:
+	// s3://bucket-name/folder-name/fileName.csv If your CSV files are in a folder in
+	// your Amazon S3 bucket and you want your import job or data deletion job to
+	// consider multiple files, you can specify the path to the folder. With a data
+	// deletion job, Amazon Personalize uses all files in the folder and any sub
+	// folder. Use the following syntax with a / after the folder name:
+	// s3://bucket-name/folder-name/
 	DataLocation *string
 
 	noSmithyDocumentSerde

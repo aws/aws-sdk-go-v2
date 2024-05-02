@@ -61,7 +61,7 @@ type DeleteResourcePolicyInput struct {
 
 type DeleteResourcePolicyOutput struct {
 
-	// A unique string that represents the revision ID of the policy. If you are
+	// A unique string that represents the revision ID of the policy. If you're
 	// comparing revision IDs, make sure to always use string comparison logic. This
 	// value will be empty if you make a request against a resource without a policy.
 	RevisionId *string

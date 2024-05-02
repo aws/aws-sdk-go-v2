@@ -62,6 +62,11 @@ type RestoreTableFromBackupInput struct {
 	// of the indexes at the time of restore.
 	LocalSecondaryIndexOverride []types.LocalSecondaryIndex
 
+	// Sets the maximum number of read and write units for the specified on-demand
+	// table. If you use this parameter, you must specify MaxReadRequestUnits ,
+	// MaxWriteRequestUnits , or both.
+	OnDemandThroughputOverride *types.OnDemandThroughput
+
 	// Provisioned throughput settings for the restored table.
 	ProvisionedThroughputOverride *types.ProvisionedThroughput
 

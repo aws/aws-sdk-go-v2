@@ -70,6 +70,26 @@ func (m *validateOpCreateCampaign) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDataDeletionJob struct {
+}
+
+func (*validateOpCreateDataDeletionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataDeletionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataDeletionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataDeletionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDatasetExportJob struct {
 }
 
@@ -545,6 +565,26 @@ func (m *validateOpDescribeCampaign) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeCampaignInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeDataDeletionJob struct {
+}
+
+func (*validateOpDescribeDataDeletionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDataDeletionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDataDeletionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDataDeletionJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1042,6 +1082,10 @@ func addOpCreateCampaignValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCampaign{}, middleware.After)
 }
 
+func addOpCreateDataDeletionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataDeletionJob{}, middleware.After)
+}
+
 func addOpCreateDatasetExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDatasetExportJob{}, middleware.After)
 }
@@ -1136,6 +1180,10 @@ func addOpDescribeBatchSegmentJobValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDescribeCampaignValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCampaign{}, middleware.After)
+}
+
+func addOpDescribeDataDeletionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDataDeletionJob{}, middleware.After)
 }
 
 func addOpDescribeDatasetExportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1566,6 +1614,35 @@ func validateOpCreateCampaignInput(v *CreateCampaignInput) error {
 	}
 	if v.SolutionVersionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SolutionVersionArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataDeletionJobInput(v *CreateDataDeletionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataDeletionJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.DatasetGroupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetGroupArn"))
+	}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
@@ -2045,6 +2122,21 @@ func validateOpDescribeCampaignInput(v *DescribeCampaignInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCampaignInput"}
 	if v.CampaignArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CampaignArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDataDeletionJobInput(v *DescribeDataDeletionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDataDeletionJobInput"}
+	if v.DataDeletionJobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataDeletionJobArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

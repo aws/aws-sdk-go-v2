@@ -5378,6 +5378,18 @@ func TestCheckSnapshot_GetInstanceMetadataDefaults(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetInstanceTpmEkPub(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstanceTpmEkPub(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetInstanceTpmEkPub")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInstanceTypesFromInstanceRequirements(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInstanceTypesFromInstanceRequirements(context.Background(), nil, func(o *Options) {
@@ -12810,6 +12822,18 @@ func TestUpdateSnapshot_GetInstanceMetadataDefaults(t *testing.T) {
 	_, err := svc.GetInstanceMetadataDefaults(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetInstanceMetadataDefaults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetInstanceTpmEkPub(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetInstanceTpmEkPub(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetInstanceTpmEkPub")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

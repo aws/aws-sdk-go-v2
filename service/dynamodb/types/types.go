@@ -838,6 +838,11 @@ type CreateGlobalSecondaryIndexAction struct {
 	// This member is required.
 	Projection *Projection
 
+	// The maximum number of read and write units for the global secondary index being
+	// created. If you use this parameter, you must specify MaxReadRequestUnits ,
+	// MaxWriteRequestUnits , or both.
+	OnDemandThroughput *OnDemandThroughput
+
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
 	// see Service, Account, and Table Quotas (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
@@ -874,6 +879,11 @@ type CreateReplicationGroupMemberAction struct {
 	// ARN. Note that you should only provide this parameter if the key is different
 	// from the default DynamoDB KMS key alias/aws/dynamodb .
 	KMSMasterKeyId *string
+
+	// The maximum on-demand throughput settings for the specified replica table being
+	// created. You can only modify MaxReadRequestUnits , because you can't modify
+	// MaxWriteRequestUnits for individual replica tables.
+	OnDemandThroughputOverride *OnDemandThroughputOverride
 
 	// Replica-specific provisioned throughput. If not specified, uses the source
 	// table's provisioned throughput settings.
@@ -1324,6 +1334,11 @@ type GlobalSecondaryIndex struct {
 	// This member is required.
 	Projection *Projection
 
+	// The maximum number of read and write units for the specified global secondary
+	// index. If you use this parameter, you must specify MaxReadRequestUnits ,
+	// MaxWriteRequestUnits , or both.
+	OnDemandThroughput *OnDemandThroughput
+
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
 	// see Service, Account, and Table Quotas (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
@@ -1398,6 +1413,11 @@ type GlobalSecondaryIndexDescription struct {
 	// partition key physically close together, in sorted order by the sort key value.
 	KeySchema []KeySchemaElement
 
+	// The maximum number of read and write units for the specified global secondary
+	// index. If you use this parameter, you must specify MaxReadRequestUnits ,
+	// MaxWriteRequestUnits , or both.
+	OnDemandThroughput *OnDemandThroughput
+
 	// Represents attributes that are copied (projected) from the table into the
 	// global secondary index. These are in addition to the primary key attributes and
 	// index key attributes, which are automatically projected.
@@ -1430,6 +1450,11 @@ type GlobalSecondaryIndexInfo struct {
 	// "range attribute" derives from the way DynamoDB stores items with the same
 	// partition key physically close together, in sorted order by the sort key value.
 	KeySchema []KeySchemaElement
+
+	// Sets the maximum number of read and write units for the specified on-demand
+	// table. If you use this parameter, you must specify MaxReadRequestUnits ,
+	// MaxWriteRequestUnits , or both.
+	OnDemandThroughput *OnDemandThroughput
 
 	// Represents attributes that are copied (projected) from the table into the
 	// global secondary index. These are in addition to the primary key attributes and
@@ -1905,6 +1930,37 @@ type LocalSecondaryIndexInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Sets the maximum number of read and write units for the specified on-demand
+// table. If you use this parameter, you must specify MaxReadRequestUnits ,
+// MaxWriteRequestUnits , or both.
+type OnDemandThroughput struct {
+
+	// Maximum number of read request units for the specified table. To specify a
+	// maximum OnDemandThroughput on your table, set the value of MaxReadRequestUnits
+	// as greater than or equal to 1. To remove the maximum OnDemandThroughput that is
+	// currently set on your table, set the value of MaxReadRequestUnits to -1.
+	MaxReadRequestUnits *int64
+
+	// Maximum number of write request units for the specified table. To specify a
+	// maximum OnDemandThroughput on your table, set the value of MaxWriteRequestUnits
+	// as greater than or equal to 1. To remove the maximum OnDemandThroughput that is
+	// currently set on your table, set the value of MaxWriteRequestUnits to -1.
+	MaxWriteRequestUnits *int64
+
+	noSmithyDocumentSerde
+}
+
+// Overrides the on-demand throughput settings for this replica table. If you
+// don't specify a value for this parameter, it uses the source table's on-demand
+// throughput settings.
+type OnDemandThroughputOverride struct {
+
+	// Maximum number of read request units for the specified replica table.
+	MaxReadRequestUnits *int64
+
+	noSmithyDocumentSerde
+}
+
 // Represents a PartiQL statement that uses parameters.
 type ParameterizedStatement struct {
 
@@ -2161,6 +2217,10 @@ type ReplicaDescription struct {
 	// The KMS key of the replica that will be used for KMS encryption.
 	KMSMasterKeyId *string
 
+	// Overrides the maximum on-demand throughput settings for the specified replica
+	// table.
+	OnDemandThroughputOverride *OnDemandThroughputOverride
+
 	// Replica-specific provisioned throughput. If not described, uses the source
 	// table's provisioned throughput settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
@@ -2208,6 +2268,10 @@ type ReplicaGlobalSecondaryIndex struct {
 	//
 	// This member is required.
 	IndexName *string
+
+	// Overrides the maximum on-demand throughput settings for the specified global
+	// secondary index in the specified replica table.
+	OnDemandThroughputOverride *OnDemandThroughputOverride
 
 	// Replica table GSI-specific provisioned throughput. If not specified, uses the
 	// source table GSI's read capacity settings.
@@ -2260,6 +2324,10 @@ type ReplicaGlobalSecondaryIndexDescription struct {
 
 	// The name of the global secondary index.
 	IndexName *string
+
+	// Overrides the maximum on-demand throughput for the specified global secondary
+	// index in the specified replica table.
+	OnDemandThroughputOverride *OnDemandThroughputOverride
 
 	// If not described, uses the source table GSI's read capacity settings.
 	ProvisionedThroughputOverride *ProvisionedThroughputOverride
@@ -2516,6 +2584,11 @@ type SourceTableDetails struct {
 	// Number of items in the table. Note that this is an approximate value.
 	ItemCount *int64
 
+	// Sets the maximum number of read and write units for the specified on-demand
+	// table. If you use this parameter, you must specify MaxReadRequestUnits ,
+	// MaxWriteRequestUnits , or both.
+	OnDemandThroughput *OnDemandThroughput
+
 	// ARN of the table for which backup was created.
 	TableArn *string
 
@@ -2687,6 +2760,11 @@ type TableCreationParameters struct {
 	// import operation.
 	GlobalSecondaryIndexes []GlobalSecondaryIndex
 
+	// Sets the maximum number of read and write units for the specified on-demand
+	// table. If you use this parameter, you must specify MaxReadRequestUnits ,
+	// MaxWriteRequestUnits , or both.
+	OnDemandThroughput *OnDemandThroughput
+
 	// Represents the provisioned throughput settings for a specified table or index.
 	// The settings can be modified using the UpdateTable operation. For current
 	// minimum and maximum provisioned throughput values, see Service, Account, and
@@ -2840,6 +2918,11 @@ type TableDescription struct {
 	// If the table is in the DELETING state, no information about indexes will be
 	// returned.
 	LocalSecondaryIndexes []LocalSecondaryIndexDescription
+
+	// The maximum number of read and write units for the specified on-demand table.
+	// If you use this parameter, you must specify MaxReadRequestUnits ,
+	// MaxWriteRequestUnits , or both.
+	OnDemandThroughput *OnDemandThroughput
 
 	// The provisioned throughput settings for the table, consisting of read and write
 	// capacity units, along with data about increases and decreases.
@@ -3027,12 +3110,15 @@ type UpdateGlobalSecondaryIndexAction struct {
 	// This member is required.
 	IndexName *string
 
+	// Updates the maximum number of read and write units for the specified global
+	// secondary index. If you use this parameter, you must specify MaxReadRequestUnits
+	// , MaxWriteRequestUnits , or both.
+	OnDemandThroughput *OnDemandThroughput
+
 	// Represents the provisioned throughput settings for the specified global
 	// secondary index. For current minimum and maximum provisioned throughput values,
 	// see Service, Account, and Table Quotas (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
-	//
-	// This member is required.
 	ProvisionedThroughput *ProvisionedThroughput
 
 	noSmithyDocumentSerde
@@ -3063,6 +3149,9 @@ type UpdateReplicationGroupMemberAction struct {
 	// that you should only provide this parameter if the key is different from the
 	// default DynamoDB KMS key alias/aws/dynamodb .
 	KMSMasterKeyId *string
+
+	// Overrides the maximum on-demand throughput for the replica table.
+	OnDemandThroughputOverride *OnDemandThroughputOverride
 
 	// Replica-specific provisioned throughput. If not specified, uses the source
 	// table's provisioned throughput settings.
