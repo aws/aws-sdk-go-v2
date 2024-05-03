@@ -1,8 +1,0 @@
-{
-    "id": "c654aed5-cb6c-48e0-88ab-baf550414a52",
-    "type": "feature",
-    "description": "This release adds support for using Provisioned Throughput with Bedrock Agents.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

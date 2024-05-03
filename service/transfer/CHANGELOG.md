@@ -1,3 +1,7 @@
+# v1.47.1 (2024-05-03)
+
+* No change notes available for this release.
+
 # v1.47.0 (2024-04-22)
 
 * **Feature**: Adding new API to support remote directory listing using SFTP connector

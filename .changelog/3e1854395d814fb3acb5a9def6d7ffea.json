@@ -1,8 +1,0 @@
-{
-    "id": "3e185439-5d81-4fb3-acb5-a9def6d7ffea",
-    "type": "documentation",
-    "description": "Updated guidance on using private or self-signed certificate authorities (CAs) with AWS DataSync object storage locations.",
-    "modules": [
-        "service/datasync"
-    ]
-}

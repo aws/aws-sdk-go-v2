@@ -1,3 +1,21 @@
+# Release (2024-05-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.10.0](service/bedrockagent/CHANGELOG.md#v1100-2024-05-03)
+  * **Feature**: This release adds support for using Provisioned Throughput with Bedrock Agents.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.97.0](service/connect/CHANGELOG.md#v1970-2024-05-03)
+  * **Feature**: This release adds 5 new APIs for managing attachments: StartAttachedFileUpload, CompleteAttachedFileUpload, GetAttachedFile, BatchGetAttachedFileMetadata, DeleteAttachedFile. These APIs can be used to programmatically upload and download attachments to Connect resources, like cases.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.17.0](service/connectcases/CHANGELOG.md#v1170-2024-05-03)
+  * **Feature**: This feature supports the release of Files related items
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.37.1](service/datasync/CHANGELOG.md#v1371-2024-05-03)
+  * **Documentation**: Updated guidance on using private or self-signed certificate authorities (CAs) with AWS DataSync object storage locations.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.26.0](service/inspector2/CHANGELOG.md#v1260-2024-05-03)
+  * **Feature**: This release adds CSV format to GetCisScanReport for Inspector v2
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.139.0](service/sagemaker/CHANGELOG.md#v11390-2024-05-03)
+  * **Feature**: Amazon SageMaker Inference now supports m6i, c6i, r6i, m7i, c7i, r7i and g5 instance types for Batch Transform Jobs
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.29.0](service/sesv2/CHANGELOG.md#v1290-2024-05-03)
+  * **Feature**: Adds support for specifying replacement headers per BulkEmailEntry in SendBulkEmail in SESv2.
+
 # Release (2024-05-02)
 
 ## General Highlights

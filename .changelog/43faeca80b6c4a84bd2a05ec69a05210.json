@@ -1,8 +1,0 @@
-{
-    "id": "43faeca8-0b6c-4a84-bd2a-05ec69a05210",
-    "type": "feature",
-    "description": "This feature supports the release of Files related items",
-    "modules": [
-        "service/connectcases"
-    ]
-}

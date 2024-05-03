@@ -1,3 +1,7 @@
+# v1.37.1 (2024-05-03)
+
+* **Documentation**: Updated guidance on using private or self-signed certificate authorities (CAs) with AWS DataSync object storage locations.
+
 # v1.37.0 (2024-04-24)
 
 * **Feature**: This change allows users to disable and enable the schedules associated with their tasks.

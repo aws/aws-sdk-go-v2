@@ -1,3 +1,7 @@
+# v1.26.0 (2024-05-03)
+
+* **Feature**: This release adds CSV format to GetCisScanReport for Inspector v2
+
 # v1.25.0 (2024-04-29)
 
 * **Feature**: Update Inspector2 to include new Agentless API parameters.

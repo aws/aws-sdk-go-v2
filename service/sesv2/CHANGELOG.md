@@ -1,3 +1,7 @@
+# v1.29.0 (2024-05-03)
+
+* **Feature**: Adds support for specifying replacement headers per BulkEmailEntry in SendBulkEmail in SESv2.
+
 # v1.28.0 (2024-05-01)
 
 * **Feature**: Fixes ListContacts and ListImportJobs APIs to use POST instead of GET.

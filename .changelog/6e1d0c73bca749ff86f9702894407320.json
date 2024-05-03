@@ -1,8 +1,0 @@
-{
-    "id": "6e1d0c73-bca7-49ff-86f9-702894407320",
-    "type": "feature",
-    "description": "Adds support for specifying replacement headers per BulkEmailEntry in SendBulkEmail in SESv2.",
-    "modules": [
-        "service/sesv2"
-    ]
-}

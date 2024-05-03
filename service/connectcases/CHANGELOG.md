@@ -1,3 +1,7 @@
+# v1.17.0 (2024-05-03)
+
+* **Feature**: This feature supports the release of Files related items
+
 # v1.16.0 (2024-04-29)
 
 * **Feature**: This feature releases DeleteField, DeletedLayout, and DeleteTemplate API's
