@@ -51,7 +51,7 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	Name *string
 
-	// The data deletion policy assigned to the data source.
+	// The data deletion policy of the updated data source.
 	DataDeletionPolicy types.DataDeletionPolicy
 
 	// Specifies a new description for the data source.

@@ -3783,6 +3783,11 @@ func awsRestjson1_serializeDocumentAgentAliasRoutingConfigurationListItem(v *typ
 		ok.String(*v.AgentVersion)
 	}
 
+	if v.ProvisionedThroughput != nil {
+		ok := object.Key("provisionedThroughput")
+		ok.String(*v.ProvisionedThroughput)
+	}
+
 	return nil
 }
 

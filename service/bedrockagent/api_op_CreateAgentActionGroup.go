@@ -55,7 +55,8 @@ type CreateAgentActionGroupInput struct {
 	AgentVersion *string
 
 	// The Amazon Resource Name (ARN) of the Lambda function containing the business
-	// logic that is carried out upon invoking the action.
+	// logic that is carried out upon invoking the action or the custom control method
+	// for handling the information elicited from the user.
 	ActionGroupExecutor types.ActionGroupExecutor
 
 	// Specifies whether the action group is available for the agent to invoke or not

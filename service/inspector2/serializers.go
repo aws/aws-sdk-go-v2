@@ -1758,6 +1758,11 @@ func awsRestjson1_serializeOpDocumentGetCisScanReportInput(v *GetCisScanReportIn
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ReportFormat) > 0 {
+		ok := object.Key("reportFormat")
+		ok.String(string(v.ReportFormat))
+	}
+
 	if v.ScanArn != nil {
 		ok := object.Key("scanArn")
 		ok.String(*v.ScanArn)

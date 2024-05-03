@@ -7311,6 +7311,11 @@ func awsRestjson1_deserializeDocumentAgentAlias(v **types.AgentAlias, value inte
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
+			}
+
 		case "routingConfiguration":
 			if err := awsRestjson1_deserializeDocumentAgentAliasRoutingConfiguration(&sv.RoutingConfiguration, value); err != nil {
 				return err
@@ -7497,6 +7502,15 @@ func awsRestjson1_deserializeDocumentAgentAliasRoutingConfigurationListItem(v **
 					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
 				}
 				sv.AgentVersion = ptr.String(jtv)
+			}
+
+		case "provisionedThroughput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProvisionedModelIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ProvisionedThroughput = ptr.String(jtv)
 			}
 
 		default:

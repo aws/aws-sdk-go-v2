@@ -6802,12 +6802,74 @@ const (
 	TransformInstanceTypeMlM54xlarge    TransformInstanceType = "ml.m5.4xlarge"
 	TransformInstanceTypeMlM512xlarge   TransformInstanceType = "ml.m5.12xlarge"
 	TransformInstanceTypeMlM524xlarge   TransformInstanceType = "ml.m5.24xlarge"
+	TransformInstanceTypeMlM6iLarge     TransformInstanceType = "ml.m6i.large"
+	TransformInstanceTypeMlM6iXlarge    TransformInstanceType = "ml.m6i.xlarge"
+	TransformInstanceTypeMlM6i2xlarge   TransformInstanceType = "ml.m6i.2xlarge"
+	TransformInstanceTypeMlM6i4xlarge   TransformInstanceType = "ml.m6i.4xlarge"
+	TransformInstanceTypeMlM6i8xlarge   TransformInstanceType = "ml.m6i.8xlarge"
+	TransformInstanceTypeMlM6i12xlarge  TransformInstanceType = "ml.m6i.12xlarge"
+	TransformInstanceTypeMlM6i16xlarge  TransformInstanceType = "ml.m6i.16xlarge"
+	TransformInstanceTypeMlM6i24xlarge  TransformInstanceType = "ml.m6i.24xlarge"
+	TransformInstanceTypeMlM6i32xlarge  TransformInstanceType = "ml.m6i.32xlarge"
+	TransformInstanceTypeMlC6iLarge     TransformInstanceType = "ml.c6i.large"
+	TransformInstanceTypeMlC6iXlarge    TransformInstanceType = "ml.c6i.xlarge"
+	TransformInstanceTypeMlC6i2xlarge   TransformInstanceType = "ml.c6i.2xlarge"
+	TransformInstanceTypeMlC6i4xlarge   TransformInstanceType = "ml.c6i.4xlarge"
+	TransformInstanceTypeMlC6i8xlarge   TransformInstanceType = "ml.c6i.8xlarge"
+	TransformInstanceTypeMlC6i12xlarge  TransformInstanceType = "ml.c6i.12xlarge"
+	TransformInstanceTypeMlC6i16xlarge  TransformInstanceType = "ml.c6i.16xlarge"
+	TransformInstanceTypeMlC6i24xlarge  TransformInstanceType = "ml.c6i.24xlarge"
+	TransformInstanceTypeMlC6i32xlarge  TransformInstanceType = "ml.c6i.32xlarge"
+	TransformInstanceTypeMlR6iLarge     TransformInstanceType = "ml.r6i.large"
+	TransformInstanceTypeMlR6iXlarge    TransformInstanceType = "ml.r6i.xlarge"
+	TransformInstanceTypeMlR6i2xlarge   TransformInstanceType = "ml.r6i.2xlarge"
+	TransformInstanceTypeMlR6i4xlarge   TransformInstanceType = "ml.r6i.4xlarge"
+	TransformInstanceTypeMlR6i8xlarge   TransformInstanceType = "ml.r6i.8xlarge"
+	TransformInstanceTypeMlR6i12xlarge  TransformInstanceType = "ml.r6i.12xlarge"
+	TransformInstanceTypeMlR6i16xlarge  TransformInstanceType = "ml.r6i.16xlarge"
+	TransformInstanceTypeMlR6i24xlarge  TransformInstanceType = "ml.r6i.24xlarge"
+	TransformInstanceTypeMlR6i32xlarge  TransformInstanceType = "ml.r6i.32xlarge"
+	TransformInstanceTypeMlM7iLarge     TransformInstanceType = "ml.m7i.large"
+	TransformInstanceTypeMlM7iXlarge    TransformInstanceType = "ml.m7i.xlarge"
+	TransformInstanceTypeMlM7i2xlarge   TransformInstanceType = "ml.m7i.2xlarge"
+	TransformInstanceTypeMlM7i4xlarge   TransformInstanceType = "ml.m7i.4xlarge"
+	TransformInstanceTypeMlM7i8xlarge   TransformInstanceType = "ml.m7i.8xlarge"
+	TransformInstanceTypeMlM7i12xlarge  TransformInstanceType = "ml.m7i.12xlarge"
+	TransformInstanceTypeMlM7i16xlarge  TransformInstanceType = "ml.m7i.16xlarge"
+	TransformInstanceTypeMlM7i24xlarge  TransformInstanceType = "ml.m7i.24xlarge"
+	TransformInstanceTypeMlM7i48xlarge  TransformInstanceType = "ml.m7i.48xlarge"
+	TransformInstanceTypeMlC7iLarge     TransformInstanceType = "ml.c7i.large"
+	TransformInstanceTypeMlC7iXlarge    TransformInstanceType = "ml.c7i.xlarge"
+	TransformInstanceTypeMlC7i2xlarge   TransformInstanceType = "ml.c7i.2xlarge"
+	TransformInstanceTypeMlC7i4xlarge   TransformInstanceType = "ml.c7i.4xlarge"
+	TransformInstanceTypeMlC7i8xlarge   TransformInstanceType = "ml.c7i.8xlarge"
+	TransformInstanceTypeMlC7i12xlarge  TransformInstanceType = "ml.c7i.12xlarge"
+	TransformInstanceTypeMlC7i16xlarge  TransformInstanceType = "ml.c7i.16xlarge"
+	TransformInstanceTypeMlC7i24xlarge  TransformInstanceType = "ml.c7i.24xlarge"
+	TransformInstanceTypeMlC7i48xlarge  TransformInstanceType = "ml.c7i.48xlarge"
+	TransformInstanceTypeMlR7iLarge     TransformInstanceType = "ml.r7i.large"
+	TransformInstanceTypeMlR7iXlarge    TransformInstanceType = "ml.r7i.xlarge"
+	TransformInstanceTypeMlR7i2xlarge   TransformInstanceType = "ml.r7i.2xlarge"
+	TransformInstanceTypeMlR7i4xlarge   TransformInstanceType = "ml.r7i.4xlarge"
+	TransformInstanceTypeMlR7i8xlarge   TransformInstanceType = "ml.r7i.8xlarge"
+	TransformInstanceTypeMlR7i12xlarge  TransformInstanceType = "ml.r7i.12xlarge"
+	TransformInstanceTypeMlR7i16xlarge  TransformInstanceType = "ml.r7i.16xlarge"
+	TransformInstanceTypeMlR7i24xlarge  TransformInstanceType = "ml.r7i.24xlarge"
+	TransformInstanceTypeMlR7i48xlarge  TransformInstanceType = "ml.r7i.48xlarge"
 	TransformInstanceTypeMlG4dnXlarge   TransformInstanceType = "ml.g4dn.xlarge"
 	TransformInstanceTypeMlG4dn2xlarge  TransformInstanceType = "ml.g4dn.2xlarge"
 	TransformInstanceTypeMlG4dn4xlarge  TransformInstanceType = "ml.g4dn.4xlarge"
 	TransformInstanceTypeMlG4dn8xlarge  TransformInstanceType = "ml.g4dn.8xlarge"
 	TransformInstanceTypeMlG4dn12xlarge TransformInstanceType = "ml.g4dn.12xlarge"
 	TransformInstanceTypeMlG4dn16xlarge TransformInstanceType = "ml.g4dn.16xlarge"
+	TransformInstanceTypeMlG5Xlarge     TransformInstanceType = "ml.g5.xlarge"
+	TransformInstanceTypeMlG52xlarge    TransformInstanceType = "ml.g5.2xlarge"
+	TransformInstanceTypeMlG54xlarge    TransformInstanceType = "ml.g5.4xlarge"
+	TransformInstanceTypeMlG58xlarge    TransformInstanceType = "ml.g5.8xlarge"
+	TransformInstanceTypeMlG512xlarge   TransformInstanceType = "ml.g5.12xlarge"
+	TransformInstanceTypeMlG516xlarge   TransformInstanceType = "ml.g5.16xlarge"
+	TransformInstanceTypeMlG524xlarge   TransformInstanceType = "ml.g5.24xlarge"
+	TransformInstanceTypeMlG548xlarge   TransformInstanceType = "ml.g5.48xlarge"
 )
 
 // Values returns all known values for TransformInstanceType. Note that this can
@@ -6841,12 +6903,74 @@ func (TransformInstanceType) Values() []TransformInstanceType {
 		"ml.m5.4xlarge",
 		"ml.m5.12xlarge",
 		"ml.m5.24xlarge",
+		"ml.m6i.large",
+		"ml.m6i.xlarge",
+		"ml.m6i.2xlarge",
+		"ml.m6i.4xlarge",
+		"ml.m6i.8xlarge",
+		"ml.m6i.12xlarge",
+		"ml.m6i.16xlarge",
+		"ml.m6i.24xlarge",
+		"ml.m6i.32xlarge",
+		"ml.c6i.large",
+		"ml.c6i.xlarge",
+		"ml.c6i.2xlarge",
+		"ml.c6i.4xlarge",
+		"ml.c6i.8xlarge",
+		"ml.c6i.12xlarge",
+		"ml.c6i.16xlarge",
+		"ml.c6i.24xlarge",
+		"ml.c6i.32xlarge",
+		"ml.r6i.large",
+		"ml.r6i.xlarge",
+		"ml.r6i.2xlarge",
+		"ml.r6i.4xlarge",
+		"ml.r6i.8xlarge",
+		"ml.r6i.12xlarge",
+		"ml.r6i.16xlarge",
+		"ml.r6i.24xlarge",
+		"ml.r6i.32xlarge",
+		"ml.m7i.large",
+		"ml.m7i.xlarge",
+		"ml.m7i.2xlarge",
+		"ml.m7i.4xlarge",
+		"ml.m7i.8xlarge",
+		"ml.m7i.12xlarge",
+		"ml.m7i.16xlarge",
+		"ml.m7i.24xlarge",
+		"ml.m7i.48xlarge",
+		"ml.c7i.large",
+		"ml.c7i.xlarge",
+		"ml.c7i.2xlarge",
+		"ml.c7i.4xlarge",
+		"ml.c7i.8xlarge",
+		"ml.c7i.12xlarge",
+		"ml.c7i.16xlarge",
+		"ml.c7i.24xlarge",
+		"ml.c7i.48xlarge",
+		"ml.r7i.large",
+		"ml.r7i.xlarge",
+		"ml.r7i.2xlarge",
+		"ml.r7i.4xlarge",
+		"ml.r7i.8xlarge",
+		"ml.r7i.12xlarge",
+		"ml.r7i.16xlarge",
+		"ml.r7i.24xlarge",
+		"ml.r7i.48xlarge",
 		"ml.g4dn.xlarge",
 		"ml.g4dn.2xlarge",
 		"ml.g4dn.4xlarge",
 		"ml.g4dn.8xlarge",
 		"ml.g4dn.12xlarge",
 		"ml.g4dn.16xlarge",
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
 	}
 }
 

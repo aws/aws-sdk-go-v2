@@ -194,6 +194,24 @@ func (CisFindingStatusComparison) Values() []CisFindingStatusComparison {
 	}
 }
 
+type CisReportFormat string
+
+// Enum values for CisReportFormat
+const (
+	CisReportFormatPdf CisReportFormat = "PDF"
+	CisReportFormatCsv CisReportFormat = "CSV"
+)
+
+// Values returns all known values for CisReportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CisReportFormat) Values() []CisReportFormat {
+	return []CisReportFormat{
+		"PDF",
+		"CSV",
+	}
+}
+
 type CisReportStatus string
 
 // Enum values for CisReportStatus

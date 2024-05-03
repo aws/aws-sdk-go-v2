@@ -8,6 +8,27 @@ import (
 	"time"
 )
 
+func ExampleCreatedByInfo_outputUsage() {
+	var union types.CreatedByInfo
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CreatedByInfoMemberAWSIdentityArn:
+		_ = v.Value // Value is string
+
+	case *types.CreatedByInfoMemberConnectUserArn:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleEvaluationAnswerData_outputUsage() {
 	var union types.EvaluationAnswerData
 	// type switches can be used to check the union value
@@ -113,6 +134,24 @@ func ExampleEvaluationFormSingleSelectQuestionAutomationOption_outputUsage() {
 }
 
 var _ *types.SingleSelectQuestionRuleCategoryAutomation
+
+func ExampleInvalidRequestExceptionReason_outputUsage() {
+	var union types.InvalidRequestExceptionReason
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvalidRequestExceptionReasonMemberAttachedFileInvalidRequestExceptionReason:
+		_ = v.Value // Value is types.AttachedFileInvalidRequestExceptionReason
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.AttachedFileInvalidRequestExceptionReason
 
 func ExampleParticipantTimerValue_outputUsage() {
 	var union types.ParticipantTimerValue

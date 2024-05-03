@@ -60,8 +60,8 @@ type DescribeLocationObjectStorageOutput struct {
 	// The URI of the object storage system location.
 	LocationUri *string
 
-	// The self-signed certificate that DataSync uses to securely authenticate with
-	// your object storage system.
+	// The certificate chain for DataSync to authenticate with your object storage
+	// system if the system uses a private or self-signed certificate authority (CA).
 	ServerCertificate []byte
 
 	// The port that your object storage server accepts inbound network traffic on

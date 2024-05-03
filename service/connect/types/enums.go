@@ -108,6 +108,27 @@ func (ArtifactStatus) Values() []ArtifactStatus {
 	}
 }
 
+type AttachedFileInvalidRequestExceptionReason string
+
+// Enum values for AttachedFileInvalidRequestExceptionReason
+const (
+	AttachedFileInvalidRequestExceptionReasonInvalidFileSize AttachedFileInvalidRequestExceptionReason = "INVALID_FILE_SIZE"
+	AttachedFileInvalidRequestExceptionReasonInvalidFileType AttachedFileInvalidRequestExceptionReason = "INVALID_FILE_TYPE"
+	AttachedFileInvalidRequestExceptionReasonInvalidFileName AttachedFileInvalidRequestExceptionReason = "INVALID_FILE_NAME"
+)
+
+// Values returns all known values for AttachedFileInvalidRequestExceptionReason.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AttachedFileInvalidRequestExceptionReason) Values() []AttachedFileInvalidRequestExceptionReason {
+	return []AttachedFileInvalidRequestExceptionReason{
+		"INVALID_FILE_SIZE",
+		"INVALID_FILE_TYPE",
+		"INVALID_FILE_NAME",
+	}
+}
+
 type BehaviorType string
 
 // Enum values for BehaviorType
@@ -606,6 +627,44 @@ func (FailureReasonCode) Values() []FailureReasonCode {
 		"REQUEST_THROTTLED",
 		"IDEMPOTENCY_EXCEPTION",
 		"INTERNAL_ERROR",
+	}
+}
+
+type FileStatusType string
+
+// Enum values for FileStatusType
+const (
+	FileStatusTypeApproved   FileStatusType = "APPROVED"
+	FileStatusTypeRejected   FileStatusType = "REJECTED"
+	FileStatusTypeProcessing FileStatusType = "PROCESSING"
+	FileStatusTypeFailed     FileStatusType = "FAILED"
+)
+
+// Values returns all known values for FileStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileStatusType) Values() []FileStatusType {
+	return []FileStatusType{
+		"APPROVED",
+		"REJECTED",
+		"PROCESSING",
+		"FAILED",
+	}
+}
+
+type FileUseCaseType string
+
+// Enum values for FileUseCaseType
+const (
+	FileUseCaseTypeAttachment FileUseCaseType = "ATTACHMENT"
+)
+
+// Values returns all known values for FileUseCaseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FileUseCaseType) Values() []FileUseCaseType {
+	return []FileUseCaseType{
+		"ATTACHMENT",
 	}
 }
 

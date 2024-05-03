@@ -922,38 +922,6 @@ func addOpUpdateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateKnowledgeBase{}, middleware.After)
 }
 
-func validateAgentAliasRoutingConfiguration(v []types.AgentAliasRoutingConfigurationListItem) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AgentAliasRoutingConfiguration"}
-	for i := range v {
-		if err := validateAgentAliasRoutingConfigurationListItem(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAgentAliasRoutingConfigurationListItem(v *types.AgentAliasRoutingConfigurationListItem) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AgentAliasRoutingConfigurationListItem"}
-	if v.AgentVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentVersion"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateChunkingConfiguration(v *types.ChunkingConfiguration) error {
 	if v == nil {
 		return nil
@@ -1588,11 +1556,6 @@ func validateOpCreateAgentAliasInput(v *CreateAgentAliasInput) error {
 	if v.AgentAliasName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasName"))
 	}
-	if v.RoutingConfiguration != nil {
-		if err := validateAgentAliasRoutingConfiguration(v.RoutingConfiguration); err != nil {
-			invalidParams.AddNested("RoutingConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2190,11 +2153,6 @@ func validateOpUpdateAgentAliasInput(v *UpdateAgentAliasInput) error {
 	}
 	if v.AgentAliasName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasName"))
-	}
-	if v.RoutingConfiguration != nil {
-		if err := validateAgentAliasRoutingConfiguration(v.RoutingConfiguration); err != nil {
-			invalidParams.AddNested("RoutingConfiguration", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

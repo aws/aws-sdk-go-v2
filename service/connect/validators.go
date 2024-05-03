@@ -350,6 +350,26 @@ func (m *validateOpBatchDisassociateAnalyticsDataSet) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetAttachedFileMetadata struct {
+}
+
+func (*validateOpBatchGetAttachedFileMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetAttachedFileMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetAttachedFileMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetAttachedFileMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetFlowAssociation struct {
 }
 
@@ -405,6 +425,26 @@ func (m *validateOpClaimPhoneNumber) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpClaimPhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCompleteAttachedFileUpload struct {
+}
+
+func (*validateOpCompleteAttachedFileUpload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCompleteAttachedFileUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CompleteAttachedFileUploadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCompleteAttachedFileUploadInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -905,6 +945,26 @@ func (m *validateOpDeactivateEvaluationForm) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeactivateEvaluationFormInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAttachedFile struct {
+}
+
+func (*validateOpDeleteAttachedFile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAttachedFile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAttachedFileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAttachedFileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2105,6 +2165,26 @@ func (m *validateOpDismissUserContact) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDismissUserContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAttachedFile struct {
+}
+
+func (*validateOpGetAttachedFile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAttachedFile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAttachedFileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAttachedFileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3550,6 +3630,26 @@ func (m *validateOpSendChatIntegrationEvent) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartAttachedFileUpload struct {
+}
+
+func (*validateOpStartAttachedFileUpload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAttachedFileUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAttachedFileUploadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAttachedFileUploadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartChatContact struct {
 }
 
@@ -4878,6 +4978,10 @@ func addOpBatchDisassociateAnalyticsDataSetValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpBatchDisassociateAnalyticsDataSet{}, middleware.After)
 }
 
+func addOpBatchGetAttachedFileMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetAttachedFileMetadata{}, middleware.After)
+}
+
 func addOpBatchGetFlowAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetFlowAssociation{}, middleware.After)
 }
@@ -4888,6 +4992,10 @@ func addOpBatchPutContactValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpClaimPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpClaimPhoneNumber{}, middleware.After)
+}
+
+func addOpCompleteAttachedFileUploadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCompleteAttachedFileUpload{}, middleware.After)
 }
 
 func addOpCreateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -4988,6 +5096,10 @@ func addOpCreateVocabularyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeactivateEvaluationFormValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeactivateEvaluationForm{}, middleware.After)
+}
+
+func addOpDeleteAttachedFileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAttachedFile{}, middleware.After)
 }
 
 func addOpDeleteContactEvaluationValidationMiddleware(stack *middleware.Stack) error {
@@ -5228,6 +5340,10 @@ func addOpDisassociateUserProficienciesValidationMiddleware(stack *middleware.St
 
 func addOpDismissUserContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDismissUserContact{}, middleware.After)
+}
+
+func addOpGetAttachedFileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAttachedFile{}, middleware.After)
 }
 
 func addOpGetContactAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -5516,6 +5632,10 @@ func addOpSearchVocabulariesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpSendChatIntegrationEventValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendChatIntegrationEvent{}, middleware.After)
+}
+
+func addOpStartAttachedFileUploadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAttachedFileUpload{}, middleware.After)
 }
 
 func addOpStartChatContactValidationMiddleware(stack *middleware.Stack) error {
@@ -7804,6 +7924,27 @@ func validateOpBatchDisassociateAnalyticsDataSetInput(v *BatchDisassociateAnalyt
 	}
 }
 
+func validateOpBatchGetAttachedFileMetadataInput(v *BatchGetAttachedFileMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAttachedFileMetadataInput"}
+	if v.FileIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileIds"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AssociatedResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetFlowAssociationInput(v *BatchGetFlowAssociationInput) error {
 	if v == nil {
 		return nil
@@ -7847,6 +7988,27 @@ func validateOpClaimPhoneNumberInput(v *ClaimPhoneNumberInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ClaimPhoneNumberInput"}
 	if v.PhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCompleteAttachedFileUploadInput(v *CompleteAttachedFileUploadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompleteAttachedFileUploadInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileId"))
+	}
+	if v.AssociatedResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8435,6 +8597,27 @@ func validateOpDeactivateEvaluationFormInput(v *DeactivateEvaluationFormInput) e
 	}
 	if v.EvaluationFormId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationFormId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAttachedFileInput(v *DeleteAttachedFileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAttachedFileInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileId"))
+	}
+	if v.AssociatedResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9540,6 +9723,27 @@ func validateOpDismissUserContactInput(v *DismissUserContactInput) error {
 	}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAttachedFileInput(v *GetAttachedFileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAttachedFileInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileId"))
+	}
+	if v.AssociatedResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10784,6 +10988,33 @@ func validateOpSendChatIntegrationEventInput(v *SendChatIntegrationEventInput) e
 		if err := validateNewSessionDetails(v.NewSessionDetails); err != nil {
 			invalidParams.AddNested("NewSessionDetails", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAttachedFileUploadInput(v *StartAttachedFileUploadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAttachedFileUploadInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.FileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileName"))
+	}
+	if v.FileSizeInBytes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSizeInBytes"))
+	}
+	if len(v.FileUseCaseType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FileUseCaseType"))
+	}
+	if v.AssociatedResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociatedResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

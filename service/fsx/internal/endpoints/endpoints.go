@@ -182,6 +182,15 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "fsx-fips.ca-central-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "fsx-fips.ca-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -215,11 +224,29 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "fsx-fips.ca-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-prod-ca-central-1",
 			}: endpoints.Endpoint{
 				Hostname: "fsx-fips.ca-central-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ca-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-prod-ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "fsx-fips.ca-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
 				},
 				Deprecated: aws.TrueTernary,
 			},
@@ -319,6 +346,24 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "fsx-fips.ca-central-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ca-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "prod-ca-west-1",
+			}: endpoints.Endpoint{
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region:  "prod-ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "fsx-fips.ca-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
 				},
 				Deprecated: aws.TrueTernary,
 			},

@@ -242,6 +242,74 @@ type AssignContactCategoryActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the attached file.
+type AttachedFile struct {
+
+	// The time of Creation of the file resource as an ISO timestamp. It's specified
+	// in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ . For example,
+	// 2024-05-03T02:41:28.172Z .
+	//
+	// This member is required.
+	CreationTime *string
+
+	// The unique identifier of the attached file resource (ARN).
+	//
+	// This member is required.
+	FileArn *string
+
+	// The unique identifier of the attached file resource.
+	//
+	// This member is required.
+	FileId *string
+
+	// A case-sensitive name of the attached file being uploaded.
+	//
+	// This member is required.
+	FileName *string
+
+	// The size of the attached file in bytes.
+	//
+	// This member is required.
+	FileSizeInBytes *int64
+
+	// The current status of the attached file.
+	//
+	// This member is required.
+	FileStatus FileStatusType
+
+	// The resource to which the attached file is (being) uploaded to. Cases (https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html)
+	// are the only current supported resource. This value must be a valid ARN.
+	AssociatedResourceArn *string
+
+	// Represents the identity that created the file.
+	CreatedBy CreatedByInfo
+
+	// The use case for the file.
+	FileUseCaseType FileUseCaseType
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} } .
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Error describing a failure to retrieve attached file metadata through
+// BatchGetAttachedFileMetadata action.
+type AttachedFileError struct {
+
+	// Status code describing the failure.
+	ErrorCode *string
+
+	// Why the attached file couldn't be retrieved.
+	ErrorMessage *string
+
+	// The unique identifier of the attached file resource.
+	FileId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a reference when the referenceType is ATTACHMENT . Otherwise,
 // null.
 type AttachmentReference struct {
@@ -870,6 +938,37 @@ type CreateCaseActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Information on the identity that created the file.
+//
+// The following types satisfy this interface:
+//
+//	CreatedByInfoMemberAWSIdentityArn
+//	CreatedByInfoMemberConnectUserArn
+type CreatedByInfo interface {
+	isCreatedByInfo()
+}
+
+// STS or IAM ARN representing the identity of API Caller. SDK users cannot
+// populate this and this value is calculated automatically if ConnectUserArn is
+// not provided.
+type CreatedByInfoMemberAWSIdentityArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CreatedByInfoMemberAWSIdentityArn) isCreatedByInfo() {}
+
+// An agent ARN representing a connect user (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-resources-for-iam-policies)
+// .
+type CreatedByInfoMemberConnectUserArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CreatedByInfoMemberConnectUserArn) isCreatedByInfo() {}
+
 // Contains credentials to use for federation.
 type Credentials struct {
 
@@ -1034,6 +1133,19 @@ type Distribution struct {
 	//
 	// This member is required.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata used to download the attached file.
+type DownloadUrlMetadata struct {
+
+	// A pre-signed URL that should be used to download the attached file.
+	Url *string
+
+	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601
+	// format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	UrlExpiry *string
 
 	noSmithyDocumentSerde
 }
@@ -2463,6 +2575,25 @@ type IntervalDetails struct {
 	TimeZone *string
 
 	noSmithyDocumentSerde
+}
+
+// Reason why the request was invalid.
+//
+// The following types satisfy this interface:
+//
+//	InvalidRequestExceptionReasonMemberAttachedFileInvalidRequestExceptionReason
+type InvalidRequestExceptionReason interface {
+	isInvalidRequestExceptionReason()
+}
+
+// Reason why the StartAttachedFiledUpload request was invalid.
+type InvalidRequestExceptionReasonMemberAttachedFileInvalidRequestExceptionReason struct {
+	Value AttachedFileInvalidRequestExceptionReason
+
+	noSmithyDocumentSerde
+}
+
+func (*InvalidRequestExceptionReasonMemberAttachedFileInvalidRequestExceptionReason) isInvalidRequestExceptionReason() {
 }
 
 // A field that is invisible to an agent.
@@ -5081,6 +5212,22 @@ type UpdateParticipantRoleConfigChannelInfoMemberChat struct {
 
 func (*UpdateParticipantRoleConfigChannelInfoMemberChat) isUpdateParticipantRoleConfigChannelInfo() {}
 
+// Fields required when uploading an attached file.
+type UploadUrlMetadata struct {
+
+	// A map of headers that should be provided when uploading the attached file.
+	HeadersToInclude map[string]string
+
+	// A pre-signed S3 URL that should be used for uploading the attached file.
+	Url *string
+
+	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601
+	// format: yyyy-MM-ddThh:mm:ss.SSSZ . For example, 2019-11-08T02:41:28.172Z .
+	UrlExpiry *string
+
+	noSmithyDocumentSerde
+}
+
 // The URL reference.
 type UrlReference struct {
 
@@ -5704,11 +5851,13 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isCreatedByInfo()                                      {}
 func (*UnknownUnionMember) isEvaluationAnswerData()                               {}
 func (*UnknownUnionMember) isEvaluationFormItem()                                 {}
 func (*UnknownUnionMember) isEvaluationFormNumericQuestionAutomation()            {}
 func (*UnknownUnionMember) isEvaluationFormQuestionTypeProperties()               {}
 func (*UnknownUnionMember) isEvaluationFormSingleSelectQuestionAutomationOption() {}
+func (*UnknownUnionMember) isInvalidRequestExceptionReason()                      {}
 func (*UnknownUnionMember) isParticipantTimerValue()                              {}
 func (*UnknownUnionMember) isPredefinedAttributeValues()                          {}
 func (*UnknownUnionMember) isRealtimeContactAnalysisSegment()                     {}

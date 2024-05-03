@@ -145,7 +145,7 @@ type GetMetricDataV2Input struct {
 	// AVG_GREETING_TIME_AGENT This metric is available only for contacts analyzed by
 	// Contact Lens conversational analytics. Unit: Seconds Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype UI name: Average greeting time agent  (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-greeting-time-agent-historical)
+	// contact/segmentAttributes/connect:Subtype UI name: Average agent greeting time (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-greeting-time-agent-historical)
 	// AVG_HANDLE_TIME Unit: Seconds Valid groupings and filters: Queue, Channel,
 	// Routing Profile, Agent, Agent Hierarchy, Feature,
 	// contact/segmentAttributes/connect:Subtype, RoutingStepExpression UI name:
@@ -174,12 +174,12 @@ type GetMetricDataV2Input struct {
 	// metric is available only for contacts analyzed by Contact Lens conversational
 	// analytics. Unit: Count Valid groupings and filters: Queue, Channel, Routing
 	// Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype UI
-	// name: Average interruptions agent  (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-agent-historical)
+	// name: Average agent interruptions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-agent-historical)
 	// AVG_INTERRUPTION_TIME_AGENT This metric is available only for contacts analyzed
 	// by Contact Lens conversational analytics. Unit: Seconds Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype UI name: Average interruption time
-	// agent (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-time-agent-historical)
+	// contact/segmentAttributes/connect:Subtype UI name: Average agent interruption
+	// time (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-time-agent-historical)
 	// AVG_NON_TALK_TIME This metric is available only for contacts analyzed by Contact
 	// Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue,
 	// Channel, Routing Profile, Agent, Agent Hierarchy,
@@ -197,11 +197,11 @@ type GetMetricDataV2Input struct {
 	// AVG_TALK_TIME_AGENT This metric is available only for contacts analyzed by
 	// Contact Lens conversational analytics. Unit: Seconds Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype UI name: Average talk time agent (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-agent-historical)
+	// contact/segmentAttributes/connect:Subtype UI name: Average agent talk time (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-agent-historical)
 	// AVG_TALK_TIME_CUSTOMER This metric is available only for contacts analyzed by
 	// Contact Lens conversational analytics. Unit: Seconds Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype UI name: Average talk time customer (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical)
+	// contact/segmentAttributes/connect:Subtype UI name: Average customer talk time (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical)
 	// CASES_CREATED Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid groupings
 	// and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases created (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##cases-created-historical)
 	// CONTACTS_ABANDONED Unit: Count Valid groupings and filters: Queue, Channel,
@@ -220,7 +220,7 @@ type GetMetricDataV2Input struct {
 	// CONTACTS_HANDLED_BY_CONNECTED_TO_AGENT Unit: Count Valid metric filter key:
 	// INITIATION_METHOD Valid groupings and filters: Queue, Channel, Agent, Agent
 	// Hierarchy, contact/segmentAttributes/connect:Subtype UI name: Contacts handled
-	// by Connected to agent (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical)
+	// (connected to agent timestamp) (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical)
 	// CONTACTS_HOLD_ABANDONS Unit: Count Valid groupings and filters: Queue, Channel,
 	// Routing Profile, Agent, Agent Hierarchy,
 	// contact/segmentAttributes/connect:Subtype UI name: Contacts hold disconnect (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical)
@@ -243,7 +243,7 @@ type GetMetricDataV2Input struct {
 	// name: Contacts queued (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical)
 	// CONTACTS_QUEUED_BY_ENQUEUE Unit: Count Valid groupings and filters: Queue,
 	// Channel, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype UI
-	// name: Contacts queued by Enqueue (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical)
+	// name: Contacts queued (enqueue timestamp) (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical)
 	// CONTACTS_RESOLVED_IN_X Unit: Count Valid groupings and filters: Queue, Channel,
 	// Routing Profile, contact/segmentAttributes/connect:Subtype Threshold: For
 	// ThresholdValue enter any whole number from 1 to 604800 (inclusive), in seconds.
@@ -283,11 +283,11 @@ type GetMetricDataV2Input struct {
 	// PERCENT_TALK_TIME_AGENT This metric is available only for contacts analyzed by
 	// Contact Lens conversational analytics. Unit: Percentage Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype UI name: Talk time agent percent (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical)
+	// contact/segmentAttributes/connect:Subtype UI name: Agent talk time percent (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical)
 	// PERCENT_TALK_TIME_CUSTOMER This metric is available only for contacts analyzed
 	// by Contact Lens conversational analytics. Unit: Percentage Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype UI name: Talk time customer percent (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical)
+	// contact/segmentAttributes/connect:Subtype UI name: Customer talk time percent (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical)
 	// REOPENED_CASE_ACTIONS Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid
 	// groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS UI name: Cases reopened (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical)
 	// RESOLVED_CASE_ACTIONS Unit: Count Required filter key: CASE_TEMPLATE_ARN Valid

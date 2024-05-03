@@ -8,7 +8,8 @@ import (
 )
 
 // Contains details about the Lambda function containing the business logic that
-// is carried out upon invoking the action.
+// is carried out upon invoking the action or the custom control method for
+// handling the information elicited from the user.
 //
 // The following types satisfy this interface:
 //
@@ -208,7 +209,8 @@ type AgentActionGroup struct {
 	UpdatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the Lambda function containing the business
-	// logic that is carried out upon invoking the action.
+	// logic that is carried out upon invoking the action or the custom control method
+	// for handling the information elicited from the user.
 	ActionGroupExecutor ActionGroupExecutor
 
 	// Contains either details about the S3 object containing the OpenAPI schema for
@@ -306,6 +308,9 @@ type AgentAlias struct {
 	// The description of the alias of the agent.
 	Description *string
 
+	// Information on the failure of Provisioned Throughput assigned to an agent alias.
+	FailureReasons []string
+
 	noSmithyDocumentSerde
 }
 
@@ -331,9 +336,10 @@ type AgentAliasHistoryEvent struct {
 type AgentAliasRoutingConfigurationListItem struct {
 
 	// The version of the agent with which the alias is associated.
-	//
-	// This member is required.
 	AgentVersion *string
+
+	// Information on the Provisioned Throughput assigned to an agent alias.
+	ProvisionedThroughput *string
 
 	noSmithyDocumentSerde
 }

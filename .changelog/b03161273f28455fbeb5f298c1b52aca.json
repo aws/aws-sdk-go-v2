@@ -1,0 +1,8 @@
+{
+    "id": "b0316127-3f28-455f-beb5-f298c1b52aca",
+    "type": "feature",
+    "description": "This release adds CSV format to GetCisScanReport for Inspector v2",
+    "modules": [
+        "service/inspector2"
+    ]
+}

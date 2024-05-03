@@ -7182,6 +7182,46 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFileContent(v **types.FileContent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileContent
+	if *v == nil {
+		sv = &types.FileContent{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fileArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileArn to be of type string, got %T instead", value)
+				}
+				sv.FileArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGetFieldResponse(v **types.GetFieldResponse, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7606,6 +7646,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.RelatedItemContentMemberContact{Value: mv}
+			break loop
+
+		case "file":
+			var mv types.FileContent
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentFileContent(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RelatedItemContentMemberFile{Value: mv}
 			break loop
 
 		default:

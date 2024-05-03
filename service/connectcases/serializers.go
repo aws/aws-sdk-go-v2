@@ -3469,6 +3469,30 @@ func awsRestjson1_serializeDocumentFieldValueUnion(v types.FieldValueUnion, valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFileContent(v *types.FileContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileArn != nil {
+		ok := object.Key("fileArn")
+		ok.String(*v.FileArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFileFilter(v *types.FileFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileArn != nil {
+		ok := object.Key("fileArn")
+		ok.String(*v.FileArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLayoutConfiguration(v *types.LayoutConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3558,6 +3582,12 @@ func awsRestjson1_serializeDocumentRelatedItemInputContent(v types.RelatedItemIn
 			return err
 		}
 
+	case *types.RelatedItemInputContentMemberFile:
+		av := object.Key("file")
+		if err := awsRestjson1_serializeDocumentFileContent(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -3579,6 +3609,12 @@ func awsRestjson1_serializeDocumentRelatedItemTypeFilter(v types.RelatedItemType
 	case *types.RelatedItemTypeFilterMemberContact:
 		av := object.Key("contact")
 		if err := awsRestjson1_serializeDocumentContactFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RelatedItemTypeFilterMemberFile:
+		av := object.Key("file")
+		if err := awsRestjson1_serializeDocumentFileFilter(&uv.Value, av); err != nil {
 			return err
 		}
 

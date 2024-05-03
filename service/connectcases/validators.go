@@ -1186,6 +1186,21 @@ func validateFieldValueList(v []types.FieldValue) error {
 	}
 }
 
+func validateFileContent(v *types.FileContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileContent"}
+	if v.FileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLayoutContent(v types.LayoutContent) error {
 	if v == nil {
 		return nil
@@ -1251,6 +1266,11 @@ func validateRelatedItemInputContent(v types.RelatedItemInputContent) error {
 	case *types.RelatedItemInputContentMemberContact:
 		if err := validateContact(&uv.Value); err != nil {
 			invalidParams.AddNested("[contact]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RelatedItemInputContentMemberFile:
+		if err := validateFileContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
 		}
 
 	}

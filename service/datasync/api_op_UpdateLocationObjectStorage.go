@@ -11,10 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates some parameters of an existing object storage location that DataSync
-// accesses for a transfer. For information about creating a self-managed object
-// storage location, see Creating a location for object storage (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html)
-// .
+// Updates some parameters of an existing DataSync location for an object storage
+// system.
 func (c *Client) UpdateLocationObjectStorage(ctx context.Context, params *UpdateLocationObjectStorageInput, optFns ...func(*Options)) (*UpdateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &UpdateLocationObjectStorageInput{}
@@ -49,13 +47,21 @@ type UpdateLocationObjectStorageInput struct {
 	// to authenticate with the object storage server.
 	SecretKey *string
 
-	// Specifies a certificate to authenticate with an object storage system that uses
-	// a private or self-signed certificate authority (CA). You must specify a
-	// Base64-encoded .pem file (for example,
-	// file:///home/user/.ssh/storage_sys_certificate.pem ). The certificate can be up
-	// to 32768 bytes (before Base64 encoding). To use this parameter, configure
-	// ServerProtocol to HTTPS . Updating the certificate doesn't interfere with tasks
-	// that you have in progress.
+	// Specifies a certificate chain for DataSync to authenticate with your object
+	// storage system if the system uses a private or self-signed certificate authority
+	// (CA). You must specify a single .pem file with a full certificate chain (for
+	// example, file:///home/user/.ssh/object_storage_certificates.pem ). The
+	// certificate chain might include:
+	//   - The object storage system's certificate
+	//   - All intermediate certificates (if there are any)
+	//   - The root certificate of the signing CA
+	// You can concatenate your certificates into a .pem file (which can be up to
+	// 32768 bytes before base64 encoding). The following example cat command creates
+	// an object_storage_certificates.pem file that includes three certificates: cat
+	// object_server_certificate.pem intermediate_certificate.pem
+	// ca_root_certificate.pem > object_storage_certificates.pem To use this parameter,
+	// configure ServerProtocol to HTTPS . Updating this parameter doesn't interfere
+	// with tasks that you have in progress.
 	ServerCertificate []byte
 
 	// Specifies the port that your object storage server accepts inbound network

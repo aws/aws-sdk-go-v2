@@ -1906,6 +1906,11 @@ func validateBulkEmailEntry(v *types.BulkEmailEntry) error {
 			invalidParams.AddNested("ReplacementTags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ReplacementHeaders != nil {
+		if err := validateMessageHeaderList(v.ReplacementHeaders); err != nil {
+			invalidParams.AddNested("ReplacementHeaders", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

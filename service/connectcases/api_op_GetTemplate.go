@@ -65,16 +65,16 @@ type GetTemplateOutput struct {
 	// This member is required.
 	TemplateId *string
 
-	// The timestamp for when the resource was created.
+	// Timestamp at which the resource was created.
 	CreatedTime *time.Time
 
-	// Indicates whether the resource has been deleted.
+	// Denotes whether or not the resource has been deleted.
 	Deleted bool
 
 	// A brief description of the template.
 	Description *string
 
-	// The timestamp for when the resource was created or last modified.
+	// Timestamp at which the resource was created or last modified.
 	LastModifiedTime *time.Time
 
 	// Configuration of layouts associated to the template.

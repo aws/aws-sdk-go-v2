@@ -1,0 +1,8 @@
+{
+    "id": "7c009fb8-4d3e-42a1-92d5-549b2f1d8243",
+    "type": "feature",
+    "description": "This release adds 5 new APIs for managing attachments: StartAttachedFileUpload, CompleteAttachedFileUpload, GetAttachedFile, BatchGetAttachedFileMetadata, DeleteAttachedFile. These APIs can be used to programmatically upload and download attachments to Connect resources, like cases.",
+    "modules": [
+        "service/connect"
+    ]
+}

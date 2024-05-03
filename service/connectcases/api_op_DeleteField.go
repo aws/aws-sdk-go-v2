@@ -56,7 +56,7 @@ type DeleteFieldInput struct {
 	// This member is required.
 	DomainId *string
 
-	// The unique identifier of a field.
+	// Unique identifier of the field.
 	//
 	// This member is required.
 	FieldId *string

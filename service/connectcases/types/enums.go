@@ -128,6 +128,7 @@ type RelatedItemType string
 const (
 	RelatedItemTypeContact RelatedItemType = "Contact"
 	RelatedItemTypeComment RelatedItemType = "Comment"
+	RelatedItemTypeFile    RelatedItemType = "File"
 )
 
 // Values returns all known values for RelatedItemType. Note that this can be
@@ -137,6 +138,7 @@ func (RelatedItemType) Values() []RelatedItemType {
 	return []RelatedItemType{
 		"Contact",
 		"Comment",
+		"File",
 	}
 }
 

@@ -266,6 +266,18 @@ func TestCheckSnapshot_BatchDisassociateAnalyticsDataSet(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetAttachedFileMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetAttachedFileMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetAttachedFileMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetFlowAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetFlowAssociation(context.Background(), nil, func(o *Options) {
@@ -295,6 +307,18 @@ func TestCheckSnapshot_ClaimPhoneNumber(t *testing.T) {
 	_, err := svc.ClaimPhoneNumber(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ClaimPhoneNumber")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CompleteAttachedFileUpload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteAttachedFileUpload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CompleteAttachedFileUpload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -595,6 +619,18 @@ func TestCheckSnapshot_DeactivateEvaluationForm(t *testing.T) {
 	_, err := svc.DeactivateEvaluationForm(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeactivateEvaluationForm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAttachedFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAttachedFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAttachedFile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1315,6 +1351,18 @@ func TestCheckSnapshot_DismissUserContact(t *testing.T) {
 	_, err := svc.DismissUserContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DismissUserContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAttachedFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAttachedFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAttachedFile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2215,6 +2263,18 @@ func TestCheckSnapshot_SendChatIntegrationEvent(t *testing.T) {
 	_, err := svc.SendChatIntegrationEvent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SendChatIntegrationEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAttachedFileUpload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAttachedFileUpload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAttachedFileUpload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3181,6 +3241,18 @@ func TestUpdateSnapshot_BatchDisassociateAnalyticsDataSet(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetAttachedFileMetadata(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetAttachedFileMetadata(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetAttachedFileMetadata")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetFlowAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetFlowAssociation(context.Background(), nil, func(o *Options) {
@@ -3210,6 +3282,18 @@ func TestUpdateSnapshot_ClaimPhoneNumber(t *testing.T) {
 	_, err := svc.ClaimPhoneNumber(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ClaimPhoneNumber")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CompleteAttachedFileUpload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteAttachedFileUpload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CompleteAttachedFileUpload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3510,6 +3594,18 @@ func TestUpdateSnapshot_DeactivateEvaluationForm(t *testing.T) {
 	_, err := svc.DeactivateEvaluationForm(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeactivateEvaluationForm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAttachedFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAttachedFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAttachedFile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4230,6 +4326,18 @@ func TestUpdateSnapshot_DismissUserContact(t *testing.T) {
 	_, err := svc.DismissUserContact(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DismissUserContact")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAttachedFile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAttachedFile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAttachedFile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5130,6 +5238,18 @@ func TestUpdateSnapshot_SendChatIntegrationEvent(t *testing.T) {
 	_, err := svc.SendChatIntegrationEvent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SendChatIntegrationEvent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAttachedFileUpload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAttachedFileUpload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAttachedFileUpload")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

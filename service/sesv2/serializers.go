@@ -7468,6 +7468,13 @@ func awsRestjson1_serializeDocumentBulkEmailEntry(v *types.BulkEmailEntry, value
 		}
 	}
 
+	if v.ReplacementHeaders != nil {
+		ok := object.Key("ReplacementHeaders")
+		if err := awsRestjson1_serializeDocumentMessageHeaderList(v.ReplacementHeaders, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ReplacementTags != nil {
 		ok := object.Key("ReplacementTags")
 		if err := awsRestjson1_serializeDocumentMessageTagList(v.ReplacementTags, ok); err != nil {

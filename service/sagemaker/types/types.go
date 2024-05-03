@@ -13902,7 +13902,11 @@ type ServiceCatalogProvisioningUpdateDetails struct {
 }
 
 // Contains information about attribute-based access control (ABAC) for a training
-// job.
+// job. The session chaining configuration uses Amazon Security Token Service (STS)
+// for your training job to request temporary, limited-privilege credentials to
+// tenants. For more information, see Attribute-based access control (ABAC) for
+// multi-tenancy training (https://docs.aws.amazon.com/sagemaker/latest/dg/model-access-training-data.html#model-access-training-data-abac)
+// .
 type SessionChainingConfig struct {
 
 	// Set to True to allow SageMaker to extract session tags from a training job

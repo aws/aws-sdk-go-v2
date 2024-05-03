@@ -163,6 +163,9 @@ func ExampleRelatedItemContent_outputUsage() {
 	case *types.RelatedItemContentMemberContact:
 		_ = v.Value // Value is types.ContactContent
 
+	case *types.RelatedItemContentMemberFile:
+		_ = v.Value // Value is types.FileContent
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -172,6 +175,7 @@ func ExampleRelatedItemContent_outputUsage() {
 	}
 }
 
+var _ *types.FileContent
 var _ *types.ContactContent
 var _ *types.CommentContent
 
@@ -185,6 +189,9 @@ func ExampleRelatedItemInputContent_outputUsage() {
 	case *types.RelatedItemInputContentMemberContact:
 		_ = v.Value // Value is types.Contact
 
+	case *types.RelatedItemInputContentMemberFile:
+		_ = v.Value // Value is types.FileContent
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -194,6 +201,7 @@ func ExampleRelatedItemInputContent_outputUsage() {
 	}
 }
 
+var _ *types.FileContent
 var _ *types.CommentContent
 var _ *types.Contact
 
@@ -207,6 +215,9 @@ func ExampleRelatedItemTypeFilter_outputUsage() {
 	case *types.RelatedItemTypeFilterMemberContact:
 		_ = v.Value // Value is types.ContactFilter
 
+	case *types.RelatedItemTypeFilterMemberFile:
+		_ = v.Value // Value is types.FileFilter
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -216,6 +227,7 @@ func ExampleRelatedItemTypeFilter_outputUsage() {
 	}
 }
 
+var _ *types.FileFilter
 var _ *types.ContactFilter
 var _ *types.CommentFilter
 
