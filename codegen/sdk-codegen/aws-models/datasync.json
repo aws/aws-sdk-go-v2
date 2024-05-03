@@ -1276,7 +1276,7 @@
                 "ServerCertificate": {
                     "target": "com.amazonaws.datasync#ObjectStorageCertificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a file with the certificates that are used to sign the object storage server's\n      certificate (for example, <code>file:///home/user/.ssh/storage_sys_certificate.pem</code>).\n      The file you specify must include the following:</p>\n         <ul>\n            <li>\n               <p>The certificate of the signing certificate authority (CA)</p>\n            </li>\n            <li>\n               <p>Any intermediate certificates</p>\n            </li>\n            <li>\n               <p>base64 encoding</p>\n            </li>\n            <li>\n               <p>A <code>.pem</code> extension</p>\n            </li>\n         </ul>\n         <p>The file can be up to 32768 bytes (before base64 encoding).</p>\n         <p>To use this parameter, configure <code>ServerProtocol</code> to <code>HTTPS</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies a certificate chain for DataSync to authenticate with your object\n      storage system if the system uses a private or self-signed certificate authority (CA). You\n      must specify a single <code>.pem</code> file with a full certificate chain (for example,\n        <code>file:///home/user/.ssh/object_storage_certificates.pem</code>).</p>\n         <p>The certificate chain might include:</p>\n         <ul>\n            <li>\n               <p>The object storage system's certificate</p>\n            </li>\n            <li>\n               <p>All intermediate certificates (if there are any)</p>\n            </li>\n            <li>\n               <p>The root certificate of the signing CA</p>\n            </li>\n         </ul>\n         <p>You can concatenate your certificates into a <code>.pem</code> file (which can be up to\n      32768 bytes before base64 encoding). The following example <code>cat</code> command creates an\n        <code>object_storage_certificates.pem</code> file that includes three certificates:</p>\n         <p>\n            <code>cat object_server_certificate.pem intermediate_certificate.pem\n        ca_root_certificate.pem > object_storage_certificates.pem</code>\n         </p>\n         <p>To use this parameter, configure <code>ServerProtocol</code> to <code>HTTPS</code>.</p>"
                     }
                 }
             },
@@ -2657,7 +2657,7 @@
                 "ServerCertificate": {
                     "target": "com.amazonaws.datasync#ObjectStorageCertificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The self-signed certificate that DataSync uses to securely authenticate with\n      your object storage system.</p>"
+                        "smithy.api#documentation": "<p>The certificate chain for DataSync to authenticate with your object storage\n      system if the system uses a private or self-signed certificate authority (CA).</p>"
                     }
                 }
             },
@@ -8723,7 +8723,7 @@
                 "Status": {
                     "target": "com.amazonaws.datasync#ScheduleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to enable or disable your task schedule. Your schedule is enabled by\n      default, but there can be situations where you need to disable it. For example,\n      you might need to pause a recurring transfer or fix an issue with your task or perform maintenance on your storage system.</p>\n         <p>DataSync might disable your schedule automatically if your task fails repeatedly\n      with the same error. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_TaskScheduleDetails.html\">TaskScheduleDetails</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to enable or disable your task schedule. Your schedule is enabled by\n      default, but there can be situations where you need to disable it. For example, you might need\n      to pause a recurring transfer to fix an issue with your task or perform maintenance on your\n      storage system.</p>\n         <p>DataSync might disable your schedule automatically if your task fails repeatedly\n      with the same error. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_TaskScheduleDetails.html\">TaskScheduleDetails</a>.</p>"
                     }
                 }
             },
@@ -9290,7 +9290,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates some parameters of an existing object storage location that DataSync\n      accesses for a transfer. For information about creating a self-managed object storage\n      location, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html\">Creating a location for object\n        storage</a>.</p>"
+                "smithy.api#documentation": "<p>Updates some parameters of an existing DataSync location for an object\n      storage system.</p>"
             }
         },
         "com.amazonaws.datasync#UpdateLocationObjectStorageRequest": {
@@ -9342,7 +9342,7 @@
                 "ServerCertificate": {
                     "target": "com.amazonaws.datasync#ObjectStorageCertificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a certificate to authenticate with an object storage system that uses a private\n      or self-signed certificate authority (CA). You must specify a Base64-encoded <code>.pem</code>\n      file (for example, <code>file:///home/user/.ssh/storage_sys_certificate.pem</code>). The\n      certificate can be up to 32768 bytes (before Base64 encoding).</p>\n         <p>To use this parameter, configure <code>ServerProtocol</code> to <code>HTTPS</code>.</p>\n         <p>Updating the certificate doesn't interfere with tasks that you have in progress.</p>"
+                        "smithy.api#documentation": "<p>Specifies a certificate chain for DataSync to authenticate with your object\n      storage system if the system uses a private or self-signed certificate authority (CA). You\n      must specify a single <code>.pem</code> file with a full certificate chain (for example,\n        <code>file:///home/user/.ssh/object_storage_certificates.pem</code>).</p>\n         <p>The certificate chain might include:</p>\n         <ul>\n            <li>\n               <p>The object storage system's certificate</p>\n            </li>\n            <li>\n               <p>All intermediate certificates (if there are any)</p>\n            </li>\n            <li>\n               <p>The root certificate of the signing CA</p>\n            </li>\n         </ul>\n         <p>You can concatenate your certificates into a <code>.pem</code> file (which can be up to\n      32768 bytes before base64 encoding). The following example <code>cat</code> command creates an\n        <code>object_storage_certificates.pem</code> file that includes three certificates:</p>\n         <p>\n            <code>cat object_server_certificate.pem intermediate_certificate.pem\n      ca_root_certificate.pem > object_storage_certificates.pem</code>\n         </p>\n         <p>To use this parameter, configure <code>ServerProtocol</code> to <code>HTTPS</code>.</p>\n         <p>Updating this parameter doesn't interfere with tasks that you have in progress.</p>"
                     }
                 }
             },

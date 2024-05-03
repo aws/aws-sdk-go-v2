@@ -51,7 +51,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains details about the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                "smithy.api#documentation": "<p>Contains details about the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.</p>"
             }
         },
         "com.amazonaws.bedrockagent#ActionGroupResource": {
@@ -346,7 +346,7 @@
                 "actionGroupExecutor": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.</p>"
                     }
                 },
                 "apiSchema": {
@@ -449,6 +449,12 @@
                         "smithy.api#documentation": "<p>The status of the alias of the agent and whether it is ready for use. The following statuses are possible:</p>\n         <ul>\n            <li>\n               <p>CREATING – The agent alias is being created.</p>\n            </li>\n            <li>\n               <p>PREPARED – The agent alias is finished being created or updated and is ready to be invoked.</p>\n            </li>\n            <li>\n               <p>FAILED – The agent alias API operation failed.</p>\n            </li>\n            <li>\n               <p>UPDATING – The agent alias is being updated.</p>\n            </li>\n            <li>\n               <p>DELETING – The agent alias is being deleted.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.bedrockagent#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the failure of Provisioned Throughput assigned to an agent alias.</p>"
+                    }
                 }
             },
             "traits": {
@@ -528,8 +534,13 @@
                 "agentVersion": {
                     "target": "com.amazonaws.bedrockagent#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the agent with which the alias is associated.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The version of the agent with which the alias is associated.</p>"
+                    }
+                },
+                "provisionedThroughput": {
+                    "target": "com.amazonaws.bedrockagent#ProvisionedModelIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information on the Provisioned Throughput assigned to an agent alias.</p>"
                     }
                 }
             },
@@ -2146,7 +2157,7 @@
                 "actionGroupExecutor": {
                     "target": "com.amazonaws.bedrockagent#ActionGroupExecutor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function containing the business logic that is carried out upon invoking the action or the custom control method for handling the information elicited from the user.</p>"
                     }
                 },
                 "apiSchema": {
@@ -6440,6 +6451,16 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagent#ProvisionedModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^((([0-9a-zA-Z][_-]?){1,63})|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:provisioned-model/[a-z0-9]{12}))$"
+            }
+        },
         "com.amazonaws.bedrockagent#RdsArn": {
             "type": "string",
             "traits": {
@@ -7787,7 +7808,7 @@
                 "dataDeletionPolicy": {
                     "target": "com.amazonaws.bedrockagent#DataDeletionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data deletion policy assigned to the data source.</p>"
+                        "smithy.api#documentation": "<p>The data deletion policy of the updated data source.</p>"
                     }
                 },
                 "serverSideEncryptionConfiguration": {

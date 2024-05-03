@@ -788,6 +788,9 @@
                     "target": "com.amazonaws.connect#BatchDisassociateAnalyticsDataSet"
                 },
                 {
+                    "target": "com.amazonaws.connect#BatchGetAttachedFileMetadata"
+                },
+                {
                     "target": "com.amazonaws.connect#BatchGetFlowAssociation"
                 },
                 {
@@ -795,6 +798,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#ClaimPhoneNumber"
+                },
+                {
+                    "target": "com.amazonaws.connect#CompleteAttachedFileUpload"
                 },
                 {
                     "target": "com.amazonaws.connect#CreateAgentStatus"
@@ -870,6 +876,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeactivateEvaluationForm"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteAttachedFile"
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteContactEvaluation"
@@ -1050,6 +1059,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DismissUserContact"
+                },
+                {
+                    "target": "com.amazonaws.connect#GetAttachedFile"
                 },
                 {
                     "target": "com.amazonaws.connect#GetContactAttributes"
@@ -1275,6 +1287,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#SendChatIntegrationEvent"
+                },
+                {
+                    "target": "com.amazonaws.connect#StartAttachedFileUpload"
                 },
                 {
                     "target": "com.amazonaws.connect#StartChatContact"
@@ -2850,7 +2865,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.connect#InstanceStorageResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>A valid resource type. To <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-contact-analysis-segment-streams.html\">enable streaming\n    for real-time analysis of contacts</a>, use the following types:</p>\n         <ul>\n            <li>\n               <p>For chat contacts, use <code>REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS</code>.</p>\n            </li>\n            <li>\n               <p>For voice contacts, use <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>REAL_TIME_CONTACT_ANALYSIS_SEGMENTS</code> is deprecated, but it is still\n    supported and will apply only to VOICE channel contacts. Use\n    <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code> for voice contacts moving forward.</p>\n            <p>If you have previously associated a stream with <code>REAL_TIME_CONTACT_ANALYSIS_SEGMENTS</code>, no\n    action is needed to update the stream to <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A valid resource type. To <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-contact-analysis-segment-streams.html\">enable streaming\n    for real-time analysis of contacts</a>, use the following types:</p>\n         <ul>\n            <li>\n               <p>For chat contacts, use <code>REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS</code>.</p>\n            </li>\n            <li>\n               <p>For voice contacts, use <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>REAL_TIME_CONTACT_ANALYSIS_SEGMENTS</code> is deprecated, but it is still supported\n    and will apply only to VOICE channel contacts. Use\n     <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code> for voice contacts moving\n    forward.</p>\n            <p>If you have previously associated a stream with\n     <code>REAL_TIME_CONTACT_ANALYSIS_SEGMENTS</code>, no action is needed to update the stream to\n     <code>REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3429,6 +3444,141 @@
                 }
             }
         },
+        "com.amazonaws.connect#AttachedFile": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601\n   format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example,\n   <code>2024-05-03T02:41:28.172Z</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileId": {
+                    "target": "com.amazonaws.connect#FileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileName": {
+                    "target": "com.amazonaws.connect#FileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A case-sensitive name of the attached file being uploaded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileSizeInBytes": {
+                    "target": "com.amazonaws.connect#FileSizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the attached file in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileStatus": {
+                    "target": "com.amazonaws.connect#FileStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the attached file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.connect#CreatedByInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the identity that created the file.</p>"
+                    }
+                },
+                "FileUseCaseType": {
+                    "target": "com.amazonaws.connect#FileUseCaseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the file.</p>"
+                    }
+                },
+                "AssociatedResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{\n    \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the attached file.</p>"
+            }
+        },
+        "com.amazonaws.connect#AttachedFileError": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.connect#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Status code describing the failure. </p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.connect#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Why the attached file couldn't be retrieved. </p>"
+                    }
+                },
+                "FileId": {
+                    "target": "com.amazonaws.connect#FileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error describing a failure to retrieve attached file metadata through BatchGetAttachedFileMetadata action.</p>"
+            }
+        },
+        "com.amazonaws.connect#AttachedFileErrorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AttachedFileError"
+            }
+        },
+        "com.amazonaws.connect#AttachedFileInvalidRequestExceptionReason": {
+            "type": "enum",
+            "members": {
+                "INVALID_FILE_SIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_FILE_SIZE"
+                    }
+                },
+                "INVALID_FILE_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_FILE_TYPE"
+                    }
+                },
+                "INVALID_FILE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_FILE_NAME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#AttachedFilesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AttachedFile"
+            }
+        },
         "com.amazonaws.connect#AttachmentName": {
             "type": "string",
             "traits": {
@@ -3784,6 +3934,91 @@
                     "target": "com.amazonaws.connect#ErrorResults",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of errors for any datasets not successfully removed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#BatchGetAttachedFileMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#BatchGetAttachedFileMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#BatchGetAttachedFileMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows you to retrieve metadata about multiple attached files on an associated resource.\n   Each attached file provided in the input list must be associated with the input\n   AssociatedResourceArn.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/attached-files/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#BatchGetAttachedFileMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "FileIds": {
+                    "target": "com.amazonaws.connect#FileIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifiers of the attached file resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#httpQuery": "associatedResourceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#BatchGetAttachedFileMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "Files": {
+                    "target": "com.amazonaws.connect#AttachedFilesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of attached files that were successfully retrieved. </p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.connect#AttachedFileErrorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of errors of attached files that could not be retrieved. </p>"
                     }
                 }
             },
@@ -4421,6 +4656,81 @@
                         "smithy.api#enumValue": "LT"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#CompleteAttachedFileUpload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CompleteAttachedFileUploadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CompleteAttachedFileUploadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Allows you to confirm that the attached file has been uploaded using the pre-signed URL\n   provided in the StartAttachedFileUpload API.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/attached-files/{InstanceId}/{FileId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CompleteAttachedFileUploadRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileId": {
+                    "target": "com.amazonaws.connect#FileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#httpQuery": "associatedResourceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request to CompleteAttachedFileUpload API",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CompleteAttachedFileUploadResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Response from CompleteAttachedFileUpload API",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#Concurrency": {
@@ -8121,6 +8431,26 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#CreatedByInfo": {
+            "type": "union",
+            "members": {
+                "ConnectUserArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An agent ARN representing a <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-resources-for-iam-policies\">connect user</a>.</p>"
+                    }
+                },
+                "AWSIdentityArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>STS or IAM ARN representing the identity of API Caller. SDK users cannot populate this and\n   this value is calculated automatically if <code>ConnectUserArn</code> is not provided.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information on the identity that created the file.</p>"
+            }
+        },
         "com.amazonaws.connect#Credentials": {
             "type": "structure",
             "members": {
@@ -8543,6 +8873,81 @@
                     "min": 0,
                     "max": 9999
                 }
+            }
+        },
+        "com.amazonaws.connect#DeleteAttachedFile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteAttachedFileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DeleteAttachedFileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an attached file along with the underlying S3 Object.</p>\n         <important>\n            <p>The attached file is <b>permanently deleted</b> if S3 bucket\n    versioning is not enabled.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/attached-files/{InstanceId}/{FileId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteAttachedFileRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileId": {
+                    "target": "com.amazonaws.connect#FileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#httpQuery": "associatedResourceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request to DeleteAttachedFile API",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteAttachedFileResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Response from DeleteAttachedFile API",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#DeleteContactEvaluation": {
@@ -12755,6 +13160,26 @@
         "com.amazonaws.connect#Double": {
             "type": "double"
         },
+        "com.amazonaws.connect#DownloadUrlMetadata": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.connect#MetadataUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pre-signed URL that should be used to download the attached file. </p>"
+                    }
+                },
+                "UrlExpiry": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format:\n   yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata used to download the attached file.</p>"
+            }
+        },
         "com.amazonaws.connect#DuplicateResourceException": {
             "type": "structure",
             "members": {
@@ -12892,6 +13317,12 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#ErrorCode": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#ErrorMessage": {
+            "type": "string"
         },
         "com.amazonaws.connect#ErrorResult": {
             "type": "structure",
@@ -14493,6 +14924,84 @@
                 "target": "com.amazonaws.connect#FieldValue"
             }
         },
+        "com.amazonaws.connect#FileId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#FileIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#FileId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#FileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.connect#FileSizeInBytes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.connect#FileStatusType": {
+            "type": "enum",
+            "members": {
+                "APPROVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPROVED"
+                    }
+                },
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#FileUseCaseType": {
+            "type": "enum",
+            "members": {
+                "ATTACHMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#FilterV2": {
             "type": "structure",
             "members": {
@@ -14625,6 +15134,156 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#FunctionArn"
+            }
+        },
+        "com.amazonaws.connect#GetAttachedFile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#GetAttachedFileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#GetAttachedFileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a pre-signed URL for download of an approved attached file. This API also returns\n   metadata about the attached file. It will only return a downloadURL if the status of the attached\n   file is <code>APPROVED</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/attached-files/{InstanceId}/{FileId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#GetAttachedFileRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileId": {
+                    "target": "com.amazonaws.connect#FileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "UrlExpiryInSeconds": {
+                    "target": "com.amazonaws.connect#URLExpiryInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional override for the expiry of the pre-signed S3 URL in seconds.</p>",
+                        "smithy.api#httpQuery": "urlExpiryInSeconds"
+                    }
+                },
+                "AssociatedResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#httpQuery": "associatedResourceArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Request to GetAttachedFile API.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#GetAttachedFileResponse": {
+            "type": "structure",
+            "members": {
+                "FileArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource (ARN).</p>"
+                    }
+                },
+                "FileId": {
+                    "target": "com.amazonaws.connect#FileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601\n   format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example,\n   <code>2024-05-03T02:41:28.172Z</code>.</p>"
+                    }
+                },
+                "FileStatus": {
+                    "target": "com.amazonaws.connect#FileStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the attached file.</p>"
+                    }
+                },
+                "FileName": {
+                    "target": "com.amazonaws.connect#FileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A case-sensitive name of the attached file being uploaded.</p>"
+                    }
+                },
+                "FileSizeInBytes": {
+                    "target": "com.amazonaws.connect#FileSizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the attached file in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>"
+                    }
+                },
+                "FileUseCaseType": {
+                    "target": "com.amazonaws.connect#FileUseCaseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the file.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.connect#CreatedByInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the identity that created the file.</p>"
+                    }
+                },
+                "DownloadUrlMetadata": {
+                    "target": "com.amazonaws.connect#DownloadUrlMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URL and expiry to be used when downloading the attached file. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{\n    \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response from GetAttachedFile API.",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.connect#GetContactAttributes": {
@@ -15304,7 +15963,7 @@
                 "Metrics": {
                     "target": "com.amazonaws.connect#MetricsV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, groupings, and filters for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics definitions</a> in the <i>Amazon Connect Administrator's\n    Guide</i>.</p>\n         <dl>\n            <dt>ABANDONMENT_RATE</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#abandonment-rate-historical\">Abandonment rate</a>\n               </p>\n            </dd>\n            <dt>AGENT_ADHERENT_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherent-time-historical\">Adherent time</a>\n               </p>\n            </dd>\n            <dt>AGENT_ANSWER_RATE</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-answer-rate-historical\">Agent answer rate</a>\n               </p>\n            </dd>\n            <dt>AGENT_NON_ADHERENT_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#non-adherent-time\">Non-adherent time</a>\n               </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-non-response\">Agent\n       non-response</a>\n               </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>Data for this metric is available starting from October 1, 2023 0:00:00 GMT.</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-nonresponse-no-abandon-historical\">Agent non-response without customer abandons</a>\n               </p>\n            </dd>\n            <dt>AGENT_OCCUPANCY</dt>\n            <dd>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#occupancy-historical\">Occupancy</a>\n               </p>\n            </dd>\n            <dt>AGENT_SCHEDULE_ADHERENCE</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherence-historical\">Adherence</a>\n               </p>\n            </dd>\n            <dt>AGENT_SCHEDULED_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#scheduled-time-historical\">Scheduled time</a>\n               </p>\n            </dd>\n            <dt>AVG_ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-abandon-time-historical\">Average queue abandon time</a>\n               </p>\n            </dd>\n            <dt>AVG_ACTIVE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-active-time-historical\">Average active time</a>\n               </p>\n            </dd>\n            <dt>AVG_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-acw-time-historical\">Average after contact work time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_AGENT_CONNECTING_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. For now, this metric only\n      supports the following as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-avg-agent-api-connecting-time\">Average agent API connecting time</a>\n               </p>\n               <note>\n                  <p>The <code>Negate</code> key in Metric Level Filters is not applicable for this\n       metric.</p>\n               </note>\n            </dd>\n            <dt>AVG_AGENT_PAUSE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-pause-time-historical\">Average agent pause time</a>\n               </p>\n            </dd>\n            <dt>AVG_CASE_RELATED_CONTACTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contacts-case-historical\">Average contacts per case</a>\n               </p>\n            </dd>\n            <dt>AVG_CASE_RESOLUTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-case-resolution-time-historical\">Average case resolution time</a>\n               </p>\n            </dd>\n            <dt>AVG_CONTACT_DURATION</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contact-duration-historical\">Average contact duration</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_CONVERSATION_DURATION</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-conversation-duration-historical\">Average conversation duration</a>\n               </p>\n            </dd>\n            <dt>AVG_GREETING_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-greeting-time-agent-historical\">Average greeting time agent </a>\n               </p>\n            </dd>\n            <dt>AVG_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype, RoutingStepExpression</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-handle-time-historical\">Average handle time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-customer-hold-time-historical\">Average customer hold time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_HOLD_TIME_ALL_CONTACTS</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#avg-customer-hold-time-all-contacts-historical\">Average customer hold time all contacts</a>\n               </p>\n            </dd>\n            <dt>AVG_HOLDS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-holds-historical\">Average holds</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-customer-hold-time-historical\">Average agent interaction and customer hold time</a>\n               </p>\n            </dd>\n            <dt>AVG_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-time-historical\">Average agent interaction time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_INTERRUPTIONS_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-agent-historical\">Average interruptions agent </a>\n               </p>\n            </dd>\n            <dt>AVG_INTERRUPTION_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-time-agent-historical\">Average interruption time agent</a>\n               </p>\n            </dd>\n            <dt>AVG_NON_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##average-non-talk-time-historical\">Average non-talk time</a>\n               </p>\n            </dd>\n            <dt>AVG_QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-answer-time-historical\">Average queue answer time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_RESOLUTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-resolution-time-historical\">Average resolution time</a>\n               </p>\n            </dd>\n            <dt>AVG_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-historical\">Average talk time</a>\n               </p>\n            </dd>\n            <dt>AVG_TALK_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-agent-historical\">Average talk time agent</a>\n               </p>\n            </dd>\n            <dt>AVG_TALK_TIME_CUSTOMER</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical\">Average talk time customer</a>\n               </p>\n            </dd>\n            <dt>CASES_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##cases-created-historical\">Cases created</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype, RoutingStepExpression</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical\">Contact abandoned</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-created-historical\">Contacts created</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>,\n      <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype, RoutingStepExpression</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#api-contacts-handled-historical\">API contacts handled</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_HANDLED_BY_CONNECTED_TO_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical\">Contacts handled by Connected to agent</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical\">Contacts hold disconnect</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_ON_HOLD_AGENT_DISCONNECT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-agent-disconnect-historical\">Contacts hold agent disconnect</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical\">Contacts hold customer disconnect</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_PUT_ON_HOLD</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical\">Contacts put on hold</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_EXTERNAL</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-external-historical\">Contacts transferred out external</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_INTERNAL</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical\">Contacts transferred out internal</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical\">Contacts queued</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_QUEUED_BY_ENQUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical\">Contacts queued by Enqueue</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_RESOLVED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>Threshold: For <code>ThresholdValue</code> enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\").</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical\">Contacts resolved in X</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical\">Contacts transferred out</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_BY_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical\">Contacts transferred out by agent</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical\">Contacts transferred out queue</a>\n               </p>\n            </dd>\n            <dt>CURRENT_CASES</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical\">Current cases</a>\n               </p>\n            </dd>\n            <dt>MAX_QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical\">Maximum queued time</a>\n               </p>\n            </dd>\n            <dt>PERCENT_CASES_FIRST_CONTACT_RESOLVED</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical\">Cases resolved on first contact</a>\n               </p>\n            </dd>\n            <dt>PERCENT_CONTACTS_STEP_EXPIRED</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, RoutingStepExpression</p>\n               <p>UI name: Not available </p>\n            </dd>\n            <dt>PERCENT_CONTACTS_STEP_JOINED</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, RoutingStepExpression</p>\n               <p>UI name: Not available </p>\n            </dd>\n            <dt>PERCENT_NON_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical\">Non-talk\n       time percent</a>\n               </p>\n            </dd>\n            <dt>PERCENT_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical\">Talk time\n       percent</a>\n               </p>\n            </dd>\n            <dt>PERCENT_TALK_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical\">Talk\n       time agent percent</a>\n               </p>\n            </dd>\n            <dt>PERCENT_TALK_TIME_CUSTOMER</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical\">Talk time customer percent</a>\n               </p>\n            </dd>\n            <dt>REOPENED_CASE_ACTIONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical\">Cases reopened</a>\n               </p>\n            </dd>\n            <dt>RESOLVED_CASE_ACTIONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historicall\">Cases resolved</a>\n               </p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical\">Service level X</a>\n               </p>\n            </dd>\n            <dt>STEP_CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, RoutingStepExpression</p>\n               <p>UI name: Not available</p>\n            </dd>\n            <dt>SUM_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical\">After\n       contact work time</a>\n               </p>\n            </dd>\n            <dt>SUM_CONNECTING_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. This metric only supports the\n      following filter keys as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time\">Agent API connecting time</a>\n               </p>\n               <note>\n                  <p>The <code>Negate</code> key in Metric Level Filters is not applicable for this\n       metric.</p>\n               </note>\n            </dd>\n            <dt>SUM_CONTACT_FLOW_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-flow-time-historical\">Contact flow time</a>\n               </p>\n            </dd>\n            <dt>SUM_CONTACT_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical\">Agent on contact time</a>\n               </p>\n            </dd>\n            <dt>SUM_CONTACTS_ANSWERED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical\">Contacts answered in X seconds</a>\n               </p>\n            </dd>\n            <dt>SUM_CONTACTS_ABANDONED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical\">Contacts abandoned in X seconds</a>\n               </p>\n            </dd>\n            <dt>SUM_CONTACTS_DISCONNECTED </dt>\n            <dd>\n               <p>Valid metric filter key: <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical\">Contact disconnected</a>\n               </p>\n            </dd>\n            <dt>SUM_ERROR_STATUS_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical\">Error status time</a>\n               </p>\n            </dd>\n            <dt>SUM_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-handle-time-historical\">Contact handle time</a>\n               </p>\n            </dd>\n            <dt>SUM_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#customer-hold-time-historical\">Customer hold time</a>\n               </p>\n            </dd>\n            <dt>SUM_IDLE_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica\">Agent idle time</a>\n               </p>\n            </dd>\n            <dt>SUM_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical\">Agent interaction and hold time</a>\n               </p>\n            </dd>\n            <dt>SUM_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-time-historical\">Agent interaction time</a>\n               </p>\n            </dd>\n            <dt>SUM_NON_PRODUCTIVE_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#npt-historical\">Non-Productive Time</a>\n               </p>\n            </dd>\n            <dt>SUM_ONLINE_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#online-time-historical\">Online time</a>\n               </p>\n            </dd>\n            <dt>SUM_RETRY_CALLBACK_ATTEMPTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#callback-attempts-historical\">Callback attempts</a>\n               </p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, groupings, and filters for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical metrics definitions</a> in the <i>Amazon Connect Administrator's\n    Guide</i>.</p>\n         <dl>\n            <dt>ABANDONMENT_RATE</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#abandonment-rate-historical\">Abandonment rate</a>\n               </p>\n            </dd>\n            <dt>AGENT_ADHERENT_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherent-time-historical\">Adherent time</a>\n               </p>\n            </dd>\n            <dt>AGENT_ANSWER_RATE</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-answer-rate-historical\">Agent answer rate</a>\n               </p>\n            </dd>\n            <dt>AGENT_NON_ADHERENT_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#non-adherent-time\">Non-adherent time</a>\n               </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-non-response\">Agent\n       non-response</a>\n               </p>\n            </dd>\n            <dt>AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>Data for this metric is available starting from October 1, 2023 0:00:00 GMT.</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-nonresponse-no-abandon-historical\">Agent non-response without customer abandons</a>\n               </p>\n            </dd>\n            <dt>AGENT_OCCUPANCY</dt>\n            <dd>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#occupancy-historical\">Occupancy</a>\n               </p>\n            </dd>\n            <dt>AGENT_SCHEDULE_ADHERENCE</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherence-historical\">Adherence</a>\n               </p>\n            </dd>\n            <dt>AGENT_SCHEDULED_TIME</dt>\n            <dd>\n               <p>This metric is available only in Amazon Web Services Regions where <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region\">Forecasting, capacity planning, and scheduling</a> is available.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#scheduled-time-historical\">Scheduled time</a>\n               </p>\n            </dd>\n            <dt>AVG_ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-abandon-time-historical\">Average queue abandon time</a>\n               </p>\n            </dd>\n            <dt>AVG_ACTIVE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-active-time-historical\">Average active time</a>\n               </p>\n            </dd>\n            <dt>AVG_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-acw-time-historical\">Average after contact work time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_AGENT_CONNECTING_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. For now, this metric only\n      supports the following as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-avg-agent-api-connecting-time\">Average agent API connecting time</a>\n               </p>\n               <note>\n                  <p>The <code>Negate</code> key in Metric Level Filters is not applicable for this\n       metric.</p>\n               </note>\n            </dd>\n            <dt>AVG_AGENT_PAUSE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-pause-time-historical\">Average agent pause time</a>\n               </p>\n            </dd>\n            <dt>AVG_CASE_RELATED_CONTACTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contacts-case-historical\">Average contacts per case</a>\n               </p>\n            </dd>\n            <dt>AVG_CASE_RESOLUTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-case-resolution-time-historical\">Average case resolution time</a>\n               </p>\n            </dd>\n            <dt>AVG_CONTACT_DURATION</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contact-duration-historical\">Average contact duration</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_CONVERSATION_DURATION</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-conversation-duration-historical\">Average conversation duration</a>\n               </p>\n            </dd>\n            <dt>AVG_GREETING_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-greeting-time-agent-historical\">Average agent greeting time</a>\n               </p>\n            </dd>\n            <dt>AVG_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype, RoutingStepExpression</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-handle-time-historical\">Average handle time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-customer-hold-time-historical\">Average customer hold time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_HOLD_TIME_ALL_CONTACTS</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#avg-customer-hold-time-all-contacts-historical\">Average customer hold time all contacts</a>\n               </p>\n            </dd>\n            <dt>AVG_HOLDS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-holds-historical\">Average holds</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-customer-hold-time-historical\">Average agent interaction and customer hold time</a>\n               </p>\n            </dd>\n            <dt>AVG_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-time-historical\">Average agent interaction time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_INTERRUPTIONS_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-agent-historical\">Average agent interruptions</a>\n               </p>\n            </dd>\n            <dt>AVG_INTERRUPTION_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-time-agent-historical\">Average agent interruption time</a>\n               </p>\n            </dd>\n            <dt>AVG_NON_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##average-non-talk-time-historical\">Average non-talk time</a>\n               </p>\n            </dd>\n            <dt>AVG_QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-answer-time-historical\">Average queue answer time</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>AVG_RESOLUTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-resolution-time-historical\">Average resolution time</a>\n               </p>\n            </dd>\n            <dt>AVG_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-historical\">Average talk time</a>\n               </p>\n            </dd>\n            <dt>AVG_TALK_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-agent-historical\">Average agent talk time</a>\n               </p>\n            </dd>\n            <dt>AVG_TALK_TIME_CUSTOMER</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical\">Average customer talk time</a>\n               </p>\n            </dd>\n            <dt>CASES_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##cases-created-historical\">Cases created</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype, RoutingStepExpression</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical\">Contact abandoned</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_CREATED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-created-historical\">Contacts created</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>,\n      <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype, RoutingStepExpression</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#api-contacts-handled-historical\">API contacts handled</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_HANDLED_BY_CONNECTED_TO_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical\">Contacts handled (connected to agent timestamp)</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical\">Contacts hold disconnect</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_ON_HOLD_AGENT_DISCONNECT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-agent-disconnect-historical\">Contacts hold agent disconnect</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical\">Contacts hold customer disconnect</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_PUT_ON_HOLD</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical\">Contacts put on hold</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_EXTERNAL</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-external-historical\">Contacts transferred out external</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_INTERNAL</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical\">Contacts transferred out internal</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical\">Contacts queued</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_QUEUED_BY_ENQUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical\">Contacts queued (enqueue timestamp)</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_RESOLVED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>Threshold: For <code>ThresholdValue</code> enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\").</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical\">Contacts resolved in X</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical\">Contacts transferred out</a>\n               </p>\n               <note>\n                  <p>Feature is a valid filter but not a valid grouping.</p>\n               </note>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_BY_AGENT</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical\">Contacts transferred out by agent</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical\">Contacts transferred out queue</a>\n               </p>\n            </dd>\n            <dt>CURRENT_CASES</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical\">Current cases</a>\n               </p>\n            </dd>\n            <dt>MAX_QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical\">Maximum queued time</a>\n               </p>\n            </dd>\n            <dt>PERCENT_CASES_FIRST_CONTACT_RESOLVED</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical\">Cases resolved on first contact</a>\n               </p>\n            </dd>\n            <dt>PERCENT_CONTACTS_STEP_EXPIRED</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, RoutingStepExpression</p>\n               <p>UI name: Not available </p>\n            </dd>\n            <dt>PERCENT_CONTACTS_STEP_JOINED</dt>\n            <dd>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, RoutingStepExpression</p>\n               <p>UI name: Not available </p>\n            </dd>\n            <dt>PERCENT_NON_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical\">Non-talk\n       time percent</a>\n               </p>\n            </dd>\n            <dt>PERCENT_TALK_TIME</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical\">Talk time\n       percent</a>\n               </p>\n            </dd>\n            <dt>PERCENT_TALK_TIME_AGENT</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical\">Agent\n       talk time percent</a>\n               </p>\n            </dd>\n            <dt>PERCENT_TALK_TIME_CUSTOMER</dt>\n            <dd>\n               <p>This metric is available only for contacts analyzed by Contact Lens conversational\n      analytics.</p>\n               <p>Unit: Percentage</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical\">Customer talk time percent</a>\n               </p>\n            </dd>\n            <dt>REOPENED_CASE_ACTIONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical\">Cases reopened</a>\n               </p>\n            </dd>\n            <dt>RESOLVED_CASE_ACTIONS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Required filter key: CASE_TEMPLATE_ARN</p>\n               <p>Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historicall\">Cases resolved</a>\n               </p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: Percent</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical\">Service level X</a>\n               </p>\n            </dd>\n            <dt>STEP_CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, RoutingStepExpression</p>\n               <p>UI name: Not available</p>\n            </dd>\n            <dt>SUM_AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical\">After\n       contact work time</a>\n               </p>\n            </dd>\n            <dt>SUM_CONNECTING_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid metric filter key: <code>INITIATION_METHOD</code>. This metric only supports the\n      following filter keys as <code>INITIATION_METHOD</code>: <code>INBOUND</code> |\n       <code>OUTBOUND</code> | <code>CALLBACK</code> | <code>API</code>\n               </p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time\">Agent API connecting time</a>\n               </p>\n               <note>\n                  <p>The <code>Negate</code> key in Metric Level Filters is not applicable for this\n       metric.</p>\n               </note>\n            </dd>\n            <dt>SUM_CONTACT_FLOW_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-flow-time-historical\">Contact flow time</a>\n               </p>\n            </dd>\n            <dt>SUM_CONTACT_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical\">Agent on contact time</a>\n               </p>\n            </dd>\n            <dt>SUM_CONTACTS_ANSWERED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical\">Contacts answered in X seconds</a>\n               </p>\n            </dd>\n            <dt>SUM_CONTACTS_ABANDONED_IN_X</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical\">Contacts abandoned in X seconds</a>\n               </p>\n            </dd>\n            <dt>SUM_CONTACTS_DISCONNECTED </dt>\n            <dd>\n               <p>Valid metric filter key: <code>DISCONNECT_REASON</code>\n               </p>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical\">Contact disconnected</a>\n               </p>\n            </dd>\n            <dt>SUM_ERROR_STATUS_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical\">Error status time</a>\n               </p>\n            </dd>\n            <dt>SUM_HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-handle-time-historical\">Contact handle time</a>\n               </p>\n            </dd>\n            <dt>SUM_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#customer-hold-time-historical\">Customer hold time</a>\n               </p>\n            </dd>\n            <dt>SUM_IDLE_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica\">Agent idle time</a>\n               </p>\n            </dd>\n            <dt>SUM_INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical\">Agent interaction and hold time</a>\n               </p>\n            </dd>\n            <dt>SUM_INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-time-historical\">Agent interaction time</a>\n               </p>\n            </dd>\n            <dt>SUM_NON_PRODUCTIVE_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#npt-historical\">Non-Productive Time</a>\n               </p>\n            </dd>\n            <dt>SUM_ONLINE_TIME_AGENT</dt>\n            <dd>\n               <p>Unit: Seconds</p>\n               <p>Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#online-time-historical\">Online time</a>\n               </p>\n            </dd>\n            <dt>SUM_RETRY_CALLBACK_ATTEMPTS</dt>\n            <dd>\n               <p>Unit: Count</p>\n               <p>Valid groupings and filters: Queue, Channel, Routing Profile,\n      contact/segmentAttributes/connect:Subtype</p>\n               <p>UI name: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#callback-attempts-historical\">Callback attempts</a>\n               </p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17499,12 +18158,29 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The message about the request.</p>"
                     }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.connect#InvalidRequestExceptionReason"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.connect#InvalidRequestExceptionReason": {
+            "type": "union",
+            "members": {
+                "AttachedFileInvalidRequestExceptionReason": {
+                    "target": "com.amazonaws.connect#AttachedFileInvalidRequestExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason why the StartAttachedFiledUpload request was invalid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Reason why the request was invalid.</p>"
             }
         },
         "com.amazonaws.connect#InvisibleFieldInfo": {
@@ -22269,6 +22945,15 @@
         },
         "com.amazonaws.connect#Message": {
             "type": "string"
+        },
+        "com.amazonaws.connect#MetadataUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
         },
         "com.amazonaws.connect#MetricDataCollectionsV2": {
             "type": "list",
@@ -30332,6 +31017,158 @@
                 }
             }
         },
+        "com.amazonaws.connect#StartAttachedFileUpload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#StartAttachedFileUploadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#StartAttachedFileUploadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading your content.</p>\n         <important>\n            <p>You may only use this API to upload attachments to a <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Connect\n    Case</a>.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/attached-files/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#StartAttachedFileUploadRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Connect instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileName": {
+                    "target": "com.amazonaws.connect#FileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A case-sensitive name of the attached file being uploaded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FileSizeInBytes": {
+                    "target": "com.amazonaws.connect#FileSizeInBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the attached file in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UrlExpiryInSeconds": {
+                    "target": "com.amazonaws.connect#URLExpiryInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional override for the expiry of the pre-signed S3 URL in seconds.</p>"
+                    }
+                },
+                "FileUseCaseType": {
+                    "target": "com.amazonaws.connect#FileUseCaseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociatedResourceArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource to which the attached file is (being) uploaded to. <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html\">Cases</a> are the only\n   current supported resource.</p>\n         <note>\n            <p>This value must be a valid ARN.</p>\n         </note>",
+                        "smithy.api#httpQuery": "associatedResourceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.connect#CreatedByInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the identity that created the file.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, <code>{\n    \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#StartAttachedFileUploadResponse": {
+            "type": "structure",
+            "members": {
+                "FileArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource (ARN).</p>"
+                    }
+                },
+                "FileId": {
+                    "target": "com.amazonaws.connect#FileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the attached file resource.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time of Creation of the file resource as an ISO timestamp. It's specified in ISO 8601\n   format: <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example,\n   <code>2024-05-03T02:41:28.172Z</code>.</p>"
+                    }
+                },
+                "FileStatus": {
+                    "target": "com.amazonaws.connect#FileStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the attached file.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.connect#CreatedByInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the identity that created the file.</p>"
+                    }
+                },
+                "UploadUrlMetadata": {
+                    "target": "com.amazonaws.connect#UploadUrlMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information to be used while uploading the attached file. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Response from StartAttachedFileUpload API.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#StartChatContact": {
             "type": "operation",
             "input": {
@@ -32954,6 +33791,15 @@
                 }
             }
         },
+        "com.amazonaws.connect#URLExpiryInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 300
+                }
+            }
+        },
         "com.amazonaws.connect#Unit": {
             "type": "enum",
             "members": {
@@ -33313,7 +34159,7 @@
                 "Attributes": {
                     "target": "com.amazonaws.connect#Attributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Connect attributes. These attributes can be accessed in flows just like any\n   other contact attributes.</p>\n         <p>You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys\n   can include only alphanumeric, dash, and underscore characters.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Connect attributes. These attributes can be accessed in flows just like any\n   other contact attributes.</p>\n         <p>You can have up to 32,768 UTF-8 bytes across all attributes for a contact. Attribute keys\n   can include only alphanumeric, dash, and underscore characters.</p>\n         <p>When the attributes for a contact exceed 32 KB, the contact is routed down the Error branch\n   of the flow. As a mitigation, consider the following options:</p>\n         <ul>\n            <li>\n               <p>Remove unnecessary attributes by setting their values to empty.</p>\n            </li>\n            <li>\n               <p>If the attributes are only used in one flow and don't need to be referred to outside of\n     that flow (for example, by a Lambda or another flow), then use flow attributes. This way you\n     aren't needlessly persisting the 32 KB of information from one flow to another. For more\n     information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html\">Flow block: Set contact\n      attributes</a> in the <i>Amazon Connect Administrator Guide</i>. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -36770,8 +37616,61 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#UploadUrlMetadata": {
+            "type": "structure",
+            "members": {
+                "Url": {
+                    "target": "com.amazonaws.connect#MetadataUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pre-signed S3 URL that should be used for uploading the attached file. </p>"
+                    }
+                },
+                "UrlExpiry": {
+                    "target": "com.amazonaws.connect#ISO8601Datetime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format:\n    <code>yyyy-MM-ddThh:mm:ss.SSSZ</code>. For example,\n   <code>2019-11-08T02:41:28.172Z</code>.</p>"
+                    }
+                },
+                "HeadersToInclude": {
+                    "target": "com.amazonaws.connect#UrlMetadataSignedHeaders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of headers that should be provided when uploading the attached file. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Fields required when uploading an attached file. </p>"
+            }
+        },
         "com.amazonaws.connect#Url": {
             "type": "string"
+        },
+        "com.amazonaws.connect#UrlMetadataSignedHeaders": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#UrlMetadataSignedHeadersKey"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#UrlMetadataSignedHeadersValue"
+            }
+        },
+        "com.amazonaws.connect#UrlMetadataSignedHeadersKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#UrlMetadataSignedHeadersValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.connect#UrlReference": {
             "type": "structure",

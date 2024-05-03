@@ -1869,6 +1869,23 @@
                 "smithy.api#pattern": "^\\d{12}|o-[a-z0-9]{10,32}$"
             }
         },
+        "com.amazonaws.inspector2#CisReportFormat": {
+            "type": "enum",
+            "members": {
+                "PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PDF"
+                    }
+                },
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                }
+            }
+        },
         "com.amazonaws.inspector2#CisReportStatus": {
             "type": "enum",
             "members": {
@@ -6981,6 +6998,9 @@
                     "target": "com.amazonaws.inspector2#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.inspector2#ThrottlingException"
                 },
                 {
@@ -6993,7 +7013,8 @@
                     {
                         "title": "Sample GetCisScanReport Call",
                         "input": {
-                            "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38"
+                            "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38",
+                            "reportFormat": "PDF"
                         },
                         "output": {
                             "url": "www.s3.amazon.com/abcdef",
@@ -7023,6 +7044,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The target accounts.</p>"
                     }
+                },
+                "reportFormat": {
+                    "target": "com.amazonaws.inspector2#CisReportFormat",
+                    "traits": {
+                        "smithy.api#default": "PDF",
+                        "smithy.api#documentation": "<p>\n         The format of the report. \n         Valid values are <code>PDF</code> and <code>CSV</code>. \n         If no value is specified, the report format defaults to <code>PDF</code>.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -7035,7 +7063,7 @@
                 "url": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The URL where a PDF of the CIS scan report can be downloaded.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The URL where a PDF or CSV of the CIS scan report can be downloaded.\n      </p>"
                     }
                 },
                 "status": {

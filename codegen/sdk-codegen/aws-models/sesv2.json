@@ -460,6 +460,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>ReplacementEmailContent</code> associated with a\n            <code>BulkEmailEntry</code>.</p>"
                     }
+                },
+                "ReplacementHeaders": {
+                    "target": "com.amazonaws.sesv2#MessageHeaderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of message headers associated with the <code>BulkEmailEntry</code> data type.</p>\n         <ul>\n            <li>\n               <p>Headers Not Present in <code>BulkEmailEntry</code>: If a header is specified in\n                    <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_Template.html\">\n                     <code>Template</code>\n                  </a> but not in <code>BulkEmailEntry</code>, the header\n                    from <code>Template</code> will be added to the outgoing email.</p>\n            </li>\n            <li>\n               <p>Headers Present in <code>BulkEmailEntry</code>: If a header is specified in\n                    <code>BulkEmailEntry</code>, it takes precedence over any header of the same name specified\n                    in <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_Template.html\">\n                     <code>Template</code>\n                  </a>:</p>\n               <ul>\n                  <li>\n                     <p>If the header is also defined within <code>Template</code>,\n                            the value from <code>BulkEmailEntry</code> will replace the header's\n                            value in the email.</p>\n                  </li>\n                  <li>\n                     <p>If the header is not defined within <code>Template</code>,\n                            it will simply be added to the email as specified in\n                            <code>BulkEmailEntry</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
