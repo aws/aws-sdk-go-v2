@@ -5350,6 +5350,24 @@ func (Scte35SegmentationCancelIndicator) Values() []Scte35SegmentationCancelIndi
 	}
 }
 
+type Scte35SegmentationScope string
+
+// Enum values for Scte35SegmentationScope
+const (
+	Scte35SegmentationScopeAllOutputGroups           Scte35SegmentationScope = "ALL_OUTPUT_GROUPS"
+	Scte35SegmentationScopeScte35EnabledOutputGroups Scte35SegmentationScope = "SCTE35_ENABLED_OUTPUT_GROUPS"
+)
+
+// Values returns all known values for Scte35SegmentationScope. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Scte35SegmentationScope) Values() []Scte35SegmentationScope {
+	return []Scte35SegmentationScope{
+		"ALL_OUTPUT_GROUPS",
+		"SCTE35_ENABLED_OUTPUT_GROUPS",
+	}
+}
+
 type Scte35SpliceInsertNoRegionalBlackoutBehavior string
 
 // Enum values for Scte35SpliceInsertNoRegionalBlackoutBehavior

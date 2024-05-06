@@ -8678,6 +8678,11 @@ func awsRestjson1_serializeDocumentAvailConfiguration(v *types.AvailConfiguratio
 		}
 	}
 
+	if len(v.Scte35SegmentationScope) > 0 {
+		ok := object.Key("scte35SegmentationScope")
+		ok.String(string(v.Scte35SegmentationScope))
+	}
+
 	return nil
 }
 

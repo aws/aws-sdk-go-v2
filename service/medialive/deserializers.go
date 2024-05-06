@@ -21902,6 +21902,15 @@ func awsRestjson1_deserializeDocumentAvailConfiguration(v **types.AvailConfigura
 				return err
 			}
 
+		case "scte35SegmentationScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Scte35SegmentationScope to be of type string, got %T instead", value)
+				}
+				sv.Scte35SegmentationScope = types.Scte35SegmentationScope(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
