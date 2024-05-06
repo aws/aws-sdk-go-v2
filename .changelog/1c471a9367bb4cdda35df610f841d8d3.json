@@ -1,8 +1,0 @@
-{
-    "id": "1c471a93-67bb-4cdd-a35d-f610f841d8d3",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive now supports configuring how SCTE 35 passthrough triggers segment breaks in HLS and MediaPackage output groups. Previously, messages triggered breaks in all these output groups. The new option is to trigger segment breaks only in groups that have SCTE 35 passthrough enabled.",
-    "modules": [
-        "service/medialive"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.33.1 (2024-05-06)
+
+* No change notes available for this release.
+
 # v1.33.0 (2024-04-30)
 
 * **Feature**: AWS Firewall Manager now supports the network firewall service stream exception policy feature for accounts within your organization.
