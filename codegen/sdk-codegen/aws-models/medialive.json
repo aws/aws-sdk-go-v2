@@ -1545,6 +1545,13 @@
                         "smithy.api#documentation": "Controls how SCTE-35 messages create cues. Splice Insert mode treats all segmentation signals traditionally. With Time Signal APOS mode only Time Signal Placement Opportunity and Break messages create segment breaks. With ESAM mode, signals are forwarded to an ESAM server for possible update.",
                         "smithy.api#jsonName": "availSettings"
                     }
+                },
+                "Scte35SegmentationScope": {
+                    "target": "com.amazonaws.medialive#Scte35SegmentationScope",
+                    "traits": {
+                        "smithy.api#documentation": "Configures whether SCTE 35 passthrough triggers segment breaks in all output groups that use segmented outputs. Insertion of a SCTE 35 message typically results in a segment break, in addition to the regular cadence of breaks. The segment breaks appear in video outputs, audio outputs, and captions outputs (if any).\n\nALL_OUTPUT_GROUPS: Default. Insert the segment break in in all output groups that have segmented outputs. This is the legacy behavior.\nSCTE35_ENABLED_OUTPUT_GROUPS: Insert the segment break only in output groups that have SCTE 35 passthrough enabled. This is the recommended value, because it reduces unnecessary segment breaks.",
+                        "smithy.api#jsonName": "scte35SegmentationScope"
+                    }
                 }
             },
             "traits": {
@@ -25565,6 +25572,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Corresponds to SCTE-35 segmentation_descriptor."
+            }
+        },
+        "com.amazonaws.medialive#Scte35SegmentationScope": {
+            "type": "enum",
+            "members": {
+                "ALL_OUTPUT_GROUPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_OUTPUT_GROUPS"
+                    }
+                },
+                "SCTE35_ENABLED_OUTPUT_GROUPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE35_ENABLED_OUTPUT_GROUPS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Scte35 Segmentation Scope"
             }
         },
         "com.amazonaws.medialive#Scte35SpliceInsert": {
