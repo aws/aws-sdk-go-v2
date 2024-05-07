@@ -1,8 +1,0 @@
-{
-    "id": "b0a8764f-5db0-4d42-88a0-b6d10378165d",
-    "type": "feature",
-    "description": "This release adds tag support for budgets and budget actions.",
-    "modules": [
-        "service/budgets"
-    ]
-}

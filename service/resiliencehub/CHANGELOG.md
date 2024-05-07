@@ -1,3 +1,7 @@
+# v1.21.0 (2024-05-07)
+
+* **Feature**: AWS Resilience Hub has expanded its drift detection capabilities by introducing a new type of drift detection - application resource drift. This new enhancement detects changes, such as the addition or deletion of resources within the application's input sources.
+
 # v1.20.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

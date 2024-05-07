@@ -1,3 +1,7 @@
+# v1.0.1 (2024-05-07)
+
+* **Documentation**: Doc only update for Route 53 profiles that fixes some link  issues
+
 # v1.0.0 (2024-04-22)
 
 * **Release**: New AWS service client module

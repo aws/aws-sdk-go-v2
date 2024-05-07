@@ -1,3 +1,15 @@
+# Release (2024-05-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.22](service/b2bi/CHANGELOG.md#v100-preview22-2024-05-07)
+  * **Documentation**: Documentation update to clarify the MappingTemplate definition.
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.23.0](service/budgets/CHANGELOG.md#v1230-2024-05-07)
+  * **Feature**: This release adds tag support for budgets and budget actions.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.21.0](service/resiliencehub/CHANGELOG.md#v1210-2024-05-07)
+  * **Feature**: AWS Resilience Hub has expanded its drift detection capabilities by introducing a new type of drift detection - application resource drift. This new enhancement detects changes, such as the addition or deletion of resources within the application's input sources.
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.0.1](service/route53profiles/CHANGELOG.md#v101-2024-05-07)
+  * **Documentation**: Doc only update for Route 53 profiles that fixes some link  issues
+
 # Release (2024-05-06)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.23.0 (2024-05-07)
+
+* **Feature**: This release adds tag support for budgets and budget actions.
+
 # v1.22.4 (2024-03-29)
 
 * **Dependency Update**: Updated to the latest SDK module versions

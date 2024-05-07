@@ -1,8 +1,0 @@
-{
-    "id": "b295faf0-af28-405b-a4e2-786e903dbf34",
-    "type": "feature",
-    "description": "AWS Resilience Hub has expanded its drift detection capabilities by introducing a new type of drift detection - application resource drift. This new enhancement detects changes, such as the addition or deletion of resources within the application's input sources.",
-    "modules": [
-        "service/resiliencehub"
-    ]
-}

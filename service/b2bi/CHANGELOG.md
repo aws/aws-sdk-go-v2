@@ -1,3 +1,7 @@
+# v1.0.0-preview.22 (2024-05-07)
+
+* **Documentation**: Documentation update to clarify the MappingTemplate definition.
+
 # v1.0.0-preview.21 (2024-04-04)
 
 * **Feature**: Adding support for X12 5010 HIPAA EDI version and associated transaction sets.

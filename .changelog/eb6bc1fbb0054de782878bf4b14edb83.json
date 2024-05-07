@@ -1,8 +1,0 @@
-{
-    "id": "eb6bc1fb-b005-4de7-8287-8bf4b14edb83",
-    "type": "documentation",
-    "description": "Doc only update for Route 53 profiles that fixes some link  issues",
-    "modules": [
-        "service/route53profiles"
-    ]
-}
