@@ -374,6 +374,18 @@ func TestCheckSnapshot_ListAppAssessmentComplianceDrifts(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAppAssessmentResourceDrifts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAppAssessmentResourceDrifts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAppAssessmentResourceDrifts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAppAssessments(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAppAssessments(context.Background(), nil, func(o *Options) {
@@ -1014,6 +1026,18 @@ func TestUpdateSnapshot_ListAppAssessmentComplianceDrifts(t *testing.T) {
 	_, err := svc.ListAppAssessmentComplianceDrifts(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAppAssessmentComplianceDrifts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAppAssessmentResourceDrifts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAppAssessmentResourceDrifts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAppAssessmentResourceDrifts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

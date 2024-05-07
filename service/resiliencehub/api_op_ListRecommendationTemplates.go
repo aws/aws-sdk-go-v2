@@ -33,8 +33,6 @@ type ListRecommendationTemplatesInput struct {
 	// partition :resiliencehub: region : account :app-assessment/ app-id . For more
 	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// in the Amazon Web Services General Reference guide.
-	//
-	// This member is required.
 	AssessmentArn *string
 
 	// Maximum number of results to include in the response. If more results exist
@@ -128,9 +126,6 @@ func (c *Client) addOperationListRecommendationTemplatesMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpListRecommendationTemplatesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecommendationTemplates(options.Region), middleware.Before); err != nil {

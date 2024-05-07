@@ -46,8 +46,8 @@ type UpdateTransformerInput struct {
 	// JSON and XML .
 	FileFormat types.FileFormat
 
-	// Specifies the name of the mapping template for the transformer. This template
-	// is used to convert the input document into the correct set of objects.
+	// Specifies the mapping template for the transformer. This template is used to
+	// map the parsed EDI file using JSONata or XSLT.
 	MappingTemplate *string
 
 	// Specify a new name for the transformer, if you want to update it.
@@ -84,8 +84,8 @@ type UpdateTransformerOutput struct {
 	// This member is required.
 	FileFormat types.FileFormat
 
-	// Returns the name of the mapping template for the transformer. This template is
-	// used to convert the input document into the correct set of objects.
+	// Returns the mapping template for the transformer. This template is used to map
+	// the parsed EDI file using JSONata or XSLT.
 	//
 	// This member is required.
 	MappingTemplate *string

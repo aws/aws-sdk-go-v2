@@ -1,0 +1,8 @@
+{
+    "id": "bef6872e-330d-493d-9bb8-df6ef6ad3c66",
+    "type": "documentation",
+    "description": "Documentation update to clarify the MappingTemplate definition.",
+    "modules": [
+        "service/b2bi"
+    ]
+}

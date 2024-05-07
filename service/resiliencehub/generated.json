@@ -34,6 +34,7 @@
         "api_op_ImportResourcesToDraftAppVersion.go",
         "api_op_ListAlarmRecommendations.go",
         "api_op_ListAppAssessmentComplianceDrifts.go",
+        "api_op_ListAppAssessmentResourceDrifts.go",
         "api_op_ListAppAssessments.go",
         "api_op_ListAppComponentCompliances.go",
         "api_op_ListAppComponentRecommendations.go",

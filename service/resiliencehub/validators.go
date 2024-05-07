@@ -530,6 +530,26 @@ func (m *validateOpListAppAssessmentComplianceDrifts) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAppAssessmentResourceDrifts struct {
+}
+
+func (*validateOpListAppAssessmentResourceDrifts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAppAssessmentResourceDrifts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAppAssessmentResourceDriftsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAppAssessmentResourceDriftsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAppComponentCompliances struct {
 }
 
@@ -665,26 +685,6 @@ func (m *validateOpListAppVersions) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAppVersionsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpListRecommendationTemplates struct {
-}
-
-func (*validateOpListRecommendationTemplates) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListRecommendationTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListRecommendationTemplatesInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListRecommendationTemplatesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1114,6 +1114,10 @@ func addOpListAppAssessmentComplianceDriftsValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpListAppAssessmentComplianceDrifts{}, middleware.After)
 }
 
+func addOpListAppAssessmentResourceDriftsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAppAssessmentResourceDrifts{}, middleware.After)
+}
+
 func addOpListAppComponentCompliancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAppComponentCompliances{}, middleware.After)
 }
@@ -1140,10 +1144,6 @@ func addOpListAppVersionResourcesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListAppVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAppVersions{}, middleware.After)
-}
-
-func addOpListRecommendationTemplatesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListRecommendationTemplates{}, middleware.After)
 }
 
 func addOpListSopRecommendationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1988,6 +1988,21 @@ func validateOpListAppAssessmentComplianceDriftsInput(v *ListAppAssessmentCompli
 	}
 }
 
+func validateOpListAppAssessmentResourceDriftsInput(v *ListAppAssessmentResourceDriftsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAppAssessmentResourceDriftsInput"}
+	if v.AssessmentArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssessmentArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAppComponentCompliancesInput(v *ListAppComponentCompliancesInput) error {
 	if v == nil {
 		return nil
@@ -2097,21 +2112,6 @@ func validateOpListAppVersionsInput(v *ListAppVersionsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListAppVersionsInput"}
 	if v.AppArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListRecommendationTemplatesInput(v *ListRecommendationTemplatesInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListRecommendationTemplatesInput"}
-	if v.AssessmentArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssessmentArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

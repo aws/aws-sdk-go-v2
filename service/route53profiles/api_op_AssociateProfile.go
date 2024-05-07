@@ -12,8 +12,10 @@ import (
 )
 
 // Associates a Route 53 Profiles profile with a VPC. A VPC can have only one
-// Profile associated with it, but a Profile can be associated with up to 5000
-// VPCs.
+// Profile associated with it, but a Profile can be associated with 1000 of VPCs
+// (and you can request a higher quota). For more information, see
+// https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities)
+// .
 func (c *Client) AssociateProfile(ctx context.Context, params *AssociateProfileInput, optFns ...func(*Options)) (*AssociateProfileOutput, error) {
 	if params == nil {
 		params = &AssociateProfileInput{}

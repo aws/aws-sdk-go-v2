@@ -796,7 +796,7 @@ type PhysicalResource struct {
 	// This member is required.
 	PhysicalResourceId *PhysicalResourceId
 
-	// The type of resource.
+	// Type of resource.
 	//
 	// This member is required.
 	ResourceType *string
@@ -1065,6 +1065,31 @@ type ResiliencyScore struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates the resources that have drifted in the current application version.
+type ResourceDrift struct {
+
+	// Amazon Resource Name (ARN) of the application whose resources have drifted. The
+	// format for this ARN is: arn: partition :resiliencehub: region : account
+	// :app-assessment/ app-id . For more information about ARNs, see  Amazon Resource
+	// Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the Amazon Web Services General Reference guide.
+	AppArn *string
+
+	// Version of the application whose resources have drifted.
+	AppVersion *string
+
+	// Indicates if the resource was added or removed.
+	DiffType DifferenceType
+
+	// Reference identifier of the resource drift.
+	ReferenceId *string
+
+	// Identifier of the drifted resource.
+	ResourceIdentifier *ResourceIdentifier
+
+	noSmithyDocumentSerde
+}
+
 // Defines application resource errors.
 type ResourceError struct {
 
@@ -1092,17 +1117,22 @@ type ResourceErrorsDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a resource identifier for the drifted resource.
+type ResourceIdentifier struct {
+
+	// Logical identifier of the drifted resource.
+	LogicalResourceId *LogicalResourceId
+
+	// Type of the drifted resource.
+	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a resource mapping.
 type ResourceMapping struct {
 
-	// Specifies the type of resource mapping. AppRegistryApp The resource is mapped
-	// to another application. The name of the application is contained in the
-	// appRegistryAppName property. CfnStack The resource is mapped to a CloudFormation
-	// stack. The name of the CloudFormation stack is contained in the logicalStackName
-	// property. Resource The resource is mapped to another resource. The name of the
-	// resource is contained in the resourceName property. ResourceGroup The resource
-	// is mapped to Resource Groups. The name of the resource group is contained in the
-	// resourceGroupName property.
+	// Specifies the type of resource mapping.
 	//
 	// This member is required.
 	MappingType ResourceMappingType
@@ -1112,24 +1142,29 @@ type ResourceMapping struct {
 	// This member is required.
 	PhysicalResourceId *PhysicalResourceId
 
-	// The name of the application this resource is mapped to.
+	// Name of the application this resource is mapped to when the mappingType is
+	// AppRegistryApp .
 	AppRegistryAppName *string
 
-	// Name of the Amazon Elastic Kubernetes Service cluster and namespace this
-	// resource belongs to. This parameter accepts values in "eks-cluster/namespace"
-	// format.
+	// Name of the Amazon Elastic Kubernetes Service cluster and namespace that this
+	// resource is mapped to when the mappingType is EKS . This parameter accepts
+	// values in "eks-cluster/namespace" format.
 	EksSourceName *string
 
-	// The name of the CloudFormation stack this resource is mapped to.
+	// Name of the CloudFormation stack this resource is mapped to when the mappingType
+	// is CfnStack .
 	LogicalStackName *string
 
-	// Name of the resource group that the resource is mapped to.
+	// Name of the Resource Groups that this resource is mapped to when the mappingType
+	// is ResourceGroup .
 	ResourceGroupName *string
 
-	// Name of the resource that the resource is mapped to.
+	// Name of the resource that this resource is mapped to when the mappingType is
+	// Resource .
 	ResourceName *string
 
-	// The short name of the Terraform source.
+	// Name of the Terraform source that this resource is mapped to when the
+	// mappingType is Terraform .
 	TerraformSourceName *string
 
 	noSmithyDocumentSerde
@@ -1153,27 +1188,27 @@ type S3Location struct {
 type ScoringComponentResiliencyScore struct {
 
 	// Number of recommendations that were excluded from the assessment. For example,
-	// if the Excluded count for Resilience Hub recommended Amazon CloudWatch alarms
-	// is 7, it indicates that 7 Amazon CloudWatch alarms are excluded from the
-	// assessment.
+	// if the excludedCount for Alarms coverage scoring component is 7, it indicates
+	// that 7 Amazon CloudWatch alarms are excluded from the assessment.
 	ExcludedCount int64
 
-	// Number of issues that must be resolved to obtain the maximum possible score for
-	// the scoring component. For SOPs, alarms, and FIS experiments, these are the
-	// number of recommendations that must be implemented. For compliance, it is the
-	// number of Application Components that has breached the resiliency policy. For
-	// example, if the Outstanding count for Resilience Hub recommended Amazon
-	// CloudWatch alarms is 5, it indicates that 5 Amazon CloudWatch alarms must be
-	// fixed to achieve the maximum possible score.
+	// Number of recommendations that must be implemented to obtain the maximum
+	// possible score for the scoring component. For SOPs, alarms, and tests, these are
+	// the number of recommendations that must be implemented. For compliance, these
+	// are the number of Application Components that have breached the resiliency
+	// policy. For example, if the outstandingCount for Alarms coverage scoring
+	// component is 5, it indicates that 5 Amazon CloudWatch alarms need to be
+	// implemented to achieve the maximum possible score.
 	OutstandingCount int64
 
-	// Maximum possible score that can be obtained for the scoring component. If the
-	// Possible score is 20 points, it indicates the maximum possible score you can
-	// achieve for your application when you run a new assessment after implementing
-	// all the Resilience Hub recommendations.
+	// Maximum possible score that can be obtained for the scoring component. For
+	// example, if the possibleScore is 20 points, it indicates the maximum possible
+	// score you can achieve for the scoring component when you run a new assessment
+	// after implementing all the Resilience Hub recommendations.
 	PossibleScore float64
 
-	// Resiliency score of your application.
+	// Resiliency score points given for the scoring component. The score is always
+	// less than or equal to the possibleScore .
 	Score float64
 
 	noSmithyDocumentSerde

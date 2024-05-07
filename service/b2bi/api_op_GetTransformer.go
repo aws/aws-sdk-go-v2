@@ -60,8 +60,8 @@ type GetTransformerOutput struct {
 	// This member is required.
 	FileFormat types.FileFormat
 
-	// Returns the name of the mapping template for the transformer. This template is
-	// used to convert the input document into the correct set of objects.
+	// Returns the mapping template for the transformer. This template is used to map
+	// the parsed EDI file using JSONata or XSLT.
 	//
 	// This member is required.
 	MappingTemplate *string

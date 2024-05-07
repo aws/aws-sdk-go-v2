@@ -51,6 +51,10 @@ type CreateBudgetInput struct {
 	// for you.
 	NotificationsWithSubscribers []types.NotificationWithSubscribers
 
+	// An optional list of tags to associate with the specified budget. Each tag
+	// consists of a key and a value, and each key must be unique for the resource.
+	ResourceTags []types.ResourceTag
+
 	noSmithyDocumentSerde
 }
 

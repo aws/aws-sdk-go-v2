@@ -236,6 +236,8 @@ type DifferenceType string
 // Enum values for DifferenceType
 const (
 	DifferenceTypeNotEqual DifferenceType = "NotEqual"
+	DifferenceTypeAdded    DifferenceType = "Added"
+	DifferenceTypeRemoved  DifferenceType = "Removed"
 )
 
 // Values returns all known values for DifferenceType. Note that this can be
@@ -244,6 +246,8 @@ const (
 func (DifferenceType) Values() []DifferenceType {
 	return []DifferenceType{
 		"NotEqual",
+		"Added",
+		"Removed",
 	}
 }
 
@@ -293,7 +297,8 @@ type DriftType string
 
 // Enum values for DriftType
 const (
-	DriftTypeApplicationCompliance DriftType = "ApplicationCompliance"
+	DriftTypeApplicationCompliance                  DriftType = "ApplicationCompliance"
+	DriftTypeAppComponentResiliencyComplianceStatus DriftType = "AppComponentResiliencyComplianceStatus"
 )
 
 // Values returns all known values for DriftType. Note that this can be expanded
@@ -302,6 +307,7 @@ const (
 func (DriftType) Values() []DriftType {
 	return []DriftType{
 		"ApplicationCompliance",
+		"AppComponentResiliencyComplianceStatus",
 	}
 }
 

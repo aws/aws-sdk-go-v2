@@ -182,9 +182,9 @@ type Budget struct {
 	// The actual and forecasted cost or usage that the budget tracks.
 	CalculatedSpend *CalculatedSpend
 
-	// The cost filters, such as Region , Service , member account , Tag , or Cost
-	// Category , that are applied to a budget. Amazon Web Services Budgets supports
-	// the following services as a Service filter for RI budgets:
+	// The cost filters, such as Region , Service , LinkedAccount , Tag , or
+	// CostCategory , that are applied to a budget. Amazon Web Services Budgets
+	// supports the following services as a Service filter for RI budgets:
 	//   - Amazon EC2
 	//   - Amazon Redshift
 	//   - Amazon Relational Database Service
@@ -487,6 +487,22 @@ type NotificationWithSubscribers struct {
 	//
 	// This member is required.
 	Subscribers []Subscriber
+
+	noSmithyDocumentSerde
+}
+
+// The tag structure that contains a tag key and value.
+type ResourceTag struct {
+
+	// The key that's associated with the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The value that's associated with the tag.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

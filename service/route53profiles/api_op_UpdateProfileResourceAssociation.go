@@ -37,8 +37,10 @@ type UpdateProfileResourceAssociationInput struct {
 	// Name of the resource association.
 	Name *string
 
-	// If you are adding a DNS Firewall rule group, include also a priority in this
-	// format: Key=FirewallRuleGroupPriority,Value=100 .
+	// If you are adding a DNS Firewall rule group, include also a priority. The
+	// priority indicates the processing order for the rule groups, starting with the
+	// priority assinged the lowest value. The allowed values for priority are between
+	// 100 and 9900.
 	ResourceProperties *string
 
 	noSmithyDocumentSerde

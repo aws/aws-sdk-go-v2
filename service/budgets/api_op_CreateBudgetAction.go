@@ -77,6 +77,10 @@ type CreateBudgetActionInput struct {
 	// This member is required.
 	Subscribers []types.Subscriber
 
+	// An optional list of tags to associate with the specified budget action. Each
+	// tag consists of a key and a value, and each key must be unique for the resource.
+	ResourceTags []types.ResourceTag
+
 	noSmithyDocumentSerde
 }
 
