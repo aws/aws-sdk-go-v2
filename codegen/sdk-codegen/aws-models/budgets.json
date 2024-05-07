@@ -91,6 +91,15 @@
                     "target": "com.amazonaws.budgets#ExecuteBudgetAction"
                 },
                 {
+                    "target": "com.amazonaws.budgets#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.budgets#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.budgets#UntagResource"
+                },
+                {
                     "target": "com.amazonaws.budgets#UpdateBudget"
                 },
                 {
@@ -159,7 +168,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -202,7 +210,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -215,7 +224,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -229,7 +237,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -354,7 +361,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -389,7 +395,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -400,14 +405,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -421,14 +428,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -437,11 +442,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -452,14 +457,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -473,7 +480,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -493,7 +499,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -504,14 +509,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -522,9 +529,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -960,7 +969,7 @@
                 "ActionType": {
                     "target": "com.amazonaws.budgets#ActionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of action. This defines the type of tasks that can be carried out by this action.\n\t\t\tThis field also determines the format for definition. </p>",
+                        "smithy.api#documentation": "<p>The type of action. This defines the type of tasks that can be carried out by this\n\t\t\taction. This field also determines the format for definition. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -981,7 +990,7 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.budgets#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role passed for action execution and reversion. Roles and actions must be in the same\n\t\t\taccount. </p>",
+                        "smithy.api#documentation": "<p>The role passed for action execution and reversion. Roles and actions must be in the\n\t\t\tsame account. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1041,7 +1050,7 @@
                 "EventType": {
                     "target": "com.amazonaws.budgets#EventType",
                     "traits": {
-                        "smithy.api#documentation": "<p>This distinguishes between whether the events are triggered by the user or are generated by\n\t\t\tthe system. </p>",
+                        "smithy.api#documentation": "<p>This distinguishes between whether the events are triggered by the user or are\n\t\t\tgenerated by the system. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1235,6 +1244,15 @@
                 }
             }
         },
+        "com.amazonaws.budgets#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                }
+            }
+        },
         "com.amazonaws.budgets#ApprovalModel": {
             "type": "enum",
             "members": {
@@ -1258,14 +1276,14 @@
                 "AutoAdjustType": {
                     "target": "com.amazonaws.budgets#AutoAdjustType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The string that defines whether your budget auto-adjusts based on historical or forecasted data.</p>",
+                        "smithy.api#documentation": "<p>The string that defines whether your budget auto-adjusts based on historical or\n\t\t\tforecasted data.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "HistoricalOptions": {
                     "target": "com.amazonaws.budgets#HistoricalOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters that define or describe the historical data that your auto-adjusting budget is based on.</p>"
+                        "smithy.api#documentation": "<p>The parameters that define or describe the historical data that your auto-adjusting\n\t\t\tbudget is based on.</p>"
                     }
                 },
                 "LastAutoAdjustTime": {
@@ -1302,32 +1320,32 @@
                 "BudgetName": {
                     "target": "com.amazonaws.budgets#BudgetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a budget. The name must be unique within an account. The <code>:</code> and\n\t\t\t\t<code>\\</code> characters, and the \"/action/\" substring, aren't allowed in\n\t\t\t\t<code>BudgetName</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of a budget. The name must be unique within an account. The <code>:</code>\n\t\t\tand <code>\\</code> characters, and the \"/action/\" substring, aren't allowed in\n\t\t\t\t<code>BudgetName</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "BudgetLimit": {
                     "target": "com.amazonaws.budgets#Spend",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total amount of cost, usage, RI utilization, RI coverage, Savings Plans utilization, or\n\t\t\tSavings Plans coverage that you want to track with your budget.</p>\n         <p>\n            <code>BudgetLimit</code> is required for cost or usage budgets, but optional for RI or\n\t\t\tSavings Plans utilization or coverage budgets. RI and Savings Plans utilization or\n\t\t\tcoverage budgets default to <code>100</code>. This is the only valid value for RI or\n\t\t\tSavings Plans utilization or coverage budgets. You can't use <code>BudgetLimit</code>\n\t\t\twith <code>PlannedBudgetLimits</code> for <code>CreateBudget</code> and\n\t\t\t\t<code>UpdateBudget</code> actions. </p>"
+                        "smithy.api#documentation": "<p>The total amount of cost, usage, RI utilization, RI coverage, Savings Plans\n\t\t\tutilization, or Savings Plans coverage that you want to track with your budget.</p>\n         <p>\n            <code>BudgetLimit</code> is required for cost or usage budgets, but optional for RI or\n\t\t\tSavings Plans utilization or coverage budgets. RI and Savings Plans utilization or\n\t\t\tcoverage budgets default to <code>100</code>. This is the only valid value for RI or\n\t\t\tSavings Plans utilization or coverage budgets. You can't use <code>BudgetLimit</code>\n\t\t\twith <code>PlannedBudgetLimits</code> for <code>CreateBudget</code> and\n\t\t\t\t<code>UpdateBudget</code> actions. </p>"
                     }
                 },
                 "PlannedBudgetLimits": {
                     "target": "com.amazonaws.budgets#PlannedBudgetLimits",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map containing multiple <code>BudgetLimit</code>, including current or future limits.</p>\n         <p>\n            <code>PlannedBudgetLimits</code> is available for cost or usage budget and supports both\n\t\t\tmonthly and quarterly <code>TimeUnit</code>. </p>\n         <p>For monthly budgets, provide 12 months of <code>PlannedBudgetLimits</code> values. This must start from the current month and include the next 11 months. The <code>key</code> is the start of the month, <code>UTC</code> in epoch seconds. </p>\n         <p>For quarterly budgets, provide four quarters of <code>PlannedBudgetLimits</code> value\n\t\t\tentries in standard calendar quarter increments. This must start from the current\n\t\t\tquarter and include the next three quarters. The <code>key</code> is the start of the\n\t\t\tquarter, <code>UTC</code> in epoch seconds. </p>\n         <p>If the planned budget expires before 12 months for monthly or four quarters for quarterly,\n\t\t\tprovide the <code>PlannedBudgetLimits</code> values only for the remaining\n\t\t\tperiods.</p>\n         <p>If the budget begins at a date in the future, provide <code>PlannedBudgetLimits</code> values from the start date of the budget. </p>\n         <p>After all of the <code>BudgetLimit</code> values in <code>PlannedBudgetLimits</code> are used, the budget continues to use the last limit as the <code>BudgetLimit</code>. At that point, the planned budget provides the same experience as a fixed budget. </p>\n         <p>\n            <code>DescribeBudget</code> and <code>DescribeBudgets</code> response along with\n\t\t\t\t<code>PlannedBudgetLimits</code> also contain <code>BudgetLimit</code> representing\n\t\t\tthe current month or quarter limit present in <code>PlannedBudgetLimits</code>. This\n\t\t\tonly applies to budgets that are created with <code>PlannedBudgetLimits</code>. Budgets\n\t\t\tthat are created without <code>PlannedBudgetLimits</code> only contain\n\t\t\t\t<code>BudgetLimit</code>. They don't contain\n\t\t\t<code>PlannedBudgetLimits</code>.</p>"
+                        "smithy.api#documentation": "<p>A map containing multiple <code>BudgetLimit</code>, including current or future\n\t\t\tlimits.</p>\n         <p>\n            <code>PlannedBudgetLimits</code> is available for cost or usage budget and supports\n\t\t\tboth monthly and quarterly <code>TimeUnit</code>. </p>\n         <p>For monthly budgets, provide 12 months of <code>PlannedBudgetLimits</code> values.\n\t\t\tThis must start from the current month and include the next 11 months. The\n\t\t\t\t<code>key</code> is the start of the month, <code>UTC</code> in epoch seconds. </p>\n         <p>For quarterly budgets, provide four quarters of <code>PlannedBudgetLimits</code> value\n\t\t\tentries in standard calendar quarter increments. This must start from the current\n\t\t\tquarter and include the next three quarters. The <code>key</code> is the start of the\n\t\t\tquarter, <code>UTC</code> in epoch seconds. </p>\n         <p>If the planned budget expires before 12 months for monthly or four quarters for\n\t\t\tquarterly, provide the <code>PlannedBudgetLimits</code> values only for the remaining\n\t\t\tperiods.</p>\n         <p>If the budget begins at a date in the future, provide <code>PlannedBudgetLimits</code>\n\t\t\tvalues from the start date of the budget. </p>\n         <p>After all of the <code>BudgetLimit</code> values in <code>PlannedBudgetLimits</code>\n\t\t\tare used, the budget continues to use the last limit as the <code>BudgetLimit</code>. At\n\t\t\tthat point, the planned budget provides the same experience as a fixed budget. </p>\n         <p>\n            <code>DescribeBudget</code> and <code>DescribeBudgets</code> response along with\n\t\t\t\t<code>PlannedBudgetLimits</code> also contain <code>BudgetLimit</code> representing\n\t\t\tthe current month or quarter limit present in <code>PlannedBudgetLimits</code>. This\n\t\t\tonly applies to budgets that are created with <code>PlannedBudgetLimits</code>. Budgets\n\t\t\tthat are created without <code>PlannedBudgetLimits</code> only contain\n\t\t\t\t<code>BudgetLimit</code>. They don't contain\n\t\t\t<code>PlannedBudgetLimits</code>.</p>"
                     }
                 },
                 "CostFilters": {
                     "target": "com.amazonaws.budgets#CostFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cost filters, such as <code>Region</code>, <code>Service</code>, <code>member account</code>, <code>Tag</code>, or <code>Cost Category</code>, that are applied to a budget.</p>\n         <p>Amazon Web Services Budgets supports the following services as a <code>Service</code> filter for RI budgets:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2</p>\n            </li>\n            <li>\n               <p>Amazon Redshift</p>\n            </li>\n            <li>\n               <p>Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>Amazon ElastiCache</p>\n            </li>\n            <li>\n               <p>Amazon OpenSearch Service</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The cost filters, such as <code>Region</code>, <code>Service</code>,\n\t\t\t\t<code>LinkedAccount</code>, <code>Tag</code>, or <code>CostCategory</code>, that are\n\t\t\tapplied to a budget.</p>\n         <p>Amazon Web Services Budgets supports the following services as a <code>Service</code> filter for RI budgets:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2</p>\n            </li>\n            <li>\n               <p>Amazon Redshift</p>\n            </li>\n            <li>\n               <p>Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>Amazon ElastiCache</p>\n            </li>\n            <li>\n               <p>Amazon OpenSearch Service</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CostTypes": {
                     "target": "com.amazonaws.budgets#CostTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of costs that are included in this <code>COST</code> budget.</p>\n         <p>\n            <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>SAVINGS_PLANS_UTILIZATION</code>, and <code>SAVINGS_PLANS_COVERAGE</code> budgets do not have <code>CostTypes</code>.</p>"
+                        "smithy.api#documentation": "<p>The types of costs that are included in this <code>COST</code> budget.</p>\n         <p>\n            <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>,\n\t\t\t\t<code>SAVINGS_PLANS_UTILIZATION</code>, and <code>SAVINGS_PLANS_COVERAGE</code>\n\t\t\tbudgets do not have <code>CostTypes</code>.</p>"
                     }
                 },
                 "TimeUnit": {
@@ -1340,7 +1358,7 @@
                 "TimePeriod": {
                     "target": "com.amazonaws.budgets#TimePeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period of time that's covered by a budget. You setthe start date and end date. The start\n\t\t\tdate must come before the end date. The end date must come before <code>06/15/87 00:00\n\t\t\t\tUTC</code>. </p>\n         <p>If you create your budget and don't specify a start date, Amazon Web Services defaults to the\n\t\t\tstart of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example,\n\t\t\tif you created your budget on January 24, 2018, chose <code>DAILY</code>, and didn't set\n\t\t\ta start date, Amazon Web Services set your start date to <code>01/24/18 00:00 UTC</code>.\n\t\t\tIf you chose <code>MONTHLY</code>, Amazon Web Services set your start date to\n\t\t\t\t<code>01/01/18 00:00 UTC</code>. If you didn't specify an end date, Amazon Web Services set your end date to <code>06/15/87 00:00 UTC</code>. The defaults are the same for\n\t\t\tthe Billing and Cost Management console and the API. </p>\n         <p>You can change either date with the <code>UpdateBudget</code> operation.</p>\n         <p>After the end date, Amazon Web Services deletes the budget and all the associated\n\t\t\tnotifications and subscribers.</p>"
+                        "smithy.api#documentation": "<p>The period of time that's covered by a budget. You setthe start date and end date. The\n\t\t\tstart date must come before the end date. The end date must come before <code>06/15/87\n\t\t\t\t00:00 UTC</code>. </p>\n         <p>If you create your budget and don't specify a start date, Amazon Web Services defaults\n\t\t\tto the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For\n\t\t\texample, if you created your budget on January 24, 2018, chose <code>DAILY</code>, and\n\t\t\tdidn't set a start date, Amazon Web Services set your start date to <code>01/24/18 00:00\n\t\t\t\tUTC</code>. If you chose <code>MONTHLY</code>, Amazon Web Services set your start\n\t\t\tdate to <code>01/01/18 00:00 UTC</code>. If you didn't specify an end date, Amazon Web Services set your end date to <code>06/15/87 00:00 UTC</code>. The defaults are\n\t\t\tthe same for the Billing and Cost Management console and the API. </p>\n         <p>You can change either date with the <code>UpdateBudget</code> operation.</p>\n         <p>After the end date, Amazon Web Services deletes the budget and all the associated\n\t\t\tnotifications and subscribers.</p>"
                     }
                 },
                 "CalculatedSpend": {
@@ -1352,7 +1370,7 @@
                 "BudgetType": {
                     "target": "com.amazonaws.budgets#BudgetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this budget tracks costs, usage, RI utilization, RI coverage, Savings\n\t\t\tPlans utilization, or Savings Plans coverage.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether this budget tracks costs, usage, RI utilization, RI coverage,\n\t\t\tSavings Plans utilization, or Savings Plans coverage.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1370,18 +1388,18 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of the <code>CreateBudget</code> operation. The content consists of the detailed metadata and data file information, and the current status of the <code>budget</code> object.</p>\n         <p>This is the Amazon Resource Name (ARN) pattern for a budget: </p>\n         <p>\n            <code>arn:aws:budgets::AccountId:budget/budgetName</code>\n         </p>"
+                "smithy.api#documentation": "<p>Represents the output of the <code>CreateBudget</code> operation. The content consists\n\t\t\tof the detailed metadata and data file information, and the current status of the\n\t\t\t\t<code>budget</code> object.</p>\n         <p>This is the Amazon Resource Name (ARN) pattern for a budget: </p>\n         <p>\n            <code>arn:aws:budgets::AccountId:budget/budgetName</code>\n         </p>"
             }
         },
         "com.amazonaws.budgets#BudgetName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p> A string that represents the budget name. The \":\" and \"\\\" characters, and the \"/action/\"\n\t\t\tsubstring, aren't allowed.</p>",
+                "smithy.api#documentation": "<p> A string that represents the budget name. The \":\" and \"\\\" characters, and the\n\t\t\t\"/action/\" substring, aren't allowed.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^(?![^:\\\\]*/action/)[^:\\\\]+$"
+                "smithy.api#pattern": "^(?![^:\\\\]*/action/|(?i).*<script>.*</script>.*)[^:\\\\]+$"
             }
         },
         "com.amazonaws.budgets#BudgetNotificationsForAccount": {
@@ -1437,12 +1455,12 @@
                 "BudgetedAndActualAmountsList": {
                     "target": "com.amazonaws.budgets#BudgetedAndActualAmountsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of amounts of cost or usage that you created budgets for, which are compared to your\n\t\t\tactual costs or usage.</p>"
+                        "smithy.api#documentation": "<p>A list of amounts of cost or usage that you created budgets for, which are compared to\n\t\t\tyour actual costs or usage.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A history of the state of a budget at the end of the budget's specified time period.</p>"
+                "smithy.api#documentation": "<p>A history of the state of a budget at the end of the budget's specified time\n\t\t\tperiod.</p>"
             }
         },
         "com.amazonaws.budgets#BudgetType": {
@@ -1486,7 +1504,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The type of a budget. It must be one of the following types: </p>\n         <p>\n            <code>COST</code>, <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>SAVINGS_PLANS_UTILIZATION</code>, or <code>SAVINGS_PLANS_COVERAGE</code>.</p>"
+                "smithy.api#documentation": "<p> The type of a budget. It must be one of the following types: </p>\n         <p>\n            <code>COST</code>, <code>USAGE</code>, <code>RI_UTILIZATION</code>,\n\t\t\t\t<code>RI_COVERAGE</code>, <code>SAVINGS_PLANS_UTILIZATION</code>, or\n\t\t\t\t<code>SAVINGS_PLANS_COVERAGE</code>.</p>"
             }
         },
         "com.amazonaws.budgets#BudgetedAndActualAmounts": {
@@ -1512,7 +1530,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The amount of cost or usage that you created the budget for, compared to your actual costs or usage.</p>"
+                "smithy.api#documentation": "<p>The amount of cost or usage that you created the budget for, compared to your actual\n\t\t\tcosts or usage.</p>"
             }
         },
         "com.amazonaws.budgets#BudgetedAndActualAmountsList": {
@@ -1548,7 +1566,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The spend objects that are associated with this budget. The <code>actualSpend</code> tracks\n\t\t\thow much you've used, cost, usage, RI units, or Savings Plans units and the\n\t\t\t\t<code>forecastedSpend</code> tracks how much that you're predicted to spend based on\n\t\t\tyour historical usage profile.</p>\n         <p>For example, if it's the 20th of the month and you have spent <code>50</code> dollars on\n\t\t\tAmazon EC2, your <code>actualSpend</code> is <code>50 USD</code>, and your\n\t\t\t\t<code>forecastedSpend</code> is <code>75 USD</code>.</p>"
+                "smithy.api#documentation": "<p>The spend objects that are associated with this budget. The <code>actualSpend</code>\n\t\t\ttracks how much you've used, cost, usage, RI units, or Savings Plans units and the\n\t\t\t\t<code>forecastedSpend</code> tracks how much that you're predicted to spend based on\n\t\t\tyour historical usage profile.</p>\n         <p>For example, if it's the 20th of the month and you have spent <code>50</code> dollars\n\t\t\ton Amazon EC2, your <code>actualSpend</code> is <code>50 USD</code>, and your\n\t\t\t\t<code>forecastedSpend</code> is <code>75 USD</code>.</p>"
             }
         },
         "com.amazonaws.budgets#ComparisonOperator": {
@@ -1574,7 +1592,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The comparison operator of a notification. Currently, the service supports the following\n\t\t\toperators:</p>\n         <p>\n            <code>GREATER_THAN</code>, <code>LESS_THAN</code>, <code>EQUAL_TO</code>\n         </p>"
+                "smithy.api#documentation": "<p> The comparison operator of a notification. Currently, the service supports the\n\t\t\tfollowing operators:</p>\n         <p>\n            <code>GREATER_THAN</code>, <code>LESS_THAN</code>, <code>EQUAL_TO</code>\n         </p>"
             }
         },
         "com.amazonaws.budgets#CostFilters": {
@@ -1660,7 +1678,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The types of cost that are included in a <code>COST</code> budget, such as tax and subscriptions.</p>\n         <p>\n            <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>,\n\t\t\t\t<code>SAVINGS_PLANS_UTILIZATION</code>, and <code>SAVINGS_PLANS_COVERAGE</code>\n\t\t\tbudgets don't have <code>CostTypes</code>.</p>"
+                "smithy.api#documentation": "<p>The types of cost that are included in a <code>COST</code> budget, such as tax and\n\t\t\tsubscriptions.</p>\n         <p>\n            <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>,\n\t\t\t\t<code>SAVINGS_PLANS_UTILIZATION</code>, and <code>SAVINGS_PLANS_COVERAGE</code>\n\t\t\tbudgets don't have <code>CostTypes</code>.</p>"
             }
         },
         "com.amazonaws.budgets#CreateBudget": {
@@ -1686,6 +1704,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.budgets#ThrottlingException"
@@ -1721,6 +1742,9 @@
                 },
                 {
                     "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.budgets#ThrottlingException"
@@ -1789,6 +1813,12 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.budgets#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of tags to associate with the specified budget action. Each tag consists of a\n         key and a value, and each key must be unique for the resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1843,6 +1873,12 @@
                     "target": "com.amazonaws.budgets#NotificationWithSubscribersList",
                     "traits": {
                         "smithy.api#documentation": "<p>A notification that you want to associate with a budget. A budget can have up to five notifications, and each notification can have one SNS subscriber and up to 10 email subscribers. If you include notifications and subscribers in your <code>CreateBudget</code> call, Amazon Web Services creates the notifications and subscribers for you.</p>"
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.budgets#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of tags to associate with the specified budget. Each tag consists of a\n         key and a value, and each key must be unique for the resource.</p>"
                     }
                 }
             },
@@ -2735,7 +2771,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n\t\t\tLists the budget names and notifications that are associated with an account.\n\t\t</p>",
+                "smithy.api#documentation": "<p> Lists the budget names and notifications that are associated with an account. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -2756,7 +2792,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.budgets#MaxResultsBudgetNotifications",
                     "traits": {
-                        "smithy.api#documentation": "<p> An integer that represents how many budgets a paginated response contains. The default is\n\t\t\t50. </p>"
+                        "smithy.api#documentation": "<p> An integer that represents how many budgets a paginated response contains. The\n\t\t\tdefault is 50. </p>"
                     }
                 },
                 "NextToken": {
@@ -2773,7 +2809,7 @@
                 "BudgetNotificationsForAccount": {
                     "target": "com.amazonaws.budgets#BudgetNotificationsForAccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tA list of budget names and associated notifications for an account.\n\t\t</p>"
+                        "smithy.api#documentation": "<p> A list of budget names and associated notifications for an account. </p>"
                     }
                 },
                 "NextToken": {
@@ -3453,19 +3489,19 @@
                 "BudgetAdjustmentPeriod": {
                     "target": "com.amazonaws.budgets#AdjustmentPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of budget periods included in the moving-average calculation that determines your auto-adjusted budget amount. The maximum value depends on the <code>TimeUnit</code> granularity of the budget:</p>\n         <ul>\n            <li>\n               <p>For the <code>DAILY</code> granularity, the maximum value is <code>60</code>.</p>\n            </li>\n            <li>\n               <p>For the <code>MONTHLY</code> granularity, the maximum value is <code>12</code>.</p>\n            </li>\n            <li>\n               <p>For the <code>QUARTERLY</code> granularity, the maximum value is <code>4</code>.</p>\n            </li>\n            <li>\n               <p>For the <code>ANNUALLY</code> granularity, the maximum value is <code>1</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The number of budget periods included in the moving-average calculation that\n\t\t\tdetermines your auto-adjusted budget amount. The maximum value depends on the\n\t\t\t\t<code>TimeUnit</code> granularity of the budget:</p>\n         <ul>\n            <li>\n               <p>For the <code>DAILY</code> granularity, the maximum value is\n\t\t\t\t\t<code>60</code>.</p>\n            </li>\n            <li>\n               <p>For the <code>MONTHLY</code> granularity, the maximum value is\n\t\t\t\t\t<code>12</code>.</p>\n            </li>\n            <li>\n               <p>For the <code>QUARTERLY</code> granularity, the maximum value is\n\t\t\t\t\t\t<code>4</code>.</p>\n            </li>\n            <li>\n               <p>For the <code>ANNUALLY</code> granularity, the maximum value is\n\t\t\t\t\t<code>1</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "LookBackAvailablePeriods": {
                     "target": "com.amazonaws.budgets#AdjustmentPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The integer that describes how many budget periods in your <code>BudgetAdjustmentPeriod</code> are included in the calculation of your current <code>BudgetLimit</code>. If the first budget period in your <code>BudgetAdjustmentPeriod</code> has no cost data, then that budget period isn’t included in the average that determines your budget limit. </p>\n         <p>For example, if you set <code>BudgetAdjustmentPeriod</code> as <code>4</code> quarters, but your account had no cost data in the first quarter, then only the last three quarters are included in the calculation. In this scenario, <code>LookBackAvailablePeriods</code> returns <code>3</code>. </p>\n         <p>You can’t set your own <code>LookBackAvailablePeriods</code>. The value is automatically calculated from the <code>BudgetAdjustmentPeriod</code> and your historical cost data.</p>"
+                        "smithy.api#documentation": "<p>The integer that describes how many budget periods in your\n\t\t\t\t<code>BudgetAdjustmentPeriod</code> are included in the calculation of your current\n\t\t\t\t<code>BudgetLimit</code>. If the first budget period in your\n\t\t\t\t<code>BudgetAdjustmentPeriod</code> has no cost data, then that budget period isn’t\n\t\t\tincluded in the average that determines your budget limit. </p>\n         <p>For example, if you set <code>BudgetAdjustmentPeriod</code> as <code>4</code>\n\t\t\tquarters, but your account had no cost data in the first quarter, then only the last\n\t\t\tthree quarters are included in the calculation. In this scenario,\n\t\t\t\t<code>LookBackAvailablePeriods</code> returns <code>3</code>. </p>\n         <p>You can’t set your own <code>LookBackAvailablePeriods</code>. The value is\n\t\t\tautomatically calculated from the <code>BudgetAdjustmentPeriod</code> and your\n\t\t\thistorical cost data.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters that define or describe the historical data that your auto-adjusting budget is based on.</p>"
+                "smithy.api#documentation": "<p>The parameters that define or describe the historical data that your auto-adjusting\n\t\t\tbudget is based on.</p>"
             }
         },
         "com.amazonaws.budgets#IamActionDefinition": {
@@ -3562,10 +3598,68 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.budgets#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.budgets#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.budgets#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.budgets#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists tags associated with a budget or budget action resource.</p>"
+            }
+        },
+        "com.amazonaws.budgets#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.budgets#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.budgets#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceTags": {
+                    "target": "com.amazonaws.budgets#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.budgets#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "<p> An integer that represents how many entries a paginated response contains. The maximum is 100.</p>",
+                "smithy.api#documentation": "<p> An integer that represents how many entries a paginated response contains. The\n\t\t\tmaximum is 100.</p>",
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3609,7 +3703,7 @@
                 "NotificationType": {
                     "target": "com.amazonaws.budgets#NotificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the notification is for how much you have spent (<code>ACTUAL</code>) or\n\t\t\tfor how much that you're forecasted to spend (<code>FORECASTED</code>).</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the notification is for how much you have spent\n\t\t\t(<code>ACTUAL</code>) or for how much that you're forecasted to spend\n\t\t\t\t(<code>FORECASTED</code>).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3624,14 +3718,14 @@
                     "target": "com.amazonaws.budgets#NotificationThreshold",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The threshold that's associated with a notification. Thresholds are always a percentage, and\n\t\t\tmany customers find value being alerted between 50% - 200% of the budgeted amount. The\n\t\t\tmaximum limit for your threshold is 1,000,000% above the budgeted amount.</p>",
+                        "smithy.api#documentation": "<p>The threshold that's associated with a notification. Thresholds are always a\n\t\t\tpercentage, and many customers find value being alerted between 50% - 200% of the\n\t\t\tbudgeted amount. The maximum limit for your threshold is 1,000,000% above the budgeted\n\t\t\tamount.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ThresholdType": {
                     "target": "com.amazonaws.budgets#ThresholdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of threshold for a notification. For <code>ABSOLUTE_VALUE</code> thresholds, Amazon Web Services notifies you when you go over or are forecasted to go over your total cost threshold. For <code>PERCENTAGE</code> thresholds, Amazon Web Services notifies you when you go over or are forecasted to go over a certain percentage of your forecasted spend. For example, if you have a budget for 200 dollars and you have a <code>PERCENTAGE</code> threshold of 80%, Amazon Web Services notifies you when you go over 160 dollars.</p>"
+                        "smithy.api#documentation": "<p>The type of threshold for a notification. For <code>ABSOLUTE_VALUE</code> thresholds,\n\t\t\t\tAmazon Web Services notifies you when you go over or are forecasted to go over your\n\t\t\ttotal cost threshold. For\n\t\t\t\t<code>PERCENTAGE</code> thresholds, Amazon Web Services notifies you when you go over\n\t\t\tor are forecasted to go over a certain percentage of your forecasted spend. For example,\n\t\t\tif you have a budget for 200 dollars and you have a <code>PERCENTAGE</code> threshold of\n\t\t\t80%, Amazon Web Services notifies you when you go over 160 dollars.</p>"
                     }
                 },
                 "NotificationState": {
@@ -3642,7 +3736,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A notification that's associated with a budget. A budget can have up to ten notifications. </p>\n         <p>Each notification must have at least one subscriber. A notification can have one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.</p>\n         <p>For example, if you have a budget for 200 dollars and you want to be notified when you go over 160 dollars, create a notification with the following parameters:</p>\n         <ul>\n            <li>\n               <p>A notificationType of <code>ACTUAL</code>\n               </p>\n            </li>\n            <li>\n               <p>A <code>thresholdType</code> of <code>PERCENTAGE</code>\n               </p>\n            </li>\n            <li>\n               <p>A <code>comparisonOperator</code> of <code>GREATER_THAN</code>\n               </p>\n            </li>\n            <li>\n               <p>A notification <code>threshold</code> of <code>80</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A notification that's associated with a budget. A budget can have up to ten\n\t\t\tnotifications. </p>\n         <p>Each notification must have at least one subscriber. A notification can have one SNS\n\t\t\tsubscriber and up to 10 email subscribers, for a total of 11 subscribers.</p>\n         <p>For example, if you have a budget for 200 dollars and you want to be notified when you\n\t\t\tgo over 160 dollars, create a notification with the following parameters:</p>\n         <ul>\n            <li>\n               <p>A notificationType of <code>ACTUAL</code>\n               </p>\n            </li>\n            <li>\n               <p>A <code>thresholdType</code> of <code>PERCENTAGE</code>\n               </p>\n            </li>\n            <li>\n               <p>A <code>comparisonOperator</code> of <code>GREATER_THAN</code>\n               </p>\n            </li>\n            <li>\n               <p>A notification <code>threshold</code> of <code>80</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.budgets#NotificationState": {
@@ -3712,7 +3806,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A notification with subscribers. A notification can have one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.</p>"
+                "smithy.api#documentation": "<p>A notification with subscribers. A notification can have one SNS subscriber and up to\n\t\t\t10 email subscribers, for a total of 11 subscribers.</p>"
             }
         },
         "com.amazonaws.budgets#NotificationWithSubscribersList": {
@@ -3798,9 +3892,73 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The request was received and recognized by the server, but the server rejected that\n      particular method for the requested resource. </p>",
+                "smithy.api#documentation": "<p>The request was received and recognized by the server, but the server rejected that\n      particular method for the requested resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 423
+            }
+        },
+        "com.amazonaws.budgets#ResourceTag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.budgets#ResourceTagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key that's associated with the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.budgets#ResourceTagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that's associated with the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tag structure that contains a tag key and value.</p>"
+            }
+        },
+        "com.amazonaws.budgets#ResourceTagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.budgets#ResourceTagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.budgets#ResourceTagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.budgets#ResourceTagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.budgets#ResourceTag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.budgets#ResourceTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.budgets#Role": {
@@ -3857,13 +4015,26 @@
                 "smithy.api#documentation": "<p>The service control policies (SCP) action definition details. </p>"
             }
         },
+        "com.amazonaws.budgets#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.budgets#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You've reached the limit on the number of tags you can associate with a resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
         "com.amazonaws.budgets#Spend": {
             "type": "structure",
             "members": {
                 "Amount": {
                     "target": "com.amazonaws.budgets#NumericValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cost or usage amount that's associated with a budget forecast, actual spend, or budget\n\t\t\tthreshold.</p>",
+                        "smithy.api#documentation": "<p>The cost or usage amount that's associated with a budget forecast, actual spend, or\n\t\t\tbudget threshold.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3921,19 +4092,19 @@
                 "Address": {
                     "target": "com.amazonaws.budgets#SubscriberAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The address that Amazon Web Services sends budget notifications to, either an SNS topic or an email.</p>\n         <p>When you create a subscriber, the value of <code>Address</code> can't contain line breaks.</p>",
+                        "smithy.api#documentation": "<p>The address that Amazon Web Services sends budget notifications to, either an SNS topic\n\t\t\tor an email.</p>\n         <p>When you create a subscriber, the value of <code>Address</code> can't contain line\n\t\t\tbreaks.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The subscriber to a budget notification. The subscriber consists of a subscription type and either an Amazon SNS topic or an email address.</p>\n         <p>For example, an email subscriber has the following parameters:</p>\n         <ul>\n            <li>\n               <p>A <code>subscriptionType</code> of <code>EMAIL</code>\n               </p>\n            </li>\n            <li>\n               <p>An <code>address</code> of <code>example@example.com</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The subscriber to a budget notification. The subscriber consists of a subscription\n\t\t\ttype and either an Amazon SNS topic or an email address.</p>\n         <p>For example, an email subscriber has the following parameters:</p>\n         <ul>\n            <li>\n               <p>A <code>subscriptionType</code> of <code>EMAIL</code>\n               </p>\n            </li>\n            <li>\n               <p>An <code>address</code> of <code>example@example.com</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.budgets#SubscriberAddress": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p> A string that contains an email address or SNS topic for the subscriber's address.</p>",
+                "smithy.api#documentation": "<p> A string that contains an email address or SNS topic for the subscriber's\n\t\t\taddress.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2147483647
@@ -3973,6 +4144,67 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> The subscription type of the subscriber. It can be SMS or EMAIL.</p>"
+            }
+        },
+        "com.amazonaws.budgets#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.budgets#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.budgets#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.budgets#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates tags for a budget or budget action resource.</p>"
+            }
+        },
+        "com.amazonaws.budgets#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.budgets#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.budgets#ResourceTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.budgets#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.budgets#TargetId": {
@@ -4036,18 +4268,18 @@
                 "Start": {
                     "target": "com.amazonaws.budgets#GenericTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start date for a budget. If you created your budget and didn't specify a start date, Amazon Web Services defaults to the start of your chosen time period (DAILY, MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24, 2018, chose <code>DAILY</code>, and didn't set a start date, Amazon Web Services set your start date to <code>01/24/18 00:00 UTC</code>. If you chose <code>MONTHLY</code>, Amazon Web Services set your start date to <code>01/01/18 00:00 UTC</code>. The defaults are the same for the Billing and Cost Management console and the API.</p>\n         <p>You can change your start date with the <code>UpdateBudget</code> operation.</p>"
+                        "smithy.api#documentation": "<p>The start date for a budget. If you created your budget and didn't specify a start\n\t\t\tdate, Amazon Web Services defaults to the start of your chosen time period (DAILY,\n\t\t\tMONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on January 24,\n\t\t\t2018, chose <code>DAILY</code>, and didn't set a start date, Amazon Web Services set your\n\t\t\tstart date to <code>01/24/18 00:00 UTC</code>. If you chose <code>MONTHLY</code>,\n\t\t\t\tAmazon Web Services set your start date to <code>01/01/18 00:00 UTC</code>. The\n\t\t\tdefaults are the same for the Billing and Cost Management console and the API.</p>\n         <p>You can change your start date with the <code>UpdateBudget</code> operation.</p>"
                     }
                 },
                 "End": {
                     "target": "com.amazonaws.budgets#GenericTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end date for a budget. If you didn't specify an end date, Amazon Web Services set your end date to <code>06/15/87 00:00 UTC</code>. The defaults are the same for the Billing and Cost Management console and the API.</p>\n         <p>After the end date, Amazon Web Services deletes the budget and all the associated\n\t\t\tnotifications and subscribers. You can change your end date with the\n\t\t\t\t<code>UpdateBudget</code> operation.</p>"
+                        "smithy.api#documentation": "<p>The end date for a budget. If you didn't specify an end date, Amazon Web Services set\n\t\t\tyour end date to <code>06/15/87 00:00 UTC</code>. The defaults are the same for the\n\t\t\t\tBilling and Cost Management console and the API.</p>\n         <p>After the end date, Amazon Web Services deletes the budget and all the associated\n\t\t\tnotifications and subscribers. You can change your end date with the\n\t\t\t\t<code>UpdateBudget</code> operation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The period of time that's covered by a budget. The period has a start date and an end date.\n\t\t\tThe start date must come before the end date. There are no restrictions on the end date. </p>"
+                "smithy.api#documentation": "<p>The period of time that's covered by a budget. The period has a start date and an end\n\t\t\tdate. The start date must come before the end date. There are no restrictions on the end\n\t\t\tdate. </p>"
             }
         },
         "com.amazonaws.budgets#TimeUnit": {
@@ -4085,12 +4317,70 @@
         "com.amazonaws.budgets#UnitValue": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p> A string that represents the spend unit of a budget. It can't be null or empty.</p>",
+                "smithy.api#documentation": "<p> A string that represents the spend unit of a budget. It can't be null or\n\t\t\tempty.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2147483647
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.budgets#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.budgets#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.budgets#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.budgets#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.budgets#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes tags associated with a budget or budget action resource.</p>"
+            }
+        },
+        "com.amazonaws.budgets#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.budgets#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTagKeys": {
+                    "target": "com.amazonaws.budgets#ResourceTagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key that's associated with the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.budgets#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.budgets#UpdateBudget": {

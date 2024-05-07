@@ -1642,7 +1642,7 @@
                 "mappingTemplate": {
                     "target": "com.amazonaws.b2bi#MappingTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the mapping template for the transformer. This template is used to convert the input document into the\n      correct set of objects.</p>",
+                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1712,7 +1712,7 @@
                 "mappingTemplate": {
                     "target": "com.amazonaws.b2bi#MappingTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the name of the mapping template for the transformer. This template is used to convert the input document into the\n      correct set of objects.</p>",
+                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2762,7 +2762,7 @@
                 "mappingTemplate": {
                     "target": "com.amazonaws.b2bi#MappingTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the name of the mapping template for the transformer. This template is used to convert the input document into the\n      correct set of objects.</p>",
+                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4034,7 +4034,7 @@
                 "mappingTemplate": {
                     "target": "com.amazonaws.b2bi#MappingTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the mapping template for the transformer. This template is used to convert the input document into the\n      correct set of objects.</p>",
+                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4338,7 +4338,7 @@
                 "mappingTemplate": {
                     "target": "com.amazonaws.b2bi#MappingTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the name of the mapping template for the transformer. This template is used to convert the input document into the\n      correct set of objects.</p>",
+                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5118,7 +5118,7 @@
                 "mappingTemplate": {
                     "target": "com.amazonaws.b2bi#MappingTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the mapping template for the transformer. This template is used to convert the input document into the\n      correct set of objects.</p>"
+                        "smithy.api#documentation": "<p>Specifies the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>"
                     }
                 },
                 "status": {
@@ -5178,7 +5178,7 @@
                 "mappingTemplate": {
                     "target": "com.amazonaws.b2bi#MappingTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the name of the mapping template for the transformer. This template is used to convert the input document into the\n      correct set of objects.</p>",
+                        "smithy.api#documentation": "<p>Returns the mapping template for the transformer. This template is used to map the parsed EDI file using JSONata or XSLT.</p>",
                         "smithy.api#required": {}
                     }
                 },
