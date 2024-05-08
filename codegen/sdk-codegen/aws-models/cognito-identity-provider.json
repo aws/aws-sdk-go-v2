@@ -358,7 +358,7 @@
                     "sdkId": "Cognito Identity Provider",
                     "arnNamespace": "cognito-idp",
                     "cloudFormationName": "Cognito",
-                    "cloudTrailEventSource": "cognitoidentityprovider.amazonaws.com",
+                    "cloudTrailEventSource": "cognito-idp.amazonaws.com",
                     "docId": "cognito-idp-2016-04-18",
                     "endpointPrefix": "cognito-idp"
                 },
@@ -15699,6 +15699,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FORCE_CHANGE_PASSWORD"
+                    }
+                },
+                "EXTERNAL_PROVIDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL_PROVIDER"
                     }
                 }
             }

@@ -1905,7 +1905,7 @@
                 "upstreamRegistryUrl": {
                     "target": "com.amazonaws.ecr#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) - <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) -\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) - <code>quay.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) - <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) -\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) -\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The registry URL of the upstream public registry to use as the source for the pull\n            through cache rule. The following is the syntax to use for each supported upstream\n            registry.</p>\n         <ul>\n            <li>\n               <p>Amazon ECR Public (<code>ecr-public</code>) - <code>public.ecr.aws</code>\n               </p>\n            </li>\n            <li>\n               <p>Docker Hub (<code>docker-hub</code>) -\n                    <code>registry-1.docker.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Quay (<code>quay</code>) - <code>quay.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Kubernetes (<code>k8s</code>) - <code>registry.k8s.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitHub Container Registry (<code>github-container-registry</code>) -\n                        <code>ghcr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>Microsoft Azure Container Registry (<code>azure-container-registry</code>) -\n                        <code><custom>.azurecr.io</code>\n               </p>\n            </li>\n            <li>\n               <p>GitLab Container Registry (<code>gitlab-container-registry</code>) -\n                        <code>registry.gitlab.com</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7710,6 +7710,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "azure-container-registry"
+                    }
+                },
+                "GitLabContainerRegistry": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gitlab-container-registry"
                     }
                 }
             }
