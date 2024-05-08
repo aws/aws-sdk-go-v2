@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves the current status of the asynchronous tasks performed by RAM when
-// you perform the ReplacePermissionAssociationsWork operation.
+// you perform the ReplacePermissionAssociationsWorkoperation.
 func (c *Client) ListReplacePermissionAssociationsWork(ctx context.Context, params *ListReplacePermissionAssociationsWorkInput, optFns ...func(*Options)) (*ListReplacePermissionAssociationsWorkOutput, error) {
 	if params == nil {
 		params = &ListReplacePermissionAssociationsWorkInput{}
@@ -52,8 +52,7 @@ type ListReplacePermissionAssociationsWorkInput struct {
 	Status types.ReplacePermissionAssociationsWorkStatus
 
 	// A list of IDs. These values come from the id field of the
-	// replacePermissionAssociationsWork structure returned by the
-	// ReplacePermissionAssociations operation.
+	// replacePermissionAssociationsWork structure returned by the ReplacePermissionAssociations operation.
 	WorkIds []string
 
 	noSmithyDocumentSerde

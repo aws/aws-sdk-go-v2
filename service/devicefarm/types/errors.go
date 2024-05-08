@@ -85,9 +85,8 @@ func (e *IdempotencyException) ErrorCode() string {
 }
 func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An internal exception was raised in the service. Contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com) if
-// you see this error.
+// An internal exception was raised in the service. Contact aws-devicefarm-support@amazon.com if you see this
+// error.
 type InternalServiceException struct {
 	Message *string
 

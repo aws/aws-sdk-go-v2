@@ -7,6 +7,7 @@
 // Services usage (for example, on Amazon EC2 instances). You commit to a
 // consistent amount of usage per hour, in the specified currency, for a term of
 // one or three years, and receive a lower price for that usage. For more
-// information, see the Amazon Web Services Savings Plans User Guide (https://docs.aws.amazon.com/savingsplans/latest/userguide/)
-// .
+// information, see the [Amazon Web Services Savings Plans User Guide].
+//
+// [Amazon Web Services Savings Plans User Guide]: https://docs.aws.amazon.com/savingsplans/latest/userguide/
 package savingsplans

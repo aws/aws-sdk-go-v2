@@ -29,34 +29,35 @@ func (c *Client) NotifyProvisionProductEngineWorkflowResult(ctx context.Context,
 
 type NotifyProvisionProductEngineWorkflowResultInput struct {
 
-	// The idempotency token that identifies the provisioning engine execution.
+	//  The idempotency token that identifies the provisioning engine execution.
 	//
 	// This member is required.
 	IdempotencyToken *string
 
-	// The identifier of the record.
+	//  The identifier of the record.
 	//
 	// This member is required.
 	RecordId *string
 
-	// The status of the provisioning engine execution.
+	//  The status of the provisioning engine execution.
 	//
 	// This member is required.
 	Status types.EngineWorkflowStatus
 
-	// The encrypted contents of the provisioning engine execution payload that
+	//  The encrypted contents of the provisioning engine execution payload that
 	// Service Catalog sends after the Terraform product provisioning workflow starts.
 	//
 	// This member is required.
 	WorkflowToken *string
 
-	// The reason why the provisioning engine execution failed.
+	//  The reason why the provisioning engine execution failed.
 	FailureReason *string
 
-	// The output of the provisioning engine execution.
+	//  The output of the provisioning engine execution.
 	Outputs []types.RecordOutput
 
-	// The ID for the provisioned product resources that are part of a resource group.
+	//  The ID for the provisioned product resources that are part of a resource
+	// group.
 	ResourceIdentifier *types.EngineWorkflowResourceIdentifier
 
 	noSmithyDocumentSerde

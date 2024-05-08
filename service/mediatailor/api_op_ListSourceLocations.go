@@ -30,7 +30,7 @@ func (c *Client) ListSourceLocations(ctx context.Context, params *ListSourceLoca
 
 type ListSourceLocationsInput struct {
 
-	// The maximum number of source locations that you want MediaTailor to return in
+	//  The maximum number of source locations that you want MediaTailor to return in
 	// response to the current request. If there are more than MaxResults source
 	// locations, use the value of NextToken in the response to get the next page of
 	// results.
@@ -145,7 +145,7 @@ var _ ListSourceLocationsAPIClient = (*Client)(nil)
 // ListSourceLocationsPaginatorOptions is the paginator options for
 // ListSourceLocations
 type ListSourceLocationsPaginatorOptions struct {
-	// The maximum number of source locations that you want MediaTailor to return in
+	//  The maximum number of source locations that you want MediaTailor to return in
 	// response to the current request. If there are more than MaxResults source
 	// locations, use the value of NextToken in the response to get the next page of
 	// results.

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a scheduled inference. Scheduling an inference is setting up a
+//	Creates a scheduled inference. Scheduling an inference is setting up a
+//
 // continuous real-time inference plan to analyze new measurement data. When
 // setting up the schedule, you provide an S3 bucket location for the input data,
 // assign it a delimiter between separate entries in the data, set an offset delay
@@ -34,7 +35,7 @@ func (c *Client) CreateInferenceScheduler(ctx context.Context, params *CreateInf
 
 type CreateInferenceSchedulerInput struct {
 
-	// A unique identifier for the request. If you do not set the client request
+	//  A unique identifier for the request. If you do not set the client request
 	// token, Amazon Lookout for Equipment generates one.
 	//
 	// This member is required.
@@ -52,13 +53,15 @@ type CreateInferenceSchedulerInput struct {
 	// This member is required.
 	DataOutputConfiguration *types.InferenceOutputConfiguration
 
-	// How often data is uploaded to the source Amazon S3 bucket for the input data.
+	//  How often data is uploaded to the source Amazon S3 bucket for the input data.
 	// The value chosen is the length of time between data uploads. For instance, if
 	// you select 5 minutes, Amazon Lookout for Equipment will upload the real-time
 	// data to the source bucket once every 5 minutes. This frequency also determines
-	// how often Amazon Lookout for Equipment runs inference on your data. For more
-	// information, see Understanding the inference process (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html)
-	// .
+	// how often Amazon Lookout for Equipment runs inference on your data.
+	//
+	// For more information, see [Understanding the inference process].
+	//
+	// [Understanding the inference process]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html
 	//
 	// This member is required.
 	DataUploadFrequency types.DataUploadFrequency
@@ -87,9 +90,11 @@ type CreateInferenceSchedulerInput struct {
 	// plus the additional five minute delay time (so 09:15) to check your Amazon S3
 	// bucket. The delay provides a buffer for you to upload data at the same
 	// frequency, so that you don't have to stop and restart the scheduler when
-	// uploading new data. For more information, see Understanding the inference
-	// process (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html)
-	// .
+	// uploading new data.
+	//
+	// For more information, see [Understanding the inference process].
+	//
+	// [Understanding the inference process]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-inference-process.html
 	DataDelayOffsetInMinutes *int64
 
 	// Provides the identifier of the KMS key used to encrypt inference scheduler data
@@ -113,14 +118,19 @@ type CreateInferenceSchedulerOutput struct {
 	// Provides a quality assessment for a model that uses labels. If Lookout for
 	// Equipment determines that the model quality is poor based on training metrics,
 	// the value is POOR_QUALITY_DETECTED . Otherwise, the value is
-	// QUALITY_THRESHOLD_MET . If the model is unlabeled, the model quality can't be
-	// assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY . In this
-	// situation, you can get a model quality assessment by adding labels to the input
-	// dataset and retraining the model. For information about using labels with your
-	// models, see Understanding labeling (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html)
-	// . For information about improving the quality of a model, see Best practices
-	// with Amazon Lookout for Equipment (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html)
-	// .
+	// QUALITY_THRESHOLD_MET .
+	//
+	// If the model is unlabeled, the model quality can't be assessed and the value of
+	// ModelQuality is CANNOT_DETERMINE_QUALITY . In this situation, you can get a
+	// model quality assessment by adding labels to the input dataset and retraining
+	// the model.
+	//
+	// For information about using labels with your models, see [Understanding labeling].
+	//
+	// For information about improving the quality of a model, see [Best practices with Amazon Lookout for Equipment].
+	//
+	// [Best practices with Amazon Lookout for Equipment]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
+	// [Understanding labeling]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html
 	ModelQuality types.ModelQuality
 
 	// Indicates the status of the CreateInferenceScheduler operation.

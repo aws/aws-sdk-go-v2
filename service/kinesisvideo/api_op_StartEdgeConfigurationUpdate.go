@@ -17,16 +17,19 @@ import (
 // Agent IoT Greengrass component that runs on an IoT Hub Device, setup at your
 // premise. The time to sync can vary and depends on the connectivity of the Hub
 // Device. The SyncStatus will be updated as the edge configuration is
-// acknowledged, and synced with the Edge Agent. If this API is invoked for the
-// first time, a new edge configuration will be created for the stream, and the
-// sync status will be set to SYNCING . You will have to wait for the sync status
-// to reach a terminal state such as: IN_SYNC , or SYNC_FAILED , before using this
-// API again. If you invoke this API during the syncing process, a
-// ResourceInUseException will be thrown. The connectivity of the stream’s edge
-// configuration and the Edge Agent will be retried for 15 minutes. After 15
-// minutes, the status will transition into the SYNC_FAILED state. To move an edge
-// configuration from one device to another, use DeleteEdgeConfiguration to delete
-// the current edge configuration. You can then invoke StartEdgeConfigurationUpdate
+// acknowledged, and synced with the Edge Agent.
+//
+// If this API is invoked for the first time, a new edge configuration will be
+// created for the stream, and the sync status will be set to SYNCING . You will
+// have to wait for the sync status to reach a terminal state such as: IN_SYNC , or
+// SYNC_FAILED , before using this API again. If you invoke this API during the
+// syncing process, a ResourceInUseException will be thrown. The connectivity of
+// the stream’s edge configuration and the Edge Agent will be retried for 15
+// minutes. After 15 minutes, the status will transition into the SYNC_FAILED
+// state.
+//
+// To move an edge configuration from one device to another, use DeleteEdgeConfiguration to delete the
+// current edge configuration. You can then invoke StartEdgeConfigurationUpdate
 // with an updated Hub Device ARN.
 func (c *Client) StartEdgeConfigurationUpdate(ctx context.Context, params *StartEdgeConfigurationUpdateInput, optFns ...func(*Options)) (*StartEdgeConfigurationUpdateOutput, error) {
 	if params == nil {
@@ -50,7 +53,7 @@ type StartEdgeConfigurationUpdateInput struct {
 	// This member is required.
 	EdgeConfig *types.EdgeConfig
 
-	// The Amazon Resource Name (ARN) of the stream. Specify either the StreamName or
+	//  The Amazon Resource Name (ARN) of the stream. Specify either the StreamName or
 	// the StreamARN .
 	StreamARN *string
 
@@ -83,7 +86,7 @@ type StartEdgeConfigurationUpdateOutput struct {
 	// The name of the stream from which the edge configuration was updated.
 	StreamName *string
 
-	// The current sync status of the stream's edge configuration. When you invoke
+	//  The current sync status of the stream's edge configuration. When you invoke
 	// this API, the sync status will be set to the SYNCING state. Use the
 	// DescribeEdgeConfiguration API to get the latest status of the edge configuration.
 	SyncStatus types.SyncStatus

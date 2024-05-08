@@ -20,9 +20,11 @@ import (
 // . EventBridge updates the fields in these objects atomically as one and
 // overrides existing values. This is by design, and means that if you don't
 // specify an optional field in one of these Parameters objects, EventBridge sets
-// that field to its system-default value during the update. For more information
-// about pipes, see Amazon EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
-// in the Amazon EventBridge User Guide.
+// that field to its system-default value during the update.
+//
+// For more information about pipes, see [Amazon EventBridge Pipes] in the Amazon EventBridge User Guide.
+//
+// [Amazon EventBridge Pipes]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html
 func (c *Client) UpdatePipe(ctx context.Context, params *UpdatePipeInput, optFns ...func(*Options)) (*UpdatePipeOutput, error) {
 	if params == nil {
 		params = &UpdatePipeInput{}
@@ -71,10 +73,12 @@ type UpdatePipeInput struct {
 	// The ARN of the target resource.
 	Target *string
 
-	// The parameters required to set up a target for your pipe. For more information
-	// about pipe target parameters, including how to use dynamic path parameters, see
-	// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
-	// in the Amazon EventBridge User Guide.
+	// The parameters required to set up a target for your pipe.
+	//
+	// For more information about pipe target parameters, including how to use dynamic
+	// path parameters, see [Target parameters]in the Amazon EventBridge User Guide.
+	//
+	// [Target parameters]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
 	TargetParameters *types.PipeTargetParameters
 
 	noSmithyDocumentSerde
@@ -94,8 +98,9 @@ type UpdatePipeOutput struct {
 	// The state the pipe should be in.
 	DesiredState types.RequestedPipeState
 
-	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.

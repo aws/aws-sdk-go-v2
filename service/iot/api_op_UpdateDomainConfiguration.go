@@ -12,9 +12,11 @@ import (
 )
 
 // Updates values stored in the domain configuration. Domain configurations for
-// default endpoints can't be updated. Requires permission to access the
-// UpdateDomainConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// default endpoints can't be updated.
+//
+// Requires permission to access the [UpdateDomainConfiguration] action.
+//
+// [UpdateDomainConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateDomainConfiguration(ctx context.Context, params *UpdateDomainConfigurationInput, optFns ...func(*Options)) (*UpdateDomainConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateDomainConfigurationInput{}

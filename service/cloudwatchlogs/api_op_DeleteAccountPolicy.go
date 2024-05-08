@@ -13,11 +13,14 @@ import (
 
 // Deletes a CloudWatch Logs account policy. This stops the policy from applying
 // to all log groups or a subset of log groups in the account. Log-group level
-// policies will still be in effect. To use this operation, you must be signed on
-// with the correct permissions depending on the type of policy that you are
-// deleting.
+// policies will still be in effect.
+//
+// To use this operation, you must be signed on with the correct permissions
+// depending on the type of policy that you are deleting.
+//
 //   - To delete a data protection policy, you must have the
 //     logs:DeleteDataProtectionPolicy and logs:DeleteAccountPolicy permissions.
+//
 //   - To delete a subscription filter policy, you must have the
 //     logs:DeleteSubscriptionFilter and logs:DeleteAccountPolicy permissions.
 func (c *Client) DeleteAccountPolicy(ctx context.Context, params *DeleteAccountPolicyInput, optFns ...func(*Options)) (*DeleteAccountPolicyOutput, error) {

@@ -14,13 +14,25 @@ import (
 // Retrieves the resource capacity settings for a fleet location. The data
 // returned includes the current capacity (number of EC2 instances) and some
 // scaling settings for the requested fleet location. For a container fleet, this
-// operation also returns counts for replica container groups. Use this operation
-// to retrieve capacity information for a fleet's remote location or home Region
-// (you can also retrieve home Region capacity by calling DescribeFleetCapacity ).
-// To retrieve capacity data, identify a fleet and location. If successful, a
-// FleetCapacity object is returned for the requested fleet location. Learn more
-// Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// GameLift metrics for fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
+// operation also returns counts for replica container groups.
+//
+// Use this operation to retrieve capacity information for a fleet's remote
+// location or home Region (you can also retrieve home Region capacity by calling
+// DescribeFleetCapacity ).
+//
+// To retrieve capacity data, identify a fleet and location.
+//
+// If successful, a FleetCapacity object is returned for the requested fleet
+// location.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [GameLift metrics for fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [GameLift metrics for fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet
 func (c *Client) DescribeFleetLocationCapacity(ctx context.Context, params *DescribeFleetLocationCapacityInput, optFns ...func(*Options)) (*DescribeFleetLocationCapacityOutput, error) {
 	if params == nil {
 		params = &DescribeFleetLocationCapacityInput{}

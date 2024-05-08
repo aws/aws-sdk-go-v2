@@ -11,8 +11,9 @@ import (
 type BatchRestrictions struct {
 
 	// An array of strings that specify the compute types that are allowed for the
-	// batch build. See Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
-	// in the CodeBuild User Guide for these values.
+	// batch build. See [Build environment compute types]in the CodeBuild User Guide for these values.
+	//
+	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	ComputeTypesAllowed []string
 
 	// Specifies the maximum number of builds allowed.
@@ -42,11 +43,17 @@ type Build struct {
 	BuildNumber *int64
 
 	// The current status of the build. Valid values include:
+	//
 	//   - FAILED : The build failed.
+	//
 	//   - FAULT : The build faulted.
+	//
 	//   - IN_PROGRESS : The build is still in progress.
+	//
 	//   - STOPPED : The build stopped.
+	//
 	//   - SUCCEEDED : The build succeeded.
+	//
 	//   - TIMED_OUT : The build timed out.
 	BuildStatus StatusType
 
@@ -60,10 +67,13 @@ type Build struct {
 	DebugSession *DebugSession
 
 	// The Key Management Service customer master key (CMK) to be used for encrypting
-	// the build output artifacts. You can use a cross-account KMS key to encrypt the
-	// build output artifacts if your service role has permission to that key. You can
-	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
-	// CMK's alias (using the format alias/ ).
+	// the build output artifacts.
+	//
+	// You can use a cross-account KMS key to encrypt the build output artifacts if
+	// your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if
+	// available, the CMK's alias (using the format alias/ ).
 	EncryptionKey *string
 
 	// When the build process ended, expressed in Unix time format.
@@ -72,14 +82,16 @@ type Build struct {
 	// Information about the build environment for this build.
 	Environment *ProjectEnvironment
 
-	// A list of exported environment variables for this build. Exported environment
-	// variables are used in conjunction with CodePipeline to export environment
-	// variables from the current build stage to subsequent stages in the pipeline. For
-	// more information, see Working with variables (https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html)
-	// in the CodePipeline User Guide.
+	// A list of exported environment variables for this build.
+	//
+	// Exported environment variables are used in conjunction with CodePipeline to
+	// export environment variables from the current build stage to subsequent stages
+	// in the pipeline. For more information, see [Working with variables]in the CodePipeline User Guide.
+	//
+	// [Working with variables]: https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html
 	ExportedEnvironmentVariables []ExportedEnvironmentVariable
 
-	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
+	//  An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
 	// ProjectFileSystemLocation object specifies the identifier , location ,
 	// mountOptions , mountPoint , and type of a file system created using Amazon
 	// Elastic File System.
@@ -89,9 +101,12 @@ type Build struct {
 	Id *string
 
 	// The entity that started the build. Valid values include:
+	//
 	//   - If CodePipeline started the build, the pipeline's name (for example,
 	//   codepipeline/my-demo-pipeline ).
+	//
 	//   - If a user started the build, the user's name (for example, MyUserName ).
+	//
 	//   - If the Jenkins plugin for CodeBuild started the build, the string
 	//   CodeBuild-Jenkins-Plugin .
 	Initiator *string
@@ -109,38 +124,45 @@ type Build struct {
 	// The name of the CodeBuild project.
 	ProjectName *string
 
-	// The number of minutes a build is allowed to be queued before it times out.
+	//  The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutes *int32
 
-	// An array of the ARNs associated with this build's reports.
+	//  An array of the ARNs associated with this build's reports.
 	ReportArns []string
 
-	// An identifier for the version of this build's source code.
+	//  An identifier for the version of this build's source code.
+	//
 	//   - For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.
+	//
 	//   - For CodePipeline, the source revision provided by CodePipeline.
+	//
 	//   - For Amazon S3, this does not apply.
 	ResolvedSourceVersion *string
 
-	// An array of ProjectArtifacts objects.
+	//  An array of ProjectArtifacts objects.
 	SecondaryArtifacts []BuildArtifacts
 
-	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one
-	// of:
+	//  An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be
+	// one of:
+	//
 	//   - For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
 	//   - For GitHub: the commit ID, pull request ID, branch name, or tag name that
 	//   corresponds to the version of the source code you want to build. If a pull
 	//   request ID is specified, it must use the format pr/pull-request-ID (for
 	//   example, pr/25 ). If a branch name is specified, the branch's HEAD commit ID
 	//   is used. If not specified, the default branch's HEAD commit ID is used.
+	//
 	//   - For Bitbucket: the commit ID, branch name, or tag name that corresponds to
 	//   the version of the source code you want to build. If a branch name is specified,
 	//   the branch's HEAD commit ID is used. If not specified, the default branch's HEAD
 	//   commit ID is used.
+	//
 	//   - For Amazon S3: the version ID of the object that represents the build input
 	//   ZIP file to use.
 	SecondarySourceVersions []ProjectSourceVersion
 
-	// An array of ProjectSource objects.
+	//  An array of ProjectSource objects.
 	SecondarySources []ProjectSource
 
 	// The name of a service role used for this build.
@@ -151,9 +173,11 @@ type Build struct {
 
 	// Any version identifier for the version of the source code to be built. If
 	// sourceVersion is specified at the project level, then this sourceVersion (at
-	// the build level) takes precedence. For more information, see Source Version
-	// Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
-	// in the CodeBuild User Guide.
+	// the build level) takes precedence.
+	//
+	// For more information, see [Source Version Sample with CodeBuild] in the CodeBuild User Guide.
+	//
+	// [Source Version Sample with CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
 	SourceVersion *string
 
 	// When the build process started, expressed in Unix time format.
@@ -175,49 +199,68 @@ type Build struct {
 // Information about build output artifacts.
 type BuildArtifacts struct {
 
-	// An identifier for this artifact definition.
+	//  An identifier for this artifact definition.
 	ArtifactIdentifier *string
 
 	// Specifies the bucket owner's access for objects that another account uploads to
 	// their Amazon S3 bucket. By default, only the account that uploads the objects to
 	// the bucket has access to these objects. This property allows you to give the
-	// bucket owner access to these objects. To use this property, your CodeBuild
-	// service role must have the s3:PutBucketAcl permission. This permission allows
-	// CodeBuild to modify the access control list for the bucket. This property can be
-	// one of the following values: NONE The bucket owner does not have access to the
-	// objects. This is the default. READ_ONLY The bucket owner has read-only access to
-	// the objects. The uploading account retains ownership of the objects. FULL The
-	// bucket owner has full access to the objects. Object ownership is determined by
-	// the following criteria:
+	// bucket owner access to these objects.
+	//
+	// To use this property, your CodeBuild service role must have the s3:PutBucketAcl
+	// permission. This permission allows CodeBuild to modify the access control list
+	// for the bucket.
+	//
+	// This property can be one of the following values:
+	//
+	// NONE The bucket owner does not have access to the objects. This is the default.
+	//
+	// READ_ONLY The bucket owner has read-only access to the objects. The uploading
+	// account retains ownership of the objects.
+	//
+	// FULL The bucket owner has full access to the objects. Object ownership is
+	// determined by the following criteria:
+	//
 	//   - If the bucket is configured with the Bucket owner preferred setting, the
 	//   bucket owner owns the objects. The uploading account will have object access as
 	//   specified by the bucket's policy.
+	//
 	//   - Otherwise, the uploading account retains ownership of the objects.
-	// For more information about Amazon S3 object ownership, see Controlling
-	// ownership of uploaded objects using S3 Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
-	// in the Amazon Simple Storage Service User Guide.
+	//
+	// For more information about Amazon S3 object ownership, see [Controlling ownership of uploaded objects using S3 Object Ownership] in the Amazon
+	// Simple Storage Service User Guide.
+	//
+	// [Controlling ownership of uploaded objects using S3 Object Ownership]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
 	BucketOwnerAccess BucketOwnerAccess
 
-	// Information that tells you if encryption for build artifacts is disabled.
+	//  Information that tells you if encryption for build artifacts is disabled.
 	EncryptionDisabled *bool
 
 	// Information about the location of the build artifacts.
 	Location *string
 
-	// The MD5 hash of the build artifact. You can use this hash along with a checksum
-	// tool to confirm file integrity and authenticity. This value is available only if
-	// the build project's packaging value is set to ZIP .
+	// The MD5 hash of the build artifact.
+	//
+	// You can use this hash along with a checksum tool to confirm file integrity and
+	// authenticity.
+	//
+	// This value is available only if the build project's packaging value is set to
+	// ZIP .
 	Md5sum *string
 
-	// If this flag is set, a name specified in the buildspec file overrides the
+	//  If this flag is set, a name specified in the buildspec file overrides the
 	// artifact name. The name specified in a buildspec file is calculated at build
 	// time and uses the Shell Command Language. For example, you can append a date and
 	// time to your artifact name so that it is always unique.
 	OverrideArtifactName *bool
 
-	// The SHA-256 hash of the build artifact. You can use this hash along with a
-	// checksum tool to confirm file integrity and authenticity. This value is
-	// available only if the build project's packaging value is set to ZIP .
+	// The SHA-256 hash of the build artifact.
+	//
+	// You can use this hash along with a checksum tool to confirm file integrity and
+	// authenticity.
+	//
+	// This value is available only if the build project's packaging value is set to
+	// ZIP .
 	Sha256sum *string
 
 	noSmithyDocumentSerde
@@ -261,15 +304,20 @@ type BuildBatch struct {
 	CurrentPhase *string
 
 	// Specifies if session debugging is enabled for this batch build. For more
-	// information, see Viewing a running build in Session Manager (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html)
-	// . Batch session debugging is not supported for matrix batch builds.
+	// information, see [Viewing a running build in Session Manager]. Batch session debugging is not supported for matrix batch
+	// builds.
+	//
+	// [Viewing a running build in Session Manager]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
 	DebugSessionEnabled *bool
 
 	// The Key Management Service customer master key (CMK) to be used for encrypting
-	// the batch build output artifacts. You can use a cross-account KMS key to encrypt
-	// the build output artifacts if your service role has permission to that key. You
-	// can specify either the Amazon Resource Name (ARN) of the CMK or, if available,
-	// the CMK's alias (using the format alias/ ).
+	// the batch build output artifacts.
+	//
+	// You can use a cross-account KMS key to encrypt the build output artifacts if
+	// your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if
+	// available, the CMK's alias (using the format alias/ ).
 	EncryptionKey *string
 
 	// The date and time that the batch build ended.
@@ -288,14 +336,17 @@ type BuildBatch struct {
 	Id *string
 
 	// The entity that started the batch build. Valid values include:
+	//
 	//   - If CodePipeline started the build, the pipeline's name (for example,
 	//   codepipeline/my-demo-pipeline ).
+	//
 	//   - If a user started the build, the user's name.
+	//
 	//   - If the Jenkins plugin for CodeBuild started the build, the string
 	//   CodeBuild-Jenkins-Plugin .
 	Initiator *string
 
-	// Information about logs for a build project. These can be logs in CloudWatch
+	//  Information about logs for a build project. These can be logs in CloudWatch
 	// Logs, built in a specified S3 bucket, or both.
 	LogConfig *LogsConfig
 
@@ -310,8 +361,11 @@ type BuildBatch struct {
 	QueuedTimeoutInMinutes *int32
 
 	// The identifier of the resolved version of this batch build's source code.
+	//
 	//   - For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.
+	//
 	//   - For CodePipeline, the source revision provided by CodePipeline.
+	//
 	//   - For Amazon S3, this does not apply.
 	ResolvedSourceVersion *string
 
@@ -321,16 +375,20 @@ type BuildBatch struct {
 
 	// An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one
 	// of:
+	//
 	//   - For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
 	//   - For GitHub: the commit ID, pull request ID, branch name, or tag name that
 	//   corresponds to the version of the source code you want to build. If a pull
 	//   request ID is specified, it must use the format pr/pull-request-ID (for
 	//   example, pr/25 ). If a branch name is specified, the branch's HEAD commit ID
 	//   is used. If not specified, the default branch's HEAD commit ID is used.
+	//
 	//   - For Bitbucket: the commit ID, branch name, or tag name that corresponds to
 	//   the version of the source code you want to build. If a branch name is specified,
 	//   the branch's HEAD commit ID is used. If not specified, the default branch's HEAD
 	//   commit ID is used.
+	//
 	//   - For Amazon S3: the version ID of the object that represents the build input
 	//   ZIP file to use.
 	SecondarySourceVersions []ProjectSourceVersion
@@ -380,18 +438,37 @@ type BuildBatchPhase struct {
 	// When the batch build phase ended, expressed in Unix time format.
 	EndTime *time.Time
 
-	// The current status of the batch build phase. Valid values include: FAILED The
-	// build phase failed. FAULT The build phase faulted. IN_PROGRESS The build phase
-	// is still in progress. STOPPED The build phase stopped. SUCCEEDED The build phase
-	// succeeded. TIMED_OUT The build phase timed out.
+	// The current status of the batch build phase. Valid values include:
+	//
+	// FAILED The build phase failed.
+	//
+	// FAULT The build phase faulted.
+	//
+	// IN_PROGRESS The build phase is still in progress.
+	//
+	// STOPPED The build phase stopped.
+	//
+	// SUCCEEDED The build phase succeeded.
+	//
+	// TIMED_OUT The build phase timed out.
 	PhaseStatus StatusType
 
-	// The name of the batch build phase. Valid values include: COMBINE_ARTIFACTS
-	// Build output artifacts are being combined and uploaded to the output location.
-	// DOWNLOAD_BATCHSPEC The batch build specification is being downloaded. FAILED One
-	// or more of the builds failed. IN_PROGRESS The batch build is in progress.
-	// STOPPED The batch build was stopped. SUBMITTED The btach build has been
-	// submitted. SUCCEEDED The batch build succeeded.
+	// The name of the batch build phase. Valid values include:
+	//
+	// COMBINE_ARTIFACTS Build output artifacts are being combined and uploaded to the
+	// output location.
+	//
+	// DOWNLOAD_BATCHSPEC The batch build specification is being downloaded.
+	//
+	// FAILED One or more of the builds failed.
+	//
+	// IN_PROGRESS The batch build is in progress.
+	//
+	// STOPPED The batch build was stopped.
+	//
+	// SUBMITTED The btach build has been submitted.
+	//
+	// SUCCEEDED The batch build succeeded.
 	PhaseType BuildBatchPhaseType
 
 	// When the batch build phase started, expressed in Unix time format.
@@ -451,22 +528,45 @@ type BuildPhase struct {
 	// When the build phase ended, expressed in Unix time format.
 	EndTime *time.Time
 
-	// The current status of the build phase. Valid values include: FAILED The build
-	// phase failed. FAULT The build phase faulted. IN_PROGRESS The build phase is
-	// still in progress. STOPPED The build phase stopped. SUCCEEDED The build phase
-	// succeeded. TIMED_OUT The build phase timed out.
+	// The current status of the build phase. Valid values include:
+	//
+	// FAILED The build phase failed.
+	//
+	// FAULT The build phase faulted.
+	//
+	// IN_PROGRESS The build phase is still in progress.
+	//
+	// STOPPED The build phase stopped.
+	//
+	// SUCCEEDED The build phase succeeded.
+	//
+	// TIMED_OUT The build phase timed out.
 	PhaseStatus StatusType
 
-	// The name of the build phase. Valid values include: BUILD Core build activities
-	// typically occur in this build phase. COMPLETED The build has been completed.
-	// DOWNLOAD_SOURCE Source code is being downloaded in this build phase. FINALIZING
-	// The build process is completing in this build phase. INSTALL Installation
-	// activities typically occur in this build phase. POST_BUILD Post-build activities
-	// typically occur in this build phase. PRE_BUILD Pre-build activities typically
-	// occur in this build phase. PROVISIONING The build environment is being set up.
+	// The name of the build phase. Valid values include:
+	//
+	// BUILD Core build activities typically occur in this build phase.
+	//
+	// COMPLETED The build has been completed.
+	//
+	// DOWNLOAD_SOURCE Source code is being downloaded in this build phase.
+	//
+	// FINALIZING The build process is completing in this build phase.
+	//
+	// INSTALL Installation activities typically occur in this build phase.
+	//
+	// POST_BUILD Post-build activities typically occur in this build phase.
+	//
+	// PRE_BUILD Pre-build activities typically occur in this build phase.
+	//
+	// PROVISIONING The build environment is being set up.
+	//
 	// QUEUED The build has been submitted and is queued behind other submitted builds.
-	// SUBMITTED The build has been submitted. UPLOAD_ARTIFACTS Build output artifacts
-	// are being uploaded to the output location.
+	//
+	// SUBMITTED The build has been submitted.
+	//
+	// UPLOAD_ARTIFACTS Build output artifacts are being uploaded to the output
+	// location.
 	PhaseType BuildPhaseType
 
 	// When the build phase started, expressed in Unix time format.
@@ -480,23 +580,31 @@ type BuildPhase struct {
 type BuildStatusConfig struct {
 
 	// Specifies the context of the build status CodeBuild sends to the source
-	// provider. The usage of this parameter depends on the source provider. Bitbucket
-	// This parameter is used for the name parameter in the Bitbucket commit status.
-	// For more information, see build (https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build)
-	// in the Bitbucket API documentation. GitHub/GitHub Enterprise Server This
-	// parameter is used for the context parameter in the GitHub commit status. For
-	// more information, see Create a commit status (https://developer.github.com/v3/repos/statuses/#create-a-commit-status)
-	// in the GitHub developer guide.
+	// provider. The usage of this parameter depends on the source provider.
+	//
+	// Bitbucket This parameter is used for the name parameter in the Bitbucket commit
+	// status. For more information, see [build]in the Bitbucket API documentation.
+	//
+	// GitHub/GitHub Enterprise Server This parameter is used for the context
+	// parameter in the GitHub commit status. For more information, see [Create a commit status]in the GitHub
+	// developer guide.
+	//
+	// [build]: https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build
+	// [Create a commit status]: https://developer.github.com/v3/repos/statuses/#create-a-commit-status
 	Context *string
 
 	// Specifies the target url of the build status CodeBuild sends to the source
-	// provider. The usage of this parameter depends on the source provider. Bitbucket
-	// This parameter is used for the url parameter in the Bitbucket commit status.
-	// For more information, see build (https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build)
-	// in the Bitbucket API documentation. GitHub/GitHub Enterprise Server This
-	// parameter is used for the target_url parameter in the GitHub commit status. For
-	// more information, see Create a commit status (https://developer.github.com/v3/repos/statuses/#create-a-commit-status)
-	// in the GitHub developer guide.
+	// provider. The usage of this parameter depends on the source provider.
+	//
+	// Bitbucket This parameter is used for the url parameter in the Bitbucket commit
+	// status. For more information, see [build]in the Bitbucket API documentation.
+	//
+	// GitHub/GitHub Enterprise Server This parameter is used for the target_url
+	// parameter in the GitHub commit status. For more information, see [Create a commit status]in the GitHub
+	// developer guide.
+	//
+	// [build]: https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build
+	// [Create a commit status]: https://developer.github.com/v3/repos/statuses/#create-a-commit-status
 	TargetUrl *string
 
 	noSmithyDocumentSerde
@@ -508,10 +616,19 @@ type BuildSummary struct {
 	// The batch build ARN.
 	Arn *string
 
-	// The status of the build group. FAILED The build group failed. FAULT The build
-	// group faulted. IN_PROGRESS The build group is still in progress. STOPPED The
-	// build group stopped. SUCCEEDED The build group succeeded. TIMED_OUT The build
-	// group timed out.
+	// The status of the build group.
+	//
+	// FAILED The build group failed.
+	//
+	// FAULT The build group faulted.
+	//
+	// IN_PROGRESS The build group is still in progress.
+	//
+	// STOPPED The build group stopped.
+	//
+	// SUCCEEDED The build group succeeded.
+	//
+	// TIMED_OUT The build group timed out.
 	BuildStatus StatusType
 
 	// A ResolvedArtifact object that represents the primary build artifacts for the
@@ -533,29 +650,35 @@ type CloudWatchLogsConfig struct {
 
 	// The current status of the logs in CloudWatch Logs for a build project. Valid
 	// values are:
+	//
 	//   - ENABLED : CloudWatch Logs are enabled for this build project.
+	//
 	//   - DISABLED : CloudWatch Logs are not enabled for this build project.
 	//
 	// This member is required.
 	Status LogsConfigStatusType
 
-	// The group name of the logs in CloudWatch Logs. For more information, see
-	// Working with Log Groups and Log Streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
-	// .
+	//  The group name of the logs in CloudWatch Logs. For more information, see [Working with Log Groups and Log Streams].
+	//
+	// [Working with Log Groups and Log Streams]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
 	GroupName *string
 
-	// The prefix of the stream name of the CloudWatch Logs. For more information, see
-	// Working with Log Groups and Log Streams (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html)
-	// .
+	//  The prefix of the stream name of the CloudWatch Logs. For more information,
+	// see [Working with Log Groups and Log Streams].
+	//
+	// [Working with Log Groups and Log Streams]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html
 	StreamName *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains code coverage report information. Line coverage measures how many
-// statements your tests cover. A statement is a single instruction, not including
-// comments, conditionals, etc. Branch coverage determines if your tests cover
-// every possible branch of a control structure, such as an if or case statement.
+// Contains code coverage report information.
+//
+// Line coverage measures how many statements your tests cover. A statement is a
+// single instruction, not including comments, conditionals, etc.
+//
+// Branch coverage determines if your tests cover every possible branch of a
+// control structure, such as an if or case statement.
 type CodeCoverage struct {
 
 	// The percentage of branches that are covered by your tests.
@@ -591,10 +714,13 @@ type CodeCoverage struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a summary of a code coverage report. Line coverage measures how many
-// statements your tests cover. A statement is a single instruction, not including
-// comments, conditionals, etc. Branch coverage determines if your tests cover
-// every possible branch of a control structure, such as an if or case statement.
+// Contains a summary of a code coverage report.
+//
+// Line coverage measures how many statements your tests cover. A statement is a
+// single instruction, not including comments, conditionals, etc.
+//
+// Branch coverage determines if your tests cover every possible branch of a
+// control structure, such as an if or case statement.
 type CodeCoverageReportSummary struct {
 
 	// The percentage of branches that are covered by your tests.
@@ -619,8 +745,9 @@ type CodeCoverageReportSummary struct {
 }
 
 // Contains information about the debug session for a build. For more information,
-// see Viewing a running build in Session Manager (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html)
-// .
+// see [Viewing a running build in Session Manager].
+//
+// [Viewing a running build in Session Manager]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
 type DebugSession struct {
 
 	// Specifies if session debugging is enabled for this build.
@@ -684,45 +811,54 @@ type EnvironmentVariable struct {
 	// This member is required.
 	Name *string
 
-	// The value of the environment variable. We strongly discourage the use of
-	// PLAINTEXT environment variables to store sensitive values, especially Amazon Web
-	// Services secret key IDs. PLAINTEXT environment variables can be displayed in
-	// plain text using the CodeBuild console and the CLI. For sensitive values, we
-	// recommend you use an environment variable of type PARAMETER_STORE or
-	// SECRETS_MANAGER .
+	// The value of the environment variable.
+	//
+	// We strongly discourage the use of PLAINTEXT environment variables to store
+	// sensitive values, especially Amazon Web Services secret key IDs. PLAINTEXT
+	// environment variables can be displayed in plain text using the CodeBuild console
+	// and the CLI. For sensitive values, we recommend you use an environment variable
+	// of type PARAMETER_STORE or SECRETS_MANAGER .
 	//
 	// This member is required.
 	Value *string
 
 	// The type of environment variable. Valid values include:
+	//
 	//   - PARAMETER_STORE : An environment variable stored in Systems Manager
 	//   Parameter Store. For environment variables of this type, specify the name of the
 	//   parameter as the value of the EnvironmentVariable. The parameter value will be
 	//   substituted for the name at runtime. You can also define Parameter Store
-	//   environment variables in the buildspec. To learn how to do so, see
-	//   env/parameter-store (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store)
-	//   in the CodeBuild User Guide.
+	//   environment variables in the buildspec. To learn how to do so, see [env/parameter-store]in the
+	//   CodeBuild User Guide.
+	//
 	//   - PLAINTEXT : An environment variable in plain text format. This is the
 	//   default value.
+	//
 	//   - SECRETS_MANAGER : An environment variable stored in Secrets Manager. For
 	//   environment variables of this type, specify the name of the secret as the
 	//   value of the EnvironmentVariable. The secret value will be substituted for the
 	//   name at runtime. You can also define Secrets Manager environment variables in
-	//   the buildspec. To learn how to do so, see env/secrets-manager (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager)
-	//   in the CodeBuild User Guide.
+	//   the buildspec. To learn how to do so, see [env/secrets-manager]in the CodeBuild User Guide.
+	//
+	// [env/secrets-manager]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager
+	// [env/parameter-store]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store
 	Type EnvironmentVariableType
 
 	noSmithyDocumentSerde
 }
 
-// Contains information about an exported environment variable. Exported
-// environment variables are used in conjunction with CodePipeline to export
-// environment variables from the current build stage to subsequent stages in the
-// pipeline. For more information, see Working with variables (https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html)
-// in the CodePipeline User Guide. During a build, the value of a variable is
-// available starting with the install phase. It can be updated between the start
-// of the install phase and the end of the post_build phase. After the post_build
-// phase ends, the value of exported variables cannot change.
+// Contains information about an exported environment variable.
+//
+// Exported environment variables are used in conjunction with CodePipeline to
+// export environment variables from the current build stage to subsequent stages
+// in the pipeline. For more information, see [Working with variables]in the CodePipeline User Guide.
+//
+// During a build, the value of a variable is available starting with the install
+// phase. It can be updated between the start of the install phase and the end of
+// the post_build phase. After the post_build phase ends, the value of exported
+// variables cannot change.
+//
+// [Working with variables]: https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html
 type ExportedEnvironmentVariable struct {
 
 	// The name of the exported environment variable.
@@ -746,57 +882,79 @@ type Fleet struct {
 
 	// Information about the compute resources the compute fleet uses. Available
 	// values include:
+	//
 	//   - BUILD_GENERAL1_SMALL : Use up to 3 GB memory and 2 vCPUs for builds.
+	//
 	//   - BUILD_GENERAL1_MEDIUM : Use up to 7 GB memory and 4 vCPUs for builds.
+	//
 	//   - BUILD_GENERAL1_LARGE : Use up to 16 GB memory and 8 vCPUs for builds,
 	//   depending on your environment type.
+	//
 	//   - BUILD_GENERAL1_XLARGE : Use up to 70 GB memory and 36 vCPUs for builds,
 	//   depending on your environment type.
+	//
 	//   - BUILD_GENERAL1_2XLARGE : Use up to 145 GB memory, 72 vCPUs, and 824 GB of
 	//   SSD storage for builds. This compute type supports Docker images up to 100 GB
 	//   uncompressed.
+	//
 	// If you use BUILD_GENERAL1_SMALL :
+	//
 	//   - For environment type LINUX_CONTAINER , you can use up to 3 GB memory and 2
 	//   vCPUs for builds.
+	//
 	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 16 GB memory, 4
 	//   vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+	//
 	//   - For environment type ARM_CONTAINER , you can use up to 4 GB memory and 2
 	//   vCPUs on ARM-based processors for builds.
+	//
 	// If you use BUILD_GENERAL1_LARGE :
+	//
 	//   - For environment type LINUX_CONTAINER , you can use up to 15 GB memory and 8
 	//   vCPUs for builds.
+	//
 	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 255 GB memory,
 	//   32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+	//
 	//   - For environment type ARM_CONTAINER , you can use up to 16 GB memory and 8
 	//   vCPUs on ARM-based processors for builds.
-	// For more information, see Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
-	// in the CodeBuild User Guide.
+	//
+	// For more information, see [Build environment compute types] in the CodeBuild User Guide.
+	//
+	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	ComputeType ComputeType
 
 	// The time at which the compute fleet was created.
 	Created *time.Time
 
 	// The environment type of the compute fleet.
+	//
 	//   - The environment type ARM_CONTAINER is available only in regions US East (N.
 	//   Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific
 	//   (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney),
 	//   EU (Frankfurt), and South America (São Paulo).
+	//
 	//   - The environment type LINUX_CONTAINER is available only in regions US East
 	//   (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU (Frankfurt),
 	//   Asia Pacific (Tokyo), Asia Pacific (Singapore), Asia Pacific (Sydney), South
 	//   America (São Paulo), and Asia Pacific (Mumbai).
+	//
 	//   - The environment type LINUX_GPU_CONTAINER is available only in regions US
 	//   East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), EU
 	//   (Frankfurt), Asia Pacific (Tokyo), and Asia Pacific (Sydney).
+	//
 	//   - The environment type WINDOWS_SERVER_2019_CONTAINER is available only in
 	//   regions US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific
 	//   (Sydney), Asia Pacific (Tokyo), Asia Pacific (Mumbai) and EU (Ireland).
+	//
 	//   - The environment type WINDOWS_SERVER_2022_CONTAINER is available only in
 	//   regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland),
 	//   EU (Frankfurt), Asia Pacific (Sydney), Asia Pacific (Singapore), Asia Pacific
 	//   (Tokyo), South America (São Paulo) and Asia Pacific (Mumbai).
-	// For more information, see Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
-	// in the CodeBuild user guide.
+	//
+	// For more information, see [Build environment compute types] in the CodeBuild user guide.
+	//
+	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	EnvironmentType EnvironmentType
 
 	// The ID of the compute fleet.
@@ -809,8 +967,10 @@ type Fleet struct {
 	Name *string
 
 	// The compute fleet overflow behavior.
+	//
 	//   - For overflow behavior QUEUE , your overflow builds need to wait on the
 	//   existing fleet instance to become available.
+	//
 	//   - For overflow behavior ON_DEMAND , your overflow builds run on CodeBuild
 	//   on-demand.
 	OverflowBehavior FleetOverflowBehavior
@@ -821,8 +981,9 @@ type Fleet struct {
 	// The status of the compute fleet.
 	Status *FleetStatus
 
-	// A list of tag key and value pairs associated with this compute fleet. These
-	// tags are available for use by Amazon Web Services services that support
+	// A list of tag key and value pairs associated with this compute fleet.
+	//
+	// These tags are available for use by Amazon Web Services services that support
 	// CodeBuild build project tags.
 	Tags []Tag
 
@@ -833,7 +994,9 @@ type Fleet struct {
 type FleetStatus struct {
 
 	// Additional information about a compute fleet. Valid values include:
+	//
 	//   - CREATE_FAILED : The compute fleet has failed to create.
+	//
 	//   - UPDATE_FAILED : The compute fleet has failed to update.
 	Context FleetContextCode
 
@@ -841,25 +1004,34 @@ type FleetStatus struct {
 	Message *string
 
 	// The status code of the compute fleet. Valid values include:
+	//
 	//   - CREATING : The compute fleet is being created.
+	//
 	//   - UPDATING : The compute fleet is being updated.
+	//
 	//   - ROTATING : The compute fleet is being rotated.
+	//
 	//   - PENDING_DELETION : The compute fleet is pending deletion.
+	//
 	//   - DELETING : The compute fleet is being deleted.
+	//
 	//   - CREATE_FAILED : The compute fleet has failed to create.
+	//
 	//   - UPDATE_ROLLBACK_FAILED : The compute fleet has failed to update and could
 	//   not rollback to previous state.
+	//
 	//   - ACTIVE : The compute fleet has succeeded and is active.
 	StatusCode FleetStatusCode
 
 	noSmithyDocumentSerde
 }
 
-// Information about the Git submodules configuration for an CodeBuild build
+//	Information about the Git submodules configuration for an CodeBuild build
+//
 // project.
 type GitSubmodulesConfig struct {
 
-	// Set to true to fetch Git submodules for your CodeBuild build project.
+	//  Set to true to fetch Git submodules for your CodeBuild build project.
 	//
 	// This member is required.
 	FetchSubmodules *bool
@@ -867,15 +1039,16 @@ type GitSubmodulesConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Information about logs for a build project. These can be logs in CloudWatch
+//	Information about logs for a build project. These can be logs in CloudWatch
+//
 // Logs, built in a specified S3 bucket, or both.
 type LogsConfig struct {
 
-	// Information about CloudWatch Logs for a build project. CloudWatch Logs are
+	//  Information about CloudWatch Logs for a build project. CloudWatch Logs are
 	// enabled by default.
 	CloudWatchLogs *CloudWatchLogsConfig
 
-	// Information about logs built to an S3 bucket for a build project. S3 logs are
+	//  Information about logs built to an S3 bucket for a build project. S3 logs are
 	// not enabled by default.
 	S3Logs *S3LogsConfig
 
@@ -885,15 +1058,15 @@ type LogsConfig struct {
 // Information about build logs in CloudWatch Logs.
 type LogsLocation struct {
 
-	// Information about CloudWatch Logs for a build project.
+	//  Information about CloudWatch Logs for a build project.
 	CloudWatchLogs *CloudWatchLogsConfig
 
 	// The ARN of the CloudWatch Logs stream for a build execution. Its format is
 	// arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}
 	// . The CloudWatch Logs stream is created during the PROVISIONING phase of a build
-	// and the ARN will not be valid until it is created. For more information, see
-	// Resources Defined by CloudWatch Logs (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies)
-	// .
+	// and the ARN will not be valid until it is created. For more information, see [Resources Defined by CloudWatch Logs].
+	//
+	// [Resources Defined by CloudWatch Logs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies
 	CloudWatchLogsArn *string
 
 	// The URL to an individual build log in CloudWatch Logs. The log stream is
@@ -904,16 +1077,16 @@ type LogsLocation struct {
 	// The name of the CloudWatch Logs group for the build logs.
 	GroupName *string
 
-	// The URL to a build log in an S3 bucket.
+	//  The URL to a build log in an S3 bucket.
 	S3DeepLink *string
 
-	// Information about S3 logs for a build project.
+	//  Information about S3 logs for a build project.
 	S3Logs *S3LogsConfig
 
-	// The ARN of S3 logs for a build project. Its format is
-	// arn:${Partition}:s3:::${BucketName}/${ObjectName} . For more information, see
-	// Resources Defined by Amazon S3 (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html#amazons3-resources-for-iam-policies)
-	// .
+	//  The ARN of S3 logs for a build project. Its format is
+	// arn:${Partition}:s3:::${BucketName}/${ObjectName} . For more information, see [Resources Defined by Amazon S3].
+	//
+	// [Resources Defined by Amazon S3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html#amazons3-resources-for-iam-policies
 	S3LogsArn *string
 
 	// The name of the CloudWatch Logs stream for the build logs.
@@ -960,16 +1133,16 @@ type Project struct {
 	// Information about the build badge for the build project.
 	Badge *ProjectBadge
 
-	// A ProjectBuildBatchConfig object that defines the batch build options for the
-	// project.
+	// A ProjectBuildBatchConfig object that defines the batch build options for the project.
 	BuildBatchConfig *ProjectBuildBatchConfig
 
 	// Information about the cache for the build project.
 	Cache *ProjectCache
 
-	// The maximum number of concurrent builds that are allowed for this project. New
-	// builds are only started if the current number of builds is less than or equal to
-	// this limit. If the current build count meets this limit, new builds are
+	// The maximum number of concurrent builds that are allowed for this project.
+	//
+	// New builds are only started if the current number of builds is less than or
+	// equal to this limit. If the current build count meets this limit, new builds are
 	// throttled and are not run.
 	ConcurrentBuildLimit *int32
 
@@ -980,17 +1153,21 @@ type Project struct {
 	Description *string
 
 	// The Key Management Service customer master key (CMK) to be used for encrypting
-	// the build output artifacts. You can use a cross-account KMS key to encrypt the
-	// build output artifacts if your service role has permission to that key. You can
-	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
-	// CMK's alias (using the format alias/ ). If you don't specify a value, CodeBuild
-	// uses the managed CMK for Amazon Simple Storage Service (Amazon S3).
+	// the build output artifacts.
+	//
+	// You can use a cross-account KMS key to encrypt the build output artifacts if
+	// your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if
+	// available, the CMK's alias (using the format alias/ ). If you don't specify a
+	// value, CodeBuild uses the managed CMK for Amazon Simple Storage Service (Amazon
+	// S3).
 	EncryptionKey *string
 
 	// Information about the build environment for this build project.
 	Environment *ProjectEnvironment
 
-	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
+	//  An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
 	// ProjectFileSystemLocation object specifies the identifier , location ,
 	// mountOptions , mountPoint , and type of a file system created using Amazon
 	// Elastic File System.
@@ -1008,8 +1185,10 @@ type Project struct {
 	Name *string
 
 	// Specifies the visibility of the project's builds. Possible values are:
-	// PUBLIC_READ The project builds are visible to the public. PRIVATE The project
-	// builds are not visible to the public.
+	//
+	// PUBLIC_READ The project builds are visible to the public.
+	//
+	// PRIVATE The project builds are not visible to the public.
 	ProjectVisibility ProjectVisibilityType
 
 	// Contains the project identifier used with the public build APIs.
@@ -1042,26 +1221,34 @@ type Project struct {
 
 	// A version of the build input to be built for this project. If not specified,
 	// the latest version is used. If specified, it must be one of:
+	//
 	//   - For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
 	//   - For GitHub: the commit ID, pull request ID, branch name, or tag name that
 	//   corresponds to the version of the source code you want to build. If a pull
 	//   request ID is specified, it must use the format pr/pull-request-ID (for
 	//   example pr/25 ). If a branch name is specified, the branch's HEAD commit ID is
 	//   used. If not specified, the default branch's HEAD commit ID is used.
+	//
 	//   - For Bitbucket: the commit ID, branch name, or tag name that corresponds to
 	//   the version of the source code you want to build. If a branch name is specified,
 	//   the branch's HEAD commit ID is used. If not specified, the default branch's HEAD
 	//   commit ID is used.
+	//
 	//   - For Amazon S3: the version ID of the object that represents the build input
 	//   ZIP file to use.
+	//
 	// If sourceVersion is specified at the build level, then that version takes
-	// precedence over this sourceVersion (at the project level). For more
-	// information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
-	// in the CodeBuild User Guide.
+	// precedence over this sourceVersion (at the project level).
+	//
+	// For more information, see [Source Version Sample with CodeBuild] in the CodeBuild User Guide.
+	//
+	// [Source Version Sample with CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
 	SourceVersion *string
 
-	// A list of tag key and value pairs associated with this build project. These
-	// tags are available for use by Amazon Web Services services that support
+	// A list of tag key and value pairs associated with this build project.
+	//
+	// These tags are available for use by Amazon Web Services services that support
 	// CodeBuild build project tags.
 	Tags []Tag
 
@@ -1084,116 +1271,156 @@ type Project struct {
 type ProjectArtifacts struct {
 
 	// The type of build output artifact. Valid values include:
+	//
 	//   - CODEPIPELINE : The build project has build output generated through
-	//   CodePipeline. The CODEPIPELINE type is not supported for secondaryArtifacts .
+	//   CodePipeline.
+	//
+	// The CODEPIPELINE type is not supported for secondaryArtifacts .
+	//
 	//   - NO_ARTIFACTS : The build project does not produce any build output.
+	//
 	//   - S3 : The build project stores build output in Amazon S3.
 	//
 	// This member is required.
 	Type ArtifactsType
 
-	// An identifier for this artifact definition.
+	//  An identifier for this artifact definition.
 	ArtifactIdentifier *string
 
 	// Specifies the bucket owner's access for objects that another account uploads to
 	// their Amazon S3 bucket. By default, only the account that uploads the objects to
 	// the bucket has access to these objects. This property allows you to give the
-	// bucket owner access to these objects. To use this property, your CodeBuild
-	// service role must have the s3:PutBucketAcl permission. This permission allows
-	// CodeBuild to modify the access control list for the bucket. This property can be
-	// one of the following values: NONE The bucket owner does not have access to the
-	// objects. This is the default. READ_ONLY The bucket owner has read-only access to
-	// the objects. The uploading account retains ownership of the objects. FULL The
-	// bucket owner has full access to the objects. Object ownership is determined by
-	// the following criteria:
+	// bucket owner access to these objects.
+	//
+	// To use this property, your CodeBuild service role must have the s3:PutBucketAcl
+	// permission. This permission allows CodeBuild to modify the access control list
+	// for the bucket.
+	//
+	// This property can be one of the following values:
+	//
+	// NONE The bucket owner does not have access to the objects. This is the default.
+	//
+	// READ_ONLY The bucket owner has read-only access to the objects. The uploading
+	// account retains ownership of the objects.
+	//
+	// FULL The bucket owner has full access to the objects. Object ownership is
+	// determined by the following criteria:
+	//
 	//   - If the bucket is configured with the Bucket owner preferred setting, the
 	//   bucket owner owns the objects. The uploading account will have object access as
 	//   specified by the bucket's policy.
+	//
 	//   - Otherwise, the uploading account retains ownership of the objects.
-	// For more information about Amazon S3 object ownership, see Controlling
-	// ownership of uploaded objects using S3 Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
-	// in the Amazon Simple Storage Service User Guide.
+	//
+	// For more information about Amazon S3 object ownership, see [Controlling ownership of uploaded objects using S3 Object Ownership] in the Amazon
+	// Simple Storage Service User Guide.
+	//
+	// [Controlling ownership of uploaded objects using S3 Object Ownership]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
 	BucketOwnerAccess BucketOwnerAccess
 
-	// Set to true if you do not want your output artifacts encrypted. This option is
+	//  Set to true if you do not want your output artifacts encrypted. This option is
 	// valid only if your artifacts type is Amazon S3. If this is set with another
 	// artifacts type, an invalidInputException is thrown.
 	EncryptionDisabled *bool
 
 	// Information about the build output artifact location:
+	//
 	//   - If type is set to CODEPIPELINE , CodePipeline ignores this value if
 	//   specified. This is because CodePipeline manages its build output locations
 	//   instead of CodeBuild.
+	//
 	//   - If type is set to NO_ARTIFACTS , this value is ignored if specified, because
 	//   no build output is produced.
+	//
 	//   - If type is set to S3 , this is the name of the output bucket.
 	Location *string
 
 	// Along with path and namespaceType , the pattern that CodeBuild uses to name and
 	// store the output artifact:
+	//
 	//   - If type is set to CODEPIPELINE , CodePipeline ignores this value if
 	//   specified. This is because CodePipeline manages its build output names instead
 	//   of CodeBuild.
+	//
 	//   - If type is set to NO_ARTIFACTS , this value is ignored if specified, because
 	//   no build output is produced.
+	//
 	//   - If type is set to S3 , this is the name of the output artifact object. If
 	//   you set the name to be a forward slash ("/"), the artifact is stored in the root
 	//   of the output bucket.
+	//
 	// For example:
+	//
 	//   - If path is set to MyArtifacts , namespaceType is set to BUILD_ID , and name
 	//   is set to MyArtifact.zip , then the output artifact is stored in
 	//   MyArtifacts//MyArtifact.zip .
+	//
 	//   - If path is empty, namespaceType is set to NONE , and name is set to " / ",
 	//   the output artifact is stored in the root of the output bucket.
+	//
 	//   - If path is set to MyArtifacts , namespaceType is set to BUILD_ID , and name
 	//   is set to " / ", the output artifact is stored in MyArtifacts/ .
 	Name *string
 
 	// Along with path and name , the pattern that CodeBuild uses to determine the name
 	// and location to store the output artifact:
+	//
 	//   - If type is set to CODEPIPELINE , CodePipeline ignores this value if
 	//   specified. This is because CodePipeline manages its build output names instead
 	//   of CodeBuild.
+	//
 	//   - If type is set to NO_ARTIFACTS , this value is ignored if specified, because
 	//   no build output is produced.
+	//
 	//   - If type is set to S3 , valid values include:
-	//   - BUILD_ID : Include the build ID in the location of the build output
-	//   artifact.
+	//
+	//   - BUILD_ID : Include the build ID in the location of the build output artifact.
+	//
 	//   - NONE : Do not include the build ID. This is the default if namespaceType is
 	//   not specified.
+	//
 	// For example, if path is set to MyArtifacts , namespaceType is set to BUILD_ID ,
 	// and name is set to MyArtifact.zip , the output artifact is stored in
 	// MyArtifacts//MyArtifact.zip .
 	NamespaceType ArtifactNamespace
 
-	// If this flag is set, a name specified in the buildspec file overrides the
+	//  If this flag is set, a name specified in the buildspec file overrides the
 	// artifact name. The name specified in a buildspec file is calculated at build
 	// time and uses the Shell Command Language. For example, you can append a date and
 	// time to your artifact name so that it is always unique.
 	OverrideArtifactName *bool
 
 	// The type of build output artifact to create:
+	//
 	//   - If type is set to CODEPIPELINE , CodePipeline ignores this value if
 	//   specified. This is because CodePipeline manages its build output artifacts
 	//   instead of CodeBuild.
+	//
 	//   - If type is set to NO_ARTIFACTS , this value is ignored if specified, because
 	//   no build output is produced.
+	//
 	//   - If type is set to S3 , valid values include:
+	//
 	//   - NONE : CodeBuild creates in the output bucket a folder that contains the
 	//   build output. This is the default if packaging is not specified.
+	//
 	//   - ZIP : CodeBuild creates in the output bucket a ZIP file that contains the
 	//   build output.
 	Packaging ArtifactPackaging
 
 	// Along with namespaceType and name , the pattern that CodeBuild uses to name and
 	// store the output artifact:
+	//
 	//   - If type is set to CODEPIPELINE , CodePipeline ignores this value if
 	//   specified. This is because CodePipeline manages its build output names instead
 	//   of CodeBuild.
+	//
 	//   - If type is set to NO_ARTIFACTS , this value is ignored if specified, because
 	//   no build output is produced.
+	//
 	//   - If type is set to S3 , this is the path to the output artifact. If path is
 	//   not specified, path is not used.
+	//
 	// For example, if path is set to MyArtifacts , namespaceType is set to NONE , and
 	// name is set to MyArtifact.zip , the output artifact is stored in the output
 	// bucket at MyArtifacts/MyArtifact.zip .
@@ -1223,9 +1450,12 @@ type ProjectBuildBatchConfig struct {
 	// batch build. This property is only used when the source provider for your
 	// project is Bitbucket, GitHub, or GitHub Enterprise, and your project is
 	// configured to report build statuses to the source provider.
+	//
 	// REPORT_AGGREGATED_BATCH (Default) Aggregate all of the build statuses into a
-	// single status report. REPORT_INDIVIDUAL_BUILDS Send a separate status report for
-	// each individual build.
+	// single status report.
+	//
+	// REPORT_INDIVIDUAL_BUILDS Send a separate status report for each individual
+	// build.
 	BatchReportMode BatchReportModeType
 
 	// Specifies if the build artifacts for the batch build should be combined into a
@@ -1249,8 +1479,11 @@ type ProjectBuildBatchConfig struct {
 type ProjectCache struct {
 
 	// The type of cache used by the build project. Valid values include:
+	//
 	//   - NO_CACHE : The build project does not use any cache.
+	//
 	//   - S3 : The build project reads and writes from and to S3.
+	//
 	//   - LOCAL : The build project stores a cache locally on a build host that is
 	//   only available to that build host.
 	//
@@ -1258,32 +1491,45 @@ type ProjectCache struct {
 	Type CacheType
 
 	// Information about the cache location:
+	//
 	//   - NO_CACHE or LOCAL : This value is ignored.
+	//
 	//   - S3 : This is the S3 bucket name/prefix.
 	Location *string
 
 	// An array of strings that specify the local cache modes. You can use one or more
 	// local cache modes at the same time. This is only used for LOCAL cache types.
-	// Possible values are: LOCAL_SOURCE_CACHE Caches Git metadata for primary and
-	// secondary sources. After the cache is created, subsequent builds pull only the
-	// change between commits. This mode is a good choice for projects with a clean
-	// working directory and a source that is a large Git repository. If you choose
-	// this option and your project does not use a Git repository (GitHub, GitHub
-	// Enterprise, or Bitbucket), the option is ignored. LOCAL_DOCKER_LAYER_CACHE
-	// Caches existing Docker layers. This mode is a good choice for projects that
-	// build or pull large Docker images. It can prevent the performance issues caused
-	// by pulling large Docker images down from the network.
+	//
+	// Possible values are:
+	//
+	// LOCAL_SOURCE_CACHE Caches Git metadata for primary and secondary sources. After
+	// the cache is created, subsequent builds pull only the change between commits.
+	// This mode is a good choice for projects with a clean working directory and a
+	// source that is a large Git repository. If you choose this option and your
+	// project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket),
+	// the option is ignored.
+	//
+	// LOCAL_DOCKER_LAYER_CACHE Caches existing Docker layers. This mode is a good
+	// choice for projects that build or pull large Docker images. It can prevent the
+	// performance issues caused by pulling large Docker images down from the network.
+	//
 	//   - You can use a Docker layer cache in the Linux environment only.
+	//
 	//   - The privileged flag must be set so that your project has the required Docker
 	//   permissions.
+	//
 	//   - You should consider the security implications before you use a Docker layer
 	//   cache.
+	//
 	// LOCAL_CUSTOM_CACHE Caches directories you specify in the buildspec file. This
 	// mode is a good choice if your build scenario is not suited to one of the other
 	// three local cache modes. If you use a custom cache:
+	//
 	//   - Only directories can be specified for caching. You cannot specify
 	//   individual files.
+	//
 	//   - Symlinks are used to reference cached directories.
+	//
 	//   - Cached directories are linked to your build before it downloads its project
 	//   sources. Cached items are overridden if a source item has the same name.
 	//   Directories are specified using cache paths in the buildspec file.
@@ -1297,68 +1543,97 @@ type ProjectEnvironment struct {
 
 	// Information about the compute resources the build project uses. Available
 	// values include:
+	//
 	//   - BUILD_GENERAL1_SMALL : Use up to 3 GB memory and 2 vCPUs for builds.
+	//
 	//   - BUILD_GENERAL1_MEDIUM : Use up to 7 GB memory and 4 vCPUs for builds.
+	//
 	//   - BUILD_GENERAL1_LARGE : Use up to 16 GB memory and 8 vCPUs for builds,
 	//   depending on your environment type.
+	//
 	//   - BUILD_GENERAL1_XLARGE : Use up to 70 GB memory and 36 vCPUs for builds,
 	//   depending on your environment type.
+	//
 	//   - BUILD_GENERAL1_2XLARGE : Use up to 145 GB memory, 72 vCPUs, and 824 GB of
 	//   SSD storage for builds. This compute type supports Docker images up to 100 GB
 	//   uncompressed.
+	//
 	//   - BUILD_LAMBDA_1GB : Use up to 1 GB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
 	//   - BUILD_LAMBDA_2GB : Use up to 2 GB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
 	//   - BUILD_LAMBDA_4GB : Use up to 4 GB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
 	//   - BUILD_LAMBDA_8GB : Use up to 8 GB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
 	//   - BUILD_LAMBDA_10GB : Use up to 10 GB memory for builds. Only available for
 	//   environment type LINUX_LAMBDA_CONTAINER and ARM_LAMBDA_CONTAINER .
+	//
 	// If you use BUILD_GENERAL1_SMALL :
+	//
 	//   - For environment type LINUX_CONTAINER , you can use up to 3 GB memory and 2
 	//   vCPUs for builds.
+	//
 	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 16 GB memory, 4
 	//   vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+	//
 	//   - For environment type ARM_CONTAINER , you can use up to 4 GB memory and 2
 	//   vCPUs on ARM-based processors for builds.
+	//
 	// If you use BUILD_GENERAL1_LARGE :
+	//
 	//   - For environment type LINUX_CONTAINER , you can use up to 15 GB memory and 8
 	//   vCPUs for builds.
+	//
 	//   - For environment type LINUX_GPU_CONTAINER , you can use up to 255 GB memory,
 	//   32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+	//
 	//   - For environment type ARM_CONTAINER , you can use up to 16 GB memory and 8
 	//   vCPUs on ARM-based processors for builds.
+	//
 	// If you're using compute fleets during project creation, computeType will be
-	// ignored. For more information, see Build Environment Compute Types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
-	// in the CodeBuild User Guide.
+	// ignored.
+	//
+	// For more information, see [Build Environment Compute Types] in the CodeBuild User Guide.
+	//
+	// [Build Environment Compute Types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	//
 	// This member is required.
 	ComputeType ComputeType
 
 	// The image tag or image digest that identifies the Docker image to use for this
 	// build project. Use the following formats:
+	//
 	//   - For an image tag: /: . For example, in the Docker repository that CodeBuild
 	//   uses to manage its Docker images, this would be aws/codebuild/standard:4.0 .
+	//
 	//   - For an image digest: /@ . For example, to specify an image with the digest
 	//   "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use
 	//   /@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf .
-	// For more information, see Docker images provided by CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html)
-	// in the CodeBuild user guide.
+	//
+	// For more information, see [Docker images provided by CodeBuild] in the CodeBuild user guide.
+	//
+	// [Docker images provided by CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html
 	//
 	// This member is required.
 	Image *string
 
 	// The type of build environment to use for related builds.
+	//
 	//   - The environment type ARM_CONTAINER is available only in regions US East (N.
 	//   Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific
 	//   (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).
+	//
 	//   - The environment type LINUX_CONTAINER is available only in regions US East
 	//   (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland),
 	//   EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia
 	//   Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China
 	//   (Ningxia).
+	//
 	//   - The environment type LINUX_GPU_CONTAINER is available only in regions US
 	//   East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU
 	//   (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
@@ -1374,17 +1649,21 @@ type ProjectEnvironment struct {
 	//   - The environment types WINDOWS_CONTAINER and WINDOWS_SERVER_2019_CONTAINER
 	//   are available only in regions US East (N. Virginia), US East (Ohio), US West
 	//   (Oregon), and EU (Ireland).
+	//
 	// If you're using compute fleets during project creation, type will be ignored.
-	// For more information, see Build environment compute types (https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html)
-	// in the CodeBuild user guide.
+	//
+	// For more information, see [Build environment compute types] in the CodeBuild user guide.
+	//
+	// [Build environment compute types]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
 	//
 	// This member is required.
 	Type EnvironmentType
 
 	// The ARN of the Amazon S3 bucket, path prefix, and object key that contains the
-	// PEM-encoded certificate for the build project. For more information, see
-	// certificate (https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate)
-	// in the CodeBuild User Guide.
+	// PEM-encoded certificate for the build project. For more information, see [certificate]in the
+	// CodeBuild User Guide.
+	//
+	// [certificate]: https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate
 	Certificate *string
 
 	// A set of environment variables to make available to builds for this build
@@ -1394,13 +1673,15 @@ type ProjectEnvironment struct {
 	// A ProjectFleet object to use for this build project.
 	Fleet *ProjectFleet
 
-	// The type of credentials CodeBuild uses to pull images in your build. There are
+	//  The type of credentials CodeBuild uses to pull images in your build. There are
 	// two valid values:
+	//
 	//   - CODEBUILD specifies that CodeBuild uses its own credentials. This requires
 	//   that you modify your ECR repository policy to trust CodeBuild service principal.
 	//
 	//   - SERVICE_ROLE specifies that CodeBuild uses your build project's service
 	//   role.
+	//
 	// When you use a cross-account or private registry image, you must use
 	// SERVICE_ROLE credentials. When you use an CodeBuild curated image, you must use
 	// CODEBUILD credentials.
@@ -1408,34 +1689,47 @@ type ProjectEnvironment struct {
 
 	// Enables running the Docker daemon inside a Docker container. Set to true only
 	// if the build project is used to build Docker images. Otherwise, a build that
-	// attempts to interact with the Docker daemon fails. The default setting is false
-	// . You can initialize the Docker daemon during the install phase of your build by
+	// attempts to interact with the Docker daemon fails. The default setting is false .
+	//
+	// You can initialize the Docker daemon during the install phase of your build by
 	// adding one of the following sets of commands to the install phase of your
-	// buildspec file: If the operating system's base image is Ubuntu Linux: - nohup
-	// /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
-	// --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout 15 sh -c "until
-	// docker info; do echo .; sleep 1; done" If the operating system's base image is
-	// Alpine Linux and the previous command does not work, add the -t argument to
-	// timeout : - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
-	// --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+	// buildspec file:
+	//
+	// If the operating system's base image is Ubuntu Linux:
+	//
+	//     - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
+	//     --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+	//
+	//     - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+	//
+	// If the operating system's base image is Alpine Linux and the previous command
+	// does not work, add the -t argument to timeout :
+	//
+	//     - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
+	//     --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+	//
 	//     - timeout -t 15 sh -c "until docker info; do echo .; sleep 1; done"
 	PrivilegedMode *bool
 
-	// The credentials for access to a private registry.
+	//  The credentials for access to a private registry.
 	RegistryCredential *RegistryCredential
 
 	noSmithyDocumentSerde
 }
 
-// Information about a file system created by Amazon Elastic File System (EFS).
-// For more information, see What Is Amazon Elastic File System? (https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html)
+//	Information about a file system created by Amazon Elastic File System (EFS).
+//
+// For more information, see [What Is Amazon Elastic File System?]
+//
+// [What Is Amazon Elastic File System?]: https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html
 type ProjectFileSystemLocation struct {
 
 	// The name used to access a file system created by Amazon EFS. CodeBuild creates
 	// an environment variable by appending the identifier in all capital letters to
 	// CODEBUILD_ . For example, if you specify my_efs for identifier , a new
-	// environment variable is create named CODEBUILD_MY_EFS . The identifier is used
-	// to mount your file system.
+	// environment variable is create named CODEBUILD_MY_EFS .
+	//
+	// The identifier is used to mount your file system.
 	Identifier *string
 
 	// A string that specifies the location of the file system created by Amazon EFS.
@@ -1444,31 +1738,34 @@ type ProjectFileSystemLocation struct {
 	// to a directory in the file system that CodeBuild mounts. For example, if the DNS
 	// name of a file system is fs-abcd1234.efs.us-west-2.amazonaws.com , and its mount
 	// directory is my-efs-mount-directory , then the location is
-	// fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory . The directory
-	// path in the format efs-dns-name:/directory-path is optional. If you do not
-	// specify a directory path, the location is only the DNS name and CodeBuild mounts
-	// the entire file system.
+	// fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory .
+	//
+	// The directory path in the format efs-dns-name:/directory-path is optional. If
+	// you do not specify a directory path, the location is only the DNS name and
+	// CodeBuild mounts the entire file system.
 	Location *string
 
-	// The mount options for a file system created by Amazon EFS. The default mount
+	//  The mount options for a file system created by Amazon EFS. The default mount
 	// options used by CodeBuild are
 	// nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 . For more
-	// information, see Recommended NFS Mount Options (https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html)
-	// .
+	// information, see [Recommended NFS Mount Options].
+	//
+	// [Recommended NFS Mount Options]: https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html
 	MountOptions *string
 
 	// The location in the container where you mount the file system.
 	MountPoint *string
 
-	// The type of the file system. The one supported type is EFS .
+	//  The type of the file system. The one supported type is EFS .
 	Type FileSystemType
 
 	noSmithyDocumentSerde
 }
 
 // Information about the compute fleet of the build project. For more information,
-// see Working with reserved capacity in CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/fleets.html)
-// .
+// see [Working with reserved capacity in CodeBuild].
+//
+// [Working with reserved capacity in CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/fleets.html
 type ProjectFleet struct {
 
 	// Specifies the compute fleet ARN for the build project.
@@ -1482,25 +1779,35 @@ type ProjectSource struct {
 
 	// The type of repository that contains the source code to be built. Valid values
 	// include:
+	//
 	//   - BITBUCKET : The source code is in a Bitbucket repository.
+	//
 	//   - CODECOMMIT : The source code is in an CodeCommit repository.
+	//
 	//   - CODEPIPELINE : The source code settings are specified in the source action
 	//   of a pipeline in CodePipeline.
+	//
 	//   - GITHUB : The source code is in a GitHub repository.
+	//
 	//   - GITHUB_ENTERPRISE : The source code is in a GitHub Enterprise Server
 	//   repository.
+	//
 	//   - GITLAB : The source code is in a GitLab repository.
-	//   - GITLAB_SELF_MANAGED : The source code is in a self-managed GitLab
-	//   repository.
+	//
+	//   - GITLAB_SELF_MANAGED : The source code is in a self-managed GitLab repository.
+	//
 	//   - NO_SOURCE : The project does not have input source code.
+	//
 	//   - S3 : The source code is in an Amazon S3 bucket.
 	//
 	// This member is required.
 	Type SourceType
 
 	// Information about the authorization settings for CodeBuild to access the source
-	// code to be built. This information is for the CodeBuild console's use only. Your
-	// code should not get or set this information directly.
+	// code to be built.
+	//
+	// This information is for the CodeBuild console's use only. Your code should not
+	// get or set this information directly.
 	Auth *SourceAuth
 
 	// Contains information that defines how the build project reports the build
@@ -1508,23 +1815,24 @@ type ProjectSource struct {
 	// is GITHUB , GITHUB_ENTERPRISE , or BITBUCKET .
 	BuildStatusConfig *BuildStatusConfig
 
-	// The buildspec file declaration to use for the builds in this build project. If
-	// this value is set, it can be either an inline buildspec definition, the path to
-	// an alternate buildspec file relative to the value of the built-in
+	// The buildspec file declaration to use for the builds in this build project.
+	//
+	// If this value is set, it can be either an inline buildspec definition, the path
+	// to an alternate buildspec file relative to the value of the built-in
 	// CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket
 	// must be in the same Amazon Web Services Region as the build project. Specify the
 	// buildspec file using its ARN (for example,
 	// arn:aws:s3:::my-codebuild-sample2/buildspec.yml ). If this value is not provided
 	// or is set to an empty string, the source code must contain a buildspec file in
-	// its root directory. For more information, see Buildspec File Name and Storage
-	// Location (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage)
-	// .
+	// its root directory. For more information, see [Buildspec File Name and Storage Location].
+	//
+	// [Buildspec File Name and Storage Location]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage
 	Buildspec *string
 
 	// Information about the Git clone depth for the build project.
 	GitCloneDepth *int32
 
-	// Information about the Git submodules configuration for the build project.
+	//  Information about the Git submodules configuration for the build project.
 	GitSubmodulesConfig *GitSubmodulesConfig
 
 	// Enable this flag to ignore SSL warnings while connecting to the project source
@@ -1533,17 +1841,23 @@ type ProjectSource struct {
 
 	// Information about the location of the source code to be built. Valid values
 	// include:
+	//
 	//   - For source code settings that are specified in the source action of a
 	//   pipeline in CodePipeline, location should not be specified. If it is
 	//   specified, CodePipeline ignores it. This is because CodePipeline uses the
 	//   settings in a pipeline's source action instead of this value.
+	//
 	//   - For source code in an CodeCommit repository, the HTTPS clone URL to the
 	//   repository that contains the source code and the buildspec file (for example,
 	//   https://git-codecommit..amazonaws.com/v1/repos/ ).
+	//
 	//   - For source code in an Amazon S3 input bucket, one of the following.
+	//
 	//   - The path to the ZIP file that contains the source code (for example, //.zip
 	//   ).
+	//
 	//   - The path to the folder that contains the source code (for example, /// ).
+	//
 	//   - For source code in a GitHub repository, the HTTPS clone URL to the
 	//   repository that contains the source and the buildspec file. You must connect
 	//   your Amazon Web Services account to your GitHub account. Use the CodeBuild
@@ -1555,6 +1869,7 @@ type ProjectSource struct {
 	//   the build project. You can leave the CodeBuild console.) To instruct CodeBuild
 	//   to use this connection, in the source object, set the auth object's type value
 	//   to OAUTH .
+	//
 	//   - For source code in an GitLab or self-managed GitLab repository, the HTTPS
 	//   clone URL to the repository that contains the source and the buildspec file. You
 	//   must connect your Amazon Web Services account to your GitLab account. Use the
@@ -1566,6 +1881,7 @@ type ProjectSource struct {
 	//   CodeBuild console.) To instruct CodeBuild to override the default connection and
 	//   use this connection instead, set the auth object's type value to
 	//   CODECONNECTIONS in the source object.
+	//
 	//   - For source code in a Bitbucket repository, the HTTPS clone URL to the
 	//   repository that contains the source and the buildspec file. You must connect
 	//   your Amazon Web Services account to your Bitbucket account. Use the CodeBuild
@@ -1575,22 +1891,28 @@ type ProjectSource struct {
 	//   you do not need to finish creating the build project. You can leave the
 	//   CodeBuild console.) To instruct CodeBuild to use this connection, in the
 	//   source object, set the auth object's type value to OAUTH .
+	//
 	// If you specify CODEPIPELINE for the Type property, don't specify this property.
 	// For all of the other types, you must specify Location .
 	Location *string
 
-	// Set to true to report the status of a build's start and finish to your source
+	//  Set to true to report the status of a build's start and finish to your source
 	// provider. This option is valid only when your source provider is GitHub, GitHub
 	// Enterprise, GitLab, GitLab Self Managed, or Bitbucket. If this is set and you
-	// use a different source provider, an invalidInputException is thrown. To be able
-	// to report the build status to the source provider, the user associated with the
-	// source provider must have write access to the repo. If the user does not have
-	// write access, the build status cannot be updated. For more information, see
-	// Source provider access (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html)
-	// in the CodeBuild User Guide. The status of a build triggered by a webhook is
-	// always reported to your source provider. If your project's builds are triggered
-	// by a webhook, you must push a new commit to the repo for a change to this
-	// property to take effect.
+	// use a different source provider, an invalidInputException is thrown.
+	//
+	// To be able to report the build status to the source provider, the user
+	// associated with the source provider must have write access to the repo. If the
+	// user does not have write access, the build status cannot be updated. For more
+	// information, see [Source provider access]in the CodeBuild User Guide.
+	//
+	// The status of a build triggered by a webhook is always reported to your source
+	// provider.
+	//
+	// If your project's builds are triggered by a webhook, you must push a new commit
+	// to the repo for a change to this property to take effect.
+	//
+	// [Source provider access]: https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html
 	ReportBuildStatus *bool
 
 	// An identifier for this project source. The identifier can only contain
@@ -1613,20 +1935,26 @@ type ProjectSourceVersion struct {
 
 	// The source version for the corresponding source identifier. If specified, must
 	// be one of:
+	//
 	//   - For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
 	//   - For GitHub or GitLab: the commit ID, pull request ID, branch name, or tag
 	//   name that corresponds to the version of the source code you want to build. If a
 	//   pull request ID is specified, it must use the format pr/pull-request-ID (for
 	//   example, pr/25 ). If a branch name is specified, the branch's HEAD commit ID
 	//   is used. If not specified, the default branch's HEAD commit ID is used.
+	//
 	//   - For Bitbucket: the commit ID, branch name, or tag name that corresponds to
 	//   the version of the source code you want to build. If a branch name is specified,
 	//   the branch's HEAD commit ID is used. If not specified, the default branch's HEAD
 	//   commit ID is used.
+	//
 	//   - For Amazon S3: the version ID of the object that represents the build input
 	//   ZIP file to use.
-	// For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
-	// in the CodeBuild User Guide.
+	//
+	// For more information, see [Source Version Sample with CodeBuild] in the CodeBuild User Guide.
+	//
+	// [Source Version Sample with CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
 	//
 	// This member is required.
 	SourceVersion *string
@@ -1634,24 +1962,29 @@ type ProjectSourceVersion struct {
 	noSmithyDocumentSerde
 }
 
-// Information about credentials that provide access to a private Docker registry.
-// When this is set:
+//	Information about credentials that provide access to a private Docker
+//
+// registry. When this is set:
+//
 //   - imagePullCredentialsType must be set to SERVICE_ROLE .
+//
 //   - images cannot be curated or an Amazon ECR image.
 //
-// For more information, see Private Registry with Secrets Manager Sample for
-// CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html)
-// .
+// For more information, see [Private Registry with Secrets Manager Sample for CodeBuild].
+//
+// [Private Registry with Secrets Manager Sample for CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html
 type RegistryCredential struct {
 
-	// The Amazon Resource Name (ARN) or name of credentials created using Secrets
-	// Manager. The credential can use the name of the credentials only if they exist
-	// in your current Amazon Web Services Region.
+	//  The Amazon Resource Name (ARN) or name of credentials created using Secrets
+	// Manager.
+	//
+	// The credential can use the name of the credentials only if they exist in your
+	// current Amazon Web Services Region.
 	//
 	// This member is required.
 	Credential *string
 
-	// The service that created the credentials to access a private Docker registry.
+	//  The service that created the credentials to access a private Docker registry.
 	// The valid value, SECRETS_MANAGER, is for Secrets Manager.
 	//
 	// This member is required.
@@ -1667,44 +2000,48 @@ type RegistryCredential struct {
 // functional tests.
 type Report struct {
 
-	// The ARN of the report run.
+	//  The ARN of the report run.
 	Arn *string
 
 	// A CodeCoverageReportSummary object that contains a code coverage summary for
 	// this report.
 	CodeCoverageSummary *CodeCoverageReportSummary
 
-	// The date and time this report run occurred.
+	//  The date and time this report run occurred.
 	Created *time.Time
 
-	// The ARN of the build run that generated this report.
+	//  The ARN of the build run that generated this report.
 	ExecutionId *string
 
-	// The date and time a report expires. A report expires 30 days after it is
+	//  The date and time a report expires. A report expires 30 days after it is
 	// created. An expired report is not available to view in CodeBuild.
 	Expired *time.Time
 
-	// Information about where the raw data used to generate this report was exported.
+	//  Information about where the raw data used to generate this report was
+	// exported.
 	ExportConfig *ReportExportConfig
 
-	// The name of the report that was run.
+	//  The name of the report that was run.
 	Name *string
 
-	// The ARN of the report group associated with this report.
+	//  The ARN of the report group associated with this report.
 	ReportGroupArn *string
 
-	// The status of this report.
+	//  The status of this report.
 	Status ReportStatusType
 
-	// A TestReportSummary object that contains information about this test report.
+	//  A TestReportSummary object that contains information about this test report.
 	TestSummary *TestReportSummary
 
-	// A boolean that specifies if this report run is truncated. The list of test
+	//  A boolean that specifies if this report run is truncated. The list of test
 	// cases is truncated after the maximum number of test cases is reached.
 	Truncated *bool
 
-	// The type of the report that was run. CODE_COVERAGE A code coverage report. TEST
-	// A test report.
+	// The type of the report that was run.
+	//
+	// CODE_COVERAGE A code coverage report.
+	//
+	// TEST A test report.
 	Type ReportType
 
 	noSmithyDocumentSerde
@@ -1713,23 +2050,26 @@ type Report struct {
 // Information about the location where the run of a report is exported.
 type ReportExportConfig struct {
 
-	// The export configuration type. Valid values are:
+	//  The export configuration type. Valid values are:
+	//
 	//   - S3 : The report results are exported to an S3 bucket.
+	//
 	//   - NO_EXPORT : The report results are not exported.
 	ExportConfigType ReportExportConfigType
 
-	// A S3ReportExportConfig object that contains information about the S3 bucket
+	//  A S3ReportExportConfig object that contains information about the S3 bucket
 	// where the run of a report is exported.
 	S3Destination *S3ReportExportConfig
 
 	noSmithyDocumentSerde
 }
 
-// A filter used to return reports with the status specified by the input status
+//	A filter used to return reports with the status specified by the input status
+//
 // parameter.
 type ReportFilter struct {
 
-	// The status used to filter reports. You can filter using one status only.
+	//  The status used to filter reports. You can filter using one status only.
 	Status ReportStatusType
 
 	noSmithyDocumentSerde
@@ -1757,19 +2097,26 @@ type ReportGroup struct {
 	// The name of the ReportGroup .
 	Name *string
 
-	// The status of the report group. This property is read-only. This can be one of
-	// the following values: ACTIVE The report group is active. DELETING The report
-	// group is in the process of being deleted.
+	// The status of the report group. This property is read-only.
+	//
+	// This can be one of the following values:
+	//
+	// ACTIVE The report group is active.
+	//
+	// DELETING The report group is in the process of being deleted.
 	Status ReportGroupStatusType
 
-	// A list of tag key and value pairs associated with this report group. These tags
-	// are available for use by Amazon Web Services services that support CodeBuild
-	// report group tags.
+	// A list of tag key and value pairs associated with this report group.
+	//
+	// These tags are available for use by Amazon Web Services services that support
+	// CodeBuild report group tags.
 	Tags []Tag
 
 	// The type of the ReportGroup . This can be one of the following values:
-	// CODE_COVERAGE The report group contains code coverage reports. TEST The report
-	// group contains test reports.
+	//
+	// CODE_COVERAGE The report group contains code coverage reports.
+	//
+	// TEST The report group contains test reports.
 	Type ReportType
 
 	noSmithyDocumentSerde
@@ -1823,7 +2170,9 @@ type ResolvedArtifact struct {
 type S3LogsConfig struct {
 
 	// The current status of the S3 build logs. Valid values are:
+	//
 	//   - ENABLED : S3 build logs are enabled for this build project.
+	//
 	//   - DISABLED : S3 build logs are not enabled for this build project.
 	//
 	// This member is required.
@@ -1832,28 +2181,39 @@ type S3LogsConfig struct {
 	// Specifies the bucket owner's access for objects that another account uploads to
 	// their Amazon S3 bucket. By default, only the account that uploads the objects to
 	// the bucket has access to these objects. This property allows you to give the
-	// bucket owner access to these objects. To use this property, your CodeBuild
-	// service role must have the s3:PutBucketAcl permission. This permission allows
-	// CodeBuild to modify the access control list for the bucket. This property can be
-	// one of the following values: NONE The bucket owner does not have access to the
-	// objects. This is the default. READ_ONLY The bucket owner has read-only access to
-	// the objects. The uploading account retains ownership of the objects. FULL The
-	// bucket owner has full access to the objects. Object ownership is determined by
-	// the following criteria:
+	// bucket owner access to these objects.
+	//
+	// To use this property, your CodeBuild service role must have the s3:PutBucketAcl
+	// permission. This permission allows CodeBuild to modify the access control list
+	// for the bucket.
+	//
+	// This property can be one of the following values:
+	//
+	// NONE The bucket owner does not have access to the objects. This is the default.
+	//
+	// READ_ONLY The bucket owner has read-only access to the objects. The uploading
+	// account retains ownership of the objects.
+	//
+	// FULL The bucket owner has full access to the objects. Object ownership is
+	// determined by the following criteria:
+	//
 	//   - If the bucket is configured with the Bucket owner preferred setting, the
 	//   bucket owner owns the objects. The uploading account will have object access as
 	//   specified by the bucket's policy.
+	//
 	//   - Otherwise, the uploading account retains ownership of the objects.
-	// For more information about Amazon S3 object ownership, see Controlling
-	// ownership of uploaded objects using S3 Object Ownership (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
-	// in the Amazon Simple Storage Service User Guide.
+	//
+	// For more information about Amazon S3 object ownership, see [Controlling ownership of uploaded objects using S3 Object Ownership] in the Amazon
+	// Simple Storage Service User Guide.
+	//
+	// [Controlling ownership of uploaded objects using S3 Object Ownership]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
 	BucketOwnerAccess BucketOwnerAccess
 
-	// Set to true if you do not want your S3 build log output encrypted. By default
+	//  Set to true if you do not want your S3 build log output encrypted. By default
 	// S3 build logs are encrypted.
 	EncryptionDisabled *bool
 
-	// The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3
+	//  The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3
 	// bucket name is my-bucket , and your path prefix is build-log , then acceptable
 	// formats are my-bucket/build-log or arn:aws:s3:::my-bucket/build-log .
 	Location *string
@@ -1864,7 +2224,7 @@ type S3LogsConfig struct {
 // Information about the S3 bucket where the raw data of a report are exported.
 type S3ReportExportConfig struct {
 
-	// The name of the S3 bucket where the raw data of a report are exported.
+	//  The name of the S3 bucket where the raw data of a report are exported.
 	Bucket *string
 
 	// The Amazon Web Services account identifier of the owner of the Amazon S3
@@ -1872,19 +2232,21 @@ type S3ReportExportConfig struct {
 	// owned by an account other than the account running the build.
 	BucketOwner *string
 
-	// A boolean value that specifies if the results of a report are encrypted.
+	//  A boolean value that specifies if the results of a report are encrypted.
 	EncryptionDisabled *bool
 
-	// The encryption key for the report's encrypted raw data.
+	//  The encryption key for the report's encrypted raw data.
 	EncryptionKey *string
 
-	// The type of build output artifact to create. Valid values include:
+	//  The type of build output artifact to create. Valid values include:
+	//
 	//   - NONE : CodeBuild creates the raw data in the output bucket. This is the
 	//   default if packaging is not specified.
+	//
 	//   - ZIP : CodeBuild creates a ZIP file with the raw data in the output bucket.
 	Packaging ReportPackagingType
 
-	// The path to the exported report's raw data results.
+	//  The path to the exported report's raw data results.
 	Path *string
 
 	noSmithyDocumentSerde
@@ -1924,8 +2286,10 @@ type ScalingConfigurationOutput struct {
 }
 
 // Information about the authorization settings for CodeBuild to access the source
-// code to be built. This information is for the CodeBuild console's use only. Your
-// code should not get or set this information directly.
+// code to be built.
+//
+// This information is for the CodeBuild console's use only. Your code should not
+// get or set this information directly.
 type SourceAuth struct {
 
 	// The authorization type to use. Valid options are OAUTH or CODECONNECTIONS.
@@ -1939,14 +2303,15 @@ type SourceAuth struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the credentials for a GitHub, GitHub Enterprise, GitLab,
+//	Information about the credentials for a GitHub, GitHub Enterprise, GitLab,
+//
 // GitLab Self Managed, or Bitbucket repository.
 type SourceCredentialsInfo struct {
 
-	// The Amazon Resource Name (ARN) of the token.
+	//  The Amazon Resource Name (ARN) of the token.
 	Arn *string
 
-	// The type of authentication used by the credentials. Valid options are OAUTH,
+	//  The type of authentication used by the credentials. Valid options are OAUTH,
 	// BASIC_AUTH, PERSONAL_ACCESS_TOKEN, or CODECONNECTIONS.
 	AuthType AuthType
 
@@ -1954,15 +2319,17 @@ type SourceCredentialsInfo struct {
 	// your authType is CODECONNECTIONS.
 	Resource *string
 
-	// The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE,
+	//  The type of source provider. The valid options are GITHUB, GITHUB_ENTERPRISE,
 	// GITLAB, GITLAB_SELF_MANAGED, or BITBUCKET.
 	ServerType ServerType
 
 	noSmithyDocumentSerde
 }
 
-// A tag, consisting of a key and a value. This tag is available for use by Amazon
-// Web Services services that support tags in CodeBuild.
+// A tag, consisting of a key and a value.
+//
+// This tag is available for use by Amazon Web Services services that support tags
+// in CodeBuild.
 type Tag struct {
 
 	// The tag's key.
@@ -1986,36 +2353,38 @@ type TargetTrackingScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a test case created using a framework such as NUnit or
+//	Information about a test case created using a framework such as NUnit or
+//
 // Cucumber. A test case might be a unit test or a configuration test.
 type TestCase struct {
 
-	// The number of nanoseconds it took to run this test case.
+	//  The number of nanoseconds it took to run this test case.
 	DurationInNanoSeconds *int64
 
-	// The date and time a test case expires. A test case expires 30 days after it is
+	//  The date and time a test case expires. A test case expires 30 days after it is
 	// created. An expired test case is not available to view in CodeBuild.
 	Expired *time.Time
 
-	// A message associated with a test case. For example, an error message or stack
+	//  A message associated with a test case. For example, an error message or stack
 	// trace.
 	Message *string
 
-	// The name of the test case.
+	//  The name of the test case.
 	Name *string
 
-	// A string that is applied to a series of related test cases. CodeBuild generates
-	// the prefix. The prefix depends on the framework used to generate the tests.
+	//  A string that is applied to a series of related test cases. CodeBuild
+	// generates the prefix. The prefix depends on the framework used to generate the
+	// tests.
 	Prefix *string
 
-	// The ARN of the report to which the test case belongs.
+	//  The ARN of the report to which the test case belongs.
 	ReportArn *string
 
-	// The status returned by the test case after it was run. Valid statuses are
+	//  The status returned by the test case after it was run. Valid statuses are
 	// SUCCEEDED , FAILED , ERROR , SKIPPED , and UNKNOWN .
 	Status *string
 
-	// The path to the raw data file that contains the test result.
+	//  The path to the raw data file that contains the test result.
 	TestRawDataPath *string
 
 	noSmithyDocumentSerde
@@ -2032,10 +2401,15 @@ type TestCaseFilter struct {
 
 	// The status used to filter test cases. A TestCaseFilter can have one status.
 	// Valid values are:
+	//
 	//   - SUCCEEDED
+	//
 	//   - FAILED
+	//
 	//   - ERROR
+	//
 	//   - SKIPPED
+	//
 	//   - UNKNOWN
 	Status *string
 
@@ -2045,18 +2419,18 @@ type TestCaseFilter struct {
 // Information about a test report.
 type TestReportSummary struct {
 
-	// The number of nanoseconds it took to run all of the test cases in this report.
+	//  The number of nanoseconds it took to run all of the test cases in this report.
 	//
 	// This member is required.
 	DurationInNanoSeconds *int64
 
-	// A map that contains the number of each type of status returned by the test
+	//  A map that contains the number of each type of status returned by the test
 	// results in this TestReportSummary .
 	//
 	// This member is required.
 	StatusCounts map[string]int32
 
-	// The number of test cases in this TestReportSummary . The total includes
+	//  The number of test cases in this TestReportSummary . The total includes
 	// truncated test cases.
 	//
 	// This member is required.
@@ -2086,8 +2460,9 @@ type Webhook struct {
 
 	// A regular expression used to determine which repository branches are built when
 	// a webhook is triggered. If the name of a branch matches the regular expression,
-	// then it is built. If branchFilter is empty, then all branches are built. It is
-	// recommended that you use filterGroups instead of branchFilter .
+	// then it is built. If branchFilter is empty, then all branches are built.
+	//
+	// It is recommended that you use filterGroups instead of branchFilter .
 	BranchFilter *string
 
 	// Specifies the type of build this webhook will trigger.
@@ -2095,9 +2470,10 @@ type Webhook struct {
 
 	// An array of arrays of WebhookFilter objects used to determine which webhooks
 	// are triggered. At least one WebhookFilter in the array must specify EVENT as
-	// its type . For a build to be triggered, at least one filter group in the
-	// filterGroups array must pass. For a filter group to pass, each of its filters
-	// must pass.
+	// its type .
+	//
+	// For a build to be triggered, at least one filter group in the filterGroups
+	// array must pass. For a filter group to pass, each of its filters must pass.
 	FilterGroups [][]WebhookFilter
 
 	// A timestamp that indicates the last time a repository's secret token was
@@ -2107,8 +2483,9 @@ type Webhook struct {
 	// The CodeBuild endpoint where webhook events are sent.
 	PayloadUrl *string
 
-	// The secret token of the associated repository. A Bitbucket webhook does not
-	// support secret .
+	// The secret token of the associated repository.
+	//
+	// A Bitbucket webhook does not support secret .
 	Secret *string
 
 	// The URL to the webhook.
@@ -2120,68 +2497,100 @@ type Webhook struct {
 // A filter used to determine which webhooks trigger a build.
 type WebhookFilter struct {
 
-	// For a WebHookFilter that uses EVENT type, a comma-separated string that
+	//  For a WebHookFilter that uses EVENT type, a comma-separated string that
 	// specifies one or more events. For example, the webhook filter PUSH,
 	// PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED allows all push, pull request
-	// created, and pull request updated events to trigger a build. For a WebHookFilter
-	// that uses any of the other filter types, a regular expression pattern. For
-	// example, a WebHookFilter that uses HEAD_REF for its type and the pattern
-	// ^refs/heads/ triggers a build when the head reference is a branch with a
-	// reference name refs/heads/branch-name .
+	// created, and pull request updated events to trigger a build.
+	//
+	// For a WebHookFilter that uses any of the other filter types, a regular
+	// expression pattern. For example, a WebHookFilter that uses HEAD_REF for its type
+	// and the pattern ^refs/heads/ triggers a build when the head reference is a
+	// branch with a reference name refs/heads/branch-name .
 	//
 	// This member is required.
 	Pattern *string
 
-	// The type of webhook filter. There are nine webhook filter types: EVENT ,
+	//  The type of webhook filter. There are nine webhook filter types: EVENT ,
 	// ACTOR_ACCOUNT_ID , HEAD_REF , BASE_REF , FILE_PATH , COMMIT_MESSAGE , TAG_NAME ,
 	// RELEASE_NAME , and WORKFLOW_NAME .
+	//
 	//   - EVENT
+	//
 	//   - A webhook event triggers a build when the provided pattern matches one of
 	//   nine event types: PUSH , PULL_REQUEST_CREATED , PULL_REQUEST_UPDATED ,
 	//   PULL_REQUEST_CLOSED , PULL_REQUEST_REOPENED , PULL_REQUEST_MERGED , RELEASED ,
 	//   PRERELEASED , and WORKFLOW_JOB_QUEUED . The EVENT patterns are specified as a
 	//   comma-separated string. For example, PUSH, PULL_REQUEST_CREATED,
 	//   PULL_REQUEST_UPDATED filters all push, pull request created, and pull request
-	//   updated events. The PULL_REQUEST_REOPENED works with GitHub and GitHub
-	//   Enterprise only. The RELEASED , PRERELEASED , and WORKFLOW_JOB_QUEUED work
-	//   with GitHub only.
+	//   updated events.
+	//
+	// The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only. The
+	//   RELEASED , PRERELEASED , and WORKFLOW_JOB_QUEUED work with GitHub only.
+	//
 	//   - ACTOR_ACCOUNT_ID
+	//
 	//   - A webhook event triggers a build when a GitHub, GitHub Enterprise, or
 	//   Bitbucket account ID matches the regular expression pattern .
+	//
 	//   - HEAD_REF
+	//
 	//   - A webhook event triggers a build when the head reference matches the
 	//   regular expression pattern . For example, refs/heads/branch-name and
-	//   refs/tags/tag-name . Works with GitHub and GitHub Enterprise push, GitHub and
-	//   GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request
-	//   events.
+	//   refs/tags/tag-name .
+	//
+	// Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull
+	//   request, Bitbucket push, and Bitbucket pull request events.
+	//
 	//   - BASE_REF
+	//
 	//   - A webhook event triggers a build when the base reference matches the
-	//   regular expression pattern . For example, refs/heads/branch-name . Works with
-	//   pull request events only.
+	//   regular expression pattern . For example, refs/heads/branch-name .
+	//
+	// Works with pull request events only.
+	//
 	//   - FILE_PATH
+	//
 	//   - A webhook triggers a build when the path of a changed file matches the
-	//   regular expression pattern . Works with GitHub and Bitbucket events push and
-	//   pull requests events. Also works with GitHub Enterprise push events, but does
-	//   not work with GitHub Enterprise pull request events.
+	//   regular expression pattern .
+	//
+	// Works with GitHub and Bitbucket events push and pull requests events. Also
+	//   works with GitHub Enterprise push events, but does not work with GitHub
+	//   Enterprise pull request events.
+	//
 	//   - COMMIT_MESSAGE
+	//
 	//   - A webhook triggers a build when the head commit message matches the regular
-	//   expression pattern . Works with GitHub and Bitbucket events push and pull
-	//   requests events. Also works with GitHub Enterprise push events, but does not
-	//   work with GitHub Enterprise pull request events.
+	//   expression pattern .
+	//
+	// Works with GitHub and Bitbucket events push and pull requests events. Also
+	//   works with GitHub Enterprise push events, but does not work with GitHub
+	//   Enterprise pull request events.
+	//
 	//   - TAG_NAME
+	//
 	//   - A webhook triggers a build when the tag name of the release matches the
-	//   regular expression pattern . Works with RELEASED and PRERELEASED events only.
+	//   regular expression pattern .
+	//
+	// Works with RELEASED and PRERELEASED events only.
+	//
 	//   - RELEASE_NAME
+	//
 	//   - A webhook triggers a build when the release name matches the regular
-	//   expression pattern . Works with RELEASED and PRERELEASED events only.
+	//   expression pattern .
+	//
+	// Works with RELEASED and PRERELEASED events only.
+	//
 	//   - WORKFLOW_NAME
+	//
 	//   - A webhook triggers a build when the workflow name matches the regular
-	//   expression pattern . Works with WORKFLOW_JOB_QUEUED events only.
+	//   expression pattern .
+	//
+	// Works with WORKFLOW_JOB_QUEUED events only.
 	//
 	// This member is required.
 	Type WebhookFilterType
 
-	// Used to indicate that the pattern determines which webhook events do not
+	//  Used to indicate that the pattern determines which webhook events do not
 	// trigger a build. If true, then a webhook event that does not match the pattern
 	// triggers a build. If false, then a webhook event that matches the pattern
 	// triggers a build.

@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a SageMaker model from Amazon Fraud Detector. You can remove an Amazon
-// SageMaker model if it is not associated with a detector version. Removing a
-// SageMaker model disconnects it from Amazon Fraud Detector, but the model remains
-// available in SageMaker.
+// Removes a SageMaker model from Amazon Fraud Detector.
+//
+// You can remove an Amazon SageMaker model if it is not associated with a
+// detector version. Removing a SageMaker model disconnects it from Amazon Fraud
+// Detector, but the model remains available in SageMaker.
 func (c *Client) DeleteExternalModel(ctx context.Context, params *DeleteExternalModelInput, optFns ...func(*Options)) (*DeleteExternalModelOutput, error) {
 	if params == nil {
 		params = &DeleteExternalModelInput{}

@@ -3,5 +3,7 @@
 // Package lakeformation provides the API client, operations, and parameter types
 // for AWS Lake Formation.
 //
-// Lake Formation Defines the public endpoint for the Lake Formation service.
+// # Lake Formation
+//
+// Defines the public endpoint for the Lake Formation service.
 package lakeformation

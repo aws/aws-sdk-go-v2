@@ -12,9 +12,10 @@ import (
 )
 
 // Obtains information about which Amazon SNS topics receive status messages from
-// the specified directory. If no input parameters are provided, such as
-// DirectoryId or TopicName, this request describes all of the associations in the
-// account.
+// the specified directory.
+//
+// If no input parameters are provided, such as DirectoryId or TopicName, this
+// request describes all of the associations in the account.
 func (c *Client) DescribeEventTopics(ctx context.Context, params *DescribeEventTopicsInput, optFns ...func(*Options)) (*DescribeEventTopicsOutput, error) {
 	if params == nil {
 		params = &DescribeEventTopicsInput{}
@@ -38,8 +39,9 @@ type DescribeEventTopicsInput struct {
 	DirectoryId *string
 
 	// A list of Amazon SNS topic names for which to obtain the information. If this
-	// member is null, all associations for the specified Directory ID are returned. An
-	// empty list results in an InvalidParameterException being thrown.
+	// member is null, all associations for the specified Directory ID are returned.
+	//
+	// An empty list results in an InvalidParameterException being thrown.
 	TopicNames []string
 
 	noSmithyDocumentSerde

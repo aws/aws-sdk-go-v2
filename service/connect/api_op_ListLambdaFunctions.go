@@ -11,6 +11,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Returns a paginated list of all Lambda functions that display in the dropdown
 // options in the relevant flow blocks.
 func (c *Client) ListLambdaFunctions(ctx context.Context, params *ListLambdaFunctionsInput, optFns ...func(*Options)) (*ListLambdaFunctionsOutput, error) {
@@ -30,8 +31,10 @@ func (c *Client) ListLambdaFunctions(ctx context.Context, params *ListLambdaFunc
 
 type ListLambdaFunctionsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

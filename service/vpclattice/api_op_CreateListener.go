@@ -13,9 +13,10 @@ import (
 
 // Creates a listener for a service. Before you start using your Amazon VPC
 // Lattice service, you must add one or more listeners. A listener is a process
-// that checks for connection requests to your services. For more information, see
-// Listeners (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html) in
-// the Amazon VPC Lattice User Guide.
+// that checks for connection requests to your services. For more information, see [Listeners]
+// in the Amazon VPC Lattice User Guide.
+//
+// [Listeners]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html
 func (c *Client) CreateListener(ctx context.Context, params *CreateListenerInput, optFns ...func(*Options)) (*CreateListenerOutput, error) {
 	if params == nil {
 		params = &CreateListenerInput{}

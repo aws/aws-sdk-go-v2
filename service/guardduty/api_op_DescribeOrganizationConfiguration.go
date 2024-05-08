@@ -12,10 +12,13 @@ import (
 )
 
 // Returns information about the account selected as the delegated administrator
-// for GuardDuty. There might be regional differences because some data sources
-// might not be available in all the Amazon Web Services Regions where GuardDuty is
-// presently supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
-// .
+// for GuardDuty.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see [Regions and endpoints].
+//
+// [Regions and endpoints]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -61,7 +64,9 @@ type DescribeOrganizationConfigurationOutput struct {
 	MemberAccountLimitReached *bool
 
 	// Indicates whether GuardDuty is automatically enabled for accounts added to the
-	// organization. Even though this is still supported, we recommend using
+	// organization.
+	//
+	// Even though this is still supported, we recommend using
 	// AutoEnableOrganizationMembers to achieve the similar results.
 	//
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
@@ -69,21 +74,26 @@ type DescribeOrganizationConfigurationOutput struct {
 
 	// Indicates the auto-enablement configuration of GuardDuty or any of the
 	// corresponding protection plans for the member accounts in the organization.
+	//
 	//   - NEW : Indicates that when a new account joins the organization, they will
 	//   have GuardDuty or any of the corresponding protection plans enabled
 	//   automatically.
+	//
 	//   - ALL : Indicates that all accounts in the organization have GuardDuty and any
 	//   of the corresponding protection plans enabled automatically. This includes NEW
 	//   accounts that join the organization and accounts that may have been suspended or
 	//   removed from the organization in GuardDuty.
+	//
 	//   - NONE : Indicates that GuardDuty or any of the corresponding protection plans
 	//   will not be automatically enabled for any account in the organization. The
 	//   administrator must manage GuardDuty for each account in the organization
-	//   individually. When you update the auto-enable setting from ALL or NEW to NONE
-	//   , this action doesn't disable the corresponding option for your existing
-	//   accounts. This configuration will apply to the new accounts that join the
-	//   organization. After you update the auto-enable settings, no new account will
-	//   have the corresponding option as enabled.
+	//   individually.
+	//
+	// When you update the auto-enable setting from ALL or NEW to NONE , this action
+	//   doesn't disable the corresponding option for your existing accounts. This
+	//   configuration will apply to the new accounts that join the organization. After
+	//   you update the auto-enable settings, no new account will have the corresponding
+	//   option as enabled.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources are enabled automatically for member accounts.

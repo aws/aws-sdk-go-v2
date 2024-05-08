@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified intent. Deleting an intent also deletes the slots
-// associated with the intent.
+// Removes the specified intent.
+//
+// Deleting an intent also deletes the slots associated with the intent.
 func (c *Client) DeleteIntent(ctx context.Context, params *DeleteIntentInput, optFns ...func(*Options)) (*DeleteIntentOutput, error) {
 	if params == nil {
 		params = &DeleteIntentInput{}
@@ -45,9 +46,9 @@ type DeleteIntentInput struct {
 	IntentId *string
 
 	// The identifier of the language and locale where the bot will be deleted. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// string must match one of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string

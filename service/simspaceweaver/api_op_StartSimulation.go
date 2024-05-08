@@ -14,10 +14,11 @@ import (
 
 // Starts a simulation with the given name. You must choose to start your
 // simulation from a schema or from a snapshot. For more information about the
-// schema, see the schema reference (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/schema-reference.html)
-// in the SimSpace Weaver User Guide. For more information about snapshots, see
-// Snapshots (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html)
-// in the SimSpace Weaver User Guide.
+// schema, see the [schema reference]in the SimSpace Weaver User Guide. For more information about
+// snapshots, see [Snapshots]in the SimSpace Weaver User Guide.
+//
+// [schema reference]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/schema-reference.html
+// [Snapshots]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html
 func (c *Client) StartSimulation(ctx context.Context, params *StartSimulationInput, optFns ...func(*Options)) (*StartSimulationOutput, error) {
 	if params == nil {
 		params = &StartSimulationInput{}
@@ -42,10 +43,11 @@ type StartSimulationInput struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that the simulation assumes to perform actions. For more information about ARNs,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference. For more information about IAM
-	// roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-	// in the Identity and Access Management User Guide.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference. For more information about
+	// IAM roles, see [IAM roles]in the Identity and Access Management User Guide.
+	//
+	// [IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleArn *string
@@ -66,24 +68,32 @@ type StartSimulationInput struct {
 	MaximumDuration *string
 
 	// The location of the simulation schema in Amazon Simple Storage Service (Amazon
-	// S3). For more information about Amazon S3, see the Amazon Simple Storage
-	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
-	// . Provide a SchemaS3Location to start your simulation from a schema. If you
-	// provide a SchemaS3Location then you can't provide a SnapshotS3Location .
+	// S3). For more information about Amazon S3, see the [Amazon Simple Storage Service User Guide].
+	//
+	// Provide a SchemaS3Location to start your simulation from a schema.
+	//
+	// If you provide a SchemaS3Location then you can't provide a SnapshotS3Location .
+	//
+	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
 	SchemaS3Location *types.S3Location
 
 	// The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon
-	// S3). For more information about Amazon S3, see the Amazon Simple Storage
-	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
-	// . Provide a SnapshotS3Location to start your simulation from a snapshot. The
-	// Amazon S3 bucket must be in the same Amazon Web Services Region as the
-	// simulation. If you provide a SnapshotS3Location then you can't provide a
-	// SchemaS3Location .
+	// S3). For more information about Amazon S3, see the [Amazon Simple Storage Service User Guide].
+	//
+	// Provide a SnapshotS3Location to start your simulation from a snapshot.
+	//
+	// The Amazon S3 bucket must be in the same Amazon Web Services Region as the
+	// simulation.
+	//
+	// If you provide a SnapshotS3Location then you can't provide a SchemaS3Location .
+	//
+	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
 	SnapshotS3Location *types.S3Location
 
-	// A list of tags for the simulation. For more information about tags, see Tagging
-	// Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in the Amazon Web Services General Reference.
+	// A list of tags for the simulation. For more information about tags, see [Tagging Amazon Web Services resources] in the
+	// Amazon Web Services General Reference.
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -92,8 +102,9 @@ type StartSimulationInput struct {
 type StartSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation. For more information about
-	// ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The time when the simulation was created, expressed as the number of seconds

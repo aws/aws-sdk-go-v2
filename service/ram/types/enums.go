@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for PermissionFeatureSet. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionFeatureSet) Values() []PermissionFeatureSet {
 	return []PermissionFeatureSet{
 		"CREATED_FROM_POLICY",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for PermissionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionStatus) Values() []PermissionStatus {
 	return []PermissionStatus{
 		"ATTACHABLE",
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for PermissionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionType) Values() []PermissionType {
 	return []PermissionType{
 		"CUSTOMER_MANAGED",
@@ -72,8 +75,9 @@ const (
 )
 
 // Values returns all known values for PermissionTypeFilter. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionTypeFilter) Values() []PermissionTypeFilter {
 	return []PermissionTypeFilter{
 		"ALL",
@@ -93,8 +97,9 @@ const (
 
 // Values returns all known values for ReplacePermissionAssociationsWorkStatus.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplacePermissionAssociationsWorkStatus) Values() []ReplacePermissionAssociationsWorkStatus {
 	return []ReplacePermissionAssociationsWorkStatus{
 		"IN_PROGRESS",
@@ -112,8 +117,9 @@ const (
 )
 
 // Values returns all known values for ResourceOwner. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceOwner) Values() []ResourceOwner {
 	return []ResourceOwner{
 		"SELF",
@@ -130,8 +136,9 @@ const (
 )
 
 // Values returns all known values for ResourceRegionScope. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceRegionScope) Values() []ResourceRegionScope {
 	return []ResourceRegionScope{
 		"REGIONAL",
@@ -150,6 +157,7 @@ const (
 
 // Values returns all known values for ResourceRegionScopeFilter. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceRegionScopeFilter) Values() []ResourceRegionScopeFilter {
 	return []ResourceRegionScopeFilter{
@@ -172,8 +180,9 @@ const (
 
 // Values returns all known values for ResourceShareAssociationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceShareAssociationStatus) Values() []ResourceShareAssociationStatus {
 	return []ResourceShareAssociationStatus{
 		"ASSOCIATING",
@@ -194,8 +203,9 @@ const (
 
 // Values returns all known values for ResourceShareAssociationType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceShareAssociationType) Values() []ResourceShareAssociationType {
 	return []ResourceShareAssociationType{
 		"PRINCIPAL",
@@ -213,8 +223,9 @@ const (
 )
 
 // Values returns all known values for ResourceShareFeatureSet. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceShareFeatureSet) Values() []ResourceShareFeatureSet {
 	return []ResourceShareFeatureSet{
 		"CREATED_FROM_POLICY",
@@ -235,8 +246,9 @@ const (
 
 // Values returns all known values for ResourceShareInvitationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceShareInvitationStatus) Values() []ResourceShareInvitationStatus {
 	return []ResourceShareInvitationStatus{
 		"PENDING",
@@ -258,8 +270,9 @@ const (
 )
 
 // Values returns all known values for ResourceShareStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceShareStatus) Values() []ResourceShareStatus {
 	return []ResourceShareStatus{
 		"PENDING",
@@ -282,8 +295,9 @@ const (
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceStatus) Values() []ResourceStatus {
 	return []ResourceStatus{
 		"AVAILABLE",

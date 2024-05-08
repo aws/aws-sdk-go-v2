@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for ApplicationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationStatus) Values() []ApplicationStatus {
 	return []ApplicationStatus{
 		"NOT_STARTED",
@@ -39,8 +40,9 @@ const (
 )
 
 // Values returns all known values for ResourceAttributeType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceAttributeType) Values() []ResourceAttributeType {
 	return []ResourceAttributeType{
 		"IPV4_ADDRESS",
@@ -67,8 +69,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"NOT_STARTED",

@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a member from a channel's ban list. The x-amz-chime-bearer request
-// header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that
-// makes the API call as the value in the header.
+// Removes a member from a channel's ban list.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
 func (c *Client) DeleteChannelBan(ctx context.Context, params *DeleteChannelBanInput, optFns ...func(*Options)) (*DeleteChannelBanOutput, error) {
 	if params == nil {
 		params = &DeleteChannelBanInput{}

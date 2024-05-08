@@ -10,7 +10,13 @@
 // accounts, then you can share your resources with your entire organization or to
 // organizational units (OUs). For supported resource types, you can also share
 // resources with individual Identity and Access Management (IAM) roles and users.
+//
 // To learn more about RAM, see the following resources:
-//   - Resource Access Manager product page (http://aws.amazon.com/ram)
-//   - Resource Access Manager User Guide (https://docs.aws.amazon.com/ram/latest/userguide/)
+//
+// [Resource Access Manager product page]
+//
+// [Resource Access Manager User Guide]
+//
+// [Resource Access Manager product page]: http://aws.amazon.com/ram
+// [Resource Access Manager User Guide]: https://docs.aws.amazon.com/ram/latest/userguide/
 package ram

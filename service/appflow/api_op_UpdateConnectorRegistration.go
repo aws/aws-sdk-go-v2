@@ -13,8 +13,10 @@ import (
 
 // Updates a custom connector that you've previously registered. This operation
 // updates the connector with one of the following:
+//
 //   - The latest version of the AWS Lambda function that's assigned to the
 //     connector
+//
 //   - A new AWS Lambda function that you specify
 func (c *Client) UpdateConnectorRegistration(ctx context.Context, params *UpdateConnectorRegistrationInput, optFns ...func(*Options)) (*UpdateConnectorRegistrationOutput, error) {
 	if params == nil {
@@ -42,13 +44,16 @@ type UpdateConnectorRegistrationInput struct {
 	// The clientToken parameter is an idempotency token. It ensures that your
 	// UpdateConnectorRegistration request completes only once. You choose the value to
 	// pass. For example, if you don't receive a response from your request, you can
-	// safely retry the request with the same clientToken parameter value. If you omit
-	// a clientToken value, the Amazon Web Services SDK that you are using inserts a
-	// value for you. This way, the SDK can safely retry requests multiple times after
-	// a network error. You must provide your own value for other use cases. If you
-	// specify input parameters that differ from your first request, an error occurs.
-	// If you use a different value for clientToken , Amazon AppFlow considers it a new
-	// call to UpdateConnectorRegistration . The token is active for 8 hours.
+	// safely retry the request with the same clientToken parameter value.
+	//
+	// If you omit a clientToken value, the Amazon Web Services SDK that you are using
+	// inserts a value for you. This way, the SDK can safely retry requests multiple
+	// times after a network error. You must provide your own value for other use
+	// cases.
+	//
+	// If you specify input parameters that differ from your first request, an error
+	// occurs. If you use a different value for clientToken , Amazon AppFlow considers
+	// it a new call to UpdateConnectorRegistration . The token is active for 8 hours.
 	ClientToken *string
 
 	// Contains information about the configuration of the connector being registered.

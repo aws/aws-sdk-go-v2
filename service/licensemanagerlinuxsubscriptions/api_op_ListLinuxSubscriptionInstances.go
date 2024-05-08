@@ -36,18 +36,31 @@ type ListLinuxSubscriptionInstancesInput struct {
 	// match one or more sets of key-value pairs that you specify. For example, you can
 	// filter by the name of AmiID with an optional operator to see subscriptions that
 	// match, partially match, or don't match a certain Amazon Machine Image (AMI) ID.
+	//
 	// The valid names for this filter are:
+	//
 	//   - AmiID
+	//
 	//   - InstanceID
+	//
 	//   - AccountID
+	//
 	//   - Status
+	//
 	//   - Region
+	//
 	//   - UsageOperation
+	//
 	//   - ProductCode
+	//
 	//   - InstanceType
+	//
 	// The valid Operators for this filter are:
+	//
 	//   - contains
+	//
 	//   - equals
+	//
 	//   - Notequal
 	Filters []types.Filter
 

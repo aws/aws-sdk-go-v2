@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the number of days before the AppInstanceUser is automatically deleted. A
-// background process deletes expired AppInstanceUsers within 6 hours of
-// expiration. Actual deletion times may vary. Expired AppInstanceUsers that have
-// not yet been deleted appear as active, and you can update their expiration
-// settings. The system honors the new settings.
+// Sets the number of days before the AppInstanceUser is automatically deleted.
+//
+// A background process deletes expired AppInstanceUsers within 6 hours of
+// expiration. Actual deletion times may vary.
+//
+// Expired AppInstanceUsers that have not yet been deleted appear as active, and
+// you can update their expiration settings. The system honors the new settings.
 func (c *Client) PutAppInstanceUserExpirationSettings(ctx context.Context, params *PutAppInstanceUserExpirationSettingsInput, optFns ...func(*Options)) (*PutAppInstanceUserExpirationSettingsOutput, error) {
 	if params == nil {
 		params = &PutAppInstanceUserExpirationSettingsInput{}

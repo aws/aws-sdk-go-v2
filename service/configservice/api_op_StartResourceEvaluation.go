@@ -16,14 +16,19 @@ import (
 // it for evaluation purposes. Config recommends using an evaluation context. It
 // runs an execution against the resource details with all of the Config rules in
 // your account that match with the specified proactive mode and resource type.
+//
 // Ensure you have the cloudformation:DescribeType role setup to validate the
-// resource type schema. You can find the Resource type schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
-// in "Amazon Web Services public extensions" within the CloudFormation registry or
-// with the following CLI commmand: aws cloudformation describe-type --type-name
-// "AWS::S3::Bucket" --type RESOURCE . For more information, see Managing
-// extensions through the CloudFormation registry (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view)
-// and Amazon Web Services resource and property types reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-// in the CloudFormation User Guide.
+// resource type schema.
+//
+// You can find the [Resource type schema] in "Amazon Web Services public extensions" within the
+// CloudFormation registry or with the following CLI commmand: aws cloudformation
+// describe-type --type-name "AWS::S3::Bucket" --type RESOURCE .
+//
+// For more information, see [Managing extensions through the CloudFormation registry] and [Amazon Web Services resource and property types reference] in the CloudFormation User Guide.
+//
+// [Resource type schema]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+// [Amazon Web Services resource and property types reference]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+// [Managing extensions through the CloudFormation registry]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view
 func (c *Client) StartResourceEvaluation(ctx context.Context, params *StartResourceEvaluationInput, optFns ...func(*Options)) (*StartResourceEvaluationOutput, error) {
 	if params == nil {
 		params = &StartResourceEvaluationInput{}
@@ -54,12 +59,14 @@ type StartResourceEvaluationInput struct {
 
 	// A client token is a unique, case-sensitive string of up to 64 ASCII characters.
 	// To make an idempotent API request using one of these actions, specify a client
-	// token in the request. Avoid reusing the same client token for other API
-	// requests. If you retry a request that completed successfully using the same
-	// client token and the same parameters, the retry succeeds without performing any
-	// further actions. If you retry a successful request using the same client token,
-	// but one or more of the parameters are different, other than the Region or
-	// Availability Zone, the retry fails with an IdempotentParameterMismatch error.
+	// token in the request.
+	//
+	// Avoid reusing the same client token for other API requests. If you retry a
+	// request that completed successfully using the same client token and the same
+	// parameters, the retry succeeds without performing any further actions. If you
+	// retry a successful request using the same client token, but one or more of the
+	// parameters are different, other than the Region or Availability Zone, the retry
+	// fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
 	// Returns an EvaluationContext object.

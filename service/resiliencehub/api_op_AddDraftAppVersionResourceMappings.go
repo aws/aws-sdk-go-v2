@@ -15,8 +15,9 @@ import (
 // assessment, Resilience Hub will use these resource-maps to resolve the latest
 // physical ID for each resource in the application template. For more information
 // about different types of resources suported by Resilience Hub and how to add
-// them in your application, see Step 2: How is your application managed? (https://docs.aws.amazon.com/resilience-hub/latest/userguide/how-app-manage.html)
-// in the Resilience Hub User Guide.
+// them in your application, see [Step 2: How is your application managed?]in the Resilience Hub User Guide.
+//
+// [Step 2: How is your application managed?]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/how-app-manage.html
 func (c *Client) AddDraftAppVersionResourceMappings(ctx context.Context, params *AddDraftAppVersionResourceMappingsInput, optFns ...func(*Options)) (*AddDraftAppVersionResourceMappingsOutput, error) {
 	if params == nil {
 		params = &AddDraftAppVersionResourceMappingsInput{}
@@ -36,8 +37,10 @@ type AddDraftAppVersionResourceMappingsInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -58,8 +61,10 @@ type AddDraftAppVersionResourceMappingsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string

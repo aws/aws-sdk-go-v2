@@ -14,8 +14,9 @@ import (
 // Amazon Web Services account. Repository names are limited to 100 alphanumeric,
 // dash, and underscore characters, and cannot include certain characters. The
 // suffix .git is prohibited. For more information about the limits on repository
-// names, see Quotas (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-// in the CodeCommit User Guide.
+// names, see [Quotas]in the CodeCommit User Guide.
+//
+// [Quotas]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
 func (c *Client) UpdateRepositoryName(ctx context.Context, params *UpdateRepositoryNameInput, optFns ...func(*Options)) (*UpdateRepositoryNameOutput, error) {
 	if params == nil {
 		params = &UpdateRepositoryNameInput{}

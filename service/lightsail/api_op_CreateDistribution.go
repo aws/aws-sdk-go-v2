@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Lightsail content delivery network (CDN) distribution. A
-// distribution is a globally distributed network of caching servers that improve
-// the performance of your website or web application hosted on a Lightsail
-// instance. For more information, see Content delivery networks in Amazon
-// Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions)
-// .
+// Creates an Amazon Lightsail content delivery network (CDN) distribution.
+//
+// A distribution is a globally distributed network of caching servers that
+// improve the performance of your website or web application hosted on a Lightsail
+// instance. For more information, see [Content delivery networks in Amazon Lightsail].
+//
+// [Content delivery networks in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions
 func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistributionInput, optFns ...func(*Options)) (*CreateDistributionOutput, error) {
 	if params == nil {
 		params = &CreateDistributionInput{}
@@ -34,10 +35,13 @@ func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistribut
 
 type CreateDistributionInput struct {
 
-	// The bundle ID to use for the distribution. A distribution bundle describes the
-	// specifications of your distribution, such as the monthly cost and monthly
-	// network transfer quota. Use the GetDistributionBundles action to get a list of
-	// distribution bundle IDs that you can specify.
+	// The bundle ID to use for the distribution.
+	//
+	// A distribution bundle describes the specifications of your distribution, such
+	// as the monthly cost and monthly network transfer quota.
+	//
+	// Use the GetDistributionBundles action to get a list of distribution bundle IDs
+	// that you can specify.
 	//
 	// This member is required.
 	BundleId *string
@@ -53,8 +57,9 @@ type CreateDistributionInput struct {
 	DistributionName *string
 
 	// An object that describes the origin resource for the distribution, such as a
-	// Lightsail instance, bucket, or load balancer. The distribution pulls, caches,
-	// and serves content from the origin.
+	// Lightsail instance, bucket, or load balancer.
+	//
+	// The distribution pulls, caches, and serves content from the origin.
 	//
 	// This member is required.
 	Origin *types.InputOrigin
@@ -66,17 +71,23 @@ type CreateDistributionInput struct {
 	// distribution.
 	CacheBehaviors []types.CacheBehaviorPerPath
 
-	// The name of the SSL/TLS certificate that you want to attach to the
-	// distribution. Use the GetCertificates (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html)
-	// action to get a list of certificate names that you can specify.
+	// The name of the SSL/TLS certificate that you want to attach to the distribution.
+	//
+	// Use the [GetCertificates] action to get a list of certificate names that you can specify.
+	//
+	// [GetCertificates]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html
 	CertificateName *string
 
-	// The IP address type for the distribution. The possible values are ipv4 for IPv4
-	// only, and dualstack for IPv4 and IPv6. The default value is dualstack .
+	// The IP address type for the distribution.
+	//
+	// The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6.
+	//
+	// The default value is dualstack .
 	IpAddressType types.IpAddressType
 
-	// The tag keys and optional values to add to the distribution during create. Use
-	// the TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the distribution during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	// The minimum TLS protocol version for the SSL/TLS certificate.

@@ -10,10 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the supported fields for a specific software package. Requires
-// permission to access the UpdatePackage (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// and GetIndexingConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// actions.
+// Updates the supported fields for a specific software package.
+//
+// Requires permission to access the [UpdatePackage] and [GetIndexingConfiguration] actions.
+//
+// [UpdatePackage]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [GetIndexingConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, optFns ...func(*Options)) (*UpdatePackageOutput, error) {
 	if params == nil {
 		params = &UpdatePackageInput{}
@@ -41,17 +43,20 @@ type UpdatePackageInput struct {
 	// request is required.
 	ClientToken *string
 
-	// The name of the default package version. Note: You cannot name a defaultVersion
-	// and set unsetDefaultVersion equal to true at the same time.
+	// The name of the default package version.
+	//
+	// Note: You cannot name a defaultVersion and set unsetDefaultVersion equal to true
+	// at the same time.
 	DefaultVersionName *string
 
 	// The package description.
 	Description *string
 
 	// Indicates whether you want to remove the named default package version from the
-	// software package. Set as true to remove the default package version. Note: You
-	// cannot name a defaultVersion and set unsetDefaultVersion equal to true at the
-	// same time.
+	// software package. Set as true to remove the default package version.
+	//
+	// Note: You cannot name a defaultVersion and set unsetDefaultVersion equal to true
+	// at the same time.
 	UnsetDefaultVersion *bool
 
 	noSmithyDocumentSerde

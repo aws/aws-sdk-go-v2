@@ -37,13 +37,16 @@ type StartWebRTCContactInput struct {
 	// Choose the flow. On the flow page, under the name of the flow, choose Show
 	// additional flow information. The ContactFlowId is the last part of the ARN,
 	// shown here in bold:
+	//
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	//
 	// This member is required.
 	ContactFlowId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -59,17 +62,20 @@ type StartWebRTCContactInput struct {
 
 	// A custom key-value pair using an attribute map. The attributes are standard
 	// Amazon Connect attributes, and can be accessed in flows just like any other
-	// contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value
-	// pairs per contact. Attribute keys can include only alphanumeric, -, and _
-	// characters.
+	// contact attributes.
+	//
+	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
+	// Attribute keys can include only alphanumeric, -, and _ characters.
 	Attributes map[string]string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// . The token is valid for 7 days after creation. If a contact is already started,
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// The token is valid for 7 days after creation. If a contact is already started,
 	// the contact ID is returned.
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// A description of the task that is shown to an agent in the Contact Control
@@ -102,9 +108,10 @@ type StartWebRTCContactOutput struct {
 	// participant is the same throughout the contact lifecycle.
 	ParticipantId *string
 
-	// The token used by the contact participant to call the
-	// CreateParticipantConnection (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
-	// API. The participant token is valid for the lifetime of a contact participant.
+	// The token used by the contact participant to call the [CreateParticipantConnection] API. The participant
+	// token is valid for the lifetime of a contact participant.
+	//
+	// [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
 	ParticipantToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,14 +13,23 @@ import (
 
 // Gets definitions of the specified entities. Uses the latest version of the
 // user's namespace by default. This API returns the following TDM entities.
+//
 //   - Properties
+//
 //   - States
+//
 //   - Events
+//
 //   - Actions
+//
 //   - Capabilities
+//
 //   - Mappings
+//
 //   - Devices
+//
 //   - Device Models
+//
 //   - Services
 //
 // This action doesn't return definitions for systems, flows, and deployments.
@@ -43,8 +52,11 @@ func (c *Client) GetEntities(ctx context.Context, params *GetEntitiesInput, optF
 
 type GetEntitiesInput struct {
 
-	// An array of entity IDs. The IDs should be in the following format.
-	// urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
+	// An array of entity IDs.
+	//
+	// The IDs should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
 	//
 	// This member is required.
 	Ids []string

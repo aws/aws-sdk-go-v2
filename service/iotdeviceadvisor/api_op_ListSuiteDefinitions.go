@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Device Advisor test suites you have created. Requires permission to
-// access the ListSuiteDefinitions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Lists the Device Advisor test suites you have created.
+//
+// Requires permission to access the [ListSuiteDefinitions] action.
+//
+// [ListSuiteDefinitions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListSuiteDefinitions(ctx context.Context, params *ListSuiteDefinitionsInput, optFns ...func(*Options)) (*ListSuiteDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListSuiteDefinitionsInput{}

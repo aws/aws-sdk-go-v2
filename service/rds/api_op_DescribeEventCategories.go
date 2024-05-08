@@ -13,9 +13,10 @@ import (
 
 // Displays a list of categories for all event source types, or, if specified, for
 // a specified source type. You can also see this list in the "Amazon RDS event
-// categories and event messages" section of the Amazon RDS User Guide  (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html)
-// or the Amazon Aurora User Guide  (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Messages.html)
-// .
+// categories and event messages" section of the [Amazon RDS User Guide]or the [Amazon Aurora User Guide].
+//
+// [Amazon RDS User Guide]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.Messages.html
+// [Amazon Aurora User Guide]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Events.Messages.html
 func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEventCategoriesInput, optFns ...func(*Options)) (*DescribeEventCategoriesOutput, error) {
 	if params == nil {
 		params = &DescribeEventCategoriesInput{}
@@ -37,8 +38,10 @@ type DescribeEventCategoriesInput struct {
 	Filters []types.Filter
 
 	// The type of source that is generating the events. For RDS Proxy events, specify
-	// db-proxy . Valid Values: db-instance | db-cluster | db-parameter-group |
-	// db-security-group | db-snapshot | db-cluster-snapshot | db-proxy
+	// db-proxy .
+	//
+	// Valid Values: db-instance | db-cluster | db-parameter-group | db-security-group
+	// | db-snapshot | db-cluster-snapshot | db-proxy
 	SourceType *string
 
 	noSmithyDocumentSerde

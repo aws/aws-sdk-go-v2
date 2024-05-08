@@ -11,8 +11,10 @@ import (
 )
 
 // Deletes an evaluation form in the specified Amazon Connect instance.
+//
 //   - If the version property is provided, only the specified version of the
 //     evaluation form is deleted.
+//
 //   - If no version is provided, then the full form (all versions) is deleted.
 func (c *Client) DeleteEvaluationForm(ctx context.Context, params *DeleteEvaluationFormInput, optFns ...func(*Options)) (*DeleteEvaluationFormOutput, error) {
 	if params == nil {
@@ -36,8 +38,10 @@ type DeleteEvaluationFormInput struct {
 	// This member is required.
 	EvaluationFormId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

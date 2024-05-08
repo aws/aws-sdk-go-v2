@@ -16,8 +16,9 @@ import (
 // aggregation group (LAG) or interconnect. If the target interconnect or LAG has
 // an existing hosted connection with a conflicting VLAN number or IP address, the
 // operation fails. This action temporarily interrupts the hosted connection's
-// connectivity to Amazon Web Services as it is being migrated. Intended for use by
-// Direct Connect Partners only.
+// connectivity to Amazon Web Services as it is being migrated.
+//
+// Intended for use by Direct Connect Partners only.
 func (c *Client) AssociateHostedConnection(ctx context.Context, params *AssociateHostedConnectionInput, optFns ...func(*Options)) (*AssociateHostedConnectionOutput, error) {
 	if params == nil {
 		params = &AssociateHostedConnectionInput{}
@@ -73,24 +74,34 @@ type AssociateHostedConnectionOutput struct {
 	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
+	//
 	//   - ordering : The initial state of a hosted connection provisioned on an
 	//   interconnect. The connection stays in the ordering state until the owner of the
 	//   hosted connection confirms or declines the connection order.
+	//
 	//   - requested : The initial state of a standard connection. The connection stays
 	//   in the requested state until the Letter of Authorization (LOA) is sent to the
 	//   customer.
+	//
 	//   - pending : The connection has been approved and is being initialized.
+	//
 	//   - available : The network link is up and the connection is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The connection is being deleted.
+	//
 	//   - deleted : The connection has been deleted.
+	//
 	//   - rejected : A hosted connection in the ordering state enters the rejected
 	//   state if it is deleted by the customer.
+	//
 	//   - unknown : The state of the connection is not available.
 	ConnectionState types.ConnectionState
 
-	// The MAC Security (MACsec) connection encryption mode. The valid values are
-	// no_encrypt , should_encrypt , and must_encrypt .
+	// The MAC Security (MACsec) connection encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the connection supports a secondary BGP peer in the same
@@ -121,9 +132,10 @@ type AssociateHostedConnectionOutput struct {
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
-	// The MAC Security (MACsec) port link status of the connection. The valid values
-	// are Encryption Up , which means that there is an active Connection Key Name, or
-	// Encryption Down .
+	// The MAC Security (MACsec) port link status of the connection.
+	//
+	// The valid values are Encryption Up , which means that there is an active
+	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.

@@ -12,8 +12,9 @@ import (
 )
 
 // Use this action to inspect your lineage and discover relationships between
-// entities. For more information, see Querying Lineage Entities (https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html)
-// in the Amazon SageMaker Developer Guide.
+// entities. For more information, see [Querying Lineage Entities]in the Amazon SageMaker Developer Guide.
+//
+// [Querying Lineage Entities]: https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html
 func (c *Client) QueryLineage(ctx context.Context, params *QueryLineageInput, optFns ...func(*Options)) (*QueryLineageOutput, error) {
 	if params == nil {
 		params = &QueryLineageInput{}
@@ -37,18 +38,24 @@ type QueryLineageInput struct {
 
 	// A set of filtering parameters that allow you to specify which entities should
 	// be returned.
+	//
 	//   - Properties - Key-value pairs to match on the lineage entities' properties.
+	//
 	//   - LineageTypes - A set of lineage entity types to match on. For example:
 	//   TrialComponent , Artifact , or Context .
+	//
 	//   - CreatedBefore - Filter entities created before this date.
+	//
 	//   - ModifiedBefore - Filter entities modified before this date.
+	//
 	//   - ModifiedAfter - Filter entities modified after this date.
 	Filters *types.QueryFilters
 
-	// Setting this value to True retrieves not only the entities of interest but also
-	// the Associations (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html)
-	// and lineage entities on the path. Set to False to only return lineage entities
-	// that match your query.
+	//  Setting this value to True retrieves not only the entities of interest but
+	// also the [Associations]and lineage entities on the path. Set to False to only return lineage
+	// entities that match your query.
+	//
+	// [Associations]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html
 	IncludeEdges *bool
 
 	// The maximum depth in lineage relationships from the StartArns that are

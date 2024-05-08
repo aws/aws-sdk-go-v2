@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the resource policy that is set on a repository. After a resource
+//	Deletes the resource policy that is set on a repository. After a resource
+//
 // policy is deleted, the permissions allowed and denied by the deleted policy are
-// removed. The effect of deleting a resource policy might not be immediate. Use
-// DeleteRepositoryPermissionsPolicy with caution. After a policy is deleted,
+// removed. The effect of deleting a resource policy might not be immediate.
+//
+// Use DeleteRepositoryPermissionsPolicy with caution. After a policy is deleted,
 // Amazon Web Services users, roles, and accounts lose permissions to perform the
 // repository actions granted by the deleted policy.
 func (c *Client) DeleteRepositoryPermissionsPolicy(ctx context.Context, params *DeleteRepositoryPermissionsPolicyInput, optFns ...func(*Options)) (*DeleteRepositoryPermissionsPolicyOutput, error) {
@@ -34,23 +36,23 @@ func (c *Client) DeleteRepositoryPermissionsPolicy(ctx context.Context, params *
 
 type DeleteRepositoryPermissionsPolicyInput struct {
 
-	// The name of the domain that contains the repository associated with the
+	//  The name of the domain that contains the repository associated with the
 	// resource policy to be deleted.
 	//
 	// This member is required.
 	Domain *string
 
-	// The name of the repository that is associated with the resource policy to be
+	//  The name of the repository that is associated with the resource policy to be
 	// deleted
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The revision of the repository's resource policy to be deleted. This revision
+	//  The revision of the repository's resource policy to be deleted. This revision
 	// is used for optimistic locking, which prevents others from accidentally
 	// overwriting your changes to the repository's resource policy.
 	PolicyRevision *string
@@ -60,7 +62,7 @@ type DeleteRepositoryPermissionsPolicyInput struct {
 
 type DeleteRepositoryPermissionsPolicyOutput struct {
 
-	// Information about the deleted policy after processing the request.
+	//  Information about the deleted policy after processing the request.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.

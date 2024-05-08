@@ -33,7 +33,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// There was a conflict when processing the request (for example, a flow with the
+//	There was a conflict when processing the request (for example, a flow with the
+//
 // given name already exists within the account. Check for conflicting resource
 // names and try again.
 type ConflictException struct {
@@ -113,7 +114,8 @@ func (e *ConnectorServerException) ErrorCode() string {
 }
 func (e *ConnectorServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An internal service error occurred during the processing of your request. Try
+//	An internal service error occurred during the processing of your request. Try
+//
 // again later.
 type InternalServerException struct {
 	Message *string
@@ -140,7 +142,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resource specified in the request (such as the source or destination
+//	The resource specified in the request (such as the source or destination
+//
 // connector profile) is not found.
 type ResourceNotFoundException struct {
 	Message *string
@@ -167,7 +170,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request would cause a service quota (such as the number of flows) to be
+//	The request would cause a service quota (such as the number of flows) to be
+//
 // exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string

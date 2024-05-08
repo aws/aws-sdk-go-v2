@@ -31,7 +31,7 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 
 type DeleteApplicationInput struct {
 
-	// The name, ID, or ARN of the application.
+	//  The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string

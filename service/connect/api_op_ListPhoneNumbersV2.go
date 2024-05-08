@@ -14,13 +14,18 @@ import (
 // Lists phone numbers claimed to your Amazon Connect instance or traffic
 // distribution group. If the provided TargetArn is a traffic distribution group,
 // you can call this API in both Amazon Web Services Regions associated with
-// traffic distribution group. For more information about phone numbers, see Set
-// Up Phone Numbers for Your Contact Center (https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html)
-// in the Amazon Connect Administrator Guide.
+// traffic distribution group.
+//
+// For more information about phone numbers, see [Set Up Phone Numbers for Your Contact Center] in the Amazon Connect
+// Administrator Guide.
+//
 //   - When given an instance ARN, ListPhoneNumbersV2 returns only the phone
 //     numbers claimed to the instance.
+//
 //   - When given a traffic distribution group ARN ListPhoneNumbersV2 returns only
 //     the phone numbers claimed to the traffic distribution group.
+//
+// [Set Up Phone Numbers for Your Contact Center]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
 func (c *Client) ListPhoneNumbersV2(ctx context.Context, params *ListPhoneNumbersV2Input, optFns ...func(*Options)) (*ListPhoneNumbersV2Output, error) {
 	if params == nil {
 		params = &ListPhoneNumbersV2Input{}
@@ -39,11 +44,12 @@ func (c *Client) ListPhoneNumbersV2(ctx context.Context, params *ListPhoneNumber
 type ListPhoneNumbersV2Input struct {
 
 	// The identifier of the Amazon Connect instance that phone numbers are claimed
-	// to. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance. If both TargetArn and
-	// InstanceId are not provided, this API lists numbers claimed to all the Amazon
-	// Connect instances belonging to your account in the same AWS Region as the
+	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance. If both TargetArn
+	// and InstanceId are not provided, this API lists numbers claimed to all the
+	// Amazon Connect instances belonging to your account in the same AWS Region as the
 	// request.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string
 
 	// The maximum number of results to return per page.

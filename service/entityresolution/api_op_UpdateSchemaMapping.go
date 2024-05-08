@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a schema mapping. A schema is immutable if it is being used by a
-// workflow. Therefore, you can't update a schema mapping if it's associated with a
-// workflow.
+// Updates a schema mapping.
+//
+// A schema is immutable if it is being used by a workflow. Therefore, you can't
+// update a schema mapping if it's associated with a workflow.
 func (c *Client) UpdateSchemaMapping(ctx context.Context, params *UpdateSchemaMappingInput, optFns ...func(*Options)) (*UpdateSchemaMappingOutput, error) {
 	if params == nil {
 		params = &UpdateSchemaMappingInput{}

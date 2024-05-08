@@ -26,9 +26,10 @@ type BandwidthRateLimitInterval struct {
 	// This member is required.
 	EndHourOfDay *int32
 
-	// The minute of the hour to end the bandwidth rate limit interval. The bandwidth
-	// rate limit interval ends at the end of the minute. To end an interval at the end
-	// of an hour, use the value 59 .
+	// The minute of the hour to end the bandwidth rate limit interval.
+	//
+	// The bandwidth rate limit interval ends at the end of the minute. To end an
+	// interval at the end of an hour, use the value 59 .
 	//
 	// This member is required.
 	EndMinuteOfHour *int32
@@ -47,7 +48,9 @@ type BandwidthRateLimitInterval struct {
 
 	// The average upload rate limit component of the bandwidth rate limit interval,
 	// in bits per second. This field does not appear in the response if the upload
-	// rate limit is not set. For Backup Gateway, the minimum value is (Value) .
+	// rate limit is not set.
+	//
+	// For Backup Gateway, the minimum value is (Value) .
 	AverageUploadRateLimitInBitsPerSec *int64
 
 	noSmithyDocumentSerde
@@ -113,9 +116,10 @@ type GatewayDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the hypervisor's permissions to which the gateway will connect. A
-// hypervisor is hardware, software, or firmware that creates and manages virtual
-// machines, and allocates resources to them.
+// Represents the hypervisor's permissions to which the gateway will connect.
+//
+// A hypervisor is hardware, software, or firmware that creates and manages
+// virtual machines, and allocates resources to them.
 type Hypervisor struct {
 
 	// The server host of the hypervisor. This can be either an IP address or a
@@ -169,8 +173,9 @@ type HypervisorDetails struct {
 	// This is the name of the specified hypervisor.
 	Name *string
 
-	// This is the current state of the specified hypervisor. The possible states are
-	// PENDING , ONLINE , OFFLINE , or ERROR .
+	// This is the current state of the specified hypervisor.
+	//
+	// The possible states are PENDING , ONLINE , OFFLINE , or ERROR .
 	State HypervisorState
 
 	noSmithyDocumentSerde
@@ -281,10 +286,12 @@ type VirtualMachineDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A VMware tag is a tag attached to a specific virtual machine. A tag (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html)
-// is a key-value pair you can use to manage, filter, and search for your
-// resources. The content of VMware tags can be matched to Amazon Web Services
-// tags.
+// A VMware tag is a tag attached to a specific virtual machine. A [tag] is a key-value
+// pair you can use to manage, filter, and search for your resources.
+//
+// The content of VMware tags can be matched to Amazon Web Services tags.
+//
+// [tag]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html
 type VmwareTag struct {
 
 	// The is the category of VMware.

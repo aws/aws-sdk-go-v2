@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a suggester. For more information, see Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
-// in the Amazon CloudSearch Developer Guide.
+// Deletes a suggester. For more information, see [Getting Search Suggestions] in the Amazon CloudSearch
+// Developer Guide.
+//
+// [Getting Search Suggestions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html
 func (c *Client) DeleteSuggester(ctx context.Context, params *DeleteSuggesterInput, optFns ...func(*Options)) (*DeleteSuggesterOutput, error) {
 	if params == nil {
 		params = &DeleteSuggesterInput{}
@@ -28,9 +30,8 @@ func (c *Client) DeleteSuggester(ctx context.Context, params *DeleteSuggesterInp
 	return out, nil
 }
 
-// Container for the parameters to the DeleteSuggester operation. Specifies the
-// name of the domain you want to update and name of the suggester you want to
-// delete.
+// Container for the parameters to the DeleteSuggester operation. Specifies the name of the
+// domain you want to update and name of the suggester you want to delete.
 type DeleteSuggesterInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across

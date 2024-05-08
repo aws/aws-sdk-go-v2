@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Device Advisor test suite. Requires permission to access the
-// DeleteSuiteDefinition (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes a Device Advisor test suite.
+//
+// Requires permission to access the [DeleteSuiteDefinition] action.
+//
+// [DeleteSuiteDefinition]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteSuiteDefinition(ctx context.Context, params *DeleteSuiteDefinitionInput, optFns ...func(*Options)) (*DeleteSuiteDefinitionOutput, error) {
 	if params == nil {
 		params = &DeleteSuiteDefinitionInput{}

@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about all operations. Results are returned from oldest to
-// newest, up to a maximum of 200. Results can be paged by making each subsequent
-// call to GetOperations use the maximum (last) statusChangedAt value from the
-// previous request.
+// Returns information about all operations.
+//
+// Results are returned from oldest to newest, up to a maximum of 200. Results can
+// be paged by making each subsequent call to GetOperations use the maximum (last)
+// statusChangedAt value from the previous request.
 func (c *Client) GetOperations(ctx context.Context, params *GetOperationsInput, optFns ...func(*Options)) (*GetOperationsOutput, error) {
 	if params == nil {
 		params = &GetOperationsInput{}
@@ -32,10 +33,11 @@ func (c *Client) GetOperations(ctx context.Context, params *GetOperationsInput, 
 
 type GetOperationsInput struct {
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetOperations request. If your results are
-	// paginated, the response will return a next page token that you can specify as
-	// the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetOperations request. If your results
+	// are paginated, the response will return a next page token that you can specify
+	// as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -43,10 +45,12 @@ type GetOperationsInput struct {
 
 type GetOperationsOutput struct {
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetOperations request and specify the next
-	// page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetOperations request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// An array of objects that describe the result of the action, such as the status

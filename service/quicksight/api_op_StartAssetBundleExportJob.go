@@ -11,15 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an Asset Bundle export job. An Asset Bundle export job exports specified
-// Amazon QuickSight assets. You can also choose to export any asset dependencies
-// in the same job. Export jobs run asynchronously and can be polled with a
-// DescribeAssetBundleExportJob API call. When a job is successfully completed, a
-// download URL that contains the exported assets is returned. The URL is valid for
-// 5 minutes and can be refreshed with a DescribeAssetBundleExportJob API call.
-// Each Amazon QuickSight account can run up to 5 export jobs concurrently. The API
-// caller must have the necessary permissions in their IAM role to access each
-// resource before the resources can be exported.
+// Starts an Asset Bundle export job.
+//
+// An Asset Bundle export job exports specified Amazon QuickSight assets. You can
+// also choose to export any asset dependencies in the same job. Export jobs run
+// asynchronously and can be polled with a DescribeAssetBundleExportJob API call.
+// When a job is successfully completed, a download URL that contains the exported
+// assets is returned. The URL is valid for 5 minutes and can be refreshed with a
+// DescribeAssetBundleExportJob API call. Each Amazon QuickSight account can run up
+// to 5 export jobs concurrently.
+//
+// The API caller must have the necessary permissions in their IAM role to access
+// each resource before the resources can be exported.
 func (c *Client) StartAssetBundleExportJob(ctx context.Context, params *StartAssetBundleExportJobInput, optFns ...func(*Options)) (*StartAssetBundleExportJobOutput, error) {
 	if params == nil {
 		params = &StartAssetBundleExportJobInput{}
@@ -54,13 +57,21 @@ type StartAssetBundleExportJobInput struct {
 	ExportFormat types.AssetBundleExportFormat
 
 	// An array of resource ARNs to export. The following resources are supported.
+	//
 	//   - Analysis
+	//
 	//   - Dashboard
+	//
 	//   - DataSet
+	//
 	//   - DataSource
+	//
 	//   - RefreshSchedule
+	//
 	//   - Theme
+	//
 	//   - VPCConnection
+	//
 	// The API caller must have the necessary permissions in their IAM role to access
 	// each resource before the resources can be exported.
 	//
@@ -69,8 +80,10 @@ type StartAssetBundleExportJobInput struct {
 
 	// An optional collection of structures that generate CloudFormation parameters to
 	// override the existing resource property values when the resource is exported to
-	// a new CloudFormation template. Use this field if the ExportFormat field of a
-	// StartAssetBundleExportJobRequest API call is set to CLOUDFORMATION_JSON .
+	// a new CloudFormation template.
+	//
+	// Use this field if the ExportFormat field of a StartAssetBundleExportJobRequest
+	// API call is set to CLOUDFORMATION_JSON .
 	CloudFormationOverridePropertyConfiguration *types.AssetBundleCloudFormationOverridePropertyConfiguration
 
 	// A Boolean that determines whether all dependencies of each resource ARN are
@@ -85,7 +98,7 @@ type StartAssetBundleExportJobInput struct {
 	// associated with each resource are exported.
 	IncludePermissions bool
 
-	// A Boolean that determines whether all tags for each resource ARN are exported
+	//  A Boolean that determines whether all tags for each resource ARN are exported
 	// with the job. If you set IncludeTags to TRUE , any tags associated with each
 	// resource are exported.
 	IncludeTags bool

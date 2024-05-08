@@ -12,9 +12,10 @@ import (
 )
 
 // Describes the user assigned to the specific file transfer protocol-enabled
-// server, as identified by its ServerId property. The response from this call
-// returns the properties of the user associated with the ServerId value that was
-// specified.
+// server, as identified by its ServerId property.
+//
+// The response from this call returns the properties of the user associated with
+// the ServerId value that was specified.
 func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, optFns ...func(*Options)) (*DescribeUserOutput, error) {
 	if params == nil {
 		params = &DescribeUserInput{}

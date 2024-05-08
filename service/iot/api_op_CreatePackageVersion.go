@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new version for an existing IoT software package. Requires permission
-// to access the CreatePackageVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// and GetIndexingConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// actions.
+// Creates a new version for an existing IoT software package.
+//
+// Requires permission to access the [CreatePackageVersion] and [GetIndexingConfiguration] actions.
+//
+// [CreatePackageVersion]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [GetIndexingConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreatePackageVersion(ctx context.Context, params *CreatePackageVersionInput, optFns ...func(*Options)) (*CreatePackageVersionOutput, error) {
 	if params == nil {
 		params = &CreatePackageVersionInput{}
@@ -44,8 +46,9 @@ type CreatePackageVersionInput struct {
 
 	// Metadata that can be used to define a package version’s configuration. For
 	// example, the S3 file location, configuration options that are being sent to the
-	// device or fleet. The combined size of all the attributes on a package version is
-	// limited to 3KB.
+	// device or fleet.
+	//
+	// The combined size of all the attributes on a package version is limited to 3KB.
 	Attributes map[string]string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -81,9 +84,9 @@ type CreatePackageVersionOutput struct {
 	// The Amazon Resource Name (ARN) for the package.
 	PackageVersionArn *string
 
-	// The status of the package version. For more information, see Package version
-	// lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
-	// .
+	// The status of the package version. For more information, see [Package version lifecycle].
+	//
+	// [Package version lifecycle]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
 	Status types.PackageVersionStatus
 
 	// The name of the new package version.

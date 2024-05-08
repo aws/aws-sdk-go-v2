@@ -10,11 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the tags for a resource, given its Amazon Resource Names (ARN). This
-// operation supports ARNs for all resource types in Nimble Studio that support
-// tags, including studio, studio component, launch profile, streaming image, and
-// streaming session. All resources that can be tagged will contain an ARN
-// property, so you do not have to create this ARN yourself.
+// Gets the tags for a resource, given its Amazon Resource Names (ARN).
+//
+// This operation supports ARNs for all resource types in Nimble Studio that
+// support tags, including studio, studio component, launch profile, streaming
+// image, and streaming session. All resources that can be tagged will contain an
+// ARN property, so you do not have to create this ARN yourself.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Explainability resources created using the
-// CreateExplainability operation. This operation returns a summary for each
-// Explainability. You can filter the list using an array of Filter objects. To
-// retrieve the complete set of properties for a particular Explainability
-// resource, use the ARN with the DescribeExplainability operation.
+// Returns a list of Explainability resources created using the CreateExplainability operation. This
+// operation returns a summary for each Explainability. You can filter the list
+// using an array of Filterobjects.
+//
+// To retrieve the complete set of properties for a particular Explainability
+// resource, use the ARN with the DescribeExplainabilityoperation.
 func (c *Client) ListExplainabilities(ctx context.Context, params *ListExplainabilitiesInput, optFns ...func(*Options)) (*ListExplainabilitiesOutput, error) {
 	if params == nil {
 		params = &ListExplainabilitiesInput{}
@@ -36,10 +37,15 @@ type ListExplainabilitiesInput struct {
 	// An array of filters. For each filter, provide a condition and a match
 	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude the resources that match the statement from the list. The
-	// match statement consists of a key and a value. Filter properties
+	// match statement consists of a key and a value.
+	//
+	// Filter properties
+	//
 	//   - Condition - The condition to apply. Valid values are IS and IS_NOT .
+	//
 	//   - Key - The name of the parameter to filter on. Valid values are ResourceArn
 	//   and Status .
+	//
 	//   - Value - The value to match.
 	Filters []types.Filter
 

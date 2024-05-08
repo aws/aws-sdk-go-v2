@@ -51,9 +51,10 @@ type UpdateAgentKnowledgeBaseInput struct {
 	// Specifies a new description for the knowledge base associated with an agent.
 	Description *string
 
-	// Specifies whether the agent uses the knowledge base or not when sending an
-	// InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
+	// Specifies whether the agent uses the knowledge base or not when sending an [InvokeAgent]
 	// request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	KnowledgeBaseState types.KnowledgeBaseState
 
 	noSmithyDocumentSerde

@@ -12,8 +12,9 @@ import (
 )
 
 // Deletes an automatic snapshot of an instance or disk. For more information, see
-// the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots)
-// .
+// the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
 func (c *Client) DeleteAutoSnapshot(ctx context.Context, params *DeleteAutoSnapshotInput, optFns ...func(*Options)) (*DeleteAutoSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteAutoSnapshotInput{}

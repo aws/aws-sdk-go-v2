@@ -47,12 +47,14 @@ type DescribeAgentOutput struct {
 	// The ARN of the agent.
 	AgentArn *string
 
-	// The time that the agent was activated (https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html)
-	// .
+	// The time that the agent was [activated].
+	//
+	// [activated]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
 	CreationTime *time.Time
 
-	// The type of service endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html)
-	// that your agent is connected to.
+	// The type of [service endpoint] that your agent is connected to.
+	//
+	// [service endpoint]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html
 	EndpointType types.EndpointType
 
 	// The last time that the agent was communicating with the DataSync service.
@@ -64,16 +66,20 @@ type DescribeAgentOutput struct {
 	// The platform-related details about the agent, such as the version number.
 	Platform *types.Platform
 
-	// The network configuration that the agent uses when connecting to a VPC service
-	// endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc)
-	// .
+	// The network configuration that the agent uses when connecting to a [VPC service endpoint].
+	//
+	// [VPC service endpoint]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
 	PrivateLinkConfig *types.PrivateLinkConfig
 
 	// The status of the agent.
+	//
 	//   - If the status is ONLINE , the agent is configured properly and ready to use.
+	//
 	//   - If the status is OFFLINE , the agent has been out of contact with DataSync
 	//   for five minutes or longer. This can happen for a few reasons. For more
-	//   information, see What do I do if my agent is offline? (https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline)
+	//   information, see [What do I do if my agent is offline?]
+	//
+	// [What do I do if my agent is offline?]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline
 	Status types.AgentStatus
 
 	// Metadata pertaining to the operation's result.

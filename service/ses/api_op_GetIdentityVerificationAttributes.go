@@ -17,21 +17,25 @@ import (
 
 // Given a list of identities (email addresses and/or domains), returns the
 // verification status and (for domain identities) the verification token for each
-// identity. The verification status of an email address is "Pending" until the
-// email address owner clicks the link within the verification email that Amazon
-// SES sent to that address. If the email address owner clicks the link within 24
-// hours, the verification status of the email address changes to "Success". If the
-// link is not clicked within 24 hours, the verification status changes to
-// "Failed." In that case, to verify the email address, you must restart the
-// verification process from the beginning. For domain identities, the domain's
-// verification status is "Pending" as Amazon SES searches for the required TXT
-// record in the DNS settings of the domain. When Amazon SES detects the record,
-// the domain's verification status changes to "Success". If Amazon SES is unable
-// to detect the record within 72 hours, the domain's verification status changes
-// to "Failed." In that case, to verify the domain, you must restart the
-// verification process from the beginning. This operation is throttled at one
-// request per second and can only get verification attributes for up to 100
-// identities at a time.
+// identity.
+//
+// The verification status of an email address is "Pending" until the email
+// address owner clicks the link within the verification email that Amazon SES sent
+// to that address. If the email address owner clicks the link within 24 hours, the
+// verification status of the email address changes to "Success". If the link is
+// not clicked within 24 hours, the verification status changes to "Failed." In
+// that case, to verify the email address, you must restart the verification
+// process from the beginning.
+//
+// For domain identities, the domain's verification status is "Pending" as Amazon
+// SES searches for the required TXT record in the DNS settings of the domain. When
+// Amazon SES detects the record, the domain's verification status changes to
+// "Success". If Amazon SES is unable to detect the record within 72 hours, the
+// domain's verification status changes to "Failed." In that case, to verify the
+// domain, you must restart the verification process from the beginning.
+//
+// This operation is throttled at one request per second and can only get
+// verification attributes for up to 100 identities at a time.
 func (c *Client) GetIdentityVerificationAttributes(ctx context.Context, params *GetIdentityVerificationAttributesInput, optFns ...func(*Options)) (*GetIdentityVerificationAttributesOutput, error) {
 	if params == nil {
 		params = &GetIdentityVerificationAttributesInput{}
@@ -49,9 +53,9 @@ func (c *Client) GetIdentityVerificationAttributes(ctx context.Context, params *
 
 // Represents a request to return the Amazon SES verification status of a list of
 // identities. For domain identities, this request also returns the verification
-// token. For information about verifying identities with Amazon SES, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html)
-// .
+// token. For information about verifying identities with Amazon SES, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
 type GetIdentityVerificationAttributesInput struct {
 
 	// A list of identities.
@@ -196,12 +200,13 @@ type IdentityExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetIdentityVerificationAttributesInput, *GetIdentityVerificationAttributesOutput, error) (bool, error)
 }
 

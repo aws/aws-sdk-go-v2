@@ -43,14 +43,14 @@ type UpdateAuditSuppressionInput struct {
 	// This member is required.
 	ResourceIdentifier *types.ResourceIdentifier
 
-	// The description of the audit suppression.
+	//  The description of the audit suppression.
 	Description *string
 
-	// The expiration date (epoch timestamp in seconds) that you want the suppression
+	//  The expiration date (epoch timestamp in seconds) that you want the suppression
 	// to adhere to.
 	ExpirationDate *time.Time
 
-	// Indicates whether a suppression should exist indefinitely or not.
+	//  Indicates whether a suppression should exist indefinitely or not.
 	SuppressIndefinitely *bool
 
 	noSmithyDocumentSerde

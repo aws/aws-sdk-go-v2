@@ -12,9 +12,11 @@ import (
 )
 
 // Enables additional CloudWatch metrics for the specified CloudFront
-// distribution. The additional metrics incur an additional cost. For more
-// information, see Viewing additional CloudFront distribution metrics (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html#monitoring-console.distributions-additional)
-// in the Amazon CloudFront Developer Guide.
+// distribution. The additional metrics incur an additional cost.
+//
+// For more information, see [Viewing additional CloudFront distribution metrics] in the Amazon CloudFront Developer Guide.
+//
+// [Viewing additional CloudFront distribution metrics]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html#monitoring-console.distributions-additional
 func (c *Client) CreateMonitoringSubscription(ctx context.Context, params *CreateMonitoringSubscriptionInput, optFns ...func(*Options)) (*CreateMonitoringSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateMonitoringSubscriptionInput{}

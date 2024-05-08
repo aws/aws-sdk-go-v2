@@ -12,8 +12,9 @@ import (
 
 // Associates a canary with a group. Using groups can help you with managing and
 // automating your canaries, and you can also view aggregated run results and
-// statistics for all canaries in a group. You must run this operation in the
-// Region where the canary exists.
+// statistics for all canaries in a group.
+//
+// You must run this operation in the Region where the canary exists.
 func (c *Client) AssociateResource(ctx context.Context, params *AssociateResourceInput, optFns ...func(*Options)) (*AssociateResourceOutput, error) {
 	if params == nil {
 		params = &AssociateResourceInput{}

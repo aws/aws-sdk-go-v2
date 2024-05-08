@@ -40,8 +40,9 @@ type CreateTemplateInput struct {
 	TemplateSource types.TemplateSource
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request. For more information, see Idempotency (https://smithy.io/2.0/spec/behavior-traits.html#idempotencytoken-trait)
-	// in the Smithy documentation.
+	// of the request. For more information, see [Idempotency]in the Smithy documentation.
+	//
+	// [Idempotency]: https://smithy.io/2.0/spec/behavior-traits.html#idempotencytoken-trait
 	ClientToken *string
 
 	// The tags to add to the migration workflow template.
@@ -61,8 +62,9 @@ type CreateTemplateOutput struct {
 	// The Amazon Resource Name (ARN) of the migration workflow template. The format
 	// for an Migration Hub Orchestrator template ARN is
 	// arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234 .
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)
-	// in the AWS General Reference.
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)]in the AWS General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
 	TemplateArn *string
 
 	// The ID of the migration workflow template.

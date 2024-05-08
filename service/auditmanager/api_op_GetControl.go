@@ -29,7 +29,7 @@ func (c *Client) GetControl(ctx context.Context, params *GetControlInput, optFns
 
 type GetControlInput struct {
 
-	// The identifier for the control.
+	//  The identifier for the control.
 	//
 	// This member is required.
 	ControlId *string
@@ -39,7 +39,7 @@ type GetControlInput struct {
 
 type GetControlOutput struct {
 
-	// The details of the control that the GetControl API returned.
+	//  The details of the control that the GetControl API returned.
 	Control *types.Control
 
 	// Metadata pertaining to the operation's result.

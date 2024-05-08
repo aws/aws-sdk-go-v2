@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more of your compute environments. If you're using an
-// unmanaged compute environment, you can use the DescribeComputeEnvironment
-// operation to determine the ecsClusterArn that you launch your Amazon ECS
-// container instances into.
+// Describes one or more of your compute environments.
+//
+// If you're using an unmanaged compute environment, you can use the
+// DescribeComputeEnvironment operation to determine the ecsClusterArn that you
+// launch your Amazon ECS container instances into.
 func (c *Client) DescribeComputeEnvironments(ctx context.Context, params *DescribeComputeEnvironmentsInput, optFns ...func(*Options)) (*DescribeComputeEnvironmentsOutput, error) {
 	if params == nil {
 		params = &DescribeComputeEnvironmentsInput{}
@@ -51,9 +52,10 @@ type DescribeComputeEnvironmentsInput struct {
 	// DescribeComputeEnvironments request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
 	// previous results that returned the nextToken value. This value is null when
-	// there are no more results to return. Treat this token as an opaque identifier
-	// that's only used to retrieve the next items in a list and not for other
-	// programmatic purposes.
+	// there are no more results to return.
+	//
+	// Treat this token as an opaque identifier that's only used to retrieve the next
+	// items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde

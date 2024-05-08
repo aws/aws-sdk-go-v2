@@ -13,8 +13,9 @@ import (
 
 // Updates a certificate. Currently, you can use this function to specify whether
 // to opt in to or out of recording your certificate in a certificate transparency
-// log. For more information, see Opting Out of Certificate Transparency Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency)
-// .
+// log. For more information, see [Opting Out of Certificate Transparency Logging].
+//
+// [Opting Out of Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
 func (c *Client) UpdateCertificateOptions(ctx context.Context, params *UpdateCertificateOptionsInput, optFns ...func(*Options)) (*UpdateCertificateOptionsOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateOptionsInput{}
@@ -33,7 +34,8 @@ func (c *Client) UpdateCertificateOptions(ctx context.Context, params *UpdateCer
 type UpdateCertificateOptionsInput struct {
 
 	// ARN of the requested certificate to update. This must be of the form:
-	// arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
+	//
+	//     arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.
 	CertificateArn *string

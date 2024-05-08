@@ -35,8 +35,9 @@ type UpdateUsagePlanInput struct {
 	// This member is required.
 	UsagePlanId *string
 
-	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
-	// .
+	// For more information about supported patch operations, see [Patch Operations].
+	//
+	// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -45,9 +46,10 @@ type UpdateUsagePlanInput struct {
 // Represents a usage plan used to specify who can assess associated API stages.
 // Optionally, target request rate and quota limits can be set. In some cases
 // clients can exceed the targets that you set. Don’t rely on usage plans to
-// control costs. Consider using Amazon Web Services Budgets (https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
-// to monitor costs and WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// to manage API requests.
+// control costs. Consider using [Amazon Web Services Budgets]to monitor costs and [WAF] to manage API requests.
+//
+// [Amazon Web Services Budgets]: https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html
+// [WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 type UpdateUsagePlanOutput struct {
 
 	// The associated API stages of a usage plan.

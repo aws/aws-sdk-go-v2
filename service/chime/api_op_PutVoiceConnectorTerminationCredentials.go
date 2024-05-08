@@ -11,16 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds termination SIP credentials for the specified Amazon Chime Voice
-// Connector. This API is is no longer supported and will not be updated. We
-// recommend using the latest version, PutVoiceConnectorTerminationCredentials (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorTerminationCredentials.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [PutVoiceConnectorTerminationCredentials], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by PutVoiceConnectorTerminationCredentials in the Amazon
 // Chime SDK Voice Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [PutVoiceConnectorTerminationCredentials]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorTerminationCredentials.html
 func (c *Client) PutVoiceConnectorTerminationCredentials(ctx context.Context, params *PutVoiceConnectorTerminationCredentialsInput, optFns ...func(*Options)) (*PutVoiceConnectorTerminationCredentialsOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorTerminationCredentialsInput{}

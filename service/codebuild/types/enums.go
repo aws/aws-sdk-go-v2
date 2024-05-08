@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ArtifactNamespace. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactNamespace) Values() []ArtifactNamespace {
 	return []ArtifactNamespace{
 		"NONE",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for ArtifactPackaging. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactPackaging) Values() []ArtifactPackaging {
 	return []ArtifactPackaging{
 		"NONE",
@@ -48,8 +50,9 @@ const (
 )
 
 // Values returns all known values for ArtifactsType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactsType) Values() []ArtifactsType {
 	return []ArtifactsType{
 		"CODEPIPELINE",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for AuthType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthType) Values() []AuthType {
 	return []AuthType{
 		"OAUTH",
@@ -89,8 +93,9 @@ const (
 )
 
 // Values returns all known values for BatchReportModeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchReportModeType) Values() []BatchReportModeType {
 	return []BatchReportModeType{
 		"REPORT_INDIVIDUAL_BUILDS",
@@ -108,8 +113,9 @@ const (
 )
 
 // Values returns all known values for BucketOwnerAccess. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BucketOwnerAccess) Values() []BucketOwnerAccess {
 	return []BucketOwnerAccess{
 		"NONE",
@@ -132,8 +138,9 @@ const (
 )
 
 // Values returns all known values for BuildBatchPhaseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BuildBatchPhaseType) Values() []BuildBatchPhaseType {
 	return []BuildBatchPhaseType{
 		"SUBMITTED",
@@ -164,8 +171,9 @@ const (
 )
 
 // Values returns all known values for BuildPhaseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BuildPhaseType) Values() []BuildPhaseType {
 	return []BuildPhaseType{
 		"SUBMITTED",
@@ -192,8 +200,9 @@ const (
 )
 
 // Values returns all known values for CacheMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CacheMode) Values() []CacheMode {
 	return []CacheMode{
 		"LOCAL_DOCKER_LAYER_CACHE",
@@ -212,8 +221,9 @@ const (
 )
 
 // Values returns all known values for CacheType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CacheType) Values() []CacheType {
 	return []CacheType{
 		"NO_CACHE",
@@ -239,8 +249,9 @@ const (
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"BUILD_GENERAL1_SMALL",
@@ -264,8 +275,9 @@ const (
 )
 
 // Values returns all known values for CredentialProviderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CredentialProviderType) Values() []CredentialProviderType {
 	return []CredentialProviderType{
 		"SECRETS_MANAGER",
@@ -286,8 +298,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentType) Values() []EnvironmentType {
 	return []EnvironmentType{
 		"WINDOWS_CONTAINER",
@@ -310,8 +323,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentVariableType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentVariableType) Values() []EnvironmentVariableType {
 	return []EnvironmentVariableType{
 		"PLAINTEXT",
@@ -328,8 +342,9 @@ const (
 )
 
 // Values returns all known values for FileSystemType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileSystemType) Values() []FileSystemType {
 	return []FileSystemType{
 		"EFS",
@@ -345,8 +360,9 @@ const (
 )
 
 // Values returns all known values for FleetContextCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetContextCode) Values() []FleetContextCode {
 	return []FleetContextCode{
 		"CREATE_FAILED",
@@ -363,8 +379,9 @@ const (
 )
 
 // Values returns all known values for FleetOverflowBehavior. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetOverflowBehavior) Values() []FleetOverflowBehavior {
 	return []FleetOverflowBehavior{
 		"QUEUE",
@@ -380,8 +397,9 @@ const (
 )
 
 // Values returns all known values for FleetScalingMetricType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetScalingMetricType) Values() []FleetScalingMetricType {
 	return []FleetScalingMetricType{
 		"FLEET_UTILIZATION_RATE",
@@ -396,8 +414,9 @@ const (
 )
 
 // Values returns all known values for FleetScalingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetScalingType) Values() []FleetScalingType {
 	return []FleetScalingType{
 		"TARGET_TRACKING_SCALING",
@@ -414,8 +433,9 @@ const (
 )
 
 // Values returns all known values for FleetSortByType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetSortByType) Values() []FleetSortByType {
 	return []FleetSortByType{
 		"NAME",
@@ -439,8 +459,9 @@ const (
 )
 
 // Values returns all known values for FleetStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetStatusCode) Values() []FleetStatusCode {
 	return []FleetStatusCode{
 		"CREATING",
@@ -464,6 +485,7 @@ const (
 
 // Values returns all known values for ImagePullCredentialsType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ImagePullCredentialsType) Values() []ImagePullCredentialsType {
 	return []ImagePullCredentialsType{
@@ -489,8 +511,9 @@ const (
 )
 
 // Values returns all known values for LanguageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageType) Values() []LanguageType {
 	return []LanguageType{
 		"JAVA",
@@ -515,8 +538,9 @@ const (
 )
 
 // Values returns all known values for LogsConfigStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogsConfigStatusType) Values() []LogsConfigStatusType {
 	return []LogsConfigStatusType{
 		"ENABLED",
@@ -535,8 +559,9 @@ const (
 )
 
 // Values returns all known values for PlatformType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlatformType) Values() []PlatformType {
 	return []PlatformType{
 		"DEBIAN",
@@ -556,8 +581,9 @@ const (
 )
 
 // Values returns all known values for ProjectSortByType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProjectSortByType) Values() []ProjectSortByType {
 	return []ProjectSortByType{
 		"NAME",
@@ -575,8 +601,9 @@ const (
 )
 
 // Values returns all known values for ProjectVisibilityType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProjectVisibilityType) Values() []ProjectVisibilityType {
 	return []ProjectVisibilityType{
 		"PUBLIC_READ",
@@ -594,8 +621,9 @@ const (
 
 // Values returns all known values for ReportCodeCoverageSortByType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportCodeCoverageSortByType) Values() []ReportCodeCoverageSortByType {
 	return []ReportCodeCoverageSortByType{
 		"LINE_COVERAGE_PERCENTAGE",
@@ -612,8 +640,9 @@ const (
 )
 
 // Values returns all known values for ReportExportConfigType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportExportConfigType) Values() []ReportExportConfigType {
 	return []ReportExportConfigType{
 		"S3",
@@ -631,8 +660,9 @@ const (
 )
 
 // Values returns all known values for ReportGroupSortByType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportGroupSortByType) Values() []ReportGroupSortByType {
 	return []ReportGroupSortByType{
 		"NAME",
@@ -650,8 +680,9 @@ const (
 )
 
 // Values returns all known values for ReportGroupStatusType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportGroupStatusType) Values() []ReportGroupStatusType {
 	return []ReportGroupStatusType{
 		"ACTIVE",
@@ -676,6 +707,7 @@ const (
 
 // Values returns all known values for ReportGroupTrendFieldType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportGroupTrendFieldType) Values() []ReportGroupTrendFieldType {
 	return []ReportGroupTrendFieldType{
@@ -700,8 +732,9 @@ const (
 )
 
 // Values returns all known values for ReportPackagingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportPackagingType) Values() []ReportPackagingType {
 	return []ReportPackagingType{
 		"ZIP",
@@ -721,8 +754,9 @@ const (
 )
 
 // Values returns all known values for ReportStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportStatusType) Values() []ReportStatusType {
 	return []ReportStatusType{
 		"GENERATING",
@@ -742,8 +776,9 @@ const (
 )
 
 // Values returns all known values for ReportType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportType) Values() []ReportType {
 	return []ReportType{
 		"TEST",
@@ -760,8 +795,9 @@ const (
 )
 
 // Values returns all known values for RetryBuildBatchType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RetryBuildBatchType) Values() []RetryBuildBatchType {
 	return []RetryBuildBatchType{
 		"RETRY_ALL_BUILDS",
@@ -781,8 +817,9 @@ const (
 )
 
 // Values returns all known values for ServerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerType) Values() []ServerType {
 	return []ServerType{
 		"GITHUB",
@@ -803,6 +840,7 @@ const (
 
 // Values returns all known values for SharedResourceSortByType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SharedResourceSortByType) Values() []SharedResourceSortByType {
 	return []SharedResourceSortByType{
@@ -820,8 +858,9 @@ const (
 )
 
 // Values returns all known values for SortOrderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrderType) Values() []SortOrderType {
 	return []SortOrderType{
 		"ASCENDING",
@@ -838,8 +877,9 @@ const (
 )
 
 // Values returns all known values for SourceAuthType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceAuthType) Values() []SourceAuthType {
 	return []SourceAuthType{
 		"OAUTH",
@@ -863,8 +903,9 @@ const (
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"CODECOMMIT",
@@ -892,8 +933,9 @@ const (
 )
 
 // Values returns all known values for StatusType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatusType) Values() []StatusType {
 	return []StatusType{
 		"SUCCEEDED",
@@ -914,8 +956,9 @@ const (
 )
 
 // Values returns all known values for WebhookBuildType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WebhookBuildType) Values() []WebhookBuildType {
 	return []WebhookBuildType{
 		"BUILD",
@@ -939,8 +982,9 @@ const (
 )
 
 // Values returns all known values for WebhookFilterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WebhookFilterType) Values() []WebhookFilterType {
 	return []WebhookFilterType{
 		"EVENT",

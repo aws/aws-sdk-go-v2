@@ -13,18 +13,22 @@ import (
 
 // Starts the asynchronous detection of text in a document. Amazon Textract can
 // detect lines of text and the words that make up a line of text.
+//
 // StartDocumentTextDetection can analyze text in documents that are in JPEG, PNG,
-// TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use
-// DocumentLocation to specify the bucket name and file name of the document.
+// TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocationto
+// specify the bucket name and file name of the document.
+//
 // StartTextDetection returns a job identifier ( JobId ) that you use to get the
 // results of the operation. When text detection is finished, Amazon Textract
 // publishes a completion status to the Amazon Simple Notification Service (Amazon
 // SNS) topic that you specify in NotificationChannel . To get the results of the
 // text detection operation, first check that the status value published to the
-// Amazon SNS topic is SUCCEEDED . If so, call GetDocumentTextDetection , and pass
-// the job identifier ( JobId ) from the initial call to StartDocumentTextDetection
-// . For more information, see Document Text Detection (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html)
-// .
+// Amazon SNS topic is SUCCEEDED . If so, call GetDocumentTextDetection, and pass the job identifier ( JobId
+// ) from the initial call to StartDocumentTextDetection .
+//
+// For more information, see [Document Text Detection].
+//
+// [Document Text Detection]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html
 func (c *Client) StartDocumentTextDetection(ctx context.Context, params *StartDocumentTextDetectionInput, optFns ...func(*Options)) (*StartDocumentTextDetectionOutput, error) {
 	if params == nil {
 		params = &StartDocumentTextDetectionInput{}
@@ -50,9 +54,9 @@ type StartDocumentTextDetectionInput struct {
 	// The idempotent token that's used to identify the start request. If you use the
 	// same token with multiple StartDocumentTextDetection requests, the same JobId is
 	// returned. Use ClientRequestToken to prevent the same job from being
-	// accidentally started more than once. For more information, see Calling Amazon
-	// Textract Asynchronous Operations (https://docs.aws.amazon.com/textract/latest/dg/api-async.html)
-	// .
+	// accidentally started more than once. For more information, see [Calling Amazon Textract Asynchronous Operations].
+	//
+	// [Calling Amazon Textract Asynchronous Operations]: https://docs.aws.amazon.com/textract/latest/dg/api-async.html
 	ClientRequestToken *string
 
 	// An identifier that you specify that's included in the completion notification

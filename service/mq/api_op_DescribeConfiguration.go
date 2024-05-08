@@ -58,8 +58,9 @@ type DescribeConfigurationOutput struct {
 	EngineType types.EngineType
 
 	// Required. The broker engine's version. For a list of supported engine versions,
-	// see, Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// see, [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.

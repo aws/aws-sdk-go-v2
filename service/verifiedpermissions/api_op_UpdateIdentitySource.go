@@ -14,10 +14,13 @@ import (
 
 // Updates the specified identity source to use a new identity provider (IdP)
 // source, or to change the mapping of identities from the IdP to a different
-// principal entity type. Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to propagate through
-// the service and be visible in the results of other Verified Permissions
-// operations.
+// principal entity type.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
 func (c *Client) UpdateIdentitySource(ctx context.Context, params *UpdateIdentitySourceInput, optFns ...func(*Options)) (*UpdateIdentitySourceOutput, error) {
 	if params == nil {
 		params = &UpdateIdentitySourceInput{}
@@ -47,9 +50,12 @@ type UpdateIdentitySourceInput struct {
 	PolicyStoreId *string
 
 	// Specifies the details required to communicate with the identity provider (IdP)
-	// associated with this identity source. At this time, the only valid member of
-	// this structure is a Amazon Cognito user pool configuration. You must specify a
-	// userPoolArn , and optionally, a ClientId .
+	// associated with this identity source.
+	//
+	// At this time, the only valid member of this structure is a Amazon Cognito user
+	// pool configuration.
+	//
+	// You must specify a userPoolArn , and optionally, a ClientId .
 	//
 	// This member is required.
 	UpdateConfiguration types.UpdateConfiguration

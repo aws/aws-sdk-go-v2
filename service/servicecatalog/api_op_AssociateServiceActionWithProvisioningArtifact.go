@@ -44,7 +44,9 @@ type AssociateServiceActionWithProvisioningArtifactInput struct {
 	ServiceActionId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

@@ -13,14 +13,21 @@ import (
 )
 
 // Starts an export of DB snapshot or DB cluster data to Amazon S3. The provided
-// IAM role must have access to the S3 bucket. You can't export snapshot data from
-// Db2 or RDS Custom DB instances. You can't export cluster data from Multi-AZ DB
-// clusters. For more information on exporting DB snapshot data, see Exporting DB
-// snapshot data to Amazon S3 (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html)
-// in the Amazon RDS User Guide or Exporting DB cluster snapshot data to Amazon S3 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-export-snapshot.html)
-// in the Amazon Aurora User Guide. For more information on exporting DB cluster
-// data, see Exporting DB cluster data to Amazon S3 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html)
-// in the Amazon Aurora User Guide.
+// IAM role must have access to the S3 bucket.
+//
+// You can't export snapshot data from Db2 or RDS Custom DB instances.
+//
+// You can't export cluster data from Multi-AZ DB clusters.
+//
+// For more information on exporting DB snapshot data, see [Exporting DB snapshot data to Amazon S3] in the Amazon RDS User
+// Guide or [Exporting DB cluster snapshot data to Amazon S3]in the Amazon Aurora User Guide.
+//
+// For more information on exporting DB cluster data, see [Exporting DB cluster data to Amazon S3] in the Amazon Aurora
+// User Guide.
+//
+// [Exporting DB cluster snapshot data to Amazon S3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-export-snapshot.html
+// [Exporting DB cluster data to Amazon S3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/export-cluster-data.html
+// [Exporting DB snapshot data to Amazon S3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ExportSnapshot.html
 func (c *Client) StartExportTask(ctx context.Context, params *StartExportTaskInput, optFns ...func(*Options)) (*StartExportTaskOutput, error) {
 	if params == nil {
 		params = &StartExportTaskInput{}
@@ -45,18 +52,28 @@ type StartExportTaskInput struct {
 	ExportTaskIdentifier *string
 
 	// The name of the IAM role to use for writing to the Amazon S3 bucket when
-	// exporting a snapshot or cluster. In the IAM policy attached to your IAM role,
-	// include the following required actions to allow the transfer of files from
-	// Amazon RDS or Amazon Aurora to an S3 bucket:
+	// exporting a snapshot or cluster.
+	//
+	// In the IAM policy attached to your IAM role, include the following required
+	// actions to allow the transfer of files from Amazon RDS or Amazon Aurora to an S3
+	// bucket:
+	//
 	//   - s3:PutObject*
+	//
 	//   - s3:GetObject*
+	//
 	//   - s3:ListBucket
+	//
 	//   - s3:DeleteObject*
+	//
 	//   - s3:GetBucketLocation
+	//
 	// In the policy, include the resources to identify the S3 bucket and objects in
 	// the bucket. The following list of resources shows the Amazon Resource Name (ARN)
 	// format for accessing S3:
+	//
 	//   - arn:aws:s3:::your-s3-bucket
+	//
 	//   - arn:aws:s3:::your-s3-bucket/*
 	//
 	// This member is required.
@@ -67,14 +84,23 @@ type StartExportTaskInput struct {
 	// alias ARN, or alias name for the KMS key. The caller of this operation must be
 	// authorized to run the following operations. These can be set in the Amazon Web
 	// Services KMS key policy:
+	//
 	//   - kms:Encrypt
+	//
 	//   - kms:Decrypt
+	//
 	//   - kms:GenerateDataKey
+	//
 	//   - kms:GenerateDataKeyWithoutPlaintext
+	//
 	//   - kms:ReEncryptFrom
+	//
 	//   - kms:ReEncryptTo
+	//
 	//   - kms:CreateGrant
+	//
 	//   - kms:DescribeKey
+	//
 	//   - kms:RetireGrant
 	//
 	// This member is required.
@@ -92,10 +118,15 @@ type StartExportTaskInput struct {
 	SourceArn *string
 
 	// The data to be exported from the snapshot or cluster. If this parameter isn't
-	// provided, all of the data is exported. Valid Values:
+	// provided, all of the data is exported.
+	//
+	// Valid Values:
+	//
 	//   - database - Export all the data from a specified database.
+	//
 	//   - database.table table-name - Export a table of the snapshot or cluster. This
 	//   format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
+	//
 	//   - database.schema schema-name - Export a database schema of the snapshot or
 	//   cluster. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	//
@@ -110,14 +141,21 @@ type StartExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of a snapshot or cluster export to Amazon S3. This data
-// type is used as a response element in the DescribeExportTasks operation.
+// Contains the details of a snapshot or cluster export to Amazon S3.
+//
+// This data type is used as a response element in the DescribeExportTasks
+// operation.
 type StartExportTaskOutput struct {
 
-	// The data exported from the snapshot or cluster. Valid Values:
+	// The data exported from the snapshot or cluster.
+	//
+	// Valid Values:
+	//
 	//   - database - Export all the data from a specified database.
+	//
 	//   - database.table table-name - Export a table of the snapshot or cluster. This
 	//   format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.
+	//
 	//   - database.schema schema-name - Export a database schema of the snapshot or
 	//   cluster. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.
 	//
@@ -161,11 +199,17 @@ type StartExportTaskOutput struct {
 	SourceType types.ExportSourceType
 
 	// The progress status of the export task. The status can be one of the following:
+	//
 	//   - CANCELED
+	//
 	//   - CANCELING
+	//
 	//   - COMPLETE
+	//
 	//   - FAILED
+	//
 	//   - IN_PROGRESS
+	//
 	//   - STARTING
 	Status *string
 

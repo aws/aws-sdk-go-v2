@@ -34,6 +34,7 @@ type ImportCertificateInput struct {
 	//   - For the CLI, provide a file path for a certificate in URI format. For
 	//   example, --certificate file://encryption-cert.pem . Alternatively, you can
 	//   provide the raw content.
+	//
 	//   - For the SDK, specify the raw content of a certificate file. For example,
 	//   --certificate "`cat encryption-cert.pem`" .
 	//
@@ -61,6 +62,7 @@ type ImportCertificateInput struct {
 	//   - For the CLI, provide a file path for a private key in URI format.For
 	//   example, --private-key file://encryption-key.pem . Alternatively, you can
 	//   provide the raw content of the private key file.
+	//
 	//   - For the SDK, specify the raw content of a private key file. For example,
 	//   --private-key "`cat encryption-key.pem`"
 	PrivateKey *string

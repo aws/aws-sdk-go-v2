@@ -13,9 +13,10 @@ import (
 
 // Creates a grant for the specified license. A grant shares the use of license
 // entitlements with a specific Amazon Web Services account, an organization, or an
-// organizational unit (OU). For more information, see Granted licenses in License
-// Manager (https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html)
-// in the License Manager User Guide.
+// organizational unit (OU). For more information, see [Granted licenses in License Manager]in the License Manager User
+// Guide.
+//
+// [Granted licenses in License Manager]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
 func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optFns ...func(*Options)) (*CreateGrantOutput, error) {
 	if params == nil {
 		params = &CreateGrantInput{}
@@ -61,6 +62,7 @@ type CreateGrantInput struct {
 
 	// The grant principals. You can specify one of the following as an Amazon
 	// Resource Name (ARN):
+	//
 	//   - An Amazon Web Services account, which includes only the account specified.
 	//
 	//   - An organizational unit (OU), which includes all accounts in the OU.

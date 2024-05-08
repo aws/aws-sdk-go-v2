@@ -11,12 +11,16 @@ import (
 )
 
 // Attaches the specified policy to the specified principal (certificate or other
-// credential). Note: This action is deprecated and works as expected for backward
-// compatibility, but we won't add enhancements. Use AttachPolicy instead.
-// Requires permission to access the AttachPrincipalPolicy (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// credential).
+//
+// Note: This action is deprecated and works as expected for backward
+// compatibility, but we won't add enhancements. Use AttachPolicyinstead.
+//
+// Requires permission to access the [AttachPrincipalPolicy] action.
 //
 // Deprecated: This operation has been deprecated.
+//
+// [AttachPrincipalPolicy]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) AttachPrincipalPolicy(ctx context.Context, params *AttachPrincipalPolicyInput, optFns ...func(*Options)) (*AttachPrincipalPolicyOutput, error) {
 	if params == nil {
 		params = &AttachPrincipalPolicyInput{}

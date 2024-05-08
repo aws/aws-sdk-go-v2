@@ -15,10 +15,11 @@ import (
 // exists for the given terminology name. Importing a terminology with the same
 // name as an existing one will merge the terminologies based on the chosen merge
 // strategy. The only supported merge strategy is OVERWRITE, where the imported
-// terminology overwrites the existing terminology of the same name. If you import
-// a terminology that overwrites an existing one, the new terminology takes up to
-// 10 minutes to fully propagate. After that, translations have access to the new
-// terminology.
+// terminology overwrites the existing terminology of the same name.
+//
+// If you import a terminology that overwrites an existing one, the new
+// terminology takes up to 10 minutes to fully propagate. After that, translations
+// have access to the new terminology.
 func (c *Client) ImportTerminology(ctx context.Context, params *ImportTerminologyInput, optFns ...func(*Options)) (*ImportTerminologyOutput, error) {
 	if params == nil {
 		params = &ImportTerminologyInput{}
@@ -61,8 +62,9 @@ type ImportTerminologyInput struct {
 
 	// Tags to be associated with this resource. A tag is a key-value pair that adds
 	// metadata to a resource. Each tag key for the resource must be unique. For more
-	// information, see Tagging your resources (https://docs.aws.amazon.com/translate/latest/dg/tagging.html)
-	// .
+	// information, see [Tagging your resources].
+	//
+	// [Tagging your resources]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

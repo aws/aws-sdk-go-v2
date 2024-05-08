@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about AWS CloudHSM clusters. This is a paginated operation,
-// which means that each response might contain only a subset of all the clusters.
-// When the response contains only a subset of clusters, it includes a NextToken
-// value. Use this value in a subsequent DescribeClusters request to get more
-// clusters. When you receive a response with no NextToken (or an empty or null
-// value), that means there are no more clusters to get.
+// Gets information about AWS CloudHSM clusters.
+//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the clusters. When the response contains only a subset of
+// clusters, it includes a NextToken value. Use this value in a subsequent
+// DescribeClusters request to get more clusters. When you receive a response with
+// no NextToken (or an empty or null value), that means there are no more clusters
+// to get.
 func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersInput, optFns ...func(*Options)) (*DescribeClustersOutput, error) {
 	if params == nil {
 		params = &DescribeClustersInput{}
@@ -34,12 +36,15 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 
 type DescribeClustersInput struct {
 
-	// One or more filters to limit the items returned in the response. Use the
-	// clusterIds filter to return only the specified clusters. Specify clusters by
-	// their cluster identifier (ID). Use the vpcIds filter to return only the
-	// clusters in the specified virtual private clouds (VPCs). Specify VPCs by their
-	// VPC identifier (ID). Use the states filter to return only clusters that match
-	// the specified state.
+	// One or more filters to limit the items returned in the response.
+	//
+	// Use the clusterIds filter to return only the specified clusters. Specify
+	// clusters by their cluster identifier (ID).
+	//
+	// Use the vpcIds filter to return only the clusters in the specified virtual
+	// private clouds (VPCs). Specify VPCs by their VPC identifier (ID).
+	//
+	// Use the states filter to return only clusters that match the specified state.
 	Filters map[string][]string
 
 	// The maximum number of clusters to return in the response. When there are more

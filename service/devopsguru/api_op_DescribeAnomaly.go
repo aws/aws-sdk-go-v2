@@ -29,7 +29,7 @@ func (c *Client) DescribeAnomaly(ctx context.Context, params *DescribeAnomalyInp
 
 type DescribeAnomalyInput struct {
 
-	// The ID of the anomaly.
+	//  The ID of the anomaly.
 	//
 	// This member is required.
 	Id *string
@@ -42,10 +42,10 @@ type DescribeAnomalyInput struct {
 
 type DescribeAnomalyOutput struct {
 
-	// A ProactiveAnomaly object that represents the requested anomaly.
+	//  A ProactiveAnomaly object that represents the requested anomaly.
 	ProactiveAnomaly *types.ProactiveAnomaly
 
-	// A ReactiveAnomaly object that represents the requested anomaly.
+	//  A ReactiveAnomaly object that represents the requested anomaly.
 	ReactiveAnomaly *types.ReactiveAnomaly
 
 	// Metadata pertaining to the operation's result.

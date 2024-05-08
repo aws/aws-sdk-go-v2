@@ -10,10 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new user profile. Required Permissions: To use this action, an IAM
-// user must have an attached policy that explicitly grants permissions. For more
-// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Creates a new user profile.
+//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information about user
+// permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) CreateUserProfile(ctx context.Context, params *CreateUserProfileInput, optFns ...func(*Options)) (*CreateUserProfileOutput, error) {
 	if params == nil {
 		params = &CreateUserProfileInput{}
@@ -37,8 +40,9 @@ type CreateUserProfileInput struct {
 	IamUserArn *string
 
 	// Whether users can specify their own SSH public key through the My Settings
-	// page. For more information, see Setting an IAM User's Public SSH Key (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html)
-	// .
+	// page. For more information, see [Setting an IAM User's Public SSH Key].
+	//
+	// [Setting an IAM User's Public SSH Key]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
 	AllowSelfManagement *bool
 
 	// The user's public SSH key.

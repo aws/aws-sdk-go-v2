@@ -38,12 +38,16 @@ type RegisterJobDefinitionInput struct {
 	JobDefinitionName *string
 
 	// The type of job definition. For more information about multi-node parallel
-	// jobs, see Creating a multi-node parallel job definition (https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html)
-	// in the Batch User Guide.
+	// jobs, see [Creating a multi-node parallel job definition]in the Batch User Guide.
+	//
 	//   - If the value is container , then one of the following is required:
 	//   containerProperties , ecsProperties , or eksProperties .
+	//
 	//   - If the value is multinode , then nodeProperties is required.
+	//
 	// If the job is run on Fargate resources, then multinode isn't supported.
+	//
+	// [Creating a multi-node parallel job definition]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html
 	//
 	// This member is required.
 	Type types.JobDefinitionType
@@ -51,9 +55,10 @@ type RegisterJobDefinitionInput struct {
 	// An object with properties specific to Amazon ECS-based single-node
 	// container-based jobs. If the job definition's type parameter is container , then
 	// you must specify either containerProperties or nodeProperties . This must not be
-	// specified for Amazon EKS-based job definitions. If the job runs on Fargate
-	// resources, then you must not specify nodeProperties ; use only
-	// containerProperties .
+	// specified for Amazon EKS-based job definitions.
+	//
+	// If the job runs on Fargate resources, then you must not specify nodeProperties ;
+	// use only containerProperties .
 	ContainerProperties *types.ContainerProperties
 
 	// An object with properties that are specific to Amazon ECS-based jobs. This must
@@ -66,10 +71,15 @@ type RegisterJobDefinitionInput struct {
 
 	// An object with properties specific to multi-node parallel jobs. If you specify
 	// node properties for a job, it becomes a multi-node parallel job. For more
-	// information, see Multi-node Parallel Jobs (https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html)
-	// in the Batch User Guide. If the job runs on Fargate resources, then you must not
-	// specify nodeProperties ; use containerProperties instead. If the job runs on
-	// Amazon EKS resources, then you must not specify nodeProperties .
+	// information, see [Multi-node Parallel Jobs]in the Batch User Guide.
+	//
+	// If the job runs on Fargate resources, then you must not specify nodeProperties ;
+	// use containerProperties instead.
+	//
+	// If the job runs on Amazon EKS resources, then you must not specify
+	// nodeProperties .
+	//
+	// [Multi-node Parallel Jobs]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
 	NodeProperties *types.NodeProperties
 
 	// Default parameter substitution placeholders to set in the job definition.
@@ -79,7 +89,9 @@ type RegisterJobDefinitionInput struct {
 
 	// The platform capabilities required by the job definition. If no value is
 	// specified, it defaults to EC2 . To run the job on Fargate resources, specify
-	// FARGATE . If the job runs on Amazon EKS resources, then you must not specify
+	// FARGATE .
+	//
+	// If the job runs on Amazon EKS resources, then you must not specify
 	// platformCapabilities .
 	PlatformCapabilities []types.PlatformCapability
 
@@ -88,36 +100,41 @@ type RegisterJobDefinitionInput struct {
 	// propagated. Tags can only be propagated to the tasks during task creation. For
 	// tags with the same name, job tags are given priority over job definitions tags.
 	// If the total number of combined tags from the job and job definition is over 50,
-	// the job is moved to the FAILED state. If the job runs on Amazon EKS resources,
-	// then you must not specify propagateTags .
+	// the job is moved to the FAILED state.
+	//
+	// If the job runs on Amazon EKS resources, then you must not specify propagateTags
+	// .
 	PropagateTags *bool
 
 	// The retry strategy to use for failed jobs that are submitted with this job
-	// definition. Any retry strategy that's specified during a SubmitJob operation
-	// overrides the retry strategy defined here. If a job is terminated due to a
-	// timeout, it isn't retried.
+	// definition. Any retry strategy that's specified during a SubmitJoboperation overrides
+	// the retry strategy defined here. If a job is terminated due to a timeout, it
+	// isn't retried.
 	RetryStrategy *types.RetryStrategy
 
 	// The scheduling priority for jobs that are submitted with this job definition.
 	// This only affects jobs in job queues with a fair share policy. Jobs with a
 	// higher scheduling priority are scheduled before jobs with a lower scheduling
-	// priority. The minimum supported value is 0 and the maximum supported value is
-	// 9999.
+	// priority.
+	//
+	// The minimum supported value is 0 and the maximum supported value is 9999.
 	SchedulingPriority *int32
 
 	// The tags that you apply to the job definition to help you categorize and
 	// organize your resources. Each tag consists of a key and an optional value. For
-	// more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html)
-	// in Batch User Guide.
+	// more information, see [Tagging Amazon Web Services Resources]in Batch User Guide.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
 	Tags map[string]string
 
 	// The timeout configuration for jobs that are submitted with this job definition,
 	// after which Batch terminates your jobs if they have not finished. If a job is
 	// terminated due to a timeout, it isn't retried. The minimum value for the timeout
-	// is 60 seconds. Any timeout configuration that's specified during a SubmitJob
-	// operation overrides the timeout configuration defined here. For more
-	// information, see Job Timeouts (https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html)
-	// in the Batch User Guide.
+	// is 60 seconds. Any timeout configuration that's specified during a SubmitJoboperation
+	// overrides the timeout configuration defined here. For more information, see [Job Timeouts]in
+	// the Batch User Guide.
+	//
+	// [Job Timeouts]: https://docs.aws.amazon.com/batch/latest/userguide/job_timeouts.html
 	Timeout *types.JobTimeout
 
 	noSmithyDocumentSerde

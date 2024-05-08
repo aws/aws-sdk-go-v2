@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for AppAttributesKeys. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppAttributesKeys) Values() []AppAttributesKeys {
 	return []AppAttributesKeys{
 		"DocumentRoot",
@@ -38,8 +39,9 @@ const (
 )
 
 // Values returns all known values for AppType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppType) Values() []AppType {
 	return []AppType{
 		"aws-flow-ruby",
@@ -61,8 +63,9 @@ const (
 )
 
 // Values returns all known values for Architecture. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Architecture) Values() []Architecture {
 	return []Architecture{
 		"x86_64",
@@ -79,8 +82,9 @@ const (
 )
 
 // Values returns all known values for AutoScalingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoScalingType) Values() []AutoScalingType {
 	return []AutoScalingType{
 		"load",
@@ -187,8 +191,9 @@ const (
 )
 
 // Values returns all known values for CloudWatchLogsEncoding. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchLogsEncoding) Values() []CloudWatchLogsEncoding {
 	return []CloudWatchLogsEncoding{
 		"ascii",
@@ -296,8 +301,9 @@ const (
 
 // Values returns all known values for CloudWatchLogsInitialPosition. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchLogsInitialPosition) Values() []CloudWatchLogsInitialPosition {
 	return []CloudWatchLogsInitialPosition{
 		"start_of_file",
@@ -314,8 +320,9 @@ const (
 )
 
 // Values returns all known values for CloudWatchLogsTimeZone. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudWatchLogsTimeZone) Values() []CloudWatchLogsTimeZone {
 	return []CloudWatchLogsTimeZone{
 		"LOCAL",
@@ -342,8 +349,9 @@ const (
 )
 
 // Values returns all known values for DeploymentCommandName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentCommandName) Values() []DeploymentCommandName {
 	return []DeploymentCommandName{
 		"install_dependencies",
@@ -393,8 +401,9 @@ const (
 )
 
 // Values returns all known values for LayerAttributesKeys. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LayerAttributesKeys) Values() []LayerAttributesKeys {
 	return []LayerAttributesKeys{
 		"EcsClusterArn",
@@ -444,8 +453,9 @@ const (
 )
 
 // Values returns all known values for LayerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LayerType) Values() []LayerType {
 	return []LayerType{
 		"aws-flow-ruby",
@@ -472,8 +482,9 @@ const (
 )
 
 // Values returns all known values for RootDeviceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RootDeviceType) Values() []RootDeviceType {
 	return []RootDeviceType{
 		"ebs",
@@ -492,8 +503,9 @@ const (
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"git",
@@ -511,8 +523,9 @@ const (
 )
 
 // Values returns all known values for StackAttributesKeys. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StackAttributesKeys) Values() []StackAttributesKeys {
 	return []StackAttributesKeys{
 		"Color",
@@ -528,8 +541,9 @@ const (
 )
 
 // Values returns all known values for VirtualizationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualizationType) Values() []VirtualizationType {
 	return []VirtualizationType{
 		"paravirtual",
@@ -547,8 +561,9 @@ const (
 )
 
 // Values returns all known values for VolumeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeType) Values() []VolumeType {
 	return []VolumeType{
 		"gp2",

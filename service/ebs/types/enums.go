@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for AccessDeniedExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
 	return []AccessDeniedExceptionReason{
@@ -29,6 +30,7 @@ const (
 
 // Values returns all known values for ChecksumAggregationMethod. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ChecksumAggregationMethod) Values() []ChecksumAggregationMethod {
 	return []ChecksumAggregationMethod{
@@ -44,8 +46,9 @@ const (
 )
 
 // Values returns all known values for ChecksumAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChecksumAlgorithm) Values() []ChecksumAlgorithm {
 	return []ChecksumAlgorithm{
 		"SHA256",
@@ -63,8 +66,9 @@ const (
 
 // Values returns all known values for RequestThrottledExceptionReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequestThrottledExceptionReason) Values() []RequestThrottledExceptionReason {
 	return []RequestThrottledExceptionReason{
 		"ACCOUNT_THROTTLED",
@@ -85,8 +89,9 @@ const (
 
 // Values returns all known values for ResourceNotFoundExceptionReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceNotFoundExceptionReason) Values() []ResourceNotFoundExceptionReason {
 	return []ResourceNotFoundExceptionReason{
 		"SNAPSHOT_NOT_FOUND",
@@ -105,8 +110,9 @@ const (
 
 // Values returns all known values for ServiceQuotaExceededExceptionReason. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExceptionReason {
 	return []ServiceQuotaExceededExceptionReason{
 		"DEPENDENCY_SERVICE_QUOTA_EXCEEDED",
@@ -123,8 +129,9 @@ const (
 )
 
 // Values returns all known values for SSEType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SSEType) Values() []SSEType {
 	return []SSEType{
 		"sse-ebs",
@@ -143,8 +150,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"completed",
@@ -176,6 +184,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the status of the StartReportCreation operation. You can call this
-// operation only from the organization's management account and from the us-east-1
-// Region.
+// Describes the status of the StartReportCreation operation.
+//
+// You can call this operation only from the organization's management account and
+// from the us-east-1 Region.
 func (c *Client) DescribeReportCreation(ctx context.Context, params *DescribeReportCreationInput, optFns ...func(*Options)) (*DescribeReportCreationOutput, error) {
 	if params == nil {
 		params = &DescribeReportCreationInput{}
@@ -43,13 +44,18 @@ type DescribeReportCreationOutput struct {
 	// The date and time that the report was started.
 	StartDate *string
 
-	// Reports the status of the operation. The operation status can be one of the
-	// following:
+	// Reports the status of the operation.
+	//
+	// The operation status can be one of the following:
+	//
 	//   - RUNNING - Report creation is in progress.
+	//
 	//   - SUCCEEDED - Report creation is complete. You can open the report from the
 	//   Amazon S3 bucket that you specified when you ran StartReportCreation .
+	//
 	//   - FAILED - Report creation timed out or the Amazon S3 bucket is not
 	//   accessible.
+	//
 	//   - NO REPORT - No report was generated in the last 90 days.
 	Status *string
 

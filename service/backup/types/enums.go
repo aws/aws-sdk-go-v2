@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AggregationPeriod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AggregationPeriod) Values() []AggregationPeriod {
 	return []AggregationPeriod{
 		"ONE_DAY",
@@ -38,8 +39,9 @@ const (
 )
 
 // Values returns all known values for BackupJobState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BackupJobState) Values() []BackupJobState {
 	return []BackupJobState{
 		"CREATED",
@@ -72,8 +74,9 @@ const (
 )
 
 // Values returns all known values for BackupJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BackupJobStatus) Values() []BackupJobStatus {
 	return []BackupJobStatus{
 		"CREATED",
@@ -114,8 +117,9 @@ const (
 )
 
 // Values returns all known values for BackupVaultEvent. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BackupVaultEvent) Values() []BackupVaultEvent {
 	return []BackupVaultEvent{
 		"BACKUP_JOB_STARTED",
@@ -146,8 +150,9 @@ const (
 )
 
 // Values returns all known values for ConditionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConditionType) Values() []ConditionType {
 	return []ConditionType{
 		"STRINGEQUALS",
@@ -166,8 +171,9 @@ const (
 )
 
 // Values returns all known values for CopyJobState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CopyJobState) Values() []CopyJobState {
 	return []CopyJobState{
 		"CREATED",
@@ -196,8 +202,9 @@ const (
 )
 
 // Values returns all known values for CopyJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CopyJobStatus) Values() []CopyJobStatus {
 	return []CopyJobStatus{
 		"CREATED",
@@ -225,8 +232,9 @@ const (
 )
 
 // Values returns all known values for LegalHoldStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LegalHoldStatus) Values() []LegalHoldStatus {
 	return []LegalHoldStatus{
 		"CREATING",
@@ -247,8 +255,9 @@ const (
 )
 
 // Values returns all known values for RecoveryPointStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecoveryPointStatus) Values() []RecoveryPointStatus {
 	return []RecoveryPointStatus{
 		"COMPLETED",
@@ -268,8 +277,9 @@ const (
 )
 
 // Values returns all known values for RestoreDeletionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RestoreDeletionStatus) Values() []RestoreDeletionStatus {
 	return []RestoreDeletionStatus{
 		"DELETING",
@@ -293,8 +303,9 @@ const (
 )
 
 // Values returns all known values for RestoreJobState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RestoreJobState) Values() []RestoreJobState {
 	return []RestoreJobState{
 		"CREATED",
@@ -320,8 +331,9 @@ const (
 )
 
 // Values returns all known values for RestoreJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RestoreJobStatus) Values() []RestoreJobStatus {
 	return []RestoreJobStatus{
 		"PENDING",
@@ -342,8 +354,9 @@ const (
 
 // Values returns all known values for
 // RestoreTestingRecoveryPointSelectionAlgorithm. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RestoreTestingRecoveryPointSelectionAlgorithm) Values() []RestoreTestingRecoveryPointSelectionAlgorithm {
 	return []RestoreTestingRecoveryPointSelectionAlgorithm{
 		"LATEST_WITHIN_WINDOW",
@@ -361,8 +374,9 @@ const (
 
 // Values returns all known values for RestoreTestingRecoveryPointType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RestoreTestingRecoveryPointType) Values() []RestoreTestingRecoveryPointType {
 	return []RestoreTestingRecoveryPointType{
 		"CONTINUOUS",
@@ -381,8 +395,9 @@ const (
 )
 
 // Values returns all known values for RestoreValidationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RestoreValidationStatus) Values() []RestoreValidationStatus {
 	return []RestoreValidationStatus{
 		"FAILED",
@@ -402,8 +417,9 @@ const (
 )
 
 // Values returns all known values for StorageClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StorageClass) Values() []StorageClass {
 	return []StorageClass{
 		"WARM",
@@ -422,8 +438,9 @@ const (
 )
 
 // Values returns all known values for VaultState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VaultState) Values() []VaultState {
 	return []VaultState{
 		"CREATING",
@@ -441,8 +458,9 @@ const (
 )
 
 // Values returns all known values for VaultType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VaultType) Values() []VaultType {
 	return []VaultType{
 		"BACKUP_VAULT",

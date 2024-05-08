@@ -13,11 +13,13 @@ import (
 
 // Seals and completes the snapshot after all of the required blocks of data have
 // been written to it. Completing the snapshot changes the status to completed .
-// You cannot write new blocks to a snapshot after it has been completed. You
-// should always retry requests that receive server ( 5xx ) error responses, and
-// ThrottlingException and RequestThrottledException client error responses. For
-// more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// You cannot write new blocks to a snapshot after it has been completed.
+//
+// You should always retry requests that receive server ( 5xx ) error responses,
+// and ThrottlingException and RequestThrottledException client error responses.
+// For more information see [Error retries]in the Amazon Elastic Compute Cloud User Guide.
+//
+// [Error retries]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
 func (c *Client) CompleteSnapshot(ctx context.Context, params *CompleteSnapshotInput, optFns ...func(*Options)) (*CompleteSnapshotOutput, error) {
 	if params == nil {
 		params = &CompleteSnapshotInput{}
@@ -46,7 +48,9 @@ type CompleteSnapshotInput struct {
 	SnapshotId *string
 
 	// An aggregated Base-64 SHA256 checksum based on the checksums of each written
-	// block. To generate the aggregated checksum using the linear aggregation method,
+	// block.
+	//
+	// To generate the aggregated checksum using the linear aggregation method,
 	// arrange the checksums for each written block in ascending order of their block
 	// index, concatenate them to form a single string, and then generate the checksum
 	// on the entire string using the SHA256 algorithm.

@@ -7,7 +7,8 @@ import (
 	"time"
 )
 
-// Contains the metadata for query results such as the column names, data types,
+//	Contains the metadata for query results such as the column names, data types,
+//
 // and other attributes.
 type ColumnInfo struct {
 
@@ -18,7 +19,7 @@ type ColumnInfo struct {
 	// This member is required.
 	Type *Type
 
-	// The name of the result set column. The name of the result set is available for
+	//  The name of the result set column. The name of the result set is available for
 	// columns of all data types except for arrays.
 	Name *string
 
@@ -28,20 +29,20 @@ type ColumnInfo struct {
 // Datum represents a single data point in a query result.
 type Datum struct {
 
-	// Indicates if the data point is an array.
+	//  Indicates if the data point is an array.
 	ArrayValue []Datum
 
-	// Indicates if the data point is null.
+	//  Indicates if the data point is null.
 	NullValue *bool
 
-	// Indicates if the data point is a row.
+	//  Indicates if the data point is a row.
 	RowValue *Row
 
-	// Indicates if the data point is a scalar value such as integer, string, double,
+	//  Indicates if the data point is a scalar value such as integer, string, double,
 	// or Boolean.
 	ScalarValue *string
 
-	// Indicates if the data point is a timeseries data type.
+	//  Indicates if the data point is a timeseries data type.
 	TimeSeriesValue []TimeSeriesDataPoint
 
 	noSmithyDocumentSerde
@@ -262,16 +263,16 @@ type Row struct {
 // Details on S3 location for error reports that result from running a query.
 type S3Configuration struct {
 
-	// Name of the S3 bucket under which error reports will be created.
+	//  Name of the S3 bucket under which error reports will be created.
 	//
 	// This member is required.
 	BucketName *string
 
-	// Encryption at rest options for the error reports. If no encryption option is
+	//  Encryption at rest options for the error reports. If no encryption option is
 	// specified, Timestream will choose SSE_S3 as default.
 	EncryptionOption S3EncryptionOption
 
-	// Prefix for the error report key. Timestream by default adds the following
+	//  Prefix for the error report key. Timestream by default adds the following
 	// prefix to the error report path.
 	ObjectKeyPrefix *string
 
@@ -281,7 +282,7 @@ type S3Configuration struct {
 // S3 report location for the scheduled query run.
 type S3ReportLocation struct {
 
-	// S3 bucket name.
+	//  S3 bucket name.
 	BucketName *string
 
 	// S3 key.
@@ -436,7 +437,7 @@ type SelectColumn struct {
 	// True, if the column name was aliased by the query. False otherwise.
 	Aliased *bool
 
-	// Database that has this column.
+	//  Database that has this column.
 	DatabaseName *string
 
 	// Name of the column.
@@ -524,7 +525,8 @@ type TimeSeriesDataPoint struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration to write data into Timestream database and table. This
+//	Configuration to write data into Timestream database and table. This
+//
 // configuration allows the user to map the query result select columns into the
 // destination table columns.
 type TimestreamConfiguration struct {
@@ -534,7 +536,7 @@ type TimestreamConfiguration struct {
 	// This member is required.
 	DatabaseName *string
 
-	// This is to allow mapping column(s) from the query result to the dimension in
+	//  This is to allow mapping column(s) from the query result to the dimension in
 	// the destination table.
 	//
 	// This member is required.
@@ -589,8 +591,9 @@ type Type struct {
 	RowColumnInfo []ColumnInfo
 
 	// Indicates if the column is of type string, integer, Boolean, double, timestamp,
-	// date, time. For more information, see Supported data types (https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html)
-	// .
+	// date, time. For more information, see [Supported data types].
+	//
+	// [Supported data types]: https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html
 	ScalarType ScalarType
 
 	// Indicates if the column is a timeseries data type.

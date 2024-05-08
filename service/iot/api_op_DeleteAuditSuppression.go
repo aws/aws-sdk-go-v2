@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Device Defender audit suppression. Requires permission to access the
-// DeleteAuditSuppression (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Deletes a Device Defender audit suppression.
+//
+// Requires permission to access the [DeleteAuditSuppression] action.
+//
+// [DeleteAuditSuppression]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteAuditSuppression(ctx context.Context, params *DeleteAuditSuppressionInput, optFns ...func(*Options)) (*DeleteAuditSuppressionOutput, error) {
 	if params == nil {
 		params = &DeleteAuditSuppressionInput{}

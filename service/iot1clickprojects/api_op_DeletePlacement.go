@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes a placement. To delete a placement, it must not have any devices
-// associated with it. When you delete a placement, all associated data becomes
-// irretrievable.
+// associated with it.
+//
+// When you delete a placement, all associated data becomes irretrievable.
 func (c *Client) DeletePlacement(ctx context.Context, params *DeletePlacementInput, optFns ...func(*Options)) (*DeletePlacementOutput, error) {
 	if params == nil {
 		params = &DeletePlacementInput{}

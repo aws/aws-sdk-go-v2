@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Recycle Bin retention rule. For more information, see  Delete Recycle
-// Bin retention rules (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-delete-rule)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Deletes a Recycle Bin retention rule. For more information, see [Delete Recycle Bin retention rules] in the Amazon
+// Elastic Compute Cloud User Guide.
+//
+// [Delete Recycle Bin retention rules]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-delete-rule
 func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns ...func(*Options)) (*DeleteRuleOutput, error) {
 	if params == nil {
 		params = &DeleteRuleInput{}

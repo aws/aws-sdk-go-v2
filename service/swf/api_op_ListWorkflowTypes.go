@@ -13,19 +13,26 @@ import (
 
 // Returns information about workflow types in the specified domain. The results
 // may be split into multiple pages that can be retrieved by making the call
-// repeatedly. Access Control You can use IAM policies to control this action's
-// access to Amazon SWF resources as follows:
+// repeatedly.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF
+// resources as follows:
+//
 //   - Use a Resource element with the domain name to limit the action to only
 //     specified domains.
+//
 //   - Use an Action element to allow or deny permission to call this action.
+//
 //   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
 // associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
-// For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
-// in the Amazon SWF Developer Guide.
+// For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows]in the Amazon SWF Developer Guide.
+//
+// [Using IAM to Manage Access to Amazon SWF Workflows]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
 func (c *Client) ListWorkflowTypes(ctx context.Context, params *ListWorkflowTypesInput, optFns ...func(*Options)) (*ListWorkflowTypesOutput, error) {
 	if params == nil {
 		params = &ListWorkflowTypesInput{}
@@ -65,8 +72,10 @@ type ListWorkflowTypesInput struct {
 	// using the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return a 400 error: " Specified token has exceeded its
-	// maximum lifetime ". The configured maximumPageSize determines how many results
-	// can be returned in a single call.
+	// maximum lifetime ".
+	//
+	// The configured maximumPageSize determines how many results can be returned in a
+	// single call.
 	NextPageToken *string
 
 	// When set to true , returns the results in reverse order. By default the results
@@ -86,8 +95,9 @@ type ListWorkflowTypesOutput struct {
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in nextPageToken . Keep all other arguments unchanged. The
-	// configured maximumPageSize determines how many results can be returned in a
+	// returned token in nextPageToken . Keep all other arguments unchanged.
+	//
+	// The configured maximumPageSize determines how many results can be returned in a
 	// single call.
 	NextPageToken *string
 

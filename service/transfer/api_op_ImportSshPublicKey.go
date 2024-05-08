@@ -12,8 +12,10 @@ import (
 
 // Adds a Secure Shell (SSH) public key to a Transfer Family user identified by a
 // UserName value assigned to the specific file transfer protocol-enabled server,
-// identified by ServerId . The response returns the UserName value, the ServerId
-// value, and the name of the SshPublicKeyId .
+// identified by ServerId .
+//
+// The response returns the UserName value, the ServerId value, and the name of
+// the SshPublicKeyId .
 func (c *Client) ImportSshPublicKey(ctx context.Context, params *ImportSshPublicKeyInput, optFns ...func(*Options)) (*ImportSshPublicKeyOutput, error) {
 	if params == nil {
 		params = &ImportSshPublicKeyInput{}
@@ -36,8 +38,9 @@ type ImportSshPublicKeyInput struct {
 	// This member is required.
 	ServerId *string
 
-	// The public key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA,
-	// and ED25519 keys.
+	// The public key portion of an SSH key pair.
+	//
+	// Transfer Family accepts RSA, ECDSA, and ED25519 keys.
 	//
 	// This member is required.
 	SshPublicKeyBody *string

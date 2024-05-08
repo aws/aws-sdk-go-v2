@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Updates a Device Advisor test suite. Requires permission to access the
-// UpdateSuiteDefinition (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a Device Advisor test suite.
+//
+// Requires permission to access the [UpdateSuiteDefinition] action.
+//
+// [UpdateSuiteDefinition]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateSuiteDefinition(ctx context.Context, params *UpdateSuiteDefinitionInput, optFns ...func(*Options)) (*UpdateSuiteDefinitionOutput, error) {
 	if params == nil {
 		params = &UpdateSuiteDefinitionInput{}

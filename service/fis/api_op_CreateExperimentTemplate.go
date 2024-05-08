@@ -11,20 +11,25 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an experiment template. An experiment template includes the following
-// components:
+// Creates an experiment template.
+//
+// An experiment template includes the following components:
+//
 //   - Targets: A target can be a specific resource in your Amazon Web Services
 //     environment, or one or more resources that match criteria that you specify, for
 //     example, resources that have specific tags.
+//
 //   - Actions: The actions to carry out on the target. You can specify multiple
 //     actions, the duration of each action, and when to start each action during an
 //     experiment.
+//
 //   - Stop conditions: If a stop condition is triggered while an experiment is
 //     running, the experiment is automatically stopped. You can define a stop
 //     condition as a CloudWatch alarm.
 //
-// For more information, see experiment templates (https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html)
-// in the Fault Injection Service User Guide.
+// For more information, see [experiment templates] in the Fault Injection Service User Guide.
+//
+// [experiment templates]: https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html
 func (c *Client) CreateExperimentTemplate(ctx context.Context, params *CreateExperimentTemplateInput, optFns ...func(*Options)) (*CreateExperimentTemplateOutput, error) {
 	if params == nil {
 		params = &CreateExperimentTemplateInput{}

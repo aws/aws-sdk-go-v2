@@ -34,12 +34,13 @@ type DeleteAllowListInput struct {
 	Id *string
 
 	// Specifies whether to force deletion of the allow list, even if active
-	// classification jobs are configured to use the list. When you try to delete an
-	// allow list, Amazon Macie checks for classification jobs that use the list and
-	// have a status other than COMPLETE or CANCELLED. By default, Macie rejects your
-	// request if any jobs meet these criteria. To skip these checks and delete the
-	// list, set this value to true. To delete the list only if no active jobs are
-	// configured to use it, set this value to false.
+	// classification jobs are configured to use the list.
+	//
+	// When you try to delete an allow list, Amazon Macie checks for classification
+	// jobs that use the list and have a status other than COMPLETE or CANCELLED. By
+	// default, Macie rejects your request if any jobs meet these criteria. To skip
+	// these checks and delete the list, set this value to true. To delete the list
+	// only if no active jobs are configured to use it, set this value to false.
 	IgnoreJobChecks *string
 
 	noSmithyDocumentSerde

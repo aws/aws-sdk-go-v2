@@ -11,17 +11,21 @@ import (
 )
 
 // Untags the specified tags from the specified Amazon Chime SDK meeting resource.
+//
 // Applies the specified tags to the specified Amazon Chime SDK meeting resource.
+//
 // This API is is no longer supported and will not be updated. We recommend using
-// the latest version, UntagResource (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_UntagResource.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// the latest version, [UntagResource], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by UntagResource in the Amazon Chime SDK Voice, Amazon
 // Chime SDK Meetings, Amazon Chime SDK Identity, Amazon Chime SDK Messaging, and
 // Amazon Chime SDK Media Pipelines Namespaces
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [UntagResource]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_UntagResource.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

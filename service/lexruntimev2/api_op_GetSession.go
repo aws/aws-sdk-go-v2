@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns session information for a specified bot, alias, and user. For example,
-// you can use this operation to retrieve session information for a user that has
-// left a long-running session in use. If the bot, alias, or session identifier
-// doesn't exist, Amazon Lex V2 returns a BadRequestException . If the locale
-// doesn't exist or is not enabled for the alias, you receive a BadRequestException
-// .
+// Returns session information for a specified bot, alias, and user.
+//
+// For example, you can use this operation to retrieve session information for a
+// user that has left a long-running session in use.
+//
+// If the bot, alias, or session identifier doesn't exist, Amazon Lex V2 returns a
+// BadRequestException . If the locale doesn't exist or is not enabled for the
+// alias, you receive a BadRequestException .
 func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns ...func(*Options)) (*GetSessionOutput, error) {
 	if params == nil {
 		params = &GetSessionInput{}
@@ -60,10 +62,11 @@ type GetSessionInput struct {
 type GetSessionOutput struct {
 
 	// A list of intents that Amazon Lex V2 determined might satisfy the user's
-	// utterance. Each interpretation includes the intent, a score that indicates how
-	// confident Amazon Lex V2 is that the interpretation is the correct one, and an
-	// optional sentiment response that indicates the sentiment expressed in the
 	// utterance.
+	//
+	// Each interpretation includes the intent, a score that indicates how confident
+	// Amazon Lex V2 is that the interpretation is the correct one, and an optional
+	// sentiment response that indicates the sentiment expressed in the utterance.
 	Interpretations []types.Interpretation
 
 	// A list of messages that were last sent to the user. The messages are ordered
@@ -74,9 +77,10 @@ type GetSessionOutput struct {
 	// The identifier of the returned session.
 	SessionId *string
 
-	// Represents the current state of the dialog between the user and the bot. You
-	// can use this to determine the progress of the conversation and what the next
-	// action might be.
+	// Represents the current state of the dialog between the user and the bot.
+	//
+	// You can use this to determine the progress of the conversation and what the
+	// next action might be.
 	SessionState *types.SessionState
 
 	// Metadata pertaining to the operation's result.

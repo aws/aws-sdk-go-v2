@@ -13,10 +13,10 @@ import (
 
 // Describes the security policy that is attached to your server or SFTP
 // connector. The response contains a description of the security policy's
-// properties. For more information about security policies, see Working with
-// security policies for servers (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
-// or Working with security policies for SFTP connectors (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html)
-// .
+// properties. For more information about security policies, see [Working with security policies for servers]or [Working with security policies for SFTP connectors].
+//
+// [Working with security policies for SFTP connectors]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html
+// [Working with security policies for servers]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html
 func (c *Client) DescribeSecurityPolicy(ctx context.Context, params *DescribeSecurityPolicyInput, optFns ...func(*Options)) (*DescribeSecurityPolicyOutput, error) {
 	if params == nil {
 		params = &DescribeSecurityPolicyInput{}

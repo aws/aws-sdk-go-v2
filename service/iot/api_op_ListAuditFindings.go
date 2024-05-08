@@ -14,8 +14,10 @@ import (
 
 // Lists the findings (results) of a Device Defender audit or of the audits
 // performed during a specified time period. (Findings are retained for 90 days.)
-// Requires permission to access the ListAuditFindings (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//
+// Requires permission to access the [ListAuditFindings] action.
+//
+// [ListAuditFindings]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListAuditFindings(ctx context.Context, params *ListAuditFindingsInput, optFns ...func(*Options)) (*ListAuditFindingsOutput, error) {
 	if params == nil {
 		params = &ListAuditFindingsInput{}
@@ -40,7 +42,7 @@ type ListAuditFindingsInput struct {
 	// specify either the startTime and endTime or the taskId, but not both.
 	EndTime *time.Time
 
-	// Boolean flag indicating whether only the suppressed findings or the
+	//  Boolean flag indicating whether only the suppressed findings or the
 	// unsuppressed findings should be listed. If this parameter isn't provided, the
 	// response will list both suppressed and unsuppressed findings.
 	ListSuppressedFindings bool

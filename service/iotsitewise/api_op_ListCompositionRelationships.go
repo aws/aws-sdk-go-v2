@@ -32,13 +32,16 @@ type ListCompositionRelationshipsInput struct {
 
 	// The ID of the asset model. This can be either the actual ID in UUID format, or
 	// else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelId *string
 
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -184,7 +187,9 @@ var _ ListCompositionRelationshipsAPIClient = (*Client)(nil)
 // ListCompositionRelationshipsPaginatorOptions is the paginator options for
 // ListCompositionRelationships
 type ListCompositionRelationshipsPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

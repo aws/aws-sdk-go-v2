@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for BatchInferenceJobMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchInferenceJobMode) Values() []BatchInferenceJobMode {
 	return []BatchInferenceJobMode{
 		"BATCH_INFERENCE",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for Domain. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Domain) Values() []Domain {
 	return []Domain{
 		"ECOMMERCE",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for ImportMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportMode) Values() []ImportMode {
 	return []ImportMode{
 		"FULL",
@@ -66,8 +69,9 @@ const (
 )
 
 // Values returns all known values for IngestionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionMode) Values() []IngestionMode {
 	return []IngestionMode{
 		"BULK",
@@ -87,8 +91,9 @@ const (
 )
 
 // Values returns all known values for ObjectiveSensitivity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectiveSensitivity) Values() []ObjectiveSensitivity {
 	return []ObjectiveSensitivity{
 		"LOW",
@@ -106,8 +111,9 @@ const (
 )
 
 // Values returns all known values for RecipeProvider. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecipeProvider) Values() []RecipeProvider {
 	return []RecipeProvider{
 		"SERVICE",
@@ -124,8 +130,9 @@ const (
 )
 
 // Values returns all known values for TrainingMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrainingMode) Values() []TrainingMode {
 	return []TrainingMode{
 		"FULL",
@@ -143,8 +150,9 @@ const (
 )
 
 // Values returns all known values for TrainingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrainingType) Values() []TrainingType {
 	return []TrainingType{
 		"AUTOMATIC",

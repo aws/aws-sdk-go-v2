@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import hub content. Hub APIs are only callable through SageMaker Studio.
+// Import hub content.
+//
+// Hub APIs are only callable through SageMaker Studio.
 func (c *Client) ImportHubContent(ctx context.Context, params *ImportHubContentInput, optFns ...func(*Options)) (*ImportHubContentOutput, error) {
 	if params == nil {
 		params = &ImportHubContentInput{}

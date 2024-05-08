@@ -53,15 +53,19 @@ type CreateScanInput struct {
 	ClientToken *string
 
 	// The type of scan, either Standard or Express . Defaults to Standard type if
-	// missing. Express scans run on limited resources and use a limited set of
-	// detectors to analyze your code in near-real time. Standard scans have standard
-	// resource limits and use the full set of detectors to analyze your code.
+	// missing.
+	//
+	// Express scans run on limited resources and use a limited set of detectors to
+	// analyze your code in near-real time. Standard scans have standard resource
+	// limits and use the full set of detectors to analyze your code.
 	ScanType types.ScanType
 
 	// An array of key-value pairs used to tag a scan. A tag is a custom attribute
 	// label with two parts:
+	//
 	//   - A tag key. For example, CostCenter , Environment , or Secret . Tag keys are
 	//   case sensitive.
+	//
 	//   - An optional tag value field. For example, 111122223333 , Production , or a
 	//   team name. Omitting the tag value is the same as using an empty string. Tag
 	//   values are case sensitive.

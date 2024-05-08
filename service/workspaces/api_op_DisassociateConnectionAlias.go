@@ -12,10 +12,13 @@ import (
 
 // Disassociates a connection alias from a directory. Disassociating a connection
 // alias disables cross-Region redirection between two directories in different
-// Regions. For more information, see Cross-Region Redirection for Amazon
-// WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
-// . Before performing this operation, call DescribeConnectionAliases (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html)
-// to make sure that the current state of the connection alias is CREATED .
+// Regions. For more information, see [Cross-Region Redirection for Amazon WorkSpaces].
+//
+// Before performing this operation, call [DescribeConnectionAliases] to make sure that the current state of
+// the connection alias is CREATED .
+//
+// [DescribeConnectionAliases]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html
+// [Cross-Region Redirection for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
 func (c *Client) DisassociateConnectionAlias(ctx context.Context, params *DisassociateConnectionAliasInput, optFns ...func(*Options)) (*DisassociateConnectionAliasOutput, error) {
 	if params == nil {
 		params = &DisassociateConnectionAliasInput{}

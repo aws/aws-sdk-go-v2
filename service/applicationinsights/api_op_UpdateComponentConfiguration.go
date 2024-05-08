@@ -41,17 +41,18 @@ type UpdateComponentConfigurationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// Automatically configures the component by applying the recommended
+	//  Automatically configures the component by applying the recommended
 	// configurations.
 	AutoConfigEnabled *bool
 
 	// The configuration settings of the component. The value is the escaped JSON of
-	// the configuration. For more information about the JSON format, see Working with
-	// JSON (https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html)
-	// . You can send a request to DescribeComponentConfigurationRecommendation to see
-	// the recommended configuration for a component. For the complete format of the
-	// component configuration file, see Component Configuration (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html)
-	// .
+	// the configuration. For more information about the JSON format, see [Working with JSON]. You can
+	// send a request to DescribeComponentConfigurationRecommendation to see the
+	// recommended configuration for a component. For the complete format of the
+	// component configuration file, see [Component Configuration].
+	//
+	// [Working with JSON]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html
+	// [Component Configuration]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html
 	ComponentConfiguration *string
 
 	// Indicates whether the application component is monitored.

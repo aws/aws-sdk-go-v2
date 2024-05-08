@@ -30,8 +30,11 @@ func (c *Client) DeprecateSystemTemplate(ctx context.Context, params *DeprecateS
 
 type DeprecateSystemTemplateInput struct {
 
-	// The ID of the system to delete. The ID should be in the following format.
-	// urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
+	// The ID of the system to delete.
+	//
+	// The ID should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
 	//
 	// This member is required.
 	Id *string

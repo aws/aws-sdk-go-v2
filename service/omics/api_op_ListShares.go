@@ -55,8 +55,8 @@ type ListSharesOutput struct {
 	// This member is required.
 	Shares []types.ShareDetails
 
-	// Next token returned in the response of a previous ListSharesResponse call. Used
-	// to get the next page of results.
+	//  Next token returned in the response of a previous ListSharesResponse call.
+	// Used to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

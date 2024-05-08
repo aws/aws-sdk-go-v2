@@ -30,15 +30,15 @@ func (c *Client) ListDomainAssociations(ctx context.Context, params *ListDomainA
 // The request structure for the list domain associations request.
 type ListDomainAssociationsInput struct {
 
-	// The unique ID for an Amplify app.
+	//  The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
 
-	// The maximum number of records to list in a single response.
+	//  The maximum number of records to list in a single response.
 	MaxResults int32
 
-	// A pagination token. Set to null to start listing apps from the start. If
+	//  A pagination token. Set to null to start listing apps from the start. If
 	// non-null, a pagination token is returned in a result. Pass its value in here to
 	// list more projects.
 	NextToken *string
@@ -49,12 +49,12 @@ type ListDomainAssociationsInput struct {
 // The result structure for the list domain association request.
 type ListDomainAssociationsOutput struct {
 
-	// A list of domain associations.
+	//  A list of domain associations.
 	//
 	// This member is required.
 	DomainAssociations []types.DomainAssociation
 
-	// A pagination token. If non-null, a pagination token is returned in a result.
+	//  A pagination token. If non-null, a pagination token is returned in a result.
 	// Pass its value in another request to retrieve more entries.
 	NextToken *string
 
@@ -154,7 +154,7 @@ var _ ListDomainAssociationsAPIClient = (*Client)(nil)
 // ListDomainAssociationsPaginatorOptions is the paginator options for
 // ListDomainAssociations
 type ListDomainAssociationsPaginatorOptions struct {
-	// The maximum number of records to list in a single response.
+	//  The maximum number of records to list in a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

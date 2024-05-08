@@ -11,12 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a device certificate with IoT in the same certificate mode (https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode)
-// as the signing CA. If you have more than one CA certificate that has the same
-// subject field, you must specify the CA certificate that was used to sign the
-// device certificate being registered. Requires permission to access the
-// RegisterCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Registers a device certificate with IoT in the same [certificate mode] as the signing CA. If you
+// have more than one CA certificate that has the same subject field, you must
+// specify the CA certificate that was used to sign the device certificate being
+// registered.
+//
+// Requires permission to access the [RegisterCertificate] action.
+//
+// [RegisterCertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [certificate mode]: https://docs.aws.amazon.com/iot/latest/apireference/API_CertificateDescription.html#iot-Type-CertificateDescription-certificateMode
 func (c *Client) RegisterCertificate(ctx context.Context, params *RegisterCertificateInput, optFns ...func(*Options)) (*RegisterCertificateOutput, error) {
 	if params == nil {
 		params = &RegisterCertificateInput{}
@@ -43,8 +46,9 @@ type RegisterCertificateInput struct {
 	// The CA certificate used to sign the device certificate being registered.
 	CaCertificatePem *string
 
-	// A boolean value that specifies if the certificate is set to active. Valid
-	// values: ACTIVE | INACTIVE
+	// A boolean value that specifies if the certificate is set to active.
+	//
+	// Valid values: ACTIVE | INACTIVE
 	//
 	// Deprecated: This member has been deprecated.
 	SetAsActive *bool

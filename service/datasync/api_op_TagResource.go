@@ -12,8 +12,9 @@ import (
 )
 
 // Applies a tag to an Amazon Web Services resource. Tags are key-value pairs that
-// can help you manage, filter, and search for your resources. These include
-// DataSync resources, such as locations, tasks, and task executions.
+// can help you manage, filter, and search for your resources.
+//
+// These include DataSync resources, such as locations, tasks, and task executions.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

@@ -30,8 +30,9 @@ func (c *Client) ListComponentVersions(ctx context.Context, params *ListComponen
 
 type ListComponentVersionsInput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the component.
+	// The [ARN] of the component.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	Arn *string

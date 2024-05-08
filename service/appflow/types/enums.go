@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AggregationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AggregationType) Values() []AggregationType {
 	return []AggregationType{
 		"None",
@@ -29,6 +30,7 @@ const (
 
 // Values returns all known values for AmplitudeConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AmplitudeConnectorOperator) Values() []AmplitudeConnectorOperator {
 	return []AmplitudeConnectorOperator{
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationType) Values() []AuthenticationType {
 	return []AuthenticationType{
 		"OAUTH2",
@@ -66,8 +69,9 @@ const (
 )
 
 // Values returns all known values for CatalogType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CatalogType) Values() []CatalogType {
 	return []CatalogType{
 		"GLUE",
@@ -83,8 +87,9 @@ const (
 )
 
 // Values returns all known values for ConnectionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionMode) Values() []ConnectionMode {
 	return []ConnectionMode{
 		"Public",
@@ -101,6 +106,7 @@ const (
 
 // Values returns all known values for ConnectorProvisioningType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorProvisioningType) Values() []ConnectorProvisioningType {
 	return []ConnectorProvisioningType{
@@ -139,8 +145,9 @@ const (
 )
 
 // Values returns all known values for ConnectorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorType) Values() []ConnectorType {
 	return []ConnectorType{
 		"Salesforce",
@@ -193,6 +200,7 @@ const (
 
 // Values returns all known values for DatadogConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DatadogConnectorOperator) Values() []DatadogConnectorOperator {
 	return []DatadogConnectorOperator{
@@ -223,8 +231,9 @@ const (
 )
 
 // Values returns all known values for DataPullMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataPullMode) Values() []DataPullMode {
 	return []DataPullMode{
 		"Incremental",
@@ -242,8 +251,9 @@ const (
 )
 
 // Values returns all known values for DataTransferApiType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataTransferApiType) Values() []DataTransferApiType {
 	return []DataTransferApiType{
 		"SYNC",
@@ -275,6 +285,7 @@ const (
 
 // Values returns all known values for DynatraceConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DynatraceConnectorOperator) Values() []DynatraceConnectorOperator {
 	return []DynatraceConnectorOperator{
@@ -308,8 +319,9 @@ const (
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionStatus) Values() []ExecutionStatus {
 	return []ExecutionStatus{
 		"InProgress",
@@ -330,8 +342,9 @@ const (
 )
 
 // Values returns all known values for FileType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileType) Values() []FileType {
 	return []FileType{
 		"CSV",
@@ -353,8 +366,9 @@ const (
 )
 
 // Values returns all known values for FlowStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FlowStatus) Values() []FlowStatus {
 	return []FlowStatus{
 		"Active",
@@ -376,8 +390,9 @@ const (
 
 // Values returns all known values for GoogleAnalyticsConnectorOperator. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GoogleAnalyticsConnectorOperator) Values() []GoogleAnalyticsConnectorOperator {
 	return []GoogleAnalyticsConnectorOperator{
 		"PROJECTION",
@@ -408,6 +423,7 @@ const (
 
 // Values returns all known values for InforNexusConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InforNexusConnectorOperator) Values() []InforNexusConnectorOperator {
 	return []InforNexusConnectorOperator{
@@ -453,6 +469,7 @@ const (
 
 // Values returns all known values for MarketoConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
 	return []MarketoConnectorOperator{
@@ -484,8 +501,9 @@ const (
 )
 
 // Values returns all known values for OAuth2CustomPropType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OAuth2CustomPropType) Values() []OAuth2CustomPropType {
 	return []OAuth2CustomPropType{
 		"TOKEN_URL",
@@ -503,8 +521,9 @@ const (
 )
 
 // Values returns all known values for OAuth2GrantType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OAuth2GrantType) Values() []OAuth2GrantType {
 	return []OAuth2GrantType{
 		"CLIENT_CREDENTIALS",
@@ -541,8 +560,9 @@ const (
 )
 
 // Values returns all known values for Operator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"PROJECTION",
@@ -593,8 +613,9 @@ const (
 )
 
 // Values returns all known values for OperatorPropertiesKeys. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperatorPropertiesKeys) Values() []OperatorPropertiesKeys {
 	return []OperatorPropertiesKeys{
 		"VALUE",
@@ -645,8 +666,9 @@ const (
 )
 
 // Values returns all known values for Operators. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Operators) Values() []Operators {
 	return []Operators{
 		"PROJECTION",
@@ -694,8 +716,9 @@ const (
 )
 
 // Values returns all known values for PardotConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PardotConnectorOperator) Values() []PardotConnectorOperator {
 	return []PardotConnectorOperator{
 		"PROJECTION",
@@ -724,8 +747,9 @@ const (
 )
 
 // Values returns all known values for PathPrefix. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PathPrefix) Values() []PathPrefix {
 	return []PathPrefix{
 		"EXECUTION_ID",
@@ -745,8 +769,9 @@ const (
 )
 
 // Values returns all known values for PrefixFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrefixFormat) Values() []PrefixFormat {
 	return []PrefixFormat{
 		"YEAR",
@@ -767,8 +792,9 @@ const (
 )
 
 // Values returns all known values for PrefixType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrefixType) Values() []PrefixType {
 	return []PrefixType{
 		"FILENAME",
@@ -790,8 +816,9 @@ const (
 
 // Values returns all known values for PrivateConnectionProvisioningFailureCause.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrivateConnectionProvisioningFailureCause) Values() []PrivateConnectionProvisioningFailureCause {
 	return []PrivateConnectionProvisioningFailureCause{
 		"CONNECTOR_AUTHENTICATION",
@@ -813,8 +840,9 @@ const (
 
 // Values returns all known values for PrivateConnectionProvisioningStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrivateConnectionProvisioningStatus) Values() []PrivateConnectionProvisioningStatus {
 	return []PrivateConnectionProvisioningStatus{
 		"FAILED",
@@ -850,8 +878,9 @@ const (
 )
 
 // Values returns all known values for S3ConnectorOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3ConnectorOperator) Values() []S3ConnectorOperator {
 	return []S3ConnectorOperator{
 		"PROJECTION",
@@ -886,8 +915,9 @@ const (
 )
 
 // Values returns all known values for S3InputFileType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3InputFileType) Values() []S3InputFileType {
 	return []S3InputFileType{
 		"CSV",
@@ -924,6 +954,7 @@ const (
 
 // Values returns all known values for SalesforceConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
 	return []SalesforceConnectorOperator{
@@ -962,6 +993,7 @@ const (
 
 // Values returns all known values for SalesforceDataTransferApi. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SalesforceDataTransferApi) Values() []SalesforceDataTransferApi {
 	return []SalesforceDataTransferApi{
@@ -1000,6 +1032,7 @@ const (
 
 // Values returns all known values for SAPODataConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SAPODataConnectorOperator) Values() []SAPODataConnectorOperator {
 	return []SAPODataConnectorOperator{
@@ -1040,8 +1073,9 @@ const (
 )
 
 // Values returns all known values for ScheduleFrequencyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduleFrequencyType) Values() []ScheduleFrequencyType {
 	return []ScheduleFrequencyType{
 		"BYMINUTE",
@@ -1082,6 +1116,7 @@ const (
 
 // Values returns all known values for ServiceNowConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceNowConnectorOperator) Values() []ServiceNowConnectorOperator {
 	return []ServiceNowConnectorOperator{
@@ -1131,6 +1166,7 @@ const (
 
 // Values returns all known values for SingularConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SingularConnectorOperator) Values() []SingularConnectorOperator {
 	return []SingularConnectorOperator{
@@ -1177,8 +1213,9 @@ const (
 )
 
 // Values returns all known values for SlackConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SlackConnectorOperator) Values() []SlackConnectorOperator {
 	return []SlackConnectorOperator{
 		"PROJECTION",
@@ -1213,6 +1250,7 @@ const (
 
 // Values returns all known values for SupportedDataTransferType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SupportedDataTransferType) Values() []SupportedDataTransferType {
 	return []SupportedDataTransferType{
@@ -1238,8 +1276,9 @@ const (
 )
 
 // Values returns all known values for TaskType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TaskType) Values() []TaskType {
 	return []TaskType{
 		"Arithmetic",
@@ -1277,6 +1316,7 @@ const (
 
 // Values returns all known values for TrendmicroConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TrendmicroConnectorOperator) Values() []TrendmicroConnectorOperator {
 	return []TrendmicroConnectorOperator{
@@ -1307,8 +1347,9 @@ const (
 )
 
 // Values returns all known values for TriggerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TriggerType) Values() []TriggerType {
 	return []TriggerType{
 		"Scheduled",
@@ -1345,8 +1386,9 @@ const (
 )
 
 // Values returns all known values for VeevaConnectorOperator. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VeevaConnectorOperator) Values() []VeevaConnectorOperator {
 	return []VeevaConnectorOperator{
 		"PROJECTION",
@@ -1384,8 +1426,9 @@ const (
 )
 
 // Values returns all known values for WriteOperationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WriteOperationType) Values() []WriteOperationType {
 	return []WriteOperationType{
 		"INSERT",
@@ -1417,6 +1460,7 @@ const (
 
 // Values returns all known values for ZendeskConnectorOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ZendeskConnectorOperator) Values() []ZendeskConnectorOperator {
 	return []ZendeskConnectorOperator{

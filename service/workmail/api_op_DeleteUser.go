@@ -11,10 +11,11 @@ import (
 )
 
 // Deletes a user from WorkMail and all subsequent systems. Before you can delete
-// a user, the user state must be DISABLED . Use the DescribeUser action to
-// confirm the user state. Deleting a user is permanent and cannot be undone.
-// WorkMail archives user mailboxes for 30 days before they are permanently
-// removed.
+// a user, the user state must be DISABLED . Use the DescribeUser action to confirm the user
+// state.
+//
+// Deleting a user is permanent and cannot be undone. WorkMail archives user
+// mailboxes for 30 days before they are permanently removed.
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}
@@ -37,10 +38,14 @@ type DeleteUserInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier of the user to be deleted. The identifier can be the UserId or
-	// Username. The following identity formats are available:
+	// The identifier of the user to be deleted.
+	//
+	// The identifier can be the UserId or Username. The following identity formats
+	// are available:
+	//
 	//   - User ID: 12345678-1234-1234-1234-123456789012 or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - User name: user
 	//
 	// This member is required.

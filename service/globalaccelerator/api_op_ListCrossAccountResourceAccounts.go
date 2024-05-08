@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the accounts that have cross-account resources. For more information, see
-// Working with cross-account attachments and resources in Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html)
-// in the Global Accelerator Developer Guide.
+// List the accounts that have cross-account resources.
+//
+// For more information, see [Working with cross-account attachments and resources in Global Accelerator] in the Global Accelerator Developer Guide.
+//
+// [Working with cross-account attachments and resources in Global Accelerator]: https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html
 func (c *Client) ListCrossAccountResourceAccounts(ctx context.Context, params *ListCrossAccountResourceAccountsInput, optFns ...func(*Options)) (*ListCrossAccountResourceAccountsOutput, error) {
 	if params == nil {
 		params = &ListCrossAccountResourceAccountsInput{}

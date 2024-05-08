@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AllowPublish. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AllowPublish) Values() []AllowPublish {
 	return []AllowPublish{
 		"ALLOW",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for AllowUpstream. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AllowUpstream) Values() []AllowUpstream {
 	return []AllowUpstream{
 		"ALLOW",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for DomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"Active",
@@ -65,6 +68,7 @@ const (
 
 // Values returns all known values for ExternalConnectionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ExternalConnectionStatus) Values() []ExternalConnectionStatus {
 	return []ExternalConnectionStatus{
@@ -83,8 +87,9 @@ const (
 )
 
 // Values returns all known values for HashAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HashAlgorithm) Values() []HashAlgorithm {
 	return []HashAlgorithm{
 		"MD5",
@@ -108,8 +113,9 @@ const (
 )
 
 // Values returns all known values for PackageFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageFormat) Values() []PackageFormat {
 	return []PackageFormat{
 		"npm",
@@ -132,8 +138,9 @@ const (
 
 // Values returns all known values for PackageGroupAllowedRepositoryUpdateType.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageGroupAllowedRepositoryUpdateType) Values() []PackageGroupAllowedRepositoryUpdateType {
 	return []PackageGroupAllowedRepositoryUpdateType{
 		"ADDED",
@@ -151,6 +158,7 @@ const (
 
 // Values returns all known values for PackageGroupAssociationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageGroupAssociationType) Values() []PackageGroupAssociationType {
 	return []PackageGroupAssociationType{
@@ -171,8 +179,9 @@ const (
 
 // Values returns all known values for PackageGroupOriginRestrictionMode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageGroupOriginRestrictionMode) Values() []PackageGroupOriginRestrictionMode {
 	return []PackageGroupOriginRestrictionMode{
 		"ALLOW",
@@ -193,8 +202,9 @@ const (
 
 // Values returns all known values for PackageGroupOriginRestrictionType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageGroupOriginRestrictionType) Values() []PackageGroupOriginRestrictionType {
 	return []PackageGroupOriginRestrictionType{
 		"EXTERNAL_UPSTREAM",
@@ -216,8 +226,9 @@ const (
 )
 
 // Values returns all known values for PackageVersionErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageVersionErrorCode) Values() []PackageVersionErrorCode {
 	return []PackageVersionErrorCode{
 		"ALREADY_EXISTS",
@@ -240,6 +251,7 @@ const (
 
 // Values returns all known values for PackageVersionOriginType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageVersionOriginType) Values() []PackageVersionOriginType {
 	return []PackageVersionOriginType{
@@ -257,8 +269,9 @@ const (
 )
 
 // Values returns all known values for PackageVersionSortType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageVersionSortType) Values() []PackageVersionSortType {
 	return []PackageVersionSortType{
 		"PUBLISHED_TIME",
@@ -278,8 +291,9 @@ const (
 )
 
 // Values returns all known values for PackageVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackageVersionStatus) Values() []PackageVersionStatus {
 	return []PackageVersionStatus{
 		"Published",
@@ -303,8 +317,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"domain",
@@ -328,6 +343,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

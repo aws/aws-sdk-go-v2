@@ -17,12 +17,14 @@ import (
 // operation requires SAML federation setup in the caller’s account as it can only
 // be called with valid SAML assertions. Lake Formation does not scope down the
 // permission of the assumed role. All permissions attached to the role via the
-// SAML federation setup will be included in the role session. This decorated role
-// is expected to access data in Amazon S3 by getting temporary access from Lake
-// Formation which is authorized via the virtual API GetDataAccess . Therefore, all
-// SAML roles that can be assumed via AssumeDecoratedRoleWithSAML must at a
-// minimum include lakeformation:GetDataAccess in their role policies. A typical
-// IAM policy attached to such a role would look as follows:
+// SAML federation setup will be included in the role session.
+//
+// This decorated role is expected to access data in Amazon S3 by getting
+// temporary access from Lake Formation which is authorized via the virtual API
+// GetDataAccess . Therefore, all SAML roles that can be assumed via
+// AssumeDecoratedRoleWithSAML must at a minimum include
+// lakeformation:GetDataAccess in their role policies. A typical IAM policy
+// attached to such a role would look as follows:
 func (c *Client) AssumeDecoratedRoleWithSAML(ctx context.Context, params *AssumeDecoratedRoleWithSAMLInput, optFns ...func(*Options)) (*AssumeDecoratedRoleWithSAMLOutput, error) {
 	if params == nil {
 		params = &AssumeDecoratedRoleWithSAMLInput{}

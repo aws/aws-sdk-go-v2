@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags attached to the resource. Required permissions:
-// rolesanywhere:ListTagsForResource .
+// Lists the tags attached to the resource.
+//
+// Required permissions: rolesanywhere:ListTagsForResource .
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

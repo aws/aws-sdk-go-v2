@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about a policy. This operation can be called only from
-// the organization's management account or by a member account that is a delegated
-// administrator for an Amazon Web Services service.
+// Retrieves information about a policy.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) DescribePolicy(ctx context.Context, params *DescribePolicyInput, optFns ...func(*Options)) (*DescribePolicyOutput, error) {
 	if params == nil {
 		params = &DescribePolicyInput{}
@@ -32,10 +34,12 @@ func (c *Client) DescribePolicy(ctx context.Context, params *DescribePolicyInput
 type DescribePolicyInput struct {
 
 	// The unique identifier (ID) of the policy that you want details about. You can
-	// get the ID from the ListPolicies or ListPoliciesForTarget operations. The regex
-	// pattern (http://wikipedia.org/wiki/regex) for a policy ID string requires "p-"
-	// followed by from 8 to 128 lowercase or uppercase letters, digits, or the
-	// underscore character (_).
+	// get the ID from the ListPoliciesor ListPoliciesForTarget operations.
+	//
+	// The [regex pattern] for a policy ID string requires "p-" followed by from 8 to 128 lowercase
+	// or uppercase letters, digits, or the underscore character (_).
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	PolicyId *string

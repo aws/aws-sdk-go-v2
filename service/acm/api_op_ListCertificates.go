@@ -14,7 +14,7 @@ import (
 // Retrieves a list of certificate ARNs and domain names. You can request that
 // only certificates that match a specific status be listed. You can also filter by
 // specific attributes of the certificate. Default filtering returns only RSA_2048
-// certificates. For more information, see Filters .
+// certificates. For more information, see Filters.
 func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesInput, optFns ...func(*Options)) (*ListCertificatesOutput, error) {
 	if params == nil {
 		params = &ListCertificatesInput{}

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates settings for a server. This operation is synchronous.
+//	Updates settings for a server.
+//
+// This operation is synchronous.
 func (c *Client) UpdateServer(ctx context.Context, params *UpdateServerInput, optFns ...func(*Options)) (*UpdateServerOutput, error) {
 	if params == nil {
 		params = &UpdateServerInput{}
@@ -41,14 +43,16 @@ type UpdateServerInput struct {
 	// Automated backups are enabled by default.
 	DisableAutomatedBackup *bool
 
-	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
-	// use coordinated universal time (UTC). Valid strings for day of week ( DDD ) are:
-	// Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
+	// DDD:HH:MM (weekly start time) or HH:MM (daily start time).
+	//
+	// Time windows always use coordinated universal time (UTC). Valid strings for day
+	// of week ( DDD ) are: Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
 	PreferredBackupWindow *string
 
-	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
-	// use coordinated universal time (UTC). Valid strings for day of week ( DDD ) are:
-	// Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
+	// DDD:HH:MM (weekly start time) or HH:MM (daily start time).
+	//
+	// Time windows always use coordinated universal time (UTC). Valid strings for day
+	// of week ( DDD ) are: Mon , Tue , Wed , Thr , Fri , Sat , or Sun .
 	PreferredMaintenanceWindow *string
 
 	noSmithyDocumentSerde

@@ -28,22 +28,30 @@ func (c *Client) DisassociateMemberFromGroup(ctx context.Context, params *Disass
 
 type DisassociateMemberFromGroupInput struct {
 
-	// The identifier for the group from which members are removed. The identifier can
-	// accept GroupId, Groupname, or email. The following identity formats are
-	// available:
+	// The identifier for the group from which members are removed.
+	//
+	// The identifier can accept GroupId, Groupname, or email. The following identity
+	// formats are available:
+	//
 	//   - Group ID: 12345678-1234-1234-1234-123456789012 or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: group@domain.tld
+	//
 	//   - Group name: group
 	//
 	// This member is required.
 	GroupId *string
 
-	// The identifier for the member to be removed from the group. The member ID can
-	// accept UserID or GroupId, Username or Groupname, or email.
+	// The identifier for the member to be removed from the group.
+	//
+	// The member ID can accept UserID or GroupId, Username or Groupname, or email.
+	//
 	//   - Member ID: 12345678-1234-1234-1234-123456789012 or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: member@domain.tld
+	//
 	//   - Member name: member
 	//
 	// This member is required.

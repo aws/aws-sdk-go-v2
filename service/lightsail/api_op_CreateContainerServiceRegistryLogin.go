@@ -17,17 +17,21 @@ import (
 // image registry of your Amazon Lightsail account so that you can use them with
 // your Lightsail container service. The log in credentials expire 12 hours after
 // they are created, at which point you will need to create a new set of log in
-// credentials. You can only push container images to the container service
-// registry of your Lightsail account. You cannot pull container images or perform
-// any other container image management actions on the container service registry.
+// credentials.
+//
+// You can only push container images to the container service registry of your
+// Lightsail account. You cannot pull container images or perform any other
+// container image management actions on the container service registry.
+//
 // After you push your container images to the container image registry of your
 // Lightsail account, use the RegisterContainerImage action to register the pushed
-// images to a specific Lightsail container service. This action is not required if
-// you install and use the Lightsail Control (lightsailctl) plugin to push
-// container images to your Lightsail container service. For more information, see
-// Pushing and managing container images on your Amazon Lightsail container
-// services (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images)
-// in the Amazon Lightsail Developer Guide.
+// images to a specific Lightsail container service.
+//
+// This action is not required if you install and use the Lightsail Control
+// (lightsailctl) plugin to push container images to your Lightsail container
+// service. For more information, see [Pushing and managing container images on your Amazon Lightsail container services]in the Amazon Lightsail Developer Guide.
+//
+// [Pushing and managing container images on your Amazon Lightsail container services]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images
 func (c *Client) CreateContainerServiceRegistryLogin(ctx context.Context, params *CreateContainerServiceRegistryLoginInput, optFns ...func(*Options)) (*CreateContainerServiceRegistryLoginOutput, error) {
 	if params == nil {
 		params = &CreateContainerServiceRegistryLoginInput{}

@@ -30,12 +30,12 @@ func (c *Client) DisassociateAttributeGroup(ctx context.Context, params *Disasso
 
 type DisassociateAttributeGroupInput struct {
 
-	// The name, ID, or ARN of the application.
+	//  The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string
 
-	// The name, ID, or ARN of the attribute group that holds the attributes to
+	//  The name, ID, or ARN of the attribute group that holds the attributes to
 	// describe the application.
 	//
 	// This member is required.

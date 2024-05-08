@@ -11,16 +11,20 @@ import (
 )
 
 // Sets the maximum number of simultaneous executions for a function, and reserves
-// capacity for that concurrency level. Concurrency settings apply to the function
-// as a whole, including all published versions and the unpublished version.
-// Reserving concurrency both ensures that your function has capacity to process
-// the specified number of events simultaneously, and prevents it from scaling
-// beyond that level. Use GetFunction to see the current setting for a function.
-// Use GetAccountSettings to see your Regional concurrency limit. You can reserve
-// concurrency for as many functions as you like, as long as you leave at least 100
-// simultaneous executions unreserved for functions that aren't configured with a
-// per-function limit. For more information, see Lambda function scaling (https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html)
-// .
+// capacity for that concurrency level.
+//
+// Concurrency settings apply to the function as a whole, including all published
+// versions and the unpublished version. Reserving concurrency both ensures that
+// your function has capacity to process the specified number of events
+// simultaneously, and prevents it from scaling beyond that level. Use GetFunctionto see the
+// current setting for a function.
+//
+// Use GetAccountSettings to see your Regional concurrency limit. You can reserve concurrency for as
+// many functions as you like, as long as you leave at least 100 simultaneous
+// executions unreserved for functions that aren't configured with a per-function
+// limit. For more information, see [Lambda function scaling].
+//
+// [Lambda function scaling]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
 func (c *Client) PutFunctionConcurrency(ctx context.Context, params *PutFunctionConcurrencyInput, optFns ...func(*Options)) (*PutFunctionConcurrencyOutput, error) {
 	if params == nil {
 		params = &PutFunctionConcurrencyInput{}
@@ -38,10 +42,16 @@ func (c *Client) PutFunctionConcurrency(ctx context.Context, params *PutFunction
 
 type PutFunctionConcurrencyInput struct {
 
-	// The name or ARN of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -59,8 +69,9 @@ type PutFunctionConcurrencyInput struct {
 type PutFunctionConcurrencyOutput struct {
 
 	// The number of concurrent executions that are reserved for this function. For
-	// more information, see Managing Lambda reserved concurrency (https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html)
-	// .
+	// more information, see [Managing Lambda reserved concurrency].
+	//
+	// [Managing Lambda reserved concurrency]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 	ReservedConcurrentExecutions *int32
 
 	// Metadata pertaining to the operation's result.

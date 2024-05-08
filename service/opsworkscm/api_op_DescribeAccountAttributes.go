@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes your OpsWorks-CM account attributes. This operation is synchronous.
+//	Describes your OpsWorks-CM account attributes.
+//
+// This operation is synchronous.
 func (c *Client) DescribeAccountAttributes(ctx context.Context, params *DescribeAccountAttributesInput, optFns ...func(*Options)) (*DescribeAccountAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountAttributesInput{}
@@ -33,7 +35,7 @@ type DescribeAccountAttributesInput struct {
 
 type DescribeAccountAttributesOutput struct {
 
-	// The attributes that are currently set for the account.
+	//  The attributes that are currently set for the account.
 	Attributes []types.AccountAttribute
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes all rule groups that are managed by Firewall Manager for the specified
-// web ACL. You can only use this if ManagedByFirewallManager is false in the
-// specified WebACL .
+// web ACL.
+//
+// You can only use this if ManagedByFirewallManager is false in the specified WebACL.
 func (c *Client) DeleteFirewallManagerRuleGroups(ctx context.Context, params *DeleteFirewallManagerRuleGroupsInput, optFns ...func(*Options)) (*DeleteFirewallManagerRuleGroupsOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallManagerRuleGroupsInput{}

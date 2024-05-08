@@ -11,12 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Put position configuration for a given resource. This action is no longer
-// supported. Calls to update the position configuration should use the
-// UpdateResourcePosition (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html)
-// API operation instead.
+// Put position configuration for a given resource.
+//
+// This action is no longer supported. Calls to update the position configuration
+// should use the [UpdateResourcePosition]API operation instead.
 //
 // Deprecated: This operation is no longer supported.
+//
+// [UpdateResourcePosition]: https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html
 func (c *Client) PutPositionConfiguration(ctx context.Context, params *PutPositionConfigurationInput, optFns ...func(*Options)) (*PutPositionConfigurationOutput, error) {
 	if params == nil {
 		params = &PutPositionConfigurationInput{}

@@ -39,13 +39,19 @@ type CreateResolverRuleInput struct {
 	CreatorRequestId *string
 
 	// When you want to forward DNS queries for specified domain name to resolvers on
-	// your network, specify FORWARD . When you have a forwarding rule to forward DNS
-	// queries for a domain to your network and you want Resolver to process queries
-	// for a subdomain of that domain, specify SYSTEM . For example, to forward DNS
-	// queries for example.com to resolvers on your network, you create a rule and
-	// specify FORWARD for RuleType . To then have Resolver process queries for
-	// apex.example.com, you create a rule and specify SYSTEM for RuleType . Currently,
-	// only Resolver can create rules that have a value of RECURSIVE for RuleType .
+	// your network, specify FORWARD .
+	//
+	// When you have a forwarding rule to forward DNS queries for a domain to your
+	// network and you want Resolver to process queries for a subdomain of that domain,
+	// specify SYSTEM .
+	//
+	// For example, to forward DNS queries for example.com to resolvers on your
+	// network, you create a rule and specify FORWARD for RuleType . To then have
+	// Resolver process queries for apex.example.com, you create a rule and specify
+	// SYSTEM for RuleType .
+	//
+	// Currently, only Resolver can create rules that have a value of RECURSIVE for
+	// RuleType .
 	//
 	// This member is required.
 	RuleType types.RuleTypeOption
@@ -69,8 +75,9 @@ type CreateResolverRuleInput struct {
 
 	// The IPs that you want Resolver to forward DNS queries to. You can specify
 	// either Ipv4 or Ipv6 addresses but not both in the same rule. Separate IP
-	// addresses with a space. TargetIps is available only when the value of Rule type
-	// is FORWARD .
+	// addresses with a space.
+	//
+	// TargetIps is available only when the value of Rule type is FORWARD .
 	TargetIps []types.TargetAddress
 
 	noSmithyDocumentSerde

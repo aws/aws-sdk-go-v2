@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List provisioned resources for a component with details. For more information
-// about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-// in the Proton User Guide.
+// List provisioned resources for a component with details.
+//
+// For more information about components, see [Proton components] in the Proton User Guide.
+//
+// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 func (c *Client) ListComponentProvisionedResources(ctx context.Context, params *ListComponentProvisionedResourcesInput, optFns ...func(*Options)) (*ListComponentProvisionedResourcesOutput, error) {
 	if params == nil {
 		params = &ListComponentProvisionedResourcesInput{}

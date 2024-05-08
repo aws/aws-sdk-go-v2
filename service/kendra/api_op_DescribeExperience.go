@@ -14,8 +14,9 @@ import (
 
 // Gets information about your Amazon Kendra experience such as a search
 // application. For more information on creating a search application experience,
-// see Building a search experience with no code (https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html)
-// .
+// see [Building a search experience with no code].
+//
+// [Building a search experience with no code]: https://docs.aws.amazon.com/kendra/latest/dg/deploying-search-experience-no-code.html
 func (c *Client) DescribeExperience(ctx context.Context, params *DescribeExperienceInput, optFns ...func(*Options)) (*DescribeExperienceOutput, error) {
 	if params == nil {
 		params = &DescribeExperienceInput{}

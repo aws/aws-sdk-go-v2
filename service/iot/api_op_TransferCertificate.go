@@ -11,13 +11,22 @@ import (
 )
 
 // Transfers the specified certificate to the specified Amazon Web Services
-// account. Requires permission to access the TransferCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. You can cancel the transfer until it is acknowledged by the recipient.
+// account.
+//
+// Requires permission to access the [TransferCertificate] action.
+//
+// You can cancel the transfer until it is acknowledged by the recipient.
+//
 // No notification is sent to the transfer destination's account. It is up to the
-// caller to notify the transfer target. The certificate being transferred must not
-// be in the ACTIVE state. You can use the UpdateCertificate action to deactivate
-// it. The certificate must not have any policies attached to it. You can use the
-// DetachPolicy action to detach them.
+// caller to notify the transfer target.
+//
+// The certificate being transferred must not be in the ACTIVE state. You can use
+// the UpdateCertificateaction to deactivate it.
+//
+// The certificate must not have any policies attached to it. You can use the DetachPolicy
+// action to detach them.
+//
+// [TransferCertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) TransferCertificate(ctx context.Context, params *TransferCertificateInput, optFns ...func(*Options)) (*TransferCertificateOutput, error) {
 	if params == nil {
 		params = &TransferCertificateInput{}

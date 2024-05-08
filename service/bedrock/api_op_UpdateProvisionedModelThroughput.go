@@ -11,8 +11,9 @@ import (
 )
 
 // Updates the name or associated model for a Provisioned Throughput. For more
-// information, see Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
-// in the Amazon Bedrock User Guide.
+// information, see [Provisioned Throughput]in the Amazon Bedrock User Guide.
+//
+// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 func (c *Client) UpdateProvisionedModelThroughput(ctx context.Context, params *UpdateProvisionedModelThroughputInput, optFns ...func(*Options)) (*UpdateProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &UpdateProvisionedModelThroughputInput{}
@@ -37,9 +38,13 @@ type UpdateProvisionedModelThroughputInput struct {
 
 	// The Amazon Resource Name (ARN) of the new model to associate with this
 	// Provisioned Throughput. You can't specify this field if this Provisioned
-	// Throughput is associated with a base model. If this Provisioned Throughput is
-	// associated with a custom model, you can specify one of the following options:
+	// Throughput is associated with a base model.
+	//
+	// If this Provisioned Throughput is associated with a custom model, you can
+	// specify one of the following options:
+	//
 	//   - The base model from which the custom model was customized.
+	//
 	//   - Another custom model that was customized from the same base model as the
 	//   custom model.
 	DesiredModelId *string

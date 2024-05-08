@@ -61,9 +61,10 @@ type CreateKxUserOutput struct {
 	// The IAM role ARN that will be associated with the user.
 	IamRole *string
 
-	// The Amazon Resource Name (ARN) that identifies the user. For more information
-	// about ARNs and how to use ARNs in policies, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
-	// in the IAM User Guide.
+	//  The Amazon Resource Name (ARN) that identifies the user. For more information
+	// about ARNs and how to use ARNs in policies, see [IAM Identifiers]in the IAM User Guide.
+	//
+	// [IAM Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
 	UserArn *string
 
 	// A unique identifier for the user.

@@ -11,7 +11,7 @@ import (
 // is the top-level node in a hierarchy of related cloud resource abstractions.
 type Application struct {
 
-	// A key-value pair that identifies an associated resource.
+	//  A key-value pair that identifies an associated resource.
 	ApplicationTag map[string]string
 
 	// The Amazon resource name (ARN) that specifies the application across services.
@@ -26,7 +26,7 @@ type Application struct {
 	// The identifier of the application.
 	Id *string
 
-	// The ISO-8601 formatted timestamp of the moment when the application was last
+	//  The ISO-8601 formatted timestamp of the moment when the application was last
 	// updated.
 	LastUpdateTime *time.Time
 
@@ -55,7 +55,7 @@ type ApplicationSummary struct {
 	// The identifier of the application.
 	Id *string
 
-	// The ISO-8601 formatted timestamp of the moment when the application was last
+	//  The ISO-8601 formatted timestamp of the moment when the application was last
 	// updated.
 	LastUpdateTime *time.Time
 
@@ -69,18 +69,18 @@ type ApplicationSummary struct {
 // The result of the application tag that's applied to a resource.
 type ApplicationTagResult struct {
 
-	// The application tag is in the process of being applied to a resource, was
+	//  The application tag is in the process of being applied to a resource, was
 	// successfully applied to a resource, or failed to apply to a resource.
 	ApplicationTagStatus ApplicationTagStatus
 
-	// The message returned if the call fails.
+	//  The message returned if the call fails.
 	ErrorMessage *string
 
-	// A unique pagination token for each page of results. Make the call again with
+	//  A unique pagination token for each page of results. Make the call again with
 	// the returned token to retrieve the next page of results.
 	NextToken *string
 
-	// The resources associated with an application
+	//  The resources associated with an application
 	Resources []ResourcesListItem
 
 	noSmithyDocumentSerde
@@ -89,7 +89,7 @@ type ApplicationTagResult struct {
 // Includes all of the AppRegistry settings.
 type AppRegistryConfiguration struct {
 
-	// Includes the definition of a tagQuery .
+	//  Includes the definition of a tagQuery .
 	TagQueryConfiguration *TagQueryConfiguration
 
 	noSmithyDocumentSerde
@@ -138,8 +138,10 @@ type AttributeGroupDetails struct {
 	// The unique identifier of the attribute group.
 	Id *string
 
-	// This field is no longer supported. We recommend you don't use the field when
-	// using ListAttributeGroupsForApplication . The name of the attribute group.
+	//  This field is no longer supported. We recommend you don't use the field when
+	// using ListAttributeGroupsForApplication .
+	//
+	// The name of the attribute group.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -181,7 +183,7 @@ type Integrations struct {
 	// The information about the resource group integration.
 	ApplicationTagResourceGroup *ResourceGroup
 
-	// The information about the resource group integration.
+	//  The information about the resource group integration.
 	ResourceGroup *ResourceGroup
 
 	noSmithyDocumentSerde
@@ -225,11 +227,19 @@ type ResourceGroup struct {
 	ErrorMessage *string
 
 	// The state of the propagation process for the resource group. The states
-	// includes: CREATING if the resource group is in the process of being created.
-	// CREATE_COMPLETE if the resource group was created successfully. CREATE_FAILED
-	// if the resource group failed to be created. UPDATING if the resource group is
-	// in the process of being updated. UPDATE_COMPLETE if the resource group updated
-	// successfully. UPDATE_FAILED if the resource group could not update successfully.
+	// includes:
+	//
+	// CREATING if the resource group is in the process of being created.
+	//
+	// CREATE_COMPLETE if the resource group was created successfully.
+	//
+	// CREATE_FAILED if the resource group failed to be created.
+	//
+	// UPDATING if the resource group is in the process of being updated.
+	//
+	// UPDATE_COMPLETE if the resource group updated successfully.
+	//
+	// UPDATE_FAILED if the resource group could not update successfully.
 	State ResourceGroupState
 
 	noSmithyDocumentSerde
@@ -244,13 +254,13 @@ type ResourceInfo struct {
 	// The name of the resource.
 	Name *string
 
-	// Determines whether an application tag is applied or skipped.
+	//  Determines whether an application tag is applied or skipped.
 	Options []AssociationOption
 
-	// The details related to the resource.
+	//  The details related to the resource.
 	ResourceDetails *ResourceDetails
 
-	// Provides information about the Service Catalog App Registry resource type.
+	//  Provides information about the Service Catalog App Registry resource type.
 	ResourceType ResourceType
 
 	noSmithyDocumentSerde
@@ -268,26 +278,27 @@ type ResourceIntegrations struct {
 // The resource in a list of resources.
 type ResourcesListItem struct {
 
-	// The message returned if the call fails.
+	//  The message returned if the call fails.
 	ErrorMessage *string
 
-	// The Amazon resource name (ARN) of the resource.
+	//  The Amazon resource name (ARN) of the resource.
 	ResourceArn *string
 
-	// Provides information about the AppRegistry resource type.
+	//  Provides information about the AppRegistry resource type.
 	ResourceType *string
 
-	// The status of the list item.
+	//  The status of the list item.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// The definition of tagQuery . Specifies which resources are associated with an
+//	The definition of tagQuery . Specifies which resources are associated with an
+//
 // application.
 type TagQueryConfiguration struct {
 
-	// Condition in the IAM policy that associates resources to an application.
+	//  Condition in the IAM policy that associates resources to an application.
 	TagKey *string
 
 	noSmithyDocumentSerde

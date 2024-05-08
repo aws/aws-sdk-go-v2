@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the map style descriptor from a map resource. The style descriptor
-// contains speciﬁcations on how features render on a map. For example, what data
-// to display, what order to display the data in, and the style for the data. Style
-// descriptors follow the Mapbox Style Specification.
+// Retrieves the map style descriptor from a map resource.
+//
+// The style descriptor contains speciﬁcations on how features render on a map.
+// For example, what data to display, what order to display the data in, and the
+// style for the data. Style descriptors follow the Mapbox Style Specification.
 func (c *Client) GetMapStyleDescriptor(ctx context.Context, params *GetMapStyleDescriptorInput, optFns ...func(*Options)) (*GetMapStyleDescriptorOutput, error) {
 	if params == nil {
 		params = &GetMapStyleDescriptorInput{}
@@ -36,8 +37,9 @@ type GetMapStyleDescriptorInput struct {
 	// This member is required.
 	MapName *string
 
-	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-	// to authorize the request.
+	// The optional [API key] to authorize the request.
+	//
+	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 	Key *string
 
 	noSmithyDocumentSerde

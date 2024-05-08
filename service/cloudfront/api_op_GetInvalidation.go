@@ -50,9 +50,9 @@ type GetInvalidationInput struct {
 // The returned result of the corresponding request.
 type GetInvalidationOutput struct {
 
-	// The invalidation's information. For more information, see Invalidation Complex
-	// Type (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html)
-	// .
+	// The invalidation's information. For more information, see [Invalidation Complex Type].
+	//
+	// [Invalidation Complex Type]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html
 	Invalidation *types.Invalidation
 
 	// Metadata pertaining to the operation's result.
@@ -182,12 +182,13 @@ type InvalidationCompletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetInvalidationInput, *GetInvalidationOutput, error) (bool, error)
 }
 

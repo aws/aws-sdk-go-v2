@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a certificate revocation list (CRL). Required permissions:
-// rolesanywhere:DeleteCrl .
+// Deletes a certificate revocation list (CRL).
+//
+// Required permissions: rolesanywhere:DeleteCrl .
 func (c *Client) DeleteCrl(ctx context.Context, params *DeleteCrlInput, optFns ...func(*Options)) (*DeleteCrlOutput, error) {
 	if params == nil {
 		params = &DeleteCrlInput{}

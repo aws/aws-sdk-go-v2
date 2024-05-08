@@ -12,14 +12,21 @@ import (
 )
 
 // Starts a Composition from a stage based on the configuration provided in the
-// request. A Composition is an ephemeral resource that exists after this endpoint
-// returns successfully. Composition stops and the resource is deleted:
-//   - When StopComposition is called.
+// request.
+//
+// A Composition is an ephemeral resource that exists after this endpoint returns
+// successfully. Composition stops and the resource is deleted:
+//
+//   - When StopCompositionis called.
+//
 //   - After a 1-minute timeout, when all participants are disconnected from the
 //     stage.
+//
 //   - After a 1-minute timeout, if there are no participants in the stage when
 //     StartComposition is called.
+//
 //   - When broadcasting to the IVS channel fails and all retries are exhausted.
+//
 //   - When broadcasting is disconnected and all attempts to reconnect are
 //     exhausted.
 func (c *Client) StartComposition(ctx context.Context, params *StartCompositionInput, optFns ...func(*Options)) (*StartCompositionOutput, error) {
@@ -56,10 +63,11 @@ type StartCompositionInput struct {
 	Layout *types.LayoutConfiguration
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -13,16 +13,19 @@ import (
 
 // Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only
 // SDK messaging customers use this API. CreateAppInstance supports idempotency
-// behavior as described in the AWS API Standard. This API is is no longer
-// supported and will not be updated. We recommend using the latest version,
-// CreateAppInstance (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstance.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// behavior as described in the AWS API Standard.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [CreateAppInstance], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by CreateAppInstance in the Amazon Chime SDK Identity
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [CreateAppInstance]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstance.html
 func (c *Client) CreateAppInstance(ctx context.Context, params *CreateAppInstanceInput, optFns ...func(*Options)) (*CreateAppInstanceOutput, error) {
 	if params == nil {
 		params = &CreateAppInstanceInput{}

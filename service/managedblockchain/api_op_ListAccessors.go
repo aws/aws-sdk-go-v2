@@ -31,15 +31,16 @@ func (c *Client) ListAccessors(ctx context.Context, params *ListAccessorsInput, 
 
 type ListAccessorsInput struct {
 
-	// The maximum number of accessors to list.
+	//  The maximum number of accessors to list.
 	MaxResults *int32
 
-	// The blockchain network that the Accessor token is created for. Use the value
-	// ETHEREUM_MAINNET_AND_GOERLI for all existing Accessors tokens that were created
-	// before the networkType property was introduced.
+	// The blockchain network that the Accessor token is created for.
+	//
+	// Use the value ETHEREUM_MAINNET_AND_GOERLI for all existing Accessors tokens
+	// that were created before the networkType property was introduced.
 	NetworkType types.AccessorNetworkType
 
-	// The pagination token that indicates the next set of results to retrieve.
+	//  The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,7 +52,7 @@ type ListAccessorsOutput struct {
 	// each accessor.
 	Accessors []types.AccessorSummary
 
-	// The pagination token that indicates the next set of results to retrieve.
+	//  The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,7 +146,7 @@ var _ ListAccessorsAPIClient = (*Client)(nil)
 
 // ListAccessorsPaginatorOptions is the paginator options for ListAccessors
 type ListAccessorsPaginatorOptions struct {
-	// The maximum number of accessors to list.
+	//  The maximum number of accessors to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

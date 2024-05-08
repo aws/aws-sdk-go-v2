@@ -11,7 +11,9 @@ import (
 	"time"
 )
 
-// Stops an execution. This API action is not supported by EXPRESS state machines.
+// Stops an execution.
+//
+// This API action is not supported by EXPRESS state machines.
 func (c *Client) StopExecution(ctx context.Context, params *StopExecutionInput, optFns ...func(*Options)) (*StopExecutionOutput, error) {
 	if params == nil {
 		params = &StopExecutionInput{}

@@ -77,10 +77,11 @@ type CreateApplicationInput struct {
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *types.NetworkConfiguration
 
-	// The Configuration (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html)
-	// specifications to use when creating an application. Each configuration consists
-	// of a classification and properties. This configuration is applied to all the job
-	// runs submitted under the application.
+	// The [Configuration] specifications to use when creating an application. Each configuration
+	// consists of a classification and properties. This configuration is applied to
+	// all the job runs submitted under the application.
+	//
+	// [Configuration]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
 	RuntimeConfiguration []types.Configuration
 
 	// The tags assigned to the application.

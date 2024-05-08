@@ -15,10 +15,12 @@ import (
 // evaluating sample records on the specified streaming source (Kinesis data stream
 // or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response,
 // the operation returns the inferred schema and also the sample records that the
-// operation used to infer the schema. You can use the inferred schema when
-// configuring a streaming source for your application. When you create an
-// application using the Kinesis Data Analytics console, the console uses this
-// operation to infer a schema and show it in the console user interface.
+// operation used to infer the schema.
+//
+// You can use the inferred schema when configuring a streaming source for your
+// application. When you create an application using the Kinesis Data Analytics
+// console, the console uses this operation to infer a schema and show it in the
+// console user interface.
 func (c *Client) DiscoverInputSchema(ctx context.Context, params *DiscoverInputSchemaInput, optFns ...func(*Options)) (*DiscoverInputSchemaOutput, error) {
 	if params == nil {
 		params = &DiscoverInputSchemaInput{}
@@ -41,8 +43,8 @@ type DiscoverInputSchemaInput struct {
 	// This member is required.
 	ServiceExecutionRole *string
 
-	// The InputProcessingConfiguration to use to preprocess the records before
-	// discovering the schema of the records.
+	// The InputProcessingConfiguration to use to preprocess the records before discovering the schema of the
+	// records.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
 
 	// The point at which you want Kinesis Data Analytics to start reading records

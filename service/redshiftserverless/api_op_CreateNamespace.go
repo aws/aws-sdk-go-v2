@@ -40,7 +40,9 @@ type CreateNamespaceInput struct {
 	AdminPasswordSecretKmsKeyId *string
 
 	// The password of the administrator for the first database created in the
-	// namespace. You can't use adminUserPassword if manageAdminPassword is true.
+	// namespace.
+	//
+	// You can't use adminUserPassword if manageAdminPassword is true.
 	AdminUserPassword *string
 
 	// The username of the administrator for the first database created in the

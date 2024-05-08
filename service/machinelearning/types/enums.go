@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for Algorithm. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Algorithm) Values() []Algorithm {
 	return []Algorithm{
 		"sgd",
@@ -34,8 +35,9 @@ const (
 
 // Values returns all known values for BatchPredictionFilterVariable. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchPredictionFilterVariable) Values() []BatchPredictionFilterVariable {
 	return []BatchPredictionFilterVariable{
 		"CreatedAt",
@@ -63,6 +65,7 @@ const (
 
 // Values returns all known values for DataSourceFilterVariable. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceFilterVariable) Values() []DataSourceFilterVariable {
 	return []DataSourceFilterVariable{
@@ -84,8 +87,9 @@ const (
 )
 
 // Values returns all known values for DetailsAttributes. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DetailsAttributes) Values() []DetailsAttributes {
 	return []DetailsAttributes{
 		"PredictiveModelType",
@@ -105,8 +109,9 @@ const (
 )
 
 // Values returns all known values for EntityStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntityStatus) Values() []EntityStatus {
 	return []EntityStatus{
 		"PENDING",
@@ -133,6 +138,7 @@ const (
 
 // Values returns all known values for EvaluationFilterVariable. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EvaluationFilterVariable) Values() []EvaluationFilterVariable {
 	return []EvaluationFilterVariable{
@@ -164,8 +170,9 @@ const (
 )
 
 // Values returns all known values for MLModelFilterVariable. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MLModelFilterVariable) Values() []MLModelFilterVariable {
 	return []MLModelFilterVariable{
 		"CreatedAt",
@@ -191,8 +198,9 @@ const (
 )
 
 // Values returns all known values for MLModelType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MLModelType) Values() []MLModelType {
 	return []MLModelType{
 		"REGRESSION",
@@ -212,8 +220,9 @@ const (
 )
 
 // Values returns all known values for RealtimeEndpointStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RealtimeEndpointStatus) Values() []RealtimeEndpointStatus {
 	return []RealtimeEndpointStatus{
 		"NONE",
@@ -232,8 +241,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"asc",
@@ -252,8 +262,9 @@ const (
 )
 
 // Values returns all known values for TaggableResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TaggableResourceType) Values() []TaggableResourceType {
 	return []TaggableResourceType{
 		"BatchPrediction",

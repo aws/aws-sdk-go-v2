@@ -10,9 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a phone number’s metadata. To verify the status of a previous
-// UpdatePhoneNumberMetadata operation, call the DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
-// API.
+// Updates a phone number’s metadata.
+//
+// To verify the status of a previous UpdatePhoneNumberMetadata operation, call
+// the [DescribePhoneNumber]API.
+//
+// [DescribePhoneNumber]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
 func (c *Client) UpdatePhoneNumberMetadata(ctx context.Context, params *UpdatePhoneNumberMetadataInput, optFns ...func(*Options)) (*UpdatePhoneNumberMetadataOutput, error) {
 	if params == nil {
 		params = &UpdatePhoneNumberMetadataInput{}
@@ -37,9 +40,9 @@ type UpdatePhoneNumberMetadataInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The description of the phone number.

@@ -11,36 +11,52 @@ import (
 )
 
 // Resets the specified user's password in a user pool as an administrator. Works
-// on any user. To use this API operation, your user pool must have self-service
-// account recovery configured. Use AdminSetUserPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html)
-// if you manage passwords as an administrator. This action might generate an SMS
-// text message. Starting June 1, 2021, US telecom carriers require you to register
-// an origination phone number before you can send SMS messages to US phone
-// numbers. If you use SMS text messages in Amazon Cognito, you must register a
-// phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
-// . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
-// Cognito users who must receive SMS messages might not be able to sign up,
-// activate their accounts, or sign in. If you have never used SMS text messages
-// with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification
-// Service might place your account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
-// , you can send messages only to verified phone numbers. After you test your app
-// while in the sandbox environment, you can move out of the sandbox and into
-// production. For more information, see SMS message settings for Amazon Cognito
-// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
-// in the Amazon Cognito Developer Guide. Deactivates a user's password, requiring
-// them to change it. If a user tries to sign in after the API is called, Amazon
-// Cognito responds with a PasswordResetRequiredException error. Your app must
-// then perform the actions that reset your user's password: the forgot-password
-// flow. In addition, if the user pool has phone verification selected and a
-// verified phone number exists for the user, or if email verification is selected
-// and a verified email exists for the user, calling this API will also result in
-// sending a message to the end user with the code to change their password. Amazon
-// Cognito evaluates Identity and Access Management (IAM) policies in requests for
-// this API operation. For this operation, you must use IAM credentials to
-// authorize requests, and you must grant yourself the corresponding IAM permission
-// in a policy. Learn more
-//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
-//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// on any user.
+//
+// To use this API operation, your user pool must have self-service account
+// recovery configured. Use [AdminSetUserPassword]if you manage passwords as an administrator.
+//
+// This action might generate an SMS text message. Starting June 1, 2021, US
+// telecom carriers require you to register an origination phone number before you
+// can send SMS messages to US phone numbers. If you use SMS text messages in
+// Amazon Cognito, you must register a phone number with [Amazon Pinpoint]. Amazon Cognito uses the
+// registered number automatically. Otherwise, Amazon Cognito users who must
+// receive SMS messages might not be able to sign up, activate their accounts, or
+// sign in.
+//
+// If you have never used SMS text messages with Amazon Cognito or any other
+// Amazon Web Service, Amazon Simple Notification Service might place your account
+// in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone numbers.
+// After you test your app while in the sandbox environment, you can move out of
+// the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
+// Cognito Developer Guide.
+//
+// Deactivates a user's password, requiring them to change it. If a user tries to
+// sign in after the API is called, Amazon Cognito responds with a
+// PasswordResetRequiredException error. Your app must then perform the actions
+// that reset your user's password: the forgot-password flow. In addition, if the
+// user pool has phone verification selected and a verified phone number exists for
+// the user, or if email verification is selected and a verified email exists for
+// the user, calling this API will also result in sending a message to the end user
+// with the code to change their password.
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [AdminSetUserPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserPassword.html
+// [sandbox mode]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+// [Amazon Pinpoint]: https://console.aws.amazon.com/pinpoint/home/
 func (c *Client) AdminResetUserPassword(ctx context.Context, params *AdminResetUserPasswordInput, optFns ...func(*Options)) (*AdminResetUserPasswordOutput, error) {
 	if params == nil {
 		params = &AdminResetUserPasswordInput{}
@@ -74,25 +90,33 @@ type AdminResetUserPasswordInput struct {
 	Username *string
 
 	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers. You create custom workflows by assigning
-	// Lambda functions to user pool triggers. When you use the AdminResetUserPassword
-	// API action, Amazon Cognito invokes the function that is assigned to the custom
-	// message trigger. When Amazon Cognito invokes this function, it passes a JSON
-	// payload, which the function receives as input. This payload contains a
-	// clientMetadata attribute, which provides the data that you assigned to the
-	// ClientMetadata parameter in your AdminResetUserPassword request. In your
-	// function code in Lambda, you can process the clientMetadata value to enhance
-	// your workflow for your specific needs. For more information, see Customizing
-	// user pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
-	// parameter, remember that Amazon Cognito won't do the following:
+	// workflows that this action triggers.
+	//
+	// You create custom workflows by assigning Lambda functions to user pool
+	// triggers. When you use the AdminResetUserPassword API action, Amazon Cognito
+	// invokes the function that is assigned to the custom message trigger. When Amazon
+	// Cognito invokes this function, it passes a JSON payload, which the function
+	// receives as input. This payload contains a clientMetadata attribute, which
+	// provides the data that you assigned to the ClientMetadata parameter in your
+	// AdminResetUserPassword request. In your function code in Lambda, you can process
+	// the clientMetadata value to enhance your workflow for your specific needs.
+	//
+	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	//
+	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
+	// do the following:
+	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
 	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
 	//   serves no purpose.
+	//
 	//   - Validate the ClientMetadata value.
+	//
 	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
 	//   sensitive information.
+	//
+	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde

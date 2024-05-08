@@ -10,10 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Terminates a network instance. A network instance is a single network created
-// in Amazon Web Services TNB that can be deployed and on which life-cycle
-// operations (like terminate, update, and delete) can be performed. You must
-// terminate a network instance before you can delete it.
+// Terminates a network instance.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
+//
+// You must terminate a network instance before you can delete it.
 func (c *Client) TerminateSolNetworkInstance(ctx context.Context, params *TerminateSolNetworkInstanceInput, optFns ...func(*Options)) (*TerminateSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &TerminateSolNetworkInstanceInput{}

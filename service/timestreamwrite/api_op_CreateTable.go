@@ -16,10 +16,11 @@ import (
 // Services account, table names must be at least unique within each Region if they
 // are in the same database. You might have identical table names in the same
 // Region if the tables are in separate databases. While creating the table, you
-// must specify the table name, database name, and the retention properties.
-// Service quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
-// . See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html)
+// must specify the table name, database name, and the retention properties. [Service quotas apply]. See [code sample]
 // for details.
+//
+// [Service quotas apply]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-table.html
 func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optFns ...func(*Options)) (*CreateTableOutput, error) {
 	if params == nil {
 		params = &CreateTableInput{}
@@ -54,10 +55,10 @@ type CreateTableInput struct {
 	// and the magnetic store.
 	RetentionProperties *types.RetentionProperties
 
-	// The schema of the table.
+	//  The schema of the table.
 	Schema *types.Schema
 
-	// A list of key-value pairs to label the table.
+	//  A list of key-value pairs to label the table.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

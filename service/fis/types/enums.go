@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AccountTargeting. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountTargeting) Values() []AccountTargeting {
 	return []AccountTargeting{
 		"single-account",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for ActionsMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionsMode) Values() []ActionsMode {
 	return []ActionsMode{
 		"skip-all",
@@ -48,6 +50,7 @@ const (
 
 // Values returns all known values for EmptyTargetResolutionMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EmptyTargetResolutionMode) Values() []EmptyTargetResolutionMode {
 	return []EmptyTargetResolutionMode{
@@ -72,8 +75,9 @@ const (
 )
 
 // Values returns all known values for ExperimentActionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentActionStatus) Values() []ExperimentActionStatus {
 	return []ExperimentActionStatus{
 		"pending",
@@ -102,8 +106,9 @@ const (
 )
 
 // Values returns all known values for ExperimentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentStatus) Values() []ExperimentStatus {
 	return []ExperimentStatus{
 		"pending",

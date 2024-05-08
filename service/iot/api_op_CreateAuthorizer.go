@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an authorizer. Requires permission to access the CreateAuthorizer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates an authorizer.
+//
+// Requires permission to access the [CreateAuthorizer] action.
+//
+// [CreateAuthorizer]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerInput, optFns ...func(*Options)) (*CreateAuthorizerOutput, error) {
 	if params == nil {
 		params = &CreateAuthorizerInput{}
@@ -43,8 +46,9 @@ type CreateAuthorizerInput struct {
 	// When true , the result from the authorizer’s Lambda function is cached for
 	// clients that use persistent HTTP connections. The results are cached for the
 	// time specified by the Lambda function in refreshAfterInSeconds . This value does
-	// not affect authorization of clients that use MQTT connections. The default value
-	// is false .
+	// not affect authorization of clients that use MQTT connections.
+	//
+	// The default value is false .
 	EnableCachingForHttp *bool
 
 	// Specifies whether IoT validates the token signature in an authorization request.
@@ -53,10 +57,14 @@ type CreateAuthorizerInput struct {
 	// The status of the create authorizer request.
 	Status types.AuthorizerStatus
 
-	// Metadata which can be used to manage the custom authorizer. For URI Request
-	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
-	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
-	// file use format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the custom authorizer.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: &&tags
+	// "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
 
 	// The name of the token key used to extract the token from the HTTP headers.

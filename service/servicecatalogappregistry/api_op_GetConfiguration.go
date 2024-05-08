@@ -33,7 +33,7 @@ type GetConfigurationInput struct {
 
 type GetConfigurationOutput struct {
 
-	// Retrieves TagKey configuration from an account.
+	//  Retrieves TagKey configuration from an account.
 	Configuration *types.AppRegistryConfiguration
 
 	// Metadata pertaining to the operation's result.

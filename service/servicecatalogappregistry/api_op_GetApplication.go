@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves metadata information about one of your applications. The application
+//	Retrieves metadata information about one of your applications. The application
+//
 // can be specified by its ARN, ID, or name (which is unique within one account in
 // one region at a given point in time). Specify by ARN or ID in automated
 // workflows if you want to make sure that the exact same application is returned
@@ -34,7 +35,7 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 
 type GetApplicationInput struct {
 
-	// The name, ID, or ARN of the application.
+	//  The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string
@@ -44,7 +45,7 @@ type GetApplicationInput struct {
 
 type GetApplicationOutput struct {
 
-	// A key-value pair that identifies an associated resource.
+	//  A key-value pair that identifies an associated resource.
 	ApplicationTag map[string]string
 
 	// The Amazon resource name (ARN) that specifies the application across services.
@@ -63,7 +64,7 @@ type GetApplicationOutput struct {
 	// The identifier of the application.
 	Id *string
 
-	// The information about the integration of the application with other services,
+	//  The information about the integration of the application with other services,
 	// such as Resource Groups.
 	Integrations *types.Integrations
 

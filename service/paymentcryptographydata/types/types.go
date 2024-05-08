@@ -438,7 +438,9 @@ type DukptEncryptionAttributes struct {
 	// Services Payment Cryptography defaults it to zero.
 	InitializationVector *string
 
-	// The block cipher method to use for encryption. The default is CBC.
+	// The block cipher method to use for encryption.
+	//
+	// The default is CBC.
 	Mode DukptEncryptionMode
 
 	noSmithyDocumentSerde

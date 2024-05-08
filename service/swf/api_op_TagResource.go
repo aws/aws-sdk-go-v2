@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add a tag to a Amazon SWF domain. Amazon SWF supports a maximum of 50 tags per
-// resource.
+// Add a tag to a Amazon SWF domain.
+//
+// Amazon SWF supports a maximum of 50 tags per resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -35,8 +36,10 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The list of tags to add to a domain. Tags may only contain unicode letters,
-	// digits, whitespace, or these symbols: _ . : / = + - @ .
+	// The list of tags to add to a domain.
+	//
+	// Tags may only contain unicode letters, digits, whitespace, or these symbols: _
+	// . : / = + - @ .
 	//
 	// This member is required.
 	Tags []types.ResourceTag

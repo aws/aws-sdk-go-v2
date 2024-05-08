@@ -10,11 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example operation serializes a payload targeting a blob. The Blob shape is
-// not structured content and we cannot make assumptions about what data will be
-// sent. This test ensures only a generic "Content-Type: application/octet-stream"
-// header is used, and that we are not treating an empty body as an empty JSON
-// document.
+// This example operation serializes a payload targeting a blob.
+//
+// The Blob shape is not structured content and we cannot make assumptions about
+// what data will be sent. This test ensures only a generic "Content-Type:
+// application/octet-stream" header is used, and that we are not treating an empty
+// body as an empty JSON document.
 func (c *Client) TestPayloadBlob(ctx context.Context, params *TestPayloadBlobInput, optFns ...func(*Options)) (*TestPayloadBlobOutput, error) {
 	if params == nil {
 		params = &TestPayloadBlobInput{}

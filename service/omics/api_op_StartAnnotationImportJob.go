@@ -53,7 +53,7 @@ type StartAnnotationImportJobInput struct {
 	// The job's left normalization setting.
 	RunLeftNormalization bool
 
-	// The name of the annotation store version.
+	//  The name of the annotation store version.
 	VersionName *string
 
 	noSmithyDocumentSerde

@@ -13,10 +13,13 @@ import (
 
 // The CreateKeyspace operation adds a new keyspace to your account. In an Amazon
 // Web Services account, keyspace names must be unique within each Region.
-// CreateKeyspace is an asynchronous operation. You can monitor the creation status
-// of the new keyspace by using the GetKeyspace operation. For more information,
-// see Creating keyspaces (https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-keyspaces.html#keyspaces-create)
-// in the Amazon Keyspaces Developer Guide.
+//
+// CreateKeyspace is an asynchronous operation. You can monitor the creation
+// status of the new keyspace by using the GetKeyspace operation.
+//
+// For more information, see [Creating keyspaces] in the Amazon Keyspaces Developer Guide.
+//
+// [Creating keyspaces]: https://docs.aws.amazon.com/keyspaces/latest/devguide/working-with-keyspaces.html#keyspaces-create
 func (c *Client) CreateKeyspace(ctx context.Context, params *CreateKeyspaceInput, optFns ...func(*Options)) (*CreateKeyspaceOutput, error) {
 	if params == nil {
 		params = &CreateKeyspaceInput{}
@@ -39,17 +42,21 @@ type CreateKeyspaceInput struct {
 	// This member is required.
 	KeyspaceName *string
 
-	// The replication specification of the keyspace includes:
+	//  The replication specification of the keyspace includes:
+	//
 	//   - replicationStrategy - the required value is SINGLE_REGION or MULTI_REGION .
+	//
 	//   - regionList - if the replicationStrategy is MULTI_REGION , the regionList
 	//   requires the current Region and at least one additional Amazon Web Services
 	//   Region where the keyspace is going to be replicated in. The maximum number of
 	//   supported replication Regions including the current Region is six.
 	ReplicationSpecification *types.ReplicationSpecification
 
-	// A list of key-value pair tags to be attached to the keyspace. For more
-	// information, see Adding tags and labels to Amazon Keyspaces resources (https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html)
-	// in the Amazon Keyspaces Developer Guide.
+	// A list of key-value pair tags to be attached to the keyspace.
+	//
+	// For more information, see [Adding tags and labels to Amazon Keyspaces resources] in the Amazon Keyspaces Developer Guide.
+	//
+	// [Adding tags and labels to Amazon Keyspaces resources]: https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

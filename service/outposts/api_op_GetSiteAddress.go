@@ -34,7 +34,7 @@ type GetSiteAddressInput struct {
 	// This member is required.
 	AddressType types.AddressType
 
-	// The ID or the Amazon Resource Name (ARN) of the site.
+	//  The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string
@@ -44,7 +44,7 @@ type GetSiteAddressInput struct {
 
 type GetSiteAddressOutput struct {
 
-	// Information about the address.
+	//  Information about the address.
 	Address *types.Address
 
 	// The type of the address you receive.

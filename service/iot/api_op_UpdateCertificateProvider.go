@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a certificate provider. Requires permission to access the
-// UpdateCertificateProvider (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a certificate provider.
+//
+// Requires permission to access the [UpdateCertificateProvider] action.
+//
+// [UpdateCertificateProvider]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateCertificateProvider(ctx context.Context, params *UpdateCertificateProviderInput, optFns ...func(*Options)) (*UpdateCertificateProviderOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateProviderInput{}

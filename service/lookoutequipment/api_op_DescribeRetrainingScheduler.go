@@ -55,12 +55,15 @@ type DescribeRetrainingSchedulerOutput struct {
 
 	// Indicates how the service uses new models. In MANAGED mode, new models are used
 	// for inference if they have better performance than the current model. In MANUAL
-	// mode, the new models are not used until they are manually activated (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation)
-	// .
+	// mode, the new models are not used until they are [manually activated].
+	//
+	// [manually activated]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation
 	PromoteMode types.ModelPromoteMode
 
-	// The frequency at which the model retraining is set. This follows the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)
+	// The frequency at which the model retraining is set. This follows the [ISO 8601]
 	// guidelines.
+	//
+	// [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601#Durations
 	RetrainingFrequency *string
 
 	// The start date for the retraining scheduler. Lookout for Equipment truncates

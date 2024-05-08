@@ -10,10 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an endpoint. It can take up to 5 minutes for this action to finish.
+// Deletes an endpoint.
+//
+// It can take up to 5 minutes for this action to finish.
+//
 // Related actions include:
-//   - CreateEndpoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html)
-//   - ListEndpoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
+//
+// [CreateEndpoint]
+//
+// [ListEndpoints]
+//
+// [ListEndpoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html
+// [CreateEndpoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html
 func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput, optFns ...func(*Options)) (*DeleteEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteEndpointInput{}

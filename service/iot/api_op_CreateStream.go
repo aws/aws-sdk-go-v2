@@ -14,8 +14,10 @@ import (
 // Creates a stream for delivering one or more large files in chunks over MQTT. A
 // stream transports data bytes in chunks or blocks packaged as MQTT messages from
 // a source like S3. You can have one or more files associated with a stream.
-// Requires permission to access the CreateStream (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//
+// Requires permission to access the [CreateStream] action.
+//
+// [CreateStream]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, optFns ...func(*Options)) (*CreateStreamOutput, error) {
 	if params == nil {
 		params = &CreateStreamInput{}

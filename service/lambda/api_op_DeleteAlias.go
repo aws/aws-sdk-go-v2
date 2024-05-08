@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
-// .
+// Deletes a Lambda function [alias].
+//
+// [alias]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
 func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optFns ...func(*Options)) (*DeleteAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAliasInput{}
@@ -29,10 +30,16 @@ func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optF
 
 type DeleteAliasInput struct {
 
-	// The name or ARN of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name - MyFunction .
+	//
 	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//
 	//   - Partial ARN - 123456789012:function:MyFunction .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//

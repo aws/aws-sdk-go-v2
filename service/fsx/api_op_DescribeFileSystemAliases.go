@@ -14,7 +14,7 @@ import (
 // Returns the DNS aliases that are associated with the specified Amazon FSx for
 // Windows File Server file system. A history of all DNS aliases that have been
 // associated with and disassociated from the file system is available in the list
-// of AdministrativeAction provided in the DescribeFileSystems operation response.
+// of AdministrativeActionprovided in the DescribeFileSystems operation response.
 func (c *Client) DescribeFileSystemAliases(ctx context.Context, params *DescribeFileSystemAliasesInput, optFns ...func(*Options)) (*DescribeFileSystemAliasesOutput, error) {
 	if params == nil {
 		params = &DescribeFileSystemAliasesInput{}

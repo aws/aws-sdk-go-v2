@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AssignPublicIp. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssignPublicIp) Values() []AssignPublicIp {
 	return []AssignPublicIp{
 		"ENABLED",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for BatchJobDependencyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchJobDependencyType) Values() []BatchJobDependencyType {
 	return []BatchJobDependencyType{
 		"N_TO_N",
@@ -49,8 +51,9 @@ const (
 
 // Values returns all known values for BatchResourceRequirementType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchResourceRequirementType) Values() []BatchResourceRequirementType {
 	return []BatchResourceRequirementType{
 		"GPU",
@@ -69,6 +72,7 @@ const (
 
 // Values returns all known values for DynamoDBStreamStartPosition. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DynamoDBStreamStartPosition) Values() []DynamoDBStreamStartPosition {
 	return []DynamoDBStreamStartPosition{
@@ -85,8 +89,9 @@ const (
 )
 
 // Values returns all known values for EcsEnvironmentFileType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EcsEnvironmentFileType) Values() []EcsEnvironmentFileType {
 	return []EcsEnvironmentFileType{
 		"s3",
@@ -103,6 +108,7 @@ const (
 
 // Values returns all known values for EcsResourceRequirementType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EcsResourceRequirementType) Values() []EcsResourceRequirementType {
 	return []EcsResourceRequirementType{
@@ -120,6 +126,7 @@ const (
 
 // Values returns all known values for IncludeExecutionDataOption. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IncludeExecutionDataOption) Values() []IncludeExecutionDataOption {
 	return []IncludeExecutionDataOption{
@@ -138,6 +145,7 @@ const (
 
 // Values returns all known values for KinesisStreamStartPosition. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (KinesisStreamStartPosition) Values() []KinesisStreamStartPosition {
 	return []KinesisStreamStartPosition{
@@ -157,8 +165,9 @@ const (
 )
 
 // Values returns all known values for LaunchType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchType) Values() []LaunchType {
 	return []LaunchType{
 		"EC2",
@@ -178,8 +187,9 @@ const (
 )
 
 // Values returns all known values for LogLevel. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"OFF",
@@ -198,8 +208,9 @@ const (
 )
 
 // Values returns all known values for MSKStartPosition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MSKStartPosition) Values() []MSKStartPosition {
 	return []MSKStartPosition{
 		"TRIM_HORIZON",
@@ -216,8 +227,9 @@ const (
 
 // Values returns all known values for OnPartialBatchItemFailureStreams. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OnPartialBatchItemFailureStreams) Values() []OnPartialBatchItemFailureStreams {
 	return []OnPartialBatchItemFailureStreams{
 		"AUTOMATIC_BISECT",
@@ -246,8 +258,9 @@ const (
 )
 
 // Values returns all known values for PipeState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipeState) Values() []PipeState {
 	return []PipeState{
 		"RUNNING",
@@ -278,6 +291,7 @@ const (
 
 // Values returns all known values for PipeTargetInvocationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PipeTargetInvocationType) Values() []PipeTargetInvocationType {
 	return []PipeTargetInvocationType{
@@ -295,8 +309,9 @@ const (
 )
 
 // Values returns all known values for PlacementConstraintType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementConstraintType) Values() []PlacementConstraintType {
 	return []PlacementConstraintType{
 		"distinctInstance",
@@ -314,8 +329,9 @@ const (
 )
 
 // Values returns all known values for PlacementStrategyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementStrategyType) Values() []PlacementStrategyType {
 	return []PlacementStrategyType{
 		"random",
@@ -332,8 +348,9 @@ const (
 )
 
 // Values returns all known values for PropagateTags. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PropagateTags) Values() []PropagateTags {
 	return []PropagateTags{
 		"TASK_DEFINITION",
@@ -349,8 +366,9 @@ const (
 )
 
 // Values returns all known values for RequestedPipeState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequestedPipeState) Values() []RequestedPipeState {
 	return []RequestedPipeState{
 		"RUNNING",
@@ -369,8 +387,9 @@ const (
 
 // Values returns all known values for RequestedPipeStateDescribeResponse. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequestedPipeStateDescribeResponse) Values() []RequestedPipeStateDescribeResponse {
 	return []RequestedPipeStateDescribeResponse{
 		"RUNNING",
@@ -389,8 +408,9 @@ const (
 )
 
 // Values returns all known values for S3OutputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3OutputFormat) Values() []S3OutputFormat {
 	return []S3OutputFormat{
 		"json",
@@ -409,8 +429,9 @@ const (
 
 // Values returns all known values for SelfManagedKafkaStartPosition. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SelfManagedKafkaStartPosition) Values() []SelfManagedKafkaStartPosition {
 	return []SelfManagedKafkaStartPosition{
 		"TRIM_HORIZON",

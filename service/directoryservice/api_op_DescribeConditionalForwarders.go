@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Obtains information about the conditional forwarders for this account. If no
-// input parameters are provided for RemoteDomainNames, this request describes all
-// conditional forwarders for the specified directory ID.
+// Obtains information about the conditional forwarders for this account.
+//
+// If no input parameters are provided for RemoteDomainNames, this request
+// describes all conditional forwarders for the specified directory ID.
 func (c *Client) DescribeConditionalForwarders(ctx context.Context, params *DescribeConditionalForwardersInput, optFns ...func(*Options)) (*DescribeConditionalForwardersOutput, error) {
 	if params == nil {
 		params = &DescribeConditionalForwardersInput{}

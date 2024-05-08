@@ -10,13 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Restores a directory using an existing directory snapshot. When you restore a
-// directory from a snapshot, any changes made to the directory after the snapshot
-// date are overwritten. This action returns as soon as the restore operation is
-// initiated. You can monitor the progress of the restore operation by calling the
-// DescribeDirectories operation with the directory identifier. When the
-// DirectoryDescription.Stage value changes to Active , the restore operation is
-// complete.
+// Restores a directory using an existing directory snapshot.
+//
+// When you restore a directory from a snapshot, any changes made to the directory
+// after the snapshot date are overwritten.
+//
+// This action returns as soon as the restore operation is initiated. You can
+// monitor the progress of the restore operation by calling the DescribeDirectoriesoperation with the
+// directory identifier. When the DirectoryDescription.Stage value changes to
+// Active , the restore operation is complete.
 func (c *Client) RestoreFromSnapshot(ctx context.Context, params *RestoreFromSnapshotInput, optFns ...func(*Options)) (*RestoreFromSnapshotOutput, error) {
 	if params == nil {
 		params = &RestoreFromSnapshotInput{}

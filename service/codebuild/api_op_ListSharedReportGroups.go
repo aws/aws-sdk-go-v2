@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of report groups that are shared with other Amazon Web Services
+//	Gets a list of report groups that are shared with other Amazon Web Services
+//
 // accounts or users.
 func (c *Client) ListSharedReportGroups(ctx context.Context, params *ListSharedReportGroupsInput, optFns ...func(*Options)) (*ListSharedReportGroupsOutput, error) {
 	if params == nil {
@@ -30,28 +31,32 @@ func (c *Client) ListSharedReportGroups(ctx context.Context, params *ListSharedR
 
 type ListSharedReportGroupsInput struct {
 
-	// The maximum number of paginated shared report groups per response. Use nextToken
-	// to iterate pages in the list of returned ReportGroup objects. The default value
-	// is 100.
+	//  The maximum number of paginated shared report groups per response. Use
+	// nextToken to iterate pages in the list of returned ReportGroup objects. The
+	// default value is 100.
 	MaxResults *int32
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults . If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
+	//  During a previous call, the maximum number of items that can be returned is
+	// the value specified in maxResults . If there more items in the list, then a
+	// unique string called a nextToken is returned. To get the next batch of items in
+	// the list, call this operation again, adding the next token to the call. To get
+	// all of the items in the list, keep calling this operation with each subsequent
+	// next token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The criterion to be used to list report groups shared with the current Amazon
+	//  The criterion to be used to list report groups shared with the current Amazon
 	// Web Services account or user. Valid values include:
+	//
 	//   - ARN : List based on the ARN.
+	//
 	//   - MODIFIED_TIME : List based on when information about the shared report group
 	//   was last changed.
 	SortBy types.SharedResourceSortByType
 
 	// The order in which to list shared report groups. Valid values include:
+	//
 	//   - ASCENDING : List in ascending order.
+	//
 	//   - DESCENDING : List in descending order.
 	SortOrder types.SortOrderType
 
@@ -60,15 +65,15 @@ type ListSharedReportGroupsInput struct {
 
 type ListSharedReportGroupsOutput struct {
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults . If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
+	//  During a previous call, the maximum number of items that can be returned is
+	// the value specified in maxResults . If there more items in the list, then a
+	// unique string called a nextToken is returned. To get the next batch of items in
+	// the list, call this operation again, adding the next token to the call. To get
+	// all of the items in the list, keep calling this operation with each subsequent
+	// next token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The list of ARNs for the report groups shared with the current Amazon Web
+	//  The list of ARNs for the report groups shared with the current Amazon Web
 	// Services account or user.
 	ReportGroups []string
 
@@ -165,9 +170,9 @@ var _ ListSharedReportGroupsAPIClient = (*Client)(nil)
 // ListSharedReportGroupsPaginatorOptions is the paginator options for
 // ListSharedReportGroups
 type ListSharedReportGroupsPaginatorOptions struct {
-	// The maximum number of paginated shared report groups per response. Use nextToken
-	// to iterate pages in the list of returned ReportGroup objects. The default value
-	// is 100.
+	//  The maximum number of paginated shared report groups per response. Use
+	// nextToken to iterate pages in the list of returned ReportGroup objects. The
+	// default value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

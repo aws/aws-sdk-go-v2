@@ -11,9 +11,10 @@ import (
 )
 
 // Deletes a trusted token issuer configuration from an instance of IAM Identity
-// Center. Deleting this trusted token issuer configuration will cause users to
-// lose access to any applications that are configured to use the trusted token
-// issuer.
+// Center.
+//
+// Deleting this trusted token issuer configuration will cause users to lose
+// access to any applications that are configured to use the trusted token issuer.
 func (c *Client) DeleteTrustedTokenIssuer(ctx context.Context, params *DeleteTrustedTokenIssuerInput, optFns ...func(*Options)) (*DeleteTrustedTokenIssuerOutput, error) {
 	if params == nil {
 		params = &DeleteTrustedTokenIssuerInput{}

@@ -11,9 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a vehicle model (model manifest) that specifies signals (attributes,
-// branches, sensors, and actuators). For more information, see Vehicle models (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/vehicle-models.html)
-// in the Amazon Web Services IoT FleetWise Developer Guide.
+//	Creates a vehicle model (model manifest) that specifies signals (attributes,
+//
+// branches, sensors, and actuators).
+//
+// For more information, see [Vehicle models] in the Amazon Web Services IoT FleetWise Developer
+// Guide.
+//
+// [Vehicle models]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/vehicle-models.html
 func (c *Client) CreateModelManifest(ctx context.Context, params *CreateModelManifestInput, optFns ...func(*Options)) (*CreateModelManifestOutput, error) {
 	if params == nil {
 		params = &CreateModelManifestInput{}
@@ -31,22 +36,22 @@ func (c *Client) CreateModelManifest(ctx context.Context, params *CreateModelMan
 
 type CreateModelManifestInput struct {
 
-	// The name of the vehicle model to create.
+	//  The name of the vehicle model to create.
 	//
 	// This member is required.
 	Name *string
 
-	// A list of nodes, which are a general abstraction of signals.
+	//  A list of nodes, which are a general abstraction of signals.
 	//
 	// This member is required.
 	Nodes []string
 
-	// The Amazon Resource Name (ARN) of a signal catalog.
+	//  The Amazon Resource Name (ARN) of a signal catalog.
 	//
 	// This member is required.
 	SignalCatalogArn *string
 
-	// A brief description of the vehicle model.
+	//  A brief description of the vehicle model.
 	Description *string
 
 	// Metadata that can be used to manage the vehicle model.
@@ -57,12 +62,12 @@ type CreateModelManifestInput struct {
 
 type CreateModelManifestOutput struct {
 
-	// The ARN of the created vehicle model.
+	//  The ARN of the created vehicle model.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the created vehicle model.
+	//  The name of the created vehicle model.
 	//
 	// This member is required.
 	Name *string

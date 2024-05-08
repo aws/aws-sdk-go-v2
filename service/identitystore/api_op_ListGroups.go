@@ -13,10 +13,12 @@ import (
 
 // Lists all groups in the identity store. Returns a paginated list of complete
 // Group objects. Filtering for a Group by the DisplayName attribute is
-// deprecated. Instead, use the GetGroupId API action. If you have administrator
-// access to a member account, you can use this API from the member account. Read
-// about member accounts (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html)
-// in the Organizations User Guide.
+// deprecated. Instead, use the GetGroupId API action.
+//
+// If you have administrator access to a member account, you can use this API from
+// the member account. Read about [member accounts]in the Organizations User Guide.
+//
+// [member accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
 func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns ...func(*Options)) (*ListGroupsOutput, error) {
 	if params == nil {
 		params = &ListGroupsInput{}

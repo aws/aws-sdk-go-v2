@@ -36,10 +36,15 @@ type ListImageBuildVersionsInput struct {
 	ImageVersionArn *string
 
 	// Use the following filters to streamline results:
+	//
 	//   - name
+	//
 	//   - osVersion
+	//
 	//   - platform
+	//
 	//   - type
+	//
 	//   - version
 	Filters []types.Filter
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Obtains the permissions boundary for a specified PermissionSet .
+// Obtains the permissions boundary for a specified PermissionSet.
 func (c *Client) GetPermissionsBoundaryForPermissionSet(ctx context.Context, params *GetPermissionsBoundaryForPermissionSetInput, optFns ...func(*Options)) (*GetPermissionsBoundaryForPermissionSetOutput, error) {
 	if params == nil {
 		params = &GetPermissionsBoundaryForPermissionSetInput{}

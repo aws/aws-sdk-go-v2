@@ -11,9 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Batch jobs. You must specify only one of the following items:
+// Returns a list of Batch jobs.
+//
+// You must specify only one of the following items:
+//
 //   - A job queue ID to return a list of jobs in that job queue
+//
 //   - A multi-node parallel job ID to return a list of nodes for that job
+//
 //   - An array job ID to return a list of the children for that job
 //
 // You can filter the results by job status with the jobStatus parameter. If you
@@ -43,15 +48,18 @@ type ListJobsInput struct {
 	// The filter to apply to the query. Only one filter can be used at a time. When
 	// the filter is used, jobStatus is ignored. The filter doesn't apply to child
 	// jobs in an array or multi-node parallel (MNP) jobs. The results are sorted by
-	// the createdAt field, with the most recent jobs being first. JOB_NAME The value
-	// of the filter is a case-insensitive match for the job name. If the value ends
-	// with an asterisk (*), the filter matches any job name that begins with the
-	// string before the '*'. This corresponds to the jobName value. For example, test1
-	// matches both Test1 and test1 , and test1* matches both test1 and Test10 . When
-	// the JOB_NAME filter is used, the results are grouped by the job name and
-	// version. JOB_DEFINITION The value for the filter is the name or Amazon Resource
-	// Name (ARN) of the job definition. This corresponds to the jobDefinition value.
-	// The value is case sensitive. When the value for the filter is the job definition
+	// the createdAt field, with the most recent jobs being first.
+	//
+	// JOB_NAME The value of the filter is a case-insensitive match for the job name.
+	// If the value ends with an asterisk (*), the filter matches any job name that
+	// begins with the string before the '*'. This corresponds to the jobName value.
+	// For example, test1 matches both Test1 and test1 , and test1* matches both test1
+	// and Test10 . When the JOB_NAME filter is used, the results are grouped by the
+	// job name and version.
+	//
+	// JOB_DEFINITION The value for the filter is the name or Amazon Resource Name
+	// (ARN) of the job definition. This corresponds to the jobDefinition value. The
+	// value is case sensitive. When the value for the filter is the job definition
 	// name, the results include all the jobs that used any revision of that job
 	// definition name. If the value ends with an asterisk (*), the filter matches any
 	// job definition name that begins with the string before the '*'. For example, jd1
@@ -60,10 +68,13 @@ type ListJobsInput struct {
 	// filter is used and the ARN is used (which is in the form
 	// arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}
 	// ), the results include jobs that used the specified revision of the job
-	// definition. Asterisk (*) isn't supported when the ARN is used. BEFORE_CREATED_AT
-	// The value for the filter is the time that's before the job was created. This
-	// corresponds to the createdAt value. The value is a string representation of the
-	// number of milliseconds since 00:00:00 UTC (midnight) on January 1, 1970.
+	// definition. Asterisk (*) isn't supported when the ARN is used.
+	//
+	// BEFORE_CREATED_AT The value for the filter is the time that's before the job
+	// was created. This corresponds to the createdAt value. The value is a string
+	// representation of the number of milliseconds since 00:00:00 UTC (midnight) on
+	// January 1, 1970.
+	//
 	// AFTER_CREATED_AT The value for the filter is the time that's after the job was
 	// created. This corresponds to the createdAt value. The value is a string
 	// representation of the number of milliseconds since 00:00:00 UTC (midnight) on
@@ -97,6 +108,7 @@ type ListJobsInput struct {
 	// maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value. This value is null when there are no more results to return.
+	//
 	// Treat this token as an opaque identifier that's only used to retrieve the next
 	// items in a list and not for other programmatic purposes.
 	NextToken *string

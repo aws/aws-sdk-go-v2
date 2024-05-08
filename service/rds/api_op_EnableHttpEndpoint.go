@@ -11,14 +11,19 @@ import (
 )
 
 // Enables the HTTP endpoint for the DB cluster. By default, the HTTP endpoint
-// isn't enabled. When enabled, this endpoint provides a connectionless web service
-// API (RDS Data API) for running SQL queries on the Aurora DB cluster. You can
-// also query your database from inside the RDS console with the RDS query editor.
-// For more information, see Using RDS Data API (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
-// in the Amazon Aurora User Guide. This operation applies only to Aurora
-// PostgreSQL Serverless v2 and provisioned DB clusters. To enable the HTTP
-// endpoint for Aurora Serverless v1 DB clusters, use the EnableHttpEndpoint
-// parameter of the ModifyDBCluster operation.
+// isn't enabled.
+//
+// When enabled, this endpoint provides a connectionless web service API (RDS Data
+// API) for running SQL queries on the Aurora DB cluster. You can also query your
+// database from inside the RDS console with the RDS query editor.
+//
+// For more information, see [Using RDS Data API] in the Amazon Aurora User Guide.
+//
+// This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned
+// DB clusters. To enable the HTTP endpoint for Aurora Serverless v1 DB clusters,
+// use the EnableHttpEndpoint parameter of the ModifyDBCluster operation.
+//
+// [Using RDS Data API]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
 func (c *Client) EnableHttpEndpoint(ctx context.Context, params *EnableHttpEndpointInput, optFns ...func(*Options)) (*EnableHttpEndpointOutput, error) {
 	if params == nil {
 		params = &EnableHttpEndpointInput{}

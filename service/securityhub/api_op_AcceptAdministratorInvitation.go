@@ -11,9 +11,12 @@ import (
 )
 
 // Accepts the invitation to be a member account and be monitored by the Security
-// Hub administrator account that the invitation was sent from. This operation is
-// only used by member accounts that are not added through Organizations. When the
-// member account accepts the invitation, permission is granted to the
+// Hub administrator account that the invitation was sent from.
+//
+// This operation is only used by member accounts that are not added through
+// Organizations.
+//
+// When the member account accepts the invitation, permission is granted to the
 // administrator account to view findings generated in the member account.
 func (c *Client) AcceptAdministratorInvitation(ctx context.Context, params *AcceptAdministratorInvitationInput, optFns ...func(*Options)) (*AcceptAdministratorInvitationOutput, error) {
 	if params == nil {

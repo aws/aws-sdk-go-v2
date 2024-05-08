@@ -40,8 +40,10 @@ type AttachVolumeInput struct {
 	GatewayARN *string
 
 	// The network interface of the gateway on which to expose the iSCSI target. Only
-	// IPv4 addresses are accepted. Use DescribeGatewayInformation to get a list of
-	// the network interfaces available on a gateway. Valid Values: A valid IP address.
+	// IPv4 addresses are accepted. Use DescribeGatewayInformationto get a list of the network interfaces
+	// available on a gateway.
+	//
+	// Valid Values: A valid IP address.
 	//
 	// This member is required.
 	NetworkInterfaceId *string
@@ -60,9 +62,10 @@ type AttachVolumeInput struct {
 	// used as a suffix for the target ARN. For example, specifying TargetName as
 	// myvolume results in the target ARN of
 	// arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume
-	// . The target name must be unique across all volumes on a gateway. If you don't
-	// specify a value, Storage Gateway uses the value that was previously used for
-	// this volume as the new target name.
+	// . The target name must be unique across all volumes on a gateway.
+	//
+	// If you don't specify a value, Storage Gateway uses the value that was
+	// previously used for this volume as the new target name.
 	TargetName *string
 
 	noSmithyDocumentSerde

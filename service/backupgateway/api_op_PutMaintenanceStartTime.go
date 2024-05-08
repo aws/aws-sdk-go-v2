@@ -44,8 +44,9 @@ type PutMaintenanceStartTimeInput struct {
 	// This member is required.
 	MinuteOfHour *int32
 
-	// The day of the month start maintenance on a gateway. Valid values range from
-	// Sunday to Saturday .
+	// The day of the month start maintenance on a gateway.
+	//
+	// Valid values range from Sunday to Saturday .
 	DayOfMonth *int32
 
 	// The day of the week to start maintenance on a gateway.

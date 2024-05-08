@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AsyncOperationName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AsyncOperationName) Values() []AsyncOperationName {
 	return []AsyncOperationName{
 		"CreateMultiRegionAccessPoint",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for BucketCannedACL. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BucketCannedACL) Values() []BucketCannedACL {
 	return []BucketCannedACL{
 		"private",
@@ -63,6 +65,7 @@ const (
 
 // Values returns all known values for BucketLocationConstraint. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (BucketLocationConstraint) Values() []BucketLocationConstraint {
 	return []BucketLocationConstraint{
@@ -89,8 +92,9 @@ const (
 )
 
 // Values returns all known values for BucketVersioningStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BucketVersioningStatus) Values() []BucketVersioningStatus {
 	return []BucketVersioningStatus{
 		"Enabled",
@@ -108,8 +112,9 @@ const (
 
 // Values returns all known values for DeleteMarkerReplicationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeleteMarkerReplicationStatus) Values() []DeleteMarkerReplicationStatus {
 	return []DeleteMarkerReplicationStatus{
 		"Enabled",
@@ -127,8 +132,9 @@ const (
 
 // Values returns all known values for ExistingObjectReplicationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExistingObjectReplicationStatus) Values() []ExistingObjectReplicationStatus {
 	return []ExistingObjectReplicationStatus{
 		"Enabled",
@@ -145,8 +151,9 @@ const (
 )
 
 // Values returns all known values for ExpirationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExpirationStatus) Values() []ExpirationStatus {
 	return []ExpirationStatus{
 		"Enabled",
@@ -163,8 +170,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"CSV",
@@ -180,8 +188,9 @@ const (
 )
 
 // Values returns all known values for GeneratedManifestFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GeneratedManifestFormat) Values() []GeneratedManifestFormat {
 	return []GeneratedManifestFormat{
 		"S3InventoryReport_CSV_20211130",
@@ -198,8 +207,9 @@ const (
 )
 
 // Values returns all known values for GranteeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GranteeType) Values() []GranteeType {
 	return []GranteeType{
 		"DIRECTORY_USER",
@@ -219,8 +229,9 @@ const (
 )
 
 // Values returns all known values for JobManifestFieldName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobManifestFieldName) Values() []JobManifestFieldName {
 	return []JobManifestFieldName{
 		"Ignore",
@@ -239,8 +250,9 @@ const (
 )
 
 // Values returns all known values for JobManifestFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobManifestFormat) Values() []JobManifestFormat {
 	return []JobManifestFormat{
 		"S3BatchOperations_CSV_20180820",
@@ -256,8 +268,9 @@ const (
 )
 
 // Values returns all known values for JobReportFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobReportFormat) Values() []JobReportFormat {
 	return []JobReportFormat{
 		"Report_CSV_20180820",
@@ -273,8 +286,9 @@ const (
 )
 
 // Values returns all known values for JobReportScope. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobReportScope) Values() []JobReportScope {
 	return []JobReportScope{
 		"AllTasks",
@@ -302,8 +316,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"Active",
@@ -331,8 +346,9 @@ const (
 )
 
 // Values returns all known values for MetricsStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricsStatus) Values() []MetricsStatus {
 	return []MetricsStatus{
 		"Enabled",
@@ -349,8 +365,9 @@ const (
 )
 
 // Values returns all known values for MFADelete. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MFADelete) Values() []MFADelete {
 	return []MFADelete{
 		"Enabled",
@@ -367,8 +384,9 @@ const (
 )
 
 // Values returns all known values for MFADeleteStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MFADeleteStatus) Values() []MFADeleteStatus {
 	return []MFADeleteStatus{
 		"Enabled",
@@ -390,8 +408,9 @@ const (
 
 // Values returns all known values for MultiRegionAccessPointStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MultiRegionAccessPointStatus) Values() []MultiRegionAccessPointStatus {
 	return []MultiRegionAccessPointStatus{
 		"READY",
@@ -412,8 +431,9 @@ const (
 )
 
 // Values returns all known values for NetworkOrigin. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkOrigin) Values() []NetworkOrigin {
 	return []NetworkOrigin{
 		"Internet",
@@ -431,8 +451,9 @@ const (
 
 // Values returns all known values for ObjectLambdaAccessPointAliasStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectLambdaAccessPointAliasStatus) Values() []ObjectLambdaAccessPointAliasStatus {
 	return []ObjectLambdaAccessPointAliasStatus{
 		"PROVISIONING",
@@ -452,6 +473,7 @@ const (
 
 // Values returns all known values for ObjectLambdaAllowedFeature. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectLambdaAllowedFeature) Values() []ObjectLambdaAllowedFeature {
 	return []ObjectLambdaAllowedFeature{
@@ -474,8 +496,9 @@ const (
 
 // Values returns all known values for
 // ObjectLambdaTransformationConfigurationAction. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectLambdaTransformationConfigurationAction) Values() []ObjectLambdaTransformationConfigurationAction {
 	return []ObjectLambdaTransformationConfigurationAction{
 		"GetObject",
@@ -501,8 +524,9 @@ const (
 )
 
 // Values returns all known values for OperationName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationName) Values() []OperationName {
 	return []OperationName{
 		"LambdaInvoke",
@@ -525,8 +549,9 @@ const (
 )
 
 // Values returns all known values for OutputSchemaVersion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputSchemaVersion) Values() []OutputSchemaVersion {
 	return []OutputSchemaVersion{
 		"V_1",
@@ -541,8 +566,9 @@ const (
 )
 
 // Values returns all known values for OwnerOverride. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OwnerOverride) Values() []OwnerOverride {
 	return []OwnerOverride{
 		"Destination",
@@ -559,8 +585,9 @@ const (
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Permission) Values() []Permission {
 	return []Permission{
 		"READ",
@@ -578,8 +605,9 @@ const (
 )
 
 // Values returns all known values for Privilege. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Privilege) Values() []Privilege {
 	return []Privilege{
 		"Minimal",
@@ -597,6 +625,7 @@ const (
 
 // Values returns all known values for ReplicaModificationsStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicaModificationsStatus) Values() []ReplicaModificationsStatus {
 	return []ReplicaModificationsStatus{
@@ -614,8 +643,9 @@ const (
 )
 
 // Values returns all known values for ReplicationRuleStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationRuleStatus) Values() []ReplicationRuleStatus {
 	return []ReplicationRuleStatus{
 		"Enabled",
@@ -634,8 +664,9 @@ const (
 )
 
 // Values returns all known values for ReplicationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationStatus) Values() []ReplicationStatus {
 	return []ReplicationStatus{
 		"COMPLETED",
@@ -661,8 +692,9 @@ const (
 )
 
 // Values returns all known values for ReplicationStorageClass. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationStorageClass) Values() []ReplicationStorageClass {
 	return []ReplicationStorageClass{
 		"STANDARD",
@@ -686,8 +718,9 @@ const (
 )
 
 // Values returns all known values for ReplicationTimeStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationTimeStatus) Values() []ReplicationTimeStatus {
 	return []ReplicationTimeStatus{
 		"Enabled",
@@ -704,8 +737,9 @@ const (
 )
 
 // Values returns all known values for RequestedJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequestedJobStatus) Values() []RequestedJobStatus {
 	return []RequestedJobStatus{
 		"Cancelled",
@@ -728,6 +762,7 @@ const (
 
 // Values returns all known values for S3CannedAccessControlList. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (S3CannedAccessControlList) Values() []S3CannedAccessControlList {
 	return []S3CannedAccessControlList{
@@ -752,8 +787,9 @@ const (
 )
 
 // Values returns all known values for S3ChecksumAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3ChecksumAlgorithm) Values() []S3ChecksumAlgorithm {
 	return []S3ChecksumAlgorithm{
 		"CRC32",
@@ -772,8 +808,9 @@ const (
 )
 
 // Values returns all known values for S3GlacierJobTier. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3GlacierJobTier) Values() []S3GlacierJobTier {
 	return []S3GlacierJobTier{
 		"BULK",
@@ -791,8 +828,9 @@ const (
 )
 
 // Values returns all known values for S3GranteeTypeIdentifier. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3GranteeTypeIdentifier) Values() []S3GranteeTypeIdentifier {
 	return []S3GranteeTypeIdentifier{
 		"id",
@@ -810,8 +848,9 @@ const (
 )
 
 // Values returns all known values for S3MetadataDirective. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3MetadataDirective) Values() []S3MetadataDirective {
 	return []S3MetadataDirective{
 		"COPY",
@@ -829,6 +868,7 @@ const (
 
 // Values returns all known values for S3ObjectLockLegalHoldStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (S3ObjectLockLegalHoldStatus) Values() []S3ObjectLockLegalHoldStatus {
 	return []S3ObjectLockLegalHoldStatus{
@@ -846,8 +886,9 @@ const (
 )
 
 // Values returns all known values for S3ObjectLockMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3ObjectLockMode) Values() []S3ObjectLockMode {
 	return []S3ObjectLockMode{
 		"COMPLIANCE",
@@ -865,6 +906,7 @@ const (
 
 // Values returns all known values for S3ObjectLockRetentionMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (S3ObjectLockRetentionMode) Values() []S3ObjectLockRetentionMode {
 	return []S3ObjectLockRetentionMode{
@@ -885,8 +927,9 @@ const (
 )
 
 // Values returns all known values for S3Permission. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3Permission) Values() []S3Permission {
 	return []S3Permission{
 		"FULL_CONTROL",
@@ -905,8 +948,9 @@ const (
 )
 
 // Values returns all known values for S3PrefixType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3PrefixType) Values() []S3PrefixType {
 	return []S3PrefixType{
 		"Object",
@@ -922,8 +966,9 @@ const (
 )
 
 // Values returns all known values for S3SSEAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3SSEAlgorithm) Values() []S3SSEAlgorithm {
 	return []S3SSEAlgorithm{
 		"AES256",
@@ -945,8 +990,9 @@ const (
 )
 
 // Values returns all known values for S3StorageClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3StorageClass) Values() []S3StorageClass {
 	return []S3StorageClass{
 		"STANDARD",
@@ -969,8 +1015,9 @@ const (
 
 // Values returns all known values for SseKmsEncryptedObjectsStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SseKmsEncryptedObjectsStatus) Values() []SseKmsEncryptedObjectsStatus {
 	return []SseKmsEncryptedObjectsStatus{
 		"Enabled",
@@ -990,8 +1037,9 @@ const (
 )
 
 // Values returns all known values for TransitionStorageClass. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitionStorageClass) Values() []TransitionStorageClass {
 	return []TransitionStorageClass{
 		"GLACIER",

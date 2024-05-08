@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an OpenSearch Serverless access policy. For more information, see Data
-// access control for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html)
-// .
+// Updates an OpenSearch Serverless access policy. For more information, see [Data access control for Amazon OpenSearch Serverless].
+//
+// [Data access control for Amazon OpenSearch Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-data-access.html
 func (c *Client) UpdateAccessPolicy(ctx context.Context, params *UpdateAccessPolicyInput, optFns ...func(*Options)) (*UpdateAccessPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateAccessPolicyInput{}

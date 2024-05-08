@@ -12,8 +12,9 @@ import (
 )
 
 // Returns the tags for an OpenSearch Serverless resource. For more information,
-// see Tagging Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html)
-// .
+// see [Tagging Amazon OpenSearch Serverless collections].
+//
+// [Tagging Amazon OpenSearch Serverless collections]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

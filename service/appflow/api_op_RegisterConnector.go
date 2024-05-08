@@ -34,17 +34,20 @@ type RegisterConnectorInput struct {
 	// The clientToken parameter is an idempotency token. It ensures that your
 	// RegisterConnector request completes only once. You choose the value to pass. For
 	// example, if you don't receive a response from your request, you can safely retry
-	// the request with the same clientToken parameter value. If you omit a clientToken
-	// value, the Amazon Web Services SDK that you are using inserts a value for you.
-	// This way, the SDK can safely retry requests multiple times after a network
-	// error. You must provide your own value for other use cases. If you specify input
-	// parameters that differ from your first request, an error occurs. If you use a
-	// different value for clientToken , Amazon AppFlow considers it a new call to
-	// RegisterConnector . The token is active for 8 hours.
+	// the request with the same clientToken parameter value.
+	//
+	// If you omit a clientToken value, the Amazon Web Services SDK that you are using
+	// inserts a value for you. This way, the SDK can safely retry requests multiple
+	// times after a network error. You must provide your own value for other use
+	// cases.
+	//
+	// If you specify input parameters that differ from your first request, an error
+	// occurs. If you use a different value for clientToken , Amazon AppFlow considers
+	// it a new call to RegisterConnector . The token is active for 8 hours.
 	ClientToken *string
 
-	// The name of the connector. The name is unique for each ConnectorRegistration in
-	// your Amazon Web Services account.
+	//  The name of the connector. The name is unique for each ConnectorRegistration
+	// in your Amazon Web Services account.
 	ConnectorLabel *string
 
 	// The provisioning type of the connector. Currently the only supported value is

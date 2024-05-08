@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves batches of metric data collected based on your sending activity. You
-// can execute this operation no more than 16 times per second, and with at most
-// 160 queries from the batches per second (cumulative).
+// Retrieves batches of metric data collected based on your sending activity.
+//
+// You can execute this operation no more than 16 times per second, and with at
+// most 160 queries from the batches per second (cumulative).
 func (c *Client) BatchGetMetricData(ctx context.Context, params *BatchGetMetricDataInput, optFns ...func(*Options)) (*BatchGetMetricDataOutput, error) {
 	if params == nil {
 		params = &BatchGetMetricDataInput{}

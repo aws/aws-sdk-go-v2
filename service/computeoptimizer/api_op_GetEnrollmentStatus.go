@@ -13,11 +13,12 @@ import (
 )
 
 // Returns the enrollment (opt in) status of an account to the Compute Optimizer
-// service. If the account is the management account of an organization, this
-// action also confirms the enrollment status of member accounts of the
-// organization. Use the GetEnrollmentStatusesForOrganization action to get
-// detailed information about the enrollment status of member accounts of an
-// organization.
+// service.
+//
+// If the account is the management account of an organization, this action also
+// confirms the enrollment status of member accounts of the organization. Use the GetEnrollmentStatusesForOrganization
+// action to get detailed information about the enrollment status of member
+// accounts of an organization.
 func (c *Client) GetEnrollmentStatus(ctx context.Context, params *GetEnrollmentStatusInput, optFns ...func(*Options)) (*GetEnrollmentStatusOutput, error) {
 	if params == nil {
 		params = &GetEnrollmentStatusInput{}
@@ -54,9 +55,10 @@ type GetEnrollmentStatusOutput struct {
 	// The enrollment status of the account.
 	Status types.Status
 
-	// The reason for the enrollment status of the account. For example, an account
-	// might show a status of Pending because member accounts of an organization
-	// require more time to be enrolled in the service.
+	// The reason for the enrollment status of the account.
+	//
+	// For example, an account might show a status of Pending because member accounts
+	// of an organization require more time to be enrolled in the service.
 	StatusReason *string
 
 	// Metadata pertaining to the operation's result.

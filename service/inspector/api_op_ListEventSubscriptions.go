@@ -12,8 +12,7 @@ import (
 )
 
 // Lists all the event subscriptions for the assessment template that is specified
-// by the ARN of the assessment template. For more information, see
-// SubscribeToEvent and UnsubscribeFromEvent .
+// by the ARN of the assessment template. For more information, see SubscribeToEventand UnsubscribeFromEvent.
 func (c *Client) ListEventSubscriptions(ctx context.Context, params *ListEventSubscriptionsInput, optFns ...func(*Options)) (*ListEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &ListEventSubscriptionsInput{}
@@ -55,7 +54,7 @@ type ListEventSubscriptionsOutput struct {
 	// This member is required.
 	Subscriptions []types.Subscription
 
-	// When a response is generated, if there is more data to be listed, this
+	//  When a response is generated, if there is more data to be listed, this
 	// parameter is present in the response and contains the value to use for the
 	// nextToken parameter in a subsequent pagination request. If there is no more data
 	// to be listed, this parameter is set to null.

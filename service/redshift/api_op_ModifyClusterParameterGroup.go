@@ -12,9 +12,12 @@ import (
 )
 
 // Modifies the parameters of a parameter group. For the parameters parameter, it
-// can't contain ASCII characters. For more information about parameters and
-// parameter groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
+// can't contain ASCII characters.
+//
+// For more information about parameters and parameter groups, go to [Amazon Redshift Parameter Groups] in the
+// Amazon Redshift Cluster Management Guide.
+//
+// [Amazon Redshift Parameter Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
 func (c *Client) ModifyClusterParameterGroup(ctx context.Context, params *ModifyClusterParameterGroupInput, optFns ...func(*Options)) (*ModifyClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &ModifyClusterParameterGroupInput{}
@@ -39,10 +42,13 @@ type ModifyClusterParameterGroupInput struct {
 	ParameterGroupName *string
 
 	// An array of parameters to be modified. A maximum of 20 parameters can be
-	// modified in a single request. For each parameter to be modified, you must supply
-	// at least the parameter name and parameter value; other name-value pairs of the
-	// parameter are optional. For the workload management (WLM) configuration, you
-	// must supply all the name-value pairs in the wlm_json_configuration parameter.
+	// modified in a single request.
+	//
+	// For each parameter to be modified, you must supply at least the parameter name
+	// and parameter value; other name-value pairs of the parameter are optional.
+	//
+	// For the workload management (WLM) configuration, you must supply all the
+	// name-value pairs in the wlm_json_configuration parameter.
 	//
 	// This member is required.
 	Parameters []types.Parameter

@@ -10,11 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates the permissions policy for your registry. A registry policy
-// is used to specify permissions for another Amazon Web Services account and is
-// used when configuring cross-account replication. For more information, see
-// Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html)
-// in the Amazon Elastic Container Registry User Guide.
+// Creates or updates the permissions policy for your registry.
+//
+// A registry policy is used to specify permissions for another Amazon Web
+// Services account and is used when configuring cross-account replication. For
+// more information, see [Registry permissions]in the Amazon Elastic Container Registry User Guide.
+//
+// [Registry permissions]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html
 func (c *Client) PutRegistryPolicy(ctx context.Context, params *PutRegistryPolicyInput, optFns ...func(*Options)) (*PutRegistryPolicyOutput, error) {
 	if params == nil {
 		params = &PutRegistryPolicyInput{}
@@ -33,8 +35,10 @@ func (c *Client) PutRegistryPolicy(ctx context.Context, params *PutRegistryPolic
 type PutRegistryPolicyInput struct {
 
 	// The JSON policy text to apply to your registry. The policy text follows the
-	// same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html)
-	// in the Amazon Elastic Container Registry User Guide.
+	// same format as IAM policy text. For more information, see [Registry permissions]in the Amazon Elastic
+	// Container Registry User Guide.
+	//
+	// [Registry permissions]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html
 	//
 	// This member is required.
 	PolicyText *string

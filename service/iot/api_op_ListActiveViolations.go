@@ -12,8 +12,10 @@ import (
 )
 
 // Lists the active violations for a given Device Defender security profile.
-// Requires permission to access the ListActiveViolations (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//
+// Requires permission to access the [ListActiveViolations] action.
+//
+// [ListActiveViolations]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListActiveViolations(ctx context.Context, params *ListActiveViolationsInput, optFns ...func(*Options)) (*ListActiveViolationsOutput, error) {
 	if params == nil {
 		params = &ListActiveViolationsInput{}
@@ -31,10 +33,10 @@ func (c *Client) ListActiveViolations(ctx context.Context, params *ListActiveVio
 
 type ListActiveViolationsInput struct {
 
-	// The criteria for a behavior.
+	//  The criteria for a behavior.
 	BehaviorCriteriaType types.BehaviorCriteriaType
 
-	// A list of all suppressed alerts.
+	//  A list of all suppressed alerts.
 	ListSuppressedAlerts *bool
 
 	// The maximum number of results to return at one time.

@@ -14,6 +14,7 @@ import (
 
 // This test case serializes XML lists for the following cases for both input and
 // output:
+//
 //   - Normal XML lists.
 //   - Normal XML sets.
 //   - XML lists of lists.

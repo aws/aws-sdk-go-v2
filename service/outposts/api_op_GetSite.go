@@ -29,7 +29,7 @@ func (c *Client) GetSite(ctx context.Context, params *GetSiteInput, optFns ...fu
 
 type GetSiteInput struct {
 
-	// The ID or the Amazon Resource Name (ARN) of the site.
+	//  The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string

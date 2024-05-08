@@ -31,8 +31,9 @@ func (c *Client) UpdateVTLDeviceType(ctx context.Context, params *UpdateVTLDevic
 
 type UpdateVTLDeviceTypeInput struct {
 
-	// The type of medium changer you want to select. Valid Values: STK-L700 |
-	// AWS-Gateway-VTL | IBM-03584L32-0402
+	// The type of medium changer you want to select.
+	//
+	// Valid Values: STK-L700 | AWS-Gateway-VTL | IBM-03584L32-0402
 	//
 	// This member is required.
 	DeviceType *string

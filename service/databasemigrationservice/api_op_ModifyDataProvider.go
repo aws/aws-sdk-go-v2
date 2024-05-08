@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified data provider using the provided settings. You must
-// remove the data provider from all migration projects before you can modify it.
+// Modifies the specified data provider using the provided settings.
+//
+// You must remove the data provider from all migration projects before you can
+// modify it.
 func (c *Client) ModifyDataProvider(ctx context.Context, params *ModifyDataProviderInput, optFns ...func(*Options)) (*ModifyDataProviderOutput, error) {
 	if params == nil {
 		params = &ModifyDataProviderInput{}
@@ -53,8 +55,10 @@ type ModifyDataProviderInput struct {
 	// existing data provider settings with the exact settings that you specify in this
 	// call. If this attribute is N, the current call to ModifyDataProvider does two
 	// things:
+	//
 	//   - It replaces any data provider settings that already exist with new values,
 	//   for settings with the same names.
+	//
 	//   - It creates new data provider settings that you specify in the call, for
 	//   settings with different names.
 	ExactSettings *bool

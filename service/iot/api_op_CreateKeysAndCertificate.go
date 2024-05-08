@@ -13,11 +13,15 @@ import (
 
 // Creates a 2048-bit RSA key pair and issues an X.509 certificate using the
 // issued public key. You can also call CreateKeysAndCertificate over MQTT from a
-// device, for more information, see Provisioning MQTT API (https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api)
-// . Note This is the only time IoT issues the private key for this certificate, so
-// it is important to keep it in a secure location. Requires permission to access
-// the CreateKeysAndCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// device, for more information, see [Provisioning MQTT API].
+//
+// Note This is the only time IoT issues the private key for this certificate, so
+// it is important to keep it in a secure location.
+//
+// Requires permission to access the [CreateKeysAndCertificate] action.
+//
+// [CreateKeysAndCertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [Provisioning MQTT API]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api
 func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKeysAndCertificateInput, optFns ...func(*Options)) (*CreateKeysAndCertificateOutput, error) {
 	if params == nil {
 		params = &CreateKeysAndCertificateInput{}
@@ -33,9 +37,11 @@ func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKey
 	return out, nil
 }
 
-// The input for the CreateKeysAndCertificate operation. Requires permission to
-// access the CreateKeysAndCertificateRequest (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// The input for the CreateKeysAndCertificate operation.
+//
+// Requires permission to access the [CreateKeysAndCertificateRequest] action.
+//
+// [CreateKeysAndCertificateRequest]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 type CreateKeysAndCertificateInput struct {
 
 	// Specifies whether the certificate is active.

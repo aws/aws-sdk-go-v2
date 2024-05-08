@@ -15,12 +15,14 @@ import (
 // access the repository, to either push to it (self-managed provisioning) or pull
 // from it (template sync). You can share a linked repository across multiple
 // resources (like environments using self-managed provisioning, or synced
-// templates). When you create a repository link, Proton creates a service-linked
-// role (https://docs.aws.amazon.com/proton/latest/userguide/using-service-linked-roles.html)
-// for you. For more information, see Self-managed provisioning (https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self)
-// , Template bundles (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-authoring.html#ag-template-bundles)
-// , and Template sync configurations (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html)
-// in the Proton User Guide.
+// templates). When you create a repository link, Proton creates a [service-linked role]for you.
+//
+// For more information, see [Self-managed provisioning], [Template bundles], and [Template sync configurations] in the Proton User Guide.
+//
+// [Self-managed provisioning]: https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self
+// [Template sync configurations]: https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html
+// [Template bundles]: https://docs.aws.amazon.com/proton/latest/userguide/ag-template-authoring.html#ag-template-bundles
+// [service-linked role]: https://docs.aws.amazon.com/proton/latest/userguide/using-service-linked-roles.html
 func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryInput, optFns ...func(*Options)) (*CreateRepositoryOutput, error) {
 	if params == nil {
 		params = &CreateRepositoryInput{}
@@ -39,9 +41,10 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 type CreateRepositoryInput struct {
 
 	// The Amazon Resource Name (ARN) of your AWS CodeStar connection that connects
-	// Proton to your repository provider account. For more information, see Setting
-	// up for Proton (https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html)
-	// in the Proton User Guide.
+	// Proton to your repository provider account. For more information, see [Setting up for Proton]in the
+	// Proton User Guide.
+	//
+	// [Setting up for Proton]: https://docs.aws.amazon.com/proton/latest/userguide/setting-up-for-service.html
 	//
 	// This member is required.
 	ConnectionArn *string
@@ -61,9 +64,11 @@ type CreateRepositoryInput struct {
 	EncryptionKey *string
 
 	// An optional list of metadata items that you can associate with the Proton
-	// repository. A tag is a key-value pair. For more information, see Proton
-	// resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
-	// in the Proton User Guide.
+	// repository. A tag is a key-value pair.
+	//
+	// For more information, see [Proton resources and tagging] in the Proton User Guide.
+	//
+	// [Proton resources and tagging]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

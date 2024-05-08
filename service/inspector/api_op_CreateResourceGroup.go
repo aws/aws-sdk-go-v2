@@ -14,7 +14,7 @@ import (
 // Creates a resource group using the specified set of tags (key and value pairs)
 // that are used to select the EC2 instances to be included in an Amazon Inspector
 // assessment target. The created resource group is then used to create an Amazon
-// Inspector assessment target. For more information, see CreateAssessmentTarget .
+// Inspector assessment target. For more information, see CreateAssessmentTarget.
 func (c *Client) CreateResourceGroup(ctx context.Context, params *CreateResourceGroupInput, optFns ...func(*Options)) (*CreateResourceGroupOutput, error) {
 	if params == nil {
 		params = &CreateResourceGroupInput{}
@@ -34,6 +34,7 @@ type CreateResourceGroupInput struct {
 
 	// A collection of keys and an array of possible values,
 	// '[{"key":"key1","values":["Value1","Value2"]},{"key":"Key2","values":["Value3"]}]'.
+	//
 	// For example,'[{"key":"Name","values":["TestEC2Instance"]}]'.
 	//
 	// This member is required.

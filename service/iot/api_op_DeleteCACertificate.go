@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a registered CA certificate. Requires permission to access the
-// DeleteCACertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes a registered CA certificate.
+//
+// Requires permission to access the [DeleteCACertificate] action.
+//
+// [DeleteCACertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteCACertificate(ctx context.Context, params *DeleteCACertificateInput, optFns ...func(*Options)) (*DeleteCACertificateOutput, error) {
 	if params == nil {
 		params = &DeleteCACertificateInput{}

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables temporary credential requests for a profile. Required permissions:
-// rolesanywhere:EnableProfile .
+// Enables temporary credential requests for a profile.
+//
+// Required permissions: rolesanywhere:EnableProfile .
 func (c *Client) EnableProfile(ctx context.Context, params *EnableProfileInput, optFns ...func(*Options)) (*EnableProfileOutput, error) {
 	if params == nil {
 		params = &EnableProfileInput{}

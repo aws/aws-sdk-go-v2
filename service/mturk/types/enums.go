@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AssignmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssignmentStatus) Values() []AssignmentStatus {
 	return []AssignmentStatus{
 		"Submitted",
@@ -39,8 +40,9 @@ const (
 )
 
 // Values returns all known values for Comparator. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Comparator) Values() []Comparator {
 	return []Comparator{
 		"LessThan",
@@ -75,8 +77,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"AssignmentAccepted",
@@ -104,8 +107,9 @@ const (
 )
 
 // Values returns all known values for HITAccessActions. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HITAccessActions) Values() []HITAccessActions {
 	return []HITAccessActions{
 		"Accept",
@@ -125,8 +129,9 @@ const (
 )
 
 // Values returns all known values for HITReviewStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HITReviewStatus) Values() []HITReviewStatus {
 	return []HITReviewStatus{
 		"NotReviewed",
@@ -148,8 +153,9 @@ const (
 )
 
 // Values returns all known values for HITStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HITStatus) Values() []HITStatus {
 	return []HITStatus{
 		"Assignable",
@@ -170,8 +176,9 @@ const (
 )
 
 // Values returns all known values for NotificationTransport. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationTransport) Values() []NotificationTransport {
 	return []NotificationTransport{
 		"Email",
@@ -190,6 +197,7 @@ const (
 
 // Values returns all known values for NotifyWorkersFailureCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (NotifyWorkersFailureCode) Values() []NotifyWorkersFailureCode {
 	return []NotifyWorkersFailureCode{
@@ -207,8 +215,9 @@ const (
 )
 
 // Values returns all known values for QualificationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QualificationStatus) Values() []QualificationStatus {
 	return []QualificationStatus{
 		"Granted",
@@ -225,8 +234,9 @@ const (
 )
 
 // Values returns all known values for QualificationTypeStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QualificationTypeStatus) Values() []QualificationTypeStatus {
 	return []QualificationTypeStatus{
 		"Active",
@@ -243,8 +253,9 @@ const (
 )
 
 // Values returns all known values for ReviewableHITStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReviewableHITStatus) Values() []ReviewableHITStatus {
 	return []ReviewableHITStatus{
 		"Reviewable",
@@ -263,8 +274,9 @@ const (
 )
 
 // Values returns all known values for ReviewActionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReviewActionStatus) Values() []ReviewActionStatus {
 	return []ReviewActionStatus{
 		"Intended",
@@ -283,8 +295,9 @@ const (
 )
 
 // Values returns all known values for ReviewPolicyLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReviewPolicyLevel) Values() []ReviewPolicyLevel {
 	return []ReviewPolicyLevel{
 		"Assignment",

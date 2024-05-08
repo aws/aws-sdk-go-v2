@@ -15,8 +15,10 @@ import (
 // Transitions your account to use TCUs for query pricing and modifies the maximum
 // query compute units that you've configured. If you reduce the value of
 // MaxQueryTCU to a desired configuration, the new value can take up to 24 hours to
-// be effective. After you've transitioned your account to use TCUs for query
-// pricing, you can't transition to using bytes scanned for query pricing.
+// be effective.
+//
+// After you've transitioned your account to use TCUs for query pricing, you can't
+// transition to using bytes scanned for query pricing.
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}
@@ -37,10 +39,13 @@ type UpdateAccountSettingsInput struct {
 	// The maximum number of compute units the service will use at any point in time
 	// to serve your queries. To run queries, you must set a minimum capacity of 4 TCU.
 	// You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16,
-	// 32, and so on. The maximum value supported for MaxQueryTCU is 1000. To request
-	// an increase to this soft limit, contact Amazon Web Services Support. For
-	// information about the default quota for maxQueryTCU, see Default quotas (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default)
-	// .
+	// 32, and so on.
+	//
+	// The maximum value supported for MaxQueryTCU is 1000. To request an increase to
+	// this soft limit, contact Amazon Web Services Support. For information about the
+	// default quota for maxQueryTCU, see [Default quotas].
+	//
+	// [Default quotas]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default
 	MaxQueryTCU *int32
 
 	// The pricing model for queries in an account.

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about a node. Applies to Hyperledger Fabric and
-// Ethereum.
+// Returns detailed information about a node.
+//
+// Applies to Hyperledger Fabric and Ethereum.
 func (c *Client) GetNode(ctx context.Context, params *GetNodeInput, optFns ...func(*Options)) (*GetNodeOutput, error) {
 	if params == nil {
 		params = &GetNodeInput{}
@@ -40,8 +41,9 @@ type GetNodeInput struct {
 	// This member is required.
 	NodeId *string
 
-	// The unique identifier of the member that owns the node. Applies only to
-	// Hyperledger Fabric and is required for Hyperledger Fabric.
+	// The unique identifier of the member that owns the node.
+	//
+	// Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.
 	MemberId *string
 
 	noSmithyDocumentSerde

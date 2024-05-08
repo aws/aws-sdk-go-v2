@@ -45,25 +45,35 @@ type UpdateSlackChannelConfigurationInput struct {
 	ChannelName *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
-	// operations on Amazon Web Services. For more information, see Managing access to
-	// the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
-	// in the Amazon Web Services Support User Guide.
+	// operations on Amazon Web Services. For more information, see [Managing access to the Amazon Web Services Support App]in the Amazon Web
+	// Services Support User Guide.
+	//
+	// [Managing access to the Amazon Web Services Support App]: https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html
 	ChannelRoleArn *string
 
 	// Whether you want to get notified when a support case has a new correspondence.
 	NotifyOnAddCorrespondenceToCase *bool
 
-	// The case severity for a support case that you want to receive notifications. If
-	// you specify high or all , at least one of the following parameters must be true
-	// :
+	// The case severity for a support case that you want to receive notifications.
+	//
+	// If you specify high or all , at least one of the following parameters must be
+	// true :
+	//
 	//   - notifyOnAddCorrespondenceToCase
+	//
 	//   - notifyOnCreateOrReopenCase
+	//
 	//   - notifyOnResolveCase
+	//
 	// If you specify none , any of the following parameters that you specify in your
 	// request must be false :
+	//
 	//   - notifyOnAddCorrespondenceToCase
+	//
 	//   - notifyOnCreateOrReopenCase
+	//
 	//   - notifyOnResolveCase
+	//
 	// If you don't specify these parameters in your request, the Amazon Web Services
 	// Support App uses the current values by default.
 	NotifyOnCaseSeverity types.NotificationSeverityLevel
@@ -87,9 +97,10 @@ type UpdateSlackChannelConfigurationOutput struct {
 	ChannelName *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
-	// operations on Amazon Web Services. For more information, see Managing access to
-	// the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
-	// in the Amazon Web Services Support User Guide.
+	// operations on Amazon Web Services. For more information, see [Managing access to the Amazon Web Services Support App]in the Amazon Web
+	// Services Support User Guide.
+	//
+	// [Managing access to the Amazon Web Services Support App]: https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html
 	ChannelRoleArn *string
 
 	// Whether you want to get notified when a support case has a new correspondence.

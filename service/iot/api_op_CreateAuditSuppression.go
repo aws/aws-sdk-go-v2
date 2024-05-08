@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Creates a Device Defender audit suppression. Requires permission to access the
-// CreateAuditSuppression (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Creates a Device Defender audit suppression.
+//
+// Requires permission to access the [CreateAuditSuppression] action.
+//
+// [CreateAuditSuppression]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateAuditSuppression(ctx context.Context, params *CreateAuditSuppressionInput, optFns ...func(*Options)) (*CreateAuditSuppressionOutput, error) {
 	if params == nil {
 		params = &CreateAuditSuppressionInput{}
@@ -40,7 +42,7 @@ type CreateAuditSuppressionInput struct {
 	// This member is required.
 	CheckName *string
 
-	// Each audit supression must have a unique client request token. If you try to
+	//  Each audit supression must have a unique client request token. If you try to
 	// create a new audit suppression with the same token as one that already exists,
 	// an exception occurs. If you omit this value, Amazon Web Services SDKs will
 	// automatically generate a unique client request.
@@ -53,13 +55,13 @@ type CreateAuditSuppressionInput struct {
 	// This member is required.
 	ResourceIdentifier *types.ResourceIdentifier
 
-	// The description of the audit suppression.
+	//  The description of the audit suppression.
 	Description *string
 
-	// The epoch timestamp in seconds at which this suppression expires.
+	//  The epoch timestamp in seconds at which this suppression expires.
 	ExpirationDate *time.Time
 
-	// Indicates whether a suppression should exist indefinitely or not.
+	//  Indicates whether a suppression should exist indefinitely or not.
 	SuppressIndefinitely *bool
 
 	noSmithyDocumentSerde

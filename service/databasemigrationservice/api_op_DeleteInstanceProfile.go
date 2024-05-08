@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified instance profile. All migration projects associated with
-// the instance profile must be deleted or modified before you can delete the
-// instance profile.
+// Deletes the specified instance profile.
+//
+// All migration projects associated with the instance profile must be deleted or
+// modified before you can delete the instance profile.
 func (c *Client) DeleteInstanceProfile(ctx context.Context, params *DeleteInstanceProfileInput, optFns ...func(*Options)) (*DeleteInstanceProfileOutput, error) {
 	if params == nil {
 		params = &DeleteInstanceProfileInput{}

@@ -29,7 +29,7 @@ func (c *Client) GetFleet(ctx context.Context, params *GetFleetInput, optFns ...
 
 type GetFleetInput struct {
 
-	// The ID of the fleet to retrieve information about.
+	//  The ID of the fleet to retrieve information about.
 	//
 	// This member is required.
 	FleetId *string
@@ -39,34 +39,34 @@ type GetFleetInput struct {
 
 type GetFleetOutput struct {
 
-	// The Amazon Resource Name (ARN) of the fleet.
+	//  The Amazon Resource Name (ARN) of the fleet.
 	//
 	// This member is required.
 	Arn *string
 
-	// The time the fleet was created in seconds since epoch (January 1, 1970 at
+	//  The time the fleet was created in seconds since epoch (January 1, 1970 at
 	// midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The ID of the fleet.
+	//  The ID of the fleet.
 	//
 	// This member is required.
 	Id *string
 
-	// The time the fleet was last updated, in seconds since epoch (January 1, 1970 at
-	// midnight UTC time).
+	//  The time the fleet was last updated, in seconds since epoch (January 1, 1970
+	// at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// The ARN of a signal catalog associated with the fleet.
+	//  The ARN of a signal catalog associated with the fleet.
 	//
 	// This member is required.
 	SignalCatalogArn *string
 
-	// A brief description of the fleet.
+	//  A brief description of the fleet.
 	Description *string
 
 	// Metadata pertaining to the operation's result.

@@ -15,11 +15,18 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Returns the access point
-// policy associated with the specified access point. The following actions are
-// related to GetAccessPointPolicy :
-//   - PutAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
-//   - DeleteAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
+// This operation is not supported by directory buckets.
+//
+// Returns the access point policy associated with the specified access point.
+//
+// The following actions are related to GetAccessPointPolicy :
+//
+// [PutAccessPointPolicy]
+//
+// [DeleteAccessPointPolicy]
+//
+// [DeleteAccessPointPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
+// [PutAccessPointPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
 func (c *Client) GetAccessPointPolicy(ctx context.Context, params *GetAccessPointPolicyInput, optFns ...func(*Options)) (*GetAccessPointPolicyOutput, error) {
 	if params == nil {
 		params = &GetAccessPointPolicyInput{}
@@ -42,11 +49,13 @@ type GetAccessPointPolicyInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The name of the access point whose policy you want to retrieve. For using this
-	// parameter with Amazon S3 on Outposts with the REST API, you must specify the
-	// name and the x-amz-outpost-id as well. For using this parameter with S3 on
-	// Outposts with the Amazon Web Services SDK and CLI, you must specify the ARN of
-	// the access point accessed in the format
+	// The name of the access point whose policy you want to retrieve.
+	//
+	// For using this parameter with Amazon S3 on Outposts with the REST API, you must
+	// specify the name and the x-amz-outpost-id as well.
+	//
+	// For using this parameter with S3 on Outposts with the Amazon Web Services SDK
+	// and CLI, you must specify the ARN of the access point accessed in the format
 	// arn:aws:s3-outposts:::outpost//accesspoint/ . For example, to access the access
 	// point reports-ap through Outpost my-outpost owned by account 123456789012 in
 	// Region us-west-2 , use the URL encoding of

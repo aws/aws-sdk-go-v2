@@ -18,11 +18,15 @@ import (
 )
 
 // Returns information about DB cluster snapshots. This API action supports
-// pagination. For more information on Amazon Aurora DB clusters, see What is
-// Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide.
+// pagination.
+//
+// For more information on Amazon Aurora DB clusters, see [What is Amazon Aurora?] in the Amazon Aurora
+// User Guide.
+//
+// For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments] in the Amazon RDS User Guide.
+//
+// [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+// [Multi-AZ DB cluster deployments]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
 func (c *Client) DescribeDBClusterSnapshots(ctx context.Context, params *DescribeDBClusterSnapshotsInput, optFns ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterSnapshotsInput{}
@@ -42,14 +46,21 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This
 	// parameter can't be used in conjunction with the DBClusterSnapshotIdentifier
-	// parameter. This parameter isn't case-sensitive. Constraints:
+	// parameter. This parameter isn't case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - If supplied, must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// A specific DB cluster snapshot identifier to describe. This parameter can't be
 	// used in conjunction with the DBClusterIdentifier parameter. This value is
-	// stored as a lowercase string. Constraints:
+	// stored as a lowercase string.
+	//
+	// Constraints:
+	//
 	//   - If supplied, must match the identifier of an existing DBClusterSnapshot.
+	//
 	//   - If this identifier is for an automated snapshot, the SnapshotType parameter
 	//   must also be specified.
 	DBClusterSnapshotIdentifier *string
@@ -57,26 +68,34 @@ type DescribeDBClusterSnapshotsInput struct {
 	// A specific DB cluster resource ID to describe.
 	DbClusterResourceId *string
 
-	// A filter that specifies one or more DB cluster snapshots to describe. Supported
-	// filters:
+	// A filter that specifies one or more DB cluster snapshots to describe.
+	//
+	// Supported filters:
+	//
 	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	//   Resource Names (ARNs).
+	//
 	//   - db-cluster-snapshot-id - Accepts DB cluster snapshot identifiers.
+	//
 	//   - snapshot-type - Accepts types of DB cluster snapshots.
+	//
 	//   - engine - Accepts names of database engines.
 	Filters []types.Filter
 
 	// Specifies whether to include manual DB cluster snapshots that are public and
 	// can be copied or restored by any Amazon Web Services account. By default, the
-	// public snapshots are not included. You can share a manual DB cluster snapshot as
-	// public by using the ModifyDBClusterSnapshotAttribute API action.
+	// public snapshots are not included.
+	//
+	// You can share a manual DB cluster snapshot as public by using the ModifyDBClusterSnapshotAttribute API action.
 	IncludePublic *bool
 
 	// Specifies whether to include shared manual DB cluster snapshots from other
 	// Amazon Web Services accounts that this Amazon Web Services account has been
 	// given permission to copy or restore. By default, these snapshots are not
-	// included. You can give an Amazon Web Services account permission to restore a
-	// manual DB cluster snapshot from another Amazon Web Services account by the
+	// included.
+	//
+	// You can give an Amazon Web Services account permission to restore a manual DB
+	// cluster snapshot from another Amazon Web Services account by the
 	// ModifyDBClusterSnapshotAttribute API action.
 	IncludeShared *bool
 
@@ -87,27 +106,36 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The type of DB cluster snapshots to be returned. You can specify one of the
 	// following values:
+	//
 	//   - automated - Return all DB cluster snapshots that have been automatically
 	//   taken by Amazon RDS for my Amazon Web Services account.
+	//
 	//   - manual - Return all DB cluster snapshots that have been taken by my Amazon
 	//   Web Services account.
+	//
 	//   - shared - Return all manual DB cluster snapshots that have been shared to my
 	//   Amazon Web Services account.
+	//
 	//   - public - Return all DB cluster snapshots that have been marked as public.
+	//
 	// If you don't specify a SnapshotType value, then both automated and manual DB
 	// cluster snapshots are returned. You can include shared DB cluster snapshots with
 	// these results by enabling the IncludeShared parameter. You can include public
-	// DB cluster snapshots with these results by enabling the IncludePublic
-	// parameter. The IncludeShared and IncludePublic parameters don't apply for
-	// SnapshotType values of manual or automated . The IncludePublic parameter
-	// doesn't apply when SnapshotType is set to shared . The IncludeShared parameter
-	// doesn't apply when SnapshotType is set to public .
+	// DB cluster snapshots with these results by enabling the IncludePublic parameter.
+	//
+	// The IncludeShared and IncludePublic parameters don't apply for SnapshotType
+	// values of manual or automated . The IncludePublic parameter doesn't apply when
+	// SnapshotType is set to shared . The IncludeShared parameter doesn't apply when
+	// SnapshotType is set to public .
 	SnapshotType *string
 
 	noSmithyDocumentSerde
@@ -223,7 +251,10 @@ var _ DescribeDBClusterSnapshotsAPIClient = (*Client)(nil)
 type DescribeDBClusterSnapshotsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
@@ -340,12 +371,13 @@ type DBClusterSnapshotAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDBClusterSnapshotsInput, *DescribeDBClusterSnapshotsOutput, error) (bool, error)
 }
 
@@ -651,12 +683,13 @@ type DBClusterSnapshotDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDBClusterSnapshotsInput, *DescribeDBClusterSnapshotsOutput, error) (bool, error)
 }
 

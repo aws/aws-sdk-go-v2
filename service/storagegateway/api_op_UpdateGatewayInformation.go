@@ -13,9 +13,11 @@ import (
 
 // Updates a gateway's metadata, which includes the gateway's name and time zone.
 // To specify which gateway to update, use the Amazon Resource Name (ARN) of the
-// gateway in your request. For gateways activated after September 2, 2015, the
-// gateway's ARN contains the gateway ID rather than the gateway name. However,
-// changing the name of the gateway has no effect on the gateway's ARN.
+// gateway in your request.
+//
+// For gateways activated after September 2, 2015, the gateway's ARN contains the
+// gateway ID rather than the gateway name. However, changing the name of the
+// gateway has no effect on the gateway's ARN.
 func (c *Client) UpdateGatewayInformation(ctx context.Context, params *UpdateGatewayInformationInput, optFns ...func(*Options)) (*UpdateGatewayInformationOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayInformationInput{}
@@ -33,15 +35,18 @@ func (c *Client) UpdateGatewayInformation(ctx context.Context, params *UpdateGat
 
 type UpdateGatewayInformationInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
 	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want
-	// to use to monitor and log events in the gateway. For more information, see What
-	// is Amazon CloudWatch Logs? (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html)
+	// to use to monitor and log events in the gateway.
+	//
+	// For more information, see [What is Amazon CloudWatch Logs?]
+	//
+	// [What is Amazon CloudWatch Logs?]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
 	CloudWatchLogGroupARN *string
 
 	// Specifies the size of the gateway's metadata cache.
@@ -60,8 +65,8 @@ type UpdateGatewayInformationInput struct {
 // updated.
 type UpdateGatewayInformationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The name you configured for your gateway.

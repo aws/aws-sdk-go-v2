@@ -41,7 +41,7 @@ type ListTerminologiesInput struct {
 
 type ListTerminologiesOutput struct {
 
-	// If the response to the ListTerminologies was truncated, the NextToken fetches
+	//  If the response to the ListTerminologies was truncated, the NextToken fetches
 	// the next group of custom terminologies.
 	NextToken *string
 

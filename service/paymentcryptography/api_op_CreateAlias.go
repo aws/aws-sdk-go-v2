@@ -13,23 +13,37 @@ import (
 
 // Creates an alias, or a friendly name, for an Amazon Web Services Payment
 // Cryptography key. You can use an alias to identify a key in the console and when
-// you call cryptographic operations such as EncryptData (https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_EncryptData.html)
-// or DecryptData (https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_DecryptData.html)
-// . You can associate the alias with any key in the same Amazon Web Services
+// you call cryptographic operations such as [EncryptData]or [DecryptData].
+//
+// You can associate the alias with any key in the same Amazon Web Services
 // Region. Each alias is associated with only one key at a time, but a key can have
 // multiple aliases. You can't create an alias without a key. The alias must be
 // unique in the account and Amazon Web Services Region, but you can create another
-// alias with the same name in a different Amazon Web Services Region. To change
-// the key that's associated with the alias, call UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
-// . To delete the alias, call DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
-// . These operations don't affect the underlying key. To get the alias that you
-// created, call ListAliases (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
-// . Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts. Related operations:
-//   - DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
-//   - GetAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html)
-//   - ListAliases (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html)
-//   - UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
+// alias with the same name in a different Amazon Web Services Region.
+//
+// To change the key that's associated with the alias, call [UpdateAlias]. To delete the alias,
+// call [DeleteAlias]. These operations don't affect the underlying key. To get the alias that
+// you created, call [ListAliases].
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
+// Related operations:
+//
+// [DeleteAlias]
+//
+// [GetAlias]
+//
+// [ListAliases]
+//
+// [UpdateAlias]
+//
+// [ListAliases]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html
+// [DeleteAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+// [UpdateAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html
+// [GetAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
+// [EncryptData]: https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_EncryptData.html
+// [DecryptData]: https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_DecryptData.html
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}
@@ -50,6 +64,7 @@ type CreateAliasInput struct {
 	// A friendly name that you can use to refer to a key. An alias must begin with
 	// alias/ followed by a name, for example alias/ExampleAlias . It can contain only
 	// alphanumeric characters, forward slashes (/), underscores (_), and dashes (-).
+	//
 	// Don't include personal, confidential or sensitive information in this field.
 	// This field may be displayed in plaintext in CloudTrail logs and other output.
 	//

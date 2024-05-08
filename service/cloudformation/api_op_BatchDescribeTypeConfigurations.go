@@ -12,9 +12,11 @@ import (
 )
 
 // Returns configuration data for the specified CloudFormation extensions, from
-// the CloudFormation registry for the account and Region. For more information,
-// see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration)
-// in the CloudFormation User Guide.
+// the CloudFormation registry for the account and Region.
+//
+// For more information, see [Configuring extensions at the account level] in the CloudFormation User Guide.
+//
+// [Configuring extensions at the account level]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
 func (c *Client) BatchDescribeTypeConfigurations(ctx context.Context, params *BatchDescribeTypeConfigurationsInput, optFns ...func(*Options)) (*BatchDescribeTypeConfigurationsOutput, error) {
 	if params == nil {
 		params = &BatchDescribeTypeConfigurationsInput{}

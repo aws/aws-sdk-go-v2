@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the IP address ranges that were specified in calls to ProvisionByoipCidr (https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html)
-// , including the current state and a history of state changes.
+// Lists the IP address ranges that were specified in calls to [ProvisionByoipCidr], including the
+// current state and a history of state changes.
+//
+// [ProvisionByoipCidr]: https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html
 func (c *Client) ListByoipCidrs(ctx context.Context, params *ListByoipCidrsInput, optFns ...func(*Options)) (*ListByoipCidrsOutput, error) {
 	if params == nil {
 		params = &ListByoipCidrsInput{}

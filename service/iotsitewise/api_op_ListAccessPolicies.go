@@ -31,9 +31,10 @@ func (c *Client) ListAccessPolicies(ctx context.Context, params *ListAccessPolic
 
 type ListAccessPoliciesInput struct {
 
-	// The ARN of the IAM user. For more information, see IAM ARNs (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
-	// in the IAM User Guide. This parameter is required if you specify IAM for
-	// identityType .
+	// The ARN of the IAM user. For more information, see [IAM ARNs] in the IAM User Guide. This
+	// parameter is required if you specify IAM for identityType .
+	//
+	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
 	IamArn *string
 
 	// The ID of the identity. This parameter is required if you specify USER or GROUP
@@ -44,7 +45,9 @@ type ListAccessPoliciesInput struct {
 	// IAM user). This parameter is required if you specify identityId .
 	IdentityType types.IdentityType
 
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -194,7 +197,9 @@ var _ ListAccessPoliciesAPIClient = (*Client)(nil)
 // ListAccessPoliciesPaginatorOptions is the paginator options for
 // ListAccessPolicies
 type ListAccessPoliciesPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

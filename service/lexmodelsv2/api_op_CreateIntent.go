@@ -12,23 +12,33 @@ import (
 	"time"
 )
 
-// Creates an intent. To define the interaction between the user and your bot, you
-// define one or more intents. For example, for a pizza ordering bot you would
-// create an OrderPizza intent. When you create an intent, you must provide a
-// name. You can optionally provide the following:
+// Creates an intent.
+//
+// To define the interaction between the user and your bot, you define one or more
+// intents. For example, for a pizza ordering bot you would create an OrderPizza
+// intent.
+//
+// When you create an intent, you must provide a name. You can optionally provide
+// the following:
+//
 //   - Sample utterances. For example, "I want to order a pizza" and "Can I order
 //     a pizza." You can't provide utterances for built-in intents.
+//
 //   - Information to be gathered. You specify slots for the information that you
 //     bot requests from the user. You can specify standard slot types, such as date
 //     and time, or custom slot types for your application.
+//
 //   - How the intent is fulfilled. You can provide a Lambda function or configure
 //     the intent to return the intent information to your client application. If you
 //     use a Lambda function, Amazon Lex invokes the function when all of the intent
 //     information is available.
+//
 //   - A confirmation prompt to send to the user to confirm an intent. For
 //     example, "Shall I order your pizza?"
+//
 //   - A conclusion statement to send to the user after the intent is fulfilled.
 //     For example, "I ordered your pizza."
+//
 //   - A follow-up prompt that asks the user for additional activity. For example,
 //     "Do you want a drink with your pizza?"
 func (c *Client) CreateIntent(ctx context.Context, params *CreateIntentInput, optFns ...func(*Options)) (*CreateIntentOutput, error) {
@@ -66,8 +76,9 @@ type CreateIntentInput struct {
 
 	// The identifier of the language and locale where this intent is used. All of the
 	// bots, slot types, and slots used by the intent must have the same locale. For
-	// more information, see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -77,8 +88,9 @@ type CreateIntentInput struct {
 	Description *string
 
 	// Specifies that Amazon Lex invokes the alias Lambda function for each user
-	// input. You can invoke this Lambda function to personalize user interaction. For
-	// example, suppose that your bot determines that the user's name is John. You
+	// input. You can invoke this Lambda function to personalize user interaction.
+	//
+	// For example, suppose that your bot determines that the user's name is John. You
 	// Lambda function might retrieve John's information from a backend database and
 	// prepopulate some of the values. For example, if you find that John is gluten
 	// intolerant, you might set the corresponding intent slot, glutenIntolerant to
@@ -88,9 +100,11 @@ type CreateIntentInput struct {
 
 	// Specifies that Amazon Lex invokes the alias Lambda function when the intent is
 	// ready for fulfillment. You can invoke this function to complete the bot's
-	// transaction with the user. For example, in a pizza ordering bot, the Lambda
-	// function can look up the closest pizza restaurant to the customer's location and
-	// then place an order on the customer's behalf.
+	// transaction with the user.
+	//
+	// For example, in a pizza ordering bot, the Lambda function can look up the
+	// closest pizza restaurant to the customer's location and then place an order on
+	// the customer's behalf.
 	FulfillmentCodeHook *types.FulfillmentCodeHookSettings
 
 	// Configuration settings for the response that is sent to the user at the
@@ -98,14 +112,21 @@ type CreateIntentInput struct {
 	InitialResponseSetting *types.InitialResponseSetting
 
 	// A list of contexts that must be active for this intent to be considered by
-	// Amazon Lex. When an intent has an input context list, Amazon Lex only considers
-	// using the intent in an interaction with the user when the specified contexts are
-	// included in the active context list for the session. If the contexts are not
-	// active, then Amazon Lex will not use the intent. A context can be automatically
-	// activated using the outputContexts property or it can be set at runtime. For
-	// example, if there are two intents with different input contexts that respond to
-	// the same utterances, only the intent with the active context will respond. An
-	// intent may have up to 5 input contexts. If an intent has multiple input
+	// Amazon Lex.
+	//
+	// When an intent has an input context list, Amazon Lex only considers using the
+	// intent in an interaction with the user when the specified contexts are included
+	// in the active context list for the session. If the contexts are not active, then
+	// Amazon Lex will not use the intent.
+	//
+	// A context can be automatically activated using the outputContexts property or
+	// it can be set at runtime.
+	//
+	// For example, if there are two intents with different input contexts that
+	// respond to the same utterances, only the intent with the active context will
+	// respond.
+	//
+	// An intent may have up to 5 input contexts. If an intent has multiple input
 	// contexts, all of the contexts must be active to consider the intent.
 	InputContexts []types.InputContext
 
@@ -122,13 +143,15 @@ type CreateIntentInput struct {
 	// called when Amazon Lex can't determine another intent to invoke.
 	KendraConfiguration *types.KendraConfiguration
 
-	// A lists of contexts that the intent activates when it is fulfilled. You can use
-	// an output context to indicate the intents that Amazon Lex should consider for
-	// the next turn of the conversation with a customer. When you use the
-	// outputContextsList property, all of the contexts specified in the list are
-	// activated when the intent is fulfilled. You can set up to 10 output contexts.
-	// You can also set the number of conversation turns that the context should be
-	// active, or the length of time that the context should be active.
+	// A lists of contexts that the intent activates when it is fulfilled.
+	//
+	// You can use an output context to indicate the intents that Amazon Lex should
+	// consider for the next turn of the conversation with a customer.
+	//
+	// When you use the outputContextsList property, all of the contexts specified in
+	// the list are activated when the intent is fulfilled. You can set up to 10 output
+	// contexts. You can also set the number of conversation turns that the context
+	// should be active, or the length of time that the context should be active.
 	OutputContexts []types.OutputContext
 
 	// A unique identifier for the built-in intent to base this intent on.
@@ -141,9 +164,10 @@ type CreateIntentInput struct {
 	QnAIntentConfiguration *types.QnAIntentConfiguration
 
 	// An array of strings that a user might say to signal the intent. For example, "I
-	// want a pizza", or "I want a {PizzaSize} pizza". In an utterance, slot names are
-	// enclosed in curly braces ("{", "}") to indicate where they should be displayed
-	// in the utterance shown to the user..
+	// want a pizza", or "I want a {PizzaSize} pizza".
+	//
+	// In an utterance, slot names are enclosed in curly braces ("{", "}") to indicate
+	// where they should be displayed in the utterance shown to the user..
 	SampleUtterances []types.SampleUtterance
 
 	noSmithyDocumentSerde

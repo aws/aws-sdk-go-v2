@@ -12,8 +12,10 @@ import (
 	"time"
 )
 
-// Creates a simulation job. After 90 days, simulation jobs expire and will be
-// deleted. They will no longer be accessible.
+// Creates a simulation job.
+//
+// After 90 days, simulation jobs expire and will be deleted. They will no longer
+// be accessible.
 func (c *Client) CreateSimulationJob(ctx context.Context, params *CreateSimulationJobInput, optFns ...func(*Options)) (*CreateSimulationJobOutput, error) {
 	if params == nil {
 		params = &CreateSimulationJobInput{}
@@ -54,13 +56,17 @@ type CreateSimulationJobInput struct {
 
 	// Specify data sources to mount read-only files from S3 into your simulation.
 	// These files are available under /opt/robomaker/datasources/data_source_name .
+	//
 	// There is a limit of 100 files and a combined size of 25GB for all
 	// DataSourceConfig objects.
 	DataSources []types.DataSourceConfig
 
-	// The failure behavior the simulation job. Continue Leaves the instance running
-	// for its maximum timeout duration after a 4XX error code. Fail Stop the
-	// simulation job and terminate the instance.
+	// The failure behavior the simulation job.
+	//
+	// Continue Leaves the instance running for its maximum timeout duration after a
+	// 4XX error code.
+	//
+	// Fail Stop the simulation job and terminate the instance.
 	FailureBehavior types.FailureBehavior
 
 	// The logging configuration.
@@ -105,22 +111,41 @@ type CreateSimulationJobOutput struct {
 	// the failure behavior for the simulation job.
 	FailureBehavior types.FailureBehavior
 
-	// The failure code of the simulation job if it failed: InternalServiceError
-	// Internal service error. RobotApplicationCrash Robot application exited
-	// abnormally. SimulationApplicationCrash Simulation application exited abnormally.
+	// The failure code of the simulation job if it failed:
+	//
+	// InternalServiceError Internal service error.
+	//
+	// RobotApplicationCrash Robot application exited abnormally.
+	//
+	// SimulationApplicationCrash  Simulation application exited abnormally.
+	//
 	// BadPermissionsRobotApplication Robot application bundle could not be downloaded.
+	//
 	// BadPermissionsSimulationApplication Simulation application bundle could not be
-	// downloaded. BadPermissionsS3Output Unable to publish outputs to
-	// customer-provided S3 bucket. BadPermissionsCloudwatchLogs Unable to publish logs
-	// to customer-provided CloudWatch Logs resource. SubnetIpLimitExceeded Subnet IP
-	// limit exceeded. ENILimitExceeded ENI limit exceeded.
+	// downloaded.
+	//
+	// BadPermissionsS3Output Unable to publish outputs to customer-provided S3 bucket.
+	//
+	// BadPermissionsCloudwatchLogs Unable to publish logs to customer-provided
+	// CloudWatch Logs resource.
+	//
+	// SubnetIpLimitExceeded Subnet IP limit exceeded.
+	//
+	// ENILimitExceeded ENI limit exceeded.
+	//
 	// BadPermissionsUserCredentials Unable to use the Role provided.
+	//
 	// InvalidBundleRobotApplication Robot bundle cannot be extracted (invalid format,
-	// bundling error, or other issue). InvalidBundleSimulationApplication Simulation
-	// bundle cannot be extracted (invalid format, bundling error, or other issue).
+	// bundling error, or other issue).
+	//
+	// InvalidBundleSimulationApplication Simulation bundle cannot be extracted
+	// (invalid format, bundling error, or other issue).
+	//
 	// RobotApplicationVersionMismatchedEtag Etag for RobotApplication does not match
-	// value during version creation. SimulationApplicationVersionMismatchedEtag Etag
-	// for SimulationApplication does not match value during version creation.
+	// value during version creation.
+	//
+	// SimulationApplicationVersionMismatchedEtag Etag for SimulationApplication does
+	// not match value during version creation.
 	FailureCode types.SimulationJobErrorCode
 
 	// The IAM role that allows the simulation job to call the AWS APIs that are

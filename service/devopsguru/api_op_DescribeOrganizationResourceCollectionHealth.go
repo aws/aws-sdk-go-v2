@@ -31,7 +31,7 @@ func (c *Client) DescribeOrganizationResourceCollectionHealth(ctx context.Contex
 
 type DescribeOrganizationResourceCollectionHealthInput struct {
 
-	// An Amazon Web Services resource collection type. This type specifies how
+	//  An Amazon Web Services resource collection type. This type specifies how
 	// analyzed Amazon Web Services resources are defined. The two types of Amazon Web
 	// Services resource collections supported are Amazon Web Services CloudFormation
 	// stacks and Amazon Web Services resources that contain the same Amazon Web
@@ -81,23 +81,30 @@ type DescribeOrganizationResourceCollectionHealthOutput struct {
 	// resources from different services to indicate that the resources are related.
 	// For example, you can assign the same tag to an Amazon DynamoDB table resource
 	// that you assign to an Lambda function. For more information about using tags,
-	// see the Tagging best practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
-	// whitepaper. Each Amazon Web Services tag has two parts.
+	// see the [Tagging best practices]whitepaper.
+	//
+	// Each Amazon Web Services tag has two parts.
+	//
 	//   - A tag key (for example, CostCenter , Environment , Project , or Secret ).
 	//   Tag keys are case-sensitive.
+	//
 	//   - An optional field known as a tag value (for example, 111122223333 ,
 	//   Production , or a team name). Omitting the tag value is the same as using an
 	//   empty string. Like tag keys, tag values are case-sensitive.
-	// Together these are known as key-value pairs. The string used for a key in a tag
-	// that you use to define your resource coverage must begin with the prefix
-	// Devops-guru- . The tag key might be DevOps-Guru-deployment-application or
-	// devops-guru-rds-application . When you create a key, the case of characters in
-	// the key can be whatever you choose. After you create a key, it is
-	// case-sensitive. For example, DevOps Guru works with a key named devops-guru-rds
-	// and a key named DevOps-Guru-RDS , and these act as two different keys. Possible
-	// key/value pairs in your application might be
+	//
+	// Together these are known as key-value pairs.
+	//
+	// The string used for a key in a tag that you use to define your resource
+	// coverage must begin with the prefix Devops-guru- . The tag key might be
+	// DevOps-Guru-deployment-application or devops-guru-rds-application . When you
+	// create a key, the case of characters in the key can be whatever you choose.
+	// After you create a key, it is case-sensitive. For example, DevOps Guru works
+	// with a key named devops-guru-rds and a key named DevOps-Guru-RDS , and these act
+	// as two different keys. Possible key/value pairs in your application might be
 	// Devops-Guru-production-application/RDS or
 	// Devops-Guru-production-application/containers .
+	//
+	// [Tagging best practices]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
 	Tags []types.TagHealth
 
 	// Metadata pertaining to the operation's result.

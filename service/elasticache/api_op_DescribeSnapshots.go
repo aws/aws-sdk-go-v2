@@ -14,7 +14,9 @@ import (
 // Returns information about cluster or replication group snapshots. By default,
 // DescribeSnapshots lists all of your snapshots; it can optionally describe a
 // single snapshot, or just the snapshots associated with a particular cache
-// cluster. This operation is valid for Redis only.
+// cluster.
+//
+// This operation is valid for Redis only.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeSnapshotsInput{}
@@ -45,8 +47,11 @@ type DescribeSnapshotsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 50 Constraints: minimum
-	// 20; maximum 50.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 50
+	//
+	// Constraints: minimum 20; maximum 50.
 	MaxRecords *int32
 
 	// A user-supplied replication group identifier. If this parameter is specified,
@@ -177,8 +182,11 @@ var _ DescribeSnapshotsAPIClient = (*Client)(nil)
 type DescribeSnapshotsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 50 Constraints: minimum
-	// 20; maximum 50.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 50
+	//
+	// Constraints: minimum 20; maximum 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

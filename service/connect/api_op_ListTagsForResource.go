@@ -10,9 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags for the specified resource. For sample policies that use tags,
-// see Amazon Connect Identity-Based Policy Examples (https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html)
-// in the Amazon Connect Administrator Guide.
+// Lists the tags for the specified resource.
+//
+// For sample policies that use tags, see [Amazon Connect Identity-Based Policy Examples] in the Amazon Connect Administrator
+// Guide.
+//
+// [Amazon Connect Identity-Based Policy Examples]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -32,8 +35,9 @@ type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource. All Amazon Connect resources
 	// (instances, queues, flows, routing profiles, etc) have an ARN. To locate the ARN
-	// for an instance, for example, see Find your Amazon Connect instance ID/ARN (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// .
+	// for an instance, for example, see [Find your Amazon Connect instance ID/ARN].
+	//
+	// [Find your Amazon Connect instance ID/ARN]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	ResourceArn *string

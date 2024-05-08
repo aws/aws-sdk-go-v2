@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the versions for an add-on. Information such as the Kubernetes
-// versions that you can use the add-on with, the owner , publisher , and the type
-// of the add-on are returned.
+// Describes the versions for an add-on.
+//
+// Information such as the Kubernetes versions that you can use the add-on with,
+// the owner , publisher , and the type of the add-on are returned.
 func (c *Client) DescribeAddonVersions(ctx context.Context, params *DescribeAddonVersionsInput, optFns ...func(*Options)) (*DescribeAddonVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeAddonVersionsInput{}
@@ -31,9 +32,10 @@ func (c *Client) DescribeAddonVersions(ctx context.Context, params *DescribeAddo
 
 type DescribeAddonVersionsInput struct {
 
-	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html)
-	// .
+	// The name of the add-on. The name must match one of the names returned by [ListAddons]
+	// ListAddons .
+	//
+	// [ListAddons]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
 	AddonName *string
 
 	// The Kubernetes versions that you can use the add-on with.
@@ -50,9 +52,10 @@ type DescribeAddonVersionsInput struct {
 	// The nextToken value returned from a previous paginated request, where maxResults
 	// was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
-	// value. This value is null when there are no more results to return. This token
-	// should be treated as an opaque identifier that is used only to retrieve the next
-	// items in a list and not for other programmatic purposes.
+	// value. This value is null when there are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The owner of the add-on. For valid owners , don't specify a value for this
@@ -79,9 +82,10 @@ type DescribeAddonVersionsOutput struct {
 	// The nextToken value to include in a future DescribeAddonVersions request. When
 	// the results of a DescribeAddonVersions request exceed maxResults , you can use
 	// this value to retrieve the next page of results. This value is null when there
-	// are no more results to return. This token should be treated as an opaque
-	// identifier that is used only to retrieve the next items in a list and not for
-	// other programmatic purposes.
+	// are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

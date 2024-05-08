@@ -30,7 +30,7 @@ func (c *Client) GetModelManifest(ctx context.Context, params *GetModelManifestI
 
 type GetModelManifestInput struct {
 
-	// The name of the vehicle model to retrieve information about.
+	//  The name of the vehicle model to retrieve information about.
 	//
 	// This member is required.
 	Name *string
@@ -40,7 +40,7 @@ type GetModelManifestInput struct {
 
 type GetModelManifestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the vehicle model.
+	//  The Amazon Resource Name (ARN) of the vehicle model.
 	//
 	// This member is required.
 	Arn *string
@@ -56,18 +56,18 @@ type GetModelManifestOutput struct {
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// The name of the vehicle model.
+	//  The name of the vehicle model.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the vehicle model.
+	//  A brief description of the vehicle model.
 	Description *string
 
-	// The ARN of the signal catalog associated with the vehicle model.
+	//  The ARN of the signal catalog associated with the vehicle model.
 	SignalCatalogArn *string
 
-	// The state of the vehicle model. If the status is ACTIVE , the vehicle model
+	//  The state of the vehicle model. If the status is ACTIVE , the vehicle model
 	// can't be edited. You can edit the vehicle model if the status is marked DRAFT .
 	Status types.ManifestStatus
 

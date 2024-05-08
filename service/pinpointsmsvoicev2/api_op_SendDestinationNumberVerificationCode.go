@@ -14,8 +14,8 @@ import (
 // Before you can send test messages to a verified destination phone number you
 // need to opt-in the verified destination phone number. Creates a new text message
 // with a verification code and send it to a verified destination phone number.
-// Once you have the verification code use VerifyDestinationNumber to opt-in the
-// verified destination phone number to receive messages.
+// Once you have the verification code use VerifyDestinationNumberto opt-in the verified destination
+// phone number to receive messages.
 func (c *Client) SendDestinationNumberVerificationCode(ctx context.Context, params *SendDestinationNumberVerificationCodeInput, optFns ...func(*Options)) (*SendDestinationNumberVerificationCodeOutput, error) {
 	if params == nil {
 		params = &SendDestinationNumberVerificationCodeInput{}
@@ -53,9 +53,9 @@ type SendDestinationNumberVerificationCodeInput struct {
 
 	// This field is used for any country-specific registration requirements.
 	// Currently, this setting is only used when you send messages to recipients in
-	// India using a sender ID. For more information see Special requirements for
-	// sending SMS messages to recipients in India (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html)
-	// .
+	// India using a sender ID. For more information see [Special requirements for sending SMS messages to recipients in India].
+	//
+	// [Special requirements for sending SMS messages to recipients in India]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html
 	DestinationCountryParameters map[string]string
 
 	// Choose the language to use for the message.

@@ -10,36 +10,36 @@ import (
 // A complex type that includes settings for a Route 53 Profile.
 type Profile struct {
 
-	// The Amazon Resource Name (ARN) of the Profile.
+	//  The Amazon Resource Name (ARN) of the Profile.
 	Arn *string
 
-	// The ClientToken value that was assigned when the Profile was created.
+	//  The ClientToken value that was assigned when the Profile was created.
 	ClientToken *string
 
-	// The date and time that the Profile was created, in Unix time format and
+	//  The date and time that the Profile was created, in Unix time format and
 	// Coordinated Universal Time (UTC).
 	CreationTime *time.Time
 
-	// ID of the Profile.
+	//  ID of the Profile.
 	Id *string
 
-	// The date and time that the Profile was modified, in Unix time format and
+	//  The date and time that the Profile was modified, in Unix time format and
 	// Coordinated Universal Time (UTC).
 	ModificationTime *time.Time
 
-	// Name of the Profile.
+	//  Name of the Profile.
 	Name *string
 
-	// Amazon Web Services account ID of the Profile owner.
+	//  Amazon Web Services account ID of the Profile owner.
 	OwnerId *string
 
-	// Sharing status for the Profile.
+	//  Sharing status for the Profile.
 	ShareStatus ShareStatus
 
-	// The status for the Profile.
+	//  The status for the Profile.
 	Status ProfileStatus
 
-	// Status message that includes additiona information about the Profile.
+	//  Status message that includes additiona information about the Profile.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -48,33 +48,33 @@ type Profile struct {
 // An association between a Route 53 Profile and a VPC.
 type ProfileAssociation struct {
 
-	// The date and time that the Profile association was created, in Unix time format
-	// and Coordinated Universal Time (UTC).
+	//  The date and time that the Profile association was created, in Unix time
+	// format and Coordinated Universal Time (UTC).
 	CreationTime *time.Time
 
-	// ID of the Profile association.
+	//  ID of the Profile association.
 	Id *string
 
-	// The date and time that the Profile association was modified, in Unix time
+	//  The date and time that the Profile association was modified, in Unix time
 	// format and Coordinated Universal Time (UTC).
 	ModificationTime *time.Time
 
-	// Name of the Profile association.
+	//  Name of the Profile association.
 	Name *string
 
-	// Amazon Web Services account ID of the Profile association owner.
+	//  Amazon Web Services account ID of the Profile association owner.
 	OwnerId *string
 
-	// ID of the Profile.
+	//  ID of the Profile.
 	ProfileId *string
 
-	// The Amazon Resource Name (ARN) of the VPC.
+	//  The Amazon Resource Name (ARN) of the VPC.
 	ResourceId *string
 
-	// Status of the Profile association.
+	//  Status of the Profile association.
 	Status ProfileStatus
 
-	// Additional information about the Profile association.
+	//  Additional information about the Profile association.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -83,39 +83,39 @@ type ProfileAssociation struct {
 // The association between a Route 53 Profile and resources.
 type ProfileResourceAssociation struct {
 
-	// The date and time that the Profile resource association was created, in Unix
+	//  The date and time that the Profile resource association was created, in Unix
 	// time format and Coordinated Universal Time (UTC).
 	CreationTime *time.Time
 
-	// ID of the Profile resource association.
+	//  ID of the Profile resource association.
 	Id *string
 
-	// The date and time that the Profile resource association was modified, in Unix
+	//  The date and time that the Profile resource association was modified, in Unix
 	// time format and Coordinated Universal Time (UTC).
 	ModificationTime *time.Time
 
-	// Name of the Profile resource association.
+	//  Name of the Profile resource association.
 	Name *string
 
-	// Amazon Web Services account ID of the Profile resource association owner.
+	//  Amazon Web Services account ID of the Profile resource association owner.
 	OwnerId *string
 
-	// Profile ID of the Profile that the resources are associated with.
+	//  Profile ID of the Profile that the resources are associated with.
 	ProfileId *string
 
-	// The Amazon Resource Name (ARN) of the resource association.
+	//  The Amazon Resource Name (ARN) of the resource association.
 	ResourceArn *string
 
-	// If the DNS resource is a DNS Firewall rule group, this indicates the priority.
+	//  If the DNS resource is a DNS Firewall rule group, this indicates the priority.
 	ResourceProperties *string
 
-	// Resource type, such as a private hosted zone, or DNS Firewall rule group.
+	//  Resource type, such as a private hosted zone, or DNS Firewall rule group.
 	ResourceType *string
 
-	// Status of the Profile resource association.
+	//  Status of the Profile resource association.
 	Status ProfileStatus
 
-	// Additional information about the Profile resource association.
+	//  Additional information about the Profile resource association.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
@@ -124,16 +124,16 @@ type ProfileResourceAssociation struct {
 // Summary information about a Route 53 Profile.
 type ProfileSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Profile.
+	//  The Amazon Resource Name (ARN) of the Profile.
 	Arn *string
 
-	// ID of the Profile.
+	//  ID of the Profile.
 	Id *string
 
-	// Name of the Profile.
+	//  Name of the Profile.
 	Name *string
 
-	// Share status of the Profile.
+	//  Share status of the Profile.
 	ShareStatus ShareStatus
 
 	noSmithyDocumentSerde
@@ -142,12 +142,12 @@ type ProfileSummary struct {
 // Tag for the Profile.
 type Tag struct {
 
-	// Key associated with the Tag .
+	//  Key associated with the Tag .
 	//
 	// This member is required.
 	Key *string
 
-	// Value for the Tag.
+	//  Value for the Tag.
 	//
 	// This member is required.
 	Value *string

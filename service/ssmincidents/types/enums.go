@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for IncidentRecordStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IncidentRecordStatus) Values() []IncidentRecordStatus {
 	return []IncidentRecordStatus{
 		"OPEN",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for ItemType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ItemType) Values() []ItemType {
 	return []ItemType{
 		"ANALYSIS",
@@ -67,8 +69,9 @@ const (
 )
 
 // Values returns all known values for RegionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegionStatus) Values() []RegionStatus {
 	return []RegionStatus{
 		"ACTIVE",
@@ -96,8 +99,9 @@ const (
 )
 
 // Values returns all known values for ReplicationSetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationSetStatus) Values() []ReplicationSetStatus {
 	return []ReplicationSetStatus{
 		"ACTIVE",
@@ -120,8 +124,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"RESPONSE_PLAN",
@@ -140,8 +145,9 @@ const (
 )
 
 // Values returns all known values for ServiceCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceCode) Values() []ServiceCode {
 	return []ServiceCode{
 		"ssm-incidents",
@@ -157,8 +163,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -175,8 +182,9 @@ const (
 )
 
 // Values returns all known values for SsmTargetAccount. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SsmTargetAccount) Values() []SsmTargetAccount {
 	return []SsmTargetAccount{
 		"RESPONSE_PLAN_OWNER_ACCOUNT",
@@ -192,8 +200,9 @@ const (
 )
 
 // Values returns all known values for TimelineEventSort. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TimelineEventSort) Values() []TimelineEventSort {
 	return []TimelineEventSort{
 		"EVENT_TIME",
@@ -209,8 +218,9 @@ const (
 )
 
 // Values returns all known values for VariableType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VariableType) Values() []VariableType {
 	return []VariableType{
 		"INCIDENT_RECORD_ARN",

@@ -7,43 +7,51 @@ import (
 	"time"
 )
 
-// A custom action to use in stateless rule actions settings. This is used in
-// CustomAction .
+// A custom action to use in stateless rule actions settings. This is used in CustomAction.
 type ActionDefinition struct {
 
 	// Stateless inspection criteria that publishes the specified metrics to Amazon
 	// CloudWatch for the matching packet. This setting defines a CloudWatch dimension
-	// value to be published. You can pair this custom action with any of the standard
-	// stateless rule actions. For example, you could pair this in a rule action with
-	// the standard action that forwards the packet for stateful inspection. Then, when
-	// a packet matches the rule, Network Firewall publishes metrics for the packet and
-	// forwards it.
+	// value to be published.
+	//
+	// You can pair this custom action with any of the standard stateless rule
+	// actions. For example, you could pair this in a rule action with the standard
+	// action that forwards the packet for stateful inspection. Then, when a packet
+	// matches the rule, Network Firewall publishes metrics for the packet and forwards
+	// it.
 	PublishMetricAction *PublishMetricAction
 
 	noSmithyDocumentSerde
 }
 
-// A single IP address specification. This is used in the MatchAttributes source
-// and destination specifications.
+// A single IP address specification. This is used in the MatchAttributes source and destination
+// specifications.
 type Address struct {
 
 	// Specify an IP address or a block of IP addresses in Classless Inter-Domain
 	// Routing (CIDR) notation. Network Firewall supports all address ranges for IPv4
-	// and IPv6. Examples:
+	// and IPv6.
+	//
+	// Examples:
+	//
 	//   - To configure Network Firewall to inspect for the IP address 192.0.2.44,
 	//   specify 192.0.2.44/32 .
+	//
 	//   - To configure Network Firewall to inspect for IP addresses from 192.0.2.0 to
 	//   192.0.2.255, specify 192.0.2.0/24 .
+	//
 	//   - To configure Network Firewall to inspect for the IP address
 	//   1111:0000:0000:0000:0000:0000:0000:0111, specify
 	//   1111:0000:0000:0000:0000:0000:0000:0111/128 .
+	//
 	//   - To configure Network Firewall to inspect for IP addresses from
 	//   1111:0000:0000:0000:0000:0000:0000:0000 to
 	//   1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
 	//   1111:0000:0000:0000:0000:0000:0000:0000/64 .
-	// For more information about CIDR notation, see the Wikipedia entry Classless
-	// Inter-Domain Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-	// .
+	//
+	// For more information about CIDR notation, see the Wikipedia entry [Classless Inter-Domain Routing].
+	//
+	// [Classless Inter-Domain Routing]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 	//
 	// This member is required.
 	AddressDefinition *string
@@ -52,12 +60,12 @@ type Address struct {
 }
 
 // The analysis result for Network Firewall's stateless rule group analyzer. Every
-// time you call CreateRuleGroup , UpdateRuleGroup , or DescribeRuleGroup on a
-// stateless rule group, Network Firewall analyzes the stateless rule groups in
-// your account and identifies the rules that might adversely effect your
-// firewall's functionality. For example, if Network Firewall detects a rule that's
-// routing traffic asymmetrically, which impacts the service's ability to properly
-// process traffic, the service includes the rule in a list of analysis results.
+// time you call CreateRuleGroup, UpdateRuleGroup, or DescribeRuleGroup on a stateless rule group, Network Firewall analyzes the
+// stateless rule groups in your account and identifies the rules that might
+// adversely effect your firewall's functionality. For example, if Network Firewall
+// detects a rule that's routing traffic asymmetrically, which impacts the
+// service's ability to properly process traffic, the service includes the rule in
+// a list of analysis results.
 type AnalysisResult struct {
 
 	// Provides analysis details for the identified rule.
@@ -69,19 +77,28 @@ type AnalysisResult struct {
 	// The types of rule configurations that Network Firewall analyzes your rule
 	// groups for. Network Firewall analyzes stateless rule groups for the following
 	// types of rule configurations:
-	//   - STATELESS_RULE_FORWARDING_ASYMMETRICALLY Cause: One or more stateless rules
-	//   with the action pass or forward are forwarding traffic asymmetrically.
-	//   Specifically, the rule's set of source IP addresses or their associated port
-	//   numbers, don't match the set of destination IP addresses or their associated
-	//   port numbers. To mitigate: Make sure that there's an existing return path. For
-	//   example, if the rule allows traffic from source 10.1.0.0/24 to destination
-	//   20.1.0.0/24, you should allow return traffic from source 20.1.0.0/24 to
-	//   destination 10.1.0.0/24.
-	//   - STATELESS_RULE_CONTAINS_TCP_FLAGS Cause: At least one stateless rule with
-	//   the action pass or forward contains TCP flags that are inconsistent in the
-	//   forward and return directions. To mitigate: Prevent asymmetric routing issues
-	//   caused by TCP flags by following these actions:
+	//
+	//   - STATELESS_RULE_FORWARDING_ASYMMETRICALLY
+	//
+	// Cause: One or more stateless rules with the action pass or forward are
+	//   forwarding traffic asymmetrically. Specifically, the rule's set of source IP
+	//   addresses or their associated port numbers, don't match the set of destination
+	//   IP addresses or their associated port numbers.
+	//
+	// To mitigate: Make sure that there's an existing return path. For example, if
+	//   the rule allows traffic from source 10.1.0.0/24 to destination 20.1.0.0/24, you
+	//   should allow return traffic from source 20.1.0.0/24 to destination 10.1.0.0/24.
+	//
+	//   - STATELESS_RULE_CONTAINS_TCP_FLAGS
+	//
+	// Cause: At least one stateless rule with the action pass or forward contains TCP
+	//   flags that are inconsistent in the forward and return directions.
+	//
+	// To mitigate: Prevent asymmetric routing issues caused by TCP flags by following
+	//   these actions:
+	//
 	//   - Remove unnecessary TCP flag inspections from the rules.
+	//
 	//   - If you need to inspect TCP flags, check that the rules correctly account
 	//   for changes in TCP flags throughout the TCP connection cycle, for example SYN
 	//   and ACK flags used in a 3-way TCP handshake.
@@ -91,7 +108,7 @@ type AnalysisResult struct {
 }
 
 // The configuration and status for a single subnet that you've specified for use
-// by the Network Firewall firewall. This is part of the FirewallStatus .
+// by the Network Firewall firewall. This is part of the FirewallStatus.
 type Attachment struct {
 
 	// The identifier of the firewall endpoint that Network Firewall has instantiated
@@ -112,9 +129,10 @@ type Attachment struct {
 	// resolve it. A FAILED status indicates a non-recoverable state, and a ERROR
 	// status indicates an issue that you can fix. Depending on the error, it can take
 	// as many as 15 minutes to populate this field. For more information about the
-	// causes for failiure or errors and solutions available for this field, see
-	// Troubleshooting firewall endpoint failures (https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html)
-	// in the Network Firewall Developer Guide.
+	// causes for failiure or errors and solutions available for this field, see [Troubleshooting firewall endpoint failures]in
+	// the Network Firewall Developer Guide.
+	//
+	// [Troubleshooting firewall endpoint failures]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html
 	StatusMessage *string
 
 	// The unique identifier of the subnet that you've specified to be used for a
@@ -124,8 +142,7 @@ type Attachment struct {
 	noSmithyDocumentSerde
 }
 
-// The capacity usage summary of the resources used by the ReferenceSets in a
-// firewall.
+// The capacity usage summary of the resources used by the ReferenceSets in a firewall.
 type CapacityUsageSummary struct {
 
 	// Describes the capacity usage of the CIDR blocks used by the IP set references
@@ -142,10 +159,13 @@ type CheckCertificateRevocationStatusActions struct {
 	// Configures how Network Firewall processes traffic when it determines that the
 	// certificate presented by the server in the SSL/TLS connection has a revoked
 	// status.
+	//
 	//   - PASS - Allow the connection to continue, and pass subsequent packets to the
 	//   stateful engine for inspection.
+	//
 	//   - DROP - Network Firewall closes the connection and drops subsequent packets
 	//   for that connection.
+	//
 	//   - REJECT - Network Firewall sends a TCP reject packet back to your client.
 	//   The service closes the connection and drops subsequent packets for that
 	//   connection. REJECT is available only for TCP traffic.
@@ -156,10 +176,13 @@ type CheckCertificateRevocationStatusActions struct {
 	// status, or a status that cannot be determined for any other reason, including
 	// when the service is unable to connect to the OCSP and CRL endpoints for the
 	// certificate.
+	//
 	//   - PASS - Allow the connection to continue, and pass subsequent packets to the
 	//   stateful engine for inspection.
+	//
 	//   - DROP - Network Firewall closes the connection and drops subsequent packets
 	//   for that connection.
+	//
 	//   - REJECT - Network Firewall sends a TCP reject packet back to your client.
 	//   The service closes the connection and drops subsequent packets for that
 	//   connection. REJECT is available only for TCP traffic.
@@ -187,19 +210,22 @@ type CIDRSummary struct {
 }
 
 // An optional, non-standard action to use for stateless packet handling. You can
-// define this in addition to the standard action that you must specify. You define
-// and name the custom actions that you want to be able to use, and then you
-// reference them by name in your actions settings. You can use custom actions in
-// the following places:
-//   - In a rule group's StatelessRulesAndCustomActions specification. The custom
-//     actions are available for use by name inside the
-//     StatelessRulesAndCustomActions where you define them. You can use them for
-//     your stateless rule actions to specify what to do with a packet that matches the
-//     rule's match attributes.
-//   - In a FirewallPolicy specification, in StatelessCustomActions . The custom
-//     actions are available for use inside the policy where you define them. You can
-//     use them for the policy's default stateless actions settings to specify what to
-//     do with packets that don't match any of the policy's stateless rules.
+// define this in addition to the standard action that you must specify.
+//
+// You define and name the custom actions that you want to be able to use, and
+// then you reference them by name in your actions settings.
+//
+// You can use custom actions in the following places:
+//
+//   - In a rule group's StatelessRulesAndCustomActionsspecification. The custom actions are available for use
+//     by name inside the StatelessRulesAndCustomActions where you define them. You
+//     can use them for your stateless rule actions to specify what to do with a packet
+//     that matches the rule's match attributes.
+//
+//   - In a FirewallPolicyspecification, in StatelessCustomActions . The custom actions are
+//     available for use inside the policy where you define them. You can use them for
+//     the policy's default stateless actions settings to specify what to do with
+//     packets that don't match any of the policy's stateless rules.
 type CustomAction struct {
 
 	// The custom action associated with the action name.
@@ -217,13 +243,16 @@ type CustomAction struct {
 }
 
 // The value to use in an Amazon CloudWatch custom metric dimension. This is used
-// in the PublishMetrics CustomAction . A CloudWatch custom metric dimension is a
-// name/value pair that's part of the identity of a metric. Network Firewall sets
-// the dimension name to CustomAction and you provide the dimension value. For
-// more information about CloudWatch custom metric dimensions, see Publishing
-// Custom Metrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#usingDimensions)
-// in the Amazon CloudWatch User Guide (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)
-// .
+// in the PublishMetricsCustomAction . A CloudWatch custom metric dimension is a name/value
+// pair that's part of the identity of a metric.
+//
+// Network Firewall sets the dimension name to CustomAction and you provide the
+// dimension value.
+//
+// For more information about CloudWatch custom metric dimensions, see [Publishing Custom Metrics] in the [Amazon CloudWatch User Guide].
+//
+// [Amazon CloudWatch User Guide]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
+// [Publishing Custom Metrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html#usingDimensions
 type Dimension struct {
 
 	// The value to use in the custom metric dimension.
@@ -239,9 +268,10 @@ type Dimension struct {
 // is encrypted by default with an Amazon Web Services owned key that Amazon Web
 // Services owns and manages for you. You can use either the Amazon Web Services
 // owned key, or provide your own customer managed key. To learn more about KMS
-// encryption of your Network Firewall resources, see Encryption at rest with
-// Amazon Web Services Key Managment Service (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
-// in the Network Firewall Developer Guide.
+// encryption of your Network Firewall resources, see [Encryption at rest with Amazon Web Services Key Managment Service]in the Network Firewall
+// Developer Guide.
+//
+// [Encryption at rest with Amazon Web Services Key Managment Service]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
 type EncryptionConfiguration struct {
 
 	// The type of Amazon Web Services KMS key to use for encryption of your Network
@@ -253,8 +283,10 @@ type EncryptionConfiguration struct {
 	// The ID of the Amazon Web Services Key Management Service (KMS) customer managed
 	// key. You can use any of the key identifiers that KMS supports, unless you're
 	// using a key that's managed by another account. If you're using a key managed by
-	// another account, then specify the key ARN. For more information, see Key ID (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id)
-	// in the Amazon Web Services KMS Developer Guide.
+	// another account, then specify the key ARN. For more information, see [Key ID]in the
+	// Amazon Web Services KMS Developer Guide.
+	//
+	// [Key ID]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
 	KeyId *string
 
 	noSmithyDocumentSerde
@@ -263,9 +295,11 @@ type EncryptionConfiguration struct {
 // The firewall defines the configuration settings for an Network Firewall
 // firewall. These settings include the firewall policy, the subnets in your VPC to
 // use for the firewall endpoints, and any tags that are attached to the firewall
-// Amazon Web Services resource. The status of the firewall, for example whether
-// it's ready to filter network traffic, is provided in the corresponding
-// FirewallStatus . You can retrieve both objects by calling DescribeFirewall .
+// Amazon Web Services resource.
+//
+// The status of the firewall, for example whether it's ready to filter network
+// traffic, is provided in the corresponding FirewallStatus. You can retrieve both objects by
+// calling DescribeFirewall.
 type Firewall struct {
 
 	// The unique identifier for the firewall.
@@ -273,10 +307,11 @@ type Firewall struct {
 	// This member is required.
 	FirewallId *string
 
-	// The Amazon Resource Name (ARN) of the firewall policy. The relationship of
-	// firewall to firewall policy is many to one. Each firewall requires one firewall
-	// policy association, and you can use the same firewall policy for multiple
-	// firewalls.
+	// The Amazon Resource Name (ARN) of the firewall policy.
+	//
+	// The relationship of firewall to firewall policy is many to one. Each firewall
+	// requires one firewall policy association, and you can use the same firewall
+	// policy for multiple firewalls.
 	//
 	// This member is required.
 	FirewallPolicyArn *string
@@ -347,19 +382,23 @@ type FirewallMetadata struct {
 
 // The firewall policy defines the behavior of a firewall using a collection of
 // stateless and stateful rule groups and other settings. You can use one firewall
-// policy for multiple firewalls. This, along with FirewallPolicyResponse , define
-// the policy. You can retrieve all objects for a firewall policy by calling
-// DescribeFirewallPolicy .
+// policy for multiple firewalls.
+//
+// This, along with FirewallPolicyResponse, define the policy. You can retrieve all objects for a
+// firewall policy by calling DescribeFirewallPolicy.
 type FirewallPolicy struct {
 
 	// The actions to take on a packet if it doesn't match any of the stateless rules
 	// in the policy. If you want non-matching packets to be forwarded for stateful
-	// inspection, specify aws:forward_to_sfe . You must specify one of the standard
-	// actions: aws:pass , aws:drop , or aws:forward_to_sfe . In addition, you can
-	// specify custom actions that are compatible with your standard section choice.
+	// inspection, specify aws:forward_to_sfe .
+	//
+	// You must specify one of the standard actions: aws:pass , aws:drop , or
+	// aws:forward_to_sfe . In addition, you can specify custom actions that are
+	// compatible with your standard section choice.
+	//
 	// For example, you could specify ["aws:pass"] or you could specify ["aws:pass",
 	// “customActionName”] . For information about compatibility, see the custom action
-	// descriptions under CustomAction .
+	// descriptions under CustomAction.
 	//
 	// This member is required.
 	StatelessDefaultActions []string
@@ -368,12 +407,15 @@ type FirewallPolicy struct {
 	// stateless rules in the policy. Network Firewall only manages UDP packet
 	// fragments and silently drops packet fragments for other protocols. If you want
 	// non-matching fragmented UDP packets to be forwarded for stateful inspection,
-	// specify aws:forward_to_sfe . You must specify one of the standard actions:
-	// aws:pass , aws:drop , or aws:forward_to_sfe . In addition, you can specify
-	// custom actions that are compatible with your standard section choice. For
-	// example, you could specify ["aws:pass"] or you could specify ["aws:pass",
+	// specify aws:forward_to_sfe .
+	//
+	// You must specify one of the standard actions: aws:pass , aws:drop , or
+	// aws:forward_to_sfe . In addition, you can specify custom actions that are
+	// compatible with your standard section choice.
+	//
+	// For example, you could specify ["aws:pass"] or you could specify ["aws:pass",
 	// “customActionName”] . For information about compatibility, see the custom action
-	// descriptions under CustomAction .
+	// descriptions under CustomAction.
 	//
 	// This member is required.
 	StatelessFragmentDefaultActions []string
@@ -384,13 +426,21 @@ type FirewallPolicy struct {
 
 	// The default actions to take on a packet that doesn't match any stateful rules.
 	// The stateful default action is optional, and is only valid when using the strict
-	// rule order. Valid values of the stateful default action:
+	// rule order.
+	//
+	// Valid values of the stateful default action:
+	//
 	//   - aws:drop_strict
+	//
 	//   - aws:drop_established
+	//
 	//   - aws:alert_strict
+	//
 	//   - aws:alert_established
-	// For more information, see Strict evaluation order (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html#suricata-strict-rule-evaluation-order.html)
-	// in the Network Firewall Developer Guide.
+	//
+	// For more information, see [Strict evaluation order] in the Network Firewall Developer Guide.
+	//
+	// [Strict evaluation order]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html#suricata-strict-rule-evaluation-order.html
 	StatefulDefaultActions []string
 
 	// Additional options governing how Network Firewall handles stateful rules. The
@@ -420,7 +470,7 @@ type FirewallPolicy struct {
 // High-level information about a firewall policy, returned by operations like
 // create and describe. You can use the information provided in the metadata to
 // retrieve and manage a firewall policy. You can retrieve all objects for a
-// firewall policy by calling DescribeFirewallPolicy .
+// firewall policy by calling DescribeFirewallPolicy.
 type FirewallPolicyMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the firewall policy.
@@ -433,14 +483,14 @@ type FirewallPolicyMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The high-level properties of a firewall policy. This, along with the
-// FirewallPolicy , define the policy. You can retrieve all objects for a firewall
-// policy by calling DescribeFirewallPolicy .
+// The high-level properties of a firewall policy. This, along with the FirewallPolicy, define
+// the policy. You can retrieve all objects for a firewall policy by calling DescribeFirewallPolicy.
 type FirewallPolicyResponse struct {
 
-	// The Amazon Resource Name (ARN) of the firewall policy. If this response is for
-	// a create request that had DryRun set to TRUE , then this ARN is a placeholder
-	// that isn't attached to a valid resource.
+	// The Amazon Resource Name (ARN) of the firewall policy.
+	//
+	// If this response is for a create request that had DryRun set to TRUE , then this
+	// ARN is a placeholder that isn't attached to a valid resource.
 	//
 	// This member is required.
 	FirewallPolicyArn *string
@@ -470,8 +520,7 @@ type FirewallPolicyResponse struct {
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The current status of the firewall policy. You can retrieve this for a firewall
-	// policy by calling DescribeFirewallPolicy and providing the firewall policy's
-	// name or ARN.
+	// policy by calling DescribeFirewallPolicyand providing the firewall policy's name or ARN.
 	FirewallPolicyStatus ResourceStatus
 
 	// The last time that the firewall policy was changed.
@@ -486,20 +535,22 @@ type FirewallPolicyResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Detailed information about the current status of a Firewall . You can retrieve
-// this for a firewall by calling DescribeFirewall and providing the firewall name
-// and ARN.
+// Detailed information about the current status of a Firewall. You can retrieve this for
+// a firewall by calling DescribeFirewalland providing the firewall name and ARN.
 type FirewallStatus struct {
 
 	// The configuration sync state for the firewall. This summarizes the sync states
 	// reported in the Config settings for all of the Availability Zones where you
-	// have configured the firewall. When you create a firewall or update its
-	// configuration, for example by adding a rule group to its firewall policy,
-	// Network Firewall distributes the configuration changes to all zones where the
-	// firewall is in use. This summary indicates whether the configuration changes
-	// have been applied everywhere. This status must be IN_SYNC for the firewall to
-	// be ready for use, but it doesn't indicate that the firewall is ready. The Status
-	// setting indicates firewall readiness.
+	// have configured the firewall.
+	//
+	// When you create a firewall or update its configuration, for example by adding a
+	// rule group to its firewall policy, Network Firewall distributes the
+	// configuration changes to all zones where the firewall is in use. This summary
+	// indicates whether the configuration changes have been applied everywhere.
+	//
+	// This status must be IN_SYNC for the firewall to be ready for use, but it
+	// doesn't indicate that the firewall is ready. The Status setting indicates
+	// firewall readiness.
 	//
 	// This member is required.
 	ConfigurationSyncStateSummary ConfigurationSyncState
@@ -530,27 +581,36 @@ type FirewallStatus struct {
 
 // The basic rule criteria for Network Firewall to use to inspect packet headers
 // in stateful traffic flow inspection. Traffic flows that match the criteria are a
-// match for the corresponding StatefulRule .
+// match for the corresponding StatefulRule.
 type Header struct {
 
 	// The destination IP address or address range to inspect for, in CIDR notation.
-	// To match with any address, specify ANY . Specify an IP address or a block of IP
-	// addresses in Classless Inter-Domain Routing (CIDR) notation. Network Firewall
-	// supports all address ranges for IPv4 and IPv6. Examples:
+	// To match with any address, specify ANY .
+	//
+	// Specify an IP address or a block of IP addresses in Classless Inter-Domain
+	// Routing (CIDR) notation. Network Firewall supports all address ranges for IPv4
+	// and IPv6.
+	//
+	// Examples:
+	//
 	//   - To configure Network Firewall to inspect for the IP address 192.0.2.44,
 	//   specify 192.0.2.44/32 .
+	//
 	//   - To configure Network Firewall to inspect for IP addresses from 192.0.2.0 to
 	//   192.0.2.255, specify 192.0.2.0/24 .
+	//
 	//   - To configure Network Firewall to inspect for the IP address
 	//   1111:0000:0000:0000:0000:0000:0000:0111, specify
 	//   1111:0000:0000:0000:0000:0000:0000:0111/128 .
+	//
 	//   - To configure Network Firewall to inspect for IP addresses from
 	//   1111:0000:0000:0000:0000:0000:0000:0000 to
 	//   1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
 	//   1111:0000:0000:0000:0000:0000:0000:0000/64 .
-	// For more information about CIDR notation, see the Wikipedia entry Classless
-	// Inter-Domain Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-	// .
+	//
+	// For more information about CIDR notation, see the Wikipedia entry [Classless Inter-Domain Routing].
+	//
+	// [Classless Inter-Domain Routing]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 	//
 	// This member is required.
 	Destination *string
@@ -577,23 +637,32 @@ type Header struct {
 	Protocol StatefulRuleProtocol
 
 	// The source IP address or address range to inspect for, in CIDR notation. To
-	// match with any address, specify ANY . Specify an IP address or a block of IP
-	// addresses in Classless Inter-Domain Routing (CIDR) notation. Network Firewall
-	// supports all address ranges for IPv4 and IPv6. Examples:
+	// match with any address, specify ANY .
+	//
+	// Specify an IP address or a block of IP addresses in Classless Inter-Domain
+	// Routing (CIDR) notation. Network Firewall supports all address ranges for IPv4
+	// and IPv6.
+	//
+	// Examples:
+	//
 	//   - To configure Network Firewall to inspect for the IP address 192.0.2.44,
 	//   specify 192.0.2.44/32 .
+	//
 	//   - To configure Network Firewall to inspect for IP addresses from 192.0.2.0 to
 	//   192.0.2.255, specify 192.0.2.0/24 .
+	//
 	//   - To configure Network Firewall to inspect for the IP address
 	//   1111:0000:0000:0000:0000:0000:0000:0111, specify
 	//   1111:0000:0000:0000:0000:0000:0000:0111/128 .
+	//
 	//   - To configure Network Firewall to inspect for IP addresses from
 	//   1111:0000:0000:0000:0000:0000:0000:0000 to
 	//   1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
 	//   1111:0000:0000:0000:0000:0000:0000:0000/64 .
-	// For more information about CIDR notation, see the Wikipedia entry Classless
-	// Inter-Domain Routing (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-	// .
+	//
+	// For more information about CIDR notation, see the Wikipedia entry [Classless Inter-Domain Routing].
+	//
+	// [Classless Inter-Domain Routing]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 	//
 	// This member is required.
 	Source *string
@@ -608,8 +677,8 @@ type Header struct {
 	noSmithyDocumentSerde
 }
 
-// A list of IP addresses and address ranges, in CIDR notation. This is part of a
-// RuleVariables .
+// A list of IP addresses and address ranges, in CIDR notation. This is part of a RuleVariables
+// .
 type IPSet struct {
 
 	// The list of IP addresses and address ranges, in CIDR notation.
@@ -632,18 +701,20 @@ type IPSetMetadata struct {
 }
 
 // Configures one or more IP set references for a Suricata-compatible rule group.
-// This is used in CreateRuleGroup or UpdateRuleGroup . An IP set reference is a
-// rule variable that references resources that you create and manage in another
-// Amazon Web Services service, such as an Amazon VPC prefix list. Network Firewall
-// IP set references enable you to dynamically update the contents of your rules.
-// When you create, update, or delete the resource you are referencing in your
-// rule, Network Firewall automatically updates the rule's content with the
-// changes. For more information about IP set references in Network Firewall, see
-// Using IP set references (https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references)
-// in the Network Firewall Developer Guide. Network Firewall currently supports
-// Amazon VPC prefix lists (https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html)
-// and resource groups (https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references.html#rule-groups-referencing-resource-groups)
-// in IP set references.
+// This is used in CreateRuleGroupor UpdateRuleGroup. An IP set reference is a rule variable that references
+// resources that you create and manage in another Amazon Web Services service,
+// such as an Amazon VPC prefix list. Network Firewall IP set references enable you
+// to dynamically update the contents of your rules. When you create, update, or
+// delete the resource you are referencing in your rule, Network Firewall
+// automatically updates the rule's content with the changes. For more information
+// about IP set references in Network Firewall, see [Using IP set references]in the Network Firewall
+// Developer Guide.
+//
+// Network Firewall currently supports [Amazon VPC prefix lists] and [resource groups] in IP set references.
+//
+// [Using IP set references]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references
+// [Amazon VPC prefix lists]: https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html
+// [resource groups]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-groups-ip-set-references.html#rule-groups-referencing-resource-groups
 type IPSetReference struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you are referencing in your
@@ -654,27 +725,35 @@ type IPSetReference struct {
 }
 
 // Defines where Network Firewall sends logs for the firewall for one log type.
-// This is used in LoggingConfiguration . You can send each type of log to an
-// Amazon S3 bucket, a CloudWatch log group, or a Kinesis Data Firehose delivery
-// stream. Network Firewall generates logs for stateful rule groups. You can save
-// alert and flow log types. The stateful rules engine records flow logs for all
-// network traffic that it receives. It records alert logs for traffic that matches
+// This is used in LoggingConfiguration. You can send each type of log to an Amazon S3 bucket, a
+// CloudWatch log group, or a Kinesis Data Firehose delivery stream.
+//
+// Network Firewall generates logs for stateful rule groups. You can save alert
+// and flow log types. The stateful rules engine records flow logs for all network
+// traffic that it receives. It records alert logs for traffic that matches
 // stateful rules that have the rule action set to DROP or ALERT .
 type LogDestinationConfig struct {
 
 	// The named location for the logs, provided in a key:value mapping that is
 	// specific to the chosen destination type.
+	//
 	//   - For an Amazon S3 bucket, provide the name of the bucket, with key bucketName
 	//   , and optionally provide a prefix, with key prefix . The following example
 	//   specifies an Amazon S3 bucket named DOC-EXAMPLE-BUCKET and the prefix alerts :
-	//   "LogDestination": { "bucketName": "DOC-EXAMPLE-BUCKET", "prefix": "alerts" }
+	//
+	// "LogDestination": { "bucketName": "DOC-EXAMPLE-BUCKET", "prefix": "alerts" }
+	//
 	//   - For a CloudWatch log group, provide the name of the CloudWatch log group,
 	//   with key logGroup . The following example specifies a log group named
-	//   alert-log-group : "LogDestination": { "logGroup": "alert-log-group" }
+	//   alert-log-group :
+	//
+	// "LogDestination": { "logGroup": "alert-log-group" }
+	//
 	//   - For a Kinesis Data Firehose delivery stream, provide the name of the
 	//   delivery stream, with key deliveryStream . The following example specifies a
-	//   delivery stream named alert-delivery-stream : "LogDestination": {
-	//   "deliveryStream": "alert-delivery-stream" }
+	//   delivery stream named alert-delivery-stream :
+	//
+	// "LogDestination": { "deliveryStream": "alert-delivery-stream" }
 	//
 	// This member is required.
 	LogDestination map[string]string
@@ -686,9 +765,9 @@ type LogDestinationConfig struct {
 	// This member is required.
 	LogDestinationType LogDestinationType
 
-	// The type of log to send. Alert logs report traffic that matches a StatefulRule
-	// with an action setting that sends an alert log message. Flow logs are standard
-	// network traffic flow logs.
+	// The type of log to send. Alert logs report traffic that matches a StatefulRule with an
+	// action setting that sends an alert log message. Flow logs are standard network
+	// traffic flow logs.
 	//
 	// This member is required.
 	LogType LogType
@@ -696,7 +775,7 @@ type LogDestinationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Defines how Network Firewall performs logging for a Firewall .
+// Defines how Network Firewall performs logging for a Firewall.
 type LoggingConfiguration struct {
 
 	// Defines the logging destinations for the logs for a firewall. Network Firewall
@@ -715,6 +794,7 @@ type MatchAttributes struct {
 
 	// The destination ports to inspect for. If not specified, this matches with any
 	// destination port. This setting is only used for protocols 6 (TCP) and 17 (UDP).
+	//
 	// You can specify individual ports, for example 1994 and you can specify port
 	// ranges, for example 1990:1994 .
 	DestinationPorts []PortRange
@@ -728,9 +808,10 @@ type MatchAttributes struct {
 	Protocols []int32
 
 	// The source ports to inspect for. If not specified, this matches with any source
-	// port. This setting is only used for protocols 6 (TCP) and 17 (UDP). You can
-	// specify individual ports, for example 1994 and you can specify port ranges, for
-	// example 1990:1994 .
+	// port. This setting is only used for protocols 6 (TCP) and 17 (UDP).
+	//
+	// You can specify individual ports, for example 1994 and you can specify port
+	// ranges, for example 1990:1994 .
 	SourcePorts []PortRange
 
 	// The source IP addresses and address ranges to inspect for, in CIDR notation. If
@@ -748,8 +829,8 @@ type MatchAttributes struct {
 // for a firewall endpoint. Network Firewall provides each endpoint with the rules
 // that are configured in the firewall policy. Each time you add a subnet or modify
 // the associated firewall policy, Network Firewall synchronizes the rules in the
-// endpoint, so it can properly filter network traffic. This is part of a SyncState
-// for a firewall.
+// endpoint, so it can properly filter network traffic. This is part of a SyncStatefor a
+// firewall.
 type PerObjectStatus struct {
 
 	// Indicates whether this object is in sync with the version indicated in the
@@ -778,8 +859,7 @@ type PolicyVariables struct {
 }
 
 // A single port range specification. This is used for source and destination port
-// ranges in the stateless rule MatchAttributes , SourcePorts , and
-// DestinationPorts settings.
+// ranges in the stateless rule MatchAttributes, SourcePorts , and DestinationPorts settings.
 type PortRange struct {
 
 	// The lower limit of the port range. This must be less than or equal to the ToPort
@@ -836,22 +916,29 @@ type RuleDefinition struct {
 
 	// The actions to take on a packet that matches one of the stateless rule
 	// definition's match attributes. You must specify a standard action and you can
-	// add custom actions. Network Firewall only forwards a packet for stateful rule
-	// inspection if you specify aws:forward_to_sfe for a rule that the packet
-	// matches, or if the packet doesn't match any stateless rule and you specify
-	// aws:forward_to_sfe for the StatelessDefaultActions setting for the
-	// FirewallPolicy . For every rule, you must specify exactly one of the following
-	// standard actions.
+	// add custom actions.
+	//
+	// Network Firewall only forwards a packet for stateful rule inspection if you
+	// specify aws:forward_to_sfe for a rule that the packet matches, or if the packet
+	// doesn't match any stateless rule and you specify aws:forward_to_sfe for the
+	// StatelessDefaultActions setting for the FirewallPolicy.
+	//
+	// For every rule, you must specify exactly one of the following standard actions.
+	//
 	//   - aws:pass - Discontinues all inspection of the packet and permits it to go
 	//   to its intended destination.
+	//
 	//   - aws:drop - Discontinues all inspection of the packet and blocks it from
 	//   going to its intended destination.
+	//
 	//   - aws:forward_to_sfe - Discontinues stateless inspection of the packet and
 	//   forwards it to the stateful rule engine for inspection.
+	//
 	// Additionally, you can specify a custom action. To do this, you define a custom
 	// action by name and type, then provide the name you've assigned to the action in
-	// this Actions setting. For information about the options, see CustomAction . To
-	// provide more than one action in this setting, separate the settings with a
+	// this Actions setting. For information about the options, see CustomAction.
+	//
+	// To provide more than one action in this setting, separate the settings with a
 	// comma. For example, if you have a custom PublishMetrics action that you've
 	// named MyMetricsAction , then you could specify the standard action aws:pass and
 	// the custom action with [“aws:pass”, “MyMetricsAction”] .
@@ -869,15 +956,17 @@ type RuleDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// The object that defines the rules in a rule group. This, along with
-// RuleGroupResponse , define the rule group. You can retrieve all objects for a
-// rule group by calling DescribeRuleGroup . Network Firewall uses a rule group to
-// inspect and control network traffic. You define stateless rule groups to inspect
-// individual packets and you define stateful rule groups to inspect packets in the
-// context of their traffic flow. To use a rule group, you include it by reference
-// in an Network Firewall firewall policy, then you use the policy in a firewall.
-// You can reference a rule group from more than one firewall policy, and you can
-// use a firewall policy in more than one firewall.
+// The object that defines the rules in a rule group. This, along with RuleGroupResponse, define
+// the rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.
+//
+// Network Firewall uses a rule group to inspect and control network traffic. You
+// define stateless rule groups to inspect individual packets and you define
+// stateful rule groups to inspect packets in the context of their traffic flow.
+//
+// To use a rule group, you include it by reference in an Network Firewall
+// firewall policy, then you use the policy in a firewall. You can reference a rule
+// group from more than one firewall policy, and you can use a firewall policy in
+// more than one firewall.
 type RuleGroup struct {
 
 	// The stateful rules or stateless rules for the rule group.
@@ -895,16 +984,16 @@ type RuleGroup struct {
 	// Additional options governing how Network Firewall handles stateful rules. The
 	// policies where you use your stateful rule group must have stateful rule options
 	// settings that are compatible with these settings. Some limitations apply; for
-	// more information, see Strict evaluation order (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-limitations-caveats.html)
-	// in the Network Firewall Developer Guide.
+	// more information, see [Strict evaluation order]in the Network Firewall Developer Guide.
+	//
+	// [Strict evaluation order]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-limitations-caveats.html
 	StatefulRuleOptions *StatefulRuleOptions
 
 	noSmithyDocumentSerde
 }
 
-// High-level information about a rule group, returned by ListRuleGroups . You can
-// use the information provided in the metadata to retrieve and manage a rule
-// group.
+// High-level information about a rule group, returned by ListRuleGroups. You can use the
+// information provided in the metadata to retrieve and manage a rule group.
 type RuleGroupMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the rule group.
@@ -917,14 +1006,14 @@ type RuleGroupMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The high-level properties of a rule group. This, along with the RuleGroup ,
-// define the rule group. You can retrieve all objects for a rule group by calling
-// DescribeRuleGroup .
+// The high-level properties of a rule group. This, along with the RuleGroup, define the
+// rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.
 type RuleGroupResponse struct {
 
-	// The Amazon Resource Name (ARN) of the rule group. If this response is for a
-	// create request that had DryRun set to TRUE , then this ARN is a placeholder that
-	// isn't attached to a valid resource.
+	// The Amazon Resource Name (ARN) of the rule group.
+	//
+	// If this response is for a create request that had DryRun set to TRUE , then this
+	// ARN is a placeholder that isn't attached to a valid resource.
 	//
 	// This member is required.
 	RuleGroupArn *string
@@ -941,20 +1030,20 @@ type RuleGroupResponse struct {
 	RuleGroupName *string
 
 	// The list of analysis results for AnalyzeRuleGroup . If you set AnalyzeRuleGroup
-	// to TRUE in CreateRuleGroup , UpdateRuleGroup , or DescribeRuleGroup , Network
-	// Firewall analyzes the rule group and identifies the rules that might adversely
-	// effect your firewall's functionality. For example, if Network Firewall detects a
-	// rule that's routing traffic asymmetrically, which impacts the service's ability
-	// to properly process traffic, the service includes the rule in the list of
-	// analysis results.
+	// to TRUE in CreateRuleGroup, UpdateRuleGroup, or DescribeRuleGroup, Network Firewall analyzes the rule group and identifies the
+	// rules that might adversely effect your firewall's functionality. For example, if
+	// Network Firewall detects a rule that's routing traffic asymmetrically, which
+	// impacts the service's ability to properly process traffic, the service includes
+	// the rule in the list of analysis results.
 	AnalysisResults []AnalysisResult
 
 	// The maximum operating resources that this rule group can use. Rule group
 	// capacity is fixed at creation. When you update a rule group, you are limited to
 	// this capacity. When you reference a rule group from a firewall policy, Network
-	// Firewall reserves this capacity for the rule group. You can retrieve the
-	// capacity that would be required for a rule group before you create the rule
-	// group by calling CreateRuleGroup with DryRun set to TRUE .
+	// Firewall reserves this capacity for the rule group.
+	//
+	// You can retrieve the capacity that would be required for a rule group before
+	// you create the rule group by calling CreateRuleGroupwith DryRun set to TRUE .
 	Capacity *int32
 
 	// The number of capacity units currently consumed by the rule group rules.
@@ -980,8 +1069,9 @@ type RuleGroupResponse struct {
 	// topic that's used to record changes to the managed rule group. You can subscribe
 	// to the SNS topic to receive notifications when the managed rule group is
 	// modified, such as for new versions and for version expiration. For more
-	// information, see the Amazon Simple Notification Service Developer Guide. (https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
-	// .
+	// information, see the [Amazon Simple Notification Service Developer Guide.].
+	//
+	// [Amazon Simple Notification Service Developer Guide.]: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
 	SnsTopic *string
 
 	// A complex type that contains metadata about the rule group that your own rule
@@ -1000,23 +1090,24 @@ type RuleGroupResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Additional settings for a stateful rule. This is part of the StatefulRule
-// configuration.
+// Additional settings for a stateful rule. This is part of the StatefulRule configuration.
 type RuleOption struct {
 
 	// The keyword for the Suricata compatible rule option. You must include a sid
 	// (signature ID), and can optionally include other keywords. For information about
-	// Suricata compatible keywords, see Rule options (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options)
-	// in the Suricata documentation.
+	// Suricata compatible keywords, see [Rule options]in the Suricata documentation.
+	//
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options
 	//
 	// This member is required.
 	Keyword *string
 
 	// The settings of the Suricata compatible rule option. Rule options have zero or
 	// more setting values, and the number of possible and required settings depends on
-	// the Keyword . For more information about the settings for specific options, see
-	// Rule options (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options)
+	// the Keyword . For more information about the settings for specific options, see [Rule options]
 	// .
+	//
+	// [Rule options]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html#rule-options
 	Settings []string
 
 	noSmithyDocumentSerde
@@ -1032,18 +1123,22 @@ type RulesSource struct {
 
 	// Stateful inspection criteria, provided in Suricata compatible rules. Suricata
 	// is an open-source threat detection framework that includes a standard rule-based
-	// language for network traffic inspection. These rules contain the inspection
-	// criteria and the action to take for traffic that matches the criteria, so this
-	// type of rule group doesn't have a separate action setting. You can't use the
-	// priority keyword if the RuleOrder option in StatefulRuleOptions is set to
+	// language for network traffic inspection.
+	//
+	// These rules contain the inspection criteria and the action to take for traffic
+	// that matches the criteria, so this type of rule group doesn't have a separate
+	// action setting.
+	//
+	// You can't use the priority keyword if the RuleOrder option in StatefulRuleOptions is set to
 	// STRICT_ORDER .
 	RulesString *string
 
 	// An array of individual stateful rules inspection criteria to be used together
 	// in a stateful rule group. Use this option to specify simple Suricata rules with
 	// protocol, source and destination, ports, direction, and rule options. For
-	// information about the Suricata Rules format, see Rules Format (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html)
-	// .
+	// information about the Suricata Rules format, see [Rules Format].
+	//
+	// [Rules Format]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
 	StatefulRules []StatefulRule
 
 	// Stateless inspection criteria to be used in a stateless rule group.
@@ -1052,15 +1147,19 @@ type RulesSource struct {
 	noSmithyDocumentSerde
 }
 
-// Stateful inspection criteria for a domain list rule group. For HTTPS traffic,
-// domain filtering is SNI-based. It uses the server name indicator extension of
-// the TLS handshake. By default, Network Firewall domain list inspection only
-// includes traffic coming from the VPC where you deploy the firewall. To inspect
-// traffic from IP addresses outside of the deployment VPC, you set the HOME_NET
-// rule variable to include the CIDR range of the deployment VPC plus the other
-// CIDR ranges. For more information, see RuleVariables in this guide and Stateful
-// domain list rule groups in Network Firewall (https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html)
-// in the Network Firewall Developer Guide.
+// Stateful inspection criteria for a domain list rule group.
+//
+// For HTTPS traffic, domain filtering is SNI-based. It uses the server name
+// indicator extension of the TLS handshake.
+//
+// By default, Network Firewall domain list inspection only includes traffic
+// coming from the VPC where you deploy the firewall. To inspect traffic from IP
+// addresses outside of the deployment VPC, you set the HOME_NET rule variable to
+// include the CIDR range of the deployment VPC plus the other CIDR ranges. For
+// more information, see RuleVariablesin this guide and [Stateful domain list rule groups in Network Firewall] in the Network Firewall Developer
+// Guide.
+//
+// [Stateful domain list rule groups in Network Firewall]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html
 type RulesSourceList struct {
 
 	// Whether you want to allow or deny access to the domains in your target list.
@@ -1076,8 +1175,10 @@ type RulesSourceList struct {
 
 	// The domains that you want to inspect for in your traffic flows. Valid domain
 	// specifications are the following:
+	//
 	//   - Explicit names. For example, abc.example.com matches only the domain
 	//   abc.example.com .
+	//
 	//   - Names that use a domain wildcard, which you indicate with an initial ' . '.
 	//   For example, .example.com matches example.com and matches all subdomains of
 	//   example.com , such as abc.example.com and www.example.com .
@@ -1088,8 +1189,7 @@ type RulesSourceList struct {
 	noSmithyDocumentSerde
 }
 
-// Settings that are available for use in the rules in the RuleGroup where this is
-// defined.
+// Settings that are available for use in the rules in the RuleGroup where this is defined.
 type RuleVariables struct {
 
 	// A list of IP addresses and address ranges, in CIDR notation.
@@ -1102,15 +1202,16 @@ type RuleVariables struct {
 }
 
 // Any Certificate Manager (ACM) Secure Sockets Layer/Transport Layer Security
-// (SSL/TLS) server certificate that's associated with a
-// ServerCertificateConfiguration . Used in a TLSInspectionConfiguration for
+// (SSL/TLS) server certificate that's associated with a ServerCertificateConfiguration. Used in a TLSInspectionConfiguration for
 // inspection of inbound traffic to your firewall. You must request or import a
 // SSL/TLS certificate into ACM for each domain Network Firewall needs to decrypt
 // and inspect. Network Firewall uses the SSL/TLS certificates to decrypt specified
 // inbound SSL/TLS traffic going to your firewall. For information about working
-// with certificates in Certificate Manager, see Request a public certificate  (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html)
-// or Importing certificates (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
-// in the Certificate Manager User Guide.
+// with certificates in Certificate Manager, see [Request a public certificate]or [Importing certificates] in the Certificate Manager
+// User Guide.
+//
+// [Request a public certificate]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html
+// [Importing certificates]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
 type ServerCertificate struct {
 
 	// The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server
@@ -1121,36 +1222,43 @@ type ServerCertificate struct {
 }
 
 // Configures the Certificate Manager certificates and scope that Network Firewall
-// uses to decrypt and re-encrypt traffic using a TLSInspectionConfiguration . You
-// can configure ServerCertificates for inbound SSL/TLS inspection, a
-// CertificateAuthorityArn for outbound SSL/TLS inspection, or both. For
-// information about working with certificates for TLS inspection, see Using
-// SSL/TLS server certficiates with TLS inspection configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
-// in the Network Firewall Developer Guide. If a server certificate that's
-// associated with your TLSInspectionConfiguration is revoked, deleted, or expired
-// it can result in client-side TLS errors.
+// uses to decrypt and re-encrypt traffic using a TLSInspectionConfiguration. You can configure
+// ServerCertificates for inbound SSL/TLS inspection, a CertificateAuthorityArn
+// for outbound SSL/TLS inspection, or both. For information about working with
+// certificates for TLS inspection, see [Using SSL/TLS server certficiates with TLS inspection configurations]in the Network Firewall Developer Guide.
+//
+// If a server certificate that's associated with your TLSInspectionConfiguration is revoked, deleted, or
+// expired it can result in client-side TLS errors.
+//
+// [Using SSL/TLS server certficiates with TLS inspection configurations]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html
 type ServerCertificateConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the imported certificate authority (CA)
 	// certificate within Certificate Manager (ACM) to use for outbound SSL/TLS
-	// inspection. The following limitations apply:
+	// inspection.
+	//
+	// The following limitations apply:
+	//
 	//   - You can use CA certificates that you imported into ACM, but you can't
 	//   generate CA certificates with ACM.
+	//
 	//   - You can't use certificates issued by Private Certificate Authority.
+	//
 	// For more information about configuring certificates for outbound inspection,
-	// see Using SSL/TLS certificates with certificates with TLS inspection
-	// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html)
-	// in the Network Firewall Developer Guide. For information about working with
-	// certificates in ACM, see Importing certificates (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
-	// in the Certificate Manager User Guide.
+	// see [Using SSL/TLS certificates with certificates with TLS inspection configurations]in the Network Firewall Developer Guide.
+	//
+	// For information about working with certificates in ACM, see [Importing certificates] in the Certificate
+	// Manager User Guide.
+	//
+	// [Importing certificates]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+	// [Using SSL/TLS certificates with certificates with TLS inspection configurations]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-certificate-requirements.html
 	CertificateAuthorityArn *string
 
 	// When enabled, Network Firewall checks if the server certificate presented by
 	// the server in the SSL/TLS connection has a revoked or unkown status. If the
 	// certificate has an unknown or revoked status, you must specify the actions that
 	// Network Firewall takes on outbound traffic. To check the certificate revocation
-	// status, you must also specify a CertificateAuthorityArn in
-	// ServerCertificateConfiguration .
+	// status, you must also specify a CertificateAuthorityArn in ServerCertificateConfiguration.
 	CheckCertificateRevocationStatus *CheckCertificateRevocationStatusActions
 
 	// A list of scopes.
@@ -1169,6 +1277,7 @@ type ServerCertificateScope struct {
 
 	// The destination ports to decrypt for inspection, in Transmission Control
 	// Protocol (TCP) format. If not specified, this matches with any destination port.
+	//
 	// You can specify individual ports, for example 1994 , and you can specify port
 	// ranges, such as 1990:1994 .
 	DestinationPorts []PortRange
@@ -1183,9 +1292,10 @@ type ServerCertificateScope struct {
 	Protocols []int32
 
 	// The source ports to decrypt for inspection, in Transmission Control Protocol
-	// (TCP) format. If not specified, this matches with any source port. You can
-	// specify individual ports, for example 1994 , and you can specify port ranges,
-	// such as 1990:1994 .
+	// (TCP) format. If not specified, this matches with any source port.
+	//
+	// You can specify individual ports, for example 1994 , and you can specify port
+	// ranges, such as 1990:1994 .
 	SourcePorts []PortRange
 
 	// The source IP addresses and address ranges to decrypt for inspection, in CIDR
@@ -1198,8 +1308,9 @@ type ServerCertificateScope struct {
 // High-level information about the managed rule group that your own rule group is
 // copied from. You can use the the metadata to track version updates made to the
 // originating rule group. You can retrieve all objects for a rule group by calling
-// DescribeRuleGroup (https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html)
-// .
+// [DescribeRuleGroup].
+//
+// [DescribeRuleGroup]: https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html
 type SourceMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the rule group that your own rule group is
@@ -1208,8 +1319,9 @@ type SourceMetadata struct {
 
 	// The update token of the Amazon Web Services managed rule group that your own
 	// rule group is copied from. To determine the update token for the managed rule
-	// group, call DescribeRuleGroup (https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html#networkfirewall-DescribeRuleGroup-response-UpdateToken)
-	// .
+	// group, call [DescribeRuleGroup].
+	//
+	// [DescribeRuleGroup]: https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html#networkfirewall-DescribeRuleGroup-response-UpdateToken
 	SourceUpdateToken *string
 
 	noSmithyDocumentSerde
@@ -1227,15 +1339,18 @@ type StatefulEngineOptions struct {
 	// your rules. The default action for this rule order is PASS , followed by DROP ,
 	// REJECT , and ALERT actions. Stateful rules are provided to the rule engine as
 	// Suricata compatible strings, and Suricata evaluates them based on your settings.
-	// For more information, see Evaluation order for stateful rules (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
-	// in the Network Firewall Developer Guide.
+	// For more information, see [Evaluation order for stateful rules]in the Network Firewall Developer Guide.
+	//
+	// [Evaluation order for stateful rules]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html
 	RuleOrder RuleOrder
 
 	// Configures how Network Firewall processes traffic when a network connection
 	// breaks midstream. Network connections can break due to disruptions in external
 	// networks or within the firewall itself.
+	//
 	//   - DROP - Network Firewall fails closed and drops all subsequent traffic going
 	//   to the firewall. This is the default behavior.
+	//
 	//   - CONTINUE - Network Firewall continues to apply rules to the subsequent
 	//   traffic without context from traffic before the break. This impacts the behavior
 	//   of rules that depend on this context. For example, if you have a stateful rule
@@ -1244,6 +1359,7 @@ type StatefulEngineOptions struct {
 	//   the application layer protocol as HTTP. However, this behavior is rule
 	//   dependent—a TCP-layer rule using a flow:stateless rule would still match, as
 	//   would the aws:drop_strict default action.
+	//
 	//   - REJECT - Network Firewall fails closed and drops all subsequent traffic
 	//   going to the firewall. Network Firewall also sends a TCP reject packet back to
 	//   your client so that the client can immediately establish a new session. Network
@@ -1257,23 +1373,28 @@ type StatefulEngineOptions struct {
 // A single Suricata rules specification, for use in a stateful rule group. Use
 // this option to specify a simple Suricata rule with protocol, source and
 // destination, ports, direction, and rule options. For information about the
-// Suricata Rules format, see Rules Format (https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html)
-// .
+// Suricata Rules format, see [Rules Format].
+//
+// [Rules Format]: https://suricata.readthedocs.io/en/suricata-6.0.9/rules/intro.html
 type StatefulRule struct {
 
 	// Defines what Network Firewall should do with the packets in a traffic flow when
 	// the flow matches the stateful rule criteria. For all actions, Network Firewall
 	// performs the specified action and discontinues stateful inspection of the
-	// traffic flow. The actions for a stateful rule are defined as follows:
+	// traffic flow.
+	//
+	// The actions for a stateful rule are defined as follows:
+	//
 	//   - PASS - Permits the packets to go to the intended destination.
+	//
 	//   - DROP - Blocks the packets from going to the intended destination and sends
-	//   an alert log message, if alert logging is configured in the Firewall
-	//   LoggingConfiguration .
-	//   - ALERT - Sends an alert log message, if alert logging is configured in the
-	//   Firewall LoggingConfiguration . You can use this action to test a rule that
-	//   you intend to use to drop traffic. You can enable the rule with ALERT action,
-	//   verify in the logs that the rule is filtering as you want, then change the
-	//   action to DROP .
+	//   an alert log message, if alert logging is configured in the FirewallLoggingConfiguration.
+	//
+	//   - ALERT - Sends an alert log message, if alert logging is configured in the FirewallLoggingConfiguration.
+	//
+	// You can use this action to test a rule that you intend to use to drop traffic.
+	//   You can enable the rule with ALERT action, verify in the logs that the rule is
+	//   filtering as you want, then change the action to DROP .
 	//
 	// This member is required.
 	Action StatefulAction
@@ -1316,14 +1437,16 @@ type StatefulRuleGroupReference struct {
 	Override *StatefulRuleGroupOverride
 
 	// An integer setting that indicates the order in which to run the stateful rule
-	// groups in a single FirewallPolicy . This setting only applies to firewall
-	// policies that specify the STRICT_ORDER rule order in the stateful engine
-	// options settings. Network Firewall evalutes each stateful rule group against a
-	// packet starting with the group that has the lowest priority setting. You must
-	// ensure that the priority settings are unique within each policy. You can change
-	// the priority settings of your rule groups at any time. To make it easier to
-	// insert rule groups later, number them so there's a wide range in between, for
-	// example use 100, 200, and so on.
+	// groups in a single FirewallPolicy. This setting only applies to firewall policies that
+	// specify the STRICT_ORDER rule order in the stateful engine options settings.
+	//
+	// Network Firewall evalutes each stateful rule group against a packet starting
+	// with the group that has the lowest priority setting. You must ensure that the
+	// priority settings are unique within each policy.
+	//
+	// You can change the priority settings of your rule groups at any time. To make
+	// it easier to insert rule groups later, number them so there's a wide range in
+	// between, for example use 100, 200, and so on.
 	Priority *int32
 
 	noSmithyDocumentSerde
@@ -1336,24 +1459,29 @@ type StatefulRuleOptions struct {
 	// Indicates how to manage the order of the rule evaluation for the rule group.
 	// DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the
 	// rule engine as Suricata compatible strings, and Suricata evaluates them based on
-	// certain settings. For more information, see Evaluation order for stateful rules (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
-	// in the Network Firewall Developer Guide.
+	// certain settings. For more information, see [Evaluation order for stateful rules]in the Network Firewall Developer
+	// Guide.
+	//
+	// [Evaluation order for stateful rules]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html
 	RuleOrder RuleOrder
 
 	noSmithyDocumentSerde
 }
 
-// A single stateless rule. This is used in StatelessRulesAndCustomActions .
+// A single stateless rule. This is used in StatelessRulesAndCustomActions.
 type StatelessRule struct {
 
 	// Indicates the order in which to run this rule relative to all of the rules that
 	// are defined for a stateless rule group. Network Firewall evaluates the rules in
 	// a rule group starting with the lowest priority setting. You must ensure that the
-	// priority settings are unique for the rule group. Each stateless rule group uses
-	// exactly one StatelessRulesAndCustomActions object, and each
-	// StatelessRulesAndCustomActions contains exactly one StatelessRules object. To
-	// ensure unique priority settings for your rule groups, set unique priorities for
-	// the stateless rules that you define inside any single StatelessRules object.
+	// priority settings are unique for the rule group.
+	//
+	// Each stateless rule group uses exactly one StatelessRulesAndCustomActions
+	// object, and each StatelessRulesAndCustomActions contains exactly one
+	// StatelessRules object. To ensure unique priority settings for your rule groups,
+	// set unique priorities for the stateless rules that you define inside any single
+	// StatelessRules object.
+	//
 	// You can change the priority settings of your rules at any time. To make it
 	// easier to insert rules later, number them so there's a wide range in between,
 	// for example use 100, 200, and so on.
@@ -1375,9 +1503,9 @@ type StatelessRule struct {
 type StatelessRuleGroupReference struct {
 
 	// An integer setting that indicates the order in which to run the stateless rule
-	// groups in a single FirewallPolicy . Network Firewall applies each stateless rule
-	// group to a packet starting with the group that has the lowest priority setting.
-	// You must ensure that the priority settings are unique within each policy.
+	// groups in a single FirewallPolicy. Network Firewall applies each stateless rule group to a
+	// packet starting with the group that has the lowest priority setting. You must
+	// ensure that the priority settings are unique within each policy.
 	//
 	// This member is required.
 	Priority *int32
@@ -1402,16 +1530,16 @@ type StatelessRulesAndCustomActions struct {
 	// Defines an array of individual custom action definitions that are available for
 	// use by the stateless rules in this StatelessRulesAndCustomActions
 	// specification. You name each custom action that you define, and then you can use
-	// it by name in your StatelessRule RuleDefinition Actions specification.
+	// it by name in your StatelessRuleRuleDefinitionActions specification.
 	CustomActions []CustomAction
 
 	noSmithyDocumentSerde
 }
 
 // The ID for a subnet that you want to associate with the firewall. This is used
-// with CreateFirewall and AssociateSubnets . Network Firewall creates an instance
-// of the associated firewall in each subnet that you specify, to filter traffic in
-// the subnet's Availability Zone.
+// with CreateFirewalland AssociateSubnets. Network Firewall creates an instance of the associated firewall in
+// each subnet that you specify, to filter traffic in the subnet's Availability
+// Zone.
 type SubnetMapping struct {
 
 	// The unique identifier for the subnet.
@@ -1427,9 +1555,13 @@ type SubnetMapping struct {
 }
 
 // The status of the firewall endpoint and firewall policy configuration for a
-// single VPC subnet. For each VPC subnet that you associate with a firewall,
-// Network Firewall does the following:
+// single VPC subnet.
+//
+// For each VPC subnet that you associate with a firewall, Network Firewall does
+// the following:
+//
 //   - Instantiates a firewall endpoint in the subnet, ready to take traffic.
+//
 //   - Configures the endpoint with the current firewall policy settings, to
 //     provide the filtering behavior for the endpoint.
 //
@@ -1441,14 +1573,14 @@ type SyncState struct {
 	// The attachment status of the firewall's association with a single VPC subnet.
 	// For each configured subnet, Network Firewall creates the attachment by
 	// instantiating the firewall endpoint in the subnet so that it's ready to take
-	// traffic. This is part of the FirewallStatus .
+	// traffic. This is part of the FirewallStatus.
 	Attachment *Attachment
 
 	// The configuration status of the firewall endpoint in a single VPC subnet.
 	// Network Firewall provides each endpoint with the rules that are configured in
 	// the firewall policy. Each time you add a subnet or modify the associated
 	// firewall policy, Network Firewall synchronizes the rules in the endpoint, so it
-	// can properly filter network traffic. This is part of the FirewallStatus .
+	// can properly filter network traffic. This is part of the FirewallStatus.
 	Config map[string]PerObjectStatus
 
 	noSmithyDocumentSerde
@@ -1478,16 +1610,18 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// TCP flags and masks to inspect packets for, used in stateless rules
-// MatchAttributes settings.
+// TCP flags and masks to inspect packets for, used in stateless rules MatchAttributes settings.
 type TCPFlagField struct {
 
 	// Used in conjunction with the Masks setting to define the flags that must be set
 	// and flags that must not be set in order for the packet to match. This setting
-	// can only specify values that are also specified in the Masks setting. For the
-	// flags that are specified in the masks setting, the following must be true for
-	// the packet to match:
+	// can only specify values that are also specified in the Masks setting.
+	//
+	// For the flags that are specified in the masks setting, the following must be
+	// true for the packet to match:
+	//
 	//   - The ones that are set in this flags setting must be set in the packet.
+	//
 	//   - The ones that are not set in this flags setting must also not be set in the
 	//   packet.
 	//
@@ -1520,20 +1654,22 @@ type TlsCertificateData struct {
 	noSmithyDocumentSerde
 }
 
-// The object that defines a TLS inspection configuration. This, along with
-// TLSInspectionConfigurationResponse , define the TLS inspection configuration.
-// You can retrieve all objects for a TLS inspection configuration by calling
-// DescribeTLSInspectionConfiguration . Network Firewall uses a TLS inspection
-// configuration to decrypt traffic. Network Firewall re-encrypts the traffic
-// before sending it to its destination. To use a TLS inspection configuration, you
-// add it to a new Network Firewall firewall policy, then you apply the firewall
-// policy to a firewall. Network Firewall acts as a proxy service to decrypt and
-// inspect the traffic traveling through your firewalls. You can reference a TLS
-// inspection configuration from more than one firewall policy, and you can use a
-// firewall policy in more than one firewall. For more information about using TLS
-// inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection
-// configurations (https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html)
-// in the Network Firewall Developer Guide.
+// The object that defines a TLS inspection configuration. This, along with TLSInspectionConfigurationResponse,
+// define the TLS inspection configuration. You can retrieve all objects for a TLS
+// inspection configuration by calling DescribeTLSInspectionConfiguration.
+//
+// Network Firewall uses a TLS inspection configuration to decrypt traffic.
+// Network Firewall re-encrypts the traffic before sending it to its destination.
+//
+// To use a TLS inspection configuration, you add it to a new Network Firewall
+// firewall policy, then you apply the firewall policy to a firewall. Network
+// Firewall acts as a proxy service to decrypt and inspect the traffic traveling
+// through your firewalls. You can reference a TLS inspection configuration from
+// more than one firewall policy, and you can use a firewall policy in more than
+// one firewall. For more information about using TLS inspection configurations,
+// see [Inspecting SSL/TLS traffic with TLS inspection configurations]in the Network Firewall Developer Guide.
+//
+// [Inspecting SSL/TLS traffic with TLS inspection configurations]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html
 type TLSInspectionConfiguration struct {
 
 	// Lists the server certificate configurations that are associated with the TLS
@@ -1601,9 +1737,8 @@ type TLSInspectionConfigurationResponse struct {
 	// The number of firewall policies that use this TLS inspection configuration.
 	NumberOfAssociations *int32
 
-	// Detailed information about the current status of a TLSInspectionConfiguration .
-	// You can retrieve this for a TLS inspection configuration by calling
-	// DescribeTLSInspectionConfiguration and providing the TLS inspection
+	// Detailed information about the current status of a TLSInspectionConfiguration. You can retrieve this for
+	// a TLS inspection configuration by calling DescribeTLSInspectionConfigurationand providing the TLS inspection
 	// configuration name and ARN.
 	TLSInspectionConfigurationStatus ResourceStatus
 

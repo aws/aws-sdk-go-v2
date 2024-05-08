@@ -38,7 +38,7 @@ type ListKxScalingGroupsInput struct {
 	// The maximum number of results to return in this request.
 	MaxResults int32
 
-	// A token that indicates where a results page should begin.
+	//  A token that indicates where a results page should begin.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,10 +46,10 @@ type ListKxScalingGroupsInput struct {
 
 type ListKxScalingGroupsOutput struct {
 
-	// A token that indicates where a results page should begin.
+	//  A token that indicates where a results page should begin.
 	NextToken *string
 
-	// A list of scaling groups available in a kdb environment.
+	//  A list of scaling groups available in a kdb environment.
 	ScalingGroups []types.KxScalingGroup
 
 	// Metadata pertaining to the operation's result.

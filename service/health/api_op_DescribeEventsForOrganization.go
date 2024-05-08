@@ -17,19 +17,31 @@ import (
 // detailed description, any additional metadata that depends on the event type, or
 // any affected resources. To retrieve that information, use the following
 // operations:
-//   - DescribeAffectedAccountsForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html)
-//   - DescribeEventDetailsForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
-//   - DescribeAffectedEntitiesForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
+//
+// [DescribeAffectedAccountsForOrganization]
+//
+// [DescribeEventDetailsForOrganization]
+//
+// [DescribeAffectedEntitiesForOrganization]
 //
 // If you don't specify a filter , the DescribeEventsForOrganizations returns all
 // events across your organization. Results are sorted by lastModifiedTime ,
-// starting with the most recent event. For more information about the different
-// types of Health events, see Event (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html)
-// . Before you can call this operation, you must first enable Health to work with
-// Organizations. To do this, call the EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-// operation from your organization's management account. This API operation uses
-// pagination. Specify the nextToken parameter in the next request to return more
-// results.
+// starting with the most recent event.
+//
+// For more information about the different types of Health events, see [Event].
+//
+// Before you can call this operation, you must first enable Health to work with
+// Organizations. To do this, call the [EnableHealthServiceAccessForOrganization]operation from your organization's
+// management account.
+//
+// This API operation uses pagination. Specify the nextToken parameter in the next
+// request to return more results.
+//
+// [DescribeEventDetailsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
+// [DescribeAffectedEntitiesForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html
+// [DescribeAffectedAccountsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html
+// [Event]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html
+// [EnableHealthServiceAccessForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
 func (c *Client) DescribeEventsForOrganization(ctx context.Context, params *DescribeEventsForOrganizationInput, optFns ...func(*Options)) (*DescribeEventsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeEventsForOrganizationInput{}

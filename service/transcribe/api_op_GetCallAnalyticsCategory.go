@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the specified Call Analytics category. To get a list
-// of your Call Analytics categories, use the operation.
+// Provides information about the specified Call Analytics category.
+//
+// To get a list of your Call Analytics categories, use the operation.
 func (c *Client) GetCallAnalyticsCategory(ctx context.Context, params *GetCallAnalyticsCategoryInput, optFns ...func(*Options)) (*GetCallAnalyticsCategoryOutput, error) {
 	if params == nil {
 		params = &GetCallAnalyticsCategoryInput{}

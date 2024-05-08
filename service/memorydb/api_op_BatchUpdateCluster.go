@@ -12,8 +12,9 @@ import (
 )
 
 // Apply the service update to a list of clusters supplied. For more information
-// on service updates and applying them, see Applying the service updates (https://docs.aws.amazon.com/MemoryDB/latest/devguide/managing-updates.html#applying-updates)
-// .
+// on service updates and applying them, see [Applying the service updates].
+//
+// [Applying the service updates]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/managing-updates.html#applying-updates
 func (c *Client) BatchUpdateCluster(ctx context.Context, params *BatchUpdateClusterInput, optFns ...func(*Options)) (*BatchUpdateClusterOutput, error) {
 	if params == nil {
 		params = &BatchUpdateClusterInput{}

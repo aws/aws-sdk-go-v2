@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ChangeDirectionEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeDirectionEnum) Values() []ChangeDirectionEnum {
 	return []ChangeDirectionEnum{
 		"INCREASE",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"aws.evidently.evaluation",
@@ -46,8 +48,9 @@ const (
 )
 
 // Values returns all known values for ExperimentBaseStat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentBaseStat) Values() []ExperimentBaseStat {
 	return []ExperimentBaseStat{
 		"Mean",
@@ -62,8 +65,9 @@ const (
 )
 
 // Values returns all known values for ExperimentReportName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentReportName) Values() []ExperimentReportName {
 	return []ExperimentReportName{
 		"BayesianInference",
@@ -82,6 +86,7 @@ const (
 
 // Values returns all known values for ExperimentResultRequestType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentResultRequestType) Values() []ExperimentResultRequestType {
 	return []ExperimentResultRequestType{
@@ -105,8 +110,9 @@ const (
 
 // Values returns all known values for ExperimentResultResponseType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentResultResponseType) Values() []ExperimentResultResponseType {
 	return []ExperimentResultResponseType{
 		"Mean",
@@ -129,8 +135,9 @@ const (
 )
 
 // Values returns all known values for ExperimentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentStatus) Values() []ExperimentStatus {
 	return []ExperimentStatus{
 		"CREATED",
@@ -151,6 +158,7 @@ const (
 
 // Values returns all known values for ExperimentStopDesiredState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentStopDesiredState) Values() []ExperimentStopDesiredState {
 	return []ExperimentStopDesiredState{
@@ -167,8 +175,9 @@ const (
 )
 
 // Values returns all known values for ExperimentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExperimentType) Values() []ExperimentType {
 	return []ExperimentType{
 		"aws.evidently.onlineab",
@@ -185,6 +194,7 @@ const (
 
 // Values returns all known values for FeatureEvaluationStrategy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FeatureEvaluationStrategy) Values() []FeatureEvaluationStrategy {
 	return []FeatureEvaluationStrategy{
@@ -202,8 +212,9 @@ const (
 )
 
 // Values returns all known values for FeatureStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeatureStatus) Values() []FeatureStatus {
 	return []FeatureStatus{
 		"AVAILABLE",
@@ -223,8 +234,9 @@ const (
 )
 
 // Values returns all known values for LaunchStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchStatus) Values() []LaunchStatus {
 	return []LaunchStatus{
 		"CREATED",
@@ -244,8 +256,9 @@ const (
 )
 
 // Values returns all known values for LaunchStopDesiredState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchStopDesiredState) Values() []LaunchStopDesiredState {
 	return []LaunchStopDesiredState{
 		"COMPLETED",
@@ -261,8 +274,9 @@ const (
 )
 
 // Values returns all known values for LaunchType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchType) Values() []LaunchType {
 	return []LaunchType{
 		"aws.evidently.splits",
@@ -278,8 +292,9 @@ const (
 )
 
 // Values returns all known values for ProjectStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProjectStatus) Values() []ProjectStatus {
 	return []ProjectStatus{
 		"AVAILABLE",
@@ -297,8 +312,9 @@ const (
 
 // Values returns all known values for SegmentReferenceResourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SegmentReferenceResourceType) Values() []SegmentReferenceResourceType {
 	return []SegmentReferenceResourceType{
 		"EXPERIMENT",
@@ -318,6 +334,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -339,8 +356,9 @@ const (
 )
 
 // Values returns all known values for VariationValueType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VariationValueType) Values() []VariationValueType {
 	return []VariationValueType{
 		"STRING",

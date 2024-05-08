@@ -33,10 +33,10 @@ type UpdateCrawlerScheduleInput struct {
 	// This member is required.
 	CrawlerName *string
 
-	// The updated cron expression used to specify the schedule (see Time-Based
-	// Schedules for Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
-	// . For example, to run something every day at 12:15 UTC, you would specify:
-	// cron(15 12 * * ? *) .
+	// The updated cron expression used to specify the schedule (see [Time-Based Schedules for Jobs and Crawlers]. For example, to
+	// run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *) .
+	//
+	// [Time-Based Schedules for Jobs and Crawlers]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
 	Schedule *string
 
 	noSmithyDocumentSerde

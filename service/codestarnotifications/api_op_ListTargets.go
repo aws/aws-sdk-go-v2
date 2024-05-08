@@ -31,9 +31,10 @@ func (c *Client) ListTargets(ctx context.Context, params *ListTargetsInput, optF
 type ListTargetsInput struct {
 
 	// The filters to use to return information by service or resource type. Valid
-	// filters include target type, target address, and target status. A filter with
-	// the same name can appear more than once when used with OR statements. Filters
-	// with different names should be applied with AND statements.
+	// filters include target type, target address, and target status.
+	//
+	// A filter with the same name can appear more than once when used with OR
+	// statements. Filters with different names should be applied with AND statements.
 	Filters []types.ListTargetsFilter
 
 	// A non-negative integer used to limit the number of returned results. The

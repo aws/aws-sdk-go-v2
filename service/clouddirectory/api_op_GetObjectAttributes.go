@@ -34,8 +34,8 @@ type GetObjectAttributesInput struct {
 	// This member is required.
 	AttributeNames []string
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides.
+	// The Amazon Resource Name (ARN) that is associated with the Directory where the object
+	// resides.
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -45,8 +45,7 @@ type GetObjectAttributesInput struct {
 	// This member is required.
 	ObjectReference *types.ObjectReference
 
-	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet
-	// for details.
+	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet for details.
 	//
 	// This member is required.
 	SchemaFacet *types.SchemaFacet

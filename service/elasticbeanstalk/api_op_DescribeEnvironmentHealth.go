@@ -37,12 +37,14 @@ type DescribeEnvironmentHealthInput struct {
 	// . If no attribute names are specified, returns the name of the environment.
 	AttributeNames []types.EnvironmentHealthAttribute
 
-	// Specify the environment by ID. You must specify either this or an
-	// EnvironmentName, or both.
+	// Specify the environment by ID.
+	//
+	// You must specify either this or an EnvironmentName, or both.
 	EnvironmentId *string
 
-	// Specify the environment by name. You must specify either this or an
-	// EnvironmentName, or both.
+	// Specify the environment by name.
+	//
+	// You must specify either this or an EnvironmentName, or both.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde
@@ -58,15 +60,17 @@ type DescribeEnvironmentHealthOutput struct {
 	// status.
 	Causes []string
 
-	// The health color (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
-	// of the environment.
+	// The [health color] of the environment.
+	//
+	// [health color]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
 	Color *string
 
 	// The environment's name.
 	EnvironmentName *string
 
-	// The health status (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
-	// of the environment. For example, Ok .
+	// The [health status] of the environment. For example, Ok .
+	//
+	// [health status]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
 	HealthStatus *string
 
 	// Summary health information for the instances in the environment.

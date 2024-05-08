@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a Device Defender ML Detect mitigation action. Requires
-// permission to access the DescribeDetectMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Gets information about a Device Defender ML Detect mitigation action.
+//
+// Requires permission to access the [DescribeDetectMitigationActionsTask] action.
+//
+// [DescribeDetectMitigationActionsTask]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeDetectMitigationActionsTask(ctx context.Context, params *DescribeDetectMitigationActionsTaskInput, optFns ...func(*Options)) (*DescribeDetectMitigationActionsTaskOutput, error) {
 	if params == nil {
 		params = &DescribeDetectMitigationActionsTaskInput{}
@@ -31,7 +33,7 @@ func (c *Client) DescribeDetectMitigationActionsTask(ctx context.Context, params
 
 type DescribeDetectMitigationActionsTaskInput struct {
 
-	// The unique identifier of the task.
+	//  The unique identifier of the task.
 	//
 	// This member is required.
 	TaskId *string
@@ -41,7 +43,7 @@ type DescribeDetectMitigationActionsTaskInput struct {
 
 type DescribeDetectMitigationActionsTaskOutput struct {
 
-	// The description of a task.
+	//  The description of a task.
 	TaskSummary *types.DetectMitigationActionsTaskSummary
 
 	// Metadata pertaining to the operation's result.

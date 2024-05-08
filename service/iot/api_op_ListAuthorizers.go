@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the authorizers registered in your account. Requires permission to access
-// the ListAuthorizers (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Lists the authorizers registered in your account.
+//
+// Requires permission to access the [ListAuthorizers] action.
+//
+// [ListAuthorizers]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListAuthorizers(ctx context.Context, params *ListAuthorizersInput, optFns ...func(*Options)) (*ListAuthorizersOutput, error) {
 	if params == nil {
 		params = &ListAuthorizersInput{}

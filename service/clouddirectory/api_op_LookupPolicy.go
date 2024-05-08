@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all policies from the root of the Directory to the object specified. If
-// there are no policies present, an empty list is returned. If policies are
-// present, and if some objects don't have the policies attached, it returns the
-// ObjectIdentifier for such objects. If policies are present, it returns
-// ObjectIdentifier , policyId , and policyType . Paths that don't lead to the root
-// from the target object are ignored. For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
-// .
+// Lists all policies from the root of the Directory to the object specified. If there are
+// no policies present, an empty list is returned. If policies are present, and if
+// some objects don't have the policies attached, it returns the ObjectIdentifier
+// for such objects. If policies are present, it returns ObjectIdentifier ,
+// policyId , and policyType . Paths that don't lead to the root from the target
+// object are ignored. For more information, see [Policies].
+//
+// [Policies]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
 func (c *Client) LookupPolicy(ctx context.Context, params *LookupPolicyInput, optFns ...func(*Options)) (*LookupPolicyOutput, error) {
 	if params == nil {
 		params = &LookupPolicyInput{}
@@ -35,8 +36,8 @@ func (c *Client) LookupPolicy(ctx context.Context, params *LookupPolicyInput, op
 
 type LookupPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory . For more
-	// information, see arns .
+	// The Amazon Resource Name (ARN) that is associated with the Directory. For more
+	// information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -62,8 +63,9 @@ type LookupPolicyOutput struct {
 	NextToken *string
 
 	// Provides list of path to policies. Policies contain PolicyId , ObjectIdentifier
-	// , and PolicyType . For more information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
-	// .
+	// , and PolicyType . For more information, see [Policies].
+	//
+	// [Policies]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
 	PolicyToPathList []types.PolicyToPath
 
 	// Metadata pertaining to the operation's result.

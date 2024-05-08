@@ -12,10 +12,13 @@ import (
 )
 
 // Returns a summary of each of the portfolio shares that were created for the
-// specified portfolio. You can use this API to determine which accounts or
-// organizational nodes this portfolio have been shared, whether the recipient
-// entity has imported the share, and whether TagOptions are included with the
-// share. The PortfolioId and Type parameters are both required.
+// specified portfolio.
+//
+// You can use this API to determine which accounts or organizational nodes this
+// portfolio have been shared, whether the recipient entity has imported the share,
+// and whether TagOptions are included with the share.
+//
+// The PortfolioId and Type parameters are both required.
 func (c *Client) DescribePortfolioShares(ctx context.Context, params *DescribePortfolioSharesInput, optFns ...func(*Options)) (*DescribePortfolioSharesOutput, error) {
 	if params == nil {
 		params = &DescribePortfolioSharesInput{}
@@ -39,11 +42,16 @@ type DescribePortfolioSharesInput struct {
 	PortfolioId *string
 
 	// The type of portfolio share to summarize. This field acts as a filter on the
-	// type of portfolio share, which can be one of the following: 1. ACCOUNT -
-	// Represents an external account to account share. 2. ORGANIZATION - Represents a
-	// share to an organization. This share is available to every account in the
-	// organization. 3. ORGANIZATIONAL_UNIT - Represents a share to an organizational
-	// unit. 4. ORGANIZATION_MEMBER_ACCOUNT - Represents a share to an account in the
+	// type of portfolio share, which can be one of the following:
+	//
+	// 1. ACCOUNT - Represents an external account to account share.
+	//
+	// 2. ORGANIZATION - Represents a share to an organization. This share is
+	// available to every account in the organization.
+	//
+	// 3. ORGANIZATIONAL_UNIT - Represents a share to an organizational unit.
+	//
+	// 4. ORGANIZATION_MEMBER_ACCOUNT - Represents a share to an account in the
 	// organization.
 	//
 	// This member is required.

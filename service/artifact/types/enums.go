@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for AcceptanceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcceptanceType) Values() []AcceptanceType {
 	return []AcceptanceType{
 		"PASSTHROUGH",
@@ -36,8 +37,9 @@ const (
 
 // Values returns all known values for NotificationSubscriptionStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationSubscriptionStatus) Values() []NotificationSubscriptionStatus {
 	return []NotificationSubscriptionStatus{
 		"SUBSCRIBED",
@@ -56,8 +58,9 @@ const (
 )
 
 // Values returns all known values for PublishedState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PublishedState) Values() []PublishedState {
 	return []PublishedState{
 		"PUBLISHED",
@@ -76,8 +79,9 @@ const (
 )
 
 // Values returns all known values for UploadState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UploadState) Values() []UploadState {
 	return []UploadState{
 		"PROCESSING",
@@ -100,6 +104,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

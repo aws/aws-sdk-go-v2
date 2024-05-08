@@ -30,7 +30,9 @@ func (c *Client) DescribeVpcConnector(ctx context.Context, params *DescribeVpcCo
 type DescribeVpcConnectorInput struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want a
-	// description for. The ARN must be a full VPC connector ARN.
+	// description for.
+	//
+	// The ARN must be a full VPC connector ARN.
 	//
 	// This member is required.
 	VpcConnectorArn *string

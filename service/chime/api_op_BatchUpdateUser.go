@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates user details within the UpdateUserRequestItem object for up to 20 users
-// for the specified Amazon Chime account. Currently, only LicenseType updates are
-// supported for this action.
+// Updates user details within the UpdateUserRequestItem object for up to 20 users for the specified
+// Amazon Chime account. Currently, only LicenseType updates are supported for
+// this action.
 func (c *Client) BatchUpdateUser(ctx context.Context, params *BatchUpdateUserInput, optFns ...func(*Options)) (*BatchUpdateUserOutput, error) {
 	if params == nil {
 		params = &BatchUpdateUserInput{}
@@ -46,9 +46,8 @@ type BatchUpdateUserInput struct {
 
 type BatchUpdateUserOutput struct {
 
-	// If the BatchUpdateUser action fails for one or more of the user IDs in the
-	// request, a list of the user IDs is returned, along with error codes and error
-	// messages.
+	// If the BatchUpdateUser action fails for one or more of the user IDs in the request, a list of
+	// the user IDs is returned, along with error codes and error messages.
 	UserErrors []types.UserError
 
 	// Metadata pertaining to the operation's result.

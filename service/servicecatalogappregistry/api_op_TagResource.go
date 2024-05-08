@@ -10,10 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns one or more tags (key-value pairs) to the specified resource. Each tag
-// consists of a key and an optional value. If a tag with the same key is already
-// associated with the resource, this action updates its value. This operation
-// returns an empty response if the call was successful.
+// Assigns one or more tags (key-value pairs) to the specified resource.
+//
+// Each tag consists of a key and an optional value. If a tag with the same key is
+// already associated with the resource, this action updates its value.
+//
+// This operation returns an empty response if the call was successful.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

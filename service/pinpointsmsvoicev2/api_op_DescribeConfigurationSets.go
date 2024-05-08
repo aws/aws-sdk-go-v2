@@ -11,13 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified configuration sets or all in your account. If you
-// specify configuration set names, the output includes information for only the
-// specified configuration sets. If you specify filters, the output includes
-// information for only those configuration sets that meet the filter criteria. If
-// you don't specify configuration set names or filters, the output includes
-// information for all configuration sets. If you specify a configuration set name
-// that isn't valid, an error is returned.
+// Describes the specified configuration sets or all in your account.
+//
+// If you specify configuration set names, the output includes information for
+// only the specified configuration sets. If you specify filters, the output
+// includes information for only those configuration sets that meet the filter
+// criteria. If you don't specify configuration set names or filters, the output
+// includes information for all configuration sets.
+//
+// If you specify a configuration set name that isn't valid, an error is returned.
 func (c *Client) DescribeConfigurationSets(ctx context.Context, params *DescribeConfigurationSetsInput, optFns ...func(*Options)) (*DescribeConfigurationSetsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationSetsInput{}

@@ -13,9 +13,10 @@ import (
 
 // Imports the public portion of a new key pair and returns its arn and fingerprint
 // . The privateKey can then be used to generate viewer authorization tokens, to
-// grant viewers access to private channels. For more information, see Setting Up
-// Private Channels (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html)
-// in the Amazon IVS User Guide.
+// grant viewers access to private channels. For more information, see [Setting Up Private Channels]in the
+// Amazon IVS User Guide.
+//
+// [Setting Up Private Channels]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
 func (c *Client) ImportPlaybackKeyPair(ctx context.Context, params *ImportPlaybackKeyPairInput, optFns ...func(*Options)) (*ImportPlaybackKeyPairOutput, error) {
 	if params == nil {
 		params = &ImportPlaybackKeyPairInput{}
@@ -41,11 +42,12 @@ type ImportPlaybackKeyPairInput struct {
 	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
-	// Any tags provided with the request are added to the playback key pair tags. See
-	// Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// Any tags provided with the request are added to the playback key pair tags. See [Tagging Amazon Web Services Resources]
 	// for more information, including restrictions that apply to tags and "Tag naming
 	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
 	// what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

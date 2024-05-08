@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AppliedLevelEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppliedLevelEnum) Values() []AppliedLevelEnum {
 	return []AppliedLevelEnum{
 		"ACCOUNT",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"DEPENDENCY_ACCESS_DENIED_ERROR",
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for PeriodUnit. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PeriodUnit) Values() []PeriodUnit {
 	return []PeriodUnit{
 		"MICROSECOND",
@@ -81,8 +84,9 @@ const (
 )
 
 // Values returns all known values for QuotaContextScope. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QuotaContextScope) Values() []QuotaContextScope {
 	return []QuotaContextScope{
 		"RESOURCE",
@@ -104,8 +108,9 @@ const (
 )
 
 // Values returns all known values for RequestStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequestStatus) Values() []RequestStatus {
 	return []RequestStatus{
 		"PENDING",
@@ -128,8 +133,9 @@ const (
 
 // Values returns all known values for ServiceQuotaTemplateAssociationStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceQuotaTemplateAssociationStatus) Values() []ServiceQuotaTemplateAssociationStatus {
 	return []ServiceQuotaTemplateAssociationStatus{
 		"ASSOCIATED",

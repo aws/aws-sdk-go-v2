@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a detailed description of the definition of a dashboard. If you do not
-// need to know details about the content of a dashboard, for instance if you are
-// trying to check the status of a recently created or updated dashboard, use the
-// DescribeDashboard (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboard.html)
-// instead.
+// Provides a detailed description of the definition of a dashboard.
+//
+// If you do not need to know details about the content of a dashboard, for
+// instance if you are trying to check the status of a recently created or updated
+// dashboard, use the [DescribeDashboard]DescribeDashboard instead.
+//
+// [DescribeDashboard]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeDashboard.html
 func (c *Client) DescribeDashboardDefinition(ctx context.Context, params *DescribeDashboardDefinitionInput, optFns ...func(*Options)) (*DescribeDashboardDefinitionOutput, error) {
 	if params == nil {
 		params = &DescribeDashboardDefinitionInput{}
@@ -60,19 +62,24 @@ type DescribeDashboardDefinitionOutput struct {
 	DashboardId *string
 
 	// Options for publishing the dashboard:
+	//
 	//   - AvailabilityStatus for AdHocFilteringOption - This status can be either
 	//   ENABLED or DISABLED . When this is set to DISABLED , Amazon QuickSight
 	//   disables the left filter pane on the published dashboard, which can be used for
 	//   ad hoc (one-time) filtering. This option is ENABLED by default.
+	//
 	//   - AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED
 	//   or DISABLED . The visual option to export data to .CSV format isn't enabled
 	//   when this is set to DISABLED . This option is ENABLED by default.
+	//
 	//   - VisibilityState for SheetControlsOption - This visibility state can be
 	//   either COLLAPSED or EXPANDED . This option is COLLAPSED by default.
 	DashboardPublishOptions *types.DashboardPublishOptions
 
-	// The definition of a dashboard. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis.
+	// The definition of a dashboard.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
 	Definition *types.DashboardVersionDefinition
 
 	// Errors associated with this dashboard version.
@@ -85,12 +92,19 @@ type DescribeDashboardDefinitionOutput struct {
 	RequestId *string
 
 	// Status associated with the dashboard version.
+	//
 	//   - CREATION_IN_PROGRESS
+	//
 	//   - CREATION_SUCCESSFUL
+	//
 	//   - CREATION_FAILED
+	//
 	//   - UPDATE_IN_PROGRESS
+	//
 	//   - UPDATE_SUCCESSFUL
+	//
 	//   - UPDATE_FAILED
+	//
 	//   - DELETED
 	ResourceStatus types.ResourceStatus
 

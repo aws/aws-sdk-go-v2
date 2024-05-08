@@ -30,7 +30,7 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 // The request structure for the list jobs request.
 type ListJobsInput struct {
 
-	// The unique ID for an Amplify app.
+	//  The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string

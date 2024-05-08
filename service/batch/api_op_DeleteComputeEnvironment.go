@@ -10,13 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Batch compute environment. Before you can delete a compute
-// environment, you must set its state to DISABLED with the
-// UpdateComputeEnvironment API operation and disassociate it from any job queues
-// with the UpdateJobQueue API operation. Compute environments that use Fargate
-// resources must terminate all active jobs on that compute environment before
-// deleting the compute environment. If this isn't done, the compute environment
-// enters an invalid state.
+// Deletes an Batch compute environment.
+//
+// Before you can delete a compute environment, you must set its state to DISABLED
+// with the UpdateComputeEnvironmentAPI operation and disassociate it from any job queues with the UpdateJobQueue API
+// operation. Compute environments that use Fargate resources must terminate all
+// active jobs on that compute environment before deleting the compute environment.
+// If this isn't done, the compute environment enters an invalid state.
 func (c *Client) DeleteComputeEnvironment(ctx context.Context, params *DeleteComputeEnvironmentInput, optFns ...func(*Options)) (*DeleteComputeEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteComputeEnvironmentInput{}

@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the account IDs that have access to the specified portfolio. A delegated
-// admin can list the accounts that have access to the shared portfolio. Note that
-// if a delegated admin is de-registered, they can no longer perform this
-// operation.
+// Lists the account IDs that have access to the specified portfolio.
+//
+// A delegated admin can list the accounts that have access to the shared
+// portfolio. Note that if a delegated admin is de-registered, they can no longer
+// perform this operation.
 func (c *Client) ListPortfolioAccess(ctx context.Context, params *ListPortfolioAccessInput, optFns ...func(*Options)) (*ListPortfolioAccessOutput, error) {
 	if params == nil {
 		params = &ListPortfolioAccessInput{}
@@ -37,7 +38,9 @@ type ListPortfolioAccessInput struct {
 	PortfolioId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

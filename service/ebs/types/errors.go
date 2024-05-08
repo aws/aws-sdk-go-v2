@@ -36,8 +36,9 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the limit for concurrent API requests. For more information,
-// see Optimizing performance of the EBS direct APIs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapi-performance)
-// in the Amazon Elastic Compute Cloud User Guide.
+// see [Optimizing performance of the EBS direct APIs]in the Amazon Elastic Compute Cloud User Guide.
+//
+// [Optimizing performance of the EBS direct APIs]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapi-performance
 type ConcurrentLimitExceededException struct {
 	Message *string
 
@@ -89,8 +90,9 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An internal error has occurred. For more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
-// .
+// An internal error has occurred. For more information see [Error retries].
+//
+// [Error retries]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
 type InternalServerException struct {
 	Message *string
 
@@ -117,8 +119,9 @@ func (e *InternalServerException) ErrorCode() string {
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The number of API requests has exceeded the maximum allowed API request
-// throttling limit for the snapshot. For more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
-// .
+// throttling limit for the snapshot. For more information see [Error retries].
+//
+// [Error retries]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
 type RequestThrottledException struct {
 	Message *string
 

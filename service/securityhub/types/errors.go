@@ -178,9 +178,10 @@ func (e *ResourceConflictException) ErrorCode() string {
 }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because it conflicts with the resource's availability.
-// For example, you tried to update a security control that's currently in the
-// UPDATING state.
+//	The request was rejected because it conflicts with the resource's
+//
+// availability. For example, you tried to update a security control that's
+// currently in the UPDATING state.
 type ResourceInUseException struct {
 	Message *string
 

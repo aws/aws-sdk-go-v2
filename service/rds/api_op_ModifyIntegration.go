@@ -12,10 +12,11 @@ import (
 	"time"
 )
 
-// Modifies a zero-ETL integration with Amazon Redshift. Currently, you can only
-// modify integrations that have Aurora MySQL source DB clusters. Integrations with
-// Aurora PostgreSQL and RDS sources currently don't support modifying the
-// integration.
+// Modifies a zero-ETL integration with Amazon Redshift.
+//
+// Currently, you can only modify integrations that have Aurora MySQL source DB
+// clusters. Integrations with Aurora PostgreSQL and RDS sources currently don't
+// support modifying the integration.
 func (c *Client) ModifyIntegration(ctx context.Context, params *ModifyIntegrationInput, optFns ...func(*Options)) (*ModifyIntegrationOutput, error) {
 	if params == nil {
 		params = &ModifyIntegrationInput{}
@@ -38,9 +39,9 @@ type ModifyIntegrationInput struct {
 	// This member is required.
 	IntegrationIdentifier *string
 
-	// A new data filter for the integration. For more information, see Data filtering
-	// for Aurora zero-ETL integrations with Amazon Redshift (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html)
-	// .
+	// A new data filter for the integration. For more information, see [Data filtering for Aurora zero-ETL integrations with Amazon Redshift].
+	//
+	// [Data filtering for Aurora zero-ETL integrations with Amazon Redshift]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html
 	DataFilter *string
 
 	// A new description for the integration.
@@ -55,9 +56,10 @@ type ModifyIntegrationInput struct {
 // A zero-ETL integration with Amazon Redshift.
 type ModifyIntegrationOutput struct {
 
-	// The encryption context for the integration. For more information, see
-	// Encryption context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
-	// in the Amazon Web Services Key Management Service Developer Guide.
+	// The encryption context for the integration. For more information, see [Encryption context] in the
+	// Amazon Web Services Key Management Service Developer Guide.
+	//
+	// [Encryption context]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
 	AdditionalEncryptionContext map[string]string
 
 	// The time when the integration was created, in Universal Coordinated Time (UTC).
@@ -90,8 +92,9 @@ type ModifyIntegrationOutput struct {
 	// The current status of the integration.
 	Status types.IntegrationStatus
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	// The ARN of the Redshift data warehouse used as the target for replication.

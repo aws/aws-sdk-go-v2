@@ -6,7 +6,7 @@
 // Amazon Web Services Private CA Connector for Active Directory creates a
 // connector between Amazon Web Services Private CA and Active Directory (AD) that
 // enables you to provision security certificates for AD signed by a private CA
-// that you own. For more information, see Amazon Web Services Private CA
-// Connector for Active Directory (https://docs.aws.amazon.com/privateca/latest/userguide/ad-connector.html)
-// .
+// that you own. For more information, see [Amazon Web Services Private CA Connector for Active Directory].
+//
+// [Amazon Web Services Private CA Connector for Active Directory]: https://docs.aws.amazon.com/privateca/latest/userguide/ad-connector.html
 package pcaconnectorad

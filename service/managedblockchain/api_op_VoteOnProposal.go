@@ -13,8 +13,9 @@ import (
 
 // Casts a vote for a specified ProposalId on behalf of a member. The member to
 // vote as, specified by VoterMemberId , must be in the same Amazon Web Services
-// account as the principal that calls the action. Applies only to Hyperledger
-// Fabric.
+// account as the principal that calls the action.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) VoteOnProposal(ctx context.Context, params *VoteOnProposalInput, optFns ...func(*Options)) (*VoteOnProposalOutput, error) {
 	if params == nil {
 		params = &VoteOnProposalInput{}
@@ -32,17 +33,17 @@ func (c *Client) VoteOnProposal(ctx context.Context, params *VoteOnProposalInput
 
 type VoteOnProposalInput struct {
 
-	// The unique identifier of the network.
+	//  The unique identifier of the network.
 	//
 	// This member is required.
 	NetworkId *string
 
-	// The unique identifier of the proposal.
+	//  The unique identifier of the proposal.
 	//
 	// This member is required.
 	ProposalId *string
 
-	// The value of the vote.
+	//  The value of the vote.
 	//
 	// This member is required.
 	Vote types.VoteValue

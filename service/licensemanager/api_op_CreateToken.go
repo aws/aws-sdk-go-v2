@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a long-lived token. A refresh token is a JWT token used to get an
-// access token. With an access token, you can call AssumeRoleWithWebIdentity to
-// get role credentials that you can use to call License Manager to manage the
-// specified license.
+// Creates a long-lived token.
+//
+// A refresh token is a JWT token used to get an access token. With an access
+// token, you can call AssumeRoleWithWebIdentity to get role credentials that you
+// can use to call License Manager to manage the specified license.
 func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optFns ...func(*Options)) (*CreateTokenOutput, error) {
 	if params == nil {
 		params = &CreateTokenInput{}

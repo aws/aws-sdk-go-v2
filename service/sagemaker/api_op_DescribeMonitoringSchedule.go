@@ -71,7 +71,7 @@ type DescribeMonitoringScheduleOutput struct {
 	// This member is required.
 	MonitoringScheduleStatus types.ScheduleStatus
 
-	// The name of the endpoint for the monitoring job.
+	//  The name of the endpoint for the monitoring job.
 	EndpointName *string
 
 	// A string, up to one KB in size, that contains the reason a monitoring job
@@ -83,9 +83,13 @@ type DescribeMonitoringScheduleOutput struct {
 
 	// The type of the monitoring job that this schedule runs. This is one of the
 	// following values.
+	//
 	//   - DATA_QUALITY - The schedule is for a data quality monitoring job.
+	//
 	//   - MODEL_QUALITY - The schedule is for a model quality monitoring job.
+	//
 	//   - MODEL_BIAS - The schedule is for a bias monitoring job.
+	//
 	//   - MODEL_EXPLAINABILITY - The schedule is for an explainability monitoring job.
 	MonitoringType types.MonitoringType
 

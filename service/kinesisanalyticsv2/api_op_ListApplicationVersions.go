@@ -13,9 +13,12 @@ import (
 
 // Lists all the versions for the specified application, including versions that
 // were rolled back. The response also includes a summary of the configuration
-// associated with each version. To get the complete description of a specific
-// application version, invoke the DescribeApplicationVersion operation. This
-// operation is supported only for Managed Service for Apache Flink.
+// associated with each version.
+//
+// To get the complete description of a specific application version, invoke the DescribeApplicationVersion
+// operation.
+//
+// This operation is supported only for Managed Service for Apache Flink.
 func (c *Client) ListApplicationVersions(ctx context.Context, params *ListApplicationVersionsInput, optFns ...func(*Options)) (*ListApplicationVersionsOutput, error) {
 	if params == nil {
 		params = &ListApplicationVersionsInput{}
@@ -43,8 +46,9 @@ type ListApplicationVersionsInput struct {
 
 	// If a previous invocation of this operation returned a pagination token, pass it
 	// into this value to retrieve the next set of results. For more information about
-	// pagination, see Using the Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
-	// .
+	// pagination, see [Using the Amazon Command Line Interface's Pagination Options].
+	//
+	// [Using the Amazon Command Line Interface's Pagination Options]: https://docs.aws.amazon.com/cli/latest/userguide/pagination.html
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,16 +57,18 @@ type ListApplicationVersionsInput struct {
 type ListApplicationVersionsOutput struct {
 
 	// A list of the application versions and the associated configuration summaries.
-	// The list includes application versions that were rolled back. To get the
-	// complete description of a specific application version, invoke the
-	// DescribeApplicationVersion operation.
+	// The list includes application versions that were rolled back.
+	//
+	// To get the complete description of a specific application version, invoke the DescribeApplicationVersion
+	// operation.
 	ApplicationVersionSummaries []types.ApplicationVersionSummary
 
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. To retrieve the next set of items, pass this token into a
 	// subsequent invocation of this operation. For more information about pagination,
-	// see Using the Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
-	// .
+	// see [Using the Amazon Command Line Interface's Pagination Options].
+	//
+	// [Using the Amazon Command Line Interface's Pagination Options]: https://docs.aws.amazon.com/cli/latest/userguide/pagination.html
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

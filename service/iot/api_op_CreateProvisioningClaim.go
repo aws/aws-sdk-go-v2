@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Creates a provisioning claim. Requires permission to access the
-// CreateProvisioningClaim (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a provisioning claim.
+//
+// Requires permission to access the [CreateProvisioningClaim] action.
+//
+// [CreateProvisioningClaim]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateProvisioningClaim(ctx context.Context, params *CreateProvisioningClaimInput, optFns ...func(*Options)) (*CreateProvisioningClaimOutput, error) {
 	if params == nil {
 		params = &CreateProvisioningClaimInput{}

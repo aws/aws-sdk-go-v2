@@ -40,7 +40,7 @@ type DescribeApplicationsInput struct {
 // Result message containing a list of application descriptions.
 type DescribeApplicationsOutput struct {
 
-	// This parameter contains a list of ApplicationDescription .
+	// This parameter contains a list of ApplicationDescription.
 	Applications []types.ApplicationDescription
 
 	// Metadata pertaining to the operation's result.

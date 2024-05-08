@@ -13,19 +13,33 @@ import (
 
 // Lists the aliases for all keys in the caller's Amazon Web Services account and
 // Amazon Web Services Region. You can filter the list of aliases. For more
-// information, see Using aliases (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-managealias.html)
-// in the Amazon Web Services Payment Cryptography User Guide. This is a paginated
-// operation, which means that each response might contain only a subset of all the
-// aliases. When the response contains only a subset of aliases, it includes a
-// NextToken value. Use this value in a subsequent ListAliases request to get more
-// aliases. When you receive a response with no NextToken (or an empty or null
-// value), that means there are no more aliases to get. Cross-account use: This
-// operation can't be used across different Amazon Web Services accounts. Related
-// operations:
-//   - CreateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html)
-//   - DeleteAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html)
-//   - GetAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html)
-//   - UpdateAlias (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html)
+// information, see [Using aliases]in the Amazon Web Services Payment Cryptography User Guide.
+//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the aliases. When the response contains only a subset of
+// aliases, it includes a NextToken value. Use this value in a subsequent
+// ListAliases request to get more aliases. When you receive a response with no
+// NextToken (or an empty or null value), that means there are no more aliases to
+// get.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
+// Related operations:
+//
+// [CreateAlias]
+//
+// [DeleteAlias]
+//
+// [GetAlias]
+//
+// [UpdateAlias]
+//
+// [DeleteAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+// [UpdateAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UpdateAlias.html
+// [Using aliases]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-managealias.html
+// [CreateAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html
+// [GetAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}
@@ -45,9 +59,10 @@ type ListAliasesInput struct {
 
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer. This value is
-	// optional. If you include a value, it must be between 1 and 100, inclusive. If
-	// you do not include a value, it defaults to 50.
+	// than the specified number of items, but it might return fewer.
+	//
+	// This value is optional. If you include a value, it must be between 1 and 100,
+	// inclusive. If you do not include a value, it defaults to 50.
 	MaxResults *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -162,9 +177,10 @@ var _ ListAliasesAPIClient = (*Client)(nil)
 type ListAliasesPaginatorOptions struct {
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer. This value is
-	// optional. If you include a value, it must be between 1 and 100, inclusive. If
-	// you do not include a value, it defaults to 50.
+	// than the specified number of items, but it might return fewer.
+	//
+	// This value is optional. If you include a value, it must be between 1 and 100,
+	// inclusive. If you do not include a value, it defaults to 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

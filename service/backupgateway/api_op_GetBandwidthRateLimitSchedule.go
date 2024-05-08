@@ -32,9 +32,10 @@ func (c *Client) GetBandwidthRateLimitSchedule(ctx context.Context, params *GetB
 
 type GetBandwidthRateLimitScheduleInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
-	// operation to return a list of gateways for your account and Amazon Web Services
-	// Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the [ListGateways]ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
+	//
+	// [ListGateways]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
 	//
 	// This member is required.
 	GatewayArn *string
@@ -48,9 +49,10 @@ type GetBandwidthRateLimitScheduleOutput struct {
 	// no bandwidth rate limit intervals have been scheduled, the array is empty.
 	BandwidthRateLimitIntervals []types.BandwidthRateLimitInterval
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html)
-	// operation to return a list of gateways for your account and Amazon Web Services
-	// Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the [ListGateways]ListGateways operation
+	// to return a list of gateways for your account and Amazon Web Services Region.
+	//
+	// [ListGateways]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html
 	GatewayArn *string
 
 	// Metadata pertaining to the operation's result.

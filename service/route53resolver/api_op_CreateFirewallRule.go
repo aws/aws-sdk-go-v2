@@ -32,8 +32,11 @@ type CreateFirewallRuleInput struct {
 
 	// The action that DNS Firewall should take on a DNS query when it matches one of
 	// the domains in the rule's domain list:
+	//
 	//   - ALLOW - Permit the request to go through.
+	//
 	//   - ALERT - Permit the request and send metrics and logs to Cloud Watch.
+	//
 	//   - BLOCK - Disallow the request. This option requires additional details in the
 	//   rule's BlockResponse .
 	//
@@ -65,69 +68,96 @@ type CreateFirewallRuleInput struct {
 
 	// The setting that determines the processing order of the rule in the rule group.
 	// DNS Firewall processes the rules in a rule group by order of priority, starting
-	// from the lowest setting. You must specify a unique priority for each rule in a
-	// rule group. To make it easier to insert rules later, leave space between the
-	// numbers, for example, use 100, 200, and so on. You can change the priority
-	// setting for the rules in a rule group at any time.
+	// from the lowest setting.
+	//
+	// You must specify a unique priority for each rule in a rule group. To make it
+	// easier to insert rules later, leave space between the numbers, for example, use
+	// 100, 200, and so on. You can change the priority setting for the rules in a rule
+	// group at any time.
 	//
 	// This member is required.
 	Priority *int32
 
 	// The DNS record's type. This determines the format of the record value that you
 	// provided in BlockOverrideDomain . Used for the rule action BLOCK with a
-	// BlockResponse setting of OVERRIDE . This setting is required if the
-	// BlockResponse setting is OVERRIDE .
+	// BlockResponse setting of OVERRIDE .
+	//
+	// This setting is required if the BlockResponse setting is OVERRIDE .
 	BlockOverrideDnsType types.BlockOverrideDnsType
 
 	// The custom DNS record to send back in response to the query. Used for the rule
-	// action BLOCK with a BlockResponse setting of OVERRIDE . This setting is required
-	// if the BlockResponse setting is OVERRIDE .
+	// action BLOCK with a BlockResponse setting of OVERRIDE .
+	//
+	// This setting is required if the BlockResponse setting is OVERRIDE .
 	BlockOverrideDomain *string
 
 	// The recommended amount of time, in seconds, for the DNS resolver or web browser
 	// to cache the provided override record. Used for the rule action BLOCK with a
-	// BlockResponse setting of OVERRIDE . This setting is required if the
-	// BlockResponse setting is OVERRIDE .
+	// BlockResponse setting of OVERRIDE .
+	//
+	// This setting is required if the BlockResponse setting is OVERRIDE .
 	BlockOverrideTtl *int32
 
 	// The way that you want DNS Firewall to block the request, used with the rule
 	// action setting BLOCK .
+	//
 	//   - NODATA - Respond indicating that the query was successful, but no response
 	//   is available for it.
+	//
 	//   - NXDOMAIN - Respond indicating that the domain name that's in the query
 	//   doesn't exist.
+	//
 	//   - OVERRIDE - Provide a custom override in the response. This option requires
 	//   custom handling details in the rule's BlockOverride* settings.
+	//
 	// This setting is required if the rule action setting is BLOCK .
 	BlockResponse types.BlockResponse
 
-	// How you want the the rule to evaluate DNS redirection in the DNS redirection
-	// chain, such as CNAME, DNAME, ot ALIAS. Inspect_Redirection_Domain (Default)
-	// inspects all domains in the redirection chain. The individual domains in the
-	// redirection chain must be added to the allow domain list.
-	// Trust_Redirection_Domain inspects only the first domain in the redirection
+	//  How you want the the rule to evaluate DNS redirection in the DNS redirection
+	// chain, such as CNAME, DNAME, ot ALIAS.
+	//
+	// Inspect_Redirection_Domain (Default) inspects all domains in the redirection
+	// chain. The individual domains in the redirection chain must be added to the
+	// allow domain list.
+	//
+	// Trust_Redirection_Domain  inspects only the first domain in the redirection
 	// chain. You don't need to add the subsequent domains in the redirection list to
 	// the domain alloww list.
 	FirewallDomainRedirectionAction types.FirewallDomainRedirectionAction
 
-	// The DNS query type you want the rule to evaluate. Allowed values are;
+	//  The DNS query type you want the rule to evaluate. Allowed values are;
+	//
 	//   - A: Returns an IPv4 address.
+	//
 	//   - AAAA: Returns an Ipv6 address.
+	//
 	//   - CAA: Restricts CAs that can create SSL/TLS certifications for the domain.
+	//
 	//   - CNAME: Returns another domain name.
+	//
 	//   - DS: Record that identifies the DNSSEC signing key of a delegated zone.
+	//
 	//   - MX: Specifies mail servers.
+	//
 	//   - NAPTR: Regular-expression-based rewriting of domain names.
+	//
 	//   - NS: Authoritative name servers.
+	//
 	//   - PTR: Maps an IP address to a domain name.
+	//
 	//   - SOA: Start of authority record for the zone.
+	//
 	//   - SPF: Lists the servers authorized to send emails from a domain.
+	//
 	//   - SRV: Application specific values that identify servers.
+	//
 	//   - TXT: Verifies email senders and application-specific values.
+	//
 	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
 	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for
-	//   example, TYPE28. For more information, see List of DNS record types (https://en.wikipedia.org/wiki/List_of_DNS_record_types)
-	//   .
+	//   example, TYPE28. For more information, see [List of DNS record types].
+	//
+	// [List of DNS record types]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
 	Qtype *string
 
 	noSmithyDocumentSerde

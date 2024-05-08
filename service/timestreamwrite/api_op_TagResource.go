@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a set of tags with a Timestream resource. You can then activate
+//	Associates a set of tags with a Timestream resource. You can then activate
+//
 // these user-defined tags so that they appear on the Billing and Cost Management
 // console for cost allocation tracking.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
@@ -32,13 +33,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// Identifies the Timestream resource to which tags should be added. This value is
-	// an Amazon Resource Name (ARN).
+	//  Identifies the Timestream resource to which tags should be added. This value
+	// is an Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// The tags to be assigned to the Timestream resource.
+	//  The tags to be assigned to the Timestream resource.
 	//
 	// This member is required.
 	Tags []types.Tag

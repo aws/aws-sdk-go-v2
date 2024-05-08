@@ -41,9 +41,11 @@ type DescribeAccessPolicyInput struct {
 
 type DescribeAccessPolicyOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the access policy, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}
+	// The [ARN] of the access policy, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:access-policy/${AccessPolicyId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AccessPolicyArn *string

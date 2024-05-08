@@ -34,12 +34,12 @@ func (c *Client) GetAnnotationStoreVersion(ctx context.Context, params *GetAnnot
 
 type GetAnnotationStoreVersionInput struct {
 
-	// The name given to an annotation store version to distinguish it from others.
+	//  The name given to an annotation store version to distinguish it from others.
 	//
 	// This member is required.
 	Name *string
 
-	// The name given to an annotation store version to distinguish it from others.
+	//  The name given to an annotation store version to distinguish it from others.
 	//
 	// This member is required.
 	VersionName *string
@@ -49,67 +49,67 @@ type GetAnnotationStoreVersionInput struct {
 
 type GetAnnotationStoreVersionOutput struct {
 
-	// The time stamp for when an annotation store version was created.
+	//  The time stamp for when an annotation store version was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The description for an annotation store version.
+	//  The description for an annotation store version.
 	//
 	// This member is required.
 	Description *string
 
-	// The annotation store version ID.
+	//  The annotation store version ID.
 	//
 	// This member is required.
 	Id *string
 
-	// The name of the annotation store.
+	//  The name of the annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of an annotation store version.
+	//  The status of an annotation store version.
 	//
 	// This member is required.
 	Status types.VersionStatus
 
-	// The status of an annotation store version.
+	//  The status of an annotation store version.
 	//
 	// This member is required.
 	StatusMessage *string
 
-	// The store ID for annotation store version.
+	//  The store ID for annotation store version.
 	//
 	// This member is required.
 	StoreId *string
 
-	// Any tags associated with an annotation store version.
+	//  Any tags associated with an annotation store version.
 	//
 	// This member is required.
 	Tags map[string]string
 
-	// The time stamp for when an annotation store version was updated.
+	//  The time stamp for when an annotation store version was updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The Arn for the annotation store.
+	//  The Arn for the annotation store.
 	//
 	// This member is required.
 	VersionArn *string
 
-	// The name given to an annotation store version to distinguish it from others.
+	//  The name given to an annotation store version to distinguish it from others.
 	//
 	// This member is required.
 	VersionName *string
 
-	// The size of the annotation store version in Bytes.
+	//  The size of the annotation store version in Bytes.
 	//
 	// This member is required.
 	VersionSizeBytes *int64
 
-	// The options for an annotation store version.
+	//  The options for an annotation store version.
 	VersionOptions types.VersionOptions
 
 	// Metadata pertaining to the operation's result.
@@ -270,12 +270,13 @@ type AnnotationStoreVersionCreatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetAnnotationStoreVersionInput, *GetAnnotationStoreVersionOutput, error) (bool, error)
 }
 
@@ -498,12 +499,13 @@ type AnnotationStoreVersionDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetAnnotationStoreVersionInput, *GetAnnotationStoreVersionOutput, error) (bool, error)
 }
 

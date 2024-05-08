@@ -30,12 +30,14 @@ func (c *Client) ListPlaceIndexes(ctx context.Context, params *ListPlaceIndexesI
 type ListPlaceIndexesInput struct {
 
 	// An optional limit for the maximum number of results returned in a single call.
+	//
 	// Default value: 100
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
-	// response. If no token is provided, the default page is the first page. Default
-	// value: null
+	// response. If no token is provided, the default page is the first page.
+	//
+	// Default value: null
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -175,6 +177,7 @@ var _ ListPlaceIndexesAPIClient = (*Client)(nil)
 // ListPlaceIndexesPaginatorOptions is the paginator options for ListPlaceIndexes
 type ListPlaceIndexesPaginatorOptions struct {
 	// An optional limit for the maximum number of results returned in a single call.
+	//
 	// Default value: 100
 	Limit int32
 

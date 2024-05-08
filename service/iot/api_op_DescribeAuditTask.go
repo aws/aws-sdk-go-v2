@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Gets information about a Device Defender audit. Requires permission to access
-// the DescribeAuditTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about a Device Defender audit.
+//
+// Requires permission to access the [DescribeAuditTask] action.
+//
+// [DescribeAuditTask]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeAuditTask(ctx context.Context, params *DescribeAuditTaskInput, optFns ...func(*Options)) (*DescribeAuditTaskOutput, error) {
 	if params == nil {
 		params = &DescribeAuditTaskInput{}

@@ -12,14 +12,17 @@ import (
 )
 
 // Creates a launch of a given feature. Before you create a launch, you must
-// create the feature to use for the launch. You can use a launch to safely
-// validate new features by serving them to a specified percentage of your users
-// while you roll out the feature. You can monitor the performance of the new
-// feature to help you decide when to ramp up traffic to more users. This helps you
-// reduce risk and identify unintended consequences before you fully launch the
-// feature. Don't use this operation to update an existing launch. Instead, use
-// UpdateLaunch (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html)
-// .
+// create the feature to use for the launch.
+//
+// You can use a launch to safely validate new features by serving them to a
+// specified percentage of your users while you roll out the feature. You can
+// monitor the performance of the new feature to help you decide when to ramp up
+// traffic to more users. This helps you reduce risk and identify unintended
+// consequences before you fully launch the feature.
+//
+// Don't use this operation to update an existing launch. Instead, use [UpdateLaunch].
+//
+// [UpdateLaunch]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html
 func (c *Client) CreateLaunch(ctx context.Context, params *CreateLaunchInput, optFns ...func(*Options)) (*CreateLaunchOutput, error) {
 	if params == nil {
 		params = &CreateLaunchInput{}
@@ -71,14 +74,20 @@ type CreateLaunchInput struct {
 	// feature variations during each step of the launch.
 	ScheduledSplitsConfig *types.ScheduledSplitsLaunchConfig
 
-	// Assigns one or more tags (key-value pairs) to the launch. Tags can help you
-	// organize and categorize your resources. You can also use them to scope user
-	// permissions by granting a user permission to access or change only resources
-	// with certain tag values. Tags don't have any semantic meaning to Amazon Web
-	// Services and are interpreted strictly as strings of characters. You can
-	// associate as many as 50 tags with a launch. For more information, see Tagging
-	// Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// Assigns one or more tags (key-value pairs) to the launch.
+	//
+	// Tags can help you organize and categorize your resources. You can also use them
+	// to scope user permissions by granting a user permission to access or change only
+	// resources with certain tag values.
+	//
+	// Tags don't have any semantic meaning to Amazon Web Services and are interpreted
+	// strictly as strings of characters.
+	//
+	// You can associate as many as 50 tags with a launch.
+	//
+	// For more information, see [Tagging Amazon Web Services resources].
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

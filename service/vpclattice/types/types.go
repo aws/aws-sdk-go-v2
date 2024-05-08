@@ -82,9 +82,11 @@ type ForwardAction struct {
 	// prioritization and selection of each target group. This means that requests are
 	// distributed to individual target groups based on their weights. For example, if
 	// two target groups have the same weight, each target group receives half of the
-	// traffic. The default value is 1. This means that if only one target group is
-	// provided, there is no need to set the weight; 100% of traffic will go to that
-	// target group.
+	// traffic.
+	//
+	// The default value is 1. This means that if only one target group is provided,
+	// there is no need to set the weight; 100% of traffic will go to that target
+	// group.
 	//
 	// This member is required.
 	TargetGroups []WeightedTargetGroup
@@ -379,7 +381,7 @@ type RuleSummary struct {
 	// The name of the rule.
 	Name *string
 
-	// The priority of the rule.
+	//  The priority of the rule.
 	Priority *int32
 
 	noSmithyDocumentSerde
@@ -461,7 +463,7 @@ type ServiceNetworkServiceAssociationSummary struct {
 	// The account that created the association.
 	CreatedBy *string
 
-	// The custom domain name of the service.
+	//  The custom domain name of the service.
 	CustomDomainName *string
 
 	// DNS information about the service.
@@ -570,7 +572,7 @@ type ServiceSummary struct {
 	// The date and time that the service was created, specified in ISO-8601 format.
 	CreatedAt *time.Time
 
-	// The custom domain name of the service.
+	//  The custom domain name of the service.
 	CustomDomainName *string
 
 	// DNS information about the service.
@@ -728,13 +730,19 @@ type TargetSummary struct {
 	ReasonCode *string
 
 	// The status of the target.
+	//
 	//   - Draining : The target is being deregistered. No new connections will be sent
 	//   to this target while current connections are being drained. Default draining
 	//   time is 5 minutes.
+	//
 	//   - Unavailable : Health checks are unavailable for the target group.
+	//
 	//   - Healthy : The target is healthy.
+	//
 	//   - Unhealthy : The target is unhealthy.
+	//
 	//   - Initial : Initial health checks on the target are being performed.
+	//
 	//   - Unused : Target group is not used in a service.
 	Status TargetStatus
 

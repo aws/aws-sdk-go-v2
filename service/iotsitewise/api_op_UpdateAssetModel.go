@@ -13,15 +13,21 @@ import (
 
 // Updates an asset model and all of the assets that were created from the model.
 // Each asset created from the model inherits the updated asset model's property
-// and hierarchy definitions. For more information, see Updating assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html)
-// in the IoT SiteWise User Guide. This operation overwrites the existing model
-// with the provided model. To avoid deleting your asset model's properties or
-// hierarchies, you must include their IDs and definitions in the updated asset
-// model payload. For more information, see DescribeAssetModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html)
-// . If you remove a property from an asset model, IoT SiteWise deletes all
-// previous data for that property. If you remove a hierarchy definition from an
-// asset model, IoT SiteWise disassociates every asset associated with that
-// hierarchy. You can't change the type or data type of an existing property.
+// and hierarchy definitions. For more information, see [Updating assets and models]in the IoT SiteWise User
+// Guide.
+//
+// This operation overwrites the existing model with the provided model. To avoid
+// deleting your asset model's properties or hierarchies, you must include their
+// IDs and definitions in the updated asset model payload. For more information,
+// see [DescribeAssetModel].
+//
+// If you remove a property from an asset model, IoT SiteWise deletes all previous
+// data for that property. If you remove a hierarchy definition from an asset
+// model, IoT SiteWise disassociates every asset associated with that hierarchy.
+// You can't change the type or data type of an existing property.
+//
+// [DescribeAssetModel]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html
+// [Updating assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
 func (c *Client) UpdateAssetModel(ctx context.Context, params *UpdateAssetModelInput, optFns ...func(*Options)) (*UpdateAssetModelOutput, error) {
 	if params == nil {
 		params = &UpdateAssetModelInput{}
@@ -41,8 +47,9 @@ type UpdateAssetModelInput struct {
 
 	// The ID of the asset model to update. This can be either the actual ID in UUID
 	// format, or else externalId: followed by the external ID, if it has one. For
-	// more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelId *string
@@ -56,9 +63,12 @@ type UpdateAssetModelInput struct {
 	// (such as attributes, measurements, transforms, and metrics) and child composite
 	// models that model parts of your industrial equipment. Each composite model has a
 	// type that defines the properties that the composite model supports. Use
-	// composite models to define alarms on this asset model. When creating custom
-	// composite models, you need to use CreateAssetModelCompositeModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html)
-	// . For more information, see .
+	// composite models to define alarms on this asset model.
+	//
+	// When creating custom composite models, you need to use [CreateAssetModelCompositeModel]. For more information,
+	// see .
+	//
+	// [CreateAssetModelCompositeModel]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
 	AssetModelCompositeModels []types.AssetModelCompositeModel
 
 	// A description for the asset model.
@@ -66,23 +76,30 @@ type UpdateAssetModelInput struct {
 
 	// An external ID to assign to the asset model. The asset model must not already
 	// have an external ID. The external ID must be unique within your Amazon Web
-	// Services account. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
-	// in the IoT SiteWise User Guide.
+	// Services account. For more information, see [Using external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Using external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
 	AssetModelExternalId *string
 
 	// The updated hierarchy definitions of the asset model. Each hierarchy specifies
 	// an asset model whose assets can be children of any other assets created from
-	// this asset model. For more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
-	// in the IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset
-	// model. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
+	// this asset model. For more information, see [Asset hierarchies]in the IoT SiteWise User Guide.
+	//
+	// You can specify up to 10 hierarchies per asset model. For more information, see [Quotas]
 	// in the IoT SiteWise User Guide.
+	//
+	// [Asset hierarchies]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
+	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelHierarchies []types.AssetModelHierarchy
 
-	// The updated property definitions of the asset model. For more information, see
-	// Asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
-	// in the IoT SiteWise User Guide. You can specify up to 200 properties per asset
-	// model. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
+	// The updated property definitions of the asset model. For more information, see [Asset properties]
 	// in the IoT SiteWise User Guide.
+	//
+	// You can specify up to 200 properties per asset model. For more information, see [Quotas]
+	// in the IoT SiteWise User Guide.
+	//
+	// [Asset properties]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html
+	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelProperties []types.AssetModelProperty
 
 	// A unique case-sensitive identifier that you can provide to ensure the

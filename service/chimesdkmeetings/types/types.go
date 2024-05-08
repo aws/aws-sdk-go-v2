@@ -8,34 +8,43 @@ import (
 
 // An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and JoinToken
 // . The JoinToken allows a client to authenticate and join as the specified
-// attendee. The JoinToken expires when the meeting ends, or when DeleteAttendee
-// is called. After that, the attendee is unable to join the meeting. We recommend
-// securely transferring each JoinToken from your server application to the client
-// so that no other client has access to the token except for the one authorized to
-// represent the attendee.
+// attendee. The JoinToken expires when the meeting ends, or when DeleteAttendee is called.
+// After that, the attendee is unable to join the meeting.
+//
+// We recommend securely transferring each JoinToken from your server application
+// to the client so that no other client has access to the token except for the one
+// authorized to represent the attendee.
 type Attendee struct {
 
 	// The Amazon Chime SDK attendee ID.
 	AttendeeId *string
 
-	// The capabilities assigned to an attendee: audio, video, or content. You use the
-	// capabilities with a set of values that control what the capabilities can do,
-	// such as SendReceive data. For more information about those values, see . When
-	// using capabilities, be aware of these corner cases:
+	// The capabilities assigned to an attendee: audio, video, or content.
+	//
+	// You use the capabilities with a set of values that control what the
+	// capabilities can do, such as SendReceive data. For more information about those
+	// values, see .
+	//
+	// When using capabilities, be aware of these corner cases:
+	//
 	//   - If you specify MeetingFeatures:Video:MaxResolution:None when you create a
 	//   meeting, all API requests that include SendReceive , Send , or Receive for
 	//   AttendeeCapabilities:Video will be rejected with ValidationError 400 .
+	//
 	//   - If you specify MeetingFeatures:Content:MaxResolution:None when you create a
 	//   meeting, all API requests that include SendReceive , Send , or Receive for
 	//   AttendeeCapabilities:Content will be rejected with ValidationError 400 .
+	//
 	//   - You can't set content capabilities to SendReceive or Receive unless you also
 	//   set video capabilities to SendReceive or Receive . If you don't set the video
 	//   capability to receive, the response will contain an HTTP 400 Bad Request status
 	//   code. However, you can set your video capability to receive and you set your
 	//   content capability to not receive.
+	//
 	//   - When you change an audio capability from None or Receive to Send or
 	//   SendReceive , and if the attendee left their microphone unmuted, audio will
 	//   flow from the attendee to the other meeting participants.
+	//
 	//   - When you change a video or content capability from None or Receive to Send
 	//   or SendReceive , and if the attendee turned on their video or content streams,
 	//   remote attendees can receive those streams, but only after media renegotiation
@@ -43,9 +52,12 @@ type Attendee struct {
 	Capabilities *AttendeeCapabilities
 
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application. Pattern:
-	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
-	// reserved. You can't configure a value that uses this prefix. Case insensitive.
+	// to an identity managed by a builder application.
+	//
+	// Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
+	//
+	// Values that begin with aws: are reserved. You can't configure a value that uses
+	// this prefix. Case insensitive.
 	ExternalUserId *string
 
 	// The join token used by the Amazon Chime SDK attendee.
@@ -54,24 +66,32 @@ type Attendee struct {
 	noSmithyDocumentSerde
 }
 
-// The media capabilities of an attendee: audio, video, or content. You use the
-// capabilities with a set of values that control what the capabilities can do,
-// such as SendReceive data. For more information, refer to and . When using
-// capabilities, be aware of these corner cases:
+// The media capabilities of an attendee: audio, video, or content.
+//
+// You use the capabilities with a set of values that control what the
+// capabilities can do, such as SendReceive data. For more information, refer to
+// and .
+//
+// When using capabilities, be aware of these corner cases:
+//
 //   - If you specify MeetingFeatures:Video:MaxResolution:None when you create a
 //     meeting, all API requests that include SendReceive , Send , or Receive for
 //     AttendeeCapabilities:Video will be rejected with ValidationError 400 .
+//
 //   - If you specify MeetingFeatures:Content:MaxResolution:None when you create a
 //     meeting, all API requests that include SendReceive , Send , or Receive for
 //     AttendeeCapabilities:Content will be rejected with ValidationError 400 .
+//
 //   - You can't set content capabilities to SendReceive or Receive unless you also
 //     set video capabilities to SendReceive or Receive . If you don't set the video
 //     capability to receive, the response will contain an HTTP 400 Bad Request status
 //     code. However, you can set your video capability to receive and you set your
 //     content capability to not receive.
+//
 //   - When you change an audio capability from None or Receive to Send or
 //     SendReceive , and an attendee unmutes their microphone, audio flows from the
 //     attendee to the other meeting participants.
+//
 //   - When you change a video or content capability from None or Receive to Send
 //     or SendReceive , and the attendee turns on their video or content streams,
 //     remote attendees can receive those streams, but only after media renegotiation
@@ -96,10 +116,11 @@ type AttendeeCapabilities struct {
 	noSmithyDocumentSerde
 }
 
-// Lists the maximum number of attendees allowed into the meeting. If you specify
-// FHD for MeetingFeatures:Video:MaxResolution , or if you specify UHD for
-// MeetingFeatures:Content:MaxResolution , the maximum number of attendees changes
-// from the default of 250 to 25 .
+// Lists the maximum number of attendees allowed into the meeting.
+//
+// If you specify FHD for MeetingFeatures:Video:MaxResolution , or if you specify
+// UHD for MeetingFeatures:Content:MaxResolution , the maximum number of attendees
+// changes from the default of 250 to 25 .
 type AttendeeFeatures struct {
 
 	// The maximum number of attendees allowed into the meeting.
@@ -130,14 +151,18 @@ type AudioFeatures struct {
 }
 
 // Lists the content (screen share) features for the meeting. Applies to all
-// attendees. If you specify MeetingFeatures:Content:MaxResolution:None when you
-// create a meeting, all API requests that include SendReceive , Send , or Receive
-// for AttendeeCapabilities:Content will be rejected with ValidationError 400 .
+// attendees.
+//
+// If you specify MeetingFeatures:Content:MaxResolution:None when you create a
+// meeting, all API requests that include SendReceive , Send , or Receive for
+// AttendeeCapabilities:Content will be rejected with ValidationError 400 .
 type ContentFeatures struct {
 
-	// The maximum resolution for the meeting content. Defaults to FHD . To use UHD ,
-	// you must also provide a MeetingFeatures:Attendee:MaxCount value and override
-	// the default size limit of 250 attendees.
+	// The maximum resolution for the meeting content.
+	//
+	// Defaults to FHD . To use UHD , you must also provide a
+	// MeetingFeatures:Attendee:MaxCount value and override the default size limit of
+	// 250 attendees.
 	MaxResolution ContentResolution
 
 	noSmithyDocumentSerde
@@ -155,9 +180,12 @@ type CreateAttendeeError struct {
 	ErrorMessage *string
 
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application. Pattern:
-	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
-	// reserved. You can't configure a value that uses this prefix. Case insensitive.
+	// to an identity managed by a builder application.
+	//
+	// Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
+	//
+	// Values that begin with aws: are reserved. You can't configure a value that uses
+	// this prefix. Case insensitive.
 	ExternalUserId *string
 
 	noSmithyDocumentSerde
@@ -168,9 +196,12 @@ type CreateAttendeeError struct {
 type CreateAttendeeRequestItem struct {
 
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application. Pattern:
-	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
-	// reserved. You can't configure a value that uses this prefix. Case insensitive.
+	// to an identity managed by a builder application.
+	//
+	// Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
+	//
+	// Values that begin with aws: are reserved. You can't configure a value that uses
+	// this prefix. Case insensitive.
 	//
 	// This member is required.
 	ExternalUserId *string
@@ -213,127 +244,168 @@ type EngineTranscribeMedicalSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings specific for Amazon Transcribe as the live transcription engine. If
-// you specify an invalid combination of parameters, a TranscriptFailed event will
-// be sent with the contents of the BadRequestException generated by Amazon
+// Settings specific for Amazon Transcribe as the live transcription engine.
+//
+// If you specify an invalid combination of parameters, a TranscriptFailed event
+// will be sent with the contents of the BadRequestException generated by Amazon
 // Transcribe. For more information on each parameter and which combinations are
-// valid, refer to the StartStreamTranscription (https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html)
-// API in the Amazon Transcribe Developer Guide.
+// valid, refer to the [StartStreamTranscription]API in the Amazon Transcribe Developer Guide.
+//
+// [StartStreamTranscription]: https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html
 type EngineTranscribeSettings struct {
 
 	// Labels all personally identifiable information (PII) identified in your
-	// transcript. If you don't include PiiEntityTypes , all PII is identified. You
-	// can’t set ContentIdentificationType and ContentRedactionType .
+	// transcript. If you don't include PiiEntityTypes , all PII is identified.
+	//
+	// You can’t set ContentIdentificationType and ContentRedactionType .
 	ContentIdentificationType TranscribeContentIdentificationType
 
 	// Content redaction is performed at the segment level. If you don't include
-	// PiiEntityTypes , all PII is redacted. You can’t set ContentRedactionType and
-	// ContentIdentificationType .
+	// PiiEntityTypes , all PII is redacted.
+	//
+	// You can’t set ContentRedactionType and ContentIdentificationType .
 	ContentRedactionType TranscribeContentRedactionType
 
 	// Enables partial result stabilization for your transcription. Partial result
 	// stabilization can reduce latency in your output, but may impact accuracy.
 	EnablePartialResultsStabilization bool
 
-	// Enables automatic language identification for your transcription. If you
-	// include IdentifyLanguage , you can optionally use LanguageOptions to include a
-	// list of language codes that you think may be present in your audio stream.
-	// Including language options can improve transcription accuracy. You can also use
-	// PreferredLanguage to include a preferred language. Doing so can help Amazon
-	// Transcribe identify the language faster. You must include either LanguageCode
-	// or IdentifyLanguage . Language identification can't be combined with custom
-	// language models or redaction.
+	// Enables automatic language identification for your transcription.
+	//
+	// If you include IdentifyLanguage , you can optionally use LanguageOptions to
+	// include a list of language codes that you think may be present in your audio
+	// stream. Including language options can improve transcription accuracy.
+	//
+	// You can also use PreferredLanguage to include a preferred language. Doing so
+	// can help Amazon Transcribe identify the language faster.
+	//
+	// You must include either LanguageCode or IdentifyLanguage .
+	//
+	// Language identification can't be combined with custom language models or
+	// redaction.
 	IdentifyLanguage bool
 
-	// Specify the language code that represents the language spoken. If you're unsure
-	// of the language spoken in your audio, consider using IdentifyLanguage to enable
-	// automatic language identification.
+	// Specify the language code that represents the language spoken.
+	//
+	// If you're unsure of the language spoken in your audio, consider using
+	// IdentifyLanguage to enable automatic language identification.
 	LanguageCode TranscribeLanguageCode
 
 	// Specify the name of the custom language model that you want to use when
 	// processing your transcription. Note that language model names are case
-	// sensitive. The language of the specified language model must match the language
-	// code. If the languages don't match, the custom language model isn't applied.
-	// There are no errors or warnings associated with a language mismatch. If you use
-	// Amazon Transcribe in multiple Regions, the custom language model must be
-	// available in Amazon Transcribe in each Region.
+	// sensitive.
+	//
+	// The language of the specified language model must match the language code. If
+	// the languages don't match, the custom language model isn't applied. There are no
+	// errors or warnings associated with a language mismatch.
+	//
+	// If you use Amazon Transcribe in multiple Regions, the custom language model
+	// must be available in Amazon Transcribe in each Region.
 	LanguageModelName *string
 
 	// Specify two or more language codes that represent the languages you think may
 	// be present in your media; including more than five is not recommended. If you're
-	// unsure what languages are present, do not include this parameter. Including
-	// language options can improve the accuracy of language identification. If you
-	// include LanguageOptions , you must also include IdentifyLanguage . You can only
-	// include one language dialect per language. For example, you cannot include en-US
-	// and en-AU .
+	// unsure what languages are present, do not include this parameter.
+	//
+	// Including language options can improve the accuracy of language identification.
+	//
+	// If you include LanguageOptions , you must also include IdentifyLanguage .
+	//
+	// You can only include one language dialect per language. For example, you cannot
+	// include en-US and en-AU .
 	LanguageOptions *string
 
 	// Specify the level of stability to use when you enable partial results
-	// stabilization ( EnablePartialResultsStabilization ). Low stability provides the
-	// highest accuracy. High stability transcribes faster, but with slightly lower
-	// accuracy.
+	// stabilization ( EnablePartialResultsStabilization ).
+	//
+	// Low stability provides the highest accuracy. High stability transcribes faster,
+	// but with slightly lower accuracy.
 	PartialResultsStability TranscribePartialResultsStability
 
 	// Specify which types of personally identifiable information (PII) you want to
 	// redact in your transcript. You can include as many types as you'd like, or you
-	// can select ALL . Values must be comma-separated and can include: ADDRESS ,
-	// BANK_ACCOUNT_NUMBER , BANK_ROUTING , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY
-	// CREDIT_DEBIT_NUMBER , EMAIL , NAME , PHONE , PIN , SSN , or ALL . Note that if
-	// you include PiiEntityTypes , you must also include ContentIdentificationType or
-	// ContentRedactionType . If you include ContentRedactionType or
-	// ContentIdentificationType , but do not include PiiEntityTypes, all PII is
-	// redacted or identified.
+	// can select ALL .
+	//
+	// Values must be comma-separated and can include: ADDRESS , BANK_ACCOUNT_NUMBER ,
+	// BANK_ROUTING , CREDIT_DEBIT_CVV , CREDIT_DEBIT_EXPIRY CREDIT_DEBIT_NUMBER ,
+	// EMAIL , NAME , PHONE , PIN , SSN , or ALL .
+	//
+	// Note that if you include PiiEntityTypes , you must also include
+	// ContentIdentificationType or ContentRedactionType .
+	//
+	// If you include ContentRedactionType or ContentIdentificationType , but do not
+	// include PiiEntityTypes, all PII is redacted or identified.
 	PiiEntityTypes *string
 
 	// Specify a preferred language from the subset of languages codes you specified
-	// in LanguageOptions . You can only use this parameter if you include
-	// IdentifyLanguage and LanguageOptions .
+	// in LanguageOptions .
+	//
+	// You can only use this parameter if you include IdentifyLanguage and
+	// LanguageOptions .
 	PreferredLanguage TranscribeLanguageCode
 
-	// The Amazon Web Services Region in which to use Amazon Transcribe. If you don't
-	// specify a Region, then the MediaRegion (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html)
-	// of the meeting is used. However, if Amazon Transcribe is not available in the
-	// MediaRegion , then a TranscriptFailed event is sent. Use auto to use Amazon
-	// Transcribe in a Region near the meeting’s MediaRegion . For more information,
-	// refer to Choosing a transcription Region (https://docs.aws.amazon.com/chime-sdk/latest/dg/transcription-options.html#choose-region)
-	// in the Amazon Chime SDK Developer Guide.
+	// The Amazon Web Services Region in which to use Amazon Transcribe.
+	//
+	// If you don't specify a Region, then the [MediaRegion] of the meeting is used. However, if
+	// Amazon Transcribe is not available in the MediaRegion , then a TranscriptFailed
+	// event is sent.
+	//
+	// Use auto to use Amazon Transcribe in a Region near the meeting’s MediaRegion .
+	// For more information, refer to [Choosing a transcription Region]in the Amazon Chime SDK Developer Guide.
+	//
+	// [Choosing a transcription Region]: https://docs.aws.amazon.com/chime-sdk/latest/dg/transcription-options.html#choose-region
+	// [MediaRegion]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html
 	Region TranscribeRegion
 
-	// Specify how you want your vocabulary filter applied to your transcript. To
-	// replace words with *** , choose mask . To delete words, choose remove . To flag
-	// words without changing them, choose tag .
+	// Specify how you want your vocabulary filter applied to your transcript.
+	//
+	// To replace words with *** , choose mask .
+	//
+	// To delete words, choose remove .
+	//
+	// To flag words without changing them, choose tag .
 	VocabularyFilterMethod TranscribeVocabularyFilterMethod
 
 	// Specify the name of the custom vocabulary filter that you want to use when
 	// processing your transcription. Note that vocabulary filter names are case
-	// sensitive. If you use Amazon Transcribe in multiple Regions, the vocabulary
-	// filter must be available in Amazon Transcribe in each Region. If you include
-	// IdentifyLanguage and want to use one or more vocabulary filters with your
-	// transcription, use the VocabularyFilterNames parameter instead.
+	// sensitive.
+	//
+	// If you use Amazon Transcribe in multiple Regions, the vocabulary filter must be
+	// available in Amazon Transcribe in each Region.
+	//
+	// If you include IdentifyLanguage and want to use one or more vocabulary filters
+	// with your transcription, use the VocabularyFilterNames parameter instead.
 	VocabularyFilterName *string
 
 	// Specify the names of the custom vocabulary filters that you want to use when
 	// processing your transcription. Note that vocabulary filter names are case
-	// sensitive. If you use Amazon Transcribe in multiple Regions, the vocabulary
-	// filter must be available in Amazon Transcribe in each Region. If you're not
-	// including IdentifyLanguage and want to use a custom vocabulary filter with your
-	// transcription, use the VocabularyFilterName parameter instead.
+	// sensitive.
+	//
+	// If you use Amazon Transcribe in multiple Regions, the vocabulary filter must be
+	// available in Amazon Transcribe in each Region.
+	//
+	// If you're not including IdentifyLanguage and want to use a custom vocabulary
+	// filter with your transcription, use the VocabularyFilterName parameter instead.
 	VocabularyFilterNames *string
 
 	// Specify the name of the custom vocabulary that you want to use when processing
-	// your transcription. Note that vocabulary names are case sensitive. If you use
-	// Amazon Transcribe multiple Regions, the vocabulary must be available in Amazon
-	// Transcribe in each Region. If you include IdentifyLanguage and want to use one
-	// or more custom vocabularies with your transcription, use the VocabularyNames
-	// parameter instead.
+	// your transcription. Note that vocabulary names are case sensitive.
+	//
+	// If you use Amazon Transcribe multiple Regions, the vocabulary must be available
+	// in Amazon Transcribe in each Region.
+	//
+	// If you include IdentifyLanguage and want to use one or more custom vocabularies
+	// with your transcription, use the VocabularyNames parameter instead.
 	VocabularyName *string
 
 	// Specify the names of the custom vocabularies that you want to use when
-	// processing your transcription. Note that vocabulary names are case sensitive. If
-	// you use Amazon Transcribe in multiple Regions, the vocabulary must be available
-	// in Amazon Transcribe in each Region. If you don't include IdentifyLanguage and
-	// want to use a custom vocabulary with your transcription, use the VocabularyName
-	// parameter instead.
+	// processing your transcription. Note that vocabulary names are case sensitive.
+	//
+	// If you use Amazon Transcribe in multiple Regions, the vocabulary must be
+	// available in Amazon Transcribe in each Region.
+	//
+	// If you don't include IdentifyLanguage and want to use a custom vocabulary with
+	// your transcription, use the VocabularyName parameter instead.
 	VocabularyNames *string
 
 	noSmithyDocumentSerde
@@ -352,23 +424,27 @@ type MediaPlacement struct {
 	// The event ingestion URL.
 	EventIngestionUrl *string
 
-	// The screen data URL. This parameter is deprecated and no longer used by the
-	// Amazon Chime SDK.
+	// The screen data URL.
+	//
+	// This parameter is deprecated and no longer used by the Amazon Chime SDK.
 	ScreenDataUrl *string
 
-	// The screen sharing URL. This parameter is deprecated and no longer used by the
-	// Amazon Chime SDK.
+	// The screen sharing URL.
+	//
+	// This parameter is deprecated and no longer used by the Amazon Chime SDK.
 	ScreenSharingUrl *string
 
-	// The screen viewing URL. This parameter is deprecated and no longer used by the
-	// Amazon Chime SDK.
+	// The screen viewing URL.
+	//
+	// This parameter is deprecated and no longer used by the Amazon Chime SDK.
 	ScreenViewingUrl *string
 
 	// The signaling URL.
 	SignalingUrl *string
 
-	// The turn control URL. This parameter is deprecated and no longer used by the
-	// Amazon Chime SDK.
+	// The turn control URL.
+	//
+	// This parameter is deprecated and no longer used by the Amazon Chime SDK.
 	TurnControlUrl *string
 
 	noSmithyDocumentSerde
@@ -377,7 +453,10 @@ type MediaPlacement struct {
 // A meeting created using the Amazon Chime SDK.
 type Meeting struct {
 
-	// The external meeting ID. Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
+	// The external meeting ID.
+	//
+	// Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
+	//
 	// Values that begin with aws: are reserved. You can't configure a value that uses
 	// this prefix. Case insensitive.
 	ExternalMeetingId *string
@@ -389,6 +468,7 @@ type Meeting struct {
 	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
 	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
 	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
+	//
 	// Available values in Amazon Web Services GovCloud (US) Regions: us-gov-east-1 ,
 	// us-gov-west-1 .
 	MediaRegion *string
@@ -478,13 +558,15 @@ type TranscriptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The video features set for the meeting. Applies to all attendees. If you
-// specify MeetingFeatures:Video:MaxResolution:None when you create a meeting, all
-// API requests that include SendReceive , Send , or Receive for
+// The video features set for the meeting. Applies to all attendees.
+//
+// If you specify MeetingFeatures:Video:MaxResolution:None when you create a
+// meeting, all API requests that include SendReceive , Send , or Receive for
 // AttendeeCapabilities:Video will be rejected with ValidationError 400 .
 type VideoFeatures struct {
 
 	// The maximum video resolution for the meeting. Applies to all attendees.
+	//
 	// Defaults to HD . To use FHD , you must also provide a
 	// MeetingFeatures:Attendee:MaxCount value and override the default size limit of
 	// 250 attendees.

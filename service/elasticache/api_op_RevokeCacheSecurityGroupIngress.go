@@ -54,8 +54,11 @@ type RevokeCacheSecurityGroupIngressInput struct {
 type RevokeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:
+	//
 	//   - AuthorizeCacheSecurityGroupIngress
+	//
 	//   - CreateCacheSecurityGroup
+	//
 	//   - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 

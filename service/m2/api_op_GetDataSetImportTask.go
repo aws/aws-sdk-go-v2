@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the status of a data set import task initiated with the
-// CreateDataSetImportTask operation.
+// Gets the status of a data set import task initiated with the CreateDataSetImportTask operation.
 func (c *Client) GetDataSetImportTask(ctx context.Context, params *GetDataSetImportTaskInput, optFns ...func(*Options)) (*GetDataSetImportTaskOutput, error) {
 	if params == nil {
 		params = &GetDataSetImportTaskInput{}

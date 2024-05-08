@@ -62,7 +62,9 @@ type UpdateBudgetInput struct {
 	Schedule types.BudgetSchedule
 
 	// Updates the status of the budget.
+	//
 	//   - ACTIVE –The budget is being evaluated.
+	//
 	//   - INACTIVE –The budget is inactive. This can include Expired, Canceled, or
 	//   deleted Deleted statuses.
 	Status types.BudgetStatus

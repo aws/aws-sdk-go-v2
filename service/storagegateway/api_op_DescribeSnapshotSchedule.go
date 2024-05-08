@@ -30,12 +30,11 @@ func (c *Client) DescribeSnapshotSchedule(ctx context.Context, params *DescribeS
 	return out, nil
 }
 
-// A JSON object containing the DescribeSnapshotScheduleInput$VolumeARN of the
-// volume.
+// A JSON object containing the DescribeSnapshotScheduleInput$VolumeARN of the volume.
 type DescribeSnapshotScheduleInput struct {
 
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to
-	// return a list of gateway volumes.
+	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a
+	// list of gateway volumes.
 	//
 	// This member is required.
 	VolumeARN *string

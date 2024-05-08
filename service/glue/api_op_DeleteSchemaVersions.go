@@ -15,15 +15,20 @@ import (
 // supplied. If the compatibility mode forbids deleting of a version that is
 // necessary, such as BACKWARDS_FULL, an error is returned. Calling the
 // GetSchemaVersions API after this call will list the status of the deleted
-// versions. When the range of version numbers contain check pointed version, the
-// API will return a 409 conflict and will not proceed with the deletion. You have
-// to remove the checkpoint first using the DeleteSchemaCheckpoint API before
-// using this API. You cannot use the DeleteSchemaVersions API to delete the first
-// schema version in the schema set. The first schema version can only be deleted
-// by the DeleteSchema API. This operation will also delete the attached
+// versions.
+//
+// When the range of version numbers contain check pointed version, the API will
+// return a 409 conflict and will not proceed with the deletion. You have to remove
+// the checkpoint first using the DeleteSchemaCheckpoint API before using this API.
+//
+// You cannot use the DeleteSchemaVersions API to delete the first schema version
+// in the schema set. The first schema version can only be deleted by the
+// DeleteSchema API. This operation will also delete the attached
 // SchemaVersionMetadata under the schema versions. Hard deletes will be enforced
-// on the database. If the compatibility mode forbids deleting of a version that is
-// necessary, such as BACKWARDS_FULL, an error is returned.
+// on the database.
+//
+// If the compatibility mode forbids deleting of a version that is necessary, such
+// as BACKWARDS_FULL, an error is returned.
 func (c *Client) DeleteSchemaVersions(ctx context.Context, params *DeleteSchemaVersionsInput, optFns ...func(*Options)) (*DeleteSchemaVersionsOutput, error) {
 	if params == nil {
 		params = &DeleteSchemaVersionsInput{}
@@ -48,7 +53,9 @@ type DeleteSchemaVersionsInput struct {
 	SchemaId *types.SchemaId
 
 	// A version range may be supplied which may be of the format:
+	//
 	//   - a single version number, 5
+	//
 	//   - a range, 5-8 : deletes versions 5, 6, 7, 8
 	//
 	// This member is required.

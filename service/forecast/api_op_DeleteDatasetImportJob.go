@@ -10,10 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a dataset import job created using the CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
-// operation. You can delete only dataset import jobs that have a status of ACTIVE
-// or CREATE_FAILED . To get the status, use the DescribeDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html)
-// operation.
+// Deletes a dataset import job created using the [CreateDatasetImportJob] operation. You can delete only
+// dataset import jobs that have a status of ACTIVE or CREATE_FAILED . To get the
+// status, use the [DescribeDatasetImportJob]operation.
+//
+// [CreateDatasetImportJob]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
+// [DescribeDatasetImportJob]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html
 func (c *Client) DeleteDatasetImportJob(ctx context.Context, params *DeleteDatasetImportJobInput, optFns ...func(*Options)) (*DeleteDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetImportJobInput{}

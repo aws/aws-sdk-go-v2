@@ -36,8 +36,10 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This request cannot be completed for one of the following reasons:
+//
 //   - Performing the requested operation would violate an existing uniqueness
 //     claim in the identity store. Resolve the conflict before retrying this request.
+//
 //   - The requested resource was being concurrently modified by another request.
 type ConflictException struct {
 	Message *string

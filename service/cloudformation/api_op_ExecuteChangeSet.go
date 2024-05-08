@@ -12,13 +12,18 @@ import (
 
 // Updates a stack using the input information that was provided when the
 // specified change set was created. After the call successfully completes,
-// CloudFormation starts updating the stack. Use the DescribeStacks action to view
-// the status of the update. When you execute a change set, CloudFormation deletes
-// all other change sets associated with the stack because they aren't valid for
-// the updated stack. If a stack policy is associated with the stack,
-// CloudFormation enforces the policy during the update. You can't specify a
-// temporary stack policy that overrides the current policy. To create a change set
-// for the entire stack hierarchy, IncludeNestedStacks must have been set to True .
+// CloudFormation starts updating the stack. Use the DescribeStacksaction to view the status of
+// the update.
+//
+// When you execute a change set, CloudFormation deletes all other change sets
+// associated with the stack because they aren't valid for the updated stack.
+//
+// If a stack policy is associated with the stack, CloudFormation enforces the
+// policy during the update. You can't specify a temporary stack policy that
+// overrides the current policy.
+//
+// To create a change set for the entire stack hierarchy, IncludeNestedStacks must
+// have been set to True .
 func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetInput, optFns ...func(*Options)) (*ExecuteChangeSetOutput, error) {
 	if params == nil {
 		params = &ExecuteChangeSetInput{}
@@ -52,20 +57,24 @@ type ExecuteChangeSetInput struct {
 
 	// Preserves the state of previously provisioned resources when an operation
 	// fails. This parameter can't be specified when the OnStackFailure parameter to
-	// the CreateChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html)
-	// API operation was specified.
+	// the [CreateChangeSet]API operation was specified.
+	//
 	//   - True - if the stack creation fails, do nothing. This is equivalent to
-	//   specifying DO_NOTHING for the OnStackFailure parameter to the CreateChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html)
-	//   API operation.
+	//   specifying DO_NOTHING for the OnStackFailure parameter to the [CreateChangeSet]API operation.
+	//
 	//   - False - if the stack creation fails, roll back the stack. This is equivalent
-	//   to specifying ROLLBACK for the OnStackFailure parameter to the CreateChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html)
-	//   API operation.
+	//   to specifying ROLLBACK for the OnStackFailure parameter to the [CreateChangeSet]API operation.
+	//
 	// Default: True
+	//
+	// [CreateChangeSet]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html
 	DisableRollback *bool
 
 	// When set to true , newly created resources are deleted when the operation rolls
 	// back. This includes newly created resources marked with a deletion policy of
-	// Retain . Default: false
+	// Retain .
+	//
+	// Default: false
 	RetainExceptOnCreate *bool
 
 	// If you specified the name of a change set, specify the stack name or Amazon

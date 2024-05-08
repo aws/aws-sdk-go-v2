@@ -138,7 +138,8 @@ func (e *ApplicationNameRequiredException) ErrorCode() string {
 }
 func (e *ApplicationNameRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified ARN is not supported. For example, it might be an ARN for a
+//	The specified ARN is not supported. For example, it might be an ARN for a
+//
 // resource that is not expected.
 type ArnNotSupportedException struct {
 	Message *string
@@ -687,7 +688,8 @@ func (e *DeploymentTargetIdRequiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The maximum number of targets that can be associated with an Amazon ECS or
+//	The maximum number of targets that can be associated with an Amazon ECS or
+//
 // Lambda deployment was exceeded. The target list of both types of deployments
 // must have exactly one item. This exception does not apply to EC2/On-premises
 // deployments.
@@ -744,7 +746,8 @@ func (e *DescriptionTooLongException) ErrorCode() string {
 }
 func (e *DescriptionTooLongException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Amazon ECS service is associated with more than one deployment groups. An
+//	The Amazon ECS service is associated with more than one deployment groups. An
+//
 // Amazon ECS service can be associated with only one deployment group.
 type ECSServiceMappingLimitExceededException struct {
 	Message *string
@@ -1099,10 +1102,15 @@ func (e *InstanceNotRegisteredException) ErrorCode() string {
 func (e *InstanceNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The format of the alarm configuration is invalid. Possible causes include:
+//
 //   - The alarm list is null.
+//
 //   - The alarm object is null.
+//
 //   - The alarm name is empty or null or exceeds the limit of 255 characters.
+//
 //   - Two alarms with the same name have been specified.
+//
 //   - The alarm configuration is enabled, but the alarm list is empty.
 type InvalidAlarmConfigException struct {
 	Message *string
@@ -1238,8 +1246,7 @@ func (e *InvalidAutoScalingGroupException) ErrorCode() string {
 func (e *InvalidAutoScalingGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The configuration for the blue/green deployment group was provided in an
-// invalid format. For information about deployment configuration format, see
-// CreateDeploymentConfig .
+// invalid format. For information about deployment configuration format, see CreateDeploymentConfig.
 type InvalidBlueGreenDeploymentConfigurationException struct {
 	Message *string
 
@@ -2433,10 +2440,14 @@ func (e *InvalidTargetGroupPairException) ErrorCode() string {
 func (e *InvalidTargetGroupPairException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The target instance configuration is invalid. Possible causes include:
+//
 //   - Configuration data for target instances was entered for an in-place
 //     deployment.
+//
 //   - The limit of 10 tags for a tag type was exceeded.
+//
 //   - The combined length of the tag names exceeded the limit.
+//
 //   - A specified tag is not currently applied to any instances.
 type InvalidTargetInstancesException struct {
 	Message *string
@@ -2489,7 +2500,8 @@ func (e *InvalidTimeRangeException) ErrorCode() string {
 }
 func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The configuration that specifies how traffic is routed during a deployment is
+//	The configuration that specifies how traffic is routed during a deployment is
+//
 // invalid.
 type InvalidTrafficRoutingConfigurationException struct {
 	Message *string

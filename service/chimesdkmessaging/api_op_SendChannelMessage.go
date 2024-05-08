@@ -11,13 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a message to a particular channel that the member is a part of. The
-// x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// Sends a message to a particular channel that the member is a part of.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
-// header. Also, STANDARD messages can be up to 4KB in size and contain metadata.
-// Metadata is arbitrary, and you can use it in a variety of ways, such as
-// containing a link to an attachment. CONTROL messages are limited to 30 bytes
-// and do not contain metadata.
+// header.
+//
+// Also, STANDARD messages can be up to 4KB in size and contain metadata. Metadata
+// is arbitrary, and you can use it in a variety of ways, such as containing a link
+// to an attachment.
+//
+// CONTROL messages are limited to 30 bytes and do not contain metadata.
 func (c *Client) SendChannelMessage(ctx context.Context, params *SendChannelMessageInput, optFns ...func(*Options)) (*SendChannelMessageOutput, error) {
 	if params == nil {
 		params = &SendChannelMessageInput{}
@@ -61,10 +65,13 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	Persistence types.ChannelMessagePersistenceType
 
-	// The type of message, STANDARD or CONTROL . STANDARD messages can be up to 4KB
-	// in size and contain metadata. Metadata is arbitrary, and you can use it in a
-	// variety of ways, such as containing a link to an attachment. CONTROL messages
-	// are limited to 30 bytes and do not contain metadata.
+	// The type of message, STANDARD or CONTROL .
+	//
+	// STANDARD messages can be up to 4KB in size and contain metadata. Metadata is
+	// arbitrary, and you can use it in a variety of ways, such as containing a link to
+	// an attachment.
+	//
+	// CONTROL messages are limited to 30 bytes and do not contain metadata.
 	//
 	// This member is required.
 	Type types.ChannelMessageType

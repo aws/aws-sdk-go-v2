@@ -13,9 +13,11 @@ import (
 
 // Sends an email message. You can use the Amazon Pinpoint Email API to send two
 // types of messages:
+//
 //   - Simple – A standard email message. When you create this type of message,
 //     you specify the sender, the recipient, and the message body, and Amazon Pinpoint
 //     assembles the message for you.
+//
 //   - Raw – A raw, MIME-formatted email message. When you send this type of
 //     email, you have to specify all of the message headers, as well as the message
 //     body. You can use this message type to send messages that contain attachments.
@@ -77,10 +79,12 @@ type SendEmailInput struct {
 type SendEmailOutput struct {
 
 	// A unique identifier for the message that is generated when Amazon Pinpoint
-	// accepts the message. It is possible for Amazon Pinpoint to accept a message
-	// without sending it. This can happen when the message you're trying to send has
-	// an attachment doesn't pass a virus check, or when you send a templated email
-	// that contains invalid personalization content, for example.
+	// accepts the message.
+	//
+	// It is possible for Amazon Pinpoint to accept a message without sending it. This
+	// can happen when the message you're trying to send has an attachment doesn't pass
+	// a virus check, or when you send a templated email that contains invalid
+	// personalization content, for example.
 	MessageId *string
 
 	// Metadata pertaining to the operation's result.

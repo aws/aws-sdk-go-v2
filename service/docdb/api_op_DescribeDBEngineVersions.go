@@ -27,11 +27,13 @@ func (c *Client) DescribeDBEngineVersions(ctx context.Context, params *DescribeD
 	return out, nil
 }
 
-// Represents the input to DescribeDBEngineVersions .
+// Represents the input to DescribeDBEngineVersions.
 type DescribeDBEngineVersionsInput struct {
 
 	// The name of a specific parameter group family to return details for.
+	//
 	// Constraints:
+	//
 	//   - If provided, must match an existing DBParameterGroupFamily .
 	DBParameterGroupFamily *string
 
@@ -42,7 +44,9 @@ type DescribeDBEngineVersionsInput struct {
 	// The database engine to return.
 	Engine *string
 
-	// The database engine version to return. Example: 3.6.0
+	// The database engine version to return.
+	//
+	// Example: 3.6.0
 	EngineVersion *string
 
 	// This parameter is not currently supported.
@@ -63,16 +67,19 @@ type DescribeDBEngineVersionsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeDBEngineVersions .
+// Represents the output of DescribeDBEngineVersions.
 type DescribeDBEngineVersionsOutput struct {
 
 	// Detailed information about one or more engine versions.
@@ -179,9 +186,12 @@ var _ DescribeDBEngineVersionsAPIClient = (*Client)(nil)
 // DescribeDBEngineVersionsPaginatorOptions is the paginator options for
 // DescribeDBEngineVersions
 type DescribeDBEngineVersionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

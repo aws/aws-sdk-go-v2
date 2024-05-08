@@ -12,24 +12,28 @@ import (
 )
 
 // Returns the refresh status of the Trusted Advisor checks that have the
-// specified check IDs. You can get the check IDs by calling the
-// DescribeTrustedAdvisorChecks operation. Some checks are refreshed automatically,
-// and you can't return their refresh statuses by using the
-// DescribeTrustedAdvisorCheckRefreshStatuses operation. If you call this operation
-// for these checks, you might see an InvalidParameterValue error.
+// specified check IDs. You can get the check IDs by calling the DescribeTrustedAdvisorChecksoperation.
+//
+// Some checks are refreshed automatically, and you can't return their refresh
+// statuses by using the DescribeTrustedAdvisorCheckRefreshStatuses operation. If
+// you call this operation for these checks, you might see an InvalidParameterValue
+// error.
+//
 //   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
 //     use the Amazon Web Services Support API.
+//
 //   - If you call the Amazon Web Services Support API from an account that
 //     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 //     SubscriptionRequiredException error message appears. For information about
-//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
-//     .
+//     changing your support plan, see [Amazon Web Services Support].
 //
 // To call the Trusted Advisor operations in the Amazon Web Services Support API,
 // you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon)
 // and Europe (Ireland) endpoints don't support the Trusted Advisor operations. For
-// more information, see About the Amazon Web Services Support API (https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint)
-// in the Amazon Web Services Support User Guide.
+// more information, see [About the Amazon Web Services Support API]in the Amazon Web Services Support User Guide.
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
+// [About the Amazon Web Services Support API]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
 func (c *Client) DescribeTrustedAdvisorCheckRefreshStatuses(ctx context.Context, params *DescribeTrustedAdvisorCheckRefreshStatusesInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorCheckRefreshStatusesInput{}
@@ -47,9 +51,10 @@ func (c *Client) DescribeTrustedAdvisorCheckRefreshStatuses(ctx context.Context,
 
 type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 
-	// The IDs of the Trusted Advisor checks to get the status. If you specify the
-	// check ID of a check that is automatically refreshed, you might see an
-	// InvalidParameterValue error.
+	// The IDs of the Trusted Advisor checks to get the status.
+	//
+	// If you specify the check ID of a check that is automatically refreshed, you
+	// might see an InvalidParameterValue error.
 	//
 	// This member is required.
 	CheckIds []*string
@@ -57,8 +62,7 @@ type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The statuses of the Trusted Advisor checks returned by the
-// DescribeTrustedAdvisorCheckRefreshStatuses operation.
+// The statuses of the Trusted Advisor checks returned by the DescribeTrustedAdvisorCheckRefreshStatuses operation.
 type DescribeTrustedAdvisorCheckRefreshStatusesOutput struct {
 
 	// The refresh status of the specified Trusted Advisor checks.

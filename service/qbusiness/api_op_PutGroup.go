@@ -12,6 +12,7 @@ import (
 )
 
 // Create, or updates, a mapping of users—who have access to a document—to groups.
+//
 // You can also map sub groups to groups. For example, the group "Company
 // Intellectual Property Teams" includes sub groups "Research" and "Engineering".
 // These sub groups include their own list of users or people who work in these
@@ -48,11 +49,12 @@ type PutGroupInput struct {
 
 	// The list that contains your users or sub groups that belong the same group. For
 	// example, the group "Company" includes the user "CEO" and the sub groups
-	// "Research", "Engineering", and "Sales and Marketing". If you have more than 1000
-	// users and/or sub groups for a single group, you need to provide the path to the
-	// S3 file that lists your users and sub groups for a group. Your sub groups can
-	// contain more than 1000 users, but the list of sub groups that belong to a group
-	// (and/or users) must be no more than 1000.
+	// "Research", "Engineering", and "Sales and Marketing".
+	//
+	// If you have more than 1000 users and/or sub groups for a single group, you need
+	// to provide the path to the S3 file that lists your users and sub groups for a
+	// group. Your sub groups can contain more than 1000 users, but the list of sub
+	// groups that belong to a group (and/or users) must be no more than 1000.
 	//
 	// This member is required.
 	GroupName *string

@@ -28,7 +28,7 @@ func (c *Client) ResendOperationAuthorization(ctx context.Context, params *Resen
 
 type ResendOperationAuthorizationInput struct {
 
-	// Operation ID.
+	//  Operation ID.
 	//
 	// This member is required.
 	OperationId *string

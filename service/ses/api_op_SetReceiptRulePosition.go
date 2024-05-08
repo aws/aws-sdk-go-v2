@@ -10,9 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the position of the specified receipt rule in the receipt rule set. For
-// information about managing receipt rules, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html)
-// . You can execute this operation no more than once per second.
+// Sets the position of the specified receipt rule in the receipt rule set.
+//
+// For information about managing receipt rules, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
 func (c *Client) SetReceiptRulePosition(ctx context.Context, params *SetReceiptRulePositionInput, optFns ...func(*Options)) (*SetReceiptRulePositionOutput, error) {
 	if params == nil {
 		params = &SetReceiptRulePositionInput{}
@@ -30,8 +34,9 @@ func (c *Client) SetReceiptRulePosition(ctx context.Context, params *SetReceiptR
 
 // Represents a request to set the position of a receipt rule in a receipt rule
 // set. You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
-// .
+// information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
 type SetReceiptRulePositionInput struct {
 
 	// The name of the receipt rule to reposition.

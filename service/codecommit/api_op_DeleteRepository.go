@@ -11,9 +11,10 @@ import (
 )
 
 // Deletes a repository. If a specified repository was already deleted, a null
-// repository ID is returned. Deleting a repository also deletes all associated
-// objects and metadata. After a repository is deleted, all future push calls to
-// the deleted repository fail.
+// repository ID is returned.
+//
+// Deleting a repository also deletes all associated objects and metadata. After a
+// repository is deleted, all future push calls to the deleted repository fail.
 func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryInput, optFns ...func(*Options)) (*DeleteRepositoryOutput, error) {
 	if params == nil {
 		params = &DeleteRepositoryInput{}

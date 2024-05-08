@@ -3,5 +3,5 @@
 // Package sagemakerruntime provides the API client, operations, and parameter
 // types for Amazon SageMaker Runtime.
 //
-// The Amazon SageMaker runtime API.
+//	The Amazon SageMaker runtime API.
 package sagemakerruntime

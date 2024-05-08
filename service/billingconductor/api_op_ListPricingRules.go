@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a pricing rule that can be associated to a pricing plan, or set of
+//	Describes a pricing rule that can be associated to a pricing plan, or set of
+//
 // pricing plans.
 func (c *Client) ListPricingRules(ctx context.Context, params *ListPricingRulesInput, optFns ...func(*Options)) (*ListPricingRulesOutput, error) {
 	if params == nil {
@@ -30,17 +31,17 @@ func (c *Client) ListPricingRules(ctx context.Context, params *ListPricingRulesI
 
 type ListPricingRulesInput struct {
 
-	// The preferred billing period to get the pricing plan.
+	//  The preferred billing period to get the pricing plan.
 	BillingPeriod *string
 
-	// A DescribePricingRuleFilter that specifies the Amazon Resource Name (ARNs) of
+	//  A DescribePricingRuleFilter that specifies the Amazon Resource Name (ARNs) of
 	// pricing rules to retrieve pricing rules information.
 	Filters *types.ListPricingRulesFilter
 
-	// The maximum number of pricing rules to retrieve.
+	//  The maximum number of pricing rules to retrieve.
 	MaxResults *int32
 
-	// The pagination token that's used on subsequent call to get pricing rules.
+	//  The pagination token that's used on subsequent call to get pricing rules.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,13 +49,13 @@ type ListPricingRulesInput struct {
 
 type ListPricingRulesOutput struct {
 
-	// The billing period for which the described pricing rules are applicable.
+	//  The billing period for which the described pricing rules are applicable.
 	BillingPeriod *string
 
-	// The pagination token that's used on subsequent calls to get pricing rules.
+	//  The pagination token that's used on subsequent calls to get pricing rules.
 	NextToken *string
 
-	// A list containing the described pricing rules.
+	//  A list containing the described pricing rules.
 	PricingRules []types.PricingRuleListElement
 
 	// Metadata pertaining to the operation's result.
@@ -149,7 +150,7 @@ var _ ListPricingRulesAPIClient = (*Client)(nil)
 
 // ListPricingRulesPaginatorOptions is the paginator options for ListPricingRules
 type ListPricingRulesPaginatorOptions struct {
-	// The maximum number of pricing rules to retrieve.
+	//  The maximum number of pricing rules to retrieve.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

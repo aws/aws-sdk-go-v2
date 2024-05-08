@@ -14,9 +14,10 @@ import (
 
 // Returns events related to clusters, security groups, and parameter groups. You
 // can obtain events specific to a particular cluster, security group, or parameter
-// group by providing the name as a parameter. By default, only the events
-// occurring within the last hour are returned; however, you can retrieve up to 14
-// days' worth of events if necessary.
+// group by providing the name as a parameter.
+//
+// By default, only the events occurring within the last hour are returned;
+// however, you can retrieve up to 14 days' worth of events if necessary.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -38,7 +39,9 @@ type DescribeEventsInput struct {
 	Duration *int32
 
 	// The end of the time interval for which to retrieve events, specified in ISO
-	// 8601 format. Example: 2017-03-30T07:03:49.555Z
+	// 8601 format.
+	//
+	// Example: 2017-03-30T07:03:49.555Z
 	EndTime *time.Time
 
 	// The maximum number of records to include in the response. If more records exist
@@ -62,7 +65,9 @@ type DescribeEventsInput struct {
 	SourceType types.SourceType
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
-	// 8601 format. Example: 2017-03-30T07:03:49.555Z
+	// 8601 format.
+	//
+	// Example: 2017-03-30T07:03:49.555Z
 	StartTime *time.Time
 
 	noSmithyDocumentSerde

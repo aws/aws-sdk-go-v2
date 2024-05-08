@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AcceleratorStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcceleratorStatus) Values() []AcceleratorStatus {
 	return []AcceleratorStatus{
 		"DEPLOYED",
@@ -38,8 +39,9 @@ const (
 )
 
 // Values returns all known values for ByoipCidrState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ByoipCidrState) Values() []ByoipCidrState {
 	return []ByoipCidrState{
 		"PENDING_PROVISIONING",
@@ -65,8 +67,9 @@ const (
 )
 
 // Values returns all known values for ClientAffinity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientAffinity) Values() []ClientAffinity {
 	return []ClientAffinity{
 		"NONE",
@@ -84,8 +87,9 @@ const (
 
 // Values returns all known values for CustomRoutingAcceleratorStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomRoutingAcceleratorStatus) Values() []CustomRoutingAcceleratorStatus {
 	return []CustomRoutingAcceleratorStatus{
 		"DEPLOYED",
@@ -103,8 +107,9 @@ const (
 
 // Values returns all known values for CustomRoutingDestinationTrafficState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomRoutingDestinationTrafficState) Values() []CustomRoutingDestinationTrafficState {
 	return []CustomRoutingDestinationTrafficState{
 		"ALLOW",
@@ -121,8 +126,9 @@ const (
 )
 
 // Values returns all known values for CustomRoutingProtocol. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomRoutingProtocol) Values() []CustomRoutingProtocol {
 	return []CustomRoutingProtocol{
 		"TCP",
@@ -140,8 +146,9 @@ const (
 )
 
 // Values returns all known values for HealthCheckProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthCheckProtocol) Values() []HealthCheckProtocol {
 	return []HealthCheckProtocol{
 		"TCP",
@@ -160,8 +167,9 @@ const (
 )
 
 // Values returns all known values for HealthState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthState) Values() []HealthState {
 	return []HealthState{
 		"INITIAL",
@@ -179,8 +187,9 @@ const (
 )
 
 // Values returns all known values for IpAddressFamily. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpAddressFamily) Values() []IpAddressFamily {
 	return []IpAddressFamily{
 		"IPv4",
@@ -197,8 +206,9 @@ const (
 )
 
 // Values returns all known values for IpAddressType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpAddressType) Values() []IpAddressType {
 	return []IpAddressType{
 		"IPV4",
@@ -215,8 +225,9 @@ const (
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"TCP",

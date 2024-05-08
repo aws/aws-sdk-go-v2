@@ -10,12 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified channel and its associated stream keys. If you try to
-// delete a live channel, you will get an error (409 ConflictException). To delete
-// a channel that is live, call StopStream , wait for the Amazon EventBridge
-// "Stream End" event (to verify that the stream's state is no longer Live), then
-// call DeleteChannel. (See Using EventBridge with Amazon IVS (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html)
-// .)
+// Deletes the specified channel and its associated stream keys.
+//
+// If you try to delete a live channel, you will get an error (409
+// ConflictException). To delete a channel that is live, call StopStream, wait for the
+// Amazon EventBridge "Stream End" event (to verify that the stream's state is no
+// longer Live), then call DeleteChannel. (See [Using EventBridge with Amazon IVS].)
+//
+// [Using EventBridge with Amazon IVS]: https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html
 func (c *Client) DeleteChannel(ctx context.Context, params *DeleteChannelInput, optFns ...func(*Options)) (*DeleteChannelOutput, error) {
 	if params == nil {
 		params = &DeleteChannelInput{}

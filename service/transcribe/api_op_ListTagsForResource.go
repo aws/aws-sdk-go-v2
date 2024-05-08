@@ -12,9 +12,11 @@ import (
 )
 
 // Lists all tags associated with the specified transcription job, vocabulary,
-// model, or resource. To learn more about using tags with Amazon Transcribe, refer
-// to Tagging resources (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html)
-// .
+// model, or resource.
+//
+// To learn more about using tags with Amazon Transcribe, refer to [Tagging resources].
+//
+// [Tagging resources]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -34,9 +36,13 @@ type ListTagsForResourceInput struct {
 
 	// Returns a list of all tags associated with the specified Amazon Resource Name
 	// (ARN). ARNs have the format
-	// arn:partition:service:region:account-id:resource-type/resource-id . For example,
+	// arn:partition:service:region:account-id:resource-type/resource-id .
+	//
+	// For example,
 	// arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name
-	// . Valid values for resource-type are: transcription-job ,
+	// .
+	//
+	// Valid values for resource-type are: transcription-job ,
 	// medical-transcription-job , vocabulary , medical-vocabulary , vocabulary-filter
 	// , and language-model .
 	//

@@ -46,24 +46,30 @@ type DescribeEnvironmentsInput struct {
 	// include only those that have the specified names.
 	EnvironmentNames []string
 
-	// Indicates whether to include deleted environments: true : Environments that have
-	// been deleted after IncludedDeletedBackTo are displayed. false : Do not include
-	// deleted environments.
+	// Indicates whether to include deleted environments:
+	//
+	// true : Environments that have been deleted after IncludedDeletedBackTo are
+	// displayed.
+	//
+	// false : Do not include deleted environments.
 	IncludeDeleted *bool
 
-	// If specified when IncludeDeleted is set to true , then environments deleted
+	//  If specified when IncludeDeleted is set to true , then environments deleted
 	// after this date are displayed.
 	IncludedDeletedBackTo *time.Time
 
 	// For a paginated request. Specify a maximum number of environments to include in
-	// each response. If no MaxRecords is specified, all available environments are
-	// retrieved in a single response.
+	// each response.
+	//
+	// If no MaxRecords is specified, all available environments are retrieved in a
+	// single response.
 	MaxRecords *int32
 
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to
-	// the ones specified in the initial request. If no NextToken is specified, the
-	// first page is retrieved.
+	// the ones specified in the initial request.
+	//
+	// If no NextToken is specified, the first page is retrieved.
 	NextToken *string
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
@@ -76,7 +82,7 @@ type DescribeEnvironmentsInput struct {
 // Result message containing a list of environment descriptions.
 type DescribeEnvironmentsOutput struct {
 
-	// Returns an EnvironmentDescription list.
+	//  Returns an EnvironmentDescription list.
 	Environments []types.EnvironmentDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to
@@ -205,12 +211,13 @@ type EnvironmentExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEnvironmentsInput, *DescribeEnvironmentsOutput, error) (bool, error)
 }
 
@@ -426,12 +433,13 @@ type EnvironmentTerminatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEnvironmentsInput, *DescribeEnvironmentsOutput, error) (bool, error)
 }
 
@@ -645,12 +653,13 @@ type EnvironmentUpdatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEnvironmentsInput, *DescribeEnvironmentsOutput, error) (bool, error)
 }
 

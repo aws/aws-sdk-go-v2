@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a real-time log configuration. To get a real-time log configuration, you
-// can provide the configuration's name or its Amazon Resource Name (ARN). You must
-// provide at least one. If you provide both, CloudFront uses the name to identify
-// the real-time log configuration to get.
+// Gets a real-time log configuration.
+//
+// To get a real-time log configuration, you can provide the configuration's name
+// or its Amazon Resource Name (ARN). You must provide at least one. If you provide
+// both, CloudFront uses the name to identify the real-time log configuration to
+// get.
 func (c *Client) GetRealtimeLogConfig(ctx context.Context, params *GetRealtimeLogConfigInput, optFns ...func(*Options)) (*GetRealtimeLogConfigOutput, error) {
 	if params == nil {
 		params = &GetRealtimeLogConfigInput{}

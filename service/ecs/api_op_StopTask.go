@@ -11,16 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a running task. Any tags associated with the task will be deleted. When
-// StopTask is called on a task, the equivalent of docker stop is issued to the
+// Stops a running task. Any tags associated with the task will be deleted.
+//
+// When StopTask is called on a task, the equivalent of docker stop is issued to the
 // containers running in the task. This results in a SIGTERM value and a default
 // 30-second timeout, after which the SIGKILL value is sent and the containers are
 // forcibly stopped. If the container handles the SIGTERM value gracefully and
-// exits within 30 seconds from receiving it, no SIGKILL value is sent. The
-// default 30-second timeout can be configured on the Amazon ECS container agent
-// with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see Amazon
-// ECS Container Agent Configuration (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
+// exits within 30 seconds from receiving it, no SIGKILL value is sent.
+//
+// The default 30-second timeout can be configured on the Amazon ECS container
+// agent with the ECS_CONTAINER_STOP_TIMEOUT variable. For more information, see [Amazon ECS Container Agent Configuration]
 // in the Amazon Elastic Container Service Developer Guide.
+//
+// [Amazon ECS Container Agent Configuration]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
 func (c *Client) StopTask(ctx context.Context, params *StopTaskInput, optFns ...func(*Options)) (*StopTaskOutput, error) {
 	if params == nil {
 		params = &StopTaskInput{}
@@ -49,8 +52,8 @@ type StopTaskInput struct {
 
 	// An optional message specified when a task is stopped. For example, if you're
 	// using a custom scheduler, you can use this parameter to specify the reason for
-	// stopping the task here, and the message appears in subsequent DescribeTasks API
-	// operations on this task.
+	// stopping the task here, and the message appears in subsequent DescribeTasksAPI operations on
+	// this task.
 	Reason *string
 
 	noSmithyDocumentSerde

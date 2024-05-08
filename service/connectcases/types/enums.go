@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AuditEventType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuditEventType) Values() []AuditEventType {
 	return []AuditEventType{
 		"Case.Created",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for CommentBodyTextType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CommentBodyTextType) Values() []CommentBodyTextType {
 	return []CommentBodyTextType{
 		"Text/Plain",
@@ -48,8 +50,9 @@ const (
 )
 
 // Values returns all known values for DomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"Active",
@@ -67,8 +70,9 @@ const (
 )
 
 // Values returns all known values for FieldNamespace. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FieldNamespace) Values() []FieldNamespace {
 	return []FieldNamespace{
 		"System",
@@ -90,8 +94,9 @@ const (
 )
 
 // Values returns all known values for FieldType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FieldType) Values() []FieldType {
 	return []FieldType{
 		"Text",
@@ -113,8 +118,9 @@ const (
 )
 
 // Values returns all known values for Order. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Order) Values() []Order {
 	return []Order{
 		"Asc",
@@ -132,8 +138,9 @@ const (
 )
 
 // Values returns all known values for RelatedItemType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RelatedItemType) Values() []RelatedItemType {
 	return []RelatedItemType{
 		"Contact",
@@ -151,8 +158,9 @@ const (
 )
 
 // Values returns all known values for TemplateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateStatus) Values() []TemplateStatus {
 	return []TemplateStatus{
 		"Active",

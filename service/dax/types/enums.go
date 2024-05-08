@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeType) Values() []ChangeType {
 	return []ChangeType{
 		"IMMEDIATE",
@@ -30,8 +31,9 @@ const (
 
 // Values returns all known values for ClusterEndpointEncryptionType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterEndpointEncryptionType) Values() []ClusterEndpointEncryptionType {
 	return []ClusterEndpointEncryptionType{
 		"NONE",
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for IsModifiable. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IsModifiable) Values() []IsModifiable {
 	return []IsModifiable{
 		"TRUE",
@@ -68,8 +71,9 @@ const (
 )
 
 // Values returns all known values for ParameterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterType) Values() []ParameterType {
 	return []ParameterType{
 		"DEFAULT",
@@ -87,8 +91,9 @@ const (
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"CLUSTER",
@@ -108,8 +113,9 @@ const (
 )
 
 // Values returns all known values for SSEStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SSEStatus) Values() []SSEStatus {
 	return []SSEStatus{
 		"ENABLING",

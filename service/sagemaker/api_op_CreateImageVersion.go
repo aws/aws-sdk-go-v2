@@ -32,7 +32,8 @@ type CreateImageVersionInput struct {
 
 	// The registry path of the container image to use as the starting point for this
 	// version. The path is an Amazon ECR URI in the following format:
-	// .dkr.ecr..amazonaws.com/
+	//
+	//     .dkr.ecr..amazonaws.com/
 	//
 	// This member is required.
 	BaseImage *string
@@ -56,8 +57,11 @@ type CreateImageVersionInput struct {
 	Horovod *bool
 
 	// Indicates SageMaker job type compatibility.
+	//
 	//   - TRAINING : The image version is compatible with SageMaker training jobs.
+	//
 	//   - INFERENCE : The image version is compatible with SageMaker inference jobs.
+	//
 	//   - NOTEBOOK_KERNEL : The image version is compatible with SageMaker notebook
 	//   kernels.
 	JobType types.JobType
@@ -66,7 +70,9 @@ type CreateImageVersionInput struct {
 	MLFramework *string
 
 	// Indicates CPU or GPU compatibility.
+	//
 	//   - CPU : The image version is compatible with CPU.
+	//
 	//   - GPU : The image version is compatible with GPU.
 	Processor types.Processor
 
@@ -77,12 +83,16 @@ type CreateImageVersionInput struct {
 	ReleaseNotes *string
 
 	// The stability of the image version, specified by the maintainer.
+	//
 	//   - NOT_PROVIDED : The maintainers did not provide a status for image version
 	//   stability.
+	//
 	//   - STABLE : The image version is stable.
+	//
 	//   - TO_BE_ARCHIVED : The image version is set to be archived. Custom image
 	//   versions that are set to be archived are automatically archived after three
 	//   months.
+	//
 	//   - ARCHIVED : The image version is archived. Archived image versions are not
 	//   searchable and are no longer actively supported.
 	VendorGuidance types.VendorGuidance

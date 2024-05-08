@@ -37,49 +37,70 @@ type CreateEventDataStoreInput struct {
 
 	// The advanced event selectors to use to select the events for the data store.
 	// You can configure up to five advanced event selectors for each event data store.
-	// For more information about how to use advanced event selectors to log CloudTrail
-	// events, see Log events by using advanced event selectors (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced)
-	// in the CloudTrail User Guide. For more information about how to use advanced
-	// event selectors to include Config configuration items in your event data store,
-	// see Create an event data store for Config configuration items (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config)
-	// in the CloudTrail User Guide. For more information about how to use advanced
-	// event selectors to include non-Amazon Web Services events in your event data
-	// store, see Create an integration to log events from outside Amazon Web Services (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration)
-	// in the CloudTrail User Guide.
+	//
+	// For more information about how to use advanced event selectors to log
+	// CloudTrail events, see [Log events by using advanced event selectors]in the CloudTrail User Guide.
+	//
+	// For more information about how to use advanced event selectors to include
+	// Config configuration items in your event data store, see [Create an event data store for Config configuration items]in the CloudTrail User
+	// Guide.
+	//
+	// For more information about how to use advanced event selectors to include
+	// non-Amazon Web Services events in your event data store, see [Create an integration to log events from outside Amazon Web Services]in the CloudTrail
+	// User Guide.
+	//
+	// [Create an event data store for Config configuration items]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config
+	// [Log events by using advanced event selectors]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
+	// [Create an integration to log events from outside Amazon Web Services]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
 	// The billing mode for the event data store determines the cost for ingesting
 	// events and the default and maximum retention period for the event data store.
+	//
 	// The following are the possible values:
+	//
 	//   - EXTENDABLE_RETENTION_PRICING - This billing mode is generally recommended if
 	//   you want a flexible retention period of up to 3653 days (about 10 years). The
 	//   default retention period for this billing mode is 366 days.
+	//
 	//   - FIXED_RETENTION_PRICING - This billing mode is recommended if you expect to
 	//   ingest more than 25 TB of event data per month and need a retention period of up
 	//   to 2557 days (about 7 years). The default retention period for this billing mode
 	//   is 2557 days.
-	// The default value is EXTENDABLE_RETENTION_PRICING . For more information about
-	// CloudTrail pricing, see CloudTrail Pricing (http://aws.amazon.com/cloudtrail/pricing/)
-	// and Managing CloudTrail Lake costs (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html)
-	// .
+	//
+	// The default value is EXTENDABLE_RETENTION_PRICING .
+	//
+	// For more information about CloudTrail pricing, see [CloudTrail Pricing] and [Managing CloudTrail Lake costs].
+	//
+	// [CloudTrail Pricing]: http://aws.amazon.com/cloudtrail/pricing/
+	// [Managing CloudTrail Lake costs]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html
 	BillingMode types.BillingMode
 
 	// Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail.
 	// The value can be an alias name prefixed by alias/ , a fully specified ARN to an
 	// alias, a fully specified ARN to a key, or a globally unique identifier.
+	//
 	// Disabling or deleting the KMS key, or removing CloudTrail permissions on the
 	// key, prevents CloudTrail from logging events to the event data store, and
 	// prevents users from querying the data in the event data store that was encrypted
 	// with the key. After you associate an event data store with a KMS key, the KMS
 	// key cannot be removed or changed. Before you disable or delete a KMS key that
 	// you are using with an event data store, delete or back up your event data store.
+	//
 	// CloudTrail also supports KMS multi-Region keys. For more information about
-	// multi-Region keys, see Using multi-Region keys (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
-	// in the Key Management Service Developer Guide. Examples:
+	// multi-Region keys, see [Using multi-Region keys]in the Key Management Service Developer Guide.
+	//
+	// Examples:
+	//
 	//   - alias/MyAliasName
+	//
 	//   - arn:aws:kms:us-east-2:123456789012:alias/MyAliasName
+	//
 	//   - arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//
 	//   - 12345678-1234-1234-1234-123456789012
+	//
+	// [Using multi-Region keys]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
 	KmsKeyId *string
 
 	// Specifies whether the event data store includes events from all Regions, or
@@ -94,15 +115,18 @@ type CreateEventDataStoreInput struct {
 	// EXTENDABLE_RETENTION_PRICING , you can set a retention period of up to 3653
 	// days, the equivalent of 10 years. If BillingMode is set to
 	// FIXED_RETENTION_PRICING , you can set a retention period of up to 2557 days, the
-	// equivalent of seven years. CloudTrail Lake determines whether to retain an event
-	// by checking if the eventTime of the event is within the specified retention
-	// period. For example, if you set a retention period of 90 days, CloudTrail will
-	// remove events when the eventTime is older than 90 days. If you plan to copy
-	// trail events to this event data store, we recommend that you consider both the
-	// age of the events that you want to copy as well as how long you want to keep the
-	// copied events in your event data store. For example, if you copy trail events
-	// that are 5 years old and specify a retention period of 7 years, the event data
-	// store will retain those events for two years.
+	// equivalent of seven years.
+	//
+	// CloudTrail Lake determines whether to retain an event by checking if the
+	// eventTime of the event is within the specified retention period. For example, if
+	// you set a retention period of 90 days, CloudTrail will remove events when the
+	// eventTime is older than 90 days.
+	//
+	// If you plan to copy trail events to this event data store, we recommend that
+	// you consider both the age of the events that you want to copy as well as how
+	// long you want to keep the copied events in your event data store. For example,
+	// if you copy trail events that are 5 years old and specify a retention period of
+	// 7 years, the event data store will retain those events for two years.
 	RetentionPeriod *int32
 
 	// Specifies whether the event data store should start ingesting live events. The
@@ -137,7 +161,8 @@ type CreateEventDataStoreOutput struct {
 
 	// Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The
 	// value is a fully specified ARN to a KMS key in the following format.
-	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//
+	//     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
 	// Indicates whether the event data store collects events from all Regions, or

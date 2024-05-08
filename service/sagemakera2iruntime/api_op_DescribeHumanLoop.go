@@ -68,8 +68,9 @@ type DescribeHumanLoopOutput struct {
 	// This member is required.
 	HumanLoopStatus types.HumanLoopStatus
 
-	// A failure code that identifies the type of failure. Possible values:
-	// ValidationError , Expired , InternalError
+	// A failure code that identifies the type of failure.
+	//
+	// Possible values: ValidationError , Expired , InternalError
 	FailureCode *string
 
 	// The reason why a human loop failed. The failure reason is returned when the

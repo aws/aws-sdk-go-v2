@@ -17,14 +17,23 @@ import (
 // on each fleet instance. For container fleets, it describes what server processes
 // to run in each replica container group. You can update a fleet's runtime
 // configuration at any time after the fleet is created; it does not need to be in
-// ACTIVE status. To update runtime configuration, specify the fleet ID and provide
-// a RuntimeConfiguration with an updated set of server process configurations. If
-// successful, the fleet's runtime configuration settings are updated. Fleet
+// ACTIVE status.
+//
+// To update runtime configuration, specify the fleet ID and provide a
+// RuntimeConfiguration with an updated set of server process configurations.
+//
+// If successful, the fleet's runtime configuration settings are updated. Fleet
 // computes that run game server processes regularly check for and receive updated
 // runtime configurations. The computes immediately take action to comply with the
 // new configuration by launching new server processes or by not replacing existing
 // processes when they shut down. Updating a fleet's runtime configuration never
-// affects existing server processes. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// affects existing server processes.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateRuntimeConfigurationInput, optFns ...func(*Options)) (*UpdateRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateRuntimeConfigurationInput{}

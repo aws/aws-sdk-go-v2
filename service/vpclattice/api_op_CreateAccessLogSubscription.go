@@ -15,8 +15,10 @@ import (
 // audit the services in the network. The service network owner will only see
 // access logs from clients and services that are associated with their service
 // network. Access log entries represent traffic originated from VPCs associated
-// with that network. For more information, see Access logs (https://docs.aws.amazon.com/vpc-lattice/latest/ug/monitoring-access-logs.html)
-// in the Amazon VPC Lattice User Guide.
+// with that network. For more information, see [Access logs]in the Amazon VPC Lattice User
+// Guide.
+//
+// [Access logs]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/monitoring-access-logs.html
 func (c *Client) CreateAccessLogSubscription(ctx context.Context, params *CreateAccessLogSubscriptionInput, optFns ...func(*Options)) (*CreateAccessLogSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateAccessLogSubscriptionInput{}

@@ -15,9 +15,11 @@ import (
 // Amazon Route 53 Application Recovery Controller in this Amazon Web Services
 // Region. Resources that are registered for zonal shifts are managed resources in
 // Route 53 ARC. You can start zonal shifts and configure zonal autoshift for
-// managed resources. At this time, you can only start a zonal shift or configure
-// zonal autoshift for Network Load Balancers and Application Load Balancers with
-// cross-zone load balancing turned off.
+// managed resources.
+//
+// At this time, you can only start a zonal shift or configure zonal autoshift for
+// Network Load Balancers and Application Load Balancers with cross-zone load
+// balancing turned off.
 func (c *Client) GetManagedResource(ctx context.Context, params *GetManagedResourceInput, optFns ...func(*Options)) (*GetManagedResourceOutput, error) {
 	if params == nil {
 		params = &GetManagedResourceInput{}
@@ -36,9 +38,10 @@ func (c *Client) GetManagedResource(ctx context.Context, params *GetManagedResou
 type GetManagedResourceInput struct {
 
 	// The identifier for the resource to shift away traffic for. The identifier is
-	// the Amazon Resource Name (ARN) for the resource. At this time, supported
-	// resources are Network Load Balancers and Application Load Balancers with
-	// cross-zone load balancing turned off.
+	// the Amazon Resource Name (ARN) for the resource.
+	//
+	// At this time, supported resources are Network Load Balancers and Application
+	// Load Balancers with cross-zone load balancing turned off.
 	//
 	// This member is required.
 	ResourceIdentifier *string

@@ -13,8 +13,9 @@ import (
 )
 
 // Creates a JSON document that specifies a set of resources to assign to a backup
-// plan. For examples, see Assigning resources programmatically (https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json)
-// .
+// plan. For examples, see [Assigning resources programmatically].
+//
+// [Assigning resources programmatically]: https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json
 func (c *Client) CreateBackupSelection(ctx context.Context, params *CreateBackupSelectionInput, optFns ...func(*Options)) (*CreateBackupSelectionOutput, error) {
 	if params == nil {
 		params = &CreateBackupSelectionInput{}
@@ -45,8 +46,9 @@ type CreateBackupSelectionInput struct {
 
 	// A unique string that identifies the request and allows failed requests to be
 	// retried without the risk of running the operation twice. This parameter is
-	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
-	// characters.
+	// optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	noSmithyDocumentSerde

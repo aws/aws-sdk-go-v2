@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The QueryTableRows API allows you to use a filter formula to query for specific
-// rows in a table.
+//	The QueryTableRows API allows you to use a filter formula to query for
+//
+// specific rows in a table.
 func (c *Client) QueryTableRows(ctx context.Context, params *QueryTableRowsInput, optFns ...func(*Options)) (*QueryTableRowsOutput, error) {
 	if params == nil {
 		params = &QueryTableRowsInput{}
@@ -36,14 +37,18 @@ type QueryTableRowsInput struct {
 	// This member is required.
 	FilterFormula *types.Filter
 
-	// The ID of the table whose rows are being queried. If a table with the specified
-	// id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table whose rows are being queried.
+	//
+	// If a table with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	TableId *string
 
-	// The ID of the workbook whose table rows are being queried. If a workbook with
-	// the specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the workbook whose table rows are being queried.
+	//
+	// If a workbook with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string
@@ -51,10 +56,11 @@ type QueryTableRowsInput struct {
 	// The maximum number of rows to return in each page of the results.
 	MaxResults *int32
 
-	// This parameter is optional. If a nextToken is not specified, the API returns
-	// the first page of data. Pagination tokens expire after 1 hour. If you use a
-	// token that was returned more than an hour back, the API will throw
-	// ValidationException.
+	//  This parameter is optional. If a nextToken is not specified, the API returns
+	// the first page of data.
+	//
+	// Pagination tokens expire after 1 hour. If you use a token that was returned
+	// more than an hour back, the API will throw ValidationException.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -62,24 +68,24 @@ type QueryTableRowsInput struct {
 
 type QueryTableRowsOutput struct {
 
-	// The list of columns in the table whose row data is returned in the result.
+	//  The list of columns in the table whose row data is returned in the result.
 	//
 	// This member is required.
 	ColumnIds []string
 
-	// The list of rows in the table that match the query filter.
+	//  The list of rows in the table that match the query filter.
 	//
 	// This member is required.
 	Rows []types.TableRow
 
-	// Indicates the cursor of the workbook at which the data returned by this request
-	// is read. Workbook cursor keeps increasing with every update and the increments
-	// are not sequential.
+	//  Indicates the cursor of the workbook at which the data returned by this
+	// request is read. Workbook cursor keeps increasing with every update and the
+	// increments are not sequential.
 	//
 	// This member is required.
 	WorkbookCursor int64
 
-	// Provides the pagination token to load the next page if there are more results
+	//  Provides the pagination token to load the next page if there are more results
 	// matching the request. If a pagination token is not present in the response, it
 	// means that all data matching the request has been loaded.
 	NextToken *string

@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for AmiProductSortBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AmiProductSortBy) Values() []AmiProductSortBy {
 	return []AmiProductSortBy{
 		"EntityId",
@@ -36,6 +37,7 @@ const (
 
 // Values returns all known values for AmiProductVisibilityString. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AmiProductVisibilityString) Values() []AmiProductVisibilityString {
 	return []AmiProductVisibilityString{
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for ChangeStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeStatus) Values() []ChangeStatus {
 	return []ChangeStatus{
 		"PREPARING",
@@ -81,8 +84,9 @@ const (
 )
 
 // Values returns all known values for ContainerProductSortBy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerProductSortBy) Values() []ContainerProductSortBy {
 	return []ContainerProductSortBy{
 		"EntityId",
@@ -104,8 +108,9 @@ const (
 
 // Values returns all known values for ContainerProductVisibilityString. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerProductVisibilityString) Values() []ContainerProductVisibilityString {
 	return []ContainerProductVisibilityString{
 		"Limited",
@@ -126,8 +131,9 @@ const (
 )
 
 // Values returns all known values for DataProductSortBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataProductSortBy) Values() []DataProductSortBy {
 	return []DataProductSortBy{
 		"EntityId",
@@ -150,6 +156,7 @@ const (
 
 // Values returns all known values for DataProductVisibilityString. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DataProductVisibilityString) Values() []DataProductVisibilityString {
 	return []DataProductVisibilityString{
@@ -170,8 +177,9 @@ const (
 )
 
 // Values returns all known values for FailureCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureCode) Values() []FailureCode {
 	return []FailureCode{
 		"CLIENT_ERROR",
@@ -188,8 +196,9 @@ const (
 )
 
 // Values returns all known values for Intent. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Intent) Values() []Intent {
 	return []Intent{
 		"VALIDATE",
@@ -214,8 +223,9 @@ const (
 )
 
 // Values returns all known values for OfferSortBy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OfferSortBy) Values() []OfferSortBy {
 	return []OfferSortBy{
 		"EntityId",
@@ -240,8 +250,9 @@ const (
 )
 
 // Values returns all known values for OfferStateString. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OfferStateString) Values() []OfferStateString {
 	return []OfferStateString{
 		"Draft",
@@ -260,8 +271,9 @@ const (
 )
 
 // Values returns all known values for OfferTargetingString. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OfferTargetingString) Values() []OfferTargetingString {
 	return []OfferTargetingString{
 		"BuyerAccounts",
@@ -280,8 +292,9 @@ const (
 )
 
 // Values returns all known values for OwnershipType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OwnershipType) Values() []OwnershipType {
 	return []OwnershipType{
 		"SELF",
@@ -310,6 +323,7 @@ const (
 
 // Values returns all known values for ResaleAuthorizationSortBy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResaleAuthorizationSortBy) Values() []ResaleAuthorizationSortBy {
 	return []ResaleAuthorizationSortBy{
@@ -340,8 +354,9 @@ const (
 
 // Values returns all known values for ResaleAuthorizationStatusString. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResaleAuthorizationStatusString) Values() []ResaleAuthorizationStatusString {
 	return []ResaleAuthorizationStatusString{
 		"Draft",
@@ -361,8 +376,9 @@ const (
 )
 
 // Values returns all known values for SaaSProductSortBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SaaSProductSortBy) Values() []SaaSProductSortBy {
 	return []SaaSProductSortBy{
 		"EntityId",
@@ -384,6 +400,7 @@ const (
 
 // Values returns all known values for SaaSProductVisibilityString. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SaaSProductVisibilityString) Values() []SaaSProductVisibilityString {
 	return []SaaSProductVisibilityString{
@@ -403,8 +420,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",

@@ -31,7 +31,9 @@ func (c *Client) ListProvisionedProductPlans(ctx context.Context, params *ListPr
 type ListProvisionedProductPlansInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified migration project using the provided parameters. The
-// migration project must be closed before you can modify it.
+// Modifies the specified migration project using the provided parameters.
+//
+// The migration project must be closed before you can modify it.
 func (c *Client) ModifyMigrationProject(ctx context.Context, params *ModifyMigrationProjectInput, optFns ...func(*Options)) (*ModifyMigrationProjectOutput, error) {
 	if params == nil {
 		params = &ModifyMigrationProjectInput{}

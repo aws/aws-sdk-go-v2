@@ -12,15 +12,19 @@ import (
 )
 
 // Lists the root or organizational units (OUs) that serve as the immediate parent
-// of the specified child OU or account. This operation, along with ListChildren
-// enables you to traverse the tree structure that makes up this root. Always check
-// the NextToken response parameter for a null value when calling a List*
-// operation. These operations can occasionally return an empty set of results even
-// when there are more results available. The NextToken response parameter value
-// is null only when there are no more results to display. This operation can be
-// called only from the organization's management account or by a member account
-// that is a delegated administrator for an Amazon Web Services service. In the
-// current release, a child can have only a single parent.
+// of the specified child OU or account. This operation, along with ListChildrenenables you to
+// traverse the tree structure that makes up this root.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// List* operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
+//
+// In the current release, a child can have only a single parent.
 func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optFns ...func(*Options)) (*ListParentsOutput, error) {
 	if params == nil {
 		params = &ListParentsInput{}
@@ -39,13 +43,18 @@ func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optF
 type ListParentsInput struct {
 
 	// The unique identifier (ID) of the OU or account whose parent containers you
-	// want to list. Don't specify a root. The regex pattern (http://wikipedia.org/wiki/regex)
-	// for a child ID string requires one of the following:
+	// want to list. Don't specify a root.
+	//
+	// The [regex pattern] for a child ID string requires one of the following:
+	//
 	//   - Account - A string that consists of exactly 12 digits.
+	//
 	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
 	//   4 to 32 lowercase letters or digits (the ID of the root that contains the OU).
 	//   This string is followed by a second "-" dash and from 8 to 32 additional
 	//   lowercase letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	ChildId *string

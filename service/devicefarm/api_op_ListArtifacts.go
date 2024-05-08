@@ -35,9 +35,14 @@ type ListArtifactsInput struct {
 	// This member is required.
 	Arn *string
 
-	// The artifacts' type. Allowed values include:
+	// The artifacts' type.
+	//
+	// Allowed values include:
+	//
 	//   - FILE
+	//
 	//   - LOG
+	//
 	//   - SCREENSHOT
 	//
 	// This member is required.

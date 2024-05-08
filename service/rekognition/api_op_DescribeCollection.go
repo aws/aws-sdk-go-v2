@@ -13,9 +13,10 @@ import (
 
 // Describes the specified collection. You can use DescribeCollection to get
 // information, such as the number of faces indexed into a collection and the
-// version of the model used by the collection for face detection. For more
-// information, see Describing a Collection in the Amazon Rekognition Developer
-// Guide.
+// version of the model used by the collection for face detection.
+//
+// For more information, see Describing a Collection in the Amazon Rekognition
+// Developer Guide.
 func (c *Client) DescribeCollection(ctx context.Context, params *DescribeCollectionInput, optFns ...func(*Options)) (*DescribeCollectionOutput, error) {
 	if params == nil {
 		params = &DescribeCollectionInput{}
@@ -52,10 +53,11 @@ type DescribeCollectionOutput struct {
 	CreationTimestamp *time.Time
 
 	// The number of faces that are indexed into the collection. To index faces into a
-	// collection, use IndexFaces .
+	// collection, use IndexFaces.
 	FaceCount *int64
 
 	// The version of the face model that's used by the collection for face detection.
+	//
 	// For more information, see Model versioning in the Amazon Rekognition Developer
 	// Guide.
 	FaceModelVersion *string

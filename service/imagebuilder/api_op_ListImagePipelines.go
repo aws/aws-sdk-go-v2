@@ -30,11 +30,17 @@ func (c *Client) ListImagePipelines(ctx context.Context, params *ListImagePipeli
 type ListImagePipelinesInput struct {
 
 	// Use the following filters to streamline results:
+	//
 	//   - description
+	//
 	//   - distributionConfigurationArn
+	//
 	//   - imageRecipeArn
+	//
 	//   - infrastructureConfigurationArn
+	//
 	//   - name
+	//
 	//   - status
 	Filters []types.Filter
 

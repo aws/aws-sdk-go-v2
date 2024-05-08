@@ -29,7 +29,7 @@ func (c *Client) GetVehicle(ctx context.Context, params *GetVehicleInput, optFns
 
 type GetVehicleInput struct {
 
-	// The ID of the vehicle to retrieve information about.
+	//  The ID of the vehicle to retrieve information about.
 	//
 	// This member is required.
 	VehicleName *string
@@ -39,25 +39,26 @@ type GetVehicleInput struct {
 
 type GetVehicleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the vehicle to retrieve information about.
+	//  The Amazon Resource Name (ARN) of the vehicle to retrieve information about.
 	Arn *string
 
 	// Static information about a vehicle in a key-value pair. For example:
+	//
 	// "engineType" : "1.3 L R2"
 	Attributes map[string]string
 
-	// The time the vehicle was created in seconds since epoch (January 1, 1970 at
+	//  The time the vehicle was created in seconds since epoch (January 1, 1970 at
 	// midnight UTC time).
 	CreationTime *time.Time
 
-	// The ARN of a decoder manifest associated with the vehicle.
+	//  The ARN of a decoder manifest associated with the vehicle.
 	DecoderManifestArn *string
 
-	// The time the vehicle was last updated in seconds since epoch (January 1, 1970
+	//  The time the vehicle was last updated in seconds since epoch (January 1, 1970
 	// at midnight UTC time).
 	LastModificationTime *time.Time
 
-	// The ARN of a vehicle model (model manifest) associated with the vehicle.
+	//  The ARN of a vehicle model (model manifest) associated with the vehicle.
 	ModelManifestArn *string
 
 	// The ID of the vehicle.

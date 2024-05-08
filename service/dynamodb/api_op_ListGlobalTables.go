@@ -12,15 +12,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all global tables that have a replica in the specified Region. This
-// operation only applies to Version 2017.11.29 (Legacy) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
-// of global tables. We recommend using Version 2019.11.21 (Current) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
-// when creating new global tables, as it provides greater flexibility, higher
+// Lists all global tables that have a replica in the specified Region.
+//
+// This operation only applies to [Version 2017.11.29 (Legacy)] of global tables. We recommend using [Version 2019.11.21 (Current)] when
+// creating new global tables, as it provides greater flexibility, higher
 // efficiency and consumes less write capacity than 2017.11.29 (Legacy). To
-// determine which version you are using, see Determining the version (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html)
-// . To update existing global tables from version 2017.11.29 (Legacy) to version
-// 2019.11.21 (Current), see Updating global tables (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html)
-// .
+// determine which version you are using, see [Determining the version]. To update existing global tables
+// from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Updating global tables].
+//
+// [Updating global tables]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+// [Version 2017.11.29 (Legacy)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
+// [Determining the version]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
 func (c *Client) ListGlobalTables(ctx context.Context, params *ListGlobalTablesInput, optFns ...func(*Options)) (*ListGlobalTablesOutput, error) {
 	if params == nil {
 		params = &ListGlobalTablesInput{}
@@ -42,10 +45,12 @@ type ListGlobalTablesInput struct {
 	ExclusiveStartGlobalTableName *string
 
 	// The maximum number of table names to return, if the parameter is not specified
-	// DynamoDB defaults to 100. If the number of global tables DynamoDB finds reaches
-	// this limit, it stops the operation and returns the table names collected up to
-	// that point, with a table name in the LastEvaluatedGlobalTableName to apply in a
-	// subsequent operation to the ExclusiveStartGlobalTableName parameter.
+	// DynamoDB defaults to 100.
+	//
+	// If the number of global tables DynamoDB finds reaches this limit, it stops the
+	// operation and returns the table names collected up to that point, with a table
+	// name in the LastEvaluatedGlobalTableName to apply in a subsequent operation to
+	// the ExclusiveStartGlobalTableName parameter.
 	Limit *int32
 
 	// Lists the global tables in a specific Region.

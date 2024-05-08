@@ -30,18 +30,18 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 // Request structure used to request a project be created.
 type CreateProjectInput struct {
 
-	// ZIP or YAML file which contains configuration settings to be used when creating
-	// the project. This may be the contents of the file downloaded from the URL
-	// provided in an export project operation.
+	//  ZIP or YAML file which contains configuration settings to be used when
+	// creating the project. This may be the contents of the file downloaded from the
+	// URL provided in an export project operation.
 	Contents []byte
 
-	// Name of the project.
+	//  Name of the project.
 	Name *string
 
-	// Default region where project resources should be created.
+	//  Default region where project resources should be created.
 	Region *string
 
-	// Unique identifier for an exported snapshot of project configuration. This
+	//  Unique identifier for an exported snapshot of project configuration. This
 	// snapshot identifier is included in the share URL when a project is exported.
 	SnapshotId *string
 
@@ -51,7 +51,7 @@ type CreateProjectInput struct {
 // Result structure used in response to a request to create a project.
 type CreateProjectOutput struct {
 
-	// Detailed information about the created AWS Mobile Hub project.
+	//  Detailed information about the created AWS Mobile Hub project.
 	Details *types.ProjectDetails
 
 	// Metadata pertaining to the operation's result.

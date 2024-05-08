@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the specified portfolio. A delegated admin is authorized
-// to invoke this command.
+// Gets information about the specified portfolio.
+//
+// A delegated admin is authorized to invoke this command.
 func (c *Client) DescribePortfolio(ctx context.Context, params *DescribePortfolioInput, optFns ...func(*Options)) (*DescribePortfolioOutput, error) {
 	if params == nil {
 		params = &DescribePortfolioInput{}
@@ -36,7 +37,9 @@ type DescribePortfolioInput struct {
 	Id *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

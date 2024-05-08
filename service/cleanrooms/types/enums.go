@@ -11,6 +11,7 @@ const (
 
 // Values returns all known values for AccessDeniedExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessDeniedExceptionReason) Values() []AccessDeniedExceptionReason {
 	return []AccessDeniedExceptionReason{
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for AggregateFunctionName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AggregateFunctionName) Values() []AggregateFunctionName {
 	return []AggregateFunctionName{
 		"SUM",
@@ -50,8 +52,9 @@ const (
 )
 
 // Values returns all known values for AggregationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AggregationType) Values() []AggregationType {
 	return []AggregationType{
 		"COUNT_DISTINCT",
@@ -66,8 +69,9 @@ const (
 )
 
 // Values returns all known values for AnalysisFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisFormat) Values() []AnalysisFormat {
 	return []AnalysisFormat{
 		"SQL",
@@ -82,8 +86,9 @@ const (
 )
 
 // Values returns all known values for AnalysisMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisMethod) Values() []AnalysisMethod {
 	return []AnalysisMethod{
 		"DIRECT_QUERY",
@@ -100,8 +105,9 @@ const (
 )
 
 // Values returns all known values for AnalysisRuleType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisRuleType) Values() []AnalysisRuleType {
 	return []AnalysisRuleType{
 		"AGGREGATION",
@@ -121,8 +127,9 @@ const (
 
 // Values returns all known values for AnalysisTemplateValidationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisTemplateValidationStatus) Values() []AnalysisTemplateValidationStatus {
 	return []AnalysisTemplateValidationStatus{
 		"VALID",
@@ -140,8 +147,9 @@ const (
 
 // Values returns all known values for AnalysisTemplateValidationType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisTemplateValidationType) Values() []AnalysisTemplateValidationType {
 	return []AnalysisTemplateValidationType{
 		"DIFFERENTIAL_PRIVACY",
@@ -158,6 +166,7 @@ const (
 
 // Values returns all known values for CollaborationQueryLogStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CollaborationQueryLogStatus) Values() []CollaborationQueryLogStatus {
 	return []CollaborationQueryLogStatus{
@@ -177,8 +186,9 @@ const (
 
 // Values returns all known values for ConfiguredTableAnalysisRuleType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfiguredTableAnalysisRuleType) Values() []ConfiguredTableAnalysisRuleType {
 	return []ConfiguredTableAnalysisRuleType{
 		"AGGREGATION",
@@ -197,8 +207,9 @@ const (
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"ALREADY_EXISTS",
@@ -220,8 +231,9 @@ const (
 
 // Values returns all known values for DifferentialPrivacyAggregationType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DifferentialPrivacyAggregationType) Values() []DifferentialPrivacyAggregationType {
 	return []DifferentialPrivacyAggregationType{
 		"AVG",
@@ -241,8 +253,9 @@ const (
 )
 
 // Values returns all known values for FilterableMemberStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterableMemberStatus) Values() []FilterableMemberStatus {
 	return []FilterableMemberStatus{
 		"INVITED",
@@ -259,8 +272,9 @@ const (
 )
 
 // Values returns all known values for JoinOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JoinOperator) Values() []JoinOperator {
 	return []JoinOperator{
 		"OR",
@@ -276,8 +290,9 @@ const (
 )
 
 // Values returns all known values for JoinRequiredOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JoinRequiredOption) Values() []JoinRequiredOption {
 	return []JoinRequiredOption{
 		"QUERY_RUNNER",
@@ -293,8 +308,9 @@ const (
 )
 
 // Values returns all known values for MemberAbility. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MemberAbility) Values() []MemberAbility {
 	return []MemberAbility{
 		"CAN_QUERY",
@@ -312,6 +328,7 @@ const (
 
 // Values returns all known values for MembershipQueryLogStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MembershipQueryLogStatus) Values() []MembershipQueryLogStatus {
 	return []MembershipQueryLogStatus{
@@ -330,8 +347,9 @@ const (
 )
 
 // Values returns all known values for MembershipStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MembershipStatus) Values() []MembershipStatus {
 	return []MembershipStatus{
 		"ACTIVE",
@@ -351,8 +369,9 @@ const (
 )
 
 // Values returns all known values for MemberStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MemberStatus) Values() []MemberStatus {
 	return []MemberStatus{
 		"INVITED",
@@ -384,8 +403,9 @@ const (
 )
 
 // Values returns all known values for ParameterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterType) Values() []ParameterType {
 	return []ParameterType{
 		"SMALLINT",
@@ -416,8 +436,9 @@ const (
 
 // Values returns all known values for PrivacyBudgetTemplateAutoRefresh. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrivacyBudgetTemplateAutoRefresh) Values() []PrivacyBudgetTemplateAutoRefresh {
 	return []PrivacyBudgetTemplateAutoRefresh{
 		"CALENDAR_MONTH",
@@ -433,8 +454,9 @@ const (
 )
 
 // Values returns all known values for PrivacyBudgetType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrivacyBudgetType) Values() []PrivacyBudgetType {
 	return []PrivacyBudgetType{
 		"DIFFERENTIAL_PRIVACY",
@@ -455,8 +477,9 @@ const (
 )
 
 // Values returns all known values for ProtectedQueryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectedQueryStatus) Values() []ProtectedQueryStatus {
 	return []ProtectedQueryStatus{
 		"SUBMITTED",
@@ -477,8 +500,9 @@ const (
 )
 
 // Values returns all known values for ProtectedQueryType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectedQueryType) Values() []ProtectedQueryType {
 	return []ProtectedQueryType{
 		"SQL",
@@ -496,8 +520,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CONFIGURED_TABLE",
@@ -516,8 +541,9 @@ const (
 )
 
 // Values returns all known values for ResultFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResultFormat) Values() []ResultFormat {
 	return []ResultFormat{
 		"CSV",
@@ -556,8 +582,9 @@ const (
 )
 
 // Values returns all known values for ScalarFunctions. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalarFunctions) Values() []ScalarFunctions {
 	return []ScalarFunctions{
 		"ABS",
@@ -595,8 +622,9 @@ const (
 )
 
 // Values returns all known values for SchemaConfiguration. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaConfiguration) Values() []SchemaConfiguration {
 	return []SchemaConfiguration{
 		"DIFFERENTIAL_PRIVACY",
@@ -612,8 +640,9 @@ const (
 )
 
 // Values returns all known values for SchemaStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaStatus) Values() []SchemaStatus {
 	return []SchemaStatus{
 		"READY",
@@ -632,8 +661,9 @@ const (
 )
 
 // Values returns all known values for SchemaStatusReasonCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaStatusReasonCode) Values() []SchemaStatusReasonCode {
 	return []SchemaStatusReasonCode{
 		"ANALYSIS_RULE_MISSING",
@@ -651,8 +681,9 @@ const (
 )
 
 // Values returns all known values for SchemaType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaType) Values() []SchemaType {
 	return []SchemaType{
 		"TABLE",
@@ -668,6 +699,7 @@ const (
 
 // Values returns all known values for TargetProtectedQueryStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetProtectedQueryStatus) Values() []TargetProtectedQueryStatus {
 	return []TargetProtectedQueryStatus{
@@ -687,6 +719,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

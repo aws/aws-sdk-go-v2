@@ -12,18 +12,22 @@ import (
 )
 
 // Creates a cached volume on a specified cached volume gateway. This operation is
-// only supported in the cached volume gateway type. Cache storage must be
-// allocated to the gateway before you can create a cached volume. Use the AddCache
-// operation to add cache storage to a gateway. In the request, you must specify
-// the gateway, size of the volume in bytes, the iSCSI target name, an IP address
-// on which to expose the target, and a unique client token. In response, the
-// gateway creates the volume and returns information about it. This information
-// includes the volume Amazon Resource Name (ARN), its size, and the iSCSI target
-// ARN that initiators can use to connect to the volume target. Optionally, you can
-// provide the ARN for an existing volume as the SourceVolumeARN for this cached
-// volume, which creates an exact copy of the existing volume’s latest recovery
-// point. The VolumeSizeInBytes value must be equal to or larger than the size of
-// the copied volume, in bytes.
+// only supported in the cached volume gateway type.
+//
+// Cache storage must be allocated to the gateway before you can create a cached
+// volume. Use the AddCacheoperation to add cache storage to a gateway.
+//
+// In the request, you must specify the gateway, size of the volume in bytes, the
+// iSCSI target name, an IP address on which to expose the target, and a unique
+// client token. In response, the gateway creates the volume and returns
+// information about it. This information includes the volume Amazon Resource Name
+// (ARN), its size, and the iSCSI target ARN that initiators can use to connect to
+// the volume target.
+//
+// Optionally, you can provide the ARN for an existing volume as the
+// SourceVolumeARN for this cached volume, which creates an exact copy of the
+// existing volume’s latest recovery point. The VolumeSizeInBytes value must be
+// equal to or larger than the size of the copied volume, in bytes.
 func (c *Client) CreateCachediSCSIVolume(ctx context.Context, params *CreateCachediSCSIVolumeInput, optFns ...func(*Options)) (*CreateCachediSCSIVolumeOutput, error) {
 	if params == nil {
 		params = &CreateCachediSCSIVolumeInput{}
@@ -47,15 +51,17 @@ type CreateCachediSCSIVolumeInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
 	// The network interface of the gateway on which to expose the iSCSI target. Only
-	// IPv4 addresses are accepted. Use DescribeGatewayInformation to get a list of
-	// the network interfaces available on a gateway. Valid Values: A valid IP address.
+	// IPv4 addresses are accepted. Use DescribeGatewayInformationto get a list of the network interfaces
+	// available on a gateway.
+	//
+	// Valid Values: A valid IP address.
 	//
 	// This member is required.
 	NetworkInterfaceId *string
@@ -64,9 +70,10 @@ type CreateCachediSCSIVolumeInput struct {
 	// used as a suffix for the target ARN. For example, specifying TargetName as
 	// myvolume results in the target ARN of
 	// arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume
-	// . The target name must be unique across all volumes on a gateway. If you don't
-	// specify a value, Storage Gateway uses the value that was previously used for
-	// this volume as the new target name.
+	// . The target name must be unique across all volumes on a gateway.
+	//
+	// If you don't specify a value, Storage Gateway uses the value that was
+	// previously used for this volume as the new target name.
 	//
 	// This member is required.
 	TargetName *string
@@ -77,7 +84,9 @@ type CreateCachediSCSIVolumeInput struct {
 	VolumeSizeInBytes int64
 
 	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// false to use a key managed by Amazon S3. Optional.
+	//
+	// Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
@@ -88,8 +97,9 @@ type CreateCachediSCSIVolumeInput struct {
 	// The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new
 	// cached volume. Specify this field if you want to create the iSCSI storage volume
 	// from a snapshot; otherwise, do not include this field. To list snapshots for
-	// your account use DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html)
-	// in the Amazon Elastic Compute Cloud API Reference.
+	// your account use [DescribeSnapshots]in the Amazon Elastic Compute Cloud API Reference.
+	//
+	// [DescribeSnapshots]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
 	SnapshotId *string
 
 	// The ARN for an existing volume. Specifying this ARN makes the new volume into
@@ -99,10 +109,12 @@ type CreateCachediSCSIVolumeInput struct {
 	SourceVolumeARN *string
 
 	// A list of up to 50 tags that you can assign to a cached volume. Each tag is a
-	// key-value pair. Valid characters for key and value are letters, spaces, and
-	// numbers that you can represent in UTF-8 format, and the following special
-	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256 characters.
+	// key-value pair.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers that you
+	// can represent in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256 characters.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

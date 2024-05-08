@@ -39,7 +39,9 @@ type ListLensReviewsInput struct {
 	// The maximum number of results to return for this request.
 	MaxResults *int32
 
-	// The milestone number. A workload can have a maximum of 100 milestones.
+	// The milestone number.
+	//
+	// A workload can have a maximum of 100 milestones.
 	MilestoneNumber *int32
 
 	// The token to use to retrieve the next set of results.
@@ -54,7 +56,9 @@ type ListLensReviewsOutput struct {
 	// List of lens summaries of lens reviews of a workload.
 	LensReviewSummaries []types.LensReviewSummary
 
-	// The milestone number. A workload can have a maximum of 100 milestones.
+	// The milestone number.
+	//
+	// A workload can have a maximum of 100 milestones.
 	MilestoneNumber *int32
 
 	// The token to use to retrieve the next set of results.

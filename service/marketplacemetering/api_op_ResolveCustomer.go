@@ -14,11 +14,15 @@ import (
 // process. When a buyer visits your website during the registration process, the
 // buyer submits a registration token through their browser. The registration token
 // is resolved through this API to obtain a CustomerIdentifier along with the
-// CustomerAWSAccountId and ProductCode . The API needs to called from the seller
-// account id used to publish the SaaS application to successfully resolve the
-// token. For an example of using ResolveCustomer , see  ResolveCustomer code
-// example (https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example)
-// in the AWS Marketplace Seller Guide.
+// CustomerAWSAccountId and ProductCode .
+//
+// The API needs to called from the seller account id used to publish the SaaS
+// application to successfully resolve the token.
+//
+// For an example of using ResolveCustomer , see [ResolveCustomer code example] in the AWS Marketplace Seller
+// Guide.
+//
+// [ResolveCustomer code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example
 func (c *Client) ResolveCustomer(ctx context.Context, params *ResolveCustomerInput, optFns ...func(*Options)) (*ResolveCustomerOutput, error) {
 	if params == nil {
 		params = &ResolveCustomerInput{}
@@ -49,6 +53,7 @@ type ResolveCustomerInput struct {
 }
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
+//
 // along with the CustomerAWSAccountId and ProductCode .
 type ResolveCustomerOutput struct {
 

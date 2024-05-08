@@ -12,8 +12,10 @@ import (
 	"time"
 )
 
-// Returns details about a specific monitor. This action requires the monitorName
-// parameter. Run ListMonitors to get a list of monitor names.
+// Returns details about a specific monitor.
+//
+// This action requires the monitorName parameter. Run ListMonitors to get a list
+// of monitor names.
 func (c *Client) GetMonitor(ctx context.Context, params *GetMonitorInput, optFns ...func(*Options)) (*GetMonitorOutput, error) {
 	if params == nil {
 		params = &GetMonitorInput{}

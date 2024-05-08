@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for ActionHistoryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionHistoryStatus) Values() []ActionHistoryStatus {
 	return []ActionHistoryStatus{
 		"Completed",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for ActionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionStatus) Values() []ActionStatus {
 	return []ActionStatus{
 		"Scheduled",
@@ -54,8 +56,9 @@ const (
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionType) Values() []ActionType {
 	return []ActionType{
 		"InstanceRefresh",
@@ -77,6 +80,7 @@ const (
 
 // Values returns all known values for ApplicationVersionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationVersionStatus) Values() []ApplicationVersionStatus {
 	return []ApplicationVersionStatus{
@@ -98,8 +102,9 @@ const (
 )
 
 // Values returns all known values for ComputeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComputeType) Values() []ComputeType {
 	return []ComputeType{
 		"BUILD_GENERAL1_SMALL",
@@ -119,8 +124,9 @@ const (
 
 // Values returns all known values for ConfigurationDeploymentStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationDeploymentStatus) Values() []ConfigurationDeploymentStatus {
 	return []ConfigurationDeploymentStatus{
 		"deployed",
@@ -139,8 +145,9 @@ const (
 
 // Values returns all known values for ConfigurationOptionValueType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationOptionValueType) Values() []ConfigurationOptionValueType {
 	return []ConfigurationOptionValueType{
 		"Scalar",
@@ -159,8 +166,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentHealth. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentHealth) Values() []EnvironmentHealth {
 	return []EnvironmentHealth{
 		"Green",
@@ -186,6 +194,7 @@ const (
 
 // Values returns all known values for EnvironmentHealthAttribute. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentHealthAttribute) Values() []EnvironmentHealthAttribute {
 	return []EnvironmentHealthAttribute{
@@ -216,8 +225,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentHealthStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentHealthStatus) Values() []EnvironmentHealthStatus {
 	return []EnvironmentHealthStatus{
 		"NoData",
@@ -241,8 +251,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentInfoType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentInfoType) Values() []EnvironmentInfoType {
 	return []EnvironmentInfoType{
 		"tail",
@@ -265,8 +276,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentStatus) Values() []EnvironmentStatus {
 	return []EnvironmentStatus{
 		"Aborting",
@@ -293,8 +305,9 @@ const (
 )
 
 // Values returns all known values for EventSeverity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventSeverity) Values() []EventSeverity {
 	return []EventSeverity{
 		"TRACE",
@@ -320,8 +333,9 @@ const (
 )
 
 // Values returns all known values for FailureType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureType) Values() []FailureType {
 	return []FailureType{
 		"UpdateCancelled",
@@ -353,6 +367,7 @@ const (
 
 // Values returns all known values for InstancesHealthAttribute. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InstancesHealthAttribute) Values() []InstancesHealthAttribute {
 	return []InstancesHealthAttribute{
@@ -382,8 +397,9 @@ const (
 )
 
 // Values returns all known values for PlatformStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlatformStatus) Values() []PlatformStatus {
 	return []PlatformStatus{
 		"Creating",
@@ -403,8 +419,9 @@ const (
 )
 
 // Values returns all known values for SourceRepository. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceRepository) Values() []SourceRepository {
 	return []SourceRepository{
 		"CodeCommit",
@@ -421,8 +438,9 @@ const (
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"Git",
@@ -439,8 +457,9 @@ const (
 )
 
 // Values returns all known values for ValidationSeverity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationSeverity) Values() []ValidationSeverity {
 	return []ValidationSeverity{
 		"error",

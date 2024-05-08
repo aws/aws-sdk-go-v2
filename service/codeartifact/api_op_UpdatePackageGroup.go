@@ -13,8 +13,9 @@ import (
 
 // Updates a package group. This API cannot be used to update a package group's
 // origin configuration or pattern. To update a package group's origin
-// configuration, use UpdatePackageGroupOriginConfiguration (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageGroupOriginConfiguration.html)
-// .
+// configuration, use [UpdatePackageGroupOriginConfiguration].
+//
+// [UpdatePackageGroupOriginConfiguration]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageGroupOriginConfiguration.html
 func (c *Client) UpdatePackageGroup(ctx context.Context, params *UpdatePackageGroupInput, optFns ...func(*Options)) (*UpdatePackageGroupOutput, error) {
 	if params == nil {
 		params = &UpdatePackageGroupInput{}
@@ -32,23 +33,23 @@ func (c *Client) UpdatePackageGroup(ctx context.Context, params *UpdatePackageGr
 
 type UpdatePackageGroupInput struct {
 
-	// The name of the domain which contains the package group to be updated.
+	//  The name of the domain which contains the package group to be updated.
 	//
 	// This member is required.
 	Domain *string
 
-	// The pattern of the package group to be updated.
+	//  The pattern of the package group to be updated.
 	//
 	// This member is required.
 	PackageGroup *string
 
-	// Contact information which you want to update the requested package group with.
+	//  Contact information which you want to update the requested package group with.
 	ContactInfo *string
 
-	// The description you want to update the requested package group with.
+	//  The description you want to update the requested package group with.
 	Description *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -57,7 +58,8 @@ type UpdatePackageGroupInput struct {
 
 type UpdatePackageGroupOutput struct {
 
-	// The package group and information about it after the request has been processed.
+	//  The package group and information about it after the request has been
+	// processed.
 	PackageGroup *types.PackageGroupDescription
 
 	// Metadata pertaining to the operation's result.

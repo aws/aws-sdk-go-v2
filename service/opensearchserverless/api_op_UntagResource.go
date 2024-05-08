@@ -11,8 +11,9 @@ import (
 )
 
 // Removes a tag or set of tags from an OpenSearch Serverless resource. For more
-// information, see Tagging Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html)
-// .
+// information, see [Tagging Amazon OpenSearch Serverless collections].
+//
+// [Tagging Amazon OpenSearch Serverless collections]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-collection.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

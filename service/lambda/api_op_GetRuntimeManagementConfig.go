@@ -15,8 +15,9 @@ import (
 // runtime update mode is Manual, this includes the ARN of the runtime version and
 // the runtime update mode. If the runtime update mode is Auto or Function update,
 // this includes the runtime update mode and null is returned for the ARN. For
-// more information, see Runtime updates (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html)
-// .
+// more information, see [Runtime updates].
+//
+// [Runtime updates]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
 func (c *Client) GetRuntimeManagementConfig(ctx context.Context, params *GetRuntimeManagementConfigInput, optFns ...func(*Options)) (*GetRuntimeManagementConfigOutput, error) {
 	if params == nil {
 		params = &GetRuntimeManagementConfigInput{}
@@ -34,10 +35,16 @@ func (c *Client) GetRuntimeManagementConfig(ctx context.Context, params *GetRunt
 
 type GetRuntimeManagementConfigInput struct {
 
-	// The name or ARN of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//

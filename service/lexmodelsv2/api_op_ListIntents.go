@@ -40,8 +40,9 @@ type ListIntentsInput struct {
 	BotVersion *string
 
 	// The identifier of the language and locale of the intents to list. The string
-	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
+	// must match one of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -57,8 +58,9 @@ type ListIntentsInput struct {
 	MaxResults *int32
 
 	// If the response from the ListIntents operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response. Use
-	// the returned token in the nextToken parameter of a ListIntents request to
+	// specified in the maxResults parameter, a token is returned in the response.
+	//
+	// Use the returned token in the nextToken parameter of a ListIntents request to
 	// return the next page of results. For a complete set of results, call the
 	// ListIntents operation until the nextToken returned in the response is null.
 	NextToken *string

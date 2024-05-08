@@ -46,8 +46,9 @@ type StopBotRecommendationInput struct {
 	BotVersion *string
 
 	// The identifier of the language and locale of the bot recommendation to stop.
-	// The string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// The string must match one of the supported locales. For more information, see [Supported languages]
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -72,8 +73,9 @@ type StopBotRecommendationOutput struct {
 	BotVersion *string
 
 	// The identifier of the language and locale of the bot response to stop. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// string must match one of the supported locales. For more information, see [Supported languages]
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	LocaleId *string
 
 	// Metadata pertaining to the operation's result.

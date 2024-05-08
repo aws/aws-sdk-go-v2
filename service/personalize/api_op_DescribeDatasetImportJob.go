@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the dataset import job created by CreateDatasetImportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html)
-// , including the import job status.
+// Describes the dataset import job created by [CreateDatasetImportJob], including the import job status.
+//
+// [CreateDatasetImportJob]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html
 func (c *Client) DescribeDatasetImportJob(ctx context.Context, params *DescribeDatasetImportJobInput, optFns ...func(*Options)) (*DescribeDatasetImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetImportJobInput{}
@@ -40,11 +41,16 @@ type DescribeDatasetImportJobInput struct {
 
 type DescribeDatasetImportJobOutput struct {
 
-	// Information about the dataset import job, including the status. The status is
-	// one of the following values:
+	// Information about the dataset import job, including the status.
+	//
+	// The status is one of the following values:
+	//
 	//   - CREATE PENDING
+	//
 	//   - CREATE IN_PROGRESS
+	//
 	//   - ACTIVE
+	//
 	//   - CREATE FAILED
 	DatasetImportJob *types.DatasetImportJob
 

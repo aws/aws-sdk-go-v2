@@ -13,9 +13,10 @@ import (
 )
 
 // Returns a description of the specified model package, which is used to create
-// SageMaker models or list them on Amazon Web Services Marketplace. To create
-// models in SageMaker, buyers can subscribe to model packages listed on Amazon Web
-// Services Marketplace.
+// SageMaker models or list them on Amazon Web Services Marketplace.
+//
+// To create models in SageMaker, buyers can subscribe to model packages listed on
+// Amazon Web Services Marketplace.
 func (c *Client) DescribeModelPackage(ctx context.Context, params *DescribeModelPackageInput, optFns ...func(*Options)) (*DescribeModelPackageOutput, error) {
 	if params == nil {
 		params = &DescribeModelPackageInput{}
@@ -33,9 +34,10 @@ func (c *Client) DescribeModelPackage(ctx context.Context, params *DescribeModel
 
 type DescribeModelPackageInput struct {
 
-	// The name or Amazon Resource Name (ARN) of the model package to describe. When
-	// you specify a name, the name must have 1 to 63 characters. Valid characters are
-	// a-z, A-Z, 0-9, and - (hyphen).
+	// The name or Amazon Resource Name (ARN) of the model package to describe.
+	//
+	// When you specify a name, the name must have 1 to 63 characters. Valid
+	// characters are a-z, A-Z, 0-9, and - (hyphen).
 	//
 	// This member is required.
 	ModelPackageName *string
@@ -95,9 +97,10 @@ type DescribeModelPackageOutput struct {
 	Domain *string
 
 	// Represents the drift check baselines that can be used when the model monitor is
-	// set using the model package. For more information, see the topic on Drift
-	// Detection against Previous Baselines in SageMaker Pipelines (https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection)
-	// in the Amazon SageMaker Developer Guide.
+	// set using the model package. For more information, see the topic on [Drift Detection against Previous Baselines in SageMaker Pipelines]in the
+	// Amazon SageMaker Developer Guide.
+	//
+	// [Drift Detection against Previous Baselines in SageMaker Pipelines]: https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection
 	DriftCheckBaselines *types.DriftCheckBaselines
 
 	// Details about inference jobs that you can run with models based on this model

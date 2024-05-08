@@ -47,16 +47,17 @@ type UpdatePricingPlanOutput struct {
 	// The Amazon Resource Name (ARN) of the updated pricing plan.
 	Arn *string
 
-	// The new description for the pricing rule.
+	//  The new description for the pricing rule.
 	Description *string
 
-	// The most recent time when the pricing plan was modified.
+	//  The most recent time when the pricing plan was modified.
 	LastModifiedTime int64
 
-	// The name of the pricing plan. The name must be unique to each pricing plan.
+	//  The name of the pricing plan. The name must be unique to each pricing plan.
 	Name *string
 
-	// The pricing rules count that's currently associated with this pricing plan list.
+	//  The pricing rules count that's currently associated with this pricing plan
+	// list.
 	Size int64
 
 	// Metadata pertaining to the operation's result.

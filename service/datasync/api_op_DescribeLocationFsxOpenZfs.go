@@ -13,8 +13,10 @@ import (
 )
 
 // Provides details about how an DataSync transfer location for an Amazon FSx for
-// OpenZFS file system is configured. Response elements related to SMB aren't
-// supported with the DescribeLocationFsxOpenZfs operation.
+// OpenZFS file system is configured.
+//
+// Response elements related to SMB aren't supported with the
+// DescribeLocationFsxOpenZfs operation.
 func (c *Client) DescribeLocationFsxOpenZfs(ctx context.Context, params *DescribeLocationFsxOpenZfsInput, optFns ...func(*Options)) (*DescribeLocationFsxOpenZfsOutput, error) {
 	if params == nil {
 		params = &DescribeLocationFsxOpenZfsInput{}
@@ -49,7 +51,9 @@ type DescribeLocationFsxOpenZfsOutput struct {
 	LocationArn *string
 
 	// The uniform resource identifier (URI) of the FSx for OpenZFS location that was
-	// described. Example: fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder
+	// described.
+	//
+	// Example: fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder
 	LocationUri *string
 
 	// The type of protocol that DataSync uses to access your file system.

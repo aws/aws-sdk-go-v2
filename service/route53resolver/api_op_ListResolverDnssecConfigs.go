@@ -33,15 +33,18 @@ type ListResolverDnssecConfigsInput struct {
 	// An optional specification to return a subset of objects.
 	Filters []types.Filter
 
-	// Optional: An integer that specifies the maximum number of DNSSEC configuration
+	//  Optional: An integer that specifies the maximum number of DNSSEC configuration
 	// results that you want Amazon Route 53 to return. If you don't specify a value
 	// for MaxResults , Route 53 returns up to 100 configuration per page.
 	MaxResults *int32
 
 	// (Optional) If the current Amazon Web Services account has more than MaxResults
 	// DNSSEC configurations, use NextToken to get the second and subsequent pages of
-	// results. For the first ListResolverDnssecConfigs request, omit this value. For
-	// the second and subsequent requests, get the value of NextToken from the
+	// results.
+	//
+	// For the first ListResolverDnssecConfigs request, omit this value.
+	//
+	// For the second and subsequent requests, get the value of NextToken from the
 	// previous response and specify that value for NextToken in the request.
 	NextToken *string
 
@@ -52,17 +55,21 @@ type ListResolverDnssecConfigsOutput struct {
 
 	// If a response includes the last of the DNSSEC configurations that are
 	// associated with the current Amazon Web Services account, NextToken doesn't
-	// appear in the response. If a response doesn't include the last of the
-	// configurations, you can get more configurations by submitting another
-	// ListResolverDnssecConfigs (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListResolverDnssecConfigs.html)
-	// request. Get the value of NextToken that Amazon Route 53 returned in the
-	// previous response and include it in NextToken in the next request.
+	// appear in the response.
+	//
+	// If a response doesn't include the last of the configurations, you can get more
+	// configurations by submitting another [ListResolverDnssecConfigs]request. Get the value of NextToken that
+	// Amazon Route 53 returned in the previous response and include it in NextToken
+	// in the next request.
+	//
+	// [ListResolverDnssecConfigs]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListResolverDnssecConfigs.html
 	NextToken *string
 
-	// An array that contains one ResolverDnssecConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html)
-	// element for each configuration for DNSSEC validation that is associated with the
-	// current Amazon Web Services account. It doesn't contain disabled DNSSEC
-	// configurations for the resource.
+	// An array that contains one [ResolverDnssecConfig] element for each configuration for DNSSEC
+	// validation that is associated with the current Amazon Web Services account. It
+	// doesn't contain disabled DNSSEC configurations for the resource.
+	//
+	// [ResolverDnssecConfig]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html
 	ResolverDnssecConfigs []types.ResolverDnssecConfig
 
 	// Metadata pertaining to the operation's result.
@@ -158,7 +165,7 @@ var _ ListResolverDnssecConfigsAPIClient = (*Client)(nil)
 // ListResolverDnssecConfigsPaginatorOptions is the paginator options for
 // ListResolverDnssecConfigs
 type ListResolverDnssecConfigsPaginatorOptions struct {
-	// Optional: An integer that specifies the maximum number of DNSSEC configuration
+	//  Optional: An integer that specifies the maximum number of DNSSEC configuration
 	// results that you want Amazon Route 53 to return. If you don't specify a value
 	// for MaxResults , Route 53 returns up to 100 configuration per page.
 	Limit int32

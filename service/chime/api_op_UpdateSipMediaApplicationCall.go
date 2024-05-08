@@ -13,15 +13,19 @@ import (
 
 // Invokes the AWS Lambda function associated with the SIP media application and
 // transaction ID in an update request. The Lambda function can then return a new
-// set of actions. This API is is no longer supported and will not be updated. We
-// recommend using the latest version, UpdateSipMediaApplicationCall (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateSipMediaApplicationCall.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// set of actions.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [UpdateSipMediaApplicationCall], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by UpdateSipMediaApplicationCall in the Amazon Chime SDK
 // Voice Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [UpdateSipMediaApplicationCall]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateSipMediaApplicationCall.html
 func (c *Client) UpdateSipMediaApplicationCall(ctx context.Context, params *UpdateSipMediaApplicationCallInput, optFns ...func(*Options)) (*UpdateSipMediaApplicationCallOutput, error) {
 	if params == nil {
 		params = &UpdateSipMediaApplicationCallInput{}

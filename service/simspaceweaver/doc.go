@@ -7,11 +7,15 @@
 // run large-scale spatial simulations in the Amazon Web Services Cloud. For
 // example, you can create crowd simulations, large real-world environments, and
 // immersive and interactive experiences. For more information about SimSpace
-// Weaver, see the SimSpace Weaver User Guide (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/)
-// . This API reference describes the API operations and data types that you can
-// use to communicate directly with SimSpace Weaver. SimSpace Weaver also provides
-// the SimSpace Weaver app SDK, which you use for app development. The SimSpace
-// Weaver app SDK API reference is included in the SimSpace Weaver app SDK
-// documentation. This documentation is part of the SimSpace Weaver app SDK
-// distributable package.
+// Weaver, see the [SimSpace Weaver User Guide].
+//
+// This API reference describes the API operations and data types that you can use
+// to communicate directly with SimSpace Weaver.
+//
+// SimSpace Weaver also provides the SimSpace Weaver app SDK, which you use for
+// app development. The SimSpace Weaver app SDK API reference is included in the
+// SimSpace Weaver app SDK documentation. This documentation is part of the
+// SimSpace Weaver app SDK distributable package.
+//
+// [SimSpace Weaver User Guide]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/
 package simspaceweaver

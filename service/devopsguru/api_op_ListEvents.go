@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the events emitted by the resources that are evaluated by
+//	Returns a list of the events emitted by the resources that are evaluated by
+//
 // DevOps Guru. You can use filters to specify which events are returned.
 func (c *Client) ListEvents(ctx context.Context, params *ListEventsInput, optFns ...func(*Options)) (*ListEventsOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) ListEvents(ctx context.Context, params *ListEventsInput, optFns
 
 type ListEventsInput struct {
 
-	// A ListEventsFilters object used to specify which events to return.
+	//  A ListEventsFilters object used to specify which events to return.
 	//
 	// This member is required.
 	Filters *types.ListEventsFilters
@@ -51,7 +52,7 @@ type ListEventsInput struct {
 
 type ListEventsOutput struct {
 
-	// A list of the requested events.
+	//  A list of the requested events.
 	//
 	// This member is required.
 	Events []types.Event

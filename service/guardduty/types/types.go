@@ -246,8 +246,9 @@ type AwsApiCallAction struct {
 }
 
 // Contains information on how the bucker owner's S3 Block Public Access settings
-// are being applied to the S3 bucket. See S3 Block Public Access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
-// for more information.
+// are being applied to the S3 bucket. See [S3 Block Public Access]for more information.
+//
+// [S3 Block Public Access]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
 type BlockPublicAccess struct {
 
 	// Indicates if S3 Block Public Access is set to BlockPublicAcls .
@@ -454,10 +455,13 @@ type CoverageEc2InstanceDetails struct {
 	InstanceType *string
 
 	// Indicates how the GuardDuty security agent is managed for this resource.
+	//
 	//   - AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this
 	//   resource.
+	//
 	//   - MANUAL indicates that you are responsible to deploy, update, and manage the
 	//   GuardDuty security agent updates for this resource.
+	//
 	// The DISABLED status doesn't apply to Amazon EC2 instances and Amazon EKS
 	// clusters.
 	ManagementType ManagementType
@@ -496,9 +500,12 @@ type CoverageEksClusterDetails struct {
 	CoveredNodes *int64
 
 	// Indicates how the Amazon EKS add-on GuardDuty agent is managed for this EKS
-	// cluster. AUTO_MANAGED indicates GuardDuty deploys and manages updates for this
-	// resource. MANUAL indicates that you are responsible to deploy, update, and
-	// manage the Amazon EKS add-on GuardDuty agent for this resource.
+	// cluster.
+	//
+	// AUTO_MANAGED indicates GuardDuty deploys and manages updates for this resource.
+	//
+	// MANUAL indicates that you are responsible to deploy, update, and manage the
+	// Amazon EKS add-on GuardDuty agent for this resource.
 	ManagementType ManagementType
 
 	noSmithyDocumentSerde
@@ -533,8 +540,10 @@ type CoverageFilterCriteria struct {
 // operation.
 type CoverageFilterCriterion struct {
 
-	// An enum value representing possible filter fields. Replace the enum value
-	// CLUSTER_NAME with EKS_CLUSTER_NAME . CLUSTER_NAME has been deprecated.
+	// An enum value representing possible filter fields.
+	//
+	// Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME . CLUSTER_NAME has
+	// been deprecated.
 	CriterionKey CoverageFilterCriterionKey
 
 	// Contains information about the condition.
@@ -592,8 +601,10 @@ type CoverageResourceDetails struct {
 // Information about the sorting criteria used in the coverage statistics.
 type CoverageSortCriteria struct {
 
-	// Represents the field name used to sort the coverage details. Replace the enum
-	// value CLUSTER_NAME with EKS_CLUSTER_NAME . CLUSTER_NAME has been deprecated.
+	// Represents the field name used to sort the coverage details.
+	//
+	// Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME . CLUSTER_NAME has
+	// been deprecated.
 	AttributeName CoverageSortKey
 
 	// The order in which the sorted findings are to be displayed.
@@ -702,8 +713,9 @@ type DataSourcesFreeTrial struct {
 }
 
 // Contains information on the server side encryption method used in the S3
-// bucket. See S3 Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html)
-// for more information.
+// bucket. See [S3 Server-Side Encryption]for more information.
+//
+// [S3 Server-Side Encryption]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
 type DefaultServerSideEncryption struct {
 
 	// The type of encryption used for objects within the S3 bucket.
@@ -743,8 +755,10 @@ type Destination struct {
 // an S3 bucket, and the ARN of the KMS key to use to encrypt published findings.
 type DestinationProperties struct {
 
-	// The ARN of the resource to publish to. To specify an S3 bucket folder use the
-	// following format: arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/
+	// The ARN of the resource to publish to.
+	//
+	// To specify an S3 bucket folder use the following format:
+	// arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/
 	DestinationArn *string
 
 	// The ARN of the KMS key to use for encryption.
@@ -792,12 +806,14 @@ type DetectorAdditionalConfigurationResult struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a GuardDuty feature. Specifying both EKS Runtime
-// Monitoring ( EKS_RUNTIME_MONITORING ) and Runtime Monitoring ( RUNTIME_MONITORING
-// ) will cause an error. You can add only one of these two features because
-// Runtime Monitoring already includes the threat detection for Amazon EKS
-// resources. For more information, see Runtime Monitoring (https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html)
-// .
+// Contains information about a GuardDuty feature.
+//
+// Specifying both EKS Runtime Monitoring ( EKS_RUNTIME_MONITORING ) and Runtime
+// Monitoring ( RUNTIME_MONITORING ) will cause an error. You can add only one of
+// these two features because Runtime Monitoring already includes the threat
+// detection for Amazon EKS resources. For more information, see [Runtime Monitoring].
+//
+// [Runtime Monitoring]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
 type DetectorFeatureConfiguration struct {
 
 	// Additional configuration for a resource.
@@ -812,12 +828,14 @@ type DetectorFeatureConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a GuardDuty feature. Specifying both EKS Runtime
-// Monitoring ( EKS_RUNTIME_MONITORING ) and Runtime Monitoring ( RUNTIME_MONITORING
-// ) will cause an error. You can add only one of these two features because
-// Runtime Monitoring already includes the threat detection for Amazon EKS
-// resources. For more information, see Runtime Monitoring (https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html)
-// .
+// Contains information about a GuardDuty feature.
+//
+// Specifying both EKS Runtime Monitoring ( EKS_RUNTIME_MONITORING ) and Runtime
+// Monitoring ( RUNTIME_MONITORING ) will cause an error. You can add only one of
+// these two features because Runtime Monitoring already includes the threat
+// detection for Amazon EKS resources. For more information, see [Runtime Monitoring].
+//
+// [Runtime Monitoring]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
 type DetectorFeatureConfigurationResult struct {
 
 	// Additional configuration for a resource.
@@ -857,7 +875,9 @@ type DnsRequestAction struct {
 
 	// The second and top level domain involved in the activity that potentially
 	// prompted GuardDuty to generate this finding. For a list of top-level and
-	// second-level domains, see public suffix list (https://publicsuffix.org/) .
+	// second-level domains, see [public suffix list].
+	//
+	// [public suffix list]: https://publicsuffix.org/
 	DomainWithSuffix *string
 
 	// The network connection protocol observed in the activity that prompted
@@ -1036,10 +1056,13 @@ type FargateDetails struct {
 	Issues []string
 
 	// Indicates how the GuardDuty security agent is managed for this resource.
+	//
 	//   - AUTO_MANAGED indicates that GuardDuty deploys and manages updates for this
 	//   resource.
+	//
 	//   - DISABLED indicates that the deployment of the GuardDuty security agent is
 	//   disabled for this resource.
+	//
 	// The MANUAL status doesn't apply to the Amazon Web Services Fargate (Amazon ECS
 	// only) woprkloads.
 	ManagementType ManagementType
@@ -1082,8 +1105,10 @@ type FilterCriteria struct {
 type FilterCriterion struct {
 
 	// An enum value representing possible scan properties to match with given scan
-	// entries. Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME .
-	// CLUSTER_NAME has been deprecated.
+	// entries.
+	//
+	// Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME . CLUSTER_NAME has
+	// been deprecated.
 	CriterionKey CriterionKey
 
 	// Contains information about the condition.
@@ -1947,13 +1972,18 @@ type OrganizationAdditionalConfiguration struct {
 	// The status of the additional configuration that will be configured for the
 	// organization. Use one of the following values to configure the feature status
 	// for the entire organization:
+	//
 	//   - NEW : Indicates that when a new account joins the organization, they will
 	//   have the additional configuration enabled automatically.
+	//
 	//   - ALL : Indicates that all accounts in the organization have the additional
 	//   configuration enabled automatically. This includes NEW accounts that join the
 	//   organization and accounts that may have been suspended or removed from the
-	//   organization in GuardDuty. It may take up to 24 hours to update the
-	//   configuration for all the member accounts.
+	//   organization in GuardDuty.
+	//
+	// It may take up to 24 hours to update the configuration for all the member
+	//   accounts.
+	//
 	//   - NONE : Indicates that the additional configuration will not be automatically
 	//   enabled for any account in the organization. The administrator must manage the
 	//   additional configuration for each account individually.
@@ -1973,13 +2003,18 @@ type OrganizationAdditionalConfigurationResult struct {
 	// Describes the status of the additional configuration that is configured for the
 	// member accounts within the organization. One of the following values is the
 	// status for the entire organization:
+	//
 	//   - NEW : Indicates that when a new account joins the organization, they will
 	//   have the additional configuration enabled automatically.
+	//
 	//   - ALL : Indicates that all accounts in the organization have the additional
 	//   configuration enabled automatically. This includes NEW accounts that join the
 	//   organization and accounts that may have been suspended or removed from the
-	//   organization in GuardDuty. It may take up to 24 hours to update the
-	//   configuration for all the member accounts.
+	//   organization in GuardDuty.
+	//
+	// It may take up to 24 hours to update the configuration for all the member
+	//   accounts.
+	//
 	//   - NONE : Indicates that the additional configuration will not be automatically
 	//   enabled for any account in the organization. The administrator must manage the
 	//   additional configuration for each account individually.
@@ -2075,13 +2110,18 @@ type OrganizationFeatureConfiguration struct {
 	// Describes the status of the feature that is configured for the member accounts
 	// within the organization. One of the following values is the status for the
 	// entire organization:
+	//
 	//   - NEW : Indicates that when a new account joins the organization, they will
 	//   have the feature enabled automatically.
+	//
 	//   - ALL : Indicates that all accounts in the organization have the feature
 	//   enabled automatically. This includes NEW accounts that join the organization
 	//   and accounts that may have been suspended or removed from the organization in
-	//   GuardDuty. It may take up to 24 hours to update the configuration for all the
-	//   member accounts.
+	//   GuardDuty.
+	//
+	// It may take up to 24 hours to update the configuration for all the member
+	//   accounts.
+	//
 	//   - NONE : Indicates that the feature will not be automatically enabled for any
 	//   account in the organization. The administrator must manage the feature for each
 	//   account individually.
@@ -2102,12 +2142,15 @@ type OrganizationFeatureConfigurationResult struct {
 
 	// Describes the status of the feature that is configured for the member accounts
 	// within the organization.
+	//
 	//   - NEW : Indicates that when a new account joins the organization, they will
 	//   have the feature enabled automatically.
+	//
 	//   - ALL : Indicates that all accounts in the organization have the feature
 	//   enabled automatically. This includes NEW accounts that join the organization
 	//   and accounts that may have been suspended or removed from the organization in
 	//   GuardDuty.
+	//
 	//   - NONE : Indicates that the feature will not be automatically enabled for any
 	//   account in the organization. In this case, each account will be managed
 	//   individually by the administrator.
@@ -2265,9 +2308,10 @@ type OrganizationScanEc2InstanceWithFindingsResult struct {
 }
 
 // Information about the coverage statistics of the features for the entire Amazon
-// Web Services organization. When you create a new Amazon Web Services
-// organization, it might take up to 24 hours to generate the statistics summary
-// for this organization.
+// Web Services organization.
+//
+// When you create a new Amazon Web Services organization, it might take up to 24
+// hours to generate the statistics summary for this organization.
 type OrganizationStatistics struct {
 
 	// Total number of active accounts in your Amazon Web Services organization that
@@ -2294,7 +2338,9 @@ type OrganizationStatistics struct {
 type Owner struct {
 
 	// The canonical user ID of the bucket owner. For information about locating your
-	// canonical user ID see Finding Your Account Canonical User ID. (https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
+	// canonical user ID see [Finding Your Account Canonical User ID.]
+	//
+	// [Finding Your Account Canonical User ID.]: https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId
 	Id *string
 
 	noSmithyDocumentSerde
@@ -2729,7 +2775,7 @@ type S3BucketDetail struct {
 // Describes whether S3 data event logs will be enabled as a data source.
 type S3LogsConfiguration struct {
 
-	// The status of S3 data event logs as a data source.
+	//  The status of S3 data event logs as a data source.
 	//
 	// This member is required.
 	Enable *bool
@@ -3242,8 +3288,9 @@ type UsageStatistics struct {
 	SumByResource []UsageResourceResult
 
 	// Lists the top 50 accounts by feature that have generated the most GuardDuty
-	// usage, in the order from most to least expensive. Currently, this doesn't
-	// support RDS_LOGIN_EVENTS .
+	// usage, in the order from most to least expensive.
+	//
+	// Currently, this doesn't support RDS_LOGIN_EVENTS .
 	TopAccountsByFeature []UsageTopAccountsResult
 
 	// Lists the top 50 resources that have generated the most GuardDuty usage, in
@@ -3271,8 +3318,9 @@ type UsageTopAccountsResult struct {
 	// The accounts that contributed to the total usage cost.
 	Accounts []UsageTopAccountResult
 
-	// Features by which you can generate the usage statistics. RDS_LOGIN_EVENTS is
-	// currently not supported with topAccountsByFeature .
+	// Features by which you can generate the usage statistics.
+	//
+	// RDS_LOGIN_EVENTS is currently not supported with topAccountsByFeature .
 	Feature UsageFeature
 
 	noSmithyDocumentSerde

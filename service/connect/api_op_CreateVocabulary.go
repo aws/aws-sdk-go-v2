@@ -35,21 +35,25 @@ type CreateVocabularyInput struct {
 	// The content of the custom vocabulary in plain-text format with a table of
 	// values. Each row in the table represents a word or a phrase, described with
 	// Phrase , IPA , SoundsLike , and DisplayAs fields. Separate the fields with TAB
-	// characters. The size limit is 50KB. For more information, see Create a custom
-	// vocabulary using a table (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table)
-	// .
+	// characters. The size limit is 50KB. For more information, see [Create a custom vocabulary using a table].
+	//
+	// [Create a custom vocabulary using a table]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table
 	//
 	// This member is required.
 	Content *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The language code of the vocabulary entries. For a list of languages and their
-	// corresponding language codes, see What is Amazon Transcribe? (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html)
+	// corresponding language codes, see [What is Amazon Transcribe?]
+	//
+	// [What is Amazon Transcribe?]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
 	//
 	// This member is required.
 	LanguageCode types.VocabularyLanguageCode
@@ -61,11 +65,11 @@ type CreateVocabularyInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// . If a create request is received more than once with same client token,
-	// subsequent requests return the previous response without creating a vocabulary
-	// again.
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs]. If a create request is
+	// received more than once with same client token, subsequent requests return the
+	// previous response without creating a vocabulary again.
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The tags used to organize, track, or control access for this resource. For

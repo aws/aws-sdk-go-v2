@@ -12,10 +12,15 @@ import (
 )
 
 // Finds a place by its unique ID. A PlaceId is returned by other search
-// operations. A PlaceId is valid only if all of the following are the same in the
-// original search request and the call to GetPlace .
+// operations.
+//
+// A PlaceId is valid only if all of the following are the same in the original
+// search request and the call to GetPlace .
+//
 //   - Customer Amazon Web Services account
+//
 //   - Amazon Web Services Region
+//
 //   - Data provider specified in the place index resource
 func (c *Client) GetPlace(ctx context.Context, params *GetPlaceInput, optFns ...func(*Options)) (*GetPlaceOutput, error) {
 	if params == nil {
@@ -39,22 +44,28 @@ type GetPlaceInput struct {
 	// This member is required.
 	IndexName *string
 
-	// The identifier of the place to find. While you can use PlaceID in subsequent
-	// requests, PlaceID is not intended to be a permanent identifier and the ID can
-	// change between consecutive API calls. Please see the following PlaceID behaviour
-	// for each data provider:
+	// The identifier of the place to find.
+	//
+	// While you can use PlaceID in subsequent requests, PlaceID is not intended to be
+	// a permanent identifier and the ID can change between consecutive API calls.
+	// Please see the following PlaceID behaviour for each data provider:
+	//
 	//   - Esri: Place IDs will change every quarter at a minimum. The typical time
 	//   period for these changes would be March, June, September, and December. Place
 	//   IDs might also change between the typical quarterly change but that will be much
 	//   less frequent.
+	//
 	//   - HERE: We recommend that you cache data for no longer than a week to keep
 	//   your data data fresh. You can assume that less than 1% ID shifts will release
 	//   over release which is approximately 1 - 2 times per week.
+	//
 	//   - Grab: Place IDs can expire or become invalid in the following situations.
+	//
 	//   - Data operations: The POI may be removed from Grab POI database by Grab Map
 	//   Ops based on the ground-truth, such as being closed in the real world, being
 	//   detected as a duplicate POI, or having incorrect information. Grab will
 	//   synchronize data to the Waypoint environment on weekly basis.
+	//
 	//   - Interpolated POI: Interpolated POI is a temporary POI generated in real
 	//   time when serving a request, and it will be marked as derived in the
 	//   place.result_type field in the response. The information of interpolated POIs
@@ -66,21 +77,29 @@ type GetPlaceInput struct {
 	// This member is required.
 	PlaceId *string
 
-	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-	// to authorize the request.
+	// The optional [API key] to authorize the request.
+	//
+	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 	Key *string
 
-	// The preferred language used to return results. The value must be a valid BCP 47 (https://tools.ietf.org/search/bcp47)
-	// language tag, for example, en for English. This setting affects the languages
-	// used in the results, but not the results themselves. If no language is
-	// specified, or not supported for a particular result, the partner automatically
-	// chooses a language for the result. For an example, we'll use the Greek language.
-	// You search for a location around Athens, Greece, with the language parameter
-	// set to en . The city in the results will most likely be returned as Athens . If
-	// you set the language parameter to el , for Greek, then the city in the results
-	// will more likely be returned as Αθήνα . If the data provider does not have a
-	// value for Greek, the result will be in a language that the provider does
-	// support.
+	// The preferred language used to return results. The value must be a valid [BCP 47]
+	// language tag, for example, en for English.
+	//
+	// This setting affects the languages used in the results, but not the results
+	// themselves. If no language is specified, or not supported for a particular
+	// result, the partner automatically chooses a language for the result.
+	//
+	// For an example, we'll use the Greek language. You search for a location around
+	// Athens, Greece, with the language parameter set to en . The city in the results
+	// will most likely be returned as Athens .
+	//
+	// If you set the language parameter to el , for Greek, then the city in the
+	// results will more likely be returned as Αθήνα .
+	//
+	// If the data provider does not have a value for Greek, the result will be in a
+	// language that the provider does support.
+	//
+	// [BCP 47]: https://tools.ietf.org/search/bcp47
 	Language *string
 
 	noSmithyDocumentSerde

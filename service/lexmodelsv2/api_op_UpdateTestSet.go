@@ -54,7 +54,7 @@ type UpdateTestSetOutput struct {
 	// The test set description for the updated test set.
 	Description *string
 
-	// The date and time of the last update for the updated test set.
+	//  The date and time of the last update for the updated test set.
 	LastUpdatedDateTime *time.Time
 
 	// Indicates whether audio or text is used for the updated test set.

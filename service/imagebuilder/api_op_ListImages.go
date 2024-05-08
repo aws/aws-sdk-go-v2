@@ -34,10 +34,15 @@ type ListImagesInput struct {
 	ByName bool
 
 	// Use the following filters to streamline results:
+	//
 	//   - name
+	//
 	//   - osVersion
+	//
 	//   - platform
+	//
 	//   - type
+	//
 	//   - version
 	Filters []types.Filter
 
@@ -62,8 +67,11 @@ type ListImagesInput struct {
 
 type ListImagesOutput struct {
 
-	// The list of image semantic versions. The semantic version has four nodes: ../.
-	// You can assign values for the first three, and can filter on all of them.
+	// The list of image semantic versions.
+	//
+	// The semantic version has four nodes: ../. You can assign values for the first
+	// three, and can filter on all of them.
+	//
 	// Filtering: With semantic versioning, you have the flexibility to use wildcards
 	// (x) to specify the most recent versions or nodes when selecting the base image
 	// or components for your recipe. When you use a wildcard in any node, all nodes to

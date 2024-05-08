@@ -11,14 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deprecated. Use DescribeLoa instead. Gets the LOA-CFA for the specified
-// interconnect. The Letter of Authorization - Connecting Facility Assignment
-// (LOA-CFA) is a document that is used when establishing your cross connect to
-// Amazon Web Services at the colocation facility. For more information, see
-// Requesting Cross Connects at Direct Connect Locations (https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
-// in the Direct Connect User Guide.
+// Deprecated. Use DescribeLoa instead.
+//
+// Gets the LOA-CFA for the specified interconnect.
+//
+// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a
+// document that is used when establishing your cross connect to Amazon Web
+// Services at the colocation facility. For more information, see [Requesting Cross Connects at Direct Connect Locations]in the Direct
+// Connect User Guide.
 //
 // Deprecated: This operation has been deprecated.
+//
+// [Requesting Cross Connects at Direct Connect Locations]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
 func (c *Client) DescribeInterconnectLoa(ctx context.Context, params *DescribeInterconnectLoaInput, optFns ...func(*Options)) (*DescribeInterconnectLoaOutput, error) {
 	if params == nil {
 		params = &DescribeInterconnectLoaInput{}

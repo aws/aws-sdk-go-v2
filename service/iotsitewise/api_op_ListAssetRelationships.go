@@ -33,14 +33,16 @@ type ListAssetRelationshipsInput struct {
 
 	// The ID of the asset. This can be either the actual ID in UUID format, or else
 	// externalId: followed by the external ID, if it has one. For more information,
-	// see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string
 
 	// The type of traversal to use to identify asset relationships. Choose the
 	// following option:
+	//
 	//   - PATH_TO_ROOT – Identify the asset's parent assets up to the root asset. The
 	//   asset that you specify in assetId is the first result in the list of
 	//   assetRelationshipSummaries , and the root asset is the last result.

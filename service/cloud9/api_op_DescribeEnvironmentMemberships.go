@@ -46,9 +46,13 @@ type DescribeEnvironmentMembershipsInput struct {
 
 	// The type of environment member permissions to get information about. Available
 	// values include:
+	//
 	//   - owner : Owns the environment.
+	//
 	//   - read-only : Has read-only access to the environment.
+	//
 	//   - read-write : Has read-write access to the environment.
+	//
 	// If no value is specified, information about all environment members are
 	// returned.
 	Permissions []types.Permissions

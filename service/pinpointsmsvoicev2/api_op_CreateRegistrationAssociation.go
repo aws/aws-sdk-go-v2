@@ -56,7 +56,7 @@ type CreateRegistrationAssociationOutput struct {
 	RegistrationId *string
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string

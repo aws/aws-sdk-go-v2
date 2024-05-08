@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for AutoPromotionResult. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoPromotionResult) Values() []AutoPromotionResult {
 	return []AutoPromotionResult{
 		"MODEL_PROMOTED",
@@ -37,8 +38,9 @@ const (
 )
 
 // Values returns all known values for DatasetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetStatus) Values() []DatasetStatus {
 	return []DatasetStatus{
 		"CREATED",
@@ -60,8 +62,9 @@ const (
 )
 
 // Values returns all known values for DataUploadFrequency. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataUploadFrequency) Values() []DataUploadFrequency {
 	return []DataUploadFrequency{
 		"PT5M",
@@ -83,6 +86,7 @@ const (
 
 // Values returns all known values for InferenceDataImportStrategy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InferenceDataImportStrategy) Values() []InferenceDataImportStrategy {
 	return []InferenceDataImportStrategy{
@@ -103,6 +107,7 @@ const (
 
 // Values returns all known values for InferenceExecutionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InferenceExecutionStatus) Values() []InferenceExecutionStatus {
 	return []InferenceExecutionStatus{
@@ -124,6 +129,7 @@ const (
 
 // Values returns all known values for InferenceSchedulerStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InferenceSchedulerStatus) Values() []InferenceSchedulerStatus {
 	return []InferenceSchedulerStatus{
@@ -145,8 +151,9 @@ const (
 )
 
 // Values returns all known values for IngestionJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionJobStatus) Values() []IngestionJobStatus {
 	return []IngestionJobStatus{
 		"IN_PROGRESS",
@@ -166,8 +173,9 @@ const (
 )
 
 // Values returns all known values for LabelRating. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LabelRating) Values() []LabelRating {
 	return []LabelRating{
 		"ANOMALY",
@@ -185,8 +193,9 @@ const (
 )
 
 // Values returns all known values for LatestInferenceResult. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LatestInferenceResult) Values() []LatestInferenceResult {
 	return []LatestInferenceResult{
 		"ANOMALOUS",
@@ -203,8 +212,9 @@ const (
 )
 
 // Values returns all known values for ModelPromoteMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelPromoteMode) Values() []ModelPromoteMode {
 	return []ModelPromoteMode{
 		"MANAGED",
@@ -222,8 +232,9 @@ const (
 )
 
 // Values returns all known values for ModelQuality. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelQuality) Values() []ModelQuality {
 	return []ModelQuality{
 		"QUALITY_THRESHOLD_MET",
@@ -243,8 +254,9 @@ const (
 )
 
 // Values returns all known values for ModelStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"IN_PROGRESS",
@@ -264,8 +276,9 @@ const (
 )
 
 // Values returns all known values for ModelVersionSourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelVersionSourceType) Values() []ModelVersionSourceType {
 	return []ModelVersionSourceType{
 		"TRAINING",
@@ -286,8 +299,9 @@ const (
 )
 
 // Values returns all known values for ModelVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelVersionStatus) Values() []ModelVersionStatus {
 	return []ModelVersionStatus{
 		"IN_PROGRESS",
@@ -308,8 +322,9 @@ const (
 )
 
 // Values returns all known values for Monotonicity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Monotonicity) Values() []Monotonicity {
 	return []Monotonicity{
 		"DECREASING",
@@ -330,6 +345,7 @@ const (
 
 // Values returns all known values for RetrainingSchedulerStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RetrainingSchedulerStatus) Values() []RetrainingSchedulerStatus {
 	return []RetrainingSchedulerStatus{
@@ -349,8 +365,9 @@ const (
 )
 
 // Values returns all known values for StatisticalIssueStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatisticalIssueStatus) Values() []StatisticalIssueStatus {
 	return []StatisticalIssueStatus{
 		"POTENTIAL_ISSUE_DETECTED",
@@ -376,8 +393,9 @@ const (
 )
 
 // Values returns all known values for TargetSamplingRate. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetSamplingRate) Values() []TargetSamplingRate {
 	return []TargetSamplingRate{
 		"PT1S",

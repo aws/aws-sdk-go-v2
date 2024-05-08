@@ -29,7 +29,7 @@ func (c *Client) BatchGetReportGroups(ctx context.Context, params *BatchGetRepor
 
 type BatchGetReportGroupsInput struct {
 
-	// An array of report group ARNs that identify the report groups to return.
+	//  An array of report group ARNs that identify the report groups to return.
 	//
 	// This member is required.
 	ReportGroupArns []string
@@ -39,10 +39,10 @@ type BatchGetReportGroupsInput struct {
 
 type BatchGetReportGroupsOutput struct {
 
-	// The array of report groups returned by BatchGetReportGroups .
+	//  The array of report groups returned by BatchGetReportGroups .
 	ReportGroups []types.ReportGroup
 
-	// An array of ARNs passed to BatchGetReportGroups that are not associated with a
+	//  An array of ARNs passed to BatchGetReportGroups that are not associated with a
 	// ReportGroup .
 	ReportGroupsNotFound []string
 

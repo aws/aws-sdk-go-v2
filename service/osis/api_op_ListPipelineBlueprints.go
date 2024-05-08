@@ -12,8 +12,9 @@ import (
 )
 
 // Retrieves a list of all available blueprints for Data Prepper. For more
-// information, see Using blueprints to create a pipeline (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint)
-// .
+// information, see [Using blueprints to create a pipeline].
+//
+// [Using blueprints to create a pipeline]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint
 func (c *Client) ListPipelineBlueprints(ctx context.Context, params *ListPipelineBlueprintsInput, optFns ...func(*Options)) (*ListPipelineBlueprintsOutput, error) {
 	if params == nil {
 		params = &ListPipelineBlueprintsInput{}

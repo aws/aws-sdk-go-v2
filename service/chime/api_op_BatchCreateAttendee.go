@@ -11,18 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates up to 100 new attendees for an active Amazon Chime SDK meeting. This
-// API is is no longer supported and will not be updated. We recommend using the
-// latest version, BatchCreateAttendee (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_BatchCreateAttendee.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide. For more information about the Amazon
-// Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
-// in the Amazon Chime SDK Developer Guide.
+// Creates up to 100 new attendees for an active Amazon Chime SDK meeting.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [BatchCreateAttendee], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
+//
+// For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK] in the Amazon Chime SDK
+// Developer Guide.
 //
 // Deprecated: Replaced by BatchCreateAttendee in the Amazon Chime SDK Meetings
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [BatchCreateAttendee]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_BatchCreateAttendee.html
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
 func (c *Client) BatchCreateAttendee(ctx context.Context, params *BatchCreateAttendeeInput, optFns ...func(*Options)) (*BatchCreateAttendeeOutput, error) {
 	if params == nil {
 		params = &BatchCreateAttendeeInput{}

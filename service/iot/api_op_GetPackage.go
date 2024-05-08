@@ -11,9 +11,11 @@ import (
 	"time"
 )
 
-// Gets information about the specified software package. Requires permission to
-// access the GetPackage (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about the specified software package.
+//
+// Requires permission to access the [GetPackage] action.
+//
+// [GetPackage]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetPackage(ctx context.Context, params *GetPackageInput, optFns ...func(*Options)) (*GetPackageOutput, error) {
 	if params == nil {
 		params = &GetPackageInput{}

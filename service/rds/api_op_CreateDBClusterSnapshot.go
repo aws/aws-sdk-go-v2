@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a snapshot of a DB cluster. For more information on Amazon Aurora, see
-// What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide.
+// Creates a snapshot of a DB cluster.
+//
+// For more information on Amazon Aurora, see [What is Amazon Aurora?] in the Amazon Aurora User Guide.
+//
+// For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments] in the Amazon RDS User Guide.
+//
+// [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+// [Multi-AZ DB cluster deployments]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
 func (c *Client) CreateDBClusterSnapshot(ctx context.Context, params *CreateDBClusterSnapshotInput, optFns ...func(*Options)) (*CreateDBClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateDBClusterSnapshotInput{}
@@ -34,18 +37,28 @@ func (c *Client) CreateDBClusterSnapshot(ctx context.Context, params *CreateDBCl
 type CreateDBClusterSnapshotInput struct {
 
 	// The identifier of the DB cluster to create a snapshot for. This parameter isn't
-	// case-sensitive. Constraints:
+	// case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBCluster.
+	//
 	// Example: my-cluster1
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
 	// The identifier of the DB cluster snapshot. This parameter is stored as a
-	// lowercase string. Constraints:
+	// lowercase string.
+	//
+	// Constraints:
+	//
 	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: my-cluster1-snapshot1
 	//
 	// This member is required.
@@ -59,8 +72,10 @@ type CreateDBClusterSnapshotInput struct {
 
 type CreateDBClusterSnapshotOutput struct {
 
-	// Contains the details for an Amazon RDS DB cluster snapshot This data type is
-	// used as a response element in the DescribeDBClusterSnapshots action.
+	// Contains the details for an Amazon RDS DB cluster snapshot
+	//
+	// This data type is used as a response element in the DescribeDBClusterSnapshots
+	// action.
 	DBClusterSnapshot *types.DBClusterSnapshot
 
 	// Metadata pertaining to the operation's result.

@@ -44,8 +44,9 @@ type TagResourceInput struct {
 
 	// The tags that you apply to the resource to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in Amazon Web Services General Reference.
+	// information, see [Tagging Amazon Web Services Resources]in Amazon Web Services General Reference.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	//
 	// This member is required.
 	Tags map[string]string

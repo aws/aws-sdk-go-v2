@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the directory registrations that you created by using the
-// https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration)
-// action.
+// Lists the directory registrations that you created by using the [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration] action.
+//
+// [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration
 func (c *Client) ListDirectoryRegistrations(ctx context.Context, params *ListDirectoryRegistrationsInput, optFns ...func(*Options)) (*ListDirectoryRegistrationsOutput, error) {
 	if params == nil {
 		params = &ListDirectoryRegistrationsInput{}

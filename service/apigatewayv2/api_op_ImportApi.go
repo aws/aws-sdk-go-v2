@@ -36,9 +36,10 @@ type ImportApiInput struct {
 	Body *string
 
 	// Specifies how to interpret the base path of the API during import. Valid values
-	// are ignore, prepend, and split. The default value is ignore. To learn more, see
-	// Set the OpenAPI basePath Property (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html)
+	// are ignore, prepend, and split. The default value is ignore. To learn more, see [Set the OpenAPI basePath Property]
 	// . Supported only for HTTP APIs.
+	//
+	// [Set the OpenAPI basePath Property]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html
 	Basepath *string
 
 	// Specifies whether to rollback the API creation when a warning is encountered.
@@ -63,9 +64,9 @@ type ImportApiOutput struct {
 	// The API ID.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// .
+	// An API key selection expression. Supported only for WebSocket APIs. See [API Key Selection Expressions].
+	//
+	// [API Key Selection Expressions]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
 	ApiKeySelectionExpression *string
 
 	// A CORS configuration. Supported only for HTTP APIs.

@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a network operation. A network operation is any operation that is done
-// to your network, such as network instance instantiation or termination.
+// Cancels a network operation.
+//
+// A network operation is any operation that is done to your network, such as
+// network instance instantiation or termination.
 func (c *Client) CancelSolNetworkOperation(ctx context.Context, params *CancelSolNetworkOperationInput, optFns ...func(*Options)) (*CancelSolNetworkOperationOutput, error) {
 	if params == nil {
 		params = &CancelSolNetworkOperationInput{}

@@ -32,7 +32,9 @@ func (c *Client) GetProvisionedProductOutputs(ctx context.Context, params *GetPr
 type GetProvisionedProductOutputsInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

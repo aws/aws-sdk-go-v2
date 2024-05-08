@@ -11,16 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of an already enabled control. If the enabled control
-// shows an EnablementStatus of SUCCEEDED, supply parameters that are different
-// from the currently configured parameters. Otherwise, Amazon Web Services Control
-// Tower will not accept the request. If the enabled control shows an
-// EnablementStatus of FAILED, Amazon Web Services Control Tower will update the
-// control to match any valid parameters that you supply. If the DriftSummary
-// status for the control shows as DRIFTED, you cannot call this API. Instead, you
-// can update the control by calling DisableControl and again calling EnableControl
-// , or you can run an extending governance operation. For usage examples, see the
-// Amazon Web Services Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
+//	Updates the configuration of an already enabled control.
+//
+// If the enabled control shows an EnablementStatus of SUCCEEDED, supply
+// parameters that are different from the currently configured parameters.
+// Otherwise, Amazon Web Services Control Tower will not accept the request.
+//
+// If the enabled control shows an EnablementStatus of FAILED, Amazon Web Services
+// Control Tower will update the control to match any valid parameters that you
+// supply.
+//
+// If the DriftSummary status for the control shows as DRIFTED, you cannot call
+// this API. Instead, you can update the control by calling DisableControl and
+// again calling EnableControl , or you can run an extending governance operation.
+// For usage examples, see [the Amazon Web Services Control Tower User Guide]
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
 func (c *Client) UpdateEnabledControl(ctx context.Context, params *UpdateEnabledControlInput, optFns ...func(*Options)) (*UpdateEnabledControlOutput, error) {
 	if params == nil {
 		params = &UpdateEnabledControlInput{}
@@ -38,7 +44,7 @@ func (c *Client) UpdateEnabledControl(ctx context.Context, params *UpdateEnabled
 
 type UpdateEnabledControlInput struct {
 
-	// The ARN of the enabled control that will be updated.
+	//  The ARN of the enabled control that will be updated.
 	//
 	// This member is required.
 	EnabledControlIdentifier *string
@@ -53,7 +59,7 @@ type UpdateEnabledControlInput struct {
 
 type UpdateEnabledControlOutput struct {
 
-	// The operation identifier for this UpdateEnabledControl operation.
+	//  The operation identifier for this UpdateEnabledControl operation.
 	//
 	// This member is required.
 	OperationIdentifier *string

@@ -32,14 +32,21 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This
 	// parameter can't be used in conjunction with the DBClusterSnapshotIdentifier
-	// parameter. This parameter is not case-sensitive. Constraints:
+	// parameter. This parameter is not case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - If supplied, must match the identifier of an existing DBCluster.
 	DBClusterIdentifier *string
 
 	// A specific DB cluster snapshot identifier to describe. This parameter can't be
 	// used in conjunction with the DBClusterIdentifier parameter. This value is
-	// stored as a lowercase string. Constraints:
+	// stored as a lowercase string.
+	//
+	// Constraints:
+	//
 	//   - If supplied, must match the identifier of an existing DBClusterSnapshot.
+	//
 	//   - If this identifier is for an automated snapshot, the SnapshotType parameter
 	//   must also be specified.
 	DBClusterSnapshotIdentifier *string
@@ -49,15 +56,17 @@ type DescribeDBClusterSnapshotsInput struct {
 
 	// True to include manual DB cluster snapshots that are public and can be copied
 	// or restored by any Amazon account, and otherwise false. The default is false .
-	// The default is false. You can share a manual DB cluster snapshot as public by
-	// using the ModifyDBClusterSnapshotAttribute API action.
+	// The default is false.
+	//
+	// You can share a manual DB cluster snapshot as public by using the ModifyDBClusterSnapshotAttribute API action.
 	IncludePublic *bool
 
 	// True to include shared manual DB cluster snapshots from other Amazon accounts
 	// that this Amazon account has been given permission to copy or restore, and
-	// otherwise false. The default is false . You can give an Amazon account
-	// permission to restore a manual DB cluster snapshot from another Amazon account
-	// by the ModifyDBClusterSnapshotAttribute API action.
+	// otherwise false. The default is false .
+	//
+	// You can give an Amazon account permission to restore a manual DB cluster
+	// snapshot from another Amazon account by the ModifyDBClusterSnapshotAttributeAPI action.
 	IncludeShared *bool
 
 	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
@@ -68,26 +77,36 @@ type DescribeDBClusterSnapshotsInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The type of DB cluster snapshots to be returned. You can specify one of the
 	// following values:
+	//
 	//   - automated - Return all DB cluster snapshots that have been automatically
 	//   taken by Amazon Neptune for my Amazon account.
+	//
 	//   - manual - Return all DB cluster snapshots that have been taken by my Amazon
 	//   account.
+	//
 	//   - shared - Return all manual DB cluster snapshots that have been shared to my
 	//   Amazon account.
+	//
 	//   - public - Return all DB cluster snapshots that have been marked as public.
+	//
 	// If you don't specify a SnapshotType value, then both automated and manual DB
 	// cluster snapshots are returned. You can include shared DB cluster snapshots with
 	// these results by setting the IncludeShared parameter to true . You can include
 	// public DB cluster snapshots with these results by setting the IncludePublic
-	// parameter to true . The IncludeShared and IncludePublic parameters don't apply
-	// for SnapshotType values of manual or automated . The IncludePublic parameter
-	// doesn't apply when SnapshotType is set to shared . The IncludeShared parameter
-	// doesn't apply when SnapshotType is set to public .
+	// parameter to true .
+	//
+	// The IncludeShared and IncludePublic parameters don't apply for SnapshotType
+	// values of manual or automated . The IncludePublic parameter doesn't apply when
+	// SnapshotType is set to shared . The IncludeShared parameter doesn't apply when
+	// SnapshotType is set to public .
 	SnapshotType *string
 
 	noSmithyDocumentSerde
@@ -98,9 +117,9 @@ type DescribeDBClusterSnapshotsOutput struct {
 	// Provides a list of DB cluster snapshots for the user.
 	DBClusterSnapshots []types.DBClusterSnapshot
 
-	// An optional pagination token provided by a previous DescribeDBClusterSnapshots
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords .
+	//  An optional pagination token provided by a previous DescribeDBClusterSnapshots request. If this
+	// parameter is specified, the response includes only records beyond the marker, up
+	// to the value specified by MaxRecords .
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -202,7 +221,10 @@ type DescribeDBClusterSnapshotsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

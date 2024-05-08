@@ -8,17 +8,20 @@ import (
 
 // Contains information about the contexts that a user is using in a session. You
 // can configure Amazon Lex V2 to set a context when an intent is fulfilled, or you
-// can set a context using the , , or operations. Use a context to indicate to
-// Amazon Lex V2 intents that should be used as follow-up intents. For example, if
-// the active context is order-fulfilled , only intents that have order-fulfilled
-// configured as a trigger are considered for follow up.
+// can set a context using the , , or operations.
+//
+// Use a context to indicate to Amazon Lex V2 intents that should be used as
+// follow-up intents. For example, if the active context is order-fulfilled , only
+// intents that have order-fulfilled configured as a trigger are considered for
+// follow up.
 type ActiveContext struct {
 
 	// A list of contexts active for the request. A context can be activated when a
-	// previous intent is fulfilled, or by including the context in the request. If you
-	// don't specify a list of contexts, Amazon Lex V2 will use the current list of
-	// contexts for the session. If you specify an empty list, all contexts for the
-	// session are cleared.
+	// previous intent is fulfilled, or by including the context in the request.
+	//
+	// If you don't specify a list of contexts, Amazon Lex V2 will use the current
+	// list of contexts for the session. If you specify an empty list, all contexts for
+	// the session are cleared.
 	//
 	// This member is required.
 	ContextAttributes map[string]string
@@ -57,15 +60,17 @@ type ActiveContextTimeToLive struct {
 }
 
 // Represents a chunk of audio sent from the client application to Amazon Lex V2.
-// The audio is all or part of an utterance from the user. Amazon Lex V2
-// accumulates audio chunks until it recognizes a natural pause in speech before
-// processing the input.
+// The audio is all or part of an utterance from the user.
+//
+// Amazon Lex V2 accumulates audio chunks until it recognizes a natural pause in
+// speech before processing the input.
 type AudioInputEvent struct {
 
 	// The encoding used for the audio chunk. You must use 8 KHz PCM 16-bit
 	// mono-channel little-endian format. The value of the field should be:
-	// audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1;
-	// is-big-endian=false
+	//
+	//     audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1;
+	//     is-big-endian=false
 	//
 	// This member is required.
 	ContentType *string
@@ -138,20 +143,29 @@ type ConfigurationEvent struct {
 
 	// The message that Amazon Lex V2 returns in the response can be either text or
 	// speech based on the responseContentType value.
+	//
 	//   - If the value is text/plain;charset=utf-8 , Amazon Lex V2 returns text in the
 	//   response.
+	//
 	//   - If the value begins with audio/ , Amazon Lex V2 returns speech in the
 	//   response. Amazon Lex V2 uses Amazon Polly to generate the speech using the
 	//   configuration that you specified in the requestContentType parameter. For
 	//   example, if you specify audio/mpeg as the value, Amazon Lex V2 returns speech
 	//   in the MPEG format.
+	//
 	//   - If the value is audio/pcm , the speech returned is audio/pcm in 16-bit,
 	//   little-endian format.
+	//
 	//   - The following are the accepted values:
+	//
 	//   - audio/mpeg
+	//
 	//   - audio/ogg
+	//
 	//   - audio/pcm
+	//
 	//   - audio/* (defaults to mpeg)
+	//
 	//   - text/plain; charset=utf-8
 	//
 	// This member is required.
@@ -162,10 +176,12 @@ type ConfigurationEvent struct {
 	ClientTimestampMillis int64
 
 	// Determines whether Amazon Lex V2 should send audio responses to the client
-	// application. Set this field to false when the client is operating in a playback
-	// mode where audio responses are played to the user. If the client isn't operating
-	// in playback mode, such as a text chat application, set this to true so that
-	// Amazon Lex V2 doesn't wait for the prompt to finish playing on the client.
+	// application.
+	//
+	// Set this field to false when the client is operating in a playback mode where
+	// audio responses are played to the user. If the client isn't operating in
+	// playback mode, such as a text chat application, set this to true so that Amazon
+	// Lex V2 doesn't wait for the prompt to finish playing on the client.
 	DisablePlayback bool
 
 	// A unique identifier that your application assigns to the event. You can use
@@ -173,17 +189,22 @@ type ConfigurationEvent struct {
 	EventId *string
 
 	// Request-specific information passed between the client application and Amazon
-	// Lex V2. The namespace x-amz-lex: is reserved for special attributes. Don't
-	// create any request attributes for prefix x-amz-lex: .
+	// Lex V2.
+	//
+	// The namespace x-amz-lex: is reserved for special attributes. Don't create any
+	// request attributes for prefix x-amz-lex: .
 	RequestAttributes map[string]string
 
 	// The state of the user's session with Amazon Lex V2.
 	SessionState *SessionState
 
-	// A list of messages to send to the user. If you set the welcomeMessage field,
-	// you must also set the DialogAction (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html)
-	// structure's type (https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type)
-	// field.
+	// A list of messages to send to the user.
+	//
+	// If you set the welcomeMessage field, you must also set the [DialogAction]DialogAction
+	// structure's [type]type field.
+	//
+	// [DialogAction]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html
+	// [type]: https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_DialogAction.html#lexv2-Type-runtime_DialogAction-type
 	WelcomeMessages []Message
 
 	noSmithyDocumentSerde
@@ -194,13 +215,17 @@ type DialogAction struct {
 
 	// The next action that the bot should take in its interaction with the user. The
 	// following values are possible:
+	//
 	//   - Close – Indicates that there will not be a response from the user. For
 	//   example, the statement "Your order has been placed" does not require a response.
 	//
 	//   - ConfirmIntent – The next action is asking the user if the intent is complete
 	//   and ready to be fulfilled. This is a yes/no question such as "Place the order?"
+	//
 	//   - Delegate – The next action is determined by Amazon Lex V2.
+	//
 	//   - ElicitIntent – The next action is to elicit an intent from the user.
+	//
 	//   - ElicitSlot – The next action is to elicit a slot value from the user.
 	//
 	// This member is required.
@@ -210,9 +235,12 @@ type DialogAction struct {
 	// a style on a slot, users can spell out their input to make it clear to your bot.
 	//
 	//   - Spell by letter - "b" "o" "b"
+	//
 	//   - Spell by word - "b as in boy" "o as in oscar" "b as in boy"
-	// For more information, see  Using spelling to enter slot values  (https://docs.aws.amazon.com/lexv2/latest/dg/spelling-styles.html)
-	// .
+	//
+	// For more information, see [Using spelling to enter slot values].
+	//
+	// [Using spelling to enter slot values]: https://docs.aws.amazon.com/lexv2/latest/dg/spelling-styles.html
 	SlotElicitationStyle StyleType
 
 	// The name of the slot that should be elicited from the user.
@@ -291,9 +319,10 @@ type HeartbeatEvent struct {
 }
 
 // A card that is shown to the user by a messaging platform. You define the
-// contents of the card, the card is displayed by the platform. When you use a
-// response card, the response from the user is constrained to the text associated
-// with a button on the card.
+// contents of the card, the card is displayed by the platform.
+//
+// When you use a response card, the response from the user is constrained to the
+// text associated with a button on the card.
 type ImageResponseCard struct {
 
 	// The title to display on the response card. The format of the title is
@@ -337,13 +366,19 @@ type Intent struct {
 
 	// Indicates the fulfillment state for the intent. The meanings of each value are
 	// as follows:
+	//
 	//   - Failed – The bot failed to fulfill the intent.
+	//
 	//   - Fulfilled – The bot has completed fulfillment of the intent.
+	//
 	//   - FulfillmentInProgress – The bot is in the middle of fulfilling the intent.
+	//
 	//   - InProgress – The bot is in the middle of eliciting the slot values that are
 	//   necessary to fulfill the intent.
+	//
 	//   - ReadyForFulfillment – The bot has elicited all the slot values for the
 	//   intent and is ready to fulfill the intent.
+	//
 	//   - Waiting – The bot is waiting for a response from the user (limited to
 	//   streaming conversations).
 	State IntentState
@@ -365,10 +400,11 @@ type IntentResultEvent struct {
 	InputMode InputMode
 
 	// A list of intents that Amazon Lex V2 determined might satisfy the user's
-	// utterance. Each interpretation includes the intent, a score that indicates how
-	// confident Amazon Lex V2 is that the interpretation is the correct one, and an
-	// optional sentiment response that indicates the sentiment expressed in the
 	// utterance.
+	//
+	// Each interpretation includes the intent, a score that indicates how confident
+	// Amazon Lex V2 is that the interpretation is the correct one, and an optional
+	// sentiment response that indicates the sentiment expressed in the utterance.
 	Interpretations []Interpretation
 
 	// The bot member that is processing the intent.
@@ -404,9 +440,10 @@ type Interpretation struct {
 	// AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
 	NluConfidence *ConfidenceScore
 
-	// The sentiment expressed in an utterance. When the bot is configured to send
-	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
-	// result of the analysis.
+	// The sentiment expressed in an utterance.
+	//
+	// When the bot is configured to send utterances to Amazon Comprehend for
+	// sentiment analysis, this field contains the result of the analysis.
 	SentimentResponse *SentimentResponse
 
 	noSmithyDocumentSerde
@@ -424,9 +461,10 @@ type Message struct {
 	Content *string
 
 	// A card that is shown to the user by a messaging platform. You define the
-	// contents of the card, the card is displayed by the platform. When you use a
-	// response card, the response from the user is constrained to the text associated
-	// with a button on the card.
+	// contents of the card, the card is displayed by the platform.
+	//
+	// When you use a response card, the response from the user is constrained to the
+	// text associated with a button on the card.
 	ImageResponseCard *ImageResponseCard
 
 	noSmithyDocumentSerde
@@ -506,17 +544,25 @@ type RuntimeHintDetails struct {
 // You can provide Amazon Lex V2 with hints to the phrases that a customer is
 // likely to use for a slot. When a slot with hints is resolved, the phrases in the
 // runtime hints are preferred in the resolution. You can provide hints for a
-// maximum of 100 intents. You can provide a maximum of 100 slots. Before you can
-// use runtime hints with an existing bot, you must first rebuild the bot. For more
-// information, see Using runtime hints to improve recognition of slot values (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html)
-// .
+// maximum of 100 intents. You can provide a maximum of 100 slots.
+//
+// Before you can use runtime hints with an existing bot, you must first rebuild
+// the bot.
+//
+// For more information, see [Using runtime hints to improve recognition of slot values].
+//
+// [Using runtime hints to improve recognition of slot values]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
 type RuntimeHints struct {
 
 	// A list of the slots in the intent that should have runtime hints added, and the
-	// phrases that should be added for each slot. The first level of the slotHints
-	// map is the name of the intent. The second level is the name of the slot within
-	// the intent. For more information, see Using hints to improve accuracy (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html)
-	// . The intent name and slot name must exist.
+	// phrases that should be added for each slot.
+	//
+	// The first level of the slotHints map is the name of the intent. The second
+	// level is the name of the slot within the intent. For more information, see [Using hints to improve accuracy].
+	//
+	// The intent name and slot name must exist.
+	//
+	// [Using hints to improve accuracy]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
 	SlotHints map[string]map[string]RuntimeHintDetails
 
 	noSmithyDocumentSerde
@@ -536,9 +582,11 @@ type RuntimeHintValue struct {
 
 // Provides information about the sentiment expressed in a user's response in a
 // conversation. Sentiments are determined using Amazon Comprehend. Sentiments are
-// only returned if they are enabled for the bot. For more information, see
-// Determine Sentiment  (https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html)
-// in the Amazon Comprehend developer guide.
+// only returned if they are enabled for the bot.
+//
+// For more information, see [Determine Sentiment] in the Amazon Comprehend developer guide.
+//
+// [Determine Sentiment]: https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html
 type SentimentResponse struct {
 
 	// The overall sentiment expressed in the user's response. This is the sentiment
@@ -674,8 +722,11 @@ func (*StartConversationRequestEventStreamMemberDisconnectionEvent) isStartConve
 // DTMF information sent to Amazon Lex V2 by your application. Amazon Lex V2
 // accumulates the DMTF information from when the user sends the first character
 // and ends
+//
 //   - when there's a pause longer that the value configured for the end timeout.
+//
 //   - when there's a digit that is the configured end character.
+//
 //   - when Amazon Lex V2 accumulates characters equal to the maximum DTMF
 //     character configuration.
 type StartConversationRequestEventStreamMemberDTMFInputEvent struct {

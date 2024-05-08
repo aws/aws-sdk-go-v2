@@ -11,8 +11,10 @@ import (
 )
 
 // Deletes the termination settings for the specified Amazon Chime SDK Voice
-// Connector. If emergency calling is configured for the Voice Connector, it must
-// be deleted prior to deleting the termination settings.
+// Connector.
+//
+// If emergency calling is configured for the Voice Connector, it must be deleted
+// prior to deleting the termination settings.
 func (c *Client) DeleteVoiceConnectorTermination(ctx context.Context, params *DeleteVoiceConnectorTerminationInput, optFns ...func(*Options)) (*DeleteVoiceConnectorTerminationOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorTerminationInput{}

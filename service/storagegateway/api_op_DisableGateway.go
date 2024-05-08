@@ -12,8 +12,11 @@ import (
 
 // Disables a tape gateway when the gateway is no longer functioning. For example,
 // if your gateway VM is damaged, you can disable the gateway so you can recover
-// virtual tapes. Use this operation for a tape gateway that is not reachable or
-// not functioning. This operation is only supported in the tape gateway type.
+// virtual tapes.
+//
+// Use this operation for a tape gateway that is not reachable or not functioning.
+// This operation is only supported in the tape gateway type.
+//
 // After a gateway is disabled, it cannot be enabled.
 func (c *Client) DisableGateway(ctx context.Context, params *DisableGatewayInput, optFns ...func(*Options)) (*DisableGatewayOutput, error) {
 	if params == nil {
@@ -33,8 +36,8 @@ func (c *Client) DisableGateway(ctx context.Context, params *DisableGatewayInput
 // DisableGatewayInput
 type DisableGatewayInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string

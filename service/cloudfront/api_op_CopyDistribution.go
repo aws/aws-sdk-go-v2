@@ -14,14 +14,24 @@ import (
 // Creates a staging distribution using the configuration of the provided primary
 // distribution. A staging distribution is a copy of an existing distribution
 // (called the primary distribution) that you can use in a continuous deployment
-// workflow. After you create a staging distribution, you can use
-// UpdateDistribution to modify the staging distribution's configuration. Then you
-// can use CreateContinuousDeploymentPolicy to incrementally move traffic to the
-// staging distribution. This API operation requires the following IAM permissions:
+// workflow.
 //
-//   - GetDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html)
-//   - CreateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html)
-//   - CopyDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CopyDistribution.html)
+// After you create a staging distribution, you can use UpdateDistribution to
+// modify the staging distribution's configuration. Then you can use
+// CreateContinuousDeploymentPolicy to incrementally move traffic to the staging
+// distribution.
+//
+// This API operation requires the following IAM permissions:
+//
+// [GetDistribution]
+//
+// [CreateDistribution]
+//
+// [CopyDistribution]
+//
+// [CopyDistribution]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CopyDistribution.html
+// [GetDistribution]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html
+// [CreateDistribution]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html
 func (c *Client) CopyDistribution(ctx context.Context, params *CopyDistributionInput, optFns ...func(*Options)) (*CopyDistributionOutput, error) {
 	if params == nil {
 		params = &CopyDistributionInput{}
@@ -54,8 +64,9 @@ type CopyDistributionInput struct {
 
 	// A Boolean flag to specify the state of the staging distribution when it's
 	// created. When you set this value to True , the staging distribution is enabled.
-	// When you set this value to False , the staging distribution is disabled. If you
-	// omit this field, the default value is True .
+	// When you set this value to False , the staging distribution is disabled.
+	//
+	// If you omit this field, the default value is True .
 	Enabled *bool
 
 	// The version identifier of the primary distribution whose configuration you are

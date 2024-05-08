@@ -31,11 +31,16 @@ func (c *Client) DescribeCacheEngineVersions(ctx context.Context, params *Descri
 type DescribeCacheEngineVersionsInput struct {
 
 	// The name of a specific cache parameter group family to return details for.
+	//
 	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
 	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis6.2 | redis7
+	//
 	// Constraints:
+	//
 	//   - Must be 1 to 255 alphanumeric characters
+	//
 	//   - First character must be a letter
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens
 	CacheParameterGroupFamily *string
 
@@ -46,7 +51,9 @@ type DescribeCacheEngineVersionsInput struct {
 	// The cache engine to return. Valid values: memcached | redis
 	Engine *string
 
-	// The cache engine version to return. Example: 1.4.14
+	// The cache engine version to return.
+	//
+	// Example: 1.4.14
 	EngineVersion *string
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -57,8 +64,11 @@ type DescribeCacheEngineVersionsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -169,8 +179,11 @@ var _ DescribeCacheEngineVersionsAPIClient = (*Client)(nil)
 type DescribeCacheEngineVersionsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

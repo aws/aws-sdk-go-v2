@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your Device Defender detect custom metrics. Requires permission to access
-// the ListCustomMetrics (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Lists your Device Defender detect custom metrics.
+//
+// Requires permission to access the [ListCustomMetrics] action.
+//
+// [ListCustomMetrics]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListCustomMetrics(ctx context.Context, params *ListCustomMetricsInput, optFns ...func(*Options)) (*ListCustomMetricsOutput, error) {
 	if params == nil {
 		params = &ListCustomMetricsInput{}
@@ -30,10 +32,10 @@ func (c *Client) ListCustomMetrics(ctx context.Context, params *ListCustomMetric
 
 type ListCustomMetricsInput struct {
 
-	// The maximum number of results to return at one time. The default is 25.
+	//  The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
 
-	// The token for the next set of results.
+	//  The token for the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,10 +43,10 @@ type ListCustomMetricsInput struct {
 
 type ListCustomMetricsOutput struct {
 
-	// The name of the custom metric.
+	//  The name of the custom metric.
 	MetricNames []string
 
-	// A token that can be used to retrieve the next set of results, or null if there
+	//  A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
 
@@ -140,7 +142,7 @@ var _ ListCustomMetricsAPIClient = (*Client)(nil)
 
 // ListCustomMetricsPaginatorOptions is the paginator options for ListCustomMetrics
 type ListCustomMetricsPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25.
+	//  The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the job executions for a job. Requires permission to access the
-// ListJobExecutionsForJob (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Lists the job executions for a job.
+//
+// Requires permission to access the [ListJobExecutionsForJob] action.
+//
+// [ListJobExecutionsForJob]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListJobExecutionsForJob(ctx context.Context, params *ListJobExecutionsForJobInput, optFns ...func(*Options)) (*ListJobExecutionsForJobOutput, error) {
 	if params == nil {
 		params = &ListJobExecutionsForJobInput{}

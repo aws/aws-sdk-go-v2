@@ -527,8 +527,9 @@ type MapMatchingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The structure representing Polygon Geometry based on the GeoJson spec (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
-// .
+// The structure representing Polygon Geometry based on the [GeoJson spec].
+//
+// [GeoJson spec]: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
 type MultiPolygonGeometryInput struct {
 
 	// The coordinates of the multipolygon geometry.
@@ -630,12 +631,14 @@ type PlatformInput struct {
 	noSmithyDocumentSerde
 }
 
-// The structure representing Polygon Geometry based on the GeoJson spec (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
-// .
+// The structure representing Polygon Geometry based on the [GeoJson spec].
+//
+// [GeoJson spec]: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
 type PolygonGeometryInput struct {
 
-	// Coordinates representing a Polygon based on the GeoJson spec (https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6)
-	// .
+	// Coordinates representing a Polygon based on the [GeoJson spec].
+	//
+	// [GeoJson spec]: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
 	//
 	// This member is required.
 	Coordinates [][][]float64
@@ -668,8 +671,9 @@ type Properties struct {
 	// The sun elevation angle. The angle from the tangent of the scene center point
 	// to the sun. Measured from the horizon in degrees (-90-90). Negative values
 	// indicate the sun is below the horizon, e.g. sun elevation of -10° means the data
-	// was captured during nautical twilight (https://www.timeanddate.com/astronomy/different-types-twilight.html)
-	// .
+	// was captured during [nautical twilight].
+	//
+	// [nautical twilight]: https://www.timeanddate.com/astronomy/different-types-twilight.html
 	ViewSunElevation *float32
 
 	noSmithyDocumentSerde
@@ -1184,14 +1188,22 @@ type ZonalStatisticsConfigInput struct {
 	// The Amazon Resource Name (ARN) or an ID of a Amazon Web Services Key Management
 	// Service (Amazon Web Services KMS) key that Amazon SageMaker uses to decrypt your
 	// output artifacts with Amazon S3 server-side encryption. The SageMaker execution
-	// role must have kms:GenerateDataKey permission. The KmsKeyId can be any of the
-	// following formats:
-	//   - // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// role must have kms:GenerateDataKey permission.
+	//
+	// The KmsKeyId can be any of the following formats:
+	//
+	//   - // KMS Key ID
+	//
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - // Amazon Resource Name (ARN) of a KMS Key
-	//   "arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"
-	// For more information about key identifiers, see Key identifiers (KeyID) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id)
-	// in the Amazon Web Services Key Management Service (Amazon Web Services KMS)
-	// documentation.
+	//
+	// "arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"
+	//
+	// For more information about key identifiers, see [Key identifiers (KeyID)] in the Amazon Web Services Key
+	// Management Service (Amazon Web Services KMS) documentation.
+	//
+	// [Key identifiers (KeyID)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
 	ZoneS3PathKmsKeyId *string
 
 	noSmithyDocumentSerde

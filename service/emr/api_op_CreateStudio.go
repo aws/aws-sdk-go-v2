@@ -87,10 +87,10 @@ type CreateStudioInput struct {
 	// notebook files when backed up to Amazon S3.
 	EncryptionKeyArn *string
 
-	// The ARN of the IAM Identity Center instance to create the Studio application.
+	//  The ARN of the IAM Identity Center instance to create the Studio application.
 	IdcInstanceArn *string
 
-	// Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL .
+	//  Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL .
 	// If the value is set to REQUIRED , users must be explicitly assigned to the
 	// Studio application to access the Studio.
 	IdcUserAssignment types.IdcUserAssignment
@@ -112,7 +112,7 @@ type CreateStudioInput struct {
 	// characters, and an optional value string with a maximum of 256 characters.
 	Tags []types.Tag
 
-	// A Boolean indicating whether to enable Trusted identity propagation for the
+	//  A Boolean indicating whether to enable Trusted identity propagation for the
 	// Studio. The default value is false .
 	TrustedIdentityPropagationEnabled *bool
 

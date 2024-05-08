@@ -11,29 +11,43 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified RuleGroup . This operation completely replaces the mutable
-// specifications that you already have for the rule group with the ones that you
-// provide to this call. To modify a rule group, do the following:
+// Updates the specified RuleGroup.
+//
+// This operation completely replaces the mutable specifications that you already
+// have for the rule group with the ones that you provide to this call.
+//
+// To modify a rule group, do the following:
+//
 //   - Retrieve it by calling GetRuleGroup
+//
 //   - Update its settings as needed
+//
 //   - Provide the complete rule group specification to this call
 //
 // A rule group defines a collection of rules to inspect and control web requests
-// that you can use in a WebACL . When you create a rule group, you define an
-// immutable capacity limit. If you update a rule group, you must stay within the
-// capacity. This allows others to reuse the rule group with confidence in its
-// capacity requirements. Temporary inconsistencies during updates When you create
-// or change a web ACL or other WAF resources, the changes take a small amount of
-// time to propagate to all areas where the resources are stored. The propagation
-// time can be from a few seconds to a number of minutes. The following are
-// examples of the temporary inconsistencies that you might notice during change
-// propagation:
+// that you can use in a WebACL. When you create a rule group, you define an immutable
+// capacity limit. If you update a rule group, you must stay within the capacity.
+// This allows others to reuse the rule group with confidence in its capacity
+// requirements.
+//
+// # Temporary inconsistencies during updates
+//
+// When you create or change a web ACL or other WAF resources, the changes take a
+// small amount of time to propagate to all areas where the resources are stored.
+// The propagation time can be from a few seconds to a number of minutes.
+//
+// The following are examples of the temporary inconsistencies that you might
+// notice during change propagation:
+//
 //   - After you create a web ACL, if you try to associate it with a resource, you
 //     might get an exception indicating that the web ACL is unavailable.
+//
 //   - After you add a rule group to a web ACL, the new rule group rules might be
 //     in effect in one area where the web ACL is used and not in another.
+//
 //   - After you change a rule action setting, you might see the old action in
 //     some places and the new action in others.
+//
 //   - After you add an IP address to an IP set that is in use in a blocking rule,
 //     the new address might be blocked in one area while still allowed in another.
 func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInput, optFns ...func(*Options)) (*UpdateRuleGroupOutput, error) {
@@ -80,16 +94,21 @@ type UpdateRuleGroupInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
 	Scope types.Scope
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	// Defines and enables Amazon CloudWatch metrics and web request sample
+	// collection.
 	//
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
@@ -97,19 +116,24 @@ type UpdateRuleGroupInput struct {
 	// A map of custom response keys and content bodies. When you create a rule with a
 	// block action, you can send a custom response to the web request. You define
 	// these for the rule group, and then use them in the rules that you define in the
-	// rule group. For information about customizing web requests and responses, see
-	// Customizing web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide. For information about the limits on count and size
-	// for custom request and response settings, see WAF quotas (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html)
-	// in the WAF Developer Guide.
+	// rule group.
+	//
+	// For information about customizing web requests and responses, see [Customizing web requests and responses in WAF] in the WAF
+	// Developer Guide.
+	//
+	// For information about the limits on count and size for custom request and
+	// response settings, see [WAF quotas]in the WAF Developer Guide.
+	//
+	// [WAF quotas]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
+	// [Customizing web requests and responses in WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
 	CustomResponseBodies map[string]types.CustomResponseBody
 
 	// A description of the rule group that helps with identification.
 	Description *string
 
-	// The Rule statements used to identify the web requests that you want to manage.
-	// Each rule includes one top-level statement that WAF uses to identify matching
-	// web requests, and parameters that govern how WAF handles them.
+	// The Rule statements used to identify the web requests that you want to manage. Each
+	// rule includes one top-level statement that WAF uses to identify matching web
+	// requests, and parameters that govern how WAF handles them.
 	Rules []types.Rule
 
 	noSmithyDocumentSerde

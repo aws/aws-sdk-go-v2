@@ -62,7 +62,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because of an error that occurred inside
+//	The operation did not succeed because of an error that occurred inside
+//
 // CodeArtifact.
 type InternalServerException struct {
 	Message *string
@@ -89,7 +90,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The operation did not succeed because the resource requested is not found in
+//	The operation did not succeed because the resource requested is not found in
+//
 // the service.
 type ResourceNotFoundException struct {
 	Message *string
@@ -119,7 +121,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because it would have exceeded a service limit
+//	The operation did not succeed because it would have exceeded a service limit
+//
 // for your account.
 type ServiceQuotaExceededException struct {
 	Message *string
@@ -149,7 +152,9 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because too many requests are sent to the service.
+//	The operation did not succeed because too many requests are sent to the
+//
+// service.
 type ThrottlingException struct {
 	Message *string
 
@@ -177,7 +182,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because a parameter in the request was sent with
+//	The operation did not succeed because a parameter in the request was sent with
+//
 // an invalid value.
 type ValidationException struct {
 	Message *string

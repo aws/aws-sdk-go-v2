@@ -58,20 +58,25 @@ type CreateServiceTemplateVersionInput struct {
 	Description *string
 
 	// To create a new minor version of the service template, include a major Version .
+	//
 	// To create a new major and minor version of the service template, exclude major
 	// Version .
 	MajorVersion *string
 
 	// An array of supported component sources. Components with supported sources can
-	// be attached to service instances based on this service template version. For
-	// more information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-	// in the Proton User Guide.
+	// be attached to service instances based on this service template version.
+	//
+	// For more information about components, see [Proton components] in the Proton User Guide.
+	//
+	// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 
 	// An optional list of metadata items that you can associate with the Proton
-	// service template version. A tag is a key-value pair. For more information, see
-	// Proton resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
-	// in the Proton User Guide.
+	// service template version. A tag is a key-value pair.
+	//
+	// For more information, see [Proton resources and tagging] in the Proton User Guide.
+	//
+	// [Proton resources and tagging]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

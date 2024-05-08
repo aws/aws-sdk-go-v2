@@ -40,9 +40,10 @@ type ListClustersInput struct {
 	// The nextToken value returned from a ListClusters request indicating that more
 	// results are available to fulfill the request and further calls are needed. If
 	// maxResults was provided, it's possible the number of results to be fewer than
-	// maxResults . This token should be treated as an opaque identifier that is only
-	// used to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// maxResults .
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde

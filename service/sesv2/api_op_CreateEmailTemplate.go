@@ -13,8 +13,11 @@ import (
 
 // Creates an email template. Email templates enable you to send personalized
 // email to one or more destinations in a single API operation. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
-// . You can execute this operation no more than once per second.
+// information, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
 func (c *Client) CreateEmailTemplate(ctx context.Context, params *CreateEmailTemplateInput, optFns ...func(*Options)) (*CreateEmailTemplateOutput, error) {
 	if params == nil {
 		params = &CreateEmailTemplateInput{}
@@ -30,9 +33,10 @@ func (c *Client) CreateEmailTemplate(ctx context.Context, params *CreateEmailTem
 	return out, nil
 }
 
-// Represents a request to create an email template. For more information, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// Represents a request to create an email template. For more information, see the [Amazon SES Developer Guide]
 // .
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
 type CreateEmailTemplateInput struct {
 
 	// The content of the email template, composed of a subject line, an HTML part,

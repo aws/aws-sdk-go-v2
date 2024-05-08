@@ -13,8 +13,10 @@ import (
 
 // Returns detailed compliance information about the specified member account.
 // Details include resources that are in and out of compliance with the specified
-// policy. The reasons for resources being considered compliant depend on the
-// Firewall Manager policy type.
+// policy.
+//
+// The reasons for resources being considered compliant depend on the Firewall
+// Manager policy type.
 func (c *Client) GetComplianceDetail(ctx context.Context, params *GetComplianceDetailInput, optFns ...func(*Options)) (*GetComplianceDetailOutput, error) {
 	if params == nil {
 		params = &GetComplianceDetailInput{}

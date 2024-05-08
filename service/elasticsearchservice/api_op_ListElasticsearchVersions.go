@@ -26,18 +26,19 @@ func (c *Client) ListElasticsearchVersions(ctx context.Context, params *ListElas
 	return out, nil
 }
 
-// Container for the parameters to the ListElasticsearchVersions operation. Use
-// MaxResults to control the maximum number of results to retrieve in a single
-// call. Use NextToken in response to retrieve more results. If the received
-// response does not contain a NextToken, then there are no more results to
-// retrieve.
+//	Container for the parameters to the ListElasticsearchVersions operation.
+//
+// Use MaxResults to control the maximum number of results to retrieve in a single call.
+//
+// Use NextToken in response to retrieve more results. If the received response does not
+// contain a NextToken, then there are no more results to retrieve.
 type ListElasticsearchVersionsInput struct {
 
-	// Set this value to limit the number of results returned. Value provided must be
+	//  Set this value to limit the number of results returned. Value provided must be
 	// greater than 10 else it wont be honored.
 	MaxResults int32
 
-	// Paginated APIs accepts NextToken input to returns next page results and
+	//  Paginated APIs accepts NextToken input to returns next page results and
 	// provides a NextToken output in the response which can be used by the client to
 	// retrieve more results.
 	NextToken *string
@@ -45,14 +46,13 @@ type ListElasticsearchVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the parameters for response received from
-// ListElasticsearchVersions operation.
+// Container for the parameters for response received from ListElasticsearchVersions operation.
 type ListElasticsearchVersionsOutput struct {
 
 	// List of supported elastic search versions.
 	ElasticsearchVersions []string
 
-	// Paginated APIs accepts NextToken input to returns next page results and
+	//  Paginated APIs accepts NextToken input to returns next page results and
 	// provides a NextToken output in the response which can be used by the client to
 	// retrieve more results.
 	NextToken *string
@@ -150,7 +150,7 @@ var _ ListElasticsearchVersionsAPIClient = (*Client)(nil)
 // ListElasticsearchVersionsPaginatorOptions is the paginator options for
 // ListElasticsearchVersions
 type ListElasticsearchVersionsPaginatorOptions struct {
-	// Set this value to limit the number of results returned. Value provided must be
+	//  Set this value to limit the number of results returned. Value provided must be
 	// greater than 10 else it wont be honored.
 	Limit int32
 

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the frameworks that are available in the Audit Manager
+//	Returns a list of the frameworks that are available in the Audit Manager
+//
 // framework library.
 func (c *Client) ListAssessmentFrameworks(ctx context.Context, params *ListAssessmentFrameworksInput, optFns ...func(*Options)) (*ListAssessmentFrameworksOutput, error) {
 	if params == nil {
@@ -30,15 +31,15 @@ func (c *Client) ListAssessmentFrameworks(ctx context.Context, params *ListAsses
 
 type ListAssessmentFrameworksInput struct {
 
-	// The type of framework, such as a standard framework or a custom framework.
+	//  The type of framework, such as a standard framework or a custom framework.
 	//
 	// This member is required.
 	FrameworkType types.FrameworkType
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,11 +47,11 @@ type ListAssessmentFrameworksInput struct {
 
 type ListAssessmentFrameworksOutput struct {
 
-	// A list of metadata that the ListAssessmentFrameworks API returns for each
+	//  A list of metadata that the ListAssessmentFrameworks API returns for each
 	// framework.
 	FrameworkMetadataList []types.AssessmentFrameworkMetadata
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -149,7 +150,7 @@ var _ ListAssessmentFrameworksAPIClient = (*Client)(nil)
 // ListAssessmentFrameworksPaginatorOptions is the paginator options for
 // ListAssessmentFrameworks
 type ListAssessmentFrameworksPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

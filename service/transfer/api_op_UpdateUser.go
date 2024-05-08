@@ -13,17 +13,23 @@ import (
 
 // Assigns new properties to a user. Parameters you pass modify any or all of the
 // following: the home directory, role, and policy for the UserName and ServerId
-// you specify. The response returns the ServerId and the UserName for the updated
-// user. In the console, you can select Restricted when you create or update a
-// user. This ensures that the user can't access anything outside of their home
+// you specify.
+//
+// The response returns the ServerId and the UserName for the updated user.
+//
+// In the console, you can select Restricted when you create or update a user.
+// This ensures that the user can't access anything outside of their home
 // directory. The programmatic way to configure this behavior is to update the
 // user. Set their HomeDirectoryType to LOGICAL , and specify HomeDirectoryMappings
-// with Entry as root ( / ) and Target as their home directory. For example, if
-// the user's home directory is /test/admin-user , the following command updates
-// the user so that their configuration in the console shows the Restricted flag as
-// selected. aws transfer update-user --server-id <server-id> --user-name
-// admin-user --home-directory-type LOGICAL --home-directory-mappings
-// "[{\"Entry\":\"/\", \"Target\":\"/test/admin-user\"}]"
+// with Entry as root ( / ) and Target as their home directory.
+//
+// For example, if the user's home directory is /test/admin-user , the following
+// command updates the user so that their configuration in the console shows the
+// Restricted flag as selected.
+//
+//	aws transfer update-user --server-id <server-id> --user-name admin-user
+//	--home-directory-type LOGICAL --home-directory-mappings "[{\"Entry\":\"/\",
+//	\"Target\":\"/test/admin-user\"}]"
 func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
 		params = &UpdateUserInput{}
@@ -57,8 +63,11 @@ type UpdateUserInput struct {
 	UserName *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. A HomeDirectory example is /bucket_name/home/mydirectory . The
-	// HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
+	// the client.
+	//
+	// A HomeDirectory example is /bucket_name/home/mydirectory .
+	//
+	// The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH .
 	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and
@@ -67,14 +76,19 @@ type UpdateUserInput struct {
 	// visible and Target is the actual Amazon S3 or Amazon EFS path. If you only
 	// specify a target, it is displayed as is. You also must ensure that your Identity
 	// and Access Management (IAM) role provides access to paths in Target . This value
-	// can be set only when HomeDirectoryType is set to LOGICAL. The following is an
-	// Entry and Target pair example. [ { "Entry": "/directory1", "Target":
-	// "/bucket_name/home/mydirectory" } ] In most cases, you can use this value
-	// instead of the session policy to lock down your user to the designated home
-	// directory (" chroot "). To do this, you can set Entry to '/' and set Target to
-	// the HomeDirectory parameter value. The following is an Entry and Target pair
-	// example for chroot . [ { "Entry": "/", "Target":
-	// "/bucket_name/home/mydirectory" } ]
+	// can be set only when HomeDirectoryType is set to LOGICAL.
+	//
+	// The following is an Entry and Target pair example.
+	//
+	//     [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]
+	//
+	// In most cases, you can use this value instead of the session policy to lock
+	// down your user to the designated home directory (" chroot "). To do this, you
+	// can set Entry to '/' and set Target to the HomeDirectory parameter value.
+	//
+	// The following is an Entry and Target pair example for chroot .
+	//
+	//     [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]
 	HomeDirectoryMappings []types.HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) that you want your users' home directory
@@ -82,25 +96,34 @@ type UpdateUserInput struct {
 	// the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer
 	// protocol clients. If you set it to LOGICAL , you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or Amazon EFS paths
-	// visible to your users. If HomeDirectoryType is LOGICAL , you must provide
-	// mappings, using the HomeDirectoryMappings parameter. If, on the other hand,
-	// HomeDirectoryType is PATH , you provide an absolute path using the HomeDirectory
-	// parameter. You cannot have both HomeDirectory and HomeDirectoryMappings in your
-	// template.
+	// visible to your users.
+	//
+	// If HomeDirectoryType is LOGICAL , you must provide mappings, using the
+	// HomeDirectoryMappings parameter. If, on the other hand, HomeDirectoryType is
+	// PATH , you provide an absolute path using the HomeDirectory parameter. You
+	// cannot have both HomeDirectory and HomeDirectoryMappings in your template.
 	HomeDirectoryType types.HomeDirectoryType
 
 	// A session policy for your user so that you can use the same Identity and Access
 	// Management (IAM) role across multiple users. This policy scopes down a user's
 	// access to portions of their Amazon S3 bucket. Variables that you can use inside
 	// this policy include ${Transfer:UserName} , ${Transfer:HomeDirectory} , and
-	// ${Transfer:HomeBucket} . This policy applies only when the domain of ServerId
-	// is Amazon S3. Amazon EFS does not use session policies. For session policies,
-	// Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource
-	// Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the
-	// Policy argument. For an example of a session policy, see Creating a session
-	// policy (https://docs.aws.amazon.com/transfer/latest/userguide/session-policy) .
-	// For more information, see AssumeRole (https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html)
-	// in the Amazon Web Services Security Token Service API Reference.
+	// ${Transfer:HomeBucket} .
+	//
+	// This policy applies only when the domain of ServerId is Amazon S3. Amazon EFS
+	// does not use session policies.
+	//
+	// For session policies, Transfer Family stores the policy as a JSON blob, instead
+	// of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON
+	// blob and pass it in the Policy argument.
+	//
+	// For an example of a session policy, see [Creating a session policy].
+	//
+	// For more information, see [AssumeRole] in the Amazon Web Services Security Token Service
+	// API Reference.
+	//
+	// [Creating a session policy]: https://docs.aws.amazon.com/transfer/latest/userguide/session-policy
+	// [AssumeRole]: https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html
 	Policy *string
 
 	// Specifies the full POSIX identity, including user ID ( Uid ), group ID ( Gid ),

@@ -11,9 +11,10 @@ import (
 )
 
 // Enables the integration of a partner product with Security Hub. Integrated
-// products send findings to Security Hub. When you enable a product integration, a
-// permissions policy that grants permission for the product to send findings to
-// Security Hub is applied.
+// products send findings to Security Hub.
+//
+// When you enable a product integration, a permissions policy that grants
+// permission for the product to send findings to Security Hub is applied.
 func (c *Client) EnableImportFindingsForProduct(ctx context.Context, params *EnableImportFindingsForProductInput, optFns ...func(*Options)) (*EnableImportFindingsForProductOutput, error) {
 	if params == nil {
 		params = &EnableImportFindingsForProductInput{}

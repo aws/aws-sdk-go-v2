@@ -12,8 +12,9 @@ import (
 )
 
 // Returns the regional endpoint information. For more information on policy
-// permissions, please see Internetwork traffic privacy (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/inter-network-traffic-privacy.html#inter-network-traffic-DescribeEndpoints)
-// .
+// permissions, please see [Internetwork traffic privacy].
+//
+// [Internetwork traffic privacy]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/inter-network-traffic-privacy.html#inter-network-traffic-DescribeEndpoints
 func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpointsInput, optFns ...func(*Options)) (*DescribeEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeEndpointsInput{}

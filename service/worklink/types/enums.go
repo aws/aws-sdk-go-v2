@@ -11,6 +11,7 @@ const (
 
 // Values returns all known values for AuthorizationProviderType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthorizationProviderType) Values() []AuthorizationProviderType {
 	return []AuthorizationProviderType{
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for DeviceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceStatus) Values() []DeviceStatus {
 	return []DeviceStatus{
 		"ACTIVE",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for DomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"PENDING_VALIDATION",
@@ -79,8 +82,9 @@ const (
 )
 
 // Values returns all known values for FleetStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetStatus) Values() []FleetStatus {
 	return []FleetStatus{
 		"CREATING",
@@ -100,8 +104,9 @@ const (
 )
 
 // Values returns all known values for IdentityProviderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityProviderType) Values() []IdentityProviderType {
 	return []IdentityProviderType{
 		"SAML",

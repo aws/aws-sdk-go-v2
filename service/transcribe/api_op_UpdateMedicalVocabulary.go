@@ -41,8 +41,9 @@ type UpdateMedicalVocabularyInput struct {
 
 	// The Amazon S3 location of the text file that contains your custom medical
 	// vocabulary. The URI must be located in the same Amazon Web Services Region as
-	// the resource you're calling. Here's an example URI path:
-	// s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt
+	// the resource you're calling.
+	//
+	// Here's an example URI path: s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt
 	//
 	// This member is required.
 	VocabularyFileUri *string
@@ -63,6 +64,7 @@ type UpdateMedicalVocabularyOutput struct {
 	LanguageCode types.LanguageCode
 
 	// The date and time the specified custom medical vocabulary was last updated.
+	//
 	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListBonusPayments operation retrieves the amounts of bonuses you have paid
+//	The ListBonusPayments operation retrieves the amounts of bonuses you have paid
+//
 // to Workers for a given HIT or assignment.
 func (c *Client) ListBonusPayments(ctx context.Context, params *ListBonusPaymentsInput, optFns ...func(*Options)) (*ListBonusPaymentsOutput, error) {
 	if params == nil {

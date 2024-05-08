@@ -12,11 +12,15 @@ import (
 	"time"
 )
 
-// Returns a list of Recommendation (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Recommendation.html)
-// objects that contain recommendations for a profiling group for a given time
-// period. A list of Anomaly (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Anomaly.html)
-// objects that contains details about anomalies detected in the profiling group
-// for the same time period is also returned.
+//	Returns a list of [Recommendation]Recommendation objects that contain recommendations for a
+//
+// profiling group for a given time period. A list of [Anomaly]Anomaly objects that
+// contains details about anomalies detected in the profiling group for the same
+// time period is also returned.
+//
+// [Anomaly]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Anomaly.html
+//
+// [Recommendation]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_Recommendation.html
 func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendationsInput, optFns ...func(*Options)) (*GetRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetRecommendationsInput{}
@@ -35,7 +39,7 @@ func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendati
 // The structure representing the GetRecommendationsRequest.
 type GetRecommendationsInput struct {
 
-	// The start time of the profile to get analysis data about. You must specify
+	//  The start time of the profile to get analysis data about. You must specify
 	// startTime and endTime . This is specified using the ISO 8601 format. For
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
@@ -43,12 +47,12 @@ type GetRecommendationsInput struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The name of the profiling group to get analysis data about.
+	//  The name of the profiling group to get analysis data about.
 	//
 	// This member is required.
 	ProfilingGroupName *string
 
-	// The end time of the profile to get analysis data about. You must specify
+	//  The end time of the profile to get analysis data about. You must specify
 	// startTime and endTime . This is specified using the ISO 8601 format. For
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
@@ -56,18 +60,29 @@ type GetRecommendationsInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The language used to provide analysis. Specify using a string that is one of
+	//  The language used to provide analysis. Specify using a string that is one of
 	// the following BCP 47 language codes.
+	//
 	//   - de-DE - German, Germany
+	//
 	//   - en-GB - English, United Kingdom
+	//
 	//   - en-US - English, United States
+	//
 	//   - es-ES - Spanish, Spain
+	//
 	//   - fr-FR - French, France
+	//
 	//   - it-IT - Italian, Italy
+	//
 	//   - ja-JP - Japanese, Japan
+	//
 	//   - ko-KR - Korean, Republic of Korea
+	//
 	//   - pt-BR - Portugese, Brazil
+	//
 	//   - zh-CN - Chinese, China
+	//
 	//   - zh-TW - Chinese, Taiwan
 	Locale *string
 
@@ -77,19 +92,19 @@ type GetRecommendationsInput struct {
 // The structure representing the GetRecommendationsResponse.
 type GetRecommendationsOutput struct {
 
-	// The list of anomalies that the analysis has found for this profile.
+	//  The list of anomalies that the analysis has found for this profile.
 	//
 	// This member is required.
 	Anomalies []types.Anomaly
 
-	// The end time of the profile the analysis data is about. This is specified using
-	// the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
+	//  The end time of the profile the analysis data is about. This is specified
+	// using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
 	// millisecond past June 1, 2020 1:15:02 PM UTC.
 	//
 	// This member is required.
 	ProfileEndTime *time.Time
 
-	// The start time of the profile the analysis data is about. This is specified
+	//  The start time of the profile the analysis data is about. This is specified
 	// using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1
 	// millisecond past June 1, 2020 1:15:02 PM UTC.
 	//

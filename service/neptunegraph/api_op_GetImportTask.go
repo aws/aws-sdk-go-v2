@@ -63,22 +63,32 @@ type GetImportTaskOutput struct {
 	Source *string
 
 	// The status of the import task:
+	//
 	//   - INITIALIZING – The necessary resources needed to create the graph are being
 	//   prepared.
+	//
 	//   - ANALYZING_DATA – The data is being analyzed to determine the optimal
 	//   infrastructure configuration for the new graph.
+	//
 	//   - RE_PROVISIONING – The data did not fit into the provisioned graph, so it is
 	//   being re-provisioned with more capacity.
+	//
 	//   - IMPORTING – The data is being loaded.
+	//
 	//   - ERROR_ENCOUNTERED – An error has been encountered while trying to create
 	//   the graph and import the data.
+	//
 	//   - ERROR_ENCOUNTERED_ROLLING_BACK – Because of the error that was encountered,
 	//   the graph is being rolled back and all its resources released.
+	//
 	//   - SUCCEEDED – Graph creation and data loading succeeded.
+	//
 	//   - FAILED – Graph creation or data loading failed. When the status is FAILED ,
 	//   you can use get-graphs to get more information about the state of the graph.
+	//
 	//   - CANCELLING – Because you cancelled the import task, cancellation is in
 	//   progress.
+	//
 	//   - CANCELLED – You have successfully cancelled the import task.
 	//
 	// This member is required.
@@ -93,9 +103,10 @@ type GetImportTaskOutput struct {
 	AttemptNumber *int32
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
-	// identifies the Gremlin CSV format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html)
-	// or OPENCYPHER , which identies the openCypher load format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html)
-	// .
+	// identifies the [Gremlin CSV format]or OPENCYPHER , which identies the [openCypher load format].
+	//
+	// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
+	// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
 	Format types.Format
 
 	// The unique identifier of the Neptune Analytics graph.
@@ -239,12 +250,13 @@ type ImportTaskSuccessfulWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetImportTaskInput, *GetImportTaskOutput, error) (bool, error)
 }
 
@@ -481,12 +493,13 @@ type ImportTaskCancelledWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetImportTaskInput, *GetImportTaskOutput, error) (bool, error)
 }
 

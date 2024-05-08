@@ -12,9 +12,9 @@ import (
 )
 
 // Lists all the inbound cross-cluster search connections for a destination
-// (remote) Amazon OpenSearch Service domain. For more information, see
-// Cross-cluster search for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
-// .
+// (remote) Amazon OpenSearch Service domain. For more information, see [Cross-cluster search for Amazon OpenSearch Service].
+//
+// [Cross-cluster search for Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
 func (c *Client) DescribeInboundConnections(ctx context.Context, params *DescribeInboundConnectionsInput, optFns ...func(*Options)) (*DescribeInboundConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeInboundConnectionsInput{}
@@ -33,7 +33,7 @@ func (c *Client) DescribeInboundConnections(ctx context.Context, params *Describ
 // Container for the parameters to the DescribeInboundConnections operation.
 type DescribeInboundConnectionsInput struct {
 
-	// A list of filters used to match properties for inbound cross-cluster
+	//  A list of filters used to match properties for inbound cross-cluster
 	// connections.
 	Filters []types.Filter
 

@@ -14,8 +14,9 @@ import (
 // Creates or updates the encryption configuration. Amazon Web Services IoT
 // FleetWise can encrypt your data and resources using an Amazon Web Services
 // managed key. Or, you can use a KMS key that you own and manage. For more
-// information, see Data encryption (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/data-encryption.html)
-// in the Amazon Web Services IoT FleetWise Developer Guide.
+// information, see [Data encryption]in the Amazon Web Services IoT FleetWise Developer Guide.
+//
+// [Data encryption]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/data-encryption.html
 func (c *Client) PutEncryptionConfiguration(ctx context.Context, params *PutEncryptionConfigurationInput, optFns ...func(*Options)) (*PutEncryptionConfigurationOutput, error) {
 	if params == nil {
 		params = &PutEncryptionConfigurationInput{}

@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the image IDs for the specified repository. You can filter images
-// based on whether or not they are tagged by using the tagStatus filter and
-// specifying either TAGGED , UNTAGGED or ANY . For example, you can filter your
-// results to return only UNTAGGED images and then pipe that result to a
-// BatchDeleteImage operation to delete them. Or, you can filter your results to
-// return only TAGGED images to list all of the tags in your repository.
+// Lists all the image IDs for the specified repository.
+//
+// You can filter images based on whether or not they are tagged by using the
+// tagStatus filter and specifying either TAGGED , UNTAGGED or ANY . For example,
+// you can filter your results to return only UNTAGGED images and then pipe that
+// result to a BatchDeleteImageoperation to delete them. Or, you can filter your results to return
+// only TAGGED images to list all of the tags in your repository.
 func (c *Client) ListImages(ctx context.Context, params *ListImagesInput, optFns ...func(*Options)) (*ListImagesOutput, error) {
 	if params == nil {
 		params = &ListImagesInput{}
@@ -55,6 +56,7 @@ type ListImagesInput struct {
 	// maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value. This value is null when there are no more results to return.
+	//
 	// This token should be treated as an opaque identifier that is only used to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string

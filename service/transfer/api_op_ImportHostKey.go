@@ -29,8 +29,9 @@ func (c *Client) ImportHostKey(ctx context.Context, params *ImportHostKeyInput, 
 
 type ImportHostKeyInput struct {
 
-	// The private key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA,
-	// and ED25519 keys.
+	// The private key portion of an SSH key pair.
+	//
+	// Transfer Family accepts RSA, ECDSA, and ED25519 keys.
 	//
 	// This member is required.
 	HostKeyBody *string

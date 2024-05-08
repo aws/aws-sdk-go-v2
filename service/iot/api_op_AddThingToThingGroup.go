@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a thing to a thing group. Requires permission to access the
-// AddThingToThingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Adds a thing to a thing group.
+//
+// Requires permission to access the [AddThingToThingGroup] action.
+//
+// [AddThingToThingGroup]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) AddThingToThingGroup(ctx context.Context, params *AddThingToThingGroupInput, optFns ...func(*Options)) (*AddThingToThingGroupOutput, error) {
 	if params == nil {
 		params = &AddThingToThingGroupInput{}

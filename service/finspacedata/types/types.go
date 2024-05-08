@@ -9,16 +9,16 @@ import (
 // The credentials required to access the external Dataview from the S3 location.
 type AwsCredentials struct {
 
-	// The unique identifier for the security credentials.
+	//  The unique identifier for the security credentials.
 	AccessKeyId *string
 
-	// The Epoch time when the current credentials expire.
+	//  The Epoch time when the current credentials expire.
 	Expiration int64
 
-	// The secret access key that can be used to sign requests.
+	//  The secret access key that can be used to sign requests.
 	SecretAccessKey *string
 
-	// The token that users must pass to use the credentials.
+	//  The token that users must pass to use the credentials.
 	SessionToken *string
 
 	noSmithyDocumentSerde
@@ -28,15 +28,23 @@ type AwsCredentials struct {
 type ChangesetErrorInfo struct {
 
 	// The category of the error.
+	//
 	//   - VALIDATION – The inputs to this request are invalid.
+	//
 	//   - SERVICE_QUOTA_EXCEEDED – Service quotas have been exceeded. Please contact
 	//   AWS support to increase quotas.
+	//
 	//   - ACCESS_DENIED – Missing required permission to perform this request.
+	//
 	//   - RESOURCE_NOT_FOUND – One or more inputs to this request were not found.
+	//
 	//   - THROTTLING – The system temporarily lacks sufficient resources to process
 	//   the request.
+	//
 	//   - INTERNAL_SERVICE_EXCEPTION – An internal service error has occurred.
+	//
 	//   - CANCELLED – Cancelled.
+	//
 	//   - USER_RECOVERABLE – A user recoverable error has occurred.
 	ErrorCategory ErrorCategory
 
@@ -60,10 +68,13 @@ type ChangesetSummary struct {
 	ActiveUntilTimestamp *int64
 
 	// Type that indicates how a Changeset is applied to a Dataset.
+	//
 	//   - REPLACE – Changeset is considered as a replacement to all prior loaded
 	//   Changesets.
+	//
 	//   - APPEND – Changeset is considered as an addition to the end of all prior
 	//   loaded Changesets.
+	//
 	//   - MODIFY – Changeset is considered as a replacement to a specific prior
 	//   ingested Changeset.
 	ChangeType ChangeType
@@ -93,10 +104,15 @@ type ChangesetSummary struct {
 	SourceParams map[string]string
 
 	// Status of the Changeset ingestion.
+	//
 	//   - PENDING – Changeset is pending creation.
+	//
 	//   - FAILED – Changeset creation has failed.
+	//
 	//   - SUCCESS – Changeset creation has succeeded.
+	//
 	//   - RUNNING – Changeset creation is running.
+	//
 	//   - STOP_REQUESTED – User requested Changeset creation to stop.
 	Status IngestionStatus
 
@@ -119,11 +135,30 @@ type ColumnDefinition struct {
 	ColumnName *string
 
 	// Data type of a column.
-	//   - STRING – A String data type. CHAR – A char data type. INTEGER – An integer
-	//   data type. TINYINT – A tinyint data type. SMALLINT – A smallint data type.
-	//   BIGINT – A bigint data type. FLOAT – A float data type. DOUBLE – A double data
-	//   type. DATE – A date data type. DATETIME – A datetime data type. BOOLEAN – A
-	//   boolean data type. BINARY – A binary data type.
+	//
+	//   - STRING – A String data type.
+	//
+	// CHAR – A char data type.
+	//
+	// INTEGER – An integer data type.
+	//
+	// TINYINT – A tinyint data type.
+	//
+	// SMALLINT – A smallint data type.
+	//
+	// BIGINT – A bigint data type.
+	//
+	// FLOAT – A float data type.
+	//
+	// DOUBLE – A double data type.
+	//
+	// DATE – A date data type.
+	//
+	// DATETIME – A datetime data type.
+	//
+	// BOOLEAN – A boolean data type.
+	//
+	// BINARY – A binary data type.
 	DataType ColumnDataType
 
 	noSmithyDocumentSerde
@@ -168,7 +203,9 @@ type Dataset struct {
 	DatasetTitle *string
 
 	// The format in which Dataset data is structured.
+	//
 	//   - TABULAR – Data is structured in a tabular format.
+	//
 	//   - NON_TABULAR – Data is structured in a non-tabular format.
 	Kind DatasetKind
 
@@ -205,19 +242,26 @@ type DatasetOwnerInfo struct {
 type DataViewDestinationTypeParams struct {
 
 	// Destination type for a Dataview.
+	//
 	//   - GLUE_TABLE – Glue table destination type.
+	//
 	//   - S3 – S3 destination type.
 	//
 	// This member is required.
 	DestinationType *string
 
 	// Dataview export file format.
+	//
 	//   - PARQUET – Parquet export file format.
+	//
 	//   - DELIMITED_TEXT – Delimited text export file format.
 	S3DestinationExportFileFormat ExportFileFormat
 
-	// Format Options for S3 Destination type. Here is an example of how you could
-	// specify the s3DestinationExportFileFormatOptions
+	// Format Options for S3 Destination type.
+	//
+	// Here is an example of how you could specify the
+	// s3DestinationExportFileFormatOptions
+	//
 	//     { "header": "true", "delimiter": ",", "compression": "gzip" }
 	S3DestinationExportFileFormatOptions map[string]string
 
@@ -228,15 +272,23 @@ type DataViewDestinationTypeParams struct {
 type DataViewErrorInfo struct {
 
 	// The category of the error.
+	//
 	//   - VALIDATION – The inputs to this request are invalid.
+	//
 	//   - SERVICE_QUOTA_EXCEEDED – Service quotas have been exceeded. Please contact
 	//   AWS support to increase quotas.
+	//
 	//   - ACCESS_DENIED – Missing required permission to perform this request.
+	//
 	//   - RESOURCE_NOT_FOUND – One or more inputs to this request were not found.
+	//
 	//   - THROTTLING – The system temporarily lacks sufficient resources to process
 	//   the request.
+	//
 	//   - INTERNAL_SERVICE_EXCEPTION – An internal service error has occurred.
+	//
 	//   - CANCELLED – Cancelled.
+	//
 	//   - USER_RECOVERABLE – A user recoverable error has occurred.
 	ErrorCategory ErrorCategory
 
@@ -289,15 +341,22 @@ type DataViewSummary struct {
 	SortColumns []string
 
 	// The status of a Dataview creation.
+	//
 	//   - RUNNING – Dataview creation is running.
+	//
 	//   - STARTING – Dataview creation is starting.
+	//
 	//   - FAILED – Dataview creation has failed.
+	//
 	//   - CANCELLED – Dataview creation has been cancelled.
+	//
 	//   - TIMEOUT – Dataview creation has timed out.
+	//
 	//   - SUCCESS – Dataview creation has succeeded.
+	//
 	//   - PENDING – Dataview creation is pending.
-	//   - FAILED_CLEANUP_FAILED – Dataview creation failed and resource cleanup
-	//   failed.
+	//
+	//   - FAILED_CLEANUP_FAILED – Dataview creation failed and resource cleanup failed.
 	Status DataViewStatus
 
 	noSmithyDocumentSerde
@@ -307,20 +366,29 @@ type DataViewSummary struct {
 type PermissionGroup struct {
 
 	// Indicates the permissions that are granted to a specific group for accessing
-	// the FinSpace application. When assigning application permissions, be aware that
-	// the permission ManageUsersAndGroups allows users to grant themselves or others
-	// access to any functionality in their FinSpace environment's application. It
-	// should only be granted to trusted users.
+	// the FinSpace application.
+	//
+	// When assigning application permissions, be aware that the permission
+	// ManageUsersAndGroups allows users to grant themselves or others access to any
+	// functionality in their FinSpace environment's application. It should only be
+	// granted to trusted users.
+	//
 	//   - CreateDataset – Group members can create new datasets.
+	//
 	//   - ManageClusters – Group members can manage Apache Spark clusters from
 	//   FinSpace notebooks.
+	//
 	//   - ManageUsersAndGroups – Group members can manage users and permission groups.
 	//   This is a privileged permission that allows users to grant themselves or others
 	//   access to any functionality in the application. It should only be granted to
 	//   trusted users.
+	//
 	//   - ManageAttributeSets – Group members can manage attribute sets.
+	//
 	//   - ViewAuditData – Group members can view audit data.
+	//
 	//   - AccessNotebooks – Group members will have access to FinSpace notebooks.
+	//
 	//   - GetTemporaryCredentials – Group members can get temporary API credentials.
 	ApplicationPermissions []ApplicationPermission
 
@@ -328,7 +396,7 @@ type PermissionGroup struct {
 	// determined as epoch time in milliseconds.
 	CreateTime int64
 
-	// A brief description for the permission group.
+	//  A brief description for the permission group.
 	Description *string
 
 	// Describes the last time the permission group was updated. The value is
@@ -336,9 +404,12 @@ type PermissionGroup struct {
 	LastModifiedTime int64
 
 	// Indicates the status of the user within a permission group.
+	//
 	//   - ADDITION_IN_PROGRESS – The user is currently being added to the permission
 	//   group.
+	//
 	//   - ADDITION_SUCCESS – The user is successfully added to the permission group.
+	//
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
 	MembershipStatus PermissionGroupMembershipStatus
@@ -346,7 +417,7 @@ type PermissionGroup struct {
 	// The name of the permission group.
 	Name *string
 
-	// The unique identifier for the permission group.
+	//  The unique identifier for the permission group.
 	PermissionGroupId *string
 
 	noSmithyDocumentSerde
@@ -356,9 +427,12 @@ type PermissionGroup struct {
 type PermissionGroupByUser struct {
 
 	// Indicates the status of the user within a permission group.
+	//
 	//   - ADDITION_IN_PROGRESS – The user is currently being added to the permission
 	//   group.
+	//
 	//   - ADDITION_SUCCESS – The user is successfully added to the permission group.
+	//
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
 	MembershipStatus PermissionGroupMembershipStatus
@@ -372,11 +446,13 @@ type PermissionGroupByUser struct {
 	noSmithyDocumentSerde
 }
 
-// Permission group parameters for Dataset permissions. Here is an example of how
-// you could specify the PermissionGroupParams :  { "permissionGroupId":
-// "0r6fCRtSTUk4XPfXQe3M0g", "datasetPermissions": [ {"permission":
-// "ViewDatasetDetails"}, {"permission": "AddDatasetData"}, {"permission":
-// "EditDatasetMetadata"}, {"permission": "DeleteDataset"} ] }
+// Permission group parameters for Dataset permissions.
+//
+// Here is an example of how you could specify the PermissionGroupParams :
+//
+//	{ "permissionGroupId": "0r6fCRtSTUk4XPfXQe3M0g", "datasetPermissions": [
+//	{"permission": "ViewDatasetDetails"}, {"permission": "AddDatasetData"},
+//	{"permission": "EditDatasetMetadata"}, {"permission": "DeleteDataset"} ] }
 type PermissionGroupParams struct {
 
 	// List of resource permissions.
@@ -391,18 +467,26 @@ type PermissionGroupParams struct {
 // Resource permission for a dataset. When you create a dataset, all the other
 // members of the same user group inherit access to the dataset. You can only
 // create a dataset if your user group has application permission for Create
-// Datasets. The following is a list of valid dataset permissions that you can
-// apply:
+// Datasets.
+//
+// The following is a list of valid dataset permissions that you can apply:
+//
 //   - ViewDatasetDetails
+//
 //   - ReadDatasetDetails
+//
 //   - AddDatasetData
+//
 //   - CreateDataView
+//
 //   - EditDatasetMetadata
+//
 //   - DeleteDataset
 //
-// For more information on the dataset permissions, see Supported Dataset
-// Permissions (https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions)
-// in the FinSpace User Guide.
+// For more information on the dataset permissions, see [Supported Dataset Permissions] in the FinSpace User
+// Guide.
+//
+// [Supported Dataset Permissions]: https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions
 type ResourcePermission struct {
 
 	// Permission for a resource.
@@ -414,12 +498,12 @@ type ResourcePermission struct {
 // The location of an external Dataview in an S3 bucket.
 type S3Location struct {
 
-	// The name of the S3 bucket.
+	//  The name of the S3 bucket.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The path of the folder, within the S3 bucket that contains the Dataset.
+	//  The path of the folder, within the S3 bucket that contains the Dataset.
 	//
 	// This member is required.
 	Key *string
@@ -454,7 +538,9 @@ type User struct {
 	// Indicates whether the user can use the GetProgrammaticAccessCredentials API to
 	// obtain credentials that can then be used to access other FinSpace Data API
 	// operations.
+	//
 	//   - ENABLED – The user has permissions to use the APIs.
+	//
 	//   - DISABLED – The user does not have permissions to use any APIs.
 	ApiAccess ApiAccess
 
@@ -478,7 +564,7 @@ type User struct {
 	// epoch time in milliseconds.
 	LastDisabledTime int64
 
-	// Describes the last time the user was activated. The value is determined as
+	//  Describes the last time the user was activated. The value is determined as
 	// epoch time in milliseconds.
 	LastEnabledTime int64
 
@@ -490,18 +576,23 @@ type User struct {
 	// time in milliseconds.
 	LastModifiedTime int64
 
-	// The last name of the user.
+	//  The last name of the user.
 	LastName *string
 
 	// The current status of the user.
+	//
 	//   - CREATING – The user creation is in progress.
+	//
 	//   - ENABLED – The user is created and is currently active.
+	//
 	//   - DISABLED – The user is currently inactive.
 	Status UserStatus
 
-	// Indicates the type of user.
+	//  Indicates the type of user.
+	//
 	//   - SUPER_USER – A user with permission to all the functionality and data in
 	//   FinSpace.
+	//
 	//   - APP_USER – A user with specific permissions in FinSpace. The users are
 	//   assigned permissions by adding them to a permission group.
 	Type UserType
@@ -516,7 +607,9 @@ type User struct {
 type UserByPermissionGroup struct {
 
 	// Indicates whether the user can access FinSpace API operations.
+	//
 	//   - ENABLED – The user has permissions to use the API operations.
+	//
 	//   - DISABLED – The user does not have permissions to use any API operations.
 	ApiAccess ApiAccess
 
@@ -534,22 +627,30 @@ type UserByPermissionGroup struct {
 	LastName *string
 
 	// Indicates the status of the user within a permission group.
+	//
 	//   - ADDITION_IN_PROGRESS – The user is currently being added to the permission
 	//   group.
+	//
 	//   - ADDITION_SUCCESS – The user is successfully added to the permission group.
+	//
 	//   - REMOVAL_IN_PROGRESS – The user is currently being removed from the
 	//   permission group.
 	MembershipStatus PermissionGroupMembershipStatus
 
 	// The current status of the user.
+	//
 	//   - CREATING – The user creation is in progress.
+	//
 	//   - ENABLED – The user is created and is currently active.
+	//
 	//   - DISABLED – The user is currently inactive.
 	Status UserStatus
 
-	// Indicates the type of user.
+	//  Indicates the type of user.
+	//
 	//   - SUPER_USER – A user with permission to all the functionality and data in
 	//   FinSpace.
+	//
 	//   - APP_USER – A user with specific permissions in FinSpace. The users are
 	//   assigned permissions by adding them to a permission group.
 	Type UserType

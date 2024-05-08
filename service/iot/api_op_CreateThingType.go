@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new thing type. Requires permission to access the CreateThingType (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a new thing type.
+//
+// Requires permission to access the [CreateThingType] action.
+//
+// [CreateThingType]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateThingType(ctx context.Context, params *CreateThingTypeInput, optFns ...func(*Options)) (*CreateThingTypeOutput, error) {
 	if params == nil {
 		params = &CreateThingTypeInput{}

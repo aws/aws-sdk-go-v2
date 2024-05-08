@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of stream processors that you have created with
-// CreateStreamProcessor .
+// Gets a list of stream processors that you have created with CreateStreamProcessor.
 func (c *Client) ListStreamProcessors(ctx context.Context, params *ListStreamProcessorsInput, optFns ...func(*Options)) (*ListStreamProcessorsOutput, error) {
 	if params == nil {
 		params = &ListStreamProcessorsInput{}

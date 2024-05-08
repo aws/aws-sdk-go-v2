@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns metadata about the images in a repository. Beginning with Docker
-// version 1.9, the Docker client compresses image layers before pushing them to a
-// V2 Docker registry. The output of the docker images command shows the
-// uncompressed image size, so it may return a larger image size than the image
-// sizes returned by DescribeImages .
+// Returns metadata about the images in a repository.
+//
+// Beginning with Docker version 1.9, the Docker client compresses image layers
+// before pushing them to a V2 Docker registry. The output of the docker images
+// command shows the uncompressed image size, so it may return a larger image size
+// than the image sizes returned by DescribeImages.
 func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput, optFns ...func(*Options)) (*DescribeImagesOutput, error) {
 	if params == nil {
 		params = &DescribeImagesInput{}

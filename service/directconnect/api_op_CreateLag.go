@@ -15,21 +15,27 @@ import (
 // physical dedicated connections between the customer network and a specific
 // Direct Connect location. A LAG is a logical interface that uses the Link
 // Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling
-// you to treat them as a single interface. All connections in a LAG must use the
-// same bandwidth (either 1Gbps or 10Gbps) and must terminate at the same Direct
-// Connect endpoint. You can have up to 10 dedicated connections per LAG.
-// Regardless of this limit, if you request more connections for the LAG than
-// Direct Connect can allocate on a single endpoint, no LAG is created. You can
-// specify an existing physical dedicated connection or interconnect to include in
-// the LAG (which counts towards the total number of connections). Doing so
-// interrupts the current physical dedicated connection, and re-establishes them as
-// a member of the LAG. The LAG will be created on the same Direct Connect endpoint
-// to which the dedicated connection terminates. Any virtual interfaces associated
-// with the dedicated connection are automatically disassociated and re-associated
-// with the LAG. The connection ID does not change. If the Amazon Web Services
-// account used to create a LAG is a registered Direct Connect Partner, the LAG is
-// automatically enabled to host sub-connections. For a LAG owned by a partner, any
-// associated virtual interfaces cannot be directly configured.
+// you to treat them as a single interface.
+//
+// All connections in a LAG must use the same bandwidth (either 1Gbps or 10Gbps)
+// and must terminate at the same Direct Connect endpoint.
+//
+// You can have up to 10 dedicated connections per LAG. Regardless of this limit,
+// if you request more connections for the LAG than Direct Connect can allocate on
+// a single endpoint, no LAG is created.
+//
+// You can specify an existing physical dedicated connection or interconnect to
+// include in the LAG (which counts towards the total number of connections). Doing
+// so interrupts the current physical dedicated connection, and re-establishes them
+// as a member of the LAG. The LAG will be created on the same Direct Connect
+// endpoint to which the dedicated connection terminates. Any virtual interfaces
+// associated with the dedicated connection are automatically disassociated and
+// re-associated with the LAG. The connection ID does not change.
+//
+// If the Amazon Web Services account used to create a LAG is a registered Direct
+// Connect Partner, the LAG is automatically enabled to host sub-connections. For a
+// LAG owned by a partner, any associated virtual interfaces cannot be directly
+// configured.
 func (c *Client) CreateLag(ctx context.Context, params *CreateLagInput, optFns ...func(*Options)) (*CreateLagOutput, error) {
 	if params == nil {
 		params = &CreateLagInput{}
@@ -79,10 +85,13 @@ type CreateLagInput struct {
 	// The name of the service provider associated with the LAG.
 	ProviderName *string
 
-	// Indicates whether the connection will support MAC Security (MACsec). All
-	// connections in the LAG must be capable of supporting MAC Security (MACsec). For
-	// information about MAC Security (MACsec) prerequisties, see MACsec prerequisties (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites)
-	// in the Direct Connect User Guide.
+	// Indicates whether the connection will support MAC Security (MACsec).
+	//
+	// All connections in the LAG must be capable of supporting MAC Security (MACsec).
+	// For information about MAC Security (MACsec) prerequisties, see [MACsec prerequisties]in the Direct
+	// Connect User Guide.
+	//
+	// [MACsec prerequisties]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
 	RequestMACSec *bool
 
 	// The tags to associate with the LAG.
@@ -116,8 +125,9 @@ type CreateLagOutput struct {
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
 
-	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt ,
-	// should_encrypt , and must_encrypt .
+	// The LAG MAC Security (MACsec) encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
@@ -134,13 +144,20 @@ type CreateLagOutput struct {
 	LagName *string
 
 	// The state of the LAG. The following are the possible values:
+	//
 	//   - requested : The initial state of a LAG. The LAG stays in the requested state
 	//   until the Letter of Authorization (LOA) is available.
+	//
 	//   - pending : The LAG has been approved and is being initialized.
+	//
 	//   - available : The network link is established and the LAG is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The LAG is being deleted.
+	//
 	//   - deleted : The LAG is deleted.
+	//
 	//   - unknown : The state of the LAG is not available.
 	LagState types.LagState
 

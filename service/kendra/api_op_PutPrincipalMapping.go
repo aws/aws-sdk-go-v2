@@ -12,16 +12,23 @@ import (
 )
 
 // Maps users to their groups so that you only need to provide the user ID when
-// you issue the query. You can also map sub groups to groups. For example, the
-// group "Company Intellectual Property Teams" includes sub groups "Research" and
-// "Engineering". These sub groups include their own list of users or people who
-// work in these teams. Only users who work in research and engineering, and
-// therefore belong in the intellectual property group, can see top-secret company
-// documents in their search results. This is useful for user context filtering,
-// where search results are filtered based on the user or their group access to
-// documents. For more information, see Filtering on user context (https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html)
-// . If more than five PUT actions for a group are currently processing, a
+// you issue the query.
+//
+// You can also map sub groups to groups. For example, the group "Company
+// Intellectual Property Teams" includes sub groups "Research" and "Engineering".
+// These sub groups include their own list of users or people who work in these
+// teams. Only users who work in research and engineering, and therefore belong in
+// the intellectual property group, can see top-secret company documents in their
+// search results.
+//
+// This is useful for user context filtering, where search results are filtered
+// based on the user or their group access to documents. For more information, see [Filtering on user context]
+// .
+//
+// If more than five PUT actions for a group are currently processing, a
 // validation exception is thrown.
+//
+// [Filtering on user context]: https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html
 func (c *Client) PutPrincipalMapping(ctx context.Context, params *PutPrincipalMappingInput, optFns ...func(*Options)) (*PutPrincipalMappingOutput, error) {
 	if params == nil {
 		params = &PutPrincipalMappingInput{}
@@ -44,13 +51,15 @@ type PutPrincipalMappingInput struct {
 	// This member is required.
 	GroupId *string
 
-	// The list that contains your users or sub groups that belong the same group. For
-	// example, the group "Company" includes the user "CEO" and the sub groups
-	// "Research", "Engineering", and "Sales and Marketing". If you have more than 1000
-	// users and/or sub groups for a single group, you need to provide the path to the
-	// S3 file that lists your users and sub groups for a group. Your sub groups can
-	// contain more than 1000 users, but the list of sub groups that belong to a group
-	// (and/or users) must be no more than 1000.
+	// The list that contains your users or sub groups that belong the same group.
+	//
+	// For example, the group "Company" includes the user "CEO" and the sub groups
+	// "Research", "Engineering", and "Sales and Marketing".
+	//
+	// If you have more than 1000 users and/or sub groups for a single group, you need
+	// to provide the path to the S3 file that lists your users and sub groups for a
+	// group. Your sub groups can contain more than 1000 users, but the list of sub
+	// groups that belong to a group (and/or users) must be no more than 1000.
 	//
 	// This member is required.
 	GroupMembers *types.GroupMembers
@@ -60,9 +69,10 @@ type PutPrincipalMappingInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The identifier of the data source you want to map users to their groups. This
-	// is useful if a group is tied to multiple data sources, but you only want the
-	// group to access documents of a certain data source. For example, the groups
+	// The identifier of the data source you want to map users to their groups.
+	//
+	// This is useful if a group is tied to multiple data sources, but you only want
+	// the group to access documents of a certain data source. For example, the groups
 	// "Research", "Engineering", and "Sales and Marketing" are all tied to the
 	// company's documents stored in the data sources Confluence and Salesforce.
 	// However, "Sales and Marketing" team only needs access to customer-related
@@ -73,19 +83,24 @@ type PutPrincipalMappingInput struct {
 	// the latest PUT action with previous actions. The highest number ID, which is
 	// the ordering ID, is the latest action you want to process and apply on top of
 	// other actions with lower number IDs. This prevents previous actions with lower
-	// number IDs from possibly overriding the latest action. The ordering ID can be
-	// the Unix time of the last update you made to a group members list. You would
-	// then provide this list when calling PutPrincipalMapping . This ensures your PUT
-	// action for that updated group with the latest members list doesn't get
-	// overwritten by earlier PUT actions for the same group which are yet to be
-	// processed. The default ordering ID is the current Unix time in milliseconds that
-	// the action was received by Amazon Kendra.
+	// number IDs from possibly overriding the latest action.
+	//
+	// The ordering ID can be the Unix time of the last update you made to a group
+	// members list. You would then provide this list when calling PutPrincipalMapping
+	// . This ensures your PUT action for that updated group with the latest members
+	// list doesn't get overwritten by earlier PUT actions for the same group which
+	// are yet to be processed.
+	//
+	// The default ordering ID is the current Unix time in milliseconds that the
+	// action was received by Amazon Kendra.
 	OrderingId *int64
 
 	// The Amazon Resource Name (ARN) of a role that has access to the S3 file that
-	// contains your list of users or sub groups that belong to a group. For more
-	// information, see IAM roles for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds)
-	// .
+	// contains your list of users or sub groups that belong to a group.
+	//
+	// For more information, see [IAM roles for Amazon Kendra].
+	//
+	// [IAM roles for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds
 	RoleArn *string
 
 	noSmithyDocumentSerde

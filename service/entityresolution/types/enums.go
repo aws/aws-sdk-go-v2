@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AttributeMatchingModel. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttributeMatchingModel) Values() []AttributeMatchingModel {
 	return []AttributeMatchingModel{
 		"ONE_TO_ONE",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for DeleteUniqueIdErrorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeleteUniqueIdErrorType) Values() []DeleteUniqueIdErrorType {
 	return []DeleteUniqueIdErrorType{
 		"SERVICE_ERROR",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for DeleteUniqueIdStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeleteUniqueIdStatus) Values() []DeleteUniqueIdStatus {
 	return []DeleteUniqueIdStatus{
 		"COMPLETED",
@@ -64,8 +67,9 @@ const (
 )
 
 // Values returns all known values for IdMappingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdMappingType) Values() []IdMappingType {
 	return []IdMappingType{
 		"PROVIDER",
@@ -81,8 +85,9 @@ const (
 )
 
 // Values returns all known values for IdNamespaceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdNamespaceType) Values() []IdNamespaceType {
 	return []IdNamespaceType{
 		"SOURCE",
@@ -98,8 +103,9 @@ const (
 )
 
 // Values returns all known values for IncrementalRunType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IncrementalRunType) Values() []IncrementalRunType {
 	return []IncrementalRunType{
 		"IMMEDIATE",
@@ -117,8 +123,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"RUNNING",
@@ -138,8 +145,9 @@ const (
 )
 
 // Values returns all known values for ResolutionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolutionType) Values() []ResolutionType {
 	return []ResolutionType{
 		"RULE_MATCHING",
@@ -175,8 +183,9 @@ const (
 )
 
 // Values returns all known values for SchemaAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaAttributeType) Values() []SchemaAttributeType {
 	return []SchemaAttributeType{
 		"NAME",
@@ -211,8 +220,9 @@ const (
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"ASSIGNMENT",
@@ -229,8 +239,9 @@ const (
 )
 
 // Values returns all known values for StatementEffect. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatementEffect) Values() []StatementEffect {
 	return []StatementEffect{
 		"Allow",

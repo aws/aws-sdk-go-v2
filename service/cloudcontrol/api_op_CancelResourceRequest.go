@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the specified resource operation request. For more information, see
-// Canceling resource operation requests (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel)
-// in the Amazon Web Services Cloud Control API User Guide. Only resource
-// operations requests with a status of PENDING or IN_PROGRESS can be canceled.
+// Cancels the specified resource operation request. For more information, see [Canceling resource operation requests] in
+// the Amazon Web Services Cloud Control API User Guide.
+//
+// Only resource operations requests with a status of PENDING or IN_PROGRESS can
+// be canceled.
+//
+// [Canceling resource operation requests]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-cancel
 func (c *Client) CancelResourceRequest(ctx context.Context, params *CancelResourceRequestInput, optFns ...func(*Options)) (*CancelResourceRequestOutput, error) {
 	if params == nil {
 		params = &CancelResourceRequestInput{}
@@ -44,8 +47,9 @@ type CancelResourceRequestInput struct {
 type CancelResourceRequestOutput struct {
 
 	// Represents the current status of a resource operation request. For more
-	// information, see Managing resource operation requests (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html)
-	// in the Amazon Web Services Cloud Control API User Guide.
+	// information, see [Managing resource operation requests]in the Amazon Web Services Cloud Control API User Guide.
+	//
+	// [Managing resource operation requests]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.

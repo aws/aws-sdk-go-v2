@@ -7,6 +7,7 @@
 // use to connect, secure, and monitor all of your services across multiple
 // accounts and virtual private clouds (VPCs). Amazon VPC Lattice interconnects
 // your microservices and legacy services within a logical boundary, so that you
-// can discover and manage them more efficiently. For more information, see the
-// Amazon VPC Lattice User Guide (https://docs.aws.amazon.com/vpc-lattice/latest/ug/)
+// can discover and manage them more efficiently. For more information, see the [Amazon VPC Lattice User Guide]
+//
+// [Amazon VPC Lattice User Guide]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/
 package vpclattice

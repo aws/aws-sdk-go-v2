@@ -13,9 +13,11 @@ import (
 
 // Replaces the rule. You must specify all parameters for the new rule. Creating
 // rules is an administrator-level action. Any user who has permission to create
-// rules will be able to access data processed by the rule. Requires permission to
-// access the ReplaceTopicRule (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// rules will be able to access data processed by the rule.
+//
+// Requires permission to access the [ReplaceTopicRule] action.
+//
+// [ReplaceTopicRule]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ReplaceTopicRule(ctx context.Context, params *ReplaceTopicRuleInput, optFns ...func(*Options)) (*ReplaceTopicRuleOutput, error) {
 	if params == nil {
 		params = &ReplaceTopicRuleInput{}

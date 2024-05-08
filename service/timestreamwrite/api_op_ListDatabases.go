@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of your Timestream databases. Service quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
-// . See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-db.html)
-// for details.
+// Returns a list of your Timestream databases. [Service quotas apply]. See [code sample] for details.
+//
+// [Service quotas apply]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.list-db.html
 func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, optFns ...func(*Options)) (*ListDatabasesOutput, error) {
 	if params == nil {
 		params = &ListDatabasesInput{}

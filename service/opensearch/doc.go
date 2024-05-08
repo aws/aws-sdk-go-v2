@@ -7,6 +7,7 @@
 // manage OpenSearch Service domains. The endpoint for configuration service
 // requests is Region specific: es.region.amazonaws.com. For example,
 // es.us-east-1.amazonaws.com. For a current list of supported Regions and
-// endpoints, see Amazon Web Services service endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#service-regions)
-// .
+// endpoints, see [Amazon Web Services service endpoints].
+//
+// [Amazon Web Services service endpoints]: https://docs.aws.amazon.com/general/latest/gr/rande.html#service-regions
 package opensearch

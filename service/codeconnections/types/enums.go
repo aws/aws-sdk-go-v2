@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for BlockerStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BlockerStatus) Values() []BlockerStatus {
 	return []BlockerStatus{
 		"ACTIVE",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for BlockerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BlockerType) Values() []BlockerType {
 	return []BlockerType{
 		"AUTOMATED",
@@ -46,8 +48,9 @@ const (
 )
 
 // Values returns all known values for ConnectionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionStatus) Values() []ConnectionStatus {
 	return []ConnectionStatus{
 		"PENDING",
@@ -68,8 +71,9 @@ const (
 )
 
 // Values returns all known values for ProviderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProviderType) Values() []ProviderType {
 	return []ProviderType{
 		"Bitbucket",
@@ -89,8 +93,9 @@ const (
 )
 
 // Values returns all known values for PublishDeploymentStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PublishDeploymentStatus) Values() []PublishDeploymentStatus {
 	return []PublishDeploymentStatus{
 		"ENABLED",
@@ -110,8 +115,9 @@ const (
 )
 
 // Values returns all known values for RepositorySyncStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RepositorySyncStatus) Values() []RepositorySyncStatus {
 	return []RepositorySyncStatus{
 		"FAILED",
@@ -133,8 +139,9 @@ const (
 )
 
 // Values returns all known values for ResourceSyncStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceSyncStatus) Values() []ResourceSyncStatus {
 	return []ResourceSyncStatus{
 		"FAILED",
@@ -152,8 +159,9 @@ const (
 )
 
 // Values returns all known values for SyncConfigurationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SyncConfigurationType) Values() []SyncConfigurationType {
 	return []SyncConfigurationType{
 		"CFN_STACK_SYNC",
@@ -169,8 +177,9 @@ const (
 )
 
 // Values returns all known values for TriggerResourceUpdateOn. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TriggerResourceUpdateOn) Values() []TriggerResourceUpdateOn {
 	return []TriggerResourceUpdateOn{
 		"ANY_CHANGE",

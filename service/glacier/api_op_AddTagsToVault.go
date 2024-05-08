@@ -16,8 +16,9 @@ import (
 // the tag limit for the vault to be exceeded, the operation throws the
 // LimitExceededException error. If a tag already exists on the vault under a
 // specified key, the existing key value will be overwritten. For more information
-// about tags, see Tagging Amazon S3 Glacier Resources (https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html)
-// .
+// about tags, see [Tagging Amazon S3 Glacier Resources].
+//
+// [Tagging Amazon S3 Glacier Resources]: https://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html
 func (c *Client) AddTagsToVault(ctx context.Context, params *AddTagsToVaultInput, optFns ...func(*Options)) (*AddTagsToVaultOutput, error) {
 	if params == nil {
 		params = &AddTagsToVaultInput{}

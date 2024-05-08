@@ -8,6 +8,7 @@ import (
 )
 
 // An Access Control List. You can authenticate users with Access Contol Lists.
+//
 // ACLs enable you to control cluster access by grouping users. These Access
 // control lists are designed as a way to organize access to clusters.
 type ACL struct {
@@ -116,8 +117,9 @@ type Cluster struct {
 
 	// Enables data tiering. Data tiering is only supported for clusters using the
 	// r6gd node type. This parameter must be set when using r6gd nodes. For more
-	// information, see Data tiering (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html)
-	// .
+	// information, see [Data tiering].
+	//
+	// [Data tiering]: https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html
 	DataTiering DataTieringStatus
 
 	// A description of the cluster
@@ -169,8 +171,12 @@ type Cluster struct {
 	SnapshotRetentionLimit *int32
 
 	// The daily time range (in UTC) during which MemoryDB begins taking a daily
-	// snapshot of your shard. Example: 05:00-09:00 If you do not specify this
-	// parameter, MemoryDB automatically chooses an appropriate time range.
+	// snapshot of your shard.
+	//
+	// Example: 05:00-09:00
+	//
+	// If you do not specify this parameter, MemoryDB automatically chooses an
+	// appropriate time range.
 	SnapshotWindow *string
 
 	// The Amazon Resource Name (ARN) of the SNS notification topic
@@ -483,9 +489,9 @@ type ReservedNodesOffering struct {
 	// The fixed price charged for this reserved node.
 	FixedPrice float64
 
-	// The node type for the reserved nodes. For more information, see Supported node
-	// types (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported)
-	// .
+	// The node type for the reserved nodes. For more information, see [Supported node types].
+	//
+	// [Supported node types]: https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported
 	NodeType *string
 
 	// The offering type of this reserved node.
@@ -647,8 +653,9 @@ type Snapshot struct {
 
 	// Enables data tiering. Data tiering is only supported for clusters using the
 	// r6gd node type. This parameter must be set when using r6gd nodes. For more
-	// information, see Data tiering (https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html)
-	// .
+	// information, see [Data tiering].
+	//
+	// [Data tiering]: https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html
 	DataTiering DataTieringStatus
 
 	// The ID of the KMS key used to encrypt the snapshot.
@@ -683,7 +690,9 @@ type Subnet struct {
 }
 
 // Represents the output of one of the following operations:
+//
 //   - CreateSubnetGroup
+//
 //   - UpdateSubnetGroup
 //
 // A subnet group is a collection of subnets (typically private) that you can
@@ -713,7 +722,9 @@ type SubnetGroup struct {
 // Key/Value pair. You can use tags to categorize and track all your MemoryDB
 // resources. When you add or remove tags on clusters, those actions will be
 // replicated to all nodes in the cluster. A tag with a null Value is permitted.
-// For more information, see Tagging your MemoryDB resources (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html)
+// For more information, see [Tagging your MemoryDB resources]
+//
+// [Tagging your MemoryDB resources]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html
 type Tag struct {
 
 	// The key for the tag. May not be null.

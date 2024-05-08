@@ -12,13 +12,18 @@ import (
 )
 
 // Returns a database user name and temporary password with temporary
-// authorization to log in to Amazon Redshift Serverless. By default, the temporary
-// credentials expire in 900 seconds. You can optionally specify a duration between
-// 900 seconds (15 minutes) and 3600 seconds (60 minutes). The Identity and Access
-// Management (IAM) user or role that runs GetCredentials must have an IAM policy
-// attached that allows access to all necessary actions and resources. If the
-// DbName parameter is specified, the IAM policy must allow access to the resource
-// dbname for the specified database name.
+// authorization to log in to Amazon Redshift Serverless.
+//
+// By default, the temporary credentials expire in 900 seconds. You can optionally
+// specify a duration between 900 seconds (15 minutes) and 3600 seconds (60
+// minutes).
+//
+// The Identity and Access Management (IAM) user or role that runs GetCredentials
+// must have an IAM policy attached that allows access to all necessary actions and
+// resources.
+//
+// If the DbName parameter is specified, the IAM policy must allow access to the
+// resource dbname for the specified database name.
 func (c *Client) GetCredentials(ctx context.Context, params *GetCredentialsInput, optFns ...func(*Options)) (*GetCredentialsOutput, error) {
 	if params == nil {
 		params = &GetCredentialsInput{}
@@ -41,15 +46,22 @@ type GetCredentialsInput struct {
 	CustomDomainName *string
 
 	// The name of the database to get temporary authorization to log on to.
+	//
 	// Constraints:
+	//
 	//   - Must be 1 to 64 alphanumeric characters or hyphens.
+	//
 	//   - Must contain only uppercase or lowercase letters, numbers, underscore, plus
 	//   sign, period (dot), at symbol (@), or hyphen.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - Must not contain a colon ( : ) or slash ( / ).
-	//   - Cannot be a reserved word. A list of reserved words can be found in
-	//   Reserved Words  (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html)
-	//   in the Amazon Redshift Database Developer Guide
+	//
+	//   - Cannot be a reserved word. A list of reserved words can be found in [Reserved Words]in the
+	//   Amazon Redshift Database Developer Guide
+	//
+	// [Reserved Words]: https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
 	DbName *string
 
 	// The number of seconds until the returned temporary password expires. The

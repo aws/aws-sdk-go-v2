@@ -28,8 +28,7 @@ func (c *Client) DeleteOutboundCrossClusterSearchConnection(ctx context.Context,
 	return out, nil
 }
 
-// Container for the parameters to the DeleteOutboundCrossClusterSearchConnection
-// operation.
+// Container for the parameters to the DeleteOutboundCrossClusterSearchConnection operation.
 type DeleteOutboundCrossClusterSearchConnectionInput struct {
 
 	// The id of the outbound connection that you want to permanently delete.
@@ -40,12 +39,10 @@ type DeleteOutboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DeleteOutboundCrossClusterSearchConnection operation. Contains
-// details of deleted outbound connection.
+// The result of a DeleteOutboundCrossClusterSearchConnection operation. Contains details of deleted outbound connection.
 type DeleteOutboundCrossClusterSearchConnectionOutput struct {
 
-	// Specifies the OutboundCrossClusterSearchConnection of deleted outbound
-	// connection.
+	// Specifies the OutboundCrossClusterSearchConnection of deleted outbound connection.
 	CrossClusterSearchConnection *types.OutboundCrossClusterSearchConnection
 
 	// Metadata pertaining to the operation's result.

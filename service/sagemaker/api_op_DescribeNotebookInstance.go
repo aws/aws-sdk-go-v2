@@ -47,17 +47,19 @@ type DescribeNotebookInstanceOutput struct {
 
 	// A list of the Elastic Inference (EI) instance types associated with this
 	// notebook instance. Currently only one EI instance type can be associated with a
-	// notebook instance. For more information, see Using Elastic Inference in Amazon
-	// SageMaker (https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html) .
+	// notebook instance. For more information, see [Using Elastic Inference in Amazon SageMaker].
+	//
+	// [Using Elastic Inference in Amazon SageMaker]: https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html
 	AcceleratorTypes []types.NotebookInstanceAcceleratorType
 
 	// An array of up to three Git repositories associated with the notebook instance.
 	// These can be either the names of Git repositories stored as resources in your
-	// account, or the URL of Git repositories in Amazon Web Services CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
-	// or in any other Git repository. These repositories are cloned at the same level
-	// as the default repository of your notebook instance. For more information, see
-	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
-	// .
+	// account, or the URL of Git repositories in [Amazon Web Services CodeCommit]or in any other Git repository.
+	// These repositories are cloned at the same level as the default repository of
+	// your notebook instance. For more information, see [Associating Git Repositories with SageMaker Notebook Instances].
+	//
+	// [Amazon Web Services CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+	// [Associating Git Repositories with SageMaker Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
 	AdditionalCodeRepositories []string
 
 	// A timestamp. Use this parameter to return the time when the notebook instance
@@ -66,19 +68,21 @@ type DescribeNotebookInstanceOutput struct {
 
 	// The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
-	// in your account, or the URL of a Git repository in Amazon Web Services
-	// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
-	// or in any other Git repository. When you open a notebook instance, it opens in
-	// the directory that contains this repository. For more information, see
-	// Associating Git Repositories with SageMaker Notebook Instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
-	// .
+	// in your account, or the URL of a Git repository in [Amazon Web Services CodeCommit]or in any other Git
+	// repository. When you open a notebook instance, it opens in the directory that
+	// contains this repository. For more information, see [Associating Git Repositories with SageMaker Notebook Instances].
+	//
+	// [Amazon Web Services CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
+	// [Associating Git Repositories with SageMaker Notebook Instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
 	DefaultCodeRepository *string
 
 	// Describes whether SageMaker provides internet access to the notebook instance.
 	// If this value is set to Disabled, the notebook instance does not have internet
-	// access, and cannot connect to SageMaker training and endpoint services. For more
-	// information, see Notebook Instances Are Internet-Enabled by Default (https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access)
-	// .
+	// access, and cannot connect to SageMaker training and endpoint services.
+	//
+	// For more information, see [Notebook Instances Are Internet-Enabled by Default].
+	//
+	// [Notebook Instances Are Internet-Enabled by Default]: https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access
 	DirectInternetAccess types.DirectInternetAccess
 
 	// If status is Failed , the reason it failed.
@@ -105,9 +109,11 @@ type DescribeNotebookInstanceOutput struct {
 	// The Amazon Resource Name (ARN) of the notebook instance.
 	NotebookInstanceArn *string
 
-	// Returns the name of a notebook instance lifecycle configuration. For
-	// information about notebook instance lifestyle configurations, see Step 2.1:
-	// (Optional) Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
+	// Returns the name of a notebook instance lifecycle configuration.
+	//
+	// For information about notebook instance lifestyle configurations, see [Step 2.1: (Optional) Customize a Notebook Instance]
+	//
+	// [Step 2.1: (Optional) Customize a Notebook Instance]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
 	NotebookInstanceLifecycleConfigName *string
 
 	// The name of the SageMaker notebook instance.
@@ -123,6 +129,7 @@ type DescribeNotebookInstanceOutput struct {
 	RoleArn *string
 
 	// Whether root access is enabled or disabled for users of the notebook instance.
+	//
 	// Lifecycle configurations need root access to be able to set up a notebook
 	// instance. Because of this, lifecycle configurations associated with a notebook
 	// instance always run with root access even if you disable root access for users.
@@ -268,12 +275,13 @@ type NotebookInstanceDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeNotebookInstanceInput, *DescribeNotebookInstanceOutput, error) (bool, error)
 }
 
@@ -454,12 +462,13 @@ type NotebookInstanceInServiceWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeNotebookInstanceInput, *DescribeNotebookInstanceOutput, error) (bool, error)
 }
 
@@ -646,12 +655,13 @@ type NotebookInstanceStoppedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeNotebookInstanceInput, *DescribeNotebookInstanceOutput, error) (bool, error)
 }
 

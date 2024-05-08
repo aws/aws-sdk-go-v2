@@ -11,20 +11,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the results from the specified query. Only the fields requested in the
-// query are returned, along with a @ptr field, which is the identifier for the
-// log record. You can use the value of @ptr in a GetLogRecord (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html)
-// operation to get the full log record. GetQueryResults does not start running a
-// query. To run a query, use StartQuery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
-// . For more information about how long results of previous queries are available,
-// see CloudWatch Logs quotas (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html)
-// . If the value of the Status field in the output is Running , this operation
+// Returns the results from the specified query.
+//
+// Only the fields requested in the query are returned, along with a @ptr field,
+// which is the identifier for the log record. You can use the value of @ptr in a [GetLogRecord]
+// operation to get the full log record.
+//
+// GetQueryResults does not start running a query. To run a query, use [StartQuery]. For more
+// information about how long results of previous queries are available, see [CloudWatch Logs quotas].
+//
+// If the value of the Status field in the output is Running , this operation
 // returns only partial results. If you see a value of Scheduled or Running for
-// the status, you can retry the operation later to see the final results. If you
-// are using CloudWatch cross-account observability, you can use this operation in
-// a monitoring account to start queries in linked source accounts. For more
-// information, see CloudWatch cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
-// .
+// the status, you can retry the operation later to see the final results.
+//
+// If you are using CloudWatch cross-account observability, you can use this
+// operation in a monitoring account to start queries in linked source accounts.
+// For more information, see [CloudWatch cross-account observability].
+//
+// [CloudWatch cross-account observability]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html
+// [GetLogRecord]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html
+// [CloudWatch Logs quotas]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch_limits_cwl.html
+// [StartQuery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
 func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInput, optFns ...func(*Options)) (*GetQueryResultsOutput, error) {
 	if params == nil {
 		params = &GetQueryResultsInput{}
@@ -54,13 +61,16 @@ type GetQueryResultsOutput struct {
 
 	// If you associated an KMS key with the CloudWatch Logs Insights query results in
 	// this account, this field displays the ARN of the key that's used to encrypt the
-	// query results when StartQuery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
-	// stores them.
+	// query results when [StartQuery]stores them.
+	//
+	// [StartQuery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
 	EncryptionKey *string
 
 	// The log events that matched the query criteria during the most recent time it
-	// ran. The results value is an array of arrays. Each log event is one object in
-	// the top-level array. Each of these log event objects is an array of field / value
+	// ran.
+	//
+	// The results value is an array of arrays. Each log event is one object in the
+	// top-level array. Each of these log event objects is an array of field / value
 	// pairs.
 	Results [][]types.ResultField
 
@@ -71,6 +81,7 @@ type GetQueryResultsOutput struct {
 
 	// The status of the most recent running of the query. Possible values are
 	// Cancelled , Complete , Failed , Running , Scheduled , Timeout , and Unknown .
+	//
 	// Queries time out after 60 minutes of runtime. To avoid having your queries time
 	// out, reduce the time range being searched or partition your query into a number
 	// of queries.

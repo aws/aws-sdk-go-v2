@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a theme. A theme is set of configuration options for color and layout.
-// Themes apply to analyses and dashboards. For more information, see Using Themes
-// in Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html)
-// in the Amazon QuickSight User Guide.
+// Creates a theme.
+//
+// A theme is set of configuration options for color and layout. Themes apply to
+// analyses and dashboards. For more information, see [Using Themes in Amazon QuickSight]in the Amazon QuickSight
+// User Guide.
+//
+// [Using Themes in Amazon QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html
 func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optFns ...func(*Options)) (*CreateThemeOutput, error) {
 	if params == nil {
 		params = &CreateThemeInput{}
@@ -32,7 +35,8 @@ func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optF
 
 type CreateThemeInput struct {
 
-	// The ID of the Amazon Web Services account where you want to store the new theme.
+	// The ID of the Amazon Web Services account where you want to store the new
+	// theme.
 	//
 	// This member is required.
 	AwsAccountId *string

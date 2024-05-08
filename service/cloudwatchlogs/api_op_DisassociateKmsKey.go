@@ -11,25 +11,29 @@ import (
 )
 
 // Disassociates the specified KMS key from the specified log group or from all
-// CloudWatch Logs Insights query results in the account. When you use
-// DisassociateKmsKey , you specify either the logGroupName parameter or the
-// resourceIdentifier parameter. You can't specify both of those parameters in the
-// same operation.
+// CloudWatch Logs Insights query results in the account.
+//
+// When you use DisassociateKmsKey , you specify either the logGroupName parameter
+// or the resourceIdentifier parameter. You can't specify both of those parameters
+// in the same operation.
+//
 //   - Specify the logGroupName parameter to stop using the KMS key to encrypt
 //     future log events ingested and stored in the log group. Instead, they will be
 //     encrypted with the default CloudWatch Logs method. The log events that were
 //     ingested while the key was associated with the log group are still encrypted
 //     with that key. Therefore, CloudWatch Logs will need permissions for the key
 //     whenever that data is accessed.
+//
 //   - Specify the resourceIdentifier parameter with the query-result resource to
-//     stop using the KMS key to encrypt the results of all future StartQuery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
-//     operations in the account. They will instead be encrypted with the default
-//     CloudWatch Logs method. The results from queries that ran while the key was
-//     associated with the account are still encrypted with that key. Therefore,
-//     CloudWatch Logs will need permissions for the key whenever that data is
-//     accessed.
+//     stop using the KMS key to encrypt the results of all future [StartQuery]operations in the
+//     account. They will instead be encrypted with the default CloudWatch Logs method.
+//     The results from queries that ran while the key was associated with the account
+//     are still encrypted with that key. Therefore, CloudWatch Logs will need
+//     permissions for the key whenever that data is accessed.
 //
 // It can take up to 5 minutes for this operation to take effect.
+//
+// [StartQuery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
 func (c *Client) DisassociateKmsKey(ctx context.Context, params *DisassociateKmsKeyInput, optFns ...func(*Options)) (*DisassociateKmsKeyOutput, error) {
 	if params == nil {
 		params = &DisassociateKmsKeyInput{}
@@ -47,25 +51,34 @@ func (c *Client) DisassociateKmsKey(ctx context.Context, params *DisassociateKms
 
 type DisassociateKmsKeyInput struct {
 
-	// The name of the log group. In your DisassociateKmsKey operation, you must
-	// specify either the resourceIdentifier parameter or the logGroup parameter, but
-	// you can't specify both.
+	// The name of the log group.
+	//
+	// In your DisassociateKmsKey operation, you must specify either the
+	// resourceIdentifier parameter or the logGroup parameter, but you can't specify
+	// both.
 	LogGroupName *string
 
 	// Specifies the target for this operation. You must specify one of the following:
+	//
 	//   - Specify the ARN of a log group to stop having CloudWatch Logs use the KMS
 	//   key to encrypt log events that are ingested and stored by that log group. After
 	//   you run this operation, CloudWatch Logs encrypts ingested log events with the
 	//   default CloudWatch Logs method. The log group ARN must be in the following
 	//   format. Replace REGION and ACCOUNT_ID with your Region and account ID.
-	//   arn:aws:logs:REGION:ACCOUNT_ID:log-group:LOG_GROUP_NAME
+	//
+	// arn:aws:logs:REGION:ACCOUNT_ID:log-group:LOG_GROUP_NAME
+	//
 	//   - Specify the following ARN to stop using this key to encrypt the results of
-	//   future StartQuery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
-	//   operations in this account. Replace REGION and ACCOUNT_ID with your Region and
-	//   account ID. arn:aws:logs:REGION:ACCOUNT_ID:query-result:*
+	//   future [StartQuery]operations in this account. Replace REGION and ACCOUNT_ID with your
+	//   Region and account ID.
+	//
+	// arn:aws:logs:REGION:ACCOUNT_ID:query-result:*
+	//
 	// In your DisssociateKmsKey operation, you must specify either the
 	// resourceIdentifier parameter or the logGroup parameter, but you can't specify
 	// both.
+	//
+	// [StartQuery]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html
 	ResourceIdentifier *string
 
 	noSmithyDocumentSerde

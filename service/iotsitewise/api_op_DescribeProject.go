@@ -44,9 +44,11 @@ type DescribeProjectOutput struct {
 	// This member is required.
 	PortalId *string
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the project, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}
+	// The [ARN] of the project, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ProjectArn *string

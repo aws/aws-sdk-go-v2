@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specific version of a bot. To delete all versions of a bot, use the
-// DeleteBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DeleteBot.html)
+// Deletes a specific version of a bot. To delete all versions of a bot, use the [DeleteBot]
 // operation.
+//
+// [DeleteBot]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DeleteBot.html
 func (c *Client) DeleteBotVersion(ctx context.Context, params *DeleteBotVersionInput, optFns ...func(*Options)) (*DeleteBotVersionOutput, error) {
 	if params == nil {
 		params = &DeleteBotVersionInput{}

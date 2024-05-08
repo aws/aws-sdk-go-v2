@@ -13,36 +13,52 @@ import (
 
 // Encrypts plaintext data to ciphertext using a symmetric (TDES, AES), asymmetric
 // (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information,
-// see Encrypt data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html)
-// in the Amazon Web Services Payment Cryptography User Guide. You can generate an
-// encryption key within Amazon Web Services Payment Cryptography by calling
-// CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
-// . You can import your own encryption key by calling ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-// . For this operation, the key must have KeyModesOfUse set to Encrypt . In
+// see [Encrypt data]in the Amazon Web Services Payment Cryptography User Guide.
+//
+// You can generate an encryption key within Amazon Web Services Payment
+// Cryptography by calling [CreateKey]. You can import your own encryption key by calling [ImportKey].
+// For this operation, the key must have KeyModesOfUse set to Encrypt . In
 // asymmetric encryption, plaintext is encrypted using public component. You can
 // import the public component of an asymmetric key pair created outside Amazon Web
-// Services Payment Cryptography by calling ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-// . For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography
+// Services Payment Cryptography by calling [ImportKey].
+//
+// For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography
 // supports TDES and AES algorithms. For EMV encryption, Amazon Web Services
 // Payment Cryptography supports TDES algorithms.For asymmetric encryption, Amazon
-// Web Services Payment Cryptography supports RSA . When you use TDES or TDES
-// DUKPT, the plaintext data length must be a multiple of 8 bytes. For AES or AES
-// DUKPT, the plaintext data length must be a multiple of 16 bytes. For RSA, it
-// sould be equal to the key size unless padding is enabled. To encrypt using
-// DUKPT, you must already have a BDK (Base Derivation Key) key in your account
-// with KeyModesOfUse set to DeriveKey , or you can generate a new DUKPT key by
-// calling CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
-// . To encrypt using EMV, you must already have an IMK (Issuer Master Key) key in
-// your account with KeyModesOfUse set to DeriveKey . For information about valid
-// keys for this operation, see Understanding key attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
-// and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. Cross-account use:
-// This operation can't be used across different Amazon Web Services accounts.
+// Web Services Payment Cryptography supports RSA .
+//
+// When you use TDES or TDES DUKPT, the plaintext data length must be a multiple
+// of 8 bytes. For AES or AES DUKPT, the plaintext data length must be a multiple
+// of 16 bytes. For RSA, it sould be equal to the key size unless padding is
+// enabled.
+//
+// To encrypt using DUKPT, you must already have a BDK (Base Derivation Key) key
+// in your account with KeyModesOfUse set to DeriveKey , or you can generate a new
+// DUKPT key by calling [CreateKey]. To encrypt using EMV, you must already have an IMK
+// (Issuer Master Key) key in your account with KeyModesOfUse set to DeriveKey .
+//
+// For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
+// Web Services Payment Cryptography User Guide.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - DecryptData
-//   - GetPublicCertificate (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html)
-//   - ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-//   - ReEncryptData
+//
+// # DecryptData
+//
+// [GetPublicCertificate]
+//
+// [ImportKey]
+//
+// # ReEncryptData
+//
+// [GetPublicCertificate]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+// [Encrypt data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html
+// [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+// [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) EncryptData(ctx context.Context, params *EncryptDataInput, optFns ...func(*Options)) (*EncryptDataOutput, error) {
 	if params == nil {
 		params = &EncryptDataInput{}
@@ -71,11 +87,14 @@ type EncryptDataInput struct {
 	// This member is required.
 	KeyIdentifier *string
 
-	// The plaintext to be encrypted. For encryption using asymmetric keys, plaintext
-	// data length is constrained by encryption key strength that you define in
-	// KeyAlgorithm and padding type that you define in AsymmetricEncryptionAttributes
-	// . For more information, see Encrypt data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html)
-	// in the Amazon Web Services Payment Cryptography User Guide.
+	// The plaintext to be encrypted.
+	//
+	// For encryption using asymmetric keys, plaintext data length is constrained by
+	// encryption key strength that you define in KeyAlgorithm and padding type that
+	// you define in AsymmetricEncryptionAttributes . For more information, see [Encrypt data] in
+	// the Amazon Web Services Payment Cryptography User Guide.
+	//
+	// [Encrypt data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html
 	//
 	// This member is required.
 	PlainText *string
@@ -98,8 +117,10 @@ type EncryptDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
-	// the CMAC specification.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	KeyCheckValue *string
 
 	// Metadata pertaining to the operation's result.

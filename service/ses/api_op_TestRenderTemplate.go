@@ -11,8 +11,9 @@ import (
 )
 
 // Creates a preview of the MIME content of an email when provided with a template
-// and a set of replacement data. You can execute this operation no more than once
-// per second.
+// and a set of replacement data.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) TestRenderTemplate(ctx context.Context, params *TestRenderTemplateInput, optFns ...func(*Options)) (*TestRenderTemplateOutput, error) {
 	if params == nil {
 		params = &TestRenderTemplateInput{}

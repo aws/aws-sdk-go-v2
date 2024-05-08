@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a safety rule./>
+// Deletes a safety rule.
+//
+// />
 func (c *Client) DeleteSafetyRule(ctx context.Context, params *DeleteSafetyRuleInput, optFns ...func(*Options)) (*DeleteSafetyRuleOutput, error) {
 	if params == nil {
 		params = &DeleteSafetyRuleInput{}

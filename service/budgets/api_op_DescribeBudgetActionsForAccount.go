@@ -34,11 +34,11 @@ type DescribeBudgetActionsForAccountInput struct {
 	// This member is required.
 	AccountId *string
 
-	// An integer that represents how many entries a paginated response contains. The
+	//  An integer that represents how many entries a paginated response contains. The
 	// maximum is 100.
 	MaxResults *int32
 
-	// A generic string.
+	//  A generic string.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,12 +46,12 @@ type DescribeBudgetActionsForAccountInput struct {
 
 type DescribeBudgetActionsForAccountOutput struct {
 
-	// A list of the budget action resources information.
+	//  A list of the budget action resources information.
 	//
 	// This member is required.
 	Actions []types.Action
 
-	// A generic string.
+	//  A generic string.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -150,7 +150,7 @@ var _ DescribeBudgetActionsForAccountAPIClient = (*Client)(nil)
 // DescribeBudgetActionsForAccountPaginatorOptions is the paginator options for
 // DescribeBudgetActionsForAccount
 type DescribeBudgetActionsForAccountPaginatorOptions struct {
-	// An integer that represents how many entries a paginated response contains. The
+	//  An integer that represents how many entries a paginated response contains. The
 	// maximum is 100.
 	Limit int32
 

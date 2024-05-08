@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a role alias. Requires permission to access the UpdateRoleAlias (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a role alias.
+//
+// Requires permission to access the [UpdateRoleAlias] action.
+//
+// [UpdateRoleAlias]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateRoleAlias(ctx context.Context, params *UpdateRoleAliasInput, optFns ...func(*Options)) (*UpdateRoleAliasOutput, error) {
 	if params == nil {
 		params = &UpdateRoleAliasInput{}
@@ -34,9 +37,10 @@ type UpdateRoleAliasInput struct {
 	// This member is required.
 	RoleAlias *string
 
-	// The number of seconds the credential will be valid. This value must be less
-	// than or equal to the maximum session duration of the IAM role that the role
-	// alias references.
+	// The number of seconds the credential will be valid.
+	//
+	// This value must be less than or equal to the maximum session duration of the
+	// IAM role that the role alias references.
 	CredentialDurationSeconds *int32
 
 	// The role ARN.

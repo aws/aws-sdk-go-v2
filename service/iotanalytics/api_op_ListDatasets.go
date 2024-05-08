@@ -29,8 +29,9 @@ func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, op
 
 type ListDatasetsInput struct {
 
-	// The maximum number of results to return in this request. The default value is
-	// 100.
+	// The maximum number of results to return in this request.
+	//
+	// The default value is 100.
 	MaxResults *int32
 
 	// The token for the next set of results.
@@ -139,8 +140,9 @@ var _ ListDatasetsAPIClient = (*Client)(nil)
 
 // ListDatasetsPaginatorOptions is the paginator options for ListDatasets
 type ListDatasetsPaginatorOptions struct {
-	// The maximum number of results to return in this request. The default value is
-	// 100.
+	// The maximum number of results to return in this request.
+	//
+	// The default value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

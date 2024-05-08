@@ -34,16 +34,19 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The tags to be assigned to the Neptune Analytics resource. The tags are
-	// metadata that are specified as a list of key-value pairs: Key (string) – A key
-	// is the required name of the tag. The string value can be from 1 to 128 Unicode
-	// characters in length. It can't be prefixed with aws: and can only contain the
-	// set of Unicode characters specified by this Java regular expression:
-	// "^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$") . Value (string) – A value is the optional
-	// value of the tag. The string value can be from 1 to 256 Unicode characters in
-	// length. It can't be prefixed with aws: and can only contain the set of Unicode
-	// characters specified by this Java regular expression:
-	// "^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$") .
+	// The tags to be assigned to the Neptune Analytics resource.
+	//
+	// The tags are metadata that are specified as a list of key-value pairs:
+	//
+	// Key (string) – A key is the required name of the tag. The string value can be
+	// from 1 to 128 Unicode characters in length. It can't be prefixed with aws: and
+	// can only contain the set of Unicode characters specified by this Java regular
+	// expression: "^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$") .
+	//
+	// Value (string) – A value is the optional value of the tag. The string value can
+	// be from 1 to 256 Unicode characters in length. It can't be prefixed with aws:
+	// and can only contain the set of Unicode characters specified by this Java
+	// regular expression: "^([\p{L}\p{Z}\p{N}_.:/=+\-]*)$") .
 	//
 	// This member is required.
 	Tags map[string]string

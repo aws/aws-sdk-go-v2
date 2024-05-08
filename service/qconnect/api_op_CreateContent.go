@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Amazon Q in Connect content. Before to calling this API, use
-// StartContentUpload (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html)
-// to upload an asset.
+// Creates Amazon Q in Connect content. Before to calling this API, use [StartContentUpload] to upload
+// an asset.
+//
+// [StartContentUpload]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html
 func (c *Client) CreateContent(ctx context.Context, params *CreateContentInput, optFns ...func(*Options)) (*CreateContentOutput, error) {
 	if params == nil {
 		params = &CreateContentInput{}
@@ -39,23 +40,25 @@ type CreateContentInput struct {
 
 	// The name of the content. Each piece of content in a knowledge base must have a
 	// unique name. You can retrieve a piece of content using only its knowledge base
-	// and its name with the SearchContent (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_SearchContent.html)
-	// API.
+	// and its name with the [SearchContent]API.
+	//
+	// [SearchContent]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_SearchContent.html
 	//
 	// This member is required.
 	Name *string
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html)
-	// .
+	// A pointer to the uploaded asset. This value is returned by [StartContentUpload].
+	//
+	// [StartContentUpload]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html
 	//
 	// This member is required.
 	UploadId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// A key/value map to store attributes without affecting tagging or

@@ -45,8 +45,10 @@ type DescribeAnomalyDetectorsInput struct {
 	Dimensions []types.Dimension
 
 	// The maximum number of results to return in one operation. The maximum value
-	// that you can specify is 100. To retrieve the remaining results, make another
-	// call with the returned NextToken value.
+	// that you can specify is 100.
+	//
+	// To retrieve the remaining results, make another call with the returned NextToken
+	// value.
 	MaxResults *int32
 
 	// Limits the results to only the anomaly detection models that are associated
@@ -171,8 +173,10 @@ var _ DescribeAnomalyDetectorsAPIClient = (*Client)(nil)
 // DescribeAnomalyDetectors
 type DescribeAnomalyDetectorsPaginatorOptions struct {
 	// The maximum number of results to return in one operation. The maximum value
-	// that you can specify is 100. To retrieve the remaining results, make another
-	// call with the returned NextToken value.
+	// that you can specify is 100.
+	//
+	// To retrieve the remaining results, make another call with the returned NextToken
+	// value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

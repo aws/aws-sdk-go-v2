@@ -11,19 +11,31 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game
-// server groups. Creates a new game server resource and notifies Amazon GameLift
-// FleetIQ that the game server is ready to host gameplay and players. This
-// operation is called by a game server process that is running on an instance in a
-// game server group. Registering game servers enables Amazon GameLift FleetIQ to
-// track available game servers and enables game clients and services to claim a
-// game server for a new game session. To register a game server, identify the game
-// server group and instance where the game server is running, and provide a unique
-// identifier for the game server. You can also include connection and game server
-// data. Once a game server is successfully registered, it is put in status
-// AVAILABLE . A request to register a game server may fail if the instance it is
-// running on is in the process of shutting down as part of instance balancing or
-// scale-down activity. Learn more Amazon GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//
+// server groups.
+//
+// Creates a new game server resource and notifies Amazon GameLift FleetIQ that
+// the game server is ready to host gameplay and players. This operation is called
+// by a game server process that is running on an instance in a game server group.
+// Registering game servers enables Amazon GameLift FleetIQ to track available game
+// servers and enables game clients and services to claim a game server for a new
+// game session.
+//
+// To register a game server, identify the game server group and instance where
+// the game server is running, and provide a unique identifier for the game server.
+// You can also include connection and game server data.
+//
+// Once a game server is successfully registered, it is put in status AVAILABLE . A
+// request to register a game server may fail if the instance it is running on is
+// in the process of shutting down as part of instance balancing or scale-down
+// activity.
+//
+// # Learn more
+//
+// [Amazon GameLift FleetIQ Guide]
+//
+// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameServerInput, optFns ...func(*Options)) (*RegisterGameServerOutput, error) {
 	if params == nil {
 		params = &RegisterGameServerInput{}

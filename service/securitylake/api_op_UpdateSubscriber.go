@@ -37,9 +37,9 @@ type UpdateSubscriberInput struct {
 	SubscriberId *string
 
 	// The supported Amazon Web Services from which logs and events are collected. For
-	// the list of supported Amazon Web Services, see the Amazon Security Lake User
-	// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
-	// .
+	// the list of supported Amazon Web Services, see the [Amazon Security Lake User Guide].
+	//
+	// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
 	Sources []types.LogSourceResource
 
 	// The description of the Security Lake account subscriber.

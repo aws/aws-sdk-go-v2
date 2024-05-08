@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more tags to a specified Amazon QLDB resource. A resource can have
-// up to 50 tags. If you try to create more than 50 tags for a resource, your
-// request fails and returns an error.
+// Adds one or more tags to a specified Amazon QLDB resource.
+//
+// A resource can have up to 50 tags. If you try to create more than 50 tags for a
+// resource, your request fails and returns an error.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -31,7 +32,8 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) to which you want to add the tags. For example:
-	// arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
+	//
+	//     arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
 	//
 	// This member is required.
 	ResourceArn *string

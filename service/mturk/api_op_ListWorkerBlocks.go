@@ -44,11 +44,11 @@ type ListWorkerBlocksOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of assignments on the page in the filtered results list, equivalent
+	//  The number of assignments on the page in the filtered results list, equivalent
 	// to the number of assignments returned by this call.
 	NumResults *int32
 
-	// The list of WorkerBlocks, containing the collection of Worker IDs and reasons
+	//  The list of WorkerBlocks, containing the collection of Worker IDs and reasons
 	// for blocking.
 	WorkerBlocks []types.WorkerBlock
 

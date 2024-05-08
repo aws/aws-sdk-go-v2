@@ -12,10 +12,14 @@ import (
 )
 
 // Lists the existing custom verification email templates for your account in the
-// current Amazon Web Services Region. For more information about custom
-// verification email templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
-// in the Amazon SES Developer Guide. You can execute this operation no more than
-// once per second.
+// current Amazon Web Services Region.
+//
+// For more information about custom verification email templates, see [Using Custom Verification Email Templates] in the
+// Amazon SES Developer Guide.
+//
+// You can execute this operation no more than once per second.
+//
+// [Using Custom Verification Email Templates]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
 func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, params *ListCustomVerificationEmailTemplatesInput, optFns ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error) {
 	if params == nil {
 		params = &ListCustomVerificationEmailTemplatesInput{}
@@ -32,9 +36,12 @@ func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, param
 }
 
 // Represents a request to list the existing custom verification email templates
-// for your account. For more information about custom verification email
-// templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
-// in the Amazon SES Developer Guide.
+// for your account.
+//
+// For more information about custom verification email templates, see [Using Custom Verification Email Templates] in the
+// Amazon SES Developer Guide.
+//
+// [Using Custom Verification Email Templates]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
 type ListCustomVerificationEmailTemplatesInput struct {
 
 	// The maximum number of custom verification email templates to return. This value

@@ -11,18 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts asynchronous recognition of celebrities in a stored video. Amazon
-// Rekognition Video can detect celebrities in a video must be stored in an Amazon
-// S3 bucket. Use Video to specify the bucket name and the filename of the video.
+// Starts asynchronous recognition of celebrities in a stored video.
+//
+// Amazon Rekognition Video can detect celebrities in a video must be stored in an
+// Amazon S3 bucket. Use Videoto specify the bucket name and the filename of the video.
 // StartCelebrityRecognition returns a job identifier ( JobId ) which you use to
 // get the results of the analysis. When celebrity recognition analysis is
 // finished, Amazon Rekognition Video publishes a completion status to the Amazon
 // Simple Notification Service topic that you specify in NotificationChannel . To
 // get the results of the celebrity recognition analysis, first check that the
-// status value published to the Amazon SNS topic is SUCCEEDED . If so, call
-// GetCelebrityRecognition and pass the job identifier ( JobId ) from the initial
-// call to StartCelebrityRecognition . For more information, see Recognizing
-// celebrities in the Amazon Rekognition Developer Guide.
+// status value published to the Amazon SNS topic is SUCCEEDED . If so, call GetCelebrityRecognition and
+// pass the job identifier ( JobId ) from the initial call to
+// StartCelebrityRecognition .
+//
+// For more information, see Recognizing celebrities in the Amazon Rekognition
+// Developer Guide.
 func (c *Client) StartCelebrityRecognition(ctx context.Context, params *StartCelebrityRecognitionInput, optFns ...func(*Options)) (*StartCelebrityRecognitionOutput, error) {
 	if params == nil {
 		params = &StartCelebrityRecognitionInput{}

@@ -31,7 +31,7 @@ func (c *Client) ListFindingsReports(ctx context.Context, params *ListFindingsRe
 // The structure representing the ListFindingsReportsRequest.
 type ListFindingsReportsInput struct {
 
-	// The end time of the profile to get analysis data about. You must specify
+	//  The end time of the profile to get analysis data about. You must specify
 	// startTime and endTime . This is specified using the ISO 8601 format. For
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
@@ -44,7 +44,7 @@ type ListFindingsReportsInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// The start time of the profile to get analysis data about. You must specify
+	//  The start time of the profile to get analysis data about. You must specify
 	// startTime and endTime . This is specified using the ISO 8601 format. For
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
@@ -68,9 +68,10 @@ type ListFindingsReportsInput struct {
 	// The nextToken value returned from a previous paginated
 	// ListFindingsReportsRequest request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value. This token should be
-	// treated as an opaque identifier that is only used to retrieve the next items in
-	// a list and not for other programmatic purposes.
+	// previous results that returned the nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde

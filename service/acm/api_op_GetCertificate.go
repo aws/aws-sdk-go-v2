@@ -13,8 +13,9 @@ import (
 // Retrieves an Amazon-issued certificate and its certificate chain. The chain
 // consists of the certificate of the issuing CA and the intermediate certificates
 // of any other subordinate CAs. All of the certificates are base64 encoded. You
-// can use OpenSSL (https://wiki.openssl.org/index.php/Command_Line_Utilities) to
-// decode the certificates and inspect individual fields.
+// can use [OpenSSL]to decode the certificates and inspect individual fields.
+//
+// [OpenSSL]: https://wiki.openssl.org/index.php/Command_Line_Utilities
 func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput, optFns ...func(*Options)) (*GetCertificateOutput, error) {
 	if params == nil {
 		params = &GetCertificateInput{}
@@ -33,9 +34,12 @@ func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput
 type GetCertificateInput struct {
 
 	// String that contains a certificate ARN in the following format:
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	//
+	//     arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	CertificateArn *string

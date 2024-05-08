@@ -49,8 +49,10 @@ type DeletePullRequestApprovalRuleInput struct {
 
 type DeletePullRequestApprovalRuleOutput struct {
 
-	// The ID of the deleted approval rule. If the approval rule was deleted in an
-	// earlier API call, the response is 200 OK without content.
+	// The ID of the deleted approval rule.
+	//
+	// If the approval rule was deleted in an earlier API call, the response is 200 OK
+	// without content.
 	//
 	// This member is required.
 	ApprovalRuleId *string

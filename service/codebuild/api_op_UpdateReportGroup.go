@@ -29,17 +29,20 @@ func (c *Client) UpdateReportGroup(ctx context.Context, params *UpdateReportGrou
 
 type UpdateReportGroupInput struct {
 
-	// The ARN of the report group to update.
+	//  The ARN of the report group to update.
 	//
 	// This member is required.
 	Arn *string
 
-	// Used to specify an updated export type. Valid values are:
+	//  Used to specify an updated export type. Valid values are:
+	//
 	//   - S3 : The report results are exported to an S3 bucket.
+	//
 	//   - NO_EXPORT : The report results are not exported.
 	ExportConfig *types.ReportExportConfig
 
-	// An updated list of tag key and value pairs associated with this report group.
+	//  An updated list of tag key and value pairs associated with this report group.
+	//
 	// These tags are available for use by Amazon Web Services services that support
 	// CodeBuild report group tags.
 	Tags []types.Tag
@@ -49,7 +52,7 @@ type UpdateReportGroupInput struct {
 
 type UpdateReportGroupOutput struct {
 
-	// Information about the updated report group.
+	//  Information about the updated report group.
 	ReportGroup *types.ReportGroup
 
 	// Metadata pertaining to the operation's result.

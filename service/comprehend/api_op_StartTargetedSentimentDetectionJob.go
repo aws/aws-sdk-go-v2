@@ -32,8 +32,9 @@ func (c *Client) StartTargetedSentimentDetectionJob(ctx context.Context, params 
 type StartTargetedSentimentDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
-	// read access to your input data. For more information, see Role-based permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
-	// .
+	// read access to your input data. For more information, see [Role-based permissions].
+	//
+	// [Role-based permissions]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -71,15 +72,17 @@ type StartTargetedSentimentDetectionJobInput struct {
 	// ID for the KMS key that Amazon Comprehend uses to encrypt data on the storage
 	// volume attached to the ML compute instance(s) that process the analysis job. The
 	// VolumeKmsKeyId can be either of the following formats:
+	//
 	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS Key:
 	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
-	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
-	// containing the resources you are using for the job. For more information, see
-	// Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
-	// .
+	//  Configuration parameters for an optional private Virtual Private Cloud (VPC)
+	// containing the resources you are using for the job. For more information, see [Amazon VPC].
+	//
+	// [Amazon VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -90,9 +93,13 @@ type StartTargetedSentimentDetectionJobOutput struct {
 	// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a
 	// unique, fully qualified identifier for the job. It includes the Amazon Web
 	// Services account, Amazon Web Services Region, and the job ID. The format of the
-	// ARN is as follows: arn::comprehend:::targeted-sentiment-detection-job/ The
-	// following is an example job ARN:
-	// arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
+	// ARN is as follows:
+	//
+	//     arn::comprehend:::targeted-sentiment-detection-job/
+	//
+	// The following is an example job ARN:
+	//
+	//     arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
 	// The identifier generated for the job. To get the status of a job, use this
@@ -100,9 +107,13 @@ type StartTargetedSentimentDetectionJobOutput struct {
 	JobId *string
 
 	// The status of the job.
+	//
 	//   - SUBMITTED - The job has been received and is queued for processing.
+	//
 	//   - IN_PROGRESS - Amazon Comprehend is processing the job.
+	//
 	//   - COMPLETED - The job was successfully completed and the output is available.
+	//
 	//   - FAILED - The job did not complete. To get details, use the
 	//   DescribeTargetedSentimentDetectionJob operation.
 	JobStatus types.JobStatus

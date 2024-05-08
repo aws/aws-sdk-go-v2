@@ -28,8 +28,7 @@ func (c *Client) DeleteRegistrationFieldValue(ctx context.Context, params *Delet
 
 type DeleteRegistrationFieldValueInput struct {
 
-	// The path to the registration form field. You can use
-	// DescribeRegistrationFieldDefinitions for a list of FieldPaths.
+	// The path to the registration form field. You can use DescribeRegistrationFieldDefinitions for a list of FieldPaths.
 	//
 	// This member is required.
 	FieldPath *string

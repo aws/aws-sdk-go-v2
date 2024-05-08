@@ -31,7 +31,10 @@ func (c *Client) DescribeDBParameterGroups(ctx context.Context, params *Describe
 
 type DescribeDBParameterGroupsInput struct {
 
-	// The name of a specific DB parameter group to return details for. Constraints:
+	// The name of a specific DB parameter group to return details for.
+	//
+	// Constraints:
+	//
 	//   - If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBParameterGroupName *string
 
@@ -46,7 +49,10 @@ type DescribeDBParameterGroupsInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -163,7 +169,10 @@ type DescribeDBParameterGroupsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

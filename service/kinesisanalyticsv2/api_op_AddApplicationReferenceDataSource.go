@@ -12,10 +12,12 @@ import (
 )
 
 // Adds a reference data source to an existing SQL-based Kinesis Data Analytics
-// application. Kinesis Data Analytics reads reference data (that is, an Amazon S3
-// object) and creates an in-application table within your application. In the
-// request, you provide the source (S3 bucket name and object key name), name of
-// the in-application table to create, and the necessary mapping information that
+// application.
+//
+// Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and
+// creates an in-application table within your application. In the request, you
+// provide the source (S3 bucket name and object key name), name of the
+// in-application table to create, and the necessary mapping information that
 // describes how data in an Amazon S3 object maps to columns in the resulting
 // in-application table.
 func (c *Client) AddApplicationReferenceDataSource(ctx context.Context, params *AddApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*AddApplicationReferenceDataSourceOutput, error) {
@@ -41,8 +43,8 @@ type AddApplicationReferenceDataSourceInput struct {
 	ApplicationName *string
 
 	// The version of the application for which you are adding the reference data
-	// source. You can use the DescribeApplication operation to get the current
-	// application version. If the version specified is not the current version, the
+	// source. You can use the DescribeApplicationoperation to get the current application version. If
+	// the version specified is not the current version, the
 	// ConcurrentModificationException is returned.
 	//
 	// This member is required.

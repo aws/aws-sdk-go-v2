@@ -13,8 +13,9 @@ import (
 )
 
 // Updates the configuration for asynchronous invocation for a function, version,
-// or alias. To configure options for asynchronous invocation, use
-// PutFunctionEventInvokeConfig .
+// or alias.
+//
+// To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
 func (c *Client) UpdateFunctionEventInvokeConfig(ctx context.Context, params *UpdateFunctionEventInvokeConfigInput, optFns ...func(*Options)) (*UpdateFunctionEventInvokeConfigOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionEventInvokeConfigInput{}
@@ -32,10 +33,16 @@ func (c *Client) UpdateFunctionEventInvokeConfig(ctx context.Context, params *Up
 
 type UpdateFunctionEventInvokeConfigInput struct {
 
-	// The name or ARN of the Lambda function, version, or alias. Name formats
+	// The name or ARN of the Lambda function, version, or alias.
+	//
+	// Name formats
+	//
 	//   - Function name - my-function (name-only), my-function:v1 (with alias).
+	//
 	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN - 123456789012:function:my-function .
+	//
 	// You can append a version number or alias to any of the formats. The length
 	// constraint applies only to the full ARN. If you specify only the function name,
 	// it is limited to 64 characters in length.
@@ -43,11 +50,16 @@ type UpdateFunctionEventInvokeConfigInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// A destination for events after they have been sent to a function for
-	// processing. Destinations
+	// A destination for events after they have been sent to a function for processing.
+	//
+	// Destinations
+	//
 	//   - Function - The Amazon Resource Name (ARN) of a Lambda function.
+	//
 	//   - Queue - The ARN of a standard SQS queue.
+	//
 	//   - Topic - The ARN of a standard SNS topic.
+	//
 	//   - Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
 
@@ -65,11 +77,16 @@ type UpdateFunctionEventInvokeConfigInput struct {
 
 type UpdateFunctionEventInvokeConfigOutput struct {
 
-	// A destination for events after they have been sent to a function for
-	// processing. Destinations
+	// A destination for events after they have been sent to a function for processing.
+	//
+	// Destinations
+	//
 	//   - Function - The Amazon Resource Name (ARN) of a Lambda function.
+	//
 	//   - Queue - The ARN of a standard SQS queue.
+	//
 	//   - Topic - The ARN of a standard SNS topic.
+	//
 	//   - Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
 

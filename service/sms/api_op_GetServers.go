@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Describes the servers in your server catalog. Before you can describe your
-// servers, you must import them using ImportServerCatalog .
+// Describes the servers in your server catalog.
+//
+// Before you can describe your servers, you must import them using ImportServerCatalog.
 func (c *Client) GetServers(ctx context.Context, params *GetServersInput, optFns ...func(*Options)) (*GetServersOutput, error) {
 	if params == nil {
 		params = &GetServersInput{}

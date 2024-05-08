@@ -29,8 +29,9 @@ func (c *Client) UpdateSchedule(ctx context.Context, params *UpdateScheduleInput
 type UpdateScheduleInput struct {
 
 	// The date or dates and time or times when the jobs are to be run. For more
-	// information, see Cron expressions (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html)
-	// in the Glue DataBrew Developer Guide.
+	// information, see [Cron expressions]in the Glue DataBrew Developer Guide.
+	//
+	// [Cron expressions]: https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html
 	//
 	// This member is required.
 	CronExpression *string

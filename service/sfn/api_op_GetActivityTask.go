@@ -16,12 +16,17 @@ import (
 // task becomes available (i.e. an execution of a task of this type is needed.) The
 // maximum time the service holds on to the request before responding is 60
 // seconds. If no task is available within 60 seconds, the poll returns a taskToken
-// with a null string. This API action isn't logged in CloudTrail. Workers should
-// set their client side socket timeout to at least 65 seconds (5 seconds higher
-// than the maximum time the service may hold the poll request). Polling with
-// GetActivityTask can cause latency in some implementations. See Avoid Latency
-// When Polling for Activity Tasks (https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html)
-// in the Step Functions Developer Guide.
+// with a null string.
+//
+// This API action isn't logged in CloudTrail.
+//
+// Workers should set their client side socket timeout to at least 65 seconds (5
+// seconds higher than the maximum time the service may hold the poll request).
+//
+// Polling with GetActivityTask can cause latency in some implementations. See [Avoid Latency When Polling for Activity Tasks] in
+// the Step Functions Developer Guide.
+//
+// [Avoid Latency When Polling for Activity Tasks]: https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html
 func (c *Client) GetActivityTask(ctx context.Context, params *GetActivityTaskInput, optFns ...func(*Options)) (*GetActivityTaskOutput, error) {
 	if params == nil {
 		params = &GetActivityTaskInput{}
@@ -40,7 +45,7 @@ func (c *Client) GetActivityTask(ctx context.Context, params *GetActivityTaskInp
 type GetActivityTaskInput struct {
 
 	// The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned
-	// when you create the task using CreateActivity .)
+	// when you create the task using CreateActivity.)
 	//
 	// This member is required.
 	ActivityArn *string
@@ -59,8 +64,8 @@ type GetActivityTaskOutput struct {
 	Input *string
 
 	// A token that identifies the scheduled task. This token must be copied and
-	// included in subsequent calls to SendTaskHeartbeat , SendTaskSuccess or
-	// SendTaskFailure in order to report the progress or completion of the task.
+	// included in subsequent calls to SendTaskHeartbeat, SendTaskSuccess or SendTaskFailure in order to report the progress or
+	// completion of the task.
 	TaskToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -61,9 +61,10 @@ type DescribeTaskExecutionOutput struct {
 	EstimatedBytesToTransfer int64
 
 	// The expected number of files, objects, and directories that DataSync will
-	// delete in your destination location. If you don't configure your task (https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html)
-	// to delete data in the destination that isn't in the source, the value is always
-	// 0 .
+	// delete in your destination location. If you don't [configure your task]to delete data in the
+	// destination that isn't in the source, the value is always 0 .
+	//
+	// [configure your task]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
 	EstimatedFilesToDelete int64
 
 	// The expected number of files, objects, and directories that DataSync will
@@ -74,14 +75,16 @@ type DescribeTaskExecutionOutput struct {
 	EstimatedFilesToTransfer int64
 
 	// A list of filter rules that exclude specific data during your transfer. For
-	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
-	// .
+	// more information and examples, see [Filtering data transferred by DataSync].
+	//
+	// [Filtering data transferred by DataSync]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Excludes []types.FilterRule
 
 	// The number of files, objects, and directories that DataSync deleted in your
-	// destination location. If you don't configure your task (https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html)
-	// to delete data in the destination that isn't in the source, the value is always
-	// 0 .
+	// destination location. If you don't [configure your task]to delete data in the destination that isn't
+	// in the source, the value is always 0 .
+	//
+	// [configure your task]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-metadata.html
 	FilesDeleted int64
 
 	// The number of files, objects, and directories that DataSync skipped during your
@@ -91,7 +94,9 @@ type DescribeTaskExecutionOutput struct {
 	// The actual number of files, objects, and directories that DataSync transferred
 	// over the network. This value is updated periodically during the task execution's
 	// TRANSFERRING phase when something is read from the source and sent over the
-	// network. If DataSync fails to transfer something, this value can be less than
+	// network.
+	//
+	// If DataSync fails to transfer something, this value can be less than
 	// EstimatedFilesToTransfer . In some cases, this value can also be greater than
 	// EstimatedFilesToTransfer . This element is implementation-specific for some
 	// location types, so don't use it as an exact indication of what transferred or to
@@ -99,34 +104,43 @@ type DescribeTaskExecutionOutput struct {
 	FilesTransferred int64
 
 	// The number of files, objects, and directories that DataSync verified during
-	// your transfer. When you configure your task to verify only the data that's
-	// transferred (https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html)
-	// , DataSync doesn't verify directories in some situations or files that fail to
-	// transfer.
+	// your transfer.
+	//
+	// When you configure your task to [verify only the data that's transferred], DataSync doesn't verify directories in some
+	// situations or files that fail to transfer.
+	//
+	// [verify only the data that's transferred]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-data-verification-options.html
 	FilesVerified int64
 
 	// A list of filter rules that include specific data during your transfer. For
-	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
-	// .
+	// more information and examples, see [Filtering data transferred by DataSync].
+	//
+	// [Filtering data transferred by DataSync]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Includes []types.FilterRule
 
 	// The configuration of the manifest that lists the files or objects to transfer.
-	// For more information, see Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
-	// .
+	// For more information, see [Specifying what DataSync transfers by using a manifest].
+	//
+	// [Specifying what DataSync transfers by using a manifest]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
 	ManifestConfig *types.ManifestConfig
 
 	// Indicates how your transfer task is configured. These options include how
 	// DataSync handles files, objects, and their associated metadata during your
 	// transfer. You also can specify how to verify data integrity, set bandwidth
-	// limits for your task, among other options. Each option has a default value.
-	// Unless you need to, you don't have to configure any option before calling
-	// StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
-	// . You also can override your task options for each task execution. For example,
+	// limits for your task, among other options.
+	//
+	// Each option has a default value. Unless you need to, you don't have to
+	// configure any option before calling [StartTaskExecution].
+	//
+	// You also can override your task options for each task execution. For example,
 	// you might want to adjust the LogLevel for an individual execution.
+	//
+	// [StartTaskExecution]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
 	Options *types.Options
 
-	// Indicates whether DataSync generated a complete task report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
-	// for your transfer.
+	// Indicates whether DataSync generated a complete [task report] for your transfer.
+	//
+	// [task report]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
 	ReportResult *types.ReportResult
 
 	// The result of the task execution.
@@ -140,16 +154,18 @@ type DescribeTaskExecutionOutput struct {
 
 	// The ARN of the task execution that you wanted information about.
 	// TaskExecutionArn is hierarchical and includes TaskArn for the task that was
-	// executed. For example, a TaskExecution value with the ARN
+	// executed.
+	//
+	// For example, a TaskExecution value with the ARN
 	// arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b
 	// executed the task with the ARN
 	// arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2 .
 	TaskExecutionArn *string
 
 	// The configuration of your task report, which provides detailed information
-	// about for your DataSync transfer. For more information, see Creating a task
-	// report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
-	// .
+	// about for your DataSync transfer. For more information, see [Creating a task report].
+	//
+	// [Creating a task report]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
 	TaskReportConfig *types.TaskReportConfig
 
 	// Metadata pertaining to the operation's result.

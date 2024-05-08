@@ -14,10 +14,12 @@ import (
 
 // Creates a new Neptune Analytics graph and imports data into it, either from
 // Amazon Simple Storage Service (S3) or from a Neptune database or a Neptune
-// database snapshot. The data can be loaded from files in S3 that in either the
-// Gremlin CSV format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html)
-// or the openCypher load format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html)
-// .
+// database snapshot.
+//
+// The data can be loaded from files in S3 that in either the [Gremlin CSV format] or the [openCypher load format].
+//
+// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
+// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
 func (c *Client) CreateGraphUsingImportTask(ctx context.Context, params *CreateGraphUsingImportTaskInput, optFns ...func(*Options)) (*CreateGraphUsingImportTaskOutput, error) {
 	if params == nil {
 		params = &CreateGraphUsingImportTaskInput{}
@@ -35,9 +37,11 @@ func (c *Client) CreateGraphUsingImportTask(ctx context.Context, params *CreateG
 
 type CreateGraphUsingImportTaskInput struct {
 
-	// A name for the new Neptune Analytics graph to be created. The name must contain
-	// from 1 to 63 letters, numbers, or hyphens, and its first character must be a
-	// letter. It cannot end with a hyphen or contain two consecutive hyphens.
+	// A name for the new Neptune Analytics graph to be created.
+	//
+	// The name must contain from 1 to 63 letters, numbers, or hyphens, and its first
+	// character must be a letter. It cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// This member is required.
 	GraphName *string
@@ -63,9 +67,10 @@ type CreateGraphUsingImportTaskInput struct {
 	FailOnError *bool
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
-	// identifies the Gremlin CSV format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html)
-	// or OPENCYPHER , which identies the openCypher load format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html)
-	// .
+	// identifies the [Gremlin CSV format]or OPENCYPHER , which identies the [openCypher load format].
+	//
+	// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
+	// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
 	Format types.Format
 
 	// Contains options for controlling the import process. For example, if the
@@ -78,8 +83,9 @@ type CreateGraphUsingImportTaskInput struct {
 	KmsKeyIdentifier *string
 
 	// The maximum provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use
-	// for the graph. Default: 1024, or the approved upper limit for your account. If
-	// both the minimum and maximum values are specified, the max of the
+	// for the graph. Default: 1024, or the approved upper limit for your account.
+	//
+	// If both the minimum and maximum values are specified, the max of the
 	// min-provisioned-memory and max-provisioned memory is used to create the graph.
 	// If neither value is specified 128 m-NCUs are used.
 	MaxProvisionedMemory *int32
@@ -93,8 +99,10 @@ type CreateGraphUsingImportTaskInput struct {
 	PublicConnectivity *bool
 
 	// The number of replicas in other AZs to provision on the new graph after import.
-	// Default = 0, Min = 0, Max = 2. Additional charges equivalent to the m-NCUs
-	// selected for the graph apply for each replica.
+	// Default = 0, Min = 0, Max = 2.
+	//
+	// Additional charges equivalent to the m-NCUs selected for the graph apply for
+	// each replica.
 	ReplicaCount *int32
 
 	// Adds metadata tags to the new graph. These tags can also be used with cost
@@ -138,9 +146,10 @@ type CreateGraphUsingImportTaskOutput struct {
 	TaskId *string
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
-	// identifies the Gremlin CSV format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html)
-	// or OPENCYPHER , which identies the openCypher load format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html)
-	// .
+	// identifies the [Gremlin CSV format]or OPENCYPHER , which identies the [openCypher load format].
+	//
+	// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
+	// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
 	Format types.Format
 
 	// The unique identifier of the Neptune Analytics graph.

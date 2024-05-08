@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a review template share. After the review template share is deleted,
-// Amazon Web Services accounts, users, organizations, and organizational units
-// (OUs) that you shared the review template with will no longer be able to apply
-// it to new workloads.
+// Delete a review template share.
+//
+// After the review template share is deleted, Amazon Web Services accounts,
+// users, organizations, and organizational units (OUs) that you shared the review
+// template with will no longer be able to apply it to new workloads.
 func (c *Client) DeleteTemplateShare(ctx context.Context, params *DeleteTemplateShareInput, optFns ...func(*Options)) (*DeleteTemplateShareOutput, error) {
 	if params == nil {
 		params = &DeleteTemplateShareInput{}
@@ -32,13 +33,17 @@ func (c *Client) DeleteTemplateShare(ctx context.Context, params *DeleteTemplate
 type DeleteTemplateShareInput struct {
 
 	// A unique case-sensitive string used to ensure that this request is idempotent
-	// (executes only once). You should not reuse the same token for other requests. If
-	// you retry a request with the same client request token and the same parameters
-	// after the original request has completed successfully, the result of the
-	// original request is returned. This token is listed as required, however, if you
-	// do not specify it, the Amazon Web Services SDKs automatically generate one for
-	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
-	// provide this token or the request will fail.
+	// (executes only once).
+	//
+	// You should not reuse the same token for other requests. If you retry a request
+	// with the same client request token and the same parameters after the original
+	// request has completed successfully, the result of the original request is
+	// returned.
+	//
+	// This token is listed as required, however, if you do not specify it, the Amazon
+	// Web Services SDKs automatically generate one for you. If you are not using the
+	// Amazon Web Services SDK or the CLI, you must provide this token or the request
+	// will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string

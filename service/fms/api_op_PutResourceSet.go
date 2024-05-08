@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the resource set. An Firewall Manager resource set defines the
-// resources to import into an Firewall Manager policy from another Amazon Web
-// Services service.
+// Creates the resource set.
+//
+// An Firewall Manager resource set defines the resources to import into an
+// Firewall Manager policy from another Amazon Web Services service.
 func (c *Client) PutResourceSet(ctx context.Context, params *PutResourceSetInput, optFns ...func(*Options)) (*PutResourceSetOutput, error) {
 	if params == nil {
 		params = &PutResourceSetInput{}

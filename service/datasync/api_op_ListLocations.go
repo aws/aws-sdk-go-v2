@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of source and destination locations. If you have more locations
-// than are returned in a response (that is, the response returns only a truncated
-// list of your agents), the response contains a token that you can specify in your
-// next request to fetch the next page of locations.
+// Returns a list of source and destination locations.
+//
+// If you have more locations than are returned in a response (that is, the
+// response returns only a truncated list of your agents), the response contains a
+// token that you can specify in your next request to fetch the next page of
+// locations.
 func (c *Client) ListLocations(ctx context.Context, params *ListLocationsInput, optFns ...func(*Options)) (*ListLocationsOutput, error) {
 	if params == nil {
 		params = &ListLocationsInput{}

@@ -33,7 +33,7 @@ type GetAccountStatusInput struct {
 
 type GetAccountStatusOutput struct {
 
-	// The status of the Amazon Web Services account.
+	//  The status of the Amazon Web Services account.
 	Status types.AccountStatus
 
 	// Metadata pertaining to the operation's result.

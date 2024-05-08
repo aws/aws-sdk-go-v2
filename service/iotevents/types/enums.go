@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for AlarmModelVersionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlarmModelVersionStatus) Values() []AlarmModelVersionStatus {
 	return []AlarmModelVersionStatus{
 		"ACTIVE",
@@ -34,8 +35,9 @@ const (
 )
 
 // Values returns all known values for AnalysisResultLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisResultLevel) Values() []AnalysisResultLevel {
 	return []AnalysisResultLevel{
 		"INFO",
@@ -54,8 +56,9 @@ const (
 )
 
 // Values returns all known values for AnalysisStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisStatus) Values() []AnalysisStatus {
 	return []AnalysisStatus{
 		"RUNNING",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"GREATER",
@@ -105,6 +109,7 @@ const (
 
 // Values returns all known values for DetectorModelVersionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DetectorModelVersionStatus) Values() []DetectorModelVersionStatus {
 	return []DetectorModelVersionStatus{
@@ -127,8 +132,9 @@ const (
 )
 
 // Values returns all known values for EvaluationMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EvaluationMethod) Values() []EvaluationMethod {
 	return []EvaluationMethod{
 		"BATCH",
@@ -147,8 +153,9 @@ const (
 )
 
 // Values returns all known values for InputStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InputStatus) Values() []InputStatus {
 	return []InputStatus{
 		"CREATING",
@@ -168,8 +175,9 @@ const (
 )
 
 // Values returns all known values for LoggingLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LoggingLevel) Values() []LoggingLevel {
 	return []LoggingLevel{
 		"ERROR",
@@ -187,8 +195,9 @@ const (
 )
 
 // Values returns all known values for PayloadType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PayloadType) Values() []PayloadType {
 	return []PayloadType{
 		"STRING",

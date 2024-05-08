@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Lists Amazon SageMaker Catalogs based on given filters and orders. The maximum
+//	Lists Amazon SageMaker Catalogs based on given filters and orders. The maximum
+//
 // number of ResourceCatalog s viewable is 1000.
 func (c *Client) ListResourceCatalogs(ctx context.Context, params *ListResourceCatalogsInput, optFns ...func(*Options)) (*ListResourceCatalogsOutput, error) {
 	if params == nil {
@@ -31,28 +32,28 @@ func (c *Client) ListResourceCatalogs(ctx context.Context, params *ListResourceC
 
 type ListResourceCatalogsInput struct {
 
-	// Use this parameter to search for ResourceCatalog s created after a specific date
-	// and time.
+	//  Use this parameter to search for ResourceCatalog s created after a specific
+	// date and time.
 	CreationTimeAfter *time.Time
 
-	// Use this parameter to search for ResourceCatalog s created before a specific
+	//  Use this parameter to search for ResourceCatalog s created before a specific
 	// date and time.
 	CreationTimeBefore *time.Time
 
-	// The maximum number of results returned by ListResourceCatalogs .
+	//  The maximum number of results returned by ListResourceCatalogs .
 	MaxResults *int32
 
-	// A string that partially matches one or more ResourceCatalog s names. Filters
+	//  A string that partially matches one or more ResourceCatalog s names. Filters
 	// ResourceCatalog by name.
 	NameContains *string
 
-	// A token to resume pagination of ListResourceCatalogs results.
+	//  A token to resume pagination of ListResourceCatalogs results.
 	NextToken *string
 
-	// The value on which the resource catalog list is sorted.
+	//  The value on which the resource catalog list is sorted.
 	SortBy types.ResourceCatalogSortBy
 
-	// The order in which the resource catalogs are listed.
+	//  The order in which the resource catalogs are listed.
 	SortOrder types.ResourceCatalogSortOrder
 
 	noSmithyDocumentSerde
@@ -60,10 +61,10 @@ type ListResourceCatalogsInput struct {
 
 type ListResourceCatalogsOutput struct {
 
-	// A token to resume pagination of ListResourceCatalogs results.
+	//  A token to resume pagination of ListResourceCatalogs results.
 	NextToken *string
 
-	// A list of the requested ResourceCatalog s.
+	//  A list of the requested ResourceCatalog s.
 	ResourceCatalogs []types.ResourceCatalog
 
 	// Metadata pertaining to the operation's result.
@@ -159,7 +160,7 @@ var _ ListResourceCatalogsAPIClient = (*Client)(nil)
 // ListResourceCatalogsPaginatorOptions is the paginator options for
 // ListResourceCatalogs
 type ListResourceCatalogsPaginatorOptions struct {
-	// The maximum number of results returned by ListResourceCatalogs .
+	//  The maximum number of results returned by ListResourceCatalogs .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -13,8 +13,10 @@ import (
 
 // Lists all the event subscriptions for a customer account. The description of a
 // subscription includes SubscriptionName , SNSTopicARN , CustomerID , SourceType ,
-// SourceID , CreationTime , and Status . If you specify SubscriptionName , this
-// action lists the description for that subscription.
+// SourceID , CreationTime , and Status .
+//
+// If you specify SubscriptionName , this action lists the description for that
+// subscription.
 func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *DescribeEventSubscriptionsInput, optFns ...func(*Options)) (*DescribeEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeEventSubscriptionsInput{}
@@ -32,19 +34,23 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 
 type DescribeEventSubscriptionsInput struct {
 
-	// Filters applied to event subscriptions. Valid filter names:
-	// event-subscription-arn | event-subscription-id
+	// Filters applied to event subscriptions.
+	//
+	// Valid filter names: event-subscription-arn | event-subscription-id
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The name of the DMS event subscription to be described.
@@ -58,7 +64,7 @@ type DescribeEventSubscriptionsOutput struct {
 	// A list of event subscriptions.
 	EventSubscriptionsList []types.EventSubscription
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
@@ -159,10 +165,13 @@ var _ DescribeEventSubscriptionsAPIClient = (*Client)(nil)
 // DescribeEventSubscriptionsPaginatorOptions is the paginator options for
 // DescribeEventSubscriptions
 type DescribeEventSubscriptionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

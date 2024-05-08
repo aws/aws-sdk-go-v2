@@ -38,7 +38,9 @@ type CreateClusterInput struct {
 	// The identifiers (IDs) of the subnets where you are creating the cluster. You
 	// must specify at least one subnet. If you specify multiple subnets, they must
 	// meet the following criteria:
+	//
 	//   - All subnets must be in the same virtual private cloud (VPC).
+	//
 	//   - You can specify only one subnet per Availability Zone.
 	//
 	// This member is required.
@@ -49,7 +51,7 @@ type CreateClusterInput struct {
 
 	// The identifier (ID) of the cluster backup to restore. Use this value to restore
 	// the cluster from a backup instead of creating a new cluster. To find the backup
-	// ID, use DescribeBackups .
+	// ID, use DescribeBackups.
 	SourceBackupId *string
 
 	// Tags to apply to the CloudHSM cluster during creation.

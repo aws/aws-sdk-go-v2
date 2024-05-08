@@ -69,9 +69,10 @@ type CancelImportTaskOutput struct {
 	TaskId *string
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
-	// identifies the Gremlin CSV format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html)
-	// or OPENCYPHER , which identies the openCypher load format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html)
-	// .
+	// identifies the [Gremlin CSV format]or OPENCYPHER , which identies the [openCypher load format].
+	//
+	// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
+	// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
 	Format types.Format
 
 	// The unique identifier of the Neptune Analytics graph.

@@ -32,8 +32,9 @@ func (c *Client) ListAnalyzedResources(ctx context.Context, params *ListAnalyzed
 // Retrieves a list of resources that have been analyzed.
 type ListAnalyzedResourcesInput struct {
 
-	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
-	// to retrieve a list of analyzed resources from.
+	// The [ARN of the analyzer] to retrieve a list of analyzed resources from.
+	//
+	// [ARN of the analyzer]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
 	//
 	// This member is required.
 	AnalyzerArn *string

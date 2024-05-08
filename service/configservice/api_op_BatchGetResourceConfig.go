@@ -15,7 +15,9 @@ import (
 // operation also returns a list of resources that are not processed in the current
 // request. If there are no unprocessed resources, the operation returns an empty
 // unprocessedResourceKeys list.
+//
 //   - The API does not return results for deleted resources.
+//
 //   - The API does not return any tags for the requested resources. This
 //     information is filtered out of the supplementaryConfiguration section of the API
 //     response.
@@ -52,8 +54,9 @@ type BatchGetResourceConfigOutput struct {
 
 	// A list of resource keys that were not processed with the current response. The
 	// unprocessesResourceKeys value is in the same form as ResourceKeys, so the value
-	// can be directly provided to a subsequent BatchGetResourceConfig operation. If
-	// there are no unprocessed resource keys, the response contains an empty
+	// can be directly provided to a subsequent BatchGetResourceConfig operation.
+	//
+	// If there are no unprocessed resource keys, the response contains an empty
 	// unprocessedResourceKeys list.
 	UnprocessedResourceKeys []types.ResourceKey
 

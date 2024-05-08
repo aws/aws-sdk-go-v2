@@ -47,7 +47,7 @@ type GetSessionOutput struct {
 	EngineConfiguration *types.EngineConfiguration
 
 	// The engine version used by the session (for example, PySpark engine version 3 ).
-	// You can get a list of engine versions by calling ListEngineVersions .
+	// You can get a list of engine versions by calling ListEngineVersions.
 	EngineVersion *string
 
 	// The notebook version.

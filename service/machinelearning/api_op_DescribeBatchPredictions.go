@@ -39,16 +39,22 @@ type DescribeBatchPredictionsInput struct {
 	EQ *string
 
 	// Use one of the following variables to filter a list of BatchPrediction :
+	//
 	//   - CreatedAt - Sets the search criteria to the BatchPrediction creation date.
+	//
 	//   - Status - Sets the search criteria to the BatchPrediction status.
-	//   - Name - Sets the search criteria to the contents of the BatchPrediction Name
-	//   .
+	//
+	//   - Name - Sets the search criteria to the contents of the BatchPrediction Name .
+	//
 	//   - IAMUser - Sets the search criteria to the user account that invoked the
 	//   BatchPrediction creation.
+	//
 	//   - MLModelId - Sets the search criteria to the MLModel used in the
 	//   BatchPrediction .
+	//
 	//   - DataSourceId - Sets the search criteria to the DataSource used in the
 	//   BatchPrediction .
+	//
 	//   - DataURI - Sets the search criteria to the data file(s) used in the
 	//   BatchPrediction . The URL can identify either a file or an Amazon Simple
 	//   Storage Solution (Amazon S3) bucket or directory.
@@ -83,19 +89,26 @@ type DescribeBatchPredictionsInput struct {
 	// An ID of the page in the paginated results.
 	NextToken *string
 
-	// A string that is found at the beginning of a variable, such as Name or Id . For
-	// example, a Batch Prediction operation could have the Name
+	// A string that is found at the beginning of a variable, such as Name or Id .
+	//
+	// For example, a Batch Prediction operation could have the Name
 	// 2014-09-09-HolidayGiftMailer . To search for this BatchPrediction , select Name
 	// for the FilterVariable and any of the following strings for the Prefix :
+	//
 	//   - 2014-09
+	//
 	//   - 2014-09-09
+	//
 	//   - 2014-09-09-Holiday
 	Prefix *string
 
 	// A two-value parameter that determines the sequence of the resulting list of
 	// MLModel s.
+	//
 	//   - asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
 	//   - dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
 	// Results are sorted by FilterVariable .
 	SortOrder types.SortOrder
 
@@ -322,12 +335,13 @@ type BatchPredictionAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeBatchPredictionsInput, *DescribeBatchPredictionsOutput, error) (bool, error)
 }
 

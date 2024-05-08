@@ -12,9 +12,9 @@ import (
 )
 
 // Returns a AdminAccounts object that lists the Firewall Manager administrators
-// within the organization that are onboarded to Firewall Manager by
-// AssociateAdminAccount . This operation can be called only from the
-// organization's management account.
+// within the organization that are onboarded to Firewall Manager by AssociateAdminAccount.
+//
+// This operation can be called only from the organization's management account.
 func (c *Client) ListAdminAccountsForOrganization(ctx context.Context, params *ListAdminAccountsForOrganizationInput, optFns ...func(*Options)) (*ListAdminAccountsForOrganizationOutput, error) {
 	if params == nil {
 		params = &ListAdminAccountsForOrganizationInput{}
@@ -51,7 +51,7 @@ type ListAdminAccountsForOrganizationInput struct {
 type ListAdminAccountsForOrganizationOutput struct {
 
 	// A list of Firewall Manager administrator accounts within the organization that
-	// were onboarded as administrators by AssociateAdminAccount or PutAdminAccount .
+	// were onboarded as administrators by AssociateAdminAccountor PutAdminAccount.
 	AdminAccounts []types.AdminAccountSummary
 
 	// When you request a list of objects with a MaxResults setting, if the number of

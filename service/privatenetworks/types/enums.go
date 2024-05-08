@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AcknowledgmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcknowledgmentStatus) Values() []AcknowledgmentStatus {
 	return []AcknowledgmentStatus{
 		"ACKNOWLEDGING",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for CommitmentLength. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CommitmentLength) Values() []CommitmentLength {
 	return []CommitmentLength{
 		"SIXTY_DAYS",
@@ -53,6 +55,7 @@ const (
 
 // Values returns all known values for DeviceIdentifierFilterKeys. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceIdentifierFilterKeys) Values() []DeviceIdentifierFilterKeys {
 	return []DeviceIdentifierFilterKeys{
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for DeviceIdentifierStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceIdentifierStatus) Values() []DeviceIdentifierStatus {
 	return []DeviceIdentifierStatus{
 		"ACTIVE",
@@ -89,8 +93,9 @@ const (
 )
 
 // Values returns all known values for ElevationReference. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ElevationReference) Values() []ElevationReference {
 	return []ElevationReference{
 		"AGL",
@@ -107,8 +112,9 @@ const (
 )
 
 // Values returns all known values for ElevationUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ElevationUnit) Values() []ElevationUnit {
 	return []ElevationUnit{
 		"FEET",
@@ -125,8 +131,9 @@ const (
 )
 
 // Values returns all known values for HealthStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthStatus) Values() []HealthStatus {
 	return []HealthStatus{
 		"INITIAL",
@@ -143,8 +150,9 @@ const (
 )
 
 // Values returns all known values for NetworkFilterKeys. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkFilterKeys) Values() []NetworkFilterKeys {
 	return []NetworkFilterKeys{
 		"STATUS",
@@ -161,8 +169,9 @@ const (
 
 // Values returns all known values for NetworkResourceDefinitionType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkResourceDefinitionType) Values() []NetworkResourceDefinitionType {
 	return []NetworkResourceDefinitionType{
 		"RADIO_UNIT",
@@ -180,6 +189,7 @@ const (
 
 // Values returns all known values for NetworkResourceFilterKeys. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkResourceFilterKeys) Values() []NetworkResourceFilterKeys {
 	return []NetworkResourceFilterKeys{
@@ -204,8 +214,9 @@ const (
 )
 
 // Values returns all known values for NetworkResourceStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkResourceStatus) Values() []NetworkResourceStatus {
 	return []NetworkResourceStatus{
 		"PENDING",
@@ -228,8 +239,9 @@ const (
 )
 
 // Values returns all known values for NetworkResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkResourceType) Values() []NetworkResourceType {
 	return []NetworkResourceType{
 		"RADIO_UNIT",
@@ -244,8 +256,9 @@ const (
 )
 
 // Values returns all known values for NetworkSiteFilterKeys. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkSiteFilterKeys) Values() []NetworkSiteFilterKeys {
 	return []NetworkSiteFilterKeys{
 		"STATUS",
@@ -264,8 +277,9 @@ const (
 )
 
 // Values returns all known values for NetworkSiteStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkSiteStatus) Values() []NetworkSiteStatus {
 	return []NetworkSiteStatus{
 		"CREATED",
@@ -288,8 +302,9 @@ const (
 )
 
 // Values returns all known values for NetworkStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkStatus) Values() []NetworkStatus {
 	return []NetworkStatus{
 		"CREATED",
@@ -309,8 +324,9 @@ const (
 )
 
 // Values returns all known values for OrderFilterKeys. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderFilterKeys) Values() []OrderFilterKeys {
 	return []OrderFilterKeys{
 		"STATUS",
@@ -328,8 +344,9 @@ const (
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateType) Values() []UpdateType {
 	return []UpdateType{
 		"REPLACE",
@@ -351,6 +368,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

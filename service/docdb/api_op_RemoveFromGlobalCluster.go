@@ -13,8 +13,9 @@ import (
 
 // Detaches an Amazon DocumentDB secondary cluster from a global cluster. The
 // cluster becomes a standalone cluster with read-write capability instead of being
-// read-only and receiving data from a primary in a different region. This action
-// only applies to Amazon DocumentDB clusters.
+// read-only and receiving data from a primary in a different region.
+//
+// This action only applies to Amazon DocumentDB clusters.
 func (c *Client) RemoveFromGlobalCluster(ctx context.Context, params *RemoveFromGlobalClusterInput, optFns ...func(*Options)) (*RemoveFromGlobalClusterOutput, error) {
 	if params == nil {
 		params = &RemoveFromGlobalClusterInput{}
@@ -30,7 +31,7 @@ func (c *Client) RemoveFromGlobalCluster(ctx context.Context, params *RemoveFrom
 	return out, nil
 }
 
-// Represents the input to RemoveFromGlobalCluster .
+// Represents the input to RemoveFromGlobalCluster.
 type RemoveFromGlobalClusterInput struct {
 
 	// The Amazon Resource Name (ARN) identifying the cluster that was detached from

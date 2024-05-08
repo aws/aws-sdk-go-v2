@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the data deletion job created by CreateDataDeletionJob (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html)
-// , including the job status.
+// Describes the data deletion job created by [CreateDataDeletionJob], including the job status.
+//
+// [CreateDataDeletionJob]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html
 func (c *Client) DescribeDataDeletionJob(ctx context.Context, params *DescribeDataDeletionJobInput, optFns ...func(*Options)) (*DescribeDataDeletionJobOutput, error) {
 	if params == nil {
 		params = &DescribeDataDeletionJobInput{}
@@ -40,11 +41,16 @@ type DescribeDataDeletionJobInput struct {
 
 type DescribeDataDeletionJobOutput struct {
 
-	// Information about the data deletion job, including the status. The status is
-	// one of the following values:
+	// Information about the data deletion job, including the status.
+	//
+	// The status is one of the following values:
+	//
 	//   - PENDING
+	//
 	//   - IN_PROGRESS
+	//
 	//   - COMPLETED
+	//
 	//   - FAILED
 	DataDeletionJob *types.DataDeletionJob
 

@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a model package. A model package is used to create SageMaker models or
-// list on Amazon Web Services Marketplace. Buyers can subscribe to model packages
-// listed on Amazon Web Services Marketplace to create models in SageMaker.
+// Deletes a model package.
+//
+// A model package is used to create SageMaker models or list on Amazon Web
+// Services Marketplace. Buyers can subscribe to model packages listed on Amazon
+// Web Services Marketplace to create models in SageMaker.
 func (c *Client) DeleteModelPackage(ctx context.Context, params *DeleteModelPackageInput, optFns ...func(*Options)) (*DeleteModelPackageOutput, error) {
 	if params == nil {
 		params = &DeleteModelPackageInput{}
@@ -30,9 +32,10 @@ func (c *Client) DeleteModelPackage(ctx context.Context, params *DeleteModelPack
 
 type DeleteModelPackageInput struct {
 
-	// The name or Amazon Resource Name (ARN) of the model package to delete. When you
-	// specify a name, the name must have 1 to 63 characters. Valid characters are a-z,
-	// A-Z, 0-9, and - (hyphen).
+	// The name or Amazon Resource Name (ARN) of the model package to delete.
+	//
+	// When you specify a name, the name must have 1 to 63 characters. Valid
+	// characters are a-z, A-Z, 0-9, and - (hyphen).
 	//
 	// This member is required.
 	ModelPackageName *string

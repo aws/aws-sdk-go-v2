@@ -13,24 +13,35 @@ import (
 )
 
 // Sends a prompt for the agent to process and respond to. Use return control
-// event type for function calling. The CLI doesn't support InvokeAgent .
+// event type for function calling.
+//
+// The CLI doesn't support InvokeAgent .
+//
 //   - To continue the same conversation with an agent, use the same sessionId
 //     value in the request.
+//
 //   - To activate trace enablement, turn enableTrace to true . Trace enablement
 //     helps you follow the agent's reasoning process that led it to the information it
 //     processed, the actions it took, and the final result it yielded. For more
-//     information, see Trace enablement (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events)
-//     .
+//     information, see [Trace enablement].
+//
 //   - End a conversation by setting endSession to true .
+//
 //   - In the sessionState object, you can include attributes for the session or
 //     prompt or parameters returned from the action group.
+//
 //   - Use return control event type for function calling.
 //
 // The response is returned in the bytes field of the chunk object.
+//
 //   - The attribution object contains citations for parts of the response.
+//
 //   - If you set enableTrace to true in the request, you can trace the agent's
 //     steps and reasoning process that led it to the response.
+//
 //   - Errors are also surfaced in the response.
+//
+// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
 func (c *Client) InvokeAgent(ctx context.Context, params *InvokeAgentInput, optFns ...func(*Options)) (*InvokeAgentOutput, error) {
 	if params == nil {
 		params = &InvokeAgentInput{}
@@ -65,8 +76,9 @@ type InvokeAgentInput struct {
 	SessionId *string
 
 	// Specifies whether to turn on the trace or not to track the agent's reasoning
-	// process. For more information, see Trace enablement (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events)
-	// .
+	// process. For more information, see [Trace enablement].
+	//
+	// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
 	EnableTrace *bool
 
 	// Specifies whether to end the session with the agent or not.
@@ -76,8 +88,9 @@ type InvokeAgentInput struct {
 	InputText *string
 
 	// Contains parameters that specify various attributes of the session. For more
-	// information, see Control session context (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html)
-	// .
+	// information, see [Control session context].
+	//
+	// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
 	SessionState *types.SessionState
 
 	noSmithyDocumentSerde

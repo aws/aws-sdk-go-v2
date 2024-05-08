@@ -11,26 +11,41 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a stream for a property graph. With the Neptune Streams feature, you can
-// generate a complete sequence of change-log entries that record every change made
-// to your graph data as it happens. GetPropertygraphStream lets you collect these
-// change-log entries for a property graph. The Neptune streams feature needs to be
-// enabled on your Neptune DBcluster. To enable streams, set the neptune_streams (https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams)
-// DB cluster parameter to 1 . See Capturing graph changes in real time using
-// Neptune streams (https://docs.aws.amazon.com/neptune/latest/userguide/streams.html)
-// . When invoking this operation in a Neptune cluster that has IAM authentication
-// enabled, the IAM user or role making the request must have a policy attached
-// that allows the neptune-db:GetStreamRecords (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstreamrecords)
-// IAM action in that cluster. When invoking this operation in a Neptune cluster
-// that has IAM authentication enabled, the IAM user or role making the request
-// must have a policy attached that enables one of the following IAM actions,
-// depending on the query: Note that you can restrict property-graph queries using
-// the following IAM context keys:
-//   - neptune-db:QueryLanguage:Gremlin (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
-//   - neptune-db:QueryLanguage:OpenCypher (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
+// Gets a stream for a property graph.
 //
-// See Condition keys available in Neptune IAM data-access policy statements (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)
-// ).
+// With the Neptune Streams feature, you can generate a complete sequence of
+// change-log entries that record every change made to your graph data as it
+// happens. GetPropertygraphStream lets you collect these change-log entries for a
+// property graph.
+//
+// The Neptune streams feature needs to be enabled on your Neptune DBcluster. To
+// enable streams, set the [neptune_streams]DB cluster parameter to 1 .
+//
+// See [Capturing graph changes in real time using Neptune streams].
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:GetStreamRecords]IAM action in that cluster.
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that enables one of the following IAM actions, depending on the query:
+//
+// Note that you can restrict property-graph queries using the following IAM
+// context keys:
+//
+// [neptune-db:QueryLanguage:Gremlin]
+//
+// [neptune-db:QueryLanguage:OpenCypher]
+//
+// See [Condition keys available in Neptune IAM data-access policy statements]).
+//
+// [Condition keys available in Neptune IAM data-access policy statements]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html
+// [neptune_streams]: https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams
+// [Capturing graph changes in real time using Neptune streams]: https://docs.aws.amazon.com/neptune/latest/userguide/streams.html
+// [neptune-db:GetStreamRecords]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstreamrecords
+// [neptune-db:QueryLanguage:Gremlin]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys
+// [neptune-db:QueryLanguage:OpenCypher]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys
 func (c *Client) GetPropertygraphStream(ctx context.Context, params *GetPropertygraphStreamInput, optFns ...func(*Options)) (*GetPropertygraphStreamOutput, error) {
 	if params == nil {
 		params = &GetPropertygraphStreamInput{}
@@ -57,13 +72,17 @@ type GetPropertygraphStreamInput struct {
 	Encoding types.Encoding
 
 	// Can be one of:
+	//
 	//   - AT_SEQUENCE_NUMBER – Indicates that reading should start from the event
 	//   sequence number specified jointly by the commitNum and opNum parameters.
+	//
 	//   - AFTER_SEQUENCE_NUMBER – Indicates that reading should start right after the
 	//   event sequence number specified jointly by the commitNum and opNum parameters.
+	//
 	//   - TRIM_HORIZON – Indicates that reading should start at the last untrimmed
 	//   record in the system, which is the oldest unexpired (not yet deleted) record in
 	//   the change-log stream.
+	//
 	//   - LATEST – Indicates that reading should start at the most recent record in
 	//   the system, which is the latest unexpired (not yet deleted) record in the
 	//   change-log stream.
@@ -72,8 +91,9 @@ type GetPropertygraphStreamInput struct {
 	// Specifies the maximum number of records to return. There is also a size limit
 	// of 10 MB on the response that can't be modified and that takes precedence over
 	// the number of records specified in the limit parameter. The response does
-	// include a threshold-breaching record if the 10 MB limit was reached. The range
-	// for limit is 1 to 100,000, with a default of 10.
+	// include a threshold-breaching record if the 10 MB limit was reached.
+	//
+	// The range for limit is 1 to 100,000, with a default of 10.
 	Limit *int64
 
 	// The operation sequence number within the specified commit to start reading from
@@ -91,10 +111,11 @@ type GetPropertygraphStreamOutput struct {
 	// This member is required.
 	Format *string
 
-	// Sequence identifier of the last change in the stream response. An event ID is
-	// composed of two fields: a commitNum , which identifies a transaction that
-	// changed the graph, and an opNum , which identifies a specific operation within
-	// that transaction:
+	// Sequence identifier of the last change in the stream response.
+	//
+	// An event ID is composed of two fields: a commitNum , which identifies a
+	// transaction that changed the graph, and an opNum , which identifies a specific
+	// operation within that transaction:
 	//
 	// This member is required.
 	LastEventId map[string]string

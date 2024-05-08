@@ -8,8 +8,9 @@ import (
 	"time"
 )
 
-// Contains custom model training parameters. See Custom models in Neptune ML (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-custom-models.html)
-// .
+// Contains custom model training parameters. See [Custom models in Neptune ML].
+//
+// [Custom models in Neptune ML]: https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-custom-models.html
 type CustomModelTrainingParameters struct {
 
 	// The path to the Amazon S3 location where the Python module implementing your
@@ -34,9 +35,9 @@ type CustomModelTrainingParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Contains custom model transform parameters. See Use a trained model to generate
-// new model artifacts (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html)
-// .
+// Contains custom model transform parameters. See [Use a trained model to generate new model artifacts].
+//
+// [Use a trained model to generate new model artifacts]: https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html
 type CustomModelTransformParameters struct {
 
 	// The path to the Amazon S3 location where the Python module implementing your
@@ -90,8 +91,9 @@ type FastResetToken struct {
 	noSmithyDocumentSerde
 }
 
-// Captures the status of a Gremlin query (see the Gremlin query status API (https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html)
-// page).
+// Captures the status of a Gremlin query (see the [Gremlin query status API] page).
+//
+// [Gremlin query status API]: https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html
 type GremlinQueryStatus struct {
 
 	// The query statistics of the Gremlin query.
@@ -195,10 +197,14 @@ type PropertygraphData struct {
 	Key *string
 
 	// The type of this Gremlin or openCypher element. Must be one of:
+	//
 	//   - v1 - Vertex label for Gremlin, or node label for openCypher.
+	//
 	//   - vp - Vertex properties for Gremlin, or node properties for openCypher.
+	//
 	//   - e - Edge and edge label for Gremlin, or relationship and relationship type
 	//   for openCypher.
+	//
 	//   - ep - Edge properties for Gremlin, or relationship properties for openCypher.
 	//
 	// This member is required.
@@ -254,9 +260,9 @@ type PropertygraphRecord struct {
 }
 
 // The graph summary API returns a read-only list of node and edge labels and
-// property keys, along with counts of nodes, edges, and properties. See Graph
-// summary response for a property graph (PG) (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-pg-response)
-// .
+// property keys, along with counts of nodes, edges, and properties. See [Graph summary response for a property graph (PG)].
+//
+// [Graph summary response for a property graph (PG)]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-pg-response
 type PropertygraphSummary struct {
 
 	// A list of the distinct edge labels in the graph.
@@ -386,8 +392,9 @@ type RDFGraphSummary struct {
 // Payload for an RDF graph summary response.
 type RDFGraphSummaryValueMap struct {
 
-	// The graph summary of an RDF graph. See Graph summary response for an RDF graph (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-rdf-response)
-	// .
+	// The graph summary of an RDF graph. See [Graph summary response for an RDF graph].
+	//
+	// [Graph summary response for an RDF graph]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-graph-summary.html#neptune-graph-summary-rdf-response
 	GraphSummary *RDFGraphSummary
 
 	// The timestamp, in ISO 8601 format, of the time at which Neptune last computed
@@ -410,12 +417,15 @@ type RefreshStatisticsIdMap struct {
 }
 
 // Neptune logs are converted to SPARQL quads in the graph using the Resource
-// Description Framework (RDF) N-QUADS (https://www.w3.org/TR/n-quads/) language
-// defined in the W3C RDF 1.1 N-Quads specification
+// Description Framework (RDF) [N-QUADS]language defined in the W3C RDF 1.1 N-Quads
+// specification
+//
+// [N-QUADS]: https://www.w3.org/TR/n-quads/
 type SparqlData struct {
 
-	// Holds an N-QUADS (https://www.w3.org/TR/n-quads/) statement expressing the
-	// changed quad.
+	// Holds an [N-QUADS] statement expressing the changed quad.
+	//
+	// [N-QUADS]: https://www.w3.org/TR/n-quads/
 	//
 	// This member is required.
 	Stmt *string
@@ -434,8 +444,9 @@ type SparqlRecord struct {
 	CommitTimestampInMillis *int64
 
 	// The serialized SPARQL change record. The serialization formats of each record
-	// are described in more detail in Serialization Formats in Neptune Streams (https://docs.aws.amazon.com/neptune/latest/userguide/streams-change-formats.html)
-	// .
+	// are described in more detail in [Serialization Formats in Neptune Streams].
+	//
+	// [Serialization Formats in Neptune Streams]: https://docs.aws.amazon.com/neptune/latest/userguide/streams-change-formats.html
 	//
 	// This member is required.
 	Data *SparqlData
@@ -461,9 +472,10 @@ type SparqlRecord struct {
 // Contains statistics information. The DFE engine uses information about the data
 // in your Neptune graph to make effective trade-offs when planning query
 // execution. This information takes the form of statistics that include so-called
-// characteristic sets and predicate statistics that can guide query planning. See
-// Managing statistics for the Neptune DFE to use (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html)
+// characteristic sets and predicate statistics that can guide query planning. See [Managing statistics for the Neptune DFE to use]
 // .
+//
+// [Managing statistics for the Neptune DFE to use]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html
 type Statistics struct {
 
 	// Indicates whether or not DFE statistics generation is enabled at all.
@@ -479,9 +491,12 @@ type Statistics struct {
 	Note *string
 
 	// A StatisticsSummary structure that contains:
+	//
 	//   - signatureCount - The total number of signatures across all characteristic
 	//   sets.
+	//
 	//   - instanceCount - The total number of characteristic-set instances.
+	//
 	//   - predicateCount - The total number of unique predicates.
 	SignatureInfo *StatisticsSummary
 

@@ -12,8 +12,10 @@ import (
 )
 
 // Returns a list of robots. You can optionally provide filters to retrieve
-// specific robots. This API will no longer be supported as of May 2, 2022. Use it
-// to remove resources that were created for Deployment Service.
+// specific robots.
+//
+// This API will no longer be supported as of May 2, 2022. Use it to remove
+// resources that were created for Deployment Service.
 //
 // Deprecated: Support for the AWS RoboMaker application deployment feature has
 // ended. For additional information, see
@@ -35,11 +37,12 @@ func (c *Client) ListRobots(ctx context.Context, params *ListRobotsInput, optFns
 
 type ListRobotsInput struct {
 
-	// Optional filters to limit results. The filter names status and fleetName are
-	// supported. When filtering, you must use the complete value of the filtered item.
-	// You can use up to three filters, but they must be for the same named item. For
-	// example, if you are looking for items with the status Registered or the status
-	// Available .
+	// Optional filters to limit results.
+	//
+	// The filter names status and fleetName are supported. When filtering, you must
+	// use the complete value of the filtered item. You can use up to three filters,
+	// but they must be for the same named item. For example, if you are looking for
+	// items with the status Registered or the status Available .
 	Filters []types.Filter
 
 	// When this parameter is used, ListRobots only returns maxResults results in a

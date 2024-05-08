@@ -35,7 +35,7 @@ type ListOrdersInput struct {
 	// The pagination token.
 	NextToken *string
 
-	// The ID or the Amazon Resource Name (ARN) of the Outpost.
+	//  The ID or the Amazon Resource Name (ARN) of the Outpost.
 	OutpostIdentifierFilter *string
 
 	noSmithyDocumentSerde
@@ -46,7 +46,7 @@ type ListOrdersOutput struct {
 	// The pagination token.
 	NextToken *string
 
-	// Information about the orders.
+	//  Information about the orders.
 	Orders []types.OrderSummary
 
 	// Metadata pertaining to the operation's result.

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The UpdateNotificationSettings operation creates, updates, disables or
+//	The UpdateNotificationSettings operation creates, updates, disables or
+//
 // re-enables notifications for a HIT type. If you call the
 // UpdateNotificationSettings operation for a HIT type that already has a
 // notification specification, the operation replaces the old specification with a
@@ -39,18 +40,18 @@ func (c *Client) UpdateNotificationSettings(ctx context.Context, params *UpdateN
 
 type UpdateNotificationSettingsInput struct {
 
-	// The ID of the HIT type whose notification specification is being updated.
+	//  The ID of the HIT type whose notification specification is being updated.
 	//
 	// This member is required.
 	HITTypeId *string
 
-	// Specifies whether notifications are sent for HITs of this HIT type, according
+	//  Specifies whether notifications are sent for HITs of this HIT type, according
 	// to the notification specification. You must specify either the Notification
 	// parameter or the Active parameter for the call to UpdateNotificationSettings to
 	// succeed.
 	Active *bool
 
-	// The notification specification for the HIT type.
+	//  The notification specification for the HIT type.
 	Notification *types.NotificationSpecification
 
 	noSmithyDocumentSerde

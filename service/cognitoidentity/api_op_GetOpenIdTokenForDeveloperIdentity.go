@@ -15,14 +15,17 @@ import (
 // logins will create an implicit linked account. You can only specify one
 // developer provider as part of the Logins map, which is linked to the identity
 // pool. The developer provider is the "domain" by which Cognito will refer to your
-// users. You can use GetOpenIdTokenForDeveloperIdentity to create a new identity
-// and to link new logins (that is, user credentials issued by a public provider or
+// users.
+//
+// You can use GetOpenIdTokenForDeveloperIdentity to create a new identity and to
+// link new logins (that is, user credentials issued by a public provider or
 // developer provider) to an existing identity. When you want to create a new
 // identity, the IdentityId should be null. When you want to associate a new login
 // with an existing authenticated/unauthenticated identity, you can do so by
 // providing the existing IdentityId . This API will create the identity in the
-// specified IdentityPoolId . You must use AWS Developer credentials to call this
-// API.
+// specified IdentityPoolId .
+//
+// You must use AWS Developer credentials to call this API.
 func (c *Client) GetOpenIdTokenForDeveloperIdentity(ctx context.Context, params *GetOpenIdTokenForDeveloperIdentityInput, optFns ...func(*Options)) (*GetOpenIdTokenForDeveloperIdentityOutput, error) {
 	if params == nil {
 		params = &GetOpenIdTokenForDeveloperIdentityInput{}
@@ -72,8 +75,10 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// one hour. The maximum token duration you can set is 24 hours. You should take
 	// care in setting the expiration time for a token, as there are significant
 	// security implications: an attacker could use a leaked token to access your AWS
-	// resources for the token's duration. Please provide for a small grace period,
-	// usually no more than 5 minutes, to account for clock skew.
+	// resources for the token's duration.
+	//
+	// Please provide for a small grace period, usually no more than 5 minutes, to
+	// account for clock skew.
 	TokenDuration *int64
 
 	noSmithyDocumentSerde

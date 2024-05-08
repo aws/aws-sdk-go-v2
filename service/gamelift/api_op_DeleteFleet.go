@@ -11,14 +11,22 @@ import (
 )
 
 // Deletes all resources and information related to a fleet and shuts down any
-// currently running fleet instances, including those in remote locations. If the
-// fleet being deleted has a VPC peering connection, you first need to get a valid
-// authorization (good for 24 hours) by calling CreateVpcPeeringAuthorization (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html)
-// . You don't need to explicitly delete the VPC peering connection. To delete a
-// fleet, specify the fleet ID to be terminated. During the deletion process, the
-// fleet status is changed to DELETING . When completed, the status switches to
-// TERMINATED and the fleet event FLEET_DELETED is emitted. Learn more Setting up
-// Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// currently running fleet instances, including those in remote locations.
+//
+// If the fleet being deleted has a VPC peering connection, you first need to get
+// a valid authorization (good for 24 hours) by calling [CreateVpcPeeringAuthorization]. You don't need to
+// explicitly delete the VPC peering connection.
+//
+// To delete a fleet, specify the fleet ID to be terminated. During the deletion
+// process, the fleet status is changed to DELETING . When completed, the status
+// switches to TERMINATED and the fleet event FLEET_DELETED is emitted.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift Fleets]
+//
+// [CreateVpcPeeringAuthorization]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html
+// [Setting up Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optFns ...func(*Options)) (*DeleteFleetOutput, error) {
 	if params == nil {
 		params = &DeleteFleetInput{}

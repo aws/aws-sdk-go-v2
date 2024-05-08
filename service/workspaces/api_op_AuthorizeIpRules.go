@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more rules to the specified IP access control group. This action
-// gives users permission to access their WorkSpaces from the CIDR address ranges
-// specified in the rules.
+// Adds one or more rules to the specified IP access control group.
+//
+// This action gives users permission to access their WorkSpaces from the CIDR
+// address ranges specified in the rules.
 func (c *Client) AuthorizeIpRules(ctx context.Context, params *AuthorizeIpRulesInput, optFns ...func(*Options)) (*AuthorizeIpRulesOutput, error) {
 	if params == nil {
 		params = &AuthorizeIpRulesInput{}

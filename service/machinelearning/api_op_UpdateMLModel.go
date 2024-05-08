@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the MLModelName and the ScoreThreshold of an MLModel . You can use the
-// GetMLModel operation to view the contents of the updated data element.
+// Updates the MLModelName and the ScoreThreshold of an MLModel .
+//
+// You can use the GetMLModel operation to view the contents of the updated data
+// element.
 func (c *Client) UpdateMLModel(ctx context.Context, params *UpdateMLModelInput, optFns ...func(*Options)) (*UpdateMLModelOutput, error) {
 	if params == nil {
 		params = &UpdateMLModelInput{}
@@ -38,17 +40,19 @@ type UpdateMLModelInput struct {
 	MLModelName *string
 
 	// The ScoreThreshold used in binary classification MLModel that marks the
-	// boundary between a positive prediction and a negative prediction. Output values
-	// greater than or equal to the ScoreThreshold receive a positive result from the
-	// MLModel , such as true . Output values less than the ScoreThreshold receive a
-	// negative response from the MLModel , such as false .
+	// boundary between a positive prediction and a negative prediction.
+	//
+	// Output values greater than or equal to the ScoreThreshold receive a positive
+	// result from the MLModel , such as true . Output values less than the
+	// ScoreThreshold receive a negative response from the MLModel , such as false .
 	ScoreThreshold *float32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of an UpdateMLModel operation. You can see the updated
-// content by using the GetMLModel operation.
+// Represents the output of an UpdateMLModel operation.
+//
+// You can see the updated content by using the GetMLModel operation.
 type UpdateMLModelOutput struct {
 
 	// The ID assigned to the MLModel during creation. This value should be identical

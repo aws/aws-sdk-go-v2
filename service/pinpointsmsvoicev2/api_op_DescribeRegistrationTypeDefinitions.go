@@ -42,7 +42,7 @@ type DescribeRegistrationTypeDefinitionsInput struct {
 	NextToken *string
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	RegistrationTypes []string
 
 	noSmithyDocumentSerde
@@ -51,7 +51,7 @@ type DescribeRegistrationTypeDefinitionsInput struct {
 type DescribeRegistrationTypeDefinitionsOutput struct {
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationTypeDefinitions []types.RegistrationTypeDefinition

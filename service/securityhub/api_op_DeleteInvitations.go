@@ -12,10 +12,14 @@ import (
 )
 
 // Deletes invitations received by the Amazon Web Services account to become a
-// member account. A Security Hub administrator account can use this operation to
-// delete invitations sent to one or more member accounts. This operation is only
-// used to delete invitations that are sent to member accounts that aren't part of
-// an organization. Organization accounts don't receive invitations.
+// member account.
+//
+// A Security Hub administrator account can use this operation to delete
+// invitations sent to one or more member accounts.
+//
+// This operation is only used to delete invitations that are sent to member
+// accounts that aren't part of an organization. Organization accounts don't
+// receive invitations.
 func (c *Client) DeleteInvitations(ctx context.Context, params *DeleteInvitationsInput, optFns ...func(*Options)) (*DeleteInvitationsOutput, error) {
 	if params == nil {
 		params = &DeleteInvitationsInput{}

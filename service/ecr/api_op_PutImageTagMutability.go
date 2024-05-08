@@ -12,8 +12,9 @@ import (
 )
 
 // Updates the image tag mutability settings for the specified repository. For
-// more information, see Image tag mutability (https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html)
-// in the Amazon Elastic Container Registry User Guide.
+// more information, see [Image tag mutability]in the Amazon Elastic Container Registry User Guide.
+//
+// [Image tag mutability]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html
 func (c *Client) PutImageTagMutability(ctx context.Context, params *PutImageTagMutabilityInput, optFns ...func(*Options)) (*PutImageTagMutabilityOutput, error) {
 	if params == nil {
 		params = &PutImageTagMutabilityInput{}

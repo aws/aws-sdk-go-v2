@@ -29,37 +29,37 @@ func (c *Client) CreateAssessment(ctx context.Context, params *CreateAssessmentI
 
 type CreateAssessmentInput struct {
 
-	// The assessment report storage destination for the assessment that's being
+	//  The assessment report storage destination for the assessment that's being
 	// created.
 	//
 	// This member is required.
 	AssessmentReportsDestination *types.AssessmentReportsDestination
 
-	// The identifier for the framework that the assessment will be created from.
+	//  The identifier for the framework that the assessment will be created from.
 	//
 	// This member is required.
 	FrameworkId *string
 
-	// The name of the assessment to be created.
+	//  The name of the assessment to be created.
 	//
 	// This member is required.
 	Name *string
 
-	// The list of roles for the assessment.
+	//  The list of roles for the assessment.
 	//
 	// This member is required.
 	Roles []types.Role
 
-	// The wrapper that contains the Amazon Web Services accounts and services that
+	//  The wrapper that contains the Amazon Web Services accounts and services that
 	// are in scope for the assessment.
 	//
 	// This member is required.
 	Scope *types.Scope
 
-	// The optional description of the assessment to be created.
+	//  The optional description of the assessment to be created.
 	Description *string
 
-	// The tags that are associated with the assessment.
+	//  The tags that are associated with the assessment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -67,7 +67,7 @@ type CreateAssessmentInput struct {
 
 type CreateAssessmentOutput struct {
 
-	// An entity that defines the scope of audit evidence collected by Audit Manager.
+	//  An entity that defines the scope of audit evidence collected by Audit Manager.
 	// An Audit Manager assessment is an implementation of an Audit Manager framework.
 	Assessment *types.Assessment
 

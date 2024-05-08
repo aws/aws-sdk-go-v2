@@ -45,8 +45,11 @@ type DescribeTaskInput struct {
 type DescribeTaskOutput struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring
-	// your task. For more information, see Monitoring DataSync with Amazon CloudWatch (https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html)
-	// .
+	// your task.
+	//
+	// For more information, see [Monitoring DataSync with Amazon CloudWatch].
+	//
+	// [Monitoring DataSync with Amazon CloudWatch]: https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html
 	CloudWatchLogGroupArn *string
 
 	// The time that the task was created.
@@ -58,38 +61,41 @@ type DescribeTaskOutput struct {
 	// The ARN of your transfer's destination location.
 	DestinationLocationArn *string
 
-	// The ARNs of the network interfaces (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
-	// that DataSync created for your destination location.
+	// The ARNs of the [network interfaces] that DataSync created for your destination location.
+	//
+	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
 	DestinationNetworkInterfaceArns []string
 
 	// If there's an issue with your task, you can use the error code to help you
-	// troubleshoot the problem. For more information, see Troubleshooting issues with
-	// DataSync transfers (https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html)
-	// .
+	// troubleshoot the problem. For more information, see [Troubleshooting issues with DataSync transfers].
+	//
+	// [Troubleshooting issues with DataSync transfers]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
 	ErrorCode *string
 
 	// If there's an issue with your task, you can use the error details to help you
-	// troubleshoot the problem. For more information, see Troubleshooting issues with
-	// DataSync transfers (https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html)
-	// .
+	// troubleshoot the problem. For more information, see [Troubleshooting issues with DataSync transfers].
+	//
+	// [Troubleshooting issues with DataSync transfers]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
 	ErrorDetail *string
 
 	// The exclude filters that define the files, objects, and folders in your source
 	// location that you don't want DataSync to transfer. For more information and
-	// examples, see Specifying what DataSync transfers by using filters (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
-	// .
+	// examples, see [Specifying what DataSync transfers by using filters].
+	//
+	// [Specifying what DataSync transfers by using filters]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Excludes []types.FilterRule
 
 	// The include filters that define the files, objects, and folders in your source
 	// location that you want DataSync to transfer. For more information and examples,
-	// see Specifying what DataSync transfers by using filters (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
-	// .
+	// see [Specifying what DataSync transfers by using filters].
+	//
+	// [Specifying what DataSync transfers by using filters]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Includes []types.FilterRule
 
 	// The configuration of the manifest that lists the files or objects that you want
-	// DataSync to transfer. For more information, see Specifying what DataSync
-	// transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
-	// .
+	// DataSync to transfer. For more information, see [Specifying what DataSync transfers by using a manifest].
+	//
+	// [Specifying what DataSync transfers by using a manifest]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
 	ManifestConfig *types.ManifestConfig
 
 	// The name of your task.
@@ -100,34 +106,36 @@ type DescribeTaskOutput struct {
 	// other options.
 	Options *types.Options
 
-	// The schedule for when you want your task to run. For more information, see
-	// Scheduling your task (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
-	// .
+	// The schedule for when you want your task to run. For more information, see [Scheduling your task].
+	//
+	// [Scheduling your task]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
 	Schedule *types.TaskSchedule
 
-	// The details about your task schedule (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
-	// .
+	// The details about your [task schedule].
+	//
+	// [task schedule]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
 	ScheduleDetails *types.TaskScheduleDetails
 
 	// The ARN of your transfer's source location.
 	SourceLocationArn *string
 
-	// The ARNs of the network interfaces (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
-	// that DataSync created for your source location.
+	// The ARNs of the [network interfaces] that DataSync created for your source location.
+	//
+	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
 	SourceNetworkInterfaceArns []string
 
-	// The status of your task. For information about what each status means, see Task
-	// statuses (https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-creation-statuses)
-	// .
+	// The status of your task. For information about what each status means, see [Task statuses].
+	//
+	// [Task statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-creation-statuses
 	Status types.TaskStatus
 
 	// The ARN of your task.
 	TaskArn *string
 
 	// The configuration of your task report, which provides detailed information
-	// about your DataSync transfer. For more information, see Monitoring your
-	// DataSync transfers with task reports (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
-	// .
+	// about your DataSync transfer. For more information, see [Monitoring your DataSync transfers with task reports].
+	//
+	// [Monitoring your DataSync transfers with task reports]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
 	TaskReportConfig *types.TaskReportConfig
 
 	// Metadata pertaining to the operation's result.

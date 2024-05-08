@@ -18,24 +18,31 @@ import (
 // Agentless Collector or Application Discovery Agent. This gives you the option to
 // perform migration assessment and planning directly from your imported data,
 // including the ability to group your devices as applications and track their
-// migration status. To start an import request, do this:
+// migration status.
+//
+// To start an import request, do this:
+//
 //   - Download the specially formatted comma separated value (CSV) import
-//     template, which you can find here:
-//     https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv (https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv)
-//     .
+//     template, which you can find here: [https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv].
+//
 //   - Fill out the template with your server and application data.
+//
 //   - Upload your import file to an Amazon S3 bucket, and make a note of it's
 //     Object URL. Your import file must be in the CSV format.
+//
 //   - Use the console or the StartImportTask command with the Amazon Web Services
 //     CLI or one of the Amazon Web Services SDKs to import the records from your file.
 //
-// For more information, including step-by-step procedures, see Migration Hub
-// Import (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html)
-// in the Amazon Web Services Application Discovery Service User Guide. There are
-// limits to the number of import tasks you can create (and delete) in an Amazon
-// Web Services account. For more information, see Amazon Web Services Application
-// Discovery Service Limits (https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html)
-// in the Amazon Web Services Application Discovery Service User Guide.
+// For more information, including step-by-step procedures, see [Migration Hub Import] in the Amazon Web
+// Services Application Discovery Service User Guide.
+//
+// There are limits to the number of import tasks you can create (and delete) in
+// an Amazon Web Services account. For more information, see [Amazon Web Services Application Discovery Service Limits]in the Amazon Web
+// Services Application Discovery Service User Guide.
+//
+// [Amazon Web Services Application Discovery Service Limits]: https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html
+// [https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv]: https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
+// [Migration Hub Import]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html
 func (c *Client) StartImportTask(ctx context.Context, params *StartImportTaskInput, optFns ...func(*Options)) (*StartImportTaskOutput, error) {
 	if params == nil {
 		params = &StartImportTaskInput{}
@@ -53,8 +60,9 @@ func (c *Client) StartImportTask(ctx context.Context, params *StartImportTaskInp
 
 type StartImportTaskInput struct {
 
-	// The URL for your import file that you've uploaded to Amazon S3. If you're using
-	// the Amazon Web Services CLI, this URL is structured as follows:
+	// The URL for your import file that you've uploaded to Amazon S3.
+	//
+	// If you're using the Amazon Web Services CLI, this URL is structured as follows:
 	// s3://BucketName/ImportFileName.CSV
 	//
 	// This member is required.
@@ -70,9 +78,11 @@ type StartImportTaskInput struct {
 
 	// Optional. A unique token that you can provide to prevent the same import
 	// request from occurring more than once. If you don't provide a token, a token is
-	// automatically generated. Sending more than one StartImportTask request with the
-	// same client request token will return information about the original import task
-	// with that client request token.
+	// automatically generated.
+	//
+	// Sending more than one StartImportTask request with the same client request
+	// token will return information about the original import task with that client
+	// request token.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

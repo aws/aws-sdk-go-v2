@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Describes an existing import job. Poll job descriptions after starting a job to
-// know when it has succeeded or failed. Job descriptions are available for 14 days
-// after job starts.
+// Describes an existing import job.
+//
+// Poll job descriptions after starting a job to know when it has succeeded or
+// failed. Job descriptions are available for 14 days after job starts.
 func (c *Client) DescribeAssetBundleImportJob(ctx context.Context, params *DescribeAssetBundleImportJobInput, optFns ...func(*Options)) (*DescribeAssetBundleImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeAssetBundleImportJobInput{}
@@ -66,20 +67,26 @@ type DescribeAssetBundleImportJobOutput struct {
 	CreatedTime *time.Time
 
 	// An array of error records that describes any failures that occurred during the
-	// export job processing. Error records accumulate while the job is still running.
-	// The complete set of error records is available after the job has completed and
-	// failed.
+	// export job processing.
+	//
+	// Error records accumulate while the job is still running. The complete set of
+	// error records is available after the job has completed and failed.
 	Errors []types.AssetBundleImportJobError
 
 	// The failure action for the import job.
 	FailureAction types.AssetBundleImportFailureAction
 
-	// Indicates the status of a job through its queuing and execution. Poll the
-	// DescribeAssetBundleImport API until JobStatus returns one of the following
-	// values:
+	// Indicates the status of a job through its queuing and execution.
+	//
+	// Poll the DescribeAssetBundleImport API until JobStatus returns one of the
+	// following values:
+	//
 	//   - SUCCESSFUL
+	//
 	//   - FAILED
+	//
 	//   - FAILED_ROLLBACK_COMPLETED
+	//
 	//   - FAILED_ROLLBACK_ERROR
 	JobStatus types.AssetBundleImportJobStatus
 
@@ -102,9 +109,10 @@ type DescribeAssetBundleImportJobOutput struct {
 	RequestId *string
 
 	// An array of error records that describes any failures that occurred while an
-	// import job was attempting a rollback. Error records accumulate while the job is
-	// still running. The complete set of error records is available after the job has
-	// completed and failed.
+	// import job was attempting a rollback.
+	//
+	// Error records accumulate while the job is still running. The complete set of
+	// error records is available after the job has completed and failed.
 	RollbackErrors []types.AssetBundleImportJobError
 
 	// The HTTP status of the response.

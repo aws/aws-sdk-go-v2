@@ -67,8 +67,9 @@ type DeadLetterConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the Amazon ECS RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html)
-// API operation.
+// The templated target type for the Amazon ECS [RunTask]RunTask API operation.
+//
+// [RunTask]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
 type EcsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the task definition to use if the event
@@ -81,8 +82,9 @@ type EcsParameters struct {
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
-	// information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
-	// in the Amazon ECS Developer Guide.
+	// information, see [Tagging Your Amazon ECS Resources]in the Amazon ECS Developer Guide.
+	//
+	// [Tagging Your Amazon ECS Resources]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
 	EnableECSManagedTags *bool
 
 	// Whether or not to enable the execute command functionality for the containers
@@ -96,9 +98,10 @@ type EcsParameters struct {
 	// Specifies the launch type on which your task is running. The launch type that
 	// you specify here must match one of the launch type (compatibilities) of the
 	// target task. The FARGATE value is supported only in the Regions where Fargate
-	// with Amazon ECS is supported. For more information, see AWS Fargate on Amazon
-	// ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html)
-	// in the Amazon ECS Developer Guide.
+	// with Amazon ECS is supported. For more information, see [AWS Fargate on Amazon ECS]in the Amazon ECS
+	// Developer Guide.
+	//
+	// [AWS Fargate on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
 	LaunchType LaunchType
 
 	// This structure specifies the network configuration for an ECS task.
@@ -119,8 +122,9 @@ type EcsParameters struct {
 	// Specifies whether to propagate the tags from the task definition to the task.
 	// If no value is specified, the tags are not propagated. Tags can only be
 	// propagated to the task during task creation. To add tags to a task after task
-	// creation, use Amazon ECS's TagResource (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html)
-	// API action.
+	// creation, use Amazon ECS's [TagResource]TagResource API action.
+	//
+	// [TagResource]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
 	PropagateTags PropagateTags
 
 	// The reference ID to use for the task.
@@ -128,8 +132,9 @@ type EcsParameters struct {
 
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
-	// define. For more information, see RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html)
-	// in the Amazon ECS API Reference.
+	// define. For more information, see [RunTask]RunTask in the Amazon ECS API Reference.
+	//
+	// [RunTask]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
 	Tags []map[string]string
 
 	// The number of tasks to create based on TaskDefinition . The default is 1 .
@@ -138,8 +143,9 @@ type EcsParameters struct {
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the EventBridge PutEvents (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
-// API operation.
+// The templated target type for the EventBridge [PutEvents]PutEvents API operation.
+//
+// [PutEvents]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html
 type EventBridgeParameters struct {
 
 	// A free-form string, with a maximum of 128 characters, used to decide what
@@ -171,12 +177,13 @@ type FlexibleTimeWindow struct {
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the Amazon Kinesis PutRecord API operation.
+// The templated target type for the Amazon Kinesis PutRecordPutRecord API operation.
 type KinesisParameters struct {
 
 	// Specifies the shard to which EventBridge Scheduler sends the event. For more
-	// information, see Amazon Kinesis Data Streams terminology and concepts (https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html)
-	// in the Amazon Kinesis Streams Developer Guide.
+	// information, see [Amazon Kinesis Data Streams terminology and concepts]in the Amazon Kinesis Streams Developer Guide.
+	//
+	// [Amazon Kinesis Data Streams terminology and concepts]: https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html
 	//
 	// This member is required.
 	PartitionKey *string
@@ -200,8 +207,9 @@ type PlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. You cannot
 	// specify an expression if the constraint type is distinctInstance . For more
-	// information, see Cluster query language (https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html)
-	// in the Amazon ECS Developer Guide.
+	// information, see [Cluster query language]in the Amazon ECS Developer Guide.
+	//
+	// [Cluster query language]: https://docs.aws.amazon.com/latest/developerguide/cluster-query-language.html
 	Expression *string
 
 	// The type of constraint. Use distinctInstance to ensure that each task in a
@@ -269,8 +277,10 @@ type SageMakerPipelineParameter struct {
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the Amazon SageMaker StartPipelineExecution (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html)
-// API operation.
+// The templated target type for the Amazon SageMaker [StartPipelineExecution]StartPipelineExecution API
+// operation.
+//
+// [StartPipelineExecution]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html
 type SageMakerPipelineParameters struct {
 
 	// List of parameter names and values to use when executing the SageMaker Model
@@ -328,12 +338,14 @@ type ScheduleSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The templated target type for the Amazon SQS SendMessage (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
-// API operation. Contains the message group ID to use when the target is a FIFO
-// queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have
-// content-based deduplication enabled. For more information, see Using the Amazon
-// SQS message deduplication ID (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
-// in the Amazon SQS Developer Guide.
+// The templated target type for the Amazon SQS [SendMessage]SendMessage API operation.
+// Contains the message group ID to use when the target is a FIFO queue. If you
+// specify an Amazon SQS FIFO queue as a target, the queue must have content-based
+// deduplication enabled. For more information, see [Using the Amazon SQS message deduplication ID]in the Amazon SQS Developer
+// Guide.
+//
+// [Using the Amazon SQS message deduplication ID]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html
+// [SendMessage]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html
 type SqsParameters struct {
 
 	// The FIFO message group ID to use as the target.
@@ -381,12 +393,14 @@ type Target struct {
 	// delivered to a target to the queue.
 	DeadLetterConfig *DeadLetterConfig
 
-	// The templated target type for the Amazon ECS RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html)
-	// API operation.
+	// The templated target type for the Amazon ECS [RunTask]RunTask API operation.
+	//
+	// [RunTask]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
 	EcsParameters *EcsParameters
 
-	// The templated target type for the EventBridge PutEvents (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
-	// API operation.
+	// The templated target type for the EventBridge [PutEvents]PutEvents API operation.
+	//
+	// [PutEvents]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html
 	EventBridgeParameters *EventBridgeParameters
 
 	// The text, or well-formed JSON, passed to the target. If you are configuring a
@@ -396,7 +410,7 @@ type Target struct {
 	// default notification to the target.
 	Input *string
 
-	// The templated target type for the Amazon Kinesis PutRecord API operation.
+	// The templated target type for the Amazon Kinesis PutRecordPutRecord API operation.
 	KinesisParameters *KinesisParameters
 
 	// A RetryPolicy object that includes information about the retry policy settings,
@@ -404,16 +418,20 @@ type Target struct {
 	// EventBridge Scheduler will try to deliver the event to a target.
 	RetryPolicy *RetryPolicy
 
-	// The templated target type for the Amazon SageMaker StartPipelineExecution (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html)
-	// API operation.
+	// The templated target type for the Amazon SageMaker [StartPipelineExecution]StartPipelineExecution API
+	// operation.
+	//
+	// [StartPipelineExecution]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StartPipelineExecution.html
 	SageMakerPipelineParameters *SageMakerPipelineParameters
 
-	// The templated target type for the Amazon SQS SendMessage (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html)
-	// API operation. Contains the message group ID to use when the target is a FIFO
-	// queue. If you specify an Amazon SQS FIFO queue as a target, the queue must have
-	// content-based deduplication enabled. For more information, see Using the Amazon
-	// SQS message deduplication ID (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
-	// in the Amazon SQS Developer Guide.
+	// The templated target type for the Amazon SQS [SendMessage]SendMessage API operation.
+	// Contains the message group ID to use when the target is a FIFO queue. If you
+	// specify an Amazon SQS FIFO queue as a target, the queue must have content-based
+	// deduplication enabled. For more information, see [Using the Amazon SQS message deduplication ID]in the Amazon SQS Developer
+	// Guide.
+	//
+	// [Using the Amazon SQS message deduplication ID]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html
+	// [SendMessage]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html
 	SqsParameters *SqsParameters
 
 	noSmithyDocumentSerde

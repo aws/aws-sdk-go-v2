@@ -11,13 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new view with the possible status of SAVED or PUBLISHED . The views
-// will have a unique name for each connect instance. It performs basic content
-// validation if the status is SAVED or full content validation if the status is
-// set to PUBLISHED . An error is returned if validation fails. It associates
-// either the $SAVED qualifier or both of the $SAVED and $LATEST qualifiers with
-// the provided view content based on the status. The view is idempotent if
-// ClientToken is provided.
+// Creates a new view with the possible status of SAVED or PUBLISHED .
+//
+// The views will have a unique name for each connect instance.
+//
+// It performs basic content validation if the status is SAVED or full content
+// validation if the status is set to PUBLISHED . An error is returned if
+// validation fails. It associates either the $SAVED qualifier or both of the
+// $SAVED and $LATEST qualifiers with the provided view content based on the
+// status. The view is idempotent if ClientToken is provided.
 func (c *Client) CreateView(ctx context.Context, params *CreateViewInput, optFns ...func(*Options)) (*CreateViewOutput, error) {
 	if params == nil {
 		params = &CreateViewInput{}
@@ -36,8 +38,9 @@ func (c *Client) CreateView(ctx context.Context, params *CreateViewInput, optFns
 type CreateViewInput struct {
 
 	// View content containing all content necessary to render a view except for
-	// runtime input data. The total uncompressed content has a maximum file size of
-	// 400kB.
+	// runtime input data.
+	//
+	// The total uncompressed content has a maximum file size of 400kB.
 	//
 	// This member is required.
 	Content *types.ViewInputContent

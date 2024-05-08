@@ -47,11 +47,14 @@ type GetResourceShareInvitationsInput struct {
 	NextToken *string
 
 	// Specifies that you want details about invitations only for the resource shares
-	// described by this list of Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// described by this list of [Amazon Resource Names (ARNs)]
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArns []string
 
-	// Specifies the Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share invitations you want information about.
+	// Specifies the [Amazon Resource Names (ARNs)] of the resource share invitations you want information about.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareInvitationArns []string
 
 	noSmithyDocumentSerde

@@ -443,12 +443,18 @@ type IncidentRecord struct {
 	// This member is required.
 	DedupeString *string
 
-	// The impact of the incident on customers and applications. Supported impact
-	// codes
+	// The impact of the incident on customers and applications.
+	//
+	// Supported impact codes
+	//
 	//   - 1 - Critical
+	//
 	//   - 2 - High
+	//
 	//   - 3 - Medium
+	//
 	//   - 4 - Low
+	//
 	//   - 5 - No Impact
 	//
 	// This member is required.
@@ -569,12 +575,18 @@ type IncidentRecordSummary struct {
 // to create an incident record.
 type IncidentTemplate struct {
 
-	// The impact of the incident on your customers and applications. Supported impact
-	// codes
+	// The impact of the incident on your customers and applications.
+	//
+	// Supported impact codes
+	//
 	//   - 1 - Critical
+	//
 	//   - 2 - High
+	//
 	//   - 3 - Medium
+	//
 	//   - 4 - Low
+	//
 	//   - 5 - No Impact
 	//
 	// This member is required.
@@ -586,15 +598,18 @@ type IncidentTemplate struct {
 	Title *string
 
 	// The string Incident Manager uses to prevent the same root cause from creating
-	// multiple incidents in the same account. A deduplication string is a term or
-	// phrase the system uses to check for duplicate incidents. If you specify a
-	// deduplication string, Incident Manager searches for open incidents that contain
-	// the same string in the dedupeString field when it creates the incident. If a
-	// duplicate is detected, Incident Manager deduplicates the newer incident into the
-	// existing incident. By default, Incident Manager automatically deduplicates
-	// multiple incidents created by the same Amazon CloudWatch alarm or Amazon
-	// EventBridge event. You don't have to enter your own deduplication string to
-	// prevent duplication for these resource types.
+	// multiple incidents in the same account.
+	//
+	// A deduplication string is a term or phrase the system uses to check for
+	// duplicate incidents. If you specify a deduplication string, Incident Manager
+	// searches for open incidents that contain the same string in the dedupeString
+	// field when it creates the incident. If a duplicate is detected, Incident Manager
+	// deduplicates the newer incident into the existing incident.
+	//
+	// By default, Incident Manager automatically deduplicates multiple incidents
+	// created by the same Amazon CloudWatch alarm or Amazon EventBridge event. You
+	// don't have to enter your own deduplication string to prevent duplication for
+	// these resource types.
 	DedupeString *string
 
 	// Tags to assign to the template. When the StartIncident API action is called,
@@ -812,8 +827,10 @@ type RelatedItem struct {
 	// This member is required.
 	Identifier *ItemIdentifier
 
-	// A unique ID for a RelatedItem . Don't specify this parameter when you add a
-	// RelatedItem by using the UpdateRelatedItems API action.
+	// A unique ID for a RelatedItem .
+	//
+	// Don't specify this parameter when you add a RelatedItem by using the UpdateRelatedItems API
+	// action.
 	GeneratedId *string
 
 	// The title of the related item.

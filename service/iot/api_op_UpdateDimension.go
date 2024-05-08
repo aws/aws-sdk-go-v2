@@ -13,9 +13,11 @@ import (
 )
 
 // Updates the definition for a dimension. You cannot change the type of a
-// dimension after it is created (you can delete it and recreate it). Requires
-// permission to access the UpdateDimension (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// dimension after it is created (you can delete it and recreate it).
+//
+// Requires permission to access the [UpdateDimension] action.
+//
+// [UpdateDimension]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateDimension(ctx context.Context, params *UpdateDimensionInput, optFns ...func(*Options)) (*UpdateDimensionOutput, error) {
 	if params == nil {
 		params = &UpdateDimensionInput{}

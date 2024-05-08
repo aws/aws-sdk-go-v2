@@ -71,9 +71,13 @@ type GetDomainOutput struct {
 	// Customer Profiles starts a weekly batch process called Identity Resolution Job.
 	// If you do not specify a date and time for Identity Resolution Job to run, by
 	// default it runs every Saturday at 12AM UTC to detect duplicate profiles in your
-	// domains. After the Identity Resolution Job completes, use the GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-	// API to return and review the results. Or, if you have configured ExportingConfig
-	// in the MatchingRequest , you can download the results from S3.
+	// domains.
+	//
+	// After the Identity Resolution Job completes, use the [GetMatches] API to return and review
+	// the results. Or, if you have configured ExportingConfig in the MatchingRequest ,
+	// you can download the results from S3.
+	//
+	// [GetMatches]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
 	Matching *types.MatchingResponse
 
 	// The process of matching duplicate profiles using the Rule-Based matching. If

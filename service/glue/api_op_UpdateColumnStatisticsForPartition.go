@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates partition statistics of columns. The Identity and Access
-// Management (IAM) permission required for this operation is UpdatePartition .
+// Creates or updates partition statistics of columns.
+//
+// The Identity and Access Management (IAM) permission required for this operation
+// is UpdatePartition .
 func (c *Client) UpdateColumnStatisticsForPartition(ctx context.Context, params *UpdateColumnStatisticsForPartitionInput, optFns ...func(*Options)) (*UpdateColumnStatisticsForPartitionOutput, error) {
 	if params == nil {
 		params = &UpdateColumnStatisticsForPartitionInput{}

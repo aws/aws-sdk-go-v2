@@ -11,8 +11,10 @@ import (
 )
 
 // Creates a client-add-in for Amazon Connect within a directory. You can create
-// only one Amazon Connect client add-in within a directory. This client add-in
-// allows WorkSpaces users to seamlessly connect to Amazon Connect.
+// only one Amazon Connect client add-in within a directory.
+//
+// This client add-in allows WorkSpaces users to seamlessly connect to Amazon
+// Connect.
 func (c *Client) CreateConnectClientAddIn(ctx context.Context, params *CreateConnectClientAddInInput, optFns ...func(*Options)) (*CreateConnectClientAddInOutput, error) {
 	if params == nil {
 		params = &CreateConnectClientAddInInput{}

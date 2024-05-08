@@ -12,9 +12,13 @@ import (
 	"time"
 )
 
-// Lists mitigation actions executions for a Device Defender ML Detect Security
-// Profile. Requires permission to access the ListDetectMitigationActionsExecutions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Lists mitigation actions executions for a Device Defender ML Detect Security
+//
+// Profile.
+//
+// Requires permission to access the [ListDetectMitigationActionsExecutions] action.
+//
+// [ListDetectMitigationActionsExecutions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListDetectMitigationActionsExecutions(ctx context.Context, params *ListDetectMitigationActionsExecutionsInput, optFns ...func(*Options)) (*ListDetectMitigationActionsExecutionsOutput, error) {
 	if params == nil {
 		params = &ListDetectMitigationActionsExecutionsInput{}
@@ -32,27 +36,27 @@ func (c *Client) ListDetectMitigationActionsExecutions(ctx context.Context, para
 
 type ListDetectMitigationActionsExecutionsInput struct {
 
-	// The end of the time period for which ML Detect mitigation actions executions
+	//  The end of the time period for which ML Detect mitigation actions executions
 	// are returned.
 	EndTime *time.Time
 
-	// The maximum number of results to return at one time. The default is 25.
+	//  The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
 
-	// The token for the next set of results.
+	//  The token for the next set of results.
 	NextToken *string
 
-	// A filter to limit results to those found after the specified time. You must
+	//  A filter to limit results to those found after the specified time. You must
 	// specify either the startTime and endTime or the taskId, but not both.
 	StartTime *time.Time
 
-	// The unique identifier of the task.
+	//  The unique identifier of the task.
 	TaskId *string
 
-	// The name of the thing whose mitigation actions are listed.
+	//  The name of the thing whose mitigation actions are listed.
 	ThingName *string
 
-	// The unique identifier of the violation.
+	//  The unique identifier of the violation.
 	ViolationId *string
 
 	noSmithyDocumentSerde
@@ -60,10 +64,10 @@ type ListDetectMitigationActionsExecutionsInput struct {
 
 type ListDetectMitigationActionsExecutionsOutput struct {
 
-	// List of actions executions.
+	//  List of actions executions.
 	ActionsExecutions []types.DetectMitigationActionExecution
 
-	// A token that can be used to retrieve the next set of results, or null if there
+	//  A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
 
@@ -160,7 +164,7 @@ var _ ListDetectMitigationActionsExecutionsAPIClient = (*Client)(nil)
 // ListDetectMitigationActionsExecutionsPaginatorOptions is the paginator options
 // for ListDetectMitigationActionsExecutions
 type ListDetectMitigationActionsExecutionsPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25.
+	//  The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

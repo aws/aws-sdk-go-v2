@@ -75,8 +75,9 @@ type ListRecommendedIntentsOutput struct {
 	BotVersion *string
 
 	// The identifier of the language and locale of the intents to list. The string
-	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
+	// must match one of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	LocaleId *string
 
 	// A token that indicates whether there are more results to return in a response

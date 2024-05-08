@@ -36,13 +36,13 @@ type ListJobTemplatesInput struct {
 	// The date and time after which the job templates were created.
 	CreatedAfter *time.Time
 
-	// The date and time before which the job templates were created.
+	//  The date and time before which the job templates were created.
 	CreatedBefore *time.Time
 
-	// The maximum number of job templates that can be listed.
+	//  The maximum number of job templates that can be listed.
 	MaxResults *int32
 
-	// The token for the next set of job templates to return.
+	//  The token for the next set of job templates to return.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,7 +50,7 @@ type ListJobTemplatesInput struct {
 
 type ListJobTemplatesOutput struct {
 
-	// This output displays the token for the next set of job templates.
+	//  This output displays the token for the next set of job templates.
 	NextToken *string
 
 	// This output lists information about the specified job templates.
@@ -148,7 +148,7 @@ var _ ListJobTemplatesAPIClient = (*Client)(nil)
 
 // ListJobTemplatesPaginatorOptions is the paginator options for ListJobTemplates
 type ListJobTemplatesPaginatorOptions struct {
-	// The maximum number of job templates that can be listed.
+	//  The maximum number of job templates that can be listed.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

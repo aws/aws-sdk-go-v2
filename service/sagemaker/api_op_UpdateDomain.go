@@ -35,9 +35,12 @@ type UpdateDomainInput struct {
 	DomainId *string
 
 	// Specifies the VPC used for non-EFS traffic.
+	//
 	//   - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon
 	//   SageMaker, which allows direct internet access.
+	//
 	//   - VpcOnly - All Studio traffic is through the specified VPC and subnets.
+	//
 	// This configuration can only be modified if there are no apps in the InService ,
 	// Pending , or Deleting state. The configuration cannot be updated if
 	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is already
@@ -62,8 +65,10 @@ type UpdateDomainInput struct {
 	// A collection of DomainSettings configuration values to update.
 	DomainSettingsForUpdate *types.DomainSettingsForUpdate
 
-	// The VPC subnets that Studio uses for communication. If removing subnets, ensure
-	// there are no apps in the InService , Pending , or Deleting state.
+	// The VPC subnets that Studio uses for communication.
+	//
+	// If removing subnets, ensure there are no apps in the InService , Pending , or
+	// Deleting state.
 	SubnetIds []string
 
 	noSmithyDocumentSerde

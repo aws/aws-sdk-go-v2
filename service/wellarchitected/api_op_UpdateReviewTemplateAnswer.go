@@ -29,13 +29,19 @@ func (c *Client) UpdateReviewTemplateAnswer(ctx context.Context, params *UpdateR
 
 type UpdateReviewTemplateAnswerInput struct {
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAlias *string
@@ -56,15 +62,18 @@ type UpdateReviewTemplateAnswerInput struct {
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable *bool
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// The update reason.
 	Reason types.AnswerReason
 
-	// List of selected choice IDs in a question answer. The values entered replace
-	// the previously selected choices.
+	// List of selected choice IDs in a question answer.
+	//
+	// The values entered replace the previously selected choices.
 	SelectedChoices []string
 
 	noSmithyDocumentSerde
@@ -75,13 +84,19 @@ type UpdateReviewTemplateAnswerOutput struct {
 	// An answer of the question.
 	Answer *types.ReviewTemplateAnswer
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The review template ARN.

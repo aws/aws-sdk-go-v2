@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of DataIntegrations in the account. You cannot create
-// a DataIntegration association for a DataIntegration that has been previously
-// associated. Use a different DataIntegration, or recreate the DataIntegration
-// using the CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
-// API.
+// Returns a paginated list of DataIntegrations in the account.
+//
+// You cannot create a DataIntegration association for a DataIntegration that has
+// been previously associated. Use a different DataIntegration, or recreate the
+// DataIntegration using the [CreateDataIntegration]API.
+//
+// [CreateDataIntegration]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
 func (c *Client) ListDataIntegrations(ctx context.Context, params *ListDataIntegrationsInput, optFns ...func(*Options)) (*ListDataIntegrationsOutput, error) {
 	if params == nil {
 		params = &ListDataIntegrationsInput{}

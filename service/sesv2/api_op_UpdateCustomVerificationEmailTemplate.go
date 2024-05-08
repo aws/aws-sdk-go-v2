@@ -10,11 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing custom verification email template. For more information
-// about custom verification email templates, see Using custom verification email
-// templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
-// in the Amazon SES Developer Guide. You can execute this operation no more than
-// once per second.
+// Updates an existing custom verification email template.
+//
+// For more information about custom verification email templates, see [Using custom verification email templates] in the
+// Amazon SES Developer Guide.
+//
+// You can execute this operation no more than once per second.
+//
+// [Using custom verification email templates]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
 func (c *Client) UpdateCustomVerificationEmailTemplate(ctx context.Context, params *UpdateCustomVerificationEmailTemplateInput, optFns ...func(*Options)) (*UpdateCustomVerificationEmailTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateCustomVerificationEmailTemplateInput{}
@@ -52,8 +55,9 @@ type UpdateCustomVerificationEmailTemplateInput struct {
 
 	// The content of the custom verification email. The total size of the email must
 	// be less than 10 MB. The message body may contain HTML, with some limitations.
-	// For more information, see Custom verification email frequently asked questions (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq)
-	// in the Amazon SES Developer Guide.
+	// For more information, see [Custom verification email frequently asked questions]in the Amazon SES Developer Guide.
+	//
+	// [Custom verification email frequently asked questions]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom-faq
 	//
 	// This member is required.
 	TemplateContent *string

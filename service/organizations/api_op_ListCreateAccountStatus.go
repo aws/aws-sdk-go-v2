@@ -12,13 +12,16 @@ import (
 )
 
 // Lists the account creation requests that match the specified status that is
-// currently being tracked for the organization. Always check the NextToken
-// response parameter for a null value when calling a List* operation. These
-// operations can occasionally return an empty set of results even when there are
-// more results available. The NextToken response parameter value is null only
-// when there are no more results to display. This operation can be called only
-// from the organization's management account or by a member account that is a
-// delegated administrator for an Amazon Web Services service.
+// currently being tracked for the organization.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// List* operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) ListCreateAccountStatus(ctx context.Context, params *ListCreateAccountStatusInput, optFns ...func(*Options)) (*ListCreateAccountStatusOutput, error) {
 	if params == nil {
 		params = &ListCreateAccountStatusInput{}

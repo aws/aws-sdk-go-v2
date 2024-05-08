@@ -11,11 +11,14 @@ import (
 )
 
 // Deletes a delivery destination. A delivery is a connection between a logical
-// delivery source and a logical delivery destination. You can't delete a delivery
-// destination if any current deliveries are associated with it. To find whether
-// any deliveries are associated with this delivery destination, use the
-// DescribeDeliveries (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html)
-// operation and check the deliveryDestinationArn field in the results.
+// delivery source and a logical delivery destination.
+//
+// You can't delete a delivery destination if any current deliveries are
+// associated with it. To find whether any deliveries are associated with this
+// delivery destination, use the [DescribeDeliveries]operation and check the deliveryDestinationArn
+// field in the results.
+//
+// [DescribeDeliveries]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
 func (c *Client) DeleteDeliveryDestination(ctx context.Context, params *DeleteDeliveryDestinationInput, optFns ...func(*Options)) (*DeleteDeliveryDestinationOutput, error) {
 	if params == nil {
 		params = &DeleteDeliveryDestinationInput{}
@@ -34,8 +37,9 @@ func (c *Client) DeleteDeliveryDestination(ctx context.Context, params *DeleteDe
 type DeleteDeliveryDestinationInput struct {
 
 	// The name of the delivery destination that you want to delete. You can find a
-	// list of delivery destionation names by using the DescribeDeliveryDestinations (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveryDestinations.html)
-	// operation.
+	// list of delivery destionation names by using the [DescribeDeliveryDestinations]operation.
+	//
+	// [DescribeDeliveryDestinations]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveryDestinations.html
 	//
 	// This member is required.
 	Name *string

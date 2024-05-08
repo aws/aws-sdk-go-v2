@@ -12,6 +12,7 @@ import (
 )
 
 // Retrieves a list of all reports and their configurations for your AWS account.
+//
 // The maximum number of reports is one.
 func (c *Client) ListReportDefinitions(ctx context.Context, params *ListReportDefinitionsInput, optFns ...func(*Options)) (*ListReportDefinitionsOutput, error) {
 	if params == nil {

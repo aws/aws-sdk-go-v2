@@ -30,28 +30,31 @@ func (c *Client) GetECSServiceRecommendationProjectedMetrics(ctx context.Context
 
 type GetECSServiceRecommendationProjectedMetricsInput struct {
 
-	// The timestamp of the last projected metrics data point to return.
+	//  The timestamp of the last projected metrics data point to return.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The granularity, in seconds, of the projected metrics data points.
+	//  The granularity, in seconds, of the projected metrics data points.
 	//
 	// This member is required.
 	Period int32
 
-	// The ARN that identifies the Amazon ECS service. The following is the format of
-	// the ARN: arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
+	//  The ARN that identifies the Amazon ECS service.
+	//
+	// The following is the format of the ARN:
+	//
+	//     arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
 	//
 	// This member is required.
 	ServiceArn *string
 
-	// The timestamp of the first projected metrics data point to return.
+	//  The timestamp of the first projected metrics data point to return.
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// The statistic of the projected metrics.
+	//  The statistic of the projected metrics.
 	//
 	// This member is required.
 	Stat types.MetricStatistic
@@ -61,7 +64,7 @@ type GetECSServiceRecommendationProjectedMetricsInput struct {
 
 type GetECSServiceRecommendationProjectedMetricsOutput struct {
 
-	// An array of objects that describes the projected metrics.
+	//  An array of objects that describes the projected metrics.
 	RecommendedOptionProjectedMetrics []types.ECSServiceRecommendedOptionProjectedMetric
 
 	// Metadata pertaining to the operation's result.

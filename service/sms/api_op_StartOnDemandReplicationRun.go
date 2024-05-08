@@ -12,8 +12,10 @@ import (
 
 // Starts an on-demand replication run for the specified replication job. This
 // replication run starts immediately. This replication run is in addition to the
-// ones already scheduled. There is a limit on the number of on-demand replications
-// runs that you can request in a 24-hour period.
+// ones already scheduled.
+//
+// There is a limit on the number of on-demand replications runs that you can
+// request in a 24-hour period.
 func (c *Client) StartOnDemandReplicationRun(ctx context.Context, params *StartOnDemandReplicationRunInput, optFns ...func(*Options)) (*StartOnDemandReplicationRunOutput, error) {
 	if params == nil {
 		params = &StartOnDemandReplicationRunInput{}

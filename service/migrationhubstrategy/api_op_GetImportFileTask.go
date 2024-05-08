@@ -30,8 +30,7 @@ func (c *Client) GetImportFileTask(ctx context.Context, params *GetImportFileTas
 
 type GetImportFileTaskInput struct {
 
-	// The ID of the import file task. This ID is returned in the response of
-	// StartImportFileTask .
+	//  The ID of the import file task. This ID is returned in the response of StartImportFileTask.
 	//
 	// This member is required.
 	Id *string
@@ -41,37 +40,37 @@ type GetImportFileTaskInput struct {
 
 type GetImportFileTaskOutput struct {
 
-	// The time that the import task completed.
+	//  The time that the import task completed.
 	CompletionTime *time.Time
 
-	// The import file task id returned in the response of StartImportFileTask .
+	//  The import file task id returned in the response of StartImportFileTask.
 	Id *string
 
-	// The name of the import task given in StartImportFileTask .
+	//  The name of the import task given in StartImportFileTask.
 	ImportName *string
 
-	// The S3 bucket where import file is located.
+	//  The S3 bucket where import file is located.
 	InputS3Bucket *string
 
-	// The Amazon S3 key name of the import file.
+	//  The Amazon S3 key name of the import file.
 	InputS3Key *string
 
-	// The number of records that failed to be imported.
+	//  The number of records that failed to be imported.
 	NumberOfRecordsFailed *int32
 
-	// The number of records successfully imported.
+	//  The number of records successfully imported.
 	NumberOfRecordsSuccess *int32
 
-	// Start time of the import task.
+	//  Start time of the import task.
 	StartTime *time.Time
 
-	// Status of import file task.
+	//  Status of import file task.
 	Status types.ImportFileTaskStatus
 
-	// The S3 bucket name for status report of import task.
+	//  The S3 bucket name for status report of import task.
 	StatusReportS3Bucket *string
 
-	// The Amazon S3 key name for status report of import task. The report contains
+	//  The Amazon S3 key name for status report of import task. The report contains
 	// details about whether each record imported successfully or why it did not.
 	StatusReportS3Key *string
 

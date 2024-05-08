@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a DB subnet group. The specified database subnet group must not be
-// associated with any DB instances.
+// Deletes a DB subnet group.
+//
+// The specified database subnet group must not be associated with any DB
+// instances.
 func (c *Client) DeleteDBSubnetGroup(ctx context.Context, params *DeleteDBSubnetGroupInput, optFns ...func(*Options)) (*DeleteDBSubnetGroupOutput, error) {
 	if params == nil {
 		params = &DeleteDBSubnetGroupInput{}
@@ -29,9 +31,14 @@ func (c *Client) DeleteDBSubnetGroup(ctx context.Context, params *DeleteDBSubnet
 
 type DeleteDBSubnetGroupInput struct {
 
-	// The name of the database subnet group to delete. You can't delete the default
-	// subnet group. Constraints: Must match the name of an existing DBSubnetGroup.
-	// Must not be default. Example: mydbsubnetgroup
+	// The name of the database subnet group to delete.
+	//
+	// You can't delete the default subnet group.
+	//
+	// Constraints: Must match the name of an existing DBSubnetGroup. Must not be
+	// default.
+	//
+	// Example: mydbsubnetgroup
 	//
 	// This member is required.
 	DBSubnetGroupName *string

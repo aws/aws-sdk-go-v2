@@ -12,8 +12,9 @@ import (
 )
 
 // Retrieves the list of key-value tags assigned to the application. For more
-// information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html)
-// .
+// information, see [Using Tagging].
+//
+// [Using Tagging]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

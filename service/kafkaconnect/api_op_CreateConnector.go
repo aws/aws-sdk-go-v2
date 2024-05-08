@@ -68,9 +68,10 @@ type CreateConnectorInput struct {
 
 	// Amazon MSK Connect does not currently support specifying multiple plugins as a
 	// list. To use more than one plugin for your connector, you can create a single
-	// custom plugin using a ZIP file that bundles multiple plugins together. Specifies
-	// which plugin to use for the connector. You must specify a single-element list
-	// containing one customPlugin object.
+	// custom plugin using a ZIP file that bundles multiple plugins together.
+	//
+	// Specifies which plugin to use for the connector. You must specify a
+	// single-element list containing one customPlugin object.
 	//
 	// This member is required.
 	Plugins []types.Plugin

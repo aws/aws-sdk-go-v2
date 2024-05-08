@@ -40,9 +40,13 @@ type PutResolverQueryLogConfigPolicyInput struct {
 	// configurations that you want to share with another Amazon Web Services account
 	// and the operations that you want the account to be able to perform. You can
 	// specify the following operations in the Actions section of the statement:
+	//
 	//   - route53resolver:AssociateResolverQueryLogConfig
+	//
 	//   - route53resolver:DisassociateResolverQueryLogConfig
+	//
 	//   - route53resolver:ListResolverQueryLogConfigs
+	//
 	// In the Resource section of the statement, you specify the ARNs for the query
 	// logging configurations that you want to share with the account that you
 	// specified in Arn .

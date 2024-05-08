@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a search index. Requires permission to access the DescribeIndex (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Describes a search index.
+//
+// Requires permission to access the [DescribeIndex] action.
+//
+// [DescribeIndex]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, optFns ...func(*Options)) (*DescribeIndexOutput, error) {
 	if params == nil {
 		params = &DescribeIndexInput{}
@@ -48,16 +51,22 @@ type DescribeIndexOutput struct {
 
 	// Contains a value that specifies the type of indexing performed. Valid values
 	// are:
+	//
 	//   - REGISTRY – Your thing index contains only registry data.
+	//
 	//   - REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow
 	//   data.
+	//
 	//   - REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data
 	//   and thing connectivity status data.
+	//
 	//   - REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains
 	//   registry data, shadow data, and thing connectivity status data.
+	//
 	//   - MULTI_INDEXING_MODE - Your thing index contains multiple data sources. For
-	//   more information, see GetIndexingConfiguration (https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html)
-	//   .
+	//   more information, see [GetIndexingConfiguration].
+	//
+	// [GetIndexingConfiguration]: https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html
 	Schema *string
 
 	// Metadata pertaining to the operation's result.

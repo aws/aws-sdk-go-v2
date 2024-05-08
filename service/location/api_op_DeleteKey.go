@@ -36,9 +36,14 @@ type DeleteKeyInput struct {
 
 	// ForceDelete bypasses an API key's expiry conditions and deletes the key. Set
 	// the parameter true to delete the key or to false to not preemptively delete the
-	// API key. Valid values: true , or false . Required: No This action is
-	// irreversible. Only use ForceDelete if you are certain the key is no longer in
-	// use.
+	// API key.
+	//
+	// Valid values: true , or false .
+	//
+	// Required: No
+	//
+	// This action is irreversible. Only use ForceDelete if you are certain the key is
+	// no longer in use.
 	ForceDelete *bool
 
 	noSmithyDocumentSerde

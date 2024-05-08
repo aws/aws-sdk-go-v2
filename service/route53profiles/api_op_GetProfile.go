@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specified Route 53 Profile, such as whether whether
-// the Profile is shared, and the current status of the Profile.
+//	Returns information about a specified Route 53 Profile, such as whether
+//
+// whether the Profile is shared, and the current status of the Profile.
 func (c *Client) GetProfile(ctx context.Context, params *GetProfileInput, optFns ...func(*Options)) (*GetProfileOutput, error) {
 	if params == nil {
 		params = &GetProfileInput{}
@@ -30,7 +31,7 @@ func (c *Client) GetProfile(ctx context.Context, params *GetProfileInput, optFns
 
 type GetProfileInput struct {
 
-	// ID of the Profile.
+	//  ID of the Profile.
 	//
 	// This member is required.
 	ProfileId *string
@@ -40,7 +41,7 @@ type GetProfileInput struct {
 
 type GetProfileOutput struct {
 
-	// Information about the Profile, including the status of the Profile.
+	//  Information about the Profile, including the status of the Profile.
 	Profile *types.Profile
 
 	// Metadata pertaining to the operation's result.

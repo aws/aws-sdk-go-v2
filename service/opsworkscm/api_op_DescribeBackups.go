@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes backups. The results are ordered by time, with newest backups first.
+//	Describes backups. The results are ordered by time, with newest backups first.
+//
 // If you do not specify a BackupId or ServerName, the command returns all backups.
-// This operation is synchronous. A ResourceNotFoundException is thrown when the
-// backup does not exist. A ValidationException is raised when parameters of the
-// request are not valid.
+//
+// This operation is synchronous.
+//
+// A ResourceNotFoundException is thrown when the backup does not exist. A
+// ValidationException is raised when parameters of the request are not valid.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}

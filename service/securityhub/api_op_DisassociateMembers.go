@@ -11,8 +11,10 @@ import (
 )
 
 // Disassociates the specified member accounts from the associated administrator
-// account. Can be used to disassociate both accounts that are managed using
-// Organizations and accounts that were invited manually.
+// account.
+//
+// Can be used to disassociate both accounts that are managed using Organizations
+// and accounts that were invited manually.
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
 	if params == nil {
 		params = &DisassociateMembersInput{}

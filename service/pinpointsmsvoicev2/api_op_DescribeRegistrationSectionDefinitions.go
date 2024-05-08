@@ -32,7 +32,7 @@ func (c *Client) DescribeRegistrationSectionDefinitions(ctx context.Context, par
 type DescribeRegistrationSectionDefinitionsInput struct {
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string
@@ -58,7 +58,7 @@ type DescribeRegistrationSectionDefinitionsOutput struct {
 	RegistrationSectionDefinitions []types.RegistrationSectionDefinition
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string

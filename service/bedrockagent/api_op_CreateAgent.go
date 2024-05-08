@@ -14,20 +14,27 @@ import (
 // Creates an agent that orchestrates interactions between foundation models, data
 // sources, software applications, user conversations, and APIs to carry out tasks
 // to help customers.
+//
 //   - Specify the following fields for security purposes.
+//
 //   - agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with
 //     permissions to invoke API operations on an agent.
+//
 //   - (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a
 //     KMS key to encrypt the creation of the agent.
+//
 //   - (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which
 //     the agent should maintain session information. After this time expires, the
 //     subsequent InvokeAgent request begins a new session.
+//
 //   - To override the default prompt behavior for agent orchestration and to use
 //     advanced prompts, include a promptOverrideConfiguration object. For more
-//     information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
-//     .
+//     information, see [Advanced prompts].
+//
 //   - If you agent fails to be created, the response returns a list of
 //     failureReasons alongside a list of recommendedActions for you to troubleshoot.
+//
+// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}
@@ -56,9 +63,9 @@ type CreateAgentInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
@@ -71,9 +78,11 @@ type CreateAgentInput struct {
 	FoundationModel *string
 
 	// The number of seconds for which Amazon Bedrock keeps information about a user's
-	// conversation with the agent. A user interaction remains active for the amount of
-	// time specified. If no conversation occurs during this time, the session expires
-	// and Amazon Bedrock deletes any data provided before the timeout.
+	// conversation with the agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *int32
 
 	// Instructions that tell the agent what it should do and how it should interact
@@ -81,8 +90,9 @@ type CreateAgentInput struct {
 	Instruction *string
 
 	// Contains configurations to override prompts in different parts of an agent
-	// sequence. For more information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
-	// .
+	// sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	PromptOverrideConfiguration *types.PromptOverrideConfiguration
 
 	// Any tags that you want to attach to the agent.

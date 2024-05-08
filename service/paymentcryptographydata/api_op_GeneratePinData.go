@@ -13,21 +13,31 @@ import (
 
 // Generates pin-related data such as PIN, PIN Verification Value (PVV), PIN
 // Block, and PIN Offset during new card issuance or reissuance. For more
-// information, see Generate PIN data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/generate-pin-data.html)
-// in the Amazon Web Services Payment Cryptography User Guide. PIN data is never
-// transmitted in clear to or from Amazon Web Services Payment Cryptography. This
-// operation generates PIN, PVV, or PIN Offset and then encrypts it using Pin
-// Encryption Key (PEK) to create an EncryptedPinBlock for transmission from
-// Amazon Web Services Payment Cryptography. This operation uses a separate Pin
-// Verification Key (PVK) for VISA PVV generation. For information about valid keys
-// for this operation, see Understanding key attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
-// and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. Cross-account use:
-// This operation can't be used across different Amazon Web Services accounts.
+// information, see [Generate PIN data]in the Amazon Web Services Payment Cryptography User Guide.
+//
+// PIN data is never transmitted in clear to or from Amazon Web Services Payment
+// Cryptography. This operation generates PIN, PVV, or PIN Offset and then encrypts
+// it using Pin Encryption Key (PEK) to create an EncryptedPinBlock for
+// transmission from Amazon Web Services Payment Cryptography. This operation uses
+// a separate Pin Verification Key (PVK) for VISA PVV generation.
+//
+// For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
+// Web Services Payment Cryptography User Guide.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - GenerateCardValidationData
-//   - TranslatePinData
-//   - VerifyPinData
+//
+// # GenerateCardValidationData
+//
+// # TranslatePinData
+//
+// # VerifyPinData
+//
+// [Generate PIN data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/generate-pin-data.html
+// [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
 func (c *Client) GeneratePinData(ctx context.Context, params *GeneratePinDataInput, optFns ...func(*Options)) (*GeneratePinDataOutput, error) {
 	if params == nil {
 		params = &GeneratePinDataInput{}
@@ -63,12 +73,14 @@ type GeneratePinDataInput struct {
 	GenerationKeyIdentifier *string
 
 	// The PIN encoding format for pin data generation as specified in ISO 9564.
-	// Amazon Web Services Payment Cryptography supports ISO_Format_0 and ISO_Format_3
-	// . The ISO_Format_0 PIN block format is equivalent to the ANSI X9.8, VISA-1, and
+	// Amazon Web Services Payment Cryptography supports ISO_Format_0 and ISO_Format_3 .
+	//
+	// The ISO_Format_0 PIN block format is equivalent to the ANSI X9.8, VISA-1, and
 	// ECI-1 PIN block formats. It is similar to a VISA-4 PIN block format. It supports
-	// a PIN from 4 to 12 digits in length. The ISO_Format_3 PIN block format is the
-	// same as ISO_Format_0 except that the fill digits are random values from 10 to
-	// 15.
+	// a PIN from 4 to 12 digits in length.
+	//
+	// The ISO_Format_3 PIN block format is the same as ISO_Format_0 except that the
+	// fill digits are random values from 10 to 15.
 	//
 	// This member is required.
 	PinBlockFormat types.PinBlockFormatForPinData
@@ -103,8 +115,10 @@ type GeneratePinDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
-	// the CMAC specification.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	//
 	// This member is required.
 	EncryptionKeyCheckValue *string
@@ -117,8 +131,10 @@ type GeneratePinDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
-	// the CMAC specification.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	//
 	// This member is required.
 	GenerationKeyCheckValue *string

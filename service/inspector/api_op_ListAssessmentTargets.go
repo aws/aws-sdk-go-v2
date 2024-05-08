@@ -12,8 +12,9 @@ import (
 )
 
 // Lists the ARNs of the assessment targets within this AWS account. For more
-// information about assessment targets, see Amazon Inspector Assessment Targets (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html)
-// .
+// information about assessment targets, see [Amazon Inspector Assessment Targets].
+//
+// [Amazon Inspector Assessment Targets]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
 func (c *Client) ListAssessmentTargets(ctx context.Context, params *ListAssessmentTargetsInput, optFns ...func(*Options)) (*ListAssessmentTargetsOutput, error) {
 	if params == nil {
 		params = &ListAssessmentTargetsInput{}
@@ -32,9 +33,11 @@ func (c *Client) ListAssessmentTargets(ctx context.Context, params *ListAssessme
 type ListAssessmentTargetsInput struct {
 
 	// You can use this parameter to specify a subset of data to be included in the
-	// action's response. For a record to match a filter, all specified filter
-	// attributes must match. When multiple values are specified for a filter
-	// attribute, any of the values can match.
+	// action's response.
+	//
+	// For a record to match a filter, all specified filter attributes must match.
+	// When multiple values are specified for a filter attribute, any of the values can
+	// match.
 	Filter *types.AssessmentTargetFilter
 
 	// You can use this parameter to indicate the maximum number of items you want in
@@ -58,7 +61,7 @@ type ListAssessmentTargetsOutput struct {
 	// This member is required.
 	AssessmentTargetArns []string
 
-	// When a response is generated, if there is more data to be listed, this
+	//  When a response is generated, if there is more data to be listed, this
 	// parameter is present in the response and contains the value to use for the
 	// nextToken parameter in a subsequent pagination request. If there is no more data
 	// to be listed, this parameter is set to null.

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The confirmation of the terms of agreement when creating the connection/link
+//	The confirmation of the terms of agreement when creating the connection/link
+//
 // aggregation group (LAG).
 func (c *Client) ConfirmCustomerAgreement(ctx context.Context, params *ConfirmCustomerAgreementInput, optFns ...func(*Options)) (*ConfirmCustomerAgreementOutput, error) {
 	if params == nil {
@@ -37,8 +38,8 @@ type ConfirmCustomerAgreementInput struct {
 
 type ConfirmCustomerAgreementOutput struct {
 
-	// The status of the customer agreement when the connection was created. This will
-	// be either signed or unsigned .
+	//  The status of the customer agreement when the connection was created. This
+	// will be either signed or unsigned .
 	Status *string
 
 	// Metadata pertaining to the operation's result.

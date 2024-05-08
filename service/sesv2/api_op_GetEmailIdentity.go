@@ -49,14 +49,16 @@ type GetEmailIdentityOutput struct {
 	// An object that contains information about the DKIM attributes for the identity.
 	DkimAttributes *types.DkimAttributes
 
-	// The feedback forwarding configuration for the identity. If the value is true ,
-	// you receive email notifications when bounce or complaint events occur. These
-	// notifications are sent to the address that you specified in the Return-Path
-	// header of the original email. You're required to have a method of tracking
-	// bounces and complaints. If you haven't set up another mechanism for receiving
-	// bounce or complaint notifications (for example, by setting up an event
-	// destination), you receive an email notification when these events occur (even if
-	// this setting is disabled).
+	// The feedback forwarding configuration for the identity.
+	//
+	// If the value is true , you receive email notifications when bounce or complaint
+	// events occur. These notifications are sent to the address that you specified in
+	// the Return-Path header of the original email.
+	//
+	// You're required to have a method of tracking bounces and complaints. If you
+	// haven't set up another mechanism for receiving bounce or complaint notifications
+	// (for example, by setting up an event destination), you receive an email
+	// notification when these events occur (even if this setting is disabled).
 	FeedbackForwardingStatus bool
 
 	// The email identity type. Note: the MANAGED_DOMAIN identity type is not
@@ -78,22 +80,27 @@ type GetEmailIdentityOutput struct {
 	// for the identity.
 	VerificationInfo *types.VerificationInfo
 
-	// The verification status of the identity. The status can be one of the
-	// following:
+	// The verification status of the identity. The status can be one of the following:
+	//
 	//   - PENDING – The verification process was initiated, but Amazon SES hasn't yet
 	//   been able to verify the identity.
+	//
 	//   - SUCCESS – The verification process completed successfully.
+	//
 	//   - FAILED – The verification process failed.
+	//
 	//   - TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from
 	//   determining the verification status of the identity.
+	//
 	//   - NOT_STARTED – The verification process hasn't been initiated for the
 	//   identity.
 	VerificationStatus types.VerificationStatus
 
 	// Specifies whether or not the identity is verified. You can only send email from
 	// verified email addresses or domains. For more information about verifying
-	// identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html)
-	// .
+	// identities, see the [Amazon Pinpoint User Guide].
+	//
+	// [Amazon Pinpoint User Guide]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
 	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.

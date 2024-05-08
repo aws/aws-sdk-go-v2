@@ -50,8 +50,9 @@ type UpdateIntegrationResponseInput struct {
 	// This member is required.
 	StatusCode *string
 
-	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
-	// .
+	// For more information about supported patch operations, see [Patch Operations].
+	//
+	// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -64,6 +65,7 @@ type UpdateIntegrationResponseOutput struct {
 
 	// Specifies how to handle response payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT , with the following behaviors:
+	//
 	// If this property is not defined, the response payload will be passed through
 	// from the integration response to the method response without modification.
 	ContentHandling types.ContentHandlingStrategy

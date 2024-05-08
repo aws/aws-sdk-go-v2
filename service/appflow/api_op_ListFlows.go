@@ -29,10 +29,11 @@ func (c *Client) ListFlows(ctx context.Context, params *ListFlowsInput, optFns .
 
 type ListFlowsInput struct {
 
-	// Specifies the maximum number of items that should be returned in the result set.
+	//  Specifies the maximum number of items that should be returned in the result
+	// set.
 	MaxResults *int32
 
-	// The pagination token for next page of data.
+	//  The pagination token for next page of data.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -40,10 +41,10 @@ type ListFlowsInput struct {
 
 type ListFlowsOutput struct {
 
-	// The list of flows associated with your account.
+	//  The list of flows associated with your account.
 	Flows []types.FlowDefinition
 
-	// The pagination token for next page of data.
+	//  The pagination token for next page of data.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -137,7 +138,8 @@ var _ ListFlowsAPIClient = (*Client)(nil)
 
 // ListFlowsPaginatorOptions is the paginator options for ListFlows
 type ListFlowsPaginatorOptions struct {
-	// Specifies the maximum number of items that should be returned in the result set.
+	//  Specifies the maximum number of items that should be returned in the result
+	// set.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

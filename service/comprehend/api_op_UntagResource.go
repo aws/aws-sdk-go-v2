@@ -28,7 +28,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the given Amazon Comprehend resource from
+	//  The Amazon Resource Name (ARN) of the given Amazon Comprehend resource from
 	// which you want to remove the tags.
 	//
 	// This member is required.

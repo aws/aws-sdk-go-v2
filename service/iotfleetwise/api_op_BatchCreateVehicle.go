@@ -11,10 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a group, or batch, of vehicles. You must specify a decoder manifest and
-// a vehicle model (model manifest) for each vehicle. For more information, see
-// Create multiple vehicles (AWS CLI) (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicles-cli.html)
-// in the Amazon Web Services IoT FleetWise Developer Guide.
+//	Creates a group, or batch, of vehicles.
+//
+// You must specify a decoder manifest and a vehicle model (model manifest) for
+// each vehicle.
+//
+// For more information, see [Create multiple vehicles (AWS CLI)] in the Amazon Web Services IoT FleetWise Developer
+// Guide.
+//
+// [Create multiple vehicles (AWS CLI)]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicles-cli.html
 func (c *Client) BatchCreateVehicle(ctx context.Context, params *BatchCreateVehicleInput, optFns ...func(*Options)) (*BatchCreateVehicleOutput, error) {
 	if params == nil {
 		params = &BatchCreateVehicleInput{}
@@ -32,7 +37,7 @@ func (c *Client) BatchCreateVehicle(ctx context.Context, params *BatchCreateVehi
 
 type BatchCreateVehicleInput struct {
 
-	// A list of information about each vehicle to create. For more information, see
+	//  A list of information about each vehicle to create. For more information, see
 	// the API data type.
 	//
 	// This member is required.
@@ -47,7 +52,7 @@ type BatchCreateVehicleOutput struct {
 	// any errors.
 	Errors []types.CreateVehicleError
 
-	// A list of information about a batch of created vehicles. For more information,
+	//  A list of information about a batch of created vehicles. For more information,
 	// see the API data type.
 	Vehicles []types.CreateVehicleResponseItem
 

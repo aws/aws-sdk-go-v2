@@ -40,8 +40,7 @@ type ScheduleRunInput struct {
 	// This member is required.
 	Test *types.ScheduleRunTest
 
-	// The ARN of an application package to run tests against, created with
-	// CreateUpload . See ListUploads .
+	// The ARN of an application package to run tests against, created with CreateUpload. See ListUploads.
 	AppArn *string
 
 	// Information about the settings for the run to be scheduled.
@@ -51,8 +50,9 @@ type ScheduleRunInput struct {
 	DevicePoolArn *string
 
 	// The filter criteria used to dynamically select a set of devices for a test run
-	// and the maximum number of devices to be included in the run. Either
-	// devicePoolArn or deviceSelectionConfiguration is required in a request.
+	// and the maximum number of devices to be included in the run.
+	//
+	// Either devicePoolArn or deviceSelectionConfiguration is required in a request.
 	DeviceSelectionConfiguration *types.DeviceSelectionConfiguration
 
 	// Specifies configuration information about a test run, such as the execution

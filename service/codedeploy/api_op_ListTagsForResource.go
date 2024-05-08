@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of tags for the resource identified by a specified Amazon
+//	Returns a list of tags for the resource identified by a specified Amazon
+//
 // Resource Name (ARN). Tags are used to organize and categorize your CodeDeploy
 // resources.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
@@ -31,7 +32,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of a CodeDeploy resource. ListTagsForResource returns all the tags
+	//  The ARN of a CodeDeploy resource. ListTagsForResource returns all the tags
 	// associated with the resource that is identified by the ResourceArn .
 	//
 	// This member is required.
@@ -51,7 +52,7 @@ type ListTagsForResourceOutput struct {
 	// next set of application revisions in the list.
 	NextToken *string
 
-	// A list of tags returned by ListTagsForResource . The tags are associated with
+	//  A list of tags returned by ListTagsForResource . The tags are associated with
 	// the resource identified by the input ResourceArn parameter.
 	Tags []types.Tag
 

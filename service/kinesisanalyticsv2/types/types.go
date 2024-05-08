@@ -198,15 +198,15 @@ type ApplicationDetail struct {
 	// application, the mode is optional.
 	ApplicationMode ApplicationMode
 
-	// If you reverted the application using RollbackApplication , the application
-	// version when RollbackApplication was called.
+	// If you reverted the application using RollbackApplication, the application version when
+	// RollbackApplication was called.
 	ApplicationVersionRolledBackFrom *int64
 
 	// The version to which you want to roll back the application.
 	ApplicationVersionRolledBackTo *int64
 
-	// The previous application version before the latest application update.
-	// RollbackApplication reverts the application to this version.
+	// The previous application version before the latest application update. RollbackApplication reverts
+	// the application to this version.
 	ApplicationVersionUpdatedFrom *int64
 
 	// Describes the application Amazon CloudWatch logging options.
@@ -409,44 +409,55 @@ type CatalogConfigurationUpdate struct {
 
 // Describes an application's checkpointing configuration. Checkpointing is the
 // process of persisting application state for fault tolerance. For more
-// information, see Checkpoints for Fault Tolerance (https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing)
-// in the Apache Flink Documentation (https://nightlies.apache.org/flink/flink-docs-release-1.18/)
-// .
+// information, see [Checkpoints for Fault Tolerance]in the [Apache Flink Documentation].
+//
+// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
 type CheckpointConfiguration struct {
 
 	// Describes whether the application uses Managed Service for Apache Flink'
 	// default checkpointing behavior. You must set this property to CUSTOM in order
 	// to set the CheckpointingEnabled , CheckpointInterval , or
-	// MinPauseBetweenCheckpoints parameters. If this value is set to DEFAULT , the
-	// application will use the following values, even if they are set to other values
-	// using APIs or application code:
+	// MinPauseBetweenCheckpoints parameters.
+	//
+	// If this value is set to DEFAULT , the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
 	//   - CheckpointingEnabled: true
+	//
 	//   - CheckpointInterval: 60000
+	//
 	//   - MinPauseBetweenCheckpoints: 5000
 	//
 	// This member is required.
 	ConfigurationType ConfigurationType
 
-	// Describes the interval in milliseconds between checkpoint operations. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
-	// a CheckpointInterval value of 60000, even if this value is set to another value
-	// using this API or in application code.
+	// Describes the interval in milliseconds between checkpoint operations.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a CheckpointInterval value of 60000, even if this value is set to another
+	// value using this API or in application code.
 	CheckpointInterval *int64
 
 	// Describes whether checkpointing is enabled for a Managed Service for Apache
-	// Flink application. If CheckpointConfiguration.ConfigurationType is DEFAULT , the
-	// application will use a CheckpointingEnabled value of true , even if this value
-	// is set to another value using this API or in application code.
+	// Flink application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a CheckpointingEnabled value of true , even if this value is set to another
+	// value using this API or in application code.
 	CheckpointingEnabled *bool
 
 	// Describes the minimum time in milliseconds after a checkpoint operation
 	// completes that a new checkpoint operation can start. If a checkpoint operation
 	// takes longer than the CheckpointInterval , the application otherwise performs
-	// continual checkpoint operations. For more information, see Tuning Checkpointing (https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/large_state_tuning/#tuning-checkpointing)
-	// in the Apache Flink Documentation (https://nightlies.apache.org/flink/flink-docs-release-1.18/)
-	// . If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// continual checkpoint operations. For more information, see [Tuning Checkpointing]in the [Apache Flink Documentation].
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
 	// use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
 	// this API or in application code.
+	//
+	// [Tuning Checkpointing]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/large_state_tuning/#tuning-checkpointing
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
 	MinPauseBetweenCheckpoints *int64
 
 	noSmithyDocumentSerde
@@ -456,31 +467,39 @@ type CheckpointConfiguration struct {
 // application.
 type CheckpointConfigurationDescription struct {
 
-	// Describes the interval in milliseconds between checkpoint operations. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
-	// a CheckpointInterval value of 60000, even if this value is set to another value
-	// using this API or in application code.
+	// Describes the interval in milliseconds between checkpoint operations.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a CheckpointInterval value of 60000, even if this value is set to another
+	// value using this API or in application code.
 	CheckpointInterval *int64
 
 	// Describes whether checkpointing is enabled for a Managed Service for Apache
-	// Flink application. If CheckpointConfiguration.ConfigurationType is DEFAULT , the
-	// application will use a CheckpointingEnabled value of true , even if this value
-	// is set to another value using this API or in application code.
+	// Flink application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a CheckpointingEnabled value of true , even if this value is set to another
+	// value using this API or in application code.
 	CheckpointingEnabled *bool
 
 	// Describes whether the application uses the default checkpointing behavior in
-	// Managed Service for Apache Flink. If this value is set to DEFAULT , the
-	// application will use the following values, even if they are set to other values
-	// using APIs or application code:
+	// Managed Service for Apache Flink.
+	//
+	// If this value is set to DEFAULT , the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
 	//   - CheckpointingEnabled: true
+	//
 	//   - CheckpointInterval: 60000
+	//
 	//   - MinPauseBetweenCheckpoints: 5000
 	ConfigurationType ConfigurationType
 
 	// Describes the minimum time in milliseconds after a checkpoint operation
-	// completes that a new checkpoint operation can start. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
-	// a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
+	// completes that a new checkpoint operation can start.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
 	// this API or in application code.
 	MinPauseBetweenCheckpoints *int64
 
@@ -491,33 +510,40 @@ type CheckpointConfigurationDescription struct {
 // Apache Flink application.
 type CheckpointConfigurationUpdate struct {
 
-	// Describes updates to the interval in milliseconds between checkpoint
-	// operations. If CheckpointConfiguration.ConfigurationType is DEFAULT , the
-	// application will use a CheckpointInterval value of 60000, even if this value is
-	// set to another value using this API or in application code.
+	// Describes updates to the interval in milliseconds between checkpoint operations.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a CheckpointInterval value of 60000, even if this value is set to another
+	// value using this API or in application code.
 	CheckpointIntervalUpdate *int64
 
-	// Describes updates to whether checkpointing is enabled for an application. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
-	// a CheckpointingEnabled value of true , even if this value is set to another
+	// Describes updates to whether checkpointing is enabled for an application.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a CheckpointingEnabled value of true , even if this value is set to another
 	// value using this API or in application code.
 	CheckpointingEnabledUpdate *bool
 
 	// Describes updates to whether the application uses the default checkpointing
 	// behavior of Managed Service for Apache Flink. You must set this property to
 	// CUSTOM in order to set the CheckpointingEnabled , CheckpointInterval , or
-	// MinPauseBetweenCheckpoints parameters. If this value is set to DEFAULT , the
-	// application will use the following values, even if they are set to other values
-	// using APIs or application code:
+	// MinPauseBetweenCheckpoints parameters.
+	//
+	// If this value is set to DEFAULT , the application will use the following values,
+	// even if they are set to other values using APIs or application code:
+	//
 	//   - CheckpointingEnabled: true
+	//
 	//   - CheckpointInterval: 60000
+	//
 	//   - MinPauseBetweenCheckpoints: 5000
 	ConfigurationTypeUpdate ConfigurationType
 
 	// Describes updates to the minimum time in milliseconds after a checkpoint
-	// operation completes that a new checkpoint operation can start. If
-	// CheckpointConfiguration.ConfigurationType is DEFAULT , the application will use
-	// a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
+	// operation completes that a new checkpoint operation can start.
+	//
+	// If CheckpointConfiguration.ConfigurationType is DEFAULT , the application will
+	// use a MinPauseBetweenCheckpoints value of 5000, even if this value is set using
 	// this API or in application code.
 	MinPauseBetweenCheckpointsUpdate *int64
 
@@ -548,9 +574,11 @@ type CloudWatchLoggingOptionDescription struct {
 	// The ID of the CloudWatch logging option description.
 	CloudWatchLoggingOptionId *string
 
-	// The IAM ARN of the role to use to send application messages. Provided for
-	// backward compatibility. Applications created with the current API version have
-	// an application-level service execution role rather than a resource-level role.
+	// The IAM ARN of the role to use to send application messages.
+	//
+	// Provided for backward compatibility. Applications created with the current API
+	// version have an application-level service execution role rather than a
+	// resource-level role.
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -627,7 +655,9 @@ type CodeContentUpdate struct {
 // For a SQL-based Kinesis Data Analytics application, provides additional mapping
 // information when the record format uses delimiters, such as CSV. For example,
 // the following sample records use CSV format, where the records use the '\n' as
-// the row delimiter and a comma (",") as the column delimiter: "name1", "address1"
+// the row delimiter and a comma (",") as the column delimiter:
+//
+//	"name1", "address1"
 //
 //	"name2", "address2"
 type CSVMappingParameters struct {
@@ -778,9 +808,10 @@ type FlinkApplicationConfiguration struct {
 
 	// Describes an application's checkpointing configuration. Checkpointing is the
 	// process of persisting application state for fault tolerance. For more
-	// information, see Checkpoints for Fault Tolerance (https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing)
-	// in the Apache Flink Documentation (https://nightlies.apache.org/flink/flink-docs-release-1.18/)
-	// .
+	// information, see [Checkpoints for Fault Tolerance]in the [Apache Flink Documentation].
+	//
+	// [Checkpoints for Fault Tolerance]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/dev/datastream/fault-tolerance/checkpointing/#enabling-and-configuring-checkpointing
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
 	CheckpointConfiguration *CheckpointConfiguration
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -802,12 +833,12 @@ type FlinkApplicationConfigurationDescription struct {
 	// process of persisting application state for fault tolerance.
 	CheckpointConfigurationDescription *CheckpointConfigurationDescription
 
-	// The job plan for an application. For more information about the job plan, see
-	// Jobs and Scheduling (https://nightlies.apache.org/flink/flink-docs-release-1.18/internals/job_scheduling.html)
-	// in the Apache Flink Documentation (https://nightlies.apache.org/flink/flink-docs-release-1.18/)
-	// . To retrieve the job plan for the application, use the
-	// DescribeApplicationRequest$IncludeAdditionalDetails parameter of the
-	// DescribeApplication operation.
+	// The job plan for an application. For more information about the job plan, see [Jobs and Scheduling]
+	// in the [Apache Flink Documentation]. To retrieve the job plan for the application, use the DescribeApplicationRequest$IncludeAdditionalDetails parameter of
+	// the DescribeApplicationoperation.
+	//
+	// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
+	// [Jobs and Scheduling]: https://nightlies.apache.org/flink/flink-docs-release-1.18/internals/job_scheduling.html
 	JobPlanDescription *string
 
 	// Describes configuration parameters for Amazon CloudWatch logging for an
@@ -849,11 +880,14 @@ type FlinkRunConfiguration struct {
 	// skip a state that cannot be mapped to the new program. This will happen if the
 	// program is updated between snapshots to remove stateful parameters, and state
 	// data in the snapshot no longer corresponds to valid application data. For more
-	// information, see Allowing Non-Restored State (https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/savepoints/#allowing-non-restored-state)
-	// in the Apache Flink documentation (https://nightlies.apache.org/flink/flink-docs-release-1.18/)
-	// . This value defaults to false . If you update your application without
-	// specifying this parameter, AllowNonRestoredState will be set to false , even if
-	// it was previously set to true .
+	// information, see [Allowing Non-Restored State]in the [Apache Flink documentation].
+	//
+	// This value defaults to false . If you update your application without specifying
+	// this parameter, AllowNonRestoredState will be set to false , even if it was
+	// previously set to true .
+	//
+	// [Allowing Non-Restored State]: https://nightlies.apache.org/flink/flink-docs-release-1.18/docs/ops/state/savepoints/#allowing-non-restored-state
+	// [Apache Flink documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
 	AllowNonRestoredState *bool
 
 	noSmithyDocumentSerde
@@ -902,7 +936,9 @@ type Input struct {
 
 	// Describes the format of the data in the streaming source, and how each data
 	// element maps to corresponding columns in the in-application stream that is being
-	// created. Also used to describe the format of the reference data source.
+	// created.
+	//
+	// Also used to describe the format of the reference data source.
 	//
 	// This member is required.
 	InputSchema *SourceSchema
@@ -919,10 +955,9 @@ type Input struct {
 	// Describes the number of in-application streams to create.
 	InputParallelism *InputParallelism
 
-	// The InputProcessingConfiguration for the input. An input processor transforms
-	// records as they are received from the stream, before the application's SQL code
-	// executes. Currently, the only input processing configuration available is
-	// InputLambdaProcessor .
+	// The InputProcessingConfiguration for the input. An input processor transforms records as they are received
+	// from the stream, before the application's SQL code executes. Currently, the only
+	// input processing configuration available is InputLambdaProcessor.
 	InputProcessingConfiguration *InputProcessingConfiguration
 
 	// If the streaming source is an Amazon Kinesis Data Firehose delivery stream,
@@ -984,9 +1019,12 @@ type InputDescription struct {
 type InputLambdaProcessor struct {
 
 	// The ARN of the Amazon Lambda function that operates on records in the stream.
+	//
 	// To specify an earlier version of the Lambda function than the latest, include
 	// the Lambda function version in the Lambda function ARN. For more information
-	// about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	// about Lambda ARNs, see [Example ARNs: Amazon Lambda]
+	//
+	// [Example ARNs: Amazon Lambda]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
 	//
 	// This member is required.
 	ResourceARN *string
@@ -1000,14 +1038,19 @@ type InputLambdaProcessor struct {
 type InputLambdaProcessorDescription struct {
 
 	// The ARN of the Amazon Lambda function that is used to preprocess the records in
-	// the stream. To specify an earlier version of the Lambda function than the
-	// latest, include the Lambda function version in the Lambda function ARN. For more
-	// information about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	// the stream.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see [Example ARNs: Amazon Lambda]
+	//
+	// [Example ARNs: Amazon Lambda]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
 	//
 	// This member is required.
 	ResourceARN *string
 
 	// The ARN of the IAM role that is used to access the Amazon Lambda function.
+	//
 	// Provided for backward compatibility. Applications that are created with the
 	// current API version have an application-level service execution role rather than
 	// a resource-level role.
@@ -1016,15 +1059,18 @@ type InputLambdaProcessorDescription struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, represents an update to the
-// InputLambdaProcessor that is used to preprocess the records in the stream.
+// For a SQL-based Kinesis Data Analytics application, represents an update to the InputLambdaProcessor
+// that is used to preprocess the records in the stream.
 type InputLambdaProcessorUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the new Amazon Lambda function that is used
-	// to preprocess the records in the stream. To specify an earlier version of the
-	// Lambda function than the latest, include the Lambda function version in the
-	// Lambda function ARN. For more information about Lambda ARNs, see Example ARNs:
-	// Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	// to preprocess the records in the stream.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see [Example ARNs: Amazon Lambda]
+	//
+	// [Example ARNs: Amazon Lambda]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
 	//
 	// This member is required.
 	ResourceARNUpdate *string
@@ -1057,12 +1103,13 @@ type InputParallelismUpdate struct {
 
 // For a SQL-based Kinesis Data Analytics application, describes a processor that
 // is used to preprocess the records in the stream before being processed by your
-// application code. Currently, the only input processor available is Amazon Lambda (https://docs.aws.amazon.com/lambda/)
-// .
+// application code. Currently, the only input processor available is [Amazon Lambda].
+//
+// [Amazon Lambda]: https://docs.aws.amazon.com/lambda/
 type InputProcessingConfiguration struct {
 
-	// The InputLambdaProcessor that is used to preprocess the records in the stream
-	// before being processed by your application code.
+	// The InputLambdaProcessor that is used to preprocess the records in the stream before being
+	// processed by your application code.
 	//
 	// This member is required.
 	InputLambdaProcessor *InputLambdaProcessor
@@ -1072,21 +1119,21 @@ type InputProcessingConfiguration struct {
 
 // For a SQL-based Kinesis Data Analytics application, provides the configuration
 // information about an input processor. Currently, the only input processor
-// available is Amazon Lambda (https://docs.aws.amazon.com/lambda/) .
+// available is [Amazon Lambda].
+//
+// [Amazon Lambda]: https://docs.aws.amazon.com/lambda/
 type InputProcessingConfigurationDescription struct {
 
-	// Provides configuration information about the associated
-	// InputLambdaProcessorDescription
+	// Provides configuration information about the associated InputLambdaProcessorDescription
 	InputLambdaProcessorDescription *InputLambdaProcessorDescription
 
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, describes updates to an
-// InputProcessingConfiguration .
+// For a SQL-based Kinesis Data Analytics application, describes updates to an InputProcessingConfiguration.
 type InputProcessingConfigurationUpdate struct {
 
-	// Provides update information for an InputLambdaProcessor .
+	// Provides update information for an InputLambdaProcessor.
 	//
 	// This member is required.
 	InputLambdaProcessorUpdate *InputLambdaProcessorUpdate
@@ -1117,11 +1164,14 @@ type InputSchemaUpdate struct {
 type InputStartingPositionConfiguration struct {
 
 	// The starting position on the stream.
+	//
 	//   - NOW - Start reading just after the most recent record in the stream, and
 	//   start at the request timestamp that the customer issued.
+	//
 	//   - TRIM_HORIZON - Start reading at the last untrimmed record in the stream,
 	//   which is the oldest record available in the stream. This option is not available
 	//   for an Amazon Kinesis Data Firehose delivery stream.
+	//
 	//   - LAST_STOPPED_POINT - Resume reading from where the application last stopped
 	//   reading.
 	InputStartingPosition InputStartingPosition
@@ -1142,7 +1192,7 @@ type InputUpdate struct {
 	// Data Analytics creates for the specific streaming source).
 	InputParallelismUpdate *InputParallelismUpdate
 
-	// Describes updates to an InputProcessingConfiguration .
+	// Describes updates to an InputProcessingConfiguration.
 	InputProcessingConfigurationUpdate *InputProcessingConfigurationUpdate
 
 	// Describes the data format on the streaming source, and how record elements on
@@ -1200,9 +1250,11 @@ type KinesisFirehoseInputDescription struct {
 	ResourceARN *string
 
 	// The ARN of the IAM role that Kinesis Data Analytics assumes to access the
-	// stream. Provided for backward compatibility. Applications that are created with
-	// the current API version have an application-level service execution role rather
-	// than a resource-level role.
+	// stream.
+	//
+	// Provided for backward compatibility. Applications that are created with the
+	// current API version have an application-level service execution role rather than
+	// a resource-level role.
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -1245,17 +1297,19 @@ type KinesisFirehoseOutputDescription struct {
 	ResourceARN *string
 
 	// The ARN of the IAM role that Kinesis Data Analytics can assume to access the
-	// stream. Provided for backward compatibility. Applications that are created with
-	// the current API version have an application-level service execution role rather
-	// than a resource-level role.
+	// stream.
+	//
+	// Provided for backward compatibility. Applications that are created with the
+	// current API version have an application-level service execution role rather than
+	// a resource-level role.
 	RoleARN *string
 
 	noSmithyDocumentSerde
 }
 
 // For a SQL-based Kinesis Data Analytics application, when updating an output
-// configuration using the UpdateApplication operation, provides information about
-// a Kinesis Data Firehose delivery stream that is configured as the destination.
+// configuration using the UpdateApplicationoperation, provides information about a Kinesis Data
+// Firehose delivery stream that is configured as the destination.
 type KinesisFirehoseOutputUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream to write to.
@@ -1266,7 +1320,8 @@ type KinesisFirehoseOutputUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies a Kinesis data stream as the streaming source. You provide the
+//	Identifies a Kinesis data stream as the streaming source. You provide the
+//
 // stream's Amazon Resource Name (ARN).
 type KinesisStreamsInput struct {
 
@@ -1289,9 +1344,11 @@ type KinesisStreamsInputDescription struct {
 	ResourceARN *string
 
 	// The ARN of the IAM role that Kinesis Data Analytics can assume to access the
-	// stream. Provided for backward compatibility. Applications that are created with
-	// the current API version have an application-level service execution role rather
-	// than a resource-level role.
+	// stream.
+	//
+	// Provided for backward compatibility. Applications that are created with the
+	// current API version have an application-level service execution role rather than
+	// a resource-level role.
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -1333,17 +1390,19 @@ type KinesisStreamsOutputDescription struct {
 	ResourceARN *string
 
 	// The ARN of the IAM role that Kinesis Data Analytics can assume to access the
-	// stream. Provided for backward compatibility. Applications that are created with
-	// the current API version have an application-level service execution role rather
-	// than a resource-level role.
+	// stream.
+	//
+	// Provided for backward compatibility. Applications that are created with the
+	// current API version have an application-level service execution role rather than
+	// a resource-level role.
 	RoleARN *string
 
 	noSmithyDocumentSerde
 }
 
 // When you update a SQL-based Kinesis Data Analytics application's output
-// configuration using the UpdateApplication operation, provides information about
-// a Kinesis data stream that is configured as the destination.
+// configuration using the UpdateApplicationoperation, provides information about a Kinesis data
+// stream that is configured as the destination.
 type KinesisStreamsOutputUpdate struct {
 
 	// The Amazon Resource Name (ARN) of the Kinesis data stream where you want to
@@ -1361,9 +1420,12 @@ type KinesisStreamsOutputUpdate struct {
 type LambdaOutput struct {
 
 	// The Amazon Resource Name (ARN) of the destination Lambda function to write to.
+	//
 	// To specify an earlier version of the Lambda function than the latest, include
 	// the Lambda function version in the Lambda function ARN. For more information
-	// about Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	// about Lambda ARNs, see [Example ARNs: Amazon Lambda]
+	//
+	// [Example ARNs: Amazon Lambda]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
 	//
 	// This member is required.
 	ResourceARN *string
@@ -1381,23 +1443,28 @@ type LambdaOutputDescription struct {
 	ResourceARN *string
 
 	// The ARN of the IAM role that Kinesis Data Analytics can assume to write to the
-	// destination function. Provided for backward compatibility. Applications that are
-	// created with the current API version have an application-level service execution
-	// role rather than a resource-level role.
+	// destination function.
+	//
+	// Provided for backward compatibility. Applications that are created with the
+	// current API version have an application-level service execution role rather than
+	// a resource-level role.
 	RoleARN *string
 
 	noSmithyDocumentSerde
 }
 
 // When you update an SQL-based Kinesis Data Analytics application's output
-// configuration using the UpdateApplication operation, provides information about
-// an Amazon Lambda function that is configured as the destination.
+// configuration using the UpdateApplicationoperation, provides information about an Amazon Lambda
+// function that is configured as the destination.
 type LambdaOutputUpdate struct {
 
-	// The Amazon Resource Name (ARN) of the destination Amazon Lambda function. To
-	// specify an earlier version of the Lambda function than the latest, include the
-	// Lambda function version in the Lambda function ARN. For more information about
-	// Lambda ARNs, see Example ARNs: Amazon Lambda (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda)
+	// The Amazon Resource Name (ARN) of the destination Amazon Lambda function.
+	//
+	// To specify an earlier version of the Lambda function than the latest, include
+	// the Lambda function version in the Lambda function ARN. For more information
+	// about Lambda ARNs, see [Example ARNs: Amazon Lambda]
+	//
+	// [Example ARNs: Amazon Lambda]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda
 	//
 	// This member is required.
 	ResourceARNUpdate *string
@@ -1445,8 +1512,9 @@ type MavenReference struct {
 }
 
 // Describes configuration parameters for Amazon CloudWatch logging for an
-// application. For more information about CloudWatch logging, see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html)
-// .
+// application. For more information about CloudWatch logging, see [Monitoring].
+//
+// [Monitoring]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html
 type MonitoringConfiguration struct {
 
 	// Describes whether to use the default CloudWatch logging configuration for an
@@ -1503,7 +1571,8 @@ type MonitoringConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a SQL-based Kinesis Data Analytics application's output
+//	Describes a SQL-based Kinesis Data Analytics application's output
+//
 // configuration, in which you identify an in-application stream and a destination
 // where you want the in-application stream data to be written. The destination can
 // be a Kinesis data stream or a Kinesis Data Firehose delivery stream.
@@ -1561,7 +1630,8 @@ type OutputDescription struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, describes updates to the
+//	For a SQL-based Kinesis Data Analytics application, describes updates to the
+//
 // output configuration identified by the OutputId .
 type OutputUpdate struct {
 
@@ -1592,9 +1662,10 @@ type OutputUpdate struct {
 
 // Describes parameters for how a Managed Service for Apache Flink application
 // executes multiple tasks simultaneously. For more information about parallelism,
-// see Parallel Execution (https://nightlies.apache.org/flink/flink-docs-release-1.18/dev/parallel.html)
-// in the Apache Flink Documentation (https://nightlies.apache.org/flink/flink-docs-release-1.18/)
-// .
+// see [Parallel Execution]in the [Apache Flink Documentation].
+//
+// [Parallel Execution]: https://nightlies.apache.org/flink/flink-docs-release-1.18/dev/parallel.html
+// [Apache Flink Documentation]: https://nightlies.apache.org/flink/flink-docs-release-1.18/
 type ParallelismConfiguration struct {
 
 	// Describes whether the application uses the default parallelism for the Managed
@@ -1622,8 +1693,9 @@ type ParallelismConfiguration struct {
 
 	// Describes the number of parallel tasks that a Managed Service for Apache Flink
 	// application can perform per Kinesis Processing Unit (KPU) used by the
-	// application. For more information about KPUs, see Amazon Managed Service for
-	// Apache Flink Pricing (http://aws.amazon.com/kinesis/data-analytics/pricing/) .
+	// application. For more information about KPUs, see [Amazon Managed Service for Apache Flink Pricing].
+	//
+	// [Amazon Managed Service for Apache Flink Pricing]: http://aws.amazon.com/kinesis/data-analytics/pricing/
 	ParallelismPerKPU *int32
 
 	noSmithyDocumentSerde
@@ -1721,8 +1793,9 @@ type PropertyGroup struct {
 
 // For a SQL-based Kinesis Data Analytics application, describes the mapping of
 // each data element in the streaming source to the corresponding column in the
-// in-application stream. Also used to describe the format of the reference data
-// source.
+// in-application stream.
+//
+// Also used to describe the format of the reference data source.
 type RecordColumn struct {
 
 	// The name of the column that is created in the in-application input stream or
@@ -1744,8 +1817,9 @@ type RecordColumn struct {
 	noSmithyDocumentSerde
 }
 
-// For a SQL-based Kinesis Data Analytics application, describes the record format
-// and relevant mapping information that should be applied to schematize the
+//	For a SQL-based Kinesis Data Analytics application, describes the record
+//
+// format and relevant mapping information that should be applied to schematize the
 // records on the stream.
 type RecordFormat struct {
 
@@ -1781,10 +1855,11 @@ type ReferenceDataSource struct {
 	// This member is required.
 	TableName *string
 
-	// Identifies the S3 bucket and object that contains the reference data. A
-	// SQL-based Kinesis Data Analytics application loads reference data only once. If
-	// the data changes, you call the UpdateApplication operation to trigger reloading
-	// of data into your application.
+	// Identifies the S3 bucket and object that contains the reference data.
+	//
+	// A SQL-based Kinesis Data Analytics application loads reference data only once.
+	// If the data changes, you call the UpdateApplicationoperation to trigger reloading of data into
+	// your application.
 	S3ReferenceDataSource *S3ReferenceDataSource
 
 	noSmithyDocumentSerde
@@ -1795,8 +1870,8 @@ type ReferenceDataSource struct {
 type ReferenceDataSourceDescription struct {
 
 	// The ID of the reference data source. This is the ID that Kinesis Data Analytics
-	// assigns when you add the reference data source to your application using the
-	// CreateApplication or UpdateApplication operation.
+	// assigns when you add the reference data source to your application using the CreateApplicationor UpdateApplication
+	// operation.
 	//
 	// This member is required.
 	ReferenceId *string
@@ -1827,8 +1902,8 @@ type ReferenceDataSourceDescription struct {
 // object to the in-application reference table that is created.
 type ReferenceDataSourceUpdate struct {
 
-	// The ID of the reference data source that is being updated. You can use the
-	// DescribeApplication operation to get this value.
+	// The ID of the reference data source that is being updated. You can use the DescribeApplication
+	// operation to get this value.
 	//
 	// This member is required.
 	ReferenceId *string
@@ -2013,10 +2088,11 @@ type S3ContentLocationUpdate struct {
 }
 
 // For a SQL-based Kinesis Data Analytics application, identifies the Amazon S3
-// bucket and object that contains the reference data. A SQL-based Kinesis Data
-// Analytics application loads reference data only once. If the data changes, you
-// call the UpdateApplication operation to trigger reloading of data into your
-// application.
+// bucket and object that contains the reference data.
+//
+// A SQL-based Kinesis Data Analytics application loads reference data only once.
+// If the data changes, you call the UpdateApplicationoperation to trigger reloading of data into
+// your application.
 type S3ReferenceDataSource struct {
 
 	// The Amazon Resource Name (ARN) of the S3 bucket.
@@ -2044,6 +2120,7 @@ type S3ReferenceDataSourceDescription struct {
 
 	// The ARN of the IAM role that Kinesis Data Analytics can assume to read the
 	// Amazon S3 object on your behalf to populate the in-application reference table.
+	//
 	// Provided for backward compatibility. Applications that are created with the
 	// current API version have an application-level service execution role rather than
 	// a resource-level role.
@@ -2125,8 +2202,8 @@ type SqlApplicationConfiguration struct {
 	// application.
 	Outputs []Output
 
-	// The array of ReferenceDataSource objects describing the reference data sources
-	// used by the application.
+	// The array of ReferenceDataSource objects describing the reference data sources used by the
+	// application.
 	ReferenceDataSources []ReferenceDataSource
 
 	noSmithyDocumentSerde
@@ -2136,16 +2213,15 @@ type SqlApplicationConfiguration struct {
 // Kinesis Data Analytics application.
 type SqlApplicationConfigurationDescription struct {
 
-	// The array of InputDescription objects describing the input streams used by the
-	// application.
+	// The array of InputDescription objects describing the input streams used by the application.
 	InputDescriptions []InputDescription
 
-	// The array of OutputDescription objects describing the destination streams used
-	// by the application.
+	// The array of OutputDescription objects describing the destination streams used by the
+	// application.
 	OutputDescriptions []OutputDescription
 
-	// The array of ReferenceDataSourceDescription objects describing the reference
-	// data sources used by the application.
+	// The array of ReferenceDataSourceDescription objects describing the reference data sources used by the
+	// application.
 	ReferenceDataSourceDescriptions []ReferenceDataSourceDescription
 
 	noSmithyDocumentSerde
@@ -2155,16 +2231,15 @@ type SqlApplicationConfigurationDescription struct {
 // sources for a SQL-based Kinesis Data Analytics application.
 type SqlApplicationConfigurationUpdate struct {
 
-	// The array of InputUpdate objects describing the new input streams used by the
-	// application.
+	// The array of InputUpdate objects describing the new input streams used by the application.
 	InputUpdates []InputUpdate
 
-	// The array of OutputUpdate objects describing the new destination streams used
-	// by the application.
+	// The array of OutputUpdate objects describing the new destination streams used by the
+	// application.
 	OutputUpdates []OutputUpdate
 
-	// The array of ReferenceDataSourceUpdate objects describing the new reference
-	// data sources used by the application.
+	// The array of ReferenceDataSourceUpdate objects describing the new reference data sources used by the
+	// application.
 	ReferenceDataSourceUpdates []ReferenceDataSourceUpdate
 
 	noSmithyDocumentSerde
@@ -2174,8 +2249,7 @@ type SqlApplicationConfigurationUpdate struct {
 // application.
 type SqlRunConfiguration struct {
 
-	// The input source ID. You can get this ID by calling the DescribeApplication
-	// operation.
+	// The input source ID. You can get this ID by calling the DescribeApplication operation.
 	//
 	// This member is required.
 	InputId *string
@@ -2193,8 +2267,9 @@ type SqlRunConfiguration struct {
 // Amazon resources. If you specify a tag that already exists, the tag value is
 // replaced with the value that you specify in the request. Note that the maximum
 // number of application tags includes system tags. The maximum number of
-// user-defined application tags is 50. For more information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html)
-// .
+// user-defined application tags is 50. For more information, see [Using Tagging].
+//
+// [Using Tagging]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
 type Tag struct {
 
 	// The key of the key-value tag.
@@ -2211,14 +2286,16 @@ type Tag struct {
 // Describes the parameters of a VPC used by the application.
 type VpcConfiguration struct {
 
-	// The array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
-	// IDs used by the VPC configuration.
+	// The array of [SecurityGroup] IDs used by the VPC configuration.
+	//
+	// [SecurityGroup]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html
 	//
 	// This member is required.
 	SecurityGroupIds []string
 
-	// The array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
-	// IDs used by the VPC configuration.
+	// The array of [Subnet] IDs used by the VPC configuration.
+	//
+	// [Subnet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html
 	//
 	// This member is required.
 	SubnetIds []string
@@ -2229,14 +2306,16 @@ type VpcConfiguration struct {
 // Describes the parameters of a VPC used by the application.
 type VpcConfigurationDescription struct {
 
-	// The array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
-	// IDs used by the VPC configuration.
+	// The array of [SecurityGroup] IDs used by the VPC configuration.
+	//
+	// [SecurityGroup]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html
 	//
 	// This member is required.
 	SecurityGroupIds []string
 
-	// The array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
-	// IDs used by the VPC configuration.
+	// The array of [Subnet] IDs used by the VPC configuration.
+	//
+	// [Subnet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html
 	//
 	// This member is required.
 	SubnetIds []string
@@ -2262,12 +2341,14 @@ type VpcConfigurationUpdate struct {
 	// This member is required.
 	VpcConfigurationId *string
 
-	// Describes updates to the array of SecurityGroup (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html)
-	// IDs used by the VPC configuration.
+	// Describes updates to the array of [SecurityGroup] IDs used by the VPC configuration.
+	//
+	// [SecurityGroup]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SecurityGroup.html
 	SecurityGroupIdUpdates []string
 
-	// Describes updates to the array of Subnet (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html)
-	// IDs used by the VPC configuration.
+	// Describes updates to the array of [Subnet] IDs used by the VPC configuration.
+	//
+	// [Subnet]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html
 	SubnetIdUpdates []string
 
 	noSmithyDocumentSerde
@@ -2342,8 +2423,9 @@ type ZeppelinApplicationConfigurationUpdate struct {
 
 // Describes configuration parameters for Amazon CloudWatch logging for a Managed
 // Service for Apache Flink Studio notebook. For more information about CloudWatch
-// logging, see Monitoring (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html)
-// .
+// logging, see [Monitoring].
+//
+// [Monitoring]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html
 type ZeppelinMonitoringConfiguration struct {
 
 	// The verbosity of the CloudWatch Logs for an application.

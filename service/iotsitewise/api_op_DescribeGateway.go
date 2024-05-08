@@ -45,18 +45,20 @@ type DescribeGatewayOutput struct {
 	// This member is required.
 	CreationDate *time.Time
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the gateway, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	// The [ARN] of the gateway, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	GatewayArn *string
 
 	// A list of gateway capability summaries that each contain a namespace and
 	// status. Each gateway capability defines data sources for the gateway. To
-	// retrieve a capability configuration's definition, use
-	// DescribeGatewayCapabilityConfiguration (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html)
-	// .
+	// retrieve a capability configuration's definition, use [DescribeGatewayCapabilityConfiguration].
+	//
+	// [DescribeGatewayCapabilityConfiguration]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html
 	//
 	// This member is required.
 	GatewayCapabilitySummaries []types.GatewayCapabilitySummary

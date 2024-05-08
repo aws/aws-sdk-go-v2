@@ -32,7 +32,7 @@ func (c *Client) DescribeRegistrationFieldDefinitions(ctx context.Context, param
 type DescribeRegistrationFieldDefinitionsInput struct {
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string
@@ -62,7 +62,7 @@ type DescribeRegistrationFieldDefinitionsOutput struct {
 	RegistrationFieldDefinitions []types.RegistrationFieldDefinition
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string

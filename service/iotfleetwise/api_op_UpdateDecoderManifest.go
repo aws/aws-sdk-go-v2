@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a decoder manifest. A decoder manifest can only be updated when the
-// status is DRAFT . Only ACTIVE decoder manifests can be associated with vehicles.
+//	Updates a decoder manifest.
+//
+// A decoder manifest can only be updated when the status is DRAFT . Only ACTIVE
+// decoder manifests can be associated with vehicles.
 func (c *Client) UpdateDecoderManifest(ctx context.Context, params *UpdateDecoderManifestInput, optFns ...func(*Options)) (*UpdateDecoderManifestOutput, error) {
 	if params == nil {
 		params = &UpdateDecoderManifestInput{}
@@ -30,37 +32,37 @@ func (c *Client) UpdateDecoderManifest(ctx context.Context, params *UpdateDecode
 
 type UpdateDecoderManifestInput struct {
 
-	// The name of the decoder manifest to update.
+	//  The name of the decoder manifest to update.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the decoder manifest to update.
+	//  A brief description of the decoder manifest to update.
 	Description *string
 
-	// A list of information about the network interfaces to add to the decoder
+	//  A list of information about the network interfaces to add to the decoder
 	// manifest.
 	NetworkInterfacesToAdd []types.NetworkInterface
 
-	// A list of network interfaces to remove from the decoder manifest.
+	//  A list of network interfaces to remove from the decoder manifest.
 	NetworkInterfacesToRemove []string
 
-	// A list of information about the network interfaces to update in the decoder
+	//  A list of information about the network interfaces to update in the decoder
 	// manifest.
 	NetworkInterfacesToUpdate []types.NetworkInterface
 
-	// A list of information about decoding additional signals to add to the decoder
+	//  A list of information about decoding additional signals to add to the decoder
 	// manifest.
 	SignalDecodersToAdd []types.SignalDecoder
 
-	// A list of signal decoders to remove from the decoder manifest.
+	//  A list of signal decoders to remove from the decoder manifest.
 	SignalDecodersToRemove []string
 
-	// A list of updated information about decoding signals to update in the decoder
+	//  A list of updated information about decoding signals to update in the decoder
 	// manifest.
 	SignalDecodersToUpdate []types.SignalDecoder
 
-	// The state of the decoder manifest. If the status is ACTIVE , the decoder
+	//  The state of the decoder manifest. If the status is ACTIVE , the decoder
 	// manifest can't be edited. If the status is DRAFT , you can edit the decoder
 	// manifest.
 	Status types.ManifestStatus
@@ -70,12 +72,12 @@ type UpdateDecoderManifestInput struct {
 
 type UpdateDecoderManifestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the updated decoder manifest.
+	//  The Amazon Resource Name (ARN) of the updated decoder manifest.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the updated decoder manifest.
+	//  The name of the updated decoder manifest.
 	//
 	// This member is required.
 	Name *string

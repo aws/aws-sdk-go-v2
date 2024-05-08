@@ -10,11 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a cases template. You can delete up to 100 templates per domain. After
-// a cases template is deleted:
+// Deletes a cases template. You can delete up to 100 templates per domain.
+//
+// After a cases template is deleted:
+//
 //   - You can still retrieve the template by calling GetTemplate .
+//
 //   - You cannot update the template.
+//
 //   - You cannot create a case by using the deleted template.
+//
 //   - Deleted templates are not included in the ListTemplates response.
 func (c *Client) DeleteTemplate(ctx context.Context, params *DeleteTemplateInput, optFns ...func(*Options)) (*DeleteTemplateOutput, error) {
 	if params == nil {

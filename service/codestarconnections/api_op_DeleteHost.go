@@ -11,8 +11,10 @@ import (
 )
 
 // The host to be deleted. Before you delete a host, all connections associated to
-// the host must be deleted. A host cannot be deleted if it is in the
-// VPC_CONFIG_INITIALIZING or VPC_CONFIG_DELETING state.
+// the host must be deleted.
+//
+// A host cannot be deleted if it is in the VPC_CONFIG_INITIALIZING or
+// VPC_CONFIG_DELETING state.
 func (c *Client) DeleteHost(ctx context.Context, params *DeleteHostInput, optFns ...func(*Options)) (*DeleteHostOutput, error) {
 	if params == nil {
 		params = &DeleteHostInput{}

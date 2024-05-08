@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specified resource group. Minimum permissions To
-// run this command, you must have the following permissions:
+// Returns information about a specified resource group.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:GetGroup
 func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...func(*Options)) (*GetGroupOutput, error) {
 	if params == nil {
@@ -45,8 +49,7 @@ type GetGroupInput struct {
 type GetGroupOutput struct {
 
 	// A structure that contains the metadata details for the specified resource
-	// group. Use GetGroupQuery and GetGroupConfiguration to get those additional
-	// details of the resource group.
+	// group. Use GetGroupQueryand GetGroupConfiguration to get those additional details of the resource group.
 	Group *types.Group
 
 	// Metadata pertaining to the operation's result.

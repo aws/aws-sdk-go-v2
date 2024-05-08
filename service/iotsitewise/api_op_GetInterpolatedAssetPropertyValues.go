@@ -14,14 +14,19 @@ import (
 // Get interpolated values for an asset property for a specified time interval,
 // during a period of time. If your time series is missing data points during the
 // specified time interval, you can use interpolation to estimate the missing data.
+//
 // For example, you can use this operation to return the interpolated temperature
-// values for a wind turbine every 24 hours over a duration of 7 days. To identify
-// an asset property, you must specify one of the following:
+// values for a wind turbine every 24 hours over a duration of 7 days.
+//
+// To identify an asset property, you must specify one of the following:
+//
 //   - The assetId and propertyId of an asset property.
+//
 //   - A propertyAlias , which is a data stream alias (for example,
 //     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
-//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
-//     .
+//     alias, see [UpdateAssetProperty].
+//
+// [UpdateAssetProperty]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
 func (c *Client) GetInterpolatedAssetPropertyValues(ctx context.Context, params *GetInterpolatedAssetPropertyValuesInput, optFns ...func(*Options)) (*GetInterpolatedAssetPropertyValuesOutput, error) {
 	if params == nil {
 		params = &GetInterpolatedAssetPropertyValuesInput{}
@@ -63,23 +68,33 @@ type GetInterpolatedAssetPropertyValuesInput struct {
 	// This member is required.
 	StartTimeInSeconds *int64
 
-	// The interpolation type. Valid values: LINEAR_INTERPOLATION | LOCF_INTERPOLATION
-	//   - LINEAR_INTERPOLATION – Estimates missing data using linear interpolation (https://en.wikipedia.org/wiki/Linear_interpolation)
-	//   . For example, you can use this operation to return the interpolated temperature
+	// The interpolation type.
+	//
+	// Valid values: LINEAR_INTERPOLATION | LOCF_INTERPOLATION
+	//
+	//   - LINEAR_INTERPOLATION – Estimates missing data using [linear interpolation].
+	//
+	// For example, you can use this operation to return the interpolated temperature
 	//   values for a wind turbine every 24 hours over a duration of 7 days. If the
 	//   interpolation starts July 1, 2021, at 9 AM, IoT SiteWise returns the first
 	//   interpolated value on July 2, 2021, at 9 AM, the second interpolated value on
 	//   July 3, 2021, at 9 AM, and so on.
+	//
 	//   - LOCF_INTERPOLATION – Estimates missing data using last observation carried
-	//   forward interpolation If no data point is found for an interval, IoT SiteWise
-	//   returns the last observed data point for the previous interval and carries
-	//   forward this interpolated value until a new data point is found. For example,
-	//   you can get the state of an on-off valve every 24 hours over a duration of 7
-	//   days. If the interpolation starts July 1, 2021, at 9 AM, IoT SiteWise returns
-	//   the last observed data point between July 1, 2021, at 9 AM and July 2, 2021, at
-	//   9 AM as the first interpolated value. If a data point isn't found after 9 AM on
-	//   July 2, 2021, IoT SiteWise uses the same interpolated value for the rest of the
-	//   days.
+	//   forward interpolation
+	//
+	// If no data point is found for an interval, IoT SiteWise returns the last
+	//   observed data point for the previous interval and carries forward this
+	//   interpolated value until a new data point is found.
+	//
+	// For example, you can get the state of an on-off valve every 24 hours over a
+	//   duration of 7 days. If the interpolation starts July 1, 2021, at 9 AM, IoT
+	//   SiteWise returns the last observed data point between July 1, 2021, at 9 AM and
+	//   July 2, 2021, at 9 AM as the first interpolated value. If a data point isn't
+	//   found after 9 AM on July 2, 2021, IoT SiteWise uses the same interpolated value
+	//   for the rest of the days.
+	//
+	// [linear interpolation]: https://en.wikipedia.org/wiki/Linear_interpolation
 	//
 	// This member is required.
 	Type *string
@@ -95,11 +110,14 @@ type GetInterpolatedAssetPropertyValuesInput struct {
 	// minus the window to the timestamp of each interval plus the window. If not
 	// specified, the window ranges between the start time minus the interval and the
 	// end time plus the interval.
+	//
 	//   - If you specify a value for the intervalWindowInSeconds parameter, the value
 	//   for the type parameter must be LINEAR_INTERPOLATION .
+	//
 	//   - If a data point isn't found during the specified query window, IoT SiteWise
 	//   won't return an interpolated value for the interval. This indicates that there's
 	//   a gap in the ingested data points.
+	//
 	// For example, you can get the interpolated temperature values for a wind turbine
 	// every 24 hours over a duration of 7 days. If the interpolation starts on July 1,
 	// 2021, at 9 AM with a window of 2 hours, IoT SiteWise uses the data points from 7
@@ -118,8 +136,9 @@ type GetInterpolatedAssetPropertyValuesInput struct {
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
 	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
-	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Mapping industrial data streams to asset properties]in the IoT SiteWise User Guide.
+	//
+	// [Mapping industrial data streams to asset properties]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
 	PropertyAlias *string
 
 	// The ID of the asset property, in UUID format.

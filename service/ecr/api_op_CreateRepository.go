@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a repository. For more information, see Amazon ECR repositories (https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html)
-// in the Amazon Elastic Container Registry User Guide.
+// Creates a repository. For more information, see [Amazon ECR repositories] in the Amazon Elastic
+// Container Registry User Guide.
+//
+// [Amazon ECR repositories]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html
 func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryInput, optFns ...func(*Options)) (*CreateRepositoryOutput, error) {
 	if params == nil {
 		params = &CreateRepositoryInput{}
@@ -32,9 +34,10 @@ type CreateRepositoryInput struct {
 
 	// The name to use for the repository. The repository name may be specified on its
 	// own (such as nginx-web-app ) or it can be prepended with a namespace to group
-	// the repository into a category (such as project-a/nginx-web-app ). The
-	// repository name must start with a letter and can only contain lowercase letters,
-	// numbers, hyphens, underscores, and forward slashes.
+	// the repository into a category (such as project-a/nginx-web-app ).
+	//
+	// The repository name must start with a letter and can only contain lowercase
+	// letters, numbers, hyphens, underscores, and forward slashes.
 	//
 	// This member is required.
 	RepositoryName *string

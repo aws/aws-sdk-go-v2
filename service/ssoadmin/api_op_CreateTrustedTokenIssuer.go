@@ -13,10 +13,12 @@ import (
 
 // Creates a connection to a trusted token issuer in an instance of IAM Identity
 // Center. A trusted token issuer enables trusted identity propagation to be used
-// with applications that authenticate outside of Amazon Web Services. This trusted
-// token issuer describes an external identity provider (IdP) that can generate
-// claims or assertions in the form of access tokens for a user. Applications
-// enabled for IAM Identity Center can use these tokens for authentication.
+// with applications that authenticate outside of Amazon Web Services.
+//
+// This trusted token issuer describes an external identity provider (IdP) that
+// can generate claims or assertions in the form of access tokens for a user.
+// Applications enabled for IAM Identity Center can use these tokens for
+// authentication.
 func (c *Client) CreateTrustedTokenIssuer(ctx context.Context, params *CreateTrustedTokenIssuerInput, optFns ...func(*Options)) (*CreateTrustedTokenIssuerOutput, error) {
 	if params == nil {
 		params = &CreateTrustedTokenIssuerInput{}
@@ -61,10 +63,15 @@ type CreateTrustedTokenIssuerInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// Specifies tags to be attached to the new trusted token issuer configuration.

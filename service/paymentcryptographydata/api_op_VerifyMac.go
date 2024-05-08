@@ -11,18 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Verifies a Message Authentication Code (MAC). You can use this operation to
-// verify MAC for message data authentication such as . In this operation, you must
-// use the same message data, secret encryption key and MAC algorithm that was used
-// to generate MAC. You can use this operation to verify a DUPKT, CMAC, HMAC or EMV
-// MAC by setting generation attributes and algorithm to the associated values. For
-// information about valid keys for this operation, see Understanding key
-// attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
-// and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. Cross-account use:
-// This operation can't be used across different Amazon Web Services accounts.
+// Verifies a Message Authentication Code (MAC).
+//
+// You can use this operation to verify MAC for message data authentication such
+// as . In this operation, you must use the same message data, secret encryption
+// key and MAC algorithm that was used to generate MAC. You can use this operation
+// to verify a DUPKT, CMAC, HMAC or EMV MAC by setting generation attributes and
+// algorithm to the associated values.
+//
+// For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
+// Web Services Payment Cryptography User Guide.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - GenerateMac
+//
+// # GenerateMac
+//
+// [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
 func (c *Client) VerifyMac(ctx context.Context, params *VerifyMacInput, optFns ...func(*Options)) (*VerifyMacOutput, error) {
 	if params == nil {
 		params = &VerifyMacInput{}
@@ -78,8 +86,10 @@ type VerifyMacOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography computes the KCV according to
-	// the CMAC specification.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	//
 	// This member is required.
 	KeyCheckValue *string

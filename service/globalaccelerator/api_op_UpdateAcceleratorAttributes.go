@@ -35,9 +35,11 @@ type UpdateAcceleratorAttributesInput struct {
 	AcceleratorArn *string
 
 	// Update whether flow logs are enabled. The default value is false. If the value
-	// is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more
-	// information, see Flow Logs (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
-	// in the Global Accelerator Developer Guide.
+	// is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified.
+	//
+	// For more information, see [Flow Logs] in the Global Accelerator Developer Guide.
+	//
+	// [Flow Logs]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
 	FlowLogsEnabled *bool
 
 	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
@@ -46,9 +48,12 @@ type UpdateAcceleratorAttributesInput struct {
 	FlowLogsS3Bucket *string
 
 	// Update the prefix for the location in the Amazon S3 bucket for the flow logs.
-	// Attribute is required if FlowLogsEnabled is true . If you specify slash (/) for
-	// the S3 bucket prefix, the log file bucket folder structure will include a double
-	// slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
+	// Attribute is required if FlowLogsEnabled is true .
+	//
+	// If you specify slash (/) for the S3 bucket prefix, the log file bucket folder
+	// structure will include a double slash (//), like the following:
+	//
+	// s3-bucket_name//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string
 
 	noSmithyDocumentSerde

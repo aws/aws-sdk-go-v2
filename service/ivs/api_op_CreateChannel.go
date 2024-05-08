@@ -58,17 +58,19 @@ type CreateChannelInput struct {
 	// enables recording. Default: "" (empty string, recording is disabled).
 	RecordingConfigurationArn *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value) . See Tagging
-	// Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// Array of 1-50 maps, each of the form string:string (key:value) . See [Tagging Amazon Web Services Resources] for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable input resolution or bitrate, the stream probably will
-	// disconnect immediately. Default: STANDARD . For details, see Channel Types (https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html)
-	// .
+	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
+	//
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
 	Type types.ChannelType
 
 	noSmithyDocumentSerde

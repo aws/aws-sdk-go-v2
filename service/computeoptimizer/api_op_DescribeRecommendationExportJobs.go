@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes recommendation export jobs created in the last seven days. Use the
-// ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations
-// actions to request an export of your recommendations. Then use the
-// DescribeRecommendationExportJobs action to view your export jobs.
+// Describes recommendation export jobs created in the last seven days.
+//
+// Use the ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations actions to request an export of your recommendations. Then use the DescribeRecommendationExportJobs
+// action to view your export jobs.
 func (c *Client) DescribeRecommendationExportJobs(ctx context.Context, params *DescribeRecommendationExportJobsInput, optFns ...func(*Options)) (*DescribeRecommendationExportJobsOutput, error) {
 	if params == nil {
 		params = &DescribeRecommendationExportJobsInput{}
@@ -36,15 +36,18 @@ type DescribeRecommendationExportJobsInput struct {
 	// export jobs.
 	Filters []types.JobFilter
 
-	// The identification numbers of the export jobs to return. An export job ID is
-	// returned when you create an export using the
-	// ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations
-	// actions. All export jobs created in the last seven days are returned if this
-	// parameter is omitted.
+	// The identification numbers of the export jobs to return.
+	//
+	// An export job ID is returned when you create an export using the ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations actions.
+	//
+	// All export jobs created in the last seven days are returned if this parameter
+	// is omitted.
 	JobIds []string
 
-	// The maximum number of export jobs to return with a single request. To retrieve
-	// the remaining results, make another request with the returned nextToken value.
+	// The maximum number of export jobs to return with a single request.
+	//
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of export jobs.
@@ -55,8 +58,9 @@ type DescribeRecommendationExportJobsInput struct {
 
 type DescribeRecommendationExportJobsOutput struct {
 
-	// The token to use to advance to the next page of export jobs. This value is null
-	// when there are no more pages of export jobs to return.
+	// The token to use to advance to the next page of export jobs.
+	//
+	// This value is null when there are no more pages of export jobs to return.
 	NextToken *string
 
 	// An array of objects that describe recommendation export jobs.
@@ -155,8 +159,10 @@ var _ DescribeRecommendationExportJobsAPIClient = (*Client)(nil)
 // DescribeRecommendationExportJobsPaginatorOptions is the paginator options for
 // DescribeRecommendationExportJobs
 type DescribeRecommendationExportJobsPaginatorOptions struct {
-	// The maximum number of export jobs to return with a single request. To retrieve
-	// the remaining results, make another request with the returned nextToken value.
+	// The maximum number of export jobs to return with a single request.
+	//
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

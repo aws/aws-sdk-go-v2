@@ -17,8 +17,9 @@ import (
 
 // Returns the version-specific settings of a Lambda function or version. The
 // output includes only options that can vary between versions of a function. To
-// modify these settings, use UpdateFunctionConfiguration . To get all of a
-// function's details, including function-level settings, use GetFunction .
+// modify these settings, use UpdateFunctionConfiguration.
+//
+// To get all of a function's details, including function-level settings, use GetFunction.
 func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFunctionConfigurationInput, optFns ...func(*Options)) (*GetFunctionConfigurationOutput, error) {
 	if params == nil {
 		params = &GetFunctionConfigurationInput{}
@@ -36,10 +37,16 @@ func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFuncti
 
 type GetFunctionConfigurationInput struct {
 
-	// The name or ARN of the Lambda function, version, or alias. Name formats
+	// The name or ARN of the Lambda function, version, or alias.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function (name-only), my-function:v1 (with alias).
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// You can append a version number or alias to any of the formats. The length
 	// constraint applies only to the full ARN. If you specify only the function name,
 	// it is limited to 64 characters in length.
@@ -74,18 +81,20 @@ type GetFunctionConfigurationOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
-	// . Omitted from CloudTrail logs.
+	// The function's [environment variables]. Omitted from CloudTrail logs.
+	//
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 	Environment *types.EnvironmentResponse
 
 	// The size of the function's /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10,240 MB. For more information, see
-	// Configuring ephemeral storage (console) (https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage)
-	// .
+	// can be any whole number between 512 and 10,240 MB. For more information, see [Configuring ephemeral storage (console)].
+	//
+	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *types.EphemeralStorage
 
-	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-	// .
+	// Connection settings for an [Amazon EFS file system].
+	//
+	// [Amazon EFS file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -100,14 +109,18 @@ type GetFunctionConfigurationOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
-	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
-	// is activated, this key is also used to encrypt the function's snapshot. This key
-	// is returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's [environment variables]. When [Lambda SnapStart] is activated, this
+	// key is also used to encrypt the function's snapshot. This key is returned only
+	// if you've configured a customer managed key.
+	//
+	// [Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
 	KMSKeyArn *string
 
-	// The date and time that the function was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// The date and time that the function was last updated, in [ISO-8601 format]
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModified *string
 
 	// The status of the last update that was performed on the function. This is first
@@ -120,8 +133,9 @@ type GetFunctionConfigurationOutput struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
 
-	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-	// .
+	// The function's [layers].
+	//
+	// [layers]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 	Layers []types.Layer
 
 	// The function's Amazon CloudWatch Logs configuration settings.
@@ -143,11 +157,13 @@ type GetFunctionConfigurationOutput struct {
 	// The function's execution role.
 	Role *string
 
-	// The identifier of the function's runtime (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-	// . Runtime is required if the deployment package is a .zip file archive. The
-	// following list includes deprecated runtimes. For more information, see Runtime
-	// deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// The identifier of the function's [runtime]. Runtime is required if the deployment
+	// package is a .zip file archive.
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [runtime]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	Runtime types.Runtime
 
 	// The ARN of the runtime and any errors that occured.
@@ -161,8 +177,9 @@ type GetFunctionConfigurationOutput struct {
 
 	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
-	// .
+	// see [Improving startup performance with Lambda SnapStart].
+	//
+	// [Improving startup performance with Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
 	SnapStart *types.SnapStartResponse
 
 	// The current state of the function. When the state is Inactive , you can
@@ -314,12 +331,13 @@ type FunctionActiveWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetFunctionConfigurationInput, *GetFunctionConfigurationOutput, error) (bool, error)
 }
 
@@ -520,12 +538,13 @@ type FunctionUpdatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetFunctionConfigurationInput, *GetFunctionConfigurationOutput, error) (bool, error)
 }
 
@@ -728,12 +747,13 @@ type PublishedVersionActiveWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetFunctionConfigurationInput, *GetFunctionConfigurationOutput, error) (bool, error)
 }
 

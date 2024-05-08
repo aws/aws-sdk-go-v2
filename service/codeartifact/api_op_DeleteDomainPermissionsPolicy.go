@@ -29,16 +29,16 @@ func (c *Client) DeleteDomainPermissionsPolicy(ctx context.Context, params *Dele
 
 type DeleteDomainPermissionsPolicyInput struct {
 
-	// The name of the domain associated with the resource policy to be deleted.
+	//  The name of the domain associated with the resource policy to be deleted.
 	//
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The current revision of the resource policy to be deleted. This revision is
+	//  The current revision of the resource policy to be deleted. This revision is
 	// used for optimistic locking, which prevents others from overwriting your changes
 	// to the domain's resource policy.
 	PolicyRevision *string
@@ -48,7 +48,7 @@ type DeleteDomainPermissionsPolicyInput struct {
 
 type DeleteDomainPermissionsPolicyOutput struct {
 
-	// Information about the deleted resource policy after processing the request.
+	//  Information about the deleted resource policy after processing the request.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.

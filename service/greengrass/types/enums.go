@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for BulkDeploymentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BulkDeploymentStatus) Values() []BulkDeploymentStatus {
 	return []BulkDeploymentStatus{
 		"Initializing",
@@ -37,8 +38,9 @@ const (
 )
 
 // Values returns all known values for ConfigurationSyncStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationSyncStatus) Values() []ConfigurationSyncStatus {
 	return []ConfigurationSyncStatus{
 		"InSync",
@@ -57,8 +59,9 @@ const (
 )
 
 // Values returns all known values for DeploymentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentType) Values() []DeploymentType {
 	return []DeploymentType{
 		"NewDeployment",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for EncodingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncodingType) Values() []EncodingType {
 	return []EncodingType{
 		"binary",
@@ -95,8 +99,9 @@ const (
 )
 
 // Values returns all known values for FunctionIsolationMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FunctionIsolationMode) Values() []FunctionIsolationMode {
 	return []FunctionIsolationMode{
 		"GreengrassContainer",
@@ -113,8 +118,9 @@ const (
 )
 
 // Values returns all known values for LoggerComponent. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LoggerComponent) Values() []LoggerComponent {
 	return []LoggerComponent{
 		"GreengrassSystem",
@@ -134,8 +140,9 @@ const (
 )
 
 // Values returns all known values for LoggerLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LoggerLevel) Values() []LoggerLevel {
 	return []LoggerLevel{
 		"DEBUG",
@@ -155,8 +162,9 @@ const (
 )
 
 // Values returns all known values for LoggerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LoggerType) Values() []LoggerType {
 	return []LoggerType{
 		"FileSystem",
@@ -173,8 +181,9 @@ const (
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Permission) Values() []Permission {
 	return []Permission{
 		"ro",
@@ -191,8 +200,9 @@ const (
 )
 
 // Values returns all known values for SoftwareToUpdate. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SoftwareToUpdate) Values() []SoftwareToUpdate {
 	return []SoftwareToUpdate{
 		"core",
@@ -209,8 +219,9 @@ const (
 )
 
 // Values returns all known values for Telemetry. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Telemetry) Values() []Telemetry {
 	return []Telemetry{
 		"On",
@@ -233,8 +244,9 @@ const (
 )
 
 // Values returns all known values for UpdateAgentLogLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateAgentLogLevel) Values() []UpdateAgentLogLevel {
 	return []UpdateAgentLogLevel{
 		"NONE",
@@ -260,6 +272,7 @@ const (
 
 // Values returns all known values for UpdateTargetsArchitecture. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateTargetsArchitecture) Values() []UpdateTargetsArchitecture {
 	return []UpdateTargetsArchitecture{
@@ -282,8 +295,9 @@ const (
 
 // Values returns all known values for UpdateTargetsOperatingSystem. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateTargetsOperatingSystem) Values() []UpdateTargetsOperatingSystem {
 	return []UpdateTargetsOperatingSystem{
 		"ubuntu",

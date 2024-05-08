@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an app block builder. An app block builder can only be started when it's
-// associated with an app block. Starting an app block builder starts a new
-// instance, which is equivalent to an elastic fleet instance with application
-// builder assistance functionality.
+// Starts an app block builder.
+//
+// An app block builder can only be started when it's associated with an app block.
+//
+// Starting an app block builder starts a new instance, which is equivalent to an
+// elastic fleet instance with application builder assistance functionality.
 func (c *Client) StartAppBlockBuilder(ctx context.Context, params *StartAppBlockBuilderInput, optFns ...func(*Options)) (*StartAppBlockBuilderOutput, error) {
 	if params == nil {
 		params = &StartAppBlockBuilderInput{}

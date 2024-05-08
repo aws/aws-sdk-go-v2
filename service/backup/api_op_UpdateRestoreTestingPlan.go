@@ -14,11 +14,17 @@ import (
 
 // This request will send changes to your specified restore testing plan.
 // RestoreTestingPlanName cannot be updated after it is created.
+//
 // RecoveryPointSelection can contain:
+//
 //   - Algorithm
+//
 //   - ExcludeVaults
+//
 //   - IncludeVaults
+//
 //   - RecoveryPointTypes
+//
 //   - SelectionWindowDays
 func (c *Client) UpdateRestoreTestingPlan(ctx context.Context, params *UpdateRestoreTestingPlanInput, optFns ...func(*Options)) (*UpdateRestoreTestingPlanOutput, error) {
 	if params == nil {

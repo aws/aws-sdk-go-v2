@@ -12,8 +12,10 @@ import (
 type HumanLoopDataAttributes struct {
 
 	// Declares that your content is free of personally identifiable information or
-	// adult content. Amazon SageMaker can restrict the Amazon Mechanical Turk workers
-	// who can view your task based on this information.
+	// adult content.
+	//
+	// Amazon SageMaker can restrict the Amazon Mechanical Turk workers who can view
+	// your task based on this information.
 	//
 	// This member is required.
 	ContentClassifiers []ContentClassifier

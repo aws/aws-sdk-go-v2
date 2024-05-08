@@ -4,17 +4,20 @@
 // Amazon WorkDocs.
 //
 // The Amazon WorkDocs API is designed for the following use cases:
+//
 //   - File Migration: File migration applications are supported for users who
 //     want to migrate their files from an on-premises or off-premises file system or
 //     service. Users can insert files into a user directory structure, as well as
 //     allow for basic metadata changes, such as modifications to the permissions of
 //     files.
+//
 //   - Security: Support security applications are supported for users who have
 //     additional security needs, such as antivirus or data loss prevention. The API
 //     actions, along with CloudTrail, allow these applications to detect when changes
 //     occur in Amazon WorkDocs. Then, the application can take the necessary actions
 //     and replace the target file. If the target file violates the policy, the
 //     application can also choose to email the user.
+//
 //   - eDiscovery/Analytics: General administrative applications are supported,
 //     such as eDiscovery and analytics. These applications can choose to mimic or
 //     record the actions in an Amazon WorkDocs site, along with CloudTrail, to
@@ -29,13 +32,20 @@
 // IAM policy). This includes, but is not limited to, the ability to modify file
 // permissions and upload any file to any user. This allows developers to perform
 // the three use cases above, as well as give users the ability to grant access on
-// a selective basis using the IAM model. The pricing for Amazon WorkDocs APIs
-// varies depending on the API call type for these actions:
+// a selective basis using the IAM model.
+//
+// The pricing for Amazon WorkDocs APIs varies depending on the API call type for
+// these actions:
+//
 //   - READ (Get*)
+//
 //   - WRITE (Activate*, Add*, Create*, Deactivate*, Initiate*, Update*)
+//
 //   - LIST (Describe*)
+//
 //   - DELETE*, CANCEL
 //
-// For information about Amazon WorkDocs API pricing, see Amazon WorkDocs Pricing (https://aws.amazon.com/workdocs/pricing/)
-// .
+// For information about Amazon WorkDocs API pricing, see [Amazon WorkDocs Pricing].
+//
+// [Amazon WorkDocs Pricing]: https://aws.amazon.com/workdocs/pricing/
 package workdocs

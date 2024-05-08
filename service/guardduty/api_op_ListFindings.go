@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists GuardDuty findings for the specified detector ID. There might be regional
-// differences because some flags might not be available in all the Regions where
-// GuardDuty is currently supported. For more information, see Regions and
-// endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
-// .
+// Lists GuardDuty findings for the specified detector ID.
+//
+// There might be regional differences because some flags might not be available
+// in all the Regions where GuardDuty is currently supported. For more information,
+// see [Regions and endpoints].
+//
+// [Regions and endpoints]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
 func (c *Client) ListFindings(ctx context.Context, params *ListFindingsInput, optFns ...func(*Options)) (*ListFindingsOutput, error) {
 	if params == nil {
 		params = &ListFindingsInput{}
@@ -40,58 +42,111 @@ type ListFindingsInput struct {
 	DetectorId *string
 
 	// Represents the criteria used for querying findings. Valid values include:
+	//
 	//   - JSON field name
+	//
 	//   - accountId
+	//
 	//   - region
+	//
 	//   - confidence
+	//
 	//   - id
+	//
 	//   - resource.accessKeyDetails.accessKeyId
+	//
 	//   - resource.accessKeyDetails.principalId
+	//
 	//   - resource.accessKeyDetails.userName
+	//
 	//   - resource.accessKeyDetails.userType
+	//
 	//   - resource.instanceDetails.iamInstanceProfile.id
+	//
 	//   - resource.instanceDetails.imageId
+	//
 	//   - resource.instanceDetails.instanceId
+	//
 	//   - resource.instanceDetails.networkInterfaces.ipv6Addresses
+	//
 	//   -
 	//   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress
+	//
 	//   - resource.instanceDetails.networkInterfaces.publicDnsName
+	//
 	//   - resource.instanceDetails.networkInterfaces.publicIp
+	//
 	//   - resource.instanceDetails.networkInterfaces.securityGroups.groupId
+	//
 	//   - resource.instanceDetails.networkInterfaces.securityGroups.groupName
+	//
 	//   - resource.instanceDetails.networkInterfaces.subnetId
+	//
 	//   - resource.instanceDetails.networkInterfaces.vpcId
+	//
 	//   - resource.instanceDetails.tags.key
+	//
 	//   - resource.instanceDetails.tags.value
+	//
 	//   - resource.resourceType
+	//
 	//   - service.action.actionType
+	//
 	//   - service.action.awsApiCallAction.api
+	//
 	//   - service.action.awsApiCallAction.callerType
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.city.cityName
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.country.countryName
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.ipAddressV4
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.organization.asn
+	//
 	//   - service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg
+	//
 	//   - service.action.awsApiCallAction.serviceName
+	//
 	//   - service.action.dnsRequestAction.domain
+	//
 	//   - service.action.dnsRequestAction.domainWithSuffix
+	//
 	//   - service.action.networkConnectionAction.blocked
+	//
 	//   - service.action.networkConnectionAction.connectionDirection
+	//
 	//   - service.action.networkConnectionAction.localPortDetails.port
+	//
 	//   - service.action.networkConnectionAction.protocol
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.country.countryName
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.organization.asn
+	//
 	//   - service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg
+	//
 	//   - service.action.networkConnectionAction.remotePortDetails.port
+	//
 	//   - service.additionalInfo.threatListName
-	//   - service.archived When this attribute is set to 'true', only archived
-	//   findings are listed. When it's set to 'false', only unarchived findings are
-	//   listed. When this attribute is not set, all existing findings are listed.
+	//
+	//   - service.archived
+	//
+	// When this attribute is set to 'true', only archived findings are listed. When
+	//   it's set to 'false', only unarchived findings are listed. When this attribute is
+	//   not set, all existing findings are listed.
+	//
 	//   - service.resourceRole
+	//
 	//   - severity
+	//
 	//   - type
-	//   - updatedAt Type: Timestamp in Unix Epoch millisecond format: 1486685375000
+	//
+	//   - updatedAt
+	//
+	// Type: Timestamp in Unix Epoch millisecond format: 1486685375000
 	FindingCriteria *types.FindingCriteria
 
 	// You can use this parameter to indicate the maximum number of items you want in

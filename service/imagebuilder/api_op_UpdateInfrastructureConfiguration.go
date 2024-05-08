@@ -31,8 +31,9 @@ func (c *Client) UpdateInfrastructureConfiguration(ctx context.Context, params *
 type UpdateInfrastructureConfigurationInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon EC2 API Reference.
+	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
@@ -55,10 +56,14 @@ type UpdateInfrastructureConfigurationInput struct {
 	// The instance metadata options that you can set for the HTTP requests that
 	// pipeline builds use to launch EC2 build and test instances. For more information
 	// about instance metadata options, see one of the following links:
-	//   - Configure the instance metadata options (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html)
-	//   in the Amazon EC2 User Guide for Linux instances.
-	//   - Configure the instance metadata options (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html)
-	//   in the Amazon EC2 Windows Guide for Windows instances.
+	//
+	// [Configure the instance metadata options]
+	//   - in the Amazon EC2 User Guide for Linux instances.
+	//
+	// [Configure the instance metadata options]
+	//   - in the Amazon EC2 Windows Guide for Windows instances.
+	//
+	// [Configure the instance metadata options]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/configuring-instance-metadata-options.html
 	InstanceMetadataOptions *types.InstanceMetadataOptions
 
 	// The instance types of the infrastructure configuration. You can specify one or
@@ -81,10 +86,11 @@ type UpdateInfrastructureConfigurationInput struct {
 	SecurityGroupIds []string
 
 	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
-	// event notifications. EC2 Image Builder is unable to send notifications to SNS
-	// topics that are encrypted using keys from other accounts. The key that is used
-	// to encrypt the SNS topic must reside in the account that the Image Builder
-	// service runs under.
+	// event notifications.
+	//
+	// EC2 Image Builder is unable to send notifications to SNS topics that are
+	// encrypted using keys from other accounts. The key that is used to encrypt the
+	// SNS topic must reside in the account that the Image Builder service runs under.
 	SnsTopicArn *string
 
 	// The subnet ID to place the instance used to customize your Amazon EC2 AMI in.

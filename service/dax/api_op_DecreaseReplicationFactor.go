@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more nodes from a DAX cluster. You cannot use
-// DecreaseReplicationFactor to remove the last node in a DAX cluster. If you need
-// to do this, use DeleteCluster instead.
+// Removes one or more nodes from a DAX cluster.
+//
+// You cannot use DecreaseReplicationFactor to remove the last node in a DAX
+// cluster. If you need to do this, use DeleteCluster instead.
 func (c *Client) DecreaseReplicationFactor(ctx context.Context, params *DecreaseReplicationFactorInput, optFns ...func(*Options)) (*DecreaseReplicationFactorOutput, error) {
 	if params == nil {
 		params = &DecreaseReplicationFactorInput{}

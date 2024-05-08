@@ -14,11 +14,17 @@ import (
 // Returns the contents of the effective policy for specified policy type and
 // account. The effective policy is the aggregation of any policies of the
 // specified type that the account inherits, plus any policy of that type that is
-// directly attached to the account. This operation applies only to policy types
-// other than service control policies (SCPs). For more information about policy
-// inheritance, see Understanding management policy inheritance (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html)
-// in the Organizations User Guide. This operation can be called from any account
-// in the organization.
+// directly attached to the account.
+//
+// This operation applies only to policy types other than service control policies
+// (SCPs).
+//
+// For more information about policy inheritance, see [Understanding management policy inheritance] in the Organizations User
+// Guide.
+//
+// This operation can be called from any account in the organization.
+//
+// [Understanding management policy inheritance]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_inheritance_mgmt.html
 func (c *Client) DescribeEffectivePolicy(ctx context.Context, params *DescribeEffectivePolicyInput, optFns ...func(*Options)) (*DescribeEffectivePolicyOutput, error) {
 	if params == nil {
 		params = &DescribeEffectivePolicyInput{}
@@ -38,9 +44,16 @@ type DescribeEffectivePolicyInput struct {
 
 	// The type of policy that you want information about. You can specify one of the
 	// following values:
-	//   - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-	//   - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-	//   - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	//
+	// [AISERVICES_OPT_OUT_POLICY]
+	//
+	// [BACKUP_POLICY]
+	//
+	// [TAG_POLICY]
+	//
+	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 	//
 	// This member is required.
 	PolicyType types.EffectivePolicyType

@@ -13,9 +13,10 @@ import (
 
 // Lists orders. Add filters to your request to return a more specific list of
 // results. Use filters to match the Amazon Resource Name (ARN) of the network site
-// or the status of the order. If you specify multiple filters, filters are joined
-// with an OR, and the request returns results that match all of the specified
-// filters.
+// or the status of the order.
+//
+// If you specify multiple filters, filters are joined with an OR, and the request
+// returns results that match all of the specified filters.
 func (c *Client) ListOrders(ctx context.Context, params *ListOrdersInput, optFns ...func(*Options)) (*ListOrdersOutput, error) {
 	if params == nil {
 		params = &ListOrdersInput{}
@@ -39,8 +40,11 @@ type ListOrdersInput struct {
 	NetworkArn *string
 
 	// The filters.
+	//
 	//   - NETWORK_SITE - The Amazon Resource Name (ARN) of the network site.
+	//
 	//   - STATUS - The status ( ACKNOWLEDGING | ACKNOWLEDGED | UNACKNOWLEDGED ).
+	//
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.

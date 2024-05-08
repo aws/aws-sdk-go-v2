@@ -15,8 +15,9 @@ import (
 // Updates the configuration of an existing origination phone number. You can
 // update the opt-out list, enable or disable two-way messaging, change the
 // TwoWayChannelArn, enable or disable self-managed opt-outs, and enable or disable
-// deletion protection. If the origination phone number is associated with a pool,
-// an error is returned.
+// deletion protection.
+//
+// If the origination phone number is associated with a pool, an error is returned.
 func (c *Client) UpdatePhoneNumber(ctx context.Context, params *UpdatePhoneNumberInput, optFns ...func(*Options)) (*UpdatePhoneNumberOutput, error) {
 	if params == nil {
 		params = &UpdatePhoneNumberInput{}
@@ -72,14 +73,16 @@ type UpdatePhoneNumberInput struct {
 
 type UpdatePhoneNumberOutput struct {
 
-	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// When set to true the phone number can't be deleted.
 	DeletionProtectionEnabled bool
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	IsoCountryCode *string
 
 	// The type of message. Valid values are TRANSACTIONAL for messages that are

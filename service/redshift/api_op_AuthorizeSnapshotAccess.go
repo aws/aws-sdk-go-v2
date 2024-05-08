@@ -12,9 +12,12 @@ import (
 )
 
 // Authorizes the specified Amazon Web Services account to restore the specified
-// snapshot. For more information about working with snapshots, go to Amazon
-// Redshift Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
-// in the Amazon Redshift Cluster Management Guide.
+// snapshot.
+//
+// For more information about working with snapshots, go to [Amazon Redshift Snapshots] in the Amazon
+// Redshift Cluster Management Guide.
+//
+// [Amazon Redshift Snapshots]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
 func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeSnapshotAccessInput, optFns ...func(*Options)) (*AuthorizeSnapshotAccessOutput, error) {
 	if params == nil {
 		params = &AuthorizeSnapshotAccessInput{}
@@ -33,8 +36,10 @@ func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeS
 type AuthorizeSnapshotAccessInput struct {
 
 	// The identifier of the Amazon Web Services account authorized to restore the
-	// specified snapshot. To share a snapshot with Amazon Web Services Support,
-	// specify amazon-redshift-support.
+	// specified snapshot.
+	//
+	// To share a snapshot with Amazon Web Services Support, specify
+	// amazon-redshift-support.
 	//
 	// This member is required.
 	AccountWithRestoreAccess *string
@@ -43,9 +48,11 @@ type AuthorizeSnapshotAccessInput struct {
 	SnapshotArn *string
 
 	// The identifier of the cluster the snapshot was created from.
+	//
 	//   - If the snapshot to access doesn't exist and the associated IAM policy
 	//   doesn't allow access to all (*) snapshots - This parameter is required.
 	//   Otherwise, permissions aren't available to check if the snapshot exists.
+	//
 	//   - If the snapshot to access exists - This parameter isn't required. Redshift
 	//   can retrieve the cluster identifier and use it to validate snapshot
 	//   authorization.

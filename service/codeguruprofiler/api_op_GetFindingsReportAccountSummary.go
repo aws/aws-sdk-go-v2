@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of FindingsReportSummary (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
-// objects that contain analysis results for all profiling groups in your AWS
-// account.
+//	Returns a list of [FindingsReportSummary]FindingsReportSummary objects that contain analysis results
+//
+// for all profiling groups in your AWS account.
+//
+// [FindingsReportSummary]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html
 func (c *Client) GetFindingsReportAccountSummary(ctx context.Context, params *GetFindingsReportAccountSummaryInput, optFns ...func(*Options)) (*GetFindingsReportAccountSummaryOutput, error) {
 	if params == nil {
 		params = &GetFindingsReportAccountSummaryInput{}
@@ -49,9 +51,10 @@ type GetFindingsReportAccountSummaryInput struct {
 	// The nextToken value returned from a previous paginated
 	// GetFindingsReportAccountSummary request where maxResults was used and the
 	// results exceeded the value of that parameter. Pagination continues from the end
-	// of the previous results that returned the nextToken value. This token should be
-	// treated as an opaque identifier that is only used to retrieve the next items in
-	// a list and not for other programmatic purposes.
+	// of the previous results that returned the nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -60,9 +63,10 @@ type GetFindingsReportAccountSummaryInput struct {
 // The structure representing the GetFindingsReportAccountSummaryResponse.
 type GetFindingsReportAccountSummaryOutput struct {
 
-	// The return list of FindingsReportSummary (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
-	// objects taht contain summaries of analysis results for all profiling groups in
-	// your AWS account.
+	// The return list of [FindingsReportSummary]FindingsReportSummary objects taht contain summaries of
+	// analysis results for all profiling groups in your AWS account.
+	//
+	// [FindingsReportSummary]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html
 	//
 	// This member is required.
 	ReportSummaries []types.FindingsReportSummary

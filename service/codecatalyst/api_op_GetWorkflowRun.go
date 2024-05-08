@@ -30,8 +30,7 @@ func (c *Client) GetWorkflowRun(ctx context.Context, params *GetWorkflowRunInput
 
 type GetWorkflowRunInput struct {
 
-	// The ID of the workflow run. To retrieve a list of workflow run IDs, use
-	// ListWorkflowRuns .
+	// The ID of the workflow run. To retrieve a list of workflow run IDs, use ListWorkflowRuns.
 	//
 	// This member is required.
 	Id *string
@@ -57,7 +56,9 @@ type GetWorkflowRunOutput struct {
 	Id *string
 
 	// The date and time the workflow run status was last updated, in coordinated
-	// universal time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// universal time (UTC) timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
@@ -73,7 +74,9 @@ type GetWorkflowRunOutput struct {
 	SpaceName *string
 
 	// The date and time the workflow run began, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -89,8 +92,9 @@ type GetWorkflowRunOutput struct {
 	WorkflowId *string
 
 	// The date and time the workflow run ended, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	EndTime *time.Time
 
 	// Information about the reasons for the status of the workflow run.

@@ -29,15 +29,15 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 
 type ListImportsInput struct {
 
-	// An optional string that, if supplied, must be copied from the output of a
+	//  An optional string that, if supplied, must be copied from the output of a
 	// previous call to ListImports . When provided in this manner, the API fetches the
 	// next page of results.
 	NextToken *string
 
-	// The number of ImportSummary objects returned in a single page.
+	//  The number of ImportSummary objects returned in a single page.
 	PageSize *int32
 
-	// The Amazon Resource Name (ARN) associated with the table that was imported to.
+	//  The Amazon Resource Name (ARN) associated with the table that was imported to.
 	TableArn *string
 
 	noSmithyDocumentSerde
@@ -45,10 +45,10 @@ type ListImportsInput struct {
 
 type ListImportsOutput struct {
 
-	// A list of ImportSummary objects.
+	//  A list of ImportSummary objects.
 	ImportSummaryList []types.ImportSummary
 
-	// If this value is returned, there are additional results to be displayed. To
+	//  If this value is returned, there are additional results to be displayed. To
 	// retrieve them, call ListImports again, with NextToken set to this value.
 	NextToken *string
 
@@ -149,7 +149,7 @@ var _ ListImportsAPIClient = (*Client)(nil)
 
 // ListImportsPaginatorOptions is the paginator options for ListImports
 type ListImportsPaginatorOptions struct {
-	// The number of ImportSummary objects returned in a single page.
+	//  The number of ImportSummary objects returned in a single page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

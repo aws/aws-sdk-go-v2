@@ -18,7 +18,9 @@ import (
 
 // Returns information about a particular replication group. If no identifier is
 // specified, DescribeReplicationGroups returns information about all replication
-// groups. This operation is valid for Redis only.
+// groups.
+//
+// This operation is valid for Redis only.
 func (c *Client) DescribeReplicationGroups(ctx context.Context, params *DescribeReplicationGroupsInput, optFns ...func(*Options)) (*DescribeReplicationGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationGroupsInput{}
@@ -45,13 +47,18 @@ type DescribeReplicationGroupsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	// The identifier for the replication group to be described. This parameter is not
-	// case sensitive. If you do not specify this parameter, information about all
-	// replication groups is returned.
+	// case sensitive.
+	//
+	// If you do not specify this parameter, information about all replication groups
+	// is returned.
 	ReplicationGroupId *string
 
 	noSmithyDocumentSerde
@@ -162,8 +169,11 @@ var _ DescribeReplicationGroupsAPIClient = (*Client)(nil)
 type DescribeReplicationGroupsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -278,12 +288,13 @@ type ReplicationGroupAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeReplicationGroupsInput, *DescribeReplicationGroupsOutput, error) (bool, error)
 }
 
@@ -492,12 +503,13 @@ type ReplicationGroupDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeReplicationGroupsInput, *DescribeReplicationGroupsOutput, error) (bool, error)
 }
 

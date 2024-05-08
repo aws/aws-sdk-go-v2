@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an identity pool. You must use AWS Developer credentials to call this
-// API.
+// Updates an identity pool.
+//
+// You must use AWS Developer credentials to call this API.
 func (c *Client) UpdateIdentityPool(ctx context.Context, params *UpdateIdentityPoolInput, optFns ...func(*Options)) (*UpdateIdentityPoolOutput, error) {
 	if params == nil {
 		params = &UpdateIdentityPoolInput{}
@@ -47,8 +48,9 @@ type UpdateIdentityPoolInput struct {
 	IdentityPoolName *string
 
 	// Enables or disables the Basic (Classic) authentication flow. For more
-	// information, see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
-	// in the Amazon Cognito Developer Guide.
+	// information, see [Identity Pools (Federated Identities) Authentication Flow]in the Amazon Cognito Developer Guide.
+	//
+	// [Identity Pools (Federated Identities) Authentication Flow]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html
 	AllowClassicFlow *bool
 
 	// A list representing an Amazon Cognito user pool and its client ID.
@@ -94,8 +96,9 @@ type UpdateIdentityPoolOutput struct {
 	IdentityPoolName *string
 
 	// Enables or disables the Basic (Classic) authentication flow. For more
-	// information, see Identity Pools (Federated Identities) Authentication Flow (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
-	// in the Amazon Cognito Developer Guide.
+	// information, see [Identity Pools (Federated Identities) Authentication Flow]in the Amazon Cognito Developer Guide.
+	//
+	// [Identity Pools (Federated Identities) Authentication Flow]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html
 	AllowClassicFlow *bool
 
 	// A list representing an Amazon Cognito user pool and its client ID.

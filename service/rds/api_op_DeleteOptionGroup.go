@@ -28,8 +28,9 @@ func (c *Client) DeleteOptionGroup(ctx context.Context, params *DeleteOptionGrou
 
 type DeleteOptionGroupInput struct {
 
-	// The name of the option group to be deleted. You can't delete default option
-	// groups.
+	// The name of the option group to be deleted.
+	//
+	// You can't delete default option groups.
 	//
 	// This member is required.
 	OptionGroupName *string

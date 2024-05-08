@@ -28,7 +28,7 @@ func (c *Client) CancelOrder(ctx context.Context, params *CancelOrderInput, optF
 
 type CancelOrderInput struct {
 
-	// The ID of the order.
+	//  The ID of the order.
 	//
 	// This member is required.
 	OrderId *string

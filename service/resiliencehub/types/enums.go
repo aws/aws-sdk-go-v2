@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for AlarmType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlarmType) Values() []AlarmType {
 	return []AlarmType{
 		"Metric",
@@ -36,6 +37,7 @@ const (
 
 // Values returns all known values for AppAssessmentScheduleType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AppAssessmentScheduleType) Values() []AppAssessmentScheduleType {
 	return []AppAssessmentScheduleType{
@@ -55,8 +57,9 @@ const (
 )
 
 // Values returns all known values for AppComplianceStatusType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppComplianceStatusType) Values() []AppComplianceStatusType {
 	return []AppComplianceStatusType{
 		"PolicyBreached",
@@ -76,8 +79,9 @@ const (
 )
 
 // Values returns all known values for AppDriftStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppDriftStatusType) Values() []AppDriftStatusType {
 	return []AppDriftStatusType{
 		"NotChecked",
@@ -95,8 +99,9 @@ const (
 )
 
 // Values returns all known values for AppStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppStatusType) Values() []AppStatusType {
 	return []AppStatusType{
 		"Active",
@@ -113,8 +118,9 @@ const (
 )
 
 // Values returns all known values for AssessmentInvoker. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssessmentInvoker) Values() []AssessmentInvoker {
 	return []AssessmentInvoker{
 		"User",
@@ -133,8 +139,9 @@ const (
 )
 
 // Values returns all known values for AssessmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssessmentStatus) Values() []AssessmentStatus {
 	return []AssessmentStatus{
 		"Pending",
@@ -153,8 +160,9 @@ const (
 )
 
 // Values returns all known values for ComplianceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComplianceStatus) Values() []ComplianceStatus {
 	return []ComplianceStatus{
 		"PolicyBreached",
@@ -176,8 +184,9 @@ const (
 
 // Values returns all known values for ConfigRecommendationOptimizationType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigRecommendationOptimizationType) Values() []ConfigRecommendationOptimizationType {
 	return []ConfigRecommendationOptimizationType{
 		"LeastCost",
@@ -200,8 +209,9 @@ const (
 )
 
 // Values returns all known values for CostFrequency. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CostFrequency) Values() []CostFrequency {
 	return []CostFrequency{
 		"Hourly",
@@ -221,8 +231,9 @@ const (
 )
 
 // Values returns all known values for DataLocationConstraint. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataLocationConstraint) Values() []DataLocationConstraint {
 	return []DataLocationConstraint{
 		"AnyLocation",
@@ -241,8 +252,9 @@ const (
 )
 
 // Values returns all known values for DifferenceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DifferenceType) Values() []DifferenceType {
 	return []DifferenceType{
 		"NotEqual",
@@ -262,8 +274,9 @@ const (
 )
 
 // Values returns all known values for DisruptionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DisruptionType) Values() []DisruptionType {
 	return []DisruptionType{
 		"Software",
@@ -283,8 +296,9 @@ const (
 )
 
 // Values returns all known values for DriftStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DriftStatus) Values() []DriftStatus {
 	return []DriftStatus{
 		"NotChecked",
@@ -302,8 +316,9 @@ const (
 )
 
 // Values returns all known values for DriftType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DriftType) Values() []DriftType {
 	return []DriftType{
 		"ApplicationCompliance",
@@ -322,8 +337,9 @@ const (
 )
 
 // Values returns all known values for EstimatedCostTier. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EstimatedCostTier) Values() []EstimatedCostTier {
 	return []EstimatedCostTier{
 		"L1",
@@ -342,8 +358,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"ScheduledAssessmentFailure",
@@ -362,6 +379,7 @@ const (
 
 // Values returns all known values for ExcludeRecommendationReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ExcludeRecommendationReason) Values() []ExcludeRecommendationReason {
 	return []ExcludeRecommendationReason{
@@ -383,8 +401,9 @@ const (
 )
 
 // Values returns all known values for HaArchitecture. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HaArchitecture) Values() []HaArchitecture {
 	return []HaArchitecture{
 		"MultiSite",
@@ -404,8 +423,9 @@ const (
 )
 
 // Values returns all known values for PermissionModelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionModelType) Values() []PermissionModelType {
 	return []PermissionModelType{
 		"LegacyIAMUser",
@@ -422,8 +442,9 @@ const (
 )
 
 // Values returns all known values for PhysicalIdentifierType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PhysicalIdentifierType) Values() []PhysicalIdentifierType {
 	return []PhysicalIdentifierType{
 		"Arn",
@@ -442,8 +463,9 @@ const (
 
 // Values returns all known values for RecommendationComplianceStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationComplianceStatus) Values() []RecommendationComplianceStatus {
 	return []RecommendationComplianceStatus{
 		"BreachedUnattainable",
@@ -463,8 +485,9 @@ const (
 )
 
 // Values returns all known values for RecommendationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationStatus) Values() []RecommendationStatus {
 	return []RecommendationStatus{
 		"Implemented",
@@ -486,8 +509,9 @@ const (
 
 // Values returns all known values for RecommendationTemplateStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationTemplateStatus) Values() []RecommendationTemplateStatus {
 	return []RecommendationTemplateStatus{
 		"Pending",
@@ -508,6 +532,7 @@ const (
 
 // Values returns all known values for RenderRecommendationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RenderRecommendationType) Values() []RenderRecommendationType {
 	return []RenderRecommendationType{
@@ -530,8 +555,9 @@ const (
 )
 
 // Values returns all known values for ResiliencyPolicyTier. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResiliencyPolicyTier) Values() []ResiliencyPolicyTier {
 	return []ResiliencyPolicyTier{
 		"MissionCritical",
@@ -554,8 +580,9 @@ const (
 )
 
 // Values returns all known values for ResiliencyScoreType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResiliencyScoreType) Values() []ResiliencyScoreType {
 	return []ResiliencyScoreType{
 		"Compliance",
@@ -577,6 +604,7 @@ const (
 
 // Values returns all known values for ResourceImportStatusType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceImportStatusType) Values() []ResourceImportStatusType {
 	return []ResourceImportStatusType{
@@ -597,6 +625,7 @@ const (
 
 // Values returns all known values for ResourceImportStrategyType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceImportStrategyType) Values() []ResourceImportStrategyType {
 	return []ResourceImportStrategyType{
@@ -618,8 +647,9 @@ const (
 )
 
 // Values returns all known values for ResourceMappingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceMappingType) Values() []ResourceMappingType {
 	return []ResourceMappingType{
 		"CfnStack",
@@ -643,8 +673,9 @@ const (
 
 // Values returns all known values for ResourceResolutionStatusType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceResolutionStatusType) Values() []ResourceResolutionStatusType {
 	return []ResourceResolutionStatusType{
 		"Pending",
@@ -663,8 +694,9 @@ const (
 )
 
 // Values returns all known values for ResourceSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceSourceType) Values() []ResourceSourceType {
 	return []ResourceSourceType{
 		"AppTemplate",
@@ -680,8 +712,9 @@ const (
 )
 
 // Values returns all known values for SopServiceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SopServiceType) Values() []SopServiceType {
 	return []SopServiceType{
 		"SSM",
@@ -697,8 +730,9 @@ const (
 )
 
 // Values returns all known values for TemplateFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateFormat) Values() []TemplateFormat {
 	return []TemplateFormat{
 		"CfnYaml",
@@ -716,8 +750,9 @@ const (
 )
 
 // Values returns all known values for TestRisk. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TestRisk) Values() []TestRisk {
 	return []TestRisk{
 		"Small",
@@ -737,8 +772,9 @@ const (
 )
 
 // Values returns all known values for TestType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TestType) Values() []TestType {
 	return []TestType{
 		"Software",

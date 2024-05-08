@@ -71,10 +71,13 @@ type UpdateIdNamespaceOutput struct {
 	// This member is required.
 	IdNamespaceName *string
 
-	// The type of ID namespace. There are two types: SOURCE and TARGET . The SOURCE
-	// contains configurations for sourceId data that will be processed in an ID
-	// mapping workflow. The TARGET contains a configuration of targetId to which all
-	// sourceIds will resolve to.
+	// The type of ID namespace. There are two types: SOURCE and TARGET .
+	//
+	// The SOURCE contains configurations for sourceId data that will be processed in
+	// an ID mapping workflow.
+	//
+	// The TARGET contains a configuration of targetId to which all sourceIds will
+	// resolve to.
 	//
 	// This member is required.
 	Type types.IdNamespaceType

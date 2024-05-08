@@ -18,10 +18,13 @@ import (
 // version 3.4.5 or higher. To enable migration regardless of version, set the
 // Force option to true. However, if you don't upgrade instances earlier than
 // version 3.4.5, some types of events might not be available when you use Amazon
-// EventBridge. To call this operation, make sure that you have certain permissions
-// added to your user account. For more information, see Migrating event
-// subscriptions to Amazon EventBridge (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge)
-// in the Amazon Web Services Database Migration Service User Guide.
+// EventBridge.
+//
+// To call this operation, make sure that you have certain permissions added to
+// your user account. For more information, see [Migrating event subscriptions to Amazon EventBridge]in the Amazon Web Services
+// Database Migration Service User Guide.
+//
+// [Migrating event subscriptions to Amazon EventBridge]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge
 func (c *Client) UpdateSubscriptionsToEventBridge(ctx context.Context, params *UpdateSubscriptionsToEventBridgeInput, optFns ...func(*Options)) (*UpdateSubscriptionsToEventBridgeOutput, error) {
 	if params == nil {
 		params = &UpdateSubscriptionsToEventBridgeInput{}

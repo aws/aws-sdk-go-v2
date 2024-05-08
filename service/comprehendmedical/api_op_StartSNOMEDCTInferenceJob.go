@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous job to detect medical concepts and link them to the
+//	Starts an asynchronous job to detect medical concepts and link them to the
+//
 // SNOMED-CT ontology. Use the DescribeSNOMEDCTInferenceJob operation to track the
 // status of a job.
 func (c *Client) StartSNOMEDCTInferenceJob(ctx context.Context, params *StartSNOMEDCTInferenceJobInput, optFns ...func(*Options)) (*StartSNOMEDCTInferenceJobOutput, error) {
@@ -31,7 +32,7 @@ func (c *Client) StartSNOMEDCTInferenceJob(ctx context.Context, params *StartSNO
 
 type StartSNOMEDCTInferenceJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	//  The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend Medical read access to your input data.
 	//
 	// This member is required.
@@ -43,7 +44,8 @@ type StartSNOMEDCTInferenceJobInput struct {
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input documents. All documents must be in the same language.
+	//  The language of the input documents. All documents must be in the same
+	// language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -53,14 +55,14 @@ type StartSNOMEDCTInferenceJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// A unique identifier for the request. If you don't set the client request token,
-	// Amazon Comprehend Medical generates one.
+	//  A unique identifier for the request. If you don't set the client request
+	// token, Amazon Comprehend Medical generates one.
 	ClientRequestToken *string
 
-	// The user generated name the asynchronous InferSNOMEDCT job.
+	//  The user generated name the asynchronous InferSNOMEDCT job.
 	JobName *string
 
-	// An AWS Key Management Service key used to encrypt your output files. If you do
+	//  An AWS Key Management Service key used to encrypt your output files. If you do
 	// not specify a key, the files are written in plain text.
 	KMSKey *string
 
@@ -69,7 +71,7 @@ type StartSNOMEDCTInferenceJobInput struct {
 
 type StartSNOMEDCTInferenceJobOutput struct {
 
-	// The identifier generated for the job. To get the status of a job, use this
+	//  The identifier generated for the job. To get the status of a job, use this
 	// identifier with the StartSNOMEDCTInferenceJob operation.
 	JobId *string
 

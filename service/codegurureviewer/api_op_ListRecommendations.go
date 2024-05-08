@@ -29,8 +29,9 @@ func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommenda
 
 type ListRecommendationsInput struct {
 
-	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
-	// object.
+	// The Amazon Resource Name (ARN) of the [CodeReview] object.
+	//
+	// [CodeReview]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
 	//
 	// This member is required.
 	CodeReviewArn *string

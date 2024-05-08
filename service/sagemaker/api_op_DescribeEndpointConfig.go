@@ -62,9 +62,10 @@ type DescribeEndpointConfigOutput struct {
 	// This member is required.
 	ProductionVariants []types.ProductionVariant
 
-	// Returns the description of an endpoint configuration created using the
-	// CreateEndpointConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html)
-	// API.
+	// Returns the description of an endpoint configuration created using the [CreateEndpointConfig]
+	// CreateEndpointConfig API.
+	//
+	// [CreateEndpointConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
 	AsyncInferenceConfig *types.AsyncInferenceConfig
 
 	// Configuration to control how SageMaker captures inference data.
@@ -93,9 +94,9 @@ type DescribeEndpointConfigOutput struct {
 
 	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
 	// hosted models, and compute resources have access to. You can control access to
-	// and from your resources by configuring a VPC. For more information, see Give
-	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
-	// .
+	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	//
+	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
 	VpcConfig *types.VpcConfig
 
 	// Metadata pertaining to the operation's result.

@@ -12,9 +12,10 @@ import (
 )
 
 // Adds the specified tags to the specified Direct Connect resource. Each resource
-// can have a maximum of 50 tags. Each tag consists of a key and an optional value.
-// If a tag with the same key is already associated with the resource, this action
-// updates its value.
+// can have a maximum of 50 tags.
+//
+// Each tag consists of a key and an optional value. If a tag with the same key is
+// already associated with the resource, this action updates its value.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

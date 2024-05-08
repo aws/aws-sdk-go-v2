@@ -34,19 +34,26 @@ func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInst
 	return out, nil
 }
 
-// Represents the input to DescribeDBInstances .
+// Represents the input to DescribeDBInstances.
 type DescribeDBInstancesInput struct {
 
 	// The user-provided instance identifier. If this parameter is specified,
 	// information from only the specific instance is returned. This parameter isn't
-	// case sensitive. Constraints:
+	// case sensitive.
+	//
+	// Constraints:
+	//
 	//   - If provided, must match the identifier of an existing DBInstance .
 	DBInstanceIdentifier *string
 
-	// A filter that specifies one or more instances to describe. Supported filters:
+	// A filter that specifies one or more instances to describe.
+	//
+	// Supported filters:
+	//
 	//   - db-cluster-id - Accepts cluster identifiers and cluster Amazon Resource
 	//   Names (ARNs). The results list includes only the information about the instances
 	//   that are associated with the clusters that are identified by these ARNs.
+	//
 	//   - db-instance-id - Accepts instance identifiers and instance ARNs. The results
 	//   list includes only the information about the instances that are identified by
 	//   these ARNs.
@@ -57,16 +64,19 @@ type DescribeDBInstancesInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeDBInstances .
+// Represents the output of DescribeDBInstances.
 type DescribeDBInstancesOutput struct {
 
 	// Detailed information about one or more instances.
@@ -173,9 +183,12 @@ var _ DescribeDBInstancesAPIClient = (*Client)(nil)
 // DescribeDBInstancesPaginatorOptions is the paginator options for
 // DescribeDBInstances
 type DescribeDBInstancesPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
@@ -290,12 +303,13 @@ type DBInstanceAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDBInstancesInput, *DescribeDBInstancesOutput, error) (bool, error)
 }
 
@@ -597,12 +611,13 @@ type DBInstanceDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeDBInstancesInput, *DescribeDBInstancesOutput, error) (bool, error)
 }
 

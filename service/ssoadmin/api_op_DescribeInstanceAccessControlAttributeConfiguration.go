@@ -15,7 +15,7 @@ import (
 // been configured to work with attributes-based access control (ABAC) for the
 // specified IAM Identity Center instance. This will not return attributes
 // configured and sent by an external identity provider. For more information about
-// ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
+// ABAC, see Attribute-Based Access Controlin the IAM Identity Center User Guide.
 func (c *Client) DescribeInstanceAccessControlAttributeConfiguration(ctx context.Context, params *DescribeInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*DescribeInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceAccessControlAttributeConfigurationInput{}

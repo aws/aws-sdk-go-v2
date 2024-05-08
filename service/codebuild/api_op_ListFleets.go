@@ -43,17 +43,24 @@ type ListFleetsInput struct {
 	NextToken *string
 
 	// The criterion to be used to list compute fleet names. Valid values include:
+	//
 	//   - CREATED_TIME : List based on when each compute fleet was created.
+	//
 	//   - LAST_MODIFIED_TIME : List based on when information about each compute fleet
 	//   was last changed.
+	//
 	//   - NAME : List based on each compute fleet's name.
+	//
 	// Use sortOrder to specify in what order to list the compute fleet names based on
 	// the preceding criteria.
 	SortBy types.FleetSortByType
 
 	// The order in which to list compute fleets. Valid values include:
+	//
 	//   - ASCENDING : List in ascending order.
+	//
 	//   - DESCENDING : List in descending order.
+	//
 	// Use sortBy to specify the criterion to be used to list compute fleet names.
 	SortOrder types.SortOrderType
 

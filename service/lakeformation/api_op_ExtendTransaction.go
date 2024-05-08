@@ -11,8 +11,10 @@ import (
 )
 
 // Indicates to the service that the specified transaction is still active and
-// should not be treated as idle and aborted. Write transactions that remain idle
-// for a long period are automatically aborted unless explicitly extended.
+// should not be treated as idle and aborted.
+//
+// Write transactions that remain idle for a long period are automatically aborted
+// unless explicitly extended.
 func (c *Client) ExtendTransaction(ctx context.Context, params *ExtendTransactionInput, optFns ...func(*Options)) (*ExtendTransactionOutput, error) {
 	if params == nil {
 		params = &ExtendTransactionInput{}

@@ -14,8 +14,7 @@ import (
 // Immediately purchases offerings for an AWS account. Offerings renew with the
 // latest total purchased quantity for an offering, unless the renewal was
 // overridden. The API returns a NotEligible error if the user is not permitted to
-// invoke the operation. If you must be able to invoke this operation, contact
-// aws-devicefarm-support@amazon.com (mailto:aws-devicefarm-support@amazon.com) .
+// invoke the operation. If you must be able to invoke this operation, contact aws-devicefarm-support@amazon.com.
 func (c *Client) PurchaseOffering(ctx context.Context, params *PurchaseOfferingInput, optFns ...func(*Options)) (*PurchaseOfferingOutput, error) {
 	if params == nil {
 		params = &PurchaseOfferingInput{}

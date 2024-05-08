@@ -12,8 +12,10 @@ import (
 
 // Adds a tag to a resource. Tags are supported only for monitors in Amazon
 // CloudWatch Internet Monitor. You can add a maximum of 50 tags in Internet
-// Monitor. A minimum of one tag is required for this call. It returns an error if
-// you use the TagResource request with 0 tags.
+// Monitor.
+//
+// A minimum of one tag is required for this call. It returns an error if you use
+// the TagResource request with 0 tags.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

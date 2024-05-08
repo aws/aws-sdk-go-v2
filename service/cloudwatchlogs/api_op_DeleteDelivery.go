@@ -32,8 +32,9 @@ func (c *Client) DeleteDelivery(ctx context.Context, params *DeleteDeliveryInput
 type DeleteDeliveryInput struct {
 
 	// The unique ID of the delivery to delete. You can find the ID of a delivery with
-	// the DescribeDeliveries (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html)
-	// operation.
+	// the [DescribeDeliveries]operation.
+	//
+	// [DescribeDeliveries]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeDeliveries.html
 	//
 	// This member is required.
 	Id *string

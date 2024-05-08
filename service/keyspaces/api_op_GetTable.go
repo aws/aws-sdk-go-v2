@@ -13,9 +13,10 @@ import (
 )
 
 // Returns information about the table, including the table's name and current
-// status, the keyspace name, configuration settings, and metadata. To read table
-// metadata using GetTable , Select action permissions for the table and system
-// tables are required to complete the operation.
+// status, the keyspace name, configuration settings, and metadata.
+//
+// To read table metadata using GetTable , Select action permissions for the table
+// and system tables are required to complete the operation.
 func (c *Client) GetTable(ctx context.Context, params *GetTableInput, optFns ...func(*Options)) (*GetTableOutput, error) {
 	if params == nil {
 		params = &GetTableInput{}
@@ -64,11 +65,13 @@ type GetTableOutput struct {
 	TableName *string
 
 	// The read/write throughput capacity mode for a table. The options are:
+	//
 	//   - throughputMode:PAY_PER_REQUEST
+	//
 	//   - throughputMode:PROVISIONED
 	CapacitySpecification *types.CapacitySpecificationSummary
 
-	// The client-side timestamps setting of the table.
+	//  The client-side timestamps setting of the table.
 	ClientSideTimestamps *types.ClientSideTimestamps
 
 	// The the description of the specified table.

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AppliedStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppliedStatus) Values() []AppliedStatus {
 	return []AppliedStatus{
 		"APPLIED",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for AutoshiftAppliedStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoshiftAppliedStatus) Values() []AutoshiftAppliedStatus {
 	return []AutoshiftAppliedStatus{
 		"APPLIED",
@@ -48,6 +50,7 @@ const (
 
 // Values returns all known values for AutoshiftExecutionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoshiftExecutionStatus) Values() []AutoshiftExecutionStatus {
 	return []AutoshiftExecutionStatus{
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"ZonalShiftAlreadyExists",
@@ -90,8 +94,9 @@ const (
 )
 
 // Values returns all known values for ControlConditionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ControlConditionType) Values() []ControlConditionType {
 	return []ControlConditionType{
 		"CLOUDWATCH",
@@ -109,8 +114,9 @@ const (
 )
 
 // Values returns all known values for PracticeRunOutcome. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PracticeRunOutcome) Values() []PracticeRunOutcome {
 	return []PracticeRunOutcome{
 		"FAILED",
@@ -138,6 +144,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -163,8 +170,9 @@ const (
 )
 
 // Values returns all known values for ZonalAutoshiftStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ZonalAutoshiftStatus) Values() []ZonalAutoshiftStatus {
 	return []ZonalAutoshiftStatus{
 		"ENABLED",
@@ -182,8 +190,9 @@ const (
 )
 
 // Values returns all known values for ZonalShiftStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ZonalShiftStatus) Values() []ZonalShiftStatus {
 	return []ZonalShiftStatus{
 		"ACTIVE",

@@ -10,12 +10,13 @@ import (
 // Entity that comprises information on categorical values in data.
 type CategoricalValues struct {
 
-	// Indicates whether there is a potential data issue related to categorical values.
+	//  Indicates whether there is a potential data issue related to categorical
+	// values.
 	//
 	// This member is required.
 	Status StatisticalIssueStatus
 
-	// Indicates the number of categories in the data.
+	//  Indicates the number of categories in the data.
 	NumberOfCategory *int32
 
 	noSmithyDocumentSerde
@@ -24,12 +25,12 @@ type CategoricalValues struct {
 // Entity that comprises information of count and percentage.
 type CountPercent struct {
 
-	// Indicates the count of occurences of the given statistic.
+	//  Indicates the count of occurences of the given statistic.
 	//
 	// This member is required.
 	Count *int32
 
-	// Indicates the percentage of occurances of the given statistic.
+	//  Indicates the percentage of occurances of the given statistic.
 	//
 	// This member is required.
 	Percentage float32
@@ -47,7 +48,7 @@ type DataIngestionJobSummary struct {
 	// The name of the dataset used for the data ingestion job.
 	DatasetName *string
 
-	// Specifies information for the input data for the data inference job, including
+	//  Specifies information for the input data for the data inference job, including
 	// data Amazon S3 location parameters.
 	IngestionInputConfiguration *IngestionInputConfiguration
 
@@ -64,55 +65,59 @@ type DataIngestionJobSummary struct {
 // data after post processing by Amazon Lookout for Equipment. For example, if you
 // provide data that has been collected at a 1 second level and you want the system
 // to resample the data at a 1 minute rate before training, the TargetSamplingRate
-// is 1 minute. When providing a value for the TargetSamplingRate , you must attach
-// the prefix "PT" to the rate you want. The value for a 1 second rate is therefore
-// PT1S, the value for a 15 minute rate is PT15M, and the value for a 1 hour rate
-// is PT1H
+// is 1 minute.
+//
+// When providing a value for the TargetSamplingRate , you must attach the prefix
+// "PT" to the rate you want. The value for a 1 second rate is therefore PT1S, the
+// value for a 15 minute rate is PT15M, and the value for a 1 hour rate is PT1H
 type DataPreProcessingConfiguration struct {
 
 	// The sampling rate of the data after post processing by Amazon Lookout for
 	// Equipment. For example, if you provide data that has been collected at a 1
 	// second level and you want the system to resample the data at a 1 minute rate
-	// before training, the TargetSamplingRate is 1 minute. When providing a value for
-	// the TargetSamplingRate , you must attach the prefix "PT" to the rate you want.
-	// The value for a 1 second rate is therefore PT1S, the value for a 15 minute rate
-	// is PT15M, and the value for a 1 hour rate is PT1H
+	// before training, the TargetSamplingRate is 1 minute.
+	//
+	// When providing a value for the TargetSamplingRate , you must attach the prefix
+	// "PT" to the rate you want. The value for a 1 second rate is therefore PT1S, the
+	// value for a 15 minute rate is PT15M, and the value for a 1 hour rate is PT1H
 	TargetSamplingRate TargetSamplingRate
 
 	noSmithyDocumentSerde
 }
 
-// DataQualitySummary gives aggregated statistics over all the sensors about a
+//	DataQualitySummary gives aggregated statistics over all the sensors about a
+//
 // completed ingestion job. It primarily gives more information about statistics
 // over different incorrect data like MissingCompleteSensorData, MissingSensorData,
 // UnsupportedDateFormats, InsufficientSensorData, DuplicateTimeStamps.
 type DataQualitySummary struct {
 
-	// Parameter that gives information about duplicate timestamps in the input data.
+	//  Parameter that gives information about duplicate timestamps in the input data.
 	//
 	// This member is required.
 	DuplicateTimestamps *DuplicateTimestamps
 
-	// Parameter that gives information about insufficient data for sensors in the
+	//  Parameter that gives information about insufficient data for sensors in the
 	// dataset. This includes information about those sensors that have complete data
 	// missing and those with a short date range.
 	//
 	// This member is required.
 	InsufficientSensorData *InsufficientSensorData
 
-	// Parameter that gives information about data that is invalid over all the
+	//  Parameter that gives information about data that is invalid over all the
 	// sensors in the input data.
 	//
 	// This member is required.
 	InvalidSensorData *InvalidSensorData
 
-	// Parameter that gives information about data that is missing over all the
+	//  Parameter that gives information about data that is missing over all the
 	// sensors in the input data.
 	//
 	// This member is required.
 	MissingSensorData *MissingSensorData
 
-	// Parameter that gives information about unsupported timestamps in the input data.
+	//  Parameter that gives information about unsupported timestamps in the input
+	// data.
 	//
 	// This member is required.
 	UnsupportedTimestamps *UnsupportedTimestamps
@@ -153,7 +158,7 @@ type DatasetSummary struct {
 // Entity that comprises information abount duplicate timestamps in the dataset.
 type DuplicateTimestamps struct {
 
-	// Indicates the total number of duplicate timestamps.
+	//  Indicates the total number of duplicate timestamps.
 	//
 	// This member is required.
 	TotalNumberOfDuplicateTimestamps *int32
@@ -165,11 +170,11 @@ type DuplicateTimestamps struct {
 // end time, diagnostics information, event duration and so on.
 type InferenceEventSummary struct {
 
-	// An array which specifies the names and values of all sensors contributing to an
-	// inference event.
+	//  An array which specifies the names and values of all sensors contributing to
+	// an inference event.
 	Diagnostics *string
 
-	// Indicates the size of an inference event in seconds.
+	//  Indicates the size of an inference event in seconds.
 	EventDurationInSeconds *int64
 
 	// Indicates the ending time of an inference event.
@@ -178,7 +183,7 @@ type InferenceEventSummary struct {
 	// Indicates the starting time of an inference event.
 	EventStartTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the inference scheduler being used for the
+	//  The Amazon Resource Name (ARN) of the inference scheduler being used for the
 	// inference event.
 	InferenceSchedulerArn *string
 
@@ -200,11 +205,11 @@ type InferenceExecutionSummary struct {
 	// stopped.
 	DataEndTime *time.Time
 
-	// Specifies configuration information for the input data for the inference
+	//  Specifies configuration information for the input data for the inference
 	// scheduler, including delimiter, format, and dataset location.
 	DataInputConfiguration *InferenceInputConfiguration
 
-	// Specifies configuration information for the output results from for the
+	//  Specifies configuration information for the output results from for the
 	// inference execution, including the output Amazon S3 location.
 	DataOutputConfiguration *InferenceOutputConfiguration
 
@@ -212,10 +217,10 @@ type InferenceExecutionSummary struct {
 	// began.
 	DataStartTime *time.Time
 
-	// Specifies the reason for failure when an inference execution has failed.
+	//  Specifies the reason for failure when an inference execution has failed.
 	FailedReason *string
 
-	// The Amazon Resource Name (ARN) of the inference scheduler being used for the
+	//  The Amazon Resource Name (ARN) of the inference scheduler being used for the
 	// inference execution.
 	InferenceSchedulerArn *string
 
@@ -258,7 +263,7 @@ type InferenceInputConfiguration struct {
 	// (UTC).
 	InputTimeZoneOffset *string
 
-	// Specifies configuration information for the input data for the inference,
+	//  Specifies configuration information for the input data for the inference,
 	// including Amazon S3 location of input data.
 	S3InputConfiguration *InferenceS3InputConfiguration
 
@@ -279,11 +284,12 @@ type InferenceInputNameConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies configuration information for the output results from for the
+//	Specifies configuration information for the output results from for the
+//
 // inference, including KMS key ID and output S3 location.
 type InferenceOutputConfiguration struct {
 
-	// Specifies configuration information for the output results from for the
+	//  Specifies configuration information for the output results from for the
 	// inference, output S3 location.
 	//
 	// This member is required.
@@ -295,7 +301,8 @@ type InferenceOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies configuration information for the input data for the inference,
+//	Specifies configuration information for the input data for the inference,
+//
 // including input data S3 location.
 type InferenceS3InputConfiguration struct {
 
@@ -310,16 +317,17 @@ type InferenceS3InputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies configuration information for the output results from the inference,
+//	Specifies configuration information for the output results from the inference,
+//
 // including output S3 location.
 type InferenceS3OutputConfiguration struct {
 
-	// The bucket containing the output results from the inference
+	//  The bucket containing the output results from the inference
 	//
 	// This member is required.
 	Bucket *string
 
-	// The prefix for the S3 bucket used for the output results from the inference.
+	//  The prefix for the S3 bucket used for the output results from the inference.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -347,7 +355,7 @@ type InferenceSchedulerSummary struct {
 	// example, it starts once every 5 minutes.
 	DataUploadFrequency DataUploadFrequency
 
-	// The Amazon Resource Name (ARN) of the inference scheduler.
+	//  The Amazon Resource Name (ARN) of the inference scheduler.
 	InferenceSchedulerArn *string
 
 	// The name of the inference scheduler.
@@ -357,7 +365,7 @@ type InferenceSchedulerSummary struct {
 	// Anomalous (anomalous events found) or Normal (no anomalous events found).
 	LatestInferenceResult LatestInferenceResult
 
-	// The Amazon Resource Name (ARN) of the machine learning model used by the
+	//  The Amazon Resource Name (ARN) of the machine learning model used by the
 	// inference scheduler.
 	ModelArn *string
 
@@ -391,7 +399,8 @@ type IngestedFilesSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies configuration information for the input data for the data ingestion
+//	Specifies configuration information for the input data for the data ingestion
+//
 // job, including input data S3 location.
 type IngestionInputConfiguration struct {
 
@@ -404,7 +413,8 @@ type IngestionInputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies S3 configuration information for the input data for the data
+//	Specifies S3 configuration information for the input data for the data
+//
 // ingestion job.
 type IngestionS3InputConfiguration struct {
 
@@ -413,13 +423,15 @@ type IngestionS3InputConfiguration struct {
 	// This member is required.
 	Bucket *string
 
-	// The pattern for matching the Amazon S3 files that will be used for ingestion.
+	//  The pattern for matching the Amazon S3 files that will be used for ingestion.
 	// If the schema was created previously without any KeyPattern, then the default
 	// KeyPattern {prefix}/{component_name}/* is used to download files from Amazon S3
 	// according to the schema. This field is required when ingestion is being done for
-	// the first time. Valid Values: {prefix}/{component_name}_* |
-	// {prefix}/{component_name}/* | {prefix}/{component_name}[DELIMITER]* (Allowed
-	// delimiters : space, dot, underscore, hyphen)
+	// the first time.
+	//
+	// Valid Values: {prefix}/{component_name}_* | {prefix}/{component_name}/* |
+	// {prefix}/{component_name}[DELIMITER]* (Allowed delimiters : space, dot,
+	// underscore, hyphen)
 	KeyPattern *string
 
 	// The prefix for the S3 location being used for the input data for the data
@@ -429,17 +441,18 @@ type IngestionS3InputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Entity that comprises aggregated information on sensors having insufficient
+//	Entity that comprises aggregated information on sensors having insufficient
+//
 // data.
 type InsufficientSensorData struct {
 
-	// Parameter that describes the total number of sensors that have data completely
+	//  Parameter that describes the total number of sensors that have data completely
 	// missing for it.
 	//
 	// This member is required.
 	MissingCompleteSensorData *MissingCompleteSensorData
 
-	// Parameter that describes the total number of sensors that have a short date
+	//  Parameter that describes the total number of sensors that have a short date
 	// range of less than 14 days of data overall.
 	//
 	// This member is required.
@@ -448,16 +461,17 @@ type InsufficientSensorData struct {
 	noSmithyDocumentSerde
 }
 
-// Entity that comprises aggregated information on sensors having insufficient
+//	Entity that comprises aggregated information on sensors having insufficient
+//
 // data.
 type InvalidSensorData struct {
 
-	// Indicates the number of sensors that have at least some invalid values.
+	//  Indicates the number of sensors that have at least some invalid values.
 	//
 	// This member is required.
 	AffectedSensorCount *int32
 
-	// Indicates the total number of invalid values across all the sensors.
+	//  Indicates the total number of invalid values across all the sensors.
 	//
 	// This member is required.
 	TotalNumberOfInvalidValues *int32
@@ -468,16 +482,16 @@ type InvalidSensorData struct {
 // Contains information about the label group.
 type LabelGroupSummary struct {
 
-	// The time at which the label group was created.
+	//  The time at which the label group was created.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) of the label group.
+	//  The Amazon Resource Name (ARN) of the label group.
 	LabelGroupArn *string
 
-	// The name of the label group.
+	//  The name of the label group.
 	LabelGroupName *string
 
-	// The time at which the label group was updated.
+	//  The time at which the label group was updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -487,7 +501,7 @@ type LabelGroupSummary struct {
 // label data.
 type LabelsInputConfiguration struct {
 
-	// The name of the label group to be used for label data.
+	//  The name of the label group to be used for label data.
 	LabelGroupName *string
 
 	// Contains location information for the S3 location being used for label data.
@@ -505,7 +519,7 @@ type LabelsS3InputConfiguration struct {
 	// This member is required.
 	Bucket *string
 
-	// The prefix for the S3 bucket used for the label data.
+	//  The prefix for the S3 bucket used for the label data.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -514,62 +528,65 @@ type LabelsS3InputConfiguration struct {
 // Information about the label.
 type LabelSummary struct {
 
-	// The time at which the label was created.
+	//  The time at which the label was created.
 	CreatedAt *time.Time
 
-	// The timestamp indicating the end of the label.
+	//  The timestamp indicating the end of the label.
 	EndTime *time.Time
 
-	// Indicates that a label pertains to a particular piece of equipment.
+	//  Indicates that a label pertains to a particular piece of equipment.
 	Equipment *string
 
-	// Indicates the type of anomaly associated with the label. Data in this field
-	// will be retained for service usage. Follow best practices for the security of
-	// your data.
+	//  Indicates the type of anomaly associated with the label.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	FaultCode *string
 
-	// The Amazon Resource Name (ARN) of the label group.
+	//  The Amazon Resource Name (ARN) of the label group.
 	LabelGroupArn *string
 
-	// The name of the label group.
+	//  The name of the label group.
 	LabelGroupName *string
 
-	// The ID of the label.
+	//  The ID of the label.
 	LabelId *string
 
-	// Indicates whether a labeled event represents an anomaly.
+	//  Indicates whether a labeled event represents an anomaly.
 	Rating LabelRating
 
-	// The timestamp indicating the start of the label.
+	//  The timestamp indicating the start of the label.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Entity that comprises information on large gaps between consecutive timestamps
+//	Entity that comprises information on large gaps between consecutive timestamps
+//
 // in data.
 type LargeTimestampGaps struct {
 
-	// Indicates whether there is a potential data issue related to large gaps in
+	//  Indicates whether there is a potential data issue related to large gaps in
 	// timestamps.
 	//
 	// This member is required.
 	Status StatisticalIssueStatus
 
-	// Indicates the size of the largest timestamp gap, in days.
+	//  Indicates the size of the largest timestamp gap, in days.
 	MaxTimestampGapInDays *int32
 
-	// Indicates the number of large timestamp gaps, if there are any.
+	//  Indicates the number of large timestamp gaps, if there are any.
 	NumberOfLargeTimestampGaps *int32
 
 	noSmithyDocumentSerde
 }
 
-// Entity that comprises information on sensors that have sensor data completely
+//	Entity that comprises information on sensors that have sensor data completely
+//
 // missing.
 type MissingCompleteSensorData struct {
 
-	// Indicates the number of sensors that have data missing completely.
+	//  Indicates the number of sensors that have data missing completely.
 	//
 	// This member is required.
 	AffectedSensorCount *int32
@@ -580,12 +597,12 @@ type MissingCompleteSensorData struct {
 // Entity that comprises aggregated information on sensors having missing data.
 type MissingSensorData struct {
 
-	// Indicates the number of sensors that have atleast some data missing.
+	//  Indicates the number of sensors that have atleast some data missing.
 	//
 	// This member is required.
 	AffectedSensorCount *int32
 
-	// Indicates the total number of missing values across all the sensors.
+	//  Indicates the total number of missing values across all the sensors.
 	//
 	// This member is required.
 	TotalNumberOfMissingValues *int32
@@ -620,13 +637,15 @@ type ModelDiagnosticsS3OutputConfiguration struct {
 	Bucket *string
 
 	// The Amazon S3 prefix for the location of the pointwise model diagnostics. The
-	// prefix specifies the folder and evaluation result file name. ( bucket ). When
-	// you call CreateModel or UpdateModel , specify the path within the bucket that
-	// you want Lookout for Equipment to save the model to. During training, Lookout
-	// for Equipment creates the model evaluation model as a compressed JSON file with
-	// the name model_diagnostics_results.json.gz . When you call DescribeModel or
-	// DescribeModelVersion , prefix contains the file path and filename of the model
-	// evaluation file.
+	// prefix specifies the folder and evaluation result file name. ( bucket ).
+	//
+	// When you call CreateModel or UpdateModel , specify the path within the bucket
+	// that you want Lookout for Equipment to save the model to. During training,
+	// Lookout for Equipment creates the model evaluation model as a compressed JSON
+	// file with the name model_diagnostics_results.json.gz .
+	//
+	// When you call DescribeModel or DescribeModelVersion , prefix contains the file
+	// path and filename of the model evaluation file.
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -648,7 +667,7 @@ type ModelSummary struct {
 	// The time at which the specific model was created.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) of the dataset used to create the model.
+	//  The Amazon Resource Name (ARN) of the dataset used to create the model.
 	DatasetArn *string
 
 	// The name of the dataset being used for the machine learning model.
@@ -663,7 +682,7 @@ type ModelSummary struct {
 	// Indicates the status of the most recent scheduled retraining run.
 	LatestScheduledRetrainingStatus ModelVersionStatus
 
-	// The Amazon Resource Name (ARN) of the machine learning model.
+	//  The Amazon Resource Name (ARN) of the machine learning model.
 	ModelArn *string
 
 	// Output configuration information for the pointwise model diagnostics for an
@@ -676,19 +695,25 @@ type ModelSummary struct {
 	// Provides a quality assessment for a model that uses labels. If Lookout for
 	// Equipment determines that the model quality is poor based on training metrics,
 	// the value is POOR_QUALITY_DETECTED . Otherwise, the value is
-	// QUALITY_THRESHOLD_MET . If the model is unlabeled, the model quality can't be
-	// assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY . In this
-	// situation, you can get a model quality assessment by adding labels to the input
-	// dataset and retraining the model. For information about using labels with your
-	// models, see Understanding labeling (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html)
-	// . For information about improving the quality of a model, see Best practices
-	// with Amazon Lookout for Equipment (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html)
-	// .
+	// QUALITY_THRESHOLD_MET .
+	//
+	// If the model is unlabeled, the model quality can't be assessed and the value of
+	// ModelQuality is CANNOT_DETERMINE_QUALITY . In this situation, you can get a
+	// model quality assessment by adding labels to the input dataset and retraining
+	// the model.
+	//
+	// For information about using labels with your models, see [Understanding labeling].
+	//
+	// For information about improving the quality of a model, see [Best practices with Amazon Lookout for Equipment].
+	//
+	// [Best practices with Amazon Lookout for Equipment]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
+	// [Understanding labeling]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html
 	ModelQuality ModelQuality
 
 	// Indicates the date that the next scheduled retraining run will start on.
-	// Lookout for Equipment truncates the time you provide to the nearest UTC day (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
-	// .
+	// Lookout for Equipment truncates the time you provide to [the nearest UTC day].
+	//
+	// [the nearest UTC day]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	NextScheduledRetrainingStartDate *time.Time
 
 	// Indicates the status of the retraining scheduler.
@@ -716,12 +741,16 @@ type ModelVersionSummary struct {
 	// Provides a quality assessment for a model that uses labels. If Lookout for
 	// Equipment determines that the model quality is poor based on training metrics,
 	// the value is POOR_QUALITY_DETECTED . Otherwise, the value is
-	// QUALITY_THRESHOLD_MET . If the model is unlabeled, the model quality can't be
-	// assessed and the value of ModelQuality is CANNOT_DETERMINE_QUALITY . In this
-	// situation, you can get a model quality assessment by adding labels to the input
-	// dataset and retraining the model. For information about improving the quality of
-	// a model, see Best practices with Amazon Lookout for Equipment (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html)
-	// .
+	// QUALITY_THRESHOLD_MET .
+	//
+	// If the model is unlabeled, the model quality can't be assessed and the value of
+	// ModelQuality is CANNOT_DETERMINE_QUALITY . In this situation, you can get a
+	// model quality assessment by adding labels to the input dataset and retraining
+	// the model.
+	//
+	// For information about improving the quality of a model, see [Best practices with Amazon Lookout for Equipment].
+	//
+	// [Best practices with Amazon Lookout for Equipment]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
 	ModelQuality ModelQuality
 
 	// The version of the model.
@@ -742,13 +771,14 @@ type ModelVersionSummary struct {
 // Entity that comprises information on monotonic values in the data.
 type MonotonicValues struct {
 
-	// Indicates whether there is a potential data issue related to having monotonic
+	//  Indicates whether there is a potential data issue related to having monotonic
 	// values.
 	//
 	// This member is required.
 	Status StatisticalIssueStatus
 
-	// Indicates the monotonicity of values. Can be INCREASING, DECREASING, or STATIC.
+	//  Indicates the monotonicity of values. Can be INCREASING, DECREASING, or
+	// STATIC.
 	Monotonicity Monotonicity
 
 	noSmithyDocumentSerde
@@ -757,7 +787,7 @@ type MonotonicValues struct {
 // Entity that comprises information on operating modes in data.
 type MultipleOperatingModes struct {
 
-	// Indicates whether there is a potential data issue related to having multiple
+	//  Indicates whether there is a potential data issue related to having multiple
 	// operating modes.
 	//
 	// This member is required.
@@ -779,8 +809,10 @@ type RetrainingSchedulerSummary struct {
 	// The name of the model that the retraining scheduler is attached to.
 	ModelName *string
 
-	// The frequency at which the model retraining is set. This follows the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)
+	// The frequency at which the model retraining is set. This follows the [ISO 8601]
 	// guidelines.
+	//
+	// [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601#Durations
 	RetrainingFrequency *string
 
 	// The start date for the retraining scheduler. Lookout for Equipment truncates
@@ -810,59 +842,60 @@ type S3Object struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of ingestion statistics like whether data exists, number of missing
+//	Summary of ingestion statistics like whether data exists, number of missing
+//
 // values, number of invalid values and so on related to the particular sensor.
 type SensorStatisticsSummary struct {
 
-	// Parameter that describes potential risk about whether data associated with the
+	//  Parameter that describes potential risk about whether data associated with the
 	// sensor is categorical.
 	CategoricalValues *CategoricalValues
 
-	// Name of the component to which the particular sensor belongs for which the
+	//  Name of the component to which the particular sensor belongs for which the
 	// statistics belong to.
 	ComponentName *string
 
-	// Indicates the time reference to indicate the end of valid data associated with
+	//  Indicates the time reference to indicate the end of valid data associated with
 	// the sensor that the statistics belong to.
 	DataEndTime *time.Time
 
-	// Parameter that indicates whether data exists for the sensor that the statistics
-	// belong to.
+	//  Parameter that indicates whether data exists for the sensor that the
+	// statistics belong to.
 	DataExists bool
 
-	// Indicates the time reference to indicate the beginning of valid data associated
-	// with the sensor that the statistics belong to.
+	//  Indicates the time reference to indicate the beginning of valid data
+	// associated with the sensor that the statistics belong to.
 	DataStartTime *time.Time
 
-	// Parameter that describes the total number of duplicate timestamp records
+	//  Parameter that describes the total number of duplicate timestamp records
 	// associated with the sensor that the statistics belong to.
 	DuplicateTimestamps *CountPercent
 
-	// Parameter that describes the total number of invalid date entries associated
+	//  Parameter that describes the total number of invalid date entries associated
 	// with the sensor that the statistics belong to.
 	InvalidDateEntries *CountPercent
 
-	// Parameter that describes the total number of, and percentage of, values that
+	//  Parameter that describes the total number of, and percentage of, values that
 	// are invalid for the sensor that the statistics belong to.
 	InvalidValues *CountPercent
 
-	// Parameter that describes potential risk about whether data associated with the
+	//  Parameter that describes potential risk about whether data associated with the
 	// sensor contains one or more large gaps between consecutive timestamps.
 	LargeTimestampGaps *LargeTimestampGaps
 
-	// Parameter that describes the total number of, and percentage of, values that
+	//  Parameter that describes the total number of, and percentage of, values that
 	// are missing for the sensor that the statistics belong to.
 	MissingValues *CountPercent
 
-	// Parameter that describes potential risk about whether data associated with the
+	//  Parameter that describes potential risk about whether data associated with the
 	// sensor is mostly monotonic.
 	MonotonicValues *MonotonicValues
 
-	// Parameter that describes potential risk about whether data associated with the
+	//  Parameter that describes potential risk about whether data associated with the
 	// sensor has more than one operating mode.
 	MultipleOperatingModes *MultipleOperatingModes
 
-	// Name of the sensor that the statistics belong to.
+	//  Name of the sensor that the statistics belong to.
 	SensorName *string
 
 	noSmithyDocumentSerde
@@ -871,7 +904,7 @@ type SensorStatisticsSummary struct {
 // Entity that comprises information on sensors that have shorter date range.
 type SensorsWithShortDateRange struct {
 
-	// Indicates the number of sensors that have less than 14 days of data.
+	//  Indicates the number of sensors that have less than 14 days of data.
 	//
 	// This member is required.
 	AffectedSensorCount *int32
@@ -895,10 +928,12 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// Entity that comprises information abount unsupported timestamps in the dataset.
+//	Entity that comprises information abount unsupported timestamps in the
+//
+// dataset.
 type UnsupportedTimestamps struct {
 
-	// Indicates the total number of unsupported timestamps across the ingested data.
+	//  Indicates the total number of unsupported timestamps across the ingested data.
 	//
 	// This member is required.
 	TotalNumberOfUnsupportedTimestamps *int32

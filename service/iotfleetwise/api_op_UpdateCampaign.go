@@ -29,23 +29,29 @@ func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput
 
 type UpdateCampaignInput struct {
 
-	// Specifies how to update a campaign. The action can be one of the following:
+	//  Specifies how to update a campaign. The action can be one of the following:
+	//
 	//   - APPROVE - To approve delivering a data collection scheme to vehicles.
+	//
 	//   - SUSPEND - To suspend collecting signal data. The campaign is deleted from
 	//   vehicles and all vehicles in the suspended campaign will stop sending data.
+	//
 	//   - RESUME - To reactivate the SUSPEND campaign. The campaign is redeployed to
 	//   all vehicles and the vehicles will resume sending data.
+	//
 	//   - UPDATE - To update a campaign.
 	//
 	// This member is required.
 	Action types.UpdateCampaignAction
 
-	// The name of the campaign to update.
+	//  The name of the campaign to update.
 	//
 	// This member is required.
 	Name *string
 
-	// A list of vehicle attributes to associate with a signal. Default: An empty array
+	//  A list of vehicle attributes to associate with a signal.
+	//
+	// Default: An empty array
 	DataExtraDimensions []string
 
 	// The description of the campaign.
@@ -56,20 +62,24 @@ type UpdateCampaignInput struct {
 
 type UpdateCampaignOutput struct {
 
-	// The Amazon Resource Name (ARN) of the campaign.
+	//  The Amazon Resource Name (ARN) of the campaign.
 	Arn *string
 
 	// The name of the updated campaign.
 	Name *string
 
 	// The state of a campaign. The status can be one of:
+	//
 	//   - CREATING - Amazon Web Services IoT FleetWise is processing your request to
 	//   create the campaign.
+	//
 	//   - WAITING_FOR_APPROVAL - After a campaign is created, it enters the
 	//   WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to
 	//   deploy the campaign to the target vehicle or fleet, use the API operation to
 	//   approve the campaign.
+	//
 	//   - RUNNING - The campaign is active.
+	//
 	//   - SUSPENDED - The campaign is suspended. To resume the campaign, use the API
 	//   operation.
 	Status types.CampaignStatus

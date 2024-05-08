@@ -12,15 +12,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates settings for a global table. This operation only applies to Version
-// 2017.11.29 (Legacy) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
-// of global tables. We recommend using Version 2019.11.21 (Current) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
-// when creating new global tables, as it provides greater flexibility, higher
+// Updates settings for a global table.
+//
+// This operation only applies to [Version 2017.11.29 (Legacy)] of global tables. We recommend using [Version 2019.11.21 (Current)] when
+// creating new global tables, as it provides greater flexibility, higher
 // efficiency and consumes less write capacity than 2017.11.29 (Legacy). To
-// determine which version you are using, see Determining the version (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html)
-// . To update existing global tables from version 2017.11.29 (Legacy) to version
-// 2019.11.21 (Current), see Updating global tables (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html)
-// .
+// determine which version you are using, see [Determining the version]. To update existing global tables
+// from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Updating global tables].
+//
+// [Updating global tables]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+// [Version 2017.11.29 (Legacy)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
+// [Determining the version]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
 func (c *Client) UpdateGlobalTableSettings(ctx context.Context, params *UpdateGlobalTableSettingsInput, optFns ...func(*Options)) (*UpdateGlobalTableSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateGlobalTableSettingsInput{}
@@ -45,12 +48,15 @@ type UpdateGlobalTableSettingsInput struct {
 
 	// The billing mode of the global table. If GlobalTableBillingMode is not
 	// specified, the global table defaults to PROVISIONED capacity billing mode.
+	//
 	//   - PROVISIONED - We recommend using PROVISIONED for predictable workloads.
-	//   PROVISIONED sets the billing mode to Provisioned Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual)
-	//   .
+	//   PROVISIONED sets the billing mode to [Provisioned Mode].
+	//
 	//   - PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
-	//   workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand)
-	//   .
+	//   workloads. PAY_PER_REQUEST sets the billing mode to [On-Demand Mode].
+	//
+	// [On-Demand Mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+	// [Provisioned Mode]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
 	GlobalTableBillingMode types.BillingMode
 
 	// Represents the settings of a global secondary index for a global table that

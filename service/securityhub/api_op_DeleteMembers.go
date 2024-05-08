@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified member accounts from Security Hub. You can invoke this
-// API only to delete accounts that became members through invitation. You can't
-// invoke this API to delete accounts that belong to an Organizations organization.
+// Deletes the specified member accounts from Security Hub.
+//
+// You can invoke this API only to delete accounts that became members through
+// invitation. You can't invoke this API to delete accounts that belong to an
+// Organizations organization.
 func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, optFns ...func(*Options)) (*DeleteMembersOutput, error) {
 	if params == nil {
 		params = &DeleteMembersInput{}

@@ -12,15 +12,19 @@ import (
 	"time"
 )
 
-// Gets aggregated values for an asset property. For more information, see
-// Querying aggregates (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
-// in the IoT SiteWise User Guide. To identify an asset property, you must specify
-// one of the following:
+// Gets aggregated values for an asset property. For more information, see [Querying aggregates] in the
+// IoT SiteWise User Guide.
+//
+// To identify an asset property, you must specify one of the following:
+//
 //   - The assetId and propertyId of an asset property.
+//
 //   - A propertyAlias , which is a data stream alias (for example,
 //     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
-//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
-//     .
+//     alias, see [UpdateAssetProperty].
+//
+// [UpdateAssetProperty]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+// [Querying aggregates]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates
 func (c *Client) GetAssetPropertyAggregates(ctx context.Context, params *GetAssetPropertyAggregatesInput, optFns ...func(*Options)) (*GetAssetPropertyAggregatesOutput, error) {
 	if params == nil {
 		params = &GetAssetPropertyAggregatesInput{}
@@ -65,7 +69,9 @@ type GetAssetPropertyAggregatesInput struct {
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 1 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 2500.
 	MaxResults *int32
@@ -75,8 +81,9 @@ type GetAssetPropertyAggregatesInput struct {
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
 	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
-	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Mapping industrial data streams to asset properties]in the IoT SiteWise User Guide.
+	//
+	// [Mapping industrial data streams to asset properties]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
 	PropertyAlias *string
 
 	// The ID of the asset property, in UUID format.
@@ -85,7 +92,9 @@ type GetAssetPropertyAggregatesInput struct {
 	// The quality by which to filter asset data.
 	Qualities []types.Quality
 
-	// The chronological sorting order of the requested information. Default: ASCENDING
+	// The chronological sorting order of the requested information.
+	//
+	// Default: ASCENDING
 	TimeOrdering types.TimeOrdering
 
 	noSmithyDocumentSerde
@@ -230,7 +239,9 @@ var _ GetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 type GetAssetPropertyAggregatesPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 1 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 2500.
 	Limit int32

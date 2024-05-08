@@ -45,14 +45,16 @@ type UpdateMethodInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
-	// .
+	// For more information about supported patch operations, see [Patch Operations].
+	//
+	// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
 }
 
-// Represents a client-facing interface by which the client calls the API to
+//	Represents a client-facing interface by which the client calls the API to
+//
 // access back-end resources. A Method resource is integrated with an Integration
 // resource. Both consist of a request and one or more responses. The method
 // request takes the client input that is passed to the back end through the

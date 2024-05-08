@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deprecated. Use DescribeHostedConnections instead. Lists the connections that
-// have been provisioned on the specified interconnect. Intended for use by Direct
-// Connect Partners only.
+// Deprecated. Use DescribeHostedConnections instead.
+//
+// Lists the connections that have been provisioned on the specified interconnect.
+//
+// Intended for use by Direct Connect Partners only.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) DescribeConnectionsOnInterconnect(ctx context.Context, params *DescribeConnectionsOnInterconnectInput, optFns ...func(*Options)) (*DescribeConnectionsOnInterconnectOutput, error) {

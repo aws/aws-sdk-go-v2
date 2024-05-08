@@ -30,7 +30,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) from which to remove the tags. For example:
-	// arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
+	//
+	//     arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
 	//
 	// This member is required.
 	ResourceArn *string

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AgreementStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AgreementStatusType) Values() []AgreementStatusType {
 	return []AgreementStatusType{
 		"ACTIVE",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for As2Transport. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (As2Transport) Values() []As2Transport {
 	return []As2Transport{
 		"HTTP",
@@ -46,8 +48,9 @@ const (
 )
 
 // Values returns all known values for CertificateStatusType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateStatusType) Values() []CertificateStatusType {
 	return []CertificateStatusType{
 		"ACTIVE",
@@ -65,8 +68,9 @@ const (
 )
 
 // Values returns all known values for CertificateType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateType) Values() []CertificateType {
 	return []CertificateType{
 		"CERTIFICATE",
@@ -84,8 +88,9 @@ const (
 )
 
 // Values returns all known values for CertificateUsageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateUsageType) Values() []CertificateUsageType {
 	return []CertificateUsageType{
 		"SIGNING",
@@ -103,8 +108,9 @@ const (
 )
 
 // Values returns all known values for CompressionEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CompressionEnum) Values() []CompressionEnum {
 	return []CompressionEnum{
 		"ZLIB",
@@ -121,8 +127,9 @@ const (
 )
 
 // Values returns all known values for CustomStepStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomStepStatus) Values() []CustomStepStatus {
 	return []CustomStepStatus{
 		"SUCCESS",
@@ -140,8 +147,9 @@ const (
 
 // Values returns all known values for DirectoryListingOptimization. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectoryListingOptimization) Values() []DirectoryListingOptimization {
 	return []DirectoryListingOptimization{
 		"ENABLED",
@@ -158,8 +166,9 @@ const (
 )
 
 // Values returns all known values for Domain. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Domain) Values() []Domain {
 	return []Domain{
 		"S3",
@@ -179,8 +188,9 @@ const (
 )
 
 // Values returns all known values for EncryptionAlg. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionAlg) Values() []EncryptionAlg {
 	return []EncryptionAlg{
 		"AES128_CBC",
@@ -199,8 +209,9 @@ const (
 )
 
 // Values returns all known values for EncryptionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionType) Values() []EncryptionType {
 	return []EncryptionType{
 		"PGP",
@@ -217,8 +228,9 @@ const (
 )
 
 // Values returns all known values for EndpointType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointType) Values() []EndpointType {
 	return []EndpointType{
 		"PUBLIC",
@@ -242,8 +254,9 @@ const (
 )
 
 // Values returns all known values for ExecutionErrorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionErrorType) Values() []ExecutionErrorType {
 	return []ExecutionErrorType{
 		"PERMISSION_DENIED",
@@ -268,8 +281,9 @@ const (
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionStatus) Values() []ExecutionStatus {
 	return []ExecutionStatus{
 		"IN_PROGRESS",
@@ -288,8 +302,9 @@ const (
 )
 
 // Values returns all known values for HomeDirectoryType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HomeDirectoryType) Values() []HomeDirectoryType {
 	return []HomeDirectoryType{
 		"PATH",
@@ -308,8 +323,9 @@ const (
 )
 
 // Values returns all known values for IdentityProviderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityProviderType) Values() []IdentityProviderType {
 	return []IdentityProviderType{
 		"SERVICE_MANAGED",
@@ -328,8 +344,9 @@ const (
 )
 
 // Values returns all known values for MapType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MapType) Values() []MapType {
 	return []MapType{
 		"FILE",
@@ -346,8 +363,9 @@ const (
 )
 
 // Values returns all known values for MdnResponse. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MdnResponse) Values() []MdnResponse {
 	return []MdnResponse{
 		"SYNC",
@@ -368,8 +386,9 @@ const (
 )
 
 // Values returns all known values for MdnSigningAlg. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MdnSigningAlg) Values() []MdnSigningAlg {
 	return []MdnSigningAlg{
 		"SHA256",
@@ -390,8 +409,9 @@ const (
 )
 
 // Values returns all known values for OverwriteExisting. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OverwriteExisting) Values() []OverwriteExisting {
 	return []OverwriteExisting{
 		"TRUE",
@@ -408,8 +428,9 @@ const (
 )
 
 // Values returns all known values for ProfileType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProfileType) Values() []ProfileType {
 	return []ProfileType{
 		"LOCAL",
@@ -428,8 +449,9 @@ const (
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"SFTP",
@@ -448,8 +470,9 @@ const (
 )
 
 // Values returns all known values for SecurityPolicyProtocol. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SecurityPolicyProtocol) Values() []SecurityPolicyProtocol {
 	return []SecurityPolicyProtocol{
 		"SFTP",
@@ -467,6 +490,7 @@ const (
 
 // Values returns all known values for SecurityPolicyResourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SecurityPolicyResourceType) Values() []SecurityPolicyResourceType {
 	return []SecurityPolicyResourceType{
@@ -484,8 +508,9 @@ const (
 )
 
 // Values returns all known values for SetStatOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SetStatOption) Values() []SetStatOption {
 	return []SetStatOption{
 		"DEFAULT",
@@ -505,6 +530,7 @@ const (
 
 // Values returns all known values for SftpAuthenticationMethods. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SftpAuthenticationMethods) Values() []SftpAuthenticationMethods {
 	return []SftpAuthenticationMethods{
@@ -527,8 +553,9 @@ const (
 )
 
 // Values returns all known values for SigningAlg. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SigningAlg) Values() []SigningAlg {
 	return []SigningAlg{
 		"SHA256",
@@ -552,8 +579,9 @@ const (
 )
 
 // Values returns all known values for State. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
 		"OFFLINE",
@@ -576,6 +604,7 @@ const (
 
 // Values returns all known values for TlsSessionResumptionMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TlsSessionResumptionMode) Values() []TlsSessionResumptionMode {
 	return []TlsSessionResumptionMode{
@@ -597,8 +626,9 @@ const (
 )
 
 // Values returns all known values for WorkflowStepType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkflowStepType) Values() []WorkflowStepType {
 	return []WorkflowStepType{
 		"COPY",

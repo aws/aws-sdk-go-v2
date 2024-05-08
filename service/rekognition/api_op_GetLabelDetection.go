@@ -12,24 +12,34 @@ import (
 )
 
 // Gets the label detection results of a Amazon Rekognition Video analysis started
-// by StartLabelDetection . The label detection operation is started by a call to
-// StartLabelDetection which returns a job identifier ( JobId ). When the label
-// detection operation finishes, Amazon Rekognition publishes a completion status
-// to the Amazon Simple Notification Service topic registered in the initial call
-// to StartlabelDetection . To get the results of the label detection operation,
-// first check that the status value published to the Amazon SNS topic is SUCCEEDED
-// . If so, call GetLabelDetection and pass the job identifier ( JobId ) from the
-// initial call to StartLabelDetection . GetLabelDetection returns an array of
-// detected labels ( Labels ) sorted by the time the labels were detected. You can
-// also sort by the label name by specifying NAME for the SortBy input parameter.
-// If there is no NAME specified, the default sort is by timestamp. You can select
-// how results are aggregated by using the AggregateBy input parameter. The
-// default aggregation method is TIMESTAMPS . You can also aggregate by SEGMENTS ,
-// which aggregates all instances of labels detected in a given segment. The
-// returned Labels array may include the following attributes:
+// by StartLabelDetection.
+//
+// The label detection operation is started by a call to StartLabelDetection which returns a job
+// identifier ( JobId ). When the label detection operation finishes, Amazon
+// Rekognition publishes a completion status to the Amazon Simple Notification
+// Service topic registered in the initial call to StartlabelDetection .
+//
+// To get the results of the label detection operation, first check that the
+// status value published to the Amazon SNS topic is SUCCEEDED . If so, call GetLabelDetection and
+// pass the job identifier ( JobId ) from the initial call to StartLabelDetection .
+//
+// GetLabelDetection returns an array of detected labels ( Labels ) sorted by the
+// time the labels were detected. You can also sort by the label name by specifying
+// NAME for the SortBy input parameter. If there is no NAME specified, the default
+// sort is by timestamp.
+//
+// You can select how results are aggregated by using the AggregateBy input
+// parameter. The default aggregation method is TIMESTAMPS . You can also aggregate
+// by SEGMENTS , which aggregates all instances of labels detected in a given
+// segment.
+//
+// The returned Labels array may include the following attributes:
+//
 //   - Name - The name of the detected label.
+//
 //   - Confidence - The level of confidence in the label assigned to a detected
 //     object.
+//
 //   - Parents - The ancestor labels for a detected label. GetLabelDetection
 //     returns a hierarchical taxonomy of detected labels. For example, a detected car
 //     might be assigned the label car. The label car has two parent labels: Vehicle
@@ -37,13 +47,17 @@ import (
 //     ancestors for a label, where every ancestor is a unique label. In the previous
 //     example, Car, Vehicle, and Transportation are returned as unique labels in the
 //     response.
+//
 //   - Aliases - Possible Aliases for the label.
+//
 //   - Categories - The label categories that the detected label belongs to.
+//
 //   - BoundingBox — Bounding boxes are described for all instances of detected
 //     common object labels, returned in an array of Instance objects. An Instance
 //     object contains a BoundingBox object, describing the location of the label on
 //     the input image. It also includes the confidence for the accuracy of the
 //     detected bounding box.
+//
 //   - Timestamp - Time, in milliseconds from the start of the video, that the
 //     label was detected. For aggregation by SEGMENTS , the StartTimestampMillis ,
 //     EndTimestampMillis , and DurationMillis structures are what define a segment.
@@ -52,15 +66,19 @@ import (
 //
 // Timestamp and Bounding box information are returned for detected Instances,
 // only if aggregation is done by TIMESTAMPS . If aggregating by SEGMENTS ,
-// information about detected instances isn’t returned. The version of the label
-// model used for the detection is also returned. Note DominantColors isn't
-// returned for Instances , although it is shown as part of the response in the
-// sample seen below. Use MaxResults parameter to limit the number of labels
-// returned. If there are more results than specified in MaxResults , the value of
-// NextToken in the operation response contains a pagination token for getting the
-// next set of results. To get the next page of results, call GetlabelDetection
-// and populate the NextToken request parameter with the token value returned from
-// the previous call to GetLabelDetection .
+// information about detected instances isn’t returned.
+//
+// The version of the label model used for the detection is also returned.
+//
+// Note DominantColors isn't returned for Instances , although it is shown as part
+// of the response in the sample seen below.
+//
+// Use MaxResults parameter to limit the number of labels returned. If there are
+// more results than specified in MaxResults , the value of NextToken in the
+// operation response contains a pagination token for getting the next set of
+// results. To get the next page of results, call GetlabelDetection and populate
+// the NextToken request parameter with the token value returned from the previous
+// call to GetLabelDetection .
 func (c *Client) GetLabelDetection(ctx context.Context, params *GetLabelDetectionInput, optFns ...func(*Options)) (*GetLabelDetectionOutput, error) {
 	if params == nil {
 		params = &GetLabelDetectionInput{}
@@ -142,8 +160,8 @@ type GetLabelDetectionOutput struct {
 	StatusMessage *string
 
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
-	// operations such as StartLabelDetection use Video to specify a video for
-	// analysis. The supported file formats are .mp4, .mov and .avi.
+	// operations such as StartLabelDetectionuse Video to specify a video for analysis. The supported
+	// file formats are .mp4, .mov and .avi.
 	Video *types.Video
 
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata

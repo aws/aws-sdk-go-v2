@@ -17,8 +17,9 @@ import (
 // response similar to GetSavingsPlanUtilization , but you have the option to make
 // multiple calls to GetSavingsPlanUtilizationDetails by providing individual
 // dates. You can use GetDimensionValues in SAVINGS_PLANS to determine the
-// possible dimension values. GetSavingsPlanUtilizationDetails internally groups
-// data by SavingsPlansArn .
+// possible dimension values.
+//
+// GetSavingsPlanUtilizationDetails internally groups data by SavingsPlansArn .
 func (c *Client) GetSavingsPlansUtilizationDetails(ctx context.Context, params *GetSavingsPlansUtilizationDetailsInput, optFns ...func(*Options)) (*GetSavingsPlansUtilizationDetailsOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansUtilizationDetailsInput{}
@@ -48,13 +49,21 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 
 	// Filters Savings Plans utilization coverage data for active Savings Plans
 	// dimensions. You can filter data with the following dimensions:
+	//
 	//   - LINKED_ACCOUNT
+	//
 	//   - SAVINGS_PLAN_ARN
+	//
 	//   - REGION
+	//
 	//   - PAYMENT_OPTION
+	//
 	//   - INSTANCE_TYPE_FAMILY
-	// GetSavingsPlansUtilizationDetails uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// object as the other operations, but only AND is supported among each dimension.
+	//
+	// GetSavingsPlansUtilizationDetails uses the same [Expression] object as the other
+	// operations, but only AND is supported among each dimension.
+	//
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
 	Filter *types.Expression
 
 	// The number of items to be returned in a response. The default is 20 , with a
@@ -66,15 +75,24 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	// page size.
 	NextToken *string
 
-	// The value that you want to sort the data by. The following values are supported
-	// for Key :
+	// The value that you want to sort the data by.
+	//
+	// The following values are supported for Key :
+	//
 	//   - UtilizationPercentage
+	//
 	//   - TotalCommitment
+	//
 	//   - UsedCommitment
+	//
 	//   - UnusedCommitment
+	//
 	//   - NetSavings
+	//
 	//   - AmortizedRecurringCommitment
+	//
 	//   - AmortizedUpfrontCommitment
+	//
 	// The supported values for SortOrder are ASCENDING and DESCENDING .
 	SortBy *types.SortDefinition
 

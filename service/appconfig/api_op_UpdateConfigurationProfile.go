@@ -99,7 +99,10 @@ type UpdateConfigurationProfileOutput struct {
 	// flags and freeform configurations. We recommend you create feature flag
 	// configurations to enable or disable new features and freeform configurations to
 	// distribute configurations to an application. When calling this API, enter one of
-	// the following values for Type : AWS.AppConfig.FeatureFlags
+	// the following values for Type :
+	//
+	//     AWS.AppConfig.FeatureFlags
+	//
 	//     AWS.Freeform
 	Type *string
 

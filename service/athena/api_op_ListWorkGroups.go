@@ -47,8 +47,8 @@ type ListWorkGroupsOutput struct {
 	// pass in the NextToken from the response object of the previous page call.
 	NextToken *string
 
-	// A list of WorkGroupSummary objects that include the names, descriptions,
-	// creation times, and states for each workgroup.
+	// A list of WorkGroupSummary objects that include the names, descriptions, creation times, and
+	// states for each workgroup.
 	WorkGroups []types.WorkGroupSummary
 
 	// Metadata pertaining to the operation's result.

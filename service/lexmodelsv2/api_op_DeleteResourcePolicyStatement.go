@@ -44,8 +44,10 @@ type DeleteResourcePolicyStatementInput struct {
 
 	// The identifier of the revision of the policy to delete the statement from. If
 	// this revision ID doesn't match the current revision ID, Amazon Lex throws an
-	// exception. If you don't specify a revision, Amazon Lex removes the current
-	// contents of the statement.
+	// exception.
+	//
+	// If you don't specify a revision, Amazon Lex removes the current contents of the
+	// statement.
 	ExpectedRevisionId *string
 
 	noSmithyDocumentSerde

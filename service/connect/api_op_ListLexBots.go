@@ -12,9 +12,11 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
-// Returns a paginated list of all the Amazon Lex V1 bots currently associated with
-// the instance. To return both Amazon Lex V1 and V2 bots, use the ListBots (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListBots.html)
-// API.
+//
+// Returns a paginated list of all the Amazon Lex V1 bots currently associated
+// with the instance. To return both Amazon Lex V1 and V2 bots, use the [ListBots]API.
+//
+// [ListBots]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListBots.html
 func (c *Client) ListLexBots(ctx context.Context, params *ListLexBotsInput, optFns ...func(*Options)) (*ListLexBotsOutput, error) {
 	if params == nil {
 		params = &ListLexBotsInput{}
@@ -32,8 +34,10 @@ func (c *Client) ListLexBots(ctx context.Context, params *ListLexBotsInput, optF
 
 type ListLexBotsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

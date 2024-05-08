@@ -12,9 +12,11 @@ import (
 )
 
 // Enables the standards specified by the provided StandardsArn . To obtain the ARN
-// for a standard, use the DescribeStandards operation. For more information, see
-// the Security Standards (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html)
-// section of the Security Hub User Guide.
+// for a standard, use the DescribeStandards operation.
+//
+// For more information, see the [Security Standards] section of the Security Hub User Guide.
+//
+// [Security Standards]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html
 func (c *Client) BatchEnableStandards(ctx context.Context, params *BatchEnableStandardsInput, optFns ...func(*Options)) (*BatchEnableStandardsOutput, error) {
 	if params == nil {
 		params = &BatchEnableStandardsInput{}

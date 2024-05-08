@@ -224,9 +224,13 @@ type BlobMetadata struct {
 	BlobId *string
 
 	// The file mode permissions of the blob. File mode permission codes include:
+	//
 	//   - 100644 indicates read/write
+	//
 	//   - 100755 indicates read/write/execute
+	//
 	//   - 160000 indicates a submodule
+	//
 	//   - 120000 indicates a symlink
 	Mode *string
 
@@ -374,9 +378,12 @@ type Commit struct {
 	// Information about the person who committed the specified commit, also known as
 	// the committer. Information includes the date in timestamp format with GMT
 	// offset, the name of the committer, and the email address for the committer, as
-	// configured in Git. For more information about the difference between an author
-	// and a committer in Git, see Viewing the Commit History (http://git-scm.com/book/ch2-3.html)
-	// in Pro Git by Scott Chacon and Ben Straub.
+	// configured in Git.
+	//
+	// For more information about the difference between an author and a committer in
+	// Git, see [Viewing the Commit History]in Pro Git by Scott Chacon and Ben Straub.
+	//
+	// [Viewing the Commit History]: http://git-scm.com/book/ch2-3.html
 	Committer *UserInfo
 
 	// The commit message associated with the specified commit.
@@ -1078,11 +1085,12 @@ type RepositoryNameIdPair struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a trigger for a repository. If you want to receive
-// notifications about repository events, consider using notifications instead of
-// triggers. For more information, see Configuring notifications for repository
-// events (https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-repository-email.html)
-// .
+// Information about a trigger for a repository.
+//
+// If you want to receive notifications about repository events, consider using
+// notifications instead of triggers. For more information, see [Configuring notifications for repository events].
+//
+// [Configuring notifications for repository events]: https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-repository-email.html
 type RepositoryTrigger struct {
 
 	// The ARN of the resource that is the target for a trigger (for example, the ARN
@@ -1092,8 +1100,9 @@ type RepositoryTrigger struct {
 	DestinationArn *string
 
 	// The repository events that cause the trigger to run actions in another service,
-	// such as sending a notification through Amazon SNS. The valid value "all" cannot
-	// be used with any other values.
+	// such as sending a notification through Amazon SNS.
+	//
+	// The valid value "all" cannot be used with any other values.
 	//
 	// This member is required.
 	Events []RepositoryTriggerEventEnum
@@ -1104,8 +1113,9 @@ type RepositoryTrigger struct {
 	Name *string
 
 	// The branches to be included in the trigger configuration. If you specify an
-	// empty array, the trigger applies to all branches. Although no content is
-	// required in the array, you must include the array itself.
+	// empty array, the trigger applies to all branches.
+	//
+	// Although no content is required in the array, you must include the array itself.
 	Branches []string
 
 	// Any custom data associated with the trigger to be included in the information

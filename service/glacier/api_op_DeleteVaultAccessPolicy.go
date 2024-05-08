@@ -15,10 +15,12 @@ import (
 // The operation is eventually consistent; that is, it might take some time for
 // Amazon S3 Glacier to completely remove the access policy, and you might still
 // see the effect of the policy for a short time after you send the delete request.
+//
 // This operation is idempotent. You can invoke delete multiple times, even if
 // there is no policy associated with the vault. For more information about vault
-// access policies, see Amazon Glacier Access Control with Vault Access Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html)
-// .
+// access policies, see [Amazon Glacier Access Control with Vault Access Policies].
+//
+// [Amazon Glacier Access Control with Vault Access Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html
 func (c *Client) DeleteVaultAccessPolicy(ctx context.Context, params *DeleteVaultAccessPolicyInput, optFns ...func(*Options)) (*DeleteVaultAccessPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteVaultAccessPolicyInput{}

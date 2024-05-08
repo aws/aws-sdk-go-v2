@@ -12,12 +12,15 @@ import (
 )
 
 // Start an asynchronous job to import Wisdom resources from an uploaded source
-// file. Before calling this API, use StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
-// to upload an asset that contains the resource data.
+// file. Before calling this API, use [StartContentUpload]to upload an asset that contains the
+// resource data.
+//
 //   - For importing Wisdom quick responses, you need to upload a csv file
 //     including the quick responses. For information about how to format the csv file
-//     for importing quick responses, see Import quick responses (https://docs.aws.amazon.com/console/connect/quick-responses/add-data)
-//     .
+//     for importing quick responses, see [Import quick responses].
+//
+// [StartContentUpload]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
+// [Import quick responses]: https://docs.aws.amazon.com/console/connect/quick-responses/add-data
 func (c *Client) StartImportJob(ctx context.Context, params *StartImportJobInput, optFns ...func(*Options)) (*StartImportJobOutput, error) {
 	if params == nil {
 		params = &StartImportJobInput{}
@@ -36,6 +39,7 @@ func (c *Client) StartImportJob(ctx context.Context, params *StartImportJobInput
 type StartImportJobInput struct {
 
 	// The type of the import job.
+	//
 	//   - For importing quick response resource, set the value to QUICK_RESPONSES .
 	//
 	// This member is required.
@@ -44,14 +48,16 @@ type StartImportJobInput struct {
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
 	// knowledge base if you're storing Wisdom Content resource to it. Can be either
 	// the ID or the ARN. URLs cannot contain the ARN.
+	//
 	//   - For importing Wisdom quick responses, this should be a QUICK_RESPONSES type
 	//   knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
-	// .
+	// A pointer to the uploaded asset. This value is returned by [StartContentUpload].
+	//
+	// [StartContentUpload]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
 	//
 	// This member is required.
 	UploadId *string

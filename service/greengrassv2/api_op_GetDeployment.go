@@ -62,8 +62,9 @@ type GetDeploymentOutput struct {
 	// The status of the deployment.
 	DeploymentStatus types.DeploymentStatus
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the IoT job that applies the deployment to target devices.
+	// The [ARN] of the IoT job that applies the deployment to target devices.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	IotJobArn *string
 
 	// The job configuration for the deployment configuration. The job configuration
@@ -77,20 +78,23 @@ type GetDeploymentOutput struct {
 	// Whether or not the deployment is the latest revision for its target.
 	IsLatestForTarget bool
 
-	// The parent deployment's target ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// within a subdeployment.
+	// The parent deployment's target [ARN] within a subdeployment.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ParentTargetArn *string
 
 	// The revision number of the deployment.
 	RevisionId *string
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
-	// in the IoT Greengrass V2 Developer Guide.
+	// information, see [Tag your resources]in the IoT Greengrass V2 Developer Guide.
+	//
+	// [Tag your resources]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
 	Tags map[string]string
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the target IoT thing or thing group.
+	// The [ARN] of the target IoT thing or thing group.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	TargetArn *string
 
 	// Metadata pertaining to the operation's result.

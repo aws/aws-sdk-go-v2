@@ -14,8 +14,10 @@ import (
 
 // This is the first of two steps to create a restore testing plan; once this
 // request is successful, finish the procedure with request
-// CreateRestoreTestingSelection. You must include the parameter
-// RestoreTestingPlan. You may optionally include CreatorRequestId and Tags.
+// CreateRestoreTestingSelection.
+//
+// You must include the parameter RestoreTestingPlan. You may optionally include
+// CreatorRequestId and Tags.
 func (c *Client) CreateRestoreTestingPlan(ctx context.Context, params *CreateRestoreTestingPlanInput, optFns ...func(*Options)) (*CreateRestoreTestingPlanOutput, error) {
 	if params == nil {
 		params = &CreateRestoreTestingPlanInput{}
@@ -35,8 +37,9 @@ type CreateRestoreTestingPlanInput struct {
 
 	// A restore testing plan must contain a unique RestoreTestingPlanName string you
 	// create and must contain a ScheduleExpression cron. You may optionally include a
-	// StartWindowHours integer and a CreatorRequestId string. The
-	// RestoreTestingPlanName is a unique string that is the name of the restore
+	// StartWindowHours integer and a CreatorRequestId string.
+	//
+	// The RestoreTestingPlanName is a unique string that is the name of the restore
 	// testing plan. This cannot be changed after creation, and it must consist of only
 	// alphanumeric characters and underscores.
 	//
@@ -73,9 +76,10 @@ type CreateRestoreTestingPlanOutput struct {
 	// This member is required.
 	RestoreTestingPlanArn *string
 
-	// This unique string is the name of the restore testing plan. The name cannot be
-	// changed after creation. The name consists of only alphanumeric characters and
-	// underscores. Maximum length is 50.
+	// This unique string is the name of the restore testing plan.
+	//
+	// The name cannot be changed after creation. The name consists of only
+	// alphanumeric characters and underscores. Maximum length is 50.
 	//
 	// This member is required.
 	RestoreTestingPlanName *string

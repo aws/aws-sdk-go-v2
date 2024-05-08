@@ -48,7 +48,9 @@ type ListFindingAggregatorsOutput struct {
 	FindingAggregators []types.FindingAggregator
 
 	// If there are more results, this is the token to provide in the next call to
-	// ListFindingAggregators . This operation currently only returns a single result.
+	// ListFindingAggregators .
+	//
+	// This operation currently only returns a single result.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

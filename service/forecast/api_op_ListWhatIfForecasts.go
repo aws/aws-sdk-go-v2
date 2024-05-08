@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of what-if forecasts created using the CreateWhatIfForecast
-// operation. For each what-if forecast, this operation returns a summary of its
-// properties, including its Amazon Resource Name (ARN). You can retrieve the
-// complete set of properties by using the what-if forecast ARN with the
-// DescribeWhatIfForecast operation.
+// Returns a list of what-if forecasts created using the CreateWhatIfForecast operation. For each
+// what-if forecast, this operation returns a summary of its properties, including
+// its Amazon Resource Name (ARN). You can retrieve the complete set of properties
+// by using the what-if forecast ARN with the DescribeWhatIfForecastoperation.
 func (c *Client) ListWhatIfForecasts(ctx context.Context, params *ListWhatIfForecastsInput, optFns ...func(*Options)) (*ListWhatIfForecastsOutput, error) {
 	if params == nil {
 		params = &ListWhatIfForecastsInput{}
@@ -37,17 +36,23 @@ type ListWhatIfForecastsInput struct {
 	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude the what-if forecast export jobs that match the statement
 	// from the list, respectively. The match statement consists of a key and a value.
+	//
 	// Filter properties
+	//
 	//   - Condition - The condition to apply. Valid values are IS and IS_NOT . To
 	//   include the forecast export jobs that match the statement, specify IS . To
 	//   exclude matching forecast export jobs, specify IS_NOT .
+	//
 	//   - Key - The name of the parameter to filter on. Valid values are
 	//   WhatIfForecastArn and Status .
+	//
 	//   - Value - The value to match.
+	//
 	// For example, to list all jobs that export a forecast named
-	// electricityWhatIfForecast, specify the following filter: "Filters": [ {
-	// "Condition": "IS", "Key": "WhatIfForecastArn", "Value":
-	// "arn:aws:forecast:us-west-2::forecast/electricityWhatIfForecast" } ]
+	// electricityWhatIfForecast, specify the following filter:
+	//
+	//     "Filters": [ { "Condition": "IS", "Key": "WhatIfForecastArn", "Value":
+	//     "arn:aws:forecast:us-west-2::forecast/electricityWhatIfForecast" } ]
 	Filters []types.Filter
 
 	// The number of items to return in the response.

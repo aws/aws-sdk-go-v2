@@ -12,9 +12,9 @@ import (
 )
 
 // Retrieves a list that describes the connection aliases used for cross-Region
-// redirection. For more information, see Cross-Region Redirection for Amazon
-// WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
-// .
+// redirection. For more information, see [Cross-Region Redirection for Amazon WorkSpaces].
+//
+// [Cross-Region Redirection for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
 func (c *Client) DescribeConnectionAliases(ctx context.Context, params *DescribeConnectionAliasesInput, optFns ...func(*Options)) (*DescribeConnectionAliasesOutput, error) {
 	if params == nil {
 		params = &DescribeConnectionAliasesInput{}

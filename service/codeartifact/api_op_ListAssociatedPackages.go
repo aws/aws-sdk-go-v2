@@ -12,9 +12,10 @@ import (
 )
 
 // Returns a list of packages associated with the requested package group. For
-// information package group association and matching, see Package group
-// definition syntax and matching behavior (https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html)
-// in the CodeArtifact User Guide.
+// information package group association and matching, see [Package group definition syntax and matching behavior]in the CodeArtifact
+// User Guide.
+//
+// [Package group definition syntax and matching behavior]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html
 func (c *Client) ListAssociatedPackages(ctx context.Context, params *ListAssociatedPackagesInput, optFns ...func(*Options)) (*ListAssociatedPackagesOutput, error) {
 	if params == nil {
 		params = &ListAssociatedPackagesInput{}
@@ -32,29 +33,29 @@ func (c *Client) ListAssociatedPackages(ctx context.Context, params *ListAssocia
 
 type ListAssociatedPackagesInput struct {
 
-	// The name of the domain that contains the package group from which to list
+	//  The name of the domain that contains the package group from which to list
 	// associated packages.
 	//
 	// This member is required.
 	Domain *string
 
-	// The pattern of the package group from which to list associated packages.
+	//  The pattern of the package group from which to list associated packages.
 	//
 	// This member is required.
 	PackageGroup *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// When this flag is included, ListAssociatedPackages will return a list of
+	//  When this flag is included, ListAssociatedPackages will return a list of
 	// packages that would be associated with a package group, even if it does not
 	// exist.
 	Preview *bool
@@ -64,11 +65,11 @@ type ListAssociatedPackagesInput struct {
 
 type ListAssociatedPackagesOutput struct {
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The list of packages associated with the requested package group.
+	//  The list of packages associated with the requested package group.
 	Packages []types.AssociatedPackage
 
 	// Metadata pertaining to the operation's result.
@@ -167,7 +168,7 @@ var _ ListAssociatedPackagesAPIClient = (*Client)(nil)
 // ListAssociatedPackagesPaginatorOptions is the paginator options for
 // ListAssociatedPackages
 type ListAssociatedPackagesPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

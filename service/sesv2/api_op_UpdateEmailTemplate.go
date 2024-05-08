@@ -13,8 +13,11 @@ import (
 
 // Updates an email template. Email templates enable you to send personalized
 // email to one or more destinations in a single API operation. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
-// . You can execute this operation no more than once per second.
+// information, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
 func (c *Client) UpdateEmailTemplate(ctx context.Context, params *UpdateEmailTemplateInput, optFns ...func(*Options)) (*UpdateEmailTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateEmailTemplateInput{}
@@ -30,9 +33,10 @@ func (c *Client) UpdateEmailTemplate(ctx context.Context, params *UpdateEmailTem
 	return out, nil
 }
 
-// Represents a request to update an email template. For more information, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// Represents a request to update an email template. For more information, see the [Amazon SES Developer Guide]
 // .
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html
 type UpdateEmailTemplateInput struct {
 
 	// The content of the email template, composed of a subject line, an HTML part,

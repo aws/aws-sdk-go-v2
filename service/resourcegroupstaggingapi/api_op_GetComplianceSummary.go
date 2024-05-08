@@ -12,15 +12,21 @@ import (
 )
 
 // Returns a table that shows counts of resources that are noncompliant with their
-// tag policies. For more information on tag policies, see Tag Policies (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
-// in the Organizations User Guide. You can call this operation only from the
-// organization's management account and from the us-east-1 Region. This operation
-// supports pagination, where the response can be sent in multiple pages. You
-// should check the PaginationToken response parameter to determine if there are
-// additional results available to return. Repeat the query, passing the
+// tag policies.
+//
+// For more information on tag policies, see [Tag Policies] in the Organizations User Guide.
+//
+// You can call this operation only from the organization's management account and
+// from the us-east-1 Region.
+//
+// This operation supports pagination, where the response can be sent in multiple
+// pages. You should check the PaginationToken response parameter to determine if
+// there are additional results available to return. Repeat the query, passing the
 // PaginationToken response parameter value as an input to the next request until
 // you recieve a null value. A null value for PaginationToken indicates that there
 // are no more results waiting to be returned.
+//
+// [Tag Policies]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 func (c *Client) GetComplianceSummary(ctx context.Context, params *GetComplianceSummaryInput, optFns ...func(*Options)) (*GetComplianceSummaryOutput, error) {
 	if params == nil {
 		params = &GetComplianceSummaryInput{}
@@ -63,21 +69,25 @@ type GetComplianceSummaryInput struct {
 	// of the specified types. The format of each resource type is
 	// service[:resourceType] . For example, specifying a resource type of ec2 returns
 	// all Amazon EC2 resources (which includes EC2 instances). Specifying a resource
-	// type of ec2:instance returns only EC2 instances. The string for each service
-	// name and resource type is the same as that embedded in a resource's Amazon
-	// Resource Name (ARN). Consult the Amazon Web Services General Reference (https://docs.aws.amazon.com/general/latest/gr/)
-	// for the following:
-	//   - For a list of service name strings, see Amazon Web Services Service
-	//   Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
-	//   .
-	//   - For resource type strings, see Example ARNs (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax)
-	//   .
-	//   - For more information about ARNs, see Amazon Resource Names (ARNs) and
-	//   Amazon Web Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	//   .
+	// type of ec2:instance returns only EC2 instances.
+	//
+	// The string for each service name and resource type is the same as that embedded
+	// in a resource's Amazon Resource Name (ARN). Consult the [Amazon Web Services General Reference]for the following:
+	//
+	//   - For a list of service name strings, see [Amazon Web Services Service Namespaces].
+	//
+	//   - For resource type strings, see [Example ARNs].
+	//
+	//   - For more information about ARNs, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
 	// You can specify multiple resource types by using a comma separated array. The
 	// array can include up to 100 items. Note that the length constraint requirement
 	// applies to each resource type filter.
+	//
+	// [Example ARNs]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax
+	// [Amazon Web Services General Reference]: https://docs.aws.amazon.com/general/latest/gr/
+	// [Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceTypeFilters []string
 
 	// Specifies that you want the response to include information for only resources

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a pipeline. In the pipeline structure, you must include either
-// artifactStore or artifactStores in your pipeline, but you cannot use both. If
-// you create a cross-region action in your pipeline, you must use artifactStores .
+// Creates a pipeline.
+//
+// In the pipeline structure, you must include either artifactStore or
+// artifactStores in your pipeline, but you cannot use both. If you create a
+// cross-region action in your pipeline, you must use artifactStores .
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {
 		params = &CreatePipelineInput{}

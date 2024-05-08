@@ -14,8 +14,9 @@ import (
 // Gets a subject, which associates a certificate identity with authentication
 // attempts. The subject stores auditing information such as the status of the last
 // authentication attempt, the certificate data used in the attempt, and the last
-// time the associated identity attempted authentication. Required permissions:
-// rolesanywhere:GetSubject .
+// time the associated identity attempted authentication.
+//
+// Required permissions: rolesanywhere:GetSubject .
 func (c *Client) GetSubject(ctx context.Context, params *GetSubjectInput, optFns ...func(*Options)) (*GetSubjectOutput, error) {
 	if params == nil {
 		params = &GetSubjectInput{}

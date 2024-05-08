@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Describes an existing snapshot job. Poll job descriptions after a job starts to
-// know the status of the job. For information on available status codes, see
-// JobStatus .
+// Describes an existing snapshot job.
+//
+// Poll job descriptions after a job starts to know the status of the job. For
+// information on available status codes, see JobStatus .
 func (c *Client) DescribeDashboardSnapshotJob(ctx context.Context, params *DescribeDashboardSnapshotJobInput, optFns ...func(*Options)) (*DescribeDashboardSnapshotJobOutput, error) {
 	if params == nil {
 		params = &DescribeDashboardSnapshotJobInput{}
@@ -58,11 +59,11 @@ type DescribeDashboardSnapshotJobOutput struct {
 	// when you start a new job with a StartDashboardSnapshotJob API call.
 	Arn *string
 
-	// The ID of the Amazon Web Services account that the dashboard snapshot job is
+	//  The ID of the Amazon Web Services account that the dashboard snapshot job is
 	// executed in.
 	AwsAccountId *string
 
-	// The time that the snapshot job was created.
+	//  The time that the snapshot job was created.
 	CreatedTime *time.Time
 
 	// The ID of the dashboard that you have started a snapshot job for.
@@ -70,16 +71,20 @@ type DescribeDashboardSnapshotJobOutput struct {
 
 	// Indicates the status of a job. The status updates as the job executes. This
 	// shows one of the following values.
+	//
 	//   - COMPLETED - The job was completed successfully.
+	//
 	//   - FAILED - The job failed to execute.
+	//
 	//   - QUEUED - The job is queued and hasn't started yet.
+	//
 	//   - RUNNING - The job is still running.
 	JobStatus types.SnapshotJobStatus
 
-	// The time that the snapshot job status was last updated.
+	//  The time that the snapshot job status was last updated.
 	LastUpdatedTime *time.Time
 
-	// The Amazon Web Services request ID for this operation.
+	//  The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The snapshot configuration of the job. This information is provided when you

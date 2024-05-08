@@ -46,7 +46,9 @@ type Cluster struct {
 	KmsKeyId *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi
+	// Coordinated Time (UTC).
+	//
+	// Format: ddd:hh24:mi-ddd:hh24:mi
 	//
 	// This member is required.
 	PreferredMaintenanceWindow *string
@@ -179,8 +181,10 @@ type ClusterSnapshot struct {
 
 	// The type of cluster snapshots to be returned. You can specify one of the
 	// following values:
+	//
 	//   - automated - Return all cluster snapshots that Amazon DocumentDB has
 	//   automatically created for your Amazon Web Services account.
+	//
 	//   - manual - Return all cluster snapshots that you have manually created for
 	//   your Amazon Web Services account.
 	SnapshotType SnapshotType

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a hub. Hub APIs are only callable through SageMaker Studio.
+// Create a hub.
+//
+// Hub APIs are only callable through SageMaker Studio.
 func (c *Client) CreateHub(ctx context.Context, params *CreateHubInput, optFns ...func(*Options)) (*CreateHubOutput, error) {
 	if params == nil {
 		params = &CreateHubInput{}

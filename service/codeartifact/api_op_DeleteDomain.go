@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a domain. You cannot delete a domain that contains repositories. If you
-// want to delete a domain with repositories, first delete its repositories.
+//	Deletes a domain. You cannot delete a domain that contains repositories. If
+//
+// you want to delete a domain with repositories, first delete its repositories.
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {
 	if params == nil {
 		params = &DeleteDomainInput{}
@@ -30,12 +31,12 @@ func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, op
 
 type DeleteDomainInput struct {
 
-	// The name of the domain to delete.
+	//  The name of the domain to delete.
 	//
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -44,7 +45,7 @@ type DeleteDomainInput struct {
 
 type DeleteDomainOutput struct {
 
-	// Contains information about the deleted domain after processing the request.
+	//  Contains information about the deleted domain after processing the request.
 	Domain *types.DomainDescription
 
 	// Metadata pertaining to the operation's result.

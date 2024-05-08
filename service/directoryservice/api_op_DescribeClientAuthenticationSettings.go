@@ -42,8 +42,7 @@ type DescribeClientAuthenticationSettingsInput struct {
 	Limit *int32
 
 	// The DescribeClientAuthenticationSettingsResult.NextToken value from a previous
-	// call to DescribeClientAuthenticationSettings . Pass null if this is the first
-	// call.
+	// call to DescribeClientAuthenticationSettings. Pass null if this is the first call.
 	NextToken *string
 
 	// The type of client authentication for which to retrieve information. If no type

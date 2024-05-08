@@ -12,8 +12,11 @@ import (
 )
 
 // Tag a resource. A tag is a key-value pair of metadata that you associate with
-// an Proton resource. For more information, see Proton resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
-// in the Proton User Guide.
+// an Proton resource.
+//
+// For more information, see [Proton resources and tagging] in the Proton User Guide.
+//
+// [Proton resources and tagging]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

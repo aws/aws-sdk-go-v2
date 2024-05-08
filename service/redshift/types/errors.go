@@ -444,9 +444,10 @@ func (e *ClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 }
 
 // The request would result in the user exceeding the allowed number of cluster
-// parameter groups. For information about increasing your quota, go to Limits in
-// Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// parameter groups. For information about increasing your quota, go to [Limits in Amazon Redshift]in the
+// Amazon Redshift Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type ClusterParameterGroupQuotaExceededFault struct {
 	Message *string
 
@@ -475,9 +476,12 @@ func (e *ClusterParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault
 }
 
 // The request would exceed the allowed number of cluster instances for this
-// account. For information about increasing your quota, go to Limits in Amazon
-// Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// account.
+//
+// For information about increasing your quota, go to [Limits in Amazon Redshift] in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type ClusterQuotaExceededFault struct {
 	Message *string
 
@@ -559,9 +563,10 @@ func (e *ClusterSecurityGroupNotFoundFault) ErrorCode() string {
 func (e *ClusterSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in the user exceeding the allowed number of cluster
-// security groups. For information about increasing your quota, go to Limits in
-// Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// security groups. For information about increasing your quota, go to [Limits in Amazon Redshift]in the
+// Amazon Redshift Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type ClusterSecurityGroupQuotaExceededFault struct {
 	Message *string
 
@@ -725,9 +730,10 @@ func (e *ClusterSubnetGroupNotFoundFault) ErrorCode() string {
 func (e *ClusterSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would result in user exceeding the allowed number of cluster subnet
-// groups. For information about increasing your quota, go to Limits in Amazon
-// Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// groups. For information about increasing your quota, go to [Limits in Amazon Redshift]in the Amazon
+// Redshift Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type ClusterSubnetGroupQuotaExceededFault struct {
 	Message *string
 
@@ -756,9 +762,10 @@ func (e *ClusterSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 }
 
 // The request would result in user exceeding the allowed number of subnets in a
-// cluster subnet groups. For information about increasing your quota, go to
-// Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// cluster subnet groups. For information about increasing your quota, go to [Limits in Amazon Redshift]in
+// the Amazon Redshift Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type ClusterSubnetQuotaExceededFault struct {
 	Message *string
 
@@ -1168,9 +1175,10 @@ func (e *EndpointsPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFault {
 }
 
 // The request would exceed the allowed number of event subscriptions for this
-// account. For information about increasing your quota, go to Limits in Amazon
-// Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// account. For information about increasing your quota, go to [Limits in Amazon Redshift]in the Amazon
+// Redshift Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type EventSubscriptionQuotaExceededFault struct {
 	Message *string
 
@@ -1255,8 +1263,9 @@ func (e *HsmClientCertificateNotFoundFault) ErrorCode() string {
 func (e *HsmClientCertificateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for HSM client certificates has been reached. For information about
-// increasing your quota, go to Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// increasing your quota, go to [Limits in Amazon Redshift]in the Amazon Redshift Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type HsmClientCertificateQuotaExceededFault struct {
 	Message *string
 
@@ -1340,8 +1349,9 @@ func (e *HsmConfigurationNotFoundFault) ErrorCode() string {
 func (e *HsmConfigurationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for HSM configurations has been reached. For information about
-// increasing your quota, go to Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// increasing your quota, go to [Limits in Amazon Redshift]in the Amazon Redshift Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type HsmConfigurationQuotaExceededFault struct {
 	Message *string
 
@@ -2018,6 +2028,7 @@ func (e *InvalidRestoreFault) ErrorCode() string {
 func (e *InvalidRestoreFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The retention period specified is either in the past or is not a valid value.
+//
 // The value must be either -1 or an integer between 1 and 3,653.
 type InvalidRetentionPeriodFault struct {
 	Message *string
@@ -2044,9 +2055,10 @@ func (e *InvalidRetentionPeriodFault) ErrorCode() string {
 }
 func (e *InvalidRetentionPeriodFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The S3 bucket name is invalid. For more information about naming rules, go to
-// Bucket Restrictions and Limitations (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html)
+// The S3 bucket name is invalid. For more information about naming rules, go to [Bucket Restrictions and Limitations]
 // in the Amazon Simple Storage Service (S3) Developer Guide.
+//
+// [Bucket Restrictions and Limitations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
 type InvalidS3BucketNameFault struct {
 	Message *string
 
@@ -2421,9 +2433,12 @@ func (e *NumberOfNodesPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
-// The operation would exceed the number of nodes allotted to the account. For
-// information about increasing your quota, go to Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// The operation would exceed the number of nodes allotted to the account.
+//
+// For information about increasing your quota, go to [Limits in Amazon Redshift] in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type NumberOfNodesQuotaExceededFault struct {
 	Message *string
 
@@ -2690,8 +2705,9 @@ func (e *ReservedNodeOfferingNotFoundFault) ErrorCode() string {
 func (e *ReservedNodeOfferingNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request would exceed the user's compute node quota. For information about
-// increasing your quota, go to Limits in Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// increasing your quota, go to [Limits in Amazon Redshift]in the Amazon Redshift Cluster Management Guide.
+//
+// [Limits in Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 type ReservedNodeQuotaExceededFault struct {
 	Message *string
 

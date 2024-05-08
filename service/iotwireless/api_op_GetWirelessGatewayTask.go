@@ -39,8 +39,9 @@ type GetWirelessGatewayTaskInput struct {
 
 type GetWirelessGatewayTaskOutput struct {
 
-	// The date and time when the most recent uplink was received. This value is only
-	// valid for 3 months.
+	// The date and time when the most recent uplink was received.
+	//
+	// This value is only valid for 3 months.
 	LastUplinkReceivedAt *string
 
 	// The status of the request.

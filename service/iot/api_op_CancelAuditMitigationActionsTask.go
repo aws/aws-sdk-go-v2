@@ -11,9 +11,11 @@ import (
 )
 
 // Cancels a mitigation action task that is in progress. If the task is not in
-// progress, an InvalidRequestException occurs. Requires permission to access the
-// CancelAuditMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// progress, an InvalidRequestException occurs.
+//
+// Requires permission to access the [CancelAuditMitigationActionsTask] action.
+//
+// [CancelAuditMitigationActionsTask]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CancelAuditMitigationActionsTask(ctx context.Context, params *CancelAuditMitigationActionsTaskInput, optFns ...func(*Options)) (*CancelAuditMitigationActionsTaskOutput, error) {
 	if params == nil {
 		params = &CancelAuditMitigationActionsTaskInput{}

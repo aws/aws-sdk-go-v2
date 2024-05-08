@@ -29,25 +29,27 @@ func (c *Client) ListProfileResourceAssociations(ctx context.Context, params *Li
 
 type ListProfileResourceAssociationsInput struct {
 
-	// The ID of the Profile.
+	//  The ID of the Profile.
 	//
 	// This member is required.
 	ProfileId *string
 
-	// The maximum number of objects that you want to return for this request. If more
-	// objects are available, in the response, a NextToken value, which you can use in
-	// a subsequent call to get the next batch of objects, is provided. If you don't
-	// specify a value for MaxResults , up to 100 objects are returned.
+	//  The maximum number of objects that you want to return for this request. If
+	// more objects are available, in the response, a NextToken value, which you can
+	// use in a subsequent call to get the next batch of objects, is provided.
+	//
+	// If you don't specify a value for MaxResults , up to 100 objects are returned.
 	MaxResults *int32
 
-	// For the first call to this list request, omit this value. When you request a
-	// list of objects, at most the number of objects specified by MaxResults is
-	// returned. If more objects are available for retrieval, a NextToken value is
-	// returned in the response. To retrieve the next batch of objects, use the token
-	// that was returned for the prior request in your next request.
+	//  For the first call to this list request, omit this value.
+	//
+	// When you request a list of objects, at most the number of objects specified by
+	// MaxResults is returned. If more objects are available for retrieval, a NextToken
+	// value is returned in the response. To retrieve the next batch of objects, use
+	// the token that was returned for the prior request in your next request.
 	NextToken *string
 
-	// ID of a resource if you want information on only one type.
+	//  ID of a resource if you want information on only one type.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -55,13 +57,13 @@ type ListProfileResourceAssociationsInput struct {
 
 type ListProfileResourceAssociationsOutput struct {
 
-	// If more than MaxResults resource associations match the specified criteria, you
-	// can submit another ListProfileResourceAssociations request to get the next
+	//  If more than MaxResults resource associations match the specified criteria,
+	// you can submit another ListProfileResourceAssociations request to get the next
 	// group of results. In the next request, specify the value of NextToken from the
 	// previous response.
 	NextToken *string
 
-	// Information about the profile resource association that you specified in a
+	//  Information about the profile resource association that you specified in a
 	// GetProfileResourceAssociation request.
 	ProfileResourceAssociations []types.ProfileResourceAssociation
 
@@ -161,10 +163,11 @@ var _ ListProfileResourceAssociationsAPIClient = (*Client)(nil)
 // ListProfileResourceAssociationsPaginatorOptions is the paginator options for
 // ListProfileResourceAssociations
 type ListProfileResourceAssociationsPaginatorOptions struct {
-	// The maximum number of objects that you want to return for this request. If more
-	// objects are available, in the response, a NextToken value, which you can use in
-	// a subsequent call to get the next batch of objects, is provided. If you don't
-	// specify a value for MaxResults , up to 100 objects are returned.
+	//  The maximum number of objects that you want to return for this request. If
+	// more objects are available, in the response, a NextToken value, which you can
+	// use in a subsequent call to get the next batch of objects, is provided.
+	//
+	// If you don't specify a value for MaxResults , up to 100 objects are returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

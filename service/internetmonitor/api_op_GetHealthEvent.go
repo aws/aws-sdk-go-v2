@@ -15,10 +15,13 @@ import (
 // Gets information that Amazon CloudWatch Internet Monitor has created and stored
 // about a health event for a specified monitor. This information includes the
 // impacted locations, and all the information related to the event, by location.
+//
 // The information returned includes the impact on performance, availability, and
 // round-trip time, information about the network providers (ASNs), the event type,
-// and so on. Information rolled up at the global traffic level is also returned,
-// including the impact type and total traffic impact.
+// and so on.
+//
+// Information rolled up at the global traffic level is also returned, including
+// the impact type and total traffic impact.
 func (c *Client) GetHealthEvent(ctx context.Context, params *GetHealthEventInput, optFns ...func(*Options)) (*GetHealthEventOutput, error) {
 	if params == nil {
 		params = &GetHealthEventInput{}
@@ -50,9 +53,10 @@ type GetHealthEventInput struct {
 
 	// The account ID for an account that you've set up cross-account sharing for in
 	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
-	// Amazon CloudWatch Observability Access Manager. For more information, see
-	// Internet Monitor cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html)
-	// in the Amazon CloudWatch Internet Monitor User Guide.
+	// Amazon CloudWatch Observability Access Manager. For more information, see [Internet Monitor cross-account observability]in
+	// the Amazon CloudWatch Internet Monitor User Guide.
+	//
+	// [Internet Monitor cross-account observability]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
 	LinkedAccountId *string
 
 	noSmithyDocumentSerde

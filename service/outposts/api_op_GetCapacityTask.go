@@ -48,11 +48,15 @@ type GetCapacityTaskOutput struct {
 	// ID of the capacity task.
 	CapacityTaskId *string
 
-	// Status of the capacity task. A capacity task can have one of the following
-	// statuses:
+	// Status of the capacity task.
+	//
+	// A capacity task can have one of the following statuses:
+	//
 	//   - REQUESTED - The capacity task was created and is awaiting the next step by
 	//   Amazon Web Services Outposts.
+	//
 	//   - IN_PROGRESS - The capacity task is running and cannot be cancelled.
+	//
 	//   - WAITING_FOR_EVACUATION - The capacity task requires capacity to run. You
 	//   must stop the recommended EC2 running instances to free up capacity for the task
 	//   to run.

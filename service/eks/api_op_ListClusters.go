@@ -30,9 +30,10 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 type ListClustersInput struct {
 
 	// Indicates whether external clusters are included in the returned list. Use ' all
-	// ' to return https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html (https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html)
-	// connected clusters, or blank to return only Amazon EKS clusters. ' all ' must be
-	// in lowercase otherwise an error occurs.
+	// ' to return [https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html]connected clusters, or blank to return only Amazon EKS clusters. '
+	// all ' must be in lowercase otherwise an error occurs.
+	//
+	// [https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html]: https://docs.aws.amazon.com/eks/latest/userguide/eks-connector.html
 	Include []string
 
 	// The maximum number of results, returned in paginated output. You receive
@@ -46,9 +47,10 @@ type ListClustersInput struct {
 	// The nextToken value returned from a previous paginated request, where maxResults
 	// was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
-	// value. This value is null when there are no more results to return. This token
-	// should be treated as an opaque identifier that is used only to retrieve the next
-	// items in a list and not for other programmatic purposes.
+	// value. This value is null when there are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -63,9 +65,10 @@ type ListClustersOutput struct {
 	// The nextToken value returned from a previous paginated request, where maxResults
 	// was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
-	// value. This value is null when there are no more results to return. This token
-	// should be treated as an opaque identifier that is used only to retrieve the next
-	// items in a list and not for other programmatic purposes.
+	// value. This value is null when there are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

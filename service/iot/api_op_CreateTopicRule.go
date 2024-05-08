@@ -13,8 +13,11 @@ import (
 
 // Creates a rule. Creating rules is an administrator-level action. Any user who
 // has permission to create rules will be able to access data processed by the
-// rule. Requires permission to access the CreateTopicRule (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// rule.
+//
+// Requires permission to access the [CreateTopicRule] action.
+//
+// [CreateTopicRule]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateTopicRule(ctx context.Context, params *CreateTopicRuleInput, optFns ...func(*Options)) (*CreateTopicRuleOutput, error) {
 	if params == nil {
 		params = &CreateTopicRuleInput{}
@@ -43,10 +46,14 @@ type CreateTopicRuleInput struct {
 	// This member is required.
 	TopicRulePayload *types.TopicRulePayload
 
-	// Metadata which can be used to manage the topic rule. For URI Request parameters
-	// use format: ...key1=value1&key2=value2... For the CLI command-line parameter use
-	// format: --tags "key1=value1&key2=value2..." For the cli-input-json file use
-	// format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the topic rule.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: --tags
+	// "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags *string
 
 	noSmithyDocumentSerde

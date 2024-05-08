@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Synthetics canary runtime versions. For more information, see
-// Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
+// Returns a list of Synthetics canary runtime versions. For more information, see [Canary Runtime Versions]
 // .
+//
+// [Canary Runtime Versions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
 func (c *Client) DescribeRuntimeVersions(ctx context.Context, params *DescribeRuntimeVersionsInput, optFns ...func(*Options)) (*DescribeRuntimeVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeRuntimeVersionsInput{}

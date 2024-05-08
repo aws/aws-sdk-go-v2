@@ -13,12 +13,12 @@ import (
 
 // Describes the specified delivery stream and its status. For example, after your
 // delivery stream is created, call DescribeDeliveryStream to see whether the
-// delivery stream is ACTIVE and therefore ready for data to be sent to it. If the
-// status of a delivery stream is CREATING_FAILED , this status doesn't change, and
-// you can't invoke CreateDeliveryStream again on it. However, you can invoke the
-// DeleteDeliveryStream operation to delete it. If the status is DELETING_FAILED ,
-// you can force deletion by invoking DeleteDeliveryStream again but with
-// DeleteDeliveryStreamInput$AllowForceDelete set to true.
+// delivery stream is ACTIVE and therefore ready for data to be sent to it.
+//
+// If the status of a delivery stream is CREATING_FAILED , this status doesn't
+// change, and you can't invoke CreateDeliveryStreamagain on it. However, you can invoke the DeleteDeliveryStream
+// operation to delete it. If the status is DELETING_FAILED , you can force
+// deletion by invoking DeleteDeliveryStreamagain but with DeleteDeliveryStreamInput$AllowForceDelete set to true.
 func (c *Client) DescribeDeliveryStream(ctx context.Context, params *DescribeDeliveryStreamInput, optFns ...func(*Options)) (*DescribeDeliveryStreamOutput, error) {
 	if params == nil {
 		params = &DescribeDeliveryStreamInput{}

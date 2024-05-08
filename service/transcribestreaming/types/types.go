@@ -24,9 +24,11 @@ type Alternative struct {
 }
 
 // A wrapper for your audio chunks. Your audio stream consists of one or more
-// audio events, which consist of one or more audio chunks. For more information,
-// see Event stream encoding (https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html)
-// .
+// audio events, which consist of one or more audio chunks.
+//
+// For more information, see [Event stream encoding].
+//
+// [Event stream encoding]: https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html
 type AudioEvent struct {
 
 	// An audio blob that contains the next part of the audio that you want to
@@ -37,20 +39,26 @@ type AudioEvent struct {
 }
 
 // An encoded stream of audio blobs. Audio streams are encoded as either HTTP/2 or
-// WebSocket data frames. For more information, see Transcribing streaming audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html)
-// .
+// WebSocket data frames.
+//
+// For more information, see [Transcribing streaming audio].
 //
 // The following types satisfy this interface:
 //
 //	AudioStreamMemberAudioEvent
 //	AudioStreamMemberConfigurationEvent
+//
+// [Transcribing streaming audio]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html
 type AudioStream interface {
 	isAudioStream()
 }
 
 // A blob of audio from your application. Your audio stream consists of one or
-// more audio events. For more information, see Event stream encoding (https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html)
-// .
+// more audio events.
+//
+// For more information, see [Event stream encoding].
+//
+// [Event stream encoding]: https://docs.aws.amazon.com/transcribe/latest/dg/event-stream.html
 type AudioStreamMemberAudioEvent struct {
 	Value AudioEvent
 
@@ -81,9 +89,11 @@ type CallAnalyticsEntity struct {
 	Category *string
 
 	// The confidence score associated with the identification of an entity in your
-	// transcript. Confidence scores are values between 0 and 1. A larger value
-	// indicates a higher probability that the identified entity correctly matches the
-	// entity spoken in your media.
+	// transcript.
+	//
+	// Confidence scores are values between 0 and 1. A larger value indicates a higher
+	// probability that the identified entity correctly matches the entity spoken in
+	// your media.
 	Confidence *float64
 
 	// The word or words that represent the identified entity.
@@ -109,6 +119,7 @@ type CallAnalyticsItem struct {
 	BeginOffsetMillis *int64
 
 	// The confidence score associated with a word or phrase in your transcript.
+	//
 	// Confidence scores are values between 0 and 1. A larger value indicates a higher
 	// probability that the identified item correctly matches the item spoken in your
 	// media.
@@ -250,6 +261,7 @@ type Entity struct {
 	Category *string
 
 	// The confidence score associated with the identified PII entity in your audio.
+	//
 	// Confidence scores are values between 0 and 1. A larger value indicates a higher
 	// probability that the identified entity correctly matches the entity spoken in
 	// your media.
@@ -286,6 +298,7 @@ type IssueDetected struct {
 type Item struct {
 
 	// The confidence score associated with a word or phrase in your transcript.
+	//
 	// Confidence scores are values between 0 and 1. A larger value indicates a higher
 	// probability that the identified item correctly matches the item spoken in your
 	// media.
@@ -363,6 +376,7 @@ type MedicalEntity struct {
 	Category *string
 
 	// The confidence score associated with the identified PHI entity in your audio.
+	//
 	// Confidence scores are values between 0 and 1. A larger value indicates a higher
 	// probability that the identified entity correctly matches the entity spoken in
 	// your media.
@@ -386,6 +400,7 @@ type MedicalEntity struct {
 type MedicalItem struct {
 
 	// The confidence score associated with a word or phrase in your transcript.
+	//
 	// Confidence scores are values between 0 and 1. A larger value indicates a higher
 	// probability that the identified item correctly matches the item spoken in your
 	// media.
@@ -411,11 +426,13 @@ type MedicalItem struct {
 	noSmithyDocumentSerde
 }
 
-// The Result associated with a . Contains a set of transcription results from one
-// or more audio segments, along with additional information per your request
-// parameters. This can include information relating to alternative transcriptions,
-// channel identification, partial result stabilization, language identification,
-// and other transcription-related data.
+// The Result associated with a .
+//
+// Contains a set of transcription results from one or more audio segments, along
+// with additional information per your request parameters. This can include
+// information relating to alternative transcriptions, channel identification,
+// partial result stabilization, language identification, and other
+// transcription-related data.
 type MedicalResult struct {
 
 	// A list of possible alternative transcriptions for the input audio. Each
@@ -428,8 +445,10 @@ type MedicalResult struct {
 	// The end time, in milliseconds, of the Result .
 	EndTime float64
 
-	// Indicates if the segment is complete. If IsPartial is true , the segment is not
-	// complete. If IsPartial is false , the segment is complete.
+	// Indicates if the segment is complete.
+	//
+	// If IsPartial is true , the segment is not complete. If IsPartial is false , the
+	// segment is complete.
 	IsPartial bool
 
 	// Provides a unique identifier for the Result .
@@ -441,9 +460,11 @@ type MedicalResult struct {
 	noSmithyDocumentSerde
 }
 
-// The MedicalTranscript associated with a . MedicalTranscript contains Results ,
-// which contains a set of transcription results from one or more audio segments,
-// along with additional information per your request parameters.
+// The MedicalTranscript associated with a .
+//
+// MedicalTranscript contains Results , which contains a set of transcription
+// results from one or more audio segments, along with additional information per
+// your request parameters.
 type MedicalTranscript struct {
 
 	// Contains a set of transcription results from one or more audio segments, along
@@ -457,6 +478,7 @@ type MedicalTranscript struct {
 }
 
 // The MedicalTranscriptEvent associated with a MedicalTranscriptResultStream .
+//
 // Contains a set of transcription results from one or more audio segments, along
 // with additional information per your request parameters.
 type MedicalTranscriptEvent struct {
@@ -481,6 +503,7 @@ type MedicalTranscriptResultStream interface {
 }
 
 // The MedicalTranscriptEvent associated with a MedicalTranscriptResultStream .
+//
 // Contains a set of transcription results from one or more audio segments, along
 // with additional information per your request parameters. This can include
 // information relating to alternative transcriptions, channel identification,
@@ -507,6 +530,7 @@ type PointsOfInterest struct {
 // Allows you to specify additional settings for your streaming Call Analytics
 // post-call request, including output locations for your redacted and unredacted
 // transcript, which IAM role to use, and, optionally, which encryption key to use.
+//
 // ContentRedactionOutput , DataAccessRoleArn , and OutputLocation are required
 // fields.
 type PostCallAnalyticsSettings struct {
@@ -514,10 +538,13 @@ type PostCallAnalyticsSettings struct {
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
 	// the Amazon S3 bucket that contains your input files. If the role that you
 	// specify doesn’t have the appropriate permissions to access the specified Amazon
-	// S3 location, your request fails. IAM role ARNs have the format
+	// S3 location, your request fails.
+	//
+	// IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path . For example:
-	// arn:aws:iam::111122223333:role/Admin . For more information, see IAM ARNs (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns)
-	// .
+	// arn:aws:iam::111122223333:role/Admin . For more information, see [IAM ARNs].
+	//
+	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -525,8 +552,11 @@ type PostCallAnalyticsSettings struct {
 	// The Amazon S3 location where you want your Call Analytics post-call
 	// transcription output stored. You can use any of the following formats to specify
 	// the output location:
+	//
 	//   - s3://DOC-EXAMPLE-BUCKET
+	//
 	//   - s3://DOC-EXAMPLE-BUCKET/my-output-folder/
+	//
 	//   - s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
 	//
 	// This member is required.
@@ -534,28 +564,38 @@ type PostCallAnalyticsSettings struct {
 
 	// Specify whether you want only a redacted transcript or both a redacted and an
 	// unredacted transcript. If you choose redacted and unredacted, two JSON files are
-	// generated and stored in the Amazon S3 output location you specify. Note that to
-	// include ContentRedactionOutput in your request, you must enable content
-	// redaction ( ContentRedactionType ).
+	// generated and stored in the Amazon S3 output location you specify.
+	//
+	// Note that to include ContentRedactionOutput in your request, you must enable
+	// content redaction ( ContentRedactionType ).
 	ContentRedactionOutput ContentRedactionOutput
 
-	// The KMS key you want to use to encrypt your Call Analytics post-call output. If
-	// using a key located in the current Amazon Web Services account, you can specify
-	// your KMS key in one of four ways:
+	// The KMS key you want to use to encrypt your Call Analytics post-call output.
+	//
+	// If using a key located in the current Amazon Web Services account, you can
+	// specify your KMS key in one of four ways:
+	//
 	//   - Use the KMS key ID itself. For example, 1234abcd-12ab-34cd-56ef-1234567890ab
 	//   .
+	//
 	//   - Use an alias for the KMS key ID. For example, alias/ExampleAlias .
+	//
 	//   - Use the Amazon Resource Name (ARN) for the KMS key ID. For example,
 	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//
 	//   - Use the ARN for the KMS key alias. For example,
 	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
+	//
 	// If using a key located in a different Amazon Web Services account than the
 	// current Amazon Web Services account, you can specify your KMS key in one of two
 	// ways:
+	//
 	//   - Use the ARN for the KMS key ID. For example,
 	//   arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//
 	//   - Use the ARN for the KMS key alias. For example,
 	//   arn:aws:kms:region:account-ID:alias/ExampleAlias .
+	//
 	// Note that the user making the request must have permission to use the specified
 	// KMS key.
 	OutputEncryptionKMSKeyId *string
@@ -563,11 +603,13 @@ type PostCallAnalyticsSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The Result associated with a . Contains a set of transcription results from one
-// or more audio segments, along with additional information per your request
-// parameters. This can include information relating to alternative transcriptions,
-// channel identification, partial result stabilization, language identification,
-// and other transcription-related data.
+// The Result associated with a .
+//
+// Contains a set of transcription results from one or more audio segments, along
+// with additional information per your request parameters. This can include
+// information relating to alternative transcriptions, channel identification,
+// partial result stabilization, language identification, and other
+// transcription-related data.
 type Result struct {
 
 	// A list of possible alternative transcriptions for the input audio. Each
@@ -580,15 +622,18 @@ type Result struct {
 	// The end time, in milliseconds, of the Result .
 	EndTime float64
 
-	// Indicates if the segment is complete. If IsPartial is true , the segment is not
-	// complete. If IsPartial is false , the segment is complete.
+	// Indicates if the segment is complete.
+	//
+	// If IsPartial is true , the segment is not complete. If IsPartial is false , the
+	// segment is complete.
 	IsPartial bool
 
 	// The language code that represents the language spoken in your audio stream.
 	LanguageCode LanguageCode
 
-	// The language code of the dominant language identified in your stream. If you
-	// enabled channel identification and each channel of your audio contains a
+	// The language code of the dominant language identified in your stream.
+	//
+	// If you enabled channel identification and each channel of your audio contains a
 	// different language, you may have more than one result.
 	LanguageIdentification []LanguageWithScore
 
@@ -616,9 +661,11 @@ type TimestampRange struct {
 	noSmithyDocumentSerde
 }
 
-// The Transcript associated with a . Transcript contains Results , which contains
-// a set of transcription results from one or more audio segments, along with
-// additional information per your request parameters.
+// The Transcript associated with a .
+//
+// Transcript contains Results , which contains a set of transcription results from
+// one or more audio segments, along with additional information per your request
+// parameters.
 type Transcript struct {
 
 	// Contains a set of transcription results from one or more audio segments, along
@@ -631,9 +678,10 @@ type Transcript struct {
 	noSmithyDocumentSerde
 }
 
-// The TranscriptEvent associated with a TranscriptResultStream . Contains a set of
-// transcription results from one or more audio segments, along with additional
-// information per your request parameters.
+// The TranscriptEvent associated with a TranscriptResultStream .
+//
+// Contains a set of transcription results from one or more audio segments, along
+// with additional information per your request parameters.
 type TranscriptEvent struct {
 
 	// Contains Results , which contains a set of transcription results from one or

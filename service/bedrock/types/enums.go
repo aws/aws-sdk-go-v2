@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for CommitmentDuration. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CommitmentDuration) Values() []CommitmentDuration {
 	return []CommitmentDuration{
 		"OneMonth",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for CustomizationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomizationType) Values() []CustomizationType {
 	return []CustomizationType{
 		"FINE_TUNING",
@@ -50,8 +52,9 @@ const (
 )
 
 // Values returns all known values for EvaluationJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EvaluationJobStatus) Values() []EvaluationJobStatus {
 	return []EvaluationJobStatus{
 		"InProgress",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for EvaluationJobType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EvaluationJobType) Values() []EvaluationJobType {
 	return []EvaluationJobType{
 		"Human",
@@ -92,8 +96,9 @@ const (
 )
 
 // Values returns all known values for EvaluationTaskType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EvaluationTaskType) Values() []EvaluationTaskType {
 	return []EvaluationTaskType{
 		"Summarization",
@@ -116,8 +121,9 @@ const (
 )
 
 // Values returns all known values for FineTuningJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FineTuningJobStatus) Values() []FineTuningJobStatus {
 	return []FineTuningJobStatus{
 		"InProgress",
@@ -138,8 +144,9 @@ const (
 
 // Values returns all known values for FoundationModelLifecycleStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FoundationModelLifecycleStatus) Values() []FoundationModelLifecycleStatus {
 	return []FoundationModelLifecycleStatus{
 		"ACTIVE",
@@ -161,6 +168,7 @@ const (
 
 // Values returns all known values for GuardrailContentFilterType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (GuardrailContentFilterType) Values() []GuardrailContentFilterType {
 	return []GuardrailContentFilterType{
@@ -184,8 +192,9 @@ const (
 )
 
 // Values returns all known values for GuardrailFilterStrength. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GuardrailFilterStrength) Values() []GuardrailFilterStrength {
 	return []GuardrailFilterStrength{
 		"NONE",
@@ -204,6 +213,7 @@ const (
 
 // Values returns all known values for GuardrailManagedWordsType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (GuardrailManagedWordsType) Values() []GuardrailManagedWordsType {
 	return []GuardrailManagedWordsType{
@@ -249,8 +259,9 @@ const (
 )
 
 // Values returns all known values for GuardrailPiiEntityType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GuardrailPiiEntityType) Values() []GuardrailPiiEntityType {
 	return []GuardrailPiiEntityType{
 		"ADDRESS",
@@ -297,8 +308,9 @@ const (
 
 // Values returns all known values for GuardrailSensitiveInformationAction. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GuardrailSensitiveInformationAction) Values() []GuardrailSensitiveInformationAction {
 	return []GuardrailSensitiveInformationAction{
 		"BLOCK",
@@ -319,8 +331,9 @@ const (
 )
 
 // Values returns all known values for GuardrailStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GuardrailStatus) Values() []GuardrailStatus {
 	return []GuardrailStatus{
 		"CREATING",
@@ -340,8 +353,9 @@ const (
 )
 
 // Values returns all known values for GuardrailTopicType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GuardrailTopicType) Values() []GuardrailTopicType {
 	return []GuardrailTopicType{
 		"DENY",
@@ -357,8 +371,9 @@ const (
 )
 
 // Values returns all known values for InferenceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InferenceType) Values() []InferenceType {
 	return []InferenceType{
 		"ON_DEMAND",
@@ -375,8 +390,9 @@ const (
 )
 
 // Values returns all known values for ModelCustomization. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelCustomization) Values() []ModelCustomization {
 	return []ModelCustomization{
 		"FINE_TUNING",
@@ -397,6 +413,7 @@ const (
 
 // Values returns all known values for ModelCustomizationJobStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelCustomizationJobStatus) Values() []ModelCustomizationJobStatus {
 	return []ModelCustomizationJobStatus{
@@ -418,8 +435,9 @@ const (
 )
 
 // Values returns all known values for ModelModality. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelModality) Values() []ModelModality {
 	return []ModelModality{
 		"TEXT",
@@ -439,8 +457,9 @@ const (
 )
 
 // Values returns all known values for ProvisionedModelStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProvisionedModelStatus) Values() []ProvisionedModelStatus {
 	return []ProvisionedModelStatus{
 		"Creating",
@@ -458,8 +477,9 @@ const (
 )
 
 // Values returns all known values for SortByProvisionedModels. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortByProvisionedModels) Values() []SortByProvisionedModels {
 	return []SortByProvisionedModels{
 		"CreationTime",
@@ -474,8 +494,9 @@ const (
 )
 
 // Values returns all known values for SortJobsBy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortJobsBy) Values() []SortJobsBy {
 	return []SortJobsBy{
 		"CreationTime",
@@ -490,8 +511,9 @@ const (
 )
 
 // Values returns all known values for SortModelsBy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortModelsBy) Values() []SortModelsBy {
 	return []SortModelsBy{
 		"CreationTime",
@@ -507,8 +529,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"Ascending",

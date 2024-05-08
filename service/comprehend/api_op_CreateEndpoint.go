@@ -12,8 +12,9 @@ import (
 )
 
 // Creates a model-specific endpoint for synchronous inference for a previously
-// trained custom model For information about endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
-// .
+// trained custom model For information about endpoints, see [Managing endpoints].
+//
+// [Managing endpoints]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {
 		params = &CreateEndpointInput{}
@@ -31,9 +32,10 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 
 type CreateEndpointInput struct {
 
-	// The desired number of inference units to be used by the model using this
-	// endpoint. Each inference unit represents of a throughput of 100 characters per
-	// second.
+	//  The desired number of inference units to be used by the model using this
+	// endpoint.
+	//
+	// Each inference unit represents of a throughput of 100 characters per second.
 	//
 	// This member is required.
 	DesiredInferenceUnits *int32

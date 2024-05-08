@@ -42,8 +42,9 @@ type UpdateAlarmModelInput struct {
 	AlarmRule *types.AlarmRule
 
 	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
-	// resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
+	// resources. For more information, see [Amazon Resource Names (ARNs)]in the AWS General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleArn *string
@@ -68,9 +69,10 @@ type UpdateAlarmModelInput struct {
 
 type UpdateAlarmModelOutput struct {
 
-	// The ARN of the alarm model. For more information, see Amazon Resource Names
-	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
+	// The ARN of the alarm model. For more information, see [Amazon Resource Names (ARNs)] in the AWS General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	AlarmModelArn *string
 
 	// The version of the alarm model.
@@ -83,11 +85,15 @@ type UpdateAlarmModelOutput struct {
 	LastUpdateTime *time.Time
 
 	// The status of the alarm model. The status can be one of the following values:
+	//
 	//   - ACTIVE - The alarm model is active and it's ready to evaluate data.
+	//
 	//   - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an
 	//   alarm model can take up to a few minutes.
+	//
 	//   - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data.
 	//   Check your alarm model information and update the alarm model.
+	//
 	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
 	//   model information and try again.
 	Status types.AlarmModelVersionStatus

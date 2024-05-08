@@ -38,8 +38,10 @@ type ExportBackupPlanTemplateInput struct {
 
 type ExportBackupPlanTemplateOutput struct {
 
-	// The body of a backup plan template in JSON format. This is a signed JSON
-	// document that cannot be modified before being passed to GetBackupPlanFromJSON.
+	// The body of a backup plan template in JSON format.
+	//
+	// This is a signed JSON document that cannot be modified before being passed to
+	// GetBackupPlanFromJSON.
 	BackupPlanTemplateJson *string
 
 	// Metadata pertaining to the operation's result.

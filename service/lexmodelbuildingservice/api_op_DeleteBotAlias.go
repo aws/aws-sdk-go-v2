@@ -10,13 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an alias for the specified bot. You can't delete an alias that is used
-// in the association between a bot and a messaging channel. If an alias is used in
-// a channel association, the DeleteBot operation returns a ResourceInUseException
-// exception that includes a reference to the channel association that refers to
-// the bot. You can remove the reference to the alias by deleting the channel
-// association. If you get the same exception again, delete the referring
-// association until the DeleteBotAlias operation is successful.
+// Deletes an alias for the specified bot.
+//
+// You can't delete an alias that is used in the association between a bot and a
+// messaging channel. If an alias is used in a channel association, the DeleteBot
+// operation returns a ResourceInUseException exception that includes a reference
+// to the channel association that refers to the bot. You can remove the reference
+// to the alias by deleting the channel association. If you get the same exception
+// again, delete the referring association until the DeleteBotAlias operation is
+// successful.
 func (c *Client) DeleteBotAlias(ctx context.Context, params *DeleteBotAliasInput, optFns ...func(*Options)) (*DeleteBotAliasOutput, error) {
 	if params == nil {
 		params = &DeleteBotAliasInput{}

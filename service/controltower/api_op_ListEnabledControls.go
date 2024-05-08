@@ -13,8 +13,9 @@ import (
 
 // Lists the controls enabled by Amazon Web Services Control Tower on the
 // specified organizational unit and the accounts it contains. For usage examples,
-// see the Amazon Web Services Control Tower User Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
-// .
+// see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
 func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledControlsInput, optFns ...func(*Options)) (*ListEnabledControlsOutput, error) {
 	if params == nil {
 		params = &ListEnabledControlsInput{}
@@ -33,8 +34,9 @@ func (c *Client) ListEnabledControls(ctx context.Context, params *ListEnabledCon
 type ListEnabledControlsInput struct {
 
 	// The ARN of the organizational unit. For information on how to find the
-	// targetIdentifier , see the overview page (https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html)
-	// .
+	// targetIdentifier , see [the overview page].
+	//
+	// [the overview page]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
 	//
 	// This member is required.
 	TargetIdentifier *string

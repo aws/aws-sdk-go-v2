@@ -48,8 +48,10 @@ type UpdateQuickResponseInput struct {
 	Content types.QuickResponseDataProvider
 
 	// The media type of the quick response content.
+	//
 	//   - Use application/x.quickresponse;format=plain for quick response written in
 	//   plain text.
+	//
 	//   - Use application/x.quickresponse;format=markdown for quick response written
 	//   in richtext.
 	ContentType *string

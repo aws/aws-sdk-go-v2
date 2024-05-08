@@ -28,13 +28,14 @@ func (c *Client) DisassociatePricingRules(ctx context.Context, params *Disassoci
 
 type DisassociatePricingRulesInput struct {
 
-	// The pricing plan Amazon Resource Name (ARN) to disassociate pricing rules from.
+	//  The pricing plan Amazon Resource Name (ARN) to disassociate pricing rules
+	// from.
 	//
 	// This member is required.
 	Arn *string
 
-	// A list containing the Amazon Resource Name (ARN) of the pricing rules that will
-	// be disassociated.
+	//  A list containing the Amazon Resource Name (ARN) of the pricing rules that
+	// will be disassociated.
 	//
 	// This member is required.
 	PricingRuleArns []string
@@ -44,7 +45,7 @@ type DisassociatePricingRulesInput struct {
 
 type DisassociatePricingRulesOutput struct {
 
-	// The Amazon Resource Name (ARN) of the pricing plan that the pricing rules
+	//  The Amazon Resource Name (ARN) of the pricing plan that the pricing rules
 	// successfully disassociated from.
 	Arn *string
 

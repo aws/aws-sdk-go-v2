@@ -118,9 +118,11 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This request cannot be completed for one of the following reasons.
+//
 //   - This request cannot be completed if it would cause the number of member
 //     accounts in the behavior graph to exceed the maximum allowed. A behavior graph
 //     cannot have more than 1,200 member accounts.
+//
 //   - This request cannot be completed if the current volume ingested is above
 //     the limit of 10 TB per day. Detective will not allow you to add additional
 //     member accounts.

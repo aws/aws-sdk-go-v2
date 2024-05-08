@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Returns information about an intent. In addition to the intent name, you must
-// specify the intent version. This operation requires permissions to perform the
-// lex:GetIntent action.
+//	Returns information about an intent. In addition to the intent name, you must
+//
+// specify the intent version.
+//
+// This operation requires permissions to perform the lex:GetIntent action.
 func (c *Client) GetIntent(ctx context.Context, params *GetIntentInput, optFns ...func(*Options)) (*GetIntentOutput, error) {
 	if params == nil {
 		params = &GetIntentInput{}
@@ -55,7 +57,7 @@ type GetIntentOutput struct {
 	ConclusionStatement *types.Statement
 
 	// If defined in the bot, Amazon Lex uses prompt to confirm the intent before
-	// fulfilling the user's request. For more information, see PutIntent .
+	// fulfilling the user's request. For more information, see PutIntent.
 	ConfirmationPrompt *types.Prompt
 
 	// The date that the intent was created.
@@ -65,14 +67,14 @@ type GetIntentOutput struct {
 	Description *string
 
 	// If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each
-	// user input. For more information, see PutIntent .
+	// user input. For more information, see PutIntent.
 	DialogCodeHook *types.CodeHook
 
 	// If defined in the bot, Amazon Lex uses this prompt to solicit additional user
-	// activity after the intent is fulfilled. For more information, see PutIntent .
+	// activity after the intent is fulfilled. For more information, see PutIntent.
 	FollowUpPrompt *types.FollowUpPrompt
 
-	// Describes how the intent is fulfilled. For more information, see PutIntent .
+	// Describes how the intent is fulfilled. For more information, see PutIntent.
 	FulfillmentActivity *types.FulfillmentActivity
 
 	// An array of InputContext objects that lists the contexts that must be active

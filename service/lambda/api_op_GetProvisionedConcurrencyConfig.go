@@ -30,10 +30,16 @@ func (c *Client) GetProvisionedConcurrencyConfig(ctx context.Context, params *Ge
 
 type GetProvisionedConcurrencyConfigInput struct {
 
-	// The name or ARN of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -58,8 +64,9 @@ type GetProvisionedConcurrencyConfigOutput struct {
 	// The amount of provisioned concurrency available.
 	AvailableProvisionedConcurrentExecutions *int32
 
-	// The date and time that a user last updated the configuration, in ISO 8601 format (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// .
+	// The date and time that a user last updated the configuration, in [ISO 8601 format].
+	//
+	// [ISO 8601 format]: https://www.iso.org/iso-8601-date-and-time-format.html
 	LastModified *string
 
 	// The amount of provisioned concurrency requested.

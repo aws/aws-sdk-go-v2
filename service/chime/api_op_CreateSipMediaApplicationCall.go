@@ -12,16 +12,19 @@ import (
 )
 
 // Creates an outbound call to a phone number from the phone number specified in
-// the request, and it invokes the endpoint of the specified sipMediaApplicationId
-// . This API is is no longer supported and will not be updated. We recommend using
-// the latest version, CreateSipMediaApplicationCall (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateSipMediaApplicationCall.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// the request, and it invokes the endpoint of the specified sipMediaApplicationId .
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [CreateSipMediaApplicationCall], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by CreateSipMediaApplicationCall in the Amazon Chime SDK
 // Voice Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [CreateSipMediaApplicationCall]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateSipMediaApplicationCall.html
 func (c *Client) CreateSipMediaApplicationCall(ctx context.Context, params *CreateSipMediaApplicationCallInput, optFns ...func(*Options)) (*CreateSipMediaApplicationCallOutput, error) {
 	if params == nil {
 		params = &CreateSipMediaApplicationCallInput{}

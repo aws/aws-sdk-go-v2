@@ -12,9 +12,10 @@ import (
 )
 
 // Retrieves the primary contact information of an Amazon Web Services account.
-// For complete details about how to use the primary contact operations, see
-// Update the primary and alternate contact information (https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html)
-// .
+//
+// For complete details about how to use the primary contact operations, see [Update the primary and alternate contact information].
+//
+// [Update the primary and alternate contact information]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact.html
 func (c *Client) GetContactInformation(ctx context.Context, params *GetContactInformationInput, optFns ...func(*Options)) (*GetContactInformationOutput, error) {
 	if params == nil {
 		params = &GetContactInformationInput{}
@@ -36,17 +37,22 @@ type GetContactInformationInput struct {
 	// that you want to access or modify with this operation. If you don't specify this
 	// parameter, it defaults to the Amazon Web Services account of the identity used
 	// to call the operation. To use this parameter, the caller must be an identity in
-	// the organization's management account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account)
-	// or a delegated administrator account. The specified account ID must also be a
-	// member account in the same organization. The organization must have all
-	// features enabled (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
-	// , and the organization must have trusted access (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
-	// enabled for the Account Management service, and optionally a delegated admin (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
-	// account assigned. The management account can't specify its own AccountId . It
-	// must call the operation in standalone context by not including the AccountId
-	// parameter. To call this operation on an account that is not a member of an
-	// organization, don't specify this parameter. Instead, call the operation using an
-	// identity belonging to the account whose contacts you wish to retrieve or modify.
+	// the [organization's management account]or a delegated administrator account. The specified account ID must also be
+	// a member account in the same organization. The organization must have [all features enabled], and the
+	// organization must have [trusted access]enabled for the Account Management service, and
+	// optionally a [delegated admin]account assigned.
+	//
+	// The management account can't specify its own AccountId . It must call the
+	// operation in standalone context by not including the AccountId parameter.
+	//
+	// To call this operation on an account that is not a member of an organization,
+	// don't specify this parameter. Instead, call the operation using an identity
+	// belonging to the account whose contacts you wish to retrieve or modify.
+	//
+	// [organization's management account]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+	// [all features enabled]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+	// [delegated admin]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+	// [trusted access]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
 	AccountId *string
 
 	noSmithyDocumentSerde

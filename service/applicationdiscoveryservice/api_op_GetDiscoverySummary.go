@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a short summary of discovered assets. This API operation takes no
-// request parameters and is called as is at the command prompt as shown in the
-// example.
+// Retrieves a short summary of discovered assets.
+//
+// This API operation takes no request parameters and is called as is at the
+// command prompt as shown in the example.
 func (c *Client) GetDiscoverySummary(ctx context.Context, params *GetDiscoverySummaryInput, optFns ...func(*Options)) (*GetDiscoverySummaryOutput, error) {
 	if params == nil {
 		params = &GetDiscoverySummaryInput{}
@@ -38,7 +39,7 @@ type GetDiscoverySummaryOutput struct {
 	// Details about discovered agents, including agent status and health.
 	AgentSummary *types.CustomerAgentInfo
 
-	// Details about Agentless Collector collectors, including status.
+	//  Details about Agentless Collector collectors, including status.
 	AgentlessCollectorSummary *types.CustomerAgentlessCollectorInfo
 
 	// The number of applications discovered.
@@ -47,7 +48,7 @@ type GetDiscoverySummaryOutput struct {
 	// Details about discovered connectors, including connector status and health.
 	ConnectorSummary *types.CustomerConnectorInfo
 
-	// Details about Migration Evaluator collectors, including collector status and
+	//  Details about Migration Evaluator collectors, including collector status and
 	// health.
 	MeCollectorSummary *types.CustomerMeCollectorInfo
 

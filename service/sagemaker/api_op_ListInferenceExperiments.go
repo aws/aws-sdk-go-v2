@@ -48,7 +48,7 @@ type ListInferenceExperimentsInput struct {
 	// Selects inference experiments whose names contain this name.
 	NameContains *string
 
-	// The response from the last list when returning a list large enough to need
+	//  The response from the last list when returning a list large enough to need
 	// tokening.
 	NextToken *string
 
@@ -58,14 +58,16 @@ type ListInferenceExperimentsInput struct {
 	// The direction of sorting (ascending or descending).
 	SortOrder types.SortOrder
 
-	// Selects inference experiments which are in this status. For the possible
-	// statuses, see DescribeInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html)
-	// .
+	//  Selects inference experiments which are in this status. For the possible
+	// statuses, see [DescribeInferenceExperiment].
+	//
+	// [DescribeInferenceExperiment]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html
 	StatusEquals types.InferenceExperimentStatus
 
-	// Selects inference experiments of this type. For the possible types of inference
-	// experiments, see CreateInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html)
-	// .
+	//  Selects inference experiments of this type. For the possible types of
+	// inference experiments, see [CreateInferenceExperiment].
+	//
+	// [CreateInferenceExperiment]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html
 	Type types.InferenceExperimentType
 
 	noSmithyDocumentSerde

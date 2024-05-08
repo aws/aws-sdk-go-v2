@@ -54,14 +54,16 @@ type UpdateAgentActionGroupInput struct {
 	ActionGroupExecutor types.ActionGroupExecutor
 
 	// Specifies whether the action group is available for the agent to invoke or not
-	// when sending an InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
-	// request.
+	// when sending an [InvokeAgent]request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	ActionGroupState types.ActionGroupState
 
 	// Contains either details about the S3 object containing the OpenAPI schema for
 	// the action group or the JSON or YAML-formatted payload defining the schema. For
-	// more information, see Action group OpenAPI schemas (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html)
-	// .
+	// more information, see [Action group OpenAPI schemas].
+	//
+	// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 	ApiSchema types.APISchema
 
 	// Specifies a new name for the action group.
@@ -74,10 +76,14 @@ type UpdateAgentActionGroupInput struct {
 	// To allow your agent to request the user for additional information when trying
 	// to complete a task, set this field to AMAZON.UserInput . You must leave the
 	// description , apiSchema , and actionGroupExecutor fields blank for this action
-	// group. During orchestration, if your agent determines that it needs to invoke an
-	// API in an action group, but doesn't have enough information to complete the API
-	// request, it will invoke this action group instead and return an Observation (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html)
-	// reprompting the user for more information.
+	// group.
+	//
+	// During orchestration, if your agent determines that it needs to invoke an API
+	// in an action group, but doesn't have enough information to complete the API
+	// request, it will invoke this action group instead and return an [Observation]reprompting the
+	// user for more information.
+	//
+	// [Observation]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
 	ParentActionGroupSignature types.ActionGroupSignature
 
 	noSmithyDocumentSerde

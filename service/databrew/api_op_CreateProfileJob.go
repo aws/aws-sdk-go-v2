@@ -62,7 +62,9 @@ type CreateProfileJobInput struct {
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
+	//
 	//   - SSE-KMS - SSE-KMS - Server-side encryption with KMS-managed keys.
+	//
 	//   - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 

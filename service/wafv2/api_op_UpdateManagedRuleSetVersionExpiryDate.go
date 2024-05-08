@@ -14,13 +14,15 @@ import (
 
 // Updates the expiration information for your managed rule set. Use this to
 // initiate the expiration of a managed rule group version. After you initiate
-// expiration for a version, WAF excludes it from the response to
-// ListAvailableManagedRuleGroupVersions for the managed rule group. This is
-// intended for use only by vendors of managed rule sets. Vendors are Amazon Web
-// Services and Amazon Web Services Marketplace sellers. Vendors, you can use the
-// managed rule set APIs to provide controlled rollout of your versioned managed
-// rule group offerings for your customers. The APIs are ListManagedRuleSets ,
-// GetManagedRuleSet , PutManagedRuleSetVersions , and
+// expiration for a version, WAF excludes it from the response to ListAvailableManagedRuleGroupVersionsfor the managed
+// rule group.
+//
+// This is intended for use only by vendors of managed rule sets. Vendors are
+// Amazon Web Services and Amazon Web Services Marketplace sellers.
+//
+// Vendors, you can use the managed rule set APIs to provide controlled rollout of
+// your versioned managed rule group offerings for your customers. The APIs are
+// ListManagedRuleSets , GetManagedRuleSet , PutManagedRuleSetVersions , and
 // UpdateManagedRuleSetVersionExpiryDate .
 func (c *Client) UpdateManagedRuleSetVersionExpiryDate(ctx context.Context, params *UpdateManagedRuleSetVersionExpiryDateInput, optFns ...func(*Options)) (*UpdateManagedRuleSetVersionExpiryDateOutput, error) {
 	if params == nil {
@@ -39,9 +41,10 @@ func (c *Client) UpdateManagedRuleSetVersionExpiryDate(ctx context.Context, para
 
 type UpdateManagedRuleSetVersionExpiryDateInput struct {
 
-	// The time that you want the version to expire. Times are in Coordinated
-	// Universal Time (UTC) format. UTC format includes the special designator, Z. For
-	// example, "2016-09-27T14:50Z".
+	// The time that you want the version to expire.
+	//
+	// Times are in Coordinated Universal Time (UTC) format. UTC format includes the
+	// special designator, Z. For example, "2016-09-27T14:50Z".
 	//
 	// This member is required.
 	ExpiryTimestamp *time.Time
@@ -65,8 +68,10 @@ type UpdateManagedRuleSetVersionExpiryDateInput struct {
 	LockToken *string
 
 	// The name of the managed rule set. You use this, along with the rule set ID, to
-	// identify the rule set. This name is assigned to the corresponding managed rule
-	// group, which your customers can access and use.
+	// identify the rule set.
+	//
+	// This name is assigned to the corresponding managed rule group, which your
+	// customers can access and use.
 	//
 	// This member is required.
 	Name *string
@@ -75,10 +80,14 @@ type UpdateManagedRuleSetVersionExpiryDateInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
@@ -98,9 +107,10 @@ type UpdateManagedRuleSetVersionExpiryDateOutput struct {
 	// The version that is set to expire.
 	ExpiringVersion *string
 
-	// The time that the version will expire. Times are in Coordinated Universal Time
-	// (UTC) format. UTC format includes the special designator, Z. For example,
-	// "2016-09-27T14:50Z".
+	// The time that the version will expire.
+	//
+	// Times are in Coordinated Universal Time (UTC) format. UTC format includes the
+	// special designator, Z. For example, "2016-09-27T14:50Z".
 	ExpiryTimestamp *time.Time
 
 	// A token used for optimistic locking. WAF returns a token to your get and list

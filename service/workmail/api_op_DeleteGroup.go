@@ -28,10 +28,14 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// The identifier of the group to be deleted. The identifier can be the GroupId,
-	// or Groupname. The following identity formats are available:
+	// The identifier of the group to be deleted.
+	//
+	// The identifier can be the GroupId, or Groupname. The following identity formats
+	// are available:
+	//
 	//   - Group ID: 12345678-1234-1234-1234-123456789012 or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Group name: group
 	//
 	// This member is required.

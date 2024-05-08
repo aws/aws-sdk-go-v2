@@ -782,22 +782,38 @@ type NetworkResource struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The resource type. The following are the supported resource types for Direct
-	// Connect:
+	// The resource type.
+	//
+	// The following are the supported resource types for Direct Connect:
+	//
 	//   - dxcon
+	//
 	//   - dx-gateway
+	//
 	//   - dx-vif
+	//
 	// The following are the supported resource types for Network Manager:
+	//
 	//   - connection
+	//
 	//   - device
+	//
 	//   - link
+	//
 	//   - site
+	//
 	// The following are the supported resource types for Amazon VPC:
+	//
 	//   - customer-gateway
+	//
 	//   - transit-gateway
+	//
 	//   - transit-gateway-attachment
+	//
 	//   - transit-gateway-connect-peer
+	//
 	//   - transit-gateway-route-table
+	//
 	//   - vpn-connection
 	ResourceType *string
 
@@ -1068,20 +1084,29 @@ type RouteAnalysis struct {
 type RouteAnalysisCompletion struct {
 
 	// The reason code. Available only if a connection is not found.
+	//
 	//   - BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND - Found a black hole route with the
 	//   destination CIDR block.
+	//
 	//   - CYCLIC_PATH_DETECTED - Found the same resource multiple times while
 	//   traversing the path.
+	//
 	//   - INACTIVE_ROUTE_FOR_DESTINATION_FOUND - Found an inactive route with the
 	//   destination CIDR block.
+	//
 	//   - MAX_HOPS_EXCEEDED - Analysis exceeded 64 hops without finding the
 	//   destination.
+	//
 	//   - ROUTE_NOT_FOUND - Cannot find a route table with the destination CIDR block.
+	//
 	//   - TGW_ATTACH_ARN_NO_MATCH - Found an attachment, but not with the correct
 	//   destination ARN.
+	//
 	//   - TGW_ATTACH_NOT_FOUND - Cannot find an attachment.
+	//
 	//   - TGW_ATTACH_NOT_IN_TGW - Found an attachment, but not to the correct transit
 	//   gateway.
+	//
 	//   - TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND - The state of the route table
 	//   association is not associated.
 	ReasonCode RouteAnalysisCompletionReasonCode
@@ -1196,10 +1221,14 @@ type SiteToSiteVpnAttachment struct {
 // Describes a tag.
 type Tag struct {
 
-	// The tag key. Constraints: Maximum length of 128 characters.
+	// The tag key.
+	//
+	// Constraints: Maximum length of 128 characters.
 	Key *string
 
-	// The tag value. Constraints: Maximum length of 256 characters.
+	// The tag value.
+	//
+	// Constraints: Maximum length of 256 characters.
 	Value *string
 
 	noSmithyDocumentSerde

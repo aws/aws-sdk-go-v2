@@ -11,11 +11,16 @@ import (
 )
 
 // Removes the asssociation of an Amazon Web Services Identity and Access
-// Management (IAM) role from a DB cluster. For more information on Amazon Aurora
-// DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide.
+// Management (IAM) role from a DB cluster.
+//
+// For more information on Amazon Aurora DB clusters, see [What is Amazon Aurora?] in the Amazon Aurora
+// User Guide.
+//
+// For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments] in the Amazon RDS User
+// Guide.
+//
+// [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+// [Multi-AZ DB cluster deployments]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
 func (c *Client) RemoveRoleFromDBCluster(ctx context.Context, params *RemoveRoleFromDBClusterInput, optFns ...func(*Options)) (*RemoveRoleFromDBClusterOutput, error) {
 	if params == nil {
 		params = &RemoveRoleFromDBClusterInput{}
@@ -45,8 +50,7 @@ type RemoveRoleFromDBClusterInput struct {
 	RoleArn *string
 
 	// The name of the feature for the DB cluster that the IAM role is to be
-	// disassociated from. For information about supported feature names, see
-	// DBEngineVersion .
+	// disassociated from. For information about supported feature names, see DBEngineVersion.
 	FeatureName *string
 
 	noSmithyDocumentSerde

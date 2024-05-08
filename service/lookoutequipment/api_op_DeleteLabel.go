@@ -28,14 +28,14 @@ func (c *Client) DeleteLabel(ctx context.Context, params *DeleteLabelInput, optF
 
 type DeleteLabelInput struct {
 
-	// The name of the label group that contains the label that you want to delete.
+	//  The name of the label group that contains the label that you want to delete.
 	// Data in this field will be retained for service usage. Follow best practices for
 	// the security of your data.
 	//
 	// This member is required.
 	LabelGroupName *string
 
-	// The ID of the label that you want to delete.
+	//  The ID of the label that you want to delete.
 	//
 	// This member is required.
 	LabelId *string

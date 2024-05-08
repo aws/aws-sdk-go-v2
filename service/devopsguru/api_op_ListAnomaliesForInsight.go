@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the anomalies that belong to an insight that you specify
+//	Returns a list of the anomalies that belong to an insight that you specify
+//
 // using its ID.
 func (c *Client) ListAnomaliesForInsight(ctx context.Context, params *ListAnomaliesForInsightInput, optFns ...func(*Options)) (*ListAnomaliesForInsightOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) ListAnomaliesForInsight(ctx context.Context, params *ListAnomal
 
 type ListAnomaliesForInsightInput struct {
 
-	// The ID of the insight. The returned anomalies belong to this insight.
+	//  The ID of the insight. The returned anomalies belong to this insight.
 	//
 	// This member is required.
 	InsightId *string
@@ -38,7 +39,7 @@ type ListAnomaliesForInsightInput struct {
 	// The ID of the Amazon Web Services account.
 	AccountId *string
 
-	// Specifies one or more service names that are used to list anomalies.
+	//  Specifies one or more service names that are used to list anomalies.
 	Filters *types.ListAnomaliesForInsightFilters
 
 	// The maximum number of results to return with a single call. To retrieve the
@@ -49,8 +50,8 @@ type ListAnomaliesForInsightInput struct {
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 
-	// A time range used to specify when the requested anomalies started. All returned
-	// anomalies started during this time range.
+	//  A time range used to specify when the requested anomalies started. All
+	// returned anomalies started during this time range.
 	StartTimeRange *types.StartTimeRange
 
 	noSmithyDocumentSerde
@@ -62,11 +63,11 @@ type ListAnomaliesForInsightOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// An array of ProactiveAnomalySummary objects that represent the requested
+	//  An array of ProactiveAnomalySummary objects that represent the requested
 	// anomalies
 	ProactiveAnomalies []types.ProactiveAnomalySummary
 
-	// An array of ReactiveAnomalySummary objects that represent the requested
+	//  An array of ReactiveAnomalySummary objects that represent the requested
 	// anomalies
 	ReactiveAnomalies []types.ReactiveAnomalySummary
 

@@ -12,8 +12,9 @@ import (
 )
 
 // Update the position information of a given wireless device or a wireless
-// gateway resource. The position coordinates are based on the World Geodetic
-// System (WGS84) (https://gisgeography.com/wgs84-world-geodetic-system/) .
+// gateway resource. The position coordinates are based on the [World Geodetic System (WGS84)].
+//
+// [World Geodetic System (WGS84)]: https://gisgeography.com/wgs84-world-geodetic-system/
 func (c *Client) UpdateResourcePosition(ctx context.Context, params *UpdateResourcePositionInput, optFns ...func(*Options)) (*UpdateResourcePositionOutput, error) {
 	if params == nil {
 		params = &UpdateResourcePositionInput{}
@@ -46,7 +47,9 @@ type UpdateResourcePositionInput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
 	// payload uses the GeoJSON format, which a format that's used to encode geographic
-	// data structures. For more information, see GeoJSON (https://geojson.org/) .
+	// data structures. For more information, see [GeoJSON].
+	//
+	// [GeoJSON]: https://geojson.org/
 	GeoJsonPayload []byte
 
 	noSmithyDocumentSerde

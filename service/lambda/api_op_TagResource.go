@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to a
-// function.
+// Adds [tags] to a function.
+//
+// [tags]: https://docs.aws.amazon.com/lambda/latest/dg/tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

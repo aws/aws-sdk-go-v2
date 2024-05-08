@@ -29,13 +29,13 @@ func (c *Client) UpdateServerConfig(ctx context.Context, params *UpdateServerCon
 
 type UpdateServerConfigInput struct {
 
-	// The ID of the server.
+	//  The ID of the server.
 	//
 	// This member is required.
 	ServerId *string
 
-	// The preferred strategy options for the application component. See the response
-	// from GetServerStrategies .
+	//  The preferred strategy options for the application component. See the response
+	// from GetServerStrategies.
 	StrategyOption *types.StrategyOption
 
 	noSmithyDocumentSerde

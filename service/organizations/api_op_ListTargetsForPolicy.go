@@ -12,13 +12,16 @@ import (
 )
 
 // Lists all the roots, organizational units (OUs), and accounts that the
-// specified policy is attached to. Always check the NextToken response parameter
-// for a null value when calling a List* operation. These operations can
-// occasionally return an empty set of results even when there are more results
-// available. The NextToken response parameter value is null only when there are
-// no more results to display. This operation can be called only from the
-// organization's management account or by a member account that is a delegated
-// administrator for an Amazon Web Services service.
+// specified policy is attached to.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// List* operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) ListTargetsForPolicy(ctx context.Context, params *ListTargetsForPolicyInput, optFns ...func(*Options)) (*ListTargetsForPolicyOutput, error) {
 	if params == nil {
 		params = &ListTargetsForPolicyInput{}
@@ -37,9 +40,11 @@ func (c *Client) ListTargetsForPolicy(ctx context.Context, params *ListTargetsFo
 type ListTargetsForPolicyInput struct {
 
 	// The unique identifier (ID) of the policy whose attachments you want to know.
-	// The regex pattern (http://wikipedia.org/wiki/regex) for a policy ID string
-	// requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits,
-	// or the underscore character (_).
+	//
+	// The [regex pattern] for a policy ID string requires "p-" followed by from 8 to 128 lowercase
+	// or uppercase letters, digits, or the underscore character (_).
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	PolicyId *string

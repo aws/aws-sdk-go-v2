@@ -32,7 +32,9 @@ type CreateKxClusterInput struct {
 
 	// The number of availability zones you want to assign per cluster. This can be
 	// one of the following
+	//
 	//   - SINGLE – Assigns one availability zone per cluster.
+	//
 	//   - MULTI – Assigns all the availability zones per cluster.
 	//
 	// This member is required.
@@ -45,24 +47,29 @@ type CreateKxClusterInput struct {
 
 	// Specifies the type of KDB database that is being created. The following types
 	// are available:
+	//
 	//   - HDB – A Historical Database. The data is only accessible with read-only
 	//   permissions from one of the FinSpace managed kdb databases mounted to the
 	//   cluster.
+	//
 	//   - RDB – A Realtime Database. This type of database captures all the data from
 	//   a ticker plant and stores it in memory until the end of day, after which it
 	//   writes all of its data to a disk and reloads the HDB. This cluster type requires
 	//   local storage for temporary storage of data during the savedown process. If you
 	//   specify this field in your request, you must provide the
 	//   savedownStorageConfiguration parameter.
+	//
 	//   - GATEWAY – A gateway cluster allows you to access data across processes in
 	//   kdb systems. It allows you to create your own routing logic using the
 	//   initialization scripts and custom code. This type of cluster does not require a
 	//   writable local storage.
+	//
 	//   - GP – A general purpose cluster allows you to quickly iterate on code during
 	//   development by granting greater access to system commands and enabling a fast
 	//   reload of custom code. This cluster type can optionally mount databases
 	//   including cache and savedown storage. For this cluster type, the node count is
 	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
+	//
 	//   - Tickerplant – A tickerplant cluster allows you to subscribe to feed
 	//   handlers based on IAM permissions. It can publish to RDBs, other Tickerplants,
 	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
@@ -143,7 +150,7 @@ type CreateKxClusterInput struct {
 	// cluster.
 	Tags map[string]string
 
-	// A configuration to store Tickerplant logs. It consists of a list of volumes
+	//  A configuration to store Tickerplant logs. It consists of a list of volumes
 	// that will be mounted to your cluster. For the cluster type Tickerplant , the
 	// location of the TP volume on the cluster will be available by using the global
 	// variable .aws.tp_log_path .
@@ -158,12 +165,14 @@ type CreateKxClusterOutput struct {
 	// your cluster.
 	AutoScalingConfiguration *types.AutoScalingConfiguration
 
-	// The availability zone identifiers for the requested regions.
+	//  The availability zone identifiers for the requested regions.
 	AvailabilityZoneId *string
 
 	// The number of availability zones you want to assign per cluster. This can be
 	// one of the following
+	//
 	//   - SINGLE – Assigns one availability zone per cluster.
+	//
 	//   - MULTI – Assigns all the availability zones per cluster.
 	AzMode types.KxAzMode
 
@@ -183,24 +192,29 @@ type CreateKxClusterOutput struct {
 
 	// Specifies the type of KDB database that is being created. The following types
 	// are available:
+	//
 	//   - HDB – A Historical Database. The data is only accessible with read-only
 	//   permissions from one of the FinSpace managed kdb databases mounted to the
 	//   cluster.
+	//
 	//   - RDB – A Realtime Database. This type of database captures all the data from
 	//   a ticker plant and stores it in memory until the end of day, after which it
 	//   writes all of its data to a disk and reloads the HDB. This cluster type requires
 	//   local storage for temporary storage of data during the savedown process. If you
 	//   specify this field in your request, you must provide the
 	//   savedownStorageConfiguration parameter.
+	//
 	//   - GATEWAY – A gateway cluster allows you to access data across processes in
 	//   kdb systems. It allows you to create your own routing logic using the
 	//   initialization scripts and custom code. This type of cluster does not require a
 	//   writable local storage.
+	//
 	//   - GP – A general purpose cluster allows you to quickly iterate on code during
 	//   development by granting greater access to system commands and enabling a fast
 	//   reload of custom code. This cluster type can optionally mount databases
 	//   including cache and savedown storage. For this cluster type, the node count is
 	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
+	//
 	//   - Tickerplant – A tickerplant cluster allows you to subscribe to feed
 	//   handlers based on IAM permissions. It can publish to RDBs, other Tickerplants,
 	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
@@ -228,7 +242,7 @@ type CreateKxClusterOutput struct {
 	// A unique identifier for the kdb environment.
 	EnvironmentId *string
 
-	// An IAM role that defines a set of permissions associated with a cluster. These
+	//  An IAM role that defines a set of permissions associated with a cluster. These
 	// permissions are assumed when a cluster attempts to access another cluster.
 	ExecutionRole *string
 
@@ -255,26 +269,34 @@ type CreateKxClusterOutput struct {
 	ScalingGroupConfiguration *types.KxScalingGroupConfiguration
 
 	// The status of cluster creation.
+	//
 	//   - PENDING – The cluster is pending creation.
+	//
 	//   - CREATING – The cluster creation process is in progress.
+	//
 	//   - CREATE_FAILED – The cluster creation process has failed.
+	//
 	//   - RUNNING – The cluster creation process is running.
+	//
 	//   - UPDATING – The cluster is in the process of being updated.
+	//
 	//   - DELETING – The cluster is in the process of being deleted.
+	//
 	//   - DELETED – The cluster has been deleted.
+	//
 	//   - DELETE_FAILED – The cluster failed to delete.
 	Status types.KxClusterStatus
 
 	// The error message when a failed state occurs.
 	StatusReason *string
 
-	// A configuration to store the Tickerplant logs. It consists of a list of volumes
-	// that will be mounted to your cluster. For the cluster type Tickerplant , the
-	// location of the TP volume on the cluster will be available by using the global
-	// variable .aws.tp_log_path .
+	//  A configuration to store the Tickerplant logs. It consists of a list of
+	// volumes that will be mounted to your cluster. For the cluster type Tickerplant ,
+	// the location of the TP volume on the cluster will be available by using the
+	// global variable .aws.tp_log_path .
 	TickerplantLogConfiguration *types.TickerplantLogConfiguration
 
-	// A list of volumes mounted on the cluster.
+	//  A list of volumes mounted on the cluster.
 	Volumes []types.Volume
 
 	// Configuration details about the network where the Privatelink endpoint of the

@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the status of one or more table restore requests made using the
-// RestoreTableFromClusterSnapshot API action. If you don't specify a value for the
-// TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the
-// status of all table restore requests ordered by the date and time of the request
-// in ascending order. Otherwise DescribeTableRestoreStatus returns the status of
-// the table specified by TableRestoreRequestId .
+// Lists the status of one or more table restore requests made using the RestoreTableFromClusterSnapshot API
+// action. If you don't specify a value for the TableRestoreRequestId parameter,
+// then DescribeTableRestoreStatus returns the status of all table restore
+// requests ordered by the date and time of the request in ascending order.
+// Otherwise DescribeTableRestoreStatus returns the status of the table specified
+// by TableRestoreRequestId .
 func (c *Client) DescribeTableRestoreStatus(ctx context.Context, params *DescribeTableRestoreStatusInput, optFns ...func(*Options)) (*DescribeTableRestoreStatusOutput, error) {
 	if params == nil {
 		params = &DescribeTableRestoreStatusInput{}
@@ -57,8 +57,7 @@ type DescribeTableRestoreStatusInput struct {
 
 type DescribeTableRestoreStatusOutput struct {
 
-	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus
-	// request.
+	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus request.
 	Marker *string
 
 	// A list of status details for one or more table restore requests.

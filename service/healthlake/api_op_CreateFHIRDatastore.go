@@ -48,11 +48,11 @@ type CreateFHIRDatastoreInput struct {
 	// the only supported preloaded data is synthetic data generated from Synthea.
 	PreloadDataConfig *types.PreloadDataConfig
 
-	// The server-side encryption key configuration for a customer provided encryption
-	// key specified for creating a data store.
+	//  The server-side encryption key configuration for a customer provided
+	// encryption key specified for creating a data store.
 	SseConfiguration *types.SseConfiguration
 
-	// Resource tags that are applied to a data store when it is created.
+	//  Resource tags that are applied to a data store when it is created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

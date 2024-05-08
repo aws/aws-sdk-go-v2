@@ -31,10 +31,11 @@ func (c *Client) ListResolverRuleAssociations(ctx context.Context, params *ListR
 type ListResolverRuleAssociationsInput struct {
 
 	// An optional specification to return a subset of Resolver rules, such as
-	// Resolver rules that are associated with the same VPC ID. If you submit a second
-	// or subsequent ListResolverRuleAssociations request and specify the NextToken
-	// parameter, you must use the same values for Filters , if any, as in the previous
-	// request.
+	// Resolver rules that are associated with the same VPC ID.
+	//
+	// If you submit a second or subsequent ListResolverRuleAssociations request and
+	// specify the NextToken parameter, you must use the same values for Filters , if
+	// any, as in the previous request.
 	Filters []types.Filter
 
 	// The maximum number of rule associations that you want to return in the response
@@ -42,8 +43,9 @@ type ListResolverRuleAssociationsInput struct {
 	// MaxResults , Resolver returns up to 100 rule associations.
 	MaxResults *int32
 
-	// For the first ListResolverRuleAssociation request, omit this value. If you have
-	// more than MaxResults rule associations, you can submit another
+	// For the first ListResolverRuleAssociation request, omit this value.
+	//
+	// If you have more than MaxResults rule associations, you can submit another
 	// ListResolverRuleAssociation request to get the next group of rule associations.
 	// In the next request, specify the value of NextToken from the previous response.
 	NextToken *string

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Copies the specified DB parameter group. You can't copy a default DB parameter
-// group. Instead, create a new custom DB parameter group, which copies the default
-// parameters and values for the specified DB parameter group family.
+// Copies the specified DB parameter group.
+//
+// You can't copy a default DB parameter group. Instead, create a new custom DB
+// parameter group, which copies the default parameters and values for the
+// specified DB parameter group family.
 func (c *Client) CopyDBParameterGroup(ctx context.Context, params *CopyDBParameterGroupInput, optFns ...func(*Options)) (*CopyDBParameterGroupOutput, error) {
 	if params == nil {
 		params = &CopyDBParameterGroupInput{}
@@ -32,9 +34,13 @@ func (c *Client) CopyDBParameterGroup(ctx context.Context, params *CopyDBParamet
 type CopyDBParameterGroupInput struct {
 
 	// The identifier or ARN for the source DB parameter group. For information about
-	// creating an ARN, see Constructing an ARN for Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
-	// in the Amazon RDS User Guide. Constraints:
+	// creating an ARN, see [Constructing an ARN for Amazon RDS]in the Amazon RDS User Guide.
+	//
+	// Constraints:
+	//
 	//   - Must specify a valid DB parameter group.
+	//
+	// [Constructing an ARN for Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
 	//
 	// This member is required.
 	SourceDBParameterGroupIdentifier *string
@@ -44,18 +50,26 @@ type CopyDBParameterGroupInput struct {
 	// This member is required.
 	TargetDBParameterGroupDescription *string
 
-	// The identifier for the copied DB parameter group. Constraints:
+	// The identifier for the copied DB parameter group.
+	//
+	// Constraints:
+	//
 	//   - Can't be null, empty, or blank
+	//
 	//   - Must contain from 1 to 255 letters, numbers, or hyphens
+	//
 	//   - First character must be a letter
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens
+	//
 	// Example: my-db-parameter-group
 	//
 	// This member is required.
 	TargetDBParameterGroupIdentifier *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -63,8 +77,10 @@ type CopyDBParameterGroupInput struct {
 
 type CopyDBParameterGroupOutput struct {
 
-	// Contains the details of an Amazon RDS DB parameter group. This data type is
-	// used as a response element in the DescribeDBParameterGroups action.
+	// Contains the details of an Amazon RDS DB parameter group.
+	//
+	// This data type is used as a response element in the DescribeDBParameterGroups
+	// action.
 	DBParameterGroup *types.DBParameterGroup
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns comments made on a pull request. Reaction counts might include numbers
-// from user identities who were deleted after the reaction was made. For a count
-// of reactions from active identities, use GetCommentReactions.
+// Returns comments made on a pull request.
+//
+// Reaction counts might include numbers from user identities who were deleted
+// after the reaction was made. For a count of reactions from active identities,
+// use GetCommentReactions.
 func (c *Client) GetCommentsForPullRequest(ctx context.Context, params *GetCommentsForPullRequestInput, optFns ...func(*Options)) (*GetCommentsForPullRequestOutput, error) {
 	if params == nil {
 		params = &GetCommentsForPullRequestInput{}
@@ -31,8 +33,7 @@ func (c *Client) GetCommentsForPullRequest(ctx context.Context, params *GetComme
 
 type GetCommentsForPullRequestInput struct {
 
-	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests .
+	// The system-generated ID of the pull request. To get this ID, use ListPullRequests.
 	//
 	// This member is required.
 	PullRequestId *string

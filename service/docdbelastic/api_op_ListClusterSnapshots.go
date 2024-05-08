@@ -38,14 +38,17 @@ type ListClusterSnapshotsInput struct {
 
 	// A pagination token provided by a previous request. If this parameter is
 	// specified, the response includes only records beyond this token, up to the value
-	// specified by max-results . If there is no more data in the responce, the
-	// nextToken will not be returned.
+	// specified by max-results .
+	//
+	// If there is no more data in the responce, the nextToken will not be returned.
 	NextToken *string
 
 	// The type of cluster snapshots to be returned. You can specify one of the
 	// following values:
+	//
 	//   - automated - Return all cluster snapshots that Amazon DocumentDB has
 	//   automatically created for your Amazon Web Services account.
+	//
 	//   - manual - Return all cluster snapshots that you have manually created for
 	//   your Amazon Web Services account.
 	SnapshotType *string
@@ -57,8 +60,9 @@ type ListClusterSnapshotsOutput struct {
 
 	// A pagination token provided by a previous request. If this parameter is
 	// specified, the response includes only records beyond this token, up to the value
-	// specified by max-results . If there is no more data in the responce, the
-	// nextToken will not be returned.
+	// specified by max-results .
+	//
+	// If there is no more data in the responce, the nextToken will not be returned.
 	NextToken *string
 
 	// A list of snapshots for a specified elastic cluster.

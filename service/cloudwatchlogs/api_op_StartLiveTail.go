@@ -15,36 +15,51 @@ import (
 
 // Starts a Live Tail streaming session for one or more log groups. A Live Tail
 // session returns a stream of log events that have been recently ingested in the
-// log groups. For more information, see Use Live Tail to view logs in near real
-// time (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html)
-// . The response to this operation is a response stream, over which the server
-// sends live log events and the client receives them. The following objects are
-// sent over the stream:
-//   - A single LiveTailSessionStart (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionStart.html)
-//     object is sent at the start of the session.
-//   - Every second, a LiveTailSessionUpdate (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionUpdate.html)
-//     object is sent. Each of these objects contains an array of the actual log
-//     events. If no new log events were ingested in the past second, the
-//     LiveTailSessionUpdate object will contain an empty array. The array of log
-//     events contained in a LiveTailSessionUpdate can include as many as 500 log
-//     events. If the number of log events matching the request exceeds 500 per second,
-//     the log events are sampled down to 500 log events to be included in each
-//     LiveTailSessionUpdate object. If your client consumes the log events slower
-//     than the server produces them, CloudWatch Logs buffers up to 10
-//     LiveTailSessionUpdate events or 5000 log events, after which it starts
-//     dropping the oldest events.
-//   - A SessionStreamingException (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionStreamingException.html)
-//     object is returned if an unknown error occurs on the server side.
-//   - A SessionTimeoutException (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionTimeoutException.html)
-//     object is returned when the session times out, after it has been kept open for
-//     three hours.
+// log groups. For more information, see [Use Live Tail to view logs in near real time].
+//
+// The response to this operation is a response stream, over which the server
+// sends live log events and the client receives them.
+//
+// The following objects are sent over the stream:
+//
+//   - A single [LiveTailSessionStart]object is sent at the start of the session.
+//
+//   - Every second, a [LiveTailSessionUpdate]object is sent. Each of these objects contains an array of
+//     the actual log events.
+//
+// If no new log events were ingested in the past second, the LiveTailSessionUpdate
+//
+//	object will contain an empty array.
+//
+// The array of log events contained in a LiveTailSessionUpdate can include as many
+//
+//	as 500 log events. If the number of log events matching the request exceeds 500
+//	per second, the log events are sampled down to 500 log events to be included in
+//	each LiveTailSessionUpdate object.
+//
+// If your client consumes the log events slower than the server produces them,
+//
+//	CloudWatch Logs buffers up to 10 LiveTailSessionUpdate events or 5000 log
+//	events, after which it starts dropping the oldest events.
+//
+//	- A [SessionStreamingException]object is returned if an unknown error occurs on the server side.
+//
+//	- A [SessionTimeoutException]object is returned when the session times out, after it has been kept
+//	open for three hours.
 //
 // You can end a session before it times out by closing the session stream or by
 // closing the client that is receiving the stream. The session also ends if the
-// established connection between the client and the server breaks. For examples of
-// using an SDK to start a Live Tail session, see Start a Live Tail session using
-// an Amazon Web Services SDK (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/example_cloudwatch-logs_StartLiveTail_section.html)
-// .
+// established connection between the client and the server breaks.
+//
+// For examples of using an SDK to start a Live Tail session, see [Start a Live Tail session using an Amazon Web Services SDK].
+//
+// [LiveTailSessionStart]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionStart.html
+// [LiveTailSessionUpdate]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_LiveTailSessionUpdate.html
+// [Use Live Tail to view logs in near real time]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_LiveTail.html
+// [Start a Live Tail session using an Amazon Web Services SDK]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/example_cloudwatch-logs_StartLiveTail_section.html
+//
+// [SessionTimeoutException]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionTimeoutException.html
+// [SessionStreamingException]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_SessionStreamingException.html
 func (c *Client) StartLiveTail(ctx context.Context, params *StartLiveTailInput, optFns ...func(*Options)) (*StartLiveTailOutput, error) {
 	if params == nil {
 		params = &StartLiveTailInput{}
@@ -63,8 +78,13 @@ func (c *Client) StartLiveTail(ctx context.Context, params *StartLiveTailInput, 
 type StartLiveTailInput struct {
 
 	// An array where each item in the array is a log group to include in the Live
-	// Tail session. Specify each log group by its ARN. If you specify an ARN, the ARN
-	// can't end with an asterisk (*). You can include up to 10 log groups.
+	// Tail session.
+	//
+	// Specify each log group by its ARN.
+	//
+	// If you specify an ARN, the ARN can't end with an asterisk (*).
+	//
+	// You can include up to 10 log groups.
 	//
 	// This member is required.
 	LogGroupIdentifiers []string
@@ -72,22 +92,33 @@ type StartLiveTailInput struct {
 	// An optional pattern to use to filter the results to include only log events
 	// that match the pattern. For example, a filter pattern of error 404 causes only
 	// log events that include both error and 404 to be included in the Live Tail
-	// stream. Regular expression filter patterns are supported. For more information
-	// about filter pattern syntax, see Filter and Pattern Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
-	// .
+	// stream.
+	//
+	// Regular expression filter patterns are supported.
+	//
+	// For more information about filter pattern syntax, see [Filter and Pattern Syntax].
+	//
+	// [Filter and Pattern Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
 	LogEventFilterPattern *string
 
 	// If you specify this parameter, then only log events in the log streams that
 	// have names that start with the prefixes that you specify here are included in
-	// the Live Tail session. If you specify this field, you can't also specify the
-	// logStreamNames field. You can specify this parameter only if you specify only
-	// one log group in logGroupIdentifiers .
+	// the Live Tail session.
+	//
+	// If you specify this field, you can't also specify the logStreamNames field.
+	//
+	// You can specify this parameter only if you specify only one log group in
+	// logGroupIdentifiers .
 	LogStreamNamePrefixes []string
 
 	// If you specify this parameter, then only log events in the log streams that you
-	// specify here are included in the Live Tail session. If you specify this field,
-	// you can't also specify the logStreamNamePrefixes field. You can specify this
-	// parameter only if you specify only one log group in logGroupIdentifiers .
+	// specify here are included in the Live Tail session.
+	//
+	// If you specify this field, you can't also specify the logStreamNamePrefixes
+	// field.
+	//
+	// You can specify this parameter only if you specify only one log group in
+	// logGroupIdentifiers .
 	LogStreamNames []string
 
 	noSmithyDocumentSerde

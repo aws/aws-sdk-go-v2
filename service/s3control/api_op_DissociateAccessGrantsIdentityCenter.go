@@ -16,8 +16,11 @@ import (
 )
 
 // Dissociates the Amazon Web Services IAM Identity Center instance from the S3
-// Access Grants instance. Permissions You must have the
-// s3:DissociateAccessGrantsIdentityCenter permission to use this operation.
+// Access Grants instance.
+//
+// Permissions You must have the s3:DissociateAccessGrantsIdentityCenter
+// permission to use this operation.
+//
 // Additional Permissions You must have the sso:DeleteApplication permission to
 // use this operation.
 func (c *Client) DissociateAccessGrantsIdentityCenter(ctx context.Context, params *DissociateAccessGrantsIdentityCenterInput, optFns ...func(*Options)) (*DissociateAccessGrantsIdentityCenterOutput, error) {

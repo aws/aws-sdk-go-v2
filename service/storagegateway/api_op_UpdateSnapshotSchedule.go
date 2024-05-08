@@ -12,13 +12,15 @@ import (
 )
 
 // Updates a snapshot schedule configured for a gateway volume. This operation is
-// only supported in the cached volume and stored volume gateway types. The default
-// snapshot schedule for volume is once every 24 hours, starting at the creation
-// time of the volume. You can use this API to change the snapshot schedule
-// configured for the volume. In the request you must identify the gateway volume
-// whose snapshot schedule you want to update, and the schedule information,
-// including when you want the snapshot to begin on a day and the frequency (in
-// hours) of snapshots.
+// only supported in the cached volume and stored volume gateway types.
+//
+// The default snapshot schedule for volume is once every 24 hours, starting at
+// the creation time of the volume. You can use this API to change the snapshot
+// schedule configured for the volume.
+//
+// In the request you must identify the gateway volume whose snapshot schedule you
+// want to update, and the schedule information, including when you want the
+// snapshot to begin on a day and the frequency (in hours) of snapshots.
 func (c *Client) UpdateSnapshotSchedule(ctx context.Context, params *UpdateSnapshotScheduleInput, optFns ...func(*Options)) (*UpdateSnapshotScheduleOutput, error) {
 	if params == nil {
 		params = &UpdateSnapshotScheduleInput{}
@@ -35,10 +37,14 @@ func (c *Client) UpdateSnapshotSchedule(ctx context.Context, params *UpdateSnaps
 }
 
 // A JSON object containing one or more of the following fields:
-//   - UpdateSnapshotScheduleInput$Description
-//   - UpdateSnapshotScheduleInput$RecurrenceInHours
-//   - UpdateSnapshotScheduleInput$StartAt
-//   - UpdateSnapshotScheduleInput$VolumeARN
+//
+// # UpdateSnapshotScheduleInput$Description
+//
+// # UpdateSnapshotScheduleInput$RecurrenceInHours
+//
+// # UpdateSnapshotScheduleInput$StartAt
+//
+// UpdateSnapshotScheduleInput$VolumeARN
 type UpdateSnapshotScheduleInput struct {
 
 	// Frequency of snapshots. Specify the number of hours between snapshots.
@@ -53,8 +59,8 @@ type UpdateSnapshotScheduleInput struct {
 	// This member is required.
 	StartAt *int32
 
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to
-	// return a list of gateway volumes.
+	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a
+	// list of gateway volumes.
 	//
 	// This member is required.
 	VolumeARN *string
@@ -63,10 +69,12 @@ type UpdateSnapshotScheduleInput struct {
 	Description *string
 
 	// A list of up to 50 tags that can be assigned to a snapshot. Each tag is a
-	// key-value pair. Valid characters for key and value are letters, spaces, and
-	// numbers representable in UTF-8 format, and the following special characters: + -
-	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
-	// maximum length for a tag's value is 256.
+	// key-value pair.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers
+	// representable in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -76,8 +84,8 @@ type UpdateSnapshotScheduleInput struct {
 // volume.
 type UpdateSnapshotScheduleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to
-	// return a list of gateway volumes.
+	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a
+	// list of gateway volumes.
 	VolumeARN *string
 
 	// Metadata pertaining to the operation's result.

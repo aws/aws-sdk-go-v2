@@ -11,14 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a virtual router within a service mesh. Specify a listener for any
-// inbound traffic that your virtual router receives. Create a virtual router for
-// each protocol and port that you need to route. Virtual routers handle traffic
-// for one or more virtual services within your mesh. After you create your virtual
-// router, create and associate routes for your virtual router that direct incoming
-// requests to different virtual nodes. For more information about virtual routers,
-// see Virtual routers (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html)
-// .
+// Creates a virtual router within a service mesh.
+//
+// Specify a listener for any inbound traffic that your virtual router receives.
+// Create a virtual router for each protocol and port that you need to route.
+// Virtual routers handle traffic for one or more virtual services within your
+// mesh. After you create your virtual router, create and associate routes for your
+// virtual router that direct incoming requests to different virtual nodes.
+//
+// For more information about virtual routers, see [Virtual routers].
+//
+// [Virtual routers]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html
 func (c *Client) CreateVirtualRouter(ctx context.Context, params *CreateVirtualRouterInput, optFns ...func(*Options)) (*CreateVirtualRouterOutput, error) {
 	if params == nil {
 		params = &CreateVirtualRouterInput{}
@@ -58,8 +61,9 @@ type CreateVirtualRouterInput struct {
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the
 	// account ID is not your own, then the account that you specify must share the
 	// mesh with your account before you can create the resource in the service mesh.
-	// For more information about mesh sharing, see Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
-	// .
+	// For more information about mesh sharing, see [Working with shared meshes].
+	//
+	// [Working with shared meshes]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
 	MeshOwner *string
 
 	// Optional metadata that you can apply to the virtual router to assist with

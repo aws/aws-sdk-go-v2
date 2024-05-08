@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Request a cost allocation tag backfill. This will backfill the activation
+//	Request a cost allocation tag backfill. This will backfill the activation
+//
 // status (either active or inactive ) for all tag keys from para:BackfillFrom up
-// to the when this request is made. You can request a backfill once every 24
-// hours.
+// to the when this request is made.
+//
+// You can request a backfill once every 24 hours.
 func (c *Client) StartCostAllocationTagBackfill(ctx context.Context, params *StartCostAllocationTagBackfillInput, optFns ...func(*Options)) (*StartCostAllocationTagBackfillOutput, error) {
 	if params == nil {
 		params = &StartCostAllocationTagBackfillInput{}
@@ -32,7 +34,7 @@ func (c *Client) StartCostAllocationTagBackfill(ctx context.Context, params *Sta
 
 type StartCostAllocationTagBackfillInput struct {
 
-	// The date you want the backfill to start from. The date can only be a first day
+	//  The date you want the backfill to start from. The date can only be a first day
 	// of the month (a billing start date). Dates can't precede the previous twelve
 	// months, or in the future.
 	//
@@ -44,7 +46,7 @@ type StartCostAllocationTagBackfillInput struct {
 
 type StartCostAllocationTagBackfillOutput struct {
 
-	// An object containing detailed metadata of your new backfill request.
+	//  An object containing detailed metadata of your new backfill request.
 	BackfillRequest *types.CostAllocationTagBackfillRequest
 
 	// Metadata pertaining to the operation's result.

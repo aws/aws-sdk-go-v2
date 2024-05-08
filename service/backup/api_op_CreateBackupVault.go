@@ -13,8 +13,10 @@ import (
 
 // Creates a logical container where backups are stored. A CreateBackupVault
 // request includes a name, optionally one or more resource tags, an encryption
-// key, and a request ID. Do not include sensitive data, such as passport numbers,
-// in the name of a backup vault.
+// key, and a request ID.
+//
+// Do not include sensitive data, such as passport numbers, in the name of a
+// backup vault.
 func (c *Client) CreateBackupVault(ctx context.Context, params *CreateBackupVaultInput, optFns ...func(*Options)) (*CreateBackupVaultOutput, error) {
 	if params == nil {
 		params = &CreateBackupVaultInput{}
@@ -46,8 +48,9 @@ type CreateBackupVaultInput struct {
 
 	// A unique string that identifies the request and allows failed requests to be
 	// retried without the risk of running the operation twice. This parameter is
-	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
-	// characters.
+	// optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	// The server-side encryption key that is used to protect your backups; for

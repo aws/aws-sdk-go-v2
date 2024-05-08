@@ -29,9 +29,8 @@ func (c *Client) CancelElasticsearchServiceSoftwareUpdate(ctx context.Context, p
 	return out, nil
 }
 
-// Container for the parameters to the CancelElasticsearchServiceSoftwareUpdate
-// operation. Specifies the name of the Elasticsearch domain that you wish to
-// cancel a service software update on.
+// Container for the parameters to the CancelElasticsearchServiceSoftwareUpdate operation. Specifies the name of the
+// Elasticsearch domain that you wish to cancel a service software update on.
 type CancelElasticsearchServiceSoftwareUpdateInput struct {
 
 	// The name of the domain that you want to stop the latest service software update

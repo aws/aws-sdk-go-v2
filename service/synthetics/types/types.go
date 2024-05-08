@@ -14,8 +14,9 @@ type ArtifactConfigInput struct {
 	// A structure that contains the configuration of the encryption-at-rest settings
 	// for artifacts that the canary uploads to Amazon S3. Artifact encryption
 	// functionality is available only for canaries that use Synthetics runtime version
-	// syn-nodejs-puppeteer-3.3 or later. For more information, see Encrypting canary
-	// artifacts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html)
+	// syn-nodejs-puppeteer-3.3 or later. For more information, see [Encrypting canary artifacts]
+	//
+	// [Encrypting canary artifacts]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html
 	S3Encryption *S3EncryptionConfig
 
 	noSmithyDocumentSerde
@@ -45,8 +46,9 @@ type BaseScreenshot struct {
 
 	// Coordinates that define the part of a screen to ignore during screenshot
 	// comparisons. To obtain the coordinates to use here, use the CloudWatch console
-	// to draw the boundaries on the screen. For more information, see Editing or
-	// deleting a canary (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/synthetics_canaries_deletion.html)
+	// to draw the boundaries on the screen. For more information, see [Editing or deleting a canary]
+	//
+	// [Editing or deleting a canary]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/synthetics_canaries_deletion.html
 	IgnoreCoordinates []string
 
 	noSmithyDocumentSerde
@@ -68,9 +70,9 @@ type Canary struct {
 	Code *CanaryCodeOutput
 
 	// The ARN of the Lambda function that is used as your canary's engine. For more
-	// information about Lambda ARN format, see Resources and Conditions for Lambda
-	// Actions (https://docs.aws.amazon.com/lambda/latest/dg/lambda-api-permissions-ref.html)
-	// .
+	// information about Lambda ARN format, see [Resources and Conditions for Lambda Actions].
+	//
+	// [Resources and Conditions for Lambda Actions]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-api-permissions-ref.html
 	EngineArn *string
 
 	// The ARN of the IAM role used to run the canary. This role must include
@@ -90,8 +92,9 @@ type Canary struct {
 	RunConfig *CanaryRunConfigOutput
 
 	// Specifies the runtime version to use for the canary. For more information about
-	// runtime versions, see Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
-	// .
+	// runtime versions, see [Canary Runtime Versions].
+	//
+	// [Canary Runtime Versions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
 	RuntimeVersion *string
 
 	// A structure that contains information about how often the canary is to run, and
@@ -119,8 +122,9 @@ type Canary struct {
 
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnets and security groups of the VPC endpoint. For more
-	// information, see Running a Canary in a VPC (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html)
-	// .
+	// information, see [Running a Canary in a VPC].
+	//
+	// [Running a Canary in a VPC]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
 	VpcConfig *VpcConfigOutput
 
 	noSmithyDocumentSerde
@@ -148,8 +152,9 @@ type CanaryCodeInput struct {
 	// include s3:// as the start of the bucket name.
 	S3Bucket *string
 
-	// The S3 key of your script. For more information, see Working with Amazon S3
-	// Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html) .
+	// The S3 key of your script. For more information, see [Working with Amazon S3 Objects].
+	//
+	// [Working with Amazon S3 Objects]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingObjects.html
 	S3Key *string
 
 	// The S3 version ID of your script.
@@ -157,8 +162,9 @@ type CanaryCodeInput struct {
 
 	// If you input your canary script directly into the canary instead of referring
 	// to an S3 location, the value of this parameter is the base64-encoded contents of
-	// the .zip file that contains the script. It must be smaller than 225 Kb. For
-	// large canary scripts, we recommend that you use an S3 location instead of
+	// the .zip file that contains the script. It must be smaller than 225 Kb.
+	//
+	// For large canary scripts, we recommend that you use an S3 location instead of
 	// inputting it directly with this parameter.
 	ZipFile []byte
 
@@ -219,21 +225,28 @@ type CanaryRunConfigInput struct {
 	// Specifies whether this canary is to use active X-Ray tracing when it runs.
 	// Active tracing enables this canary run to be displayed in the ServiceLens and
 	// X-Ray service maps even if the canary does not hit an endpoint that has X-Ray
-	// tracing enabled. Using X-Ray tracing incurs charges. For more information, see
-	// Canaries and X-Ray tracing (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html)
-	// . You can enable active tracing only for canaries that use version
-	// syn-nodejs-2.0 or later for their canary runtime.
+	// tracing enabled. Using X-Ray tracing incurs charges. For more information, see [Canaries and X-Ray tracing].
+	//
+	// You can enable active tracing only for canaries that use version syn-nodejs-2.0
+	// or later for their canary runtime.
+	//
+	// [Canaries and X-Ray tracing]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html
 	ActiveTracing *bool
 
 	// Specifies the keys and values to use for any environment variables used in the
-	// canary script. Use the following format: { "key1" : "value1", "key2" : "value2",
-	// ...} Keys must start with a letter and be at least two characters. The total
-	// size of your environment variables cannot exceed 4 KB. You can't specify any
-	// Lambda reserved environment variables as the keys for your environment
-	// variables. For more information about reserved keys, see Runtime environment
-	// variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime)
-	// . The environment variables keys and values are not encrypted. Do not store
+	// canary script. Use the following format:
+	//
+	// { "key1" : "value1", "key2" : "value2", ...}
+	//
+	// Keys must start with a letter and be at least two characters. The total size of
+	// your environment variables cannot exceed 4 KB. You can't specify any Lambda
+	// reserved environment variables as the keys for your environment variables. For
+	// more information about reserved keys, see [Runtime environment variables].
+	//
+	// The environment variables keys and values are not encrypted. Do not store
 	// sensitive information in this field.
+	//
+	// [Runtime environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime
 	EnvironmentVariables map[string]string
 
 	// The maximum amount of memory available to the canary while it is running, in
@@ -241,9 +254,10 @@ type CanaryRunConfigInput struct {
 	MemoryInMB *int32
 
 	// How long the canary is allowed to run before it must stop. You can't set this
-	// time to be longer than the frequency of the runs of this canary. If you omit
-	// this field, the frequency of the canary is used as this value, up to a maximum
-	// of 14 minutes.
+	// time to be longer than the frequency of the runs of this canary.
+	//
+	// If you omit this field, the frequency of the canary is used as this value, up
+	// to a maximum of 14 minutes.
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -298,16 +312,23 @@ type CanaryRunTimeline struct {
 type CanaryScheduleInput struct {
 
 	// A rate expression or a cron expression that defines how often the canary is to
-	// run. For a rate expression, The syntax is rate(number unit) . unit can be minute
-	// , minutes , or hour . For example, rate(1 minute) runs the canary once a
-	// minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs
-	// it once every hour. You can specify a frequency between rate(1 minute) and
-	// rate(1 hour) . Specifying rate(0 minute) or rate(0 hour) is a special value
-	// that causes the canary to run only once when it is started. Use cron(expression)
-	// to specify a cron expression. You can't schedule a canary to wait for more than
-	// a year before running. For information about the syntax for cron expressions,
-	// see Scheduling canary runs using cron (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html)
-	// .
+	// run.
+	//
+	// For a rate expression, The syntax is rate(number unit) . unit can be minute ,
+	// minutes , or hour .
+	//
+	// For example, rate(1 minute) runs the canary once a minute, rate(10 minutes)
+	// runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You
+	// can specify a frequency between rate(1 minute) and rate(1 hour) .
+	//
+	// Specifying rate(0 minute) or rate(0 hour) is a special value that causes the
+	// canary to run only once when it is started.
+	//
+	// Use cron(expression) to specify a cron expression. You can't schedule a canary
+	// to wait for more than a year before running. For information about the syntax
+	// for cron expressions, see [Scheduling canary runs using cron].
+	//
+	// [Scheduling canary runs using cron]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html
 	//
 	// This member is required.
 	Expression *string
@@ -330,15 +351,22 @@ type CanaryScheduleOutput struct {
 	DurationInSeconds *int64
 
 	// A rate expression or a cron expression that defines how often the canary is to
-	// run. For a rate expression, The syntax is rate(number unit) . unit can be minute
-	// , minutes , or hour . For example, rate(1 minute) runs the canary once a
-	// minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs
-	// it once every hour. You can specify a frequency between rate(1 minute) and
-	// rate(1 hour) . Specifying rate(0 minute) or rate(0 hour) is a special value
-	// that causes the canary to run only once when it is started. Use cron(expression)
-	// to specify a cron expression. For information about the syntax for cron
-	// expressions, see Scheduling canary runs using cron (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html)
-	// .
+	// run.
+	//
+	// For a rate expression, The syntax is rate(number unit) . unit can be minute ,
+	// minutes , or hour .
+	//
+	// For example, rate(1 minute) runs the canary once a minute, rate(10 minutes)
+	// runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You
+	// can specify a frequency between rate(1 minute) and rate(1 hour) .
+	//
+	// Specifying rate(0 minute) or rate(0 hour) is a special value that causes the
+	// canary to run only once when it is started.
+	//
+	// Use cron(expression) to specify a cron expression. For information about the
+	// syntax for cron expressions, see [Scheduling canary runs using cron].
+	//
+	// [Scheduling canary runs using cron]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html
 	Expression *string
 
 	noSmithyDocumentSerde
@@ -419,8 +447,9 @@ type GroupSummary struct {
 }
 
 // This structure contains information about one canary runtime version. For more
-// information about runtime versions, see Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
-// .
+// information about runtime versions, see [Canary Runtime Versions].
+//
+// [Canary Runtime Versions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
 type RuntimeVersion struct {
 
 	// If this runtime version is deprecated, this value is the date of deprecation.
@@ -432,22 +461,26 @@ type RuntimeVersion struct {
 	// The date that the runtime version was released.
 	ReleaseDate *time.Time
 
-	// The name of the runtime version. For a list of valid runtime versions, see
-	// Canary Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
-	// .
+	// The name of the runtime version. For a list of valid runtime versions, see [Canary Runtime Versions].
+	//
+	// [Canary Runtime Versions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
 	VersionName *string
 
 	noSmithyDocumentSerde
 }
 
 // A structure that contains the configuration of encryption-at-rest settings for
-// canary artifacts that the canary uploads to Amazon S3. For more information, see
-// Encrypting canary artifacts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html)
+// canary artifacts that the canary uploads to Amazon S3.
+//
+// For more information, see [Encrypting canary artifacts]
+//
+// [Encrypting canary artifacts]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html
 type S3EncryptionConfig struct {
 
-	// The encryption method to use for artifacts created by this canary. Specify
+	//  The encryption method to use for artifacts created by this canary. Specify
 	// SSE_S3 to use server-side encryption (SSE) with an Amazon S3-managed key.
 	// Specify SSE-KMS to use server-side encryption with a customer-managed KMS key.
+	//
 	// If you omit this parameter, an Amazon Web Services-managed KMS key is used.
 	EncryptionMode EncryptionMode
 
@@ -460,18 +493,22 @@ type S3EncryptionConfig struct {
 
 // An object that specifies what screenshots to use as a baseline for visual
 // monitoring by this canary. It can optionally also specify parts of the
-// screenshots to ignore during the visual monitoring comparison. Visual monitoring
-// is supported only on canaries running the syn-puppeteer-node-3.2 runtime or
-// later. For more information, see Visual monitoring (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html)
-// and Visual monitoring blueprint (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html)
+// screenshots to ignore during the visual monitoring comparison.
+//
+// Visual monitoring is supported only on canaries running the
+// syn-puppeteer-node-3.2 runtime or later. For more information, see [Visual monitoring]and [Visual monitoring blueprint]
+//
+// [Visual monitoring]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
+// [Visual monitoring blueprint]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
 type VisualReferenceInput struct {
 
 	// Specifies which canary run to use the screenshots from as the baseline for
 	// future visual monitoring with this canary. Valid values are nextrun to use the
 	// screenshots from the next run after this update is made, lastrun to use the
 	// screenshots from the most recent run before this update was made, or the value
-	// of Id in the  CanaryRun (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html)
-	// from any past run of this canary.
+	// of Id in the [CanaryRun] from any past run of this canary.
+	//
+	// [CanaryRun]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html
 	//
 	// This member is required.
 	BaseCanaryRunId *string
@@ -487,8 +524,10 @@ type VisualReferenceInput struct {
 // If this canary performs visual monitoring by comparing screenshots, this
 // structure contains the ID of the canary run that is used as the baseline for
 // screenshots, and the coordinates of any parts of those screenshots that are
-// ignored during visual monitoring comparison. Visual monitoring is supported only
-// on canaries running the syn-puppeteer-node-3.2 runtime or later.
+// ignored during visual monitoring comparison.
+//
+// Visual monitoring is supported only on canaries running the
+// syn-puppeteer-node-3.2 runtime or later.
 type VisualReferenceOutput struct {
 
 	// The ID of the canary run that produced the baseline screenshots that are used
@@ -504,8 +543,9 @@ type VisualReferenceOutput struct {
 
 // If this canary is to test an endpoint in a VPC, this structure contains
 // information about the subnets and security groups of the VPC endpoint. For more
-// information, see Running a Canary in a VPC (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html)
-// .
+// information, see [Running a Canary in a VPC].
+//
+// [Running a Canary in a VPC]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
 type VpcConfigInput struct {
 
 	// The IDs of the security groups for this canary.
@@ -519,8 +559,9 @@ type VpcConfigInput struct {
 
 // If this canary is to test an endpoint in a VPC, this structure contains
 // information about the subnets and security groups of the VPC endpoint. For more
-// information, see Running a Canary in a VPC (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html)
-// .
+// information, see [Running a Canary in a VPC].
+//
+// [Running a Canary in a VPC]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
 type VpcConfigOutput struct {
 
 	// The IDs of the security groups for this canary.

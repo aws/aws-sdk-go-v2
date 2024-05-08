@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example operation serializes a request without an HTTP body. These tests
-// are to ensure we do not attach a body or related headers (Content-Length,
-// Content-Type) to operations that semantically cannot produce an HTTP body.
+// This example operation serializes a request without an HTTP body.
+//
+// These tests are to ensure we do not attach a body or related headers
+// (Content-Length, Content-Type) to operations that semantically cannot produce an
+// HTTP body.
 func (c *Client) TestNoPayload(ctx context.Context, params *TestNoPayloadInput, optFns ...func(*Options)) (*TestNoPayloadOutput, error) {
 	if params == nil {
 		params = &TestNoPayloadInput{}

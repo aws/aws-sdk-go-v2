@@ -11,16 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a specified number of users to a channel. This API is is no longer
-// supported and will not be updated. We recommend using the latest version,
-// BatchCreateChannelMembership (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_BatchCreateChannelMembership.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Adds a specified number of users to a channel.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [BatchCreateChannelMembership], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by BatchCreateChannelMembership in the Amazon Chime SDK
 // Messaging Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [BatchCreateChannelMembership]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_BatchCreateChannelMembership.html
 func (c *Client) BatchCreateChannelMembership(ctx context.Context, params *BatchCreateChannelMembershipInput, optFns ...func(*Options)) (*BatchCreateChannelMembershipOutput, error) {
 	if params == nil {
 		params = &BatchCreateChannelMembershipInput{}

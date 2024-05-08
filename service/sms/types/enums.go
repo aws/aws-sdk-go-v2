@@ -12,8 +12,9 @@ const (
 
 // Values returns all known values for AppLaunchConfigurationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppLaunchConfigurationStatus) Values() []AppLaunchConfigurationStatus {
 	return []AppLaunchConfigurationStatus{
 		"NOT_CONFIGURED",
@@ -43,8 +44,9 @@ const (
 )
 
 // Values returns all known values for AppLaunchStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppLaunchStatus) Values() []AppLaunchStatus {
 	return []AppLaunchStatus{
 		"READY_FOR_CONFIGURATION",
@@ -75,8 +77,9 @@ const (
 
 // Values returns all known values for AppReplicationConfigurationStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppReplicationConfigurationStatus) Values() []AppReplicationConfigurationStatus {
 	return []AppReplicationConfigurationStatus{
 		"NOT_CONFIGURED",
@@ -107,8 +110,9 @@ const (
 )
 
 // Values returns all known values for AppReplicationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppReplicationStatus) Values() []AppReplicationStatus {
 	return []AppReplicationStatus{
 		"READY_FOR_CONFIGURATION",
@@ -143,8 +147,9 @@ const (
 )
 
 // Values returns all known values for AppStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppStatus) Values() []AppStatus {
 	return []AppStatus{
 		"CREATING",
@@ -164,8 +169,9 @@ const (
 )
 
 // Values returns all known values for AppValidationStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppValidationStrategy) Values() []AppValidationStrategy {
 	return []AppValidationStrategy{
 		"SSM",
@@ -184,8 +190,9 @@ const (
 )
 
 // Values returns all known values for ConnectorCapability. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorCapability) Values() []ConnectorCapability {
 	return []ConnectorCapability{
 		"VSPHERE",
@@ -205,8 +212,9 @@ const (
 )
 
 // Values returns all known values for ConnectorStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorStatus) Values() []ConnectorStatus {
 	return []ConnectorStatus{
 		"HEALTHY",
@@ -223,8 +231,9 @@ const (
 )
 
 // Values returns all known values for LicenseType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseType) Values() []LicenseType {
 	return []LicenseType{
 		"AWS",
@@ -241,8 +250,9 @@ const (
 )
 
 // Values returns all known values for OutputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"JSON",
@@ -265,8 +275,9 @@ const (
 )
 
 // Values returns all known values for ReplicationJobState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationJobState) Values() []ReplicationJobState {
 	return []ReplicationJobState{
 		"PENDING",
@@ -294,8 +305,9 @@ const (
 )
 
 // Values returns all known values for ReplicationRunState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationRunState) Values() []ReplicationRunState {
 	return []ReplicationRunState{
 		"PENDING",
@@ -317,8 +329,9 @@ const (
 )
 
 // Values returns all known values for ReplicationRunType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationRunType) Values() []ReplicationRunType {
 	return []ReplicationRunType{
 		"ON_DEMAND",
@@ -335,8 +348,9 @@ const (
 )
 
 // Values returns all known values for ScriptType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScriptType) Values() []ScriptType {
 	return []ScriptType{
 		"SHELL_SCRIPT",
@@ -356,8 +370,9 @@ const (
 )
 
 // Values returns all known values for ServerCatalogStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerCatalogStatus) Values() []ServerCatalogStatus {
 	return []ServerCatalogStatus{
 		"NOT_IMPORTED",
@@ -376,8 +391,9 @@ const (
 )
 
 // Values returns all known values for ServerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerType) Values() []ServerType {
 	return []ServerType{
 		"VIRTUAL_MACHINE",
@@ -393,6 +409,7 @@ const (
 
 // Values returns all known values for ServerValidationStrategy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerValidationStrategy) Values() []ServerValidationStrategy {
 	return []ServerValidationStrategy{
@@ -412,8 +429,9 @@ const (
 )
 
 // Values returns all known values for ValidationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationStatus) Values() []ValidationStatus {
 	return []ValidationStatus{
 		"READY_FOR_VALIDATION",
@@ -434,8 +452,9 @@ const (
 )
 
 // Values returns all known values for VmManagerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VmManagerType) Values() []VmManagerType {
 	return []VmManagerType{
 		"VSPHERE",

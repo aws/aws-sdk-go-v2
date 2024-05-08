@@ -10,9 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified portfolio. You cannot delete a portfolio if it was shared
-// with you or if it has associated products, users, constraints, or shared
-// accounts. A delegated admin is authorized to invoke this command.
+// Deletes the specified portfolio.
+//
+// You cannot delete a portfolio if it was shared with you or if it has associated
+// products, users, constraints, or shared accounts.
+//
+// A delegated admin is authorized to invoke this command.
 func (c *Client) DeletePortfolio(ctx context.Context, params *DeletePortfolioInput, optFns ...func(*Options)) (*DeletePortfolioOutput, error) {
 	if params == nil {
 		params = &DeletePortfolioInput{}
@@ -36,7 +39,9 @@ type DeletePortfolioInput struct {
 	Id *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

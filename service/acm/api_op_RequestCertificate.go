@@ -14,18 +14,25 @@ import (
 // Requests an ACM certificate for use with other Amazon Web Services services. To
 // request an ACM certificate, you must specify a fully qualified domain name
 // (FQDN) in the DomainName parameter. You can also specify additional FQDNs in
-// the SubjectAlternativeNames parameter. If you are requesting a private
-// certificate, domain validation is not required. If you are requesting a public
-// certificate, each domain name that you specify must be validated to verify that
-// you own or control the domain. You can use DNS validation (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html)
-// or email validation (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html)
+// the SubjectAlternativeNames parameter.
+//
+// If you are requesting a private certificate, domain validation is not required.
+// If you are requesting a public certificate, each domain name that you specify
+// must be validated to verify that you own or control the domain. You can use [DNS validation]or [email validation]
 // . We recommend that you use DNS validation. ACM issues public certificates after
-// receiving approval from the domain owner. ACM behavior differs from the RFC 6125 (https://datatracker.ietf.org/doc/html/rfc6125#appendix-B.2)
-// specification of the certificate validation process. ACM first checks for a
-// Subject Alternative Name, and, if it finds one, ignores the common name (CN).
+// receiving approval from the domain owner.
+//
+// ACM behavior differs from the [RFC 6125] specification of the certificate validation
+// process. ACM first checks for a Subject Alternative Name, and, if it finds one,
+// ignores the common name (CN).
+//
 // After successful completion of the RequestCertificate action, there is a delay
 // of several seconds before you can retrieve information about the new
 // certificate.
+//
+// [email validation]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+// [RFC 6125]: https://datatracker.ietf.org/doc/html/rfc6125#appendix-B.2
+// [DNS validation]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
 func (c *Client) RequestCertificate(ctx context.Context, params *RequestCertificateInput, optFns ...func(*Options)) (*RequestCertificateOutput, error) {
 	if params == nil {
 		params = &RequestCertificateInput{}
@@ -47,11 +54,14 @@ type RequestCertificateInput struct {
 	// secure with an ACM certificate. Use an asterisk (*) to create a wildcard
 	// certificate that protects several sites in the same domain. For example,
 	// *.example.com protects www.example.com, site.example.com, and
-	// images.example.com. In compliance with RFC 5280 (https://datatracker.ietf.org/doc/html/rfc5280)
-	// , the length of the domain name (technically, the Common Name) that you provide
-	// cannot exceed 64 octets (characters), including periods. To add a longer domain
-	// name, specify it in the Subject Alternative Name field, which supports names up
-	// to 253 octets in length.
+	// images.example.com.
+	//
+	// In compliance with [RFC 5280], the length of the domain name (technically, the Common
+	// Name) that you provide cannot exceed 64 octets (characters), including periods.
+	// To add a longer domain name, specify it in the Subject Alternative Name field,
+	// which supports names up to 253 octets in length.
+	//
+	// [RFC 5280]: https://datatracker.ietf.org/doc/html/rfc5280
 	//
 	// This member is required.
 	DomainName *string
@@ -59,10 +69,12 @@ type RequestCertificateInput struct {
 	// The Amazon Resource Name (ARN) of the private certificate authority (CA) that
 	// will be used to issue the certificate. If you do not provide an ARN and you are
 	// trying to request a private certificate, ACM will attempt to issue a public
-	// certificate. For more information about private CAs, see the Amazon Web
-	// Services Private Certificate Authority (https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html)
-	// user guide. The ARN must have the following form:
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// certificate. For more information about private CAs, see the [Amazon Web Services Private Certificate Authority]user guide. The
+	// ARN must have the following form:
+	//
+	//     arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// [Amazon Web Services Private Certificate Authority]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaWelcome.html
 	CertificateAuthorityArn *string
 
 	// The domain name that you want ACM to use to send you emails so that you can
@@ -85,16 +97,18 @@ type RequestCertificateInput struct {
 	// services may require RSA keys, or only support ECDSA keys of a particular size,
 	// while others allow the use of either RSA and ECDSA keys to ensure that
 	// compatibility is not broken. Check the requirements for the AWS service where
-	// you plan to deploy your certificate. Default: RSA_2048
+	// you plan to deploy your certificate.
+	//
+	// Default: RSA_2048
 	KeyAlgorithm types.KeyAlgorithm
 
 	// Currently, you can use this parameter to specify whether to add the certificate
 	// to a certificate transparency log. Certificate transparency makes it possible to
 	// detect SSL/TLS certificates that have been mistakenly or maliciously issued.
 	// Certificates that have not been logged typically produce an error message in a
-	// browser. For more information, see Opting Out of Certificate Transparency
-	// Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency)
-	// .
+	// browser. For more information, see [Opting Out of Certificate Transparency Logging].
+	//
+	// [Opting Out of Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
 	Options *types.CertificateOptions
 
 	// Additional FQDNs to be included in the Subject Alternative Name extension of
@@ -103,26 +117,34 @@ type RequestCertificateInput struct {
 	// by using either name. The maximum number of domain names that you can add to an
 	// ACM certificate is 100. However, the initial quota is 10 domain names. If you
 	// need more than 10 names, you must request a quota increase. For more
-	// information, see Quotas (https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html)
-	// . The maximum length of a SAN DNS name is 253 octets. The name is made up of
+	// information, see [Quotas].
+	//
+	// The maximum length of a SAN DNS name is 253 octets. The name is made up of
 	// multiple labels separated by periods. No label can be longer than 63 octets.
 	// Consider the following examples:
+	//
 	//   - (63 octets).(63 octets).(63 octets).(61 octets) is legal because the total
 	//   length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63 octets.
+	//
 	//   - (64 octets).(63 octets).(63 octets).(61 octets) is not legal because the
 	//   total length exceeds 253 octets (64+1+63+1+63+1+61) and the first label exceeds
 	//   63 octets.
+	//
 	//   - (63 octets).(63 octets).(63 octets).(62 octets) is not legal because the
 	//   total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.
+	//
+	// [Quotas]: https://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
 	SubjectAlternativeNames []string
 
 	// One or more resource tags to associate with the certificate.
 	Tags []types.Tag
 
 	// The method you want to use if you are requesting a public certificate to
-	// validate that you own or control domain. You can validate with DNS (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html)
-	// or validate with email (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html)
-	// . We recommend that you use DNS validation.
+	// validate that you own or control domain. You can [validate with DNS]or [validate with email]. We recommend that you use
+	// DNS validation.
+	//
+	// [validate with email]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+	// [validate with DNS]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
 	ValidationMethod types.ValidationMethod
 
 	noSmithyDocumentSerde
@@ -132,7 +154,8 @@ type RequestCertificateOutput struct {
 
 	// String that contains the ARN of the issued certificate. This must be of the
 	// form:
-	// arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	//
+	//     arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	CertificateArn *string
 
 	// Metadata pertaining to the operation's result.

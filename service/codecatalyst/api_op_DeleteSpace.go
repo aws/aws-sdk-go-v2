@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a space. Deleting a space cannot be undone. Additionally, since space
-// names must be unique across Amazon CodeCatalyst, you cannot reuse names of
-// deleted spaces.
+// Deletes a space.
+//
+// Deleting a space cannot be undone. Additionally, since space names must be
+// unique across Amazon CodeCatalyst, you cannot reuse names of deleted spaces.
 func (c *Client) DeleteSpace(ctx context.Context, params *DeleteSpaceInput, optFns ...func(*Options)) (*DeleteSpaceOutput, error) {
 	if params == nil {
 		params = &DeleteSpaceInput{}
@@ -30,7 +31,7 @@ func (c *Client) DeleteSpace(ctx context.Context, params *DeleteSpaceInput, optF
 
 type DeleteSpaceInput struct {
 
-	// The name of the space. To retrieve a list of space names, use ListSpaces .
+	// The name of the space. To retrieve a list of space names, use ListSpaces.
 	//
 	// This member is required.
 	Name *string

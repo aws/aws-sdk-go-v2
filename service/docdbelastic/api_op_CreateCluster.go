@@ -30,17 +30,26 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 
 type CreateClusterInput struct {
 
-	// The name of the Amazon DocumentDB elastic clusters administrator. Constraints:
+	// The name of the Amazon DocumentDB elastic clusters administrator.
+	//
+	// Constraints:
+	//
 	//   - Must be from 1 to 63 letters or numbers.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - Cannot be a reserved word.
 	//
 	// This member is required.
 	AdminUserName *string
 
 	// The password for the Amazon DocumentDB elastic clusters administrator. The
-	// password can contain any printable ASCII characters. Constraints:
+	// password can contain any printable ASCII characters.
+	//
+	// Constraints:
+	//
 	//   - Must contain from 8 to 100 characters.
+	//
 	//   - Cannot contain a forward slash (/), double quote ("), or the "at" symbol
 	//   (@).
 	//
@@ -54,10 +63,16 @@ type CreateClusterInput struct {
 	AuthType types.Auth
 
 	// The name of the new elastic cluster. This parameter is stored as a lowercase
-	// string. Constraints:
+	// string.
+	//
+	// Constraints:
+	//
 	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: my-cluster
 	//
 	// This member is required.
@@ -80,13 +95,16 @@ type CreateClusterInput struct {
 	// The client token for the elastic cluster.
 	ClientToken *string
 
-	// The KMS key identifier to use to encrypt the new elastic cluster. The KMS key
-	// identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you
-	// are creating a cluster using the same Amazon account that owns this KMS
-	// encryption key, you can use the KMS key alias instead of the ARN as the KMS
-	// encryption key. If an encryption key is not specified, Amazon DocumentDB uses
-	// the default encryption key that KMS creates for your account. Your account has a
-	// different default encryption key for each Amazon Region.
+	// The KMS key identifier to use to encrypt the new elastic cluster.
+	//
+	// The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption
+	// key. If you are creating a cluster using the same Amazon account that owns this
+	// KMS encryption key, you can use the KMS key alias instead of the ARN as the KMS
+	// encryption key.
+	//
+	// If an encryption key is not specified, Amazon DocumentDB uses the default
+	// encryption key that KMS creates for your account. Your account has a different
+	// default encryption key for each Amazon Region.
 	KmsKeyId *string
 
 	// The daily time range during which automated backups are created if automated
@@ -94,10 +112,16 @@ type CreateClusterInput struct {
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi Default: a 30-minute
-	// window selected at random from an 8-hour block of time for each Amazon Web
-	// Services Region, occurring on a random day of the week. Valid days: Mon, Tue,
-	// Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// Coordinated Time (UTC).
+	//
+	// Format: ddd:hh24:mi-ddd:hh24:mi
+	//
+	// Default: a 30-minute window selected at random from an 8-hour block of time for
+	// each Amazon Web Services Region, occurring on a random day of the week.
+	//
+	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+	//
+	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// The number of replica instances applying to all shards in the elastic cluster.

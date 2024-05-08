@@ -29,7 +29,7 @@ func (c *Client) GetAssessment(ctx context.Context, params *GetAssessmentInput, 
 
 type GetAssessmentInput struct {
 
-	// The assessmentid returned by StartAssessment .
+	//  The assessmentid returned by StartAssessment.
 	//
 	// This member is required.
 	Id *string
@@ -42,10 +42,10 @@ type GetAssessmentOutput struct {
 	// List of criteria for assessment.
 	AssessmentTargets []types.AssessmentTarget
 
-	// Detailed information about the assessment.
+	//  Detailed information about the assessment.
 	DataCollectionDetails *types.DataCollectionDetails
 
-	// The ID for the specific assessment task.
+	//  The ID for the specific assessment task.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

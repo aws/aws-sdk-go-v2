@@ -12,16 +12,19 @@ import (
 )
 
 // Creates an Amazon Rekognition stream processor that you can use to detect and
-// recognize faces or to detect labels in a streaming video. Amazon Rekognition
-// Video is a consumer of live video from Amazon Kinesis Video Streams. There are
-// two different settings for stream processors in Amazon Rekognition: detecting
-// faces and detecting labels.
+// recognize faces or to detect labels in a streaming video.
+//
+// Amazon Rekognition Video is a consumer of live video from Amazon Kinesis Video
+// Streams. There are two different settings for stream processors in Amazon
+// Rekognition: detecting faces and detecting labels.
+//
 //   - If you are creating a stream processor for detecting faces, you provide as
 //     input a Kinesis video stream ( Input ) and a Kinesis data stream ( Output )
 //     stream for receiving the output. You must use the FaceSearch option in
 //     Settings , specifying the collection that contains the faces you want to
-//     recognize. After you have finished analyzing a streaming video, use
-//     StopStreamProcessor to stop processing.
+//     recognize. After you have finished analyzing a streaming video, use StopStreamProcessorto stop
+//     processing.
+//
 //   - If you are creating a stream processor to detect labels, you provide as
 //     input a Kinesis video stream ( Input ), Amazon S3 bucket information ( Output
 //     ), and an Amazon SNS topic ARN ( NotificationChannel ). You can also provide a
@@ -29,16 +32,18 @@ import (
 //     you want to detect by using the ConnectedHome option in settings, and
 //     selecting one of the following: PERSON , PET , PACKAGE , ALL You can also
 //     specify where in the frame you want Amazon Rekognition to monitor with
-//     RegionsOfInterest . When you run the StartStreamProcessor operation on a label
-//     detection stream processor, you input start and stop information to determine
-//     the length of the processing time.
+//     RegionsOfInterest . When you run the StartStreamProcessoroperation on a label detection stream
+//     processor, you input start and stop information to determine the length of the
+//     processing time.
 //
 // Use Name to assign an identifier for the stream processor. You use Name to
 // manage the stream processor. For example, you can start processing the source
-// video by calling StartStreamProcessor with the Name field. This operation
-// requires permissions to perform the rekognition:CreateStreamProcessor action.
-// If you want to tag your stream processor, you also require permission to perform
-// the rekognition:TagResource operation.
+// video by calling StartStreamProcessorwith the Name field.
+//
+// This operation requires permissions to perform the
+// rekognition:CreateStreamProcessor action. If you want to tag your stream
+// processor, you also require permission to perform the rekognition:TagResource
+// operation.
 func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStreamProcessorInput, optFns ...func(*Options)) (*CreateStreamProcessorOutput, error) {
 	if params == nil {
 		params = &CreateStreamProcessorInput{}
@@ -65,17 +70,17 @@ type CreateStreamProcessorInput struct {
 
 	// An identifier you assign to the stream processor. You can use Name to manage
 	// the stream processor. For example, you can get the current status of the stream
-	// processor by calling DescribeStreamProcessor . Name is idempotent. This is
-	// required for both face search and label detection stream processors.
+	// processor by calling DescribeStreamProcessor. Name is idempotent. This is required for both face
+	// search and label detection stream processors.
 	//
 	// This member is required.
 	Name *string
 
 	// Kinesis data stream stream or Amazon S3 bucket location to which Amazon
 	// Rekognition Video puts the analysis results. If you are using the AWS CLI, the
-	// parameter name is StreamProcessorOutput . This must be a S3Destination of an
-	// Amazon S3 bucket that you own for a label detection stream processor or a
-	// Kinesis data stream ARN for a face search stream processor.
+	// parameter name is StreamProcessorOutput . This must be a S3Destination of an Amazon S3
+	// bucket that you own for a label detection stream processor or a Kinesis data
+	// stream ARN for a face search stream processor.
 	//
 	// This member is required.
 	Output *types.StreamProcessorOutput
@@ -96,13 +101,13 @@ type CreateStreamProcessorInput struct {
 	// This member is required.
 	Settings *types.StreamProcessorSettings
 
-	// Shows whether you are sharing data with Rekognition to improve model
+	//  Shows whether you are sharing data with Rekognition to improve model
 	// performance. You can choose this option at the account level or on a per-stream
 	// basis. Note that if you opt out at the account level this setting is ignored on
 	// individual streams.
 	DataSharingPreference *types.StreamProcessorDataSharingPreference
 
-	// The identifier for your AWS Key Management Service key (AWS KMS key). This is
+	//  The identifier for your AWS Key Management Service key (AWS KMS key). This is
 	// an optional parameter for label detection stream processors and should not be
 	// used to create a face search stream processor. You can supply the Amazon
 	// Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your
@@ -113,23 +118,27 @@ type CreateStreamProcessorInput struct {
 
 	// The Amazon Simple Notification Service topic to which Amazon Rekognition
 	// publishes the object detection results and completion status of a video analysis
-	// operation. Amazon Rekognition publishes a notification the first time an object
-	// of interest or a person is detected in the video stream. For example, if Amazon
+	// operation.
+	//
+	// Amazon Rekognition publishes a notification the first time an object of
+	// interest or a person is detected in the video stream. For example, if Amazon
 	// Rekognition detects a person at second 2, a pet at second 4, and a person again
 	// at second 5, Amazon Rekognition sends 2 object class detected notifications, one
-	// for a person at second 2 and one for a pet at second 4. Amazon Rekognition also
-	// publishes an an end-of-session notification with a summary when the stream
-	// processing session is complete.
+	// for a person at second 2 and one for a pet at second 4.
+	//
+	// Amazon Rekognition also publishes an an end-of-session notification with a
+	// summary when the stream processing session is complete.
 	NotificationChannel *types.StreamProcessorNotificationChannel
 
-	// Specifies locations in the frames where Amazon Rekognition checks for objects
+	//  Specifies locations in the frames where Amazon Rekognition checks for objects
 	// or people. You can specify up to 10 regions of interest, and each region has
 	// either a polygon or a bounding box. This is an optional parameter for label
 	// detection stream processors and should not be used to create a face search
 	// stream processor.
 	RegionsOfInterest []types.RegionOfInterest
 
-	// A set of tags (key-value pairs) that you want to attach to the stream processor.
+	//  A set of tags (key-value pairs) that you want to attach to the stream
+	// processor.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

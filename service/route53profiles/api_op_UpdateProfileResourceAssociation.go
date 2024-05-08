@@ -29,18 +29,19 @@ func (c *Client) UpdateProfileResourceAssociation(ctx context.Context, params *U
 
 type UpdateProfileResourceAssociationInput struct {
 
-	// ID of the resource association.
+	//  ID of the resource association.
 	//
 	// This member is required.
 	ProfileResourceAssociationId *string
 
-	// Name of the resource association.
+	//  Name of the resource association.
 	Name *string
 
-	// If you are adding a DNS Firewall rule group, include also a priority. The
+	//  If you are adding a DNS Firewall rule group, include also a priority. The
 	// priority indicates the processing order for the rule groups, starting with the
-	// priority assinged the lowest value. The allowed values for priority are between
-	// 100 and 9900.
+	// priority assinged the lowest value.
+	//
+	// The allowed values for priority are between 100 and 9900.
 	ResourceProperties *string
 
 	noSmithyDocumentSerde
@@ -48,7 +49,7 @@ type UpdateProfileResourceAssociationInput struct {
 
 type UpdateProfileResourceAssociationOutput struct {
 
-	// Information about the UpdateProfileResourceAssociation request, including a
+	//  Information about the UpdateProfileResourceAssociation request, including a
 	// status message.
 	ProfileResourceAssociation *types.ProfileResourceAssociation
 

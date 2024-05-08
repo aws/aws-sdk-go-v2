@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Creates a custom slot type To create a custom slot type, specify a name for the
-// slot type and a set of enumeration values, the values that a slot of this type
-// can assume.
+// Creates a custom slot type
+//
+// To create a custom slot type, specify a name for the slot type and a set of
+// enumeration values, the values that a slot of this type can assume.
 func (c *Client) CreateSlotType(ctx context.Context, params *CreateSlotTypeInput, optFns ...func(*Options)) (*CreateSlotTypeOutput, error) {
 	if params == nil {
 		params = &CreateSlotTypeInput{}
@@ -45,8 +46,9 @@ type CreateSlotTypeInput struct {
 	// The identifier of the language and locale that the slot type will be used in.
 	// The string must match one of the supported locales. All of the bots, intents,
 	// and slots used by the slot type must have the same locale. For more information,
-	// see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -68,7 +70,9 @@ type CreateSlotTypeInput struct {
 
 	// The built-in slot type used as a parent of this slot type. When you define a
 	// parent slot type, the new slot type has the configuration of the parent slot
-	// type. Only AMAZON.AlphaNumeric is supported.
+	// type.
+	//
+	// Only AMAZON.AlphaNumeric is supported.
 	ParentSlotTypeSignature *string
 
 	// A list of SlotTypeValue objects that defines the values that the slot type can
@@ -78,8 +82,10 @@ type CreateSlotTypeInput struct {
 
 	// Determines the strategy that Amazon Lex uses to select a value from the list of
 	// possible values. The field can be set to one of the following values:
+	//
 	//   - ORIGINAL_VALUE - Returns the value entered by the user, if the user value is
 	//   similar to the slot value.
+	//
 	//   - TOP_RESOLUTION - If there is a resolution list for the slot, return the
 	//   first value in the resolution list. If there is no resolution list, return null.
 	//

@@ -13,8 +13,10 @@ import (
 
 // Adds one or more key-value tags to an Amazon Lookout for Vision model. For more
 // information, see Tagging a model in the Amazon Lookout for Vision Developer
-// Guide. This operation requires permissions to perform the
-// lookoutvision:TagResource operation.
+// Guide.
+//
+// This operation requires permissions to perform the lookoutvision:TagResource
+// operation.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

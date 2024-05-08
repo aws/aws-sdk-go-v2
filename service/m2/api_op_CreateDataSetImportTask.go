@@ -39,7 +39,7 @@ type CreateDataSetImportTaskInput struct {
 	// This member is required.
 	ImportConfig types.DataSetImportConfig
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
+	//  Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request to create a data set import. The service generates the clientToken when
 	// the API call is triggered. The token expires after one hour, so if you retry the
 	// API within this timeframe with the same clientToken, you will get the same
@@ -52,7 +52,7 @@ type CreateDataSetImportTaskInput struct {
 type CreateDataSetImportTaskOutput struct {
 
 	// The task identifier. This operation is asynchronous. Use this identifier with
-	// the GetDataSetImportTask operation to obtain the status of this task.
+	// the GetDataSetImportTaskoperation to obtain the status of this task.
 	//
 	// This member is required.
 	TaskId *string

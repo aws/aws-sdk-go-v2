@@ -30,6 +30,7 @@ func (c *Client) ListTokens(ctx context.Context, params *ListTokensInput, optFns
 type ListTokensInput struct {
 
 	// Filters to scope the results. The following filter is supported:
+	//
 	//   - LicenseArns
 	Filters []types.Filter
 

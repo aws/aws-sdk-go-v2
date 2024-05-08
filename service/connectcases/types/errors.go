@@ -121,9 +121,10 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service quota has been exceeded. For a list of service quotas, see Amazon
-// Connect Service Quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
-// in the Amazon Connect Administrator Guide.
+// The service quota has been exceeded. For a list of service quotas, see [Amazon Connect Service Quotas] in the
+// Amazon Connect Administrator Guide.
+//
+// [Amazon Connect Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

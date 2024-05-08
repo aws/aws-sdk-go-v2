@@ -12,8 +12,9 @@ import (
 )
 
 // Creates a snapshot of all databases in a namespace. For more information about
-// snapshots, see Working with snapshots and recovery points (https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html)
-// .
+// snapshots, see [Working with snapshots and recovery points].
+//
+// [Working with snapshots and recovery points]: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotInput{}
@@ -44,8 +45,9 @@ type CreateSnapshotInput struct {
 	// How long to retain the created snapshot.
 	RetentionPeriod *int32
 
-	// An array of Tag objects (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html)
-	// to associate with the snapshot.
+	// An array of [Tag objects] to associate with the snapshot.
+	//
+	// [Tag objects]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

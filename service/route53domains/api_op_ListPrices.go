@@ -13,10 +13,15 @@ import (
 
 // Lists the following prices for either all the TLDs supported by Route 53, or
 // the specified TLD:
+//
 //   - Registration
+//
 //   - Transfer
+//
 //   - Owner change
+//
 //   - Domain renewal
+//
 //   - Domain restoration
 func (c *Client) ListPrices(ctx context.Context, params *ListPricesInput, optFns ...func(*Options)) (*ListPricesOutput, error) {
 	if params == nil {
@@ -39,16 +44,20 @@ type ListPricesInput struct {
 	// of prices that are not yet complete is greater than the value that you specified
 	// for MaxItems , you can use Marker to return additional prices. Get the value of
 	// NextPageMarker from the previous response, and submit another request that
-	// includes the value of NextPageMarker in the Marker element. Used only for all
-	// TLDs. If you specify a TLD, don't specify a Marker .
+	// includes the value of NextPageMarker in the Marker element.
+	//
+	// Used only for all TLDs. If you specify a TLD, don't specify a Marker .
 	Marker *string
 
-	// Number of Prices to be returned. Used only for all TLDs. If you specify a TLD,
-	// don't specify a MaxItems .
+	// Number of Prices to be returned.
+	//
+	// Used only for all TLDs. If you specify a TLD, don't specify a MaxItems .
 	MaxItems *int32
 
 	// The TLD for which you want to receive the pricing information. For example. .net
-	// . If a Tld value is not provided, a list of prices for all TLDs supported by
+	// .
+	//
+	// If a Tld value is not provided, a list of prices for all TLDs supported by
 	// Route 53 is returned.
 	Tld *string
 
@@ -59,6 +68,7 @@ type ListPricesOutput struct {
 
 	// If there are more prices than you specified for MaxItems in the request, submit
 	// another request and include the value of NextPageMarker in the value of Marker .
+	//
 	// Used only for all TLDs. If you specify a TLD, don't specify a NextPageMarker .
 	NextPageMarker *string
 
@@ -157,8 +167,9 @@ var _ ListPricesAPIClient = (*Client)(nil)
 
 // ListPricesPaginatorOptions is the paginator options for ListPrices
 type ListPricesPaginatorOptions struct {
-	// Number of Prices to be returned. Used only for all TLDs. If you specify a TLD,
-	// don't specify a MaxItems .
+	// Number of Prices to be returned.
+	//
+	// Used only for all TLDs. If you specify a TLD, don't specify a MaxItems .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

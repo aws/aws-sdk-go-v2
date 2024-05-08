@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListTableColumns API allows you to retrieve a list of all the columns in a
+//	The ListTableColumns API allows you to retrieve a list of all the columns in a
+//
 // table in a workbook.
 func (c *Client) ListTableColumns(ctx context.Context, params *ListTableColumnsInput, optFns ...func(*Options)) (*ListTableColumnsOutput, error) {
 	if params == nil {
@@ -30,23 +31,28 @@ func (c *Client) ListTableColumns(ctx context.Context, params *ListTableColumnsI
 
 type ListTableColumnsInput struct {
 
-	// The ID of the table whose columns are being retrieved. If a table with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table whose columns are being retrieved.
+	//
+	// If a table with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	TableId *string
 
 	// The ID of the workbook that contains the table whose columns are being
-	// retrieved. If a workbook with the specified id could not be found, this API
-	// throws ResourceNotFoundException.
+	// retrieved.
+	//
+	// If a workbook with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	WorkbookId *string
 
-	// This parameter is optional. If a nextToken is not specified, the API returns
-	// the first page of data. Pagination tokens expire after 1 hour. If you use a
-	// token that was returned more than an hour back, the API will throw
-	// ValidationException.
+	//  This parameter is optional. If a nextToken is not specified, the API returns
+	// the first page of data.
+	//
+	// Pagination tokens expire after 1 hour. If you use a token that was returned
+	// more than an hour back, the API will throw ValidationException.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,19 +60,19 @@ type ListTableColumnsInput struct {
 
 type ListTableColumnsOutput struct {
 
-	// The list of columns in the table.
+	//  The list of columns in the table.
 	//
 	// This member is required.
 	TableColumns []types.TableColumn
 
-	// Provides the pagination token to load the next page if there are more results
+	//  Provides the pagination token to load the next page if there are more results
 	// matching the request. If a pagination token is not present in the response, it
 	// means that all data matching the request has been loaded.
 	NextToken *string
 
-	// Indicates the cursor of the workbook at which the data returned by this request
-	// is read. Workbook cursor keeps increasing with every update and the increments
-	// are not sequential.
+	//  Indicates the cursor of the workbook at which the data returned by this
+	// request is read. Workbook cursor keeps increasing with every update and the
+	// increments are not sequential.
 	WorkbookCursor int64
 
 	// Metadata pertaining to the operation's result.

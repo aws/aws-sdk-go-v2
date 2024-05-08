@@ -14,8 +14,10 @@ import (
 
 // Update the specified origin endpoint. Edit the packaging preferences on an
 // endpoint to optimize the viewing experience. You can't edit the name of the
-// endpoint. Any edits you make that impact the video output may not be reflected
-// for a few minutes.
+// endpoint.
+//
+// Any edits you make that impact the video output may not be reflected for a few
+// minutes.
 func (c *Client) UpdateOriginEndpoint(ctx context.Context, params *UpdateOriginEndpointInput, optFns ...func(*Options)) (*UpdateOriginEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateOriginEndpointInput{}

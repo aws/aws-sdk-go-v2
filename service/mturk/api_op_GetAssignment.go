@@ -39,10 +39,10 @@ type GetAssignmentInput struct {
 
 type GetAssignmentOutput struct {
 
-	// The assignment. The response includes one Assignment element.
+	//  The assignment. The response includes one Assignment element.
 	Assignment *types.Assignment
 
-	// The HIT associated with this assignment. The response includes one HIT element.
+	//  The HIT associated with this assignment. The response includes one HIT element.
 	HIT *types.HIT
 
 	// Metadata pertaining to the operation's result.

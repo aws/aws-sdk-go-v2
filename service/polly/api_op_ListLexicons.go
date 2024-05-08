@@ -12,8 +12,9 @@ import (
 )
 
 // Returns a list of pronunciation lexicons stored in an Amazon Web Services
-// Region. For more information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html)
-// .
+// Region. For more information, see [Managing Lexicons].
+//
+// [Managing Lexicons]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
 func (c *Client) ListLexicons(ctx context.Context, params *ListLexiconsInput, optFns ...func(*Options)) (*ListLexiconsOutput, error) {
 	if params == nil {
 		params = &ListLexiconsInput{}

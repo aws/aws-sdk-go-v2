@@ -33,18 +33,21 @@ type ListMonitorsInput struct {
 	// A boolean option that you can set to TRUE to include monitors for linked
 	// accounts in a list of monitors, when you've set up cross-account sharing in
 	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
-	// Amazon CloudWatch Observability Access Manager. For more information, see
-	// Internet Monitor cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html)
-	// in the Amazon CloudWatch Internet Monitor User Guide.
+	// Amazon CloudWatch Observability Access Manager. For more information, see [Internet Monitor cross-account observability]in
+	// the Amazon CloudWatch Internet Monitor User Guide.
+	//
+	// [Internet Monitor cross-account observability]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
 	IncludeLinkedAccounts *bool
 
 	// The number of monitor objects that you want to return with this call.
 	MaxResults *int32
 
 	// The status of a monitor. This includes the status of the data processing for
-	// the monitor and the status of the monitor itself. For information about the
-	// statuses for a monitor, see Monitor (https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html)
-	// .
+	// the monitor and the status of the monitor itself.
+	//
+	// For information about the statuses for a monitor, see [Monitor].
+	//
+	// [Monitor]: https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html
 	MonitorStatus *string
 
 	// The token for the next set of results. You receive this token from a previous

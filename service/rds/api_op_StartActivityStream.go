@@ -12,10 +12,11 @@ import (
 )
 
 // Starts a database activity stream to monitor activity on the database. For more
-// information, see Monitoring Amazon Aurora with Database Activity Streams (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
-// in the Amazon Aurora User Guide or Monitoring Amazon RDS with Database Activity
-// Streams (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
-// in the Amazon RDS User Guide.
+// information, see [Monitoring Amazon Aurora with Database Activity Streams]in the Amazon Aurora User Guide or [Monitoring Amazon RDS with Database Activity Streams] in the Amazon RDS User
+// Guide.
+//
+// [Monitoring Amazon Aurora with Database Activity Streams]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+// [Monitoring Amazon RDS with Database Activity Streams]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html
 func (c *Client) StartActivityStream(ctx context.Context, params *StartActivityStreamInput, optFns ...func(*Options)) (*StartActivityStreamOutput, error) {
 	if params == nil {
 		params = &StartActivityStreamInput{}

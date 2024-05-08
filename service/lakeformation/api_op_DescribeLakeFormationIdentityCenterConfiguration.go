@@ -61,10 +61,14 @@ type DescribeLakeFormationIdentityCenterConfigurationOutput struct {
 
 	// A list of Amazon Web Services account IDs or Amazon Web Services
 	// organization/organizational unit ARNs that are allowed to access data managed by
-	// Lake Formation. If the ShareRecipients list includes valid values, a resource
-	// share is created with the principals you want to have access to the resources as
-	// the ShareRecipients . If the ShareRecipients value is null or the list is
-	// empty, no resource share is created.
+	// Lake Formation.
+	//
+	// If the ShareRecipients list includes valid values, a resource share is created
+	// with the principals you want to have access to the resources as the
+	// ShareRecipients .
+	//
+	// If the ShareRecipients value is null or the list is empty, no resource share is
+	// created.
 	ShareRecipients []types.DataLakePrincipal
 
 	// Metadata pertaining to the operation's result.

@@ -40,9 +40,12 @@ type CreateIAMPolicyAssignmentInput struct {
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:
+	//
 	//   - ENABLED - Anything specified in this assignment is used when creating the
 	//   data source.
+	//
 	//   - DISABLED - This assignment isn't used when creating the data source.
+	//
 	//   - DRAFT - This assignment is an unfinished draft and isn't used when creating
 	//   the data source.
 	//
@@ -81,9 +84,12 @@ type CreateIAMPolicyAssignmentOutput struct {
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:
+	//
 	//   - ENABLED - Anything specified in this assignment is used when creating the
 	//   data source.
+	//
 	//   - DISABLED - This assignment isn't used when creating the data source.
+	//
 	//   - DRAFT - This assignment is an unfinished draft and isn't used when creating
 	//   the data source.
 	AssignmentStatus types.AssignmentStatus

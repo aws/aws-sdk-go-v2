@@ -301,7 +301,9 @@ type BudgetSummary struct {
 	DisplayName *string
 
 	// The status of the budget.
+	//
 	//   - ACTIVE –The budget is being evaluated.
+	//
 	//   - INACTIVE –The budget is inactive. This can include Expired, Canceled, or
 	//   deleted Deleted statuses.
 	//
@@ -1346,15 +1348,25 @@ type JobSearchSummary struct {
 	TargetTaskRunStatus JobTargetTaskRunStatus
 
 	// task run status for the job.
+	//
 	//   - PENDING –pending and waiting for resources.
+	//
 	//   - READY –ready to be processed.
+	//
 	//   - ASSIGNED –assigned and will run next on a worker.
+	//
 	//   - SCHEDULED –scheduled to be run on a worker.
+	//
 	//   - INTERRUPTING –being interrupted.
+	//
 	//   - RUNNING –running on a worker.
+	//
 	//   - SUSPENDED –the task is suspended.
+	//
 	//   - CANCELED –the task has been canceled.
+	//
 	//   - FAILED –the task has failed.
+	//
 	//   - SUCCEEDED –the task has succeeded.
 	TaskRunStatus TaskRunStatus
 
@@ -1419,15 +1431,25 @@ type JobSummary struct {
 	TargetTaskRunStatus JobTargetTaskRunStatus
 
 	// The task run status for the job.
+	//
 	//   - PENDING –pending and waiting for resources.
+	//
 	//   - READY –ready to be processed.
+	//
 	//   - ASSIGNED –assigned and will run next on a worker.
+	//
 	//   - SCHEDULED –scheduled to be run on a worker.
+	//
 	//   - INTERRUPTING –being interrupted.
+	//
 	//   - RUNNING –running on a worker.
+	//
 	//   - SUSPENDED –the task is suspended.
+	//
 	//   - CANCELED –the task has been canceled.
+	//
 	//   - FAILED –the task has failed.
+	//
 	//   - SUCCEEDED –the task has succeeded.
 	TaskRunStatus TaskRunStatus
 
@@ -1744,11 +1766,15 @@ type QueueFleetAssociationSummary struct {
 	QueueId *string
 
 	// The status of task scheduling in the queue-fleet association.
+	//
 	//   - ACTIVE –Association is active.
+	//
 	//   - STOP_SCHEDULING_AND_COMPLETE_TASKS –Association has stopped scheduling new
 	//   tasks and is completing current tasks.
+	//
 	//   - STOP_SCHEDULING_AND_CANCEL_TASKS –Association has stopped scheduling new
 	//   tasks and is canceling current tasks.
+	//
 	//   - STOPPED –Association has been stopped.
 	//
 	// This member is required.
@@ -1943,8 +1969,9 @@ type SearchFilterExpressionMemberStringFilter struct {
 func (*SearchFilterExpressionMemberStringFilter) isSearchFilterExpression() {}
 
 // The filter expression, AND or OR , to use when searching among a group of search
-// strings in a resource. You can use two groupings per search each within
-// parenthesis () .
+// strings in a resource.
+//
+// You can use two groupings per search each within parenthesis () .
 type SearchGroupedFilterExpressions struct {
 
 	// The filters to use for the search.
@@ -2564,15 +2591,25 @@ type StepSearchSummary struct {
 	TargetTaskRunStatus StepTargetTaskRunStatus
 
 	// The task run status for the job.
+	//
 	//   - PENDING –pending and waiting for resources.
+	//
 	//   - READY –ready to be processed.
+	//
 	//   - ASSIGNED –assigned and will run next on a worker.
+	//
 	//   - SCHEDULED –scheduled to be run on a worker.
+	//
 	//   - INTERRUPTING –being interrupted.
+	//
 	//   - RUNNING –running on a worker.
+	//
 	//   - SUSPENDED –the task is suspended.
+	//
 	//   - CANCELED –the task has been canceled.
+	//
 	//   - FAILED –the task has failed.
+	//
 	//   - SUCCEEDED –the task has succeeded.
 	TaskRunStatus TaskRunStatus
 
@@ -2611,15 +2648,25 @@ type StepSummary struct {
 	StepId *string
 
 	// The task run status for the job.
+	//
 	//   - PENDING –pending and waiting for resources.
+	//
 	//   - READY –ready to process.
+	//
 	//   - ASSIGNED –assigned and will run next on a worker.
+	//
 	//   - SCHEDULED –scheduled to run on a worker.
+	//
 	//   - INTERRUPTING –being interrupted.
+	//
 	//   - RUNNING –running on a worker.
+	//
 	//   - SUSPENDED –the task is suspended.
+	//
 	//   - CANCELED –the task has been canceled.
+	//
 	//   - FAILED –the task has failed.
+	//
 	//   - SUCCEEDED –the task has succeeded.
 	//
 	// This member is required.

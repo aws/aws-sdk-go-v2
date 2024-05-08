@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the versions of a model in an Amazon Lookout for Vision project. The
-// ListModels operation is eventually consistent. Recent calls to CreateModel
-// might take a while to appear in the response from ListProjects . This operation
-// requires permissions to perform the lookoutvision:ListModels operation.
+// Lists the versions of a model in an Amazon Lookout for Vision project.
+//
+// The ListModels operation is eventually consistent. Recent calls to CreateModel
+// might take a while to appear in the response from ListProjects .
+//
+// This operation requires permissions to perform the lookoutvision:ListModels
+// operation.
 func (c *Client) ListModels(ctx context.Context, params *ListModelsInput, optFns ...func(*Options)) (*ListModelsOutput, error) {
 	if params == nil {
 		params = &ListModelsInput{}

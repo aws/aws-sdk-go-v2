@@ -11,9 +11,14 @@ import (
 )
 
 // Disassociates one or more specified tags from the specified AppStream 2.0
-// resource. To list the current tags for your resources, use ListTagsForResource .
-// For more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-// in the Amazon AppStream 2.0 Administration Guide.
+// resource.
+//
+// To list the current tags for your resources, use ListTagsForResource.
+//
+// For more information about tags, see [Tagging Your Resources] in the Amazon AppStream 2.0
+// Administration Guide.
+//
+// [Tagging Your Resources]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

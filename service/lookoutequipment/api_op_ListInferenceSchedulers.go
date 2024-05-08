@@ -33,14 +33,14 @@ type ListInferenceSchedulersInput struct {
 	// The beginning of the name of the inference schedulers to be listed.
 	InferenceSchedulerNameBeginsWith *string
 
-	// Specifies the maximum number of inference schedulers to list.
+	//  Specifies the maximum number of inference schedulers to list.
 	MaxResults *int32
 
 	// The name of the machine learning model used by the inference scheduler to be
 	// listed.
 	ModelName *string
 
-	// An opaque pagination token indicating where to continue the listing of
+	//  An opaque pagination token indicating where to continue the listing of
 	// inference schedulers.
 	NextToken *string
 
@@ -56,7 +56,7 @@ type ListInferenceSchedulersOutput struct {
 	// upload frequency, model name and ARN, and status.
 	InferenceSchedulerSummaries []types.InferenceSchedulerSummary
 
-	// An opaque pagination token indicating where to continue the listing of
+	//  An opaque pagination token indicating where to continue the listing of
 	// inference schedulers.
 	NextToken *string
 
@@ -153,7 +153,7 @@ var _ ListInferenceSchedulersAPIClient = (*Client)(nil)
 // ListInferenceSchedulersPaginatorOptions is the paginator options for
 // ListInferenceSchedulers
 type ListInferenceSchedulersPaginatorOptions struct {
-	// Specifies the maximum number of inference schedulers to list.
+	//  Specifies the maximum number of inference schedulers to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

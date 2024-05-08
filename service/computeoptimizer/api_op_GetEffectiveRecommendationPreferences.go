@@ -13,9 +13,10 @@ import (
 
 // Returns the recommendation preferences that are in effect for a given resource,
 // such as enhanced infrastructure metrics. Considers all applicable preferences
-// that you might have set at the resource, account, and organization level. When
-// you create a recommendation preference, you can set its status to Active or
-// Inactive . Use this action to view the recommendation preferences that are in
+// that you might have set at the resource, account, and organization level.
+//
+// When you create a recommendation preference, you can set its status to Active
+// or Inactive . Use this action to view the recommendation preferences that are in
 // effect, or Active .
 func (c *Client) GetEffectiveRecommendationPreferences(ctx context.Context, params *GetEffectiveRecommendationPreferencesInput, optFns ...func(*Options)) (*GetEffectiveRecommendationPreferencesOutput, error) {
 	if params == nil {
@@ -48,51 +49,68 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 
 	// The status of the enhanced infrastructure metrics recommendation preference.
 	// Considers all applicable preferences that you might have set at the resource,
-	// account, and organization level. A status of Active confirms that the
-	// preference is applied in the latest recommendation refresh, and a status of
-	// Inactive confirms that it's not yet applied to recommendations. To validate
-	// whether the preference is applied to your last generated set of recommendations,
-	// review the effectiveRecommendationPreferences value in the response of the
-	// GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations actions.
-	// For more information, see Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-	// in the Compute Optimizer User Guide.
+	// account, and organization level.
+	//
+	// A status of Active confirms that the preference is applied in the latest
+	// recommendation refresh, and a status of Inactive confirms that it's not yet
+	// applied to recommendations.
+	//
+	// To validate whether the preference is applied to your last generated set of
+	// recommendations, review the effectiveRecommendationPreferences value in the
+	// response of the GetAutoScalingGroupRecommendationsand GetEC2InstanceRecommendations actions.
+	//
+	// For more information, see [Enhanced infrastructure metrics] in the Compute Optimizer User Guide.
+	//
+	// [Enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 	EnhancedInfrastructureMetrics types.EnhancedInfrastructureMetrics
 
 	// The provider of the external metrics recommendation preference. Considers all
 	// applicable preferences that you might have set at the account and organization
-	// level. If the preference is applied in the latest recommendation refresh, an
-	// object with a valid source value appears in the response. If the preference
-	// isn't applied to the recommendations already, then this object doesn't appear in
-	// the response. To validate whether the preference is applied to your last
-	// generated set of recommendations, review the effectiveRecommendationPreferences
-	// value in the response of the GetEC2InstanceRecommendations actions. For more
-	// information, see Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
-	// in the Compute Optimizer User Guide.
+	// level.
+	//
+	// If the preference is applied in the latest recommendation refresh, an object
+	// with a valid source value appears in the response. If the preference isn't
+	// applied to the recommendations already, then this object doesn't appear in the
+	// response.
+	//
+	// To validate whether the preference is applied to your last generated set of
+	// recommendations, review the effectiveRecommendationPreferences value in the
+	// response of the GetEC2InstanceRecommendationsactions.
+	//
+	// For more information, see [Enhanced infrastructure metrics] in the Compute Optimizer User Guide.
+	//
+	// [Enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html
 	ExternalMetricsPreference *types.ExternalMetricsPreference
 
-	// The number of days the utilization metrics of the Amazon Web Services resource
-	// are analyzed. To validate that the preference is applied to your last generated
-	// set of recommendations, review the effectiveRecommendationPreferences value in
-	// the response of the GetAutoScalingGroupRecommendations or
+	//  The number of days the utilization metrics of the Amazon Web Services resource
+	// are analyzed.
+	//
+	// To validate that the preference is applied to your last generated set of
+	// recommendations, review the effectiveRecommendationPreferences value in the
+	// response of the GetAutoScalingGroupRecommendations or
 	// GetEC2InstanceRecommendations actions.
 	LookBackPeriod types.LookBackPeriodPreference
 
-	// The resource type values that are considered as candidates when generating
+	//  The resource type values that are considered as candidates when generating
 	// rightsizing recommendations. This object resolves any wildcard expressions and
 	// returns the effective list of candidate resource type values. It also considers
 	// all applicable preferences that you set at the resource, account, and
-	// organization level. To validate that the preference is applied to your last
-	// generated set of recommendations, review the effectiveRecommendationPreferences
-	// value in the response of the GetAutoScalingGroupRecommendations or
+	// organization level.
+	//
+	// To validate that the preference is applied to your last generated set of
+	// recommendations, review the effectiveRecommendationPreferences value in the
+	// response of the GetAutoScalingGroupRecommendations or
 	// GetEC2InstanceRecommendations actions.
 	PreferredResources []types.EffectivePreferredResource
 
-	// The resource’s CPU and memory utilization preferences, such as threshold and
+	//  The resource’s CPU and memory utilization preferences, such as threshold and
 	// headroom, that were used to generate rightsizing recommendations. It considers
 	// all applicable preferences that you set at the resource, account, and
-	// organization level. To validate that the preference is applied to your last
-	// generated set of recommendations, review the effectiveRecommendationPreferences
-	// value in the response of the GetAutoScalingGroupRecommendations or
+	// organization level.
+	//
+	// To validate that the preference is applied to your last generated set of
+	// recommendations, review the effectiveRecommendationPreferences value in the
+	// response of the GetAutoScalingGroupRecommendations or
 	// GetEC2InstanceRecommendations actions.
 	UtilizationPreferences []types.UtilizationPreference
 

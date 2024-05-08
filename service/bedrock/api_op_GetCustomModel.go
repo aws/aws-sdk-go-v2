@@ -13,8 +13,9 @@ import (
 )
 
 // Get the properties associated with a Amazon Bedrock custom model that you have
-// created.For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Amazon Bedrock User Guide.
+// created.For more information, see [Custom models]in the Amazon Bedrock User Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 func (c *Client) GetCustomModel(ctx context.Context, params *GetCustomModelInput, optFns ...func(*Options)) (*GetCustomModelOutput, error) {
 	if params == nil {
 		params = &GetCustomModelInput{}
@@ -81,8 +82,9 @@ type GetCustomModelOutput struct {
 	CustomizationType types.CustomizationType
 
 	// Hyperparameter values associated with this model. For details on the format for
-	// different models, see Custom model hyperparameters (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html)
-	// .
+	// different models, see [Custom model hyperparameters].
+	//
+	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
 	HyperParameters map[string]string
 
 	// Job name associated with this model.

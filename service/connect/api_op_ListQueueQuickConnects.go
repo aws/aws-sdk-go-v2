@@ -13,6 +13,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Lists the quick connects associated with a queue.
 func (c *Client) ListQueueQuickConnects(ctx context.Context, params *ListQueueQuickConnectsInput, optFns ...func(*Options)) (*ListQueueQuickConnectsOutput, error) {
 	if params == nil {
@@ -31,8 +32,10 @@ func (c *Client) ListQueueQuickConnects(ctx context.Context, params *ListQueueQu
 
 type ListQueueQuickConnectsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

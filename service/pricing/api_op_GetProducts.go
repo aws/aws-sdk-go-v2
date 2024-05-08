@@ -38,7 +38,9 @@ type GetProductsInput struct {
 	// all filters are returned.
 	Filters []types.Filter
 
-	// The format version that you want the response to be in. Valid values are: aws_v1
+	// The format version that you want the response to be in.
+	//
+	// Valid values are: aws_v1
 	FormatVersion *string
 
 	// The maximum number of results to return in the response.

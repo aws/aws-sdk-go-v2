@@ -23,7 +23,10 @@ type Cluster struct {
 	ClusterDiscoveryEndpoint *Endpoint
 
 	// The type of encryption supported by the cluster's endpoint. Values are:
-	//   - NONE for no encryption TLS for Transport Layer Security
+	//
+	//   - NONE for no encryption
+	//
+	// TLS for Transport Layer Security
 	ClusterEndpointEncryptionType ClusterEndpointEncryptionType
 
 	// The name of the DAX cluster.
@@ -270,9 +273,13 @@ type SecurityGroupMembership struct {
 type SSEDescription struct {
 
 	// The current state of server-side encryption:
+	//
 	//   - ENABLING - Server-side encryption is being enabled.
+	//
 	//   - ENABLED - Server-side encryption is enabled.
+	//
 	//   - DISABLING - Server-side encryption is being disabled.
+	//
 	//   - DISABLED - Server-side encryption is disabled.
 	Status SSEStatus
 
@@ -305,7 +312,9 @@ type Subnet struct {
 }
 
 // Represents the output of one of the following actions:
+//
 //   - CreateSubnetGroup
+//
 //   - ModifySubnetGroup
 type SubnetGroup struct {
 
@@ -325,10 +334,13 @@ type SubnetGroup struct {
 }
 
 // A description of a tag. Every tag is a key-value pair. You can add up to 50
-// tags to a single DAX cluster. AWS-assigned tag names and values are
-// automatically assigned the aws: prefix, which the user cannot assign.
-// AWS-assigned tag names do not count towards the tag limit of 50. User-assigned
-// tag names have the prefix user: . You cannot backdate the application of a tag.
+// tags to a single DAX cluster.
+//
+// AWS-assigned tag names and values are automatically assigned the aws: prefix,
+// which the user cannot assign. AWS-assigned tag names do not count towards the
+// tag limit of 50. User-assigned tag names have the prefix user: .
+//
+// You cannot backdate the application of a tag.
 type Tag struct {
 
 	// The key for the tag. Tag keys are case sensitive. Every DAX cluster can only

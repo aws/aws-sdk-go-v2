@@ -12,6 +12,7 @@ import (
 )
 
 // Loads the metadata for all the dependent database objects of the parent object.
+//
 // This operation uses your project's Amazon S3 bucket as a metadata cache to
 // improve performance.
 func (c *Client) StartMetadataModelImport(ctx context.Context, params *StartMetadataModelImportInput, optFns ...func(*Options)) (*StartMetadataModelImportOutput, error) {

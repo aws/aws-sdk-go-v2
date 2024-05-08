@@ -12,9 +12,10 @@ import (
 )
 
 // Creates a gateway, which is a virtual or edge device that delivers industrial
-// data streams from local servers to IoT SiteWise. For more information, see
-// Ingesting data using a gateway (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html)
-// in the IoT SiteWise User Guide.
+// data streams from local servers to IoT SiteWise. For more information, see [Ingesting data using a gateway]in
+// the IoT SiteWise User Guide.
+//
+// [Ingesting data using a gateway]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html
 func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, optFns ...func(*Options)) (*CreateGatewayOutput, error) {
 	if params == nil {
 		params = &CreateGatewayInput{}
@@ -43,8 +44,9 @@ type CreateGatewayInput struct {
 	GatewayPlatform *types.GatewayPlatform
 
 	// A list of key-value pairs that contain metadata for the gateway. For more
-	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
+	//
+	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -52,9 +54,11 @@ type CreateGatewayInput struct {
 
 type CreateGatewayOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the gateway, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	// The [ARN] of the gateway, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	GatewayArn *string

@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Stops a
-// running model. The operation might take a while to complete. To check the
-// current status, call DescribeProjectVersions . Only applies to Custom Labels
-// projects. This operation requires permissions to perform the
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Stops a running model. The operation might take a while to complete. To check
+// the current status, call DescribeProjectVersions. Only applies to Custom Labels projects.
+//
+// This operation requires permissions to perform the
 // rekognition:StopProjectVersion action.
 func (c *Client) StopProjectVersion(ctx context.Context, params *StopProjectVersionInput, optFns ...func(*Options)) (*StopProjectVersionOutput, error) {
 	if params == nil {
@@ -33,9 +35,10 @@ func (c *Client) StopProjectVersion(ctx context.Context, params *StopProjectVers
 
 type StopProjectVersionInput struct {
 
-	// The Amazon Resource Name (ARN) of the model version that you want to stop. This
-	// operation requires permissions to perform the rekognition:StopProjectVersion
-	// action.
+	// The Amazon Resource Name (ARN) of the model version that you want to stop.
+	//
+	// This operation requires permissions to perform the
+	// rekognition:StopProjectVersion action.
 	//
 	// This member is required.
 	ProjectVersionArn *string

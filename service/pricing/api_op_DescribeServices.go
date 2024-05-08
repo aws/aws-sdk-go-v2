@@ -35,7 +35,9 @@ func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesI
 
 type DescribeServicesInput struct {
 
-	// The format version that you want the response to be in. Valid values are: aws_v1
+	// The format version that you want the response to be in.
+	//
+	// Valid values are: aws_v1
 	FormatVersion *string
 
 	// The maximum number of results that you want returned in the response.

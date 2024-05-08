@@ -32,8 +32,9 @@ type ListProtocolsListsInput struct {
 	// The maximum number of objects that you want Firewall Manager to return for this
 	// request. If more objects are available, in the response, Firewall Manager
 	// provides a NextToken value that you can use in a subsequent call to get the
-	// next batch of objects. If you don't specify this, Firewall Manager returns all
-	// available objects.
+	// next batch of objects.
+	//
+	// If you don't specify this, Firewall Manager returns all available objects.
 	//
 	// This member is required.
 	MaxResults *int32
@@ -161,8 +162,9 @@ type ListProtocolsListsPaginatorOptions struct {
 	// The maximum number of objects that you want Firewall Manager to return for this
 	// request. If more objects are available, in the response, Firewall Manager
 	// provides a NextToken value that you can use in a subsequent call to get the
-	// next batch of objects. If you don't specify this, Firewall Manager returns all
-	// available objects.
+	// next batch of objects.
+	//
+	// If you don't specify this, Firewall Manager returns all available objects.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

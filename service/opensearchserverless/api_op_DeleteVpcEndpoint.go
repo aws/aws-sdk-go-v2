@@ -12,8 +12,9 @@ import (
 )
 
 // Deletes an OpenSearch Serverless-managed interface endpoint. For more
-// information, see Access Amazon OpenSearch Serverless using an interface endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
-// .
+// information, see [Access Amazon OpenSearch Serverless using an interface endpoint].
+//
+// [Access Amazon OpenSearch Serverless using an interface endpoint]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html
 func (c *Client) DeleteVpcEndpoint(ctx context.Context, params *DeleteVpcEndpointInput, optFns ...func(*Options)) (*DeleteVpcEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteVpcEndpointInput{}

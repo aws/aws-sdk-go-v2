@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the properties associated with an InferSNOMEDCT job. Use this operation to
-// get the status of an inference job.
+//	Gets the properties associated with an InferSNOMEDCT job. Use this operation
+//
+// to get the status of an inference job.
 func (c *Client) DescribeSNOMEDCTInferenceJob(ctx context.Context, params *DescribeSNOMEDCTInferenceJobInput, optFns ...func(*Options)) (*DescribeSNOMEDCTInferenceJobOutput, error) {
 	if params == nil {
 		params = &DescribeSNOMEDCTInferenceJobInput{}
@@ -30,7 +31,7 @@ func (c *Client) DescribeSNOMEDCTInferenceJob(ctx context.Context, params *Descr
 
 type DescribeSNOMEDCTInferenceJobInput struct {
 
-	// The identifier that Amazon Comprehend Medical generated for the job. The
+	//  The identifier that Amazon Comprehend Medical generated for the job. The
 	// StartSNOMEDCTInferenceJob operation returns this identifier in its response.
 	//
 	// This member is required.

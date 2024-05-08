@@ -185,9 +185,9 @@ type AutoExportRevisionDestinationEntry struct {
 	Bucket *string
 
 	// A string representing the pattern for generated names of the individual assets
-	// in the revision. For more information about key patterns, see Key patterns when
-	// exporting revisions (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns)
-	// .
+	// in the revision. For more information about key patterns, see [Key patterns when exporting revisions].
+	//
+	// [Key patterns when exporting revisions]: https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns
 	KeyPattern *string
 
 	noSmithyDocumentSerde
@@ -1248,9 +1248,9 @@ type RevisionDestinationEntry struct {
 	RevisionId *string
 
 	// A string representing the pattern for generated names of the individual assets
-	// in the revision. For more information about key patterns, see Key patterns when
-	// exporting revisions (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns)
-	// .
+	// in the revision. For more information about key patterns, see [Key patterns when exporting revisions].
+	//
+	// [Key patterns when exporting revisions]: https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns
 	KeyPattern *string
 
 	noSmithyDocumentSerde
@@ -1339,7 +1339,7 @@ type S3DataAccessAsset struct {
 	// S3 keys made available using this asset.
 	Keys []string
 
-	// List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs
+	//  List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs
 	// used to encrypt S3 objects being shared in this S3 Data Access asset. Providers
 	// must include all AWS KMS keys used to encrypt these shared S3 objects.
 	KmsKeysToGrant []KmsKeyToGrant

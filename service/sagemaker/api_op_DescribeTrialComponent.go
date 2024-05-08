@@ -88,8 +88,11 @@ type DescribeTrialComponentOutput struct {
 	StartTime *time.Time
 
 	// The status of the component. States include:
+	//
 	//   - InProgress
+	//
 	//   - Completed
+	//
 	//   - Failed
 	Status *types.TrialComponentStatus
 

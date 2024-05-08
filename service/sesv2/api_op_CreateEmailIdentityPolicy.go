@@ -11,12 +11,18 @@ import (
 )
 
 // Creates the specified sending authorization policy for the given identity (an
-// email address or a domain). This API is for the identity owner only. If you have
-// not verified the identity, this API will return an error. Sending authorization
-// is a feature that enables an identity owner to authorize other senders to use
-// its identities. For information about using sending authorization, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
-// . You can execute this operation no more than once per second.
+// email address or a domain).
+//
+// This API is for the identity owner only. If you have not verified the identity,
+// this API will return an error.
+//
+// Sending authorization is a feature that enables an identity owner to authorize
+// other senders to use its identities. For information about using sending
+// authorization, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
 func (c *Client) CreateEmailIdentityPolicy(ctx context.Context, params *CreateEmailIdentityPolicyInput, optFns ...func(*Options)) (*CreateEmailIdentityPolicyOutput, error) {
 	if params == nil {
 		params = &CreateEmailIdentityPolicyInput{}
@@ -34,9 +40,9 @@ func (c *Client) CreateEmailIdentityPolicy(ctx context.Context, params *CreateEm
 
 // Represents a request to create a sending authorization policy for an identity.
 // Sending authorization is an Amazon SES feature that enables you to authorize
-// other senders to use your identities. For information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html)
-// .
+// other senders to use your identities. For information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html
 type CreateEmailIdentityPolicyInput struct {
 
 	// The email identity.
@@ -44,16 +50,19 @@ type CreateEmailIdentityPolicyInput struct {
 	// This member is required.
 	EmailIdentity *string
 
-	// The text of the policy in JSON format. The policy cannot exceed 4 KB. For
-	// information about the syntax of sending authorization policies, see the Amazon
-	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html)
-	// .
+	// The text of the policy in JSON format. The policy cannot exceed 4 KB.
+	//
+	// For information about the syntax of sending authorization policies, see the [Amazon SES Developer Guide].
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
 	//
 	// This member is required.
 	Policy *string
 
-	// The name of the policy. The policy name cannot exceed 64 characters and can
-	// only include alphanumeric characters, dashes, and underscores.
+	// The name of the policy.
+	//
+	// The policy name cannot exceed 64 characters and can only include alphanumeric
+	// characters, dashes, and underscores.
 	//
 	// This member is required.
 	PolicyName *string

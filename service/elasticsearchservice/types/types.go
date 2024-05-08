@@ -12,8 +12,9 @@ import (
 type AccessPoliciesStatus struct {
 
 	// The access policy configured for the Elasticsearch domain. Access policies may
-	// be resource-based, IP-based, or IAM-based. See Configuring Access Policies (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies)
-	// for more information.
+	// be resource-based, IP-based, or IAM-based. See [Configuring Access Policies]for more information.
+	//
+	// [Configuring Access Policies]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies
 	//
 	// This member is required.
 	Options *string
@@ -27,48 +28,53 @@ type AccessPoliciesStatus struct {
 	noSmithyDocumentSerde
 }
 
-// List of limits that are specific to a given InstanceType and for each of it's
-// InstanceRole .
+//	List of limits that are specific to a given InstanceType and for each of it's InstanceRole
+//
+// .
 type AdditionalLimit struct {
 
-	// Name of Additional Limit is specific to a given InstanceType and for each of
-	// it's InstanceRole etc.
+	//  Name of Additional Limit is specific to a given InstanceType and for each of
+	// it's InstanceRoleetc.
 	//
 	// Attributes and their details:
 	//
 	//   - MaximumNumberOfDataNodesSupported This attribute will be present in Master
-	//   node only to specify how much data nodes upto which given
-	//   ESPartitionInstanceType can support as master node.
+	//   node only to specify how much data nodes upto which given ESPartitionInstanceTypecan support as
+	//   master node.
 	//   - MaximumNumberOfDataNodesWithoutMasterNode This attribute will be present in
-	//   Data node only to specify how much data nodes of given ESPartitionInstanceType
-	//   upto which you don't need any master nodes to govern them.
+	//   Data node only to specify how much data nodes of given ESPartitionInstanceTypeupto which you don't
+	//   need any master nodes to govern them.
 	LimitName *string
 
-	// Value for given AdditionalLimit$LimitName .
+	//  Value for given AdditionalLimit$LimitName .
 	LimitValues []string
 
 	noSmithyDocumentSerde
 }
 
-// Status of the advanced options for the specified Elasticsearch domain.
+//	Status of the advanced options for the specified Elasticsearch domain.
+//
 // Currently, the following advanced options are available:
+//
 //   - Option to allow references to indices in an HTTP request body. Must be false
 //     when configuring access to individual sub-resources. By default, the value is
-//     true . See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
-//     for more information.
+//     true . See [Configuration Advanced Options]for more information.
 //   - Option to specify the percentage of heap space that is allocated to field
 //     data. By default, this setting is unbounded.
 //
-// For more information, see Configuring Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
-// .
+// For more information, see [Configuring Advanced Options].
+//
+// [Configuration Advanced Options]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
+// [Configuring Advanced Options]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
 type AdvancedOptionsStatus struct {
 
-	// Specifies the status of advanced options for the specified Elasticsearch domain.
+	//  Specifies the status of advanced options for the specified Elasticsearch
+	// domain.
 	//
 	// This member is required.
 	Options map[string]string
 
-	// Specifies the status of OptionStatus for advanced options for the specified
+	//  Specifies the status of OptionStatus for advanced options for the specified
 	// Elasticsearch domain.
 	//
 	// This member is required.
@@ -125,16 +131,17 @@ type AdvancedSecurityOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the status of advanced security options for the specified
+//	Specifies the status of advanced security options for the specified
+//
 // Elasticsearch domain.
 type AdvancedSecurityOptionsStatus struct {
 
-	// Specifies advanced security options for the specified Elasticsearch domain.
+	//  Specifies advanced security options for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Options *AdvancedSecurityOptions
 
-	// Status of the advanced security options for the specified Elasticsearch domain.
+	//  Status of the advanced security options for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -158,8 +165,9 @@ type AuthorizedPrincipal struct {
 // Specifies Auto-Tune type and Auto-Tune action details.
 type AutoTune struct {
 
-	// Specifies details of the Auto-Tune action. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// Specifies details of the Auto-Tune action. See the [Developer Guide] for more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	AutoTuneDetails *AutoTuneDetails
 
 	// Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION.
@@ -168,29 +176,35 @@ type AutoTune struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies details of the Auto-Tune action. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// Specifies details of the Auto-Tune action. See the [Developer Guide] for more information.
+//
+// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 type AutoTuneDetails struct {
 
-	// Specifies details of the scheduled Auto-Tune action. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// Specifies details of the scheduled Auto-Tune action. See the [Developer Guide] for more
+	// information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	ScheduledAutoTuneDetails *ScheduledAutoTuneDetails
 
 	noSmithyDocumentSerde
 }
 
-// Specifies Auto-Tune maitenance schedule. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// Specifies Auto-Tune maitenance schedule. See the [Developer Guide] for more information.
+//
+// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 type AutoTuneMaintenanceSchedule struct {
 
-	// Specifies cron expression for a recurring maintenance schedule. See the
-	// Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// Specifies cron expression for a recurring maintenance schedule. See the [Developer Guide] for
+	// more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	CronExpressionForRecurrence *string
 
 	// Specifies maintenance schedule duration: duration value and duration unit. See
-	// the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// the [Developer Guide]for more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	Duration *Duration
 
 	// Specifies timestamp at which Auto-Tune maintenance schedule start.
@@ -207,8 +221,9 @@ type AutoTuneOptions struct {
 	// Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.
 	DesiredState AutoTuneDesiredState
 
-	// Specifies list of maitenance schedules. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// Specifies list of maitenance schedules. See the [Developer Guide] for more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	MaintenanceSchedules []AutoTuneMaintenanceSchedule
 
 	// Specifies the rollback state while disabling Auto-Tune for the domain. Valid
@@ -225,8 +240,9 @@ type AutoTuneOptionsInput struct {
 	// Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.
 	DesiredState AutoTuneDesiredState
 
-	// Specifies list of maitenance schedules. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// Specifies list of maitenance schedules. See the [Developer Guide] for more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	MaintenanceSchedules []AutoTuneMaintenanceSchedule
 
 	noSmithyDocumentSerde
@@ -245,14 +261,15 @@ type AutoTuneOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the status of Auto-Tune options for the specified Elasticsearch
+//	Specifies the status of Auto-Tune options for the specified Elasticsearch
+//
 // domain.
 type AutoTuneOptionsStatus struct {
 
-	// Specifies Auto-Tune options for the specified Elasticsearch domain.
+	//  Specifies Auto-Tune options for the specified Elasticsearch domain.
 	Options *AutoTuneOptions
 
-	// Specifies Status of the Auto-Tune options for the specified Elasticsearch
+	//  Specifies Status of the Auto-Tune options for the specified Elasticsearch
 	// domain.
 	Status *AutoTuneStatus
 
@@ -391,9 +408,9 @@ type ChangeProgressStatusDetails struct {
 }
 
 // Options to specify the Cognito user and identity pools for Kibana
-// authentication. For more information, see Amazon Cognito Authentication for
-// Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html)
-// .
+// authentication. For more information, see [Amazon Cognito Authentication for Kibana].
+//
+// [Amazon Cognito Authentication for Kibana]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
 type CognitoOptions struct {
 
 	// Specifies the option to enable Cognito for Kibana authentication.
@@ -440,8 +457,7 @@ type ColdStorageOptions struct {
 	noSmithyDocumentSerde
 }
 
-// A map from an ElasticsearchVersion to a list of compatible ElasticsearchVersion
-// s to which the domain can be upgraded.
+// A map from an ElasticsearchVersion to a list of compatible ElasticsearchVersion s to which the domain can be upgraded.
 type CompatibleVersionsMap struct {
 
 	// The current version of Elasticsearch on which a domain is.
@@ -484,6 +500,7 @@ type DomainEndpointOptions struct {
 	// of Elasticsearch domain.
 	//
 	// It can be one of the following values:
+	//
 	//   - Policy-Min-TLS-1-0-2019-07: TLS security policy that supports TLS version
 	//   1.0 to TLS version 1.2
 	//   - Policy-Min-TLS-1-2-2019-07: TLS security policy that supports only TLS
@@ -514,10 +531,10 @@ type DomainEndpointOptionsStatus struct {
 
 type DomainInfo struct {
 
-	// Specifies the DomainName .
+	//  Specifies the DomainName .
 	DomainName *string
 
-	// Specifies the EngineType of the domain.
+	//  Specifies the EngineType of the domain.
 	EngineType EngineType
 
 	noSmithyDocumentSerde
@@ -576,8 +593,8 @@ type DomainPackageDetails struct {
 
 type DryRunResults struct {
 
-	// Specifies the deployment mechanism through which the update shall be applied on
-	// the domain. Possible responses are Blue/Green (The update will require a
+	//  Specifies the deployment mechanism through which the update shall be applied
+	// on the domain. Possible responses are Blue/Green (The update will require a
 	// blue/green deployment.) DynamicUpdate (The update can be applied in-place
 	// without a Blue/Green deployment required.) Undetermined (The domain is
 	// undergoing an update which needs to complete before the deployment type can be
@@ -592,26 +609,30 @@ type DryRunResults struct {
 }
 
 // Specifies maintenance schedule duration: duration value and duration unit. See
-// the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// the [Developer Guide]for more information.
+//
+// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 type Duration struct {
 
 	// Specifies the unit of a maintenance schedule duration. Valid value is HOURS.
-	// See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// See the [Developer Guide]for more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	Unit TimeUnit
 
-	// Integer to specify the value of a maintenance schedule duration. See the
-	// Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	//  Integer to specify the value of a maintenance schedule duration. See the [Developer Guide] for
+	// more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	Value *int64
 
 	noSmithyDocumentSerde
 }
 
 // Options to enable, disable, and specify the properties of EBS storage volumes.
-// For more information, see Configuring EBS-based Storage (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs)
-// .
+// For more information, see [Configuring EBS-based Storage].
+//
+// [Configuring EBS-based Storage]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs
 type EBSOptions struct {
 
 	// Specifies whether EBS-based storage is enabled.
@@ -623,10 +644,10 @@ type EBSOptions struct {
 	// Specifies the Throughput for GP3 EBS volume (SSD).
 	Throughput *int32
 
-	// Integer to specify the size of an EBS volume.
+	//  Integer to specify the size of an EBS volume.
 	VolumeSize *int32
 
-	// Specifies the volume type for EBS-based storage.
+	//  Specifies the volume type for EBS-based storage.
 	VolumeType VolumeType
 
 	noSmithyDocumentSerde
@@ -635,12 +656,12 @@ type EBSOptions struct {
 // Status of the EBS options for the specified Elasticsearch domain.
 type EBSOptionsStatus struct {
 
-	// Specifies the EBS options for the specified Elasticsearch domain.
+	//  Specifies the EBS options for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Options *EBSOptions
 
-	// Specifies the status of the EBS options for the specified Elasticsearch domain.
+	//  Specifies the status of the EBS options for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -658,9 +679,10 @@ type ElasticsearchClusterConfig struct {
 	// Total number of dedicated master nodes, active and on standby, for the cluster.
 	DedicatedMasterCount *int32
 
-	// A boolean value to indicate whether a dedicated master node is enabled. See
-	// About Dedicated Master Nodes (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes)
+	// A boolean value to indicate whether a dedicated master node is enabled. See [About Dedicated Master Nodes]
 	// for more information.
+	//
+	// [About Dedicated Master Nodes]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-dedicatedmasternodes
 	DedicatedMasterEnabled *bool
 
 	// The instance type for a dedicated master node.
@@ -686,9 +708,10 @@ type ElasticsearchClusterConfig struct {
 	// enabled.
 	ZoneAwarenessConfig *ZoneAwarenessConfig
 
-	// A boolean value to indicate whether zone awareness is enabled. See About Zone
-	// Awareness (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness)
-	// for more information.
+	// A boolean value to indicate whether zone awareness is enabled. See [About Zone Awareness] for more
+	// information.
+	//
+	// [About Zone Awareness]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness
 	ZoneAwarenessEnabled *bool
 
 	noSmithyDocumentSerde
@@ -697,12 +720,12 @@ type ElasticsearchClusterConfig struct {
 // Specifies the configuration status for the specified Elasticsearch domain.
 type ElasticsearchClusterConfigStatus struct {
 
-	// Specifies the cluster configuration for the specified Elasticsearch domain.
+	//  Specifies the cluster configuration for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Options *ElasticsearchClusterConfig
 
-	// Specifies the status of the configuration for the specified Elasticsearch
+	//  Specifies the status of the configuration for the specified Elasticsearch
 	// domain.
 	//
 	// This member is required.
@@ -717,8 +740,9 @@ type ElasticsearchDomainConfig struct {
 	// IAM access policy as a JSON-formatted string.
 	AccessPolicies *AccessPoliciesStatus
 
-	// Specifies the AdvancedOptions for the domain. See Configuring Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
-	// for more information.
+	// Specifies the AdvancedOptions for the domain. See [Configuring Advanced Options] for more information.
+	//
+	// [Configuring Advanced Options]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
 	AdvancedOptions *AdvancedOptionsStatus
 
 	// Specifies AdvancedSecurityOptions for the domain.
@@ -730,9 +754,9 @@ type ElasticsearchDomainConfig struct {
 	// Specifies change details of the domain configuration change.
 	ChangeProgressDetails *ChangeProgressDetails
 
-	// The CognitoOptions for the specified domain. For more information, see Amazon
-	// Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html)
-	// .
+	// The CognitoOptions for the specified domain. For more information, see [Amazon Cognito Authentication for Kibana].
+	//
+	// [Amazon Cognito Authentication for Kibana]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
 	CognitoOptions *CognitoOptionsStatus
 
 	// Specifies the DomainEndpointOptions for the Elasticsearch domain.
@@ -762,9 +786,9 @@ type ElasticsearchDomainConfig struct {
 	// Specifies the SnapshotOptions for the Elasticsearch domain.
 	SnapshotOptions *SnapshotOptionsStatus
 
-	// The VPCOptions for the specified domain. For more information, see VPC
-	// Endpoints for Amazon Elasticsearch Service Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html)
-	// .
+	// The VPCOptions for the specified domain. For more information, see [VPC Endpoints for Amazon Elasticsearch Service Domains].
+	//
+	// [VPC Endpoints for Amazon Elasticsearch Service Domains]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
 	VPCOptions *VPCDerivedInfoStatus
 
 	noSmithyDocumentSerde
@@ -773,9 +797,10 @@ type ElasticsearchDomainConfig struct {
 // The current status of an Elasticsearch domain.
 type ElasticsearchDomainStatus struct {
 
-	// The Amazon resource name (ARN) of an Elasticsearch domain. See Identifiers for
-	// IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
-	// in Using AWS Identity and Access Management for more information.
+	// The Amazon resource name (ARN) of an Elasticsearch domain. See [Identifiers for IAM Entities] in Using AWS
+	// Identity and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
 	//
 	// This member is required.
 	ARN *string
@@ -798,7 +823,7 @@ type ElasticsearchDomainStatus struct {
 	// This member is required.
 	ElasticsearchClusterConfig *ElasticsearchClusterConfig
 
-	// IAM access policy as a JSON-formatted string.
+	//  IAM access policy as a JSON-formatted string.
 	AccessPolicies *string
 
 	// Specifies the status of the AdvancedOptions
@@ -813,9 +838,9 @@ type ElasticsearchDomainStatus struct {
 	// Specifies change details of the domain configuration change.
 	ChangeProgressDetails *ChangeProgressDetails
 
-	// The CognitoOptions for the specified domain. For more information, see Amazon
-	// Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html)
-	// .
+	// The CognitoOptions for the specified domain. For more information, see [Amazon Cognito Authentication for Kibana].
+	//
+	// [Amazon Cognito Authentication for Kibana]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
 	CognitoOptions *CognitoOptions
 
 	// The domain creation status. True if the creation of an Elasticsearch domain is
@@ -834,13 +859,14 @@ type ElasticsearchDomainStatus struct {
 	// The status of any changes that are currently in progress for the domain.
 	DomainProcessingStatus DomainProcessingStatusType
 
-	// The EBSOptions for the specified domain. See Configuring EBS-based Storage (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs)
-	// for more information.
+	// The EBSOptions for the specified domain. See [Configuring EBS-based Storage] for more information.
+	//
+	// [Configuring EBS-based Storage]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs
 	EBSOptions *EBSOptions
 
 	ElasticsearchVersion *string
 
-	// Specifies the status of the EncryptionAtRestOptions .
+	//  Specifies the status of the EncryptionAtRestOptions .
 	EncryptionAtRestOptions *EncryptionAtRestOptions
 
 	// The Elasticsearch domain endpoint that you use to submit index and search
@@ -877,24 +903,25 @@ type ElasticsearchDomainStatus struct {
 	// configuration is active.
 	UpgradeProcessing *bool
 
-	// The VPCOptions for the specified domain. For more information, see VPC
-	// Endpoints for Amazon Elasticsearch Service Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html)
-	// .
+	// The VPCOptions for the specified domain. For more information, see [VPC Endpoints for Amazon Elasticsearch Service Domains].
+	//
+	// [VPC Endpoints for Amazon Elasticsearch Service Domains]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
 	VPCOptions *VPCDerivedInfo
 
 	noSmithyDocumentSerde
 }
 
-// Status of the Elasticsearch version options for the specified Elasticsearch
+//	Status of the Elasticsearch version options for the specified Elasticsearch
+//
 // domain.
 type ElasticsearchVersionStatus struct {
 
-	// Specifies the Elasticsearch version for the specified Elasticsearch domain.
+	//  Specifies the Elasticsearch version for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Options *string
 
-	// Specifies the status of the Elasticsearch version options for the specified
+	//  Specifies the status of the Elasticsearch version options for the specified
 	// Elasticsearch domain.
 	//
 	// This member is required.
@@ -909,21 +936,24 @@ type EncryptionAtRestOptions struct {
 	// Specifies the option to enable Encryption At Rest.
 	Enabled *bool
 
-	// Specifies the KMS Key ID for Encryption At Rest options.
+	//  Specifies the KMS Key ID for Encryption At Rest options.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
 
-// Status of the Encryption At Rest options for the specified Elasticsearch domain.
+//	Status of the Encryption At Rest options for the specified Elasticsearch
+//
+// domain.
 type EncryptionAtRestOptionsStatus struct {
 
-	// Specifies the Encryption At Rest options for the specified Elasticsearch domain.
+	//  Specifies the Encryption At Rest options for the specified Elasticsearch
+	// domain.
 	//
 	// This member is required.
 	Options *EncryptionAtRestOptions
 
-	// Specifies the status of the Encryption At Rest options for the specified
+	//  Specifies the status of the Encryption At Rest options for the specified
 	// Elasticsearch domain.
 	//
 	// This member is required.
@@ -940,16 +970,17 @@ type ErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A filter used to limit results when describing inbound or outbound
+//	A filter used to limit results when describing inbound or outbound
+//
 // cross-cluster search connections. Multiple values can be specified per filter. A
 // cross-cluster search connection must match at least one of the specified values
 // for it to be returned from an operation.
 type Filter struct {
 
-	// Specifies the name of the filter.
+	//  Specifies the name of the filter.
 	Name *string
 
-	// Contains one or more values for the filter.
+	//  Contains one or more values for the filter.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -958,8 +989,7 @@ type Filter struct {
 // Specifies details of an inbound connection.
 type InboundCrossClusterSearchConnection struct {
 
-	// Specifies the InboundCrossClusterSearchConnectionStatus for the outbound
-	// connection.
+	// Specifies the InboundCrossClusterSearchConnectionStatus for the outbound connection.
 	ConnectionStatus *InboundCrossClusterSearchConnectionStatus
 
 	// Specifies the connection id for the inbound cross-cluster search connection.
@@ -981,6 +1011,7 @@ type InboundCrossClusterSearchConnectionStatus struct {
 	Message *string
 
 	// The state code for inbound connection. This can be one of the following:
+	//
 	//   - PENDING_ACCEPTANCE: Inbound connection is not yet accepted by destination
 	//   domain owner.
 	//   - APPROVED: Inbound connection is pending acceptance by destination domain
@@ -994,14 +1025,15 @@ type InboundCrossClusterSearchConnectionStatus struct {
 	noSmithyDocumentSerde
 }
 
-// InstanceCountLimits represents the limits on number of instances that be
+//	InstanceCountLimits represents the limits on number of instances that be
+//
 // created in Amazon Elasticsearch for given InstanceType.
 type InstanceCountLimits struct {
 
-	// Maximum number of Instances that can be instantiated for given InstanceType.
+	//  Maximum number of Instances that can be instantiated for given InstanceType.
 	MaximumInstanceCount int32
 
-	// Minimum number of Instances that can be instantiated for given InstanceType.
+	//  Minimum number of Instances that can be instantiated for given InstanceType.
 	MinimumInstanceCount int32
 
 	noSmithyDocumentSerde
@@ -1011,20 +1043,20 @@ type InstanceCountLimits struct {
 // available for given InstanceType.
 type InstanceLimits struct {
 
-	// InstanceCountLimits represents the limits on number of instances that be
+	//  InstanceCountLimits represents the limits on number of instances that be
 	// created in Amazon Elasticsearch for given InstanceType.
 	InstanceCountLimits *InstanceCountLimits
 
 	noSmithyDocumentSerde
 }
 
-// Limits for given InstanceType and for each of it's role.
+//	Limits for given InstanceType and for each of it's role.
 //
-// Limits contains following StorageTypes, InstanceLimits and AdditionalLimits
+// Limits contains following StorageTypes,InstanceLimits and AdditionalLimits
 type Limits struct {
 
-	// List of additional limits that are specific to a given InstanceType and for
-	// each of it's InstanceRole .
+	//  List of additional limits that are specific to a given InstanceType and for
+	// each of it's InstanceRole.
 	AdditionalLimits []AdditionalLimit
 
 	// InstanceLimits represents the list of instance related attributes that are
@@ -1041,6 +1073,7 @@ type Limits struct {
 // Log Publishing option that is set for given domain.
 //
 // Attributes and their details:
+//
 //   - CloudWatchLogsLogGroupArn: ARN of the Cloudwatch log group to which log
 //     needs to be published.
 //   - Enabled: Whether the log publishing for given log type is enabled or not
@@ -1049,7 +1082,7 @@ type LogPublishingOption struct {
 	// ARN of the Cloudwatch log group to which log needs to be published.
 	CloudWatchLogsLogGroupArn *string
 
-	// Specifies whether given log publishing option is enabled or not.
+	//  Specifies whether given log publishing option is enabled or not.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -1100,6 +1133,7 @@ type ModifyingProperties struct {
 
 	// The type of value that is currently being modified. Properties can have two
 	// types:
+	//
 	//   - PLAIN_TEXT: Contain direct values such as "1", "True", or "c5.large.search".
 	//   - STRINGIFIED_JSON: Contain content in JSON format, such as
 	//   {"Enabled":"True"}".
@@ -1169,8 +1203,7 @@ type OutboundCrossClusterSearchConnection struct {
 	// Specifies the connection alias for the outbound cross-cluster search connection.
 	ConnectionAlias *string
 
-	// Specifies the OutboundCrossClusterSearchConnectionStatus for the outbound
-	// connection.
+	// Specifies the OutboundCrossClusterSearchConnectionStatus for the outbound connection.
 	ConnectionStatus *OutboundCrossClusterSearchConnectionStatus
 
 	// Specifies the connection id for the outbound cross-cluster search connection.
@@ -1192,6 +1225,7 @@ type OutboundCrossClusterSearchConnectionStatus struct {
 	Message *string
 
 	// The state code for outbound connection. This can be one of the following:
+	//
 	//   - VALIDATING: The outbound connection request is being validated.
 	//   - VALIDATION_FAILED: Validation failed for the connection request.
 	//   - PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet
@@ -1426,8 +1460,10 @@ type SAMLOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies details of the scheduled Auto-Tune action. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// Specifies details of the scheduled Auto-Tune action. See the [Developer Guide] for more
+// information.
+//
+// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 type ScheduledAutoTuneDetails struct {
 
 	// Specifies Auto-Tune action description.
@@ -1512,9 +1548,10 @@ type SnapshotOptionsStatus struct {
 // that are available for given InstanceType.
 type StorageType struct {
 
-	// SubType of the given storage type. List of available sub-storage options: For
+	//  SubType of the given storage type. List of available sub-storage options: For
 	// "instance" storageType we wont have any storageSubType, in case of "ebs"
 	// storageType we will have following valid storageSubTypes
+	//
 	//   - standard
 	//   - gp2
 	//   - gp3
@@ -1525,7 +1562,8 @@ type StorageType struct {
 	// List of limits that are applicable for given storage type.
 	StorageTypeLimits []StorageTypeLimit
 
-	// Type of the storage. List of available storage options:
+	//  Type of the storage. List of available storage options:
+	//
 	//   - instance Inbuilt storage available for the given Instance
 	//   - ebs Elastic block storage that would be attached to the given Instance
 	StorageTypeName *string
@@ -1536,8 +1574,9 @@ type StorageType struct {
 // Limits that are applicable for given storage type.
 type StorageTypeLimit struct {
 
-	// Name of storage limits that are applicable for given storage type. If
-	// StorageType is ebs, following storage options are applicable
+	//  Name of storage limits that are applicable for given storage type. If StorageType is ebs,
+	// following storage options are applicable
+	//
 	//   - MinimumVolumeSize Minimum amount of volume size that is applicable for given
 	//   storage type.It can be empty if it is not applicable.
 	//   - MaximumVolumeSize Maximum amount of volume size that is applicable for given
@@ -1552,7 +1591,7 @@ type StorageTypeLimit struct {
 	//   storage type.It can be empty if it is not applicable.
 	LimitName *string
 
-	// Values for the StorageTypeLimit$LimitName .
+	//  Values for the StorageTypeLimit$LimitName .
 	LimitValues []string
 
 	noSmithyDocumentSerde
@@ -1585,15 +1624,16 @@ type UpgradeHistory struct {
 	// format.
 	StartTimestamp *time.Time
 
-	// A list of UpgradeStepItem s representing information about each step performed
-	// as pard of a specific Upgrade or Upgrade Eligibility Check.
+	//  A list of UpgradeStepItem s representing information about each step performed as pard of a
+	// specific Upgrade or Upgrade Eligibility Check.
 	StepsList []UpgradeStepItem
 
 	// A string that describes the update briefly
 	UpgradeName *string
 
-	// The overall status of the update. The status can take one of the following
+	//  The overall status of the update. The status can take one of the following
 	// values:
+	//
 	//   - In Progress
 	//   - Succeeded
 	//   - Succeeded with Issues
@@ -1613,15 +1653,17 @@ type UpgradeStepItem struct {
 	// The Floating point value representing progress percentage of a particular step.
 	ProgressPercent *float64
 
-	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
+	//  Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
 	// through:
+	//
 	//   - PreUpgradeCheck
 	//   - Snapshot
 	//   - Upgrade
 	UpgradeStep UpgradeStep
 
-	// The status of a particular step during an upgrade. The status can take one of
+	//  The status of a particular step during an upgrade. The status can take one of
 	// the following values:
+	//
 	//   - In Progress
 	//   - Succeeded
 	//   - Succeeded with Issues
@@ -1632,8 +1674,9 @@ type UpgradeStepItem struct {
 }
 
 // Options to specify the subnets and security groups for VPC endpoint. For more
-// information, see VPC Endpoints for Amazon Elasticsearch Service Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html)
-// .
+// information, see [VPC Endpoints for Amazon Elasticsearch Service Domains].
+//
+// [VPC Endpoints for Amazon Elasticsearch Service Domains]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
 type VPCDerivedInfo struct {
 
 	// The availability zones for the Elasticsearch domain. Exists only if the domain
@@ -1656,12 +1699,12 @@ type VPCDerivedInfo struct {
 // Status of the VPC options for the specified Elasticsearch domain.
 type VPCDerivedInfoStatus struct {
 
-	// Specifies the VPC options for the specified Elasticsearch domain.
+	//  Specifies the VPC options for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Options *VPCDerivedInfo
 
-	// Specifies the status of the VPC options for the specified Elasticsearch domain.
+	//  Specifies the status of the VPC options for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Status *OptionStatus
@@ -1730,8 +1773,9 @@ type VpcEndpointSummary struct {
 }
 
 // Options to specify the subnets and security groups for VPC endpoint. For more
-// information, see VPC Endpoints for Amazon Elasticsearch Service Domains (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html)
-// .
+// information, see [VPC Endpoints for Amazon Elasticsearch Service Domains].
+//
+// [VPC Endpoints for Amazon Elasticsearch Service Domains]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
 type VPCOptions struct {
 
 	// Specifies the security groups for VPC endpoint.

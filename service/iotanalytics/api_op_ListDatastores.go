@@ -29,8 +29,9 @@ func (c *Client) ListDatastores(ctx context.Context, params *ListDatastoresInput
 
 type ListDatastoresInput struct {
 
-	// The maximum number of results to return in this request. The default value is
-	// 100.
+	// The maximum number of results to return in this request.
+	//
+	// The default value is 100.
 	MaxResults *int32
 
 	// The token for the next set of results.
@@ -140,8 +141,9 @@ var _ ListDatastoresAPIClient = (*Client)(nil)
 
 // ListDatastoresPaginatorOptions is the paginator options for ListDatastores
 type ListDatastoresPaginatorOptions struct {
-	// The maximum number of results to return in this request. The default value is
-	// 100.
+	// The maximum number of results to return in this request.
+	//
+	// The default value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

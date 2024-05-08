@@ -42,8 +42,9 @@ type UpdateTeamMemberInput struct {
 	UserArn *string
 
 	// The role assigned to the user in the project. Project roles have different
-	// levels of access. For more information, see Working with Teams (http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html)
-	// in the AWS CodeStar User Guide.
+	// levels of access. For more information, see [Working with Teams]in the AWS CodeStar User Guide.
+	//
+	// [Working with Teams]: http://docs.aws.amazon.com/codestar/latest/userguide/working-with-teams.html
 	ProjectRole *string
 
 	// Whether a team member is allowed to remotely access project resources using the

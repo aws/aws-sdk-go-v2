@@ -13,12 +13,15 @@ import (
 
 // When you export your virtual machine (VM) from its virtualization environment,
 // that process creates a set of one or more disk container files that act as
-// snapshots of your VM’s environment, settings, and data. The Amazon EC2 API
-// ImportImage (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html)
+// snapshots of your VM’s environment, settings, and data. The Amazon EC2 API [ImportImage]
 // action uses those files to import your VM and create an AMI. To import using the
-// CLI command, see import-image (https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html)
+// CLI command, see [import-image]
+//
 // You can reference the task ID from the VM import to pull in the AMI that the
 // import created as the base image for your Image Builder recipe.
+//
+// [ImportImage]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportImage.html
+// [import-image]: https://docs.aws.amazon.com/cli/latest/reference/ec2/import-image.html
 func (c *Client) ImportVmImage(ctx context.Context, params *ImportVmImageInput, optFns ...func(*Options)) (*ImportVmImageOutput, error) {
 	if params == nil {
 		params = &ImportVmImageInput{}
@@ -37,8 +40,9 @@ func (c *Client) ImportVmImage(ctx context.Context, params *ImportVmImageInput, 
 type ImportVmImageInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon EC2 API Reference.
+	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
@@ -54,15 +58,18 @@ type ImportVmImageInput struct {
 	Platform types.Platform
 
 	// The semantic version to attach to the base image that was created during the
-	// import process. This version follows the semantic version syntax. The semantic
-	// version has four nodes: ../. You can assign values for the first three, and can
-	// filter on all of them. Assignment: For the first three nodes you can assign any
-	// positive integer value, including zero, with an upper limit of 2^30-1, or
-	// 1073741823 for each node. Image Builder automatically assigns the build number
-	// to the fourth node. Patterns: You can use any numeric pattern that adheres to
-	// the assignment requirements for the nodes that you can assign. For example, you
-	// might choose a software version pattern, such as 1.0.0, or a date, such as
-	// 2021.01.01.
+	// import process. This version follows the semantic version syntax.
+	//
+	// The semantic version has four nodes: ../. You can assign values for the first
+	// three, and can filter on all of them.
+	//
+	// Assignment: For the first three nodes you can assign any positive integer
+	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
+	// node. Image Builder automatically assigns the build number to the fourth node.
+	//
+	// Patterns: You can use any numeric pattern that adheres to the assignment
+	// requirements for the nodes that you can assign. For example, you might choose a
+	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
 	//
 	// This member is required.
 	SemanticVersion *string

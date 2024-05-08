@@ -12,11 +12,14 @@ import (
 )
 
 // Obtains information about the directory snapshots that belong to this account.
+//
 // This operation supports pagination with the use of the NextToken request and
 // response parameters. If more results are available, the
 // DescribeSnapshots.NextToken member contains a token that you pass in the next
-// call to DescribeSnapshots to retrieve the next set of items. You can also
-// specify a maximum number of return results with the Limit parameter.
+// call to DescribeSnapshotsto retrieve the next set of items.
+//
+// You can also specify a maximum number of return results with the Limit
+// parameter.
 func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshotsInput, optFns ...func(*Options)) (*DescribeSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeSnapshotsInput{}
@@ -41,8 +44,8 @@ type DescribeSnapshotsInput struct {
 	// The maximum number of objects to return.
 	Limit *int32
 
-	// The DescribeSnapshotsResult.NextToken value from a previous call to
-	// DescribeSnapshots . Pass null if this is the first call.
+	// The DescribeSnapshotsResult.NextToken value from a previous call to DescribeSnapshots. Pass null
+	// if this is the first call.
 	NextToken *string
 
 	// A list of identifiers of the snapshots to obtain the information for. If this
@@ -57,13 +60,15 @@ type DescribeSnapshotsInput struct {
 type DescribeSnapshotsOutput struct {
 
 	// If not null, more results are available. Pass this value in the NextToken
-	// member of a subsequent call to DescribeSnapshots .
+	// member of a subsequent call to DescribeSnapshots.
 	NextToken *string
 
-	// The list of Snapshot objects that were retrieved. It is possible that this list
-	// contains less than the number of items specified in the Limit member of the
-	// request. This occurs if there are less than the requested number of items left
-	// to retrieve, or if the limitations of the operation have been exceeded.
+	// The list of Snapshot objects that were retrieved.
+	//
+	// It is possible that this list contains less than the number of items specified
+	// in the Limit member of the request. This occurs if there are less than the
+	// requested number of items left to retrieve, or if the limitations of the
+	// operation have been exceeded.
 	Snapshots []types.Snapshot
 
 	// Metadata pertaining to the operation's result.

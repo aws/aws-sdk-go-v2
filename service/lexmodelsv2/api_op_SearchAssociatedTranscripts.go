@@ -52,8 +52,9 @@ type SearchAssociatedTranscriptsInput struct {
 	Filters []types.AssociatedTranscriptFilter
 
 	// The identifier of the language and locale of the transcripts to search. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// string must match one of the supported locales. For more information, see [Supported languages]
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -86,16 +87,17 @@ type SearchAssociatedTranscriptsOutput struct {
 	// searching.
 	BotId *string
 
-	// The unique identifier of the bot recommendation associated with the transcripts
-	// to search.
+	//  The unique identifier of the bot recommendation associated with the
+	// transcripts to search.
 	BotRecommendationId *string
 
 	// The version of the bot containing the transcripts that you are searching.
 	BotVersion *string
 
 	// The identifier of the language and locale of the transcripts to search. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// string must match one of the supported locales. For more information, see [Supported languages]
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	LocaleId *string
 
 	// A index that indicates whether there are more results to return in a response

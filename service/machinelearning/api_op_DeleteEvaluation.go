@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns the DELETED status to an Evaluation , rendering it unusable. After
-// invoking the DeleteEvaluation operation, you can use the GetEvaluation
+// Assigns the DELETED status to an Evaluation , rendering it unusable.
+//
+// After invoking the DeleteEvaluation operation, you can use the GetEvaluation
 // operation to verify that the status of the Evaluation changed to DELETED .
+//
 // Caution: The results of the DeleteEvaluation operation are irreversible.
 func (c *Client) DeleteEvaluation(ctx context.Context, params *DeleteEvaluationInput, optFns ...func(*Options)) (*DeleteEvaluationOutput, error) {
 	if params == nil {
@@ -39,10 +41,12 @@ type DeleteEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DeleteEvaluation operation. The output indicates
-// that Amazon Machine Learning (Amazon ML) received the request. You can use the
-// GetEvaluation operation and check the value of the Status parameter to see
-// whether an Evaluation is marked as DELETED .
+//	Represents the output of a DeleteEvaluation operation. The output indicates
+//
+// that Amazon Machine Learning (Amazon ML) received the request.
+//
+// You can use the GetEvaluation operation and check the value of the Status
+// parameter to see whether an Evaluation is marked as DELETED .
 type DeleteEvaluationOutput struct {
 
 	// A user-supplied ID that uniquely identifies the Evaluation . This value should

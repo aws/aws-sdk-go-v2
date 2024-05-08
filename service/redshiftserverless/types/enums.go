@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for LogExport. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogExport) Values() []LogExport {
 	return []LogExport{
 		"useractivitylog",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for NamespaceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NamespaceStatus) Values() []NamespaceStatus {
 	return []NamespaceStatus{
 		"AVAILABLE",
@@ -55,8 +57,9 @@ const (
 )
 
 // Values returns all known values for SnapshotStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SnapshotStatus) Values() []SnapshotStatus {
 	return []SnapshotStatus{
 		"AVAILABLE",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for State. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
 		"ACTIVE",
@@ -96,8 +100,9 @@ const (
 )
 
 // Values returns all known values for UsageLimitBreachAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UsageLimitBreachAction) Values() []UsageLimitBreachAction {
 	return []UsageLimitBreachAction{
 		"log",
@@ -116,8 +121,9 @@ const (
 )
 
 // Values returns all known values for UsageLimitPeriod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UsageLimitPeriod) Values() []UsageLimitPeriod {
 	return []UsageLimitPeriod{
 		"daily",
@@ -135,8 +141,9 @@ const (
 )
 
 // Values returns all known values for UsageLimitUsageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UsageLimitUsageType) Values() []UsageLimitUsageType {
 	return []UsageLimitUsageType{
 		"serverless-compute",
@@ -155,8 +162,9 @@ const (
 )
 
 // Values returns all known values for WorkgroupStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkgroupStatus) Values() []WorkgroupStatus {
 	return []WorkgroupStatus{
 		"CREATING",

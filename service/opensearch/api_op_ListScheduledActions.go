@@ -12,9 +12,10 @@ import (
 )
 
 // Retrieves a list of configuration changes that are scheduled for a domain.
-// These changes can be service software updates (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
-// or blue/green Auto-Tune enhancements (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types)
-// .
+// These changes can be [service software updates]or [blue/green Auto-Tune enhancements].
+//
+// [blue/green Auto-Tune enhancements]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types
+// [service software updates]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
 func (c *Client) ListScheduledActions(ctx context.Context, params *ListScheduledActionsInput, optFns ...func(*Options)) (*ListScheduledActionsOutput, error) {
 	if params == nil {
 		params = &ListScheduledActionsInput{}

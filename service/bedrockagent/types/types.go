@@ -53,8 +53,9 @@ type ActionGroupSummary struct {
 	ActionGroupName *string
 
 	// Specifies whether the action group is available for the agent to invoke or not
-	// when sending an InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
-	// request.
+	// when sending an [InvokeAgent]request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	//
 	// This member is required.
 	ActionGroupState ActionGroupState
@@ -96,12 +97,19 @@ type Agent struct {
 
 	// The status of the agent and whether it is ready for use. The following statuses
 	// are possible:
+	//
 	//   - CREATING – The agent is being created.
+	//
 	//   - PREPARING – The agent is being prepared.
+	//
 	//   - PREPARED – The agent is prepared and ready to be invoked.
+	//
 	//   - NOT_PREPARED – The agent has been created but not yet prepared.
+	//
 	//   - FAILED – The agent API operation failed.
+	//
 	//   - UPDATING – The agent is being updated.
+	//
 	//   - DELETING – The agent is being deleted.
 	//
 	// This member is required.
@@ -118,9 +126,11 @@ type Agent struct {
 	CreatedAt *time.Time
 
 	// The number of seconds for which Amazon Bedrock keeps information about a user's
-	// conversation with the agent. A user interaction remains active for the amount of
-	// time specified. If no conversation occurs during this time, the session expires
-	// and Amazon Bedrock deletes any data provided before the timeout.
+	// conversation with the agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
 	//
 	// This member is required.
 	IdleSessionTTLInSeconds *int32
@@ -132,9 +142,9 @@ type Agent struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
@@ -157,8 +167,9 @@ type Agent struct {
 	PreparedAt *time.Time
 
 	// Contains configurations to override prompt templates in different parts of an
-	// agent sequence. For more information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
-	// .
+	// agent sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	PromptOverrideConfiguration *PromptOverrideConfiguration
 
 	// Contains recommended actions to take for the agent-related API that you invoked
@@ -182,8 +193,9 @@ type AgentActionGroup struct {
 	ActionGroupName *string
 
 	// Specifies whether the action group is available for the agent to invoke or not
-	// when sending an InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
-	// request.
+	// when sending an [InvokeAgent]request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	//
 	// This member is required.
 	ActionGroupState ActionGroupState
@@ -215,15 +227,16 @@ type AgentActionGroup struct {
 
 	// Contains either details about the S3 object containing the OpenAPI schema for
 	// the action group or the JSON or YAML-formatted payload defining the schema. For
-	// more information, see Action group OpenAPI schemas (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html)
-	// .
+	// more information, see [Action group OpenAPI schemas].
+	//
+	// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 	ApiSchema APISchema
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The description of the action group.
@@ -236,10 +249,13 @@ type AgentActionGroup struct {
 	// If this field is set as AMAZON.UserInput , the agent can request the user for
 	// additional information when trying to complete a task. The description ,
 	// apiSchema , and actionGroupExecutor fields must be blank for this action group.
+	//
 	// During orchestration, if the agent determines that it needs to invoke an API in
 	// an action group, but doesn't have enough information to complete the API
-	// request, it will invoke this action group instead and return an Observation (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html)
-	// reprompting the user for more information.
+	// request, it will invoke this action group instead and return an [Observation]reprompting the
+	// user for more information.
+	//
+	// [Observation]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
 	ParentActionSignature ActionGroupSignature
 
 	noSmithyDocumentSerde
@@ -265,11 +281,16 @@ type AgentAlias struct {
 
 	// The status of the alias of the agent and whether it is ready for use. The
 	// following statuses are possible:
+	//
 	//   - CREATING – The agent alias is being created.
+	//
 	//   - PREPARED – The agent alias is finished being created or updated and is
 	//   ready to be invoked.
+	//
 	//   - FAILED – The agent alias API operation failed.
+	//
 	//   - UPDATING – The agent alias is being updated.
+	//
 	//   - DELETING – The agent alias is being deleted.
 	//
 	// This member is required.
@@ -300,9 +321,9 @@ type AgentAlias struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The description of the alias of the agent.
@@ -412,8 +433,9 @@ type AgentKnowledgeBase struct {
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Specifies whether to use the knowledge base or not when sending an InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
-	// request.
+	// Specifies whether to use the knowledge base or not when sending an [InvokeAgent] request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	//
 	// This member is required.
 	KnowledgeBaseState KnowledgeBaseState
@@ -435,9 +457,10 @@ type AgentKnowledgeBaseSummary struct {
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Specifies whether the agent uses the knowledge base or not when sending an
-	// InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
+	// Specifies whether the agent uses the knowledge base or not when sending an [InvokeAgent]
 	// request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	//
 	// This member is required.
 	KnowledgeBaseState KnowledgeBaseState
@@ -520,9 +543,11 @@ type AgentVersion struct {
 	CreatedAt *time.Time
 
 	// The number of seconds for which Amazon Bedrock keeps information about a user's
-	// conversation with the agent. A user interaction remains active for the amount of
-	// time specified. If no conversation occurs during this time, the session expires
-	// and Amazon Bedrock deletes any data provided before the timeout.
+	// conversation with the agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
 	//
 	// This member is required.
 	IdleSessionTTLInSeconds *int32
@@ -553,8 +578,9 @@ type AgentVersion struct {
 	Instruction *string
 
 	// Contains configurations to override prompt templates in different parts of an
-	// agent sequence. For more information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
-	// .
+	// agent sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	PromptOverrideConfiguration *PromptOverrideConfiguration
 
 	// A list of recommended actions to take for the failed API operation on the
@@ -599,21 +625,24 @@ type AgentVersionSummary struct {
 }
 
 // Contains details about the OpenAPI schema for the action group. For more
-// information, see Action group OpenAPI schemas (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html)
-// . You can either include the schema directly in the payload field or you can
-// upload it to an S3 bucket and specify the S3 bucket location in the s3 field.
+// information, see [Action group OpenAPI schemas]. You can either include the schema directly in the payload
+// field or you can upload it to an S3 bucket and specify the S3 bucket location in
+// the s3 field.
 //
 // The following types satisfy this interface:
 //
 //	APISchemaMemberPayload
 //	APISchemaMemberS3
+//
+// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 type APISchema interface {
 	isAPISchema()
 }
 
 // The JSON or YAML-formatted payload defining the OpenAPI schema for the action
-// group. For more information, see Action group OpenAPI schemas (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html)
-// .
+// group. For more information, see [Action group OpenAPI schemas].
+//
+// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 type APISchemaMemberPayload struct {
 	Value string
 
@@ -623,8 +652,9 @@ type APISchemaMemberPayload struct {
 func (*APISchemaMemberPayload) isAPISchema() {}
 
 // Contains details about the S3 object containing the OpenAPI schema for the
-// action group. For more information, see Action group OpenAPI schemas (https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html)
-// .
+// action group. For more information, see [Action group OpenAPI schemas].
+//
+// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 type APISchemaMemberS3 struct {
 	Value S3Identifier
 
@@ -643,8 +673,10 @@ type ChunkingConfiguration struct {
 	// belongs to is queried. You have the following options for chunking your data. If
 	// you opt for NONE , then you may want to pre-process your files by splitting them
 	// up such that each file corresponds to a chunk.
+	//
 	//   - FIXED_SIZE – Amazon Bedrock splits your source data into chunks of the
 	//   approximate size that you set in the fixedSizeChunkingConfiguration .
+	//
 	//   - NONE – Amazon Bedrock treats each file as one chunk. If you choose this
 	//   option, you may want to pre-process your documents by splitting them into
 	//   separate files.
@@ -688,8 +720,10 @@ type DataSource struct {
 	Name *string
 
 	// The status of the data source. The following statuses are possible:
+	//
 	//   - Available – The data source has been created and is ready for ingestion
 	//   into the knowledge base.
+	//
 	//   - Deleting – The data source is being deleted.
 	//
 	// This member is required.
@@ -785,13 +819,25 @@ type FixedSizeChunkingConfiguration struct {
 }
 
 // Defines parameters that the agent needs to invoke from the user to complete the
-// function. Corresponds to an action in an action group. This data type is used in
-// the following API operations:
-//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
-//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
-//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
-//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
-//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+// function. Corresponds to an action in an action group.
+//
+// This data type is used in the following API operations:
+//
+// [CreateAgentActionGroup request]
+//
+// [CreateAgentActionGroup response]
+//
+// [UpdateAgentActionGroup request]
+//
+// [UpdateAgentActionGroup response]
+//
+// [GetAgentActionGroup response]
+//
+// [CreateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+// [GetAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+// [UpdateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+// [CreateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+// [UpdateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
 type Function struct {
 
 	// A name for the function.
@@ -809,17 +855,29 @@ type Function struct {
 }
 
 // Defines functions that each define parameters that the agent needs to invoke
-// from the user. Each function represents an action in an action group. This data
-// type is used in the following API operations:
-//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
-//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
-//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
-//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
-//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+// from the user. Each function represents an action in an action group.
+//
+// This data type is used in the following API operations:
+//
+// [CreateAgentActionGroup request]
+//
+// [CreateAgentActionGroup response]
+//
+// [UpdateAgentActionGroup request]
+//
+// [UpdateAgentActionGroup response]
+//
+// [GetAgentActionGroup response]
 //
 // The following types satisfy this interface:
 //
 //	FunctionSchemaMemberFunctions
+//
+// [CreateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+// [GetAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+// [UpdateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+// [CreateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+// [UpdateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
 type FunctionSchema interface {
 	isFunctionSchema()
 }
@@ -835,8 +893,9 @@ func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
 
 // Contains inference parameters to use when the agent invokes a foundation model
 // in the part of the agent sequence defined by the promptType . For more
-// information, see Inference parameters for foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
-// .
+// information, see [Inference parameters for foundation models].
+//
+// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 type InferenceConfiguration struct {
 
 	// The maximum number of tokens to allow in the generated response.
@@ -871,11 +930,19 @@ type InferenceConfiguration struct {
 }
 
 // Contains details about an ingestion job, which converts a data source to
-// embeddings for a vector store in knowledge base. This data type is used in the
-// following API operations:
-//   - StartIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax)
-//   - GetIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax)
-//   - ListIngestionJob response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax)
+// embeddings for a vector store in knowledge base.
+//
+// This data type is used in the following API operations:
+//
+// [StartIngestionJob response]
+//
+// [GetIngestionJob response]
+//
+// [ListIngestionJob response]
+//
+// [StartIngestionJob response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax
+// [ListIngestionJob response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax
+// [GetIngestionJob response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax
 type IngestionJob struct {
 
 	// The unique identifier of the ingested data source.
@@ -1066,10 +1133,15 @@ type KnowledgeBase struct {
 	RoleArn *string
 
 	// The status of the knowledge base. The following statuses are possible:
+	//
 	//   - CREATING – The knowledge base is being created.
+	//
 	//   - ACTIVE – The knowledge base is ready to be queried.
+	//
 	//   - DELETING – The knowledge base is being deleted.
+	//
 	//   - UPDATING – The knowledge base is being updated.
+	//
 	//   - FAILED – The knowledge base API operation failed.
 	//
 	// This member is required.
@@ -1207,9 +1279,9 @@ type MongoDbAtlasFieldMapping struct {
 }
 
 // Contains details about the storage configuration of the knowledge base in
-// Amazon OpenSearch Service. For more information, see Create a vector index in
-// Amazon OpenSearch Service (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html)
-// .
+// Amazon OpenSearch Service. For more information, see [Create a vector index in Amazon OpenSearch Service].
+//
+// [Create a vector index in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
 type OpenSearchServerlessConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the OpenSearch Service vector store.
@@ -1256,13 +1328,25 @@ type OpenSearchServerlessFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about a parameter in a function for an action group. This data
-// type is used in the following API operations:
-//   - CreateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax)
-//   - CreateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax)
-//   - UpdateAgentActionGroup request (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax)
-//   - UpdateAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax)
-//   - GetAgentActionGroup response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax)
+// Contains details about a parameter in a function for an action group.
+//
+// This data type is used in the following API operations:
+//
+// [CreateAgentActionGroup request]
+//
+// [CreateAgentActionGroup response]
+//
+// [UpdateAgentActionGroup request]
+//
+// [UpdateAgentActionGroup response]
+//
+// [GetAgentActionGroup response]
+//
+// [CreateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+// [GetAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+// [UpdateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+// [CreateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+// [UpdateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
 type ParameterDetail struct {
 
 	// The data type of the parameter.
@@ -1282,8 +1366,9 @@ type ParameterDetail struct {
 }
 
 // Contains details about the storage configuration of the knowledge base in
-// Pinecone. For more information, see Create a vector index in Pinecone (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html)
-// .
+// Pinecone. For more information, see [Create a vector index in Pinecone].
+//
+// [Create a vector index in Pinecone]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html
 type PineconeConfiguration struct {
 
 	// The endpoint URL for your index management page.
@@ -1329,27 +1414,31 @@ type PineconeFieldMapping struct {
 }
 
 // Contains configurations to override a prompt template in one part of an agent
-// sequence. For more information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
-// .
+// sequence. For more information, see [Advanced prompts].
+//
+// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 type PromptConfiguration struct {
 
 	// Defines the prompt template with which to replace the default prompt template.
 	// You can use placeholder variables in the base prompt template to customize the
-	// prompt. For more information, see Prompt template placeholder variables (https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html)
-	// .
+	// prompt. For more information, see [Prompt template placeholder variables].
+	//
+	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	BasePromptTemplate *string
 
 	// Contains inference parameters to use when the agent invokes a foundation model
 	// in the part of the agent sequence defined by the promptType . For more
-	// information, see Inference parameters for foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html)
-	// .
+	// information, see [Inference parameters for foundation models].
+	//
+	// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 	InferenceConfiguration *InferenceConfiguration
 
 	// Specifies whether to override the default parser Lambda function when parsing
 	// the raw foundation model output in the part of the agent sequence defined by the
 	// promptType . If you set the field as OVERRIDEN , the overrideLambda field in
-	// the PromptOverrideConfiguration (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html)
-	// must be specified with the ARN of a Lambda function.
+	// the [PromptOverrideConfiguration]must be specified with the ARN of a Lambda function.
+	//
+	// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 	ParserMode CreationMode
 
 	// Specifies whether to override the default prompt template for this promptType .
@@ -1361,9 +1450,13 @@ type PromptConfiguration struct {
 	// Specifies whether to allow the agent to carry out the step specified in the
 	// promptType . If you set this value to DISABLED , the agent skips that step. The
 	// default state for each promptType is as follows.
+	//
 	//   - PRE_PROCESSING – ENABLED
+	//
 	//   - ORCHESTRATION – ENABLED
+	//
 	//   - KNOWLEDGE_BASE_RESPONSE_GENERATION – ENABLED
+	//
 	//   - POST_PROCESSING – DISABLED
 	PromptState PromptState
 
@@ -1374,13 +1467,15 @@ type PromptConfiguration struct {
 }
 
 // Contains configurations to override prompts in different parts of an agent
-// sequence. For more information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
-// .
+// sequence. For more information, see [Advanced prompts].
+//
+// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 type PromptOverrideConfiguration struct {
 
 	// Contains configurations to override a prompt template in one part of an agent
-	// sequence. For more information, see Advanced prompts (https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html)
-	// .
+	// sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	//
 	// This member is required.
 	PromptConfigurations []PromptConfiguration
@@ -1395,8 +1490,9 @@ type PromptOverrideConfiguration struct {
 }
 
 // Contains details about the storage configuration of the knowledge base in
-// Amazon RDS. For more information, see Create a vector index in Amazon RDS (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html)
-// .
+// Amazon RDS. For more information, see [Create a vector index in Amazon RDS].
+//
+// [Create a vector index in Amazon RDS]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
 type RdsConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
@@ -1460,9 +1556,9 @@ type RdsFieldMapping struct {
 }
 
 // Contains details about the storage configuration of the knowledge base in Redis
-// Enterprise Cloud. For more information, see Create a vector index in Redis
-// Enterprise Cloud (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html)
-// .
+// Enterprise Cloud. For more information, see [Create a vector index in Redis Enterprise Cloud].
+//
+// [Create a vector index in Redis Enterprise Cloud]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
 type RedisEnterpriseCloudConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
@@ -1527,8 +1623,9 @@ type S3DataSourceConfiguration struct {
 	BucketOwnerAccountId *string
 
 	// A list of S3 prefixes that define the object containing the data sources. For
-	// more information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
-	// .
+	// more information, see [Organizing objects using prefixes].
+	//
+	// [Organizing objects using prefixes]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
 	InclusionPrefixes []string
 
 	noSmithyDocumentSerde
@@ -1574,8 +1671,9 @@ type StorageConfiguration struct {
 	PineconeConfiguration *PineconeConfiguration
 
 	// Contains details about the storage configuration of the knowledge base in
-	// Amazon RDS. For more information, see Create a vector index in Amazon RDS (https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html)
-	// .
+	// Amazon RDS. For more information, see [Create a vector index in Amazon RDS].
+	//
+	// [Create a vector index in Amazon RDS]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
 	RdsConfiguration *RdsConfiguration
 
 	// Contains the storage configuration of the knowledge base in Redis Enterprise

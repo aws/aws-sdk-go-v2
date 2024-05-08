@@ -20,8 +20,11 @@ import (
 // for users or groups from your corporate identity directory. First, you must add
 // your corporate identity directory to Amazon Web Services IAM Identity Center.
 // Then, you can associate this IAM Identity Center instance with your S3 Access
-// Grants instance. Permissions You must have the
-// s3:AssociateAccessGrantsIdentityCenter permission to use this operation.
+// Grants instance.
+//
+// Permissions You must have the s3:AssociateAccessGrantsIdentityCenter permission
+// to use this operation.
+//
 // Additional Permissions You must also have the following permissions:
 // sso:CreateApplication , sso:PutApplicationGrant , and
 // sso:PutApplicationAuthenticationMethod .
@@ -50,9 +53,10 @@ type AssociateAccessGrantsIdentityCenterInput struct {
 	// The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center
 	// instance that you are associating with your S3 Access Grants instance. An IAM
 	// Identity Center instance is your corporate identity directory that you added to
-	// the IAM Identity Center. You can use the ListInstances (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html)
-	// API operation to retrieve a list of your Identity Center instances and their
-	// ARNs.
+	// the IAM Identity Center. You can use the [ListInstances]API operation to retrieve a list of
+	// your Identity Center instances and their ARNs.
+	//
+	// [ListInstances]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
 	//
 	// This member is required.
 	IdentityCenterArn *string

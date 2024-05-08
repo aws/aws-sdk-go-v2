@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Updates the schema definition Inactive schemas will be deleted after two years.
+// Updates the schema definition
+//
+// Inactive schemas will be deleted after two years.
 func (c *Client) UpdateSchema(ctx context.Context, params *UpdateSchemaInput, optFns ...func(*Options)) (*UpdateSchemaOutput, error) {
 	if params == nil {
 		params = &UpdateSchemaInput{}

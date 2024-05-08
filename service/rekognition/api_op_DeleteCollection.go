@@ -11,9 +11,12 @@ import (
 )
 
 // Deletes the specified collection. Note that this operation removes all faces in
-// the collection. For an example, see Deleting a collection (https://docs.aws.amazon.com/rekognition/latest/dg/delete-collection-procedure.html)
-// . This operation requires permissions to perform the
-// rekognition:DeleteCollection action.
+// the collection. For an example, see [Deleting a collection].
+//
+// This operation requires permissions to perform the rekognition:DeleteCollection
+// action.
+//
+// [Deleting a collection]: https://docs.aws.amazon.com/rekognition/latest/dg/delete-collection-procedure.html
 func (c *Client) DeleteCollection(ctx context.Context, params *DeleteCollectionInput, optFns ...func(*Options)) (*DeleteCollectionOutput, error) {
 	if params == nil {
 		params = &DeleteCollectionInput{}

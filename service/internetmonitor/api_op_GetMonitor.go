@@ -40,9 +40,10 @@ type GetMonitorInput struct {
 
 	// The account ID for an account that you've set up cross-account sharing for in
 	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
-	// Amazon CloudWatch Observability Access Manager. For more information, see
-	// Internet Monitor cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html)
-	// in the Amazon CloudWatch Internet Monitor User Guide.
+	// Amazon CloudWatch Observability Access Manager. For more information, see [Internet Monitor cross-account observability]in
+	// the Amazon CloudWatch Internet Monitor User Guide.
+	//
+	// [Internet Monitor cross-account observability]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
 	LinkedAccountId *string
 
 	noSmithyDocumentSerde
@@ -84,9 +85,12 @@ type GetMonitorOutput struct {
 	// The list of health event threshold configurations. The threshold percentage for
 	// a health score determines, along with other configuration information, when
 	// Internet Monitor creates a health event when there's an internet issue that
-	// affects your application end users. For more information, see Change health
-	// event thresholds (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview)
-	// in the Internet Monitor section of the CloudWatch User Guide.
+	// affects your application end users.
+	//
+	// For more information, see [Change health event thresholds] in the Internet Monitor section of the CloudWatch
+	// User Guide.
+	//
+	// [Change health event thresholds]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
 	HealthEventsConfig *types.HealthEventsConfig
 
 	// Publish internet measurements for Internet Monitor to another location, such as
@@ -98,8 +102,12 @@ type GetMonitorOutput struct {
 	// city-network is the location (city) where clients access your application
 	// resources from and the ASN or network provider, such as an internet service
 	// provider (ISP), that clients access the resources through. This limit can help
-	// control billing costs. To learn more, see Choosing a city-network maximum value  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
-	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+	// control billing costs.
+	//
+	// To learn more, see [Choosing a city-network maximum value] in the Amazon CloudWatch Internet Monitor section of the
+	// CloudWatch User Guide.
+	//
+	// [Choosing a city-network maximum value]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html
 	MaxCityNetworksToMonitor *int32
 
 	// The health of the data processing for the monitor.
@@ -113,9 +121,12 @@ type GetMonitorOutput struct {
 
 	// The percentage of the internet-facing traffic for your application to monitor
 	// with this monitor. If you set a city-networks maximum, that limit overrides the
-	// traffic percentage that you set. To learn more, see Choosing an application
-	// traffic percentage to monitor  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html)
-	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+	// traffic percentage that you set.
+	//
+	// To learn more, see [Choosing an application traffic percentage to monitor] in the Amazon CloudWatch Internet Monitor section of the
+	// CloudWatch User Guide.
+	//
+	// [Choosing an application traffic percentage to monitor]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html
 	TrafficPercentageToMonitor *int32
 
 	// Metadata pertaining to the operation's result.

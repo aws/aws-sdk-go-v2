@@ -29,7 +29,10 @@ func (c *Client) CopyOptionGroup(ctx context.Context, params *CopyOptionGroupInp
 
 type CopyOptionGroupInput struct {
 
-	// The identifier for the source option group. Constraints:
+	// The identifier for the source option group.
+	//
+	// Constraints:
+	//
 	//   - Must specify a valid option group.
 	//
 	// This member is required.
@@ -40,18 +43,26 @@ type CopyOptionGroupInput struct {
 	// This member is required.
 	TargetOptionGroupDescription *string
 
-	// The identifier for the copied option group. Constraints:
+	// The identifier for the copied option group.
+	//
+	// Constraints:
+	//
 	//   - Can't be null, empty, or blank
+	//
 	//   - Must contain from 1 to 255 letters, numbers, or hyphens
+	//
 	//   - First character must be a letter
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens
+	//
 	// Example: my-option-group
 	//
 	// This member is required.
 	TargetOptionGroupIdentifier *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes the specified identity (an email address or a domain) from the list of
-// verified identities. You can execute this operation no more than once per
-// second.
+// verified identities.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) DeleteIdentity(ctx context.Context, params *DeleteIdentityInput, optFns ...func(*Options)) (*DeleteIdentityOutput, error) {
 	if params == nil {
 		params = &DeleteIdentityInput{}

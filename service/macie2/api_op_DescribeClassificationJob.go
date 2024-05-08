@@ -74,17 +74,23 @@ type DescribeClassificationJobOutput struct {
 	JobId *string
 
 	// The current status of the job. Possible values are:
+	//
 	//   - CANCELLED - You cancelled the job or, if it's a one-time job, you paused
 	//   the job and didn't resume it within 30 days.
+	//
 	//   - COMPLETE - For a one-time job, Amazon Macie finished processing the data
 	//   specified for the job. This value doesn't apply to recurring jobs.
+	//
 	//   - IDLE - For a recurring job, the previous scheduled run is complete and the
 	//   next scheduled run is pending. This value doesn't apply to one-time jobs.
+	//
 	//   - PAUSED - Macie started running the job but additional processing would
 	//   exceed the monthly sensitive data discovery quota for your account or one or
 	//   more member accounts that the job analyzes data for.
+	//
 	//   - RUNNING - For a one-time job, the job is in progress. For a recurring job,
 	//   a scheduled run is in progress.
+	//
 	//   - USER_PAUSED - You paused the job. If you paused the job while it had a
 	//   status of RUNNING and you don't resume it within 30 days of pausing it, the job
 	//   or job run will expire and be cancelled, depending on the job's type. To check
@@ -92,7 +98,9 @@ type DescribeClassificationJobOutput struct {
 	JobStatus types.JobStatus
 
 	// The schedule for running the job. Possible values are:
+	//
 	//   - ONE_TIME - The job runs only once.
+	//
 	//   - SCHEDULED - The job runs on a daily, weekly, or monthly basis. The
 	//   scheduleFrequency property indicates the recurrence pattern for the job.
 	JobType types.JobType
@@ -110,31 +118,41 @@ type DescribeClassificationJobOutput struct {
 	// An array of unique identifiers, one for each managed data identifier that the
 	// job is explicitly configured to include (use) or exclude (not use) when it
 	// analyzes data. Inclusion or exclusion depends on the managed data identifier
-	// selection type specified for the job (managedDataIdentifierSelector).This value
-	// is null if the job's managed data identifier selection type is ALL, NONE, or
-	// RECOMMENDED.
+	// selection type specified for the job (managedDataIdentifierSelector).
+	//
+	// This value is null if the job's managed data identifier selection type is ALL,
+	// NONE, or RECOMMENDED.
 	ManagedDataIdentifierIds []string
 
 	// The selection type that determines which managed data identifiers the job uses
 	// when it analyzes data. Possible values are:
+	//
 	//   - ALL - Use all managed data identifiers.
+	//
 	//   - EXCLUDE - Use all managed data identifiers except the ones specified by the
 	//   managedDataIdentifierIds property.
+	//
 	//   - INCLUDE - Use only the managed data identifiers specified by the
 	//   managedDataIdentifierIds property.
+	//
 	//   - NONE - Don't use any managed data identifiers. Use only custom data
 	//   identifiers (customDataIdentifierIds).
+	//
 	//   - RECOMMENDED (default) - Use the recommended set of managed data identifiers.
+	//
 	// If this value is null, the job uses the recommended set of managed data
-	// identifiers. If the job is a recurring job and this value is ALL or EXCLUDE,
-	// each job run automatically uses new managed data identifiers that are released.
-	// If this value is null or RECOMMENDED for a recurring job, each job run uses all
-	// the managed data identifiers that are in the recommended set when the run
-	// starts. For information about individual managed data identifiers or to
-	// determine which ones are in the recommended set, see Using managed data
-	// identifiers (https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html)
-	// and Recommended managed data identifiers (https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html)
-	// in the Amazon Macie User Guide.
+	// identifiers.
+	//
+	// If the job is a recurring job and this value is ALL or EXCLUDE, each job run
+	// automatically uses new managed data identifiers that are released. If this value
+	// is null or RECOMMENDED for a recurring job, each job run uses all the managed
+	// data identifiers that are in the recommended set when the run starts.
+	//
+	// For information about individual managed data identifiers or to determine which
+	// ones are in the recommended set, see [Using managed data identifiers]and [Recommended managed data identifiers] in the Amazon Macie User Guide.
+	//
+	// [Using managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
+	// [Recommended managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html
 	ManagedDataIdentifierSelector types.ManagedDataIdentifierSelector
 
 	// The custom name of the job.

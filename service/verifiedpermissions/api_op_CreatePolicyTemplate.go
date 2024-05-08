@@ -17,11 +17,13 @@ import (
 // instantiated policy can then be considered in authorization decisions. The
 // instantiated policy works identically to any other policy, except that it is
 // dynamically linked to the template. If the template changes, then any policies
-// that are linked to that template are immediately updated as well. Verified
-// Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to propagate through
-// the service and be visible in the results of other Verified Permissions
-// operations.
+// that are linked to that template are immediately updated as well.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
 func (c *Client) CreatePolicyTemplate(ctx context.Context, params *CreatePolicyTemplateInput, optFns ...func(*Options)) (*CreatePolicyTemplateOutput, error) {
 	if params == nil {
 		params = &CreatePolicyTemplateInput{}
@@ -54,13 +56,19 @@ type CreatePolicyTemplateInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an ConflictException error. Verified
-	// Permissions recognizes a ClientToken for eight hours. After eight hours, the
-	// next request with the same parameters performs the operation again regardless of
-	// the value of ClientToken .
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an ConflictException error.
+	//
+	// Verified Permissions recognizes a ClientToken for eight hours. After eight
+	// hours, the next request with the same parameters performs the operation again
+	// regardless of the value of ClientToken .
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// Specifies a description for the policy template.

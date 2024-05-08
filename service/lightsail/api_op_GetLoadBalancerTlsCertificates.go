@@ -12,10 +12,12 @@ import (
 )
 
 // Returns information about the TLS certificates that are associated with the
-// specified Lightsail load balancer. TLS is just an updated, more secure version
-// of Secure Socket Layer (SSL). You can have a maximum of 2 certificates
-// associated with a Lightsail load balancer. One is active and the other is
-// inactive.
+// specified Lightsail load balancer.
+//
+// TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+//
+// You can have a maximum of 2 certificates associated with a Lightsail load
+// balancer. One is active and the other is inactive.
 func (c *Client) GetLoadBalancerTlsCertificates(ctx context.Context, params *GetLoadBalancerTlsCertificatesInput, optFns ...func(*Options)) (*GetLoadBalancerTlsCertificatesOutput, error) {
 	if params == nil {
 		params = &GetLoadBalancerTlsCertificatesInput{}

@@ -16,7 +16,9 @@ import (
 // Private Certificate Authority (Private CA) or by uploading a CA certificate.
 // Your Amazon Web Services workloads can authenticate with the trust anchor using
 // certificates issued by the CA in exchange for temporary Amazon Web Services
-// credentials. Required permissions: rolesanywhere:CreateTrustAnchor .
+// credentials.
+//
+// Required permissions: rolesanywhere:CreateTrustAnchor .
 func (c *Client) CreateTrustAnchor(ctx context.Context, params *CreateTrustAnchorInput, optFns ...func(*Options)) (*CreateTrustAnchorOutput, error) {
 	if params == nil {
 		params = &CreateTrustAnchorInput{}

@@ -54,12 +54,15 @@ type PutAccountDetailsInput struct {
 	ContactLanguage types.ContactLanguage
 
 	// Indicates whether or not your account should have production access in the
-	// current Amazon Web Services Region. If the value is false , then your account is
-	// in the sandbox. When your account is in the sandbox, you can only send email to
-	// verified identities. If the value is true , then your account has production
-	// access. When your account has production access, you can send email to any
-	// address. The sending quota and maximum sending rate for your account vary based
-	// on your specific use case.
+	// current Amazon Web Services Region.
+	//
+	// If the value is false , then your account is in the sandbox. When your account
+	// is in the sandbox, you can only send email to verified identities.
+	//
+	// If the value is true , then your account has production access. When your
+	// account has production access, you can send email to any address. The sending
+	// quota and maximum sending rate for your account vary based on your specific use
+	// case.
 	ProductionAccessEnabled *bool
 
 	noSmithyDocumentSerde

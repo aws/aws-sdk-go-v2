@@ -12,10 +12,13 @@ import (
 
 // Creates an association between a geofence collection and a tracker resource.
 // This allows the tracker resource to communicate location data to the linked
-// geofence collection. You can associate up to five geofence collections to each
-// tracker resource. Currently not supported — Cross-account configurations, such
-// as creating associations between a tracker resource in one account and a
-// geofence collection in another account.
+// geofence collection.
+//
+// You can associate up to five geofence collections to each tracker resource.
+//
+// Currently not supported — Cross-account configurations, such as creating
+// associations between a tracker resource in one account and a geofence collection
+// in another account.
 func (c *Client) AssociateTrackerConsumer(ctx context.Context, params *AssociateTrackerConsumerInput, optFns ...func(*Options)) (*AssociateTrackerConsumerOutput, error) {
 	if params == nil {
 		params = &AssociateTrackerConsumerInput{}
@@ -36,6 +39,7 @@ type AssociateTrackerConsumerInput struct {
 	// The Amazon Resource Name (ARN) for the geofence collection to be associated to
 	// tracker resource. Used when you need to specify a resource across all Amazon Web
 	// Services.
+	//
 	//   - Format example:
 	//   arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer
 	//

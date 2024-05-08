@@ -33,21 +33,27 @@ func (c *Client) ListScrapers(ctx context.Context, params *ListScrapersInput, op
 type ListScrapersInput struct {
 
 	// (Optional) A list of key-value pairs to filter the list of scrapers returned.
-	// Keys include status , sourceArn , destinationArn , and alias . Filters on the
-	// same key are OR 'd together, and filters on different keys are AND 'd together.
-	// For example, status=ACTIVE&status=CREATING&alias=Test , will return all scrapers
-	// that have the alias Test, and are either in status ACTIVE or CREATING. To find
-	// all active scrapers that are sending metrics to a specific Amazon Managed
-	// Service for Prometheus workspace, you would use the ARN of the workspace in a
-	// query:
-	// status=ACTIVE&destinationArn=arn:aws:aps:us-east-1:123456789012:workspace/ws-example1-1234-abcd-56ef-123456789012
+	// Keys include status , sourceArn , destinationArn , and alias .
+	//
+	// Filters on the same key are OR 'd together, and filters on different keys are
+	// AND 'd together. For example, status=ACTIVE&status=CREATING&alias=Test , will
+	// return all scrapers that have the alias Test, and are either in status ACTIVE or
+	// CREATING.
+	//
+	// To find all active scrapers that are sending metrics to a specific Amazon
+	// Managed Service for Prometheus workspace, you would use the ARN of the workspace
+	// in a query:
+	//
+	//     status=ACTIVE&destinationArn=arn:aws:aps:us-east-1:123456789012:workspace/ws-example1-1234-abcd-56ef-123456789012
+	//
 	// If this is included, it filters the results to only the scrapers that match the
 	// filter.
 	Filters map[string][]string
 
 	// Optional) The maximum number of scrapers to return in one ListScrapers
-	// operation. The range is 1-1000. If you omit this parameter, the default of 100
-	// is used.
+	// operation. The range is 1-1000.
+	//
+	// If you omit this parameter, the default of 100 is used.
 	MaxResults *int32
 
 	// (Optional) The token for the next set of items to return. (You received this
@@ -162,8 +168,9 @@ var _ ListScrapersAPIClient = (*Client)(nil)
 // ListScrapersPaginatorOptions is the paginator options for ListScrapers
 type ListScrapersPaginatorOptions struct {
 	// Optional) The maximum number of scrapers to return in one ListScrapers
-	// operation. The range is 1-1000. If you omit this parameter, the default of 100
-	// is used.
+	// operation. The range is 1-1000.
+	//
+	// If you omit this parameter, the default of 100 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -28,12 +28,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource that the tags are added to.
+	//  The Amazon Resource Name (ARN) of the resource that the tags are added to.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The list of tags that are added to the specified resource.
+	//  The list of tags that are added to the specified resource.
 	//
 	// This member is required.
 	Tags map[string]string

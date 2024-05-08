@@ -16,8 +16,10 @@ import (
 // startDateTime and endDateTime fields are required. These fields define a time
 // range for which you want to retrieve results. Of the optional fields, you can
 // organize the results in the following ways:
+//
 //   - Use the filters field to filter the results and the sortBy field to specify
 //     the values by which to sort the results.
+//
 //   - Use the maxResults field to limit the number of results to return in a
 //     single response and the nextToken field to return the next batch of results if
 //     the response does not return the full set of results.
@@ -66,10 +68,12 @@ type ListSessionAnalyticsDataInput struct {
 
 	// If the response from the ListSessionAnalyticsData operation contains more
 	// results than specified in the maxResults parameter, a token is returned in the
-	// response. Use the returned token in the nextToken parameter of a
-	// ListSessionAnalyticsData request to return the next page of results. For a
-	// complete set of results, call the ListSessionAnalyticsData operation until the
-	// nextToken returned in the response is null.
+	// response.
+	//
+	// Use the returned token in the nextToken parameter of a ListSessionAnalyticsData
+	// request to return the next page of results. For a complete set of results, call
+	// the ListSessionAnalyticsData operation until the nextToken returned in the
+	// response is null.
 	NextToken *string
 
 	// An object specifying the measure and method by which to sort the session
@@ -86,10 +90,12 @@ type ListSessionAnalyticsDataOutput struct {
 
 	// If the response from the ListSessionAnalyticsData operation contains more
 	// results than specified in the maxResults parameter, a token is returned in the
-	// response. Use the returned token in the nextToken parameter of a
-	// ListSessionAnalyticsData request to return the next page of results. For a
-	// complete set of results, call the ListSessionAnalyticsData operation until the
-	// nextToken returned in the response is null.
+	// response.
+	//
+	// Use the returned token in the nextToken parameter of a ListSessionAnalyticsData
+	// request to return the next page of results. For a complete set of results, call
+	// the ListSessionAnalyticsData operation until the nextToken returned in the
+	// response is null.
 	NextToken *string
 
 	// A list of objects, each of which contains information about a session with the

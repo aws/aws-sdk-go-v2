@@ -16,8 +16,9 @@ import (
 // information about these events to. For example, you can send event data to
 // Amazon SNS to receive notifications when you receive bounces or complaints, or
 // you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for
-// long-term storage. A single configuration set can include more than one event
-// destination.
+// long-term storage.
+//
+// A single configuration set can include more than one event destination.
 func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, params *CreateConfigurationSetEventDestinationInput, optFns ...func(*Options)) (*CreateConfigurationSetEventDestinationOutput, error) {
 	if params == nil {
 		params = &CreateConfigurationSetEventDestinationInput{}

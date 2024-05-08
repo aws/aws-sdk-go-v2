@@ -30,8 +30,10 @@ func (c *Client) SearchRoutingProfiles(ctx context.Context, params *SearchRoutin
 
 type SearchRoutingProfilesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -43,10 +45,11 @@ type SearchRoutingProfilesInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The search criteria to be used to return routing profiles. The name and
-	// description fields support "contains" queries with a minimum of 2 characters and
-	// a maximum of 25 characters. Any queries with character lengths outside of this
-	// range will throw invalid results.
+	// The search criteria to be used to return routing profiles.
+	//
+	// The name and description fields support "contains" queries with a minimum of 2
+	// characters and a maximum of 25 characters. Any queries with character lengths
+	// outside of this range will throw invalid results.
 	SearchCriteria *types.RoutingProfileSearchCriteria
 
 	// Filters to be applied to search results.

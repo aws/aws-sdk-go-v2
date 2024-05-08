@@ -11,9 +11,10 @@ import (
 	"time"
 )
 
-// Creates a branch in a specified source repository in Amazon CodeCatalyst. This
-// API only creates a branch in a source repository hosted in Amazon CodeCatalyst.
-// You cannot use this API to create a branch in a linked repository.
+// Creates a branch in a specified source repository in Amazon CodeCatalyst.
+//
+// This API only creates a branch in a source repository hosted in Amazon
+// CodeCatalyst. You cannot use this API to create a branch in a linked repository.
 func (c *Client) CreateSourceRepositoryBranch(ctx context.Context, params *CreateSourceRepositoryBranchInput, optFns ...func(*Options)) (*CreateSourceRepositoryBranchOutput, error) {
 	if params == nil {
 		params = &CreateSourceRepositoryBranchInput{}
@@ -64,8 +65,9 @@ type CreateSourceRepositoryBranchOutput struct {
 	HeadCommitId *string
 
 	// The time the branch was last updated, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	LastUpdatedTime *time.Time
 
 	// The name of the newly created branch.

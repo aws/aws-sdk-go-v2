@@ -11,20 +11,31 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified WebACL . You can only use this if ManagedByFirewallManager
-// is false in the specified WebACL . Before deleting any web ACL, first
-// disassociate it from all resources.
+// Deletes the specified WebACL.
+//
+// You can only use this if ManagedByFirewallManager is false in the specified WebACL.
+//
+// Before deleting any web ACL, first disassociate it from all resources.
+//
 //   - To retrieve a list of the resources that are associated with a web ACL, use
 //     the following calls:
-//   - For regional resources, call ListResourcesForWebACL .
+//
+//   - For regional resources, call ListResourcesForWebACL.
+//
 //   - For Amazon CloudFront distributions, use the CloudFront call
-//     ListDistributionsByWebACLId . For information, see ListDistributionsByWebACLId (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html)
-//     in the Amazon CloudFront API Reference.
+//     ListDistributionsByWebACLId . For information, see [ListDistributionsByWebACLId]in the Amazon CloudFront
+//     API Reference.
+//
 //   - To disassociate a resource from a web ACL, use the following calls:
-//   - For regional resources, call DisassociateWebACL .
+//
+//   - For regional resources, call DisassociateWebACL.
+//
 //   - For Amazon CloudFront distributions, provide an empty web ACL ID in the
-//     CloudFront call UpdateDistribution . For information, see UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
-//     in the Amazon CloudFront API Reference.
+//     CloudFront call UpdateDistribution . For information, see [UpdateDistribution]in the Amazon
+//     CloudFront API Reference.
+//
+// [ListDistributionsByWebACLId]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html
+// [UpdateDistribution]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
 func (c *Client) DeleteWebACL(ctx context.Context, params *DeleteWebACLInput, optFns ...func(*Options)) (*DeleteWebACLOutput, error) {
 	if params == nil {
 		params = &DeleteWebACLInput{}
@@ -69,10 +80,14 @@ type DeleteWebACLInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.

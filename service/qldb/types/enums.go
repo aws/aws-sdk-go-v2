@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for EncryptionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionStatus) Values() []EncryptionStatus {
 	return []EncryptionStatus{
 		"ENABLED",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for ErrorCause. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCause) Values() []ErrorCause {
 	return []ErrorCause{
 		"KINESIS_STREAM_NOT_FOUND",
@@ -50,8 +52,9 @@ const (
 )
 
 // Values returns all known values for ExportStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatus) Values() []ExportStatus {
 	return []ExportStatus{
 		"IN_PROGRESS",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for LedgerState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LedgerState) Values() []LedgerState {
 	return []LedgerState{
 		"CREATING",
@@ -92,8 +96,9 @@ const (
 )
 
 // Values returns all known values for OutputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"ION_BINARY",
@@ -111,8 +116,9 @@ const (
 )
 
 // Values returns all known values for PermissionsMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionsMode) Values() []PermissionsMode {
 	return []PermissionsMode{
 		"ALLOW_ALL",
@@ -130,8 +136,9 @@ const (
 )
 
 // Values returns all known values for S3ObjectEncryptionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3ObjectEncryptionType) Values() []S3ObjectEncryptionType {
 	return []S3ObjectEncryptionType{
 		"SSE_KMS",
@@ -152,8 +159,9 @@ const (
 )
 
 // Values returns all known values for StreamStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamStatus) Values() []StreamStatus {
 	return []StreamStatus{
 		"ACTIVE",

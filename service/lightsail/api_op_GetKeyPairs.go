@@ -33,10 +33,11 @@ type GetKeyPairsInput struct {
 	// response of your request.
 	IncludeDefaultKeyPair *bool
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetKeyPairs request. If your results are
-	// paginated, the response will return a next page token that you can specify as
-	// the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetKeyPairs request. If your results
+	// are paginated, the response will return a next page token that you can specify
+	// as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -47,10 +48,12 @@ type GetKeyPairsOutput struct {
 	// An array of key-value pairs containing information about the key pairs.
 	KeyPairs []types.KeyPair
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetKeyPairs request and specify the next page
-	// token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetKeyPairs request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -37,7 +37,7 @@ type DeleteRepositoryInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The force option can be used to delete a repository that contains images. If
+	//  The force option can be used to delete a repository that contains images. If
 	// the force option is not used, the repository must be empty prior to deletion.
 	Force bool
 

@@ -39,23 +39,32 @@ type ListClusterNodesInput struct {
 
 	// A filter that returns nodes in a SageMaker HyperPod cluster created after the
 	// specified time. Timestamps are formatted according to the ISO 8601 standard.
+	//
 	// Acceptable formats include:
+	//
 	//   - YYYY-MM-DDThh:mm:ss.sssTZD (UTC), for example, 2014-10-01T20:30:00.000Z
+	//
 	//   - YYYY-MM-DDThh:mm:ss.sssTZD (with offset), for example,
 	//   2014-10-01T12:30:00.000-08:00
+	//
 	//   - YYYY-MM-DD , for example, 2014-10-01
+	//
 	//   - Unix time in seconds, for example, 1412195400 . This is also referred to as
 	//   Unix Epoch time and represents the number of seconds since midnight, January 1,
 	//   1970 UTC.
-	// For more information about the timestamp format, see Timestamp (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
-	// in the Amazon Web Services Command Line Interface User Guide.
+	//
+	// For more information about the timestamp format, see [Timestamp] in the Amazon Web
+	// Services Command Line Interface User Guide.
+	//
+	// [Timestamp]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	CreationTimeAfter *time.Time
 
 	// A filter that returns nodes in a SageMaker HyperPod cluster created before the
 	// specified time. The acceptable formats are the same as the timestamp formats for
-	// CreationTimeAfter . For more information about the timestamp format, see
-	// Timestamp (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
-	// in the Amazon Web Services Command Line Interface User Guide.
+	// CreationTimeAfter . For more information about the timestamp format, see [Timestamp] in
+	// the Amazon Web Services Command Line Interface User Guide.
+	//
+	// [Timestamp]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	CreationTimeBefore *time.Time
 
 	// A filter that returns the instance groups whose name contain a specified string.

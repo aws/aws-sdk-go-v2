@@ -12,9 +12,11 @@ import (
 )
 
 // Grants permissions to the principal to access metadata in the Data Catalog and
-// data organized in underlying data storage such as Amazon S3. For information
-// about permissions, see Security and Access Control to Metadata and Data (https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html)
-// .
+// data organized in underlying data storage such as Amazon S3.
+//
+// For information about permissions, see [Security and Access Control to Metadata and Data].
+//
+// [Security and Access Control to Metadata and Data]: https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html
 func (c *Client) GrantPermissions(ctx context.Context, params *GrantPermissionsInput, optFns ...func(*Options)) (*GrantPermissionsOutput, error) {
 	if params == nil {
 		params = &GrantPermissionsInput{}
@@ -43,9 +45,11 @@ type GrantPermissionsInput struct {
 
 	// The principal to be granted the permissions on the resource. Supported
 	// principals are IAM users or IAM roles, and they are defined by their principal
-	// type and their ARN. Note that if you define a resource with a particular ARN,
-	// then later delete, and recreate a resource with that same ARN, the resource
-	// maintains the permissions already granted.
+	// type and their ARN.
+	//
+	// Note that if you define a resource with a particular ARN, then later delete,
+	// and recreate a resource with that same ARN, the resource maintains the
+	// permissions already granted.
 	//
 	// This member is required.
 	Principal *types.DataLakePrincipal

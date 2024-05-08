@@ -31,14 +31,16 @@ func (c *Client) CreatePlaybackRestrictionPolicy(ctx context.Context, params *Cr
 type CreatePlaybackRestrictionPolicyInput struct {
 
 	// A list of country codes that control geoblocking restriction. Allowed values
-	// are the officially assigned ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-	// codes. Default: All countries (an empty array).
+	// are the officially assigned [ISO 3166-1 alpha-2]codes. Default: All countries (an empty array).
+	//
+	// [ISO 3166-1 alpha-2]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 	AllowedCountries []string
 
 	// A list of origin sites that control CORS restriction. Allowed values are the
-	// same as valid values of the Origin header defined at
-	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)
-	// . Default: All origins (an empty array).
+	// same as valid values of the Origin header defined at [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]. Default: All origins (an
+	// empty array).
+	//
+	// [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
 	AllowedOrigins []string
 
 	// Whether channel playback is constrained by origin site. Default: false .
@@ -47,11 +49,12 @@ type CreatePlaybackRestrictionPolicyInput struct {
 	// Playback-restriction-policy name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value) . See Tagging
-	// Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// Array of 1-50 maps, each of the form string:string (key:value) . See [Tagging Amazon Web Services Resources] for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

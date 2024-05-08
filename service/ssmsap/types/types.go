@@ -184,16 +184,24 @@ type Component struct {
 	Sid *string
 
 	// The status of the component.
+	//
 	//   - ACTIVATED - this status has been deprecated.
+	//
 	//   - STARTING - the component is in the process of being started.
+	//
 	//   - STOPPED - the component is not running.
+	//
 	//   - STOPPING - the component is in the process of being stopped.
+	//
 	//   - RUNNING - the component is running.
+	//
 	//   - RUNNING_WITH_ERROR - one or more child component(s) of the parent component
-	//   is not running. Call GetComponent (https://docs.aws.amazon.com/ssmsap/latest/APIReference/API_GetComponent.html)
-	//   to review the status of each child component.
+	//   is not running. Call [GetComponent]GetComponent to review the status of each child component.
+	//
 	//   - UNDEFINED - AWS Systems Manager for SAP cannot provide the component status
 	//   based on the discovered information. Verify your SAP application.
+	//
+	// [GetComponent]: https://docs.aws.amazon.com/ssmsap/latest/APIReference/API_GetComponent.html
 	Status ComponentStatus
 
 	// The SAP system number of the application component.

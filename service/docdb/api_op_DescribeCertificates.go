@@ -33,7 +33,10 @@ type DescribeCertificatesInput struct {
 	// The user-supplied certificate identifier. If this parameter is specified,
 	// information for only the specified certificate is returned. If this parameter is
 	// omitted, a list of up to MaxRecords certificates is returned. This parameter is
-	// not case sensitive. Constraints
+	// not case sensitive.
+	//
+	// Constraints
+	//
 	//   - Must match an existing CertificateIdentifier .
 	CertificateIdentifier *string
 
@@ -48,8 +51,13 @@ type DescribeCertificatesInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints:
+	//
+	// Default: 100
+	//
+	// Constraints:
+	//
 	//   - Minimum: 20
+	//
 	//   - Maximum: 100
 	MaxRecords *int32
 
@@ -166,8 +174,13 @@ type DescribeCertificatesPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints:
+	//
+	// Default: 100
+	//
+	// Constraints:
+	//
 	//   - Minimum: 20
+	//
 	//   - Maximum: 100
 	Limit int32
 

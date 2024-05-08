@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ExclusionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExclusionStatus) Values() []ExclusionStatus {
 	return []ExclusionStatus{
 		"excluded",
@@ -38,8 +39,9 @@ const (
 )
 
 // Values returns all known values for RecommendationLanguage. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationLanguage) Values() []RecommendationLanguage {
 	return []RecommendationLanguage{
 		"en",
@@ -68,8 +70,9 @@ const (
 
 // Values returns all known values for RecommendationLifecycleStage. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationLifecycleStage) Values() []RecommendationLifecycleStage {
 	return []RecommendationLifecycleStage{
 		"in_progress",
@@ -92,8 +95,9 @@ const (
 )
 
 // Values returns all known values for RecommendationPillar. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationPillar) Values() []RecommendationPillar {
 	return []RecommendationPillar{
 		"cost_optimizing",
@@ -125,8 +129,9 @@ const (
 )
 
 // Values returns all known values for RecommendationSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationSource) Values() []RecommendationSource {
 	return []RecommendationSource{
 		"aws_config",
@@ -155,8 +160,9 @@ const (
 )
 
 // Values returns all known values for RecommendationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationStatus) Values() []RecommendationStatus {
 	return []RecommendationStatus{
 		"ok",
@@ -174,8 +180,9 @@ const (
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationType) Values() []RecommendationType {
 	return []RecommendationType{
 		"standard",
@@ -193,8 +200,9 @@ const (
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceStatus) Values() []ResourceStatus {
 	return []ResourceStatus{
 		"ok",
@@ -215,8 +223,9 @@ const (
 
 // Values returns all known values for UpdateRecommendationLifecycleStage. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateRecommendationLifecycleStage) Values() []UpdateRecommendationLifecycleStage {
 	return []UpdateRecommendationLifecycleStage{
 		"pending_response",
@@ -241,8 +250,9 @@ const (
 
 // Values returns all known values for
 // UpdateRecommendationLifecycleStageReasonCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateRecommendationLifecycleStageReasonCode) Values() []UpdateRecommendationLifecycleStageReasonCode {
 	return []UpdateRecommendationLifecycleStageReasonCode{
 		"non_critical_account",

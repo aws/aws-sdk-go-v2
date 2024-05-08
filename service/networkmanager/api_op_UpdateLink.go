@@ -43,13 +43,19 @@ type UpdateLinkInput struct {
 	// The upload and download speed in Mbps.
 	Bandwidth *types.Bandwidth
 
-	// A description of the link. Constraints: Maximum length of 256 characters.
+	// A description of the link.
+	//
+	// Constraints: Maximum length of 256 characters.
 	Description *string
 
-	// The provider of the link. Constraints: Maximum length of 128 characters.
+	// The provider of the link.
+	//
+	// Constraints: Maximum length of 128 characters.
 	Provider *string
 
-	// The type of the link. Constraints: Maximum length of 128 characters.
+	// The type of the link.
+	//
+	// Constraints: Maximum length of 128 characters.
 	Type *string
 
 	noSmithyDocumentSerde

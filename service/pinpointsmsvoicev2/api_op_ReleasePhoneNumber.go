@@ -13,9 +13,10 @@ import (
 )
 
 // Releases an existing origination phone number in your account. Once released, a
-// phone number is no longer available for sending messages. If the origination
-// phone number has deletion protection enabled or is associated with a pool, an
-// error is returned.
+// phone number is no longer available for sending messages.
+//
+// If the origination phone number has deletion protection enabled or is
+// associated with a pool, an error is returned.
 func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNumberInput, optFns ...func(*Options)) (*ReleasePhoneNumberOutput, error) {
 	if params == nil {
 		params = &ReleasePhoneNumberInput{}
@@ -33,8 +34,8 @@ func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNum
 
 type ReleasePhoneNumberInput struct {
 
-	// The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use
-	// DescribePhoneNumbers to get the values for PhoneNumberId and PhoneNumberArn.
+	// The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use DescribePhoneNumbers
+	// to get the values for PhoneNumberId and PhoneNumberArn.
 	//
 	// This member is required.
 	PhoneNumberId *string
@@ -44,8 +45,9 @@ type ReleasePhoneNumberInput struct {
 
 type ReleasePhoneNumberOutput struct {
 
-	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.

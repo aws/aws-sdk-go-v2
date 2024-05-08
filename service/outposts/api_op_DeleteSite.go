@@ -28,7 +28,7 @@ func (c *Client) DeleteSite(ctx context.Context, params *DeleteSiteInput, optFns
 
 type DeleteSiteInput struct {
 
-	// The ID or the Amazon Resource Name (ARN) of the site.
+	//  The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string

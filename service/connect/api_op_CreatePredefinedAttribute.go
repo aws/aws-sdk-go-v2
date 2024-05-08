@@ -35,12 +35,12 @@ type CreatePredefinedAttributeInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The name of the predefined attribute.
+	//  The name of the predefined attribute.
 	//
 	// This member is required.
 	Name *string
 
-	// The values of the predefined attribute.
+	//  The values of the predefined attribute.
 	//
 	// This member is required.
 	Values types.PredefinedAttributeValues

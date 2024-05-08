@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets StreamingSessionBackup resource. Invoke this operation to poll for a
-// streaming session backup while stopping a streaming session.
+// Gets StreamingSessionBackup resource.
+//
+// Invoke this operation to poll for a streaming session backup while stopping a
+// streaming session.
 func (c *Client) GetStreamingSessionBackup(ctx context.Context, params *GetStreamingSessionBackupInput, optFns ...func(*Options)) (*GetStreamingSessionBackupOutput, error) {
 	if params == nil {
 		params = &GetStreamingSessionBackupInput{}

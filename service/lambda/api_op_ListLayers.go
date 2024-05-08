@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Lambda layers (https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html)
-// and shows information about the latest version of each. Specify a runtime
-// identifier (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-// to list only layers that indicate that they're compatible with that runtime.
+// Lists [Lambda layers] and shows information about the latest version of each. Specify a [runtime identifier] to
+// list only layers that indicate that they're compatible with that runtime.
 // Specify a compatible architecture to include only layers that are compatible
-// with that instruction set architecture (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
-// .
+// with that [instruction set architecture].
+//
+// [instruction set architecture]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
+// [runtime identifier]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+// [Lambda layers]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html
 func (c *Client) ListLayers(ctx context.Context, params *ListLayersInput, optFns ...func(*Options)) (*ListLayersOutput, error) {
 	if params == nil {
 		params = &ListLayersInput{}
@@ -35,13 +36,16 @@ func (c *Client) ListLayers(ctx context.Context, params *ListLayersInput, optFns
 
 type ListLayersInput struct {
 
-	// The compatible instruction set architecture (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
-	// .
+	// The compatible [instruction set architecture].
+	//
+	// [instruction set architecture]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
 	CompatibleArchitecture types.Architecture
 
-	// A runtime identifier. For example, java21 . The following list includes
-	// deprecated runtimes. For more information, see Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// A runtime identifier. For example, java21 .
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	CompatibleRuntime types.Runtime
 
 	// A pagination token returned by a previous call.

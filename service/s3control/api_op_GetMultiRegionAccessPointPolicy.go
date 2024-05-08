@@ -16,15 +16,23 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Returns the access
-// control policy of the specified Multi-Region Access Point. This action will
-// always be routed to the US West (Oregon) Region. For more information about the
-// restrictions around working with Multi-Region Access Points, see Multi-Region
-// Access Point restrictions and limitations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html)
-// in the Amazon S3 User Guide. The following actions are related to
-// GetMultiRegionAccessPointPolicy :
-//   - GetMultiRegionAccessPointPolicyStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html)
-//   - PutMultiRegionAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html)
+// This operation is not supported by directory buckets.
+//
+// Returns the access control policy of the specified Multi-Region Access Point.
+//
+// This action will always be routed to the US West (Oregon) Region. For more
+// information about the restrictions around working with Multi-Region Access
+// Points, see [Multi-Region Access Point restrictions and limitations]in the Amazon S3 User Guide.
+//
+// The following actions are related to GetMultiRegionAccessPointPolicy :
+//
+// [GetMultiRegionAccessPointPolicyStatus]
+//
+// [PutMultiRegionAccessPointPolicy]
+//
+// [PutMultiRegionAccessPointPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html
+// [GetMultiRegionAccessPointPolicyStatus]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html
+// [Multi-Region Access Point restrictions and limitations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
 func (c *Client) GetMultiRegionAccessPointPolicy(ctx context.Context, params *GetMultiRegionAccessPointPolicyInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointPolicyOutput, error) {
 	if params == nil {
 		params = &GetMultiRegionAccessPointPolicyInput{}
@@ -50,9 +58,10 @@ type GetMultiRegionAccessPointPolicyInput struct {
 
 	// Specifies the Multi-Region Access Point. The name of the Multi-Region Access
 	// Point is different from the alias. For more information about the distinction
-	// between the name and the alias of an Multi-Region Access Point, see Rules for
-	// naming Amazon S3 Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
-	// in the Amazon S3 User Guide.
+	// between the name and the alias of an Multi-Region Access Point, see [Rules for naming Amazon S3 Multi-Region Access Points]in the
+	// Amazon S3 User Guide.
+	//
+	// [Rules for naming Amazon S3 Multi-Region Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
 	//
 	// This member is required.
 	Name *string

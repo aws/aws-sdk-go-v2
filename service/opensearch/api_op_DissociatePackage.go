@@ -14,8 +14,9 @@ import (
 // Removes a package from the specified Amazon OpenSearch Service domain. The
 // package can't be in use with any OpenSearch index for the dissociation to
 // succeed. The package is still available in OpenSearch Service for association
-// later. For more information, see Custom packages for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html)
-// .
+// later. For more information, see [Custom packages for Amazon OpenSearch Service].
+//
+// [Custom packages for Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html
 func (c *Client) DissociatePackage(ctx context.Context, params *DissociatePackageInput, optFns ...func(*Options)) (*DissociatePackageOutput, error) {
 	if params == nil {
 		params = &DissociatePackageInput{}
@@ -51,7 +52,7 @@ type DissociatePackageInput struct {
 // Container for the response returned by an DissociatePackage operation.
 type DissociatePackageOutput struct {
 
-	// Information about a package that has been dissociated from the domain.
+	//  Information about a package that has been dissociated from the domain.
 	DomainPackageDetails *types.DomainPackageDetails
 
 	// Metadata pertaining to the operation's result.

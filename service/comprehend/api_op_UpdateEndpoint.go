@@ -11,8 +11,9 @@ import (
 )
 
 // Updates information about the specified endpoint. For information about
-// endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
-// .
+// endpoints, see [Managing endpoints].
+//
+// [Managing endpoints]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
 func (c *Client) UpdateEndpoint(ctx context.Context, params *UpdateEndpointInput, optFns ...func(*Options)) (*UpdateEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateEndpointInput{}
@@ -39,9 +40,10 @@ type UpdateEndpointInput struct {
 	// CMK.
 	DesiredDataAccessRoleArn *string
 
-	// The desired number of inference units to be used by the model using this
-	// endpoint. Each inference unit represents of a throughput of 100 characters per
-	// second.
+	//  The desired number of inference units to be used by the model using this
+	// endpoint.
+	//
+	// Each inference unit represents of a throughput of 100 characters per second.
 	DesiredInferenceUnits *int32
 
 	// The ARN of the new model to use when updating an existing endpoint.

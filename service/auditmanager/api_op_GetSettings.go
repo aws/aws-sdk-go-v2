@@ -29,7 +29,7 @@ func (c *Client) GetSettings(ctx context.Context, params *GetSettingsInput, optF
 
 type GetSettingsInput struct {
 
-	// The list of setting attribute enum values.
+	//  The list of setting attribute enum values.
 	//
 	// This member is required.
 	Attribute types.SettingAttribute
@@ -39,7 +39,7 @@ type GetSettingsInput struct {
 
 type GetSettingsOutput struct {
 
-	// The settings object that holds all supported Audit Manager settings.
+	//  The settings object that holds all supported Audit Manager settings.
 	Settings *types.Settings
 
 	// Metadata pertaining to the operation's result.

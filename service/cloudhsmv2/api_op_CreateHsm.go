@@ -31,13 +31,12 @@ func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns .
 type CreateHsmInput struct {
 
 	// The Availability Zone where you are creating the HSM. To find the cluster's
-	// Availability Zones, use DescribeClusters .
+	// Availability Zones, use DescribeClusters.
 	//
 	// This member is required.
 	AvailabilityZone *string
 
-	// The identifier (ID) of the HSM's cluster. To find the cluster ID, use
-	// DescribeClusters .
+	// The identifier (ID) of the HSM's cluster. To find the cluster ID, use DescribeClusters.
 	//
 	// This member is required.
 	ClusterId *string

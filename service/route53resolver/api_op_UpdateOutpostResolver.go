@@ -41,7 +41,7 @@ type UpdateOutpostResolverInput struct {
 	// Name of the Resolver on the Outpost.
 	Name *string
 
-	// Amazon EC2 instance type.
+	//  Amazon EC2 instance type.
 	PreferredInstanceType *string
 
 	noSmithyDocumentSerde

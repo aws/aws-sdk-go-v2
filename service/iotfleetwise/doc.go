@@ -8,6 +8,9 @@
 // scale. With Amazon Web Services IoT FleetWise, you can standardize all of your
 // vehicle data models, independent of the in-vehicle communication architecture,
 // and define data collection rules to transfer only high-value data to the cloud.
-// For more information, see What is Amazon Web Services IoT FleetWise? (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/)
-// in the Amazon Web Services IoT FleetWise Developer Guide.
+//
+// For more information, see [What is Amazon Web Services IoT FleetWise?] in the Amazon Web Services IoT FleetWise Developer
+// Guide.
+//
+// [What is Amazon Web Services IoT FleetWise?]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/
 package iotfleetwise

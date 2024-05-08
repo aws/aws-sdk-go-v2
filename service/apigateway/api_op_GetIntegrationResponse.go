@@ -60,6 +60,7 @@ type GetIntegrationResponseOutput struct {
 
 	// Specifies how to handle response payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT , with the following behaviors:
+	//
 	// If this property is not defined, the response payload will be passed through
 	// from the integration response to the method response without modification.
 	ContentHandling types.ContentHandlingStrategy

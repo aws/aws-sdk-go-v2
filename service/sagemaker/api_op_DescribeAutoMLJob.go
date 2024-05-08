@@ -12,9 +12,12 @@ import (
 	"time"
 )
 
-// Returns information about an AutoML job created by calling CreateAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html)
-// . AutoML jobs created by calling CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
-// cannot be described by DescribeAutoMLJob .
+// Returns information about an AutoML job created by calling [CreateAutoMLJob].
+//
+// AutoML jobs created by calling [CreateAutoMLJobV2] cannot be described by DescribeAutoMLJob .
+//
+// [CreateAutoMLJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html
+// [CreateAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
 func (c *Client) DescribeAutoMLJob(ctx context.Context, params *DescribeAutoMLJobInput, optFns ...func(*Options)) (*DescribeAutoMLJobOutput, error) {
 	if params == nil {
 		params = &DescribeAutoMLJobInput{}
@@ -98,8 +101,9 @@ type DescribeAutoMLJobOutput struct {
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// The best model candidate selected by SageMaker Autopilot using both the best
-	// objective metric and lowest InferenceLatency (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html)
-	// for an experiment.
+	// objective metric and lowest [InferenceLatency]for an experiment.
+	//
+	// [InferenceLatency]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html
 	BestCandidate *types.AutoMLCandidate
 
 	// Returns the end time of the AutoML job.

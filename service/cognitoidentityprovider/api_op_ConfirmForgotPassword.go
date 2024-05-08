@@ -12,12 +12,14 @@ import (
 )
 
 // Allows a user to enter a confirmation code to reset a forgotten password.
-// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in
-// requests for this API operation. For this operation, you can't use IAM
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
 // credentials to authorize requests, and you can't grant IAM permissions in
 // policies. For more information about authorization models in Amazon Cognito, see
-// Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// .
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 func (c *Client) ConfirmForgotPassword(ctx context.Context, params *ConfirmForgotPasswordInput, optFns ...func(*Options)) (*ConfirmForgotPasswordOutput, error) {
 	if params == nil {
 		params = &ConfirmForgotPasswordInput{}
@@ -42,8 +44,9 @@ type ConfirmForgotPasswordInput struct {
 	ClientId *string
 
 	// The confirmation code from your user's request to reset their password. For
-	// more information, see ForgotPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html)
-	// .
+	// more information, see [ForgotPassword].
+	//
+	// [ForgotPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html
 	//
 	// This member is required.
 	ConfirmationCode *string
@@ -67,31 +70,41 @@ type ConfirmForgotPasswordInput struct {
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers. You create custom workflows by assigning
-	// Lambda functions to user pool triggers. When you use the ConfirmForgotPassword
-	// API action, Amazon Cognito invokes the function that is assigned to the post
-	// confirmation trigger. When Amazon Cognito invokes this function, it passes a
-	// JSON payload, which the function receives as input. This payload contains a
-	// clientMetadata attribute, which provides the data that you assigned to the
-	// ClientMetadata parameter in your ConfirmForgotPassword request. In your function
-	// code in Lambda, you can process the clientMetadata value to enhance your
-	// workflow for your specific needs. For more information, see Customizing user
-	// pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
-	// parameter, remember that Amazon Cognito won't do the following:
+	// workflows that this action triggers.
+	//
+	// You create custom workflows by assigning Lambda functions to user pool
+	// triggers. When you use the ConfirmForgotPassword API action, Amazon Cognito
+	// invokes the function that is assigned to the post confirmation trigger. When
+	// Amazon Cognito invokes this function, it passes a JSON payload, which the
+	// function receives as input. This payload contains a clientMetadata attribute,
+	// which provides the data that you assigned to the ClientMetadata parameter in
+	// your ConfirmForgotPassword request. In your function code in Lambda, you can
+	// process the clientMetadata value to enhance your workflow for your specific
+	// needs.
+	//
+	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	//
+	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
+	// do the following:
+	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
 	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
 	//   serves no purpose.
+	//
 	//   - Validate the ClientMetadata value.
+	//
 	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
 	//   sensitive information.
+	//
+	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
 	// of a user pool client and username plus the client ID in the message. For more
-	// information about SecretHash , see Computing secret hash values (https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash)
-	// .
+	// information about SecretHash , see [Computing secret hash values].
+	//
+	// [Computing secret hash values]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
 	SecretHash *string
 
 	// Contextual data about your user session, such as the device fingerprint, IP

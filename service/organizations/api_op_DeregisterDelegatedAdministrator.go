@@ -11,16 +11,20 @@ import (
 )
 
 // Removes the specified member Amazon Web Services account as a delegated
-// administrator for the specified Amazon Web Services service. Deregistering a
-// delegated administrator can have unintended impacts on the functionality of the
-// enabled Amazon Web Services service. See the documentation for the enabled
-// service before you deregister a delegated administrator so that you understand
-// any potential impacts. You can run this action only for Amazon Web Services
-// services that support this feature. For a current list of services that support
-// it, see the column Supports Delegated Administrator in the table at Amazon Web
-// Services Services that you can use with Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html)
-// in the Organizations User Guide. This operation can be called only from the
-// organization's management account.
+// administrator for the specified Amazon Web Services service.
+//
+// Deregistering a delegated administrator can have unintended impacts on the
+// functionality of the enabled Amazon Web Services service. See the documentation
+// for the enabled service before you deregister a delegated administrator so that
+// you understand any potential impacts.
+//
+// You can run this action only for Amazon Web Services services that support this
+// feature. For a current list of services that support it, see the column Supports
+// Delegated Administrator in the table at [Amazon Web Services Services that you can use with Organizations]in the Organizations User Guide.
+//
+// This operation can be called only from the organization's management account.
+//
+// [Amazon Web Services Services that you can use with Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
 func (c *Client) DeregisterDelegatedAdministrator(ctx context.Context, params *DeregisterDelegatedAdministratorInput, optFns ...func(*Options)) (*DeregisterDelegatedAdministratorOutput, error) {
 	if params == nil {
 		params = &DeregisterDelegatedAdministratorInput{}
@@ -45,11 +49,12 @@ type DeregisterDelegatedAdministratorInput struct {
 	AccountId *string
 
 	// The service principal name of an Amazon Web Services service for which the
-	// account is a delegated administrator. Delegated administrator privileges are
-	// revoked for only the specified Amazon Web Services service from the member
-	// account. If the specified service is the only service for which the member
-	// account is a delegated administrator, the operation also revokes Organizations
-	// read action permissions.
+	// account is a delegated administrator.
+	//
+	// Delegated administrator privileges are revoked for only the specified Amazon
+	// Web Services service from the member account. If the specified service is the
+	// only service for which the member account is a delegated administrator, the
+	// operation also revokes Organizations read action permissions.
 	//
 	// This member is required.
 	ServicePrincipal *string

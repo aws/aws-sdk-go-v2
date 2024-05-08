@@ -51,14 +51,17 @@ type ListAccountSettingsInput struct {
 	// The nextToken value returned from a ListAccountSettings request indicating that
 	// more results are available to fulfill the request and further calls will be
 	// needed. If maxResults was provided, it's possible the number of results to be
-	// fewer than maxResults . This token should be treated as an opaque identifier
-	// that is only used to retrieve the next items in a list and not for other
-	// programmatic purposes.
+	// fewer than maxResults .
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The ARN of the principal, which can be a user, role, or the root user. If this
 	// field is omitted, the account settings are listed only for the authenticated
-	// user. Federated users assume the account setting of the root user and can't have
+	// user.
+	//
+	// Federated users assume the account setting of the root user and can't have
 	// explicit account settings set for them.
 	PrincipalArn *string
 

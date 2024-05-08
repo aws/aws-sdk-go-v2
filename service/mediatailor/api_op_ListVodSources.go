@@ -35,7 +35,7 @@ type ListVodSourcesInput struct {
 	// This member is required.
 	SourceLocationName *string
 
-	// The maximum number of VOD sources that you want MediaTailor to return in
+	//  The maximum number of VOD sources that you want MediaTailor to return in
 	// response to the current request. If there are more than MaxResults VOD sources,
 	// use the value of NextToken in the response to get the next page of results.
 	MaxResults *int32
@@ -151,7 +151,7 @@ var _ ListVodSourcesAPIClient = (*Client)(nil)
 
 // ListVodSourcesPaginatorOptions is the paginator options for ListVodSources
 type ListVodSourcesPaginatorOptions struct {
-	// The maximum number of VOD sources that you want MediaTailor to return in
+	//  The maximum number of VOD sources that you want MediaTailor to return in
 	// response to the current request. If there are more than MaxResults VOD sources,
 	// use the value of NextToken in the response to get the next page of results.
 	Limit int32

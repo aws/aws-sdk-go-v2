@@ -13,6 +13,7 @@ import (
 // Adds an email address to the list of identities for your Amazon SES account in
 // the current Amazon Web Services Region and attempts to verify it. As a result of
 // executing this operation, a verification email is sent to the specified address.
+//
 // You can execute this operation no more than once per second.
 func (c *Client) VerifyEmailIdentity(ctx context.Context, params *VerifyEmailIdentityInput, optFns ...func(*Options)) (*VerifyEmailIdentityOutput, error) {
 	if params == nil {
@@ -30,8 +31,9 @@ func (c *Client) VerifyEmailIdentity(ctx context.Context, params *VerifyEmailIde
 }
 
 // Represents a request to begin email address verification with Amazon SES. For
-// information about email address verification, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure)
-// .
+// information about email address verification, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#verify-email-addresses-procedure
 type VerifyEmailIdentityInput struct {
 
 	// The email address to be verified.

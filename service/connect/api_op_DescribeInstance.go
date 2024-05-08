@@ -12,8 +12,10 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Returns the current state of the specified instance identifier. It tracks the
 // instance while it is being created and returns an error status, if applicable.
+//
 // If an instance is not created successfully, the instance status reason field
 // returns details relevant to the reason. The instance in a failed state is
 // returned only for 24 hours after the CreateInstance API was invoked.
@@ -34,8 +36,10 @@ func (c *Client) DescribeInstance(ctx context.Context, params *DescribeInstanceI
 
 type DescribeInstanceInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

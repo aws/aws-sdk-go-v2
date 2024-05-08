@@ -34,8 +34,9 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	DBInstanceClass *string
 
 	// Duration filter value, specified in years or seconds. Specify this parameter to
-	// show only reservations for this duration. Valid Values: 1 | 3 | 31536000 |
-	// 94608000
+	// show only reservations for this duration.
+	//
+	// Valid Values: 1 | 3 | 31536000 | 94608000
 	Duration *string
 
 	// This parameter isn't currently supported.
@@ -48,7 +49,10 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
+	// the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -56,18 +60,21 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	MultiAZ *bool
 
 	// The offering type filter value. Specify this parameter to show only the
-	// available offerings matching the specified offering type. Valid Values:
-	// "Partial Upfront" | "All Upfront" | "No Upfront"
+	// available offerings matching the specified offering type.
+	//
+	// Valid Values: "Partial Upfront" | "All Upfront" | "No Upfront"
 	OfferingType *string
 
 	// Product description filter value. Specify this parameter to show only the
-	// available offerings that contain the specified product description. The results
-	// show offerings that partially match the filter value.
+	// available offerings that contain the specified product description.
+	//
+	// The results show offerings that partially match the filter value.
 	ProductDescription *string
 
 	// The offering identifier filter value. Specify this parameter to show only the
-	// available offering that matches the specified reservation identifier. Example:
-	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
+	// available offering that matches the specified reservation identifier.
+	//
+	// Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
 	ReservedDBInstancesOfferingId *string
 
 	noSmithyDocumentSerde
@@ -183,7 +190,10 @@ var _ DescribeReservedDBInstancesOfferingsAPIClient = (*Client)(nil)
 type DescribeReservedDBInstancesOfferingsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
+	// the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

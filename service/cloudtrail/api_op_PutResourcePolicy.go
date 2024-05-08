@@ -10,11 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a resource-based permission policy to a CloudTrail channel that is
+//	Attaches a resource-based permission policy to a CloudTrail channel that is
+//
 // used for an integration with an event source outside of Amazon Web Services. For
-// more information about resource-based policies, see CloudTrail resource-based
-// policy examples (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html)
-// in the CloudTrail User Guide.
+// more information about resource-based policies, see [CloudTrail resource-based policy examples]in the CloudTrail User
+// Guide.
+//
+// [CloudTrail resource-based policy examples]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -32,18 +34,22 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
+	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
 	// resource-based policy. The following is the format of a resource ARN:
 	// arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel .
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A JSON-formatted string for an Amazon Web Services resource-based policy. The
-	// following are requirements for the resource policy:
+	//  A JSON-formatted string for an Amazon Web Services resource-based policy.
+	//
+	// The following are requirements for the resource policy:
+	//
 	//   - Contains only one action: cloudtrail-data:PutAuditEvents
+	//
 	//   - Contains at least one statement. The policy can have a maximum of 20
 	//   statements.
+	//
 	//   - Each statement contains at least one principal. A statement can have a
 	//   maximum of 50 principals.
 	//
@@ -55,11 +61,11 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
+	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
 	// resource-based policy.
 	ResourceArn *string
 
-	// The JSON-formatted string of the Amazon Web Services resource-based policy
+	//  The JSON-formatted string of the Amazon Web Services resource-based policy
 	// attached to the CloudTrail channel.
 	ResourcePolicy *string
 

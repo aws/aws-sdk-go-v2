@@ -12,8 +12,10 @@ import (
 )
 
 // Adds or updates services and authorized targets to configure what the Amazon
-// QuickSight IAM Identity Center application can access. This operation is only
-// supported for Amazon QuickSight accounts using IAM Identity Center
+// QuickSight IAM Identity Center application can access.
+//
+// This operation is only supported for Amazon QuickSight accounts using IAM
+// Identity Center
 func (c *Client) UpdateIdentityPropagationConfig(ctx context.Context, params *UpdateIdentityPropagationConfigInput, optFns ...func(*Options)) (*UpdateIdentityPropagationConfigOutput, error) {
 	if params == nil {
 		params = &UpdateIdentityPropagationConfigInput{}

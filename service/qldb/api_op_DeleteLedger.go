@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a ledger and all of its contents. This action is irreversible. If
-// deletion protection is enabled, you must first disable it before you can delete
-// the ledger. You can disable it by calling the UpdateLedger operation to set
-// this parameter to false .
+// Deletes a ledger and all of its contents. This action is irreversible.
+//
+// If deletion protection is enabled, you must first disable it before you can
+// delete the ledger. You can disable it by calling the UpdateLedger operation to
+// set this parameter to false .
 func (c *Client) DeleteLedger(ctx context.Context, params *DeleteLedgerInput, optFns ...func(*Options)) (*DeleteLedgerOutput, error) {
 	if params == nil {
 		params = &DeleteLedgerInput{}

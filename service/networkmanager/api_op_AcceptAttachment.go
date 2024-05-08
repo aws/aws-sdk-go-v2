@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts a core network attachment request. Once the attachment request is
-// accepted by a core network owner, the attachment is created and connected to a
-// core network.
+// Accepts a core network attachment request.
+//
+// Once the attachment request is accepted by a core network owner, the attachment
+// is created and connected to a core network.
 func (c *Client) AcceptAttachment(ctx context.Context, params *AcceptAttachmentInput, optFns ...func(*Options)) (*AcceptAttachmentOutput, error) {
 	if params == nil {
 		params = &AcceptAttachmentInput{}

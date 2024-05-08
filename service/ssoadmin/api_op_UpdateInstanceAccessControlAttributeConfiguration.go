@@ -18,8 +18,7 @@ import (
 // attributes from the IAM Identity Center identity store. If a SAML assertion
 // passes any of these attributes, IAM Identity Center replaces the attribute value
 // with the value from the IAM Identity Center identity store. For more information
-// about ABAC, see Attribute-Based Access Control in the IAM Identity Center User
-// Guide.
+// about ABAC, see Attribute-Based Access Controlin the IAM Identity Center User Guide.
 func (c *Client) UpdateInstanceAccessControlAttributeConfiguration(ctx context.Context, params *UpdateInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*UpdateInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceAccessControlAttributeConfigurationInput{}

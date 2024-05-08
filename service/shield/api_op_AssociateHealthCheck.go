@@ -13,10 +13,12 @@ import (
 // Adds health-based detection to the Shield Advanced protection for a resource.
 // Shield Advanced health-based detection uses the health of your Amazon Web
 // Services resource to improve responsiveness and accuracy in attack detection and
-// response. You define the health check in Route 53 and then associate it with
-// your Shield Advanced protection. For more information, see Shield Advanced
-// Health-Based Detection (https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option)
-// in the WAF Developer Guide.
+// response.
+//
+// You define the health check in Route 53 and then associate it with your Shield
+// Advanced protection. For more information, see [Shield Advanced Health-Based Detection]in the WAF Developer Guide.
+//
+// [Shield Advanced Health-Based Detection]: https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option
 func (c *Client) AssociateHealthCheck(ctx context.Context, params *AssociateHealthCheckInput, optFns ...func(*Options)) (*AssociateHealthCheckOutput, error) {
 	if params == nil {
 		params = &AssociateHealthCheckInput{}
@@ -40,8 +42,8 @@ type AssociateHealthCheckInput struct {
 	// This member is required.
 	HealthCheckArn *string
 
-	// The unique identifier (ID) for the Protection object to add the health check
-	// association to.
+	// The unique identifier (ID) for the Protection object to add the health check association
+	// to.
 	//
 	// This member is required.
 	ProtectionId *string

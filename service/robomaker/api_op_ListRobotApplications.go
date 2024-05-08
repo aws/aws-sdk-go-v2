@@ -30,9 +30,10 @@ func (c *Client) ListRobotApplications(ctx context.Context, params *ListRobotApp
 
 type ListRobotApplicationsInput struct {
 
-	// Optional filters to limit results. The filter name name is supported. When
-	// filtering, you must use the complete value of the filtered item. You can use up
-	// to three filters.
+	// Optional filters to limit results.
+	//
+	// The filter name name is supported. When filtering, you must use the complete
+	// value of the filtered item. You can use up to three filters.
 	Filters []types.Filter
 
 	// When this parameter is used, ListRobotApplications only returns maxResults

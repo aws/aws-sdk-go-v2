@@ -73,8 +73,9 @@ type UpdatePoolInput struct {
 
 type UpdatePoolOutput struct {
 
-	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the pool was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// When set to true the pool can't be deleted.

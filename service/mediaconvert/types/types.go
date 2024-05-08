@@ -1877,6 +1877,7 @@ type ColorCorrector struct {
 	// outcome of manually regrading from HDR to SDR. When you specify an output color
 	// space, MediaConvert uses the following color space metadata, which includes
 	// color primaries, transfer characteristics, and matrix coefficients:
+	//
 	//   - HDR 10: BT.2020, PQ, BT.2020 non-constant
 	//   - HLG 2020: BT.2020, HLG, BT.2020 non-constant
 	//   - P3DCI (Theater): DCIP3, SMPTE 428M, BT.709
@@ -2251,6 +2252,7 @@ type Deinterlacer struct {
 
 	// Use Deinterlacer to choose how the service will do deinterlacing. Default is
 	// Deinterlace.
+	//
 	//   - Deinterlace converts interlaced to progressive.
 	//   - Inverse telecine converts Hard Telecine 29.97i to progressive 23.976p.
 	//   - Adaptive auto-detects and converts to progressive.
@@ -4583,6 +4585,7 @@ type Input struct {
 
 	// Set PSI control for transport stream inputs to specify which data the demux
 	// process to scans.
+	//
 	//   - Ignore PSI - Scan all PIDs for audio and video.
 	//   - Use PSI - Scan only PSI data.
 	PsiControl InputPsiControl
@@ -4802,6 +4805,7 @@ type InputTemplate struct {
 
 	// Set PSI control for transport stream inputs to specify which data the demux
 	// process to scans.
+	//
 	//   - Ignore PSI - Scan all PIDs for audio and video.
 	//   - Use PSI - Scan only PSI data.
 	PsiControl InputPsiControl
@@ -8104,6 +8108,7 @@ type VideoSelector struct {
 	// an input color space, MediaConvert uses the following color space metadata,
 	// which includes color primaries, transfer characteristics, and matrix
 	// coefficients:
+	//
 	//   - HDR 10: BT.2020, PQ, BT.2020 non-constant
 	//   - HLG 2020: BT.2020, HLG, BT.2020 non-constant
 	//   - P3DCI (Theater): DCIP3, SMPTE 428M, BT.709

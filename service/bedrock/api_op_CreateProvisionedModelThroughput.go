@@ -12,10 +12,11 @@ import (
 )
 
 // Creates dedicated throughput for a base or custom model with the model units
-// and for the duration that you specify. For pricing details, see Amazon Bedrock
-// Pricing (http://aws.amazon.com/bedrock/pricing/) . For more information, see
-// Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html)
-// in the Amazon Bedrock User Guide.
+// and for the duration that you specify. For pricing details, see [Amazon Bedrock Pricing]. For more
+// information, see [Provisioned Throughput]in the Amazon Bedrock User Guide.
+//
+// [Amazon Bedrock Pricing]: http://aws.amazon.com/bedrock/pricing/
+// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 func (c *Client) CreateProvisionedModelThroughput(ctx context.Context, params *CreateProvisionedModelThroughputInput, optFns ...func(*Options)) (*CreateProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &CreateProvisionedModelThroughputInput{}
@@ -35,9 +36,9 @@ type CreateProvisionedModelThroughputInput struct {
 
 	// The Amazon Resource Name (ARN) or name of the model to associate with this
 	// Provisioned Throughput. For a list of models for which you can purchase
-	// Provisioned Throughput, see Amazon Bedrock model IDs for purchasing Provisioned
-	// Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#prov-throughput-models)
-	// in the Amazon Bedrock User Guide.
+	// Provisioned Throughput, see [Amazon Bedrock model IDs for purchasing Provisioned Throughput]in the Amazon Bedrock User Guide.
+	//
+	// [Amazon Bedrock model IDs for purchasing Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#prov-throughput-models
 	//
 	// This member is required.
 	ModelId *string
@@ -46,11 +47,16 @@ type CreateProvisionedModelThroughputInput struct {
 	// level for the specified model. The throughput level of a model unit specifies
 	// the total number of input and output tokens that it can process and generate
 	// within a span of one minute. By default, your account has no model units for
-	// purchasing Provisioned Throughputs with commitment. You must first visit the
-	// Amazon Web Services support center (https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase)
-	// to request MUs. For model unit quotas, see Provisioned Throughput quotas (https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html#prov-thru-quotas)
-	// in the Amazon Bedrock User Guide. For more information about what an MU
-	// specifies, contact your Amazon Web Services account manager.
+	// purchasing Provisioned Throughputs with commitment. You must first visit the [Amazon Web Services support center]to
+	// request MUs.
+	//
+	// For model unit quotas, see [Provisioned Throughput quotas] in the Amazon Bedrock User Guide.
+	//
+	// For more information about what an MU specifies, contact your Amazon Web
+	// Services account manager.
+	//
+	// [Amazon Web Services support center]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase
+	// [Provisioned Throughput quotas]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html#prov-thru-quotas
 	//
 	// This member is required.
 	ModelUnits *int32
@@ -62,17 +68,20 @@ type CreateProvisionedModelThroughputInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon S3 User Guide.
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency]in
+	// the Amazon S3 User Guide.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
 	// The commitment duration requested for the Provisioned Throughput. Billing
 	// occurs hourly and is discounted for longer commitment terms. To request a
-	// no-commit Provisioned Throughput, omit this field. Custom models support all
-	// levels of commitment. To see which base models support no commitment, see
-	// Supported regions and models for Provisioned Throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/pt-supported.html)
-	// in the Amazon Bedrock User Guide
+	// no-commit Provisioned Throughput, omit this field.
+	//
+	// Custom models support all levels of commitment. To see which base models
+	// support no commitment, see [Supported regions and models for Provisioned Throughput]in the Amazon Bedrock User Guide
+	//
+	// [Supported regions and models for Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/pt-supported.html
 	CommitmentDuration types.CommitmentDuration
 
 	// Tags to associate with this Provisioned Throughput.

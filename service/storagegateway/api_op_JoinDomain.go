@@ -12,14 +12,16 @@ import (
 )
 
 // Adds a file gateway to an Active Directory domain. This operation is only
-// supported for file gateways that support the SMB file protocol. Joining a domain
-// creates an Active Directory computer account in the default organizational unit,
-// using the gateway's Gateway ID as the account name (for example, SGW-1234ADE).
-// If your Active Directory environment requires that you pre-stage accounts to
-// facilitate the join domain process, you will need to create this account ahead
-// of time. To create the gateway's computer account in an organizational unit
-// other than the default, you must specify the organizational unit when joining
-// the domain.
+// supported for file gateways that support the SMB file protocol.
+//
+// Joining a domain creates an Active Directory computer account in the default
+// organizational unit, using the gateway's Gateway ID as the account name (for
+// example, SGW-1234ADE). If your Active Directory environment requires that you
+// pre-stage accounts to facilitate the join domain process, you will need to
+// create this account ahead of time.
+//
+// To create the gateway's computer account in an organizational unit other than
+// the default, you must specify the organizational unit when joining the domain.
 func (c *Client) JoinDomain(ctx context.Context, params *JoinDomainInput, optFns ...func(*Options)) (*JoinDomainOutput, error) {
 	if params == nil {
 		params = &JoinDomainInput{}
@@ -84,15 +86,22 @@ type JoinDomainInput struct {
 type JoinDomainOutput struct {
 
 	// Indicates the status of the gateway as a member of the Active Directory domain.
+	//
 	//   - ACCESS_DENIED : Indicates that the JoinDomain operation failed due to an
 	//   authentication error.
+	//
 	//   - DETACHED : Indicates that gateway is not joined to a domain.
+	//
 	//   - JOINED : Indicates that the gateway has successfully joined a domain.
+	//
 	//   - JOINING : Indicates that a JoinDomain operation is in progress.
+	//
 	//   - NETWORK_ERROR : Indicates that JoinDomain operation failed due to a network
 	//   or connectivity error.
+	//
 	//   - TIMEOUT : Indicates that the JoinDomain operation failed because the
 	//   operation didn't complete within the allotted time.
+	//
 	//   - UNKNOWN_ERROR : Indicates that the JoinDomain operation failed due to
 	//   another type of error.
 	ActiveDirectoryStatus types.ActiveDirectoryStatus

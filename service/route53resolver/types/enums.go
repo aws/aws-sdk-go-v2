@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Action) Values() []Action {
 	return []Action{
 		"ALLOW",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for AutodefinedReverseFlag. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutodefinedReverseFlag) Values() []AutodefinedReverseFlag {
 	return []AutodefinedReverseFlag{
 		"ENABLE",
@@ -50,8 +52,9 @@ const (
 )
 
 // Values returns all known values for BlockOverrideDnsType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BlockOverrideDnsType) Values() []BlockOverrideDnsType {
 	return []BlockOverrideDnsType{
 		"CNAME",
@@ -68,8 +71,9 @@ const (
 )
 
 // Values returns all known values for BlockResponse. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BlockResponse) Values() []BlockResponse {
 	return []BlockResponse{
 		"NODATA",
@@ -87,8 +91,9 @@ const (
 
 // Values returns all known values for FirewallDomainImportOperation. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallDomainImportOperation) Values() []FirewallDomainImportOperation {
 	return []FirewallDomainImportOperation{
 		"REPLACE",
@@ -108,6 +113,7 @@ const (
 
 // Values returns all known values for FirewallDomainListStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallDomainListStatus) Values() []FirewallDomainListStatus {
 	return []FirewallDomainListStatus{
@@ -129,8 +135,9 @@ const (
 
 // Values returns all known values for FirewallDomainRedirectionAction. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallDomainRedirectionAction) Values() []FirewallDomainRedirectionAction {
 	return []FirewallDomainRedirectionAction{
 		"INSPECT_REDIRECTION_DOMAIN",
@@ -149,8 +156,9 @@ const (
 
 // Values returns all known values for FirewallDomainUpdateOperation. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallDomainUpdateOperation) Values() []FirewallDomainUpdateOperation {
 	return []FirewallDomainUpdateOperation{
 		"ADD",
@@ -169,8 +177,9 @@ const (
 )
 
 // Values returns all known values for FirewallFailOpenStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallFailOpenStatus) Values() []FirewallFailOpenStatus {
 	return []FirewallFailOpenStatus{
 		"ENABLED",
@@ -190,8 +199,9 @@ const (
 
 // Values returns all known values for FirewallRuleGroupAssociationStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallRuleGroupAssociationStatus) Values() []FirewallRuleGroupAssociationStatus {
 	return []FirewallRuleGroupAssociationStatus{
 		"COMPLETE",
@@ -210,8 +220,9 @@ const (
 )
 
 // Values returns all known values for FirewallRuleGroupStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FirewallRuleGroupStatus) Values() []FirewallRuleGroupStatus {
 	return []FirewallRuleGroupStatus{
 		"COMPLETE",
@@ -239,8 +250,9 @@ const (
 )
 
 // Values returns all known values for IpAddressStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpAddressStatus) Values() []IpAddressStatus {
 	return []IpAddressStatus{
 		"CREATING",
@@ -268,6 +280,7 @@ const (
 
 // Values returns all known values for MutationProtectionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MutationProtectionStatus) Values() []MutationProtectionStatus {
 	return []MutationProtectionStatus{
@@ -290,8 +303,9 @@ const (
 )
 
 // Values returns all known values for OutpostResolverStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutpostResolverStatus) Values() []OutpostResolverStatus {
 	return []OutpostResolverStatus{
 		"CREATING",
@@ -314,8 +328,9 @@ const (
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"DoH",
@@ -338,8 +353,9 @@ const (
 
 // Values returns all known values for ResolverAutodefinedReverseStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverAutodefinedReverseStatus) Values() []ResolverAutodefinedReverseStatus {
 	return []ResolverAutodefinedReverseStatus{
 		"ENABLING",
@@ -365,8 +381,9 @@ const (
 
 // Values returns all known values for ResolverDNSSECValidationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverDNSSECValidationStatus) Values() []ResolverDNSSECValidationStatus {
 	return []ResolverDNSSECValidationStatus{
 		"ENABLING",
@@ -388,6 +405,7 @@ const (
 
 // Values returns all known values for ResolverEndpointDirection. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverEndpointDirection) Values() []ResolverEndpointDirection {
 	return []ResolverEndpointDirection{
@@ -409,8 +427,9 @@ const (
 )
 
 // Values returns all known values for ResolverEndpointStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverEndpointStatus) Values() []ResolverEndpointStatus {
 	return []ResolverEndpointStatus{
 		"CREATING",
@@ -432,8 +451,9 @@ const (
 )
 
 // Values returns all known values for ResolverEndpointType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverEndpointType) Values() []ResolverEndpointType {
 	return []ResolverEndpointType{
 		"IPV6",
@@ -454,8 +474,9 @@ const (
 
 // Values returns all known values for ResolverQueryLogConfigAssociationError.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverQueryLogConfigAssociationError) Values() []ResolverQueryLogConfigAssociationError {
 	return []ResolverQueryLogConfigAssociationError{
 		"NONE",
@@ -478,8 +499,9 @@ const (
 
 // Values returns all known values for ResolverQueryLogConfigAssociationStatus.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverQueryLogConfigAssociationStatus) Values() []ResolverQueryLogConfigAssociationStatus {
 	return []ResolverQueryLogConfigAssociationStatus{
 		"CREATING",
@@ -502,8 +524,9 @@ const (
 
 // Values returns all known values for ResolverQueryLogConfigStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverQueryLogConfigStatus) Values() []ResolverQueryLogConfigStatus {
 	return []ResolverQueryLogConfigStatus{
 		"CREATING",
@@ -526,8 +549,9 @@ const (
 
 // Values returns all known values for ResolverRuleAssociationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverRuleAssociationStatus) Values() []ResolverRuleAssociationStatus {
 	return []ResolverRuleAssociationStatus{
 		"CREATING",
@@ -549,8 +573,9 @@ const (
 )
 
 // Values returns all known values for ResolverRuleStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverRuleStatus) Values() []ResolverRuleStatus {
 	return []ResolverRuleStatus{
 		"COMPLETE",
@@ -570,8 +595,9 @@ const (
 )
 
 // Values returns all known values for RuleTypeOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RuleTypeOption) Values() []RuleTypeOption {
 	return []RuleTypeOption{
 		"FORWARD",
@@ -590,8 +616,9 @@ const (
 )
 
 // Values returns all known values for ShareStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ShareStatus) Values() []ShareStatus {
 	return []ShareStatus{
 		"NOT_SHARED",
@@ -609,8 +636,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -628,8 +656,9 @@ const (
 )
 
 // Values returns all known values for Validation. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Validation) Values() []Validation {
 	return []Validation{
 		"ENABLE",

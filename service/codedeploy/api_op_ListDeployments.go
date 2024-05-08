@@ -32,17 +32,19 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 type ListDeploymentsInput struct {
 
 	// The name of an CodeDeploy application associated with the user or Amazon Web
-	// Services account. If applicationName is specified, then deploymentGroupName
-	// must be specified. If it is not specified, then deploymentGroupName must not be
-	// specified.
+	// Services account.
+	//
+	// If applicationName is specified, then deploymentGroupName must be specified. If
+	// it is not specified, then deploymentGroupName must not be specified.
 	ApplicationName *string
 
 	// A time range (start and end) for returning a subset of the list of deployments.
 	CreateTimeRange *types.TimeRange
 
-	// The name of a deployment group for the specified application. If
-	// deploymentGroupName is specified, then applicationName must be specified. If it
-	// is not specified, then applicationName must not be specified.
+	// The name of a deployment group for the specified application.
+	//
+	// If deploymentGroupName is specified, then applicationName must be specified. If
+	// it is not specified, then applicationName must not be specified.
 	DeploymentGroupName *string
 
 	// The unique ID of an external resource for returning deployments linked to the
@@ -50,11 +52,17 @@ type ListDeploymentsInput struct {
 	ExternalId *string
 
 	// A subset of deployments to list by status:
+	//
 	//   - Created : Include created deployments in the resulting list.
+	//
 	//   - Queued : Include queued deployments in the resulting list.
+	//
 	//   - In Progress : Include in-progress deployments in the resulting list.
+	//
 	//   - Succeeded : Include successful deployments in the resulting list.
+	//
 	//   - Failed : Include failed deployments in the resulting list.
+	//
 	//   - Stopped : Include stopped deployments in the resulting list.
 	IncludeOnlyStatuses []types.DeploymentStatus
 

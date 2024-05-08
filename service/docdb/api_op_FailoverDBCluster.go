@@ -11,12 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Forces a failover for a cluster. A failover for a cluster promotes one of the
-// Amazon DocumentDB replicas (read-only instances) in the cluster to be the
-// primary instance (the cluster writer). If the primary instance fails, Amazon
-// DocumentDB automatically fails over to an Amazon DocumentDB replica, if one
-// exists. You can force a failover when you want to simulate a failure of a
-// primary instance for testing.
+// Forces a failover for a cluster.
+//
+// A failover for a cluster promotes one of the Amazon DocumentDB replicas
+// (read-only instances) in the cluster to be the primary instance (the cluster
+// writer).
+//
+// If the primary instance fails, Amazon DocumentDB automatically fails over to an
+// Amazon DocumentDB replica, if one exists. You can force a failover when you want
+// to simulate a failure of a primary instance for testing.
 func (c *Client) FailoverDBCluster(ctx context.Context, params *FailoverDBClusterInput, optFns ...func(*Options)) (*FailoverDBClusterOutput, error) {
 	if params == nil {
 		params = &FailoverDBClusterInput{}
@@ -32,17 +35,21 @@ func (c *Client) FailoverDBCluster(ctx context.Context, params *FailoverDBCluste
 	return out, nil
 }
 
-// Represents the input to FailoverDBCluster .
+// Represents the input to FailoverDBCluster.
 type FailoverDBClusterInput struct {
 
 	// A cluster identifier to force a failover for. This parameter is not case
-	// sensitive. Constraints:
+	// sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBCluster .
 	DBClusterIdentifier *string
 
-	// The name of the instance to promote to the primary instance. You must specify
-	// the instance identifier for an Amazon DocumentDB replica in the cluster. For
-	// example, mydbcluster-replica1 .
+	// The name of the instance to promote to the primary instance.
+	//
+	// You must specify the instance identifier for an Amazon DocumentDB replica in
+	// the cluster. For example, mydbcluster-replica1 .
 	TargetDBInstanceIdentifier *string
 
 	noSmithyDocumentSerde

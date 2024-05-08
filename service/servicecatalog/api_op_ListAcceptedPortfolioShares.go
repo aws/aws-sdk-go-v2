@@ -32,7 +32,9 @@ func (c *Client) ListAcceptedPortfolioShares(ctx context.Context, params *ListAc
 type ListAcceptedPortfolioSharesInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -45,10 +47,13 @@ type ListAcceptedPortfolioSharesInput struct {
 
 	// The type of shared portfolios to list. The default is to list imported
 	// portfolios.
+	//
 	//   - AWS_ORGANIZATIONS - List portfolios accepted and shared via organizational
 	//   sharing by the management account or delegated administrator of your
 	//   organization.
+	//
 	//   - AWS_SERVICECATALOG - Deprecated type.
+	//
 	//   - IMPORTED - List imported portfolios that have been accepted and shared
 	//   through account-to-account sharing.
 	PortfolioShareType types.PortfolioShareType

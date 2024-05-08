@@ -46,9 +46,9 @@ type CreateBotLocaleInput struct {
 
 	// The identifier of the language and locale that the bot will be used in. The
 	// string must match one of the supported locales. All of the intents, slot types,
-	// and slots used in the bot must have the same locale. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// and slots used in the bot must have the same locale. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -56,14 +56,19 @@ type CreateBotLocaleInput struct {
 	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent
 	// , AMAZON.KendraSearchIntent , or both when returning alternative intents.
 	// AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they
-	// are configured for the bot. For example, suppose a bot is configured with the
-	// confidence threshold of 0.80 and the AMAZON.FallbackIntent . Amazon Lex returns
-	// three alternative intents with the following confidence scores: IntentA (0.70),
-	// IntentB (0.60), IntentC (0.50). The response from the RecognizeText operation
-	// would be:
+	// are configured for the bot.
+	//
+	// For example, suppose a bot is configured with the confidence threshold of 0.80
+	// and the AMAZON.FallbackIntent . Amazon Lex returns three alternative intents
+	// with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC
+	// (0.50). The response from the RecognizeText operation would be:
+	//
 	//   - AMAZON.FallbackIntent
+	//
 	//   - IntentA
+	//
 	//   - IntentB
+	//
 	//   - IntentC
 	//
 	// This member is required.
@@ -89,13 +94,17 @@ type CreateBotLocaleOutput struct {
 	// The specified bot identifier.
 	BotId *string
 
-	// The status of the bot. When the status is Creating the bot locale is being
-	// configured. When the status is Building Amazon Lex is building the bot for
-	// testing and use. If the status of the bot is ReadyExpressTesting , you can test
-	// the bot using the exact utterances specified in the bots' intents. When the bot
-	// is ready for full testing or to run, the status is Built . If there was a
-	// problem with building the bot, the status is Failed . If the bot was saved but
-	// not built, the status is NotBuilt .
+	// The status of the bot.
+	//
+	// When the status is Creating the bot locale is being configured. When the status
+	// is Building Amazon Lex is building the bot for testing and use.
+	//
+	// If the status of the bot is ReadyExpressTesting , you can test the bot using the
+	// exact utterances specified in the bots' intents. When the bot is ready for full
+	// testing or to run, the status is Built .
+	//
+	// If there was a problem with building the bot, the status is Failed . If the bot
+	// was saved but not built, the status is NotBuilt .
 	BotLocaleStatus types.BotLocaleStatus
 
 	// The specified bot version.

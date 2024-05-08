@@ -11,9 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a Device Defender's ML Detect Security Profile training model's status.
-// Requires permission to access the GetBehaviorModelTrainingSummaries (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Returns a Device Defender's ML Detect Security Profile training model's
+//
+// status.
+//
+// Requires permission to access the [GetBehaviorModelTrainingSummaries] action.
+//
+// [GetBehaviorModelTrainingSummaries]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetBehaviorModelTrainingSummaries(ctx context.Context, params *GetBehaviorModelTrainingSummariesInput, optFns ...func(*Options)) (*GetBehaviorModelTrainingSummariesOutput, error) {
 	if params == nil {
 		params = &GetBehaviorModelTrainingSummariesInput{}
@@ -31,13 +35,13 @@ func (c *Client) GetBehaviorModelTrainingSummaries(ctx context.Context, params *
 
 type GetBehaviorModelTrainingSummariesInput struct {
 
-	// The maximum number of results to return at one time. The default is 10.
+	//  The maximum number of results to return at one time. The default is 10.
 	MaxResults *int32
 
-	// The token for the next set of results.
+	//  The token for the next set of results.
 	NextToken *string
 
-	// The name of the security profile.
+	//  The name of the security profile.
 	SecurityProfileName *string
 
 	noSmithyDocumentSerde
@@ -45,11 +49,11 @@ type GetBehaviorModelTrainingSummariesInput struct {
 
 type GetBehaviorModelTrainingSummariesOutput struct {
 
-	// A token that can be used to retrieve the next set of results, or null if there
+	//  A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
 
-	// A list of all ML Detect behaviors and their model status for a given Security
+	//  A list of all ML Detect behaviors and their model status for a given Security
 	// Profile.
 	Summaries []types.BehaviorModelTrainingSummary
 
@@ -146,7 +150,7 @@ var _ GetBehaviorModelTrainingSummariesAPIClient = (*Client)(nil)
 // GetBehaviorModelTrainingSummariesPaginatorOptions is the paginator options for
 // GetBehaviorModelTrainingSummaries
 type GetBehaviorModelTrainingSummariesPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 10.
+	//  The maximum number of results to return at one time. The default is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

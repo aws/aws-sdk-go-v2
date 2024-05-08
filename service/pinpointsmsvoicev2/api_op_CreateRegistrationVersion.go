@@ -51,14 +51,22 @@ type CreateRegistrationVersionOutput struct {
 	RegistrationId *string
 
 	// The status of the registration.
+	//
 	//   - DRAFT : The initial status of a registration version after it’s created.
+	//
 	//   - SUBMITTED : Your registration has been submitted.
+	//
 	//   - REVIEWING : Your registration has been accepted and is being reviewed.
+	//
 	//   - APPROVED : Your registration has been approved.
+	//
 	//   - DISCARDED : You've abandon this version of their registration to start over
 	//   with a new version.
+	//
 	//   - DENIED : You must fix your registration and resubmit it.
+	//
 	//   - REVOKED : Your previously approved registration has been revoked.
+	//
 	//   - ARCHIVED : Your previously approved registration version moves into this
 	//   status when a more recently submitted version is approved.
 	//

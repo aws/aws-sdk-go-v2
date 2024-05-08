@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for CodeGenerationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CodeGenerationStatus) Values() []CodeGenerationStatus {
 	return []CodeGenerationStatus{
 		"CREATE_IN_PROGRESS",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for DiscovererState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DiscovererState) Values() []DiscovererState {
 	return []DiscovererState{
 		"STARTED",
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
 		"OpenApi3",

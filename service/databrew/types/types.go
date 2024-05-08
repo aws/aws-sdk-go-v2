@@ -53,17 +53,20 @@ type ColumnStatisticsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an individual condition that evaluates to true or false. Conditions
-// are used with recipe actions. The action is only performed for column values
-// where the condition evaluates to true. If a recipe requires more than one
-// condition, then the recipe must specify multiple ConditionExpression elements.
-// Each condition is applied to the rows in a dataset first, before the recipe
-// action is performed.
+// Represents an individual condition that evaluates to true or false.
+//
+// Conditions are used with recipe actions. The action is only performed for
+// column values where the condition evaluates to true.
+//
+// If a recipe requires more than one condition, then the recipe must specify
+// multiple ConditionExpression elements. Each condition is applied to the rows in
+// a dataset first, before the recipe action is performed.
 type ConditionExpression struct {
 
-	// A specific condition to apply to a recipe action. For more information, see
-	// Recipe structure (https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure)
-	// in the Glue DataBrew Developer Guide.
+	// A specific condition to apply to a recipe action. For more information, see [Recipe structure] in
+	// the Glue DataBrew Developer Guide.
+	//
+	// [Recipe structure]: https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure
 	//
 	// This member is required.
 	Condition *string
@@ -334,25 +337,45 @@ type DatetimeOptions struct {
 type EntityDetectorConfiguration struct {
 
 	// Entity types to detect. Can be any of the following:
+	//
 	//   - USA_SSN
+	//
 	//   - EMAIL
+	//
 	//   - USA_ITIN
+	//
 	//   - USA_PASSPORT_NUMBER
+	//
 	//   - PHONE_NUMBER
+	//
 	//   - USA_DRIVING_LICENSE
+	//
 	//   - BANK_ACCOUNT
+	//
 	//   - CREDIT_CARD
+	//
 	//   - IP_ADDRESS
+	//
 	//   - MAC_ADDRESS
+	//
 	//   - USA_DEA_NUMBER
+	//
 	//   - USA_HCPCS_CODE
+	//
 	//   - USA_NATIONAL_PROVIDER_IDENTIFIER
+	//
 	//   - USA_NATIONAL_DRUG_CODE
+	//
 	//   - USA_HEALTH_INSURANCE_CLAIM_NUMBER
+	//
 	//   - USA_MEDICARE_BENEFICIARY_IDENTIFIER
+	//
 	//   - USA_CPT_CODE
+	//
 	//   - PERSON_NAME
+	//
 	//   - DATE
+	//
 	// The Entity type group USA_ALL is also supported, and includes all of the above
 	// entity types except PERSON_NAME and DATE.
 	//
@@ -408,8 +431,9 @@ type FilesLimit struct {
 }
 
 // Represents a structure for defining parameter conditions. Supported conditions
-// are described here: Supported conditions for dynamic datasets (https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets)
-// in the Glue DataBrew Developer Guide.
+// are described here: [Supported conditions for dynamic datasets]in the Glue DataBrew Developer Guide.
+//
+// [Supported conditions for dynamic datasets]: https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets
 type FilterExpression struct {
 
 	// The expression which includes condition names followed by substitution
@@ -493,11 +517,15 @@ type Job struct {
 	DatasetName *string
 
 	// The Amazon Resource Name (ARN) of an encryption key that is used to protect the
-	// job output. For more information, see Encrypting data written by DataBrew jobs (https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html)
+	// job output. For more information, see [Encrypting data written by DataBrew jobs]
+	//
+	// [Encrypting data written by DataBrew jobs]: https://docs.aws.amazon.com/databrew/latest/dg/encryption-security-configuration.html
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
+	//
 	//   - SSE-KMS - Server-side encryption with keys managed by KMS.
+	//
 	//   - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode EncryptionMode
 
@@ -545,8 +573,10 @@ type Job struct {
 	Timeout int32
 
 	// The job type of the job, which must be one of the following:
+	//
 	//   - PROFILE - A job to analyze a dataset, to determine its size, data types,
 	//   data distribution, and more.
+	//
 	//   - RECIPE - A job to apply one or more transformations to a dataset.
 	Type JobType
 
@@ -630,14 +660,18 @@ type JobSample struct {
 
 	// A value that determines whether the profile job is run on the entire dataset or
 	// a specified number of rows. This value must be one of the following:
+	//
 	//   - FULL_DATASET - The profile job is run on the entire dataset.
+	//
 	//   - CUSTOM_ROWS - The profile job is run on the number of rows specified in the
 	//   Size parameter.
 	Mode SampleMode
 
 	// The Size parameter is only required when the mode is CUSTOM_ROWS. The profile
 	// job is run on the specified number of rows. The maximum value for size is
-	// Long.MAX_VALUE. Long.MAX_VALUE = 9223372036854775807
+	// Long.MAX_VALUE.
+	//
+	// Long.MAX_VALUE = 9223372036854775807
 	Size *int64
 
 	noSmithyDocumentSerde
@@ -843,11 +877,14 @@ type Recipe struct {
 	PublishedDate *time.Time
 
 	// The identifier for the version for the recipe. Must be one of the following:
+	//
 	//   - Numeric version ( X.Y ) - X and Y stand for major and minor version numbers.
 	//   The maximum length of each is 6 digits, and neither can be negative values. Both
 	//   X and Y are required, and "0.0" isn't a valid version.
+	//
 	//   - LATEST_WORKING - the most recent valid version being developed in a DataBrew
 	//   project.
+	//
 	//   - LATEST_PUBLISHED - the most recent published version.
 	RecipeVersion *string
 
@@ -864,8 +901,9 @@ type Recipe struct {
 }
 
 // Represents a transformation and associated parameters that are used to apply a
-// change to a DataBrew dataset. For more information, see Recipe actions reference (https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html)
-// .
+// change to a DataBrew dataset. For more information, see [Recipe actions reference].
+//
+// [Recipe actions reference]: https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html
 type RecipeAction struct {
 
 	// The name of a valid DataBrew transformation to be performed on the data.
@@ -901,9 +939,10 @@ type RecipeStep struct {
 	// This member is required.
 	Action *RecipeAction
 
-	// One or more conditions that must be met for the recipe step to succeed. All of
-	// the conditions in the array must be met. In other words, all of the conditions
-	// must be combined using a logical AND operation.
+	// One or more conditions that must be met for the recipe step to succeed.
+	//
+	// All of the conditions in the array must be met. In other words, all of the
+	// conditions must be combined using a logical AND operation.
 	ConditionExpressions []ConditionExpression
 
 	noSmithyDocumentSerde
@@ -939,7 +978,11 @@ type Rule struct {
 	// CheckExpression starts with a column reference, then ColumnSelectors in the rule
 	// should be null. If ColumnSelectors has been defined, then there should be no
 	// column reference in the left side of a condition, for example, is_between :val1
-	// and :val2 . For more information, see Available checks (https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html)
+	// and :val2 .
+	//
+	// For more information, see [Available checks]
+	//
+	// [Available checks]: https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html
 	//
 	// This member is required.
 	CheckExpression *string
@@ -1080,9 +1123,10 @@ type Schedule struct {
 	// The Amazon Resource Name (ARN) of the user who created the schedule.
 	CreatedBy *string
 
-	// The dates and times when the job is to run. For more information, see Cron
-	// expressions (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html) in
-	// the Glue DataBrew Developer Guide.
+	// The dates and times when the job is to run. For more information, see [Cron expressions] in the
+	// Glue DataBrew Developer Guide.
+	//
+	// [Cron expressions]: https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html
 	CronExpression *string
 
 	// A list of jobs to be run, according to the schedule.

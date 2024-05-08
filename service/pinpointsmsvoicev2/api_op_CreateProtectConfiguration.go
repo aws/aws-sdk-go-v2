@@ -57,8 +57,9 @@ type CreateProtectConfigurationOutput struct {
 	// This member is required.
 	AccountDefault bool
 
-	// The time when the protect configuration was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the protect configuration was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time

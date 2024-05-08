@@ -29,7 +29,7 @@ func (c *Client) ListOrganizationInsights(ctx context.Context, params *ListOrgan
 
 type ListOrganizationInsightsInput struct {
 
-	// A filter used by ListInsights to specify which insights to return.
+	//  A filter used by ListInsights to specify which insights to return.
 	//
 	// This member is required.
 	StatusFilter *types.ListInsightsStatusFilter

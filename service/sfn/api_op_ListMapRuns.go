@@ -39,9 +39,10 @@ type ListMapRunsInput struct {
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
-	// The actual number of results returned per call might be fewer than the specified
-	// maximum.
+	// page size is 1000. A value of 0 uses the default.
+	//
+	// This is only an upper limit. The actual number of results returned per call
+	// might be fewer than the specified maximum.
 	MaxResults int32
 
 	// If nextToken is returned, there are more results available. The value of
@@ -166,9 +167,10 @@ var _ ListMapRunsAPIClient = (*Client)(nil)
 type ListMapRunsPaginatorOptions struct {
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
-	// The actual number of results returned per call might be fewer than the specified
-	// maximum.
+	// page size is 1000. A value of 0 uses the default.
+	//
+	// This is only an upper limit. The actual number of results returned per call
+	// might be fewer than the specified maximum.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -12,9 +12,10 @@ import (
 )
 
 // Returns the Amazon EMR block public access configuration for your Amazon Web
-// Services account in the current Region. For more information see Configure
-// Block Public Access for Amazon EMR (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)
-// in the Amazon EMR Management Guide.
+// Services account in the current Region. For more information see [Configure Block Public Access for Amazon EMR]in the Amazon
+// EMR Management Guide.
+//
+// [Configure Block Public Access for Amazon EMR]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html
 func (c *Client) GetBlockPublicAccessConfiguration(ctx context.Context, params *GetBlockPublicAccessConfigurationInput, optFns ...func(*Options)) (*GetBlockPublicAccessConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBlockPublicAccessConfigurationInput{}
@@ -44,11 +45,13 @@ type GetBlockPublicAccessConfigurationOutput struct {
 	// specified as an exception using PermittedPublicSecurityGroupRuleRanges in the
 	// BlockPublicAccessConfiguration . By default, Port 22 (SSH) is an exception, and
 	// public access is allowed on this port. You can change this by updating the block
-	// public access configuration to remove the exception. For accounts that created
-	// clusters in a Region before November 25, 2019, block public access is disabled
-	// by default in that Region. To use this feature, you must manually enable and
-	// configure it. For accounts that did not create an Amazon EMR cluster in a Region
-	// before this date, block public access is enabled by default in that Region.
+	// public access configuration to remove the exception.
+	//
+	// For accounts that created clusters in a Region before November 25, 2019, block
+	// public access is disabled by default in that Region. To use this feature, you
+	// must manually enable and configure it. For accounts that did not create an
+	// Amazon EMR cluster in a Region before this date, block public access is enabled
+	// by default in that Region.
 	//
 	// This member is required.
 	BlockPublicAccessConfiguration *types.BlockPublicAccessConfiguration

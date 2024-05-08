@@ -13,26 +13,40 @@ import (
 // Invalidates the identity, access, and refresh tokens that Amazon Cognito issued
 // to a user. Call this operation with your administrative credentials when your
 // user signs out of your app. This results in the following behavior.
-//   - Amazon Cognito no longer accepts token-authorized user operations that you
-//     authorize with a signed-out user's access tokens. For more information, see
-//     Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-//     . Amazon Cognito returns an Access Token has been revoked error when your app
-//     attempts to authorize a user pools API request with a revoked access token that
-//     contains the scope aws.cognito.signin.user.admin .
-//   - Amazon Cognito no longer accepts a signed-out user's ID token in a GetId  (https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetId.html)
-//     request to an identity pool with ServerSideTokenCheck enabled for its user
-//     pool IdP configuration in CognitoIdentityProvider (https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_CognitoIdentityProvider.html)
-//     .
-//   - Amazon Cognito no longer accepts a signed-out user's refresh tokens in
-//     refresh requests.
 //
-// Other requests might be valid until your user's token expires. Amazon Cognito
-// evaluates Identity and Access Management (IAM) policies in requests for this API
-// operation. For this operation, you must use IAM credentials to authorize
-// requests, and you must grant yourself the corresponding IAM permission in a
-// policy. Learn more
-//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
-//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+//   - Amazon Cognito no longer accepts token-authorized user operations that you
+//     authorize with a signed-out user's access tokens. For more information, see [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// Amazon Cognito returns an Access Token has been revoked error when your app
+//
+//	attempts to authorize a user pools API request with a revoked access token that
+//	contains the scope aws.cognito.signin.user.admin .
+//
+//	- Amazon Cognito no longer accepts a signed-out user's ID token in a [GetId]request
+//	to an identity pool with ServerSideTokenCheck enabled for its user pool IdP
+//	configuration in [CognitoIdentityProvider].
+//
+//	- Amazon Cognito no longer accepts a signed-out user's refresh tokens in
+//	refresh requests.
+//
+// Other requests might be valid until your user's token expires.
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
+// credentials to authorize requests, and you must grant yourself the corresponding
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+//
+// [CognitoIdentityProvider]: https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_CognitoIdentityProvider.html
+// [GetId]: https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetId.html
 func (c *Client) AdminUserGlobalSignOut(ctx context.Context, params *AdminUserGlobalSignOutInput, optFns ...func(*Options)) (*AdminUserGlobalSignOutOutput, error) {
 	if params == nil {
 		params = &AdminUserGlobalSignOutInput{}

@@ -14,8 +14,9 @@ import (
 // Creates an association between the source and the destination. A source can be
 // associated with multiple destinations, and a destination can be associated with
 // multiple sources. An association is a lineage tracking entity. For more
-// information, see Amazon SageMaker ML Lineage Tracking (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html)
-// .
+// information, see [Amazon SageMaker ML Lineage Tracking].
+//
+// [Amazon SageMaker ML Lineage Tracking]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
 func (c *Client) AddAssociation(ctx context.Context, params *AddAssociationInput, optFns ...func(*Options)) (*AddAssociationOutput, error) {
 	if params == nil {
 		params = &AddAssociationInput{}
@@ -45,14 +46,18 @@ type AddAssociationInput struct {
 
 	// The type of association. The following are suggested uses for each type. Amazon
 	// SageMaker places no restrictions on their use.
+	//
 	//   - ContributedTo - The source contributed to the destination or had a part in
 	//   enabling the destination. For example, the training data contributed to the
 	//   training job.
+	//
 	//   - AssociatedWith - The source is connected to the destination. For example,
 	//   an approval workflow is associated with a model deployment.
+	//
 	//   - DerivedFrom - The destination is a modification of the source. For example,
 	//   a digest output of a channel input for a processing job is derived from the
 	//   original inputs.
+	//
 	//   - Produced - The source generated the destination. For example, a training
 	//   job produced a model artifact.
 	AssociationType types.AssociationEdgeType

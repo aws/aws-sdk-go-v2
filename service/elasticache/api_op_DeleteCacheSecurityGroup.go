@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a cache security group. You cannot delete a cache security group if it
-// is associated with any clusters.
+// Deletes a cache security group.
+//
+// You cannot delete a cache security group if it is associated with any clusters.
 func (c *Client) DeleteCacheSecurityGroup(ctx context.Context, params *DeleteCacheSecurityGroupInput, optFns ...func(*Options)) (*DeleteCacheSecurityGroupOutput, error) {
 	if params == nil {
 		params = &DeleteCacheSecurityGroupInput{}
@@ -30,8 +31,9 @@ func (c *Client) DeleteCacheSecurityGroup(ctx context.Context, params *DeleteCac
 // Represents the input of a DeleteCacheSecurityGroup operation.
 type DeleteCacheSecurityGroupInput struct {
 
-	// The name of the cache security group to delete. You cannot delete the default
-	// security group.
+	// The name of the cache security group to delete.
+	//
+	// You cannot delete the default security group.
 	//
 	// This member is required.
 	CacheSecurityGroupName *string

@@ -12,7 +12,9 @@ import (
 )
 
 // Returns information about the networks in which the current Amazon Web Services
-// account participates. Applies to Hyperledger Fabric and Ethereum.
+// account participates.
+//
+// Applies to Hyperledger Fabric and Ethereum.
 func (c *Client) ListNetworks(ctx context.Context, params *ListNetworksInput, optFns ...func(*Options)) (*ListNetworksOutput, error) {
 	if params == nil {
 		params = &ListNetworksInput{}
@@ -44,7 +46,9 @@ type ListNetworksInput struct {
 	NextToken *string
 
 	// An optional status specifier. If provided, only networks currently in this
-	// status are listed. Applies only to Hyperledger Fabric.
+	// status are listed.
+	//
+	// Applies only to Hyperledger Fabric.
 	Status types.NetworkStatus
 
 	noSmithyDocumentSerde

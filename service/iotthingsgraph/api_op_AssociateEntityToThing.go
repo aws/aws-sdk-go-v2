@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a device with a concrete thing that is in the user's registry. A
-// thing can be associated with only one device at a time. If you associate a thing
-// with a new device id, its previous association will be removed.
+// Associates a device with a concrete thing that is in the user's registry.
+//
+// A thing can be associated with only one device at a time. If you associate a
+// thing with a new device id, its previous association will be removed.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) AssociateEntityToThing(ctx context.Context, params *AssociateEntityToThingInput, optFns ...func(*Options)) (*AssociateEntityToThingOutput, error) {
@@ -32,8 +33,11 @@ func (c *Client) AssociateEntityToThing(ctx context.Context, params *AssociateEn
 
 type AssociateEntityToThingInput struct {
 
-	// The ID of the device to be associated with the thing. The ID should be in the
-	// following format. urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
+	// The ID of the device to be associated with the thing.
+	//
+	// The ID should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
 	//
 	// This member is required.
 	EntityId *string

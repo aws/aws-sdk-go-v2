@@ -13,11 +13,21 @@ import (
 
 // Gets the key material for an Amazon Web Services Payment Cryptography key,
 // including the immutable and mutable data specified when the key was created.
+//
 // Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts. Related operations:
-//   - CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
-//   - DeleteKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html)
-//   - ListKeys (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html)
+// Services accounts.
+//
+// Related operations:
+//
+// [CreateKey]
+//
+// [DeleteKey]
+//
+// [ListKeys]
+//
+// [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+// [ListKeys]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) GetKey(ctx context.Context, params *GetKeyInput, optFns ...func(*Options)) (*GetKeyOutput, error) {
 	if params == nil {
 		params = &GetKeyInput{}

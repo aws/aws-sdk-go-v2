@@ -10,13 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a review template. Disclaimer Do not include or gather personal
-// identifiable information (PII) of end users or other identifiable individuals in
-// or via your review templates. If your review template or those shared with you
-// and used in your account do include or collect PII you are responsible for:
-// ensuring that the included PII is processed in accordance with applicable law,
-// providing adequate privacy notices, and obtaining necessary consents for
-// processing such data.
+// Create a review template.
+//
+// # Disclaimer
+//
+// Do not include or gather personal identifiable information (PII) of end users
+// or other identifiable individuals in or via your review templates. If your
+// review template or those shared with you and used in your account do include or
+// collect PII you are responsible for: ensuring that the included PII is processed
+// in accordance with applicable law, providing adequate privacy notices, and
+// obtaining necessary consents for processing such data.
 func (c *Client) CreateReviewTemplate(ctx context.Context, params *CreateReviewTemplateInput, optFns ...func(*Options)) (*CreateReviewTemplateOutput, error) {
 	if params == nil {
 		params = &CreateReviewTemplateInput{}
@@ -35,13 +38,17 @@ func (c *Client) CreateReviewTemplate(ctx context.Context, params *CreateReviewT
 type CreateReviewTemplateInput struct {
 
 	// A unique case-sensitive string used to ensure that this request is idempotent
-	// (executes only once). You should not reuse the same token for other requests. If
-	// you retry a request with the same client request token and the same parameters
-	// after the original request has completed successfully, the result of the
-	// original request is returned. This token is listed as required, however, if you
-	// do not specify it, the Amazon Web Services SDKs automatically generate one for
-	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
-	// provide this token or the request will fail.
+	// (executes only once).
+	//
+	// You should not reuse the same token for other requests. If you retry a request
+	// with the same client request token and the same parameters after the original
+	// request has completed successfully, the result of the original request is
+	// returned.
+	//
+	// This token is listed as required, however, if you do not specify it, the Amazon
+	// Web Services SDKs automatically generate one for you. If you are not using the
+	// Amazon Web Services SDK or the CLI, you must provide this token or the request
+	// will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -61,8 +68,10 @@ type CreateReviewTemplateInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// The tags assigned to the review template.

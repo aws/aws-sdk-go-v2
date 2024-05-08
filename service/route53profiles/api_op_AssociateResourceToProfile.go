@@ -29,25 +29,26 @@ func (c *Client) AssociateResourceToProfile(ctx context.Context, params *Associa
 
 type AssociateResourceToProfileInput struct {
 
-	// Name for the resource association.
+	//  Name for the resource association.
 	//
 	// This member is required.
 	Name *string
 
-	// ID of the Profile.
+	//  ID of the Profile.
 	//
 	// This member is required.
 	ProfileId *string
 
-	// Amazon resource number, ARN, of the DNS resource.
+	//  Amazon resource number, ARN, of the DNS resource.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// If you are adding a DNS Firewall rule group, include also a priority. The
+	//  If you are adding a DNS Firewall rule group, include also a priority. The
 	// priority indicates the processing order for the rule groups, starting with the
-	// priority assinged the lowest value. The allowed values for priority are between
-	// 100 and 9900.
+	// priority assinged the lowest value.
+	//
+	// The allowed values for priority are between 100 and 9900.
 	ResourceProperties *string
 
 	noSmithyDocumentSerde
@@ -55,7 +56,7 @@ type AssociateResourceToProfileInput struct {
 
 type AssociateResourceToProfileOutput struct {
 
-	// Infromation about the AssociateResourceToProfile , including a status message.
+	//  Infromation about the AssociateResourceToProfile , including a status message.
 	ProfileResourceAssociation *types.ProfileResourceAssociation
 
 	// Metadata pertaining to the operation's result.

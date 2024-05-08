@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a node configuration with new parameters. Applies only to Hyperledger
-// Fabric.
+// Updates a node configuration with new parameters.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) UpdateNode(ctx context.Context, params *UpdateNodeInput, optFns ...func(*Options)) (*UpdateNodeOutput, error) {
 	if params == nil {
 		params = &UpdateNodeInput{}
@@ -43,8 +44,9 @@ type UpdateNodeInput struct {
 	// Configuration properties for publishing to Amazon CloudWatch Logs.
 	LogPublishingConfiguration *types.NodeLogPublishingConfiguration
 
-	// The unique identifier of the member that owns the node. Applies only to
-	// Hyperledger Fabric.
+	// The unique identifier of the member that owns the node.
+	//
+	// Applies only to Hyperledger Fabric.
 	MemberId *string
 
 	noSmithyDocumentSerde

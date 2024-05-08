@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an update to an Amazon EKS resource. When the status of the update is
-// Succeeded , the update is complete. If an update fails, the status is Failed ,
-// and an error detail explains the reason for the failure.
+// Describes an update to an Amazon EKS resource.
+//
+// When the status of the update is Succeeded , the update is complete. If an
+// update fails, the status is Failed , and an error detail explains the reason for
+// the failure.
 func (c *Client) DescribeUpdate(ctx context.Context, params *DescribeUpdateInput, optFns ...func(*Options)) (*DescribeUpdateOutput, error) {
 	if params == nil {
 		params = &DescribeUpdateInput{}
@@ -42,9 +44,10 @@ type DescribeUpdateInput struct {
 	// This member is required.
 	UpdateId *string
 
-	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html)
-	// . This parameter is required if the update is an add-on update.
+	// The name of the add-on. The name must match one of the names returned by [ListAddons]
+	// ListAddons . This parameter is required if the update is an add-on update.
+	//
+	// [ListAddons]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
 	AddonName *string
 
 	// The name of the Amazon EKS node group associated with the update. This

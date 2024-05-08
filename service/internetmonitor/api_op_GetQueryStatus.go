@@ -15,10 +15,15 @@ import (
 // Monitor query interface, for a specified query ID and monitor. When you run a
 // query, check the status to make sure that the query has SUCCEEDED before you
 // review the results.
+//
 //   - QUEUED : The query is scheduled to run.
+//
 //   - RUNNING : The query is in progress but not complete.
+//
 //   - SUCCEEDED : The query completed sucessfully.
+//
 //   - FAILED : The query failed due to an error.
+//
 //   - CANCELED : The query was canceled.
 func (c *Client) GetQueryStatus(ctx context.Context, params *GetQueryStatusInput, optFns ...func(*Options)) (*GetQueryStatusOutput, error) {
 	if params == nil {

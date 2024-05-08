@@ -11,53 +11,65 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Firehose delivery stream. By default, you can create up to 50
-// delivery streams per Amazon Web Services Region. This is an asynchronous
-// operation that immediately returns. The initial status of the delivery stream is
-// CREATING . After the delivery stream is created, its status is ACTIVE and it
-// now accepts data. If the delivery stream creation fails, the status transitions
-// to CREATING_FAILED . Attempts to send data to a delivery stream that is not in
-// the ACTIVE state cause an exception. To check the state of a delivery stream,
-// use DescribeDeliveryStream . If the status of a delivery stream is
-// CREATING_FAILED , this status doesn't change, and you can't invoke
-// CreateDeliveryStream again on it. However, you can invoke the
-// DeleteDeliveryStream operation to delete it. A Firehose delivery stream can be
-// configured to receive records directly from providers using PutRecord or
-// PutRecordBatch , or it can be configured to use an existing Kinesis stream as
-// its source. To specify a Kinesis data stream as input, set the
+// Creates a Firehose delivery stream.
+//
+// By default, you can create up to 50 delivery streams per Amazon Web Services
+// Region.
+//
+// This is an asynchronous operation that immediately returns. The initial status
+// of the delivery stream is CREATING . After the delivery stream is created, its
+// status is ACTIVE and it now accepts data. If the delivery stream creation
+// fails, the status transitions to CREATING_FAILED . Attempts to send data to a
+// delivery stream that is not in the ACTIVE state cause an exception. To check
+// the state of a delivery stream, use DescribeDeliveryStream.
+//
+// If the status of a delivery stream is CREATING_FAILED , this status doesn't
+// change, and you can't invoke CreateDeliveryStream again on it. However, you can
+// invoke the DeleteDeliveryStreamoperation to delete it.
+//
+// A Firehose delivery stream can be configured to receive records directly from
+// providers using PutRecordor PutRecordBatch, or it can be configured to use an existing Kinesis stream
+// as its source. To specify a Kinesis data stream as input, set the
 // DeliveryStreamType parameter to KinesisStreamAsSource , and provide the Kinesis
 // stream Amazon Resource Name (ARN) and role ARN in the
-// KinesisStreamSourceConfiguration parameter. To create a delivery stream with
-// server-side encryption (SSE) enabled, include
-// DeliveryStreamEncryptionConfigurationInput in your request. This is optional.
-// You can also invoke StartDeliveryStreamEncryption to turn on SSE for an
-// existing delivery stream that doesn't have SSE enabled. A delivery stream is
-// configured with a single destination, such as Amazon Simple Storage Service
-// (Amazon S3), Amazon Redshift, Amazon OpenSearch Service, Amazon OpenSearch
-// Serverless, Splunk, and any custom HTTP endpoint or HTTP endpoints owned by or
-// supported by third-party service providers, including Datadog, Dynatrace,
-// LogicMonitor, MongoDB, New Relic, and Sumo Logic. You must specify only one of
-// the following destination configuration parameters:
+// KinesisStreamSourceConfiguration parameter.
+//
+// To create a delivery stream with server-side encryption (SSE) enabled, include DeliveryStreamEncryptionConfigurationInput
+// in your request. This is optional. You can also invoke StartDeliveryStreamEncryptionto turn on SSE for an
+// existing delivery stream that doesn't have SSE enabled.
+//
+// A delivery stream is configured with a single destination, such as Amazon
+// Simple Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Service,
+// Amazon OpenSearch Serverless, Splunk, and any custom HTTP endpoint or HTTP
+// endpoints owned by or supported by third-party service providers, including
+// Datadog, Dynatrace, LogicMonitor, MongoDB, New Relic, and Sumo Logic. You must
+// specify only one of the following destination configuration parameters:
 // ExtendedS3DestinationConfiguration , S3DestinationConfiguration ,
 // ElasticsearchDestinationConfiguration , RedshiftDestinationConfiguration , or
-// SplunkDestinationConfiguration . When you specify S3DestinationConfiguration ,
-// you can also provide the following optional values: BufferingHints,
-// EncryptionConfiguration , and CompressionFormat . By default, if no
-// BufferingHints value is provided, Firehose buffers data up to 5 MB or for 5
-// minutes, whichever condition is satisfied first. BufferingHints is a hint, so
-// there are some cases where the service cannot adhere to these conditions
-// strictly. For example, record boundaries might be such that the size is a little
-// over or under the configured buffering size. By default, no encryption is
-// performed. We strongly recommend that you enable encryption to ensure secure
-// data storage in Amazon S3. A few notes about Amazon Redshift as a destination:
+// SplunkDestinationConfiguration .
+//
+// When you specify S3DestinationConfiguration , you can also provide the following
+// optional values: BufferingHints, EncryptionConfiguration , and CompressionFormat
+// . By default, if no BufferingHints value is provided, Firehose buffers data up
+// to 5 MB or for 5 minutes, whichever condition is satisfied first. BufferingHints
+// is a hint, so there are some cases where the service cannot adhere to these
+// conditions strictly. For example, record boundaries might be such that the size
+// is a little over or under the configured buffering size. By default, no
+// encryption is performed. We strongly recommend that you enable encryption to
+// ensure secure data storage in Amazon S3.
+//
+// A few notes about Amazon Redshift as a destination:
+//
 //   - An Amazon Redshift destination requires an S3 bucket as intermediate
 //     location. Firehose first delivers data to Amazon S3 and then uses COPY syntax
 //     to load data into an Amazon Redshift table. This is specified in the
 //     RedshiftDestinationConfiguration.S3Configuration parameter.
+//
 //   - The compression formats SNAPPY or ZIP cannot be specified in
 //     RedshiftDestinationConfiguration.S3Configuration because the Amazon Redshift
 //     COPY operation that reads from the S3 bucket doesn't support these compression
 //     formats.
+//
 //   - We strongly recommend that you use the user name and password you provide
 //     exclusively with Firehose, and that the permissions for the account are
 //     restricted for Amazon Redshift INSERT permissions.
@@ -65,8 +77,9 @@ import (
 // Firehose assumes the IAM role that is configured as part of the destination.
 // The role should allow the Firehose principal to assume the role, and the role
 // should have permissions that allow the service to deliver the data. For more
-// information, see Grant Firehose Access to an Amazon S3 Destination (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
-// in the Amazon Firehose Developer Guide.
+// information, see [Grant Firehose Access to an Amazon S3 Destination]in the Amazon Firehose Developer Guide.
+//
+// [Grant Firehose Access to an Amazon S3 Destination]: https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
 func (c *Client) CreateDeliveryStream(ctx context.Context, params *CreateDeliveryStreamInput, optFns ...func(*Options)) (*CreateDeliveryStreamOutput, error) {
 	if params == nil {
 		params = &CreateDeliveryStreamInput{}
@@ -105,7 +118,9 @@ type CreateDeliveryStreamInput struct {
 	DeliveryStreamEncryptionConfigurationInput *types.DeliveryStreamEncryptionConfigurationInput
 
 	// The delivery stream type. This parameter can be one of the following values:
+	//
 	//   - DirectPut : Provider applications access the delivery stream directly.
+	//
 	//   - KinesisStreamAsSource : The delivery stream uses a Kinesis data stream as a
 	//   source.
 	DeliveryStreamType types.DeliveryStreamType
@@ -120,9 +135,9 @@ type CreateDeliveryStreamInput struct {
 	// destination. You can specify only one destination.
 	HttpEndpointDestinationConfiguration *types.HttpEndpointDestinationConfiguration
 
-	// When a Kinesis data stream is used as the source for the delivery stream, a
-	// KinesisStreamSourceConfiguration containing the Kinesis data stream Amazon
-	// Resource Name (ARN) and the role ARN for the source stream.
+	// When a Kinesis data stream is used as the source for the delivery stream, a KinesisStreamSourceConfiguration
+	// containing the Kinesis data stream Amazon Resource Name (ARN) and the role ARN
+	// for the source stream.
 	KinesisStreamSourceConfiguration *types.KinesisStreamSourceConfiguration
 
 	// The configuration for the Amazon MSK cluster to be used as the source for a
@@ -147,18 +162,28 @@ type CreateDeliveryStreamInput struct {
 	// you can define and assign to Amazon Web Services resources. Tags are metadata.
 	// For example, you can add friendly names and descriptions or other types of
 	// information that can help you distinguish the delivery stream. For more
-	// information about tags, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-	// in the Amazon Web Services Billing and Cost Management User Guide. You can
-	// specify up to 50 tags when creating a delivery stream. If you specify tags in
-	// the CreateDeliveryStream action, Amazon Data Firehose performs an additional
-	// authorization on the firehose:TagDeliveryStream action to verify if users have
-	// permissions to create tags. If you do not provide this permission, requests to
-	// create new Firehose delivery streams with IAM resource tags will fail with an
-	// AccessDeniedException such as following. AccessDeniedException User:
-	// arn:aws:sts::x:assumed-role/x/x is not authorized to perform:
+	// information about tags, see [Using Cost Allocation Tags]in the Amazon Web Services Billing and Cost
+	// Management User Guide.
+	//
+	// You can specify up to 50 tags when creating a delivery stream.
+	//
+	// If you specify tags in the CreateDeliveryStream action, Amazon Data Firehose
+	// performs an additional authorization on the firehose:TagDeliveryStream action
+	// to verify if users have permissions to create tags. If you do not provide this
+	// permission, requests to create new Firehose delivery streams with IAM resource
+	// tags will fail with an AccessDeniedException such as following.
+	//
+	// AccessDeniedException
+	//
+	// User: arn:aws:sts::x:assumed-role/x/x is not authorized to perform:
 	// firehose:TagDeliveryStream on resource:
 	// arn:aws:firehose:us-east-1:x:deliverystream/x with an explicit deny in an
-	// identity-based policy. For an example IAM policy, see Tag example. (https://docs.aws.amazon.com/firehose/latest/APIReference/API_CreateDeliveryStream.html#API_CreateDeliveryStream_Examples)
+	// identity-based policy.
+	//
+	// For an example IAM policy, see [Tag example.]
+	//
+	// [Tag example.]: https://docs.aws.amazon.com/firehose/latest/APIReference/API_CreateDeliveryStream.html#API_CreateDeliveryStream_Examples
+	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

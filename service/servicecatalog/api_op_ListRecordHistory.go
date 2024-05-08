@@ -30,7 +30,9 @@ func (c *Client) ListRecordHistory(ctx context.Context, params *ListRecordHistor
 type ListRecordHistoryInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

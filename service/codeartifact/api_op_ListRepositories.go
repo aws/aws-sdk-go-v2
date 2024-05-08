@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of RepositorySummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
-// objects. Each RepositorySummary contains information about a repository in the
-// specified Amazon Web Services account and that matches the input parameters.
+//	Returns a list of [RepositorySummary] objects. Each RepositorySummary contains information about
+//
+// a repository in the specified Amazon Web Services account and that matches the
+// input parameters.
+//
+// [RepositorySummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html
 func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesInput, optFns ...func(*Options)) (*ListRepositoriesOutput, error) {
 	if params == nil {
 		params = &ListRepositoriesInput{}
@@ -31,14 +34,14 @@ func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesI
 
 type ListRepositoriesInput struct {
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A prefix used to filter returned repositories. Only repositories with names
+	//  A prefix used to filter returned repositories. Only repositories with names
 	// that start with repositoryPrefix are returned.
 	RepositoryPrefix *string
 
@@ -47,11 +50,13 @@ type ListRepositoriesInput struct {
 
 type ListRepositoriesOutput struct {
 
-	// If there are additional results, this is the token for the next set of results.
+	//  If there are additional results, this is the token for the next set of
+	// results.
 	NextToken *string
 
-	// The returned list of RepositorySummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
-	// objects.
+	//  The returned list of [RepositorySummary] objects.
+	//
+	// [RepositorySummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html
 	Repositories []types.RepositorySummary
 
 	// Metadata pertaining to the operation's result.
@@ -146,7 +151,7 @@ var _ ListRepositoriesAPIClient = (*Client)(nil)
 
 // ListRepositoriesPaginatorOptions is the paginator options for ListRepositories
 type ListRepositoriesPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

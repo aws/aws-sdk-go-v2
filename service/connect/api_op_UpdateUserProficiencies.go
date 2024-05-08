@@ -29,7 +29,7 @@ func (c *Client) UpdateUserProficiencies(ctx context.Context, params *UpdateUser
 
 type UpdateUserProficienciesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID in
+	//  The identifier of the Amazon Connect instance. You can find the instance ID in
 	// the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.

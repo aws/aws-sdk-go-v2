@@ -14,8 +14,10 @@ import (
 // Use this operation to define the identity provider (IdP) that this workspace
 // authenticates users from, using SAML. You can also map SAML assertion attributes
 // to workspace user information and define which groups in the assertion attribute
-// are to have the Admin and Editor roles in the workspace. Changes to the
-// authentication method for a workspace may take a few minutes to take effect.
+// are to have the Admin and Editor roles in the workspace.
+//
+// Changes to the authentication method for a workspace may take a few minutes to
+// take effect.
 func (c *Client) UpdateWorkspaceAuthentication(ctx context.Context, params *UpdateWorkspaceAuthenticationInput, optFns ...func(*Options)) (*UpdateWorkspaceAuthenticationOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceAuthenticationInput{}
@@ -35,8 +37,9 @@ type UpdateWorkspaceAuthenticationInput struct {
 
 	// Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to
 	// authenticate users for using the Grafana console within a workspace. For more
-	// information, see User authentication in Amazon Managed Grafana (https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html)
-	// .
+	// information, see [User authentication in Amazon Managed Grafana].
+	//
+	// [User authentication in Amazon Managed Grafana]: https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html
 	//
 	// This member is required.
 	AuthenticationProviders []types.AuthenticationProviderTypes

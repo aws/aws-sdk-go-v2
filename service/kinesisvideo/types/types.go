@@ -57,9 +57,11 @@ type DeletionConfig struct {
 	// for deletion, once it has been uploaded to the Kinesis Video Stream cloud. The
 	// media files can be deleted if any of the deletion configuration values are set
 	// to true , such as when the limit for the EdgeRetentionInHours , or the
-	// MaxLocalMediaSizeInMB , has been reached. Since the default value is set to true
-	// , configure the uploader schedule such that the media files are not being
-	// deleted before they are initially uploaded to the Amazon Web Services cloud.
+	// MaxLocalMediaSizeInMB , has been reached.
+	//
+	// Since the default value is set to true , configure the uploader schedule such
+	// that the media files are not being deleted before they are initially uploaded to
+	// the Amazon Web Services cloud.
 	DeleteAfterUpload *bool
 
 	// The number of hours that you want to retain the data in the stream on the Edge
@@ -307,8 +309,9 @@ type MediaSourceConfig struct {
 	MediaUriSecretArn *string
 
 	// The Uniform Resource Identifier (URI) type. The FILE_URI value can be used to
-	// stream local media files. Preview only supports the RTSP_URI media source URI
-	// format .
+	// stream local media files.
+	//
+	// Preview only supports the RTSP_URI media source URI format .
 	//
 	// This member is required.
 	MediaUriType MediaUriType
@@ -318,9 +321,11 @@ type MediaSourceConfig struct {
 
 // A structure that encapsulates, or contains, the media storage configuration
 // properties.
+//
 //   - If StorageStatus is enabled, the data will be stored in the StreamARN
 //     provided. In order for WebRTC Ingestion to work, the stream must have data
 //     retention enabled.
+//
 //   - If StorageStatus is disabled, no data will be stored, and the StreamARN
 //     parameter will not be needed.
 type MediaStorageConfiguration struct {
@@ -388,8 +393,9 @@ type RecorderConfig struct {
 }
 
 // An object that describes the endpoint of the signaling channel returned by the
-// GetSignalingChannelEndpoint API. The media server endpoint will correspond to
-// the WEBRTC Protocol.
+// GetSignalingChannelEndpoint API.
+//
+// The media server endpoint will correspond to the WEBRTC Protocol.
 type ResourceEndpointListItem struct {
 
 	// The protocol of the signaling channel returned by the
@@ -405,10 +411,13 @@ type ResourceEndpointListItem struct {
 
 // This API enables you to specify the duration that the camera, or local media
 // file, should record onto the Edge Agent. The ScheduleConfig consists of the
-// ScheduleExpression and the DurationInMinutes attributes. If the ScheduleConfig
-// is not provided in the RecorderConfig , then the Edge Agent will always be set
-// to recording mode. If the ScheduleConfig is not provided in the UploaderConfig ,
-// then the Edge Agent will upload at regular intervals (every 1 hour).
+// ScheduleExpression and the DurationInMinutes attributes.
+//
+// If the ScheduleConfig is not provided in the RecorderConfig , then the Edge
+// Agent will always be set to recording mode.
+//
+// If the ScheduleConfig is not provided in the UploaderConfig , then the Edge
+// Agent will upload at regular intervals (every 1 hour).
 type ScheduleConfig struct {
 
 	// The total duration to record the media. If the ScheduleExpression attribute is
@@ -420,9 +429,12 @@ type ScheduleConfig struct {
 	// The Quartz cron expression that takes care of scheduling jobs to record from
 	// the camera, or local media file, onto the Edge Agent. If the ScheduleExpression
 	// is not provided for the RecorderConfig , then the Edge Agent will always be set
-	// to recording mode. For more information about Quartz, refer to the Cron Trigger
-	// Tutorial  (http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html)
-	// page to understand the valid expressions and its use.
+	// to recording mode.
+	//
+	// For more information about Quartz, refer to the [Cron Trigger Tutorial] page to understand the valid
+	// expressions and its use.
+	//
+	// [Cron Trigger Tutorial]: http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html
 	//
 	// This member is required.
 	ScheduleExpression *string

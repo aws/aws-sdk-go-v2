@@ -31,8 +31,9 @@ func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput
 
 type CreateTemplateInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	//
 	// This member is required.
 	ConnectorArn *string

@@ -16,20 +16,30 @@ import (
 // snapshot includes entity data from the State Fabric, the simulation
 // configuration specified in the schema, and the clock tick number. You can use
 // the snapshot to initialize a new simulation. For more information about
-// snapshots, see Snapshots (https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html)
-// in the SimSpace Weaver User Guide. You specify a Destination when you create a
-// snapshot. The Destination is the name of an Amazon S3 bucket and an optional
-// ObjectKeyPrefix . The ObjectKeyPrefix is usually the name of a folder in the
-// bucket. SimSpace Weaver creates a snapshot folder inside the Destination and
-// places the snapshot file there. The snapshot file is an Amazon S3 object. It has
-// an object key with the form:
+// snapshots, see [Snapshots]in the SimSpace Weaver User Guide.
+//
+// You specify a Destination when you create a snapshot. The Destination is the
+// name of an Amazon S3 bucket and an optional ObjectKeyPrefix . The
+// ObjectKeyPrefix is usually the name of a folder in the bucket. SimSpace Weaver
+// creates a snapshot folder inside the Destination and places the snapshot file
+// there.
+//
+// The snapshot file is an Amazon S3 object. It has an object key with the form:
 // object-key-prefix/snapshot/simulation-name-YYMMdd-HHmm-ss.zip , where:
+//
 //   - YY is the 2-digit year
+//
 //   - MM is the 2-digit month
+//
 //   - dd is the 2-digit day of the month
+//
 //   - HH is the 2-digit hour (24-hour clock)
+//
 //   - mm is the 2-digit minutes
+//
 //   - ss is the 2-digit seconds
+//
+// [Snapshots]: https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotInput{}
@@ -48,8 +58,10 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 type CreateSnapshotInput struct {
 
 	// The Amazon S3 bucket and optional folder (object key prefix) where SimSpace
-	// Weaver creates the snapshot file. The Amazon S3 bucket must be in the same
-	// Amazon Web Services Region as the simulation.
+	// Weaver creates the snapshot file.
+	//
+	// The Amazon S3 bucket must be in the same Amazon Web Services Region as the
+	// simulation.
 	//
 	// This member is required.
 	Destination *types.S3Destination

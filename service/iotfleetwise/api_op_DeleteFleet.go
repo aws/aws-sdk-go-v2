@@ -10,11 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a fleet. Before you delete a fleet, all vehicles must be dissociated
-// from the fleet. For more information, see Delete a fleet (AWS CLI) (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/delete-fleet-cli.html)
-// in the Amazon Web Services IoT FleetWise Developer Guide. If the fleet is
-// successfully deleted, Amazon Web Services IoT FleetWise sends back an HTTP 200
-// response with an empty body.
+//	Deletes a fleet. Before you delete a fleet, all vehicles must be dissociated
+//
+// from the fleet. For more information, see [Delete a fleet (AWS CLI)]in the Amazon Web Services IoT
+// FleetWise Developer Guide.
+//
+// If the fleet is successfully deleted, Amazon Web Services IoT FleetWise sends
+// back an HTTP 200 response with an empty body.
+//
+// [Delete a fleet (AWS CLI)]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/delete-fleet-cli.html
 func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optFns ...func(*Options)) (*DeleteFleetOutput, error) {
 	if params == nil {
 		params = &DeleteFleetInput{}
@@ -32,7 +36,7 @@ func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optF
 
 type DeleteFleetInput struct {
 
-	// The ID of the fleet to delete.
+	//  The ID of the fleet to delete.
 	//
 	// This member is required.
 	FleetId *string

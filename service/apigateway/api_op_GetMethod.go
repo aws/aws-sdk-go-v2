@@ -48,7 +48,8 @@ type GetMethodInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a client-facing interface by which the client calls the API to
+//	Represents a client-facing interface by which the client calls the API to
+//
 // access back-end resources. A Method resource is integrated with an Integration
 // resource. Both consist of a request and one or more responses. The method
 // request takes the client input that is passed to the back end through the

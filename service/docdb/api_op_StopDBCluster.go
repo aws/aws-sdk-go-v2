@@ -12,9 +12,9 @@ import (
 )
 
 // Stops the running cluster that is specified by DBClusterIdentifier . The cluster
-// must be in the available state. For more information, see Stopping and Starting
-// an Amazon DocumentDB Cluster (https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html)
-// .
+// must be in the available state. For more information, see [Stopping and Starting an Amazon DocumentDB Cluster].
+//
+// [Stopping and Starting an Amazon DocumentDB Cluster]: https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html
 func (c *Client) StopDBCluster(ctx context.Context, params *StopDBClusterInput, optFns ...func(*Options)) (*StopDBClusterOutput, error) {
 	if params == nil {
 		params = &StopDBClusterInput{}

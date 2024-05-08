@@ -12,8 +12,10 @@ import (
 )
 
 // Provides a list of Medical Scribe jobs that match the specified criteria. If no
-// criteria are specified, all Medical Scribe jobs are returned. To get detailed
-// information about a specific Medical Scribe job, use the operation.
+// criteria are specified, all Medical Scribe jobs are returned.
+//
+// To get detailed information about a specific Medical Scribe job, use the
+// operation.
 func (c *Client) ListMedicalScribeJobs(ctx context.Context, params *ListMedicalScribeJobsInput, optFns ...func(*Options)) (*ListMedicalScribeJobsOutput, error) {
 	if params == nil {
 		params = &ListMedicalScribeJobsInput{}

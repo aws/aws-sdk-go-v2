@@ -31,8 +31,9 @@ func (c *Client) RevokePermissions(ctx context.Context, params *RevokePermission
 type RevokePermissionsInput struct {
 
 	// The permissions revoked to the principal on the resource. For information about
-	// permissions, see Security and Access Control to Metadata and Data (https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html)
-	// .
+	// permissions, see [Security and Access Control to Metadata and Data].
+	//
+	// [Security and Access Control to Metadata and Data]: https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html
 	//
 	// This member is required.
 	Permissions []types.Permission

@@ -12,8 +12,9 @@ import (
 )
 
 // Deletes a global cluster. The primary and secondary clusters must already be
-// detached or deleted before attempting to delete a global cluster. This action
-// only applies to Amazon DocumentDB clusters.
+// detached or deleted before attempting to delete a global cluster.
+//
+// This action only applies to Amazon DocumentDB clusters.
 func (c *Client) DeleteGlobalCluster(ctx context.Context, params *DeleteGlobalClusterInput, optFns ...func(*Options)) (*DeleteGlobalClusterOutput, error) {
 	if params == nil {
 		params = &DeleteGlobalClusterInput{}
@@ -29,7 +30,7 @@ func (c *Client) DeleteGlobalCluster(ctx context.Context, params *DeleteGlobalCl
 	return out, nil
 }
 
-// Represents the input to DeleteGlobalCluster .
+// Represents the input to DeleteGlobalCluster.
 type DeleteGlobalClusterInput struct {
 
 	// The cluster identifier of the global cluster being deleted.

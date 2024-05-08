@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers an organization’s member account as the CloudTrail delegated
-// administrator (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html)
-// .
+// Registers an organization’s member account as the CloudTrail [delegated administrator].
+//
+// [delegated administrator]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html
 func (c *Client) RegisterOrganizationDelegatedAdmin(ctx context.Context, params *RegisterOrganizationDelegatedAdminInput, optFns ...func(*Options)) (*RegisterOrganizationDelegatedAdminOutput, error) {
 	if params == nil {
 		params = &RegisterOrganizationDelegatedAdminInput{}

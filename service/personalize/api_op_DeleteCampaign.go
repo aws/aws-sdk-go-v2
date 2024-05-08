@@ -12,9 +12,11 @@ import (
 
 // Removes a campaign by deleting the solution deployment. The solution that the
 // campaign is based on is not deleted and can be redeployed when needed. A deleted
-// campaign can no longer be specified in a GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
-// request. For information on creating campaigns, see CreateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html)
-// .
+// campaign can no longer be specified in a [GetRecommendations]request. For information on creating
+// campaigns, see [CreateCampaign].
+//
+// [CreateCampaign]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html
+// [GetRecommendations]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
 func (c *Client) DeleteCampaign(ctx context.Context, params *DeleteCampaignInput, optFns ...func(*Options)) (*DeleteCampaignOutput, error) {
 	if params == nil {
 		params = &DeleteCampaignInput{}

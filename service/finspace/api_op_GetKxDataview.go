@@ -30,7 +30,7 @@ func (c *Client) GetKxDataview(ctx context.Context, params *GetKxDataviewInput, 
 
 type GetKxDataviewInput struct {
 
-	// The name of the database where you created the dataview.
+	//  The name of the database where you created the dataview.
 	//
 	// This member is required.
 	DatabaseName *string
@@ -51,7 +51,7 @@ type GetKxDataviewInput struct {
 
 type GetKxDataviewOutput struct {
 
-	// The current active changeset versions of the database on the given dataview.
+	//  The current active changeset versions of the database on the given dataview.
 	ActiveVersions []types.KxDataviewActiveVersion
 
 	// The option to specify whether you want to apply all the future additions and
@@ -59,14 +59,14 @@ type GetKxDataviewOutput struct {
 	// default value is false.
 	AutoUpdate bool
 
-	// The identifier of the availability zones.
+	//  The identifier of the availability zones.
 	AvailabilityZoneId *string
 
 	// The number of availability zones you want to assign per volume. Currently,
 	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode types.KxAzMode
 
-	// A unique identifier of the changeset that you want to use to ingest data.
+	//  A unique identifier of the changeset that you want to use to ingest data.
 	ChangesetId *string
 
 	// The timestamp at which the dataview was created in FinSpace. The value is
@@ -74,7 +74,7 @@ type GetKxDataviewOutput struct {
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// The name of the database where you created the dataview.
+	//  The name of the database where you created the dataview.
 	DatabaseName *string
 
 	// A unique identifier for the dataview.
@@ -87,7 +87,7 @@ type GetKxDataviewOutput struct {
 	// the dataview details.
 	EnvironmentId *string
 
-	// The last time that the dataview was updated in FinSpace. The value is
+	//  The last time that the dataview was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
@@ -95,20 +95,23 @@ type GetKxDataviewOutput struct {
 	// Returns True if the dataview is created as writeable and False otherwise.
 	ReadWrite bool
 
-	// The configuration that contains the database path of the data that you want to
+	//  The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
 	SegmentConfigurations []types.KxDataviewSegmentConfiguration
 
-	// The status of dataview creation.
+	//  The status of dataview creation.
+	//
 	//   - CREATING – The dataview creation is in progress.
+	//
 	//   - UPDATING – The dataview is in the process of being updated.
+	//
 	//   - ACTIVE – The dataview is active.
 	Status types.KxDataviewStatus
 
-	// The error message when a failed state occurs.
+	//  The error message when a failed state occurs.
 	StatusReason *string
 
 	// Metadata pertaining to the operation's result.

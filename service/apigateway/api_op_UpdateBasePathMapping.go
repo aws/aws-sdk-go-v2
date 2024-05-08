@@ -30,8 +30,9 @@ func (c *Client) UpdateBasePathMapping(ctx context.Context, params *UpdateBasePa
 // A request to change information about the BasePathMapping resource.
 type UpdateBasePathMappingInput struct {
 
-	// The base path of the BasePathMapping resource to change. To specify an empty
-	// base path, set this parameter to '(none)' .
+	// The base path of the BasePathMapping resource to change.
+	//
+	// To specify an empty base path, set this parameter to '(none)' .
 	//
 	// This member is required.
 	BasePath *string
@@ -41,8 +42,9 @@ type UpdateBasePathMappingInput struct {
 	// This member is required.
 	DomainName *string
 
-	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
-	// .
+	// For more information about supported patch operations, see [Patch Operations].
+	//
+	// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde

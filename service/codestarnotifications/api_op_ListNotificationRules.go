@@ -30,9 +30,10 @@ func (c *Client) ListNotificationRules(ctx context.Context, params *ListNotifica
 type ListNotificationRulesInput struct {
 
 	// The filters to use to return information by service or resource type. For valid
-	// values, see ListNotificationRulesFilter . A filter with the same name can appear
-	// more than once when used with OR statements. Filters with different names should
-	// be applied with AND statements.
+	// values, see ListNotificationRulesFilter.
+	//
+	// A filter with the same name can appear more than once when used with OR
+	// statements. Filters with different names should be applied with AND statements.
 	Filters []types.ListNotificationRulesFilter
 
 	// A non-negative integer used to limit the number of returned results. The

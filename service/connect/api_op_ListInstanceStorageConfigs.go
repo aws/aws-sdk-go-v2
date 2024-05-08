@@ -12,6 +12,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Returns a paginated list of storage configs for the identified instance and
 // resource type.
 func (c *Client) ListInstanceStorageConfigs(ctx context.Context, params *ListInstanceStorageConfigsInput, optFns ...func(*Options)) (*ListInstanceStorageConfigsOutput, error) {
@@ -31,8 +32,10 @@ func (c *Client) ListInstanceStorageConfigs(ctx context.Context, params *ListIns
 
 type ListInstanceStorageConfigsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

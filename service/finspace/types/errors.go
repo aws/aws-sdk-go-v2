@@ -192,7 +192,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded your service quota. To perform the requested action, remove
+//	You have exceeded your service quota. To perform the requested action, remove
+//
 // some of the relevant resources, or use Service Quotas to request a service quota
 // increase.
 type ServiceQuotaExceededException struct {

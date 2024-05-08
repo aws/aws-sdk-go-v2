@@ -11,11 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a detailed description of the definition of a template. If you do not
-// need to know details about the content of a template, for instance if you are
-// trying to check the status of a recently created or updated template, use the
-// DescribeTemplate (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeTemplate.html)
-// instead.
+// Provides a detailed description of the definition of a template.
+//
+// If you do not need to know details about the content of a template, for
+// instance if you are trying to check the status of a recently created or updated
+// template, use the [DescribeTemplate]DescribeTemplate instead.
+//
+// [DescribeTemplate]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeTemplate.html
 func (c *Client) DescribeTemplateDefinition(ctx context.Context, params *DescribeTemplateDefinitionInput, optFns ...func(*Options)) (*DescribeTemplateDefinitionOutput, error) {
 	if params == nil {
 		params = &DescribeTemplateDefinitionInput{}
@@ -58,8 +60,10 @@ type DescribeTemplateDefinitionInput struct {
 
 type DescribeTemplateDefinitionOutput struct {
 
-	// The definition of the template. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis.
+	// The definition of the template.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
 	Definition *types.TemplateVersionDefinition
 
 	// Errors associated with the template version.
@@ -72,12 +76,19 @@ type DescribeTemplateDefinitionOutput struct {
 	RequestId *string
 
 	// Status associated with the template.
+	//
 	//   - CREATION_IN_PROGRESS
+	//
 	//   - CREATION_SUCCESSFUL
+	//
 	//   - CREATION_FAILED
+	//
 	//   - UPDATE_IN_PROGRESS
+	//
 	//   - UPDATE_SUCCESSFUL
+	//
 	//   - UPDATE_FAILED
+	//
 	//   - DELETED
 	ResourceStatus types.ResourceStatus
 

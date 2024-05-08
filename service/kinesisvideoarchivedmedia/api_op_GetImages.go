@@ -72,9 +72,11 @@ type GetImagesInput struct {
 	// image size will be returned.
 	HeightPixels *int32
 
-	// The maximum number of images to be returned by the API. The default limit is 25
-	// images per API response. Providing a MaxResults greater than this value will
-	// result in a page size of 25. Any additional results will be paginated.
+	// The maximum number of images to be returned by the API.
+	//
+	// The default limit is 25 images per API response. Providing a MaxResults greater
+	// than this value will result in a page size of 25. Any additional results will be
+	// paginated.
 	MaxResults *int64
 
 	// A token that specifies where to start paginating the next set of Images. This
@@ -211,9 +213,11 @@ var _ GetImagesAPIClient = (*Client)(nil)
 
 // GetImagesPaginatorOptions is the paginator options for GetImages
 type GetImagesPaginatorOptions struct {
-	// The maximum number of images to be returned by the API. The default limit is 25
-	// images per API response. Providing a MaxResults greater than this value will
-	// result in a page size of 25. Any additional results will be paginated.
+	// The maximum number of images to be returned by the API.
+	//
+	// The default limit is 25 images per API response. Providing a MaxResults greater
+	// than this value will result in a page size of 25. Any additional results will be
+	// paginated.
 	Limit int64
 
 	// Set to true if pagination should stop if the service returns a pagination token

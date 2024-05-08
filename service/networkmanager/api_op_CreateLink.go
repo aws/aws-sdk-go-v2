@@ -29,7 +29,7 @@ func (c *Client) CreateLink(ctx context.Context, params *CreateLinkInput, optFns
 
 type CreateLinkInput struct {
 
-	// The upload speed and download speed in Mbps.
+	//  The upload speed and download speed in Mbps.
 	//
 	// This member is required.
 	Bandwidth *types.Bandwidth
@@ -44,18 +44,24 @@ type CreateLinkInput struct {
 	// This member is required.
 	SiteId *string
 
-	// A description of the link. Constraints: Maximum length of 256 characters.
+	// A description of the link.
+	//
+	// Constraints: Maximum length of 256 characters.
 	Description *string
 
-	// The provider of the link. Constraints: Maximum length of 128 characters. Cannot
-	// include the following characters: | \ ^
+	// The provider of the link.
+	//
+	// Constraints: Maximum length of 128 characters. Cannot include the following
+	// characters: | \ ^
 	Provider *string
 
 	// The tags to apply to the resource during creation.
 	Tags []types.Tag
 
-	// The type of the link. Constraints: Maximum length of 128 characters. Cannot
-	// include the following characters: | \ ^
+	// The type of the link.
+	//
+	// Constraints: Maximum length of 128 characters. Cannot include the following
+	// characters: | \ ^
 	Type *string
 
 	noSmithyDocumentSerde

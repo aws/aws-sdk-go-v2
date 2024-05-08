@@ -110,9 +110,15 @@ type DescribeLabelingJobOutput struct {
 
 	// The S3 location of the JSON file that defines the categories used to label data
 	// objects. Please note the following label-category limits:
+	//
 	//   - Semantic segmentation labeling jobs using automated labeling: 20 labels
+	//
 	//   - Box bounding labeling jobs (all): 10 labels
-	// The file is a JSON structure in the following format: {
+	//
+	// The file is a JSON structure in the following format:
+	//
+	//     {
+	//
 	//     "document-version": "2018-11-28"
 	//
 	//     "labels": [
@@ -154,8 +160,9 @@ type DescribeLabelingJobOutput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// environment. For more information, see [Tagging Amazon Web Services Resources].
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

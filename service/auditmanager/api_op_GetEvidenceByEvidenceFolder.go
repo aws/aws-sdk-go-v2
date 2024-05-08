@@ -29,25 +29,25 @@ func (c *Client) GetEvidenceByEvidenceFolder(ctx context.Context, params *GetEvi
 
 type GetEvidenceByEvidenceFolderInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the control set.
+	//  The identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// The unique identifier for the folder that the evidence is stored in.
+	//  The unique identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -55,10 +55,10 @@ type GetEvidenceByEvidenceFolderInput struct {
 
 type GetEvidenceByEvidenceFolderOutput struct {
 
-	// The list of evidence that the GetEvidenceByEvidenceFolder API returned.
+	//  The list of evidence that the GetEvidenceByEvidenceFolder API returned.
 	Evidence []types.Evidence
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -157,7 +157,7 @@ var _ GetEvidenceByEvidenceFolderAPIClient = (*Client)(nil)
 // GetEvidenceByEvidenceFolderPaginatorOptions is the paginator options for
 // GetEvidenceByEvidenceFolder
 type GetEvidenceByEvidenceFolderPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

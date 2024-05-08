@@ -33,7 +33,7 @@ func (c *Client) DeletePackageGroup(ctx context.Context, params *DeletePackageGr
 
 type DeletePackageGroupInput struct {
 
-	// The domain that contains the package group to be deleted.
+	//  The domain that contains the package group to be deleted.
 	//
 	// This member is required.
 	Domain *string
@@ -43,7 +43,7 @@ type DeletePackageGroupInput struct {
 	// This member is required.
 	PackageGroup *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -52,7 +52,7 @@ type DeletePackageGroupInput struct {
 
 type DeletePackageGroupOutput struct {
 
-	// Information about the deleted package group after processing the request.
+	//  Information about the deleted package group after processing the request.
 	PackageGroup *types.PackageGroupDescription
 
 	// Metadata pertaining to the operation's result.

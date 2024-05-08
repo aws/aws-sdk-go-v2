@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an OpenSearch Serverless access policy. For more information, see
-// Updating data lifecycle policies (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-update)
-// .
+// Updates an OpenSearch Serverless access policy. For more information, see [Updating data lifecycle policies].
+//
+// [Updating data lifecycle policies]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-update
 func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecyclePolicyInput, optFns ...func(*Options)) (*UpdateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateLifecyclePolicyInput{}
@@ -41,7 +41,7 @@ type UpdateLifecyclePolicyInput struct {
 	// This member is required.
 	PolicyVersion *string
 
-	// The type of lifecycle policy.
+	//  The type of lifecycle policy.
 	//
 	// This member is required.
 	Type types.LifecyclePolicyType

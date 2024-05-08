@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the Cognito identity pools registered for your account. You must
-// use AWS Developer credentials to call this API.
+// Lists all of the Cognito identity pools registered for your account.
+//
+// You must use AWS Developer credentials to call this API.
 func (c *Client) ListIdentityPools(ctx context.Context, params *ListIdentityPoolsInput, optFns ...func(*Options)) (*ListIdentityPoolsOutput, error) {
 	if params == nil {
 		params = &ListIdentityPoolsInput{}

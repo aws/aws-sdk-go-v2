@@ -30,28 +30,28 @@ func (c *Client) ListLabels(ctx context.Context, params *ListLabelsInput, optFns
 
 type ListLabelsInput struct {
 
-	// Returns the name of the label group.
+	//  Returns the name of the label group.
 	//
 	// This member is required.
 	LabelGroupName *string
 
-	// Lists the labels that pertain to a particular piece of equipment.
+	//  Lists the labels that pertain to a particular piece of equipment.
 	Equipment *string
 
-	// Returns labels with a particular fault code.
+	//  Returns labels with a particular fault code.
 	FaultCode *string
 
-	// Returns all labels with a start time earlier than the end time given.
+	//  Returns all labels with a start time earlier than the end time given.
 	IntervalEndTime *time.Time
 
-	// Returns all the labels with a end time equal to or later than the start time
+	//  Returns all the labels with a end time equal to or later than the start time
 	// given.
 	IntervalStartTime *time.Time
 
-	// Specifies the maximum number of labels to list.
+	//  Specifies the maximum number of labels to list.
 	MaxResults *int32
 
-	// An opaque pagination token indicating where to continue the listing of label
+	//  An opaque pagination token indicating where to continue the listing of label
 	// groups.
 	NextToken *string
 
@@ -60,12 +60,15 @@ type ListLabelsInput struct {
 
 type ListLabelsOutput struct {
 
-	// A summary of the items in the label group. If you don't supply the
-	// LabelGroupName request parameter, or if you supply the name of a label group
-	// that doesn't exist, ListLabels returns an empty array in LabelSummaries .
+	//  A summary of the items in the label group.
+	//
+	// If you don't supply the LabelGroupName request parameter, or if you supply the
+	// name of a label group that doesn't exist, ListLabels returns an empty array in
+	// LabelSummaries .
 	LabelSummaries []types.LabelSummary
 
-	// An opaque pagination token indicating where to continue the listing of datasets.
+	//  An opaque pagination token indicating where to continue the listing of
+	// datasets.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -162,7 +165,7 @@ var _ ListLabelsAPIClient = (*Client)(nil)
 
 // ListLabelsPaginatorOptions is the paginator options for ListLabels
 type ListLabelsPaginatorOptions struct {
-	// Specifies the maximum number of labels to list.
+	//  Specifies the maximum number of labels to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

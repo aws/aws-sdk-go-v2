@@ -28,12 +28,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the flow that you want to untag.
+	//  The Amazon Resource Name (ARN) of the flow that you want to untag.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tag keys associated with the tag that you want to remove from your flow.
+	//  The tag keys associated with the tag that you want to remove from your flow.
 	//
 	// This member is required.
 	TagKeys []string

@@ -58,7 +58,7 @@ type DescribeLocationHdfsOutput struct {
 	// .
 	KerberosPrincipal *string
 
-	// The URI of the HDFS cluster's Key Management Server (KMS).
+	//  The URI of the HDFS cluster's Key Management Server (KMS).
 	KmsKeyProviderUri *string
 
 	// The ARN of the HDFS location.

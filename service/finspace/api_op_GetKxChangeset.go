@@ -82,9 +82,13 @@ type GetKxChangesetOutput struct {
 	LastModifiedTimestamp *time.Time
 
 	// Status of the changeset creation process.
+	//
 	//   - Pending – Changeset creation is pending.
+	//
 	//   - Processing – Changeset creation is running.
+	//
 	//   - Failed – Changeset creation has failed.
+	//
 	//   - Complete – Changeset creation has succeeded.
 	Status types.ChangesetStatus
 

@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an inference experiment that you created. The status of the inference
+//	Updates an inference experiment that you created. The status of the inference
+//
 // experiment has to be either Created , Running . For more information on the
-// status of an inference experiment, see DescribeInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html)
-// .
+// status of an inference experiment, see [DescribeInferenceExperiment].
+//
+// [DescribeInferenceExperiment]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html
 func (c *Client) UpdateInferenceExperiment(ctx context.Context, params *UpdateInferenceExperimentInput, optFns ...func(*Options)) (*UpdateInferenceExperimentOutput, error) {
 	if params == nil {
 		params = &UpdateInferenceExperimentInput{}
@@ -44,17 +46,17 @@ type UpdateInferenceExperimentInput struct {
 	// The description of the inference experiment.
 	Description *string
 
-	// An array of ModelVariantConfig objects. There is one for each variant, whose
+	//  An array of ModelVariantConfig objects. There is one for each variant, whose
 	// infrastructure configuration you want to update.
 	ModelVariants []types.ModelVariantConfig
 
-	// The duration for which the inference experiment will run. If the status of the
+	//  The duration for which the inference experiment will run. If the status of the
 	// inference experiment is Created , then you can update both the start and end
 	// dates. If the status of the inference experiment is Running , then you can
 	// update only the end date.
 	Schedule *types.InferenceExperimentSchedule
 
-	// The configuration of ShadowMode inference experiment type. Use this field to
+	//  The configuration of ShadowMode inference experiment type. Use this field to
 	// specify a production variant which takes all the inference requests, and a
 	// shadow variant to which Amazon SageMaker replicates a percentage of the
 	// inference requests. For the shadow variant also specify the percentage of

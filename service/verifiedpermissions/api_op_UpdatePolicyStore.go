@@ -12,10 +12,13 @@ import (
 	"time"
 )
 
-// Modifies the validation setting for a policy store. Verified Permissions is
-// eventually consistent (https://wikipedia.org/wiki/Eventual_consistency) . It can
-// take a few seconds for a new or changed element to propagate through the service
-// and be visible in the results of other Verified Permissions operations.
+// Modifies the validation setting for a policy store.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
 func (c *Client) UpdatePolicyStore(ctx context.Context, params *UpdatePolicyStoreInput, optFns ...func(*Options)) (*UpdatePolicyStoreOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyStoreInput{}
@@ -53,8 +56,9 @@ type UpdatePolicyStoreInput struct {
 
 type UpdatePolicyStoreOutput struct {
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the updated policy store.
+	// The [Amazon Resource Name (ARN)] of the updated policy store.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	Arn *string

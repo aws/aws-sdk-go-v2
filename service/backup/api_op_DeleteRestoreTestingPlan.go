@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This request deletes the specified restore testing plan. Deletion can only
-// successfully occur if all associated restore testing selections are deleted
-// first.
+// This request deletes the specified restore testing plan.
+//
+// Deletion can only successfully occur if all associated restore testing
+// selections are deleted first.
 func (c *Client) DeleteRestoreTestingPlan(ctx context.Context, params *DeleteRestoreTestingPlanInput, optFns ...func(*Options)) (*DeleteRestoreTestingPlanOutput, error) {
 	if params == nil {
 		params = &DeleteRestoreTestingPlanInput{}

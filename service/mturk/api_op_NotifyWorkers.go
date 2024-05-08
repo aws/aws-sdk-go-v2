@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The NotifyWorkers operation sends an email to one or more Workers that you
+//	The NotifyWorkers operation sends an email to one or more Workers that you
+//
 // specify with the Worker ID. You can specify up to 100 Worker IDs to send the
 // same message with a single call to the NotifyWorkers operation. The
 // NotifyWorkers operation will send a notification email to a Worker only if you
@@ -54,7 +55,7 @@ type NotifyWorkersInput struct {
 
 type NotifyWorkersOutput struct {
 
-	// When MTurk sends notifications to the list of Workers, it returns back any
+	//  When MTurk sends notifications to the list of Workers, it returns back any
 	// failures it encounters in this list of NotifyWorkersFailureStatus objects.
 	NotifyWorkersFailureStatuses []types.NotifyWorkersFailureStatus
 

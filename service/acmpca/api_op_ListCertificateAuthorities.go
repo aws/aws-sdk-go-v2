@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the private certificate authorities that you created by using the
-// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-// action.
+// Lists the private certificate authorities that you created by using the [CreateCertificateAuthority] action.
+//
+// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 func (c *Client) ListCertificateAuthorities(ctx context.Context, params *ListCertificateAuthoritiesInput, optFns ...func(*Options)) (*ListCertificateAuthoritiesOutput, error) {
 	if params == nil {
 		params = &ListCertificateAuthoritiesInput{}
@@ -34,8 +34,10 @@ type ListCertificateAuthoritiesInput struct {
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response on each page. If additional items exist beyond
 	// the number you specify, the NextToken element is sent in the response. Use this
-	// NextToken value in a subsequent request to retrieve additional items. Although
-	// the maximum value is 1000, the action only returns a maximum of 100 items.
+	// NextToken value in a subsequent request to retrieve additional items.
+	//
+	// Although the maximum value is 1000, the action only returns a maximum of 100
+	// items.
 	MaxResults *int32
 
 	// Use this parameter when paginating results in a subsequent request after you
@@ -155,8 +157,10 @@ type ListCertificateAuthoritiesPaginatorOptions struct {
 	// Use this parameter when paginating results to specify the maximum number of
 	// items to return in the response on each page. If additional items exist beyond
 	// the number you specify, the NextToken element is sent in the response. Use this
-	// NextToken value in a subsequent request to retrieve additional items. Although
-	// the maximum value is 1000, the action only returns a maximum of 100 items.
+	// NextToken value in a subsequent request to retrieve additional items.
+	//
+	// Although the maximum value is 1000, the action only returns a maximum of 100
+	// items.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

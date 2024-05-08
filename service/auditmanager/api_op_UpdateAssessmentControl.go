@@ -29,25 +29,25 @@ func (c *Client) UpdateAssessmentControl(ctx context.Context, params *UpdateAsse
 
 type UpdateAssessmentControlInput struct {
 
-	// The unique identifier for the assessment.
+	//  The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The unique identifier for the control.
+	//  The unique identifier for the control.
 	//
 	// This member is required.
 	ControlId *string
 
-	// The unique identifier for the control set.
+	//  The unique identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// The comment body text for the control.
+	//  The comment body text for the control.
 	CommentBody *string
 
-	// The status of the control.
+	//  The status of the control.
 	ControlStatus types.ControlStatus
 
 	noSmithyDocumentSerde
@@ -55,7 +55,7 @@ type UpdateAssessmentControlInput struct {
 
 type UpdateAssessmentControlOutput struct {
 
-	// The name of the updated control set that the UpdateAssessmentControl API
+	//  The name of the updated control set that the UpdateAssessmentControl API
 	// returned.
 	Control *types.AssessmentControl
 

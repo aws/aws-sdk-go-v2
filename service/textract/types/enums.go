@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for AdapterVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdapterVersionStatus) Values() []AdapterVersionStatus {
 	return []AdapterVersionStatus{
 		"ACTIVE",
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for AutoUpdate. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoUpdate) Values() []AutoUpdate {
 	return []AutoUpdate{
 		"ENABLED",
@@ -75,8 +77,9 @@ const (
 )
 
 // Values returns all known values for BlockType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BlockType) Values() []BlockType {
 	return []BlockType{
 		"KEY_VALUE_SET",
@@ -115,8 +118,9 @@ const (
 )
 
 // Values returns all known values for ContentClassifier. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentClassifier) Values() []ContentClassifier {
 	return []ContentClassifier{
 		"FreeOfPersonallyIdentifiableInformation",
@@ -140,8 +144,9 @@ const (
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntityType) Values() []EntityType {
 	return []EntityType{
 		"KEY",
@@ -168,8 +173,9 @@ const (
 )
 
 // Values returns all known values for FeatureType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeatureType) Values() []FeatureType {
 	return []FeatureType{
 		"TABLES",
@@ -191,8 +197,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"IN_PROGRESS",
@@ -218,8 +225,9 @@ const (
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RelationshipType) Values() []RelationshipType {
 	return []RelationshipType{
 		"VALUE",
@@ -243,8 +251,9 @@ const (
 )
 
 // Values returns all known values for SelectionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SelectionStatus) Values() []SelectionStatus {
 	return []SelectionStatus{
 		"SELECTED",
@@ -261,8 +270,9 @@ const (
 )
 
 // Values returns all known values for TextType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TextType) Values() []TextType {
 	return []TextType{
 		"HANDWRITING",
@@ -278,8 +288,9 @@ const (
 )
 
 // Values returns all known values for ValueType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValueType) Values() []ValueType {
 	return []ValueType{
 		"DATE",

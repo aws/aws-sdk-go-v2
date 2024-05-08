@@ -34,7 +34,7 @@ type GetCisScanReportInput struct {
 	// This member is required.
 	ScanArn *string
 
-	// The format of the report. Valid values are PDF and CSV . If no value is
+	//  The format of the report. Valid values are PDF and CSV . If no value is
 	// specified, the report format defaults to PDF .
 	ReportFormat types.CisReportFormat
 
@@ -49,7 +49,7 @@ type GetCisScanReportOutput struct {
 	// The status.
 	Status types.CisReportStatus
 
-	// The URL where a PDF or CSV of the CIS scan report can be downloaded.
+	//  The URL where a PDF or CSV of the CIS scan report can be downloaded.
 	Url *string
 
 	// Metadata pertaining to the operation's result.

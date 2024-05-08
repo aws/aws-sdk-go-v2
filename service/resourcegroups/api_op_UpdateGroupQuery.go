@@ -12,10 +12,15 @@ import (
 )
 
 // Updates the resource query of a group. For more information about resource
-// queries, see Create a tag-based group in Resource Groups (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag)
-// . Minimum permissions To run this command, you must have the following
-// permissions:
+// queries, see [Create a tag-based group in Resource Groups].
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:UpdateGroupQuery
+//
+// [Create a tag-based group in Resource Groups]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
 func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryInput, optFns ...func(*Options)) (*UpdateGroupQueryOutput, error) {
 	if params == nil {
 		params = &UpdateGroupQueryInput{}
@@ -34,8 +39,10 @@ func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryI
 type UpdateGroupQueryInput struct {
 
 	// The resource query to determine which Amazon Web Services resources are members
-	// of this resource group. A resource group can contain either a Configuration or
-	// a ResourceQuery , but not both.
+	// of this resource group.
+	//
+	// A resource group can contain either a Configuration or a ResourceQuery , but not
+	// both.
 	//
 	// This member is required.
 	ResourceQuery *types.ResourceQuery

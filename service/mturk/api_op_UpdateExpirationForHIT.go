@@ -11,8 +11,9 @@ import (
 	"time"
 )
 
-// The UpdateExpirationForHIT operation allows you update the expiration time of a
-// HIT. If you update it to a time in the past, the HIT will be immediately
+//	The UpdateExpirationForHIT operation allows you update the expiration time of
+//
+// a HIT. If you update it to a time in the past, the HIT will be immediately
 // expired.
 func (c *Client) UpdateExpirationForHIT(ctx context.Context, params *UpdateExpirationForHITInput, optFns ...func(*Options)) (*UpdateExpirationForHITOutput, error) {
 	if params == nil {
@@ -31,12 +32,12 @@ func (c *Client) UpdateExpirationForHIT(ctx context.Context, params *UpdateExpir
 
 type UpdateExpirationForHITInput struct {
 
-	// The date and time at which you want the HIT to expire
+	//  The date and time at which you want the HIT to expire
 	//
 	// This member is required.
 	ExpireAt *time.Time
 
-	// The HIT to update.
+	//  The HIT to update.
 	//
 	// This member is required.
 	HITId *string

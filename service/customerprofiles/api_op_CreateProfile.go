@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a standard profile. A standard profile represents the following
-// attributes for a customer profile in a domain.
+// Creates a standard profile.
+//
+// A standard profile represents the following attributes for a customer profile
+// in a domain.
 func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, optFns ...func(*Options)) (*CreateProfileOutput, error) {
 	if params == nil {
 		params = &CreateProfileInput{}

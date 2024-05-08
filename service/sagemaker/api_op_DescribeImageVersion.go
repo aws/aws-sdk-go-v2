@@ -76,8 +76,11 @@ type DescribeImageVersionOutput struct {
 	ImageVersionStatus types.ImageVersionStatus
 
 	// Indicates SageMaker job type compatibility.
+	//
 	//   - TRAINING : The image version is compatible with SageMaker training jobs.
+	//
 	//   - INFERENCE : The image version is compatible with SageMaker inference jobs.
+	//
 	//   - NOTEBOOK_KERNEL : The image version is compatible with SageMaker notebook
 	//   kernels.
 	JobType types.JobType
@@ -89,7 +92,9 @@ type DescribeImageVersionOutput struct {
 	MLFramework *string
 
 	// Indicates CPU or GPU compatibility.
+	//
 	//   - CPU : The image version is compatible with CPU.
+	//
 	//   - GPU : The image version is compatible with GPU.
 	Processor types.Processor
 
@@ -100,12 +105,16 @@ type DescribeImageVersionOutput struct {
 	ReleaseNotes *string
 
 	// The stability of the image version specified by the maintainer.
+	//
 	//   - NOT_PROVIDED : The maintainers did not provide a status for image version
 	//   stability.
+	//
 	//   - STABLE : The image version is stable.
+	//
 	//   - TO_BE_ARCHIVED : The image version is set to be archived. Custom image
 	//   versions that are set to be archived are automatically archived after three
 	//   months.
+	//
 	//   - ARCHIVED : The image version is archived. Archived image versions are not
 	//   searchable and are no longer actively supported.
 	VendorGuidance types.VendorGuidance
@@ -240,12 +249,13 @@ type ImageVersionCreatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeImageVersionInput, *DescribeImageVersionOutput, error) (bool, error)
 }
 
@@ -443,12 +453,13 @@ type ImageVersionDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeImageVersionInput, *DescribeImageVersionOutput, error) (bool, error)
 }
 

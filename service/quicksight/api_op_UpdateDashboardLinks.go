@@ -39,7 +39,7 @@ type UpdateDashboardLinksInput struct {
 	// This member is required.
 	DashboardId *string
 
-	// list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
+	//  list of analysis Amazon Resource Names (ARNs) to be linked to the dashboard.
 	//
 	// This member is required.
 	LinkEntities []string

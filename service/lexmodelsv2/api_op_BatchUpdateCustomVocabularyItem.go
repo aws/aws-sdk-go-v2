@@ -47,9 +47,9 @@ type BatchUpdateCustomVocabularyItemInput struct {
 	CustomVocabularyItemList []types.CustomVocabularyItem
 
 	// The identifier of the language and locale where this custom vocabulary is used.
-	// The string must match one of the supported locales. For more information, see
-	// Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// The string must match one of the supported locales. For more information, see [Supported Languages].
+	//
+	// [Supported Languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -70,9 +70,9 @@ type BatchUpdateCustomVocabularyItemOutput struct {
 	Errors []types.FailedCustomVocabularyItem
 
 	// The identifier of the language and locale where this custom vocabulary is used.
-	// The string must match one of the supported locales. For more information, see
-	// Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// The string must match one of the supported locales. For more information, see [Supported Languages].
+	//
+	// [Supported Languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	LocaleId *string
 
 	// A list of custom vocabulary items that were successfully updated during the

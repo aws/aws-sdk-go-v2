@@ -34,7 +34,7 @@ type CreateOrderInput struct {
 	// This member is required.
 	LineItems []types.LineItemRequest
 
-	// The ID or the Amazon Resource Name (ARN) of the Outpost.
+	//  The ID or the Amazon Resource Name (ARN) of the Outpost.
 	//
 	// This member is required.
 	OutpostIdentifier *string

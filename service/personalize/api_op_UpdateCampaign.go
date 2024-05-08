@@ -11,24 +11,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a campaign to deploy a retrained solution version with an existing
+//	Updates a campaign to deploy a retrained solution version with an existing
+//
 // campaign, change your campaign's minProvisionedTPS , or modify your campaign's
 // configuration. For example, you can set enableMetadataWithRecommendations to
-// true for an existing campaign. To update a campaign to start automatically using
-// the latest solution version, specify the following:
+// true for an existing campaign.
+//
+// To update a campaign to start automatically using the latest solution version,
+// specify the following:
+//
 //   - For the SolutionVersionArn parameter, specify the Amazon Resource Name (ARN)
 //     of your solution in SolutionArn/$LATEST format.
+//
 //   - In the campaignConfig , set syncWithLatestSolutionVersion to true .
 //
 // To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.
-// Check the campaign status using the DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
-// operation. You can still get recommendations from a campaign while an update is
-// in progress. The campaign will use the previous solution version and campaign
+// Check the campaign status using the [DescribeCampaign]operation.
+//
+// You can still get recommendations from a campaign while an update is in
+// progress. The campaign will use the previous solution version and campaign
 // configuration to generate recommendations until the latest campaign update
-// status is Active . For more information about updating a campaign, including
-// code samples, see Updating a campaign (https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html)
-// . For more information about campaigns, see Creating a campaign (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html)
-// .
+// status is Active .
+//
+// For more information about updating a campaign, including code samples, see [Updating a campaign].
+// For more information about campaigns, see [Creating a campaign].
+//
+// [Creating a campaign]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html
+// [Updating a campaign]: https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html
+// [DescribeCampaign]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
 func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput, optFns ...func(*Options)) (*UpdateCampaignOutput, error) {
 	if params == nil {
 		params = &UpdateCampaignInput{}
@@ -64,11 +74,15 @@ type UpdateCampaignInput struct {
 	// The Amazon Resource Name (ARN) of a new model to deploy. To specify the latest
 	// solution version of your solution, specify the ARN of your solution in
 	// SolutionArn/$LATEST format. You must use this format if you set
-	// syncWithLatestSolutionVersion to True in the CampaignConfig (https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html)
-	// . To deploy a model that isn't the latest solution version of your solution,
-	// specify the ARN of the solution version. For more information about automatic
-	// campaign updates, see Enabling automatic campaign updates (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update)
-	// .
+	// syncWithLatestSolutionVersion to True in the [CampaignConfig].
+	//
+	// To deploy a model that isn't the latest solution version of your solution,
+	// specify the ARN of the solution version.
+	//
+	// For more information about automatic campaign updates, see [Enabling automatic campaign updates].
+	//
+	// [Enabling automatic campaign updates]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
+	// [CampaignConfig]: https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html
 	SolutionVersionArn *string
 
 	noSmithyDocumentSerde

@@ -12,9 +12,9 @@ import (
 
 // Starts a configuration session used to retrieve a deployed configuration. For
 // more information about this API action and to view example CLI commands that
-// show how to use it with the GetLatestConfiguration API action, see Retrieving
-// the configuration (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration)
-// in the AppConfig User Guide.
+// show how to use it with the GetLatestConfigurationAPI action, see [Retrieving the configuration] in the AppConfig User Guide.
+//
+// [Retrieving the configuration]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration
 func (c *Client) StartConfigurationSession(ctx context.Context, params *StartConfigurationSessionInput, optFns ...func(*Options)) (*StartConfigurationSessionOutput, error) {
 	if params == nil {
 		params = &StartConfigurationSessionInput{}
@@ -48,8 +48,8 @@ type StartConfigurationSessionInput struct {
 	EnvironmentIdentifier *string
 
 	// Sets a constraint on a session. If you specify a value of, for example, 60
-	// seconds, then the client that established the session can't call
-	// GetLatestConfiguration more frequently than every 60 seconds.
+	// seconds, then the client that established the session can't call GetLatestConfigurationmore
+	// frequently than every 60 seconds.
 	RequiredMinimumPollIntervalInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -58,10 +58,12 @@ type StartConfigurationSessionInput struct {
 type StartConfigurationSessionOutput struct {
 
 	// Token encapsulating state about the configuration session. Provide this token
-	// to the GetLatestConfiguration API to retrieve configuration data. This token
-	// should only be used once in your first call to GetLatestConfiguration . You must
-	// use the new token in the GetLatestConfiguration response (
+	// to the GetLatestConfiguration API to retrieve configuration data.
+	//
+	// This token should only be used once in your first call to GetLatestConfiguration
+	// . You must use the new token in the GetLatestConfiguration response (
 	// NextPollConfigurationToken ) in each subsequent call to GetLatestConfiguration .
+	//
 	// The InitialConfigurationToken and NextPollConfigurationToken should only be
 	// used once. To support long poll use cases, the tokens are valid for up to 24
 	// hours. If a GetLatestConfiguration call uses an expired token, the system

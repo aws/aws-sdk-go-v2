@@ -15,8 +15,10 @@ import (
 // including recognizers currently in training. Allows you to filter the list of
 // recognizers based on criteria such as status and submission time. This call
 // returns up to 500 entity recognizers in the list, with a default number of 100
-// recognizers in the list. The results of this list are not in any particular
-// order. Please get the list and sort locally if needed.
+// recognizers in the list.
+//
+// The results of this list are not in any particular order. Please get the list
+// and sort locally if needed.
 func (c *Client) ListEntityRecognizers(ctx context.Context, params *ListEntityRecognizersInput, optFns ...func(*Options)) (*ListEntityRecognizersOutput, error) {
 	if params == nil {
 		params = &ListEntityRecognizersInput{}
@@ -38,7 +40,7 @@ type ListEntityRecognizersInput struct {
 	// SubmitTimeBefore , or SubmitTimeAfter . You can only set one filter at a time.
 	Filter *types.EntityRecognizerFilter
 
-	// The maximum number of results to return on each page. The default is 100.
+	//  The maximum number of results to return on each page. The default is 100.
 	MaxResults *int32
 
 	// Identifies the next page of results to return.
@@ -148,7 +150,7 @@ var _ ListEntityRecognizersAPIClient = (*Client)(nil)
 // ListEntityRecognizersPaginatorOptions is the paginator options for
 // ListEntityRecognizers
 type ListEntityRecognizersPaginatorOptions struct {
-	// The maximum number of results to return on each page. The default is 100.
+	//  The maximum number of results to return on each page. The default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

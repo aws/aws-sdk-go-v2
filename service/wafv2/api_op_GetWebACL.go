@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the specified WebACL .
+// Retrieves the specified WebACL.
 func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns ...func(*Options)) (*GetWebACLOutput, error) {
 	if params == nil {
 		params = &GetWebACLInput{}
@@ -45,10 +45,14 @@ type GetWebACLInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
@@ -64,9 +68,10 @@ type GetWebACLOutput struct {
 	// prevention managed rule group AWSManagedRulesATPRuleSet and the account
 	// creation fraud prevention managed rule group AWSManagedRulesACFPRuleSet . This
 	// is only populated if you are using a rule group in your web ACL that integrates
-	// with your applications in this way. For more information, see WAF client
-	// application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
-	// in the WAF Developer Guide.
+	// with your applications in this way. For more information, see [WAF client application integration]in the WAF
+	// Developer Guide.
+	//
+	// [WAF client application integration]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
 	ApplicationIntegrationURL *string
 
 	// A token used for optimistic locking. WAF returns a token to your get and list

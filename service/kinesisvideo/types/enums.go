@@ -17,8 +17,9 @@ const (
 )
 
 // Values returns all known values for APIName. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (APIName) Values() []APIName {
 	return []APIName{
 		"PUT_MEDIA",
@@ -42,8 +43,9 @@ const (
 )
 
 // Values returns all known values for ChannelProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelProtocol) Values() []ChannelProtocol {
 	return []ChannelProtocol{
 		"WSS",
@@ -61,8 +63,9 @@ const (
 )
 
 // Values returns all known values for ChannelRole. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelRole) Values() []ChannelRole {
 	return []ChannelRole{
 		"MASTER",
@@ -79,8 +82,9 @@ const (
 )
 
 // Values returns all known values for ChannelType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"SINGLE_MASTER",
@@ -96,8 +100,9 @@ const (
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"BEGINS_WITH",
@@ -113,8 +118,9 @@ const (
 )
 
 // Values returns all known values for ConfigurationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationStatus) Values() []ConfigurationStatus {
 	return []ConfigurationStatus{
 		"ENABLED",
@@ -131,8 +137,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"JPEG",
@@ -148,8 +155,9 @@ const (
 )
 
 // Values returns all known values for FormatConfigKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FormatConfigKey) Values() []FormatConfigKey {
 	return []FormatConfigKey{
 		"JPEGQuality",
@@ -165,8 +173,9 @@ const (
 )
 
 // Values returns all known values for ImageSelectorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageSelectorType) Values() []ImageSelectorType {
 	return []ImageSelectorType{
 		"SERVER_TIMESTAMP",
@@ -184,8 +193,9 @@ const (
 
 // Values returns all known values for MediaStorageConfigurationStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaStorageConfigurationStatus) Values() []MediaStorageConfigurationStatus {
 	return []MediaStorageConfigurationStatus{
 		"ENABLED",
@@ -202,8 +212,9 @@ const (
 )
 
 // Values returns all known values for MediaUriType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaUriType) Values() []MediaUriType {
 	return []MediaUriType{
 		"RTSP_URI",
@@ -221,8 +232,9 @@ const (
 )
 
 // Values returns all known values for RecorderStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecorderStatus) Values() []RecorderStatus {
 	return []RecorderStatus{
 		"SUCCESS",
@@ -242,8 +254,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"CREATING",
@@ -262,8 +275,9 @@ const (
 )
 
 // Values returns all known values for StrategyOnFullSize. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StrategyOnFullSize) Values() []StrategyOnFullSize {
 	return []StrategyOnFullSize{
 		"DELETE_OLDEST_MEDIA",
@@ -285,8 +299,9 @@ const (
 )
 
 // Values returns all known values for SyncStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SyncStatus) Values() []SyncStatus {
 	return []SyncStatus{
 		"SYNCING",
@@ -309,8 +324,9 @@ const (
 
 // Values returns all known values for UpdateDataRetentionOperation. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateDataRetentionOperation) Values() []UpdateDataRetentionOperation {
 	return []UpdateDataRetentionOperation{
 		"INCREASE_DATA_RETENTION",
@@ -328,8 +344,9 @@ const (
 )
 
 // Values returns all known values for UploaderStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UploaderStatus) Values() []UploaderStatus {
 	return []UploaderStatus{
 		"SUCCESS",

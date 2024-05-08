@@ -30,7 +30,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Timestream resource with tags to be listed. This value is an Amazon
+	//  The Timestream resource with tags to be listed. This value is an Amazon
 	// Resource Name (ARN).
 	//
 	// This member is required.
@@ -41,7 +41,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tags currently associated with the Timestream resource.
+	//  The tags currently associated with the Timestream resource.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

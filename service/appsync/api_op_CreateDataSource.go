@@ -50,10 +50,11 @@ type CreateDataSourceInput struct {
 	// Amazon DynamoDB settings.
 	DynamodbConfig *types.DynamodbDataSourceConfig
 
-	// Amazon OpenSearch Service settings. As of September 2021, Amazon Elasticsearch
-	// service is Amazon OpenSearch Service. This configuration is deprecated. For new
-	// data sources, use CreateDataSourceRequest$openSearchServiceConfig to create an
-	// OpenSearch data source.
+	// Amazon OpenSearch Service settings.
+	//
+	// As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch
+	// Service. This configuration is deprecated. For new data sources, use CreateDataSourceRequest$openSearchServiceConfigto create
+	// an OpenSearch data source.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 
 	// Amazon EventBridge settings.
@@ -69,8 +70,9 @@ type CreateDataSourceInput struct {
 	// Note that metricsConfig won't be used unless the dataSourceLevelMetricsBehavior
 	// value is set to PER_DATA_SOURCE_METRICS . If the dataSourceLevelMetricsBehavior
 	// is set to FULL_REQUEST_DATA_SOURCE_METRICS instead, metricsConfig will be
-	// ignored. However, you can still set its value. metricsConfig can be ENABLED or
-	// DISABLED .
+	// ignored. However, you can still set its value.
+	//
+	// metricsConfig can be ENABLED or DISABLED .
 	MetricsConfig types.DataSourceLevelMetricsConfig
 
 	// Amazon OpenSearch Service settings.

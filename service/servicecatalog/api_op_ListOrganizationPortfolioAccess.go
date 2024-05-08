@@ -13,8 +13,10 @@ import (
 
 // Lists the organization nodes that have access to the specified portfolio. This
 // API can only be called by the management account in the organization or by a
-// delegated admin. If a delegated admin is de-registered, they can no longer
-// perform this operation.
+// delegated admin.
+//
+// If a delegated admin is de-registered, they can no longer perform this
+// operation.
 func (c *Client) ListOrganizationPortfolioAccess(ctx context.Context, params *ListOrganizationPortfolioAccessInput, optFns ...func(*Options)) (*ListOrganizationPortfolioAccessOutput, error) {
 	if params == nil {
 		params = &ListOrganizationPortfolioAccessInput{}
@@ -33,9 +35,12 @@ func (c *Client) ListOrganizationPortfolioAccess(ctx context.Context, params *Li
 type ListOrganizationPortfolioAccessInput struct {
 
 	// The organization node type that will be returned in the output.
+	//
 	//   - ORGANIZATION - Organization that has access to the portfolio.
+	//
 	//   - ORGANIZATIONAL_UNIT - Organizational unit that has access to the portfolio
 	//   within your organization.
+	//
 	//   - ACCOUNT - Account that has access to the portfolio within your organization.
 	//
 	// This member is required.
@@ -47,7 +52,9 @@ type ListOrganizationPortfolioAccessInput struct {
 	PortfolioId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

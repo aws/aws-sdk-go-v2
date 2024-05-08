@@ -34,9 +34,10 @@ type UpdateWorkspaceAliasInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// The new alias for the workspace. It does not need to be unique. Amazon Managed
-	// Service for Prometheus will automatically strip any blank spaces from the
-	// beginning and end of the alias that you specify.
+	// The new alias for the workspace. It does not need to be unique.
+	//
+	// Amazon Managed Service for Prometheus will automatically strip any blank spaces
+	// from the beginning and end of the alias that you specify.
 	Alias *string
 
 	// A unique identifier that you can provide to ensure the idempotency of the

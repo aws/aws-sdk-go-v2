@@ -44,7 +44,8 @@ type ListReportJobsInput struct {
 	ByReportPlanName *string
 
 	// Returns only report jobs that are in the specified status. The statuses are:
-	// CREATED | RUNNING | COMPLETED | FAILED
+	//
+	//     CREATED | RUNNING | COMPLETED | FAILED
 	ByStatus *string
 
 	// The number of desired results from 1 to 1000. Optional. If unspecified, the

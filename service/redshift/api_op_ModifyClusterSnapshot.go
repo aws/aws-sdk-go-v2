@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the settings for a snapshot. This exanmple modifies the manual
-// retention period setting for a cluster snapshot.
+// Modifies the settings for a snapshot.
+//
+// This exanmple modifies the manual retention period setting for a cluster
+// snapshot.
 func (c *Client) ModifyClusterSnapshot(ctx context.Context, params *ModifyClusterSnapshotInput, optFns ...func(*Options)) (*ModifyClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &ModifyClusterSnapshotInput{}
@@ -40,10 +42,12 @@ type ModifyClusterSnapshotInput struct {
 	Force *bool
 
 	// The number of days that a manual snapshot is retained. If the value is -1, the
-	// manual snapshot is retained indefinitely. If the manual snapshot falls outside
-	// of the new retention period, you can specify the force option to immediately
-	// delete the snapshot. The value must be either -1 or an integer between 1 and
-	// 3,653.
+	// manual snapshot is retained indefinitely.
+	//
+	// If the manual snapshot falls outside of the new retention period, you can
+	// specify the force option to immediately delete the snapshot.
+	//
+	// The value must be either -1 or an integer between 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
 
 	noSmithyDocumentSerde

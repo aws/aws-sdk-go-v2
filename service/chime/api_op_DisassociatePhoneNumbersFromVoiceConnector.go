@@ -12,15 +12,19 @@ import (
 )
 
 // Disassociates the specified phone numbers from the specified Amazon Chime Voice
-// Connector. This API is is no longer supported and will not be updated. We
-// recommend using the latest version, DisassociatePhoneNumbersFromVoiceConnector (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DisassociatePhoneNumbersFromVoiceConnector.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Connector.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DisassociatePhoneNumbersFromVoiceConnector], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DisassociatePhoneNumbersFromVoiceConnector in the
 // Amazon Chime SDK Voice Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [DisassociatePhoneNumbersFromVoiceConnector]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DisassociatePhoneNumbersFromVoiceConnector.html
 func (c *Client) DisassociatePhoneNumbersFromVoiceConnector(ctx context.Context, params *DisassociatePhoneNumbersFromVoiceConnectorInput, optFns ...func(*Options)) (*DisassociatePhoneNumbersFromVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &DisassociatePhoneNumbersFromVoiceConnectorInput{}

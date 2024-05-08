@@ -17,8 +17,8 @@ type ChannelDestinationConfiguration struct {
 	// This member is required.
 	ChannelArn *string
 
-	// ARN of the EncoderConfiguration resource. The encoder configuration and stage
-	// resources must be in the same AWS account and region.
+	// ARN of the EncoderConfiguration resource. The encoder configuration and stage resources must be in
+	// the same AWS account and region.
 	EncoderConfigurationArn *string
 
 	noSmithyDocumentSerde
@@ -62,10 +62,11 @@ type Composition struct {
 	StartTime *time.Time
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -103,10 +104,11 @@ type CompositionSummary struct {
 	StartTime *time.Time
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -206,10 +208,11 @@ type EncoderConfiguration struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps, 30
@@ -231,10 +234,11 @@ type EncoderConfigurationSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -247,12 +251,13 @@ type Event struct {
 	// the specific error that occurred. If the event is not an error event, this field
 	// is null. INSUFFICIENT_CAPABILITIES indicates that the participant tried to take
 	// an action that the participant’s token is not allowed to do. For more
-	// information about participant capabilities, see the capabilities field in
-	// CreateParticipantToken . QUOTA_EXCEEDED indicates that the number of
-	// participants who want to publish/subscribe to a stage exceeds the quota; for
-	// more information, see Service Quotas (https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html)
-	// . PUBLISHER_NOT_FOUND indicates that the participant tried to subscribe to a
+	// information about participant capabilities, see the capabilities field in CreateParticipantToken.
+	// QUOTA_EXCEEDED indicates that the number of participants who want to
+	// publish/subscribe to a stage exceeds the quota; for more information, see [Service Quotas].
+	// PUBLISHER_NOT_FOUND indicates that the participant tried to subscribe to a
 	// publisher that doesn’t exist.
+	//
+	// [Service Quotas]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html
 	ErrorCode EventErrorCode
 
 	// ISO 8601 timestamp (returned as a string) for when the event occurred.
@@ -274,13 +279,13 @@ type Event struct {
 }
 
 // Configuration information specific to Grid layout, for server-side composition.
-// See "Layouts" in Server-Side Composition (https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html)
-// .
+// See "Layouts" in [Server-Side Composition].
+//
+// [Server-Side Composition]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html
 type GridConfiguration struct {
 
 	// This attribute name identifies the featured slot. A participant with this
-	// attribute set to "true" (as a string value) in ParticipantTokenConfiguration is
-	// placed in the featured slot.
+	// attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot.
 	FeaturedParticipantAttribute *string
 
 	// Specifies the spacing between participant tiles in pixels. Default: 2 .
@@ -387,9 +392,10 @@ type ParticipantSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Object specifying a participant token in a stage. Important: Treat tokens as
-// opaque; i.e., do not build functionality based on token contents. The format of
-// tokens could change in the future.
+// Object specifying a participant token in a stage.
+//
+// Important: Treat tokens as opaque; i.e., do not build functionality based on
+// token contents. The format of tokens could change in the future.
 type ParticipantToken struct {
 
 	// Application-provided attributes to encode into the token and attach to a stage.
@@ -448,14 +454,13 @@ type ParticipantTokenConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information specific to Picture-in-Picture (PiP) layout, for
-// server-side composition (https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html)
-// .
+// Configuration information specific to Picture-in-Picture (PiP) layout, for [server-side composition].
+//
+// [server-side composition]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/server-side-composition.html
 type PipConfiguration struct {
 
 	// This attribute name identifies the featured slot. A participant with this
-	// attribute set to "true" (as a string value) in ParticipantTokenConfiguration is
-	// placed in the featured slot.
+	// attribute set to "true" (as a string value) in ParticipantTokenConfiguration is placed in the featured slot.
 	FeaturedParticipantAttribute *string
 
 	// Specifies the spacing between participant tiles in pixels. Default: 0 .
@@ -478,7 +483,7 @@ type PipConfiguration struct {
 	PipOffset int32
 
 	// Identifies the PiP slot. A participant with this attribute set to "true" (as a
-	// string value) in ParticipantTokenConfiguration is placed in the PiP slot.
+	// string value) in ParticipantTokenConfigurationis placed in the PiP slot.
 	PipParticipantAttribute *string
 
 	// Determines the corner position of the PiP window. Default: BOTTOM_RIGHT .
@@ -508,8 +513,8 @@ type RecordingConfiguration struct {
 // stored.
 type S3DestinationConfiguration struct {
 
-	// ARNs of the EncoderConfiguration resource. The encoder configuration and stage
-	// resources must be in the same AWS account and region.
+	// ARNs of the EncoderConfiguration resource. The encoder configuration and stage resources must be in
+	// the same AWS account and region.
 	//
 	// This member is required.
 	EncoderConfigurationArns []string
@@ -567,10 +572,11 @@ type Stage struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -589,7 +595,7 @@ type StageSession struct {
 	// ID of the session within the stage.
 	SessionId *string
 
-	// ISO 8601 timestamp (returned as a string) when this stage session began.
+	//  ISO 8601 timestamp (returned as a string) when this stage session began.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -605,7 +611,7 @@ type StageSessionSummary struct {
 	// ID of the session within the stage.
 	SessionId *string
 
-	// ISO 8601 timestamp (returned as a string) when this stage session began.
+	//  ISO 8601 timestamp (returned as a string) when this stage session began.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -626,10 +632,11 @@ type StageSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -650,10 +657,11 @@ type StorageConfiguration struct {
 	S3 *S3StorageConfiguration
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -674,10 +682,11 @@ type StorageConfigurationSummary struct {
 	S3 *S3StorageConfiguration
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

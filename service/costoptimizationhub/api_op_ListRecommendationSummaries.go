@@ -12,8 +12,9 @@ import (
 )
 
 // Returns a concise representation of savings estimates for resources. Also
-// returns de-duped savings across different types of recommendations. The
-// following filters are not supported for this API: recommendationIds ,
+// returns de-duped savings across different types of recommendations.
+//
+// The following filters are not supported for this API: recommendationIds ,
 // resourceArns , and resourceIds .
 func (c *Client) ListRecommendationSummaries(ctx context.Context, params *ListRecommendationSummariesInput, optFns ...func(*Options)) (*ListRecommendationSummariesOutput, error) {
 	if params == nil {

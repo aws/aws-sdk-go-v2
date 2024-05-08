@@ -16,27 +16,31 @@ import (
 // stream. The inference stream provides the response payload incrementally as a
 // series of parts. Before you can get an inference stream, you must have access to
 // a model that's deployed using Amazon SageMaker hosting services, and the
-// container for that model must support inference streaming. For more information
-// that can help you use this API, see the following sections in the Amazon
-// SageMaker Developer Guide:
-//   - For information about how to add streaming support to a model, see How
-//     Containers Serve Requests (https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-code-how-containe-serves-requests)
-//     .
-//   - For information about how to process the streaming response, see Invoke
-//     real-time endpoints (https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-test-endpoints.html)
-//     .
+// container for that model must support inference streaming.
+//
+// For more information that can help you use this API, see the following sections
+// in the Amazon SageMaker Developer Guide:
+//
+//   - For information about how to add streaming support to a model, see [How Containers Serve Requests].
+//
+//   - For information about how to process the streaming response, see [Invoke real-time endpoints].
 //
 // Before you can use this operation, your IAM permissions must allow the
 // sagemaker:InvokeEndpoint action. For more information about Amazon SageMaker
-// actions for IAM policies, see Actions, resources, and condition keys for Amazon
-// SageMaker (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsagemaker.html)
-// in the IAM Service Authorization Reference. Amazon SageMaker strips all POST
-// headers except those supported by the API. Amazon SageMaker might add additional
-// headers. You should not rely on the behavior of headers outside those enumerated
-// in the request syntax. Calls to InvokeEndpointWithResponseStream are
-// authenticated by using Amazon Web Services Signature Version 4. For information,
-// see Authenticating Requests (Amazon Web Services Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
-// in the Amazon S3 API Reference.
+// actions for IAM policies, see [Actions, resources, and condition keys for Amazon SageMaker]in the IAM Service Authorization Reference.
+//
+// Amazon SageMaker strips all POST headers except those supported by the API.
+// Amazon SageMaker might add additional headers. You should not rely on the
+// behavior of headers outside those enumerated in the request syntax.
+//
+// Calls to InvokeEndpointWithResponseStream are authenticated by using Amazon Web
+// Services Signature Version 4. For information, see [Authenticating Requests (Amazon Web Services Signature Version 4)]in the Amazon S3 API
+// Reference.
+//
+// [How Containers Serve Requests]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-inference-code.html#your-algorithms-inference-code-how-containe-serves-requests
+// [Invoke real-time endpoints]: https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-test-endpoints.html
+// [Actions, resources, and condition keys for Amazon SageMaker]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonsagemaker.html
+// [Authenticating Requests (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
 func (c *Client) InvokeEndpointWithResponseStream(ctx context.Context, params *InvokeEndpointWithResponseStreamInput, optFns ...func(*Options)) (*InvokeEndpointWithResponseStreamOutput, error) {
 	if params == nil {
 		params = &InvokeEndpointWithResponseStreamInput{}
@@ -55,17 +59,19 @@ func (c *Client) InvokeEndpointWithResponseStream(ctx context.Context, params *I
 type InvokeEndpointWithResponseStreamInput struct {
 
 	// Provides input data, in the format specified in the ContentType request header.
-	// Amazon SageMaker passes all of the data in the body to the model. For
-	// information about the format of the request body, see Common Data
-	// Formats-Inference (https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html)
-	// .
+	// Amazon SageMaker passes all of the data in the body to the model.
+	//
+	// For information about the format of the request body, see [Common Data Formats-Inference].
+	//
+	// [Common Data Formats-Inference]: https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html
 	//
 	// This member is required.
 	Body []byte
 
 	// The name of the endpoint that you specified when you created the endpoint using
-	// the CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
-	// API.
+	// the [CreateEndpoint]API.
+	//
+	// [CreateEndpoint]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
 	//
 	// This member is required.
 	EndpointName *string
@@ -81,15 +87,19 @@ type InvokeEndpointWithResponseStreamInput struct {
 	// that is forwarded verbatim. You could use this value, for example, to provide an
 	// ID that you can use to track a request or to provide other metadata that a
 	// service endpoint was programmed to process. The value must consist of no more
-	// than 1024 visible US-ASCII characters as specified in Section 3.3.6. Field
-	// Value Components (https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6)
-	// of the Hypertext Transfer Protocol (HTTP/1.1). The code in your model is
-	// responsible for setting or updating any custom attributes in the response. If
-	// your code does not set this value in the response, an empty value is returned.
-	// For example, if a custom attribute represents the trace ID, your model can
-	// prepend the custom attribute with Trace ID: in your post-processing function.
+	// than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the Hypertext Transfer
+	// Protocol (HTTP/1.1).
+	//
+	// The code in your model is responsible for setting or updating any custom
+	// attributes in the response. If your code does not set this value in the
+	// response, an empty value is returned. For example, if a custom attribute
+	// represents the trace ID, your model can prepend the custom attribute with Trace
+	// ID: in your post-processing function.
+	//
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
 	// the Amazon SageMaker Python SDK.
+	//
+	// [Section 3.3.6. Field Value Components]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
 	CustomAttributes *string
 
 	// If the endpoint hosts one or more inference components, this parameter
@@ -106,8 +116,11 @@ type InvokeEndpointWithResponseStreamInput struct {
 	// Specify the production variant to send the inference request to when invoking
 	// an endpoint that is running two or more variants. Note that this parameter
 	// overrides the default behavior for the endpoint, which is to distribute the
-	// invocation traffic based on the variant weights. For information about how to
-	// use variant targeting to perform a/b testing, see Test models in production (https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html)
+	// invocation traffic based on the variant weights.
+	//
+	// For information about how to use variant targeting to perform a/b testing, see [Test models in production]
+	//
+	// [Test models in production]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-testing.html
 	TargetVariant *string
 
 	noSmithyDocumentSerde
@@ -123,16 +136,21 @@ type InvokeEndpointWithResponseStreamOutput struct {
 	// value that is forwarded verbatim. You could use this value, for example, to
 	// return an ID received in the CustomAttributes header of a request or other
 	// metadata that a service endpoint was programmed to produce. The value must
-	// consist of no more than 1024 visible US-ASCII characters as specified in
-	// Section 3.3.6. Field Value Components (https://tools.ietf.org/html/rfc7230#section-3.2.6)
-	// of the Hypertext Transfer Protocol (HTTP/1.1). If the customer wants the custom
+	// consist of no more than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the
+	// Hypertext Transfer Protocol (HTTP/1.1). If the customer wants the custom
 	// attribute returned, the model must set the custom attribute to be included on
-	// the way back. The code in your model is responsible for setting or updating any
-	// custom attributes in the response. If your code does not set this value in the
+	// the way back.
+	//
+	// The code in your model is responsible for setting or updating any custom
+	// attributes in the response. If your code does not set this value in the
 	// response, an empty value is returned. For example, if a custom attribute
 	// represents the trace ID, your model can prepend the custom attribute with Trace
-	// ID: in your post-processing function. This feature is currently supported in the
-	// Amazon Web Services SDKs but not in the Amazon SageMaker Python SDK.
+	// ID: in your post-processing function.
+	//
+	// This feature is currently supported in the Amazon Web Services SDKs but not in
+	// the Amazon SageMaker Python SDK.
+	//
+	// [Section 3.3.6. Field Value Components]: https://tools.ietf.org/html/rfc7230#section-3.2.6
 	CustomAttributes *string
 
 	// Identifies the production variant that was invoked.

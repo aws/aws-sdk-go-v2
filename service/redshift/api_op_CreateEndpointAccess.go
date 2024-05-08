@@ -30,10 +30,11 @@ func (c *Client) CreateEndpointAccess(ctx context.Context, params *CreateEndpoin
 
 type CreateEndpointAccessInput struct {
 
-	// The Redshift-managed VPC endpoint name. An endpoint name must contain 1-30
-	// characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first
-	// character must be a letter. The name can't contain two consecutive hyphens or
-	// end with a hyphen.
+	// The Redshift-managed VPC endpoint name.
+	//
+	// An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z,
+	// 0-9, and hyphen(-). The first character must be a letter. The name can't contain
+	// two consecutive hyphens or end with a hyphen.
 	//
 	// This member is required.
 	EndpointName *string

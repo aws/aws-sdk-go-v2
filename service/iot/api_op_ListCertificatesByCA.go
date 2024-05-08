@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the device certificates signed by the specified CA certificate. Requires
-// permission to access the ListCertificatesByCA (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// List the device certificates signed by the specified CA certificate.
+//
+// Requires permission to access the [ListCertificatesByCA] action.
+//
+// [ListCertificatesByCA]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListCertificatesByCA(ctx context.Context, params *ListCertificatesByCAInput, optFns ...func(*Options)) (*ListCertificatesByCAOutput, error) {
 	if params == nil {
 		params = &ListCertificatesByCAInput{}

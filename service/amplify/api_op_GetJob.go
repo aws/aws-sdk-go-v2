@@ -50,7 +50,7 @@ type GetJobInput struct {
 
 type GetJobOutput struct {
 
-	// Describes an execution job for an Amplify app.
+	//  Describes an execution job for an Amplify app.
 	//
 	// This member is required.
 	Job *types.Job

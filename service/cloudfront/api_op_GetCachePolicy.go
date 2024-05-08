@@ -12,7 +12,9 @@ import (
 )
 
 // Gets a cache policy, including the following metadata:
+//
 //   - The policy's identifier.
+//
 //   - The date and time when the policy was last modified.
 //
 // To get a cache policy, you must provide the policy's identifier. If the cache

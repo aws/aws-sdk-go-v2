@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for AgentStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AgentStatus) Values() []AgentStatus {
 	return []AgentStatus{
 		"SUCCESS",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for AngleUnits. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AngleUnits) Values() []AngleUnits {
 	return []AngleUnits{
 		"DEGREE_ANGLE",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for AuditResults. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuditResults) Values() []AuditResults {
 	return []AuditResults{
 		"HEALTHY",
@@ -70,8 +73,9 @@ const (
 )
 
 // Values returns all known values for BandwidthUnits. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BandwidthUnits) Values() []BandwidthUnits {
 	return []BandwidthUnits{
 		"GHz",
@@ -89,8 +93,9 @@ const (
 )
 
 // Values returns all known values for CapabilityHealth. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapabilityHealth) Values() []CapabilityHealth {
 	return []CapabilityHealth{
 		"UNHEALTHY",
@@ -112,8 +117,9 @@ const (
 )
 
 // Values returns all known values for CapabilityHealthReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapabilityHealthReason) Values() []CapabilityHealthReason {
 	return []CapabilityHealthReason{
 		"NO_REGISTERED_AGENT",
@@ -140,8 +146,9 @@ const (
 )
 
 // Values returns all known values for ConfigCapabilityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigCapabilityType) Values() []ConfigCapabilityType {
 	return []ConfigCapabilityType{
 		"antenna-downlink",
@@ -174,8 +181,9 @@ const (
 )
 
 // Values returns all known values for ContactStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContactStatus) Values() []ContactStatus {
 	return []ContactStatus{
 		"AVAILABLE",
@@ -204,8 +212,9 @@ const (
 )
 
 // Values returns all known values for Criticality. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Criticality) Values() []Criticality {
 	return []Criticality{
 		"PREFERRED",
@@ -222,8 +231,9 @@ const (
 )
 
 // Values returns all known values for EirpUnits. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EirpUnits) Values() []EirpUnits {
 	return []EirpUnits{
 		"dBW",
@@ -242,8 +252,9 @@ const (
 )
 
 // Values returns all known values for EndpointStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointStatus) Values() []EndpointStatus {
 	return []EndpointStatus{
 		"created",
@@ -271,8 +282,9 @@ const (
 )
 
 // Values returns all known values for EphemerisInvalidReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EphemerisInvalidReason) Values() []EphemerisInvalidReason {
 	return []EphemerisInvalidReason{
 		"METADATA_INVALID",
@@ -292,8 +304,9 @@ const (
 )
 
 // Values returns all known values for EphemerisSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EphemerisSource) Values() []EphemerisSource {
 	return []EphemerisSource{
 		"CUSTOMER_PROVIDED",
@@ -314,8 +327,9 @@ const (
 )
 
 // Values returns all known values for EphemerisStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EphemerisStatus) Values() []EphemerisStatus {
 	return []EphemerisStatus{
 		"VALIDATING",
@@ -337,8 +351,9 @@ const (
 )
 
 // Values returns all known values for FrequencyUnits. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FrequencyUnits) Values() []FrequencyUnits {
 	return []FrequencyUnits{
 		"GHz",
@@ -357,8 +372,9 @@ const (
 )
 
 // Values returns all known values for Polarization. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Polarization) Values() []Polarization {
 	return []Polarization{
 		"LEFT_HAND",

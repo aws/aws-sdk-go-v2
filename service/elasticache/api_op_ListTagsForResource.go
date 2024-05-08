@@ -11,14 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all tags currently on a named resource. A tag is a key-value pair where
-// the key and value are case-sensitive. You can use tags to categorize and track
-// all your ElastiCache resources, with the exception of global replication group.
-// When you add or remove tags on replication groups, those actions will be
-// replicated to all nodes in the replication group. For more information, see
-// Resource-level permissions (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html)
-// . If the cluster is not in the available state, ListTagsForResource returns an
+// Lists all tags currently on a named resource.
+//
+// A tag is a key-value pair where the key and value are case-sensitive. You can
+// use tags to categorize and track all your ElastiCache resources, with the
+// exception of global replication group. When you add or remove tags on
+// replication groups, those actions will be replicated to all nodes in the
+// replication group. For more information, see [Resource-level permissions].
+//
+// If the cluster is not in the available state, ListTagsForResource returns an
 // error.
+//
+// [Resource-level permissions]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -39,10 +43,11 @@ type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource for which you want the list of
 	// tags, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster or
-	// arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot . For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web
-	// Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot .
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceName *string

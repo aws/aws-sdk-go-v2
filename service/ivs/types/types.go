@@ -8,8 +8,8 @@ import (
 )
 
 // Object specifying a stream’s audio configuration, as set up by the broadcaster
-// (usually in an encoder). This is part of the IngestConfiguration object and
-// used for monitoring stream health.
+// (usually in an encoder). This is part of the IngestConfigurationobject and used for monitoring
+// stream health.
 type AudioConfiguration struct {
 
 	// Number of audio channels.
@@ -66,7 +66,7 @@ type BatchStartViewerSessionRevocationError struct {
 	noSmithyDocumentSerde
 }
 
-// A viewer session to revoke in the call to BatchStartViewerSessionRevocation .
+// A viewer session to revoke in the call to BatchStartViewerSessionRevocation.
 type BatchStartViewerSessionRevocationViewerSession struct {
 
 	// The ARN of the channel associated with the viewer session to revoke.
@@ -135,16 +135,18 @@ type Channel struct {
 	Srt *Srt
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable input resolution or bitrate, the stream probably will
-	// disconnect immediately. Default: STANDARD . For details, see Channel Types (https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html)
-	// .
+	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
+	//
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
 	Type ChannelType
 
 	noSmithyDocumentSerde
@@ -186,16 +188,18 @@ type ChannelSummary struct {
 	RecordingConfigurationArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable input resolution or bitrate, the stream probably will
-	// disconnect immediately. Default: STANDARD . For details, see Channel Types (https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html)
-	// .
+	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
+	//
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
 	Type ChannelType
 
 	noSmithyDocumentSerde
@@ -238,10 +242,11 @@ type PlaybackKeyPair struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -257,10 +262,11 @@ type PlaybackKeyPairSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -271,16 +277,18 @@ type PlaybackKeyPairSummary struct {
 type PlaybackRestrictionPolicy struct {
 
 	// A list of country codes that control geoblocking restriction. Allowed values
-	// are the officially assigned ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-	// codes. Default: All countries (an empty array).
+	// are the officially assigned [ISO 3166-1 alpha-2]codes. Default: All countries (an empty array).
+	//
+	// [ISO 3166-1 alpha-2]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 	//
 	// This member is required.
 	AllowedCountries []string
 
 	// A list of origin sites that control CORS restriction. Allowed values are the
-	// same as valid values of the Origin header defined at
-	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)
-	// . Default: All origins (an empty array).
+	// same as valid values of the Origin header defined at [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]. Default: All origins (an
+	// empty array).
+	//
+	// [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
 	//
 	// This member is required.
 	AllowedOrigins []string
@@ -297,10 +305,11 @@ type PlaybackRestrictionPolicy struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -310,16 +319,18 @@ type PlaybackRestrictionPolicy struct {
 type PlaybackRestrictionPolicySummary struct {
 
 	// A list of country codes that control geoblocking restriction. Allowed values
-	// are the officially assigned ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-	// codes. Default: All countries (an empty array).
+	// are the officially assigned [ISO 3166-1 alpha-2]codes. Default: All countries (an empty array).
+	//
+	// [ISO 3166-1 alpha-2]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 	//
 	// This member is required.
 	AllowedCountries []string
 
 	// A list of origin sites that control CORS restriction. Allowed values are the
-	// same as valid values of the Origin header defined at
-	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)
-	// . Default: All origins (an empty array).
+	// same as valid values of the Origin header defined at [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]. Default: All origins (an
+	// empty array).
+	//
+	// [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
 	//
 	// This member is required.
 	AllowedOrigins []string
@@ -336,10 +347,11 @@ type PlaybackRestrictionPolicySummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -377,10 +389,11 @@ type RecordingConfiguration struct {
 	RenditionConfiguration *RenditionConfiguration
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// A complex type that allows you to enable/disable the recording of thumbnails
@@ -415,10 +428,11 @@ type RecordingConfigurationSummary struct {
 	Name *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -436,8 +450,9 @@ type RenditionConfiguration struct {
 	// CUSTOM ; otherwise, this field is irrelevant. The selected renditions are
 	// recorded if they are available during the stream. If a selected rendition is
 	// unavailable, the best available rendition is recorded. For details on the
-	// resolution dimensions of each rendition, see Auto-Record to Amazon S3 (https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html)
-	// .
+	// resolution dimensions of each rendition, see [Auto-Record to Amazon S3].
+	//
+	// [Auto-Record to Amazon S3]: https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html
 	Renditions []RenditionConfigurationRendition
 
 	noSmithyDocumentSerde
@@ -501,9 +516,9 @@ type Stream struct {
 	noSmithyDocumentSerde
 }
 
-// Object specifying a stream’s events. For a list of events, see Using Amazon
-// EventBridge with Amazon IVS (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html)
-// .
+// Object specifying a stream’s events. For a list of events, see [Using Amazon EventBridge with Amazon IVS].
+//
+// [Using Amazon EventBridge with Amazon IVS]: https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html
 type StreamEvent struct {
 
 	// Time when the event occurred. This is an ISO 8601 timestamp; note that this is
@@ -538,10 +553,11 @@ type StreamKey struct {
 	ChannelArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	// Stream-key value.
@@ -560,10 +576,11 @@ type StreamKeySummary struct {
 	ChannelArn *string
 
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
-	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// string:string (key:value) . See [Tagging Amazon Web Services Resources] for more information, including restrictions
+	// that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -595,9 +612,9 @@ type StreamSession struct {
 	StreamId *string
 
 	// List of Amazon IVS events that the stream encountered. The list is sorted by
-	// most recent events and contains up to 500 events. For Amazon IVS events, see
-	// Using Amazon EventBridge with Amazon IVS (https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html)
-	// .
+	// most recent events and contains up to 500 events. For Amazon IVS events, see [Using Amazon EventBridge with Amazon IVS].
+	//
+	// [Using Amazon EventBridge with Amazon IVS]: https://docs.aws.amazon.com/ivs/latest/userguide/eventbridge.html
 	TruncatedEvents []StreamEvent
 
 	noSmithyDocumentSerde
@@ -663,8 +680,9 @@ type ThumbnailConfiguration struct {
 	// recorded at the selected resolution if the corresponding rendition is available
 	// during the stream; otherwise, they are recorded at source resolution. For more
 	// information about resolution values and their corresponding height and width
-	// dimensions, see Auto-Record to Amazon S3 (https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html)
-	// . Default: Null (source resolution is returned).
+	// dimensions, see [Auto-Record to Amazon S3]. Default: Null (source resolution is returned).
+	//
+	// [Auto-Record to Amazon S3]: https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html
 	Resolution ThumbnailConfigurationResolution
 
 	// Indicates the format in which thumbnails are recorded. SEQUENTIAL records all
@@ -675,22 +693,24 @@ type ThumbnailConfiguration struct {
 	Storage []ThumbnailConfigurationStorage
 
 	// The targeted thumbnail-generation interval in seconds. This is configurable
-	// (and required) only if recordingMode is INTERVAL . Default: 60. Important: For
-	// the BASIC channel type, setting a value for targetIntervalSeconds does not
-	// guarantee that thumbnails are generated at the specified interval. For
+	// (and required) only if recordingMode is INTERVAL . Default: 60.
+	//
+	// Important: For the BASIC channel type, setting a value for targetIntervalSeconds
+	// does not guarantee that thumbnails are generated at the specified interval. For
 	// thumbnails to be generated at the targetIntervalSeconds interval, the
 	// IDR/Keyframe value for the input video must be less than the
-	// targetIntervalSeconds value. See  Amazon IVS Streaming Configuration (https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html)
-	// for information on setting IDR/Keyframe to the recommended value in
-	// video-encoder settings.
+	// targetIntervalSeconds value. See [Amazon IVS Streaming Configuration] for information on setting IDR/Keyframe to
+	// the recommended value in video-encoder settings.
+	//
+	// [Amazon IVS Streaming Configuration]: https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html
 	TargetIntervalSeconds *int64
 
 	noSmithyDocumentSerde
 }
 
 // Object specifying a stream’s video configuration, as set up by the broadcaster
-// (usually in an encoder). This is part of the IngestConfiguration object and
-// used for monitoring stream health.
+// (usually in an encoder). This is part of the IngestConfigurationobject and used for monitoring
+// stream health.
 type VideoConfiguration struct {
 
 	// Indicates the degree of required decoder performance for a profile. Normally

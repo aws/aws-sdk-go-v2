@@ -46,9 +46,9 @@ type GetCampaignDateRangeKpiInput struct {
 	// to retrieve data for. This value describes the associated metric and consists of
 	// two or more terms, which are comprised of lowercase alphanumeric characters,
 	// separated by a hyphen. Examples are email-open-rate and
-	// successful-delivery-rate. For a list of valid values, see the Amazon Pinpoint
-	// Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html)
-	// .
+	// successful-delivery-rate. For a list of valid values, see the [Amazon Pinpoint Developer Guide].
+	//
+	// [Amazon Pinpoint Developer Guide]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html
 	//
 	// This member is required.
 	KpiName *string

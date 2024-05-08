@@ -14,15 +14,19 @@ import (
 // Returns a list of recommended items. For campaigns, the campaign's Amazon
 // Resource Name (ARN) is required and the required user and item input depends on
 // the recipe type used to create the solution backing the campaign as follows:
+//
 //   - USER_PERSONALIZATION - userId required, itemId not used
+//
 //   - RELATED_ITEMS - itemId required, userId not used
 //
 // Campaigns that are backed by a solution created using a recipe of type
-// PERSONALIZED_RANKING use the API. For recommenders, the recommender's ARN is
-// required and the required item and user input depends on the use case
-// (domain-based recipe) backing the recommender. For information on use case
-// requirements see Choosing recommender use cases (https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html)
-// .
+// PERSONALIZED_RANKING use the API.
+//
+// For recommenders, the recommender's ARN is required and the required item and
+// user input depends on the use case (domain-based recipe) backing the
+// recommender. For information on use case requirements see [Choosing recommender use cases].
+//
+// [Choosing recommender use cases]: https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html
 func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendationsInput, optFns ...func(*Options)) (*GetRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetRecommendationsInput{}
@@ -51,35 +55,45 @@ type GetRecommendationsInput struct {
 	Context map[string]string
 
 	// The ARN of the filter to apply to the returned recommendations. For more
-	// information, see Filtering Recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
-	// . When using this parameter, be sure the filter resource is ACTIVE .
+	// information, see [Filtering Recommendations].
+	//
+	// When using this parameter, be sure the filter resource is ACTIVE .
+	//
+	// [Filtering Recommendations]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
 	FilterArn *string
 
 	// The values to use when filtering recommendations. For each placeholder
 	// parameter in your filter expression, provide the parameter name (in matching
 	// case) as a key and the filter value(s) as the corresponding value. Separate
-	// multiple values for one parameter with a comma. For filter expressions that use
-	// an INCLUDE element to include items, you must provide values for all parameters
-	// that are defined in the expression. For filters with expressions that use an
-	// EXCLUDE element to exclude items, you can omit the filter-values .In this case,
-	// Amazon Personalize doesn't use that portion of the expression to filter
-	// recommendations. For more information, see Filtering recommendations and user
-	// segments (https://docs.aws.amazon.com/personalize/latest/dg/filter.html) .
+	// multiple values for one parameter with a comma.
+	//
+	// For filter expressions that use an INCLUDE element to include items, you must
+	// provide values for all parameters that are defined in the expression. For
+	// filters with expressions that use an EXCLUDE element to exclude items, you can
+	// omit the filter-values .In this case, Amazon Personalize doesn't use that
+	// portion of the expression to filter recommendations.
+	//
+	// For more information, see [Filtering recommendations and user segments].
+	//
+	// [Filtering recommendations and user segments]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
 	FilterValues map[string]string
 
-	// The item ID to provide recommendations for. Required for RELATED_ITEMS recipe
-	// type.
+	// The item ID to provide recommendations for.
+	//
+	// Required for RELATED_ITEMS recipe type.
 	ItemId *string
 
 	// If you enabled metadata in recommendations when you created or updated the
 	// campaign or recommender, specify the metadata columns from your Items dataset to
 	// include in item recommendations. The map key is ITEMS and the value is a list
 	// of column names from your Items dataset. The maximum number of columns you can
-	// provide is 10. For information about enabling metadata for a campaign, see
-	// Enabling metadata in recommendations for a campaign (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata)
-	// . For information about enabling metadata for a recommender, see Enabling
-	// metadata in recommendations for a recommender (https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata)
-	// .
+	// provide is 10.
+	//
+	// For information about enabling metadata for a campaign, see [Enabling metadata in recommendations for a campaign]. For information
+	// about enabling metadata for a recommender, see [Enabling metadata in recommendations for a recommender].
+	//
+	// [Enabling metadata in recommendations for a campaign]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+	// [Enabling metadata in recommendations for a recommender]: https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata
 	MetadataColumns map[string][]string
 
 	// The number of results to return. The default is 25. If you are including
@@ -96,8 +110,9 @@ type GetRecommendationsInput struct {
 	// with a recommender for a domain use case.
 	RecommenderArn *string
 
-	// The user ID to provide recommendations for. Required for USER_PERSONALIZATION
-	// recipe type.
+	// The user ID to provide recommendations for.
+	//
+	// Required for USER_PERSONALIZATION recipe type.
 	UserId *string
 
 	noSmithyDocumentSerde

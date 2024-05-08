@@ -11,7 +11,8 @@ import (
 	"time"
 )
 
-// Retrieves an attribute group by its ARN, ID, or name. The attribute group can
+//	Retrieves an attribute group by its ARN, ID, or name. The attribute group can
+//
 // be specified by its ARN, ID, or name.
 func (c *Client) GetAttributeGroup(ctx context.Context, params *GetAttributeGroupInput, optFns ...func(*Options)) (*GetAttributeGroupOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) GetAttributeGroup(ctx context.Context, params *GetAttributeGrou
 
 type GetAttributeGroupInput struct {
 
-	// The name, ID, or ARN of the attribute group that holds the attributes to
+	//  The name, ID, or ARN of the attribute group that holds the attributes to
 	// describe the application.
 	//
 	// This member is required.

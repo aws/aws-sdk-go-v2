@@ -16,9 +16,12 @@ import (
 // CloudWatch Internet Monitor query interface. Specify a time period for the data
 // that you want returned by using StartTime and EndTime . You filter the query
 // results to return by providing parameters that you specify with FilterParameters
-// . For more information about using the query interface, including examples, see
-// Using the Amazon CloudWatch Internet Monitor query interface (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html)
+// .
+//
+// For more information about using the query interface, including examples, see [Using the Amazon CloudWatch Internet Monitor query interface]
 // in the Amazon CloudWatch Internet Monitor User Guide.
+//
+// [Using the Amazon CloudWatch Internet Monitor query interface]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}
@@ -49,17 +52,22 @@ type StartQueryInput struct {
 
 	// The type of query to run. The following are the three types of queries that you
 	// can run using the Internet Monitor query interface:
+	//
 	//   - MEASUREMENTS : Provides availability score, performance score, total
 	//   traffic, and round-trip times, at 5 minute intervals.
+	//
 	//   - TOP_LOCATIONS : Provides availability score, performance score, total
 	//   traffic, and time to first byte (TTFB) information, for the top location and ASN
 	//   combinations that you're monitoring, by traffic volume.
+	//
 	//   - TOP_LOCATION_DETAILS : Provides TTFB for Amazon CloudFront, your current
 	//   configuration, and the best performing EC2 configuration, at 1 hour intervals.
+	//
 	// For lists of the fields returned with each query type and more information
-	// about how each type of query is performed, see Using the Amazon CloudWatch
-	// Internet Monitor query interface (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html)
-	// in the Amazon CloudWatch Internet Monitor User Guide.
+	// about how each type of query is performed, see [Using the Amazon CloudWatch Internet Monitor query interface]in the Amazon CloudWatch
+	// Internet Monitor User Guide.
+	//
+	// [Using the Amazon CloudWatch Internet Monitor query interface]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
 	//
 	// This member is required.
 	QueryType types.QueryType
@@ -73,17 +81,20 @@ type StartQueryInput struct {
 	// The FilterParameters field that you use with Amazon CloudWatch Internet Monitor
 	// queries is a string the defines how you want a query to be filtered. The filter
 	// parameters that you can specify depend on the query type, since each query type
-	// returns a different set of Internet Monitor data. For more information about
-	// specifying filter parameters, see Using the Amazon CloudWatch Internet Monitor
-	// query interface (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html)
-	// in the Amazon CloudWatch Internet Monitor User Guide.
+	// returns a different set of Internet Monitor data.
+	//
+	// For more information about specifying filter parameters, see [Using the Amazon CloudWatch Internet Monitor query interface] in the Amazon
+	// CloudWatch Internet Monitor User Guide.
+	//
+	// [Using the Amazon CloudWatch Internet Monitor query interface]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-view-cw-tools-cwim-query.html
 	FilterParameters []types.FilterParameter
 
 	// The account ID for an account that you've set up cross-account sharing for in
 	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
-	// Amazon CloudWatch Observability Access Manager. For more information, see
-	// Internet Monitor cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html)
-	// in the Amazon CloudWatch Internet Monitor User Guide.
+	// Amazon CloudWatch Observability Access Manager. For more information, see [Internet Monitor cross-account observability]in
+	// the Amazon CloudWatch Internet Monitor User Guide.
+	//
+	// [Internet Monitor cross-account observability]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
 	LinkedAccountId *string
 
 	noSmithyDocumentSerde

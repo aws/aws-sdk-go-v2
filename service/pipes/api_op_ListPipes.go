@@ -12,8 +12,9 @@ import (
 )
 
 // Get the pipes associated with this account. For more information about pipes,
-// see Amazon EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
-// in the Amazon EventBridge User Guide.
+// see [Amazon EventBridge Pipes]in the Amazon EventBridge User Guide.
+//
+// [Amazon EventBridge Pipes]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html
 func (c *Client) ListPipes(ctx context.Context, params *ListPipesInput, optFns ...func(*Options)) (*ListPipesOutput, error) {
 	if params == nil {
 		params = &ListPipesInput{}

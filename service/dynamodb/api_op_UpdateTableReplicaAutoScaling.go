@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates auto scaling settings on your global tables at once. This operation
-// only applies to Version 2019.11.21 (Current) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
-// of global tables.
+// Updates auto scaling settings on your global tables at once.
+//
+// This operation only applies to [Version 2019.11.21 (Current)] of global tables.
+//
+// [Version 2019.11.21 (Current)]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
 func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *UpdateTableReplicaAutoScalingInput, optFns ...func(*Options)) (*UpdateTableReplicaAutoScalingOutput, error) {
 	if params == nil {
 		params = &UpdateTableReplicaAutoScalingInput{}

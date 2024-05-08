@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified endpoint. All tasks associated with the endpoint must be
-// deleted before you can delete the endpoint.
+// Deletes the specified endpoint.
+//
+// All tasks associated with the endpoint must be deleted before you can delete
+// the endpoint.
 func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput, optFns ...func(*Options)) (*DeleteEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteEndpointInput{}

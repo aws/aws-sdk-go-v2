@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes streaming session resource. After invoking this operation, use
-// GetStreamingSession to poll the resource until it transitions to a DELETED
-// state. A streaming session will count against your streaming session quota until
-// it is marked DELETED .
+// Deletes streaming session resource.
+//
+// After invoking this operation, use GetStreamingSession to poll the resource
+// until it transitions to a DELETED state.
+//
+// A streaming session will count against your streaming session quota until it is
+// marked DELETED .
 func (c *Client) DeleteStreamingSession(ctx context.Context, params *DeleteStreamingSessionInput, optFns ...func(*Options)) (*DeleteStreamingSessionOutput, error) {
 	if params == nil {
 		params = &DeleteStreamingSessionInput{}

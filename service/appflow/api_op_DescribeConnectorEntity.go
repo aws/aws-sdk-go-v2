@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides details regarding the entity used with the connector, with a
+//	Provides details regarding the entity used with the connector, with a
+//
 // description of the data model for each field in that entity.
 func (c *Client) DescribeConnectorEntity(ctx context.Context, params *DescribeConnectorEntityInput, optFns ...func(*Options)) (*DescribeConnectorEntityOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) DescribeConnectorEntity(ctx context.Context, params *DescribeCo
 
 type DescribeConnectorEntityInput struct {
 
-	// The entity name for that connector.
+	//  The entity name for that connector.
 	//
 	// This member is required.
 	ConnectorEntityName *string
@@ -38,11 +39,11 @@ type DescribeConnectorEntityInput struct {
 	// The version of the API that's used by the connector.
 	ApiVersion *string
 
-	// The name of the connector profile. The name is unique for each ConnectorProfile
+	//  The name of the connector profile. The name is unique for each ConnectorProfile
 	// in the Amazon Web Services account.
 	ConnectorProfileName *string
 
-	// The type of connector application, such as Salesforce, Amplitude, and so on.
+	//  The type of connector application, such as Salesforce, Amplitude, and so on.
 	ConnectorType types.ConnectorType
 
 	noSmithyDocumentSerde
@@ -50,7 +51,7 @@ type DescribeConnectorEntityInput struct {
 
 type DescribeConnectorEntityOutput struct {
 
-	// Describes the fields for that connector entity. For example, for an account
+	//  Describes the fields for that connector entity. For example, for an account
 	// entity, the fields would be account name, account ID, and so on.
 	//
 	// This member is required.

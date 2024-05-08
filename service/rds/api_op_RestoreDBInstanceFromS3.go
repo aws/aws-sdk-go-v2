@@ -15,8 +15,11 @@ import (
 // databases by using backup files. You can create a backup of your on-premises
 // database, store it on Amazon Simple Storage Service (Amazon S3), and then
 // restore the backup file onto a new Amazon RDS DB instance running MySQL. For
-// more information, see Importing Data into an Amazon RDS MySQL DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html)
-// in the Amazon RDS User Guide. This operation doesn't apply to RDS Custom.
+// more information, see [Importing Data into an Amazon RDS MySQL DB Instance]in the Amazon RDS User Guide.
+//
+// This operation doesn't apply to RDS Custom.
+//
+// [Importing Data into an Amazon RDS MySQL DB Instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
 func (c *Client) RestoreDBInstanceFromS3(ctx context.Context, params *RestoreDBInstanceFromS3Input, optFns ...func(*Options)) (*RestoreDBInstanceFromS3Output, error) {
 	if params == nil {
 		params = &RestoreDBInstanceFromS3Input{}
@@ -37,25 +40,33 @@ type RestoreDBInstanceFromS3Input struct {
 	// The compute and memory capacity of the DB instance, for example db.m4.large.
 	// Not all DB instance classes are available in all Amazon Web Services Regions, or
 	// for all database engines. For the full list of DB instance classes, and
-	// availability for your engine, see DB Instance Class (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
-	// in the Amazon RDS User Guide. Importing from Amazon S3 isn't supported on the
-	// db.t2.micro DB instance class.
+	// availability for your engine, see [DB Instance Class]in the Amazon RDS User Guide.
+	//
+	// Importing from Amazon S3 isn't supported on the db.t2.micro DB instance class.
+	//
+	// [DB Instance Class]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
 	//
 	// This member is required.
 	DBInstanceClass *string
 
 	// The DB instance identifier. This parameter is stored as a lowercase string.
+	//
 	// Constraints:
+	//
 	//   - Must contain from 1 to 63 letters, numbers, or hyphens.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: mydbinstance
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The name of the database engine to be used for this instance. Valid Values:
-	// mysql
+	// The name of the database engine to be used for this instance.
+	//
+	// Valid Values: mysql
 	//
 	// This member is required.
 	Engine *string
@@ -71,21 +82,28 @@ type RestoreDBInstanceFromS3Input struct {
 	// This member is required.
 	S3IngestionRoleArn *string
 
-	// The name of the engine of your source database. Valid Values: mysql
+	// The name of the engine of your source database.
+	//
+	// Valid Values: mysql
 	//
 	// This member is required.
 	SourceEngine *string
 
-	// The version of the database that the backup files were created from. MySQL
-	// versions 5.6 and 5.7 are supported. Example: 5.6.40
+	// The version of the database that the backup files were created from.
+	//
+	// MySQL versions 5.6 and 5.7 are supported.
+	//
+	// Example: 5.6.40
 	//
 	// This member is required.
 	SourceEngineVersion *string
 
 	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
-	// Follow the allocation rules specified in CreateDBInstance . Be sure to allocate
-	// enough storage for your new DB instance so that the restore operation can
-	// succeed. You can also allocate additional storage for future growth.
+	// Follow the allocation rules specified in CreateDBInstance .
+	//
+	// Be sure to allocate enough storage for your new DB instance so that the restore
+	// operation can succeed. You can also allocate additional storage for future
+	// growth.
 	AllocatedStorage *int32
 
 	// Specifies whether to automatically apply minor engine upgrades to the DB
@@ -94,13 +112,19 @@ type RestoreDBInstanceFromS3Input struct {
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone that the DB instance is created in. For information about
-	// Amazon Web Services Regions and Availability Zones, see Regions and
-	// Availability Zones (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
-	// in the Amazon RDS User Guide. Default: A random, system-chosen Availability Zone
-	// in the endpoint's Amazon Web Services Region. Example: us-east-1d Constraint:
-	// The AvailabilityZone parameter can't be specified if the DB instance is a
-	// Multi-AZ deployment. The specified Availability Zone must be in the same Amazon
-	// Web Services Region as the current endpoint.
+	// Amazon Web Services Regions and Availability Zones, see [Regions and Availability Zones]in the Amazon RDS User
+	// Guide.
+	//
+	// Default: A random, system-chosen Availability Zone in the endpoint's Amazon Web
+	// Services Region.
+	//
+	// Example: us-east-1d
+	//
+	// Constraint: The AvailabilityZone parameter can't be specified if the DB
+	// instance is a Multi-AZ deployment. The specified Availability Zone must be in
+	// the same Amazon Web Services Region as the current endpoint.
+	//
+	// [Regions and Availability Zones]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
 	AvailabilityZone *string
 
 	// The number of days for which automated backups are retained. Setting this
@@ -109,11 +133,14 @@ type RestoreDBInstanceFromS3Input struct {
 	BackupRetentionPeriod *int32
 
 	// The CA certificate identifier to use for the DB instance's server certificate.
-	// This setting doesn't apply to RDS Custom DB instances. For more information, see
-	// Using SSL/TLS to encrypt a connection to a DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
-	// in the Amazon RDS User Guide and Using SSL/TLS to encrypt a connection to a DB
-	// cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
-	// in the Amazon Aurora User Guide.
+	//
+	// This setting doesn't apply to RDS Custom DB instances.
+	//
+	// For more information, see [Using SSL/TLS to encrypt a connection to a DB instance] in the Amazon RDS User Guide and [Using SSL/TLS to encrypt a connection to a DB cluster] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Using SSL/TLS to encrypt a connection to a DB cluster]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+	// [Using SSL/TLS to encrypt a connection to a DB instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
 	CACertificateIdentifier *string
 
 	// Specifies whether to copy all tags from the DB instance to snapshots of the DB
@@ -124,17 +151,22 @@ type RestoreDBInstanceFromS3Input struct {
 	// naming rules specified in CreateDBInstance .
 	DBName *string
 
-	// The name of the DB parameter group to associate with this DB instance. If you
-	// do not specify a value for DBParameterGroupName , then the default
+	// The name of the DB parameter group to associate with this DB instance.
+	//
+	// If you do not specify a value for DBParameterGroupName , then the default
 	// DBParameterGroup for the specified DB engine is used.
 	DBParameterGroupName *string
 
-	// A list of DB security groups to associate with this DB instance. Default: The
-	// default DB security group for the database engine.
+	// A list of DB security groups to associate with this DB instance.
+	//
+	// Default: The default DB security group for the database engine.
 	DBSecurityGroups []string
 
-	// A DB subnet group to associate with this DB instance. Constraints: If supplied,
-	// must match the name of an existing DBSubnetGroup. Example: mydbsubnetgroup
+	// A DB subnet group to associate with this DB instance.
+	//
+	// Constraints: If supplied, must match the name of an existing DBSubnetGroup.
+	//
+	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
 
 	// Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
@@ -142,27 +174,33 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// Specifies whether to enable deletion protection for the DB instance. The
 	// database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection isn't enabled. For more information, see Deleting a DB
-	// Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
-	// .
+	// deletion protection isn't enabled. For more information, see [Deleting a DB Instance].
+	//
+	// [Deleting a DB Instance]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html
 	DeletionProtection *bool
 
 	// The list of logs that the restored DB instance is to export to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. For more information,
-	// see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
-	// in the Amazon RDS User Guide.
+	// see [Publishing Database Logs to Amazon CloudWatch Logs]in the Amazon RDS User Guide.
+	//
+	// [Publishing Database Logs to Amazon CloudWatch Logs]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
 	EnableCloudwatchLogsExports []string
 
 	// Specifies whether to enable mapping of Amazon Web Services Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping isn't
-	// enabled. For more information about IAM database authentication, see IAM
-	// Database Authentication for MySQL and PostgreSQL (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html)
-	// in the Amazon RDS User Guide.
+	// enabled.
+	//
+	// For more information about IAM database authentication, see [IAM Database Authentication for MySQL and PostgreSQL] in the Amazon RDS
+	// User Guide.
+	//
+	// [IAM Database Authentication for MySQL and PostgreSQL]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
-	// Specifies whether to enable Performance Insights for the DB instance. For more
-	// information, see Using Amazon Performance Insights (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
-	// in the Amazon RDS User Guide.
+	// Specifies whether to enable Performance Insights for the DB instance.
+	//
+	// For more information, see [Using Amazon Performance Insights] in the Amazon RDS User Guide.
+	//
+	// [Using Amazon Performance Insights]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
 	EnablePerformanceInsights *bool
 
 	// The version number of the database engine to use. Choose the latest minor
@@ -171,101 +209,148 @@ type RestoreDBInstanceFromS3Input struct {
 	EngineVersion *string
 
 	// The amount of Provisioned IOPS (input/output operations per second) to allocate
-	// initially for the DB instance. For information about valid IOPS values, see
-	// Amazon RDS Provisioned IOPS storage (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
-	// in the Amazon RDS User Guide.
+	// initially for the DB instance. For information about valid IOPS values, see [Amazon RDS Provisioned IOPS storage]in
+	// the Amazon RDS User Guide.
+	//
+	// [Amazon RDS Provisioned IOPS storage]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
 	Iops *int32
 
-	// The Amazon Web Services KMS key identifier for an encrypted DB instance. The
-	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
-	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
-	// account, specify the key ARN or alias ARN. If the StorageEncrypted parameter is
-	// enabled, and you do not specify a value for the KmsKeyId parameter, then Amazon
-	// RDS will use your default KMS key. There is a default KMS key for your Amazon
-	// Web Services account. Your Amazon Web Services account has a different default
-	// KMS key for each Amazon Web Services Region.
+	// The Amazon Web Services KMS key identifier for an encrypted DB instance.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key. To use a KMS key in a different Amazon Web
+	// Services account, specify the key ARN or alias ARN.
+	//
+	// If the StorageEncrypted parameter is enabled, and you do not specify a value
+	// for the KmsKeyId parameter, then Amazon RDS will use your default KMS key.
+	// There is a default KMS key for your Amazon Web Services account. Your Amazon Web
+	// Services account has a different default KMS key for each Amazon Web Services
+	// Region.
 	KmsKeyId *string
 
 	// The license model for this DB instance. Use general-public-license .
 	LicenseModel *string
 
 	// Specifies whether to manage the master user password with Amazon Web Services
-	// Secrets Manager. For more information, see Password management with Amazon Web
-	// Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
-	// in the Amazon RDS User Guide. Constraints:
+	// Secrets Manager.
+	//
+	// For more information, see [Password management with Amazon Web Services Secrets Manager] in the Amazon RDS User Guide.
+	//
+	// Constraints:
+	//
 	//   - Can't manage the master user password with Amazon Web Services Secrets
 	//   Manager if MasterUserPassword is specified.
+	//
+	// [Password management with Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html
 	ManageMasterUserPassword *bool
 
-	// The password for the master user. Constraints:
+	// The password for the master user.
+	//
+	// Constraints:
+	//
 	//   - Can't be specified if ManageMasterUserPassword is turned on.
+	//
 	//   - Can include any printable ASCII character except "/", """, or "@". For RDS
 	//   for Oracle, can't include the "&" (ampersand) or the "'" (single quotes)
 	//   character.
+	//
 	// Length Constraints:
+	//
 	//   - RDS for Db2 - Must contain from 8 to 128 characters.
+	//
 	//   - RDS for MariaDB - Must contain from 8 to 41 characters.
+	//
 	//   - RDS for Microsoft SQL Server - Must contain from 8 to 128 characters.
+	//
 	//   - RDS for MySQL - Must contain from 8 to 41 characters.
+	//
 	//   - RDS for Oracle - Must contain from 8 to 30 characters.
+	//
 	//   - RDS for PostgreSQL - Must contain from 8 to 128 characters.
 	MasterUserPassword *string
 
 	// The Amazon Web Services KMS key identifier to encrypt a secret that is
-	// automatically generated and managed in Amazon Web Services Secrets Manager. This
-	// setting is valid only if the master user password is managed by RDS in Amazon
-	// Web Services Secrets Manager for the DB instance. The Amazon Web Services KMS
-	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
-	// To use a KMS key in a different Amazon Web Services account, specify the key ARN
-	// or alias ARN. If you don't specify MasterUserSecretKmsKeyId , then the
-	// aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a
-	// different Amazon Web Services account, then you can't use the aws/secretsmanager
-	// KMS key to encrypt the secret, and you must use a customer managed KMS key.
-	// There is a default KMS key for your Amazon Web Services account. Your Amazon Web
-	// Services account has a different default KMS key for each Amazon Web Services
-	// Region.
+	// automatically generated and managed in Amazon Web Services Secrets Manager.
+	//
+	// This setting is valid only if the master user password is managed by RDS in
+	// Amazon Web Services Secrets Manager for the DB instance.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key. To use a KMS key in a different Amazon Web
+	// Services account, specify the key ARN or alias ARN.
+	//
+	// If you don't specify MasterUserSecretKmsKeyId , then the aws/secretsmanager KMS
+	// key is used to encrypt the secret. If the secret is in a different Amazon Web
+	// Services account, then you can't use the aws/secretsmanager KMS key to encrypt
+	// the secret, and you must use a customer managed KMS key.
+	//
+	// There is a default KMS key for your Amazon Web Services account. Your Amazon
+	// Web Services account has a different default KMS key for each Amazon Web
+	// Services Region.
 	MasterUserSecretKmsKeyId *string
 
-	// The name for the master user. Constraints:
+	// The name for the master user.
+	//
+	// Constraints:
+	//
 	//   - Must be 1 to 16 letters or numbers.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Can't be a reserved word for the chosen database engine.
 	MasterUsername *string
 
 	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
-	// the storage of the DB instance. For more information about this setting,
-	// including limitations that apply to it, see Managing capacity automatically
-	// with Amazon RDS storage autoscaling (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
-	// in the Amazon RDS User Guide.
+	// the storage of the DB instance.
+	//
+	// For more information about this setting, including limitations that apply to
+	// it, see [Managing capacity automatically with Amazon RDS storage autoscaling]in the Amazon RDS User Guide.
+	//
+	// [Managing capacity automatically with Amazon RDS storage autoscaling]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
 	MaxAllocatedStorage *int32
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
 	// collected for the DB instance. To disable collecting Enhanced Monitoring
-	// metrics, specify 0. If MonitoringRoleArn is specified, then you must also set
-	// MonitoringInterval to a value other than 0. Valid Values: 0, 1, 5, 10, 15, 30,
-	// 60 Default: 0
+	// metrics, specify 0.
+	//
+	// If MonitoringRoleArn is specified, then you must also set MonitoringInterval to
+	// a value other than 0.
+	//
+	// Valid Values: 0, 1, 5, 10, 15, 30, 60
+	//
+	// Default: 0
 	MonitoringInterval *int32
 
 	// The ARN for the IAM role that permits RDS to send enhanced monitoring metrics
 	// to Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess .
-	// For information on creating a monitoring role, see Setting Up and Enabling
-	// Enhanced Monitoring (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling)
-	// in the Amazon RDS User Guide. If MonitoringInterval is set to a value other
-	// than 0, then you must supply a MonitoringRoleArn value.
+	// For information on creating a monitoring role, see [Setting Up and Enabling Enhanced Monitoring]in the Amazon RDS User
+	// Guide.
+	//
+	// If MonitoringInterval is set to a value other than 0, then you must supply a
+	// MonitoringRoleArn value.
+	//
+	// [Setting Up and Enabling Enhanced Monitoring]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling
 	MonitoringRoleArn *string
 
 	// Specifies whether the DB instance is a Multi-AZ deployment. If the DB instance
 	// is a Multi-AZ deployment, you can't set the AvailabilityZone parameter.
 	MultiAZ *bool
 
-	// The network type of the DB instance. Valid Values:
+	// The network type of the DB instance.
+	//
+	// Valid Values:
+	//
 	//   - IPV4
+	//
 	//   - DUAL
+	//
 	// The network type is determined by the DBSubnetGroup specified for the DB
 	// instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and
-	// the IPv6 protocols ( DUAL ). For more information, see  Working with a DB
-	// instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
-	// in the Amazon RDS User Guide.
+	// the IPv6 protocols ( DUAL ).
+	//
+	// For more information, see [Working with a DB instance in a VPC] in the Amazon RDS User Guide.
+	//
+	// [Working with a DB instance in a VPC]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
 	NetworkType *string
 
 	// The name of the option group to associate with this DB instance. If this
@@ -273,65 +358,101 @@ type RestoreDBInstanceFromS3Input struct {
 	OptionGroupName *string
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
-	// Insights data. The Amazon Web Services KMS key identifier is the key ARN, key
-	// ID, alias ARN, or alias name for the KMS key. If you do not specify a value for
-	// PerformanceInsightsKMSKeyId , then Amazon RDS uses your default KMS key. There
-	// is a default KMS key for your Amazon Web Services account. Your Amazon Web
-	// Services account has a different default KMS key for each Amazon Web Services
-	// Region.
+	// Insights data.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key.
+	//
+	// If you do not specify a value for PerformanceInsightsKMSKeyId , then Amazon RDS
+	// uses your default KMS key. There is a default KMS key for your Amazon Web
+	// Services account. Your Amazon Web Services account has a different default KMS
+	// key for each Amazon Web Services Region.
 	PerformanceInsightsKMSKeyId *string
 
 	// The number of days to retain Performance Insights data. The default is 7 days.
 	// The following values are valid:
+	//
 	//   - 7
+	//
 	//   - month * 31, where month is a number of months from 1-23
+	//
 	//   - 731
+	//
 	// For example, the following values are valid:
+	//
 	//   - 93 (3 months * 31)
+	//
 	//   - 341 (11 months * 31)
+	//
 	//   - 589 (19 months * 31)
+	//
 	//   - 731
+	//
 	// If you specify a retention period such as 94, which isn't a valid value, RDS
 	// issues an error.
 	PerformanceInsightsRetentionPeriod *int32
 
-	// The port number on which the database accepts connections. Type: Integer Valid
-	// Values: 1150 - 65535 Default: 3306
+	// The port number on which the database accepts connections.
+	//
+	// Type: Integer
+	//
+	// Valid Values: 1150 - 65535
+	//
+	// Default: 3306
 	Port *int32
 
 	// The time range each day during which automated backups are created if automated
-	// backups are enabled. For more information, see Backup window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
-	// in the Amazon RDS User Guide. Constraints:
+	// backups are enabled. For more information, see [Backup window]in the Amazon RDS User Guide.
+	//
+	// Constraints:
+	//
 	//   - Must be in the format hh24:mi-hh24:mi .
+	//
 	//   - Must be in Universal Coordinated Time (UTC).
+	//
 	//   - Must not conflict with the preferred maintenance window.
+	//
 	//   - Must be at least 30 minutes.
+	//
+	// [Backup window]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
 	PreferredBackupWindow *string
 
 	// The time range each week during which system maintenance can occur, in
-	// Universal Coordinated Time (UTC). For more information, see Amazon RDS
-	// Maintenance Window (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance)
-	// in the Amazon RDS User Guide. Constraints:
+	// Universal Coordinated Time (UTC). For more information, see [Amazon RDS Maintenance Window]in the Amazon RDS
+	// User Guide.
+	//
+	// Constraints:
+	//
 	//   - Must be in the format ddd:hh24:mi-ddd:hh24:mi .
+	//
 	//   - Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	//
 	//   - Must be in Universal Coordinated Time (UTC).
+	//
 	//   - Must not conflict with the preferred backup window.
+	//
 	//   - Must be at least 30 minutes.
+	//
+	// [Amazon RDS Maintenance Window]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#Concepts.DBMaintenance
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
 	ProcessorFeatures []types.ProcessorFeature
 
-	// Specifies whether the DB instance is publicly accessible. When the DB instance
-	// is publicly accessible, its Domain Name System (DNS) endpoint resolves to the
-	// private IP address from within the DB instance's virtual private cloud (VPC). It
-	// resolves to the public IP address from outside of the DB instance's VPC. Access
-	// to the DB instance is ultimately controlled by the security group it uses. That
-	// public access is not permitted if the security group assigned to the DB instance
-	// doesn't permit it. When the DB instance isn't publicly accessible, it is an
-	// internal DB instance with a DNS name that resolves to a private IP address. For
-	// more information, see CreateDBInstance .
+	// Specifies whether the DB instance is publicly accessible.
+	//
+	// When the DB instance is publicly accessible, its Domain Name System (DNS)
+	// endpoint resolves to the private IP address from within the DB instance's
+	// virtual private cloud (VPC). It resolves to the public IP address from outside
+	// of the DB instance's VPC. Access to the DB instance is ultimately controlled by
+	// the security group it uses. That public access is not permitted if the security
+	// group assigned to the DB instance doesn't permit it.
+	//
+	// When the DB instance isn't publicly accessible, it is an internal DB instance
+	// with a DNS name that resolves to a private IP address.
+	//
+	// For more information, see CreateDBInstance.
 	PubliclyAccessible *bool
 
 	// The prefix of your Amazon S3 bucket.
@@ -340,19 +461,25 @@ type RestoreDBInstanceFromS3Input struct {
 	// Specifies whether the new DB instance is encrypted or not.
 	StorageEncrypted *bool
 
-	// Specifies the storage throughput value for the DB instance. This setting
-	// doesn't apply to RDS Custom or Amazon Aurora.
+	// Specifies the storage throughput value for the DB instance.
+	//
+	// This setting doesn't apply to RDS Custom or Amazon Aurora.
 	StorageThroughput *int32
 
-	// Specifies the storage type to be associated with the DB instance. Valid Values:
-	// gp2 | gp3 | io1 | io2 | standard If you specify io1 , io2 , or gp3 , you must
-	// also include a value for the Iops parameter. Default: io1 if the Iops parameter
-	// is specified; otherwise gp2
+	// Specifies the storage type to be associated with the DB instance.
+	//
+	// Valid Values: gp2 | gp3 | io1 | io2 | standard
+	//
+	// If you specify io1 , io2 , or gp3 , you must also include a value for the Iops
+	// parameter.
+	//
+	// Default: io1 if the Iops parameter is specified; otherwise gp2
 	StorageType *string
 
-	// A list of tags to associate with this DB instance. For more information, see
-	// Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+	// A list of tags to associate with this DB instance. For more information, see [Tagging Amazon RDS Resources]
 	// in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	// Specifies whether the DB instance class of the DB instance uses its default
@@ -367,9 +494,10 @@ type RestoreDBInstanceFromS3Input struct {
 
 type RestoreDBInstanceFromS3Output struct {
 
-	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the operations CreateDBInstance ,
-	// CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
+	// Contains the details of an Amazon RDS DB instance.
+	//
+	// This data type is used as a response element in the operations CreateDBInstance
+	// , CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
 	// ModifyDBInstance , PromoteReadReplica , RebootDBInstance ,
 	// RestoreDBInstanceFromDBSnapshot , RestoreDBInstanceFromS3 ,
 	// RestoreDBInstanceToPointInTime , StartDBInstance , and StopDBInstance .

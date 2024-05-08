@@ -11,8 +11,9 @@ import (
 )
 
 // Removes tags for a resource in CodeCommit. For a list of valid resources in
-// CodeCommit, see CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
-// in the CodeCommit User Guide.
+// CodeCommit, see [CodeCommit Resources and Operations]in the CodeCommit User Guide.
+//
+// [CodeCommit Resources and Operations]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

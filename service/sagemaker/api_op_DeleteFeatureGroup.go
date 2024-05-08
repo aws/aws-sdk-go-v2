@@ -12,11 +12,14 @@ import (
 
 // Delete the FeatureGroup and any data that was written to the OnlineStore of the
 // FeatureGroup . Data cannot be accessed from the OnlineStore immediately after
-// DeleteFeatureGroup is called. Data written into the OfflineStore will not be
-// deleted. The Amazon Web Services Glue database and tables that are automatically
-// created for your OfflineStore are not deleted. Note that it can take
-// approximately 10-15 minutes to delete an OnlineStore FeatureGroup with the
-// InMemory StorageType .
+// DeleteFeatureGroup is called.
+//
+// Data written into the OfflineStore will not be deleted. The Amazon Web Services
+// Glue database and tables that are automatically created for your OfflineStore
+// are not deleted.
+//
+// Note that it can take approximately 10-15 minutes to delete an OnlineStore
+// FeatureGroup with the InMemory StorageType .
 func (c *Client) DeleteFeatureGroup(ctx context.Context, params *DeleteFeatureGroupInput, optFns ...func(*Options)) (*DeleteFeatureGroupOutput, error) {
 	if params == nil {
 		params = &DeleteFeatureGroupInput{}

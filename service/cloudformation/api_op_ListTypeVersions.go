@@ -30,16 +30,22 @@ func (c *Client) ListTypeVersions(ctx context.Context, params *ListTypeVersionsI
 type ListTypeVersionsInput struct {
 
 	// The Amazon Resource Name (ARN) of the extension for which you want version
-	// summary information. Conditional: You must specify either TypeName and Type , or
-	// Arn .
+	// summary information.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	Arn *string
 
 	// The deprecation status of the extension versions that you want to get summary
-	// information about. Valid values include:
+	// information about.
+	//
+	// Valid values include:
+	//
 	//   - LIVE : The extension version is registered and can be used in CloudFormation
 	//   operations, dependent on its provisioning behavior and visibility scope.
+	//
 	//   - DEPRECATED : The extension version has been deregistered and can no longer
 	//   be used in CloudFormation operations.
+	//
 	// The default is LIVE .
 	DeprecatedStatus types.DeprecatedStatus
 
@@ -56,15 +62,18 @@ type ListTypeVersionsInput struct {
 	// previous response object's NextToken parameter is set to null .
 	NextToken *string
 
-	// The publisher ID of the extension publisher. Extensions published by Amazon
-	// aren't assigned a publisher ID.
+	// The publisher ID of the extension publisher.
+	//
+	// Extensions published by Amazon aren't assigned a publisher ID.
 	PublisherId *string
 
-	// The kind of the extension. Conditional: You must specify either TypeName and
-	// Type , or Arn .
+	// The kind of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	Type types.RegistryType
 
 	// The name of the extension for which you want version summary information.
+	//
 	// Conditional: You must specify either TypeName and Type , or Arn .
 	TypeName *string
 

@@ -28,9 +28,13 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the canary or group that you want to view tags for. The ARN format
-	// of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name . The
-	// ARN format of a group is arn:aws:synthetics:Region:account-id:group:group-name
+	// The ARN of the canary or group that you want to view tags for.
+	//
+	// The ARN format of a canary is
+	// arn:aws:synthetics:Region:account-id:canary:canary-name .
+	//
+	// The ARN format of a group is
+	// arn:aws:synthetics:Region:account-id:group:group-name
 	//
 	// This member is required.
 	ResourceArn *string

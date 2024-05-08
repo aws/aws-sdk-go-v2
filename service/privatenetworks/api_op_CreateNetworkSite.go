@@ -48,8 +48,9 @@ type CreateNetworkSiteInput struct {
 	AvailabilityZoneId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// The description of the site.
@@ -58,7 +59,7 @@ type CreateNetworkSiteInput struct {
 	// Information about the pending plan for this site.
 	PendingPlan *types.SitePlan
 
-	// The tags to apply to the network site.
+	//  The tags to apply to the network site.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -69,7 +70,7 @@ type CreateNetworkSiteOutput struct {
 	// Information about the network site.
 	NetworkSite *types.NetworkSite
 
-	// The network site tags.
+	//  The network site tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

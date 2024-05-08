@@ -28,8 +28,10 @@ func (c *Client) UpdatePrompt(ctx context.Context, params *UpdatePromptInput, op
 
 type UpdatePromptInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -46,8 +48,9 @@ type UpdatePromptInput struct {
 	Name *string
 
 	// The URI for the S3 bucket where the prompt is stored. You can provide S3
-	// pre-signed URLs returned by the GetPromptFile (https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html)
-	// API instead of providing S3 URIs.
+	// pre-signed URLs returned by the [GetPromptFile]API instead of providing S3 URIs.
+	//
+	// [GetPromptFile]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html
 	S3Uri *string
 
 	noSmithyDocumentSerde

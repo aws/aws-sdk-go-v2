@@ -21,8 +21,9 @@ type AccessTokenSummary struct {
 	Name *string
 
 	// The date and time when the personal access token will expire, in coordinated
-	// universal time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// universal time (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	ExpiresTime *time.Time
 
 	noSmithyDocumentSerde
@@ -98,7 +99,9 @@ type DevEnvironmentSessionSummary struct {
 	SpaceName *string
 
 	// The date and time the session started, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	StartedTime *time.Time
@@ -132,8 +135,9 @@ type DevEnvironmentSummary struct {
 	InstanceType InstanceType
 
 	// The time when the Dev Environment was last updated, in coordinated universal
-	// time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// time (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
@@ -209,8 +213,9 @@ type EventLogEntry struct {
 	EventSource *string
 
 	// The time the event took place, in coordinated universal time (UTC) timestamp
-	// format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	EventTime *time.Time
@@ -328,7 +333,9 @@ type IdeConfiguration struct {
 	// and VSCode .
 	Name *string
 
-	// A link to the IDE runtime image. This parameter is not required for VSCode .
+	// A link to the IDE runtime image.
+	//
+	// This parameter is not required for VSCode .
 	Runtime *string
 
 	noSmithyDocumentSerde
@@ -338,8 +345,9 @@ type IdeConfiguration struct {
 type ListSourceRepositoriesItem struct {
 
 	// The time the source repository was created, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	CreatedTime *time.Time
@@ -350,8 +358,9 @@ type ListSourceRepositoriesItem struct {
 	Id *string
 
 	// The time the source repository was last updated, in coordinated universal time
-	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
@@ -376,8 +385,9 @@ type ListSourceRepositoryBranchesItem struct {
 	HeadCommitId *string
 
 	// The time the branch was last updated, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	LastUpdatedTime *time.Time
 
 	// The name of the branch.
@@ -392,9 +402,10 @@ type ListSourceRepositoryBranchesItem struct {
 // Information about the persistent storage for a Dev Environment.
 type PersistentStorage struct {
 
-	// The size of the persistent storage in gigabytes (specifically GiB). Valid
-	// values for storage are based on memory sizes in 16GB increments. Valid values
-	// are 16, 32, and 64.
+	// The size of the persistent storage in gigabytes (specifically GiB).
+	//
+	// Valid values for storage are based on memory sizes in 16GB increments. Valid
+	// values are 16, 32, and 64.
 	//
 	// This member is required.
 	SizeInGiB *int32
@@ -402,12 +413,14 @@ type PersistentStorage struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the configuration of persistent storage for a Dev Environment.
+// Information about the configuration of persistent storage for a Dev
+// Environment.
 type PersistentStorageConfiguration struct {
 
-	// The size of the persistent storage in gigabytes (specifically GiB). Valid
-	// values for storage are based on memory sizes in 16GB increments. Valid values
-	// are 16, 32, and 64.
+	// The size of the persistent storage in gigabytes (specifically GiB).
+	//
+	// Valid values for storage are based on memory sizes in 16GB increments. Valid
+	// values are 16, 32, and 64.
 	//
 	// This member is required.
 	SizeInGiB *int32
@@ -567,14 +580,17 @@ type WorkflowRunSummary struct {
 	Id *string
 
 	// The date and time the workflow was last updated, in coordinated universal time
-	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// (UTC) timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
 
 	// The date and time the workflow run began, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -595,7 +611,9 @@ type WorkflowRunSummary struct {
 	WorkflowName *string
 
 	// The date and time the workflow run ended, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	EndTime *time.Time
 
 	// The reasons for the workflow run status.
@@ -613,7 +631,9 @@ type WorkflowSortCriteria struct {
 type WorkflowSummary struct {
 
 	// The date and time the workflow was created, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	CreatedTime *time.Time
@@ -629,7 +649,9 @@ type WorkflowSummary struct {
 	Id *string
 
 	// The date and time the workflow was last updated, in coordinated universal time
-	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// (UTC) timestamp format as specified in [RFC 3339]
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time

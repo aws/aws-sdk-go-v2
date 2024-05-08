@@ -34,22 +34,22 @@ type DescribeBudgetActionHistoriesInput struct {
 	// This member is required.
 	AccountId *string
 
-	// A system-generated universally unique identifier (UUID) for the action.
+	//  A system-generated universally unique identifier (UUID) for the action.
 	//
 	// This member is required.
 	ActionId *string
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
 	BudgetName *string
 
-	// An integer that represents how many entries a paginated response contains. The
+	//  An integer that represents how many entries a paginated response contains. The
 	// maximum is 100.
 	MaxResults *int32
 
-	// A generic string.
+	//  A generic string.
 	NextToken *string
 
 	// The period of time that's covered by a budget. The period has a start date and
@@ -62,12 +62,12 @@ type DescribeBudgetActionHistoriesInput struct {
 
 type DescribeBudgetActionHistoriesOutput struct {
 
-	// The historical record of the budget action resource.
+	//  The historical record of the budget action resource.
 	//
 	// This member is required.
 	ActionHistories []types.ActionHistory
 
-	// A generic string.
+	//  A generic string.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -166,7 +166,7 @@ var _ DescribeBudgetActionHistoriesAPIClient = (*Client)(nil)
 // DescribeBudgetActionHistoriesPaginatorOptions is the paginator options for
 // DescribeBudgetActionHistories
 type DescribeBudgetActionHistoriesPaginatorOptions struct {
-	// An integer that represents how many entries a paginated response contains. The
+	//  An integer that represents how many entries a paginated response contains. The
 	// maximum is 100.
 	Limit int32
 

@@ -31,9 +31,11 @@ func (c *Client) ListResolverEndpoints(ctx context.Context, params *ListResolver
 type ListResolverEndpointsInput struct {
 
 	// An optional specification to return a subset of Resolver endpoints, such as all
-	// inbound Resolver endpoints. If you submit a second or subsequent
-	// ListResolverEndpoints request and specify the NextToken parameter, you must use
-	// the same values for Filters , if any, as in the previous request.
+	// inbound Resolver endpoints.
+	//
+	// If you submit a second or subsequent ListResolverEndpoints request and specify
+	// the NextToken parameter, you must use the same values for Filters , if any, as
+	// in the previous request.
 	Filters []types.Filter
 
 	// The maximum number of Resolver endpoints that you want to return in the
@@ -41,10 +43,11 @@ type ListResolverEndpointsInput struct {
 	// MaxResults , Resolver returns up to 100 Resolver endpoints.
 	MaxResults *int32
 
-	// For the first ListResolverEndpoints request, omit this value. If you have more
-	// than MaxResults Resolver endpoints, you can submit another ListResolverEndpoints
-	// request to get the next group of Resolver endpoints. In the next request,
-	// specify the value of NextToken from the previous response.
+	// For the first ListResolverEndpoints request, omit this value.
+	//
+	// If you have more than MaxResults Resolver endpoints, you can submit another
+	// ListResolverEndpoints request to get the next group of Resolver endpoints. In
+	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde

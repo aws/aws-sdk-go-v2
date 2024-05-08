@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the FileSystemPolicy for the specified EFS file system. This operation
-// requires permissions for the elasticfilesystem:DescribeFileSystemPolicy action.
+// Returns the FileSystemPolicy for the specified EFS file system.
+//
+// This operation requires permissions for the
+// elasticfilesystem:DescribeFileSystemPolicy action.
 func (c *Client) DescribeFileSystemPolicy(ctx context.Context, params *DescribeFileSystemPolicyInput, optFns ...func(*Options)) (*DescribeFileSystemPolicyOutput, error) {
 	if params == nil {
 		params = &DescribeFileSystemPolicyInput{}

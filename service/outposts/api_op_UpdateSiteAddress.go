@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the address of the specified site. You can't update a site address if
-// there is an order in progress. You must wait for the order to complete or cancel
-// the order. You can update the operating address before you place an order at the
-// site, or after all Outposts that belong to the site have been deactivated.
+// Updates the address of the specified site.
+//
+// You can't update a site address if there is an order in progress. You must wait
+// for the order to complete or cancel the order.
+//
+// You can update the operating address before you place an order at the site, or
+// after all Outposts that belong to the site have been deactivated.
 func (c *Client) UpdateSiteAddress(ctx context.Context, params *UpdateSiteAddressInput, optFns ...func(*Options)) (*UpdateSiteAddressOutput, error) {
 	if params == nil {
 		params = &UpdateSiteAddressInput{}
@@ -32,17 +35,17 @@ func (c *Client) UpdateSiteAddress(ctx context.Context, params *UpdateSiteAddres
 
 type UpdateSiteAddressInput struct {
 
-	// The address for the site.
+	//  The address for the site.
 	//
 	// This member is required.
 	Address *types.Address
 
-	// The type of the address.
+	//  The type of the address.
 	//
 	// This member is required.
 	AddressType types.AddressType
 
-	// The ID or the Amazon Resource Name (ARN) of the site.
+	//  The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string
@@ -52,10 +55,10 @@ type UpdateSiteAddressInput struct {
 
 type UpdateSiteAddressOutput struct {
 
-	// Information about an address.
+	//  Information about an address.
 	Address *types.Address
 
-	// The type of the address.
+	//  The type of the address.
 	AddressType types.AddressType
 
 	// Metadata pertaining to the operation's result.

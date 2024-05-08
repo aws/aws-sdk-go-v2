@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for BrokerAZDistribution. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BrokerAZDistribution) Values() []BrokerAZDistribution {
 	return []BrokerAZDistribution{
 		"DEFAULT",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for ClientBroker. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientBroker) Values() []ClientBroker {
 	return []ClientBroker{
 		"TLS",
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for ClusterState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterState) Values() []ClusterState {
 	return []ClusterState{
 		"ACTIVE",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for ClusterType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClusterType) Values() []ClusterType {
 	return []ClusterType{
 		"PROVISIONED",
@@ -96,8 +100,9 @@ const (
 )
 
 // Values returns all known values for ConfigurationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationState) Values() []ConfigurationState {
 	return []ConfigurationState{
 		"ACTIVE",
@@ -116,8 +121,9 @@ const (
 )
 
 // Values returns all known values for CustomerActionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomerActionStatus) Values() []CustomerActionStatus {
 	return []CustomerActionStatus{
 		"CRITICAL_ACTION_REQUIRED",
@@ -137,8 +143,9 @@ const (
 )
 
 // Values returns all known values for EnhancedMonitoring. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnhancedMonitoring) Values() []EnhancedMonitoring {
 	return []EnhancedMonitoring{
 		"DEFAULT",
@@ -157,8 +164,9 @@ const (
 )
 
 // Values returns all known values for KafkaVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KafkaVersionStatus) Values() []KafkaVersionStatus {
 	return []KafkaVersionStatus{
 		"ACTIVE",
@@ -174,8 +182,9 @@ const (
 )
 
 // Values returns all known values for NodeType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NodeType) Values() []NodeType {
 	return []NodeType{
 		"BROKER",
@@ -192,8 +201,9 @@ const (
 
 // Values returns all known values for ReplicationStartingPositionType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationStartingPositionType) Values() []ReplicationStartingPositionType {
 	return []ReplicationStartingPositionType{
 		"LATEST",
@@ -213,8 +223,9 @@ const (
 )
 
 // Values returns all known values for ReplicatorState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicatorState) Values() []ReplicatorState {
 	return []ReplicatorState{
 		"RUNNING",
@@ -234,8 +245,9 @@ const (
 )
 
 // Values returns all known values for StorageMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StorageMode) Values() []StorageMode {
 	return []StorageMode{
 		"LOCAL",
@@ -255,8 +267,9 @@ const (
 )
 
 // Values returns all known values for TargetCompressionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetCompressionType) Values() []TargetCompressionType {
 	return []TargetCompressionType{
 		"NONE",
@@ -276,8 +289,9 @@ const (
 )
 
 // Values returns all known values for UserIdentityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserIdentityType) Values() []UserIdentityType {
 	return []UserIdentityType{
 		"AWSACCOUNT",
@@ -300,8 +314,9 @@ const (
 )
 
 // Values returns all known values for VpcConnectionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcConnectionState) Values() []VpcConnectionState {
 	return []VpcConnectionState{
 		"CREATING",

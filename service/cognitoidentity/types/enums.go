@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for AmbiguousRoleResolutionType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AmbiguousRoleResolutionType) Values() []AmbiguousRoleResolutionType {
 	return []AmbiguousRoleResolutionType{
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"AccessDenied",
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for MappingRuleMatchType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MappingRuleMatchType) Values() []MappingRuleMatchType {
 	return []MappingRuleMatchType{
 		"Equals",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for RoleMappingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RoleMappingType) Values() []RoleMappingType {
 	return []RoleMappingType{
 		"Token",

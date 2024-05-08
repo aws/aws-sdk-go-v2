@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides details about a batch of security controls for the current Amazon Web
+//	Provides details about a batch of security controls for the current Amazon Web
+//
 // Services account and Amazon Web Services Region.
 func (c *Client) BatchGetSecurityControls(ctx context.Context, params *BatchGetSecurityControlsInput, optFns ...func(*Options)) (*BatchGetSecurityControlsOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) BatchGetSecurityControls(ctx context.Context, params *BatchGetS
 
 type BatchGetSecurityControlsInput struct {
 
-	// A list of security controls (identified with SecurityControlId ,
+	//  A list of security controls (identified with SecurityControlId ,
 	// SecurityControlArn , or a mix of both parameters). The security control ID or
 	// Amazon Resource Name (ARN) is the same across standards.
 	//
@@ -42,14 +43,14 @@ type BatchGetSecurityControlsInput struct {
 
 type BatchGetSecurityControlsOutput struct {
 
-	// An array that returns the identifier, Amazon Resource Name (ARN), and other
+	//  An array that returns the identifier, Amazon Resource Name (ARN), and other
 	// details about a security control. The same information is returned whether the
 	// request includes SecurityControlId or SecurityControlArn .
 	//
 	// This member is required.
 	SecurityControls []types.SecurityControl
 
-	// A security control (identified with SecurityControlId , SecurityControlArn , or
+	//  A security control (identified with SecurityControlId , SecurityControlArn , or
 	// a mix of both parameters) for which details cannot be returned.
 	UnprocessedIds []types.UnprocessedSecurityControl
 

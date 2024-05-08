@@ -14,11 +14,23 @@ import (
 // Retrieves all tags assigned to a Amazon GameLift resource. Use resource tags to
 // organize Amazon Web Services resources for a range of purposes. This operation
 // handles the permissions necessary to manage tags for Amazon GameLift resources
-// that support tagging. To list tags for a resource, specify the unique ARN value
-// for the resource. Learn more Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-// in the Amazon Web Services General Reference Amazon Web Services Tagging
-// Strategies (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
-// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// that support tagging.
+//
+// To list tags for a resource, specify the unique ARN value for the resource.
+//
+// # Learn more
+//
+// [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference
+//
+// [Amazon Web Services Tagging Strategies]
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+// [Amazon Web Services Tagging Strategies]: http://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -36,11 +48,12 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that uniquely identifies the Amazon GameLift resource that you want to
-	// retrieve tags for. Amazon GameLift includes resource ARNs in the data object for
-	// the resource. You can retrieve the ARN by calling a List or Describe operation
-	// for the resource type.
+	// The Amazon Resource Name ([ARN] ) that uniquely identifies the Amazon GameLift
+	// resource that you want to retrieve tags for. Amazon GameLift includes resource
+	// ARNs in the data object for the resource. You can retrieve the ARN by calling a
+	// List or Describe operation for the resource type.
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	//
 	// This member is required.
 	ResourceARN *string

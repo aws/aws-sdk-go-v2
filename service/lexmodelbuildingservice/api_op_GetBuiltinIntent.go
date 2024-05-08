@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a built-in intent. This operation requires permission
-// for the lex:GetBuiltinIntent action.
+// Returns information about a built-in intent.
+//
+// This operation requires permission for the lex:GetBuiltinIntent action.
 func (c *Client) GetBuiltinIntent(ctx context.Context, params *GetBuiltinIntentInput, optFns ...func(*Options)) (*GetBuiltinIntentOutput, error) {
 	if params == nil {
 		params = &GetBuiltinIntentInput{}
@@ -31,8 +32,9 @@ func (c *Client) GetBuiltinIntent(ctx context.Context, params *GetBuiltinIntentI
 type GetBuiltinIntentInput struct {
 
 	// The unique identifier for a built-in intent. To find the signature for an
-	// intent, see Standard Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
+	// intent, see [Standard Built-in Intents]in the Alexa Skills Kit.
+	//
+	// [Standard Built-in Intents]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents
 	//
 	// This member is required.
 	Signature *string

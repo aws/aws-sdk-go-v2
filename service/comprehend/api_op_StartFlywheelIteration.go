@@ -11,8 +11,10 @@ import (
 )
 
 // Start the flywheel iteration.This operation uses any new datasets to train a
-// new model version. For more information about flywheels, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
-// in the Amazon Comprehend Developer Guide.
+// new model version. For more information about flywheels, see [Flywheel overview]in the Amazon
+// Comprehend Developer Guide.
+//
+// [Flywheel overview]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
 func (c *Client) StartFlywheelIteration(ctx context.Context, params *StartFlywheelIterationInput, optFns ...func(*Options)) (*StartFlywheelIterationOutput, error) {
 	if params == nil {
 		params = &StartFlywheelIterationInput{}

@@ -35,7 +35,9 @@ type ListReceivedGrantsForOrganizationInput struct {
 	LicenseArn *string
 
 	// Filters to scope the results. The following filters are supported:
+	//
 	//   - ParentArn
+	//
 	//   - GranteePrincipalArn
 	Filters []types.Filter
 

@@ -12,8 +12,9 @@ import (
 )
 
 // Creates an Amazon Chime SDK Voice Connector. For more information about Voice
-// Connectors, see Managing Amazon Chime SDK Voice Connector groups (https://docs.aws.amazon.com/chime-sdk/latest/ag/voice-connector-groups.html)
-// in the Amazon Chime SDK Administrator Guide.
+// Connectors, see [Managing Amazon Chime SDK Voice Connector groups]in the Amazon Chime SDK Administrator Guide.
+//
+// [Managing Amazon Chime SDK Voice Connector groups]: https://docs.aws.amazon.com/chime-sdk/latest/ag/voice-connector-groups.html
 func (c *Client) CreateVoiceConnector(ctx context.Context, params *CreateVoiceConnectorInput, optFns ...func(*Options)) (*CreateVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &CreateVoiceConnectorInput{}

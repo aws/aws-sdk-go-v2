@@ -10,13 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The RejectAssignment operation rejects the results of a completed assignment.
+//	The RejectAssignment operation rejects the results of a completed assignment.
+//
 // You can include an optional feedback message with the rejection, which the
 // Worker can see in the Status section of the web site. When you include a
 // feedback message with the rejection, it helps the Worker understand why the
 // assignment was rejected, and can improve the quality of the results the Worker
-// submits in the future. Only the Requester who created the HIT can reject an
-// assignment for the HIT.
+// submits in the future.
+//
+// Only the Requester who created the HIT can reject an assignment for the HIT.
 func (c *Client) RejectAssignment(ctx context.Context, params *RejectAssignmentInput, optFns ...func(*Options)) (*RejectAssignmentOutput, error) {
 	if params == nil {
 		params = &RejectAssignmentInput{}
@@ -34,14 +36,14 @@ func (c *Client) RejectAssignment(ctx context.Context, params *RejectAssignmentI
 
 type RejectAssignmentInput struct {
 
-	// The ID of the assignment. The assignment must correspond to a HIT created by
+	//  The ID of the assignment. The assignment must correspond to a HIT created by
 	// the Requester.
 	//
 	// This member is required.
 	AssignmentId *string
 
-	// A message for the Worker, which the Worker can see in the Status section of the
-	// web site.
+	//  A message for the Worker, which the Worker can see in the Status section of
+	// the web site.
 	//
 	// This member is required.
 	RequesterFeedback *string

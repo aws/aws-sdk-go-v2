@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists of information about the signals (nodes) specified in a signal catalog.
+//	Lists of information about the signals (nodes) specified in a signal catalog.
+//
 // This API operation uses pagination. Specify the nextToken parameter in the
 // request to return more results.
 func (c *Client) ListSignalCatalogNodes(ctx context.Context, params *ListSignalCatalogNodesInput, optFns ...func(*Options)) (*ListSignalCatalogNodesOutput, error) {
@@ -31,19 +32,21 @@ func (c *Client) ListSignalCatalogNodes(ctx context.Context, params *ListSignalC
 
 type ListSignalCatalogNodesInput struct {
 
-	// The name of the signal catalog to list information about.
+	//  The name of the signal catalog to list information about.
 	//
 	// This member is required.
 	Name *string
 
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
-	// A pagination token for the next set of results. If the results of a search are
-	// large, only a portion of the results are returned, and a nextToken pagination
-	// token is returned in the response. To retrieve the next set of results, reissue
-	// the search request and include the returned token. When all results have been
-	// returned, the response does not contain a pagination token value.
+	// A pagination token for the next set of results.
+	//
+	// If the results of a search are large, only a portion of the results are
+	// returned, and a nextToken pagination token is returned in the response. To
+	// retrieve the next set of results, reissue the search request and include the
+	// returned token. When all results have been returned, the response does not
+	// contain a pagination token value.
 	NextToken *string
 
 	// The type of node in the signal catalog.
@@ -54,11 +57,11 @@ type ListSignalCatalogNodesInput struct {
 
 type ListSignalCatalogNodesOutput struct {
 
-	// The token to retrieve the next set of results, or null if there are no more
+	//  The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
 
-	// A list of information about nodes.
+	//  A list of information about nodes.
 	Nodes []types.Node
 
 	// Metadata pertaining to the operation's result.
@@ -157,7 +160,7 @@ var _ ListSignalCatalogNodesAPIClient = (*Client)(nil)
 // ListSignalCatalogNodesPaginatorOptions is the paginator options for
 // ListSignalCatalogNodes
 type ListSignalCatalogNodesPaginatorOptions struct {
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

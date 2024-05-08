@@ -11,9 +11,10 @@ import (
 	"time"
 )
 
-// Downloads the regional Amazon Lightsail default key pair. This action also
-// creates a Lightsail default key pair if a default key pair does not currently
-// exist in the Amazon Web Services Region.
+// Downloads the regional Amazon Lightsail default key pair.
+//
+// This action also creates a Lightsail default key pair if a default key pair
+// does not currently exist in the Amazon Web Services Region.
 func (c *Client) DownloadDefaultKeyPair(ctx context.Context, params *DownloadDefaultKeyPairInput, optFns ...func(*Options)) (*DownloadDefaultKeyPairOutput, error) {
 	if params == nil {
 		params = &DownloadDefaultKeyPairInput{}

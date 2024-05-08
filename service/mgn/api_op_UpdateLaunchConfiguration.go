@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates multiple LaunchConfigurations by Source Server ID. bootMode valid
-// values are LEGACY_BIOS | UEFI
+// Updates multiple LaunchConfigurations by Source Server ID.
+//
+// bootMode valid values are LEGACY_BIOS | UEFI
 func (c *Client) UpdateLaunchConfiguration(ctx context.Context, params *UpdateLaunchConfigurationInput, optFns ...func(*Options)) (*UpdateLaunchConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateLaunchConfigurationInput{}

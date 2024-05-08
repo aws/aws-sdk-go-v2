@@ -12,6 +12,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Updates the value for the specified attribute type.
 func (c *Client) UpdateInstanceAttribute(ctx context.Context, params *UpdateInstanceAttributeInput, optFns ...func(*Options)) (*UpdateInstanceAttributeOutput, error) {
 	if params == nil {
@@ -30,15 +31,18 @@ func (c *Client) UpdateInstanceAttribute(ctx context.Context, params *UpdateInst
 
 type UpdateInstanceAttributeInput struct {
 
-	// The type of attribute. Only allowlisted customers can consume
-	// USE_CUSTOM_TTS_VOICES. To access this feature, contact Amazon Web Services
-	// Support for allowlisting.
+	// The type of attribute.
+	//
+	// Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this
+	// feature, contact Amazon Web Services Support for allowlisting.
 	//
 	// This member is required.
 	AttributeType types.InstanceAttributeType
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

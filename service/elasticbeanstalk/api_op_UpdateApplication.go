@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified application to have the specified properties. If a
-// property (for example, description ) is not provided, the value remains
+// Updates the specified application to have the specified properties.
+//
+// If a property (for example, description ) is not provided, the value remains
 // unchanged. To clear these properties, specify an empty string.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
@@ -38,8 +39,10 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// A new description for the application. Default: If not specified, AWS Elastic
-	// Beanstalk does not update the description.
+	// A new description for the application.
+	//
+	// Default: If not specified, AWS Elastic Beanstalk does not update the
+	// description.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -48,7 +51,7 @@ type UpdateApplicationInput struct {
 // Result message containing a single description of an application.
 type UpdateApplicationOutput struct {
 
-	// The ApplicationDescription of the application.
+	//  The ApplicationDescription of the application.
 	Application *types.ApplicationDescription
 
 	// Metadata pertaining to the operation's result.

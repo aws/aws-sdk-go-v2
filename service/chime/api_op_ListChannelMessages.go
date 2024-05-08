@@ -13,20 +13,27 @@ import (
 )
 
 // List all the messages in a channel. Returns a paginated list of ChannelMessages
-// . By default, sorted by creation timestamp in descending order. Redacted
-// messages appear in the results as empty, since they are only redacted, not
-// deleted. Deleted messages do not appear in the results. This action always
-// returns the latest version of an edited message. Also, the x-amz-chime-bearer
-// request header is mandatory. Use the AppInstanceUserArn of the user that makes
-// the API call as the value in the header. This API is is no longer supported and
-// will not be updated. We recommend using the latest version, ListChannelMessages (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMessages.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// . By default, sorted by creation timestamp in descending order.
+//
+// Redacted messages appear in the results as empty, since they are only redacted,
+// not deleted. Deleted messages do not appear in the results. This action always
+// returns the latest version of an edited message.
+//
+// Also, the x-amz-chime-bearer request header is mandatory. Use the
+// AppInstanceUserArn of the user that makes the API call as the value in the
+// header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [ListChannelMessages], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by ListChannelMessages in the Amazon Chime SDK Messaging
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [ListChannelMessages]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMessages.html
 func (c *Client) ListChannelMessages(ctx context.Context, params *ListChannelMessagesInput, optFns ...func(*Options)) (*ListChannelMessagesOutput, error) {
 	if params == nil {
 		params = &ListChannelMessagesInput{}

@@ -11,9 +11,10 @@ import (
 )
 
 // Returns information about the cache of a gateway. This operation is only
-// supported in the cached volume, tape, and file gateway types. The response
-// includes disk IDs that are configured as cache, and it includes the amount of
-// cache allocated and used.
+// supported in the cached volume, tape, and file gateway types.
+//
+// The response includes disk IDs that are configured as cache, and it includes
+// the amount of cache allocated and used.
 func (c *Client) DescribeCache(ctx context.Context, params *DescribeCacheInput, optFns ...func(*Options)) (*DescribeCacheOutput, error) {
 	if params == nil {
 		params = &DescribeCacheInput{}
@@ -31,8 +32,8 @@ func (c *Client) DescribeCache(ctx context.Context, params *DescribeCacheInput, 
 
 type DescribeCacheInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -65,11 +66,11 @@ type DescribeCacheOutput struct {
 
 	// An array of strings that identify disks that are to be configured as working
 	// storage. Each string has a minimum length of 1 and maximum length of 300. You
-	// can get the disk IDs from the ListLocalDisks API.
+	// can get the disk IDs from the ListLocalDisksAPI.
 	DiskIds []string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.

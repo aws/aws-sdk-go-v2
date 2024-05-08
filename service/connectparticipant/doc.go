@@ -7,6 +7,7 @@
 // enables companies of any size to deliver superior customer service at a lower
 // cost. Amazon Connect communications capabilities make it easy for companies to
 // deliver personalized interactions across communication channels, including chat.
+//
 // Use the Amazon Connect Participant Service to manage participants (for example,
 // agents, customers, and managers listening in), and to send messages and events
 // within a chat contact. The APIs in the service enable the following: sending

@@ -63,10 +63,11 @@ type ListNotebookInstancesInput struct {
 	// instances whose name contains the specified string.
 	NameContains *string
 
-	// If the previous call to the ListNotebookInstances is truncated, the response
+	//  If the previous call to the ListNotebookInstances is truncated, the response
 	// includes a NextToken . You can use this token in your subsequent
-	// ListNotebookInstances request to fetch the next set of notebook instances. You
-	// might specify a filter or a sort order in your request. When response is
+	// ListNotebookInstances request to fetch the next set of notebook instances.
+	//
+	// You might specify a filter or a sort order in your request. When response is
 	// truncated, you must use the same values for the filer and sort order in the next
 	// request.
 	NextToken *string

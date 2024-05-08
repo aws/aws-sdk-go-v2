@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the connectors vended by Amazon AppFlow for specified connector
+//	Describes the connectors vended by Amazon AppFlow for specified connector
+//
 // types. If you don't specify a connector type, this operation describes all
 // connectors vended by Amazon AppFlow. If there are more connectors than can be
 // returned in one page, the response contains a nextToken object, which can be be
@@ -34,14 +35,14 @@ func (c *Client) DescribeConnectors(ctx context.Context, params *DescribeConnect
 
 type DescribeConnectorsInput struct {
 
-	// The type of connector, such as Salesforce, Amplitude, and so on.
+	//  The type of connector, such as Salesforce, Amplitude, and so on.
 	ConnectorTypes []types.ConnectorType
 
 	// The maximum number of items that should be returned in the result set. The
 	// default is 20.
 	MaxResults *int32
 
-	// The pagination token for the next page of data.
+	//  The pagination token for the next page of data.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,13 +50,13 @@ type DescribeConnectorsInput struct {
 
 type DescribeConnectorsOutput struct {
 
-	// The configuration that is applied to the connectors used in the flow.
+	//  The configuration that is applied to the connectors used in the flow.
 	ConnectorConfigurations map[string]types.ConnectorConfiguration
 
 	// Information about the connectors supported in Amazon AppFlow.
 	Connectors []types.ConnectorDetail
 
-	// The pagination token for the next page of data.
+	//  The pagination token for the next page of data.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

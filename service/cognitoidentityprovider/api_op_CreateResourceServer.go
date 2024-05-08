@@ -12,12 +12,20 @@ import (
 )
 
 // Creates a new OAuth2.0 resource server and defines custom scopes within it.
+//
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
-// IAM permission in a policy. Learn more
-//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
-//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) CreateResourceServer(ctx context.Context, params *CreateResourceServerInput, optFns ...func(*Options)) (*CreateResourceServerOutput, error) {
 	if params == nil {
 		params = &CreateResourceServerInput{}
@@ -37,8 +45,9 @@ type CreateResourceServerInput struct {
 
 	// A unique resource server identifier for the resource server. The identifier can
 	// be an API friendly name like solar-system-data . You can also set an API URL
-	// like https://solar-system-data-api.example.com as your identifier. Amazon
-	// Cognito represents scopes in the access token in the format
+	// like https://solar-system-data-api.example.com as your identifier.
+	//
+	// Amazon Cognito represents scopes in the access token in the format
 	// $resource-server-identifier/$scope . Longer scope-identifier strings increase
 	// the size of your access tokens.
 	//

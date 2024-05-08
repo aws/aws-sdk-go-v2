@@ -270,8 +270,11 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 
 // There was a problem with the Secrets Manager secret used with the request,
 // caused by one of the following conditions:
+//
 //   - RDS Data API timed out retrieving the secret.
+//
 //   - The secret provided wasn't found.
+//
 //   - The secret couldn't be decrypted.
 type SecretsErrorException struct {
 	Message *string
@@ -379,8 +382,11 @@ func (e *TransactionNotFoundException) ErrorCode() string {
 func (e *TransactionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a problem with the result because of one of the following conditions:
+//
 //   - It contained an unsupported data type.
+//
 //   - It contained a multidimensional array.
+//
 //   - The size was too large.
 type UnsupportedResultException struct {
 	Message *string

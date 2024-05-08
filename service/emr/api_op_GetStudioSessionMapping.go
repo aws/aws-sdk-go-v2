@@ -41,16 +41,19 @@ type GetStudioSessionMappingInput struct {
 	StudioId *string
 
 	// The globally unique identifier (GUID) of the user or group. For more
-	// information, see UserId (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
-	// and GroupId (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId)
-	// in the IAM Identity Center Identity Store API Reference. Either IdentityName or
-	// IdentityId must be specified.
+	// information, see [UserId]and [GroupId] in the IAM Identity Center Identity Store API Reference.
+	// Either IdentityName or IdentityId must be specified.
+	//
+	// [UserId]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId
+	// [GroupId]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId
 	IdentityId *string
 
-	// The name of the user or group to fetch. For more information, see UserName (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
-	// and DisplayName (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the IAM Identity Center Identity Store API Reference. Either IdentityName or
+	// The name of the user or group to fetch. For more information, see [UserName] and [DisplayName] in the
+	// IAM Identity Center Identity Store API Reference. Either IdentityName or
 	// IdentityId must be specified.
+	//
+	// [UserName]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName
+	// [DisplayName]: https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName
 	IdentityName *string
 
 	noSmithyDocumentSerde

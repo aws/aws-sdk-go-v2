@@ -12,8 +12,10 @@ import (
 )
 
 // Updates an app authorization within an app bundle, which allows AppFabric to
-// connect to an application. If the app authorization was in a connected state,
-// updating the app authorization will set it back to a PendingConnect state.
+// connect to an application.
+//
+// If the app authorization was in a connected state, updating the app
+// authorization will set it back to a PendingConnect state.
 func (c *Client) UpdateAppAuthorization(ctx context.Context, params *UpdateAppAuthorizationInput, optFns ...func(*Options)) (*UpdateAppAuthorizationOutput, error) {
 	if params == nil {
 		params = &UpdateAppAuthorizationInput{}
@@ -44,10 +46,11 @@ type UpdateAppAuthorizationInput struct {
 	AppBundleIdentifier *string
 
 	// Contains credentials for the application, such as an API key or OAuth2 client
-	// ID and secret. Specify credentials that match the authorization type of the app
-	// authorization to update. For example, if the authorization type of the app
-	// authorization is OAuth2 ( oauth2 ), then you should provide only the OAuth2
-	// credentials.
+	// ID and secret.
+	//
+	// Specify credentials that match the authorization type of the app authorization
+	// to update. For example, if the authorization type of the app authorization is
+	// OAuth2 ( oauth2 ), then you should provide only the OAuth2 credentials.
 	Credential types.Credential
 
 	// Contains information about an application tenant, such as the application

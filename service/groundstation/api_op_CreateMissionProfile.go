@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a mission profile. dataflowEdges is a list of lists of strings. Each
-// lower level list of strings has two elements: a from ARN and a to ARN.
+// Creates a mission profile.
+//
+// dataflowEdges is a list of lists of strings. Each lower level list of strings
+// has two elements: a from ARN and a to ARN.
 func (c *Client) CreateMissionProfile(ctx context.Context, params *CreateMissionProfileInput, optFns ...func(*Options)) (*CreateMissionProfileOutput, error) {
 	if params == nil {
 		params = &CreateMissionProfileInput{}

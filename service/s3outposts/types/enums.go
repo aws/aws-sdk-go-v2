@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for EndpointAccessType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointAccessType) Values() []EndpointAccessType {
 	return []EndpointAccessType{
 		"Private",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for EndpointStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointStatus) Values() []EndpointStatus {
 	return []EndpointStatus{
 		"Pending",

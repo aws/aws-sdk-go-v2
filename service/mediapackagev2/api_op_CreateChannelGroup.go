@@ -50,7 +50,9 @@ type CreateChannelGroupInput struct {
 	Description *string
 
 	// A comma-separated list of tag key:value pairs that you define. For example:
-	// "Key1": "Value1",
+	//
+	//     "Key1": "Value1",
+	//
 	//     "Key2": "Value2"
 	Tags map[string]string
 

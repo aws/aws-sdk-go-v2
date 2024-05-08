@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Describes a channel. For information about MediaTailor channels, see Working
-// with channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
-// in the MediaTailor User Guide.
+// Describes a channel. For information about MediaTailor channels, see [Working with channels] in the
+// MediaTailor User Guide.
+//
+// [Working with channels]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
 func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInput, optFns ...func(*Options)) (*DescribeChannelOutput, error) {
 	if params == nil {
 		params = &DescribeChannelInput{}
@@ -77,14 +78,15 @@ type DescribeChannelOutput struct {
 
 	// The tags assigned to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
-	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
+	// cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// The channel's tier.
 	Tier *string
 
-	// The time-shifted viewing configuration for the channel.
+	//  The time-shifted viewing configuration for the channel.
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	// Metadata pertaining to the operation's result.

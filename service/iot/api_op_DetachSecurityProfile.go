@@ -11,8 +11,11 @@ import (
 )
 
 // Disassociates a Device Defender security profile from a thing group or from
-// this account. Requires permission to access the DetachSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// this account.
+//
+// Requires permission to access the [DetachSecurityProfile] action.
+//
+// [DetachSecurityProfile]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DetachSecurityProfile(ctx context.Context, params *DetachSecurityProfileInput, optFns ...func(*Options)) (*DetachSecurityProfileOutput, error) {
 	if params == nil {
 		params = &DetachSecurityProfileInput{}

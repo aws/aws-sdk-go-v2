@@ -12,11 +12,12 @@ import (
 
 // Starts a CloudTrail Lake query. Use the QueryStatement parameter to provide
 // your SQL query, enclosed in single quotation marks. Use the optional
-// DeliveryS3Uri parameter to deliver the query results to an S3 bucket. StartQuery
-// requires you specify either the QueryStatement parameter, or a QueryAlias and
-// any QueryParameters . In the current release, the QueryAlias and QueryParameters
-// parameters are used only for the queries that populate the CloudTrail Lake
-// dashboards.
+// DeliveryS3Uri parameter to deliver the query results to an S3 bucket.
+//
+// StartQuery requires you specify either the QueryStatement parameter, or a
+// QueryAlias and any QueryParameters . In the current release, the QueryAlias and
+// QueryParameters parameters are used only for the queries that populate the
+// CloudTrail Lake dashboards.
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}
@@ -34,13 +35,13 @@ func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns
 
 type StartQueryInput struct {
 
-	// The URI for the S3 bucket where CloudTrail delivers the query results.
+	//  The URI for the S3 bucket where CloudTrail delivers the query results.
 	DeliveryS3Uri *string
 
-	// The alias that identifies a query template.
+	//  The alias that identifies a query template.
 	QueryAlias *string
 
-	// The query parameters for the specified QueryAlias .
+	//  The query parameters for the specified QueryAlias .
 	QueryParameters []string
 
 	// The SQL code of your query.

@@ -30,14 +30,18 @@ func (c *Client) ListAssetModels(ctx context.Context, params *ListAssetModelsInp
 type ListAssetModelsInput struct {
 
 	// The type of asset model.
+	//
 	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
 	//   Can't be included as a component in another asset model.
+	//
 	//   - COMPONENT_MODEL – A reusable component that you can include in the
 	//   composite models of other asset models. You can't create assets directly from
 	//   this type of asset model.
 	AssetModelTypes []types.AssetModelType
 
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
@@ -179,7 +183,9 @@ var _ ListAssetModelsAPIClient = (*Client)(nil)
 
 // ListAssetModelsPaginatorOptions is the paginator options for ListAssetModels
 type ListAssetModelsPaginatorOptions struct {
-	// The maximum number of results to return for each paginated request. Default: 50
+	// The maximum number of results to return for each paginated request.
+	//
+	// Default: 50
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a workload or custom lens share invitation. This API operation can be
-// called independently of any resource. Previous documentation implied that a
-// workload ARN must be specified.
+// Update a workload or custom lens share invitation.
+//
+// This API operation can be called independently of any resource. Previous
+// documentation implied that a workload ARN must be specified.
 func (c *Client) UpdateShareInvitation(ctx context.Context, params *UpdateShareInvitationInput, optFns ...func(*Options)) (*UpdateShareInvitationOutput, error) {
 	if params == nil {
 		params = &UpdateShareInvitationInput{}

@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes a project. To delete a project, it must not have any placements
-// associated with it. When you delete a project, all associated data becomes
-// irretrievable.
+// associated with it.
+//
+// When you delete a project, all associated data becomes irretrievable.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}

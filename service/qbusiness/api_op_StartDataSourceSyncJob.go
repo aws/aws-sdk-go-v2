@@ -34,7 +34,7 @@ type StartDataSourceSyncJobInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the data source connector.
+	//  The identifier of the data source connector.
 	//
 	// This member is required.
 	DataSourceId *string

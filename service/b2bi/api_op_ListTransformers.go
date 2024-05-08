@@ -43,9 +43,10 @@ type ListTransformersInput struct {
 
 type ListTransformersOutput struct {
 
-	// Returns an array of one or more transformer objects. For each transformer, a
-	// TransformerSummary object is returned. The TransformerSummary contains all the
-	// details for a specific transformer.
+	// Returns an array of one or more transformer objects.
+	//
+	// For each transformer, a TransformerSummary object is returned. The
+	// TransformerSummary contains all the details for a specific transformer.
 	//
 	// This member is required.
 	Transformers []types.TransformerSummary

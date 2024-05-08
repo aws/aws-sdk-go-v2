@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This method works, but is deprecated. Use BatchGetDeploymentTargets instead.
+//	This method works, but is deprecated. Use BatchGetDeploymentTargets instead.
+//
 // Returns an array of one or more instances associated with a deployment. This
 // method works with EC2/On-premises and Lambda compute platforms. The newer
 // BatchGetDeploymentTargets works with all compute platforms. The maximum number
@@ -36,7 +37,7 @@ func (c *Client) BatchGetDeploymentInstances(ctx context.Context, params *BatchG
 // Represents the input of a BatchGetDeploymentInstances operation.
 type BatchGetDeploymentInstancesInput struct {
 
-	// The unique ID of a deployment.
+	//  The unique ID of a deployment.
 	//
 	// This member is required.
 	DeploymentId *string

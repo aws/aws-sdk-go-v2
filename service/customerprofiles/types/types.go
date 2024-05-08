@@ -8,10 +8,11 @@ import (
 )
 
 // A data type pair that consists of a KeyName and Values list that is used in
-// conjunction with the KeyName (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName)
-// and Values (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values)
-// parameters to search for profiles using the SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
-// API.
+// conjunction with the [KeyName]and [Values] parameters to search for profiles using the [SearchProfiles] API.
+//
+// [KeyName]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-KeyName
+// [SearchProfiles]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html
+// [Values]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html#customerprofiles-SearchProfiles-request-Values
 type AdditionalSearchKey struct {
 
 	// A searchable identifier of a customer profile.
@@ -207,11 +208,17 @@ type AttributeItem struct {
 // identity resolution uses to match profiles. You can choose how profiles are
 // compared across attribute types and which attribute to use for matching from
 // each type. There are three attribute types you can configure:
+//
 //   - Email type
+//
 //   - You can choose from Email , BusinessEmail , and PersonalEmail
+//
 //   - Phone number type
+//
 //   - You can choose from Phone , HomePhone , and MobilePhone
+//
 //   - Address type
+//
 //   - You can choose from Address , BusinessAddress , MaillingAddress , and
 //     ShippingAddress
 //
@@ -232,26 +239,31 @@ type AttributeTypesSelector struct {
 	AttributeMatchingModel AttributeMatchingModel
 
 	// The Address type. You can choose from Address , BusinessAddress ,
-	// MaillingAddress , and ShippingAddress . You only can use the Address type in the
-	// MatchingRule . For example, if you want to match profile based on
-	// BusinessAddress.City or MaillingAddress.City , you need to choose the
-	// BusinessAddress and the MaillingAddress to represent the Address type and
-	// specify the Address.City on the matching rule.
+	// MaillingAddress , and ShippingAddress .
+	//
+	// You only can use the Address type in the MatchingRule . For example, if you want
+	// to match profile based on BusinessAddress.City or MaillingAddress.City , you
+	// need to choose the BusinessAddress and the MaillingAddress to represent the
+	// Address type and specify the Address.City on the matching rule.
 	Address []string
 
 	// The Email type. You can choose from EmailAddress , BusinessEmailAddress and
-	// PersonalEmailAddress . You only can use the EmailAddress type in the
-	// MatchingRule . For example, if you want to match profile based on
-	// PersonalEmailAddress or BusinessEmailAddress , you need to choose the
-	// PersonalEmailAddress and the BusinessEmailAddress to represent the EmailAddress
-	// type and only specify the EmailAddress on the matching rule.
+	// PersonalEmailAddress .
+	//
+	// You only can use the EmailAddress type in the MatchingRule . For example, if you
+	// want to match profile based on PersonalEmailAddress or BusinessEmailAddress ,
+	// you need to choose the PersonalEmailAddress and the BusinessEmailAddress to
+	// represent the EmailAddress type and only specify the EmailAddress on the
+	// matching rule.
 	EmailAddress []string
 
 	// The PhoneNumber type. You can choose from PhoneNumber , HomePhoneNumber , and
-	// MobilePhoneNumber . You only can use the PhoneNumber type in the MatchingRule .
-	// For example, if you want to match a profile based on Phone or HomePhone , you
-	// need to choose the Phone and the HomePhone to represent the PhoneNumber type
-	// and only specify the PhoneNumber on the matching rule.
+	// MobilePhoneNumber .
+	//
+	// You only can use the PhoneNumber type in the MatchingRule . For example, if you
+	// want to match a profile based on Phone or HomePhone , you need to choose the
+	// Phone and the HomePhone to represent the PhoneNumber type and only specify the
+	// PhoneNumber on the matching rule.
 	PhoneNumber []string
 
 	noSmithyDocumentSerde
@@ -267,7 +279,8 @@ type AutoMerging struct {
 
 	// How the auto-merging process should resolve conflicts between different
 	// profiles. For example, if Profile A and Profile B have the same FirstName and
-	// LastName (and that is the matching criteria), which EmailAddress should be used?
+	// LastName (and that is the matching criteria), which EmailAddress should be
+	// used?
 	ConflictResolution *ConflictResolution
 
 	// A list of matching attributes that represent matching criteria. If two profiles
@@ -323,7 +336,9 @@ type ConflictResolution struct {
 
 	// How the auto-merging process should resolve conflicts between different
 	// profiles.
+	//
 	//   - RECENCY : Uses the data that was most recently updated.
+	//
 	//   - SOURCE : Uses the data from a specific source. For example, if a company has
 	//   been aquired or two departments have merged, data from the specified source is
 	//   used. If two duplicate profiles are from the same source, then RECENCY is used
@@ -487,11 +502,13 @@ type EventStreamSummary struct {
 }
 
 // Configuration information about the S3 bucket where Identity Resolution Jobs
-// writes result files. You need to give Customer Profiles service principal write
-// permission to your S3 bucket. Otherwise, you'll get an exception in the API
-// response. For an example policy, see Amazon Connect Customer Profiles
-// cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service)
-// .
+// writes result files.
+//
+// You need to give Customer Profiles service principal write permission to your
+// S3 bucket. Otherwise, you'll get an exception in the API response. For an
+// example policy, see [Amazon Connect Customer Profiles cross-service confused deputy prevention].
+//
+// [Amazon Connect Customer Profiles cross-service confused deputy prevention]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service
 type ExportingConfig struct {
 
 	// The S3 location where Identity Resolution Jobs write result files.
@@ -620,8 +637,9 @@ type FlowDefinition struct {
 }
 
 // A data type pair that consists of a KeyName and Values list that were used to
-// find a profile returned in response to a SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
-// request.
+// find a profile returned in response to a [SearchProfiles]request.
+//
+// [SearchProfiles]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html
 type FoundByKeyValue struct {
 
 	// A searchable identifier of a customer profile.
@@ -658,17 +676,24 @@ type IdentityResolutionJob struct {
 	Message *string
 
 	// The status of the Identity Resolution Job.
+	//
 	//   - PENDING : The Identity Resolution Job is scheduled but has not started yet.
 	//   If you turn off the Identity Resolution feature in your domain, jobs in the
 	//   PENDING state are deleted.
+	//
 	//   - PREPROCESSING : The Identity Resolution Job is loading your data.
+	//
 	//   - FIND_MATCHING : The Identity Resolution Job is using the machine learning
 	//   model to identify profiles that belong to the same matching group.
+	//
 	//   - MERGING : The Identity Resolution Job is merging duplicate profiles.
+	//
 	//   - COMPLETED : The Identity Resolution Job completed successfully.
+	//
 	//   - PARTIAL_SUCCESS : There's a system error and not all of the data is merged.
 	//   The Identity Resolution Job writes a message indicating the source of the
 	//   problem.
+	//
 	//   - FAILED : The Identity Resolution Job did not merge any data. It writes a
 	//   message indicating the source of the problem.
 	Status IdentityResolutionJobStatus
@@ -990,22 +1015,39 @@ type MatchingResponse struct {
 
 // Specifies how does the rule-based matching process should match profiles. You
 // can choose from the following attributes to build the matching Rule:
+//
 //   - AccountNumber
+//
 //   - Address.Address
+//
 //   - Address.City
+//
 //   - Address.Country
+//
 //   - Address.County
+//
 //   - Address.PostalCode
+//
 //   - Address.State
+//
 //   - Address.Province
+//
 //   - BirthDate
+//
 //   - BusinessName
+//
 //   - EmailAddress
+//
 //   - FirstName
+//
 //   - Gender
+//
 //   - LastName
+//
 //   - MiddleName
+//
 //   - PhoneNumber
+//
 //   - Any customized profile attributes that start with the Attributes
 type MatchingRule struct {
 
@@ -1138,22 +1180,26 @@ type Profile struct {
 	// The customer’s first name.
 	FirstName *string
 
-	// A list of items used to find a profile returned in a SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
-	// response. An item is a key-value(s) pair that matches an attribute in the
-	// profile. If the optional AdditionalSearchKeys parameter was included in the
-	// SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
-	// request, the FoundByItems list should be interpreted based on the
-	// LogicalOperator used in the request:
+	// A list of items used to find a profile returned in a [SearchProfiles] response. An item is a
+	// key-value(s) pair that matches an attribute in the profile.
+	//
+	// If the optional AdditionalSearchKeys parameter was included in the [SearchProfiles] request,
+	// the FoundByItems list should be interpreted based on the LogicalOperator used
+	// in the request:
+	//
 	//   - AND - The profile included in the response matched all of the search keys
 	//   specified in the request. The FoundByItems will include all of the
 	//   key-value(s) pairs that were specified in the request (as this is a requirement
 	//   of AND search logic).
+	//
 	//   - OR - The profile included in the response matched at least one of the search
 	//   keys specified in the request. The FoundByItems will include each of the
 	//   key-value(s) pairs that the profile was found by.
+	//
 	// The OR relationship is the default behavior if the LogicalOperator parameter is
-	// not included in the SearchProfiles (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html)
-	// request.
+	// not included in the [SearchProfiles]request.
+	//
+	// [SearchProfiles]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_SearchProfiles.html
 	FoundByItems []FoundByKeyValue
 
 	// The gender with which the customer identifies.
@@ -1236,11 +1282,13 @@ type RuleBasedMatchingRequest struct {
 	ConflictResolution *ConflictResolution
 
 	// Configuration information about the S3 bucket where Identity Resolution Jobs
-	// writes result files. You need to give Customer Profiles service principal write
-	// permission to your S3 bucket. Otherwise, you'll get an exception in the API
-	// response. For an example policy, see Amazon Connect Customer Profiles
-	// cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service)
-	// .
+	// writes result files.
+	//
+	// You need to give Customer Profiles service principal write permission to your
+	// S3 bucket. Otherwise, you'll get an exception in the API response. For an
+	// example policy, see [Amazon Connect Customer Profiles cross-service confused deputy prevention].
+	//
+	// [Amazon Connect Customer Profiles cross-service confused deputy prevention]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service
 	ExportingConfig *ExportingConfig
 
 	// Configures how the rule-based matching process should match profiles. You can
@@ -1250,7 +1298,9 @@ type RuleBasedMatchingRequest struct {
 	// Indicates the maximum allowed rule level.
 	MaxAllowedRuleLevelForMatching *int32
 
-	// MatchingRule (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html)
+	// [MatchingRule]
+	//
+	// [MatchingRule]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html
 	MaxAllowedRuleLevelForMerging *int32
 
 	noSmithyDocumentSerde
@@ -1271,11 +1321,13 @@ type RuleBasedMatchingResponse struct {
 	Enabled *bool
 
 	// Configuration information about the S3 bucket where Identity Resolution Jobs
-	// writes result files. You need to give Customer Profiles service principal write
-	// permission to your S3 bucket. Otherwise, you'll get an exception in the API
-	// response. For an example policy, see Amazon Connect Customer Profiles
-	// cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service)
-	// .
+	// writes result files.
+	//
+	// You need to give Customer Profiles service principal write permission to your
+	// S3 bucket. Otherwise, you'll get an exception in the API response. For an
+	// example policy, see [Amazon Connect Customer Profiles cross-service confused deputy prevention].
+	//
+	// [Amazon Connect Customer Profiles cross-service confused deputy prevention]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service
 	ExportingConfig *ExportingConfig
 
 	// Configures how the rule-based matching process should match profiles. You can
@@ -1285,19 +1337,26 @@ type RuleBasedMatchingResponse struct {
 	// Indicates the maximum allowed rule level.
 	MaxAllowedRuleLevelForMatching *int32
 
-	// MatchingRule (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html)
+	// [MatchingRule]
+	//
+	// [MatchingRule]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html
 	MaxAllowedRuleLevelForMerging *int32
 
 	// PENDING
+	//
 	//   - The first status after configuration a rule-based matching rule. If it is
 	//   an existing domain, the rule-based Identity Resolution waits one hour before
 	//   creating the matching rule. If it is a new domain, the system will skip the
 	//   PENDING stage.
+	//
 	// IN_PROGRESS
+	//
 	//   - The system is creating the rule-based matching rule. Under this status, the
 	//   system is evaluating the existing data and you can no longer change the
 	//   Rule-based matching configuration.
+	//
 	// ACTIVE
+	//
 	//   - The rule is ready to use. You can change the rule a day after the status is
 	//   in ACTIVE .
 	Status RuleBasedMatchingStatus

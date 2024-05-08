@@ -33,15 +33,15 @@ type CreateApplicationInput struct {
 	// instance roles if they are missing.
 	AttachMissingPermission *bool
 
-	// Indicates whether Application Insights automatically configures unmonitored
+	//  Indicates whether Application Insights automatically configures unmonitored
 	// resources in the resource group.
 	AutoConfigEnabled *bool
 
-	// Configures all of the resources in the resource group by applying the
+	//  Configures all of the resources in the resource group by applying the
 	// recommended configurations.
 	AutoCreate *bool
 
-	// Indicates whether Application Insights can listen to CloudWatch events for the
+	//  Indicates whether Application Insights can listen to CloudWatch events for the
 	// application resources, such as instance terminated , failed deployment , and
 	// others.
 	CWEMonitorEnabled *bool
@@ -51,10 +51,11 @@ type CreateApplicationInput struct {
 	// the account, set this parameter to ACCOUNT_BASED .
 	GroupingType types.GroupingType
 
-	// When set to true , creates opsItems for any problems detected on an application.
+	//  When set to true , creates opsItems for any problems detected on an
+	// application.
 	OpsCenterEnabled *bool
 
-	// The SNS topic provided to Application Insights that is associated to the
+	//  The SNS topic provided to Application Insights that is associated to the
 	// created opsItem. Allows you to receive notifications for updates to the opsItem.
 	OpsItemSNSTopicArn *string
 

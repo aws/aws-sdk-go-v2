@@ -56,7 +56,8 @@ type ListSpeakersOutput struct {
 	// unchanged. Each pagination token expires after 24 hours.
 	NextToken *string
 
-	// A list containing details about each speaker in the Amazon Web Services account.
+	// A list containing details about each speaker in the Amazon Web Services
+	// account.
 	SpeakerSummaries []types.SpeakerSummary
 
 	// Metadata pertaining to the operation's result.

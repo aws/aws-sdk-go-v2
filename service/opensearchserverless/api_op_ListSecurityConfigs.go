@@ -12,9 +12,9 @@ import (
 )
 
 // Returns information about configured OpenSearch Serverless security
-// configurations. For more information, see SAML authentication for Amazon
-// OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html)
-// .
+// configurations. For more information, see [SAML authentication for Amazon OpenSearch Serverless].
+//
+// [SAML authentication for Amazon OpenSearch Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-saml.html
 func (c *Client) ListSecurityConfigs(ctx context.Context, params *ListSecurityConfigsInput, optFns ...func(*Options)) (*ListSecurityConfigsOutput, error) {
 	if params == nil {
 		params = &ListSecurityConfigsInput{}

@@ -12,8 +12,12 @@ import (
 )
 
 // Creates a provisioning artifact (also known as a version) for the specified
-// product. You cannot create a provisioning artifact for a product that was shared
-// with you. The user or role that performs this operation must have the
+// product.
+//
+// You cannot create a provisioning artifact for a product that was shared with
+// you.
+//
+// The user or role that performs this operation must have the
 // cloudformation:GetTemplate IAM policy permission. This policy permission is
 // required when using the ImportFromPhysicalId template source in the information
 // data section.
@@ -52,7 +56,9 @@ type CreateProvisioningArtifactInput struct {
 	ProductId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -62,11 +68,20 @@ type CreateProvisioningArtifactInput struct {
 type CreateProvisioningArtifactOutput struct {
 
 	// Specify the template source with one of the following options, but not both.
-	// Keys accepted: [ LoadTemplateFromURL , ImportFromPhysicalId ]. Use the URL of
-	// the CloudFormation template in Amazon S3 or GitHub in JSON format.
-	// LoadTemplateFromURL Use the URL of the CloudFormation template in Amazon S3 or
-	// GitHub in JSON format. ImportFromPhysicalId Use the physical id of the resource
-	// that contains the template; currently supports CloudFormation stack ARN.
+	// Keys accepted: [ LoadTemplateFromURL , ImportFromPhysicalId ].
+	//
+	// Use the URL of the CloudFormation template in Amazon S3 or GitHub in JSON
+	// format.
+	//
+	//     LoadTemplateFromURL
+	//
+	// Use the URL of the CloudFormation template in Amazon S3 or GitHub in JSON
+	// format.
+	//
+	//     ImportFromPhysicalId
+	//
+	// Use the physical id of the resource that contains the template; currently
+	// supports CloudFormation stack ARN.
 	Info map[string]string
 
 	// Information about the provisioning artifact.

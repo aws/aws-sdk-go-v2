@@ -49,8 +49,9 @@ type CreateVerifiedDestinationNumberInput struct {
 
 type CreateVerifiedDestinationNumberOutput struct {
 
-	// The time when the verified phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the verified phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -61,7 +62,9 @@ type CreateVerifiedDestinationNumberOutput struct {
 	DestinationPhoneNumber *string
 
 	// The status of the verified destination phone number.
+	//
 	//   - PENDING : The phone number hasn't been verified yet.
+	//
 	//   - VERIFIED : The phone number is verified and can receive messages.
 	//
 	// This member is required.

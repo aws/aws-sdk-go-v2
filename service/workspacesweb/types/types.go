@@ -134,38 +134,69 @@ type IdentityProvider struct {
 
 	// The identity provider details. The following list describes the provider detail
 	// keys for each identity provider type.
+	//
 	//   - For Google and Login with Amazon:
+	//
 	//   - client_id
+	//
 	//   - client_secret
+	//
 	//   - authorize_scopes
+	//
 	//   - For Facebook:
+	//
 	//   - client_id
+	//
 	//   - client_secret
+	//
 	//   - authorize_scopes
+	//
 	//   - api_version
+	//
 	//   - For Sign in with Apple:
+	//
 	//   - client_id
+	//
 	//   - team_id
+	//
 	//   - key_id
+	//
 	//   - private_key
+	//
 	//   - authorize_scopes
+	//
 	//   - For OIDC providers:
+	//
 	//   - client_id
+	//
 	//   - client_secret
+	//
 	//   - attributes_request_method
+	//
 	//   - oidc_issuer
+	//
 	//   - authorize_scopes
+	//
 	//   - authorize_url if not available from discovery URL specified by oidc_issuer
 	//   key
+	//
 	//   - token_url if not available from discovery URL specified by oidc_issuer key
+	//
 	//   - attributes_url if not available from discovery URL specified by oidc_issuer
 	//   key
+	//
 	//   - jwks_uri if not available from discovery URL specified by oidc_issuer key
+	//
 	//   - For SAML providers:
+	//
 	//   - MetadataFile OR MetadataURL
+	//
 	//   - IDPSignout (boolean) optional
+	//
 	//   - IDPInit (boolean) optional
+	//
 	//   - RequestSigningAlgorithm (string) optional - Only accepts rsa-sha256
+	//
 	//   - EncryptedResponses (boolean) optional
 	IdentityProviderDetails map[string]string
 
@@ -220,7 +251,7 @@ type IpAccessSettings struct {
 	// The description of the IP access settings.
 	Description *string
 
-	// The display name of the IP access settings.
+	//  The display name of the IP access settings.
 	DisplayName *string
 
 	// The IP rules of the IP access settings.
@@ -317,14 +348,17 @@ type Portal struct {
 	AdditionalEncryptionContext map[string]string
 
 	// The type of authentication integration points used when signing into the web
-	// portal. Defaults to Standard . Standard web portals are authenticated directly
-	// through your identity provider. You need to call CreateIdentityProvider to
-	// integrate your identity provider with your web portal. User and group access to
-	// your web portal is controlled through your identity provider. IAM Identity
-	// Center web portals are authenticated through IAM Identity Center (successor to
-	// Single Sign-On). Identity sources (including external identity provider
-	// integration), plus user and group access to your web portal, can be configured
-	// in the IAM Identity Center.
+	// portal. Defaults to Standard .
+	//
+	// Standard web portals are authenticated directly through your identity provider.
+	// You need to call CreateIdentityProvider to integrate your identity provider
+	// with your web portal. User and group access to your web portal is controlled
+	// through your identity provider.
+	//
+	// IAM Identity Center web portals are authenticated through IAM Identity Center
+	// (successor to Single Sign-On). Identity sources (including external identity
+	// provider integration), plus user and group access to your web portal, can be
+	// configured in the IAM Identity Center.
 	AuthenticationType AuthenticationType
 
 	// The ARN of the browser settings that is associated with this web portal.
@@ -389,14 +423,17 @@ type PortalSummary struct {
 	PortalArn *string
 
 	// The type of authentication integration points used when signing into the web
-	// portal. Defaults to Standard . Standard web portals are authenticated directly
-	// through your identity provider. You need to call CreateIdentityProvider to
-	// integrate your identity provider with your web portal. User and group access to
-	// your web portal is controlled through your identity provider. IAM Identity
-	// Center web portals are authenticated through IAM Identity Center (successor to
-	// Single Sign-On). Identity sources (including external identity provider
-	// integration), plus user and group access to your web portal, can be configured
-	// in the IAM Identity Center.
+	// portal. Defaults to Standard .
+	//
+	// Standard web portals are authenticated directly through your identity provider.
+	// You need to call CreateIdentityProvider to integrate your identity provider
+	// with your web portal. User and group access to your web portal is controlled
+	// through your identity provider.
+	//
+	// IAM Identity Center web portals are authenticated through IAM Identity Center
+	// (successor to Single Sign-On). Identity sources (including external identity
+	// provider integration), plus user and group access to your web portal, can be
+	// configured in the IAM Identity Center.
 	AuthenticationType AuthenticationType
 
 	// The ARN of the browser settings that is associated with the web portal.

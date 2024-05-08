@@ -12,14 +12,19 @@ import (
 )
 
 // Updates the bundle of your Amazon Lightsail content delivery network (CDN)
-// distribution. A distribution bundle specifies the monthly network transfer quota
-// and monthly cost of your distribution. Update your distribution's bundle if your
-// distribution is going over its monthly network transfer quota and is incurring
-// an overage fee. You can update your distribution's bundle only one time within
-// your monthly Amazon Web Services billing cycle. To determine if you can update
-// your distribution's bundle, use the GetDistributions action. The
-// ableToUpdateBundle parameter in the result will indicate whether you can
-// currently update your distribution's bundle.
+// distribution.
+//
+// A distribution bundle specifies the monthly network transfer quota and monthly
+// cost of your distribution.
+//
+// Update your distribution's bundle if your distribution is going over its
+// monthly network transfer quota and is incurring an overage fee.
+//
+// You can update your distribution's bundle only one time within your monthly
+// Amazon Web Services billing cycle. To determine if you can update your
+// distribution's bundle, use the GetDistributions action. The ableToUpdateBundle
+// parameter in the result will indicate whether you can currently update your
+// distribution's bundle.
 func (c *Client) UpdateDistributionBundle(ctx context.Context, params *UpdateDistributionBundleInput, optFns ...func(*Options)) (*UpdateDistributionBundleOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionBundleInput{}
@@ -37,13 +42,16 @@ func (c *Client) UpdateDistributionBundle(ctx context.Context, params *UpdateDis
 
 type UpdateDistributionBundleInput struct {
 
-	// The bundle ID of the new bundle to apply to your distribution. Use the
-	// GetDistributionBundles action to get a list of distribution bundle IDs that you
-	// can specify.
+	// The bundle ID of the new bundle to apply to your distribution.
+	//
+	// Use the GetDistributionBundles action to get a list of distribution bundle IDs
+	// that you can specify.
 	BundleId *string
 
-	// The name of the distribution for which to update the bundle. Use the
-	// GetDistributions action to get a list of distribution names that you can specify.
+	// The name of the distribution for which to update the bundle.
+	//
+	// Use the GetDistributions action to get a list of distribution names that you
+	// can specify.
 	DistributionName *string
 
 	noSmithyDocumentSerde

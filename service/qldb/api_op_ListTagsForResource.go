@@ -29,7 +29,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) for which to list the tags. For example:
-	// arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
+	//
+	//     arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger
 	//
 	// This member is required.
 	ResourceArn *string

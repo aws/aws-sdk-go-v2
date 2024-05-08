@@ -12,8 +12,9 @@ import (
 )
 
 // Deletes the specified BGP peer on the specified virtual interface with the
-// specified customer address and ASN. You cannot delete the last BGP peer from a
-// virtual interface.
+// specified customer address and ASN.
+//
+// You cannot delete the last BGP peer from a virtual interface.
 func (c *Client) DeleteBGPPeer(ctx context.Context, params *DeleteBGPPeerInput, optFns ...func(*Options)) (*DeleteBGPPeerOutput, error) {
 	if params == nil {
 		params = &DeleteBGPPeerInput{}

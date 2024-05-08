@@ -12,9 +12,9 @@ import (
 )
 
 // Lists direct-query data sources for a specific domain. For more information,
-// see For more information, see Working with Amazon OpenSearch Service direct
-// queries with Amazon S3 (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html)
-// .
+// see For more information, see [Working with Amazon OpenSearch Service direct queries with Amazon S3].
+//
+// [Working with Amazon OpenSearch Service direct queries with Amazon S3]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/direct-query-s3.html
 func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInput, optFns ...func(*Options)) (*ListDataSourcesOutput, error) {
 	if params == nil {
 		params = &ListDataSourcesInput{}

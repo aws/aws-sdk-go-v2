@@ -13,7 +13,9 @@ import (
 
 // Creates a proposal for a change to the network that other members of the
 // network can vote on, for example, a proposal to add a new member to the network.
-// Any member can create a proposal. Applies only to Hyperledger Fabric.
+// Any member can create a proposal.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) CreateProposal(ctx context.Context, params *CreateProposalInput, optFns ...func(*Options)) (*CreateProposalOutput, error) {
 	if params == nil {
 		params = &CreateProposalInput{}
@@ -54,7 +56,7 @@ type CreateProposalInput struct {
 	// This member is required.
 	MemberId *string
 
-	// The unique identifier of the network for which the proposal is made.
+	//  The unique identifier of the network for which the proposal is made.
 	//
 	// This member is required.
 	NetworkId *string
@@ -63,12 +65,17 @@ type CreateProposalInput struct {
 	// "Proposal to add Example Corp. as member."
 	Description *string
 
-	// Tags to assign to the proposal. Each tag consists of a key and an optional
-	// value. You can specify multiple key-value pairs in a single request with an
-	// overall maximum of 50 tags allowed per resource. For more information about
-	// tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// Tags to assign to the proposal.
+	//
+	// Each tag consists of a key and an optional value. You can specify multiple
+	// key-value pairs in a single request with an overall maximum of 50 tags allowed
+	// per resource.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -11,14 +11,18 @@ import (
 )
 
 // Creates a traffic distribution group given an Amazon Connect instance that has
-// been replicated. The SignInConfig distribution is available only on a default
-// TrafficDistributionGroup (see the IsDefault parameter in the
-// TrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html)
-// data type). If you call UpdateTrafficDistribution with a modified SignInConfig
-// and a non-default TrafficDistributionGroup , an InvalidRequestException is
-// returned. For more information about creating traffic distribution groups, see
-// Set up traffic distribution groups (https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html)
-// in the Amazon Connect Administrator Guide.
+// been replicated.
+//
+// The SignInConfig distribution is available only on a default
+// TrafficDistributionGroup (see the IsDefault parameter in the [TrafficDistributionGroup] data type). If
+// you call UpdateTrafficDistribution with a modified SignInConfig and a
+// non-default TrafficDistributionGroup , an InvalidRequestException is returned.
+//
+// For more information about creating traffic distribution groups, see [Set up traffic distribution groups] in the
+// Amazon Connect Administrator Guide.
+//
+// [Set up traffic distribution groups]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html
+// [TrafficDistributionGroup]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
 func (c *Client) CreateTrafficDistributionGroup(ctx context.Context, params *CreateTrafficDistributionGroupInput, optFns ...func(*Options)) (*CreateTrafficDistributionGroupOutput, error) {
 	if params == nil {
 		params = &CreateTrafficDistributionGroupInput{}
@@ -49,9 +53,9 @@ type CreateTrafficDistributionGroupInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// A description for the traffic distribution group.

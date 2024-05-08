@@ -12,8 +12,9 @@ import (
 )
 
 // Retrieve the configuration properties of a flywheel iteration. For more
-// information about flywheels, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
-// in the Amazon Comprehend Developer Guide.
+// information about flywheels, see [Flywheel overview]in the Amazon Comprehend Developer Guide.
+//
+// [Flywheel overview]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
 func (c *Client) DescribeFlywheelIteration(ctx context.Context, params *DescribeFlywheelIterationInput, optFns ...func(*Options)) (*DescribeFlywheelIterationOutput, error) {
 	if params == nil {
 		params = &DescribeFlywheelIterationInput{}

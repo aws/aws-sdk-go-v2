@@ -10,12 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a registration code used to register a CA certificate with IoT. IoT will
-// create a registration code as part of this API call if the registration code
-// doesn't exist or has been deleted. If you already have a registration code, this
-// API call will return the same registration code. Requires permission to access
-// the GetRegistrationCode (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets a registration code used to register a CA certificate with IoT.
+//
+// IoT will create a registration code as part of this API call if the
+// registration code doesn't exist or has been deleted. If you already have a
+// registration code, this API call will return the same registration code.
+//
+// Requires permission to access the [GetRegistrationCode] action.
+//
+// [GetRegistrationCode]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetRegistrationCode(ctx context.Context, params *GetRegistrationCodeInput, optFns ...func(*Options)) (*GetRegistrationCodeOutput, error) {
 	if params == nil {
 		params = &GetRegistrationCodeInput{}

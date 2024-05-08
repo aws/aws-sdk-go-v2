@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an access entry. Deleting an access entry of a type other than Standard
-// can cause your cluster to function improperly. If you delete an access entry in
-// error, you can recreate it.
+// Deletes an access entry.
+//
+// Deleting an access entry of a type other than Standard can cause your cluster
+// to function improperly. If you delete an access entry in error, you can recreate
+// it.
 func (c *Client) DeleteAccessEntry(ctx context.Context, params *DeleteAccessEntryInput, optFns ...func(*Options)) (*DeleteAccessEntryOutput, error) {
 	if params == nil {
 		params = &DeleteAccessEntryInput{}

@@ -11,9 +11,8 @@ import (
 )
 
 // Aborts the upload of the specified document version that was previously
-// initiated by InitiateDocumentVersionUpload . The client should make this call
-// only when it no longer intends to upload the document version, or fails to do
-// so.
+// initiated by InitiateDocumentVersionUpload. The client should make this call only when it no longer intends
+// to upload the document version, or fails to do so.
 func (c *Client) AbortDocumentVersionUpload(ctx context.Context, params *AbortDocumentVersionUploadInput, optFns ...func(*Options)) (*AbortDocumentVersionUploadOutput, error) {
 	if params == nil {
 		params = &AbortDocumentVersionUploadInput{}

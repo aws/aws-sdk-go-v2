@@ -119,8 +119,7 @@ func (e *InvalidAddressException) ErrorCode() string {
 func (e *InvalidAddressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Job or cluster creation failed. One or more inputs were invalid. Confirm that
-// the CreateClusterRequest$SnowballType value supports your
-// CreateJobRequest$JobType , and try again.
+// the CreateClusterRequest$SnowballTypevalue supports your CreateJobRequest$JobType, and try again.
 type InvalidInputCombinationException struct {
 	Message *string
 
@@ -230,7 +229,7 @@ func (e *InvalidResourceException) ErrorCode() string {
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The provided Key Management Service key lacks the permissions to perform the
-// specified CreateJob or UpdateJob action.
+// specified CreateJobor UpdateJob action.
 type KMSRequestFailedException struct {
 	Message *string
 

@@ -15,11 +15,18 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Removes the resource
-// policy for an Object Lambda Access Point. The following actions are related to
-// DeleteAccessPointPolicyForObjectLambda :
-//   - GetAccessPointPolicyForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html)
-//   - PutAccessPointPolicyForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html)
+// This operation is not supported by directory buckets.
+//
+// Removes the resource policy for an Object Lambda Access Point.
+//
+// The following actions are related to DeleteAccessPointPolicyForObjectLambda :
+//
+// [GetAccessPointPolicyForObjectLambda]
+//
+// [PutAccessPointPolicyForObjectLambda]
+//
+// [PutAccessPointPolicyForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicyForObjectLambda.html
+// [GetAccessPointPolicyForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html
 func (c *Client) DeleteAccessPointPolicyForObjectLambda(ctx context.Context, params *DeleteAccessPointPolicyForObjectLambdaInput, optFns ...func(*Options)) (*DeleteAccessPointPolicyForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &DeleteAccessPointPolicyForObjectLambdaInput{}

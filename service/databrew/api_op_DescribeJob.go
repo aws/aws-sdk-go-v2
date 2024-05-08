@@ -67,7 +67,9 @@ type DescribeJobOutput struct {
 	EncryptionKeyArn *string
 
 	// The encryption mode for the job, which can be one of the following:
+	//
 	//   - SSE-KMS - Server-side encryption with keys managed by KMS.
+	//
 	//   - SSE-S3 - Server-side encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
@@ -120,8 +122,10 @@ type DescribeJobOutput struct {
 	Timeout int32
 
 	// The job type, which must be one of the following:
+	//
 	//   - PROFILE - The job analyzes the dataset to determine its size, data types,
 	//   data distribution, and more.
+	//
 	//   - RECIPE - The job applies one or more transformations to a dataset.
 	Type types.JobType
 

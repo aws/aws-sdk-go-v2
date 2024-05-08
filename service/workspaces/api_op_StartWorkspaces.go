@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a
-// running mode of AutoStop and a state of STOPPED .
+// Starts the specified WorkSpaces.
+//
+// You cannot start a WorkSpace unless it has a running mode of AutoStop and a
+// state of STOPPED .
 func (c *Client) StartWorkspaces(ctx context.Context, params *StartWorkspacesInput, optFns ...func(*Options)) (*StartWorkspacesOutput, error) {
 	if params == nil {
 		params = &StartWorkspacesInput{}

@@ -30,7 +30,7 @@ func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, 
 // Request structure used to request a project be deleted.
 type DeleteProjectInput struct {
 
-	// Unique project identifier.
+	//  Unique project identifier.
 	//
 	// This member is required.
 	ProjectId *string
@@ -41,11 +41,11 @@ type DeleteProjectInput struct {
 // Result structure used in response to request to delete a project.
 type DeleteProjectOutput struct {
 
-	// Resources which were deleted.
+	//  Resources which were deleted.
 	DeletedResources []types.Resource
 
-	// Resources which were not deleted, due to a risk of losing potentially important
-	// data or files.
+	//  Resources which were not deleted, due to a risk of losing potentially
+	// important data or files.
 	OrphanedResources []types.Resource
 
 	// Metadata pertaining to the operation's result.

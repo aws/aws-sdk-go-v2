@@ -11,9 +11,12 @@ import (
 )
 
 // Deletes a flywheel. When you delete the flywheel, Amazon Comprehend does not
-// delete the data lake or the model associated with the flywheel. For more
-// information about flywheels, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
-// in the Amazon Comprehend Developer Guide.
+// delete the data lake or the model associated with the flywheel.
+//
+// For more information about flywheels, see [Flywheel overview] in the Amazon Comprehend Developer
+// Guide.
+//
+// [Flywheel overview]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
 func (c *Client) DeleteFlywheel(ctx context.Context, params *DeleteFlywheelInput, optFns ...func(*Options)) (*DeleteFlywheelOutput, error) {
 	if params == nil {
 		params = &DeleteFlywheelInput{}

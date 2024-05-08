@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables your application to delete an existing flow. Before deleting the flow,
+//	Enables your application to delete an existing flow. Before deleting the flow,
+//
 // Amazon AppFlow validates the request by checking the flow configuration and
 // status. You can delete flows one at a time.
 func (c *Client) DeleteFlow(ctx context.Context, params *DeleteFlowInput, optFns ...func(*Options)) (*DeleteFlowOutput, error) {
@@ -30,13 +31,13 @@ func (c *Client) DeleteFlow(ctx context.Context, params *DeleteFlowInput, optFns
 
 type DeleteFlowInput struct {
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
 	FlowName *string
 
-	// Indicates whether Amazon AppFlow should delete the flow, even if it is
+	//  Indicates whether Amazon AppFlow should delete the flow, even if it is
 	// currently in use.
 	ForceDelete bool
 

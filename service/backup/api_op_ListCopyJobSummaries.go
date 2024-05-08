@@ -14,6 +14,7 @@ import (
 // This request obtains a list of copy jobs created or running within the the most
 // recent 30 days. You can include parameters AccountID, State, ResourceType,
 // MessageCategory, AggregationPeriod, MaxResults, or NextToken to filter results.
+//
 // This request returns a summary that contains Region, Account, State,
 // RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
 func (c *Client) ListCopyJobSummaries(ctx context.Context, params *ListCopyJobSummariesInput, optFns ...func(*Options)) (*ListCopyJobSummariesOutput, error) {
@@ -33,30 +34,43 @@ func (c *Client) ListCopyJobSummaries(ctx context.Context, params *ListCopyJobSu
 
 type ListCopyJobSummariesInput struct {
 
-	// Returns the job count for the specified account. If the request is sent from a
-	// member account or an account not part of Amazon Web Services Organizations, jobs
-	// within requestor's account will be returned. Root, admin, and delegated
-	// administrator accounts can use the value ANY to return job counts from every
-	// account in the organization. AGGREGATE_ALL aggregates job counts from all
-	// accounts within the authenticated organization, then returns the sum.
+	// Returns the job count for the specified account.
+	//
+	// If the request is sent from a member account or an account not part of Amazon
+	// Web Services Organizations, jobs within requestor's account will be returned.
+	//
+	// Root, admin, and delegated administrator accounts can use the value ANY to
+	// return job counts from every account in the organization.
+	//
+	// AGGREGATE_ALL aggregates job counts from all accounts within the authenticated
+	// organization, then returns the sum.
 	AccountId *string
 
 	// This is the period that sets the boundaries for returned results.
+	//
 	//   - ONE_DAY for daily job count for the prior 14 days.
+	//
 	//   - SEVEN_DAYS for the aggregated job count for the prior 7 days.
+	//
 	//   - FOURTEEN_DAYS for aggregated job count for prior 14 days.
 	AggregationPeriod types.AggregationPeriod
 
-	// This parameter sets the maximum number of items to be returned. The value is an
-	// integer. Range of accepted values is from 1 to 500.
+	// This parameter sets the maximum number of items to be returned.
+	//
+	// The value is an integer. Range of accepted values is from 1 to 500.
 	MaxResults *int32
 
 	// This parameter returns the job count for the specified message category.
+	//
 	// Example accepted strings include AccessDenied , Success , and InvalidParameters
-	// . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of accepted MessageCategory strings. The the value ANY returns count
-	// of all message categories. AGGREGATE_ALL aggregates job counts for all message
-	// categories and returns the sum.
+	// . See [Monitoring]for a list of accepted MessageCategory strings.
+	//
+	// The the value ANY returns count of all message categories.
+	//
+	// AGGREGATE_ALL aggregates job counts for all message categories and returns the
+	// sum.
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	MessageCategory *string
 
 	// The next item following a partial list of returned resources. For example, if a
@@ -66,17 +80,22 @@ type ListCopyJobSummariesInput struct {
 	NextToken *string
 
 	// Returns the job count for the specified resource type. Use request
-	// GetSupportedResourceTypes to obtain strings for supported resource types. The
-	// the value ANY returns count of all resource types. AGGREGATE_ALL aggregates job
-	// counts for all resource types and returns the sum. The type of Amazon Web
-	// Services resource to be backed up; for example, an Amazon Elastic Block Store
-	// (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
-	// database.
+	// GetSupportedResourceTypes to obtain strings for supported resource types.
+	//
+	// The the value ANY returns count of all resource types.
+	//
+	// AGGREGATE_ALL aggregates job counts for all resource types and returns the sum.
+	//
+	// The type of Amazon Web Services resource to be backed up; for example, an
+	// Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database
+	// Service (Amazon RDS) database.
 	ResourceType *string
 
-	// This parameter returns the job count for jobs with the specified state. The the
-	// value ANY returns count of all states. AGGREGATE_ALL aggregates job counts for
-	// all states and returns the sum.
+	// This parameter returns the job count for jobs with the specified state.
+	//
+	// The the value ANY returns count of all states.
+	//
+	// AGGREGATE_ALL aggregates job counts for all states and returns the sum.
 	State types.CopyJobStatus
 
 	noSmithyDocumentSerde
@@ -85,8 +104,11 @@ type ListCopyJobSummariesInput struct {
 type ListCopyJobSummariesOutput struct {
 
 	// This is the period that sets the boundaries for returned results.
+	//
 	//   - ONE_DAY for daily job count for the prior 14 days.
+	//
 	//   - SEVEN_DAYS for the aggregated job count for the prior 7 days.
+	//
 	//   - FOURTEEN_DAYS for aggregated job count for prior 14 days.
 	AggregationPeriod *string
 
@@ -193,8 +215,9 @@ var _ ListCopyJobSummariesAPIClient = (*Client)(nil)
 // ListCopyJobSummariesPaginatorOptions is the paginator options for
 // ListCopyJobSummaries
 type ListCopyJobSummariesPaginatorOptions struct {
-	// This parameter sets the maximum number of items to be returned. The value is an
-	// integer. Range of accepted values is from 1 to 500.
+	// This parameter sets the maximum number of items to be returned.
+	//
+	// The value is an integer. Range of accepted values is from 1 to 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

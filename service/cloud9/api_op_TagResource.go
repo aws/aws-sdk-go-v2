@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds tags to an Cloud9 development environment. Tags that you add to an Cloud9
-// environment by using this method will NOT be automatically propagated to
-// underlying resources.
+// Adds tags to an Cloud9 development environment.
+//
+// Tags that you add to an Cloud9 environment by using this method will NOT be
+// automatically propagated to underlying resources.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

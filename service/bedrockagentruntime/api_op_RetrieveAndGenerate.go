@@ -36,8 +36,9 @@ type RetrieveAndGenerateInput struct {
 	Input *types.RetrieveAndGenerateInput
 
 	// Contains configurations for the knowledge base query and retrieval process. For
-	// more information, see Query configurations (https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html)
-	// .
+	// more information, see [Query configurations].
+	//
+	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
 	RetrieveAndGenerateConfiguration *types.RetrieveAndGenerateConfiguration
 
 	// Contains details about the session with the knowledge base.

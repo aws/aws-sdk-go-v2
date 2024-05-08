@@ -12,8 +12,10 @@ import (
 
 // Removes one or more tags from an Amazon Lookout for Vision model. For more
 // information, see Tagging a model in the Amazon Lookout for Vision Developer
-// Guide. This operation requires permissions to perform the
-// lookoutvision:UntagResource operation.
+// Guide.
+//
+// This operation requires permissions to perform the lookoutvision:UntagResource
+// operation.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

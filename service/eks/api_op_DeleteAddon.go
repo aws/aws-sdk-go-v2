@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon EKS add-on. When you remove an add-on, it's deleted from the
-// cluster. You can always manually start an add-on on the cluster using the
-// Kubernetes API.
+// Deletes an Amazon EKS add-on.
+//
+// When you remove an add-on, it's deleted from the cluster. You can always
+// manually start an add-on on the cluster using the Kubernetes API.
 func (c *Client) DeleteAddon(ctx context.Context, params *DeleteAddonInput, optFns ...func(*Options)) (*DeleteAddonOutput, error) {
 	if params == nil {
 		params = &DeleteAddonInput{}
@@ -31,9 +32,10 @@ func (c *Client) DeleteAddon(ctx context.Context, params *DeleteAddonInput, optF
 
 type DeleteAddonInput struct {
 
-	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html)
-	// .
+	// The name of the add-on. The name must match one of the names returned by [ListAddons]
+	// ListAddons .
+	//
+	// [ListAddons]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
 	//
 	// This member is required.
 	AddonName *string
@@ -53,8 +55,9 @@ type DeleteAddonInput struct {
 
 type DeleteAddonOutput struct {
 
-	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
-	// in the Amazon EKS User Guide.
+	// An Amazon EKS add-on. For more information, see [Amazon EKS add-ons] in the Amazon EKS User Guide.
+	//
+	// [Amazon EKS add-ons]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
 	Addon *types.Addon
 
 	// Metadata pertaining to the operation's result.

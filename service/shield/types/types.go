@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// The automatic application layer DDoS mitigation settings for a Protection . This
+// The automatic application layer DDoS mitigation settings for a Protection. This
 // configuration determines whether Shield Advanced automatically manages rules in
 // the web ACL in order to respond to application layer events that Shield Advanced
 // determines to be DDoS attacks.
@@ -41,11 +41,13 @@ type AttackDetail struct {
 	// The unique identifier (ID) of the attack.
 	AttackId *string
 
-	// The array of objects that provide details of the Shield event. For
-	// infrastructure layer events (L3 and L4 events), you can view metrics for top
-	// contributors in Amazon CloudWatch metrics. For more information, see Shield
-	// metrics and alarms (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
-	// in the WAF Developer Guide.
+	// The array of objects that provide details of the Shield event.
+	//
+	// For infrastructure layer events (L3 and L4 events), you can view metrics for
+	// top contributors in Amazon CloudWatch metrics. For more information, see [Shield metrics and alarms]in the
+	// WAF Developer Guide.
+	//
+	// [Shield metrics and alarms]: https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms
 	AttackProperties []AttackProperty
 
 	// The time the attack ended, in Unix time in seconds.
@@ -67,14 +69,17 @@ type AttackDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Details of a Shield event. This is provided as part of an AttackDetail .
+// Details of a Shield event. This is provided as part of an AttackDetail.
 type AttackProperty struct {
 
 	// The type of Shield event that was observed. NETWORK indicates layer 3 and layer
-	// 4 events and APPLICATION indicates layer 7 events. For infrastructure layer
-	// events (L3 and L4 events), you can view metrics for top contributors in Amazon
-	// CloudWatch metrics. For more information, see Shield metrics and alarms (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
-	// in the WAF Developer Guide.
+	// 4 events and APPLICATION indicates layer 7 events.
+	//
+	// For infrastructure layer events (L3 and L4 events), you can view metrics for
+	// top contributors in Amazon CloudWatch metrics. For more information, see [Shield metrics and alarms]in the
+	// WAF Developer Guide.
+	//
+	// [Shield metrics and alarms]: https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms
 	AttackLayer AttackLayer
 
 	// Defines the Shield event property information that is provided. The
@@ -96,9 +101,8 @@ type AttackProperty struct {
 	noSmithyDocumentSerde
 }
 
-// A single attack statistics data record. This is returned by
-// DescribeAttackStatistics along with a time range indicating the time period that
-// the attack statistics apply to.
+// A single attack statistics data record. This is returned by DescribeAttackStatistics along with a time
+// range indicating the time period that the attack statistics apply to.
 type AttackStatisticsDataItem struct {
 
 	// The number of attacks detected during the time period. This is always present,
@@ -139,23 +143,41 @@ type AttackSummary struct {
 type AttackVectorDescription struct {
 
 	// The attack type. Valid values:
+	//
 	//   - UDP_TRAFFIC
+	//
 	//   - UDP_FRAGMENT
+	//
 	//   - GENERIC_UDP_REFLECTION
+	//
 	//   - DNS_REFLECTION
+	//
 	//   - NTP_REFLECTION
+	//
 	//   - CHARGEN_REFLECTION
+	//
 	//   - SSDP_REFLECTION
+	//
 	//   - PORT_MAPPER
+	//
 	//   - RIP_REFLECTION
+	//
 	//   - SNMP_REFLECTION
+	//
 	//   - MSSQL_REFLECTION
+	//
 	//   - NET_BIOS_REFLECTION
+	//
 	//   - SYN_FLOOD
+	//
 	//   - ACK_FLOOD
+	//
 	//   - REQUEST_FLOOD
+	//
 	//   - HTTP_REFLECTION
+	//
 	//   - UDS_REFLECTION
+	//
 	//   - MEMCACHED_REFLECTION
 	//
 	// This member is required.
@@ -164,9 +186,9 @@ type AttackVectorDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the volume of attacks during the time period, included in an
-// AttackStatisticsDataItem . If the accompanying AttackCount in the statistics
-// object is zero, this setting might be empty.
+// Information about the volume of attacks during the time period, included in an AttackStatisticsDataItem
+// . If the accompanying AttackCount in the statistics object is zero, this
+// setting might be empty.
 type AttackVolume struct {
 
 	// A statistics object that uses bits per second as the unit. This is included for
@@ -185,7 +207,7 @@ type AttackVolume struct {
 	noSmithyDocumentSerde
 }
 
-// Statistics objects for the various data types in AttackVolume .
+// Statistics objects for the various data types in AttackVolume.
 type AttackVolumeStatistics struct {
 
 	// The maximum attack volume observed for the given unit.
@@ -197,8 +219,11 @@ type AttackVolumeStatistics struct {
 }
 
 // Specifies that Shield Advanced should configure its WAF rules with the WAF Block
-// action. This is only used in the context of the ResponseAction setting. JSON
-// specification: "Block": {}
+// action.
+//
+// This is only used in the context of the ResponseAction setting.
+//
+// JSON specification: "Block": {}
 type BlockAction struct {
 	noSmithyDocumentSerde
 }
@@ -212,16 +237,18 @@ type Contributor struct {
 	// SOURCE_COUNTRY , the Name could be United States .
 	Name *string
 
-	// The contribution of this contributor expressed in Protection units. For example
-	// 10,000 .
+	// The contribution of this contributor expressed in Protection units. For example 10,000 .
 	Value int64
 
 	noSmithyDocumentSerde
 }
 
 // Specifies that Shield Advanced should configure its WAF rules with the WAF Count
-// action. This is only used in the context of the ResponseAction setting. JSON
-// specification: "Count": {}
+// action.
+//
+// This is only used in the context of the ResponseAction setting.
+//
+// JSON specification: "Count": {}
 type CountAction struct {
 	noSmithyDocumentSerde
 }
@@ -348,12 +375,15 @@ type ProtectionGroup struct {
 
 	// Defines how Shield combines resource data for the group in order to detect,
 	// mitigate, and report events.
+	//
 	//   - Sum - Use the total traffic across the group. This is a good choice for
 	//   most cases. Examples include Elastic IP addresses for EC2 instances that scale
 	//   manually or automatically.
+	//
 	//   - Mean - Use the average of the traffic across the group. This is a good
 	//   choice for resources that share traffic uniformly. Examples include accelerators
 	//   and load balancers.
+	//
 	//   - Max - Use the highest traffic from each resource. This is useful for
 	//   resources that don't share traffic and for resources that share that traffic in
 	//   a non-uniform way. Examples include Amazon CloudFront distributions and origin
@@ -455,11 +485,15 @@ type ProtectionLimits struct {
 type ResponseAction struct {
 
 	// Specifies that Shield Advanced should configure its WAF rules with the WAF Block
-	// action. You must specify exactly one action, either Block or Count .
+	// action.
+	//
+	// You must specify exactly one action, either Block or Count .
 	Block *BlockAction
 
 	// Specifies that Shield Advanced should configure its WAF rules with the WAF Count
-	// action. You must specify exactly one action, either Block or Count .
+	// action.
+	//
+	// You must specify exactly one action, either Block or Count .
 	Count *CountAction
 
 	noSmithyDocumentSerde
@@ -492,10 +526,12 @@ type Subscription struct {
 	SubscriptionLimits *SubscriptionLimits
 
 	// If ENABLED , the subscription will be automatically renewed at the end of the
-	// existing subscription period. When you initally create a subscription, AutoRenew
-	// is set to ENABLED . You can change this by submitting an UpdateSubscription
-	// request. If the UpdateSubscription request does not included a value for
-	// AutoRenew , the existing value for AutoRenew remains unchanged.
+	// existing subscription period.
+	//
+	// When you initally create a subscription, AutoRenew is set to ENABLED . You can
+	// change this by submitting an UpdateSubscription request. If the
+	// UpdateSubscription request does not included a value for AutoRenew , the
+	// existing value for AutoRenew remains unchanged.
 	AutoRenew AutoRenew
 
 	// The date and time your subscription will end.
@@ -506,10 +542,13 @@ type Subscription struct {
 
 	// If ENABLED , the Shield Response Team (SRT) will use email and phone to notify
 	// contacts about escalations to the SRT and to initiate proactive customer
-	// support. If PENDING , you have requested proactive engagement and the request is
-	// pending. The status changes to ENABLED when your request is fully processed. If
-	// DISABLED , the SRT will not proactively notify contacts about escalations or to
-	// initiate proactive customer support.
+	// support.
+	//
+	// If PENDING , you have requested proactive engagement and the request is pending.
+	// The status changes to ENABLED when your request is fully processed.
+	//
+	// If DISABLED , the SRT will not proactively notify contacts about escalations or
+	// to initiate proactive customer support.
 	ProactiveEngagementStatus ProactiveEngagementStatus
 
 	// The start time of the subscription, in Unix time in seconds.

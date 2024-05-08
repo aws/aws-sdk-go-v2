@@ -39,7 +39,7 @@ type DeletePricingPlanInput struct {
 
 type DeletePricingPlanOutput struct {
 
-	// The Amazon Resource Name (ARN) of the deleted pricing plan.
+	//  The Amazon Resource Name (ARN) of the deleted pricing plan.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

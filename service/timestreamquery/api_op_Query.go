@@ -14,20 +14,30 @@ import (
 
 // Query is a synchronous operation that enables you to run a query against your
 // Amazon Timestream data. Query will time out after 60 seconds. You must update
-// the default timeout in the SDK to support a timeout of 60 seconds. See the code
-// sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html)
-// for details. Your query request will fail in the following cases:
+// the default timeout in the SDK to support a timeout of 60 seconds. See the [code sample]for
+// details.
+//
+// Your query request will fail in the following cases:
+//
 //   - If you submit a Query request with the same client token outside of the
 //     5-minute idempotency window.
+//
 //   - If you submit a Query request with the same client token, but change other
 //     parameters, within the 5-minute idempotency window.
+//
 //   - If the size of the row (including the query metadata) exceeds 1 MB, then
-//     the query will fail with the following error message: Query aborted as max
-//     page response size has been exceeded by the output result row
-//   - If the IAM principal of the query initiator and the result reader are not
-//     the same and/or the query initiator and the result reader do not have the same
-//     query string in the query requests, the query will fail with an Invalid
-//     pagination token error.
+//     the query will fail with the following error message:
+//
+// Query aborted as max page response size has been exceeded by the output result
+//
+//	row
+//
+//	- If the IAM principal of the query initiator and the result reader are not
+//	the same and/or the query initiator and the result reader do not have the same
+//	query string in the query requests, the query will fail with an Invalid
+//	pagination token error.
+//
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
 		params = &QueryInput{}
@@ -45,58 +55,74 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 
 type QueryInput struct {
 
-	// The query to be run by Timestream.
+	//  The query to be run by Timestream.
 	//
 	// This member is required.
 	QueryString *string
 
-	// Unique, case-sensitive string of up to 64 ASCII characters specified when a
+	//  Unique, case-sensitive string of up to 64 ASCII characters specified when a
 	// Query request is made. Providing a ClientToken makes the call to Query
 	// idempotent. This means that running the same query repeatedly will produce the
 	// same result. In other words, making multiple identical Query requests has the
 	// same effect as making a single request. When using ClientToken in a query, note
 	// the following:
+	//
 	//   - If the Query API is instantiated without a ClientToken , the Query SDK
 	//   generates a ClientToken on your behalf.
+	//
 	//   - If the Query invocation only contains the ClientToken but does not include a
 	//   NextToken , that invocation of Query is assumed to be a new query run.
+	//
 	//   - If the invocation contains NextToken , that particular invocation is assumed
 	//   to be a subsequent invocation of a prior call to the Query API, and a result set
 	//   is returned.
+	//
 	//   - After 4 hours, any request with the same ClientToken is treated as a new
 	//   request.
 	ClientToken *string
 
-	// The total number of rows to be returned in the Query output. The initial run of
-	// Query with a MaxRows value specified will return the result set of the query in
-	// two cases:
+	//  The total number of rows to be returned in the Query output. The initial run
+	// of Query with a MaxRows value specified will return the result set of the query
+	// in two cases:
+	//
 	//   - The size of the result is less than 1MB .
+	//
 	//   - The number of rows in the result set is less than the value of maxRows .
+	//
 	// Otherwise, the initial invocation of Query only returns a NextToken , which can
 	// then be used in subsequent calls to fetch the result set. To resume pagination,
-	// provide the NextToken value in the subsequent command. If the row size is large
-	// (e.g. a row has many columns), Timestream may return fewer rows to keep the
-	// response size from exceeding the 1 MB limit. If MaxRows is not provided,
-	// Timestream will send the necessary number of rows to meet the 1 MB limit.
+	// provide the NextToken value in the subsequent command.
+	//
+	// If the row size is large (e.g. a row has many columns), Timestream may return
+	// fewer rows to keep the response size from exceeding the 1 MB limit. If MaxRows
+	// is not provided, Timestream will send the necessary number of rows to meet the 1
+	// MB limit.
 	MaxRows *int32
 
-	// A pagination token used to return a set of results. When the Query API is
+	//  A pagination token used to return a set of results. When the Query API is
 	// invoked using NextToken , that particular invocation is assumed to be a
 	// subsequent invocation of a prior call to Query , and a result set is returned.
 	// However, if the Query invocation only contains the ClientToken , that invocation
-	// of Query is assumed to be a new query run. Note the following when using
-	// NextToken in a query:
+	// of Query is assumed to be a new query run.
+	//
+	// Note the following when using NextToken in a query:
+	//
 	//   - A pagination token can be used for up to five Query invocations, OR for a
 	//   duration of up to 1 hour – whichever comes first.
+	//
 	//   - Using the same NextToken will return the same set of records. To keep
 	//   paginating through the result set, you must to use the most recent nextToken .
+	//
 	//   - Suppose a Query invocation returns two NextToken values, TokenA and TokenB .
 	//   If TokenB is used in a subsequent Query invocation, then TokenA is invalidated
 	//   and cannot be reused.
+	//
 	//   - To request a previous result set from a query after pagination has begun,
 	//   you must re-invoke the Query API.
+	//
 	//   - The latest NextToken should be used to paginate until null is returned, at
 	//   which point a new NextToken should be used.
+	//
 	//   - If the IAM principal of the query initiator and the result reader are not
 	//   the same and/or the query initiator and the result reader do not have the same
 	//   query string in the query requests, the query will fail with an Invalid
@@ -108,22 +134,22 @@ type QueryInput struct {
 
 type QueryOutput struct {
 
-	// The column data types of the returned result set.
+	//  The column data types of the returned result set.
 	//
 	// This member is required.
 	ColumnInfo []types.ColumnInfo
 
-	// A unique ID for the given query.
+	//  A unique ID for the given query.
 	//
 	// This member is required.
 	QueryId *string
 
-	// The result set rows returned by the query.
+	//  The result set rows returned by the query.
 	//
 	// This member is required.
 	Rows []types.Row
 
-	// A pagination token that can be used again on a Query call to get the next set
+	//  A pagination token that can be used again on a Query call to get the next set
 	// of results.
 	NextToken *string
 
@@ -282,17 +308,22 @@ var _ QueryAPIClient = (*Client)(nil)
 
 // QueryPaginatorOptions is the paginator options for Query
 type QueryPaginatorOptions struct {
-	// The total number of rows to be returned in the Query output. The initial run of
-	// Query with a MaxRows value specified will return the result set of the query in
-	// two cases:
+	//  The total number of rows to be returned in the Query output. The initial run
+	// of Query with a MaxRows value specified will return the result set of the query
+	// in two cases:
+	//
 	//   - The size of the result is less than 1MB .
+	//
 	//   - The number of rows in the result set is less than the value of maxRows .
+	//
 	// Otherwise, the initial invocation of Query only returns a NextToken , which can
 	// then be used in subsequent calls to fetch the result set. To resume pagination,
-	// provide the NextToken value in the subsequent command. If the row size is large
-	// (e.g. a row has many columns), Timestream may return fewer rows to keep the
-	// response size from exceeding the 1 MB limit. If MaxRows is not provided,
-	// Timestream will send the necessary number of rows to meet the 1 MB limit.
+	// provide the NextToken value in the subsequent command.
+	//
+	// If the row size is large (e.g. a row has many columns), Timestream may return
+	// fewer rows to keep the response size from exceeding the 1 MB limit. If MaxRows
+	// is not provided, Timestream will send the necessary number of rows to meet the 1
+	// MB limit.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

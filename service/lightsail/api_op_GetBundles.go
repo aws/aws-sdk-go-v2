@@ -12,10 +12,13 @@ import (
 )
 
 // Returns the bundles that you can apply to an Amazon Lightsail instance when you
-// create it. A bundle describes the specifications of an instance, such as the
-// monthly cost, amount of memory, the number of vCPUs, amount of storage space,
-// and monthly network data transfer quota. Bundles are referred to as instance
-// plans in the Lightsail console.
+// create it.
+//
+// A bundle describes the specifications of an instance, such as the monthly cost,
+// amount of memory, the number of vCPUs, amount of storage space, and monthly
+// network data transfer quota.
+//
+// Bundles are referred to as instance plans in the Lightsail console.
 func (c *Client) GetBundles(ctx context.Context, params *GetBundlesInput, optFns ...func(*Options)) (*GetBundlesOutput, error) {
 	if params == nil {
 		params = &GetBundlesInput{}
@@ -33,16 +36,18 @@ func (c *Client) GetBundles(ctx context.Context, params *GetBundlesInput, optFns
 
 type GetBundlesInput struct {
 
-	// Returns a list of bundles that are specific to Lightsail for Research. You must
-	// use this parameter to view Lightsail for Research bundles.
+	// Returns a list of bundles that are specific to Lightsail for Research.
+	//
+	// You must use this parameter to view Lightsail for Research bundles.
 	AppCategory types.AppCategory
 
 	// A Boolean value that indicates whether to include inactive (unavailable)
 	// bundles in the response of your request.
 	IncludeInactive *bool
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetBundles request. If your results are
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetBundles request. If your results are
 	// paginated, the response will return a next page token that you can specify as
 	// the page token in a subsequent request.
 	PageToken *string
@@ -56,10 +61,12 @@ type GetBundlesOutput struct {
 	// bundles.
 	Bundles []types.Bundle
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetBundles request and specify the next page
-	// token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetBundles request and specify
+	// the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

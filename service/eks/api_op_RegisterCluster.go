@@ -11,17 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Connects a Kubernetes cluster to the Amazon EKS control plane. Any Kubernetes
-// cluster can be connected to the Amazon EKS control plane to view current
-// information about the cluster and its nodes. Cluster connection requires two
-// steps. First, send a RegisterClusterRequest to add it to the Amazon EKS control
-// plane. Second, a Manifest (https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml)
-// containing the activationID and activationCode must be applied to the
-// Kubernetes cluster through it's native provider to provide visibility. After the
-// manifest is updated and applied, the connected cluster is visible to the Amazon
-// EKS control plane. If the manifest isn't applied within three days, the
-// connected cluster will no longer be visible and must be deregistered using
+// Connects a Kubernetes cluster to the Amazon EKS control plane.
+//
+// Any Kubernetes cluster can be connected to the Amazon EKS control plane to view
+// current information about the cluster and its nodes.
+//
+// Cluster connection requires two steps. First, send a RegisterClusterRequest to add it to the Amazon
+// EKS control plane.
+//
+// Second, a [Manifest] containing the activationID and activationCode must be applied to
+// the Kubernetes cluster through it's native provider to provide visibility.
+//
+// After the manifest is updated and applied, the connected cluster is visible to
+// the Amazon EKS control plane. If the manifest isn't applied within three days,
+// the connected cluster will no longer be visible and must be deregistered using
 // DeregisterCluster .
+//
+// [Manifest]: https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml
 func (c *Client) RegisterCluster(ctx context.Context, params *RegisterClusterInput, optFns ...func(*Options)) (*RegisterClusterOutput, error) {
 	if params == nil {
 		params = &RegisterClusterInput{}

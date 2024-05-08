@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a Device Defender ML Detect mitigation action. Requires permission to
-// access the CancelDetectMitigationActionsTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Cancels a Device Defender ML Detect mitigation action.
+//
+// Requires permission to access the [CancelDetectMitigationActionsTask] action.
+//
+// [CancelDetectMitigationActionsTask]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CancelDetectMitigationActionsTask(ctx context.Context, params *CancelDetectMitigationActionsTaskInput, optFns ...func(*Options)) (*CancelDetectMitigationActionsTaskOutput, error) {
 	if params == nil {
 		params = &CancelDetectMitigationActionsTaskInput{}
@@ -30,7 +32,7 @@ func (c *Client) CancelDetectMitigationActionsTask(ctx context.Context, params *
 
 type CancelDetectMitigationActionsTaskInput struct {
 
-	// The unique identifier of the task.
+	//  The unique identifier of the task.
 	//
 	// This member is required.
 	TaskId *string

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the indexing configuration. Requires permission to access the
-// GetIndexingConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets the indexing configuration.
+//
+// Requires permission to access the [GetIndexingConfiguration] action.
+//
+// [GetIndexingConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetIndexingConfiguration(ctx context.Context, params *GetIndexingConfigurationInput, optFns ...func(*Options)) (*GetIndexingConfigurationOutput, error) {
 	if params == nil {
 		params = &GetIndexingConfigurationInput{}

@@ -12,8 +12,10 @@ import (
 )
 
 // Deletes the specified network. You must delete network sites before you delete
-// the network. For more information, see DeleteNetworkSite (https://docs.aws.amazon.com/private-networks/latest/APIReference/API_DeleteNetworkSite.html)
-// in the API Reference for Amazon Web Services Private 5G.
+// the network. For more information, see [DeleteNetworkSite]in the API Reference for Amazon Web
+// Services Private 5G.
+//
+// [DeleteNetworkSite]: https://docs.aws.amazon.com/private-networks/latest/APIReference/API_DeleteNetworkSite.html
 func (c *Client) DeleteNetwork(ctx context.Context, params *DeleteNetworkInput, optFns ...func(*Options)) (*DeleteNetworkOutput, error) {
 	if params == nil {
 		params = &DeleteNetworkInput{}
@@ -37,8 +39,9 @@ type DeleteNetworkInput struct {
 	NetworkArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	noSmithyDocumentSerde

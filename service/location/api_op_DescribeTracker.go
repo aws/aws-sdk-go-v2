@@ -40,8 +40,10 @@ type DescribeTrackerInput struct {
 
 type DescribeTrackerOutput struct {
 
-	// The timestamp for when the tracker resource was created in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the tracker resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -53,6 +55,7 @@ type DescribeTrackerOutput struct {
 
 	// The Amazon Resource Name (ARN) for the tracker resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
+	//
 	//   - Format example: arn:aws:geo:region:account-id:tracker/ExampleTracker
 	//
 	// This member is required.
@@ -63,8 +66,10 @@ type DescribeTrackerOutput struct {
 	// This member is required.
 	TrackerName *string
 
-	// The timestamp for when the tracker resource was last updated in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the tracker resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -73,21 +78,26 @@ type DescribeTrackerOutput struct {
 	// true these events will be sent to EventBridge.
 	EventBridgeEnabled *bool
 
-	// Enables GeospatialQueries for a tracker that uses a Amazon Web Services KMS
-	// customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
-	// . This parameter is only used if you are using a KMS customer managed key. If
-	// you wish to encrypt your data using your own KMS customer managed key, then the
-	// Bounding Polygon Queries feature will be disabled by default. This is because by
-	// using this feature, a representation of your device positions will not be
-	// encrypted using the your KMS managed key. The exact device position, however; is
-	// still encrypted using your managed key. You can choose to opt-in to the Bounding
-	// Polygon Quseries feature. This is done by setting the
-	// KmsKeyEnableGeospatialQueries parameter to true when creating or updating a
-	// Tracker.
+	// Enables GeospatialQueries for a tracker that uses a [Amazon Web Services KMS customer managed key].
+	//
+	// This parameter is only used if you are using a KMS customer managed key.
+	//
+	// If you wish to encrypt your data using your own KMS customer managed key, then
+	// the Bounding Polygon Queries feature will be disabled by default. This is
+	// because by using this feature, a representation of your device positions will
+	// not be encrypted using the your KMS managed key. The exact device position,
+	// however; is still encrypted using your managed key.
+	//
+	// You can choose to opt-in to the Bounding Polygon Quseries feature. This is done
+	// by setting the KmsKeyEnableGeospatialQueries parameter to true when creating or
+	// updating a Tracker.
+	//
+	// [Amazon Web Services KMS customer managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
 	KmsKeyEnableGeospatialQueries *bool
 
-	// A key identifier for an Amazon Web Services KMS customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
-	// assigned to the Amazon Location resource.
+	// A key identifier for an [Amazon Web Services KMS customer managed key] assigned to the Amazon Location resource.
+	//
+	// [Amazon Web Services KMS customer managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
 	KmsKeyId *string
 
 	// The position filtering method of the tracker resource.

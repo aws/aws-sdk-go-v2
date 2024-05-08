@@ -30,10 +30,15 @@ func (c *Client) CreateGeofenceCollection(ctx context.Context, params *CreateGeo
 
 type CreateGeofenceCollectionInput struct {
 
-	// A custom name for the geofence collection. Requirements:
+	// A custom name for the geofence collection.
+	//
+	// Requirements:
+	//
 	//   - Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods
 	//   (.), and underscores (_).
+	//
 	//   - Must be a unique geofence collection name.
+	//
 	//   - No spaces allowed. For example, ExampleGeofenceCollection .
 	//
 	// This member is required.
@@ -42,8 +47,9 @@ type CreateGeofenceCollectionInput struct {
 	// An optional description for the geofence collection.
 	Description *string
 
-	// A key identifier for an Amazon Web Services KMS customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
-	// . Enter a key ID, key ARN, alias name, or alias ARN.
+	// A key identifier for an [Amazon Web Services KMS customer managed key]. Enter a key ID, key ARN, alias name, or alias ARN.
+	//
+	// [Amazon Web Services KMS customer managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
 	KmsKeyId *string
 
 	// No longer used. If included, the only allowed value is RequestBasedUsage .
@@ -59,13 +65,22 @@ type CreateGeofenceCollectionInput struct {
 
 	// Applies one or more tags to the geofence collection. A tag is a key-value pair
 	// helps manage, identify, search, and filter your resources by labelling them.
-	// Format: "key" : "value" Restrictions:
+	//
+	// Format: "key" : "value"
+	//
+	// Restrictions:
+	//
 	//   - Maximum 50 tags per resource
+	//
 	//   - Each resource tag must be unique with a maximum of one value.
+	//
 	//   - Maximum key length: 128 Unicode characters in UTF-8
+	//
 	//   - Maximum value length: 256 Unicode characters in UTF-8
+	//
 	//   - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	//   characters: + - = . _ : / @.
+	//
 	//   - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
@@ -76,6 +91,7 @@ type CreateGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
 	// you need to specify a resource across all Amazon Web Services.
+	//
 	//   - Format example:
 	//   arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
@@ -87,8 +103,10 @@ type CreateGeofenceCollectionOutput struct {
 	// This member is required.
 	CollectionName *string
 
-	// The timestamp for when the geofence collection was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence collection was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time

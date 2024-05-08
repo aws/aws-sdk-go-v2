@@ -11,9 +11,11 @@ import (
 )
 
 // Sets the default authorizer. This will be used if a websocket connection is
-// made without specifying an authorizer. Requires permission to access the
-// SetDefaultAuthorizer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// made without specifying an authorizer.
+//
+// Requires permission to access the [SetDefaultAuthorizer] action.
+//
+// [SetDefaultAuthorizer]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) SetDefaultAuthorizer(ctx context.Context, params *SetDefaultAuthorizerInput, optFns ...func(*Options)) (*SetDefaultAuthorizerOutput, error) {
 	if params == nil {
 		params = &SetDefaultAuthorizerInput{}

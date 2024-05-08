@@ -12,24 +12,28 @@ import (
 )
 
 // This public API operation provides a code that Amazon Cognito sent to your user
-// when they signed up in your user pool via the SignUp (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SignUp.html)
-// API operation. After your user enters their code, they confirm ownership of the
-// email address or phone number that they provided, and their user account becomes
-// active. Depending on your user pool configuration, your users will receive their
-// confirmation code in an email or SMS message. Local users who signed up in your
-// user pool are the only type of user who can confirm sign-up with a code. Users
-// who federate through an external identity provider (IdP) have already been
-// confirmed by their IdP. Administrator-created users, users created with the
-// AdminCreateUser (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminCreateUser.html)
-// API operation, confirm their accounts when they respond to their invitation
-// email message and choose a password. They do not receive a confirmation code.
-// Instead, they receive a temporary password. Amazon Cognito doesn't evaluate
-// Identity and Access Management (IAM) policies in requests for this API
-// operation. For this operation, you can't use IAM credentials to authorize
-// requests, and you can't grant IAM permissions in policies. For more information
-// about authorization models in Amazon Cognito, see Using the Amazon Cognito user
-// pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// .
+// when they signed up in your user pool via the [SignUp]API operation. After your user
+// enters their code, they confirm ownership of the email address or phone number
+// that they provided, and their user account becomes active. Depending on your
+// user pool configuration, your users will receive their confirmation code in an
+// email or SMS message.
+//
+// Local users who signed up in your user pool are the only type of user who can
+// confirm sign-up with a code. Users who federate through an external identity
+// provider (IdP) have already been confirmed by their IdP. Administrator-created
+// users, users created with the [AdminCreateUser]API operation, confirm their accounts when they
+// respond to their invitation email message and choose a password. They do not
+// receive a confirmation code. Instead, they receive a temporary password.
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [SignUp]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SignUp.html
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [AdminCreateUser]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminCreateUser.html
 func (c *Client) ConfirmSignUp(ctx context.Context, params *ConfirmSignUpInput, optFns ...func(*Options)) (*ConfirmSignUpOutput, error) {
 	if params == nil {
 		params = &ConfirmSignUpInput{}
@@ -72,25 +76,33 @@ type ConfirmSignUpInput struct {
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers. You create custom workflows by assigning
-	// Lambda functions to user pool triggers. When you use the ConfirmSignUp API
-	// action, Amazon Cognito invokes the function that is assigned to the post
-	// confirmation trigger. When Amazon Cognito invokes this function, it passes a
-	// JSON payload, which the function receives as input. This payload contains a
-	// clientMetadata attribute, which provides the data that you assigned to the
-	// ClientMetadata parameter in your ConfirmSignUp request. In your function code in
-	// Lambda, you can process the clientMetadata value to enhance your workflow for
-	// your specific needs. For more information, see Customizing user pool Workflows
-	// with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
-	// parameter, remember that Amazon Cognito won't do the following:
+	// workflows that this action triggers.
+	//
+	// You create custom workflows by assigning Lambda functions to user pool
+	// triggers. When you use the ConfirmSignUp API action, Amazon Cognito invokes the
+	// function that is assigned to the post confirmation trigger. When Amazon Cognito
+	// invokes this function, it passes a JSON payload, which the function receives as
+	// input. This payload contains a clientMetadata attribute, which provides the
+	// data that you assigned to the ClientMetadata parameter in your ConfirmSignUp
+	// request. In your function code in Lambda, you can process the clientMetadata
+	// value to enhance your workflow for your specific needs.
+	//
+	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	//
+	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
+	// do the following:
+	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
 	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
 	//   serves no purpose.
+	//
 	//   - Validate the ClientMetadata value.
+	//
 	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
 	//   sensitive information.
+	//
+	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	// Boolean to be specified to force user confirmation irrespective of existing

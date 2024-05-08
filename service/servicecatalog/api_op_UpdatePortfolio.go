@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified portfolio. You cannot update a product that was shared
-// with you.
+// Updates the specified portfolio.
+//
+// You cannot update a product that was shared with you.
 func (c *Client) UpdatePortfolio(ctx context.Context, params *UpdatePortfolioInput, optFns ...func(*Options)) (*UpdatePortfolioOutput, error) {
 	if params == nil {
 		params = &UpdatePortfolioInput{}
@@ -36,7 +37,9 @@ type UpdatePortfolioInput struct {
 	Id *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

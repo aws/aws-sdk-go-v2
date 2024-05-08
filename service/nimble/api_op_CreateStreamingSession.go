@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a streaming session in a studio. After invoking this operation, you
-// must poll GetStreamingSession until the streaming session is in the READY state.
+// Creates a streaming session in a studio.
+//
+// After invoking this operation, you must poll GetStreamingSession until the
+// streaming session is in the READY state.
 func (c *Client) CreateStreamingSession(ctx context.Context, params *CreateStreamingSessionInput, optFns ...func(*Options)) (*CreateStreamingSessionOutput, error) {
 	if params == nil {
 		params = &CreateStreamingSessionInput{}

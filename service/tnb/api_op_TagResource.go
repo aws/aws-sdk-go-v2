@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tags an AWS TNB resource. A tag is a label that you assign to an Amazon Web
-// Services resource. Each tag consists of a key and an optional value. You can use
-// tags to search and filter your resources or track your Amazon Web Services
-// costs.
+// Tags an AWS TNB resource.
+//
+// A tag is a label that you assign to an Amazon Web Services resource. Each tag
+// consists of a key and an optional value. You can use tags to search and filter
+// your resources or track your Amazon Web Services costs.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

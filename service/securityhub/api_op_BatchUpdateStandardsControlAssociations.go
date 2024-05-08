@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For a batch of security controls and standards, this operation updates the
+//	For a batch of security controls and standards, this operation updates the
+//
 // enablement status of a control in a standard.
 func (c *Client) BatchUpdateStandardsControlAssociations(ctx context.Context, params *BatchUpdateStandardsControlAssociationsInput, optFns ...func(*Options)) (*BatchUpdateStandardsControlAssociationsOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) BatchUpdateStandardsControlAssociations(ctx context.Context, pa
 
 type BatchUpdateStandardsControlAssociationsInput struct {
 
-	// Updates the enablement status of a security control in a specified standard.
+	//  Updates the enablement status of a security control in a specified standard.
 	//
 	// This member is required.
 	StandardsControlAssociationUpdates []types.StandardsControlAssociationUpdate
@@ -40,7 +41,7 @@ type BatchUpdateStandardsControlAssociationsInput struct {
 
 type BatchUpdateStandardsControlAssociationsOutput struct {
 
-	// A security control (identified with SecurityControlId , SecurityControlArn , or
+	//  A security control (identified with SecurityControlId , SecurityControlArn , or
 	// a mix of both parameters) whose enablement status in a specified standard
 	// couldn't be updated.
 	UnprocessedAssociationUpdates []types.UnprocessedStandardsControlAssociationUpdate

@@ -14,6 +14,7 @@ const (
 
 // Values returns all known values for ChangeProgressStageStatuses. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeProgressStageStatuses) Values() []ChangeProgressStageStatuses {
 	return []ChangeProgressStageStatuses{
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for ChangeProgressStatuses. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeProgressStatuses) Values() []ChangeProgressStatuses {
 	return []ChangeProgressStatuses{
 		"PENDING",
@@ -63,8 +65,9 @@ const (
 )
 
 // Values returns all known values for PipelineStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineStatus) Values() []PipelineStatus {
 	return []PipelineStatus{
 		"CREATING",
@@ -88,8 +91,9 @@ const (
 )
 
 // Values returns all known values for VpcEndpointServiceName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcEndpointServiceName) Values() []VpcEndpointServiceName {
 	return []VpcEndpointServiceName{
 		"OPENSEARCH_SERVERLESS",

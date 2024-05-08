@@ -39,7 +39,7 @@ type StartWorkflowRunInput struct {
 	SpaceName *string
 
 	// The system-generated unique ID of the workflow. To retrieve a list of workflow
-	// IDs, use ListWorkflows .
+	// IDs, use ListWorkflows.
 	//
 	// This member is required.
 	WorkflowId *string

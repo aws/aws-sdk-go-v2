@@ -13,8 +13,9 @@ import (
 
 // Deletes the specified network site. Return the hardware after you delete the
 // network site. You are responsible for minimum charges. For more information, see
-// Hardware returns (https://docs.aws.amazon.com/private-networks/latest/userguide/hardware-maintenance.html)
-// in the Amazon Web Services Private 5G User Guide.
+// [Hardware returns]in the Amazon Web Services Private 5G User Guide.
+//
+// [Hardware returns]: https://docs.aws.amazon.com/private-networks/latest/userguide/hardware-maintenance.html
 func (c *Client) DeleteNetworkSite(ctx context.Context, params *DeleteNetworkSiteInput, optFns ...func(*Options)) (*DeleteNetworkSiteOutput, error) {
 	if params == nil {
 		params = &DeleteNetworkSiteInput{}
@@ -38,8 +39,9 @@ type DeleteNetworkSiteInput struct {
 	NetworkSiteArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	noSmithyDocumentSerde

@@ -11,8 +11,9 @@ import (
 )
 
 // Removes the specified tags that are attached to a resource. For more
-// information, see Removing tags from Amazon Personalize resources (https://docs.aws.amazon.com/personalize/latest/dg/tags-remove.html)
-// .
+// information, see [Removing tags from Amazon Personalize resources].
+//
+// [Removing tags from Amazon Personalize resources]: https://docs.aws.amazon.com/personalize/latest/dg/tags-remove.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

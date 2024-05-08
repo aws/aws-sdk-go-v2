@@ -30,46 +30,52 @@ func (c *Client) CreateLabel(ctx context.Context, params *CreateLabelInput, optF
 
 type CreateLabelInput struct {
 
-	// A unique identifier for the request to create a label. If you do not set the
+	//  A unique identifier for the request to create a label. If you do not set the
 	// client request token, Lookout for Equipment generates one.
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The end time of the labeled event.
+	//  The end time of the labeled event.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The name of a group of labels. Data in this field will be retained for service
-	// usage. Follow best practices for the security of your data.
+	//  The name of a group of labels.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	//
 	// This member is required.
 	LabelGroupName *string
 
-	// Indicates whether a labeled event represents an anomaly.
+	//  Indicates whether a labeled event represents an anomaly.
 	//
 	// This member is required.
 	Rating types.LabelRating
 
-	// The start time of the labeled event.
+	//  The start time of the labeled event.
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// Indicates that a label pertains to a particular piece of equipment. Data in
-	// this field will be retained for service usage. Follow best practices for the
-	// security of your data.
+	//  Indicates that a label pertains to a particular piece of equipment.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	Equipment *string
 
-	// Provides additional information about the label. The fault code must be defined
-	// in the FaultCodes attribute of the label group. Data in this field will be
-	// retained for service usage. Follow best practices for the security of your data.
+	//  Provides additional information about the label. The fault code must be
+	// defined in the FaultCodes attribute of the label group.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	FaultCode *string
 
-	// Metadata providing additional information about the label. Data in this field
-	// will be retained for service usage. Follow best practices for the security of
-	// your data.
+	//  Metadata providing additional information about the label.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	Notes *string
 
 	noSmithyDocumentSerde
@@ -77,7 +83,7 @@ type CreateLabelInput struct {
 
 type CreateLabelOutput struct {
 
-	// The ID of the label that you have created.
+	//  The ID of the label that you have created.
 	LabelId *string
 
 	// Metadata pertaining to the operation's result.

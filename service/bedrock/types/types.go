@@ -68,8 +68,9 @@ type CustomModelSummary struct {
 	ModelName *string
 
 	// Specifies whether to carry out continued pre-training of a model or whether to
-	// fine-tune it. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-	// .
+	// fine-tune it. For more information, see [Custom models].
+	//
+	// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 	CustomizationType CustomizationType
 
 	noSmithyDocumentSerde
@@ -78,11 +79,14 @@ type CustomModelSummary struct {
 // Contains the ARN of the Amazon Bedrock models specified in your model
 // evaluation job. Each Amazon Bedrock model supports different inferenceParams .
 // To learn more about supported inference parameters for Amazon Bedrock models,
-// see Inference parameters for foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets-custom.html)
-// . The inferenceParams are specified using JSON. To successfully insert JSON as
+// see [Inference parameters for foundation models].
+//
+// The inferenceParams are specified using JSON. To successfully insert JSON as
 // string make sure that all quotations are properly escaped. For example,
 // "temperature":"0.25" key value pair would need to be formatted as
 // \"temperature\":\"0.25\" to successfully accepted in the request.
+//
+// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets-custom.html
 type EvaluationBedrockModel struct {
 
 	// Each Amazon Bedrock support different inference parameters that change how the
@@ -379,16 +383,20 @@ type FoundationModelSummary struct {
 // Contains filter strengths for harmful content. Guardrails support the following
 // content filters to detect and filter harmful user inputs and FM-generated
 // outputs.
+//
 //   - Hate – Describes language or a statement that discriminates, criticizes,
 //     insults, denounces, or dehumanizes a person or group on the basis of an identity
 //     (such as race, ethnicity, gender, religion, sexual orientation, ability, and
 //     national origin).
+//
 //   - Insults – Describes language or a statement that includes demeaning,
 //     humiliating, mocking, insulting, or belittling language. This type of language
 //     is also labeled as bullying.
+//
 //   - Sexual – Describes language or a statement that indicates sexual interest,
 //     activity, or arousal using direct or indirect references to body parts, physical
 //     traits, or sex.
+//
 //   - Violence – Describes language or a statement that includes glorification of
 //     or threats to inflict physical pain, hurt, or injury toward a person, group or
 //     thing.
@@ -401,10 +409,16 @@ type FoundationModelSummary struct {
 // content is high. A single statement can be classified across multiple categories
 // with varying confidence levels. For example, a single statement can be
 // classified as Hate with HIGH confidence, Insults with LOW confidence, Sexual
-// with NONE confidence, and Violence with MEDIUM confidence. For more information,
-// see Guardrails content filters (https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html)
-// . This data type is used in the following API operations:
-//   - GetGuardrail response body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax)
+// with NONE confidence, and Violence with MEDIUM confidence.
+//
+// For more information, see [Guardrails content filters].
+//
+// This data type is used in the following API operations:
+//
+// [GetGuardrail response body]
+//
+// [GetGuardrail response body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax
+// [Guardrails content filters]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html
 type GuardrailContentFilter struct {
 
 	// The strength of the content filter to apply to prompts. As you increase the
@@ -432,16 +446,20 @@ type GuardrailContentFilter struct {
 // Contains filter strengths for harmful content. Guardrails support the following
 // content filters to detect and filter harmful user inputs and FM-generated
 // outputs.
+//
 //   - Hate – Describes language or a statement that discriminates, criticizes,
 //     insults, denounces, or dehumanizes a person or group on the basis of an identity
 //     (such as race, ethnicity, gender, religion, sexual orientation, ability, and
 //     national origin).
+//
 //   - Insults – Describes language or a statement that includes demeaning,
 //     humiliating, mocking, insulting, or belittling language. This type of language
 //     is also labeled as bullying.
+//
 //   - Sexual – Describes language or a statement that indicates sexual interest,
 //     activity, or arousal using direct or indirect references to body parts, physical
 //     traits, or sex.
+//
 //   - Violence – Describes language or a statement that includes glorification of
 //     or threats to inflict physical pain, hurt, or injury toward a person, group or
 //     thing.
@@ -454,11 +472,19 @@ type GuardrailContentFilter struct {
 // content is high. A single statement can be classified across multiple categories
 // with varying confidence levels. For example, a single statement can be
 // classified as Hate with HIGH confidence, Insults with LOW confidence, Sexual
-// with NONE confidence, and Violence with MEDIUM confidence. For more information,
-// see Guardrails content filters (https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html)
-// . This data type is used in the following API operations:
-//   - CreateGuardrail request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax)
-//   - UpdateGuardrail request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax)
+// with NONE confidence, and Violence with MEDIUM confidence.
+//
+// For more information, see [Guardrails content filters].
+//
+// This data type is used in the following API operations:
+//
+// [CreateGuardrail request body]
+//
+// [UpdateGuardrail request body]
+//
+// [UpdateGuardrail request body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax
+// [Guardrails content filters]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters.html
+// [CreateGuardrail request body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax
 type GuardrailContentFilterConfig struct {
 
 	// The strength of the content filter to apply to prompts. As you increase the
@@ -483,9 +509,13 @@ type GuardrailContentFilterConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about how to handle harmful content. This data type is used in
-// the following API operations:
-//   - GetGuardrail response body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax)
+// Contains details about how to handle harmful content.
+//
+// This data type is used in the following API operations:
+//
+// [GetGuardrail response body]
+//
+// [GetGuardrail response body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax
 type GuardrailContentPolicy struct {
 
 	// Contains the type of the content filter and how strongly it should apply to
@@ -495,10 +525,16 @@ type GuardrailContentPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about how to handle harmful content. This data type is used in
-// the following API operations:
-//   - CreateGuardrail request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax)
-//   - UpdateGuardrail request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax)
+// Contains details about how to handle harmful content.
+//
+// This data type is used in the following API operations:
+//
+// [CreateGuardrail request body]
+//
+// [UpdateGuardrail request body]
+//
+// [UpdateGuardrail request body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax
+// [CreateGuardrail request body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax
 type GuardrailContentPolicyConfig struct {
 
 	// Contains the type of the content filter and how strongly it should apply to
@@ -640,9 +676,13 @@ type GuardrailSensitiveInformationPolicyConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about a guardrail. This data type is used in the following API
-// operations:
-//   - ListGuardrails response body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListGuardrails.html#API_ListGuardrails_ResponseSyntax)
+// Contains details about a guardrail.
+//
+// This data type is used in the following API operations:
+//
+// [ListGuardrails response body]
+//
+// [ListGuardrails response body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListGuardrails.html#API_ListGuardrails_ResponseSyntax
 type GuardrailSummary struct {
 
 	// The ARN of the guardrail.
@@ -686,9 +726,13 @@ type GuardrailSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Details about topics for the guardrail to identify and deny. This data type is
-// used in the following API operations:
-//   - GetGuardrail response body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax)
+// Details about topics for the guardrail to identify and deny.
+//
+// This data type is used in the following API operations:
+//
+// [GetGuardrail response body]
+//
+// [GetGuardrail response body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax
 type GuardrailTopic struct {
 
 	// A definition of the topic to deny.
@@ -711,10 +755,16 @@ type GuardrailTopic struct {
 	noSmithyDocumentSerde
 }
 
-// Details about topics for the guardrail to identify and deny. This data type is
-// used in the following API operations:
-//   - CreateGuardrail request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax)
-//   - UpdateGuardrail request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax)
+// Details about topics for the guardrail to identify and deny.
+//
+// This data type is used in the following API operations:
+//
+// [CreateGuardrail request body]
+//
+// [UpdateGuardrail request body]
+//
+// [UpdateGuardrail request body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax
+// [CreateGuardrail request body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax
 type GuardrailTopicConfig struct {
 
 	// A definition of the topic to deny.
@@ -739,9 +789,13 @@ type GuardrailTopicConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about topics that the guardrail should identify and deny. This
-// data type is used in the following API operations:
-//   - GetGuardrail response body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax)
+// Contains details about topics that the guardrail should identify and deny.
+//
+// This data type is used in the following API operations:
+//
+// [GetGuardrail response body]
+//
+// [GetGuardrail response body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetGuardrail.html#API_GetGuardrail_ResponseSyntax
 type GuardrailTopicPolicy struct {
 
 	// A list of policies related to topics that the guardrail should deny.
@@ -752,10 +806,16 @@ type GuardrailTopicPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about topics that the guardrail should identify and deny. This
-// data type is used in the following API operations:
-//   - CreateGuardrail request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax)
-//   - UpdateGuardrail request body (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax)
+// Contains details about topics that the guardrail should identify and deny.
+//
+// This data type is used in the following API operations:
+//
+// [CreateGuardrail request body]
+//
+// [UpdateGuardrail request body]
+//
+// [UpdateGuardrail request body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_UpdateGuardrail.html#API_UpdateGuardrail_RequestSyntax
+// [CreateGuardrail request body]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateGuardrail.html#API_CreateGuardrail_RequestSyntax
 type GuardrailTopicPolicyConfig struct {
 
 	// A list of policies related to topics that the guardrail should deny.
@@ -815,15 +875,18 @@ type GuardrailWordPolicyConfig struct {
 // Specifies the custom metrics, how tasks will be rated, the flow definition ARN,
 // and your custom prompt datasets. Model evaluation jobs use human workers only
 // support the use of custom prompt datasets. To learn more about custom prompt
-// datasets and the required format, see Custom prompt datasets (https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets-custom.html)
-// . When you create custom metrics in HumanEvaluationCustomMetric you must
-// specify the metric's name . The list of names specified in the
+// datasets and the required format, see [Custom prompt datasets].
+//
+// When you create custom metrics in HumanEvaluationCustomMetric you must specify
+// the metric's name . The list of names specified in the
 // HumanEvaluationCustomMetric array, must match the metricNames array of strings
 // specified in EvaluationDatasetMetricConfig . For example, if in the
 // HumanEvaluationCustomMetric array your specified the names "accuracy",
 // "toxicity", "readability" as custom metrics then the metricNames array would
 // need to look like the following ["accuracy", "toxicity", "readability"] in
 // EvaluationDatasetMetricConfig .
+//
+// [Custom prompt datasets]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets-custom.html
 type HumanEvaluationConfig struct {
 
 	// Use to specify the metrics, task, and prompt dataset to be used in your model
@@ -938,8 +1001,9 @@ type ModelCustomizationJobSummary struct {
 	CustomModelName *string
 
 	// Specifies whether to carry out continued pre-training of a model or whether to
-	// fine-tune it. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-	// .
+	// fine-tune it. For more information, see [Custom models].
+	//
+	// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 	CustomizationType CustomizationType
 
 	// Time that the customization job ended.
@@ -962,9 +1026,13 @@ type OutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of information about a Provisioned Throughput. This data type is used
-// in the following API operations:
-//   - ListProvisionedThroughputs response (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListProvisionedModelThroughputs.html#API_ListProvisionedModelThroughputs_ResponseSyntax)
+// A summary of information about a Provisioned Throughput.
+//
+// This data type is used in the following API operations:
+//
+// [ListProvisionedThroughputs response]
+//
+// [ListProvisionedThroughputs response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListProvisionedModelThroughputs.html#API_ListProvisionedModelThroughputs_ResponseSyntax
 type ProvisionedModelSummary struct {
 
 	// The time that the Provisioned Throughput was created.

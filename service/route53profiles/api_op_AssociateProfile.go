@@ -11,11 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a Route 53 Profiles profile with a VPC. A VPC can have only one
+//	Associates a Route 53 Profiles profile with a VPC. A VPC can have only one
+//
 // Profile associated with it, but a Profile can be associated with 1000 of VPCs
-// (and you can request a higher quota). For more information, see
-// https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities)
-// .
+// (and you can request a higher quota). For more information, see [https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities].
+//
+// [https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities
 func (c *Client) AssociateProfile(ctx context.Context, params *AssociateProfileInput, optFns ...func(*Options)) (*AssociateProfileOutput, error) {
 	if params == nil {
 		params = &AssociateProfileInput{}
@@ -33,22 +34,22 @@ func (c *Client) AssociateProfile(ctx context.Context, params *AssociateProfileI
 
 type AssociateProfileInput struct {
 
-	// A name for the association.
+	//  A name for the association.
 	//
 	// This member is required.
 	Name *string
 
-	// ID of the Profile.
+	//  ID of the Profile.
 	//
 	// This member is required.
 	ProfileId *string
 
-	// The ID of the VPC.
+	//  The ID of the VPC.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// A list of the tag keys and values that you want to identify the Profile
+	//  A list of the tag keys and values that you want to identify the Profile
 	// association.
 	Tags []types.Tag
 
@@ -57,7 +58,7 @@ type AssociateProfileInput struct {
 
 type AssociateProfileOutput struct {
 
-	// The association that you just created. The association has an ID that you can
+	//  The association that you just created. The association has an ID that you can
 	// use to identify it in other requests, like update and delete.
 	ProfileAssociation *types.ProfileAssociation
 

@@ -51,12 +51,18 @@ type DescribeWorldExportJobOutput struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The failure code of the world export job if it failed: InternalServiceError
-	// Internal service error. LimitExceeded The requested resource exceeds the maximum
-	// number allowed, or the number of concurrent stream requests exceeds the maximum
-	// number allowed. ResourceNotFound The specified resource could not be found.
-	// RequestThrottled The request was throttled. InvalidInput An input parameter in
-	// the request is not valid.
+	// The failure code of the world export job if it failed:
+	//
+	// InternalServiceError Internal service error.
+	//
+	// LimitExceeded The requested resource exceeds the maximum number allowed, or the
+	// number of concurrent stream requests exceeds the maximum number allowed.
+	//
+	// ResourceNotFound The specified resource could not be found.
+	//
+	// RequestThrottled The request was throttled.
+	//
+	// InvalidInput An input parameter in the request is not valid.
 	FailureCode types.WorldExportJobErrorCode
 
 	// The reason why the world export job failed.
@@ -69,11 +75,20 @@ type DescribeWorldExportJobOutput struct {
 	// The output location.
 	OutputLocation *types.OutputLocation
 
-	// The status of the world export job. Pending The world export job request is
-	// pending. Running The world export job is running. Completed The world export job
-	// completed. Failed The world export job failed. See failureCode and failureReason
-	// for more information. Canceled The world export job was cancelled. Canceling The
-	// world export job is being cancelled.
+	// The status of the world export job.
+	//
+	// Pending The world export job request is pending.
+	//
+	// Running The world export job is running.
+	//
+	// Completed The world export job completed.
+	//
+	// Failed The world export job failed. See failureCode and failureReason for more
+	// information.
+	//
+	// Canceled The world export job was cancelled.
+	//
+	// Canceling The world export job is being cancelled.
 	Status types.WorldExportJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world

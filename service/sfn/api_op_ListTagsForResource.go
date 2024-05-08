@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List tags for a given resource. Tags may only contain Unicode letters, digits,
-// white space, or these symbols: _ . : / = + - @ .
+// List tags for a given resource.
+//
+// Tags may only contain Unicode letters, digits, white space, or these symbols: _
+// . : / = + - @ .
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

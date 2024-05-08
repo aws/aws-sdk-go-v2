@@ -283,9 +283,10 @@ type Dimension struct {
 	// This member is required.
 	DimensionKey *string
 
-	// The number of units of the dimension the acceptor has purchased. For Agreements
-	// with ConfigurableUpfrontPricingTerm , the RateCard section will define the
-	// prices and dimensions defined by the seller (proposer), whereas the
+	// The number of units of the dimension the acceptor has purchased.
+	//
+	// For Agreements with ConfigurableUpfrontPricingTerm , the RateCard section will
+	// define the prices and dimensions defined by the seller (proposer), whereas the
 	// Configuration section will define the actual dimensions, prices, and units the
 	// buyer has chosen to accept.
 	//
@@ -300,14 +301,18 @@ type Dimension struct {
 type DocumentItem struct {
 
 	// Category of the document. Document types include:
+	//
 	//   - CustomEula – A custom EULA provided by you as seller. A URL for a EULA
 	//   stored in an accessible Amazon S3 bucket is required for this document type.
+	//
 	//   - CustomDsa – A custom Data Subscription Agreement (DSA) provided by you as
 	//   seller. A URL for a DSA stored in an accessible Amazon S3 bucket is required for
 	//   this document type.
+	//
 	//   - StandardEula – The Standard Contract for AWS Marketplace (SCMP). For more
 	//   information about SCMP, see the AWS Marketplace Seller Guide. You don’t provide
 	//   a URL for this type because it’s managed by AWS Marketplace.
+	//
 	//   - StandardDsa – DSA for AWS Marketplace. For more information about the DSA,
 	//   see the AWS Data Exchange User Guide. You don’t provide a URL for this type
 	//   because it’s managed by AWS Marketplace.
@@ -328,20 +333,26 @@ type DocumentItem struct {
 type EstimatedCharges struct {
 
 	// The total known amount customer has to pay across the lifecycle of the
-	// agreement. This is the total contract value if accepted terms contain
+	// agreement.
+	//
+	// This is the total contract value if accepted terms contain
 	// ConfigurableUpfrontPricingTerm or FixedUpfrontPricingTerm . In the case of pure
 	// contract pricing, this will be the total value of the contract. In the case of
 	// contracts with consumption pricing, this will only include the committed value
-	// and not include any overages that occur. If the accepted terms contain
-	// PaymentScheduleTerm , it will be the total payment schedule amount. This occurs
-	// when flexible payment schedule is used, and is the sum of all invoice charges in
-	// the payment schedule. In case a customer has amended an agreement, by purchasing
-	// more units of any dimension, this will include both the original cost as well as
-	// the added cost incurred due to addition of new units. This is 0 if the accepted
-	// terms contain UsageBasedPricingTerm without ConfigurableUpfrontPricingTerm or
-	// RecurringPaymentTerm . This occurs for usage-based pricing (such as SaaS metered
-	// or AMI/container hourly or monthly), because the exact usage is not known
-	// upfront.
+	// and not include any overages that occur.
+	//
+	// If the accepted terms contain PaymentScheduleTerm , it will be the total payment
+	// schedule amount. This occurs when flexible payment schedule is used, and is the
+	// sum of all invoice charges in the payment schedule.
+	//
+	// In case a customer has amended an agreement, by purchasing more units of any
+	// dimension, this will include both the original cost as well as the added cost
+	// incurred due to addition of new units.
+	//
+	// This is 0 if the accepted terms contain UsageBasedPricingTerm without
+	// ConfigurableUpfrontPricingTerm or RecurringPaymentTerm . This occurs for
+	// usage-based pricing (such as SaaS metered or AMI/container hourly or monthly),
+	// because the exact usage is not known upfront.
 	AgreementValue *string
 
 	// Defines the currency code for the charge.
@@ -542,8 +553,10 @@ type RenewalTermConfiguration struct {
 // The list of resources involved in the agreement.
 type Resource struct {
 
-	// The unique identifier of the resource. We mention the term resource, which is
-	// most commonly a product, so a resourceId is also a productId .
+	// The unique identifier of the resource.
+	//
+	// We mention the term resource, which is most commonly a product, so a resourceId
+	// is also a productId .
 	Id *string
 
 	// Type of the resource, which is the product. Values include SaaSProduct or

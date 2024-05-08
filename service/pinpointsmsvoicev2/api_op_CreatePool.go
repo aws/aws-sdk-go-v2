@@ -14,13 +14,16 @@ import (
 
 // Creates a new pool and associates the specified origination identity to the
 // pool. A pool can include one or more phone numbers and SenderIds that are
-// associated with your Amazon Web Services account. The new pool inherits its
-// configuration from the specified origination identity. This includes keywords,
-// message type, opt-out list, two-way configuration, and self-managed opt-out
-// configuration. Deletion protection isn't inherited from the origination identity
-// and defaults to false. If the origination identity is a phone number and is
-// already associated with another pool, an error is returned. A sender ID can be
-// associated with multiple pools.
+// associated with your Amazon Web Services account.
+//
+// The new pool inherits its configuration from the specified origination
+// identity. This includes keywords, message type, opt-out list, two-way
+// configuration, and self-managed opt-out configuration. Deletion protection isn't
+// inherited from the origination identity and defaults to false.
+//
+// If the origination identity is a phone number and is already associated with
+// another pool, an error is returned. A sender ID can be associated with multiple
+// pools.
 func (c *Client) CreatePool(ctx context.Context, params *CreatePoolInput, optFns ...func(*Options)) (*CreatePoolOutput, error) {
 	if params == nil {
 		params = &CreatePoolInput{}
@@ -52,9 +55,8 @@ type CreatePoolInput struct {
 	MessageType types.MessageType
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
-	// SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values
-	// for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get
-	// the values for SenderId and SenderIdArn.
+	// SenderId or SenderIdArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and
+	// PhoneNumberArn while DescribeSenderIdscan be used to get the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
@@ -65,7 +67,7 @@ type CreatePoolInput struct {
 	ClientToken *string
 
 	// By default this is set to false. When set to true the pool can't be deleted.
-	// You can change this value using the UpdatePool action.
+	// You can change this value using the UpdatePoolaction.
 	DeletionProtectionEnabled *bool
 
 	// An array of tags (key and value pairs) associated with the pool.
@@ -76,8 +78,9 @@ type CreatePoolInput struct {
 
 type CreatePoolOutput struct {
 
-	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the pool was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// When set to true deletion protection is enabled. By default this is set to
@@ -108,9 +111,12 @@ type CreatePoolOutput struct {
 	SharedRoutesEnabled bool
 
 	// The current status of the pool.
+	//
 	//   - CREATING: The pool is currently being created and isn't yet available for
 	//   use.
+	//
 	//   - ACTIVE: The pool is active and available for use.
+	//
 	//   - DELETING: The pool is being deleted.
 	Status types.PoolStatus
 

@@ -16,9 +16,10 @@ import (
 	"time"
 )
 
-// Returns the resource policy of the S3 Access Grants instance. Permissions You
-// must have the s3:GetAccessGrantsInstanceResourcePolicy permission to use this
-// operation.
+// Returns the resource policy of the S3 Access Grants instance.
+//
+// Permissions You must have the s3:GetAccessGrantsInstanceResourcePolicy
+// permission to use this operation.
 func (c *Client) GetAccessGrantsInstanceResourcePolicy(ctx context.Context, params *GetAccessGrantsInstanceResourcePolicyInput, optFns ...func(*Options)) (*GetAccessGrantsInstanceResourcePolicyOutput, error) {
 	if params == nil {
 		params = &GetAccessGrantsInstanceResourcePolicyInput{}

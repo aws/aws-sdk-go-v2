@@ -14,8 +14,10 @@ import (
 
 // Creates a Cedar policy and saves it in the specified policy store. You can
 // create either a static policy or a policy linked to a policy template.
+//
 //   - To create a static policy, provide the Cedar policy text in the StaticPolicy
 //     section of the PolicyDefinition .
+//
 //   - To create a policy that is dynamically linked to a policy template, specify
 //     the policy template ID and the principal and resource to associate with this
 //     policy in the templateLinked section of the PolicyDefinition . If the policy
@@ -24,10 +26,13 @@ import (
 //
 // Creating a policy causes it to be validated against the schema in the policy
 // store. If the policy doesn't pass validation, the operation fails and the policy
-// isn't stored. Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to propagate through
-// the service and be visible in the results of other Verified Permissions
-// operations.
+// isn't stored.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
 		params = &CreatePolicyInput{}
@@ -61,13 +66,19 @@ type CreatePolicyInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an ConflictException error. Verified
-	// Permissions recognizes a ClientToken for eight hours. After eight hours, the
-	// next request with the same parameters performs the operation again regardless of
-	// the value of ClientToken .
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an ConflictException error.
+	//
+	// Verified Permissions recognizes a ClientToken for eight hours. After eight
+	// hours, the next request with the same parameters performs the operation again
+	// regardless of the value of ClientToken .
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	noSmithyDocumentSerde

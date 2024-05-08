@@ -11,10 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes events for a specified server. Results are ordered by time, with
-// newest events first. This operation is synchronous. A ResourceNotFoundException
-// is thrown when the server does not exist. A ValidationException is raised when
-// parameters of the request are not valid.
+//	Describes events for a specified server. Results are ordered by time, with
+//
+// newest events first.
+//
+// This operation is synchronous.
+//
+// A ResourceNotFoundException is thrown when the server does not exist. A
+// ValidationException is raised when parameters of the request are not valid.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}

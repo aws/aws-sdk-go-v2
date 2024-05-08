@@ -38,7 +38,9 @@ type ListStackInstancesForProvisionedProductInput struct {
 	ProvisionedProductId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

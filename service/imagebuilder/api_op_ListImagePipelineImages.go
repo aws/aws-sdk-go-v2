@@ -36,7 +36,9 @@ type ListImagePipelineImagesInput struct {
 	ImagePipelineArn *string
 
 	// Use the following filters to streamline results:
+	//
 	//   - name
+	//
 	//   - version
 	Filters []types.Filter
 

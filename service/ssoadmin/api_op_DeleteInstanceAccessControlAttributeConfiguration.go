@@ -14,8 +14,8 @@ import (
 // IAM Identity Center instance and deletes all of the attribute mappings that have
 // been configured. Once deleted, any attributes that are received from an identity
 // source and any custom attributes you have previously configured will not be
-// passed. For more information about ABAC, see Attribute-Based Access Control in
-// the IAM Identity Center User Guide.
+// passed. For more information about ABAC, see Attribute-Based Access Controlin the IAM Identity Center User
+// Guide.
 func (c *Client) DeleteInstanceAccessControlAttributeConfiguration(ctx context.Context, params *DeleteInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*DeleteInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteInstanceAccessControlAttributeConfigurationInput{}

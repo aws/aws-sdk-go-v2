@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListTableRows API allows you to retrieve a list of all the rows in a table
+//	The ListTableRows API allows you to retrieve a list of all the rows in a table
+//
 // in a workbook.
 func (c *Client) ListTableRows(ctx context.Context, params *ListTableRowsInput, optFns ...func(*Options)) (*ListTableRowsOutput, error) {
 	if params == nil {
@@ -30,13 +31,16 @@ func (c *Client) ListTableRows(ctx context.Context, params *ListTableRowsInput, 
 
 type ListTableRowsInput struct {
 
-	// The ID of the table whose rows are being retrieved. If a table with the
-	// specified id could not be found, this API throws ResourceNotFoundException.
+	// The ID of the table whose rows are being retrieved.
+	//
+	// If a table with the specified id could not be found, this API throws
+	// ResourceNotFoundException.
 	//
 	// This member is required.
 	TableId *string
 
 	// The ID of the workbook that contains the table whose rows are being retrieved.
+	//
 	// If a workbook with the specified id could not be found, this API throws
 	// ResourceNotFoundException.
 	//
@@ -46,13 +50,14 @@ type ListTableRowsInput struct {
 	// The maximum number of rows to return in each page of the results.
 	MaxResults *int32
 
-	// This parameter is optional. If a nextToken is not specified, the API returns
-	// the first page of data. Pagination tokens expire after 1 hour. If you use a
-	// token that was returned more than an hour back, the API will throw
-	// ValidationException.
+	//  This parameter is optional. If a nextToken is not specified, the API returns
+	// the first page of data.
+	//
+	// Pagination tokens expire after 1 hour. If you use a token that was returned
+	// more than an hour back, the API will throw ValidationException.
 	NextToken *string
 
-	// This parameter is optional. If one or more row ids are specified in this list,
+	//  This parameter is optional. If one or more row ids are specified in this list,
 	// then only the specified row ids are returned in the result. If no row ids are
 	// specified here, then all the rows in the table are returned.
 	RowIds []string
@@ -62,30 +67,30 @@ type ListTableRowsInput struct {
 
 type ListTableRowsOutput struct {
 
-	// The list of columns in the table whose row data is returned in the result.
+	//  The list of columns in the table whose row data is returned in the result.
 	//
 	// This member is required.
 	ColumnIds []string
 
-	// The list of rows in the table. Note that this result is paginated, so this list
-	// contains a maximum of 100 rows.
+	//  The list of rows in the table. Note that this result is paginated, so this
+	// list contains a maximum of 100 rows.
 	//
 	// This member is required.
 	Rows []types.TableRow
 
-	// Indicates the cursor of the workbook at which the data returned by this request
-	// is read. Workbook cursor keeps increasing with every update and the increments
-	// are not sequential.
+	//  Indicates the cursor of the workbook at which the data returned by this
+	// request is read. Workbook cursor keeps increasing with every update and the
+	// increments are not sequential.
 	//
 	// This member is required.
 	WorkbookCursor int64
 
-	// Provides the pagination token to load the next page if there are more results
+	//  Provides the pagination token to load the next page if there are more results
 	// matching the request. If a pagination token is not present in the response, it
 	// means that all data matching the request has been loaded.
 	NextToken *string
 
-	// The list of row ids included in the request that were not found in the table.
+	//  The list of row ids included in the request that were not found in the table.
 	RowIdsNotFound []string
 
 	// Metadata pertaining to the operation's result.

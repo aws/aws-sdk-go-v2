@@ -10,14 +10,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a state machine alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-// . After you delete a state machine alias, you can't use it to start executions.
+// Deletes a state machine [alias].
+//
+// After you delete a state machine alias, you can't use it to start executions.
 // When you delete a state machine alias, Step Functions doesn't delete the state
-// machine versions that alias references. Related operations:
-//   - CreateStateMachineAlias
-//   - DescribeStateMachineAlias
-//   - ListStateMachineAliases
-//   - UpdateStateMachineAlias
+// machine versions that alias references.
+//
+// Related operations:
+//
+// # CreateStateMachineAlias
+//
+// # DescribeStateMachineAlias
+//
+// # ListStateMachineAliases
+//
+// # UpdateStateMachineAlias
+//
+// [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
 func (c *Client) DeleteStateMachineAlias(ctx context.Context, params *DeleteStateMachineAliasInput, optFns ...func(*Options)) (*DeleteStateMachineAliasOutput, error) {
 	if params == nil {
 		params = &DeleteStateMachineAliasInput{}

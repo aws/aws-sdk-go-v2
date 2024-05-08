@@ -80,8 +80,9 @@ type DescribeRecoveryPointOutput struct {
 
 	// This is the identifier of a resource within a composite group, such as nested
 	// (child) recovery point belonging to a composite (parent) stack. The ID is
-	// transferred from the logical ID (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax)
-	// within a stack.
+	// transferred from the [logical ID]within a stack.
+	//
+	// [logical ID]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax
 	CompositeMemberIdentifier *string
 
 	// Contains identifying information about the creation of a recovery point,
@@ -119,14 +120,19 @@ type DescribeRecoveryPointOutput struct {
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup transitions and expires backups automatically
-	// according to the lifecycle that you define. Backups that are transitioned to
-	// cold storage must be stored in cold storage for a minimum of 90 days. Therefore,
-	// the “retention” setting must be 90 days greater than the “transition to cold
-	// after days” setting. The “transition to cold after days” setting cannot be
-	// changed after a backup has been transitioned to cold. Resource types that are
-	// able to be transitioned to cold storage are listed in the "Lifecycle to cold
-	// storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types.
+	// according to the lifecycle that you define.
+	//
+	// Backups that are transitioned to cold storage must be stored in cold storage
+	// for a minimum of 90 days. Therefore, the “retention” setting must be 90 days
+	// greater than the “transition to cold after days” setting. The “transition to
+	// cold after days” setting cannot be changed after a backup has been transitioned
+	// to cold.
+	//
+	// Resource types that are able to be transitioned to cold storage are listed in
+	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+	// expression for other resource types.
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 	Lifecycle *types.Lifecycle
 
 	// This is an ARN that uniquely identifies a parent (composite) recovery point;
@@ -160,27 +166,36 @@ type DescribeRecoveryPointOutput struct {
 	// null .
 	SourceBackupVaultArn *string
 
-	// A status code specifying the state of the recovery point. PARTIAL status
-	// indicates Backup could not create the recovery point before the backup window
-	// closed. To increase your backup plan window using the API, see UpdateBackupPlan (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html)
-	// . You can also increase your backup plan window using the Console by choosing
-	// and editing your backup plan. EXPIRED status indicates that the recovery point
-	// has exceeded its retention period, but Backup lacks permission or is otherwise
-	// unable to delete it. To manually delete these recovery points, see Step 3:
-	// Delete the recovery points (https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups)
-	// in the Clean up resources section of Getting started. STOPPED status occurs on
-	// a continuous backup where a user has taken some action that causes the
-	// continuous backup to be disabled. This can be caused by the removal of
-	// permissions, turning off versioning, turning off events being sent to
+	// A status code specifying the state of the recovery point.
+	//
+	// PARTIAL status indicates Backup could not create the recovery point before the
+	// backup window closed. To increase your backup plan window using the API, see [UpdateBackupPlan].
+	// You can also increase your backup plan window using the Console by choosing and
+	// editing your backup plan.
+	//
+	// EXPIRED status indicates that the recovery point has exceeded its retention
+	// period, but Backup lacks permission or is otherwise unable to delete it. To
+	// manually delete these recovery points, see [Step 3: Delete the recovery points]in the Clean up resources section of
+	// Getting started.
+	//
+	// STOPPED status occurs on a continuous backup where a user has taken some action
+	// that causes the continuous backup to be disabled. This can be caused by the
+	// removal of permissions, turning off versioning, turning off events being sent to
 	// EventBridge, or disabling the EventBridge rules that are put in place by Backup.
+	//
 	// To resolve STOPPED status, ensure that all requested permissions are in place
 	// and that versioning is enabled on the S3 bucket. Once these conditions are met,
 	// the next instance of a backup rule running will result in a new continuous
 	// recovery point being created. The recovery points with STOPPED status do not
-	// need to be deleted. For SAP HANA on Amazon EC2 STOPPED status occurs due to
-	// user action, application misconfiguration, or backup failure. To ensure that
-	// future continuous backups succeed, refer to the recovery point status and check
-	// SAP HANA for details.
+	// need to be deleted.
+	//
+	// For SAP HANA on Amazon EC2 STOPPED status occurs due to user action,
+	// application misconfiguration, or backup failure. To ensure that future
+	// continuous backups succeed, refer to the recovery point status and check SAP
+	// HANA for details.
+	//
+	// [Step 3: Delete the recovery points]: https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups
+	// [UpdateBackupPlan]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html
 	Status types.RecoveryPointStatus
 
 	// A status message explaining the status of the recovery point.

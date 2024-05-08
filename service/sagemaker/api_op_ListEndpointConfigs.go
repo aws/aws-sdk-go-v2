@@ -66,7 +66,7 @@ type ListEndpointConfigsOutput struct {
 	// This member is required.
 	EndpointConfigs []types.EndpointConfigSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the
+	//  If the response is truncated, SageMaker returns this token. To retrieve the
 	// next set of endpoint configurations, use it in the subsequent request
 	NextToken *string
 

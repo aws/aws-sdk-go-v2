@@ -28,12 +28,12 @@ func (c *Client) AssociateVehicleFleet(ctx context.Context, params *AssociateVeh
 
 type AssociateVehicleFleetInput struct {
 
-	// The ID of a fleet.
+	//  The ID of a fleet.
 	//
 	// This member is required.
 	FleetId *string
 
-	// The unique ID of the vehicle to associate with the fleet.
+	//  The unique ID of the vehicle to associate with the fleet.
 	//
 	// This member is required.
 	VehicleName *string

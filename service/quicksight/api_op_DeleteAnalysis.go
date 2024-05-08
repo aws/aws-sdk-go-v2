@@ -16,13 +16,16 @@ import (
 // a recovery window value, the operation defaults to 30 days. Amazon QuickSight
 // attaches a DeletionTime stamp to the response that specifies the end of the
 // recovery window. At the end of the recovery window, Amazon QuickSight deletes
-// the analysis permanently. At any time before recovery window ends, you can use
-// the RestoreAnalysis API operation to remove the DeletionTime stamp and cancel
-// the deletion of the analysis. The analysis remains visible in the API until it's
-// deleted, so you can describe it but you can't make a template from it. An
-// analysis that's scheduled for deletion isn't accessible in the Amazon QuickSight
-// console. To access it in the console, restore it. Deleting an analysis doesn't
-// delete the dashboards that you publish from it.
+// the analysis permanently.
+//
+// At any time before recovery window ends, you can use the RestoreAnalysis API
+// operation to remove the DeletionTime stamp and cancel the deletion of the
+// analysis. The analysis remains visible in the API until it's deleted, so you can
+// describe it but you can't make a template from it.
+//
+// An analysis that's scheduled for deletion isn't accessible in the Amazon
+// QuickSight console. To access it in the console, restore it. Deleting an
+// analysis doesn't delete the dashboards that you publish from it.
 func (c *Client) DeleteAnalysis(ctx context.Context, params *DeleteAnalysisInput, optFns ...func(*Options)) (*DeleteAnalysisOutput, error) {
 	if params == nil {
 		params = &DeleteAnalysisInput{}

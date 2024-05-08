@@ -53,8 +53,9 @@ type ValidatePullThroughCacheRuleOutput struct {
 	EcrRepositoryPrefix *string
 
 	// The reason the validation failed. For more details about possible causes and
-	// how to address them, see Using pull through cache rules (https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html)
-	// in the Amazon Elastic Container Registry User Guide.
+	// how to address them, see [Using pull through cache rules]in the Amazon Elastic Container Registry User Guide.
+	//
+	// [Using pull through cache rules]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html
 	Failure *string
 
 	// Whether or not the pull through cache rule was validated. If true , Amazon ECR

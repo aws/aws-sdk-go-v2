@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for dashboards that belong to a user. This operation is eventually
-// consistent. The results are best effort and may not reflect very recent updates
-// and changes.
+// Searches for dashboards that belong to a user.
+//
+// This operation is eventually consistent. The results are best effort and may
+// not reflect very recent updates and changes.
 func (c *Client) SearchDashboards(ctx context.Context, params *SearchDashboardsInput, optFns ...func(*Options)) (*SearchDashboardsOutput, error) {
 	if params == nil {
 		params = &SearchDashboardsInput{}

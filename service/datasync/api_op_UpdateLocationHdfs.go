@@ -56,7 +56,8 @@ type UpdateLocationHdfsInput struct {
 	// base64-encoded text.
 	KerberosKrb5Conf []byte
 
-	// The Kerberos principal with access to the files and folders on the HDFS cluster.
+	// The Kerberos principal with access to the files and folders on the HDFS
+	// cluster.
 	KerberosPrincipal *string
 
 	// The URI of the HDFS cluster's Key Management Server (KMS).

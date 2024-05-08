@@ -31,8 +31,9 @@ func (c *Client) CreateSourceRepository(ctx context.Context, params *CreateSourc
 type CreateSourceRepositoryInput struct {
 
 	// The name of the source repository. For more information about name
-	// requirements, see Quotas for source repositories (https://docs.aws.amazon.com/codecatalyst/latest/userguide/source-quotas.html)
-	// .
+	// requirements, see [Quotas for source repositories].
+	//
+	// [Quotas for source repositories]: https://docs.aws.amazon.com/codecatalyst/latest/userguide/source-quotas.html
 	//
 	// This member is required.
 	Name *string

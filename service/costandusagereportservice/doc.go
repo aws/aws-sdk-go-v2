@@ -5,13 +5,22 @@
 //
 // You can use the Amazon Web Services Cost and Usage Report API to
 // programmatically create, query, and delete Amazon Web Services Cost and Usage
-// Report definitions. Amazon Web Services Cost and Usage Report track the monthly
-// Amazon Web Services costs and usage associated with your Amazon Web Services
-// account. The report contains line items for each unique combination of Amazon
-// Web Services product, usage type, and operation that your Amazon Web Services
-// account uses. You can configure the Amazon Web Services Cost and Usage Report to
-// show only the data that you want, using the Amazon Web Services Cost and Usage
-// Report API. Service Endpoint The Amazon Web Services Cost and Usage Report API
-// provides the following endpoint:
+// Report definitions.
+//
+// Amazon Web Services Cost and Usage Report track the monthly Amazon Web Services
+// costs and usage associated with your Amazon Web Services account.
+//
+// The report contains line items for each unique combination of Amazon Web
+// Services product, usage type, and operation that your Amazon Web Services
+// account uses.
+//
+// You can configure the Amazon Web Services Cost and Usage Report to show only
+// the data that you want, using the Amazon Web Services Cost and Usage Report API.
+//
+// # Service Endpoint
+//
+// The Amazon Web Services Cost and Usage Report API provides the following
+// endpoint:
+//
 //   - cur.us-east-1.amazonaws.com
 package costandusagereportservice

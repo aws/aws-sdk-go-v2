@@ -49,11 +49,15 @@ type TestConnectionOutput struct {
 	// Returns Connection succeeded if the test is successful. Or, returns a
 	// descriptive error message if the test fails. The following list provides
 	// troubleshooting details, depending on the error message that you receive.
+	//
 	//   - Verify that your secret name aligns with the one in Transfer Role
 	//   permissions.
+	//
 	//   - Verify the server URL in the connector configuration , and verify that the
 	//   login credentials work successfully outside of the connector.
+	//
 	//   - Verify that the secret exists and is formatted correctly.
+	//
 	//   - Verify that the trusted host key in the connector configuration matches the
 	//   ssh-keyscan output.
 	StatusMessage *string

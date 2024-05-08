@@ -13,12 +13,17 @@ import (
 
 // Returns a list of the source Amazon Web Services Regions where the current
 // Amazon Web Services Region can create a read replica, copy a DB snapshot from,
-// or replicate automated backups from. Use this operation to determine whether
-// cross-Region features are supported between other Regions and your current
-// Region. This operation supports pagination. To return information about the
-// Regions that are enabled for your account, or all Regions, use the EC2 operation
-// DescribeRegions . For more information, see  DescribeRegions (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html)
+// or replicate automated backups from.
+//
+// Use this operation to determine whether cross-Region features are supported
+// between other Regions and your current Region. This operation supports
+// pagination.
+//
+// To return information about the Regions that are enabled for your account, or
+// all Regions, use the EC2 operation DescribeRegions . For more information, see [DescribeRegions]
 // in the Amazon EC2 API Reference.
+//
+// [DescribeRegions]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRegions.html
 func (c *Client) DescribeSourceRegions(ctx context.Context, params *DescribeSourceRegionsInput, optFns ...func(*Options)) (*DescribeSourceRegionsOutput, error) {
 	if params == nil {
 		params = &DescribeSourceRegionsInput{}
@@ -46,12 +51,17 @@ type DescribeSourceRegionsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The source Amazon Web Services Region name. For example, us-east-1 .
+	//
 	// Constraints:
+	//
 	//   - Must specify a valid Amazon Web Services Region name.
 	RegionName *string
 
@@ -170,7 +180,10 @@ var _ DescribeSourceRegionsAPIClient = (*Client)(nil)
 type DescribeSourceRegionsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

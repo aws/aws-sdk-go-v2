@@ -12,11 +12,14 @@ import (
 )
 
 // Returns a paginated list of premigration assessment runs based on filter
-// settings. These filter settings can specify a combination of premigration
-// assessment runs, migration tasks, replication instances, and assessment run
-// status values. This operation doesn't return information about individual
-// assessments. For this information, see the
-// DescribeReplicationTaskIndividualAssessments operation.
+// settings.
+//
+// These filter settings can specify a combination of premigration assessment
+// runs, migration tasks, replication instances, and assessment run status values.
+//
+// This operation doesn't return information about individual assessments. For
+// this information, see the DescribeReplicationTaskIndividualAssessments
+// operation.
 func (c *Client) DescribeReplicationTaskAssessmentRuns(ctx context.Context, params *DescribeReplicationTaskAssessmentRunsInput, optFns ...func(*Options)) (*DescribeReplicationTaskAssessmentRunsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationTaskAssessmentRunsInput{}
@@ -35,8 +38,10 @@ func (c *Client) DescribeReplicationTaskAssessmentRuns(ctx context.Context, para
 type DescribeReplicationTaskAssessmentRunsInput struct {
 
 	// Filters applied to the premigration assessment runs described in the form of
-	// key-value pairs. Valid filter names: replication-task-assessment-run-arn ,
-	// replication-task-arn , replication-instance-arn , status
+	// key-value pairs.
+	//
+	// Valid filter names: replication-task-assessment-run-arn , replication-task-arn ,
+	// replication-instance-arn , status
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter

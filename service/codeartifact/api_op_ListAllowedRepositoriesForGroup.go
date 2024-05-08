@@ -13,8 +13,9 @@ import (
 
 // Lists the repositories in the added repositories list of the specified
 // restriction type for a package group. For more information about restriction
-// types and added repository lists, see Package group origin controls (https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-origin-controls.html)
-// in the CodeArtifact User Guide.
+// types and added repository lists, see [Package group origin controls]in the CodeArtifact User Guide.
+//
+// [Package group origin controls]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-origin-controls.html
 func (c *Client) ListAllowedRepositoriesForGroup(ctx context.Context, params *ListAllowedRepositoriesForGroupInput, optFns ...func(*Options)) (*ListAllowedRepositoriesForGroupOutput, error) {
 	if params == nil {
 		params = &ListAllowedRepositoriesForGroupInput{}
@@ -32,7 +33,7 @@ func (c *Client) ListAllowedRepositoriesForGroup(ctx context.Context, params *Li
 
 type ListAllowedRepositoriesForGroupInput struct {
 
-	// The name of the domain that contains the package group from which to list
+	//  The name of the domain that contains the package group from which to list
 	// allowed repositories.
 	//
 	// This member is required.
@@ -48,14 +49,14 @@ type ListAllowedRepositoriesForGroupInput struct {
 	// This member is required.
 	PackageGroup *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -68,7 +69,7 @@ type ListAllowedRepositoriesForGroupOutput struct {
 	// restriction type.
 	AllowedRepositories []string
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -168,7 +169,7 @@ var _ ListAllowedRepositoriesForGroupAPIClient = (*Client)(nil)
 // ListAllowedRepositoriesForGroupPaginatorOptions is the paginator options for
 // ListAllowedRepositoriesForGroup
 type ListAllowedRepositoriesForGroupPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -12,15 +12,19 @@ import (
 )
 
 // Retrieves origination setting details for the specified Amazon Chime Voice
-// Connector. This API is is no longer supported and will not be updated. We
-// recommend using the latest version, GetVoiceConnectorOrigination (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorOrigination.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Connector.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [GetVoiceConnectorOrigination], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by GetVoiceConnectorOrigination in the Amazon Chime SDK
 // Voice Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [GetVoiceConnectorOrigination]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorOrigination.html
 func (c *Client) GetVoiceConnectorOrigination(ctx context.Context, params *GetVoiceConnectorOriginationInput, optFns ...func(*Options)) (*GetVoiceConnectorOriginationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorOriginationInput{}

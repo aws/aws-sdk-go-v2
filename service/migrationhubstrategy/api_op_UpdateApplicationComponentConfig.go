@@ -29,7 +29,7 @@ func (c *Client) UpdateApplicationComponentConfig(ctx context.Context, params *U
 
 type UpdateApplicationComponentConfigInput struct {
 
-	// The ID of the application component. The ID is unique within an AWS account.
+	//  The ID of the application component. The ID is unique within an AWS account.
 	//
 	// This member is required.
 	ApplicationComponentId *string
@@ -43,18 +43,19 @@ type UpdateApplicationComponentConfigInput struct {
 	// is initiated.
 	ConfigureOnly *bool
 
-	// Indicates whether the application component has been included for server
+	//  Indicates whether the application component has been included for server
 	// recommendation or not.
 	InclusionStatus types.InclusionStatus
 
-	// Database credentials.
+	//  Database credentials.
 	SecretsManagerKey *string
 
-	// The list of source code configurations to update for the application component.
+	//  The list of source code configurations to update for the application
+	// component.
 	SourceCodeList []types.SourceCode
 
-	// The preferred strategy options for the application component. Use values from
-	// the GetApplicationComponentStrategies response.
+	//  The preferred strategy options for the application component. Use values from
+	// the GetApplicationComponentStrategiesresponse.
 	StrategyOption *types.StrategyOption
 
 	noSmithyDocumentSerde

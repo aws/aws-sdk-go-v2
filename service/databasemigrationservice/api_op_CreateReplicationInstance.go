@@ -11,16 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the replication instance using the specified parameters. DMS requires
-// that your account have certain roles with appropriate permissions before you can
-// create a replication instance. For information on the required roles, see
-// Creating the IAM Roles to Use With the CLI and DMS API (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole)
-// . For information on the required permissions, see IAM Permissions Needed to
-// Use DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions)
-// . If you don't specify a version when creating a replication instance, DMS will
+// Creates the replication instance using the specified parameters.
+//
+// DMS requires that your account have certain roles with appropriate permissions
+// before you can create a replication instance. For information on the required
+// roles, see [Creating the IAM Roles to Use With the CLI and DMS API]. For information on the required permissions, see [IAM Permissions Needed to Use DMS].
+//
+// If you don't specify a version when creating a replication instance, DMS will
 // create the instance using the default engine version. For information about the
-// default engine version, see Release Notes (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReleaseNotes.html)
-// .
+// default engine version, see [Release Notes].
+//
+// [Release Notes]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReleaseNotes.html
+// [Creating the IAM Roles to Use With the CLI and DMS API]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole
+// [IAM Permissions Needed to Use DMS]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions
 func (c *Client) CreateReplicationInstance(ctx context.Context, params *CreateReplicationInstanceInput, optFns ...func(*Options)) (*CreateReplicationInstanceOutput, error) {
 	if params == nil {
 		params = &CreateReplicationInstanceInput{}
@@ -40,20 +43,28 @@ type CreateReplicationInstanceInput struct {
 
 	// The compute and memory capacity of the replication instance as defined for the
 	// specified replication instance class. For example to specify the instance class
-	// dms.c4.large, set this parameter to "dms.c4.large" . For more information on the
-	// settings and capacities for the available replication instance classes, see
-	// Choosing the right DMS replication instance (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)
-	// ; and, Selecting the best size for a replication instance (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.SizingReplicationInstance.html)
-	// .
+	// dms.c4.large, set this parameter to "dms.c4.large" .
+	//
+	// For more information on the settings and capacities for the available
+	// replication instance classes, see [Choosing the right DMS replication instance]; and, [Selecting the best size for a replication instance].
+	//
+	// [Selecting the best size for a replication instance]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.SizingReplicationInstance.html
+	// [Choosing the right DMS replication instance]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html
 	//
 	// This member is required.
 	ReplicationInstanceClass *string
 
 	// The replication instance identifier. This parameter is stored as a lowercase
-	// string. Constraints:
+	// string.
+	//
+	// Constraints:
+	//
 	//   - Must contain 1-63 alphanumeric characters or hyphens.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: myrepinstance
 	//
 	// This member is required.
@@ -65,7 +76,9 @@ type CreateReplicationInstanceInput struct {
 
 	// A value that indicates whether minor engine upgrades are applied automatically
 	// to the replication instance during the maintenance window. This parameter
-	// defaults to true . Default: true
+	// defaults to true .
+	//
+	// Default: true
 	AutoMinorVersionUpgrade *bool
 
 	// The Availability Zone where the replication instance will be created. The
@@ -80,19 +93,24 @@ type CreateReplicationInstanceInput struct {
 	// servers. For example: "1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"
 	DnsNameServers *string
 
-	// The engine version number of the replication instance. If an engine version
-	// number is not specified when a replication instance is created, the default is
-	// the latest engine version available.
+	// The engine version number of the replication instance.
+	//
+	// If an engine version number is not specified when a replication instance is
+	// created, the default is the latest engine version available.
 	EngineVersion *string
 
 	// An KMS key identifier that is used to encrypt the data on the replication
-	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS
-	// uses your default encryption key. KMS creates the default encryption key for
-	// your Amazon Web Services account. Your Amazon Web Services account has a
-	// different default encryption key for each Amazon Web Services Region.
+	// instance.
+	//
+	// If you don't specify a value for the KmsKeyId parameter, then DMS uses your
+	// default encryption key.
+	//
+	// KMS creates the default encryption key for your Amazon Web Services account.
+	// Your Amazon Web Services account has a different default encryption key for each
+	// Amazon Web Services Region.
 	KmsKeyId *string
 
-	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
+	//  Specifies whether the replication instance is a Multi-AZ deployment. You can't
 	// set the AvailabilityZone parameter if the Multi-AZ parameter is set to true .
 	MultiAZ *bool
 
@@ -102,13 +120,19 @@ type CreateReplicationInstanceInput struct {
 	NetworkType *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi Default: A 30-minute
-	// window selected at random from an 8-hour block of time per Amazon Web Services
-	// Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu,
-	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// Coordinated Time (UTC).
+	//
+	// Format: ddd:hh24:mi-ddd:hh24:mi
+	//
+	// Default: A 30-minute window selected at random from an 8-hour block of time per
+	// Amazon Web Services Region, occurring on a random day of the week.
+	//
+	// Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+	//
+	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
-	// Specifies the accessibility options for the replication instance. A value of
+	//  Specifies the accessibility options for the replication instance. A value of
 	// true represents an instance with a public IP address. A value of false
 	// represents an instance with a private IP address. The default value is true .
 	PubliclyAccessible *bool
@@ -130,7 +154,7 @@ type CreateReplicationInstanceInput struct {
 	// One or more tags to be assigned to the replication instance.
 	Tags []types.Tag
 
-	// Specifies the VPC security group to be used with the replication instance. The
+	//  Specifies the VPC security group to be used with the replication instance. The
 	// VPC security group must work with the VPC containing the replication instance.
 	VpcSecurityGroupIds []string
 

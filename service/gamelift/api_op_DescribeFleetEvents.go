@@ -15,10 +15,19 @@ import (
 // Retrieves entries from a fleet's event log. Fleet events are initiated by
 // changes in status, such as during fleet creation and termination, changes in
 // capacity, etc. If a fleet has multiple locations, events are also initiated by
-// changes to status and capacity in remote locations. You can specify a time range
-// to limit the result set. Use the pagination parameters to retrieve results as a
-// set of sequential pages. If successful, a collection of event log entries
-// matching the request are returned. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// changes to status and capacity in remote locations.
+//
+// You can specify a time range to limit the result set. Use the pagination
+// parameters to retrieve results as a set of sequential pages.
+//
+// If successful, a collection of event log entries matching the request are
+// returned.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetEventsInput, optFns ...func(*Options)) (*DescribeFleetEventsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetEventsInput{}

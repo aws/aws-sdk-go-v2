@@ -49,16 +49,19 @@ type AssociateFirewallRuleGroupInput struct {
 	// The setting that determines the processing order of the rule group among the
 	// rule groups that you associate with the specified VPC. DNS Firewall filters VPC
 	// traffic starting from the rule group with the lowest numeric priority setting.
-	// You must specify a unique priority for each rule group that you associate with a
-	// single VPC. To make it easier to insert rule groups later, leave space between
+	//
+	// You must specify a unique priority for each rule group that you associate with
+	// a single VPC. To make it easier to insert rule groups later, leave space between
 	// the numbers, for example, use 101, 200, and so on. You can change the priority
-	// setting for a rule group association after you create it. The allowed values for
-	// Priority are between 100 and 9900.
+	// setting for a rule group association after you create it.
+	//
+	// The allowed values for Priority are between 100 and 9900.
 	//
 	// This member is required.
 	Priority *int32
 
-	// The unique identifier of the VPC that you want to associate with the rule group.
+	// The unique identifier of the VPC that you want to associate with the rule
+	// group.
 	//
 	// This member is required.
 	VpcId *string

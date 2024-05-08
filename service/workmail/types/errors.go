@@ -225,9 +225,9 @@ func (e *InvalidConfigurationException) ErrorCode() string {
 func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You SES configuration has customizations that WorkMail cannot save. The error
-// message lists the invalid setting. For examples of invalid settings, refer to
-// CreateReceiptRule (https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html)
-// .
+// message lists the invalid setting. For examples of invalid settings, refer to [CreateReceiptRule].
+//
+// [CreateReceiptRule]: https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html
 type InvalidCustomSesConfigurationException struct {
 	Message *string
 

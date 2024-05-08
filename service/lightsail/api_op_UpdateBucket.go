@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Lightsail bucket. Use this action to update the
-// configuration of an existing bucket, such as versioning, public accessibility,
-// and the Amazon Web Services accounts that can access the bucket.
+// Updates an existing Amazon Lightsail bucket.
+//
+// Use this action to update the configuration of an existing bucket, such as
+// versioning, public accessibility, and the Amazon Web Services accounts that can
+// access the bucket.
 func (c *Client) UpdateBucket(ctx context.Context, params *UpdateBucketInput, optFns ...func(*Options)) (*UpdateBucketOutput, error) {
 	if params == nil {
 		params = &UpdateBucketInput{}
@@ -43,13 +45,17 @@ type UpdateBucketInput struct {
 	AccessRules *types.AccessRules
 
 	// An array of strings to specify the Amazon Web Services account IDs that can
-	// access the bucket. You can give a maximum of 10 Amazon Web Services accounts
-	// access to a bucket.
+	// access the bucket.
+	//
+	// You can give a maximum of 10 Amazon Web Services accounts access to a bucket.
 	ReadonlyAccessAccounts []string
 
-	// Specifies whether to enable or suspend versioning of objects in the bucket. The
-	// following options can be specified:
+	// Specifies whether to enable or suspend versioning of objects in the bucket.
+	//
+	// The following options can be specified:
+	//
 	//   - Enabled - Enables versioning of objects in the specified bucket.
+	//
 	//   - Suspended - Suspends versioning of objects in the specified bucket. Existing
 	//   object versions are retained.
 	Versioning *string

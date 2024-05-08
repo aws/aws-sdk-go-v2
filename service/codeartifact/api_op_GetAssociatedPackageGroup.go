@@ -16,9 +16,12 @@ import (
 // domain. As such, GetAssociatedPackageGroup can be used to see which package
 // group's origin configuration applies to a package before that package is in a
 // repository. This can be helpful to check if public packages are blocked without
-// ingesting them. For information package group association and matching, see
-// Package group definition syntax and matching behavior (https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html)
-// in the CodeArtifact User Guide.
+// ingesting them.
+//
+// For information package group association and matching, see [Package group definition syntax and matching behavior] in the
+// CodeArtifact User Guide.
+//
+// [Package group definition syntax and matching behavior]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html
 func (c *Client) GetAssociatedPackageGroup(ctx context.Context, params *GetAssociatedPackageGroupInput, optFns ...func(*Options)) (*GetAssociatedPackageGroupOutput, error) {
 	if params == nil {
 		params = &GetAssociatedPackageGroupInput{}
@@ -36,37 +39,45 @@ func (c *Client) GetAssociatedPackageGroup(ctx context.Context, params *GetAssoc
 
 type GetAssociatedPackageGroupInput struct {
 
-	// The name of the domain that contains the package from which to get the
+	//  The name of the domain that contains the package from which to get the
 	// associated package group.
 	//
 	// This member is required.
 	Domain *string
 
-	// The format of the package from which to get the associated package group.
+	//  The format of the package from which to get the associated package group.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The package from which to get the associated package group.
+	//  The package from which to get the associated package group.
 	//
 	// This member is required.
 	Package *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the package from which to get the associated package group.
 	// The package component that specifies its namespace depends on its type. For
-	// example: The namespace is required when getting associated package groups from
-	// packages of the following formats:
+	// example:
+	//
+	// The namespace is required when getting associated package groups from packages
+	// of the following formats:
+	//
 	//   - Maven
+	//
 	//   - Swift
+	//
 	//   - generic
 	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string

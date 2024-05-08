@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for CustomHealthStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomHealthStatus) Values() []CustomHealthStatus {
 	return []CustomHealthStatus{
 		"HEALTHY",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for FilterCondition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterCondition) Values() []FilterCondition {
 	return []FilterCondition{
 		"EQ",
@@ -52,8 +54,9 @@ const (
 )
 
 // Values returns all known values for HealthCheckType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthCheckType) Values() []HealthCheckType {
 	return []HealthCheckType{
 		"HTTP",
@@ -72,8 +75,9 @@ const (
 )
 
 // Values returns all known values for HealthStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthStatus) Values() []HealthStatus {
 	return []HealthStatus{
 		"HEALTHY",
@@ -93,8 +97,9 @@ const (
 )
 
 // Values returns all known values for HealthStatusFilter. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthStatusFilter) Values() []HealthStatusFilter {
 	return []HealthStatusFilter{
 		"HEALTHY",
@@ -114,8 +119,9 @@ const (
 )
 
 // Values returns all known values for NamespaceFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NamespaceFilterName) Values() []NamespaceFilterName {
 	return []NamespaceFilterName{
 		"TYPE",
@@ -134,8 +140,9 @@ const (
 )
 
 // Values returns all known values for NamespaceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NamespaceType) Values() []NamespaceType {
 	return []NamespaceType{
 		"DNS_PUBLIC",
@@ -156,8 +163,9 @@ const (
 )
 
 // Values returns all known values for OperationFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationFilterName) Values() []OperationFilterName {
 	return []OperationFilterName{
 		"NAMESPACE_ID",
@@ -179,8 +187,9 @@ const (
 )
 
 // Values returns all known values for OperationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationStatus) Values() []OperationStatus {
 	return []OperationStatus{
 		"SUBMITTED",
@@ -200,8 +209,9 @@ const (
 )
 
 // Values returns all known values for OperationTargetType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationTargetType) Values() []OperationTargetType {
 	return []OperationTargetType{
 		"NAMESPACE",
@@ -223,8 +233,9 @@ const (
 )
 
 // Values returns all known values for OperationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationType) Values() []OperationType {
 	return []OperationType{
 		"CREATE_NAMESPACE",
@@ -247,8 +258,9 @@ const (
 )
 
 // Values returns all known values for RecordType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecordType) Values() []RecordType {
 	return []RecordType{
 		"SRV",
@@ -267,8 +279,9 @@ const (
 )
 
 // Values returns all known values for RoutingPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RoutingPolicy) Values() []RoutingPolicy {
 	return []RoutingPolicy{
 		"MULTIVALUE",
@@ -284,8 +297,9 @@ const (
 )
 
 // Values returns all known values for ServiceFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceFilterName) Values() []ServiceFilterName {
 	return []ServiceFilterName{
 		"NAMESPACE_ID",
@@ -302,8 +316,9 @@ const (
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"HTTP",
@@ -320,8 +335,9 @@ const (
 )
 
 // Values returns all known values for ServiceTypeOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceTypeOption) Values() []ServiceTypeOption {
 	return []ServiceTypeOption{
 		"HTTP",

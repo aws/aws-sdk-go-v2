@@ -11,18 +11,22 @@ import (
 )
 
 // Redacts message content, but not metadata. The message exists in the back end,
-// but the action returns null content, and the state shows as redacted. The
-// x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
-// the user that makes the API call as the value in the header. This API is is no
-// longer supported and will not be updated. We recommend using the latest version,
-// RedactChannelMessage (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_RedactChannelMessage.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// but the action returns null content, and the state shows as redacted.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
+// of the user that makes the API call as the value in the header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [RedactChannelMessage], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by RedactChannelMessage in the Amazon Chime SDK Messaging
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [RedactChannelMessage]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_RedactChannelMessage.html
 func (c *Client) RedactChannelMessage(ctx context.Context, params *RedactChannelMessageInput, optFns ...func(*Options)) (*RedactChannelMessageOutput, error) {
 	if params == nil {
 		params = &RedactChannelMessageInput{}

@@ -13,12 +13,12 @@ import (
 )
 
 // This operation retrieves the access-policy subresource set on the vault; for
-// more information on setting this subresource, see Set Vault Access Policy (PUT
-// access-policy) (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html)
-// . If there is no access policy set on the vault, the operation returns a 404
-// Not found error. For more information about vault access policies, see Amazon
-// Glacier Access Control with Vault Access Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html)
-// .
+// more information on setting this subresource, see [Set Vault Access Policy (PUT access-policy)]. If there is no access
+// policy set on the vault, the operation returns a 404 Not found error. For more
+// information about vault access policies, see [Amazon Glacier Access Control with Vault Access Policies].
+//
+// [Set Vault Access Policy (PUT access-policy)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html
+// [Amazon Glacier Access Control with Vault Access Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html
 func (c *Client) GetVaultAccessPolicy(ctx context.Context, params *GetVaultAccessPolicyInput, optFns ...func(*Options)) (*GetVaultAccessPolicyOutput, error) {
 	if params == nil {
 		params = &GetVaultAccessPolicyInput{}

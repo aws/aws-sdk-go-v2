@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AddressFamily. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AddressFamily) Values() []AddressFamily {
 	return []AddressFamily{
 		"ipv4",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for BGPPeerState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BGPPeerState) Values() []BGPPeerState {
 	return []BGPPeerState{
 		"verifying",
@@ -54,8 +56,9 @@ const (
 )
 
 // Values returns all known values for BGPStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BGPStatus) Values() []BGPStatus {
 	return []BGPStatus{
 		"up",
@@ -80,8 +83,9 @@ const (
 )
 
 // Values returns all known values for ConnectionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionState) Values() []ConnectionState {
 	return []ConnectionState{
 		"ordering",
@@ -107,8 +111,9 @@ const (
 
 // Values returns all known values for
 // DirectConnectGatewayAssociationProposalState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectConnectGatewayAssociationProposalState) Values() []DirectConnectGatewayAssociationProposalState {
 	return []DirectConnectGatewayAssociationProposalState{
 		"requested",
@@ -130,8 +135,9 @@ const (
 
 // Values returns all known values for DirectConnectGatewayAssociationState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectConnectGatewayAssociationState) Values() []DirectConnectGatewayAssociationState {
 	return []DirectConnectGatewayAssociationState{
 		"associating",
@@ -154,8 +160,9 @@ const (
 
 // Values returns all known values for DirectConnectGatewayAttachmentState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectConnectGatewayAttachmentState) Values() []DirectConnectGatewayAttachmentState {
 	return []DirectConnectGatewayAttachmentState{
 		"attaching",
@@ -175,8 +182,9 @@ const (
 
 // Values returns all known values for DirectConnectGatewayAttachmentType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectConnectGatewayAttachmentType) Values() []DirectConnectGatewayAttachmentType {
 	return []DirectConnectGatewayAttachmentType{
 		"TransitVirtualInterface",
@@ -196,6 +204,7 @@ const (
 
 // Values returns all known values for DirectConnectGatewayState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectConnectGatewayState) Values() []DirectConnectGatewayState {
 	return []DirectConnectGatewayState{
@@ -215,8 +224,9 @@ const (
 )
 
 // Values returns all known values for GatewayType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GatewayType) Values() []GatewayType {
 	return []GatewayType{
 		"virtualPrivateGateway",
@@ -234,8 +244,9 @@ const (
 )
 
 // Values returns all known values for HasLogicalRedundancy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HasLogicalRedundancy) Values() []HasLogicalRedundancy {
 	return []HasLogicalRedundancy{
 		"unknown",
@@ -258,8 +269,9 @@ const (
 )
 
 // Values returns all known values for InterconnectState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InterconnectState) Values() []InterconnectState {
 	return []InterconnectState{
 		"requested",
@@ -286,8 +298,9 @@ const (
 )
 
 // Values returns all known values for LagState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LagState) Values() []LagState {
 	return []LagState{
 		"requested",
@@ -308,8 +321,9 @@ const (
 )
 
 // Values returns all known values for LoaContentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LoaContentType) Values() []LoaContentType {
 	return []LoaContentType{
 		"application/pdf",
@@ -326,8 +340,9 @@ const (
 )
 
 // Values returns all known values for NniPartnerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NniPartnerType) Values() []NniPartnerType {
 	return []NniPartnerType{
 		"v1",
@@ -352,8 +367,9 @@ const (
 )
 
 // Values returns all known values for VirtualInterfaceState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualInterfaceState) Values() []VirtualInterfaceState {
 	return []VirtualInterfaceState{
 		"confirming",

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the details of the network instance. A network instance is a single
-// network created in Amazon Web Services TNB that can be deployed and on which
-// life-cycle operations (like terminate, update, and delete) can be performed.
+// Gets the details of the network instance.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 func (c *Client) GetSolNetworkInstance(ctx context.Context, params *GetSolNetworkInstanceInput, optFns ...func(*Options)) (*GetSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkInstanceInput{}
@@ -51,9 +53,11 @@ type GetSolNetworkInstanceOutput struct {
 	// This member is required.
 	Id *string
 
-	// The metadata of a network instance. A network instance is a single network
-	// created in Amazon Web Services TNB that can be deployed and on which life-cycle
-	// operations (like terminate, update, and delete) can be performed.
+	// The metadata of a network instance.
+	//
+	// A network instance is a single network created in Amazon Web Services TNB that
+	// can be deployed and on which life-cycle operations (like terminate, update, and
+	// delete) can be performed.
 	//
 	// This member is required.
 	Metadata *types.GetSolNetworkInstanceMetadata
@@ -78,8 +82,9 @@ type GetSolNetworkInstanceOutput struct {
 	// This member is required.
 	NsdInfoId *string
 
-	// Lifecycle management operation details on the network instance. Lifecycle
-	// management operations are deploy, update, or delete operations.
+	// Lifecycle management operation details on the network instance.
+	//
+	// Lifecycle management operations are deploy, update, or delete operations.
 	LcmOpInfo *types.LcmOperationInfo
 
 	// Network instance state.

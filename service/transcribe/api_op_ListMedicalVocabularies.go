@@ -13,8 +13,10 @@ import (
 
 // Provides a list of custom medical vocabularies that match the specified
 // criteria. If no criteria are specified, all custom medical vocabularies are
-// returned. To get detailed information about a specific custom medical
-// vocabulary, use the operation.
+// returned.
+//
+// To get detailed information about a specific custom medical vocabulary, use the
+// operation.
 func (c *Client) ListMedicalVocabularies(ctx context.Context, params *ListMedicalVocabulariesInput, optFns ...func(*Options)) (*ListMedicalVocabulariesOutput, error) {
 	if params == nil {
 		params = &ListMedicalVocabulariesInput{}

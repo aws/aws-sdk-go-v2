@@ -13,8 +13,9 @@ import (
 
 // Inspects the text of a batch of documents for the syntax and part of speech of
 // the words in the document and returns information about them. For more
-// information, see Syntax (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html)
-// in the Comprehend Developer Guide.
+// information, see [Syntax]in the Comprehend Developer Guide.
+//
+// [Syntax]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
 func (c *Client) BatchDetectSyntax(ctx context.Context, params *BatchDetectSyntaxInput, optFns ...func(*Options)) (*BatchDetectSyntaxOutput, error) {
 	if params == nil {
 		params = &BatchDetectSyntaxInput{}

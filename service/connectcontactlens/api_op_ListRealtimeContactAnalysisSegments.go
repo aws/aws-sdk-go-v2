@@ -58,10 +58,13 @@ type ListRealtimeContactAnalysisSegmentsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
 	// If response includes nextToken there are two possible scenarios:
+	//
 	//   - There are more segments so another call is required to get them.
+	//
 	//   - There are no more segments at this time, but more may be available later
 	//   (real-time analysis is in progress) so the client should call the operation
 	//   again to get new segments.
+	//
 	// If response does not include nextToken , the analysis is completed (successfully
 	// or failed) and there are no more segments to retrieve.
 	NextToken *string

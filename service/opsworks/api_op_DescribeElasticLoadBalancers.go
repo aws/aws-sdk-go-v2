@@ -11,12 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a stack's Elastic Load Balancing instances. This call accepts only
-// one resource-identifying parameter. Required Permissions: To use this action, an
-// IAM user must have a Show, Deploy, or Manage permissions level for the stack, or
-// an attached policy that explicitly grants permissions. For more information
-// about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Describes a stack's Elastic Load Balancing instances.
+//
+// This call accepts only one resource-identifying parameter.
+//
+// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
+// or Manage permissions level for the stack, or an attached policy that explicitly
+// grants permissions. For more information about user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeElasticLoadBalancers(ctx context.Context, params *DescribeElasticLoadBalancersInput, optFns ...func(*Options)) (*DescribeElasticLoadBalancersOutput, error) {
 	if params == nil {
 		params = &DescribeElasticLoadBalancersInput{}

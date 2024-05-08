@@ -15,12 +15,16 @@ import (
 // Exports journal contents within a date and time range from a ledger into a
 // specified Amazon Simple Storage Service (Amazon S3) bucket. A journal export job
 // can write the data objects in either the text or binary representation of Amazon
-// Ion format, or in JSON Lines text format. If the ledger with the given Name
-// doesn't exist, then throws ResourceNotFoundException . If the ledger with the
-// given Name is in CREATING status, then throws
-// ResourcePreconditionNotMetException . You can initiate up to two concurrent
-// journal export requests for each ledger. Beyond this limit, journal export
-// requests throw LimitExceededException .
+// Ion format, or in JSON Lines text format.
+//
+// If the ledger with the given Name doesn't exist, then throws
+// ResourceNotFoundException .
+//
+// If the ledger with the given Name is in CREATING status, then throws
+// ResourcePreconditionNotMetException .
+//
+// You can initiate up to two concurrent journal export requests for each ledger.
+// Beyond this limit, journal export requests throw LimitExceededException .
 func (c *Client) ExportJournalToS3(ctx context.Context, params *ExportJournalToS3Input, optFns ...func(*Options)) (*ExportJournalToS3Output, error) {
 	if params == nil {
 		params = &ExportJournalToS3Input{}
@@ -39,19 +43,25 @@ func (c *Client) ExportJournalToS3(ctx context.Context, params *ExportJournalToS
 type ExportJournalToS3Input struct {
 
 	// The exclusive end date and time for the range of journal contents to export.
+	//
 	// The ExclusiveEndTime must be in ISO 8601 date and time format and in Universal
-	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z . The ExclusiveEndTime
-	// must be less than or equal to the current UTC date and time.
+	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z .
+	//
+	// The ExclusiveEndTime must be less than or equal to the current UTC date and
+	// time.
 	//
 	// This member is required.
 	ExclusiveEndTime *time.Time
 
 	// The inclusive start date and time for the range of journal contents to export.
+	//
 	// The InclusiveStartTime must be in ISO 8601 date and time format and in
-	// Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z . The
-	// InclusiveStartTime must be before ExclusiveEndTime . If you provide an
-	// InclusiveStartTime that is before the ledger's CreationDateTime , Amazon QLDB
-	// defaults it to the ledger's CreationDateTime .
+	// Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z .
+	//
+	// The InclusiveStartTime must be before ExclusiveEndTime .
+	//
+	// If you provide an InclusiveStartTime that is before the ledger's
+	// CreationDateTime , Amazon QLDB defaults it to the ledger's CreationDateTime .
 	//
 	// This member is required.
 	InclusiveStartTime *time.Time
@@ -63,9 +73,12 @@ type ExportJournalToS3Input struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
 	// a journal export job to do the following:
+	//
 	//   - Write objects into your Amazon S3 bucket.
+	//
 	//   - (Optional) Use your customer managed key in Key Management Service (KMS)
 	//   for server-side encryption of your exported data.
+	//
 	// To pass a role to QLDB when requesting a journal export, you must have
 	// permissions to perform the iam:PassRole action on the IAM role resource. This
 	// is required for all journal export requests.
@@ -80,12 +93,18 @@ type ExportJournalToS3Input struct {
 	S3ExportConfiguration *types.S3ExportConfiguration
 
 	// The output format of your exported journal data. A journal export job can write
-	// the data objects in either the text or binary representation of Amazon Ion (https://docs.aws.amazon.com/qldb/latest/developerguide/ion.html)
-	// format, or in JSON Lines (https://jsonlines.org/) text format. Default: ION_TEXT
+	// the data objects in either the text or binary representation of [Amazon Ion]format, or in [JSON Lines]
+	// text format.
+	//
+	// Default: ION_TEXT
+	//
 	// In JSON Lines format, each journal block in an exported data object is a valid
 	// JSON object that is delimited by a newline. You can use this format to directly
 	// integrate JSON exports with analytics tools such as Amazon Athena and Glue
 	// because these services can parse newline-delimited JSON automatically.
+	//
+	// [Amazon Ion]: https://docs.aws.amazon.com/qldb/latest/developerguide/ion.html
+	// [JSON Lines]: https://jsonlines.org/
 	OutputFormat types.OutputFormat
 
 	noSmithyDocumentSerde
@@ -94,8 +113,10 @@ type ExportJournalToS3Input struct {
 type ExportJournalToS3Output struct {
 
 	// The UUID (represented in Base62-encoded text) that QLDB assigns to each journal
-	// export job. To describe your export request and check the status of the job, you
-	// can use ExportId to call DescribeJournalS3Export .
+	// export job.
+	//
+	// To describe your export request and check the status of the job, you can use
+	// ExportId to call DescribeJournalS3Export .
 	//
 	// This member is required.
 	ExportId *string

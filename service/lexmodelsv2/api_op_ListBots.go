@@ -40,10 +40,11 @@ type ListBotsInput struct {
 	MaxResults *int32
 
 	// If the response from the ListBots operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response. Use
-	// the returned token in the nextToken parameter of a ListBots request to return
-	// the next page of results. For a complete set of results, call the ListBots
-	// operation until the nextToken returned in the response is null.
+	// specified in the maxResults parameter, a token is returned in the response.
+	//
+	// Use the returned token in the nextToken parameter of a ListBots request to
+	// return the next page of results. For a complete set of results, call the
+	// ListBots operation until the nextToken returned in the response is null.
 	NextToken *string
 
 	// Specifies sorting parameters for the list of bots. You can specify that the

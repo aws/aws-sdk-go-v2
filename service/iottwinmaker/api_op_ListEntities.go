@@ -34,12 +34,14 @@ type ListEntitiesInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// A list of objects that filter the request. Only one object is accepted as a
-	// valid input.
+	// A list of objects that filter the request.
+	//
+	// Only one object is accepted as a valid input.
 	Filters []types.ListEntitiesFilter
 
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 25.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 250.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -180,8 +182,9 @@ var _ ListEntitiesAPIClient = (*Client)(nil)
 
 // ListEntitiesPaginatorOptions is the paginator options for ListEntities
 type ListEntitiesPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 25.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 250.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -204,8 +204,9 @@ func (e *ServiceLimitExceededException) ErrorCode() string {
 }
 func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was denied due to request throttling. Instead of this error,
-// TooManyRequestsException should be used.
+// The request was denied due to request throttling.
+//
+// Instead of this error, TooManyRequestsException should be used.
 type ThrottlingException struct {
 	Message *string
 
@@ -233,8 +234,9 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The allowed number of job-signing requests has been exceeded. This error
-// supersedes the error ThrottlingException .
+// The allowed number of job-signing requests has been exceeded.
+//
+// This error supersedes the error ThrottlingException .
 type TooManyRequestsException struct {
 	Message *string
 

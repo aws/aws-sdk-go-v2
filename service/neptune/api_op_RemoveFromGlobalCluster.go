@@ -48,10 +48,9 @@ type RemoveFromGlobalClusterInput struct {
 
 type RemoveFromGlobalClusterOutput struct {
 
-	// Contains the details of an Amazon Neptune global database. This data type is
-	// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
-	// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
-	// RemoveFromGlobalCluster actions.
+	// Contains the details of an Amazon Neptune global database.
+	//
+	// This data type is used as a response element for the CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and RemoveFromGlobalCluster actions.
 	GlobalCluster *types.GlobalCluster
 
 	// Metadata pertaining to the operation's result.

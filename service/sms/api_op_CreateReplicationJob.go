@@ -53,10 +53,15 @@ type CreateReplicationJobInput struct {
 
 	// The ID of the KMS key for replication jobs that produce encrypted AMIs. This
 	// value can be any of the following:
+	//
 	//   - KMS key ID
+	//
 	//   - KMS key alias
+	//
 	//   - ARN referring to the KMS key ID
+	//
 	//   - ARN referring to the KMS key alias
+	//
 	// If encrypted is true but a KMS key ID is not specified, the customer's default
 	// KMS key for Amazon EBS is used.
 	KmsKeyId *string

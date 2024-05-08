@@ -35,8 +35,9 @@ type ListClustersInput struct {
 
 	// A pagination token provided by a previous request. If this parameter is
 	// specified, the response includes only records beyond this token, up to the value
-	// specified by max-results . If there is no more data in the responce, the
-	// nextToken will not be returned.
+	// specified by max-results .
+	//
+	// If there is no more data in the responce, the nextToken will not be returned.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,8 +50,9 @@ type ListClustersOutput struct {
 
 	// A pagination token provided by a previous request. If this parameter is
 	// specified, the response includes only records beyond this token, up to the value
-	// specified by max-results . If there is no more data in the responce, the
-	// nextToken will not be returned.
+	// specified by max-results .
+	//
+	// If there is no more data in the responce, the nextToken will not be returned.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns descriptions of all resources of the specified stack. For deleted
-// stacks, ListStackResources returns resource information for up to 90 days after
-// the stack has been deleted.
+// Returns descriptions of all resources of the specified stack.
+//
+// For deleted stacks, ListStackResources returns resource information for up to
+// 90 days after the stack has been deleted.
 func (c *Client) ListStackResources(ctx context.Context, params *ListStackResourcesInput, optFns ...func(*Options)) (*ListStackResourcesOutput, error) {
 	if params == nil {
 		params = &ListStackResourcesInput{}
@@ -34,9 +35,12 @@ type ListStackResourcesInput struct {
 
 	// The name or the unique stack ID that is associated with the stack, which aren't
 	// always interchangeable:
+	//
 	//   - Running stacks: You can specify either the stack's name or its unique stack
 	//   ID.
+	//
 	//   - Deleted stacks: You must specify the unique stack ID.
+	//
 	// Default: There is no default value.
 	//
 	// This member is required.

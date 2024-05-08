@@ -28,7 +28,7 @@ func (c *Client) DeleteAssessmentFramework(ctx context.Context, params *DeleteAs
 
 type DeleteAssessmentFrameworkInput struct {
 
-	// The identifier for the custom framework.
+	//  The identifier for the custom framework.
 	//
 	// This member is required.
 	FrameworkId *string

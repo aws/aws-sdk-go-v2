@@ -15,12 +15,16 @@ import (
 // pattern. If you suppress an anomaly, CloudWatch Logs won’t report new
 // occurrences of that anomaly and won't update that anomaly with new data. If you
 // suppress a pattern, CloudWatch Logs won’t report any anomalies related to that
-// pattern. You must specify either anomalyId or patternId , but you can't specify
-// both parameters in the same operation. If you have previously used this
-// operation to suppress detection of a pattern or anomaly, you can use it again to
-// cause CloudWatch Logs to end the suppression. To do this, use this operation and
-// specify the anomaly or pattern to stop suppressing, and omit the suppressionType
-// and suppressionPeriod parameters.
+// pattern.
+//
+// You must specify either anomalyId or patternId , but you can't specify both
+// parameters in the same operation.
+//
+// If you have previously used this operation to suppress detection of a pattern
+// or anomaly, you can use it again to cause CloudWatch Logs to end the
+// suppression. To do this, use this operation and specify the anomaly or pattern
+// to stop suppressing, and omit the suppressionType and suppressionPeriod
+// parameters.
 func (c *Client) UpdateAnomaly(ctx context.Context, params *UpdateAnomalyInput, optFns ...func(*Options)) (*UpdateAnomalyOutput, error) {
 	if params == nil {
 		params = &UpdateAnomalyInput{}
@@ -44,13 +48,15 @@ type UpdateAnomalyInput struct {
 	AnomalyDetectorArn *string
 
 	// If you are suppressing or unsuppressing an anomaly, specify its unique ID here.
-	// You can find anomaly IDs by using the ListAnomalies (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListAnomalies.html)
-	// operation.
+	// You can find anomaly IDs by using the [ListAnomalies]operation.
+	//
+	// [ListAnomalies]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListAnomalies.html
 	AnomalyId *string
 
 	// If you are suppressing or unsuppressing an pattern, specify its unique ID here.
-	// You can find pattern IDs by using the ListAnomalies (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListAnomalies.html)
-	// operation.
+	// You can find pattern IDs by using the [ListAnomalies]operation.
+	//
+	// [ListAnomalies]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListAnomalies.html
 	PatternId *string
 
 	// If you are temporarily suppressing an anomaly or pattern, use this structure to

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified migration project. The migration project must be closed
-// before you can delete it.
+// Deletes the specified migration project.
+//
+// The migration project must be closed before you can delete it.
 func (c *Client) DeleteMigrationProject(ctx context.Context, params *DeleteMigrationProjectInput, optFns ...func(*Options)) (*DeleteMigrationProjectOutput, error) {
 	if params == nil {
 		params = &DeleteMigrationProjectInput{}

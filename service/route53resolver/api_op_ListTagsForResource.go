@@ -39,10 +39,11 @@ type ListTagsForResourceInput struct {
 	// Resolver returns up to 100 tags.
 	MaxResults *int32
 
-	// For the first ListTagsForResource request, omit this value. If you have more
-	// than MaxResults tags, you can submit another ListTagsForResource request to get
-	// the next group of tags for the resource. In the next request, specify the value
-	// of NextToken from the previous response.
+	// For the first ListTagsForResource request, omit this value.
+	//
+	// If you have more than MaxResults tags, you can submit another
+	// ListTagsForResource request to get the next group of tags for the resource. In
+	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde

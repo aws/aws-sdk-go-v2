@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns views in the given instance. Results are sorted primarily by type, and
-// secondarily by name.
+// Returns views in the given instance.
+//
+// Results are sorted primarily by type, and secondarily by name.
 func (c *Client) ListViews(ctx context.Context, params *ListViewsInput, optFns ...func(*Options)) (*ListViewsOutput, error) {
 	if params == nil {
 		params = &ListViewsInput{}

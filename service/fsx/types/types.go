@@ -21,8 +21,9 @@ type ActiveDirectoryBackupAttributes struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceARN *string
 
 	noSmithyDocumentSerde
@@ -33,72 +34,92 @@ type ActiveDirectoryBackupAttributes struct {
 type AdministrativeAction struct {
 
 	// Describes the type of administrative action, as follows:
+	//
 	//   - FILE_SYSTEM_UPDATE - A file system update administrative action initiated
 	//   from the Amazon FSx console, API ( UpdateFileSystem ), or CLI (
 	//   update-file-system ).
+	//
 	//   - THROUGHPUT_OPTIMIZATION - After the FILE_SYSTEM_UPDATE task to increase a
 	//   file system's throughput capacity has been completed successfully, a
-	//   THROUGHPUT_OPTIMIZATION task starts. You can track the storage-optimization
-	//   progress using the ProgressPercent property. When THROUGHPUT_OPTIMIZATION has
-	//   been completed successfully, the parent FILE_SYSTEM_UPDATE action status
-	//   changes to COMPLETED . For more information, see Managing throughput capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html)
-	//   in the Amazon FSx for Windows File Server User Guide.
+	//   THROUGHPUT_OPTIMIZATION task starts.
+	//
+	// You can track the storage-optimization progress using the ProgressPercent
+	//   property. When THROUGHPUT_OPTIMIZATION has been completed successfully, the
+	//   parent FILE_SYSTEM_UPDATE action status changes to COMPLETED . For more
+	//   information, see [Managing throughput capacity]in the Amazon FSx for Windows File Server User Guide.
+	//
 	//   - STORAGE_OPTIMIZATION - After the FILE_SYSTEM_UPDATE task to increase a file
 	//   system's storage capacity has been completed successfully, a
 	//   STORAGE_OPTIMIZATION task starts.
+	//
 	//   - For Windows and ONTAP, storage optimization is the process of migrating the
 	//   file system data to newer larger disks.
+	//
 	//   - For Lustre, storage optimization consists of rebalancing the data across
-	//   the existing and newly added file servers. You can track the
-	//   storage-optimization progress using the ProgressPercent property. When
-	//   STORAGE_OPTIMIZATION has been completed successfully, the parent
-	//   FILE_SYSTEM_UPDATE action status changes to COMPLETED . For more information,
-	//   see Managing storage capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
-	//   in the Amazon FSx for Windows File Server User Guide, Managing storage
-	//   capacity (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html)
-	//   in the Amazon FSx for Lustre User Guide, and Managing storage capacity and
-	//   provisioned IOPS (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html)
-	//   in the Amazon FSx for NetApp ONTAP User Guide.
+	//   the existing and newly added file servers.
+	//
+	// You can track the storage-optimization progress using the ProgressPercent
+	//   property. When STORAGE_OPTIMIZATION has been completed successfully, the
+	//   parent FILE_SYSTEM_UPDATE action status changes to COMPLETED . For more
+	//   information, see [Managing storage capacity]in the Amazon FSx for Windows File Server User Guide, [Managing storage capacity]in the
+	//   Amazon FSx for Lustre User Guide, and [Managing storage capacity and provisioned IOPS]in the Amazon FSx for NetApp ONTAP User
+	//   Guide.
+	//
 	//   - FILE_SYSTEM_ALIAS_ASSOCIATION - A file system update to associate a new
-	//   Domain Name System (DNS) alias with the file system. For more information, see
-	//   AssociateFileSystemAliases (https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html)
+	//   Domain Name System (DNS) alias with the file system. For more information, see [AssociateFileSystemAliases]
 	//   .
+	//
 	//   - FILE_SYSTEM_ALIAS_DISASSOCIATION - A file system update to disassociate a
-	//   DNS alias from the file system. For more information, see
-	//   DisassociateFileSystemAliases (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html)
-	//   .
+	//   DNS alias from the file system. For more information, see [DisassociateFileSystemAliases].
+	//
 	//   - IOPS_OPTIMIZATION - After the FILE_SYSTEM_UPDATE task to increase a file
 	//   system's throughput capacity has been completed successfully, a
-	//   IOPS_OPTIMIZATION task starts. You can track the storage-optimization progress
-	//   using the ProgressPercent property. When IOPS_OPTIMIZATION has been completed
-	//   successfully, the parent FILE_SYSTEM_UPDATE action status changes to COMPLETED
-	//   . For more information, see Managing provisioned SSD IOPS (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-provisioned-ssd-iops.html)
-	//   in the Amazon FSx for Windows File Server User Guide.
+	//   IOPS_OPTIMIZATION task starts.
+	//
+	// You can track the storage-optimization progress using the ProgressPercent
+	//   property. When IOPS_OPTIMIZATION has been completed successfully, the parent
+	//   FILE_SYSTEM_UPDATE action status changes to COMPLETED . For more information,
+	//   see [Managing provisioned SSD IOPS]in the Amazon FSx for Windows File Server User Guide.
+	//
 	//   - STORAGE_TYPE_OPTIMIZATION - After the FILE_SYSTEM_UPDATE task to increase a
 	//   file system's throughput capacity has been completed successfully, a
-	//   STORAGE_TYPE_OPTIMIZATION task starts. You can track the storage-optimization
-	//   progress using the ProgressPercent property. When STORAGE_TYPE_OPTIMIZATION
-	//   has been completed successfully, the parent FILE_SYSTEM_UPDATE action status
-	//   changes to COMPLETED .
+	//   STORAGE_TYPE_OPTIMIZATION task starts.
+	//
+	// You can track the storage-optimization progress using the ProgressPercent
+	//   property. When STORAGE_TYPE_OPTIMIZATION has been completed successfully, the
+	//   parent FILE_SYSTEM_UPDATE action status changes to COMPLETED .
+	//
 	//   - VOLUME_UPDATE - A volume update to an Amazon FSx for OpenZFS volume
 	//   initiated from the Amazon FSx console, API ( UpdateVolume ), or CLI (
 	//   update-volume ).
+	//
 	//   - VOLUME_RESTORE - An Amazon FSx for OpenZFS volume is returned to the state
 	//   saved by the specified snapshot, initiated from an API (
 	//   RestoreVolumeFromSnapshot ) or CLI ( restore-volume-from-snapshot ).
+	//
 	//   - SNAPSHOT_UPDATE - A snapshot update to an Amazon FSx for OpenZFS volume
 	//   initiated from the Amazon FSx console, API ( UpdateSnapshot ), or CLI (
 	//   update-snapshot ).
+	//
 	//   - RELEASE_NFS_V3_LOCKS - Tracks the release of Network File System (NFS) V3
 	//   locks on an Amazon FSx for OpenZFS file system.
+	//
 	//   - VOLUME_INITIALIZE_WITH_SNAPSHOT - A volume is being created from a snapshot
 	//   on a different FSx for OpenZFS file system. You can initiate this from the
 	//   Amazon FSx console, API ( CreateVolume ), or CLI ( create-volume ) when using
 	//   the using the FULL_COPY strategy.
+	//
 	//   - VOLUME_UPDATE_WITH_SNAPSHOT - A volume is being updated from a snapshot on a
 	//   different FSx for OpenZFS file system. You can initiate this from the Amazon FSx
 	//   console, API ( CopySnapshotAndUpdateVolume ), or CLI (
 	//   copy-snapshot-and-update-volume ).
+	//
+	// [Managing storage capacity]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
+	// [AssociateFileSystemAliases]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html
+	// [DisassociateFileSystemAliases]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html
+	// [Managing provisioned SSD IOPS]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-provisioned-ssd-iops.html
+	// [Managing throughput capacity]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html
+	// [Managing storage capacity and provisioned IOPS]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
 	AdministrativeActionType AdministrativeActionType
 
 	// Provides information about a failed administrative action.
@@ -116,11 +137,15 @@ type AdministrativeAction struct {
 	RequestTime *time.Time
 
 	// The status of the administrative action, as follows:
-	//   - FAILED - Amazon FSx failed to process the administrative action
-	//   successfully.
+	//
+	//   - FAILED - Amazon FSx failed to process the administrative action successfully.
+	//
 	//   - IN_PROGRESS - Amazon FSx is processing the administrative action.
+	//
 	//   - PENDING - Amazon FSx is waiting to process the administrative action.
+	//
 	//   - COMPLETED - Amazon FSx has finished processing the administrative task.
+	//
 	//   - UPDATED_OPTIMIZING - For a storage-capacity increase update, Amazon FSx has
 	//   updated the file system with the new storage capacity, and is now performing the
 	//   storage-optimization process.
@@ -160,11 +185,16 @@ type AggregateConfiguration struct {
 	// pools which make up your primary storage tier. Each high-availability (HA) pair
 	// has one aggregate. The names of the aggregates map to the names of the
 	// aggregates in the ONTAP CLI and REST API. For FlexVols, there will always be a
-	// single entry. Amazon FSx responds with an HTTP status code 400 (Bad Request) for
-	// the following conditions:
+	// single entry.
+	//
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
+	// following conditions:
+	//
 	//   - The strings in the value of Aggregates are not are not formatted as aggrX ,
 	//   where X is a number between 1 and 6.
+	//
 	//   - The value of Aggregates contains aggregates that are not present.
+	//
 	//   - One or more of the aggregates supplied are too close to the volume limit to
 	//   support adding more volumes.
 	Aggregates []string
@@ -178,31 +208,41 @@ type AggregateConfiguration struct {
 
 // A DNS alias that is associated with the file system. You can use a DNS alias to
 // access a file system using user-defined DNS names, in addition to the default
-// DNS name that Amazon FSx assigns to the file system. For more information, see
-// DNS aliases (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
+// DNS name that Amazon FSx assigns to the file system. For more information, see [DNS aliases]
 // in the FSx for Windows File Server User Guide.
+//
+// [DNS aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
 type Alias struct {
 
 	// Describes the state of the DNS alias.
+	//
 	//   - AVAILABLE - The DNS alias is associated with an Amazon FSx file system.
+	//
 	//   - CREATING - Amazon FSx is creating the DNS alias and associating it with the
 	//   file system.
+	//
 	//   - CREATE_FAILED - Amazon FSx was unable to associate the DNS alias with the
 	//   file system.
+	//
 	//   - DELETING - Amazon FSx is disassociating the DNS alias from the file system
 	//   and deleting it.
+	//
 	//   - DELETE_FAILED - Amazon FSx was unable to disassociate the DNS alias from
 	//   the file system.
 	Lifecycle AliasLifecycle
 
 	// The name of the DNS alias. The alias name has to meet the following
 	// requirements:
+	//
 	//   - Formatted as a fully-qualified domain name (FQDN), hostname.domain , for
 	//   example, accounting.example.com .
-	//   - Can contain alphanumeric characters, the underscore (_), and the hyphen
-	//   (-).
+	//
+	//   - Can contain alphanumeric characters, the underscore (_), and the hyphen (-).
+	//
 	//   - Cannot start or end with a hyphen.
+	//
 	//   - Can start with a numeric.
+	//
 	// For DNS names, Amazon FSx stores alphabetic characters as lowercase letters
 	// (a-z), regardless of how you specify them: as uppercase letters, lowercase
 	// letters, or the corresponding letters in escape codes.
@@ -213,9 +253,11 @@ type Alias struct {
 
 // Sets the autocommit period of files in an FSx for ONTAP SnapLock volume, which
 // determines how long the files must remain unmodified before they're
-// automatically transitioned to the write once, read many (WORM) state. For more
-// information, see Autocommit (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-autocommit)
-// .
+// automatically transitioned to the write once, read many (WORM) state.
+//
+// For more information, see [Autocommit].
+//
+// [Autocommit]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-autocommit
 type AutocommitPeriod struct {
 
 	// Defines the type of time for the autocommit period of a file in an FSx for
@@ -227,10 +269,15 @@ type AutocommitPeriod struct {
 
 	// Defines the amount of time for the autocommit period of a file in an FSx for
 	// ONTAP SnapLock volume. The following ranges are valid:
+	//
 	//   - Minutes : 5 - 65,535
+	//
 	//   - Hours : 1 - 65,535
+	//
 	//   - Days : 1 - 3,650
+	//
 	//   - Months : 1 - 120
+	//
 	//   - Years : 1 - 10
 	Value *int32
 
@@ -241,18 +288,23 @@ type AutocommitPeriod struct {
 // AutoExportPolicy defines the types of updated objects on the file system that
 // will be automatically exported to the data repository. As you create, modify, or
 // delete files, Amazon FSx for Lustre automatically exports the defined changes
-// asynchronously once your application finishes modifying the file. The
-// AutoExportPolicy is only supported on Amazon FSx for Lustre file systems with a
-// data repository association.
+// asynchronously once your application finishes modifying the file.
+//
+// The AutoExportPolicy is only supported on Amazon FSx for Lustre file systems
+// with a data repository association.
 type AutoExportPolicy struct {
 
 	// The AutoExportPolicy can have the following event values:
+	//
 	//   - NEW - New files and directories are automatically exported to the data
 	//   repository as they are added to the file system.
+	//
 	//   - CHANGED - Changes to files and directories on the file system are
 	//   automatically exported to the data repository.
+	//
 	//   - DELETED - Files and directories are automatically deleted on the data
 	//   repository when they are deleted on the file system.
+	//
 	// You can define any combination of event types for your AutoExportPolicy .
 	Events []EventType
 
@@ -262,19 +314,23 @@ type AutoExportPolicy struct {
 // Describes the data repository association's automatic import policy. The
 // AutoImportPolicy defines how Amazon FSx keeps your file metadata and directory
 // listings up to date by importing changes to your Amazon FSx for Lustre file
-// system as you modify objects in a linked S3 bucket. The AutoImportPolicy is
-// only supported on Amazon FSx for Lustre file systems with a data repository
-// association.
+// system as you modify objects in a linked S3 bucket.
+//
+// The AutoImportPolicy is only supported on Amazon FSx for Lustre file systems
+// with a data repository association.
 type AutoImportPolicy struct {
 
 	// The AutoImportPolicy can have the following event values:
+	//
 	//   - NEW - Amazon FSx automatically imports metadata of files added to the linked
 	//   S3 bucket that do not currently exist in the FSx file system.
+	//
 	//   - CHANGED - Amazon FSx automatically updates file metadata and invalidates
 	//   existing file content on the file system as files change in the data repository.
 	//
 	//   - DELETED - Amazon FSx automatically deletes files on the file system as
 	//   corresponding files are deleted in the data repository.
+	//
 	// You can define any combination of event types for your AutoImportPolicy .
 	Events []EventType
 
@@ -303,14 +359,21 @@ type Backup struct {
 	FileSystem *FileSystem
 
 	// The lifecycle status of the backup.
+	//
 	//   - AVAILABLE - The backup is fully available.
+	//
 	//   - PENDING - For user-initiated backups on Lustre file systems only; Amazon FSx
 	//   hasn't started creating the backup.
+	//
 	//   - CREATING - Amazon FSx is creating the backup.
+	//
 	//   - TRANSFERRING - For user-initiated backups on Lustre file systems only;
 	//   Amazon FSx is transferring the backup to Amazon S3.
+	//
 	//   - COPYING - Amazon FSx is copying the backup.
+	//
 	//   - DELETED - Amazon FSx deleted the backup and it's no longer available.
+	//
 	//   - FAILED - Amazon FSx couldn't finish the backup.
 	//
 	// This member is required.
@@ -444,46 +507,65 @@ type CreateFileCacheLustreConfiguration struct {
 	// This member is required.
 	PerUnitStorageThroughput *int32
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
 }
 
-// The Lustre configuration for the file system being created. The following
-// parameters are not supported for file systems with a data repository association
-// created with .
+// The Lustre configuration for the file system being created.
+//
+// The following parameters are not supported for file systems with a data
+// repository association created with .
+//
 //   - AutoImportPolicy
+//
 //   - ExportPath
+//
 //   - ImportedFileChunkSize
+//
 //   - ImportPath
 type CreateFileSystemLustreConfiguration struct {
 
-	// (Optional) When you create your file system, your existing S3 objects appear as
-	// file and directory listings. Use this parameter to choose how Amazon FSx keeps
-	// your file and directory listings up to date as you add or modify objects in your
-	// linked S3 bucket. AutoImportPolicy can have the following values:
+	//  (Optional) When you create your file system, your existing S3 objects appear
+	// as file and directory listings. Use this parameter to choose how Amazon FSx
+	// keeps your file and directory listings up to date as you add or modify objects
+	// in your linked S3 bucket. AutoImportPolicy can have the following values:
+	//
 	//   - NONE - (Default) AutoImport is off. Amazon FSx only updates file and
 	//   directory listings from the linked S3 bucket when the file system is created.
 	//   FSx does not update file and directory listings for any new or changed objects
 	//   after choosing this option.
+	//
 	//   - NEW - AutoImport is on. Amazon FSx automatically imports directory listings
 	//   of any new objects added to the linked S3 bucket that do not currently exist in
 	//   the FSx file system.
+	//
 	//   - NEW_CHANGED - AutoImport is on. Amazon FSx automatically imports file and
 	//   directory listings of any new objects added to the S3 bucket and any existing
 	//   objects that are changed in the S3 bucket after you choose this option.
+	//
 	//   - NEW_CHANGED_DELETED - AutoImport is on. Amazon FSx automatically imports
 	//   file and directory listings of any new objects added to the S3 bucket, any
 	//   existing objects that are changed in the S3 bucket, and any objects that were
 	//   deleted in the S3 bucket.
-	// For more information, see  Automatically import updates from your S3 bucket (https://docs.aws.amazon.com/fsx/latest/LustreGuide/older-deployment-types.html#legacy-auto-import-from-s3)
-	// . This parameter is not supported for file systems with a data repository
+	//
+	// For more information, see [Automatically import updates from your S3 bucket].
+	//
+	// This parameter is not supported for file systems with a data repository
 	// association.
+	//
+	// [Automatically import updates from your S3 bucket]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/older-deployment-types.html#legacy-auto-import-from-s3
 	AutoImportPolicy AutoImportPolicyType
 
 	// The number of days to retain automatic backups. Setting this property to 0
@@ -499,9 +581,13 @@ type CreateFileSystemLustreConfiguration struct {
 	// CopyTagsToBackups is set to true and you specify one or more backup tags, only
 	// the specified tags are copied to backups. If you specify one or more tags when
 	// creating a user-initiated backup, no tags are copied from the file system,
-	// regardless of this value. (Default = false ) For more information, see  Working
-	// with backups (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html)
-	// in the Amazon FSx for Lustre User Guide.
+	// regardless of this value.
+	//
+	// (Default = false )
+	//
+	// For more information, see [Working with backups] in the Amazon FSx for Lustre User Guide.
+	//
+	// [Working with backups]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
 	CopyTagsToBackups *bool
 
 	// A recurring daily time, in the format HH:MM . HH is the zero-padded hour of the
@@ -511,40 +597,54 @@ type CreateFileSystemLustreConfiguration struct {
 
 	// Sets the data compression configuration for the file system. DataCompressionType
 	// can have the following values:
+	//
 	//   - NONE - (Default) Data compression is turned off when the file system is
 	//   created.
+	//
 	//   - LZ4 - Data compression is turned on with the LZ4 algorithm.
-	// For more information, see Lustre data compression (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html)
-	// in the Amazon FSx for Lustre User Guide.
+	//
+	// For more information, see [Lustre data compression] in the Amazon FSx for Lustre User Guide.
+	//
+	// [Lustre data compression]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
 	DataCompressionType DataCompressionType
 
 	// (Optional) Choose SCRATCH_1 and SCRATCH_2 deployment types when you need
 	// temporary storage and shorter-term processing of data. The SCRATCH_2 deployment
 	// type provides in-transit encryption of data and higher burst throughput capacity
-	// than SCRATCH_1 . Choose PERSISTENT_1 for longer-term storage and for
-	// throughput-focused workloads that aren’t latency-sensitive. PERSISTENT_1
-	// supports encryption of data in transit, and is available in all Amazon Web
-	// Services Regions in which FSx for Lustre is available. Choose PERSISTENT_2 for
-	// longer-term storage and for latency-sensitive workloads that require the highest
-	// levels of IOPS/throughput. PERSISTENT_2 supports SSD storage, and offers higher
-	// PerUnitStorageThroughput (up to 1000 MB/s/TiB). PERSISTENT_2 is available in a
-	// limited number of Amazon Web Services Regions. For more information, and an
-	// up-to-date list of Amazon Web Services Regions in which PERSISTENT_2 is
-	// available, see File system deployment options for FSx for Lustre (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-deployment-types)
-	// in the Amazon FSx for Lustre User Guide. If you choose PERSISTENT_2 , and you
-	// set FileSystemTypeVersion to 2.10 , the CreateFileSystem operation fails.
+	// than SCRATCH_1 .
+	//
+	// Choose PERSISTENT_1 for longer-term storage and for throughput-focused
+	// workloads that aren’t latency-sensitive. PERSISTENT_1 supports encryption of
+	// data in transit, and is available in all Amazon Web Services Regions in which
+	// FSx for Lustre is available.
+	//
+	// Choose PERSISTENT_2 for longer-term storage and for latency-sensitive workloads
+	// that require the highest levels of IOPS/throughput. PERSISTENT_2 supports SSD
+	// storage, and offers higher PerUnitStorageThroughput (up to 1000 MB/s/TiB).
+	// PERSISTENT_2 is available in a limited number of Amazon Web Services Regions.
+	// For more information, and an up-to-date list of Amazon Web Services Regions in
+	// which PERSISTENT_2 is available, see [File system deployment options for FSx for Lustre] in the Amazon FSx for Lustre User Guide.
+	//
+	// If you choose PERSISTENT_2 , and you set FileSystemTypeVersion to 2.10 , the
+	// CreateFileSystem operation fails.
+	//
 	// Encryption of data in transit is automatically turned on when you access
 	// SCRATCH_2 , PERSISTENT_1 and PERSISTENT_2 file systems from Amazon EC2
 	// instances that support automatic encryption in the Amazon Web Services Regions
 	// where they are available. For more information about encryption in transit for
-	// FSx for Lustre file systems, see Encrypting data in transit (https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html)
-	// in the Amazon FSx for Lustre User Guide. (Default = SCRATCH_1 )
+	// FSx for Lustre file systems, see [Encrypting data in transit]in the Amazon FSx for Lustre User Guide.
+	//
+	// (Default = SCRATCH_1 )
+	//
+	// [File system deployment options for FSx for Lustre]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-fsx-lustre.html#lustre-deployment-types
+	// [Encrypting data in transit]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html
 	DeploymentType LustreDeploymentType
 
 	// The type of drive cache used by PERSISTENT_1 file systems that are provisioned
 	// with HDD storage devices. This parameter is required when storage type is HDD.
 	// Set this property to READ to improve the performance for frequently accessed
 	// files by caching up to 20% of the total storage capacity of the file system.
+	//
 	// This parameter is required when StorageType is set to HDD .
 	DriveCacheType DriveCacheType
 
@@ -554,14 +654,17 @@ type CreateFileSystemLustreConfiguration struct {
 	// changed data is to be exported from your Amazon FSx for Lustre file system. If
 	// an ExportPath value is not provided, Amazon FSx sets a default export path,
 	// s3://import-bucket/FSxLustre[creation-timestamp] . The timestamp is in UTC
-	// format, for example s3://import-bucket/FSxLustre20181105T222312Z . The Amazon S3
-	// export bucket must be the same as the import bucket specified by ImportPath . If
-	// you specify only a bucket name, such as s3://import-bucket , you get a 1:1
-	// mapping of file system objects to S3 bucket objects. This mapping means that the
-	// input data in S3 is overwritten on export. If you provide a custom prefix in the
-	// export path, such as s3://import-bucket/[custom-optional-prefix] , Amazon FSx
-	// exports the contents of your file system to that export prefix in the Amazon S3
-	// bucket. This parameter is not supported for file systems with a data repository
+	// format, for example s3://import-bucket/FSxLustre20181105T222312Z .
+	//
+	// The Amazon S3 export bucket must be the same as the import bucket specified by
+	// ImportPath . If you specify only a bucket name, such as s3://import-bucket , you
+	// get a 1:1 mapping of file system objects to S3 bucket objects. This mapping
+	// means that the input data in S3 is overwritten on export. If you provide a
+	// custom prefix in the export path, such as
+	// s3://import-bucket/[custom-optional-prefix] , Amazon FSx exports the contents of
+	// your file system to that export prefix in the Amazon S3 bucket.
+	//
+	// This parameter is not supported for file systems with a data repository
 	// association.
 	ExportPath *string
 
@@ -571,6 +674,7 @@ type CreateFileSystemLustreConfiguration struct {
 	// of the Amazon S3 bucket you select. An example is
 	// s3://import-bucket/optional-prefix . If you specify a prefix after the Amazon S3
 	// bucket name, only object keys with that prefix are loaded into the file system.
+	//
 	// This parameter is not supported for file systems with a data repository
 	// association.
 	ImportPath *string
@@ -578,10 +682,13 @@ type CreateFileSystemLustreConfiguration struct {
 	// (Optional) For files imported from a data repository, this value determines the
 	// stripe count and maximum amount of data per file (in MiB) stored on a single
 	// physical disk. The maximum number of disks that a single file can be striped
-	// across is limited by the total number of disks that make up the file system. The
-	// default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500
-	// GiB). Amazon S3 objects have a maximum size of 5 TB. This parameter is not
-	// supported for file systems with a data repository association.
+	// across is limited by the total number of disks that make up the file system.
+	//
+	// The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB
+	// (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
+	//
+	// This parameter is not supported for file systems with a data repository
+	// association.
 	ImportedFileChunkSize *int32
 
 	// The Lustre logging configuration used when creating an Amazon FSx for Lustre
@@ -595,9 +702,14 @@ type CreateFileSystemLustreConfiguration struct {
 	// multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput
 	// (MB/s/TiB). For a 2.4-TiB ﬁle system, provisioning 50 MB/s/TiB of
 	// PerUnitStorageThroughput yields 120 MB/s of ﬁle system throughput. You pay for
-	// the amount of throughput that you provision. Valid values:
+	// the amount of throughput that you provision.
+	//
+	// Valid values:
+	//
 	//   - For PERSISTENT_1 SSD storage: 50, 100, 200 MB/s/TiB.
+	//
 	//   - For PERSISTENT_1 HDD storage: 12, 40 MB/s/TiB.
+	//
 	//   - For PERSISTENT_2 SSD storage: 125, 250, 500, 1000 MB/s/TiB.
 	PerUnitStorageThroughput *int32
 
@@ -620,15 +732,19 @@ type CreateFileSystemOntapConfiguration struct {
 
 	// Specifies the FSx for ONTAP file system deployment type to use in creating the
 	// file system.
+	//
 	//   - MULTI_AZ_1 - (Default) A high availability file system configured for
 	//   Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
 	//
 	//   - SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.
+	//
 	//   - SINGLE_AZ_2 - A file system configured with multiple high-availability (HA)
 	//   pairs for Single-AZ redundancy.
+	//
 	// For information about the use cases for Multi-AZ and Single-AZ deployments,
-	// refer to Choosing a file system deployment type (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-AZ.html)
-	// .
+	// refer to [Choosing a file system deployment type].
+	//
+	// [Choosing a file system deployment type]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-AZ.html
 	//
 	// This member is required.
 	DeploymentType OntapDeploymentType
@@ -663,12 +779,17 @@ type CreateFileSystemOntapConfiguration struct {
 	// file system. Scale-up file systems are powered by 1 HA pair. The default value
 	// is 1. FSx for ONTAP scale-out file systems are powered by up to 12 HA pairs. The
 	// value of this property affects the values of StorageCapacity , Iops , and
-	// ThroughputCapacity . For more information, see High-availability (HA) pairs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html)
-	// in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code
-	// 400 (Bad Request) for the following conditions:
+	// ThroughputCapacity . For more information, see [High-availability (HA) pairs] in the FSx for ONTAP user guide.
+	//
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
+	// following conditions:
+	//
 	//   - The value of HAPairs is less than 1 or greater than 12.
+	//
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
 	//   SINGLE_AZ_1 or MULTI_AZ_1 .
+	//
+	// [High-availability (HA) pairs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html
 	HAPairs *int32
 
 	// Required when DeploymentType is set to MULTI_AZ_1 . This specifies the subnet in
@@ -679,46 +800,68 @@ type CreateFileSystemOntapConfiguration struct {
 	// rules for routing traffic to the correct file server. You should specify all
 	// virtual private cloud (VPC) route tables associated with the subnets in which
 	// your clients are located. By default, Amazon FSx selects your VPC's default
-	// route table. Amazon FSx manages these route tables for Multi-AZ file systems
-	// using tag-based authentication. These route tables are tagged with Key:
-	// AmazonFSx; Value: ManagedByAmazonFSx . When creating FSx for ONTAP Multi-AZ file
-	// systems using CloudFormation we recommend that you add the Key: AmazonFSx;
-	// Value: ManagedByAmazonFSx tag manually.
+	// route table.
+	//
+	// Amazon FSx manages these route tables for Multi-AZ file systems using tag-based
+	// authentication. These route tables are tagged with Key: AmazonFSx; Value:
+	// ManagedByAmazonFSx . When creating FSx for ONTAP Multi-AZ file systems using
+	// CloudFormation we recommend that you add the Key: AmazonFSx; Value:
+	// ManagedByAmazonFSx tag manually.
 	RouteTableIds []string
 
 	// Sets the throughput capacity for the file system that you're creating in
-	// megabytes per second (MBps). For more information, see Managing throughput
-	// capacity (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html)
-	// in the FSx for ONTAP User Guide. Amazon FSx responds with an HTTP status code
-	// 400 (Bad Request) for the following conditions:
+	// megabytes per second (MBps). For more information, see [Managing throughput capacity]in the FSx for ONTAP
+	// User Guide.
+	//
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
+	// following conditions:
+	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value.
+	//
 	//   - The value of ThroughputCapacity when divided by the value of HAPairs is
 	//   outside of the valid range for ThroughputCapacity .
+	//
+	// [Managing throughput capacity]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html
 	ThroughputCapacity *int32
 
 	// Use to choose the throughput capacity per HA pair, rather than the total
-	// throughput for the file system. You can define either the
-	// ThroughputCapacityPerHAPair or the ThroughputCapacity when creating a file
-	// system, but not both. This field and ThroughputCapacity are the same for
-	// scale-up file systems powered by one HA pair.
+	// throughput for the file system.
+	//
+	// You can define either the ThroughputCapacityPerHAPair or the ThroughputCapacity
+	// when creating a file system, but not both.
+	//
+	// This field and ThroughputCapacity are the same for scale-up file systems
+	// powered by one HA pair.
+	//
 	//   - For SINGLE_AZ_1 and MULTI_AZ_1 file systems, valid values are 128, 256, 512,
 	//   1024, 2048, or 4096 MBps.
+	//
 	//   - For SINGLE_AZ_2 file systems, valid values are 3072 or 6144 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
+	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value for file systems with one HA pair.
+	//
 	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
 	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).
+	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -731,21 +874,26 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// Specifies the file system deployment type. Single AZ deployment types are
 	// configured for redundancy within a single Availability Zone in an Amazon Web
 	// Services Region . Valid values are the following:
+	//
 	//   - MULTI_AZ_1 - Creates file systems with high availability that are configured
 	//   for Multi-AZ redundancy to tolerate temporary unavailability in Availability
 	//   Zones (AZs). Multi_AZ_1 is available only in the US East (N. Virginia), US
 	//   East (Ohio), US West (Oregon), Asia Pacific (Singapore), Asia Pacific (Tokyo),
 	//   and Europe (Ireland) Amazon Web Services Regions.
+	//
 	//   - SINGLE_AZ_1 - Creates file systems with throughput capacities of 64 - 4,096
 	//   MB/s. Single_AZ_1 is available in all Amazon Web Services Regions where Amazon
 	//   FSx for OpenZFS is available.
+	//
 	//   - SINGLE_AZ_2 - Creates file systems with throughput capacities of 160 -
 	//   10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US
 	//   East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Singapore),
 	//   Asia Pacific (Tokyo), and Europe (Ireland) Amazon Web Services Regions.
-	// For more information, see Deployment type availability (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions)
-	// and File system performance (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance)
-	// in the Amazon FSx for OpenZFS User Guide.
+	//
+	// For more information, see [Deployment type availability] and [File system performance] in the Amazon FSx for OpenZFS User Guide.
+	//
+	// [Deployment type availability]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions
+	// [File system performance]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance
 	//
 	// This member is required.
 	DeploymentType OpenZFSDeploymentType
@@ -753,10 +901,13 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in
 	// megabytes per second (MBps). Valid values depend on the DeploymentType you
 	// choose, as follows:
+	//
 	//   - For MULTI_AZ_1 and SINGLE_AZ_2 , valid values are 160, 320, 640, 1280, 2560,
 	//   3840, 5120, 7680, or 10240 MBps.
+	//
 	//   - For SINGLE_AZ_1 , valid values are 64, 128, 256, 512, 1024, 2048, 3072, or
 	//   4096 MBps.
+	//
 	// You pay for additional throughput capacity that you provision.
 	//
 	// This member is required.
@@ -819,11 +970,17 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// route table.
 	RouteTableIds []string
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -851,19 +1008,28 @@ type CreateFileSystemWindowsConfiguration struct {
 	// create the file system using the AssociateFileSystemAliases operation. You can
 	// remove DNS aliases from the file system after it is created using the
 	// DisassociateFileSystemAliases operation. You only need to specify the alias name
-	// in the request payload. For more information, see Working with DNS Aliases (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
-	// and Walkthrough 5: Using DNS aliases to access your file system (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html)
-	// , including additional steps you must take to be able to access your file system
-	// using a DNS alias. An alias name has to meet the following requirements:
+	// in the request payload.
+	//
+	// For more information, see [Working with DNS Aliases] and [Walkthrough 5: Using DNS aliases to access your file system], including additional steps you must take to be
+	// able to access your file system using a DNS alias.
+	//
+	// An alias name has to meet the following requirements:
+	//
 	//   - Formatted as a fully-qualified domain name (FQDN), hostname.domain , for
 	//   example, accounting.example.com .
-	//   - Can contain alphanumeric characters, the underscore (_), and the hyphen
-	//   (-).
+	//
+	//   - Can contain alphanumeric characters, the underscore (_), and the hyphen (-).
+	//
 	//   - Cannot start or end with a hyphen.
+	//
 	//   - Can start with a numeric.
+	//
 	// For DNS alias names, Amazon FSx stores alphabetic characters as lowercase
 	// letters (a-z), regardless of how you specify them: as uppercase letters,
 	// lowercase letters, or the corresponding letters in escape codes.
+	//
+	// [Walkthrough 5: Using DNS aliases to access your file system]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
+	// [Working with DNS Aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
 	Aliases []string
 
 	// The configuration that Amazon FSx for Windows File Server uses to audit and log
@@ -890,18 +1056,22 @@ type CreateFileSystemWindowsConfiguration struct {
 	DailyAutomaticBackupStartTime *string
 
 	// Specifies the file system deployment type, valid values are the following:
+	//
 	//   - MULTI_AZ_1 - Deploys a high availability file system that is configured for
 	//   Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
 	//   You can only deploy a Multi-AZ file system in Amazon Web Services Regions that
 	//   have a minimum of three Availability Zones. Also supports HDD storage type
+	//
 	//   - SINGLE_AZ_1 - (Default) Choose to deploy a file system that is configured
 	//   for single AZ redundancy.
+	//
 	//   - SINGLE_AZ_2 - The latest generation Single AZ file system. Specifies a file
 	//   system that is configured for single AZ redundancy and supports HDD storage
 	//   type.
-	// For more information, see  Availability and Durability: Single-AZ and Multi-AZ
-	// File Systems (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html)
-	// .
+	//
+	// For more information, see [Availability and Durability: Single-AZ and Multi-AZ File Systems].
+	//
+	// [Availability and Durability: Single-AZ and Multi-AZ File Systems]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
 	DeploymentType WindowsDeploymentType
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
@@ -921,10 +1091,10 @@ type CreateFileSystemWindowsConfiguration struct {
 	// The configuration that Amazon FSx uses to join a FSx for Windows File Server
 	// file system or an FSx for ONTAP storage virtual machine (SVM) to a self-managed
 	// (including on-premises) Microsoft Active Directory (AD) directory. For more
-	// information, see Using Amazon FSx for Windows with your self-managed Microsoft
-	// Active Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
-	// or Managing FSx for ONTAP SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
-	// .
+	// information, see [Using Amazon FSx for Windows with your self-managed Microsoft Active Directory]or [Managing FSx for ONTAP SVMs].
+	//
+	// [Using Amazon FSx for Windows with your self-managed Microsoft Active Directory]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
+	// [Managing FSx for ONTAP SVMs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
@@ -962,30 +1132,38 @@ type CreateOntapVolumeConfiguration struct {
 	JunctionPath *string
 
 	// Specifies the type of volume you are creating. Valid values are the following:
+	//
 	//   - RW specifies a read/write volume. RW is the default.
+	//
 	//   - DP specifies a data-protection volume. A DP volume is read-only and can be
 	//   used as the destination of a NetApp SnapMirror relationship.
-	// For more information, see Volume types (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types)
-	// in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// For more information, see [Volume types] in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// [Volume types]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types
 	OntapVolumeType InputOntapVolumeType
 
 	// Specifies the security style for the volume. If a volume's security style is
 	// not specified, it is automatically set to the root volume's security style. The
 	// security style determines the type of permissions that FSx for ONTAP uses to
-	// control data access. For more information, see Volume security style (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style)
-	// in the Amazon FSx for NetApp ONTAP User Guide. Specify one of the following
-	// values:
+	// control data access. For more information, see [Volume security style]in the Amazon FSx for NetApp
+	// ONTAP User Guide. Specify one of the following values:
+	//
 	//   - UNIX if the file system is managed by a UNIX administrator, the majority of
 	//   users are NFS clients, and an application accessing the data uses a UNIX user as
 	//   the service account.
+	//
 	//   - NTFS if the file system is managed by a Windows administrator, the majority
 	//   of users are SMB clients, and an application accessing the data uses a Windows
 	//   user as the service account.
-	//   - MIXED This is an advanced setting. For more information, see the topic What
-	//   the security styles and their effects are (https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html)
-	//   in the NetApp Documentation Center.
-	// For more information, see Volume security style (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html)
-	// in the FSx for ONTAP User Guide.
+	//
+	//   - MIXED This is an advanced setting. For more information, see the topic [What the security styles and their effects are]in
+	//   the NetApp Documentation Center.
+	//
+	// For more information, see [Volume security style] in the FSx for ONTAP User Guide.
+	//
+	// [What the security styles and their effects are]: https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html
+	// [Volume security style]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html
 	SecurityStyle SecurityStyle
 
 	// Specifies the configured size of the volume, in bytes.
@@ -1002,21 +1180,29 @@ type CreateOntapVolumeConfiguration struct {
 
 	// Specifies the snapshot policy for the volume. There are three built-in snapshot
 	// policies:
+	//
 	//   - default : This is the default policy. A maximum of six hourly snapshots
 	//   taken five minutes past the hour. A maximum of two daily snapshots taken Monday
 	//   through Saturday at 10 minutes after midnight. A maximum of two weekly snapshots
 	//   taken every Sunday at 15 minutes after midnight.
+	//
 	//   - default-1weekly : This policy is the same as the default policy except that
 	//   it only retains one snapshot from the weekly schedule.
+	//
 	//   - none : This policy does not take any snapshots. This policy can be assigned
 	//   to volumes to prevent automatic snapshots from being taken.
+	//
 	// You can also provide the name of a custom policy that you created with the
-	// ONTAP CLI or REST API. For more information, see Snapshot policies (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
-	// in the Amazon FSx for NetApp ONTAP User Guide.
+	// ONTAP CLI or REST API.
+	//
+	// For more information, see [Snapshot policies] in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// [Snapshot policies]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies
 	SnapshotPolicy *string
 
 	// Set to true to enable deduplication, compression, and compaction storage
 	// efficiency features on the volume, or set to false to disable them.
+	//
 	// StorageEfficiencyEnabled is required when creating a RW volume ( OntapVolumeType
 	// set to RW ).
 	StorageEfficiencyEnabled *bool
@@ -1024,7 +1210,10 @@ type CreateOntapVolumeConfiguration struct {
 	// Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
 	// for ONTAP's intelligent tiering automatically transitions a volume's data
 	// between the file system's primary storage and capacity pool storage based on
-	// your access patterns. Valid tiering policies are the following:
+	// your access patterns.
+	//
+	// Valid tiering policies are the following:
+	//
 	//   - SNAPSHOT_ONLY - (Default value) moves cold snapshots to the capacity pool
 	//   storage tier.
 	//
@@ -1040,8 +1229,9 @@ type CreateOntapVolumeConfiguration struct {
 
 	// Use to specify the style of an ONTAP volume. FSx for ONTAP offers two styles of
 	// volumes that you can use for different purposes, FlexVol and FlexGroup volumes.
-	// For more information, see Volume styles (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-styles.html)
-	// in the Amazon FSx for NetApp ONTAP User Guide.
+	// For more information, see [Volume styles]in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// [Volume styles]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-styles.html
 	VolumeStyle VolumeStyle
 
 	noSmithyDocumentSerde
@@ -1053,17 +1243,21 @@ type CreateOpenZFSOriginSnapshotConfiguration struct {
 
 	// Specifies the strategy used when copying data from the snapshot to the new
 	// volume.
+	//
 	//   - CLONE - The new volume references the data in the origin snapshot. Cloning a
 	//   snapshot is faster than copying data from the snapshot to a new volume and
 	//   doesn't consume disk throughput. However, the origin snapshot can't be deleted
 	//   if there is a volume using its copied data.
-	//   - FULL_COPY - Copies all data from the snapshot to the new volume. Specify
-	//   this option to create the volume from a snapshot on another FSx for OpenZFS file
-	//   system.
+	//
+	//   - FULL_COPY - Copies all data from the snapshot to the new volume.
+	//
+	// Specify this option to create the volume from a snapshot on another FSx for
+	//   OpenZFS file system.
+	//
 	// The INCREMENTAL_COPY option is only for updating an existing volume by using a
-	// snapshot from another FSx for OpenZFS file system. For more information, see
-	// CopySnapshotAndUpdateVolume (https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html)
-	// .
+	// snapshot from another FSx for OpenZFS file system. For more information, see [CopySnapshotAndUpdateVolume].
+	//
+	// [CopySnapshotAndUpdateVolume]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html
 	//
 	// This member is required.
 	CopyStrategy OpenZFSCopyStrategy
@@ -1071,8 +1265,9 @@ type CreateOpenZFSOriginSnapshotConfiguration struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	SnapshotARN *string
@@ -1100,16 +1295,22 @@ type CreateOpenZFSVolumeConfiguration struct {
 
 	// Specifies the method used to compress the data on the volume. The compression
 	// type is NONE by default.
+	//
 	//   - NONE - Doesn't compress the data on the volume. NONE is the default.
+	//
 	//   - ZSTD - Compresses the data in the volume using the Zstandard (ZSTD)
 	//   compression algorithm. ZSTD compression provides a higher level of data
 	//   compression and higher read throughput performance than LZ4 compression.
+	//
 	//   - LZ4 - Compresses the data in the volume using the LZ4 compression algorithm.
 	//   LZ4 compression provides a lower level of compression and higher write
 	//   throughput performance than ZSTD compression.
+	//
 	// For more information about volume compression types and the performance of your
-	// Amazon FSx for OpenZFS file system, see Tips for maximizing performance (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs)
-	// File system and volume settings in the Amazon FSx for OpenZFS User Guide.
+	// Amazon FSx for OpenZFS file system, see [Tips for maximizing performance]File system and volume settings in the
+	// Amazon FSx for OpenZFS User Guide.
+	//
+	// [Tips for maximizing performance]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
 	DataCompressionType OpenZFSDataCompressionType
 
 	// The configuration object for mounting a Network File System (NFS) file system.
@@ -1128,8 +1329,10 @@ type CreateOpenZFSVolumeConfiguration struct {
 	// use cases. Generally, workloads that write in fixed small or large record sizes
 	// may benefit from setting a custom record size, like database workloads (small
 	// record size) or media streaming workloads (large record size). For additional
-	// guidance on when to set a custom record size, see ZFS Record size (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#record-size-performance)
-	// in the Amazon FSx for OpenZFS User Guide.
+	// guidance on when to set a custom record size, see [ZFS Record size]in the Amazon FSx for OpenZFS
+	// User Guide.
+	//
+	// [ZFS Record size]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#record-size-performance
 	RecordSizeKiB *int32
 
 	// Sets the maximum storage size in gibibytes (GiB) for the volume. You can
@@ -1137,9 +1340,11 @@ type CreateOpenZFSVolumeConfiguration struct {
 	// quota limits the amount of storage that the volume can consume to the configured
 	// amount, but does not guarantee the space will be available on the parent volume.
 	// To guarantee quota space, you must also set StorageCapacityReservationGiB . To
-	// not specify a storage capacity quota, set this to -1 . For more information, see
-	// Volume properties (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties)
-	// in the Amazon FSx for OpenZFS User Guide.
+	// not specify a storage capacity quota, set this to -1 .
+	//
+	// For more information, see [Volume properties] in the Amazon FSx for OpenZFS User Guide.
+	//
+	// [Volume properties]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
 	StorageCapacityQuotaGiB *int32
 
 	// Specifies the amount of storage in gibibytes (GiB) to reserve from the parent
@@ -1147,8 +1352,9 @@ type CreateOpenZFSVolumeConfiguration struct {
 	// amount of storage space on the parent volume will always be available for the
 	// volume. You can't reserve more storage than the parent volume has. To not
 	// specify a storage capacity reservation, set this to 0 or -1 . For more
-	// information, see Volume properties (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties)
-	// in the Amazon FSx for OpenZFS User Guide.
+	// information, see [Volume properties]in the Amazon FSx for OpenZFS User Guide.
+	//
+	// [Volume properties]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
 	StorageCapacityReservationGiB *int32
 
 	// Configures how much storage users and groups can use on the volume.
@@ -1163,18 +1369,20 @@ type CreateSnaplockConfiguration struct {
 
 	// Specifies the retention mode of an FSx for ONTAP SnapLock volume. After it is
 	// set, it can't be changed. You can choose one of the following retention modes:
+	//
 	//   - COMPLIANCE : Files transitioned to write once, read many (WORM) on a
 	//   Compliance volume can't be deleted until their retention periods expire. This
 	//   retention mode is used to address government or industry-specific mandates or to
-	//   protect against ransomware attacks. For more information, see SnapLock
-	//   Compliance (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html)
-	//   .
+	//   protect against ransomware attacks. For more information, see [SnapLock Compliance].
+	//
 	//   - ENTERPRISE : Files transitioned to WORM on an Enterprise volume can be
 	//   deleted by authorized users before their retention periods expire using
 	//   privileged delete. This retention mode is used to advance an organization's data
 	//   integrity and internal compliance or to test retention settings before using
-	//   SnapLock Compliance. For more information, see SnapLock Enterprise (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html)
-	//   .
+	//   SnapLock Compliance. For more information, see [SnapLock Enterprise].
+	//
+	// [SnapLock Enterprise]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html
+	// [SnapLock Compliance]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html
 	//
 	// This member is required.
 	SnaplockType SnaplockType
@@ -1182,9 +1390,11 @@ type CreateSnaplockConfiguration struct {
 	// Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume.
 	// The default value is false . If you set AuditLogVolume to true , the SnapLock
 	// volume is created as an audit log volume. The minimum retention period for an
-	// audit log volume is six months. For more information, see SnapLock audit log
-	// volumes (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume)
-	// .
+	// audit log volume is six months.
+	//
+	// For more information, see [SnapLock audit log volumes].
+	//
+	// [SnapLock audit log volumes]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume
 	AuditLogVolume *bool
 
 	// The configuration object for setting the autocommit period of files in an FSx
@@ -1196,8 +1406,11 @@ type CreateSnaplockConfiguration struct {
 	// administrators to delete WORM files even if they have active retention periods.
 	// PERMANENTLY_DISABLED is a terminal state. If privileged delete is permanently
 	// disabled on a SnapLock volume, you can't re-enable it. The default value is
-	// DISABLED . For more information, see Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete)
-	// .
+	// DISABLED .
+	//
+	// For more information, see [Privileged delete].
+	//
+	// [Privileged delete]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete
 	PrivilegedDelete PrivilegedDelete
 
 	// Specifies the retention period of an FSx for ONTAP SnapLock volume.
@@ -1205,9 +1418,11 @@ type CreateSnaplockConfiguration struct {
 
 	// Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume.
 	// Volume-append mode allows you to create WORM-appendable files and write data to
-	// them incrementally. The default value is false . For more information, see
-	// Volume-append mode (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append)
-	// .
+	// them incrementally. The default value is false .
+	//
+	// For more information, see [Volume-append mode].
+	//
+	// [Volume-append mode]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append
 	VolumeAppendModeEnabled *bool
 
 	noSmithyDocumentSerde
@@ -1227,10 +1442,10 @@ type CreateSvmActiveDirectoryConfiguration struct {
 	// The configuration that Amazon FSx uses to join a FSx for Windows File Server
 	// file system or an FSx for ONTAP storage virtual machine (SVM) to a self-managed
 	// (including on-premises) Microsoft Active Directory (AD) directory. For more
-	// information, see Using Amazon FSx for Windows with your self-managed Microsoft
-	// Active Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
-	// or Managing FSx for ONTAP SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
-	// .
+	// information, see [Using Amazon FSx for Windows with your self-managed Microsoft Active Directory]or [Managing FSx for ONTAP SVMs].
+	//
+	// [Using Amazon FSx for Windows with your self-managed Microsoft Active Directory]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
+	// [Managing FSx for ONTAP SVMs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
 	noSmithyDocumentSerde
@@ -1240,8 +1455,11 @@ type CreateSvmActiveDirectoryConfiguration struct {
 // Lustre file system to an Amazon S3 bucket or an Amazon File Cache resource to an
 // Amazon S3 bucket or an NFS file system. The data repository association
 // configuration object is returned in the response of the following operations:
+//
 //   - CreateDataRepositoryAssociation
+//
 //   - UpdateDataRepositoryAssociation
+//
 //   - DescribeDataRepositoryAssociations
 //
 // Data repository associations are supported on Amazon File Cache resources and
@@ -1254,28 +1472,34 @@ type DataRepositoryAssociation struct {
 
 	// A boolean flag indicating whether an import data repository task to import
 	// metadata should run after the data repository association is created. The task
-	// runs if this flag is set to true . BatchImportMetaDataOnCreate is not supported
-	// for data repositories linked to an Amazon File Cache resource.
+	// runs if this flag is set to true .
+	//
+	// BatchImportMetaDataOnCreate is not supported for data repositories linked to an
+	// Amazon File Cache resource.
 	BatchImportMetaDataOnCreate *bool
 
 	// The time that the resource was created, in seconds (since
 	// 1970-01-01T00:00:00Z), also known as Unix time.
 	CreationTime *time.Time
 
-	// The path to the data repository that will be linked to the cache or file
-	// system.
+	// The path to the data repository that will be linked to the cache or file system.
+	//
 	//   - For Amazon File Cache, the path can be an NFS data repository that will be
 	//   linked to the cache. The path can be in one of two formats:
+	//
 	//   - If you are not using the DataRepositorySubdirectories parameter, the path is
 	//   to an NFS Export directory (or one of its subdirectories) in the format
 	//   nsf://nfs-domain-name/exportpath . You can therefore link a single NFS Export
 	//   to a single data repository association.
+	//
 	//   - If you are using the DataRepositorySubdirectories parameter, the path is the
 	//   domain name of the NFS file system in the format nfs://filer-domain-name ,
 	//   which indicates the root of the subdirectories specified with the
 	//   DataRepositorySubdirectories parameter.
+	//
 	//   - For Amazon File Cache, the path can be an S3 bucket or prefix in the format
 	//   s3://myBucket/myPrefix/ .
+	//
 	//   - For Amazon FSx for Lustre, the path can be an S3 bucket or prefix in the
 	//   format s3://myBucket/myPrefix/ .
 	DataRepositoryPath *string
@@ -1301,12 +1525,16 @@ type DataRepositoryAssociation struct {
 	// DataRepositoryPath . The leading forward slash in the path is required. Two data
 	// repository associations cannot have overlapping cache paths. For example, if a
 	// data repository is associated with cache path /ns1/ , then you cannot link
-	// another data repository with cache path /ns1/ns2 . This path specifies the
-	// directory in your cache where files will be exported from. This cache directory
-	// can be linked to only one data repository (S3 or NFS) and no other data
-	// repository can be linked to the directory. The cache path can only be set to
-	// root (/) on an NFS DRA when DataRepositorySubdirectories is specified. If you
-	// specify root (/) as the cache path, you can create only one DRA on the cache.
+	// another data repository with cache path /ns1/ns2 .
+	//
+	// This path specifies the directory in your cache where files will be exported
+	// from. This cache directory can be linked to only one data repository (S3 or NFS)
+	// and no other data repository can be linked to the directory.
+	//
+	// The cache path can only be set to root (/) on an NFS DRA when
+	// DataRepositorySubdirectories is specified. If you specify root (/) as the cache
+	// path, you can create only one DRA on the cache.
+	//
 	// The cache path cannot be set to root (/) for an S3 DRA.
 	FileCachePath *string
 
@@ -1319,34 +1547,44 @@ type DataRepositoryAssociation struct {
 	// required. Two data repository associations cannot have overlapping file system
 	// paths. For example, if a data repository is associated with file system path
 	// /ns1/ , then you cannot link another data repository with file system path
-	// /ns1/ns2 . This path specifies where in your file system files will be exported
-	// from or imported to. This file system directory can be linked to only one Amazon
-	// S3 bucket, and no other S3 bucket can be linked to the directory. If you specify
-	// only a forward slash ( / ) as the file system path, you can link only one data
-	// repository to the file system. You can only specify "/" as the file system path
-	// for the first data repository associated with a file system.
+	// /ns1/ns2 .
+	//
+	// This path specifies where in your file system files will be exported from or
+	// imported to. This file system directory can be linked to only one Amazon S3
+	// bucket, and no other S3 bucket can be linked to the directory.
+	//
+	// If you specify only a forward slash ( / ) as the file system path, you can link
+	// only one data repository to the file system. You can only specify "/" as the
+	// file system path for the first data repository associated with a file system.
 	FileSystemPath *string
 
 	// For files imported from a data repository, this value determines the stripe
 	// count and maximum amount of data per file (in MiB) stored on a single physical
 	// disk. The maximum number of disks that a single file can be striped across is
-	// limited by the total number of disks that make up the file system or cache. The
-	// default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500
-	// GiB). Amazon S3 objects have a maximum size of 5 TB.
+	// limited by the total number of disks that make up the file system or cache.
+	//
+	// The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB
+	// (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
 	ImportedFileChunkSize *int32
 
 	// Describes the state of a data repository association. The lifecycle can have
 	// the following values:
+	//
 	//   - CREATING - The data repository association between the file system or cache
 	//   and the data repository is being created. The data repository is unavailable.
+	//
 	//   - AVAILABLE - The data repository association is available for use.
+	//
 	//   - MISCONFIGURED - The data repository association is misconfigured. Until the
 	//   configuration is corrected, automatic import and automatic export will not work
 	//   (only for Amazon FSx for Lustre).
+	//
 	//   - UPDATING - The data repository association is undergoing a customer
 	//   initiated update that might affect its availability.
+	//
 	//   - DELETING - The data repository association is undergoing a customer
 	//   initiated deletion.
+	//
 	//   - FAILED - The data repository association is in a terminal state that cannot
 	//   be recovered.
 	Lifecycle DataRepositoryLifecycle
@@ -1358,8 +1596,9 @@ type DataRepositoryAssociation struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceARN *string
 
 	// The configuration for an Amazon S3 data repository linked to an Amazon FSx for
@@ -1373,25 +1612,30 @@ type DataRepositoryAssociation struct {
 }
 
 // The data repository configuration object for Lustre file systems returned in
-// the response of the CreateFileSystem operation. This data type is not supported
-// on file systems with a data repository association. For file systems with a data
-// repository association, see .
+// the response of the CreateFileSystem operation.
+//
+// This data type is not supported on file systems with a data repository
+// association. For file systems with a data repository association, see .
 type DataRepositoryConfiguration struct {
 
 	// Describes the file system's linked S3 data repository's AutoImportPolicy . The
 	// AutoImportPolicy configures how Amazon FSx keeps your file and directory
 	// listings up to date as you add or modify objects in your linked S3 bucket.
 	// AutoImportPolicy can have the following values:
+	//
 	//   - NONE - (Default) AutoImport is off. Amazon FSx only updates file and
 	//   directory listings from the linked S3 bucket when the file system is created.
 	//   FSx does not update file and directory listings for any new or changed objects
 	//   after choosing this option.
+	//
 	//   - NEW - AutoImport is on. Amazon FSx automatically imports directory listings
 	//   of any new objects added to the linked S3 bucket that do not currently exist in
 	//   the FSx file system.
+	//
 	//   - NEW_CHANGED - AutoImport is on. Amazon FSx automatically imports file and
 	//   directory listings of any new objects added to the S3 bucket and any existing
 	//   objects that are changed in the S3 bucket after you choose this option.
+	//
 	//   - NEW_CHANGED_DELETED - AutoImport is on. Amazon FSx automatically imports
 	//   file and directory listings of any new objects added to the S3 bucket, any
 	//   existing objects that are changed in the S3 bucket, and any objects that were
@@ -1416,25 +1660,31 @@ type DataRepositoryConfiguration struct {
 	// For files imported from a data repository, this value determines the stripe
 	// count and maximum amount of data per file (in MiB) stored on a single physical
 	// disk. The maximum number of disks that a single file can be striped across is
-	// limited by the total number of disks that make up the file system. The default
-	// chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB).
-	// Amazon S3 objects have a maximum size of 5 TB.
+	// limited by the total number of disks that make up the file system.
+	//
+	// The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB
+	// (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
 	ImportedFileChunkSize *int32
 
 	// Describes the state of the file system's S3 durable data repository, if it is
 	// configured with an S3 repository. The lifecycle can have the following values:
+	//
 	//   - CREATING - The data repository configuration between the FSx file system and
 	//   the linked S3 data repository is being created. The data repository is
 	//   unavailable.
+	//
 	//   - AVAILABLE - The data repository is available for use.
+	//
 	//   - MISCONFIGURED - Amazon FSx cannot automatically import updates from the S3
 	//   bucket until the data repository configuration is corrected. For more
-	//   information, see Troubleshooting a Misconfigured linked S3 bucket (https://docs.aws.amazon.com/fsx/latest/LustreGuide/troubleshooting.html#troubleshooting-misconfigured-data-repository)
-	//   .
+	//   information, see [Troubleshooting a Misconfigured linked S3 bucket].
+	//
 	//   - UPDATING - The data repository is undergoing a customer initiated update and
 	//   availability may be impacted.
-	//   - FAILED - The data repository is in a terminal state that cannot be
-	//   recovered.
+	//
+	//   - FAILED - The data repository is in a terminal state that cannot be recovered.
+	//
+	// [Troubleshooting a Misconfigured linked S3 bucket]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/troubleshooting.html#troubleshooting-misconfigured-data-repository
 	Lifecycle DataRepositoryLifecycle
 
 	noSmithyDocumentSerde
@@ -1451,16 +1701,20 @@ type DataRepositoryFailureDetails struct {
 }
 
 // A description of the data repository task.
+//
 //   - You use import and export data repository tasks to perform bulk transfer
 //     operations between an Amazon FSx for Lustre file system and a linked data
 //     repository.
+//
 //   - You use release data repository tasks to release files that have been
 //     exported to a linked S3 bucket from your Amazon FSx for Lustre file system.
+//
 //   - An Amazon File Cache resource uses a task to automatically release files
 //     from the cache.
 //
-// To learn more about data repository tasks, see Data Repository Tasks (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html)
-// .
+// To learn more about data repository tasks, see [Data Repository Tasks].
+//
+// [Data Repository Tasks]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html
 type DataRepositoryTask struct {
 
 	// The time that the resource was created, in seconds (since
@@ -1470,14 +1724,21 @@ type DataRepositoryTask struct {
 	CreationTime *time.Time
 
 	// The lifecycle status of the data repository task, as follows:
+	//
 	//   - PENDING - The task has not started.
+	//
 	//   - EXECUTING - The task is in process.
+	//
 	//   - FAILED - The task was not able to be completed. For example, there may be
-	//   files the task failed to process. The DataRepositoryTaskFailureDetails
-	//   property provides more information about task failures.
+	//   files the task failed to process. The DataRepositoryTaskFailureDetailsproperty provides more information
+	//   about task failures.
+	//
 	//   - SUCCEEDED - The task has completed successfully.
+	//
 	//   - CANCELED - The task was canceled and it did not complete.
+	//
 	//   - CANCELING - The task is in process of being canceled.
+	//
 	// You cannot delete an FSx for Lustre file system if there are data repository
 	// tasks for the file system in the PENDING or EXECUTING states. Please retry when
 	// the data repository task is finished (with a status of CANCELED , SUCCEEDED , or
@@ -1493,13 +1754,17 @@ type DataRepositoryTask struct {
 	TaskId *string
 
 	// The type of data repository task.
+	//
 	//   - EXPORT_TO_REPOSITORY tasks export from your Amazon FSx for Lustre file
 	//   system to a linked data repository.
+	//
 	//   - IMPORT_METADATA_FROM_REPOSITORY tasks import metadata changes from a linked
 	//   S3 bucket to your Amazon FSx for Lustre file system.
+	//
 	//   - RELEASE_DATA_FROM_FILESYSTEM tasks release files in your Amazon FSx for
 	//   Lustre file system that have been exported to a linked S3 bucket and that meet
 	//   your specified release criteria.
+	//
 	//   - AUTO_RELEASE_DATA tasks automatically release files from an Amazon File
 	//   Cache resource.
 	//
@@ -1526,8 +1791,10 @@ type DataRepositoryTask struct {
 
 	// An array of paths that specify the data for the data repository task to
 	// process. For example, in an EXPORT_TO_REPOSITORY task, the paths specify which
-	// data to export to the linked data repository. (Default) If Paths is not
-	// specified, Amazon FSx uses the file system root directory.
+	// data to export to the linked data repository.
+	//
+	// (Default) If Paths is not specified, Amazon FSx uses the file system root
+	// directory.
 	Paths []string
 
 	// The configuration that specifies the last accessed time criteria for files that
@@ -1544,8 +1811,9 @@ type DataRepositoryTask struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceARN *string
 
 	// The time the system began processing the task.
@@ -1580,8 +1848,10 @@ type DataRepositoryTaskFilter struct {
 
 	// Name of the task property to use in filtering the tasks returned in the
 	// response.
+	//
 	//   - Use file-system-id to retrieve data repository tasks for specific file
 	//   systems.
+	//
 	//   - Use task-lifecycle to retrieve data repository tasks with one or more
 	//   specific lifecycle states, as follows: CANCELED, EXECUTING, FAILED, PENDING, and
 	//   SUCCEEDED.
@@ -1634,6 +1904,7 @@ type DeleteFileSystemLustreConfiguration struct {
 	// Set SkipFinalBackup to false if you want to take a final backup of the file
 	// system you are deleting. By default, Amazon FSx will not take a final backup on
 	// your behalf when the DeleteFileSystem operation is invoked. (Default = true)
+	//
 	// The fsx:CreateBackup permission is required if you set SkipFinalBackup to false
 	// in order to delete the file system and take a final backup.
 	SkipFinalBackup *bool
@@ -1726,8 +1997,11 @@ type DeleteVolumeOntapConfiguration struct {
 	// SnapLock Enterprise volume with unexpired write once, read many (WORM) files.
 	// The IAM permission fsx:BypassSnaplockEnterpriseRetention is also required to
 	// delete SnapLock Enterprise volumes with unexpired WORM files. The default value
-	// is false . For more information, see  Deleting a SnapLock volume (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-delete-volume.html)
-	// .
+	// is false .
+	//
+	// For more information, see [Deleting a SnapLock volume].
+	//
+	// [Deleting a SnapLock volume]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-delete-volume.html
 	BypassSnaplockEnterpriseRetention *bool
 
 	// A list of Tag values, with a maximum of 50 elements.
@@ -1771,12 +2045,15 @@ type DeleteVolumeOpenZFSConfiguration struct {
 // was provisioned, or the mode (by the customer or by Amazon FSx).
 type DiskIopsConfiguration struct {
 
-	// The total number of SSD IOPS provisioned for the file system. The minimum and
-	// maximum values for this property depend on the value of HAPairs and
-	// StorageCapacity . The minimum value is calculated as StorageCapacity * 3 *
+	// The total number of SSD IOPS provisioned for the file system.
+	//
+	// The minimum and maximum values for this property depend on the value of HAPairs
+	// and StorageCapacity . The minimum value is calculated as StorageCapacity * 3 *
 	// HAPairs (3 IOPS per GB of StorageCapacity ). The maximum value is calculated as
-	// 200,000 * HAPairs . Amazon FSx responds with an HTTP status code 400 (Bad
-	// Request) if the value of Iops is outside of the minimum or maximum values.
+	// 200,000 * HAPairs .
+	//
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) if the value of
+	// Iops is outside of the minimum or maximum values.
 	Iops *int64
 
 	// Specifies whether the file system is using the AUTOMATIC setting of SSD IOPS of
@@ -1801,9 +2078,11 @@ type DurationSinceLastAccess struct {
 	// was last accessed in the file system. Only exported files with a MAX(atime,
 	// ctime, mtime) timestamp that is more than this amount of time in the past
 	// (relative to the task create time) will be released. The default of Value is 0 .
-	// This is a required parameter. If an exported file meets the last accessed time
-	// criteria, its file or directory path must also be specified in the Paths
-	// parameter of the operation in order for the file to be released.
+	// This is a required parameter.
+	//
+	// If an exported file meets the last accessed time criteria, its file or
+	// directory path must also be specified in the Paths parameter of the operation
+	// in order for the file to be released.
 	Value *int64
 
 	noSmithyDocumentSerde
@@ -1838,17 +2117,24 @@ type FileCache struct {
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
 	// data on an Amazon File Cache. If a KmsKeyId isn't specified, the Amazon
-	// FSx-managed KMS key for your account is used. For more information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
-	// in the Key Management Service API Reference.
+	// FSx-managed KMS key for your account is used. For more information, see [Encrypt]in the
+	// Key Management Service API Reference.
+	//
+	// [Encrypt]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
 	KmsKeyId *string
 
 	// The lifecycle status of the cache. The following are the possible values and
 	// what they mean:
+	//
 	//   - AVAILABLE - The cache is in a healthy state, and is reachable and available
 	//   for use.
+	//
 	//   - CREATING - The new cache is being created.
+	//
 	//   - DELETING - An existing cache is being deleted.
+	//
 	//   - UPDATING - The cache is undergoing a customer-initiated update.
+	//
 	//   - FAILED - An existing cache has experienced an unrecoverable failure. When
 	//   creating a new cache, the cache was unable to be created.
 	Lifecycle FileCacheLifecycle
@@ -1866,8 +2152,9 @@ type FileCache struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceARN *string
 
 	// The storage capacity of the cache in gibibytes (GiB).
@@ -1877,9 +2164,10 @@ type FileCache struct {
 	// only one subnet ID in a call to the CreateFileCache operation.
 	SubnetIds []string
 
-	// The ID of your virtual private cloud (VPC). For more information, see VPC and
-	// subnets (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html)
-	// in the Amazon VPC User Guide.
+	// The ID of your virtual private cloud (VPC). For more information, see [VPC and subnets] in the
+	// Amazon VPC User Guide.
+	//
+	// [VPC and subnets]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -1918,17 +2206,24 @@ type FileCacheCreating struct {
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
 	// data on an Amazon File Cache. If a KmsKeyId isn't specified, the Amazon
-	// FSx-managed KMS key for your account is used. For more information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
-	// in the Key Management Service API Reference.
+	// FSx-managed KMS key for your account is used. For more information, see [Encrypt]in the
+	// Key Management Service API Reference.
+	//
+	// [Encrypt]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
 	KmsKeyId *string
 
 	// The lifecycle status of the cache. The following are the possible values and
 	// what they mean:
+	//
 	//   - AVAILABLE - The cache is in a healthy state, and is reachable and available
 	//   for use.
+	//
 	//   - CREATING - The new cache is being created.
+	//
 	//   - DELETING - An existing cache is being deleted.
+	//
 	//   - UPDATING - The cache is undergoing a customer-initiated update.
+	//
 	//   - FAILED - An existing cache has experienced an unrecoverable failure. When
 	//   creating a new cache, the cache was unable to be created.
 	Lifecycle FileCacheLifecycle
@@ -1946,8 +2241,9 @@ type FileCacheCreating struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceARN *string
 
 	// The storage capacity of the cache in gibibytes (GiB).
@@ -1960,9 +2256,10 @@ type FileCacheCreating struct {
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []Tag
 
-	// The ID of your virtual private cloud (VPC). For more information, see VPC and
-	// subnets (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html)
-	// in the Amazon VPC User Guide.
+	// The ID of your virtual private cloud (VPC). For more information, see [VPC and subnets] in the
+	// Amazon VPC User Guide.
+	//
+	// [VPC and subnets]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -1971,22 +2268,27 @@ type FileCacheCreating struct {
 // The configuration for a data repository association (DRA) to be created during
 // the Amazon File Cache resource creation. The DRA links the cache to either an
 // Amazon S3 bucket or prefix, or a Network File System (NFS) data repository that
-// supports the NFSv3 protocol. The DRA does not support automatic import or
-// automatic export.
+// supports the NFSv3 protocol.
+//
+// The DRA does not support automatic import or automatic export.
 type FileCacheDataRepositoryAssociation struct {
 
 	// The path to the S3 or NFS data repository that links to the cache. You must
 	// provide one of the following paths:
+	//
 	//   - The path can be an NFS data repository that links to the cache. The path
 	//   can be in one of two formats:
+	//
 	//   - If you are not using the DataRepositorySubdirectories parameter, the path is
 	//   to an NFS Export directory (or one of its subdirectories) in the format
 	//   nsf://nfs-domain-name/exportpath . You can therefore link a single NFS Export
 	//   to a single data repository association.
+	//
 	//   - If you are using the DataRepositorySubdirectories parameter, the path is the
 	//   domain name of the NFS file system in the format nfs://filer-domain-name ,
 	//   which indicates the root of the subdirectories specified with the
 	//   DataRepositorySubdirectories parameter.
+	//
 	//   - The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/
 	//   .
 	//
@@ -1998,13 +2300,17 @@ type FileCacheDataRepositoryAssociation struct {
 	// DataRepositoryPath . The leading forward slash in the name is required. Two data
 	// repository associations cannot have overlapping cache paths. For example, if a
 	// data repository is associated with cache path /ns1/ , then you cannot link
-	// another data repository with cache path /ns1/ns2 . This path specifies where in
-	// your cache files will be exported from. This cache directory can be linked to
-	// only one data repository, and no data repository other can be linked to the
-	// directory. The cache path can only be set to root (/) on an NFS DRA when
+	// another data repository with cache path /ns1/ns2 .
+	//
+	// This path specifies where in your cache files will be exported from. This cache
+	// directory can be linked to only one data repository, and no data repository
+	// other can be linked to the directory.
+	//
+	// The cache path can only be set to root (/) on an NFS DRA when
 	// DataRepositorySubdirectories is specified. If you specify root (/) as the cache
-	// path, you can create only one DRA on the cache. The cache path cannot be set to
-	// root (/) for an S3 DRA.
+	// path, you can create only one DRA on the cache.
+	//
+	// The cache path cannot be set to root (/) for an S3 DRA.
 	//
 	// This member is required.
 	FileCachePath *string
@@ -2057,11 +2363,17 @@ type FileCacheLustreConfiguration struct {
 	// (MB/s/TiB). The only supported value is 1000 .
 	PerUnitStorageThroughput *int32
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -2132,27 +2444,39 @@ type FileSystem struct {
 
 	// The ID of the Key Management Service (KMS) key used to encrypt Amazon FSx file
 	// system data. Used as follows with Amazon FSx file system types:
+	//
 	//   - Amazon FSx for Lustre PERSISTENT_1 and PERSISTENT_2 deployment types only.
-	//   SCRATCH_1 and SCRATCH_2 types are encrypted using the Amazon FSx service KMS
-	//   key for your account.
+	//
+	// SCRATCH_1 and SCRATCH_2 types are encrypted using the Amazon FSx service KMS key
+	//   for your account.
+	//
 	//   - Amazon FSx for NetApp ONTAP
+	//
 	//   - Amazon FSx for OpenZFS
+	//
 	//   - Amazon FSx for Windows File Server
 	KmsKeyId *string
 
 	// The lifecycle status of the file system. The following are the possible values
 	// and what they mean:
+	//
 	//   - AVAILABLE - The file system is in a healthy state, and is reachable and
 	//   available for use.
+	//
 	//   - CREATING - Amazon FSx is creating the new file system.
+	//
 	//   - DELETING - Amazon FSx is deleting an existing file system.
+	//
 	//   - FAILED - An existing file system has experienced an unrecoverable failure.
 	//   When creating a new file system, Amazon FSx was unable to create the file
 	//   system.
+	//
 	//   - MISCONFIGURED - The file system is in a failed but recoverable state.
+	//
 	//   - MISCONFIGURED_UNAVAILABLE - (Amazon FSx for Windows File Server only) The
 	//   file system is currently unavailable due to a change in your Active Directory
 	//   configuration.
+	//
 	//   - UPDATING - The file system is undergoing a customer-initiated update.
 	Lifecycle FileSystemLifecycle
 
@@ -2162,10 +2486,13 @@ type FileSystem struct {
 	// The IDs of the elastic network interfaces from which a specific file system is
 	// accessible. The elastic network interface is automatically created in the same
 	// virtual private cloud (VPC) that the Amazon FSx file system was created in. For
-	// more information, see Elastic Network Interfaces (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html)
-	// in the Amazon EC2 User Guide. For an Amazon FSx for Windows File Server file
-	// system, you can have one network interface ID. For an Amazon FSx for Lustre file
-	// system, you can have more than one.
+	// more information, see [Elastic Network Interfaces]in the Amazon EC2 User Guide.
+	//
+	// For an Amazon FSx for Windows File Server file system, you can have one network
+	// interface ID. For an Amazon FSx for Lustre file system, you can have more than
+	// one.
+	//
+	// [Elastic Network Interfaces]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
 	NetworkInterfaceIds []string
 
 	// The configuration for this Amazon FSx for NetApp ONTAP file system.
@@ -2182,9 +2509,10 @@ type FileSystem struct {
 	// The Amazon Resource Name (ARN) of the file system resource.
 	ResourceARN *string
 
-	// The storage capacity of the file system in gibibytes (GiB). Amazon FSx responds
-	// with an HTTP status code 400 (Bad Request) if the value of StorageCapacity is
-	// outside of the minimum or maximum values.
+	// The storage capacity of the file system in gibibytes (GiB).
+	//
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) if the value of
+	// StorageCapacity is outside of the minimum or maximum values.
 	StorageCapacity *int32
 
 	// The type of storage the file system is using. If set to SSD , the file system
@@ -2196,16 +2524,18 @@ type FileSystem struct {
 	// the Amazon FSx Windows and ONTAP MULTI_AZ_1 file system deployment type, there
 	// are two subnet IDs, one for the preferred file server and one for the standby
 	// file server. The preferred file server subnet identified in the
-	// PreferredSubnetID property. All other file systems have only one subnet ID. For
-	// FSx for Lustre file systems, and Single-AZ Windows file systems, this is the ID
-	// of the subnet that contains the file system's endpoint. For MULTI_AZ_1 Windows
-	// and ONTAP file systems, the file system endpoint is available in the
+	// PreferredSubnetID property. All other file systems have only one subnet ID.
+	//
+	// For FSx for Lustre file systems, and Single-AZ Windows file systems, this is
+	// the ID of the subnet that contains the file system's endpoint. For MULTI_AZ_1
+	// Windows and ONTAP file systems, the file system endpoint is available in the
 	// PreferredSubnetID .
 	SubnetIds []string
 
-	// The tags to associate with the file system. For more information, see Tagging
-	// your Amazon FSx resources (https://docs.aws.amazon.com/fsx/latest/LustreGuide/tag-resources.html)
-	// in the Amazon FSx for Lustre User Guide.
+	// The tags to associate with the file system. For more information, see [Tagging your Amazon FSx resources] in the
+	// Amazon FSx for Lustre User Guide.
+	//
+	// [Tagging your Amazon FSx resources]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/tag-resources.html
 	Tags []Tag
 
 	// The ID of the primary virtual private cloud (VPC) for the file system.
@@ -2303,29 +2633,40 @@ type LustreFileSystemConfiguration struct {
 
 	// The data compression configuration for the file system. DataCompressionType can
 	// have the following values:
+	//
 	//   - NONE - Data compression is turned off for the file system.
+	//
 	//   - LZ4 - Data compression is turned on with the LZ4 algorithm.
-	// For more information, see Lustre data compression (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html)
-	// .
+	//
+	// For more information, see [Lustre data compression].
+	//
+	// [Lustre data compression]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
 	DataCompressionType DataCompressionType
 
 	// The data repository configuration object for Lustre file systems returned in
-	// the response of the CreateFileSystem operation. This data type is not supported
-	// on file systems with a data repository association. For file systems with a data
-	// repository association, see .
+	// the response of the CreateFileSystem operation.
+	//
+	// This data type is not supported on file systems with a data repository
+	// association. For file systems with a data repository association, see .
 	DataRepositoryConfiguration *DataRepositoryConfiguration
 
 	// The deployment type of the FSx for Lustre file system. Scratch deployment type
-	// is designed for temporary storage and shorter-term processing of data. SCRATCH_1
-	// and SCRATCH_2 deployment types are best suited for when you need temporary
-	// storage and shorter-term processing of data. The SCRATCH_2 deployment type
-	// provides in-transit encryption of data and higher burst throughput capacity than
-	// SCRATCH_1 . The PERSISTENT_1 and PERSISTENT_2 deployment type is used for
-	// longer-term storage and workloads and encryption of data in transit.
-	// PERSISTENT_2 offers higher PerUnitStorageThroughput (up to 1000 MB/s/TiB) along
-	// with a lower minimum storage capacity requirement (600 GiB). To learn more about
-	// FSx for Lustre deployment types, see FSx for Lustre deployment options (https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html)
-	// . The default is SCRATCH_1 .
+	// is designed for temporary storage and shorter-term processing of data.
+	//
+	// SCRATCH_1 and SCRATCH_2 deployment types are best suited for when you need
+	// temporary storage and shorter-term processing of data. The SCRATCH_2 deployment
+	// type provides in-transit encryption of data and higher burst throughput capacity
+	// than SCRATCH_1 .
+	//
+	// The PERSISTENT_1 and PERSISTENT_2 deployment type is used for longer-term
+	// storage and workloads and encryption of data in transit. PERSISTENT_2 offers
+	// higher PerUnitStorageThroughput (up to 1000 MB/s/TiB) along with a lower
+	// minimum storage capacity requirement (600 GiB). To learn more about FSx for
+	// Lustre deployment types, see [FSx for Lustre deployment options].
+	//
+	// The default is SCRATCH_1 .
+	//
+	// [FSx for Lustre deployment options]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html
 	DeploymentType LustreDeploymentType
 
 	// The type of drive cache used by PERSISTENT_1 file systems that are provisioned
@@ -2333,6 +2674,7 @@ type LustreFileSystemConfiguration struct {
 	// When set to READ the file system has an SSD storage cache that is sized to 20%
 	// of the file system's storage capacity. This improves the performance for
 	// frequently accessed files by caching up to 20% of the total storage capacity.
+	//
 	// This parameter is required when StorageType is set to HDD.
 	DriveCacheType DriveCacheType
 
@@ -2340,19 +2682,25 @@ type LustreFileSystemConfiguration struct {
 	// for your file system to Amazon CloudWatch Logs.
 	LogConfiguration *LustreLogConfiguration
 
-	// You use the MountName value when mounting the file system. For the SCRATCH_1
-	// deployment type, this value is always " fsx ". For SCRATCH_2 , PERSISTENT_1 ,
-	// and PERSISTENT_2 deployment types, this value is a string that is unique within
-	// an Amazon Web Services Region.
+	// You use the MountName value when mounting the file system.
+	//
+	// For the SCRATCH_1 deployment type, this value is always " fsx ". For SCRATCH_2 ,
+	// PERSISTENT_1 , and PERSISTENT_2 deployment types, this value is a string that
+	// is unique within an Amazon Web Services Region.
 	MountName *string
 
 	// Per unit storage throughput represents the megabytes per second of read or
 	// write throughput per 1 tebibyte of storage provisioned. File system throughput
 	// capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput
 	// (MB/s/TiB). This option is only valid for PERSISTENT_1 and PERSISTENT_2
-	// deployment types. Valid values:
+	// deployment types.
+	//
+	// Valid values:
+	//
 	//   - For PERSISTENT_1 SSD storage: 50, 100, 200.
+	//
 	//   - For PERSISTENT_1 HDD storage: 12, 40.
+	//
 	//   - For PERSISTENT_2 SSD storage: 125, 250, 500, 1000.
 	PerUnitStorageThroughput *int32
 
@@ -2375,10 +2723,15 @@ type LustreFileSystemConfiguration struct {
 type LustreLogConfiguration struct {
 
 	// The data repository events that are logged by Amazon FSx.
+	//
 	//   - WARN_ONLY - only warning events are logged.
+	//
 	//   - ERROR_ONLY - only error events are logged.
+	//
 	//   - WARN_ERROR - both warning events and error events are logged.
+	//
 	//   - DISABLED - logging of data repository events is turned off.
+	//
 	// Note that Amazon File Cache uses a default setting of WARN_ERROR , which can't
 	// be changed.
 	//
@@ -2397,32 +2750,44 @@ type LustreLogConfiguration struct {
 // The Lustre logging configuration used when creating or updating an Amazon FSx
 // for Lustre file system. An Amazon File Cache is created with Lustre logging
 // enabled by default, with a setting of WARN_ERROR for the logging events. which
-// can't be changed. Lustre logging writes the enabled logging events for your file
-// system or cache to Amazon CloudWatch Logs.
+// can't be changed.
+//
+// Lustre logging writes the enabled logging events for your file system or cache
+// to Amazon CloudWatch Logs.
 type LustreLogCreateConfiguration struct {
 
 	// Sets which data repository events are logged by Amazon FSx.
+	//
 	//   - WARN_ONLY - only warning events are logged.
+	//
 	//   - ERROR_ONLY - only error events are logged.
+	//
 	//   - WARN_ERROR - both warning events and error events are logged.
+	//
 	//   - DISABLED - logging of data repository events is turned off.
 	//
 	// This member is required.
 	Level LustreAccessAuditLogLevel
 
-	// The Amazon Resource Name (ARN) that specifies the destination of the logs. The
-	// destination can be any Amazon CloudWatch Logs log group ARN, with the following
-	// requirements:
+	// The Amazon Resource Name (ARN) that specifies the destination of the logs.
+	//
+	// The destination can be any Amazon CloudWatch Logs log group ARN, with the
+	// following requirements:
+	//
 	//   - The destination ARN that you provide must be in the same Amazon Web
 	//   Services partition, Amazon Web Services Region, and Amazon Web Services account
 	//   as your Amazon FSx file system.
+	//
 	//   - The name of the Amazon CloudWatch Logs log group must begin with the
 	//   /aws/fsx prefix.
+	//
 	//   - If you do not provide a destination, Amazon FSx will create and use a log
 	//   stream in the CloudWatch Logs /aws/fsx/lustre log group (for Amazon FSx for
 	//   Lustre) or /aws/fsx/filecache (for Amazon File Cache).
+	//
 	//   - If Destination is provided and the resource does not exist, the request will
 	//   fail with a BadRequest error.
+	//
 	//   - If Level is set to DISABLED , you cannot specify a destination in
 	//   Destination .
 	Destination *string
@@ -2433,19 +2798,24 @@ type LustreLogCreateConfiguration struct {
 // The configuration for Lustre root squash used to restrict root-level access
 // from clients that try to access your FSx for Lustre file system as root. Use the
 // RootSquash parameter to enable root squash. To learn more about Lustre root
-// squash, see Lustre root squash (https://docs.aws.amazon.com/fsx/latest/LustreGuide/root-squash.html)
-// . You can also use the NoSquashNids parameter to provide an array of clients
-// who are not affected by the root squash setting. These clients will access the
-// file system as root, with unrestricted privileges.
+// squash, see [Lustre root squash].
+//
+// You can also use the NoSquashNids parameter to provide an array of clients who
+// are not affected by the root squash setting. These clients will access the file
+// system as root, with unrestricted privileges.
+//
+// [Lustre root squash]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/root-squash.html
 type LustreRootSquashConfiguration struct {
 
 	// When root squash is enabled, you can optionally specify an array of NIDs of
 	// clients for which root squash does not apply. A client NID is a Lustre Network
 	// Identifier used to uniquely identify a client. You can specify the NID as either
 	// a single address or a range of addresses:
+	//
 	//   - A single address is described in standard Lustre NID format by specifying
 	//   the client’s IP address followed by the Lustre network ID (for example,
 	//   10.0.1.6@tcp ).
+	//
 	//   - An address range is described using a dash to separate the range (for
 	//   example, 10.0.[2-10].[1-255]@tcp ).
 	NoSquashNids []string
@@ -2453,10 +2823,13 @@ type LustreRootSquashConfiguration struct {
 	// You enable root squash by setting a user ID (UID) and group ID (GID) for the
 	// file system in the format UID:GID (for example, 365534:65534 ). The UID and GID
 	// values can range from 0 to 4294967294 :
+	//
 	//   - A non-zero value for UID and GID enables root squash. The UID and GID
 	//   values can be different, but each must be a non-zero value.
+	//
 	//   - A value of 0 (zero) for UID and GID indicates root, and therefore disables
 	//   root squash.
+	//
 	// When root squash is enabled, the user ID and group ID of a root user accessing
 	// the file system are re-mapped to the UID and GID you provide.
 	RootSquash *string
@@ -2502,15 +2875,19 @@ type OntapFileSystemConfiguration struct {
 
 	// Specifies the FSx for ONTAP file system deployment type in use in the file
 	// system.
+	//
 	//   - MULTI_AZ_1 - (Default) A high availability file system configured for
 	//   Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
 	//
 	//   - SINGLE_AZ_1 - A file system configured for Single-AZ redundancy.
+	//
 	//   - SINGLE_AZ_2 - A file system configured with multiple high-availability (HA)
 	//   pairs for Single-AZ redundancy.
+	//
 	// For information about the use cases for Multi-AZ and Single-AZ deployments,
-	// refer to Choosing Multi-AZ or Single-AZ file system deployment (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html)
-	// .
+	// refer to [Choosing Multi-AZ or Single-AZ file system deployment].
+	//
+	// [Choosing Multi-AZ or Single-AZ file system deployment]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html
 	DeploymentType OntapDeploymentType
 
 	// The SSD IOPS configuration for the ONTAP file system, specifying the number of
@@ -2537,18 +2914,24 @@ type OntapFileSystemConfiguration struct {
 
 	// Specifies how many high-availability (HA) file server pairs the file system
 	// will have. The default value is 1. The value of this property affects the values
-	// of StorageCapacity , Iops , and ThroughputCapacity . For more information, see
-	// High-availability (HA) pairs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html)
-	// in the FSx for ONTAP user guide. Amazon FSx responds with an HTTP status code
-	// 400 (Bad Request) for the following conditions:
+	// of StorageCapacity , Iops , and ThroughputCapacity . For more information, see [High-availability (HA) pairs]
+	// in the FSx for ONTAP user guide.
+	//
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
+	// following conditions:
+	//
 	//   - The value of HAPairs is less than 1 or greater than 12.
+	//
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
 	//   SINGLE_AZ_1 or MULTI_AZ_1 .
+	//
+	// [High-availability (HA) pairs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html
 	HAPairs *int32
 
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual
-	// private cloud (VPC). For more information, see VPC and subnets (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html)
-	// in the Amazon VPC User Guide.
+	// private cloud (VPC). For more information, see [VPC and subnets]in the Amazon VPC User Guide.
+	//
+	// [VPC and subnets]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html
 	PreferredSubnetId *string
 
 	// (Multi-AZ only) The VPC route tables in which your file system's endpoints are
@@ -2561,26 +2944,42 @@ type OntapFileSystemConfiguration struct {
 
 	// Use to choose the throughput capacity per HA pair. When the value of HAPairs is
 	// equal to 1, the value of ThroughputCapacityPerHAPair is the total throughput
-	// for the file system. This field and ThroughputCapacity cannot be defined in the
-	// same API call, but one is required. This field and ThroughputCapacity are the
-	// same for file systems with one HA pair.
+	// for the file system.
+	//
+	// This field and ThroughputCapacity cannot be defined in the same API call, but
+	// one is required.
+	//
+	// This field and ThroughputCapacity are the same for file systems with one HA
+	// pair.
+	//
 	//   - For SINGLE_AZ_1 and MULTI_AZ_1 , valid values are 128, 256, 512, 1024, 2048,
 	//   or 4096 MBps.
+	//
 	//   - For SINGLE_AZ_2 , valid values are 3072 or 6144 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
+	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value.
+	//
 	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
 	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).
+	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -2604,10 +3003,12 @@ type OntapVolumeConfiguration struct {
 
 	// Specifies the FlexCache endpoint type of the volume. Valid values are the
 	// following:
+	//
 	//   - NONE specifies that the volume doesn't have a FlexCache configuration. NONE
 	//   is the default.
-	//   - ORIGIN specifies that the volume is the origin volume for a FlexCache
-	//   volume.
+	//
+	//   - ORIGIN specifies that the volume is the origin volume for a FlexCache volume.
+	//
 	//   - CACHE specifies that the volume is a FlexCache volume.
 	FlexCacheEndpointType FlexCacheEndpointType
 
@@ -2620,10 +3021,13 @@ type OntapVolumeConfiguration struct {
 	JunctionPath *string
 
 	// Specifies the type of volume. Valid values are the following:
+	//
 	//   - RW specifies a read/write volume. RW is the default.
+	//
 	//   - DP specifies a data-protection volume. You can protect data by replicating
 	//   it to data-protection mirror copies. If a disaster occurs, you can use these
 	//   data-protection mirror copies to recover data.
+	//
 	//   - LS specifies a load-sharing mirror volume. A load-sharing mirror reduces the
 	//   network traffic to a FlexVol volume by providing additional read-only access to
 	//   clients.
@@ -2643,17 +3047,24 @@ type OntapVolumeConfiguration struct {
 
 	// Specifies the snapshot policy for the volume. There are three built-in snapshot
 	// policies:
+	//
 	//   - default : This is the default policy. A maximum of six hourly snapshots
 	//   taken five minutes past the hour. A maximum of two daily snapshots taken Monday
 	//   through Saturday at 10 minutes after midnight. A maximum of two weekly snapshots
 	//   taken every Sunday at 15 minutes after midnight.
+	//
 	//   - default-1weekly : This policy is the same as the default policy except that
 	//   it only retains one snapshot from the weekly schedule.
+	//
 	//   - none : This policy does not take any snapshots. This policy can be assigned
 	//   to volumes to prevent automatic snapshots from being taken.
+	//
 	// You can also provide the name of a custom policy that you created with the
-	// ONTAP CLI or REST API. For more information, see Snapshot policies (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
-	// in the Amazon FSx for NetApp ONTAP User Guide.
+	// ONTAP CLI or REST API.
+	//
+	// For more information, see [Snapshot policies] in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// [Snapshot policies]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies
 	SnapshotPolicy *string
 
 	// The volume's storage efficiency setting.
@@ -2665,9 +3076,11 @@ type OntapVolumeConfiguration struct {
 	// A Boolean flag indicating whether this volume is the root volume for its
 	// storage virtual machine (SVM). Only one volume on an SVM can be the root volume.
 	// This value defaults to false . If this value is true , then this is the SVM root
-	// volume. This flag is useful when you're deleting an SVM, because you must first
-	// delete all non-root volumes. This flag, when set to false , helps you identify
-	// which volumes to delete before you can delete the SVM.
+	// volume.
+	//
+	// This flag is useful when you're deleting an SVM, because you must first delete
+	// all non-root volumes. This flag, when set to false , helps you identify which
+	// volumes to delete before you can delete the SVM.
 	StorageVirtualMachineRoot *bool
 
 	// The volume's TieringPolicy setting.
@@ -2677,8 +3090,9 @@ type OntapVolumeConfiguration struct {
 	UUID *string
 
 	// Use to specify the style of an ONTAP volume. For more information about
-	// FlexVols and FlexGroups, see Volume types (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html)
-	// in Amazon FSx for NetApp ONTAP User Guide.
+	// FlexVols and FlexGroups, see [Volume types]in Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// [Volume types]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html
 	VolumeStyle VolumeStyle
 
 	noSmithyDocumentSerde
@@ -2697,14 +3111,18 @@ type OpenZFSClientConfiguration struct {
 	Clients *string
 
 	// The options to use when mounting the file system. For a list of options that
-	// you can use with Network File System (NFS), see the exports(5) - Linux man page (https://linux.die.net/man/5/exports)
-	// . When choosing your options, consider the following:
+	// you can use with Network File System (NFS), see the [exports(5) - Linux man page]. When choosing your
+	// options, consider the following:
+	//
 	//   - crossmnt is used by default. If you don't specify crossmnt when changing the
 	//   client configuration, you won't be able to see or access snapshots in your file
 	//   system's snapshot directory.
+	//
 	//   - sync is used by default. If you instead specify async , the system
 	//   acknowledges writes before writing to disk. If the system crashes before the
 	//   writes are finished, you lose the unwritten data.
+	//
+	// [exports(5) - Linux man page]: https://linux.die.net/man/5/exports
 	//
 	// This member is required.
 	Options []string
@@ -2726,10 +3144,13 @@ type OpenZFSCreateRootVolumeConfiguration struct {
 
 	// Specifies the method used to compress the data on the volume. The compression
 	// type is NONE by default.
+	//
 	//   - NONE - Doesn't compress the data on the volume. NONE is the default.
+	//
 	//   - ZSTD - Compresses the data in the volume using the Zstandard (ZSTD)
 	//   compression algorithm. Compared to LZ4, Z-Standard provides a better compression
 	//   ratio to minimize on-disk storage utilization.
+	//
 	//   - LZ4 - Compresses the data in the volume using the LZ4 compression algorithm.
 	//   Compared to Z-Standard, LZ4 is less compute-intensive and delivers higher write
 	//   throughput speeds.
@@ -2748,8 +3169,9 @@ type OpenZFSCreateRootVolumeConfiguration struct {
 	// Most workloads should use the default record size. Database workflows can
 	// benefit from a smaller record size, while streaming workflows can benefit from a
 	// larger record size. For additional guidance on setting a custom record size, see
-	// Tips for maximizing performance (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs)
-	// in the Amazon FSx for OpenZFS User Guide.
+	// [Tips for maximizing performance]in the Amazon FSx for OpenZFS User Guide.
+	//
+	// [Tips for maximizing performance]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
 	RecordSizeKiB *int32
 
 	// An object specifying how much storage users or groups can use on the volume.
@@ -2826,11 +3248,17 @@ type OpenZFSFileSystemConfiguration struct {
 	// (MBps).
 	ThroughputCapacity *int32
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -2854,30 +3282,36 @@ type OpenZFSNfsExport struct {
 type OpenZFSOriginSnapshotConfiguration struct {
 
 	// The strategy used when copying data from the snapshot to the new volume.
+	//
 	//   - CLONE - The new volume references the data in the origin snapshot. Cloning a
 	//   snapshot is faster than copying the data from a snapshot to a new volume and
 	//   doesn't consume disk throughput. However, the origin snapshot can't be deleted
 	//   if there is a volume using its copied data.
+	//
 	//   - FULL_COPY - Copies all data from the snapshot to the new volume.
+	//
 	// The INCREMENTAL_COPY option is only for updating an existing volume by using a
-	// snapshot from another FSx for OpenZFS file system. For more information, see
-	// CopySnapshotAndUpdateVolume (https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html)
-	// .
+	// snapshot from another FSx for OpenZFS file system. For more information, see [CopySnapshotAndUpdateVolume].
+	//
+	// [CopySnapshotAndUpdateVolume]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html
 	CopyStrategy OpenZFSCopyStrategy
 
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	SnapshotARN *string
 
 	noSmithyDocumentSerde
 }
 
 // Used to configure quotas that define how much storage a user or group can use
-// on an FSx for OpenZFS volume. For more information, see Volume properties (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties)
-// in the FSx for OpenZFS User Guide.
+// on an FSx for OpenZFS volume. For more information, see [Volume properties]in the FSx for OpenZFS
+// User Guide.
+//
+// [Volume properties]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
 type OpenZFSUserOrGroupQuota struct {
 
 	// The ID of the user or group that the quota applies to.
@@ -2903,17 +3337,21 @@ type OpenZFSVolumeConfiguration struct {
 
 	// Specifies the strategy used when copying data from the snapshot to the new
 	// volume.
+	//
 	//   - CLONE - The new volume references the data in the origin snapshot. Cloning a
 	//   snapshot is faster than copying data from the snapshot to a new volume and
 	//   doesn't consume disk throughput. However, the origin snapshot can't be deleted
 	//   if there is a volume using its copied data.
-	//   - FULL_COPY - Copies all data from the snapshot to the new volume. Specify
-	//   this option to create the volume from a snapshot on another FSx for OpenZFS file
-	//   system.
+	//
+	//   - FULL_COPY - Copies all data from the snapshot to the new volume.
+	//
+	// Specify this option to create the volume from a snapshot on another FSx for
+	//   OpenZFS file system.
+	//
 	// The INCREMENTAL_COPY option is only for updating an existing volume by using a
-	// snapshot from another FSx for OpenZFS file system. For more information, see
-	// CopySnapshotAndUpdateVolume (https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html)
-	// .
+	// snapshot from another FSx for OpenZFS file system. For more information, see [CopySnapshotAndUpdateVolume].
+	//
+	// [CopySnapshotAndUpdateVolume]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html
 	CopyStrategy OpenZFSCopyStrategy
 
 	// A Boolean value indicating whether tags for the volume should be copied to
@@ -2926,10 +3364,13 @@ type OpenZFSVolumeConfiguration struct {
 
 	// Specifies the method used to compress the data on the volume. The compression
 	// type is NONE by default.
+	//
 	//   - NONE - Doesn't compress the data on the volume. NONE is the default.
+	//
 	//   - ZSTD - Compresses the data in the volume using the Zstandard (ZSTD)
 	//   compression algorithm. Compared to LZ4, Z-Standard provides a better compression
 	//   ratio to minimize on-disk storage utilization.
+	//
 	//   - LZ4 - Compresses the data in the volume using the LZ4 compression algorithm.
 	//   Compared to Z-Standard, LZ4 is less compute-intensive and delivers higher write
 	//   throughput speeds.
@@ -2978,8 +3419,9 @@ type OpenZFSVolumeConfiguration struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	SourceSnapshotARN *string
 
 	// The maximum amount of storage in gibibtyes (GiB) that the volume can use from
@@ -3006,15 +3448,17 @@ type OpenZFSVolumeConfiguration struct {
 // system. Only files that were last accessed before this point-in-time can be
 // released. For example, if you specify a last accessed time criteria of 9 days,
 // only files that were last accessed 9.00001 or more days ago can be released.
-// Only file data that has been exported to S3 can be released. Files that have not
-// yet been exported to S3, such as new or changed files that have not been
+//
+// Only file data that has been exported to S3 can be released. Files that have
+// not yet been exported to S3, such as new or changed files that have not been
 // exported, are not eligible for release. When files are released, their metadata
 // stays on the file system, so they can still be accessed later. Users and
 // applications can access a released file by reading the file again, which
-// restores data from Amazon S3 to the FSx for Lustre file system. If a file meets
-// the last accessed time criteria, its file or directory path must also be
-// specified with the Paths parameter of the operation in order for the file to be
-// released.
+// restores data from Amazon S3 to the FSx for Lustre file system.
+//
+// If a file meets the last accessed time criteria, its file or directory path
+// must also be specified with the Paths parameter of the operation in order for
+// the file to be released.
 type ReleaseConfiguration struct {
 
 	// Defines the point-in-time since an exported file was last accessed, in order
@@ -3027,9 +3471,11 @@ type ReleaseConfiguration struct {
 
 // Specifies the retention period of an FSx for ONTAP SnapLock volume. After it is
 // set, it can't be changed. Files can't be deleted or modified during the
-// retention period. For more information, see Working with the retention period
-// in SnapLock (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html)
-// .
+// retention period.
+//
+// For more information, see [Working with the retention period in SnapLock].
+//
+// [Working with the retention period in SnapLock]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html
 type RetentionPeriod struct {
 
 	// Defines the type of time for the retention period of an FSx for ONTAP SnapLock
@@ -3043,11 +3489,17 @@ type RetentionPeriod struct {
 	// Defines the amount of time for the retention period of an FSx for ONTAP
 	// SnapLock volume. You can't set a value for INFINITE or UNSPECIFIED . For all
 	// other options, the following ranges are valid:
+	//
 	//   - Seconds : 0 - 65,535
+	//
 	//   - Minutes : 0 - 65,535
+	//
 	//   - Hours : 0 - 24
+	//
 	//   - Days : 0 - 365
+	//
 	//   - Months : 0 - 12
+	//
 	//   - Years : 0 - 100
 	Value *int32
 
@@ -3060,9 +3512,11 @@ type RetentionPeriod struct {
 // repository are automatically imported to the file system and an AutoExportPolicy
 // that defines which file events on the file system are automatically exported to
 // the data repository. File events are when files or directories are added,
-// changed, or deleted on the file system or the data repository. Data repository
-// associations on Amazon File Cache don't use S3DataRepositoryConfiguration
-// because they don't support automatic import or automatic export.
+// changed, or deleted on the file system or the data repository.
+//
+// Data repository associations on Amazon File Cache don't use
+// S3DataRepositoryConfiguration because they don't support automatic import or
+// automatic export.
 type S3DataRepositoryConfiguration struct {
 
 	// Specifies the type of updated objects (new, changed, deleted) that will be
@@ -3107,10 +3561,10 @@ type SelfManagedActiveDirectoryAttributes struct {
 // The configuration that Amazon FSx uses to join a FSx for Windows File Server
 // file system or an FSx for ONTAP storage virtual machine (SVM) to a self-managed
 // (including on-premises) Microsoft Active Directory (AD) directory. For more
-// information, see Using Amazon FSx for Windows with your self-managed Microsoft
-// Active Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
-// or Managing FSx for ONTAP SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
-// .
+// information, see [Using Amazon FSx for Windows with your self-managed Microsoft Active Directory]or [Managing FSx for ONTAP SVMs].
+//
+// [Using Amazon FSx for Windows with your self-managed Microsoft Active Directory]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html
+// [Managing FSx for ONTAP SVMs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
 type SelfManagedActiveDirectoryConfiguration struct {
 
 	// A list of up to three IP addresses of DNS servers or domain controllers in the
@@ -3151,10 +3605,13 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// (Optional) The fully qualified distinguished name of the organizational unit
 	// within your self-managed AD directory. Amazon FSx only accepts OU as the direct
 	// parent of the file system. An example is OU=FSx,DC=yourdomain,DC=corp,DC=com .
-	// To learn more, see RFC 2253 (https://tools.ietf.org/html/rfc2253) . If none is
-	// provided, the FSx file system is created in the default location of your
-	// self-managed AD directory. Only Organizational Unit (OU) objects can be the
-	// direct parent of the file system that you're creating.
+	// To learn more, see [RFC 2253]. If none is provided, the FSx file system is created in the
+	// default location of your self-managed AD directory.
+	//
+	// Only Organizational Unit (OU) objects can be the direct parent of the file
+	// system that you're creating.
+	//
+	// [RFC 2253]: https://tools.ietf.org/html/rfc2253
 	OrganizationalUnitDistinguishedName *string
 
 	noSmithyDocumentSerde
@@ -3187,6 +3644,7 @@ type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
 	// Specifies the updated user name for the service account on your self-managed AD
 	// domain. Amazon FSx uses this account to join to your self-managed AD domain.
+	//
 	// This account must have the permissions required to join computers to the domain
 	// in the organizational unit provided in OrganizationalUnitDistinguishedName .
 	UserName *string
@@ -3200,9 +3658,11 @@ type SnaplockConfiguration struct {
 	// Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume.
 	// The default value is false . If you set AuditLogVolume to true , the SnapLock
 	// volume is created as an audit log volume. The minimum retention period for an
-	// audit log volume is six months. For more information, see SnapLock audit log
-	// volumes (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume)
-	// .
+	// audit log volume is six months.
+	//
+	// For more information, see [SnapLock audit log volumes].
+	//
+	// [SnapLock audit log volumes]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume
 	AuditLogVolume *bool
 
 	// The configuration object for setting the autocommit period of files in an FSx
@@ -3214,9 +3674,11 @@ type SnaplockConfiguration struct {
 	// administrators to delete write once, read many (WORM) files even if they have
 	// active retention periods. PERMANENTLY_DISABLED is a terminal state. If
 	// privileged delete is permanently disabled on a SnapLock volume, you can't
-	// re-enable it. The default value is DISABLED . For more information, see
-	// Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete)
-	// .
+	// re-enable it. The default value is DISABLED .
+	//
+	// For more information, see [Privileged delete].
+	//
+	// [Privileged delete]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete
 	PrivilegedDelete PrivilegedDelete
 
 	// Specifies the retention period of an FSx for ONTAP SnapLock volume.
@@ -3224,25 +3686,29 @@ type SnaplockConfiguration struct {
 
 	// Specifies the retention mode of an FSx for ONTAP SnapLock volume. After it is
 	// set, it can't be changed. You can choose one of the following retention modes:
+	//
 	//   - COMPLIANCE : Files transitioned to write once, read many (WORM) on a
 	//   Compliance volume can't be deleted until their retention periods expire. This
 	//   retention mode is used to address government or industry-specific mandates or to
-	//   protect against ransomware attacks. For more information, see SnapLock
-	//   Compliance (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html)
-	//   .
+	//   protect against ransomware attacks. For more information, see [SnapLock Compliance].
+	//
 	//   - ENTERPRISE : Files transitioned to WORM on an Enterprise volume can be
 	//   deleted by authorized users before their retention periods expire using
 	//   privileged delete. This retention mode is used to advance an organization's data
 	//   integrity and internal compliance or to test retention settings before using
-	//   SnapLock Compliance. For more information, see SnapLock Enterprise (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html)
-	//   .
+	//   SnapLock Compliance. For more information, see [SnapLock Enterprise].
+	//
+	// [SnapLock Enterprise]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html
+	// [SnapLock Compliance]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html
 	SnaplockType SnaplockType
 
 	// Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume.
 	// Volume-append mode allows you to create WORM-appendable files and write data to
-	// them incrementally. The default value is false . For more information, see
-	// Volume-append mode (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append)
-	// .
+	// them incrementally. The default value is false .
+	//
+	// For more information, see [Volume-append mode].
+	//
+	// [Volume-append mode]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append
 	VolumeAppendModeEnabled *bool
 
 	noSmithyDocumentSerde
@@ -3250,8 +3716,9 @@ type SnaplockConfiguration struct {
 
 // The configuration to set the retention period of an FSx for ONTAP SnapLock
 // volume. The retention period includes default, maximum, and minimum settings.
-// For more information, see Working with the retention period in SnapLock (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html)
-// .
+// For more information, see [Working with the retention period in SnapLock].
+//
+// [Working with the retention period in SnapLock]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html
 type SnaplockRetentionPeriod struct {
 
 	// The retention period assigned to a write once, read many (WORM) file by default
@@ -3290,9 +3757,13 @@ type Snapshot struct {
 	CreationTime *time.Time
 
 	// The lifecycle status of the snapshot.
+	//
 	//   - PENDING - Amazon FSx hasn't started creating the snapshot.
+	//
 	//   - CREATING - Amazon FSx is creating the snapshot.
+	//
 	//   - DELETING - Amazon FSx is deleting the snapshot.
+	//
 	//   - AVAILABLE - The snapshot is fully available.
 	Lifecycle SnapshotLifecycle
 
@@ -3305,8 +3776,9 @@ type Snapshot struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceARN *string
 
 	// The ID of the snapshot.
@@ -3356,11 +3828,17 @@ type StorageVirtualMachine struct {
 	FileSystemId *string
 
 	// Describes the SVM's lifecycle status.
+	//
 	//   - CREATED - The SVM is fully available for use.
+	//
 	//   - CREATING - Amazon FSx is creating the new SVM.
+	//
 	//   - DELETING - Amazon FSx is deleting an existing SVM.
+	//
 	//   - FAILED - Amazon FSx was unable to create the SVM.
+	//
 	//   - MISCONFIGURED - The SVM is in a failed but recoverable state.
+	//
 	//   - PENDING - Amazon FSx has not started creating the SVM.
 	Lifecycle StorageVirtualMachineLifecycle
 
@@ -3373,8 +3851,9 @@ type StorageVirtualMachine struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceARN *string
 
 	// The security style of the root volume of the SVM.
@@ -3486,7 +3965,9 @@ type Tag struct {
 // Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
 // for ONTAP's intelligent tiering automatically transitions a volume's data
 // between the file system's primary storage and capacity pool storage based on
-// your access patterns. Valid tiering policies are the following:
+// your access patterns.
+//
+// Valid tiering policies are the following:
 //
 //   - SNAPSHOT_ONLY - (Default value) moves cold snapshots to the capacity pool
 //     storage tier.
@@ -3509,11 +3990,15 @@ type TieringPolicy struct {
 
 	// Specifies the tiering policy used to transition data. Default value is
 	// SNAPSHOT_ONLY .
+	//
 	//   - SNAPSHOT_ONLY - moves cold snapshots to the capacity pool storage tier.
+	//
 	//   - AUTO - moves cold user data and snapshots to the capacity pool storage tier
 	//   based on your access patterns.
+	//
 	//   - ALL - moves all user data blocks in both the active file system and Snapshot
 	//   copies to the storage pool tier.
+	//
 	//   - NONE - keeps a volume's data in the primary storage tier, preventing it from
 	//   being moved to the capacity pool tier.
 	Name TieringPolicyName
@@ -3524,11 +4009,17 @@ type TieringPolicy struct {
 // The configuration update for an Amazon File Cache resource.
 type UpdateFileCacheLustreConfiguration struct {
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -3538,24 +4029,29 @@ type UpdateFileCacheLustreConfiguration struct {
 // UpdateFileSystem operation.
 type UpdateFileSystemLustreConfiguration struct {
 
-	// (Optional) When you create your file system, your existing S3 objects appear as
-	// file and directory listings. Use this property to choose how Amazon FSx keeps
+	//  (Optional) When you create your file system, your existing S3 objects appear
+	// as file and directory listings. Use this property to choose how Amazon FSx keeps
 	// your file and directory listing up to date as you add or modify objects in your
 	// linked S3 bucket. AutoImportPolicy can have the following values:
+	//
 	//   - NONE - (Default) AutoImport is off. Amazon FSx only updates file and
 	//   directory listings from the linked S3 bucket when the file system is created.
 	//   FSx does not update the file and directory listing for any new or changed
 	//   objects after choosing this option.
+	//
 	//   - NEW - AutoImport is on. Amazon FSx automatically imports directory listings
 	//   of any new objects added to the linked S3 bucket that do not currently exist in
 	//   the FSx file system.
+	//
 	//   - NEW_CHANGED - AutoImport is on. Amazon FSx automatically imports file and
 	//   directory listings of any new objects added to the S3 bucket and any existing
 	//   objects that are changed in the S3 bucket after you choose this option.
+	//
 	//   - NEW_CHANGED_DELETED - AutoImport is on. Amazon FSx automatically imports
 	//   file and directory listings of any new objects added to the S3 bucket, any
 	//   existing objects that are changed in the S3 bucket, and any objects that were
 	//   deleted in the S3 bucket.
+	//
 	// This parameter is not supported for file systems with a data repository
 	// association.
 	AutoImportPolicy AutoImportPolicyType
@@ -3572,11 +4068,17 @@ type UpdateFileSystemLustreConfiguration struct {
 
 	// Sets the data compression configuration for the file system. DataCompressionType
 	// can have the following values:
+	//
 	//   - NONE - Data compression is turned off for the file system.
+	//
 	//   - LZ4 - Data compression is turned on with the LZ4 algorithm.
+	//
 	// If you don't use DataCompressionType , the file system retains its current data
-	// compression configuration. For more information, see Lustre data compression (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html)
-	// .
+	// compression configuration.
+	//
+	// For more information, see [Lustre data compression].
+	//
+	// [Lustre data compression]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html
 	DataCompressionType DataCompressionType
 
 	// The Lustre logging configuration used when updating an Amazon FSx for Lustre
@@ -3588,12 +4090,16 @@ type UpdateFileSystemLustreConfiguration struct {
 	// measured in megabytes per second per tebibyte (MB/s/TiB). You can increase or
 	// decrease your file system's throughput. Valid values depend on the deployment
 	// type of the file system, as follows:
+	//
 	//   - For PERSISTENT_1 SSD-based deployment types, valid values are 50, 100, and
 	//   200 MB/s/TiB.
+	//
 	//   - For PERSISTENT_2 SSD-based deployment types, valid values are 125, 250, 500,
 	//   and 1000 MB/s/TiB.
-	// For more information, see  Managing throughput capacity (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-throughput-capacity.html)
-	// .
+	//
+	// For more information, see [Managing throughput capacity].
+	//
+	// [Managing throughput capacity]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-throughput-capacity.html
 	PerUnitStorageThroughput *int32
 
 	// The Lustre root squash configuration used when updating an Amazon FSx for
@@ -3631,15 +4137,16 @@ type UpdateFileSystemOntapConfiguration struct {
 	// capacity, but you can provision additional IOPS per GB of storage. The
 	// configuration consists of an IOPS mode ( AUTOMATIC or USER_PROVISIONED ), and in
 	// the case of USER_PROVISIONED IOPS, the total number of SSD IOPS provisioned.
-	// For more information, see Updating SSD storage capacity and IOPS (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/increase-primary-storage.html)
-	// .
+	// For more information, see [Updating SSD storage capacity and IOPS].
+	//
+	// [Updating SSD storage capacity and IOPS]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/increase-primary-storage.html
 	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// Update the password for the fsxadmin user by entering a new password. You use
 	// the fsxadmin user to access the NetApp ONTAP CLI and REST API to manage your
-	// file system resources. For more information, see Managing resources using
-	// NetApp Applicaton (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-resources-ontap-apps.html)
-	// .
+	// file system resources. For more information, see [Managing resources using NetApp Applicaton].
+	//
+	// [Managing resources using NetApp Applicaton]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-resources-ontap-apps.html
 	FsxAdminPassword *string
 
 	// (Multi-AZ only) A list of IDs of existing virtual private cloud (VPC) route
@@ -3649,37 +4156,58 @@ type UpdateFileSystemOntapConfiguration struct {
 	RemoveRouteTableIds []string
 
 	// Enter a new value to change the amount of throughput capacity for the file
-	// system in megabytes per second (MBps). For more information, see Managing
-	// throughput capacity (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html)
-	// in the FSx for ONTAP User Guide. Amazon FSx responds with an HTTP status code
-	// 400 (Bad Request) for the following conditions:
+	// system in megabytes per second (MBps). For more information, see [Managing throughput capacity]in the FSx for
+	// ONTAP User Guide.
+	//
+	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
+	// following conditions:
+	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value.
+	//
 	//   - The value of ThroughputCapacity when divided by the value of HAPairs is
 	//   outside of the valid range for ThroughputCapacity .
+	//
+	// [Managing throughput capacity]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html
 	ThroughputCapacity *int32
 
 	// Use to choose the throughput capacity per HA pair, rather than the total
-	// throughput for the file system. This field and ThroughputCapacity cannot be
-	// defined in the same API call, but one is required. This field and
-	// ThroughputCapacity are the same for file systems with one HA pair.
+	// throughput for the file system.
+	//
+	// This field and ThroughputCapacity cannot be defined in the same API call, but
+	// one is required.
+	//
+	// This field and ThroughputCapacity are the same for file systems with one HA
+	// pair.
+	//
 	//   - For SINGLE_AZ_1 and MULTI_AZ_1 , valid values are 128, 256, 512, 1024, 2048,
 	//   or 4096 MBps.
+	//
 	//   - For SINGLE_AZ_2 , valid values are 3072 or 6144 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
+	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value for file systems with one HA pair.
+	//
 	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
 	//   ThroughputCapacityPerHAPair is a valid HA pair (a value between 2 and 12).
+	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -3736,17 +4264,25 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	// The throughput of an Amazon FSx for OpenZFS file system, measured in megabytes
 	// per second  (MB/s). Valid values depend on the DeploymentType you choose, as
 	// follows:
+	//
 	//   - For MULTI_AZ_1 and SINGLE_AZ_2 , valid values are 160, 320, 640, 1280, 2560,
 	//   3840, 5120, 7680, or 10240 MB/s.
+	//
 	//   - For SINGLE_AZ_1 , valid values are 64, 128, 256, 512, 1024, 2048, 3072, or
 	//   4096 MB/s.
 	ThroughputCapacity *int32
 
-	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
-	// which 1 represents Monday and 7 represents Sunday. For further details, see the
-	// ISO-8601 spec as described on Wikipedia (https://en.wikipedia.org/wiki/ISO_week_date)
-	// . HH is the zero-padded hour of the day (0-23), and MM is the zero-padded
-	// minute of the hour. For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	// A recurring weekly time, in the format D:HH:MM .
+	//
+	// D is the day of the week, for which 1 represents Monday and 7 represents
+	// Sunday. For further details, see [the ISO-8601 spec as described on Wikipedia].
+	//
+	// HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute
+	// of the hour.
+	//
+	// For example, 1:05:00 specifies maintenance at 5 AM Monday.
+	//
+	// [the ISO-8601 spec as described on Wikipedia]: https://en.wikipedia.org/wiki/ISO_week_date
 	WeeklyMaintenanceStartTime *string
 
 	noSmithyDocumentSerde
@@ -3764,9 +4300,9 @@ type UpdateFileSystemWindowsConfiguration struct {
 
 	// The number of days to retain automatic backups. Setting this property to 0
 	// disables automatic backups. You can retain automatic backups for a maximum of 90
-	// days. The default is 30 . For more information, see Working with Automatic
-	// Daily Backups (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups)
-	// .
+	// days. The default is 30 . For more information, see [Working with Automatic Daily Backups].
+	//
+	// [Working with Automatic Daily Backups]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups
 	AutomaticBackupRetentionDays *int32
 
 	// The preferred time to start the daily automatic backup, in the UTC time zone,
@@ -3790,8 +4326,9 @@ type UpdateFileSystemWindowsConfiguration struct {
 	// you are updating the file system to. Valid values are 8, 16, 32, 64, 128, 256,
 	// 512, 1024, 2048. You cannot make a throughput capacity update request if there
 	// is an existing throughput capacity update request in progress. For more
-	// information, see Managing Throughput Capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html)
-	// .
+	// information, see [Managing Throughput Capacity].
+	//
+	// [Managing Throughput Capacity]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html
 	ThroughputCapacity *int32
 
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in
@@ -3834,17 +4371,24 @@ type UpdateOntapVolumeConfiguration struct {
 
 	// Specifies the snapshot policy for the volume. There are three built-in snapshot
 	// policies:
+	//
 	//   - default : This is the default policy. A maximum of six hourly snapshots
 	//   taken five minutes past the hour. A maximum of two daily snapshots taken Monday
 	//   through Saturday at 10 minutes after midnight. A maximum of two weekly snapshots
 	//   taken every Sunday at 15 minutes after midnight.
+	//
 	//   - default-1weekly : This policy is the same as the default policy except that
 	//   it only retains one snapshot from the weekly schedule.
+	//
 	//   - none : This policy does not take any snapshots. This policy can be assigned
 	//   to volumes to prevent automatic snapshots from being taken.
+	//
 	// You can also provide the name of a custom policy that you created with the
-	// ONTAP CLI or REST API. For more information, see Snapshot policies (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
-	// in the Amazon FSx for NetApp ONTAP User Guide.
+	// ONTAP CLI or REST API.
+	//
+	// For more information, see [Snapshot policies] in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// [Snapshot policies]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies
 	SnapshotPolicy *string
 
 	// Default is false . Set to true to enable the deduplication, compression, and
@@ -3863,10 +4407,13 @@ type UpdateOpenZFSVolumeConfiguration struct {
 
 	// Specifies the method used to compress the data on the volume. The compression
 	// type is NONE by default.
+	//
 	//   - NONE - Doesn't compress the data on the volume. NONE is the default.
+	//
 	//   - ZSTD - Compresses the data in the volume using the Zstandard (ZSTD)
 	//   compression algorithm. Compared to LZ4, Z-Standard provides a better compression
 	//   ratio to minimize on-disk storage utilization.
+	//
 	//   - LZ4 - Compresses the data in the volume using the LZ4 compression algorithm.
 	//   Compared to Z-Standard, LZ4 is less compute-intensive and delivers higher write
 	//   throughput speeds.
@@ -3883,8 +4430,9 @@ type UpdateOpenZFSVolumeConfiguration struct {
 	// Most workloads should use the default record size. Database workflows can
 	// benefit from a smaller record size, while streaming workflows can benefit from a
 	// larger record size. For additional guidance on when to set a custom record size,
-	// see Tips for maximizing performance (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs)
-	// in the Amazon FSx for OpenZFS User Guide.
+	// see [Tips for maximizing performance]in the Amazon FSx for OpenZFS User Guide.
+	//
+	// [Tips for maximizing performance]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
 	RecordSizeKiB *int32
 
 	// The maximum amount of storage in gibibytes (GiB) that the volume can use from
@@ -3910,9 +4458,11 @@ type UpdateSnaplockConfiguration struct {
 	// Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume.
 	// The default value is false . If you set AuditLogVolume to true , the SnapLock
 	// volume is created as an audit log volume. The minimum retention period for an
-	// audit log volume is six months. For more information, see SnapLock audit log
-	// volumes (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume)
-	// .
+	// audit log volume is six months.
+	//
+	// For more information, see [SnapLock audit log volumes].
+	//
+	// [SnapLock audit log volumes]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume
 	AuditLogVolume *bool
 
 	// The configuration object for setting the autocommit period of files in an FSx
@@ -3924,9 +4474,11 @@ type UpdateSnaplockConfiguration struct {
 	// administrators to delete write once, read many (WORM) files even if they have
 	// active retention periods. PERMANENTLY_DISABLED is a terminal state. If
 	// privileged delete is permanently disabled on a SnapLock volume, you can't
-	// re-enable it. The default value is DISABLED . For more information, see
-	// Privileged delete (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete)
-	// .
+	// re-enable it. The default value is DISABLED .
+	//
+	// For more information, see [Privileged delete].
+	//
+	// [Privileged delete]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-enterprise.html#privileged-delete
 	PrivilegedDelete PrivilegedDelete
 
 	// Specifies the retention period of an FSx for ONTAP SnapLock volume.
@@ -3934,9 +4486,11 @@ type UpdateSnaplockConfiguration struct {
 
 	// Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume.
 	// Volume-append mode allows you to create WORM-appendable files and write data to
-	// them incrementally. The default value is false . For more information, see
-	// Volume-append mode (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append)
-	// .
+	// them incrementally. The default value is false .
+	//
+	// For more information, see [Volume-append mode].
+	//
+	// [Volume-append mode]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append
 	VolumeAppendModeEnabled *bool
 
 	noSmithyDocumentSerde
@@ -3975,12 +4529,19 @@ type Volume struct {
 	FileSystemId *string
 
 	// The lifecycle status of the volume.
+	//
 	//   - AVAILABLE - The volume is fully available for use.
+	//
 	//   - CREATED - The volume has been created.
+	//
 	//   - CREATING - Amazon FSx is creating the new volume.
+	//
 	//   - DELETING - Amazon FSx is deleting an existing volume.
+	//
 	//   - FAILED - Amazon FSx was unable to create the volume.
+	//
 	//   - MISCONFIGURED - The volume is in a failed but recoverable state.
+	//
 	//   - PENDING - Amazon FSx hasn't started creating the volume.
 	Lifecycle VolumeLifecycle
 
@@ -3999,8 +4560,9 @@ type Volume struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceARN *string
 
 	// A list of Tag values, with a maximum of 50 elements.
@@ -4032,26 +4594,35 @@ type VolumeFilter struct {
 
 // The configuration that Amazon FSx for Windows File Server uses to audit and log
 // user accesses of files, folders, and file shares on the Amazon FSx for Windows
-// File Server file system. For more information, see File access auditing (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html)
-// .
+// File Server file system. For more information, see [File access auditing].
+//
+// [File access auditing]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html
 type WindowsAuditLogConfiguration struct {
 
 	// Sets which attempt type is logged by Amazon FSx for file and folder accesses.
+	//
 	//   - SUCCESS_ONLY - only successful attempts to access files or folders are
 	//   logged.
+	//
 	//   - FAILURE_ONLY - only failed attempts to access files or folders are logged.
+	//
 	//   - SUCCESS_AND_FAILURE - both successful attempts and failed attempts to access
 	//   files or folders are logged.
+	//
 	//   - DISABLED - access auditing of files and folders is turned off.
 	//
 	// This member is required.
 	FileAccessAuditLogLevel WindowsAccessAuditLogLevel
 
 	// Sets which attempt type is logged by Amazon FSx for file share accesses.
+	//
 	//   - SUCCESS_ONLY - only successful attempts to access file shares are logged.
+	//
 	//   - FAILURE_ONLY - only failed attempts to access file shares are logged.
+	//
 	//   - SUCCESS_AND_FAILURE - both successful attempts and failed attempts to access
 	//   file shares are logged.
+	//
 	//   - DISABLED - access auditing of file shares is turned off.
 	//
 	// This member is required.
@@ -4059,12 +4630,15 @@ type WindowsAuditLogConfiguration struct {
 
 	// The Amazon Resource Name (ARN) for the destination of the audit logs. The
 	// destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis
-	// Data Firehose delivery stream ARN. The name of the Amazon CloudWatch Logs log
-	// group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data
-	// Firehose delivery stream must begin with the aws-fsx prefix. The destination
-	// ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream)
-	// must be in the same Amazon Web Services partition, Amazon Web Services Region,
-	// and Amazon Web Services account as your Amazon FSx file system.
+	// Data Firehose delivery stream ARN.
+	//
+	// The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx
+	// prefix. The name of the Amazon Kinesis Data Firehose delivery stream must begin
+	// with the aws-fsx prefix.
+	//
+	// The destination ARN (either CloudWatch Logs log group or Kinesis Data Firehose
+	// delivery stream) must be in the same Amazon Web Services partition, Amazon Web
+	// Services Region, and Amazon Web Services account as your Amazon FSx file system.
 	AuditLogDestination *string
 
 	noSmithyDocumentSerde
@@ -4075,40 +4649,54 @@ type WindowsAuditLogConfiguration struct {
 type WindowsAuditLogCreateConfiguration struct {
 
 	// Sets which attempt type is logged by Amazon FSx for file and folder accesses.
+	//
 	//   - SUCCESS_ONLY - only successful attempts to access files or folders are
 	//   logged.
+	//
 	//   - FAILURE_ONLY - only failed attempts to access files or folders are logged.
+	//
 	//   - SUCCESS_AND_FAILURE - both successful attempts and failed attempts to access
 	//   files or folders are logged.
+	//
 	//   - DISABLED - access auditing of files and folders is turned off.
 	//
 	// This member is required.
 	FileAccessAuditLogLevel WindowsAccessAuditLogLevel
 
 	// Sets which attempt type is logged by Amazon FSx for file share accesses.
+	//
 	//   - SUCCESS_ONLY - only successful attempts to access file shares are logged.
+	//
 	//   - FAILURE_ONLY - only failed attempts to access file shares are logged.
+	//
 	//   - SUCCESS_AND_FAILURE - both successful attempts and failed attempts to access
 	//   file shares are logged.
+	//
 	//   - DISABLED - access auditing of file shares is turned off.
 	//
 	// This member is required.
 	FileShareAccessAuditLogLevel WindowsAccessAuditLogLevel
 
-	// The Amazon Resource Name (ARN) that specifies the destination of the audit
-	// logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon
+	// The Amazon Resource Name (ARN) that specifies the destination of the audit logs.
+	//
+	// The destination can be any Amazon CloudWatch Logs log group ARN or Amazon
 	// Kinesis Data Firehose delivery stream ARN, with the following requirements:
+	//
 	//   - The destination ARN that you provide (either CloudWatch Logs log group or
 	//   Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services
 	//   partition, Amazon Web Services Region, and Amazon Web Services account as your
 	//   Amazon FSx file system.
+	//
 	//   - The name of the Amazon CloudWatch Logs log group must begin with the
 	//   /aws/fsx prefix. The name of the Amazon Kinesis Data Firehose delivery stream
 	//   must begin with the aws-fsx prefix.
+	//
 	//   - If you do not provide a destination in AuditLogDestination , Amazon FSx will
 	//   create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.
+	//
 	//   - If AuditLogDestination is provided and the resource does not exist, the
 	//   request will fail with a BadRequest error.
+	//
 	//   - If FileAccessAuditLogLevel and FileShareAccessAuditLogLevel are both set to
 	//   DISABLED , you cannot specify a destination in AuditLogDestination .
 	AuditLogDestination *string
@@ -4130,8 +4718,9 @@ type WindowsFileSystemConfiguration struct {
 	// create the file system using the AssociateFileSystemAliases operation. You can
 	// remove DNS aliases from the file system after it is created using the
 	// DisassociateFileSystemAliases operation. You only need to specify the alias name
-	// in the request payload. For more information, see DNS aliases (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
-	// .
+	// in the request payload. For more information, see [DNS aliases].
+	//
+	// [DNS aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
 	Aliases []Alias
 
 	// The configuration that Amazon FSx for Windows File Server uses to audit and log
@@ -4156,16 +4745,21 @@ type WindowsFileSystemConfiguration struct {
 	DailyAutomaticBackupStartTime *string
 
 	// Specifies the file system deployment type, valid values are the following:
+	//
 	//   - MULTI_AZ_1 - Specifies a high availability file system that is configured
 	//   for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ)
 	//   unavailability, and supports SSD and HDD storage.
+	//
 	//   - SINGLE_AZ_1 - (Default) Specifies a file system that is configured for
 	//   single AZ redundancy, only supports SSD storage.
+	//
 	//   - SINGLE_AZ_2 - Latest generation Single AZ file system. Specifies a file
 	//   system that is configured for single AZ redundancy and supports SSD and HDD
 	//   storage.
-	// For more information, see Single-AZ and Multi-AZ File Systems (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html)
-	// .
+	//
+	// For more information, see [Single-AZ and Multi-AZ File Systems].
+	//
+	// [Single-AZ and Multi-AZ File Systems]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html
 	DeploymentType WindowsDeploymentType
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
@@ -4179,31 +4773,38 @@ type WindowsFileSystemConfiguration struct {
 	MaintenanceOperationsInProgress []FileSystemMaintenanceOperation
 
 	// For MULTI_AZ_1 deployment types, the IP address of the primary, or preferred,
-	// file server. Use this IP address when mounting the file system on Linux SMB
-	// clients or Windows SMB clients that are not joined to a Microsoft Active
-	// Directory. Applicable for all Windows file system deployment types. This IP
-	// address is temporarily unavailable when the file system is undergoing
-	// maintenance. For Linux and Windows SMB clients that are joined to an Active
-	// Directory, use the file system's DNSName instead. For more information on
-	// mapping and mounting file shares, see Accessing File Shares (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html)
-	// .
+	// file server.
+	//
+	// Use this IP address when mounting the file system on Linux SMB clients or
+	// Windows SMB clients that are not joined to a Microsoft Active Directory.
+	// Applicable for all Windows file system deployment types. This IP address is
+	// temporarily unavailable when the file system is undergoing maintenance. For
+	// Linux and Windows SMB clients that are joined to an Active Directory, use the
+	// file system's DNSName instead. For more information on mapping and mounting file
+	// shares, see [Accessing File Shares].
+	//
+	// [Accessing File Shares]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html
 	PreferredFileServerIp *string
 
 	// For MULTI_AZ_1 deployment types, it specifies the ID of the subnet where the
 	// preferred file server is located. Must be one of the two subnet IDs specified in
 	// SubnetIds property. Amazon FSx serves traffic from this subnet except in the
-	// event of a failover to the secondary file server. For SINGLE_AZ_1 and
-	// SINGLE_AZ_2 deployment types, this value is the same as that for SubnetIDs . For
-	// more information, see Availability and durability: Single-AZ and Multi-AZ file
-	// systems (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources)
-	// .
+	// event of a failover to the secondary file server.
+	//
+	// For SINGLE_AZ_1 and SINGLE_AZ_2 deployment types, this value is the same as
+	// that for SubnetIDs . For more information, see [Availability and durability: Single-AZ and Multi-AZ file systems].
+	//
+	// [Availability and durability: Single-AZ and Multi-AZ file systems]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources
 	PreferredSubnetId *string
 
 	// For MULTI_AZ_1 deployment types, use this endpoint when performing
-	// administrative tasks on the file system using Amazon FSx Remote PowerShell. For
-	// SINGLE_AZ_1 and SINGLE_AZ_2 deployment types, this is the DNS name of the file
-	// system. This endpoint is temporarily unavailable when the file system is
-	// undergoing maintenance.
+	// administrative tasks on the file system using Amazon FSx Remote PowerShell.
+	//
+	// For SINGLE_AZ_1 and SINGLE_AZ_2 deployment types, this is the DNS name of the
+	// file system.
+	//
+	// This endpoint is temporarily unavailable when the file system is undergoing
+	// maintenance.
 	RemoteAdministrationEndpoint *string
 
 	// The configuration of the self-managed Microsoft Active Directory (AD) directory

@@ -61,12 +61,16 @@ type UpdateDevEnvironmentInput struct {
 
 	// The amount of time the Dev Environment will run without any activity detected
 	// before stopping, in minutes. Only whole integers are allowed. Dev Environments
-	// consume compute minutes when running. Changing this value will cause a restart
-	// of the Dev Environment if it is running.
+	// consume compute minutes when running.
+	//
+	// Changing this value will cause a restart of the Dev Environment if it is
+	// running.
 	InactivityTimeoutMinutes int32
 
-	// The Amazon EC2 instace type to use for the Dev Environment. Changing this value
-	// will cause a restart of the Dev Environment if it is running.
+	// The Amazon EC2 instace type to use for the Dev Environment.
+	//
+	// Changing this value will cause a restart of the Dev Environment if it is
+	// running.
 	InstanceType types.InstanceType
 
 	noSmithyDocumentSerde

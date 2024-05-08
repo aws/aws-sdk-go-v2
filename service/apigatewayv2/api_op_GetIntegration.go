@@ -60,12 +60,17 @@ type GetIntegrationOutput struct {
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
 	// content type conversions. Supported values are CONVERT_TO_BINARY and
-	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
-	// response payload from a Base64-encoded string to the corresponding binary blob.
+	// CONVERT_TO_TEXT, with the following behaviors:
+	//
+	// CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to
+	// the corresponding binary blob.
+	//
 	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-	// Base64-encoded string. If this property is not defined, the response payload
-	// will be passed through from the integration response to the route response or
-	// method response without modification.
+	// Base64-encoded string.
+	//
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the route response or method response without
+	// modification.
 	ContentHandlingStrategy types.ContentHandlingStrategy
 
 	// Specifies the credentials required for the integration, if any. For AWS
@@ -86,48 +91,68 @@ type GetIntegrationOutput struct {
 	IntegrationMethod *string
 
 	// The integration response selection expression for the integration. Supported
-	// only for WebSocket APIs. See Integration Response Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions)
-	// .
+	// only for WebSocket APIs. See [Integration Response Selection Expressions].
+	//
+	// [Integration Response Selection Expressions]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions
 	IntegrationResponseSelectionExpression *string
 
 	// Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service
-	// action to invoke. To learn more, see Integration subtype reference (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html)
-	// .
+	// action to invoke. To learn more, see [Integration subtype reference].
+	//
+	// [Integration subtype reference]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html
 	IntegrationSubtype *string
 
-	// The integration type of an integration. One of the following: AWS: for
-	// integrating the route or method request with an AWS service action, including
-	// the Lambda function-invoking action. With the Lambda function-invoking action,
-	// this is referred to as the Lambda custom integration. With any other AWS service
-	// action, this is known as AWS integration. Supported only for WebSocket APIs.
-	// AWS_PROXY: for integrating the route or method request with a Lambda function or
-	// other AWS service action. This integration is also referred to as a Lambda proxy
-	// integration. HTTP: for integrating the route or method request with an HTTP
-	// endpoint. This integration is also referred to as the HTTP custom integration.
-	// Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or
-	// method request with an HTTP endpoint, with the client request passed through
-	// as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating
-	// the route or method request with API Gateway as a "loopback" endpoint without
-	// invoking any backend. Supported only for WebSocket APIs.
+	// The integration type of an integration. One of the following:
+	//
+	// AWS: for integrating the route or method request with an AWS service action,
+	// including the Lambda function-invoking action. With the Lambda function-invoking
+	// action, this is referred to as the Lambda custom integration. With any other AWS
+	// service action, this is known as AWS integration. Supported only for WebSocket
+	// APIs.
+	//
+	// AWS_PROXY: for integrating the route or method request with a Lambda function
+	// or other AWS service action. This integration is also referred to as a Lambda
+	// proxy integration.
+	//
+	// HTTP: for integrating the route or method request with an HTTP endpoint. This
+	// integration is also referred to as the HTTP custom integration. Supported only
+	// for WebSocket APIs.
+	//
+	// HTTP_PROXY: for integrating the route or method request with an HTTP endpoint,
+	// with the client request passed through as-is. This is also referred to as HTTP
+	// proxy integration.
+	//
+	// MOCK: for integrating the route or method request with API Gateway as a
+	// "loopback" endpoint without invoking any backend. Supported only for WebSocket
+	// APIs.
 	IntegrationType types.IntegrationType
 
-	// For a Lambda integration, specify the URI of a Lambda function. For an HTTP
-	// integration, specify a fully-qualified URL. For an HTTP API private integration,
-	// specify the ARN of an Application Load Balancer listener, Network Load Balancer
-	// listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
-	// service, API Gateway uses DiscoverInstances to identify resources. You can use
-	// query parameters to target specific resources. To learn more, see
-	// DiscoverInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html)
-	// . For private integrations, all resources must be owned by the same AWS account.
+	// For a Lambda integration, specify the URI of a Lambda function.
+	//
+	// For an HTTP integration, specify a fully-qualified URL.
+	//
+	// For an HTTP API private integration, specify the ARN of an Application Load
+	// Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If
+	// you specify the ARN of an AWS Cloud Map service, API Gateway uses
+	// DiscoverInstances to identify resources. You can use query parameters to target
+	// specific resources. To learn more, see [DiscoverInstances]. For private integrations, all
+	// resources must be owned by the same AWS account.
+	//
+	// [DiscoverInstances]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
 	IntegrationUri *string
 
 	// Specifies the pass-through behavior for incoming requests based on the
 	// Content-Type header in the request, and the available mapping templates
 	// specified as the requestTemplates property on the Integration resource. There
 	// are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported
-	// only for WebSocket APIs. WHEN_NO_MATCH passes the request body for unmapped
-	// content types through to the integration backend without transformation. NEVER
-	// rejects unmapped content types with an HTTP 415 Unsupported Media Type response.
+	// only for WebSocket APIs.
+	//
+	// WHEN_NO_MATCH passes the request body for unmapped content types through to the
+	// integration backend without transformation.
+	//
+	// NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type
+	// response.
+	//
 	// WHEN_NO_TEMPLATES allows pass-through when the integration has no content types
 	// mapped to templates. However, if there is at least one content type defined,
 	// unmapped content types will be rejected with the same HTTP 415 Unsupported Media
@@ -145,19 +170,24 @@ type GetIntegrationOutput struct {
 	// required by the backend. The method request parameter value must match the
 	// pattern of method.request.{location}.{name} , where {location} is querystring,
 	// path, or header; and {name} must be a valid and unique method request parameter
-	// name. For HTTP API integrations with a specified integrationSubtype, request
+	// name.
+	//
+	// For HTTP API integrations with a specified integrationSubtype, request
 	// parameters are a key-value map specifying parameters that are passed to
 	// AWS_PROXY integrations. You can provide static values, or map request data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Working with AWS service integrations for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html)
-	// . For HTTP API integrations, without a specified integrationSubtype request
+	// more, see [Working with AWS service integrations for HTTP APIs].
+	//
+	// For HTTP API integrations, without a specified integrationSubtype request
 	// parameters are a key-value map specifying how to transform HTTP requests before
 	// sending them to backend integrations. The key should follow the pattern
 	// <action>:<header|querystring|path>.<location>. The action can be append,
 	// overwrite or remove. For values, you can provide static values, or map request
 	// data, stage variables, or context variables that are evaluated at runtime. To
-	// learn more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
-	// .
+	// learn more, see [Transforming API requests and responses].
+	//
+	// [Working with AWS service integrations for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
+	// [Transforming API requests and responses]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
 	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
@@ -174,8 +204,9 @@ type GetIntegrationOutput struct {
 	// <action>:<header>.<location> or overwrite.statuscode. The action can be append,
 	// overwrite or remove. The value can be a static value, or map to response data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
-	// .
+	// more, see [Transforming API requests and responses].
+	//
+	// [Transforming API requests and responses]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
 	ResponseParameters map[string]map[string]string
 
 	// The template selection expression for the integration. Supported only for

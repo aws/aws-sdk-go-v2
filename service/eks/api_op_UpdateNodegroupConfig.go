@@ -13,9 +13,9 @@ import (
 
 // Updates an Amazon EKS managed node group configuration. Your node group
 // continues to function during the update. The response output includes an update
-// ID that you can use to track the status of your node group update with the
-// DescribeUpdate API operation. Currently you can update the Kubernetes labels for
-// a node group or the scaling configuration.
+// ID that you can use to track the status of your node group update with the DescribeUpdateAPI
+// operation. Currently you can update the Kubernetes labels for a node group or
+// the scaling configuration.
 func (c *Client) UpdateNodegroupConfig(ctx context.Context, params *UpdateNodegroupConfigInput, optFns ...func(*Options)) (*UpdateNodegroupConfigOutput, error) {
 	if params == nil {
 		params = &UpdateNodegroupConfigInput{}
@@ -54,8 +54,9 @@ type UpdateNodegroupConfigInput struct {
 	ScalingConfig *types.NodegroupScalingConfig
 
 	// The Kubernetes taints to be applied to the nodes in the node group after the
-	// update. For more information, see Node taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
-	// .
+	// update. For more information, see [Node taints on managed node groups].
+	//
+	// [Node taints on managed node groups]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
 	Taints *types.UpdateTaintsPayload
 
 	// The node group update configuration.

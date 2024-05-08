@@ -13,7 +13,9 @@ import (
 )
 
 // Retrieves the device position history from a tracker resource within a
-// specified range of time. Device positions are deleted after 30 days.
+// specified range of time.
+//
+// Device positions are deleted after 30 days.
 func (c *Client) GetDevicePositionHistory(ctx context.Context, params *GetDevicePositionHistoryInput, optFns ...func(*Options)) (*GetDevicePositionHistoryOutput, error) {
 	if params == nil {
 		params = &GetDevicePositionHistoryInput{}
@@ -41,26 +43,38 @@ type GetDevicePositionHistoryInput struct {
 	// This member is required.
 	TrackerName *string
 
-	// Specify the end time for the position history in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ . By default, the value will be the time that
-	// the request is made. Requirement:
+	// Specify the end time for the position history in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ . By default, the value will be the time that the
+	// request is made.
+	//
+	// Requirement:
+	//
 	//   - The time specified for EndTimeExclusive must be after the time for
 	//   StartTimeInclusive .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	EndTimeExclusive *time.Time
 
 	// An optional limit for the number of device positions returned in a single call.
+	//
 	// Default value: 100
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
-	// response. If no token is provided, the default page is the first page. Default
-	// value: null
+	// response. If no token is provided, the default page is the first page.
+	//
+	// Default value: null
 	NextToken *string
 
-	// Specify the start time for the position history in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ . By default, the value will be 24 hours prior
-	// to the time that the request is made. Requirement:
+	// Specify the start time for the position history in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ . By default, the value will be 24 hours prior to the
+	// time that the request is made.
+	//
+	// Requirement:
+	//
 	//   - The time specified for StartTimeInclusive must be before EndTimeExclusive .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	StartTimeInclusive *time.Time
 
 	noSmithyDocumentSerde
@@ -204,6 +218,7 @@ var _ GetDevicePositionHistoryAPIClient = (*Client)(nil)
 // GetDevicePositionHistory
 type GetDevicePositionHistoryPaginatorOptions struct {
 	// An optional limit for the number of device positions returned in a single call.
+	//
 	// Default value: 100
 	Limit int32
 

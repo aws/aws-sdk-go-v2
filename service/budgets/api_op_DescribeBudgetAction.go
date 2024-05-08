@@ -34,12 +34,12 @@ type DescribeBudgetActionInput struct {
 	// This member is required.
 	AccountId *string
 
-	// A system-generated universally unique identifier (UUID) for the action.
+	//  A system-generated universally unique identifier (UUID) for the action.
 	//
 	// This member is required.
 	ActionId *string
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
@@ -55,12 +55,12 @@ type DescribeBudgetActionOutput struct {
 	// This member is required.
 	AccountId *string
 
-	// A budget action resource.
+	//  A budget action resource.
 	//
 	// This member is required.
 	Action *types.Action
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.

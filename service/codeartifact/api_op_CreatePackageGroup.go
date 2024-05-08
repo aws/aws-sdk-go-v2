@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a package group. For more information about creating package groups,
-// including example CLI commands, see Create a package group (https://docs.aws.amazon.com/codeartifact/latest/ug/create-package-group.html)
-// in the CodeArtifact User Guide.
+//	Creates a package group. For more information about creating package groups,
+//
+// including example CLI commands, see [Create a package group]in the CodeArtifact User Guide.
+//
+// [Create a package group]: https://docs.aws.amazon.com/codeartifact/latest/ug/create-package-group.html
 func (c *Client) CreatePackageGroup(ctx context.Context, params *CreatePackageGroupInput, optFns ...func(*Options)) (*CreatePackageGroupOutput, error) {
 	if params == nil {
 		params = &CreatePackageGroupInput{}
@@ -31,7 +33,7 @@ func (c *Client) CreatePackageGroup(ctx context.Context, params *CreatePackageGr
 
 type CreatePackageGroupInput struct {
 
-	// The name of the domain in which you want to create a package group.
+	//  The name of the domain in which you want to create a package group.
 	//
 	// This member is required.
 	Domain *string
@@ -42,13 +44,13 @@ type CreatePackageGroupInput struct {
 	// This member is required.
 	PackageGroup *string
 
-	// The contact information for the created package group.
+	//  The contact information for the created package group.
 	ContactInfo *string
 
-	// A description of the package group.
+	//  A description of the package group.
 	Description *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -60,7 +62,7 @@ type CreatePackageGroupInput struct {
 
 type CreatePackageGroupOutput struct {
 
-	// Information about the created package group after processing the request.
+	//  Information about the created package group after processing the request.
 	PackageGroup *types.PackageGroupDescription
 
 	// Metadata pertaining to the operation's result.

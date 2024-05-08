@@ -81,23 +81,33 @@ type GetScheduleOutput struct {
 	// The name of the schedule.
 	Name *string
 
-	// The expression that defines when the schedule runs. The following formats are
+	//  The expression that defines when the schedule runs. The following formats are
 	// supported.
+	//
 	//   - at expression - at(yyyy-mm-ddThh:mm:ss)
+	//
 	//   - rate expression - rate(value unit)
+	//
 	//   - cron expression - cron(fields)
+	//
 	// You can use at expressions to create one-time schedules that invoke a target
 	// once, at the time and in the time zone, that you specify. You can use rate and
 	// cron expressions to create recurring schedules. Rate-based schedules are useful
 	// when you want to invoke a target at regular intervals, such as every 15 minutes
 	// or every five days. Cron-based schedules are useful when you want to invoke a
 	// target periodically at a specific time, such as at 8:00 am (UTC+0) every 1st day
-	// of the month. A cron expression consists of six fields separated by white
-	// spaces: (minutes hours day_of_month month day_of_week year) . A rate expression
-	// consists of a value as a positive integer, and a unit with the following
-	// options: minute | minutes | hour | hours | day | days For more information and
-	// examples, see Schedule types on EventBridge Scheduler (https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
-	// in the EventBridge Scheduler User Guide.
+	// of the month.
+	//
+	// A cron expression consists of six fields separated by white spaces: (minutes
+	// hours day_of_month month day_of_week year) .
+	//
+	// A rate expression consists of a value as a positive integer, and a unit with
+	// the following options: minute | minutes | hour | hours | day | days
+	//
+	// For more information and examples, see [Schedule types on EventBridge Scheduler] in the EventBridge Scheduler User
+	// Guide.
+	//
+	// [Schedule types on EventBridge Scheduler]: https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html
 	ScheduleExpression *string
 
 	// The timezone in which the scheduling expression is evaluated.

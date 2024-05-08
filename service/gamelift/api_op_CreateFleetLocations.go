@@ -11,20 +11,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation has been expanded to use with the Amazon GameLift containers
-// feature, which is currently in public preview. Adds remote locations to an EC2
-// or container fleet and begins populating the new locations with instances. The
-// new instances conform to the fleet's instance type, auto-scaling, and other
-// configuration settings. You can't add remote locations to a fleet that resides
-// in an Amazon Web Services Region that doesn't support multiple locations. Fleets
-// created prior to March 2021 can't support multiple locations. To add fleet
-// locations, specify the fleet to be updated and provide a list of one or more
-// locations. If successful, this operation returns the list of added locations
-// with their status set to NEW . Amazon GameLift initiates the process of starting
-// an instance in each added location. You can track the status of each new
-// location by monitoring location creation events using DescribeFleetEvents (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html)
-// . Learn more Setting up fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Multi-location fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+//	This operation has been expanded to use with the Amazon GameLift containers
+//
+// feature, which is currently in public preview.
+//
+// Adds remote locations to an EC2 or container fleet and begins populating the
+// new locations with instances. The new instances conform to the fleet's instance
+// type, auto-scaling, and other configuration settings.
+//
+// You can't add remote locations to a fleet that resides in an Amazon Web
+// Services Region that doesn't support multiple locations. Fleets created prior to
+// March 2021 can't support multiple locations.
+//
+// To add fleet locations, specify the fleet to be updated and provide a list of
+// one or more locations.
+//
+// If successful, this operation returns the list of added locations with their
+// status set to NEW . Amazon GameLift initiates the process of starting an
+// instance in each added location. You can track the status of each new location
+// by monitoring location creation events using [DescribeFleetEvents].
+//
+// # Learn more
+//
+// [Setting up fleets]
+//
+// [Multi-location fleets]
+//
+// [DescribeFleetEvents]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html
+// [Multi-location fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [Setting up fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) CreateFleetLocations(ctx context.Context, params *CreateFleetLocationsInput, optFns ...func(*Options)) (*CreateFleetLocationsOutput, error) {
 	if params == nil {
 		params = &CreateFleetLocationsInput{}
@@ -61,10 +76,11 @@ type CreateFleetLocationsInput struct {
 
 type CreateFleetLocationsOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that was updated with new locations.

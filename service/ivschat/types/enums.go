@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for ChatTokenCapability. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChatTokenCapability) Values() []ChatTokenCapability {
 	return []ChatTokenCapability{
 		"SEND_MESSAGE",
@@ -31,8 +32,9 @@ const (
 
 // Values returns all known values for CreateLoggingConfigurationState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CreateLoggingConfigurationState) Values() []CreateLoggingConfigurationState {
 	return []CreateLoggingConfigurationState{
 		"ACTIVE",
@@ -48,8 +50,9 @@ const (
 )
 
 // Values returns all known values for FallbackResult. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FallbackResult) Values() []FallbackResult {
 	return []FallbackResult{
 		"ALLOW",
@@ -72,6 +75,7 @@ const (
 
 // Values returns all known values for LoggingConfigurationState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LoggingConfigurationState) Values() []LoggingConfigurationState {
 	return []LoggingConfigurationState{
@@ -93,8 +97,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"ROOM",
@@ -110,8 +115,9 @@ const (
 
 // Values returns all known values for UpdateLoggingConfigurationState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateLoggingConfigurationState) Values() []UpdateLoggingConfigurationState {
 	return []UpdateLoggingConfigurationState{
 		"ACTIVE",
@@ -129,6 +135,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

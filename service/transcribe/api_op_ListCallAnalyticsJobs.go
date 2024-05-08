@@ -12,8 +12,10 @@ import (
 )
 
 // Provides a list of Call Analytics jobs that match the specified criteria. If no
-// criteria are specified, all Call Analytics jobs are returned. To get detailed
-// information about a specific Call Analytics job, use the operation.
+// criteria are specified, all Call Analytics jobs are returned.
+//
+// To get detailed information about a specific Call Analytics job, use the
+// operation.
 func (c *Client) ListCallAnalyticsJobs(ctx context.Context, params *ListCallAnalyticsJobsInput, optFns ...func(*Options)) (*ListCallAnalyticsJobsOutput, error) {
 	if params == nil {
 		params = &ListCallAnalyticsJobsInput{}

@@ -13,8 +13,9 @@ import (
 
 // Retrieves the delivery destination policy assigned to the delivery destination
 // that you specify. For more information about delivery destinations and their
-// policies, see PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html)
-// .
+// policies, see [PutDeliveryDestinationPolicy].
+//
+// [PutDeliveryDestinationPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
 func (c *Client) GetDeliveryDestinationPolicy(ctx context.Context, params *GetDeliveryDestinationPolicyInput, optFns ...func(*Options)) (*GetDeliveryDestinationPolicyOutput, error) {
 	if params == nil {
 		params = &GetDeliveryDestinationPolicyInput{}

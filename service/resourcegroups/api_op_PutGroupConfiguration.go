@@ -12,9 +12,13 @@ import (
 )
 
 // Attaches a service configuration to the specified group. This occurs
-// asynchronously, and can take time to complete. You can use GetGroupConfiguration
-// to check the status of the update. Minimum permissions To run this command, you
-// must have the following permissions:
+// asynchronously, and can take time to complete. You can use GetGroupConfigurationto check the status
+// of the update.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:PutGroupConfiguration
 func (c *Client) PutGroupConfiguration(ctx context.Context, params *PutGroupConfigurationInput, optFns ...func(*Options)) (*PutGroupConfigurationOutput, error) {
 	if params == nil {
@@ -36,10 +40,14 @@ type PutGroupConfigurationInput struct {
 	// The new configuration to associate with the specified group. A configuration
 	// associates the resource group with an Amazon Web Services service and specifies
 	// how the service can interact with the resources in the group. A configuration is
-	// an array of GroupConfigurationItem elements. For information about the syntax
-	// of a service configuration, see Service configurations for Resource Groups (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html)
-	// . A resource group can contain either a Configuration or a ResourceQuery , but
-	// not both.
+	// an array of GroupConfigurationItemelements.
+	//
+	// For information about the syntax of a service configuration, see [Service configurations for Resource Groups].
+	//
+	// A resource group can contain either a Configuration or a ResourceQuery , but not
+	// both.
+	//
+	// [Service configurations for Resource Groups]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
 	Configuration []types.GroupConfigurationItem
 
 	// The name or ARN of the resource group with the configuration that you want to

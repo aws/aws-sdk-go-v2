@@ -12,6 +12,7 @@ import (
 )
 
 // Specify VDM preferences for email that you send using the configuration set.
+//
 // You can execute this operation no more than once per second.
 func (c *Client) PutConfigurationSetVdmOptions(ctx context.Context, params *PutConfigurationSetVdmOptionsInput, optFns ...func(*Options)) (*PutConfigurationSetVdmOptionsOutput, error) {
 	if params == nil {

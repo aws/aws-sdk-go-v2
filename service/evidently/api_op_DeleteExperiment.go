@@ -11,8 +11,11 @@ import (
 )
 
 // Deletes an Evidently experiment. The feature used for the experiment is not
-// deleted. To stop an experiment without deleting it, use StopExperiment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopExperiment.html)
-// .
+// deleted.
+//
+// To stop an experiment without deleting it, use [StopExperiment].
+//
+// [StopExperiment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_StopExperiment.html
 func (c *Client) DeleteExperiment(ctx context.Context, params *DeleteExperimentInput, optFns ...func(*Options)) (*DeleteExperimentOutput, error) {
 	if params == nil {
 		params = &DeleteExperimentInput{}

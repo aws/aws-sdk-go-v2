@@ -15,8 +15,11 @@ import (
 	"time"
 )
 
-// Returns the current status of an existing association or disassociation
-// request. A ResourceNotFoundException is thrown when no recent association or
+//	Returns the current status of an existing association or disassociation
+//
+// request.
+//
+// A ResourceNotFoundException is thrown when no recent association or
 // disassociation request with the specified token is found, or when the server
 // does not exist. A ValidationException is raised when parameters of the request
 // are not valid.
@@ -57,9 +60,14 @@ type DescribeNodeAssociationStatusOutput struct {
 	// PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).
 	EngineAttributes []types.EngineAttribute
 
-	// The status of the association or disassociation request. Possible values:
+	// The status of the association or disassociation request.
+	//
+	// Possible values:
+	//
 	//   - SUCCESS : The association or disassociation succeeded.
+	//
 	//   - FAILED : The association or disassociation failed.
+	//
 	//   - IN_PROGRESS : The association or disassociation is still in progress.
 	NodeAssociationStatus types.NodeAssociationStatus
 
@@ -188,12 +196,13 @@ type NodeAssociatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeNodeAssociationStatusInput, *DescribeNodeAssociationStatusOutput, error) (bool, error)
 }
 

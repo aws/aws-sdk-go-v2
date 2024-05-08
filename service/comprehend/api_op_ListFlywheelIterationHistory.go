@@ -12,8 +12,9 @@ import (
 )
 
 // Information about the history of a flywheel iteration. For more information
-// about flywheels, see Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
-// in the Amazon Comprehend Developer Guide.
+// about flywheels, see [Flywheel overview]in the Amazon Comprehend Developer Guide.
+//
+// [Flywheel overview]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
 func (c *Client) ListFlywheelIterationHistory(ctx context.Context, params *ListFlywheelIterationHistoryInput, optFns ...func(*Options)) (*ListFlywheelIterationHistoryOutput, error) {
 	if params == nil {
 		params = &ListFlywheelIterationHistoryInput{}

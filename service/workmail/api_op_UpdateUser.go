@@ -12,8 +12,8 @@ import (
 )
 
 // Updates data for the user. To have the latest information, it must be preceded
-// by a DescribeUser call. The dataset in the request should be the one expected
-// when performing another DescribeUser call.
+// by a DescribeUsercall. The dataset in the request should be the one expected when
+// performing another DescribeUser call.
 func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns ...func(*Options)) (*UpdateUserOutput, error) {
 	if params == nil {
 		params = &UpdateUserInput{}
@@ -36,11 +36,16 @@ type UpdateUserInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier for the user to be updated. The identifier can be the UserId,
-	// Username, or email. The following identity formats are available:
+	// The identifier for the user to be updated.
+	//
+	// The identifier can be the UserId, Username, or email. The following identity
+	// formats are available:
+	//
 	//   - User ID: 12345678-1234-1234-1234-123456789012 or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: user@domain.tld
+	//
 	//   - User name: user
 	//
 	// This member is required.
@@ -79,7 +84,9 @@ type UpdateUserInput struct {
 	// Updates the user's office.
 	Office *string
 
-	// Updates the user role. You cannot pass SYSTEM_USER or RESOURCE.
+	// Updates the user role.
+	//
+	// You cannot pass SYSTEM_USER or RESOURCE.
 	Role types.UserRole
 
 	// Updates the user's street address.

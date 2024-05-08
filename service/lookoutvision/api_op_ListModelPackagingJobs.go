@@ -11,11 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the model packaging jobs created for an Amazon Lookout for Vision
-// project. This operation requires permissions to perform the
-// lookoutvision:ListModelPackagingJobs operation. For more information, see Using
-// your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for
-// Vision Developer Guide.
+//	Lists the model packaging jobs created for an Amazon Lookout for Vision
+//
+// project.
+//
+// This operation requires permissions to perform the
+// lookoutvision:ListModelPackagingJobs operation.
+//
+// For more information, see Using your Amazon Lookout for Vision model on an edge
+// device in the Amazon Lookout for Vision Developer Guide.
 func (c *Client) ListModelPackagingJobs(ctx context.Context, params *ListModelPackagingJobsInput, optFns ...func(*Options)) (*ListModelPackagingJobsOutput, error) {
 	if params == nil {
 		params = &ListModelPackagingJobsInput{}
@@ -33,7 +37,7 @@ func (c *Client) ListModelPackagingJobs(ctx context.Context, params *ListModelPa
 
 type ListModelPackagingJobsInput struct {
 
-	// The name of the project for which you want to list the model packaging jobs.
+	//  The name of the project for which you want to list the model packaging jobs.
 	//
 	// This member is required.
 	ProjectName *string
@@ -53,8 +57,8 @@ type ListModelPackagingJobsInput struct {
 
 type ListModelPackagingJobsOutput struct {
 
-	// A list of the model packaging jobs created for the specified Amazon Lookout for
-	// Vision project.
+	//  A list of the model packaging jobs created for the specified Amazon Lookout
+	// for Vision project.
 	ModelPackagingJobs []types.ModelPackagingJobMetadata
 
 	// If the previous response was incomplete (because there is more results to

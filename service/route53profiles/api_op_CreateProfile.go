@@ -38,12 +38,12 @@ type CreateProfileInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// A name for the Profile.
+	//  A name for the Profile.
 	//
 	// This member is required.
 	Name *string
 
-	// A list of the tag keys and values that you want to associate with the Route 53
+	//  A list of the tag keys and values that you want to associate with the Route 53
 	// Profile.
 	Tags []types.Tag
 
@@ -52,7 +52,7 @@ type CreateProfileInput struct {
 
 type CreateProfileOutput struct {
 
-	// The Profile that you just created.
+	//  The Profile that you just created.
 	Profile *types.Profile
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of AssetSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
-// objects for assets in a package version.
+//	Returns a list of [AssetSummary] objects for assets in a package version.
+//
+// [AssetSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html
 func (c *Client) ListPackageVersionAssets(ctx context.Context, params *ListPackageVersionAssetsInput, optFns ...func(*Options)) (*ListPackageVersionAssetsOutput, error) {
 	if params == nil {
 		params = &ListPackageVersionAssetsInput{}
@@ -30,56 +31,64 @@ func (c *Client) ListPackageVersionAssets(ctx context.Context, params *ListPacka
 
 type ListPackageVersionAssetsInput struct {
 
-	// The name of the domain that contains the repository associated with the package
-	// version assets.
+	//  The name of the domain that contains the repository associated with the
+	// package version assets.
 	//
 	// This member is required.
 	Domain *string
 
-	// The format of the package that contains the requested package version assets.
+	//  The format of the package that contains the requested package version assets.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package that contains the requested package version assets.
+	//  The name of the package that contains the requested package version assets.
 	//
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2 ).
+	//  A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
 
-	// The name of the repository that contains the package that contains the
+	//  The name of the repository that contains the package that contains the
 	// requested package version assets.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
 	// The namespace of the package version that contains the requested package
 	// version assets. The package component that specifies its namespace depends on
-	// its type. For example: The namespace is required requesting assets from package
-	// versions of the following formats:
+	// its type. For example:
+	//
+	// The namespace is required requesting assets from package versions of the
+	// following formats:
+	//
 	//   - Maven
+	//
 	//   - Swift
+	//
 	//   - generic
 	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -88,33 +97,39 @@ type ListPackageVersionAssetsInput struct {
 
 type ListPackageVersionAssetsOutput struct {
 
-	// The returned list of AssetSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
-	// objects.
+	//  The returned list of [AssetSummary] objects.
+	//
+	// [AssetSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html
 	Assets []types.AssetSummary
 
-	// The format of the package that contains the requested package version assets.
+	//  The format of the package that contains the requested package version assets.
 	Format types.PackageFormat
 
 	// The namespace of the package version that contains the requested package
 	// version assets. The package component that specifies its namespace depends on
 	// its type. For example:
+	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// If there are additional results, this is the token for the next set of results.
+	//  If there are additional results, this is the token for the next set of
+	// results.
 	NextToken *string
 
-	// The name of the package that contains the requested package version assets.
+	//  The name of the package that contains the requested package version assets.
 	Package *string
 
-	// The version of the package associated with the requested assets.
+	//  The version of the package associated with the requested assets.
 	Version *string
 
-	// The current revision associated with the package version.
+	//  The current revision associated with the package version.
 	VersionRevision *string
 
 	// Metadata pertaining to the operation's result.
@@ -213,7 +228,7 @@ var _ ListPackageVersionAssetsAPIClient = (*Client)(nil)
 // ListPackageVersionAssetsPaginatorOptions is the paginator options for
 // ListPackageVersionAssets
 type ListPackageVersionAssetsPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

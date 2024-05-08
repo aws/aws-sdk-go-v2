@@ -11,15 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates one or more WorkSpaces. This operation is asynchronous and returns
-// before the WorkSpaces are created.
+// Creates one or more WorkSpaces.
+//
+// This operation is asynchronous and returns before the WorkSpaces are created.
+//
 //   - The MANUAL running mode value is only supported by Amazon WorkSpaces Core.
 //     Contact your account team to be allow-listed to use this value. For more
-//     information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/)
-//     .
+//     information, see [Amazon WorkSpaces Core].
+//
 //   - You don't need to specify the PCOIP protocol for Linux bundles because WSP
 //     is the default protocol for those bundles.
+//
 //   - User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.
+//
+// [Amazon WorkSpaces Core]: http://aws.amazon.com/workspaces/core/
 func (c *Client) CreateWorkspaces(ctx context.Context, params *CreateWorkspacesInput, optFns ...func(*Options)) (*CreateWorkspacesOutput, error) {
 	if params == nil {
 		params = &CreateWorkspacesInput{}
@@ -50,10 +55,11 @@ type CreateWorkspacesOutput struct {
 	// Information about the WorkSpaces that could not be created.
 	FailedRequests []types.FailedCreateWorkspaceRequest
 
-	// Information about the WorkSpaces that were created. Because this operation is
-	// asynchronous, the identifier returned is not immediately available for use with
-	// other operations. For example, if you call DescribeWorkspaces before the
-	// WorkSpace is created, the information returned can be incomplete.
+	// Information about the WorkSpaces that were created.
+	//
+	// Because this operation is asynchronous, the identifier returned is not
+	// immediately available for use with other operations. For example, if you call DescribeWorkspaces
+	// before the WorkSpace is created, the information returned can be incomplete.
 	PendingRequests []types.Workspace
 
 	// Metadata pertaining to the operation's result.

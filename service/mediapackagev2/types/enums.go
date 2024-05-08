@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AdMarkerDash. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdMarkerDash) Values() []AdMarkerDash {
 	return []AdMarkerDash{
 		"BINARY",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for AdMarkerHls. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdMarkerHls) Values() []AdMarkerHls {
 	return []AdMarkerHls{
 		"DATERANGE",
@@ -45,8 +47,9 @@ const (
 )
 
 // Values returns all known values for CmafEncryptionMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CmafEncryptionMethod) Values() []CmafEncryptionMethod {
 	return []CmafEncryptionMethod{
 		"CENC",
@@ -65,8 +68,9 @@ const (
 )
 
 // Values returns all known values for ConflictExceptionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionType) Values() []ConflictExceptionType {
 	return []ConflictExceptionType{
 		"RESOURCE_IN_USE",
@@ -85,8 +89,9 @@ const (
 )
 
 // Values returns all known values for ContainerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerType) Values() []ContainerType {
 	return []ContainerType{
 		"TS",
@@ -103,8 +108,9 @@ const (
 )
 
 // Values returns all known values for DashDrmSignaling. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DashDrmSignaling) Values() []DashDrmSignaling {
 	return []DashDrmSignaling{
 		"INDIVIDUAL",
@@ -124,8 +130,9 @@ const (
 )
 
 // Values returns all known values for DashPeriodTrigger. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DashPeriodTrigger) Values() []DashPeriodTrigger {
 	return []DashPeriodTrigger{
 		"AVAILS",
@@ -145,6 +152,7 @@ const (
 
 // Values returns all known values for DashSegmentTemplateFormat. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DashSegmentTemplateFormat) Values() []DashSegmentTemplateFormat {
 	return []DashSegmentTemplateFormat{
@@ -163,8 +171,9 @@ const (
 )
 
 // Values returns all known values for DashUtcTimingMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DashUtcTimingMode) Values() []DashUtcTimingMode {
 	return []DashUtcTimingMode{
 		"HTTP_HEAD",
@@ -185,8 +194,9 @@ const (
 )
 
 // Values returns all known values for DrmSystem. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DrmSystem) Values() []DrmSystem {
 	return []DrmSystem{
 		"CLEAR_KEY_AES_128",
@@ -208,8 +218,9 @@ const (
 )
 
 // Values returns all known values for PresetSpeke20Audio. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PresetSpeke20Audio) Values() []PresetSpeke20Audio {
 	return []PresetSpeke20Audio{
 		"PRESET_AUDIO_1",
@@ -237,8 +248,9 @@ const (
 )
 
 // Values returns all known values for PresetSpeke20Video. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PresetSpeke20Video) Values() []PresetSpeke20Video {
 	return []PresetSpeke20Video{
 		"PRESET_VIDEO_1",
@@ -264,8 +276,9 @@ const (
 )
 
 // Values returns all known values for ResourceTypeNotFound. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceTypeNotFound) Values() []ResourceTypeNotFound {
 	return []ResourceTypeNotFound{
 		"CHANNEL_GROUP",
@@ -290,8 +303,9 @@ const (
 )
 
 // Values returns all known values for ScteFilter. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScteFilter) Values() []ScteFilter {
 	return []ScteFilter{
 		"SPLICE_INSERT",
@@ -315,8 +329,9 @@ const (
 )
 
 // Values returns all known values for TsEncryptionMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TsEncryptionMethod) Values() []TsEncryptionMethod {
 	return []TsEncryptionMethod{
 		"AES_128",
@@ -376,8 +391,9 @@ const (
 )
 
 // Values returns all known values for ValidationExceptionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionType) Values() []ValidationExceptionType {
 	return []ValidationExceptionType{
 		"CONTAINER_TYPE_IMMUTABLE",

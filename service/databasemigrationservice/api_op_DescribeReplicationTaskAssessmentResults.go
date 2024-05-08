@@ -13,9 +13,12 @@ import (
 
 // Returns the task assessment results from the Amazon S3 bucket that DMS creates
 // in your Amazon Web Services account. This action always returns the latest
-// results. For more information about DMS task assessments, see Creating a task
-// assessment report (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
-// in the Database Migration Service User Guide.
+// results.
+//
+// For more information about DMS task assessments, see [Creating a task assessment report] in the Database Migration
+// Service User Guide.
+//
+// [Creating a task assessment report]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html
 func (c *Client) DescribeReplicationTaskAssessmentResults(ctx context.Context, params *DescribeReplicationTaskAssessmentResultsInput, optFns ...func(*Options)) (*DescribeReplicationTaskAssessmentResultsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationTaskAssessmentResultsInput{}
@@ -33,15 +36,18 @@ func (c *Client) DescribeReplicationTaskAssessmentResults(ctx context.Context, p
 
 type DescribeReplicationTaskAssessmentResultsInput struct {
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the task. When
@@ -57,12 +63,12 @@ type DescribeReplicationTaskAssessmentResultsOutput struct {
 	// - The Amazon S3 bucket where the task assessment report is located.
 	BucketName *string
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The task assessment report.
+	//  The task assessment report.
 	ReplicationTaskAssessmentResults []types.ReplicationTaskAssessmentResult
 
 	// Metadata pertaining to the operation's result.
@@ -158,10 +164,13 @@ var _ DescribeReplicationTaskAssessmentResultsAPIClient = (*Client)(nil)
 // DescribeReplicationTaskAssessmentResultsPaginatorOptions is the paginator
 // options for DescribeReplicationTaskAssessmentResults
 type DescribeReplicationTaskAssessmentResultsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

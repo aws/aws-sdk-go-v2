@@ -11,8 +11,9 @@ import (
 )
 
 // Detaches a key-value pair from a resource, as identified by its Amazon Resource
-// Name (ARN). Resources are users, servers, roles, and other entities. No response
-// is returned from this call.
+// Name (ARN). Resources are users, servers, roles, and other entities.
+//
+// No response is returned from this call.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

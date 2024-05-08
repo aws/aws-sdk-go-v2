@@ -12,8 +12,10 @@ import (
 )
 
 // Deletes a recommendation preference, such as enhanced infrastructure metrics.
-// For more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-// in the Compute Optimizer User Guide.
+//
+// For more information, see [Activating enhanced infrastructure metrics] in the Compute Optimizer User Guide.
+//
+// [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 func (c *Client) DeleteRecommendationPreferences(ctx context.Context, params *DeleteRecommendationPreferencesInput, optFns ...func(*Options)) (*DeleteRecommendationPreferencesOutput, error) {
 	if params == nil {
 		params = &DeleteRecommendationPreferencesInput{}
@@ -36,21 +38,24 @@ type DeleteRecommendationPreferencesInput struct {
 	// This member is required.
 	RecommendationPreferenceNames []types.RecommendationPreferenceName
 
-	// The target resource type of the recommendation preference to delete. The
-	// Ec2Instance option encompasses standalone instances and instances that are part
-	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
-	// that are part of an Auto Scaling group. The valid values for this parameter are
-	// Ec2Instance and AutoScalingGroup .
+	// The target resource type of the recommendation preference to delete.
+	//
+	// The Ec2Instance option encompasses standalone instances and instances that are
+	// part of Auto Scaling groups. The AutoScalingGroup option encompasses only
+	// instances that are part of an Auto Scaling group.
+	//
+	// The valid values for this parameter are Ec2Instance and AutoScalingGroup .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
 
 	// An object that describes the scope of the recommendation preference to delete.
+	//
 	// You can delete recommendation preferences that are created at the organization
 	// level (for management accounts of an organization only), account level, and
-	// resource level. For more information, see Activating enhanced infrastructure
-	// metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-	// in the Compute Optimizer User Guide.
+	// resource level. For more information, see [Activating enhanced infrastructure metrics]in the Compute Optimizer User Guide.
+	//
+	// [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 	Scope *types.Scope
 
 	noSmithyDocumentSerde

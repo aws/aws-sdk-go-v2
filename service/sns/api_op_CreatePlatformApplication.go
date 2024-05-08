@@ -14,26 +14,35 @@ import (
 // notification services, such as APNS and GCM (Firebase Cloud Messaging), to which
 // devices and mobile apps may register. You must specify PlatformPrincipal and
 // PlatformCredential attributes when using the CreatePlatformApplication action.
+//
 // PlatformPrincipal and PlatformCredential are received from the notification
 // service.
+//
 //   - For ADM , PlatformPrincipal is client id and PlatformCredential is client
 //     secret .
+//
 //   - For Baidu , PlatformPrincipal is API key and PlatformCredential is secret
 //     key .
+//
 //   - For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal
 //     is SSL certificate and PlatformCredential is private key .
+//
 //   - For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is
 //     signing key ID and PlatformCredential is signing key .
+//
 //   - For GCM (Firebase Cloud Messaging) using key credentials, there is no
 //     PlatformPrincipal . The PlatformCredential is API key .
+//
 //   - For GCM (Firebase Cloud Messaging) using token credentials, there is no
 //     PlatformPrincipal . The PlatformCredential is a JSON formatted private key
 //     file. When using the Amazon Web Services CLI, the file must be in string format
 //     and special characters must be ignored. To format the file correctly, Amazon SNS
 //     recommends using the following command: SERVICE_JSON=`jq @json <<< cat
 //     service.json` .
+//
 //   - For MPNS , PlatformPrincipal is TLS certificate and PlatformCredential is
 //     private key .
+//
 //   - For WNS , PlatformPrincipal is Package Security Identifier and
 //     PlatformCredential is secret key .
 //
@@ -57,8 +66,9 @@ func (c *Client) CreatePlatformApplication(ctx context.Context, params *CreatePl
 // Input for CreatePlatformApplication action.
 type CreatePlatformApplicationInput struct {
 
-	// For a list of attributes, see SetPlatformApplicationAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html)
-	// .
+	// For a list of attributes, see [SetPlatformApplicationAttributes]SetPlatformApplicationAttributes .
+	//
+	// [SetPlatformApplicationAttributes]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
 	//
 	// This member is required.
 	Attributes map[string]string

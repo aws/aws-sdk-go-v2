@@ -34,16 +34,16 @@ type GetChangeLogsInput struct {
 	// This member is required.
 	AssessmentId *string
 
-	// The unique identifier for the control.
+	//  The unique identifier for the control.
 	ControlId *string
 
-	// The unique identifier for the control set.
+	//  The unique identifier for the control set.
 	ControlSetId *string
 
 	// Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde

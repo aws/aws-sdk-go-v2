@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about one or more Amazon Lightsail SSL/TLS certificates. To
-// get a summary of a certificate, omit includeCertificateDetails from your
+// Returns information about one or more Amazon Lightsail SSL/TLS certificates.
+//
+// To get a summary of a certificate, omit includeCertificateDetails from your
 // request. The response will include only the certificate Amazon Resource Name
 // (ARN), certificate name, domain name, and tags.
 func (c *Client) GetCertificates(ctx context.Context, params *GetCertificatesInput, optFns ...func(*Options)) (*GetCertificatesOutput, error) {
@@ -32,26 +33,32 @@ func (c *Client) GetCertificates(ctx context.Context, params *GetCertificatesInp
 
 type GetCertificatesInput struct {
 
-	// The name for the certificate for which to return information. When omitted, the
-	// response includes all of your certificates in the Amazon Web Services Region
-	// where the request is made.
+	// The name for the certificate for which to return information.
+	//
+	// When omitted, the response includes all of your certificates in the Amazon Web
+	// Services Region where the request is made.
 	CertificateName *string
 
-	// The status of the certificates for which to return information. For example,
-	// specify ISSUED to return only certificates with an ISSUED status. When omitted,
-	// the response includes all of your certificates in the Amazon Web Services Region
-	// where the request is made, regardless of their current status.
+	// The status of the certificates for which to return information.
+	//
+	// For example, specify ISSUED to return only certificates with an ISSUED status.
+	//
+	// When omitted, the response includes all of your certificates in the Amazon Web
+	// Services Region where the request is made, regardless of their current status.
 	CertificateStatuses []types.CertificateStatus
 
 	// Indicates whether to include detailed information about the certificates in the
-	// response. When omitted, the response includes only the certificate names, Amazon
-	// Resource Names (ARNs), domain names, and tags.
+	// response.
+	//
+	// When omitted, the response includes only the certificate names, Amazon Resource
+	// Names (ARNs), domain names, and tags.
 	IncludeCertificateDetails bool
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetCertificates request. If your results are
-	// paginated, the response will return a next page token that you can specify as
-	// the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetCertificates request. If your
+	// results are paginated, the response will return a next page token that you can
+	// specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde

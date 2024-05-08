@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets details of the past fraud predictions for the specified event ID, event
+//	Gets details of the past fraud predictions for the specified event ID, event
+//
 // type, detector ID, and detector version ID that was generated in the specified
 // time period.
 func (c *Client) GetEventPredictionMetadata(ctx context.Context, params *GetEventPredictionMetadataInput, optFns ...func(*Options)) (*GetEventPredictionMetadataOutput, error) {
@@ -31,31 +32,33 @@ func (c *Client) GetEventPredictionMetadata(ctx context.Context, params *GetEven
 
 type GetEventPredictionMetadataInput struct {
 
-	// The detector ID.
+	//  The detector ID.
 	//
 	// This member is required.
 	DetectorId *string
 
-	// The detector version ID.
+	//  The detector version ID.
 	//
 	// This member is required.
 	DetectorVersionId *string
 
-	// The event ID.
+	//  The event ID.
 	//
 	// This member is required.
 	EventId *string
 
-	// The event type associated with the detector specified for the prediction.
+	//  The event type associated with the detector specified for the prediction.
 	//
 	// This member is required.
 	EventTypeName *string
 
-	// The timestamp that defines when the prediction was generated. The timestamp
-	// must be specified using ISO 8601 standard in UTC. We recommend calling
-	// ListEventPredictions (https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html)
-	// first, and using the predictionTimestamp value in the response to provide an
-	// accurate prediction timestamp value.
+	//  The timestamp that defines when the prediction was generated. The timestamp
+	// must be specified using ISO 8601 standard in UTC.
+	//
+	// We recommend calling [ListEventPredictions] first, and using the predictionTimestamp value in the
+	// response to provide an accurate prediction timestamp value.
+	//
+	// [ListEventPredictions]: https://docs.aws.amazon.com/frauddetector/latest/api/API_ListEventPredictions.html
 	//
 	// This member is required.
 	PredictionTimestamp *string
@@ -65,50 +68,51 @@ type GetEventPredictionMetadataInput struct {
 
 type GetEventPredictionMetadataOutput struct {
 
-	// The detector ID.
+	//  The detector ID.
 	DetectorId *string
 
-	// The detector version ID.
+	//  The detector version ID.
 	DetectorVersionId *string
 
-	// The status of the detector version.
+	//  The status of the detector version.
 	DetectorVersionStatus *string
 
-	// The entity ID.
+	//  The entity ID.
 	EntityId *string
 
-	// The entity type.
+	//  The entity type.
 	EntityType *string
 
-	// External (Amazon SageMaker) models that were evaluated for generating
+	//  External (Amazon SageMaker) models that were evaluated for generating
 	// predictions.
 	EvaluatedExternalModels []types.EvaluatedExternalModel
 
-	// Model versions that were evaluated for generating predictions.
+	//  Model versions that were evaluated for generating predictions.
 	EvaluatedModelVersions []types.EvaluatedModelVersion
 
-	// The event ID.
+	//  The event ID.
 	EventId *string
 
-	// The timestamp for when the prediction was generated for the associated event ID.
+	//  The timestamp for when the prediction was generated for the associated event
+	// ID.
 	EventTimestamp *string
 
-	// The event type associated with the detector specified for this prediction.
+	//  The event type associated with the detector specified for this prediction.
 	EventTypeName *string
 
-	// A list of event variables that influenced the prediction scores.
+	//  A list of event variables that influenced the prediction scores.
 	EventVariables []types.EventVariableSummary
 
-	// The outcomes of the matched rule, based on the rule execution mode.
+	//  The outcomes of the matched rule, based on the rule execution mode.
 	Outcomes []string
 
 	// The timestamp that defines when the prediction was generated.
 	PredictionTimestamp *string
 
-	// The execution mode of the rule used for evaluating variable values.
+	//  The execution mode of the rule used for evaluating variable values.
 	RuleExecutionMode types.RuleExecutionMode
 
-	// List of rules associated with the detector version that were used for
+	//  List of rules associated with the detector version that were used for
 	// evaluating variable values.
 	Rules []types.EvaluatedRule
 

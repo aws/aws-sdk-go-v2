@@ -12,8 +12,9 @@ import (
 )
 
 // Creates the specified connection alias for use with cross-Region redirection.
-// For more information, see Cross-Region Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
-// .
+// For more information, see [Cross-Region Redirection for Amazon WorkSpaces].
+//
+// [Cross-Region Redirection for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
 func (c *Client) CreateConnectionAlias(ctx context.Context, params *CreateConnectionAliasInput, optFns ...func(*Options)) (*CreateConnectionAliasOutput, error) {
 	if params == nil {
 		params = &CreateConnectionAliasInput{}
@@ -32,11 +33,12 @@ func (c *Client) CreateConnectionAlias(ctx context.Context, params *CreateConnec
 type CreateConnectionAliasInput struct {
 
 	// A connection string in the form of a fully qualified domain name (FQDN), such
-	// as www.example.com . After you create a connection string, it is always
-	// associated to your Amazon Web Services account. You cannot recreate the same
-	// connection string with a different account, even if you delete all instances of
-	// it from the original account. The connection string is globally reserved for
-	// your account.
+	// as www.example.com .
+	//
+	// After you create a connection string, it is always associated to your Amazon
+	// Web Services account. You cannot recreate the same connection string with a
+	// different account, even if you delete all instances of it from the original
+	// account. The connection string is globally reserved for your account.
 	//
 	// This member is required.
 	ConnectionString *string

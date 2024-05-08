@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for ApplicationTagStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationTagStatus) Values() []ApplicationTagStatus {
 	return []ApplicationTagStatus{
 		"IN_PROGRESS",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for AssociationOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociationOption) Values() []AssociationOption {
 	return []AssociationOption{
 		"APPLY_APPLICATION_TAG",
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for ResourceGroupState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceGroupState) Values() []ResourceGroupState {
 	return []ResourceGroupState{
 		"CREATING",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for ResourceItemStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceItemStatus) Values() []ResourceItemStatus {
 	return []ResourceItemStatus{
 		"SUCCESS",
@@ -97,8 +101,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"CFN_STACK",
@@ -115,8 +120,9 @@ const (
 )
 
 // Values returns all known values for SyncAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SyncAction) Values() []SyncAction {
 	return []SyncAction{
 		"START_SYNC",

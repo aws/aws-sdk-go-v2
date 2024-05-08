@@ -47,11 +47,15 @@ type GetChannelScheduleInput struct {
 	MaxResults *int32
 
 	// (Optional) If the playback configuration has more than MaxResults channel
-	// schedules, use NextToken to get the second and subsequent pages of results. For
-	// the first GetChannelScheduleRequest request, omit this value. For the second
-	// and subsequent requests, get the value of NextToken from the previous response
-	// and specify that value for NextToken in the request. If the previous response
-	// didn't include a NextToken element, there are no more channel schedules to get.
+	// schedules, use NextToken to get the second and subsequent pages of results.
+	//
+	// For the first GetChannelScheduleRequest request, omit this value.
+	//
+	// For the second and subsequent requests, get the value of NextToken from the
+	// previous response and specify that value for NextToken in the request.
+	//
+	// If the previous response didn't include a NextToken element, there are no more
+	// channel schedules to get.
 	NextToken *string
 
 	noSmithyDocumentSerde

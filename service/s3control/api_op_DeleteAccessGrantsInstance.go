@@ -16,16 +16,19 @@ import (
 )
 
 // Deletes your S3 Access Grants instance. You must first delete the access grants
-// and locations before S3 Access Grants can delete the instance. See
-// DeleteAccessGrant (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html)
-// and DeleteAccessGrantsLocation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html)
-// . If you have associated an IAM Identity Center instance with your S3 Access
-// Grants instance, you must first dissassociate the Identity Center instance from
-// the S3 Access Grants instance before you can delete the S3 Access Grants
-// instance. See AssociateAccessGrantsIdentityCenter (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html)
-// and DissociateAccessGrantsIdentityCenter (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html)
-// . Permissions You must have the s3:DeleteAccessGrantsInstance permission to use
+// and locations before S3 Access Grants can delete the instance. See [DeleteAccessGrant]and [DeleteAccessGrantsLocation]. If you
+// have associated an IAM Identity Center instance with your S3 Access Grants
+// instance, you must first dissassociate the Identity Center instance from the S3
+// Access Grants instance before you can delete the S3 Access Grants instance. See [AssociateAccessGrantsIdentityCenter]
+// and [DissociateAccessGrantsIdentityCenter].
+//
+// Permissions You must have the s3:DeleteAccessGrantsInstance permission to use
 // this operation.
+//
+// [DeleteAccessGrant]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
+// [AssociateAccessGrantsIdentityCenter]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html
+// [DeleteAccessGrantsLocation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html
+// [DissociateAccessGrantsIdentityCenter]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html
 func (c *Client) DeleteAccessGrantsInstance(ctx context.Context, params *DeleteAccessGrantsInstanceInput, optFns ...func(*Options)) (*DeleteAccessGrantsInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteAccessGrantsInstanceInput{}

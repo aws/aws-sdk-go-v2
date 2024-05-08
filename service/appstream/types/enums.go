@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for AccessEndpointType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessEndpointType) Values() []AccessEndpointType {
 	return []AccessEndpointType{
 		"STREAMING",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for Action. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Action) Values() []Action {
 	return []Action{
 		"CLIPBOARD_COPY_FROM_LOCAL_DEVICE",
@@ -57,6 +59,7 @@ const (
 
 // Values returns all known values for AppBlockBuilderAttribute. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AppBlockBuilderAttribute) Values() []AppBlockBuilderAttribute {
 	return []AppBlockBuilderAttribute{
@@ -75,6 +78,7 @@ const (
 
 // Values returns all known values for AppBlockBuilderPlatformType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AppBlockBuilderPlatformType) Values() []AppBlockBuilderPlatformType {
 	return []AppBlockBuilderPlatformType{
@@ -93,8 +97,9 @@ const (
 )
 
 // Values returns all known values for AppBlockBuilderState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppBlockBuilderState) Values() []AppBlockBuilderState {
 	return []AppBlockBuilderState{
 		"STARTING",
@@ -113,8 +118,9 @@ const (
 
 // Values returns all known values for AppBlockBuilderStateChangeReasonCode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppBlockBuilderStateChangeReasonCode) Values() []AppBlockBuilderStateChangeReasonCode {
 	return []AppBlockBuilderStateChangeReasonCode{
 		"INTERNAL_ERROR",
@@ -130,8 +136,9 @@ const (
 )
 
 // Values returns all known values for AppBlockState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppBlockState) Values() []AppBlockState {
 	return []AppBlockState{
 		"INACTIVE",
@@ -148,8 +155,9 @@ const (
 )
 
 // Values returns all known values for ApplicationAttribute. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationAttribute) Values() []ApplicationAttribute {
 	return []ApplicationAttribute{
 		"LAUNCH_PARAMETERS",
@@ -166,8 +174,9 @@ const (
 )
 
 // Values returns all known values for AppVisibility. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AppVisibility) Values() []AppVisibility {
 	return []AppVisibility{
 		"ALL",
@@ -186,8 +195,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationType) Values() []AuthenticationType {
 	return []AuthenticationType{
 		"API",
@@ -208,6 +218,7 @@ const (
 
 // Values returns all known values for CertificateBasedAuthStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateBasedAuthStatus) Values() []CertificateBasedAuthStatus {
 	return []CertificateBasedAuthStatus{
@@ -231,8 +242,9 @@ const (
 )
 
 // Values returns all known values for FleetAttribute. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetAttribute) Values() []FleetAttribute {
 	return []FleetAttribute{
 		"VPC_CONFIGURATION",
@@ -282,8 +294,9 @@ const (
 )
 
 // Values returns all known values for FleetErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetErrorCode) Values() []FleetErrorCode {
 	return []FleetErrorCode{
 		"IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION",
@@ -330,8 +343,9 @@ const (
 )
 
 // Values returns all known values for FleetState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetState) Values() []FleetState {
 	return []FleetState{
 		"STARTING",
@@ -351,8 +365,9 @@ const (
 )
 
 // Values returns all known values for FleetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetType) Values() []FleetType {
 	return []FleetType{
 		"ALWAYS_ON",
@@ -379,8 +394,9 @@ const (
 )
 
 // Values returns all known values for ImageBuilderState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageBuilderState) Values() []ImageBuilderState {
 	return []ImageBuilderState{
 		"PENDING",
@@ -407,8 +423,9 @@ const (
 
 // Values returns all known values for ImageBuilderStateChangeReasonCode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageBuilderStateChangeReasonCode) Values() []ImageBuilderStateChangeReasonCode {
 	return []ImageBuilderStateChangeReasonCode{
 		"INTERNAL_ERROR",
@@ -430,8 +447,9 @@ const (
 )
 
 // Values returns all known values for ImageState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageState) Values() []ImageState {
 	return []ImageState{
 		"PENDING",
@@ -455,6 +473,7 @@ const (
 
 // Values returns all known values for ImageStateChangeReasonCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageStateChangeReasonCode) Values() []ImageStateChangeReasonCode {
 	return []ImageStateChangeReasonCode{
@@ -473,8 +492,9 @@ const (
 )
 
 // Values returns all known values for MessageAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MessageAction) Values() []MessageAction {
 	return []MessageAction{
 		"SUPPRESS",
@@ -491,8 +511,9 @@ const (
 )
 
 // Values returns all known values for PackagingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PackagingType) Values() []PackagingType {
 	return []PackagingType{
 		"CUSTOM",
@@ -509,8 +530,9 @@ const (
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Permission) Values() []Permission {
 	return []Permission{
 		"ENABLED",
@@ -530,8 +552,9 @@ const (
 )
 
 // Values returns all known values for PlatformType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlatformType) Values() []PlatformType {
 	return []PlatformType{
 		"WINDOWS",
@@ -551,8 +574,9 @@ const (
 )
 
 // Values returns all known values for PreferredProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PreferredProtocol) Values() []PreferredProtocol {
 	return []PreferredProtocol{
 		"TCP",
@@ -569,8 +593,9 @@ const (
 )
 
 // Values returns all known values for SessionConnectionState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SessionConnectionState) Values() []SessionConnectionState {
 	return []SessionConnectionState{
 		"CONNECTED",
@@ -588,8 +613,9 @@ const (
 )
 
 // Values returns all known values for SessionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SessionState) Values() []SessionState {
 	return []SessionState{
 		"ACTIVE",
@@ -617,8 +643,9 @@ const (
 )
 
 // Values returns all known values for StackAttribute. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StackAttribute) Values() []StackAttribute {
 	return []StackAttribute{
 		"STORAGE_CONNECTORS",
@@ -645,8 +672,9 @@ const (
 )
 
 // Values returns all known values for StackErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StackErrorCode) Values() []StackErrorCode {
 	return []StackErrorCode{
 		"STORAGE_CONNECTOR_ERROR",
@@ -664,8 +692,9 @@ const (
 )
 
 // Values returns all known values for StorageConnectorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StorageConnectorType) Values() []StorageConnectorType {
 	return []StorageConnectorType{
 		"HOMEFOLDERS",
@@ -683,8 +712,9 @@ const (
 )
 
 // Values returns all known values for StreamView. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamView) Values() []StreamView {
 	return []StreamView{
 		"APP",
@@ -703,8 +733,9 @@ const (
 
 // Values returns all known values for UsageReportExecutionErrorCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UsageReportExecutionErrorCode) Values() []UsageReportExecutionErrorCode {
 	return []UsageReportExecutionErrorCode{
 		"RESOURCE_NOT_FOUND",
@@ -721,8 +752,9 @@ const (
 )
 
 // Values returns all known values for UsageReportSchedule. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UsageReportSchedule) Values() []UsageReportSchedule {
 	return []UsageReportSchedule{
 		"DAILY",
@@ -741,8 +773,9 @@ const (
 
 // Values returns all known values for UserStackAssociationErrorCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserStackAssociationErrorCode) Values() []UserStackAssociationErrorCode {
 	return []UserStackAssociationErrorCode{
 		"STACK_NOT_FOUND",
@@ -762,8 +795,9 @@ const (
 )
 
 // Values returns all known values for VisibilityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VisibilityType) Values() []VisibilityType {
 	return []VisibilityType{
 		"PUBLIC",

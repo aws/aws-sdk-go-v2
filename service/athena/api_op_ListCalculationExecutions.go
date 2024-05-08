@@ -44,14 +44,25 @@ type ListCalculationExecutionsInput struct {
 	NextToken *string
 
 	// A filter for a specific calculation execution state. A description of each
-	// state follows. CREATING - The calculation is in the process of being created.
-	// CREATED - The calculation has been created and is ready to run. QUEUED - The
-	// calculation has been queued for processing. RUNNING - The calculation is
-	// running. CANCELING - A request to cancel the calculation has been received and
-	// the system is working to stop it. CANCELED - The calculation is no longer
-	// running as the result of a cancel request. COMPLETED - The calculation has
-	// completed without error. FAILED - The calculation failed and is no longer
-	// running.
+	// state follows.
+	//
+	// CREATING - The calculation is in the process of being created.
+	//
+	// CREATED - The calculation has been created and is ready to run.
+	//
+	// QUEUED - The calculation has been queued for processing.
+	//
+	// RUNNING - The calculation is running.
+	//
+	// CANCELING - A request to cancel the calculation has been received and the
+	// system is working to stop it.
+	//
+	// CANCELED - The calculation is no longer running as the result of a cancel
+	// request.
+	//
+	// COMPLETED - The calculation has completed without error.
+	//
+	// FAILED - The calculation failed and is no longer running.
 	StateFilter types.CalculationExecutionState
 
 	noSmithyDocumentSerde

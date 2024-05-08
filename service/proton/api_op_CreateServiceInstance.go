@@ -50,9 +50,11 @@ type CreateServiceInstanceInput struct {
 	ClientToken *string
 
 	// An optional list of metadata items that you can associate with the Proton
-	// service instance. A tag is a key-value pair. For more information, see Proton
-	// resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
-	// in the Proton User Guide.
+	// service instance. A tag is a key-value pair.
+	//
+	// For more information, see [Proton resources and tagging] in the Proton User Guide.
+	//
+	// [Proton resources and tagging]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
 	Tags []types.Tag
 
 	// To create a new major and minor version of the service template, exclude major

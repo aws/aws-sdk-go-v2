@@ -29,8 +29,7 @@ func (c *Client) GetParticipant(ctx context.Context, params *GetParticipantInput
 
 type GetParticipantInput struct {
 
-	// Unique identifier for the participant. This is assigned by IVS and returned by
-	// CreateParticipantToken .
+	// Unique identifier for the participant. This is assigned by IVS and returned by CreateParticipantToken.
 	//
 	// This member is required.
 	ParticipantId *string

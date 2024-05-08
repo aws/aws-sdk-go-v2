@@ -134,10 +134,12 @@ type AssetListing struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The metadata forms attached to an asset published in an Amazon DataZone catalog.
+	// The metadata forms attached to an asset published in an Amazon DataZone
+	// catalog.
 	Forms *string
 
-	// The glossary terms attached to an asset published in an Amazon DataZone catalog.
+	// The glossary terms attached to an asset published in an Amazon DataZone
+	// catalog.
 	GlossaryTerms []DetailedGlossaryTerm
 
 	// The latest time series data points forms included in the additional attributes

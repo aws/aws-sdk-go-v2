@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a group. Calling this action requires developer credentials.
+// Gets a group.
+//
+// Calling this action requires developer credentials.
 func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...func(*Options)) (*GetGroupOutput, error) {
 	if params == nil {
 		params = &GetGroupInput{}

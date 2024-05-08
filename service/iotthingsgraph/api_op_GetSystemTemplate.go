@@ -31,9 +31,11 @@ func (c *Client) GetSystemTemplate(ctx context.Context, params *GetSystemTemplat
 
 type GetSystemTemplateInput struct {
 
-	// The ID of the system to get. This ID must be in the user's namespace. The ID
-	// should be in the following format. urn:tdm:REGION/ACCOUNT
-	// ID/default:system:SYSTEMNAME
+	// The ID of the system to get. This ID must be in the user's namespace.
+	//
+	// The ID should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME
 	//
 	// This member is required.
 	Id *string

@@ -12,6 +12,7 @@ import (
 )
 
 // Searches users in an Amazon Connect instance, with optional filtering.
+//
 // AfterContactWorkTimeLimit is returned in milliseconds.
 func (c *Client) SearchUsers(ctx context.Context, params *SearchUsersInput, optFns ...func(*Options)) (*SearchUsersOutput, error) {
 	if params == nil {
@@ -30,9 +31,12 @@ func (c *Client) SearchUsers(ctx context.Context, params *SearchUsersInput, optF
 
 type SearchUsersInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance. InstanceID is a required
-	// field. The "Required: No" below is incorrect.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// InstanceID is a required field. The "Required: No" below is incorrect.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -44,10 +48,11 @@ type SearchUsersInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The search criteria to be used to return users. The name and description fields
-	// support "contains" queries with a minimum of 2 characters and a maximum of 25
-	// characters. Any queries with character lengths outside of this range will throw
-	// invalid results.
+	// The search criteria to be used to return users.
+	//
+	// The name and description fields support "contains" queries with a minimum of 2
+	// characters and a maximum of 25 characters. Any queries with character lengths
+	// outside of this range will throw invalid results.
 	SearchCriteria *types.UserSearchCriteria
 
 	// Filters to be applied to search results.

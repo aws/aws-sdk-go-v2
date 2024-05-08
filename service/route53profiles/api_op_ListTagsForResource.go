@@ -28,7 +28,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) for the resource that you want to list the tags
+	//  The Amazon Resource Name (ARN) for the resource that you want to list the tags
 	// for.
 	//
 	// This member is required.
@@ -39,7 +39,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tags that are associated with the resource that you specified in the
+	//  The tags that are associated with the resource that you specified in the
 	// ListTagsForResource request.
 	//
 	// This member is required.

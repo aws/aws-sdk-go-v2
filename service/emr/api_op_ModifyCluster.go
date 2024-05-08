@@ -37,7 +37,7 @@ type ModifyClusterInput struct {
 	// The number of steps that can be executed concurrently. You can specify a
 	// minimum of 1 step and a maximum of 256 steps. We recommend that you do not
 	// change this parameter while steps are running or the ActionOnFailure setting
-	// may not behave as expected. For more information see Step$ActionOnFailure .
+	// may not behave as expected. For more information see Step$ActionOnFailure.
 	StepConcurrencyLevel *int32
 
 	noSmithyDocumentSerde

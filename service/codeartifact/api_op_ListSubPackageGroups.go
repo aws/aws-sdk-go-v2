@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of direct children of the specified package group. For
-// information package group hierarchy, see Package group definition syntax and
-// matching behavior (https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html)
-// in the CodeArtifact User Guide.
+// Returns a list of direct children of the specified package group.
+//
+// For information package group hierarchy, see [Package group definition syntax and matching behavior] in the CodeArtifact User Guide.
+//
+// [Package group definition syntax and matching behavior]: https://docs.aws.amazon.com/codeartifact/latest/ug/package-group-definition-syntax-matching-behavior.html
 func (c *Client) ListSubPackageGroups(ctx context.Context, params *ListSubPackageGroupsInput, optFns ...func(*Options)) (*ListSubPackageGroupsOutput, error) {
 	if params == nil {
 		params = &ListSubPackageGroupsInput{}
@@ -32,25 +33,25 @@ func (c *Client) ListSubPackageGroups(ctx context.Context, params *ListSubPackag
 
 type ListSubPackageGroupsInput struct {
 
-	// The name of the domain which contains the package group from which to list sub
+	//  The name of the domain which contains the package group from which to list sub
 	// package groups.
 	//
 	// This member is required.
 	Domain *string
 
-	// The pattern of the package group from which to list sub package groups.
+	//  The pattern of the package group from which to list sub package groups.
 	//
 	// This member is required.
 	PackageGroup *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -59,10 +60,11 @@ type ListSubPackageGroupsInput struct {
 
 type ListSubPackageGroupsOutput struct {
 
-	// If there are additional results, this is the token for the next set of results.
+	//  If there are additional results, this is the token for the next set of
+	// results.
 	NextToken *string
 
-	// A list of sub package groups for the requested package group.
+	//  A list of sub package groups for the requested package group.
 	PackageGroups []types.PackageGroupSummary
 
 	// Metadata pertaining to the operation's result.
@@ -161,7 +163,7 @@ var _ ListSubPackageGroupsAPIClient = (*Client)(nil)
 // ListSubPackageGroupsPaginatorOptions is the paginator options for
 // ListSubPackageGroups
 type ListSubPackageGroupsPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

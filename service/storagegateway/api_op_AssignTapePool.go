@@ -52,7 +52,9 @@ type AssignTapePoolInput struct {
 	// RetentionLockInDays , and the user does not already have
 	// BypassGovernanceRetention , setting this to TRUE enables the user to bypass the
 	// retention lock. This parameter is set to true by default for calls from the
-	// console. Valid values: TRUE | FALSE
+	// console.
+	//
+	// Valid values: TRUE | FALSE
 	BypassGovernanceRetention bool
 
 	noSmithyDocumentSerde

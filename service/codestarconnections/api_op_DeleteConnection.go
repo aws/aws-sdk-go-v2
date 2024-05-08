@@ -28,8 +28,9 @@ func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionI
 
 type DeleteConnectionInput struct {
 
-	// The Amazon Resource Name (ARN) of the connection to be deleted. The ARN is
-	// never reused if the connection is deleted.
+	// The Amazon Resource Name (ARN) of the connection to be deleted.
+	//
+	// The ARN is never reused if the connection is deleted.
 	//
 	// This member is required.
 	ConnectionArn *string

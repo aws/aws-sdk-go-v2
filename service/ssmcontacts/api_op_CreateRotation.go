@@ -30,10 +30,10 @@ func (c *Client) CreateRotation(ctx context.Context, params *CreateRotationInput
 
 type CreateRotationInput struct {
 
-	// The Amazon Resource Names (ARNs) of the contacts to add to the rotation. The
-	// order that you list the contacts in is their shift order in the rotation
-	// schedule. To change the order of the contact's shifts, use the UpdateRotation
-	// operation.
+	// The Amazon Resource Names (ARNs) of the contacts to add to the rotation.
+	//
+	// The order that you list the contacts in is their shift order in the rotation
+	// schedule. To change the order of the contact's shifts, use the UpdateRotationoperation.
 	//
 	// This member is required.
 	ContactIds []string
@@ -50,10 +50,13 @@ type CreateRotationInput struct {
 
 	// The time zone to base the rotation’s activity on in Internet Assigned Numbers
 	// Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
-	// "Asia/Seoul". For more information, see the Time Zone Database (https://www.iana.org/time-zones)
-	// on the IANA website. Designators for time zones that don’t support Daylight
-	// Savings Time rules, such as Pacific Standard Time (PST) and Pacific Daylight
-	// Time (PDT), are not supported.
+	// "Asia/Seoul". For more information, see the [Time Zone Database]on the IANA website.
+	//
+	// Designators for time zones that don’t support Daylight Savings Time rules, such
+	// as Pacific Standard Time (PST) and Pacific Daylight Time (PDT), are not
+	// supported.
+	//
+	// [Time Zone Database]: https://www.iana.org/time-zones
 	//
 	// This member is required.
 	TimeZoneId *string
@@ -67,8 +70,9 @@ type CreateRotationInput struct {
 
 	// Optional metadata to assign to the rotation. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For more
-	// information, see Tagging Incident Manager resources (https://docs.aws.amazon.com/incident-manager/latest/userguide/tagging.html)
-	// in the Incident Manager User Guide.
+	// information, see [Tagging Incident Manager resources]in the Incident Manager User Guide.
+	//
+	// [Tagging Incident Manager resources]: https://docs.aws.amazon.com/incident-manager/latest/userguide/tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

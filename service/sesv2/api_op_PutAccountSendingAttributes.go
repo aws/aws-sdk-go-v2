@@ -30,9 +30,10 @@ func (c *Client) PutAccountSendingAttributes(ctx context.Context, params *PutAcc
 type PutAccountSendingAttributesInput struct {
 
 	// Enables or disables your account's ability to send email. Set to true to enable
-	// email sending, or set to false to disable email sending. If Amazon Web Services
-	// paused your account's ability to send email, you can't use this operation to
-	// resume your account's ability to send email.
+	// email sending, or set to false to disable email sending.
+	//
+	// If Amazon Web Services paused your account's ability to send email, you can't
+	// use this operation to resume your account's ability to send email.
 	SendingEnabled bool
 
 	noSmithyDocumentSerde

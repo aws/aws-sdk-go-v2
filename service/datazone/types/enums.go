@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AcceptRuleBehavior. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcceptRuleBehavior) Values() []AcceptRuleBehavior {
 	return []AcceptRuleBehavior{
 		"ALL",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for AuthType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthType) Values() []AuthType {
 	return []AuthType{
 		"IAM_IDC",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for ChangeAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChangeAction) Values() []ChangeAction {
 	return []ChangeAction{
 		"PUBLISH",
@@ -66,8 +69,9 @@ const (
 
 // Values returns all known values for ConfigurableActionTypeAuthorization. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurableActionTypeAuthorization) Values() []ConfigurableActionTypeAuthorization {
 	return []ConfigurableActionTypeAuthorization{
 		"IAM",
@@ -90,8 +94,9 @@ const (
 )
 
 // Values returns all known values for DataAssetActivityStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataAssetActivityStatus) Values() []DataAssetActivityStatus {
 	return []DataAssetActivityStatus{
 		"FAILED",
@@ -119,8 +124,9 @@ const (
 )
 
 // Values returns all known values for DataSourceErrorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceErrorType) Values() []DataSourceErrorType {
 	return []DataSourceErrorType{
 		"ACCESS_DENIED_EXCEPTION",
@@ -145,8 +151,9 @@ const (
 )
 
 // Values returns all known values for DataSourceRunStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceRunStatus) Values() []DataSourceRunStatus {
 	return []DataSourceRunStatus{
 		"REQUESTED",
@@ -166,8 +173,9 @@ const (
 )
 
 // Values returns all known values for DataSourceRunType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceRunType) Values() []DataSourceRunType {
 	return []DataSourceRunType{
 		"PRIORITIZED",
@@ -190,8 +198,9 @@ const (
 )
 
 // Values returns all known values for DataSourceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceStatus) Values() []DataSourceStatus {
 	return []DataSourceStatus{
 		"CREATING",
@@ -216,8 +225,9 @@ const (
 )
 
 // Values returns all known values for DeploymentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentStatus) Values() []DeploymentStatus {
 	return []DeploymentStatus{
 		"IN_PROGRESS",
@@ -237,8 +247,9 @@ const (
 )
 
 // Values returns all known values for DeploymentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentType) Values() []DeploymentType {
 	return []DeploymentType{
 		"CREATE",
@@ -260,8 +271,9 @@ const (
 )
 
 // Values returns all known values for DomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"CREATING",
@@ -282,8 +294,9 @@ const (
 )
 
 // Values returns all known values for EnableSetting. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnableSetting) Values() []EnableSetting {
 	return []EnableSetting{
 		"ENABLED",
@@ -299,8 +312,9 @@ const (
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntityType) Values() []EntityType {
 	return []EntityType{
 		"ASSET",
@@ -327,8 +341,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentStatus) Values() []EnvironmentStatus {
 	return []EnvironmentStatus{
 		"ACTIVE",
@@ -356,8 +371,9 @@ const (
 )
 
 // Values returns all known values for FilterExpressionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterExpressionType) Values() []FilterExpressionType {
 	return []FilterExpressionType{
 		"INCLUDE",
@@ -374,8 +390,9 @@ const (
 )
 
 // Values returns all known values for FormTypeStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FormTypeStatus) Values() []FormTypeStatus {
 	return []FormTypeStatus{
 		"ENABLED",
@@ -392,8 +409,9 @@ const (
 )
 
 // Values returns all known values for GlossaryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GlossaryStatus) Values() []GlossaryStatus {
 	return []GlossaryStatus{
 		"DISABLED",
@@ -410,8 +428,9 @@ const (
 )
 
 // Values returns all known values for GlossaryTermStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GlossaryTermStatus) Values() []GlossaryTermStatus {
 	return []GlossaryTermStatus{
 		"ENABLED",
@@ -428,8 +447,9 @@ const (
 )
 
 // Values returns all known values for GroupProfileStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupProfileStatus) Values() []GroupProfileStatus {
 	return []GroupProfileStatus{
 		"ASSIGNED",
@@ -446,8 +466,9 @@ const (
 )
 
 // Values returns all known values for GroupSearchType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupSearchType) Values() []GroupSearchType {
 	return []GroupSearchType{
 		"SSO_GROUP",
@@ -465,8 +486,9 @@ const (
 )
 
 // Values returns all known values for InventorySearchScope. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InventorySearchScope) Values() []InventorySearchScope {
 	return []InventorySearchScope{
 		"ASSET",
@@ -485,8 +507,9 @@ const (
 )
 
 // Values returns all known values for ListingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListingStatus) Values() []ListingStatus {
 	return []ListingStatus{
 		"CREATING",
@@ -508,6 +531,7 @@ const (
 
 // Values returns all known values for MetadataGenerationRunStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MetadataGenerationRunStatus) Values() []MetadataGenerationRunStatus {
 	return []MetadataGenerationRunStatus{
@@ -528,6 +552,7 @@ const (
 
 // Values returns all known values for MetadataGenerationRunType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MetadataGenerationRunType) Values() []MetadataGenerationRunType {
 	return []MetadataGenerationRunType{
@@ -544,8 +569,9 @@ const (
 
 // Values returns all known values for MetadataGenerationTargetType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetadataGenerationTargetType) Values() []MetadataGenerationTargetType {
 	return []MetadataGenerationTargetType{
 		"ASSET",
@@ -561,6 +587,7 @@ const (
 
 // Values returns all known values for NotificationResourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationResourceType) Values() []NotificationResourceType {
 	return []NotificationResourceType{
@@ -580,8 +607,9 @@ const (
 )
 
 // Values returns all known values for NotificationRole. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationRole) Values() []NotificationRole {
 	return []NotificationRole{
 		"PROJECT_OWNER",
@@ -601,8 +629,9 @@ const (
 )
 
 // Values returns all known values for NotificationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationType) Values() []NotificationType {
 	return []NotificationType{
 		"TASK",
@@ -620,8 +649,9 @@ const (
 )
 
 // Values returns all known values for ProjectStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProjectStatus) Values() []ProjectStatus {
 	return []ProjectStatus{
 		"ACTIVE",
@@ -639,8 +669,9 @@ const (
 )
 
 // Values returns all known values for RejectRuleBehavior. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RejectRuleBehavior) Values() []RejectRuleBehavior {
 	return []RejectRuleBehavior{
 		"ALL",
@@ -658,8 +689,9 @@ const (
 
 // Values returns all known values for SearchOutputAdditionalAttribute. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SearchOutputAdditionalAttribute) Values() []SearchOutputAdditionalAttribute {
 	return []SearchOutputAdditionalAttribute{
 		"FORMS",
@@ -675,8 +707,9 @@ const (
 )
 
 // Values returns all known values for SortFieldProject. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortFieldProject) Values() []SortFieldProject {
 	return []SortFieldProject{
 		"NAME",
@@ -692,8 +725,9 @@ const (
 )
 
 // Values returns all known values for SortKey. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortKey) Values() []SortKey {
 	return []SortKey{
 		"CREATED_AT",
@@ -710,8 +744,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -734,8 +769,9 @@ const (
 
 // Values returns all known values for SubscriptionGrantOverallStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionGrantOverallStatus) Values() []SubscriptionGrantOverallStatus {
 	return []SubscriptionGrantOverallStatus{
 		"PENDING",
@@ -763,8 +799,9 @@ const (
 )
 
 // Values returns all known values for SubscriptionGrantStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionGrantStatus) Values() []SubscriptionGrantStatus {
 	return []SubscriptionGrantStatus{
 		"GRANT_PENDING",
@@ -789,6 +826,7 @@ const (
 
 // Values returns all known values for SubscriptionRequestStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionRequestStatus) Values() []SubscriptionRequestStatus {
 	return []SubscriptionRequestStatus{
@@ -808,8 +846,9 @@ const (
 )
 
 // Values returns all known values for SubscriptionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionStatus) Values() []SubscriptionStatus {
 	return []SubscriptionStatus{
 		"APPROVED",
@@ -827,8 +866,9 @@ const (
 )
 
 // Values returns all known values for TaskStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TaskStatus) Values() []TaskStatus {
 	return []TaskStatus{
 		"ACTIVE",
@@ -845,8 +885,9 @@ const (
 )
 
 // Values returns all known values for TimeSeriesEntityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TimeSeriesEntityType) Values() []TimeSeriesEntityType {
 	return []TimeSeriesEntityType{
 		"ASSET",
@@ -925,8 +966,9 @@ const (
 )
 
 // Values returns all known values for Timezone. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Timezone) Values() []Timezone {
 	return []Timezone{
 		"UTC",
@@ -1005,8 +1047,9 @@ const (
 )
 
 // Values returns all known values for TypesSearchScope. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TypesSearchScope) Values() []TypesSearchScope {
 	return []TypesSearchScope{
 		"ASSET_TYPE",
@@ -1023,8 +1066,9 @@ const (
 )
 
 // Values returns all known values for UserAssignment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserAssignment) Values() []UserAssignment {
 	return []UserAssignment{
 		"AUTOMATIC",
@@ -1041,8 +1085,9 @@ const (
 )
 
 // Values returns all known values for UserDesignation. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserDesignation) Values() []UserDesignation {
 	return []UserDesignation{
 		"PROJECT_OWNER",
@@ -1061,8 +1106,9 @@ const (
 )
 
 // Values returns all known values for UserProfileStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserProfileStatus) Values() []UserProfileStatus {
 	return []UserProfileStatus{
 		"ASSIGNED",
@@ -1081,8 +1127,9 @@ const (
 )
 
 // Values returns all known values for UserProfileType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserProfileType) Values() []UserProfileType {
 	return []UserProfileType{
 		"IAM",
@@ -1101,8 +1148,9 @@ const (
 )
 
 // Values returns all known values for UserSearchType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserSearchType) Values() []UserSearchType {
 	return []UserSearchType{
 		"SSO_USER",
@@ -1122,8 +1170,9 @@ const (
 )
 
 // Values returns all known values for UserType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"IAM_USER",

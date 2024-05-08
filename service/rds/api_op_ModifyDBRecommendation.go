@@ -42,8 +42,12 @@ type ModifyDBRecommendationInput struct {
 	// recommended actions at one time.
 	RecommendedActionUpdates []types.RecommendedActionUpdate
 
-	// The recommendation status to update. Valid values:
+	// The recommendation status to update.
+	//
+	// Valid values:
+	//
 	//   - active
+	//
 	//   - dismissed
 	Status *string
 

@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Get the status of the last BulkPublish operation for an identity pool.This API
-// can only be called with developer credentials. You cannot call this API with the
-// temporary user credentials provided by Cognito Identity.
+// Get the status of the last BulkPublish operation for an identity pool.
+//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 func (c *Client) GetBulkPublishDetails(ctx context.Context, params *GetBulkPublishDetailsInput, optFns ...func(*Options)) (*GetBulkPublishDetailsOutput, error) {
 	if params == nil {
 		params = &GetBulkPublishDetailsInput{}
@@ -53,11 +54,17 @@ type GetBulkPublishDetailsOutput struct {
 	// The date/time at which the last bulk publish was initiated.
 	BulkPublishStartTime *time.Time
 
-	// Status of the last bulk publish operation, valid values are: NOT_STARTED - No
-	// bulk publish has been requested for this identity pool IN_PROGRESS - Data is
-	// being published to the configured stream SUCCEEDED - All data for the identity
-	// pool has been published to the configured stream FAILED - Some portion of the
-	// data has failed to publish, check FailureMessage for the cause.
+	// Status of the last bulk publish operation, valid values are:
+	//
+	// NOT_STARTED - No bulk publish has been requested for this identity pool
+	//
+	// IN_PROGRESS - Data is being published to the configured stream
+	//
+	// SUCCEEDED - All data for the identity pool has been published to the configured
+	// stream
+	//
+	// FAILED - Some portion of the data has failed to publish, check FailureMessage
+	// for the cause.
 	BulkPublishStatus types.BulkPublishStatus
 
 	// If BulkPublishStatus is FAILED this field will contain the error message that

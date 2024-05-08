@@ -35,33 +35,45 @@ type SearchPlaceIndexForPositionInput struct {
 	// This member is required.
 	IndexName *string
 
-	// Specifies the longitude and latitude of the position to query. This parameter
-	// must contain a pair of numbers. The first number represents the X coordinate, or
-	// longitude; the second number represents the Y coordinate, or latitude. For
-	// example, [-123.1174, 49.2847] represents a position with longitude -123.1174
+	// Specifies the longitude and latitude of the position to query.
+	//
+	// This parameter must contain a pair of numbers. The first number represents the
+	// X coordinate, or longitude; the second number represents the Y coordinate, or
+	// latitude.
+	//
+	// For example, [-123.1174, 49.2847] represents a position with longitude -123.1174
 	// and latitude 49.2847 .
 	//
 	// This member is required.
 	Position []float64
 
-	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-	// to authorize the request.
+	// The optional [API key] to authorize the request.
+	//
+	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 	Key *string
 
-	// The preferred language used to return results. The value must be a valid BCP 47 (https://tools.ietf.org/search/bcp47)
-	// language tag, for example, en for English. This setting affects the languages
-	// used in the results, but not the results themselves. If no language is
-	// specified, or not supported for a particular result, the partner automatically
-	// chooses a language for the result. For an example, we'll use the Greek language.
-	// You search for a location around Athens, Greece, with the language parameter
-	// set to en . The city in the results will most likely be returned as Athens . If
-	// you set the language parameter to el , for Greek, then the city in the results
-	// will more likely be returned as Αθήνα . If the data provider does not have a
-	// value for Greek, the result will be in a language that the provider does
-	// support.
+	// The preferred language used to return results. The value must be a valid [BCP 47]
+	// language tag, for example, en for English.
+	//
+	// This setting affects the languages used in the results, but not the results
+	// themselves. If no language is specified, or not supported for a particular
+	// result, the partner automatically chooses a language for the result.
+	//
+	// For an example, we'll use the Greek language. You search for a location around
+	// Athens, Greece, with the language parameter set to en . The city in the results
+	// will most likely be returned as Athens .
+	//
+	// If you set the language parameter to el , for Greek, then the city in the
+	// results will more likely be returned as Αθήνα .
+	//
+	// If the data provider does not have a value for Greek, the result will be in a
+	// language that the provider does support.
+	//
+	// [BCP 47]: https://tools.ietf.org/search/bcp47
 	Language *string
 
 	// An optional parameter. The maximum number of results returned per request.
+	//
 	// Default value: 50
 	MaxResults *int32
 

@@ -16,12 +16,15 @@ import (
 // and (if available) the custom resource name. The results consist of resources
 // that Config has discovered, including those that Config is not currently
 // recording. You can narrow the results to include only resources that have
-// specific resource IDs or a resource name. You can specify either resource IDs or
-// a resource name, but not both, in the same request. The response is paginated.
-// By default, Config lists 100 resource identifiers on each page. You can
-// customize this number with the limit parameter. The response includes a
-// nextToken string. To get the next page of results, run the request again and
-// specify the string for the nextToken parameter.
+// specific resource IDs or a resource name.
+//
+// You can specify either resource IDs or a resource name, but not both, in the
+// same request.
+//
+// The response is paginated. By default, Config lists 100 resource identifiers on
+// each page. You can customize this number with the limit parameter. The response
+// includes a nextToken string. To get the next page of results, run the request
+// again and specify the string for the nextToken parameter.
 func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscoveredResourcesInput, optFns ...func(*Options)) (*ListDiscoveredResourcesOutput, error) {
 	if params == nil {
 		params = &ListDiscoveredResourcesInput{}

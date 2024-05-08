@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a domain configuration. Requires permission to access the
-// CreateDomainConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a domain configuration.
+//
+// Requires permission to access the [CreateDomainConfiguration] action.
+//
+// [CreateDomainConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateDomainConfiguration(ctx context.Context, params *CreateDomainConfigurationInput, optFns ...func(*Options)) (*CreateDomainConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateDomainConfigurationInput{}
@@ -50,14 +52,19 @@ type CreateDomainConfigurationInput struct {
 	// The server certificate configuration.
 	ServerCertificateConfig *types.ServerCertificateConfig
 
-	// The type of service delivered by the endpoint. Amazon Web Services IoT Core
-	// currently supports only the DATA service type.
+	// The type of service delivered by the endpoint.
+	//
+	// Amazon Web Services IoT Core currently supports only the DATA service type.
 	ServiceType types.ServiceType
 
-	// Metadata which can be used to manage the domain configuration. For URI Request
-	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
-	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
-	// file use format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the domain configuration.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: &&tags
+	// "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
 
 	// An object that specifies the TLS configuration for a domain.

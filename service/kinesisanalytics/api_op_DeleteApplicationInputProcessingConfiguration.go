@@ -12,9 +12,11 @@ import (
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
-// applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation . Deletes an InputProcessingConfiguration (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
-// from an input.
+// applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
+//
+// Deletes an [InputProcessingConfiguration] from an input.
+//
+// [InputProcessingConfiguration]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html
 func (c *Client) DeleteApplicationInputProcessingConfiguration(ctx context.Context, params *DeleteApplicationInputProcessingConfigurationInput, optFns ...func(*Options)) (*DeleteApplicationInputProcessingConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationInputProcessingConfigurationInput{}
@@ -44,8 +46,9 @@ type DeleteApplicationInputProcessingConfigurationInput struct {
 
 	// The ID of the input configuration from which to delete the input processing
 	// configuration. You can get a list of the input IDs for an application by using
-	// the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation.
+	// the [DescribeApplication]operation.
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
 	//
 	// This member is required.
 	InputId *string

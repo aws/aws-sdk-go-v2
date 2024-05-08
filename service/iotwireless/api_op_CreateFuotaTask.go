@@ -46,19 +46,21 @@ type CreateFuotaTaskInput struct {
 	// request will complete successfully. However, if you try to create a new resource
 	// using the same token but different parameters, an HTTP 409 conflict occurs. If
 	// you omit this value, AWS SDKs will automatically generate a unique client
-	// request. For more information about idempotency, see Ensuring idempotency in
-	// Amazon EC2 API requests (https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html)
-	// .
+	// request. For more information about idempotency, see [Ensuring idempotency in Amazon EC2 API requests].
+	//
+	// [Ensuring idempotency in Amazon EC2 API requests]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientRequestToken *string
 
 	// The description of the new resource.
 	Description *string
 
 	// The interval for sending fragments in milliseconds, rounded to the nearest
-	// second. This interval only determines the timing for when the Cloud sends down
-	// the fragments to yor device. There can be a delay for when your device will
-	// receive these fragments. This delay depends on the device's class and the
-	// communication delay with the cloud.
+	// second.
+	//
+	// This interval only determines the timing for when the Cloud sends down the
+	// fragments to yor device. There can be a delay for when your device will receive
+	// these fragments. This delay depends on the device's class and the communication
+	// delay with the cloud.
 	FragmentIntervalMS *int32
 
 	// The size of each fragment in bytes. This parameter is supported only for FUOTA

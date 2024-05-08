@@ -17,8 +17,9 @@ const (
 )
 
 // Values returns all known values for KeyAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyAlgorithm) Values() []KeyAlgorithm {
 	return []KeyAlgorithm{
 		"TDES_2KEY",
@@ -41,8 +42,9 @@ const (
 )
 
 // Values returns all known values for KeyCheckValueAlgorithm. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyCheckValueAlgorithm) Values() []KeyCheckValueAlgorithm {
 	return []KeyCheckValueAlgorithm{
 		"CMAC",
@@ -61,8 +63,9 @@ const (
 )
 
 // Values returns all known values for KeyClass. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyClass) Values() []KeyClass {
 	return []KeyClass{
 		"SYMMETRIC_KEY",
@@ -82,8 +85,9 @@ const (
 )
 
 // Values returns all known values for KeyExportability. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyExportability) Values() []KeyExportability {
 	return []KeyExportability{
 		"EXPORTABLE",
@@ -104,8 +108,9 @@ const (
 )
 
 // Values returns all known values for KeyMaterialType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyMaterialType) Values() []KeyMaterialType {
 	return []KeyMaterialType{
 		"TR34_KEY_BLOCK",
@@ -125,8 +130,9 @@ const (
 )
 
 // Values returns all known values for KeyOrigin. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyOrigin) Values() []KeyOrigin {
 	return []KeyOrigin{
 		"EXTERNAL",
@@ -145,8 +151,9 @@ const (
 )
 
 // Values returns all known values for KeyState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyState) Values() []KeyState {
 	return []KeyState{
 		"CREATE_IN_PROGRESS",
@@ -186,8 +193,9 @@ const (
 )
 
 // Values returns all known values for KeyUsage. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyUsage) Values() []KeyUsage {
 	return []KeyUsage{
 		"TR31_B0_BASE_DERIVATION_KEY",
@@ -224,8 +232,9 @@ const (
 )
 
 // Values returns all known values for Tr34KeyBlockFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Tr34KeyBlockFormat) Values() []Tr34KeyBlockFormat {
 	return []Tr34KeyBlockFormat{
 		"X9_TR34_2012",
@@ -243,6 +252,7 @@ const (
 
 // Values returns all known values for WrappedKeyMaterialFormat. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (WrappedKeyMaterialFormat) Values() []WrappedKeyMaterialFormat {
 	return []WrappedKeyMaterialFormat{
@@ -261,8 +271,9 @@ const (
 )
 
 // Values returns all known values for WrappingKeySpec. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WrappingKeySpec) Values() []WrappingKeySpec {
 	return []WrappingKeySpec{
 		"RSA_OAEP_SHA_256",

@@ -13,10 +13,13 @@ import (
 
 // Create an endpoint group for the specified listener. An endpoint group is a
 // collection of endpoints in one Amazon Web Services Region. A resource must be
-// valid and active when you add it as an endpoint. For more information about
-// endpoint types and requirements for endpoints that you can add to Global
-// Accelerator, see Endpoints for standard accelerators (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints.html)
-// in the Global Accelerator Developer Guide.
+// valid and active when you add it as an endpoint.
+//
+// For more information about endpoint types and requirements for endpoints that
+// you can add to Global Accelerator, see [Endpoints for standard accelerators]in the Global Accelerator Developer
+// Guide.
+//
+// [Endpoints for standard accelerators]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints.html
 func (c *Client) CreateEndpointGroup(ctx context.Context, params *CreateEndpointGroupInput, optFns ...func(*Options)) (*CreateEndpointGroupOutput, error) {
 	if params == nil {
 		params = &CreateEndpointGroupInput{}
@@ -76,8 +79,11 @@ type CreateEndpointGroupInput struct {
 	// part of this endpoint group. For example, you can create a port override in
 	// which the listener receives user traffic on ports 80 and 443, but your
 	// accelerator routes that traffic to ports 1080 and 1443, respectively, on the
-	// endpoints. For more information, see Overriding listener ports (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
-	// in the Global Accelerator Developer Guide.
+	// endpoints.
+	//
+	// For more information, see [Overriding listener ports] in the Global Accelerator Developer Guide.
+	//
+	// [Overriding listener ports]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html
 	PortOverrides []types.PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
@@ -86,10 +92,13 @@ type CreateEndpointGroupInput struct {
 	ThresholdCount *int32
 
 	// The percentage of traffic to send to an Amazon Web Services Region. Additional
-	// traffic is distributed to other endpoint groups for this listener. Use this
-	// action to increase (dial up) or decrease (dial down) traffic to a specific
-	// Region. The percentage is applied to the traffic that would otherwise have been
-	// routed to the Region based on optimal routing. The default value is 100.
+	// traffic is distributed to other endpoint groups for this listener.
+	//
+	// Use this action to increase (dial up) or decrease (dial down) traffic to a
+	// specific Region. The percentage is applied to the traffic that would otherwise
+	// have been routed to the Region based on optimal routing.
+	//
+	// The default value is 100.
 	TrafficDialPercentage *float32
 
 	noSmithyDocumentSerde

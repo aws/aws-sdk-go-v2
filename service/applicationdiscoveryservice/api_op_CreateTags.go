@@ -13,7 +13,9 @@ import (
 
 // Creates one or more tags for configuration items. Tags are metadata that help
 // you categorize IT assets. This API accepts a list of multiple configuration
-// items. Do not store sensitive information (like personal data) in tags.
+// items.
+//
+// Do not store sensitive information (like personal data) in tags.
 func (c *Client) CreateTags(ctx context.Context, params *CreateTagsInput, optFns ...func(*Options)) (*CreateTagsOutput, error) {
 	if params == nil {
 		params = &CreateTagsInput{}
@@ -37,8 +39,9 @@ type CreateTagsInput struct {
 	ConfigurationIds []string
 
 	// Tags that you want to associate with one or more configuration items. Specify
-	// the tags that you want to create in a key-value format. For example: {"key":
-	// "serverType", "value": "webServer"}
+	// the tags that you want to create in a key-value format. For example:
+	//
+	//     {"key": "serverType", "value": "webServer"}
 	//
 	// This member is required.
 	Tags []types.Tag

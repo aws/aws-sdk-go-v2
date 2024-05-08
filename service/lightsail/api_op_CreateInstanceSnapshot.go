@@ -12,10 +12,12 @@ import (
 )
 
 // Creates a snapshot of a specific virtual private server, or instance. You can
-// use a snapshot to create a new instance that is based on that snapshot. The
-// create instance snapshot operation supports tag-based access control via request
-// tags. For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// use a snapshot to create a new instance that is based on that snapshot.
+//
+// The create instance snapshot operation supports tag-based access control via
+// request tags. For more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateInstanceSnapshot(ctx context.Context, params *CreateInstanceSnapshotInput, optFns ...func(*Options)) (*CreateInstanceSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateInstanceSnapshotInput{}
@@ -43,8 +45,9 @@ type CreateInstanceSnapshotInput struct {
 	// This member is required.
 	InstanceSnapshotName *string
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

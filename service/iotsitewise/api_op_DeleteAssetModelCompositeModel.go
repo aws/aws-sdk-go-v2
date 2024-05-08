@@ -15,8 +15,9 @@ import (
 // assets created from a composite model before you can delete the model. Also, you
 // can't delete a composite model if a parent asset model exists that contains a
 // property formula expression that depends on the asset model that you want to
-// delete. For more information, see Deleting assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html)
-// in the IoT SiteWise User Guide.
+// delete. For more information, see [Deleting assets and models]in the IoT SiteWise User Guide.
+//
+// [Deleting assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html
 func (c *Client) DeleteAssetModelCompositeModel(ctx context.Context, params *DeleteAssetModelCompositeModelInput, optFns ...func(*Options)) (*DeleteAssetModelCompositeModelOutput, error) {
 	if params == nil {
 		params = &DeleteAssetModelCompositeModelInput{}
@@ -55,8 +56,9 @@ type DeleteAssetModelCompositeModelInput struct {
 type DeleteAssetModelCompositeModelOutput struct {
 
 	// Contains current status information for an asset model. For more information,
-	// see Asset and model states (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
-	// in the IoT SiteWise User Guide.
+	// see [Asset and model states]in the IoT SiteWise User Guide.
+	//
+	// [Asset and model states]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html
 	//
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus

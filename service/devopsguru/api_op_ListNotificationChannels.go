@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of notification channels configured for DevOps Guru. Each
+//	Returns a list of notification channels configured for DevOps Guru. Each
+//
 // notification channel is used to notify you when DevOps Guru generates an insight
 // that contains information about how to improve your operations. The one
 // supported notification channel is Amazon Simple Notification Service (Amazon
@@ -42,7 +43,7 @@ type ListNotificationChannelsInput struct {
 
 type ListNotificationChannelsOutput struct {
 
-	// An array that contains the requested notification channels.
+	//  An array that contains the requested notification channels.
 	Channels []types.NotificationChannel
 
 	// The pagination token to use to retrieve the next page of results for this

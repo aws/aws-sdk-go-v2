@@ -12,15 +12,19 @@ import (
 )
 
 // Submits an Batch job from a job definition. Parameters that are specified
-// during SubmitJob override parameters defined in the job definition. vCPU and
-// memory requirements that are specified in the resourceRequirements objects in
-// the job definition are the exception. They can't be overridden this way using
-// the memory and vcpus parameters. Rather, you must specify updates to job
-// definition parameters in a resourceRequirements object that's included in the
-// containerOverrides parameter. Job queues with a scheduling policy are limited to
-// 500 active fair share identifiers at a time. Jobs that run on Fargate resources
-// can't be guaranteed to run for more than 14 days. This is because, after 14
-// days, Fargate resources might become unavailable and job might be terminated.
+// during SubmitJoboverride parameters defined in the job definition. vCPU and memory
+// requirements that are specified in the resourceRequirements objects in the job
+// definition are the exception. They can't be overridden this way using the memory
+// and vcpus parameters. Rather, you must specify updates to job definition
+// parameters in a resourceRequirements object that's included in the
+// containerOverrides parameter.
+//
+// Job queues with a scheduling policy are limited to 500 active fair share
+// identifiers at a time.
+//
+// Jobs that run on Fargate resources can't be guaranteed to run for more than 14
+// days. This is because, after 14 days, Fargate resources might become unavailable
+// and job might be terminated.
 func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns ...func(*Options)) (*SubmitJobOutput, error) {
 	if params == nil {
 		params = &SubmitJobInput{}
@@ -43,8 +47,9 @@ type SubmitJobInput struct {
 	// definition-name:revision , or the Amazon Resource Name (ARN) for the job
 	// definition, with or without the revision (
 	// arn:aws:batch:region:account:job-definition/definition-name:revision , or
-	// arn:aws:batch:region:account:job-definition/definition-name ). If the revision
-	// is not specified, then the latest active revision is used.
+	// arn:aws:batch:region:account:job-definition/definition-name ).
+	//
+	// If the revision is not specified, then the latest active revision is used.
 	//
 	// This member is required.
 	JobDefinition *string
@@ -64,8 +69,9 @@ type SubmitJobInput struct {
 
 	// The array properties for the submitted job, such as the size of the array. The
 	// array size can be between 2 and 10,000. If you specify array properties for a
-	// job, it becomes an array job. For more information, see Array Jobs (https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html)
-	// in the Batch User Guide.
+	// job, it becomes an array job. For more information, see [Array Jobs]in the Batch User Guide.
+	//
+	// [Array Jobs]: https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
 	ArrayProperties *types.ArrayProperties
 
 	// An object with properties that override the defaults for the job definition
@@ -93,8 +99,10 @@ type SubmitJobInput struct {
 	EksPropertiesOverride *types.EksPropertiesOverride
 
 	// A list of node overrides in JSON format that specify the node range to target
-	// and the container overrides for that node range. This parameter isn't applicable
-	// to jobs that are running on Fargate resources; use containerOverrides instead.
+	// and the container overrides for that node range.
+	//
+	// This parameter isn't applicable to jobs that are running on Fargate resources;
+	// use containerOverrides instead.
 	NodeOverrides *types.NodeOverrides
 
 	// Additional parameters passed to the job that replace parameter substitution
@@ -112,38 +120,43 @@ type SubmitJobInput struct {
 	// propagation setting in the job definition.
 	PropagateTags *bool
 
-	// The retry strategy to use for failed jobs from this SubmitJob operation. When a
-	// retry strategy is specified here, it overrides the retry strategy defined in the
-	// job definition.
+	// The retry strategy to use for failed jobs from this SubmitJob operation. When a retry
+	// strategy is specified here, it overrides the retry strategy defined in the job
+	// definition.
 	RetryStrategy *types.RetryStrategy
 
 	// The scheduling priority for the job. This only affects jobs in job queues with
 	// a fair share policy. Jobs with a higher scheduling priority are scheduled before
 	// jobs with a lower scheduling priority. This overrides any scheduling priority in
-	// the job definition and works only within a single share identifier. The minimum
-	// supported value is 0 and the maximum supported value is 9999.
+	// the job definition and works only within a single share identifier.
+	//
+	// The minimum supported value is 0 and the maximum supported value is 9999.
 	SchedulingPriorityOverride *int32
 
 	// The share identifier for the job. Don't specify this parameter if the job queue
 	// doesn't have a scheduling policy. If the job queue has a scheduling policy, then
-	// this parameter must be specified. This string is limited to 255 alphanumeric
-	// characters, and can be followed by an asterisk (*).
+	// this parameter must be specified.
+	//
+	// This string is limited to 255 alphanumeric characters, and can be followed by
+	// an asterisk (*).
 	ShareIdentifier *string
 
 	// The tags that you apply to the job request to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in Amazon Web Services General Reference.
+	// information, see [Tagging Amazon Web Services Resources]in Amazon Web Services General Reference.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
-	// The timeout configuration for this SubmitJob operation. You can specify a
-	// timeout duration after which Batch terminates your jobs if they haven't
-	// finished. If a job is terminated due to a timeout, it isn't retried. The minimum
-	// value for the timeout is 60 seconds. This configuration overrides any timeout
-	// configuration specified in the job definition. For array jobs, child jobs have
-	// the same timeout configuration as the parent job. For more information, see Job
-	// Timeouts (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// The timeout configuration for this SubmitJob operation. You can specify a timeout
+	// duration after which Batch terminates your jobs if they haven't finished. If a
+	// job is terminated due to a timeout, it isn't retried. The minimum value for the
+	// timeout is 60 seconds. This configuration overrides any timeout configuration
+	// specified in the job definition. For array jobs, child jobs have the same
+	// timeout configuration as the parent job. For more information, see [Job Timeouts]in the
+	// Amazon Elastic Container Service Developer Guide.
+	//
+	// [Job Timeouts]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
 	Timeout *types.JobTimeout
 
 	noSmithyDocumentSerde

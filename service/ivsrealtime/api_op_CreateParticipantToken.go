@@ -13,8 +13,10 @@ import (
 
 // Creates an additional token for a specified stage. This can be done after stage
 // creation or when tokens expire. Tokens always are scoped to the stage for which
-// they are created. Encryption keys are owned by Amazon IVS and never used
-// directly by your application.
+// they are created.
+//
+// Encryption keys are owned by Amazon IVS and never used directly by your
+// application.
 func (c *Client) CreateParticipantToken(ctx context.Context, params *CreateParticipantTokenInput, optFns ...func(*Options)) (*CreateParticipantTokenOutput, error) {
 	if params == nil {
 		params = &CreateParticipantTokenInput{}

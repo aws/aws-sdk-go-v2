@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a collection of standardized signals that can be reused to create
+//	Creates a collection of standardized signals that can be reused to create
+//
 // vehicle models.
 func (c *Client) CreateSignalCatalog(ctx context.Context, params *CreateSignalCatalogInput, optFns ...func(*Options)) (*CreateSignalCatalogOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) CreateSignalCatalog(ctx context.Context, params *CreateSignalCa
 
 type CreateSignalCatalogInput struct {
 
-	// The name of the signal catalog to create.
+	//  The name of the signal catalog to create.
 	//
 	// This member is required.
 	Name *string
@@ -38,7 +39,7 @@ type CreateSignalCatalogInput struct {
 	// A brief description of the signal catalog.
 	Description *string
 
-	// A list of information about nodes, which are a general abstraction of signals.
+	//  A list of information about nodes, which are a general abstraction of signals.
 	// For more information, see the API data type.
 	Nodes []types.Node
 
@@ -50,12 +51,12 @@ type CreateSignalCatalogInput struct {
 
 type CreateSignalCatalogOutput struct {
 
-	// The ARN of the created signal catalog.
+	//  The ARN of the created signal catalog.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the created signal catalog.
+	//  The name of the created signal catalog.
 	//
 	// This member is required.
 	Name *string

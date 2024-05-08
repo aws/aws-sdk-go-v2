@@ -14,24 +14,37 @@ import (
 // Used by Security Hub customers to update information about their investigation
 // into a finding. Requested by administrator accounts or member accounts.
 // Administrator accounts can update findings for their account and their member
-// accounts. Member accounts can update findings for their account. Updates from
-// BatchUpdateFindings do not affect the value of UpdatedAt for a finding.
+// accounts. Member accounts can update findings for their account.
+//
+// Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a
+// finding.
+//
 // Administrator and member accounts can use BatchUpdateFindings to update the
 // following finding fields and objects.
+//
 //   - Confidence
+//
 //   - Criticality
+//
 //   - Note
+//
 //   - RelatedFindings
+//
 //   - Severity
+//
 //   - Types
+//
 //   - UserDefinedFields
+//
 //   - VerificationState
+//
 //   - Workflow
 //
 // You can configure IAM policies to restrict access to fields and field values.
 // For example, you might not want member accounts to be able to suppress findings
-// or change the finding severity. See Configuring access to BatchUpdateFindings (https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access)
-// in the Security Hub User Guide.
+// or change the finding severity. See [Configuring access to BatchUpdateFindings]in the Security Hub User Guide.
+//
+// [Configuring access to BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access
 func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFindingsInput, optFns ...func(*Options)) (*BatchUpdateFindingsOutput, error) {
 	if params == nil {
 		params = &BatchUpdateFindingsInput{}
@@ -50,23 +63,27 @@ func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFin
 type BatchUpdateFindingsInput struct {
 
 	// The list of findings to update. BatchUpdateFindings can be used to update up to
-	// 100 findings at a time. For each finding, the list provides the finding
-	// identifier and the ARN of the finding provider.
+	// 100 findings at a time.
+	//
+	// For each finding, the list provides the finding identifier and the ARN of the
+	// finding provider.
 	//
 	// This member is required.
 	FindingIdentifiers []types.AwsSecurityFindingIdentifier
 
 	// The updated value for the finding confidence. Confidence is defined as the
 	// likelihood that a finding accurately identifies the behavior or issue that it
-	// was intended to identify. Confidence is scored on a 0-100 basis using a ratio
-	// scale, where 0 means zero percent confidence and 100 means 100 percent
-	// confidence.
+	// was intended to identify.
+	//
+	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
+	// percent confidence and 100 means 100 percent confidence.
 	Confidence *int32
 
 	// The updated value for the level of importance assigned to the resources
-	// associated with the findings. A score of 0 means that the underlying resources
-	// have no criticality, and a score of 100 is reserved for the most critical
-	// resources.
+	// associated with the findings.
+	//
+	// A score of 0 means that the underlying resources have no criticality, and a
+	// score of 100 is reserved for the most critical resources.
 	Criticality *int32
 
 	// The updated note.
@@ -79,11 +96,18 @@ type BatchUpdateFindingsInput struct {
 	Severity *types.SeverityUpdate
 
 	// One or more finding types in the format of namespace/category/classifier that
-	// classify a finding. Valid namespace values are as follows.
+	// classify a finding.
+	//
+	// Valid namespace values are as follows.
+	//
 	//   - Software and Configuration Checks
+	//
 	//   - TTPs
+	//
 	//   - Effects
+	//
 	//   - Unusual Behaviors
+	//
 	//   - Sensitive Data Identifications
 	Types []string
 
@@ -91,17 +115,24 @@ type BatchUpdateFindingsInput struct {
 	// custom, user-defined fields added to a finding.
 	UserDefinedFields map[string]string
 
-	// Indicates the veracity of a finding. The available values for VerificationState
-	// are as follows.
+	// Indicates the veracity of a finding.
+	//
+	// The available values for VerificationState are as follows.
+	//
 	//   - UNKNOWN – The default disposition of a security finding
+	//
 	//   - TRUE_POSITIVE – The security finding is confirmed
+	//
 	//   - FALSE_POSITIVE – The security finding was determined to be a false alarm
+	//
 	//   - BENIGN_POSITIVE – A special case of TRUE_POSITIVE where the finding doesn't
 	//   pose any threat, is expected, or both
 	VerificationState types.VerificationState
 
-	// Used to update the workflow status of a finding. The workflow status indicates
-	// the progress of the investigation into the finding.
+	// Used to update the workflow status of a finding.
+	//
+	// The workflow status indicates the progress of the investigation into the
+	// finding.
 	Workflow *types.WorkflowUpdate
 
 	noSmithyDocumentSerde

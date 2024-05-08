@@ -30,9 +30,10 @@ func (c *Client) UpdateBot(ctx context.Context, params *UpdateBotInput, optFns .
 
 type UpdateBotInput struct {
 
-	// The unique identifier of the bot to update. This identifier is returned by the
-	// CreateBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
+	// The unique identifier of the bot to update. This identifier is returned by the [CreateBot]
 	// operation.
+	//
+	// [CreateBot]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
 	//
 	// This member is required.
 	BotId *string
@@ -50,10 +51,13 @@ type UpdateBotInput struct {
 	DataPrivacy *types.DataPrivacy
 
 	// The time, in seconds, that Amazon Lex should keep information about a user's
-	// conversation with the bot. A user interaction remains active for the amount of
-	// time specified. If no conversation occurs during this time, the session expires
-	// and Amazon Lex deletes any data provided before the timeout. You can specify
-	// between 60 (1 minute) and 86,400 (24 hours) seconds.
+	// conversation with the bot.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Lex deletes
+	// any data provided before the timeout.
+	//
+	// You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.
 	//
 	// This member is required.
 	IdleSessionTTLInSeconds *int32

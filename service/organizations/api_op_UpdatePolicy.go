@@ -13,9 +13,11 @@ import (
 
 // Updates an existing policy with a new name, description, or content. If you
 // don't supply any parameter, that value remains unchanged. You can't change a
-// policy's type. This operation can be called only from the organization's
-// management account or by a member account that is a delegated administrator for
-// an Amazon Web Services service.
+// policy's type.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}
@@ -33,28 +35,36 @@ func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, op
 
 type UpdatePolicyInput struct {
 
-	// The unique identifier (ID) of the policy that you want to update. The regex
-	// pattern (http://wikipedia.org/wiki/regex) for a policy ID string requires "p-"
-	// followed by from 8 to 128 lowercase or uppercase letters, digits, or the
-	// underscore character (_).
+	// The unique identifier (ID) of the policy that you want to update.
+	//
+	// The [regex pattern] for a policy ID string requires "p-" followed by from 8 to 128 lowercase
+	// or uppercase letters, digits, or the underscore character (_).
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	PolicyId *string
 
 	// If provided, the new content for the policy. The text must be correctly
 	// formatted JSON that complies with the syntax for the policy's type. For more
-	// information, see SCP syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html)
-	// in the Organizations User Guide. The maximum size of a policy document depends
-	// on the policy's type. For more information, see Maximum and minimum values (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values)
-	// in the Organizations User Guide.
+	// information, see [SCP syntax]in the Organizations User Guide.
+	//
+	// The maximum size of a policy document depends on the policy's type. For more
+	// information, see [Maximum and minimum values]in the Organizations User Guide.
+	//
+	// [Maximum and minimum values]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values
+	// [SCP syntax]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
 	Content *string
 
 	// If provided, the new description for the policy.
 	Description *string
 
-	// If provided, the new name for the policy. The regex pattern (http://wikipedia.org/wiki/regex)
-	// that is used to validate this parameter is a string of any of the characters in
-	// the ASCII character range.
+	// If provided, the new name for the policy.
+	//
+	// The [regex pattern] that is used to validate this parameter is a string of any of the
+	// characters in the ASCII character range.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	Name *string
 
 	noSmithyDocumentSerde

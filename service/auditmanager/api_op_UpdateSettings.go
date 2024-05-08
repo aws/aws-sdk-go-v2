@@ -29,13 +29,13 @@ func (c *Client) UpdateSettings(ctx context.Context, params *UpdateSettingsInput
 
 type UpdateSettingsInput struct {
 
-	// The default S3 destination bucket for storing assessment reports.
+	//  The default S3 destination bucket for storing assessment reports.
 	DefaultAssessmentReportsDestination *types.AssessmentReportsDestination
 
-	// The default S3 destination bucket for storing evidence finder exports.
+	//  The default S3 destination bucket for storing evidence finder exports.
 	DefaultExportDestination *types.DefaultExportDestination
 
-	// A list of the default audit owners.
+	//  A list of the default audit owners.
 	DefaultProcessOwners []types.Role
 
 	// The deregistration policy for your Audit Manager data. You can use this
@@ -44,18 +44,21 @@ type UpdateSettingsInput struct {
 	DeregistrationPolicy *types.DeregistrationPolicy
 
 	// Specifies whether the evidence finder feature is enabled. Change this attribute
-	// to enable or disable evidence finder. When you use this attribute to disable
-	// evidence finder, Audit Manager deletes the event data store that’s used to query
-	// your evidence data. As a result, you can’t re-enable evidence finder and use the
-	// feature again. Your only alternative is to deregister (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html)
-	// and then re-register (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html)
-	// Audit Manager.
+	// to enable or disable evidence finder.
+	//
+	// When you use this attribute to disable evidence finder, Audit Manager deletes
+	// the event data store that’s used to query your evidence data. As a result, you
+	// can’t re-enable evidence finder and use the feature again. Your only alternative
+	// is to [deregister]and then [re-register] Audit Manager.
+	//
+	// [deregister]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html
+	// [re-register]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html
 	EvidenceFinderEnabled *bool
 
-	// The KMS key details.
+	//  The KMS key details.
 	KmsKey *string
 
-	// The Amazon Simple Notification Service (Amazon SNS) topic that Audit Manager
+	//  The Amazon Simple Notification Service (Amazon SNS) topic that Audit Manager
 	// sends notifications to.
 	SnsTopic *string
 
@@ -64,7 +67,7 @@ type UpdateSettingsInput struct {
 
 type UpdateSettingsOutput struct {
 
-	// The current list of settings.
+	//  The current list of settings.
 	Settings *types.Settings
 
 	// Metadata pertaining to the operation's result.

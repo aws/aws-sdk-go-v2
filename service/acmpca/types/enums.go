@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AccessMethodType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessMethodType) Values() []AccessMethodType {
 	return []AccessMethodType{
 		"CA_REPOSITORY",
@@ -32,8 +33,9 @@ const (
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionType) Values() []ActionType {
 	return []ActionType{
 		"IssueCertificate",
@@ -52,6 +54,7 @@ const (
 
 // Values returns all known values for AuditReportResponseFormat. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AuditReportResponseFormat) Values() []AuditReportResponseFormat {
 	return []AuditReportResponseFormat{
@@ -70,8 +73,9 @@ const (
 )
 
 // Values returns all known values for AuditReportStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuditReportStatus) Values() []AuditReportStatus {
 	return []AuditReportStatus{
 		"CREATING",
@@ -95,6 +99,7 @@ const (
 
 // Values returns all known values for CertificateAuthorityStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateAuthorityStatus) Values() []CertificateAuthorityStatus {
 	return []CertificateAuthorityStatus{
@@ -118,6 +123,7 @@ const (
 
 // Values returns all known values for CertificateAuthorityType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateAuthorityType) Values() []CertificateAuthorityType {
 	return []CertificateAuthorityType{
@@ -136,8 +142,9 @@ const (
 
 // Values returns all known values for CertificateAuthorityUsageMode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateAuthorityUsageMode) Values() []CertificateAuthorityUsageMode {
 	return []CertificateAuthorityUsageMode{
 		"GENERAL_PURPOSE",
@@ -161,8 +168,9 @@ const (
 )
 
 // Values returns all known values for ExtendedKeyUsageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExtendedKeyUsageType) Values() []ExtendedKeyUsageType {
 	return []ExtendedKeyUsageType{
 		"SERVER_AUTH",
@@ -187,8 +195,9 @@ const (
 )
 
 // Values returns all known values for FailureReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureReason) Values() []FailureReason {
 	return []FailureReason{
 		"REQUEST_TIMED_OUT",
@@ -208,8 +217,9 @@ const (
 )
 
 // Values returns all known values for KeyAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyAlgorithm) Values() []KeyAlgorithm {
 	return []KeyAlgorithm{
 		"RSA_2048",
@@ -229,6 +239,7 @@ const (
 
 // Values returns all known values for KeyStorageSecurityStandard. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyStorageSecurityStandard) Values() []KeyStorageSecurityStandard {
 	return []KeyStorageSecurityStandard{
@@ -245,8 +256,9 @@ const (
 )
 
 // Values returns all known values for PolicyQualifierId. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyQualifierId) Values() []PolicyQualifierId {
 	return []PolicyQualifierId{
 		"CPS",
@@ -262,8 +274,9 @@ const (
 )
 
 // Values returns all known values for ResourceOwner. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceOwner) Values() []ResourceOwner {
 	return []ResourceOwner{
 		"SELF",
@@ -286,8 +299,9 @@ const (
 )
 
 // Values returns all known values for RevocationReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RevocationReason) Values() []RevocationReason {
 	return []RevocationReason{
 		"UNSPECIFIED",
@@ -310,8 +324,9 @@ const (
 )
 
 // Values returns all known values for S3ObjectAcl. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3ObjectAcl) Values() []S3ObjectAcl {
 	return []S3ObjectAcl{
 		"PUBLIC_READ",
@@ -332,8 +347,9 @@ const (
 )
 
 // Values returns all known values for SigningAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SigningAlgorithm) Values() []SigningAlgorithm {
 	return []SigningAlgorithm{
 		"SHA256WITHECDSA",
@@ -357,8 +373,9 @@ const (
 )
 
 // Values returns all known values for ValidityPeriodType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidityPeriodType) Values() []ValidityPeriodType {
 	return []ValidityPeriodType{
 		"END_DATE",

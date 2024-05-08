@@ -31,10 +31,11 @@ func (c *Client) UpdateDefaultAutoScalingConfiguration(ctx context.Context, para
 type UpdateDefaultAutoScalingConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner auto scaling configuration
-	// that you want to set as the default. The ARN can be a full auto scaling
-	// configuration ARN, or a partial ARN ending with either .../name  or
-	// .../name/revision . If a revision isn't specified, the latest active revision
-	// is set as the default.
+	// that you want to set as the default.
+	//
+	// The ARN can be a full auto scaling configuration ARN, or a partial ARN ending
+	// with either .../name  or .../name/revision . If a revision isn't specified, the
+	// latest active revision is set as the default.
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string

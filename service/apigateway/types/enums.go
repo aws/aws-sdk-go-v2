@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for ApiKeysFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApiKeysFormat) Values() []ApiKeysFormat {
 	return []ApiKeysFormat{
 		"csv",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for ApiKeySourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApiKeySourceType) Values() []ApiKeySourceType {
 	return []ApiKeySourceType{
 		"HEADER",
@@ -46,8 +48,9 @@ const (
 )
 
 // Values returns all known values for AuthorizerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthorizerType) Values() []AuthorizerType {
 	return []AuthorizerType{
 		"TOKEN",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for CacheClusterSize. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CacheClusterSize) Values() []CacheClusterSize {
 	return []CacheClusterSize{
 		"0.5",
@@ -98,8 +102,9 @@ const (
 )
 
 // Values returns all known values for CacheClusterStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CacheClusterStatus) Values() []CacheClusterStatus {
 	return []CacheClusterStatus{
 		"CREATE_IN_PROGRESS",
@@ -119,8 +124,9 @@ const (
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionType) Values() []ConnectionType {
 	return []ConnectionType{
 		"INTERNET",
@@ -137,8 +143,9 @@ const (
 )
 
 // Values returns all known values for ContentHandlingStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentHandlingStrategy) Values() []ContentHandlingStrategy {
 	return []ContentHandlingStrategy{
 		"CONVERT_TO_BINARY",
@@ -165,8 +172,9 @@ const (
 )
 
 // Values returns all known values for DocumentationPartType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DocumentationPartType) Values() []DocumentationPartType {
 	return []DocumentationPartType{
 		"API",
@@ -196,8 +204,9 @@ const (
 )
 
 // Values returns all known values for DomainNameStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainNameStatus) Values() []DomainNameStatus {
 	return []DomainNameStatus{
 		"AVAILABLE",
@@ -218,8 +227,9 @@ const (
 )
 
 // Values returns all known values for EndpointType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointType) Values() []EndpointType {
 	return []EndpointType{
 		"REGIONAL",
@@ -256,8 +266,9 @@ const (
 )
 
 // Values returns all known values for GatewayResponseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GatewayResponseType) Values() []GatewayResponseType {
 	return []GatewayResponseType{
 		"DEFAULT_4XX",
@@ -296,8 +307,9 @@ const (
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IntegrationType) Values() []IntegrationType {
 	return []IntegrationType{
 		"HTTP",
@@ -317,8 +329,9 @@ const (
 )
 
 // Values returns all known values for LocationStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LocationStatusType) Values() []LocationStatusType {
 	return []LocationStatusType{
 		"DOCUMENTED",
@@ -339,8 +352,9 @@ const (
 )
 
 // Values returns all known values for Op. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Op) Values() []Op {
 	return []Op{
 		"add",
@@ -361,8 +375,9 @@ const (
 )
 
 // Values returns all known values for PutMode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PutMode) Values() []PutMode {
 	return []PutMode{
 		"merge",
@@ -380,8 +395,9 @@ const (
 )
 
 // Values returns all known values for QuotaPeriodType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QuotaPeriodType) Values() []QuotaPeriodType {
 	return []QuotaPeriodType{
 		"DAY",
@@ -399,8 +415,9 @@ const (
 )
 
 // Values returns all known values for SecurityPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SecurityPolicy) Values() []SecurityPolicy {
 	return []SecurityPolicy{
 		"TLS_1_0",
@@ -419,8 +436,9 @@ const (
 
 // Values returns all known values for UnauthorizedCacheControlHeaderStrategy.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnauthorizedCacheControlHeaderStrategy) Values() []UnauthorizedCacheControlHeaderStrategy {
 	return []UnauthorizedCacheControlHeaderStrategy{
 		"FAIL_WITH_403",
@@ -440,8 +458,9 @@ const (
 )
 
 // Values returns all known values for VpcLinkStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcLinkStatus) Values() []VpcLinkStatus {
 	return []VpcLinkStatus{
 		"AVAILABLE",

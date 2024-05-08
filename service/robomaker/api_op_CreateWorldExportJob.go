@@ -70,16 +70,25 @@ type CreateWorldExportJobOutput struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The failure code of the world export job if it failed: InternalServiceError
-	// Internal service error. LimitExceeded The requested resource exceeds the maximum
-	// number allowed, or the number of concurrent stream requests exceeds the maximum
-	// number allowed. ResourceNotFound The specified resource could not be found.
-	// RequestThrottled The request was throttled. InvalidInput An input parameter in
-	// the request is not valid. AllWorldGenerationFailed All of the worlds in the
-	// world generation job failed. This can happen if your worldCount is greater than
-	// 50 or less than 1. For more information about troubleshooting WorldForge, see
-	// Troubleshooting Simulation WorldForge (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html)
-	// .
+	// The failure code of the world export job if it failed:
+	//
+	// InternalServiceError Internal service error.
+	//
+	// LimitExceeded The requested resource exceeds the maximum number allowed, or the
+	// number of concurrent stream requests exceeds the maximum number allowed.
+	//
+	// ResourceNotFound The specified resource could not be found.
+	//
+	// RequestThrottled The request was throttled.
+	//
+	// InvalidInput An input parameter in the request is not valid.
+	//
+	// AllWorldGenerationFailed All of the worlds in the world generation job failed.
+	// This can happen if your worldCount is greater than 50 or less than 1.
+	//
+	// For more information about troubleshooting WorldForge, see [Troubleshooting Simulation WorldForge].
+	//
+	// [Troubleshooting Simulation WorldForge]: https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html
 	FailureCode types.WorldExportJobErrorCode
 
 	// The IAM role that the world export process uses to access the Amazon S3 bucket
@@ -89,11 +98,19 @@ type CreateWorldExportJobOutput struct {
 	// The output location.
 	OutputLocation *types.OutputLocation
 
-	// The status of the world export job. Pending The world export job request is
-	// pending. Running The world export job is running. Completed The world export job
-	// completed. Failed The world export job failed. See failureCode for more
-	// information. Canceled The world export job was cancelled. Canceling The world
-	// export job is being cancelled.
+	// The status of the world export job.
+	//
+	// Pending The world export job request is pending.
+	//
+	// Running The world export job is running.
+	//
+	// Completed The world export job completed.
+	//
+	// Failed The world export job failed. See failureCode for more information.
+	//
+	// Canceled The world export job was cancelled.
+	//
+	// Canceling The world export job is being cancelled.
 	Status types.WorldExportJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world

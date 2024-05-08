@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a locale from a bot. When you delete a locale, all intents, slots, and
-// slot types defined for the locale are also deleted.
+// Removes a locale from a bot.
+//
+// When you delete a locale, all intents, slots, and slot types defined for the
+// locale are also deleted.
 func (c *Client) DeleteBotLocale(ctx context.Context, params *DeleteBotLocaleInput, optFns ...func(*Options)) (*DeleteBotLocaleOutput, error) {
 	if params == nil {
 		params = &DeleteBotLocaleInput{}
@@ -41,8 +43,9 @@ type DeleteBotLocaleInput struct {
 	BotVersion *string
 
 	// The identifier of the language and locale that will be deleted. The string must
-	// match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
+	// match one of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string

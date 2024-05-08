@@ -10,9 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified product. You cannot delete a product if it was shared
-// with you or is associated with a portfolio. A delegated admin is authorized to
-// invoke this command.
+// Deletes the specified product.
+//
+// You cannot delete a product if it was shared with you or is associated with a
+// portfolio.
+//
+// A delegated admin is authorized to invoke this command.
 func (c *Client) DeleteProduct(ctx context.Context, params *DeleteProductInput, optFns ...func(*Options)) (*DeleteProductOutput, error) {
 	if params == nil {
 		params = &DeleteProductInput{}
@@ -36,7 +39,9 @@ type DeleteProductInput struct {
 	Id *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the API keys for a given API. API keys are deleted automatically 60 days
-// after they expire. However, they may still be included in the response until
-// they have actually been deleted. You can safely call DeleteApiKey to manually
-// delete a key before it's automatically deleted.
+// Lists the API keys for a given API.
+//
+// API keys are deleted automatically 60 days after they expire. However, they may
+// still be included in the response until they have actually been deleted. You can
+// safely call DeleteApiKey to manually delete a key before it's automatically
+// deleted.
 func (c *Client) ListApiKeys(ctx context.Context, params *ListApiKeysInput, optFns ...func(*Options)) (*ListApiKeysOutput, error) {
 	if params == nil {
 		params = &ListApiKeysInput{}

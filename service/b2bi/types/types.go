@@ -278,9 +278,11 @@ type TransformerSummary struct {
 
 // A structure that contains the X12 transaction set and version. The X12
 // structure is used when the system transforms an EDI (electronic data
-// interchange) file. If an EDI input file contains more than one transaction, each
-// transaction must have the same transaction set and version, for example
-// 214/4010. If not, the transformer cannot parse the file.
+// interchange) file.
+//
+// If an EDI input file contains more than one transaction, each transaction must
+// have the same transaction set and version, for example 214/4010. If not, the
+// transformer cannot parse the file.
 type X12Details struct {
 
 	// Returns an enumerated type where each value identifies an X12 transaction set.

@@ -35,24 +35,39 @@ type GetReportGroupTrendInput struct {
 	ReportGroupArn *string
 
 	// The test report value to accumulate. This must be one of the following values:
+	//
 	// Test reports: DURATION Accumulate the test run times for the specified reports.
+	//
 	// PASS_RATE Accumulate the percentage of tests that passed for the specified test
-	// reports. TOTAL Accumulate the total number of tests for the specified test
-	// reports. Code coverage reports: BRANCH_COVERAGE Accumulate the branch coverage
-	// percentages for the specified test reports. BRANCHES_COVERED Accumulate the
-	// branches covered values for the specified test reports. BRANCHES_MISSED
-	// Accumulate the branches missed values for the specified test reports.
+	// reports.
+	//
+	// TOTAL Accumulate the total number of tests for the specified test reports.
+	//
+	// Code coverage reports: BRANCH_COVERAGE Accumulate the branch coverage
+	// percentages for the specified test reports.
+	//
+	// BRANCHES_COVERED Accumulate the branches covered values for the specified test
+	// reports.
+	//
+	// BRANCHES_MISSED Accumulate the branches missed values for the specified test
+	// reports.
+	//
 	// LINE_COVERAGE Accumulate the line coverage percentages for the specified test
-	// reports. LINES_COVERED Accumulate the lines covered values for the specified
-	// test reports. LINES_MISSED Accumulate the lines not covered values for the
-	// specified test reports.
+	// reports.
+	//
+	// LINES_COVERED Accumulate the lines covered values for the specified test
+	// reports.
+	//
+	// LINES_MISSED Accumulate the lines not covered values for the specified test
+	// reports.
 	//
 	// This member is required.
 	TrendField types.ReportGroupTrendFieldType
 
 	// The number of reports to analyze. This operation always retrieves the most
-	// recent reports. If this parameter is omitted, the most recent 100 reports are
-	// analyzed.
+	// recent reports.
+	//
+	// If this parameter is omitted, the most recent 100 reports are analyzed.
 	NumOfReports *int32
 
 	noSmithyDocumentSerde

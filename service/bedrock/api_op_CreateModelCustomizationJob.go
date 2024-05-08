@@ -11,17 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a fine-tuning job to customize a base model. You specify the base
-// foundation model and the location of the training data. After the
-// model-customization job completes successfully, your custom model resource will
-// be ready to use. Amazon Bedrock returns validation loss metrics and output
-// generations after the job completes. For information on the format of training
-// and validation data, see Prepare the datasets (https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-prepare.html)
-// . Model-customization jobs are asynchronous and the completion time depends on
+// Creates a fine-tuning job to customize a base model.
+//
+// You specify the base foundation model and the location of the training data.
+// After the model-customization job completes successfully, your custom model
+// resource will be ready to use. Amazon Bedrock returns validation loss metrics
+// and output generations after the job completes.
+//
+// For information on the format of training and validation data, see [Prepare the datasets].
+//
+// Model-customization jobs are asynchronous and the completion time depends on
 // the base model and the training/validation data size. To monitor a job, use the
-// GetModelCustomizationJob operation to retrieve the job status. For more
-// information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Amazon Bedrock User Guide.
+// GetModelCustomizationJob operation to retrieve the job status.
+//
+// For more information, see [Custom models] in the Amazon Bedrock User Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+// [Prepare the datasets]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-prepare.html
 func (c *Client) CreateModelCustomizationJob(ctx context.Context, params *CreateModelCustomizationJobInput, optFns ...func(*Options)) (*CreateModelCustomizationJobOutput, error) {
 	if params == nil {
 		params = &CreateModelCustomizationJobInput{}
@@ -50,8 +56,9 @@ type CreateModelCustomizationJobInput struct {
 	CustomModelName *string
 
 	// Parameters related to tuning the model. For details on the format for different
-	// models, see Custom model hyperparameters (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html)
-	// .
+	// models, see [Custom model hyperparameters].
+	//
+	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
 	//
 	// This member is required.
 	HyperParameters map[string]string
@@ -82,9 +89,9 @@ type CreateModelCustomizationJobInput struct {
 
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
-	// ignores the request, but does not return an error. For more information, see
-	// Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
 	// The custom model is encrypted at rest using this key.

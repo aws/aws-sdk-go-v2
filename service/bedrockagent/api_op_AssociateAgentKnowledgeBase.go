@@ -52,8 +52,9 @@ type AssociateAgentKnowledgeBaseInput struct {
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Specifies whether to use the knowledge base or not when sending an InvokeAgent (https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html)
-	// request.
+	// Specifies whether to use the knowledge base or not when sending an [InvokeAgent] request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	KnowledgeBaseState types.KnowledgeBaseState
 
 	noSmithyDocumentSerde

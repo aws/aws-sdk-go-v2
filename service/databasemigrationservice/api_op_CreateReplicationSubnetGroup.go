@@ -11,16 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a replication subnet group given a list of the subnet IDs in a VPC. The
-// VPC needs to have at least one subnet in at least two availability zones in the
-// Amazon Web Services Region, otherwise the service will throw a
-// ReplicationSubnetGroupDoesNotCoverEnoughAZs exception. If a replication subnet
-// group exists in your Amazon Web Services account, the
+// Creates a replication subnet group given a list of the subnet IDs in a VPC.
+//
+// The VPC needs to have at least one subnet in at least two availability zones in
+// the Amazon Web Services Region, otherwise the service will throw a
+// ReplicationSubnetGroupDoesNotCoverEnoughAZs exception.
+//
+// If a replication subnet group exists in your Amazon Web Services account, the
 // CreateReplicationSubnetGroup action returns the following error message: The
 // Replication Subnet Group already exists. In this case, delete the existing
-// replication subnet group. To do so, use the DeleteReplicationSubnetGroup (https://docs.aws.amazon.com/en_us/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html)
-// action. Optionally, choose Subnet groups in the DMS console, then choose your
-// subnet group. Next, choose Delete from Actions.
+// replication subnet group. To do so, use the [DeleteReplicationSubnetGroup]action. Optionally, choose Subnet
+// groups in the DMS console, then choose your subnet group. Next, choose Delete
+// from Actions.
+//
+// [DeleteReplicationSubnetGroup]: https://docs.aws.amazon.com/en_us/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html
 func (c *Client) CreateReplicationSubnetGroup(ctx context.Context, params *CreateReplicationSubnetGroupInput, optFns ...func(*Options)) (*CreateReplicationSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateReplicationSubnetGroupInput{}
@@ -44,9 +48,12 @@ type CreateReplicationSubnetGroupInput struct {
 	ReplicationSubnetGroupDescription *string
 
 	// The name for the replication subnet group. This value is stored as a lowercase
-	// string. Constraints: Must contain no more than 255 alphanumeric characters,
-	// periods, spaces, underscores, or hyphens. Must not be "default". Example:
-	// mySubnetgroup
+	// string.
+	//
+	// Constraints: Must contain no more than 255 alphanumeric characters, periods,
+	// spaces, underscores, or hyphens. Must not be "default".
+	//
+	// Example: mySubnetgroup
 	//
 	// This member is required.
 	ReplicationSubnetGroupIdentifier *string

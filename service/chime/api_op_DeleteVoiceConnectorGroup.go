@@ -12,15 +12,19 @@ import (
 
 // Deletes the specified Amazon Chime Voice Connector group. Any
 // VoiceConnectorItems and phone numbers associated with the group must be removed
-// before it can be deleted. This API is is no longer supported and will not be
-// updated. We recommend using the latest version, DeleteVoiceConnectorGroup (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorGroup.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// before it can be deleted.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DeleteVoiceConnectorGroup], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DeleteVoiceConnectorGroup in the Amazon Chime SDK Voice
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [DeleteVoiceConnectorGroup]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorGroup.html
 func (c *Client) DeleteVoiceConnectorGroup(ctx context.Context, params *DeleteVoiceConnectorGroupInput, optFns ...func(*Options)) (*DeleteVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorGroupInput{}

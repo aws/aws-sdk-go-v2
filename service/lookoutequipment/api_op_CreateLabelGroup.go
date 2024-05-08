@@ -29,26 +29,31 @@ func (c *Client) CreateLabelGroup(ctx context.Context, params *CreateLabelGroupI
 
 type CreateLabelGroupInput struct {
 
-	// A unique identifier for the request to create a label group. If you do not set
+	//  A unique identifier for the request to create a label group. If you do not set
 	// the client request token, Lookout for Equipment generates one.
 	//
 	// This member is required.
 	ClientToken *string
 
-	// Names a group of labels. Data in this field will be retained for service usage.
-	// Follow best practices for the security of your data.
+	//  Names a group of labels.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	//
 	// This member is required.
 	LabelGroupName *string
 
-	// The acceptable fault codes (indicating the type of anomaly associated with the
-	// label) that can be used with this label group. Data in this field will be
-	// retained for service usage. Follow best practices for the security of your data.
+	//  The acceptable fault codes (indicating the type of anomaly associated with the
+	// label) that can be used with this label group.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	FaultCodes []string
 
-	// Tags that provide metadata about the label group you are creating. Data in this
-	// field will be retained for service usage. Follow best practices for the security
-	// of your data.
+	//  Tags that provide metadata about the label group you are creating.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -56,10 +61,10 @@ type CreateLabelGroupInput struct {
 
 type CreateLabelGroupOutput struct {
 
-	// The Amazon Resource Name (ARN) of the label group that you have created.
+	//  The Amazon Resource Name (ARN) of the label group that you have created.
 	LabelGroupArn *string
 
-	// The name of the label group that you have created. Data in this field will be
+	//  The name of the label group that you have created. Data in this field will be
 	// retained for service usage. Follow best practices for the security of your data.
 	LabelGroupName *string
 

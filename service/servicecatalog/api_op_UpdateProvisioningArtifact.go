@@ -12,8 +12,10 @@ import (
 )
 
 // Updates the specified provisioning artifact (also known as a version) for the
-// specified product. You cannot update a provisioning artifact for a product that
-// was shared with you.
+// specified product.
+//
+// You cannot update a provisioning artifact for a product that was shared with
+// you.
 func (c *Client) UpdateProvisioningArtifact(ctx context.Context, params *UpdateProvisioningArtifactInput, optFns ...func(*Options)) (*UpdateProvisioningArtifactOutput, error) {
 	if params == nil {
 		params = &UpdateProvisioningArtifactInput{}
@@ -42,24 +44,30 @@ type UpdateProvisioningArtifactInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// Indicates whether the product version is active. Inactive provisioning
-	// artifacts are invisible to end users. End users cannot launch or update a
-	// provisioned product from an inactive provisioning artifact.
+	// Indicates whether the product version is active.
+	//
+	// Inactive provisioning artifacts are invisible to end users. End users cannot
+	// launch or update a provisioned product from an inactive provisioning artifact.
 	Active *bool
 
 	// The updated description of the provisioning artifact.
 	Description *string
 
 	// Information set by the administrator to provide guidance to end users about
-	// which provisioning artifacts to use. The DEFAULT value indicates that the
-	// product version is active. The administrator can set the guidance to DEPRECATED
-	// to inform users that the product version is deprecated. Users are able to make
-	// updates to a provisioned product of a deprecated version but cannot launch new
-	// provisioned products using a deprecated version.
+	// which provisioning artifacts to use.
+	//
+	// The DEFAULT value indicates that the product version is active.
+	//
+	// The administrator can set the guidance to DEPRECATED to inform users that the
+	// product version is deprecated. Users are able to make updates to a provisioned
+	// product of a deprecated version but cannot launch new provisioned products using
+	// a deprecated version.
 	Guidance types.ProvisioningArtifactGuidance
 
 	// The updated name of the provisioning artifact.

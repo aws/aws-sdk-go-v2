@@ -28,13 +28,13 @@ func (c *Client) DeletePredefinedAttribute(ctx context.Context, params *DeletePr
 
 type DeletePredefinedAttributeInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID in
+	//  The identifier of the Amazon Connect instance. You can find the instance ID in
 	// the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The name of the predefined attribute.
+	//  The name of the predefined attribute.
 	//
 	// This member is required.
 	Name *string

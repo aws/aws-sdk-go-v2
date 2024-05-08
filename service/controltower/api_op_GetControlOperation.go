@@ -13,9 +13,9 @@ import (
 
 // Returns the status of a particular EnableControl or DisableControl operation.
 // Displays a message in case of error. Details for an operation are available for
-// 90 days. For usage examples, see the Amazon Web Services Control Tower User
-// Guide  (https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html)
-// .
+// 90 days. For usage examples, see [the Amazon Web Services Control Tower User Guide].
+//
+// [the Amazon Web Services Control Tower User Guide]: https://docs.aws.amazon.com/controltower/latest/userguide/control-api-examples-short.html
 func (c *Client) GetControlOperation(ctx context.Context, params *GetControlOperationInput, optFns ...func(*Options)) (*GetControlOperationOutput, error) {
 	if params == nil {
 		params = &GetControlOperationInput{}

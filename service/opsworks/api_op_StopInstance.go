@@ -12,13 +12,14 @@ import (
 
 // Stops a specified instance. When you stop a standard instance, the data
 // disappears and must be reinstalled when you restart the instance. You can stop
-// an Amazon EBS-backed instance without losing data. For more information, see
-// Starting, Stopping, and Rebooting Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// an Amazon EBS-backed instance without losing data. For more information, see [Starting, Stopping, and Rebooting Instances].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Starting, Stopping, and Rebooting Instances]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) StopInstance(ctx context.Context, params *StopInstanceInput, optFns ...func(*Options)) (*StopInstanceOutput, error) {
 	if params == nil {
 		params = &StopInstanceInput{}

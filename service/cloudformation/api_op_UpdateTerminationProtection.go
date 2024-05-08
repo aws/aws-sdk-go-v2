@@ -12,11 +12,14 @@ import (
 
 // Updates termination protection for the specified stack. If a user attempts to
 // delete a stack with termination protection enabled, the operation fails and the
-// stack remains unchanged. For more information, see Protecting a Stack From
-// Being Deleted (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)
-// in the CloudFormation User Guide. For nested stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html)
-// , termination protection is set on the root stack and can't be changed directly
-// on the nested stack.
+// stack remains unchanged. For more information, see [Protecting a Stack From Being Deleted]in the CloudFormation User
+// Guide.
+//
+// For [nested stacks], termination protection is set on the root stack and can't be changed
+// directly on the nested stack.
+//
+// [Protecting a Stack From Being Deleted]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html
+// [nested stacks]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html
 func (c *Client) UpdateTerminationProtection(ctx context.Context, params *UpdateTerminationProtectionInput, optFns ...func(*Options)) (*UpdateTerminationProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateTerminationProtectionInput{}

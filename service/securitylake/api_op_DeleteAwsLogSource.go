@@ -16,9 +16,10 @@ import (
 // source, Security Lake stops collecting data from that source in the specified
 // Regions and accounts, and subscribers can no longer consume new data from the
 // source. However, subscribers can still consume data that Security Lake collected
-// from the source before removal. You can choose any source type in any Amazon Web
-// Services Region for either accounts that are part of a trusted organization or
-// standalone accounts.
+// from the source before removal.
+//
+// You can choose any source type in any Amazon Web Services Region for either
+// accounts that are part of a trusted organization or standalone accounts.
 func (c *Client) DeleteAwsLogSource(ctx context.Context, params *DeleteAwsLogSourceInput, optFns ...func(*Options)) (*DeleteAwsLogSourceOutput, error) {
 	if params == nil {
 		params = &DeleteAwsLogSourceInput{}

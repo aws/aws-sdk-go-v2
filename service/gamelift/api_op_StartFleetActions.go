@@ -11,20 +11,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Resumes certain types of activity on fleet instances that were suspended with
-// StopFleetActions (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html)
-// . For multi-location fleets, fleet actions are managed separately for each
+// Resumes certain types of activity on fleet instances that were suspended with [StopFleetActions].
+// For multi-location fleets, fleet actions are managed separately for each
 // location. Currently, this operation is used to restart a fleet's auto-scaling
-// activity. This operation can be used in the following ways:
+// activity.
+//
+// This operation can be used in the following ways:
+//
 //   - To restart actions on instances in the fleet's home Region, provide a fleet
 //     ID and the type of actions to resume.
+//
 //   - To restart actions on instances in one of the fleet's remote locations,
 //     provide a fleet ID, a location name, and the type of actions to resume.
 //
 // If successful, Amazon GameLift once again initiates scaling events as triggered
 // by the fleet's scaling policies. If actions on the fleet location were never
-// stopped, this operation will have no effect. Learn more Setting up Amazon
-// GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// stopped, this operation will have no effect.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [StopFleetActions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html
 func (c *Client) StartFleetActions(ctx context.Context, params *StartFleetActionsInput, optFns ...func(*Options)) (*StartFleetActionsOutput, error) {
 	if params == nil {
 		params = &StartFleetActionsInput{}
@@ -62,10 +71,11 @@ type StartFleetActionsInput struct {
 
 type StartFleetActionsOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet to restart actions on.

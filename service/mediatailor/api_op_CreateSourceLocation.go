@@ -13,8 +13,9 @@ import (
 )
 
 // Creates a source location. A source location is a container for sources. For
-// more information about source locations, see Working with source locations (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html)
-// in the MediaTailor User Guide.
+// more information about source locations, see [Working with source locations]in the MediaTailor User Guide.
+//
+// [Working with source locations]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-source-locations.html
 func (c *Client) CreateSourceLocation(ctx context.Context, params *CreateSourceLocationInput, optFns ...func(*Options)) (*CreateSourceLocationOutput, error) {
 	if params == nil {
 		params = &CreateSourceLocationInput{}
@@ -54,8 +55,9 @@ type CreateSourceLocationInput struct {
 
 	// The tags to assign to the source location. Tags are key-value pairs that you
 	// can associate with Amazon resources to help with organization, access control,
-	// and cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
+	// and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -83,9 +85,9 @@ type CreateSourceLocationOutput struct {
 	LastModifiedTime *time.Time
 
 	// The segment delivery configurations for the source location. For information
-	// about MediaTailor configurations, see Working with configurations in AWS
-	// Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html)
-	// .
+	// about MediaTailor configurations, see [Working with configurations in AWS Elemental MediaTailor].
+	//
+	// [Working with configurations in AWS Elemental MediaTailor]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
 	SegmentDeliveryConfigurations []types.SegmentDeliveryConfiguration
 
 	// The name to assign to the source location.
@@ -93,8 +95,9 @@ type CreateSourceLocationOutput struct {
 
 	// The tags to assign to the source location. Tags are key-value pairs that you
 	// can associate with Amazon resources to help with organization, access control,
-	// and cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
+	// and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

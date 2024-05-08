@@ -41,8 +41,10 @@ type CreateEphemerisInput struct {
 	// This member is required.
 	SatelliteId *string
 
-	// Whether to set the ephemeris status to ENABLED after validation. Setting this
-	// to false will set the ephemeris status to DISABLED after validation.
+	// Whether to set the ephemeris status to ENABLED after validation.
+	//
+	// Setting this to false will set the ephemeris status to DISABLED after
+	// validation.
 	Enabled *bool
 
 	// Ephemeris data.
@@ -56,8 +58,12 @@ type CreateEphemerisInput struct {
 	KmsKeyArn *string
 
 	// Customer-provided priority score to establish the order in which overlapping
-	// ephemerides should be used. The default for customer-provided ephemeris priority
-	// is 1, and higher numbers take precedence. Priority must be 1 or greater
+	// ephemerides should be used.
+	//
+	// The default for customer-provided ephemeris priority is 1, and higher numbers
+	// take precedence.
+	//
+	// Priority must be 1 or greater
 	Priority *int32
 
 	// Tags assigned to an ephemeris.

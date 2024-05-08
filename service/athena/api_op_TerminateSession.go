@@ -43,14 +43,24 @@ type TerminateSessionInput struct {
 
 type TerminateSessionOutput struct {
 
-	// The state of the session. A description of each state follows. CREATING - The
-	// session is being started, including acquiring resources. CREATED - The session
-	// has been started. IDLE - The session is able to accept a calculation. BUSY -
-	// The session is processing another task and is unable to accept a calculation.
-	// TERMINATING - The session is in the process of shutting down. TERMINATED - The
-	// session and its resources are no longer running. DEGRADED - The session has no
-	// healthy coordinators. FAILED - Due to a failure, the session and its resources
-	// are no longer running.
+	// The state of the session. A description of each state follows.
+	//
+	// CREATING - The session is being started, including acquiring resources.
+	//
+	// CREATED - The session has been started.
+	//
+	// IDLE - The session is able to accept a calculation.
+	//
+	// BUSY - The session is processing another task and is unable to accept a
+	// calculation.
+	//
+	// TERMINATING - The session is in the process of shutting down.
+	//
+	// TERMINATED - The session and its resources are no longer running.
+	//
+	// DEGRADED - The session has no healthy coordinators.
+	//
+	// FAILED - Due to a failure, the session and its resources are no longer running.
 	State types.SessionState
 
 	// Metadata pertaining to the operation's result.

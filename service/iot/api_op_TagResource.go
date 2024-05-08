@@ -12,8 +12,11 @@ import (
 )
 
 // Adds to or modifies the tags of the given resource. Tags are metadata which can
-// be used to manage a resource. Requires permission to access the TagResource (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// be used to manage a resource.
+//
+// Requires permission to access the [TagResource] action.
+//
+// [TagResource]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

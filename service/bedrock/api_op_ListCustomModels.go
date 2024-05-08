@@ -13,8 +13,11 @@ import (
 )
 
 // Returns a list of the custom models that you have created with the
-// CreateModelCustomizationJob operation. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Amazon Bedrock User Guide.
+// CreateModelCustomizationJob operation.
+//
+// For more information, see [Custom models] in the Amazon Bedrock User Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 func (c *Client) ListCustomModels(ctx context.Context, params *ListCustomModelsInput, optFns ...func(*Options)) (*ListCustomModelsOutput, error) {
 	if params == nil {
 		params = &ListCustomModelsInput{}

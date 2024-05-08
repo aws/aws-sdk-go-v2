@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Moves a domain from Amazon Web Services to another registrar. Supported
-// actions:
+//	Moves a domain from Amazon Web Services to another registrar.
+//
+// Supported actions:
+//
 //   - Changes the IPS tags of a .uk domain, and pushes it to transit. Transit
 //     means that the domain is ready to be transferred to another registrar.
 func (c *Client) PushDomain(ctx context.Context, params *PushDomainInput, optFns ...func(*Options)) (*PushDomainOutput, error) {
@@ -31,12 +33,12 @@ func (c *Client) PushDomain(ctx context.Context, params *PushDomainInput, optFns
 
 type PushDomainInput struct {
 
-	// Name of the domain.
+	//  Name of the domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	// New IPS tag for the domain.
+	//  New IPS tag for the domain.
 	//
 	// This member is required.
 	Target *string

@@ -34,12 +34,17 @@ type UpdateVocabularyInput struct {
 
 	// The language code that represents the language of the entries in the custom
 	// vocabulary you want to update. Each custom vocabulary must contain terms in only
-	// one language. A custom vocabulary can only be used to transcribe files in the
-	// same language as the custom vocabulary. For example, if you create a custom
-	// vocabulary using US English ( en-US ), you can only apply this custom vocabulary
-	// to files that contain English audio. For a list of supported languages and their
-	// associated language codes, refer to the Supported languages (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// table.
+	// one language.
+	//
+	// A custom vocabulary can only be used to transcribe files in the same language
+	// as the custom vocabulary. For example, if you create a custom vocabulary using
+	// US English ( en-US ), you can only apply this custom vocabulary to files that
+	// contain English audio.
+	//
+	// For a list of supported languages and their associated language codes, refer to
+	// the [Supported languages]table.
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -53,31 +58,41 @@ type UpdateVocabularyInput struct {
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
 	// the Amazon S3 bucket that contains your input files (in this case, your custom
 	// vocabulary). If the role that you specify doesn’t have the appropriate
-	// permissions to access the specified Amazon S3 location, your request fails. IAM
-	// role ARNs have the format arn:partition:iam::account:role/role-name-with-path .
-	// For example: arn:aws:iam::111122223333:role/Admin . For more information, see
-	// IAM ARNs (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns)
-	// .
+	// permissions to access the specified Amazon S3 location, your request fails.
+	//
+	// IAM role ARNs have the format
+	// arn:partition:iam::account:role/role-name-with-path . For example:
+	// arn:aws:iam::111122223333:role/Admin .
+	//
+	// For more information, see [IAM ARNs].
+	//
+	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	DataAccessRoleArn *string
 
 	// Use this parameter if you want to update your custom vocabulary by including
 	// all desired terms, as comma-separated values, within your request. The other
 	// option for updating your custom vocabulary is to save your entries in a text
 	// file and upload them to an Amazon S3 bucket, then specify the location of your
-	// file using the VocabularyFileUri parameter. Note that if you include Phrases in
-	// your request, you cannot use VocabularyFileUri ; you must choose one or the
-	// other. Each language has a character set that contains all allowed characters
-	// for that specific language. If you use unsupported characters, your custom
-	// vocabulary filter request fails. Refer to Character Sets for Custom Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html)
-	// to get the character set for your language.
+	// file using the VocabularyFileUri parameter.
+	//
+	// Note that if you include Phrases in your request, you cannot use
+	// VocabularyFileUri ; you must choose one or the other.
+	//
+	// Each language has a character set that contains all allowed characters for that
+	// specific language. If you use unsupported characters, your custom vocabulary
+	// filter request fails. Refer to [Character Sets for Custom Vocabularies]to get the character set for your language.
+	//
+	// [Character Sets for Custom Vocabularies]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
 	Phrases []string
 
 	// The Amazon S3 location of the text file that contains your custom vocabulary.
 	// The URI must be located in the same Amazon Web Services Region as the resource
-	// you're calling. Here's an example URI path:
-	// s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt Note that if you include
-	// VocabularyFileUri in your request, you cannot use the Phrases flag; you must
-	// choose one or the other.
+	// you're calling.
+	//
+	// Here's an example URI path: s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt
+	//
+	// Note that if you include VocabularyFileUri in your request, you cannot use the
+	// Phrases flag; you must choose one or the other.
 	VocabularyFileUri *string
 
 	noSmithyDocumentSerde
@@ -88,8 +103,9 @@ type UpdateVocabularyOutput struct {
 	// The language code you selected for your custom vocabulary.
 	LanguageCode types.LanguageCode
 
-	// The date and time the specified custom vocabulary was last updated. Timestamps
-	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
+	// The date and time the specified custom vocabulary was last updated.
+	//
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 

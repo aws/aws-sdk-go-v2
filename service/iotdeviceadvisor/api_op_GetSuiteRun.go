@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Gets information about a Device Advisor test suite run. Requires permission to
-// access the GetSuiteRun (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about a Device Advisor test suite run.
+//
+// Requires permission to access the [GetSuiteRun] action.
+//
+// [GetSuiteRun]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetSuiteRun(ctx context.Context, params *GetSuiteRunInput, optFns ...func(*Options)) (*GetSuiteRunOutput, error) {
 	if params == nil {
 		params = &GetSuiteRunInput{}

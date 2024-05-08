@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the specified product from the specified portfolio. A delegated
-// admin is authorized to invoke this command.
+// Disassociates the specified product from the specified portfolio.
+//
+// A delegated admin is authorized to invoke this command.
 func (c *Client) DisassociateProductFromPortfolio(ctx context.Context, params *DisassociateProductFromPortfolioInput, optFns ...func(*Options)) (*DisassociateProductFromPortfolioOutput, error) {
 	if params == nil {
 		params = &DisassociateProductFromPortfolioInput{}
@@ -40,7 +41,9 @@ type DisassociateProductFromPortfolioInput struct {
 	ProductId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

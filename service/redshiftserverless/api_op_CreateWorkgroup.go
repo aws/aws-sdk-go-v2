@@ -48,8 +48,9 @@ type CreateWorkgroupInput struct {
 	// enable_user_activity_logging , query_group , search_path , require_ssl ,
 	// use_fips_ssl , and query monitoring metrics that let you define performance
 	// boundaries. For more information about query monitoring rules and available
-	// metrics, see Query monitoring metrics for Amazon Redshift Serverless (https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless)
-	// .
+	// metrics, see [Query monitoring metrics for Amazon Redshift Serverless].
+	//
+	// [Query monitoring metrics for Amazon Redshift Serverless]: https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless
 	ConfigParameters []types.ConfigParameter
 
 	// The value that specifies whether to turn on enhanced virtual private cloud

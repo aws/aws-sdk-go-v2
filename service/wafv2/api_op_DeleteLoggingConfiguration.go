@@ -28,8 +28,8 @@ func (c *Client) DeleteLoggingConfiguration(ctx context.Context, params *DeleteL
 
 type DeleteLoggingConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the web ACL from which you want to delete the
-	// LoggingConfiguration .
+	// The Amazon Resource Name (ARN) of the web ACL from which you want to delete the LoggingConfiguration
+	// .
 	//
 	// This member is required.
 	ResourceArn *string

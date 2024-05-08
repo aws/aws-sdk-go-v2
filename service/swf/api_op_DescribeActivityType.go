@@ -13,23 +13,32 @@ import (
 
 // Returns information about the specified activity type. This includes
 // configuration settings provided when the type was registered and other general
-// information about the type. Access Control You can use IAM policies to control
-// this action's access to Amazon SWF resources as follows:
+// information about the type.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF
+// resources as follows:
+//
 //   - Use a Resource element with the domain name to limit the action to only
 //     specified domains.
+//
 //   - Use an Action element to allow or deny permission to call this action.
+//
 //   - Constrain the following parameters by using a Condition element with the
 //     appropriate keys.
+//
 //   - activityType.name : String constraint. The key is swf:activityType.name .
+//
 //   - activityType.version : String constraint. The key is
 //     swf:activityType.version .
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
 // associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
-// For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
-// in the Amazon SWF Developer Guide.
+// For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows]in the Amazon SWF Developer Guide.
+//
+// [Using IAM to Manage Access to Amazon SWF Workflows]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
 func (c *Client) DescribeActivityType(ctx context.Context, params *DescribeActivityTypeInput, optFns ...func(*Options)) (*DescribeActivityTypeOutput, error) {
 	if params == nil {
 		params = &DescribeActivityTypeInput{}
@@ -69,13 +78,17 @@ type DescribeActivityTypeOutput struct {
 	// This member is required.
 	Configuration *types.ActivityTypeConfiguration
 
-	// General information about the activity type. The status of activity type
-	// (returned in the ActivityTypeInfo structure) can be one of the following.
+	// General information about the activity type.
+	//
+	// The status of activity type (returned in the ActivityTypeInfo structure) can be
+	// one of the following.
+	//
 	//   - REGISTERED – The type is registered and available. Workers supporting this
 	//   type should be running.
-	//   - DEPRECATED – The type was deprecated using DeprecateActivityType , but is
-	//   still in use. You should keep workers supporting this type running. You cannot
-	//   create new tasks of this type.
+	//
+	//   - DEPRECATED – The type was deprecated using DeprecateActivityType, but is still in use. You
+	//   should keep workers supporting this type running. You cannot create new tasks of
+	//   this type.
 	//
 	// This member is required.
 	TypeInfo *types.ActivityTypeInfo

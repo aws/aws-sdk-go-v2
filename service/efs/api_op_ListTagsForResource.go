@@ -12,8 +12,10 @@ import (
 )
 
 // Lists all tags for a top-level EFS resource. You must provide the ID of the
-// resource that you want to retrieve the tags for. This operation requires
-// permissions for the elasticfilesystem:DescribeAccessPoints action.
+// resource that you want to retrieve the tags for.
+//
+// This operation requires permissions for the
+// elasticfilesystem:DescribeAccessPoints action.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

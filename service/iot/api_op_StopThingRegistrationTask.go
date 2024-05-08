@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a bulk thing provisioning task. Requires permission to access the
-// StopThingRegistrationTask (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Cancels a bulk thing provisioning task.
+//
+// Requires permission to access the [StopThingRegistrationTask] action.
+//
+// [StopThingRegistrationTask]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) StopThingRegistrationTask(ctx context.Context, params *StopThingRegistrationTaskInput, optFns ...func(*Options)) (*StopThingRegistrationTaskOutput, error) {
 	if params == nil {
 		params = &StopThingRegistrationTaskInput{}

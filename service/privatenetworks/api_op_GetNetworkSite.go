@@ -42,7 +42,7 @@ type GetNetworkSiteOutput struct {
 	// Information about the network site.
 	NetworkSite *types.NetworkSite
 
-	// The network site tags.
+	//  The network site tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

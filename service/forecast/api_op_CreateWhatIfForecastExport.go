@@ -11,17 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Exports a forecast created by the CreateWhatIfForecast operation to your Amazon
-// Simple Storage Service (Amazon S3) bucket. The forecast file name will match the
-// following conventions: ≈__ The component is in Java SimpleDateFormat
-// (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes
-// an Identity and Access Management (IAM) role that Amazon Forecast can assume to
-// access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles .
-// For more information, see howitworks-forecast . To get a list of all your
-// what-if forecast export jobs, use the ListWhatIfForecastExports operation. The
-// Status of the forecast export job must be ACTIVE before you can access the
-// forecast in your Amazon S3 bucket. To get the status, use the
-// DescribeWhatIfForecastExport operation.
+// Exports a forecast created by the CreateWhatIfForecast operation to your Amazon Simple Storage
+// Service (Amazon S3) bucket. The forecast file name will match the following
+// conventions:
+//
+//	≈__
+//
+// The component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ).
+//
+// You must specify a DataDestination object that includes an Identity and Access Management
+// (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For
+// more information, see aws-forecast-iam-roles.
+//
+// For more information, see howitworks-forecast.
+//
+// To get a list of all your what-if forecast export jobs, use the ListWhatIfForecastExports operation.
+//
+// The Status of the forecast export job must be ACTIVE before you can access the
+// forecast in your Amazon S3 bucket. To get the status, use the DescribeWhatIfForecastExportoperation.
 func (c *Client) CreateWhatIfForecastExport(ctx context.Context, params *CreateWhatIfForecastExportInput, optFns ...func(*Options)) (*CreateWhatIfForecastExportOutput, error) {
 	if params == nil {
 		params = &CreateWhatIfForecastExportInput{}
@@ -41,9 +48,10 @@ type CreateWhatIfForecastExportInput struct {
 
 	// The location where you want to save the forecast and an Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the location.
-	// The forecast must be exported to an Amazon S3 bucket. If encryption is used,
-	// Destination must include an Key Management Service (KMS) key. The IAM role must
-	// allow Amazon Forecast permission to access the key.
+	// The forecast must be exported to an Amazon S3 bucket.
+	//
+	// If encryption is used, Destination must include an Key Management Service (KMS)
+	// key. The IAM role must allow Amazon Forecast permission to access the key.
 	//
 	// This member is required.
 	Destination *types.DataDestination
@@ -61,8 +69,9 @@ type CreateWhatIfForecastExportInput struct {
 	// The format of the exported data, CSV or PARQUET.
 	Format *string
 
-	// A list of tags (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
-	// to apply to the what if forecast.
+	// A list of [tags] to apply to the what if forecast.
+	//
+	// [tags]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

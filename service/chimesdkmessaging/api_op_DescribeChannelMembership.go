@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of a user's channel membership. The x-amz-chime-bearer
-// request header is mandatory. Use the ARN of the AppInstanceUser or
-// AppInstanceBot that makes the API call as the value in the header.
+// Returns the full details of a user's channel membership.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
 func (c *Client) DescribeChannelMembership(ctx context.Context, params *DescribeChannelMembershipInput, optFns ...func(*Options)) (*DescribeChannelMembershipOutput, error) {
 	if params == nil {
 		params = &DescribeChannelMembershipInput{}
@@ -47,8 +49,9 @@ type DescribeChannelMembershipInput struct {
 	MemberArn *string
 
 	// The ID of the SubChannel in the request. The response contains an
-	// ElasticChannelConfiguration object. Only required to get a user’s SubChannel
-	// membership details.
+	// ElasticChannelConfiguration object.
+	//
+	// Only required to get a user’s SubChannel membership details.
 	SubChannelId *string
 
 	noSmithyDocumentSerde

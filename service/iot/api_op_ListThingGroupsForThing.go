@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the thing groups to which the specified thing belongs. Requires permission
-// to access the ListThingGroupsForThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// List the thing groups to which the specified thing belongs.
+//
+// Requires permission to access the [ListThingGroupsForThing] action.
+//
+// [ListThingGroupsForThing]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListThingGroupsForThing(ctx context.Context, params *ListThingGroupsForThingInput, optFns ...func(*Options)) (*ListThingGroupsForThingOutput, error) {
 	if params == nil {
 		params = &ListThingGroupsForThingInput{}

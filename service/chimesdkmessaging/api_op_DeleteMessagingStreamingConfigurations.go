@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes the streaming configurations for an AppInstance . For more information,
-// see Streaming messaging data (https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html)
-// in the Amazon Chime SDK Developer Guide.
+// see [Streaming messaging data]in the Amazon Chime SDK Developer Guide.
+//
+// [Streaming messaging data]: https://docs.aws.amazon.com/chime-sdk/latest/dg/streaming-export.html
 func (c *Client) DeleteMessagingStreamingConfigurations(ctx context.Context, params *DeleteMessagingStreamingConfigurationsInput, optFns ...func(*Options)) (*DeleteMessagingStreamingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DeleteMessagingStreamingConfigurationsInput{}

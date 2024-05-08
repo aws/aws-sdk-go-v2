@@ -48,19 +48,29 @@ type ListNotebookExecutionsInput struct {
 	Marker *string
 
 	// The status filter for listing notebook executions.
+	//
 	//   - START_PENDING indicates that the cluster has received the execution request
 	//   but execution has not begun.
+	//
 	//   - STARTING indicates that the execution is starting on the cluster.
+	//
 	//   - RUNNING indicates that the execution is being processed by the cluster.
+	//
 	//   - FINISHING indicates that execution processing is in the final stages.
+	//
 	//   - FINISHED indicates that the execution has completed without error.
+	//
 	//   - FAILING indicates that the execution is failing and will not finish
 	//   successfully.
+	//
 	//   - FAILED indicates that the execution failed.
+	//
 	//   - STOP_PENDING indicates that the cluster has received a StopNotebookExecution
 	//   request and the stop is pending.
+	//
 	//   - STOPPING indicates that the cluster is in the process of stopping the
 	//   execution as a result of a StopNotebookExecution request.
+	//
 	//   - STOPPED indicates that the execution stopped because of a
 	//   StopNotebookExecution request.
 	Status types.NotebookExecutionStatus

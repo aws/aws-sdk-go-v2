@@ -69,9 +69,9 @@ type ListCustomVocabularyItemsOutput struct {
 	CustomVocabularyItems []types.CustomVocabularyItem
 
 	// The identifier of the language and locale where this custom vocabulary is used.
-	// The string must match one of the supported locales. For more information, see
-	// Supported Languages  (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// The string must match one of the supported locales. For more information, see [Supported Languages].
+	//
+	// [Supported Languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	LocaleId *string
 
 	// The nextToken identifier to the list custom vocabulary response.

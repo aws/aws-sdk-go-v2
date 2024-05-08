@@ -13,20 +13,27 @@ import (
 
 // This operation assigns feature variation to user sessions. For each user
 // session, you pass in an entityID that represents the user. Evidently then
-// checks the evaluation rules and assigns the variation. The first rules that are
-// evaluated are the override rules. If the user's entityID matches an override
-// rule, the user is served the variation specified by that rule. Next, if there is
-// a launch of the feature, the user might be assigned to a variation in the
-// launch. The chance of this depends on the percentage of users that are allocated
-// to that launch. If the user is enrolled in the launch, the variation they are
-// served depends on the allocation of the various feature variations used for the
-// launch. If the user is not assigned to a launch, and there is an ongoing
-// experiment for this feature, the user might be assigned to a variation in the
-// experiment. The chance of this depends on the percentage of users that are
-// allocated to that experiment. If the user is enrolled in the experiment, the
+// checks the evaluation rules and assigns the variation.
+//
+// The first rules that are evaluated are the override rules. If the user's
+// entityID matches an override rule, the user is served the variation specified by
+// that rule.
+//
+// Next, if there is a launch of the feature, the user might be assigned to a
+// variation in the launch. The chance of this depends on the percentage of users
+// that are allocated to that launch. If the user is enrolled in the launch, the
 // variation they are served depends on the allocation of the various feature
-// variations used for the experiment. If the user is not assigned to a launch or
-// experiment, they are served the default variation.
+// variations used for the launch.
+//
+// If the user is not assigned to a launch, and there is an ongoing experiment for
+// this feature, the user might be assigned to a variation in the experiment. The
+// chance of this depends on the percentage of users that are allocated to that
+// experiment. If the user is enrolled in the experiment, the variation they are
+// served depends on the allocation of the various feature variations used for the
+// experiment.
+//
+// If the user is not assigned to a launch or experiment, they are served the
+// default variation.
 func (c *Client) BatchEvaluateFeature(ctx context.Context, params *BatchEvaluateFeatureInput, optFns ...func(*Options)) (*BatchEvaluateFeatureOutput, error) {
 	if params == nil {
 		params = &BatchEvaluateFeatureInput{}

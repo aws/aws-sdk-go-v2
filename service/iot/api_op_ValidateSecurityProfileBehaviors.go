@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Validates a Device Defender security profile behaviors specification. Requires
-// permission to access the ValidateSecurityProfileBehaviors (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Validates a Device Defender security profile behaviors specification.
+//
+// Requires permission to access the [ValidateSecurityProfileBehaviors] action.
+//
+// [ValidateSecurityProfileBehaviors]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ValidateSecurityProfileBehaviors(ctx context.Context, params *ValidateSecurityProfileBehaviorsInput, optFns ...func(*Options)) (*ValidateSecurityProfileBehaviorsOutput, error) {
 	if params == nil {
 		params = &ValidateSecurityProfileBehaviorsInput{}

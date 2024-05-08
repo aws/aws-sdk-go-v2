@@ -18,20 +18,33 @@ import (
 // associated member accounts. This supports dimensions, Cost Categories, and
 // nested expressions. For any time period, you can filter data about reservation
 // usage by the following dimensions:
+//
 //   - AZ
+//
 //   - CACHE_ENGINE
+//
 //   - DATABASE_ENGINE
+//
 //   - DEPLOYMENT_OPTION
+//
 //   - INSTANCE_TYPE
+//
 //   - LINKED_ACCOUNT
+//
 //   - OPERATING_SYSTEM
+//
 //   - PLATFORM
+//
 //   - REGION
+//
 //   - SERVICE
+//
 //   - TAG
+//
 //   - TENANCY
 //
-// To determine valid values for a dimension, use the GetDimensionValues operation.
+// To determine valid values for a dimension, use the GetDimensionValues
+// operation.
 func (c *Client) GetReservationCoverage(ctx context.Context, params *GetReservationCoverageInput, optFns ...func(*Options)) (*GetReservationCoverageOutput, error) {
 	if params == nil {
 		params = &GetReservationCoverageInput{}
@@ -63,43 +76,74 @@ type GetReservationCoverageInput struct {
 
 	// Filters utilization data by dimensions. You can filter by the following
 	// dimensions:
+	//
 	//   - AZ
+	//
 	//   - CACHE_ENGINE
+	//
 	//   - DATABASE_ENGINE
+	//
 	//   - DEPLOYMENT_OPTION
+	//
 	//   - INSTANCE_TYPE
+	//
 	//   - LINKED_ACCOUNT
+	//
 	//   - OPERATING_SYSTEM
+	//
 	//   - PLATFORM
+	//
 	//   - REGION
+	//
 	//   - SERVICE
+	//
 	//   - TAG
+	//
 	//   - TENANCY
-	// GetReservationCoverage uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// object as the other operations, but only AND is supported among each dimension.
-	// You can nest only one level deep. If there are multiple values for a dimension,
-	// they are OR'd together. If you don't provide a SERVICE filter, Cost Explorer
-	// defaults to EC2. Cost category is also supported.
+	//
+	// GetReservationCoverage uses the same [Expression] object as the other operations, but only
+	// AND is supported among each dimension. You can nest only one level deep. If
+	// there are multiple values for a dimension, they are OR'd together.
+	//
+	// If you don't provide a SERVICE filter, Cost Explorer defaults to EC2.
+	//
+	// Cost category is also supported.
+	//
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
 	Filter *types.Expression
 
 	// The granularity of the Amazon Web Services cost data for the reservation. Valid
-	// values are MONTHLY and DAILY . If GroupBy is set, Granularity can't be set. If
-	// Granularity isn't set, the response object doesn't include Granularity , either
-	// MONTHLY or DAILY . The GetReservationCoverage operation supports only DAILY and
-	// MONTHLY granularities.
+	// values are MONTHLY and DAILY .
+	//
+	// If GroupBy is set, Granularity can't be set. If Granularity isn't set, the
+	// response object doesn't include Granularity , either MONTHLY or DAILY .
+	//
+	// The GetReservationCoverage operation supports only DAILY and MONTHLY
+	// granularities.
 	Granularity types.Granularity
 
 	// You can group the data by the following attributes:
+	//
 	//   - AZ
+	//
 	//   - CACHE_ENGINE
+	//
 	//   - DATABASE_ENGINE
+	//
 	//   - DEPLOYMENT_OPTION
+	//
 	//   - INSTANCE_TYPE
+	//
 	//   - INVOICING_ENTITY
+	//
 	//   - LINKED_ACCOUNT
+	//
 	//   - OPERATING_SYSTEM
+	//
 	//   - PLATFORM
+	//
 	//   - REGION
+	//
 	//   - TENANCY
 	GroupBy []types.GroupDefinition
 
@@ -109,8 +153,10 @@ type GetReservationCoverageInput struct {
 	// of objects.
 	MaxResults *int32
 
-	// The measurement that you want your reservation coverage reported in. Valid
-	// values are Hour , Unit , and Cost . You can use multiple values in a request.
+	// The measurement that you want your reservation coverage reported in.
+	//
+	// Valid values are Hour , Unit , and Cost . You can use multiple values in a
+	// request.
 	Metrics []string
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
@@ -118,18 +164,30 @@ type GetReservationCoverageInput struct {
 	// page size.
 	NextPageToken *string
 
-	// The value by which you want to sort the data. The following values are
-	// supported for Key :
+	// The value by which you want to sort the data.
+	//
+	// The following values are supported for Key :
+	//
 	//   - OnDemandCost
+	//
 	//   - CoverageHoursPercentage
+	//
 	//   - OnDemandHours
+	//
 	//   - ReservedHours
+	//
 	//   - TotalRunningHours
+	//
 	//   - CoverageNormalizedUnitsPercentage
+	//
 	//   - OnDemandNormalizedUnits
+	//
 	//   - ReservedNormalizedUnits
+	//
 	//   - TotalRunningNormalizedUnits
+	//
 	//   - Time
+	//
 	// Supported values for SortOrder are ASCENDING or DESCENDING .
 	SortBy *types.SortDefinition
 

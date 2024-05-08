@@ -11,15 +11,19 @@ import (
 )
 
 // Demotes an AppInstanceAdmin to an AppInstanceUser . This action does not delete
-// the user. This API is is no longer supported and will not be updated. We
-// recommend using the latest version, DeleteAppInstanceAdmin (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceAdmin.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// the user.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DeleteAppInstanceAdmin], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DeleteAppInstanceAdmin in the Amazon Chime SDK Identity
 // Namespace
+//
+// [DeleteAppInstanceAdmin]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceAdmin.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 func (c *Client) DeleteAppInstanceAdmin(ctx context.Context, params *DeleteAppInstanceAdminInput, optFns ...func(*Options)) (*DeleteAppInstanceAdminOutput, error) {
 	if params == nil {
 		params = &DeleteAppInstanceAdminInput{}

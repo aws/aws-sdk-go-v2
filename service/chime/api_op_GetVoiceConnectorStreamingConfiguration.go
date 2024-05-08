@@ -14,15 +14,19 @@ import (
 // Retrieves the streaming configuration details for the specified Amazon Chime
 // Voice Connector. Shows whether media streaming is enabled for sending to Amazon
 // Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis
-// data. This API is is no longer supported and will not be updated. We recommend
-// using the latest version, GetVoiceConnectorStreamingConfiguration (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorStreamingConfiguration.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// data.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [GetVoiceConnectorStreamingConfiguration], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by GetVoiceConnectorStreamingConfiguration in the Amazon
 // Chime SDK Voice Namespace
+//
+// [GetVoiceConnectorStreamingConfiguration]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorStreamingConfiguration.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 func (c *Client) GetVoiceConnectorStreamingConfiguration(ctx context.Context, params *GetVoiceConnectorStreamingConfigurationInput, optFns ...func(*Options)) (*GetVoiceConnectorStreamingConfigurationOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorStreamingConfigurationInput{}

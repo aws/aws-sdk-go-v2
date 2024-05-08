@@ -39,11 +39,12 @@ type ListResolverEndpointIpAddressesInput struct {
 	// MaxResults , Resolver returns up to 100 IP addresses.
 	MaxResults *int32
 
-	// For the first ListResolverEndpointIpAddresses request, omit this value. If the
-	// specified Resolver endpoint has more than MaxResults IP addresses, you can
-	// submit another ListResolverEndpointIpAddresses request to get the next group of
-	// IP addresses. In the next request, specify the value of NextToken from the
-	// previous response.
+	// For the first ListResolverEndpointIpAddresses request, omit this value.
+	//
+	// If the specified Resolver endpoint has more than MaxResults IP addresses, you
+	// can submit another ListResolverEndpointIpAddresses request to get the next
+	// group of IP addresses. In the next request, specify the value of NextToken from
+	// the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde

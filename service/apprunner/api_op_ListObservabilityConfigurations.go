@@ -14,9 +14,10 @@ import (
 // Returns a list of active App Runner observability configurations in your Amazon
 // Web Services account. You can query the revisions for a specific configuration
 // name or the revisions for all active configurations in your account. You can
-// optionally query only the latest revision of each requested name. To retrieve a
-// full description of a particular configuration revision, call and provide one of
-// the ARNs returned by ListObservabilityConfigurations .
+// optionally query only the latest revision of each requested name.
+//
+// To retrieve a full description of a particular configuration revision, call and
+// provide one of the ARNs returned by ListObservabilityConfigurations .
 func (c *Client) ListObservabilityConfigurations(ctx context.Context, params *ListObservabilityConfigurationsInput, optFns ...func(*Options)) (*ListObservabilityConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListObservabilityConfigurationsInput{}
@@ -35,19 +36,25 @@ func (c *Client) ListObservabilityConfigurations(ctx context.Context, params *Li
 type ListObservabilityConfigurationsInput struct {
 
 	// Set to true to list only the latest revision for each requested configuration
-	// name. Set to false to list all revisions for each requested configuration name.
+	// name.
+	//
+	// Set to false to list all revisions for each requested configuration name.
+	//
 	// Default: true
 	LatestOnly bool
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
-	// identical to the ones that are specified in the initial request. If you don't
-	// specify NextToken , the request retrieves the first result page.
+	// identical to the ones that are specified in the initial request.
+	//
+	// If you don't specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	// The name of the App Runner observability configuration that you want to list.
@@ -164,8 +171,10 @@ var _ ListObservabilityConfigurationsAPIClient = (*Client)(nil)
 // ListObservabilityConfigurations
 type ListObservabilityConfigurationsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

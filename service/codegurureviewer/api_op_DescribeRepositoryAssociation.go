@@ -15,8 +15,10 @@ import (
 	"time"
 )
 
-// Returns a RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-// object that contains information about the requested repository association.
+// Returns a [RepositoryAssociation] object that contains information about the requested repository
+// association.
+//
+// [RepositoryAssociation]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
 func (c *Client) DescribeRepositoryAssociation(ctx context.Context, params *DescribeRepositoryAssociationInput, optFns ...func(*Options)) (*DescribeRepositoryAssociationOutput, error) {
 	if params == nil {
 		params = &DescribeRepositoryAssociationInput{}
@@ -34,9 +36,11 @@ func (c *Client) DescribeRepositoryAssociation(ctx context.Context, params *Desc
 
 type DescribeRepositoryAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object. You can retrieve this ARN by calling ListRepositoryAssociations (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html)
-	// .
+	// The Amazon Resource Name (ARN) of the [RepositoryAssociation] object. You can retrieve this ARN by
+	// calling [ListRepositoryAssociations].
+	//
+	// [ListRepositoryAssociations]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+	// [RepositoryAssociation]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
 	//
 	// This member is required.
 	AssociationArn *string
@@ -51,8 +55,10 @@ type DescribeRepositoryAssociationOutput struct {
 
 	// An array of key-value pairs used to tag an associated repository. A tag is a
 	// custom attribute label with two parts:
+	//
 	//   - A tag key (for example, CostCenter , Environment , Project , or Secret ).
 	//   Tag keys are case sensitive.
+	//
 	//   - An optional field known as a tag value (for example, 111122223333 ,
 	//   Production , or a team name). Omitting the tag value is the same as using an
 	//   empty string. Like tag keys, tag values are case sensitive.
@@ -186,12 +192,13 @@ type RepositoryAssociationSucceededWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeRepositoryAssociationInput, *DescribeRepositoryAssociationOutput, error) (bool, error)
 }
 

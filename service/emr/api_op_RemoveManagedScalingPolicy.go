@@ -28,7 +28,7 @@ func (c *Client) RemoveManagedScalingPolicy(ctx context.Context, params *RemoveM
 
 type RemoveManagedScalingPolicyInput struct {
 
-	// Specifies the ID of the cluster from which the managed scaling policy will be
+	//  Specifies the ID of the cluster from which the managed scaling policy will be
 	// removed.
 	//
 	// This member is required.

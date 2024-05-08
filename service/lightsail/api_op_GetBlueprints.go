@@ -14,11 +14,12 @@ import (
 // Returns the list of available instance images, or blueprints. You can use a
 // blueprint to create a new instance already running a specific operating system,
 // as well as a preinstalled app or development stack. The software each instance
-// is running depends on the blueprint image you choose. Use active blueprints when
-// creating new instances. Inactive blueprints are listed to support customers with
-// existing instances and are not necessarily available to create new instances.
-// Blueprints are marked inactive when they become outdated due to operating system
-// updates or new application releases.
+// is running depends on the blueprint image you choose.
+//
+// Use active blueprints when creating new instances. Inactive blueprints are
+// listed to support customers with existing instances and are not necessarily
+// available to create new instances. Blueprints are marked inactive when they
+// become outdated due to operating system updates or new application releases.
 func (c *Client) GetBlueprints(ctx context.Context, params *GetBlueprintsInput, optFns ...func(*Options)) (*GetBlueprintsOutput, error) {
 	if params == nil {
 		params = &GetBlueprintsInput{}
@@ -36,18 +37,20 @@ func (c *Client) GetBlueprints(ctx context.Context, params *GetBlueprintsInput, 
 
 type GetBlueprintsInput struct {
 
-	// Returns a list of blueprints that are specific to Lightsail for Research. You
-	// must use this parameter to view Lightsail for Research blueprints.
+	// Returns a list of blueprints that are specific to Lightsail for Research.
+	//
+	// You must use this parameter to view Lightsail for Research blueprints.
 	AppCategory types.AppCategory
 
 	// A Boolean value that indicates whether to include inactive (unavailable)
 	// blueprints in the response of your request.
 	IncludeInactive *bool
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetBlueprints request. If your results are
-	// paginated, the response will return a next page token that you can specify as
-	// the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetBlueprints request. If your results
+	// are paginated, the response will return a next page token that you can specify
+	// as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -59,10 +62,12 @@ type GetBlueprintsOutput struct {
 	// blueprints.
 	Blueprints []types.Blueprint
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetBlueprints request and specify the next
-	// page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetBlueprints request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

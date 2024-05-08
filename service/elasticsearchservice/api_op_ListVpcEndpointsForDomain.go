@@ -28,8 +28,8 @@ func (c *Client) ListVpcEndpointsForDomain(ctx context.Context, params *ListVpcE
 	return out, nil
 }
 
-// Container for request parameters to the ListVpcEndpointsForDomain operation.
-// Specifies the domain whose VPC endpoints will be listed.
+// Container for request parameters to the ListVpcEndpointsForDomain operation. Specifies the domain whose
+// VPC endpoints will be listed.
 type ListVpcEndpointsForDomainInput struct {
 
 	// Name of the ElasticSearch domain whose VPC endpoints are to be listed.
@@ -43,8 +43,8 @@ type ListVpcEndpointsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the ListVpcEndpointsForDomain operation.
-// Returns a list containing summarized details of the VPC endpoints.
+// Container for response parameters to the ListVpcEndpointsForDomain operation. Returns a list containing
+// summarized details of the VPC endpoints.
 type ListVpcEndpointsForDomainOutput struct {
 
 	// Information about each endpoint associated with the domain.

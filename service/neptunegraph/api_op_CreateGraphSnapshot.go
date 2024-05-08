@@ -36,9 +36,11 @@ type CreateGraphSnapshotInput struct {
 	// This member is required.
 	GraphIdentifier *string
 
-	// The snapshot name. For example: my-snapshot-1 . The name must contain from 1 to
-	// 63 letters, numbers, or hyphens, and its first character must be a letter. It
-	// cannot end with a hyphen or contain two consecutive hyphens.
+	// The snapshot name. For example: my-snapshot-1 .
+	//
+	// The name must contain from 1 to 63 letters, numbers, or hyphens, and its first
+	// character must be a letter. It cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// This member is required.
 	SnapshotName *string

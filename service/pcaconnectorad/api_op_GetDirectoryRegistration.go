@@ -29,9 +29,9 @@ func (c *Client) GetDirectoryRegistration(ctx context.Context, params *GetDirect
 
 type GetDirectoryRegistrationInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration].
+	//
+	// [CreateDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html
 	//
 	// This member is required.
 	DirectoryRegistrationArn *string

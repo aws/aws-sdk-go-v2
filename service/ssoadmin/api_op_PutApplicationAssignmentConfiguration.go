@@ -12,10 +12,12 @@ import (
 
 // Configure how users gain access to an application. If AssignmentsRequired is
 // true (default value), users don’t have access to the application unless an
-// assignment is created using the CreateApplicationAssignment API (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html)
-// . If false , all users have access to the application. If an assignment is
-// created using CreateApplicationAssignment (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html)
-// ., the user retains access if AssignmentsRequired is set to true .
+// assignment is created using the [CreateApplicationAssignment API]. If false , all users have access to the
+// application. If an assignment is created using [CreateApplicationAssignment]., the user retains access if
+// AssignmentsRequired is set to true .
+//
+// [CreateApplicationAssignment API]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html
+// [CreateApplicationAssignment]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html
 func (c *Client) PutApplicationAssignmentConfiguration(ctx context.Context, params *PutApplicationAssignmentConfigurationInput, optFns ...func(*Options)) (*PutApplicationAssignmentConfigurationOutput, error) {
 	if params == nil {
 		params = &PutApplicationAssignmentConfigurationInput{}
@@ -33,17 +35,17 @@ func (c *Client) PutApplicationAssignmentConfiguration(ctx context.Context, para
 
 type PutApplicationAssignmentConfigurationInput struct {
 
-	// Specifies the ARN of the application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
-	// Amazon Web Services General Reference.
+	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ApplicationArn *string
 
 	// If AssignmentsRequired is true (default value), users don’t have access to the
-	// application unless an assignment is created using the
-	// CreateApplicationAssignment API (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html)
-	// . If false , all users have access to the application.
+	// application unless an assignment is created using the [CreateApplicationAssignment API]. If false , all users
+	// have access to the application.
+	//
+	// [CreateApplicationAssignment API]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html
 	//
 	// This member is required.
 	AssignmentRequired *bool

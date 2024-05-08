@@ -12,8 +12,10 @@ import (
 type AddAttributesActivity struct {
 
 	// A list of 1-50 AttributeNameMapping objects that map an existing attribute to a
-	// new attribute. The existing attributes remain in the message, so if you want to
-	// remove the originals, use RemoveAttributeActivity .
+	// new attribute.
+	//
+	// The existing attributes remain in the message, so if you want to remove the
+	// originals, use RemoveAttributeActivity .
 	//
 	// This member is required.
 	Attributes map[string]string
@@ -55,10 +57,13 @@ type Channel struct {
 	// When the channel was created.
 	CreationTime *time.Time
 
-	// The last time when a new message arrived in the channel. IoT Analytics updates
-	// this value at most once per minute for one channel. Hence, the
-	// lastMessageArrivalTime value is an approximation. This feature only applies to
-	// messages that arrived in the data store after October 23, 2020.
+	// The last time when a new message arrived in the channel.
+	//
+	// IoT Analytics updates this value at most once per minute for one channel.
+	// Hence, the lastMessageArrivalTime value is an approximation.
+	//
+	// This feature only applies to messages that arrived in the data store after
+	// October 23, 2020.
 	LastMessageArrivalTime *time.Time
 
 	// When the channel was last updated.
@@ -104,8 +109,11 @@ type ChannelActivity struct {
 type ChannelMessages struct {
 
 	// Specifies one or more keys that identify the Amazon Simple Storage Service
-	// (Amazon S3) objects that save your channel messages. You must use the full path
-	// for the key. Example path: channel/mychannel/__dt=2020-02-29
+	// (Amazon S3) objects that save your channel messages.
+	//
+	// You must use the full path for the key.
+	//
+	// Example path: channel/mychannel/__dt=2020-02-29
 	// 00:00:00/1582940490000_1582940520000_123456789012_mychannel_0_2118.0.json.gz
 	S3Paths []string
 
@@ -162,10 +170,13 @@ type ChannelSummary struct {
 	// When the channel was created.
 	CreationTime *time.Time
 
-	// The last time when a new message arrived in the channel. IoT Analytics updates
-	// this value at most once per minute for one channel. Hence, the
-	// lastMessageArrivalTime value is an approximation. This feature only applies to
-	// messages that arrived in the data store after October 23, 2020.
+	// The last time when a new message arrived in the channel.
+	//
+	// IoT Analytics updates this value at most once per minute for one channel.
+	// Hence, the lastMessageArrivalTime value is an approximation.
+	//
+	// This feature only applies to messages that arrived in the data store after
+	// October 23, 2020.
 	LastMessageArrivalTime *time.Time
 
 	// The last time the channel was updated.
@@ -185,9 +196,10 @@ type Column struct {
 	// This member is required.
 	Name *string
 
-	// The type of data. For more information about the supported data types, see
-	// Common data types (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html)
-	// in the Glue Developer Guide.
+	// The type of data. For more information about the supported data types, see [Common data types] in
+	// the Glue Developer Guide.
+	//
+	// [Common data types]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html
 	//
 	// This member is required.
 	Type *string
@@ -335,8 +347,9 @@ type Dataset struct {
 	LastUpdateTime *time.Time
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
-	// late. To specify lateDataRules , the dataset must use a DeltaTimer (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
-	// filter.
+	// late. To specify lateDataRules , the dataset must use a [DeltaTimer] filter.
+	//
+	// [DeltaTimer]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
 	LateDataRules []LateDataRule
 
 	// The name of the dataset.
@@ -355,9 +368,9 @@ type Dataset struct {
 	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
 	// are different) are kept for the time period specified by the retentionPeriod
-	// parameter. For more information, see Keeping Multiple Versions of IoT Analytics
-	// datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
-	// in the IoT Analytics User Guide.
+	// parameter. For more information, see [Keeping Multiple Versions of IoT Analytics datasets]in the IoT Analytics User Guide.
+	//
+	// [Keeping Multiple Versions of IoT Analytics datasets]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
 	VersioningConfiguration *VersioningConfiguration
 
 	noSmithyDocumentSerde
@@ -529,20 +542,27 @@ type Datastore struct {
 	// When the data store was created.
 	CreationTime *time.Time
 
-	// Contains information about the partition dimensions in a data store.
+	//  Contains information about the partition dimensions in a data store.
 	DatastorePartitions *DatastorePartitions
 
 	// Contains the configuration information of file formats. IoT Analytics data
-	// stores support JSON and Parquet (https://parquet.apache.org/) . The default file
-	// format is JSON. You can specify only one format. You can't change the file
-	// format after you create the data store.
+	// stores support JSON and [Parquet].
+	//
+	// The default file format is JSON. You can specify only one format.
+	//
+	// You can't change the file format after you create the data store.
+	//
+	// [Parquet]: https://parquet.apache.org/
 	FileFormatConfiguration *FileFormatConfiguration
 
-	// The last time when a new message arrived in the data store. IoT Analytics
-	// updates this value at most once per minute for Amazon Simple Storage Service one
-	// data store. Hence, the lastMessageArrivalTime value is an approximation. This
-	// feature only applies to messages that arrived in the data store after October
-	// 23, 2020.
+	// The last time when a new message arrived in the data store.
+	//
+	// IoT Analytics updates this value at most once per minute for Amazon Simple
+	// Storage Service one data store. Hence, the lastMessageArrivalTime value is an
+	// approximation.
+	//
+	// This feature only applies to messages that arrived in the data store after
+	// October 23, 2020.
 	LastMessageArrivalTime *time.Time
 
 	// The last time the data store was updated.
@@ -555,9 +575,13 @@ type Datastore struct {
 	// customerManagedS3 storage is selected, this parameter is ignored.
 	RetentionPeriod *RetentionPeriod
 
-	// The status of a data store: CREATING The data store is being created. ACTIVE
-	// The data store has been created and can be used. DELETING The data store is
-	// being deleted.
+	// The status of a data store:
+	//
+	// CREATING The data store is being created.
+	//
+	// ACTIVE The data store has been created and can be used.
+	//
+	// DELETING The data store is being deleted.
 	Status DatastoreStatus
 
 	// Where data in a data store is stored.. You can choose serviceManagedS3 storage,
@@ -585,12 +609,14 @@ type DatastoreActivity struct {
 	noSmithyDocumentSerde
 }
 
-// Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.
-// You can't change the choice of Amazon S3 storage after your data store is
-// created.
+//	Used to store data used by IoT SiteWise in an Amazon S3 bucket that you
+//
+// manage. You can't change the choice of Amazon S3 storage after your data store
+// is created.
 type DatastoreIotSiteWiseMultiLayerStorage struct {
 
-	// Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.
+	//  Used to store data used by IoT SiteWise in an Amazon S3 bucket that you
+	// manage.
 	//
 	// This member is required.
 	CustomerManagedS3Storage *IotSiteWiseCustomerManagedDatastoreS3Storage
@@ -598,7 +624,8 @@ type DatastoreIotSiteWiseMultiLayerStorage struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the data store that you manage, which stores data
+//	Contains information about the data store that you manage, which stores data
+//
 // used by IoT SiteWise.
 type DatastoreIotSiteWiseMultiLayerStorageSummary struct {
 
@@ -608,14 +635,15 @@ type DatastoreIotSiteWiseMultiLayerStorageSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A single dimension to partition a data store. The dimension must be an
+//	A single dimension to partition a data store. The dimension must be an
+//
 // AttributePartition or a TimestampPartition .
 type DatastorePartition struct {
 
-	// A partition dimension defined by an attributeName .
+	//  A partition dimension defined by an attributeName .
 	AttributePartition *Partition
 
-	// A partition dimension defined by a timestamp attribute.
+	//  A partition dimension defined by a timestamp attribute.
 	TimestampPartition *TimestampPartition
 
 	noSmithyDocumentSerde
@@ -624,7 +652,7 @@ type DatastorePartition struct {
 // Contains information about the partition dimensions in a data store.
 type DatastorePartitions struct {
 
-	// A list of partition dimensions in a data store.
+	//  A list of partition dimensions in a data store.
 	Partitions []DatastorePartition
 
 	noSmithyDocumentSerde
@@ -664,9 +692,10 @@ type DatastoreStorageMemberCustomerManagedS3 struct {
 
 func (*DatastoreStorageMemberCustomerManagedS3) isDatastoreStorage() {}
 
-// Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.
-// You can't change the choice of Amazon S3 storage after your data store is
-// created.
+//	Used to store data used by IoT SiteWise in an Amazon S3 bucket that you
+//
+// manage. You can't change the choice of Amazon S3 storage after your data store
+// is created.
 type DatastoreStorageMemberIotSiteWiseMultiLayerStorage struct {
 	Value DatastoreIotSiteWiseMultiLayerStorage
 
@@ -691,7 +720,8 @@ type DatastoreStorageSummary struct {
 	// Used to store data in an Amazon S3 bucket managed by IoT Analytics.
 	CustomerManagedS3 *CustomerManagedDatastoreS3StorageSummary
 
-	// Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.
+	//  Used to store data used by IoT SiteWise in an Amazon S3 bucket that you
+	// manage.
 	IotSiteWiseMultiLayerStorage *DatastoreIotSiteWiseMultiLayerStorageSummary
 
 	// Used to store data in an Amazon S3 bucket managed by IoT Analytics.
@@ -709,7 +739,7 @@ type DatastoreSummary struct {
 	// The name of the data store.
 	DatastoreName *string
 
-	// Contains information about the partition dimensions in a data store.
+	//  Contains information about the partition dimensions in a data store.
 	DatastorePartitions *DatastorePartitions
 
 	// Where data in a data store is stored.
@@ -718,11 +748,14 @@ type DatastoreSummary struct {
 	// The file format of the data in the data store.
 	FileFormatType FileFormatType
 
-	// The last time when a new message arrived in the data store. IoT Analytics
-	// updates this value at most once per minute for Amazon Simple Storage Service one
-	// data store. Hence, the lastMessageArrivalTime value is an approximation. This
-	// feature only applies to messages that arrived in the data store after October
-	// 23, 2020.
+	// The last time when a new message arrived in the data store.
+	//
+	// IoT Analytics updates this value at most once per minute for Amazon Simple
+	// Storage Service one data store. Hence, the lastMessageArrivalTime value is an
+	// approximation.
+	//
+	// This feature only applies to messages that arrived in the data store after
+	// October 23, 2020.
 	LastMessageArrivalTime *time.Time
 
 	// The last time the data store was updated.
@@ -761,19 +794,25 @@ type DeltaTime struct {
 }
 
 // A structure that contains the configuration information of a delta time session
-// window. DeltaTime (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
-// specifies a time interval. You can use DeltaTime to create dataset contents
-// with data that has arrived in the data store since the last execution. For an
-// example of DeltaTime , see  Creating a SQL dataset with a delta window (CLI) (https://docs.aws.amazon.com/iotanalytics/latest/userguide/automate-create-dataset.html#automate-example6)
-// in the IoT Analytics User Guide.
+// window.
+//
+// [DeltaTime]DeltaTime specifies a time interval. You can use DeltaTime to create dataset
+// contents with data that has arrived in the data store since the last execution.
+// For an example of DeltaTime , see [Creating a SQL dataset with a delta window (CLI)] in the IoT Analytics User Guide.
+//
+// [DeltaTime]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
+// [Creating a SQL dataset with a delta window (CLI)]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/automate-create-dataset.html#automate-example6
 type DeltaTimeSessionWindowConfiguration struct {
 
 	// A time interval. You can use timeoutInMinutes so that IoT Analytics can batch
 	// up late data notifications that have been generated since the last execution.
 	// IoT Analytics sends one batch of notifications to Amazon CloudWatch Events at
-	// one time. For more information about how to write a timestamp expression, see
-	// Date and Time Functions and Operators (https://prestodb.io/docs/0.172/functions/datetime.html)
-	// , in the Presto 0.172 Documentation.
+	// one time.
+	//
+	// For more information about how to write a timestamp expression, see [Date and Time Functions and Operators], in the
+	// Presto 0.172 Documentation.
+	//
+	// [Date and Time Functions and Operators]: https://prestodb.io/docs/0.172/functions/datetime.html
 	//
 	// This member is required.
 	TimeoutInMinutes *int32
@@ -853,9 +892,13 @@ type EstimatedResourceSize struct {
 }
 
 // Contains the configuration information of file formats. IoT Analytics data
-// stores support JSON and Parquet (https://parquet.apache.org/) . The default file
-// format is JSON. You can specify only one format. You can't change the file
-// format after you create the data store.
+// stores support JSON and [Parquet].
+//
+// The default file format is JSON. You can specify only one format.
+//
+// You can't change the file format after you create the data store.
+//
+// [Parquet]: https://parquet.apache.org/
 type FileFormatConfiguration struct {
 
 	// Contains the configuration information of the JSON format.
@@ -924,17 +967,18 @@ type IotEventsDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.
-// You can't change the choice of Amazon S3 storage after your data store is
-// created.
+//	Used to store data used by IoT SiteWise in an Amazon S3 bucket that you
+//
+// manage. You can't change the choice of Amazon S3 storage after your data store
+// is created.
 type IotSiteWiseCustomerManagedDatastoreS3Storage struct {
 
-	// The name of the Amazon S3 bucket where your data is stored.
+	//  The name of the Amazon S3 bucket where your data is stored.
 	//
 	// This member is required.
 	Bucket *string
 
-	// (Optional) The prefix used to create the keys of the data store data objects.
+	//  (Optional) The prefix used to create the keys of the data store data objects.
 	// Each object in an Amazon S3 bucket has a key that is its unique identifier in
 	// the bucket. Each object in a bucket has exactly one key. The prefix must end
 	// with a forward slash (/).
@@ -943,14 +987,15 @@ type IotSiteWiseCustomerManagedDatastoreS3Storage struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the data store that you manage, which stores data
+//	Contains information about the data store that you manage, which stores data
+//
 // used by IoT SiteWise.
 type IotSiteWiseCustomerManagedDatastoreS3StorageSummary struct {
 
-	// The name of the Amazon S3 bucket where your data is stored.
+	//  The name of the Amazon S3 bucket where your data is stored.
 	Bucket *string
 
-	// (Optional) The prefix used to create the keys of the data store data objects.
+	//  (Optional) The prefix used to create the keys of the data store data objects.
 	// Each object in an Amazon S3 bucket has a key that is its unique identifier in
 	// the bucket. Each object in a bucket has exactly one key. The prefix must end
 	// with a forward slash (/).
@@ -967,9 +1012,10 @@ type JsonConfiguration struct {
 // An activity that runs a Lambda function to modify the message.
 type LambdaActivity struct {
 
-	// The number of messages passed to the Lambda function for processing. The Lambda
-	// function must be able to process all of these messages within five minutes,
-	// which is the maximum timeout duration for Lambda functions.
+	// The number of messages passed to the Lambda function for processing.
+	//
+	// The Lambda function must be able to process all of these messages within five
+	// minutes, which is the maximum timeout duration for Lambda functions.
 	//
 	// This member is required.
 	BatchSize *int32
@@ -1104,7 +1150,7 @@ type ParquetConfiguration struct {
 // A partition dimension defined by an attribute.
 type Partition struct {
 
-	// The name of the attribute that defines a partition dimension.
+	//  The name of the attribute that defines a partition dimension.
 	//
 	// This member is required.
 	AttributeName *string
@@ -1278,17 +1324,23 @@ type S3DestinationConfiguration struct {
 	Bucket *string
 
 	// The key of the dataset contents object in an S3 bucket. Each object has a key
-	// that is a unique identifier. Each object has exactly one key. You can create a
-	// unique key with the following options:
+	// that is a unique identifier. Each object has exactly one key.
+	//
+	// You can create a unique key with the following options:
+	//
 	//   - Use !{iotanalytics:scheduleTime} to insert the time of a scheduled SQL query
 	//   run.
+	//
 	//   - Use !{iotanalytics:versionId} to insert a unique hash that identifies a
 	//   dataset content.
+	//
 	//   - Use !{iotanalytics:creationTime} to insert the creation time of a dataset
 	//   content.
+	//
 	// The following example creates a unique key for a CSV file:
-	// dataset/mydataset/!{iotanalytics:scheduleTime}/!{iotanalytics:versionId}.csv If
-	// you don't use !{iotanalytics:versionId} to specify the key, you might get
+	// dataset/mydataset/!{iotanalytics:scheduleTime}/!{iotanalytics:versionId}.csv
+	//
+	// If you don't use !{iotanalytics:versionId} to specify the key, you might get
 	// duplicate keys. For example, you might have two dataset contents with the same
 	// scheduleTime but different versionId s. This means that one dataset content
 	// overwrites the other.
@@ -1313,8 +1365,9 @@ type S3DestinationConfiguration struct {
 type Schedule struct {
 
 	// The expression that defines when to trigger an update. For more information,
-	// see Schedule Expressions for Rules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
-	// in the Amazon CloudWatch Events User Guide.
+	// see [Schedule Expressions for Rules]in the Amazon CloudWatch Events User Guide.
+	//
+	// [Schedule Expressions for Rules]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
 	Expression *string
 
 	noSmithyDocumentSerde
@@ -1323,8 +1376,10 @@ type Schedule struct {
 // Information needed to define a schema.
 type SchemaDefinition struct {
 
-	// Specifies one or more columns that store your data. Each schema can have up to
-	// 100 columns. Each column can have up to 100 nested types.
+	// Specifies one or more columns that store your data.
+	//
+	// Each schema can have up to 100 columns. Each column can have up to 100 nested
+	// types.
 	Columns []Column
 
 	noSmithyDocumentSerde
@@ -1405,12 +1460,12 @@ type Tag struct {
 // A partition dimension defined by a timestamp attribute.
 type TimestampPartition struct {
 
-	// The attribute name of the partition defined by a timestamp.
+	//  The attribute name of the partition defined by a timestamp.
 	//
 	// This member is required.
 	AttributeName *string
 
-	// The timestamp format of a partition defined by a timestamp. The default format
+	//  The timestamp format of a partition defined by a timestamp. The default format
 	// is seconds since epoch (January 1, 1970 at midnight UTC time).
 	TimestampFormat *string
 

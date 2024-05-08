@@ -12,8 +12,9 @@ import (
 )
 
 // Gets the historical values for one or more asset properties. For more
-// information, see Querying historical values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values)
-// in the IoT SiteWise User Guide.
+// information, see [Querying historical values]in the IoT SiteWise User Guide.
+//
+// [Querying historical values]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values
 func (c *Client) BatchGetAssetPropertyValueHistory(ctx context.Context, params *BatchGetAssetPropertyValueHistoryInput, optFns ...func(*Options)) (*BatchGetAssetPropertyValueHistoryOutput, error) {
 	if params == nil {
 		params = &BatchGetAssetPropertyValueHistoryInput{}
@@ -39,7 +40,9 @@ type BatchGetAssetPropertyValueHistoryInput struct {
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 4 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 20000.
 	MaxResults *int32
@@ -204,7 +207,9 @@ var _ BatchGetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 type BatchGetAssetPropertyValueHistoryPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 4 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 20000.
 	Limit int32

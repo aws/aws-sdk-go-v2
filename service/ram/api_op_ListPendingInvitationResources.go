@@ -31,9 +31,10 @@ func (c *Client) ListPendingInvitationResources(ctx context.Context, params *Lis
 
 type ListPendingInvitationResourcesInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the invitation. You can use GetResourceShareInvitations to find the ARN of
-	// the invitation.
+	// Specifies the [Amazon Resource Name (ARN)] of the invitation. You can use GetResourceShareInvitations to find the ARN of the
+	// invitation.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceShareInvitationArn *string
@@ -57,10 +58,14 @@ type ListPendingInvitationResourcesInput struct {
 
 	// Specifies that you want the results to include only resources that have the
 	// specified scope.
+	//
 	//   - ALL – the results include both global and regional resources or resource
 	//   types.
+	//
 	//   - GLOBAL – the results include only global resources or resource types.
+	//
 	//   - REGIONAL – the results include only regional resources or resource types.
+	//
 	// The default value is ALL .
 	ResourceRegionScope types.ResourceRegionScopeFilter
 

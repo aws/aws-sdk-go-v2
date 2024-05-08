@@ -13,12 +13,16 @@ import (
 
 // Lists gateways owned by an Amazon Web Services account in an Amazon Web
 // Services Region specified in the request. The returned list is ordered by
-// gateway Amazon Resource Name (ARN). By default, the operation returns a maximum
-// of 100 gateways. This operation supports pagination that allows you to
-// optionally reduce the number of gateways returned in a response. If you have
-// more gateways than are returned in a response (that is, the response returns
-// only a truncated list of your gateways), the response contains a marker that you
-// can specify in your next request to fetch the next page of gateways.
+// gateway Amazon Resource Name (ARN).
+//
+// By default, the operation returns a maximum of 100 gateways. This operation
+// supports pagination that allows you to optionally reduce the number of gateways
+// returned in a response.
+//
+// If you have more gateways than are returned in a response (that is, the
+// response returns only a truncated list of your gateways), the response contains
+// a marker that you can specify in your next request to fetch the next page of
+// gateways.
 func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, optFns ...func(*Options)) (*ListGatewaysOutput, error) {
 	if params == nil {
 		params = &ListGatewaysInput{}
@@ -35,8 +39,10 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 }
 
 // A JSON object containing zero or more of the following fields:
-//   - ListGatewaysInput$Limit
-//   - ListGatewaysInput$Marker
+//
+// # ListGatewaysInput$Limit
+//
+// ListGatewaysInput$Marker
 type ListGatewaysInput struct {
 
 	// Specifies that the list of gateways returned be limited to the specified number

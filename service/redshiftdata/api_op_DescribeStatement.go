@@ -15,9 +15,12 @@ import (
 // Describes the details about a specific instance when a query was run by the
 // Amazon Redshift Data API. The information includes when the query started, when
 // it finished, the query status, the number of rows returned, and the SQL
-// statement. For more information about the Amazon Redshift Data API and CLI usage
-// examples, see Using the Amazon Redshift Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html)
-// in the Amazon Redshift Management Guide.
+// statement.
+//
+// For more information about the Amazon Redshift Data API and CLI usage examples,
+// see [Using the Amazon Redshift Data API]in the Amazon Redshift Management Guide.
+//
+// [Using the Amazon Redshift Data API]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
 func (c *Client) DescribeStatement(ctx context.Context, params *DescribeStatementInput, optFns ...func(*Options)) (*DescribeStatementOutput, error) {
 	if params == nil {
 		params = &DescribeStatementInput{}
@@ -108,13 +111,20 @@ type DescribeStatementOutput struct {
 
 	// The status of the SQL statement being described. Status values are defined as
 	// follows:
+	//
 	//   - ABORTED - The query run was stopped by the user.
+	//
 	//   - ALL - A status value that includes all query statuses. This value can be
 	//   used to filter results.
+	//
 	//   - FAILED - The query run failed.
+	//
 	//   - FINISHED - The query has finished running.
+	//
 	//   - PICKED - The query has been chosen to be run.
+	//
 	//   - STARTED - The query run has started.
+	//
 	//   - SUBMITTED - The query was submitted, but not yet processed.
 	Status types.StatusString
 

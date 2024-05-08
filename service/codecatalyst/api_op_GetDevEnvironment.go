@@ -32,8 +32,7 @@ func (c *Client) GetDevEnvironment(ctx context.Context, params *GetDevEnvironmen
 type GetDevEnvironmentInput struct {
 
 	// The system-generated unique ID of the Dev Environment for which you want to
-	// view information. To retrieve a list of Dev Environment IDs, use
-	// ListDevEnvironments .
+	// view information. To retrieve a list of Dev Environment IDs, use ListDevEnvironments.
 	//
 	// This member is required.
 	Id *string
@@ -75,8 +74,9 @@ type GetDevEnvironmentOutput struct {
 	InstanceType types.InstanceType
 
 	// The time when the Dev Environment was last updated, in coordinated universal
-	// time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// time (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time

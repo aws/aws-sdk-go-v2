@@ -13,9 +13,10 @@ import (
 
 // Creates a transfer location for a Hadoop Distributed File System (HDFS).
 // DataSync can use this location as a source or destination for transferring data.
-// Before you begin, make sure that you understand how DataSync accesses HDFS
-// clusters (https://docs.aws.amazon.com/datasync/latest/userguide/create-hdfs-location.html#accessing-hdfs)
-// .
+//
+// Before you begin, make sure that you understand how DataSync [accesses HDFS clusters].
+//
+// [accesses HDFS clusters]: https://docs.aws.amazon.com/datasync/latest/userguide/create-hdfs-location.html#accessing-hdfs
 func (c *Client) CreateLocationHdfs(ctx context.Context, params *CreateLocationHdfsInput, optFns ...func(*Options)) (*CreateLocationHdfsOutput, error) {
 	if params == nil {
 		params = &CreateLocationHdfsInput{}
@@ -59,20 +60,23 @@ type CreateLocationHdfsInput struct {
 	// The Kerberos key table (keytab) that contains mappings between the defined
 	// Kerberos principal and the encrypted keys. You can load the keytab from a file
 	// by providing the file's address. If you're using the CLI, it performs base64
-	// encoding for you. Otherwise, provide the base64-encoded text. If KERBEROS is
-	// specified for AuthenticationType , this parameter is required.
+	// encoding for you. Otherwise, provide the base64-encoded text.
+	//
+	// If KERBEROS is specified for AuthenticationType , this parameter is required.
 	KerberosKeytab []byte
 
 	// The krb5.conf file that contains the Kerberos configuration information. You
 	// can load the krb5.conf file by providing the file's address. If you're using
 	// the CLI, it performs the base64 encoding for you. Otherwise, provide the
-	// base64-encoded text. If KERBEROS is specified for AuthenticationType , this
-	// parameter is required.
+	// base64-encoded text.
+	//
+	// If KERBEROS is specified for AuthenticationType , this parameter is required.
 	KerberosKrb5Conf []byte
 
 	// The Kerberos principal with access to the files and folders on the HDFS
-	// cluster. If KERBEROS is specified for AuthenticationType , this parameter is
-	// required.
+	// cluster.
+	//
+	// If KERBEROS is specified for AuthenticationType , this parameter is required.
 	KerberosPrincipal *string
 
 	// The URI of the HDFS cluster's Key Management Server (KMS).
@@ -90,8 +94,9 @@ type CreateLocationHdfsInput struct {
 	// cluster. By default, data is replicated to three DataNodes.
 	ReplicationFactor *int32
 
-	// The user name used to identify the client on the host operating system. If
-	// SIMPLE is specified for AuthenticationType , this parameter is required.
+	// The user name used to identify the client on the host operating system.
+	//
+	// If SIMPLE is specified for AuthenticationType , this parameter is required.
 	SimpleUser *string
 
 	// A subdirectory in the HDFS cluster. This subdirectory is used to read data from

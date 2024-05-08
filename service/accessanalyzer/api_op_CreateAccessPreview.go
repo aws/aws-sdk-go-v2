@@ -30,9 +30,10 @@ func (c *Client) CreateAccessPreview(ctx context.Context, params *CreateAccessPr
 
 type CreateAccessPreviewInput struct {
 
-	// The ARN of the account analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
-	// used to generate the access preview. You can only create an access preview for
-	// analyzers with an Account type and Active status.
+	// The [ARN of the account analyzer] used to generate the access preview. You can only create an access preview
+	// for analyzers with an Account type and Active status.
+	//
+	// [ARN of the account analyzer]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
 	//
 	// This member is required.
 	AnalyzerArn *string

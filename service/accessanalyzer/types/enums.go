@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AccessCheckPolicyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessCheckPolicyType) Values() []AccessCheckPolicyType {
 	return []AccessCheckPolicyType{
 		"IDENTITY_POLICY",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for AccessPreviewStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessPreviewStatus) Values() []AccessPreviewStatus {
 	return []AccessPreviewStatus{
 		"COMPLETED",
@@ -50,8 +52,9 @@ const (
 
 // Values returns all known values for AccessPreviewStatusReasonCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessPreviewStatusReasonCode) Values() []AccessPreviewStatusReasonCode {
 	return []AccessPreviewStatusReasonCode{
 		"INTERNAL_ERROR",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for AclPermission. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AclPermission) Values() []AclPermission {
 	return []AclPermission{
 		"READ",
@@ -94,8 +98,9 @@ const (
 )
 
 // Values returns all known values for AnalyzerStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalyzerStatus) Values() []AnalyzerStatus {
 	return []AnalyzerStatus{
 		"ACTIVE",
@@ -115,6 +120,7 @@ const (
 
 // Values returns all known values for CheckAccessNotGrantedResult. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckAccessNotGrantedResult) Values() []CheckAccessNotGrantedResult {
 	return []CheckAccessNotGrantedResult{
@@ -132,8 +138,9 @@ const (
 )
 
 // Values returns all known values for CheckNoNewAccessResult. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckNoNewAccessResult) Values() []CheckNoNewAccessResult {
 	return []CheckNoNewAccessResult{
 		"PASS",
@@ -151,8 +158,9 @@ const (
 )
 
 // Values returns all known values for FindingChangeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingChangeType) Values() []FindingChangeType {
 	return []FindingChangeType{
 		"CHANGED",
@@ -172,8 +180,9 @@ const (
 )
 
 // Values returns all known values for FindingSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingSourceType) Values() []FindingSourceType {
 	return []FindingSourceType{
 		"POLICY",
@@ -193,8 +202,9 @@ const (
 )
 
 // Values returns all known values for FindingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingStatus) Values() []FindingStatus {
 	return []FindingStatus{
 		"ACTIVE",
@@ -212,8 +222,9 @@ const (
 )
 
 // Values returns all known values for FindingStatusUpdate. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingStatusUpdate) Values() []FindingStatusUpdate {
 	return []FindingStatusUpdate{
 		"ACTIVE",
@@ -233,8 +244,9 @@ const (
 )
 
 // Values returns all known values for FindingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingType) Values() []FindingType {
 	return []FindingType{
 		"ExternalAccess",
@@ -256,8 +268,9 @@ const (
 )
 
 // Values returns all known values for JobErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobErrorCode) Values() []JobErrorCode {
 	return []JobErrorCode{
 		"AUTHORIZATION_ERROR",
@@ -278,8 +291,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"IN_PROGRESS",
@@ -310,8 +324,9 @@ const (
 )
 
 // Values returns all known values for KmsGrantOperation. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KmsGrantOperation) Values() []KmsGrantOperation {
 	return []KmsGrantOperation{
 		"CreateGrant",
@@ -348,8 +363,9 @@ const (
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Locale) Values() []Locale {
 	return []Locale{
 		"DE",
@@ -374,8 +390,9 @@ const (
 )
 
 // Values returns all known values for OrderBy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderBy) Values() []OrderBy {
 	return []OrderBy{
 		"ASC",
@@ -393,8 +410,9 @@ const (
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"IDENTITY_POLICY",
@@ -414,8 +432,9 @@ const (
 )
 
 // Values returns all known values for ReasonCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReasonCode) Values() []ReasonCode {
 	return []ReasonCode{
 		"AWS_SERVICE_ACCESS_DISABLED",
@@ -448,8 +467,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"AWS::S3::Bucket",
@@ -482,8 +502,9 @@ const (
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
 		"ACCOUNT",
@@ -505,6 +526,7 @@ const (
 
 // Values returns all known values for ValidatePolicyFindingType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidatePolicyFindingType) Values() []ValidatePolicyFindingType {
 	return []ValidatePolicyFindingType{
@@ -529,6 +551,7 @@ const (
 
 // Values returns all known values for ValidatePolicyResourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidatePolicyResourceType) Values() []ValidatePolicyResourceType {
 	return []ValidatePolicyResourceType{
@@ -553,6 +576,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

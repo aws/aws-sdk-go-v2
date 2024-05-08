@@ -32,12 +32,12 @@ func (c *Client) GetDeploymentInstance(ctx context.Context, params *GetDeploymen
 // Represents the input of a GetDeploymentInstance operation.
 type GetDeploymentInstanceInput struct {
 
-	// The unique ID of a deployment.
+	//  The unique ID of a deployment.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// The unique ID of an instance in the deployment group.
+	//  The unique ID of an instance in the deployment group.
 	//
 	// This member is required.
 	InstanceId *string
@@ -48,7 +48,7 @@ type GetDeploymentInstanceInput struct {
 // Represents the output of a GetDeploymentInstance operation.
 type GetDeploymentInstanceOutput struct {
 
-	// Information about the instance.
+	//  Information about the instance.
 	//
 	// Deprecated: InstanceSummary is deprecated, use DeploymentTarget instead.
 	InstanceSummary *types.InstanceSummary

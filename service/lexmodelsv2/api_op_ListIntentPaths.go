@@ -14,8 +14,10 @@ import (
 
 // Retrieves summary statistics for a path of intents that users take over
 // sessions with your bot. The following fields are required:
+//
 //   - startDateTime and endDateTime – Define a time range for which you want to
 //     retrieve results.
+//
 //   - intentPath – Define an order of intents for which you want to retrieve
 //     metrics. Separate intents in the path with a forward slash. For example,
 //     populate the intentPath field with /BookCar/BookHotel to see details about how
@@ -52,8 +54,11 @@ type ListIntentPathsInput struct {
 
 	// The intent path for which you want to retrieve metrics. Use a forward slash to
 	// separate intents in the path. For example:
+	//
 	//   - /BookCar
+	//
 	//   - /BookCar/BookHotel
+	//
 	//   - /BookHotel/BookCar
 	//
 	// This member is required.

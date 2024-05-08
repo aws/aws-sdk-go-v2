@@ -11,9 +11,10 @@ import (
 )
 
 // Creates a Grafana API key for the workspace. This key can be used to
-// authenticate requests sent to the workspace's HTTP API. See
-// https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html (https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html)
-// for available APIs and example requests.
+// authenticate requests sent to the workspace's HTTP API. See [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html]for available APIs
+// and example requests.
+//
+// [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html]: https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
 func (c *Client) CreateWorkspaceApiKey(ctx context.Context, params *CreateWorkspaceApiKeyInput, optFns ...func(*Options)) (*CreateWorkspaceApiKeyOutput, error) {
 	if params == nil {
 		params = &CreateWorkspaceApiKeyInput{}
@@ -36,7 +37,9 @@ type CreateWorkspaceApiKeyInput struct {
 	// This member is required.
 	KeyName *string
 
-	// Specifies the permission level of the key. Valid values: VIEWER | EDITOR | ADMIN
+	// Specifies the permission level of the key.
+	//
+	// Valid values: VIEWER | EDITOR | ADMIN
 	//
 	// This member is required.
 	KeyRole *string

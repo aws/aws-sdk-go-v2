@@ -11,8 +11,9 @@ import (
 )
 
 // Removes one or more tags from an OpenSearch Ingestion pipeline. For more
-// information, see Tagging Amazon OpenSearch Ingestion pipelines (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html)
-// .
+// information, see [Tagging Amazon OpenSearch Ingestion pipelines].
+//
+// [Tagging Amazon OpenSearch Ingestion pipelines]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

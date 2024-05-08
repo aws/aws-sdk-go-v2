@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListHITsForQualificationType operation returns the HITs that use the given
+//	The ListHITsForQualificationType operation returns the HITs that use the given
+//
 // Qualification type for a Qualification requirement. The operation returns HITs
 // of any status, except for HITs that have been deleted with the DeleteHIT
 // operation or that have been auto-deleted.
@@ -32,12 +33,12 @@ func (c *Client) ListHITsForQualificationType(ctx context.Context, params *ListH
 
 type ListHITsForQualificationTypeInput struct {
 
-	// The ID of the Qualification type to use when querying HITs.
+	//  The ID of the Qualification type to use when querying HITs.
 	//
 	// This member is required.
 	QualificationTypeId *string
 
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	MaxResults *int32
 
 	// Pagination Token
@@ -48,7 +49,7 @@ type ListHITsForQualificationTypeInput struct {
 
 type ListHITsForQualificationTypeOutput struct {
 
-	// The list of HIT elements returned by the query.
+	//  The list of HIT elements returned by the query.
 	HITs []types.HIT
 
 	// If the previous response was incomplete (because there is more data to
@@ -56,8 +57,8 @@ type ListHITsForQualificationTypeOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of HITs on this page in the filtered results list, equivalent to the
-	// number of HITs being returned by this call.
+	//  The number of HITs on this page in the filtered results list, equivalent to
+	// the number of HITs being returned by this call.
 	NumResults *int32
 
 	// Metadata pertaining to the operation's result.
@@ -156,7 +157,7 @@ var _ ListHITsForQualificationTypeAPIClient = (*Client)(nil)
 // ListHITsForQualificationTypePaginatorOptions is the paginator options for
 // ListHITsForQualificationType
 type ListHITsForQualificationTypePaginatorOptions struct {
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

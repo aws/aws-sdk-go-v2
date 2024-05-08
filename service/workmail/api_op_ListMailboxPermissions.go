@@ -31,11 +31,15 @@ func (c *Client) ListMailboxPermissions(ctx context.Context, params *ListMailbox
 type ListMailboxPermissionsInput struct {
 
 	// The identifier of the user, or resource for which to list mailbox permissions.
+	//
 	// The entity ID can accept UserId or ResourceId, Username or Resourcename, or
 	// email.
+	//
 	//   - Entity ID: 12345678-1234-1234-1234-123456789012, or
 	//   r-0123456789a0123456789b0123456789
+	//
 	//   - Email address: entity@domain.tld
+	//
 	//   - Entity name: entity
 	//
 	// This member is required.

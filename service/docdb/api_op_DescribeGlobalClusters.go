@@ -12,7 +12,9 @@ import (
 )
 
 // Returns information about Amazon DocumentDB global clusters. This API supports
-// pagination. This action only applies to Amazon DocumentDB clusters.
+// pagination.
+//
+// This action only applies to Amazon DocumentDB clusters.
 func (c *Client) DescribeGlobalClusters(ctx context.Context, params *DescribeGlobalClustersInput, optFns ...func(*Options)) (*DescribeGlobalClustersOutput, error) {
 	if params == nil {
 		params = &DescribeGlobalClustersInput{}
@@ -30,10 +32,11 @@ func (c *Client) DescribeGlobalClusters(ctx context.Context, params *DescribeGlo
 
 type DescribeGlobalClustersInput struct {
 
-	// A filter that specifies one or more global DB clusters to describe. Supported
-	// filters: db-cluster-id accepts cluster identifiers and cluster Amazon Resource
-	// Names (ARNs). The results list will only include information about the clusters
-	// identified by these ARNs.
+	// A filter that specifies one or more global DB clusters to describe.
+	//
+	// Supported filters: db-cluster-id accepts cluster identifiers and cluster Amazon
+	// Resource Names (ARNs). The results list will only include information about the
+	// clusters identified by these ARNs.
 	Filters []types.Filter
 
 	// The user-supplied cluster identifier. If this parameter is specified,

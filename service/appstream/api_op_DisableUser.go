@@ -35,7 +35,9 @@ type DisableUserInput struct {
 	// This member is required.
 	AuthenticationType types.AuthenticationType
 
-	// The email address of the user. Users' email addresses are case-sensitive.
+	// The email address of the user.
+	//
+	// Users' email addresses are case-sensitive.
 	//
 	// This member is required.
 	UserName *string

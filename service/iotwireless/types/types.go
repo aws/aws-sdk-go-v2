@@ -333,7 +333,7 @@ type DownlinkQueueMessage struct {
 	// LoRaWAN router info.
 	LoRaWAN *LoRaWANSendDataToDevice
 
-	// The message ID assigned by IoT Wireless to each downlink message, which helps
+	//  The message ID assigned by IoT Wireless to each downlink message, which helps
 	// identify the message.
 	MessageId *string
 
@@ -2116,10 +2116,11 @@ type WiFiAccessPoint struct {
 }
 
 // The log options for a wireless device event and can be used to set log levels
-// for a specific wireless device event. For a LoRaWAN device, possible events for
-// a log messsage are: Join , Rejoin , Downlink_Data , and Uplink_Data . For a
-// Sidewalk device, possible events for a log message are Registration ,
-// Downlink_Data , and Uplink_Data .
+// for a specific wireless device event.
+//
+// For a LoRaWAN device, possible events for a log messsage are: Join , Rejoin ,
+// Downlink_Data , and Uplink_Data . For a Sidewalk device, possible events for a
+// log message are Registration , Downlink_Data , and Uplink_Data .
 type WirelessDeviceEventLogOption struct {
 
 	// The event for a log message, if the log message is tied to a wireless device.
@@ -2219,8 +2220,9 @@ type WirelessDeviceStatistics struct {
 	// The ID of the wireless device reporting the data.
 	Id *string
 
-	// The date and time when the most recent uplink was received. Theis value is only
-	// valid for 3 months.
+	// The date and time when the most recent uplink was received.
+	//
+	// Theis value is only valid for 3 months.
 	LastUplinkReceivedAt *string
 
 	// LoRaWAN device info.
@@ -2245,8 +2247,10 @@ type WirelessDeviceStatistics struct {
 }
 
 // The log options for a wireless gateway event and can be used to set log levels
-// for a specific wireless gateway event. For a LoRaWAN gateway, possible events
-// for a log message are CUPS_Request and Certificate .
+// for a specific wireless gateway event.
+//
+// For a LoRaWAN gateway, possible events for a log message are CUPS_Request and
+// Certificate .
 type WirelessGatewayEventLogOption struct {
 
 	// The event for a log message, if the log message is tied to a wireless gateway.
@@ -2298,8 +2302,9 @@ type WirelessGatewayStatistics struct {
 	// The ID of the wireless gateway reporting the data.
 	Id *string
 
-	// The date and time when the most recent uplink was received. This value is only
-	// valid for 3 months.
+	// The date and time when the most recent uplink was received.
+	//
+	// This value is only valid for 3 months.
 	LastUplinkReceivedAt *string
 
 	// LoRaWAN gateway info.

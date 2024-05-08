@@ -44,10 +44,14 @@ type GetQueryStateInput struct {
 type GetQueryStateOutput struct {
 
 	// The state of a query previously submitted. The possible states are:
+	//
 	//   - PENDING: the query is pending.
+	//
 	//   - WORKUNITS_AVAILABLE: some work units are ready for retrieval and execution.
+	//
 	//   - FINISHED: the query planning finished successfully, and all work units are
 	//   ready for retrieval and execution.
+	//
 	//   - ERROR: an error occurred with the query, such as an invalid query ID or a
 	//   backend error.
 	//

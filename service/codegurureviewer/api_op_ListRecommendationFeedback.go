@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of RecommendationFeedbackSummary (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html)
-// objects that contain customer recommendation feedback for all CodeGuru Reviewer
-// users.
+// Returns a list of [RecommendationFeedbackSummary] objects that contain customer recommendation feedback for
+// all CodeGuru Reviewer users.
+//
+// [RecommendationFeedbackSummary]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html
 func (c *Client) ListRecommendationFeedback(ctx context.Context, params *ListRecommendationFeedbackInput, optFns ...func(*Options)) (*ListRecommendationFeedbackOutput, error) {
 	if params == nil {
 		params = &ListRecommendationFeedbackInput{}
@@ -31,8 +32,9 @@ func (c *Client) ListRecommendationFeedback(ctx context.Context, params *ListRec
 
 type ListRecommendationFeedbackInput struct {
 
-	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
-	// object.
+	// The Amazon Resource Name (ARN) of the [CodeReview] object.
+	//
+	// [CodeReview]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
 	//
 	// This member is required.
 	CodeReviewArn *string
@@ -51,10 +53,12 @@ type ListRecommendationFeedbackInput struct {
 
 	// An Amazon Web Services user's account ID or Amazon Resource Name (ARN). Use
 	// this ID to query the recommendation feedback for a code review from that user.
+	//
 	// The UserId is an IAM principal that can be specified as an Amazon Web Services
-	// account ID or an Amazon Resource Name (ARN). For more information, see
-	// Specifying a Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
-	// in the Amazon Web Services Identity and Access Management User Guide.
+	// account ID or an Amazon Resource Name (ARN). For more information, see [Specifying a Principal]in the
+	// Amazon Web Services Identity and Access Management User Guide.
+	//
+	// [Specifying a Principal]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
 	UserIds []string
 
 	noSmithyDocumentSerde

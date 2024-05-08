@@ -35,7 +35,9 @@ type UpdateServiceInput struct {
 	ServiceIdentifier *string
 
 	// The type of IAM policy.
+	//
 	//   - NONE : The resource does not use an IAM policy. This is the default.
+	//
 	//   - AWS_IAM : The resource uses an IAM policy. When this type is used, auth is
 	//   enabled and an auth policy is required.
 	AuthType types.AuthType

@@ -29,14 +29,18 @@ func (c *Client) RestartAppServer(ctx context.Context, params *RestartAppServerI
 
 type RestartAppServerInput struct {
 
-	// The ID of the environment to restart the server for. Condition: You must
-	// specify either this or an EnvironmentName, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	// The ID of the environment to restart the server for.
+	//
+	// Condition: You must specify either this or an EnvironmentName, or both. If you
+	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentId *string
 
-	// The name of the environment to restart the server for. Condition: You must
-	// specify either this or an EnvironmentId, or both. If you do not specify either,
-	// AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	// The name of the environment to restart the server for.
+	//
+	// Condition: You must specify either this or an EnvironmentId, or both. If you do
+	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde

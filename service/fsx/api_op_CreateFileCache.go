@@ -11,22 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon File Cache resource. You can use this operation with a
-// client request token in the request that Amazon File Cache uses to ensure
-// idempotent creation. If a cache with the specified client request token exists
-// and the parameters match, CreateFileCache returns the description of the
-// existing cache. If a cache with the specified client request token exists and
-// the parameters don't match, this call returns IncompatibleParameterError . If a
-// file cache with the specified client request token doesn't exist,
-// CreateFileCache does the following:
+// Creates a new Amazon File Cache resource.
+//
+// You can use this operation with a client request token in the request that
+// Amazon File Cache uses to ensure idempotent creation. If a cache with the
+// specified client request token exists and the parameters match, CreateFileCache
+// returns the description of the existing cache. If a cache with the specified
+// client request token exists and the parameters don't match, this call returns
+// IncompatibleParameterError . If a file cache with the specified client request
+// token doesn't exist, CreateFileCache does the following:
+//
 //   - Creates a new, empty Amazon File Cache resourcewith an assigned ID, and an
 //     initial lifecycle state of CREATING .
+//
 //   - Returns the description of the cache in JSON format.
 //
 // The CreateFileCache call returns while the cache's lifecycle state is still
-// CREATING . You can check the cache creation status by calling the
-// DescribeFileCaches (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html)
-// operation, which returns the cache state along with other information.
+// CREATING . You can check the cache creation status by calling the [DescribeFileCaches] operation,
+// which returns the cache state along with other information.
+//
+// [DescribeFileCaches]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileCaches.html
 func (c *Client) CreateFileCache(ctx context.Context, params *CreateFileCacheInput, optFns ...func(*Options)) (*CreateFileCacheOutput, error) {
 	if params == nil {
 		params = &CreateFileCacheInput{}
@@ -68,13 +72,14 @@ type CreateFileCacheInput struct {
 
 	// An idempotency token for resource creation, in a string of up to 63 ASCII
 	// characters. This token is automatically filled on your behalf when you use the
-	// Command Line Interface (CLI) or an Amazon Web Services SDK. By using the
-	// idempotent operation, you can retry a CreateFileCache operation without the
-	// risk of creating an extra cache. This approach can be useful when an initial
-	// call fails in a way that makes it unclear whether a cache was created. Examples
-	// are if a transport level timeout occurred, or your connection was reset. If you
-	// use the same client request token and the initial call created a cache, the
-	// client receives success as long as the parameters are the same.
+	// Command Line Interface (CLI) or an Amazon Web Services SDK.
+	//
+	// By using the idempotent operation, you can retry a CreateFileCache operation
+	// without the risk of creating an extra cache. This approach can be useful when an
+	// initial call fails in a way that makes it unclear whether a cache was created.
+	// Examples are if a transport level timeout occurred, or your connection was
+	// reset. If you use the same client request token and the initial call created a
+	// cache, the client receives success as long as the parameters are the same.
 	ClientRequestToken *string
 
 	// A boolean flag indicating whether tags for the cache should be copied to data
@@ -84,20 +89,25 @@ type CreateFileCacheInput struct {
 	// A list of up to 8 configurations for data repository associations (DRAs) to be
 	// created during the cache creation. The DRAs link the cache to either an Amazon
 	// S3 data repository or a Network File System (NFS) data repository that supports
-	// the NFSv3 protocol. The DRA configurations must meet the following requirements:
+	// the NFSv3 protocol.
+	//
+	// The DRA configurations must meet the following requirements:
 	//
 	//   - All configurations on the list must be of the same data repository type,
 	//   either all S3 or all NFS. A cache can't link to different data repository types
 	//   at the same time.
-	//   - An NFS DRA must link to an NFS file system that supports the NFSv3
-	//   protocol.
+	//
+	//   - An NFS DRA must link to an NFS file system that supports the NFSv3 protocol.
+	//
 	// DRA automatic import and automatic export is not supported.
 	DataRepositoryAssociations []types.FileCacheDataRepositoryAssociation
 
 	// Specifies the ID of the Key Management Service (KMS) key to use for encrypting
 	// data on an Amazon File Cache. If a KmsKeyId isn't specified, the Amazon
-	// FSx-managed KMS key for your account is used. For more information, see Encrypt (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html)
-	// in the Key Management Service API Reference.
+	// FSx-managed KMS key for your account is used. For more information, see [Encrypt]in the
+	// Key Management Service API Reference.
+	//
+	// [Encrypt]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
 	KmsKeyId *string
 
 	// The configuration for the Amazon File Cache resource being created.

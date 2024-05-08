@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the details of a transaction. This action will return transaction details
-// for all transactions that are confirmed on the blockchain, even if they have not
-// reached finality (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
-// .
+// Gets the details of a transaction.
+//
+// This action will return transaction details for all transactions that are
+// confirmed on the blockchain, even if they have not reached [finality].
+//
+// [finality]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
 func (c *Client) GetTransaction(ctx context.Context, params *GetTransactionInput, optFns ...func(*Options)) (*GetTransactionOutput, error) {
 	if params == nil {
 		params = &GetTransactionInput{}
@@ -41,7 +43,9 @@ type GetTransactionInput struct {
 	TransactionHash *string
 
 	// The identifier of a Bitcoin transaction. It is generated when a transaction is
-	// created. transactionId is only supported on the Bitcoin networks.
+	// created.
+	//
+	// transactionId is only supported on the Bitcoin networks.
 	TransactionId *string
 
 	noSmithyDocumentSerde

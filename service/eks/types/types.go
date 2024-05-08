@@ -22,8 +22,10 @@ type AccessConfigResponse struct {
 
 // An access entry allows an IAM principal (user or role) to access your cluster.
 // Access entries can replace the need to maintain the aws-auth ConfigMap for
-// authentication. For more information about access entries, see Access entries (https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html)
-// in the Amazon EKS User Guide.
+// authentication. For more information about access entries, see [Access entries]in the Amazon
+// EKS User Guide.
+//
+// [Access entries]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html
 type AccessEntry struct {
 
 	// The ARN of the access entry.
@@ -74,11 +76,12 @@ type AccessEntry struct {
 // managed by Amazon EKS, but they're not IAM policies. You can't view the
 // permissions in the policies using the API. The permissions for many of the
 // policies are similar to the Kubernetes cluster-admin , admin , edit , and view
-// cluster roles. For more information about these cluster roles, see User-facing
-// roles (https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles)
-// in the Kubernetes documentation. To view the contents of the policies, see
-// Access policy permissions (https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html#access-policy-permissions)
-// in the Amazon EKS User Guide.
+// cluster roles. For more information about these cluster roles, see [User-facing roles]in the
+// Kubernetes documentation. To view the contents of the policies, see [Access policy permissions]in the
+// Amazon EKS User Guide.
+//
+// [User-facing roles]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
+// [Access policy permissions]: https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html#access-policy-permissions
 type AccessPolicy struct {
 
 	// The ARN of the access policy.
@@ -103,8 +106,9 @@ type AccessScope struct {
 	noSmithyDocumentSerde
 }
 
-// An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
-// in the Amazon EKS User Guide.
+// An Amazon EKS add-on. For more information, see [Amazon EKS add-ons] in the Amazon EKS User Guide.
+//
+// [Amazon EKS add-ons]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
 type Addon struct {
 
 	// The Amazon Resource Name (ARN) of the add-on.
@@ -332,17 +336,20 @@ type Cluster struct {
 	OutpostConfig *OutpostConfigResponse
 
 	// The platform version of your Amazon EKS cluster. For more information about
-	// clusters deployed on the Amazon Web Services Cloud, see Platform versions (https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html)
-	// in the Amazon EKS User Guide . For more information about local clusters
-	// deployed on an Outpost, see Amazon EKS local cluster platform versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-platform-versions.html)
+	// clusters deployed on the Amazon Web Services Cloud, see [Platform versions]in the Amazon EKS User
+	// Guide . For more information about local clusters deployed on an Outpost, see [Amazon EKS local cluster platform versions]
 	// in the Amazon EKS User Guide .
+	//
+	// [Platform versions]: https://docs.aws.amazon.com/eks/latest/userguide/platform-versions.html
+	// [Amazon EKS local cluster platform versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-platform-versions.html
 	PlatformVersion *string
 
 	// The VPC configuration used by the cluster control plane. Amazon EKS VPC
 	// resources have specific requirements to work properly with Kubernetes. For more
-	// information, see Cluster VPC considerations (https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html)
-	// and Cluster security group considerations (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
-	// in the Amazon EKS User Guide.
+	// information, see [Cluster VPC considerations]and [Cluster security group considerations] in the Amazon EKS User Guide.
+	//
+	// [Cluster security group considerations]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+	// [Cluster VPC considerations]: https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html
 	ResourcesVpcConfig *VpcConfigResponse
 
 	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
@@ -449,9 +456,10 @@ type ConnectorConfigResponse struct {
 }
 
 // The placement configuration for all the control plane instances of your local
-// Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see
-// Capacity considerations (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
+// Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see [Capacity considerations]
 // in the Amazon EKS User Guide.
+//
+// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 type ControlPlanePlacementRequest struct {
 
 	// The name of the placement group for the Kubernetes control plane instances.
@@ -462,9 +470,10 @@ type ControlPlanePlacementRequest struct {
 }
 
 // The placement configuration for all the control plane instances of your local
-// Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see
-// Capacity considerations (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
+// Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see [Capacity considerations]
 // in the Amazon EKS User Guide.
+//
+// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 type ControlPlanePlacementResponse struct {
 
 	// The name of the placement group for the Kubernetes control plane instances.
@@ -595,18 +604,24 @@ type EncryptionConfig struct {
 type ErrorDetail struct {
 
 	// A brief description of the error.
+	//
 	//   - SubnetNotFound: We couldn't find one of the subnets associated with the
 	//   cluster.
+	//
 	//   - SecurityGroupNotFound: We couldn't find one of the security groups
 	//   associated with the cluster.
+	//
 	//   - EniLimitReached: You have reached the elastic network interface limit for
 	//   your account.
+	//
 	//   - IpNotAvailable: A subnet associated with the cluster doesn't have any
 	//   available IP addresses.
-	//   - AccessDenied: You don't have permissions to perform the specified
-	//   operation.
+	//
+	//   - AccessDenied: You don't have permissions to perform the specified operation.
+	//
 	//   - OperationNotPermitted: The service role associated with the cluster doesn't
 	//   have the required access permissions for Amazon EKS.
+	//
 	//   - VpcIdNotFound: We couldn't find the VPC associated with the cluster.
 	ErrorCode ErrorCode
 
@@ -635,9 +650,10 @@ type FargateProfile struct {
 	FargateProfileName *string
 
 	// The Amazon Resource Name (ARN) of the Pod execution role to use for any Pod
-	// that matches the selectors in the Fargate profile. For more information, see Pod
-	// execution role (https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html)
+	// that matches the selectors in the Fargate profile. For more information, see [Pod execution role]Pod
 	// in the Amazon EKS User Guide.
+	//
+	// [Pod execution role]: https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html
 	PodExecutionRoleArn *string
 
 	// The selectors to match for a Pod to use this Fargate profile.
@@ -673,8 +689,9 @@ type FargateProfileSelector struct {
 // An object representing an identity provider.
 type Identity struct {
 
-	// An object representing the OpenID Connect (https://openid.net/connect/)
-	// identity provider information.
+	// An object representing the [OpenID Connect] identity provider information.
+	//
+	// [OpenID Connect]: https://openid.net/connect/
 	Oidc *OIDC
 
 	noSmithyDocumentSerde
@@ -841,51 +858,67 @@ type InsightSummary struct {
 type Issue struct {
 
 	// A brief description of the error.
+	//
 	//   - AccessDenied: Amazon EKS or one or more of your managed nodes is failing to
 	//   authenticate or authorize with your Kubernetes cluster API server.
+	//
 	//   - AsgInstanceLaunchFailures: Your Auto Scaling group is experiencing failures
 	//   while attempting to launch instances.
+	//
 	//   - AutoScalingGroupNotFound: We couldn't find the Auto Scaling group
 	//   associated with the managed node group. You may be able to recreate an Auto
 	//   Scaling group with the same settings to recover.
+	//
 	//   - ClusterUnreachable: Amazon EKS or one or more of your managed nodes is
 	//   unable to to communicate with your Kubernetes cluster API server. This can
 	//   happen if there are network disruptions or if API servers are timing out
 	//   processing requests.
+	//
 	//   - Ec2LaunchTemplateNotFound: We couldn't find the Amazon EC2 launch template
 	//   for your managed node group. You may be able to recreate a launch template with
 	//   the same settings to recover.
+	//
 	//   - Ec2LaunchTemplateVersionMismatch: The Amazon EC2 launch template version
 	//   for your managed node group does not match the version that Amazon EKS created.
 	//   You may be able to revert to the version that Amazon EKS created to recover.
+	//
 	//   - Ec2SecurityGroupDeletionFailure: We could not delete the remote access
 	//   security group for your managed node group. Remove any dependencies from the
 	//   security group.
+	//
 	//   - Ec2SecurityGroupNotFound: We couldn't find the cluster security group for
 	//   the cluster. You must recreate your cluster.
+	//
 	//   - Ec2SubnetInvalidConfiguration: One or more Amazon EC2 subnets specified for
 	//   a node group do not automatically assign public IP addresses to instances
 	//   launched into it. If you want your instances to be assigned a public IP address,
 	//   then you need to enable the auto-assign public IP address setting for the
-	//   subnet. See Modifying the public IPv4 addressing attribute for your subnet (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip)
-	//   in the Amazon VPC User Guide.
+	//   subnet. See [Modifying the public IPv4 addressing attribute for your subnet]IPv4 in the Amazon VPC User Guide.
+	//
 	//   - IamInstanceProfileNotFound: We couldn't find the IAM instance profile for
 	//   your managed node group. You may be able to recreate an instance profile with
 	//   the same settings to recover.
+	//
 	//   - IamNodeRoleNotFound: We couldn't find the IAM role for your managed node
 	//   group. You may be able to recreate an IAM role with the same settings to
 	//   recover.
+	//
 	//   - InstanceLimitExceeded: Your Amazon Web Services account is unable to launch
 	//   any more instances of the specified instance type. You may be able to request an
 	//   Amazon EC2 instance limit increase to recover.
+	//
 	//   - InsufficientFreeAddresses: One or more of the subnets associated with your
 	//   managed node group does not have enough available IP addresses for new nodes.
+	//
 	//   - InternalFailure: These errors are usually caused by an Amazon EKS
 	//   server-side issue.
+	//
 	//   - NodeCreationFailure: Your launched instances are unable to register with
-	//   your Amazon EKS cluster. Common causes of this failure are insufficient node
-	//   IAM role (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
+	//   your Amazon EKS cluster. Common causes of this failure are insufficient [node IAM role]
 	//   permissions or lack of outbound internet access for the nodes.
+	//
+	// [Modifying the public IPv4 addressing attribute for your subnet]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
+	// [node IAM role]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
 	Code NodegroupIssueCode
 
 	// The error message associated with the issue.
@@ -905,14 +938,16 @@ type KubernetesNetworkConfigRequest struct {
 	// specify an IP family when you create a cluster and can't change this value once
 	// the cluster is created. If you specify ipv6 , the VPC and subnets that you
 	// specify for cluster creation must have both IPv4 and IPv6 CIDR blocks assigned
-	// to them. You can't specify ipv6 for clusters in China Regions. You can only
-	// specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of
-	// the Amazon VPC CNI add-on. If you specify ipv6 , then ensure that your VPC meets
-	// the requirements listed in the considerations listed in Assigning IPv6
-	// addresses to pods and services (https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html)
-	// in the Amazon EKS User Guide. Kubernetes assigns services IPv6 addresses from
-	// the unique local address range (fc00::/7) . You can't specify a custom IPv6
-	// CIDR block. Pod addresses are assigned from the subnet's IPv6 CIDR.
+	// to them. You can't specify ipv6 for clusters in China Regions.
+	//
+	// You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1
+	// or later of the Amazon VPC CNI add-on. If you specify ipv6 , then ensure that
+	// your VPC meets the requirements listed in the considerations listed in [Assigning IPv6 addresses to pods and services]in the
+	// Amazon EKS User Guide. Kubernetes assigns services IPv6 addresses from the
+	// unique local address range (fc00::/7) . You can't specify a custom IPv6 CIDR
+	// block. Pod addresses are assigned from the subnet's IPv6 CIDR.
+	//
+	// [Assigning IPv6 addresses to pods and services]: https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html
 	IpFamily IpFamily
 
 	// Don't specify a value if you select ipv6 for ipFamily. The CIDR block to assign
@@ -921,11 +956,15 @@ type KubernetesNetworkConfigRequest struct {
 	// We recommend that you specify a block that does not overlap with resources in
 	// other networks that are peered or connected to your VPC. The block must meet the
 	// following requirements:
+	//
 	//   - Within one of the following private IP address blocks: 10.0.0.0/8 ,
 	//   172.16.0.0/12 , or 192.168.0.0/16 .
+	//
 	//   - Doesn't overlap with any CIDR block assigned to the VPC that you selected
 	//   for VPC.
+	//
 	//   - Between /24 and /12 .
+	//
 	// You can only specify a custom CIDR block when you create a cluster. You can't
 	// change this value after the cluster is created.
 	ServiceIpv4Cidr *string
@@ -963,25 +1002,34 @@ type KubernetesNetworkConfigResponse struct {
 }
 
 // An object representing a node group launch template specification. The launch
-// template can't include SubnetId (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html)
-// , IamInstanceProfile (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html)
-// , RequestSpotInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html)
-// , HibernationOptions (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html)
-// , or TerminateInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html)
-// , or the node group deployment or update will fail. For more information about
-// launch templates, see CreateLaunchTemplate (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html)
-// in the Amazon EC2 API Reference. For more information about using launch
-// templates with Amazon EKS, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-// in the Amazon EKS User Guide. You must specify either the launch template ID or
-// the launch template name in the request, but not both.
+// template can't include [SubnetId]SubnetId , [IamInstanceProfile]IamInstanceProfile , [RequestSpotInstances]RequestSpotInstances , [HibernationOptions]
+// HibernationOptions , or [TerminateInstances]TerminateInstances , or the node group deployment or
+// update will fail. For more information about launch templates, see [CreateLaunchTemplate]
+// CreateLaunchTemplate in the Amazon EC2 API Reference. For more information about
+// using launch templates with Amazon EKS, see [Launch template support]in the Amazon EKS User Guide.
+//
+// You must specify either the launch template ID or the launch template name in
+// the request, but not both.
+//
+// [HibernationOptions]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html
+// [CreateLaunchTemplate]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
+// [RequestSpotInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+// [Launch template support]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+// [IamInstanceProfile]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
+// [SubnetId]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
+// [TerminateInstances]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html
 type LaunchTemplateSpecification struct {
 
-	// The ID of the launch template. You must specify either the launch template ID
-	// or the launch template name in the request, but not both.
+	// The ID of the launch template.
+	//
+	// You must specify either the launch template ID or the launch template name in
+	// the request, but not both.
 	Id *string
 
-	// The name of the launch template. You must specify either the launch template
-	// name or the launch template ID in the request, but not both.
+	// The name of the launch template.
+	//
+	// You must specify either the launch template name or the launch template ID in
+	// the request, but not both.
 	Name *string
 
 	// The version number of the launch template to use. If no version is specified,
@@ -1059,9 +1107,10 @@ type Nodegroup struct {
 	// deployed with a launch template, then this is null .
 	InstanceTypes []string
 
-	// The Kubernetes labels applied to the nodes in the node group. Only labels that
-	// are applied with the Amazon EKS API are shown here. There may be other
-	// Kubernetes labels applied to the nodes in this group.
+	// The Kubernetes labels applied to the nodes in the node group.
+	//
+	// Only labels that are applied with the Amazon EKS API are shown here. There may
+	// be other Kubernetes labels applied to the nodes in this group.
 	Labels map[string]string
 
 	// If a launch template was used to create the node group, then this is the launch
@@ -1117,9 +1166,9 @@ type Nodegroup struct {
 	// The Kubernetes taints to be applied to the nodes in the node group when they
 	// are created. Effect is one of No_Schedule , Prefer_No_Schedule , or No_Execute .
 	// Kubernetes taints can be used together with tolerations to control how workloads
-	// are scheduled to your nodes. For more information, see Node taints on managed
-	// node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
-	// .
+	// are scheduled to your nodes. For more information, see [Node taints on managed node groups].
+	//
+	// [Node taints on managed node groups]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
 	Taints []Taint
 
 	// The node group update configuration.
@@ -1160,28 +1209,36 @@ type NodegroupResources struct {
 // specify any or none of the properties.
 type NodegroupScalingConfig struct {
 
-	// The current number of nodes that the managed node group should maintain. If you
-	// use the Kubernetes Cluster Autoscaler (https://github.com/kubernetes/autoscaler#kubernetes-autoscaler)
-	// , you shouldn't change the desiredSize value directly, as this can cause the
-	// Cluster Autoscaler to suddenly scale up or scale down. Whenever this parameter
-	// changes, the number of worker nodes in the node group is updated to the
-	// specified size. If this parameter is given a value that is smaller than the
-	// current number of running worker nodes, the necessary number of worker nodes are
-	// terminated to match the given value. When using CloudFormation, no action occurs
-	// if you remove this parameter from your CFN template. This parameter can be
-	// different from minSize in some cases, such as when starting with extra hosts
-	// for testing. This parameter can also be different when you want to start with an
-	// estimated number of needed hosts, but let the Cluster Autoscaler reduce the
-	// number if there are too many. When the Cluster Autoscaler is used, the
-	// desiredSize parameter is altered by the Cluster Autoscaler (but can be
-	// out-of-date for short periods of time). the Cluster Autoscaler doesn't scale a
-	// managed node group lower than minSize or higher than maxSize .
+	// The current number of nodes that the managed node group should maintain.
+	//
+	// If you use the Kubernetes [Cluster Autoscaler], you shouldn't change the desiredSize value
+	// directly, as this can cause the Cluster Autoscaler to suddenly scale up or scale
+	// down.
+	//
+	// Whenever this parameter changes, the number of worker nodes in the node group
+	// is updated to the specified size. If this parameter is given a value that is
+	// smaller than the current number of running worker nodes, the necessary number of
+	// worker nodes are terminated to match the given value.
+	//
+	// When using CloudFormation, no action occurs if you remove this parameter from
+	// your CFN template.
+	//
+	// This parameter can be different from minSize in some cases, such as when
+	// starting with extra hosts for testing. This parameter can also be different when
+	// you want to start with an estimated number of needed hosts, but let the Cluster
+	// Autoscaler reduce the number if there are too many. When the Cluster Autoscaler
+	// is used, the desiredSize parameter is altered by the Cluster Autoscaler (but
+	// can be out-of-date for short periods of time). the Cluster Autoscaler doesn't
+	// scale a managed node group lower than minSize or higher than maxSize .
+	//
+	// [Cluster Autoscaler]: https://github.com/kubernetes/autoscaler#kubernetes-autoscaler
 	DesiredSize *int32
 
 	// The maximum number of nodes that the managed node group can scale out to. For
-	// information about the maximum number that you can specify, see Amazon EKS
-	// service quotas (https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html)
-	// in the Amazon EKS User Guide.
+	// information about the maximum number that you can specify, see [Amazon EKS service quotas]in the Amazon
+	// EKS User Guide.
+	//
+	// [Amazon EKS service quotas]: https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html
 	MaxSize *int32
 
 	// The minimum number of nodes that the managed node group can scale in to.
@@ -1206,8 +1263,10 @@ type NodegroupUpdateConfig struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing the OpenID Connect (https://openid.net/connect/) (OIDC)
-// identity provider information for the cluster.
+// An object representing the [OpenID Connect] (OIDC) identity provider information for the
+// cluster.
+//
+// [OpenID Connect]: https://openid.net/connect/
 type OIDC struct {
 
 	// The issuer URL for the OIDC identity provider.
@@ -1269,8 +1328,9 @@ type OidcIdentityProviderConfig struct {
 
 // An object representing an OpenID Connect (OIDC) configuration. Before
 // associating an OIDC identity provider to your cluster, review the considerations
-// in Authenticating users for your cluster from an OIDC identity provider (https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html)
-// in the Amazon EKS User Guide.
+// in [Authenticating users for your cluster from an OIDC identity provider]in the Amazon EKS User Guide.
+//
+// [Authenticating users for your cluster from an OIDC identity provider]: https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html
 type OidcIdentityProviderConfigRequest struct {
 
 	// This is also known as audience. The ID for the client application that makes
@@ -1306,9 +1366,10 @@ type OidcIdentityProviderConfigRequest struct {
 
 	// The key value pairs that describe required claims in the identity token. If
 	// set, each claim is verified to be present in the token with a matching value.
-	// For the maximum number of claims that you can require, see Amazon EKS service
-	// quotas (https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html) in
-	// the Amazon EKS User Guide.
+	// For the maximum number of claims that you can require, see [Amazon EKS service quotas]in the Amazon EKS
+	// User Guide.
+	//
+	// [Amazon EKS service quotas]: https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html
 	RequiredClaims map[string]string
 
 	// The JSON Web Token (JWT) claim to use as the username. The default is sub ,
@@ -1328,18 +1389,22 @@ type OidcIdentityProviderConfigRequest struct {
 }
 
 // The configuration of your local Amazon EKS cluster on an Amazon Web Services
-// Outpost. Before creating a cluster on an Outpost, review Creating a local
-// cluster on an Outpost (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-create.html)
-// in the Amazon EKS User Guide. This API isn't available for Amazon EKS clusters
-// on the Amazon Web Services cloud.
+// Outpost. Before creating a cluster on an Outpost, review [Creating a local cluster on an Outpost]in the Amazon EKS User
+// Guide. This API isn't available for Amazon EKS clusters on the Amazon Web
+// Services cloud.
+//
+// [Creating a local cluster on an Outpost]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-local-cluster-create.html
 type OutpostConfigRequest struct {
 
 	// The Amazon EC2 instance type that you want to use for your local Amazon EKS
 	// cluster on Outposts. Choose an instance type based on the number of nodes that
-	// your cluster will have. For more information, see Capacity considerations (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
-	// in the Amazon EKS User Guide. The instance type that you specify is used for all
-	// Kubernetes control plane instances. The instance type can't be changed after
-	// cluster creation. The control plane is not automatically scaled by Amazon EKS.
+	// your cluster will have. For more information, see [Capacity considerations]in the Amazon EKS User Guide.
+	//
+	// The instance type that you specify is used for all Kubernetes control plane
+	// instances. The instance type can't be changed after cluster creation. The
+	// control plane is not automatically scaled by Amazon EKS.
+	//
+	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 	//
 	// This member is required.
 	ControlPlaneInstanceType *string
@@ -1352,8 +1417,9 @@ type OutpostConfigRequest struct {
 
 	// An object representing the placement configuration for all the control plane
 	// instances of your local Amazon EKS cluster on an Amazon Web Services Outpost.
-	// For more information, see Capacity considerations (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
-	// in the Amazon EKS User Guide.
+	// For more information, see [Capacity considerations]in the Amazon EKS User Guide.
+	//
+	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 	ControlPlanePlacement *ControlPlanePlacementRequest
 
 	noSmithyDocumentSerde
@@ -1378,8 +1444,9 @@ type OutpostConfigResponse struct {
 
 	// An object representing the placement configuration for all the control plane
 	// instances of your local Amazon EKS cluster on an Amazon Web Services Outpost.
-	// For more information, see Capacity considerations (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
-	// in the Amazon EKS User Guide.
+	// For more information, see [Capacity considerations]in the Amazon EKS User Guide.
+	//
+	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 	ControlPlanePlacement *ControlPlanePlacementResponse
 
 	noSmithyDocumentSerde
@@ -1421,18 +1488,26 @@ type PodIdentityAssociation struct {
 
 	// Metadata that assists with categorization and organization. Each tag consists
 	// of a key and an optional value. You define both. Tags don't propagate to any
-	// other cluster or Amazon Web Services resources. The following basic restrictions
-	// apply to tags:
+	// other cluster or Amazon Web Services resources.
+	//
+	// The following basic restrictions apply to tags:
+	//
 	//   - Maximum number of tags per resource – 50
+	//
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
+	//
 	//   - Maximum key length – 128 Unicode characters in UTF-8
+	//
 	//   - Maximum value length – 256 Unicode characters in UTF-8
+	//
 	//   - If your tagging schema is used across multiple services and resources,
 	//   remember that other services may have restrictions on allowed characters.
 	//   Generally allowed characters are: letters, numbers, and spaces representable in
 	//   UTF-8, and the following characters: + - = . _ : / @.
+	//
 	//   - Tag keys and values are case-sensitive.
+	//
 	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
 	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
 	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
@@ -1442,11 +1517,16 @@ type PodIdentityAssociation struct {
 	noSmithyDocumentSerde
 }
 
-// The summarized description of the association. Each summary is simplified by
-// removing these fields compared to the full PodIdentityAssociation :
+// The summarized description of the association.
+//
+// Each summary is simplified by removing these fields compared to the full PodIdentityAssociation:
+//
 //   - The IAM role: roleArn
+//
 //   - The timestamp that the association was created at: createdAt
+//
 //   - The most recent timestamp that the association was modified at:. modifiedAt
+//
 //   - The tags on the association: tags
 type PodIdentityAssociationSummary struct {
 
@@ -1476,10 +1556,11 @@ type Provider struct {
 
 	// Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be
 	// symmetric and created in the same Amazon Web Services Region as the cluster. If
-	// the KMS key was created in a different account, the IAM principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html)
-	// must have access to the KMS key. For more information, see Allowing users in
-	// other accounts to use a KMS key (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html)
-	// in the Key Management Service Developer Guide.
+	// the KMS key was created in a different account, the [IAM principal]must have access to the KMS
+	// key. For more information, see [Allowing users in other accounts to use a KMS key]in the Key Management Service Developer Guide.
+	//
+	// [IAM principal]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
+	// [Allowing users in other accounts to use a KMS key]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html
 	KeyArn *string
 
 	noSmithyDocumentSerde
@@ -1490,28 +1571,31 @@ type Provider struct {
 type RemoteAccessConfig struct {
 
 	// The Amazon EC2 SSH key name that provides access for SSH communication with the
-	// nodes in the managed node group. For more information, see Amazon EC2 key pairs
-	// and Linux instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
-	// in the Amazon Elastic Compute Cloud User Guide for Linux Instances. For Windows,
-	// an Amazon EC2 SSH key is used to obtain the RDP password. For more information,
-	// see Amazon EC2 key pairs and Windows instances (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key-pairs.html)
-	// in the Amazon Elastic Compute Cloud User Guide for Windows Instances.
+	// nodes in the managed node group. For more information, see [Amazon EC2 key pairs and Linux instances]in the Amazon
+	// Elastic Compute Cloud User Guide for Linux Instances. For Windows, an Amazon EC2
+	// SSH key is used to obtain the RDP password. For more information, see [Amazon EC2 key pairs and Windows instances]in the
+	// Amazon Elastic Compute Cloud User Guide for Windows Instances.
+	//
+	// [Amazon EC2 key pairs and Windows instances]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key-pairs.html
+	// [Amazon EC2 key pairs and Linux instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 	Ec2SshKey *string
 
 	// The security group IDs that are allowed SSH access (port 22) to the nodes. For
 	// Windows, the port is 3389. If you specify an Amazon EC2 SSH key but don't
 	// specify a source security group when you create a managed node group, then the
 	// port on the nodes is opened to the internet ( 0.0.0.0/0 ). For more information,
-	// see Security Groups for Your VPC (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
-	// in the Amazon Virtual Private Cloud User Guide.
+	// see [Security Groups for Your VPC]in the Amazon Virtual Private Cloud User Guide.
+	//
+	// [Security Groups for Your VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html
 	SourceSecurityGroups []string
 
 	noSmithyDocumentSerde
 }
 
-// A property that allows a node to repel a Pod . For more information, see Node
-// taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
-// in the Amazon EKS User Guide.
+// A property that allows a node to repel a Pod . For more information, see [Node taints on managed node groups] in
+// the Amazon EKS User Guide.
+//
+// [Node taints on managed node groups]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
 type Taint struct {
 
 	// The effect of the taint.
@@ -1584,8 +1668,9 @@ type UpdateParam struct {
 }
 
 // An object representing the details of an update to a taints payload. For more
-// information, see Node taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
-// in the Amazon EKS User Guide.
+// information, see [Node taints on managed node groups]in the Amazon EKS User Guide.
+//
+// [Node taints on managed node groups]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
 type UpdateTaintsPayload struct {
 
 	// Kubernetes taints to be added or updated.
@@ -1606,17 +1691,19 @@ type VpcConfigRequest struct {
 	// this parameter is false , which disables private access for your Kubernetes API
 	// server. If you disable private access and you have nodes or Fargate pods in the
 	// cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks
-	// for communication with the nodes or Fargate pods. For more information, see
-	// Amazon EKS cluster endpoint access control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-	// in the Amazon EKS User Guide .
+	// for communication with the nodes or Fargate pods. For more information, see [Amazon EKS cluster endpoint access control]in
+	// the Amazon EKS User Guide .
+	//
+	// [Amazon EKS cluster endpoint access control]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
 	EndpointPrivateAccess *bool
 
 	// Set this value to false to disable public access to your cluster's Kubernetes
 	// API server endpoint. If you disable public access, your cluster's Kubernetes API
 	// server can only receive requests from within the cluster VPC. The default value
 	// for this parameter is true , which enables public access for your Kubernetes API
-	// server. For more information, see Amazon EKS cluster endpoint access control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-	// in the Amazon EKS User Guide .
+	// server. For more information, see [Amazon EKS cluster endpoint access control]in the Amazon EKS User Guide .
+	//
+	// [Amazon EKS cluster endpoint access control]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
 	EndpointPublicAccess *bool
 
 	// The CIDR blocks that are allowed access to your cluster's public Kubernetes API
@@ -1624,17 +1711,19 @@ type VpcConfigRequest struct {
 	// CIDR blocks that you specify is denied. The default value is 0.0.0.0/0 . If
 	// you've disabled private endpoint access, make sure that you specify the
 	// necessary CIDR blocks for every node and Fargate Pod in the cluster. For more
-	// information, see Amazon EKS cluster endpoint access control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-	// in the Amazon EKS User Guide .
+	// information, see [Amazon EKS cluster endpoint access control]in the Amazon EKS User Guide .
+	//
+	// [Amazon EKS cluster endpoint access control]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
 	PublicAccessCidrs []string
 
 	// Specify one or more security groups for the cross-account elastic network
 	// interfaces that Amazon EKS creates to use that allow communication between your
 	// nodes and the Kubernetes control plane. If you don't specify any security
 	// groups, then familiarize yourself with the difference between Amazon EKS
-	// defaults for clusters deployed with Kubernetes. For more information, see
-	// Amazon EKS security group considerations (https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html)
-	// in the Amazon EKS User Guide .
+	// defaults for clusters deployed with Kubernetes. For more information, see [Amazon EKS security group considerations]in
+	// the Amazon EKS User Guide .
+	//
+	// [Amazon EKS security group considerations]: https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
 	SecurityGroupIds []string
 
 	// Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account
@@ -1659,8 +1748,9 @@ type VpcConfigResponse struct {
 	// endpoint instead of traversing the internet. If this value is disabled and you
 	// have nodes or Fargate pods in the cluster, then ensure that publicAccessCidrs
 	// includes the necessary CIDR blocks for communication with the nodes or Fargate
-	// pods. For more information, see Amazon EKS cluster endpoint access control (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html)
-	// in the Amazon EKS User Guide .
+	// pods. For more information, see [Amazon EKS cluster endpoint access control]in the Amazon EKS User Guide .
+	//
+	// [Amazon EKS cluster endpoint access control]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
 	EndpointPrivateAccess bool
 
 	// Whether the public API server endpoint is enabled.

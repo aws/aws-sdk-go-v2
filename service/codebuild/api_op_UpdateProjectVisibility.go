@@ -12,10 +12,10 @@ import (
 )
 
 // Changes the public visibility for a project. The project's build results, logs,
-// and artifacts are available to the general public. For more information, see
-// Public build projects (https://docs.aws.amazon.com/codebuild/latest/userguide/public-builds.html)
-// in the CodeBuild User Guide. The following should be kept in mind when making
-// your projects public:
+// and artifacts are available to the general public. For more information, see [Public build projects]in
+// the CodeBuild User Guide.
+//
+// The following should be kept in mind when making your projects public:
 //
 //   - All of a project's build results, logs, and artifacts, including builds
 //     that were run when the project was private, are available to the general public.
@@ -29,15 +29,17 @@ import (
 //     you use an Amazon EC2 Systems Manager Parameter Store or Secrets Manager to
 //     store sensitive values.
 //
-//   - Follow Best practices for using webhooks (https://docs.aws.amazon.com/codebuild/latest/userguide/webhooks.html#webhook-best-practices)
-//     in the CodeBuild User Guide to limit which entities can trigger a build, and do
-//     not store the buildspec in the project itself, to ensure that your webhooks are
-//     as secure as possible.
+//   - Follow [Best practices for using webhooks]in the CodeBuild User Guide to limit which entities can trigger a
+//     build, and do not store the buildspec in the project itself, to ensure that your
+//     webhooks are as secure as possible.
 //
 //   - A malicious user can use public builds to distribute malicious artifacts.
 //     We recommend that you review all pull requests to verify that the pull request
 //     is a legitimate change. We also recommend that you validate any artifacts with
 //     their checksums to make sure that the correct artifacts are being downloaded.
+//
+// [Public build projects]: https://docs.aws.amazon.com/codebuild/latest/userguide/public-builds.html
+// [Best practices for using webhooks]: https://docs.aws.amazon.com/codebuild/latest/userguide/webhooks.html#webhook-best-practices
 func (c *Client) UpdateProjectVisibility(ctx context.Context, params *UpdateProjectVisibilityInput, optFns ...func(*Options)) (*UpdateProjectVisibilityOutput, error) {
 	if params == nil {
 		params = &UpdateProjectVisibilityInput{}
@@ -61,8 +63,10 @@ type UpdateProjectVisibilityInput struct {
 	ProjectArn *string
 
 	// Specifies the visibility of the project's builds. Possible values are:
-	// PUBLIC_READ The project builds are visible to the public. PRIVATE The project
-	// builds are not visible to the public.
+	//
+	// PUBLIC_READ The project builds are visible to the public.
+	//
+	// PRIVATE The project builds are not visible to the public.
 	//
 	// This member is required.
 	ProjectVisibility types.ProjectVisibilityType
@@ -80,8 +84,10 @@ type UpdateProjectVisibilityOutput struct {
 	ProjectArn *string
 
 	// Specifies the visibility of the project's builds. Possible values are:
-	// PUBLIC_READ The project builds are visible to the public. PRIVATE The project
-	// builds are not visible to the public.
+	//
+	// PUBLIC_READ The project builds are visible to the public.
+	//
+	// PRIVATE The project builds are not visible to the public.
 	ProjectVisibility types.ProjectVisibilityType
 
 	// Contains the project identifier used with the public build APIs.

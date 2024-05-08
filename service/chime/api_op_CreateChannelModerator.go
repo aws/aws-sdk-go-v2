@@ -12,23 +12,31 @@ import (
 )
 
 // Creates a new ChannelModerator . A channel moderator can:
+//
 //   - Add and remove other members of the channel.
+//
 //   - Add and remove other moderators of the channel.
+//
 //   - Add and remove user bans for the channel.
+//
 //   - Redact messages in the channel.
+//
 //   - List messages in the channel.
 //
 // The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
-// of the user that makes the API call as the value in the header. This API is is
-// no longer supported and will not be updated. We recommend using the latest
-// version, CreateChannelModerator (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelModerator.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// of the user that makes the API call as the value in the header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [CreateChannelModerator], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by CreateChannelModerator in the Amazon Chime SDK
 // Messaging Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [CreateChannelModerator]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelModerator.html
 func (c *Client) CreateChannelModerator(ctx context.Context, params *CreateChannelModeratorInput, optFns ...func(*Options)) (*CreateChannelModeratorOutput, error) {
 	if params == nil {
 		params = &CreateChannelModeratorInput{}

@@ -33,17 +33,19 @@ type ListGraphSnapshotsInput struct {
 	// The unique identifier of the Neptune Analytics graph.
 	GraphIdentifier *string
 
-	// The total number of records to return in the command's output. If the total
-	// number of records available is more than the value specified, nextToken is
-	// provided in the command's output. To resume pagination, provide the nextToken
-	// output value in the nextToken argument of a subsequent command. Do not use the
-	// nextToken response element directly outside of the Amazon CLI.
+	// The total number of records to return in the command's output.
+	//
+	// If the total number of records available is more than the value specified,
+	// nextToken is provided in the command's output. To resume pagination, provide the
+	// nextToken output value in the nextToken argument of a subsequent command. Do
+	// not use the nextToken response element directly outside of the Amazon CLI.
 	MaxResults *int32
 
-	// Pagination token used to paginate output. When this value is provided as input,
-	// the service returns results from where the previous response left off. When this
-	// value is present in output, it indicates that there are more results to
-	// retrieve.
+	// Pagination token used to paginate output.
+	//
+	// When this value is provided as input, the service returns results from where
+	// the previous response left off. When this value is present in output, it
+	// indicates that there are more results to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -61,10 +63,11 @@ type ListGraphSnapshotsOutput struct {
 	// This member is required.
 	GraphSnapshots []types.GraphSnapshotSummary
 
-	// Pagination token used to paginate output. When this value is provided as input,
-	// the service returns results from where the previous response left off. When this
-	// value is present in output, it indicates that there are more results to
-	// retrieve.
+	// Pagination token used to paginate output.
+	//
+	// When this value is provided as input, the service returns results from where
+	// the previous response left off. When this value is present in output, it
+	// indicates that there are more results to retrieve.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -160,11 +163,12 @@ var _ ListGraphSnapshotsAPIClient = (*Client)(nil)
 // ListGraphSnapshotsPaginatorOptions is the paginator options for
 // ListGraphSnapshots
 type ListGraphSnapshotsPaginatorOptions struct {
-	// The total number of records to return in the command's output. If the total
-	// number of records available is more than the value specified, nextToken is
-	// provided in the command's output. To resume pagination, provide the nextToken
-	// output value in the nextToken argument of a subsequent command. Do not use the
-	// nextToken response element directly outside of the Amazon CLI.
+	// The total number of records to return in the command's output.
+	//
+	// If the total number of records available is more than the value specified,
+	// nextToken is provided in the command's output. To resume pagination, provide the
+	// nextToken output value in the nextToken argument of a subsequent command. Do
+	// not use the nextToken response element directly outside of the Amazon CLI.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

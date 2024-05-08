@@ -13,8 +13,11 @@ import (
 
 // Update an existing App Runner VPC Ingress Connection resource. The VPC Ingress
 // Connection must be in one of the following states to be updated:
+//
 //   - AVAILABLE
+//
 //   - FAILED_CREATION
+//
 //   - FAILED_UPDATE
 func (c *Client) UpdateVpcIngressConnection(ctx context.Context, params *UpdateVpcIngressConnectionInput, optFns ...func(*Options)) (*UpdateVpcIngressConnectionOutput, error) {
 	if params == nil {

@@ -13,10 +13,12 @@ import (
 )
 
 // Provides information about a Map Run's configuration, progress, and results. If
-// you've redriven (https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html)
-// a Map Run, this API action also returns information about the redrives of that
-// Map Run. For more information, see Examining Map Run (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
-// in the Step Functions Developer Guide.
+// you've [redriven]a Map Run, this API action also returns information about the redrives
+// of that Map Run. For more information, see [Examining Map Run]in the Step Functions Developer
+// Guide.
+//
+// [redriven]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html
+// [Examining Map Run]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
 func (c *Client) DescribeMapRun(ctx context.Context, params *DescribeMapRunInput, optFns ...func(*Options)) (*DescribeMapRunOutput, error) {
 	if params == nil {
 		params = &DescribeMapRunInput{}

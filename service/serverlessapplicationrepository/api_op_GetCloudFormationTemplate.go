@@ -34,7 +34,9 @@ type GetCloudFormationTemplateInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The UUID returned by CreateCloudFormationTemplate.Pattern:
+	// The UUID returned by CreateCloudFormationTemplate.
+	//
+	// Pattern:
 	// [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
 	//
 	// This member is required.
@@ -54,14 +56,21 @@ type GetCloudFormationTemplateOutput struct {
 	// The date and time this template expires. Templates expire 1 hour after creation.
 	ExpirationTime *string
 
-	// The semantic version of the application: https://semver.org/ (https://semver.org/)
+	// The semantic version of the application:
+	//
+	// [https://semver.org/]
+	//
+	// [https://semver.org/]: https://semver.org/
 	SemanticVersion *string
 
-	// Status of the template creation workflow.Possible values: PREPARING | ACTIVE |
-	// EXPIRED
+	// Status of the template creation workflow.
+	//
+	// Possible values: PREPARING | ACTIVE | EXPIRED
 	Status types.Status
 
-	// The UUID returned by CreateCloudFormationTemplate.Pattern:
+	// The UUID returned by CreateCloudFormationTemplate.
+	//
+	// Pattern:
 	// [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
 	TemplateId *string
 

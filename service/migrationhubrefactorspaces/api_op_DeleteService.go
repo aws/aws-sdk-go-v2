@@ -30,9 +30,11 @@ func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, 
 
 type DeleteServiceInput struct {
 
-	// Deletes a Refactor Spaces service. The RefactorSpacesSecurityGroup security
-	// group must be removed from all Amazon Web Services resources in the virtual
-	// private cloud (VPC) prior to deleting a service with a URL endpoint in a VPC.
+	// Deletes a Refactor Spaces service.
+	//
+	// The RefactorSpacesSecurityGroup security group must be removed from all Amazon
+	// Web Services resources in the virtual private cloud (VPC) prior to deleting a
+	// service with a URL endpoint in a VPC.
 	//
 	// This member is required.
 	ApplicationIdentifier *string

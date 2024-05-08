@@ -10,12 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an origin request policy. You cannot delete an origin request policy if
-// it's attached to any cache behaviors. First update your distributions to remove
-// the origin request policy from all cache behaviors, then delete the origin
-// request policy. To delete an origin request policy, you must provide the
-// policy's identifier and version. To get the identifier, you can use
-// ListOriginRequestPolicies or GetOriginRequestPolicy .
+// Deletes an origin request policy.
+//
+// You cannot delete an origin request policy if it's attached to any cache
+// behaviors. First update your distributions to remove the origin request policy
+// from all cache behaviors, then delete the origin request policy.
+//
+// To delete an origin request policy, you must provide the policy's identifier
+// and version. To get the identifier, you can use ListOriginRequestPolicies or
+// GetOriginRequestPolicy .
 func (c *Client) DeleteOriginRequestPolicy(ctx context.Context, params *DeleteOriginRequestPolicyInput, optFns ...func(*Options)) (*DeleteOriginRequestPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteOriginRequestPolicyInput{}

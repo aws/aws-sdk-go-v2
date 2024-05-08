@@ -50,6 +50,7 @@ type BotChannelAssociation struct {
 	BotConfiguration map[string]string
 
 	// The name of the Amazon Lex bot to which this association is being made.
+	//
 	// Currently, Amazon Lex supports associations with Facebook and Slack, and Twilio.
 	BotName *string
 
@@ -68,8 +69,11 @@ type BotChannelAssociation struct {
 	Name *string
 
 	// The status of the bot channel.
+	//
 	//   - CREATED - The channel has been created and is ready for use.
+	//
 	//   - IN_PROGRESS - Channel creation is in progress.
+	//
 	//   - FAILED - There was an error creating the channel. For information about the
 	//   reason for the failure, see the failureReason field.
 	Status ChannelStatus
@@ -110,8 +114,9 @@ type BotMetadata struct {
 type BuiltinIntentMetadata struct {
 
 	// A unique identifier for the built-in intent. To find the signature for an
-	// intent, see Standard Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
+	// intent, see [Standard Built-in Intents]in the Alexa Skills Kit.
+	//
+	// [Standard Built-in Intents]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents
 	Signature *string
 
 	// A list of identifiers for the locales that the intent supports.
@@ -133,8 +138,9 @@ type BuiltinIntentSlot struct {
 type BuiltinSlotTypeMetadata struct {
 
 	// A unique identifier for the built-in slot type. To find the signature for a
-	// slot type, see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
-	// in the Alexa Skills Kit.
+	// slot type, see [Slot Type Reference]in the Alexa Skills Kit.
+	//
+	// [Slot Type Reference]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference
 	Signature *string
 
 	// A list of target locales for the slot.
@@ -148,7 +154,7 @@ type BuiltinSlotTypeMetadata struct {
 type CodeHook struct {
 
 	// The version of the request-response that you want Amazon Lex to use to invoke
-	// your Lambda function. For more information, see using-lambda .
+	// your Lambda function. For more information, see using-lambda.
 	//
 	// This member is required.
 	MessageVersion *string
@@ -167,9 +173,9 @@ type ConversationLogsRequest struct {
 	// The Amazon Resource Name (ARN) of an IAM role with permission to write to your
 	// CloudWatch Logs for text logs and your S3 bucket for audio logs. If audio
 	// encryption is enabled, this role also provides access permission for the AWS KMS
-	// key used for encrypting audio logs. For more information, see Creating an IAM
-	// Role and Policy for Conversation Logs (https://docs.aws.amazon.com/lex/latest/dg/conversation-logs-role-and-policy.html)
-	// .
+	// key used for encrypting audio logs. For more information, see [Creating an IAM Role and Policy for Conversation Logs].
+	//
+	// [Creating an IAM Role and Policy for Conversation Logs]: https://docs.aws.amazon.com/lex/latest/dg/conversation-logs-role-and-policy.html
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -197,11 +203,15 @@ type ConversationLogsResponse struct {
 }
 
 // Each slot type can have a set of values. Each enumeration value represents a
-// value the slot type can take. For example, a pizza ordering bot could have a
-// slot type that specifies the type of crust that the pizza should have. The slot
-// type could include the values
+// value the slot type can take.
+//
+// For example, a pizza ordering bot could have a slot type that specifies the
+// type of crust that the pizza should have. The slot type could include the values
+//
 //   - thick
+//
 //   - thin
+//
 //   - stuffed
 type EnumerationValue struct {
 
@@ -235,30 +245,34 @@ type FollowUpPrompt struct {
 	noSmithyDocumentSerde
 }
 
-// Describes how the intent is fulfilled after the user provides all of the
+//	Describes how the intent is fulfilled after the user provides all of the
+//
 // information required for the intent. You can provide a Lambda function to
 // process the intent, or you can return the intent information to the client
 // application. We recommend that you use a Lambda function so that the relevant
 // logic lives in the Cloud and limit the client-side code primarily to
 // presentation. If you need to update the logic, you only update the Lambda
-// function; you don't need to upgrade your client application. Consider the
-// following examples:
+// function; you don't need to upgrade your client application.
+//
+// Consider the following examples:
+//
 //   - In a pizza ordering application, after the user provides all of the
 //     information for placing an order, you use a Lambda function to place an order
 //     with a pizzeria.
+//
 //   - In a gaming application, when a user says "pick up a rock," this
 //     information must go back to the client application so that it can perform the
 //     operation and update the graphics. In this case, you want Amazon Lex to return
 //     the intent data to the client.
 type FulfillmentActivity struct {
 
-	// How the intent should be fulfilled, either by running a Lambda function or by
+	//  How the intent should be fulfilled, either by running a Lambda function or by
 	// returning the slot data to the client application.
 	//
 	// This member is required.
 	Type FulfillmentActivityType
 
-	// A description of the Lambda function that is run to fulfill the intent.
+	//  A description of the Lambda function that is run to fulfill the intent.
 	CodeHook *CodeHook
 
 	noSmithyDocumentSerde
@@ -317,8 +331,9 @@ type IntentMetadata struct {
 // Provides configuration information for the AMAZON.KendraSearchIntent intent.
 // When you use this intent, Amazon Lex searches the specified Amazon Kendra index
 // and returns documents from the index that match the user's utterance. For more
-// information, see AMAZON.KendraSearchIntent (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html)
-// .
+// information, see [AMAZON.KendraSearchIntent].
+//
+// [AMAZON.KendraSearchIntent]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
 type KendraConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the
@@ -339,8 +354,11 @@ type KendraConfiguration struct {
 
 	// A query filter that Amazon Lex sends to Amazon Kendra to filter the response
 	// from the query. The filter is in the format defined by Amazon Kendra. For more
-	// information, see Filtering queries (http://docs.aws.amazon.com/kendra/latest/dg/filtering.html)
-	// . You can override this filter string with a new filter string at runtime.
+	// information, see [Filtering queries].
+	//
+	// You can override this filter string with a new filter string at runtime.
+	//
+	// [Filtering queries]: http://docs.aws.amazon.com/kendra/latest/dg/filtering.html
 	QueryFilterString *string
 
 	noSmithyDocumentSerde
@@ -435,8 +453,10 @@ type MigrationAlert struct {
 	ReferenceURLs []string
 
 	// The type of alert. There are two kinds of alerts:
+	//
 	//   - ERROR - There was an issue with the migration that can't be resolved. The
 	//   migration stops.
+	//
 	//   - WARN - There was an issue with the migration that requires manual changes to
 	//   the new Amazon Lex V2 bot. The migration continues.
 	Type MigrationAlertType
@@ -508,7 +528,7 @@ type OutputContext struct {
 // Obtains information from the user. To define a prompt, provide one or more
 // messages and specify the number of attempts to get information from the user. If
 // you provide more than one message, Amazon Lex chooses one of the messages to use
-// to prompt the user. For more information, see how-it-works .
+// to prompt the user. For more information, see how-it-works.
 type Prompt struct {
 
 	// The number of times to prompt the user for information.
@@ -525,14 +545,15 @@ type Prompt struct {
 
 	// A response card. Amazon Lex uses this prompt at runtime, in the PostText API
 	// response. It substitutes session attributes and slot values for placeholders in
-	// the response card. For more information, see ex-resp-card .
+	// the response card. For more information, see ex-resp-card.
 	ResponseCard *string
 
 	noSmithyDocumentSerde
 }
 
 // Describes the resource that refers to the resource that you are attempting to
-// delete. This object is returned as part of the ResourceInUseException exception.
+// delete. This object is returned as part of the ResourceInUseException
+// exception.
 type ResourceReference struct {
 
 	// The name of the resource that is using the resource that you are trying to
@@ -570,21 +591,24 @@ type Slot struct {
 	// Determines whether a slot is obfuscated in conversation logs and stored
 	// utterances. When you obfuscate a slot, the value is replaced by the slot name in
 	// curly braces ({}). For example, if the slot name is "full_name", obfuscated
-	// values are replaced with "{full_name}". For more information, see Slot
-	// Obfuscation  (https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html) .
+	// values are replaced with "{full_name}". For more information, see [Slot Obfuscation].
+	//
+	// [Slot Obfuscation]: https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html
 	ObfuscationSetting ObfuscationSetting
 
-	// Directs Amazon Lex the order in which to elicit this slot value from the user.
+	//  Directs Amazon Lex the order in which to elicit this slot value from the user.
 	// For example, if the intent has two slots with priorities 1 and 2, AWS Amazon Lex
-	// first elicits a value for the slot with priority 1. If multiple slots share the
-	// same priority, the order in which Amazon Lex elicits values is arbitrary.
+	// first elicits a value for the slot with priority 1.
+	//
+	// If multiple slots share the same priority, the order in which Amazon Lex
+	// elicits values is arbitrary.
 	Priority *int32
 
-	// A set of possible responses for the slot type used by text-based clients. A
+	//  A set of possible responses for the slot type used by text-based clients. A
 	// user chooses an option from the response card, instead of using text to reply.
 	ResponseCard *string
 
-	// If you know a specific pattern with which users might respond to an Amazon Lex
+	//  If you know a specific pattern with which users might respond to an Amazon Lex
 	// request for a slot value, you can provide those utterances to improve accuracy.
 	// This is optional. In most cases, Amazon Lex is capable of understanding user
 	// utterances.
@@ -607,9 +631,12 @@ type Slot struct {
 type SlotDefaultValue struct {
 
 	// The default value for the slot. You can specify one of the following:
+	//
 	//   - #context-name.slot-name - The slot value "slot-name" in the context
 	//   "context-name."
+	//
 	//   - {attribute} - The slot value of the session attribute "attribute."
+	//
 	//   - 'value' - The discrete value "value."
 	//
 	// This member is required.
@@ -624,10 +651,12 @@ type SlotDefaultValueSpec struct {
 
 	// The default values for a slot. You can specify more than one default. For
 	// example, you can specify a default value to use from a matching context
-	// variable, a session attribute, or a fixed value. The default value chosen is
-	// selected based on the order that you specify them in the list. For example, if
-	// you specify a context variable and a fixed value in that order, Amazon Lex uses
-	// the context variable if it is available, else it uses the fixed value.
+	// variable, a session attribute, or a fixed value.
+	//
+	// The default value chosen is selected based on the order that you specify them
+	// in the list. For example, if you specify a context variable and a fixed value in
+	// that order, Amazon Lex uses the context variable if it is available, else it
+	// uses the fixed value.
 	//
 	// This member is required.
 	DefaultValueList []SlotDefaultValue
@@ -669,15 +698,23 @@ type SlotTypeMetadata struct {
 // Provides a regular expression used to validate the value of a slot.
 type SlotTypeRegexConfiguration struct {
 
-	// A regular expression used to validate the value of a slot. Use a standard
-	// regular expression. Amazon Lex supports the following characters in the regular
-	// expression:
+	// A regular expression used to validate the value of a slot.
+	//
+	// Use a standard regular expression. Amazon Lex supports the following characters
+	// in the regular expression:
+	//
 	//   - A-Z, a-z
+	//
 	//   - 0-9
+	//
 	//   - Unicode characters ("\ u")
-	// Represent Unicode characters with four digits, for example "\u0041" or
-	// "\u005A". The following regular expression operators are not supported:
+	//
+	// Represent Unicode characters with four digits, for example "\u0041" or "\u005A".
+	//
+	// The following regular expression operators are not supported:
+	//
 	//   - Infinite repeaters: *, +, or {x,} with no upper bound.
+	//
 	//   - Wild card (.)
 	//
 	// This member is required.
@@ -695,9 +732,11 @@ type Statement struct {
 	// This member is required.
 	Messages []Message
 
-	// At runtime, if the client is using the PostText (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
-	// API, Amazon Lex includes the response card in the response. It substitutes all
-	// of the session attributes and slot values for placeholders in the response card.
+	//  At runtime, if the client is using the [PostText] API, Amazon Lex includes the response
+	// card in the response. It substitutes all of the session attributes and slot
+	// values for placeholders in the response card.
+	//
+	// [PostText]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
 	ResponseCard *string
 
 	noSmithyDocumentSerde
@@ -751,8 +790,8 @@ type UtteranceList struct {
 	// The version of the bot that processed the list.
 	BotVersion *string
 
-	// One or more UtteranceData objects that contain information about the utterances
-	// that have been made to a bot. The maximum number of object is 100.
+	// One or more UtteranceData objects that contain information about the utterances that have
+	// been made to a bot. The maximum number of object is 100.
 	Utterances []UtteranceData
 
 	noSmithyDocumentSerde

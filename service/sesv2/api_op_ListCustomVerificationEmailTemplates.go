@@ -12,10 +12,14 @@ import (
 )
 
 // Lists the existing custom verification email templates for your account in the
-// current Amazon Web Services Region. For more information about custom
-// verification email templates, see Using custom verification email templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
-// in the Amazon SES Developer Guide. You can execute this operation no more than
-// once per second.
+// current Amazon Web Services Region.
+//
+// For more information about custom verification email templates, see [Using custom verification email templates] in the
+// Amazon SES Developer Guide.
+//
+// You can execute this operation no more than once per second.
+//
+// [Using custom verification email templates]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
 func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, params *ListCustomVerificationEmailTemplatesInput, optFns ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error) {
 	if params == nil {
 		params = &ListCustomVerificationEmailTemplatesInput{}
@@ -42,8 +46,9 @@ type ListCustomVerificationEmailTemplatesInput struct {
 	// The number of results to show in a single call to
 	// ListCustomVerificationEmailTemplates . If the number of results is larger than
 	// the number you specified in this parameter, then the response includes a
-	// NextToken element, which you can use to obtain additional results. The value you
-	// specify has to be at least 1, and can be no more than 50.
+	// NextToken element, which you can use to obtain additional results.
+	//
+	// The value you specify has to be at least 1, and can be no more than 50.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -157,8 +162,9 @@ type ListCustomVerificationEmailTemplatesPaginatorOptions struct {
 	// The number of results to show in a single call to
 	// ListCustomVerificationEmailTemplates . If the number of results is larger than
 	// the number you specified in this parameter, then the response includes a
-	// NextToken element, which you can use to obtain additional results. The value you
-	// specify has to be at least 1, and can be no more than 50.
+	// NextToken element, which you can use to obtain additional results.
+	//
+	// The value you specify has to be at least 1, and can be no more than 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

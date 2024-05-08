@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified WorkSpaces. You can filter the results by using the
-// bundle identifier, directory identifier, or owner, but you can specify only one
-// filter at a time.
+// Describes the specified WorkSpaces.
+//
+// You can filter the results by using the bundle identifier, directory
+// identifier, or owner, but you can specify only one filter at a time.
 func (c *Client) DescribeWorkspaces(ctx context.Context, params *DescribeWorkspacesInput, optFns ...func(*Options)) (*DescribeWorkspacesOutput, error) {
 	if params == nil {
 		params = &DescribeWorkspacesInput{}
@@ -52,9 +53,11 @@ type DescribeWorkspacesInput struct {
 	UserName *string
 
 	// The identifiers of the WorkSpaces. You cannot combine this parameter with any
-	// other filter. Because the CreateWorkspaces operation is asynchronous, the
-	// identifier it returns is not immediately available. If you immediately call
-	// DescribeWorkspaces with this identifier, no information is returned.
+	// other filter.
+	//
+	// Because the CreateWorkspaces operation is asynchronous, the identifier it returns is not
+	// immediately available. If you immediately call DescribeWorkspaceswith this identifier, no
+	// information is returned.
 	WorkspaceIds []string
 
 	// The name of the user-decoupled WorkSpace.
@@ -69,8 +72,10 @@ type DescribeWorkspacesOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
-	// Information about the WorkSpaces. Because CreateWorkspaces is an asynchronous
-	// operation, some of the returned information could be incomplete.
+	// Information about the WorkSpaces.
+	//
+	// Because CreateWorkspaces is an asynchronous operation, some of the returned information could
+	// be incomplete.
 	Workspaces []types.Workspace
 
 	// Metadata pertaining to the operation's result.

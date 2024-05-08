@@ -32,8 +32,9 @@ type DescribeGlobalClustersInput struct {
 
 	// The user-supplied DB cluster identifier. If this parameter is specified, only
 	// information about the specified DB cluster is returned. This parameter is not
-	// case-sensitive. Constraints: If supplied, must match an existing DB cluster
-	// identifier.
+	// case-sensitive.
+	//
+	// Constraints: If supplied, must match an existing DB cluster identifier.
 	GlobalClusterIdentifier *string
 
 	// (Optional) A pagination token returned by a previous call to
@@ -43,7 +44,10 @@ type DescribeGlobalClustersInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination marker token is included in
-	// the response that you can use to retrieve the remaining results. Default: 100
+	// the response that you can use to retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -155,7 +159,10 @@ var _ DescribeGlobalClustersAPIClient = (*Client)(nil)
 type DescribeGlobalClustersPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination marker token is included in
-	// the response that you can use to retrieve the remaining results. Default: 100
+	// the response that you can use to retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

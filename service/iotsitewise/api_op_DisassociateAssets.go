@@ -31,29 +31,32 @@ type DisassociateAssetsInput struct {
 
 	// The ID of the parent asset from which to disassociate the child asset. This can
 	// be either the actual ID in UUID format, or else externalId: followed by the
-	// external ID, if it has one. For more information, see Referencing objects with
-	// external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// external ID, if it has one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User
+	// Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string
 
 	// The ID of the child asset to disassociate. This can be either the actual ID in
 	// UUID format, or else externalId: followed by the external ID, if it has one.
-	// For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	ChildAssetId *string
 
 	// The ID of a hierarchy in the parent asset's model. (This can be either the
 	// actual ID in UUID format, or else externalId: followed by the external ID, if
-	// it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.) Hierarchies allow different groupings of assets
-	// to be formed that all come from the same asset model. You can use the hierarchy
-	// ID to identify the correct asset to disassociate. For more information, see
-	// Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
-	// in the IoT SiteWise User Guide.
+	// it has one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.)
+	// Hierarchies allow different groupings of assets to be formed that all come from
+	// the same asset model. You can use the hierarchy ID to identify the correct asset
+	// to disassociate. For more information, see [Asset hierarchies]in the IoT SiteWise User Guide.
+	//
+	// [Asset hierarchies]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	HierarchyId *string

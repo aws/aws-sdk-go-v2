@@ -13,10 +13,14 @@ import (
 
 // Creates a cross-account shared resource. The resource owner makes an offer to
 // share the resource with the principal subscriber (an AWS user with a different
-// account than the resource owner). The following resources support cross-account
-// sharing:
+// account than the resource owner).
+//
+// The following resources support cross-account sharing:
+//
 //   - Healthomics variant stores
+//
 //   - Healthomics annotation stores
+//
 //   - Private workflows
 func (c *Client) CreateShare(ctx context.Context, params *CreateShareInput, optFns ...func(*Options)) (*CreateShareOutput, error) {
 	if params == nil {

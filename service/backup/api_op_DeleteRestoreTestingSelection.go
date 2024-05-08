@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Input the Restore Testing Plan name and Restore Testing Selection name. All
-// testing selections associated with a restore testing plan must be deleted before
-// the restore testing plan can be deleted.
+// Input the Restore Testing Plan name and Restore Testing Selection name.
+//
+// All testing selections associated with a restore testing plan must be deleted
+// before the restore testing plan can be deleted.
 func (c *Client) DeleteRestoreTestingSelection(ctx context.Context, params *DeleteRestoreTestingSelectionInput, optFns ...func(*Options)) (*DeleteRestoreTestingSelectionOutput, error) {
 	if params == nil {
 		params = &DeleteRestoreTestingSelectionInput{}

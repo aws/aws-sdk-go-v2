@@ -28,13 +28,13 @@ func (c *Client) DeleteConnectorProfile(ctx context.Context, params *DeleteConne
 
 type DeleteConnectorProfileInput struct {
 
-	// The name of the connector profile. The name is unique for each ConnectorProfile
+	//  The name of the connector profile. The name is unique for each ConnectorProfile
 	// in your account.
 	//
 	// This member is required.
 	ConnectorProfileName *string
 
-	// Indicates whether Amazon AppFlow should delete the profile, even if it is
+	//  Indicates whether Amazon AppFlow should delete the profile, even if it is
 	// currently in use in one or more flows.
 	ForceDelete bool
 

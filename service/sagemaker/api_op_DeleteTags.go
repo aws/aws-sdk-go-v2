@@ -10,13 +10,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified tags from an SageMaker resource. To list a resource's
-// tags, use the ListTags API. When you call this API to delete tags from a
-// hyperparameter tuning job, the deleted tags are not removed from training jobs
-// that the hyperparameter tuning job launched before you called this API. When you
-// call this API to delete tags from a SageMaker Domain or User Profile, the
-// deleted tags are not removed from Apps that the SageMaker Domain or User Profile
-// launched before you called this API.
+// Deletes the specified tags from an SageMaker resource.
+//
+// To list a resource's tags, use the ListTags API.
+//
+// When you call this API to delete tags from a hyperparameter tuning job, the
+// deleted tags are not removed from training jobs that the hyperparameter tuning
+// job launched before you called this API.
+//
+// When you call this API to delete tags from a SageMaker Domain or User Profile,
+// the deleted tags are not removed from Apps that the SageMaker Domain or User
+// Profile launched before you called this API.
 func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns ...func(*Options)) (*DeleteTagsOutput, error) {
 	if params == nil {
 		params = &DeleteTagsInput{}

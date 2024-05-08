@@ -16,8 +16,9 @@ import (
 )
 
 // Returns the current status of a resource operation request. For more
-// information, see Tracking the progress of resource operation requests (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track)
-// in the Amazon Web Services Cloud Control API User Guide.
+// information, see [Tracking the progress of resource operation requests]in the Amazon Web Services Cloud Control API User Guide.
+//
+// [Tracking the progress of resource operation requests]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html#resource-operations-manage-requests-track
 func (c *Client) GetResourceRequestStatus(ctx context.Context, params *GetResourceRequestStatusInput, optFns ...func(*Options)) (*GetResourceRequestStatusOutput, error) {
 	if params == nil {
 		params = &GetResourceRequestStatusInput{}
@@ -36,6 +37,7 @@ func (c *Client) GetResourceRequestStatus(ctx context.Context, params *GetResour
 type GetResourceRequestStatusInput struct {
 
 	// A unique token used to track the progress of the resource operation request.
+	//
 	// Request tokens are included in the ProgressEvent type returned by a resource
 	// operation request.
 	//
@@ -177,12 +179,13 @@ type ResourceRequestSuccessWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetResourceRequestStatusInput, *GetResourceRequestStatusOutput, error) (bool, error)
 }
 

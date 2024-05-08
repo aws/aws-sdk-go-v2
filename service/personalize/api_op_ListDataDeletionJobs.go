@@ -15,8 +15,9 @@ import (
 // time, with the most recent first. When a dataset group is not specified, all the
 // data deletion jobs associated with the account are listed. The response provides
 // the properties for each job, including the Amazon Resource Name (ARN). For more
-// information on data deletion jobs, see Deleting users (https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html)
-// .
+// information on data deletion jobs, see [Deleting users].
+//
+// [Deleting users]: https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html
 func (c *Client) ListDataDeletionJobs(ctx context.Context, params *ListDataDeletionJobsInput, optFns ...func(*Options)) (*ListDataDeletionJobsOutput, error) {
 	if params == nil {
 		params = &ListDataDeletionJobsInput{}

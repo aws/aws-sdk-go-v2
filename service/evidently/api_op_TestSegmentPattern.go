@@ -11,8 +11,9 @@ import (
 )
 
 // Use this operation to test a rules pattern that you plan to use to create an
-// audience segment. For more information about segments, see CreateSegment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html)
-// .
+// audience segment. For more information about segments, see [CreateSegment].
+//
+// [CreateSegment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateSegment.html
 func (c *Client) TestSegmentPattern(ctx context.Context, params *TestSegmentPatternInput, optFns ...func(*Options)) (*TestSegmentPatternOutput, error) {
 	if params == nil {
 		params = &TestSegmentPatternInput{}

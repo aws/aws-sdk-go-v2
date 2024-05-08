@@ -12,8 +12,9 @@ import (
 )
 
 // Lists the hosted connections that have been provisioned on the specified
-// interconnect or link aggregation group (LAG). Intended for use by Direct Connect
-// Partners only.
+// interconnect or link aggregation group (LAG).
+//
+// Intended for use by Direct Connect Partners only.
 func (c *Client) DescribeHostedConnections(ctx context.Context, params *DescribeHostedConnectionsInput, optFns ...func(*Options)) (*DescribeHostedConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeHostedConnectionsInput{}

@@ -14,10 +14,15 @@ import (
 // Returns the event types that meet the specified filter criteria. You can use
 // this API operation to find information about the Health event, such as the
 // category, Amazon Web Service, and event code. The metadata for each event
-// appears in the EventType (https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html)
-// object. If you don't specify a filter criteria, the API operation returns all
-// event types, in no particular order. This API operation uses pagination. Specify
-// the nextToken parameter in the next request to return more results.
+// appears in the [EventType]object.
+//
+// If you don't specify a filter criteria, the API operation returns all event
+// types, in no particular order.
+//
+// This API operation uses pagination. Specify the nextToken parameter in the next
+// request to return more results.
+//
+// [EventType]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html
 func (c *Client) DescribeEventTypes(ctx context.Context, params *DescribeEventTypesInput, optFns ...func(*Options)) (*DescribeEventTypesOutput, error) {
 	if params == nil {
 		params = &DescribeEventTypesInput{}
@@ -43,8 +48,10 @@ type DescribeEventTypesInput struct {
 	Locale *string
 
 	// The maximum number of items to return in one batch, between 10 and 100,
-	// inclusive. If you don't specify the maxResults parameter, this operation
-	// returns a maximum of 30 items by default.
+	// inclusive.
+	//
+	// If you don't specify the maxResults parameter, this operation returns a maximum
+	// of 30 items by default.
 	MaxResults *int32
 
 	// If the results of a search are large, only a portion of the results are
@@ -166,8 +173,10 @@ var _ DescribeEventTypesAPIClient = (*Client)(nil)
 // DescribeEventTypes
 type DescribeEventTypesPaginatorOptions struct {
 	// The maximum number of items to return in one batch, between 10 and 100,
-	// inclusive. If you don't specify the maxResults parameter, this operation
-	// returns a maximum of 30 items by default.
+	// inclusive.
+	//
+	// If you don't specify the maxResults parameter, this operation returns a maximum
+	// of 30 items by default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

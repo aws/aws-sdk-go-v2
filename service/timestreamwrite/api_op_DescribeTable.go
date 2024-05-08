@@ -13,10 +13,11 @@ import (
 )
 
 // Returns information about the table, including the table name, database name,
-// retention duration of the memory store and the magnetic store. Service quotas
-// apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
-// . See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-table.html)
-// for details.
+// retention duration of the memory store and the magnetic store. [Service quotas apply]. See [code sample] for
+// details.
+//
+// [Service quotas apply]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.describe-table.html
 func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, optFns ...func(*Options)) (*DescribeTableOutput, error) {
 	if params == nil {
 		params = &DescribeTableInput{}

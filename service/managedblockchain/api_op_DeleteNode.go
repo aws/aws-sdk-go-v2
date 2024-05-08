@@ -11,7 +11,9 @@ import (
 )
 
 // Deletes a node that your Amazon Web Services account owns. All data on the node
-// is lost and cannot be recovered. Applies to Hyperledger Fabric and Ethereum.
+// is lost and cannot be recovered.
+//
+// Applies to Hyperledger Fabric and Ethereum.
 func (c *Client) DeleteNode(ctx context.Context, params *DeleteNodeInput, optFns ...func(*Options)) (*DeleteNodeOutput, error) {
 	if params == nil {
 		params = &DeleteNodeInput{}
@@ -29,9 +31,12 @@ func (c *Client) DeleteNode(ctx context.Context, params *DeleteNodeInput, optFns
 
 type DeleteNodeInput struct {
 
-	// The unique identifier of the network that the node is on. Ethereum public
-	// networks have the following NetworkId s:
+	// The unique identifier of the network that the node is on.
+	//
+	// Ethereum public networks have the following NetworkId s:
+	//
 	//   - n-ethereum-mainnet
+	//
 	//   - n-ethereum-goerli
 	//
 	// This member is required.
@@ -42,8 +47,9 @@ type DeleteNodeInput struct {
 	// This member is required.
 	NodeId *string
 
-	// The unique identifier of the member that owns this node. Applies only to
-	// Hyperledger Fabric and is required for Hyperledger Fabric.
+	// The unique identifier of the member that owns this node.
+	//
+	// Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.
 	MemberId *string
 
 	noSmithyDocumentSerde

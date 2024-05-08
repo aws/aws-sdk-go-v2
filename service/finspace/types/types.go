@@ -11,7 +11,7 @@ import (
 // your cluster.
 type AutoScalingConfiguration struct {
 
-	// The metric your cluster will track in order to scale in and out. For example,
+	//  The metric your cluster will track in order to scale in and out. For example,
 	// CPU_UTILIZATION_PERCENTAGE is the average CPU usage across all the nodes in a
 	// cluster.
 	AutoScalingMetric AutoScalingMetric
@@ -51,20 +51,27 @@ type CapacityConfiguration struct {
 	// The type that determines the hardware of the host computer used for your
 	// cluster instance. Each node type offers different memory and storage
 	// capabilities. Choose a node type based on the requirements of the application or
-	// software that you plan to run on your instance. You can only specify one of the
-	// following values:
-	//   - kx.s.large – The node type with a configuration of 12 GiB memory and 2
-	//   vCPUs.
+	// software that you plan to run on your instance.
+	//
+	// You can only specify one of the following values:
+	//
+	//   - kx.s.large – The node type with a configuration of 12 GiB memory and 2 vCPUs.
+	//
 	//   - kx.s.xlarge – The node type with a configuration of 27 GiB memory and 4
 	//   vCPUs.
+	//
 	//   - kx.s.2xlarge – The node type with a configuration of 54 GiB memory and 8
 	//   vCPUs.
+	//
 	//   - kx.s.4xlarge – The node type with a configuration of 108 GiB memory and 16
 	//   vCPUs.
+	//
 	//   - kx.s.8xlarge – The node type with a configuration of 216 GiB memory and 32
 	//   vCPUs.
+	//
 	//   - kx.s.16xlarge – The node type with a configuration of 432 GiB memory and 64
 	//   vCPUs.
+	//
 	//   - kx.s.32xlarge – The node type with a configuration of 864 GiB memory and 128
 	//   vCPUs.
 	NodeType *string
@@ -76,7 +83,9 @@ type CapacityConfiguration struct {
 type ChangeRequest struct {
 
 	// Defines the type of change request. A changeType can have the following values:
+	//
 	//   - PUT – Adds or updates files in a database.
+	//
 	//   - DELETE – Deletes files in a database.
 	//
 	// This member is required.
@@ -216,7 +225,7 @@ type FederationParameters struct {
 // Defines the ICMP protocol that consists of the ICMP type and code.
 type IcmpTypeCode struct {
 
-	// The ICMP code. A value of -1 means all codes for the specified ICMP type.
+	//  The ICMP code. A value of -1 means all codes for the specified ICMP type.
 	//
 	// This member is required.
 	Code int32
@@ -236,13 +245,21 @@ type KxAttachedCluster struct {
 	ClusterName *string
 
 	// The status of the attached cluster.
+	//
 	//   - PENDING – The cluster is pending creation.
+	//
 	//   - CREATING – The cluster creation process is in progress.
+	//
 	//   - CREATE_FAILED – The cluster creation process has failed.
+	//
 	//   - RUNNING – The cluster creation process is running.
+	//
 	//   - UPDATING – The cluster is in the process of being updated.
+	//
 	//   - DELETING – The cluster is in the process of being deleted.
+	//
 	//   - DELETED – The cluster has been deleted.
+	//
 	//   - DELETE_FAILED – The cluster failed to delete.
 	ClusterStatus KxClusterStatus
 
@@ -262,9 +279,13 @@ type KxCacheStorageConfiguration struct {
 	Size *int32
 
 	// The type of cache storage. The valid values are:
+	//
 	//   - CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.
+	//
 	//   - CACHE_250 – This type provides at least 250 MB/s disk access throughput.
+	//
 	//   - CACHE_12 – This type provides at least 12 MB/s disk access throughput.
+	//
 	// For cache type CACHE_1000 and CACHE_250 you can select cache size as 1200 GB or
 	// increments of 2400 GB. For cache type CACHE_12 you can select the cache size in
 	// increments of 6000 GB.
@@ -296,10 +317,14 @@ type KxChangesetListEntry struct {
 	// 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
 
-	// Status of the changeset.
+	//  Status of the changeset.
+	//
 	//   - Pending – Changeset creation is pending.
+	//
 	//   - Processing – Changeset creation is running.
+	//
 	//   - Failed – Changeset creation has failed.
+	//
 	//   - Complete – Changeset creation has succeeded.
 	Status ChangesetStatus
 
@@ -309,12 +334,14 @@ type KxChangesetListEntry struct {
 // The details of a kdb cluster.
 type KxCluster struct {
 
-	// The availability zone identifiers for the requested regions.
+	//  The availability zone identifiers for the requested regions.
 	AvailabilityZoneId *string
 
 	// The number of availability zones assigned per cluster. This can be one of the
 	// following:
+	//
 	//   - SINGLE – Assigns one availability zone per cluster.
+	//
 	//   - MULTI – Assigns all the availability zones per cluster.
 	AzMode KxAzMode
 
@@ -326,24 +353,29 @@ type KxCluster struct {
 
 	// Specifies the type of KDB database that is being created. The following types
 	// are available:
+	//
 	//   - HDB – A Historical Database. The data is only accessible with read-only
 	//   permissions from one of the FinSpace managed kdb databases mounted to the
 	//   cluster.
+	//
 	//   - RDB – A Realtime Database. This type of database captures all the data from
 	//   a ticker plant and stores it in memory until the end of day, after which it
 	//   writes all of its data to a disk and reloads the HDB. This cluster type requires
 	//   local storage for temporary storage of data during the savedown process. If you
 	//   specify this field in your request, you must provide the
 	//   savedownStorageConfiguration parameter.
+	//
 	//   - GATEWAY – A gateway cluster allows you to access data across processes in
 	//   kdb systems. It allows you to create your own routing logic using the
 	//   initialization scripts and custom code. This type of cluster does not require a
 	//   writable local storage.
+	//
 	//   - GP – A general purpose cluster allows you to quickly iterate on code during
 	//   development by granting greater access to system commands and enabling a fast
 	//   reload of custom code. This cluster type can optionally mount databases
 	//   including cache and savedown storage. For this cluster type, the node count is
 	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
+	//
 	//   - Tickerplant – A tickerplant cluster allows you to subscribe to feed
 	//   handlers based on IAM permissions. It can publish to RDBs, other Tickerplants,
 	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
@@ -356,7 +388,7 @@ type KxCluster struct {
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// An IAM role that defines a set of permissions associated with a cluster. These
+	//  An IAM role that defines a set of permissions associated with a cluster. These
 	// permissions are assumed when a cluster attempts to access another cluster.
 	ExecutionRole *string
 
@@ -374,38 +406,51 @@ type KxCluster struct {
 	ReleaseLabel *string
 
 	// The status of a cluster.
+	//
 	//   - PENDING – The cluster is pending creation.
+	//
 	//   - CREATING –The cluster creation process is in progress.
+	//
 	//   - CREATE_FAILED– The cluster creation process has failed.
+	//
 	//   - RUNNING – The cluster creation process is running.
+	//
 	//   - UPDATING – The cluster is in the process of being updated.
+	//
 	//   - DELETING – The cluster is in the process of being deleted.
+	//
 	//   - DELETED – The cluster has been deleted.
+	//
 	//   - DELETE_FAILED – The cluster failed to delete.
 	Status KxClusterStatus
 
 	// The error message when a failed state occurs.
 	StatusReason *string
 
-	// A list of volumes attached to the cluster.
+	//  A list of volumes attached to the cluster.
 	Volumes []Volume
 
 	noSmithyDocumentSerde
 }
 
-// The configuration that allows you to choose how you want to update code on a
+//	The configuration that allows you to choose how you want to update code on a
+//
 // cluster. Depending on the option you choose, you can reduce the time it takes to
 // update the cluster.
 type KxClusterCodeDeploymentConfiguration struct {
 
-	// The type of deployment that you want on a cluster.
+	//  The type of deployment that you want on a cluster.
+	//
 	//   - ROLLING – This options updates the cluster by stopping the exiting q
 	//   process and starting a new q process with updated configuration.
+	//
 	//   - NO_RESTART – This option updates the cluster without stopping the running q
 	//   process. It is only available for GP type cluster. This option is quicker as
-	//   it reduces the turn around time to update configuration on a cluster. With this
-	//   deployment mode, you cannot update the initializationScript and
+	//   it reduces the turn around time to update configuration on a cluster.
+	//
+	// With this deployment mode, you cannot update the initializationScript and
 	//   commandLineArguments parameters.
+	//
 	//   - FORCE – This option updates the cluster by immediately stopping all the
 	//   running processes before starting up new ones with the updated configuration.
 	//
@@ -433,6 +478,7 @@ type KxDatabaseCacheConfiguration struct {
 
 	// The type of disk cache. This parameter is used to map the database path to
 	// cache storage. The valid values are:
+	//
 	//   - CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.
 	//
 	// This member is required.
@@ -444,7 +490,7 @@ type KxDatabaseCacheConfiguration struct {
 	// This member is required.
 	DbPaths []string
 
-	// The name of the dataview to be used for caching historical data on disk.
+	//  The name of the dataview to be used for caching historical data on disk.
 	DataviewName *string
 
 	noSmithyDocumentSerde
@@ -466,10 +512,10 @@ type KxDatabaseConfiguration struct {
 	// A unique identifier of the changeset that is associated with the cluster.
 	ChangesetId *string
 
-	// The configuration of the dataview to be used with specified cluster.
+	//  The configuration of the dataview to be used with specified cluster.
 	DataviewConfiguration *KxDataviewConfiguration
 
-	// The name of the dataview to be used for caching historical data on disk.
+	//  The name of the dataview to be used for caching historical data on disk.
 	DataviewName *string
 
 	noSmithyDocumentSerde
@@ -497,25 +543,25 @@ type KxDatabaseListEntry struct {
 // The active version of the dataview that is currently in use by this cluster.
 type KxDataviewActiveVersion struct {
 
-	// The list of clusters that are currently using this dataview.
+	//  The list of clusters that are currently using this dataview.
 	AttachedClusters []string
 
 	// A unique identifier for the changeset.
 	ChangesetId *string
 
-	// The timestamp at which the dataview version was active. The value is determined
-	// as epoch time in milliseconds. For example, the value for Monday, November 1,
-	// 2021 12:00:00 PM UTC is specified as 1635768000000.
+	//  The timestamp at which the dataview version was active. The value is
+	// determined as epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// The configuration that contains the database path of the data that you want to
+	//  The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
 	SegmentConfigurations []KxDataviewSegmentConfiguration
 
-	// A unique identifier of the active version.
+	//  A unique identifier of the active version.
 	VersionId *string
 
 	noSmithyDocumentSerde
@@ -527,13 +573,13 @@ type KxDataviewConfiguration struct {
 	// A unique identifier for the changeset.
 	ChangesetId *string
 
-	// The unique identifier of the dataview.
+	//  The unique identifier of the dataview.
 	DataviewName *string
 
-	// The version of the dataview corresponding to a given changeset.
+	//  The version of the dataview corresponding to a given changeset.
 	DataviewVersionId *string
 
-	// The db path and volume configuration for the segmented database.
+	//  The db path and volume configuration for the segmented database.
 	SegmentConfigurations []KxDataviewSegmentConfiguration
 
 	noSmithyDocumentSerde
@@ -542,15 +588,15 @@ type KxDataviewConfiguration struct {
 // A collection of kdb dataview entries.
 type KxDataviewListEntry struct {
 
-	// The active changeset versions for the given dataview entry.
+	//  The active changeset versions for the given dataview entry.
 	ActiveVersions []KxDataviewActiveVersion
 
-	// The option to specify whether you want to apply all the future additions and
+	//  The option to specify whether you want to apply all the future additions and
 	// corrections automatically to the dataview when you ingest new changesets. The
 	// default value is false.
 	AutoUpdate bool
 
-	// The identifier of the availability zones.
+	//  The identifier of the availability zones.
 	AvailabilityZoneId *string
 
 	// The number of availability zones you want to assign per volume. Currently,
@@ -560,18 +606,18 @@ type KxDataviewListEntry struct {
 	// A unique identifier for the changeset.
 	ChangesetId *string
 
-	// The timestamp at which the dataview list entry was created in FinSpace. The
+	//  The timestamp at which the dataview list entry was created in FinSpace. The
 	// value is determined as epoch time in milliseconds. For example, the value for
 	// Monday, November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// A unique identifier of the database.
+	//  A unique identifier of the database.
 	DatabaseName *string
 
-	// A unique identifier of the dataview.
+	//  A unique identifier of the dataview.
 	DataviewName *string
 
-	// A description for the dataview list entry.
+	//  A description for the dataview list entry.
 	Description *string
 
 	// A unique identifier for the kdb environment.
@@ -582,39 +628,40 @@ type KxDataviewListEntry struct {
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
 
-	// Returns True if the dataview is created as writeable and False otherwise.
+	//  Returns True if the dataview is created as writeable and False otherwise.
 	ReadWrite bool
 
-	// The configuration that contains the database path of the data that you want to
+	//  The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
 	SegmentConfigurations []KxDataviewSegmentConfiguration
 
-	// The status of a given dataview entry.
+	//  The status of a given dataview entry.
 	Status KxDataviewStatus
 
-	// The error message when a failed state occurs.
+	//  The error message when a failed state occurs.
 	StatusReason *string
 
 	noSmithyDocumentSerde
 }
 
-// The configuration that contains the database path of the data that you want to
+//	The configuration that contains the database path of the data that you want to
+//
 // place on each selected volume. Each segment must have a unique database path for
 // each volume. If you do not explicitly specify any database path for a volume,
 // they are accessible from the cluster through the default S3/object store
 // segment.
 type KxDataviewSegmentConfiguration struct {
 
-	// The database path of the data that you want to place on each selected volume
+	//  The database path of the data that you want to place on each selected volume
 	// for the segment. Each segment must have a unique database path for each volume.
 	//
 	// This member is required.
 	DbPaths []string
 
-	// The name of the volume where you want to add data.
+	//  The name of the volume where you want to add data.
 	//
 	// This member is required.
 	VolumeName *string
@@ -628,18 +675,22 @@ type KxDataviewSegmentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration that allows you to choose how you want to update the
+//	The configuration that allows you to choose how you want to update the
+//
 // databases on a cluster. Depending on the option you choose, you can reduce the
 // time it takes to update the cluster.
 type KxDeploymentConfiguration struct {
 
-	// The type of deployment that you want on a cluster.
+	//  The type of deployment that you want on a cluster.
+	//
 	//   - ROLLING – This options updates the cluster by stopping the exiting q
 	//   process and starting a new q process with updated configuration.
+	//
 	//   - NO_RESTART – This option updates the cluster without stopping the running q
 	//   process. It is only available for HDB type cluster. This option is quicker as
-	//   it reduces the turn around time to update configuration on a cluster. With this
-	//   deployment mode, you cannot update the initializationScript and
+	//   it reduces the turn around time to update configuration on a cluster.
+	//
+	// With this deployment mode, you cannot update the initializationScript and
 	//   commandLineArguments parameters.
 	//
 	// This member is required.
@@ -696,15 +747,24 @@ type KxEnvironment struct {
 	Name *string
 
 	// The status of the environment creation.
+	//
 	//   - CREATE_REQUESTED – Environment creation has been requested.
+	//
 	//   - CREATING – Environment is in the process of being created.
+	//
 	//   - FAILED_CREATION – Environment creation has failed.
+	//
 	//   - CREATED – Environment is successfully created and is currently active.
+	//
 	//   - DELETE REQUESTED – Environment deletion has been requested.
+	//
 	//   - DELETING – Environment is in the process of being deleted.
+	//
 	//   - RETRY_DELETION – Initial environment deletion failed, system is
 	//   reattempting delete.
+	//
 	//   - DELETED – Environment has been deleted.
+	//
 	//   - FAILED_DELETION – Environment deletion has failed.
 	Status EnvironmentStatus
 
@@ -723,16 +783,17 @@ type KxEnvironment struct {
 	noSmithyDocumentSerde
 }
 
-// The structure containing the size and type of the network attached storage
+//	The structure containing the size and type of the network attached storage
+//
 // (NAS_1) file system volume.
 type KxNAS1Configuration struct {
 
-	// The size of the network attached storage. For storage type SSD_1000 and SSD_250
+	//  The size of the network attached storage. For storage type SSD_1000 and SSD_250
 	// you can select the minimum size as 1200 GB or increments of 2400 GB. For storage
 	// type HDD_12 you can select the minimum size as 6000 GB or increments of 6000 GB.
 	Size *int32
 
-	// The type of the network attached storage.
+	//  The type of the network attached storage.
 	Type KxNAS1Type
 
 	noSmithyDocumentSerde
@@ -753,8 +814,10 @@ type KxNode struct {
 	// A unique identifier for the node.
 	NodeId *string
 
-	// Specifies the status of the cluster nodes.
+	//  Specifies the status of the cluster nodes.
+	//
 	//   - RUNNING – The node is actively serving.
+	//
 	//   - PROVISIONING – The node is being prepared.
 	Status KxNodeStatus
 
@@ -771,10 +834,11 @@ type KxSavedownStorageConfiguration struct {
 
 	// The type of writeable storage space for temporarily storing your savedown data.
 	// The valid values are:
+	//
 	//   - SDS01 – This type represents 3000 IOPS and io2 ebs volume type.
 	Type KxSavedownStorageType
 
-	// The name of the kdb volume that you want to use as writeable save-down storage
+	//  The name of the kdb volume that you want to use as writeable save-down storage
 	// for clusters.
 	VolumeName *string
 
@@ -787,31 +851,39 @@ type KxScalingGroup struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneId *string
 
-	// The list of clusters currently active in a given scaling group.
+	//  The list of clusters currently active in a given scaling group.
 	Clusters []string
 
-	// The timestamp at which the scaling group was created in FinSpace. The value is
+	//  The timestamp at which the scaling group was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// The memory and CPU capabilities of the scaling group host on which FinSpace
-	// Managed kdb clusters will be placed. You can add one of the following values:
+	//  The memory and CPU capabilities of the scaling group host on which FinSpace
+	// Managed kdb clusters will be placed.
+	//
+	// You can add one of the following values:
+	//
 	//   - kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16
 	//   vCPUs.
+	//
 	//   - kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32
 	//   vCPUs.
+	//
 	//   - kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64
 	//   vCPUs.
+	//
 	//   - kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and
 	//   128 vCPUs.
+	//
 	//   - kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and
 	//   64 vCPUs.
+	//
 	//   - kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and
 	//   96 vCPUs.
 	HostType *string
 
-	// The last time that the scaling group was updated in FinSpace. The value is
+	//  The last time that the scaling group was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
@@ -819,10 +891,10 @@ type KxScalingGroup struct {
 	// A unique identifier for the kdb scaling group.
 	ScalingGroupName *string
 
-	// The status of scaling groups.
+	//  The status of scaling groups.
 	Status KxScalingGroupStatus
 
-	// The error message when a failed state occurs.
+	//  The error message when a failed state occurs.
 	StatusReason *string
 
 	noSmithyDocumentSerde
@@ -831,13 +903,13 @@ type KxScalingGroup struct {
 // The structure that stores the capacity configuration details of a scaling group.
 type KxScalingGroupConfiguration struct {
 
-	// A reservation of the minimum amount of memory that should be available on the
+	//  A reservation of the minimum amount of memory that should be available on the
 	// scaling group for a kdb cluster to be successfully placed in a scaling group.
 	//
 	// This member is required.
 	MemoryReservation *int32
 
-	// The number of kdb cluster nodes.
+	//  The number of kdb cluster nodes.
 	//
 	// This member is required.
 	NodeCount *int32
@@ -847,11 +919,11 @@ type KxScalingGroupConfiguration struct {
 	// This member is required.
 	ScalingGroupName *string
 
-	// The number of vCPUs that you want to reserve for each node of this kdb cluster
+	//  The number of vCPUs that you want to reserve for each node of this kdb cluster
 	// on the scaling group host.
 	Cpu *float64
 
-	// An optional hard limit on the amount of memory a kdb cluster can use.
+	//  An optional hard limit on the amount of memory a kdb cluster can use.
 	MemoryLimit *int32
 
 	noSmithyDocumentSerde
@@ -869,9 +941,10 @@ type KxUser struct {
 	// The timestamp at which the kdb user was updated.
 	UpdateTimestamp *time.Time
 
-	// The Amazon Resource Name (ARN) that identifies the user. For more information
-	// about ARNs and how to use ARNs in policies, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
-	// in the IAM User Guide.
+	//  The Amazon Resource Name (ARN) that identifies the user. For more information
+	// about ARNs and how to use ARNs in policies, see [IAM Identifiers]in the IAM User Guide.
+	//
+	// [IAM Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
 	UserArn *string
 
 	// A unique identifier for the user.
@@ -890,12 +963,12 @@ type KxVolume struct {
 	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode KxAzMode
 
-	// The timestamp at which the volume was created in FinSpace. The value is
+	//  The timestamp at which the volume was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// A description of the volume.
+	//  A description of the volume.
 	Description *string
 
 	// The last time that the volume was updated in FinSpace. The value is determined
@@ -904,14 +977,23 @@ type KxVolume struct {
 	LastModifiedTimestamp *time.Time
 
 	// The status of volume.
+	//
 	//   - CREATING – The volume creation is in progress.
+	//
 	//   - CREATE_FAILED – The volume creation has failed.
+	//
 	//   - ACTIVE – The volume is active.
+	//
 	//   - UPDATING – The volume is in the process of being updated.
+	//
 	//   - UPDATE_FAILED – The update action failed.
+	//
 	//   - UPDATED – The volume is successfully updated.
+	//
 	//   - DELETING – The volume is in the process of being deleted.
+	//
 	//   - DELETE_FAILED – The system failed to delete the volume.
+	//
 	//   - DELETED – The volume is successfully deleted.
 	Status KxVolumeStatus
 
@@ -921,48 +1003,49 @@ type KxVolume struct {
 	// A unique identifier for the volume.
 	VolumeName *string
 
-	// The type of file system volume. Currently, FinSpace only supports NAS_1 volume
+	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
 	VolumeType KxVolumeType
 
 	noSmithyDocumentSerde
 }
 
-// The network access control list (ACL) is an optional layer of security for your
-// VPC that acts as a firewall for controlling traffic in and out of one or more
-// subnets. The entry is a set of numbered ingress and egress rules that determine
-// whether a packet should be allowed in or out of a subnet associated with the
-// ACL. We process the entries in the ACL according to the rule numbers, in
-// ascending order.
+//	The network access control list (ACL) is an optional layer of security for
+//
+// your VPC that acts as a firewall for controlling traffic in and out of one or
+// more subnets. The entry is a set of numbered ingress and egress rules that
+// determine whether a packet should be allowed in or out of a subnet associated
+// with the ACL. We process the entries in the ACL according to the rule numbers,
+// in ascending order.
 type NetworkACLEntry struct {
 
-	// The IPv4 network range to allow or deny, in CIDR notation. For example,
+	//  The IPv4 network range to allow or deny, in CIDR notation. For example,
 	// 172.16.0.0/24 . We modify the specified CIDR block to its canonical form. For
 	// example, if you specify 100.68.0.18/18 , we modify it to 100.68.0.0/18 .
 	//
 	// This member is required.
 	CidrBlock *string
 
-	// The protocol number. A value of -1 means all the protocols.
+	//  The protocol number. A value of -1 means all the protocols.
 	//
 	// This member is required.
 	Protocol *string
 
-	// Indicates whether to allow or deny the traffic that matches the rule.
+	//  Indicates whether to allow or deny the traffic that matches the rule.
 	//
 	// This member is required.
 	RuleAction RuleAction
 
-	// The rule number for the entry. For example 100. All the network ACL entries are
-	// processed in ascending order by rule number.
+	//  The rule number for the entry. For example 100. All the network ACL entries
+	// are processed in ascending order by rule number.
 	//
 	// This member is required.
 	RuleNumber *int32
 
-	// Defines the ICMP protocol that consists of the ICMP type and code.
+	//  Defines the ICMP protocol that consists of the ICMP type and code.
 	IcmpTypeCode *IcmpTypeCode
 
-	// The range of ports the rule applies to.
+	//  The range of ports the rule applies to.
 	PortRange *PortRange
 
 	noSmithyDocumentSerde
@@ -971,12 +1054,12 @@ type NetworkACLEntry struct {
 // The range of ports the rule applies to.
 type PortRange struct {
 
-	// The first port in the range.
+	//  The first port in the range.
 	//
 	// This member is required.
 	From int32
 
-	// The last port in the range.
+	//  The last port in the range.
 	//
 	// This member is required.
 	To int32
@@ -1005,13 +1088,14 @@ type SuperuserParameters struct {
 	noSmithyDocumentSerde
 }
 
-// A configuration to store the Tickerplant logs. It consists of a list of volumes
-// that will be mounted to your cluster. For the cluster type Tickerplant , the
-// location of the TP volume on the cluster will be available by using the global
-// variable .aws.tp_log_path .
+//	A configuration to store the Tickerplant logs. It consists of a list of
+//
+// volumes that will be mounted to your cluster. For the cluster type Tickerplant ,
+// the location of the TP volume on the cluster will be available by using the
+// global variable .aws.tp_log_path .
 type TickerplantLogConfiguration struct {
 
-	// The name of the volumes for tickerplant logs.
+	//  The name of the volumes for tickerplant logs.
 	TickerplantLogVolumes []string
 
 	noSmithyDocumentSerde
@@ -1035,7 +1119,7 @@ type TransitGatewayConfiguration struct {
 	// This member is required.
 	TransitGatewayID *string
 
-	// The rules that define how you manage the outbound traffic from kdb network to
+	//  The rules that define how you manage the outbound traffic from kdb network to
 	// your internal network.
 	AttachmentNetworkAclConfiguration []NetworkACLEntry
 
@@ -1048,7 +1132,7 @@ type Volume struct {
 	// A unique identifier for the volume.
 	VolumeName *string
 
-	// The type of file system volume. Currently, FinSpace only supports NAS_1 volume
+	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
 	VolumeType VolumeType
 
@@ -1061,6 +1145,7 @@ type VpcConfiguration struct {
 
 	// The IP address type for cluster network configuration parameters. The following
 	// type is available:
+	//
 	//   - IP_V4 – IP address version 4
 	IpAddressType IPAddressType
 

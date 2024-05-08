@@ -13,12 +13,13 @@ import (
 // Deletes a group so that all users and sub groups that belong to the group can
 // no longer access documents only available to that group. For example, after
 // deleting the group "Summer Interns", all interns who belonged to that group no
-// longer see intern-only documents in their chat results. If you want to delete,
-// update, or replace users or sub groups of a group, you need to use the PutGroup
-// operation. For example, if a user in the group "Engineering" leaves the
-// engineering team and another user takes their place, you provide an updated list
-// of users or sub groups that belong to the "Engineering" group when calling
-// PutGroup .
+// longer see intern-only documents in their chat results.
+//
+// If you want to delete, update, or replace users or sub groups of a group, you
+// need to use the PutGroup operation. For example, if a user in the group
+// "Engineering" leaves the engineering team and another user takes their place,
+// you provide an updated list of users or sub groups that belong to the
+// "Engineering" group when calling PutGroup .
 func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGroupInput{}
@@ -51,14 +52,15 @@ type DeleteGroupInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The identifier of the data source linked to the group A group can be tied to
-	// multiple data sources. You can delete a group from accessing documents in a
-	// certain data source. For example, the groups "Research", "Engineering", and
-	// "Sales and Marketing" are all tied to the company's documents stored in the data
-	// sources Confluence and Salesforce. You want to delete "Research" and
-	// "Engineering" groups from Salesforce, so that these groups cannot access
-	// customer-related documents stored in Salesforce. Only "Sales and Marketing"
-	// should access documents in the Salesforce data source.
+	// The identifier of the data source linked to the group
+	//
+	// A group can be tied to multiple data sources. You can delete a group from
+	// accessing documents in a certain data source. For example, the groups
+	// "Research", "Engineering", and "Sales and Marketing" are all tied to the
+	// company's documents stored in the data sources Confluence and Salesforce. You
+	// want to delete "Research" and "Engineering" groups from Salesforce, so that
+	// these groups cannot access customer-related documents stored in Salesforce. Only
+	// "Sales and Marketing" should access documents in the Salesforce data source.
 	DataSourceId *string
 
 	noSmithyDocumentSerde

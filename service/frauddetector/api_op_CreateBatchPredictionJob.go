@@ -39,10 +39,13 @@ type CreateBatchPredictionJobInput struct {
 	// This member is required.
 	EventTypeName *string
 
-	// The ARN of the IAM role to use for this job request. The IAM Role must have
-	// read permissions to your input S3 bucket and write permissions to your output S3
-	// bucket. For more information about bucket permissions, see User policy examples (https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html)
-	// in the Amazon S3 User Guide.
+	// The ARN of the IAM role to use for this job request.
+	//
+	// The IAM Role must have read permissions to your input S3 bucket and write
+	// permissions to your output S3 bucket. For more information about bucket
+	// permissions, see [User policy examples]in the Amazon S3 User Guide.
+	//
+	// [User policy examples]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-policies-s3.html
 	//
 	// This member is required.
 	IamRoleArn *string

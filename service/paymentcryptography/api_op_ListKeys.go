@@ -12,16 +12,28 @@ import (
 )
 
 // Lists the keys in the caller's Amazon Web Services account and Amazon Web
-// Services Region. You can filter the list of keys. This is a paginated operation,
-// which means that each response might contain only a subset of all the keys. When
-// the response contains only a subset of keys, it includes a NextToken value. Use
-// this value in a subsequent ListKeys request to get more keys. When you receive
-// a response with no NextToken (or an empty or null value), that means there are
-// no more keys to get. Cross-account use: This operation can't be used across
-// different Amazon Web Services accounts. Related operations:
-//   - CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
-//   - DeleteKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html)
-//   - GetKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html)
+// Services Region. You can filter the list of keys.
+//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the keys. When the response contains only a subset of keys,
+// it includes a NextToken value. Use this value in a subsequent ListKeys request
+// to get more keys. When you receive a response with no NextToken (or an empty or
+// null value), that means there are no more keys to get.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
+// Related operations:
+//
+// [CreateKey]
+//
+// [DeleteKey]
+//
+// [GetKey]
+//
+// [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+// [GetKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {
 		params = &ListKeysInput{}
@@ -44,9 +56,10 @@ type ListKeysInput struct {
 
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer. This value is
-	// optional. If you include a value, it must be between 1 and 100, inclusive. If
-	// you do not include a value, it defaults to 50.
+	// than the specified number of items, but it might return fewer.
+	//
+	// This value is optional. If you include a value, it must be between 1 and 100,
+	// inclusive. If you do not include a value, it defaults to 50.
 	MaxResults *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -162,9 +175,10 @@ var _ ListKeysAPIClient = (*Client)(nil)
 type ListKeysPaginatorOptions struct {
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer. This value is
-	// optional. If you include a value, it must be between 1 and 100, inclusive. If
-	// you do not include a value, it defaults to 50.
+	// than the specified number of items, but it might return fewer.
+	//
+	// This value is optional. If you include a value, it must be between 1 and 100,
+	// inclusive. If you do not include a value, it defaults to 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

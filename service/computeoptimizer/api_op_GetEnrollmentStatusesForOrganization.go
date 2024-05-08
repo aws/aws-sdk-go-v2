@@ -12,8 +12,9 @@ import (
 )
 
 // Returns the Compute Optimizer enrollment (opt-in) status of organization member
-// accounts, if your account is an organization management account. To get the
-// enrollment status of standalone accounts, use the GetEnrollmentStatus action.
+// accounts, if your account is an organization management account.
+//
+// To get the enrollment status of standalone accounts, use the GetEnrollmentStatus action.
 func (c *Client) GetEnrollmentStatusesForOrganization(ctx context.Context, params *GetEnrollmentStatusesForOrganizationInput, optFns ...func(*Options)) (*GetEnrollmentStatusesForOrganizationOutput, error) {
 	if params == nil {
 		params = &GetEnrollmentStatusesForOrganizationInput{}
@@ -36,9 +37,10 @@ type GetEnrollmentStatusesForOrganizationInput struct {
 	Filters []types.EnrollmentFilter
 
 	// The maximum number of account enrollment statuses to return with a single
-	// request. You can specify up to 100 statuses to return with each request. To
-	// retrieve the remaining results, make another request with the returned nextToken
-	// value.
+	// request. You can specify up to 100 statuses to return with each request.
+	//
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of account enrollment statuses.
@@ -54,6 +56,7 @@ type GetEnrollmentStatusesForOrganizationOutput struct {
 	AccountEnrollmentStatuses []types.AccountEnrollmentStatus
 
 	// The token to use to advance to the next page of account enrollment statuses.
+	//
 	// This value is null when there are no more pages of account enrollment statuses
 	// to return.
 	NextToken *string
@@ -152,9 +155,10 @@ var _ GetEnrollmentStatusesForOrganizationAPIClient = (*Client)(nil)
 // for GetEnrollmentStatusesForOrganization
 type GetEnrollmentStatusesForOrganizationPaginatorOptions struct {
 	// The maximum number of account enrollment statuses to return with a single
-	// request. You can specify up to 100 statuses to return with each request. To
-	// retrieve the remaining results, make another request with the returned nextToken
-	// value.
+	// request. You can specify up to 100 statuses to return with each request.
+	//
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

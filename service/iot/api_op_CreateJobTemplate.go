@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job template. Requires permission to access the CreateJobTemplate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a job template.
+//
+// Requires permission to access the [CreateJobTemplate] action.
+//
+// [CreateJobTemplate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateJobTemplate(ctx context.Context, params *CreateJobTemplateInput, optFns ...func(*Options)) (*CreateJobTemplateOutput, error) {
 	if params == nil {
 		params = &CreateJobTemplateInput{}
@@ -47,20 +50,26 @@ type CreateJobTemplateInput struct {
 	// The package version Amazon Resource Names (ARNs) that are installed on the
 	// device when the job successfully completes. The package version must be in
 	// either the Published or Deprecated state when the job deploys. For more
-	// information, see Package version lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
-	// . Note:The following Length Constraints relates to a single ARN. Up to 25
-	// package version ARNs are allowed.
+	// information, see [Package version lifecycle].
+	//
+	// Note:The following Length Constraints relates to a single ARN. Up to 25 package
+	// version ARNs are allowed.
+	//
+	// [Package version lifecycle]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
 	DestinationPackageVersions []string
 
 	// The job document. Required if you don't specify a value for documentSource .
 	Document *string
 
 	// An S3 link, or S3 object URL, to the job document. The link is an Amazon S3
-	// object URL and is required if you don't specify a value for document . For
-	// example, --document-source
-	// https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0 For
-	// more information, see Methods for accessing a bucket (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html)
-	// .
+	// object URL and is required if you don't specify a value for document .
+	//
+	// For example, --document-source
+	// https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0
+	//
+	// For more information, see [Methods for accessing a bucket].
+	//
+	// [Methods for accessing a bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html
 	DocumentSource *string
 
 	// The ARN of the job to use as the basis for the job template.

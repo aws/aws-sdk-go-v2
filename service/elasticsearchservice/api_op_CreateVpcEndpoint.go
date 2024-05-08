@@ -46,8 +46,8 @@ type CreateVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the CreateVpcEndpoint operation. Contains
-// the configuration and status of the VPC Endpoint being created.
+// Container for response parameters to the CreateVpcEndpoint operation. Contains the configuration
+// and status of the VPC Endpoint being created.
 type CreateVpcEndpointOutput struct {
 
 	// Information about the newly created VPC endpoint.

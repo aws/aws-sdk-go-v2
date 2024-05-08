@@ -11,9 +11,10 @@ import (
 )
 
 // Creates or updates an access policy associated with an existing destination. An
-// access policy is an IAM policy document (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html)
-// that is used to authorize claims to register a subscription filter against a
-// given destination.
+// access policy is an [IAM policy document]that is used to authorize claims to register a subscription
+// filter against a given destination.
+//
+// [IAM policy document]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html
 func (c *Client) PutDestinationPolicy(ctx context.Context, params *PutDestinationPolicyInput, optFns ...func(*Options)) (*PutDestinationPolicyOutput, error) {
 	if params == nil {
 		params = &PutDestinationPolicyInput{}
@@ -48,9 +49,11 @@ type PutDestinationPolicyInput struct {
 	// you must first update the subscription filters in the accounts that send logs to
 	// this destination. If you do not, the subscription filters might stop working. By
 	// specifying true for forceUpdate , you are affirming that you have already
-	// updated the subscription filters. For more information, see Updating an
-	// existing cross-account subscription (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Cross-Account-Log_Subscription-Update.html)
+	// updated the subscription filters. For more information, see [Updating an existing cross-account subscription]
+	//
 	// If you omit this parameter, the default of false is used.
+	//
+	// [Updating an existing cross-account subscription]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Cross-Account-Log_Subscription-Update.html
 	ForceUpdate *bool
 
 	noSmithyDocumentSerde

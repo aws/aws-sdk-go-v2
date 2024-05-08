@@ -50,10 +50,13 @@ type UpdateEnvironmentInput struct {
 
 	// Forces the updates on the environment. This option is needed if the
 	// applications in the environment are not stopped or if there are ongoing
-	// application-related activities in the environment. If you use this option, be
-	// aware that it could lead to data corruption in the applications, and that you
-	// might need to perform repair and recovery procedures for the applications. This
-	// option is not needed if the attribute being updated is
+	// application-related activities in the environment.
+	//
+	// If you use this option, be aware that it could lead to data corruption in the
+	// applications, and that you might need to perform repair and recovery procedures
+	// for the applications.
+	//
+	// This option is not needed if the attribute being updated is
 	// preferredMaintenanceWindow .
 	ForceUpdate bool
 
@@ -63,8 +66,9 @@ type UpdateEnvironmentInput struct {
 	// Configures the maintenance window that you want for the runtime environment.
 	// The maintenance window must have the format ddd:hh24:mi-ddd:hh24:mi and must be
 	// less than 24 hours. The following two examples are valid maintenance windows:
-	// sun:23:45-mon:00:15 or sat:01:00-sat:03:00 . If you do not provide a value, a
-	// random system-generated value will be assigned.
+	// sun:23:45-mon:00:15 or sat:01:00-sat:03:00 .
+	//
+	// If you do not provide a value, a random system-generated value will be assigned.
 	PreferredMaintenanceWindow *string
 
 	noSmithyDocumentSerde

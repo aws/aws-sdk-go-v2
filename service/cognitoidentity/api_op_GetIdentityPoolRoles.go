@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the roles for an identity pool. You must use AWS Developer credentials to
-// call this API.
+// Gets the roles for an identity pool.
+//
+// You must use AWS Developer credentials to call this API.
 func (c *Client) GetIdentityPoolRoles(ctx context.Context, params *GetIdentityPoolRolesInput, optFns ...func(*Options)) (*GetIdentityPoolRolesOutput, error) {
 	if params == nil {
 		params = &GetIdentityPoolRolesInput{}
@@ -46,8 +47,8 @@ type GetIdentityPoolRolesOutput struct {
 	IdentityPoolId *string
 
 	// How users for a specific identity provider are to mapped to roles. This is a
-	// String-to- RoleMapping object map. The string identifies the identity provider,
-	// for example, "graph.facebook.com" or
+	// String-to-RoleMapping object map. The string identifies the identity provider, for example,
+	// "graph.facebook.com" or
 	// "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
 	RoleMappings map[string]types.RoleMapping
 

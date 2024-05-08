@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the content of the network service descriptor. A network service
-// descriptor is a .yaml file in a network package that uses the TOSCA standard to
-// describe the network functions you want to deploy and the Amazon Web Services
-// infrastructure you want to deploy the network functions on.
+// Gets the content of the network service descriptor.
+//
+// A network service descriptor is a .yaml file in a network package that uses the
+// TOSCA standard to describe the network functions you want to deploy and the
+// Amazon Web Services infrastructure you want to deploy the network functions on.
 func (c *Client) GetSolNetworkPackageDescriptor(ctx context.Context, params *GetSolNetworkPackageDescriptorInput, optFns ...func(*Options)) (*GetSolNetworkPackageDescriptorOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkPackageDescriptorInput{}

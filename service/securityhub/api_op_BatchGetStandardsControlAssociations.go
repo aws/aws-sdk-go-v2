@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For a batch of security controls and standards, identifies whether each control
-// is currently enabled or disabled in a standard.
+//	For a batch of security controls and standards, identifies whether each
+//
+// control is currently enabled or disabled in a standard.
 func (c *Client) BatchGetStandardsControlAssociations(ctx context.Context, params *BatchGetStandardsControlAssociationsInput, optFns ...func(*Options)) (*BatchGetStandardsControlAssociationsOutput, error) {
 	if params == nil {
 		params = &BatchGetStandardsControlAssociationsInput{}
@@ -30,7 +31,7 @@ func (c *Client) BatchGetStandardsControlAssociations(ctx context.Context, param
 
 type BatchGetStandardsControlAssociationsInput struct {
 
-	// An array with one or more objects that includes a security control (identified
+	//  An array with one or more objects that includes a security control (identified
 	// with SecurityControlId , SecurityControlArn , or a mix of both parameters) and
 	// the Amazon Resource Name (ARN) of a standard. This field is used to query the
 	// enablement status of a control in a specified standard. The security control ID
@@ -50,7 +51,7 @@ type BatchGetStandardsControlAssociationsOutput struct {
 	// This member is required.
 	StandardsControlAssociationDetails []types.StandardsControlAssociationDetail
 
-	// A security control (identified with SecurityControlId , SecurityControlArn , or
+	//  A security control (identified with SecurityControlId , SecurityControlArn , or
 	// a mix of both parameters) whose enablement status in a specified standard cannot
 	// be returned.
 	UnprocessedAssociations []types.UnprocessedStandardsControlAssociation

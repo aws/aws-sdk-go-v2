@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ActionAfterCompletion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionAfterCompletion) Values() []ActionAfterCompletion {
 	return []ActionAfterCompletion{
 		"NONE",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for AssignPublicIp. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssignPublicIp) Values() []AssignPublicIp {
 	return []AssignPublicIp{
 		"ENABLED",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for FlexibleTimeWindowMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FlexibleTimeWindowMode) Values() []FlexibleTimeWindowMode {
 	return []FlexibleTimeWindowMode{
 		"OFF",
@@ -66,8 +69,9 @@ const (
 )
 
 // Values returns all known values for LaunchType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchType) Values() []LaunchType {
 	return []LaunchType{
 		"EC2",
@@ -85,8 +89,9 @@ const (
 )
 
 // Values returns all known values for PlacementConstraintType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementConstraintType) Values() []PlacementConstraintType {
 	return []PlacementConstraintType{
 		"distinctInstance",
@@ -104,8 +109,9 @@ const (
 )
 
 // Values returns all known values for PlacementStrategyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementStrategyType) Values() []PlacementStrategyType {
 	return []PlacementStrategyType{
 		"random",
@@ -122,8 +128,9 @@ const (
 )
 
 // Values returns all known values for PropagateTags. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PropagateTags) Values() []PropagateTags {
 	return []PropagateTags{
 		"TASK_DEFINITION",
@@ -139,8 +146,9 @@ const (
 )
 
 // Values returns all known values for ScheduleGroupState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduleGroupState) Values() []ScheduleGroupState {
 	return []ScheduleGroupState{
 		"ACTIVE",
@@ -157,8 +165,9 @@ const (
 )
 
 // Values returns all known values for ScheduleState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScheduleState) Values() []ScheduleState {
 	return []ScheduleState{
 		"ENABLED",

@@ -38,11 +38,11 @@ type ListEndpointsInput struct {
 	// time (timestamp).
 	CreationTimeBefore *time.Time
 
-	// A filter that returns only endpoints that were modified after the specified
+	//  A filter that returns only endpoints that were modified after the specified
 	// timestamp.
 	LastModifiedTimeAfter *time.Time
 
-	// A filter that returns only endpoints that were modified before the specified
+	//  A filter that returns only endpoints that were modified before the specified
 	// timestamp.
 	LastModifiedTimeBefore *time.Time
 
@@ -65,7 +65,7 @@ type ListEndpointsInput struct {
 	// The sort order for results. The default is Descending .
 	SortOrder types.OrderKey
 
-	// A filter that returns only endpoints with the specified status.
+	//  A filter that returns only endpoints with the specified status.
 	StatusEquals types.EndpointStatus
 
 	noSmithyDocumentSerde
@@ -73,12 +73,12 @@ type ListEndpointsInput struct {
 
 type ListEndpointsOutput struct {
 
-	// An array or endpoint objects.
+	//  An array or endpoint objects.
 	//
 	// This member is required.
 	Endpoints []types.EndpointSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the
+	//  If the response is truncated, SageMaker returns this token. To retrieve the
 	// next set of training jobs, use it in the subsequent request.
 	NextToken *string
 

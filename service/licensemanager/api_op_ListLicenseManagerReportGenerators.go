@@ -30,6 +30,7 @@ func (c *Client) ListLicenseManagerReportGenerators(ctx context.Context, params 
 type ListLicenseManagerReportGeneratorsInput struct {
 
 	// Filters to scope the results. The following filters are supported:
+	//
 	//   - LicenseConfigurationArn
 	Filters []types.Filter
 

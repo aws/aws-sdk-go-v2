@@ -11,12 +11,14 @@ import (
 )
 
 // Disassociates an Elastic IP address from its instance. The address remains
-// registered with the stack. For more information, see Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// registered with the stack. For more information, see [Resource Management].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DisassociateElasticIp(ctx context.Context, params *DisassociateElasticIpInput, optFns ...func(*Options)) (*DisassociateElasticIpOutput, error) {
 	if params == nil {
 		params = &DisassociateElasticIpInput{}

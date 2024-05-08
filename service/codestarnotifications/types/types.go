@@ -10,8 +10,9 @@ import (
 type EventTypeSummary struct {
 
 	// The system-generated ID of the event. For a complete list of event types and
-	// IDs, see Notification concepts (https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api)
-	// in the Developer Tools Console User Guide.
+	// IDs, see [Notification concepts]in the Developer Tools Console User Guide.
+	//
+	// [Notification concepts]: https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api
 	EventTypeId *string
 
 	// The name of the event.
@@ -106,7 +107,9 @@ type Target struct {
 	TargetAddress *string
 
 	// The target type. Can be an Chatbot topic or Chatbot client.
+	//
 	//   - Chatbot topics are specified as SNS .
+	//
 	//   - Chatbot clients are specified as AWSChatbotSlack .
 	TargetType *string
 
@@ -123,7 +126,9 @@ type TargetSummary struct {
 	TargetStatus TargetStatus
 
 	// The type of the target (for example, SNS ).
+	//
 	//   - Chatbot topics are specified as SNS .
+	//
 	//   - Chatbot clients are specified as AWSChatbotSlack .
 	TargetType *string
 

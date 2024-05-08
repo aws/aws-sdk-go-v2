@@ -13,8 +13,9 @@ import (
 // When a contact is being recorded, and the recording has been suspended using
 // SuspendContactRecording, this API resumes recording whatever recording is
 // selected in the flow configuration: call, screen, or both. If only call
-// recording or only screen recording is enabled, then it would resume. Voice and
-// screen recordings are supported.
+// recording or only screen recording is enabled, then it would resume.
+//
+// Voice and screen recordings are supported.
 func (c *Client) ResumeContactRecording(ctx context.Context, params *ResumeContactRecordingInput, optFns ...func(*Options)) (*ResumeContactRecordingOutput, error) {
 	if params == nil {
 		params = &ResumeContactRecordingInput{}
@@ -43,8 +44,10 @@ type ResumeContactRecordingInput struct {
 	// This member is required.
 	InitialContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

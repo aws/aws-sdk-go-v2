@@ -44,7 +44,7 @@ type GetNetworkOutput struct {
 	// This member is required.
 	Network *types.Network
 
-	// The network tags.
+	//  The network tags.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

@@ -43,10 +43,13 @@ type CreateBotInput struct {
 	DataPrivacy *types.DataPrivacy
 
 	// The time, in seconds, that Amazon Lex should keep information about a user's
-	// conversation with the bot. A user interaction remains active for the amount of
-	// time specified. If no conversation occurs during this time, the session expires
-	// and Amazon Lex deletes any data provided before the timeout. You can specify
-	// between 60 (1 minute) and 86,400 (24 hours) seconds.
+	// conversation with the bot.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Lex deletes
+	// any data provided before the timeout.
+	//
+	// You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.
 	//
 	// This member is required.
 	IdleSessionTTLInSeconds *int32

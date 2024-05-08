@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A list of information about signal decoders specified in a decoder manifest.
+//	A list of information about signal decoders specified in a decoder manifest.
+//
 // This API operation uses pagination. Specify the nextToken parameter in the
 // request to return more results.
 func (c *Client) ListDecoderManifestSignals(ctx context.Context, params *ListDecoderManifestSignalsInput, optFns ...func(*Options)) (*ListDecoderManifestSignalsOutput, error) {
@@ -31,19 +32,21 @@ func (c *Client) ListDecoderManifestSignals(ctx context.Context, params *ListDec
 
 type ListDecoderManifestSignalsInput struct {
 
-	// The name of the decoder manifest to list information about.
+	//  The name of the decoder manifest to list information about.
 	//
 	// This member is required.
 	Name *string
 
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
-	// A pagination token for the next set of results. If the results of a search are
-	// large, only a portion of the results are returned, and a nextToken pagination
-	// token is returned in the response. To retrieve the next set of results, reissue
-	// the search request and include the returned token. When all results have been
-	// returned, the response does not contain a pagination token value.
+	// A pagination token for the next set of results.
+	//
+	// If the results of a search are large, only a portion of the results are
+	// returned, and a nextToken pagination token is returned in the response. To
+	// retrieve the next set of results, reissue the search request and include the
+	// returned token. When all results have been returned, the response does not
+	// contain a pagination token value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,11 +54,11 @@ type ListDecoderManifestSignalsInput struct {
 
 type ListDecoderManifestSignalsOutput struct {
 
-	// The token to retrieve the next set of results, or null if there are no more
+	//  The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
 
-	// Information about a list of signals to decode.
+	//  Information about a list of signals to decode.
 	SignalDecoders []types.SignalDecoder
 
 	// Metadata pertaining to the operation's result.
@@ -154,7 +157,7 @@ var _ ListDecoderManifestSignalsAPIClient = (*Client)(nil)
 // ListDecoderManifestSignalsPaginatorOptions is the paginator options for
 // ListDecoderManifestSignals
 type ListDecoderManifestSignalsPaginatorOptions struct {
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

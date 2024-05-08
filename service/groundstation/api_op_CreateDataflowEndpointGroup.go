@@ -12,10 +12,13 @@ import (
 )
 
 // Creates a DataflowEndpoint group containing the specified list of
-// DataflowEndpoint objects. The name field in each endpoint is used in your
-// mission profile DataflowEndpointConfig to specify which endpoints to use during
-// a contact. When a contact uses multiple DataflowEndpointConfig objects, each
-// Config must match a DataflowEndpoint in the same group.
+// DataflowEndpoint objects.
+//
+// The name field in each endpoint is used in your mission profile
+// DataflowEndpointConfig to specify which endpoints to use during a contact.
+//
+// When a contact uses multiple DataflowEndpointConfig objects, each Config must
+// match a DataflowEndpoint in the same group.
 func (c *Client) CreateDataflowEndpointGroup(ctx context.Context, params *CreateDataflowEndpointGroupInput, optFns ...func(*Options)) (*CreateDataflowEndpointGroupOutput, error) {
 	if params == nil {
 		params = &CreateDataflowEndpointGroupInput{}

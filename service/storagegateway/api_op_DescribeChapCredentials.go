@@ -34,9 +34,8 @@ func (c *Client) DescribeChapCredentials(ctx context.Context, params *DescribeCh
 // target.
 type DescribeChapCredentialsInput struct {
 
-	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for
-	// specified VolumeARN.
+	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation
+	// to return to retrieve the TargetARN for specified VolumeARN.
 	//
 	// This member is required.
 	TargetARN *string
@@ -47,16 +46,20 @@ type DescribeChapCredentialsInput struct {
 // A JSON object containing the following fields:
 type DescribeChapCredentialsOutput struct {
 
-	// An array of ChapInfo objects that represent CHAP credentials. Each object in
-	// the array contains CHAP credential information for one target-initiator pair. If
-	// no CHAP credentials are set, an empty array is returned. CHAP credential
-	// information is provided in a JSON object with the following fields:
+	// An array of ChapInfo objects that represent CHAP credentials. Each object in the array
+	// contains CHAP credential information for one target-initiator pair. If no CHAP
+	// credentials are set, an empty array is returned. CHAP credential information is
+	// provided in a JSON object with the following fields:
+	//
 	//   - InitiatorName: The iSCSI initiator that connects to the target.
+	//
 	//   - SecretToAuthenticateInitiator: The secret key that the initiator (for
 	//   example, the Windows client) must provide to participate in mutual CHAP with the
 	//   target.
+	//
 	//   - SecretToAuthenticateTarget: The secret key that the target must provide to
 	//   participate in mutual CHAP with the initiator (e.g. Windows client).
+	//
 	//   - TargetARN: The Amazon Resource Name (ARN) of the storage volume.
 	ChapCredentials []types.ChapInfo
 

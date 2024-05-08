@@ -10,12 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Permanently deletes an IAM policy from the specified RuleGroup.
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Permanently deletes an IAM policy from the specified RuleGroup.
+//
 // The user making the request must be the owner of the RuleGroup.
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 func (c *Client) DeletePermissionPolicy(ctx context.Context, params *DeletePermissionPolicyInput, optFns ...func(*Options)) (*DeletePermissionPolicyOutput, error) {
 	if params == nil {
 		params = &DeletePermissionPolicyInput{}
@@ -34,7 +41,9 @@ func (c *Client) DeletePermissionPolicy(ctx context.Context, params *DeletePermi
 type DeletePermissionPolicyInput struct {
 
 	// The Amazon Resource Name (ARN) of the RuleGroup from which you want to delete
-	// the policy. The user making the request must be the owner of the RuleGroup.
+	// the policy.
+	//
+	// The user making the request must be the owner of the RuleGroup.
 	//
 	// This member is required.
 	ResourceArn *string

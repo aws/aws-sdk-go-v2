@@ -33,8 +33,7 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 type ListApplicationsInput struct {
 
 	// The ARN of the IAM Identity Center application under which the operation will
-	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services General
 	// Reference.
 	//
 	// This member is required.

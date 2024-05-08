@@ -12,8 +12,10 @@ import (
 )
 
 // Lists all your certificate providers in your Amazon Web Services account.
-// Requires permission to access the ListCertificateProviders (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//
+// Requires permission to access the [ListCertificateProviders] action.
+//
+// [ListCertificateProviders]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListCertificateProviders(ctx context.Context, params *ListCertificateProvidersInput, optFns ...func(*Options)) (*ListCertificateProvidersOutput, error) {
 	if params == nil {
 		params = &ListCertificateProvidersInput{}

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets a resource policy on a domain that specifies permissions to access it.
+//	Sets a resource policy on a domain that specifies permissions to access it.
+//
 // When you call PutDomainPermissionsPolicy , the resource policy on the domain is
 // ignored when evaluting permissions. This ensures that the owner of a domain
 // cannot lock themselves out of the domain, which would prevent them from being
@@ -33,22 +34,22 @@ func (c *Client) PutDomainPermissionsPolicy(ctx context.Context, params *PutDoma
 
 type PutDomainPermissionsPolicyInput struct {
 
-	// The name of the domain on which to set the resource policy.
+	//  The name of the domain on which to set the resource policy.
 	//
 	// This member is required.
 	Domain *string
 
-	// A valid displayable JSON Aspen policy string to be set as the access control
+	//  A valid displayable JSON Aspen policy string to be set as the access control
 	// resource policy on the provided domain.
 	//
 	// This member is required.
 	PolicyDocument *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The current revision of the resource policy to be set. This revision is used
+	//  The current revision of the resource policy to be set. This revision is used
 	// for optimistic locking, which prevents others from overwriting your changes to
 	// the domain's resource policy.
 	PolicyRevision *string
@@ -58,7 +59,7 @@ type PutDomainPermissionsPolicyInput struct {
 
 type PutDomainPermissionsPolicyOutput struct {
 
-	// The resource policy that was set after processing the request.
+	//  The resource policy that was set after processing the request.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AlexaSkillStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlexaSkillStatus) Values() []AlexaSkillStatus {
 	return []AlexaSkillStatus{
 		"ACTIVE",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for CallingNameStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CallingNameStatus) Values() []CallingNameStatus {
 	return []CallingNameStatus{
 		"Unassigned",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for CallLegType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CallLegType) Values() []CallLegType {
 	return []CallLegType{
 		"Caller",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for Capability. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Capability) Values() []Capability {
 	return []Capability{
 		"Voice",
@@ -101,8 +105,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"BadRequest",
@@ -133,8 +138,9 @@ const (
 )
 
 // Values returns all known values for GeoMatchLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GeoMatchLevel) Values() []GeoMatchLevel {
 	return []GeoMatchLevel{
 		"Country",
@@ -150,8 +156,9 @@ const (
 )
 
 // Values returns all known values for LanguageCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"en-US",
@@ -168,8 +175,9 @@ const (
 )
 
 // Values returns all known values for NotificationTarget. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationTarget) Values() []NotificationTarget {
 	return []NotificationTarget{
 		"EventBridge",
@@ -187,8 +195,9 @@ const (
 )
 
 // Values returns all known values for NumberSelectionBehavior. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NumberSelectionBehavior) Values() []NumberSelectionBehavior {
 	return []NumberSelectionBehavior{
 		"PreferSticky",
@@ -207,6 +216,7 @@ const (
 
 // Values returns all known values for OrderedPhoneNumberStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderedPhoneNumberStatus) Values() []OrderedPhoneNumberStatus {
 	return []OrderedPhoneNumberStatus{
@@ -226,6 +236,7 @@ const (
 
 // Values returns all known values for OriginationRouteProtocol. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginationRouteProtocol) Values() []OriginationRouteProtocol {
 	return []OriginationRouteProtocol{
@@ -245,6 +256,7 @@ const (
 
 // Values returns all known values for PhoneNumberAssociationName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberAssociationName) Values() []PhoneNumberAssociationName {
 	return []PhoneNumberAssociationName{
@@ -272,8 +284,9 @@ const (
 )
 
 // Values returns all known values for PhoneNumberOrderStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberOrderStatus) Values() []PhoneNumberOrderStatus {
 	return []PhoneNumberOrderStatus{
 		"Processing",
@@ -299,8 +312,9 @@ const (
 )
 
 // Values returns all known values for PhoneNumberOrderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberOrderType) Values() []PhoneNumberOrderType {
 	return []PhoneNumberOrderType{
 		"New",
@@ -317,8 +331,9 @@ const (
 )
 
 // Values returns all known values for PhoneNumberProductType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberProductType) Values() []PhoneNumberProductType {
 	return []PhoneNumberProductType{
 		"VoiceConnector",
@@ -344,8 +359,9 @@ const (
 )
 
 // Values returns all known values for PhoneNumberStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberStatus) Values() []PhoneNumberStatus {
 	return []PhoneNumberStatus{
 		"Cancelled",
@@ -371,8 +387,9 @@ const (
 )
 
 // Values returns all known values for PhoneNumberType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PhoneNumberType) Values() []PhoneNumberType {
 	return []PhoneNumberType{
 		"Local",
@@ -390,8 +407,9 @@ const (
 )
 
 // Values returns all known values for ProxySessionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProxySessionStatus) Values() []ProxySessionStatus {
 	return []ProxySessionStatus{
 		"Open",
@@ -409,8 +427,9 @@ const (
 )
 
 // Values returns all known values for SipRuleTriggerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SipRuleTriggerType) Values() []SipRuleTriggerType {
 	return []SipRuleTriggerType{
 		"ToPhoneNumber",
@@ -435,8 +454,9 @@ const (
 )
 
 // Values returns all known values for VoiceConnectorAwsRegion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceConnectorAwsRegion) Values() []VoiceConnectorAwsRegion {
 	return []VoiceConnectorAwsRegion{
 		"us-east-1",

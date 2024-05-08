@@ -37,8 +37,8 @@ type ListVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the ListVpcEndpoints operation. Returns a
-// list containing summarized details of the VPC endpoints.
+// Container for response parameters to the ListVpcEndpoints operation. Returns a list containing
+// summarized details of the VPC endpoints.
 type ListVpcEndpointsOutput struct {
 
 	// Provides an identifier to allow retrieval of paginated results.

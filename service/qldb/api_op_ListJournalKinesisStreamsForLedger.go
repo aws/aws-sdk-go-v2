@@ -11,12 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all Amazon QLDB journal streams for a given ledger. This action does
-// not return any expired journal streams. For more information, see Expiration
-// for terminal streams (https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration)
-// in the Amazon QLDB Developer Guide. This action returns a maximum of MaxResults
-// items. It is paginated so that you can retrieve all the items by calling
-// ListJournalKinesisStreamsForLedger multiple times.
+// Returns all Amazon QLDB journal streams for a given ledger.
+//
+// This action does not return any expired journal streams. For more information,
+// see [Expiration for terminal streams]in the Amazon QLDB Developer Guide.
+//
+// This action returns a maximum of MaxResults items. It is paginated so that you
+// can retrieve all the items by calling ListJournalKinesisStreamsForLedger
+// multiple times.
+//
+// [Expiration for terminal streams]: https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration
 func (c *Client) ListJournalKinesisStreamsForLedger(ctx context.Context, params *ListJournalKinesisStreamsForLedgerInput, optFns ...func(*Options)) (*ListJournalKinesisStreamsForLedgerOutput, error) {
 	if params == nil {
 		params = &ListJournalKinesisStreamsForLedgerInput{}
@@ -56,6 +60,7 @@ type ListJournalKinesisStreamsForLedgerOutput struct {
 
 	//   - If NextToken is empty, the last page of results has been processed and there
 	//   are no more results to be retrieved.
+	//
 	//   - If NextToken is not empty, more results are available. To retrieve the next
 	//   page of results, use the value of NextToken in a subsequent
 	//   ListJournalKinesisStreamsForLedger call.

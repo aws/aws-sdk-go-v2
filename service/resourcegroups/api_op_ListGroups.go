@@ -11,8 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of existing Resource Groups in your account. Minimum permissions
+// Returns a list of existing Resource Groups in your account.
+//
+// # Minimum permissions
+//
 // To run this command, you must have the following permissions:
+//
 //   - resource-groups:ListGroups
 func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns ...func(*Options)) (*ListGroupsOutput, error) {
 	if params == nil {
@@ -31,20 +35,28 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 
 type ListGroupsInput struct {
 
-	// Filters, formatted as GroupFilter objects, that you want to apply to a
-	// ListGroups operation.
+	// Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups
+	// operation.
+	//
 	//   - resource-type - Filter the results to include only those resource groups
 	//   that have the specified resource type in their ResourceTypeFilter . For
 	//   example, AWS::EC2::Instance would return any resource group with a
 	//   ResourceTypeFilter that includes AWS::EC2::Instance .
+	//
 	//   - configuration-type - Filter the results to include only those groups that
 	//   have the specified configuration types attached. The current supported values
 	//   are:
+	//
 	//   - AWS::AppRegistry::Application
+	//
 	//   - AWS::AppRegistry::ApplicationResourceGroups
+	//
 	//   - AWS::CloudFormation::Stack
+	//
 	//   - AWS::EC2::CapacityReservationPool
+	//
 	//   - AWS::EC2::HostManagement
+	//
 	//   - AWS::NetworkFirewall::RuleGroup
 	Filters []types.GroupFilter
 
@@ -70,11 +82,11 @@ type ListGroupsInput struct {
 
 type ListGroupsOutput struct {
 
-	// A list of GroupIdentifier objects. Each identifier is an object that contains
-	// both the Name and the GroupArn .
+	// A list of GroupIdentifier objects. Each identifier is an object that contains both the Name
+	// and the GroupArn .
 	GroupIdentifiers []types.GroupIdentifier
 
-	// Deprecated - don't use this field. Use the GroupIdentifiers response field
+	//  Deprecated - don't use this field. Use the GroupIdentifiers response field
 	// instead.
 	//
 	// Deprecated: This field is deprecated, use GroupIdentifiers instead.

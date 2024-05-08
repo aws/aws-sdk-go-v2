@@ -13,8 +13,11 @@ import (
 
 // Creates a service. A service is any software application that can run on
 // instances containers, or serverless functions within an account or virtual
-// private cloud (VPC). For more information, see Services (https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html)
-// in the Amazon VPC Lattice User Guide.
+// private cloud (VPC).
+//
+// For more information, see [Services] in the Amazon VPC Lattice User Guide.
+//
+// [Services]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -40,7 +43,9 @@ type CreateServiceInput struct {
 	Name *string
 
 	// The type of IAM policy.
+	//
 	//   - NONE : The resource does not use an IAM policy. This is the default.
+	//
 	//   - AWS_IAM : The resource uses an IAM policy. When this type is used, auth is
 	//   enabled and an auth policy is required.
 	AuthType types.AuthType

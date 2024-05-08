@@ -12,8 +12,9 @@ import (
 )
 
 // Creates a definition for a job that monitors model quality and drift. For
-// information about model monitor, see Amazon SageMaker Model Monitor (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html)
-// .
+// information about model monitor, see [Amazon SageMaker Model Monitor].
+//
+// [Amazon SageMaker Model Monitor]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html
 func (c *Client) CreateModelQualityJobDefinition(ctx context.Context, params *CreateModelQualityJobDefinitionInput, optFns ...func(*Options)) (*CreateModelQualityJobDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateModelQualityJobDefinitionInput{}
@@ -71,9 +72,10 @@ type CreateModelQualityJobDefinitionInput struct {
 	// A time limit for how long the monitoring job is allowed to run before stopping.
 	StoppingCondition *types.MonitoringStoppingCondition
 
-	// (Optional) An array of key-value pairs. For more information, see  Using Cost
-	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the Amazon Web Services Billing and Cost Management User Guide.
+	// (Optional) An array of key-value pairs. For more information, see [Using Cost Allocation Tags] in the
+	// Amazon Web Services Billing and Cost Management User Guide.
+	//
+	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

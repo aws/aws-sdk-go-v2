@@ -12,10 +12,12 @@ import (
 	"time"
 )
 
-// Defines a ProfileObjectType. To add or remove tags on an existing ObjectType,
-// see TagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)
-// / UntagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html)
-// .
+// Defines a ProfileObjectType.
+//
+// To add or remove tags on an existing ObjectType, see [TagResource]/[UntagResource] .
+//
+// [TagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html
+// [UntagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html
 func (c *Client) PutProfileObjectType(ctx context.Context, params *PutProfileObjectTypeInput, optFns ...func(*Options)) (*PutProfileObjectTypeOutput, error) {
 	if params == nil {
 		params = &PutProfileObjectTypeInput{}
@@ -125,9 +127,10 @@ type PutProfileObjectTypeOutput struct {
 	LastUpdatedAt *time.Time
 
 	// The format of your sourceLastUpdatedTimestamp that was previously set up in
-	// fields that were parsed using SimpleDateFormat (https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html)
-	// . If you have sourceLastUpdatedTimestamp in your field, you must set up
-	// sourceLastUpdatedTimestampFormat .
+	// fields that were parsed using [SimpleDateFormat]. If you have sourceLastUpdatedTimestamp in your
+	// field, you must set up sourceLastUpdatedTimestampFormat .
+	//
+	// [SimpleDateFormat]: https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html
 	SourceLastUpdatedTimestampFormat *string
 
 	// The tags used to organize, track, or control access for this resource.

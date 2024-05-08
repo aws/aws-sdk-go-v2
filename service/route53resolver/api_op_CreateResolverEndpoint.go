@@ -13,8 +13,10 @@ import (
 
 // Creates a Resolver endpoint. There are two types of Resolver endpoints, inbound
 // and outbound:
+//
 //   - An inbound Resolver endpoint forwards DNS queries to the DNS service for a
 //     VPC from your network.
+//
 //   - An outbound Resolver endpoint forwards DNS queries from the DNS service for
 //     a VPC to your network.
 func (c *Client) CreateResolverEndpoint(ctx context.Context, params *CreateResolverEndpointInput, optFns ...func(*Options)) (*CreateResolverEndpointOutput, error) {
@@ -42,8 +44,10 @@ type CreateResolverEndpointInput struct {
 	CreatorRequestId *string
 
 	// Specify the applicable value:
+	//
 	//   - INBOUND : Resolver forwards DNS queries to the DNS service for a VPC from
 	//   your network
+	//
 	//   - OUTBOUND : Resolver forwards DNS queries from the DNS service for a VPC to
 	//   your network
 	//
@@ -52,8 +56,9 @@ type CreateResolverEndpointInput struct {
 
 	// The subnets and IP addresses in your VPC that DNS queries originate from (for
 	// outbound endpoints) or that you forward DNS queries to (for inbound endpoints).
-	// The subnet ID uniquely identifies a VPC. Even though the minimum is 1, Route 53
-	// requires that you create at least two.
+	// The subnet ID uniquely identifies a VPC.
+	//
+	// Even though the minimum is 1, Route 53 requires that you create at least two.
 	//
 	// This member is required.
 	IpAddresses []types.IpAddressRequest
@@ -63,13 +68,16 @@ type CreateResolverEndpointInput struct {
 	// rules (for inbound Resolver endpoints) or outbound rules (for outbound Resolver
 	// endpoints). Inbound and outbound rules must allow TCP and UDP access. For
 	// inbound access, open port 53. For outbound access, open the port that you're
-	// using for DNS queries on your network. Some security group rules will cause your
-	// connection to be tracked. For outbound resolver endpoint, it can potentially
-	// impact the maximum queries per second from outbound endpoint to your target name
-	// server. For inbound resolver endpoint, it can bring down the overall maximum
-	// queries per second per IP address to as low as 1500. To avoid connection
-	// tracking caused by security group, see Untracked connections (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#untracked-connectionsl)
-	// .
+	// using for DNS queries on your network.
+	//
+	// Some security group rules will cause your connection to be tracked. For
+	// outbound resolver endpoint, it can potentially impact the maximum queries per
+	// second from outbound endpoint to your target name server. For inbound resolver
+	// endpoint, it can bring down the overall maximum queries per second per IP
+	// address to as low as 1500. To avoid connection tracking caused by security
+	// group, see [Untracked connections].
+	//
+	// [Untracked connections]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#untracked-connectionsl
 	//
 	// This member is required.
 	SecurityGroupIds []string
@@ -86,23 +94,35 @@ type CreateResolverEndpointInput struct {
 	// OutpostArn .
 	PreferredInstanceType *string
 
-	// The protocols you want to use for the endpoint. DoH-FIPS is applicable for
-	// inbound endpoints only. For an inbound endpoint you can apply the protocols as
-	// follows:
+	//  The protocols you want to use for the endpoint. DoH-FIPS is applicable for
+	// inbound endpoints only.
+	//
+	// For an inbound endpoint you can apply the protocols as follows:
+	//
 	//   - Do53 and DoH in combination.
+	//
 	//   - Do53 and DoH-FIPS in combination.
+	//
 	//   - Do53 alone.
+	//
 	//   - DoH alone.
+	//
 	//   - DoH-FIPS alone.
+	//
 	//   - None, which is treated as Do53.
+	//
 	// For an outbound endpoint you can apply the protocols as follows:
+	//
 	//   - Do53 and DoH in combination.
+	//
 	//   - Do53 alone.
+	//
 	//   - DoH alone.
+	//
 	//   - None, which is treated as Do53.
 	Protocols []types.Protocol
 
-	// For the endpoint type you can choose either IPv4, IPv6, or dual-stack. A
+	//  For the endpoint type you can choose either IPv4, IPv6, or dual-stack. A
 	// dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This
 	// endpoint type is applied to all IP addresses.
 	ResolverEndpointType types.ResolverEndpointType

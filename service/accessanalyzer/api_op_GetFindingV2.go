@@ -33,8 +33,9 @@ func (c *Client) GetFindingV2(ctx context.Context, params *GetFindingV2Input, op
 
 type GetFindingV2Input struct {
 
-	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
-	// that generated the finding.
+	// The [ARN of the analyzer] that generated the finding.
+	//
+	// [ARN of the analyzer]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
 	//
 	// This member is required.
 	AnalyzerArn *string

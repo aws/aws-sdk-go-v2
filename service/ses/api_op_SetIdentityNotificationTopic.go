@@ -16,10 +16,13 @@ import (
 // identity, such as an email address or domain. When you send an email that uses
 // the chosen identity in the Source field, Amazon SES sends notifications to the
 // topic you specified. You can send bounce, complaint, or delivery notifications
-// (or any combination of the three) to the Amazon SNS topic that you specify. You
-// can execute this operation no more than once per second. For more information
-// about feedback notification, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html)
-// .
+// (or any combination of the three) to the Amazon SNS topic that you specify.
+//
+// You can execute this operation no more than once per second.
+//
+// For more information about feedback notification, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html
 func (c *Client) SetIdentityNotificationTopic(ctx context.Context, params *SetIdentityNotificationTopicInput, optFns ...func(*Options)) (*SetIdentityNotificationTopicOutput, error) {
 	if params == nil {
 		params = &SetIdentityNotificationTopicInput{}
@@ -37,16 +40,19 @@ func (c *Client) SetIdentityNotificationTopic(ctx context.Context, params *SetId
 
 // Represents a request to specify the Amazon SNS topic to which Amazon SES
 // publishes bounce, complaint, or delivery notifications for emails sent with that
-// identity as the source. For information about Amazon SES notifications, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-sns.html)
+// identity as the source. For information about Amazon SES notifications, see the [Amazon SES Developer Guide]
 // .
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-sns.html
 type SetIdentityNotificationTopicInput struct {
 
-	// The identity (email address or domain) for the Amazon SNS topic. You can only
-	// specify a verified identity for this parameter. You can specify an identity by
-	// using its name or by using its Amazon Resource Name (ARN). The following
-	// examples are all valid identities: sender@example.com , example.com ,
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com .
+	// The identity (email address or domain) for the Amazon SNS topic.
+	//
+	// You can only specify a verified identity for this parameter.
+	//
+	// You can specify an identity by using its name or by using its Amazon Resource
+	// Name (ARN). The following examples are all valid identities: sender@example.com
+	// , example.com , arn:aws:ses:us-east-1:123456789012:identity/example.com .
 	//
 	// This member is required.
 	Identity *string

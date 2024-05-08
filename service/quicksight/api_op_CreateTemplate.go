@@ -13,13 +13,14 @@ import (
 
 // Creates a template either from a TemplateDefinition or from an existing Amazon
 // QuickSight analysis or template. You can use the resulting template to create
-// additional dashboards, templates, or analyses. A template is an entity in Amazon
-// QuickSight that encapsulates the metadata required to create an analysis and
-// that you can use to create s dashboard. A template adds a layer of abstraction
-// by using placeholders to replace the dataset associated with the analysis. You
-// can use templates to create dashboards by replacing dataset placeholders with
-// datasets that follow the same schema that was used to create the source analysis
-// and template.
+// additional dashboards, templates, or analyses.
+//
+// A template is an entity in Amazon QuickSight that encapsulates the metadata
+// required to create an analysis and that you can use to create s dashboard. A
+// template adds a layer of abstraction by using placeholders to replace the
+// dataset associated with the analysis. You can use templates to create dashboards
+// by replacing dataset placeholders with datasets that follow the same schema that
+// was used to create the source analysis and template.
 func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput, optFns ...func(*Options)) (*CreateTemplateOutput, error) {
 	if params == nil {
 		params = &CreateTemplateInput{}
@@ -50,9 +51,13 @@ type CreateTemplateInput struct {
 	// This member is required.
 	TemplateId *string
 
-	// The definition of a template. A definition is the data model of all features in
-	// a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must
-	// be provided in order for the request to be valid.
+	// The definition of a template.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	Definition *types.TemplateVersionDefinition
 
 	// A display name for the template.
@@ -67,11 +72,14 @@ type CreateTemplateInput struct {
 	// require an Amazon Resource Name (ARN). For SourceTemplate , specify the ARN of
 	// the source template. For SourceAnalysis , specify the ARN of the source
 	// analysis. The SourceTemplate ARN can contain any Amazon Web Services account
-	// and any Amazon QuickSight-supported Amazon Web Services Region. Use the
-	// DataSetReferences entity within SourceTemplate or SourceAnalysis to list the
-	// replacement datasets for the placeholders listed in the original. The schema in
-	// each dataset must match its placeholder. Either a SourceEntity or a Definition
-	// must be provided in order for the request to be valid.
+	// and any Amazon QuickSight-supported Amazon Web Services Region.
+	//
+	// Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to
+	// list the replacement datasets for the placeholders listed in the original. The
+	// schema in each dataset must match its placeholder.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	SourceEntity *types.TemplateSourceEntity
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to

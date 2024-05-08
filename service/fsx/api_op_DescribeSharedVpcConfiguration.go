@@ -12,9 +12,9 @@ import (
 
 // Indicates whether participant accounts in your organization can create Amazon
 // FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a
-// virtual private cloud (VPC) owner. For more information, see Creating FSx for
-// ONTAP file systems in shared subnets (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/creating-file-systems.html#fsxn-vpc-shared-subnets)
-// .
+// virtual private cloud (VPC) owner. For more information, see [Creating FSx for ONTAP file systems in shared subnets].
+//
+// [Creating FSx for ONTAP file systems in shared subnets]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/creating-file-systems.html#fsxn-vpc-shared-subnets
 func (c *Client) DescribeSharedVpcConfiguration(ctx context.Context, params *DescribeSharedVpcConfigurationInput, optFns ...func(*Options)) (*DescribeSharedVpcConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeSharedVpcConfigurationInput{}

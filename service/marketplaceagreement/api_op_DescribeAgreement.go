@@ -42,6 +42,7 @@ type DescribeAgreementInput struct {
 type DescribeAgreementOutput struct {
 
 	// The date and time the offer was accepted or the agreement was created.
+	//
 	// AcceptanceTime and StartTime can differ for future dated agreements (FDAs).
 	AcceptanceTime *time.Time
 
@@ -72,19 +73,30 @@ type DescribeAgreementOutput struct {
 	// The date and time when the agreement starts.
 	StartTime *time.Time
 
-	// The current status of the agreement. Statuses include:
+	// The current status of the agreement.
+	//
+	// Statuses include:
+	//
 	//   - ACTIVE – The terms of the agreement are active.
+	//
 	//   - ARCHIVED – The agreement ended without a specified reason.
+	//
 	//   - CANCELLED – The acceptor ended the agreement before the defined end date.
+	//
 	//   - EXPIRED – The agreement ended on the defined end date.
+	//
 	//   - RENEWED – The agreement was renewed into a new agreement (for example, an
 	//   auto-renewal).
+	//
 	//   - REPLACED – The agreement was replaced using an agreement replacement offer.
+	//
 	//   - ROLLED_BACK (Only applicable to inactive agreement revisions) – The
 	//   agreement revision has been rolled back because of an error. An earlier revision
 	//   is now active.
+	//
 	//   - SUPERCEDED (Only applicable to inactive agreement revisions) – The agreement
 	//   revision is no longer active and another agreement revision is now active.
+	//
 	//   - TERMINATED – The agreement ended before the defined end date because of an
 	//   AWS termination (for example, a payment failure).
 	Status types.AgreementStatus

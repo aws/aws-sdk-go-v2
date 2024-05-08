@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for CreationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CreationMode) Values() []CreationMode {
 	return []CreationMode{
 		"DEFAULT",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for ExternalSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExternalSourceType) Values() []ExternalSourceType {
 	return []ExternalSourceType{
 		"S3",
@@ -48,8 +50,9 @@ const (
 )
 
 // Values returns all known values for InvocationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InvocationType) Values() []InvocationType {
 	return []InvocationType{
 		"ACTION_GROUP",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for PromptType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PromptType) Values() []PromptType {
 	return []PromptType{
 		"PRE_PROCESSING",
@@ -89,8 +93,9 @@ const (
 )
 
 // Values returns all known values for ResponseState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResponseState) Values() []ResponseState {
 	return []ResponseState{
 		"FAILURE",
@@ -107,6 +112,7 @@ const (
 
 // Values returns all known values for RetrievalResultLocationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RetrievalResultLocationType) Values() []RetrievalResultLocationType {
 	return []RetrievalResultLocationType{
@@ -123,8 +129,9 @@ const (
 )
 
 // Values returns all known values for RetrieveAndGenerateType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RetrieveAndGenerateType) Values() []RetrieveAndGenerateType {
 	return []RetrieveAndGenerateType{
 		"KNOWLEDGE_BASE",
@@ -141,8 +148,9 @@ const (
 )
 
 // Values returns all known values for SearchType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SearchType) Values() []SearchType {
 	return []SearchType{
 		"HYBRID",
@@ -160,8 +168,9 @@ const (
 )
 
 // Values returns all known values for Source. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Source) Values() []Source {
 	return []Source{
 		"ACTION_GROUP",
@@ -182,8 +191,9 @@ const (
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
 		"ACTION_GROUP",

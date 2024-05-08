@@ -13,12 +13,17 @@ import (
 
 // Returns a description of the settings for the specified configuration set, that
 // is, either a configuration template or the configuration set associated with a
-// running environment. When describing the settings for the configuration set
-// associated with a running environment, it is possible to receive two sets of
-// setting descriptions. One is the deployed configuration set, and the other is a
-// draft configuration of an environment that is either in the process of
-// deployment or that failed to deploy. Related Topics
-//   - DeleteEnvironmentConfiguration
+// running environment.
+//
+// When describing the settings for the configuration set associated with a
+// running environment, it is possible to receive two sets of setting descriptions.
+// One is the deployed configuration set, and the other is a draft configuration of
+// an environment that is either in the process of deployment or that failed to
+// deploy.
+//
+// # Related Topics
+//
+// DeleteEnvironmentConfiguration
 func (c *Client) DescribeConfigurationSettings(ctx context.Context, params *DescribeConfigurationSettingsInput, optFns ...func(*Options)) (*DescribeConfigurationSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationSettingsInput{}
@@ -43,17 +48,20 @@ type DescribeConfigurationSettingsInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The name of the environment to describe. Condition: You must specify either
-	// this or a TemplateName, but not both. If you specify both, AWS Elastic Beanstalk
-	// returns an InvalidParameterCombination error. If you do not specify either, AWS
-	// Elastic Beanstalk returns MissingRequiredParameter error.
+	// The name of the environment to describe.
+	//
+	// Condition: You must specify either this or a TemplateName, but not both. If you
+	// specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination
+	// error. If you do not specify either, AWS Elastic Beanstalk returns
+	// MissingRequiredParameter error.
 	EnvironmentName *string
 
-	// The name of the configuration template to describe. Conditional: You must
-	// specify either this parameter or an EnvironmentName, but not both. If you
-	// specify both, AWS Elastic Beanstalk returns an InvalidParameterCombination
-	// error. If you do not specify either, AWS Elastic Beanstalk returns a
-	// MissingRequiredParameter error.
+	// The name of the configuration template to describe.
+	//
+	// Conditional: You must specify either this parameter or an EnvironmentName, but
+	// not both. If you specify both, AWS Elastic Beanstalk returns an
+	// InvalidParameterCombination error. If you do not specify either, AWS Elastic
+	// Beanstalk returns a MissingRequiredParameter error.
 	TemplateName *string
 
 	noSmithyDocumentSerde
@@ -63,7 +71,7 @@ type DescribeConfigurationSettingsInput struct {
 // environment.
 type DescribeConfigurationSettingsOutput struct {
 
-	// A list of ConfigurationSettingsDescription .
+	//  A list of ConfigurationSettingsDescription.
 	ConfigurationSettings []types.ConfigurationSettingsDescription
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,10 @@ import (
 )
 
 // Directory Service for Microsoft Active Directory allows you to configure and
-// verify trust relationships. This action verifies a trust relationship between
-// your Managed Microsoft AD directory and an external domain.
+// verify trust relationships.
+//
+// This action verifies a trust relationship between your Managed Microsoft AD
+// directory and an external domain.
 func (c *Client) VerifyTrust(ctx context.Context, params *VerifyTrustInput, optFns ...func(*Options)) (*VerifyTrustOutput, error) {
 	if params == nil {
 		params = &VerifyTrustInput{}

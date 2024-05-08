@@ -13,15 +13,19 @@ import (
 
 // Sends user input to Amazon Lex. Client applications can use this API to send
 // requests to Amazon Lex at runtime. Amazon Lex then interprets the user input
-// using the machine learning model it built for the bot. In response, Amazon Lex
-// returns the next message to convey to the user an optional responseCard to
-// display. Consider the following example messages:
+// using the machine learning model it built for the bot.
+//
+// In response, Amazon Lex returns the next message to convey to the user an
+// optional responseCard to display. Consider the following example messages:
+//
 //   - For a user input "I would like a pizza", Amazon Lex might return a response
 //     with a message eliciting slot data (for example, PizzaSize): "What size pizza
 //     would you like?"
+//
 //   - After the user provides all of the pizza order information, Amazon Lex
 //     might return a response with a message to obtain user confirmation "Proceed with
 //     the pizza order?".
+//
 //   - After the user replies to a confirmation prompt with a "yes", Amazon Lex
 //     might return a conclusion statement: "Thank you, your cheese pizza has been
 //     ordered.".
@@ -33,23 +37,31 @@ import (
 // behavior, for example, to display the appropriate client user interface. These
 // are the slotToElicit , dialogState , intentName , and slots fields in the
 // response. Consider the following examples:
+//
 //   - If the message is to elicit slot data, Amazon Lex returns the following
 //     context information:
+//
 //   - dialogState set to ElicitSlot
+//
 //   - intentName set to the intent name in the current context
+//
 //   - slotToElicit set to the slot name for which the message is eliciting
 //     information
+//
 //   - slots set to a map of slots, configured for the intent, with currently known
 //     values
+//
 //   - If the message is a confirmation prompt, the dialogState is set to
 //     ConfirmIntent and SlotToElicit is set to null.
+//
 //   - If the message is a clarification prompt (configured for the intent) that
 //     indicates that user intent is not understood, the dialogState is set to
 //     ElicitIntent and slotToElicit is set to null.
 //
 // In addition, Amazon Lex also returns your application-specific sessionAttributes
-// . For more information, see Managing Conversation Context (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html)
-// .
+// . For more information, see [Managing Conversation Context].
+//
+// [Managing Conversation Context]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html
 func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...func(*Options)) (*PostTextOutput, error) {
 	if params == nil {
 		params = &PostTextInput{}
@@ -84,15 +96,21 @@ type PostTextInput struct {
 
 	// The ID of the client application user. Amazon Lex uses this to identify a
 	// user's conversation with your bot. At runtime, each request must contain the
-	// userID field. To decide the user ID to use for your application, consider the
-	// following factors.
+	// userID field.
+	//
+	// To decide the user ID to use for your application, consider the following
+	// factors.
+	//
 	//   - The userID field must not contain any personally identifiable information of
 	//   the user, for example, name, personal identification numbers, or other end user
 	//   personal information.
+	//
 	//   - If you want a user to start a conversation on one device and continue on
 	//   another device, use a user-specific identifier.
+	//
 	//   - If you want the same user to be able to have two independent conversations
 	//   on two different devices, choose a device-specific identifier.
+	//
 	//   - A user can't have two independent conversations with two different versions
 	//   of the same bot. For example, a user can't have a conversation with the PROD and
 	//   BETA versions of the same bot. If you anticipate that a user will need to have
@@ -103,22 +121,29 @@ type PostTextInput struct {
 	UserId *string
 
 	// A list of contexts active for the request. A context can be activated when a
-	// previous intent is fulfilled, or by including the context in the request, If you
-	// don't specify a list of contexts, Amazon Lex will use the current list of
-	// contexts for the session. If you specify an empty list, all contexts for the
+	// previous intent is fulfilled, or by including the context in the request,
+	//
+	// If you don't specify a list of contexts, Amazon Lex will use the current list
+	// of contexts for the session. If you specify an empty list, all contexts for the
 	// session are cleared.
 	ActiveContexts []types.ActiveContext
 
-	// Request-specific information passed between Amazon Lex and a client
-	// application. The namespace x-amz-lex: is reserved for special attributes. Don't
-	// create any request attributes with the prefix x-amz-lex: . For more information,
-	// see Setting Request Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs)
-	// .
+	// Request-specific information passed between Amazon Lex and a client application.
+	//
+	// The namespace x-amz-lex: is reserved for special attributes. Don't create any
+	// request attributes with the prefix x-amz-lex: .
+	//
+	// For more information, see [Setting Request Attributes].
+	//
+	// [Setting Request Attributes]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
 	RequestAttributes map[string]string
 
 	// Application-specific information passed between Amazon Lex and a client
-	// application. For more information, see Setting Session Attributes (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs)
-	// .
+	// application.
+	//
+	// For more information, see [Setting Session Attributes].
+	//
+	// [Setting Session Attributes]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
 	SessionAttributes map[string]string
 
 	noSmithyDocumentSerde
@@ -127,12 +152,14 @@ type PostTextInput struct {
 type PostTextOutput struct {
 
 	// A list of active contexts for the session. A context can be set when an intent
-	// is fulfilled or by calling the PostContent , PostText , or PutSession
-	// operation. You can use a context to control the intents that can follow up an
-	// intent, or to modify the operation of your application.
+	// is fulfilled or by calling the PostContent , PostText , or PutSession operation.
+	//
+	// You can use a context to control the intents that can follow up an intent, or
+	// to modify the operation of your application.
 	ActiveContexts []types.ActiveContext
 
 	// One to four alternative intents that may be applicable to the user's intent.
+	//
 	// Each alternative includes a score that indicates how confident Amazon Lex is
 	// that the intent matches the user's intent. The intents are sorted by the
 	// confidence score.
@@ -143,56 +170,78 @@ type PostTextOutput struct {
 	// another version.
 	BotVersion *string
 
-	// Identifies the current state of the user interaction. Amazon Lex returns one of
-	// the following values as dialogState . The client can optionally use this
+	//  Identifies the current state of the user interaction. Amazon Lex returns one
+	// of the following values as dialogState . The client can optionally use this
 	// information to customize the user interface.
-	//   - ElicitIntent - Amazon Lex wants to elicit user intent. For example, a user
-	//   might utter an intent ("I want to order a pizza"). If Amazon Lex cannot infer
-	//   the user intent from this utterance, it will return this dialogState.
-	//   - ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response. For
-	//   example, Amazon Lex wants user confirmation before fulfilling an intent. Instead
-	//   of a simple "yes" or "no," a user might respond with additional information. For
-	//   example, "yes, but make it thick crust pizza" or "no, I want to order a drink".
-	//   Amazon Lex can process such additional information (in these examples, update
-	//   the crust type slot value, or change intent from OrderPizza to OrderDrink).
+	//
+	//   - ElicitIntent - Amazon Lex wants to elicit user intent.
+	//
+	// For example, a user might utter an intent ("I want to order a pizza"). If
+	//   Amazon Lex cannot infer the user intent from this utterance, it will return this
+	//   dialogState.
+	//
+	//   - ConfirmIntent - Amazon Lex is expecting a "yes" or "no" response.
+	//
+	// For example, Amazon Lex wants user confirmation before fulfilling an intent.
+	//
+	// Instead of a simple "yes" or "no," a user might respond with additional
+	//   information. For example, "yes, but make it thick crust pizza" or "no, I want to
+	//   order a drink". Amazon Lex can process such additional information (in these
+	//   examples, update the crust type slot value, or change intent from OrderPizza to
+	//   OrderDrink).
+	//
 	//   - ElicitSlot - Amazon Lex is expecting a slot value for the current intent.
-	//   For example, suppose that in the response Amazon Lex sends this message: "What
+	//
+	// For example, suppose that in the response Amazon Lex sends this message: "What
 	//   size pizza would you like?". A user might reply with the slot value (e.g.,
 	//   "medium"). The user might also provide additional information in the response
 	//   (e.g., "medium thick crust pizza"). Amazon Lex can process such additional
 	//   information appropriately.
+	//
 	//   - Fulfilled - Conveys that the Lambda function configured for the intent has
 	//   successfully fulfilled the intent.
+	//
 	//   - ReadyForFulfillment - Conveys that the client has to fulfill the intent.
-	//   - Failed - Conveys that the conversation with the user failed. This can happen
-	//   for various reasons including that the user did not provide an appropriate
-	//   response to prompts from the service (you can configure how many times Amazon
-	//   Lex can prompt a user for specific information), or the Lambda function failed
-	//   to fulfill the intent.
+	//
+	//   - Failed - Conveys that the conversation with the user failed.
+	//
+	// This can happen for various reasons including that the user did not provide an
+	//   appropriate response to prompts from the service (you can configure how many
+	//   times Amazon Lex can prompt a user for specific information), or the Lambda
+	//   function failed to fulfill the intent.
 	DialogState types.DialogState
 
 	// The current user intent that Amazon Lex is aware of.
 	IntentName *string
 
 	// The message to convey to the user. The message can come from the bot's
-	// configuration or from a Lambda function. If the intent is not configured with a
-	// Lambda function, or if the Lambda function returned Delegate as the
-	// dialogAction.type its response, Amazon Lex decides on the next course of action
-	// and selects an appropriate message from the bot's configuration based on the
-	// current interaction context. For example, if Amazon Lex isn't able to understand
-	// user input, it uses a clarification prompt message. When you create an intent
-	// you can assign messages to groups. When messages are assigned to groups Amazon
-	// Lex returns one message from each group in the response. The message field is an
-	// escaped JSON string containing the messages. For more information about the
-	// structure of the JSON string returned, see msg-prompts-formats . If the Lambda
-	// function returns a message, Amazon Lex passes it to the client in its response.
+	// configuration or from a Lambda function.
+	//
+	// If the intent is not configured with a Lambda function, or if the Lambda
+	// function returned Delegate as the dialogAction.type its response, Amazon Lex
+	// decides on the next course of action and selects an appropriate message from the
+	// bot's configuration based on the current interaction context. For example, if
+	// Amazon Lex isn't able to understand user input, it uses a clarification prompt
+	// message.
+	//
+	// When you create an intent you can assign messages to groups. When messages are
+	// assigned to groups Amazon Lex returns one message from each group in the
+	// response. The message field is an escaped JSON string containing the messages.
+	// For more information about the structure of the JSON string returned, see msg-prompts-formats.
+	//
+	// If the Lambda function returns a message, Amazon Lex passes it to the client in
+	// its response.
 	Message *string
 
 	// The format of the response message. One of the following values:
+	//
 	//   - PlainText - The message contains plain UTF-8 text.
+	//
 	//   - CustomPayload - The message is a custom format defined by the Lambda
 	//   function.
+	//
 	//   - SSML - The message contains text formatted for voice output.
+	//
 	//   - Composite - The message contains an escaped JSON object containing one or
 	//   more messages from the groups that messages were assigned to when the intent was
 	//   created.
@@ -200,9 +249,12 @@ type PostTextOutput struct {
 
 	// Provides a score that indicates how confident Amazon Lex is that the returned
 	// intent is the one that matches the user's intent. The score is between 0.0 and
-	// 1.0. For more information, see Confidence Scores (https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html)
-	// . The score is a relative score, not an absolute score. The score may change
+	// 1.0. For more information, see [Confidence Scores].
+	//
+	// The score is a relative score, not an absolute score. The score may change
 	// based on improvements to Amazon Lex.
+	//
+	// [Confidence Scores]: https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html
 	NluIntentConfidence *types.IntentConfidence
 
 	// Represents the options that the user has to respond to the current prompt.
@@ -211,9 +263,10 @@ type PostTextOutput struct {
 	// function).
 	ResponseCard *types.ResponseCard
 
-	// The sentiment expressed in and utterance. When the bot is configured to send
-	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
-	// result of the analysis.
+	// The sentiment expressed in and utterance.
+	//
+	// When the bot is configured to send utterances to Amazon Comprehend for
+	// sentiment analysis, this field contains the result of the analysis.
 	SentimentResponse *types.SentimentResponse
 
 	// A map of key-value pairs representing the session-specific context information.
@@ -226,12 +279,14 @@ type PostTextOutput struct {
 	// Amazon Lex is eliciting a value.
 	SlotToElicit *string
 
-	// The intent slots that Amazon Lex detected from the user input in the
-	// conversation. Amazon Lex creates a resolution list containing likely values for
-	// a slot. The value that it returns is determined by the valueSelectionStrategy
-	// selected when the slot type was created or updated. If valueSelectionStrategy
-	// is set to ORIGINAL_VALUE , the value provided by the user is returned, if the
-	// user value is similar to the slot values. If valueSelectionStrategy is set to
+	//  The intent slots that Amazon Lex detected from the user input in the
+	// conversation.
+	//
+	// Amazon Lex creates a resolution list containing likely values for a slot. The
+	// value that it returns is determined by the valueSelectionStrategy selected when
+	// the slot type was created or updated. If valueSelectionStrategy is set to
+	// ORIGINAL_VALUE , the value provided by the user is returned, if the user value
+	// is similar to the slot values. If valueSelectionStrategy is set to
 	// TOP_RESOLUTION Amazon Lex returns the first value in the resolution list or, if
 	// there is no resolution list, null. If you don't specify a valueSelectionStrategy
 	// , the default is ORIGINAL_VALUE .

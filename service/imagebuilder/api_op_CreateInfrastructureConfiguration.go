@@ -31,8 +31,9 @@ func (c *Client) CreateInfrastructureConfiguration(ctx context.Context, params *
 type CreateInfrastructureConfigurationInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon EC2 API Reference.
+	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
@@ -75,10 +76,11 @@ type CreateInfrastructureConfigurationInput struct {
 	SecurityGroupIds []string
 
 	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
-	// event notifications. EC2 Image Builder is unable to send notifications to SNS
-	// topics that are encrypted using keys from other accounts. The key that is used
-	// to encrypt the SNS topic must reside in the account that the Image Builder
-	// service runs under.
+	// event notifications.
+	//
+	// EC2 Image Builder is unable to send notifications to SNS topics that are
+	// encrypted using keys from other accounts. The key that is used to encrypt the
+	// SNS topic must reside in the account that the Image Builder service runs under.
 	SnsTopicArn *string
 
 	// The subnet ID in which to place the instance used to customize your Amazon EC2

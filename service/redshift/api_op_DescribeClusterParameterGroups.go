@@ -15,15 +15,22 @@ import (
 // you created and the default parameter group. For each parameter group, the
 // response includes the parameter group name, description, and parameter group
 // family name. You can optionally specify a name to retrieve the description of a
-// specific parameter group. For more information about parameters and parameter
-// groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
-// in the Amazon Redshift Cluster Management Guide. If you specify both tag keys
-// and tag values in the same request, Amazon Redshift returns all parameter groups
-// that match any combination of the specified keys and values. For example, if you
-// have owner and environment for tag keys, and admin and test for tag values, all
-// parameter groups that have any combination of those values are returned. If both
-// tag keys and values are omitted from the request, parameter groups are returned
-// regardless of whether they have tag keys or values associated with them.
+// specific parameter group.
+//
+// For more information about parameters and parameter groups, go to [Amazon Redshift Parameter Groups] in the
+// Amazon Redshift Cluster Management Guide.
+//
+// If you specify both tag keys and tag values in the same request, Amazon
+// Redshift returns all parameter groups that match any combination of the
+// specified keys and values. For example, if you have owner and environment for
+// tag keys, and admin and test for tag values, all parameter groups that have any
+// combination of those values are returned.
+//
+// If both tag keys and values are omitted from the request, parameter groups are
+// returned regardless of whether they have tag keys or values associated with
+// them.
+//
+// [Amazon Redshift Parameter Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
 func (c *Client) DescribeClusterParameterGroups(ctx context.Context, params *DescribeClusterParameterGroupsInput, optFns ...func(*Options)) (*DescribeClusterParameterGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeClusterParameterGroupsInput{}
@@ -42,17 +49,19 @@ func (c *Client) DescribeClusterParameterGroups(ctx context.Context, params *Des
 type DescribeClusterParameterGroupsInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterParameterGroups request
-	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
-	// in the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
+	// response records. When the results of a DescribeClusterParameterGroupsrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -89,8 +98,7 @@ type DescribeClusterParameterGroupsOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// A list of ClusterParameterGroup instances. Each instance describes one cluster
-	// parameter group.
+	// A list of ClusterParameterGroup instances. Each instance describes one cluster parameter group.
 	ParameterGroups []types.ClusterParameterGroup
 
 	// Metadata pertaining to the operation's result.
@@ -189,7 +197,10 @@ type DescribeClusterParameterGroupsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

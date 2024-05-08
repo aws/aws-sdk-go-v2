@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the permissions on a dataset. The permissions resource is
+// Describes the permissions on a dataset.
+//
+// The permissions resource is
 // arn:aws:quicksight:region:aws-account-id:dataset/data-set-id .
 func (c *Client) DescribeDataSetPermissions(ctx context.Context, params *DescribeDataSetPermissionsInput, optFns ...func(*Options)) (*DescribeDataSetPermissionsOutput, error) {
 	if params == nil {

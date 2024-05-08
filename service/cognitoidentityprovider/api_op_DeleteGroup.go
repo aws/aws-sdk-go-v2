@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a group. Calling this action requires developer credentials.
+// Deletes a group.
+//
+// Calling this action requires developer credentials.
 func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optFns ...func(*Options)) (*DeleteGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGroupInput{}

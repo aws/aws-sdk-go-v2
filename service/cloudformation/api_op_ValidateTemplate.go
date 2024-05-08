@@ -33,17 +33,24 @@ func (c *Client) ValidateTemplate(ctx context.Context, params *ValidateTemplateI
 type ValidateTemplateInput struct {
 
 	// Structure containing the template body with a minimum length of 1 byte and a
-	// maximum length of 51,200 bytes. For more information, go to Template Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the CloudFormation User Guide. Conditional: You must pass TemplateURL or
-	// TemplateBody . If both are passed, only TemplateBody is used.
+	// maximum length of 51,200 bytes. For more information, go to [Template Anatomy]in the
+	// CloudFormation User Guide.
+	//
+	// Conditional: You must pass TemplateURL or TemplateBody . If both are passed,
+	// only TemplateBody is used.
+	//
+	// [Template Anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateBody *string
 
 	// Location of file containing the template body. The URL must point to a template
 	// (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems
-	// Manager document. For more information, go to Template Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the CloudFormation User Guide. The location for an Amazon S3 bucket must
-	// start with https:// . Conditional: You must pass TemplateURL or TemplateBody .
-	// If both are passed, only TemplateBody is used.
+	// Manager document. For more information, go to [Template Anatomy]in the CloudFormation User Guide.
+	// The location for an Amazon S3 bucket must start with https:// .
+	//
+	// Conditional: You must pass TemplateURL or TemplateBody . If both are passed,
+	// only TemplateBody is used.
+	//
+	// [Template Anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateURL *string
 
 	noSmithyDocumentSerde
@@ -54,10 +61,12 @@ type ValidateTemplateOutput struct {
 
 	// The capabilities found within the template. If your template contains IAM
 	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value for
-	// this parameter when you use the CreateStack or UpdateStack actions with your
-	// template; otherwise, those actions return an InsufficientCapabilities error. For
-	// more information, see Acknowledging IAM Resources in CloudFormation Templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
-	// .
+	// this parameter when you use the CreateStackor UpdateStack actions with your template; otherwise,
+	// those actions return an InsufficientCapabilities error.
+	//
+	// For more information, see [Acknowledging IAM Resources in CloudFormation Templates].
+	//
+	// [Acknowledging IAM Resources in CloudFormation Templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
 	Capabilities []types.Capability
 
 	// The list of resources that generated the values in the Capabilities response

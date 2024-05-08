@@ -11,10 +11,13 @@ import (
 )
 
 // The ListTagsLogGroup operation is on the path to deprecation. We recommend that
-// you use ListTagsForResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html)
-// instead. Lists the tags for the specified log group.
+// you use [ListTagsForResource]instead.
+//
+// Lists the tags for the specified log group.
 //
 // Deprecated: Please use the generic tagging API ListTagsForResource
+//
+// [ListTagsForResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
 func (c *Client) ListTagsLogGroup(ctx context.Context, params *ListTagsLogGroupInput, optFns ...func(*Options)) (*ListTagsLogGroupOutput, error) {
 	if params == nil {
 		params = &ListTagsLogGroupInput{}

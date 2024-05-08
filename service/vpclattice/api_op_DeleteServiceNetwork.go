@@ -14,8 +14,9 @@ import (
 // no service or VPC associated with it. If you delete a service network, all
 // resources related to the service network, such as the resource policy, auth
 // policy, and access log subscriptions, are also deleted. For more information,
-// see Delete a service network (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#delete-service-network)
-// in the Amazon VPC Lattice User Guide.
+// see [Delete a service network]in the Amazon VPC Lattice User Guide.
+//
+// [Delete a service network]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#delete-service-network
 func (c *Client) DeleteServiceNetwork(ctx context.Context, params *DeleteServiceNetworkInput, optFns ...func(*Options)) (*DeleteServiceNetworkOutput, error) {
 	if params == nil {
 		params = &DeleteServiceNetworkInput{}

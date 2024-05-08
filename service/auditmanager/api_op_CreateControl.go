@@ -29,29 +29,29 @@ func (c *Client) CreateControl(ctx context.Context, params *CreateControlInput, 
 
 type CreateControlInput struct {
 
-	// The data mapping sources for the control.
+	//  The data mapping sources for the control.
 	//
 	// This member is required.
 	ControlMappingSources []types.CreateControlMappingSource
 
-	// The name of the control.
+	//  The name of the control.
 	//
 	// This member is required.
 	Name *string
 
-	// The recommended actions to carry out if the control isn't fulfilled.
+	//  The recommended actions to carry out if the control isn't fulfilled.
 	ActionPlanInstructions *string
 
-	// The title of the action plan for remediating the control.
+	//  The title of the action plan for remediating the control.
 	ActionPlanTitle *string
 
-	// The description of the control.
+	//  The description of the control.
 	Description *string
 
-	// The tags that are associated with the control.
+	//  The tags that are associated with the control.
 	Tags map[string]string
 
-	// The steps to follow to determine if the control is satisfied.
+	//  The steps to follow to determine if the control is satisfied.
 	TestingInformation *string
 
 	noSmithyDocumentSerde
@@ -59,7 +59,7 @@ type CreateControlInput struct {
 
 type CreateControlOutput struct {
 
-	// The new control that the CreateControl API returned.
+	//  The new control that the CreateControl API returned.
 	Control *types.Control
 
 	// Metadata pertaining to the operation's result.

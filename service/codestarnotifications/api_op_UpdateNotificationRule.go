@@ -13,8 +13,9 @@ import (
 
 // Updates a notification rule for a resource. You can change the events that
 // trigger the notification rule, the status of the rule, and the targets that
-// receive the notifications. To add or remove tags for a notification rule, you
-// must use TagResource and UntagResource .
+// receive the notifications.
+//
+// To add or remove tags for a notification rule, you must use TagResource and UntagResource.
 func (c *Client) UpdateNotificationRule(ctx context.Context, params *UpdateNotificationRuleInput, optFns ...func(*Options)) (*UpdateNotificationRuleOutput, error) {
 	if params == nil {
 		params = &UpdateNotificationRuleInput{}
@@ -45,8 +46,9 @@ type UpdateNotificationRuleInput struct {
 	DetailType types.DetailType
 
 	// A list of event types associated with this notification rule. For a complete
-	// list of event types and IDs, see Notification concepts (https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api)
-	// in the Developer Tools Console User Guide.
+	// list of event types and IDs, see [Notification concepts]in the Developer Tools Console User Guide.
+	//
+	// [Notification concepts]: https://docs.aws.amazon.com/codestar-notifications/latest/userguide/concepts.html#concepts-api
 	EventTypeIds []string
 
 	// The name of the notification rule.

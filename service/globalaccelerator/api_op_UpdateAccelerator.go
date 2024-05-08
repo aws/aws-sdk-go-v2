@@ -12,10 +12,14 @@ import (
 )
 
 // Update an accelerator to make changes, such as the following:
+//
 //   - Change the name of the accelerator.
+//
 //   - Disable the accelerator so that it no longer accepts or routes traffic, or
 //     so that you can delete it.
+//
 //   - Enable the accelerator, if it is disabled.
+//
 //   - Change the IP address type to dual-stack if it is IPv4, or change the IP
 //     address type to IPv4 if it's dual-stack.
 //
@@ -23,10 +27,12 @@ import (
 // long as it exists, even if you disable the accelerator and it no longer accepts
 // or routes traffic. However, when you delete the accelerator, you lose the static
 // IP addresses that are assigned to it, so you can no longer route traffic by
-// using them. Global Accelerator is a global service that supports endpoints in
-// multiple Amazon Web Services Regions but you must specify the US West (Oregon)
-// Region to create, update, or otherwise work with accelerators. That is, for
-// example, specify --region us-west-2 on Amazon Web Services CLI commands.
+// using them.
+//
+// Global Accelerator is a global service that supports endpoints in multiple
+// Amazon Web Services Regions but you must specify the US West (Oregon) Region to
+// create, update, or otherwise work with accelerators. That is, for example,
+// specify --region us-west-2 on Amazon Web Services CLI commands.
 func (c *Client) UpdateAccelerator(ctx context.Context, params *UpdateAcceleratorInput, optFns ...func(*Options)) (*UpdateAcceleratorOutput, error) {
 	if params == nil {
 		params = &UpdateAcceleratorInput{}
@@ -50,8 +56,10 @@ type UpdateAcceleratorInput struct {
 	AcceleratorArn *string
 
 	// Indicates whether an accelerator is enabled. The value is true or false. The
-	// default value is true. If the value is set to true, the accelerator cannot be
-	// deleted. If set to false, the accelerator can be deleted.
+	// default value is true.
+	//
+	// If the value is set to true, the accelerator cannot be deleted. If set to
+	// false, the accelerator can be deleted.
 	Enabled *bool
 
 	// The IP address type that an accelerator supports. For a standard accelerator,

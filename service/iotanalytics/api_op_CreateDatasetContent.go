@@ -35,8 +35,9 @@ type CreateDatasetContentInput struct {
 	DatasetName *string
 
 	// The version ID of the dataset content. To specify versionId for a dataset
-	// content, the dataset must use a DeltaTimer (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
-	// filter.
+	// content, the dataset must use a [DeltaTimer]filter.
+	//
+	// [DeltaTimer]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
 	VersionId *string
 
 	noSmithyDocumentSerde

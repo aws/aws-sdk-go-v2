@@ -12,7 +12,9 @@ import (
 )
 
 // Gets an origin request policy, including the following metadata:
+//
 //   - The policy's identifier.
+//
 //   - The date and time when the policy was last modified.
 //
 // To get an origin request policy, you must provide the policy's identifier. If

@@ -8,14 +8,25 @@
 // identify and filter the common controls and related metadata that are available
 // to Amazon Web Services customers. This API reference provides descriptions,
 // syntax, and usage examples for each of the actions and data types that are
-// supported by Amazon Web Services Control Catalog. Use the following links to get
-// started with the Amazon Web Services Control Catalog API:
-//   - Actions (https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Operations.html)
-//     : An alphabetical list of all Control Catalog API operations.
-//   - Data types (https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Types.html)
-//     : An alphabetical list of all Control Catalog data types.
-//   - Common parameters (https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonParameters.html)
-//     : Parameters that all operations can use.
-//   - Common errors (https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonErrors.html)
-//     : Client and server errors that all operations can return.
+// supported by Amazon Web Services Control Catalog.
+//
+// Use the following links to get started with the Amazon Web Services Control
+// Catalog API:
+//
+// [Actions]
+//   - : An alphabetical list of all Control Catalog API operations.
+//
+// [Data types]
+//   - : An alphabetical list of all Control Catalog data types.
+//
+// [Common parameters]
+//   - : Parameters that all operations can use.
+//
+// [Common errors]
+//   - : Client and server errors that all operations can return.
+//
+// [Common errors]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonErrors.html
+// [Actions]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Operations.html
+// [Data types]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Types.html
+// [Common parameters]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonParameters.html
 package controlcatalog

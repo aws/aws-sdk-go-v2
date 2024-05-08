@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Lists notebook instance lifestyle configurations created with the
-// CreateNotebookInstanceLifecycleConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateNotebookInstanceLifecycleConfig.html)
-// API.
+// Lists notebook instance lifestyle configurations created with the [CreateNotebookInstanceLifecycleConfig] API.
+//
+// [CreateNotebookInstanceLifecycleConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateNotebookInstanceLifecycleConfig.html
 func (c *Client) ListNotebookInstanceLifecycleConfigs(ctx context.Context, params *ListNotebookInstanceLifecycleConfigsInput, optFns ...func(*Options)) (*ListNotebookInstanceLifecycleConfigsOutput, error) {
 	if params == nil {
 		params = &ListNotebookInstanceLifecycleConfigsInput{}

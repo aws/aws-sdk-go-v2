@@ -15,11 +15,14 @@ import (
 // and usage-related metric that you want the request to return. For example, you
 // can specify BlendedCosts or UsageQuantity . You can also filter and group your
 // data by various dimensions, such as SERVICE or AZ , in a specific time range.
-// For a complete list of valid dimensions, see the GetDimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
-// operation. Management account in an organization in Organizations have access to
-// all member accounts. For information about filter limitations, see Quotas and
-// restrictions (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html)
-// in the Billing and Cost Management User Guide.
+// For a complete list of valid dimensions, see the [GetDimensionValues]operation. Management account
+// in an organization in Organizations have access to all member accounts.
+//
+// For information about filter limitations, see [Quotas and restrictions] in the Billing and Cost
+// Management User Guide.
+//
+// [GetDimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
+// [Quotas and restrictions]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html
 func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInput, optFns ...func(*Options)) (*GetCostAndUsageOutput, error) {
 	if params == nil {
 		params = &GetCostAndUsageInput{}
@@ -45,16 +48,21 @@ type GetCostAndUsageInput struct {
 	Granularity types.Granularity
 
 	// Which metrics are returned in the query. For more information about blended and
-	// unblended rates, see Why does the "blended" annotation appear on some line
-	// items in my bill? (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/)
-	// . Valid values are AmortizedCost , BlendedCost , NetAmortizedCost ,
+	// unblended rates, see [Why does the "blended" annotation appear on some line items in my bill?].
+	//
+	// Valid values are AmortizedCost , BlendedCost , NetAmortizedCost ,
 	// NetUnblendedCost , NormalizedUsageAmount , UnblendedCost , and UsageQuantity .
+	//
 	// If you return the UsageQuantity metric, the service aggregates all usage
 	// numbers without taking into account the units. For example, if you aggregate
 	// usageQuantity across all of Amazon EC2, the results aren't meaningful because
 	// Amazon EC2 compute hours and data transfer are measured in different units (for
 	// example, hours and GB). To get more meaningful UsageQuantity metrics, filter by
-	// UsageType or UsageTypeGroups . Metrics is required for GetCostAndUsage requests.
+	// UsageType or UsageTypeGroups .
+	//
+	// Metrics is required for GetCostAndUsage requests.
+	//
+	// [Why does the "blended" annotation appear on some line items in my bill?]: http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
 	//
 	// This member is required.
 	Metrics []string
@@ -70,19 +78,25 @@ type GetCostAndUsageInput struct {
 	// Filters Amazon Web Services costs by different dimensions. For example, you can
 	// specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with
 	// that account's usage of that service. You can nest Expression objects to define
-	// any combination of dimension filters. For more information, see Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// . Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE .
+	// any combination of dimension filters. For more information, see [Expression].
+	//
+	// Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE .
+	//
 	// Valid values for MatchOptions for CostCategories and Tags are EQUALS , ABSENT ,
 	// and CASE_SENSITIVE . Default values are EQUALS and CASE_SENSITIVE .
+	//
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
 	Filter *types.Expression
 
 	// You can group Amazon Web Services costs using up to two different groups,
-	// either dimensions, tag keys, cost categories, or any two group by types. Valid
-	// values for the DIMENSION type are AZ , INSTANCE_TYPE , LEGAL_ENTITY_NAME ,
+	// either dimensions, tag keys, cost categories, or any two group by types.
+	//
+	// Valid values for the DIMENSION type are AZ , INSTANCE_TYPE , LEGAL_ENTITY_NAME ,
 	// INVOICING_ENTITY , LINKED_ACCOUNT , OPERATION , PLATFORM , PURCHASE_TYPE ,
-	// SERVICE , TENANCY , RECORD_TYPE , and USAGE_TYPE . When you group by the TAG
-	// type and include a valid tag key, you get all tag values, including empty
-	// strings.
+	// SERVICE , TENANCY , RECORD_TYPE , and USAGE_TYPE .
+	//
+	// When you group by the TAG type and include a valid tag key, you get all tag
+	// values, including empty strings.
 	GroupBy []types.GroupDefinition
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the

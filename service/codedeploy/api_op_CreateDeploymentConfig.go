@@ -40,26 +40,36 @@ type CreateDeploymentConfigInput struct {
 
 	// The minimum number of healthy instances that should be available at any time
 	// during the deployment. There are two parameters expected in the input: type and
-	// value. The type parameter takes either of the following values:
+	// value.
+	//
+	// The type parameter takes either of the following values:
+	//
 	//   - HOST_COUNT: The value parameter represents the minimum number of healthy
 	//   instances as an absolute value.
+	//
 	//   - FLEET_PERCENT: The value parameter represents the minimum number of healthy
 	//   instances as a percentage of the total number of instances in the deployment. If
 	//   you specify FLEET_PERCENT, at the start of the deployment, CodeDeploy converts
 	//   the percentage to the equivalent number of instances and rounds up fractional
 	//   instances.
-	// The value parameter takes an integer. For example, to set a minimum of 95%
-	// healthy instance, specify a type of FLEET_PERCENT and a value of 95.
+	//
+	// The value parameter takes an integer.
+	//
+	// For example, to set a minimum of 95% healthy instance, specify a type of
+	// FLEET_PERCENT and a value of 95.
 	MinimumHealthyHosts *types.MinimumHealthyHosts
 
 	// The configuration that specifies how the deployment traffic is routed.
 	TrafficRoutingConfig *types.TrafficRoutingConfig
 
 	// Configure the ZonalConfig object if you want CodeDeploy to deploy your
-	// application to one Availability Zone (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones)
-	// at a time, within an Amazon Web Services Region. For more information about the
-	// zonal configuration feature, see zonal configuration (https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config)
-	// in the CodeDeploy User Guide.
+	// application to one [Availability Zone]at a time, within an Amazon Web Services Region.
+	//
+	// For more information about the zonal configuration feature, see [zonal configuration] in the
+	// CodeDeploy User Guide.
+	//
+	// [zonal configuration]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations-create.html#zonal-config
+	// [Availability Zone]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-availability-zones
 	ZonalConfig *types.ZonalConfig
 
 	noSmithyDocumentSerde

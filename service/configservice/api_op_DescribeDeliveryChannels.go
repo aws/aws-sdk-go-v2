@@ -13,8 +13,9 @@ import (
 
 // Returns details about the specified delivery channel. If a delivery channel is
 // not specified, this action returns the details of all delivery channels
-// associated with the account. Currently, you can specify only one delivery
-// channel per region in your account.
+// associated with the account.
+//
+// Currently, you can specify only one delivery channel per region in your account.
 func (c *Client) DescribeDeliveryChannels(ctx context.Context, params *DescribeDeliveryChannelsInput, optFns ...func(*Options)) (*DescribeDeliveryChannelsOutput, error) {
 	if params == nil {
 		params = &DescribeDeliveryChannelsInput{}

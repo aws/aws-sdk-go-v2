@@ -43,9 +43,8 @@ type ListVpcEndpointAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the ListVpcEndpointAccess operation.
-// Returns a list of accounts id and account type authorized to manage VPC
-// endpoints.
+// Container for response parameters to the ListVpcEndpointAccess operation. Returns a list of accounts
+// id and account type authorized to manage VPC endpoints.
 type ListVpcEndpointAccessOutput struct {
 
 	// List of AuthorizedPrincipal describing the details of the permissions to manage

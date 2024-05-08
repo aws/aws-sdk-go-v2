@@ -11,40 +11,60 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation creates a legacy predictor that does not include all the
+//	This operation creates a legacy predictor that does not include all the
+//
 // predictor functionalities provided by Amazon Forecast. To create a predictor
-// that is compatible with all aspects of Forecast, use CreateAutoPredictor .
-// Creates an Amazon Forecast predictor. In the request, provide a dataset group
-// and either specify an algorithm or let Amazon Forecast choose an algorithm for
-// you using AutoML. If you specify an algorithm, you also can override
-// algorithm-specific hyperparameters. Amazon Forecast uses the algorithm to train
-// a predictor using the latest version of the datasets in the specified dataset
-// group. You can then generate a forecast using the CreateForecast operation. To
-// see the evaluation metrics, use the GetAccuracyMetrics operation. You can
-// specify a featurization configuration to fill and aggregate the data fields in
-// the TARGET_TIME_SERIES dataset to improve model training. For more information,
-// see FeaturizationConfig . For RELATED_TIME_SERIES datasets, CreatePredictor
-// verifies that the DataFrequency specified when the dataset was created matches
-// the ForecastFrequency . TARGET_TIME_SERIES datasets don't have this restriction.
+// that is compatible with all aspects of Forecast, use CreateAutoPredictor.
+//
+// Creates an Amazon Forecast predictor.
+//
+// In the request, provide a dataset group and either specify an algorithm or let
+// Amazon Forecast choose an algorithm for you using AutoML. If you specify an
+// algorithm, you also can override algorithm-specific hyperparameters.
+//
+// Amazon Forecast uses the algorithm to train a predictor using the latest
+// version of the datasets in the specified dataset group. You can then generate a
+// forecast using the CreateForecastoperation.
+//
+// To see the evaluation metrics, use the GetAccuracyMetrics operation.
+//
+// You can specify a featurization configuration to fill and aggregate the data
+// fields in the TARGET_TIME_SERIES dataset to improve model training. For more
+// information, see FeaturizationConfig.
+//
+// For RELATED_TIME_SERIES datasets, CreatePredictor verifies that the
+// DataFrequency specified when the dataset was created matches the
+// ForecastFrequency . TARGET_TIME_SERIES datasets don't have this restriction.
 // Amazon Forecast also verifies the delimiter and timestamp format. For more
-// information, see howitworks-datasets-groups . By default, predictors are trained
-// and evaluated at the 0.1 (P10), 0.5 (P50), and 0.9 (P90) quantiles. You can
-// choose custom forecast types to train and evaluate your predictor by setting the
-// ForecastTypes . AutoML If you want Amazon Forecast to evaluate each algorithm
-// and choose the one that minimizes the objective function , set PerformAutoML to
-// true . The objective function is defined as the mean of the weighted losses
-// over the forecast types. By default, these are the p10, p50, and p90 quantile
-// losses. For more information, see EvaluationResult . When AutoML is enabled, the
-// following properties are disallowed:
+// information, see howitworks-datasets-groups.
+//
+// By default, predictors are trained and evaluated at the 0.1 (P10), 0.5 (P50),
+// and 0.9 (P90) quantiles. You can choose custom forecast types to train and
+// evaluate your predictor by setting the ForecastTypes .
+//
+// # AutoML
+//
+// If you want Amazon Forecast to evaluate each algorithm and choose the one that
+// minimizes the objective function , set PerformAutoML to true . The objective
+// function is defined as the mean of the weighted losses over the forecast types.
+// By default, these are the p10, p50, and p90 quantile losses. For more
+// information, see EvaluationResult.
+//
+// When AutoML is enabled, the following properties are disallowed:
+//
 //   - AlgorithmArn
+//
 //   - HPOConfig
+//
 //   - PerformHPO
+//
 //   - TrainingParameters
 //
 // To get a list of all of your predictors, use the ListPredictors operation.
+//
 // Before you can use the predictor to create a forecast, the Status of the
 // predictor must be ACTIVE , signifying that training has completed. To get the
-// status, use the DescribePredictor operation.
+// status, use the DescribePredictoroperation.
 func (c *Client) CreatePredictor(ctx context.Context, params *CreatePredictorInput, optFns ...func(*Options)) (*CreatePredictorOutput, error) {
 	if params == nil {
 		params = &CreatePredictorInput{}
@@ -68,11 +88,14 @@ type CreatePredictorInput struct {
 	FeaturizationConfig *types.FeaturizationConfig
 
 	// Specifies the number of time-steps that the model is trained to predict. The
-	// forecast horizon is also called the prediction length. For example, if you
-	// configure a dataset for daily data collection (using the DataFrequency
-	// parameter of the CreateDataset operation) and set the forecast horizon to 10,
-	// the model returns predictions for 10 days. The maximum forecast horizon is the
-	// lesser of 500 time-steps or 1/3 of the TARGET_TIME_SERIES dataset length.
+	// forecast horizon is also called the prediction length.
+	//
+	// For example, if you configure a dataset for daily data collection (using the
+	// DataFrequency parameter of the CreateDataset operation) and set the forecast horizon to 10,
+	// the model returns predictions for 10 days.
+	//
+	// The maximum forecast horizon is the lesser of 500 time-steps or 1/3 of the
+	// TARGET_TIME_SERIES dataset length.
 	//
 	// This member is required.
 	ForecastHorizon *int32
@@ -89,21 +112,32 @@ type CreatePredictorInput struct {
 	PredictorName *string
 
 	// The Amazon Resource Name (ARN) of the algorithm to use for model training.
-	// Required if PerformAutoML is not set to true . Supported algorithms:
+	// Required if PerformAutoML is not set to true .
+	//
+	// Supported algorithms:
+	//
 	//   - arn:aws:forecast:::algorithm/ARIMA
+	//
 	//   - arn:aws:forecast:::algorithm/CNN-QR
+	//
 	//   - arn:aws:forecast:::algorithm/Deep_AR_Plus
+	//
 	//   - arn:aws:forecast:::algorithm/ETS
+	//
 	//   - arn:aws:forecast:::algorithm/NPTS
+	//
 	//   - arn:aws:forecast:::algorithm/Prophet
 	AlgorithmArn *string
 
-	// The LatencyOptimized AutoML override strategy is only available in private
+	//  The LatencyOptimized AutoML override strategy is only available in private
 	// beta. Contact Amazon Web Services Support or your account manager to learn more
-	// about access privileges. Used to overide the default AutoML strategy, which is
-	// to optimize predictor accuracy. To apply an AutoML strategy that minimizes
-	// training time, use LatencyOptimized . This parameter is only valid for
-	// predictors trained using AutoML.
+	// about access privileges.
+	//
+	// Used to overide the default AutoML strategy, which is to optimize predictor
+	// accuracy. To apply an AutoML strategy that minimizes training time, use
+	// LatencyOptimized .
+	//
+	// This parameter is only valid for predictors trained using AutoML.
 	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
 
 	// An Key Management Service (KMS) key and the Identity and Access Management
@@ -119,14 +153,16 @@ type CreatePredictorInput struct {
 	// Specifies the forecast types used to train a predictor. You can specify up to
 	// five forecast types. Forecast types can be quantiles from 0.01 to 0.99, by
 	// increments of 0.01 or higher. You can also specify the mean forecast with mean .
+	//
 	// The default value is ["0.10", "0.50", "0.9"] .
 	ForecastTypes []string
 
 	// Provides hyperparameter override values for the algorithm. If you don't provide
 	// this parameter, Amazon Forecast uses default values. The individual algorithms
 	// specify which hyperparameters support hyperparameter optimization (HPO). For
-	// more information, see aws-forecast-choosing-recipes . If you included the
-	// HPOConfig object, you must set PerformHPO to true.
+	// more information, see aws-forecast-choosing-recipes.
+	//
+	// If you included the HPOConfig object, you must set PerformHPO to true.
 	HPOConfig *types.HyperParameterTuningJobConfig
 
 	// The accuracy metric used to optimize the predictor.
@@ -134,40 +170,58 @@ type CreatePredictorInput struct {
 
 	// Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates
 	// the algorithms it provides and chooses the best algorithm and configuration for
-	// your training dataset. The default value is false . In this case, you are
-	// required to specify an algorithm. Set PerformAutoML to true to have Amazon
-	// Forecast perform AutoML. This is a good option if you aren't sure which
-	// algorithm is suitable for your training data. In this case, PerformHPO must be
-	// false.
+	// your training dataset.
+	//
+	// The default value is false . In this case, you are required to specify an
+	// algorithm.
+	//
+	// Set PerformAutoML to true to have Amazon Forecast perform AutoML. This is a
+	// good option if you aren't sure which algorithm is suitable for your training
+	// data. In this case, PerformHPO must be false.
 	PerformAutoML *bool
 
 	// Whether to perform hyperparameter optimization (HPO). HPO finds optimal
 	// hyperparameter values for your training data. The process of performing HPO is
-	// known as running a hyperparameter tuning job. The default value is false . In
-	// this case, Amazon Forecast uses default hyperparameter values from the chosen
-	// algorithm. To override the default values, set PerformHPO to true and,
-	// optionally, supply the HyperParameterTuningJobConfig object. The tuning job
-	// specifies a metric to optimize, which hyperparameters participate in tuning, and
-	// the valid range for each tunable hyperparameter. In this case, you are required
-	// to specify an algorithm and PerformAutoML must be false. The following
-	// algorithms support HPO:
+	// known as running a hyperparameter tuning job.
+	//
+	// The default value is false . In this case, Amazon Forecast uses default
+	// hyperparameter values from the chosen algorithm.
+	//
+	// To override the default values, set PerformHPO to true and, optionally, supply
+	// the HyperParameterTuningJobConfigobject. The tuning job specifies a metric to optimize, which
+	// hyperparameters participate in tuning, and the valid range for each tunable
+	// hyperparameter. In this case, you are required to specify an algorithm and
+	// PerformAutoML must be false.
+	//
+	// The following algorithms support HPO:
+	//
 	//   - DeepAR+
+	//
 	//   - CNN-QR
 	PerformHPO *bool
 
 	// The optional metadata that you apply to the predictor to help you categorize
 	// and organize them. Each tag consists of a key and an optional value, both of
-	// which you define. The following basic restrictions apply to tags:
+	// which you define.
+	//
+	// The following basic restrictions apply to tags:
+	//
 	//   - Maximum number of tags per resource - 50.
+	//
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
+	//
 	//   - Maximum key length - 128 Unicode characters in UTF-8.
+	//
 	//   - Maximum value length - 256 Unicode characters in UTF-8.
+	//
 	//   - If your tagging schema is used across multiple services and resources,
 	//   remember that other services may have restrictions on allowed characters.
 	//   Generally allowed characters are: letters, numbers, and spaces representable in
 	//   UTF-8, and the following characters: + - = . _ : / @.
+	//
 	//   - Tag keys and values are case sensitive.
+	//
 	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
 	//   prefix for keys as it is reserved for Amazon Web Services use. You cannot edit
 	//   or delete tag keys with this prefix. Values can have this prefix. If a tag value
@@ -178,7 +232,7 @@ type CreatePredictorInput struct {
 
 	// The hyperparameters to override for model training. The hyperparameters that
 	// you can override are listed in the individual algorithms. For the list of
-	// supported algorithms, see aws-forecast-choosing-recipes .
+	// supported algorithms, see aws-forecast-choosing-recipes.
 	TrainingParameters map[string]string
 
 	noSmithyDocumentSerde

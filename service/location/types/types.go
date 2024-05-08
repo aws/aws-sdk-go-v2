@@ -23,18 +23,30 @@ type ApiKeyRestrictions struct {
 	// A list of allowed actions that an API key resource grants permissions to
 	// perform. You must have at least one action for each type of resource. For
 	// example, if you have a place resource, you must include at least one place
-	// action. The following are valid values for the actions.
+	// action.
+	//
+	// The following are valid values for the actions.
+	//
 	//   - Map actions
+	//
 	//   - geo:GetMap* - Allows all actions needed for map rendering.
+	//
 	//   - Place actions
+	//
 	//   - geo:SearchPlaceIndexForText - Allows geocoding.
+	//
 	//   - geo:SearchPlaceIndexForPosition - Allows reverse geocoding.
-	//   - geo:SearchPlaceIndexForSuggestions - Allows generating suggestions from
-	//   text.
+	//
+	//   - geo:SearchPlaceIndexForSuggestions - Allows generating suggestions from text.
+	//
 	//   - GetPlace - Allows finding a place by place ID.
+	//
 	//   - Route actions
+	//
 	//   - geo:CalculateRoute - Allows point to point routing.
+	//
 	//   - geo:CalculateRouteMatrix - Allows calculating a matrix of routes.
+	//
 	// You must use these strings exactly. For example, to provide access to map
 	// rendering, the only valid action is geo:GetMap* as an input to the list.
 	// ["geo:GetMap*"] is valid but ["geo:GetMapTile"] is not. Similarly, you cannot
@@ -45,33 +57,47 @@ type ApiKeyRestrictions struct {
 	AllowActions []string
 
 	// A list of allowed resource ARNs that a API key bearer can perform actions on.
+	//
 	//   - The ARN must be the correct ARN for a map, place, or route ARN. You may
 	//   include wildcards in the resource-id to match multiple resources of the same
 	//   type.
+	//
 	//   - The resources must be in the same partition , region , and account-id as the
 	//   key that is being created.
+	//
 	//   - Other than wildcards, you must include the full ARN, including the arn ,
 	//   partition , service , region , account-id and resource-id delimited by colons
 	//   (:).
+	//
 	//   - No spaces allowed, even with wildcards. For example,
 	//   arn:aws:geo:region:account-id:map/ExampleMap* .
-	// For more information about ARN format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	//
+	// For more information about ARN format, see [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AllowResources []string
 
 	// An optional list of allowed HTTP referers for which requests must originate
 	// from. Requests using this API key from other domains will not be allowed.
+	//
 	// Requirements:
+	//
 	//   - Contain only alphanumeric characters (A–Z, a–z, 0–9) or any symbols in this
 	//   list $\-._+!*`(),;/?:@=&
+	//
 	//   - May contain a percent (%) if followed by 2 hexadecimal digits (A-F, a-f,
 	//   0-9); this is used for URL encoding purposes.
+	//
 	//   - May contain wildcard characters question mark (?) and asterisk (*).
-	//   Question mark (?) will replace any single character (including hexadecimal
-	//   digits). Asterisk (*) will replace any multiple characters (including multiple
+	//
+	// Question mark (?) will replace any single character (including hexadecimal
+	//   digits).
+	//
+	// Asterisk (*) will replace any multiple characters (including multiple
 	//   hexadecimal digits).
+	//
 	//   - No spaces allowed. For example, https://example.com .
 	AllowReferers []string
 
@@ -125,8 +151,10 @@ type BatchEvaluateGeofencesError struct {
 	// This member is required.
 	Error *BatchItemError
 
-	// Specifies a timestamp for when the error occurred in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// Specifies a timestamp for when the error occurred in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	SampleTime *time.Time
@@ -188,16 +216,20 @@ type BatchPutGeofenceRequestEntry struct {
 	GeofenceId *string
 
 	// Contains the details of the position of the geofence. Can be either a polygon
-	// or a circle. Including both will return a validation error. Each geofence
-	// polygon (https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html)
-	// can have a maximum of 1,000 vertices.
+	// or a circle. Including both will return a validation error.
+	//
+	// Each [geofence polygon] can have a maximum of 1,000 vertices.
+	//
+	// [geofence polygon]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
 	//
 	// This member is required.
 	Geometry *GeofenceGeometry
 
 	// Associates one of more properties with the geofence. A property is a key-value
 	// pair stored with the geofence and added to any geofence event triggered with
-	// that geofence. Format: "key" : "value"
+	// that geofence.
+	//
+	// Format: "key" : "value"
 	GeofenceProperties map[string]string
 
 	noSmithyDocumentSerde
@@ -207,9 +239,10 @@ type BatchPutGeofenceRequestEntry struct {
 // geofence collection.
 type BatchPutGeofenceSuccess struct {
 
-	// The timestamp for when the geofence was stored in a geofence collection in ISO
-	// 8601 (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence was stored in a geofence collection in [ISO 8601]
+	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -219,8 +252,10 @@ type BatchPutGeofenceSuccess struct {
 	// This member is required.
 	GeofenceId *string
 
-	// The timestamp for when the geofence was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -242,8 +277,10 @@ type BatchUpdateDevicePositionError struct {
 	// This member is required.
 	Error *BatchItemError
 
-	// The timestamp at which the device position was determined. Uses  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp at which the device position was determined. Uses [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	SampleTime *time.Time
@@ -255,12 +292,18 @@ type BatchUpdateDevicePositionError struct {
 // TravelMode as Car .
 type CalculateRouteCarModeOptions struct {
 
-	// Avoids ferries when calculating routes. Default Value: false Valid Values: false
-	// | true
+	// Avoids ferries when calculating routes.
+	//
+	// Default Value: false
+	//
+	// Valid Values: false | true
 	AvoidFerries *bool
 
-	// Avoids tolls when calculating routes. Default Value: false Valid Values: false
-	// | true
+	// Avoids tolls when calculating routes.
+	//
+	// Default Value: false
+	//
+	// Valid Values: false | true
 	AvoidTolls *bool
 
 	noSmithyDocumentSerde
@@ -271,12 +314,16 @@ type CalculateRouteMatrixSummary struct {
 
 	// The data provider of traffic and road network data used to calculate the
 	// routes. Indicates one of the available providers:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -306,20 +353,26 @@ type CalculateRouteSummary struct {
 
 	// The data provider of traffic and road network data used to calculate the route.
 	// Indicates one of the available providers:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
 
 	// The total distance covered by the route. The sum of the distance travelled
-	// between every stop on the route. If Esri is the data source for the route
-	// calculator, the route distance can’t be greater than 400 km. If the route
-	// exceeds 400 km, the response is a 400 RoutesValidationException error.
+	// between every stop on the route.
+	//
+	// If Esri is the data source for the route calculator, the route distance can’t
+	// be greater than 400 km. If the route exceeds 400 km, the response is a 400
+	// RoutesValidationException error.
 	//
 	// This member is required.
 	Distance *float64
@@ -336,15 +389,21 @@ type CalculateRouteSummary struct {
 	DurationSeconds *float64
 
 	// Specifies a geographical box surrounding a route. Used to zoom into a route
-	// when displaying it in a map. For example, [min x, min y, max x, max y] . The
-	// first 2 bbox parameters describe the lower southwest corner:
+	// when displaying it in a map. For example, [min x, min y, max x, max y] .
+	//
+	// The first 2 bbox parameters describe the lower southwest corner:
+	//
 	//   - The first bbox position is the X coordinate or longitude of the lower
 	//   southwest corner.
+	//
 	//   - The second bbox position is the Y coordinate or latitude of the lower
 	//   southwest corner.
+	//
 	// The next 2 bbox parameters describe the upper northeast corner:
+	//
 	//   - The third bbox position is the X coordinate, or longitude of the upper
 	//   northeast corner.
+	//
 	//   - The fourth bbox position is the Y coordinate, or latitude of the upper
 	//   northeast corner.
 	//
@@ -358,12 +417,18 @@ type CalculateRouteSummary struct {
 // TravelMode as Truck .
 type CalculateRouteTruckModeOptions struct {
 
-	// Avoids ferries when calculating routes. Default Value: false Valid Values: false
-	// | true
+	// Avoids ferries when calculating routes.
+	//
+	// Default Value: false
+	//
+	// Valid Values: false | true
 	AvoidFerries *bool
 
-	// Avoids tolls when calculating routes. Default Value: false Valid Values: false
-	// | true
+	// Avoids tolls when calculating routes.
+	//
+	// Default Value: false
+	//
+	// Valid Values: false | true
 	AvoidTolls *bool
 
 	// Specifies the truck's dimension specifications including length, height, width,
@@ -381,8 +446,10 @@ type CalculateRouteTruckModeOptions struct {
 // A circle on the earth, as defined by a center point and a radius.
 type Circle struct {
 
-	// A single point geometry, specifying the center of the circle, using WGS 84 (https://gisgeography.com/wgs84-world-geodetic-system/)
+	// A single point geometry, specifying the center of the circle, using [WGS 84]
 	// coordinates, in the form [longitude, latitude] .
+	//
+	// [WGS 84]: https://gisgeography.com/wgs84-world-geodetic-system/
 	//
 	// This member is required.
 	Center []float64
@@ -396,22 +463,30 @@ type Circle struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the data storage option chosen for requesting Places. When using
-// Amazon Location Places:
+// Specifies the data storage option chosen for requesting Places.
+//
+// When using Amazon Location Places:
+//
 //   - If using HERE Technologies as a data provider, you can't store results for
 //     locations in Japan by setting IntendedUse to Storage . parameter.
+//
 //   - Under the MobileAssetTracking or MobilAssetManagement pricing plan, you
 //     can't store results from your place index resources by setting IntendedUse to
 //     Storage . This returns a validation exception error.
 //
-// For more information, see the AWS Service Terms (https://aws.amazon.com/service-terms/)
-// for Amazon Location Service.
+// For more information, see the [AWS Service Terms] for Amazon Location Service.
+//
+// [AWS Service Terms]: https://aws.amazon.com/service-terms/
 type DataSourceConfiguration struct {
 
-	// Specifies how the results of an operation will be stored by the caller. Valid
-	// values include:
+	// Specifies how the results of an operation will be stored by the caller.
+	//
+	// Valid values include:
+	//
 	//   - SingleUse specifies that the results won't be stored.
+	//
 	//   - Storage specifies that the result can be cached or stored in a database.
+	//
 	// Default value: SingleUse
 	IntendedUse IntendedUse
 
@@ -426,15 +501,18 @@ type DevicePosition struct {
 	// This member is required.
 	Position []float64
 
-	// The timestamp for when the tracker resource received the device position in
-	// ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the tracker resource received the device position in [ISO 8601]
+	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	ReceivedTime *time.Time
 
-	// The timestamp at which the device's position was determined. Uses  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp at which the device's position was determined. Uses [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	SampleTime *time.Time
@@ -459,14 +537,17 @@ type DevicePositionUpdate struct {
 	// This member is required.
 	DeviceId *string
 
-	// The latest device position defined in WGS 84 (https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84)
-	// format: [X or longitude, Y or latitude] .
+	// The latest device position defined in [WGS 84] format: [X or longitude, Y or latitude] .
+	//
+	// [WGS 84]: https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84
 	//
 	// This member is required.
 	Position []float64
 
-	// The timestamp at which the device's position was determined. Uses ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp at which the device's position was determined. Uses [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	SampleTime *time.Time
@@ -476,34 +557,43 @@ type DevicePositionUpdate struct {
 
 	// Associates one of more properties with the position update. A property is a
 	// key-value pair stored with the position update and added to any geofence event
-	// the update may trigger. Format: "key" : "value"
+	// the update may trigger.
+	//
+	// Format: "key" : "value"
 	PositionProperties map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the geofence geometry details. A geofence geometry is made up of
-// either a polygon or a circle. Can be either a polygon or a circle. Including
-// both will return a validation error. Amazon Location doesn't currently support
-// polygons with holes, multipolygons, polygons that are wound clockwise, or that
-// cross the antimeridian.
+// Contains the geofence geometry details.
+//
+// A geofence geometry is made up of either a polygon or a circle. Can be either a
+// polygon or a circle. Including both will return a validation error.
+//
+// Amazon Location doesn't currently support polygons with holes, multipolygons,
+// polygons that are wound clockwise, or that cross the antimeridian.
 type GeofenceGeometry struct {
 
 	// A circle on the earth, as defined by a center point and a radius.
 	Circle *Circle
 
 	// A polygon is a list of linear rings which are each made up of a list of
-	// vertices. Each vertex is a 2-dimensional point of the form: [longitude,
-	// latitude] . This is represented as an array of doubles of length 2 (so [double,
-	// double] ). An array of 4 or more vertices, where the first and last vertex are
-	// the same (to form a closed boundary), is called a linear ring. The linear ring
-	// vertices must be listed in counter-clockwise order around the ring’s interior.
-	// The linear ring is represented as an array of vertices, or an array of arrays of
-	// doubles ( [[double, double], ...] ). A geofence consists of a single linear
-	// ring. To allow for future expansion, the Polygon parameter takes an array of
-	// linear rings, which is represented as an array of arrays of arrays of doubles (
-	// [[[double, double], ...], ...] ). A linear ring for use in geofences can consist
-	// of between 4 and 1,000 vertices.
+	// vertices.
+	//
+	// Each vertex is a 2-dimensional point of the form: [longitude, latitude] . This
+	// is represented as an array of doubles of length 2 (so [double, double] ).
+	//
+	// An array of 4 or more vertices, where the first and last vertex are the same
+	// (to form a closed boundary), is called a linear ring. The linear ring vertices
+	// must be listed in counter-clockwise order around the ring’s interior. The linear
+	// ring is represented as an array of vertices, or an array of arrays of doubles (
+	// [[double, double], ...] ).
+	//
+	// A geofence consists of a single linear ring. To allow for future expansion, the
+	// Polygon parameter takes an array of linear rings, which is represented as an
+	// array of arrays of arrays of doubles ( [[[double, double], ...], ...] ).
+	//
+	// A linear ring for use in geofences can consist of between 4 and 1,000 vertices.
 	Polygon [][][]float64
 
 	noSmithyDocumentSerde
@@ -511,23 +601,30 @@ type GeofenceGeometry struct {
 
 // Contains the calculated route's details for each path between a pair of
 // positions. The number of legs returned corresponds to one fewer than the total
-// number of positions in the request. For example, a route with a departure
-// position and destination position returns one leg with the positions snapped to
-// a nearby road (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html)
-// :
+// number of positions in the request.
+//
+// For example, a route with a departure position and destination position returns
+// one leg with the positions [snapped to a nearby road]:
+//
 //   - The StartPosition is the departure position.
+//
 //   - The EndPosition is the destination position.
 //
 // A route with a waypoint between the departure and destination position returns
 // two legs with the positions snapped to a nearby road:
+//
 //   - Leg 1: The StartPosition is the departure position . The EndPosition is the
 //     waypoint positon.
+//
 //   - Leg 2: The StartPosition is the waypoint position. The EndPosition is the
 //     destination position.
+//
+// [snapped to a nearby road]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
 type Leg struct {
 
 	// The distance between the leg's StartPosition and EndPosition along a calculated
 	// route.
+	//
 	//   - The default measurement is Kilometers unless the request specifies a
 	//   DistanceUnit of Miles .
 	//
@@ -542,15 +639,19 @@ type Leg struct {
 	DurationSeconds *float64
 
 	// The terminating position of the leg. Follows the format [longitude,latitude] .
-	// If the EndPosition isn't located on a road, it's snapped to a nearby road (https://docs.aws.amazon.com/location/latest/developerguide/nap-to-nearby-road.html)
-	// .
+	//
+	// If the EndPosition isn't located on a road, it's [snapped to a nearby road].
+	//
+	// [snapped to a nearby road]: https://docs.aws.amazon.com/location/latest/developerguide/nap-to-nearby-road.html
 	//
 	// This member is required.
 	EndPosition []float64
 
-	// The starting position of the leg. Follows the format [longitude,latitude] . If
-	// the StartPosition isn't located on a road, it's snapped to a nearby road (https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html)
-	// .
+	// The starting position of the leg. Follows the format [longitude,latitude] .
+	//
+	// If the StartPosition isn't located on a road, it's [snapped to a nearby road].
+	//
+	// [snapped to a nearby road]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
 	//
 	// This member is required.
 	StartPosition []float64
@@ -573,9 +674,11 @@ type Leg struct {
 // in plotting a route leg on a map.
 type LegGeometry struct {
 
-	// An ordered list of positions used to plot a route on a map. The first position
-	// is closest to the start position for the leg, and the last position is the
-	// closest to the end position for the leg.
+	// An ordered list of positions used to plot a route on a map.
+	//
+	// The first position is closest to the start position for the leg, and the last
+	// position is the closest to the end position for the leg.
+	//
 	//   - For example, [[-123.117, 49.284],[-123.115, 49.285],[-123.115, 49.285]]
 	LineString [][]float64
 
@@ -595,8 +698,10 @@ type ListDevicePositionsResponseEntry struct {
 	// This member is required.
 	Position []float64
 
-	// The timestamp at which the device position was determined. Uses  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp at which the device position was determined. Uses [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	SampleTime *time.Time
@@ -618,8 +723,10 @@ type ListGeofenceCollectionsResponseEntry struct {
 	// This member is required.
 	CollectionName *string
 
-	// The timestamp for when the geofence collection was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence collection was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -629,8 +736,10 @@ type ListGeofenceCollectionsResponseEntry struct {
 	// This member is required.
 	Description *string
 
-	// Specifies a timestamp for when the resource was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// Specifies a timestamp for when the resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -651,9 +760,10 @@ type ListGeofenceCollectionsResponseEntry struct {
 // Contains a list of geofences stored in a given geofence collection.
 type ListGeofenceResponseEntry struct {
 
-	// The timestamp for when the geofence was stored in a geofence collection in ISO
-	// 8601 (https://www.iso.org/iso-8601-date-and-time-format.html) format:
-	// YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence was stored in a geofence collection in [ISO 8601]
+	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -670,23 +780,31 @@ type ListGeofenceResponseEntry struct {
 
 	// Identifies the state of the geofence. A geofence will hold one of the following
 	// states:
+	//
 	//   - ACTIVE — The geofence has been indexed by the system.
+	//
 	//   - PENDING — The geofence is being processed by the system.
+	//
 	//   - FAILED — The geofence failed to be indexed by the system.
+	//
 	//   - DELETED — The geofence has been deleted from the system index.
+	//
 	//   - DELETING — The geofence is being deleted from the system index.
 	//
 	// This member is required.
 	Status *string
 
-	// The timestamp for when the geofence was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
 	// User defined properties of the geofence. A property is a key-value pair stored
 	// with the geofence and added to any geofence event triggered with that geofence.
+	//
 	// Format: "key" : "value"
 	GeofenceProperties map[string]string
 
@@ -696,14 +814,18 @@ type ListGeofenceResponseEntry struct {
 // An API key resource listed in your Amazon Web Services account.
 type ListKeysResponseEntry struct {
 
-	// The timestamp of when the API key was created, in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp of when the API key was created, in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
 
-	// The timestamp for when the API key resource will expire, in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the API key resource will expire, in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	ExpireTime *time.Time
@@ -719,8 +841,10 @@ type ListKeysResponseEntry struct {
 	// This member is required.
 	Restrictions *ApiKeyRestrictions
 
-	// The timestamp of when the API key was last updated, in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp of when the API key was last updated, in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -735,8 +859,10 @@ type ListKeysResponseEntry struct {
 // account.
 type ListMapsResponseEntry struct {
 
-	// The timestamp for when the map resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the map resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -756,8 +882,10 @@ type ListMapsResponseEntry struct {
 	// This member is required.
 	MapName *string
 
-	// The timestamp for when the map resource was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the map resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -773,19 +901,25 @@ type ListMapsResponseEntry struct {
 // A place index resource listed in your Amazon Web Services account.
 type ListPlaceIndexesResponseEntry struct {
 
-	// The timestamp for when the place index resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the place index resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
 
 	// The data provider of geospatial data. Values can be one of the following:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -800,8 +934,10 @@ type ListPlaceIndexesResponseEntry struct {
 	// This member is required.
 	IndexName *string
 
-	// The timestamp for when the place index resource was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the place index resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -822,21 +958,28 @@ type ListRouteCalculatorsResponseEntry struct {
 	// This member is required.
 	CalculatorName *string
 
-	// The timestamp when the route calculator resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp when the route calculator resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
 	//   - For example, 2020–07-2T12:15:20.000Z+01:00
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
 
 	// The data provider of traffic and road network data. Indicates one of the
 	// available providers:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -846,9 +989,12 @@ type ListRouteCalculatorsResponseEntry struct {
 	// This member is required.
 	Description *string
 
-	// The timestamp when the route calculator resource was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp when the route calculator resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
 	//   - For example, 2020–07-2T12:15:20.000Z+01:00
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -864,8 +1010,10 @@ type ListRouteCalculatorsResponseEntry struct {
 // Contains the tracker resource details.
 type ListTrackersResponseEntry struct {
 
-	// The timestamp for when the tracker resource was created in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the tracker resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -880,8 +1028,10 @@ type ListTrackersResponseEntry struct {
 	// This member is required.
 	TrackerName *string
 
-	// The timestamp at which the device's position was determined. Uses  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp at which the device's position was determined. Uses [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -902,99 +1052,132 @@ type ListTrackersResponseEntry struct {
 // Specifies the map tile style selected from an available provider.
 type MapConfiguration struct {
 
-	// Specifies the map style selected from an available data provider. Valid Esri
-	// map styles (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
-	// :
+	// Specifies the map style selected from an available data provider.
+	//
+	// Valid [Esri map styles]:
+	//
 	//   - VectorEsriNavigation – The Esri Navigation map style, which provides a
 	//   detailed basemap for the world symbolized with a custom navigation map style
 	//   that's designed for use during the day in mobile devices. It also includes a
 	//   richer set of places, such as shops, services, restaurants, attractions, and
 	//   other points of interest. Enable the POI layer by setting it in CustomLayers
 	//   to leverage the additional places data.
+	//
 	//   - RasterEsriImagery – The Esri Imagery map style. A raster basemap that
 	//   provides one meter or better satellite and aerial imagery in many parts of the
 	//   world and lower resolution satellite imagery worldwide.
+	//
 	//   - VectorEsriLightGrayCanvas – The Esri Light Gray Canvas map style, which
 	//   provides a detailed vector basemap with a light gray, neutral background style
 	//   with minimal colors, labels, and features that's designed to draw attention to
 	//   your thematic content.
+	//
 	//   - VectorEsriTopographic – The Esri Light map style, which provides a detailed
 	//   vector basemap with a classic Esri map style.
+	//
 	//   - VectorEsriStreets – The Esri Street Map style, which provides a detailed
 	//   vector basemap for the world symbolized with a classic Esri street map style.
 	//   The vector tile layer is similar in content and style to the World Street Map
 	//   raster map.
+	//
 	//   - VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector
 	//   basemap with a dark gray, neutral background with minimal colors, labels, and
 	//   features that's designed to draw attention to your thematic content.
-	// Valid HERE Technologies map styles (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
-	// :
+	//
+	// Valid [HERE Technologies map styles]:
+	//
 	//   - VectorHereExplore – A default HERE map style containing a neutral, global
 	//   map and its features including roads, buildings, landmarks, and water features.
 	//   It also now includes a fully designed map of Japan.
+	//
 	//   - RasterHereExploreSatellite – A global map containing high resolution
 	//   satellite imagery.
+	//
 	//   - HybridHereExploreSatellite – A global map displaying the road network,
 	//   street names, and city labels over satellite imagery. This style will
 	//   automatically retrieve both raster and vector tiles, and your charges will be
-	//   based on total tiles retrieved. Hybrid styles use both vector and raster tiles
-	//   when rendering the map that you see. This means that more tiles are retrieved
-	//   than when using either vector or raster tiles alone. Your charges will include
-	//   all tiles retrieved.
+	//   based on total tiles retrieved.
+	//
+	// Hybrid styles use both vector and raster tiles when rendering the map that you
+	//   see. This means that more tiles are retrieved than when using either vector or
+	//   raster tiles alone. Your charges will include all tiles retrieved.
+	//
 	//   - VectorHereContrast – The HERE Contrast (Berlin) map style is a high contrast
-	//   detailed base map of the world that blends 3D and 2D rendering. The
-	//   VectorHereContrast style has been renamed from VectorHereBerlin .
+	//   detailed base map of the world that blends 3D and 2D rendering.
+	//
+	// The VectorHereContrast style has been renamed from VectorHereBerlin .
 	//   VectorHereBerlin has been deprecated, but will continue to work in
 	//   applications that use it.
+	//
 	//   - VectorHereExploreTruck – A global map containing truck restrictions and
 	//   attributes (e.g. width / height / HAZMAT) symbolized with highlighted segments
 	//   and icons on top of HERE Explore to support use cases within transport and
 	//   logistics.
-	// Valid GrabMaps map styles (https://docs.aws.amazon.com/location/latest/developerguide/grab.html)
-	// :
+	//
+	// Valid [GrabMaps map styles]:
+	//
 	//   - VectorGrabStandardLight – The Grab Standard Light map style provides a
 	//   basemap with detailed land use coloring, area names, roads, landmarks, and
 	//   points of interest covering Southeast Asia.
+	//
 	//   - VectorGrabStandardDark – The Grab Standard Dark map style provides a dark
 	//   variation of the standard basemap covering Southeast Asia.
+	//
 	// Grab provides maps only for countries in Southeast Asia, and is only available
 	// in the Asia Pacific (Singapore) Region ( ap-southeast-1 ). For more information,
-	// see GrabMaps countries and area covered (https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area)
-	// . Valid Open Data map styles (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html)
-	// :
+	// see [GrabMaps countries and area covered].
+	//
+	// Valid [Open Data map styles]:
+	//
 	//   - VectorOpenDataStandardLight – The Open Data Standard Light map style
 	//   provides a detailed basemap for the world suitable for website and mobile
 	//   application use. The map includes highways major roads, minor roads, railways,
 	//   water features, cities, parks, landmarks, building footprints, and
 	//   administrative boundaries.
+	//
 	//   - VectorOpenDataStandardDark – Open Data Standard Dark is a dark-themed map
 	//   style that provides a detailed basemap for the world suitable for website and
 	//   mobile application use. The map includes highways major roads, minor roads,
 	//   railways, water features, cities, parks, landmarks, building footprints, and
 	//   administrative boundaries.
+	//
 	//   - VectorOpenDataVisualizationLight – The Open Data Visualization Light map
 	//   style is a light-themed style with muted colors and fewer features that aids in
 	//   understanding overlaid data.
+	//
 	//   - VectorOpenDataVisualizationDark – The Open Data Visualization Dark map style
 	//   is a dark-themed style with muted colors and fewer features that aids in
 	//   understanding overlaid data.
+	//
+	// [GrabMaps map styles]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+	// [GrabMaps countries and area covered]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area
+	// [Open Data map styles]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
+	// [Esri map styles]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+	// [HERE Technologies map styles]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
 	//
 	// This member is required.
 	Style *string
 
 	// Specifies the custom layers for the style. Leave unset to not enable any custom
 	// layer, or, for styles that support custom layers, you can enable layer(s), such
-	// as POI layer for the VectorEsriNavigation style. Default is unset . Currenlty
-	// only VectorEsriNavigation supports CustomLayers. For more information, see
-	// Custom Layers (https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#map-custom-layers)
-	// .
+	// as POI layer for the VectorEsriNavigation style. Default is unset .
+	//
+	// Currenlty only VectorEsriNavigation supports CustomLayers. For more
+	// information, see [Custom Layers].
+	//
+	// [Custom Layers]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#map-custom-layers
 	CustomLayers []string
 
 	// Specifies the political view for the style. Leave unset to not use a political
 	// view, or, for styles that support specific political views, you can choose a
-	// view, such as IND for the Indian view. Default is unset. Not all map resources
-	// or styles support political view styles. See Political views (https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views)
-	// for more information.
+	// view, such as IND for the Indian view.
+	//
+	// Default is unset.
+	//
+	// Not all map resources or styles support political view styles. See [Political views] for more
+	// information.
+	//
+	// [Political views]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
 	PoliticalView *string
 
 	noSmithyDocumentSerde
@@ -1005,25 +1188,32 @@ type MapConfigurationUpdate struct {
 
 	// Specifies the custom layers for the style. Leave unset to not enable any custom
 	// layer, or, for styles that support custom layers, you can enable layer(s), such
-	// as POI layer for the VectorEsriNavigation style. Default is unset . Currenlty
-	// only VectorEsriNavigation supports CustomLayers. For more information, see
-	// Custom Layers (https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#map-custom-layers)
-	// .
+	// as POI layer for the VectorEsriNavigation style. Default is unset .
+	//
+	// Currenlty only VectorEsriNavigation supports CustomLayers. For more
+	// information, see [Custom Layers].
+	//
+	// [Custom Layers]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#map-custom-layers
 	CustomLayers []string
 
 	// Specifies the political view for the style. Set to an empty string to not use a
 	// political view, or, for styles that support specific political views, you can
-	// choose a view, such as IND for the Indian view. Not all map resources or styles
-	// support political view styles. See Political views (https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views)
-	// for more information.
+	// choose a view, such as IND for the Indian view.
+	//
+	// Not all map resources or styles support political view styles. See [Political views] for more
+	// information.
+	//
+	// [Political views]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
 	PoliticalView *string
 
 	noSmithyDocumentSerde
 }
 
 // Contains details about addresses or points of interest that match the search
-// criteria. Not all details are included with all responses. Some details may only
-// be returned by specific data partners.
+// criteria.
+//
+// Not all details are included with all responses. Some details may only be
+// returned by specific data partners.
 type Place struct {
 
 	// Places uses a point geometry to specify a location or a Place.
@@ -1034,22 +1224,28 @@ type Place struct {
 	// The numerical portion of an address, such as a building number.
 	AddressNumber *string
 
-	// The Amazon Location categories that describe this Place. For more information
-	// about using categories, including a list of Amazon Location categories, see
-	// Categories and filtering (https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html)
-	// , in the Amazon Location Service Developer Guide.
+	// The Amazon Location categories that describe this Place.
+	//
+	// For more information about using categories, including a list of Amazon
+	// Location categories, see [Categories and filtering], in the Amazon Location Service Developer Guide.
+	//
+	// [Categories and filtering]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
 	Categories []string
 
-	// A country/region specified using ISO 3166 (https://www.iso.org/iso-3166-country-codes.html)
-	// 3-digit country/region code. For example, CAN .
+	// A country/region specified using [ISO 3166] 3-digit country/region code. For example, CAN .
+	//
+	// [ISO 3166]: https://www.iso.org/iso-3166-country-codes.html
 	Country *string
 
-	// True if the result is interpolated from other known places. False if the Place
-	// is a known place. Not returned when the partner does not provide the
-	// information. For example, returns False for an address location that is found
-	// in the partner data, but returns True if an address does not exist in the
-	// partner data and its location is calculated by interpolating between other known
-	// addresses.
+	// True if the result is interpolated from other known places.
+	//
+	// False if the Place is a known place.
+	//
+	// Not returned when the partner does not provide the information.
+	//
+	// For example, returns False for an address location that is found in the partner
+	// data, but returns True if an address does not exist in the partner data and its
+	// location is calculated by interpolating between other known addresses.
 	Interpolated *bool
 
 	// The full name and address of the point of interest such as a city, region, or
@@ -1075,11 +1271,14 @@ type Place struct {
 	Street *string
 
 	// An area that's part of a larger municipality. For example, Blissville is a
-	// submunicipality in the Queen County in New York. This property is only returned
-	// for a place index that uses Esri as a data provider. The property is represented
-	// as a district . For more information about data providers, see Amazon Location
-	// Service data providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	// submunicipality in the Queen County in New York.
+	//
+	// This property is only returned for a place index that uses Esri as a data
+	// provider. The property is represented as a district .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	SubMunicipality *string
 
 	// A county, or an area that's part of a larger region. For example, Metro
@@ -1095,12 +1294,14 @@ type Place struct {
 	TimeZone *TimeZone
 
 	// For addresses with multiple units, the unit identifier. Can include numbers and
-	// letters, for example 3B or Unit 123 . This property is returned only for a place
-	// index that uses Esri or Grab as a data provider. It is not returned for
-	// SearchPlaceIndexForPosition .
+	// letters, for example 3B or Unit 123 .
+	//
+	// This property is returned only for a place index that uses Esri or Grab as a
+	// data provider. It is not returned for SearchPlaceIndexForPosition .
 	UnitNumber *string
 
 	// For addresses with a UnitNumber , the type of unit. For example, Apartment .
+	//
 	// This property is returned only for a place index that uses Esri as a data
 	// provider.
 	UnitType *string
@@ -1111,10 +1312,13 @@ type Place struct {
 // Places uses a point geometry to specify a location or a Place.
 type PlaceGeometry struct {
 
-	// A single point geometry specifies a location for a Place using WGS 84 (https://gisgeography.com/wgs84-world-geodetic-system/)
-	// coordinates:
+	// A single point geometry specifies a location for a Place using [WGS 84] coordinates:
+	//
 	//   - x — Specifies the x coordinate or longitude.
+	//
 	//   - y — Specifies the y coordinate or latitude.
+	//
+	// [WGS 84]: https://gisgeography.com/wgs84-world-geodetic-system/
 	Point []float64
 
 	noSmithyDocumentSerde
@@ -1150,8 +1354,9 @@ type RouteMatrixEntry struct {
 }
 
 // An error corresponding to the calculation of a route between the
-// DeparturePosition and DestinationPosition . The error code can be one of the
-// following:
+// DeparturePosition and DestinationPosition .
+//
+// The error code can be one of the following:
 //
 //   - RouteNotFound - Unable to find a valid route with the given parameters.
 //
@@ -1187,8 +1392,10 @@ type RouteMatrixEntryError struct {
 type SearchForPositionResult struct {
 
 	// The distance in meters of a great-circle arc between the query position and the
-	// result. A great-circle arc is the shortest path on a sphere, in this case the
-	// Earth. This returns the shortest distance between two locations.
+	// result.
+	//
+	// A great-circle arc is the shortest path on a sphere, in this case the Earth.
+	// This returns the shortest distance between two locations.
 	//
 	// This member is required.
 	Distance *float64
@@ -1199,9 +1406,10 @@ type SearchForPositionResult struct {
 	Place *Place
 
 	// The unique identifier of the place. You can use this with the GetPlace
-	// operation to find the place again later. For SearchPlaceIndexForPosition
-	// operations, the PlaceId is returned only by place indexes that use HERE or Grab
-	// as a data provider.
+	// operation to find the place again later.
+	//
+	// For SearchPlaceIndexForPosition operations, the PlaceId is returned only by
+	// place indexes that use HERE or Grab as a data provider.
 	PlaceId *string
 
 	noSmithyDocumentSerde
@@ -1216,33 +1424,44 @@ type SearchForSuggestionsResult struct {
 	// This member is required.
 	Text *string
 
-	// The Amazon Location categories that describe the Place. For more information
-	// about using categories, including a list of Amazon Location categories, see
-	// Categories and filtering (https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html)
-	// , in the Amazon Location Service Developer Guide.
+	// The Amazon Location categories that describe the Place.
+	//
+	// For more information about using categories, including a list of Amazon
+	// Location categories, see [Categories and filtering], in the Amazon Location Service Developer Guide.
+	//
+	// [Categories and filtering]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
 	Categories []string
 
 	// The unique identifier of the Place. You can use this with the GetPlace
 	// operation to find the place again later, or to get full information for the
-	// Place. The GetPlace request must use the same PlaceIndex resource as the
-	// SearchPlaceIndexForSuggestions that generated the Place ID. For
-	// SearchPlaceIndexForSuggestions operations, the PlaceId is returned by place
-	// indexes that use Esri, Grab, or HERE as data providers. While you can use
-	// PlaceID in subsequent requests, PlaceID is not intended to be a permanent
-	// identifier and the ID can change between consecutive API calls. Please see the
-	// following PlaceID behaviour for each data provider:
+	// Place.
+	//
+	// The GetPlace request must use the same PlaceIndex resource as the
+	// SearchPlaceIndexForSuggestions that generated the Place ID.
+	//
+	// For SearchPlaceIndexForSuggestions operations, the PlaceId is returned by place
+	// indexes that use Esri, Grab, or HERE as data providers.
+	//
+	// While you can use PlaceID in subsequent requests, PlaceID is not intended to be
+	// a permanent identifier and the ID can change between consecutive API calls.
+	// Please see the following PlaceID behaviour for each data provider:
+	//
 	//   - Esri: Place IDs will change every quarter at a minimum. The typical time
 	//   period for these changes would be March, June, September, and December. Place
 	//   IDs might also change between the typical quarterly change but that will be much
 	//   less frequent.
+	//
 	//   - HERE: We recommend that you cache data for no longer than a week to keep
 	//   your data data fresh. You can assume that less than 1% ID shifts will release
 	//   over release which is approximately 1 - 2 times per week.
+	//
 	//   - Grab: Place IDs can expire or become invalid in the following situations.
+	//
 	//   - Data operations: The POI may be removed from Grab POI database by Grab Map
 	//   Ops based on the ground-truth, such as being closed in the real world, being
 	//   detected as a duplicate POI, or having incorrect information. Grab will
 	//   synchronize data to the Waypoint environment on weekly basis.
+	//
 	//   - Interpolated POI: Interpolated POI is a temporary POI generated in real
 	//   time when serving a request, and it will be marked as derived in the
 	//   place.result_type field in the response. The information of interpolated POIs
@@ -1270,20 +1489,25 @@ type SearchForTextResult struct {
 
 	// The distance in meters of a great-circle arc between the bias position
 	// specified and the result. Distance will be returned only if a bias position was
-	// specified in the query. A great-circle arc is the shortest path on a sphere, in
-	// this case the Earth. This returns the shortest distance between two locations.
+	// specified in the query.
+	//
+	// A great-circle arc is the shortest path on a sphere, in this case the Earth.
+	// This returns the shortest distance between two locations.
 	Distance *float64
 
 	// The unique identifier of the place. You can use this with the GetPlace
-	// operation to find the place again later. For SearchPlaceIndexForText
-	// operations, the PlaceId is returned only by place indexes that use HERE or Grab
-	// as a data provider.
+	// operation to find the place again later.
+	//
+	// For SearchPlaceIndexForText operations, the PlaceId is returned only by place
+	// indexes that use HERE or Grab as a data provider.
 	PlaceId *string
 
 	// The relative confidence in the match for a result among the results returned.
 	// For example, if more fields for an address match (including house number,
 	// street, city, country/region, and postal code), the relevance score is closer to
-	// 1. Returned only when the partner selected is Esri or Grab.
+	// 1.
+	//
+	// Returned only when the partner selected is Esri or Grab.
 	Relevance *float64
 
 	noSmithyDocumentSerde
@@ -1294,12 +1518,16 @@ type SearchPlaceIndexForPositionSummary struct {
 
 	// The geospatial data provider attached to the place index resource specified in
 	// the request. Values can be one of the following:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -1310,11 +1538,13 @@ type SearchPlaceIndexForPositionSummary struct {
 	Position []float64
 
 	// The preferred language used to return results. Matches the language in the
-	// request. The value is a valid BCP 47 (https://tools.ietf.org/search/bcp47)
-	// language tag, for example, en for English.
+	// request. The value is a valid [BCP 47]language tag, for example, en for English.
+	//
+	// [BCP 47]: https://tools.ietf.org/search/bcp47
 	Language *string
 
 	// Contains the optional result count limit that is specified in the request.
+	//
 	// Default value: 50
 	MaxResults *int32
 
@@ -1326,12 +1556,16 @@ type SearchPlaceIndexForSuggestionsSummary struct {
 
 	// The geospatial data provider attached to the place index resource specified in
 	// the request. Values can be one of the following:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -1342,10 +1576,14 @@ type SearchPlaceIndexForSuggestionsSummary struct {
 	Text *string
 
 	// Contains the coordinates for the optional bias position specified in the
-	// request. This parameter contains a pair of numbers. The first number represents
-	// the X coordinate, or longitude; the second number represents the Y coordinate,
-	// or latitude. For example, [-123.1174, 49.2847] represents the position with
-	// longitude -123.1174 and latitude 49.2847 .
+	// request.
+	//
+	// This parameter contains a pair of numbers. The first number represents the X
+	// coordinate, or longitude; the second number represents the Y coordinate, or
+	// latitude.
+	//
+	// For example, [-123.1174, 49.2847] represents the position with longitude
+	// -123.1174 and latitude 49.2847 .
 	BiasPosition []float64
 
 	// Contains the coordinates for the optional bounding box specified in the request.
@@ -1358,8 +1596,9 @@ type SearchPlaceIndexForSuggestionsSummary struct {
 	FilterCountries []string
 
 	// The preferred language used to return results. Matches the language in the
-	// request. The value is a valid BCP 47 (https://tools.ietf.org/search/bcp47)
-	// language tag, for example, en for English.
+	// request. The value is a valid [BCP 47]language tag, for example, en for English.
+	//
+	// [BCP 47]: https://tools.ietf.org/search/bcp47
 	Language *string
 
 	// Contains the optional result count limit specified in the request.
@@ -1373,12 +1612,16 @@ type SearchPlaceIndexForTextSummary struct {
 
 	// The geospatial data provider attached to the place index resource specified in
 	// the request. Values can be one of the following:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -1389,10 +1632,14 @@ type SearchPlaceIndexForTextSummary struct {
 	Text *string
 
 	// Contains the coordinates for the optional bias position specified in the
-	// request. This parameter contains a pair of numbers. The first number represents
-	// the X coordinate, or longitude; the second number represents the Y coordinate,
-	// or latitude. For example, [-123.1174, 49.2847] represents the position with
-	// longitude -123.1174 and latitude 49.2847 .
+	// request.
+	//
+	// This parameter contains a pair of numbers. The first number represents the X
+	// coordinate, or longitude; the second number represents the Y coordinate, or
+	// latitude.
+	//
+	// For example, [-123.1174, 49.2847] represents the position with longitude
+	// -123.1174 and latitude 49.2847 .
 	BiasPosition []float64
 
 	// Contains the coordinates for the optional bounding box specified in the request.
@@ -1405,23 +1652,26 @@ type SearchPlaceIndexForTextSummary struct {
 	FilterCountries []string
 
 	// The preferred language used to return results. Matches the language in the
-	// request. The value is a valid BCP 47 (https://tools.ietf.org/search/bcp47)
-	// language tag, for example, en for English.
+	// request. The value is a valid [BCP 47]language tag, for example, en for English.
+	//
+	// [BCP 47]: https://tools.ietf.org/search/bcp47
 	Language *string
 
 	// Contains the optional result count limit specified in the request.
 	MaxResults *int32
 
-	// The bounding box that fully contains all search results. If you specified the
-	// optional FilterBBox parameter in the request, ResultBBox is contained within
-	// FilterBBox .
+	// The bounding box that fully contains all search results.
+	//
+	// If you specified the optional FilterBBox parameter in the request, ResultBBox
+	// is contained within FilterBBox .
 	ResultBBox []float64
 
 	noSmithyDocumentSerde
 }
 
-// Represents an element of a leg within a route. A step contains instructions for
-// how to move to the next step in the leg.
+//	Represents an element of a leg within a route. A step contains instructions
+//
+// for how to move to the next step in the leg.
 type Step struct {
 
 	// The travel distance between the step's StartPosition and EndPosition .
@@ -1450,8 +1700,9 @@ type Step struct {
 
 	// Represents the start position, or index, in a sequence of steps within the
 	// leg's line string geometry. For example, the index of the first step in a leg
-	// geometry is 0 . Included in the response for queries that set IncludeLegGeometry
-	// to True .
+	// geometry is 0 .
+	//
+	// Included in the response for queries that set IncludeLegGeometry to True .
 	GeometryOffset *int32
 
 	noSmithyDocumentSerde
@@ -1461,8 +1712,9 @@ type Step struct {
 // offset from UTC in seconds.
 type TimeZone struct {
 
-	// The name of the time zone, following the  IANA time zone standard (https://www.iana.org/time-zones)
-	// . For example, America/Los_Angeles .
+	// The name of the time zone, following the [IANA time zone standard]. For example, America/Los_Angeles .
+	//
+	// [IANA time zone standard]: https://www.iana.org/time-zones
 	//
 	// This member is required.
 	Name *string
@@ -1489,23 +1741,30 @@ type TrackingFilterGeometry struct {
 type TruckDimensions struct {
 
 	// The height of the truck.
+	//
 	//   - For example, 4.5 .
+	//
 	// For routes calculated with a HERE resource, this value must be between 0 and 50
 	// meters.
 	Height *float64
 
 	// The length of the truck.
+	//
 	//   - For example, 15.5 .
+	//
 	// For routes calculated with a HERE resource, this value must be between 0 and
 	// 300 meters.
 	Length *float64
 
-	// Specifies the unit of measurement for the truck dimensions. Default Value:
-	// Meters
+	//  Specifies the unit of measurement for the truck dimensions.
+	//
+	// Default Value: Meters
 	Unit DimensionUnit
 
 	// The width of the truck.
+	//
 	//   - For example, 4.5 .
+	//
 	// For routes calculated with a HERE resource, this value must be between 0 and 50
 	// meters.
 	Width *float64
@@ -1519,10 +1778,13 @@ type TruckDimensions struct {
 type TruckWeight struct {
 
 	// The total weight of the truck.
+	//
 	//   - For example, 3500 .
 	Total *float64
 
-	// The unit of measurement to use for the truck weight. Default Value: Kilograms
+	// The unit of measurement to use for the truck weight.
+	//
+	// Default Value: Kilograms
 	Unit VehicleWeightUnit
 
 	noSmithyDocumentSerde

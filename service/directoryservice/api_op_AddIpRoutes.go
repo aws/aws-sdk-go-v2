@@ -16,11 +16,12 @@ import (
 // from your Microsoft AD on Amazon Web Services. AddIpRoutes adds this address
 // block. You can also use AddIpRoutes to facilitate routing traffic that uses
 // public IP ranges from your Microsoft AD on Amazon Web Services to a peer VPC.
+//
 // Before you call AddIpRoutes, ensure that all of the required permissions have
 // been explicitly granted through a policy. For details about what permissions are
-// required to run the AddIpRoutes operation, see Directory Service API
-// Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html)
-// .
+// required to run the AddIpRoutes operation, see [Directory Service API Permissions: Actions, Resources, and Conditions Reference].
+//
+// [Directory Service API Permissions: Actions, Resources, and Conditions Reference]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
 func (c *Client) AddIpRoutes(ctx context.Context, params *AddIpRoutesInput, optFns ...func(*Options)) (*AddIpRoutesOutput, error) {
 	if params == nil {
 		params = &AddIpRoutesInput{}
@@ -51,26 +52,48 @@ type AddIpRoutesInput struct {
 
 	// If set to true, updates the inbound and outbound rules of the security group
 	// that has the description: "Amazon Web Services created security group for
-	// directory ID directory controllers." Following are the new rules: Inbound:
+	// directory ID directory controllers." Following are the new rules:
+	//
+	// Inbound:
+	//
 	//   - Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: 0.0.0.0/0
+	//
 	//   - Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: 0.0.0.0/0
+	//
 	//   - Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0
+	//
 	//   - Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0
+	//
 	//   - Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0
+	//
 	//   - Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0
+	//
 	// Outbound:
+	//
 	//   - Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0
+	//
 	// These security rules impact an internal network interface that is not exposed
 	// publicly.
 	UpdateSecurityGroupForDirectoryControllers bool

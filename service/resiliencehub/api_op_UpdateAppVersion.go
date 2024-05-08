@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Resilience Hub application version. This API updates the Resilience
-// Hub application draft version. To use this information for running resiliency
-// assessments, you must publish the Resilience Hub application using the
-// PublishAppVersion API.
+// Updates the Resilience Hub application version.
+//
+// This API updates the Resilience Hub application draft version. To use this
+// information for running resiliency assessments, you must publish the Resilience
+// Hub application using the PublishAppVersion API.
 func (c *Client) UpdateAppVersion(ctx context.Context, params *UpdateAppVersionInput, optFns ...func(*Options)) (*UpdateAppVersionOutput, error) {
 	if params == nil {
 		params = &UpdateAppVersionInput{}
@@ -33,18 +34,26 @@ type UpdateAppVersionInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
 
 	// Additional configuration parameters for an Resilience Hub application. If you
 	// want to implement additionalInfo through the Resilience Hub console rather than
-	// using an API call, see Configure the application configuration parameters (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html)
-	// . Currently, this parameter accepts a key-value mapping (in a string format) of
-	// only one failover region and one associated account. Key: "failover-regions"
+	// using an API call, see [Configure the application configuration parameters].
+	//
+	// Currently, this parameter accepts a key-value mapping (in a string format) of
+	// only one failover region and one associated account.
+	//
+	// Key: "failover-regions"
+	//
 	// Value: "[{"region":"<REGION>", "accounts":[{"id":"<ACCOUNT_ID>"}]}]"
+	//
+	// [Configure the application configuration parameters]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
 	AdditionalInfo map[string][]string
 
 	noSmithyDocumentSerde
@@ -54,8 +63,10 @@ type UpdateAppVersionOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -67,8 +78,11 @@ type UpdateAppVersionOutput struct {
 
 	// Additional configuration parameters for an Resilience Hub application. If you
 	// want to implement additionalInfo through the Resilience Hub console rather than
-	// using an API call, see Configure the application configuration parameters (https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html)
-	// . Currently, this parameter supports only failover region and account.
+	// using an API call, see [Configure the application configuration parameters].
+	//
+	// Currently, this parameter supports only failover region and account.
+	//
+	// [Configure the application configuration parameters]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/app-config-param.html
 	AdditionalInfo map[string][]string
 
 	// Metadata pertaining to the operation's result.

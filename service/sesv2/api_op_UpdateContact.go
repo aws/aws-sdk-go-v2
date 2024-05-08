@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a contact's preferences for a list. You must specify all existing topic
-// preferences in the TopicPreferences object, not just the ones that need
-// updating; otherwise, all your existing preferences will be removed.
+// Updates a contact's preferences for a list.
+//
+// You must specify all existing topic preferences in the TopicPreferences object,
+// not just the ones that need updating; otherwise, all your existing preferences
+// will be removed.
 func (c *Client) UpdateContact(ctx context.Context, params *UpdateContactInput, optFns ...func(*Options)) (*UpdateContactOutput, error) {
 	if params == nil {
 		params = &UpdateContactInput{}

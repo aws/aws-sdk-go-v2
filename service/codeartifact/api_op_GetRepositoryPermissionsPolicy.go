@@ -29,18 +29,19 @@ func (c *Client) GetRepositoryPermissionsPolicy(ctx context.Context, params *Get
 
 type GetRepositoryPermissionsPolicyInput struct {
 
-	// The name of the domain containing the repository whose associated resource
+	//  The name of the domain containing the repository whose associated resource
 	// policy is to be retrieved.
 	//
 	// This member is required.
 	Domain *string
 
-	// The name of the repository whose associated resource policy is to be retrieved.
+	//  The name of the repository whose associated resource policy is to be
+	// retrieved.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -49,7 +50,7 @@ type GetRepositoryPermissionsPolicyInput struct {
 
 type GetRepositoryPermissionsPolicyOutput struct {
 
-	// The returned resource policy.
+	//  The returned resource policy.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.

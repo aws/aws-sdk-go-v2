@@ -31,7 +31,9 @@ func (c *Client) DescribeProductAsAdmin(ctx context.Context, params *DescribePro
 type DescribeProductAsAdminInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -42,11 +44,12 @@ type DescribeProductAsAdminInput struct {
 	Name *string
 
 	// The unique identifier of the shared portfolio that the specified product is
-	// associated with. You can provide this parameter to retrieve the shared
-	// TagOptions associated with the product. If this parameter is provided and if
-	// TagOptions sharing is enabled in the portfolio share, the API returns both local
-	// and shared TagOptions associated with the product. Otherwise only local
-	// TagOptions will be returned.
+	// associated with.
+	//
+	// You can provide this parameter to retrieve the shared TagOptions associated
+	// with the product. If this parameter is provided and if TagOptions sharing is
+	// enabled in the portfolio share, the API returns both local and shared TagOptions
+	// associated with the product. Otherwise only local TagOptions will be returned.
 	SourcePortfolioId *string
 
 	noSmithyDocumentSerde

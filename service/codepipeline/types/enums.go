@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for ActionCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionCategory) Values() []ActionCategory {
 	return []ActionCategory{
 		"Source",
@@ -39,8 +40,9 @@ const (
 
 // Values returns all known values for ActionConfigurationPropertyType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionConfigurationPropertyType) Values() []ActionConfigurationPropertyType {
 	return []ActionConfigurationPropertyType{
 		"String",
@@ -60,8 +62,9 @@ const (
 )
 
 // Values returns all known values for ActionExecutionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionExecutionStatus) Values() []ActionExecutionStatus {
 	return []ActionExecutionStatus{
 		"InProgress",
@@ -81,8 +84,9 @@ const (
 )
 
 // Values returns all known values for ActionOwner. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionOwner) Values() []ActionOwner {
 	return []ActionOwner{
 		"AWS",
@@ -100,8 +104,9 @@ const (
 )
 
 // Values returns all known values for ApprovalStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApprovalStatus) Values() []ApprovalStatus {
 	return []ApprovalStatus{
 		"Approved",
@@ -117,8 +122,9 @@ const (
 )
 
 // Values returns all known values for ArtifactLocationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactLocationType) Values() []ArtifactLocationType {
 	return []ArtifactLocationType{
 		"S3",
@@ -133,8 +139,9 @@ const (
 )
 
 // Values returns all known values for ArtifactStoreType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactStoreType) Values() []ArtifactStoreType {
 	return []ArtifactStoreType{
 		"S3",
@@ -149,8 +156,9 @@ const (
 )
 
 // Values returns all known values for BlockerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BlockerType) Values() []BlockerType {
 	return []BlockerType{
 		"Schedule",
@@ -165,8 +173,9 @@ const (
 )
 
 // Values returns all known values for EncryptionKeyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionKeyType) Values() []EncryptionKeyType {
 	return []EncryptionKeyType{
 		"KMS",
@@ -183,8 +192,9 @@ const (
 )
 
 // Values returns all known values for ExecutionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionMode) Values() []ExecutionMode {
 	return []ExecutionMode{
 		"QUEUED",
@@ -202,8 +212,9 @@ const (
 )
 
 // Values returns all known values for ExecutionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionType) Values() []ExecutionType {
 	return []ExecutionType{
 		"STANDARD",
@@ -220,8 +231,9 @@ const (
 )
 
 // Values returns all known values for ExecutorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutorType) Values() []ExecutorType {
 	return []ExecutorType{
 		"JobWorker",
@@ -242,8 +254,9 @@ const (
 )
 
 // Values returns all known values for FailureType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureType) Values() []FailureType {
 	return []FailureType{
 		"JobFailed",
@@ -265,8 +278,9 @@ const (
 )
 
 // Values returns all known values for GitPullRequestEventType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GitPullRequestEventType) Values() []GitPullRequestEventType {
 	return []GitPullRequestEventType{
 		"OPEN",
@@ -289,8 +303,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"Created",
@@ -317,8 +332,9 @@ const (
 )
 
 // Values returns all known values for PipelineExecutionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineExecutionStatus) Values() []PipelineExecutionStatus {
 	return []PipelineExecutionStatus{
 		"Cancelled",
@@ -340,6 +356,7 @@ const (
 
 // Values returns all known values for PipelineTriggerProviderType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineTriggerProviderType) Values() []PipelineTriggerProviderType {
 	return []PipelineTriggerProviderType{
@@ -356,8 +373,9 @@ const (
 )
 
 // Values returns all known values for PipelineType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PipelineType) Values() []PipelineType {
 	return []PipelineType{
 		"V1",
@@ -373,8 +391,9 @@ const (
 )
 
 // Values returns all known values for Result. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Result) Values() []Result {
 	return []Result{
 		"ROLLBACK",
@@ -391,8 +410,9 @@ const (
 )
 
 // Values returns all known values for SourceRevisionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceRevisionType) Values() []SourceRevisionType {
 	return []SourceRevisionType{
 		"COMMIT_ID",
@@ -414,8 +434,9 @@ const (
 )
 
 // Values returns all known values for StageExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StageExecutionStatus) Values() []StageExecutionStatus {
 	return []StageExecutionStatus{
 		"Cancelled",
@@ -436,8 +457,9 @@ const (
 )
 
 // Values returns all known values for StageRetryMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StageRetryMode) Values() []StageRetryMode {
 	return []StageRetryMode{
 		"FAILED_ACTIONS",
@@ -454,8 +476,9 @@ const (
 )
 
 // Values returns all known values for StageTransitionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StageTransitionType) Values() []StageTransitionType {
 	return []StageTransitionType{
 		"Inbound",
@@ -472,8 +495,9 @@ const (
 )
 
 // Values returns all known values for StartTimeRange. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StartTimeRange) Values() []StartTimeRange {
 	return []StartTimeRange{
 		"Latest",
@@ -497,8 +521,9 @@ const (
 )
 
 // Values returns all known values for TriggerType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TriggerType) Values() []TriggerType {
 	return []TriggerType{
 		"CreatePipeline",
@@ -524,6 +549,7 @@ const (
 
 // Values returns all known values for WebhookAuthenticationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (WebhookAuthenticationType) Values() []WebhookAuthenticationType {
 	return []WebhookAuthenticationType{

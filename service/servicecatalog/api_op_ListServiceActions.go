@@ -30,7 +30,9 @@ func (c *Client) ListServiceActions(ctx context.Context, params *ListServiceActi
 type ListServiceActionsInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

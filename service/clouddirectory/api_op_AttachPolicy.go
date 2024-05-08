@@ -30,8 +30,8 @@ func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, op
 
 type AttachPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory where both
-	// objects reside. For more information, see arns .
+	// The Amazon Resource Name (ARN) that is associated with the Directory where both objects
+	// reside. For more information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string

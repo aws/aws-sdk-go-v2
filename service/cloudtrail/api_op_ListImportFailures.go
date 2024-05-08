@@ -29,15 +29,15 @@ func (c *Client) ListImportFailures(ctx context.Context, params *ListImportFailu
 
 type ListImportFailuresInput struct {
 
-	// The ID of the import.
+	//  The ID of the import.
 	//
 	// This member is required.
 	ImportId *string
 
-	// The maximum number of failures to display on a single page.
+	//  The maximum number of failures to display on a single page.
 	MaxResults *int32
 
-	// A token you can use to get the next page of import failures.
+	//  A token you can use to get the next page of import failures.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,10 +45,10 @@ type ListImportFailuresInput struct {
 
 type ListImportFailuresOutput struct {
 
-	// Contains information about the import failures.
+	//  Contains information about the import failures.
 	Failures []types.ImportFailureListItem
 
-	// A token you can use to get the next page of results.
+	//  A token you can use to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -147,7 +147,7 @@ var _ ListImportFailuresAPIClient = (*Client)(nil)
 // ListImportFailuresPaginatorOptions is the paginator options for
 // ListImportFailures
 type ListImportFailuresPaginatorOptions struct {
-	// The maximum number of failures to display on a single page.
+	//  The maximum number of failures to display on a single page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

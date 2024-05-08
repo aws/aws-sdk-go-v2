@@ -30,8 +30,9 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 type UntagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource. For a list of supported
-	// resources, see ResourceTag (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html)
-	// .
+	// resources, see [ResourceTag].
+	//
+	// [ResourceTag]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html
 	//
 	// This member is required.
 	ResourceArn *string

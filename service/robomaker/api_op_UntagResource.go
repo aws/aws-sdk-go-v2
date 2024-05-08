@@ -10,10 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified tags from the specified AWS RoboMaker resource. To remove
-// a tag, specify the tag key. To change the tag value of an existing tag key, use
-// TagResource (https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html)
-// .
+// Removes the specified tags from the specified AWS RoboMaker resource.
+//
+// To remove a tag, specify the tag key. To change the tag value of an existing
+// tag key, use [TagResource]TagResource .
+//
+// [TagResource]: https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

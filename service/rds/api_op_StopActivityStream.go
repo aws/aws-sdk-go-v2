@@ -13,11 +13,13 @@ import (
 
 // Stops a database activity stream that was started using the Amazon Web Services
 // console, the start-activity-stream CLI command, or the StartActivityStream
-// operation. For more information, see Monitoring Amazon Aurora with Database
-// Activity Streams (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
-// in the Amazon Aurora User Guide or Monitoring Amazon RDS with Database Activity
-// Streams (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
-// in the Amazon RDS User Guide.
+// operation.
+//
+// For more information, see [Monitoring Amazon Aurora with Database Activity Streams] in the Amazon Aurora User Guide or [Monitoring Amazon RDS with Database Activity Streams] in the Amazon
+// RDS User Guide.
+//
+// [Monitoring Amazon Aurora with Database Activity Streams]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+// [Monitoring Amazon RDS with Database Activity Streams]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html
 func (c *Client) StopActivityStream(ctx context.Context, params *StopActivityStreamInput, optFns ...func(*Options)) (*StopActivityStreamOutput, error) {
 	if params == nil {
 		params = &StopActivityStreamInput{}
@@ -55,8 +57,10 @@ type StopActivityStreamOutput struct {
 	KinesisStreamName *string
 
 	// The Amazon Web Services KMS key identifier used for encrypting messages in the
-	// database activity stream. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the KMS key.
+	// database activity stream.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key.
 	KmsKeyId *string
 
 	// The status of the database activity stream.

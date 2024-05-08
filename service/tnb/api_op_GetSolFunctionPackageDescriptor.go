@@ -11,13 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a function package descriptor in a function package. A function package
-// descriptor is a .yaml file in a function package that uses the TOSCA standard to
-// describe how the network function in the function package should run on your
-// network. A function package is a .zip file in CSAR (Cloud Service Archive)
-// format that contains a network function (an ETSI standard telecommunication
-// application) and function package descriptor that uses the TOSCA standard to
-// describe how the network functions should run on your network.
+// Gets a function package descriptor in a function package.
+//
+// A function package descriptor is a .yaml file in a function package that uses
+// the TOSCA standard to describe how the network function in the function package
+// should run on your network.
+//
+// A function package is a .zip file in CSAR (Cloud Service Archive) format that
+// contains a network function (an ETSI standard telecommunication application) and
+// function package descriptor that uses the TOSCA standard to describe how the
+// network functions should run on your network.
 func (c *Client) GetSolFunctionPackageDescriptor(ctx context.Context, params *GetSolFunctionPackageDescriptorInput, optFns ...func(*Options)) (*GetSolFunctionPackageDescriptorOutput, error) {
 	if params == nil {
 		params = &GetSolFunctionPackageDescriptorInput{}

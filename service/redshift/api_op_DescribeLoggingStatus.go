@@ -31,8 +31,9 @@ func (c *Client) DescribeLoggingStatus(ctx context.Context, params *DescribeLogg
 
 type DescribeLoggingStatusInput struct {
 
-	// The identifier of the cluster from which to get the logging status. Example:
-	// examplecluster
+	// The identifier of the cluster from which to get the logging status.
+	//
+	// Example: examplecluster
 	//
 	// This member is required.
 	ClusterIdentifier *string

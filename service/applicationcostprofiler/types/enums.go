@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"CSV",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for ReportFrequency. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportFrequency) Values() []ReportFrequency {
 	return []ReportFrequency{
 		"MONTHLY",
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for S3BucketRegion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (S3BucketRegion) Values() []S3BucketRegion {
 	return []S3BucketRegion{
 		"ap-east-1",

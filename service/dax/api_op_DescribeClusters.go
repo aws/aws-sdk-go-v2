@@ -13,15 +13,21 @@ import (
 
 // Returns information about all provisioned DAX clusters if no cluster identifier
 // is specified, or about a specific DAX cluster if a cluster identifier is
-// supplied. If the cluster is in the CREATING state, only cluster level
-// information will be displayed until all of the nodes are successfully
-// provisioned. If the cluster is in the DELETING state, only cluster level
-// information will be displayed. If nodes are currently being added to the DAX
-// cluster, node endpoint information and creation time for the additional nodes
-// will not be displayed until they are completely provisioned. When the DAX
-// cluster state is available, the cluster is ready for use. If nodes are currently
-// being removed from the DAX cluster, no endpoint information for the removed
-// nodes is displayed.
+// supplied.
+//
+// If the cluster is in the CREATING state, only cluster level information will be
+// displayed until all of the nodes are successfully provisioned.
+//
+// If the cluster is in the DELETING state, only cluster level information will be
+// displayed.
+//
+// If nodes are currently being added to the DAX cluster, node endpoint
+// information and creation time for the additional nodes will not be displayed
+// until they are completely provisioned. When the DAX cluster state is available,
+// the cluster is ready for use.
+//
+// If nodes are currently being removed from the DAX cluster, no endpoint
+// information for the removed nodes is displayed.
 func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersInput, optFns ...func(*Options)) (*DescribeClustersOutput, error) {
 	if params == nil {
 		params = &DescribeClustersInput{}
@@ -44,8 +50,9 @@ type DescribeClustersInput struct {
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
-	// that the remaining results can be retrieved. The value for MaxResults must be
-	// between 20 and 100.
+	// that the remaining results can be retrieved.
+	//
+	// The value for MaxResults must be between 20 and 100.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination

@@ -11,14 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates engine-specific attributes on a specified server. The server enters the
-// MODIFYING state when this operation is in progress. Only one update can occur at
-// a time. You can use this command to reset a Chef server's public key (
+//	Updates engine-specific attributes on a specified server. The server enters
+//
+// the MODIFYING state when this operation is in progress. Only one update can
+// occur at a time. You can use this command to reset a Chef server's public key (
 // CHEF_PIVOTAL_KEY ) or a Puppet server's admin password ( PUPPET_ADMIN_PASSWORD
-// ). This operation is asynchronous. This operation can only be called for servers
-// in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised.
-// A ResourceNotFoundException is thrown when the server does not exist. A
-// ValidationException is raised when parameters of the request are not valid.
+// ).
+//
+// This operation is asynchronous.
+//
+// This operation can only be called for servers in HEALTHY or UNHEALTHY states.
+// Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is
+// thrown when the server does not exist. A ValidationException is raised when
+// parameters of the request are not valid.
 func (c *Client) UpdateServerEngineAttributes(ctx context.Context, params *UpdateServerEngineAttributesInput, optFns ...func(*Options)) (*UpdateServerEngineAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateServerEngineAttributesInput{}

@@ -33,7 +33,7 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 
 type CreateDatasetInput struct {
 
-	// A unique identifier for the request. If you do not set the client request
+	//  A unique identifier for the request. If you do not set the client request
 	// token, Amazon Lookout for Equipment generates one.
 	//
 	// This member is required.
@@ -60,7 +60,7 @@ type CreateDatasetInput struct {
 
 type CreateDatasetOutput struct {
 
-	// The Amazon Resource Name (ARN) of the dataset being created.
+	//  The Amazon Resource Name (ARN) of the dataset being created.
 	DatasetArn *string
 
 	// The name of the dataset being created.

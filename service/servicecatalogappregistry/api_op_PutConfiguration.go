@@ -29,7 +29,7 @@ func (c *Client) PutConfiguration(ctx context.Context, params *PutConfigurationI
 
 type PutConfigurationInput struct {
 
-	// Associates a TagKey configuration to an account.
+	//  Associates a TagKey configuration to an account.
 	//
 	// This member is required.
 	Configuration *types.AppRegistryConfiguration

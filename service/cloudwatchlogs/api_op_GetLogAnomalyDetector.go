@@ -30,9 +30,9 @@ func (c *Client) GetLogAnomalyDetector(ctx context.Context, params *GetLogAnomal
 type GetLogAnomalyDetectorInput struct {
 
 	// The ARN of the anomaly detector to retrieve information about. You can find the
-	// ARNs of log anomaly detectors in your account by using the
-	// ListLogAnomalyDetectors (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListLogAnomalyDetectors.html)
-	// operation.
+	// ARNs of log anomaly detectors in your account by using the [ListLogAnomalyDetectors]operation.
+	//
+	// [ListLogAnomalyDetectors]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListLogAnomalyDetectors.html
 	//
 	// This member is required.
 	AnomalyDetectorArn *string
@@ -43,8 +43,9 @@ type GetLogAnomalyDetectorInput struct {
 type GetLogAnomalyDetectorOutput struct {
 
 	// Specifies whether the anomaly detector is currently active. To change its
-	// status, use the enabled parameter in the UpdateLogAnomalyDetector (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateLogAnomalyDetector.html)
-	// operation.
+	// status, use the enabled parameter in the [UpdateLogAnomalyDetector] operation.
+	//
+	// [UpdateLogAnomalyDetector]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UpdateLogAnomalyDetector.html
 	AnomalyDetectorStatus types.AnomalyDetectorStatus
 
 	// The number of days used as the life cycle of anomalies. After this time,

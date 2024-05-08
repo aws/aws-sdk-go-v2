@@ -12,9 +12,9 @@ import (
 )
 
 // Describes an event tracker. The response includes the trackingId and status of
-// the event tracker. For more information on event trackers, see
-// CreateEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html)
-// .
+// the event tracker. For more information on event trackers, see [CreateEventTracker].
+//
+// [CreateEventTracker]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html
 func (c *Client) DescribeEventTracker(ctx context.Context, params *DescribeEventTrackerInput, optFns ...func(*Options)) (*DescribeEventTrackerOutput, error) {
 	if params == nil {
 		params = &DescribeEventTrackerInput{}

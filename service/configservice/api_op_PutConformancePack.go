@@ -14,12 +14,16 @@ import (
 // Creates or updates a conformance pack. A conformance pack is a collection of
 // Config rules that can be easily deployed in an account and a region and across
 // an organization. For information on how many conformance packs you can have per
-// account, see Service Limits  (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html)
-// in the Config Developer Guide. This API creates a service-linked role
-// AWSServiceRoleForConfigConforms in your account. The service-linked role is
-// created only when the role does not exist in your account. You must specify only
-// one of the follow parameters: TemplateS3Uri , TemplateBody or
-// TemplateSSMDocumentDetails .
+// account, see [Service Limits]in the Config Developer Guide.
+//
+// This API creates a service-linked role AWSServiceRoleForConfigConforms in your
+// account. The service-linked role is created only when the role does not exist in
+// your account.
+//
+// You must specify only one of the follow parameters: TemplateS3Uri , TemplateBody
+// or TemplateSSMDocumentDetails .
+//
+// [Service Limits]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
 func (c *Client) PutConformancePack(ctx context.Context, params *PutConformancePackInput, optFns ...func(*Options)) (*PutConformancePackOutput, error) {
 	if params == nil {
 		params = &PutConformancePackInput{}
@@ -45,27 +49,34 @@ type PutConformancePackInput struct {
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
-	// The name of the Amazon S3 bucket where Config stores conformance pack
-	// templates. This field is optional.
+	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
+	//
+	// This field is optional.
 	DeliveryS3Bucket *string
 
-	// The prefix for the Amazon S3 bucket. This field is optional.
+	// The prefix for the Amazon S3 bucket.
+	//
+	// This field is optional.
 	DeliveryS3KeyPrefix *string
 
 	// A string containing the full conformance pack template body. The structure
 	// containing the template body has a minimum length of 1 byte and a maximum length
-	// of 51,200 bytes. You can use a YAML template with two resource types: Config
-	// rule ( AWS::Config::ConfigRule ) and remediation action (
+	// of 51,200 bytes.
+	//
+	// You can use a YAML template with two resource types: Config rule (
+	// AWS::Config::ConfigRule ) and remediation action (
 	// AWS::Config::RemediationConfiguration ).
 	TemplateBody *string
 
 	// The location of the file containing the template body ( s3://bucketname/prefix
 	// ). The uri must point to a conformance pack template (max size: 300 KB) that is
-	// located in an Amazon S3 bucket in the same Region as the conformance pack. You
-	// must have access to read Amazon S3 bucket. In addition, in order to ensure a
-	// successful deployment, the template object must not be in an archived storage
-	// class (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
-	// if this parameter is passed.
+	// located in an Amazon S3 bucket in the same Region as the conformance pack.
+	//
+	// You must have access to read Amazon S3 bucket. In addition, in order to ensure
+	// a successful deployment, the template object must not be in an [archived storage class]if this
+	// parameter is passed.
+	//
+	// [archived storage class]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
 	TemplateS3Uri *string
 
 	// An object of type TemplateSSMDocumentDetails , which contains the name or the

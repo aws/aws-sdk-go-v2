@@ -66,8 +66,9 @@ type UpdateChannelInput struct {
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable input resolution or bitrate, the stream probably will
-	// disconnect immediately. Default: STANDARD . For details, see Channel Types (https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html)
-	// .
+	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
+	//
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
 	Type types.ChannelType
 
 	noSmithyDocumentSerde

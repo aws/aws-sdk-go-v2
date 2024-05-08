@@ -41,7 +41,7 @@ type CreateNotificationRuleInput struct {
 	DetailType types.DetailType
 
 	// A list of event types associated with this notification rule. For a list of
-	// allowed events, see EventTypeSummary .
+	// allowed events, see EventTypeSummary.
 	//
 	// This member is required.
 	EventTypeIds []string
@@ -68,9 +68,10 @@ type CreateNotificationRuleInput struct {
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// with the same parameters is received and a token is included, the request
-	// returns information about the initial request that used that token. The Amazon
-	// Web Services SDKs prepopulate client request tokens. If you are using an Amazon
-	// Web Services SDK, an idempotency token is created for you.
+	// returns information about the initial request that used that token.
+	//
+	// The Amazon Web Services SDKs prepopulate client request tokens. If you are
+	// using an Amazon Web Services SDK, an idempotency token is created for you.
 	ClientRequestToken *string
 
 	// The status of the notification rule. The default value is ENABLED . If the

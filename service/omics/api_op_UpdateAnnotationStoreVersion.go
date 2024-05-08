@@ -30,17 +30,17 @@ func (c *Client) UpdateAnnotationStoreVersion(ctx context.Context, params *Updat
 
 type UpdateAnnotationStoreVersionInput struct {
 
-	// The name of an annotation store.
+	//  The name of an annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// The name of an annotation store version.
+	//  The name of an annotation store version.
 	//
 	// This member is required.
 	VersionName *string
 
-	// The description of an annotation store.
+	//  The description of an annotation store.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -48,42 +48,42 @@ type UpdateAnnotationStoreVersionInput struct {
 
 type UpdateAnnotationStoreVersionOutput struct {
 
-	// The time stamp for when an annotation store version was created.
+	//  The time stamp for when an annotation store version was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The description of an annotation store version.
+	//  The description of an annotation store version.
 	//
 	// This member is required.
 	Description *string
 
-	// The annotation store version ID.
+	//  The annotation store version ID.
 	//
 	// This member is required.
 	Id *string
 
-	// The name of an annotation store.
+	//  The name of an annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of an annotation store version.
+	//  The status of an annotation store version.
 	//
 	// This member is required.
 	Status types.VersionStatus
 
-	// The annotation store ID.
+	//  The annotation store ID.
 	//
 	// This member is required.
 	StoreId *string
 
-	// The time stamp for when an annotation store version was updated.
+	//  The time stamp for when an annotation store version was updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The name of an annotation store version.
+	//  The name of an annotation store version.
 	//
 	// This member is required.
 	VersionName *string

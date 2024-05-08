@@ -22,18 +22,21 @@ import (
 // archives and their total size are as of the last inventory generation. This
 // means that if you add or remove an archive from a vault, and then immediately
 // use Describe Vault, the change in contents will not be immediately reflected. If
-// you want to retrieve the latest inventory of the vault, use InitiateJob . Amazon
-// S3 Glacier generates vault inventories approximately daily. For more
-// information, see Downloading a Vault Inventory in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html)
-// . An AWS account has full permission to perform all operations (actions).
+// you want to retrieve the latest inventory of the vault, use InitiateJob. Amazon S3 Glacier
+// generates vault inventories approximately daily. For more information, see [Downloading a Vault Inventory in Amazon S3 Glacier].
+//
+// An AWS account has full permission to perform all operations (actions).
 // However, AWS Identity and Access Management (IAM) users don't have any
 // permissions by default. You must grant them explicit permission to perform
-// specific actions. For more information, see Access Control Using AWS Identity
-// and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
-// . For conceptual information and underlying REST API, see Retrieving Vault
-// Metadata in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html)
-// and Describe Vault  (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html)
-// in the Amazon Glacier Developer Guide.
+// specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
+//
+// For conceptual information and underlying REST API, see [Retrieving Vault Metadata in Amazon S3 Glacier] and [Describe Vault] in the Amazon
+// Glacier Developer Guide.
+//
+// [Downloading a Vault Inventory in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html
+// [Describe Vault]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html
+// [Retrieving Vault Metadata in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html
+// [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
 func (c *Client) DescribeVault(ctx context.Context, params *DescribeVaultInput, optFns ...func(*Options)) (*DescribeVaultOutput, error) {
 	if params == nil {
 		params = &DescribeVaultInput{}
@@ -231,12 +234,13 @@ type VaultExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeVaultInput, *DescribeVaultOutput, error) (bool, error)
 }
 
@@ -396,12 +400,13 @@ type VaultNotExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeVaultInput, *DescribeVaultOutput, error) (bool, error)
 }
 

@@ -46,8 +46,8 @@ type CreateComputerInput struct {
 	// This member is required.
 	Password *string
 
-	// An array of Attribute objects that contain any LDAP attributes to apply to the
-	// computer account.
+	// An array of Attribute objects that contain any LDAP attributes to apply to the computer
+	// account.
 	ComputerAttributes []types.Attribute
 
 	// The fully-qualified distinguished name of the organizational unit to place the

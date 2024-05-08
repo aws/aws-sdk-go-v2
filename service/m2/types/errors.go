@@ -62,7 +62,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Failed to connect to server, or didn’t receive response within expected time
+//	Failed to connect to server, or didn’t receive response within expected time
+//
 // period.
 type ExecutionTimeoutException struct {
 	Message *string

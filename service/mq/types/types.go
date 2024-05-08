@@ -149,8 +149,9 @@ type Configuration struct {
 	EngineType EngineType
 
 	// Required. The broker engine's version. For a list of supported engine versions,
-	// see, Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// see, [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	//
 	// This member is required.
 	EngineVersion *string
@@ -286,7 +287,9 @@ type EngineVersion struct {
 }
 
 // Optional. The metadata of the LDAP server used to authenticate and authorize
-// connections to the broker. Does not apply to RabbitMQ brokers.
+// connections to the broker.
+//
+// Does not apply to RabbitMQ brokers.
 type LdapServerMetadataInput struct {
 
 	// Specifies the location of the LDAP server such as Directory Service for
@@ -525,13 +528,16 @@ type User struct {
 
 	// The username of the broker user. The following restrictions apply to broker
 	// usernames:
+	//
 	//   - For Amazon MQ for ActiveMQ brokers, this value can contain only
 	//   alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	//   This value must be 2-100 characters long.
+	//
 	//   - para>For Amazon MQ for RabbitMQ brokers, this value can contain only
 	//   alphanumeric characters, dashes, periods, underscores (- . _). This value must
 	//   not contain a tilde (~) character. Amazon MQ prohibts using guest as a valid
 	//   usename. This value must be 2-100 characters long.
+	//
 	// Do not add personally identifiable information (PII) or other confidential or
 	// sensitive information in broker usernames. Broker usernames are accessible to
 	// other Amazon Web Services services, including CloudWatch Logs. Broker usernames

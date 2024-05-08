@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a member from a channel. The x-amz-chime-bearer request header is
-// mandatory. Use the AppInstanceUserArn of the user that makes the API call as
-// the value in the header.
+// Removes a member from a channel.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
+// of the user that makes the API call as the value in the header.
 func (c *Client) DeleteChannelMembership(ctx context.Context, params *DeleteChannelMembershipInput, optFns ...func(*Options)) (*DeleteChannelMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteChannelMembershipInput{}
@@ -45,7 +46,9 @@ type DeleteChannelMembershipInput struct {
 	// This member is required.
 	MemberArn *string
 
-	// The ID of the SubChannel in the request. Only for use by moderators.
+	// The ID of the SubChannel in the request.
+	//
+	// Only for use by moderators.
 	SubChannelId *string
 
 	noSmithyDocumentSerde

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the tasks to search user access status for a specific email address. The
-// tasks are stopped when the user access status data is found. The tasks are
+// Starts the tasks to search user access status for a specific email address.
+//
+// The tasks are stopped when the user access status data is found. The tasks are
 // terminated when the API calls to the application time out.
 func (c *Client) StartUserAccessTasks(ctx context.Context, params *StartUserAccessTasksInput, optFns ...func(*Options)) (*StartUserAccessTasksOutput, error) {
 	if params == nil {

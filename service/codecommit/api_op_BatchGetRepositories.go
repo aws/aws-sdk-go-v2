@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about one or more repositories. The description field for a
-// repository accepts all HTML characters and all valid Unicode characters.
-// Applications that do not HTML-encode the description and display it in a webpage
-// can expose users to potentially malicious code. Make sure that you HTML-encode
-// the description field in any application that uses this API to display the
-// repository description on a webpage.
+// Returns information about one or more repositories.
+//
+// The description field for a repository accepts all HTML characters and all
+// valid Unicode characters. Applications that do not HTML-encode the description
+// and display it in a webpage can expose users to potentially malicious code. Make
+// sure that you HTML-encode the description field in any application that uses
+// this API to display the repository description on a webpage.
 func (c *Client) BatchGetRepositories(ctx context.Context, params *BatchGetRepositoriesInput, optFns ...func(*Options)) (*BatchGetRepositoriesOutput, error) {
 	if params == nil {
 		params = &BatchGetRepositoriesInput{}
@@ -35,8 +36,10 @@ func (c *Client) BatchGetRepositories(ctx context.Context, params *BatchGetRepos
 // Represents the input of a batch get repositories operation.
 type BatchGetRepositoriesInput struct {
 
-	// The names of the repositories to get information about. The length constraint
-	// limit is for each string in the array. The array itself can be empty.
+	// The names of the repositories to get information about.
+	//
+	// The length constraint limit is for each string in the array. The array itself
+	// can be empty.
 	//
 	// This member is required.
 	RepositoryNames []string

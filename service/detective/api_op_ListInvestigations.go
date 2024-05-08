@@ -46,9 +46,10 @@ type ListInvestigationsInput struct {
 
 	// Lists if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
-	// retrieve the next page. Keep all other arguments unchanged. Each pagination
-	// token expires after 24 hours. Using an expired pagination token will return a
-	// Validation Exception error.
+	// retrieve the next page. Keep all other arguments unchanged.
+	//
+	// Each pagination token expires after 24 hours. Using an expired pagination token
+	// will return a Validation Exception error.
 	NextToken *string
 
 	// Sorts the investigation results based on a criteria.
@@ -65,8 +66,9 @@ type ListInvestigationsOutput struct {
 
 	// Lists if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
-	// retrieve the next page. Keep all other arguments unchanged. Each pagination
-	// token expires after 24 hours.
+	// retrieve the next page. Keep all other arguments unchanged.
+	//
+	// Each pagination token expires after 24 hours.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

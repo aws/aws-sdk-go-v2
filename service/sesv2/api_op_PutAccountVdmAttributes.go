@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update your Amazon SES account VDM attributes. You can execute this operation
-// no more than once per second.
+// Update your Amazon SES account VDM attributes.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) PutAccountVdmAttributes(ctx context.Context, params *PutAccountVdmAttributesInput, optFns ...func(*Options)) (*PutAccountVdmAttributesOutput, error) {
 	if params == nil {
 		params = &PutAccountVdmAttributesInput{}

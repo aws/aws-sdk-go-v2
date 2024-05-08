@@ -12,9 +12,11 @@ import (
 )
 
 // Returns a paginated list of common controls from the Amazon Web Services
-// Control Catalog. You can apply an optional filter to see common controls that
-// have a specific objective. If you don’t provide a filter, the operation returns
-// all common controls.
+// Control Catalog.
+//
+// You can apply an optional filter to see common controls that have a specific
+// objective. If you don’t provide a filter, the operation returns all common
+// controls.
 func (c *Client) ListCommonControls(ctx context.Context, params *ListCommonControlsInput, optFns ...func(*Options)) (*ListCommonControlsOutput, error) {
 	if params == nil {
 		params = &ListCommonControlsInput{}
@@ -32,9 +34,10 @@ func (c *Client) ListCommonControls(ctx context.Context, params *ListCommonContr
 
 type ListCommonControlsInput struct {
 
-	// An optional filter that narrows the results to a specific objective. This
-	// filter allows you to specify one objective ARN at a time. Passing multiple ARNs
-	// in the CommonControlFilter isn’t currently supported.
+	// An optional filter that narrows the results to a specific objective.
+	//
+	// This filter allows you to specify one objective ARN at a time. Passing multiple
+	// ARNs in the CommonControlFilter isn’t currently supported.
 	CommonControlFilter *types.CommonControlFilter
 
 	// The maximum number of results on a page or for an API request call.

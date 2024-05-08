@@ -15,8 +15,9 @@ import (
 // Updates an existing Recycle Bin retention rule. You can update a retention
 // rule's description, resource tags, and retention period at any time after
 // creation. You can't update a retention rule's resource type after creation. For
-// more information, see Update Recycle Bin retention rules (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule)
-// in the Amazon Elastic Compute Cloud User Guide.
+// more information, see [Update Recycle Bin retention rules]in the Amazon Elastic Compute Cloud User Guide.
+//
+// [Update Recycle Bin retention rules]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule
 func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns ...func(*Options)) (*UpdateRuleOutput, error) {
 	if params == nil {
 		params = &UpdateRuleInput{}
@@ -47,12 +48,15 @@ type UpdateRuleInput struct {
 	// deleted resources, of the specified resource type, that have one or more of the
 	// specified tag key and value pairs are retained. If a resource is deleted, but it
 	// does not have any of the specified tag key and value pairs, it is immediately
-	// deleted without being retained by the retention rule. You can add the same tag
-	// key and value pair to a maximum or five retention rules. To create a
-	// Region-level retention rule, omit this parameter. A Region-level retention rule
-	// does not have any resource tags specified. It retains all deleted resources of
-	// the specified resource type in the Region in which the rule is created, even if
-	// the resources are not tagged.
+	// deleted without being retained by the retention rule.
+	//
+	// You can add the same tag key and value pair to a maximum or five retention
+	// rules.
+	//
+	// To create a Region-level retention rule, omit this parameter. A Region-level
+	// retention rule does not have any resource tags specified. It retains all deleted
+	// resources of the specified resource type in the Region in which the rule is
+	// created, even if the resources are not tagged.
 	ResourceTags []types.ResourceTag
 
 	// This parameter is currently not supported. You can't update a retention rule's
@@ -80,12 +84,16 @@ type UpdateRuleOutput struct {
 	LockEndTime *time.Time
 
 	// The lock state for the retention rule.
+	//
 	//   - locked - The retention rule is locked and can't be modified or deleted.
+	//
 	//   - pending_unlock - The retention rule has been unlocked but it is still within
 	//   the unlock delay period. The retention rule can be modified or deleted only
 	//   after the unlock delay period has expired.
+	//
 	//   - unlocked - The retention rule is unlocked and it can be modified or deleted
 	//   by any user with the required permissions.
+	//
 	//   - null - The retention rule has never been locked. Once a retention rule has
 	//   been locked, it can transition between the locked and unlocked states only; it
 	//   can never transition back to null .

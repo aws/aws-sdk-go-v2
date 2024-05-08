@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs one or more SQL statements. This operation isn't supported for Aurora
-// PostgreSQL Serverless v2 and provisioned DB clusters, and for Aurora Serverless
-// v1 DB clusters, the operation is deprecated. Use the BatchExecuteStatement or
-// ExecuteStatement operation.
+// Runs one or more SQL statements.
+//
+// This operation isn't supported for Aurora PostgreSQL Serverless v2 and
+// provisioned DB clusters, and for Aurora Serverless v1 DB clusters, the operation
+// is deprecated. Use the BatchExecuteStatement or ExecuteStatement operation.
 //
 // Deprecated: The ExecuteSql API is deprecated, please use the ExecuteStatement
 // API.
@@ -39,8 +40,11 @@ type ExecuteSqlInput struct {
 
 	// The Amazon Resource Name (ARN) of the secret that enables access to the DB
 	// cluster. Enter the database user name and password for the credentials in the
-	// secret. For information about creating the secret, see Create a database secret (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html)
-	// .
+	// secret.
+	//
+	// For information about creating the secret, see [Create a database secret].
+	//
+	// [Create a database secret]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
 	//
 	// This member is required.
 	AwsSecretStoreArn *string
@@ -50,9 +54,11 @@ type ExecuteSqlInput struct {
 	// This member is required.
 	DbClusterOrInstanceArn *string
 
-	// One or more SQL statements to run on the DB cluster. You can separate SQL
-	// statements from each other with a semicolon (;). Any valid SQL statement is
-	// permitted, including data definition, data manipulation, and commit statements.
+	// One or more SQL statements to run on the DB cluster.
+	//
+	// You can separate SQL statements from each other with a semicolon (;). Any valid
+	// SQL statement is permitted, including data definition, data manipulation, and
+	// commit statements.
 	//
 	// This member is required.
 	SqlStatements *string

@@ -75,10 +75,11 @@ type UpdateApplicationInput struct {
 	// label to use a different release of Amazon EMR.
 	ReleaseLabel *string
 
-	// The Configuration (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html)
-	// specifications to use when updating an application. Each configuration consists
-	// of a classification and properties. This configuration is applied across all the
-	// job runs submitted under the application.
+	// The [Configuration] specifications to use when updating an application. Each configuration
+	// consists of a classification and properties. This configuration is applied
+	// across all the job runs submitted under the application.
+	//
+	// [Configuration]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
 	RuntimeConfiguration []types.Configuration
 
 	// The key-value pairs that specify worker type to WorkerTypeSpecificationInput .

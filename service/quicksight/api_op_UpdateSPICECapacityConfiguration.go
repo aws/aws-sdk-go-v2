@@ -37,7 +37,9 @@ type UpdateSPICECapacityConfigurationInput struct {
 
 	// Determines how SPICE capacity can be purchased. The following options are
 	// available.
+	//
 	//   - MANUAL : SPICE capacity can only be purchased manually.
+	//
 	//   - AUTO_PURCHASE : Extra SPICE capacity is automatically purchased on your
 	//   behalf as needed. SPICE capacity can also be purchased manually with this
 	//   option.

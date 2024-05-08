@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for ActivationOverrideBehavior. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ActivationOverrideBehavior) Values() []ActivationOverrideBehavior {
 	return []ActivationOverrideBehavior{
@@ -34,8 +35,9 @@ const (
 )
 
 // Values returns all known values for AllowedOperation. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AllowedOperation) Values() []AllowedOperation {
 	return []AllowedOperation{
 		"CreateGrant",
@@ -57,8 +59,9 @@ const (
 )
 
 // Values returns all known values for CheckoutType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckoutType) Values() []CheckoutType {
 	return []CheckoutType{
 		"PROVISIONAL",
@@ -74,8 +77,9 @@ const (
 )
 
 // Values returns all known values for DigitalSignatureMethod. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DigitalSignatureMethod) Values() []DigitalSignatureMethod {
 	return []DigitalSignatureMethod{
 		"JWT_PS384",
@@ -116,8 +120,9 @@ const (
 )
 
 // Values returns all known values for EntitlementDataUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntitlementDataUnit) Values() []EntitlementDataUnit {
 	return []EntitlementDataUnit{
 		"Count",
@@ -184,8 +189,9 @@ const (
 )
 
 // Values returns all known values for EntitlementUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntitlementUnit) Values() []EntitlementUnit {
 	return []EntitlementUnit{
 		"Count",
@@ -234,8 +240,9 @@ const (
 )
 
 // Values returns all known values for GrantStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GrantStatus) Values() []GrantStatus {
 	return []GrantStatus{
 		"PENDING_WORKFLOW",
@@ -262,6 +269,7 @@ const (
 
 // Values returns all known values for InventoryFilterCondition. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InventoryFilterCondition) Values() []InventoryFilterCondition {
 	return []InventoryFilterCondition{
@@ -282,6 +290,7 @@ const (
 
 // Values returns all known values for LicenseConfigurationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseConfigurationStatus) Values() []LicenseConfigurationStatus {
 	return []LicenseConfigurationStatus{
@@ -301,6 +310,7 @@ const (
 
 // Values returns all known values for LicenseConversionTaskStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseConversionTaskStatus) Values() []LicenseConversionTaskStatus {
 	return []LicenseConversionTaskStatus{
@@ -321,8 +331,9 @@ const (
 )
 
 // Values returns all known values for LicenseCountingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseCountingType) Values() []LicenseCountingType {
 	return []LicenseCountingType{
 		"vCPU",
@@ -341,8 +352,9 @@ const (
 )
 
 // Values returns all known values for LicenseDeletionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseDeletionStatus) Values() []LicenseDeletionStatus {
 	return []LicenseDeletionStatus{
 		"PENDING_DELETE",
@@ -364,8 +376,9 @@ const (
 )
 
 // Values returns all known values for LicenseStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseStatus) Values() []LicenseStatus {
 	return []LicenseStatus{
 		"AVAILABLE",
@@ -393,8 +406,9 @@ const (
 )
 
 // Values returns all known values for ReceivedStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReceivedStatus) Values() []ReceivedStatus {
 	return []ReceivedStatus{
 		"PENDING_WORKFLOW",
@@ -418,8 +432,9 @@ const (
 )
 
 // Values returns all known values for RenewType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RenewType) Values() []RenewType {
 	return []RenewType{
 		"None",
@@ -438,8 +453,9 @@ const (
 )
 
 // Values returns all known values for ReportFrequencyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportFrequencyType) Values() []ReportFrequencyType {
 	return []ReportFrequencyType{
 		"DAY",
@@ -457,8 +473,9 @@ const (
 )
 
 // Values returns all known values for ReportType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportType) Values() []ReportType {
 	return []ReportType{
 		"LicenseConfigurationSummaryReport",
@@ -478,8 +495,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"EC2_INSTANCE",
@@ -498,8 +516,9 @@ const (
 )
 
 // Values returns all known values for TokenType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TokenType) Values() []TokenType {
 	return []TokenType{
 		"REFRESH_TOKEN",

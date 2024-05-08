@@ -10,15 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates AppInstance metadata. This API is is no longer supported and will not
-// be updated. We recommend using the latest version, UpdateAppInstance (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_UpdateAppInstance.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Updates AppInstance metadata.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [UpdateAppInstance], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by UpdateAppInstance in the Amazon Chime SDK Identity
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [UpdateAppInstance]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_UpdateAppInstance.html
 func (c *Client) UpdateAppInstance(ctx context.Context, params *UpdateAppInstanceInput, optFns ...func(*Options)) (*UpdateAppInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateAppInstanceInput{}

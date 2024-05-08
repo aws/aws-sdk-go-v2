@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an alert. Amazon Lookout for Metrics API actions are eventually
-// consistent. If you do a read operation on a resource immediately after creating
-// or modifying it, use retries to allow time for the write operation to complete.
+// Describes an alert.
+//
+// Amazon Lookout for Metrics API actions are eventually consistent. If you do a
+// read operation on a resource immediately after creating or modifying it, use
+// retries to allow time for the write operation to complete.
 func (c *Client) DescribeAlert(ctx context.Context, params *DescribeAlertInput, optFns ...func(*Options)) (*DescribeAlertOutput, error) {
 	if params == nil {
 		params = &DescribeAlertInput{}

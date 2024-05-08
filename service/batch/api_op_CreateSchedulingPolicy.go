@@ -42,11 +42,13 @@ type CreateSchedulingPolicyInput struct {
 
 	// The tags that you apply to the scheduling policy to help you categorize and
 	// organize your resources. Each tag consists of a key and an optional value. For
-	// more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in Amazon Web Services General Reference. These tags can be updated or removed
-	// using the TagResource (https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html)
-	// and UntagResource (https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html)
-	// API operations.
+	// more information, see [Tagging Amazon Web Services Resources]in Amazon Web Services General Reference.
+	//
+	// These tags can be updated or removed using the [TagResource] and [UntagResource] API operations.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [TagResource]: https://docs.aws.amazon.com/batch/latest/APIReference/API_TagResource.html
+	// [UntagResource]: https://docs.aws.amazon.com/batch/latest/APIReference/API_UntagResource.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

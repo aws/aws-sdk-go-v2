@@ -13,8 +13,9 @@ import (
 
 // Describes the permissions that the owner of a connection alias has granted to
 // another Amazon Web Services account for the specified connection alias. For more
-// information, see Cross-Region Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
-// .
+// information, see [Cross-Region Redirection for Amazon WorkSpaces].
+//
+// [Cross-Region Redirection for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
 func (c *Client) DescribeConnectionAliasPermissions(ctx context.Context, params *DescribeConnectionAliasPermissionsInput, optFns ...func(*Options)) (*DescribeConnectionAliasPermissionsOutput, error) {
 	if params == nil {
 		params = &DescribeConnectionAliasPermissionsInput{}

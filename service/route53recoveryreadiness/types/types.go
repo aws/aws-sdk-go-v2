@@ -244,10 +244,12 @@ type ResourceSetOutput struct {
 	ResourceSetName *string
 
 	// The resource type of the resources in the resource set. Enter one of the
-	// following values for resource type: AWS::ApiGateway::Stage,
-	// AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup,
-	// AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table,
-	// AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer,
+	// following values for resource type:
+	//
+	// AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage,
+	// AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm,
+	// AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume,
+	// AWS::ElasticLoadBalancing::LoadBalancer,
 	// AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function,
 	// AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck,
 	// AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC,

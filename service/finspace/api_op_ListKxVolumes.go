@@ -41,7 +41,7 @@ type ListKxVolumesInput struct {
 	// A token that indicates where a results page should begin.
 	NextToken *string
 
-	// The type of file system volume. Currently, FinSpace only supports NAS_1 volume
+	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
 	VolumeType types.KxVolumeType
 
@@ -50,7 +50,7 @@ type ListKxVolumesInput struct {
 
 type ListKxVolumesOutput struct {
 
-	// A summary of volumes.
+	//  A summary of volumes.
 	KxVolumeSummaries []types.KxVolume
 
 	// A token that indicates where a results page should begin.

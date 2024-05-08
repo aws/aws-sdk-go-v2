@@ -11,11 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information on a job bookmark entry. For more information about
-// enabling and using job bookmarks, see:
-//   - Tracking processed data using job bookmarks (https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html)
-//   - Job parameters used by Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
-//   - Job structure (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html#aws-glue-api-jobs-job-Job)
+// Returns information on a job bookmark entry.
+//
+// For more information about enabling and using job bookmarks, see:
+//
+// [Tracking processed data using job bookmarks]
+//
+// [Job parameters used by Glue]
+//
+// [Job structure]
+//
+// [Job parameters used by Glue]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+// [Tracking processed data using job bookmarks]: https://docs.aws.amazon.com/glue/latest/dg/monitor-continuations.html
+// [Job structure]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-jobs-job.html#aws-glue-api-jobs-job-Job
 func (c *Client) GetJobBookmark(ctx context.Context, params *GetJobBookmarkInput, optFns ...func(*Options)) (*GetJobBookmarkOutput, error) {
 	if params == nil {
 		params = &GetJobBookmarkInput{}

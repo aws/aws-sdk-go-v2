@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new attendee for an active Amazon Chime SDK meeting. For more
-// information about the Amazon Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html)
-// in the Amazon Chime Developer Guide.
+//	Creates a new attendee for an active Amazon Chime SDK meeting. For more
+//
+// information about the Amazon Chime SDK, see [Using the Amazon Chime SDK]in the Amazon Chime Developer
+// Guide.
+//
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html
 func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput, optFns ...func(*Options)) (*CreateAttendeeOutput, error) {
 	if params == nil {
 		params = &CreateAttendeeInput{}
@@ -32,9 +35,12 @@ func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput
 type CreateAttendeeInput struct {
 
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
-	// to an identity managed by a builder application. Pattern:
-	// [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]* Values that begin with aws: are
-	// reserved. You can't configure a value that uses this prefix.
+	// to an identity managed by a builder application.
+	//
+	// Pattern: [-_&@+=,(){}\[\]\/«».:|'"#a-zA-Z0-9À-ÿ\s]*
+	//
+	// Values that begin with aws: are reserved. You can't configure a value that uses
+	// this prefix.
 	//
 	// This member is required.
 	ExternalUserId *string
@@ -46,24 +52,32 @@ type CreateAttendeeInput struct {
 
 	// The capabilities ( audio , video , or content ) that you want to grant an
 	// attendee. If you don't specify capabilities, all users have send and receive
-	// capabilities on all media channels by default. You use the capabilities with a
-	// set of values that control what the capabilities can do, such as SendReceive
-	// data. For more information about those values, see . When using capabilities, be
-	// aware of these corner cases:
+	// capabilities on all media channels by default.
+	//
+	// You use the capabilities with a set of values that control what the
+	// capabilities can do, such as SendReceive data. For more information about those
+	// values, see .
+	//
+	// When using capabilities, be aware of these corner cases:
+	//
 	//   - If you specify MeetingFeatures:Video:MaxResolution:None when you create a
 	//   meeting, all API requests that include SendReceive , Send , or Receive for
 	//   AttendeeCapabilities:Video will be rejected with ValidationError 400 .
+	//
 	//   - If you specify MeetingFeatures:Content:MaxResolution:None when you create a
 	//   meeting, all API requests that include SendReceive , Send , or Receive for
 	//   AttendeeCapabilities:Content will be rejected with ValidationError 400 .
+	//
 	//   - You can't set content capabilities to SendReceive or Receive unless you also
 	//   set video capabilities to SendReceive or Receive . If you don't set the video
 	//   capability to receive, the response will contain an HTTP 400 Bad Request status
 	//   code. However, you can set your video capability to receive and you set your
 	//   content capability to not receive.
+	//
 	//   - When you change an audio capability from None or Receive to Send or
 	//   SendReceive , and if the attendee left their microphone unmuted, audio will
 	//   flow from the attendee to the other meeting participants.
+	//
 	//   - When you change a video or content capability from None or Receive to Send
 	//   or SendReceive , and if the attendee turned on their video or content streams,
 	//   remote attendees can receive those streams, but only after media renegotiation

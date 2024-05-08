@@ -46,15 +46,21 @@ type AppAuthorization struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The state of the app authorization. The following states are possible:
+	// The state of the app authorization.
+	//
+	// The following states are possible:
+	//
 	//   - PendingConnect : The initial state of the app authorization. The app
 	//   authorization is created but not yet connected.
+	//
 	//   - Connected : The app authorization is connected to the application, and is
 	//   ready to be used.
+	//
 	//   - ConnectionValidationFailed : The app authorization received a validation
 	//   exception when trying to connect to the application. If the app authorization is
 	//   in this state, you should verify the configured credentials and try to connect
 	//   the app authorization again.
+	//
 	//   - TokenAutoRotationFailed : AppFabric failed to refresh the access token. If
 	//   the app authorization is in this state, you should try to reconnect the app
 	//   authorization.
@@ -76,7 +82,9 @@ type AppAuthorization struct {
 	// The application URL for the OAuth flow.
 	AuthUrl *string
 
-	// The user persona of the app authorization. This field should always be admin .
+	// The user persona of the app authorization.
+	//
+	// This field should always be admin .
 	Persona Persona
 
 	noSmithyDocumentSerde
@@ -100,15 +108,21 @@ type AppAuthorizationSummary struct {
 	// This member is required.
 	AppBundleArn *string
 
-	// The state of the app authorization. The following states are possible:
+	// The state of the app authorization.
+	//
+	// The following states are possible:
+	//
 	//   - PendingConnect : The initial state of the app authorization. The app
 	//   authorization is created but not yet connected.
+	//
 	//   - Connected : The app authorization is connected to the application, and is
 	//   ready to be used.
+	//
 	//   - ConnectionValidationFailed : The app authorization received a validation
 	//   exception when trying to connect to the application. If the app authorization is
 	//   in this state, you should verify the configured credentials and try to connect
 	//   the app authorization again.
+	//
 	//   - TokenAutoRotationFailed : AppFabric failed to refresh the access token. If
 	//   the app authorization is in this state, you should try to reconnect the app
 	//   authorization.
@@ -358,15 +372,20 @@ type IngestionDestination struct {
 	// The timestamp of when the ingestion destination was created.
 	CreatedAt *time.Time
 
-	// The state of the ingestion destination. The following states are possible:
+	// The state of the ingestion destination.
+	//
+	// The following states are possible:
+	//
 	//   - Active : The ingestion destination is active and is ready to be used.
+	//
 	//   - Failed : The ingestion destination has failed. If the ingestion destination
 	//   is in this state, you should verify the ingestion destination configuration and
 	//   try again.
 	Status IngestionDestinationStatus
 
-	// The reason for the current status of the ingestion destination. Only present
-	// when the status of ingestion destination is Failed .
+	// The reason for the current status of the ingestion destination.
+	//
+	// Only present when the status of ingestion destination is Failed .
 	StatusReason *string
 
 	// The timestamp of when the ingestion destination was last updated.
@@ -514,10 +533,16 @@ type UserAccessResultItem struct {
 	// The email address of the target user.
 	Email *string
 
-	// The status of the user access result item. The following states are possible:
+	// The status of the user access result item.
+	//
+	// The following states are possible:
+	//
 	//   - IN_PROGRESS : The user access task is in progress.
+	//
 	//   - COMPLETED : The user access task completed successfully.
+	//
 	//   - FAILED : The user access task failed.
+	//
 	//   - EXPIRED : The user access task expired.
 	ResultStatus ResultStatus
 

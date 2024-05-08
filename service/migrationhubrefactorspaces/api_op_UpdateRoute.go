@@ -30,23 +30,23 @@ func (c *Client) UpdateRoute(ctx context.Context, params *UpdateRouteInput, optF
 
 type UpdateRouteInput struct {
 
-	// If set to ACTIVE , traffic is forwarded to this route’s service after the route
+	//  If set to ACTIVE , traffic is forwarded to this route’s service after the route
 	// is updated.
 	//
 	// This member is required.
 	ActivationState types.RouteActivationState
 
-	// The ID of the application within which the route is being updated.
+	//  The ID of the application within which the route is being updated.
 	//
 	// This member is required.
 	ApplicationIdentifier *string
 
-	// The ID of the environment in which the route is being updated.
+	//  The ID of the environment in which the route is being updated.
 	//
 	// This member is required.
 	EnvironmentIdentifier *string
 
-	// The unique identifier of the route to update.
+	//  The unique identifier of the route to update.
 	//
 	// This member is required.
 	RouteIdentifier *string
@@ -56,26 +56,27 @@ type UpdateRouteInput struct {
 
 type UpdateRouteOutput struct {
 
-	// The ID of the application in which the route is being updated.
+	//  The ID of the application in which the route is being updated.
 	ApplicationId *string
 
-	// The Amazon Resource Name (ARN) of the route. The format for this ARN is
+	//  The Amazon Resource Name (ARN) of the route. The format for this ARN is
 	// arn:aws:refactor-spaces:region:account-id:resource-type/resource-id . For more
-	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
-	// A timestamp that indicates when the route was last updated.
+	//  A timestamp that indicates when the route was last updated.
 	LastUpdatedTime *time.Time
 
-	// The unique identifier of the route.
+	//  The unique identifier of the route.
 	RouteId *string
 
-	// The ID of service in which the route was created. Traffic that matches this
+	//  The ID of service in which the route was created. Traffic that matches this
 	// route is forwarded to this service.
 	ServiceId *string
 
-	// The current state of the route.
+	//  The current state of the route.
 	State types.RouteState
 
 	// Metadata pertaining to the operation's result.

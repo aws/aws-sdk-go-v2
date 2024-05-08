@@ -42,8 +42,10 @@ type UpdateRotationInput struct {
 	RotationId *string
 
 	// The Amazon Resource Names (ARNs) of the contacts to include in the updated
-	// rotation. The order in which you list the contacts is their shift order in the
-	// rotation schedule.
+	// rotation.
+	//
+	// The order in which you list the contacts is their shift order in the rotation
+	// schedule.
 	ContactIds []string
 
 	// The date and time the rotation goes into effect.
@@ -51,10 +53,13 @@ type UpdateRotationInput struct {
 
 	// The time zone to base the updated rotation’s activity on, in Internet Assigned
 	// Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
-	// "Asia/Seoul". For more information, see the Time Zone Database (https://www.iana.org/time-zones)
-	// on the IANA website. Designators for time zones that don’t support Daylight
-	// Savings Time Rules, such as Pacific Standard Time (PST) and Pacific Daylight
-	// Time (PDT), aren't supported.
+	// "Asia/Seoul". For more information, see the [Time Zone Database]on the IANA website.
+	//
+	// Designators for time zones that don’t support Daylight Savings Time Rules, such
+	// as Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren't
+	// supported.
+	//
+	// [Time Zone Database]: https://www.iana.org/time-zones
 	TimeZoneId *string
 
 	noSmithyDocumentSerde

@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests updates to the configuration of the specified provisioned product. If
-// there are tags associated with the object, they cannot be updated or added.
+// Requests updates to the configuration of the specified provisioned product.
+//
+// If there are tags associated with the object, they cannot be updated or added.
 // Depending on the specific updates requested, this operation can update with no
 // interruption, with some interruption, or replace the provisioned product
-// entirely. You can check the status of this request using DescribeRecord .
+// entirely.
+//
+// You can check the status of this request using DescribeRecord.
 func (c *Client) UpdateProvisionedProduct(ctx context.Context, params *UpdateProvisionedProductInput, optFns ...func(*Options)) (*UpdateProvisionedProductOutput, error) {
 	if params == nil {
 		params = &UpdateProvisionedProductInput{}
@@ -39,7 +42,9 @@ type UpdateProvisionedProductInput struct {
 	UpdateToken *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 

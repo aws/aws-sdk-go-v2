@@ -31,19 +31,24 @@ func (c *Client) SearchProvisionedProducts(ctx context.Context, params *SearchPr
 type SearchProvisionedProductsInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The access level to use to obtain results. The default is User .
 	AccessLevelFilter *types.AccessLevelFilter
 
-	// The search filters. When the key is SearchQuery , the searchable fields are arn
-	// , createdTime , id , lastRecordId , idempotencyToken , name , physicalId ,
-	// productId , provisioningArtifactId , type , status , tags , userArn ,
-	// userArnSession , lastProvisioningRecordId , lastSuccessfulProvisioningRecordId ,
-	// productName , and provisioningArtifactName . Example:
-	// "SearchQuery":["status:AVAILABLE"]
+	// The search filters.
+	//
+	// When the key is SearchQuery , the searchable fields are arn , createdTime , id ,
+	// lastRecordId , idempotencyToken , name , physicalId , productId ,
+	// provisioningArtifactId , type , status , tags , userArn , userArnSession ,
+	// lastProvisioningRecordId , lastSuccessfulProvisioningRecordId , productName ,
+	// and provisioningArtifactName .
+	//
+	// Example: "SearchQuery":["status:AVAILABLE"]
 	Filters map[string][]string
 
 	// The maximum number of items to return with this call.

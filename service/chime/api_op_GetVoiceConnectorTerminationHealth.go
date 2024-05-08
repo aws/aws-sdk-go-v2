@@ -11,17 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is is no longer supported and will not be updated. We recommend using
-// the latest version, GetVoiceConnectorTerminationHealth (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorTerminationHealth.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide. Retrieves information about the last
-// time a SIP OPTIONS ping was received from your SIP infrastructure for the
-// specified Amazon Chime Voice Connector.
+//	This API is is no longer supported and will not be updated. We recommend using
+//
+// the latest version, [GetVoiceConnectorTerminationHealth], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
+//
+// Retrieves information about the last time a SIP OPTIONS ping was received from
+// your SIP infrastructure for the specified Amazon Chime Voice Connector.
 //
 // Deprecated: Replaced by GetVoiceConnectorTerminationHealth in the Amazon Chime
 // SDK Voice Namespace
+//
+// [GetVoiceConnectorTerminationHealth]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorTerminationHealth.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
 func (c *Client) GetVoiceConnectorTerminationHealth(ctx context.Context, params *GetVoiceConnectorTerminationHealthInput, optFns ...func(*Options)) (*GetVoiceConnectorTerminationHealthOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorTerminationHealthInput{}

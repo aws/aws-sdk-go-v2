@@ -12,9 +12,11 @@ import (
 	"time"
 )
 
-// Updates a Device Defender security profile. Requires permission to access the
-// UpdateSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a Device Defender security profile.
+//
+// Requires permission to access the [UpdateSecurityProfile] action.
+//
+// [UpdateSecurityProfile]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateSecurityProfile(ctx context.Context, params *UpdateSecurityProfileInput, optFns ...func(*Options)) (*UpdateSecurityProfileOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityProfileInput{}
@@ -37,8 +39,9 @@ type UpdateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileName *string
 
-	// Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
-	// list of metrics whose data is retained (stored). By default, data is retained
+	//  Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+	//
+	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors , but it is also retained for any
 	// metric specified here. Can be used with custom metrics; cannot be used with
 	// dimensions.
@@ -90,8 +93,9 @@ type UpdateSecurityProfileInput struct {
 
 type UpdateSecurityProfileOutput struct {
 
-	// Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead. A
-	// list of metrics whose data is retained (stored). By default, data is retained
+	//  Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+	//
+	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the security profile's behaviors , but it is also
 	// retained for any metric specified here.
 	//

@@ -10,8 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the specified connector from Server Migration Service. After you
-// disassociate a connector, it is no longer available to support replication jobs.
+// Disassociates the specified connector from Server Migration Service.
+//
+// After you disassociate a connector, it is no longer available to support
+// replication jobs.
 func (c *Client) DisassociateConnector(ctx context.Context, params *DisassociateConnectorInput, optFns ...func(*Options)) (*DisassociateConnectorOutput, error) {
 	if params == nil {
 		params = &DisassociateConnectorInput{}

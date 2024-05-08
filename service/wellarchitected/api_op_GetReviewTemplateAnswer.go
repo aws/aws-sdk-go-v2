@@ -29,13 +29,19 @@ func (c *Client) GetReviewTemplateAnswer(ctx context.Context, params *GetReviewT
 
 type GetReviewTemplateAnswerInput struct {
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAlias *string
@@ -58,13 +64,19 @@ type GetReviewTemplateAnswerOutput struct {
 	// An answer of the question.
 	Answer *types.ReviewTemplateAnswer
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The review template ARN.

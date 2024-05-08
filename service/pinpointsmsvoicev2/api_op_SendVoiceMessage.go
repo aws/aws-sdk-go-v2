@@ -12,8 +12,9 @@ import (
 )
 
 // Allows you to send a request that sends a voice message through Amazon
-// Pinpoint. This operation uses Amazon Polly (http://aws.amazon.com/polly/) to
-// convert a text script into a voice message.
+// Pinpoint. This operation uses [Amazon Polly]to convert a text script into a voice message.
+//
+// [Amazon Polly]: http://aws.amazon.com/polly/
 func (c *Client) SendVoiceMessage(ctx context.Context, params *SendVoiceMessageInput, optFns ...func(*Options)) (*SendVoiceMessageOutput, error) {
 	if params == nil {
 		params = &SendVoiceMessageInput{}
@@ -60,11 +61,14 @@ type SendVoiceMessageInput struct {
 	// The text to convert to a voice message.
 	MessageBody *string
 
-	// Specifies if the MessageBody field contains text or speech synthesis markup
-	// language (SSML) (https://docs.aws.amazon.com/polly/latest/dg/what-is.html) .
+	// Specifies if the MessageBody field contains text or [speech synthesis markup language (SSML)].
+	//
 	//   - TEXT: This is the default value. When used the maximum character limit is
 	//   3000.
+	//
 	//   - SSML: When used the maximum character limit is 6000 including SSML tagging.
+	//
+	// [speech synthesis markup language (SSML)]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
 	MessageBodyTextType types.VoiceMessageBodyTextType
 
 	// The unique identifier for the protect configuration.
@@ -73,8 +77,9 @@ type SendVoiceMessageInput struct {
 	// How long the voice message is valid for. By default this is 72 hours.
 	TimeToLive *int32
 
-	// The voice for the Amazon Polly (https://docs.aws.amazon.com/polly/latest/dg/what-is.html)
-	// service to use. By default this is set to "MATTHEW".
+	// The voice for the [Amazon Polly] service to use. By default this is set to "MATTHEW".
+	//
+	// [Amazon Polly]: https://docs.aws.amazon.com/polly/latest/dg/what-is.html
 	VoiceId types.VoiceId
 
 	noSmithyDocumentSerde

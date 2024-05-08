@@ -48,9 +48,9 @@ type DescribeRescoreExecutionPlanOutput struct {
 
 	// The capacity units set for the rescore execution plan. A capacity of zero
 	// indicates that the rescore execution plan is using the default capacity. For
-	// more information on the default capacity and additional capacity units, see
-	// Adjusting capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html)
-	// .
+	// more information on the default capacity and additional capacity units, see [Adjusting capacity].
+	//
+	// [Adjusting capacity]: https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// The Unix timestamp of when the rescore execution plan was created.

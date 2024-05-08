@@ -12,11 +12,15 @@ import (
 )
 
 // Returns all journal export jobs for all ledgers that are associated with the
-// current Amazon Web Services account and Region. This action returns a maximum of
-// MaxResults items, and is paginated so that you can retrieve all the items by
-// calling ListJournalS3Exports multiple times. This action does not return any
-// expired export jobs. For more information, see Export job expiration (https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration)
+// current Amazon Web Services account and Region.
+//
+// This action returns a maximum of MaxResults items, and is paginated so that you
+// can retrieve all the items by calling ListJournalS3Exports multiple times.
+//
+// This action does not return any expired export jobs. For more information, see [Export job expiration]
 // in the Amazon QLDB Developer Guide.
+//
+// [Export job expiration]: https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration
 func (c *Client) ListJournalS3Exports(ctx context.Context, params *ListJournalS3ExportsInput, optFns ...func(*Options)) (*ListJournalS3ExportsOutput, error) {
 	if params == nil {
 		params = &ListJournalS3ExportsInput{}
@@ -54,6 +58,7 @@ type ListJournalS3ExportsOutput struct {
 
 	//   - If NextToken is empty, then the last page of results has been processed and
 	//   there are no more results to be retrieved.
+	//
 	//   - If NextToken is not empty, then there are more results available. To
 	//   retrieve the next page of results, use the value of NextToken in a subsequent
 	//   ListJournalS3Exports call.

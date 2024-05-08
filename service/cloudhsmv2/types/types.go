@@ -146,8 +146,8 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the backup that will be copied and created by the
-// CopyBackupToRegion operation.
+// Contains information about the backup that will be copied and created by the CopyBackupToRegion
+// operation.
 type DestinationBackup struct {
 
 	// The date and time when both the source backup was created.

@@ -11,9 +11,10 @@ import (
 )
 
 // Lists all available node types that you can scale to from your cluster's
-// current node type. When you use the UpdateCluster operation to scale your
-// cluster, the value of the NodeType parameter must be one of the node types
-// returned by this operation.
+// current node type.
+//
+// When you use the UpdateCluster operation to scale your cluster, the value of
+// the NodeType parameter must be one of the node types returned by this operation.
 func (c *Client) ListAllowedNodeTypeUpdates(ctx context.Context, params *ListAllowedNodeTypeUpdatesInput, optFns ...func(*Options)) (*ListAllowedNodeTypeUpdatesOutput, error) {
 	if params == nil {
 		params = &ListAllowedNodeTypeUpdatesInput{}

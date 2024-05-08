@@ -70,7 +70,10 @@ type AudienceGenerationJobDataSource struct {
 
 	// Defines the Amazon S3 bucket where the seed audience for the generating
 	// audience is stored. A valid data source is a JSON line file in the following
-	// format: {"user_id": "111111"}
+	// format:
+	//
+	//     {"user_id": "111111"}
+	//
 	//     {"user_id": "222222"}
 	//
 	//     ...
@@ -197,9 +200,9 @@ type AudienceQualityMetrics struct {
 type AudienceSize struct {
 
 	// Whether the audience size is defined in absolute terms or as a percentage. You
-	// can use the ABSOLUTE AudienceSize to configure out audience sizes using the
-	// count of identifiers in the output. You can use the Percentage AudienceSize to
-	// configure sizes in the range 1-100 percent.
+	// can use the ABSOLUTEAudienceSize to configure out audience sizes using the count of
+	// identifiers in the output. You can use the PercentageAudienceSize to configure sizes in the
+	// range 1-100 percent.
 	//
 	// This member is required.
 	Type AudienceSizeType
@@ -212,12 +215,11 @@ type AudienceSize struct {
 	noSmithyDocumentSerde
 }
 
-// Configure the list of audience output sizes that can be created. A request to
-// StartAudienceGenerationJob that uses this configured audience model must have an
-// audienceSize selected from this list. You can use the ABSOLUTE AudienceSize to
-// configure out audience sizes using the count of identifiers in the output. You
-// can use the Percentage AudienceSize to configure sizes in the range 1-100
-// percent.
+// Configure the list of audience output sizes that can be created. A request to StartAudienceGenerationJob
+// that uses this configured audience model must have an audienceSize selected
+// from this list. You can use the ABSOLUTEAudienceSize to configure out audience sizes using
+// the count of identifiers in the output. You can use the PercentageAudienceSize to configure
+// sizes in the range 1-100 percent.
 type AudienceSizeConfig struct {
 
 	// An array of the different audience output sizes.

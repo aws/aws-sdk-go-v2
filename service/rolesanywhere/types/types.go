@@ -108,9 +108,10 @@ type MappingRule struct {
 	noSmithyDocumentSerde
 }
 
-// Customizable notification settings that will be applied to notification events.
-// IAM Roles Anywhere consumes these settings while notifying across multiple
-// channels - CloudWatch metrics, EventBridge, and Health Dashboard.
+//	Customizable notification settings that will be applied to notification
+//
+// events. IAM Roles Anywhere consumes these settings while notifying across
+// multiple channels - CloudWatch metrics, EventBridge, and Health Dashboard.
 type NotificationSetting struct {
 
 	// Indicates whether the notification setting is enabled.
@@ -124,9 +125,10 @@ type NotificationSetting struct {
 	Event NotificationEvent
 
 	// The specified channel of notification. IAM Roles Anywhere uses CloudWatch
-	// metrics, EventBridge, and Health Dashboard to notify for an event. In the
-	// absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL'
-	// channels.
+	// metrics, EventBridge, and Health Dashboard to notify for an event.
+	//
+	// In the absence of a specific channel, IAM Roles Anywhere applies this setting
+	// to 'ALL' channels.
 	Channel NotificationChannel
 
 	// The number of days before a notification event. This value is required for a
@@ -136,9 +138,10 @@ type NotificationSetting struct {
 	noSmithyDocumentSerde
 }
 
-// The state of a notification setting. A notification setting includes
-// information such as event name, threshold, status of the notification setting,
-// and the channel to notify.
+// The state of a notification setting.
+//
+// A notification setting includes information such as event name, threshold,
+// status of the notification setting, and the channel to notify.
 type NotificationSettingDetail struct {
 
 	// Indicates whether the notification setting is enabled.
@@ -152,9 +155,10 @@ type NotificationSettingDetail struct {
 	Event NotificationEvent
 
 	// The specified channel of notification. IAM Roles Anywhere uses CloudWatch
-	// metrics, EventBridge, and Health Dashboard to notify for an event. In the
-	// absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL'
-	// channels.
+	// metrics, EventBridge, and Health Dashboard to notify for an event.
+	//
+	// In the absence of a specific channel, IAM Roles Anywhere applies this setting
+	// to 'ALL' channels.
 	Channel NotificationChannel
 
 	// The principal that configured the notification setting. For default settings
@@ -195,10 +199,11 @@ type ProfileDetail struct {
 	// The Amazon Web Services account that created the profile.
 	CreatedBy *string
 
-	// Used to determine how long sessions vended using this profile are valid for.
-	// See the Expiration section of the CreateSession API documentation (https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object)
-	// page for more details. In requests, if this value is not provided, the default
-	// value will be 3600.
+	//  Used to determine how long sessions vended using this profile are valid for.
+	// See the Expiration section of the [CreateSession API documentation] page for more details. In requests, if this
+	// value is not provided, the default value will be 3600.
+	//
+	// [CreateSession API documentation]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
 	DurationSeconds *int32
 
 	// Indicates whether the profile is enabled.
@@ -256,8 +261,9 @@ type SourceData interface {
 	isSourceData()
 }
 
-// The root certificate of the Private Certificate Authority specified by this ARN
-// is used in trust validation for temporary credential requests. Included for
+//	The root certificate of the Private Certificate Authority specified by this
+//
+// ARN is used in trust validation for temporary credential requests. Included for
 // trust anchors of type AWS_ACM_PCA .
 type SourceDataMemberAcmPcaArn struct {
 	Value string

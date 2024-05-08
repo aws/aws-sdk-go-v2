@@ -12,9 +12,11 @@ import (
 )
 
 // Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint
-// receives a confirmation message, and must confirm the subscription. For more
-// information, see Setting up notifications for an IAM user or role (https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html)
-// in the Amazon WorkDocs Developer Guide.
+// receives a confirmation message, and must confirm the subscription.
+//
+// For more information, see [Setting up notifications for an IAM user or role] in the Amazon WorkDocs Developer Guide.
+//
+// [Setting up notifications for an IAM user or role]: https://docs.aws.amazon.com/workdocs/latest/developerguide/manage-notifications.html
 func (c *Client) CreateNotificationSubscription(ctx context.Context, params *CreateNotificationSubscriptionInput, optFns ...func(*Options)) (*CreateNotificationSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateNotificationSubscriptionInput{}

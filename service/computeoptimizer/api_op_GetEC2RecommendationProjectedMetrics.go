@@ -13,12 +13,14 @@ import (
 )
 
 // Returns the projected utilization metrics of Amazon EC2 instance
-// recommendations. The Cpu and Memory metrics are the only projected utilization
-// metrics returned when you run this action. Additionally, the Memory metric is
-// returned only for resources that have the unified CloudWatch agent installed on
-// them. For more information, see Enabling Memory Utilization with the CloudWatch
-// Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
-// .
+// recommendations.
+//
+// The Cpu and Memory metrics are the only projected utilization metrics returned
+// when you run this action. Additionally, the Memory metric is returned only for
+// resources that have the unified CloudWatch agent installed on them. For more
+// information, see [Enabling Memory Utilization with the CloudWatch Agent].
+//
+// [Enabling Memory Utilization with the CloudWatch Agent]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
 func (c *Client) GetEC2RecommendationProjectedMetrics(ctx context.Context, params *GetEC2RecommendationProjectedMetricsInput, optFns ...func(*Options)) (*GetEC2RecommendationProjectedMetricsOutput, error) {
 	if params == nil {
 		params = &GetEC2RecommendationProjectedMetricsInput{}

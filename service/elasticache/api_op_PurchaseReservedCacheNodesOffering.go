@@ -12,10 +12,10 @@ import (
 )
 
 // Allows you to purchase a reserved cache node offering. Reserved nodes are not
-// eligible for cancellation and are non-refundable. For more information, see
-// Managing Costs with Reserved Nodes (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/reserved-nodes.html)
-// for Redis or Managing Costs with Reserved Nodes (https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/reserved-nodes.html)
-// for Memcached.
+// eligible for cancellation and are non-refundable. For more information, see [Managing Costs with Reserved Nodes]for
+// Redis or [Managing Costs with Reserved Nodes]for Memcached.
+//
+// [Managing Costs with Reserved Nodes]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/reserved-nodes.html
 func (c *Client) PurchaseReservedCacheNodesOffering(ctx context.Context, params *PurchaseReservedCacheNodesOfferingInput, optFns ...func(*Options)) (*PurchaseReservedCacheNodesOfferingOutput, error) {
 	if params == nil {
 		params = &PurchaseReservedCacheNodesOfferingInput{}
@@ -34,19 +34,25 @@ func (c *Client) PurchaseReservedCacheNodesOffering(ctx context.Context, params 
 // Represents the input of a PurchaseReservedCacheNodesOffering operation.
 type PurchaseReservedCacheNodesOfferingInput struct {
 
-	// The ID of the reserved cache node offering to purchase. Example:
-	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
+	// The ID of the reserved cache node offering to purchase.
+	//
+	// Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
 	//
 	// This member is required.
 	ReservedCacheNodesOfferingId *string
 
-	// The number of cache node instances to reserve. Default: 1
+	// The number of cache node instances to reserve.
+	//
+	// Default: 1
 	CacheNodeCount *int32
 
-	// A customer-specified identifier to track this reservation. The Reserved Cache
-	// Node ID is an unique customer-specified identifier to track this reservation. If
-	// this parameter is not specified, ElastiCache automatically generates an
-	// identifier for the reservation. Example: myreservationID
+	// A customer-specified identifier to track this reservation.
+	//
+	// The Reserved Cache Node ID is an unique customer-specified identifier to track
+	// this reservation. If this parameter is not specified, ElastiCache automatically
+	// generates an identifier for the reservation.
+	//
+	// Example: myreservationID
 	ReservedCacheNodeId *string
 
 	// A list of tags to be added to this resource. A tag is a key-value pair. A tag

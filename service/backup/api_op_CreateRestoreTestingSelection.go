@@ -14,17 +14,24 @@ import (
 
 // This request can be sent after CreateRestoreTestingPlan request returns
 // successfully. This is the second part of creating a resource testing plan, and
-// it must be completed sequentially. This consists of RestoreTestingSelectionName
-// , ProtectedResourceType , and one of the following:
+// it must be completed sequentially.
+//
+// This consists of RestoreTestingSelectionName , ProtectedResourceType , and one
+// of the following:
+//
 //   - ProtectedResourceArns
+//
 //   - ProtectedResourceConditions
 //
-// Each protected resource type can have one single value. A restore testing
-// selection can include a wildcard value ("*") for ProtectedResourceArns along
-// with ProtectedResourceConditions . Alternatively, you can include up to 30
-// specific protected resource ARNs in ProtectedResourceArns . Cannot select by
-// both protected resource types AND specific ARNs. Request will fail if both are
-// included.
+// Each protected resource type can have one single value.
+//
+// A restore testing selection can include a wildcard value ("*") for
+// ProtectedResourceArns along with ProtectedResourceConditions . Alternatively,
+// you can include up to 30 specific protected resource ARNs in
+// ProtectedResourceArns .
+//
+// Cannot select by both protected resource types AND specific ARNs. Request will
+// fail if both are included.
 func (c *Client) CreateRestoreTestingSelection(ctx context.Context, params *CreateRestoreTestingSelectionInput, optFns ...func(*Options)) (*CreateRestoreTestingSelectionOutput, error) {
 	if params == nil {
 		params = &CreateRestoreTestingSelectionInput{}
@@ -50,12 +57,17 @@ type CreateRestoreTestingSelectionInput struct {
 
 	// This consists of RestoreTestingSelectionName , ProtectedResourceType , and one
 	// of the following:
+	//
 	//   - ProtectedResourceArns
+	//
 	//   - ProtectedResourceConditions
-	// Each protected resource type can have one single value. A restore testing
-	// selection can include a wildcard value ("*") for ProtectedResourceArns along
-	// with ProtectedResourceConditions . Alternatively, you can include up to 30
-	// specific protected resource ARNs in ProtectedResourceArns .
+	//
+	// Each protected resource type can have one single value.
+	//
+	// A restore testing selection can include a wildcard value ("*") for
+	// ProtectedResourceArns along with ProtectedResourceConditions . Alternatively,
+	// you can include up to 30 specific protected resource ARNs in
+	// ProtectedResourceArns .
 	//
 	// This member is required.
 	RestoreTestingSelection *types.RestoreTestingSelectionForCreate
@@ -81,9 +93,10 @@ type CreateRestoreTestingSelectionOutput struct {
 	// This member is required.
 	RestoreTestingPlanArn *string
 
-	// Unique string that is the name of the restore testing plan. The name cannot be
-	// changed after creation. The name consists of only alphanumeric characters and
-	// underscores. Maximum length is 50.
+	// Unique string that is the name of the restore testing plan.
+	//
+	// The name cannot be changed after creation. The name consists of only
+	// alphanumeric characters and underscores. Maximum length is 50.
 	//
 	// This member is required.
 	RestoreTestingPlanName *string

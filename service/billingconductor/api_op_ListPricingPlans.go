@@ -48,7 +48,7 @@ type ListPricingPlansInput struct {
 
 type ListPricingPlansOutput struct {
 
-	// The billing period for which the described pricing plans are applicable.
+	//  The billing period for which the described pricing plans are applicable.
 	BillingPeriod *string
 
 	// The pagination token that's used on subsequent calls to get pricing plans.

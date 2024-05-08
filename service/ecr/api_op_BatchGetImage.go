@@ -12,8 +12,10 @@ import (
 )
 
 // Gets detailed information for an image. Images are specified with either an
-// imageTag or imageDigest . When an image is pulled, the BatchGetImage API is
-// called once to retrieve the image manifest.
+// imageTag or imageDigest .
+//
+// When an image is pulled, the BatchGetImage API is called once to retrieve the
+// image manifest.
 func (c *Client) BatchGetImage(ctx context.Context, params *BatchGetImageInput, optFns ...func(*Options)) (*BatchGetImageOutput, error) {
 	if params == nil {
 		params = &BatchGetImageInput{}
@@ -42,8 +44,9 @@ type BatchGetImageInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The accepted media types for the request. Valid values:
-	// application/vnd.docker.distribution.manifest.v1+json |
+	// The accepted media types for the request.
+	//
+	// Valid values: application/vnd.docker.distribution.manifest.v1+json |
 	// application/vnd.docker.distribution.manifest.v2+json |
 	// application/vnd.oci.image.manifest.v1+json
 	AcceptedMediaTypes []string

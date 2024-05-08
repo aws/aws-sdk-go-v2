@@ -73,8 +73,8 @@ type DatastoreProperties struct {
 	// Synthea is supported.
 	PreloadDataConfig *PreloadDataConfig
 
-	// The server-side encryption key configuration for a customer provided encryption
-	// key (CMK).
+	//  The server-side encryption key configuration for a customer provided
+	// encryption key (CMK).
 	SseConfiguration *SseConfiguration
 
 	noSmithyDocumentSerde
@@ -157,17 +157,25 @@ type IdentityProviderConfiguration struct {
 
 	// The JSON metadata elements that you want to use in your identity provider
 	// configuration. Required elements are listed based on the launch specification of
-	// the SMART application. For more information on all possible elements, see
-	// Metadata (https://build.fhir.org/ig/HL7/smart-app-launch/conformance.html#metadata)
-	// in SMART's App Launch specification. authorization_endpoint : The URL to the
-	// OAuth2 authorization endpoint. grant_types_supported : An array of grant types
-	// that are supported at the token endpoint. You must provide at least one grant
-	// type option. Valid options are authorization_code and client_credentials .
-	// token_endpoint : The URL to the OAuth2 token endpoint. capabilities : An array
-	// of strings of the SMART capabilities that the authorization server supports.
+	// the SMART application. For more information on all possible elements, see [Metadata]in
+	// SMART's App Launch specification.
+	//
+	// authorization_endpoint : The URL to the OAuth2 authorization endpoint.
+	//
+	// grant_types_supported : An array of grant types that are supported at the token
+	// endpoint. You must provide at least one grant type option. Valid options are
+	// authorization_code and client_credentials .
+	//
+	// token_endpoint : The URL to the OAuth2 token endpoint.
+	//
+	// capabilities : An array of strings of the SMART capabilities that the
+	// authorization server supports.
+	//
 	// code_challenge_methods_supported : An array of strings of supported PKCE code
 	// challenge methods. You must include the S256 method in the array of PKCE code
 	// challenge methods.
+	//
+	// [Metadata]: https://build.fhir.org/ig/HL7/smart-app-launch/conformance.html#metadata
 	Metadata *string
 
 	noSmithyDocumentSerde
@@ -226,7 +234,7 @@ type ImportJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-// The input properties for an import job.
+//	The input properties for an import job.
 //
 // The following types satisfy this interface:
 //
@@ -276,17 +284,19 @@ type JobProgressReport struct {
 	noSmithyDocumentSerde
 }
 
-// The customer-managed-key(CMK) used when creating a data store. If a customer
+//	The customer-managed-key(CMK) used when creating a data store. If a customer
+//
 // owned key is not specified, an AWS owned key will be used for encryption.
 type KmsEncryptionConfig struct {
 
-	// The type of customer-managed-key(CMK) used for encryption. The two types of
+	//  The type of customer-managed-key(CMK) used for encryption. The two types of
 	// supported CMKs are customer owned CMKs and AWS owned CMKs.
 	//
 	// This member is required.
 	CmkType CmkType
 
-	// The KMS encryption key id/alias used to encrypt the data store contents at rest.
+	//  The KMS encryption key id/alias used to encrypt the data store contents at
+	// rest.
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -301,7 +311,9 @@ type OutputDataConfig interface {
 	isOutputDataConfig()
 }
 
-// The output data configuration that was supplied when the export job was created.
+//	The output data configuration that was supplied when the export job was
+//
+// created.
 type OutputDataConfigMemberS3Configuration struct {
 	Value S3Configuration
 
@@ -310,7 +322,8 @@ type OutputDataConfigMemberS3Configuration struct {
 
 func (*OutputDataConfigMemberS3Configuration) isOutputDataConfig() {}
 
-// The input properties for the preloaded data store. Only data preloaded from
+//	The input properties for the preloaded data store. Only data preloaded from
+//
 // Synthea is supported.
 type PreloadDataConfig struct {
 
@@ -322,16 +335,17 @@ type PreloadDataConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration of the S3 bucket for either an import or export job. This
+//	The configuration of the S3 bucket for either an import or export job. This
+//
 // includes assigning permissions for access.
 type S3Configuration struct {
 
-	// The KMS key ID used to access the S3 bucket.
+	//  The KMS key ID used to access the S3 bucket.
 	//
 	// This member is required.
 	KmsKeyId *string
 
-	// The S3Uri is the user specified S3 location of the FHIR data to be imported
+	//  The S3Uri is the user specified S3 location of the FHIR data to be imported
 	// into AWS HealthLake.
 	//
 	// This member is required.
@@ -340,11 +354,12 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
-// The server-side encryption key configuration for a customer provided encryption
-// key.
+//	The server-side encryption key configuration for a customer provided
+//
+// encryption key.
 type SseConfiguration struct {
 
-	// The KMS encryption configuration used to provide details for data encryption.
+	//  The KMS encryption configuration used to provide details for data encryption.
 	//
 	// This member is required.
 	KmsEncryptionConfig *KmsEncryptionConfig
@@ -352,16 +367,17 @@ type SseConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A tag is a label consisting of a user-defined key and value. The form for tags
+//	A tag is a label consisting of a user-defined key and value. The form for tags
+//
 // is {"Key", "Value"}
 type Tag struct {
 
-	// The key portion of a tag. Tag keys are case sensitive.
+	//  The key portion of a tag. Tag keys are case sensitive.
 	//
 	// This member is required.
 	Key *string
 
-	// The value portion of a tag. Tag values are case sensitive.
+	//  The value portion of a tag. Tag values are case sensitive.
 	//
 	// This member is required.
 	Value *string

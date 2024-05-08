@@ -13,28 +13,38 @@ import (
 
 // Adds a user to a channel. The InvitedBy response field is derived from the
 // request header. A channel member can:
+//
 //   - List messages
+//
 //   - Send messages
+//
 //   - Receive messages
+//
 //   - Edit their own messages
+//
 //   - Leave the channel
 //
 // Privacy settings impact this action as follows:
+//
 //   - Public Channels: You do not need to be a member to list messages, but you
 //     must be a member to send messages.
+//
 //   - Private Channels: You must be a member to list or send messages.
 //
 // The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
-// of the user that makes the API call as the value in the header. This API is is
-// no longer supported and will not be updated. We recommend using the latest
-// version, CreateChannelMembership (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelMembership.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// of the user that makes the API call as the value in the header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [CreateChannelMembership], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by CreateChannelMembership in the Amazon Chime SDK
 // Messaging Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [CreateChannelMembership]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelMembership.html
 func (c *Client) CreateChannelMembership(ctx context.Context, params *CreateChannelMembershipInput, optFns ...func(*Options)) (*CreateChannelMembershipOutput, error) {
 	if params == nil {
 		params = &CreateChannelMembershipInput{}

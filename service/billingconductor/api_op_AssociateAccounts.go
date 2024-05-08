@@ -32,12 +32,12 @@ func (c *Client) AssociateAccounts(ctx context.Context, params *AssociateAccount
 
 type AssociateAccountsInput struct {
 
-	// The associating array of account IDs.
+	//  The associating array of account IDs.
 	//
 	// This member is required.
 	AccountIds []string
 
-	// The Amazon Resource Name (ARN) of the billing group that associates the array
+	//  The Amazon Resource Name (ARN) of the billing group that associates the array
 	// of account IDs.
 	//
 	// This member is required.
@@ -48,7 +48,7 @@ type AssociateAccountsInput struct {
 
 type AssociateAccountsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the billing group that associates the array
+	//  The Amazon Resource Name (ARN) of the billing group that associates the array
 	// of account IDs.
 	Arn *string
 

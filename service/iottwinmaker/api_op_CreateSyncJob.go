@@ -36,7 +36,9 @@ type CreateSyncJobInput struct {
 	// This member is required.
 	SyncRole *string
 
-	// The sync source. Currently the only supported syncSoource is SITEWISE .
+	// The sync source.
+	//
+	// Currently the only supported syncSoource is SITEWISE .
 	//
 	// This member is required.
 	SyncSource *string

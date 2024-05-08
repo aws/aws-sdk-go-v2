@@ -36,12 +36,12 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The destination platform type for the deployment ( Lambda , Server , or ECS ).
+	//  The destination platform type for the deployment ( Lambda , Server , or ECS ).
 	ComputePlatform types.ComputePlatform
 
-	// The metadata that you apply to CodeDeploy applications to help you organize and
-	// categorize them. Each tag consists of a key and an optional value, both of which
-	// you define.
+	//  The metadata that you apply to CodeDeploy applications to help you organize
+	// and categorize them. Each tag consists of a key and an optional value, both of
+	// which you define.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

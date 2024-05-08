@@ -31,8 +31,12 @@ func (c *Client) BatchGetAttachedFileMetadata(ctx context.Context, params *Batch
 
 type BatchGetAttachedFileMetadataInput struct {
 
-	// The resource to which the attached file is (being) uploaded to. Cases (https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html)
-	// are the only current supported resource. This value must be a valid ARN.
+	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
+	// current supported resource.
+	//
+	// This value must be a valid ARN.
+	//
+	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
 	//
 	// This member is required.
 	AssociatedResourceArn *string

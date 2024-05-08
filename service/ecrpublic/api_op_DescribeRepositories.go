@@ -45,9 +45,10 @@ type DescribeRepositoriesInput struct {
 	// the value of that parameter. Pagination continues from the end of the previous
 	// results that returned the nextToken value. If there are no more results to
 	// return, this value is null . If you specify repositories with repositoryNames ,
-	// you can't use this option. This token should be treated as an opaque identifier
-	// that is only used to retrieve the next items in a list and not for other
-	// programmatic purposes.
+	// you can't use this option.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The Amazon Web Services account ID that's associated with the registry that

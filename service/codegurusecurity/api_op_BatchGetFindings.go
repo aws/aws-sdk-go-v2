@@ -47,7 +47,7 @@ type BatchGetFindingsOutput struct {
 	// This member is required.
 	FailedFindings []types.BatchGetFindingsError
 
-	// A list of all requested findings.
+	//  A list of all requested findings.
 	//
 	// This member is required.
 	Findings []types.Finding

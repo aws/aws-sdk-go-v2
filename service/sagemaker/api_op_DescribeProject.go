@@ -65,9 +65,9 @@ type DescribeProjectOutput struct {
 	// This member is required.
 	ProjectStatus types.ProjectStatus
 
-	// Information used to provision a service catalog product. For information, see
-	// What is Amazon Web Services Service Catalog (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html)
-	// .
+	// Information used to provision a service catalog product. For information, see [What is Amazon Web Services Service Catalog].
+	//
+	// [What is Amazon Web Services Service Catalog]: https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html
 	//
 	// This member is required.
 	ServiceCatalogProvisioningDetails *types.ServiceCatalogProvisioningDetails

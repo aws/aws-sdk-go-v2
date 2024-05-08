@@ -12,13 +12,18 @@ import (
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
-// applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation . Deletes a reference data source configuration
-// from the specified application configuration. If the application is running,
-// Amazon Kinesis Analytics immediately removes the in-application table that you
-// created using the AddApplicationReferenceDataSource (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
-// operation. This operation requires permissions to perform the
+// applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
+//
+// Deletes a reference data source configuration from the specified application
+// configuration.
+//
+// If the application is running, Amazon Kinesis Analytics immediately removes the
+// in-application table that you created using the [AddApplicationReferenceDataSource]operation.
+//
+// This operation requires permissions to perform the
 // kinesisanalytics.DeleteApplicationReferenceDataSource action.
+//
+// [AddApplicationReferenceDataSource]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html
 func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, params *DeleteApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*DeleteApplicationReferenceDataSourceOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationReferenceDataSourceInput{}
@@ -41,17 +46,21 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Version of the application. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException is returned.
+	// Version of the application. You can use the [DescribeApplication] operation to get the current
+	// application version. If the version specified is not the current version, the
+	// ConcurrentModificationException is returned.
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// ID of the reference data source. When you add a reference data source to your
-	// application using the AddApplicationReferenceDataSource (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
-	// , Amazon Kinesis Analytics assigns an ID. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// application using the [AddApplicationReferenceDataSource], Amazon Kinesis Analytics assigns an ID. You can use the [DescribeApplication]
 	// operation to get the reference ID.
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
+	// [AddApplicationReferenceDataSource]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html
 	//
 	// This member is required.
 	ReferenceId *string

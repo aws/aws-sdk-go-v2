@@ -102,8 +102,9 @@ type GetComponentTypeOutput struct {
 	// Each string in the mapping must be unique to this object.
 	PropertyDefinitions map[string]types.PropertyDefinitionResponse
 
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 25.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 250.
 	PropertyGroups map[string]types.PropertyGroupResponse
 
 	// The current status of the component type.

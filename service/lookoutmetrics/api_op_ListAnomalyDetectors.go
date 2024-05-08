@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the detectors in the current AWS Region. Amazon Lookout for Metrics API
-// actions are eventually consistent. If you do a read operation on a resource
-// immediately after creating or modifying it, use retries to allow time for the
-// write operation to complete.
+// Lists the detectors in the current AWS Region.
+//
+// Amazon Lookout for Metrics API actions are eventually consistent. If you do a
+// read operation on a resource immediately after creating or modifying it, use
+// retries to allow time for the write operation to complete.
 func (c *Client) ListAnomalyDetectors(ctx context.Context, params *ListAnomalyDetectorsInput, optFns ...func(*Options)) (*ListAnomalyDetectorsOutput, error) {
 	if params == nil {
 		params = &ListAnomalyDetectorsInput{}

@@ -23,16 +23,24 @@ type AccountDetails struct {
 
 // Provides details about one of the following actions that affects or that was
 // taken on a resource:
+//
 //   - A remote IP address issued an Amazon Web Services API call
+//
 //   - A DNS request was received
+//
 //   - A remote IP address attempted to connect to an EC2 instance
+//
 //   - A remote IP address attempted a port probe on an EC2 instance
 type Action struct {
 
 	// The type of action that was detected. The possible action types are:
+	//
 	//   - NETWORK_CONNECTION
+	//
 	//   - AWS_API_CALL
+	//
 	//   - DNS_REQUEST
+	//
 	//   - PORT_PROBE
 	ActionType *string
 
@@ -162,34 +170,37 @@ type AdminAccount struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an enabled security standard in which a security control is
+//	Information about an enabled security standard in which a security control is
+//
 // enabled.
 type AssociatedStandard struct {
 
 	// The unique identifier of a standard in which a control is enabled. This field
 	// consists of the resource portion of the Amazon Resource Name (ARN) returned for
-	// a standard in the DescribeStandards (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html)
-	// API response.
+	// a standard in the [DescribeStandards]API response.
+	//
+	// [DescribeStandards]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
 	StandardsId *string
 
 	noSmithyDocumentSerde
 }
 
-// Options for filtering the ListConfigurationPolicyAssociations response. You can
-// filter by the Amazon Resource Name (ARN) or universally unique identifier (UUID)
-// of a configuration policy, AssociationType , or AssociationStatus .
+//	Options for filtering the ListConfigurationPolicyAssociations response. You
+//
+// can filter by the Amazon Resource Name (ARN) or universally unique identifier
+// (UUID) of a configuration policy, AssociationType , or AssociationStatus .
 type AssociationFilters struct {
 
-	// The current status of the association between a target and a configuration
+	//  The current status of the association between a target and a configuration
 	// policy.
 	AssociationStatus ConfigurationPolicyAssociationStatus
 
-	// Indicates whether the association between a target and a configuration was
+	//  Indicates whether the association between a target and a configuration was
 	// directly applied by the Security Hub delegated administrator or inherited from a
 	// parent.
 	AssociationType AssociationType
 
-	// The ARN or UUID of the configuration policy.
+	//  The ARN or UUID of the configuration policy.
 	ConfigurationPolicyId *string
 
 	noSmithyDocumentSerde
@@ -198,51 +209,55 @@ type AssociationFilters struct {
 // The associations between a route table and one or more subnets or a gateway.
 type AssociationSetDetails struct {
 
-	// The state of the association between a route table and a subnet or gateway.
+	//  The state of the association between a route table and a subnet or gateway.
 	AssociationState *AssociationStateDetails
 
-	// The ID of the internet gateway or virtual private gateway.
+	//  The ID of the internet gateway or virtual private gateway.
 	GatewayId *string
 
-	// Indicates whether this is the main route table.
+	//  Indicates whether this is the main route table.
 	Main *bool
 
-	// The ID of the association.
+	//  The ID of the association.
 	RouteTableAssociationId *string
 
-	// The ID of the route table.
+	//  The ID of the route table.
 	RouteTableId *string
 
-	// The ID of the subnet. A subnet ID is not returned for an implicit association.
+	//  The ID of the subnet. A subnet ID is not returned for an implicit association.
 	SubnetId *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes the state of an association between a route table and a subnet or
+//	Describes the state of an association between a route table and a subnet or
+//
 // gateway.
 type AssociationStateDetails struct {
 
-	// The state of the association.
+	//  The state of the association.
 	State *string
 
-	// The status message, if applicable.
+	//  The status message, if applicable.
 	StatusMessage *string
 
 	noSmithyDocumentSerde
 }
 
-// One or more actions to update finding fields if a finding matches the defined
+//	One or more actions to update finding fields if a finding matches the defined
+//
 // criteria of the rule.
 type AutomationRulesAction struct {
 
-	// Specifies that the automation rule action is an update to a finding field.
+	//  Specifies that the automation rule action is an update to a finding field.
 	FindingFieldsUpdate *AutomationRulesFindingFieldsUpdate
 
-	// Specifies that the rule action should update the Types finding field. The Types
+	//  Specifies that the rule action should update the Types finding field. The Types
 	// finding field classifies findings in the format of
-	// namespace/category/classifier. For more information, see Types taxonomy for ASFF (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html)
-	// in the Security Hub User Guide.
+	// namespace/category/classifier. For more information, see [Types taxonomy for ASFF]in the Security Hub
+	// User Guide.
+	//
+	// [Types taxonomy for ASFF]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html
 	Type AutomationRulesActionType
 
 	noSmithyDocumentSerde
@@ -251,35 +266,41 @@ type AutomationRulesAction struct {
 // Defines the configuration of an automation rule.
 type AutomationRulesConfig struct {
 
-	// One or more actions to update finding fields if a finding matches the defined
+	//  One or more actions to update finding fields if a finding matches the defined
 	// criteria of the rule.
 	Actions []AutomationRulesAction
 
-	// A timestamp that indicates when the rule was created. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	//  A timestamp that indicates when the rule was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedAt *time.Time
 
-	// The principal that created a rule.
+	//  The principal that created a rule.
 	CreatedBy *string
 
-	// A set of Amazon Web Services Security Finding Format (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)
-	// finding field attributes and corresponding expected values that Security Hub
-	// uses to filter findings. If a rule is enabled and a finding matches the
-	// conditions specified in this parameter, Security Hub applies the rule action to
-	// the finding.
+	//  A set of [Amazon Web Services Security Finding Format] finding field attributes and corresponding expected values that
+	// Security Hub uses to filter findings. If a rule is enabled and a finding matches
+	// the conditions specified in this parameter, Security Hub applies the rule action
+	// to the finding.
+	//
+	// [Amazon Web Services Security Finding Format]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
 	Criteria *AutomationRulesFindingFilters
 
-	// A description of the rule.
+	//  A description of the rule.
 	Description *string
 
 	// Specifies whether a rule is the last to be applied with respect to a finding
@@ -290,32 +311,37 @@ type AutomationRulesConfig struct {
 	// rule isn't terminal.
 	IsTerminal *bool
 
-	// The Amazon Resource Name (ARN) of a rule.
+	//  The Amazon Resource Name (ARN) of a rule.
 	RuleArn *string
 
-	// The name of the rule.
+	//  The name of the rule.
 	RuleName *string
 
-	// An integer ranging from 1 to 1000 that represents the order in which the rule
+	//  An integer ranging from 1 to 1000 that represents the order in which the rule
 	// action is applied to findings. Security Hub applies rules with lower values for
 	// this parameter first.
 	RuleOrder *int32
 
-	// Whether the rule is active after it is created. If this parameter is equal to
+	//  Whether the rule is active after it is created. If this parameter is equal to
 	// ENABLED , Security Hub starts applying the rule to findings and finding updates
 	// after the rule is created.
 	RuleStatus RuleStatus
 
-	// A timestamp that indicates when the rule was most recently updated. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	//  A timestamp that indicates when the rule was most recently updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	UpdatedAt *time.Time
@@ -323,32 +349,33 @@ type AutomationRulesConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies the finding fields that the automation rule action updates when a
+//	Identifies the finding fields that the automation rule action updates when a
+//
 // finding matches the defined criteria.
 type AutomationRulesFindingFieldsUpdate struct {
 
-	// The rule action updates the Confidence field of a finding.
+	//  The rule action updates the Confidence field of a finding.
 	Confidence *int32
 
-	// The rule action updates the Criticality field of a finding.
+	//  The rule action updates the Criticality field of a finding.
 	Criticality *int32
 
 	// The updated note.
 	Note *NoteUpdate
 
-	// The rule action updates the RelatedFindings field of a finding.
+	//  The rule action updates the RelatedFindings field of a finding.
 	RelatedFindings []RelatedFinding
 
 	// Updates to the severity information for a finding.
 	Severity *SeverityUpdate
 
-	// The rule action updates the Types field of a finding.
+	//  The rule action updates the Types field of a finding.
 	Types []string
 
-	// The rule action updates the UserDefinedFields field of a finding.
+	//  The rule action updates the UserDefinedFields field of a finding.
 	UserDefinedFields map[string]string
 
-	// The rule action updates the VerificationState field of a finding.
+	//  The rule action updates the VerificationState field of a finding.
 	VerificationState VerificationState
 
 	// Used to update information about the investigation into the finding.
@@ -360,34 +387,41 @@ type AutomationRulesFindingFieldsUpdate struct {
 // The criteria that determine which findings a rule applies to.
 type AutomationRulesFindingFilters struct {
 
-	// The Amazon Web Services account ID in which a finding was generated. Array
-	// Members: Minimum number of 1 item. Maximum number of 100 items.
+	// The Amazon Web Services account ID in which a finding was generated.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
 	AwsAccountId []StringFilter
 
 	// The name of the Amazon Web Services account in which a finding was generated.
+	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	AwsAccountName []StringFilter
 
-	// The name of the company for the product that generated the finding. For
-	// control-based findings, the company is Amazon Web Services. Array Members:
-	// Minimum number of 1 item. Maximum number of 20 items.
+	//  The name of the company for the product that generated the finding. For
+	// control-based findings, the company is Amazon Web Services.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	CompanyName []StringFilter
 
 	// The unique identifier of a standard in which a control is enabled. This field
 	// consists of the resource portion of the Amazon Resource Name (ARN) returned for
-	// a standard in the DescribeStandards (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html)
-	// API response. Array Members: Minimum number of 1 item. Maximum number of 20
-	// items.
+	// a standard in the [DescribeStandards]API response.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	//
+	// [DescribeStandards]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
 	ComplianceAssociatedStandardsId []StringFilter
 
-	// The security control ID for which a finding was generated. Security control IDs
-	// are the same across standards. Array Members: Minimum number of 1 item. Maximum
-	// number of 20 items.
+	//  The security control ID for which a finding was generated. Security control
+	// IDs are the same across standards.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	ComplianceSecurityControlId []StringFilter
 
-	// The result of a security check. This field is only used for findings generated
-	// from controls. Array Members: Minimum number of 1 item. Maximum number of 20
-	// items.
+	//  The result of a security check. This field is only used for findings generated
+	// from controls.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	ComplianceStatus []StringFilter
 
 	// The likelihood that a finding accurately identifies the behavior or issue that
@@ -395,234 +429,304 @@ type AutomationRulesFindingFilters struct {
 	// ratio scale. A value of 0 means 0 percent confidence, and a value of 100 means
 	// 100 percent confidence. For example, a data exfiltration detection based on a
 	// statistical deviation of network traffic has low confidence because an actual
-	// exfiltration hasn't been verified. For more information, see Confidence (https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence)
-	// in the Security Hub User Guide. Array Members: Minimum number of 1 item. Maximum
-	// number of 20 items.
+	// exfiltration hasn't been verified. For more information, see [Confidence]in the Security
+	// Hub User Guide.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	//
+	// [Confidence]: https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence
 	Confidence []NumberFilter
 
-	// A timestamp that indicates when this finding record was created. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
-	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
-	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
-	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
-	//   2024-01-04T15:25:10.123456789+17:59 )
-	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-	CreatedAt []DateFilter
-
-	// The level of importance that is assigned to the resources that are associated
-	// with a finding. Criticality is scored on a 0–100 basis, using a ratio scale
-	// that supports only full integers. A score of 0 means that the underlying
-	// resources have no criticality, and a score of 100 is reserved for the most
-	// critical resources. For more information, see Criticality (https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality)
-	// in the Security Hub User Guide. Array Members: Minimum number of 1 item. Maximum
-	// number of 20 items.
-	Criticality []NumberFilter
-
-	// A finding's description. Array Members: Minimum number of 1 item. Maximum
-	// number of 20 items.
-	Description []StringFilter
-
-	// A timestamp that indicates when the potential security issue captured by a
-	// finding was first observed by the security findings product. This field accepts
-	// only the specified formats. Timestamps can end with Z or ("+" / "-") time-hour
-	// [":" time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
-	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
-	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
-	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
-	//   2024-01-04T15:25:10.123456789+17:59 )
-	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-	FirstObservedAt []DateFilter
-
-	// The identifier for the solution-specific component that generated a finding.
-	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
-	GeneratorId []StringFilter
-
-	// The product-specific identifier for a finding. Array Members: Minimum number of
-	// 1 item. Maximum number of 20 items.
-	Id []StringFilter
-
-	// A timestamp that indicates when the potential security issue captured by a
-	// finding was most recently observed by the security findings product. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
-	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
-	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
-	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
-	//   2024-01-04T15:25:10.123456789+17:59 )
-	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-	LastObservedAt []DateFilter
-
-	// The text of a user-defined note that's added to a finding. Array Members:
-	// Minimum number of 1 item. Maximum number of 20 items.
-	NoteText []StringFilter
-
-	// The timestamp of when the note was updated. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
-	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
-	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
-	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
-	//   2024-01-04T15:25:10.123456789+17:59 )
-	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-	NoteUpdatedAt []DateFilter
-
-	// The principal that created a note. Array Members: Minimum number of 1 item.
-	// Maximum number of 20 items.
-	NoteUpdatedBy []StringFilter
-
-	// The Amazon Resource Name (ARN) for a third-party product that generated a
-	// finding in Security Hub. Array Members: Minimum number of 1 item. Maximum number
-	// of 20 items.
-	ProductArn []StringFilter
-
-	// Provides the name of the product that generated the finding. For control-based
-	// findings, the product name is Security Hub. Array Members: Minimum number of 1
-	// item. Maximum number of 20 items.
-	ProductName []StringFilter
-
-	// Provides the current state of a finding. Array Members: Minimum number of 1
-	// item. Maximum number of 20 items.
-	RecordState []StringFilter
-
-	// The product-generated identifier for a related finding. Array Members: Minimum
-	// number of 1 item. Maximum number of 20 items.
-	RelatedFindingsId []StringFilter
-
-	// The ARN for the product that generated a related finding. Array Members:
-	// Minimum number of 1 item. Maximum number of 20 items.
-	RelatedFindingsProductArn []StringFilter
-
-	// The Amazon Resource Name (ARN) of the application that is related to a finding.
-	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-	ResourceApplicationArn []StringFilter
-
-	// The name of the application that is related to a finding. Array Members:
-	// Minimum number of 1 item. Maximum number of 20 items.
-	ResourceApplicationName []StringFilter
-
-	// Custom fields and values about the resource that a finding pertains to. Array
-	// Members: Minimum number of 1 item. Maximum number of 20 items.
-	ResourceDetailsOther []MapFilter
-
-	// The identifier for the given resource type. For Amazon Web Services resources
-	// that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon
-	// Web Services resources that lack ARNs, this is the identifier as defined by the
-	// Amazon Web Service that created the resource. For non-Amazon Web Services
-	// resources, this is a unique identifier that is associated with the resource.
-	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
-	ResourceId []StringFilter
-
-	// The partition in which the resource that the finding pertains to is located. A
-	// partition is a group of Amazon Web Services Regions. Each Amazon Web Services
-	// account is scoped to one partition. Array Members: Minimum number of 1 item.
-	// Maximum number of 20 items.
-	ResourcePartition []StringFilter
-
-	// The Amazon Web Services Region where the resource that a finding pertains to is
-	// located. Array Members: Minimum number of 1 item. Maximum number of 20 items.
-	ResourceRegion []StringFilter
-
-	// A list of Amazon Web Services tags associated with a resource at the time the
-	// finding was processed. Array Members: Minimum number of 1 item. Maximum number
-	// of 20 items.
-	ResourceTags []MapFilter
-
-	// The type of resource that the finding pertains to. Array Members: Minimum
-	// number of 1 item. Maximum number of 20 items.
-	ResourceType []StringFilter
-
-	// The severity value of the finding. Array Members: Minimum number of 1 item.
-	// Maximum number of 20 items.
-	SeverityLabel []StringFilter
-
-	// Provides a URL that links to a page about the current finding in the finding
-	// product. Array Members: Minimum number of 1 item. Maximum number of 20 items.
-	SourceUrl []StringFilter
-
-	// A finding's title. Array Members: Minimum number of 1 item. Maximum number of
-	// 100 items.
-	Title []StringFilter
-
-	// One or more finding types in the format of namespace/category/classifier that
-	// classify a finding. For a list of namespaces, classifiers, and categories, see
-	// Types taxonomy for ASFF (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html)
-	// in the Security Hub User Guide. Array Members: Minimum number of 1 item. Maximum
-	// number of 20 items.
-	Type []StringFilter
-
-	// A timestamp that indicates when the finding record was most recently updated.
+	//  A timestamp that indicates when this finding record was created.
+	//
 	// This field accepts only the specified formats. Timestamps can end with Z or
 	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
 	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
 	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	CreatedAt []DateFilter
+
+	//  The level of importance that is assigned to the resources that are associated
+	// with a finding. Criticality is scored on a 0–100 basis, using a ratio scale
+	// that supports only full integers. A score of 0 means that the underlying
+	// resources have no criticality, and a score of 100 is reserved for the most
+	// critical resources. For more information, see [Criticality]in the Security Hub User Guide.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	//
+	// [Criticality]: https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality
+	Criticality []NumberFilter
+
+	//  A finding's description.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	Description []StringFilter
+
+	//  A timestamp that indicates when the potential security issue captured by a
+	// finding was first observed by the security findings product.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
+	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
+	//   2024-01-04T15:25:10.123456789+17:59 )
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	FirstObservedAt []DateFilter
+
+	//  The identifier for the solution-specific component that generated a finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
+	GeneratorId []StringFilter
+
+	//  The product-specific identifier for a finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	Id []StringFilter
+
+	//  A timestamp that indicates when the potential security issue captured by a
+	// finding was most recently observed by the security findings product.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
+	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
+	//   2024-01-04T15:25:10.123456789+17:59 )
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	LastObservedAt []DateFilter
+
+	//  The text of a user-defined note that's added to a finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	NoteText []StringFilter
+
+	//  The timestamp of when the note was updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
+	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
+	//   2024-01-04T15:25:10.123456789+17:59 )
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	NoteUpdatedAt []DateFilter
+
+	//  The principal that created a note.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	NoteUpdatedBy []StringFilter
+
+	//  The Amazon Resource Name (ARN) for a third-party product that generated a
+	// finding in Security Hub.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ProductArn []StringFilter
+
+	//  Provides the name of the product that generated the finding. For control-based
+	// findings, the product name is Security Hub.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ProductName []StringFilter
+
+	//  Provides the current state of a finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	RecordState []StringFilter
+
+	//  The product-generated identifier for a related finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	RelatedFindingsId []StringFilter
+
+	//  The ARN for the product that generated a related finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	RelatedFindingsProductArn []StringFilter
+
+	//  The Amazon Resource Name (ARN) of the application that is related to a
+	// finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ResourceApplicationArn []StringFilter
+
+	//  The name of the application that is related to a finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ResourceApplicationName []StringFilter
+
+	//  Custom fields and values about the resource that a finding pertains to.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ResourceDetailsOther []MapFilter
+
+	//  The identifier for the given resource type. For Amazon Web Services resources
+	// that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon
+	// Web Services resources that lack ARNs, this is the identifier as defined by the
+	// Amazon Web Service that created the resource. For non-Amazon Web Services
+	// resources, this is a unique identifier that is associated with the resource.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
+	ResourceId []StringFilter
+
+	//  The partition in which the resource that the finding pertains to is located. A
+	// partition is a group of Amazon Web Services Regions. Each Amazon Web Services
+	// account is scoped to one partition.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ResourcePartition []StringFilter
+
+	//  The Amazon Web Services Region where the resource that a finding pertains to
+	// is located.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ResourceRegion []StringFilter
+
+	//  A list of Amazon Web Services tags associated with a resource at the time the
+	// finding was processed.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ResourceTags []MapFilter
+
+	//  The type of resource that the finding pertains to.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	ResourceType []StringFilter
+
+	//  The severity value of the finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	SeverityLabel []StringFilter
+
+	//  Provides a URL that links to a page about the current finding in the finding
+	// product.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	SourceUrl []StringFilter
+
+	//  A finding's title.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 100 items.
+	Title []StringFilter
+
+	//  One or more finding types in the format of namespace/category/classifier that
+	// classify a finding. For a list of namespaces, classifiers, and categories, see [Types taxonomy for ASFF]
+	// in the Security Hub User Guide.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
+	//
+	// [Types taxonomy for ASFF]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html
+	Type []StringFilter
+
+	//  A timestamp that indicates when the finding record was most recently updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
+	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
+	//   2024-01-04T15:25:10.123456789+17:59 )
+	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	UpdatedAt []DateFilter
 
-	// A list of user-defined name and value string pairs added to a finding. Array
-	// Members: Minimum number of 1 item. Maximum number of 20 items.
+	//  A list of user-defined name and value string pairs added to a finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	UserDefinedFields []MapFilter
 
-	// Provides the veracity of a finding. Array Members: Minimum number of 1 item.
-	// Maximum number of 20 items.
+	//  Provides the veracity of a finding.
+	//
+	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	VerificationState []StringFilter
 
-	// Provides information about the status of the investigation into a finding.
+	//  Provides information about the status of the investigation into a finding.
+	//
 	// Array Members: Minimum number of 1 item. Maximum number of 20 items.
 	WorkflowStatus []StringFilter
 
 	noSmithyDocumentSerde
 }
 
-// Metadata for automation rules in the calling account. The response includes
+//	Metadata for automation rules in the calling account. The response includes
+//
 // rules with a RuleStatus of ENABLED and DISABLED .
 type AutomationRulesMetadata struct {
 
-	// A timestamp that indicates when the rule was created. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	//  A timestamp that indicates when the rule was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedAt *time.Time
 
-	// The principal that created a rule.
+	//  The principal that created a rule.
 	CreatedBy *string
 
-	// A description of the rule.
+	//  A description of the rule.
 	Description *string
 
 	// Specifies whether a rule is the last to be applied with respect to a finding
@@ -633,10 +737,10 @@ type AutomationRulesMetadata struct {
 	// rule isn't terminal.
 	IsTerminal *bool
 
-	// The Amazon Resource Name (ARN) for the rule.
+	//  The Amazon Resource Name (ARN) for the rule.
 	RuleArn *string
 
-	// The name of the rule.
+	//  The name of the rule.
 	RuleName *string
 
 	// An integer ranging from 1 to 1000 that represents the order in which the rule
@@ -644,23 +748,29 @@ type AutomationRulesMetadata struct {
 	// this parameter first.
 	RuleOrder *int32
 
-	// Whether the rule is active after it is created. If this parameter is equal to
+	//  Whether the rule is active after it is created. If this parameter is equal to
 	// ENABLED , Security Hub starts applying the rule to findings and finding updates
 	// after the rule is created. To change the value of this parameter after creating
-	// a rule, use BatchUpdateAutomationRules (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html)
-	// .
+	// a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
+	//
+	// [BatchUpdateAutomationRules]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
 	RuleStatus RuleStatus
 
-	// A timestamp that indicates when the rule was most recently updated. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	//  A timestamp that indicates when the rule was most recently updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	UpdatedAt *time.Time
@@ -680,71 +790,72 @@ type AvailabilityZone struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Amazon MQ message broker. A message broker allows
+//	Provides details about an Amazon MQ message broker. A message broker allows
+//
 // software applications and components to communicate using various programming
 // languages, operating systems, and formal messaging protocols.
 type AwsAmazonMqBrokerDetails struct {
 
-	// The authentication strategy used to secure the broker. The default is SIMPLE .
+	//  The authentication strategy used to secure the broker. The default is SIMPLE .
 	AuthenticationStrategy *string
 
-	// Whether automatically upgrade new minor versions for brokers, as new versions
+	//  Whether automatically upgrade new minor versions for brokers, as new versions
 	// are released and supported by Amazon MQ. Automatic upgrades occur during the
 	// scheduled maintenance window of the broker or after a manual broker reboot.
 	AutoMinorVersionUpgrade *bool
 
-	// The Amazon Resource Name (ARN) of the broker.
+	//  The Amazon Resource Name (ARN) of the broker.
 	BrokerArn *string
 
-	// The unique ID that Amazon MQ generates for the broker.
+	//  The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string
 
 	// The broker's name.
 	BrokerName *string
 
-	// The broker's deployment mode.
+	//  The broker's deployment mode.
 	DeploymentMode *string
 
-	// Encryption options for the broker. Doesn’t apply to RabbitMQ brokers.
+	//  Encryption options for the broker. Doesn’t apply to RabbitMQ brokers.
 	EncryptionOptions *AwsAmazonMqBrokerEncryptionOptionsDetails
 
-	// The type of broker engine.
+	//  The type of broker engine.
 	EngineType *string
 
-	// The version of the broker engine.
+	//  The version of the broker engine.
 	EngineVersion *string
 
-	// The broker's instance type.
+	//  The broker's instance type.
 	HostInstanceType *string
 
-	// The metadata of the Lightweight Directory Access Protocol (LDAP) server used to
-	// authenticate and authorize connections to the broker. This is an optional
+	//  The metadata of the Lightweight Directory Access Protocol (LDAP) server used
+	// to authenticate and authorize connections to the broker. This is an optional
 	// failover server.
 	LdapServerMetadata *AwsAmazonMqBrokerLdapServerMetadataDetails
 
-	// Turns on Amazon CloudWatch logging for brokers.
+	//  Turns on Amazon CloudWatch logging for brokers.
 	Logs *AwsAmazonMqBrokerLogsDetails
 
-	// The scheduled time period (UTC) during which Amazon MQ begins to apply pending
+	//  The scheduled time period (UTC) during which Amazon MQ begins to apply pending
 	// updates or patches to the broker.
 	MaintenanceWindowStartTime *AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails
 
-	// Permits connections from applications outside of the VPC that hosts the
+	//  Permits connections from applications outside of the VPC that hosts the
 	// broker's subnets.
 	PubliclyAccessible *bool
 
-	// The list of rules (one minimum, 125 maximum) that authorize connections to
+	//  The list of rules (one minimum, 125 maximum) that authorize connections to
 	// brokers.
 	SecurityGroups []string
 
-	// The broker's storage type.
+	//  The broker's storage type.
 	StorageType *string
 
-	// The list of groups that define which subnets and IP ranges the broker can use
+	//  The list of groups that define which subnets and IP ranges the broker can use
 	// from different Availability Zones.
 	SubnetIds []string
 
-	// The list of all broker usernames for the specified broker. Doesn't apply to
+	//  The list of all broker usernames for the specified broker. Doesn't apply to
 	// RabbitMQ brokers.
 	Users []AwsAmazonMqBrokerUsersDetails
 
@@ -754,57 +865,58 @@ type AwsAmazonMqBrokerDetails struct {
 // Provides details about broker encryption options.
 type AwsAmazonMqBrokerEncryptionOptionsDetails struct {
 
-	// The KMS key that’s used to encrypt your data at rest. If not provided, Amazon
+	//  The KMS key that’s used to encrypt your data at rest. If not provided, Amazon
 	// MQ will use a default KMS key to encrypt your data.
 	KmsKeyId *string
 
-	// Specifies that an KMS key should be used for at-rest encryption. Set to true by
-	// default if no value is provided (for example, for RabbitMQ brokers).
+	//  Specifies that an KMS key should be used for at-rest encryption. Set to true
+	// by default if no value is provided (for example, for RabbitMQ brokers).
 	UseAwsOwnedKey *bool
 
 	noSmithyDocumentSerde
 }
 
-// The metadata of the Lightweight Directory Access Protocol (LDAP) server used to
-// authenticate and authorize connections to the broker. This is an optional
+//	The metadata of the Lightweight Directory Access Protocol (LDAP) server used
+//
+// to authenticate and authorize connections to the broker. This is an optional
 // failover server.
 type AwsAmazonMqBrokerLdapServerMetadataDetails struct {
 
-	// Specifies the location of the LDAP server, such as Amazon Web Services
+	//  Specifies the location of the LDAP server, such as Amazon Web Services
 	// Directory Service for Microsoft Active Directory.
 	Hosts []string
 
-	// The distinguished name of the node in the directory information tree (DIT) to
+	//  The distinguished name of the node in the directory information tree (DIT) to
 	// search for roles or groups.
 	RoleBase *string
 
-	// The group name attribute in a role entry whose value is the name of that role.
+	//  The group name attribute in a role entry whose value is the name of that role.
 	RoleName *string
 
-	// The LDAP search filter used to find roles within the roleBase .
+	//  The LDAP search filter used to find roles within the roleBase .
 	RoleSearchMatching *string
 
-	// The directory search scope for the role. If set to true , the scope is to search
-	// the entire subtree.
+	//  The directory search scope for the role. If set to true , the scope is to
+	// search the entire subtree.
 	RoleSearchSubtree *bool
 
-	// A username for the service account, which is an account in your LDAP server
+	//  A username for the service account, which is an account in your LDAP server
 	// that has access to initiate a connection.
 	ServiceAccountUsername *string
 
-	// Selects a particular subtree of the directory information tree (DIT) to search
+	//  Selects a particular subtree of the directory information tree (DIT) to search
 	// for user entries.
 	UserBase *string
 
-	// The name of the LDAP attribute in the user's directory entry for the user's
+	//  The name of the LDAP attribute in the user's directory entry for the user's
 	// group membership.
 	UserRoleName *string
 
-	// The LDAP search filter used to find users within the userBase .
+	//  The LDAP search filter used to find users within the userBase .
 	UserSearchMatching *string
 
-	// The directory search scope for the user. If set to true, the scope is to search
-	// the entire subtree.
+	//  The directory search scope for the user. If set to true, the scope is to
+	// search the entire subtree.
 	UserSearchSubtree *bool
 
 	noSmithyDocumentSerde
@@ -813,20 +925,20 @@ type AwsAmazonMqBrokerLdapServerMetadataDetails struct {
 // Provides information about logs to be activated for the specified broker.
 type AwsAmazonMqBrokerLogsDetails struct {
 
-	// Activates audit logging. Every user management action made using JMX or the
+	//  Activates audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ brokers.
 	Audit *bool
 
-	// The location of the CloudWatch Logs log group where audit logs are sent.
+	//  The location of the CloudWatch Logs log group where audit logs are sent.
 	AuditLogGroup *string
 
-	// Activates general logging.
+	//  Activates general logging.
 	General *bool
 
-	// The location of the CloudWatch Logs log group where general logs are sent.
+	//  The location of the CloudWatch Logs log group where general logs are sent.
 	GeneralLogGroup *string
 
-	// The list of information about logs that are to be turned on for the specified
+	//  The list of information about logs that are to be turned on for the specified
 	// broker.
 	Pending *AwsAmazonMqBrokerLogsPendingDetails
 
@@ -836,41 +948,43 @@ type AwsAmazonMqBrokerLogsDetails struct {
 // Provides information about logs to be activated for the specified broker.
 type AwsAmazonMqBrokerLogsPendingDetails struct {
 
-	// Activates audit logging. Every user management action made using JMX or the
+	//  Activates audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ brokers.
 	Audit *bool
 
-	// Activates general logging.
+	//  Activates general logging.
 	General *bool
 
 	noSmithyDocumentSerde
 }
 
-// The scheduled time period (UTC) during which Amazon MQ begins to apply pending
+//	The scheduled time period (UTC) during which Amazon MQ begins to apply pending
+//
 // updates or patches to the broker.
 type AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails struct {
 
-	// The day of the week on which the maintenance window falls.
+	//  The day of the week on which the maintenance window falls.
 	DayOfWeek *string
 
-	// The time, in 24-hour format, on which the maintenance window falls.
+	//  The time, in 24-hour format, on which the maintenance window falls.
 	TimeOfDay *string
 
-	// The time zone in either the Country/City format or the UTC offset format. UTC
+	//  The time zone in either the Country/City format or the UTC offset format. UTC
 	// is the default format.
 	TimeZone *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about the broker usernames for the specified broker. Doesn't
+//	Provides details about the broker usernames for the specified broker. Doesn't
+//
 // apply to RabbitMQ brokers.
 type AwsAmazonMqBrokerUsersDetails struct {
 
-	// The type of change pending for the broker user.
+	//  The type of change pending for the broker user.
 	PendingChange *string
 
-	// The username of the broker user.
+	//  The username of the broker user.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -894,30 +1008,40 @@ type AwsApiCallAction struct {
 	// that the API call originated from.
 	DomainDetails *AwsApiCallActionDomainDetails
 
-	// A timestamp that indicates when the API call was first observed. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// A timestamp that indicates when the API call was first observed.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	FirstSeen *string
 
-	// A timestamp that indicates when the API call was most recently observed. This
-	// field accepts only the specified formats. Timestamps can end with Z or ("+" /
-	// "-") time-hour [":" time-minute] . The time-secfrac after seconds is limited to
-	// a maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid
-	// timestamp formats with examples:
+	// A timestamp that indicates when the API call was most recently observed.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastSeen *string
@@ -965,9 +1089,10 @@ type AwsApiGatewayCanarySettings struct {
 	PercentTraffic *float64
 
 	// Stage variables that are overridden in the canary release deployment. The
-	// variables include new stage variables that are introduced in the canary. Each
-	// variable is represented as a string-to-string map between the stage variable
-	// name and the variable value.
+	// variables include new stage variables that are introduced in the canary.
+	//
+	// Each variable is represented as a string-to-string map between the stage
+	// variable name and the variable value.
 	StageVariableOverrides map[string]string
 
 	// Indicates whether the canary deployment uses the stage cache.
@@ -979,9 +1104,10 @@ type AwsApiGatewayCanarySettings struct {
 // Contains information about the endpoints for the API.
 type AwsApiGatewayEndpointConfiguration struct {
 
-	// A list of endpoint types for the REST API. For an edge-optimized API, the
-	// endpoint type is EDGE . For a Regional API, the endpoint type is REGIONAL . For
-	// a private API, the endpoint type is PRIVATE .
+	// A list of endpoint types for the REST API.
+	//
+	// For an edge-optimized API, the endpoint type is EDGE . For a Regional API, the
+	// endpoint type is REGIONAL . For a private API, the endpoint type is PRIVATE .
 	Types []string
 
 	noSmithyDocumentSerde
@@ -1010,10 +1136,14 @@ type AwsApiGatewayMethodSettings struct {
 	HttpMethod *string
 
 	// The logging level for this method. The logging level affects the log entries
-	// that are pushed to CloudWatch Logs. If the logging level is ERROR , then the
-	// logs only include error-level entries. If the logging level is INFO , then the
-	// logs include both ERROR events and extra informational events. Valid values: OFF
-	// | ERROR | INFO
+	// that are pushed to CloudWatch Logs.
+	//
+	// If the logging level is ERROR , then the logs only include error-level entries.
+	//
+	// If the logging level is INFO , then the logs include both ERROR events and
+	// extra informational events.
+	//
+	// Valid values: OFF | ERROR | INFO
 	LoggingLevel *string
 
 	// Indicates whether CloudWatch metrics are enabled for the method.
@@ -1023,10 +1153,13 @@ type AwsApiGatewayMethodSettings struct {
 	RequireAuthorizationForCacheControl *bool
 
 	// The resource path for this method. Forward slashes (/) are encoded as ~1 . The
-	// initial slash must include a forward slash. For example, the path value
-	// /resource/subresource must be encoded as /~1resource~1subresource . To specify
-	// the root path, use only a slash (/). You can use an asterisk (*) as a wildcard
-	// to apply method settings to multiple methods.
+	// initial slash must include a forward slash.
+	//
+	// For example, the path value /resource/subresource must be encoded as
+	// /~1resource~1subresource .
+	//
+	// To specify the root path, use only a slash (/). You can use an asterisk (*) as
+	// a wildcard to apply method settings to multiple methods.
 	ResourcePath *string
 
 	// The throttling burst limit for the method.
@@ -1035,8 +1168,9 @@ type AwsApiGatewayMethodSettings struct {
 	// The throttling rate limit for the method.
 	ThrottlingRateLimit *float64
 
-	// Indicates how to handle unauthorized requests for cache invalidation. Valid
-	// values: FAIL_WITH_403 | SUCCEED_WITH_RESPONSE_HEADER |
+	// Indicates how to handle unauthorized requests for cache invalidation.
+	//
+	// Valid values: FAIL_WITH_403 | SUCCEED_WITH_RESPONSE_HEADER |
 	// SUCCEED_WITHOUT_RESPONSE_HEADER
 	UnauthorizedCacheControlHeaderStrategy *string
 
@@ -1047,23 +1181,32 @@ type AwsApiGatewayMethodSettings struct {
 type AwsApiGatewayRestApiDetails struct {
 
 	// The source of the API key for metering requests according to a usage plan.
+	//
 	// HEADER indicates whether to read the API key from the X-API-Key header of a
-	// request. AUTHORIZER indicates whether to read the API key from the
-	// UsageIdentifierKey from a custom authorizer.
+	// request.
+	//
+	// AUTHORIZER indicates whether to read the API key from the UsageIdentifierKey
+	// from a custom authorizer.
 	ApiKeySource *string
 
 	// The list of binary media types supported by the REST API.
 	BinaryMediaTypes []string
 
-	// Indicates when the API was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the API was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedDate *string
@@ -1077,8 +1220,11 @@ type AwsApiGatewayRestApiDetails struct {
 	// The identifier of the REST API.
 	Id *string
 
-	// The minimum size in bytes of a payload before compression is enabled. If null ,
-	// then compression is disabled. If 0, then all payloads are compressed.
+	// The minimum size in bytes of a payload before compression is enabled.
+	//
+	// If null , then compression is disabled.
+	//
+	// If 0, then all payloads are compressed.
 	MinimumCompressionSize *int32
 
 	// The name of the REST API.
@@ -1111,15 +1257,21 @@ type AwsApiGatewayStageDetails struct {
 	// The identifier of the client certificate for the stage.
 	ClientCertificateId *string
 
-	// Indicates when the stage was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the stage was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedDate *string
@@ -1133,16 +1285,21 @@ type AwsApiGatewayStageDetails struct {
 	// The version of the API documentation that is associated with the stage.
 	DocumentationVersion *string
 
-	// Indicates when the stage was most recently updated. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the stage was most recently updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastUpdatedDate *string
@@ -1156,11 +1313,16 @@ type AwsApiGatewayStageDetails struct {
 	// Indicates whether active tracing with X-Ray is enabled for the stage.
 	TracingEnabled *bool
 
-	// A map that defines the stage variables for the stage. Variable names can have
-	// alphanumeric and underscore characters. Variable values can contain the
-	// following characters:
+	// A map that defines the stage variables for the stage.
+	//
+	// Variable names can have alphanumeric and underscore characters.
+	//
+	// Variable values can contain the following characters:
+	//
 	//   - Uppercase and lowercase letters
+	//
 	//   - Numbers
+	//
 	//   - Special characters -._~:/?#&=,
 	Variables map[string]string
 
@@ -1173,9 +1335,12 @@ type AwsApiGatewayStageDetails struct {
 // Contains information about a version 2 API in Amazon API Gateway.
 type AwsApiGatewayV2ApiDetails struct {
 
-	// The URI of the API. Uses the format  .execute-api..amazonaws.com The stage name
-	// is typically appended to the URI to form a complete path to a deployed API
-	// stage.
+	// The URI of the API.
+	//
+	// Uses the format  .execute-api..amazonaws.com
+	//
+	// The stage name is typically appended to the URI to form a complete path to a
+	// deployed API stage.
 	ApiEndpoint *string
 
 	// The identifier of the API.
@@ -1188,15 +1353,21 @@ type AwsApiGatewayV2ApiDetails struct {
 	// APIs.
 	CorsConfiguration *AwsCorsConfiguration
 
-	// Indicates when the API was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the API was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedDate *string
@@ -1207,12 +1378,17 @@ type AwsApiGatewayV2ApiDetails struct {
 	// The name of the API.
 	Name *string
 
-	// The API protocol for the API. Valid values: WEBSOCKET | HTTP
+	// The API protocol for the API.
+	//
+	// Valid values: WEBSOCKET | HTTP
 	ProtocolType *string
 
-	// The route selection expression for the API. For HTTP APIs, must be
-	// ${request.method} ${request.path} . This is the default value for HTTP APIs. For
-	// WebSocket APIs, there is no default value.
+	// The route selection expression for the API.
+	//
+	// For HTTP APIs, must be ${request.method} ${request.path} . This is the default
+	// value for HTTP APIs.
+	//
+	// For WebSocket APIs, there is no default value.
 	RouteSelectionExpression *string
 
 	// The version identifier for the API.
@@ -1233,9 +1409,13 @@ type AwsApiGatewayV2RouteSettings struct {
 	DetailedMetricsEnabled *bool
 
 	// The logging level. The logging level affects the log entries that are pushed to
-	// CloudWatch Logs. Supported only for WebSocket APIs. If the logging level is
-	// ERROR , then the logs only include error-level entries. If the logging level is
-	// INFO , then the logs include both ERROR events and extra informational events.
+	// CloudWatch Logs. Supported only for WebSocket APIs.
+	//
+	// If the logging level is ERROR , then the logs only include error-level entries.
+	//
+	// If the logging level is INFO , then the logs include both ERROR events and
+	// extra informational events.
+	//
 	// Valid values: OFF | ERROR | INFO
 	LoggingLevel *string
 
@@ -1264,15 +1444,21 @@ type AwsApiGatewayV2StageDetails struct {
 	// WebSocket API calls.
 	ClientCertificateId *string
 
-	// Indicates when the stage was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the stage was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedDate *string
@@ -1290,16 +1476,21 @@ type AwsApiGatewayV2StageDetails struct {
 	// automatic deployment enabled.
 	LastDeploymentStatusMessage *string
 
-	// Indicates when the stage was most recently updated. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the stage was most recently updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastUpdatedDate *string
@@ -1310,11 +1501,16 @@ type AwsApiGatewayV2StageDetails struct {
 	// The name of the stage.
 	StageName *string
 
-	// A map that defines the stage variables for the stage. Variable names can have
-	// alphanumeric and underscore characters. Variable values can contain the
-	// following characters:
+	// A map that defines the stage variables for the stage.
+	//
+	// Variable names can have alphanumeric and underscore characters.
+	//
+	// Variable values can contain the following characters:
+	//
 	//   - Uppercase and lowercase letters
+	//
 	//   - Numbers
+	//
 	//   - Special characters -._~:/?#&=,
 	StageVariables map[string]string
 
@@ -1324,37 +1520,38 @@ type AwsApiGatewayV2StageDetails struct {
 // A list of additional authentication providers for the GraphqlApi API.
 type AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails struct {
 
-	// The type of security configuration for your GraphQL API: API key, Identity and
+	//  The type of security configuration for your GraphQL API: API key, Identity and
 	// Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or
 	// Lambda.
 	AuthenticationType *string
 
-	// The configuration for Lambda function authorization.
+	//  The configuration for Lambda function authorization.
 	LambdaAuthorizerConfig *AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails
 
-	// The OpenID Connect configuration.
+	//  The OpenID Connect configuration.
 	OpenIdConnectConfig *AwsAppSyncGraphQlApiOpenIdConnectConfigDetails
 
-	// The Amazon Cognito user pools configuration.
+	//  The Amazon Cognito user pools configuration.
 	UserPoolConfig *AwsAppSyncGraphQlApiUserPoolConfigDetails
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about an AppSync Graph QL API, which lets you query multiple
+//	Provides details about an AppSync Graph QL API, which lets you query multiple
+//
 // databases, microservices, and APIs from a single GraphQL endpoint.
 type AwsAppSyncGraphQlApiDetails struct {
 
-	// A list of additional authentication providers for the GraphQL API.
+	//  A list of additional authentication providers for the GraphQL API.
 	AdditionalAuthenticationProviders []AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails
 
-	// The unique identifier for the API.
+	//  The unique identifier for the API.
 	ApiId *string
 
-	// The Amazon Resource Name (ARN) of the API.
+	//  The Amazon Resource Name (ARN) of the API.
 	Arn *string
 
-	// The type of security configuration for your GraphQL API: API key, Identity and
+	//  The type of security configuration for your GraphQL API: API key, Identity and
 	// Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or
 	// Lambda.
 	AuthenticationType *string
@@ -1362,123 +1559,128 @@ type AwsAppSyncGraphQlApiDetails struct {
 	// The unique identifier for the API.
 	Id *string
 
-	// Specifies the configuration for Lambda function authorization.
+	//  Specifies the configuration for Lambda function authorization.
 	LambdaAuthorizerConfig *AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails
 
-	// The Amazon CloudWatch Logs configuration.
+	//  The Amazon CloudWatch Logs configuration.
 	LogConfig *AwsAppSyncGraphQlApiLogConfigDetails
 
-	// The API name.
+	//  The API name.
 	Name *string
 
-	// Specifies the authorization configuration for using an OpenID Connect compliant
-	// service with an AppSync GraphQL API endpoint.
+	//  Specifies the authorization configuration for using an OpenID Connect
+	// compliant service with an AppSync GraphQL API endpoint.
 	OpenIdConnectConfig *AwsAppSyncGraphQlApiOpenIdConnectConfigDetails
 
-	// The Amazon Cognito user pools configuration.
+	//  The Amazon Cognito user pools configuration.
 	UserPoolConfig *AwsAppSyncGraphQlApiUserPoolConfigDetails
 
-	// The Amazon Resource Name (ARN) of the WAF web access control list (web ACL)
+	//  The Amazon Resource Name (ARN) of the WAF web access control list (web ACL)
 	// associated with this GraphQL API, if one exists.
 	WafWebAclArn *string
 
-	// Indicates whether to use X-Ray tracing for the GraphQL API.
+	//  Indicates whether to use X-Ray tracing for the GraphQL API.
 	XrayEnabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the authorization configuration for using an Lambda function with
+//	Specifies the authorization configuration for using an Lambda function with
+//
 // your AppSync GraphQL API endpoint.
 type AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails struct {
 
-	// The number of seconds a response should be cached for. The default is 5 minutes
-	// (300 seconds).
+	//  The number of seconds a response should be cached for. The default is 5
+	// minutes (300 seconds).
 	AuthorizerResultTtlInSeconds *int32
 
-	// The Amazon Resource Name (ARN) of the Lambda function to be called for
+	//  The Amazon Resource Name (ARN) of the Lambda function to be called for
 	// authorization. This can be a standard Lambda ARN, a version ARN (.../v3), or an
 	// alias ARN.
 	AuthorizerUri *string
 
-	// A regular expression for validation of tokens before the Lambda function is
+	//  A regular expression for validation of tokens before the Lambda function is
 	// called.
 	IdentityValidationExpression *string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the logging configuration when writing GraphQL operations and tracing
-// to Amazon CloudWatch for an AppSync GraphQL API.
+//	Specifies the logging configuration when writing GraphQL operations and
+//
+// tracing to Amazon CloudWatch for an AppSync GraphQL API.
 type AwsAppSyncGraphQlApiLogConfigDetails struct {
 
-	// The Amazon Resource Name (ARN) of the service role that AppSync assumes to
+	//  The Amazon Resource Name (ARN) of the service role that AppSync assumes to
 	// publish to CloudWatch Logs in your account.
 	CloudWatchLogsRoleArn *string
 
-	// Set to TRUE to exclude sections that contain information such as headers,
+	//  Set to TRUE to exclude sections that contain information such as headers,
 	// context, and evaluated mapping templates, regardless of logging level.
 	ExcludeVerboseContent *bool
 
-	// The field logging level.
+	//  The field logging level.
 	FieldLogLevel *string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the authorization configuration for using an OpenID Connect compliant
-// service with your AppSync GraphQL API endpoint.
+//	Specifies the authorization configuration for using an OpenID Connect
+//
+// compliant service with your AppSync GraphQL API endpoint.
 type AwsAppSyncGraphQlApiOpenIdConnectConfigDetails struct {
 
-	// The number of milliseconds that a token is valid after being authenticated.
+	//  The number of milliseconds that a token is valid after being authenticated.
 	AuthTtL *int64
 
-	// The client identifier of the relying party at the OpenID identity provider.
+	//  The client identifier of the relying party at the OpenID identity provider.
 	// This identifier is typically obtained when the relying party is registered with
 	// the OpenID identity provider. You can specify a regular expression so that
 	// AppSync can validate against multiple client identifiers at a time.
 	ClientId *string
 
-	// The number of milliseconds that a token is valid after it's issued to a user.
+	//  The number of milliseconds that a token is valid after it's issued to a user.
 	IatTtL *int64
 
-	// The issuer for the OIDC configuration. The issuer returned by discovery must
+	//  The issuer for the OIDC configuration. The issuer returned by discovery must
 	// exactly match the value of iss in the ID token.
 	Issuer *string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the authorization configuration for using Amazon Cognito user pools
+//	Specifies the authorization configuration for using Amazon Cognito user pools
+//
 // with your AppSync GraphQL API endpoint.
 type AwsAppSyncGraphQlApiUserPoolConfigDetails struct {
 
-	// A regular expression for validating the incoming Amazon Cognito user pools app
+	//  A regular expression for validating the incoming Amazon Cognito user pools app
 	// client ID. If this value isn't set, no filtering is applied.
 	AppIdClientRegex *string
 
-	// The Amazon Web Services Region in which the user pool was created.
+	//  The Amazon Web Services Region in which the user pool was created.
 	AwsRegion *string
 
-	// The action that you want your GraphQL API to take when a request that uses
+	//  The action that you want your GraphQL API to take when a request that uses
 	// Amazon Cognito user pools authentication doesn't match the Amazon Cognito user
 	// pools configuration.
 	DefaultAction *string
 
-	// The user pool ID.
+	//  The user pool ID.
 	UserPoolId *string
 
 	noSmithyDocumentSerde
 }
 
-// The configuration of the workgroup, which includes the location in Amazon
+//	The configuration of the workgroup, which includes the location in Amazon
+//
 // Simple Storage Service (Amazon S3) where query results are stored, the
 // encryption option, if any, used for query results, whether Amazon CloudWatch
 // metrics are enabled for the workgroup, and the limit for the amount of bytes
 // scanned (cutoff) per query, if it is specified.
 type AwsAthenaWorkGroupConfigurationDetails struct {
 
-	// The location in Amazon S3 where query and calculation results are stored and
+	//  The location in Amazon S3 where query and calculation results are stored and
 	// the encryption option, if any, used for query and calculation results. These are
 	// known as client-side settings. If workgroup settings override client-side
 	// settings, then the query uses the workgroup settings.
@@ -1487,31 +1689,33 @@ type AwsAthenaWorkGroupConfigurationDetails struct {
 	noSmithyDocumentSerde
 }
 
-// The location in Amazon Simple Storage Service (Amazon S3) where query and
+//	The location in Amazon Simple Storage Service (Amazon S3) where query and
+//
 // calculation results are stored and the encryption option, if any, used for query
 // and calculation results. These are known as client-side settings. If workgroup
 // settings override client-side settings, then the query uses the workgroup
 // settings.
 type AwsAthenaWorkGroupConfigurationResultConfigurationDetails struct {
 
-	// Specifies the method used to encrypt the user’s data stores in the Athena
+	//  Specifies the method used to encrypt the user’s data stores in the Athena
 	// workgroup.
 	EncryptionConfiguration *AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the method used to encrypt the user’s data stores in the Athena
+//	Specifies the method used to encrypt the user’s data stores in the Athena
+//
 // workgroup.
 type AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDetails struct {
 
-	// Indicates whether Amazon Simple Storage Service (Amazon S3) server-side
+	//  Indicates whether Amazon Simple Storage Service (Amazon S3) server-side
 	// encryption with Amazon S3 managed keys (SSE_S3), server-side encryption with KMS
 	// keys (SSE_KMS), or client-side encryption with KMS customer managed keys
 	// (CSE_KMS) is used.
 	EncryptionOption *string
 
-	// For SSE_KMS and CSE_KMS , this is the KMS key Amazon Resource Name (ARN) or ID.
+	//  For SSE_KMS and CSE_KMS , this is the KMS key Amazon Resource Name (ARN) or ID.
 	KmsKey *string
 
 	noSmithyDocumentSerde
@@ -1520,20 +1724,20 @@ type AwsAthenaWorkGroupConfigurationResultConfigurationEncryptionConfigurationDe
 // Provides information about an Amazon Athena workgroup.
 type AwsAthenaWorkGroupDetails struct {
 
-	// The configuration of the workgroup, which includes the location in Amazon
+	//  The configuration of the workgroup, which includes the location in Amazon
 	// Simple Storage Service (Amazon S3) where query results are stored, the
 	// encryption option, if any, used for query results, whether Amazon CloudWatch
 	// metrics are enabled for the workgroup, and the limit for the amount of bytes
 	// scanned (cutoff) per query, if it is specified.
 	Configuration *AwsAthenaWorkGroupConfigurationDetails
 
-	// The workgroup description.
+	//  The workgroup description.
 	Description *string
 
-	// The workgroup name.
+	//  The workgroup name.
 	Name *string
 
-	// Whether the workgroup is enabled or disabled.
+	//  Whether the workgroup is enabled or disabled.
 	State *string
 
 	noSmithyDocumentSerde
@@ -1557,16 +1761,21 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	// Indicates whether capacity rebalancing is enabled.
 	CapacityRebalance *bool
 
-	// Indicates when the auto scaling group was created. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the auto scaling group was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedTime *string
@@ -1644,8 +1853,11 @@ type AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDeta
 
 	// How to allocate instances across Spot Instance pools. Valid values are as
 	// follows:
+	//
 	//   - lowest-price
+	//
 	//   - capacity-optimized
+	//
 	//   - capacity-optimized-prioritized
 	SpotAllocationStrategy *string
 
@@ -1714,12 +1926,14 @@ type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails struct {
 	Ebs *AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails
 
 	// Whether to suppress the device that is included in the block device mapping of
-	// the Amazon Machine Image (AMI). If NoDevice is true , then you cannot specify
-	// Ebs .>
+	// the Amazon Machine Image (AMI).
+	//
+	// If NoDevice is true , then you cannot specify Ebs .>
 	NoDevice *bool
 
-	// The name of the virtual device (for example, ephemeral0 ). You can provide
-	// either VirtualName or Ebs , but not both.
+	// The name of the virtual device (for example, ephemeral0 ).
+	//
+	// You can provide either VirtualName or Ebs , but not both.
 	VirtualName *string
 
 	noSmithyDocumentSerde
@@ -1736,31 +1950,45 @@ type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails struct {
 	Encrypted *bool
 
 	// The number of input/output (I/O) operations per second (IOPS) to provision for
-	// the volume. Only supported for gp3 or io1 volumes. Required for io1 volumes.
-	// Not used with standard , gp2 , st1 , or sc1 volumes.
+	// the volume.
+	//
+	// Only supported for gp3 or io1 volumes. Required for io1 volumes. Not used with
+	// standard , gp2 , st1 , or sc1 volumes.
 	Iops *int32
 
-	// The snapshot ID of the volume to use. You must specify either VolumeSize or
-	// SnapshotId .
+	// The snapshot ID of the volume to use.
+	//
+	// You must specify either VolumeSize or SnapshotId .
 	SnapshotId *string
 
 	// The volume size, in GiBs. The following are the supported volumes sizes for
 	// each volume type:
+	//
 	//   - gp2 and gp3: 1-16,384
+	//
 	//   - io1: 4-16,384
+	//
 	//   - st1 and sc1: 125-16,384
+	//
 	//   - standard: 1-1,024
+	//
 	// You must specify either SnapshotId or VolumeSize . If you specify both
 	// SnapshotId and VolumeSize , the volume size must be equal or greater than the
 	// size of the snapshot.
 	VolumeSize *int32
 
 	// The volume type. Valid values are as follows:
+	//
 	//   - gp2
+	//
 	//   - gp3
+	//
 	//   - io1
+	//
 	//   - sc1
+	//
 	//   - st1
+	//
 	//   - standard
 	VolumeType *string
 
@@ -1785,16 +2013,21 @@ type AwsAutoScalingLaunchConfigurationDetails struct {
 	// ClassicLinkVPCId .
 	ClassicLinkVpcSecurityGroups []string
 
-	// The creation date and time for the launch configuration. This field accepts
-	// only the specified formats. Timestamps can end with Z or ("+" / "-") time-hour
-	// [":" time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// The creation date and time for the launch configuration.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedTime *string
@@ -1852,8 +2085,9 @@ type AwsAutoScalingLaunchConfigurationDetails struct {
 // Information about the type of monitoring for instances in the group.
 type AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails struct {
 
-	// If set to true , then instances in the group launch with detailed monitoring. If
-	// set to false , then instances in the group launch with basic monitoring.
+	// If set to true , then instances in the group launch with detailed monitoring.
+	//
+	// If set to false , then instances in the group launch with basic monitoring.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -1883,14 +2117,18 @@ type AwsBackupBackupPlanAdvancedBackupSettingsDetails struct {
 	// Specifies the backup option for a selected resource. This option is only
 	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid values
 	// are as follows:
+	//
 	//   - Set to WindowsVSS: enabled to enable the WindowsVSS backup option and create
 	//   a Windows VSS backup.
+	//
 	//   - Set to WindowsVSS: disabled to create a regular backup. The WindowsVSS
 	//   option is not enabled by default.
 	BackupOptions map[string]string
 
 	// The name of a resource type. The only supported resource type is Amazon EC2
-	// instances with Windows VSS. The only valid value is EC2 .
+	// instances with Windows VSS.
+	//
+	// The only valid value is EC2 .
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -1960,9 +2198,10 @@ type AwsBackupBackupPlanRuleCopyActionsDetails struct {
 	// Defines when a protected resource is transitioned to cold storage and when it
 	// expires. Backup transitions and expires backups automatically according to the
 	// lifecycle that you define. If you do not specify a lifecycle, Backup applies the
-	// lifecycle policy of the source backup to the destination backup. Backups
-	// transitioned to cold storage must be stored in cold storage for a minimum of 90
-	// days.
+	// lifecycle policy of the source backup to the destination backup.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days.
 	Lifecycle *AwsBackupBackupPlanLifecycleDetails
 
 	noSmithyDocumentSerde
@@ -1987,9 +2226,10 @@ type AwsBackupBackupPlanRuleDetails struct {
 	// Defines when a protected resource is transitioned to cold storage and when it
 	// expires. Backup transitions and expires backups automatically according to the
 	// lifecycle that you define. If you do not specify a lifecycle, Backup applies the
-	// lifecycle policy of the source backup to the destination backup. Backups
-	// transitioned to cold storage must be stored in cold storage for a minimum of 90
-	// days.
+	// lifecycle policy of the source backup to the destination backup.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days.
 	Lifecycle *AwsBackupBackupPlanLifecycleDetails
 
 	// Uniquely identifies a rule that is used to schedule the backup of a selection
@@ -2050,9 +2290,13 @@ type AwsBackupBackupVaultNotificationsDetails struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the
 	// backup vault. The following events are supported:
+	//
 	//   - BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED
+	//
 	//   - COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED
+	//
 	//   - RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED
+	//
 	//   - S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED
 	BackupVaultEvents []string
 
@@ -2136,7 +2380,8 @@ type AwsBackupRecoveryPointDetails struct {
 	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
 	CreationDate *string
 
-	// The ARN for the server-side encryption key that is used to protect your backups.
+	// The ARN for the server-side encryption key that is used to protect your
+	// backups.
 	EncryptionKeyArn *string
 
 	// Specifies the IAM role ARN used to create the target recovery point
@@ -2174,9 +2419,13 @@ type AwsBackupRecoveryPointDetails struct {
 
 	// A status code specifying the state of the recovery point. Valid values are as
 	// follows:
+	//
 	//   - COMPLETED
+	//
 	//   - DELETING
+	//
 	//   - EXPIRED
+	//
 	//   - PARTIAL
 	Status *string
 
@@ -2184,8 +2433,11 @@ type AwsBackupRecoveryPointDetails struct {
 	StatusMessage *string
 
 	// Specifies the storage class of the recovery point. Valid values are as follows:
+	//
 	//   - COLD
+	//
 	//   - DELETED
+	//
 	//   - WARM
 	StorageClass *string
 
@@ -2214,16 +2466,21 @@ type AwsCertificateManagerCertificateDetails struct {
 	// the certificate.
 	CertificateAuthorityArn *string
 
-	// Indicates when the certificate was requested. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the certificate was requested.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedAt *string
@@ -2233,8 +2490,9 @@ type AwsCertificateManagerCertificateDetails struct {
 	DomainName *string
 
 	// Contains information about the initial validation of each domain name that
-	// occurs as a result of the RequestCertificate request. Only provided if the
-	// certificate type is AMAZON_ISSUED .
+	// occurs as a result of the RequestCertificate request.
+	//
+	// Only provided if the certificate type is AMAZON_ISSUED .
 	DomainValidationOptions []AwsCertificateManagerCertificateDomainValidationOption
 
 	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
@@ -2242,24 +2500,32 @@ type AwsCertificateManagerCertificateDetails struct {
 	// consists of a name and an object identifier (OID).
 	ExtendedKeyUsages []AwsCertificateManagerCertificateExtendedKeyUsage
 
-	// For a failed certificate request, the reason for the failure. Valid values:
-	// NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED |
-	// INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED | CAA_ERROR |
-	// PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE | PCA_REQUEST_FAILED |
-	// PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS |
-	// PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER
+	// For a failed certificate request, the reason for the failure.
+	//
+	// Valid values: NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED |
+	// DOMAIN_NOT_ALLOWED | INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED |
+	// CAA_ERROR | PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE |
+	// PCA_REQUEST_FAILED | PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND |
+	// PCA_INVALID_ARGS | PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND |
+	// OTHER
 	FailureReason *string
 
 	// Indicates when the certificate was imported. Provided if the certificate type
-	// is IMPORTED . This field accepts only the specified formats. Timestamps can end
-	// with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
-	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
-	// Here are valid timestamp formats with examples:
+	// is IMPORTED .
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ImportedAt *string
@@ -2268,15 +2534,21 @@ type AwsCertificateManagerCertificateDetails struct {
 	InUseBy []string
 
 	// Indicates when the certificate was issued. Provided if the certificate type is
-	// AMAZON_ISSUED . This field accepts only the specified formats. Timestamps can
-	// end with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
-	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
-	// Here are valid timestamp formats with examples:
+	// AMAZON_ISSUED .
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	IssuedAt *string
@@ -2284,38 +2556,49 @@ type AwsCertificateManagerCertificateDetails struct {
 	// The name of the certificate authority that issued and signed the certificate.
 	Issuer *string
 
-	// The algorithm that was used to generate the public-private key pair. Valid
-	// values: RSA_2048 | RSA_1024 | RSA_4096 | EC_prime256v1 | EC_secp384r1 |
+	// The algorithm that was used to generate the public-private key pair.
+	//
+	// Valid values: RSA_2048 | RSA_1024 | RSA_4096 | EC_prime256v1 | EC_secp384r1 |
 	// EC_secp521r1
 	KeyAlgorithm *string
 
 	// A list of key usage X.509 v3 extension objects.
 	KeyUsages []AwsCertificateManagerCertificateKeyUsage
 
-	// The time after which the certificate becomes invalid. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// The time after which the certificate becomes invalid.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	NotAfter *string
 
-	// The time before which the certificate is not valid. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// The time before which the certificate is not valid.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	NotBefore *string
@@ -2324,8 +2607,9 @@ type AwsCertificateManagerCertificateDetails struct {
 	// transparency log.
 	Options *AwsCertificateManagerCertificateOptions
 
-	// Whether the certificate is eligible for renewal. Valid values: ELIGIBLE |
-	// INELIGIBLE
+	// Whether the certificate is eligible for renewal.
+	//
+	// Valid values: ELIGIBLE | INELIGIBLE
 	RenewalEligibility *string
 
 	// Information about the status of the Certificate Manager managed renewal for the
@@ -2338,8 +2622,10 @@ type AwsCertificateManagerCertificateDetails struct {
 	// The algorithm that was used to sign the certificate.
 	SignatureAlgorithm *string
 
-	// The status of the certificate. Valid values: PENDING_VALIDATION | ISSUED |
-	// INACTIVE | EXPIRED | VALIDATION_TIMED_OUT | REVOKED | FAILED
+	// The status of the certificate.
+	//
+	// Valid values: PENDING_VALIDATION | ISSUED | INACTIVE | EXPIRED |
+	// VALIDATION_TIMED_OUT | REVOKED | FAILED
 	Status *string
 
 	// The name of the entity that is associated with the public key contained in the
@@ -2348,23 +2634,28 @@ type AwsCertificateManagerCertificateDetails struct {
 
 	// One or more domain names (subject alternative names) included in the
 	// certificate. This list contains the domain names that are bound to the public
-	// key that is contained in the certificate. The subject alternative names include
-	// the canonical domain name (CN) of the certificate and additional domain names
-	// that can be used to connect to the website.
+	// key that is contained in the certificate.
+	//
+	// The subject alternative names include the canonical domain name (CN) of the
+	// certificate and additional domain names that can be used to connect to the
+	// website.
 	SubjectAlternativeNames []string
 
 	// The source of the certificate. For certificates that Certificate Manager
 	// provides, Type is AMAZON_ISSUED . For certificates that are imported with
-	// ImportCertificate , Type is IMPORTED . Valid values: IMPORTED | AMAZON_ISSUED |
-	// PRIVATE
+	// ImportCertificate , Type is IMPORTED .
+	//
+	// Valid values: IMPORTED | AMAZON_ISSUED | PRIVATE
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
 // Contains information about one of the following:
+//
 //   - The initial validation of each domain name that occurs as a result of the
 //     RequestCertificate request
+//
 //   - The validation of each domain name in the certificate, as it pertains to
 //     Certificate Manager managed renewal
 type AwsCertificateManagerCertificateDomainValidationOption struct {
@@ -2398,8 +2689,9 @@ type AwsCertificateManagerCertificateExtendedKeyUsage struct {
 	// public key can be used.
 	Name *string
 
-	// An object identifier (OID) for the extension value. The format is numbers
-	// separated by periods.
+	// An object identifier (OID) for the extension value.
+	//
+	// The format is numbers separated by periods.
 	OId *string
 
 	noSmithyDocumentSerde
@@ -2417,8 +2709,9 @@ type AwsCertificateManagerCertificateKeyUsage struct {
 // Contains other options for the certificate.
 type AwsCertificateManagerCertificateOptions struct {
 
-	// Whether to add the certificate to a transparency log. Valid values: DISABLED |
-	// ENABLED
+	// Whether to add the certificate to a transparency log.
+	//
+	// Valid values: DISABLED | ENABLED
 	CertificateTransparencyLoggingPreference *string
 
 	noSmithyDocumentSerde
@@ -2433,29 +2726,37 @@ type AwsCertificateManagerCertificateRenewalSummary struct {
 	// certificate type is AMAZON_ISSUED .
 	DomainValidationOptions []AwsCertificateManagerCertificateDomainValidationOption
 
-	// The status of the Certificate Manager managed renewal of the certificate. Valid
-	// values: PENDING_AUTO_RENEWAL | PENDING_VALIDATION | SUCCESS | FAILED
+	// The status of the Certificate Manager managed renewal of the certificate.
+	//
+	// Valid values: PENDING_AUTO_RENEWAL | PENDING_VALIDATION | SUCCESS | FAILED
 	RenewalStatus *string
 
 	// The reason that a renewal request was unsuccessful. This attribute is used only
-	// when RenewalStatus is FAILED . Valid values: NO_AVAILABLE_CONTACTS |
-	// ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED | INVALID_PUBLIC_DOMAIN |
-	// DOMAIN_VALIDATION_DENIED | CAA_ERROR | PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN |
-	// PCA_INVALID_STATE | PCA_REQUEST_FAILED | PCA_NAME_CONSTRAINTS_VALIDATION |
-	// PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS | PCA_INVALID_DURATION |
-	// PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER
+	// when RenewalStatus is FAILED .
+	//
+	// Valid values: NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED |
+	// DOMAIN_NOT_ALLOWED | INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED |
+	// CAA_ERROR | PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE |
+	// PCA_REQUEST_FAILED | PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND |
+	// PCA_INVALID_ARGS | PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND |
+	// OTHER
 	RenewalStatusReason *string
 
-	// Indicates when the renewal summary was last updated. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the renewal summary was last updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	UpdatedAt *string
@@ -2567,10 +2868,13 @@ type AwsCloudFrontDistributionCacheBehavior struct {
 
 	// The protocol that viewers can use to access the files in an origin. You can
 	// specify the following options:
+	//
 	//   - allow-all - Viewers can use HTTP or HTTPS.
+	//
 	//   - redirect-to-https - CloudFront responds to HTTP requests with an HTTP status
 	//   code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new
 	//   URL to resubmit.
+	//
 	//   - https-only - CloudFront responds to HTTP request with an HTTP status code of
 	//   403 (Forbidden).
 	ViewerProtocolPolicy *string
@@ -2593,10 +2897,13 @@ type AwsCloudFrontDistributionDefaultCacheBehavior struct {
 
 	// The protocol that viewers can use to access the files in an origin. You can
 	// specify the following options:
+	//
 	//   - allow-all - Viewers can use HTTP or HTTPS.
+	//
 	//   - redirect-to-https - CloudFront responds to HTTP requests with an HTTP status
 	//   code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new
 	//   URL to resubmit.
+	//
 	//   - https-only - CloudFront responds to HTTP request with an HTTP status code of
 	//   403 (Forbidden).
 	ViewerProtocolPolicy *string
@@ -2625,16 +2932,21 @@ type AwsCloudFrontDistributionDetails struct {
 	// The entity tag is a hash of the object.
 	ETag *string
 
-	// Indicates when that the distribution was last modified. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when that the distribution was last modified.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastModifiedTime *string
@@ -2684,9 +2996,9 @@ type AwsCloudFrontDistributionLogging struct {
 }
 
 // A custom origin. A custom origin is any origin that is not an Amazon S3 bucket,
-// with one exception. An Amazon S3 bucket that is configured with static website
-// hosting (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) is
-// a custom origin.
+// with one exception. An Amazon S3 bucket that is [configured with static website hosting]is a custom origin.
+//
+// [configured with static website hosting]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
 type AwsCloudFrontDistributionOriginCustomOriginConfig struct {
 
 	// The HTTP port that CloudFront uses to connect to the origin.
@@ -2703,7 +3015,8 @@ type AwsCloudFrontDistributionOriginCustomOriginConfig struct {
 	// origin.
 	OriginProtocolPolicy *string
 
-	// Specifies how long, in seconds, CloudFront waits for a response from the origin.
+	// Specifies how long, in seconds, CloudFront waits for a response from the
+	// origin.
 	OriginReadTimeout *int32
 
 	// Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to
@@ -2979,8 +3292,11 @@ type AwsCloudWatchAlarmDetails struct {
 	Period *int32
 
 	// The statistic for the metric associated with the alarm, other than percentile.
-	// For percentile statistics, use ExtendedStatistic . For an alarm based on a
-	// metric, you must specify either Statistic or ExtendedStatistic but not both.
+	// For percentile statistics, use ExtendedStatistic .
+	//
+	// For an alarm based on a metric, you must specify either Statistic or
+	// ExtendedStatistic but not both.
+	//
 	// For an alarm based on a math expression, you can't specify Statistic . Instead,
 	// you use Metrics .
 	Statistic *string
@@ -3057,9 +3373,10 @@ type AwsCodeBuildProjectDetails struct {
 	// Information about the build artifacts for the CodeBuild project.
 	Artifacts []AwsCodeBuildProjectArtifactsDetails
 
-	// The KMS key used to encrypt the build output artifacts. You can specify either
-	// the ARN of the KMS key or, if available, the KMS key alias (using the format
-	// alias/alias-name).
+	// The KMS key used to encrypt the build output artifacts.
+	//
+	// You can specify either the ARN of the KMS key or, if available, the KMS key
+	// alias (using the format alias/alias-name).
 	EncryptionKey *string
 
 	// Information about the build environment for this build project.
@@ -3097,13 +3414,16 @@ type AwsCodeBuildProjectEnvironment struct {
 	// project.
 	EnvironmentVariables []AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails
 
-	// The type of credentials CodeBuild uses to pull images in your build. Valid
-	// values:
+	// The type of credentials CodeBuild uses to pull images in your build.
+	//
+	// Valid values:
+	//
 	//   - CODEBUILD specifies that CodeBuild uses its own credentials. This requires
 	//   that you modify your ECR repository policy to trust the CodeBuild service
 	//   principal.
-	//   - SERVICE_ROLE specifies that CodeBuild uses your build project's service
-	//   role.
+	//
+	//   - SERVICE_ROLE specifies that CodeBuild uses your build project's service role.
+	//
 	// When you use a cross-account or private registry image, you must use
 	// SERVICE_ROLE credentials. When you use an CodeBuild curated image, you must use
 	// CODEBUILD credentials.
@@ -3116,20 +3436,25 @@ type AwsCodeBuildProjectEnvironment struct {
 	// The credentials for access to a private registry.
 	RegistryCredential *AwsCodeBuildProjectEnvironmentRegistryCredential
 
-	// The type of build environment to use for related builds. The environment type
-	// ARM_CONTAINER is available only in Regions US East (N. Virginia), US East
-	// (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia Pacific
-	// (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt). The environment type
-	// LINUX_CONTAINER with compute type build.general1.2xlarge is available only in
-	// Regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada
-	// (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific
-	// (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney),
-	// China (Beijing), and China (Ningxia). The environment type LINUX_GPU_CONTAINER
+	// The type of build environment to use for related builds.
+	//
+	// The environment type ARM_CONTAINER is available only in Regions US East (N.
+	// Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific
+	// (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt).
+	//
+	// The environment type LINUX_CONTAINER with compute type build.general1.2xlarge
 	// is available only in Regions US East (N. Virginia), US East (N. Virginia), US
 	// West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe
 	// (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific
-	// (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia). Valid
-	// values: WINDOWS_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER |
+	// (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).
+	//
+	// The environment type LINUX_GPU_CONTAINER is available only in Regions US East
+	// (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe
+	// (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia
+	// Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China
+	// (Beijing), and China (Ningxia).
+	//
+	// Valid values: WINDOWS_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER |
 	// ARM_CONTAINER
 	Type *string
 
@@ -3155,12 +3480,14 @@ type AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails struct {
 // The credentials for access to a private registry.
 type AwsCodeBuildProjectEnvironmentRegistryCredential struct {
 
-	// The ARN or name of credentials created using Secrets Manager. The credential
-	// can use the name of the credentials only if they exist in your current Amazon
-	// Web Services Region.
+	// The ARN or name of credentials created using Secrets Manager.
+	//
+	// The credential can use the name of the credentials only if they exist in your
+	// current Amazon Web Services Region.
 	Credential *string
 
 	// The service that created the credentials to access a private Docker registry.
+	//
 	// The valid value, SECRETS_MANAGER , is for Secrets Manager.
 	CredentialProvider *string
 
@@ -3218,35 +3545,50 @@ type AwsCodeBuildProjectSource struct {
 	// Whether to ignore SSL warnings while connecting to the project source code.
 	InsecureSsl *bool
 
-	// Information about the location of the source code to be built. Valid values
-	// include:
+	// Information about the location of the source code to be built.
+	//
+	// Valid values include:
+	//
 	//   - For source code settings that are specified in the source action of a
 	//   pipeline in CodePipeline, location should not be specified. If it is specified,
 	//   CodePipeline ignores it. This is because CodePipeline uses the settings in a
 	//   pipeline's source action instead of this value.
+	//
 	//   - For source code in an CodeCommit repository, the HTTPS clone URL to the
 	//   repository that contains the source code and the build spec file (for example,
 	//   https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).
+	//
 	//   - For source code in an S3 input bucket, one of the following.
+	//
 	//   - The path to the ZIP file that contains the source code (for example,
 	//   bucket-name/path/to/object-name.zip ).
+	//
 	//   - The path to the folder that contains the source code (for example,
 	//   bucket-name/path/to/source-code/folder/ ).
+	//
 	//   - For source code in a GitHub repository, the HTTPS clone URL to the
 	//   repository that contains the source and the build spec file.
+	//
 	//   - For source code in a Bitbucket repository, the HTTPS clone URL to the
 	//   repository that contains the source and the build spec file.
 	Location *string
 
 	// The type of repository that contains the source code to be built. Valid values
 	// are:
+	//
 	//   - BITBUCKET - The source code is in a Bitbucket repository.
+	//
 	//   - CODECOMMIT - The source code is in an CodeCommit repository.
+	//
 	//   - CODEPIPELINE - The source code settings are specified in the source action
 	//   of a pipeline in CodePipeline.
+	//
 	//   - GITHUB - The source code is in a GitHub repository.
+	//
 	//   - GITHUB_ENTERPRISE - The source code is in a GitHub Enterprise repository.
+	//
 	//   - NO_SOURCE - The project does not have input source code.
+	//
 	//   - S3 - The source code is in an S3 input bucket.
 	Type *string
 
@@ -3293,114 +3635,116 @@ type AwsCorsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Database Migration Service (DMS) endpoint. An
+//	Provides details about an Database Migration Service (DMS) endpoint. An
+//
 // endpoint provides connection, data store type, and location information about
 // your data store.
 type AwsDmsEndpointDetails struct {
 
-	// The Amazon Resource Name (ARN) for the SSL certificate that encrypts
+	//  The Amazon Resource Name (ARN) for the SSL certificate that encrypts
 	// connections between the DMS endpoint and the replication instance.
 	CertificateArn *string
 
-	// The name of the endpoint database.
+	//  The name of the endpoint database.
 	DatabaseName *string
 
-	// The Amazon Resource Name (ARN) of the endpoint.
+	//  The Amazon Resource Name (ARN) of the endpoint.
 	EndpointArn *string
 
-	// The database endpoint identifier.
+	//  The database endpoint identifier.
 	EndpointIdentifier *string
 
-	// The type of endpoint. Valid values are source and target.
+	//  The type of endpoint. Valid values are source and target.
 	EndpointType *string
 
-	// The type of engine for the endpoint, depending on the EndpointType value.
+	//  The type of engine for the endpoint, depending on the EndpointType value.
 	EngineName *string
 
-	// A value that can be used for cross-account validation.
+	//  A value that can be used for cross-account validation.
 	ExternalId *string
 
-	// Additional attributes associated with the connection.
+	//  Additional attributes associated with the connection.
 	ExtraConnectionAttributes *string
 
-	// An DMS key identifier that is used to encrypt the connection parameters for the
-	// endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS
+	//  An DMS key identifier that is used to encrypt the connection parameters for
+	// the endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS
 	// uses your default encryption key. KMS creates the default encryption key for
 	// your Amazon Web Services account. Your Amazon Web Services account has a
 	// different default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
-	// The port used to access the endpoint.
+	//  The port used to access the endpoint.
 	Port *int32
 
-	// The name of the server where the endpoint database resides.
+	//  The name of the server where the endpoint database resides.
 	ServerName *string
 
-	// The SSL mode used to connect to the endpoint. The default is none.
+	//  The SSL mode used to connect to the endpoint. The default is none.
 	SslMode *string
 
-	// The user name to be used to log in to the endpoint database.
+	//  The user name to be used to log in to the endpoint database.
 	Username *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Database Migration Service (DMS) replication
+//	Provides details about an Database Migration Service (DMS) replication
+//
 // instance. DMS uses a replication instance to connect to your source data store,
 // read the source data, and format the data for consumption by the target data
 // store.
 type AwsDmsReplicationInstanceDetails struct {
 
-	// The amount of storage (in gigabytes) that is allocated for the replication
+	//  The amount of storage (in gigabytes) that is allocated for the replication
 	// instance.
 	AllocatedStorage *int32
 
-	// Indicates whether minor engine upgrades are applied automatically to the
+	//  Indicates whether minor engine upgrades are applied automatically to the
 	// replication instance during the maintenance window.
 	AutoMinorVersionUpgrade *bool
 
-	// The Availability Zone that the replication instance is created in. The default
+	//  The Availability Zone that the replication instance is created in. The default
 	// value is a random, system-chosen Availability Zone in the endpoint's Amazon Web
 	// Services Region, such as us-east-1d .
 	AvailabilityZone *string
 
-	// The engine version number of the replication instance. If an engine version
+	//  The engine version number of the replication instance. If an engine version
 	// number is not specified when a replication instance is created, the default is
 	// the latest engine version available.
 	EngineVersion *string
 
-	// An KMS key identifier that is used to encrypt the data on the replication
+	//  An KMS key identifier that is used to encrypt the data on the replication
 	// instance. If you don't specify a value for the KmsKeyId parameter, DMS uses
 	// your default encryption key. KMS creates the default encryption key for your
 	// Amazon Web Services account. Your Amazon Web Services account has a different
 	// default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
-	// Specifies whether the replication instance is deployed across multiple
+	//  Specifies whether the replication instance is deployed across multiple
 	// Availability Zones (AZs). You can't set the AvailabilityZone parameter if the
 	// MultiAZ parameter is set to true .
 	MultiAZ *bool
 
-	// The maintenance window times for the replication instance. Upgrades to the
+	//  The maintenance window times for the replication instance. Upgrades to the
 	// replication instance are performed during this time.
 	PreferredMaintenanceWindow *string
 
-	// Specifies the accessibility options for the replication instance. A value of
+	//  Specifies the accessibility options for the replication instance. A value of
 	// true represents an instance with a public IP address. A value of false
 	// represents an instance with a private IP address. The default value is true .
 	PubliclyAccessible *bool
 
-	// The compute and memory capacity of the replication instance as defined for the
+	//  The compute and memory capacity of the replication instance as defined for the
 	// specified replication instance class.
 	ReplicationInstanceClass *string
 
-	// The replication instance identifier.
+	//  The replication instance identifier.
 	ReplicationInstanceIdentifier *string
 
-	// The subnet group for the replication instance.
+	//  The subnet group for the replication instance.
 	ReplicationSubnetGroup *AwsDmsReplicationInstanceReplicationSubnetGroupDetails
 
-	// The virtual private cloud (VPC) security group for the replication instance.
+	//  The virtual private cloud (VPC) security group for the replication instance.
 	VpcSecurityGroups []AwsDmsReplicationInstanceVpcSecurityGroupsDetails
 
 	noSmithyDocumentSerde
@@ -3409,73 +3753,75 @@ type AwsDmsReplicationInstanceDetails struct {
 // Provides details about the replication subnet group.
 type AwsDmsReplicationInstanceReplicationSubnetGroupDetails struct {
 
-	// The identifier of the replication subnet group.
+	//  The identifier of the replication subnet group.
 	ReplicationSubnetGroupIdentifier *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about the virtual private cloud (VPC) security group that’s
+//	Provides details about the virtual private cloud (VPC) security group that’s
+//
 // associated with the replication instance.
 type AwsDmsReplicationInstanceVpcSecurityGroupsDetails struct {
 
-	// The identifier of the VPC security group that’s associated with the replication
-	// instance.
+	//  The identifier of the VPC security group that’s associated with the
+	// replication instance.
 	VpcSecurityGroupId *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Database Migration Service (DMS) replication task. A
+//	Provides details about an Database Migration Service (DMS) replication task. A
+//
 // replication task moves a set of data from the source endpoint to the target
 // endpoint.
 type AwsDmsReplicationTaskDetails struct {
 
-	// Indicates when you want a change data capture (CDC) operation to start.
+	//  Indicates when you want a change data capture (CDC) operation to start.
 	// CCdcStartPosition or CCdcStartTime specifies when you want a CDC operation to
 	// start. Only a value for one of these fields is included.
 	CdcStartPosition *string
 
-	// Indicates the start time for a CDC operation. CdcStartPosition or CCdcStartTime
+	//  Indicates the start time for a CDC operation. CdcStartPosition or CCdcStartTime
 	// specifies when you want a CDC operation to start. Only a value for one of these
 	// fields is included.
 	CdcStartTime *string
 
-	// Indicates when you want a CDC operation to stop. The value can be either server
-	// time or commit time.
+	//  Indicates when you want a CDC operation to stop. The value can be either
+	// server time or commit time.
 	CdcStopPosition *string
 
-	// The identifier of the replication task.
+	//  The identifier of the replication task.
 	Id *string
 
-	// The migration type.
+	//  The migration type.
 	MigrationType *string
 
-	// The Amazon Resource Name (ARN) of a replication instance.
+	//  The Amazon Resource Name (ARN) of a replication instance.
 	ReplicationInstanceArn *string
 
-	// The user-defined replication task identifier or name.
+	//  The user-defined replication task identifier or name.
 	ReplicationTaskIdentifier *string
 
-	// The settings for the replication task.
+	//  The settings for the replication task.
 	ReplicationTaskSettings *string
 
-	// A display name for the resource identifier at the end of the EndpointArn
+	//  A display name for the resource identifier at the end of the EndpointArn
 	// response parameter. If you don't specify a ResourceIdentifier value, DMS
 	// generates a default identifier value for the end of EndpointArn .
 	ResourceIdentifier *string
 
-	// The ARN of the source endpoint.
+	//  The ARN of the source endpoint.
 	SourceEndpointArn *string
 
-	// The table mappings for the replication task, in JSON format.
+	//  The table mappings for the replication task, in JSON format.
 	TableMappings *string
 
-	// The ARN of the target endpoint.
+	//  The ARN of the target endpoint.
 	TargetEndpointArn *string
 
-	// Supplemental information that the task requires to migrate the data for certain
-	// source and target endpoints.
+	//  Supplemental information that the task requires to migrate the data for
+	// certain source and target endpoints.
 	TaskData *string
 
 	noSmithyDocumentSerde
@@ -3500,15 +3846,21 @@ type AwsDynamoDbTableBillingModeSummary struct {
 	BillingMode *string
 
 	// If the billing mode is PAY_PER_REQUEST , indicates when the billing mode was set
-	// to that value. This field accepts only the specified formats. Timestamps can end
-	// with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
-	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
-	// Here are valid timestamp formats with examples:
+	// to that value.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastUpdateToPayPerRequestDateTime *string
@@ -3525,20 +3877,26 @@ type AwsDynamoDbTableDetails struct {
 	// Information about the billing for read/write capacity on the table.
 	BillingModeSummary *AwsDynamoDbTableBillingModeSummary
 
-	// Indicates when the table was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the table was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreationDateTime *string
 
-	// Indicates whether deletion protection is to be enabled (true) or disabled
+	//  Indicates whether deletion protection is to be enabled (true) or disabled
 	// (false) on the table.
 	DeletionProtectionEnabled *bool
 
@@ -3588,12 +3946,19 @@ type AwsDynamoDbTableDetails struct {
 	TableSizeBytes *int64
 
 	// The current status of the table. Valid values are as follows:
+	//
 	//   - ACTIVE
+	//
 	//   - ARCHIVED
+	//
 	//   - ARCHIVING
+	//
 	//   - CREATING
+	//
 	//   - DELETING
+	//
 	//   - INACCESSIBLE_ENCRYPTION_CREDENTIALS
+	//
 	//   - UPDATING
 	TableStatus *string
 
@@ -3616,9 +3981,13 @@ type AwsDynamoDbTableGlobalSecondaryIndex struct {
 	IndexSizeBytes *int64
 
 	// The current status of the index.
+	//
 	//   - ACTIVE
+	//
 	//   - CREATING
+	//
 	//   - DELETING
+	//
 	//   - UPDATING
 	IndexStatus *string
 
@@ -3681,8 +4050,11 @@ type AwsDynamoDbTableProjection struct {
 
 	// The types of attributes that are projected into the index. Valid values are as
 	// follows:
+	//
 	//   - ALL
+	//
 	//   - INCLUDE
+	//
 	//   - KEYS_ONLY
 	ProjectionType *string
 
@@ -3693,30 +4065,40 @@ type AwsDynamoDbTableProjection struct {
 // secondary index.
 type AwsDynamoDbTableProvisionedThroughput struct {
 
-	// Indicates when the provisioned throughput was last decreased. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// Indicates when the provisioned throughput was last decreased.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastDecreaseDateTime *string
 
-	// Indicates when the provisioned throughput was last increased. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// Indicates when the provisioned throughput was last increased.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastIncreaseDateTime *string
@@ -3762,10 +4144,15 @@ type AwsDynamoDbTableReplica struct {
 	RegionName *string
 
 	// The current status of the replica. Valid values are as follows:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATING
+	//
 	//   - CREATION_FAILED
+	//
 	//   - DELETING
+	//
 	//   - UPDATING
 	ReplicaStatus *string
 
@@ -3790,16 +4177,21 @@ type AwsDynamoDbTableReplicaGlobalSecondaryIndex struct {
 // Information about the restore for the table.
 type AwsDynamoDbTableRestoreSummary struct {
 
-	// Indicates the point in time that the table was restored to. This field accepts
-	// only the specified formats. Timestamps can end with Z or ("+" / "-") time-hour
-	// [":" time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates the point in time that the table was restored to.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	RestoreDateTime *string
@@ -3820,15 +4212,21 @@ type AwsDynamoDbTableRestoreSummary struct {
 type AwsDynamoDbTableSseDescription struct {
 
 	// If the key is inaccessible, the date and time when DynamoDB detected that the
-	// key was inaccessible. This field accepts only the specified formats. Timestamps
-	// can end with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac
-	// after seconds is limited to a maximum of 9 digits. The offset is bounded by
-	// +/-18:00. Here are valid timestamp formats with examples:
+	// key was inaccessible.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	InaccessibleEncryptionDateTime *string
@@ -3857,11 +4255,12 @@ type AwsDynamoDbTableStreamSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Active Directory that’s used to authenticate an
+//	Provides details about an Active Directory that’s used to authenticate an
+//
 // Client VPN endpoint.
 type AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails struct {
 
-	// The ID of the Active Directory used for authentication.
+	//  The ID of the Active Directory used for authentication.
 	DirectoryId *string
 
 	noSmithyDocumentSerde
@@ -3870,18 +4269,18 @@ type AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails struct {
 // Information about the authentication method used by the Client VPN endpoint.
 type AwsEc2ClientVpnEndpointAuthenticationOptionsDetails struct {
 
-	// Information about the Active Directory, if applicable. With Active Directory
+	//  Information about the Active Directory, if applicable. With Active Directory
 	// authentication, clients are authenticated against existing Active Directory
 	// groups.
 	ActiveDirectory *AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails
 
-	// Information about the IAM SAML identity provider, if applicable.
+	//  Information about the IAM SAML identity provider, if applicable.
 	FederatedAuthentication *AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails
 
-	// Information about the authentication certificates, if applicable.
+	//  Information about the authentication certificates, if applicable.
 	MutualAuthentication *AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails
 
-	// The authentication type used.
+	//  The authentication type used.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -3890,10 +4289,10 @@ type AwsEc2ClientVpnEndpointAuthenticationOptionsDetails struct {
 // Describes the IAM SAML identity providers used for federated authentication.
 type AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails struct {
 
-	// The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+	//  The Amazon Resource Name (ARN) of the IAM SAML identity provider.
 	SamlProviderArn *string
 
-	// The Amazon Resource Name (ARN) of the IAM SAML identity provider for the
+	//  The Amazon Resource Name (ARN) of the IAM SAML identity provider for the
 	// self-service portal.
 	SelfServiceSamlProviderArn *string
 
@@ -3903,7 +4302,7 @@ type AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails 
 // Information about the client certificate used for authentication.
 type AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails struct {
 
-	// The Amazon Resource Name (ARN) of the client certificate.
+	//  The Amazon Resource Name (ARN) of the client certificate.
 	ClientRootCertificateChain *string
 
 	noSmithyDocumentSerde
@@ -3912,14 +4311,14 @@ type AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails str
 // The options for managing connection authorization for new client connections.
 type AwsEc2ClientVpnEndpointClientConnectOptionsDetails struct {
 
-	// Indicates whether client connect options are enabled.
+	//  Indicates whether client connect options are enabled.
 	Enabled *bool
 
-	// The Amazon Resource Name (ARN) of the Lambda function used for connection
+	//  The Amazon Resource Name (ARN) of the Lambda function used for connection
 	// authorization.
 	LambdaFunctionArn *string
 
-	// The status of any updates to the client connect options.
+	//  The status of any updates to the client connect options.
 	Status *AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails
 
 	noSmithyDocumentSerde
@@ -3928,102 +4327,105 @@ type AwsEc2ClientVpnEndpointClientConnectOptionsDetails struct {
 // Describes the status of the Client VPN endpoint attribute.
 type AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails struct {
 
-	// The status code.
+	//  The status code.
 	Code *string
 
-	// The status message.
+	//  The status message.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
-// Options for enabling a customizable text banner that will be displayed on
+//	Options for enabling a customizable text banner that will be displayed on
+//
 // Amazon Web Services provided clients when a VPN session is established.
 type AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails struct {
 
-	// Customizable text that will be displayed in a banner on Amazon Web Services
+	//  Customizable text that will be displayed in a banner on Amazon Web Services
 	// provided clients when a VPN session is established.
 	BannerText *string
 
-	// Current state of text banner feature.
+	//  Current state of text banner feature.
 	Enabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// Information about the client connection logging options for the Client VPN
+//	Information about the client connection logging options for the Client VPN
+//
 // endpoint.
 type AwsEc2ClientVpnEndpointConnectionLogOptionsDetails struct {
 
-	// The name of the Amazon CloudWatch Logs log group to which connection logging
+	//  The name of the Amazon CloudWatch Logs log group to which connection logging
 	// data is published.
 	CloudwatchLogGroup *string
 
-	// The name of the Amazon CloudWatch Logs log stream to which connection logging
+	//  The name of the Amazon CloudWatch Logs log stream to which connection logging
 	// data is published.
 	CloudwatchLogStream *string
 
-	// Indicates whether client connection logging is enabled for the Client VPN
+	//  Indicates whether client connection logging is enabled for the Client VPN
 	// endpoint.
 	Enabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// Describes an Client VPN endpoint. A Client VPN endpoint is the resource that
+//	Describes an Client VPN endpoint. A Client VPN endpoint is the resource that
+//
 // you create and configure to enable and manage client VPN sessions. It's the
 // termination point for all client VPN sessions.
 type AwsEc2ClientVpnEndpointDetails struct {
 
-	// Information about the authentication method used by the Client VPN endpoint.
+	//  Information about the authentication method used by the Client VPN endpoint.
 	AuthenticationOptions []AwsEc2ClientVpnEndpointAuthenticationOptionsDetails
 
-	// The IPv4 address range, in CIDR notation, from which client IP addresses are
+	//  The IPv4 address range, in CIDR notation, from which client IP addresses are
 	// assigned.
 	ClientCidrBlock *string
 
-	// The options for managing connection authorization for new client connections.
+	//  The options for managing connection authorization for new client connections.
 	ClientConnectOptions *AwsEc2ClientVpnEndpointClientConnectOptionsDetails
 
-	// Options for enabling a customizable text banner that will be displayed on
+	//  Options for enabling a customizable text banner that will be displayed on
 	// Amazon Web Services provided clients when a VPN session is established.
 	ClientLoginBannerOptions *AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails
 
-	// The ID of the Client VPN endpoint.
+	//  The ID of the Client VPN endpoint.
 	ClientVpnEndpointId *string
 
-	// Information about the client connection logging options for the Client VPN
+	//  Information about the client connection logging options for the Client VPN
 	// endpoint.
 	ConnectionLogOptions *AwsEc2ClientVpnEndpointConnectionLogOptionsDetails
 
-	// A brief description of the endpoint.
+	//  A brief description of the endpoint.
 	Description *string
 
-	// Information about the DNS servers to be used for DNS resolution.
+	//  Information about the DNS servers to be used for DNS resolution.
 	DnsServer []string
 
-	// The IDs of the security groups for the target network.
+	//  The IDs of the security groups for the target network.
 	SecurityGroupIdSet []string
 
-	// The URL of the self-service portal.
+	//  The URL of the self-service portal.
 	SelfServicePortalUrl *string
 
-	// The Amazon Resource Name (ARN) of the server certificate.
+	//  The Amazon Resource Name (ARN) of the server certificate.
 	ServerCertificateArn *string
 
-	// The maximum VPN session duration time in hours.
+	//  The maximum VPN session duration time in hours.
 	SessionTimeoutHours *int32
 
-	// Indicates whether split-tunnel is enabled in the Client VPN endpoint.
+	//  Indicates whether split-tunnel is enabled in the Client VPN endpoint.
 	SplitTunnel *bool
 
-	// The transport protocol used by the Client VPN endpoint.
+	//  The transport protocol used by the Client VPN endpoint.
 	TransportProtocol *string
 
-	// The ID of the VPC.
+	//  The ID of the VPC.
 	VpcId *string
 
-	// The port number for the Client VPN endpoint.
+	//  The port number for the Client VPN endpoint.
 	VpnPort *int32
 
 	noSmithyDocumentSerde
@@ -4040,8 +4442,10 @@ type AwsEc2EipDetails struct {
 	// an EC2 instance.
 	AssociationId *string
 
-	// The domain in which to allocate the address. If the address is for use with EC2
-	// instances in a VPC, then Domain is vpc . Otherwise, Domain is standard .
+	// The domain in which to allocate the address.
+	//
+	// If the address is for use with EC2 instances in a VPC, then Domain is vpc .
+	// Otherwise, Domain is standard .
 	Domain *string
 
 	// The identifier of the EC2 instance.
@@ -4087,15 +4491,21 @@ type AwsEc2InstanceDetails struct {
 	// The key name associated with the instance.
 	KeyName *string
 
-	// Indicates when the instance was launched. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the instance was launched.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LaunchedAt *string
@@ -4103,7 +4513,7 @@ type AwsEc2InstanceDetails struct {
 	// Details about the metadata options for the Amazon EC2 instance.
 	MetadataOptions *AwsEc2InstanceMetadataOptions
 
-	// Describes the type of monitoring that’s turned on for an instance.
+	//  Describes the type of monitoring that’s turned on for an instance.
 	Monitoring *AwsEc2InstanceMonitoringDetails
 
 	// The identifiers of the network interfaces for the EC2 instance. The details for
@@ -4152,8 +4562,8 @@ type AwsEc2InstanceMetadataOptions struct {
 // The type of monitoring that’s turned on for an Amazon EC2 instance.
 type AwsEc2InstanceMonitoringDetails struct {
 
-	// Indicates whether detailed monitoring is turned on. Otherwise, basic monitoring
-	// is turned on.
+	//  Indicates whether detailed monitoring is turned on. Otherwise, basic
+	// monitoring is turned on.
 	State *string
 
 	noSmithyDocumentSerde
@@ -4169,22 +4579,23 @@ type AwsEc2InstanceNetworkInterfacesDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a block device mapping for an Amazon Elastic Compute Cloud
+//	Information about a block device mapping for an Amazon Elastic Compute Cloud
+//
 // (Amazon EC2) launch template.
 type AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails struct {
 
-	// The device name.
+	//  The device name.
 	DeviceName *string
 
-	// Parameters used to automatically set up Amazon EBS volumes when the instance is
-	// launched.
+	//  Parameters used to automatically set up Amazon EBS volumes when the instance
+	// is launched.
 	Ebs *AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails
 
-	// Omits the device from the block device mapping when an empty string is
+	//  Omits the device from the block device mapping when an empty string is
 	// specified.
 	NoDevice *string
 
-	// The virtual device name (ephemeralN). Instance store volumes are numbered
+	//  The virtual device name (ephemeralN). Instance store volumes are numbered
 	// starting from 0. An instance type with 2 available instance store volumes can
 	// specify mappings for ephemeral0 and ephemeral1 . The number of available
 	// instance store volumes depends on the instance type.
@@ -4193,49 +4604,51 @@ type AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Parameters for a block device for an Amazon Elastic Block Store (Amazon EBS)
+//	Parameters for a block device for an Amazon Elastic Block Store (Amazon EBS)
+//
 // volume in an Amazon EC2 launch template.
 type AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails struct {
 
-	// Indicates whether the EBS volume is deleted on instance termination.
+	//  Indicates whether the EBS volume is deleted on instance termination.
 	DeleteOnTermination *bool
 
-	// Indicates whether the EBS volume is encrypted. Encrypted volumes can only be
+	//  Indicates whether the EBS volume is encrypted. Encrypted volumes can only be
 	// attached to instances that support Amazon EBS encryption. If you're creating a
 	// volume from a snapshot, you can't specify an encryption value.
 	Encrypted *bool
 
-	// The number of I/O operations per second (IOPS).
+	//  The number of I/O operations per second (IOPS).
 	Iops *int32
 
-	// The Amazon Resource Name (ARN) of the symmetric Key Management Service (KMS)
+	//  The Amazon Resource Name (ARN) of the symmetric Key Management Service (KMS)
 	// customer managed key used for encryption.
 	KmsKeyId *string
 
-	// The ID of the EBS snapshot.
+	//  The ID of the EBS snapshot.
 	SnapshotId *string
 
-	// The throughput to provision for a gp3 volume, with a maximum of 1,000 MiB/s.
+	//  The throughput to provision for a gp3 volume, with a maximum of 1,000 MiB/s.
 	Throughput *int32
 
-	// The size of the volume, in GiBs. You must specify either a snapshot ID or a
+	//  The size of the volume, in GiBs. You must specify either a snapshot ID or a
 	// volume size.
 	VolumeSize *int32
 
-	// The volume type.
+	//  The volume type.
 	VolumeType *string
 
 	noSmithyDocumentSerde
 }
 
-// Information about the target Capacity Reservation or Capacity Reservation group
-// in which to run an Amazon EC2 instance.
+//	Information about the target Capacity Reservation or Capacity Reservation
+//
+// group in which to run an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails struct {
 
-	// The ID of the Capacity Reservation in which to run the instance.
+	//  The ID of the Capacity Reservation in which to run the instance.
 	CapacityReservationId *string
 
-	// The Amazon Resource Name (ARN) of the Capacity Reservation resource group in
+	//  The Amazon Resource Name (ARN) of the Capacity Reservation resource group in
 	// which to run the instance.
 	CapacityReservationResourceGroupArn *string
 
@@ -4245,163 +4658,172 @@ type AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservation
 // Specifies the Capacity Reservation targeting option of an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails struct {
 
-	// Indicates the instance's Capacity Reservation preferences. If equal to open ,
+	//  Indicates the instance's Capacity Reservation preferences. If equal to open ,
 	// the instance can run in any open Capacity Reservation that has matching
 	// attributes (instance type, platform, Availability Zone). If equal to none , the
 	// instance avoids running in a Capacity Reservation even if one is available. The
 	// instance runs in On-Demand capacity.
 	CapacityReservationPreference *string
 
-	// Specifies a target Capacity Reservation.
+	//  Specifies a target Capacity Reservation.
 	CapacityReservationTarget *AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the CPU options for an Amazon EC2 instance. For more information, see
-// Optimize CPU options (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+//	Specifies the CPU options for an Amazon EC2 instance. For more information,
+//
+// see [Optimize CPU options]in the Amazon Elastic Compute Cloud User Guide.
+//
+// [Optimize CPU options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
 type AwsEc2LaunchTemplateDataCpuOptionsDetails struct {
 
-	// The number of CPU cores for the instance.
+	//  The number of CPU cores for the instance.
 	CoreCount *int32
 
-	// The number of threads per CPU core. A value of 1 disables multithreading for
+	//  The number of threads per CPU core. A value of 1 disables multithreading for
 	// the instance, The default value is 2 .
 	ThreadsPerCore *int32
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the credit option for CPU usage of a T2, T3, or T3a Amazon EC2
+//	Specifies the credit option for CPU usage of a T2, T3, or T3a Amazon EC2
+//
 // instance.
 type AwsEc2LaunchTemplateDataCreditSpecificationDetails struct {
 
-	// The credit option for CPU usage of a T instance.
+	//  The credit option for CPU usage of a T instance.
 	CpuCredits *string
 
 	noSmithyDocumentSerde
 }
 
-// The information to include in an Amazon Elastic Compute Cloud (Amazon EC2)
+//	The information to include in an Amazon Elastic Compute Cloud (Amazon EC2)
+//
 // launch template.
 type AwsEc2LaunchTemplateDataDetails struct {
 
-	// Information about a block device mapping for an Amazon EC2 launch template.
+	//  Information about a block device mapping for an Amazon EC2 launch template.
 	BlockDeviceMappingSet []AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails
 
-	// Specifies an instance's Capacity Reservation targeting option. You can specify
+	//  Specifies an instance's Capacity Reservation targeting option. You can specify
 	// only one option at a time.
 	CapacityReservationSpecification *AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails
 
-	// Specifies the CPU options for an instance. For more information, see Optimize
-	// CPU options (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	//  Specifies the CPU options for an instance. For more information, see [Optimize CPU options] in the
+	// Amazon Elastic Compute Cloud User Guide.
+	//
+	// [Optimize CPU options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
 	CpuOptions *AwsEc2LaunchTemplateDataCpuOptionsDetails
 
-	// Specifies the credit option for CPU usage of a T2, T3, or T3a instance.
+	//  Specifies the credit option for CPU usage of a T2, T3, or T3a instance.
 	CreditSpecification *AwsEc2LaunchTemplateDataCreditSpecificationDetails
 
-	// Indicates whether to enable the instance for stop protection. For more
-	// information, see Enable stop protection (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection)
-	// in the Amazon EC2 User Guide.
+	//  Indicates whether to enable the instance for stop protection. For more
+	// information, see [Enable stop protection]in the Amazon EC2 User Guide.
+	//
+	// [Enable stop protection]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
 	DisableApiStop *bool
 
-	// If you set this parameter to true , you can't terminate the instance using the
+	//  If you set this parameter to true , you can't terminate the instance using the
 	// Amazon EC2 console, CLI, or API. If set to true , you can.
 	DisableApiTermination *bool
 
-	// Indicates whether the instance is optimized for Amazon EBS I/O.
+	//  Indicates whether the instance is optimized for Amazon EBS I/O.
 	EbsOptimized *bool
 
-	// Provides details about Elastic Graphics accelerators to associate with the
+	//  Provides details about Elastic Graphics accelerators to associate with the
 	// instance.
 	ElasticGpuSpecificationSet []AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails
 
-	// The Amazon Elastic Inference accelerator for the instance.
+	//  The Amazon Elastic Inference accelerator for the instance.
 	ElasticInferenceAcceleratorSet []AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails
 
-	// Indicates whether the Amazon EC2 instance is enabled for Amazon Web Services
+	//  Indicates whether the Amazon EC2 instance is enabled for Amazon Web Services
 	// Nitro Enclaves.
 	EnclaveOptions *AwsEc2LaunchTemplateDataEnclaveOptionsDetails
 
-	// Specifies whether your Amazon EC2 instance is configured for hibernation.
+	//  Specifies whether your Amazon EC2 instance is configured for hibernation.
 	HibernationOptions *AwsEc2LaunchTemplateDataHibernationOptionsDetails
 
-	// The name or Amazon Resource Name (ARN) of an IAM instance profile.
+	//  The name or Amazon Resource Name (ARN) of an IAM instance profile.
 	IamInstanceProfile *AwsEc2LaunchTemplateDataIamInstanceProfileDetails
 
-	// The ID of the Amazon Machine Image (AMI).
+	//  The ID of the Amazon Machine Image (AMI).
 	ImageId *string
 
-	// Provides the options for specifying the instance initiated shutdown behavior.
+	//  Provides the options for specifying the instance initiated shutdown behavior.
 	InstanceInitiatedShutdownBehavior *string
 
-	// Specifies the market (purchasing) option for an instance.
+	//  Specifies the market (purchasing) option for an instance.
 	InstanceMarketOptions *AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails
 
-	// The attributes for the instance types. When you specify instance attributes,
+	//  The attributes for the instance types. When you specify instance attributes,
 	// Amazon EC2 will identify instance types with these attributes. If you specify
 	// InstanceRequirements , you can't specify InstanceType .
 	InstanceRequirements *AwsEc2LaunchTemplateDataInstanceRequirementsDetails
 
-	// The instance type. For more information, see Instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
-	// in the Amazon EC2 User Guide. If you specify InstanceType , you can't specify
-	// InstanceRequirements .
+	//  The instance type. For more information, see [Instance types] in the Amazon EC2 User Guide. If
+	// you specify InstanceType , you can't specify InstanceRequirements .
+	//
+	// [Instance types]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
 	InstanceType *string
 
-	// The ID of the kernel.
+	//  The ID of the kernel.
 	KernelId *string
 
-	// The name of the key pair that allows users to connect to the instance.
+	//  The name of the key pair that allows users to connect to the instance.
 	KeyName *string
 
-	// Specifies a license configuration for an instance.
+	//  Specifies a license configuration for an instance.
 	LicenseSet []AwsEc2LaunchTemplateDataLicenseSetDetails
 
-	// The maintenance options of your instance.
+	//  The maintenance options of your instance.
 	MaintenanceOptions *AwsEc2LaunchTemplateDataMaintenanceOptionsDetails
 
-	// The metadata options for the instance. For more information, see Instance
-	// metadata and user data (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
-	// in the Amazon EC2 User Guide.
+	//  The metadata options for the instance. For more information, see [Instance metadata and user data] in the
+	// Amazon EC2 User Guide.
+	//
+	// [Instance metadata and user data]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 	MetadataOptions *AwsEc2LaunchTemplateDataMetadataOptionsDetails
 
-	// The monitoring for the instance.
+	//  The monitoring for the instance.
 	Monitoring *AwsEc2LaunchTemplateDataMonitoringDetails
 
-	// Specifies the parameters for a network interface that is attached to the
+	//  Specifies the parameters for a network interface that is attached to the
 	// instance.
 	NetworkInterfaceSet []AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails
 
-	// Specifies the placement of an instance.
+	//  Specifies the placement of an instance.
 	Placement *AwsEc2LaunchTemplateDataPlacementDetails
 
-	// The options for the instance hostname.
+	//  The options for the instance hostname.
 	PrivateDnsNameOptions *AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails
 
-	// The ID of the RAM disk.
+	//  The ID of the RAM disk.
 	RamDiskId *string
 
-	// One or more security group IDs.
+	//  One or more security group IDs.
 	SecurityGroupIdSet []string
 
-	// One or more security group names. For a nondefault VPC, you must use security
+	//  One or more security group names. For a nondefault VPC, you must use security
 	// group IDs instead. You cannot specify both a security group ID and security name
 	// in the same request.
 	SecurityGroupSet []string
 
-	// The user data to make available to the instance.
+	//  The user data to make available to the instance.
 	UserData *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Elastic Graphics specification for an Amazon EC2
+//	Provides details about an Elastic Graphics specification for an Amazon EC2
+//
 // launch template.
 type AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails struct {
 
-	// The type of Elastic Graphics accelerator.
+	//  The type of Elastic Graphics accelerator.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -4410,20 +4832,21 @@ type AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails struct {
 // Provides details for an Amazon Elastic Inference accelerator.
 type AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails struct {
 
-	// The number of Elastic Inference accelerators to attach to the instance.
+	//  The number of Elastic Inference accelerators to attach to the instance.
 	Count *int32
 
-	// The type of Elastic Inference accelerator.
+	//  The type of Elastic Inference accelerator.
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
-// Indicates whether the instance is enabled for Amazon Web Services Nitro
+//	Indicates whether the instance is enabled for Amazon Web Services Nitro
+//
 // Enclaves.
 type AwsEc2LaunchTemplateDataEnclaveOptionsDetails struct {
 
-	// If this parameter is set to true , the instance is enabled for Amazon Web
+	//  If this parameter is set to true , the instance is enabled for Amazon Web
 	// Services Nitro Enclaves.
 	Enabled *bool
 
@@ -4433,33 +4856,35 @@ type AwsEc2LaunchTemplateDataEnclaveOptionsDetails struct {
 // Specifies whether your Amazon EC2 instance is configured for hibernation.
 type AwsEc2LaunchTemplateDataHibernationOptionsDetails struct {
 
-	// If you set this parameter to true , the instance is enabled for hibernation.
+	//  If you set this parameter to true , the instance is enabled for hibernation.
 	Configured *bool
 
 	noSmithyDocumentSerde
 }
 
-// Provides details for an Identity and Access Management (IAM) instance profile,
+//	Provides details for an Identity and Access Management (IAM) instance profile,
+//
 // which is a container for an IAM role for your instance.
 type AwsEc2LaunchTemplateDataIamInstanceProfileDetails struct {
 
-	// The Amazon Resource Name (ARN) of the instance profile.
+	//  The Amazon Resource Name (ARN) of the instance profile.
 	Arn *string
 
-	// The name of the instance profile.
+	//  The name of the instance profile.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about the market (purchasing) option for an Amazon EC2
+//	Provides details about the market (purchasing) option for an Amazon EC2
+//
 // instance.
 type AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails struct {
 
-	// The market type.
+	//  The market type.
 	MarketType *string
 
-	// The options for Spot Instances.
+	//  The options for Spot Instances.
 	SpotOptions *AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails
 
 	noSmithyDocumentSerde
@@ -4468,65 +4893,69 @@ type AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails struct {
 // Provides details about the market (purchasing) options for Spot Instances.
 type AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails struct {
 
-	// Deprecated.
+	//  Deprecated.
 	BlockDurationMinutes *int32
 
-	// The behavior when a Spot Instance is interrupted.
+	//  The behavior when a Spot Instance is interrupted.
 	InstanceInterruptionBehavior *string
 
-	// The maximum hourly price you're willing to pay for the Spot Instances.
+	//  The maximum hourly price you're willing to pay for the Spot Instances.
 	MaxPrice *string
 
-	// The Spot Instance request type.
+	//  The Spot Instance request type.
 	SpotInstanceType *string
 
-	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ), for
+	//  The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ), for
 	// persistent requests.
 	ValidUntil *string
 
 	noSmithyDocumentSerde
 }
 
-// The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web
+//	The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web
+//
 // Services Inferentia chips) on an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails struct {
 
-	// The maximum number of accelerators. If this parameter isn't specified, there's
+	//  The maximum number of accelerators. If this parameter isn't specified, there's
 	// no maximum limit. To exclude accelerator-enabled instance types, set Max to 0 .
 	Max *int32
 
-	// The minimum number of accelerators. If this parameter isn't specified, there's
+	//  The minimum number of accelerators. If this parameter isn't specified, there's
 	// no minimum limit.
 	Min *int32
 
 	noSmithyDocumentSerde
 }
 
-// The minimum and maximum amount of memory, in MiB, for the accelerators on an
+//	The minimum and maximum amount of memory, in MiB, for the accelerators on an
+//
 // Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails struct {
 
-	// The maximum amount of memory, in MiB. If this parameter isn't specified,
+	//  The maximum amount of memory, in MiB. If this parameter isn't specified,
 	// there's no maximum limit.
 	Max *int32
 
-	// The minimum amount of memory, in MiB. If 0 is specified, there's no maximum
+	//  The minimum amount of memory, in MiB. If 0 is specified, there's no maximum
 	// limit.
 	Min *int32
 
 	noSmithyDocumentSerde
 }
 
-// The minimum and maximum baseline bandwidth to Amazon Elastic Block Store
-// (Amazon EBS), in Mbps. For more information, see Amazon EBS–optimized instances  (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)
-// in the Amazon EC2 User Guide.
+//	The minimum and maximum baseline bandwidth to Amazon Elastic Block Store
+//
+// (Amazon EBS), in Mbps. For more information, see [Amazon EBS–optimized instances]in the Amazon EC2 User Guide.
+//
+// [Amazon EBS–optimized instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
 type AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails struct {
 
-	// The maximum baseline bandwidth, in Mbps. If this parameter is omitted, there's
+	//  The maximum baseline bandwidth, in Mbps. If this parameter is omitted, there's
 	// no maximum limit.
 	Max *int32
 
-	// The minimum baseline bandwidth, in Mbps. If this parameter is omitted, there's
+	//  The minimum baseline bandwidth, in Mbps. If this parameter is omitted, there's
 	// no minimum limit.
 	Min *int32
 
@@ -4536,7 +4965,7 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails
 // The attributes for the Amazon EC2 instance types.
 type AwsEc2LaunchTemplateDataInstanceRequirementsDetails struct {
 
-	// The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web
+	//  The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web
 	// Services Inferentia chips) on an instance.
 	AcceleratorCount *AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails
 
@@ -4544,10 +4973,10 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsDetails struct {
 	// manufacturers.
 	AcceleratorManufacturers []string
 
-	// The accelerators that must be on the instance type.
+	//  The accelerators that must be on the instance type.
 	AcceleratorNames []string
 
-	// The minimum and maximum amount of total accelerator memory, in MiB.
+	//  The minimum and maximum amount of total accelerator memory, in MiB.
 	AcceleratorTotalMemoryMiB *AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails
 
 	// The accelerator types that must be on the instance type.
@@ -4557,68 +4986,75 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsDetails struct {
 	// required.
 	BareMetal *string
 
-	// The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more
-	// information, see Amazon EBS optimized instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html)
-	// in the Amazon EC2 User Guide.
+	//  The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more
+	// information, see [Amazon EBS optimized instances]in the Amazon EC2 User Guide.
+	//
+	// [Amazon EBS optimized instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html
 	BaselineEbsBandwidthMbps *AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails
 
-	// Indicates whether burstable performance T instance types are included,
-	// excluded, or required. For more information, Burstable performance instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
-	// in the Amazon EC2 User Guide.
+	//  Indicates whether burstable performance T instance types are included,
+	// excluded, or required. For more information, [Burstable performance instances]in the Amazon EC2 User Guide.
+	//
+	// [Burstable performance instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
 	BurstablePerformance *string
 
-	// The CPU manufacturers to include.
+	//  The CPU manufacturers to include.
 	CpuManufacturers []string
 
-	// The instance types to exclude.
+	//  The instance types to exclude.
 	ExcludedInstanceTypes []string
 
-	// Indicates whether current or previous generation instance types are included.
+	//  Indicates whether current or previous generation instance types are included.
 	InstanceGenerations []string
 
-	// Indicates whether instance types with instance store volumes are included,
-	// excluded, or required. For more information, see Amazon EC2 instance store (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html)
-	// in the Amazon EC2 User Guide.
+	//  Indicates whether instance types with instance store volumes are included,
+	// excluded, or required. For more information, see [Amazon EC2 instance store]in the Amazon EC2 User Guide.
+	//
+	// [Amazon EC2 instance store]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html
 	LocalStorage *string
 
-	// The type of local storage that is required.
+	//  The type of local storage that is required.
 	LocalStorageTypes []string
 
-	// The minimum and maximum amount of memory per vCPU, in GiB.
+	//  The minimum and maximum amount of memory per vCPU, in GiB.
 	MemoryGiBPerVCpu *AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails
 
-	// The minimum and maximum amount of memory, in MiB.
+	//  The minimum and maximum amount of memory, in MiB.
 	MemoryMiB *AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails
 
-	// The minimum and maximum number of network interfaces.
+	//  The minimum and maximum number of network interfaces.
 	NetworkInterfaceCount *AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails
 
-	// The price protection threshold for On-Demand Instances. This is the maximum
+	//  The price protection threshold for On-Demand Instances. This is the maximum
 	// you'll pay for an On-Demand Instance, expressed as a percentage above the least
 	// expensive current generation M, C, or R instance type with your specified
 	// attributes. When Amazon EC2 selects instance types with your attributes, it
-	// excludes instance types priced above your threshold. The parameter accepts an
-	// integer, which Amazon EC2 interprets as a percentage. A high value, such as
-	// 999999 , turns off price protection.
+	// excludes instance types priced above your threshold.
+	//
+	// The parameter accepts an integer, which Amazon EC2 interprets as a percentage.
+	//
+	// A high value, such as 999999 , turns off price protection.
 	OnDemandMaxPricePercentageOverLowestPrice *int32
 
-	// Indicates whether instance types must support hibernation for On-Demand
+	//  Indicates whether instance types must support hibernation for On-Demand
 	// Instances.
 	RequireHibernateSupport *bool
 
-	// The price protection threshold for Spot Instances. This is the maximum you'll
+	//  The price protection threshold for Spot Instances. This is the maximum you'll
 	// pay for a Spot Instance, expressed as a percentage above the least expensive
 	// current generation M, C, or R instance type with your specified attributes. When
 	// Amazon EC2 selects instance types with your attributes, it excludes instance
-	// types priced above your threshold. The parameter accepts an integer, which
-	// Amazon EC2 interprets as a percentage. A high value, such as 999999 , turns off
-	// price protection.
+	// types priced above your threshold.
+	//
+	// The parameter accepts an integer, which Amazon EC2 interprets as a percentage.
+	//
+	// A high value, such as 999999 , turns off price protection.
 	SpotMaxPricePercentageOverLowestPrice *int32
 
-	// The minimum and maximum amount of total local storage, in GB.
+	//  The minimum and maximum amount of total local storage, in GB.
 	TotalLocalStorageGB *AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails
 
-	// The minimum and maximum number of vCPUs.
+	//  The minimum and maximum number of vCPUs.
 	VCpuCount *AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails
 
 	noSmithyDocumentSerde
@@ -4627,11 +5063,11 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsDetails struct {
 // The minimum and maximum amount of memory per vCPU, in GiB.
 type AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails struct {
 
-	// The maximum amount of memory per vCPU, in GiB. If this parameter is omitted,
+	//  The maximum amount of memory per vCPU, in GiB. If this parameter is omitted,
 	// there's no maximum limit.
 	Max *float64
 
-	// The minimum amount of memory per vCPU, in GiB. If this parameter is omitted,
+	//  The minimum amount of memory per vCPU, in GiB. If this parameter is omitted,
 	// there's no maximum limit.
 	Min *float64
 
@@ -4641,36 +5077,38 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails struct 
 // The minimum and maximum amount of memory, in MiB, for an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails struct {
 
-	// The maximum amount of memory, in MiB.
+	//  The maximum amount of memory, in MiB.
 	Max *int32
 
-	// The minimum amount of memory, in MiB.
+	//  The minimum amount of memory, in MiB.
 	Min *int32
 
 	noSmithyDocumentSerde
 }
 
-// The minimum and maximum number of network interfaces to be attached to an
+//	The minimum and maximum number of network interfaces to be attached to an
+//
 // Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails struct {
 
-	// The maximum number of network interfaces.
+	//  The maximum number of network interfaces.
 	Max *int32
 
-	// The minimum number of network interfaces.
+	//  The minimum number of network interfaces.
 	Min *int32
 
 	noSmithyDocumentSerde
 }
 
-// The minimum and maximum amount of total local storage, in GB, that an Amazon
+//	The minimum and maximum amount of total local storage, in GB, that an Amazon
+//
 // EC2 instance uses.
 type AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails struct {
 
-	// The maximum amount of total local storage, in GB.
+	//  The maximum amount of total local storage, in GB.
 	Max *float64
 
-	// The minimum amount of total local storage, in GB.
+	//  The minimum amount of total local storage, in GB.
 	Min *float64
 
 	noSmithyDocumentSerde
@@ -4679,10 +5117,10 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails stru
 // The minimum and maximum number of vCPUs for an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails struct {
 
-	// The maximum number of vCPUs.
+	//  The maximum number of vCPUs.
 	Max *int32
 
-	// The minimum number of vCPUs.
+	//  The minimum number of vCPUs.
 	Min *int32
 
 	noSmithyDocumentSerde
@@ -4691,7 +5129,7 @@ type AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails struct {
 // Provides details about the license configuration for an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataLicenseSetDetails struct {
 
-	// The Amazon Resource Name (ARN) of the license configuration.
+	//  The Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string
 
 	noSmithyDocumentSerde
@@ -4700,7 +5138,8 @@ type AwsEc2LaunchTemplateDataLicenseSetDetails struct {
 // The maintenance options of an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataMaintenanceOptionsDetails struct {
 
-	// Disables the automatic recovery behavior of your instance or sets it to default.
+	//  Disables the automatic recovery behavior of your instance or sets it to
+	// default.
 	AutoRecovery *string
 
 	noSmithyDocumentSerde
@@ -4709,26 +5148,27 @@ type AwsEc2LaunchTemplateDataMaintenanceOptionsDetails struct {
 // Specifies the metadata options for an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataMetadataOptionsDetails struct {
 
-	// Enables or disables the HTTP metadata endpoint on your instances. If the
+	//  Enables or disables the HTTP metadata endpoint on your instances. If the
 	// parameter is not specified, the default state is enabled, and you won't be able
 	// to access your instance metadata.
 	HttpEndpoint *string
 
-	// Enables or disables the IPv6 endpoint for the instance metadata service.
+	//  Enables or disables the IPv6 endpoint for the instance metadata service.
 	HttpProtocolIpv6 *string
 
-	// The desired HTTP PUT response hop limit for instance metadata requests. The
+	//  The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel.
 	HttpPutResponseHopLimit *int32
 
-	// The state of token usage for your instance metadata requests.
+	//  The state of token usage for your instance metadata requests.
 	HttpTokens *string
 
-	// When set to enabled , this parameter allows access to instance tags from the
+	//  When set to enabled , this parameter allows access to instance tags from the
 	// instance metadata. When set to disabled , it turns off access to instance tags
-	// from the instance metadata. For more information, see Work with instance tags
-	// in instance metadata (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS)
-	// in the Amazon EC2 User Guide.
+	// from the instance metadata. For more information, see [Work with instance tags in instance metadata]in the Amazon EC2 User
+	// Guide.
+	//
+	// [Work with instance tags in instance metadata]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
 	InstanceMetadataTags *string
 
 	noSmithyDocumentSerde
@@ -4737,89 +5177,93 @@ type AwsEc2LaunchTemplateDataMetadataOptionsDetails struct {
 // The monitoring for an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataMonitoringDetails struct {
 
-	// Enables detailed monitoring when true is specified. Otherwise, basic monitoring
-	// is enabled. For more information about detailed monitoring, see Enable or turn
-	// off detailed monitoring for your instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html)
-	// in the Amazon EC2 User Guide.
+	//  Enables detailed monitoring when true is specified. Otherwise, basic
+	// monitoring is enabled. For more information about detailed monitoring, see [Enable or turn off detailed monitoring for your instances]in
+	// the Amazon EC2 User Guide.
+	//
+	// [Enable or turn off detailed monitoring for your instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html
 	Enabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// One or more network interfaces to attach to an Amazon EC2 instance. If you
+//	One or more network interfaces to attach to an Amazon EC2 instance. If you
+//
 // specify a network interface, you must specify security groups and subnets as
 // part of the network interface.
 type AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails struct {
 
-	// Indicates whether to associate a Carrier IP address with eth0 for a new network
-	// interface. You use this option when you launch an instance in a Wavelength Zone
-	// and want to associate a Carrier IP address with the network interface. For more
-	// information, see Carrier IP address (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
-	// in the Wavelength Developer Guide.
+	//  Indicates whether to associate a Carrier IP address with eth0 for a new
+	// network interface. You use this option when you launch an instance in a
+	// Wavelength Zone and want to associate a Carrier IP address with the network
+	// interface. For more information, see [Carrier IP address]in the Wavelength Developer Guide.
+	//
+	// [Carrier IP address]: https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip
 	AssociateCarrierIpAddress *bool
 
-	// Associates a public IPv4 address with eth0 for a new network interface.
+	//  Associates a public IPv4 address with eth0 for a new network interface.
 	AssociatePublicIpAddress *bool
 
-	// Indicates whether the network interface is deleted when the instance is
+	//  Indicates whether the network interface is deleted when the instance is
 	// terminated.
 	DeleteOnTermination *bool
 
-	// A description for the network interface.
+	//  A description for the network interface.
 	Description *string
 
-	// The device index for the network interface attachment.
+	//  The device index for the network interface attachment.
 	DeviceIndex *int32
 
-	// The IDs of one or more security groups.
+	//  The IDs of one or more security groups.
 	Groups []string
 
-	// The type of network interface.
+	//  The type of network interface.
 	InterfaceType *string
 
-	// The number of IPv4 prefixes to be automatically assigned to the network
+	//  The number of IPv4 prefixes to be automatically assigned to the network
 	// interface. You cannot use this option if you use the Ipv4Prefixes option.
 	Ipv4PrefixCount *int32
 
-	// One or more IPv4 prefixes to be assigned to the network interface. You cannot
+	//  One or more IPv4 prefixes to be assigned to the network interface. You cannot
 	// use this option if you use the Ipv4PrefixCount option.
 	Ipv4Prefixes []AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails
 
-	// The number of IPv6 addresses to assign to a network interface. Amazon EC2
+	//  The number of IPv6 addresses to assign to a network interface. Amazon EC2
 	// automatically selects the IPv6 addresses from the subnet range. You can't use
 	// this option if you use Ipv6Addresses .
 	Ipv6AddressCount *int32
 
-	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your
+	//  One or more specific IPv6 addresses from the IPv6 CIDR block range of your
 	// subnet. You can't use this option if you use Ipv6AddressCount .
 	Ipv6Addresses []AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails
 
-	// The number of IPv6 prefixes to be automatically assigned to the network
+	//  The number of IPv6 prefixes to be automatically assigned to the network
 	// interface. You cannot use this option if you use the Ipv6Prefix option.
 	Ipv6PrefixCount *int32
 
-	// One or more IPv6 prefixes to be assigned to the network interface. You cannot
+	//  One or more IPv6 prefixes to be assigned to the network interface. You cannot
 	// use this option if you use the Ipv6PrefixCount option.
 	Ipv6Prefixes []AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails
 
-	// The index of the network card. Some instance types support multiple network
+	//  The index of the network card. Some instance types support multiple network
 	// cards. The primary network interface must be assigned to network card index 0 .
 	// The default is network card index 0 .
 	NetworkCardIndex *int32
 
-	// The ID of the network interface.
+	//  The ID of the network interface.
 	NetworkInterfaceId *string
 
-	// The primary private IPv4 address of the network interface.
+	//  The primary private IPv4 address of the network interface.
 	PrivateIpAddress *string
 
-	// One or more private IPv4 addresses.
+	//  One or more private IPv4 addresses.
 	PrivateIpAddresses []AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails
 
-	// The number of secondary private IPv4 addresses to assign to a network interface.
+	//  The number of secondary private IPv4 addresses to assign to a network
+	// interface.
 	SecondaryPrivateIpAddressCount *int32
 
-	// The ID of the subnet for the network interface.
+	//  The ID of the subnet for the network interface.
 	SubnetId *string
 
 	noSmithyDocumentSerde
@@ -4828,9 +5272,10 @@ type AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails struct {
 // Provides details on one or more IPv4 prefixes for a network interface.
 type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails struct {
 
-	// The IPv4 prefix. For more information, see Assigning prefixes to Amazon EC2
-	// network interfaces (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	//  The IPv4 prefix. For more information, see [Assigning prefixes to Amazon EC2 network interfaces] in the Amazon Elastic Compute
+	// Cloud User Guide.
+	//
+	// [Assigning prefixes to Amazon EC2 network interfaces]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
 	Ipv4Prefix *string
 
 	noSmithyDocumentSerde
@@ -4839,18 +5284,19 @@ type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails struct {
 // Specifies an IPv6 address in an Amazon EC2 launch template.
 type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails struct {
 
-	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your
+	//  One or more specific IPv6 addresses from the IPv6 CIDR block range of your
 	// subnet.
 	Ipv6Address *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details on one or more IPv6 prefixes to be assigned to the network
+//	Provides details on one or more IPv6 prefixes to be assigned to the network
+//
 // interface.
 type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails struct {
 
-	// The IPv6 prefix.
+	//  The IPv6 prefix.
 	Ipv6Prefix *string
 
 	noSmithyDocumentSerde
@@ -4859,11 +5305,11 @@ type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails struct {
 // One or more private IPv4 addresses.
 type AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails struct {
 
-	// Indicates whether the private IPv4 address is the primary private IPv4 address.
-	// Only one IPv4 address can be designated as primary.
+	//  Indicates whether the private IPv4 address is the primary private IPv4
+	// address. Only one IPv4 address can be designated as primary.
 	Primary *bool
 
-	// The private IPv4 address.
+	//  The private IPv4 address.
 	PrivateIpAddress *string
 
 	noSmithyDocumentSerde
@@ -4872,29 +5318,29 @@ type AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails struct
 // Provides details about the placement of an Amazon EC2 instance.
 type AwsEc2LaunchTemplateDataPlacementDetails struct {
 
-	// The affinity setting for an instance on an EC2 Dedicated Host.
+	//  The affinity setting for an instance on an EC2 Dedicated Host.
 	Affinity *string
 
-	// The Availability Zone for the instance.
+	//  The Availability Zone for the instance.
 	AvailabilityZone *string
 
-	// The name of the placement group for the instance.
+	//  The name of the placement group for the instance.
 	GroupName *string
 
-	// The ID of the Dedicated Host for the instance.
+	//  The ID of the Dedicated Host for the instance.
 	HostId *string
 
-	// The Amazon Resource Name (ARN) of the host resource group in which to launch
+	//  The Amazon Resource Name (ARN) of the host resource group in which to launch
 	// the instances.
 	HostResourceGroupArn *string
 
-	// The number of the partition the instance should launch in.
+	//  The number of the partition the instance should launch in.
 	PartitionNumber *int32
 
-	// Reserved for future use.
+	//  Reserved for future use.
 	SpreadDomain *string
 
-	// The tenancy of the instance (if the instance is running in a VPC). An instance
+	//  The tenancy of the instance (if the instance is running in a VPC). An instance
 	// with a tenancy of dedicated runs on single-tenant hardware.
 	Tenancy *string
 
@@ -4904,37 +5350,38 @@ type AwsEc2LaunchTemplateDataPlacementDetails struct {
 // Describes the options for Amazon EC2 instance hostnames.
 type AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails struct {
 
-	// Indicates whether to respond to DNS queries for instance hostnames with DNS
+	//  Indicates whether to respond to DNS queries for instance hostnames with DNS
 	// AAAA records.
 	EnableResourceNameDnsAAAARecord *bool
 
-	// Indicates whether to respond to DNS queries for instance hostnames with DNS A
+	//  Indicates whether to respond to DNS queries for instance hostnames with DNS A
 	// records.
 	EnableResourceNameDnsARecord *bool
 
-	// The type of hostname for EC2 instances.
+	//  The type of hostname for EC2 instances.
 	HostnameType *string
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the properties for creating an Amazon Elastic Compute Cloud (Amazon
+//	Specifies the properties for creating an Amazon Elastic Compute Cloud (Amazon
+//
 // EC2) launch template.
 type AwsEc2LaunchTemplateDetails struct {
 
-	// The default version of the launch template.
+	//  The default version of the launch template.
 	DefaultVersionNumber *int64
 
-	// An ID for the launch template.
+	//  An ID for the launch template.
 	Id *string
 
-	// The latest version of the launch template.
+	//  The latest version of the launch template.
 	LatestVersionNumber *int64
 
-	// The information to include in the launch template.
+	//  The information to include in the launch template.
 	LaunchTemplateData *AwsEc2LaunchTemplateDataDetails
 
-	// A name for the launch template.
+	//  A name for the launch template.
 	LaunchTemplateName *string
 
 	noSmithyDocumentSerde
@@ -5016,15 +5463,21 @@ type AwsEc2NetworkAclEntry struct {
 // Information about the network interface attachment.
 type AwsEc2NetworkInterfaceAttachment struct {
 
-	// Indicates when the attachment initiated. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the attachment initiated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	AttachTime *string
@@ -5045,7 +5498,9 @@ type AwsEc2NetworkInterfaceAttachment struct {
 	// The Amazon Web Services account ID of the owner of the instance.
 	InstanceOwnerId *string
 
-	// The attachment state. Valid values: attaching | attached | detaching | detached
+	// The attachment state.
+	//
+	// Valid values: attaching | attached | detaching | detached
 	Status *string
 
 	noSmithyDocumentSerde
@@ -5119,22 +5574,22 @@ type AwsEc2NetworkInterfaceSecurityGroup struct {
 // Provides details about a route table for the specified VPC.
 type AwsEc2RouteTableDetails struct {
 
-	// The associations between a route table and one or more subnets or a gateway.
+	//  The associations between a route table and one or more subnets or a gateway.
 	AssociationSet []AssociationSetDetails
 
-	// The ID of the Amazon Web Services account that owns the route table.
+	//  The ID of the Amazon Web Services account that owns the route table.
 	OwnerId *string
 
-	// Describes a virtual private gateway propagating route.
+	//  Describes a virtual private gateway propagating route.
 	PropagatingVgwSet []PropagatingVgwSetDetails
 
-	// The routes in the route table.
+	//  The routes in the route table.
 	RouteSet []RouteSetDetails
 
-	// The ID of the route table.
+	//  The ID of the route table.
 	RouteTableId *string
 
-	// The ID of the virtual private cloud (VPC).
+	//  The ID of the virtual private cloud (VPC).
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -5168,16 +5623,24 @@ type AwsEc2SecurityGroupDetails struct {
 type AwsEc2SecurityGroupIpPermission struct {
 
 	// The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
-	// type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all
-	// ICMP/ICMPv6 types, you must specify all codes.
+	// type number.
+	//
+	// A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
 	FromPort *int32
 
-	// The IP protocol name ( tcp , udp , icmp , icmpv6 ) or number. [VPC only] Use -1
-	// to specify all protocols. When authorizing security group rules, specifying -1
-	// or a protocol number other than tcp , udp , icmp , or icmpv6 allows traffic on
-	// all ports, regardless of any port range you specify. For tcp , udp , and icmp ,
-	// you must specify a port range. For icmpv6 , the port range is optional. If you
-	// omit the port range, traffic for all types and codes is allowed.
+	// The IP protocol name ( tcp , udp , icmp , icmpv6 ) or number.
+	//
+	// [VPC only] Use -1 to specify all protocols.
+	//
+	// When authorizing security group rules, specifying -1 or a protocol number other
+	// than tcp , udp , icmp , or icmpv6 allows traffic on all ports, regardless of
+	// any port range you specify.
+	//
+	// For tcp , udp , and icmp , you must specify a port range.
+	//
+	// For icmpv6 , the port range is optional. If you omit the port range, traffic for
+	// all types and codes is allowed.
 	IpProtocol *string
 
 	// The IPv4 ranges.
@@ -5191,9 +5654,10 @@ type AwsEc2SecurityGroupIpPermission struct {
 	// endpoint from instances associated with the security group.
 	PrefixListIds []AwsEc2SecurityGroupPrefixListId
 
-	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
-	// code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all
-	// ICMP/ICMPv6 types, you must specify all codes.
+	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
+	//
+	// A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
+	// types, you must specify all codes.
 	ToPort *int32
 
 	// The security group and Amazon Web Services account ID pairs.
@@ -5245,11 +5709,14 @@ type AwsEc2SecurityGroupUserIdGroupPair struct {
 	// The status of a VPC peering connection, if applicable.
 	PeeringStatus *string
 
-	// The ID of an Amazon Web Services account. For a referenced security group in
-	// another VPC, the account ID of the referenced security group is returned in the
-	// response. If the referenced security group is deleted, this value is not
-	// returned. [EC2-Classic] Required when adding or removing rules that reference a
-	// security group in another VPC.
+	// The ID of an Amazon Web Services account.
+	//
+	// For a referenced security group in another VPC, the account ID of the
+	// referenced security group is returned in the response. If the referenced
+	// security group is deleted, this value is not returned.
+	//
+	// [EC2-Classic] Required when adding or removing rules that reference a security
+	// group in another VPC.
 	UserId *string
 
 	// The ID of the VPC for the referenced security group, if applicable.
@@ -5366,10 +5833,15 @@ type AwsEc2VolumeAttachment struct {
 	InstanceId *string
 
 	// The attachment state of the volume. Valid values are as follows:
+	//
 	//   - attaching
+	//
 	//   - attached
+	//
 	//   - busy
+	//
 	//   - detaching
+	//
 	//   - detached
 	Status *string
 
@@ -5382,15 +5854,21 @@ type AwsEc2VolumeDetails struct {
 	// The volume attachments.
 	Attachments []AwsEc2VolumeAttachment
 
-	// Indicates when the volume was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the volume was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreateTime *string
@@ -5412,11 +5890,17 @@ type AwsEc2VolumeDetails struct {
 	SnapshotId *string
 
 	// The volume state. Valid values are as follows:
+	//
 	//   - available
+	//
 	//   - creating
+	//
 	//   - deleted
+	//
 	//   - deleting
+	//
 	//   - error
+	//
 	//   - in-use
 	Status *string
 
@@ -5484,10 +5968,15 @@ type AwsEc2VpcEndpointServiceDetails struct {
 	ServiceName *string
 
 	// The current state of the service. Valid values are as follows:
+	//
 	//   - Available
+	//
 	//   - Deleted
+	//
 	//   - Deleting
+	//
 	//   - Failed
+	//
 	//   - Pending
 	ServiceState *string
 
@@ -5591,9 +6080,13 @@ type AwsEc2VpnConnectionDetails struct {
 	Routes []AwsEc2VpnConnectionRoutesDetails
 
 	// The current state of the VPN connection. Valid values are as follows:
+	//
 	//   - available
+	//
 	//   - deleted
+	//
 	//   - deleting
+	//
 	//   - pending
 	State *string
 
@@ -5713,16 +6206,21 @@ type AwsEc2VpnConnectionVgwTelemetryDetails struct {
 	// The ARN of the VPN tunnel endpoint certificate.
 	CertificateArn *string
 
-	// The date and time of the last change in status. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// The date and time of the last change in status.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastStatusChange *string
@@ -5744,24 +6242,32 @@ type AwsEc2VpnConnectionVgwTelemetryDetails struct {
 type AwsEcrContainerImageDetails struct {
 
 	// The architecture of the image. Valid values are as follows:
+	//
 	//   - arm64
+	//
 	//   - i386
+	//
 	//   - x86_64
 	Architecture *string
 
 	// The sha256 digest of the image manifest.
 	ImageDigest *string
 
-	// The date and time when the image was pushed to the repository. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// The date and time when the image was pushed to the repository.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ImagePublishedAt *string
@@ -5907,8 +6413,9 @@ type AwsEcsClusterDefaultCapacityProviderStrategyDetails struct {
 type AwsEcsClusterDetails struct {
 
 	// The number of services that are running on the cluster in an ACTIVE state. You
-	// can view these services with the Amazon ECS ListServices (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html)
-	// API operation.
+	// can view these services with the Amazon ECS [ListServices]ListServices API operation.
+	//
+	// [ListServices]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
 	ActiveServicesCount *int32
 
 	// The short name of one or more capacity providers to associate with the cluster.
@@ -5968,16 +6475,21 @@ type AwsEcsContainerDetails struct {
 type AwsEcsServiceCapacityProviderStrategyDetails struct {
 
 	// The minimum number of tasks to run on the capacity provider. Only one strategy
-	// item can specify a value for Base . The value must be between 0 and 100000.
+	// item can specify a value for Base .
+	//
+	// The value must be between 0 and 100000.
 	Base *int32
 
 	// The short name of the capacity provider.
 	CapacityProvider *string
 
 	// The relative percentage of the total number of tasks that should use the
-	// capacity provider. If no weight is specified, the default value is 0. At least
-	// one capacity provider must have a weight greater than 0. The value can be
-	// between 0 and 1000.
+	// capacity provider.
+	//
+	// If no weight is specified, the default value is 0. At least one capacity
+	// provider must have a weight greater than 0.
+	//
+	// The value can be between 0 and 1000.
 	Weight *int32
 
 	noSmithyDocumentSerde
@@ -6009,21 +6521,27 @@ type AwsEcsServiceDeploymentConfigurationDetails struct {
 	// number of tasks in a service that are allowed in the RUNNING or PENDING state
 	// during a deployment, and for tasks that use the EC2 launch type, when any
 	// container instances are in the DRAINING state. Provided as a percentage of the
-	// desired number of tasks. The default value is 200%. For a service that uses the
-	// blue/green ( CODE_DEPLOY ) or EXTERNAL deployment types, and tasks that use the
-	// EC2 launch type, the maximum number of tasks in the service that remain in the
-	// RUNNING state while the container instances are in the DRAINING state. For the
-	// Fargate launch type, the maximum percent value is not used.
+	// desired number of tasks. The default value is 200%.
+	//
+	// For a service that uses the blue/green ( CODE_DEPLOY ) or EXTERNAL deployment
+	// types, and tasks that use the EC2 launch type, the maximum number of tasks in
+	// the service that remain in the RUNNING state while the container instances are
+	// in the DRAINING state.
+	//
+	// For the Fargate launch type, the maximum percent value is not used.
 	MaximumPercent *int32
 
 	// For a service that uses the rolling update ( ECS ) deployment type, the minimum
 	// number of tasks in a service that must remain in the RUNNING state during a
 	// deployment, and while any container instances are in the DRAINING state if the
 	// service contains tasks using the EC2 launch type. Expressed as a percentage of
-	// the desired number of tasks. The default value is 100%. For a service that uses
-	// the blue/green ( CODE_DEPLOY ) or EXTERNAL deployment types and tasks that use
-	// the EC2 launch type, the minimum number of the tasks in the service that remain
-	// in the RUNNING state while the container instances are in the DRAINING state.
+	// the desired number of tasks. The default value is 100%.
+	//
+	// For a service that uses the blue/green ( CODE_DEPLOY ) or EXTERNAL deployment
+	// types and tasks that use the EC2 launch type, the minimum number of the tasks in
+	// the service that remain in the RUNNING state while the container instances are
+	// in the DRAINING state.
+	//
 	// For the Fargate launch type, the minimum healthy percent value is not used.
 	MinimumHealthyPercent *int32
 
@@ -6034,13 +6552,17 @@ type AwsEcsServiceDeploymentConfigurationDetails struct {
 type AwsEcsServiceDeploymentControllerDetails struct {
 
 	// The rolling update ( ECS ) deployment type replaces the current running version
-	// of the container with the latest version. The blue/green ( CODE_DEPLOY )
-	// deployment type uses the blue/green deployment model that is powered by
-	// CodeDeploy. This deployment model a new deployment of a service can be verified
-	// before production traffic is sent to it. The external ( EXTERNAL ) deployment
-	// type allows the use of any third-party deployment controller for full control
-	// over the deployment process for an Amazon ECS service. Valid values: ECS |
-	// CODE_DEPLOY | EXTERNAL
+	// of the container with the latest version.
+	//
+	// The blue/green ( CODE_DEPLOY ) deployment type uses the blue/green deployment
+	// model that is powered by CodeDeploy. This deployment model a new deployment of a
+	// service can be verified before production traffic is sent to it.
+	//
+	// The external ( EXTERNAL ) deployment type allows the use of any third-party
+	// deployment controller for full control over the deployment process for an Amazon
+	// ECS service.
+	//
+	// Valid values: ECS | CODE_DEPLOY | EXTERNAL
 	Type *string
 
 	noSmithyDocumentSerde
@@ -6075,7 +6597,9 @@ type AwsEcsServiceDetails struct {
 	// scheduler ignores unhealthy Elastic Load Balancing target health checks.
 	HealthCheckGracePeriodSeconds *int32
 
-	// The launch type that the service uses. Valid values: EC2 | FARGATE | EXTERNAL
+	// The launch type that the service uses.
+	//
+	// Valid values: EC2 | FARGATE | EXTERNAL
 	LaunchType *string
 
 	// Information about the load balancers that the service uses.
@@ -6101,7 +6625,9 @@ type AwsEcsServiceDetails struct {
 
 	// Indicates whether to propagate the tags from the task definition to the task or
 	// from the service to the task. If no value is provided, then tags are not
-	// propagated. Valid values: TASK_DEFINITION | SERVICE
+	// propagated.
+	//
+	// Valid values: TASK_DEFINITION | SERVICE
 	PropagateTags *string
 
 	// The ARN of the IAM role that is associated with the service. The role allows
@@ -6109,22 +6635,29 @@ type AwsEcsServiceDetails struct {
 	// Load Balancing load balancer.
 	Role *string
 
-	// The scheduling strategy to use for the service. The REPLICA scheduling strategy
-	// places and maintains the desired number of tasks across the cluster. By default,
-	// the service scheduler spreads tasks across Availability Zones. Task placement
-	// strategies and constraints are used to customize task placement decisions. The
-	// DAEMON scheduling strategy deploys exactly one task on each active container
-	// instance that meets all of the task placement constraints that are specified in
-	// the cluster. The service scheduler also evaluates the task placement constraints
-	// for running tasks and stops tasks that do not meet the placement constraints.
+	// The scheduling strategy to use for the service.
+	//
+	// The REPLICA scheduling strategy places and maintains the desired number of
+	// tasks across the cluster. By default, the service scheduler spreads tasks across
+	// Availability Zones. Task placement strategies and constraints are used to
+	// customize task placement decisions.
+	//
+	// The DAEMON scheduling strategy deploys exactly one task on each active
+	// container instance that meets all of the task placement constraints that are
+	// specified in the cluster. The service scheduler also evaluates the task
+	// placement constraints for running tasks and stops tasks that do not meet the
+	// placement constraints.
+	//
 	// Valid values: REPLICA | DAEMON
 	SchedulingStrategy *string
 
 	// The ARN of the service.
 	ServiceArn *string
 
-	// The name of the service. The name can contain up to 255 characters. It can use
-	// letters, numbers, underscores, and hyphens.
+	// The name of the service.
+	//
+	// The name can contain up to 255 characters. It can use letters, numbers,
+	// underscores, and hyphens.
 	ServiceName *string
 
 	// Information about the service discovery registries to assign to the service.
@@ -6149,14 +6682,17 @@ type AwsEcsServiceLoadBalancersDetails struct {
 	ContainerPort *int32
 
 	// The name of the load balancer to associate with the Amazon ECS service or task
-	// set. Only specified when using a Classic Load Balancer. For an Application Load
+	// set.
+	//
+	// Only specified when using a Classic Load Balancer. For an Application Load
 	// Balancer or a Network Load Balancer, the load balancer name is omitted.
 	LoadBalancerName *string
 
 	// The ARN of the Elastic Load Balancing target group or groups associated with a
-	// service or task set. Only specified when using an Application Load Balancer or a
-	// Network Load Balancer. For a Classic Load Balancer, the target group ARN is
-	// omitted.
+	// service or task set.
+	//
+	// Only specified when using an Application Load Balancer or a Network Load
+	// Balancer. For a Classic Load Balancer, the target group ARN is omitted.
 	TargetGroupArn *string
 
 	noSmithyDocumentSerde
@@ -6167,15 +6703,19 @@ type AwsEcsServiceLoadBalancersDetails struct {
 type AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails struct {
 
 	// Whether the task's elastic network interface receives a public IP address. The
-	// default value is DISABLED . Valid values: ENABLED | DISABLED
+	// default value is DISABLED .
+	//
+	// Valid values: ENABLED | DISABLED
 	AssignPublicIp *string
 
-	// The IDs of the security groups associated with the task or service. You can
-	// provide up to five security groups.
+	// The IDs of the security groups associated with the task or service.
+	//
+	// You can provide up to five security groups.
 	SecurityGroups []string
 
-	// The IDs of the subnets associated with the task or service. You can provide up
-	// to 16 subnets.
+	// The IDs of the subnets associated with the task or service.
+	//
+	// You can provide up to 16 subnets.
 	Subnets []string
 
 	noSmithyDocumentSerde
@@ -6200,7 +6740,9 @@ type AwsEcsServicePlacementConstraintsDetails struct {
 
 	// The type of constraint. Use distinctInstance to run each task in a particular
 	// group on a different container instance. Use memberOf to restrict the selection
-	// to a group of valid candidates. Valid values: distinctInstance | memberOf
+	// to a group of valid candidates.
+	//
+	// Valid values: distinctInstance | memberOf
 	Type *string
 
 	noSmithyDocumentSerde
@@ -6209,20 +6751,28 @@ type AwsEcsServicePlacementConstraintsDetails struct {
 // A placement strategy that determines how to place the tasks for the service.
 type AwsEcsServicePlacementStrategiesDetails struct {
 
-	// The field to apply the placement strategy against. For the spread placement
-	// strategy, valid values are instanceId (or host , which has the same effect), or
-	// any platform or custom attribute that is applied to a container instance, such
-	// as attribute:ecs.availability-zone . For the binpack placement strategy, valid
-	// values are cpu and memory . For the random placement strategy, this attribute
-	// is not used.
+	// The field to apply the placement strategy against.
+	//
+	// For the spread placement strategy, valid values are instanceId (or host , which
+	// has the same effect), or any platform or custom attribute that is applied to a
+	// container instance, such as attribute:ecs.availability-zone .
+	//
+	// For the binpack placement strategy, valid values are cpu and memory .
+	//
+	// For the random placement strategy, this attribute is not used.
 	Field *string
 
-	// The type of placement strategy. The random placement strategy randomly places
-	// tasks on available candidates. The spread placement strategy spreads placement
-	// across available candidates evenly based on the value of Field . The binpack
-	// strategy places tasks on available candidates that have the least available
-	// amount of the resource that is specified in Field . Valid values: random |
-	// spread | binpack
+	// The type of placement strategy.
+	//
+	// The random placement strategy randomly places tasks on available candidates.
+	//
+	// The spread placement strategy spreads placement across available candidates
+	// evenly based on the value of Field .
+	//
+	// The binpack strategy places tasks on available candidates that have the least
+	// available amount of the resource that is specified in Field .
+	//
+	// Valid values: random | spread | binpack
 	Type *string
 
 	noSmithyDocumentSerde
@@ -6231,18 +6781,24 @@ type AwsEcsServicePlacementStrategiesDetails struct {
 // Information about a service discovery registry to assign to the service.
 type AwsEcsServiceServiceRegistriesDetails struct {
 
-	// The container name value to use for the service discovery service. If the task
-	// definition uses the bridge or host network mode, you must specify ContainerName
-	// and ContainerPort . If the task definition uses the awsvpc network mode and a
-	// type SRV DNS record, you must specify either ContainerName and ContainerPort ,
-	// or Port , but not both.
+	// The container name value to use for the service discovery service.
+	//
+	// If the task definition uses the bridge or host network mode, you must specify
+	// ContainerName and ContainerPort .
+	//
+	// If the task definition uses the awsvpc network mode and a type SRV DNS record,
+	// you must specify either ContainerName and ContainerPort , or Port , but not
+	// both.
 	ContainerName *string
 
-	// The port value to use for the service discovery service. If the task definition
-	// uses the bridge or host network mode, you must specify ContainerName and
-	// ContainerPort . If the task definition uses the awsvpc network mode and a type
-	// SRV DNS record, you must specify either ContainerName and ContainerPort , or
-	// Port , but not both.
+	// The port value to use for the service discovery service.
+	//
+	// If the task definition uses the bridge or host network mode, you must specify
+	// ContainerName and ContainerPort .
+	//
+	// If the task definition uses the awsvpc network mode and a type SRV DNS record,
+	// you must specify either ContainerName and ContainerPort , or Port , but not
+	// both.
 	ContainerPort *int32
 
 	// The port value to use for a service discovery service that specifies an SRV
@@ -6262,9 +6818,13 @@ type AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails struct {
 	// The dependency condition of the dependent container. Indicates the required
 	// status of the dependent container before the current container can start. Valid
 	// values are as follows:
+	//
 	//   - COMPLETE
+	//
 	//   - HEALTHY
+	//
 	//   - SUCCESS
+	//
 	//   - START
 	Condition *string
 
@@ -6400,13 +6960,20 @@ type AwsEcsTaskDefinitionContainerDefinitionsDetails struct {
 	// A list of ulimits to set in the container.
 	Ulimits []AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails
 
-	// The user to use inside the container. The value can use one of the following
-	// formats.
+	// The user to use inside the container.
+	//
+	// The value can use one of the following formats.
+	//
 	//   - user
+	//
 	//   - user : group
+	//
 	//   - uid
+	//
 	//   - uid : gid
+	//
 	//   - user : gid
+	//
 	//   - uid : group
 	User *string
 
@@ -6460,10 +7027,14 @@ type AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails struct {
 // configures a log router for container logs.
 type AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails struct {
 
-	// The options to use to configure the log router. The valid option keys are as
-	// follows:
+	// The options to use to configure the log router.
+	//
+	// The valid option keys are as follows:
+	//
 	//   - enable-ecs-log-metadata . The value can be true or false .
+	//
 	//   - config-file-type . The value can be s3 or file .
+	//
 	//   - config-file-value . The value is either an S3 ARN or a file path.
 	Options map[string]string
 
@@ -6504,10 +7075,11 @@ type AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails struct {
 type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails struct {
 
 	// The Linux capabilities for the container that are added to the default
-	// configuration provided by Docker. Valid values are as follows: Valid values:
-	// "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" |
-	// "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" |
-	// "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
+	// configuration provided by Docker. Valid values are as follows:
+	//
+	// Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
+	// "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK"
+	// | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
 	// "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" |
 	// "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
 	// "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" |
@@ -6516,14 +7088,16 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails 
 	Add []string
 
 	// The Linux capabilities for the container that are dropped from the default
-	// configuration provided by Docker. Valid values: "ALL" | "AUDIT_CONTROL" |
-	// "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH"
-	// | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" |
-	// "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" |
-	// "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" |
-	// "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" |
-	// "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" |
-	// "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM"
+	// configuration provided by Docker.
+	//
+	// Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
+	// "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK"
+	// | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" |
+	// "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" |
+	// "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" |
+	// "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" |
+	// "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" |
+	// "SYSLOG" | "WAKE_ALARM"
 	Drop []string
 
 	noSmithyDocumentSerde
@@ -6584,13 +7158,14 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails struct 
 	// The absolute file path where the tmpfs volume is to be mounted.
 	ContainerPath *string
 
-	// The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw"
-	// | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" |
-	// "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
-	// "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" |
-	// "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" |
-	// "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" |
-	// "nr_inodes" | "nr_blocks" | "mpol"
+	// The list of tmpfs volume mount options.
+	//
+	// Valid values: "defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" |
+	// "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand"
+	// | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" |
+	// "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" |
+	// "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime"
+	// | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol"
 	MountOptions []string
 
 	// The maximum size (in MiB) of the tmpfs volume.
@@ -6602,20 +7177,34 @@ type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails struct 
 // The log configuration specification for the container.
 type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails struct {
 
-	// The log driver to use for the container. Valid values on Fargate are as
-	// follows:
+	// The log driver to use for the container.
+	//
+	// Valid values on Fargate are as follows:
+	//
 	//   - awsfirelens
+	//
 	//   - awslogs
+	//
 	//   - splunk
+	//
 	// Valid values on Amazon EC2 are as follows:
+	//
 	//   - awsfirelens
+	//
 	//   - awslogs
+	//
 	//   - fluentd
+	//
 	//   - gelf
+	//
 	//   - journald
+	//
 	//   - json-file
+	//
 	//   - logentries
+	//
 	//   - splunk
+	//
 	//   - syslog
 	LogDriver *string
 
@@ -6635,9 +7224,10 @@ type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetail
 	// The name of the secret.
 	Name *string
 
-	// The secret to expose to the container. The value is either the full ARN of the
-	// Secrets Manager secret or the full ARN of the parameter in the Systems Manager
-	// Parameter Store.
+	// The secret to expose to the container.
+	//
+	// The value is either the full ARN of the Secrets Manager secret or the full ARN
+	// of the parameter in the Systems Manager Parameter Store.
 	ValueFrom *string
 
 	noSmithyDocumentSerde
@@ -6691,10 +7281,13 @@ type AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails struct 
 	// InferenceAccelerator .
 	Type *string
 
-	// The value for the specified resource type. For GPU , the value is the number of
-	// physical GPUs the Amazon ECS container agent reserves for the container. For
-	// InferenceAccelerator , the value should match the DeviceName attribute of an
-	// entry in InferenceAccelerators .
+	// The value for the specified resource type.
+	//
+	// For GPU , the value is the number of physical GPUs the Amazon ECS container
+	// agent reserves for the container.
+	//
+	// For InferenceAccelerator , the value should match the DeviceName attribute of
+	// an entry in InferenceAccelerators .
 	Value *string
 
 	noSmithyDocumentSerde
@@ -6733,20 +7326,35 @@ type AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails struct {
 	HardLimit *int32
 
 	// The type of the ulimit. Valid values are as follows:
+	//
 	//   - core
+	//
 	//   - cpu
+	//
 	//   - data
+	//
 	//   - fsize
+	//
 	//   - locks
+	//
 	//   - memlock
+	//
 	//   - msgqueue
+	//
 	//   - nice
+	//
 	//   - nofile
+	//
 	//   - nproc
+	//
 	//   - rss
+	//
 	//   - rtprio
+	//
 	//   - rttime
+	//
 	//   - sigpending
+	//
 	//   - stack
 	Name *string
 
@@ -6777,10 +7385,15 @@ type AwsEcsTaskDefinitionDetails struct {
 	ContainerDefinitions []AwsEcsTaskDefinitionContainerDefinitionsDetails
 
 	// The number of CPU units used by the task.Valid values are as follows:
+	//
 	//   - 256 (.25 vCPU)
+	//
 	//   - 512 (.5 vCPU)
+	//
 	//   - 1024 (1 vCPU)
+	//
 	//   - 2048 (2 vCPU)
+	//
 	//   - 4096 (4 vCPU)
 	Cpu *string
 
@@ -6796,24 +7409,34 @@ type AwsEcsTaskDefinitionDetails struct {
 
 	// The inter-process communication (IPC) resource namespace to use for the
 	// containers in the task. Valid values are as follows:
+	//
 	//   - host
+	//
 	//   - none
+	//
 	//   - task
 	IpcMode *string
 
-	// The amount (in MiB) of memory used by the task. For tasks that are hosted on
-	// Amazon EC2, you can provide a task-level memory value or a container-level
-	// memory value. For tasks that are hosted on Fargate, you must use one of the
-	// specified values (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size)
-	// in the Amazon Elastic Container Service Developer Guide , which determines your
-	// range of supported values for the Cpu and Memory parameters.
+	// The amount (in MiB) of memory used by the task.
+	//
+	// For tasks that are hosted on Amazon EC2, you can provide a task-level memory
+	// value or a container-level memory value. For tasks that are hosted on Fargate,
+	// you must use one of the [specified values]in the Amazon Elastic Container Service Developer Guide
+	// , which determines your range of supported values for the Cpu and Memory
+	// parameters.
+	//
+	// [specified values]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_size
 	Memory *string
 
 	// The Docker networking mode to use for the containers in the task. Valid values
 	// are as follows:
+	//
 	//   - awsvpc
+	//
 	//   - bridge
+	//
 	//   - host
+	//
 	//   - none
 	NetworkMode *string
 
@@ -6830,7 +7453,7 @@ type AwsEcsTaskDefinitionDetails struct {
 	// The task launch types that the task definition was validated against.
 	RequiresCompatibilities []string
 
-	// The status of the task definition.
+	//  The status of the task definition.
 	Status *string
 
 	// The short name or ARN of the IAM role that grants containers in the task
@@ -7137,11 +7760,17 @@ type AwsEksClusterDetails struct {
 	CertificateAuthorityData *string
 
 	// The status of the cluster. Valid values are as follows:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATING
+	//
 	//   - DELETING
+	//
 	//   - FAILED
+	//
 	//   - PENDING
+	//
 	//   - UPDATING
 	ClusterStatus *string
 
@@ -7174,10 +7803,15 @@ type AwsEksClusterLoggingClusterLoggingDetails struct {
 	Enabled *bool
 
 	// A list of logging types. Valid values are as follows:
+	//
 	//   - api
+	//
 	//   - audit
+	//
 	//   - authenticator
+	//
 	//   - controllerManager
+	//
 	//   - scheduler
 	Types []string
 
@@ -7196,7 +7830,7 @@ type AwsEksClusterLoggingDetails struct {
 // Information about the VPC configuration used by the cluster control plane.
 type AwsEksClusterResourcesVpcConfigDetails struct {
 
-	// Indicates whether the Amazon EKS public API server endpoint is turned on. If
+	//  Indicates whether the Amazon EKS public API server endpoint is turned on. If
 	// the Amazon EKS public API server endpoint is turned off, your cluster's
 	// Kubernetes API server can only receive requests that originate from within the
 	// cluster VPC.
@@ -7257,13 +7891,21 @@ type AwsElasticBeanstalkEnvironmentDetails struct {
 	SolutionStackName *string
 
 	// The current operational status of the environment. Valid values are as follows:
+	//
 	//   - Aborting
+	//
 	//   - Launching
+	//
 	//   - LinkingFrom
+	//
 	//   - LinkingTo
+	//
 	//   - Ready
+	//
 	//   - Terminated
+	//
 	//   - Terminating
+	//
 	//   - Updating
 	Status *string
 
@@ -7335,9 +7977,14 @@ type AwsElasticsearchDomainDetails struct {
 	// Unique identifier for an Elasticsearch domain.
 	DomainId *string
 
-	// Name of an Elasticsearch domain. Domain names are unique across all domains
-	// owned by the same account within an Amazon Web Services Region. Domain names
-	// must start with a lowercase letter and must be between 3 and 28 characters.
+	// Name of an Elasticsearch domain.
+	//
+	// Domain names are unique across all domains owned by the same account within an
+	// Amazon Web Services Region.
+	//
+	// Domain names must start with a lowercase letter and must be between 3 and 28
+	// characters.
+	//
 	// Valid characters are a-z (lowercase only), 0-9, and – (hyphen).
 	DomainName *string
 
@@ -7351,7 +7998,9 @@ type AwsElasticsearchDomainDetails struct {
 	EncryptionAtRestOptions *AwsElasticsearchDomainEncryptionAtRestOptions
 
 	// Domain-specific endpoint used to submit index, search, and data upload requests
-	// to an Elasticsearch domain. The endpoint is a service URL.
+	// to an Elasticsearch domain.
+	//
+	// The endpoint is a service URL.
 	Endpoint *string
 
 	// The key-value pair that exists if the Elasticsearch domain uses VPC endpoints.
@@ -7380,9 +8029,12 @@ type AwsElasticsearchDomainDomainEndpointOptions struct {
 	// Whether to require that all traffic to the domain arrive over HTTPS.
 	EnforceHTTPS *bool
 
-	// The TLS security policy to apply to the HTTPS endpoint of the OpenSearch
-	// domain. Valid values:
+	// The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.
+	//
+	// Valid values:
+	//
 	//   - Policy-Min-TLS-1-0-2019-07 , which supports TLSv1.0 and higher
+	//
 	//   - Policy-Min-TLS-1-2-2019-07 , which only supports TLSv1.2
 	TLSSecurityPolicy *string
 
@@ -7403,18 +8055,23 @@ type AwsElasticsearchDomainElasticsearchClusterConfigDetails struct {
 
 	// The hardware configuration of the computer that hosts the dedicated master
 	// node. A sample value is m3.medium.elasticsearch . If this attribute is
-	// specified, then DedicatedMasterEnabled must be true . For a list of valid
-	// values, see Supported instance types in Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html)
-	// in the Amazon OpenSearch Service Developer Guide.
+	// specified, then DedicatedMasterEnabled must be true .
+	//
+	// For a list of valid values, see [Supported instance types in Amazon OpenSearch Service] in the Amazon OpenSearch Service Developer
+	// Guide.
+	//
+	// [Supported instance types in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html
 	DedicatedMasterType *string
 
 	// The number of data nodes to use in the Elasticsearch domain.
 	InstanceCount *int32
 
 	// The instance type for your data nodes. For example, m3.medium.elasticsearch .
-	// For a list of valid values, see Supported instance types in Amazon OpenSearch
-	// Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html)
-	// in the Amazon OpenSearch Service Developer Guide.
+	//
+	// For a list of valid values, see [Supported instance types in Amazon OpenSearch Service] in the Amazon OpenSearch Service Developer
+	// Guide.
+	//
+	// [Supported instance types in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html
 	InstanceType *string
 
 	// Configuration options for zone awareness. Provided if ZoneAwarenessEnabled is
@@ -7513,10 +8170,15 @@ type AwsElasticsearchDomainServiceSoftwareOptions struct {
 	UpdateAvailable *bool
 
 	// The status of the service software update. Valid values are as follows:
+	//
 	//   - COMPLETED
+	//
 	//   - ELIGIBLE
+	//
 	//   - IN_PROGRESS
+	//
 	//   - NOT_ELIGIBLE
+	//
 	//   - PENDING_UPDATE
 	UpdateStatus *string
 
@@ -7574,8 +8236,9 @@ type AwsElbLbCookieStickinessPolicy struct {
 // Contains information about the access log configuration for the load balancer.
 type AwsElbLoadBalancerAccessLog struct {
 
-	// The interval in minutes for publishing the access logs. You can publish access
-	// logs either every 5 minutes or every 60 minutes.
+	// The interval in minutes for publishing the access logs.
+	//
+	// You can publish access logs either every 5 minutes or every 60 minutes.
 	EmitInterval *int32
 
 	// Indicates whether access logs are enabled for the load balancer.
@@ -7584,8 +8247,9 @@ type AwsElbLoadBalancerAccessLog struct {
 	// The name of the S3 bucket where the access logs are stored.
 	S3BucketName *string
 
-	// The logical hierarchy that was created for the S3 bucket. If a prefix is not
-	// provided, the log is placed at the root level of the bucket.
+	// The logical hierarchy that was created for the S3 bucket.
+	//
+	// If a prefix is not provided, the log is placed at the root level of the bucket.
 	S3BucketPrefix *string
 
 	noSmithyDocumentSerde
@@ -7606,28 +8270,33 @@ type AwsElbLoadBalancerAdditionalAttribute struct {
 // Contains attributes for the load balancer.
 type AwsElbLoadBalancerAttributes struct {
 
-	// Information about the access log configuration for the load balancer. If the
-	// access log is enabled, the load balancer captures detailed information about all
-	// requests. It delivers the information to a specified S3 bucket.
+	// Information about the access log configuration for the load balancer.
+	//
+	// If the access log is enabled, the load balancer captures detailed information
+	// about all requests. It delivers the information to a specified S3 bucket.
 	AccessLog *AwsElbLoadBalancerAccessLog
 
 	// Any additional attributes for a load balancer.
 	AdditionalAttributes []AwsElbLoadBalancerAdditionalAttribute
 
 	// Information about the connection draining configuration for the load balancer.
-	// If connection draining is enabled, the load balancer allows existing requests to
-	// complete before it shifts traffic away from a deregistered or unhealthy
+	//
+	// If connection draining is enabled, the load balancer allows existing requests
+	// to complete before it shifts traffic away from a deregistered or unhealthy
 	// instance.
 	ConnectionDraining *AwsElbLoadBalancerConnectionDraining
 
-	// Connection settings for the load balancer. If an idle timeout is configured,
-	// the load balancer allows connections to remain idle for the specified duration.
-	// When a connection is idle, no data is sent over the connection.
+	// Connection settings for the load balancer.
+	//
+	// If an idle timeout is configured, the load balancer allows connections to
+	// remain idle for the specified duration. When a connection is idle, no data is
+	// sent over the connection.
 	ConnectionSettings *AwsElbLoadBalancerConnectionSettings
 
-	// Cross-zone load balancing settings for the load balancer. If cross-zone load
-	// balancing is enabled, the load balancer routes the request traffic evenly across
-	// all instances regardless of the Availability Zones.
+	// Cross-zone load balancing settings for the load balancer.
+	//
+	// If cross-zone load balancing is enabled, the load balancer routes the request
+	// traffic evenly across all instances regardless of the Availability Zones.
 	CrossZoneLoadBalancing *AwsElbLoadBalancerCrossZoneLoadBalancing
 
 	noSmithyDocumentSerde
@@ -7694,16 +8363,21 @@ type AwsElbLoadBalancerDetails struct {
 	// The ID of the Amazon Route 53 hosted zone for the load balancer.
 	CanonicalHostedZoneNameID *string
 
-	// Indicates when the load balancer was created. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the load balancer was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedTime *string
@@ -7729,10 +8403,13 @@ type AwsElbLoadBalancerDetails struct {
 	// The policies for a load balancer.
 	Policies *AwsElbLoadBalancerPolicies
 
-	// The type of load balancer. Only provided if the load balancer is in a VPC. If
-	// Scheme is internet-facing , the load balancer has a public DNS name that
-	// resolves to a public IP address. If Scheme is internal , the load balancer has a
-	// public DNS name that resolves to a private IP address.
+	// The type of load balancer. Only provided if the load balancer is in a VPC.
+	//
+	// If Scheme is internet-facing , the load balancer has a public DNS name that
+	// resolves to a public IP address.
+	//
+	// If Scheme is internal , the load balancer has a public DNS name that resolves to
+	// a private IP address.
 	Scheme *string
 
 	// The security groups for the load balancer. Only provided if the load balancer
@@ -7766,10 +8443,15 @@ type AwsElbLoadBalancerHealthCheck struct {
 
 	// The instance that is being checked. The target specifies the protocol and port.
 	// The available protocols are TCP, SSL, HTTP, and HTTPS. The range of valid ports
-	// is 1 through 65535. For the HTTP and HTTPS protocols, the target also specifies
-	// the ping path. For the TCP protocol, the target is specified as TCP: . For the
-	// SSL protocol, the target is specified as SSL. . For the HTTP and HTTPS
-	// protocols, the target is specified as :/ .
+	// is 1 through 65535.
+	//
+	// For the HTTP and HTTPS protocols, the target also specifies the ping path.
+	//
+	// For the TCP protocol, the target is specified as TCP: .
+	//
+	// For the SSL protocol, the target is specified as SSL. .
+	//
+	// For the HTTP and HTTPS protocols, the target is specified as  :/ .
 	Target *string
 
 	// The amount of time, in seconds, during which no response means a failed health
@@ -7798,17 +8480,22 @@ type AwsElbLoadBalancerListener struct {
 	// The port on which the instance is listening.
 	InstancePort *int32
 
-	// The protocol to use to route traffic to instances. Valid values: HTTP | HTTPS |
-	// TCP | SSL
+	// The protocol to use to route traffic to instances.
+	//
+	// Valid values: HTTP | HTTPS | TCP | SSL
 	InstanceProtocol *string
 
-	// The port on which the load balancer is listening. On EC2-VPC, you can specify
-	// any port from the range 1-65535. On EC2-Classic, you can specify any port from
-	// the following list: 25, 80, 443, 465, 587, 1024-65535.
+	// The port on which the load balancer is listening.
+	//
+	// On EC2-VPC, you can specify any port from the range 1-65535.
+	//
+	// On EC2-Classic, you can specify any port from the following list: 25, 80, 443,
+	// 465, 587, 1024-65535.
 	LoadBalancerPort *int32
 
-	// The load balancer transport protocol to use for routing. Valid values: HTTP |
-	// HTTPS | TCP | SSL
+	// The load balancer transport protocol to use for routing.
+	//
+	// Valid values: HTTP | HTTPS | TCP | SSL
 	Protocol *string
 
 	// The ARN of the server certificate.
@@ -7877,16 +8564,21 @@ type AwsElbv2LoadBalancerDetails struct {
 	// The ID of the Amazon Route 53 hosted zone associated with the load balancer.
 	CanonicalHostedZoneId *string
 
-	// Indicates when the load balancer was created. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the load balancer was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedTime *string
@@ -7920,85 +8612,89 @@ type AwsElbv2LoadBalancerDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A schema defines the structure of events that are sent to Amazon EventBridge.
+//	A schema defines the structure of events that are sent to Amazon EventBridge.
+//
 // Schema registries are containers for schemas. They collect and organize schemas
 // so that your schemas are in logical groups.
 type AwsEventSchemasRegistryDetails struct {
 
-	// A description of the registry to be created.
+	//  A description of the registry to be created.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the registry.
+	//  The Amazon Resource Name (ARN) of the registry.
 	RegistryArn *string
 
-	// The name of the schema registry.
+	//  The name of the schema registry.
 	RegistryName *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Amazon EventBridge global endpoint. The endpoint can
+//	Provides details about an Amazon EventBridge global endpoint. The endpoint can
+//
 // improve your application’s availability by making it Regional-fault tolerant.
 type AwsEventsEndpointDetails struct {
 
-	// The Amazon Resource Name (ARN) of the endpoint.
+	//  The Amazon Resource Name (ARN) of the endpoint.
 	Arn *string
 
-	// A description of the endpoint.
+	//  A description of the endpoint.
 	Description *string
 
-	// The URL subdomain of the endpoint. For example, if EndpointUrl is
+	//  The URL subdomain of the endpoint. For example, if EndpointUrl is
 	// https://abcde.veo.endpoints.event.amazonaws.com , then the EndpointId is
 	// abcde.veo .
 	EndpointId *string
 
-	// The URL of the endpoint.
+	//  The URL of the endpoint.
 	EndpointUrl *string
 
-	// The event buses being used by the endpoint.
+	//  The event buses being used by the endpoint.
 	EventBuses []AwsEventsEndpointEventBusesDetails
 
-	// The name of the endpoint.
+	//  The name of the endpoint.
 	Name *string
 
-	// Whether event replication was enabled or disabled for this endpoint. The
+	//  Whether event replication was enabled or disabled for this endpoint. The
 	// default state is ENABLED , which means you must supply a RoleArn . If you don't
 	// have a RoleArn or you don't want event replication enabled, set the state to
 	// DISABLED .
 	ReplicationConfig *AwsEventsEndpointReplicationConfigDetails
 
-	// The ARN of the role used by event replication for the endpoint.
+	//  The ARN of the role used by event replication for the endpoint.
 	RoleArn *string
 
-	// The routing configuration of the endpoint.
+	//  The routing configuration of the endpoint.
 	RoutingConfig *AwsEventsEndpointRoutingConfigDetails
 
-	// The current state of the endpoint.
+	//  The current state of the endpoint.
 	State *string
 
-	// The reason the endpoint is in its current state.
+	//  The reason the endpoint is in its current state.
 	StateReason *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about the Amazon EventBridge event buses that the endpoint is
+//	Provides details about the Amazon EventBridge event buses that the endpoint is
+//
 // associated with.
 type AwsEventsEndpointEventBusesDetails struct {
 
-	// The Amazon Resource Name (ARN) of the event bus that the endpoint is associated
-	// with.
+	//  The Amazon Resource Name (ARN) of the event bus that the endpoint is
+	// associated with.
 	EventBusArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Indicates whether replication is enabled or disabled for the endpoint. If
+//	Indicates whether replication is enabled or disabled for the endpoint. If
+//
 // enabled, the endpoint can replicate all events to a secondary Amazon Web
 // Services Region.
 type AwsEventsEndpointReplicationConfigDetails struct {
 
-	// The state of event replication.
+	//  The state of event replication.
 	State *string
 
 	noSmithyDocumentSerde
@@ -8007,21 +8703,22 @@ type AwsEventsEndpointReplicationConfigDetails struct {
 // Provides details about the routing configuration of the endpoint.
 type AwsEventsEndpointRoutingConfigDetails struct {
 
-	// The failover configuration for an endpoint. This includes what triggers
+	//  The failover configuration for an endpoint. This includes what triggers
 	// failover and what happens when it's triggered.
 	FailoverConfig *AwsEventsEndpointRoutingConfigFailoverConfigDetails
 
 	noSmithyDocumentSerde
 }
 
-// The failover configuration for an endpoint. This includes what triggers
+//	The failover configuration for an endpoint. This includes what triggers
+//
 // failover and what happens when it's triggered.
 type AwsEventsEndpointRoutingConfigFailoverConfigDetails struct {
 
-	// The main Region of the endpoint.
+	//  The main Region of the endpoint.
 	Primary *AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails
 
-	// The Region that events are routed to when failover is triggered or event
+	//  The Region that events are routed to when failover is triggered or event
 	// replication is enabled.
 	Secondary *AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails
 
@@ -8031,48 +8728,51 @@ type AwsEventsEndpointRoutingConfigFailoverConfigDetails struct {
 // Provides details about the primary Amazon Web Services Region of the endpoint.
 type AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails struct {
 
-	// The Amazon Resource Name (ARN) of the health check used by the endpoint to
+	//  The Amazon Resource Name (ARN) of the health check used by the endpoint to
 	// determine whether failover is triggered.
 	HealthCheck *string
 
 	noSmithyDocumentSerde
 }
 
-// The Amazon Web Services Region that events are routed to when failover is
+//	The Amazon Web Services Region that events are routed to when failover is
+//
 // triggered or event replication is enabled.
 type AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails struct {
 
-	// Defines the secondary Region.
+	//  Defines the secondary Region.
 	Route *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about Amazon EventBridge event bus. An event bus is a router
+//	Provides details about Amazon EventBridge event bus. An event bus is a router
+//
 // that receives events and delivers them to zero or more destinations, or targets.
 // This can be a custom event bus which you can use to receive events from your
 // custom applications and services, or it can be a partner event bus which can be
 // matched to a partner event source.
 type AwsEventsEventbusDetails struct {
 
-	// The Amazon Resource Name (ARN) of the account permitted to write events to the
+	//  The Amazon Resource Name (ARN) of the account permitted to write events to the
 	// current account.
 	Arn *string
 
-	// The name of the event bus.
+	//  The name of the event bus.
 	Name *string
 
-	// The policy that enables the external account to send events to your account.
+	//  The policy that enables the external account to send events to your account.
 	Policy *string
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of CloudTrail as a data
+//	An object that contains information on the status of CloudTrail as a data
+//
 // source for the detector.
 type AwsGuardDutyDetectorDataSourcesCloudTrailDetails struct {
 
-	// Specifies whether CloudTrail is activated as a data source for the detector.
+	//  Specifies whether CloudTrail is activated as a data source for the detector.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -8081,144 +8781,154 @@ type AwsGuardDutyDetectorDataSourcesCloudTrailDetails struct {
 // Describes which data sources are activated for the detector.
 type AwsGuardDutyDetectorDataSourcesDetails struct {
 
-	// An object that contains information on the status of CloudTrail as a data
+	//  An object that contains information on the status of CloudTrail as a data
 	// source for the detector.
 	CloudTrail *AwsGuardDutyDetectorDataSourcesCloudTrailDetails
 
-	// An object that contains information on the status of DNS logs as a data source
+	//  An object that contains information on the status of DNS logs as a data source
 	// for the detector.
 	DnsLogs *AwsGuardDutyDetectorDataSourcesDnsLogsDetails
 
-	// An object that contains information on the status of VPC Flow Logs as a data
+	//  An object that contains information on the status of VPC Flow Logs as a data
 	// source for the detector.
 	FlowLogs *AwsGuardDutyDetectorDataSourcesFlowLogsDetails
 
-	// An object that contains information on the status of Kubernetes data sources
+	//  An object that contains information on the status of Kubernetes data sources
 	// for the detector.
 	Kubernetes *AwsGuardDutyDetectorDataSourcesKubernetesDetails
 
-	// An object that contains information on the status of Malware Protection as a
+	//  An object that contains information on the status of Malware Protection as a
 	// data source for the detector.
 	MalwareProtection *AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails
 
-	// An object that contains information on the status of S3 Data event logs as a
+	//  An object that contains information on the status of S3 Data event logs as a
 	// data source for the detector.
 	S3Logs *AwsGuardDutyDetectorDataSourcesS3LogsDetails
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of DNS logs as a data source
+//	An object that contains information on the status of DNS logs as a data source
+//
 // for the detector.
 type AwsGuardDutyDetectorDataSourcesDnsLogsDetails struct {
 
-	// Describes whether DNS logs is enabled as a data source for the detector.
+	//  Describes whether DNS logs is enabled as a data source for the detector.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of VPC Flow Logs as a data
+//	An object that contains information on the status of VPC Flow Logs as a data
+//
 // source for the detector.
 type AwsGuardDutyDetectorDataSourcesFlowLogsDetails struct {
 
-	// Describes whether VPC Flow Logs are activated as a data source for the detector.
-	Status *string
-
-	noSmithyDocumentSerde
-}
-
-// An object that contains information on the status of Kubernetes audit logs as a
-// data source for the detector.
-type AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails struct {
-
-	// Describes whether Kubernetes audit logs are activated as a data source for the
+	//  Describes whether VPC Flow Logs are activated as a data source for the
 	// detector.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of Kubernetes data sources
+//	An object that contains information on the status of Kubernetes audit logs as
+//
+// a data source for the detector.
+type AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails struct {
+
+	//  Describes whether Kubernetes audit logs are activated as a data source for the
+	// detector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+//	An object that contains information on the status of Kubernetes data sources
+//
 // for the detector.
 type AwsGuardDutyDetectorDataSourcesKubernetesDetails struct {
 
-	// Describes whether Kubernetes audit logs are activated as a data source for the
+	//  Describes whether Kubernetes audit logs are activated as a data source for the
 	// detector.
 	AuditLogs *AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of Malware Protection as a
+//	An object that contains information on the status of Malware Protection as a
+//
 // data source for the detector.
 type AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails struct {
 
-	// Describes the configuration of Malware Protection for EC2 instances with
+	//  Describes the configuration of Malware Protection for EC2 instances with
 	// findings.
 	ScanEc2InstanceWithFindings *AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails
 
-	// The GuardDuty Malware Protection service role.
+	//  The GuardDuty Malware Protection service role.
 	ServiceRole *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration of Malware Protection for EC2 instances with
+//	Describes the configuration of Malware Protection for EC2 instances with
+//
 // findings.
 type AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails struct {
 
-	// Describes the configuration of scanning EBS volumes (Malware Protection) as a
+	//  Describes the configuration of scanning EBS volumes (Malware Protection) as a
 	// data source.
 	EbsVolumes *AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails
 
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration of scanning EBS volumes (Malware Protection) as a
+//	Describes the configuration of scanning EBS volumes (Malware Protection) as a
+//
 // data source.
 type AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails struct {
 
-	// Specifies the reason why scanning EBS volumes (Malware Protection) isn’t
+	//  Specifies the reason why scanning EBS volumes (Malware Protection) isn’t
 	// activated as a data source.
 	Reason *string
 
-	// Describes whether scanning EBS volumes is activated as a data source for the
+	//  Describes whether scanning EBS volumes is activated as a data source for the
 	// detector.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains information on the status of S3 data event logs as a
+//	An object that contains information on the status of S3 data event logs as a
+//
 // data source for the detector.
 type AwsGuardDutyDetectorDataSourcesS3LogsDetails struct {
 
-	// A value that describes whether S3 data event logs are automatically enabled for
-	// new members of an organization.
+	//  A value that describes whether S3 data event logs are automatically enabled
+	// for new members of an organization.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Amazon GuardDuty detector. A detector is an object
+//	Provides details about an Amazon GuardDuty detector. A detector is an object
+//
 // that represents the GuardDuty service. A detector is required for GuardDuty to
 // become operational.
 type AwsGuardDutyDetectorDetails struct {
 
-	// Describes which data sources are activated for the detector.
+	//  Describes which data sources are activated for the detector.
 	DataSources *AwsGuardDutyDetectorDataSourcesDetails
 
-	// Describes which features are activated for the detector.
+	//  Describes which features are activated for the detector.
 	Features []AwsGuardDutyDetectorFeaturesDetails
 
-	// The publishing frequency of the finding.
+	//  The publishing frequency of the finding.
 	FindingPublishingFrequency *string
 
-	// The GuardDuty service role.
+	//  The GuardDuty service role.
 	ServiceRole *string
 
-	// The activation status of the detector.
+	//  The activation status of the detector.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -8227,10 +8937,10 @@ type AwsGuardDutyDetectorDetails struct {
 // Describes which features are activated for the detector.
 type AwsGuardDutyDetectorFeaturesDetails struct {
 
-	// Indicates the name of the feature that is activated for the detector.
+	//  Indicates the name of the feature that is activated for the detector.
 	Name *string
 
-	// Indicates the status of the feature that is activated for the detector.
+	//  Indicates the status of the feature that is activated for the detector.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -8245,16 +8955,21 @@ type AwsIamAccessKeyDetails struct {
 	// The Amazon Web Services account ID of the account for the key.
 	AccountId *string
 
-	// Indicates when the IAM access key was created. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the IAM access key was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedAt *string
@@ -8274,9 +8989,10 @@ type AwsIamAccessKeyDetails struct {
 	// The status of the IAM access key related to a finding.
 	Status AwsIamAccessKeyStatus
 
-	// The user associated with the IAM access key related to a finding. The UserName
-	// parameter has been replaced with the PrincipalName parameter because access
-	// keys can also be assigned to principals that are not IAM users.
+	// The user associated with the IAM access key related to a finding.
+	//
+	// The UserName parameter has been replaced with the PrincipalName parameter
+	// because access keys can also be assigned to principals that are not IAM users.
 	//
 	// Deprecated: This filter is deprecated. Instead, use PrincipalName.
 	UserName *string
@@ -8299,15 +9015,21 @@ type AwsIamAccessKeySessionContext struct {
 // Attributes of the session that the key was used for.
 type AwsIamAccessKeySessionContextAttributes struct {
 
-	// Indicates when the session was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the session was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreationDate *string
@@ -8358,15 +9080,21 @@ type AwsIamGroupDetails struct {
 	// A list of the managed policies that are attached to the IAM group.
 	AttachedManagedPolicies []AwsIamAttachedManagedPolicy
 
-	// Indicates when the IAM group was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the IAM group was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreateDate *string
@@ -8401,16 +9129,21 @@ type AwsIamInstanceProfile struct {
 	// The ARN of the instance profile.
 	Arn *string
 
-	// Indicates when the instance profile was created. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the instance profile was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreateDate *string
@@ -8439,15 +9172,21 @@ type AwsIamInstanceProfileRole struct {
 	// The policy that grants an entity permission to assume the role.
 	AssumeRolePolicyDocument *string
 
-	// Indicates when the role was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the role was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreateDate *string
@@ -8483,15 +9222,21 @@ type AwsIamPolicyDetails struct {
 	// The number of users, groups, and roles that the policy is attached to.
 	AttachmentCount *int32
 
-	// When the policy was created. This field accepts only the specified formats.
-	// Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] . The
-	// time-secfrac after seconds is limited to a maximum of 9 digits. The offset is
-	// bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// When the policy was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreateDate *string
@@ -8521,16 +9266,21 @@ type AwsIamPolicyDetails struct {
 	// List of versions of the policy.
 	PolicyVersionList []AwsIamPolicyVersion
 
-	// When the policy was most recently updated. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// When the policy was most recently updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	UpdateDate *string
@@ -8541,15 +9291,21 @@ type AwsIamPolicyDetails struct {
 // A version of an IAM policy.
 type AwsIamPolicyVersion struct {
 
-	// Indicates when the version was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the version was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreateDate *string
@@ -8572,15 +9328,21 @@ type AwsIamRoleDetails struct {
 	// The list of the managed policies that are attached to the role.
 	AttachedManagedPolicies []AwsIamAttachedManagedPolicy
 
-	// Indicates when the role was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the role was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreateDate *string
@@ -8626,15 +9388,21 @@ type AwsIamUserDetails struct {
 	// A list of the managed policies that are attached to the user.
 	AttachedManagedPolicies []AwsIamAttachedManagedPolicy
 
-	// Indicates when the user was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the user was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreateDate *string
@@ -8714,15 +9482,21 @@ type AwsKmsKeyDetails struct {
 	// KMS key.
 	AWSAccountId *string
 
-	// Indicates when the KMS key was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the KMS key was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreationDate *float64
@@ -8741,16 +9515,25 @@ type AwsKmsKeyDetails struct {
 	KeyRotationStatus *bool
 
 	// The state of the KMS key. Valid values are as follows:
+	//
 	//   - Disabled
+	//
 	//   - Enabled
+	//
 	//   - PendingDeletion
+	//
 	//   - PendingImport
+	//
 	//   - Unavailable
 	KeyState *string
 
-	// The source of the KMS key material. When this value is AWS_KMS , KMS created the
-	// key material. When this value is EXTERNAL , the key material was imported from
-	// your existing key management infrastructure or the KMS key lacks key material.
+	// The source of the KMS key material.
+	//
+	// When this value is AWS_KMS , KMS created the key material.
+	//
+	// When this value is EXTERNAL , the key material was imported from your existing
+	// key management infrastructure or the KMS key lacks key material.
+	//
 	// When this value is AWS_CLOUDHSM , the key material was created in the CloudHSM
 	// cluster associated with a custom key store.
 	Origin *string
@@ -8818,16 +9601,21 @@ type AwsLambdaFunctionDetails struct {
 	// key.
 	KmsKeyArn *string
 
-	// Indicates when the function was last updated. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the function was last updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastModified *string
@@ -8932,27 +9720,39 @@ type AwsLambdaFunctionVpcConfig struct {
 // Details about a Lambda layer version.
 type AwsLambdaLayerVersionDetails struct {
 
-	// The layer's compatible function runtimes (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-	// . The following list includes deprecated runtimes. For more information, see
-	// Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// in the Lambda Developer Guide. Array Members: Maximum number of 5 items. Valid
-	// Values: nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x | nodejs12.x
-	// | nodejs14.x | nodejs16.x | java8 | java8.al2 | java11 | python2.7 | python3.6 |
-	// python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 |
+	// The layer's compatible [function runtimes].
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy] in
+	// the Lambda Developer Guide.
+	//
+	// Array Members: Maximum number of 5 items.
+	//
+	// Valid Values: nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | nodejs10.x |
+	// nodejs12.x | nodejs14.x | nodejs16.x | java8 | java8.al2 | java11 | python2.7 |
+	// python3.6 | python3.7 | python3.8 | python3.9 | dotnetcore1.0 | dotnetcore2.0 |
 	// dotnetcore2.1 | dotnetcore3.1 | dotnet6 | nodejs4.3-edge | go1.x | ruby2.5 |
 	// ruby2.7 | provided | provided.al2 | nodejs18.x | python3.10 | java17 | ruby3.2 |
 	// python3.11 | nodejs20.x | provided.al2023 | python3.12 | java21
+	//
+	// [function runtimes]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	CompatibleRuntimes []string
 
-	// Indicates when the version was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the version was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedDate *string
@@ -8979,13 +9779,13 @@ type AwsMountPoint struct {
 // Provides details about different modes of client authentication.
 type AwsMskClusterClusterInfoClientAuthenticationDetails struct {
 
-	// Provides details for client authentication using SASL.
+	//  Provides details for client authentication using SASL.
 	Sasl *AwsMskClusterClusterInfoClientAuthenticationSaslDetails
 
-	// Provides details for client authentication using TLS.
+	//  Provides details for client authentication using TLS.
 	Tls *AwsMskClusterClusterInfoClientAuthenticationTlsDetails
 
-	// Provides details for allowing no client authentication.
+	//  Provides details for allowing no client authentication.
 	Unauthenticated *AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails
 
 	noSmithyDocumentSerde
@@ -8994,10 +9794,10 @@ type AwsMskClusterClusterInfoClientAuthenticationDetails struct {
 // Provides details for client authentication using SASL.
 type AwsMskClusterClusterInfoClientAuthenticationSaslDetails struct {
 
-	// Provides details for SASL client authentication using IAM.
+	//  Provides details for SASL client authentication using IAM.
 	Iam *AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails
 
-	// Details for SASL client authentication using SCRAM.
+	//  Details for SASL client authentication using SCRAM.
 	Scram *AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails
 
 	noSmithyDocumentSerde
@@ -9006,7 +9806,7 @@ type AwsMskClusterClusterInfoClientAuthenticationSaslDetails struct {
 // Details for SASL/IAM client authentication.
 type AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails struct {
 
-	// Indicates whether SASL/IAM authentication is enabled or not.
+	//  Indicates whether SASL/IAM authentication is enabled or not.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -9015,7 +9815,7 @@ type AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails struct {
 // Details for SASL/SCRAM client authentication.
 type AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails struct {
 
-	// Indicates whether SASL/SCRAM authentication is enabled or not.
+	//  Indicates whether SASL/SCRAM authentication is enabled or not.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -9024,13 +9824,13 @@ type AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails struct {
 // Provides details for client authentication using TLS.
 type AwsMskClusterClusterInfoClientAuthenticationTlsDetails struct {
 
-	// List of Amazon Web Services Private CA Amazon Resource Names (ARNs). Amazon Web
-	// Services Private CA enables creation of private certificate authority (CA)
+	//  List of Amazon Web Services Private CA Amazon Resource Names (ARNs). Amazon
+	// Web Services Private CA enables creation of private certificate authority (CA)
 	// hierarchies, including root and subordinate CAs, without the investment and
 	// maintenance costs of operating an on-premises CA.
 	CertificateAuthorityArnList []string
 
-	// Indicates whether TLS authentication is enabled or not.
+	//  Indicates whether TLS authentication is enabled or not.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -9039,59 +9839,62 @@ type AwsMskClusterClusterInfoClientAuthenticationTlsDetails struct {
 // Provides details for allowing no client authentication.
 type AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails struct {
 
-	// Indicates whether unauthenticated is allowed or not.
+	//  Indicates whether unauthenticated is allowed or not.
 	Enabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// Provide details about an Amazon Managed Streaming for Apache Kafka (Amazon MSK)
-// cluster.
+//	Provide details about an Amazon Managed Streaming for Apache Kafka (Amazon
+//
+// MSK) cluster.
 type AwsMskClusterClusterInfoDetails struct {
 
-	// Provides information for different modes of client authentication.
+	//  Provides information for different modes of client authentication.
 	ClientAuthentication *AwsMskClusterClusterInfoClientAuthenticationDetails
 
-	// The name of the cluster.
+	//  The name of the cluster.
 	ClusterName *string
 
-	// The current version of the cluster.
+	//  The current version of the cluster.
 	CurrentVersion *string
 
-	// Includes encryption-related information, such as the KMS key used for
+	//  Includes encryption-related information, such as the KMS key used for
 	// encrypting data at rest and whether you want Amazon MSK to encrypt your data in
 	// transit.
 	EncryptionInfo *AwsMskClusterClusterInfoEncryptionInfoDetails
 
-	// Specifies the level of monitoring for the cluster.
+	//  Specifies the level of monitoring for the cluster.
 	EnhancedMonitoring *string
 
-	// The number of broker nodes in the cluster.
+	//  The number of broker nodes in the cluster.
 	NumberOfBrokerNodes *int32
 
 	noSmithyDocumentSerde
 }
 
-// Includes encryption-related information, such as the KMS key used for
+//	Includes encryption-related information, such as the KMS key used for
+//
 // encrypting data at rest and whether you want MSK to encrypt your data in
 // transit.
 type AwsMskClusterClusterInfoEncryptionInfoDetails struct {
 
-	// The data-volume encryption details. You can't update encryption at rest
+	//  The data-volume encryption details. You can't update encryption at rest
 	// settings for existing clusters.
 	EncryptionAtRest *AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails
 
-	// The settings for encrypting data in transit.
+	//  The settings for encrypting data in transit.
 	EncryptionInTransit *AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails
 
 	noSmithyDocumentSerde
 }
 
-// The data-volume encryption details. You can't update encryption at rest
+//	The data-volume encryption details. You can't update encryption at rest
+//
 // settings for existing clusters.
 type AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails struct {
 
-	// The Amazon Resource Name (ARN) of the KMS key for encrypting data at rest. If
+	//  The Amazon Resource Name (ARN) of the KMS key for encrypting data at rest. If
 	// you don't specify a KMS key, MSK creates one for you and uses it.
 	DataVolumeKMSKeyId *string
 
@@ -9101,11 +9904,11 @@ type AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails struct {
 // The settings for encrypting data in transit.
 type AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails struct {
 
-	// Indicates the encryption setting for data in transit between clients and
+	//  Indicates the encryption setting for data in transit between clients and
 	// brokers.
 	ClientBroker *string
 
-	// When set to true , it indicates that data communication among the broker nodes
+	//  When set to true , it indicates that data communication among the broker nodes
 	// of the cluster is encrypted. When set to false , the communication happens in
 	// plain text. The default value is true .
 	InCluster *bool
@@ -9113,11 +9916,12 @@ type AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon
+//	Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon
+//
 // MSK) cluster.
 type AwsMskClusterDetails struct {
 
-	// Provides information about a cluster.
+	//  Provides information about a cluster.
 	ClusterInfo *AwsMskClusterClusterInfoDetails
 
 	noSmithyDocumentSerde
@@ -9196,8 +10000,9 @@ type AwsNetworkFirewallFirewallSubnetMappingsDetails struct {
 
 // Details about an Network Firewall rule group. Rule groups are used to inspect
 // and control network traffic. Stateless rule groups apply to individual packets.
-// Stateful rule groups apply to packets in the context of their traffic flow. Rule
-// groups are referenced in firewall policies.
+// Stateful rule groups apply to packets in the context of their traffic flow.
+//
+// Rule groups are referenced in firewall policies.
 type AwsNetworkFirewallRuleGroupDetails struct {
 
 	// The maximum number of operating resources that this rule group can use.
@@ -9251,16 +10056,20 @@ type AwsOpenSearchServiceDomainClusterConfigDetails struct {
 	// to data upload requests.
 	DedicatedMasterEnabled *bool
 
-	// The hardware configuration of the computer that hosts the dedicated master
-	// node. If this attribute is specified, then DedicatedMasterEnabled must be true .
+	// The hardware configuration of the computer that hosts the dedicated master node.
+	//
+	// If this attribute is specified, then DedicatedMasterEnabled must be true .
 	DedicatedMasterType *string
 
 	// The number of data nodes to use in the OpenSearch domain.
 	InstanceCount *int32
 
-	// The instance type for your data nodes. For a list of valid values, see
-	// Supported instance types in Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html)
-	// in the Amazon OpenSearch Service Developer Guide.
+	// The instance type for your data nodes.
+	//
+	// For a list of valid values, see [Supported instance types in Amazon OpenSearch Service] in the Amazon OpenSearch Service Developer
+	// Guide.
+	//
+	// [Supported instance types in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/supported-instance-types.html
 	InstanceType *string
 
 	// The number of UltraWarm instances.
@@ -9317,8 +10126,10 @@ type AwsOpenSearchServiceDomainDetails struct {
 	// Additional options for the domain endpoint.
 	DomainEndpointOptions *AwsOpenSearchServiceDomainDomainEndpointOptionsDetails
 
-	// The domain endpoints. Used if the OpenSearch domain resides in a VPC. This is a
-	// map of key-value pairs. The key is always vpc . The value is the endpoint.
+	// The domain endpoints. Used if the OpenSearch domain resides in a VPC.
+	//
+	// This is a map of key-value pairs. The key is always vpc . The value is the
+	// endpoint.
 	DomainEndpoints map[string]string
 
 	// The name of the endpoint.
@@ -9461,10 +10272,15 @@ type AwsOpenSearchServiceDomainServiceSoftwareOptionsDetails struct {
 	UpdateAvailable *bool
 
 	// The status of the service software update. Valid values are as follows:
+	//
 	//   - COMPLETED
+	//
 	//   - ELIGIBLE
+	//
 	//   - IN_PROGRESS
+	//
 	//   - NOT_ELIGIBLE
+	//
 	//   - PENDING_UPDATE
 	UpdateStatus *string
 
@@ -9493,8 +10309,11 @@ type AwsRdsDbClusterAssociatedRole struct {
 
 	// The status of the association between the IAM role and the DB cluster. Valid
 	// values are as follows:
+	//
 	//   - ACTIVE
+	//
 	//   - INVALID
+	//
 	//   - PENDING
 	Status *string
 
@@ -9505,9 +10324,13 @@ type AwsRdsDbClusterAssociatedRole struct {
 type AwsRdsDbClusterDetails struct {
 
 	// The status of the database activity stream. Valid values are as follows:
+	//
 	//   - started
+	//
 	//   - starting
+	//
 	//   - stopped
+	//
 	//   - stopping
 	ActivityStreamStatus *string
 
@@ -9518,7 +10341,7 @@ type AwsRdsDbClusterDetails struct {
 	// A list of the IAM roles that are associated with the DB cluster.
 	AssociatedRoles []AwsRdsDbClusterAssociatedRole
 
-	// Indicates if minor version upgrades are automatically applied to the cluster.
+	//  Indicates if minor version upgrades are automatically applied to the cluster.
 	AutoMinorVersionUpgrade *bool
 
 	// A list of Availability Zones (AZs) where instances in the DB cluster can be
@@ -9529,15 +10352,20 @@ type AwsRdsDbClusterDetails struct {
 	BackupRetentionPeriod *int32
 
 	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
+	//
 	// This field accepts only the specified formats. Timestamps can end with Z or
 	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
 	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
 	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ClusterCreateTime *string
@@ -9592,16 +10420,24 @@ type AwsRdsDbClusterDetails struct {
 
 	// The name of the database engine to use for this DB cluster. Valid values are as
 	// follows:
+	//
 	//   - aurora
+	//
 	//   - aurora-mysql
+	//
 	//   - aurora-postgresql
 	Engine *string
 
 	// The database engine mode of the DB cluster.Valid values are as follows:
+	//
 	//   - global
+	//
 	//   - multimaster
+	//
 	//   - parallelquery
+	//
 	//   - provisioned
+	//
 	//   - serverless
 	EngineMode *string
 
@@ -9632,12 +10468,19 @@ type AwsRdsDbClusterDetails struct {
 	Port *int32
 
 	// The range of time each day when automated backups are created, if automated
-	// backups are enabled. Uses the format HH:MM-HH:MM . For example, 04:52-05:22 .
+	// backups are enabled.
+	//
+	// Uses the format HH:MM-HH:MM . For example, 04:52-05:22 .
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Uses the format :HH:MM-:HH:MM . For the day values, use
-	// mon | tue | wed | thu | fri | sat | sun . For example, sun:09:32-sun:10:02 .
+	// Coordinated Time (UTC).
+	//
+	// Uses the format :HH:MM-:HH:MM .
+	//
+	// For the day values, use mon | tue | wed | thu | fri | sat | sun .
+	//
+	// For example, sun:09:32-sun:10:02 .
 	PreferredMaintenanceWindow *string
 
 	// The identifiers of the read replicas that are associated with this DB cluster.
@@ -9689,16 +10532,17 @@ type AwsRdsDbClusterOptionGroupMembership struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the name and values of a manual Amazon Relational Database Service
+//	Contains the name and values of a manual Amazon Relational Database Service
+//
 // (RDS) DB cluster snapshot attribute.
 type AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute struct {
 
-	// The name of the manual DB cluster snapshot attribute. The attribute named
+	//  The name of the manual DB cluster snapshot attribute. The attribute named
 	// restore refers to the list of Amazon Web Services accounts that have permission
 	// to copy or restore the manual DB cluster snapshot.
 	AttributeName *string
 
-	// The value(s) for the manual DB cluster snapshot attribute. If the AttributeName
+	//  The value(s) for the manual DB cluster snapshot attribute. If the AttributeName
 	// field is set to restore , then this element returns a list of IDs of the Amazon
 	// Web Services accounts that are authorized to copy or restore the manual DB
 	// cluster snapshot. If a value of all is in the list, then the manual DB cluster
@@ -9719,15 +10563,20 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	AvailabilityZones []string
 
 	// Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).
+	//
 	// This field accepts only the specified formats. Timestamps can end with Z or
 	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
 	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
 	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ClusterCreateTime *string
@@ -9735,7 +10584,7 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	// The DB cluster identifier.
 	DbClusterIdentifier *string
 
-	// Contains the name and values of a manual DB cluster snapshot attribute.
+	//  Contains the name and values of a manual DB cluster snapshot attribute.
 	DbClusterSnapshotAttributes []AwsRdsDbClusterSnapshotDbClusterSnapshotAttribute
 
 	// The identifier of the DB cluster snapshot.
@@ -9766,15 +10615,21 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	// The port number on which the DB instances in the DB cluster accept connections.
 	Port *int32
 
-	// Indicates when the snapshot was taken. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the snapshot was taken.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	SnapshotCreateTime *string
@@ -9824,9 +10679,12 @@ type AwsRdsDbInstanceAssociatedRole struct {
 
 	// Describes the state of the association between the IAM role and the DB
 	// instance. The Status property returns one of the following values:
+	//
 	//   - ACTIVE - The IAM role ARN is associated with the DB instance and can be used
 	//   to access other Amazon Web Services services on your behalf.
+	//
 	//   - PENDING - The IAM role ARN is being associated with the DB instance.
+	//
 	//   - INVALID - The IAM role ARN is associated with the DB instance. But the DB
 	//   instance is unable to assume the IAM role in order to access other Amazon Web
 	//   Services services on your behalf.
@@ -9874,11 +10732,17 @@ type AwsRdsDbInstanceDetails struct {
 	DBInstanceIdentifier *string
 
 	// The meaning of this parameter differs according to the database engine you use.
-	// MySQL, MariaDB, SQL Server, PostgreSQL Contains the name of the initial database
-	// of this instance that was provided at create time, if one was specified when the
-	// DB instance was created. This same name is returned for the life of the DB
-	// instance. Oracle Contains the Oracle System ID (SID) of the created DB instance.
-	// Not shown when the returned parameters do not apply to an Oracle DB instance.
+	//
+	// MySQL, MariaDB, SQL Server, PostgreSQL
+	//
+	// Contains the name of the initial database of this instance that was provided at
+	// create time, if one was specified when the DB instance was created. This same
+	// name is returned for the life of the DB instance.
+	//
+	// Oracle
+	//
+	// Contains the Oracle System ID (SID) of the created DB instance. Not shown when
+	// the returned parameters do not apply to an Oracle DB instance.
 	DBName *string
 
 	// Specifies the port that the DB instance listens on. If the DB instance is part
@@ -9902,8 +10766,9 @@ type AwsRdsDbInstanceDetails struct {
 	// key for the DB instance is accessed.
 	DbiResourceId *string
 
-	// Indicates whether the DB instance has deletion protection enabled. When
-	// deletion protection is enabled, the database cannot be deleted.
+	// Indicates whether the DB instance has deletion protection enabled.
+	//
+	// When deletion protection is enabled, the database cannot be deleted.
 	DeletionProtection *bool
 
 	// The Active Directory domain membership records associated with the DB instance.
@@ -9927,23 +10792,32 @@ type AwsRdsDbInstanceDetails struct {
 	EnhancedMonitoringResourceArn *string
 
 	// True if mapping of IAM accounts to database accounts is enabled, and otherwise
-	// false. IAM database authentication can be enabled for the following database
-	// engines.
+	// false.
+	//
+	// IAM database authentication can be enabled for the following database engines.
+	//
 	//   - For MySQL 5.6, minor version 5.6.34 or higher
+	//
 	//   - For MySQL 5.7, minor version 5.7.16 or higher
+	//
 	//   - Aurora 5.6 or higher
 	IAMDatabaseAuthenticationEnabled *bool
 
-	// Indicates when the DB instance was created. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the DB instance was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	InstanceCreateTime *string
@@ -9956,15 +10830,21 @@ type AwsRdsDbInstanceDetails struct {
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with
-	// point-in-time restore. This field accepts only the specified formats. Timestamps
-	// can end with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac
-	// after seconds is limited to a maximum of 9 digits. The offset is bounded by
-	// +/-18:00. Here are valid timestamp formats with examples:
+	// point-in-time restore.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LatestRestorableTime *string
@@ -10009,12 +10889,19 @@ type AwsRdsDbInstanceDetails struct {
 	PerformanceInsightsRetentionPeriod *int32
 
 	// The range of time each day when automated backups are created, if automated
-	// backups are enabled. Uses the format HH:MM-HH:MM . For example, 04:52-05:22 .
+	// backups are enabled.
+	//
+	// Uses the format HH:MM-HH:MM . For example, 04:52-05:22 .
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Uses the format :HH:MM-:HH:MM . For the day values, use
-	// mon | tue | wed | thu | fri | sat | sun . For example, sun:09:32-sun:10:02 .
+	// Coordinated Time (UTC).
+	//
+	// Uses the format :HH:MM-:HH:MM .
+	//
+	// For the day values, use mon | tue | wed | thu | fri | sat | sun .
+	//
+	// For example, sun:09:32-sun:10:02 .
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
@@ -10025,10 +10912,13 @@ type AwsRdsDbInstanceDetails struct {
 	// failure of the existing primary instance.
 	PromotionTier *int32
 
-	// Specifies the accessibility options for the DB instance. A value of true
-	// specifies an Internet-facing instance with a publicly resolvable DNS name, which
-	// resolves to a public IP address. A value of false specifies an internal instance
-	// with a DNS name that resolves to a private IP address.
+	// Specifies the accessibility options for the DB instance.
+	//
+	// A value of true specifies an Internet-facing instance with a publicly
+	// resolvable DNS name, which resolves to a public IP address.
+	//
+	// A value of false specifies an internal instance with a DNS name that resolves
+	// to a private IP address.
 	PubliclyAccessible *bool
 
 	// List of identifiers of Aurora DB clusters to which the RDS DB instance is
@@ -10267,19 +11157,33 @@ type AwsRdsDbSnapshotDetails struct {
 
 	// The name of the database engine to use for this DB instance. Valid values are
 	// as follows:
+	//
 	//   - aurora
+	//
 	//   - aurora-mysql
+	//
 	//   - aurora-postgresql
+	//
 	//   - c
+	//
 	//   - mariadb
+	//
 	//   - mysql
+	//
 	//   - oracle-ee
+	//
 	//   - oracle-se
+	//
 	//   - oracle-se1
+	//
 	//   - oracle-se2
+	//
 	//   - sqlserver-ee
+	//
 	//   - sqlserver-ex
+	//
 	//   - sqlserver-se
+	//
 	//   - sqlserver-web
 	Engine *string
 
@@ -10336,8 +11240,11 @@ type AwsRdsDbSnapshotDetails struct {
 	Status *string
 
 	// The storage type associated with the DB snapshot. Valid values are as follows:
+	//
 	//   - gp2
+	//
 	//   - io1
+	//
 	//   - standard
 	StorageType *string
 
@@ -10449,20 +11356,27 @@ type AwsRdsEventSubscriptionDetails struct {
 	// The source type for the event notification subscription.
 	SourceType *string
 
-	// The status of the event notification subscription. Valid values: creating |
-	// modifying | deleting | active | no-permission | topic-not-exist
+	// The status of the event notification subscription.
+	//
+	// Valid values: creating | modifying | deleting | active | no-permission |
+	// topic-not-exist
 	Status *string
 
-	// The datetime when the event notification subscription was created. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// The datetime when the event notification subscription was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	SubscriptionCreationTime *string
@@ -10521,8 +11435,10 @@ type AwsRedshiftClusterClusterParameterStatus struct {
 
 	// The status of the parameter. Indicates whether the parameter is in sync with
 	// the database, waiting for a cluster reboot, or encountered an error when it was
-	// applied. Valid values: in-sync | pending-reboot | applying | invalid-parameter
-	// | apply-deferred | apply-error | unknown-error
+	// applied.
+	//
+	// Valid values: in-sync | pending-reboot | applying | invalid-parameter |
+	// apply-deferred | apply-error | unknown-error
 	ParameterApplyStatus *string
 
 	// The name of the parameter.
@@ -10553,9 +11469,11 @@ type AwsRedshiftClusterClusterSnapshotCopyStatus struct {
 	DestinationRegion *string
 
 	// The number of days that manual snapshots are retained in the destination Region
-	// after they are copied from a source Region. If the value is -1 , then the manual
-	// snapshot is retained indefinitely. Valid values: Either -1 or an integer
-	// between 1 and 3,653
+	// after they are copied from a source Region.
+	//
+	// If the value is -1 , then the manual snapshot is retained indefinitely.
+	//
+	// Valid values: Either -1 or an integer between 1 and 3,653
 	ManualSnapshotRetentionPeriod *int32
 
 	// The number of days to retain automated snapshots in the destination Region
@@ -10572,16 +11490,21 @@ type AwsRedshiftClusterClusterSnapshotCopyStatus struct {
 // cluster.
 type AwsRedshiftClusterDeferredMaintenanceWindow struct {
 
-	// The end of the time window for which maintenance was deferred. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// The end of the time window for which maintenance was deferred.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	DeferMaintenanceEndTime *string
@@ -10589,16 +11512,21 @@ type AwsRedshiftClusterDeferredMaintenanceWindow struct {
 	// The identifier of the maintenance window.
 	DeferMaintenanceIdentifier *string
 
-	// The start of the time window for which maintenance was deferred. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// The start of the time window for which maintenance was deferred.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	DeferMaintenanceStartTime *string
@@ -10621,24 +11549,35 @@ type AwsRedshiftClusterDetails struct {
 
 	// The availability status of the cluster for queries. Possible values are the
 	// following:
+	//
 	//   - Available - The cluster is available for queries.
+	//
 	//   - Unavailable - The cluster is not available for queries.
+	//
 	//   - Maintenance - The cluster is intermittently available for queries due to
 	//   maintenance activities.
+	//
 	//   - Modifying -The cluster is intermittently available for queries due to
 	//   changes that modify the cluster.
+	//
 	//   - Failed - The cluster failed and is not available for queries.
 	ClusterAvailabilityStatus *string
 
-	// Indicates when the cluster was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the cluster was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ClusterCreateTime *string
@@ -10665,12 +11604,13 @@ type AwsRedshiftClusterDetails struct {
 	// cross-Region snapshot copy.
 	ClusterSnapshotCopyStatus *AwsRedshiftClusterClusterSnapshotCopyStatus
 
-	// The current status of the cluster. Valid values: available | available,
-	// prep-for-resize | available, resize-cleanup | cancelling-resize | creating |
-	// deleting | final-snapshot | hardware-failure | incompatible-hsm |
-	// incompatible-network | incompatible-parameters | incompatible-restore |
-	// modifying | paused | rebooting | renaming | resizing | rotating-keys |
-	// storage-full | updating-hsm
+	// The current status of the cluster.
+	//
+	// Valid values: available | available, prep-for-resize | available, resize-cleanup
+	// | cancelling-resize | creating | deleting | final-snapshot | hardware-failure |
+	// incompatible-hsm | incompatible-network | incompatible-parameters |
+	// incompatible-restore | modifying | paused | rebooting | renaming | resizing |
+	// rotating-keys | storage-full | updating-hsm
 	ClusterStatus *string
 
 	// The name of the subnet group that is associated with the cluster. This
@@ -10681,8 +11621,11 @@ type AwsRedshiftClusterDetails struct {
 	ClusterVersion *string
 
 	// The name of the initial database that was created when the cluster was created.
-	// The same name is returned for the life of the cluster. If an initial database is
-	// not specified, a database named devdev is created by default.
+	//
+	// The same name is returned for the life of the cluster.
+	//
+	// If an initial database is not specified, a database named devdev is created by
+	// default.
 	DBName *string
 
 	// List of time windows during which maintenance was deferred.
@@ -10705,21 +11648,28 @@ type AwsRedshiftClusterDetails struct {
 	EnhancedVpcRouting *bool
 
 	// Indicates when the next snapshot is expected to be taken. The cluster must have
-	// a valid snapshot schedule and have backups enabled. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// a valid snapshot schedule and have backups enabled.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ExpectedNextSnapshotScheduleTime *string
 
-	// The status of the next expected snapshot. Valid values: OnTrack | Pending
+	// The status of the next expected snapshot.
+	//
+	// Valid values: OnTrack | Pending
 	ExpectedNextSnapshotScheduleTimeStatus *string
 
 	// Information about whether the Amazon Redshift cluster finished applying any
@@ -10741,26 +11691,34 @@ type AwsRedshiftClusterDetails struct {
 	// The name of the maintenance track for the cluster.
 	MaintenanceTrackName *string
 
-	// The default number of days to retain a manual snapshot. If the value is -1 , the
-	// snapshot is retained indefinitely. This setting doesn't change the retention
-	// period of existing snapshots. Valid values: Either -1 or an integer between 1
-	// and 3,653
+	// The default number of days to retain a manual snapshot.
+	//
+	// If the value is -1 , the snapshot is retained indefinitely.
+	//
+	// This setting doesn't change the retention period of existing snapshots.
+	//
+	// Valid values: Either -1 or an integer between 1 and 3,653
 	ManualSnapshotRetentionPeriod *int32
 
 	// The master user name for the cluster. This name is used to connect to the
 	// database that is specified in as the value of DBName .
 	MasterUsername *string
 
-	// Indicates the start of the next maintenance window. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates the start of the next maintenance window.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	NextMaintenanceWindowStartTime *string
@@ -10778,8 +11736,13 @@ type AwsRedshiftClusterDetails struct {
 	PendingModifiedValues *AwsRedshiftClusterPendingModifiedValues
 
 	// The weekly time range, in Universal Coordinated Time (UTC), during which system
-	// maintenance can occur. Format: :HH:MM-:HH:MM For the day values, use mon | tue
-	// | wed | thu | fri | sat | sun For example, sun:09:32-sun:10:02
+	// maintenance can occur.
+	//
+	// Format:  :HH:MM-:HH:MM
+	//
+	// For the day values, use mon | tue | wed | thu | fri | sat | sun
+	//
+	// For example, sun:09:32-sun:10:02
 	PreferredMaintenanceWindow *string
 
 	// Whether the cluster can be accessed from a public network.
@@ -10795,8 +11758,9 @@ type AwsRedshiftClusterDetails struct {
 	// A unique identifier for the cluster snapshot schedule.
 	SnapshotScheduleIdentifier *string
 
-	// The current state of the cluster snapshot schedule. Valid values: MODIFYING |
-	// ACTIVE | FAILED
+	// The current state of the cluster snapshot schedule.
+	//
+	// Valid values: MODIFYING | ACTIVE | FAILED
 	SnapshotScheduleState *string
 
 	// The identifier of the VPC that the cluster is in, if the cluster is in a VPC.
@@ -10847,8 +11811,11 @@ type AwsRedshiftClusterHsmStatus struct {
 	HsmConfigurationIdentifier *string
 
 	// Indicates whether the Amazon Redshift cluster has finished applying any HSM
-	// settings changes specified in a modify cluster command. Type: String Valid
-	// values: active | applying
+	// settings changes specified in a modify cluster command.
+	//
+	// Type: String
+	//
+	// Valid values: active | applying
 	Status *string
 
 	noSmithyDocumentSerde
@@ -10858,8 +11825,9 @@ type AwsRedshiftClusterHsmStatus struct {
 // services.
 type AwsRedshiftClusterIamRole struct {
 
-	// The status of the IAM role's association with the cluster. Valid values: in-sync
-	// | adding | removing
+	// The status of the IAM role's association with the cluster.
+	//
+	// Valid values: in-sync | adding | removing
 	ApplyStatus *string
 
 	// The ARN of the IAM role.
@@ -10877,30 +11845,40 @@ type AwsRedshiftClusterLoggingStatus struct {
 	// The message indicating that the logs failed to be delivered.
 	LastFailureMessage *string
 
-	// The last time when logs failed to be delivered. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// The last time when logs failed to be delivered.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastFailureTime *string
 
-	// The last time that logs were delivered successfully. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// The last time that logs were delivered successfully.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastSuccessfulDeliveryTime *string
@@ -10961,7 +11939,9 @@ type AwsRedshiftClusterResizeInfo struct {
 	// Indicates whether the resize operation can be canceled.
 	AllowCancelResize *bool
 
-	// The type of resize operation. Valid values: ClassicResize
+	// The type of resize operation.
+	//
+	// Valid values: ClassicResize
 	ResizeType *string
 
 	noSmithyDocumentSerde
@@ -10972,30 +11952,36 @@ type AwsRedshiftClusterResizeInfo struct {
 type AwsRedshiftClusterRestoreStatus struct {
 
 	// The number of megabytes per second being transferred from the backup storage.
-	// Returns the average rate for a completed backup. This field is only updated when
-	// you restore to DC2 and DS2 node types.
+	// Returns the average rate for a completed backup.
+	//
+	// This field is only updated when you restore to DC2 and DS2 node types.
 	CurrentRestoreRateInMegaBytesPerSecond *float64
 
 	// The amount of time an in-progress restore has been running, or the amount of
-	// time it took a completed restore to finish. This field is only updated when you
-	// restore to DC2 and DS2 node types.
+	// time it took a completed restore to finish.
+	//
+	// This field is only updated when you restore to DC2 and DS2 node types.
 	ElapsedTimeInSeconds *int64
 
 	// The estimate of the time remaining before the restore is complete. Returns 0
-	// for a completed restore. This field is only updated when you restore to DC2 and
-	// DS2 node types.
+	// for a completed restore.
+	//
+	// This field is only updated when you restore to DC2 and DS2 node types.
 	EstimatedTimeToCompletionInSeconds *int64
 
-	// The number of megabytes that were transferred from snapshot storage. This field
-	// is only updated when you restore to DC2 and DS2 node types.
+	// The number of megabytes that were transferred from snapshot storage.
+	//
+	// This field is only updated when you restore to DC2 and DS2 node types.
 	ProgressInMegaBytes *int64
 
-	// The size of the set of snapshot data that was used to restore the cluster. This
-	// field is only updated when you restore to DC2 and DS2 node types.
+	// The size of the set of snapshot data that was used to restore the cluster.
+	//
+	// This field is only updated when you restore to DC2 and DS2 node types.
 	SnapshotSizeInMegaBytes *int64
 
-	// The status of the restore action. Valid values: starting | restoring | completed
-	// | failed
+	// The status of the restore action.
+	//
+	// Valid values: starting | restoring | completed | failed
 	Status *string
 
 	noSmithyDocumentSerde
@@ -11013,35 +11999,37 @@ type AwsRedshiftClusterVpcSecurityGroup struct {
 	noSmithyDocumentSerde
 }
 
-// An object that contains an optional comment about your Amazon Route 53 hosted
+//	An object that contains an optional comment about your Amazon Route 53 hosted
+//
 // zone.
 type AwsRoute53HostedZoneConfigDetails struct {
 
-	// Any comments that you include about the hosted zone.
+	//  Any comments that you include about the hosted zone.
 	Comment *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about a specified Amazon Route 53 hosted zone, including the
+//	Provides details about a specified Amazon Route 53 hosted zone, including the
+//
 // four name servers assigned to the hosted zone. A hosted zone represents a
 // collection of records that can be managed together, belonging to a single parent
 // domain name.
 type AwsRoute53HostedZoneDetails struct {
 
-	// An object that contains information about the specified hosted zone.
+	//  An object that contains information about the specified hosted zone.
 	HostedZone *AwsRoute53HostedZoneObjectDetails
 
-	// An object that contains a list of the authoritative name servers for a hosted
+	//  An object that contains a list of the authoritative name servers for a hosted
 	// zone or for a reusable delegation set.
 	NameServers []string
 
-	// An array that contains one QueryLoggingConfig element for each DNS query
+	//  An array that contains one QueryLoggingConfig element for each DNS query
 	// logging configuration that is associated with the current Amazon Web Services
 	// account.
 	QueryLoggingConfig *AwsRoute53QueryLoggingConfigDetails
 
-	// An object that contains information about the Amazon Virtual Private Clouds
+	//  An object that contains information about the Amazon Virtual Private Clouds
 	// (Amazon VPCs) that are associated with the specified hosted zone.
 	Vpcs []AwsRoute53HostedZoneVpcDetails
 
@@ -11051,73 +12039,76 @@ type AwsRoute53HostedZoneDetails struct {
 // An object that contains information about an Amazon Route 53 hosted zone.
 type AwsRoute53HostedZoneObjectDetails struct {
 
-	// An object that includes the Comment element.
+	//  An object that includes the Comment element.
 	Config *AwsRoute53HostedZoneConfigDetails
 
-	// The ID that Route 53 assigns to the hosted zone when you create it.
+	//  The ID that Route 53 assigns to the hosted zone when you create it.
 	Id *string
 
-	// The name of the domain. For public hosted zones, this is the name that you have
-	// registered with your DNS registrar.
+	//  The name of the domain. For public hosted zones, this is the name that you
+	// have registered with your DNS registrar.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// For private hosted zones, this is a complex type that contains information
+//	For private hosted zones, this is a complex type that contains information
+//
 // about an Amazon VPC.
 type AwsRoute53HostedZoneVpcDetails struct {
 
-	// The identifier of an Amazon VPC.
+	//  The identifier of an Amazon VPC.
 	Id *string
 
-	// The Amazon Web Services Region that an Amazon VPC was created in.
+	//  The Amazon Web Services Region that an Amazon VPC was created in.
 	Region *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about a specified Amazon Route 53 configuration for DNS query
+//	Provides details about a specified Amazon Route 53 configuration for DNS query
+//
 // logging.
 type AwsRoute53QueryLoggingConfigDetails struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group that
+	//  The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group that
 	// Route 53 is publishing logs to.
 	CloudWatchLogsLogGroupArn *CloudWatchLogsLogGroupArnConfigDetails
 
 	noSmithyDocumentSerde
 }
 
-// Returns configuration information about the specified Amazon S3 access point.
+//	Returns configuration information about the specified Amazon S3 access point.
+//
 // S3 access points are named network endpoints that are attached to buckets that
 // you can use to perform S3 object operations.
 type AwsS3AccessPointDetails struct {
 
-	// The Amazon Resource Name (ARN) of the access point.
+	//  The Amazon Resource Name (ARN) of the access point.
 	AccessPointArn *string
 
-	// The name or alias of the access point.
+	//  The name or alias of the access point.
 	Alias *string
 
-	// The name of the S3 bucket associated with the specified access point.
+	//  The name of the S3 bucket associated with the specified access point.
 	Bucket *string
 
-	// The Amazon Web Services account ID associated with the S3 bucket associated
+	//  The Amazon Web Services account ID associated with the S3 bucket associated
 	// with this access point.
 	BucketAccountId *string
 
-	// The name of the specified access point.
+	//  The name of the specified access point.
 	Name *string
 
-	// Indicates whether this access point allows access from the public internet.
+	//  Indicates whether this access point allows access from the public internet.
 	NetworkOrigin *string
 
 	// provides information about the Amazon S3 Public Access Block configuration for
 	// accounts.
 	PublicAccessBlockConfiguration *AwsS3AccountPublicAccessBlockDetails
 
-	// Contains the virtual private cloud (VPC) configuration for the specified access
-	// point.
+	//  Contains the virtual private cloud (VPC) configuration for the specified
+	// access point.
 	VpcConfiguration *AwsS3AccessPointVpcConfigurationDetails
 
 	noSmithyDocumentSerde
@@ -11126,7 +12117,7 @@ type AwsS3AccessPointDetails struct {
 // The virtual private cloud (VPC) configuration for an Amazon S3 access point.
 type AwsS3AccessPointVpcConfigurationDetails struct {
 
-	// If this field is specified, this access point will only allow connections from
+	//  If this field is specified, this access point will only allow connections from
 	// the specified VPC ID.
 	VpcId *string
 
@@ -11182,16 +12173,21 @@ type AwsS3BucketBucketLifecycleConfigurationRulesDetails struct {
 	// provides a number of days before Amazon S3 cancels the entire upload.
 	AbortIncompleteMultipartUpload *AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails
 
-	// The date when objects are moved or deleted. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// The date when objects are moved or deleted.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ExpirationDate *string
@@ -11201,8 +12197,10 @@ type AwsS3BucketBucketLifecycleConfigurationRulesDetails struct {
 
 	// Whether Amazon S3 removes a delete marker that has no noncurrent versions. If
 	// set to true , the delete marker is expired. If set to false , the policy takes
-	// no action. If you provide ExpiredObjectDeleteMarker , you cannot provide
-	// ExpirationInDays or ExpirationDate .
+	// no action.
+	//
+	// If you provide ExpiredObjectDeleteMarker , you cannot provide ExpirationInDays
+	// or ExpirationDate .
 	ExpiredObjectDeleteMarker *bool
 
 	// Identifies the objects that a rule applies to.
@@ -11320,15 +12318,21 @@ type AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDet
 type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 
 	// A date on which to transition objects to the specified storage class. If you
-	// provide Date , you cannot provide Days . This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// provide Date , you cannot provide Days .
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	Date *string
@@ -11338,10 +12342,15 @@ type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 	Days *int32
 
 	// The storage class to transition the object to. Valid values are as follows:
+	//
 	//   - DEEP_ARCHIVE
+	//
 	//   - GLACIER
+	//
 	//   - INTELLIGENT_TIERING
+	//
 	//   - ONEZONE_IA
+	//
 	//   - STANDARD_IA
 	StorageClass *string
 
@@ -11383,24 +12392,30 @@ type AwsS3BucketDetails struct {
 	// The website configuration parameters for the S3 bucket.
 	BucketWebsiteConfiguration *AwsS3BucketWebsiteConfiguration
 
-	// Indicates when the S3 bucket was created. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the S3 bucket was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedAt *string
 
-	// The name of the bucket.
+	//  The name of the bucket.
 	Name *string
 
-	// Specifies which rule Amazon S3 applies by default to every new object placed in
-	// the bucket.
+	//  Specifies which rule Amazon S3 applies by default to every new object placed
+	// in the bucket.
 	ObjectLockConfiguration *AwsS3BucketObjectLockConfiguration
 
 	// The Amazon Web Services account identifier of the account that owns the S3
@@ -11460,8 +12475,11 @@ type AwsS3BucketNotificationConfigurationDetail struct {
 	// Indicates the type of notification. Notifications can be generated using Lambda
 	// functions, Amazon SQS queues, or Amazon SNS topics, with corresponding valid
 	// values as follows:
+	//
 	//   - LambdaConfiguration
+	//
 	//   - QueueConfiguration
+	//
 	//   - TopicConfiguration
 	Type *string
 
@@ -11500,44 +12518,47 @@ type AwsS3BucketNotificationConfigurationS3KeyFilterRule struct {
 	noSmithyDocumentSerde
 }
 
-// The container element for S3 Object Lock configuration parameters. In Amazon
+//	The container element for S3 Object Lock configuration parameters. In Amazon
+//
 // S3, Object Lock can help prevent objects from being deleted or overwritten for a
 // fixed amount of time or indefinitely.
 type AwsS3BucketObjectLockConfiguration struct {
 
-	// Indicates whether the bucket has an Object Lock configuration enabled.
+	//  Indicates whether the bucket has an Object Lock configuration enabled.
 	ObjectLockEnabled *string
 
-	// Specifies the Object Lock rule for the specified object.
+	//  Specifies the Object Lock rule for the specified object.
 	Rule *AwsS3BucketObjectLockConfigurationRuleDetails
 
 	noSmithyDocumentSerde
 }
 
-// The default S3 Object Lock retention mode and period that you want to apply to
+//	The default S3 Object Lock retention mode and period that you want to apply to
+//
 // new objects placed in the specified Amazon S3 bucket.
 type AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails struct {
 
-	// The number of days that you want to specify for the default retention period.
+	//  The number of days that you want to specify for the default retention period.
 	Days *int32
 
-	// The default Object Lock retention mode you want to apply to new objects placed
+	//  The default Object Lock retention mode you want to apply to new objects placed
 	// in the specified bucket.
 	Mode *string
 
-	// The number of years that you want to specify for the default retention period.
+	//  The number of years that you want to specify for the default retention period.
 	Years *int32
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the S3 Object Lock rule for the specified object. In Amazon S3,
+//	Specifies the S3 Object Lock rule for the specified object. In Amazon S3,
+//
 // Object Lock can help prevent objects from being deleted or overwritten for a
 // fixed amount of time or indefinitely.
 type AwsS3BucketObjectLockConfigurationRuleDetails struct {
 
-	// The default Object Lock retention mode and period that you want to apply to new
-	// objects placed in the specified bucket.
+	//  The default Object Lock retention mode and period that you want to apply to
+	// new objects placed in the specified bucket.
 	DefaultRetention *AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails
 
 	noSmithyDocumentSerde
@@ -11645,12 +12666,14 @@ type AwsS3BucketWebsiteConfigurationRoutingRuleRedirect struct {
 	// the original request.
 	Protocol *string
 
-	// The object key prefix to use in the redirect request. Cannot be provided if
-	// ReplaceKeyWith is present.
+	// The object key prefix to use in the redirect request.
+	//
+	// Cannot be provided if ReplaceKeyWith is present.
 	ReplaceKeyPrefixWith *string
 
-	// The specific object key to use in the redirect request. Cannot be provided if
-	// ReplaceKeyPrefixWith is present.
+	// The specific object key to use in the redirect request.
+	//
+	// Cannot be provided if ReplaceKeyPrefixWith is present.
 	ReplaceKeyWith *string
 
 	noSmithyDocumentSerde
@@ -11666,16 +12689,21 @@ type AwsS3ObjectDetails struct {
 	// resource found at a URL.
 	ETag *string
 
-	// Indicates when the object was last modified. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the object was last modified.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastModified *string
@@ -11697,99 +12725,105 @@ type AwsS3ObjectDetails struct {
 // Provides details about an Amazon SageMaker notebook instance.
 type AwsSageMakerNotebookInstanceDetails struct {
 
-	// A list of Amazon Elastic Inference instance types to associate with the
+	//  A list of Amazon Elastic Inference instance types to associate with the
 	// notebook instance. Currently, only one instance type can be associated with a
 	// notebook instance.
 	AcceleratorTypes []string
 
-	// An array of up to three Git repositories associated with the notebook instance.
-	// These can be either the names of Git repositories stored as resources in your
-	// account, or the URL of Git repositories in CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
-	// or in any other Git repository. These repositories are cloned at the same level
-	// as the default repository of your notebook instance. For more information, see
-	// Associating Git repositories with SageMaker notebook instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
-	// in the Amazon SageMaker Developer Guide.
+	//  An array of up to three Git repositories associated with the notebook
+	// instance. These can be either the names of Git repositories stored as resources
+	// in your account, or the URL of Git repositories in [CodeCommit]or in any other Git
+	// repository. These repositories are cloned at the same level as the default
+	// repository of your notebook instance. For more information, see [Associating Git repositories with SageMaker notebook instances]in the Amazon
+	// SageMaker Developer Guide.
+	//
+	// [Associating Git repositories with SageMaker notebook instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+	// [CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
 	AdditionalCodeRepositories []string
 
-	// The Git repository associated with the notebook instance as its default code
+	//  The Git repository associated with the notebook instance as its default code
 	// repository. This can be either the name of a Git repository stored as a resource
-	// in your account, or the URL of a Git repository in CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
-	// or in any other Git repository. When you open a notebook instance, it opens in
-	// the directory that contains this repository. For more information, see
-	// Associating Git repositories with SageMaker notebook instances (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html)
-	// in the Amazon SageMaker Developer Guide.
+	// in your account, or the URL of a Git repository in [CodeCommit]or in any other Git
+	// repository. When you open a notebook instance, it opens in the directory that
+	// contains this repository. For more information, see [Associating Git repositories with SageMaker notebook instances]in the Amazon SageMaker
+	// Developer Guide.
+	//
+	// [Associating Git repositories with SageMaker notebook instances]: https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html
+	// [CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
 	DefaultCodeRepository *string
 
-	// Sets whether SageMaker provides internet access to the notebook instance. If
+	//  Sets whether SageMaker provides internet access to the notebook instance. If
 	// you set this to Disabled , this notebook instance is able to access resources
 	// only in your VPC, and is not be able to connect to SageMaker training and
 	// endpoint services unless you configure a Network Address Translation (NAT)
 	// Gateway in your VPC.
 	DirectInternetAccess *string
 
-	// If status of the instance is Failed , the reason it failed.
+	//  If status of the instance is Failed , the reason it failed.
 	FailureReason *string
 
-	// Information on the IMDS configuration of the notebook instance.
+	//  Information on the IMDS configuration of the notebook instance.
 	InstanceMetadataServiceConfiguration *AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails
 
-	// The type of machine learning (ML) compute instance to launch for the notebook
+	//  The type of machine learning (ML) compute instance to launch for the notebook
 	// instance.
 	InstanceType *string
 
-	// The Amazon Resource Name (ARN) of an Key Management Service (KMS) key that
+	//  The Amazon Resource Name (ARN) of an Key Management Service (KMS) key that
 	// SageMaker uses to encrypt data on the storage volume attached to your notebook
-	// instance. The KMS key you provide must be enabled. For information, see
-	// Enabling and disabling keys (https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html)
-	// in the Key Management Service Developer Guide.
+	// instance. The KMS key you provide must be enabled. For information, see [Enabling and disabling keys]in the
+	// Key Management Service Developer Guide.
+	//
+	// [Enabling and disabling keys]: https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html
 	KmsKeyId *string
 
-	// The network interface ID that SageMaker created when the instance was created.
+	//  The network interface ID that SageMaker created when the instance was created.
 	NetworkInterfaceId *string
 
-	// The Amazon Resource Name (ARN) of the notebook instance.
+	//  The Amazon Resource Name (ARN) of the notebook instance.
 	NotebookInstanceArn *string
 
-	// The name of a notebook instance lifecycle configuration.
+	//  The name of a notebook instance lifecycle configuration.
 	NotebookInstanceLifecycleConfigName *string
 
-	// The name of the new notebook instance.
+	//  The name of the new notebook instance.
 	NotebookInstanceName *string
 
-	// The status of the notebook instance.
+	//  The status of the notebook instance.
 	NotebookInstanceStatus *string
 
-	// The platform identifier of the notebook instance runtime environment.
+	//  The platform identifier of the notebook instance runtime environment.
 	PlatformIdentifier *string
 
-	// The Amazon Resource Name (ARN) of the IAM role associated with the instance.
+	//  The Amazon Resource Name (ARN) of the IAM role associated with the instance.
 	RoleArn *string
 
-	// Whether root access is enabled or disabled for users of the notebook instance.
+	//  Whether root access is enabled or disabled for users of the notebook instance.
 	RootAccess *string
 
-	// The VPC security group IDs.
+	//  The VPC security group IDs.
 	SecurityGroups []string
 
-	// The ID of the VPC subnet to which you have a connectivity from your ML compute
+	//  The ID of the VPC subnet to which you have a connectivity from your ML compute
 	// instance.
 	SubnetId *string
 
-	// The URL that you use to connect to the Jupyter notebook that is running in your
-	// notebook instance.
+	//  The URL that you use to connect to the Jupyter notebook that is running in
+	// your notebook instance.
 	Url *string
 
-	// The size, in GB, of the ML storage volume to attach to the notebook instance.
+	//  The size, in GB, of the ML storage volume to attach to the notebook instance.
 	VolumeSizeInGB *int32
 
 	noSmithyDocumentSerde
 }
 
-// Information on the instance metadata service (IMDS) configuration of the
+//	Information on the instance metadata service (IMDS) configuration of the
+//
 // notebook instance.
 type AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails struct {
 
-	// Indicates the minimum IMDS version that the notebook instance supports.
+	//  Indicates the minimum IMDS version that the notebook instance supports.
 	MinimumInstanceMetadataServiceVersion *string
 
 	noSmithyDocumentSerde
@@ -11837,9 +12871,10 @@ type AwsSecretsManagerSecretRotationRules struct {
 
 // Provides a consistent format for Security Hub findings. AwsSecurityFinding
 // format allows you to share findings between Amazon Web Services security
-// services and third-party solutions. A finding is a potential security issue
-// generated either by Amazon Web Services services or by the integrated
-// third-party solutions and standards checks.
+// services and third-party solutions.
+//
+// A finding is a potential security issue generated either by Amazon Web Services
+// services or by the integrated third-party solutions and standards checks.
 type AwsSecurityFinding struct {
 
 	// The Amazon Web Services account ID that a finding is generated in.
@@ -11848,22 +12883,30 @@ type AwsSecurityFinding struct {
 	AwsAccountId *string
 
 	// Indicates when the security findings provider created the potential security
-	// issue that a finding captured. This field accepts only the specified formats.
-	// Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] . The
-	// time-secfrac after seconds is limited to a maximum of 9 digits. The offset is
-	// bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// issue that a finding captured.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	//
 	// This member is required.
 	CreatedAt *string
 
-	// A finding's description. In this release, Description is a required property.
+	// A finding's description.
+	//
+	// In this release, Description is a required property.
 	//
 	// This member is required.
 	Description *string
@@ -11898,21 +12941,28 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	SchemaVersion *string
 
-	// A finding's title. In this release, Title is a required property.
+	// A finding's title.
+	//
+	// In this release, Title is a required property.
 	//
 	// This member is required.
 	Title *string
 
 	// Indicates when the security findings provider last updated the finding record.
+	//
 	// This field accepts only the specified formats. Timestamps can end with Z or
 	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
 	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
 	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	//
@@ -11925,11 +12975,14 @@ type AwsSecurityFinding struct {
 	// The name of the Amazon Web Services account from which a finding was generated.
 	AwsAccountName *string
 
-	// The name of the company for the product that generated the finding. Security
-	// Hub populates this attribute automatically for each finding. You cannot update
-	// this attribute with BatchImportFindings or BatchUpdateFindings . The exception
-	// to this is a custom integration. When you use the Security Hub console or API to
-	// filter findings by company name, you use this attribute.
+	// The name of the company for the product that generated the finding.
+	//
+	// Security Hub populates this attribute automatically for each finding. You
+	// cannot update this attribute with BatchImportFindings or BatchUpdateFindings .
+	// The exception to this is a custom integration.
+	//
+	// When you use the Security Hub console or API to filter findings by company
+	// name, you use this attribute.
 	CompanyName *string
 
 	// This data type is exclusive to findings that are generated as the result of a
@@ -11940,11 +12993,13 @@ type AwsSecurityFinding struct {
 
 	// A finding's confidence. Confidence is defined as the likelihood that a finding
 	// accurately identifies the behavior or issue that it was intended to identify.
+	//
 	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
 	// percent confidence and 100 means 100 percent confidence.
 	Confidence *int32
 
 	// The level of importance assigned to the resources associated with the finding.
+	//
 	// A score of 0 means that the underlying resources have no criticality, and a
 	// score of 100 is reserved for the most critical resources.
 	Criticality *int32
@@ -11955,15 +13010,21 @@ type AwsSecurityFinding struct {
 	FindingProviderFields *FindingProviderFields
 
 	// Indicates when the security findings provider first observed the potential
-	// security issue that a finding captured. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// security issue that a finding captured.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	FirstObservedAt *string
@@ -11976,16 +13037,21 @@ type AwsSecurityFinding struct {
 	GeneratorDetails *GeneratorDetails
 
 	// Indicates when the security findings provider most recently observed the
-	// potential security issue that a finding captured. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// potential security issue that a finding captured.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastObservedAt *string
@@ -12011,39 +13077,50 @@ type AwsSecurityFinding struct {
 	Process *ProcessDetails
 
 	// A imestamp that indicates when Security Hub received a finding and begins to
-	// process it. This field accepts only the specified formats. Timestamps can end
-	// with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
-	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
-	// Here are valid timestamp formats with examples:
+	// process it.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ProcessedAt *string
 
 	// A data type where security findings providers can include additional
 	// solution-specific details that aren't part of the defined AwsSecurityFinding
-	// format. Can contain up to 50 key-value pairs. For each key-value pair, the key
-	// can contain up to 128 characters, and the value can contain up to 2048
-	// characters.
+	// format.
+	//
+	// Can contain up to 50 key-value pairs. For each key-value pair, the key can
+	// contain up to 128 characters, and the value can contain up to 2048 characters.
 	ProductFields map[string]string
 
-	// The name of the product that generated the finding. Security Hub populates this
-	// attribute automatically for each finding. You cannot update this attribute with
-	// BatchImportFindings or BatchUpdateFindings . The exception to this is a custom
-	// integration. When you use the Security Hub console or API to filter findings by
-	// product name, you use this attribute.
+	// The name of the product that generated the finding.
+	//
+	// Security Hub populates this attribute automatically for each finding. You
+	// cannot update this attribute with BatchImportFindings or BatchUpdateFindings .
+	// The exception to this is a custom integration.
+	//
+	// When you use the Security Hub console or API to filter findings by product
+	// name, you use this attribute.
 	ProductName *string
 
 	// The record state of a finding.
 	RecordState RecordState
 
-	// The Region from which the finding was generated. Security Hub populates this
-	// attribute automatically for each finding. You cannot update it using
-	// BatchImportFindings or BatchUpdateFindings .
+	// The Region from which the finding was generated.
+	//
+	// Security Hub populates this attribute automatically for each finding. You
+	// cannot update it using BatchImportFindings or BatchUpdateFindings .
 	Region *string
 
 	// A list of related findings.
@@ -12070,8 +13147,10 @@ type AwsSecurityFinding struct {
 	Threats []Threat
 
 	// One or more finding types in the format of namespace/category/classifier that
-	// classify a finding. Valid namespace values are: Software and Configuration
-	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
+	// classify a finding.
+	//
+	// Valid namespace values are: Software and Configuration Checks | TTPs | Effects
+	// | Unusual Behaviors | Sensitive Data Identifications
 	Types []string
 
 	// A list of name/value string pairs associated with the finding. These are
@@ -12097,8 +13176,10 @@ type AwsSecurityFinding struct {
 }
 
 // A collection of filters that are applied to all active findings aggregated by
-// Security Hub. You can filter by up to ten finding attributes. For each
-// attribute, you can provide up to 20 filter values.
+// Security Hub.
+//
+// You can filter by up to ten finding attributes. For each attribute, you can
+// provide up to 20 filter values.
 type AwsSecurityFindingFilters struct {
 
 	// The Amazon Web Services account ID in which a finding is generated.
@@ -12111,20 +13192,21 @@ type AwsSecurityFindingFilters struct {
 	// that generates findings.
 	CompanyName []StringFilter
 
-	// The unique identifier of a standard in which a control is enabled. This field
+	//  The unique identifier of a standard in which a control is enabled. This field
 	// consists of the resource portion of the Amazon Resource Name (ARN) returned for
-	// a standard in the DescribeStandards (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html)
-	// API response.
+	// a standard in the [DescribeStandards]API response.
+	//
+	// [DescribeStandards]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
 	ComplianceAssociatedStandardsId []StringFilter
 
-	// The unique identifier of a control across standards. Values for this field
+	//  The unique identifier of a control across standards. Values for this field
 	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
 	ComplianceSecurityControlId []StringFilter
 
-	// The name of a security control parameter.
+	//  The name of a security control parameter.
 	ComplianceSecurityControlParametersName []StringFilter
 
-	// The current value of a security control parameter.
+	//  The current value of a security control parameter.
 	ComplianceSecurityControlParametersValue []StringFilter
 
 	// Exclusive to findings that are generated as the result of a check run against a
@@ -12134,26 +13216,33 @@ type AwsSecurityFindingFilters struct {
 
 	// A finding's confidence. Confidence is defined as the likelihood that a finding
 	// accurately identifies the behavior or issue that it was intended to identify.
+	//
 	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
 	// percent confidence and 100 means 100 percent confidence.
 	Confidence []NumberFilter
 
 	// A timestamp that indicates when the security findings provider created the
-	// potential security issue that a finding reflects. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// potential security issue that a finding reflects.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	CreatedAt []DateFilter
 
 	// The level of importance assigned to the resources associated with the finding.
+	//
 	// A score of 0 means that the underlying resources have no criticality, and a
 	// score of 100 is reserved for the most critical resources.
 	Criticality []NumberFilter
@@ -12163,15 +13252,17 @@ type AwsSecurityFindingFilters struct {
 
 	// The finding provider value for the finding confidence. Confidence is defined as
 	// the likelihood that a finding accurately identifies the behavior or issue that
-	// it was intended to identify. Confidence is scored on a 0-100 basis using a ratio
-	// scale, where 0 means zero percent confidence and 100 means 100 percent
-	// confidence.
+	// it was intended to identify.
+	//
+	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
+	// percent confidence and 100 means 100 percent confidence.
 	FindingProviderFieldsConfidence []NumberFilter
 
 	// The finding provider value for the level of importance assigned to the
-	// resources associated with the findings. A score of 0 means that the underlying
-	// resources have no criticality, and a score of 100 is reserved for the most
-	// critical resources.
+	// resources associated with the findings.
+	//
+	// A score of 0 means that the underlying resources have no criticality, and a
+	// score of 100 is reserved for the most critical resources.
 	FindingProviderFieldsCriticality []NumberFilter
 
 	// The finding identifier of a related finding that is identified by the finding
@@ -12189,22 +13280,28 @@ type AwsSecurityFindingFilters struct {
 	FindingProviderFieldsSeverityOriginal []StringFilter
 
 	// One or more finding types that the finding provider assigned to the finding.
-	// Uses the format of namespace/category/classifier that classify a finding. Valid
-	// namespace values are: Software and Configuration Checks | TTPs | Effects |
-	// Unusual Behaviors | Sensitive Data Identifications
+	// Uses the format of namespace/category/classifier that classify a finding.
+	//
+	// Valid namespace values are: Software and Configuration Checks | TTPs | Effects
+	// | Unusual Behaviors | Sensitive Data Identifications
 	FindingProviderFieldsTypes []StringFilter
 
 	// A timestamp that indicates when the security findings provider first observed
-	// the potential security issue that a finding captured. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// the potential security issue that a finding captured.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	FirstObservedAt []DateFilter
@@ -12223,16 +13320,21 @@ type AwsSecurityFindingFilters struct {
 	Keyword []KeywordFilter
 
 	// A timestamp that indicates when the security findings provider most recently
-	// observed the potential security issue that a finding captured. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// observed the potential security issue that a finding captured.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastObservedAt []DateFilter
@@ -12292,16 +13394,21 @@ type AwsSecurityFindingFilters struct {
 	// The principal that created a note.
 	NoteUpdatedBy []StringFilter
 
-	// A timestamp that identifies when the process was launched. This field accepts
-	// only the specified formats. Timestamps can end with Z or ("+" / "-") time-hour
-	// [":" time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// A timestamp that identifies when the process was launched.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ProcessLaunchedAt []DateFilter
@@ -12319,16 +13426,21 @@ type AwsSecurityFindingFilters struct {
 	// The process ID.
 	ProcessPid []NumberFilter
 
-	// A timestamp that identifies when the process was terminated. This field accepts
-	// only the specified formats. Timestamps can end with Z or ("+" / "-") time-hour
-	// [":" time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// A timestamp that identifies when the process was terminated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ProcessTerminatedAt []DateFilter
@@ -12361,10 +13473,10 @@ type AwsSecurityFindingFilters struct {
 	// The ARN of the solution that generated a related finding.
 	RelatedFindingsProductArn []StringFilter
 
-	// The ARN of the application that is related to a finding.
+	//  The ARN of the application that is related to a finding.
 	ResourceApplicationArn []StringFilter
 
-	// The name of the application that is related to a finding.
+	//  The name of the application that is related to a finding.
 	ResourceApplicationName []StringFilter
 
 	// The IAM profile ARN of the instance.
@@ -12424,16 +13536,21 @@ type AwsSecurityFindingFilters struct {
 	// The name of the image related to a finding.
 	ResourceContainerImageName []StringFilter
 
-	// A timestamp that identifies when the container was started. This field accepts
-	// only the specified formats. Timestamps can end with Z or ("+" / "-") time-hour
-	// [":" time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// A timestamp that identifies when the container was started.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	ResourceContainerLaunchedAt []DateFilter
@@ -12512,15 +13629,21 @@ type AwsSecurityFindingFilters struct {
 	Type []StringFilter
 
 	// A timestamp that indicates when the security findings provider last updated the
-	// finding record. This field accepts only the specified formats. Timestamps can
-	// end with Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after
-	// seconds is limited to a maximum of 9 digits. The offset is bounded by +/-18:00.
-	// Here are valid timestamp formats with examples:
+	// finding record.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	UpdatedAt []DateFilter
@@ -12532,44 +13655,66 @@ type AwsSecurityFindingFilters struct {
 	// The veracity of a finding.
 	VerificationState []StringFilter
 
-	// Indicates whether a software vulnerability in your environment has a known
+	//  Indicates whether a software vulnerability in your environment has a known
 	// exploit. You can filter findings by this field only if you use Security Hub and
 	// Amazon Inspector.
 	VulnerabilitiesExploitAvailable []StringFilter
 
-	// Indicates whether a vulnerability is fixed in a newer version of the affected
+	//  Indicates whether a vulnerability is fixed in a newer version of the affected
 	// software packages. You can filter findings by this field only if you use
 	// Security Hub and Amazon Inspector.
 	VulnerabilitiesFixAvailable []StringFilter
 
-	// The workflow state of a finding. Note that this field is deprecated. To search
-	// for a finding based on its workflow status, use WorkflowStatus .
+	// The workflow state of a finding.
+	//
+	// Note that this field is deprecated. To search for a finding based on its
+	// workflow status, use WorkflowStatus .
 	WorkflowState []StringFilter
 
 	// The status of the investigation into a finding. Allowed values are the
 	// following.
-	//   - NEW - The initial state of a finding, before it is reviewed. Security Hub
-	//   also resets the workflow status from NOTIFIED or RESOLVED to NEW in the
-	//   following cases:
+	//
+	//   - NEW - The initial state of a finding, before it is reviewed.
+	//
+	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
+	//   the following cases:
+	//
 	//   - RecordState changes from ARCHIVED to ACTIVE .
+	//
 	//   - Compliance.Status changes from PASSED to either WARNING , FAILED , or
 	//   NOT_AVAILABLE .
+	//
 	//   - NOTIFIED - Indicates that the resource owner has been notified about the
 	//   security issue. Used when the initial reviewer is not the resource owner, and
-	//   needs intervention from the resource owner. If one of the following occurs, the
-	//   workflow status is changed automatically from NOTIFIED to NEW :
+	//   needs intervention from the resource owner.
+	//
+	// If one of the following occurs, the workflow status is changed automatically
+	//   from NOTIFIED to NEW :
+	//
 	//   - RecordState changes from ARCHIVED to ACTIVE .
+	//
 	//   - Compliance.Status changes from PASSED to FAILED , WARNING , or NOT_AVAILABLE
 	//   .
+	//
 	//   - SUPPRESSED - Indicates that you reviewed the finding and do not believe that
-	//   any action is needed. The workflow status of a SUPPRESSED finding does not
-	//   change if RecordState changes from ARCHIVED to ACTIVE .
+	//   any action is needed.
+	//
+	// The workflow status of a SUPPRESSED finding does not change if RecordState
+	//   changes from ARCHIVED to ACTIVE .
+	//
 	//   - RESOLVED - The finding was reviewed and remediated and is now considered
-	//   resolved. The finding remains RESOLVED unless one of the following occurs:
+	//   resolved.
+	//
+	// The finding remains RESOLVED unless one of the following occurs:
+	//
 	//   - RecordState changes from ARCHIVED to ACTIVE .
+	//
 	//   - Compliance.Status changes from PASSED to FAILED , WARNING , or NOT_AVAILABLE
-	//   . In those cases, the workflow status is automatically reset to NEW . For
-	//   findings from controls, if Compliance.Status is PASSED , then Security Hub
+	//   .
+	//
+	// In those cases, the workflow status is automatically reset to NEW .
+	//
+	// For findings from controls, if Compliance.Status is PASSED , then Security Hub
 	//   automatically sets the workflow status to RESOLVED .
 	WorkflowStatus []StringFilter
 
@@ -12728,11 +13873,17 @@ type AwsSsmComplianceSummary struct {
 	NonCompliantUnspecifiedCount *int32
 
 	// The highest severity for the patches. Valid values are as follows:
+	//
 	//   - CRITICAL
+	//
 	//   - HIGH
+	//
 	//   - MEDIUM
+	//
 	//   - LOW
+	//
 	//   - INFORMATIONAL
+	//
 	//   - UNSPECIFIED
 	OverallSeverity *string
 
@@ -12746,8 +13897,11 @@ type AwsSsmComplianceSummary struct {
 	PatchGroup *string
 
 	// The current patch compliance status. Valid values are as follows:
+	//
 	//   - COMPLIANT
+	//
 	//   - NON_COMPLIANT
+	//
 	//   - UNSPECIFIED_DATA
 	Status *string
 
@@ -12773,43 +13927,46 @@ type AwsSsmPatchComplianceDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Provides details about an Step Functions state machine, which is a workflow
+//	Provides details about an Step Functions state machine, which is a workflow
+//
 // consisting of a series of event- driven steps.
 type AwsStepFunctionStateMachineDetails struct {
 
-	// A user-defined or an auto-generated string that identifies a Map state. This
+	//  A user-defined or an auto-generated string that identifies a Map state. This
 	// parameter is present only if the stateMachineArn specified in input is a
 	// qualified state machine ARN.
 	Label *string
 
-	// Used to set CloudWatch Logs options.
+	//  Used to set CloudWatch Logs options.
 	LoggingConfiguration *AwsStepFunctionStateMachineLoggingConfigurationDetails
 
-	// The name of the state machine.
+	//  The name of the state machine.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the IAM role used when creating this state
+	//  The Amazon Resource Name (ARN) of the IAM role used when creating this state
 	// machine.
 	RoleArn *string
 
-	// The ARN that identifies the state machine.
+	//  The ARN that identifies the state machine.
 	StateMachineArn *string
 
-	// The current status of the state machine.
+	//  The current status of the state machine.
 	Status *string
 
-	// Specifies whether X-Ray tracing is enabled.
+	//  Specifies whether X-Ray tracing is enabled.
 	TracingConfiguration *AwsStepFunctionStateMachineTracingConfigurationDetails
 
-	// The type of the state machine (STANDARD or EXPRESS).
+	//  The type of the state machine (STANDARD or EXPRESS).
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
-// An object describing a CloudWatch log group. For more information, see  Amazon
-// Web Services::Logs::LogGroup (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
-// in the CloudFormation User Guide.
+//	An object describing a CloudWatch log group. For more information, see [Amazon Web Services::Logs::LogGroup] in the
+//
+// CloudFormation User Guide.
+//
+// [Amazon Web Services::Logs::LogGroup]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
 type AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails struct {
 
 	// The ARN (ends with :* ) of the CloudWatch Logs log group to which you want your
@@ -12819,13 +13976,15 @@ type AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLo
 	noSmithyDocumentSerde
 }
 
-// An array of objects that describes where your execution history events will be
+//	An array of objects that describes where your execution history events will be
+//
 // logged.
 type AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails struct {
 
-	// An object describing a CloudWatch Logs log group. For more information, see
-	// Amazon Web Services::Logs::LogGroup (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
+	//  An object describing a CloudWatch Logs log group. For more information, see [Amazon Web Services::Logs::LogGroup]
 	// in the CloudFormation User Guide.
+	//
+	// [Amazon Web Services::Logs::LogGroup]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
 	CloudWatchLogsLogGroup *AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails
 
 	noSmithyDocumentSerde
@@ -12834,15 +13993,15 @@ type AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails struct {
 // The LoggingConfiguration data type is used to set CloudWatch Logs options.
 type AwsStepFunctionStateMachineLoggingConfigurationDetails struct {
 
-	// An array of objects that describes where your execution history events will be
+	//  An array of objects that describes where your execution history events will be
 	// logged.
 	Destinations []AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails
 
-	// Determines whether execution data is included in your log. When set to false,
+	//  Determines whether execution data is included in your log. When set to false,
 	// data is excluded.
 	IncludeExecutionData *bool
 
-	// Defines which category of execution history events are logged.
+	//  Defines which category of execution history events are logged.
 	Level *string
 
 	noSmithyDocumentSerde
@@ -12851,7 +14010,7 @@ type AwsStepFunctionStateMachineLoggingConfigurationDetails struct {
 // Specifies whether X-Ray tracing is enabled.
 type AwsStepFunctionStateMachineTracingConfigurationDetails struct {
 
-	// When set to true, X-Ray tracing is enabled.
+	//  When set to true, X-Ray tracing is enabled.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -12896,17 +14055,26 @@ type AwsWafRateBasedRuleMatchPredicate struct {
 	DataId *string
 
 	// If set to true , then the rule actions are performed on requests that match the
-	// predicate settings. If set to false , then the rule actions are performed on all
-	// requests except those that match the predicate settings.
+	// predicate settings.
+	//
+	// If set to false , then the rule actions are performed on all requests except
+	// those that match the predicate settings.
 	Negated *bool
 
 	// The type of predicate. Valid values are as follows:
+	//
 	//   - ByteMatch
+	//
 	//   - GeoMatch
+	//
 	//   - IPMatch
+	//
 	//   - RegexMatch
+	//
 	//   - SizeConstraint
+	//
 	//   - SqlInjectionMatch
+	//
 	//   - XssMatch
 	Type *string
 
@@ -12952,17 +14120,26 @@ type AwsWafRegionalRateBasedRuleMatchPredicate struct {
 	DataId *string
 
 	// If set to true , then the rule actions are performed on requests that match the
-	// predicate settings. If set to false , then the rule actions are performed on all
-	// requests except those that match the predicate settings.
+	// predicate settings.
+	//
+	// If set to false , then the rule actions are performed on all requests except
+	// those that match the predicate settings.
 	Negated *bool
 
 	// The type of predicate. Valid values are as follows:
+	//
 	//   - ByteMatch
+	//
 	//   - GeoMatch
+	//
 	//   - IPMatch
+	//
 	//   - RegexMatch
+	//
 	//   - SizeConstraint
+	//
 	//   - SqlInjectionMatch
+	//
 	//   - XssMatch
 	Type *string
 
@@ -13229,25 +14406,29 @@ type AwsWafRulePredicateListDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies that WAF should allow the request and optionally defines additional
+//	Specifies that WAF should allow the request and optionally defines additional
+//
 // custom handling for the request.
 type AwsWafv2ActionAllowDetails struct {
 
-	// Defines custom handling for the web request. For information about customizing
-	// web requests and responses, see Customizing web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide..
+	//  Defines custom handling for the web request. For information about customizing
+	// web requests and responses, see [Customizing web requests and responses in WAF]in the WAF Developer Guide..
+	//
+	// [Customizing web requests and responses in WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
 	CustomRequestHandling *AwsWafv2CustomRequestHandlingDetails
 
 	noSmithyDocumentSerde
 }
 
-// Specifies that WAF should block the request and optionally defines additional
+//	Specifies that WAF should block the request and optionally defines additional
+//
 // custom handling for the response to the web request.
 type AwsWafv2ActionBlockDetails struct {
 
-	// Defines a custom response for the web request. For information, see Customizing
-	// web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide..
+	//  Defines a custom response for the web request. For information, see [Customizing web requests and responses in WAF] in the
+	// WAF Developer Guide..
+	//
+	// [Customizing web requests and responses in WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
 	CustomResponse *AwsWafv2CustomResponseDetails
 
 	noSmithyDocumentSerde
@@ -13256,42 +14437,44 @@ type AwsWafv2ActionBlockDetails struct {
 // A custom header for custom request and response handling.
 type AwsWafv2CustomHttpHeader struct {
 
-	// The name of the custom header.
+	//  The name of the custom header.
 	Name *string
 
-	// The value of the custom header.
+	//  The value of the custom header.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
-// Custom request handling behavior that inserts custom headers into a web
+//	Custom request handling behavior that inserts custom headers into a web
+//
 // request. WAF uses custom request handling when the rule action doesn't block the
 // request.
 type AwsWafv2CustomRequestHandlingDetails struct {
 
-	// The HTTP headers to insert into the request.
+	//  The HTTP headers to insert into the request.
 	InsertHeaders []AwsWafv2CustomHttpHeader
 
 	noSmithyDocumentSerde
 }
 
-// A custom response to send to the client. You can define a custom response for
+//	A custom response to send to the client. You can define a custom response for
+//
 // rule actions and default web ACL actions that are set to block.
 type AwsWafv2CustomResponseDetails struct {
 
-	// References the response body that you want WAF to return to the web request
+	//  References the response body that you want WAF to return to the web request
 	// client. You can define a custom response for a rule action or a default web ACL
 	// action that is set to block.
 	CustomResponseBodyKey *string
 
-	// The HTTP status code to return to the client. For a list of status codes that
-	// you can use in your custom responses, see Supported status codes for custom
-	// response (https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html)
-	// in the WAF Developer Guide.
+	//  The HTTP status code to return to the client. For a list of status codes that
+	// you can use in your custom responses, see [Supported status codes for custom response]in the WAF Developer Guide.
+	//
+	// [Supported status codes for custom response]: https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html
 	ResponseCode *int32
 
-	// The HTTP headers to use in the response.
+	//  The HTTP headers to use in the response.
 	ResponseHeaders []AwsWafv2CustomHttpHeader
 
 	noSmithyDocumentSerde
@@ -13300,34 +14483,35 @@ type AwsWafv2CustomResponseDetails struct {
 // Details about an WAFv2 rule group.
 type AwsWafv2RuleGroupDetails struct {
 
-	// The Amazon Resource Name (ARN) of the entity.
+	//  The Amazon Resource Name (ARN) of the entity.
 	Arn *string
 
-	// The web ACL capacity units (WCUs) required for this rule group.
+	//  The web ACL capacity units (WCUs) required for this rule group.
 	Capacity *int64
 
-	// A description of the rule group that helps with identification.
+	//  A description of the rule group that helps with identification.
 	Description *string
 
-	// A unique identifier for the rule group.
+	//  A unique identifier for the rule group.
 	Id *string
 
-	// The name of the rule group. You cannot change the name of a rule group after
+	//  The name of the rule group. You cannot change the name of a rule group after
 	// you create it.
 	Name *string
 
-	// The Rule statements used to identify the web requests that you want to allow,
+	//  The Rule statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that WAF uses to
 	// identify matching web requests, and parameters that govern how WAF handles them.
 	Rules []AwsWafv2RulesDetails
 
-	// Specifies whether the rule group is for an Amazon CloudFront distribution or
+	//  Specifies whether the rule group is for an Amazon CloudFront distribution or
 	// for a regional application. A regional application can be an Application Load
 	// Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an
 	// Amazon Cognito user pool.
 	Scope *string
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	//  Defines and enables Amazon CloudWatch metrics and web request sample
+	// collection.
 	VisibilityConfig *AwsWafv2VisibilityConfigDetails
 
 	noSmithyDocumentSerde
@@ -13336,10 +14520,11 @@ type AwsWafv2RuleGroupDetails struct {
 // Specifies that WAF should run a CAPTCHA check against the request.
 type AwsWafv2RulesActionCaptchaDetails struct {
 
-	// Defines custom handling for the web request, used when the CAPTCHA inspection
+	//  Defines custom handling for the web request, used when the CAPTCHA inspection
 	// determines that the request's token is valid and unexpired. For more
-	// information, see Customizing web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide..
+	// information, see [Customizing web requests and responses in WAF]in the WAF Developer Guide..
+	//
+	// [Customizing web requests and responses in WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
 	CustomRequestHandling *AwsWafv2CustomRequestHandlingDetails
 
 	noSmithyDocumentSerde
@@ -13348,111 +14533,121 @@ type AwsWafv2RulesActionCaptchaDetails struct {
 // Specifies that WAF should count the request.
 type AwsWafv2RulesActionCountDetails struct {
 
-	// Defines custom handling for the web request. For more information, see
-	// Customizing web requests and responses in WAF (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
-	// in the WAF Developer Guide..
+	//  Defines custom handling for the web request. For more information, see [Customizing web requests and responses in WAF] in the
+	// WAF Developer Guide..
+	//
+	// [Customizing web requests and responses in WAF]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html
 	CustomRequestHandling *AwsWafv2CustomRequestHandlingDetails
 
 	noSmithyDocumentSerde
 }
 
-// The action that WAF should take on a web request when it matches a rule's
+//	The action that WAF should take on a web request when it matches a rule's
+//
 // statement. Settings at the web ACL level can override the rule action setting.
 type AwsWafv2RulesActionDetails struct {
 
-	// Instructs WAF to allow the web request.
+	//  Instructs WAF to allow the web request.
 	Allow *AwsWafv2ActionAllowDetails
 
-	// Instructs WAF to block the web request.
+	//  Instructs WAF to block the web request.
 	Block *AwsWafv2ActionBlockDetails
 
-	// Instructs WAF to run a CAPTCHA check against the web request.
+	//  Instructs WAF to run a CAPTCHA check against the web request.
 	Captcha *AwsWafv2RulesActionCaptchaDetails
 
-	// Instructs WAF to count the web request and then continue evaluating the request
-	// using the remaining rules in the web ACL.
+	//  Instructs WAF to count the web request and then continue evaluating the
+	// request using the remaining rules in the web ACL.
 	Count *AwsWafv2RulesActionCountDetails
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about rules in a rule group. A rule identifies web requests
+//	Provides details about rules in a rule group. A rule identifies web requests
+//
 // that you want to allow, block, or count. Each rule includes one top-level
 // Statement that WAF uses to identify matching web requests, and parameters that
 // govern how WAF handles them.
 type AwsWafv2RulesDetails struct {
 
-	// The action that WAF should take on a web request when it matches the rule
+	//  The action that WAF should take on a web request when it matches the rule
 	// statement. Settings at the web ACL level can override the rule action setting.
 	Action *AwsWafv2RulesActionDetails
 
-	// The name of the rule.
+	//  The name of the rule.
 	Name *string
 
-	// The action to use in the place of the action that results from the rule group
+	//  The action to use in the place of the action that results from the rule group
 	// evaluation.
 	OverrideAction *string
 
-	// If you define more than one Rule in a WebACL, WAF evaluates each request
+	//  If you define more than one Rule in a WebACL, WAF evaluates each request
 	// against the Rules in order based on the value of Priority . WAF processes rules
 	// with lower priority first. The priorities don't need to be consecutive, but they
 	// must all be different.
 	Priority *int32
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	//  Defines and enables Amazon CloudWatch metrics and web request sample
+	// collection.
 	VisibilityConfig *AwsWafv2VisibilityConfigDetails
 
 	noSmithyDocumentSerde
 }
 
-// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+//	Defines and enables Amazon CloudWatch metrics and web request sample
+//
+// collection.
 type AwsWafv2VisibilityConfigDetails struct {
 
-	// A boolean indicating whether the associated resource sends metrics to Amazon
-	// CloudWatch. For the list of available metrics, see WAF metrics and dimensions (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics)
-	// in the WAF Developer Guide.
+	//  A boolean indicating whether the associated resource sends metrics to Amazon
+	// CloudWatch. For the list of available metrics, see [WAF metrics and dimensions]in the WAF Developer Guide.
+	//
+	// [WAF metrics and dimensions]: https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics
 	CloudWatchMetricsEnabled *bool
 
-	// A name of the Amazon CloudWatch metric.
+	//  A name of the Amazon CloudWatch metric.
 	MetricName *string
 
-	// A boolean indicating whether WAF should store a sampling of the web requests
+	//  A boolean indicating whether WAF should store a sampling of the web requests
 	// that match the rules. You can view the sampled requests through the WAF console.
 	SampledRequestsEnabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// Specifies the action that Amazon CloudFront or WAF takes when a web request
+//	Specifies the action that Amazon CloudFront or WAF takes when a web request
+//
 // matches the conditions in the rule.
 type AwsWafv2WebAclActionDetails struct {
 
-	// Specifies that WAF should allow requests by default.
+	//  Specifies that WAF should allow requests by default.
 	Allow *AwsWafv2ActionAllowDetails
 
-	// Specifies that WAF should block requests by default.
+	//  Specifies that WAF should block requests by default.
 	Block *AwsWafv2ActionBlockDetails
 
 	noSmithyDocumentSerde
 }
 
-// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
+//	Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
+//
 // their own CaptchaConfig settings.
 type AwsWafv2WebAclCaptchaConfigDetails struct {
 
-	// Determines how long a CAPTCHA timestamp in the token remains valid after the
+	//  Determines how long a CAPTCHA timestamp in the token remains valid after the
 	// client successfully solves a CAPTCHA puzzle.
 	ImmunityTimeProperty *AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails
 
 	noSmithyDocumentSerde
 }
 
-// Used for CAPTCHA and challenge token settings. Determines how long a CAPTCHA or
-// challenge timestamp remains valid after WAF updates it for a successful CAPTCHA
-// or challenge response.
+//	Used for CAPTCHA and challenge token settings. Determines how long a CAPTCHA
+//
+// or challenge timestamp remains valid after WAF updates it for a successful
+// CAPTCHA or challenge response.
 type AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails struct {
 
-	// The amount of time, in seconds, that a CAPTCHA or challenge timestamp is
+	//  The amount of time, in seconds, that a CAPTCHA or challenge timestamp is
 	// considered valid by WAF.
 	ImmunityTime *int64
 
@@ -13462,38 +14657,39 @@ type AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails struct {
 // Details about an WAFv2 web Access Control List (ACL).
 type AwsWafv2WebAclDetails struct {
 
-	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
+	//  The Amazon Resource Name (ARN) of the web ACL that you want to associate with
 	// the resource.
 	Arn *string
 
-	// The web ACL capacity units (WCUs) currently being used by this web ACL.
+	//  The web ACL capacity units (WCUs) currently being used by this web ACL.
 	Capacity *int64
 
-	// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
+	//  Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
 	// their own CaptchaConfig settings.
 	CaptchaConfig *AwsWafv2WebAclCaptchaConfigDetails
 
-	// The action to perform if none of the Rules contained in the web ACL match.
+	//  The action to perform if none of the Rules contained in the web ACL match.
 	DefaultAction *AwsWafv2WebAclActionDetails
 
-	// A description of the web ACL that helps with identification.
+	//  A description of the web ACL that helps with identification.
 	Description *string
 
-	// A unique identifier for the web ACL.
+	//  A unique identifier for the web ACL.
 	Id *string
 
-	// Indicates whether this web ACL is managed by Firewall Manager.
+	//  Indicates whether this web ACL is managed by Firewall Manager.
 	ManagedbyFirewallManager *bool
 
-	// The name of the web ACL.
+	//  The name of the web ACL.
 	Name *string
 
-	// The Rule statements used to identify the web requests that you want to allow,
+	//  The Rule statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that WAF uses to
 	// identify matching web requests, and parameters that govern how WAF handles them.
 	Rules []AwsWafv2RulesDetails
 
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	//  Defines and enables Amazon CloudWatch metrics and web request sample
+	// collection.
 	VisibilityConfig *AwsWafv2VisibilityConfigDetails
 
 	noSmithyDocumentSerde
@@ -13529,13 +14725,17 @@ type AwsWafWebAclRule struct {
 	// Rules to exclude from a rule group.
 	ExcludedRules []WafExcludedRule
 
-	// Use the OverrideAction to test your RuleGroup . Any rule in a RuleGroup can
-	// potentially block a request. If you set the OverrideAction to None , the
-	// RuleGroup blocks a request if any individual rule in the RuleGroup matches the
-	// request and is configured to block that request. However, if you first want to
-	// test the RuleGroup , set the OverrideAction to Count . The RuleGroup then
-	// overrides any block action specified by individual rules contained within the
-	// group. Instead of blocking matching requests, those requests are counted.
+	// Use the OverrideAction to test your RuleGroup .
+	//
+	// Any rule in a RuleGroup can potentially block a request. If you set the
+	// OverrideAction to None , the RuleGroup blocks a request if any individual rule
+	// in the RuleGroup matches the request and is configured to block that request.
+	//
+	// However, if you first want to test the RuleGroup , set the OverrideAction to
+	// Count . The RuleGroup then overrides any block action specified by individual
+	// rules contained within the group. Instead of blocking matching requests, those
+	// requests are counted.
+	//
 	// ActivatedRule | OverrideAction applies only when updating or adding a RuleGroup
 	// to a web ACL. In this case you do not use ActivatedRule Action . For all other
 	// update requests, ActivatedRule Action is used instead of ActivatedRule
@@ -13551,8 +14751,11 @@ type AwsWafWebAclRule struct {
 	// The identifier for a rule.
 	RuleId *string
 
-	// The rule type. Valid values: REGULAR | RATE_BASED | GROUP The default is REGULAR
-	// .
+	// The rule type.
+	//
+	// Valid values: REGULAR | RATE_BASED | GROUP
+	//
+	// The default is REGULAR .
 	Type *string
 
 	noSmithyDocumentSerde
@@ -13566,8 +14769,10 @@ type AwsXrayEncryptionConfigDetails struct {
 	KeyId *string
 
 	// The current status of the encryption configuration. Valid values are ACTIVE or
-	// UPDATING . When Status is equal to UPDATING , X-Ray might use both the old and
-	// new encryption.
+	// UPDATING .
+	//
+	// When Status is equal to UPDATING , X-Ray might use both the old and new
+	// encryption.
 	Status *string
 
 	// The type of encryption. KMS indicates that the encryption uses KMS keys. NONE
@@ -13582,32 +14787,45 @@ type AwsXrayEncryptionConfigDetails struct {
 type BatchUpdateFindingsUnprocessedFinding struct {
 
 	// The code associated with the error. Possible values are:
+	//
 	//   - ConcurrentUpdateError - Another request attempted to update the finding
-	//   while this request was being processed. This error may also occur if you call
-	//   BatchUpdateFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)
-	//   and BatchImportFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)
-	//   at the same time.
+	//   while this request was being processed. This error may also occur if you call [BatchUpdateFindings]
+	//   BatchUpdateFindings and [BatchImportFindings]BatchImportFindings at the same time.
+	//
 	//   - DuplicatedFindingIdentifier - The request included two or more findings with
 	//   the same FindingIdentifier .
+	//
 	//   - FindingNotFound - The FindingIdentifier included in the request did not
 	//   match an existing finding.
+	//
 	//   - FindingSizeExceeded - The finding size was greater than the permissible
 	//   value of 240 KB.
+	//
 	//   - InternalFailure - An internal service failure occurred when updating the
 	//   finding.
+	//
 	//   - InvalidInput - The finding update contained an invalid value that did not
-	//   satisfy the Amazon Web Services Security Finding Format (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)
-	//   syntax.
+	//   satisfy the [Amazon Web Services Security Finding Format]syntax.
+	//
+	// [Amazon Web Services Security Finding Format]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html
+	// [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
+	// [BatchImportFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
 	//
 	// This member is required.
 	ErrorCode *string
 
 	// The message associated with the error. Possible values are:
+	//
 	//   - Concurrent finding updates detected
+	//
 	//   - Finding Identifier is duplicated
+	//
 	//   - Finding Not Found
+	//
 	//   - Finding size exceeded 240 KB
+	//
 	//   - Internal service failure
+	//
 	//   - Invalid Input
 	//
 	// This member is required.
@@ -13621,11 +14839,12 @@ type BatchUpdateFindingsUnprocessedFinding struct {
 	noSmithyDocumentSerde
 }
 
-// The options for customizing a security control parameter with a boolean. For a
+//	The options for customizing a security control parameter with a boolean. For a
+//
 // boolean parameter, the options are true and false .
 type BooleanConfigurationOptions struct {
 
-	// The Security Hub default value for a boolean parameter.
+	//  The Security Hub default value for a boolean parameter.
 	DefaultValue *bool
 
 	noSmithyDocumentSerde
@@ -13728,36 +14947,40 @@ type ClassificationStatus struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Resource Name (ARN) and other details of the Amazon CloudWatch Logs
+//	The Amazon Resource Name (ARN) and other details of the Amazon CloudWatch Logs
+//
 // log group that Amazon Route 53 is publishing logs to.
 type CloudWatchLogsLogGroupArnConfigDetails struct {
 
-	// The ARN of the CloudWatch Logs log group that Route 53 is publishing logs to.
+	//  The ARN of the CloudWatch Logs log group that Route 53 is publishing logs to.
 	CloudWatchLogsLogGroupArn *string
 
-	// The ID of the hosted zone that CloudWatch Logs is logging queries for.
+	//  The ID of the hosted zone that CloudWatch Logs is logging queries for.
 	HostedZoneId *string
 
-	// The ID for a DNS query logging configuration.
+	//  The ID for a DNS query logging configuration.
 	Id *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about where a code vulnerability is located in your Lambda
+//	Provides details about where a code vulnerability is located in your Lambda
+//
 // function.
 type CodeVulnerabilitiesFilePath struct {
 
-	// The line number of the last line of code in which the vulnerability is located.
+	//  The line number of the last line of code in which the vulnerability is
+	// located.
 	EndLine *int32
 
-	// The name of the file in which the code vulnerability is located.
+	//  The name of the file in which the code vulnerability is located.
 	FileName *string
 
-	// The file path to the code in which the vulnerability is located.
+	//  The file path to the code in which the vulnerability is located.
 	FilePath *string
 
-	// The line number of the first line of code in which the vulnerability is located.
+	//  The line number of the first line of code in which the vulnerability is
+	// located.
 	StartLine *int32
 
 	noSmithyDocumentSerde
@@ -13767,7 +14990,8 @@ type CodeVulnerabilitiesFilePath struct {
 // returned for findings generated from controls.
 type Compliance struct {
 
-	// The enabled security standards in which a security control is currently enabled.
+	// The enabled security standards in which a security control is currently
+	// enabled.
 	AssociatedStandards []AssociatedStandard
 
 	// For a control, the industry or regulatory framework requirements that are
@@ -13775,18 +14999,24 @@ type Compliance struct {
 	// requirements.
 	RelatedRequirements []string
 
-	// The unique identifier of a control across standards. Values for this field
+	//  The unique identifier of a control across standards. Values for this field
 	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
 	SecurityControlId *string
 
-	// An object that includes security control parameter names and values.
+	//  An object that includes security control parameter names and values.
 	SecurityControlParameters []SecurityControlParameter
 
-	// The result of a standards check. The valid values for Status are as follows.
+	// The result of a standards check.
+	//
+	// The valid values for Status are as follows.
+	//
 	//   - PASSED - Standards check passed for all evaluated resources.
+	//
 	//   - WARNING - Some information is missing or this check is not supported for
 	//   your configuration.
+	//
 	//   - FAILED - Standards check failed for at least one evaluated resource.
+	//
 	//   - NOT_AVAILABLE - Check could not be performed due to a service outage, API
 	//   error, or because the result of the Config evaluation was NOT_APPLICABLE . If
 	//   the Config evaluation result was NOT_APPLICABLE , then after 3 days, Security
@@ -13794,15 +15024,16 @@ type Compliance struct {
 	Status ComplianceStatus
 
 	// For findings generated from controls, a list of reasons behind the value of
-	// Status . For the list of status reason codes and their meanings, see
-	// Standards-related information in the ASFF (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff)
-	// in the Security Hub User Guide.
+	// Status . For the list of status reason codes and their meanings, see [Standards-related information in the ASFF] in the
+	// Security Hub User Guide.
+	//
+	// [Standards-related information in the ASFF]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
 	StatusReasons []StatusReason
 
 	noSmithyDocumentSerde
 }
 
-// The options for customizing a security control parameter.
+//	The options for customizing a security control parameter.
 //
 // The following types satisfy this interface:
 //
@@ -13818,8 +15049,9 @@ type ConfigurationOptions interface {
 	isConfigurationOptions()
 }
 
-// The options for customizing a security control parameter that is a boolean. For
-// a boolean parameter, the options are true and false .
+//	The options for customizing a security control parameter that is a boolean.
+//
+// For a boolean parameter, the options are true and false .
 type ConfigurationOptionsMemberBoolean struct {
 	Value BooleanConfigurationOptions
 
@@ -13846,7 +15078,8 @@ type ConfigurationOptionsMemberEnum struct {
 
 func (*ConfigurationOptionsMemberEnum) isConfigurationOptions() {}
 
-// The options for customizing a security control parameter that is a list of
+//	The options for customizing a security control parameter that is a list of
+//
 // enums.
 type ConfigurationOptionsMemberEnumList struct {
 	Value EnumListConfigurationOptions
@@ -13865,7 +15098,8 @@ type ConfigurationOptionsMemberInteger struct {
 
 func (*ConfigurationOptionsMemberInteger) isConfigurationOptions() {}
 
-// The options for customizing a security control parameter that is a list of
+//	The options for customizing a security control parameter that is a list of
+//
 // integers.
 type ConfigurationOptionsMemberIntegerList struct {
 	Value IntegerListConfigurationOptions
@@ -13875,7 +15109,8 @@ type ConfigurationOptionsMemberIntegerList struct {
 
 func (*ConfigurationOptionsMemberIntegerList) isConfigurationOptions() {}
 
-// The options for customizing a security control parameter that is a string data
+//	The options for customizing a security control parameter that is a string data
+//
 // type.
 type ConfigurationOptionsMemberString struct {
 	Value StringConfigurationOptions
@@ -13885,7 +15120,8 @@ type ConfigurationOptionsMemberString struct {
 
 func (*ConfigurationOptionsMemberString) isConfigurationOptions() {}
 
-// The options for customizing a security control parameter that is a list of
+//	The options for customizing a security control parameter that is a list of
+//
 // strings.
 type ConfigurationOptionsMemberStringList struct {
 	Value StringListConfigurationOptions
@@ -13895,73 +15131,76 @@ type ConfigurationOptionsMemberStringList struct {
 
 func (*ConfigurationOptionsMemberStringList) isConfigurationOptions() {}
 
-// Provides details about the association between an Security Hub configuration
+//	Provides details about the association between an Security Hub configuration
+//
 // and a target account, organizational unit, or the root. An association can exist
 // between a target and a configuration policy, or between a target and
 // self-managed behavior.
 type ConfigurationPolicyAssociation struct {
 
-	// The target account, organizational unit, or the root.
+	//  The target account, organizational unit, or the root.
 	Target Target
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains the details of a configuration policy association
+//	An object that contains the details of a configuration policy association
+//
 // that’s returned in a ListConfigurationPolicyAssociations request.
 type ConfigurationPolicyAssociationSummary struct {
 
-	// The current status of the association between the specified target and the
+	//  The current status of the association between the specified target and the
 	// configuration.
 	AssociationStatus ConfigurationPolicyAssociationStatus
 
-	// The explanation for a FAILED value for AssociationStatus .
+	//  The explanation for a FAILED value for AssociationStatus .
 	AssociationStatusMessage *string
 
-	// Indicates whether the association between the specified target and the
+	//  Indicates whether the association between the specified target and the
 	// configuration was directly applied by the Security Hub delegated administrator
 	// or inherited from a parent.
 	AssociationType AssociationType
 
-	// The universally unique identifier (UUID) of the configuration policy.
+	//  The universally unique identifier (UUID) of the configuration policy.
 	ConfigurationPolicyId *string
 
-	// The identifier of the target account, organizational unit, or the root.
+	//  The identifier of the target account, organizational unit, or the root.
 	TargetId *string
 
-	// Specifies whether the target is an Amazon Web Services account, organizational
+	//  Specifies whether the target is an Amazon Web Services account, organizational
 	// unit, or the root.
 	TargetType TargetType
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// association was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// An object that contains the details of an Security Hub configuration policy
+//	An object that contains the details of an Security Hub configuration policy
+//
 // that’s returned in a ListConfigurationPolicies request.
 type ConfigurationPolicySummary struct {
 
-	// The Amazon Resource Name (ARN) of the configuration policy.
+	//  The Amazon Resource Name (ARN) of the configuration policy.
 	Arn *string
 
-	// The description of the configuration policy.
+	//  The description of the configuration policy.
 	Description *string
 
-	// The universally unique identifier (UUID) of the configuration policy.
+	//  The universally unique identifier (UUID) of the configuration policy.
 	Id *string
 
-	// The name of the configuration policy. Alphanumeric characters and the following
-	// ASCII characters are permitted: -, ., !, *, / .
+	//  The name of the configuration policy. Alphanumeric characters and the
+	// following ASCII characters are permitted: -, ., !, *, / .
 	Name *string
 
-	// Indicates whether the service that the configuration policy applies to is
+	//  Indicates whether the service that the configuration policy applies to is
 	// enabled in the policy.
 	ServiceEnabled *bool
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// was last updated.
 	UpdatedAt *time.Time
 
@@ -13980,15 +15219,21 @@ type ContainerDetails struct {
 	// The name of the container image related to a finding.
 	ImageName *string
 
-	// Indicates when the container started. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the container started.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LaunchedAt *string
@@ -14088,30 +15333,40 @@ type DateFilter struct {
 	// A date range for the date filter.
 	DateRange *DateRange
 
-	// A timestamp that provides the end date for the date filter. This field accepts
-	// only the specified formats. Timestamps can end with Z or ("+" / "-") time-hour
-	// [":" time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// A timestamp that provides the end date for the date filter.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	End *string
 
-	// A timestamp that provides the start date for the date filter. This field
-	// accepts only the specified formats. Timestamps can end with Z or ("+" / "-")
-	// time-hour [":" time-minute] . The time-secfrac after seconds is limited to a
-	// maximum of 9 digits. The offset is bounded by +/-18:00. Here are valid timestamp
-	// formats with examples:
+	// A timestamp that provides the start date for the date filter.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	Start *string
@@ -14150,13 +15405,13 @@ type DnsRequestAction struct {
 // The options for customizing a security control parameter that is a double.
 type DoubleConfigurationOptions struct {
 
-	// The Security Hub default value for a control parameter that is a double.
+	//  The Security Hub default value for a control parameter that is a double.
 	DefaultValue *float64
 
-	// The maximum valid value for a control parameter that is a double.
+	//  The maximum valid value for a control parameter that is a double.
 	Max *float64
 
-	// The minimum valid value for a control parameter that is a double.
+	//  The minimum valid value for a control parameter that is a double.
 	Min *float64
 
 	noSmithyDocumentSerde
@@ -14165,26 +15420,29 @@ type DoubleConfigurationOptions struct {
 // The options for customizing a security control parameter that is an enum.
 type EnumConfigurationOptions struct {
 
-	// The valid values for a control parameter that is an enum.
+	//  The valid values for a control parameter that is an enum.
 	AllowedValues []string
 
-	// The Security Hub default value for a control parameter that is an enum.
+	//  The Security Hub default value for a control parameter that is an enum.
 	DefaultValue *string
 
 	noSmithyDocumentSerde
 }
 
-// The options for customizing a security control parameter that is a list of
+//	The options for customizing a security control parameter that is a list of
+//
 // enums.
 type EnumListConfigurationOptions struct {
 
-	// The valid values for a control parameter that is a list of enums.
+	//  The valid values for a control parameter that is a list of enums.
 	AllowedValues []string
 
-	// The Security Hub default value for a control parameter that is a list of enums.
+	//  The Security Hub default value for a control parameter that is a list of
+	// enums.
 	DefaultValue []string
 
-	// The maximum number of list items that an enum list control parameter can accept.
+	//  The maximum number of list items that an enum list control parameter can
+	// accept.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -14202,7 +15460,8 @@ type FilePaths struct {
 	// The hash value for the infected or suspicious file.
 	Hash *string
 
-	// The Amazon Resource Name (ARN) of the resource on which the threat was detected.
+	// The Amazon Resource Name (ARN) of the resource on which the threat was
+	// detected.
 	ResourceId *string
 
 	noSmithyDocumentSerde
@@ -14219,11 +15478,12 @@ type FindingAggregator struct {
 	noSmithyDocumentSerde
 }
 
-// A list of events that changed the specified finding during the specified time
+//	A list of events that changed the specified finding during the specified time
+//
 // period. Each record represents a single finding change event.
 type FindingHistoryRecord struct {
 
-	// Identifies whether the event marks the creation of a new finding. A value of
+	//  Identifies whether the event marks the creation of a new finding. A value of
 	// True means that the finding is newly created. A value of False means that the
 	// finding isn’t newly created.
 	FindingCreated *bool
@@ -14231,34 +15491,42 @@ type FindingHistoryRecord struct {
 	// Identifies which finding to get the finding history for.
 	FindingIdentifier *AwsSecurityFindingIdentifier
 
-	// A token for pagination purposes. Provide this token in the subsequent request
-	// to GetFindingsHistory (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindingsHistory.html)
-	// to get up to an additional 100 results of history for the same finding that you
-	// specified in your initial request.
+	//  A token for pagination purposes. Provide this token in the subsequent request
+	// to [GetFindingsHistory]GetFindingsHistory to get up to an additional 100 results of history for the
+	// same finding that you specified in your initial request.
+	//
+	// [GetFindingsHistory]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_GetFindingsHistory.html
 	NextToken *string
 
-	// Identifies the source of the event that changed the finding. For example, an
-	// integrated Amazon Web Service or third-party partner integration may call
-	// BatchImportFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)
-	// , or an Security Hub customer may call BatchUpdateFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)
-	// .
+	//  Identifies the source of the event that changed the finding. For example, an
+	// integrated Amazon Web Service or third-party partner integration may call [BatchImportFindings]
+	// BatchImportFindings , or an Security Hub customer may call [BatchUpdateFindings]BatchUpdateFindings .
+	//
+	// [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
+	// [BatchImportFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
 	UpdateSource *FindingHistoryUpdateSource
 
-	// A timestamp that indicates when Security Hub processed the updated finding
-	// record. This field accepts only the specified formats. Timestamps can end with Z
-	// or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	//  A timestamp that indicates when Security Hub processed the updated finding
+	// record.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
 	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
 	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	UpdateTime *time.Time
 
-	// An array of objects that provides details about the finding change event,
+	//  An array of objects that provides details about the finding change event,
 	// including the Amazon Web Services Security Finding Format (ASFF) field that
 	// changed, the value of the field before the change, and the value of the field
 	// after the change.
@@ -14267,21 +15535,24 @@ type FindingHistoryRecord struct {
 	noSmithyDocumentSerde
 }
 
-// An array of objects that provides details about a change to a finding,
+//	An array of objects that provides details about a change to a finding,
+//
 // including the Amazon Web Services Security Finding Format (ASFF) field that
 // changed, the value of the field before the change, and the value of the field
 // after the change.
 type FindingHistoryUpdate struct {
 
-	// The value of the ASFF field after the finding change event. To preserve storage
-	// and readability, Security Hub omits this value if FindingHistoryRecord (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingHistoryRecord.html)
+	//  The value of the ASFF field after the finding change event. To preserve
+	// storage and readability, Security Hub omits this value if [FindingHistoryRecord]FindingHistoryRecord
 	// exceeds database limits.
+	//
+	// [FindingHistoryRecord]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_FindingHistoryRecord.html
 	NewValue *string
 
-	// The value of the ASFF field before the finding change event.
+	//  The value of the ASFF field before the finding change event.
 	OldValue *string
 
-	// The ASFF field that changed during the finding change event.
+	//  The ASFF field that changed during the finding change event.
 	UpdatedField *string
 
 	noSmithyDocumentSerde
@@ -14290,16 +15561,17 @@ type FindingHistoryUpdate struct {
 // Identifies the source of the finding change event.
 type FindingHistoryUpdateSource struct {
 
-	// The identity of the source that initiated the finding change event. For
+	//  The identity of the source that initiated the finding change event. For
 	// example, the Amazon Resource Name (ARN) of a partner that calls
 	// BatchImportFindings or of a customer that calls BatchUpdateFindings.
 	Identity *string
 
-	// Describes the type of finding change event, such as a call to
-	// BatchImportFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html)
-	// (by an integrated Amazon Web Service or third party partner integration) or
-	// BatchUpdateFindings (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html)
-	// (by a Security Hub customer).
+	//  Describes the type of finding change event, such as a call to [BatchImportFindings]
+	// BatchImportFindings (by an integrated Amazon Web Service or third party partner
+	// integration) or [BatchUpdateFindings]BatchUpdateFindings (by a Security Hub customer).
+	//
+	// [BatchUpdateFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
+	// [BatchImportFindings]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
 	Type FindingHistoryUpdateSourceType
 
 	noSmithyDocumentSerde
@@ -14312,11 +15584,13 @@ type FindingProviderFields struct {
 
 	// A finding's confidence. Confidence is defined as the likelihood that a finding
 	// accurately identifies the behavior or issue that it was intended to identify.
+	//
 	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
 	// percent confidence and 100 means 100 percent confidence.
 	Confidence *int32
 
 	// The level of importance assigned to the resources associated with the finding.
+	//
 	// A score of 0 means that the underlying resources have no criticality, and a
 	// score of 100 is reserved for the most critical resources.
 	Criticality *int32
@@ -14328,8 +15602,10 @@ type FindingProviderFields struct {
 	Severity *FindingProviderSeverity
 
 	// One or more finding types in the format of namespace/category/classifier that
-	// classify a finding. Valid namespace values are: Software and Configuration
-	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
+	// classify a finding.
+	//
+	// Valid namespace values are: Software and Configuration Checks | TTPs | Effects
+	// | Unusual Behaviors | Sensitive Data Identifications
 	Types []string
 
 	noSmithyDocumentSerde
@@ -14358,15 +15634,17 @@ type FirewallPolicyDetails struct {
 	StatelessCustomActions []FirewallPolicyStatelessCustomActionsDetails
 
 	// The actions to take on a packet if it doesn't match any of the stateless rules
-	// in the policy. You must specify a standard action ( aws:pass , aws:drop ,
-	// aws:forward_to_sfe ), and can optionally include a custom action from
-	// StatelessCustomActions .
+	// in the policy.
+	//
+	// You must specify a standard action ( aws:pass , aws:drop , aws:forward_to_sfe ),
+	// and can optionally include a custom action from StatelessCustomActions .
 	StatelessDefaultActions []string
 
 	// The actions to take on a fragmented UDP packet if it doesn't match any of the
-	// stateless rules in the policy. You must specify a standard action ( aws:pass ,
-	// aws:drop , aws:forward_to_sfe ), and can optionally include a custom action from
-	// StatelessCustomActions .
+	// stateless rules in the policy.
+	//
+	// You must specify a standard action ( aws:pass , aws:drop , aws:forward_to_sfe ),
+	// and can optionally include a custom action from StatelessCustomActions .
 	StatelessFragmentDefaultActions []string
 
 	// The stateless rule groups that are used in the firewall policy.
@@ -14408,20 +15686,21 @@ type FirewallPolicyStatelessRuleGroupReferencesDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Provides metadata for the Amazon CodeGuru detector associated with a finding.
+//	Provides metadata for the Amazon CodeGuru detector associated with a finding.
+//
 // This field pertains to findings that relate to Lambda functions. Amazon
 // Inspector identifies policy violations and vulnerabilities in Lambda function
 // code based on internal detectors developed in collaboration with Amazon
 // CodeGuru. Security Hub receives those findings.
 type GeneratorDetails struct {
 
-	// The description of the detector used to identify the code vulnerability.
+	//  The description of the detector used to identify the code vulnerability.
 	Description *string
 
-	// An array of tags used to identify the detector associated with the finding.
+	//  An array of tags used to identify the detector associated with the finding.
 	Labels []string
 
-	// The name of the detector used to identify the code vulnerability.
+	//  The name of the detector used to identify the code vulnerability.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -14550,34 +15829,35 @@ type InsightResultValue struct {
 // The options for customizing a security control parameter that is an integer.
 type IntegerConfigurationOptions struct {
 
-	// The Security Hub default value for a control parameter that is an integer.
+	//  The Security Hub default value for a control parameter that is an integer.
 	DefaultValue *int32
 
-	// The maximum valid value for a control parameter that is an integer.
+	//  The maximum valid value for a control parameter that is an integer.
 	Max *int32
 
-	// The minimum valid value for a control parameter that is an integer.
+	//  The minimum valid value for a control parameter that is an integer.
 	Min *int32
 
 	noSmithyDocumentSerde
 }
 
-// The options for customizing a security control parameter that is a list of
+//	The options for customizing a security control parameter that is a list of
+//
 // integers.
 type IntegerListConfigurationOptions struct {
 
-	// The Security Hub default value for a control parameter that is a list of
+	//  The Security Hub default value for a control parameter that is a list of
 	// integers.
 	DefaultValue []int32
 
-	// The maximum valid value for a control parameter that is a list of integers.
+	//  The maximum valid value for a control parameter that is a list of integers.
 	Max *int32
 
-	// The maximum number of list items that an interger list control parameter can
+	//  The maximum number of list items that an interger list control parameter can
 	// accept.
 	MaxItems *int32
 
-	// The minimum valid value for a control parameter that is a list of integers.
+	//  The minimum valid value for a control parameter that is a list of integers.
 	Min *int32
 
 	noSmithyDocumentSerde
@@ -14637,11 +15917,17 @@ type Ipv6CidrBlockAssociation struct {
 	AssociationId *string
 
 	// Information about the state of the CIDR block. Valid values are as follows:
+	//
 	//   - associating
+	//
 	//   - associated
+	//
 	//   - disassociating
+	//
 	//   - disassociated
+	//
 	//   - failed
+	//
 	//   - failing
 	CidrBlockState *string
 
@@ -14663,9 +15949,12 @@ type KeywordFilter struct {
 // Information about the state of the load balancer.
 type LoadBalancerState struct {
 
-	// The state code. The initial state of the load balancer is provisioning. After
-	// the load balancer is fully set up and ready to route traffic, its state is
-	// active. If the load balancer could not be set up, its state is failed.
+	// The state code. The initial state of the load balancer is provisioning.
+	//
+	// After the load balancer is fully set up and ready to route traffic, its state
+	// is active.
+	//
+	// If the load balancer could not be set up, its state is failed.
 	Code *string
 
 	// A description of the state.
@@ -14699,39 +15988,53 @@ type Malware struct {
 type MapFilter struct {
 
 	// The condition to apply to the key value when filtering Security Hub findings
-	// with a map filter. To search for values that have the filter value, use one of
-	// the following comparison operators:
+	// with a map filter.
+	//
+	// To search for values that have the filter value, use one of the following
+	// comparison operators:
+	//
 	//   - To search for values that include the filter value, use CONTAINS . For
 	//   example, for the ResourceTags field, the filter Department CONTAINS Security
 	//   matches findings that include the value Security for the Department tag. In
 	//   the same example, a finding with a value of Security team for the Department
 	//   tag is a match.
+	//
 	//   - To search for values that exactly match the filter value, use EQUALS . For
 	//   example, for the ResourceTags field, the filter Department EQUALS Security
 	//   matches findings that have the value Security for the Department tag.
+	//
 	// CONTAINS and EQUALS filters on the same field are joined by OR . A finding
 	// matches if it matches any one of those filters. For example, the filters
 	// Department CONTAINS Security OR Department CONTAINS Finance match a finding that
-	// includes either Security , Finance , or both values. To search for values that
-	// don't have the filter value, use one of the following comparison operators:
+	// includes either Security , Finance , or both values.
+	//
+	// To search for values that don't have the filter value, use one of the following
+	// comparison operators:
+	//
 	//   - To search for values that exclude the filter value, use NOT_CONTAINS . For
 	//   example, for the ResourceTags field, the filter Department NOT_CONTAINS
-	//   Finance matches findings that exclude the value Finance for the Department
-	//   tag.
+	//   Finance matches findings that exclude the value Finance for the Department tag.
+	//
 	//   - To search for values other than the filter value, use NOT_EQUALS . For
 	//   example, for the ResourceTags field, the filter Department NOT_EQUALS Finance
 	//   matches findings that don’t have the value Finance for the Department tag.
+	//
 	// NOT_CONTAINS and NOT_EQUALS filters on the same field are joined by AND . A
 	// finding matches only if it matches all of those filters. For example, the
 	// filters Department NOT_CONTAINS Security AND Department NOT_CONTAINS Finance
-	// match a finding that excludes both the Security and Finance values. CONTAINS
-	// filters can only be used with other CONTAINS filters. NOT_CONTAINS filters can
-	// only be used with other NOT_CONTAINS filters. You can’t have both a CONTAINS
-	// filter and a NOT_CONTAINS filter on the same field. Similarly, you can’t have
-	// both an EQUALS filter and a NOT_EQUALS filter on the same field. Combining
-	// filters in this way returns an error. CONTAINS and NOT_CONTAINS operators can
-	// be used only with automation rules. For more information, see Automation rules (https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html)
-	// in the Security Hub User Guide.
+	// match a finding that excludes both the Security and Finance values.
+	//
+	// CONTAINS filters can only be used with other CONTAINS filters. NOT_CONTAINS
+	// filters can only be used with other NOT_CONTAINS filters.
+	//
+	// You can’t have both a CONTAINS filter and a NOT_CONTAINS filter on the same
+	// field. Similarly, you can’t have both an EQUALS filter and a NOT_EQUALS filter
+	// on the same field. Combining filters in this way returns an error.
+	//
+	// CONTAINS and NOT_CONTAINS operators can be used only with automation rules. For
+	// more information, see [Automation rules]in the Security Hub User Guide.
+	//
+	// [Automation rules]: https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html
 	Comparison MapFilterComparison
 
 	// The key of the map filter. For example, for ResourceTags , Key identifies the
@@ -14763,27 +16066,38 @@ type Member struct {
 	// account.
 	InvitedAt *time.Time
 
-	// This is replaced by AdministratorID . The Amazon Web Services account ID of the
-	// Security Hub administrator account associated with this member account.
+	// This is replaced by AdministratorID .
+	//
+	// The Amazon Web Services account ID of the Security Hub administrator account
+	// associated with this member account.
 	//
 	// Deprecated: This field is deprecated, use AdministratorId instead.
 	MasterId *string
 
 	// The status of the relationship between the member account and its administrator
-	// account. The status can have one of the following values:
+	// account.
+	//
+	// The status can have one of the following values:
+	//
 	//   - Created - Indicates that the administrator account added the member account,
 	//   but has not yet invited the member account.
+	//
 	//   - Invited - Indicates that the administrator account invited the member
 	//   account. The member account has not yet responded to the invitation.
+	//
 	//   - Enabled - Indicates that the member account is currently active. For
 	//   manually invited member accounts, indicates that the member account accepted the
 	//   invitation.
+	//
 	//   - Removed - Indicates that the administrator account disassociated the member
 	//   account.
+	//
 	//   - Resigned - Indicates that the member account disassociated themselves from
 	//   the administrator account.
+	//
 	//   - Deleted - Indicates that the administrator account deleted the member
 	//   account.
+	//
 	//   - AccountSuspended - Indicates that an organization account was suspended from
 	//   Amazon Web Services at the same time that the administrator account tried to
 	//   enable the organization account as a member account.
@@ -14920,16 +16234,21 @@ type Note struct {
 	// This member is required.
 	Text *string
 
-	// A timestamp that indicates when the note was updated. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// A timestamp that indicates when the note was updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	//
@@ -14967,7 +16286,7 @@ type NumberFilter struct {
 	// findings.
 	Eq *float64
 
-	// The greater-than condition to be applied to a single field when querying for
+	//  The greater-than condition to be applied to a single field when querying for
 	// findings.
 	Gt *float64
 
@@ -14975,7 +16294,7 @@ type NumberFilter struct {
 	// for findings.
 	Gte *float64
 
-	// The less-than condition to be applied to a single field when querying for
+	//  The less-than condition to be applied to a single field when querying for
 	// findings.
 	Lt *float64
 
@@ -15011,31 +16330,34 @@ type Occurrences struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the way an organization is configured in Security
+//	Provides information about the way an organization is configured in Security
+//
 // Hub.
 type OrganizationConfiguration struct {
 
-	// Indicates whether the organization uses local or central configuration. If you
-	// use local configuration, the Security Hub delegated administrator can set
-	// AutoEnable to true and AutoEnableStandards to DEFAULT . This automatically
+	//  Indicates whether the organization uses local or central configuration.
+	//
+	// If you use local configuration, the Security Hub delegated administrator can
+	// set AutoEnable to true and AutoEnableStandards to DEFAULT . This automatically
 	// enables Security Hub and default security standards in new organization
 	// accounts. These new account settings must be set separately in each Amazon Web
-	// Services Region, and settings may be different in each Region. If you use
-	// central configuration, the delegated administrator can create configuration
-	// policies. Configuration policies can be used to configure Security Hub, security
-	// standards, and security controls in multiple accounts and Regions. If you want
-	// new organization accounts to use a specific configuration, you can create a
-	// configuration policy and associate it with the root or specific organizational
-	// units (OUs). New accounts will inherit the policy from the root or their
-	// assigned OU.
+	// Services Region, and settings may be different in each Region.
+	//
+	// If you use central configuration, the delegated administrator can create
+	// configuration policies. Configuration policies can be used to configure Security
+	// Hub, security standards, and security controls in multiple accounts and Regions.
+	// If you want new organization accounts to use a specific configuration, you can
+	// create a configuration policy and associate it with the root or specific
+	// organizational units (OUs). New accounts will inherit the policy from the root
+	// or their assigned OU.
 	ConfigurationType OrganizationConfigurationConfigurationType
 
-	// Describes whether central configuration could be enabled as the
+	//  Describes whether central configuration could be enabled as the
 	// ConfigurationType for the organization. If your ConfigurationType is local
 	// configuration, then the value of Status is always ENABLED .
 	Status OrganizationConfigurationStatus
 
-	// Provides an explanation if the value of Status is equal to FAILED when
+	//  Provides an explanation if the value of Status is equal to FAILED when
 	// ConfigurationType is equal to CENTRAL .
 	StatusMessage *string
 
@@ -15059,37 +16381,42 @@ type Page struct {
 	noSmithyDocumentSerde
 }
 
-// An object that provides the current value of a security control parameter and
+//	An object that provides the current value of a security control parameter and
+//
 // identifies whether it has been customized.
 type ParameterConfiguration struct {
 
-	// Identifies whether a control parameter uses a custom user-defined value or
-	// subscribes to the default Security Hub behavior. When ValueType is set equal to
-	// DEFAULT , the default behavior can be a specific Security Hub default value, or
-	// the default behavior can be to ignore a specific parameter. When ValueType is
-	// set equal to DEFAULT , Security Hub ignores user-provided input for the Value
-	// field. When ValueType is set equal to CUSTOM , the Value field can't be empty.
+	//  Identifies whether a control parameter uses a custom user-defined value or
+	// subscribes to the default Security Hub behavior.
+	//
+	// When ValueType is set equal to DEFAULT , the default behavior can be a specific
+	// Security Hub default value, or the default behavior can be to ignore a specific
+	// parameter. When ValueType is set equal to DEFAULT , Security Hub ignores
+	// user-provided input for the Value field.
+	//
+	// When ValueType is set equal to CUSTOM , the Value field can't be empty.
 	//
 	// This member is required.
 	ValueType ParameterValueType
 
-	// The current value of a control parameter.
+	//  The current value of a control parameter.
 	Value ParameterValue
 
 	noSmithyDocumentSerde
 }
 
-// An object that describes a security control parameter and the options for
+//	An object that describes a security control parameter and the options for
+//
 // customizing it.
 type ParameterDefinition struct {
 
-	// The options for customizing a control parameter. Customization options vary
+	//  The options for customizing a control parameter. Customization options vary
 	// based on the data type of the parameter.
 	//
 	// This member is required.
 	ConfigurationOptions ConfigurationOptions
 
-	// Description of a control parameter.
+	//  Description of a control parameter.
 	//
 	// This member is required.
 	Description *string
@@ -15097,7 +16424,8 @@ type ParameterDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// An object that includes the data type of a security control parameter and its
+//	An object that includes the data type of a security control parameter and its
+//
 // current value.
 //
 // The following types satisfy this interface:
@@ -15222,28 +16550,40 @@ type PatchSummary struct {
 	// and INSTALL .
 	Operation *string
 
-	// Indicates when the operation completed. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the operation completed.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	OperationEndTime *string
 
-	// Indicates when the operation started. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the operation started.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	OperationStartTime *string
@@ -15254,7 +16594,8 @@ type PatchSummary struct {
 	noSmithyDocumentSerde
 }
 
-// An object that defines how Security Hub is configured. It includes whether
+//	An object that defines how Security Hub is configured. It includes whether
+//
 // Security Hub is enabled or disabled, a list of enabled security standards, a
 // list of enabled or disabled security controls, and a list of custom parameter
 // values for specified controls. If you provide a list of security controls that
@@ -15336,15 +16677,21 @@ type PortRangeFromTo struct {
 // The details of process-related information about a finding.
 type ProcessDetails struct {
 
-	// Indicates when the process was launched. This field accepts only the specified
-	// formats. Timestamps can end with Z or ("+" / "-") time-hour [":" time-minute] .
-	// The time-secfrac after seconds is limited to a maximum of 9 digits. The offset
-	// is bounded by +/-18:00. Here are valid timestamp formats with examples:
+	// Indicates when the process was launched.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LaunchedAt *string
@@ -15362,16 +16709,21 @@ type ProcessDetails struct {
 	// The process ID.
 	Pid *int32
 
-	// Indicates when the process was terminated. This field accepts only the
-	// specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the process was terminated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	TerminatedAt *string
@@ -15402,19 +16754,23 @@ type Product struct {
 
 	// The types of integration that the product supports. Available values are the
 	// following.
+	//
 	//   - SEND_FINDINGS_TO_SECURITY_HUB - The integration sends findings to Security
 	//   Hub.
+	//
 	//   - RECEIVE_FINDINGS_FROM_SECURITY_HUB - The integration receives findings from
 	//   Security Hub.
+	//
 	//   - UPDATE_FINDINGS_IN_SECURITY_HUB - The integration does not send new findings
 	//   to Security Hub, but does make updates to the findings that it receives from
 	//   Security Hub.
 	IntegrationTypes []IntegrationType
 
 	// For integrations with Amazon Web Services services, the Amazon Web Services
-	// Console URL from which to activate the service. For integrations with
-	// third-party products, the Amazon Web Services Marketplace URL from which to
-	// subscribe to or purchase the product.
+	// Console URL from which to activate the service.
+	//
+	// For integrations with third-party products, the Amazon Web Services Marketplace
+	// URL from which to subscribe to or purchase the product.
 	MarketplaceUrl *string
 
 	// The name of the product.
@@ -15429,7 +16785,7 @@ type Product struct {
 // Describes a virtual private gateway propagating route.
 type PropagatingVgwSetDetails struct {
 
-	// The ID of the virtual private gateway.
+	//  The ID of the virtual private gateway.
 	GatewayId *string
 
 	noSmithyDocumentSerde
@@ -15518,16 +16874,19 @@ type Resource struct {
 
 	// The type of the resource that details are provided for. If possible, set Type
 	// to one of the supported resource types. For example, if the resource is an EC2
-	// instance, then set Type to AwsEc2Instance . If the resource does not match any
-	// of the provided types, then set Type to Other .
+	// instance, then set Type to AwsEc2Instance .
+	//
+	// If the resource does not match any of the provided types, then set Type to Other
+	// .
 	//
 	// This member is required.
 	Type *string
 
-	// The Amazon Resource Name (ARN) of the application that is related to a finding.
+	//  The Amazon Resource Name (ARN) of the application that is related to a
+	// finding.
 	ApplicationArn *string
 
-	// The name of the application that is related to a finding.
+	//  The name of the application that is related to a finding.
 	ApplicationName *string
 
 	// Contains information about sensitive data that was detected on the resource.
@@ -15554,18 +16913,22 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
-// Additional details about a resource related to a finding. To provide the
-// details, use the object that corresponds to the resource type. For example, if
-// the resource type is AwsEc2Instance , then you use the AwsEc2Instance object to
-// provide the details. If the type-specific object does not contain all of the
-// fields you want to populate, then you use the Other object to populate those
-// additional fields. You also use the Other object to populate the details when
-// the selected type does not have a corresponding object.
+// Additional details about a resource related to a finding.
+//
+// To provide the details, use the object that corresponds to the resource type.
+// For example, if the resource type is AwsEc2Instance , then you use the
+// AwsEc2Instance object to provide the details.
+//
+// If the type-specific object does not contain all of the fields you want to
+// populate, then you use the Other object to populate those additional fields.
+//
+// You also use the Other object to populate the details when the selected type
+// does not have a corresponding object.
 type ResourceDetails struct {
 
-	// Provides details about AppSync message broker. A message broker allows software
-	// applications and components to communicate using various programming languages,
-	// operating systems, and formal messaging protocols.
+	//  Provides details about AppSync message broker. A message broker allows
+	// software applications and components to communicate using various programming
+	// languages, operating systems, and formal messaging protocols.
 	AwsAmazonMqBroker *AwsAmazonMqBrokerDetails
 
 	// Provides information about a REST API in version 1 of Amazon API Gateway.
@@ -15580,11 +16943,11 @@ type ResourceDetails struct {
 	// Provides information about a version 2 stage for Amazon API Gateway.
 	AwsApiGatewayV2Stage *AwsApiGatewayV2StageDetails
 
-	// Provides details about an AppSync Graph QL API, which lets you query multiple
+	//  Provides details about an AppSync Graph QL API, which lets you query multiple
 	// databases, microservices, and APIs from a single GraphQL endpoint.
 	AwsAppSyncGraphQlApi *AwsAppSyncGraphQlApiDetails
 
-	// Provides information about an Amazon Athena workgroup. A workgroup helps you
+	//  Provides information about an Amazon Athena workgroup. A workgroup helps you
 	// separate users, teams, applications, or workloads. It also helps you set limits
 	// on data processing and track costs.
 	AwsAthenaWorkGroup *AwsAthenaWorkGroupDetails
@@ -15625,24 +16988,24 @@ type ResourceDetails struct {
 	// Details for an CodeBuild project.
 	AwsCodeBuildProject *AwsCodeBuildProjectDetails
 
-	// Provides details about an Database Migration Service (DMS) endpoint. An
+	//  Provides details about an Database Migration Service (DMS) endpoint. An
 	// endpoint provides connection, data store type, and location information about
 	// your data store.
 	AwsDmsEndpoint *AwsDmsEndpointDetails
 
-	// Provides details about an DMS replication instance. DMS uses a replication
+	//  Provides details about an DMS replication instance. DMS uses a replication
 	// instance to connect to your source data store, read the source data, and format
 	// the data for consumption by the target data store.
 	AwsDmsReplicationInstance *AwsDmsReplicationInstanceDetails
 
-	// Provides details about an DMS replication task. A replication task moves a set
+	//  Provides details about an DMS replication task. A replication task moves a set
 	// of data from the source endpoint to the target endpoint.
 	AwsDmsReplicationTask *AwsDmsReplicationTaskDetails
 
 	// Details about a DynamoDB table.
 	AwsDynamoDbTable *AwsDynamoDbTableDetails
 
-	// Provides details about an Client VPN endpoint. A Client VPN endpoint is the
+	//  Provides details about an Client VPN endpoint. A Client VPN endpoint is the
 	// resource that you create and configure to enable and manage client VPN sessions.
 	// It's the termination point for all client VPN sessions.
 	AwsEc2ClientVpnEndpoint *AwsEc2ClientVpnEndpointDetails
@@ -15653,7 +17016,7 @@ type ResourceDetails struct {
 	// Details about an EC2 instance related to a finding.
 	AwsEc2Instance *AwsEc2InstanceDetails
 
-	// Specifies the properties for creating an Amazon Elastic Compute Cloud (Amazon
+	//  Specifies the properties for creating an Amazon Elastic Compute Cloud (Amazon
 	// EC2) launch template.
 	AwsEc2LaunchTemplate *AwsEc2LaunchTemplateDetails
 
@@ -15663,7 +17026,7 @@ type ResourceDetails struct {
 	// Details for an EC2 network interface.
 	AwsEc2NetworkInterface *AwsEc2NetworkInterfaceDetails
 
-	// Provides details about a route table. A route table contains a set of rules,
+	//  Provides details about a route table. A route table contains a set of rules,
 	// called routes, that determine where to direct network traffic from your subnet
 	// or gateway.
 	AwsEc2RouteTable *AwsEc2RouteTableDetails
@@ -15738,21 +17101,21 @@ type ResourceDetails struct {
 	// Details about a load balancer.
 	AwsElbv2LoadBalancer *AwsElbv2LoadBalancerDetails
 
-	// A schema defines the structure of events that are sent to Amazon EventBridge.
+	//  A schema defines the structure of events that are sent to Amazon EventBridge.
 	// Schema registries are containers for schemas. They collect and organize schemas
 	// so that your schemas are in logical groups.
 	AwsEventSchemasRegistry *AwsEventSchemasRegistryDetails
 
-	// Provides details about an Amazon EventBridge global endpoint. The endpoint can
+	//  Provides details about an Amazon EventBridge global endpoint. The endpoint can
 	// improve your application’s availability by making it Regional-fault tolerant.
 	AwsEventsEndpoint *AwsEventsEndpointDetails
 
-	// Provides details about Amazon EventBridge event bus for an endpoint. An event
+	//  Provides details about Amazon EventBridge event bus for an endpoint. An event
 	// bus is a router that receives events and delivers them to zero or more
 	// destinations, or targets.
 	AwsEventsEventbus *AwsEventsEventbusDetails
 
-	// Provides details about an Amazon GuardDuty detector. A detector is an object
+	//  Provides details about an Amazon GuardDuty detector. A detector is an object
 	// that represents the GuardDuty service. A detector is required for GuardDuty to
 	// become operational.
 	AwsGuardDutyDetector *AwsGuardDutyDetectorDetails
@@ -15784,7 +17147,7 @@ type ResourceDetails struct {
 	// Details for a Lambda layer version.
 	AwsLambdaLayerVersion *AwsLambdaLayerVersionDetails
 
-	// Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon
+	//  Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon
 	// MSK) cluster.
 	AwsMskCluster *AwsMskClusterDetails
 
@@ -15821,12 +17184,12 @@ type ResourceDetails struct {
 	// Contains details about an Amazon Redshift cluster.
 	AwsRedshiftCluster *AwsRedshiftClusterDetails
 
-	// Provides details about an Amazon Route 53 hosted zone, including the four name
+	//  Provides details about an Amazon Route 53 hosted zone, including the four name
 	// servers assigned to the hosted zone. A hosted zone represents a collection of
 	// records that can be managed together, belonging to a single parent domain name.
 	AwsRoute53HostedZone *AwsRoute53HostedZoneDetails
 
-	// Provides details about an Amazon Simple Storage Service (Amazon S3) access
+	//  Provides details about an Amazon Simple Storage Service (Amazon S3) access
 	// point. S3 access points are named network endpoints that are attached to S3
 	// buckets that you can use to perform S3 object operations.
 	AwsS3AccessPoint *AwsS3AccessPointDetails
@@ -15840,7 +17203,7 @@ type ResourceDetails struct {
 	// Details about an S3 object related to a finding.
 	AwsS3Object *AwsS3ObjectDetails
 
-	// Provides details about an Amazon SageMaker notebook instance.
+	//  Provides details about an Amazon SageMaker notebook instance.
 	AwsSageMakerNotebookInstance *AwsSageMakerNotebookInstanceDetails
 
 	// Details about a Secrets Manager secret.
@@ -15856,7 +17219,7 @@ type ResourceDetails struct {
 	// patch baseline that was used to patch the instance.
 	AwsSsmPatchCompliance *AwsSsmPatchComplianceDetails
 
-	// Provides details about an Step Functions state machine, which is a workflow
+	//  Provides details about an Step Functions state machine, which is a workflow
 	// consisting of a series of event-driven steps.
 	AwsStepFunctionStateMachine *AwsStepFunctionStateMachineDetails
 
@@ -15884,10 +17247,10 @@ type ResourceDetails struct {
 	// Details for an WAF web ACL.
 	AwsWafWebAcl *AwsWafWebAclDetails
 
-	// Details about an WAFv2 rule group.
+	//  Details about an WAFv2 rule group.
 	AwsWafv2RuleGroup *AwsWafv2RuleGroupDetails
 
-	// Details about an WAFv2 web Access Control List (ACL).
+	//  Details about an WAFv2 web Access Control List (ACL).
 	AwsWafv2WebAcl *AwsWafv2WebAclDetails
 
 	// Information about the encryption configuration for X-Ray.
@@ -15898,10 +17261,12 @@ type ResourceDetails struct {
 
 	// Details about a resource that are not available in a type-specific details
 	// object. Use the Other object in the following cases.
+	//
 	//   - The type-specific object does not contain all of the fields that you want
 	//   to populate. In this case, first use the type-specific object to populate those
 	//   fields. Use the Other object to populate the fields that are missing from the
 	//   type-specific object.
+	//
 	//   - The resource type does not have a corresponding object. This includes
 	//   resources for which the type is Other .
 	Other map[string]string
@@ -15924,52 +17289,52 @@ type Result struct {
 // Provides details about the routes in the route table.
 type RouteSetDetails struct {
 
-	// The ID of the carrier gateway.
+	//  The ID of the carrier gateway.
 	CarrierGatewayId *string
 
-	// The Amazon Resource Name (ARN) of the core network.
+	//  The Amazon Resource Name (ARN) of the core network.
 	CoreNetworkArn *string
 
-	// The IPv4 CIDR block used for the destination match.
+	//  The IPv4 CIDR block used for the destination match.
 	DestinationCidrBlock *string
 
-	// The IPv6 CIDR block used for the destination match.
+	//  The IPv6 CIDR block used for the destination match.
 	DestinationIpv6CidrBlock *string
 
-	// The prefix of the destination Amazon Web Service.
+	//  The prefix of the destination Amazon Web Service.
 	DestinationPrefixListId *string
 
-	// The ID of the egress-only internet gateway.
+	//  The ID of the egress-only internet gateway.
 	EgressOnlyInternetGatewayId *string
 
-	// The ID of a gateway attached to your VPC.
+	//  The ID of a gateway attached to your VPC.
 	GatewayId *string
 
-	// The ID of a NAT instance in your VPC.
+	//  The ID of a NAT instance in your VPC.
 	InstanceId *string
 
-	// The ID of the Amazon Web Services account that owns the instance.
+	//  The ID of the Amazon Web Services account that owns the instance.
 	InstanceOwnerId *string
 
-	// The ID of the local gateway.
+	//  The ID of the local gateway.
 	LocalGatewayId *string
 
-	// The ID of a NAT gateway.
+	//  The ID of a NAT gateway.
 	NatGatewayId *string
 
-	// The ID of the network interface.
+	//  The ID of the network interface.
 	NetworkInterfaceId *string
 
-	// Describes how the route was created.
+	//  Describes how the route was created.
 	Origin *string
 
-	// The state of the route.
+	//  The state of the route.
 	State *string
 
-	// The ID of a transit gateway.
+	//  The ID of a transit gateway.
 	TransitGatewayId *string
 
-	// The ID of a VPC peering connection.
+	//  The ID of a VPC peering connection.
 	VpcPeeringConnectionId *string
 
 	noSmithyDocumentSerde
@@ -15981,9 +17346,12 @@ type RuleGroupDetails struct {
 	// Additional settings to use in the specified rules.
 	RuleVariables *RuleGroupVariables
 
-	// The rules and actions for the rule group. For stateful rule groups, can contain
-	// RulesString , RulesSourceList , or StatefulRules . For stateless rule groups,
-	// contains StatelessRulesAndCustomActions .
+	// The rules and actions for the rule group.
+	//
+	// For stateful rule groups, can contain RulesString , RulesSourceList , or
+	// StatefulRules .
+	//
+	// For stateless rule groups, contains StatelessRulesAndCustomActions .
 	RulesSource *RuleGroupSource
 
 	noSmithyDocumentSerde
@@ -16253,11 +17621,12 @@ type RuleGroupVariablesPortSetsDetails struct {
 	noSmithyDocumentSerde
 }
 
-// A security control in Security Hub describes a security best practice related
+//	A security control in Security Hub describes a security best practice related
+//
 // to a specific resource.
 type SecurityControl struct {
 
-	// The description of a security control across standards. This typically
+	//  The description of a security control across standards. This typically
 	// summarizes how Security Hub evaluates the control and the conditions under which
 	// it produces a failed finding. This parameter doesn't reference a specific
 	// standard.
@@ -16265,34 +17634,35 @@ type SecurityControl struct {
 	// This member is required.
 	Description *string
 
-	// A link to Security Hub documentation that explains how to remediate a failed
+	//  A link to Security Hub documentation that explains how to remediate a failed
 	// finding for a security control.
 	//
 	// This member is required.
 	RemediationUrl *string
 
-	// The Amazon Resource Name (ARN) for a security control across standards, such as
-	// arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1 . This
+	//  The Amazon Resource Name (ARN) for a security control across standards, such
+	// as arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1 . This
 	// parameter doesn't mention a specific standard.
 	//
 	// This member is required.
 	SecurityControlArn *string
 
-	// The unique identifier of a security control across standards. Values for this
+	//  The unique identifier of a security control across standards. Values for this
 	// field typically consist of an Amazon Web Service name and a number, such as
 	// APIGateway.3.
 	//
 	// This member is required.
 	SecurityControlId *string
 
-	// The enablement status of a security control in a specific standard.
+	//  The enablement status of a security control in a specific standard.
 	//
 	// This member is required.
 	SecurityControlStatus ControlStatus
 
-	// The severity of a security control. For more information about how Security Hub
-	// determines control severity, see Assigning severity to control findings (https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity)
-	// in the Security Hub User Guide.
+	//  The severity of a security control. For more information about how Security
+	// Hub determines control severity, see [Assigning severity to control findings]in the Security Hub User Guide.
+	//
+	// [Assigning severity to control findings]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity
 	//
 	// This member is required.
 	SeverityRating SeverityRating
@@ -16302,19 +17672,20 @@ type SecurityControl struct {
 	// This member is required.
 	Title *string
 
-	// The most recent reason for updating the customizable properties of a security
-	// control. This differs from the UpdateReason field of the
-	// BatchUpdateStandardsControlAssociations (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html)
-	// API, which tracks the reason for updating the enablement status of a control.
-	// This field accepts alphanumeric characters in addition to white spaces, dashes,
-	// and underscores.
+	//  The most recent reason for updating the customizable properties of a security
+	// control. This differs from the UpdateReason field of the [BatchUpdateStandardsControlAssociations]
+	// BatchUpdateStandardsControlAssociations API, which tracks the reason for
+	// updating the enablement status of a control. This field accepts alphanumeric
+	// characters in addition to white spaces, dashes, and underscores.
+	//
+	// [BatchUpdateStandardsControlAssociations]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
 	LastUpdateReason *string
 
-	// An object that identifies the name of a control parameter, its current value,
+	//  An object that identifies the name of a control parameter, its current value,
 	// and whether it has been customized.
 	Parameters map[string]ParameterConfiguration
 
-	// Identifies whether customizable properties of a security control are reflected
+	//  Identifies whether customizable properties of a security control are reflected
 	// in Security Hub findings. A status of READY indicates findings include the
 	// current parameter values. A status of UPDATING indicates that all findings may
 	// not include the current parameter values.
@@ -16323,32 +17694,34 @@ type SecurityControl struct {
 	noSmithyDocumentSerde
 }
 
-// A list of security controls and control parameter values that are included in a
-// configuration policy.
+//	A list of security controls and control parameter values that are included in
+//
+// a configuration policy.
 type SecurityControlCustomParameter struct {
 
-	// An object that specifies parameter values for a control in a configuration
+	//  An object that specifies parameter values for a control in a configuration
 	// policy.
 	Parameters map[string]ParameterConfiguration
 
-	// The ID of the security control.
+	//  The ID of the security control.
 	SecurityControlId *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides metadata for a security control, including its unique
+//	Provides metadata for a security control, including its unique
+//
 // standard-agnostic identifier, title, description, severity, availability in
 // Amazon Web Services Regions, and a link to remediation steps.
 type SecurityControlDefinition struct {
 
-	// Specifies whether a security control is available in the current Amazon Web
+	//  Specifies whether a security control is available in the current Amazon Web
 	// Services Region.
 	//
 	// This member is required.
 	CurrentRegionAvailability RegionAvailabilityStatus
 
-	// The description of a security control across standards. This typically
+	//  The description of a security control across standards. This typically
 	// summarizes how Security Hub evaluates the control and the conditions under which
 	// it produces a failed finding. This parameter doesn't reference a specific
 	// standard.
@@ -16356,13 +17729,13 @@ type SecurityControlDefinition struct {
 	// This member is required.
 	Description *string
 
-	// A link to Security Hub documentation that explains how to remediate a failed
+	//  A link to Security Hub documentation that explains how to remediate a failed
 	// finding for a security control.
 	//
 	// This member is required.
 	RemediationUrl *string
 
-	// The unique identifier of a security control across standards. Values for this
+	//  The unique identifier of a security control across standards. Values for this
 	// field typically consist of an Amazon Web Service name and a number (for example,
 	// APIGateway.3). This parameter differs from SecurityControlArn , which is a
 	// unique Amazon Resource Name (ARN) assigned to a control. The ARN references the
@@ -16372,26 +17745,27 @@ type SecurityControlDefinition struct {
 	// This member is required.
 	SecurityControlId *string
 
-	// The severity of a security control. For more information about how Security Hub
-	// determines control severity, see Assigning severity to control findings (https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity)
-	// in the Security Hub User Guide.
+	//  The severity of a security control. For more information about how Security
+	// Hub determines control severity, see [Assigning severity to control findings]in the Security Hub User Guide.
+	//
+	// [Assigning severity to control findings]: https://docs.aws.amazon.com/securityhub/latest/userguide/controls-findings-create-update.html#control-findings-severity
 	//
 	// This member is required.
 	SeverityRating SeverityRating
 
-	// The title of a security control.
+	//  The title of a security control.
 	//
 	// This member is required.
 	Title *string
 
-	// Security control properties that you can customize. Currently, only parameter
+	//  Security control properties that you can customize. Currently, only parameter
 	// customization is supported for select controls. An empty array is returned for
 	// controls that don’t support custom properties.
 	CustomizableProperties []SecurityControlProperty
 
-	// An object that provides a security control parameter name, description, and the
-	// options for customizing it. This object is excluded for a control that doesn't
-	// support custom parameters.
+	//  An object that provides a security control parameter name, description, and
+	// the options for customizing it. This object is excluded for a control that
+	// doesn't support custom parameters.
 	ParameterDefinitions map[string]ParameterDefinition
 
 	noSmithyDocumentSerde
@@ -16400,57 +17774,59 @@ type SecurityControlDefinition struct {
 // A parameter that a security control accepts.
 type SecurityControlParameter struct {
 
-	// The name of a
+	//  The name of a
 	Name *string
 
-	// The current value of a control parameter.
+	//  The current value of a control parameter.
 	Value []string
 
 	noSmithyDocumentSerde
 }
 
-// An object that defines which security controls are enabled in an Security Hub
+//	An object that defines which security controls are enabled in an Security Hub
+//
 // configuration policy. The enablement status of a control is aligned across all
 // of the enabled standards in an account.
 type SecurityControlsConfiguration struct {
 
-	// A list of security controls that are disabled in the configuration policy.
+	//  A list of security controls that are disabled in the configuration policy.
 	// Security Hub enables all other controls (including newly released controls)
 	// other than the listed controls.
 	DisabledSecurityControlIdentifiers []string
 
-	// A list of security controls that are enabled in the configuration policy.
+	//  A list of security controls that are enabled in the configuration policy.
 	// Security Hub disables all other controls (including newly released controls)
 	// other than the listed controls.
 	EnabledSecurityControlIdentifiers []string
 
-	// A list of security controls and control parameter values that are included in a
-	// configuration policy.
+	//  A list of security controls and control parameter values that are included in
+	// a configuration policy.
 	SecurityControlCustomParameters []SecurityControlCustomParameter
 
 	noSmithyDocumentSerde
 }
 
-// An object that defines how Security Hub is configured. The configuration policy
-// includes whether Security Hub is enabled or disabled, a list of enabled security
-// standards, a list of enabled or disabled security controls, and a list of custom
-// parameter values for specified controls. If you provide a list of security
-// controls that are enabled in the configuration policy, Security Hub disables all
-// other controls (including newly released controls). If you provide a list of
-// security controls that are disabled in the configuration policy, Security Hub
-// enables all other controls (including newly released controls).
+//	An object that defines how Security Hub is configured. The configuration
+//
+// policy includes whether Security Hub is enabled or disabled, a list of enabled
+// security standards, a list of enabled or disabled security controls, and a list
+// of custom parameter values for specified controls. If you provide a list of
+// security controls that are enabled in the configuration policy, Security Hub
+// disables all other controls (including newly released controls). If you provide
+// a list of security controls that are disabled in the configuration policy,
+// Security Hub enables all other controls (including newly released controls).
 type SecurityHubPolicy struct {
 
-	// A list that defines which security standards are enabled in the configuration
+	//  A list that defines which security standards are enabled in the configuration
 	// policy.
 	EnabledStandardIdentifiers []string
 
-	// An object that defines which security controls are enabled in the configuration
-	// policy. The enablement status of a control is aligned across all of the enabled
-	// standards in an account.
+	//  An object that defines which security controls are enabled in the
+	// configuration policy. The enablement status of a control is aligned across all
+	// of the enabled standards in an account.
 	SecurityControlsConfiguration *SecurityControlsConfiguration
 
-	// Indicates whether Security Hub is enabled in the policy.
+	//  Indicates whether Security Hub is enabled in the policy.
 	ServiceEnabled *bool
 
 	noSmithyDocumentSerde
@@ -16490,36 +17866,57 @@ type SensitiveDataResult struct {
 	noSmithyDocumentSerde
 }
 
-// The severity of the finding. The finding provider can provide the initial
-// severity. The finding provider can only update the severity if it hasn't been
-// updated using BatchUpdateFindings . The finding must have either Label or
-// Normalized populated. If only one of these attributes is populated, then
-// Security Hub automatically populates the other one. If neither attribute is
-// populated, then the finding is invalid. Label is the preferred attribute.
+// The severity of the finding.
+//
+// The finding provider can provide the initial severity. The finding provider can
+// only update the severity if it hasn't been updated using BatchUpdateFindings .
+//
+// The finding must have either Label or Normalized populated. If only one of
+// these attributes is populated, then Security Hub automatically populates the
+// other one. If neither attribute is populated, then the finding is invalid. Label
+// is the preferred attribute.
 type Severity struct {
 
 	// The severity value of the finding. The allowed values are the following.
+	//
 	//   - INFORMATIONAL - No issue was found.
+	//
 	//   - LOW - The issue does not require action on its own.
+	//
 	//   - MEDIUM - The issue must be addressed but not urgently.
+	//
 	//   - HIGH - The issue must be addressed as a priority.
+	//
 	//   - CRITICAL - The issue must be remediated immediately to avoid it escalating.
+	//
 	// If you provide Normalized and do not provide Label , then Label is set
 	// automatically as follows.
+	//
 	//   - 0 - INFORMATIONAL
+	//
 	//   - 1–39 - LOW
+	//
 	//   - 40–69 - MEDIUM
+	//
 	//   - 70–89 - HIGH
+	//
 	//   - 90–100 - CRITICAL
 	Label SeverityLabel
 
 	// Deprecated. The normalized severity of a finding. Instead of providing
-	// Normalized , provide Label . If you provide Label and do not provide Normalized
-	// , then Normalized is set automatically as follows.
+	// Normalized , provide Label .
+	//
+	// If you provide Label and do not provide Normalized , then Normalized is set
+	// automatically as follows.
+	//
 	//   - INFORMATIONAL - 0
+	//
 	//   - LOW - 1
+	//
 	//   - MEDIUM - 40
+	//
 	//   - HIGH - 70
+	//
 	//   - CRITICAL - 90
 	Normalized *int32
 
@@ -16527,8 +17924,10 @@ type Severity struct {
 	Original *string
 
 	// Deprecated. This attribute isn't included in findings. Instead of providing
-	// Product , provide Original . The native severity as defined by the Amazon Web
-	// Services service or integrated partner product that generated the finding.
+	// Product , provide Original .
+	//
+	// The native severity as defined by the Amazon Web Services service or integrated
+	// partner product that generated the finding.
 	Product *float64
 
 	noSmithyDocumentSerde
@@ -16538,20 +17937,32 @@ type Severity struct {
 type SeverityUpdate struct {
 
 	// The severity value of the finding. The allowed values are the following.
+	//
 	//   - INFORMATIONAL - No issue was found.
+	//
 	//   - LOW - The issue does not require action on its own.
+	//
 	//   - MEDIUM - The issue must be addressed but not urgently.
+	//
 	//   - HIGH - The issue must be addressed as a priority.
+	//
 	//   - CRITICAL - The issue must be remediated immediately to avoid it escalating.
 	Label SeverityLabel
 
 	// The normalized severity for the finding. This attribute is to be deprecated in
-	// favor of Label . If you provide Normalized and do not provide Label , Label is
-	// set automatically as follows.
+	// favor of Label .
+	//
+	// If you provide Normalized and do not provide Label , Label is set automatically
+	// as follows.
+	//
 	//   - 0 - INFORMATIONAL
+	//
 	//   - 1–39 - LOW
+	//
 	//   - 40–69 - MEDIUM
+	//
 	//   - 70–89 - HIGH
+	//
 	//   - 90–100 - CRITICAL
 	Normalized *int32
 
@@ -16623,9 +18034,10 @@ type Standard struct {
 
 	// Whether the standard is enabled by default. When Security Hub is enabled from
 	// the console, if a standard is enabled by default, the check box for that
-	// standard is selected by default. When Security Hub is enabled using the
-	// EnableSecurityHub API operation, the standard is enabled by default unless
-	// EnableDefaultStandards is set to false .
+	// standard is selected by default.
+	//
+	// When Security Hub is enabled using the EnableSecurityHub API operation, the
+	// standard is enabled by default unless EnableDefaultStandards is set to false .
 	EnabledByDefault *bool
 
 	// The name of the standard.
@@ -16669,9 +18081,10 @@ type StandardsControl struct {
 	// documentation.
 	RemediationUrl *string
 
-	// The severity of findings generated from this security standard control. The
-	// finding severity is based on an assessment of how easy it would be to compromise
-	// Amazon Web Services resources if the issue is detected.
+	// The severity of findings generated from this security standard control.
+	//
+	// The finding severity is based on an assessment of how easy it would be to
+	// compromise Amazon Web Services resources if the issue is detected.
 	SeverityRating SeverityRating
 
 	// The ARN of the security standard control.
@@ -16686,72 +18099,73 @@ type StandardsControl struct {
 // Provides details about a control's enablement status in a specified standard.
 type StandardsControlAssociationDetail struct {
 
-	// Specifies whether a control is enabled or disabled in a specified standard.
+	//  Specifies whether a control is enabled or disabled in a specified standard.
 	//
 	// This member is required.
 	AssociationStatus AssociationStatus
 
-	// The ARN of a security control across standards, such as
+	//  The ARN of a security control across standards, such as
 	// arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1 . This
 	// parameter doesn't mention a specific standard.
 	//
 	// This member is required.
 	SecurityControlArn *string
 
-	// The unique identifier of a security control across standards. Values for this
+	//  The unique identifier of a security control across standards. Values for this
 	// field typically consist of an Amazon Web Service name and a number, such as
 	// APIGateway.3.
 	//
 	// This member is required.
 	SecurityControlId *string
 
-	// The Amazon Resource Name (ARN) of a security standard.
+	//  The Amazon Resource Name (ARN) of a security standard.
 	//
 	// This member is required.
 	StandardsArn *string
 
-	// The requirement that underlies a control in the compliance framework related to
-	// the standard.
+	//  The requirement that underlies a control in the compliance framework related
+	// to the standard.
 	RelatedRequirements []string
 
-	// Provides the input parameter that Security Hub uses to call the
-	// UpdateStandardsControl (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html)
-	// API. This API can be used to enable or disable a control in a specified
-	// standard.
+	//  Provides the input parameter that Security Hub uses to call the [UpdateStandardsControl] API. This API
+	// can be used to enable or disable a control in a specified standard.
+	//
+	// [UpdateStandardsControl]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_UpdateStandardsControl.html
 	StandardsControlArns []string
 
-	// The description of a control. This typically summarizes how Security Hub
+	//  The description of a control. This typically summarizes how Security Hub
 	// evaluates the control and the conditions under which it produces a failed
 	// finding. This parameter may reference a specific standard.
 	StandardsControlDescription *string
 
-	// The title of a control. This field may reference a specific standard.
+	//  The title of a control. This field may reference a specific standard.
 	StandardsControlTitle *string
 
-	// The time at which the enablement status of the control in the specified
+	//  The time at which the enablement status of the control in the specified
 	// standard was last updated.
 	UpdatedAt *time.Time
 
-	// The reason for updating the enablement status of a control in a specified
+	//  The reason for updating the enablement status of a control in a specified
 	// standard.
 	UpdatedReason *string
 
 	noSmithyDocumentSerde
 }
 
-// An array with one or more objects that includes a security control (identified
+//	An array with one or more objects that includes a security control (identified
+//
 // with SecurityControlId , SecurityControlArn , or a mix of both parameters) and
 // the Amazon Resource Name (ARN) of a standard. The security control ID or ARN is
 // the same across standards.
 type StandardsControlAssociationId struct {
 
-	// The unique identifier (identified with SecurityControlId , SecurityControlArn ,
+	//  The unique identifier (identified with SecurityControlId , SecurityControlArn ,
 	// or a mix of both parameters) of a security control across standards.
 	//
 	// This member is required.
 	SecurityControlId *string
 
-	// The ARN of a standard.
+	//  The ARN of a standard.
 	//
 	// This member is required.
 	StandardsArn *string
@@ -16759,44 +18173,45 @@ type StandardsControlAssociationId struct {
 	noSmithyDocumentSerde
 }
 
-// An array that provides the enablement status and other details for each control
-// that applies to each enabled standard.
+//	An array that provides the enablement status and other details for each
+//
+// control that applies to each enabled standard.
 type StandardsControlAssociationSummary struct {
 
-	// The enablement status of a control in a specific standard.
+	//  The enablement status of a control in a specific standard.
 	//
 	// This member is required.
 	AssociationStatus AssociationStatus
 
-	// The ARN of a control, such as
+	//  The ARN of a control, such as
 	// arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1 . This
 	// parameter doesn't mention a specific standard.
 	//
 	// This member is required.
 	SecurityControlArn *string
 
-	// A unique standard-agnostic identifier for a control. Values for this field
+	//  A unique standard-agnostic identifier for a control. Values for this field
 	// typically consist of an Amazon Web Service and a number, such as APIGateway.5.
 	// This field doesn't reference a specific standard.
 	//
 	// This member is required.
 	SecurityControlId *string
 
-	// The Amazon Resource Name (ARN) of a standard.
+	//  The Amazon Resource Name (ARN) of a standard.
 	//
 	// This member is required.
 	StandardsArn *string
 
-	// The requirement that underlies this control in the compliance framework related
-	// to the standard.
+	//  The requirement that underlies this control in the compliance framework
+	// related to the standard.
 	RelatedRequirements []string
 
-	// The description of a control. This typically summarizes how Security Hub
+	//  The description of a control. This typically summarizes how Security Hub
 	// evaluates the control and the conditions under which it produces a failed
 	// finding. The parameter may reference a specific standard.
 	StandardsControlDescription *string
 
-	// The title of a control.
+	//  The title of a control.
 	StandardsControlTitle *string
 
 	// The last time that a control's enablement status in a specified standard was
@@ -16878,12 +18293,19 @@ type StandardsSubscription struct {
 	// This member is required.
 	StandardsInput map[string]string
 
-	// The status of the standard subscription. The status values are as follows:
+	// The status of the standard subscription.
+	//
+	// The status values are as follows:
+	//
 	//   - PENDING - Standard is in the process of being enabled.
+	//
 	//   - READY - Standard is enabled.
+	//
 	//   - INCOMPLETE - Standard could not be enabled completely. Some controls may not
 	//   be available.
+	//
 	//   - DELETING - Standard is in the process of being disabled.
+	//
 	//   - FAILED - Standard could not be disabled.
 	//
 	// This member is required.
@@ -16947,8 +18369,9 @@ type StatelessCustomPublishMetricActionDimension struct {
 type StatusReason struct {
 
 	// A code that represents a reason for the control status. For the list of status
-	// reason codes and their meanings, see Standards-related information in the ASFF (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff)
-	// in the Security Hub User Guide.
+	// reason codes and their meanings, see [Standards-related information in the ASFF]in the Security Hub User Guide.
+	//
+	// [Standards-related information in the ASFF]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff
 	//
 	// This member is required.
 	ReasonCode *string
@@ -16962,13 +18385,13 @@ type StatusReason struct {
 // The options for customizing a security control parameter that is a string.
 type StringConfigurationOptions struct {
 
-	// The Security Hub default value for a control parameter that is a string.
+	//  The Security Hub default value for a control parameter that is a string.
 	DefaultValue *string
 
-	// The description of the RE2 regular expression.
+	//  The description of the RE2 regular expression.
 	ExpressionDescription *string
 
-	// An RE2 regular expression that Security Hub uses to validate a user-provided
+	//  An RE2 regular expression that Security Hub uses to validate a user-provided
 	// control parameter string.
 	Re2Expression *string
 
@@ -16979,57 +18402,77 @@ type StringConfigurationOptions struct {
 type StringFilter struct {
 
 	// The condition to apply to a string value when filtering Security Hub findings.
+	//
 	// To search for values that have the filter value, use one of the following
 	// comparison operators:
+	//
 	//   - To search for values that include the filter value, use CONTAINS . For
 	//   example, the filter Title CONTAINS CloudFront matches findings that have a
 	//   Title that includes the string CloudFront.
+	//
 	//   - To search for values that exactly match the filter value, use EQUALS . For
 	//   example, the filter AwsAccountId EQUALS 123456789012 only matches findings
 	//   that have an account ID of 123456789012 .
+	//
 	//   - To search for values that start with the filter value, use PREFIX . For
 	//   example, the filter ResourceRegion PREFIX us matches findings that have a
 	//   ResourceRegion that starts with us . A ResourceRegion that starts with a
 	//   different value, such as af , ap , or ca , doesn't match.
+	//
 	// CONTAINS , EQUALS , and PREFIX filters on the same field are joined by OR . A
 	// finding matches if it matches any one of those filters. For example, the filters
 	// Title CONTAINS CloudFront OR Title CONTAINS CloudWatch match a finding that
-	// includes either CloudFront , CloudWatch , or both strings in the title. To
-	// search for values that don’t have the filter value, use one of the following
+	// includes either CloudFront , CloudWatch , or both strings in the title.
+	//
+	// To search for values that don’t have the filter value, use one of the following
 	// comparison operators:
+	//
 	//   - To search for values that exclude the filter value, use NOT_CONTAINS . For
 	//   example, the filter Title NOT_CONTAINS CloudFront matches findings that have a
 	//   Title that excludes the string CloudFront.
+	//
 	//   - To search for values other than the filter value, use NOT_EQUALS . For
 	//   example, the filter AwsAccountId NOT_EQUALS 123456789012 only matches findings
 	//   that have an account ID other than 123456789012 .
+	//
 	//   - To search for values that don't start with the filter value, use
 	//   PREFIX_NOT_EQUALS . For example, the filter ResourceRegion PREFIX_NOT_EQUALS
 	//   us matches findings with a ResourceRegion that starts with a value other than
 	//   us .
+	//
 	// NOT_CONTAINS , NOT_EQUALS , and PREFIX_NOT_EQUALS filters on the same field are
 	// joined by AND . A finding matches only if it matches all of those filters. For
 	// example, the filters Title NOT_CONTAINS CloudFront AND Title NOT_CONTAINS
 	// CloudWatch match a finding that excludes both CloudFront and CloudWatch in the
-	// title. You can’t have both a CONTAINS filter and a NOT_CONTAINS filter on the
-	// same field. Similarly, you can't provide both an EQUALS filter and a NOT_EQUALS
-	// or PREFIX_NOT_EQUALS filter on the same field. Combining filters in this way
+	// title.
+	//
+	// You can’t have both a CONTAINS filter and a NOT_CONTAINS filter on the same
+	// field. Similarly, you can't provide both an EQUALS filter and a NOT_EQUALS or
+	// PREFIX_NOT_EQUALS filter on the same field. Combining filters in this way
 	// returns an error. CONTAINS filters can only be used with other CONTAINS
 	// filters. NOT_CONTAINS filters can only be used with other NOT_CONTAINS filters.
+	//
 	// You can combine PREFIX filters with NOT_EQUALS or PREFIX_NOT_EQUALS filters for
 	// the same field. Security Hub first processes the PREFIX filters, and then the
-	// NOT_EQUALS or PREFIX_NOT_EQUALS filters. For example, for the following
-	// filters, Security Hub first identifies findings that have resource types that
-	// start with either AwsIam or AwsEc2 . It then excludes findings that have a
-	// resource type of AwsIamPolicy and findings that have a resource type of
-	// AwsEc2NetworkInterface .
+	// NOT_EQUALS or PREFIX_NOT_EQUALS filters.
+	//
+	// For example, for the following filters, Security Hub first identifies findings
+	// that have resource types that start with either AwsIam or AwsEc2 . It then
+	// excludes findings that have a resource type of AwsIamPolicy and findings that
+	// have a resource type of AwsEc2NetworkInterface .
+	//
 	//   - ResourceType PREFIX AwsIam
+	//
 	//   - ResourceType PREFIX AwsEc2
+	//
 	//   - ResourceType NOT_EQUALS AwsIamPolicy
+	//
 	//   - ResourceType NOT_EQUALS AwsEc2NetworkInterface
+	//
 	// CONTAINS and NOT_CONTAINS operators can be used only with automation rules. For
-	// more information, see Automation rules (https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html)
-	// in the Security Hub User Guide.
+	// more information, see [Automation rules]in the Security Hub User Guide.
+	//
+	// [Automation rules]: https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html
 	Comparison StringFilterComparison
 
 	// The string filter value. Filter values are case sensitive. For example, the
@@ -17040,31 +18483,33 @@ type StringFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The options for customizing a security control parameter that is a list of
+//	The options for customizing a security control parameter that is a list of
+//
 // strings.
 type StringListConfigurationOptions struct {
 
-	// The Security Hub default value for a control parameter that is a list of
+	//  The Security Hub default value for a control parameter that is a list of
 	// strings.
 	DefaultValue []string
 
-	// The description of the RE2 regular expression.
+	//  The description of the RE2 regular expression.
 	ExpressionDescription *string
 
-	// The maximum number of list items that a string list control parameter can
+	//  The maximum number of list items that a string list control parameter can
 	// accept.
 	MaxItems *int32
 
-	// An RE2 regular expression that Security Hub uses to validate a user-provided
+	//  An RE2 regular expression that Security Hub uses to validate a user-provided
 	// list of strings for a control parameter.
 	Re2Expression *string
 
 	noSmithyDocumentSerde
 }
 
-// The target account, organizational unit, or the root that is associated with an
-// Security Hub configuration. The configuration can be a configuration policy or
-// self-managed behavior.
+//	The target account, organizational unit, or the root that is associated with
+//
+// an Security Hub configuration. The configuration can be a configuration policy
+// or self-managed behavior.
 //
 // The following types satisfy this interface:
 //
@@ -17128,15 +18573,21 @@ type ThreatIntelIndicator struct {
 	Category ThreatIntelIndicatorCategory
 
 	// Indicates when the most recent instance of a threat intelligence indicator was
-	// observed. This field accepts only the specified formats. Timestamps can end with
-	// Z or ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// observed.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
 	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
 	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	LastObservedAt *string
@@ -17157,67 +18608,73 @@ type ThreatIntelIndicator struct {
 	noSmithyDocumentSerde
 }
 
-// A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
+//	A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
+//
 // parameter tells you which automation rules the request didn't process and why.
 type UnprocessedAutomationRule struct {
 
-	// The error code associated with the unprocessed automation rule.
+	//  The error code associated with the unprocessed automation rule.
 	ErrorCode *int32
 
-	// An error message describing why a request didn't process a specific rule.
+	//  An error message describing why a request didn't process a specific rule.
 	ErrorMessage *string
 
-	// The Amazon Resource Name (ARN) for the unprocessed automation rule.
+	//  The Amazon Resource Name (ARN) for the unprocessed automation rule.
 	RuleArn *string
 
 	noSmithyDocumentSerde
 }
 
-// An array of configuration policy associations, one for each configuration
+//	An array of configuration policy associations, one for each configuration
+//
 // policy association identifier, that was specified in a
 // BatchGetConfigurationPolicyAssociations request but couldn’t be processed due to
 // an error.
 type UnprocessedConfigurationPolicyAssociation struct {
 
-	// Configuration policy association identifiers that were specified in a
+	//  Configuration policy association identifiers that were specified in a
 	// BatchGetConfigurationPolicyAssociations request but couldn’t be processed due to
 	// an error.
 	ConfigurationPolicyAssociationIdentifiers *ConfigurationPolicyAssociation
 
-	// An HTTP status code that identifies why the configuration policy association
+	//  An HTTP status code that identifies why the configuration policy association
 	// failed.
 	ErrorCode *string
 
-	// A string that identifies why the configuration policy association failed.
+	//  A string that identifies why the configuration policy association failed.
 	ErrorReason *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about a security control for which a response couldn't be
+//	Provides details about a security control for which a response couldn't be
+//
 // returned.
 type UnprocessedSecurityControl struct {
 
-	// The error code for the unprocessed security control.
+	//  The error code for the unprocessed security control.
 	//
 	// This member is required.
 	ErrorCode UnprocessedErrorCode
 
-	// The control (identified with SecurityControlId , SecurityControlArn , or a mix
+	//  The control (identified with SecurityControlId , SecurityControlArn , or a mix
 	// of both parameters) for which a response couldn't be returned.
 	//
 	// This member is required.
 	SecurityControlId *string
 
-	// The reason why the security control was unprocessed.
+	//  The reason why the security control was unprocessed.
 	ErrorReason *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details about which control's enablement status couldn't be retrieved
-// in a specified standard when calling BatchUpdateStandardsControlAssociations (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html)
-// . This parameter also provides details about why the request was unprocessed.
+//	Provides details about which control's enablement status couldn't be retrieved
+//
+// in a specified standard when calling [BatchUpdateStandardsControlAssociations]. This parameter also provides details
+// about why the request was unprocessed.
+//
+// [BatchUpdateStandardsControlAssociations]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
 type UnprocessedStandardsControlAssociation struct {
 
 	// The error code for the unprocessed standard and control association.
@@ -17225,12 +18682,13 @@ type UnprocessedStandardsControlAssociation struct {
 	// This member is required.
 	ErrorCode UnprocessedErrorCode
 
-	// An array with one or more objects that includes a security control (identified
+	//  An array with one or more objects that includes a security control (identified
 	// with SecurityControlId , SecurityControlArn , or a mix of both parameters) and
 	// the Amazon Resource Name (ARN) of a standard. This parameter shows the specific
 	// controls for which the enablement status couldn't be retrieved in specified
-	// standards when calling BatchUpdateStandardsControlAssociations (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html)
-	// .
+	// standards when calling [BatchUpdateStandardsControlAssociations].
+	//
+	// [BatchUpdateStandardsControlAssociations]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
 	//
 	// This member is required.
 	StandardsControlAssociationId *StandardsControlAssociationId
@@ -17242,8 +18700,10 @@ type UnprocessedStandardsControlAssociation struct {
 }
 
 // Provides details about which control's enablement status could not be updated
-// in a specified standard when calling the BatchUpdateStandardsControlAssociations (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html)
-// API. This parameter also provides details about why the request was unprocessed.
+// in a specified standard when calling the [BatchUpdateStandardsControlAssociations]API. This parameter also provides
+// details about why the request was unprocessed.
+//
+// [BatchUpdateStandardsControlAssociations]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
 type UnprocessedStandardsControlAssociationUpdate struct {
 
 	// The error code for the unprocessed update of the control's enablement status in
@@ -17253,8 +18713,9 @@ type UnprocessedStandardsControlAssociationUpdate struct {
 	ErrorCode UnprocessedErrorCode
 
 	// An array of control and standard associations for which an update failed when
-	// calling BatchUpdateStandardsControlAssociations (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html)
-	// .
+	// calling [BatchUpdateStandardsControlAssociations].
+	//
+	// [BatchUpdateStandardsControlAssociations]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
 	//
 	// This member is required.
 	StandardsControlAssociationUpdate *StandardsControlAssociationUpdate
@@ -17269,22 +18730,22 @@ type UnprocessedStandardsControlAssociationUpdate struct {
 // Specifies the parameters to update in an existing automation rule.
 type UpdateAutomationRulesRequestItem struct {
 
-	// The Amazon Resource Name (ARN) for the rule.
+	//  The Amazon Resource Name (ARN) for the rule.
 	//
 	// This member is required.
 	RuleArn *string
 
-	// One or more actions to update finding fields if a finding matches the
+	//  One or more actions to update finding fields if a finding matches the
 	// conditions specified in Criteria .
 	Actions []AutomationRulesAction
 
-	// A set of ASFF finding field attributes and corresponding expected values that
+	//  A set of ASFF finding field attributes and corresponding expected values that
 	// Security Hub uses to filter findings. If a rule is enabled and a finding matches
 	// the conditions specified in this parameter, Security Hub applies the rule action
 	// to the finding.
 	Criteria *AutomationRulesFindingFilters
 
-	// A description of the rule.
+	//  A description of the rule.
 	Description *string
 
 	// Specifies whether a rule is the last to be applied with respect to a finding
@@ -17295,19 +18756,20 @@ type UpdateAutomationRulesRequestItem struct {
 	// rule isn't terminal.
 	IsTerminal *bool
 
-	// The name of the rule.
+	//  The name of the rule.
 	RuleName *string
 
-	// An integer ranging from 1 to 1000 that represents the order in which the rule
+	//  An integer ranging from 1 to 1000 that represents the order in which the rule
 	// action is applied to findings. Security Hub applies rules with lower values for
 	// this parameter first.
 	RuleOrder *int32
 
-	// Whether the rule is active after it is created. If this parameter is equal to
+	//  Whether the rule is active after it is created. If this parameter is equal to
 	// ENABLED , Security Hub starts applying the rule to findings and finding updates
 	// after the rule is created. To change the value of this parameter after creating
-	// a rule, use BatchUpdateAutomationRules (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html)
-	// .
+	// a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
+	//
+	// [BatchUpdateAutomationRules]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
 	RuleStatus RuleStatus
 
 	noSmithyDocumentSerde
@@ -17387,13 +18849,16 @@ type Vulnerability struct {
 	// FixedInVersion and Remediation . This field is evaluated for each vulnerability
 	// Id based on the number of vulnerable packages that have a value for both
 	// FixedInVersion and Remediation . Valid values are as follows:
+	//
 	//   - YES if all vulnerable packages have a value for both FixedInVersion and
 	//   Remediation
+	//
 	//   - NO if no vulnerable packages have a value for FixedInVersion and Remediation
+	//
 	//   - PARTIAL otherwise
 	FixAvailable VulnerabilityFixAvailable
 
-	// The date and time of the last exploit associated with a finding discovered in
+	//  The date and time of the last exploit associated with a finding discovered in
 	// your environment.
 	LastKnownExploitAt *string
 
@@ -17417,15 +18882,15 @@ type Vulnerability struct {
 // Inspector.
 type VulnerabilityCodeVulnerabilities struct {
 
-	// The Common Weakness Enumeration (CWE) item associated with the detected code
+	//  The Common Weakness Enumeration (CWE) item associated with the detected code
 	// vulnerability.
 	Cwes []string
 
-	// Provides details about where a code vulnerability is located in your Lambda
+	//  Provides details about where a code vulnerability is located in your Lambda
 	// function.
 	FilePath *CodeVulnerabilitiesFilePath
 
-	// The Amazon Resource Name (ARN) of the Lambda layer in which the code
+	//  The Amazon Resource Name (ARN) of the Lambda layer in which the code
 	// vulnerability is located.
 	SourceArn *string
 
@@ -17443,16 +18908,21 @@ type VulnerabilityVendor struct {
 	// The URL of the vulnerability advisory.
 	Url *string
 
-	// Indicates when the vulnerability advisory was created. This field accepts only
-	// the specified formats. Timestamps can end with Z or ("+" / "-") time-hour [":"
-	// time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the vulnerability advisory was created.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	VendorCreatedAt *string
@@ -17460,16 +18930,21 @@ type VulnerabilityVendor struct {
 	// The severity that the vendor assigned to the vulnerability.
 	VendorSeverity *string
 
-	// Indicates when the vulnerability advisory was last updated. This field accepts
-	// only the specified formats. Timestamps can end with Z or ("+" / "-") time-hour
-	// [":" time-minute] . The time-secfrac after seconds is limited to a maximum of 9
-	// digits. The offset is bounded by +/-18:00. Here are valid timestamp formats with
-	// examples:
+	// Indicates when the vulnerability advisory was last updated.
+	//
+	// This field accepts only the specified formats. Timestamps can end with Z or
+	// ("+" / "-") time-hour [":" time-minute] . The time-secfrac after seconds is
+	// limited to a maximum of 9 digits. The offset is bounded by +/-18:00. Here are
+	// valid timestamp formats with examples:
+	//
 	//   - YYYY-MM-DDTHH:MM:SSZ (for example, 2019-01-31T23:00:00Z )
-	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z
-	//   )
+	//
+	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ (for example, 2019-01-31T23:00:00.123456789Z )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS+HH:MM (for example, 2024-01-04T15:25:10+17:59 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS-HHMM (for example, 2024-01-04T15:25:10-1759 )
+	//
 	//   - YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM (for example,
 	//   2024-01-04T15:25:10.123456789+17:59 )
 	VendorUpdatedAt *string
@@ -17482,9 +18957,14 @@ type VulnerabilityVendor struct {
 type WafAction struct {
 
 	// Specifies how you want WAF to respond to requests that match the settings in a
-	// rule. Valid settings include the following:
+	// rule.
+	//
+	// Valid settings include the following:
+	//
 	//   - ALLOW - WAF allows requests
+	//
 	//   - BLOCK - WAF blocks requests
+	//
 	//   - COUNT - WAF increments a counter of the requests that match all of the
 	//   conditions in the rule. WAF then continues to inspect the web request based on
 	//   the remaining rules in the web ACL. You can't specify COUNT for the default
@@ -17506,8 +18986,9 @@ type WafExcludedRule struct {
 // Details about an override action for a rule.
 type WafOverrideAction struct {
 
-	// COUNT overrides the action specified by the individual rule within a RuleGroup
-	// . If set to NONE , the rule's action takes place.
+	// COUNT overrides the action specified by the individual rule within a RuleGroup .
+	//
+	// If set to NONE , the rule's action takes place.
 	Type *string
 
 	noSmithyDocumentSerde
@@ -17519,19 +19000,27 @@ type Workflow struct {
 	// The status of the investigation into the finding. The workflow status is
 	// specific to an individual finding. It does not affect the generation of new
 	// findings. For example, setting the workflow status to SUPPRESSED or RESOLVED
-	// does not prevent a new finding for the same issue. The allowed values are the
-	// following.
-	//   - NEW - The initial state of a finding, before it is reviewed. Security Hub
-	//   also resets the workflow status from NOTIFIED or RESOLVED to NEW in the
-	//   following cases:
+	// does not prevent a new finding for the same issue.
+	//
+	// The allowed values are the following.
+	//
+	//   - NEW - The initial state of a finding, before it is reviewed.
+	//
+	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
+	//   the following cases:
+	//
 	//   - RecordState changes from ARCHIVED to ACTIVE .
+	//
 	//   - ComplianceStatus changes from PASSED to either WARNING , FAILED , or
 	//   NOT_AVAILABLE .
+	//
 	//   - NOTIFIED - Indicates that you notified the resource owner about the security
 	//   issue. Used when the initial reviewer is not the resource owner, and needs
 	//   intervention from the resource owner.
+	//
 	//   - SUPPRESSED - Indicates that you reviewed the finding and do not believe that
 	//   any action is needed. The finding is no longer updated.
+	//
 	//   - RESOLVED - The finding was reviewed and remediated and is now considered
 	//   resolved.
 	Status WorkflowStatus
@@ -17545,19 +19034,27 @@ type WorkflowUpdate struct {
 	// The status of the investigation into the finding. The workflow status is
 	// specific to an individual finding. It does not affect the generation of new
 	// findings. For example, setting the workflow status to SUPPRESSED or RESOLVED
-	// does not prevent a new finding for the same issue. The allowed values are the
-	// following.
-	//   - NEW - The initial state of a finding, before it is reviewed. Security Hub
-	//   also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the following
-	//   cases:
+	// does not prevent a new finding for the same issue.
+	//
+	// The allowed values are the following.
+	//
+	//   - NEW - The initial state of a finding, before it is reviewed.
+	//
+	// Security Hub also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the
+	//   following cases:
+	//
 	//   - The record state changes from ARCHIVED to ACTIVE .
+	//
 	//   - The compliance status changes from PASSED to either WARNING , FAILED , or
 	//   NOT_AVAILABLE .
+	//
 	//   - NOTIFIED - Indicates that you notified the resource owner about the security
 	//   issue. Used when the initial reviewer is not the resource owner, and needs
 	//   intervention from the resource owner.
+	//
 	//   - RESOLVED - The finding was reviewed and remediated and is now considered
 	//   resolved.
+	//
 	//   - SUPPRESSED - Indicates that you reviewed the finding and do not believe that
 	//   any action is needed. The finding is no longer updated.
 	Status WorkflowStatus

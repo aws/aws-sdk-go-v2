@@ -12,14 +12,18 @@ import (
 )
 
 // Gets the results for an Amazon Textract asynchronous operation that analyzes
-// text in a lending document. You start asynchronous text analysis by calling
-// StartLendingAnalysis , which returns a job identifier ( JobId ). When the text
-// analysis operation finishes, Amazon Textract publishes a completion status to
-// the Amazon Simple Notification Service (Amazon SNS) topic that's registered in
-// the initial call to StartLendingAnalysis . To get the results of the text
-// analysis operation, first check that the status value published to the Amazon
-// SNS topic is SUCCEEDED. If so, call GetLendingAnalysis, and pass the job
-// identifier ( JobId ) from the initial call to StartLendingAnalysis .
+// text in a lending document.
+//
+// You start asynchronous text analysis by calling StartLendingAnalysis , which
+// returns a job identifier ( JobId ). When the text analysis operation finishes,
+// Amazon Textract publishes a completion status to the Amazon Simple Notification
+// Service (Amazon SNS) topic that's registered in the initial call to
+// StartLendingAnalysis .
+//
+// To get the results of the text analysis operation, first check that the status
+// value published to the Amazon SNS topic is SUCCEEDED. If so, call
+// GetLendingAnalysis, and pass the job identifier ( JobId ) from the initial call
+// to StartLendingAnalysis .
 func (c *Client) GetLendingAnalysis(ctx context.Context, params *GetLendingAnalysisInput, optFns ...func(*Options)) (*GetLendingAnalysisOutput, error) {
 	if params == nil {
 		params = &GetLendingAnalysisInput{}
@@ -58,13 +62,13 @@ type GetLendingAnalysisInput struct {
 
 type GetLendingAnalysisOutput struct {
 
-	// The current model version of the Analyze Lending API.
+	//  The current model version of the Analyze Lending API.
 	AnalyzeLendingModelVersion *string
 
 	// Information about the input document.
 	DocumentMetadata *types.DocumentMetadata
 
-	// The current status of the lending analysis job.
+	//  The current status of the lending analysis job.
 	JobStatus types.JobStatus
 
 	// If the response is truncated, Amazon Textract returns this token. You can use
@@ -72,15 +76,15 @@ type GetLendingAnalysisOutput struct {
 	// results.
 	NextToken *string
 
-	// Holds the information returned by one of AmazonTextract's document analysis
+	//  Holds the information returned by one of AmazonTextract's document analysis
 	// operations for the pinstripe.
 	Results []types.LendingResult
 
-	// Returns if the lending analysis job could not be completed. Contains
+	//  Returns if the lending analysis job could not be completed. Contains
 	// explanation for what error occurred.
 	StatusMessage *string
 
-	// A list of warnings that occurred during the lending analysis operation.
+	//  A list of warnings that occurred during the lending analysis operation.
 	Warnings []types.Warning
 
 	// Metadata pertaining to the operation's result.

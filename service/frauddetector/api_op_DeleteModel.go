@@ -11,10 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a model. You can delete models and model versions in Amazon Fraud
-// Detector, provided that they are not associated with a detector version. When
-// you delete a model, Amazon Fraud Detector permanently deletes that model and the
-// data is no longer stored in Amazon Fraud Detector.
+// Deletes a model.
+//
+// You can delete models and model versions in Amazon Fraud Detector, provided
+// that they are not associated with a detector version.
+//
+// When you delete a model, Amazon Fraud Detector permanently deletes that model
+// and the data is no longer stored in Amazon Fraud Detector.
 func (c *Client) DeleteModel(ctx context.Context, params *DeleteModelInput, optFns ...func(*Options)) (*DeleteModelOutput, error) {
 	if params == nil {
 		params = &DeleteModelInput{}

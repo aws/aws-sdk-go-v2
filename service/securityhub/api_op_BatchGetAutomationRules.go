@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of details for automation rules based on rule Amazon Resource
+//	Retrieves a list of details for automation rules based on rule Amazon Resource
+//
 // Names (ARNs).
 func (c *Client) BatchGetAutomationRules(ctx context.Context, params *BatchGetAutomationRulesInput, optFns ...func(*Options)) (*BatchGetAutomationRulesOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) BatchGetAutomationRules(ctx context.Context, params *BatchGetAu
 
 type BatchGetAutomationRulesInput struct {
 
-	// A list of rule ARNs to get details for.
+	//  A list of rule ARNs to get details for.
 	//
 	// This member is required.
 	AutomationRulesArns []string
@@ -40,10 +41,10 @@ type BatchGetAutomationRulesInput struct {
 
 type BatchGetAutomationRulesOutput struct {
 
-	// A list of rule details for the provided rule ARNs.
+	//  A list of rule details for the provided rule ARNs.
 	Rules []types.AutomationRulesConfig
 
-	// A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
+	//  A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
 	// parameter tells you which automation rules the request didn't retrieve and why.
 	UnprocessedAutomationRules []types.UnprocessedAutomationRule
 

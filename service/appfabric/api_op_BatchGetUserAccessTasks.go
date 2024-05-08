@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets user access details in a batch request. This action polls data from the
-// tasks that are kicked off by the StartUserAccessTasks action.
+// Gets user access details in a batch request.
+//
+// This action polls data from the tasks that are kicked off by the
+// StartUserAccessTasks action.
 func (c *Client) BatchGetUserAccessTasks(ctx context.Context, params *BatchGetUserAccessTasksInput, optFns ...func(*Options)) (*BatchGetUserAccessTasksOutput, error) {
 	if params == nil {
 		params = &BatchGetUserAccessTasksInput{}

@@ -41,23 +41,26 @@ type CreateAssistantInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The description of the assistant.
 	Description *string
 
 	// The configuration information for the customer managed key used for encryption.
+	//
 	// The customer managed key must have a policy that allows kms:CreateGrant ,
 	// kms:DescribeKey , kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM
 	// identity using the key to invoke Amazon Q in Connect. To use Amazon Q in Connect
 	// with chat, the key policy must also allow kms:Decrypt , kms:GenerateDataKey* ,
 	// and kms:DescribeKey permissions to the connect.amazonaws.com service principal.
+	//
 	// For more information about setting up a customer managed key for Amazon Q in
-	// Connect, see Enable Amazon Q in Connect for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
-	// .
+	// Connect, see [Enable Amazon Q in Connect for your instance].
+	//
+	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The tags used to organize, track, or control access for this resource.

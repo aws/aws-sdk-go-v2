@@ -42,21 +42,22 @@ type CreateSiteInput struct {
 	// equipment materials that could affect your installation process.
 	Notes *string
 
-	// The location to install and power on the hardware. This address might be
+	//  The location to install and power on the hardware. This address might be
 	// different from the shipping address.
 	OperatingAddress *types.Address
 
-	// Information about the physical and logistical details for the rack at this
-	// site. For more information about hardware requirements for racks, see Network
-	// readiness checklist (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist)
-	// in the Amazon Web Services Outposts User Guide.
+	//  Information about the physical and logistical details for the rack at this
+	// site. For more information about hardware requirements for racks, see [Network readiness checklist]in the
+	// Amazon Web Services Outposts User Guide.
+	//
+	// [Network readiness checklist]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist
 	RackPhysicalProperties *types.RackPhysicalProperties
 
-	// The location to ship the hardware. This address might be different from the
+	//  The location to ship the hardware. This address might be different from the
 	// operating address.
 	ShippingAddress *types.Address
 
-	// The tags to apply to a site.
+	//  The tags to apply to a site.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

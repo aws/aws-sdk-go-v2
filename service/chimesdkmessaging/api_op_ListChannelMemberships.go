@@ -11,12 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all channel memberships in a channel. The x-amz-chime-bearer request
-// header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that
-// makes the API call as the value in the header. If you want to list the channels
-// to which a specific app instance user belongs, see the
-// ListChannelMembershipsForAppInstanceUser (https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html)
-// API.
+// Lists all channel memberships in a channel.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
+//
+// If you want to list the channels to which a specific app instance user belongs,
+// see the [ListChannelMembershipsForAppInstanceUser]API.
+//
+// [ListChannelMembershipsForAppInstanceUser]: https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html
 func (c *Client) ListChannelMemberships(ctx context.Context, params *ListChannelMembershipsInput, optFns ...func(*Options)) (*ListChannelMembershipsOutput, error) {
 	if params == nil {
 		params = &ListChannelMembershipsInput{}
@@ -51,8 +55,10 @@ type ListChannelMembershipsInput struct {
 	// are returned.
 	NextToken *string
 
-	// The ID of the SubChannel in the request. Only required when listing a user's
-	// memberships in a particular sub-channel of an elastic channel.
+	// The ID of the SubChannel in the request.
+	//
+	// Only required when listing a user's memberships in a particular sub-channel of
+	// an elastic channel.
 	SubChannelId *string
 
 	// The membership type of a user, DEFAULT or HIDDEN . Default members are returned

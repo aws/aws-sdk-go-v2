@@ -10,12 +10,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift containers feature, which is
-// currently in public preview. Deletes a container group definition resource. You
-// can delete a container group definition if there are no fleets using the
-// definition. To delete a container group definition, identify the resource to
-// delete. Learn more
-//   - Manage a container group definition (https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html)
+//	This operation is used with the Amazon GameLift containers feature, which is
+//
+// currently in public preview.
+//
+// Deletes a container group definition resource. You can delete a container group
+// definition if there are no fleets using the definition.
+//
+// To delete a container group definition, identify the resource to delete.
+//
+// # Learn more
+//
+// [Manage a container group definition]
+//
+// [Manage a container group definition]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-create-groups.html
 func (c *Client) DeleteContainerGroupDefinition(ctx context.Context, params *DeleteContainerGroupDefinitionInput, optFns ...func(*Options)) (*DeleteContainerGroupDefinitionOutput, error) {
 	if params == nil {
 		params = &DeleteContainerGroupDefinitionInput{}

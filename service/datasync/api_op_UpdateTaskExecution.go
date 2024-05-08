@@ -11,9 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of a running DataSync task execution. Currently, the
-// only Option that you can modify with UpdateTaskExecution is BytesPerSecond (https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond)
-// , which throttles bandwidth for a running or queued task execution.
+// Updates the configuration of a running DataSync task execution.
+//
+// Currently, the only Option that you can modify with UpdateTaskExecution is [BytesPerSecond],
+// which throttles bandwidth for a running or queued task execution.
+//
+// [BytesPerSecond]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond
 func (c *Client) UpdateTaskExecution(ctx context.Context, params *UpdateTaskExecutionInput, optFns ...func(*Options)) (*UpdateTaskExecutionOutput, error) {
 	if params == nil {
 		params = &UpdateTaskExecutionInput{}
@@ -34,11 +37,15 @@ type UpdateTaskExecutionInput struct {
 	// Indicates how your transfer task is configured. These options include how
 	// DataSync handles files, objects, and their associated metadata during your
 	// transfer. You also can specify how to verify data integrity, set bandwidth
-	// limits for your task, among other options. Each option has a default value.
-	// Unless you need to, you don't have to configure any option before calling
-	// StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
-	// . You also can override your task options for each task execution. For example,
+	// limits for your task, among other options.
+	//
+	// Each option has a default value. Unless you need to, you don't have to
+	// configure any option before calling [StartTaskExecution].
+	//
+	// You also can override your task options for each task execution. For example,
 	// you might want to adjust the LogLevel for an individual execution.
+	//
+	// [StartTaskExecution]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
 	//
 	// This member is required.
 	Options *types.Options

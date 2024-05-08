@@ -72,9 +72,9 @@ type AccountSettingsDetail struct {
 
 	// The maximum capacity limits for all OpenSearch Serverless collections, in
 	// OpenSearch Compute Units (OCUs). These limits are used to scale your collections
-	// based on the current workload. For more information, see Managing capacity
-	// limits for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html)
-	// .
+	// based on the current workload. For more information, see [Managing capacity limits for Amazon OpenSearch Serverless].
+	//
+	// [Managing capacity limits for Amazon OpenSearch Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
 	CapacityLimits *CapacityLimits
 
 	noSmithyDocumentSerde
@@ -82,9 +82,9 @@ type AccountSettingsDetail struct {
 
 // The maximum capacity limits for all OpenSearch Serverless collections, in
 // OpenSearch Compute Units (OCUs). These limits are used to scale your collections
-// based on the current workload. For more information, see Managing capacity
-// limits for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html)
-// .
+// based on the current workload. For more information, see [Managing capacity limits for Amazon OpenSearch Serverless].
+//
+// [Managing capacity limits for Amazon OpenSearch Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
 type CapacityLimits struct {
 
 	// The maximum indexing capacity for collections.
@@ -229,9 +229,9 @@ type CreateCollectionDetail struct {
 }
 
 // Creation details for an OpenSearch Serverless-managed interface endpoint. For
-// more information, see Access Amazon OpenSearch Serverless using an interface
-// endpoint (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html)
-// .
+// more information, see [Access Amazon OpenSearch Serverless using an interface endpoint].
+//
+// [Access Amazon OpenSearch Serverless using an interface endpoint]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-vpc.html
 type CreateVpcEndpointDetail struct {
 
 	// The unique identifier of the endpoint.

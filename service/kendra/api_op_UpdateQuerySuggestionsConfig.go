@@ -11,13 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the settings of query suggestions for an index. Amazon Kendra supports
-// partial updates, so you only need to provide the fields you want to update. If
-// an update is currently processing, you need to wait for the update to finish
-// before making another update. Updates to query suggestions settings might not
-// take effect right away. The time for your updated settings to take effect
-// depends on the updates made and the number of search queries in your index. You
-// can still enable/disable query suggestions at any time.
+// Updates the settings of query suggestions for an index.
+//
+// Amazon Kendra supports partial updates, so you only need to provide the fields
+// you want to update.
+//
+// If an update is currently processing, you need to wait for the update to finish
+// before making another update.
+//
+// Updates to query suggestions settings might not take effect right away. The
+// time for your updated settings to take effect depends on the updates made and
+// the number of search queries in your index.
+//
+// You can still enable/disable query suggestions at any time.
+//
 // UpdateQuerySuggestionsConfig is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) UpdateQuerySuggestionsConfig(ctx context.Context, params *UpdateQuerySuggestionsConfigInput, optFns ...func(*Options)) (*UpdateQuerySuggestionsConfigOutput, error) {
@@ -37,7 +44,7 @@ func (c *Client) UpdateQuerySuggestionsConfig(ctx context.Context, params *Updat
 
 type UpdateQuerySuggestionsConfigInput struct {
 
-	// The identifier of the index with query suggestions you want to update.
+	//  The identifier of the index with query suggestions you want to update.
 	//
 	// This member is required.
 	IndexId *string
@@ -48,38 +55,54 @@ type UpdateQuerySuggestionsConfigInput struct {
 
 	// TRUE to include queries without user information (i.e. all queries,
 	// irrespective of the user), otherwise FALSE to only include queries with user
-	// information. If you pass user information to Amazon Kendra along with the
-	// queries, you can set this flag to FALSE and instruct Amazon Kendra to only
-	// consider queries with user information. If you set to FALSE , Amazon Kendra only
-	// considers queries searched at least MinimumQueryCount times across
-	// MinimumNumberOfQueryingUsers unique users for suggestions. If you set to TRUE ,
-	// Amazon Kendra ignores all user information and learns from all queries.
+	// information.
+	//
+	// If you pass user information to Amazon Kendra along with the queries, you can
+	// set this flag to FALSE and instruct Amazon Kendra to only consider queries with
+	// user information.
+	//
+	// If you set to FALSE , Amazon Kendra only considers queries searched at least
+	// MinimumQueryCount times across MinimumNumberOfQueryingUsers unique users for
+	// suggestions.
+	//
+	// If you set to TRUE , Amazon Kendra ignores all user information and learns from
+	// all queries.
 	IncludeQueriesWithoutUserInformation *bool
 
 	// The minimum number of unique users who must search a query in order for the
-	// query to be eligible to suggest to your users. Increasing this number might
-	// decrease the number of suggestions. However, this ensures a query is searched by
-	// many users and is truly popular to suggest to users. How you tune this setting
-	// depends on your specific needs.
+	// query to be eligible to suggest to your users.
+	//
+	// Increasing this number might decrease the number of suggestions. However, this
+	// ensures a query is searched by many users and is truly popular to suggest to
+	// users.
+	//
+	// How you tune this setting depends on your specific needs.
 	MinimumNumberOfQueryingUsers *int32
 
 	// The the minimum number of times a query must be searched in order to be
-	// eligible to suggest to your users. Decreasing this number increases the number
-	// of suggestions. However, this affects the quality of suggestions as it sets a
-	// low bar for a query to be considered popular to suggest to users. How you tune
-	// this setting depends on your specific needs.
+	// eligible to suggest to your users.
+	//
+	// Decreasing this number increases the number of suggestions. However, this
+	// affects the quality of suggestions as it sets a low bar for a query to be
+	// considered popular to suggest to users.
+	//
+	// How you tune this setting depends on your specific needs.
 	MinimumQueryCount *int32
 
-	// Set the mode to ENABLED or LEARN_ONLY . By default, Amazon Kendra enables query
-	// suggestions. LEARN_ONLY mode allows you to turn off query suggestions. You can
-	// to update this at any time. In LEARN_ONLY mode, Amazon Kendra continues to
-	// learn from new queries to keep suggestions up to date for when you are ready to
-	// switch to ENABLED mode again.
+	// Set the mode to ENABLED or LEARN_ONLY .
+	//
+	// By default, Amazon Kendra enables query suggestions. LEARN_ONLY mode allows you
+	// to turn off query suggestions. You can to update this at any time.
+	//
+	// In LEARN_ONLY mode, Amazon Kendra continues to learn from new queries to keep
+	// suggestions up to date for when you are ready to switch to ENABLED mode again.
 	Mode types.Mode
 
-	// How recent your queries are in your query log time window. The time window is
-	// the number of days from current day to past days. By default, Amazon Kendra sets
-	// this to 180.
+	// How recent your queries are in your query log time window.
+	//
+	// The time window is the number of days from current day to past days.
+	//
+	// By default, Amazon Kendra sets this to 180.
 	QueryLogLookBackWindowInDays *int32
 
 	noSmithyDocumentSerde

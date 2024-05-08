@@ -13,12 +13,14 @@ import (
 
 // Deploys conformance packs across member accounts in an Amazon Web Services
 // Organization. For information on how many organization conformance packs and how
-// many Config rules you can have per account, see Service Limits  (https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html)
-// in the Config Developer Guide. Only a management account and a delegated
-// administrator can call this API. When calling this API with a delegated
-// administrator, you must ensure Organizations ListDelegatedAdministrator
-// permissions are added. An organization can have up to 3 delegated
-// administrators. This API enables organization service access for
+// many Config rules you can have per account, see [Service Limits]in the Config Developer Guide.
+//
+// Only a management account and a delegated administrator can call this API. When
+// calling this API with a delegated administrator, you must ensure Organizations
+// ListDelegatedAdministrator permissions are added. An organization can have up to
+// 3 delegated administrators.
+//
+// This API enables organization service access for
 // config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess
 // action and creates a service-linked role
 // AWSServiceRoleForConfigMultiAccountSetup in the management or delegated
@@ -26,13 +28,20 @@ import (
 // only when the role does not exist in the caller account. To use this API with
 // delegated administrator, register a delegated administrator by calling Amazon
 // Web Services Organization register-delegate-admin for
-// config-multiaccountsetup.amazonaws.com . Prerequisite: Ensure you call
-// EnableAllFeatures API to enable all features in an organization. You must
-// specify either the TemplateS3Uri or the TemplateBody parameter, but not both.
-// If you provide both Config uses the TemplateS3Uri parameter and ignores the
-// TemplateBody parameter. Config sets the state of a conformance pack to
-// CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created
-// or updated. You cannot update a conformance pack while it is in this state.
+// config-multiaccountsetup.amazonaws.com .
+//
+// Prerequisite: Ensure you call EnableAllFeatures API to enable all features in
+// an organization.
+//
+// You must specify either the TemplateS3Uri or the TemplateBody parameter, but
+// not both. If you provide both Config uses the TemplateS3Uri parameter and
+// ignores the TemplateBody parameter.
+//
+// Config sets the state of a conformance pack to CREATE_IN_PROGRESS and
+// UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot
+// update a conformance pack while it is in this state.
+//
+// [Service Limits]: https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html
 func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *PutOrganizationConformancePackInput, optFns ...func(*Options)) (*PutOrganizationConformancePackOutput, error) {
 	if params == nil {
 		params = &PutOrganizationConformancePackInput{}
@@ -58,12 +67,14 @@ type PutOrganizationConformancePackInput struct {
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
-	// The name of the Amazon S3 bucket where Config stores conformance pack
-	// templates. This field is optional. If used, it must be prefixed with
-	// awsconfigconforms .
+	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
+	//
+	// This field is optional. If used, it must be prefixed with awsconfigconforms .
 	DeliveryS3Bucket *string
 
-	// The prefix for the Amazon S3 bucket. This field is optional.
+	// The prefix for the Amazon S3 bucket.
+	//
+	// This field is optional.
 	DeliveryS3KeyPrefix *string
 
 	// A list of Amazon Web Services accounts to be excluded from an organization
@@ -76,10 +87,13 @@ type PutOrganizationConformancePackInput struct {
 	TemplateBody *string
 
 	// Location of file containing the template body. The uri must point to the
-	// conformance pack template (max size: 300 KB). You must have access to read
-	// Amazon S3 bucket. In addition, in order to ensure a successful deployment, the
-	// template object must not be in an archived storage class (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
-	// if this parameter is passed.
+	// conformance pack template (max size: 300 KB).
+	//
+	// You must have access to read Amazon S3 bucket. In addition, in order to ensure
+	// a successful deployment, the template object must not be in an [archived storage class]if this
+	// parameter is passed.
+	//
+	// [archived storage class]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
 	TemplateS3Uri *string
 
 	noSmithyDocumentSerde

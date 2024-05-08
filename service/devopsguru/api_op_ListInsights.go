@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of insights in your Amazon Web Services account. You can specify
-// which insights are returned by their start time and status ( ONGOING , CLOSED ,
-// or ANY ).
+//	Returns a list of insights in your Amazon Web Services account. You can
+//
+// specify which insights are returned by their start time and status ( ONGOING ,
+// CLOSED , or ANY ).
 func (c *Client) ListInsights(ctx context.Context, params *ListInsightsInput, optFns ...func(*Options)) (*ListInsightsOutput, error) {
 	if params == nil {
 		params = &ListInsightsInput{}
@@ -31,7 +32,7 @@ func (c *Client) ListInsights(ctx context.Context, params *ListInsightsInput, op
 
 type ListInsightsInput struct {
 
-	// A filter used to filter the returned insights by their status. You can specify
+	//  A filter used to filter the returned insights by their status. You can specify
 	// one status filter.
 	//
 	// This member is required.
@@ -54,10 +55,10 @@ type ListInsightsOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// The returned list of proactive insights.
+	//  The returned list of proactive insights.
 	ProactiveInsights []types.ProactiveInsightSummary
 
-	// The returned list of reactive insights.
+	//  The returned list of reactive insights.
 	ReactiveInsights []types.ReactiveInsightSummary
 
 	// Metadata pertaining to the operation's result.

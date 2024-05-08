@@ -34,7 +34,7 @@ type UpdateInferenceSchedulerInput struct {
 	// This member is required.
 	InferenceSchedulerName *string
 
-	// A period of time (in minutes) by which inference on the data is delayed after
+	//  A period of time (in minutes) by which inference on the data is delayed after
 	// the data starts. For instance, if you select an offset delay time of five
 	// minutes, inference will not begin on the data until the first data measurement
 	// after the five minute mark. For example, if five minutes is selected, the
@@ -44,11 +44,11 @@ type UpdateInferenceSchedulerInput struct {
 	// when uploading new data.
 	DataDelayOffsetInMinutes *int64
 
-	// Specifies information for the input data for the inference scheduler, including
-	// delimiter, format, and dataset location.
+	//  Specifies information for the input data for the inference scheduler,
+	// including delimiter, format, and dataset location.
 	DataInputConfiguration *types.InferenceInputConfiguration
 
-	// Specifies information for the output results from the inference scheduler,
+	//  Specifies information for the output results from the inference scheduler,
 	// including the output S3 location.
 	DataOutputConfiguration *types.InferenceOutputConfiguration
 
@@ -60,7 +60,7 @@ type UpdateInferenceSchedulerInput struct {
 	// example, it starts once every 5 minutes.
 	DataUploadFrequency types.DataUploadFrequency
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data
+	//  The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source for the inference scheduler.
 	RoleArn *string
 

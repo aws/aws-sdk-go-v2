@@ -11,8 +11,9 @@ import (
 )
 
 // Sends a cancel request for a specified task. You can cancel a task only if it's
-// still in a QUEUED state. Tasks that are already running can't be cancelled. A
-// task might still run if it's processed from the queue before the CancelTask
+// still in a QUEUED state. Tasks that are already running can't be cancelled.
+//
+// A task might still run if it's processed from the queue before the CancelTask
 // operation changes the task's state.
 func (c *Client) CancelTask(ctx context.Context, params *CancelTaskInput, optFns ...func(*Options)) (*CancelTaskOutput, error) {
 	if params == nil {

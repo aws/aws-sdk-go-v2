@@ -74,8 +74,10 @@ type GetServiceOutput struct {
 	// Any error associated with the service resource.
 	Error *types.ErrorResponse
 
-	// The configuration for the Lambda endpoint type. The Arn is the Amazon Resource
-	// Name (ARN) of the Lambda function associated with this service.
+	// The configuration for the Lambda endpoint type.
+	//
+	// The Arn is the Amazon Resource Name (ARN) of the Lambda function associated
+	// with this service.
 	LambdaEndpoint *types.LambdaEndpointConfig
 
 	// A timestamp that indicates when the service was last updated.
@@ -97,8 +99,11 @@ type GetServiceOutput struct {
 	// Web Services resource. Each tag consists of a key-value pair.
 	Tags map[string]string
 
-	// The configuration for the URL endpoint type. The Url isthe URL of the endpoint
-	// type. The HealthUrl is the health check URL of the endpoint type.
+	// The configuration for the URL endpoint type.
+	//
+	// The Url isthe URL of the endpoint type.
+	//
+	// The HealthUrl is the health check URL of the endpoint type.
 	UrlEndpoint *types.UrlEndpointConfig
 
 	// The ID of the virtual private cloud (VPC).

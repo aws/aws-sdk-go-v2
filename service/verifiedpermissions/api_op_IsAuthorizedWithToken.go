@@ -13,16 +13,21 @@ import (
 
 // Makes an authorization decision about a service request described in the
 // parameters. The principal in this request comes from an external identity source
-// in the form of an identity token formatted as a JSON web token (JWT) (https://wikipedia.org/wiki/JSON_Web_Token)
-// . The information in the parameters can also define additional context that
-// Verified Permissions can include in the evaluation. The request is evaluated
-// against all matching policies in the specified policy store. The result of the
-// decision is either Allow or Deny , along with a list of the policies that
-// resulted in the decision. At this time, Verified Permissions accepts tokens from
-// only Amazon Cognito. Verified Permissions validates each token that is specified
-// in a request by checking its expiration date and its signature. If you delete a
-// Amazon Cognito user pool or user, tokens from that deleted pool or that deleted
-// user continue to be usable until they expire.
+// in the form of an identity token formatted as a [JSON web token (JWT)]. The information in the
+// parameters can also define additional context that Verified Permissions can
+// include in the evaluation. The request is evaluated against all matching
+// policies in the specified policy store. The result of the decision is either
+// Allow or Deny , along with a list of the policies that resulted in the decision.
+//
+// At this time, Verified Permissions accepts tokens from only Amazon Cognito.
+//
+// Verified Permissions validates each token that is specified in a request by
+// checking its expiration date and its signature.
+//
+// If you delete a Amazon Cognito user pool or user, tokens from that deleted pool
+// or that deleted user continue to be usable until they expire.
+//
+// [JSON web token (JWT)]: https://wikipedia.org/wiki/JSON_Web_Token
 func (c *Client) IsAuthorizedWithToken(ctx context.Context, params *IsAuthorizedWithTokenInput, optFns ...func(*Options)) (*IsAuthorizedWithTokenOutput, error) {
 	if params == nil {
 		params = &IsAuthorizedWithTokenInput{}
@@ -49,8 +54,10 @@ type IsAuthorizedWithTokenInput struct {
 	// Specifies an access token for the principal to be authorized. This token is
 	// provided to you by the identity provider (IdP) associated with the specified
 	// identity source. You must specify either an accessToken , an identityToken , or
-	// both. Must be an access token. Verified Permissions returns an error if the
-	// token_use claim in the submitted token isn't access .
+	// both.
+	//
+	// Must be an access token. Verified Permissions returns an error if the token_use
+	// claim in the submitted token isn't access .
 	AccessToken *string
 
 	// Specifies the requested action to be authorized. Is the specified principal
@@ -62,20 +69,25 @@ type IsAuthorizedWithTokenInput struct {
 	Context types.ContextDefinition
 
 	// Specifies the list of resources and their associated attributes that Verified
-	// Permissions can examine when evaluating the policies. You can't include
-	// principals in this parameter, only resource and action entities. This parameter
-	// can't include any entities of a type that matches the user or group entity types
-	// that you defined in your identity source.
+	// Permissions can examine when evaluating the policies.
+	//
+	// You can't include principals in this parameter, only resource and action
+	// entities. This parameter can't include any entities of a type that matches the
+	// user or group entity types that you defined in your identity source.
+	//
 	//   - The IsAuthorizedWithToken operation takes principal attributes from only the
 	//   identityToken or accessToken passed to the operation.
+	//
 	//   - For action entities, you can include only their Identifier and EntityType .
 	Entities types.EntitiesDefinition
 
 	// Specifies an identity token for the principal to be authorized. This token is
 	// provided to you by the identity provider (IdP) associated with the specified
 	// identity source. You must specify either an accessToken , an identityToken , or
-	// both. Must be an ID token. Verified Permissions returns an error if the
-	// token_use claim in the submitted token isn't id .
+	// both.
+	//
+	// Must be an ID token. Verified Permissions returns an error if the token_use
+	// claim in the submitted token isn't id .
 	IdentityToken *string
 
 	// Specifies the resource for which the authorization decision is made. For

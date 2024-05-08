@@ -12,8 +12,9 @@ import (
 )
 
 // Returns a paginated list of individual assessments based on filter settings.
-// These filter settings can specify a combination of premigration assessment runs,
-// migration tasks, and assessment status values.
+//
+// These filter settings can specify a combination of premigration assessment
+// runs, migration tasks, and assessment status values.
 func (c *Client) DescribeReplicationTaskIndividualAssessments(ctx context.Context, params *DescribeReplicationTaskIndividualAssessmentsInput, optFns ...func(*Options)) (*DescribeReplicationTaskIndividualAssessmentsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationTaskIndividualAssessmentsInput{}
@@ -32,8 +33,10 @@ func (c *Client) DescribeReplicationTaskIndividualAssessments(ctx context.Contex
 type DescribeReplicationTaskIndividualAssessmentsInput struct {
 
 	// Filters applied to the individual assessments described in the form of
-	// key-value pairs. Valid filter names: replication-task-assessment-run-arn ,
-	// replication-task-arn , status
+	// key-value pairs.
+	//
+	// Valid filter names: replication-task-assessment-run-arn , replication-task-arn ,
+	// status
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter

@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the content of a message. The x-amz-chime-bearer request header is
-// mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the
-// API call as the value in the header.
+// Updates the content of a message.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
 func (c *Client) UpdateChannelMessage(ctx context.Context, params *UpdateChannelMessageInput, optFns ...func(*Options)) (*UpdateChannelMessageOutput, error) {
 	if params == nil {
 		params = &UpdateChannelMessageInput{}
@@ -57,8 +59,9 @@ type UpdateChannelMessageInput struct {
 	// The metadata of the message being updated.
 	Metadata *string
 
-	// The ID of the SubChannel in the request. Only required when updating messages
-	// in a SubChannel that the user belongs to.
+	// The ID of the SubChannel in the request.
+	//
+	// Only required when updating messages in a SubChannel that the user belongs to.
 	SubChannelId *string
 
 	noSmithyDocumentSerde

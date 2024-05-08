@@ -14,8 +14,9 @@ import (
 
 // This operation returns the current data retrieval policy for the account and
 // region specified in the GET request. For more information about data retrieval
-// policies, see Amazon Glacier Data Retrieval Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html)
-// .
+// policies, see [Amazon Glacier Data Retrieval Policies].
+//
+// [Amazon Glacier Data Retrieval Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html
 func (c *Client) GetDataRetrievalPolicy(ctx context.Context, params *GetDataRetrievalPolicyInput, optFns ...func(*Options)) (*GetDataRetrievalPolicyOutput, error) {
 	if params == nil {
 		params = &GetDataRetrievalPolicyInput{}

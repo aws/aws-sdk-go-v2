@@ -13,11 +13,14 @@ import (
 
 // Returns information about the specified HSM client certificate. If no
 // certificate ID is specified, returns information about all the HSM certificates
-// owned by your Amazon Web Services account. If you specify both tag keys and tag
-// values in the same request, Amazon Redshift returns all HSM client certificates
-// that match any combination of the specified keys and values. For example, if you
-// have owner and environment for tag keys, and admin and test for tag values, all
-// HSM client certificates that have any combination of those values are returned.
+// owned by your Amazon Web Services account.
+//
+// If you specify both tag keys and tag values in the same request, Amazon
+// Redshift returns all HSM client certificates that match any combination of the
+// specified keys and values. For example, if you have owner and environment for
+// tag keys, and admin and test for tag values, all HSM client certificates that
+// have any combination of those values are returned.
+//
 // If both tag keys and values are omitted from the request, HSM client
 // certificates are returned regardless of whether they have tag keys or values
 // associated with them.
@@ -44,17 +47,19 @@ type DescribeHsmClientCertificatesInput struct {
 	HsmClientCertificateIdentifier *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeHsmClientCertificates request
-	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
-	// in the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
+	// response records. When the results of a DescribeHsmClientCertificatesrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -187,7 +192,10 @@ type DescribeHsmClientCertificatesPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

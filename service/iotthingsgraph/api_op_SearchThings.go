@@ -12,11 +12,15 @@ import (
 )
 
 // Searches for things associated with the specified entity. You can search by
-// both device and device model. For example, if two different devices, camera1 and
-// camera2, implement the camera device model, the user can associate thing1 to
-// camera1 and thing2 to camera2. SearchThings(camera2) will return only thing2,
-// but SearchThings(camera) will return both thing1 and thing2. This action
-// searches for exact matches and doesn't perform partial text matching.
+// both device and device model.
+//
+// For example, if two different devices, camera1 and camera2, implement the
+// camera device model, the user can associate thing1 to camera1 and thing2 to
+// camera2. SearchThings(camera2) will return only thing2, but SearchThings(camera)
+// will return both thing1 and thing2.
+//
+// This action searches for exact matches and doesn't perform partial text
+// matching.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) SearchThings(ctx context.Context, params *SearchThingsInput, optFns ...func(*Options)) (*SearchThingsOutput, error) {
@@ -36,8 +40,11 @@ func (c *Client) SearchThings(ctx context.Context, params *SearchThingsInput, op
 
 type SearchThingsInput struct {
 
-	// The ID of the entity to which the things are associated. The IDs should be in
-	// the following format. urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
+	// The ID of the entity to which the things are associated.
+	//
+	// The IDs should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
 	//
 	// This member is required.
 	EntityId *string

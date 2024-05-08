@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list that describes the available WorkSpace bundles. You can filter
-// the results using either bundle ID or owner, but not both.
+// Retrieves a list that describes the available WorkSpace bundles.
+//
+// You can filter the results using either bundle ID or owner, but not both.
 func (c *Client) DescribeWorkspaceBundles(ctx context.Context, params *DescribeWorkspaceBundlesInput, optFns ...func(*Options)) (*DescribeWorkspaceBundlesOutput, error) {
 	if params == nil {
 		params = &DescribeWorkspaceBundlesInput{}
@@ -39,8 +40,10 @@ type DescribeWorkspaceBundlesInput struct {
 	NextToken *string
 
 	// The owner of the bundles. You cannot combine this parameter with any other
-	// filter. To describe the bundles provided by Amazon Web Services, specify AMAZON
-	// . To describe the bundles that belong to your account, don't specify a value.
+	// filter.
+	//
+	// To describe the bundles provided by Amazon Web Services, specify AMAZON . To
+	// describe the bundles that belong to your account, don't specify a value.
 	Owner *string
 
 	noSmithyDocumentSerde

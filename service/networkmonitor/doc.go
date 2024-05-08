@@ -12,11 +12,14 @@
 // creates a monitor containing all the possible source and destination
 // combinations, each of which is called a probe, within a single monitor. These
 // probes then monitor network traffic to help you identify where network issues
-// might be affecting your traffic. Before you begin, ensure the Amazon Web
-// Services CLI is configured in the Amazon Web Services Account where you will
-// create the Network Monitor resource. Network Monitor doesn’t support creation on
-// cross-account resources, but you can create a Network Monitor in any subnet
-// belonging to a VPC owned by your Account. For more information, see Using
-// Amazon CloudWatch Network Monitor (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/what-is-network-monitor.html)
-// in the Amazon CloudWatch User Guide.
+// might be affecting your traffic.
+//
+// Before you begin, ensure the Amazon Web Services CLI is configured in the
+// Amazon Web Services Account where you will create the Network Monitor resource.
+// Network Monitor doesn’t support creation on cross-account resources, but you can
+// create a Network Monitor in any subnet belonging to a VPC owned by your Account.
+//
+// For more information, see [Using Amazon CloudWatch Network Monitor] in the Amazon CloudWatch User Guide.
+//
+// [Using Amazon CloudWatch Network Monitor]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/what-is-network-monitor.html
 package networkmonitor

@@ -13,8 +13,10 @@ import (
 
 // Updates an existing Managed Service for Apache Flink application. Using this
 // operation, you can update application code, input configuration, and output
-// configuration. Managed Service for Apache Flink updates the ApplicationVersionId
-// each time you update your application.
+// configuration.
+//
+// Managed Service for Apache Flink updates the ApplicationVersionId each time you
+// update your application.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}
@@ -42,21 +44,20 @@ type UpdateApplicationInput struct {
 
 	// Describes application Amazon CloudWatch logging option updates. You can only
 	// update existing CloudWatch logging options with this action. To add a new
-	// CloudWatch logging option, use AddApplicationCloudWatchLoggingOption .
+	// CloudWatch logging option, use AddApplicationCloudWatchLoggingOption.
 	CloudWatchLoggingOptionUpdates []types.CloudWatchLoggingOptionUpdate
 
 	// A value you use to implement strong concurrency for application updates. You
 	// must provide the CurrentApplicationVersionId or the ConditionalToken . You get
-	// the application's current ConditionalToken using DescribeApplication . For
-	// better concurrency support, use the ConditionalToken parameter instead of
+	// the application's current ConditionalToken using DescribeApplication. For better concurrency
+	// support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	ConditionalToken *string
 
 	// The current application version ID. You must provide the
 	// CurrentApplicationVersionId or the ConditionalToken .You can retrieve the
-	// application version ID using DescribeApplication . For better concurrency
-	// support, use the ConditionalToken parameter instead of
-	// CurrentApplicationVersionId .
+	// application version ID using DescribeApplication. For better concurrency support, use the
+	// ConditionalToken parameter instead of CurrentApplicationVersionId .
 	CurrentApplicationVersionId *int64
 
 	// Describes updates to the application's starting parameters.
@@ -64,8 +65,10 @@ type UpdateApplicationInput struct {
 
 	// Updates the Managed Service for Apache Flink runtime environment used to run
 	// your code. To avoid issues you must:
+	//
 	//   - Ensure your new jar and dependencies are compatible with the new runtime
 	//   selected.
+	//
 	//   - Ensure your new code's state is compatible with the snapshot from which
 	//   your application will start
 	RuntimeEnvironmentUpdate types.RuntimeEnvironment

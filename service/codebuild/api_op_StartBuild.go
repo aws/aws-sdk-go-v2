@@ -14,9 +14,11 @@ import (
 // Starts running a build with the settings defined in the project. These setting
 // include: how to run a build, where to get the source code, which build
 // environment to use, which build commands to run, and where to store the build
-// output. You can also start a build run by overriding some of the build settings
-// in the project. The overrides only apply for that specific start build request.
-// The settings in the project are unaltered.
+// output.
+//
+// You can also start a build run by overriding some of the build settings in the
+// project. The overrides only apply for that specific start build request. The
+// settings in the project are unaltered.
 func (c *Client) StartBuild(ctx context.Context, params *StartBuildInput, optFns ...func(*Options)) (*StartBuildOutput, error) {
 	if params == nil {
 		params = &StartBuildInput{}
@@ -50,20 +52,24 @@ type StartBuildInput struct {
 
 	// A buildspec file declaration that overrides the latest one defined in the build
 	// project, for this build only. The buildspec defined on the project is not
-	// changed. If this value is set, it can be either an inline buildspec definition,
-	// the path to an alternate buildspec file relative to the value of the built-in
+	// changed.
+	//
+	// If this value is set, it can be either an inline buildspec definition, the path
+	// to an alternate buildspec file relative to the value of the built-in
 	// CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket
 	// must be in the same Amazon Web Services Region as the build project. Specify the
 	// buildspec file using its ARN (for example,
 	// arn:aws:s3:::my-codebuild-sample2/buildspec.yml ). If this value is not provided
 	// or is set to an empty string, the source code must contain a buildspec file in
-	// its root directory. For more information, see Buildspec File Name and Storage
-	// Location (https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage)
-	// . Since this property allows you to change the build commands that will run in
+	// its root directory. For more information, see [Buildspec File Name and Storage Location].
+	//
+	// Since this property allows you to change the build commands that will run in
 	// the container, you should note that an IAM principal with the ability to call
 	// this API and set this parameter can override the default settings. Moreover, we
 	// encourage that you use a trustworthy buildspec location like a file in your
 	// source repository or a Amazon S3 bucket.
+	//
+	// [Buildspec File Name and Storage Location]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage
 	BuildspecOverride *string
 
 	// A ProjectCache object specified for this build that overrides the one defined
@@ -79,16 +85,19 @@ type StartBuildInput struct {
 	ComputeTypeOverride types.ComputeType
 
 	// Specifies if session debugging is enabled for this build. For more information,
-	// see Viewing a running build in Session Manager (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html)
-	// .
+	// see [Viewing a running build in Session Manager].
+	//
+	// [Viewing a running build in Session Manager]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
 	DebugSessionEnabled *bool
 
 	// The Key Management Service customer master key (CMK) that overrides the one
 	// specified in the build project. The CMK key encrypts the build output artifacts.
+	//
 	// You can use a cross-account KMS key to encrypt the build output artifacts if
-	// your service role has permission to that key. You can specify either the Amazon
-	// Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the
-	// format alias/ ).
+	// your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if
+	// available, the CMK's alias (using the format alias/ ).
 	EncryptionKeyOverride *string
 
 	// A container type for this build that overrides the one specified in the build
@@ -107,7 +116,7 @@ type StartBuildInput struct {
 	// for this build only, any previous depth of history defined in the build project.
 	GitCloneDepthOverride *int32
 
-	// Information about the Git submodules configuration for this build of an
+	//  Information about the Git submodules configuration for this build of an
 	// CodeBuild build project.
 	GitSubmodulesConfigOverride *types.GitSubmodulesConfig
 
@@ -122,12 +131,16 @@ type StartBuildInput struct {
 	ImageOverride *string
 
 	// The type of credentials CodeBuild uses to pull images in your build. There are
-	// two valid values: CODEBUILD Specifies that CodeBuild uses its own credentials.
-	// This requires that you modify your ECR repository policy to trust CodeBuild's
-	// service principal. SERVICE_ROLE Specifies that CodeBuild uses your build
-	// project's service role. When using a cross-account or private registry image,
-	// you must use SERVICE_ROLE credentials. When using an CodeBuild curated image,
-	// you must use CODEBUILD credentials.
+	// two valid values:
+	//
+	// CODEBUILD Specifies that CodeBuild uses its own credentials. This requires that
+	// you modify your ECR repository policy to trust CodeBuild's service principal.
+	//
+	// SERVICE_ROLE Specifies that CodeBuild uses your build project's service role.
+	//
+	// When using a cross-account or private registry image, you must use SERVICE_ROLE
+	// credentials. When using an CodeBuild curated image, you must use CODEBUILD
+	// credentials.
 	ImagePullCredentialsTypeOverride types.ImagePullCredentialsType
 
 	// Enable this flag to override the insecure SSL setting that is specified in the
@@ -136,37 +149,41 @@ type StartBuildInput struct {
 	// if the build's source is GitHub Enterprise.
 	InsecureSslOverride *bool
 
-	// Log settings for this build that override the log settings defined in the build
-	// project.
+	//  Log settings for this build that override the log settings defined in the
+	// build project.
 	LogsConfigOverride *types.LogsConfig
 
 	// Enable this flag to override privileged mode in the build project.
 	PrivilegedModeOverride *bool
 
-	// The number of minutes a build is allowed to be queued before it times out.
+	//  The number of minutes a build is allowed to be queued before it times out.
 	QueuedTimeoutInMinutesOverride *int32
 
-	// The credentials for access to a private registry.
+	//  The credentials for access to a private registry.
 	RegistryCredentialOverride *types.RegistryCredential
 
-	// Set to true to report to your source provider the status of a build's start and
-	// completion. If you use this option with a source provider other than GitHub,
-	// GitHub Enterprise, or Bitbucket, an invalidInputException is thrown. To be able
-	// to report the build status to the source provider, the user associated with the
-	// source provider must have write access to the repo. If the user does not have
-	// write access, the build status cannot be updated. For more information, see
-	// Source provider access (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html)
-	// in the CodeBuild User Guide. The status of a build triggered by a webhook is
-	// always reported to your source provider.
+	//  Set to true to report to your source provider the status of a build's start
+	// and completion. If you use this option with a source provider other than GitHub,
+	// GitHub Enterprise, or Bitbucket, an invalidInputException is thrown.
+	//
+	// To be able to report the build status to the source provider, the user
+	// associated with the source provider must have write access to the repo. If the
+	// user does not have write access, the build status cannot be updated. For more
+	// information, see [Source provider access]in the CodeBuild User Guide.
+	//
+	// The status of a build triggered by a webhook is always reported to your source
+	// provider.
+	//
+	// [Source provider access]: https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html
 	ReportBuildStatusOverride *bool
 
-	// An array of ProjectArtifacts objects.
+	//  An array of ProjectArtifacts objects.
 	SecondaryArtifactsOverride []types.ProjectArtifacts
 
-	// An array of ProjectSource objects.
+	//  An array of ProjectSource objects.
 	SecondarySourcesOverride []types.ProjectSource
 
-	// An array of ProjectSourceVersion objects that specify one or more versions of
+	//  An array of ProjectSourceVersion objects that specify one or more versions of
 	// the project's secondary sources to be used for this build only.
 	SecondarySourcesVersionOverride []types.ProjectSourceVersion
 
@@ -189,19 +206,30 @@ type StartBuildInput struct {
 
 	// The version of the build input to be built, for this build only. If not
 	// specified, the latest version is used. If specified, the contents depends on the
-	// source provider: CodeCommit The commit ID, branch, or Git tag to use. GitHub The
-	// commit ID, pull request ID, branch name, or tag name that corresponds to the
-	// version of the source code you want to build. If a pull request ID is specified,
-	// it must use the format pr/pull-request-ID (for example pr/25 ). If a branch name
-	// is specified, the branch's HEAD commit ID is used. If not specified, the default
-	// branch's HEAD commit ID is used. Bitbucket The commit ID, branch name, or tag
-	// name that corresponds to the version of the source code you want to build. If a
-	// branch name is specified, the branch's HEAD commit ID is used. If not specified,
-	// the default branch's HEAD commit ID is used. Amazon S3 The version ID of the
-	// object that represents the build input ZIP file to use. If sourceVersion is
-	// specified at the project level, then this sourceVersion (at the build level)
-	// takes precedence. For more information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
-	// in the CodeBuild User Guide.
+	// source provider:
+	//
+	// CodeCommit The commit ID, branch, or Git tag to use.
+	//
+	// GitHub The commit ID, pull request ID, branch name, or tag name that
+	// corresponds to the version of the source code you want to build. If a pull
+	// request ID is specified, it must use the format pr/pull-request-ID (for example
+	// pr/25 ). If a branch name is specified, the branch's HEAD commit ID is used. If
+	// not specified, the default branch's HEAD commit ID is used.
+	//
+	// Bitbucket The commit ID, branch name, or tag name that corresponds to the
+	// version of the source code you want to build. If a branch name is specified, the
+	// branch's HEAD commit ID is used. If not specified, the default branch's HEAD
+	// commit ID is used.
+	//
+	// Amazon S3 The version ID of the object that represents the build input ZIP file
+	// to use.
+	//
+	// If sourceVersion is specified at the project level, then this sourceVersion (at
+	// the build level) takes precedence.
+	//
+	// For more information, see [Source Version Sample with CodeBuild] in the CodeBuild User Guide.
+	//
+	// [Source Version Sample with CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
 	SourceVersion *string
 
 	// The number of build timeout minutes, from 5 to 480 (8 hours), that overrides,

@@ -11,9 +11,11 @@ import (
 )
 
 // Disassociates a channel flow from all its channels. Once disassociated, all
-// messages to that channel stop going through the channel flow processor. Only
-// administrators or channel moderators can disassociate a channel flow. The
-// x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// messages to that channel stop going through the channel flow processor.
+//
+// Only administrators or channel moderators can disassociate a channel flow.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
 // header.
 func (c *Client) DisassociateChannelFlow(ctx context.Context, params *DisassociateChannelFlowInput, optFns ...func(*Options)) (*DisassociateChannelFlowOutput, error) {

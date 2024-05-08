@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Describe the content of a hub. Hub APIs are only callable through SageMaker
-// Studio.
+// Describe the content of a hub.
+//
+// Hub APIs are only callable through SageMaker Studio.
 func (c *Client) DescribeHubContent(ctx context.Context, params *DescribeHubContentInput, optFns ...func(*Options)) (*DescribeHubContentOutput, error) {
 	if params == nil {
 		params = &DescribeHubContentInput{}

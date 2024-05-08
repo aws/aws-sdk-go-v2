@@ -14,8 +14,10 @@ import (
 // Adds metadata tags to an DMS resource, including replication instance,
 // endpoint, subnet group, and migration task. These tags can also be used with
 // cost allocation reporting to track cost associated with DMS resources, or used
-// in a Condition statement in an IAM policy for DMS. For more information, see Tag (https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html)
+// in a Condition statement in an IAM policy for DMS. For more information, see [Tag]Tag
 // data type description.
+//
+// [Tag]: https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
 	if params == nil {
 		params = &AddTagsToResourceInput{}
@@ -35,8 +37,9 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 type AddTagsToResourceInput struct {
 
 	// Identifies the DMS resource to which tags should be added. The value for this
-	// parameter is an Amazon Resource Name (ARN). For DMS, you can tag a replication
-	// instance, an endpoint, or a replication task.
+	// parameter is an Amazon Resource Name (ARN).
+	//
+	// For DMS, you can tag a replication instance, an endpoint, or a replication task.
 	//
 	// This member is required.
 	ResourceArn *string

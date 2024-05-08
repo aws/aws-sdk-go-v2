@@ -10,11 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an ActiveMQ user. Do not add personally identifiable information (PII)
-// or other confidential or sensitive information in broker usernames. Broker
-// usernames are accessible to other Amazon Web Services services, including
-// CloudWatch Logs. Broker usernames are not intended to be used for private or
-// sensitive data.
+// Creates an ActiveMQ user.
+//
+// Do not add personally identifiable information (PII) or other confidential or
+// sensitive information in broker usernames. Broker usernames are accessible to
+// other Amazon Web Services services, including CloudWatch Logs. Broker usernames
+// are not intended to be used for private or sensitive data.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}

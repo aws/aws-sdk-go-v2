@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the permission policy for a version of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// . For more information, see AddLayerVersionPermission .
+// Returns the permission policy for a version of an [Lambda layer]. For more information, see AddLayerVersionPermission.
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 func (c *Client) GetLayerVersionPolicy(ctx context.Context, params *GetLayerVersionPolicyInput, optFns ...func(*Options)) (*GetLayerVersionPolicyOutput, error) {
 	if params == nil {
 		params = &GetLayerVersionPolicyInput{}

@@ -12,9 +12,9 @@ import (
 )
 
 // Modifies the self-service WorkSpace management capabilities for your users. For
-// more information, see Enable Self-Service WorkSpace Management Capabilities for
-// Your Users (https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html)
-// .
+// more information, see [Enable Self-Service WorkSpace Management Capabilities for Your Users].
+//
+// [Enable Self-Service WorkSpace Management Capabilities for Your Users]: https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html
 func (c *Client) ModifySelfservicePermissions(ctx context.Context, params *ModifySelfservicePermissionsInput, optFns ...func(*Options)) (*ModifySelfservicePermissionsOutput, error) {
 	if params == nil {
 		params = &ModifySelfservicePermissionsInput{}

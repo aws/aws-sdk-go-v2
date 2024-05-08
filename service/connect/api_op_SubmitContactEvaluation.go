@@ -15,8 +15,10 @@ import (
 // included in the request are merged with existing answers for the given
 // evaluation. If no answers or notes are passed, the evaluation is submitted with
 // the existing answers and notes. You can delete an answer or note by passing an
-// empty object ( {} ) to the question identifier. If a contact evaluation is
-// already in submitted state, this operation will trigger a resubmission.
+// empty object ( {} ) to the question identifier.
+//
+// If a contact evaluation is already in submitted state, this operation will
+// trigger a resubmission.
 func (c *Client) SubmitContactEvaluation(ctx context.Context, params *SubmitContactEvaluationInput, optFns ...func(*Options)) (*SubmitContactEvaluationOutput, error) {
 	if params == nil {
 		params = &SubmitContactEvaluationInput{}
@@ -39,8 +41,10 @@ type SubmitContactEvaluationInput struct {
 	// This member is required.
 	EvaluationId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

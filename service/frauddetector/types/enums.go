@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for AsyncJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AsyncJobStatus) Values() []AsyncJobStatus {
 	return []AsyncJobStatus{
 		"IN_PROGRESS_INITIALIZING",
@@ -38,8 +39,9 @@ const (
 )
 
 // Values returns all known values for DataSource. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSource) Values() []DataSource {
 	return []DataSource{
 		"EVENT",
@@ -60,8 +62,9 @@ const (
 )
 
 // Values returns all known values for DataType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataType) Values() []DataType {
 	return []DataType{
 		"STRING",
@@ -82,8 +85,9 @@ const (
 )
 
 // Values returns all known values for DetectorVersionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DetectorVersionStatus) Values() []DetectorVersionStatus {
 	return []DetectorVersionStatus{
 		"DRAFT",
@@ -101,8 +105,9 @@ const (
 )
 
 // Values returns all known values for EventIngestion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventIngestion) Values() []EventIngestion {
 	return []EventIngestion{
 		"ENABLED",
@@ -118,8 +123,9 @@ const (
 )
 
 // Values returns all known values for Language. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Language) Values() []Language {
 	return []Language{
 		"DETECTORPL",
@@ -136,8 +142,9 @@ const (
 )
 
 // Values returns all known values for ListUpdateMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListUpdateMode) Values() []ListUpdateMode {
 	return []ListUpdateMode{
 		"REPLACE",
@@ -155,8 +162,9 @@ const (
 )
 
 // Values returns all known values for ModelEndpointStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelEndpointStatus) Values() []ModelEndpointStatus {
 	return []ModelEndpointStatus{
 		"ASSOCIATED",
@@ -173,8 +181,9 @@ const (
 )
 
 // Values returns all known values for ModelInputDataFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelInputDataFormat) Values() []ModelInputDataFormat {
 	return []ModelInputDataFormat{
 		"TEXT_CSV",
@@ -191,8 +200,9 @@ const (
 )
 
 // Values returns all known values for ModelOutputDataFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelOutputDataFormat) Values() []ModelOutputDataFormat {
 	return []ModelOutputDataFormat{
 		"TEXT_CSV",
@@ -208,8 +218,9 @@ const (
 )
 
 // Values returns all known values for ModelSource. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelSource) Values() []ModelSource {
 	return []ModelSource{
 		"SAGEMAKER",
@@ -226,8 +237,9 @@ const (
 )
 
 // Values returns all known values for ModelTypeEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelTypeEnum) Values() []ModelTypeEnum {
 	return []ModelTypeEnum{
 		"ONLINE_FRAUD_INSIGHTS",
@@ -246,8 +258,9 @@ const (
 )
 
 // Values returns all known values for ModelVersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelVersionStatus) Values() []ModelVersionStatus {
 	return []ModelVersionStatus{
 		"ACTIVE",
@@ -265,8 +278,9 @@ const (
 )
 
 // Values returns all known values for RuleExecutionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RuleExecutionMode) Values() []RuleExecutionMode {
 	return []RuleExecutionMode{
 		"ALL_MATCHED",
@@ -283,8 +297,9 @@ const (
 )
 
 // Values returns all known values for TrainingDataSourceEnum. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrainingDataSourceEnum) Values() []TrainingDataSourceEnum {
 	return []TrainingDataSourceEnum{
 		"EXTERNAL_EVENTS",
@@ -304,6 +319,7 @@ const (
 
 // Values returns all known values for UnlabeledEventsTreatment. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (UnlabeledEventsTreatment) Values() []UnlabeledEventsTreatment {
 	return []UnlabeledEventsTreatment{

@@ -15,7 +15,9 @@ import (
 // operation in conjunction with Amazon CloudWatch alarms to temporarily pause
 // email sending for a configuration set when the reputation metrics for that
 // configuration set (such as your bounce on complaint rate) exceed certain
-// thresholds. You can execute this operation no more than once per second.
+// thresholds.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) UpdateConfigurationSetSendingEnabled(ctx context.Context, params *UpdateConfigurationSetSendingEnabledInput, optFns ...func(*Options)) (*UpdateConfigurationSetSendingEnabledOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationSetSendingEnabledInput{}

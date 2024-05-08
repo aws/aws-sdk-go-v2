@@ -11,8 +11,11 @@ import (
 )
 
 // Gets a report download link for a successful Device Advisor qualifying test
-// suite run. Requires permission to access the GetSuiteRunReport (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// suite run.
+//
+// Requires permission to access the [GetSuiteRunReport] action.
+//
+// [GetSuiteRunReport]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetSuiteRunReport(ctx context.Context, params *GetSuiteRunReportInput, optFns ...func(*Options)) (*GetSuiteRunReportOutput, error) {
 	if params == nil {
 		params = &GetSuiteRunReportInput{}

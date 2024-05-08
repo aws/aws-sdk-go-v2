@@ -44,8 +44,10 @@ type PutEvaluationsInput struct {
 	// Use this parameter to specify a test run for PutEvaluations . You can verify
 	// whether your Lambda function will deliver evaluation results to Config. No
 	// updates occur to your existing evaluations, and evaluation results are not sent
-	// to Config. When TestMode is true , PutEvaluations doesn't require a valid value
-	// for the ResultToken parameter, but the value cannot be null.
+	// to Config.
+	//
+	// When TestMode is true , PutEvaluations doesn't require a valid value for the
+	// ResultToken parameter, but the value cannot be null.
 	TestMode bool
 
 	noSmithyDocumentSerde

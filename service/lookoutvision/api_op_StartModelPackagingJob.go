@@ -14,22 +14,35 @@ import (
 // Starts an Amazon Lookout for Vision model packaging job. A model packaging job
 // creates an AWS IoT Greengrass component for a Lookout for Vision model. You can
 // use the component to deploy your model to an edge device managed by Greengrass.
-// Use the DescribeModelPackagingJob API to determine the current status of the
-// job. The model packaging job is complete if the value of Status is SUCCEEDED .
+//
+// Use the DescribeModelPackagingJob API to determine the current status of the job.
+//
+// The model packaging job is complete if the value of Status is SUCCEEDED .
+//
 // To deploy the component to the target device, use the component name and
-// component version with the AWS IoT Greengrass CreateDeployment (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html)
-// API. This operation requires the following permissions:
+// component version with the AWS IoT Greengrass [CreateDeployment]API.
+//
+// This operation requires the following permissions:
+//
 //   - lookoutvision:StartModelPackagingJob
+//
 //   - s3:PutObject
+//
 //   - s3:GetBucketLocation
+//
 //   - kms:GenerateDataKey
+//
 //   - greengrass:CreateComponentVersion
+//
 //   - greengrass:DescribeComponent
+//
 //   - (Optional) greengrass:TagResource . Only required if you want to tag the
 //     component.
 //
 // For more information, see Using your Amazon Lookout for Vision model on an edge
 // device in the Amazon Lookout for Vision Developer Guide.
+//
+// [CreateDeployment]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_CreateDeployment.html
 func (c *Client) StartModelPackagingJob(ctx context.Context, params *StartModelPackagingJobInput, optFns ...func(*Options)) (*StartModelPackagingJobOutput, error) {
 	if params == nil {
 		params = &StartModelPackagingJobInput{}
@@ -52,12 +65,12 @@ type StartModelPackagingJobInput struct {
 	// This member is required.
 	Configuration *types.ModelPackagingConfiguration
 
-	// The version of the model within the project that you want to package.
+	//  The version of the model within the project that you want to package.
 	//
 	// This member is required.
 	ModelVersion *string
 
-	// The name of the project which contains the version of the model that you want
+	//  The name of the project which contains the version of the model that you want
 	// to package.
 	//
 	// This member is required.
@@ -67,13 +80,16 @@ type StartModelPackagingJobInput struct {
 	// StartModelPackagingJob completes only once. You choose the value to pass. For
 	// example, An issue might prevent you from getting a response from
 	// StartModelPackagingJob . In this case, safely retry your call to
-	// StartModelPackagingJob by using the same ClientToken parameter value. If you
-	// don't supply a value for ClientToken , the AWS SDK you are using inserts a value
-	// for you. This prevents retries after a network error from making multiple
-	// dataset creation requests. You'll need to provide your own value for other use
-	// cases. An error occurs if the other input parameters are not the same as in the
-	// first request. Using a different value for ClientToken is considered a new call
-	// to StartModelPackagingJob . An idempotency token is active for 8 hours.
+	// StartModelPackagingJob by using the same ClientToken parameter value.
+	//
+	// If you don't supply a value for ClientToken , the AWS SDK you are using inserts
+	// a value for you. This prevents retries after a network error from making
+	// multiple dataset creation requests. You'll need to provide your own value for
+	// other use cases.
+	//
+	// An error occurs if the other input parameters are not the same as in the first
+	// request. Using a different value for ClientToken is considered a new call to
+	// StartModelPackagingJob . An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	// A description for the model packaging job.

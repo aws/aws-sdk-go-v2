@@ -33,8 +33,9 @@ type CreateVpcConnectorInput struct {
 
 	// A list of IDs of subnets that App Runner should use when it associates your
 	// service with a custom Amazon VPC. Specify IDs of subnets of a single Amazon VPC.
-	// App Runner determines the Amazon VPC from the subnets you specify. App Runner
-	// currently only provides support for IPv4.
+	// App Runner determines the Amazon VPC from the subnets you specify.
+	//
+	// App Runner currently only provides support for IPv4.
 	//
 	// This member is required.
 	Subnets []string

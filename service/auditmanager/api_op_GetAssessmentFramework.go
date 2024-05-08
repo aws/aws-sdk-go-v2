@@ -29,7 +29,7 @@ func (c *Client) GetAssessmentFramework(ctx context.Context, params *GetAssessme
 
 type GetAssessmentFrameworkInput struct {
 
-	// The identifier for the framework.
+	//  The identifier for the framework.
 	//
 	// This member is required.
 	FrameworkId *string
@@ -39,7 +39,7 @@ type GetAssessmentFrameworkInput struct {
 
 type GetAssessmentFrameworkOutput struct {
 
-	// The framework that the GetAssessmentFramework API returned.
+	//  The framework that the GetAssessmentFramework API returned.
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.

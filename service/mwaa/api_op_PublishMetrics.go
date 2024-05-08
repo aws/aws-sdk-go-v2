@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Internal only. Publishes environment health metrics to Amazon CloudWatch.
+//	Internal only. Publishes environment health metrics to Amazon CloudWatch.
 //
 // Deprecated: This API is for internal use and not meant for public use, and is
 // no longer available.
@@ -32,15 +32,15 @@ func (c *Client) PublishMetrics(ctx context.Context, params *PublishMetricsInput
 
 type PublishMetricsInput struct {
 
-	// Internal only. The name of the environment.
+	//  Internal only. The name of the environment.
 	//
 	// This member is required.
 	EnvironmentName *string
 
-	// Internal only. Publishes metrics to Amazon CloudWatch. To learn more about the
-	// metrics published to Amazon CloudWatch, see Amazon MWAA performance metrics in
-	// Amazon CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html)
-	// .
+	//  Internal only. Publishes metrics to Amazon CloudWatch. To learn more about the
+	// metrics published to Amazon CloudWatch, see [Amazon MWAA performance metrics in Amazon CloudWatch].
+	//
+	// [Amazon MWAA performance metrics in Amazon CloudWatch]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
 	//
 	// This member is required.
 	//

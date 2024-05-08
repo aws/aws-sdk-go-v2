@@ -35,8 +35,10 @@ type ListEnvironmentTemplateVersionsInput struct {
 	TemplateName *string
 
 	// To view a list of minor of versions under a major version of an environment
-	// template, include major Version . To view a list of major versions of an
-	// environment template, exclude major Version .
+	// template, include major Version .
+	//
+	// To view a list of major versions of an environment template, exclude major
+	// Version .
 	MajorVersion *string
 
 	// The maximum number of major or minor versions of an environment template to

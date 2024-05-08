@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a backend environment for an Amplify app. This API is available only to
-// Amplify Gen 1 applications where the backend was created using Amplify Studio or
-// the Amplify command line interface (CLI). This API isn’t available to
-// applications created using the Amplify Gen 2 public preview. When you deploy an
-// application with Amplify Gen 2, you provision the app's backend infrastructure
-// using Typescript code.
+// Deletes a backend environment for an Amplify app.
+//
+// This API is available only to Amplify Gen 1 applications where the backend was
+// created using Amplify Studio or the Amplify command line interface (CLI). This
+// API isn’t available to applications created using the Amplify Gen 2 public
+// preview. When you deploy an application with Amplify Gen 2, you provision the
+// app's backend infrastructure using Typescript code.
 func (c *Client) DeleteBackendEnvironment(ctx context.Context, params *DeleteBackendEnvironmentInput, optFns ...func(*Options)) (*DeleteBackendEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteBackendEnvironmentInput{}

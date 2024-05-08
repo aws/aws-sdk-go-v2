@@ -31,15 +31,19 @@ func (c *Client) GetUsageForecast(ctx context.Context, params *GetUsageForecastI
 type GetUsageForecastInput struct {
 
 	// How granular you want the forecast to be. You can get 3 months of DAILY
-	// forecasts or 12 months of MONTHLY forecasts. The GetUsageForecast operation
-	// supports only DAILY and MONTHLY granularities.
+	// forecasts or 12 months of MONTHLY forecasts.
+	//
+	// The GetUsageForecast operation supports only DAILY and MONTHLY granularities.
 	//
 	// This member is required.
 	Granularity types.Granularity
 
-	// Which metric Cost Explorer uses to create your forecast. Valid values for a
-	// GetUsageForecast call are the following:
+	// Which metric Cost Explorer uses to create your forecast.
+	//
+	// Valid values for a GetUsageForecast call are the following:
+	//
 	//   - USAGE_QUANTITY
+	//
 	//   - NORMALIZED_USAGE_AMOUNT
 	//
 	// This member is required.
@@ -57,28 +61,51 @@ type GetUsageForecastInput struct {
 
 	// The filters that you want to use to filter your forecast. The GetUsageForecast
 	// API supports filtering by the following dimensions:
+	//
 	//   - AZ
+	//
 	//   - INSTANCE_TYPE
+	//
 	//   - LINKED_ACCOUNT
+	//
 	//   - LINKED_ACCOUNT_NAME
+	//
 	//   - OPERATION
+	//
 	//   - PURCHASE_TYPE
+	//
 	//   - REGION
+	//
 	//   - SERVICE
+	//
 	//   - USAGE_TYPE
+	//
 	//   - USAGE_TYPE_GROUP
+	//
 	//   - RECORD_TYPE
+	//
 	//   - OPERATING_SYSTEM
+	//
 	//   - TENANCY
+	//
 	//   - SCOPE
+	//
 	//   - PLATFORM
+	//
 	//   - SUBSCRIPTION_ID
+	//
 	//   - LEGAL_ENTITY_NAME
+	//
 	//   - DEPLOYMENT_OPTION
+	//
 	//   - DATABASE_ENGINE
+	//
 	//   - INSTANCE_TYPE_FAMILY
+	//
 	//   - BILLING_ENTITY
+	//
 	//   - RESERVATION_ID
+	//
 	//   - SAVINGS_PLAN_ARN
 	Filter *types.Expression
 

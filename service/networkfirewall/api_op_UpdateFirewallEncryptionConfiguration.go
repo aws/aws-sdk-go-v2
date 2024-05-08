@@ -34,9 +34,10 @@ type UpdateFirewallEncryptionConfigurationInput struct {
 	// is encrypted by default with an Amazon Web Services owned key that Amazon Web
 	// Services owns and manages for you. You can use either the Amazon Web Services
 	// owned key, or provide your own customer managed key. To learn more about KMS
-	// encryption of your Network Firewall resources, see Encryption at rest with
-	// Amazon Web Services Key Managment Service (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
-	// in the Network Firewall Developer Guide.
+	// encryption of your Network Firewall resources, see [Encryption at rest with Amazon Web Services Key Managment Service]in the Network Firewall
+	// Developer Guide.
+	//
+	// [Encryption at rest with Amazon Web Services Key Managment Service]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -48,14 +49,16 @@ type UpdateFirewallEncryptionConfigurationInput struct {
 
 	// An optional token that you can use for optimistic locking. Network Firewall
 	// returns a token to your requests that access the firewall. The token marks the
-	// state of the firewall resource at the time of the request. To make an
-	// unconditional change to the firewall, omit the token in your update request.
-	// Without the token, Network Firewall performs your updates regardless of whether
-	// the firewall has changed since you last retrieved it. To make a conditional
-	// change to the firewall, provide the token in your update request. Network
-	// Firewall uses the token to ensure that the firewall hasn't changed since you
-	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException . If this happens, retrieve the firewall again to get a
+	// state of the firewall resource at the time of the request.
+	//
+	// To make an unconditional change to the firewall, omit the token in your update
+	// request. Without the token, Network Firewall performs your updates regardless of
+	// whether the firewall has changed since you last retrieved it.
+	//
+	// To make a conditional change to the firewall, provide the token in your update
+	// request. Network Firewall uses the token to ensure that the firewall hasn't
+	// changed since you last retrieved it. If it has changed, the operation fails with
+	// an InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
@@ -70,9 +73,10 @@ type UpdateFirewallEncryptionConfigurationOutput struct {
 	// is encrypted by default with an Amazon Web Services owned key that Amazon Web
 	// Services owns and manages for you. You can use either the Amazon Web Services
 	// owned key, or provide your own customer managed key. To learn more about KMS
-	// encryption of your Network Firewall resources, see Encryption at rest with
-	// Amazon Web Services Key Managment Service (https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html)
-	// in the Network Firewall Developer Guide.
+	// encryption of your Network Firewall resources, see [Encryption at rest with Amazon Web Services Key Managment Service]in the Network Firewall
+	// Developer Guide.
+	//
+	// [Encryption at rest with Amazon Web Services Key Managment Service]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -84,14 +88,16 @@ type UpdateFirewallEncryptionConfigurationOutput struct {
 
 	// An optional token that you can use for optimistic locking. Network Firewall
 	// returns a token to your requests that access the firewall. The token marks the
-	// state of the firewall resource at the time of the request. To make an
-	// unconditional change to the firewall, omit the token in your update request.
-	// Without the token, Network Firewall performs your updates regardless of whether
-	// the firewall has changed since you last retrieved it. To make a conditional
-	// change to the firewall, provide the token in your update request. Network
-	// Firewall uses the token to ensure that the firewall hasn't changed since you
-	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException . If this happens, retrieve the firewall again to get a
+	// state of the firewall resource at the time of the request.
+	//
+	// To make an unconditional change to the firewall, omit the token in your update
+	// request. Without the token, Network Firewall performs your updates regardless of
+	// whether the firewall has changed since you last retrieved it.
+	//
+	// To make a conditional change to the firewall, provide the token in your update
+	// request. Network Firewall uses the token to ensure that the firewall hasn't
+	// changed since you last retrieved it. If it has changed, the operation fails with
+	// an InvalidTokenException . If this happens, retrieve the firewall again to get a
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string

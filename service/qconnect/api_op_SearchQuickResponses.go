@@ -41,8 +41,9 @@ type SearchQuickResponsesInput struct {
 	// This member is required.
 	SearchExpression *types.QuickResponseSearchExpression
 
-	// The user-defined Amazon Connect contact attributes (https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes)
-	// to be resolved when search results are returned.
+	// The [user-defined Amazon Connect contact attributes] to be resolved when search results are returned.
+	//
+	// [user-defined Amazon Connect contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes
 	Attributes map[string]string
 
 	// The maximum number of results to return per page.

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified instance profile using the provided parameters. All
-// migration projects associated with the instance profile must be deleted or
+// Modifies the specified instance profile using the provided parameters.
+//
+// All migration projects associated with the instance profile must be deleted or
 // modified before you can modify the instance profile.
 func (c *Client) ModifyInstanceProfile(ctx context.Context, params *ModifyInstanceProfileInput, optFns ...func(*Options)) (*ModifyInstanceProfileOutput, error) {
 	if params == nil {
@@ -48,11 +49,14 @@ type ModifyInstanceProfileInput struct {
 	InstanceProfileName *string
 
 	// The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the
-	// connection parameters for the instance profile. If you don't specify a value for
-	// the KmsKeyArn parameter, then DMS uses your default encryption key. KMS creates
-	// the default encryption key for your Amazon Web Services account. Your Amazon Web
-	// Services account has a different default encryption key for each Amazon Web
-	// Services Region.
+	// connection parameters for the instance profile.
+	//
+	// If you don't specify a value for the KmsKeyArn parameter, then DMS uses your
+	// default encryption key.
+	//
+	// KMS creates the default encryption key for your Amazon Web Services account.
+	// Your Amazon Web Services account has a different default encryption key for each
+	// Amazon Web Services Region.
 	KmsKeyArn *string
 
 	// Specifies the network type for the instance profile. A value of IPV4 represents

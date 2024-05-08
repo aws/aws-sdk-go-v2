@@ -12,19 +12,29 @@ import (
 )
 
 // Retrieves information on a fleet's remote locations, including life-cycle
-// status and any suspended fleet activity. This operation can be used in the
-// following ways:
+// status and any suspended fleet activity.
+//
+// This operation can be used in the following ways:
+//
 //   - To get data for specific locations, provide a fleet identifier and a list
 //     of locations. Location data is returned in the order that it is requested.
+//
 //   - To get data for all locations, provide a fleet identifier only. Location
 //     data is returned in no particular order.
 //
 // When requesting attributes for multiple locations, use the pagination
-// parameters to retrieve results as a set of sequential pages. If successful, a
-// LocationAttributes object is returned for each requested location. If the fleet
-// does not have a requested location, no information is returned. This operation
-// does not return the home Region. To get information on a fleet's home Region,
-// call DescribeFleetAttributes . Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// parameters to retrieve results as a set of sequential pages.
+//
+// If successful, a LocationAttributes object is returned for each requested
+// location. If the fleet does not have a requested location, no information is
+// returned. This operation does not return the home Region. To get information on
+// a fleet's home Region, call DescribeFleetAttributes .
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DescribeFleetLocationAttributes(ctx context.Context, params *DescribeFleetLocationAttributesInput, optFns ...func(*Options)) (*DescribeFleetLocationAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetLocationAttributesInput{}
@@ -66,16 +76,17 @@ type DescribeFleetLocationAttributesInput struct {
 
 type DescribeFleetLocationAttributesOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that location attributes were requested for.
 	FleetId *string
 
-	// Location-specific information on the requested fleet's remote locations.
+	//  Location-specific information on the requested fleet's remote locations.
 	LocationAttributes []types.LocationAttributes
 
 	// A token that indicates where to resume retrieving results on the next call to

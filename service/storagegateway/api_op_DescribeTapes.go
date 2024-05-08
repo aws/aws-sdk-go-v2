@@ -14,12 +14,13 @@ import (
 // Returns a description of virtual tapes that correspond to the specified Amazon
 // Resource Names (ARNs). If TapeARN is not specified, returns a description of
 // the virtual tapes associated with the specified gateway. This operation is only
-// supported for the tape gateway type. The operation supports pagination. By
-// default, the operation returns a maximum of up to 100 tapes. You can optionally
-// specify the Limit field in the body to limit the number of tapes in the
-// response. If the number of tapes returned in the response is truncated, the
-// response includes a Marker field. You can use this Marker value in your
-// subsequent request to retrieve the next set of tapes.
+// supported for the tape gateway type.
+//
+// The operation supports pagination. By default, the operation returns a maximum
+// of up to 100 tapes. You can optionally specify the Limit field in the body to
+// limit the number of tapes in the response. If the number of tapes returned in
+// the response is truncated, the response includes a Marker field. You can use
+// this Marker value in your subsequent request to retrieve the next set of tapes.
 func (c *Client) DescribeTapes(ctx context.Context, params *DescribeTapesInput, optFns ...func(*Options)) (*DescribeTapesOutput, error) {
 	if params == nil {
 		params = &DescribeTapesInput{}
@@ -38,20 +39,22 @@ func (c *Client) DescribeTapes(ctx context.Context, params *DescribeTapesInput, 
 // DescribeTapesInput
 type DescribeTapesInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
 	// Specifies that the number of virtual tapes described be limited to the
-	// specified number. Amazon Web Services may impose its own limit, if this field is
-	// not set.
+	// specified number.
+	//
+	// Amazon Web Services may impose its own limit, if this field is not set.
 	Limit *int32
 
 	// A marker value, obtained in a previous call to DescribeTapes . This marker
-	// indicates which page of results to retrieve. If not specified, the first page of
-	// results is retrieved.
+	// indicates which page of results to retrieve.
+	//
+	// If not specified, the first page of results is retrieved.
 	Marker *string
 
 	// Specifies one or more unique Amazon Resource Names (ARNs) that represent the
@@ -67,8 +70,10 @@ type DescribeTapesInput struct {
 type DescribeTapesOutput struct {
 
 	// An opaque string that can be used as part of a subsequent DescribeTapes call to
-	// retrieve the next page of results. If a response does not contain a marker, then
-	// there are no more results to be retrieved.
+	// retrieve the next page of results.
+	//
+	// If a response does not contain a marker, then there are no more results to be
+	// retrieved.
 	Marker *string
 
 	// An array of virtual tape descriptions.
@@ -169,8 +174,9 @@ var _ DescribeTapesAPIClient = (*Client)(nil)
 // DescribeTapesPaginatorOptions is the paginator options for DescribeTapes
 type DescribeTapesPaginatorOptions struct {
 	// Specifies that the number of virtual tapes described be limited to the
-	// specified number. Amazon Web Services may impose its own limit, if this field is
-	// not set.
+	// specified number.
+	//
+	// Amazon Web Services may impose its own limit, if this field is not set.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

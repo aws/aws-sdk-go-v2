@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for analyses that belong to the user specified in the filter. This
-// operation is eventually consistent. The results are best effort and may not
-// reflect very recent updates and changes.
+// Searches for analyses that belong to the user specified in the filter.
+//
+// This operation is eventually consistent. The results are best effort and may
+// not reflect very recent updates and changes.
 func (c *Client) SearchAnalyses(ctx context.Context, params *SearchAnalysesInput, optFns ...func(*Options)) (*SearchAnalysesOutput, error) {
 	if params == nil {
 		params = &SearchAnalysesInput{}

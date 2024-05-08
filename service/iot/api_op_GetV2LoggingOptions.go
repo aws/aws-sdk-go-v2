@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the fine grained logging options. Requires permission to access the
-// GetV2LoggingOptions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets the fine grained logging options.
+//
+// Requires permission to access the [GetV2LoggingOptions] action.
+//
+// [GetV2LoggingOptions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetV2LoggingOptions(ctx context.Context, params *GetV2LoggingOptionsInput, optFns ...func(*Options)) (*GetV2LoggingOptionsOutput, error) {
 	if params == nil {
 		params = &GetV2LoggingOptionsInput{}

@@ -11,8 +11,9 @@ const (
 
 // Values returns all known values for AccessDeniedForDependencyExceptionReason.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessDeniedForDependencyExceptionReason) Values() []AccessDeniedForDependencyExceptionReason {
 	return []AccessDeniedForDependencyExceptionReason{
 		"ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for AccountJoinedMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountJoinedMethod) Values() []AccountJoinedMethod {
 	return []AccountJoinedMethod{
 		"INVITED",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for AccountStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountStatus) Values() []AccountStatus {
 	return []AccountStatus{
 		"ACTIVE",
@@ -68,8 +71,9 @@ const (
 )
 
 // Values returns all known values for ActionType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionType) Values() []ActionType {
 	return []ActionType{
 		"INVITE",
@@ -88,8 +92,9 @@ const (
 )
 
 // Values returns all known values for ChildType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChildType) Values() []ChildType {
 	return []ChildType{
 		"ACCOUNT",
@@ -139,8 +144,9 @@ const (
 
 // Values returns all known values for ConstraintViolationExceptionReason. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConstraintViolationExceptionReason) Values() []ConstraintViolationExceptionReason {
 	return []ConstraintViolationExceptionReason{
 		"ACCOUNT_NUMBER_LIMIT_EXCEEDED",
@@ -203,6 +209,7 @@ const (
 
 // Values returns all known values for CreateAccountFailureReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CreateAccountFailureReason) Values() []CreateAccountFailureReason {
 	return []CreateAccountFailureReason{
@@ -234,8 +241,9 @@ const (
 )
 
 // Values returns all known values for CreateAccountState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CreateAccountState) Values() []CreateAccountState {
 	return []CreateAccountState{
 		"IN_PROGRESS",
@@ -254,8 +262,9 @@ const (
 )
 
 // Values returns all known values for EffectivePolicyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EffectivePolicyType) Values() []EffectivePolicyType {
 	return []EffectivePolicyType{
 		"TAG_POLICY",
@@ -282,8 +291,9 @@ const (
 
 // Values returns all known values for
 // HandshakeConstraintViolationExceptionReason. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HandshakeConstraintViolationExceptionReason) Values() []HandshakeConstraintViolationExceptionReason {
 	return []HandshakeConstraintViolationExceptionReason{
 		"ACCOUNT_NUMBER_LIMIT_EXCEEDED",
@@ -309,8 +319,9 @@ const (
 )
 
 // Values returns all known values for HandshakePartyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HandshakePartyType) Values() []HandshakePartyType {
 	return []HandshakePartyType{
 		"ACCOUNT",
@@ -334,8 +345,9 @@ const (
 )
 
 // Values returns all known values for HandshakeResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HandshakeResourceType) Values() []HandshakeResourceType {
 	return []HandshakeResourceType{
 		"ACCOUNT",
@@ -362,8 +374,9 @@ const (
 )
 
 // Values returns all known values for HandshakeState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HandshakeState) Values() []HandshakeState {
 	return []HandshakeState{
 		"REQUESTED",
@@ -384,8 +397,9 @@ const (
 )
 
 // Values returns all known values for IAMUserAccessToBilling. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IAMUserAccessToBilling) Values() []IAMUserAccessToBilling {
 	return []IAMUserAccessToBilling{
 		"ALLOW",
@@ -429,6 +443,7 @@ const (
 
 // Values returns all known values for InvalidInputExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InvalidInputExceptionReason) Values() []InvalidInputExceptionReason {
 	return []InvalidInputExceptionReason{
@@ -472,8 +487,9 @@ const (
 )
 
 // Values returns all known values for OrganizationFeatureSet. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrganizationFeatureSet) Values() []OrganizationFeatureSet {
 	return []OrganizationFeatureSet{
 		"ALL",
@@ -490,8 +506,9 @@ const (
 )
 
 // Values returns all known values for ParentType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParentType) Values() []ParentType {
 	return []ParentType{
 		"ROOT",
@@ -510,8 +527,9 @@ const (
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"SERVICE_CONTROL_POLICY",
@@ -531,8 +549,9 @@ const (
 )
 
 // Values returns all known values for PolicyTypeStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyTypeStatus) Values() []PolicyTypeStatus {
 	return []PolicyTypeStatus{
 		"ENABLED",
@@ -551,8 +570,9 @@ const (
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"ACCOUNT",

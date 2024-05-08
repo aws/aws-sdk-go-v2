@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the Config used when scheduling contacts. Updating a Config will not
-// update the execution parameters for existing future contacts scheduled with this
-// Config .
+// Updates the Config used when scheduling contacts.
+//
+// Updating a Config will not update the execution parameters for existing future
+// contacts scheduled with this Config .
 func (c *Client) UpdateConfig(ctx context.Context, params *UpdateConfigInput, optFns ...func(*Options)) (*UpdateConfigOutput, error) {
 	if params == nil {
 		params = &UpdateConfigInput{}

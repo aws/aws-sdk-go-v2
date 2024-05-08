@@ -81,8 +81,11 @@ type DescribeProjectOutput struct {
 	Sample *types.Sample
 
 	// Describes the current state of the session:
+	//
 	//   - PROVISIONING - allocating resources for the session.
+	//
 	//   - INITIALIZING - getting the session ready for first use.
+	//
 	//   - ASSIGNED - the session is ready for use.
 	SessionStatus types.SessionStatus
 

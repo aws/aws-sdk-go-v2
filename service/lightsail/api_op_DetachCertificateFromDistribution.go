@@ -12,9 +12,10 @@ import (
 )
 
 // Detaches an SSL/TLS certificate from your Amazon Lightsail content delivery
-// network (CDN) distribution. After the certificate is detached, your distribution
-// stops accepting traffic for all of the domains that are associated with the
-// certificate.
+// network (CDN) distribution.
+//
+// After the certificate is detached, your distribution stops accepting traffic
+// for all of the domains that are associated with the certificate.
 func (c *Client) DetachCertificateFromDistribution(ctx context.Context, params *DetachCertificateFromDistributionInput, optFns ...func(*Options)) (*DetachCertificateFromDistributionOutput, error) {
 	if params == nil {
 		params = &DetachCertificateFromDistributionInput{}
@@ -32,8 +33,10 @@ func (c *Client) DetachCertificateFromDistribution(ctx context.Context, params *
 
 type DetachCertificateFromDistributionInput struct {
 
-	// The name of the distribution from which to detach the certificate. Use the
-	// GetDistributions action to get a list of distribution names that you can specify.
+	// The name of the distribution from which to detach the certificate.
+	//
+	// Use the GetDistributions action to get a list of distribution names that you
+	// can specify.
 	//
 	// This member is required.
 	DistributionName *string

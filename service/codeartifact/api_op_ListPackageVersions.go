@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of PackageVersionSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
-// objects for package versions in a repository that match the request parameters.
-// Package versions of all statuses will be returned by default when calling
-// list-package-versions with no --status parameter.
+//	Returns a list of [PackageVersionSummary] objects for package versions in a repository that match the
+//
+// request parameters. Package versions of all statuses will be returned by default
+// when calling list-package-versions with no --status parameter.
+//
+// [PackageVersionSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html
 func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVersionsInput, optFns ...func(*Options)) (*ListPackageVersionsOutput, error) {
 	if params == nil {
 		params = &ListPackageVersionsInput{}
@@ -32,50 +34,57 @@ func (c *Client) ListPackageVersions(ctx context.Context, params *ListPackageVer
 
 type ListPackageVersionsInput struct {
 
-	// The name of the domain that contains the repository that contains the requested
-	// package versions.
+	//  The name of the domain that contains the repository that contains the
+	// requested package versions.
 	//
 	// This member is required.
 	Domain *string
 
-	// The format of the package versions you want to list.
+	//  The format of the package versions you want to list.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package for which you want to request package versions.
+	//  The name of the package for which you want to request package versions.
 	//
 	// This member is required.
 	Package *string
 
-	// The name of the repository that contains the requested package versions.
+	//  The name of the repository that contains the requested package versions.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
 	// The namespace of the package that contains the requested package versions. The
 	// package component that specifies its namespace depends on its type. For example:
+	//
 	// The namespace is required when deleting package versions of the following
 	// formats:
+	//
 	//   - Maven
+	//
 	//   - Swift
+	//
 	//   - generic
 	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -83,10 +92,10 @@ type ListPackageVersionsInput struct {
 	// provided originType will be returned.
 	OriginType types.PackageVersionOriginType
 
-	// How to sort the requested list of package versions.
+	//  How to sort the requested list of package versions.
 	SortBy types.PackageVersionSortType
 
-	// A string that filters the requested package versions by status.
+	//  A string that filters the requested package versions by status.
 	Status types.PackageVersionStatus
 
 	noSmithyDocumentSerde
@@ -94,34 +103,41 @@ type ListPackageVersionsInput struct {
 
 type ListPackageVersionsOutput struct {
 
-	// The default package version to display. This depends on the package format:
+	//  The default package version to display. This depends on the package format:
+	//
 	//   - For Maven and PyPI packages, it's the most recently published package
 	//   version.
+	//
 	//   - For npm packages, it's the version referenced by the latest tag. If the
 	//   latest tag is not set, it's the most recently published package version.
 	DefaultDisplayVersion *string
 
-	// A format of the package.
+	//  A format of the package.
 	Format types.PackageFormat
 
 	// The namespace of the package that contains the requested package versions. The
 	// package component that specifies its namespace depends on its type. For example:
 	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// If there are additional results, this is the token for the next set of results.
+	//  If there are additional results, this is the token for the next set of
+	// results.
 	NextToken *string
 
-	// The name of the package.
+	//  The name of the package.
 	Package *string
 
-	// The returned list of PackageVersionSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html)
-	// objects.
+	//  The returned list of [PackageVersionSummary] objects.
+	//
+	// [PackageVersionSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html
 	Versions []types.PackageVersionSummary
 
 	// Metadata pertaining to the operation's result.
@@ -220,7 +236,7 @@ var _ ListPackageVersionsAPIClient = (*Client)(nil)
 // ListPackageVersionsPaginatorOptions is the paginator options for
 // ListPackageVersions
 type ListPackageVersionsPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

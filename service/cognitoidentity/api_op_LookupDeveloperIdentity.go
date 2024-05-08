@@ -18,12 +18,14 @@ import (
 // DeveloperUserIdentifier will be matched against IdentityID . If the values are
 // verified against the database, the response returns both values and is the same
 // as the request. Otherwise a ResourceConflictException is thrown.
-// LookupDeveloperIdentity is intended for low-throughput control plane operations:
-// for example, to enable customer service to locate an identity ID by username. If
-// you are using it for higher-volume operations such as user authentication, your
-// requests are likely to be throttled. GetOpenIdTokenForDeveloperIdentity is a
-// better option for higher-volume operations for user authentication. You must use
-// AWS Developer credentials to call this API.
+//
+// LookupDeveloperIdentity is intended for low-throughput control plane
+// operations: for example, to enable customer service to locate an identity ID by
+// username. If you are using it for higher-volume operations such as user
+// authentication, your requests are likely to be throttled. GetOpenIdTokenForDeveloperIdentityis a better option
+// for higher-volume operations for user authentication.
+//
+// You must use AWS Developer credentials to call this API.
 func (c *Client) LookupDeveloperIdentity(ctx context.Context, params *LookupDeveloperIdentityInput, optFns ...func(*Options)) (*LookupDeveloperIdentityOutput, error) {
 	if params == nil {
 		params = &LookupDeveloperIdentityInput{}

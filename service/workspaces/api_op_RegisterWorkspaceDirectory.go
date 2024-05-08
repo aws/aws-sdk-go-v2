@@ -14,9 +14,9 @@ import (
 // Registers the specified directory. This operation is asynchronous and returns
 // before the WorkSpace directory is registered. If this is the first time you are
 // registering a directory, you will need to create the workspaces_DefaultRole role
-// before you can register a directory. For more information, see Creating the
-// workspaces_DefaultRole Role (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role)
-// .
+// before you can register a directory. For more information, see [Creating the workspaces_DefaultRole Role].
+//
+// [Creating the workspaces_DefaultRole Role]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role
 func (c *Client) RegisterWorkspaceDirectory(ctx context.Context, params *RegisterWorkspaceDirectoryInput, optFns ...func(*Options)) (*RegisterWorkspaceDirectoryOutput, error) {
 	if params == nil {
 		params = &RegisterWorkspaceDirectoryInput{}
@@ -68,9 +68,9 @@ type RegisterWorkspaceDirectoryInput struct {
 	// Your Own License (BYOL) images, this value must be set to DEDICATED and your
 	// Amazon Web Services account must be enabled for BYOL. If your account has not
 	// been enabled for BYOL, you will receive an InvalidParameterValuesException
-	// error. For more information about BYOL images, see Bring Your Own Windows
-	// Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html)
-	// .
+	// error. For more information about BYOL images, see [Bring Your Own Windows Desktop Images].
+	//
+	// [Bring Your Own Windows Desktop Images]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
 	Tenancy types.Tenancy
 
 	noSmithyDocumentSerde

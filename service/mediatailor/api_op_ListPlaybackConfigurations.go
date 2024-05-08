@@ -12,8 +12,9 @@ import (
 )
 
 // Retrieves existing playback configurations. For information about MediaTailor
-// configurations, see Working with Configurations in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html)
-// .
+// configurations, see [Working with Configurations in AWS Elemental MediaTailor].
+//
+// [Working with Configurations in AWS Elemental MediaTailor]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
 func (c *Client) ListPlaybackConfigurations(ctx context.Context, params *ListPlaybackConfigurationsInput, optFns ...func(*Options)) (*ListPlaybackConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListPlaybackConfigurationsInput{}

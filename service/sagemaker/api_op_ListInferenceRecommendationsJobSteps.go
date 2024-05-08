@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the subtasks for an Inference Recommender job. The supported
-// subtasks are benchmarks, which evaluate the performance of your model on
-// different instance types.
+// Returns a list of the subtasks for an Inference Recommender job.
+//
+// The supported subtasks are benchmarks, which evaluate the performance of your
+// model on different instance types.
 func (c *Client) ListInferenceRecommendationsJobSteps(ctx context.Context, params *ListInferenceRecommendationsJobStepsInput, optFns ...func(*Options)) (*ListInferenceRecommendationsJobStepsOutput, error) {
 	if params == nil {
 		params = &ListInferenceRecommendationsJobStepsInput{}
@@ -47,8 +48,9 @@ type ListInferenceRecommendationsJobStepsInput struct {
 	// empty, then all benchmarks are returned.
 	Status types.RecommendationJobStatus
 
-	// A filter to return details about the specified type of subtask. BENCHMARK :
-	// Evaluate the performance of your model on different instance types.
+	// A filter to return details about the specified type of subtask.
+	//
+	// BENCHMARK : Evaluate the performance of your model on different instance types.
 	StepType types.RecommendationStepType
 
 	noSmithyDocumentSerde

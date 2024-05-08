@@ -28,8 +28,7 @@ func (c *Client) PutRegistrationFieldValue(ctx context.Context, params *PutRegis
 
 type PutRegistrationFieldValueInput struct {
 
-	// The path to the registration form field. You can use
-	// DescribeRegistrationFieldDefinitions for a list of FieldPaths.
+	// The path to the registration form field. You can use DescribeRegistrationFieldDefinitions for a list of FieldPaths.
 	//
 	// This member is required.
 	FieldPath *string
@@ -53,8 +52,7 @@ type PutRegistrationFieldValueInput struct {
 
 type PutRegistrationFieldValueOutput struct {
 
-	// The path to the registration form field. You can use
-	// DescribeRegistrationFieldDefinitions for a list of FieldPaths.
+	// The path to the registration form field. You can use DescribeRegistrationFieldDefinitions for a list of FieldPaths.
 	//
 	// This member is required.
 	FieldPath *string

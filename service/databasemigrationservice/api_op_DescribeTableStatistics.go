@@ -12,10 +12,11 @@ import (
 )
 
 // Returns table statistics on the database migration task, including table name,
-// rows inserted, rows updated, and rows deleted. Note that the "last updated"
-// column the DMS console only indicates the time that DMS last updated the table
-// statistics record for a table. It does not indicate the time of the last update
-// to the table.
+// rows inserted, rows updated, and rows deleted.
+//
+// Note that the "last updated" column the DMS console only indicates the time
+// that DMS last updated the table statistics record for a table. It does not
+// indicate the time of the last update to the table.
 func (c *Client) DescribeTableStatistics(ctx context.Context, params *DescribeTableStatisticsInput, optFns ...func(*Options)) (*DescribeTableStatisticsOutput, error) {
 	if params == nil {
 		params = &DescribeTableStatisticsInput{}
@@ -38,20 +39,26 @@ type DescribeTableStatisticsInput struct {
 	// This member is required.
 	ReplicationTaskArn *string
 
-	// Filters applied to table statistics. Valid filter names: schema-name |
-	// table-name | table-state A combination of filters creates an AND condition where
-	// each record matches all specified filters.
+	// Filters applied to table statistics.
+	//
+	// Valid filter names: schema-name | table-name | table-state
+	//
+	// A combination of filters creates an AND condition where each record matches all
+	// specified filters.
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 500.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 500.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -59,7 +66,7 @@ type DescribeTableStatisticsInput struct {
 
 type DescribeTableStatisticsOutput struct {
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
@@ -166,10 +173,13 @@ var _ DescribeTableStatisticsAPIClient = (*Client)(nil)
 // DescribeTableStatisticsPaginatorOptions is the paginator options for
 // DescribeTableStatistics
 type DescribeTableStatisticsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 500.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

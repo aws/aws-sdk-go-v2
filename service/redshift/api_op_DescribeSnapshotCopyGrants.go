@@ -12,9 +12,12 @@ import (
 )
 
 // Returns a list of snapshot copy grants owned by the Amazon Web Services account
-// in the destination region. For more information about managing snapshot copy
-// grants, go to Amazon Redshift Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
-// in the Amazon Redshift Cluster Management Guide.
+// in the destination region.
+//
+// For more information about managing snapshot copy grants, go to [Amazon Redshift Database Encryption] in the Amazon
+// Redshift Cluster Management Guide.
+//
+// [Amazon Redshift Database Encryption]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
 func (c *Client) DescribeSnapshotCopyGrants(ctx context.Context, params *DescribeSnapshotCopyGrantsInput, optFns ...func(*Options)) (*DescribeSnapshotCopyGrantsOutput, error) {
 	if params == nil {
 		params = &DescribeSnapshotCopyGrantsInput{}
@@ -38,14 +41,19 @@ type DescribeSnapshotCopyGrantsInput struct {
 	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
 	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request. Constraints: You can specify either the
-	// SnapshotCopyGrantName parameter or the Marker parameter, but not both.
+	// retrying the request.
+	//
+	// Constraints: You can specify either the SnapshotCopyGrantName parameter or the
+	// Marker parameter, but not both.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -76,8 +84,10 @@ type DescribeSnapshotCopyGrantsOutput struct {
 	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
 	// in the Marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request. Constraints: You can specify either the
-	// SnapshotCopyGrantName parameter or the Marker parameter, but not both.
+	// retrying the request.
+	//
+	// Constraints: You can specify either the SnapshotCopyGrantName parameter or the
+	// Marker parameter, but not both.
 	Marker *string
 
 	// The list of SnapshotCopyGrant objects.
@@ -179,7 +189,10 @@ type DescribeSnapshotCopyGrantsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

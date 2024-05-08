@@ -12,12 +12,14 @@ import (
 )
 
 // Specify the time-based auto scaling configuration for a specified instance. For
-// more information, see Managing Load with Time-based and Load-based Instances (https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// more information, see [Managing Load with Time-based and Load-based Instances].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Managing Load with Time-based and Load-based Instances]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) SetTimeBasedAutoScaling(ctx context.Context, params *SetTimeBasedAutoScalingInput, optFns ...func(*Options)) (*SetTimeBasedAutoScalingOutput, error) {
 	if params == nil {
 		params = &SetTimeBasedAutoScalingInput{}

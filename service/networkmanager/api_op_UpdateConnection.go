@@ -43,8 +43,9 @@ type UpdateConnectionInput struct {
 	// The ID of the link for the second device in the connection.
 	ConnectedLinkId *string
 
-	// A description of the connection. Length Constraints: Maximum length of 256
-	// characters.
+	// A description of the connection.
+	//
+	// Length Constraints: Maximum length of 256 characters.
 	Description *string
 
 	// The ID of the link for the first device in the connection.

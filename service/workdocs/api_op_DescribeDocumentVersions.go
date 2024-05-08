@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the document versions for the specified document. By default, only
-// active versions are returned.
+// Retrieves the document versions for the specified document.
+//
+// By default, only active versions are returned.
 func (c *Client) DescribeDocumentVersions(ctx context.Context, params *DescribeDocumentVersionsInput, optFns ...func(*Options)) (*DescribeDocumentVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeDocumentVersionsInput{}

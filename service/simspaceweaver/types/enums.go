@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for ClockStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClockStatus) Values() []ClockStatus {
 	return []ClockStatus{
 		"UNKNOWN",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for ClockTargetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClockTargetStatus) Values() []ClockTargetStatus {
 	return []ClockTargetStatus{
 		"UNKNOWN",
@@ -58,6 +60,7 @@ const (
 
 // Values returns all known values for LifecycleManagementStrategy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecycleManagementStrategy) Values() []LifecycleManagementStrategy {
 	return []LifecycleManagementStrategy{
@@ -81,8 +84,9 @@ const (
 )
 
 // Values returns all known values for SimulationAppStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationAppStatus) Values() []SimulationAppStatus {
 	return []SimulationAppStatus{
 		"STARTING",
@@ -105,6 +109,7 @@ const (
 
 // Values returns all known values for SimulationAppTargetStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationAppTargetStatus) Values() []SimulationAppTargetStatus {
 	return []SimulationAppTargetStatus{
@@ -130,8 +135,9 @@ const (
 )
 
 // Values returns all known values for SimulationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationStatus) Values() []SimulationStatus {
 	return []SimulationStatus{
 		"UNKNOWN",
@@ -157,8 +163,9 @@ const (
 )
 
 // Values returns all known values for SimulationTargetStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SimulationTargetStatus) Values() []SimulationTargetStatus {
 	return []SimulationTargetStatus{
 		"UNKNOWN",

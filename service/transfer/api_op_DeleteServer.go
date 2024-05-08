@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the file transfer protocol-enabled server that you specify. No response
-// returns from this operation.
+// Deletes the file transfer protocol-enabled server that you specify.
+//
+// No response returns from this operation.
 func (c *Client) DeleteServer(ctx context.Context, params *DeleteServerInput, optFns ...func(*Options)) (*DeleteServerOutput, error) {
 	if params == nil {
 		params = &DeleteServerInput{}

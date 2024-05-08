@@ -12,52 +12,93 @@ import (
 )
 
 // Use this operation to update the configuration of an existing Amazon FSx file
-// system. You can update multiple properties in a single request. For FSx for
-// Windows File Server file systems, you can update the following properties:
+// system. You can update multiple properties in a single request.
+//
+// For FSx for Windows File Server file systems, you can update the following
+// properties:
+//
 //   - AuditLogConfiguration
+//
 //   - AutomaticBackupRetentionDays
+//
 //   - DailyAutomaticBackupStartTime
+//
 //   - SelfManagedActiveDirectoryConfiguration
+//
 //   - StorageCapacity
+//
 //   - StorageType
+//
 //   - ThroughputCapacity
+//
 //   - DiskIopsConfiguration
+//
 //   - WeeklyMaintenanceStartTime
 //
 // For FSx for Lustre file systems, you can update the following properties:
+//
 //   - AutoImportPolicy
+//
 //   - AutomaticBackupRetentionDays
+//
 //   - DailyAutomaticBackupStartTime
+//
 //   - DataCompressionType
+//
 //   - LogConfiguration
+//
 //   - LustreRootSquashConfiguration
+//
 //   - PerUnitStorageThroughput
+//
 //   - StorageCapacity
+//
 //   - WeeklyMaintenanceStartTime
 //
 // For FSx for ONTAP file systems, you can update the following properties:
+//
 //   - AddRouteTableIds
+//
 //   - AutomaticBackupRetentionDays
+//
 //   - DailyAutomaticBackupStartTime
+//
 //   - DiskIopsConfiguration
+//
 //   - FsxAdminPassword
+//
 //   - HAPairs
+//
 //   - RemoveRouteTableIds
+//
 //   - StorageCapacity
+//
 //   - ThroughputCapacity
+//
 //   - ThroughputCapacityPerHAPair
+//
 //   - WeeklyMaintenanceStartTime
 //
 // For FSx for OpenZFS file systems, you can update the following properties:
+//
 //   - AddRouteTableIds
+//
 //   - AutomaticBackupRetentionDays
+//
 //   - CopyTagsToBackups
+//
 //   - CopyTagsToVolumes
+//
 //   - DailyAutomaticBackupStartTime
+//
 //   - DiskIopsConfiguration
+//
 //   - RemoveRouteTableIds
+//
 //   - StorageCapacity
+//
 //   - ThroughputCapacity
+//
 //   - WeeklyMaintenanceStartTime
 func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemInput, optFns ...func(*Options)) (*UpdateFileSystemOutput, error) {
 	if params == nil {
@@ -100,32 +141,42 @@ type UpdateFileSystemInput struct {
 	// Use this parameter to increase the storage capacity of an FSx for Windows File
 	// Server, FSx for Lustre, FSx for OpenZFS, or FSx for ONTAP file system. Specifies
 	// the storage capacity target value, in GiB, to increase the storage capacity for
-	// the file system that you're updating. You can't make a storage capacity increase
-	// request if there is an existing storage capacity increase request in progress.
+	// the file system that you're updating.
+	//
+	// You can't make a storage capacity increase request if there is an existing
+	// storage capacity increase request in progress.
+	//
 	// For Lustre file systems, the storage capacity target value can be the following:
 	//
 	//   - For SCRATCH_2 , PERSISTENT_1 , and PERSISTENT_2 SSD deployment types, valid
 	//   values are in multiples of 2400 GiB. The value must be greater than the current
 	//   storage capacity.
+	//
 	//   - For PERSISTENT HDD file systems, valid values are multiples of 6000 GiB for
 	//   12-MBps throughput per TiB file systems and multiples of 1800 GiB for 40-MBps
 	//   throughput per TiB file systems. The values must be greater than the current
 	//   storage capacity.
+	//
 	//   - For SCRATCH_1 file systems, you can't increase the storage capacity.
-	// For more information, see Managing storage and throughput capacity (https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html)
-	// in the FSx for Lustre User Guide. For FSx for OpenZFS file systems, the storage
-	// capacity target value must be at least 10 percent greater than the current
-	// storage capacity value. For more information, see Managing storage capacity (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html)
-	// in the FSx for OpenZFS User Guide. For Windows file systems, the storage
-	// capacity target value must be at least 10 percent greater than the current
-	// storage capacity value. To increase storage capacity, the file system must have
-	// at least 16 MBps of throughput capacity. For more information, see Managing
-	// storage capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
-	// in the Amazon FSxfor Windows File Server User Guide. For ONTAP file systems, the
-	// storage capacity target value must be at least 10 percent greater than the
-	// current storage capacity value. For more information, see Managing storage
-	// capacity and provisioned IOPS (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html)
-	// in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// For more information, see [Managing storage and throughput capacity] in the FSx for Lustre User Guide.
+	//
+	// For FSx for OpenZFS file systems, the storage capacity target value must be at
+	// least 10 percent greater than the current storage capacity value. For more
+	// information, see [Managing storage capacity]in the FSx for OpenZFS User Guide.
+	//
+	// For Windows file systems, the storage capacity target value must be at least 10
+	// percent greater than the current storage capacity value. To increase storage
+	// capacity, the file system must have at least 16 MBps of throughput capacity. For
+	// more information, see [Managing storage capacity]in the Amazon FSxfor Windows File Server User Guide.
+	//
+	// For ONTAP file systems, the storage capacity target value must be at least 10
+	// percent greater than the current storage capacity value. For more information,
+	// see [Managing storage capacity and provisioned IOPS]in the Amazon FSx for NetApp ONTAP User Guide.
+	//
+	// [Managing storage and throughput capacity]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
+	// [Managing storage capacity]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
+	// [Managing storage capacity and provisioned IOPS]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
 	StorageCapacity *int32
 
 	// Specifies the file system's storage type.

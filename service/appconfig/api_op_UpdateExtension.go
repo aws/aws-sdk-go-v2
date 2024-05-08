@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an AppConfig extension. For more information about extensions, see
-// Extending workflows (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
-// in the AppConfig User Guide.
+// Updates an AppConfig extension. For more information about extensions, see [Extending workflows] in
+// the AppConfig User Guide.
+//
+// [Extending workflows]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
 func (c *Client) UpdateExtension(ctx context.Context, params *UpdateExtensionInput, optFns ...func(*Options)) (*UpdateExtensionOutput, error) {
 	if params == nil {
 		params = &UpdateExtensionInput{}

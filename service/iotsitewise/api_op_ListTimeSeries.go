@@ -34,8 +34,9 @@ type ListTimeSeriesInput struct {
 
 	// The ID of the asset in which the asset property was created. This can be either
 	// the actual ID in UUID format, or else externalId: followed by the external ID,
-	// if it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// if it has one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	AssetId *string
 
 	// The maximum number of results to return for each paginated request.
@@ -46,7 +47,9 @@ type ListTimeSeriesInput struct {
 
 	// The type of the time series. The time series type can be one of the following
 	// values:
+	//
 	//   - ASSOCIATED – The time series is associated with an asset property.
+	//
 	//   - DISASSOCIATED – The time series isn't associated with any asset property.
 	TimeSeriesType types.ListTimeSeriesType
 

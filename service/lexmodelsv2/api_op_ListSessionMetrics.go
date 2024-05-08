@@ -14,24 +14,29 @@ import (
 
 // Retrieves summary metrics for the user sessions with your bot. The following
 // fields are required:
-//   - metrics – A list of AnalyticsSessionMetric (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsSessionMetric.html)
-//     objects. In each object, use the name field to specify the metric to
-//     calculate, the statistic field to specify whether to calculate the Sum ,
-//     Average , or Max number, and the order field to specify whether to sort the
-//     results in Ascending or Descending order.
+//
+//   - metrics – A list of [AnalyticsSessionMetric]objects. In each object, use the name field to specify
+//     the metric to calculate, the statistic field to specify whether to calculate
+//     the Sum , Average , or Max number, and the order field to specify whether to
+//     sort the results in Ascending or Descending order.
+//
 //   - startDateTime and endDateTime – Define a time range for which you want to
 //     retrieve results.
 //
 // Of the optional fields, you can organize the results in the following ways:
+//
 //   - Use the filters field to filter the results, the groupBy field to specify
 //     categories by which to group the results, and the binBy field to specify time
 //     intervals by which to group the results.
+//
 //   - Use the maxResults field to limit the number of results to return in a
 //     single response and the nextToken field to return the next batch of results if
 //     the response does not return the full set of results.
 //
 // Note that an order field exists in both binBy and metrics . Currently, you can
 // specify it in either field, but not in both.
+//
+// [AnalyticsSessionMetric]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsSessionMetric.html
 func (c *Client) ListSessionMetrics(ctx context.Context, params *ListSessionMetricsInput, optFns ...func(*Options)) (*ListSessionMetricsOutput, error) {
 	if params == nil {
 		params = &ListSessionMetricsInput{}
@@ -83,10 +88,13 @@ type ListSessionMetricsInput struct {
 
 	// A list of objects, each of which specifies how to group the results. You can
 	// group by the following criteria:
+	//
 	//   - ConversationEndState – The final state of the conversation. The possible end
-	//   states are detailed in Key definitions (https://docs.aws.amazon.com/analytics-key-definitions-conversations)
-	//   in the user guide.
+	//   states are detailed in [Key definitions]in the user guide.
+	//
 	//   - LocaleId – The unique identifier of the bot locale.
+	//
+	// [Key definitions]: https://docs.aws.amazon.com/analytics-key-definitions-conversations
 	GroupBy []types.AnalyticsSessionGroupBySpecification
 
 	// The maximum number of results to return in each page of results. If there are
@@ -96,6 +104,7 @@ type ListSessionMetricsInput struct {
 
 	// If the response from the ListSessionMetrics operation contains more results
 	// than specified in the maxResults parameter, a token is returned in the response.
+	//
 	// Use the returned token in the nextToken parameter of a ListSessionMetrics
 	// request to return the next page of results. For a complete set of results, call
 	// the ListSessionMetrics operation until the nextToken returned in the response is
@@ -112,6 +121,7 @@ type ListSessionMetricsOutput struct {
 
 	// If the response from the ListSessionMetrics operation contains more results
 	// than specified in the maxResults parameter, a token is returned in the response.
+	//
 	// Use the returned token in the nextToken parameter of a ListSessionMetrics
 	// request to return the next page of results. For a complete set of results, call
 	// the ListSessionMetrics operation until the nextToken returned in the response is

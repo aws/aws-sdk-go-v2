@@ -29,8 +29,7 @@ func (c *Client) GetRecommendationReportDetails(ctx context.Context, params *Get
 
 type GetRecommendationReportDetailsInput struct {
 
-	// The recommendation report generation task id returned by
-	// StartRecommendationReportGeneration .
+	//  The recommendation report generation task id returned by StartRecommendationReportGeneration.
 	//
 	// This member is required.
 	Id *string
@@ -40,11 +39,10 @@ type GetRecommendationReportDetailsInput struct {
 
 type GetRecommendationReportDetailsOutput struct {
 
-	// The ID of the recommendation report generation task. See the response of
-	// StartRecommendationReportGeneration .
+	//  The ID of the recommendation report generation task. See the response of StartRecommendationReportGeneration.
 	Id *string
 
-	// Detailed information about the recommendation report.
+	//  Detailed information about the recommendation report.
 	RecommendationReportDetails *types.RecommendationReportDetails
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a role alias. Requires permission to access the CreateRoleAlias (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a role alias.
+//
+// Requires permission to access the [CreateRoleAlias] action.
+//
+// [CreateRoleAlias]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateRoleAlias(ctx context.Context, params *CreateRoleAliasInput, optFns ...func(*Options)) (*CreateRoleAliasOutput, error) {
 	if params == nil {
 		params = &CreateRoleAliasInput{}
@@ -42,14 +45,20 @@ type CreateRoleAliasInput struct {
 	RoleArn *string
 
 	// How long (in seconds) the credentials will be valid. The default value is 3,600
-	// seconds. This value must be less than or equal to the maximum session duration
-	// of the IAM role that the role alias references.
+	// seconds.
+	//
+	// This value must be less than or equal to the maximum session duration of the
+	// IAM role that the role alias references.
 	CredentialDurationSeconds *int32
 
-	// Metadata which can be used to manage the role alias. For URI Request parameters
-	// use format: ...key1=value1&key2=value2... For the CLI command-line parameter use
-	// format: &&tags "key1=value1&key2=value2..." For the cli-input-json file use
-	// format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the role alias.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: &&tags
+	// "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

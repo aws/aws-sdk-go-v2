@@ -28,8 +28,7 @@ func (c *Client) CreateOutboundCrossClusterSearchConnection(ctx context.Context,
 	return out, nil
 }
 
-// Container for the parameters to the CreateOutboundCrossClusterSearchConnection
-// operation.
+// Container for the parameters to the CreateOutboundCrossClusterSearchConnection operation.
 type CreateOutboundCrossClusterSearchConnectionInput struct {
 
 	// Specifies the connection alias that will be used by the customer for this
@@ -51,15 +50,14 @@ type CreateOutboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a CreateOutboundCrossClusterSearchConnection request. Contains
-// the details of the newly created cross-cluster search connection.
+// The result of a CreateOutboundCrossClusterSearchConnection request. Contains the details of the newly created
+// cross-cluster search connection.
 type CreateOutboundCrossClusterSearchConnectionOutput struct {
 
 	// Specifies the connection alias provided during the create connection request.
 	ConnectionAlias *string
 
-	// Specifies the OutboundCrossClusterSearchConnectionStatus for the newly created
-	// connection.
+	// Specifies the OutboundCrossClusterSearchConnectionStatus for the newly created connection.
 	ConnectionStatus *types.OutboundCrossClusterSearchConnectionStatus
 
 	// Unique id for the created outbound connection, which is used for subsequent

@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Updates a channel. For information about MediaTailor channels, see Working with
-// channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
-// in the MediaTailor User Guide.
+// Updates a channel. For information about MediaTailor channels, see [Working with channels] in the
+// MediaTailor User Guide.
+//
+// [Working with channels]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
 	if params == nil {
 		params = &UpdateChannelInput{}
@@ -51,7 +52,7 @@ type UpdateChannelInput struct {
 	// .
 	FillerSlate *types.SlateSource
 
-	// The time-shifted viewing configuration you want to associate to the channel.
+	//  The time-shifted viewing configuration you want to associate to the channel.
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	noSmithyDocumentSerde
@@ -86,22 +87,25 @@ type UpdateChannelOutput struct {
 	// The channel's output properties.
 	Outputs []types.ResponseOutputItem
 
-	// The type of playback mode for this channel. LINEAR - Programs play back-to-back
-	// only once. LOOP - Programs play back-to-back in an endless loop. When the last
-	// program in the schedule plays, playback loops back to the first program in the
-	// schedule.
+	// The type of playback mode for this channel.
+	//
+	// LINEAR - Programs play back-to-back only once.
+	//
+	// LOOP - Programs play back-to-back in an endless loop. When the last program in
+	// the schedule plays, playback loops back to the first program in the schedule.
 	PlaybackMode *string
 
 	// The tags to assign to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
-	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
+	// cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// The tier associated with this Channel.
 	Tier *string
 
-	// The time-shifted viewing configuration for the channel.
+	//  The time-shifted viewing configuration for the channel.
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	// Metadata pertaining to the operation's result.

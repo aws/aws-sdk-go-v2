@@ -11,10 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the block lists used for query suggestions for an index. For information
-// on the current quota limits for block lists, see Quotas for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
-// . ListQuerySuggestionsBlockLists is currently not supported in the Amazon Web
+// Lists the block lists used for query suggestions for an index.
+//
+// For information on the current quota limits for block lists, see [Quotas for Amazon Kendra].
+//
+// ListQuerySuggestionsBlockLists is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
+//
+// [Quotas for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 func (c *Client) ListQuerySuggestionsBlockLists(ctx context.Context, params *ListQuerySuggestionsBlockListsInput, optFns ...func(*Options)) (*ListQuerySuggestionsBlockListsOutput, error) {
 	if params == nil {
 		params = &ListQuerySuggestionsBlockListsInput{}
@@ -33,8 +37,11 @@ func (c *Client) ListQuerySuggestionsBlockLists(ctx context.Context, params *Lis
 type ListQuerySuggestionsBlockListsInput struct {
 
 	// The identifier of the index for a list of all block lists that exist for that
-	// index. For information on the current quota limits for block lists, see Quotas
-	// for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
+	// index.
+	//
+	// For information on the current quota limits for block lists, see [Quotas for Amazon Kendra].
+	//
+	// [Quotas for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 	//
 	// This member is required.
 	IndexId *string
@@ -53,11 +60,15 @@ type ListQuerySuggestionsBlockListsInput struct {
 
 type ListQuerySuggestionsBlockListsOutput struct {
 
-	// Summary items for a block list. This includes summary items on the block list
-	// ID, block list name, when the block list was created, when the block list was
-	// last updated, and the count of block words/phrases in the block list. For
-	// information on the current quota limits for block lists, see Quotas for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
+	// Summary items for a block list.
+	//
+	// This includes summary items on the block list ID, block list name, when the
+	// block list was created, when the block list was last updated, and the count of
+	// block words/phrases in the block list.
+	//
+	// For information on the current quota limits for block lists, see [Quotas for Amazon Kendra].
+	//
+	// [Quotas for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 	BlockListSummaryItems []types.QuerySuggestionsBlockListSummary
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use

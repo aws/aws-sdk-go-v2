@@ -36,9 +36,10 @@ type UpdateIndexInput struct {
 
 	// Sets the number of additional document storage and query capacity units that
 	// should be used by the index. You can change the capacity of the index up to 5
-	// times per day, or make 5 API calls. If you are using extra storage units, you
-	// can't reduce the storage capacity below what is required to meet the storage
-	// needs for your index.
+	// times per day, or make 5 API calls.
+	//
+	// If you are using extra storage units, you can't reduce the storage capacity
+	// below what is required to meet the storage needs for your index.
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// A new description for the index.
@@ -60,9 +61,10 @@ type UpdateIndexInput struct {
 	UserContextPolicy types.UserContextPolicy
 
 	// Gets users and groups from IAM Identity Center identity source. To configure
-	// this, see UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
-	// . This is useful for user context filtering, where search results are filtered
-	// based on the user or their group access to documents.
+	// this, see [UserGroupResolutionConfiguration]. This is useful for user context filtering, where search results are
+	// filtered based on the user or their group access to documents.
+	//
+	// [UserGroupResolutionConfiguration]: https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration.

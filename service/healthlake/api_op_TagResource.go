@@ -29,13 +29,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name(ARN)that gives AWS HealthLake access to the data store
-	// which tags are being added to.
+	//  The Amazon Resource Name(ARN)that gives AWS HealthLake access to the data
+	// store which tags are being added to.
 	//
 	// This member is required.
 	ResourceARN *string
 
-	// The user specified key and value pair tags being added to a data store.
+	//  The user specified key and value pair tags being added to a data store.
 	//
 	// This member is required.
 	Tags []types.Tag

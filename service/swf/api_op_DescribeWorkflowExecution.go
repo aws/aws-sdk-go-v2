@@ -13,21 +13,29 @@ import (
 )
 
 // Returns information about the specified workflow execution including its type
-// and some statistics. This operation is eventually consistent. The results are
-// best effort and may not exactly reflect recent updates and changes. Access
-// Control You can use IAM policies to control this action's access to Amazon SWF
+// and some statistics.
+//
+// This operation is eventually consistent. The results are best effort and may
+// not exactly reflect recent updates and changes.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF
 // resources as follows:
+//
 //   - Use a Resource element with the domain name to limit the action to only
 //     specified domains.
+//
 //   - Use an Action element to allow or deny permission to call this action.
+//
 //   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
 // associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
-// For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
-// in the Amazon SWF Developer Guide.
+// For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows]in the Amazon SWF Developer Guide.
+//
+// [Using IAM to Manage Access to Amazon SWF Workflows]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
 func (c *Client) DescribeWorkflowExecution(ctx context.Context, params *DescribeWorkflowExecutionInput, optFns ...func(*Options)) (*DescribeWorkflowExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeWorkflowExecutionInput{}
@@ -85,7 +93,7 @@ type DescribeWorkflowExecutionOutput struct {
 
 	// The latest executionContext provided by the decider for this workflow
 	// execution. A decider can provide an executionContext (a free-form string) when
-	// closing a decision task using RespondDecisionTaskCompleted .
+	// closing a decision task using RespondDecisionTaskCompleted.
 	LatestExecutionContext *string
 
 	// Metadata pertaining to the operation's result.

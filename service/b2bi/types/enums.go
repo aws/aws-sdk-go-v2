@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for CapabilityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapabilityType) Values() []CapabilityType {
 	return []CapabilityType{
 		"edi",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for FileFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileFormat) Values() []FileFormat {
 	return []FileFormat{
 		"XML",
@@ -45,8 +47,9 @@ const (
 )
 
 // Values returns all known values for Logging. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Logging) Values() []Logging {
 	return []Logging{
 		"ENABLED",
@@ -64,8 +67,9 @@ const (
 )
 
 // Values returns all known values for TransformerJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransformerJobStatus) Values() []TransformerJobStatus {
 	return []TransformerJobStatus{
 		"running",
@@ -83,8 +87,9 @@ const (
 )
 
 // Values returns all known values for TransformerStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransformerStatus) Values() []TransformerStatus {
 	return []TransformerStatus{
 		"active",
@@ -174,8 +179,9 @@ const (
 )
 
 // Values returns all known values for X12TransactionSet. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (X12TransactionSet) Values() []X12TransactionSet {
 	return []X12TransactionSet{
 		"X12_110",
@@ -267,8 +273,9 @@ const (
 )
 
 // Values returns all known values for X12Version. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (X12Version) Values() []X12Version {
 	return []X12Version{
 		"VERSION_4010",

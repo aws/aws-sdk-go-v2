@@ -11,17 +11,19 @@ import (
 type BatchPolicy struct {
 
 	// The number of active simulation jobs create as part of the batch that can be in
-	// an active state at the same time. Active states include: Pending , Preparing ,
-	// Running , Restarting , RunningFailed and Terminating . All other states are
-	// terminal states.
+	// an active state at the same time.
+	//
+	// Active states include: Pending , Preparing , Running , Restarting ,
+	// RunningFailed and Terminating . All other states are terminal states.
 	MaxConcurrency *int32
 
-	// The amount of time, in seconds, to wait for the batch to complete. If a batch
-	// times out, and there are pending requests that were failing due to an internal
-	// failure (like InternalServiceError ), they will be moved to the failed list and
-	// the batch status will be Failed . If the pending requests were failing for any
-	// other reason, the failed pending requests will be moved to the failed list and
-	// the batch status will be TimedOut .
+	// The amount of time, in seconds, to wait for the batch to complete.
+	//
+	// If a batch times out, and there are pending requests that were failing due to
+	// an internal failure (like InternalServiceError ), they will be moved to the
+	// failed list and the batch status will be Failed . If the pending requests were
+	// failing for any other reason, the failed pending requests will be moved to the
+	// failed list and the batch status will be TimedOut .
 	TimeoutInSeconds *int64
 
 	noSmithyDocumentSerde
@@ -68,14 +70,18 @@ type ComputeResponse struct {
 // Information about a data source.
 type DataSource struct {
 
-	// The location where your files are mounted in the container image. If you've
-	// specified the type of the data source as an Archive , you must provide an Amazon
-	// S3 object key to your archive. The object key must point to either a .zip or
-	// .tar.gz file. If you've specified the type of the data source as a Prefix , you
-	// provide the Amazon S3 prefix that points to the files that you are using for
-	// your data source. If you've specified the type of the data source as a File ,
-	// you provide the Amazon S3 path to the file that you're using as your data
+	// The location where your files are mounted in the container image.
+	//
+	// If you've specified the type of the data source as an Archive , you must provide
+	// an Amazon S3 object key to your archive. The object key must point to either a
+	// .zip or .tar.gz file.
+	//
+	// If you've specified the type of the data source as a Prefix , you provide the
+	// Amazon S3 prefix that points to the files that you are using for your data
 	// source.
+	//
+	// If you've specified the type of the data source as a File , you provide the
+	// Amazon S3 path to the file that you're using as your data source.
 	Destination *string
 
 	// The name of the data source.
@@ -89,8 +95,9 @@ type DataSource struct {
 
 	// The data type for the data source that you're using for your container image or
 	// simulation job. You can use this field to specify whether your data source is an
-	// Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the
-	// default value is File .
+	// Archive, an Amazon S3 prefix, or a file.
+	//
+	// If you don't specify a field, the default value is File .
 	Type DataSourceType
 
 	noSmithyDocumentSerde
@@ -114,20 +121,25 @@ type DataSourceConfig struct {
 	// This member is required.
 	S3Keys []string
 
-	// The location where your files are mounted in the container image. If you've
-	// specified the type of the data source as an Archive , you must provide an Amazon
-	// S3 object key to your archive. The object key must point to either a .zip or
-	// .tar.gz file. If you've specified the type of the data source as a Prefix , you
-	// provide the Amazon S3 prefix that points to the files that you are using for
-	// your data source. If you've specified the type of the data source as a File ,
-	// you provide the Amazon S3 path to the file that you're using as your data
+	// The location where your files are mounted in the container image.
+	//
+	// If you've specified the type of the data source as an Archive , you must provide
+	// an Amazon S3 object key to your archive. The object key must point to either a
+	// .zip or .tar.gz file.
+	//
+	// If you've specified the type of the data source as a Prefix , you provide the
+	// Amazon S3 prefix that points to the files that you are using for your data
 	// source.
+	//
+	// If you've specified the type of the data source as a File , you provide the
+	// Amazon S3 path to the file that you're using as your data source.
 	Destination *string
 
 	// The data type for the data source that you're using for your container image or
 	// simulation job. You can use this field to specify whether your data source is an
-	// Archive, an Amazon S3 prefix, or a file. If you don't specify a field, the
-	// default value is File .
+	// Archive, an Amazon S3 prefix, or a file.
+	//
+	// If you don't specify a field, the default value is File .
 	Type DataSourceType
 
 	noSmithyDocumentSerde
@@ -326,9 +338,11 @@ type Fleet struct {
 type LaunchConfig struct {
 
 	// If you've specified General as the value for your RobotSoftwareSuite , you can
-	// use this field to specify a list of commands for your container image. If you've
-	// specified SimulationRuntime as the value for your SimulationSoftwareSuite , you
-	// can use this field to specify a list of commands for your container image.
+	// use this field to specify a list of commands for your container image.
+	//
+	// If you've specified SimulationRuntime as the value for your
+	// SimulationSoftwareSuite , you can use this field to specify a list of commands
+	// for your container image.
 	Command []string
 
 	// The environment variables for the application launch.
@@ -355,8 +369,9 @@ type LaunchConfig struct {
 // The logging configuration.
 type LoggingConfig struct {
 
-	// A boolean indicating whether to record all ROS topics. This API is no longer
-	// supported and will throw an error if used.
+	// A boolean indicating whether to record all ROS topics.
+	//
+	// This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
 	// additional information, see
@@ -425,11 +440,19 @@ type PortMapping struct {
 // Information about the progress of a deployment job.
 type ProgressDetail struct {
 
-	// The current progress status. Validating Validating the deployment.
+	// The current progress status.
+	//
+	// Validating Validating the deployment.
+	//
 	// DownloadingExtracting Downloading and extracting the bundle on the robot.
-	// ExecutingPreLaunch Executing pre-launch script(s) if provided. Launching
-	// Launching the robot application. ExecutingPostLaunch Executing post-launch
-	// script(s) if provided. Finished Deployment is complete.
+	//
+	// ExecutingPreLaunch Executing pre-launch script(s) if provided.
+	//
+	// Launching Launching the robot application.
+	//
+	// ExecutingPostLaunch Executing post-launch script(s) if provided.
+	//
+	// Finished Deployment is complete.
 	CurrentProgress RobotDeploymentStep
 
 	// Estimated amount of time in seconds remaining in the step. This currently only
@@ -516,6 +539,7 @@ type RobotApplicationConfig struct {
 
 	// A Boolean indicating whether to use default robot application tools. The
 	// default tools are rviz, rqt, terminal and rosbag record. The default is False .
+	//
 	// This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
@@ -525,8 +549,11 @@ type RobotApplicationConfig struct {
 
 	// A Boolean indicating whether to use default upload configurations. By default,
 	// .ros and .gazebo files are uploaded when the application terminates and all ROS
-	// topics will be recorded. If you set this value, you must specify an
-	// outputLocation . This API is no longer supported and will throw an error if used.
+	// topics will be recorded.
+	//
+	// If you set this value, you must specify an outputLocation .
+	//
+	// This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
 	// additional information, see
@@ -652,6 +679,7 @@ type SimulationApplicationConfig struct {
 
 	// A Boolean indicating whether to use default simulation application tools. The
 	// default tools are rviz, rqt, terminal and rosbag record. The default is False .
+	//
 	// This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
@@ -661,8 +689,11 @@ type SimulationApplicationConfig struct {
 
 	// A Boolean indicating whether to use default upload configurations. By default,
 	// .ros and .gazebo files are uploaded when the application terminates and all ROS
-	// topics will be recorded. If you set this value, you must specify an
-	// outputLocation . This API is no longer supported and will throw an error if used.
+	// topics will be recorded.
+	//
+	// If you set this value, you must specify an outputLocation .
+	//
+	// This API is no longer supported and will throw an error if used.
 	//
 	// Deprecated: AWS RoboMaker is ending support for ROS software suite. For
 	// additional information, see
@@ -715,9 +746,12 @@ type SimulationJob struct {
 	// The data sources for the simulation job.
 	DataSources []DataSource
 
-	// The failure behavior the simulation job. Continue Leaves the host running for
-	// its maximum timeout duration after a 4XX error code. Fail Stop the simulation
-	// job and terminate the instance.
+	// The failure behavior the simulation job.
+	//
+	// Continue Leaves the host running for its maximum timeout duration after a 4XX
+	// error code.
+	//
+	// Fail Stop the simulation job and terminate the instance.
 	FailureBehavior FailureBehavior
 
 	// The failure code of the simulation job if it failed.
@@ -800,22 +834,36 @@ type SimulationJobBatchSummary struct {
 	// The number of pending simulation job requests.
 	PendingRequestCount int32
 
-	// The status of the simulation job batch. Pending The simulation job batch
-	// request is pending. InProgress The simulation job batch is in progress. Failed
-	// The simulation job batch failed. One or more simulation job requests could not
-	// be completed due to an internal failure (like InternalServiceError ). See
-	// failureCode and failureReason for more information. Completed The simulation
-	// batch job completed. A batch is complete when (1) there are no pending
-	// simulation job requests in the batch and none of the failed simulation job
-	// requests are due to InternalServiceError and (2) when all created simulation
-	// jobs have reached a terminal state (for example, Completed or Failed ). Canceled
-	// The simulation batch job was cancelled. Canceling The simulation batch job is
-	// being cancelled. Completing The simulation batch job is completing. TimingOut
-	// The simulation job batch is timing out. If a batch timing out, and there are
-	// pending requests that were failing due to an internal failure (like
-	// InternalServiceError ), the batch status will be Failed . If there are no such
-	// failing request, the batch status will be TimedOut . TimedOut The simulation
-	// batch job timed out.
+	// The status of the simulation job batch.
+	//
+	// Pending The simulation job batch request is pending.
+	//
+	// InProgress The simulation job batch is in progress.
+	//
+	// Failed The simulation job batch failed. One or more simulation job requests
+	// could not be completed due to an internal failure (like InternalServiceError ).
+	// See failureCode and failureReason for more information.
+	//
+	// Completed The simulation batch job completed. A batch is complete when (1)
+	// there are no pending simulation job requests in the batch and none of the failed
+	// simulation job requests are due to InternalServiceError and (2) when all
+	// created simulation jobs have reached a terminal state (for example, Completed
+	// or Failed ).
+	//
+	// Canceled The simulation batch job was cancelled.
+	//
+	// Canceling The simulation batch job is being cancelled.
+	//
+	// Completing The simulation batch job is completing.
+	//
+	// TimingOut The simulation job batch is timing out.
+	//
+	// If a batch timing out, and there are pending requests that were failing due to
+	// an internal failure (like InternalServiceError ), the batch status will be
+	// Failed . If there are no such failing request, the batch status will be TimedOut
+	// .
+	//
+	// TimedOut The simulation batch job timed out.
 	Status SimulationJobBatchStatus
 
 	noSmithyDocumentSerde
@@ -835,13 +883,17 @@ type SimulationJobRequest struct {
 
 	// Specify data sources to mount read-only files from S3 into your simulation.
 	// These files are available under /opt/robomaker/datasources/data_source_name .
+	//
 	// There is a limit of 100 files and a combined size of 25GB for all
 	// DataSourceConfig objects.
 	DataSources []DataSourceConfig
 
-	// The failure behavior the simulation job. Continue Leaves the host running for
-	// its maximum timeout duration after a 4XX error code. Fail Stop the simulation
-	// job and terminate the instance.
+	// The failure behavior the simulation job.
+	//
+	// Continue Leaves the host running for its maximum timeout duration after a 4XX
+	// error code.
+	//
+	// Fail Stop the simulation job and terminate the instance.
 	FailureBehavior FailureBehavior
 
 	// The IAM role name that allows the simulation instance to call the AWS APIs that
@@ -1026,31 +1078,38 @@ type Tool struct {
 type UploadConfiguration struct {
 
 	// A prefix that specifies where files will be uploaded in Amazon S3. It is
-	// appended to the simulation output location to determine the final path. For
-	// example, if your simulation output location is s3://my-bucket and your upload
-	// configuration name is robot-test , your files will be uploaded to
+	// appended to the simulation output location to determine the final path.
+	//
+	// For example, if your simulation output location is s3://my-bucket and your
+	// upload configuration name is robot-test , your files will be uploaded to
 	// s3://my-bucket///robot-test .
 	//
 	// This member is required.
 	Name *string
 
-	// Specifies the path of the file(s) to upload. Standard Unix glob matching rules
+	//  Specifies the path of the file(s) to upload. Standard Unix glob matching rules
 	// are accepted, with the addition of ** as a super asterisk. For example,
 	// specifying /var/log/**.log causes all .log files in the /var/log directory tree
-	// to be collected. For more examples, see Glob Library (https://github.com/gobwas/glob)
-	// .
+	// to be collected. For more examples, see [Glob Library].
+	//
+	// [Glob Library]: https://github.com/gobwas/glob
 	//
 	// This member is required.
 	Path *string
 
-	// Specifies when to upload the files: UPLOAD_ON_TERMINATE Matching files are
-	// uploaded once the simulation enters the TERMINATING state. Matching files are
-	// not uploaded until all of your code (including tools) have stopped. If there is
-	// a problem uploading a file, the upload is retried. If problems persist, no
-	// further upload attempts will be made. UPLOAD_ROLLING_AUTO_REMOVE Matching files
-	// are uploaded as they are created. They are deleted after they are uploaded. The
-	// specified path is checked every 5 seconds. A final check is made when all of
-	// your code (including tools) have stopped.
+	// Specifies when to upload the files:
+	//
+	// UPLOAD_ON_TERMINATE Matching files are uploaded once the simulation enters the
+	// TERMINATING state. Matching files are not uploaded until all of your code
+	// (including tools) have stopped.
+	//
+	// If there is a problem uploading a file, the upload is retried. If problems
+	// persist, no further upload attempts will be made.
+	//
+	// UPLOAD_ROLLING_AUTO_REMOVE Matching files are uploaded as they are created.
+	// They are deleted after they are uploaded. The specified path is checked every 5
+	// seconds. A final check is made when all of your code (including tools) have
+	// stopped.
 	//
 	// This member is required.
 	UploadBehavior UploadBehavior
@@ -1108,9 +1167,10 @@ type WorldConfig struct {
 // unique floorplans and the number of unique interiors for each floor plan. For
 // example, if you want 1 world with 20 unique interiors, you set floorplanCount =
 // 1 and interiorCountPerFloorplan = 20 . This will result in 20 worlds (
-// floorplanCount * interiorCountPerFloorplan) . If you set floorplanCount = 4 and
-// interiorCountPerFloorplan = 5 , there will be 20 worlds with 5 unique floor
-// plans.
+// floorplanCount * interiorCountPerFloorplan) .
+//
+// If you set floorplanCount = 4 and interiorCountPerFloorplan = 5 , there will be
+// 20 worlds with 5 unique floor plans.
 type WorldCount struct {
 
 	// The number of unique floorplans.
@@ -1135,11 +1195,19 @@ type WorldExportJobSummary struct {
 	// The output location.
 	OutputLocation *OutputLocation
 
-	// The status of the world export job. Pending The world export job request is
-	// pending. Running The world export job is running. Completed The world export job
-	// completed. Failed The world export job failed. See failureCode for more
-	// information. Canceled The world export job was cancelled. Canceling The world
-	// export job is being cancelled.
+	// The status of the world export job.
+	//
+	// Pending The world export job request is pending.
+	//
+	// Running The world export job is running.
+	//
+	// Completed The world export job completed.
+	//
+	// Failed The world export job failed. See failureCode for more information.
+	//
+	// Canceled The world export job was cancelled.
+	//
+	// Canceling The world export job is being cancelled.
 	Status WorldExportJobStatus
 
 	// A list of worlds.
@@ -1151,12 +1219,18 @@ type WorldExportJobSummary struct {
 // Information about a failed world.
 type WorldFailure struct {
 
-	// The failure code of the world export job if it failed: InternalServiceError
-	// Internal service error. LimitExceeded The requested resource exceeds the maximum
-	// number allowed, or the number of concurrent stream requests exceeds the maximum
-	// number allowed. ResourceNotFound The specified resource could not be found.
-	// RequestThrottled The request was throttled. InvalidInput An input parameter in
-	// the request is not valid.
+	// The failure code of the world export job if it failed:
+	//
+	// InternalServiceError Internal service error.
+	//
+	// LimitExceeded The requested resource exceeds the maximum number allowed, or the
+	// number of concurrent stream requests exceeds the maximum number allowed.
+	//
+	// ResourceNotFound The specified resource could not be found.
+	//
+	// RequestThrottled The request was throttled.
+	//
+	// InvalidInput An input parameter in the request is not valid.
 	FailureCode WorldGenerationJobErrorCode
 
 	// The number of failed worlds.
@@ -1182,12 +1256,21 @@ type WorldGenerationJobSummary struct {
 	// The number of worlds that failed.
 	FailedWorldCount int32
 
-	// The status of the world generator job: Pending The world generator job request
-	// is pending. Running The world generator job is running. Completed The world
-	// generator job completed. Failed The world generator job failed. See failureCode
-	// for more information. PartialFailed Some worlds did not generate. Canceled The
-	// world generator job was cancelled. Canceling The world generator job is being
-	// cancelled.
+	// The status of the world generator job:
+	//
+	// Pending The world generator job request is pending.
+	//
+	// Running The world generator job is running.
+	//
+	// Completed The world generator job completed.
+	//
+	// Failed The world generator job failed. See failureCode for more information.
+	//
+	// PartialFailed Some worlds did not generate.
+	//
+	// Canceled The world generator job was cancelled.
+	//
+	// Canceling The world generator job is being cancelled.
 	Status WorldGenerationJobStatus
 
 	// The number of worlds that were generated.

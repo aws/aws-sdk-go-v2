@@ -29,7 +29,7 @@ func (c *Client) PutFeedback(ctx context.Context, params *PutFeedbackInput, optF
 
 type PutFeedbackInput struct {
 
-	// The feedback from customers is about the recommendations in this insight.
+	//  The feedback from customers is about the recommendations in this insight.
 	InsightFeedback *types.InsightFeedback
 
 	noSmithyDocumentSerde

@@ -14,8 +14,9 @@ import (
 // Creates an action. An action is a lineage tracking entity that represents an
 // action or activity. For example, a model deployment or an HPO job. Generally, an
 // action involves at least one input or output artifact. For more information, see
-// Amazon SageMaker ML Lineage Tracking (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html)
-// .
+// [Amazon SageMaker ML Lineage Tracking].
+//
+// [Amazon SageMaker ML Lineage Tracking]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
 func (c *Client) CreateAction(ctx context.Context, params *CreateActionInput, optFns ...func(*Options)) (*CreateActionOutput, error) {
 	if params == nil {
 		params = &CreateActionInput{}

@@ -12,10 +12,12 @@ import (
 )
 
 // Return the tags applied to an AWS Elastic Beanstalk resource. The response
-// contains a list of tag key-value pairs. Elastic Beanstalk supports tagging of
-// all of its resources. For details about resource tagging, see Tagging
-// Application Resources (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html)
-// .
+// contains a list of tag key-value pairs.
+//
+// Elastic Beanstalk supports tagging of all of its resources. For details about
+// resource tagging, see [Tagging Application Resources].
+//
+// [Tagging Application Resources]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -33,8 +35,9 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resouce for which a tag list is
-	// requested. Must be the ARN of an Elastic Beanstalk resource.
+	// The Amazon Resource Name (ARN) of the resouce for which a tag list is requested.
+	//
+	// Must be the ARN of an Elastic Beanstalk resource.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -32,7 +32,9 @@ type ListResourcesInput struct {
 
 	// Specifies that you want to list only the resource shares that match the
 	// following:
+	//
 	//   - SELF – resources that your account shares with other accounts
+	//
 	//   - OTHER-ACCOUNTS – resources that other accounts share with your account
 	//
 	// This member is required.
@@ -60,27 +62,34 @@ type ListResourcesInput struct {
 	Principal *string
 
 	// Specifies that you want to list only the resource shares that include resources
-	// with the specified Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// with the specified [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceArns []string
 
 	// Specifies that you want the results to include only resources that have the
 	// specified scope.
+	//
 	//   - ALL – the results include both global and regional resources or resource
 	//   types.
+	//
 	//   - GLOBAL – the results include only global resources or resource types.
+	//
 	//   - REGIONAL – the results include only regional resources or resource types.
+	//
 	// The default value is ALL .
 	ResourceRegionScope types.ResourceRegionScopeFilter
 
 	// Specifies that you want to list only resources in the resource shares
-	// identified by the specified Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// identified by the specified [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArns []string
 
 	// Specifies that you want to list only the resource shares that include resources
-	// of the specified resource type. For valid values, query the ListResourceTypes
-	// operation.
+	// of the specified resource type.
+	//
+	// For valid values, query the ListResourceTypes operation.
 	ResourceType *string
 
 	noSmithyDocumentSerde

@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified configuration template. When you launch an environment
-// using a configuration template, the environment gets a copy of the template. You
-// can delete or modify the environment's copy of the template without affecting
-// the running environment.
+// Deletes the specified configuration template.
+//
+// When you launch an environment using a configuration template, the environment
+// gets a copy of the template. You can delete or modify the environment's copy of
+// the template without affecting the running environment.
 func (c *Client) DeleteConfigurationTemplate(ctx context.Context, params *DeleteConfigurationTemplateInput, optFns ...func(*Options)) (*DeleteConfigurationTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteConfigurationTemplateInput{}

@@ -56,9 +56,10 @@ type GetMLTransformOutput struct {
 
 	// This value determines which version of Glue this machine learning transform is
 	// compatible with. Glue 1.0 is recommended for most customers. If the value is not
-	// set, the Glue compatibility defaults to Glue 0.9. For more information, see
-	// Glue Versions (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
-	// in the developer guide.
+	// set, the Glue compatibility defaults to Glue 0.9. For more information, see [Glue Versions]in
+	// the developer guide.
+	//
+	// [Glue Versions]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
 	GlueVersion *string
 
 	// A list of Glue table definitions used by the transform.
@@ -73,10 +74,12 @@ type GetMLTransformOutput struct {
 	// The number of Glue data processing units (DPUs) that are allocated to task runs
 	// for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A
 	// DPU is a relative measure of processing power that consists of 4 vCPUs of
-	// compute capacity and 16 GB of memory. For more information, see the Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/) . When the WorkerType field
-	// is set to a value other than Standard , the MaxCapacity field is set
-	// automatically and becomes read-only.
+	// compute capacity and 16 GB of memory. For more information, see the [Glue pricing page].
+	//
+	// When the WorkerType field is set to a value other than Standard , the
+	// MaxCapacity field is set automatically and becomes read-only.
+	//
+	// [Glue pricing page]: https://aws.amazon.com/glue/pricing/
 	MaxCapacity *float64
 
 	// The maximum number of times to retry a task for this transform after a task run
@@ -121,10 +124,13 @@ type GetMLTransformOutput struct {
 
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
+	//
 	//   - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory
 	//   and a 50GB disk, and 2 executors per worker.
+	//
 	//   - For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a
 	//   64GB disk, and 1 executor per worker.
+	//
 	//   - For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a
 	//   128GB disk, and 1 executor per worker.
 	WorkerType types.WorkerType

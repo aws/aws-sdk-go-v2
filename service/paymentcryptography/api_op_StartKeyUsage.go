@@ -13,9 +13,15 @@ import (
 
 // Enables an Amazon Web Services Payment Cryptography key, which makes it active
 // for cryptographic operations within Amazon Web Services Payment Cryptography
+//
 // Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts. Related operations:
-//   - StopKeyUsage (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html)
+// Services accounts.
+//
+// Related operations:
+//
+// [StopKeyUsage]
+//
+// [StopKeyUsage]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html
 func (c *Client) StartKeyUsage(ctx context.Context, params *StartKeyUsageInput, optFns ...func(*Options)) (*StartKeyUsageOutput, error) {
 	if params == nil {
 		params = &StartKeyUsageInput{}

@@ -7,7 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Access is denied. HTTP status code: 403
+// Access is denied.
+//
+// HTTP status code: 403
 type AccessDeniedException struct {
 	Message *string
 
@@ -33,7 +35,9 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// There was an internal service exception. HTTP status code: 500
+// There was an internal service exception.
+//
+// HTTP status code: 500
 type InternalServiceException struct {
 	Message *string
 
@@ -85,7 +89,9 @@ func (e *ResourceInUseException) ErrorCode() string {
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified resource wasn't found. HTTP status code: 404
+// The specified resource wasn't found.
+//
+// HTTP status code: 404
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -163,7 +169,9 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Too many requests. HTTP status code: 429
+// Too many requests.
+//
+// HTTP status code: 429
 type ThrottlingException struct {
 	Message *string
 
@@ -189,7 +197,9 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An error occurred during validation. HTTP status code: 422
+// An error occurred during validation.
+//
+// HTTP status code: 422
 type ValidationException struct {
 	Message *string
 

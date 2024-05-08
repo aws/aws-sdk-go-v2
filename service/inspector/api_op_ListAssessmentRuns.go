@@ -35,9 +35,11 @@ type ListAssessmentRunsInput struct {
 	AssessmentTemplateArns []string
 
 	// You can use this parameter to specify a subset of data to be included in the
-	// action's response. For a record to match a filter, all specified filter
-	// attributes must match. When multiple values are specified for a filter
-	// attribute, any of the values can match.
+	// action's response.
+	//
+	// For a record to match a filter, all specified filter attributes must match.
+	// When multiple values are specified for a filter attribute, any of the values can
+	// match.
 	Filter *types.AssessmentRunFilter
 
 	// You can use this parameter to indicate the maximum number of items that you
@@ -61,7 +63,7 @@ type ListAssessmentRunsOutput struct {
 	// This member is required.
 	AssessmentRunArns []string
 
-	// When a response is generated, if there is more data to be listed, this
+	//  When a response is generated, if there is more data to be listed, this
 	// parameter is present in the response and contains the value to use for the
 	// nextToken parameter in a subsequent pagination request. If there is no more data
 	// to be listed, this parameter is set to null.

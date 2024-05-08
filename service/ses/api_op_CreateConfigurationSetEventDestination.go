@@ -11,14 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a configuration set event destination. When you create or update an
-// event destination, you must provide one, and only one, destination. The
-// destination can be CloudWatch, Amazon Kinesis Firehose, or Amazon Simple
-// Notification Service (Amazon SNS). An event destination is the Amazon Web
-// Services service to which Amazon SES publishes the email sending events
-// associated with a configuration set. For information about using configuration
-// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// . You can execute this operation no more than once per second.
+// Creates a configuration set event destination.
+//
+// When you create or update an event destination, you must provide one, and only
+// one, destination. The destination can be CloudWatch, Amazon Kinesis Firehose, or
+// Amazon Simple Notification Service (Amazon SNS).
+//
+// An event destination is the Amazon Web Services service to which Amazon SES
+// publishes the email sending events associated with a configuration set. For
+// information about using configuration sets, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, params *CreateConfigurationSetEventDestinationInput, optFns ...func(*Options)) (*CreateConfigurationSetEventDestinationOutput, error) {
 	if params == nil {
 		params = &CreateConfigurationSetEventDestinationInput{}
@@ -38,9 +43,9 @@ func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, par
 // configuration set event destination, which can be either Amazon CloudWatch or
 // Amazon Kinesis Firehose, describes an Amazon Web Services service in which
 // Amazon SES publishes the email sending events associated with a configuration
-// set. For information about using configuration sets, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// .
+// set. For information about using configuration sets, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 type CreateConfigurationSetEventDestinationInput struct {
 
 	// The name of the configuration set that the event destination should be

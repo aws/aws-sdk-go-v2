@@ -472,8 +472,10 @@ func (e *LifecyclePolicyPreviewNotFoundException) ErrorFault() smithy.ErrorFault
 }
 
 // The operation did not succeed because it would have exceeded a service limit
-// for your account. For more information, see Amazon ECR service quotas (https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html)
-// in the Amazon Elastic Container Registry User Guide.
+// for your account. For more information, see [Amazon ECR service quotas]in the Amazon Elastic Container
+// Registry User Guide.
+//
+// [Amazon ECR service quotas]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html
 type LimitExceededException struct {
 	Message *string
 

@@ -12,20 +12,23 @@ import (
 )
 
 // Lists the tags applied to an Amazon Chime SDK meeting and messaging resources.
+//
 // This API is is no longer supported and will not be updated. We recommend using
 // the applicable latest version in the Amazon Chime SDK.
-//   - For meetings: ListTagsForResource (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_ListTagsForResource.html)
-//     .
-//   - For messaging: ListTagsForResource (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListTagsForResource.html)
-//     .
+//
+//   - For meetings: [ListTagsForResource].
+//
+//   - For messaging: [ListTagsForResource].
 //
 // Using the latest version requires migrating to a dedicated namespace. For more
-// information, refer to Migrating from the Amazon Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by ListTagsForResource in the Amazon Chime SDK Voice,
 // Amazon Chime SDK Meetings, Amazon Chime SDK Identity, Amazon Chime SDK
 // Messaging, and Amazon Chime SDK Media Pipelines Namespaces
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [ListTagsForResource]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListTagsForResource.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

@@ -12,8 +12,10 @@ import (
 )
 
 // Retrieves the compiled information from a RequestEnvironmentInfo request.
-// Related Topics
-//   - RequestEnvironmentInfo
+//
+// # Related Topics
+//
+// RequestEnvironmentInfo
 func (c *Client) RetrieveEnvironmentInfo(ctx context.Context, params *RetrieveEnvironmentInfoInput, optFns ...func(*Options)) (*RetrieveEnvironmentInfoOutput, error) {
 	if params == nil {
 		params = &RetrieveEnvironmentInfoInput{}
@@ -29,7 +31,7 @@ func (c *Client) RetrieveEnvironmentInfo(ctx context.Context, params *RetrieveEn
 	return out, nil
 }
 
-// Request to download logs retrieved with RequestEnvironmentInfo .
+// Request to download logs retrieved with RequestEnvironmentInfo.
 type RetrieveEnvironmentInfoInput struct {
 
 	// The type of information to retrieve.
@@ -37,16 +39,22 @@ type RetrieveEnvironmentInfoInput struct {
 	// This member is required.
 	InfoType types.EnvironmentInfoType
 
-	// The ID of the data's environment. If no such environment is found, returns an
-	// InvalidParameterValue error. Condition: You must specify either this or an
-	// EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk
-	// returns MissingRequiredParameter error.
+	// The ID of the data's environment.
+	//
+	// If no such environment is found, returns an InvalidParameterValue error.
+	//
+	// Condition: You must specify either this or an EnvironmentName, or both. If you
+	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentId *string
 
-	// The name of the data's environment. If no such environment is found, returns an
-	// InvalidParameterValue error. Condition: You must specify either this or an
-	// EnvironmentId, or both. If you do not specify either, AWS Elastic Beanstalk
-	// returns MissingRequiredParameter error.
+	// The name of the data's environment.
+	//
+	// If no such environment is found, returns an InvalidParameterValue error.
+	//
+	// Condition: You must specify either this or an EnvironmentId, or both. If you do
+	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde
@@ -55,7 +63,7 @@ type RetrieveEnvironmentInfoInput struct {
 // Result message containing a description of the requested environment info.
 type RetrieveEnvironmentInfoOutput struct {
 
-	// The EnvironmentInfoDescription of the environment.
+	//  The EnvironmentInfoDescription of the environment.
 	EnvironmentInfo []types.EnvironmentInfoDescription
 
 	// Metadata pertaining to the operation's result.

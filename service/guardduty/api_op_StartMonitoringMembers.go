@@ -13,8 +13,9 @@ import (
 
 // Turns on GuardDuty monitoring of the specified member accounts. Use this
 // operation to restart monitoring of accounts that you stopped monitoring with the
-// StopMonitoringMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_StopMonitoringMembers.html)
-// operation.
+// [StopMonitoringMembers]operation.
+//
+// [StopMonitoringMembers]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_StopMonitoringMembers.html
 func (c *Client) StartMonitoringMembers(ctx context.Context, params *StartMonitoringMembersInput, optFns ...func(*Options)) (*StartMonitoringMembersOutput, error) {
 	if params == nil {
 		params = &StartMonitoringMembersInput{}

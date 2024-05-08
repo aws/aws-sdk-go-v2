@@ -12,6 +12,7 @@ import (
 )
 
 // Removes the association between a specified Resolver rule and a specified VPC.
+//
 // If you disassociate a Resolver rule from a VPC, Resolver stops forwarding DNS
 // queries for the domain name that you specified in the Resolver rule.
 func (c *Client) DisassociateResolverRule(ctx context.Context, params *DisassociateResolverRuleInput, optFns ...func(*Options)) (*DisassociateResolverRuleOutput, error) {

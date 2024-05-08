@@ -55,13 +55,15 @@ type SendMediaMessageInput struct {
 	// The maximum amount that you want to spend, in US dollars, per each MMS message.
 	MaxPrice *string
 
-	// An array of URLs to each media file to send. The media files have to be stored
-	// in a publicly available S3 bucket. Supported media file formats are listed in
-	// MMS file types, size and character limits (https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html)
-	// . For more information on creating an S3 bucket and managing objects, see
-	// Creating a bucket (https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)
-	// and Uploading objects (https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html)
-	// in the S3 user guide.
+	// An array of URLs to each media file to send.
+	//
+	// The media files have to be stored in a publicly available S3 bucket. Supported
+	// media file formats are listed in [MMS file types, size and character limits]. For more information on creating an S3
+	// bucket and managing objects, see [Creating a bucket]and [Uploading objects] in the S3 user guide.
+	//
+	// [Creating a bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
+	// [MMS file types, size and character limits]: https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html
+	// [Uploading objects]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
 	MediaUrls []string
 
 	// The text body of the message.

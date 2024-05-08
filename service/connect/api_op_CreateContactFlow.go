@@ -11,9 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a flow for the specified Amazon Connect instance. You can also create
-// and update flows using the Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html)
-// .
+// Creates a flow for the specified Amazon Connect instance.
+//
+// You can also create and update flows using the [Amazon Connect Flow language].
+//
+// [Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
 func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlowInput, optFns ...func(*Options)) (*CreateContactFlowOutput, error) {
 	if params == nil {
 		params = &CreateContactFlowInput{}
@@ -31,9 +33,11 @@ func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlo
 
 type CreateContactFlowInput struct {
 
-	// The JSON string that represents the content of the flow. For an example, see
-	// Example flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
-	// . Length Constraints: Minimum length of 1. Maximum length of 256000.
+	// The JSON string that represents the content of the flow. For an example, see [Example flow in Amazon Connect Flow language].
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 256000.
+	//
+	// [Example flow in Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
 	//
 	// This member is required.
 	Content *string
@@ -48,9 +52,10 @@ type CreateContactFlowInput struct {
 	// This member is required.
 	Name *string
 
-	// The type of the flow. For descriptions of the available types, see Choose a
-	// flow type (https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types)
-	// in the Amazon Connect Administrator Guide.
+	// The type of the flow. For descriptions of the available types, see [Choose a flow type] in the
+	// Amazon Connect Administrator Guide.
+	//
+	// [Choose a flow type]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
 	//
 	// This member is required.
 	Type types.ContactFlowType

@@ -119,8 +119,9 @@ func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 
 // The operation exceeds a resource limit, for example, the maximum number of
 // policy objects that you can create for an Amazon Web Services account. For more
-// information, see Firewall Manager Limits (https://docs.aws.amazon.com/waf/latest/developerguide/fms-limits.html)
-// in the WAF Developer Guide.
+// information, see [Firewall Manager Limits]in the WAF Developer Guide.
+//
+// [Firewall Manager Limits]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-limits.html
 type LimitExceededException struct {
 	Message *string
 

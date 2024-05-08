@@ -11,13 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a delegation signer (DS) record in the registry zone for this domain
-// name. Note that creating DS record at the registry impacts DNSSEC validation of
-// your DNS records. This action may render your domain name unavailable on the
-// internet if the steps are completed in the wrong order, or with incorrect
-// timing. For more information about DNSSEC signing, see Configuring DNSSEC
-// signing (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html)
-// in the Route 53 developer guide.
+//	Creates a delegation signer (DS) record in the registry zone for this domain
+//
+// name.
+//
+// Note that creating DS record at the registry impacts DNSSEC validation of your
+// DNS records. This action may render your domain name unavailable on the internet
+// if the steps are completed in the wrong order, or with incorrect timing. For
+// more information about DNSSEC signing, see [Configuring DNSSEC signing]in the Route 53 developer guide.
+//
+// [Configuring DNSSEC signing]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html
 func (c *Client) AssociateDelegationSignerToDomain(ctx context.Context, params *AssociateDelegationSignerToDomainInput, optFns ...func(*Options)) (*AssociateDelegationSignerToDomainOutput, error) {
 	if params == nil {
 		params = &AssociateDelegationSignerToDomainInput{}
@@ -52,8 +55,9 @@ type AssociateDelegationSignerToDomainInput struct {
 type AssociateDelegationSignerToDomainOutput struct {
 
 	// The identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-	// .
+	// status, use [GetOperationDetail].
+	//
+	// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

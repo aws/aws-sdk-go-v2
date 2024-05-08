@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures the specified network resource. Use this action to specify the
-// geographic position of the hardware. You must provide Certified Professional
-// Installer (CPI) credentials in the request so that we can obtain spectrum
-// grants. For more information, see Radio units (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html)
-// in the Amazon Web Services Private 5G User Guide.
+// Configures the specified network resource.
+//
+// Use this action to specify the geographic position of the hardware. You must
+// provide Certified Professional Installer (CPI) credentials in the request so
+// that we can obtain spectrum grants. For more information, see [Radio units]in the Amazon Web
+// Services Private 5G User Guide.
+//
+// [Radio units]: https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html
 func (c *Client) ConfigureAccessPoint(ctx context.Context, params *ConfigureAccessPointInput, optFns ...func(*Options)) (*ConfigureAccessPointOutput, error) {
 	if params == nil {
 		params = &ConfigureAccessPointInput{}

@@ -11,6 +11,7 @@ import (
 )
 
 // Deletes the association between an Amazon Lex bot and a messaging platform.
+//
 // This operation requires permission for the lex:DeleteBotChannelAssociation
 // action.
 func (c *Client) DeleteBotChannelAssociation(ctx context.Context, params *DeleteBotChannelAssociationInput, optFns ...func(*Options)) (*DeleteBotChannelAssociationOutput, error) {

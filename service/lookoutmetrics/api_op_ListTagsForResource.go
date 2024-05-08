@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
-// for a detector, dataset, or alert.
+// Gets a list of [tags] for a detector, dataset, or alert.
+//
+// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

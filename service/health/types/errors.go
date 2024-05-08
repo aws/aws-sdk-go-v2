@@ -7,10 +7,11 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-// is already in progress. Wait for the action to complete before trying again. To
-// get the current status, use the DescribeHealthServiceStatusForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeHealthServiceStatusForOrganization.html)
-// operation.
+// [EnableHealthServiceAccessForOrganization] is already in progress. Wait for the action to complete before trying again.
+// To get the current status, use the [DescribeHealthServiceStatusForOrganization]operation.
+//
+// [DescribeHealthServiceStatusForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeHealthServiceStatusForOrganization.html
+// [EnableHealthServiceAccessForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
 type ConcurrentModificationException struct {
 	Message *string
 

@@ -14,11 +14,12 @@ import (
 // Creates a Neptune global database spread across multiple Amazon Regions. The
 // global database contains a single primary cluster with read-write capability,
 // and read-only secondary clusters that receive data from the primary cluster
-// through high-speed replication performed by the Neptune storage subsystem. You
-// can create a global database that is initially empty, and then add a primary
-// cluster and secondary clusters to it, or you can specify an existing Neptune
-// cluster during the create operation to become the primary cluster of the global
-// database.
+// through high-speed replication performed by the Neptune storage subsystem.
+//
+// You can create a global database that is initially empty, and then add a
+// primary cluster and secondary clusters to it, or you can specify an existing
+// Neptune cluster during the create operation to become the primary cluster of the
+// global database.
 func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalClusterInput, optFns ...func(*Options)) (*CreateGlobalClusterOutput, error) {
 	if params == nil {
 		params = &CreateGlobalClusterInput{}
@@ -45,12 +46,14 @@ type CreateGlobalClusterInput struct {
 	// database can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
 
-	// The name of the database engine to be used in the global database. Valid
-	// values: neptune
+	// The name of the database engine to be used in the global database.
+	//
+	// Valid values: neptune
 	Engine *string
 
-	// The Neptune engine version to be used by the global database. Valid values:
-	// 1.2.0.0 or above.
+	// The Neptune engine version to be used by the global database.
+	//
+	// Valid values: 1.2.0.0 or above.
 	EngineVersion *string
 
 	// (Optional) The Amazon Resource Name (ARN) of an existing Neptune DB cluster to
@@ -65,10 +68,9 @@ type CreateGlobalClusterInput struct {
 
 type CreateGlobalClusterOutput struct {
 
-	// Contains the details of an Amazon Neptune global database. This data type is
-	// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
-	// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
-	// RemoveFromGlobalCluster actions.
+	// Contains the details of an Amazon Neptune global database.
+	//
+	// This data type is used as a response element for the CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and RemoveFromGlobalCluster actions.
 	GlobalCluster *types.GlobalCluster
 
 	// Metadata pertaining to the operation's result.

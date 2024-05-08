@@ -29,8 +29,8 @@ func (c *Client) BatchRead(ctx context.Context, params *BatchReadInput, optFns .
 
 type BatchReadInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory . For more
-	// information, see arns .
+	// The Amazon Resource Name (ARN) that is associated with the Directory. For more
+	// information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string

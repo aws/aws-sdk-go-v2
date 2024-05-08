@@ -36,8 +36,11 @@ type CreateDBSubnetGroupInput struct {
 	DBSubnetGroupDescription *string
 
 	// The name for the DB subnet group. This value is stored as a lowercase string.
+	//
 	// Constraints: Must contain no more than 255 letters, numbers, periods,
-	// underscores, spaces, or hyphens. Must not be default. Example: mySubnetgroup
+	// underscores, spaces, or hyphens. Must not be default.
+	//
+	// Example: mySubnetgroup
 	//
 	// This member is required.
 	DBSubnetGroupName *string
@@ -55,8 +58,9 @@ type CreateDBSubnetGroupInput struct {
 
 type CreateDBSubnetGroupOutput struct {
 
-	// Contains the details of an Amazon Neptune DB subnet group. This data type is
-	// used as a response element in the DescribeDBSubnetGroups action.
+	// Contains the details of an Amazon Neptune DB subnet group.
+	//
+	// This data type is used as a response element in the DescribeDBSubnetGroups action.
 	DBSubnetGroup *types.DBSubnetGroup
 
 	// Metadata pertaining to the operation's result.

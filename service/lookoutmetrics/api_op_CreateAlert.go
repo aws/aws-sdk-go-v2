@@ -54,8 +54,9 @@ type CreateAlertInput struct {
 	// An integer from 0 to 100 specifying the alert sensitivity threshold.
 	AlertSensitivityThreshold int32
 
-	// A list of tags (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
-	// to apply to the alert.
+	// A list of [tags] to apply to the alert.
+	//
+	// [tags]: https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

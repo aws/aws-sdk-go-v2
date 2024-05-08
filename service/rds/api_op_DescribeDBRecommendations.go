@@ -31,36 +31,58 @@ func (c *Client) DescribeDBRecommendations(ctx context.Context, params *Describe
 
 type DescribeDBRecommendationsInput struct {
 
-	// A filter that specifies one or more recommendations to describe. Supported
-	// Filters:
+	// A filter that specifies one or more recommendations to describe.
+	//
+	// Supported Filters:
+	//
 	//   - recommendation-id - Accepts a list of recommendation identifiers. The
 	//   results list only includes the recommendations whose identifier is one of the
 	//   specified filter values.
-	//   - status - Accepts a list of recommendation statuses. Valid values:
+	//
+	//   - status - Accepts a list of recommendation statuses.
+	//
+	// Valid values:
+	//
 	//   - active - The recommendations which are ready for you to apply.
+	//
 	//   - pending - The applied or scheduled recommendations which are in progress.
+	//
 	//   - resolved - The recommendations which are completed.
-	//   - dismissed - The recommendations that you dismissed. The results list only
-	//   includes the recommendations whose status is one of the specified filter values.
+	//
+	//   - dismissed - The recommendations that you dismissed.
+	//
+	// The results list only includes the recommendations whose status is one of the
+	//   specified filter values.
 	//
 	//   - severity - Accepts a list of recommendation severities. The results list
 	//   only includes the recommendations whose severity is one of the specified filter
-	//   values. Valid values:
+	//   values.
+	//
+	// Valid values:
+	//
 	//   - high
+	//
 	//   - medium
+	//
 	//   - low
+	//
 	//   - informational
+	//
 	//   - type-id - Accepts a list of recommendation type identifiers. The results
 	//   list only includes the recommendations whose type is one of the specified filter
 	//   values.
+	//
 	//   - dbi-resource-id - Accepts a list of database resource identifiers. The
 	//   results list only includes the recommendations that generated for the specified
 	//   databases.
+	//
 	//   - cluster-resource-id - Accepts a list of cluster resource identifiers. The
 	//   results list only includes the recommendations that generated for the specified
 	//   clusters.
+	//
 	//   - pg-arn - Accepts a list of parameter group ARNs. The results list only
 	//   includes the recommendations that generated for the specified parameter groups.
+	//
 	//   - cluster-pg-arn - Accepts a list of cluster parameter group ARNs. The results
 	//   list only includes the recommendations that generated for the specified cluster
 	//   parameter groups.
@@ -74,19 +96,32 @@ type DescribeDBRecommendationsInput struct {
 	// specified time.
 	LastUpdatedBefore *time.Time
 
-	// The language that you choose to return the list of recommendations. Valid
-	// values:
+	// The language that you choose to return the list of recommendations.
+	//
+	// Valid values:
+	//
 	//   - en
+	//
 	//   - en_UK
+	//
 	//   - de
+	//
 	//   - es
+	//
 	//   - fr
+	//
 	//   - id
+	//
 	//   - it
+	//
 	//   - ja
+	//
 	//   - ko
+	//
 	//   - pt_BR
+	//
 	//   - zh_TW
+	//
 	//   - zh_CN
 	Locale *string
 

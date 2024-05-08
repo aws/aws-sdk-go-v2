@@ -11,9 +11,11 @@ import (
 	"time"
 )
 
-// Gets information about the specified policy version. Requires permission to
-// access the GetPolicyVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about the specified policy version.
+//
+// Requires permission to access the [GetPolicyVersion] action.
+//
+// [GetPolicyVersion]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionInput, optFns ...func(*Options)) (*GetPolicyVersionOutput, error) {
 	if params == nil {
 		params = &GetPolicyVersionInput{}

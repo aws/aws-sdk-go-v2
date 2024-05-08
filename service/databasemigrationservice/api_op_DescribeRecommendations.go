@@ -41,11 +41,12 @@ type DescribeRecommendationsInput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
 	// next page of results. If this parameter is specified, the response includes only
-	// records beyond the marker, up to the value specified by MaxRecords . If
-	// NextToken is returned by a previous response, there are more results available.
-	// The value of NextToken is a unique pagination token for each page. Make the
-	// call again using the returned token to retrieve the next page. Keep all other
-	// arguments unchanged.
+	// records beyond the marker, up to the value specified by MaxRecords .
+	//
+	// If NextToken is returned by a previous response, there are more results
+	// available. The value of NextToken is a unique pagination token for each page.
+	// Make the call again using the returned token to retrieve the next page. Keep all
+	// other arguments unchanged.
 	NextToken *string
 
 	noSmithyDocumentSerde

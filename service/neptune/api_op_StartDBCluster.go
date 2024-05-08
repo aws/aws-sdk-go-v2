@@ -41,8 +41,9 @@ type StartDBClusterInput struct {
 
 type StartDBClusterOutput struct {
 
-	// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-	// a response element in the DescribeDBClusters .
+	// Contains the details of an Amazon Neptune DB cluster.
+	//
+	// This data type is used as a response element in the DescribeDBClusters.
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.

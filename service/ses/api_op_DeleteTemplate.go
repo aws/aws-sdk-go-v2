@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an email template. You can execute this operation no more than once per
-// second.
+// Deletes an email template.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) DeleteTemplate(ctx context.Context, params *DeleteTemplateInput, optFns ...func(*Options)) (*DeleteTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteTemplateInput{}
@@ -27,9 +28,10 @@ func (c *Client) DeleteTemplate(ctx context.Context, params *DeleteTemplateInput
 	return out, nil
 }
 
-// Represents a request to delete an email template. For more information, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html)
+// Represents a request to delete an email template. For more information, see the [Amazon SES Developer Guide]
 // .
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/send-personalized-email-api.html
 type DeleteTemplateInput struct {
 
 	// The name of the template to be deleted.

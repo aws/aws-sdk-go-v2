@@ -33,11 +33,17 @@ type GetActionTypeInput struct {
 
 	// Defines what kind of action can be taken in the stage. The following are the
 	// valid values:
+	//
 	//   - Source
+	//
 	//   - Build
+	//
 	//   - Test
+	//
 	//   - Deploy
+	//
 	//   - Approval
+	//
 	//   - Invoke
 	//
 	// This member is required.

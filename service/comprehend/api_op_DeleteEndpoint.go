@@ -12,8 +12,9 @@ import (
 
 // Deletes a model-specific endpoint for a previously-trained custom model. All
 // endpoints must be deleted in order for the model to be deleted. For information
-// about endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
-// .
+// about endpoints, see [Managing endpoints].
+//
+// [Managing endpoints]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
 func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput, optFns ...func(*Options)) (*DeleteEndpointOutput, error) {
 	if params == nil {
 		params = &DeleteEndpointInput{}

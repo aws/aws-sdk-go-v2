@@ -53,9 +53,9 @@ type CreateCrawlerInput struct {
 	Classifiers []string
 
 	// Crawler configuration information. This versioned JSON string allows users to
-	// specify aspects of a crawler's behavior. For more information, see Setting
-	// crawler configuration options (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)
-	// .
+	// specify aspects of a crawler's behavior. For more information, see [Setting crawler configuration options].
+	//
+	// [Setting crawler configuration options]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
 	Configuration *string
 
 	// The name of the SecurityConfiguration structure to be used by this crawler.
@@ -78,10 +78,10 @@ type CreateCrawlerInput struct {
 	// only folders that were added since the last crawler run.
 	RecrawlPolicy *types.RecrawlPolicy
 
-	// A cron expression used to specify the schedule (see Time-Based Schedules for
-	// Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
-	// . For example, to run something every day at 12:15 UTC, you would specify:
-	// cron(15 12 * * ? *) .
+	// A cron expression used to specify the schedule (see [Time-Based Schedules for Jobs and Crawlers]. For example, to run
+	// something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *) .
+	//
+	// [Time-Based Schedules for Jobs and Crawlers]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
 	Schedule *string
 
 	// The policy for the crawler's update and deletion behavior.
@@ -91,9 +91,10 @@ type CreateCrawlerInput struct {
 	TablePrefix *string
 
 	// The tags to use with this crawler request. You may use tags to limit access to
-	// the crawler. For more information about tags in Glue, see Amazon Web Services
-	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in
-	// the developer guide.
+	// the crawler. For more information about tags in Glue, see [Amazon Web Services Tags in Glue]in the developer
+	// guide.
+	//
+	// [Amazon Web Services Tags in Glue]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde

@@ -11,11 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an asset. This action can't be undone. For more information, see
-// Deleting assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html)
-// in the IoT SiteWise User Guide. You can't delete an asset that's associated to
-// another asset. For more information, see DisassociateAssets (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DisassociateAssets.html)
-// .
+// Deletes an asset. This action can't be undone. For more information, see [Deleting assets and models] in
+// the IoT SiteWise User Guide.
+//
+// You can't delete an asset that's associated to another asset. For more
+// information, see [DisassociateAssets].
+//
+// [DisassociateAssets]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DisassociateAssets.html
+// [Deleting assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html
 func (c *Client) DeleteAsset(ctx context.Context, params *DeleteAssetInput, optFns ...func(*Options)) (*DeleteAssetOutput, error) {
 	if params == nil {
 		params = &DeleteAssetInput{}
@@ -35,8 +38,9 @@ type DeleteAssetInput struct {
 
 	// The ID of the asset to delete. This can be either the actual ID in UUID format,
 	// or else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string

@@ -29,12 +29,12 @@ func (c *Client) GetAssessmentReportUrl(ctx context.Context, params *GetAssessme
 
 type GetAssessmentReportUrlInput struct {
 
-	// The unique identifier for the assessment.
+	//  The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The unique identifier for the assessment report.
+	//  The unique identifier for the assessment report.
 	//
 	// This member is required.
 	AssessmentReportId *string
@@ -44,7 +44,7 @@ type GetAssessmentReportUrlInput struct {
 
 type GetAssessmentReportUrlOutput struct {
 
-	// Short for uniform resource locator. A URL is used as a unique identifier to
+	//  Short for uniform resource locator. A URL is used as a unique identifier to
 	// locate a resource on the internet.
 	PreSignedUrl *types.URL
 

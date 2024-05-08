@@ -67,7 +67,7 @@ type GetWebExperienceOutput struct {
 	// description of the error that caused the data source connector to fail.
 	Error *types.ErrorDetail
 
-	// The Amazon Resource Name (ARN) of the service role attached to your web
+	//  The Amazon Resource Name (ARN) of the service role attached to your web
 	// experience.
 	RoleArn *string
 

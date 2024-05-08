@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a PackageDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
-// object that contains information about the requested package.
+//	Returns a [PackageDescription] object that contains information about the requested package.
+//
+// [PackageDescription]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html
 func (c *Client) DescribePackage(ctx context.Context, params *DescribePackageInput, optFns ...func(*Options)) (*DescribePackageOutput, error) {
 	if params == nil {
 		params = &DescribePackageInput{}
@@ -50,20 +51,27 @@ type DescribePackageInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the requested package. The package component that specifies
-	// its namespace depends on its type. For example: The namespace is required when
-	// requesting packages of the following formats:
+	// its namespace depends on its type. For example:
+	//
+	// The namespace is required when requesting packages of the following formats:
+	//
 	//   - Maven
+	//
 	//   - Swift
+	//
 	//   - generic
 	//
 	//   - The namespace of a Maven package version is its groupId .
+	//
 	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
 	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
 	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
@@ -73,8 +81,9 @@ type DescribePackageInput struct {
 
 type DescribePackageOutput struct {
 
-	// A PackageDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
-	// object that contains information about the requested package.
+	// A [PackageDescription] object that contains information about the requested package.
+	//
+	// [PackageDescription]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html
 	//
 	// This member is required.
 	Package *types.PackageDescription

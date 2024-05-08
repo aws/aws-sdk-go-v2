@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an integration workflow. An integration workflow is an async process
+//	Creates an integration workflow. An integration workflow is an async process
+//
 // which ingests historic data and sets up an integration for ongoing updates. The
 // supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo.
 func (c *Client) CreateIntegrationWorkflow(ctx context.Context, params *CreateIntegrationWorkflowInput, optFns ...func(*Options)) (*CreateIntegrationWorkflowOutput, error) {

@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates configurations for a data source. You can't change the
-// chunkingConfiguration after you create the data source. Specify the existing
-// chunkingConfiguration .
+// Updates configurations for a data source.
+//
+// You can't change the chunkingConfiguration after you create the data source.
+// Specify the existing chunkingConfiguration .
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
 		params = &UpdateDataSourceInput{}

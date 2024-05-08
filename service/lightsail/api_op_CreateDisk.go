@@ -12,10 +12,12 @@ import (
 )
 
 // Creates a block storage disk that can be attached to an Amazon Lightsail
-// instance in the same Availability Zone ( us-east-2a ). The create disk
-// operation supports tag-based access control via request tags. For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// instance in the same Availability Zone ( us-east-2a ).
+//
+// The create disk operation supports tag-based access control via request tags.
+// For more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateDisk(ctx context.Context, params *CreateDiskInput, optFns ...func(*Options)) (*CreateDiskOutput, error) {
 	if params == nil {
 		params = &CreateDiskInput{}
@@ -35,8 +37,10 @@ type CreateDiskInput struct {
 
 	// The Availability Zone where you want to create the disk ( us-east-2a ). Use the
 	// same Availability Zone as the Lightsail instance to which you want to attach the
-	// disk. Use the get regions operation to list the Availability Zones where
-	// Lightsail is currently available.
+	// disk.
+	//
+	// Use the get regions operation to list the Availability Zones where Lightsail is
+	// currently available.
 	//
 	// This member is required.
 	AvailabilityZone *string
@@ -54,8 +58,9 @@ type CreateDiskInput struct {
 	// An array of objects that represent the add-ons to enable for the new disk.
 	AddOns []types.AddOnRequest
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

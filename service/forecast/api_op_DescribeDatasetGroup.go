@@ -12,13 +12,20 @@ import (
 	"time"
 )
 
-// Describes a dataset group created using the CreateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html)
-// operation. In addition to listing the parameters provided in the
-// CreateDatasetGroup request, this operation includes the following properties:
+// Describes a dataset group created using the [CreateDatasetGroup] operation.
+//
+// In addition to listing the parameters provided in the CreateDatasetGroup
+// request, this operation includes the following properties:
+//
 //   - DatasetArns - The datasets belonging to the group.
+//
 //   - CreationTime
+//
 //   - LastModificationTime
+//
 //   - Status
+//
+// [CreateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html
 func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatasetGroupInput, optFns ...func(*Options)) (*DescribeDatasetGroupOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetGroupInput{}
@@ -62,20 +69,29 @@ type DescribeDatasetGroupOutput struct {
 	// The domain associated with the dataset group.
 	Domain types.Domain
 
-	// When the dataset group was created or last updated from a call to the
-	// UpdateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html)
+	// When the dataset group was created or last updated from a call to the [UpdateDatasetGroup]
 	// operation. While the dataset group is being updated, LastModificationTime is
 	// the current time of the DescribeDatasetGroup call.
+	//
+	// [UpdateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
 	LastModificationTime *time.Time
 
 	// The status of the dataset group. States include:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//
 	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//
 	//   - UPDATE_PENDING , UPDATE_IN_PROGRESS , UPDATE_FAILED
-	// The UPDATE states apply when you call the UpdateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html)
-	// operation. The Status of the dataset group must be ACTIVE before you can use
-	// the dataset group to create a predictor.
+	//
+	// The UPDATE states apply when you call the [UpdateDatasetGroup] operation.
+	//
+	// The Status of the dataset group must be ACTIVE before you can use the dataset
+	// group to create a predictor.
+	//
+	// [UpdateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
 	Status *string
 
 	// Metadata pertaining to the operation's result.

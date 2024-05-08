@@ -39,15 +39,21 @@ type DescribeClusterDbRevisionsInput struct {
 	// exceed the value specified in MaxRecords , Amazon Redshift returns a value in
 	// the marker field of the response. You can retrieve the next set of response
 	// records by providing the returned marker value in the marker parameter and
-	// retrying the request. Constraints: You can specify either the ClusterIdentifier
-	// parameter, or the marker parameter, but not both.
+	// retrying the request.
+	//
+	// Constraints: You can specify either the ClusterIdentifier parameter, or the
+	// marker parameter, but not both.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in the marker field of the response. You can retrieve the next set of
 	// response records by providing the returned marker value in the marker parameter
-	// and retrying the request. Default: 100 Constraints: minimum 20, maximum 100.
+	// and retrying the request.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -161,7 +167,11 @@ type DescribeClusterDbRevisionsPaginatorOptions struct {
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in the marker field of the response. You can retrieve the next set of
 	// response records by providing the returned marker value in the marker parameter
-	// and retrying the request. Default: 100 Constraints: minimum 20, maximum 100.
+	// and retrying the request.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

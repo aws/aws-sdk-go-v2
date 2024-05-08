@@ -12,9 +12,12 @@ import (
 	"time"
 )
 
-// Gets the real-time metric data from the specified Amazon Connect instance. For
-// a description of each metric, see Real-time Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
-// in the Amazon Connect Administrator Guide.
+// Gets the real-time metric data from the specified Amazon Connect instance.
+//
+// For a description of each metric, see [Real-time Metrics Definitions] in the Amazon Connect Administrator
+// Guide.
+//
+// [Real-time Metrics Definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
 func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMetricDataInput, optFns ...func(*Options)) (*GetCurrentMetricDataOutput, error) {
 	if params == nil {
 		params = &GetCurrentMetricDataInput{}
@@ -33,56 +36,123 @@ func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMet
 type GetCurrentMetricDataInput struct {
 
 	// The metrics to retrieve. Specify the name and unit for each metric. The
-	// following metrics are available. For a description of all the metrics, see
-	// Real-time Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
-	// in the Amazon Connect Administrator Guide. AGENTS_AFTER_CONTACT_WORK Unit: COUNT
-	// Name in real-time metrics report: ACW (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time)
-	// AGENTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Available (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time)
-	// AGENTS_ERROR Unit: COUNT Name in real-time metrics report: Error (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time)
-	// AGENTS_NON_PRODUCTIVE Unit: COUNT Name in real-time metrics report: NPT
-	// (Non-Productive Time) (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time)
-	// AGENTS_ON_CALL Unit: COUNT Name in real-time metrics report: On contact (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time)
-	// AGENTS_ON_CONTACT Unit: COUNT Name in real-time metrics report: On contact (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time)
-	// AGENTS_ONLINE Unit: COUNT Name in real-time metrics report: Online (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time)
-	// AGENTS_STAFFED Unit: COUNT Name in real-time metrics report: Staffed (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time)
-	// CONTACTS_IN_QUEUE Unit: COUNT Name in real-time metrics report: In queue (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time)
-	// CONTACTS_SCHEDULED Unit: COUNT Name in real-time metrics report: Scheduled (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time)
-	// OLDEST_CONTACT_AGE Unit: SECONDS When you use groupings, Unit says SECONDS and
-	// the Value is returned in SECONDS. When you do not use groupings, Unit says
-	// SECONDS but the Value is returned in MILLISECONDS. For example, if you get a
-	// response like this: { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit":
-	// "SECONDS" }, "Value": 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds.
+	// following metrics are available. For a description of all the metrics, see [Real-time Metrics Definitions]in
+	// the Amazon Connect Administrator Guide.
+	//
+	// AGENTS_AFTER_CONTACT_WORK Unit: COUNT
+	//
+	// Name in real-time metrics report: [ACW]
+	//
+	// AGENTS_AVAILABLE Unit: COUNT
+	//
+	// Name in real-time metrics report: [Available]
+	//
+	// AGENTS_ERROR Unit: COUNT
+	//
+	// Name in real-time metrics report: [Error]
+	//
+	// AGENTS_NON_PRODUCTIVE Unit: COUNT
+	//
+	// Name in real-time metrics report: [NPT (Non-Productive Time)]
+	//
+	// AGENTS_ON_CALL Unit: COUNT
+	//
+	// Name in real-time metrics report: [On contact]
+	//
+	// AGENTS_ON_CONTACT Unit: COUNT
+	//
+	// Name in real-time metrics report: [On contact]
+	//
+	// AGENTS_ONLINE Unit: COUNT
+	//
+	// Name in real-time metrics report: [Online]
+	//
+	// AGENTS_STAFFED Unit: COUNT
+	//
+	// Name in real-time metrics report: [Staffed]
+	//
+	// CONTACTS_IN_QUEUE Unit: COUNT
+	//
+	// Name in real-time metrics report: [In queue]
+	//
+	// CONTACTS_SCHEDULED Unit: COUNT
+	//
+	// Name in real-time metrics report: [Scheduled]
+	//
+	// OLDEST_CONTACT_AGE Unit: SECONDS
+	//
+	// When you use groupings, Unit says SECONDS and the Value is returned in SECONDS.
+	//
+	// When you do not use groupings, Unit says SECONDS but the Value is returned in
+	// MILLISECONDS. For example, if you get a response like this:
+	//
+	// { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value":
+	// 24113.0 }
+	//
+	// The actual OLDEST_CONTACT_AGE is 24 seconds.
+	//
 	// When the filter RoutingStepExpression is used, this metric is still calculated
 	// from enqueue time. For example, if a contact that has been queued under for 10
 	// seconds has expired and becomes active, then OLDEST_CONTACT_AGE for this queue
-	// will be counted starting from 10, not 0. Name in real-time metrics report:
-	// Oldest (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time)
-	// SLOTS_ACTIVE Unit: COUNT Name in real-time metrics report: Active (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time)
-	// SLOTS_AVAILABLE Unit: COUNT Name in real-time metrics report: Availability (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time)
+	// will be counted starting from 10, not 0.
+	//
+	// Name in real-time metrics report: [Oldest]
+	//
+	// SLOTS_ACTIVE Unit: COUNT
+	//
+	// Name in real-time metrics report: [Active]
+	//
+	// SLOTS_AVAILABLE Unit: COUNT
+	//
+	// Name in real-time metrics report: [Availability]
+	//
+	// [Availability]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time
+	// [Staffed]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time
+	// [NPT (Non-Productive Time)]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time
+	// [Real-time Metrics Definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html
+	// [Error]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time
+	// [Scheduled]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time
+	// [Oldest]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time
+	// [On contact]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time
+	// [Active]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time
+	// [ACW]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time
+	// [Available]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time
+	// [In queue]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time
+	// [Online]: https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time
 	//
 	// This member is required.
 	CurrentMetrics []types.CurrentMetric
 
 	// The filters to apply to returned metrics. You can filter up to the following
 	// limits:
+	//
 	//   - Queues: 100
+	//
 	//   - Routing profiles: 100
+	//
 	//   - Channels: 3 (VOICE, CHAT, and TASK channels are supported.)
+	//
 	//   - RoutingStepExpressions: 50
+	//
 	// Metric data is retrieved only for the resources associated with the queues or
 	// routing profiles, and by any channels included in the filter. (You cannot filter
 	// by both queue AND routing profile.) You can include both resource IDs and
-	// resource ARNs in the same request. When using the RoutingStepExpression filter,
-	// you need to pass exactly one QueueId . The filter is also case sensitive so when
-	// using the RoutingStepExpression filter, grouping by ROUTING_STEP_EXPRESSION is
-	// required. Currently tagging is only supported on the resources that are passed
-	// in the filter.
+	// resource ARNs in the same request.
+	//
+	// When using the RoutingStepExpression filter, you need to pass exactly one
+	// QueueId . The filter is also case sensitive so when using the
+	// RoutingStepExpression filter, grouping by ROUTING_STEP_EXPRESSION is required.
+	//
+	// Currently tagging is only supported on the resources that are passed in the
+	// filter.
 	//
 	// This member is required.
 	Filters *types.Filters
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -90,12 +160,16 @@ type GetCurrentMetricDataInput struct {
 	// The grouping applied to the metrics returned. For example, when grouped by QUEUE
 	// , the metrics returned apply to each queue rather than aggregated for all
 	// queues.
+	//
 	//   - If you group by CHANNEL , you should include a Channels filter. VOICE, CHAT,
 	//   and TASK channels are supported.
+	//
 	//   - If you group by ROUTING_PROFILE , you must include either a queue or routing
 	//   profile filter. In addition, a routing profile filter is required for metrics
 	//   CONTACTS_SCHEDULED , CONTACTS_IN_QUEUE , and OLDEST_CONTACT_AGE .
+	//
 	//   - If no Grouping is included in the request, a summary of metrics is returned.
+	//
 	//   - When using the RoutingStepExpression filter, group by
 	//   ROUTING_STEP_EXPRESSION is required.
 	Groupings []types.Grouping
@@ -104,15 +178,19 @@ type GetCurrentMetricDataInput struct {
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results. The token
-	// expires after 5 minutes from the time it is created. Subsequent requests that
-	// use the token must use the same request parameters as the request that generated
-	// the token.
+	// response in the next request to retrieve the next set of results.
+	//
+	// The token expires after 5 minutes from the time it is created. Subsequent
+	// requests that use the token must use the same request parameters as the request
+	// that generated the token.
 	NextToken *string
 
 	// The way to sort the resulting response based on metrics. You can enter one sort
 	// criteria. By default resources are sorted based on AGENTS_ONLINE , DESCENDING .
-	// The metric collection is sorted based on the input metrics. Note the following:
+	// The metric collection is sorted based on the input metrics.
+	//
+	// Note the following:
+	//
 	//   - Sorting on SLOTS_ACTIVE and SLOTS_AVAILABLE is not supported.
 	SortCriteria []types.CurrentMetricSortCriteria
 
@@ -131,6 +209,7 @@ type GetCurrentMetricDataOutput struct {
 	MetricResults []types.CurrentMetricResult
 
 	// If there are additional results, this is the token for the next set of results.
+	//
 	// The token expires after 5 minutes from the time it is created. Subsequent
 	// requests that use the token must use the same request parameters as the request
 	// that generated the token.

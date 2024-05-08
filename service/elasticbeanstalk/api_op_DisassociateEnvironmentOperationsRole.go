@@ -13,8 +13,9 @@ import (
 // Disassociate the operations role from an environment. After this call is made,
 // Elastic Beanstalk uses the caller's permissions for permissions to downstream
 // services during subsequent calls acting on this environment. For more
-// information, see Operations roles (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
-// in the AWS Elastic Beanstalk Developer Guide.
+// information, see [Operations roles]in the AWS Elastic Beanstalk Developer Guide.
+//
+// [Operations roles]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
 func (c *Client) DisassociateEnvironmentOperationsRole(ctx context.Context, params *DisassociateEnvironmentOperationsRoleInput, optFns ...func(*Options)) (*DisassociateEnvironmentOperationsRoleOutput, error) {
 	if params == nil {
 		params = &DisassociateEnvironmentOperationsRoleInput{}

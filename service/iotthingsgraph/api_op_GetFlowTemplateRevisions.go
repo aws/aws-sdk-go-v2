@@ -34,8 +34,11 @@ func (c *Client) GetFlowTemplateRevisions(ctx context.Context, params *GetFlowTe
 
 type GetFlowTemplateRevisionsInput struct {
 
-	// The ID of the workflow. The ID should be in the following format.
-	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
+	// The ID of the workflow.
+	//
+	// The ID should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
 	//
 	// This member is required.
 	Id *string

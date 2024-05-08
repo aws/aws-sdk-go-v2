@@ -13,9 +13,13 @@ import (
 
 // Creates the decoder manifest associated with a model manifest. To create a
 // decoder manifest, the following must be true:
+//
 //   - Every signal decoder has a unique name.
+//
 //   - Each signal decoder is associated with a network interface.
+//
 //   - Each network interface has a unique ID.
+//
 //   - The signal decoders are specified in the model manifest.
 func (c *Client) CreateDecoderManifest(ctx context.Context, params *CreateDecoderManifestInput, optFns ...func(*Options)) (*CreateDecoderManifestOutput, error) {
 	if params == nil {
@@ -34,23 +38,23 @@ func (c *Client) CreateDecoderManifest(ctx context.Context, params *CreateDecode
 
 type CreateDecoderManifestInput struct {
 
-	// The Amazon Resource Name (ARN) of the vehicle model (model manifest).
+	//  The Amazon Resource Name (ARN) of the vehicle model (model manifest).
 	//
 	// This member is required.
 	ModelManifestArn *string
 
-	// The unique name of the decoder manifest to create.
+	//  The unique name of the decoder manifest to create.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the decoder manifest.
+	//  A brief description of the decoder manifest.
 	Description *string
 
-	// A list of information about available network interfaces.
+	//  A list of information about available network interfaces.
 	NetworkInterfaces []types.NetworkInterface
 
-	// A list of information about signal decoders.
+	//  A list of information about signal decoders.
 	SignalDecoders []types.SignalDecoder
 
 	// Metadata that can be used to manage the decoder manifest.
@@ -61,12 +65,12 @@ type CreateDecoderManifestInput struct {
 
 type CreateDecoderManifestOutput struct {
 
-	// The ARN of the created decoder manifest.
+	//  The ARN of the created decoder manifest.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the created decoder manifest.
+	//  The name of the created decoder manifest.
 	//
 	// This member is required.
 	Name *string

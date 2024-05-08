@@ -15,17 +15,23 @@ import (
 // from the outside-in. Canaries help you check the availability and latency of
 // your web services and troubleshoot anomalies by investigating load time data,
 // screenshots of the UI, logs, and metrics. You can set up a canary to run
-// continuously or just once. Do not use CreateCanary to modify an existing
-// canary. Use UpdateCanary (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html)
-// instead. To create canaries, you must have the CloudWatchSyntheticsFullAccess
-// policy. If you are creating a new IAM role for the canary, you also need the
-// iam:CreateRole , iam:CreatePolicy and iam:AttachRolePolicy permissions. For
-// more information, see Necessary Roles and Permissions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles)
-// . Do not include secrets or proprietary information in your canary names. The
+// continuously or just once.
+//
+// Do not use CreateCanary to modify an existing canary. Use [UpdateCanary] instead.
+//
+// To create canaries, you must have the CloudWatchSyntheticsFullAccess policy. If
+// you are creating a new IAM role for the canary, you also need the iam:CreateRole
+// , iam:CreatePolicy and iam:AttachRolePolicy permissions. For more information,
+// see [Necessary Roles and Permissions].
+//
+// Do not include secrets or proprietary information in your canary names. The
 // canary name makes up part of the Amazon Resource Name (ARN) for the canary, and
 // the ARN is included in outbound calls over the internet. For more information,
-// see Security Considerations for Synthetics Canaries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html)
-// .
+// see [Security Considerations for Synthetics Canaries].
+//
+// [UpdateCanary]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html
+// [Necessary Roles and Permissions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles
+// [Security Considerations for Synthetics Canaries]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html
 func (c *Client) CreateCanary(ctx context.Context, params *CreateCanaryInput, optFns ...func(*Options)) (*CreateCanaryOutput, error) {
 	if params == nil {
 		params = &CreateCanaryInput{}
@@ -60,31 +66,40 @@ type CreateCanaryInput struct {
 	// The ARN of the IAM role to be used to run the canary. This role must already
 	// exist, and must include lambda.amazonaws.com as a principal in the trust
 	// policy. The role must also have the following permissions:
+	//
 	//   - s3:PutObject
+	//
 	//   - s3:GetBucketLocation
+	//
 	//   - s3:ListAllMyBuckets
+	//
 	//   - cloudwatch:PutMetricData
+	//
 	//   - logs:CreateLogGroup
+	//
 	//   - logs:CreateLogStream
+	//
 	//   - logs:PutLogEvents
 	//
 	// This member is required.
 	ExecutionRoleArn *string
 
 	// The name for this canary. Be sure to give it a descriptive name that
-	// distinguishes it from other canaries in your account. Do not include secrets or
-	// proprietary information in your canary names. The canary name makes up part of
-	// the canary ARN, and the ARN is included in outbound calls over the internet. For
-	// more information, see Security Considerations for Synthetics Canaries (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html)
-	// .
+	// distinguishes it from other canaries in your account.
+	//
+	// Do not include secrets or proprietary information in your canary names. The
+	// canary name makes up part of the canary ARN, and the ARN is included in outbound
+	// calls over the internet. For more information, see [Security Considerations for Synthetics Canaries].
+	//
+	// [Security Considerations for Synthetics Canaries]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html
 	//
 	// This member is required.
 	Name *string
 
 	// Specifies the runtime version to use for the canary. For a list of valid
-	// runtime versions and more information about runtime versions, see Canary
-	// Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
-	// .
+	// runtime versions and more information about runtime versions, see [Canary Runtime Versions].
+	//
+	// [Canary Runtime Versions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
 	//
 	// This member is required.
 	RuntimeVersion *string
@@ -104,8 +119,10 @@ type CreateCanaryInput struct {
 	FailureRetentionPeriodInDays *int32
 
 	// A structure that contains the configuration for individual canary runs, such as
-	// timeout value and environment variables. The environment variables keys and
-	// values are not encrypted. Do not store sensitive information in this field.
+	// timeout value and environment variables.
+	//
+	// The environment variables keys and values are not encrypted. Do not store
+	// sensitive information in this field.
 	RunConfig *types.CanaryRunConfigInput
 
 	// The number of days to retain data about successful runs of this canary. If you
@@ -114,15 +131,18 @@ type CreateCanaryInput struct {
 	SuccessRetentionPeriodInDays *int32
 
 	// A list of key-value pairs to associate with the canary. You can associate as
-	// many as 50 tags with a canary. Tags can help you organize and categorize your
-	// resources. You can also use them to scope user permissions, by granting a user
-	// permission to access or change only the resources that have certain tag values.
+	// many as 50 tags with a canary.
+	//
+	// Tags can help you organize and categorize your resources. You can also use them
+	// to scope user permissions, by granting a user permission to access or change
+	// only the resources that have certain tag values.
 	Tags map[string]string
 
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnet and security groups of the VPC endpoint. For more
-	// information, see Running a Canary in a VPC (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html)
-	// .
+	// information, see [Running a Canary in a VPC].
+	//
+	// [Running a Canary in a VPC]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
 	VpcConfig *types.VpcConfigInput
 
 	noSmithyDocumentSerde

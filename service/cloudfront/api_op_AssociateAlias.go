@@ -11,16 +11,20 @@ import (
 )
 
 // Associates an alias (also known as a CNAME or an alternate domain name) with a
-// CloudFront distribution. With this operation you can move an alias that's
-// already in use on a CloudFront distribution to a different distribution in one
-// step. This prevents the downtime that could occur if you first remove the alias
-// from one distribution and then separately add the alias to another distribution.
-// To use this operation to associate an alias with a distribution, you provide the
-// alias and the ID of the target distribution for the alias. For more information,
-// including how to set up the target distribution, prerequisites that you must
-// complete, and other restrictions, see Moving an alternate domain name to a
-// different distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move)
-// in the Amazon CloudFront Developer Guide.
+// CloudFront distribution.
+//
+// With this operation you can move an alias that's already in use on a CloudFront
+// distribution to a different distribution in one step. This prevents the downtime
+// that could occur if you first remove the alias from one distribution and then
+// separately add the alias to another distribution.
+//
+// To use this operation to associate an alias with a distribution, you provide
+// the alias and the ID of the target distribution for the alias. For more
+// information, including how to set up the target distribution, prerequisites that
+// you must complete, and other restrictions, see [Moving an alternate domain name to a different distribution]in the Amazon CloudFront
+// Developer Guide.
+//
+// [Moving an alternate domain name to a different distribution]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html#alternate-domain-names-move
 func (c *Client) AssociateAlias(ctx context.Context, params *AssociateAliasInput, optFns ...func(*Options)) (*AssociateAliasOutput, error) {
 	if params == nil {
 		params = &AssociateAliasInput{}

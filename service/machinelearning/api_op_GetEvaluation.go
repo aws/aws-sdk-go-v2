@@ -90,30 +90,38 @@ type GetEvaluationOutput struct {
 	// Measurements of how well the MLModel performed using observations referenced by
 	// the DataSource . One of the following metric is returned based on the type of
 	// the MLModel :
+	//
 	//   - BinaryAUC: A binary MLModel uses the Area Under the Curve (AUC) technique to
 	//   measure performance.
+	//
 	//   - RegressionRMSE: A regression MLModel uses the Root Mean Square Error (RMSE)
 	//   technique to measure performance. RMSE measures the difference between predicted
 	//   and actual values for a single variable.
+	//
 	//   - MulticlassAvgFScore: A multiclass MLModel uses the F1 score technique to
 	//   measure performance.
-	// For more information about performance metrics, please see the Amazon Machine
-	// Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg)
-	// .
+	//
+	// For more information about performance metrics, please see the [Amazon Machine Learning Developer Guide].
+	//
+	// [Amazon Machine Learning Developer Guide]: https://docs.aws.amazon.com/machine-learning/latest/dg
 	PerformanceMetrics *types.PerformanceMetrics
 
 	// The epoch time when Amazon Machine Learning marked the Evaluation as INPROGRESS
 	// . StartedAt isn't available if the Evaluation is in the PENDING state.
 	StartedAt *time.Time
 
-	// The status of the evaluation. This element can have one of the following
-	// values:
+	// The status of the evaluation. This element can have one of the following values:
+	//
 	//   - PENDING - Amazon Machine Language (Amazon ML) submitted a request to
 	//   evaluate an MLModel .
+	//
 	//   - INPROGRESS - The evaluation is underway.
+	//
 	//   - FAILED - The request to evaluate an MLModel did not run to completion. It is
 	//   not usable.
+	//
 	//   - COMPLETED - The evaluation process completed successfully.
+	//
 	//   - DELETED - The Evaluation is marked as deleted. It is not usable.
 	Status types.EntityStatus
 

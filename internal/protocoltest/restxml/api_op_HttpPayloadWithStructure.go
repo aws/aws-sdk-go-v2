@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example serializes a structure in the payload. Note that serializing a
-// structure changes the wrapper element name to match the targeted structure.
+// This example serializes a structure in the payload.
+//
+// Note that serializing a structure changes the wrapper element name to match the
+// targeted structure.
 func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPayloadWithStructureInput, optFns ...func(*Options)) (*HttpPayloadWithStructureOutput, error) {
 	if params == nil {
 		params = &HttpPayloadWithStructureInput{}

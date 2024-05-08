@@ -8,8 +8,10 @@ import (
 )
 
 // Specified CIDRIP or EC2 security group is not authorized for the specified DB
-// security group. Neptune may not also be authorized via IAM to perform necessary
-// actions on your behalf.
+// security group.
+//
+// Neptune may not also be authorized via IAM to perform necessary actions on your
+// behalf.
 type AuthorizationNotFoundFault struct {
 	Message *string
 
@@ -195,7 +197,8 @@ func (e *DBClusterNotFoundFault) ErrorCode() string {
 }
 func (e *DBClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// DBClusterParameterGroupName does not refer to an existing DB Cluster parameter
+//	DBClusterParameterGroupName does not refer to an existing DB Cluster parameter
+//
 // group.
 type DBClusterParameterGroupNotFoundFault struct {
 	Message *string

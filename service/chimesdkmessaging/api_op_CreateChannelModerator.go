@@ -12,10 +12,15 @@ import (
 )
 
 // Creates a new ChannelModerator . A channel moderator can:
+//
 //   - Add and remove other members of the channel.
+//
 //   - Add and remove other moderators of the channel.
+//
 //   - Add and remove user bans for the channel.
+//
 //   - Redact messages in the channel.
+//
 //   - List messages in the channel.
 //
 // The x-amz-chime-bearer request header is mandatory. Use the ARN of the

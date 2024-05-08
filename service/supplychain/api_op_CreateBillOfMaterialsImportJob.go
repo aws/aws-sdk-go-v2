@@ -12,9 +12,11 @@ import (
 
 // CreateBillOfMaterialsImportJob creates an import job for the Product Bill Of
 // Materials (BOM) entity. For information on the product_bom entity, see the AWS
-// Supply Chain User Guide. The CSV file must be located in an Amazon S3 location
-// accessible to AWS Supply Chain. It is recommended to use the same Amazon S3
-// bucket created during your AWS Supply Chain instance creation.
+// Supply Chain User Guide.
+//
+// The CSV file must be located in an Amazon S3 location accessible to AWS Supply
+// Chain. It is recommended to use the same Amazon S3 bucket created during your
+// AWS Supply Chain instance creation.
 func (c *Client) CreateBillOfMaterialsImportJob(ctx context.Context, params *CreateBillOfMaterialsImportJobInput, optFns ...func(*Options)) (*CreateBillOfMaterialsImportJobOutput, error) {
 	if params == nil {
 		params = &CreateBillOfMaterialsImportJobInput{}

@@ -11,8 +11,10 @@ import (
 )
 
 // Removes the association of the specified tags from an Amazon Pinpoint SMS Voice
-// V2 resource. For more information on tags see Tagging Amazon Pinpoint resources (https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html)
-// in the Amazon Pinpoint Developer Guide.
+// V2 resource. For more information on tags see [Tagging Amazon Pinpoint resources]in the Amazon Pinpoint Developer
+// Guide.
+//
+// [Tagging Amazon Pinpoint resources]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/tagging-resources.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

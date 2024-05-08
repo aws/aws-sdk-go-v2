@@ -12,8 +12,10 @@ import (
 )
 
 // Returns the list of powers that can be specified for your Amazon Lightsail
-// container services. The power specifies the amount of memory, the number of
-// vCPUs, and the base price of the container service.
+// container services.
+//
+// The power specifies the amount of memory, the number of vCPUs, and the base
+// price of the container service.
 func (c *Client) GetContainerServicePowers(ctx context.Context, params *GetContainerServicePowersInput, optFns ...func(*Options)) (*GetContainerServicePowersOutput, error) {
 	if params == nil {
 		params = &GetContainerServicePowersInput{}

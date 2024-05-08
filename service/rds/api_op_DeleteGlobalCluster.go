@@ -12,8 +12,9 @@ import (
 )
 
 // Deletes a global database cluster. The primary and secondary clusters must
-// already be detached or destroyed first. This action only applies to Aurora DB
-// clusters.
+// already be detached or destroyed first.
+//
+// This action only applies to Aurora DB clusters.
 func (c *Client) DeleteGlobalCluster(ctx context.Context, params *DeleteGlobalClusterInput, optFns ...func(*Options)) (*DeleteGlobalClusterOutput, error) {
 	if params == nil {
 		params = &DeleteGlobalClusterInput{}

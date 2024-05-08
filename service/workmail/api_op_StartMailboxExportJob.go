@@ -12,8 +12,10 @@ import (
 
 // Starts a mailbox export job to export MIME-format email messages and calendar
 // items from the specified mailbox to the specified Amazon Simple Storage Service
-// (Amazon S3) bucket. For more information, see Exporting mailbox content (https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html)
-// in the WorkMail Administrator Guide.
+// (Amazon S3) bucket. For more information, see [Exporting mailbox content]in the WorkMail Administrator
+// Guide.
+//
+// [Exporting mailbox content]: https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html
 func (c *Client) StartMailboxExportJob(ctx context.Context, params *StartMailboxExportJobInput, optFns ...func(*Options)) (*StartMailboxExportJobOutput, error) {
 	if params == nil {
 		params = &StartMailboxExportJobInput{}
@@ -36,13 +38,17 @@ type StartMailboxExportJobInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The identifier of the user or resource associated with the mailbox. The
-	// identifier can accept UserId or ResourceId, Username or Resourcename, or email.
-	// The following identity formats are available:
+	// The identifier of the user or resource associated with the mailbox.
+	//
+	// The identifier can accept UserId or ResourceId, Username or Resourcename, or
+	// email. The following identity formats are available:
+	//
 	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
 	//   r-0123456789a0123456789b0123456789 , or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: entity@domain.tld
+	//
 	//   - Entity name: entity
 	//
 	// This member is required.

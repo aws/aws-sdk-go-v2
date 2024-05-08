@@ -39,8 +39,10 @@ type UpdateSensitivityInspectionTemplateInput struct {
 	Description *string
 
 	// The managed data identifiers to explicitly exclude (not use) when analyzing
-	// data. To exclude an allow list or custom data identifier that's currently
-	// included by the template, update the values for the
+	// data.
+	//
+	// To exclude an allow list or custom data identifier that's currently included by
+	// the template, update the values for the
 	// SensitivityInspectionTemplateIncludes.allowListIds and
 	// SensitivityInspectionTemplateIncludes.customDataIdentifierIds properties,
 	// respectively.

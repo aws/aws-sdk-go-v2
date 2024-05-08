@@ -12,7 +12,7 @@ import (
 )
 
 // Attaches an Amazon Web Services managed or customer managed policy to the
-// specified PermissionSet as a permissions boundary.
+// specified PermissionSetas a permissions boundary.
 func (c *Client) PutPermissionsBoundaryToPermissionSet(ctx context.Context, params *PutPermissionsBoundaryToPermissionSetInput, optFns ...func(*Options)) (*PutPermissionsBoundaryToPermissionSetOutput, error) {
 	if params == nil {
 		params = &PutPermissionsBoundaryToPermissionSetInput{}

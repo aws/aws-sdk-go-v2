@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Takes a list of configurationId as input and starts an asynchronous deletion
+//	Takes a list of configurationId as input and starts an asynchronous deletion
+//
 // task to remove the configurationItems. Returns a unique deletion task
 // identifier.
 func (c *Client) StartBatchDeleteConfigurationTask(ctx context.Context, params *StartBatchDeleteConfigurationTaskInput, optFns ...func(*Options)) (*StartBatchDeleteConfigurationTaskOutput, error) {
@@ -31,12 +32,12 @@ func (c *Client) StartBatchDeleteConfigurationTask(ctx context.Context, params *
 
 type StartBatchDeleteConfigurationTaskInput struct {
 
-	// The list of configuration IDs that will be deleted by the task.
+	//  The list of configuration IDs that will be deleted by the task.
 	//
 	// This member is required.
 	ConfigurationIds []string
 
-	// The type of configuration item to delete. Supported types are: SERVER.
+	//  The type of configuration item to delete. Supported types are: SERVER.
 	//
 	// This member is required.
 	ConfigurationType types.DeletionConfigurationItemType
@@ -46,7 +47,7 @@ type StartBatchDeleteConfigurationTaskInput struct {
 
 type StartBatchDeleteConfigurationTaskOutput struct {
 
-	// The unique identifier associated with the newly started deletion task.
+	//  The unique identifier associated with the newly started deletion task.
 	TaskId *string
 
 	// Metadata pertaining to the operation's result.

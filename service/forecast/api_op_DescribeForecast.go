@@ -12,13 +12,19 @@ import (
 	"time"
 )
 
-// Describes a forecast created using the CreateForecast operation. In addition to
-// listing the properties provided in the CreateForecast request, this operation
-// lists the following properties:
+// Describes a forecast created using the CreateForecast operation.
+//
+// In addition to listing the properties provided in the CreateForecast request,
+// this operation lists the following properties:
+//
 //   - DatasetGroupArn - The dataset group that provided the training data.
+//
 //   - CreationTime
+//
 //   - LastModificationTime
+//
 //   - Status
+//
 //   - Message - If an error occurred, information about the error.
 func (c *Client) DescribeForecast(ctx context.Context, params *DescribeForecastInput, optFns ...func(*Options)) (*DescribeForecastOutput, error) {
 	if params == nil {
@@ -67,10 +73,15 @@ type DescribeForecastOutput struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
+	//
 	//   - CREATE_PENDING - The CreationTime .
+	//
 	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//
 	//   - CREATE_STOPPING - The current timestamp.
+	//
 	//   - CREATE_STOPPED - When the job stopped.
+	//
 	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
@@ -81,10 +92,15 @@ type DescribeForecastOutput struct {
 	PredictorArn *string
 
 	// The status of the forecast. States include:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//
 	//   - CREATE_STOPPING , CREATE_STOPPED
+	//
 	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//
 	// The Status of the forecast must be ACTIVE before you can query or export the
 	// forecast.
 	Status *string

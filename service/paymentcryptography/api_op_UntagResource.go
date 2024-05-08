@@ -10,12 +10,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a tag from an Amazon Web Services Payment Cryptography key. Tagging or
-// untagging an Amazon Web Services Payment Cryptography key can allow or deny
-// permission to the key. Cross-account use: This operation can't be used across
-// different Amazon Web Services accounts. Related operations:
-//   - ListTagsForResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html)
-//   - TagResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html)
+// Deletes a tag from an Amazon Web Services Payment Cryptography key.
+//
+// Tagging or untagging an Amazon Web Services Payment Cryptography key can allow
+// or deny permission to the key.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
+// Related operations:
+//
+// [ListTagsForResource]
+//
+// [TagResource]
+//
+// [TagResource]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
+// [ListTagsForResource]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -38,11 +48,13 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// One or more tag keys. Don't include the tag values. If the Amazon Web Services
-	// Payment Cryptography key doesn't have the specified tag key, Amazon Web Services
-	// Payment Cryptography doesn't throw an exception or return a response. To confirm
-	// that the operation succeeded, use the ListTagsForResource (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html)
-	// operation.
+	// One or more tag keys. Don't include the tag values.
+	//
+	// If the Amazon Web Services Payment Cryptography key doesn't have the specified
+	// tag key, Amazon Web Services Payment Cryptography doesn't throw an exception or
+	// return a response. To confirm that the operation succeeded, use the [ListTagsForResource]operation.
+	//
+	// [ListTagsForResource]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html
 	//
 	// This member is required.
 	TagKeys []string

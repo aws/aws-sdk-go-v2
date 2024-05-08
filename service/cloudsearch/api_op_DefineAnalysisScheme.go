@@ -12,9 +12,10 @@ import (
 )
 
 // Configures an analysis scheme that can be applied to a text or text-array field
-// to define language-specific text processing options. For more information, see
-// Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
+// to define language-specific text processing options. For more information, see [Configuring Analysis Schemes]
 // in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Analysis Schemes]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html
 func (c *Client) DefineAnalysisScheme(ctx context.Context, params *DefineAnalysisSchemeInput, optFns ...func(*Options)) (*DefineAnalysisSchemeOutput, error) {
 	if params == nil {
 		params = &DefineAnalysisSchemeInput{}
@@ -30,8 +31,8 @@ func (c *Client) DefineAnalysisScheme(ctx context.Context, params *DefineAnalysi
 	return out, nil
 }
 
-// Container for the parameters to the DefineAnalysisScheme operation. Specifies
-// the name of the domain you want to update and the analysis scheme configuration.
+// Container for the parameters to the DefineAnalysisScheme operation. Specifies the name of the
+// domain you want to update and the analysis scheme configuration.
 type DefineAnalysisSchemeInput struct {
 
 	// Configuration information for an analysis scheme. Each analysis scheme has a
@@ -53,8 +54,8 @@ type DefineAnalysisSchemeInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DefineAnalysisScheme request. Contains the status of the
-// newly-configured analysis scheme.
+// The result of a DefineAnalysisScheme request. Contains the status of the newly-configured analysis
+// scheme.
 type DefineAnalysisSchemeOutput struct {
 
 	// The status and configuration of an AnalysisScheme .

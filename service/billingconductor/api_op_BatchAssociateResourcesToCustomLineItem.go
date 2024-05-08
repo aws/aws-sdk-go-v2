@@ -29,12 +29,12 @@ func (c *Client) BatchAssociateResourcesToCustomLineItem(ctx context.Context, pa
 
 type BatchAssociateResourcesToCustomLineItemInput struct {
 
-	// A list containing the ARNs of the resources to be associated.
+	//  A list containing the ARNs of the resources to be associated.
 	//
 	// This member is required.
 	ResourceArns []string
 
-	// A percentage custom line item ARN to associate the resources to.
+	//  A percentage custom line item ARN to associate the resources to.
 	//
 	// This member is required.
 	TargetArn *string
@@ -47,11 +47,11 @@ type BatchAssociateResourcesToCustomLineItemInput struct {
 
 type BatchAssociateResourcesToCustomLineItemOutput struct {
 
-	// A list of AssociateResourceResponseElement for each resource that failed
+	//  A list of AssociateResourceResponseElement for each resource that failed
 	// association to a percentage custom line item.
 	FailedAssociatedResources []types.AssociateResourceResponseElement
 
-	// A list of AssociateResourceResponseElement for each resource that's been
+	//  A list of AssociateResourceResponseElement for each resource that's been
 	// associated to a percentage custom line item successfully.
 	SuccessfullyAssociatedResources []types.AssociateResourceResponseElement
 

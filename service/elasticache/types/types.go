@@ -47,14 +47,20 @@ type CacheCluster struct {
 	// The ARN (Amazon Resource Name) of the cache cluster.
 	ARN *string
 
-	// A flag that enables encryption at-rest when set to true . You cannot modify the
-	// value of AtRestEncryptionEnabled after the cluster is created. To enable
-	// at-rest encryption on a cluster you must set AtRestEncryptionEnabled to true
-	// when you create a cluster. Required: Only available when creating a replication
-	// group in an Amazon VPC using redis version 3.2.6 , 4.x or later. Default: false
+	// A flag that enables encryption at-rest when set to true .
+	//
+	// You cannot modify the value of AtRestEncryptionEnabled after the cluster is
+	// created. To enable at-rest encryption on a cluster you must set
+	// AtRestEncryptionEnabled to true when you create a cluster.
+	//
+	// Required: Only available when creating a replication group in an Amazon VPC
+	// using redis version 3.2.6 , 4.x or later.
+	//
+	// Default: false
 	AtRestEncryptionEnabled *bool
 
 	// A flag that enables using an AuthToken (password) when issuing Redis commands.
+	//
 	// Default: false
 	AuthTokenEnabled *bool
 
@@ -78,57 +84,102 @@ type CacheCluster struct {
 	// cluster nodes , restore-failed , or snapshotting .
 	CacheClusterStatus *string
 
-	// The name of the compute and memory capacity node type for the cluster. The
-	// following node types are supported by ElastiCache. Generally speaking, the
+	// The name of the compute and memory capacity node type for the cluster.
+	//
+	// The following node types are supported by ElastiCache. Generally speaking, the
 	// current generation types provide more memory and computational power at lower
 	// cost when compared to their equivalent previous generation counterparts.
+	//
 	//   - General purpose:
-	//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
-	//   cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
-	//   , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   M6g node types (available only for Redis engine version 5.0.6 onward and for
-	//   Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
-	//   cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
-	//   , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
-	//   cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
-	//   node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
-	//   cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
-	//   engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
-	//   cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
-	//   cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
-	//   cache.t2.micro , cache.t2.small , cache.t2.medium
+	//
+	//   - Current generation:
+	//
+	// M7g node types: cache.m7g.large , cache.m7g.xlarge , cache.m7g.2xlarge ,
+	//   cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge ,
+	//   cache.m7g.16xlarge
+	//
+	// For region availability, see [Supported Node Types]
+	//
+	// M6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward):
+	//
+	// cache.m6g.large , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge ,
+	//   cache.m6g.8xlarge , cache.m6g.12xlarge , cache.m6g.16xlarge
+	//
+	// M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
+	//   cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge
+	//
+	// M4 node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+	//   cache.m4.4xlarge , cache.m4.10xlarge
+	//
+	// T4g node types (available only for Redis engine version 5.0.6 onward and
+	//   Memcached engine version 1.5.16 onward): cache.t4g.micro , cache.t4g.small ,
+	//   cache.t4g.medium
+	//
+	// T3 node types: cache.t3.micro , cache.t3.small , cache.t3.medium
+	//
+	// T2 node types: cache.t2.micro , cache.t2.small , cache.t2.medium
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) T1
-	//   node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
-	//   cache.m1.large , cache.m1.xlarge M3 node types: cache.m3.medium ,
-	//   cache.m3.large , cache.m3.xlarge , cache.m3.2xlarge
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// T1 node types: cache.t1.micro
+	//
+	// M1 node types: cache.m1.small , cache.m1.medium , cache.m1.large ,
+	//   cache.m1.xlarge
+	//
+	// M3 node types: cache.m3.medium , cache.m3.large , cache.m3.xlarge ,
+	//   cache.m3.2xlarge
+	//
 	//   - Compute optimized:
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) C1
-	//   node types: cache.c1.xlarge
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// C1 node types: cache.c1.xlarge
+	//
 	//   - Memory optimized:
-	//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
-	//   cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
-	//   , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   R6g node types (available only for Redis engine version 5.0.6 onward and for
+	//
+	//   - Current generation:
+	//
+	// R7g node types: cache.r7g.large , cache.r7g.xlarge , cache.r7g.2xlarge ,
+	//   cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge ,
+	//   cache.r7g.16xlarge
+	//
+	// For region availability, see [Supported Node Types]
+	//
+	// R6g node types (available only for Redis engine version 5.0.6 onward and for
 	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
 	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
-	//   , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
-	//   cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
-	//   node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+	//   , cache.r6g.16xlarge
+	//
+	// R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
+	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge
+	//
+	// R4 node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
 	//   cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) M2
-	//   node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
-	//   types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// M2 node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge
+	//
+	// R3 node types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
 	//
 	// cache.r3.4xlarge , cache.r3.8xlarge
+	//
 	// Additional node type info
+	//
 	//   - All current generation instance types are created in Amazon VPC by default.
+	//
 	//   - Redis append-only files (AOF) are not supported for T1 or T2 instances.
+	//
 	//   - Redis Multi-AZ with automatic failover is not supported on T1 instances.
+	//
 	//   - Redis configuration variables appendonly and appendfsync are not supported
 	//   on Redis version 2.8.22 and later.
+	//
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// A list of cache nodes that are members of the cluster.
@@ -150,7 +201,9 @@ type CacheCluster struct {
 
 	// Represents a Memcached cluster endpoint which can be used by an application to
 	// connect to any node in the cluster. The configuration endpoint will always have
-	// .cfg in it. Example: mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211
+	// .cfg in it.
+	//
+	// Example: mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211
 	ConfigurationEndpoint *Endpoint
 
 	// The name of the cache engine ( memcached or redis ) to be used for this cluster.
@@ -161,8 +214,9 @@ type CacheCluster struct {
 
 	// The network type associated with the cluster, either ipv4 | ipv6 . IPv6 is
 	// supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/)
-	// .
+	// engine version 1.6.6 on all instances built on the [Nitro system].
+	//
+	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery IpDiscovery
 
 	// Returns the destination, format and type of the logs.
@@ -170,7 +224,9 @@ type CacheCluster struct {
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
 	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
+	// instances built on the [Nitro system].
+	//
+	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	NetworkType NetworkType
 
 	// Describes a notification topic and its status. Notification topics are used for
@@ -178,9 +234,10 @@ type CacheCluster struct {
 	// Service (SNS).
 	NotificationConfiguration *NotificationConfiguration
 
-	// The number of cache nodes in the cluster. For clusters running Redis, this
-	// value must be 1. For clusters running Memcached, this value must be between 1
-	// and 40.
+	// The number of cache nodes in the cluster.
+	//
+	// For clusters running Redis, this value must be 1. For clusters running
+	// Memcached, this value must be between 1 and 40.
 	NumCacheNodes *int32
 
 	// A group of settings that are applied to the cluster in the future, or that are
@@ -193,15 +250,24 @@ type CacheCluster struct {
 
 	// Specifies the weekly time range during which maintenance on the cluster is
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
-	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
-	// for ddd are:
+	// Clock UTC). The minimum maintenance window is a 60 minute period.
+	//
+	// Valid values for ddd are:
+	//
 	//   - sun
+	//
 	//   - mon
+	//
 	//   - tue
+	//
 	//   - wed
+	//
 	//   - thu
+	//
 	//   - fri
+	//
 	//   - sat
+	//
 	// Example: sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
@@ -221,17 +287,24 @@ type CacheCluster struct {
 
 	// The number of days for which ElastiCache retains automatic cluster snapshots
 	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a
-	// snapshot that was taken today is retained for 5 days before being deleted. If
-	// the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
+	// snapshot that was taken today is retained for 5 days before being deleted.
+	//
+	// If the value of SnapshotRetentionLimit is set to zero (0), backups are turned
+	// off.
 	SnapshotRetentionLimit *int32
 
 	// The daily time range (in UTC) during which ElastiCache begins taking a daily
-	// snapshot of your cluster. Example: 05:00-09:00
+	// snapshot of your cluster.
+	//
+	// Example: 05:00-09:00
 	SnapshotWindow *string
 
-	// A flag that enables in-transit encryption when set to true . Required: Only
-	// available when creating a replication group in an Amazon VPC using redis version
-	// 3.2.6 , 4.x or later. Default: false
+	// A flag that enables in-transit encryption when set to true .
+	//
+	// Required: Only available when creating a replication group in an Amazon VPC
+	// using redis version 3.2.6 , 4.x or later.
+	//
+	// Default: false
 	TransitEncryptionEnabled *bool
 
 	// A setting that allows you to migrate your clients to use in-transit encryption,
@@ -251,6 +324,7 @@ type CacheEngineVersion struct {
 	CacheEngineVersionDescription *string
 
 	// The name of the cache parameter group family associated with this cache engine.
+	//
 	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
 	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
 	CacheParameterGroupFamily *string
@@ -266,57 +340,114 @@ type CacheEngineVersion struct {
 
 // Represents an individual cache node within a cluster. Each cache node runs its
 // own instance of the cluster's protocol-compliant caching software - either
-// Memcached or Redis. The following node types are supported by ElastiCache.
-// Generally speaking, the current generation types provide more memory and
-// computational power at lower cost when compared to their equivalent previous
-// generation counterparts.
+// Memcached or Redis.
+//
+// The following node types are supported by ElastiCache. Generally speaking, the
+// current generation types provide more memory and computational power at lower
+// cost when compared to their equivalent previous generation counterparts.
+//
 //   - General purpose:
-//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
-//     cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
-//     , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-//     M6g node types (available only for Redis engine version 5.0.6 onward and for
-//     Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
-//     cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
-//     , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
-//     cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
-//     node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
-//     cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
-//     engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
-//     cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
-//     cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
-//     cache.t2.micro , cache.t2.small , cache.t2.medium
+//
+//   - Current generation:
+//
+// M7g node types: cache.m7g.large , cache.m7g.xlarge , cache.m7g.2xlarge ,
+//
+//	cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge ,
+//	cache.m7g.16xlarge
+//
+// For region availability, see [Supported Node Types]
+//
+// M6g node types (available only for Redis engine version 5.0.6 onward and for
+//
+//	Memcached engine version 1.5.16 onward):
+//
+// cache.m6g.large , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge ,
+//
+//	cache.m6g.8xlarge , cache.m6g.12xlarge , cache.m6g.16xlarge
+//
+// M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
+//
+//	cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge
+//
+// M4 node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+//
+//	cache.m4.4xlarge , cache.m4.10xlarge
+//
+// T4g node types (available only for Redis engine version 5.0.6 onward and
+//
+//	Memcached engine version 1.5.16 onward): cache.t4g.micro , cache.t4g.small ,
+//	cache.t4g.medium
+//
+// T3 node types: cache.t3.micro , cache.t3.small , cache.t3.medium
+//
+// T2 node types: cache.t2.micro , cache.t2.small , cache.t2.medium
+//
 //   - Previous generation: (not recommended. Existing clusters are still
-//     supported but creation of new clusters is not supported for these types.) T1
-//     node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
-//     cache.m1.large , cache.m1.xlarge M3 node types: cache.m3.medium ,
-//     cache.m3.large , cache.m3.xlarge , cache.m3.2xlarge
-//   - Compute optimized:
-//   - Previous generation: (not recommended. Existing clusters are still
-//     supported but creation of new clusters is not supported for these types.) C1
-//     node types: cache.c1.xlarge
+//     supported but creation of new clusters is not supported for these types.)
+//
+// T1 node types: cache.t1.micro
+//
+// M1 node types: cache.m1.small , cache.m1.medium , cache.m1.large ,
+//
+//	cache.m1.xlarge
+//
+// M3 node types: cache.m3.medium , cache.m3.large , cache.m3.xlarge ,
+//
+//	cache.m3.2xlarge
+//
+//	- Compute optimized:
+//
+//	- Previous generation: (not recommended. Existing clusters are still
+//	supported but creation of new clusters is not supported for these types.)
+//
+// C1 node types: cache.c1.xlarge
+//
 //   - Memory optimized:
-//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
-//     cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
-//     , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-//     R6g node types (available only for Redis engine version 5.0.6 onward and for
-//     Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
-//     cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
-//     , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
-//     cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
-//     node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
-//     cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
-//   - Previous generation: (not recommended. Existing clusters are still
-//     supported but creation of new clusters is not supported for these types.) M2
-//     node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
-//     types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
+//
+//   - Current generation:
+//
+// R7g node types: cache.r7g.large , cache.r7g.xlarge , cache.r7g.2xlarge ,
+//
+//	cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge ,
+//	cache.r7g.16xlarge
+//
+// For region availability, see [Supported Node Types]
+//
+// R6g node types (available only for Redis engine version 5.0.6 onward and for
+//
+//	Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
+//	cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
+//	, cache.r6g.16xlarge
+//
+// R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
+//
+//	cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge
+//
+// R4 node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+//
+//	cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
+//
+//	- Previous generation: (not recommended. Existing clusters are still
+//	supported but creation of new clusters is not supported for these types.)
+//
+// M2 node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge
+//
+// R3 node types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
 //
 // cache.r3.4xlarge , cache.r3.8xlarge
+//
 // Additional node type info
+//
 //   - All current generation instance types are created in Amazon VPC by default.
+//
 //   - Redis append-only files (AOF) are not supported for T1 or T2 instances.
+//
 //   - Redis Multi-AZ with automatic failover is not supported on T1 instances.
+//
 //   - Redis configuration variables appendonly and appendfsync are not supported
 //     on Redis version 2.8.22 and later.
+//
+// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 type CacheNode struct {
 
 	// The date and time when the cache node was created.
@@ -363,8 +494,9 @@ type CacheNodeTypeSpecificParameter struct {
 
 	// Indicates whether a change to the parameter is applied immediately or requires
 	// a reboot for the change to be applied. You can force a reboot or wait until the
-	// next maintenance window's reboot. For more information, see Rebooting a Cluster (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html)
-	// .
+	// next maintenance window's reboot. For more information, see [Rebooting a Cluster].
+	//
+	// [Rebooting a Cluster]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html
 	ChangeType ChangeType
 
 	// The valid data type for the parameter.
@@ -440,8 +572,10 @@ type CacheParameterGroup struct {
 	ARN *string
 
 	// The name of the cache parameter group family that this cache parameter group is
-	// compatible with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 |
-	// redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
+	// compatible with.
+	//
+	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
+	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
 	CacheParameterGroupFamily *string
 
 	// The name of the cache parameter group.
@@ -473,8 +607,11 @@ type CacheParameterGroupStatus struct {
 }
 
 // Represents the output of one of the following operations:
+//
 //   - AuthorizeCacheSecurityGroupIngress
+//
 //   - CreateCacheSecurityGroup
+//
 //   - RevokeCacheSecurityGroupIngress
 type CacheSecurityGroup struct {
 
@@ -512,7 +649,9 @@ type CacheSecurityGroupMembership struct {
 }
 
 // Represents the output of one of the following operations:
+//
 //   - CreateCacheSubnetGroup
+//
 //   - ModifyCacheSubnetGroup
 type CacheSubnetGroup struct {
 
@@ -530,7 +669,9 @@ type CacheSubnetGroup struct {
 
 	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Redis
 	// engine version 6.2 onward or Memcached engine version 1.6.6 on all instances
-	// built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
+	// built on the [Nitro system].
+	//
+	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	SupportedNetworkTypes []NetworkType
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group.
@@ -542,7 +683,7 @@ type CacheSubnetGroup struct {
 // The usage limits for storage and ElastiCache Processing Units for the cache.
 type CacheUsageLimits struct {
 
-	// The maximum data storage limit in the cache, expressed in Gigabytes.
+	//  The maximum data storage limit in the cache, expressed in Gigabytes.
 	DataStorage *DataStorage
 
 	// The configuration for the number of ElastiCache Processing Units (ECPU) the
@@ -568,11 +709,16 @@ type ConfigureShard struct {
 
 	// The number of replicas you want in this node group at the end of this
 	// operation. The maximum value for NewReplicaCount is 5. The minimum value
-	// depends upon the type of Redis replication group you are working with. The
-	// minimum number of replicas in a shard or replication group is:
+	// depends upon the type of Redis replication group you are working with.
+	//
+	// The minimum number of replicas in a shard or replication group is:
+	//
 	//   - Redis (cluster mode disabled)
+	//
 	//   - If Multi-AZ: 1
+	//
 	//   - If Multi-AZ: 0
+	//
 	//   - Redis (cluster mode enabled): 0 (though you will not be able to failover to
 	//   a replica if your primary node fails)
 	//
@@ -581,8 +727,9 @@ type ConfigureShard struct {
 
 	// The 4-digit id for the node group you are configuring. For Redis (cluster mode
 	// disabled) replication groups, the node group id is always 0001. To find a Redis
-	// (cluster mode enabled)'s node group's (shard's) id, see Finding a Shard's Id (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/shard-find-id.html)
-	// .
+	// (cluster mode enabled)'s node group's (shard's) id, see [Finding a Shard's Id].
+	//
+	// [Finding a Shard's Id]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/shard-find-id.html
 	//
 	// This member is required.
 	NodeGroupId *string
@@ -694,9 +841,10 @@ type EngineDefaults struct {
 	CacheNodeTypeSpecificParameters []CacheNodeTypeSpecificParameter
 
 	// Specifies the name of the cache parameter group family to which the engine
-	// default parameters apply. Valid values are: memcached1.4 | memcached1.5 |
-	// memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.0
-	// | redis6.x | redis7
+	// default parameters apply.
+	//
+	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
+	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.0 | redis6.x | redis7
 	CacheParameterGroupFamily *string
 
 	// Provides an identifier to allow retrieval of paginated results.
@@ -762,6 +910,7 @@ type GlobalNodeGroup struct {
 // cluster that resides in a different Amazon region. The secondary cluster accepts
 // only reads. The primary cluster automatically replicates updates to the
 // secondary cluster.
+//
 //   - The GlobalReplicationGroupIdSuffix represents the name of the Global
 //     datastore, which is what you use to associate a secondary cluster.
 type GlobalReplicationGroup struct {
@@ -769,15 +918,18 @@ type GlobalReplicationGroup struct {
 	// The ARN (Amazon Resource Name) of the global replication group.
 	ARN *string
 
-	// A flag that enables encryption at rest when set to true . You cannot modify the
-	// value of AtRestEncryptionEnabled after the replication group is created. To
-	// enable encryption at rest on a replication group you must set
-	// AtRestEncryptionEnabled to true when you create the replication group.
+	// A flag that enables encryption at rest when set to true .
+	//
+	// You cannot modify the value of AtRestEncryptionEnabled after the replication
+	// group is created. To enable encryption at rest on a replication group you must
+	// set AtRestEncryptionEnabled to true when you create the replication group.
+	//
 	// Required: Only available when creating a replication group in an Amazon VPC
 	// using redis version 3.2.6 , 4.x or later.
 	AtRestEncryptionEnabled *bool
 
 	// A flag that enables using an AuthToken (password) when issuing Redis commands.
+	//
 	// Default: false
 	AuthTokenEnabled *bool
 
@@ -808,9 +960,10 @@ type GlobalReplicationGroup struct {
 	// The status of the Global datastore
 	Status *string
 
-	// A flag that enables in-transit encryption when set to true. Required: Only
-	// available when creating a replication group in an Amazon VPC using redis version
-	// 3.2.6 , 4.x or later.
+	// A flag that enables in-transit encryption when set to true.
+	//
+	// Required: Only available when creating a replication group in an Amazon VPC
+	// using redis version 3.2.6 , 4.x or later.
 	TransitEncryptionEnabled *bool
 
 	noSmithyDocumentSerde
@@ -874,7 +1027,9 @@ type LogDeliveryConfiguration struct {
 	// Returns the log format, either JSON or TEXT.
 	LogFormat LogFormat
 
-	// Refers to slow-log (https://redis.io/commands/slowlog) or engine-log.
+	// Refers to [slow-log] or engine-log.
+	//
+	// [slow-log]: https://redis.io/commands/slowlog
 	LogType LogType
 
 	// Returns an error message for the log delivery configuration.
@@ -903,7 +1058,9 @@ type LogDeliveryConfigurationRequest struct {
 	// Specifies either JSON or TEXT
 	LogFormat LogFormat
 
-	// Refers to slow-log (https://redis.io/commands/slowlog) or engine-log..
+	// Refers to [slow-log] or engine-log..
+	//
+	// [slow-log]: https://redis.io/commands/slowlog
 	LogType LogType
 
 	noSmithyDocumentSerde
@@ -970,8 +1127,9 @@ type NodeGroupConfiguration struct {
 	ReplicaOutpostArns []string
 
 	// A string that specifies the keyspace for a particular node group. Keyspaces
-	// range from 0 to 16,383. The string is in the format startkey-endkey . Example:
-	// "0-3999"
+	// range from 0 to 16,383. The string is in the format startkey-endkey .
+	//
+	// Example: "0-3999"
 	Slots *string
 
 	noSmithyDocumentSerde
@@ -1102,8 +1260,9 @@ type Parameter struct {
 
 	// Indicates whether a change to the parameter is applied immediately or requires
 	// a reboot for the change to be applied. You can force a reboot or wait until the
-	// next maintenance window's reboot. For more information, see Rebooting a Cluster (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html)
-	// .
+	// next maintenance window's reboot. For more information, see [Rebooting a Cluster].
+	//
+	// [Rebooting a Cluster]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html
 	ChangeType ChangeType
 
 	// The valid data type for the parameter.
@@ -1157,7 +1316,9 @@ type PendingLogDeliveryConfiguration struct {
 	// Returns the log format, either JSON or TEXT
 	LogFormat LogFormat
 
-	// Refers to slow-log (https://redis.io/commands/slowlog) or engine-log..
+	// Refers to [slow-log] or engine-log..
+	//
+	// [slow-log]: https://redis.io/commands/slowlog
 	LogType LogType
 
 	noSmithyDocumentSerde
@@ -1183,9 +1344,10 @@ type PendingModifiedValues struct {
 	// The log delivery configurations being modified
 	LogDeliveryConfigurations []PendingLogDeliveryConfiguration
 
-	// The new number of cache nodes for the cluster. For clusters running Redis, this
-	// value must be 1. For clusters running Memcached, this value must be between 1
-	// and 40.
+	// The new number of cache nodes for the cluster.
+	//
+	// For clusters running Redis, this value must be 1. For clusters running
+	// Memcached, this value must be between 1 and 40.
 	NumCacheNodes *int32
 
 	// A flag that enables in-transit encryption when set to true.
@@ -1257,14 +1419,20 @@ type ReplicationGroup struct {
 	// The ARN (Amazon Resource Name) of the replication group.
 	ARN *string
 
-	// A flag that enables encryption at-rest when set to true . You cannot modify the
-	// value of AtRestEncryptionEnabled after the cluster is created. To enable
-	// encryption at-rest on a cluster you must set AtRestEncryptionEnabled to true
-	// when you create a cluster. Required: Only available when creating a replication
-	// group in an Amazon VPC using redis version 3.2.6 , 4.x or later. Default: false
+	// A flag that enables encryption at-rest when set to true .
+	//
+	// You cannot modify the value of AtRestEncryptionEnabled after the cluster is
+	// created. To enable encryption at-rest on a cluster you must set
+	// AtRestEncryptionEnabled to true when you create a cluster.
+	//
+	// Required: Only available when creating a replication group in an Amazon VPC
+	// using redis version 3.2.6 , 4.x or later.
+	//
+	// Default: false
 	AtRestEncryptionEnabled *bool
 
 	// A flag that enables using an AuthToken (password) when issuing Redis commands.
+	//
 	// Default: false
 	AuthTokenEnabled *bool
 
@@ -1285,7 +1453,9 @@ type ReplicationGroup struct {
 
 	// A flag indicating whether or not this replication group is cluster enabled;
 	// i.e., whether its data can be partitioned across multiple shards (API/CLI: node
-	// groups). Valid values: true | false
+	// groups).
+	//
+	// Valid values: true | false
 	ClusterEnabled *bool
 
 	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
@@ -1301,8 +1471,9 @@ type ReplicationGroup struct {
 
 	// Enables data tiering. Data tiering is only supported for replication groups
 	// using the r6gd node type. This parameter must be set to true when using r6gd
-	// nodes. For more information, see Data tiering (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html)
-	// .
+	// nodes. For more information, see [Data tiering].
+	//
+	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
 	DataTiering DataTieringStatus
 
 	// The user supplied description of the replication group.
@@ -1314,8 +1485,9 @@ type ReplicationGroup struct {
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
 	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/)
-	// .
+	// engine version 1.6.6 on all instances built on the [Nitro system].
+	//
+	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	IpDiscovery IpDiscovery
 
 	// The ID of the KMS key used to encrypt the disk in the cluster.
@@ -1331,12 +1503,16 @@ type ReplicationGroup struct {
 	MemberClustersOutpostArns []string
 
 	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For
-	// more information, see Minimizing Downtime: Multi-AZ (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html)
+	// more information, see [Minimizing Downtime: Multi-AZ]
+	//
+	// [Minimizing Downtime: Multi-AZ]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html
 	MultiAZ MultiAZStatus
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
 	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
+	// instances built on the [Nitro system].
+	//
+	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	NetworkType NetworkType
 
 	// A list of node groups in this replication group. For Redis (cluster mode
@@ -1357,13 +1533,20 @@ type ReplicationGroup struct {
 
 	// The number of days for which ElastiCache retains automatic cluster snapshots
 	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a
-	// snapshot that was taken today is retained for 5 days before being deleted. If
-	// the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
+	// snapshot that was taken today is retained for 5 days before being deleted.
+	//
+	// If the value of SnapshotRetentionLimit is set to zero (0), backups are turned
+	// off.
 	SnapshotRetentionLimit *int32
 
 	// The daily time range (in UTC) during which ElastiCache begins taking a daily
-	// snapshot of your node group (shard). Example: 05:00-09:00 If you do not specify
-	// this parameter, ElastiCache automatically chooses an appropriate time range.
+	// snapshot of your node group (shard).
+	//
+	// Example: 05:00-09:00
+	//
+	// If you do not specify this parameter, ElastiCache automatically chooses an
+	// appropriate time range.
+	//
 	// This parameter is only valid if the Engine parameter is redis .
 	SnapshotWindow *string
 
@@ -1375,9 +1558,12 @@ type ReplicationGroup struct {
 	// deleting , create-failed , snapshotting .
 	Status *string
 
-	// A flag that enables in-transit encryption when set to true . Required: Only
-	// available when creating a replication group in an Amazon VPC using redis version
-	// 3.2.6 , 4.x or later. Default: false
+	// A flag that enables in-transit encryption when set to true .
+	//
+	// Required: Only available when creating a replication group in an Amazon VPC
+	// using redis version 3.2.6 , 4.x or later.
+	//
+	// Default: false
 	TransitEncryptionEnabled *bool
 
 	// A setting that allows you to migrate your clients to use in-transit encryption,
@@ -1436,57 +1622,102 @@ type ReservedCacheNode struct {
 	// The number of cache nodes that have been reserved.
 	CacheNodeCount *int32
 
-	// The cache node type for the reserved cache nodes. The following node types are
-	// supported by ElastiCache. Generally speaking, the current generation types
-	// provide more memory and computational power at lower cost when compared to their
-	// equivalent previous generation counterparts.
+	// The cache node type for the reserved cache nodes.
+	//
+	// The following node types are supported by ElastiCache. Generally speaking, the
+	// current generation types provide more memory and computational power at lower
+	// cost when compared to their equivalent previous generation counterparts.
+	//
 	//   - General purpose:
-	//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
-	//   cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
-	//   , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   M6g node types (available only for Redis engine version 5.0.6 onward and for
-	//   Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
-	//   cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
-	//   , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
-	//   cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
-	//   node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
-	//   cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
-	//   engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
-	//   cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
-	//   cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
-	//   cache.t2.micro , cache.t2.small , cache.t2.medium
+	//
+	//   - Current generation:
+	//
+	// M7g node types: cache.m7g.large , cache.m7g.xlarge , cache.m7g.2xlarge ,
+	//   cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge ,
+	//   cache.m7g.16xlarge
+	//
+	// For region availability, see [Supported Node Types]
+	//
+	// M6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward):
+	//
+	// cache.m6g.large , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge ,
+	//   cache.m6g.8xlarge , cache.m6g.12xlarge , cache.m6g.16xlarge
+	//
+	// M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
+	//   cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge
+	//
+	// M4 node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+	//   cache.m4.4xlarge , cache.m4.10xlarge
+	//
+	// T4g node types (available only for Redis engine version 5.0.6 onward and
+	//   Memcached engine version 1.5.16 onward): cache.t4g.micro , cache.t4g.small ,
+	//   cache.t4g.medium
+	//
+	// T3 node types: cache.t3.micro , cache.t3.small , cache.t3.medium
+	//
+	// T2 node types: cache.t2.micro , cache.t2.small , cache.t2.medium
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) T1
-	//   node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
-	//   cache.m1.large , cache.m1.xlarge M3 node types: cache.m3.medium ,
-	//   cache.m3.large , cache.m3.xlarge , cache.m3.2xlarge
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// T1 node types: cache.t1.micro
+	//
+	// M1 node types: cache.m1.small , cache.m1.medium , cache.m1.large ,
+	//   cache.m1.xlarge
+	//
+	// M3 node types: cache.m3.medium , cache.m3.large , cache.m3.xlarge ,
+	//   cache.m3.2xlarge
+	//
 	//   - Compute optimized:
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) C1
-	//   node types: cache.c1.xlarge
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// C1 node types: cache.c1.xlarge
+	//
 	//   - Memory optimized:
-	//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
-	//   cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
-	//   , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   R6g node types (available only for Redis engine version 5.0.6 onward and for
+	//
+	//   - Current generation:
+	//
+	// R7g node types: cache.r7g.large , cache.r7g.xlarge , cache.r7g.2xlarge ,
+	//   cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge ,
+	//   cache.r7g.16xlarge
+	//
+	// For region availability, see [Supported Node Types]
+	//
+	// R6g node types (available only for Redis engine version 5.0.6 onward and for
 	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
 	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
-	//   , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
-	//   cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
-	//   node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+	//   , cache.r6g.16xlarge
+	//
+	// R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
+	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge
+	//
+	// R4 node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
 	//   cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) M2
-	//   node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
-	//   types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// M2 node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge
+	//
+	// R3 node types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
 	//
 	// cache.r3.4xlarge , cache.r3.8xlarge
+	//
 	// Additional node type info
+	//
 	//   - All current generation instance types are created in Amazon VPC by default.
+	//
 	//   - Redis append-only files (AOF) are not supported for T1 or T2 instances.
+	//
 	//   - Redis Multi-AZ with automatic failover is not supported on T1 instances.
+	//
 	//   - Redis configuration variables appendonly and appendfsync are not supported
 	//   on Redis version 2.8.22 and later.
+	//
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The duration of the reservation in seconds.
@@ -1504,7 +1735,9 @@ type ReservedCacheNode struct {
 	// The recurring price charged to run this reserved cache node.
 	RecurringCharges []RecurringCharge
 
-	// The Amazon Resource Name (ARN) of the reserved cache node. Example:
+	// The Amazon Resource Name (ARN) of the reserved cache node.
+	//
+	// Example:
 	// arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582
 	ReservationARN *string
 
@@ -1529,57 +1762,102 @@ type ReservedCacheNode struct {
 // Describes all of the attributes of a reserved cache node offering.
 type ReservedCacheNodesOffering struct {
 
-	// The cache node type for the reserved cache node. The following node types are
-	// supported by ElastiCache. Generally speaking, the current generation types
-	// provide more memory and computational power at lower cost when compared to their
-	// equivalent previous generation counterparts.
+	// The cache node type for the reserved cache node.
+	//
+	// The following node types are supported by ElastiCache. Generally speaking, the
+	// current generation types provide more memory and computational power at lower
+	// cost when compared to their equivalent previous generation counterparts.
+	//
 	//   - General purpose:
-	//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
-	//   cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
-	//   , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   M6g node types (available only for Redis engine version 5.0.6 onward and for
-	//   Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
-	//   cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
-	//   , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
-	//   cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
-	//   node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
-	//   cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
-	//   engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
-	//   cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
-	//   cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
-	//   cache.t2.micro , cache.t2.small , cache.t2.medium
+	//
+	//   - Current generation:
+	//
+	// M7g node types: cache.m7g.large , cache.m7g.xlarge , cache.m7g.2xlarge ,
+	//   cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge ,
+	//   cache.m7g.16xlarge
+	//
+	// For region availability, see [Supported Node Types]
+	//
+	// M6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward):
+	//
+	// cache.m6g.large , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge ,
+	//   cache.m6g.8xlarge , cache.m6g.12xlarge , cache.m6g.16xlarge
+	//
+	// M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
+	//   cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge
+	//
+	// M4 node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+	//   cache.m4.4xlarge , cache.m4.10xlarge
+	//
+	// T4g node types (available only for Redis engine version 5.0.6 onward and
+	//   Memcached engine version 1.5.16 onward): cache.t4g.micro , cache.t4g.small ,
+	//   cache.t4g.medium
+	//
+	// T3 node types: cache.t3.micro , cache.t3.small , cache.t3.medium
+	//
+	// T2 node types: cache.t2.micro , cache.t2.small , cache.t2.medium
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) T1
-	//   node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
-	//   cache.m1.large , cache.m1.xlarge M3 node types: cache.m3.medium ,
-	//   cache.m3.large , cache.m3.xlarge , cache.m3.2xlarge
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// T1 node types: cache.t1.micro
+	//
+	// M1 node types: cache.m1.small , cache.m1.medium , cache.m1.large ,
+	//   cache.m1.xlarge
+	//
+	// M3 node types: cache.m3.medium , cache.m3.large , cache.m3.xlarge ,
+	//   cache.m3.2xlarge
+	//
 	//   - Compute optimized:
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) C1
-	//   node types: cache.c1.xlarge
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// C1 node types: cache.c1.xlarge
+	//
 	//   - Memory optimized:
-	//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
-	//   cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
-	//   , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   R6g node types (available only for Redis engine version 5.0.6 onward and for
+	//
+	//   - Current generation:
+	//
+	// R7g node types: cache.r7g.large , cache.r7g.xlarge , cache.r7g.2xlarge ,
+	//   cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge ,
+	//   cache.r7g.16xlarge
+	//
+	// For region availability, see [Supported Node Types]
+	//
+	// R6g node types (available only for Redis engine version 5.0.6 onward and for
 	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
 	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
-	//   , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
-	//   cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
-	//   node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+	//   , cache.r6g.16xlarge
+	//
+	// R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
+	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge
+	//
+	// R4 node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
 	//   cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) M2
-	//   node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
-	//   types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// M2 node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge
+	//
+	// R3 node types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
 	//
 	// cache.r3.4xlarge , cache.r3.8xlarge
+	//
 	// Additional node type info
+	//
 	//   - All current generation instance types are created in Amazon VPC by default.
+	//
 	//   - Redis append-only files (AOF) are not supported for T1 or T2 instances.
+	//
 	//   - Redis Multi-AZ with automatic failover is not supported on T1 instances.
+	//
 	//   - Redis configuration variables appendonly and appendfsync are not supported
 	//   on Redis version 2.8.22 and later.
+	//
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The duration of the offering. in seconds.
@@ -1793,9 +2071,9 @@ type ServiceUpdate struct {
 	ServiceUpdateName *string
 
 	// The recommendend date to apply the service update in order to ensure
-	// compliance. For information on compliance, see Self-Service Security Updates
-	// for Compliance (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service)
-	// .
+	// compliance. For information on compliance, see [Self-Service Security Updates for Compliance].
+	//
+	// [Self-Service Security Updates for Compliance]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service
 	ServiceUpdateRecommendedApplyByDate *time.Time
 
 	// The date when the service update is initially available
@@ -1845,56 +2123,101 @@ type Snapshot struct {
 	CacheClusterId *string
 
 	// The name of the compute and memory capacity node type for the source cluster.
+	//
 	// The following node types are supported by ElastiCache. Generally speaking, the
 	// current generation types provide more memory and computational power at lower
 	// cost when compared to their equivalent previous generation counterparts.
+	//
 	//   - General purpose:
-	//   - Current generation: M7g node types: cache.m7g.large , cache.m7g.xlarge ,
-	//   cache.m7g.2xlarge , cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge
-	//   , cache.m7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   M6g node types (available only for Redis engine version 5.0.6 onward and for
-	//   Memcached engine version 1.5.16 onward): cache.m6g.large , cache.m6g.xlarge ,
-	//   cache.m6g.2xlarge , cache.m6g.4xlarge , cache.m6g.8xlarge , cache.m6g.12xlarge
-	//   , cache.m6g.16xlarge M5 node types: cache.m5.large , cache.m5.xlarge ,
-	//   cache.m5.2xlarge , cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge M4
-	//   node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
-	//   cache.m4.4xlarge , cache.m4.10xlarge T4g node types (available only for Redis
-	//   engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
-	//   cache.t4g.micro , cache.t4g.small , cache.t4g.medium T3 node types:
-	//   cache.t3.micro , cache.t3.small , cache.t3.medium T2 node types:
-	//   cache.t2.micro , cache.t2.small , cache.t2.medium
+	//
+	//   - Current generation:
+	//
+	// M7g node types: cache.m7g.large , cache.m7g.xlarge , cache.m7g.2xlarge ,
+	//   cache.m7g.4xlarge , cache.m7g.8xlarge , cache.m7g.12xlarge ,
+	//   cache.m7g.16xlarge
+	//
+	// For region availability, see [Supported Node Types]
+	//
+	// M6g node types (available only for Redis engine version 5.0.6 onward and for
+	//   Memcached engine version 1.5.16 onward):
+	//
+	// cache.m6g.large , cache.m6g.xlarge , cache.m6g.2xlarge , cache.m6g.4xlarge ,
+	//   cache.m6g.8xlarge , cache.m6g.12xlarge , cache.m6g.16xlarge
+	//
+	// M5 node types: cache.m5.large , cache.m5.xlarge , cache.m5.2xlarge ,
+	//   cache.m5.4xlarge , cache.m5.12xlarge , cache.m5.24xlarge
+	//
+	// M4 node types: cache.m4.large , cache.m4.xlarge , cache.m4.2xlarge ,
+	//   cache.m4.4xlarge , cache.m4.10xlarge
+	//
+	// T4g node types (available only for Redis engine version 5.0.6 onward and
+	//   Memcached engine version 1.5.16 onward): cache.t4g.micro , cache.t4g.small ,
+	//   cache.t4g.medium
+	//
+	// T3 node types: cache.t3.micro , cache.t3.small , cache.t3.medium
+	//
+	// T2 node types: cache.t2.micro , cache.t2.small , cache.t2.medium
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) T1
-	//   node types: cache.t1.micro M1 node types: cache.m1.small , cache.m1.medium ,
-	//   cache.m1.large , cache.m1.xlarge M3 node types: cache.m3.medium ,
-	//   cache.m3.large , cache.m3.xlarge , cache.m3.2xlarge
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// T1 node types: cache.t1.micro
+	//
+	// M1 node types: cache.m1.small , cache.m1.medium , cache.m1.large ,
+	//   cache.m1.xlarge
+	//
+	// M3 node types: cache.m3.medium , cache.m3.large , cache.m3.xlarge ,
+	//   cache.m3.2xlarge
+	//
 	//   - Compute optimized:
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) C1
-	//   node types: cache.c1.xlarge
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// C1 node types: cache.c1.xlarge
+	//
 	//   - Memory optimized:
-	//   - Current generation: R7g node types: cache.r7g.large , cache.r7g.xlarge ,
-	//   cache.r7g.2xlarge , cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge
-	//   , cache.r7g.16xlarge For region availability, see Supported Node Types (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
-	//   R6g node types (available only for Redis engine version 5.0.6 onward and for
+	//
+	//   - Current generation:
+	//
+	// R7g node types: cache.r7g.large , cache.r7g.xlarge , cache.r7g.2xlarge ,
+	//   cache.r7g.4xlarge , cache.r7g.8xlarge , cache.r7g.12xlarge ,
+	//   cache.r7g.16xlarge
+	//
+	// For region availability, see [Supported Node Types]
+	//
+	// R6g node types (available only for Redis engine version 5.0.6 onward and for
 	//   Memcached engine version 1.5.16 onward): cache.r6g.large , cache.r6g.xlarge ,
 	//   cache.r6g.2xlarge , cache.r6g.4xlarge , cache.r6g.8xlarge , cache.r6g.12xlarge
-	//   , cache.r6g.16xlarge R5 node types: cache.r5.large , cache.r5.xlarge ,
-	//   cache.r5.2xlarge , cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge R4
-	//   node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
+	//   , cache.r6g.16xlarge
+	//
+	// R5 node types: cache.r5.large , cache.r5.xlarge , cache.r5.2xlarge ,
+	//   cache.r5.4xlarge , cache.r5.12xlarge , cache.r5.24xlarge
+	//
+	// R4 node types: cache.r4.large , cache.r4.xlarge , cache.r4.2xlarge ,
 	//   cache.r4.4xlarge , cache.r4.8xlarge , cache.r4.16xlarge
+	//
 	//   - Previous generation: (not recommended. Existing clusters are still
-	//   supported but creation of new clusters is not supported for these types.) M2
-	//   node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge R3 node
-	//   types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
+	//   supported but creation of new clusters is not supported for these types.)
+	//
+	// M2 node types: cache.m2.xlarge , cache.m2.2xlarge , cache.m2.4xlarge
+	//
+	// R3 node types: cache.r3.large , cache.r3.xlarge , cache.r3.2xlarge ,
 	//
 	// cache.r3.4xlarge , cache.r3.8xlarge
+	//
 	// Additional node type info
+	//
 	//   - All current generation instance types are created in Amazon VPC by default.
+	//
 	//   - Redis append-only files (AOF) are not supported for T1 or T2 instances.
+	//
 	//   - Redis Multi-AZ with automatic failover is not supported on T1 instances.
+	//
 	//   - Redis configuration variables appendonly and appendfsync are not supported
 	//   on Redis version 2.8.22 and later.
+	//
+	// [Supported Node Types]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion
 	CacheNodeType *string
 
 	// The cache parameter group that is associated with the source cluster.
@@ -1905,8 +2228,9 @@ type Snapshot struct {
 
 	// Enables data tiering. Data tiering is only supported for replication groups
 	// using the r6gd node type. This parameter must be set to true when using r6gd
-	// nodes. For more information, see Data tiering (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html)
-	// .
+	// nodes. For more information, see [Data tiering].
+	//
+	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html
 	DataTiering DataTieringStatus
 
 	// The name of the cache engine ( memcached or redis ) used by the source cluster.
@@ -1921,9 +2245,10 @@ type Snapshot struct {
 	// A list of the cache nodes in the source cluster.
 	NodeSnapshots []NodeSnapshot
 
-	// The number of cache nodes in the source cluster. For clusters running Redis,
-	// this value must be 1. For clusters running Memcached, this value must be between
-	// 1 and 40.
+	// The number of cache nodes in the source cluster.
+	//
+	// For clusters running Redis, this value must be 1. For clusters running
+	// Memcached, this value must be between 1 and 40.
 	NumCacheNodes *int32
 
 	// The number of node groups (shards) in this snapshot. When restoring from a
@@ -1939,15 +2264,24 @@ type Snapshot struct {
 
 	// Specifies the weekly time range during which maintenance on the cluster is
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
-	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
-	// for ddd are:
+	// Clock UTC). The minimum maintenance window is a 60 minute period.
+	//
+	// Valid values for ddd are:
+	//
 	//   - sun
+	//
 	//   - mon
+	//
 	//   - tue
+	//
 	//   - wed
+	//
 	//   - thu
+	//
 	//   - fri
+	//
 	//   - sat
+	//
 	// Example: sun:23:00-mon:01:30
 	PreferredMaintenanceWindow *string
 
@@ -1965,11 +2299,15 @@ type Snapshot struct {
 	SnapshotName *string
 
 	// For an automatic snapshot, the number of days for which ElastiCache retains the
-	// snapshot before deleting it. For manual snapshots, this field reflects the
-	// SnapshotRetentionLimit for the source cluster when the snapshot was created.
-	// This field is otherwise ignored: Manual snapshots do not expire, and can only be
-	// deleted using the DeleteSnapshot operation. Important If the value of
-	// SnapshotRetentionLimit is set to zero (0), backups are turned off.
+	// snapshot before deleting it.
+	//
+	// For manual snapshots, this field reflects the SnapshotRetentionLimit for the
+	// source cluster when the snapshot was created. This field is otherwise ignored:
+	// Manual snapshots do not expire, and can only be deleted using the DeleteSnapshot
+	// operation.
+	//
+	// Important If the value of SnapshotRetentionLimit is set to zero (0), backups
+	// are turned off.
 	SnapshotRetentionLimit *int32
 
 	// Indicates whether the snapshot is from an automatic backup ( automated ) or was
@@ -2011,7 +2349,9 @@ type Subnet struct {
 
 	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Redis
 	// engine version 6.2 onward or Memcached engine version 1.6.6 on all instances
-	// built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
+	// built on the [Nitro system].
+	//
+	// [Nitro system]: http://aws.amazon.com/ec2/nitro/
 	SupportedNetworkTypes []NetworkType
 
 	noSmithyDocumentSerde
@@ -2105,8 +2445,9 @@ type UpdateAction struct {
 	ServiceUpdateName *string
 
 	// The recommended date to apply the service update to ensure compliance. For
-	// information on compliance, see Self-Service Security Updates for Compliance (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service)
-	// .
+	// information on compliance, see [Self-Service Security Updates for Compliance].
+	//
+	// [Self-Service Security Updates for Compliance]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service
 	ServiceUpdateRecommendedApplyByDate *time.Time
 
 	// The date the update is first available

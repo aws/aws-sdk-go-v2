@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the share invitations. WorkloadNamePrefix , LensNamePrefix ,
-// ProfileNamePrefix , and TemplateNamePrefix are mutually exclusive. Use the
-// parameter that matches your ShareResourceType .
+// List the share invitations.
+//
+// WorkloadNamePrefix , LensNamePrefix , ProfileNamePrefix , and TemplateNamePrefix
+// are mutually exclusive. Use the parameter that matches your ShareResourceType .
 func (c *Client) ListShareInvitations(ctx context.Context, params *ListShareInvitationsInput, optFns ...func(*Options)) (*ListShareInvitationsOutput, error) {
 	if params == nil {
 		params = &ListShareInvitationsInput{}

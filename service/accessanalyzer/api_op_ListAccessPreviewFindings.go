@@ -35,8 +35,9 @@ type ListAccessPreviewFindingsInput struct {
 	// This member is required.
 	AccessPreviewId *string
 
-	// The ARN of the analyzer (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources)
-	// used to generate the access.
+	// The [ARN of the analyzer] used to generate the access.
+	//
+	// [ARN of the analyzer]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
 	//
 	// This member is required.
 	AnalyzerArn *string

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for BillingMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BillingMode) Values() []BillingMode {
 	return []BillingMode{
 		"EXTENDABLE_RETENTION_PRICING",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for DeliveryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryStatus) Values() []DeliveryStatus {
 	return []DeliveryStatus{
 		"SUCCESS",
@@ -61,8 +63,9 @@ const (
 )
 
 // Values returns all known values for DestinationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DestinationType) Values() []DestinationType {
 	return []DestinationType{
 		"EVENT_DATA_STORE",
@@ -78,8 +81,9 @@ const (
 )
 
 // Values returns all known values for EventCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventCategory) Values() []EventCategory {
 	return []EventCategory{
 		"insight",
@@ -99,8 +103,9 @@ const (
 )
 
 // Values returns all known values for EventDataStoreStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventDataStoreStatus) Values() []EventDataStoreStatus {
 	return []EventDataStoreStatus{
 		"CREATED",
@@ -123,8 +128,9 @@ const (
 )
 
 // Values returns all known values for FederationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FederationStatus) Values() []FederationStatus {
 	return []FederationStatus{
 		"ENABLING",
@@ -144,8 +150,9 @@ const (
 )
 
 // Values returns all known values for ImportFailureStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportFailureStatus) Values() []ImportFailureStatus {
 	return []ImportFailureStatus{
 		"FAILED",
@@ -166,8 +173,9 @@ const (
 )
 
 // Values returns all known values for ImportStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportStatus) Values() []ImportStatus {
 	return []ImportStatus{
 		"INITIALIZING",
@@ -187,8 +195,9 @@ const (
 )
 
 // Values returns all known values for InsightsMetricDataType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InsightsMetricDataType) Values() []InsightsMetricDataType {
 	return []InsightsMetricDataType{
 		"FillWithZeros",
@@ -205,8 +214,9 @@ const (
 )
 
 // Values returns all known values for InsightType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InsightType) Values() []InsightType {
 	return []InsightType{
 		"ApiCallRateInsight",
@@ -229,8 +239,9 @@ const (
 )
 
 // Values returns all known values for LookupAttributeKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LookupAttributeKey) Values() []LookupAttributeKey {
 	return []LookupAttributeKey{
 		"EventId",
@@ -257,8 +268,9 @@ const (
 )
 
 // Values returns all known values for QueryStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryStatus) Values() []QueryStatus {
 	return []QueryStatus{
 		"QUEUED",
@@ -280,8 +292,9 @@ const (
 )
 
 // Values returns all known values for ReadWriteType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReadWriteType) Values() []ReadWriteType {
 	return []ReadWriteType{
 		"ReadOnly",

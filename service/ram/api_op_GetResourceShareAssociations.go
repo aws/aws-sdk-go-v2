@@ -32,7 +32,9 @@ type GetResourceShareAssociationsInput struct {
 
 	// Specifies whether you want to retrieve the associations that involve a
 	// specified resource or principal.
+	//
 	//   - PRINCIPAL – list the principals whose associations you want to see.
+	//
 	//   - RESOURCE – list the resources whose associations you want to see.
 	//
 	// This member is required.
@@ -60,18 +62,24 @@ type GetResourceShareAssociationsInput struct {
 
 	// Specifies the ID of the principal whose resource shares you want to retrieve.
 	// This can be an Amazon Web Services account ID, an organization ID, an
-	// organizational unit ID, or the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of an individual IAM role or user. You cannot specify this parameter if the
-	// association type is RESOURCE .
+	// organizational unit ID, or the [Amazon Resource Name (ARN)]of an individual IAM role or user.
+	//
+	// You cannot specify this parameter if the association type is RESOURCE .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Principal *string
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of a resource whose resource shares you want to retrieve. You cannot specify
-	// this parameter if the association type is PRINCIPAL .
+	// Specifies the [Amazon Resource Name (ARN)] of a resource whose resource shares you want to retrieve.
+	//
+	// You cannot specify this parameter if the association type is PRINCIPAL .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceArn *string
 
-	// Specifies a list of Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share whose associations you want to retrieve.
+	// Specifies a list of [Amazon Resource Names (ARNs)] of the resource share whose associations you want to
+	// retrieve.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArns []string
 
 	noSmithyDocumentSerde

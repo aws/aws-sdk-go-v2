@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AnalyticsMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalyticsMode) Values() []AnalyticsMode {
 	return []AnalyticsMode{
 		"ENABLE",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for CompressionFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CompressionFormat) Values() []CompressionFormat {
 	return []CompressionFormat{
 		"GZIP",
@@ -60,8 +62,9 @@ const (
 )
 
 // Values returns all known values for DatabaseOutputMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatabaseOutputMode) Values() []DatabaseOutputMode {
 	return []DatabaseOutputMode{
 		"NEW_TABLE",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for EncryptionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionMode) Values() []EncryptionMode {
 	return []EncryptionMode{
 		"SSE-KMS",
@@ -98,8 +102,9 @@ const (
 )
 
 // Values returns all known values for InputFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InputFormat) Values() []InputFormat {
 	return []InputFormat{
 		"CSV",
@@ -124,8 +129,9 @@ const (
 )
 
 // Values returns all known values for JobRunState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobRunState) Values() []JobRunState {
 	return []JobRunState{
 		"STARTING",
@@ -147,8 +153,9 @@ const (
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobType) Values() []JobType {
 	return []JobType{
 		"PROFILE",
@@ -165,8 +172,9 @@ const (
 )
 
 // Values returns all known values for LogSubscription. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogSubscription) Values() []LogSubscription {
 	return []LogSubscription{
 		"ENABLE",
@@ -183,8 +191,9 @@ const (
 )
 
 // Values returns all known values for Order. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Order) Values() []Order {
 	return []Order{
 		"DESCENDING",
@@ -200,8 +209,9 @@ const (
 )
 
 // Values returns all known values for OrderedBy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderedBy) Values() []OrderedBy {
 	return []OrderedBy{
 		"LAST_MODIFIED_DATE",
@@ -223,8 +233,9 @@ const (
 )
 
 // Values returns all known values for OutputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"CSV",
@@ -248,8 +259,9 @@ const (
 )
 
 // Values returns all known values for ParameterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParameterType) Values() []ParameterType {
 	return []ParameterType{
 		"Datetime",
@@ -267,8 +279,9 @@ const (
 )
 
 // Values returns all known values for SampleMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SampleMode) Values() []SampleMode {
 	return []SampleMode{
 		"FULL_DATASET",
@@ -286,8 +299,9 @@ const (
 )
 
 // Values returns all known values for SampleType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SampleType) Values() []SampleType {
 	return []SampleType{
 		"FIRST_N",
@@ -313,8 +327,9 @@ const (
 )
 
 // Values returns all known values for SessionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SessionStatus) Values() []SessionStatus {
 	return []SessionStatus{
 		"ASSIGNED",
@@ -340,8 +355,9 @@ const (
 )
 
 // Values returns all known values for Source. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Source) Values() []Source {
 	return []Source{
 		"S3",
@@ -361,8 +377,9 @@ const (
 )
 
 // Values returns all known values for ThresholdType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThresholdType) Values() []ThresholdType {
 	return []ThresholdType{
 		"GREATER_THAN_OR_EQUAL",
@@ -381,8 +398,9 @@ const (
 )
 
 // Values returns all known values for ThresholdUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThresholdUnit) Values() []ThresholdUnit {
 	return []ThresholdUnit{
 		"COUNT",
@@ -398,8 +416,9 @@ const (
 )
 
 // Values returns all known values for ValidationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationMode) Values() []ValidationMode {
 	return []ValidationMode{
 		"CHECK_ALL",

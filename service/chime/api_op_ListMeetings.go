@@ -11,14 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists up to 100 active Amazon Chime SDK meetings. ListMeetings is not supported
-// in the Amazon Chime SDK Meetings Namespace. Update your application to remove
-// calls to this API. For more information about the Amazon Chime SDK, see Using
-// the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
-// in the Amazon Chime SDK Developer Guide.
+// Lists up to 100 active Amazon Chime SDK meetings.
+//
+// ListMeetings is not supported in the Amazon Chime SDK Meetings Namespace.
+// Update your application to remove calls to this API.
+//
+// For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK] in the Amazon Chime SDK
+// Developer Guide.
 //
 // Deprecated: ListMeetings is not supported in the Amazon Chime SDK Meetings
 // Namespace. Update your application to remove calls to this API.
+//
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
 func (c *Client) ListMeetings(ctx context.Context, params *ListMeetingsInput, optFns ...func(*Options)) (*ListMeetingsOutput, error) {
 	if params == nil {
 		params = &ListMeetingsInput{}

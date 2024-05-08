@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Updates the specified dataview. The dataviews get automatically updated when
+//	Updates the specified dataview. The dataviews get automatically updated when
+//
 // any new changesets are ingested. Each update of the dataview creates a new
 // version, including changeset details and cache configurations
 func (c *Client) UpdateKxDataview(ctx context.Context, params *UpdateKxDataviewInput, optFns ...func(*Options)) (*UpdateKxDataviewOutput, error) {
@@ -37,7 +38,7 @@ type UpdateKxDataviewInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The name of the database.
+	//  The name of the database.
 	//
 	// This member is required.
 	DatabaseName *string
@@ -56,10 +57,10 @@ type UpdateKxDataviewInput struct {
 	// A unique identifier for the changeset.
 	ChangesetId *string
 
-	// The description for a dataview.
+	//  The description for a dataview.
 	Description *string
 
-	// The configuration that contains the database path of the data that you want to
+	//  The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
@@ -71,7 +72,7 @@ type UpdateKxDataviewInput struct {
 
 type UpdateKxDataviewOutput struct {
 
-	// The current active changeset versions of the database on the given dataview.
+	//  The current active changeset versions of the database on the given dataview.
 	ActiveVersions []types.KxDataviewActiveVersion
 
 	// The option to specify whether you want to apply all the future additions and
@@ -79,7 +80,7 @@ type UpdateKxDataviewOutput struct {
 	// default value is false.
 	AutoUpdate bool
 
-	// The identifier of the availability zones.
+	//  The identifier of the availability zones.
 	AvailabilityZoneId *string
 
 	// The number of availability zones you want to assign per volume. Currently,
@@ -89,15 +90,15 @@ type UpdateKxDataviewOutput struct {
 	// A unique identifier for the changeset.
 	ChangesetId *string
 
-	// The timestamp at which the dataview was created in FinSpace. The value is
+	//  The timestamp at which the dataview was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// The name of the database.
+	//  The name of the database.
 	DatabaseName *string
 
-	// The name of the database under which the dataview was created.
+	//  The name of the database under which the dataview was created.
 	DataviewName *string
 
 	// A description of the dataview.
@@ -107,7 +108,7 @@ type UpdateKxDataviewOutput struct {
 	// dataview.
 	EnvironmentId *string
 
-	// The last time that the dataview was updated in FinSpace. The value is
+	//  The last time that the dataview was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
@@ -115,16 +116,19 @@ type UpdateKxDataviewOutput struct {
 	// Returns True if the dataview is created as writeable and False otherwise.
 	ReadWrite bool
 
-	// The configuration that contains the database path of the data that you want to
+	//  The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
 	SegmentConfigurations []types.KxDataviewSegmentConfiguration
 
-	// The status of dataview creation.
+	//  The status of dataview creation.
+	//
 	//   - CREATING – The dataview creation is in progress.
+	//
 	//   - UPDATING – The dataview is in the process of being updated.
+	//
 	//   - ACTIVE – The dataview is active.
 	Status types.KxDataviewStatus
 

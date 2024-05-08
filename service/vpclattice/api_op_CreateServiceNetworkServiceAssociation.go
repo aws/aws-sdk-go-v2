@@ -11,14 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a service with a service network. You can't use this operation if
-// the service and service network are already associated or if there is a
-// disassociation or deletion in progress. If the association fails, you can retry
-// the operation by deleting the association and recreating it. You cannot
-// associate a service and service network that are shared with a caller. The
-// caller must own either the service or the service network. As a result of this
-// operation, the association is created in the service network account and the
-// association owner account.
+// Associates a service with a service network.
+//
+// You can't use this operation if the service and service network are already
+// associated or if there is a disassociation or deletion in progress. If the
+// association fails, you can retry the operation by deleting the association and
+// recreating it.
+//
+// You cannot associate a service and service network that are shared with a
+// caller. The caller must own either the service or the service network.
+//
+// As a result of this operation, the association is created in the service
+// network account and the association owner account.
 func (c *Client) CreateServiceNetworkServiceAssociation(ctx context.Context, params *CreateServiceNetworkServiceAssociationInput, optFns ...func(*Options)) (*CreateServiceNetworkServiceAssociationOutput, error) {
 	if params == nil {
 		params = &CreateServiceNetworkServiceAssociationInput{}

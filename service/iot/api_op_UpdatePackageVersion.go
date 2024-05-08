@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the supported fields for a specific package version. Requires
-// permission to access the UpdatePackageVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// and GetIndexingConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// actions.
+// Updates the supported fields for a specific package version.
+//
+// Requires permission to access the [UpdatePackageVersion] and [GetIndexingConfiguration] actions.
+//
+// [UpdatePackageVersion]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [GetIndexingConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdatePackageVersion(ctx context.Context, params *UpdatePackageVersionInput, optFns ...func(*Options)) (*UpdatePackageVersionOutput, error) {
 	if params == nil {
 		params = &UpdatePackageVersionInput{}
@@ -43,15 +45,19 @@ type UpdatePackageVersionInput struct {
 	VersionName *string
 
 	// The status that the package version should be assigned. For more information,
-	// see Package version lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
-	// .
+	// see [Package version lifecycle].
+	//
+	// [Package version lifecycle]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
 	Action types.PackageVersionAction
 
 	// Metadata that can be used to define a package version’s configuration. For
 	// example, the Amazon S3 file location, configuration options that are being sent
-	// to the device or fleet. Note: Attributes can be updated only when the package
-	// version is in a draft state. The combined size of all the attributes on a
-	// package version is limited to 3KB.
+	// to the device or fleet.
+	//
+	// Note: Attributes can be updated only when the package version is in a draft
+	// state.
+	//
+	// The combined size of all the attributes on a package version is limited to 3KB.
 	Attributes map[string]string
 
 	// A unique case-sensitive identifier that you can provide to ensure the

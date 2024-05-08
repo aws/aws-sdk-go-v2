@@ -11,15 +11,21 @@ import (
 )
 
 // The UntagLogGroup operation is on the path to deprecation. We recommend that
-// you use UntagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html)
-// instead. Removes the specified tags from the specified log group. To list the
-// tags for a log group, use ListTagsForResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html)
-// . To add tags, use TagResource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html)
-// . CloudWatch Logs doesn’t support IAM policies that prevent users from assigning
+// you use [UntagResource]instead.
+//
+// Removes the specified tags from the specified log group.
+//
+// To list the tags for a log group, use [ListTagsForResource]. To add tags, use [TagResource].
+//
+// CloudWatch Logs doesn’t support IAM policies that prevent users from assigning
 // specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys
 // condition keys.
 //
 // Deprecated: Please use the generic tagging API UntagResource
+//
+// [TagResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagResource.html
+// [UntagResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagResource.html
+// [ListTagsForResource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsForResource.html
 func (c *Client) UntagLogGroup(ctx context.Context, params *UntagLogGroupInput, optFns ...func(*Options)) (*UntagLogGroupOutput, error) {
 	if params == nil {
 		params = &UntagLogGroupInput{}

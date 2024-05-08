@@ -16,12 +16,13 @@ import (
 )
 
 // Retrieves the certificate signing request (CSR) for your private certificate
-// authority (CA). The CSR is created when you call the CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-// action. Sign the CSR with your Amazon Web Services Private CA-hosted or
-// on-premises root or subordinate CA. Then import the signed certificate back into
-// Amazon Web Services Private CA by calling the
-// ImportCertificateAuthorityCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)
-// action. The CSR is returned as a base64 PEM-encoded string.
+// authority (CA). The CSR is created when you call the [CreateCertificateAuthority]action. Sign the CSR with
+// your Amazon Web Services Private CA-hosted or on-premises root or subordinate
+// CA. Then import the signed certificate back into Amazon Web Services Private CA
+// by calling the [ImportCertificateAuthorityCertificate]action. The CSR is returned as a base64 PEM-encoded string.
+//
+// [ImportCertificateAuthorityCertificate]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html
+// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCertificateAuthorityCsrInput, optFns ...func(*Options)) (*GetCertificateAuthorityCsrOutput, error) {
 	if params == nil {
 		params = &GetCertificateAuthorityCsrInput{}
@@ -39,10 +40,12 @@ func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCert
 
 type GetCertificateAuthorityCsrInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called the
-	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-	// action. This must be of the form:
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// The Amazon Resource Name (ARN) that was returned when you called the [CreateCertificateAuthority] action.
+	// This must be of the form:
+	//
+	//     arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
@@ -184,12 +187,13 @@ type CertificateAuthorityCSRCreatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetCertificateAuthorityCsrInput, *GetCertificateAuthorityCsrOutput, error) (bool, error)
 }
 

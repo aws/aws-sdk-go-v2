@@ -11,8 +11,9 @@ import (
 )
 
 // Deactivates and removes a recommender. A deleted recommender can no longer be
-// specified in a GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
-// request.
+// specified in a [GetRecommendations]request.
+//
+// [GetRecommendations]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
 func (c *Client) DeleteRecommender(ctx context.Context, params *DeleteRecommenderInput, optFns ...func(*Options)) (*DeleteRecommenderOutput, error) {
 	if params == nil {
 		params = &DeleteRecommenderInput{}

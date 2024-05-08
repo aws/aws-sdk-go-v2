@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of names for one or more on-premises instances. Unless otherwise
-// specified, both registered and deregistered on-premises instance names are
-// listed. To list only registered or deregistered on-premises instance names, use
-// the registration status parameter.
+// Gets a list of names for one or more on-premises instances.
+//
+// Unless otherwise specified, both registered and deregistered on-premises
+// instance names are listed. To list only registered or deregistered on-premises
+// instance names, use the registration status parameter.
 func (c *Client) ListOnPremisesInstances(ctx context.Context, params *ListOnPremisesInstancesInput, optFns ...func(*Options)) (*ListOnPremisesInstancesOutput, error) {
 	if params == nil {
 		params = &ListOnPremisesInstancesInput{}
@@ -38,8 +39,10 @@ type ListOnPremisesInstancesInput struct {
 	NextToken *string
 
 	// The registration status of the on-premises instances:
+	//
 	//   - Deregistered : Include deregistered on-premises instances in the resulting
 	//   list.
+	//
 	//   - Registered : Include registered on-premises instances in the resulting list.
 	RegistrationStatus types.RegistrationStatus
 

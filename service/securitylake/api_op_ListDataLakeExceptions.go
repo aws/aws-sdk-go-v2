@@ -35,9 +35,10 @@ type ListDataLakeExceptionsInput struct {
 
 	// List if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
-	// retrieve the next page. Keep all other arguments unchanged. Each pagination
-	// token expires after 24 hours. Using an expired pagination token will return an
-	// HTTP 400 InvalidToken error.
+	// retrieve the next page. Keep all other arguments unchanged.
+	//
+	// Each pagination token expires after 24 hours. Using an expired pagination token
+	// will return an HTTP 400 InvalidToken error.
 	NextToken *string
 
 	// The Amazon Web Services Regions from which exceptions are retrieved.
@@ -53,9 +54,10 @@ type ListDataLakeExceptionsOutput struct {
 
 	// List if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
-	// retrieve the next page. Keep all other arguments unchanged. Each pagination
-	// token expires after 24 hours. Using an expired pagination token will return an
-	// HTTP 400 InvalidToken error.
+	// retrieve the next page. Keep all other arguments unchanged.
+	//
+	// Each pagination token expires after 24 hours. Using an expired pagination token
+	// will return an HTTP 400 InvalidToken error.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

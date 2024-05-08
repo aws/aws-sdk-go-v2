@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an Amazon QuickSight group's description and Amazon Resource Name (ARN).
+// Returns an Amazon QuickSight group's description and Amazon Resource Name
+// (ARN).
 func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, optFns ...func(*Options)) (*DescribeGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGroupInput{}

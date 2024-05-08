@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ExecutionRedriveFilter. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionRedriveFilter) Values() []ExecutionRedriveFilter {
 	return []ExecutionRedriveFilter{
 		"REDRIVEN",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for ExecutionRedriveStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionRedriveStatus) Values() []ExecutionRedriveStatus {
 	return []ExecutionRedriveStatus{
 		"REDRIVABLE",
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionStatus) Values() []ExecutionStatus {
 	return []ExecutionStatus{
 		"RUNNING",
@@ -134,8 +137,9 @@ const (
 )
 
 // Values returns all known values for HistoryEventType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HistoryEventType) Values() []HistoryEventType {
 	return []HistoryEventType{
 		"ActivityFailed",
@@ -212,8 +216,9 @@ const (
 )
 
 // Values returns all known values for InspectionLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InspectionLevel) Values() []InspectionLevel {
 	return []InspectionLevel{
 		"INFO",
@@ -233,8 +238,9 @@ const (
 )
 
 // Values returns all known values for LogLevel. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogLevel) Values() []LogLevel {
 	return []LogLevel{
 		"ALL",
@@ -255,8 +261,9 @@ const (
 )
 
 // Values returns all known values for MapRunStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MapRunStatus) Values() []MapRunStatus {
 	return []MapRunStatus{
 		"RUNNING",
@@ -275,8 +282,9 @@ const (
 )
 
 // Values returns all known values for StateMachineStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StateMachineStatus) Values() []StateMachineStatus {
 	return []StateMachineStatus{
 		"ACTIVE",
@@ -293,8 +301,9 @@ const (
 )
 
 // Values returns all known values for StateMachineType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StateMachineType) Values() []StateMachineType {
 	return []StateMachineType{
 		"STANDARD",
@@ -312,8 +321,9 @@ const (
 )
 
 // Values returns all known values for SyncExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SyncExecutionStatus) Values() []SyncExecutionStatus {
 	return []SyncExecutionStatus{
 		"SUCCEEDED",
@@ -333,8 +343,9 @@ const (
 )
 
 // Values returns all known values for TestExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TestExecutionStatus) Values() []TestExecutionStatus {
 	return []TestExecutionStatus{
 		"SUCCEEDED",
@@ -354,8 +365,9 @@ const (
 
 // Values returns all known values for ValidateStateMachineDefinitionResultCode.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidateStateMachineDefinitionResultCode) Values() []ValidateStateMachineDefinitionResultCode {
 	return []ValidateStateMachineDefinitionResultCode{
 		"OK",
@@ -372,8 +384,9 @@ const (
 
 // Values returns all known values for ValidateStateMachineDefinitionSeverity.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidateStateMachineDefinitionSeverity) Values() []ValidateStateMachineDefinitionSeverity {
 	return []ValidateStateMachineDefinitionSeverity{
 		"ERROR",
@@ -392,6 +405,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

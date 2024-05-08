@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves overall summary including the number of servers to rehost and the
+//	Retrieves overall summary including the number of servers to rehost and the
+//
 // overall number of anti-patterns.
 func (c *Client) GetPortfolioSummary(ctx context.Context, params *GetPortfolioSummaryInput, optFns ...func(*Options)) (*GetPortfolioSummaryOutput, error) {
 	if params == nil {
@@ -34,7 +35,7 @@ type GetPortfolioSummaryInput struct {
 
 type GetPortfolioSummaryOutput struct {
 
-	// An assessment summary for the portfolio including the number of servers to
+	//  An assessment summary for the portfolio including the number of servers to
 	// rehost and the overall number of anti-patterns.
 	AssessmentSummary *types.AssessmentSummary
 

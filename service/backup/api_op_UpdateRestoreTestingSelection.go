@@ -13,10 +13,11 @@ import (
 )
 
 // Most elements except the RestoreTestingSelectionName can be updated with this
-// request. RestoreTestingSelection can use either protected resource ARNs or
-// conditions, but not both. That is, if your selection has ProtectedResourceArns ,
-// requesting an update with the parameter ProtectedResourceConditions will be
-// unsuccessful.
+// request.
+//
+// RestoreTestingSelection can use either protected resource ARNs or conditions,
+// but not both. That is, if your selection has ProtectedResourceArns , requesting
+// an update with the parameter ProtectedResourceConditions will be unsuccessful.
 func (c *Client) UpdateRestoreTestingSelection(ctx context.Context, params *UpdateRestoreTestingSelectionInput, optFns ...func(*Options)) (*UpdateRestoreTestingSelectionOutput, error) {
 	if params == nil {
 		params = &UpdateRestoreTestingSelectionInput{}

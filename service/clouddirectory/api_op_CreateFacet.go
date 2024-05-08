@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Facet in a schema. Facet creation is allowed only in development
-// or applied schemas.
+// Creates a new Facet in a schema. Facet creation is allowed only in development or
+// applied schemas.
 func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optFns ...func(*Options)) (*CreateFacetOutput, error) {
 	if params == nil {
 		params = &CreateFacetInput{}
@@ -30,18 +30,17 @@ func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optF
 
 type CreateFacetInput struct {
 
-	// The name of the Facet , which is unique for a given schema.
+	// The name of the Facet, which is unique for a given schema.
 	//
 	// This member is required.
 	Name *string
 
-	// The schema ARN in which the new Facet will be created. For more information,
-	// see arns .
+	// The schema ARN in which the new Facet will be created. For more information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string
 
-	// The attributes that are associated with the Facet .
+	// The attributes that are associated with the Facet.
 	Attributes []types.FacetAttribute
 
 	// There are two different styles that you can define on any given facet, Static
@@ -51,15 +50,17 @@ type CreateFacetInput struct {
 
 	// Specifies whether a given object created from this facet is of type node, leaf
 	// node, policy or index.
+	//
 	//   - Node: Can have multiple children but one parent.
 	//
 	//   - Leaf node: Cannot have children but can have multiple parents.
 	//
 	//   - Policy: Allows you to store a policy document and policy type. For more
-	//   information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
-	//   .
+	//   information, see [Policies].
 	//
 	//   - Index: Can be created with the Index API.
+	//
+	// [Policies]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
 	ObjectType types.ObjectType
 
 	noSmithyDocumentSerde

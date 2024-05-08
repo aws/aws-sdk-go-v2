@@ -39,7 +39,7 @@ type GetHITInput struct {
 
 type GetHITOutput struct {
 
-	// Contains the requested HIT data.
+	//  Contains the requested HIT data.
 	HIT *types.HIT
 
 	// Metadata pertaining to the operation's result.

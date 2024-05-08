@@ -11,9 +11,11 @@ import (
 )
 
 // Deletes a guardrail.
+//
 //   - To delete a guardrail, only specify the ARN of the guardrail in the
 //     guardrailIdentifier field. If you delete a guardrail, all of its versions will
 //     be deleted.
+//
 //   - To delete a version of a guardrail, specify the ARN of the guardrail in the
 //     guardrailIdentifier field and the version in the guardrailVersion field.
 func (c *Client) DeleteGuardrail(ctx context.Context, params *DeleteGuardrailInput, optFns ...func(*Options)) (*DeleteGuardrailOutput, error) {

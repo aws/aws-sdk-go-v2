@@ -34,7 +34,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request could not be completed due to a conflict with the current state of
+//	The request could not be completed due to a conflict with the current state of
+//
 // the target resource.
 type ConflictException struct {
 	Message *string
@@ -61,7 +62,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Processing of the request has failed because of an unknown error, exception or
+//	Processing of the request has failed because of an unknown error, exception or
+//
 // failure.
 type InternalServerException struct {
 	Message *string
@@ -88,7 +90,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The resource requested could not be found. Verify the resource ID and retry
+//	The resource requested could not be found. Verify the resource ID and retry
+//
 // your request.
 type ResourceNotFoundException struct {
 	Message *string
@@ -167,7 +170,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input fails to satisfy constraints specified by Amazon Lookout for
+//	The input fails to satisfy constraints specified by Amazon Lookout for
+//
 // Equipment or a related Amazon Web Services service that's being utilized.
 type ValidationException struct {
 	Message *string

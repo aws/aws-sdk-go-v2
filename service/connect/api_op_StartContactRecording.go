@@ -12,8 +12,10 @@ import (
 )
 
 // Starts recording the contact:
+//
 //   - If the API is called before the agent joins the call, recording starts when
 //     the agent joins the call.
+//
 //   - If the API is called after the agent joins the call, recording starts at
 //     the time of the API call.
 //
@@ -22,9 +24,14 @@ import (
 // StartContactRecording to restart it. For scenarios where the recording has
 // started and you want to suspend and resume it, such as when collecting sensitive
 // information (for example, a credit card number), use SuspendContactRecording and
-// ResumeContactRecording. You can use this API to override the recording behavior
-// configured in the Set recording behavior (https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html)
-// block. Only voice recordings are supported at this time.
+// ResumeContactRecording.
+//
+// You can use this API to override the recording behavior configured in the [Set recording behavior]
+// block.
+//
+// Only voice recordings are supported at this time.
+//
+// [Set recording behavior]: https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html
 func (c *Client) StartContactRecording(ctx context.Context, params *StartContactRecordingInput, optFns ...func(*Options)) (*StartContactRecordingOutput, error) {
 	if params == nil {
 		params = &StartContactRecordingInput{}
@@ -53,8 +60,10 @@ type StartContactRecordingInput struct {
 	// This member is required.
 	InitialContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string

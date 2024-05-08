@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of all log groups that are being monitored and tagged by
+//	Returns the list of all log groups that are being monitored and tagged by
+//
 // DevOps Guru.
 func (c *Client) ListMonitoredResources(ctx context.Context, params *ListMonitoredResourcesInput, optFns ...func(*Options)) (*ListMonitoredResourcesOutput, error) {
 	if params == nil {
@@ -30,7 +31,7 @@ func (c *Client) ListMonitoredResources(ctx context.Context, params *ListMonitor
 
 type ListMonitoredResourcesInput struct {
 
-	// Filters to determine which monitored resources you want to retrieve. You can
+	//  Filters to determine which monitored resources you want to retrieve. You can
 	// filter by resource type or resource permission status.
 	Filters *types.ListMonitoredResourcesFilters
 
@@ -47,7 +48,7 @@ type ListMonitoredResourcesInput struct {
 
 type ListMonitoredResourcesOutput struct {
 
-	// Information about the resource that is being monitored, including the name of
+	//  Information about the resource that is being monitored, including the name of
 	// the resource, the type of resource, and whether or not permission is given to
 	// DevOps Guru to access that resource.
 	//

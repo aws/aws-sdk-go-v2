@@ -16,21 +16,28 @@ import (
 // value for the workerGroup parameter. The task returned can come from any of the
 // pipelines that match the workerGroup value passed in by the task runner and
 // that was launched using the IAM user credentials specified by the task runner.
+//
 // If tasks are ready in the work queue, PollForTask returns a response
 // immediately. If no tasks are available in the queue, PollForTask uses
 // long-polling and holds on to a poll connection for up to a 90 seconds, during
 // which time the first newly scheduled task is handed to the task runner. To
 // accomodate this, set the socket timeout in your task runner to 90 seconds. The
 // task runner should not call PollForTask again on the same workerGroup until it
-// receives a response, and this can take up to 90 seconds. POST / HTTP/1.1
-// Content-Type: application/x-amz-json-1.1 X-Amz-Target: DataPipeline.PollForTask
-// Content-Length: 59 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
-// 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"workerGroup":
-// "MyworkerGroup", "hostname": "example.com"} x-amzn-RequestId:
-// 41c713d2-0775-11e2-af6f-6bc7a6be60d9 Content-Type: application/x-amz-json-1.1
-// Content-Length: 39 Date: Mon, 12 Nov 2012 17:50:53 GMT {"taskObject":
-// {"attemptId": "@SayHello_2012-12-12T00:00:00_Attempt=1", "objects":
-// {"@SayHello_2012-12-12T00:00:00_Attempt=1": {"fields": [ {"key":
+// receives a response, and this can take up to 90 seconds.
+//
+// POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1 X-Amz-Target:
+// DataPipeline.PollForTask Content-Length: 59 Host:
+// datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
+// Authorization: AuthParams
+//
+// {"workerGroup": "MyworkerGroup", "hostname": "example.com"}
+//
+// x-amzn-RequestId: 41c713d2-0775-11e2-af6f-6bc7a6be60d9 Content-Type:
+// application/x-amz-json-1.1 Content-Length: 39 Date: Mon, 12 Nov 2012 17:50:53
+// GMT
+//
+// {"taskObject": {"attemptId": "@SayHello_2012-12-12T00:00:00_Attempt=1",
+// "objects": {"@SayHello_2012-12-12T00:00:00_Attempt=1": {"fields": [ {"key":
 // "@componentParent", "refValue": "SayHello"}, {"key": "@scheduledStartTime",
 // "stringValue": "2012-12-12T00:00:00"}, {"key": "parent", "refValue":
 // "SayHello"}, {"key": "@sphere", "stringValue": "ATTEMPT"}, {"key":
@@ -80,11 +87,12 @@ type PollForTaskInput struct {
 
 	// Identity information for the EC2 instance that is hosting the task runner. You
 	// can get this value from the instance using
-	// http://169.254.169.254/latest/meta-data/instance-id . For more information, see
-	// Instance Metadata (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html)
+	// http://169.254.169.254/latest/meta-data/instance-id . For more information, see [Instance Metadata]
 	// in the Amazon Elastic Compute Cloud User Guide. Passing in this value proves
 	// that your task runner is running on an EC2 instance, and ensures the proper AWS
 	// Data Pipeline service charges are applied to your pipeline.
+	//
+	// [Instance Metadata]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
 	InstanceIdentity *types.InstanceIdentity
 
 	noSmithyDocumentSerde
@@ -96,7 +104,7 @@ type PollForTaskOutput struct {
 	// The information needed to complete the task that is being assigned to the task
 	// runner. One of the fields returned in this object is taskId , which contains an
 	// identifier for the task being assigned. The calling task runner uses taskId in
-	// subsequent calls to ReportTaskProgress and SetTaskStatus .
+	// subsequent calls to ReportTaskProgressand SetTaskStatus.
 	TaskObject *types.TaskObject
 
 	// Metadata pertaining to the operation's result.

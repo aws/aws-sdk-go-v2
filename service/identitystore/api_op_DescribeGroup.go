@@ -12,9 +12,11 @@ import (
 )
 
 // Retrieves the group metadata and attributes from GroupId in an identity store.
+//
 // If you have administrator access to a member account, you can use this API from
-// the member account. Read about member accounts (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html)
-// in the Organizations User Guide.
+// the member account. Read about [member accounts]in the Organizations User Guide.
+//
+// [member accounts]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html
 func (c *Client) DescribeGroup(ctx context.Context, params *DescribeGroupInput, optFns ...func(*Options)) (*DescribeGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGroupInput{}

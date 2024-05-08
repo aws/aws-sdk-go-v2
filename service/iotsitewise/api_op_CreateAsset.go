@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an asset from an existing asset model. For more information, see
-// Creating assets (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html)
-// in the IoT SiteWise User Guide.
+// Creates an asset from an existing asset model. For more information, see [Creating assets] in
+// the IoT SiteWise User Guide.
+//
+// [Creating assets]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html
 func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optFns ...func(*Options)) (*CreateAssetOutput, error) {
 	if params == nil {
 		params = &CreateAssetInput{}
@@ -33,8 +34,9 @@ type CreateAssetInput struct {
 
 	// The ID of the asset model from which to create the asset. This can be either
 	// the actual ID in UUID format, or else externalId: followed by the external ID,
-	// if it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// if it has one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelId *string
@@ -48,8 +50,10 @@ type CreateAssetInput struct {
 	AssetDescription *string
 
 	// An external ID to assign to the asset. The external ID must be unique within
-	// your Amazon Web Services account. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
-	// in the IoT SiteWise User Guide.
+	// your Amazon Web Services account. For more information, see [Using external IDs]in the IoT SiteWise
+	// User Guide.
+	//
+	// [Using external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
 	AssetExternalId *string
 
 	// The ID to assign to the asset, if desired. IoT SiteWise automatically generates
@@ -64,8 +68,9 @@ type CreateAssetInput struct {
 	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the asset. For more
-	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
+	//
+	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -73,9 +78,11 @@ type CreateAssetInput struct {
 
 type CreateAssetOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the asset, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}
+	// The [ARN] of the asset, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AssetArn *string

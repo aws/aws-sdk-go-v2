@@ -11,8 +11,9 @@ import (
 )
 
 // This action is only used by the Amazon ECS agent, and it is not intended for
-// use outside of the agent. Returns an endpoint for the Amazon ECS agent to poll
-// for updates.
+// use outside of the agent.
+//
+// Returns an endpoint for the Amazon ECS agent to poll for updates.
 func (c *Client) DiscoverPollEndpoint(ctx context.Context, params *DiscoverPollEndpointInput, optFns ...func(*Options)) (*DiscoverPollEndpointOutput, error) {
 	if params == nil {
 		params = &DiscoverPollEndpointInput{}
@@ -35,8 +36,9 @@ type DiscoverPollEndpointInput struct {
 	Cluster *string
 
 	// The container instance ID or full ARN of the container instance. For more
-	// information about the ARN format, see Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
-	// in the Amazon ECS Developer Guide.
+	// information about the ARN format, see [Amazon Resource Name (ARN)]in the Amazon ECS Developer Guide.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
 	ContainerInstance *string
 
 	noSmithyDocumentSerde
@@ -48,8 +50,10 @@ type DiscoverPollEndpointOutput struct {
 	Endpoint *string
 
 	// The endpoint for the Amazon ECS agent to poll for Service Connect
-	// configuration. For more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// configuration. For more information, see [Service Connect]in the Amazon Elastic Container
+	// Service Developer Guide.
+	//
+	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
 	ServiceConnectEndpoint *string
 
 	// The telemetry endpoint for the Amazon ECS agent.

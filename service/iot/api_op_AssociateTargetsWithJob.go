@@ -11,13 +11,17 @@ import (
 )
 
 // Associates a group with a continuous job. The following criteria must be met:
+//
 //   - The job must have been created with the targetSelection field set to
 //     "CONTINUOUS".
+//
 //   - The job status must currently be "IN_PROGRESS".
+//
 //   - The total number of targets associated with a job must not exceed 100.
 //
-// Requires permission to access the AssociateTargetsWithJob (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Requires permission to access the [AssociateTargetsWithJob] action.
+//
+// [AssociateTargetsWithJob]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) AssociateTargetsWithJob(ctx context.Context, params *AssociateTargetsWithJobInput, optFns ...func(*Options)) (*AssociateTargetsWithJobOutput, error) {
 	if params == nil {
 		params = &AssociateTargetsWithJobInput{}
@@ -49,12 +53,18 @@ type AssociateTargetsWithJobInput struct {
 	// targets.
 	Comment *string
 
-	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
-	// notifications to MQTT topics that contain the value in the following format.
-	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
-	// namespaceId feature is only supported by IoT Greengrass at this time. For more
-	// information, see Setting up IoT Greengrass core devices. (https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html)
+	// The namespace used to indicate that a job is a customer-managed job.
+	//
+	// When you specify a value for this parameter, Amazon Web Services IoT Core sends
+	// jobs notifications to MQTT topics that contain the value in the following
+	// format.
+	//
+	//     $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/
+	//
+	// The namespaceId feature is only supported by IoT Greengrass at this time. For
+	// more information, see [Setting up IoT Greengrass core devices.]
+	//
+	// [Setting up IoT Greengrass core devices.]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
 	NamespaceId *string
 
 	noSmithyDocumentSerde

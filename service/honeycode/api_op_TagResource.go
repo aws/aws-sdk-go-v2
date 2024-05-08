@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The TagResource API allows you to add tags to an ARN-able resource. Resource
+//	The TagResource API allows you to add tags to an ARN-able resource. Resource
+//
 // includes workbook, table, screen and screen-automation.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {

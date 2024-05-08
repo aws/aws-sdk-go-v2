@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of upgrade compatible Elastisearch versions. You can optionally
-// pass a DomainName to get all upgrade compatible Elasticsearch versions for that
-// specific domain.
+//	Returns a list of upgrade compatible Elastisearch versions. You can optionally
+//
+// pass a DomainNameto get all upgrade compatible Elasticsearch versions for that specific
+// domain.
 func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params *GetCompatibleElasticsearchVersionsInput, optFns ...func(*Options)) (*GetCompatibleElasticsearchVersionsOutput, error) {
 	if params == nil {
 		params = &GetCompatibleElasticsearchVersionsInput{}
@@ -29,8 +30,7 @@ func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params 
 	return out, nil
 }
 
-// Container for request parameters to GetCompatibleElasticsearchVersions
-// operation.
+// Container for request parameters to GetCompatibleElasticsearchVersions operation.
 type GetCompatibleElasticsearchVersionsInput struct {
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
@@ -45,8 +45,7 @@ type GetCompatibleElasticsearchVersionsInput struct {
 // Container for response returned by GetCompatibleElasticsearchVersions operation.
 type GetCompatibleElasticsearchVersionsOutput struct {
 
-	// A map of compatible Elasticsearch versions returned as part of the
-	// GetCompatibleElasticsearchVersions operation.
+	//  A map of compatible Elasticsearch versions returned as part of the GetCompatibleElasticsearchVersions operation.
 	CompatibleElasticsearchVersions []types.CompatibleVersionsMap
 
 	// Metadata pertaining to the operation's result.
